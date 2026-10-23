@@ -1,76 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d4104` (_code @ 0x3d4104, 0x16c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: descending tests use TST instead of a flag-setting shift, and ascending sort blocks remain inline rather than outlined. */
+#include "status/StatusDown.h"
+#include <stdlib.h>
 
-extern "C" {
-
-int qsort(...);
-int arraySortQsort(...);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern int itemSortCompare(...); /* 0x270cb4 */
-extern int entryCompareByDataValue(...); /* 0x2b2ad4 */
-extern int FUN_002ce0d8(...); /* 0x2ce0d8 */
-extern int FUN_002ce15c(...); /* 0x2ce15c */
-extern int FUN_00321c18(...); /* 0x321c18 */
-extern int flagRecCompare(...); /* 0x34f40c */
-extern int FUN_0035fdb0(...); /* 0x35fdb0 */
-extern int FUN_0035fe34(...); /* 0x35fe34 */
-extern int g_statusDown; /* 0x588fe8 */
-
-/* Supplied declaration required: qsort. */
-extern int FUN_0026140c(void);
-/* Supplied declaration required: arraySortQsort. */
-
-
-void FUN_003d4104(void)
-
-{
-/* irregular: 10 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char *pbVar3;
-  
-  temp_v0 = g_statusDown;
-  temp_v1 = FUN_0026140c();
-  pbVar3 = (unsigned char *)(temp_v1 + 0x16);
-  if ((*(unsigned char *)(temp_v1 + 0x16) & 0x7f) == 1) {
-    if ((char)*(unsigned char *)(temp_v1 + 0x16) < '\0') {
-      qsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_0035fe34);
-    }
-    else {
-      qsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_002ce15c);
-    }
-  }
-  if ((*pbVar3 & 0x7f) == 8) {
-    if ((char)*pbVar3 < '\0') {
-      qsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_0035fdb0);
-    }
-    else {
-      qsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_002ce0d8);
-    }
-  }
-  if ((*pbVar3 & 0x7f) == 2) {
-    if ((char)*pbVar3 < '\0') {
-      qsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_00321c18);
-    }
-    else {
-      qsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,itemSortCompare);
-    }
-  }
-  if ((*pbVar3 & 0x7f) != 3) {
-    return;
-  }
-  if (-1 < (char)*pbVar3) {
-    arraySortQsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,entryCompareByDataValue);
-    return;
-  }
-  arraySortQsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,flagRecCompare);
-  return;
+namespace {
+struct InventorySortMode {
+    u8 key : 7;
+    u8 descending : 1;
+};
+typedef char InventorySortModeSizeCheck[sizeof(InventorySortMode) == 1 ? 1 : -1];
 }
 
-} /* extern "C" */
+extern "C" {
+extern StatusDownStateA *g_statusDown;
+u8 *FUN_0026140c(void);
+void arraySortQsort(void *entries, u32 count, u32 elementSize, int (*compare)(const void *, const void *));
+int FUN_0035fe34(const void *, const void *);
+int FUN_002ce15c(const void *, const void *);
+int FUN_0035fdb0(const void *, const void *);
+int FUN_002ce0d8(const void *, const void *);
+int FUN_00321c18(const void *, const void *);
+int itemSortCompare(const void *, const void *);
+int flagRecCompare(const void *, const void *);
+int entryCompareByDataValue(const void *, const void *);
+
+// Apply the persisted inventory sort key and ascending/descending selection.
+void FUN_003d4104(void)
+{
+    StatusDownStateA *status = g_statusDown;
+    const InventorySortMode *sortMode = reinterpret_cast<const InventorySortMode *>(FUN_0026140c() + 0x16);
+    if (sortMode->key == 1) {
+        if (sortMode->descending != 0)
+            qsort(status->inventory.entries, status->inventory.count, 4, FUN_0035fe34);
+        else
+            qsort(status->inventory.entries, status->inventory.count, 4, FUN_002ce15c);
+    }
+    if (sortMode->key == 8) {
+        if (sortMode->descending != 0)
+            qsort(status->inventory.entries, status->inventory.count, 4, FUN_0035fdb0);
+        else
+            qsort(status->inventory.entries, status->inventory.count, 4, FUN_002ce0d8);
+    }
+    if (sortMode->key == 2) {
+        if (sortMode->descending != 0)
+            qsort(status->inventory.entries, status->inventory.count, 4, FUN_00321c18);
+        else
+            qsort(status->inventory.entries, status->inventory.count, 4, itemSortCompare);
+    }
+    if (sortMode->key != 3)
+        return;
+    if (sortMode->descending == 0)
+        arraySortQsort(status->inventory.entries, status->inventory.count, 4, entryCompareByDataValue);
+    else
+        arraySortQsort(status->inventory.entries, status->inventory.count, 4, flagRecCompare);
+}
+}

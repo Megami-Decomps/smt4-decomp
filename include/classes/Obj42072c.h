@@ -2,6 +2,7 @@
 #define CLASSES_OBJ42072C_H
 
 #include "common.h"
+#include <stddef.h>
 
 extern "C" {
 int asdMemFree(void *block);
@@ -75,8 +76,14 @@ public:
         reset();
     }
 
-    /* 0x000 */ u32 unk00;
-    /* 0x004 */ u8 block[0x150];
+    union {
+        /* 0x000 */ u32 unk00;
+        /* 0x000 */ u32 commandWordCount;
+    };
+    union {
+        /* 0x004 */ u8 block[0x150];
+        /* 0x004 */ u32 commands[84];
+    };
     /* 0x154 */ u8 flags[12];
     /* 0x160 */ Obj42072cVertexArray arrays[12];
     /* 0x6A0 */ Obj42072cEntry entries[12];
@@ -122,5 +129,11 @@ struct VertexLoadArrayBank {
     /* 0x160 */ VertexLoadArrayData arrays[12];
 };
 typedef char VertexLoadArrayDataSizeCheck[sizeof(VertexLoadArrayData) == 0x70 ? 1 : -1];
+typedef char Obj42072cCommandBlockLayoutCheck[
+    offsetof(Obj42072cState, commands) == 4 &&
+    offsetof(Obj42072cState, commandWordCount) == 0 &&
+    offsetof(Obj42072cState, arrays) == 0x160 &&
+    offsetof(Obj42072cState, entries) == 0x6A0 &&
+    sizeof(Obj42072cState) == 0x790 ? 1 : -1];
 
 #endif

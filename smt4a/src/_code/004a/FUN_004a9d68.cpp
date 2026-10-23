@@ -1,93 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a9d68` (_code @ 0x4a9d68, 0x190 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: slot-relative addresses, aggregate copy and mask-update scheduling differ. */
+#include "battle/btlUI.h"
+#include "shard/W6_W6Match6_ProjectionCamera.h"
 
-extern "C" {
-
-int uiSpriteSelectAnim(unsigned int *, int);
-int FUN_002a1850(int *, int, unsigned int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
-
-extern unsigned int *g_btlUiBlock; /* 0x57a9c8 */
-extern unsigned int DAT_0057a9f0; /* 0x57a9f0 */
-extern unsigned int DAT_0057a9f4; /* 0x57a9f4 */
-
-extern unsigned int FUN_00152f54(void);
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: FUN_002a1850. */
-extern int btlScriptUnitHasFlags(unsigned int);
-
-
-unsigned int FUN_004a9d68(unsigned int param_1,unsigned int *param_2)
-
+static inline u32 findActionSlot(BtlUiA *ui)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2; 5 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar4;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int uStack_34;
-  unsigned int uStack_30;
-  
-  puVar1 = g_btlUiBlock;
-  temp_v2 = 0;
-  do {
-    if (*(short *)(g_btlUiBlock + temp_v2 * 0x53 + 0x468b) == 0) {
-      if (temp_v2 >= 0xc) {
-        return 0xffffffff;
-      }
-      temp_v4 = 0;
-      *(unsigned short *)(g_btlUiBlock + temp_v2 * 0x53 + 0x468b) = 2;
-      *(unsigned short *)((int)puVar1 + temp_v2 * 0x14c + 0x11a2e) = 0;
-      puVar1[temp_v2 * 0x53 + 0x468c] = 0;
-      *(unsigned char *)(puVar1 + temp_v2 * 0x53 + 0x468d) = 0;
-      temp_v5 = in_s0;
-      uStack_34 = in_s1;
-      uStack_30 = in_s2;
-      temp_v0 = FUN_00152f54();
-      FUN_002a1850(&temp_v5,0,temp_v0);
-      puVar1[temp_v2 * 0x53 + 0x468e] = temp_v5;
-      puVar1[temp_v2 * 0x53 + 0x468f] = uStack_34;
-      puVar1[temp_v2 * 0x53 + 0x4690] = uStack_30;
-      puVar1[temp_v2 * 0x53 + 0x4693] = temp_v4;
-      puVar1[temp_v2 * 0x53 + 0x4692] = temp_v4;
-      puVar1[temp_v2 * 0x53 + 0x4691] = temp_v4;
-      puVar1[temp_v2 * 0x53 + 0x4696] = temp_v4;
-      puVar1[temp_v2 * 0x53 + 0x4695] = temp_v4;
-      puVar1[temp_v2 * 0x53 + 0x4694] = temp_v4;
-      puVar1[temp_v2 * 0x53 + 0x4697] = (unsigned int)param_2;
-      temp_v3 = ~DAT_0057a9f0;
-      param_2[1] = param_2[1] & ~DAT_0057a9f4;
-      *param_2 = *param_2 & temp_v3;
-      temp_v1 = btlScriptUnitHasFlags(*puVar1);
-      if (temp_v1 != 0) {
-        *(unsigned char *)(puVar1 + temp_v2 * 0x53 + 0x468d) = 0;
-        *(unsigned short *)(puVar1 + temp_v2 * 0x53 + 0x468b) = 5;
-        puVar4 = (unsigned int *)puVar1[temp_v2 * 0x53 + 0x4697];
-        temp_v3 = puVar4[1] | DAT_0057a9f4;
-        *puVar4 = DAT_0057a9f0 | *puVar4;
-        puVar4[1] = temp_v3;
-      }
-      else {
-        uiSpriteSelectAnim(puVar1 + temp_v2 * 0x53 + 0x4645,10);
-        uiSpriteSelectAnim(puVar1 + temp_v2 * 0x53 + 0x4668,0xb);
-      }
-      return temp_v2;
+    for (s32 index = 0; index < 12; ++index) {
+        if (ui->actionRequests.slots[index].state == 0)
+            return index;
     }
-    temp_v2 = temp_v2 + 1;
-  } while ((int)temp_v2 < 0xc);
-  return 0xffffffff;
+    return -1;
 }
 
-} /* extern "C" */
+extern "C" {
+extern BtlUiGlobalsA g_btlUi;
+ProjectionMatrices *FUN_00152f54();
+void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
+s32 btlScriptUnitHasFlags(u32 owner);
+void uiSpriteSelectAnim(SpritePlaybackView *sprite, s32 animation);
+
+// Reserve a projected effect slot and synchronize the owner's completion-mask bit.
+u32 FUN_004a9d68(u32 request, u64 *ownerFlags, f32 x, f32 y, f32 z)
+{
+    // The completion mask is beyond BtlUiGlobalsA's shared pointer-only prefix.
+    struct GlobalsView { u8 prefix[0x38]; u64 completionMask; };
+    typedef char GlobalsMaskOffsetCheck[offsetof(GlobalsView, completionMask) == 0x38 ? 1 : -1];
+    const GlobalsView *globals = reinterpret_cast<const GlobalsView *>(&g_btlUi);
+    BtlUiA *ui = g_btlUi.ui;
+    u32 index = findActionSlot(ui);
+    if (index >= 12)
+        return -1;
+    BattleUiActionSlot *slot = &ui->actionRequests.slots[index];
+    slot->state = 2;
+    slot->frame = 0;
+    slot->progress = 0.0f;
+    slot->active = 0;
+    BattleUiActionVector position = {x, y, z};
+    FUN_002a1850(&position.x, 0, FUN_00152f54(), &position.x);
+    slot->projected = position;
+    slot->velocity[0] = slot->velocity[1] = slot->velocity[2] = 0.0f;
+    slot->acceleration[0] = slot->acceleration[1] = slot->acceleration[2] = 0.0f;
+    slot->ownerFlags = reinterpret_cast<u32 *>(ownerFlags);
+    *ownerFlags &= ~globals->completionMask;
+    if (btlScriptUnitHasFlags(ui->owner)) {
+        slot->active = 0;
+        slot->state = 5;
+        *reinterpret_cast<u64 *>(slot->ownerFlags) |= globals->completionMask;
+    } else {
+        uiSpriteSelectAnim(&slot->firstSprite, 10);
+        uiSpriteSelectAnim(&slot->secondSprite, 11);
+    }
+    return index;
+}
+}

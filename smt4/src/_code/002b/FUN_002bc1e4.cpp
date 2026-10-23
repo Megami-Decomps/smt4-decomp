@@ -1,95 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bc1e4` (_code @ 0x2bc1e4, 0x188 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: command writer uses different scratch registers and paired stores in its termination commands. */
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 extern "C" {
-
-int nngxLockEnter(void);
-int nngxLockLeave(void);
-int FUN_002aa624(int, unsigned char *);
-int FUN_002ba2b8(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
-extern unsigned int g_commandBufferEnd; /* 0x4652a4 */
-extern signed char DAT_004c62a1; /* 0x4c62a1 */
-extern signed char DAT_004c62a2; /* 0x4c62a2 */
-extern int DAT_004c632c; /* 0x4c632c */
-extern int DAT_004c6330; /* 0x4c6330 */
-
-/* Supplied declaration required: nngxLockEnter. */
-/* Supplied declaration required: nngxLockLeave. */
-/* Supplied declaration required: FUN_002aa624. */
-/* Supplied declaration required: FUN_002ba2b8. */
-
+extern AsdGfxContext g_asdGfxContext;
+extern u32 *g_commandBufferCursor;
+extern u32 *g_commandBufferEnd;
+void nngxLockEnter(void);
+void nngxLockLeave(void);
+void FUN_002aa624(AsdCmdBuffer *buffer, AsdCmdRecord *record);
+void FUN_002ba2b8(void);
 
 void FUN_002bc1e4(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char *puVar4;
-  
-  temp_v0 = DAT_004c632c;
-  puVar1 = g_commandBufferCursor;
-  temp_v1 = (int)g_commandBufferCursor - *(int *)(DAT_004c632c + 4);
-  *(unsigned int *)(DAT_004c632c + 0xc) = temp_v1;
-  if (*(unsigned int *)(temp_v0 + 0x14) == temp_v1) {
-    return;
-  }
-  if ((temp_v1 & 8) != 0) {
-    *(unsigned int *)(temp_v0 + 0xc) = temp_v1 + 0x18;
-  }
-  else {
-    *(unsigned int *)(temp_v0 + 0xc) = temp_v1 + 0x20;
-    if ((unsigned int)puVar1 < g_commandBufferEnd) {
-      g_commandBufferCursor = puVar1 + 2;
-      puVar1[1] = 0x8025e;
-      *puVar1 = 0;
+    AsdCmdBuffer *buffer = g_asdGfxContext.cmdBuffer;
+    u32 bytes = (u8 *)g_commandBufferCursor - buffer->start;
+    buffer->writeOffset = bytes;
+    if (buffer->committedOffset == bytes)
+        return;
+    if (bytes & 8) {
+        buffer->writeOffset = bytes + 24;
+    } else {
+        buffer->writeOffset = bytes + 32;
+        if (g_commandBufferCursor < g_commandBufferEnd) {
+            u32 *cursor = g_commandBufferCursor;
+            g_commandBufferCursor += 2;
+            cursor[1] = 0x8025E;
+            cursor[0] = 0;
+        }
     }
-  }
-  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
-    *g_commandBufferCursor = 1;
-    g_commandBufferCursor[1] = 0xf0111;
-    g_commandBufferCursor = g_commandBufferCursor + 2;
-  }
-  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
-    *g_commandBufferCursor = 1;
-    g_commandBufferCursor[1] = 0xf0110;
-    g_commandBufferCursor = g_commandBufferCursor + 2;
-  }
-  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
-    *g_commandBufferCursor = 0x12345678;
-    g_commandBufferCursor[1] = 0xf0010;
-    g_commandBufferCursor = g_commandBufferCursor + 2;
-  }
-  puVar4 = (unsigned char *)(*(int *)(temp_v0 + 0x18) + *(int *)(temp_v0 + 0x20) * 0x1c);
-  *puVar4 = 1;
-  *(int *)(puVar4 + 4) = *(int *)(temp_v0 + 4) + *(int *)(temp_v0 + 0x14);
-  *(int *)(puVar4 + 8) = *(int *)(temp_v0 + 0xc) - *(int *)(temp_v0 + 0x14);
-  if (*(int *)(temp_v0 + 0x34) != 0) {
-    FUN_002aa624(temp_v0,puVar4);
-  }
-  temp_v1 = *(unsigned int *)(puVar4 + 0xc);
-  *(unsigned int *)(puVar4 + 0xc) = temp_v1 & 0xfffffffd;
-  if (*(char *)(temp_v0 + 0x3d) != '\0') {
-    *(unsigned int *)(puVar4 + 0xc) = (temp_v1 & 0xfffffffd) | 1;
-  }
-  *(unsigned int *)(temp_v0 + 0x14) = *(unsigned int *)(temp_v0 + 0xc);
-  nngxLockEnter();
-  *(int *)(temp_v0 + 0x20) = *(int *)(temp_v0 + 0x20) + 1;
-  if (((DAT_004c6330 == temp_v0) && (DAT_004c62a2 != '\0')) && (DAT_004c62a1 == '\0')) {
-    DAT_004c62a1 = '\x01';
-    FUN_002ba2b8();
-  }
-  nngxLockLeave();
-  return;
+    if (g_commandBufferCursor < g_commandBufferEnd) {
+        g_commandBufferCursor[0] = 1;
+        g_commandBufferCursor[1] = 0xF0111;
+        g_commandBufferCursor += 2;
+    }
+    if (g_commandBufferCursor < g_commandBufferEnd) {
+        g_commandBufferCursor[0] = 1;
+        g_commandBufferCursor[1] = 0xF0110;
+        g_commandBufferCursor += 2;
+    }
+    if (g_commandBufferCursor < g_commandBufferEnd) {
+        g_commandBufferCursor[0] = 0x12345678;
+        g_commandBufferCursor[1] = 0xF0010;
+        g_commandBufferCursor += 2;
+    }
+    AsdCmdRecord *record = &buffer->entries[buffer->listCount];
+    record->kind = 1;
+    record->commands = buffer->start + buffer->committedOffset;
+    record->byteCount = buffer->writeOffset - buffer->committedOffset;
+    if (buffer->unk34)
+        FUN_002aa624(buffer, record);
+    record->flags &= ~2;
+    if (buffer->flag3d)
+        record->flags |= 1;
+    buffer->committedOffset = buffer->writeOffset;
+    nngxLockEnter();
+    ++buffer->listCount;
+    if (g_asdGfxContext.activeBuffer == buffer && g_asdGfxContext.submission.enabled &&
+            !g_asdGfxContext.submission.pending) {
+        g_asdGfxContext.submission.pending = 1;
+        FUN_002ba2b8();
+    }
+    nngxLockLeave();
 }
-
-} /* extern "C" */
+}

@@ -18,7 +18,7 @@ int FUN_002f0420(...);
 int FUN_0032d0c8(...);
 int statusDisplayBindUnitRecord(...);
 int FUN_003343f0(...);
-int FUN_0036d318(...);
+int unitInitializeFromTemplate(...);
 int FUN_00371edc(...);
 int FUN_0037e09c(int);
 int statusIconSetKind(...);
@@ -60,7 +60,7 @@ extern int ifTouchGetActiveCounter(void);
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: FUN_003343f0. */
 extern int FUN_0035db94(void);
-/* Supplied declaration required: FUN_0036d318. */
+/* Supplied declaration required: unitInitializeFromTemplate. */
 /* Supplied declaration required: FUN_00371edc. */
 /* Supplied declaration required: FUN_0037e09c. */
 /* Supplied declaration required: statusIconSetKind. */
@@ -197,7 +197,7 @@ LAB_002f9458:
           temp_v22 = temp_v2;
           if (((int)*psVar8 != (unsigned int)*(unsigned short *)(temp_v2 + 0x4858)) ||
              (psVar8[0xe] != *(short *)(temp_v2 + 0x485e))) {
-            FUN_0036d318(*(unsigned short *)(temp_v2 + 0x4858),temp_v11);
+            unitInitializeFromTemplate(*(unsigned short *)(temp_v2 + 0x4858),temp_v11);
             puVar9 = (unsigned short *)FUN_002c7e24();
             temp_v6 = (unsigned int)*puVar9;
             dataTable00FindById();
@@ -339,7 +339,7 @@ LAB_002f9924:
       psVar8 = (short *)FUN_002c7e24();
       param_1 = param_1 + temp_v8 * 0x40;
       if ((int)*psVar8 != (unsigned int)*(unsigned short *)(param_1 + 0x4858)) {
-        FUN_0036d318((unsigned int)*(unsigned short *)(param_1 + 0x4858),temp_v11);
+        unitInitializeFromTemplate((unsigned int)*(unsigned short *)(param_1 + 0x4858),temp_v11);
         puVar9 = (unsigned short *)FUN_002c7e24();
         temp_v6 = (unsigned int)*puVar9;
         dataTable00FindById();

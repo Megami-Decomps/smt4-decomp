@@ -1,97 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004112c4` (_code @ 0x4112c4, 0x184 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail knows the stage-mode query preserves s0/s1; separate-unit declaration forces a saved VFP pair and changes epilogue factoring. */
+#include "battle/btlMain.h"
+#include "battle/btlUI.h"
+#include <stddef.h>
 
-extern "C" {
-
-int btlGetMainState(void);
-int slotSetRequest(int, int, int);
-int dialogClose(int);
-int partyModelSlotsLoad(void);
-int btlStageGetModeIndex(int);
-int FUN_004a9d1c(unsigned int);
-int FUN_004f5238(unsigned int, int, int, int, int, int, int, int, int);
-int FUN_004f8f08(unsigned int);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned int g_btlAux; /* 0x573808 */
-extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
-
-extern int FUN_0013def0(unsigned int);
-/* Supplied declaration required: btlGetMainState. */
-extern int FUN_00163e84(unsigned int);
-/* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: dialogClose. */
-extern int dialogIsActive(void);
-/* Supplied declaration required: partyModelSlotsLoad. */
-extern int btlStartEntries(void);
-/* Supplied declaration required: btlStageGetModeIndex. */
-/* Supplied declaration required: FUN_004a9d1c. */
-extern int btlUiIsIdleB(unsigned int);
-/* Supplied declaration required: FUN_004f5238. */
-/* Supplied declaration required: FUN_004f8f08. */
-
-
-void FUN_004112c4(int param_1)
-
-{
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 0x10);
-  if (temp_v0 != 0) {
-    if (temp_v0 != 1) {
-      if (temp_v0 != 2) {
-        if (temp_v0 == 3) {
-          btlGetMainState();
-          temp_v0 = btlStartEntries();
-          if (temp_v0 != 0) {
-            *(unsigned int *)(param_1 + 8) = 3;
-          }
-        }
-      }
-      else {
-        temp_v0 = FUN_00163e84(0);
-        if (temp_v0 != 0) {
-          FUN_004f8f08(g_btlAux);
-          btlGetMainState();
-          partyModelSlotsLoad();
-          *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
-          return;
-        }
-      }
-    }
-    else {
-      temp_v0 = btlUiIsIdleB(g_btlUiBlock);
-      if ((temp_v0 != 0) &&
-         ((temp_v0 = dialogIsActive(), temp_v0 == 0 || (*(unsigned int *)(param_1 + 0xc) >= 0x37)))) {
-        slotSetRequest(0,10,0xff);
-        *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
-        return;
-      }
-    }
-  }
-  else {
-    temp_v0 = FUN_0013def0(0);
-    if (temp_v0 == 3) {
-      btlStageGetModeIndex(param_1);
-      FUN_004f5238(g_btlAux,0,0,9,0,6,0,1,0);
-      FUN_004a9d1c(g_btlUiBlock);
-      temp_v0 = dialogIsActive();
-      if (temp_v0 != 0) {
-        dialogClose(1);
-      }
-      *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
-      return;
-    }
-  }
-  return;
+namespace {
+struct EntryStartupStep {
+    u8 unk00[8];
+    u32 state;
+    u32 frames;
+    s32 phase;
+};
+struct StageHeightRecord { u8 unk00[0x18]; f32 height; };
+typedef char EntryStartupStepOffsets[offsetof(EntryStartupStep, state) == 8 &&
+    offsetof(EntryStartupStep, phase) == 0x10 && sizeof(StageHeightRecord) == 0x1C ? 1 : -1];
 }
+extern "C" {
+extern BtlAuxA *g_btlAux;
+extern BtlUiA *g_btlUiBlock;
+extern StageHeightRecord DAT_00529780[];
+s32 FUN_0013def0(u32 slot);
+s32 FUN_00163e84(u32 slot);
+s32 btlStageGetModeIndex(EntryStartupStep *step);
+void FUN_004f5238(BtlAuxA *context, u32 first, u32 second, u32 kind,
+                  u32 enabled, u32 mode, u32 flags, u32 active, u32 extra, f32 x, f32 y);
+void FUN_004a9d1c(BtlUiA *ui);
+s32 dialogIsActive(void);
+void dialogClose(s32 mode);
+s32 btlUiIsIdleB(BtlUiA *ui);
+void slotSetRequest(s32 slot, s32 mode, s32 value);
+void FUN_004f8f08(BtlAuxA *context);
+BtlMainStateA *btlGetMainState(void);
+void partyModelSlotsLoad(BtlMainStateA *battle);
+s32 btlStartEntries(BtlMainStateA *battle);
 
-} /* extern "C" */
+// Close the battle overlay, request the next slot, then load and start the party entries.
+void FUN_004112c4(EntryStartupStep *step)
+{
+    switch (step->phase) {
+    case 0:
+        if (FUN_0013def0(0) == 3) {
+            f32 height = 0.0f;
+            s32 index = btlStageGetModeIndex(step);
+            if (index >= 0)
+                height = DAT_00529780[index].height;
+            FUN_004f5238(g_btlAux, 0, 0, 9, 0, 6, 0, 1, 0, 0.0f, height);
+            FUN_004a9d1c(g_btlUiBlock);
+            if (dialogIsActive())
+                dialogClose(1);
+            ++step->phase;
+        }
+        break;
+    case 1:
+        if (btlUiIsIdleB(g_btlUiBlock) && (!dialogIsActive() || step->frames >= 55)) {
+            slotSetRequest(0, 10, 255);
+            ++step->phase;
+        }
+        break;
+    case 2:
+        if (FUN_00163e84(0)) {
+            FUN_004f8f08(g_btlAux);
+            partyModelSlotsLoad(btlGetMainState());
+            ++step->phase;
+        }
+        break;
+    case 3:
+        if (btlStartEntries(btlGetMainState()))
+            step->state = 3;
+        break;
+    }
+}
+}

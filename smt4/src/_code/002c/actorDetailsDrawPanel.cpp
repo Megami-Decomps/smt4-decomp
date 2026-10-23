@@ -23,7 +23,7 @@ void drawSetColorFromRGBA8(u32 color);
 void FUN_002bdf94(s32 layer, s32 x, s32 y, s32 z, s32 scale, s32 depth, const char *format, ...);
 void FUN_002bd82c(void *text, u32 color);
 void FUN_002598f0(void *text, s32 x, s32 y, s32 depth);
-void FUN_002be370(s32 skill, s32 x, s32 y, s32 depth, s32 mode);
+void itemDrawCategoryBadge(s32 skill, s32 x, s32 y, s32 depth, s32 mode);
 
 /* Render the actor's portrait, values, skill list, and labels with temporary UI state. */
 void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDetailsRecordIV *record,
@@ -100,7 +100,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
             s32 rowX = row->position.x + transform->x + x;
             FUN_002bf380(2, 0x39, 0x11, rowX + offset, rowY, 0x71);
             position = FUN_002bf4f8(0x39, 0xAA);
-            FUN_002be370(texts->skillIds[index], position->position.x + rowX + offset,
+            itemDrawCategoryBadge(texts->skillIds[index], position->position.x + rowX + offset,
                           position->position.y + rowY, 0x72, 0);
             position = FUN_002bf4f8(0x39, 0xAB);
             FUN_002bd82c(texts->skills[index], 0);

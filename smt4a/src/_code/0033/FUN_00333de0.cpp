@@ -1,89 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00333de0` (_code @ 0x333de0, 0x180 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: selection-store scheduling allows the saved-zero value to reuse the selection-address register. */
+#include "status/StatusDown.h"
+#include "addon/aocMain.h"
 
 extern "C" {
+extern StatusDownStateA *g_statusDown;
+extern AocSystemA *g_aocSystem;
+s32 FUN_002c7e3c();
+void sysPlaySe(u32 sound);
+s32 fieldStateAllowsAction();
+s32 gameWorkStateGet();
+u32 FUN_0046fca8(AocSystemA *system, s32 id);
+u32 dataTableValueOrZero(u32 table);
+void asdTextDrawDirectoryEntry(AsdText *text, s32 font, s32 mode, s32 x, s32 y, u32 directory, s32 index);
+s32 FUN_001688c4(AsdText *text);
+void FUN_00203b40(GridNavigation *navigation, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
+void flagsSetOrClearBit(GridNavigation *navigation, s32 enabled);
 
-int sysPlaySe(...);
-int dataTableValueOrZero(...);
-int FUN_00203b40(int, unsigned int, int, int, int, int);
-int asdTextDrawDirectoryEntry(...);
-int flagsSetOrClearBit(int, int);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned int g_aocSystem; /* 0x570280 */
-extern int g_statusDown; /* 0x588fe8 */
-
-/* Supplied declaration required: sysPlaySe. */
-extern unsigned int FUN_001688c4(unsigned int);
-/* Supplied declaration required: dataTableValueOrZero. */
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: asdTextDrawDirectoryEntry. */
-extern int FUN_002c7e3c(void);
-/* Supplied declaration required: flagsSetOrClearBit. */
-extern int gameWorkStateGet(void);
-extern int fieldStateAllowsAction(void);
-extern int FUN_0046fca8(unsigned int, int);
-
-
-void FUN_00333de0(int param_1)
-
+// Play the mode-specific selection sound and rebuild the selected entry's scrollable caption.
+void FUN_00333de0(s32 selected)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = g_statusDown;
-  if (((*(short *)(g_statusDown + 0x598) < 0) && (-1 < param_1)) &&
-     (*(char *)(g_statusDown + 0x514) == '\x01')) {
-    temp_v1 = FUN_002c7e3c();
-    if (temp_v1 == 0xe || temp_v1 == 7) {
-      temp_v2 = 0x33;
-      sysPlaySe(temp_v2);
-    }
-    else if ((!(temp_v1 == 9 || temp_v1 == 10)) && (!(temp_v1 == 0xc || temp_v1 == 8))) {
-      if ((temp_v1 != 2 && temp_v1 != 4) && temp_v1 != 0x11) {
-        sysPlaySe(0x2d);
-      }
-      else {
-        temp_v1 = fieldStateAllowsAction();
-        if (temp_v1 == 0) {
-          temp_v2 = 0x29;
+    StatusDownStateA *status = g_statusDown;
+    if ((s16)status->unk598 < 0 && selected >= 0 && status->unk514 == 1) {
+        s32 mode = FUN_002c7e3c();
+        if (mode == 14 || mode == 7) {
+            sysPlaySe(0x33);
+        } else if (mode == 9 || mode == 10 || mode == 12 || mode == 8) {
+            sysPlaySe(0x62);
+        } else if (mode == 2 || mode == 4 || mode == 17) {
+            sysPlaySe(fieldStateAllowsAction() ? 0xFA : 0x29);
+        } else {
+            sysPlaySe(0x2D);
         }
-        else {
-          temp_v2 = 0xfa;
-        }
-        sysPlaySe(temp_v2);
-      }
     }
-    else {
-      temp_v2 = 0x62;
-      sysPlaySe(temp_v2);
+    status->unk598 = (u16)selected;
+    if (selected >= 0 && gameWorkStateGet()) {
+        u32 directory = FUN_0046fca8(g_aocSystem, selected);
+        if (directory == 0)
+            directory = dataTableValueOrZero(0x3F);
+        asdTextDrawDirectoryEntry(status->caption.text, 3, -1, 0, 3, directory, selected);
+    } else {
+        asdTextDrawDirectoryEntry(status->caption.text, 3, -1, 0, 3, dataTableValueOrZero(0x3F), 0);
     }
-  }
-  *(short *)(temp_v0 + 0x598) = (short)param_1;
-  if ((param_1 >= 0) && (temp_v1 = gameWorkStateGet(), temp_v1 != 0)) {
-    temp_v1 = FUN_0046fca8(g_aocSystem,param_1);
-    if (temp_v1 == 0) {
-      temp_v1 = dataTableValueOrZero();
-    }
-    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x23b8),3,0xffffffff,0,3,temp_v1,param_1);
-  }
-  else {
-    temp_v2 = dataTableValueOrZero(0x3f);
-    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x23b8),3,0xffffffff,0,3,temp_v2,0);
-  }
-  temp_v2 = FUN_001688c4(*(unsigned int *)(temp_v0 + 0x23b8));
-  FUN_00203b40(temp_v0 + 0x23c0,temp_v2,10,1,0,1);
-  flagsSetOrClearBit(temp_v0 + 0x23c0,0);
-  *(unsigned char *)(temp_v0 + 0x528) = 1;
-  return;
+    s32 count = FUN_001688c4(status->caption.text);
+    FUN_00203b40(&status->caption.navigation, count, 10, 1, 0, 1);
+    flagsSetOrClearBit(&status->caption.navigation, 0);
+    status->inventoryDirty = 1;
 }
-
-} /* extern "C" */
+}

@@ -1,64 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ff888` (_code @ 0x3ff888, 0x108 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The filter countdown stays in r1 rather than retail's saved r4, adding an index initialization. */
+#include "shard/Shard0031.h"
+#include <stddef.h>
 
+struct SlotRecord;
 extern "C" {
+s32 gameFlagIsSet(u32 flag);
+SlotRecord *gameGetSlotRecord(s32 slot);
+SlotTable *gameGetSlotTable(void);
+s32 FUN_004bd0d8(SlotRecord *record);
+s32 bitsAt60Test(SlotRecord *record, u32 bit);
+s32 FUN_004bd730(void);
+void __aeabi_memset4(void *destination, u32 size, s32 value);
 
-int __aeabi_memset4(char [28], int, unsigned int);
-
-extern int gameFlagIsSet(unsigned int);
-extern int gameGetSlotRecord(int);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: __aeabi_memset4. */
-extern int FUN_004bd0d8(int);
-extern int bitsAt60Test(int, unsigned int);
-extern int FUN_004bd730(void);
-
-
-unsigned int FUN_003ff888(void)
-
+/* Searches the occupied roster for a record allowed by the current feature and status flags. */
+s32 FUN_003ff888(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  char acStack_30 [28];
-  
-  temp_v0 = gameFlagIsSet(0x401);
-  if (temp_v0 != 0) {
-    temp_v0 = gameGetSlotTable();
-    temp_v4 = 0;
-    __aeabi_memset4(acStack_30,0x18,0xffffffff);
-    temp_v3 = (unsigned int)*(unsigned char *)(temp_v0 + 0x1ca3);
-    if (temp_v3 != 0) {
-      pcVar2 = (char *)(temp_v0 + 0x1c88);
-      do {
-        if (-1 < *pcVar2) {
-          acStack_30[temp_v4] = *pcVar2;
-          temp_v4 = temp_v4 + 1;
+    /* The roster count lies beyond the shared SlotTable prefix; do not grow that shared type. */
+    struct RosterView {
+        /* 0x0000 */ PartyStatusSlots slots;
+        /* 0x1CA3 */ u8 count;
+    };
+    typedef char RosterCountOffsetCheck[offsetof(RosterView, count) == 0x1CA3 ? 1 : -1];
+    s8 occupiedSlots[24];
+    if (gameFlagIsSet(0x401) != 0) {
+        RosterView *roster = (RosterView *)gameGetSlotTable();
+        u8 occupiedCount = 0;
+        __aeabi_memset4(occupiedSlots, sizeof(occupiedSlots), -1);
+        s32 remaining = roster->count;
+        if (remaining != 0) {
+            const s8 *slot = roster->slots.active.slots;
+            for (; remaining > 0; --remaining, ++slot) {
+                if (*slot >= 0) {
+                    occupiedSlots[occupiedCount++] = *slot;
+                }
+            }
+            for (s32 index = 0; index < occupiedCount; ++index) {
+                SlotRecord *record = gameGetSlotRecord(occupiedSlots[index]);
+                if (record != NULL && FUN_004bd730() != 0 &&
+                    FUN_004bd0d8(record) == 0 && bitsAt60Test(record, 1) == 0 &&
+                    bitsAt60Test(record, 10) == 0) {
+                    return 1;
+                }
+            }
         }
-        temp_v3 = temp_v3 - 1;
-        pcVar2 = pcVar2 + 1;
-      } while (temp_v3 != 0);
-      temp_v0 = 0;
-      if (temp_v4 != 0) {
-        do {
-          temp_v1 = gameGetSlotRecord((int)acStack_30[temp_v0]);
-          if ((((temp_v1 != 0) && (temp_v2 = FUN_004bd730(), temp_v2 != 0)) &&
-              (temp_v2 = FUN_004bd0d8(temp_v1), temp_v2 == 0)) &&
-             ((temp_v2 = bitsAt60Test(temp_v1,1), temp_v2 == 0 &&
-              (temp_v1 = bitsAt60Test(temp_v1,10), temp_v1 == 0)))) {
-            return 1;
-          }
-          temp_v0 = temp_v0 + 1;
-        } while (temp_v0 < (int)temp_v4);
-      }
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

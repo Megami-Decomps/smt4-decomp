@@ -1,83 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a8dac` (_code @ 0x3a8dac, 0x120 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: mode-panel base is formed after initialization rather than retained across it; selected-ID and owner registers differ. */
+#include "classes/Obj4223c4.h"
+#include <stddef.h>
 
 extern "C" {
+s32 utilityReturnSuccess(const void *state);
+s32 stageAssetsLoaded();
+void FUN_00233240(void *panel, s32 mode);
+void buttonHelpSetPreset(u32 preset);
+s32 flaggedValueHolderGetTotal(const SelectionFlags *selection);
+s32 FUN_0029e0f8();
+void FUN_0029defc(s32 id, s32 mode);
+void statusPanelSetOpen(s32 open);
+void FUN_0029dfc0(s32 mode);
 
-int FUN_00233240(...);
-int statusPanelSetOpen(int);
-int FUN_0029defc(int, int);
-int FUN_0029dfc0(int);
-int buttonHelpSetPreset(unsigned int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int utilityReturnSuccess(int);
-/* Supplied declaration required: FUN_00233240. */
-extern int flaggedValueHolderGetTotal(int *);
-extern int stageAssetsLoaded(void);
-/* Supplied declaration required: statusPanelSetOpen. */
-/* Supplied declaration required: FUN_0029defc. */
-/* Supplied declaration required: FUN_0029dfc0. */
-extern int FUN_0029e0f8(void);
-/* Supplied declaration required: buttonHelpSetPreset. */
-
-
-void FUN_003a8dac(int *param_1)
-
+// Enter the compendium list once ready and synchronize the selected status-panel entry.
+void FUN_003a8dac(Obj4223c4 *screen)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  short temp_v2;
-  
-  temp_v0 = (**(romwright_code **)(*param_1 + 0x24))(param_1);
-  if (temp_v0 == 0) {
-    return;
-  }
-  temp_v0 = utilityReturnSuccess((int)param_1 + 0x96);
-  if (temp_v0 != 0) {
-    return;
-  }
-  if (((char)param_1[0x169] == '\x01') && (temp_v0 = stageAssetsLoaded(), temp_v0 == 0)) {
-    return;
-  }
-  param_1[5] = 1;
-  param_1[6] = 0;
-  FUN_00233240(param_1 + 0x37);
-  FUN_00233240(param_1 + 0x37,1);
-  if ((char)param_1[0x169] == '\0') {
-    temp_v1 = 0x2e;
-    buttonHelpSetPreset(temp_v1);
-  }
-  else if ((char)param_1[0x169] == '\x01') {
-    temp_v1 = 0x46;
-    buttonHelpSetPreset(temp_v1);
-  }
-  if ((short)param_1[0x16a] != 0) {
-    temp_v0 = flaggedValueHolderGetTotal(param_1 + 8);
-    temp_v2 = (short)param_1[temp_v0 * 8 + 0x16b];
-    temp_v0 = flaggedValueHolderGetTotal(param_1 + 8);
-    if ((char)param_1[temp_v0 * 8 + 0x171] == '\0') {
-      temp_v2 = 0;
+    struct Entry {
+        u16 count;
+        u16 unk02;
+        u16 id;
+        u8 unk06[0x16];
+        u8 available;
+        u8 unk1d[3];
+    };
+    // Entry storage and the remembered status ID extend beyond the class's documented prefix.
+    struct ScreenEntryView {
+        u8 unk000[0x14];
+        s32 state;
+        u32 timer;
+        u8 unk01c[4];
+        SelectionFlags selection;
+        u8 unk02f[0x67];
+        u8 transition[0x46]; // 0x096
+        u8 panel[0x4c8]; // 0x0dc
+        s8 mode; // 0x5a4
+        u8 unk5a5[3];
+        Entry entries[1280]; // 0x5a8
+        u8 unkA5A8[8];
+        u16 statusId; // 0xa5b0
+    };
+    typedef char ScreenEntryViewOffsetCheck[sizeof(Entry) == 0x20 && offsetof(ScreenEntryView, transition) == 0x96 && offsetof(ScreenEntryView, statusId) == 0xa5b0 ? 1 : -1];
+    ScreenEntryView *view = reinterpret_cast<ScreenEntryView *>(screen);
+    if (!screen->isScreenReady() || utilityReturnSuccess(view->transition))
+        return;
+    if (screen->mode == 1 && !stageAssetsLoaded())
+        return;
+    view->state = 1;
+    view->timer = 0;
+    FUN_00233240(view->panel, 0);
+    FUN_00233240(view->panel, 1);
+    if (view->mode == 0)
+        buttonHelpSetPreset(0x2e);
+    else if (view->mode == 1)
+        buttonHelpSetPreset(0x46);
+    if (view->entries[0].count != 0) {
+        Entry *entries = view->entries;
+        u16 id = entries[flaggedValueHolderGetTotal(&view->selection)].id;
+        if (!entries[flaggedValueHolderGetTotal(&view->selection)].available)
+            id = 0;
+        if (!FUN_0029e0f8() || view->statusId == id)
+            return;
+        view->statusId = id;
+        if (id) {
+            FUN_0029defc(static_cast<s16>(id), 1);
+            statusPanelSetOpen(1);
+            return;
+        }
     }
-    temp_v0 = FUN_0029e0f8();
-    if ((temp_v0 == 0) || ((short)param_1[0x296c] == temp_v2)) {
-      return;
-    }
-    *(short *)(param_1 + 0x296c) = temp_v2;
-    if (temp_v2 != 0) {
-      FUN_0029defc((int)temp_v2,1);
-      statusPanelSetOpen(1);
-      return;
-    }
-  }
-  FUN_0029dfc0(0);
-  return;
+    FUN_0029dfc0(0);
 }
-
-} /* extern "C" */
+}

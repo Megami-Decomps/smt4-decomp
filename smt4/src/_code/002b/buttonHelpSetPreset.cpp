@@ -1,102 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `buttonHelpSetPreset` (_code @ 0x2b8838, 0x14c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: button-order constant storage, active-slot register allocation and transition-tail scheduling differ. */
+#include "ui/ButtonHelp.h"
 
+struct ButtonHelpPresetRecord { u16 buttons[6]; u8 shown; };
+// The pending preset follows the known globals prefix; do not grow the shared type.
+struct ButtonHelpPresetGlobals { ButtonHelpGlobals prefix; s32 pending; };
 extern "C" {
+extern ButtonHelpPresetGlobals g_buttonHelp;
+const ButtonHelpPresetRecord *dataTableGetEntry0e(u32 preset);
+void FUN_002b827c(u32 preset);
+void FUN_002b8454(u8 slot, u8 kind, u8 value, s32 sound);
+void FUN_001385f8();
+void FUN_002ae5e0();
 
-int FUN_001385f8(void);
-int FUN_002ae5e0(void);
-int dataTableGetEntry0e(...);
-int FUN_002b827c(unsigned int);
-int FUN_002b8454(unsigned int, unsigned int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned char g_buttonHelp; /* 0x43da28 */
-extern unsigned int DAT_0043da38; /* 0x43da38 */
-
-/* Supplied declaration required: FUN_001385f8. */
-/* Supplied declaration required: FUN_002ae5e0. */
-/* Supplied declaration required: dataTableGetEntry0e. */
-/* Supplied declaration required: FUN_002b827c. */
-/* Supplied declaration required: FUN_002b8454. */
-
-
-void buttonHelpSetPreset(unsigned int param_1)
-
+void buttonHelpSetPreset(u32 preset)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned char *puVar6;
-  unsigned char temp_v6;
-  unsigned char temp_v7 [12];
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-  puVar6 = (unsigned char *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x4c9);
-  if (*(unsigned char *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x4c9) != param_1) {
-    if ((int)DAT_0043da38 < 0) {
-      temp_v1 = 0;
-      do {
-        if (*(char *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + temp_v1 + 0x4b8) != '\0') {
-          DAT_0043da38 = param_1;
-          return;
-        }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 6);
-    }
-    DAT_0043da38 = -1;
-    FUN_002b827c(param_1);
-    temp_v1 = dataTableGetEntry0e(*(unsigned char *)(temp_v0 + 0x4c9));
-    temp_v2 = dataTableGetEntry0e(param_1);
-    if (temp_v1 != 0 && temp_v2 != 0) {
-      *(unsigned char *)(temp_v0 + 0x4ca) = *(unsigned char *)(temp_v0 + 0x4c9);
-      *puVar6 = (char)param_1;
-      temp_v3 = 0x102;
-      temp_v5 = 0;
-      temp_v7[0] = 5;
-      temp_v7[1] = 6;
-      temp_v7[2] = 4;
-      temp_v7[3] = 3;
-      temp_v7[4] = 2;
-      temp_v7[5] = 1;
-      temp_v7[6] = 0;
-      temp_v7[7] = 0;
-      do {
-        temp_v6 = *(short *)(temp_v2 + temp_v5 * 2) != 0;
-        if (temp_v6) {
-          temp_v3 = (unsigned int)temp_v7[temp_v5];
-        }
-        if (!temp_v6) {
-          temp_v3 = 0x12;
-        }
-        FUN_002b8454(temp_v5 & 0xff,temp_v3);
-        temp_v5 = temp_v5 + 1;
-        temp_v3 = temp_v4;
-      } while ((int)temp_v5 < 6);
-      if (*(char *)(temp_v1 + 0xc) != '\0') {
-        if (*(char *)(temp_v2 + 0xc) != '\0') {
-          *(unsigned char *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x4c5) = 0;
-          FUN_001385f8();
-          return;
-        }
-        *(unsigned char *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x4c5) = 1;
-        FUN_002ae5e0();
+    ButtonHelpWork *work = g_buttonHelp.prefix.work;
+    if (work->unk4C9 == preset) {
         return;
-      }
-      *(unsigned char *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x4c5) = 1;
-      FUN_001385f8();
-      return;
     }
-  }
-  return;
+    if (g_buttonHelp.pending < 0) {
+        const ButtonHelpSelectionViewIV *selection = reinterpret_cast<const ButtonHelpSelectionViewIV *>(g_buttonHelp.prefix.work);
+        for (s32 index = 0; index < 6; ++index) {
+            if (selection->active[index] != 0) {
+                g_buttonHelp.pending = preset;
+                return;
+            }
+        }
+    }
+    g_buttonHelp.pending = -1;
+    FUN_002b827c(preset);
+    const ButtonHelpPresetRecord *previous = dataTableGetEntry0e(work->unk4C9);
+    const ButtonHelpPresetRecord *next = dataTableGetEntry0e(preset);
+    if (previous == NULL || next == NULL) {
+        return;
+    }
+    work->unk04CA[0] = work->unk4C9;
+    work->unk4C9 = preset;
+    u8 buttonOrder[8] = { 5, 6, 4, 3, 2, 1, 0, 0 };
+    for (s32 index = 0; index < 6; ++index) {
+        u16 value = next->buttons[index];
+        u8 kind = value != 0 ? buttonOrder[index] : 18;
+        u8 label = value != 0 ? static_cast<u8>(value) : 81;
+        FUN_002b8454(static_cast<u8>(index), kind, label, 0);
+    }
+    if (previous->shown != 0) {
+        if (next->shown != 0) {
+            g_buttonHelp.prefix.work->unk4C5 = 0;
+            FUN_001385f8();
+        } else {
+            g_buttonHelp.prefix.work->unk4C5 = 1;
+            FUN_002ae5e0();
+        }
+    } else {
+        g_buttonHelp.prefix.work->unk4C5 = 1;
+        FUN_001385f8();
+    }
 }
-
-} /* extern "C" */
+}

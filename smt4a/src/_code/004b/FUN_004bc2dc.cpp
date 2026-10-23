@@ -1,81 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bc2dc` (_code @ 0x4bc2dc, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: table base/candidate registers and result return storage differ. */
+#include "battle/WeightedEncounter.h"
+#include "gamedata/DataTable.h"
+#include "gamedata/Table00.h"
 extern "C" {
+extern void *g_aocSystem;
+s32 randRange(u16 maximum);
+WeightedEncounterTable *resourceFindType27Record(void *system, u32 index);
+WeightedEncounterGroup *FUN_004bb80c(u32 id);
+Table00Record *dataTable00FindById(u32 id);
 
-int dataTable00FindById(void);
-int resourceFindType27Record(int, unsigned int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern int g_aocSystem; /* 0x570280 */
-
-extern int randRange(short);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: resourceFindType27Record. */
-extern int FUN_004bb80c(int index);
-
-
-unsigned short FUN_004bc2dc(unsigned int param_1,int param_2)
-
+// Select an encounter by weight, excluding special portrait groups from the total when requested.
+u32 FUN_004bc2dc(s32 tableIndex, s32 excludeSpecial)
 {
-/* irregular: 1 goto(s); 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  short *psVar7;
-  short temp_v6;
-  
-  temp_v0 = dataTableGet(2,1);
-  temp_v1 = dataTableGetEntries();
-  temp_v5 = temp_v1;
-  if (((-1 < (int)param_1) && (temp_v2 = dataTableGetCount(temp_v0), param_1 < temp_v2)) &&
-     (temp_v5 = g_aocSystem, resourceFindType27Record(g_aocSystem,param_1), temp_v5 == 0)) {
-    temp_v5 = temp_v1 + param_1 * 0x78;
-  }
-  temp_v6 = 0;
-  temp_v1 = 0;
-  do {
-    psVar7 = (short *)(temp_v5 + temp_v1 * 4);
-    if (*psVar7 != 0) {
-      if (param_2 != 0) {
-        temp_v3 = FUN_004bb80c((unsigned short)*psVar7);
-        temp_v4 = 0;
-        do {
-          temp_v2 = (unsigned int)*(unsigned short *)(temp_v3 + temp_v4 * 2 + 0x14);
-          if (((temp_v2 != 0) && (dataTable00FindById(), temp_v2 != 0)) &&
-             ((*(char *)(temp_v2 + 0xa2) != '\0' || (*(char *)(temp_v2 + 0xa3) != '\0'))))
-          goto LAB_004bc3bc;
-          temp_v4 = temp_v4 + 1;
-        } while (temp_v4 < 6);
-      }
-      temp_v6 = temp_v6 + psVar7[1];
+    u32 selected = 0;
+    void *section = dataTableGet(2, 1);
+    WeightedEncounterTable *table = (WeightedEncounterTable *)dataTableGetEntries(section);
+    if (tableIndex >= 0 && (u32)tableIndex < dataTableGetCount(section)) {
+        WeightedEncounterTable *overrideTable = resourceFindType27Record(g_aocSystem, tableIndex);
+        table = overrideTable ? overrideTable : &table[tableIndex];
     }
-LAB_004bc3bc:
-    temp_v1 = temp_v1 + 1;
-    if (temp_v1 >= 0x1e) {
-      temp_v1 = randRange(temp_v6 - 1);
-      temp_v3 = 0;
-      while ((psVar7 = (short *)(temp_v5 + temp_v3 * 4), *psVar7 == 0 ||
-             (temp_v1 = temp_v1 - (unsigned int)(unsigned short)psVar7[1], -1 < temp_v1))) {
-        temp_v3 = temp_v3 + 1;
-        if (temp_v3 >= 0x1e) {
-          return 0;
+    s32 total = 0;
+    for (s32 index = 0; index < 30; ++index) {
+        WeightedEncounterEntry *entry = &table->entries[index];
+        if (entry->id != 0) {
+            bool excluded = false;
+            if (excludeSpecial) {
+                WeightedEncounterGroup *group = FUN_004bb80c(entry->id);
+                for (s32 member = 0; member < 6; ++member) {
+                    if (group->members[member] != 0) {
+                        Table00Record *record = dataTable00FindById(group->members[member]);
+                        if (record != NULL && (record->bustUp.value || record->unk86[0x1D])) {
+                            excluded = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!excluded)
+                total += entry->weight;
         }
-      }
-      return *(unsigned short *)(temp_v5 + temp_v3 * 4);
     }
-  } while( 1 );
+    s32 choice = randRange((u16)(total - 1));
+    for (s32 index = 0; index < 30; ++index) {
+        if (table->entries[index].id != 0) {
+            choice -= table->entries[index].weight;
+            if (choice < 0) {
+                selected = table->entries[index].id;
+                break;
+            }
+        }
+    }
+    return selected;
 }
-
-} /* extern "C" */
+}

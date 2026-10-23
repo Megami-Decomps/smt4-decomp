@@ -1,85 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e3188` (_code @ 0x3e3188, 0x10c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: mask-word address hoisting, roster flag indexing, final state-store order and saved registers differ. */
+#include "battle/btlMain.h"
+#include "battle/btlEncount.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
+extern BtlEncounterGlobalsA g_btlEncount;
+void FUN_004caca0(BtlMainStateA *battle, s32 group, s32 enabled, s32 animate);
+s32 btlRosterGroupAllInactive(BtlMainStateA *battle, s32 group);
+void FUN_003ed238(BtlMainStateA *battle, u32 flags);
+void FUN_003e025c(BtlStep *step, BtlMainStateA *battle);
 
-int FUN_003e025c(...);
-int FUN_003ed238(...);
-int FUN_004caca0(...);
-int btlRosterGroupAllInactive(...);
-
-typedef struct fn_003e3188_arg1 fn_003e3188_arg1;
-struct fn_003e3188_arg1 {
-    unsigned char pad_0x0[0x3];
-    byte field_0x3; /* +0x3 */
-    unsigned char pad_0x4[0x30];
-    undefined4 field_0x34; /* +0x34 */
-    unsigned char pad_0x38[0x32];
-    short field_0x6a; /* +0x6a */
-    unsigned char pad_0x6c[0xac];
-    unsigned char field_0x118; /* +0x118 */
-    unsigned char pad_0x119[0x3];
-    unsigned char field_0x11c; /* +0x11c */
-    unsigned char pad_0x11d[0x17f];
-    unsigned char field_0x29c; /* +0x29c */
-    unsigned char pad_0x29d[0x4];
-    unsigned char field_0x2a1; /* +0x2a1 */
-    unsigned char pad_0x2a2[0x162];
-    void *field_0x404; /* +0x404 */
-};
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern unsigned int DAT_00573868; /* 0x573868 */
-extern unsigned int DAT_0057386c; /* 0x57386c */
-
-/* Supplied declaration required: FUN_003e025c. */
-/* Supplied declaration required: FUN_003ed238. */
-/* Supplied declaration required: FUN_004caca0. */
-/* Supplied declaration required: btlRosterGroupAllInactive. */
-
-
-void FUN_003e3188(unsigned int *param_1,fn_003e3188_arg1 *param_2)
-
+// Wait for the roster to become inactive, count marked entries, and enter the next step.
+void FUN_003e3188(BtlStep *step, BtlMainStateA *battle)
 {
-/* irregular: 4 native warning(s); review required */
-  fn_003e3188_arg1 *pfVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if (!((*(unsigned int *)&param_2[0x11].field_0x11c & DAT_0057386c) == 0 &&
-       (DAT_00573868 & *(unsigned int *)&param_2[0x11].field_0x118) == 0)) {
-    FUN_004caca0(param_2,1,1,0);
-  }
-  else {
-    FUN_004caca0(param_2,1,1);
-  }
-  *param_1 = 0x12;
-  param_1[4] = 0;
-  param_1[3] = 0;
-  pfVar1 = param_2;
-  btlRosterGroupAllInactive(param_2,1);
-  if (pfVar1 != (fn_003e3188_arg1 *)0x0) {
-    FUN_003ed238(param_2,0x400);
-    temp_v0 = 4;
-    do {
-      temp_v1 = *(unsigned int *)(*(int *)&param_2[7].field_0x29c + temp_v0 * 0x1d0 + 0x50);
-      if (((temp_v1 & 1) != 0 && (temp_v1 & 0x80) != 0) && (temp_v1 & 0x400) != 0) {
-        param_2[7].field_0x2a1 = param_2[7].field_0x2a1 + '\x01';
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x36);
-    param_1[4] = 0;
-    *param_1 = 0xd;
-    param_1[3] = 0;
-    FUN_003e025c(param_1,param_2);
-    return;
-  }
-  return;
+    if (((battle->stateFlags.words[0] & g_btlEncount.transition.words[0]) |
+         (battle->stateFlags.words[1] & g_btlEncount.transition.words[1])) != 0) {
+        FUN_004caca0(battle, 1, 1, 0);
+    } else {
+        FUN_004caca0(battle, 1, 1, 1);
+    }
+    step->state = 0x12;
+    step->counters.unk10 = 0;
+    step->counters.unk0C = 0;
+    if (btlRosterGroupAllInactive(battle, 1) != 0) {
+        FUN_003ed238(battle, 0x400);
+        for (s32 index = 4; index < 54; ++index) {
+            u32 flags = battle->roster[index].liveFlags.unk50;
+            if ((flags & 1) != 0 && (flags & 0x80) != 0 && (flags & 0x400) != 0) {
+                ++battle->flaggedRoster.count;
+            }
+        }
+        step->counters.unk10 = 0;
+        step->state = 0xD;
+        step->counters.unk0C = 0;
+        FUN_003e025c(step, battle);
+    }
 }
-
-} /* extern "C" */
+}

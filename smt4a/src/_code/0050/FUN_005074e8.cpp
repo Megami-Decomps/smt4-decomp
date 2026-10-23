@@ -1,109 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_005074e8` (_code @ 0x5074e8, 0x1b0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: placement arrays of recovered trivial element types omit retail construction loops; caller stack homing and bone-copy scheduling also differ. */
+#include "gfx/SkeletonInstanceBuffers.h"
+#include <new>
 
 extern "C" {
+SkeletonBufferBlock FUN_0045b4d0(SkeletonBufferCursor *cursor, u32 bytes, u32 alignment);
+void FUN_00199f84(SkeletonMatrix34 *destination, const SkeletonMatrix34 *source);
+void FUN_00193c08(SkeletonInstanceResource *resource, SkeletonInstanceBuffers *instance);
 
-int FUN_00193c08(int, unsigned char *);
-int FUN_00199f84(int, unsigned int *);
-int FUN_0045b4d0(int *, int *, unsigned int, int);
-
-/* stack frame of param_5: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-} param_5_stack;
-
-/* Supplied declaration required: FUN_00193c08. */
-/* Supplied declaration required: FUN_00199f84. */
-/* Supplied declaration required: FUN_0045b4d0. */
-
-
-void FUN_005074e8(int *param_1,int param_2,unsigned char *param_3,int param_4,int param_5)
-
+SkeletonBufferBlock FUN_005074e8(SkeletonInstanceResource *resource, SkeletonInstanceBuffers *instance,
+                               u8 *memory, const SkeletonBufferRequirements *requirements)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned short *puVar5;
-  int temp_v4;
-  unsigned int *puVar7;
-  unsigned short *puVar8;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int uStack_5c;
-  int temp_v8;
-  unsigned int uStack_54;
-  int *temp_v9;
-  int iStack_30;
-  unsigned char *pbStack_2c;
-  int iStack_28;
-  
-  temp_v6 = *(int *)(param_5 + 8) + param_4;
-  temp_v5 = param_4;
-  temp_v9 = param_1;
-  iStack_30 = param_2;
-  pbStack_2c = param_3;
-  iStack_28 = param_4;
-  FUN_0045b4d0(&temp_v8,&temp_v5,*(unsigned int *)(param_5 + 0x2c),4);
-  *(unsigned int *)(param_3 + 4) = temp_v8;
-  *(unsigned int *)(param_3 + 8) = uStack_54 >> 1;
-  for (temp_v2 = 0; temp_v2 < uStack_54 >> 1; temp_v2 = temp_v2 + 1) {
-  }
-  FUN_0045b4d0(&temp_v8,&temp_v5,*(unsigned int *)(param_5 + 0x34),4);
-  temp_v2 = uStack_54 >> 6;
-  *(unsigned int *)(param_3 + 0xc) = temp_v8;
-  *(unsigned int *)(param_3 + 0x10) = temp_v2;
-  temp_v3 = 0;
-  if (temp_v3 < temp_v2) {
-    do {
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < temp_v2);
-  }
-  FUN_0045b4d0(&temp_v8,&temp_v5,*(unsigned int *)(param_5 + 0x3c),4);
-  *(unsigned int *)(param_3 + 0x14) = temp_v8;
-  *(unsigned int *)(param_3 + 0x18) = uStack_54 / 0x30;
-  for (temp_v2 = 0; temp_v2 < uStack_54 / 0x30; temp_v2 = temp_v2 + 1) {
-  }
-  if (*(char *)(param_2 + 1) == '\x02') {
-    FUN_0045b4d0(&temp_v7,&temp_v5,*(unsigned int *)(param_5 + 0x44),4);
-    *(unsigned int *)(param_3 + 0x1c) = temp_v7;
-    *(unsigned int *)(param_3 + 0x20) = uStack_5c / 0xc;
-    for (temp_v2 = 0; temp_v2 < uStack_5c / 0xc; temp_v2 = temp_v2 + 1) {
+    SkeletonBufferCursor cursor = {memory, memory + requirements->totalBytes};
+    SkeletonBufferBlock block = FUN_0045b4d0(&cursor, requirements->idBytes, 4);
+    instance->jointIds = static_cast<u16 *>(block.data);
+    instance->jointCount = block.bytes / sizeof(u16);
+    new (instance->jointIds) u16[instance->jointCount];
+    block = FUN_0045b4d0(&cursor, requirements->matrixBytes, 4);
+    instance->matrices = static_cast<SkeletonMatrix44 *>(block.data);
+    instance->matrixCount = block.bytes / sizeof(SkeletonMatrix44);
+    new (instance->matrices) SkeletonMatrix44[instance->matrixCount];
+    block = FUN_0045b4d0(&cursor, requirements->localMatrixBytes, 4);
+    instance->localMatrices = static_cast<SkeletonMatrix34 *>(block.data);
+    instance->localMatrixCount = block.bytes / sizeof(SkeletonMatrix34);
+    new (instance->localMatrices) SkeletonMatrix34[instance->localMatrixCount];
+    if (resource->kind == 2) {
+        block = FUN_0045b4d0(&cursor, requirements->vectorBytes, 4);
+        instance->vectors = static_cast<SkeletonVector3 *>(block.data);
+        instance->vectorCount = block.bytes / sizeof(SkeletonVector3);
+        new (instance->vectors) SkeletonVector3[instance->vectorCount];
     }
-  }
-  puVar5 = *(unsigned short **)(param_3 + 4);
-  temp_v4 = 0;
-  temp_v0 = 0;
-  puVar8 = puVar5 + *(int *)(param_3 + 8);
-  while (puVar5 != puVar8) {
-    puVar7 = (unsigned int *)(*(int *)(param_2 + 0x70) + temp_v4 * 100);
-    *puVar5 = (short)puVar7[1];
-    FUN_00199f84(*(int *)(param_3 + 0x14) + temp_v4 * 0x30,puVar7 + 0xb);
-    puVar5 = puVar5 + 1;
-    temp_v4 = temp_v4 + 1;
-    if ((*puVar7 & 0x70000) != 0) {
-      temp_v0 = 1;
+    bool hasSpecialJoint = false;
+    u32 index = 0;
+    u16 *joint = instance->jointIds;
+    u16 *end = joint + instance->jointCount;
+    while (joint != end) {
+        SkeletonJointResource *source = &resource->joints[index];
+        *joint = source->id;
+        FUN_00199f84(&instance->localMatrices[index], &source->localMatrix);
+        ++joint;
+        ++index;
+        if (source->flags & 0x70000)
+            hasSpecialJoint = true;
     }
-  }
-  FUN_00193c08(param_2,param_3);
-  param_3[1] = *(unsigned char *)(param_2 + 1);
-  if (temp_v0) {
-    temp_v1 = *param_3 | 1;
-  }
-  else {
-    temp_v1 = *param_3 & 0xfe;
-  }
-  *param_3 = temp_v1;
-  *temp_v9 = temp_v5;
-  temp_v9[1] = 0;
-  return;
+    FUN_00193c08(resource, instance);
+    instance->kind = resource->kind;
+    if (hasSpecialJoint)
+        instance->flags |= 1;
+    else
+        instance->flags &= ~1;
+    SkeletonBufferBlock remaining = {cursor.current, 0};
+    return remaining;
 }
-
-} /* extern "C" */
+}

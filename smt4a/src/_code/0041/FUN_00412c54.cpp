@@ -1,111 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00412c54` (_code @ 0x412c54, 0x1f0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-int sysMemClear(unsigned int, int);
-int asdPrimAlloc(int);
-int FUN_0042c7c8(unsigned int, unsigned char *, unsigned int, int);
-int rt_memcpy(int, unsigned int);
-
-/* stack frame of param_2: 15 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned char sp1D; /* 0x1d: local_1d */
-    unsigned char sp1E; /* 0x1e: local_1e */
-    unsigned char sp1F; /* 0x1f: local_1f */
-    unsigned char sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned char sp25; /* 0x25: local_25 */
-    unsigned char sp26; /* 0x26: local_26 */
-    unsigned char sp27; /* 0x27: local_27 */
-    unsigned char sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned char sp2D; /* 0x2d: local_2d */
-    unsigned char sp2E; /* 0x2e: local_2e */
-    unsigned char sp2F; /* 0x2f: local_2f */
-    unsigned char sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-extern unsigned int asdGxGetPhysicalAddress(int);
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: asdPrimAlloc. */
-/* Supplied declaration required: FUN_0042c7c8. */
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_00412c54(int param_1,unsigned int param_2)
-
+/* NON_MATCHING: descriptor stack layout, initialization interleaving and saved registers differ. */
+#include "gfx/VertexStreams.h"
+#include "shard/W6_W6Match5_ShaderBinding.h"
+static inline u32 vertexStreamBytes(const VertexStreamSource *source, u32 flag, u32 stride)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  unsigned char temp_v5;
-  unsigned int temp_v6;
-  unsigned char temp_v7;
-  unsigned char temp_v8;
-  unsigned char temp_v9;
-  unsigned char temp_v10;
-  unsigned int temp_v11;
-  unsigned char temp_v12;
-  unsigned char temp_v13;
-  unsigned char temp_v14;
-  unsigned char temp_v15;
-  unsigned int temp_v16;
-  
-  sysMemClear(param_2,0x790);
-  temp_v16 = 0;
-  temp_v7 = 0;
-  temp_v12 = 0;
-  temp_v2 = 0;
-  temp_v8 = 1;
-  temp_v13 = 1;
-  temp_v3 = 1;
-  temp_v9 = 0xff;
-  temp_v14 = 0xff;
-  temp_v4 = 0xff;
-  temp_v10 = 0xff;
-  temp_v11 = 0;
-  temp_v15 = 0xff;
-  temp_v5 = 0xff;
-  temp_v6 = 0;
-  if ((*(unsigned int *)(param_1 + 4) & 1) != 0) {
-    temp_v0 = *(int *)(param_1 + 0xc) * 0xc;
-    asdPrimAlloc(temp_v0);
-    rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x30));
-    temp_v9 = 0;
-    temp_v1 = asdGxGetPhysicalAddress(temp_v0);
-    FUN_0042c7c8(param_2,&temp_v7,temp_v1,0xb);
-  }
-  if ((*(unsigned int *)(param_1 + 4) & 2) != 0) {
-    temp_v0 = *(int *)(param_1 + 0xc) << 4;
-    asdPrimAlloc(temp_v0);
-    rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x34));
-    temp_v4 = 1;
-    temp_v1 = asdGxGetPhysicalAddress(temp_v0);
-    FUN_0042c7c8(param_2,&temp_v2,temp_v1,0xf);
-  }
-  if ((*(unsigned int *)(param_1 + 4) & 0x20) != 0) {
-    temp_v0 = *(int *)(param_1 + 0xc) << 2;
-    asdPrimAlloc(temp_v0);
-    rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x38));
-    temp_v4 = 1;
-    temp_v1 = asdGxGetPhysicalAddress(temp_v0);
-    FUN_0042c7c8(param_2,&temp_v2,temp_v1,0xd);
-  }
-  if ((*(unsigned int *)(param_1 + 4) & 4) != 0) {
-    temp_v0 = *(int *)(param_1 + 0xc) << 3;
-    asdPrimAlloc(temp_v0);
-    rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x3c));
-    temp_v14 = 2;
-    temp_v1 = asdGxGetPhysicalAddress(temp_v0);
-    FUN_0042c7c8(param_2,&temp_v12,temp_v1,7);
-  }
-  return;
+    return (source->flags & flag) ? source->geometry.vertexCount * stride : 0;
 }
+extern "C" {
+void sysMemClear(void *memory, u32 bytes);
+void *asdPrimAlloc(u32 bytes);
+void rt_memcpy(void *destination, const void *source, u32 bytes);
+u32 asdGxGetPhysicalAddress(const void *address);
+void FUN_0042c7c8(void *vertex, const ShaderBindSymbol *symbol, u32 physicalAddress, u32 format);
 
-} /* extern "C" */
+/* The SDK vertex-state object occupies 0x790 bytes. */
+void FUN_00412c54(VertexStreamSource *source, void *vertex)
+{
+    sysMemClear(vertex, 0x790);
+    ShaderBindSymbol position;
+    position.vertex.kind = 0;
+    position.vertex.count = 1;
+    position.vertex.attribute = 255;
+    position.vertex.registerIndex = 255;
+    position.vertex.flags = 0;
+    ShaderBindSymbol texCoord;
+    texCoord.vertex.kind = 0;
+    texCoord.vertex.count = 1;
+    texCoord.vertex.attribute = 255;
+    texCoord.vertex.registerIndex = 255;
+    texCoord.vertex.flags = 0;
+    ShaderBindSymbol color;
+    color.vertex.kind = 0;
+    color.vertex.count = 1;
+    color.vertex.attribute = 255;
+    color.vertex.registerIndex = 255;
+    color.vertex.flags = 0;
+    if (source->flags & 1) {
+        void *data = asdPrimAlloc(vertexStreamBytes(source, 1, 12));
+        rt_memcpy(data, source->position, vertexStreamBytes(source, 1, 12));
+        position.vertex.attribute = 0;
+        FUN_0042c7c8(vertex, &position, asdGxGetPhysicalAddress(data), 11);
+    }
+    if (source->flags & 2) {
+        void *data = asdPrimAlloc(vertexStreamBytes(source, 2, 16));
+        rt_memcpy(data, source->color, vertexStreamBytes(source, 2, 16));
+        color.vertex.attribute = 1;
+        FUN_0042c7c8(vertex, &color, asdGxGetPhysicalAddress(data), 15);
+    }
+    if (source->flags & 0x20) {
+        void *data = asdPrimAlloc(vertexStreamBytes(source, 0x20, 4));
+        rt_memcpy(data, source->secondaryColor, vertexStreamBytes(source, 0x20, 4));
+        color.vertex.attribute = 1;
+        FUN_0042c7c8(vertex, &color, asdGxGetPhysicalAddress(data), 13);
+    }
+    if (source->flags & 4) {
+        void *data = asdPrimAlloc(vertexStreamBytes(source, 4, 8));
+        rt_memcpy(data, source->texCoord, vertexStreamBytes(source, 4, 8));
+        texCoord.vertex.attribute = 2;
+        FUN_0042c7c8(vertex, &texCoord, asdGxGetPhysicalAddress(data), 7);
+    }
+}
+}

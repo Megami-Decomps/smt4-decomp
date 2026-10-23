@@ -20,7 +20,7 @@ int asdMemFree(...);
 int scrScriptProcessDestroy(...);
 int asdLoadFileSyncDefault(void);
 int FUN_0022e774(void);
-int FUN_0026c3c4(int);
+int statusCommitSelectedSkills(int);
 int FUN_00275bc8(...);
 int scrScriptProcessStartEntry(...);
 int FUN_00285774(void);
@@ -31,7 +31,7 @@ int FUN_002f01c4(int);
 int FUN_003180c4(...);
 int FUN_00333dc8(...);
 int statusDisplayBindUnitRecord(int, int, int);
-int FUN_00336de4(...);
+int btlTalkBustUpSetDemonTexture(...);
 int gameClearOwnedSlot(int);
 int FUN_0035da20(...);
 int btlTalkBustUpReleaseContent(void);
@@ -81,7 +81,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022e774. */
 extern int messageMainIsIdle(void);
 extern int FUN_0026c3a0(void);
-/* Supplied declaration required: FUN_0026c3c4. */
+/* Supplied declaration required: statusCommitSelectedSkills. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00285774. */
@@ -95,7 +95,7 @@ extern int messageGetChoiceResult(void);
 extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
-/* Supplied declaration required: FUN_00336de4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 /* Supplied declaration required: gameClearOwnedSlot. */
 /* Supplied declaration required: FUN_0035da20. */
 /* Supplied declaration required: btlTalkBustUpReleaseContent. */
@@ -192,10 +192,10 @@ void FUN_002f5064(int param_1)
       else {
         *(int *)temp_v12 = 0;
       }
-      FUN_00336de4(*(unsigned short *)(temp_v2 + 0x62),0);
+      btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v2 + 0x62),0);
       btlTalkBustUpSetUnk2F4(1);
       statusDisplayBindUnitRecord(temp_v2,0,0);
-      FUN_0026c3c4(temp_v2 + 0x34);
+      statusCommitSelectedSkills(temp_v2 + 0x34);
       FUN_002f01c4((int)*(short *)(temp_v2 + 0x62));
       if (*(char *)(temp_v20 + 0xd4) != '\0') {
         temp_v14 = 0;
@@ -339,7 +339,7 @@ LAB_002f56d4:
       if (temp_v3 != 0) {
         temp_v3 = btlTalkBustUpGetValue();
         if (temp_v3 == 0) {
-          FUN_00336de4(*(unsigned short *)(temp_v2 + 0x62),1);
+          btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v2 + 0x62),1);
           btlTalkBustUpSetUnk2F4(1);
         }
         temp_v2 = *(int *)(temp_v11 + 0x4574);

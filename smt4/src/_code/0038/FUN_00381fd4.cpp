@@ -1,119 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00381fd4` (_code @ 0x381fd4, 0x1e0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: anchor operand allocation, flow-mode constant hoisting and repeated mode comparisons differ from retail. */
+#include "ui/SpriteAnchorGroup.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+extern const u8 DAT_00405878[23];
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 index);
+TextureTableEntryIV *FUN_002bf4f8(u32 table, s32 index);
+ScriptRunState *FUN_00297060(void *buffer, void *arguments);
+s32 FUN_002c2a04(s32 index);
+void FUN_002a03d8(s32 index, s32 mode);
 
-int FUN_00297060(int, unsigned int);
-int FUN_002a03d8(int, int);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_002a03d8. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-extern int FUN_002bf4f8(unsigned int, unsigned char);
-extern int FUN_002c2a04(unsigned int);
-
-
-void FUN_00381fd4(int param_1)
-
+void FUN_00381fd4(SpriteAnchorGroupWork *work)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned char temp_v5;
-  unsigned int in_fpscr;
-  unsigned int temp_v6;
-  
-  temp_v5 = *(int *)(param_1 + 0x5a0) != 0;
-  temp_v1 = 0;
-  if (temp_v5) {
-    temp_v1 = *(int *)(param_1 + 0x5a4);
-  }
-  if (temp_v5 && temp_v1 != 0) {
-    temp_v5 = *(int *)(param_1 + 0x5ac) != 0;
-    temp_v1 = 0;
-    if (temp_v5) {
-      temp_v1 = *(int *)(param_1 + 0x5b0);
+    if (work->firstBuffer && work->firstArguments &&
+        work->secondBuffer && work->secondArguments && asdTMTexTableNodeIsLoaded(0x31, 0)) {
+        for (u32 index = 0; index < 23; ++index) {
+            TextureTableEntryIV *entry = FUN_002bf4f8(0x31, DAT_00405878[index]);
+            const TextLayoutEntryPrefixIV *layout = (const TextLayoutEntryPrefixIV *)entry;
+            work->current[index].x = work->rest[index].x = (f32)layout->x;
+            work->current[index].y = work->rest[index].y = (f32)layout->y;
+            if (entry->placement) {
+                work->optional[index].x = (f32)entry->placement->x;
+                work->optional[index].y = (f32)entry->placement->y;
+            }
+        }
+        for (s32 index = 0; index < 7; ++index) {
+            work->current[index + 4].x += work->rest[21].x;
+            work->current[index + 4].y += work->rest[21].y;
+        }
+        for (s32 index = 0; index < 10; ++index) {
+            work->current[index + 11].x += work->rest[22].x;
+            work->current[index + 11].y += work->rest[22].y;
+        }
+        work->firstProcess = FUN_00297060(work->firstBuffer, work->firstArguments);
+        work->firstProcess->mode = 2;
+        work->secondProcess = FUN_00297060(work->secondBuffer, work->secondArguments);
+        work->secondProcess->mode = 2;
+        work->state = work->mode == 1 || work->mode == 2 ? 14 : 3;
+        work->frame = 0;
+        if (work->mode != 1 && work->mode != 2) {
+            if (FUN_002c2a04(0) == 3)
+                FUN_002a03d8(0, 10);
+            if (FUN_002c2a04(1) == 3)
+                FUN_002a03d8(1, 10);
+        }
     }
-    if ((temp_v5 && temp_v1 != 0) && (temp_v1 = asdTMTexTableNodeIsLoaded(0x31,0), temp_v1 != 0)) {
-      temp_v4 = 0;
-      do {
-        temp_v1 = FUN_002bf4f8(0x31,*(unsigned char *)(temp_v4 + 0x405878));
-        temp_v2 = param_1 + temp_v4 * 8;
-        temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned int *)(temp_v2 + 0x29c) = temp_v6;
-        *(unsigned int *)(temp_v2 + 0x49c) = temp_v6;
-        temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned int *)(temp_v2 + 0x2a0) = temp_v6;
-        *(unsigned int *)(temp_v2 + 0x4a0) = temp_v6;
-        if (*(short **)(temp_v1 + 0xc) != (short *)0x0) {
-          temp_v6 = VectorSignedToFloat((int)**(short **)(temp_v1 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(temp_v2 + 0x39c) = temp_v6;
-          temp_v6 = VectorSignedToFloat((int)*(short *)(*(int *)(temp_v1 + 0xc) + 2),
-                                      (unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(temp_v2 + 0x3a0) = temp_v6;
-        }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 0x17);
-      temp_v1 = 0;
-      temp_v2 = 7;
-      do {
-        temp_v3 = param_1 + temp_v1 * 8;
-        temp_v2 = temp_v2 - 1;
-        temp_v1 = temp_v1 + 1;
-        *(float *)(temp_v3 + 0x4bc) = *(float *)(temp_v3 + 0x4bc) + *(float *)(param_1 + 0x344);
-        *(float *)(temp_v3 + 0x4c0) = *(float *)(temp_v3 + 0x4c0) + *(float *)(param_1 + 0x348);
-      } while (temp_v2 != 0);
-      temp_v1 = 0;
-      temp_v2 = 10;
-      do {
-        temp_v3 = param_1 + temp_v1 * 8;
-        temp_v2 = temp_v2 - 1;
-        temp_v1 = temp_v1 + 1;
-        *(float *)(temp_v3 + 0x4f4) = *(float *)(temp_v3 + 0x4f4) + *(float *)(param_1 + 0x34c);
-        *(float *)(temp_v3 + 0x4f8) = *(float *)(temp_v3 + 0x4f8) + *(float *)(param_1 + 0x350);
-      } while (temp_v2 != 0);
-      temp_v1 = *(int *)(param_1 + 0x5a0);
-      FUN_00297060(temp_v1,*(unsigned int *)(param_1 + 0x5a4));
-      *(int *)(param_1 + 0x5a8) = temp_v1;
-      *(unsigned int *)(temp_v1 + 0x108) = 2;
-      temp_v1 = *(int *)(param_1 + 0x5ac);
-      FUN_00297060(temp_v1,*(unsigned int *)(param_1 + 0x5b0));
-      *(int *)(param_1 + 0x5b4) = temp_v1;
-      *(unsigned int *)(temp_v1 + 0x108) = 2;
-      temp_v0 = *(char *)(param_1 + 0x21);
-      if (temp_v0 != '\x01' && temp_v0 != '\x02') {
-        temp_v6 = 3;
-      }
-      else {
-        temp_v6 = 0xe;
-      }
-      *(unsigned int *)(param_1 + 4) = temp_v6;
-      *(unsigned int *)(param_1 + 8) = 0;
-      if (temp_v0 != '\x01' && temp_v0 != '\x02') {
-        temp_v1 = FUN_002c2a04(0);
-        if (temp_v1 == 3) {
-          FUN_002a03d8(0,10);
-        }
-        temp_v1 = FUN_002c2a04(1);
-        if (temp_v1 == 3) {
-          FUN_002a03d8(1,10);
-          return;
-        }
-      }
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

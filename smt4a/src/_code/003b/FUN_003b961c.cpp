@@ -1,59 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b961c` (_code @ 0x3b961c, 0x104 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: condition-code merging and duplicated trigger-notification tails differ from retail. */
+#include "gamedata/Table49Trigger.h"
 
 extern "C" {
+void FUN_003a249c(void);
+s32 dataTable49Type1Count(void);
+const Table49Trigger* dataTable49GetEntry(s32 index);
+s32 gameFlagIsSet(u32 flag);
+void gameFlagSetValue(u32 flag, s32 value, s32 notify);
 
-int FUN_003a249c(void);
-int dataTable49Type1Count(void);
-int gameFlagSetValue(unsigned int, int);
-
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_003a249c. */
-extern short *dataTable49GetEntry(int);
-/* Supplied declaration required: dataTable49Type1Count. */
-/* Supplied declaration required: gameFlagSetValue. */
-
-
-unsigned int FUN_003b961c(int param_1,int param_2)
-
+// Apply unconsumed table triggers for a group and its selected entry.
+u32 FUN_003b961c(s32 groupId, s32 entryId)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  short *psVar2;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = param_1;
-  dataTable49Type1Count();
-  temp_v2 = 0;
-  if (temp_v2 < temp_v0) {
-    do {
-      psVar2 = (short *)dataTable49GetEntry(temp_v2);
-      if (psVar2[1] != -1) {
-        if (((*psVar2 == param_1) && (psVar2[1] == param_2)) &&
-           ((temp_v1 = gameFlagIsSet(*(unsigned int *)(psVar2 + 2)), temp_v1 != 0 &&
-            (temp_v1 = gameFlagIsSet(*(unsigned int *)(psVar2 + 4)), temp_v1 == 0)))) {
-          temp_v1 = gameFlagIsSet(*(unsigned int *)(psVar2 + 6));
-          if (temp_v1 == 0) {
-            gameFlagSetValue(*(unsigned int *)(psVar2 + 6),1);
-            FUN_003a249c();
-          }
+    s32 count = dataTable49Type1Count();
+    for (s32 index = 0; index < count; ++index) {
+        const Table49Trigger* trigger = dataTable49GetEntry(index);
+        if (trigger->entryId != -1) {
+            if (trigger->groupId != groupId)
+                continue;
+            if (trigger->entryId != entryId)
+                continue;
+            if (gameFlagIsSet(trigger->requiredFlag) && !gameFlagIsSet(trigger->excludedFlag)) {
+                if (!gameFlagIsSet(trigger->triggeredFlag)) {
+                    gameFlagSetValue(trigger->triggeredFlag, 1, 1);
+                    FUN_003a249c();
+                }
+            }
+        } else if (trigger->groupId == groupId && gameFlagIsSet(trigger->requiredFlag) &&
+                   !gameFlagIsSet(trigger->excludedFlag)) {
+            if (!gameFlagIsSet(trigger->triggeredFlag)) {
+                gameFlagSetValue(trigger->triggeredFlag, 1, 1);
+                FUN_003a249c();
+            }
         }
-      }
-      else if (((*psVar2 == param_1) &&
-               (temp_v1 = gameFlagIsSet(*(unsigned int *)(psVar2 + 2)), temp_v1 != 0)) &&
-              (temp_v1 = gameFlagIsSet(*(unsigned int *)(psVar2 + 4)), temp_v1 == 0)) {
-        temp_v1 = gameFlagIsSet(*(unsigned int *)(psVar2 + 6));
-        if (temp_v1 == 0) {
-          gameFlagSetValue(*(unsigned int *)(psVar2 + 6),1);
-          FUN_003a249c();
-        }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < temp_v0);
-  }
-  return 1;
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

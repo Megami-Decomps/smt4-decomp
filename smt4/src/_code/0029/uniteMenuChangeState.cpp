@@ -11,7 +11,7 @@ void FUN_0029ee6c(const char *text, u32 color);
 s32 FUN_0029efc0(const void *cursor);
 s32 FUN_0029efa8(const void *cursor);
 void FUN_0029dc74(u32 id, void *member);
-void FUN_0029d770(u32 id, void *member);
+void unitInitializeFromSavedRecord(u32 id, void *member);
 const void *partyMemberFindById(u32 id);
 void FUN_0029da34(u32 mode, u32 enabled, u32 id, const void *member);
 void buttonHelpShowSkillDetails(u32 id);
@@ -51,7 +51,7 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
         if (work->firstListIV.kind == 1) {
             const void *selectedMember = partyMemberFindById(pair->firstId);
             if (selectedMember == NULL) {
-                FUN_0029d770(pair->firstId, member);
+                unitInitializeFromSavedRecord(pair->firstId, member);
                 selectedMember = member;
             }
             FUN_0029da34(0, 1, pair->firstId, selectedMember);
@@ -59,7 +59,7 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
         if (work->firstListIV.kind == 2) {
             const void *selectedMember = partyMemberFindById(pair->secondId);
             if (selectedMember == NULL) {
-                FUN_0029d770(pair->secondId, member);
+                unitInitializeFromSavedRecord(pair->secondId, member);
                 selectedMember = member;
             }
             FUN_0029da34(0, 1, pair->secondId, selectedMember);

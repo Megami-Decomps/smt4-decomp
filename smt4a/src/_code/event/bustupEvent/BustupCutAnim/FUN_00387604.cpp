@@ -12,7 +12,7 @@ int FUN_0014f0dc(...);
 int taskCreateDraw(...);
 int FUN_001523b8(...);
 int asdMemoryAllocTracked(...);
-int FUN_00186e2c(...);
+int cameraExportParameters(...);
 int sysMemClear(...);
 int FUN_0036b824(...);
 int FUN_00449814(...);
@@ -42,7 +42,7 @@ extern unsigned int *g_bustupCutAnim; /* 0x57f4c4 */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001523b8. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_00186e2c. */
+/* Supplied declaration required: cameraExportParameters. */
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0036b824. */
@@ -116,7 +116,7 @@ unsigned int FUN_00387604(void)
         FUN_00449814(temp_v4,temp_v1);
       }
     }
-    FUN_00186e2c(puVar1 + 0x144,puVar1[0x17b]);
+    cameraExportParameters(puVar1 + 0x144,puVar1[0x17b]);
     puVar7 = puVar1 + 1;
     uiSetFloatPair(puVar7);
     FUN_0014f0dc(puVar7,puVar1 + 0x144,puVar1 + 0x147,puVar1 + 0x14a);

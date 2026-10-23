@@ -1,67 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00515cec` (_code @ 0x515cec, 0x128 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: post-reserve pointer/capacity stores and successful-return scheduling differ. */
+#include "classes/AllocatorWordVector.h"
+#include <new>
+#include <memory>
 
-extern "C" {
-
-typedef int romwright_code(...);
-
-unsigned int FUN_00515cec(int *param_1,unsigned int *param_2)
-
+static inline bool allocatorWordVectorReserve(AllocatorWordVector *vector, s32 requested)
 {
-  int *piVar1;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  unsigned int temp_v0;
-  unsigned int *puVar5;
-  unsigned int temp_v1;
-  unsigned int *puVar7;
-  int temp_v2;
-  
-  temp_v1 = param_1[3];
-  temp_v0 = temp_v1 & 0x3fffffff;
-  if ((int)temp_v0 <= (param_1[2] - param_1[1]) >> 2) {
-    if (temp_v0 != 0) {
-      temp_v0 = temp_v0 << 1;
+    if (requested <= (s32)(vector->capacityFlags & 0x3FFFFFFF))
+        return true;
+    if (vector->allocator == NULL || (vector->capacityFlags & 0xC0000000) != 0x40000000)
+        return false;
+    u32 *storage = (u32 *)vector->allocator->allocate(requested * sizeof(u32), 0x20);
+    if (storage == NULL)
+        return false;
+    s32 size = 0;
+    u32 *source = vector->begin;
+    u32 *sourceEnd = vector->end;
+    if (source != sourceEnd) {
+        std::uninitialized_copy(source, sourceEnd, storage);
+        size = vector->end - vector->begin;
     }
-    else {
-      temp_v0 = 1;
+    if (vector->begin != NULL) {
+        vector->end = vector->begin;
+        vector->allocator->release(vector->begin);
     }
-    if ((temp_v1 & 0x3fffffff) < temp_v0) {
-      piVar1 = (int *)*param_1;
-      temp_v2 = 0;
-      if (((piVar1 == (int *)0x0) || ((temp_v1 & 0xc0000000) != 0x40000000)) ||
-         (puVar2 = (unsigned int *)(**(romwright_code **)(*piVar1 + 8))(piVar1,temp_v0 << 2,0x20),
-         puVar2 == (unsigned int *)0x0)) {
-        return 0;
-      }
-      puVar3 = (unsigned int *)param_1[1];
-      puVar7 = (unsigned int *)param_1[2];
-      puVar5 = puVar2;
-      if (puVar3 != puVar7) {
-        do {
-          if (puVar5 != (unsigned int *)0x0) {
-            *puVar5 = *puVar3;
-          }
-          puVar3 = puVar3 + 1;
-          puVar5 = puVar5 + 1;
-        } while (puVar3 != puVar7);
-        temp_v2 = (param_1[2] - param_1[1]) >> 2;
-      }
-      if (param_1[1] != 0) {
-        param_1[2] = param_1[1];
-        (**(romwright_code **)(*(int *)*param_1 + 0xc))();
-      }
-      param_1[2] = (int)(puVar2 + temp_v2);
-      param_1[1] = (int)puVar2;
-      param_1[3] = (param_1[3] & 0xc0000000U) | temp_v0;
-    }
-  }
-  if ((unsigned int *)param_1[2] != (unsigned int *)0x0) {
-    *(unsigned int *)param_1[2] = *param_2;
-  }
-  param_1[2] = param_1[2] + 4;
-  return 1;
+    vector->end = storage + size;
+    vector->begin = storage;
+    vector->capacityFlags = (vector->capacityFlags & 0xC0000000) | requested;
+    return true;
 }
 
-} /* extern "C" */
+/* Append a copied word, doubling allocator-owned storage when it is full. */
+extern "C" u32 FUN_00515cec(AllocatorWordVector *vector, const u32 *value)
+{
+    s32 capacity = vector->capacityFlags & 0x3FFFFFFF;
+    bool available = true;
+    if (capacity <= vector->end - vector->begin)
+        available = allocatorWordVectorReserve(vector, capacity != 0 ? capacity * 2 : 1);
+    if (available) {
+        new (vector->end) u32(*value);
+        ++vector->end;
+    }
+    return available;
+}

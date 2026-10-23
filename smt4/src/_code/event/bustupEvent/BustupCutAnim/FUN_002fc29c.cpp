@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0024edd4(...);
 int FUN_00298d50(...);
-int FUN_002adf00(...);
+int cameraExportParameters(...);
 int textFormatBuffer(...);
 int FUN_002c159c(...);
 int FUN_002c1e30(...);
@@ -39,7 +39,7 @@ extern char s__B_B_B_B_B_B_B_B_B_B_0043dfd8[129]; /* 0x43dfd8 */
 extern unsigned int FUN_00263c1c(unsigned char *);
 /* Supplied declaration required: FUN_00298d50. */
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002adf00. */
+/* Supplied declaration required: cameraExportParameters. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002c159c. */
 /* Supplied declaration required: FUN_002c1e30. */
@@ -121,7 +121,7 @@ unsigned int FUN_002fc29c(void)
         FUN_0024edd4(temp_v4,temp_v1);
       }
     }
-    FUN_002adf00(puVar9,puVar1[0x17a]);
+    cameraExportParameters(puVar9,puVar1[0x17a]);
     puVar7 = puVar1 + 1;
     FUN_002c159c(puVar7);
     FUN_002c1edc(puVar7,puVar9,puVar1 + 0x146,puVar1 + 0x149);

@@ -1,64 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041f9e4` (_code @ 0x41f9e4, 0x104 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler duplicates the row-render call rather than merging it into retail's shared call; 71 versus 65 instructions. */
+#include "common.h"
+#include <stddef.h>
 
-extern "C" {
-
-int FUN_0041b360(int, int, unsigned int, int, int, unsigned int);
-int FUN_0041c45c(int, unsigned int);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern unsigned int FUN_001834a4(unsigned int, int);
-/* Supplied declaration required: FUN_0041b360. */
-/* Supplied declaration required: FUN_0041c45c. */
-
-
-void FUN_0041f9e4(int param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  
-  temp_v4 = 0x51;
-  temp_v2 = 0;
-  if (*(int *)(param_1 + 0x18) < 2) {
-    temp_v4 = 0x83;
-  }
-  if (0 < *(int *)(param_1 + 0x18)) {
-    do {
-      temp_v3 = *(int *)(param_1 + 0x300) + *(int *)(param_1 + 0x304) + temp_v2;
-      temp_v0 = FUN_001834a4(0x2b,temp_v4 + temp_v2);
-      if (*(char *)(param_1 + temp_v3 + 0x2ec) != '\0') {
-        temp_v5 = 1;
-        temp_v1 = param_1 + temp_v3 * 0x80 + 0x6c;
-      }
-      else {
-        if ((*(char *)(param_1 + 0x13) == '\0') && (0 < temp_v3)) {
-          temp_v5 = 0;
-        }
-        else {
-          temp_v5 = 1;
-        }
-        temp_v1 = 0;
-      }
-      FUN_0041b360(param_1 + temp_v2 * 0x44 + 0x664,temp_v1,temp_v0,temp_v3 + 1,
-                   *(int *)(param_1 + 0x308) == temp_v2,temp_v5);
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < *(int *)(param_1 + 0x18));
-  }
-  temp_v0 = FUN_001834a4(0x2b,*(int *)(param_1 + 0x308) + temp_v4);
-  FUN_0041c45c(param_1 + 0x6ec,temp_v0);
-  return;
+namespace {
+struct MenuRowRecord { u8 data[0x80]; };
+struct MenuRowWidget { u8 data[0x44]; };
+struct MenuRowRefreshView {
+    u8 unk000[0x13];
+    u8 allowEmpty;
+    u8 unk014[4];
+    s32 visibleCount; // 0x018
+    u8 unk01c[0x50];
+    MenuRowRecord records[5]; // 0x06c
+    u8 occupied[20]; // 0x2ec
+    s32 firstIndex; // 0x300
+    s32 pageOffset; // 0x304
+    s32 selectedRow; // 0x308
+    u8 unk30c[0x358];
+    MenuRowWidget rows[2]; // 0x664
+    u8 selection[1]; // 0x6ec
+};
+typedef char MenuRowRefreshLayoutCheck[offsetof(MenuRowRefreshView, records) == 0x6c && offsetof(MenuRowRefreshView, occupied) == 0x2ec && offsetof(MenuRowRefreshView, rows) == 0x664 && offsetof(MenuRowRefreshView, selection) == 0x6ec ? 1 : -1];
 }
+extern "C" {
+const void *FUN_001834a4(u32 archive, s32 index);
+void FUN_0041b360(MenuRowWidget *, MenuRowRecord *, const void *, s32, s32, s32);
+void FUN_0041c45c(void *, const void *);
 
-} /* extern "C" */
+// Refresh the visible record rows and their selection indicator.
+void FUN_0041f9e4(MenuRowRefreshView *menu)
+{
+    s32 baseIndex = 0x51;
+    if (menu->visibleCount <= 1)
+        baseIndex = 0x83;
+    for (s32 row = 0; row < menu->visibleCount; ++row) {
+        s32 recordIndex = menu->firstIndex + menu->pageOffset + row;
+        const void *layout = FUN_001834a4(0x2b, baseIndex + row);
+        s32 selected = menu->selectedRow == row;
+        if (menu->occupied[recordIndex]) {
+            FUN_0041b360(&menu->rows[row], &menu->records[recordIndex], layout,
+                        recordIndex + 1, selected, 1);
+        } else {
+            s32 enabled = menu->allowEmpty || recordIndex < 1;
+            FUN_0041b360(&menu->rows[row], NULL, layout,
+                        recordIndex + 1, selected, enabled);
+        }
+    }
+    const void *layout = FUN_001834a4(0x2b, menu->selectedRow + baseIndex);
+    FUN_0041c45c(menu->selection, layout);
+}
+}

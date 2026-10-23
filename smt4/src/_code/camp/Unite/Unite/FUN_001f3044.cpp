@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00294834(...);
-int FUN_00294e18(...);
+int statusCameraSelectPreset(...);
 int FUN_00297060(...);
 int fileSlotLoad(...);
-int FUN_002a019c(...);
+int uniteRebuildFusionCatalog(...);
 int FUN_002bcc60(...);
 int resultReportIfFailed(...);
 int timerStart(...);
@@ -64,13 +64,13 @@ extern int *g_unite; /* 0x43dd68 */
 extern int FUN_00263c1c(unsigned char *);
 extern int FUN_002907a8(void);
 /* Supplied declaration required: FUN_00294834. */
-/* Supplied declaration required: FUN_00294e18. */
+/* Supplied declaration required: statusCameraSelectPreset. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: fileSlotLoad. */
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 extern int FUN_0029aef0(void);
 extern int flagWordTestBit(int, unsigned int);
-/* Supplied declaration required: FUN_002a019c. */
+/* Supplied declaration required: uniteRebuildFusionCatalog. */
 extern int lmapSceneGetScript(void);
 extern int FUN_002a0d0c(void);
 extern int gameGetUnitRecord(void);
@@ -178,7 +178,7 @@ void FUN_001f3044(void)
     *(unsigned char *)(temp_v0 + 0x31) = 0xff;
     *(unsigned char *)(temp_v0 + 0x32) = 0;
     *(unsigned char *)(temp_v0 + 0x33) = 0;
-    FUN_002a019c();
+    uniteRebuildFusionCatalog();
   }
   temp_v0 = FUN_002a0d0c();
   if (-1 < *(short *)(temp_v0 + 0x1c)) {
@@ -208,7 +208,7 @@ void FUN_001f3044(void)
     }
   }
   __aeabi_memset4(piVar1 + 0x10e,0x80,0xffffffff);
-  FUN_002a019c();
+  uniteRebuildFusionCatalog();
   drawParameterBlockClear(piVar1 + 1);
   temp_v3 = (int *)0x16c;
   paramsInit(piVar1 + 1,&DAT_004030ec,0x54,&DAT_00403140,0x3c,0,0,0,0,&DAT_0040317c);
@@ -244,7 +244,7 @@ void FUN_001f3044(void)
   }
   temp_v0 = FUN_00263c1c(&LAB_001f3694);
   piVar1[0x2574] = temp_v0;
-  FUN_00294e18(1);
+  statusCameraSelectPreset(1);
   temp_v0 = asdMdlManagerCreateSecondList(&LAB_001f36b0,7);
   piVar1[0x2572] = temp_v0;
   temp_v0 = asdMdlManagerCreateSecondList(&LAB_001f36c8,7);

@@ -1,89 +1,89 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a5d5c` (_code @ 0x4a5d5c, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: selected preview and sound behavior restored; owner subobject bases, register allocation and clear-panel tail placement differ. */
+#include "ui/ItemListSelection.h"
+#include "shard/W6_W6Match8_DevilRecordA.h"
 
 extern "C" {
+void sysPlaySe(u32 sound);
+s32 FUN_0023b3b8();
+s32 FUN_0023b3d0();
+void FUN_0023b45c(s32 value);
+void statusPanelSetOpen(s32 open);
+s32 statusDownGetFlag();
+void FUN_0031f718(s16 id, s32 enabled, s32 initial);
+void FUN_00372048(s32 mode);
+u32 FUN_003b70e0(s32 mode);
+s32 flaggedValueHolderGetTotal(void *cursor);
 
-int sysPlaySe(...);
-int FUN_00184310(void);
-int FUN_0023b45c(int);
-int statusPanelSetOpen(int);
-int FUN_0031f718(int, int, int);
-int FUN_00372048(int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00184310. */
-extern int FUN_0023b3b8(void);
-extern int FUN_0023b3d0(void);
-/* Supplied declaration required: FUN_0023b45c. */
-/* Supplied declaration required: statusPanelSetOpen. */
-extern int statusDownGetFlag(void);
-/* Supplied declaration required: FUN_0031f718. */
-/* Supplied declaration required: FUN_00372048. */
-extern int FUN_003b70e0(int);
-extern int flaggedValueHolderGetTotal(int);
-
-
-void FUN_004a5d5c(int param_1)
-
+// Refresh the selected demon's status preview and play the appropriate selection sound.
+void FUN_004a5d5c(ItemListSelectionOwner *owner)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  if (*(short *)(param_1 + 0x864) != 0) {
-    temp_v3 = param_1 + 0x864;
-    temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v3 + temp_v0 * 0x20 + 4);
-    temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
-    if (*(char *)(temp_v3 + temp_v0 * 0x20 + 0x1c) == '\0') {
-      temp_v2 = 0;
+    struct PreviewEntry {
+        u16 count;
+        u16 unk02;
+        u16 id;
+        u8 unk06[0x16];
+        u8 enabled;
+        u8 suffix[3];
+    };
+    struct PreviewBlock {
+        u8 prefix[0x60];
+        u8 specialSound;
+        u8 padding[3];
+        PreviewEntry entries[1];
+    };
+    struct PreviewWorkView {
+        u8 prefix[0x20];
+        u8 cursor[0x7E0];
+        PreviewBlock block;
+    };
+    struct CachedPreviewView {
+        u8 prefix[0xA870];
+        u16 id;
+    };
+    struct PreviewRecordFlags {
+        u8 prefix[0xB3];
+        u8 flags;
+    };
+    PreviewWorkView *work = reinterpret_cast<PreviewWorkView *>(owner);
+    CachedPreviewView *cache = reinterpret_cast<CachedPreviewView *>(owner);
+    PreviewBlock *block = &work->block;
+    if (block->entries[0].count != 0) {
+        PreviewEntry *entries = block->entries;
+        u32 id = entries[flaggedValueHolderGetTotal(work->cursor)].id;
+        if (entries[flaggedValueHolderGetTotal(work->cursor)].enabled == 0)
+            id = 0;
+        if (FUN_0023b3d0() == 0 || cache->id == id)
+            return;
+        cache->id = id;
+        if (id != 0) {
+            FUN_0031f718((s16)id, 1, 0);
+            statusPanelSetOpen(1);
+            s32 mode = statusDownGetFlag();
+            s32 panel = FUN_0023b3b8();
+            const PreviewRecordFlags *record = reinterpret_cast<const PreviewRecordFlags *>(FUN_00184310(id));
+            if ((record->flags & 2) != 0 && mode == 5) {
+                panel = 1;
+                mode = panel;
+            }
+            FUN_00372048(panel);
+            u32 sound = FUN_003b70e0(mode);
+            if (sound != 0) {
+                sysPlaySe(sound);
+                return;
+            }
+            if (block->specialSound != 0) {
+                sysPlaySe(0x48);
+                return;
+            }
+            record = reinterpret_cast<const PreviewRecordFlags *>(
+                FUN_00184310(entries[flaggedValueHolderGetTotal(work->cursor)].id));
+            if ((record->flags & 2) == 0)
+                sysPlaySe(0x30);
+            else
+                sysPlaySe(0x121);
+            return;
+        }
     }
-    temp_v0 = FUN_0023b3d0();
-    if ((temp_v0 == 0) || (*(unsigned short *)(param_1 + 0xa870) == temp_v2)) {
-      return;
-    }
-    *(short *)(param_1 + 0xa870) = (short)temp_v2;
-    if (temp_v2 != 0) {
-      FUN_0031f718((int)(short)temp_v2,1,0);
-      statusPanelSetOpen(1);
-      temp_v1 = statusDownGetFlag();
-      temp_v0 = FUN_0023b3b8();
-      FUN_00184310();
-      if (((*(unsigned char *)(temp_v2 + 0xb3) & 2) != 0) && (temp_v1 == 5)) {
-        temp_v1 = 1;
-        temp_v0 = temp_v1;
-      }
-      FUN_00372048(temp_v0);
-      temp_v0 = FUN_003b70e0(temp_v1);
-      if (temp_v0 != 0) {
-        sysPlaySe();
-        return;
-      }
-      if (*(char *)(param_1 + 0x860) != '\0') {
-        sysPlaySe(0x48);
-        return;
-      }
-      temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
-      temp_v2 = (unsigned int)*(unsigned short *)(temp_v3 + temp_v0 * 0x20 + 4);
-      FUN_00184310();
-      if ((*(unsigned char *)(temp_v2 + 0xb3) & 2) == 0) {
-        sysPlaySe(0x30);
-        return;
-      }
-      sysPlaySe(0x121);
-      return;
-    }
-  }
-  FUN_0023b45c(0);
-  return;
+    FUN_0023b45c(0);
 }
-
-} /* extern "C" */
+}

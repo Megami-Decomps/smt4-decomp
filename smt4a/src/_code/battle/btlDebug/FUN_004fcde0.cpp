@@ -1,64 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fcde0` (_code @ 0x4fcde0, 0x124 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: roster bounds-check merging, action payload spills and flag-mask loads differ. */
+#include "battle/btlMain.h"
+#include "battle/btlReflect.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
+struct BattleReflectMarkingState {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u64 marked;
+};
 extern "C" {
+extern BattleReflectMarkingState DAT_00573c08;
+BtlMainStateA* btlGetMainState(void);
+ReflectAction* FUN_004102d8(ReflectContext* context, s32 actor, s32 secondary, u32 options);
 
-int FUN_004102d8(int, int, int, unsigned int);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-extern int g_btlActionReflect; /* 0x5712f0 */
-extern unsigned int DAT_00573c20; /* 0x573c20 */
-extern unsigned int DAT_00573c24; /* 0x573c24 */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_004102d8. */
-
-
-unsigned int FUN_004fcde0(short param_1,unsigned int param_2,unsigned int *param_3)
-
+// Queue roster reflection commands followed by a marked-combatant command.
+u32 FUN_004fcde0(s32 actor, u32 options, BtlCombatantEntryA* combatant)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  
-  temp_v4 = 0;
-  do {
-    temp_v0 = *(short *)((int)param_3 + 0x6e);
-    if ((-1 < temp_v0) && (temp_v0 < 0x6d)) {
-      temp_v1 = btlGetMainState();
-      temp_v1 = *(int *)(temp_v1 + 0x1ed4) + temp_v4 * 0x1d0;
-      if ((temp_v1 != 0) &&
-         (((temp_v3 = *(unsigned int *)(temp_v1 + 0x50), (temp_v3 & 1) != 0 && (temp_v3 & 2) != 0 &&
-           (*(short *)(temp_v1 + 0x68) == temp_v0)) && ((temp_v3 & 0x400) != 0)))) {
-        temp_v2 = g_btlActionReflect;
-        FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
-        *(unsigned char *)(temp_v2 + 5) = *(unsigned char *)(temp_v2 + 5) | 4;
-        *(int *)(temp_v2 + 0x14) = temp_v1;
-        *(unsigned char *)(temp_v2 + 4) = 0x2c;
-        *(unsigned int *)(temp_v2 + 0x28) = 0x14;
-        *(unsigned int *)(temp_v2 + 0x4c) = 0;
-      }
+    for (s32 index = 0; index < 109; ++index) {
+        s16 selected = combatant->indexView.selectionIndex;
+        if (selected >= 0 && selected < 109) {
+            BattleRosterRecordA* roster = &btlGetMainState()->roster[index];
+            if (roster != NULL && (roster->motion.flags & 1) && (roster->motion.flags & 2) &&
+                roster->motion.unitIndex == selected && (roster->motion.flags & 0x400)) {
+                ReflectAction* action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, options);
+                action->flagView.flags |= 4;
+                action->target = (u32)roster;
+                action->kind = 0x2C;
+                action->value = 20;
+                action->parameter = 0;
+            }
+        }
     }
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 0x6d);
-  temp_v3 = DAT_00573c24 | param_3[1];
-  *param_3 = DAT_00573c20 | *param_3;
-  param_3[1] = temp_v3;
-  temp_v4 = g_btlActionReflect;
-  FUN_004102d8(g_btlActionReflect,(int)(short)(param_1 + 0x14),0,param_2);
-  *(unsigned char *)(temp_v4 + 4) = 0x2e;
-  *(unsigned int **)(temp_v4 + 0x18) = param_3;
-  *(unsigned int *)(temp_v4 + 0x28) = 0;
-  return 1;
+    combatant->flags |= DAT_00573c08.marked;
+    ReflectAction* action = FUN_004102d8(g_btlActionReflect, (s16)(actor + 20), 0, options);
+    action->kind = 0x2E;
+    action->wordValues.unk18 = (u32)combatant;
+    action->value = 0;
+    return 1;
 }
-
-} /* extern "C" */
+}

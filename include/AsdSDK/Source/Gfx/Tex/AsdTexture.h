@@ -27,7 +27,13 @@ typedef struct AsdTexture {
         } storage;
         struct {
             u32 flags; // 0x0c
-            u8 unk10[0x0c];
+            union {
+                u8 unk10[0x0c];
+                struct {
+                    u32 level; // 0x10
+                    u8 unk14[8];
+                } mip;
+            };
             u32 format; // 0x1c
             u32 type; // 0x20
             u8 unk24[0x0c];
@@ -43,6 +49,8 @@ typedef struct AsdTexture {
         void *auxiliaryData;
     };
 } AsdTexture;
+typedef char AsdTextureLevelOffsetCheck[
+    offsetof(AsdTexture, image.mip.level) == 0x10 && sizeof(AsdTexture) == 0x48 ? 1 : -1];
 
 /* A positioned rectangle backed by a texture; both games use this wrapper. */
 struct AsdTextureRegion {

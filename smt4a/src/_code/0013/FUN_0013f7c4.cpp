@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_001519c4(...);
-int FUN_00151aa4(...);
+int messageDrawPairedFrameSprites(...);
 int FUN_00169e38(...);
 int SBORROW4(...);
 
@@ -45,7 +45,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001519c4. */
-/* Supplied declaration required: FUN_00151aa4. */
+/* Supplied declaration required: messageDrawPairedFrameSprites. */
 /* Supplied declaration required: FUN_00151e4c. */
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00162790. */
@@ -215,7 +215,7 @@ unsigned int FUN_0013f7c4(void)
             temp_v1 = temp_v1 + 1;
           } while (temp_v1 < 6);
           efctSetSpeed();
-          FUN_00151aa4(0xac16,0xac17,0xac23,0xac18,0xac19,0xac24);
+          messageDrawPairedFrameSprites(0xac16,0xac17,0xac23,0xac18,0xac19,0xac24);
           efctSetSpeed();
         }
       }
@@ -232,7 +232,7 @@ unsigned int FUN_0013f7c4(void)
           efctSetSpeed();
         }
         FUN_001519c4(0xabfe);
-        FUN_00151aa4(0xabff,0xac00,0xac06,0xac01,0xac02,0xac07);
+        messageDrawPairedFrameSprites(0xabff,0xac00,0xac06,0xac01,0xac02,0xac07);
         efctSetSpeed();
       }
     }
@@ -249,7 +249,7 @@ unsigned int FUN_0013f7c4(void)
         efctSetSpeed();
       }
       FUN_001519c4(0xac31);
-      FUN_00151aa4(0xac32,0xac33,0xac39,0xac34,0xac35,0xac3a);
+      messageDrawPairedFrameSprites(0xac32,0xac33,0xac39,0xac34,0xac35,0xac3a);
       efctSetSpeed();
     }
   }

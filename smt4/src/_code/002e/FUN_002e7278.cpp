@@ -12,7 +12,7 @@ int FUN_0024fd70(...);
 int mathMatrixApplyScale(...);
 int matrix44SetIdentity(...);
 int matrix43Multiply(...);
-int FUN_002a2c7c(...);
+int gfxQuaternionWorkspaceBuildMatrix(...);
 int FUN_002f8938(...);
 int FUN_0031f554(...);
 int VectorSignedToFloat(...);
@@ -162,7 +162,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Supplied declaration required: mathMatrixApplyScale. */
 /* Supplied declaration required: matrix44SetIdentity. */
 /* Supplied declaration required: matrix43Multiply. */
-/* Supplied declaration required: FUN_002a2c7c. */
+/* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: FUN_002f8938. */
 /* Supplied declaration required: FUN_0031f554. */
 
@@ -290,7 +290,7 @@ void FUN_002e7278(fn_002e7278_arg0 *param_1)
         DAT_004ea920 = fStack_1b4;
         DAT_004ea924 = fStack_1b0;
         DAT_004ea928 = fStack_1ac;
-        FUN_002a2c7c();
+        gfxQuaternionWorkspaceBuildMatrix();
         if (0 < temp_v7) {
           unaff_r10 = (float *)&DAT_00472550;
         }
@@ -431,7 +431,7 @@ void FUN_002e7278(fn_002e7278_arg0 *param_1)
         DAT_004ea920 = fStack_1b4;
         DAT_004ea924 = fStack_1b0;
         DAT_004ea928 = fStack_1ac;
-        FUN_002a2c7c();
+        gfxQuaternionWorkspaceBuildMatrix();
         temp_v40 = DAT_004ea964;
         temp_v42 = DAT_004ea96c;
         temp_v43 = DAT_004ea970;

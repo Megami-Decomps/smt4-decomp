@@ -1,101 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00429a1c` (_code @ 0x429a1c, 0x198 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: eCard parameter classification and current-PC error reporting restored; lookup register reuse, branch direction and literal placement differ. */
+#include "common.h"
 
+namespace {
+struct ECardParameter { const char *key; const char *value; };
+struct ECardParameters { ECardParameter *entries; u32 count; };
+struct ECardResponse { u32 unk00; ECardParameters *parameters; };
+}
 extern "C" {
-
-int FUN_00189a38(unsigned int, int);
-int libc_strncmp(...);
-
-extern unsigned char LAB_00429bb4; /* 0x429bb4 */
-extern unsigned char LAB_00429be4; /* 0x429be4 */
-
-/* Supplied declaration required: FUN_00189a38. */
-/* Supplied declaration required: libc_strncmp. */
-
-
-unsigned int FUN_00429a1c(int param_1)
-
-{
-/* irregular: 3 goto(s); 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  
-  temp_v4 = 0;
-  piVar3 = *(int **)(param_1 + 4);
-  temp_v3 = 0xf9613903;
-  temp_v2 = 0;
-  temp_v5 = piVar3[1];
-  if (temp_v5 != 0) {
-    do {
-      temp_v0 = libc_strncmp(*(unsigned int *)(*piVar3 + temp_v2 * 8),&LAB_00429bb4,0x40);
-      if (temp_v0 == 0) {
-        temp_v0 = *(int *)(*piVar3 + temp_v2 * 8 + 4);
-        if (temp_v0 != 0) goto LAB_00429a84;
-        goto LAB_00429a78;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < temp_v5);
-  }
-  temp_v0 = 0;
-LAB_00429a78:
-  FUN_00189a38(0xf9613903,0x429a84);
-LAB_00429a84:
-  temp_v1 = libc_strncmp("REDEEMABLE",temp_v0,0xb);
-  if (temp_v1 != 0) {
-    temp_v4 = libc_strncmp("REDEEMED",temp_v0,9);
-    if (temp_v4 == 0) {
-      temp_v3 = 0xc8a13900;
-    }
-    else {
-      temp_v4 = libc_strncmp("REVOKED",temp_v0,8);
-      if (temp_v4 == 0) {
-        temp_v3 = 0xc8a13901;
-      }
-      else {
-        temp_v4 = libc_strncmp("INACTIVE",temp_v0,9);
-        if (temp_v4 == 0) {
-          temp_v3 = 0xc8a13902;
-        }
-      }
-    }
-  }
-  else {
-    piVar3 = *(int **)(param_1 + 4);
-    temp_v2 = 0;
-    temp_v5 = piVar3[1];
-    if (temp_v5 != 0) {
-      do {
-        temp_v0 = libc_strncmp(*(unsigned int *)(*piVar3 + temp_v2 * 8),&LAB_00429be4,0x40);
-        if (temp_v0 == 0) {
-          temp_v4 = *(int *)(*piVar3 + temp_v2 * 8 + 4);
-          if (temp_v4 != 0) goto LAB_00429b60;
-          break;
-        }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < temp_v5);
-    }
-    FUN_00189a38(0xf9613903,0x429b60);
-LAB_00429b60:
-    temp_v0 = libc_strncmp("GUNIT",temp_v4,6);
-    temp_v3 = 0;
-    if (temp_v0 != 0) {
-      temp_v4 = libc_strncmp("POINTS",temp_v4,7);
-      if (temp_v4 == 0) {
-        temp_v3 = 0xc8a13904;
-      }
-      else {
-        temp_v3 = 0xc8a13906;
-      }
-      return temp_v3;
-    }
-  }
-  return temp_v3;
+s32 libc_strncmp(const char *first, const char *second, u32 length);
+void FUN_00189a38(u32 result, u32 location);
+extern const char DAT_00536ca6[]; // REDEEMABLE
+extern const char DAT_00536cb1[]; // REDEEMED
+extern const char DAT_00536c9e[]; // REVOKED
+extern const char DAT_00536cba[]; // INACTIVE
+extern const char DAT_00536c91[]; // GUNIT
+extern const char DAT_00536c97[]; // POINTS
 }
 
-} /* extern "C" */
+static inline const char *findECardParameter(ECardParameters *parameters, const char *key)
+{
+    u32 count = parameters->count;
+    for (u32 index = 0; index < count; ++index) {
+        if (libc_strncmp(parameters->entries[index].key, key, 0x40) == 0)
+            return parameters->entries[index].value;
+    }
+    return NULL;
+}
+
+// Translate card status and currency parameters into the native eCard result codes.
+extern "C" u32 FUN_00429a1c(ECardResponse *response)
+{
+    const u32 malformed = 0xF9613903;
+    const char *status = findECardParameter(response->parameters, "sys.ECardStatus");
+    if (status == NULL)
+        FUN_00189a38(malformed, __current_pc());
+    if (libc_strncmp(DAT_00536ca6, status, 11) != 0) {
+        if (libc_strncmp(DAT_00536cb1, status, 9) == 0)
+            return 0xC8A13900;
+        if (libc_strncmp(DAT_00536c9e, status, 8) == 0)
+            return 0xC8A13901;
+        if (libc_strncmp(DAT_00536cba, status, 9) == 0)
+            return 0xC8A13902;
+        return malformed;
+    }
+    const char *currency = findECardParameter(response->parameters, "sys.ECardCurrency");
+    if (currency == NULL)
+        FUN_00189a38(malformed, __current_pc());
+    if (libc_strncmp(DAT_00536c91, currency, 6) == 0)
+        return 0;
+    if (libc_strncmp(DAT_00536c97, currency, 7) == 0)
+        return 0xC8A13904;
+    return 0xC8A13906;
+}

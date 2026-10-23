@@ -1,57 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e8a78` (_code @ 0x2e8a78, 0x110 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: loop/record and saved X/Z registers are swapped; effect vector load/multiply scheduling differs. */
+#include "map/mapIf.h"
+#include "map/mapDepart.h"
 
 extern "C" {
+extern MapIfState *g_mapIf;
+extern GameState g_gameState;
+f32 mathDistanceBetweenPoints(f32, f32, f32, f32, f32, f32);
+void FUN_00291e40(u32, f32, f32, f32);
 
-int mathDistanceBetweenPoints(void);
-int FUN_00291e40(int);
-
-extern int g_mapIf; /* 0x447a78 */
-extern unsigned char g_gameState; /* 0x49f91c */
-
-/* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: FUN_00291e40. */
-
-
-void FUN_002e8a78(void)
-
+// Trigger the first nearby waiting map marker and place its appearance effect above the player.
+void FUN_002e8a78(f32 x, f32 y, f32 z)
 {
-/* irregular: irregular input(s): in_s0; 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int in_s0;
-  unsigned long long temp_v4;
-  
-  temp_v0 = g_mapIf;
-  temp_v2 = 0;
-  temp_v4 = (unsigned long long)in_s0;
-  do {
-    temp_v3 = temp_v0 + temp_v2 * 0x194;
-    if ((*(char *)(temp_v3 + 0x1d0) != '\0') &&
-       (((temp_v1 = *(int *)(temp_v3 + 0x1e4), temp_v1 == 0x1d || temp_v1 == 0x26 ||
-         ((temp_v1 == 0x1e || temp_v1 == 0x1f) || temp_v1 == 0x25)) && (*(int *)(temp_v3 + 0x1d4) == 6)))) {
-      temp_v1 = (int)temp_v4;
-      mathDistanceBetweenPoints();
-      if (temp_v1 < 0x41200000) {
-        if ((*(signed char *)((unsigned char *)&g_gameState + 0x18)) == '\0') {
-          if (!(*(int *)(temp_v3 + 0x1e4) == 0x26 || *(int *)(temp_v3 + 0x1e4) == 0x25)) {
-            FUN_00291e40(0x10001ff);
-          }
-          else {
-            FUN_00291e40(0x10001ff);
-          }
+    MapIfState *work = g_mapIf;
+    for (s32 i = 0; i < 128; ++i) {
+        MapIfRecord *record = &work->records[i];
+        if (record->active &&
+            (record->display.category == 29 || record->display.category == 38 ||
+             record->display.category == 30 || record->display.category == 31 ||
+             record->display.category == 37) && record->state == 6) {
+            if (mathDistanceBetweenPoints(x, y, z, record->position.x, record->position.y, record->position.z) < 10.0f) {
+                f32 effectX = record->position.x;
+                f32 effectY = y + 120.0f;
+                f32 effectZ = record->position.z;
+                if (!g_gameState.unk18) {
+                    if (record->display.category == 38 || record->display.category == 37)
+                        FUN_00291e40(0x10001FF, effectX * (1.0f / 3.0f), effectY * (1.0f / 3.0f), effectZ * (1.0f / 3.0f));
+                    else
+                        FUN_00291e40(0x10001FF, effectX, effectY, effectZ);
+                }
+                record->state = 7;
+                record->proximity.timer = 0;
+                return;
+            }
         }
-        *(unsigned int *)(temp_v3 + 0x1d4) = 7;
-        *(unsigned short *)(temp_v3 + 0x1fc) = 0;
-        return;
-      }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x80);
-  return;
 }
-
-} /* extern "C" */
+}

@@ -17,7 +17,7 @@ void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6940(...);
 int FUN_002b6c34(...);
 int FUN_002bdf94(...);
-int FUN_002be370(...);
+int itemDrawCategoryBadge(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
 int FUN_002be650(...);
@@ -74,7 +74,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: devilGetRecord. */
 extern unsigned int aocIndexValueOrDefault(int);
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be370. */
+/* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
@@ -328,7 +328,7 @@ void FUN_002f1558(int param_1)
       VectorSignedToFloat(*(short *)(temp_v3 + 8) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_002be5a4(3,0x72e027ff,temp_v18);
       temp_v3 = FUN_002bf4f8(0x15,0x12f);
-      FUN_002be370(temp_v13,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + temp_v2,0xc9,0);
+      itemDrawCategoryBadge(temp_v13,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + temp_v2,0xc9,0);
       temp_v3 = FUN_002bf4f8(0x15,0x12d);
       FUN_002bdf94(2,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + temp_v2,1,1,0xc9,
                    &LAB_002f2478);

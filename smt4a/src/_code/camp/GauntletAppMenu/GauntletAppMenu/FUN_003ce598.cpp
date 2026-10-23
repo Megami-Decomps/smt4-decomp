@@ -19,7 +19,7 @@ int FUN_00353b00(...);
 int FUN_00359974(...);
 int useCounterRelease(void);
 int FUN_003d1aa0(...);
-int FUN_003d1bc4(void);
+int gauntletAppSortMenuEntries(void);
 int gameFlagSetValue(...);
 
 int FUN_00152cf8(int, int, int, int, int);
@@ -87,7 +87,7 @@ extern unsigned int flaggedEntryGetValueA(int);
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: useCounterRelease. */
 /* Supplied declaration required: FUN_003d1aa0. */
-/* Supplied declaration required: FUN_003d1bc4. */
+/* Supplied declaration required: gauntletAppSortMenuEntries. */
 /* Supplied declaration required: FUN_003dc0c0. */
 /* Supplied declaration required: FUN_003e41f8. */
 extern int FUN_003e4230(unsigned int);
@@ -456,7 +456,7 @@ unsigned int FUN_003ce598(void)
       FUN_003dc0c0(temp_v6,3);
     }
     else {
-      FUN_003d1bc4();
+      gauntletAppSortMenuEntries();
     }
     break;
   case 7:

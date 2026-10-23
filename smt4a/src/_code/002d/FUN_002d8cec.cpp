@@ -1,104 +1,80 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d8cec` (_code @ 0x2d8cec, 0x1e4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: group loop selection, saved registers and animation comparison loads differ. */
+#include "gfx/ModelGroups.h"
+#include "map/mapDepart.h"
+#include "shard/W6_W6Match3_NodeEnable.h"
+/* Named floats in the shared slot's padding would raise the union's alignment. */
+struct ModelGroupResumeSlot {
+    u8 active, dirty, visible, unk03;
+    f32 position[3];
+    f32 yaw;
+    s32 animation;
+    u8 unk18[8];
+    AsdMdlObject *model;
+    u8 pending;
+    u8 unk25[7];
+};
+struct ModelGroupsModeView { u8 unk00[0xC]; u16 mode; };
+/* The node's visibility link and animation lie beyond the shared node prefix. */
+struct ModelResumeNode {
+    AsdMdlNode node;
+    NodeEnableTarget *target;
+    u8 unk30[8];
+    s32 animation;
+};
+typedef char ModelGroupResumeOffsets[(sizeof(ModelGroupResumeSlot) == 0x2C && offsetof(ModelGroupResumeSlot, animation) == 0x14 && offsetof(ModelResumeNode, animation) == 0x38) ? 1 : -1];
 extern "C" {
-
-int FUN_001ac2d4(unsigned int);
-int FUN_0029570c(void);
-int nodeSetTranslation(unsigned int, int, char *);
-int faderSetValue(unsigned int);
-int FUN_0036bb1c(unsigned int, int);
-
-extern int DAT_00581270; /* 0x581270 */
-extern unsigned char g_gameState; /* 0x5f15fc */
-
-/* Supplied declaration required: FUN_001ac2d4. */
-/* Supplied declaration required: FUN_0029570c. */
-/* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: faderSetValue. */
-/* Supplied declaration required: FUN_0036bb1c. */
-
-
-void FUN_002d8cec(void)
-
-{
-/* irregular: 5 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  char *pcVar5;
-  int temp_v3;
-  int temp_v4;
-  
-  if (*(short *)(DAT_00581270 + 0xc) != 0x16) {
-    return;
-  }
-  FUN_0029570c();
-  temp_v3 = 0;
-  temp_v4 = 9;
-  temp_v2 = 0;
-  pcVar5 = (char *)(DAT_00581270 + temp_v2 * 0x2c + 0x1114);
-  do {
-    if (*pcVar5 != '\0') {
-      if ((*(signed char *)((unsigned char *)&g_gameState + 0x23)) != '\0') {
-        puVar1 = *(unsigned int **)(pcVar5 + 0x20);
-        if ((*puVar1 & 2) == 0) {
-          *puVar1 = *puVar1 | 2;
-          *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-          faderSetValue(*(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8));
-        }
-        pcVar5[1] = '\x01';
-      }
-      else if (pcVar5[1] != '\0') {
-        puVar1 = *(unsigned int **)(pcVar5 + 0x20);
-        temp_v1 = *puVar1;
-        if (pcVar5[2] != '\0') {
-          if ((temp_v1 & 2) != 0) {
-            *puVar1 = temp_v1 & 0xfffffffd;
-            *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 1;
-            temp_v0 = *(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8);
-            faderSetValue(temp_v0);
-          }
-        }
-        else if ((temp_v1 & 2) == 0) {
-          *puVar1 = temp_v1 | 2;
-          *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-          temp_v0 = *(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8);
-          faderSetValue(temp_v0);
-        }
-        nodeSetTranslation(*(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8),0,pcVar5 + 4);
-        FUN_0036bb1c(*(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8),0);
-        if (*(int *)(*(int *)(*(int *)(pcVar5 + 0x20) + 8) + 0x38) != *(int *)(pcVar5 + 0x14)) {
-          FUN_001ac2d4(*(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8));
-        }
-        pcVar5[1] = '\0';
-      }
-    }
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 < temp_v4) {
-      if (temp_v3 == 0) {
-        pcVar5 = (char *)(DAT_00581270 + temp_v2 * 0x2c + 0x1114);
-        continue;
-      }
-    }
-    else {
-      temp_v3 = temp_v3 + 1;
-      if (temp_v3 >= 2) {
-        return;
-      }
-      if (temp_v3 == 0) {
-        temp_v4 = 9;
-        temp_v2 = 0;
-        pcVar5 = (char *)(DAT_00581270 + temp_v2 * 0x2c + 0x1114);
-        continue;
-      }
-      temp_v4 = 3;
-      temp_v2 = 0;
-    }
-    pcVar5 = (char *)(DAT_00581270 + temp_v2 * 0x2c + 0x12a0);
-  } while( 1 );
+extern ModelGroups *DAT_00581270;
+extern GameStateA g_gameState;
+void FUN_0029570c(void);
+void faderSetValue(AsdMdlNode *node, f32 value);
+void nodeSetTranslation(AsdMdlNode *node, s32 mode, const f32 *position);
+void FUN_0036bb1c(AsdMdlNode *node, s32 mode, f32 x, f32 y, f32 z);
+void FUN_001ac2d4(AsdMdlNode *node, s32 animation, f32 blend);
 }
-
-} /* extern "C" */
+static inline void suspendModelGroupSlot(ModelGroupResumeSlot *slot)
+{
+    AsdMdlObject *model = slot->model;
+    if (!(model->flags & 2)) {
+        model->flags |= 2;
+        reinterpret_cast<ModelResumeNode *>(model->node)->target->enabled = 0;
+        faderSetValue(slot->model->node, 0.0f);
+    }
+}
+static inline void showModelGroupSlot(ModelGroupResumeSlot *slot)
+{
+    AsdMdlObject *model = slot->model;
+    if (model->flags & 2) {
+        model->flags &= ~2;
+        reinterpret_cast<ModelResumeNode *>(model->node)->target->enabled = 1;
+        faderSetValue(slot->model->node, 1.0f);
+    }
+}
+extern "C" void FUN_002d8cec(void)
+{
+    if (reinterpret_cast<const ModelGroupsModeView *>(DAT_00581270)->mode != 22)
+        return;
+    FUN_0029570c();
+    for (s32 group = 0; group < 2; ++group) {
+        s32 count = group == 0 ? 9 : 3;
+        for (s32 i = 0; i < count; ++i) {
+            ModelGroupSlot *storage = group == 0 ? &DAT_00581270->primary[i] : &DAT_00581270->secondary[i];
+            ModelGroupResumeSlot *slot = reinterpret_cast<ModelGroupResumeSlot *>(storage);
+            if (slot->active) {
+                if (g_gameState.controllerFlags.secondary) {
+                    suspendModelGroupSlot(slot);
+                    slot->dirty = 1;
+                } else if (slot->dirty) {
+                    if (slot->visible)
+                        showModelGroupSlot(slot);
+                    else
+                        suspendModelGroupSlot(slot);
+                    nodeSetTranslation(slot->model->node, 0, slot->position);
+                    FUN_0036bb1c(slot->model->node, 0, 0.0f, slot->yaw, 0.0f);
+                    if (reinterpret_cast<ModelResumeNode *>(slot->model->node)->animation != slot->animation)
+                        FUN_001ac2d4(slot->model->node, slot->animation, 0.0f);
+                    slot->dirty = 0;
+                }
+            }
+        }
+    }
+}

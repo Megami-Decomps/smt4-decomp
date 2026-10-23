@@ -39,6 +39,10 @@ struct UniteWork {
             /* 0x0000 */ u8 unk0000[0x3FC];
             /* 0x03FC */ u32 frame;
         } transition;
+        struct {
+            /* 0x0000 */ u8 unk0000[0x15C];
+            /* 0x015C */ f32 amount;
+        } optionPulse;
     };
     /* 0x0400 */ s32 state;
     /* 0x0404 */ union {
@@ -55,6 +59,10 @@ struct UniteWork {
             /* 0x0404 */ s32 previous;
             /* 0x0408 */ s32 saved;
         } history;
+        struct {
+            u8 prefix404[0x14];
+            s32 cost;
+        } fusionPriceIV;
     };
     /* 0x0434 */ u32 request;
     /* 0x0438 */ union {
@@ -110,9 +118,22 @@ struct UniteWork {
             u32 skillCount; /* 0x13ac */
         } catalogA;
         struct {
+            /* 0x0438 */ u8 unk0438[0x188];
+            u16 demons[1201]; /* 0x5c0 */
+            u16 races[56]; /* 0xf22 */
+            u16 skills[501]; /* 0xf92 */
+            u32 demonCount; /* 0x137c */
+            u32 raceCount; /* 0x1380 */
+            u32 skillCount; /* 0x1384 */
+        } catalogIV;
+        struct {
             /* 0x0438 */ u8 unk0438[0xF58];
             /* 0x1390 */ UnitePairEntryIV pairs[1];
         } pairListIV;
+        struct {
+            /* 0x0438 */ u8 unk0438BeforeScores[0x7468];
+            /* 0x78A0 */ s32 scores[1];
+        } pairScoresIV;
         struct {
             /* 0x0438 */ u8 unk0438[0x6844];
             /* 0x6C7C */ u8 cursor[0x64];
@@ -139,6 +160,54 @@ struct UniteWork {
             /* 0x925C */ s32 resetCount;
             /* 0x9260 */ s32 frames;
         } previewA;
+        struct {
+            u8 unk0438BeforePortraits[0x5DDC];
+            /* 0x6214 */ u8 cursor[0x64];
+            /* 0x6278 */ u16 desired[500];
+            /* 0x6660 */ s16 loaded[4];
+            u8 unk6668[0x2C6C];
+            /* 0x92D4 */ u8 alternateCursor[0x64];
+        } portraitSelectionIV;
+        struct {
+            u8 unk0438BeforePortraits[0x5E04];
+            /* 0x623C */ u8 cursor[0x64];
+            /* 0x62A0 */ u16 desired[500];
+            /* 0x6688 */ s16 loaded[4];
+            u8 unk6690[0x2884];
+            /* 0x8F14 */ u8 alternateCursor[0x64];
+        } portraitSelectionA;
+        struct {
+            /* 0x0438 */ u8 unk0438[0x8E44];
+            /* 0x927C */ u32 ids[1];
+        } optionNamesA;
+        struct {
+            u8 prefix438[0x623C];
+            union {
+                u8 cursor[0x64];
+                struct {
+                    u8 prefix[0x34];
+                    u32 words[4];
+                    u16 unk44;
+                    s16 id;
+                } selected;
+            };
+        } resultSelectionIV;
+        struct {
+            u8 prefix438[0x8BD8];
+            u32 words[4];
+        } resultSnapshotIV;
+        struct {
+            u8 prefix438[0x9000];
+            UnitePairEntryIV pairs[1];
+        } resultPairsIV;
+        struct {
+            u8 prefix438[0x8C40];
+            /* 0x9078 */ UnitePairEntry pairs[1];
+        } resultPairsA;
+        struct {
+            u8 prefix438[0x8738];
+            /* 0x8B70 */ u16 skills[24];
+        } inheritanceA;
     };
     /* 0x9450 */ u8 blocked;
 };
@@ -164,6 +233,7 @@ struct UniteDescriptionEntry {
 };
 typedef char UniteWorkSizeCheck[sizeof(UniteWork) == 0x9454 ? 1 : -1];
 typedef char UniteWorkIVPairsOffsetCheck[offsetof(UniteWork, pairListIV.pairs) == 0x1390 ? 1 : -1];
+typedef char UniteWorkIVScoresOffsetCheck[offsetof(UniteWork, pairScoresIV.scores) == 0x78a0 ? 1 : -1];
 typedef char UniteWorkIVFirstCursorOffsetCheck[offsetof(UniteWork, firstListIV.cursor) == 0x6C7C ? 1 : -1];
 typedef char UniteWorkIVSecondCursorOffsetCheck[offsetof(UniteWork, secondListIV.cursor) == 0x9204 ? 1 : -1];
 typedef char UniteWorkPreviewOffsetCheck[offsetof(UniteWork, previewA.firstModel) == 0x9208 && offsetof(UniteWork, previewA.cameraPose) == 0x9214 && offsetof(UniteWork, previewA.frames) == 0x9260 ? 1 : -1];
@@ -176,6 +246,41 @@ typedef char UniteWorkIVPreviewOffsets[offsetof(UniteWorkIV, preview.previewSoun
 typedef char UniteWorkSelectionAOffsetCheck[
     offsetof(UniteWork, unk0438) == 0x438 &&
     offsetof(UniteWork, selectionA.selectedIndex) == 0x8E88 &&
+    sizeof(UniteWork) == 0x9454 ? 1 : -1];
+typedef char UniteWorkPortraitSelectionOffsetsCheck[
+    offsetof(UniteWork, portraitSelectionIV.cursor) == 0x6214 &&
+    offsetof(UniteWork, portraitSelectionIV.desired) == 0x6278 &&
+    offsetof(UniteWork, portraitSelectionIV.loaded) == 0x6660 &&
+    offsetof(UniteWork, portraitSelectionIV.alternateCursor) == 0x92D4 &&
+    sizeof(UniteWork) == 0x9454 ? 1 : -1];
+typedef char UniteWorkPortraitSelectionAOffsetsCheck[
+    offsetof(UniteWork, portraitSelectionA.cursor) == 0x623C &&
+    offsetof(UniteWork, portraitSelectionA.desired) == 0x62A0 &&
+    offsetof(UniteWork, portraitSelectionA.loaded) == 0x6688 &&
+    offsetof(UniteWork, portraitSelectionA.alternateCursor) == 0x8F14 &&
+    sizeof(UniteWork) == 0x9454 ? 1 : -1];
+
+typedef char UniteWorkOptionDrawOffsetsCheck[
+    offsetof(UniteWork, optionPulse.amount) == 0x15C &&
+    offsetof(UniteWork, optionNamesA.ids) == 0x927C &&
+    sizeof(UniteWork) == 0x9454 ? 1 : -1];
+typedef char UniteWorkResultSelectionIVOffsetsCheck[
+    offsetof(UniteWork, fusionPriceIV.cost) == 0x418 &&
+    offsetof(UniteWork, resultSelectionIV.cursor) == 0x6674 &&
+    offsetof(UniteWork, resultSelectionIV.selected.words) == 0x66A8 &&
+    offsetof(UniteWork, resultSelectionIV.selected.id) == 0x66BA &&
+    offsetof(UniteWork, resultSnapshotIV.words) == 0x9010 &&
+    offsetof(UniteWork, resultPairsIV.pairs) == 0x9438 &&
+    sizeof(UniteWork) == 0x9454 ? 1 : -1];
+typedef char UniteWorkCatalogIVOffsets[
+    offsetof(UniteWork, catalogIV.demons) == 0x5c0 &&
+    offsetof(UniteWork, catalogIV.races) == 0xf22 &&
+    offsetof(UniteWork, catalogIV.skills) == 0xf92 &&
+    offsetof(UniteWork, catalogIV.demonCount) == 0x137c &&
+    sizeof(UniteWork) == 0x9454 ? 1 : -1];
+typedef char UniteWorkResultBuildAOffsets[
+    offsetof(UniteWork, resultPairsA.pairs) == 0x9078 &&
+    offsetof(UniteWork, inheritanceA.skills) == 0x8B70 &&
     sizeof(UniteWork) == 0x9454 ? 1 : -1];
 
 #endif

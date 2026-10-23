@@ -1,49 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026ec00` (_code @ 0x26ec00, 0x198 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: opacity field addressing is folded differently; retail retains accessor NOPs. */
+#include "camp/CampState.h"
 
 extern "C" {
+extern CampStateA *g_camp;
+void efctSetSpeed(f32);
+void FUN_00164b5c(s32, s32, s32, s32, s32, s32);
+void FUN_001835b4(s32, s32, s32, s32, s32, s32);
 
-int FUN_00164b5c(int, int, int, unsigned int, unsigned int, int);
-int efctSetSpeed(void);
-int FUN_001835b4(...);
-
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-/* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001835b4. */
-
-
-void FUN_0026ec00(unsigned int param_1,unsigned int param_2,int param_3)
-
+// Draw one of two layered camp labels with independently animated opacity.
+void FUN_0026ec00(s32 x, s32 y, s32 alternate)
 {
-/* irregular: 3 native warning(s); review required */
-  efctSetSpeed();
-  FUN_00164b5c(2,0x14,6,param_1,param_2,0x79);
-  efctSetSpeed();
-  FUN_001835b4(2,0x14,0x429,param_1,param_2,0x7e);
-  if (param_3 != 0) {
-    FUN_001835b4(2,0x14,0x5cf,param_1,param_2,0x7f);
-    FUN_001835b4(2,0x14,0x5d0,param_1,param_2,0x7f);
-    FUN_001835b4(2,0x14,0x5d2,param_1,param_2,0x80);
-    efctSetSpeed();
-    FUN_001835b4(2,0x14,0x5d1,param_1,param_2,0x83);
-    efctSetSpeed();
-    return;
-  }
-  FUN_001835b4(2,0x14,0x42a,param_1,param_2,0x7f);
-  FUN_001835b4(2,0x14,0x42b,param_1,param_2,0x7f);
-  FUN_001835b4(2,0x14,0x5c9,param_1,param_2,0x80);
-  efctSetSpeed();
-  FUN_001835b4(2,0x14,0x42c,param_1,param_2,0x83);
-  efctSetSpeed();
-  return;
+    struct LabelOpacityView {
+        u8 prefix[0x790];
+        f32 foreground;
+        u8 unk794[0x88];
+        f32 background;
+    };
+    LabelOpacityView *label = reinterpret_cast<LabelOpacityView *>(g_camp);
+    efctSetSpeed(label->background);
+    FUN_00164b5c(2, 20, 6, x, y, 121);
+    efctSetSpeed(1.0f);
+    FUN_001835b4(2, 20, 0x429, x, y, 126);
+    if (alternate) {
+        FUN_001835b4(2, 20, 0x5CF, x, y, 127);
+        FUN_001835b4(2, 20, 0x5D0, x, y, 127);
+        FUN_001835b4(2, 20, 0x5D2, x, y, 128);
+        efctSetSpeed(label->foreground);
+        FUN_001835b4(2, 20, 0x5D1, x, y, 131);
+        efctSetSpeed(1.0f);
+    } else {
+        FUN_001835b4(2, 20, 0x42A, x, y, 127);
+        FUN_001835b4(2, 20, 0x42B, x, y, 127);
+        FUN_001835b4(2, 20, 0x5C9, x, y, 128);
+        efctSetSpeed(label->foreground);
+        FUN_001835b4(2, 20, 0x42C, x, y, 131);
+        efctSetSpeed(1.0f);
+    }
 }
-
-} /* extern "C" */
+}

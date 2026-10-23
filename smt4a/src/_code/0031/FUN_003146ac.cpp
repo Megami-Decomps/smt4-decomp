@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0046e800(int, unsigned int);
+int aocFindPackagePayload(int, unsigned int);
 int flagValueAdd(unsigned int, int);
 int gamePackedFlagTest(...);
 
@@ -39,7 +39,7 @@ extern int gameFlagIsSet(void);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern int FUN_001ba3d4(unsigned int);
-/* Supplied declaration required: FUN_0046e800. */
+/* Supplied declaration required: aocFindPackagePayload. */
 /* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: gamePackedFlagTest. */
 
@@ -70,7 +70,7 @@ unsigned int FUN_003146ac(unsigned int param_1,int param_2)
     temp_v4 = (unsigned int)*puVar6;
     *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0x18) = (unsigned int)puVar6[1];
     temp_v3 = g_aocSystem;
-    FUN_0046e800(g_aocSystem,temp_v4);
+    aocFindPackagePayload(g_aocSystem,temp_v4);
     if (temp_v3 == 0) {
       temp_v2 = dataTableGet(0x20,1);
       temp_v3 = dataTableGetEntries();

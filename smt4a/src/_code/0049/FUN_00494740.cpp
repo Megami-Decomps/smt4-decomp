@@ -1,110 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00494740` (_code @ 0x494740, 0x1d4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: animation completion accessor, switch state-store registers and common script-run tail merging differ. */
+#include "shard/Shard0049.h"
+#include "shard/W6_W6Match6_SpritePresetBank.h"
+#include "ui/UiSpriteState.h"
 
+struct EquipmentMenuScriptViewA {
+    u8 unk000[0x184];
+    void *table;
+    u8 unk188[4];
+    void *process;
+};
 extern "C" {
+extern u32 g_handleRegistry;
+void FUN_0038b010(s32);
+void uiSpriteBankApplyPreset(SpritePresetBank *, u32);
+void FUN_00167458(UiSpriteState *, s32);
+s32 vec2GetXInt(const UiSpriteState *);
+s32 vec2GetYInt(const UiSpriteState *);
+void pointConvertToFloat(AsdTextureRegion *, s32, s32);
+s32 FUN_0023b3d0();
+u32 tableGroupFindEntryIndex(void *, const char *);
+void scrScriptProcessStartEntry(void *, u32);
+void scrRunOpcodesStub(void *);
+s32 FUN_0040ab8c();
+void FUN_0040aad4(EquipmentMenuResource *, s32);
+void handleRegistryRegisterObject(u32, u32);
+void FUN_003fd7b4(u32, f32, f32, f32);
 
-int FUN_00167458(int, int);
-int uiSpriteBankApplyPreset(int, int);
-int scrRunOpcodesStub(unsigned int);
-int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int FUN_0038b010(int);
-int FUN_003fd7b4(unsigned int);
-int FUN_0040aad4(int, int);
-int handleRegistryRegisterObject(unsigned int, unsigned int);
-int pointConvertToFloat(int, unsigned int, unsigned int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned char LAB_00494914; /* 0x494914 */
-extern unsigned char LAB_00494924; /* 0x494924 */
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: FUN_00167458. */
-/* Supplied declaration required: uiSpriteBankApplyPreset. */
-/* Supplied declaration required: scrRunOpcodesStub. */
-extern int FUN_0023b3d0(void);
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_0038b010. */
-/* Supplied declaration required: FUN_003fd7b4. */
-/* Supplied declaration required: FUN_0040aad4. */
-extern int FUN_0040ab8c(void);
-/* Supplied declaration required: handleRegistryRegisterObject. */
-/* Supplied declaration required: pointConvertToFloat. */
-
-
-void FUN_00494740(int param_1)
-
+void FUN_00494740(EquipmentMenuState *work)
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  if (*(int *)(param_1 + 8) != 0) {
-    if (*(int *)(param_1 + 8) == 1) {
-      temp_v2 = param_1 + 0x3ec;
-      FUN_00167458(temp_v2,0);
-      temp_v0 = vec2GetYInt(temp_v2);
-      temp_v1 = vec2GetXInt(temp_v2);
-      pointConvertToFloat(param_1 + 0x3a4,temp_v1,temp_v0);
-      if (*(char *)(param_1 + 0x476) != '\0') {
-        switch(*(unsigned int *)(param_1 + 0xb40)) {
-        case 0:
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-          temp_v2 = FUN_0023b3d0();
-          if (temp_v2 != 0) {
-            *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 4);
-            *(unsigned int *)(param_1 + 4) = 7;
-            *(unsigned int *)(param_1 + 8) = 0;
-          }
-          break;
-        case 7:
-          *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 4);
-          *(unsigned int *)(param_1 + 4) = 8;
-          *(unsigned int *)(param_1 + 8) = 0;
-          temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_00494914);
-          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18c),temp_v0);
-          scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
-          break;
-        case 8:
-          *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 4);
-          *(unsigned int *)(param_1 + 4) = 9;
-          *(unsigned int *)(param_1 + 8) = 0;
-          temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_00494924);
-          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18c),temp_v0);
-          scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
-          break;
-        default:
+    if (work->transition.frame == 0) {
+        FUN_0038b010(1);
+        uiSpriteBankApplyPreset(reinterpret_cast<SpritePresetBank *>(work->unk00000 + 0x3CC), 0);
+        work->transition.frame = 1;
+    } else if (work->transition.frame == 1) {
+        UiSpriteState *sprite = reinterpret_cast<UiSpriteState *>(work->unk00000 + 0x3EC);
+        FUN_00167458(sprite, 0);
+        s32 y = vec2GetYInt(sprite);
+        s32 x = vec2GetXInt(sprite);
+        pointConvertToFloat(&work->detail.region, x, y);
+        if (sprite->animationFlags.completed) {
+            EquipmentMenuScriptViewA *script = reinterpret_cast<EquipmentMenuScriptViewA *>(work);
+            switch (work->page) {
+            case 0: case 1: case 2: case 3: case 4: case 5: case 6:
+                if (FUN_0023b3d0()) {
+                    work->transition.previousState = work->transition.state;
+                    work->transition.state = 7;
+                    work->transition.frame = 0;
+                }
+                break;
+            case 7:
+                work->transition.previousState = work->transition.state;
+                work->transition.state = 8;
+                work->transition.frame = 0;
+                scrScriptProcessStartEntry(script->process, tableGroupFindEntryIndex(script->table, "shop_itembuy"));
+                scrRunOpcodesStub(script->process);
+                break;
+            case 8:
+                work->transition.previousState = work->transition.state;
+                work->transition.state = 9;
+                work->transition.frame = 0;
+                scrScriptProcessStartEntry(script->process, tableGroupFindEntryIndex(script->table, "shop_selloff"));
+                scrRunOpcodesStub(script->process);
+                break;
+            }
         }
-      }
     }
-  }
-  else {
-    FUN_0038b010(1);
-    uiSpriteBankApplyPreset(param_1 + 0x3cc,0);
-    *(unsigned int *)(param_1 + 8) = 1;
-  }
-  if (((*(int *)(param_1 + 0x16028) != 0) && (temp_v2 = FUN_0040ab8c(), temp_v2 != 0)) &&
-     (*(int *)(*(int *)(param_1 + 0x16028) + 4) == 0)) {
-    FUN_0040aad4(*(int *)(param_1 + 0x16028),0);
-    temp_v0 = *(unsigned int *)(*(int *)(param_1 + 0x16028) + 4);
-    handleRegistryRegisterObject(g_handleRegistry,temp_v0);
-    FUN_003fd7b4(temp_v0);
-    return;
-  }
-  return;
+    if (work->resource && FUN_0040ab8c() && work->resource->handle == 0) {
+        FUN_0040aad4(work->resource, 0);
+        u32 handle = work->resource->handle;
+        handleRegistryRegisterObject(g_handleRegistry, handle);
+        FUN_003fd7b4(handle, 0.0f, -32000.0f, 0.0f);
+    }
 }
-
-} /* extern "C" */
+}

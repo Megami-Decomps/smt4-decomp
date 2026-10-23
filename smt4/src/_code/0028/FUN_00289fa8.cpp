@@ -1,77 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00289fa8` (_code @ 0x289fa8, 0x120 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: position queue indexing and float-store register allocation differ. */
+#include "battle/btlUI.h"
 
-extern "C" {
+extern "C" BtlUiGlobals g_btlUi;
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-} param_3_stack;
-
-extern unsigned char g_btlUi; /* 0x439c88 */
-
-
-unsigned int FUN_00289fa8(unsigned int param_1,unsigned char param_2,unsigned char param_3)
-
+/* Append to an existing position group or start an unused group. */
+extern "C" u32 FUN_00289fa8(u32, u8 kind, u8 mode, f32 x, f32 y, f32 z)
 {
-/* irregular: 1 goto(s); irregular input(s): in_s0, in_s1, in_s2; 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  unsigned char temp_v6;
-  float in_s0;
-  float in_s1;
-  float in_s2;
-  
-  temp_v0 = 0xffffffff;
-  temp_v1 = 0;
-  do {
-    temp_v4 = (int)*(char *)((*(int *)((unsigned char *)&g_btlUi + 0x20)) + temp_v1 + 0xe01c);
-    if (temp_v4 - 1U < 7) {
-      temp_v4 = (*(int *)((unsigned char *)&g_btlUi + 0x20)) + temp_v1 * 0xa0 + temp_v4 * 0x14;
-      temp_v5 = 0;
-      if (*(float *)(temp_v4 + 0xd5f8) == in_s0) {
-        temp_v5 = *(float *)(temp_v4 + 0xd5fc) == in_s1;
-      }
-      temp_v6 = 0;
-      if (temp_v5) {
-        temp_v6 = *(float *)(temp_v4 + 0xd600) == in_s2;
-      }
-      if (temp_v6) {
-        temp_v0 = temp_v1;
-        if (-1 < (int)temp_v1) goto LAB_0028a054;
-        break;
-      }
+    /* Local views preserve the byte alignment of the shared BtlUiObjD unions. */
+    struct Request {
+        f32 x, y, z;
+        u8 active, mode, kind;
+        u8 unk0F[5];
+    };
+    struct Group { Request requests[8]; };
+    struct QueueView {
+        u8 unk0000[0xD60C];
+        Group groups[16];
+        u8 unkE00C[0x10];
+        s8 counts[16];
+    };
+    QueueView *queue = reinterpret_cast<QueueView *>(g_btlUi.ui);
+    s32 selected = -1;
+    for (s32 group = 0; group < 16; ++group) {
+        s32 count = queue->counts[group];
+        if (static_cast<u32>(count - 1) < 7) {
+            const Request *previous = &queue->groups[group].requests[count - 1];
+            if (previous->x == x && previous->y == y && previous->z == z) {
+                selected = group;
+                break;
+            }
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while ((int)temp_v1 < 0x10);
-  temp_v2 = 0;
-  do {
-    temp_v1 = temp_v2;
-    if (*(char *)((*(int *)((unsigned char *)&g_btlUi + 0x20)) + temp_v1 + 0xe01c) < '\x01') break;
-    temp_v2 = temp_v1 + 1;
-    temp_v1 = temp_v0;
-  } while ((int)temp_v2 < 0x10);
-LAB_0028a054:
-  if (temp_v1 < 0x11) {
-    temp_v4 = (*(int *)((unsigned char *)&g_btlUi + 0x20)) + temp_v1;
-    if (*(char *)(temp_v4 + 0xe01c) < 8) {
-      temp_v3 = (*(int *)((unsigned char *)&g_btlUi + 0x20)) + temp_v1 * 0xa0 + *(char *)(temp_v4 + 0xe01c) * 0x14;
-      *(unsigned char *)(temp_v3 + 0xd618) = 1;
-      *(unsigned char *)(temp_v3 + 0xd619) = param_3;
-      *(float *)(temp_v3 + 0xd60c) = in_s0;
-      *(float *)(temp_v3 + 0xd610) = in_s1;
-      *(float *)(temp_v3 + 0xd614) = in_s2;
-      *(unsigned char *)(temp_v3 + 0xd61a) = param_2;
-      *(char *)(temp_v4 + 0xe01c) = *(char *)(temp_v4 + 0xe01c) + '\x01';
-      return temp_v1;
+    if (selected < 0) {
+        for (s32 group = 0; group < 16; ++group) {
+            if (queue->counts[group] < 1) {
+                selected = group;
+                break;
+            }
+        }
     }
-  }
-  return 0xffffffff;
+    if (static_cast<u32>(selected) < 17 && queue->counts[selected] < 8) {
+        Request *request = &queue->groups[selected].requests[queue->counts[selected]];
+        request->active = 1;
+        request->mode = mode;
+        request->x = x;
+        request->y = y;
+        request->z = z;
+        request->kind = kind;
+        queue->counts[selected]++;
+        return selected;
+    }
+    return 0xFFFFFFFF;
 }
-
-} /* extern "C" */

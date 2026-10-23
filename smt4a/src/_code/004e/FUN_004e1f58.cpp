@@ -1,83 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e1f58` (_code @ 0x4e1f58, 0x160 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: duplicate search is pair-unrolled, roster base addresses are hoisted and flag tests are combined differently; 109 versus retail 90 instructions, -O2 candidate. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
+BattleMotionSubject *FUN_001568f8(BtlMainStateA *battle, s32 parameterIndex);
+s32 idSetFindSubjectIndex(BtlMainStateA *battle, const BattleRosterRecordA *record);
 
-int FUN_001568f8(int, int);
-
-/* Supplied declaration required: FUN_001568f8. */
-extern int idSetFindSubjectIndex(int, int);
-
-
-void FUN_004e1f58(int *param_1,int param_2,int param_3)
-
+// Retain one identity/pose snapshot per eligible roster model, without duplicating existing entries.
+void FUN_004e1f58(BtlMainGlobalsA *globals, const BattleActionUnit *action, s32 alternate)
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  temp_v5 = 0;
-  do {
-    temp_v3 = *param_1;
-    temp_v4 = *(int *)(temp_v3 + 0x1ed4) + temp_v5 * 0x1d0;
-    temp_v0 = (unsigned int)*(short *)(temp_v4 + 0x68);
-    if (-1 < (int)temp_v0) {
-      if (param_3 == 0) {
-        temp_v0 = (unsigned int)*(unsigned char *)(temp_v0 + param_2 + 0x38);
-      }
-      if ((param_3 != 0 || temp_v0 != 0) &&
-         (temp_v0 = *(unsigned int *)(temp_v4 + 0x50), (temp_v0 & 1) != 0 && (temp_v0 & 0x80) != 0)) {
-        if (param_3 != 0) {
-          temp_v0 = temp_v0 & 0x8000;
+    for (s32 rosterIndex = 0; rosterIndex < 133; ++rosterIndex) {
+        BtlMainStateA *battle = globals->state;
+        BattleRosterRecordA *record = &battle->roster[rosterIndex];
+        s32 unitIndex = record->combatant.combatantIndex;
+        if (unitIndex < 0 || (!alternate && !action->selectedUnits[unitIndex]))
+            continue;
+        u32 flags = record->liveFlags.unk50;
+        if (!(flags & 1) || !(flags & 0x80))
+            continue;
+        if (alternate) {
+            if (!(flags & 0x8000))
+                continue;
+        } else if (!(flags & 0x400)) {
+            continue;
         }
-        else {
-          temp_v0 = temp_v0 & 0x400;
+        if (record->liveFlags.unk10C & 2)
+            continue;
+        BattleMotionSubject *subject = FUN_001568f8(battle, record->combatant.parameterIndex);
+        if (!subject)
+            continue;
+        s32 subjectIndex = idSetFindSubjectIndex(globals->state, record);
+        if (subjectIndex < 0)
+            subjectIndex = 0;
+        s32 id = subject->appearance.ids[subjectIndex];
+        BattleRetainedRosterEntry *entries = globals->state->retainedRoster.entries;
+        s32 existing;
+        for (existing = 0; existing < 109; ++existing) {
+            if (entries[existing].id == id && entries[existing].key == record->modelMatch.key)
+                break;
         }
-        if (((temp_v0 != 0) && ((*(unsigned int *)(temp_v4 + 0x10c) & 2) == 0)) &&
-           (FUN_001568f8(temp_v3,(int)*(short *)(temp_v4 + 0x6a)), temp_v3 != 0)) {
-          temp_v1 = idSetFindSubjectIndex(*param_1,temp_v4);
-          if (temp_v1 < 0) {
-            temp_v1 = 0;
-          }
-          temp_v2 = 0;
-          temp_v3 = *(int *)(temp_v3 + temp_v1 * 4 + 0xc);
-          do {
-            piVar4 = (int *)(temp_v2 * 0x1c + 0x2418 + *param_1);
-            if ((*piVar4 == temp_v3) && (piVar4[1] == *(int *)(temp_v4 + 100))) goto LAB_004e20a8;
-            temp_v2 = temp_v2 + 1;
-          } while (temp_v2 < 0x6d);
-          temp_v1 = 0;
-          do {
-            piVar4 = (int *)(temp_v1 * 0x1c + 0x2418 + *param_1);
-            if (*piVar4 < 0) {
-              *piVar4 = temp_v3;
-              piVar4[1] = *(int *)(temp_v4 + 100);
-              piVar4[2] = *(int *)(temp_v4 + 0x40);
-              temp_v3 = *(int *)(temp_v4 + 0x10);
-              temp_v1 = *(int *)(temp_v4 + 0x14);
-              piVar4[3] = *(int *)(temp_v4 + 0xc);
-              piVar4[4] = temp_v3;
-              piVar4[5] = temp_v1;
-              piVar4[6] = (int)*(short *)(temp_v4 + 0x6a);
-              break;
+        if (existing < 109)
+            continue;
+        for (s32 index = 0; index < 109; ++index) {
+            BattleRetainedRosterEntry *entry = &entries[index];
+            if (entry->id < 0) {
+                entry->id = id;
+                entry->key = record->modelMatch.key;
+                entry->scale = record->motion.scale;
+                entry->position = *reinterpret_cast<const BattleVector3 *>(record->motion.position);
+                entry->parameterIndex = record->combatant.parameterIndex;
+                break;
             }
-            temp_v1 = temp_v1 + 1;
-          } while (temp_v1 < 0x6d);
         }
-      }
     }
-LAB_004e20a8:
-    temp_v5 = temp_v5 + 1;
-    if (temp_v5 >= 0x85) {
-      return;
-    }
-  } while( 1 );
 }
-
-} /* extern "C" */
+}

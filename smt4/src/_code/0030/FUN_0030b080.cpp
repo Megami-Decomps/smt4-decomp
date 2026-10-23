@@ -16,10 +16,10 @@ typedef struct BtlState0030b080 {
 
 u32 scrGetArg(u32 index);
 BtlState0030b080 *btlGetMainState(void);
-s32 FUN_00245854(Entity0030b080 *entity, u32 arg);
+s32 btlEntryHasActionSkillCategory(Entity0030b080 *entity, u32 arg);
 void scrSetResult(s32 value);
 
-/* Script command: reports whether some active, enabled, visible entity accepts script argument 0 (FUN_00245854). Returns 1. */
+/* Script command: reports whether some active, enabled, visible entity accepts script argument 0 (btlEntryHasActionSkillCategory). Returns 1. */
 u32 FUN_0030b080(void)
 {
     u32 arg = scrGetArg(0);
@@ -29,7 +29,7 @@ u32 FUN_0030b080(void)
         Entity0030b080 *entity = &btlGetMainState()->entities[i];
         u32 flags = entity->flags;
 
-        if ((flags & 0x10) != 0 && (flags & 1) != 0 && (flags & 0x40) == 0 && FUN_00245854(entity, arg) != 0) {
+        if ((flags & 0x10) != 0 && (flags & 1) != 0 && (flags & 0x40) == 0 && btlEntryHasActionSkillCategory(entity, arg) != 0) {
             scrSetResult(1);
             return 1;
         }

@@ -1,75 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041e450` (_code @ 0x41e450, 0x13c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: selection stores combine and the visible-row count is cached rather than reloaded. */
+#include "saveLoadUI/SaveLoadControllerA.h"
+#include "shard/S1ListPanel.h"
 
 extern "C" {
+SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
+s32 FUN_003450d4(void *scroll, const SpriteInfo *sprite, u32 *limits, s32 width,
+                  s32 left, s32 top, u8 *flags, s32 first, s32 second);
+s32 resourceRunOperationIfUnblocked(void *scroll);
+s32 flaggedEntryGetValueA(void *scroll);
+s32 recordGetModeForId(s32 id);
 
-int FUN_003450d4(int, unsigned int, int, int, int, int, int, int, int);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern unsigned int FUN_001834a4(unsigned int, unsigned int);
-extern int recordGetModeForId(int);
-extern unsigned int resourceRunOperationIfUnblocked(int);
-extern int flaggedEntryGetValueA(int);
-/* Supplied declaration required: FUN_003450d4. */
-
-
-void FUN_0041e450(int param_1)
-
+/* Update scroll selection, row sprites, and the selected slot's action flags. */
+void FUN_0041e450(SaveLoadControllerA *controller)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = FUN_001834a4(0x2b,0xd);
-  temp_v1 = param_1 + 0x3d8;
-  FUN_003450d4(temp_v1,temp_v0,param_1 + 0x43c,(int)*(short *)(param_1 + 0x444),
-               (int)*(short *)(param_1 + 0x440),(int)*(short *)(param_1 + 0x442),param_1 + 0x44c,0,1
-              );
-  if (temp_v1 != 0) {
-    temp_v0 = resourceRunOperationIfUnblocked(param_1 + 0x3d8);
-    *(unsigned int *)(param_1 + 0x304) = temp_v0;
-    temp_v1 = flaggedEntryGetValueA(param_1 + 0x3d8);
-    *(int *)(param_1 + 0x308) = temp_v1;
-    *(unsigned int *)(param_1 + 0x2fc) = *(unsigned int *)(param_1 + 0x2f8);
-    *(int *)(param_1 + 0x2f8) = temp_v1 + *(int *)(param_1 + 0x304) + *(int *)(param_1 + 0x300);
-    temp_v1 = 0;
-    if (temp_v1 < *(int *)(param_1 + 0x18)) {
-      do {
-        temp_v3 = *(int *)(param_1 + 0x304) + *(int *)(param_1 + 0x300) + temp_v1;
-        temp_v2 = param_1 + temp_v1 * 0x44;
-        temp_v1 = temp_v1 + 1;
-        if (temp_v3 >= 1) {
-          *(unsigned int *)(temp_v2 + 0x6a0) = 0x86;
-          *(unsigned int *)(temp_v2 + 0x6a4) = 0x98;
+    struct RowSprites {
+        u32 first, second;
+        u8 unk08[0x3c];
+    };
+    // The row sprites extend beyond the shared save-load controller prefix.
+    struct ScrollView {
+        u8 unk000[0x18];
+        s32 count;
+        u8 unk01c[0x2dc];
+        s32 selected;
+        s32 previous;
+        s32 first;
+        s32 scroll;
+        s32 row;
+        u8 unk30c[0xcc];
+        u8 control[0x64];
+        u32 limits;
+        s16 left, top, width, slotId;
+        u8 unk448[4];
+        u8 flags[3];
+        u8 unk44f[0x251];
+        RowSprites rows[1];
+    };
+    typedef char ScrollViewLayout[offsetof(ScrollView, control) == 0x3d8 &&
+        offsetof(ScrollView, rows) == 0x6a0 ? 1 : -1];
+    ScrollView *view = reinterpret_cast<ScrollView *>(controller);
+    SpriteInfo *sprite = FUN_001834a4(0x2b, 0xd);
+    if (FUN_003450d4(view->control, sprite, &view->limits, view->width,
+                      view->left, view->top, view->flags, 0, 1)) {
+        view->scroll = resourceRunOperationIfUnblocked(view->control);
+        view->row = flaggedEntryGetValueA(view->control);
+        view->previous = view->selected;
+        view->selected = view->row + view->scroll + view->first;
+        for (s32 index = 0; index < view->count; ++index) {
+            if (view->scroll + view->first + index >= 1) {
+                view->rows[index].first = 0x86;
+                view->rows[index].second = 0x98;
+            } else {
+                view->rows[index].first = 0x85;
+                view->rows[index].second = 0x97;
+            }
         }
-        else {
-          *(unsigned int *)(temp_v2 + 0x6a0) = 0x85;
-          *(unsigned int *)(temp_v2 + 0x6a4) = 0x97;
-        }
-      } while (temp_v1 < *(int *)(param_1 + 0x18));
     }
-  }
-  temp_v1 = recordGetModeForId((int)*(short *)(param_1 + 0x446));
-  *(unsigned char *)(param_1 + 0x44e) = 0;
-  *(unsigned char *)(param_1 + 0x44d) = 0;
-  if (temp_v1 == 1 || temp_v1 == 2) {
-    *(unsigned char *)(param_1 + 0x44e) = 1;
-  }
-  else if (temp_v1 == 6) {
-    *(unsigned char *)(param_1 + 0x44e) = 1;
-    *(unsigned char *)(param_1 + 0x44d) = 1;
-  }
-  return;
+    s32 mode = recordGetModeForId(view->slotId);
+    view->flags[2] = 0;
+    view->flags[1] = 0;
+    if (mode == 1 || mode == 2) {
+        view->flags[2] = 1;
+    } else if (mode == 6) {
+        view->flags[2] = 1;
+        view->flags[1] = 1;
+    }
 }
-
-} /* extern "C" */
+}

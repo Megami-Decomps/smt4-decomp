@@ -16,7 +16,7 @@ void FUN_0029ede8(u32, u32, s32, s32);
 void FUN_002907c4(char *, u32);
 s32 textFormatBuffer(char *, const char *, ...);
 void textEncodeFontSlot(u32, const char *);
-void FUN_0024bda8(char *, u32);
+void btlFormatCategoryLabel(char *, u32);
 void skillFormatTargetLabel(char *, s32);
 void FUN_001f4568(u32, u32, u32, char *);
 void asdTextDrawDirectoryEntry(AsdText *, u32, s32, s32, s32, RelativeDirectory *, u32);
@@ -42,7 +42,7 @@ void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index)
         textFormatBuffer(text, "%s\x81\x60%s", minimum, maximum); // CP932 full-width wave dash.
         textEncodeFontSlot(0x25, text);
     }
-    FUN_0024bda8(text, rankedTableRecordGetSortFlags(entry) >> 20);
+    btlFormatCategoryLabel(text, rankedTableRecordGetSortFlags(entry) >> 20);
     textEncodeFontSlot(0x26, text);
     skillFormatTargetLabel(text, entry->category);
     textEncodeFontSlot(0x27, text);

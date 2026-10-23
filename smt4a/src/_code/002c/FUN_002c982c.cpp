@@ -8,7 +8,7 @@ int markerKindGetColor(int);
 int FUN_0024101c(int, short *);
 int statusPanelSetOpen(int);
 int statusDisplayBindUnitRecord(unsigned char [42], int, int, int);
-int FUN_0036d318(...);
+int unitInitializeFromTemplate(...);
 int FUN_0037e09c(int);
 int FUN_003b076c(void);
 int __aeabi_idivmod(int, int);
@@ -26,7 +26,7 @@ typedef struct {
 /* Supplied declaration required: statusPanelSetOpen. */
 extern short *FUN_002c7e24(void);
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
-/* Supplied declaration required: FUN_0036d318. */
+/* Supplied declaration required: unitInitializeFromTemplate. */
 /* Supplied declaration required: FUN_0037e09c. */
 /* Supplied declaration required: FUN_003b076c. */
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -70,7 +70,7 @@ void FUN_002c982c(int param_1)
                   FUN_003b076c();
                   FUN_0037e09c(1);
                   if (*(short *)(temp_v0 + 0x485e) != psVar2[0xe]) {
-                    FUN_0036d318(*puVar4,temp_v5);
+                    unitInitializeFromTemplate(*puVar4,temp_v5);
                     temp_v6 = *(unsigned short *)(temp_v0 + 0x485a);
                     temp_v7 = *(unsigned short *)(temp_v0 + 0x485c);
                     temp_v8 = *(unsigned short *)(temp_v0 + 0x485e);
@@ -96,7 +96,7 @@ LAB_002c998c:
           markerKindGetColor(0);
           FUN_003b076c();
           if (*(short *)(temp_v0 + 0x485e) != psVar2[0xe]) {
-            FUN_0036d318(*puVar4,temp_v5);
+            unitInitializeFromTemplate(*puVar4,temp_v5);
             temp_v6 = *(unsigned short *)(temp_v0 + 0x485a);
             temp_v7 = *(unsigned short *)(temp_v0 + 0x485c);
             temp_v8 = *(unsigned short *)(temp_v0 + 0x485e);
@@ -108,7 +108,7 @@ LAB_002c998c:
         temp_v3 = temp_v0 + 0x4871;
         FUN_0024101c(temp_v3,psVar2 + 0x30d);
         if ((temp_v3 != 0) && ((int)*psVar2 == (unsigned int)*puVar4)) {
-          FUN_0036d318((unsigned int)*puVar4,temp_v5);
+          unitInitializeFromTemplate((unsigned int)*puVar4,temp_v5);
           temp_v6 = *(unsigned short *)(temp_v0 + 0x485a);
           temp_v7 = *(unsigned short *)(temp_v0 + 0x485c);
           temp_v8 = *(unsigned short *)(temp_v0 + 0x485e);

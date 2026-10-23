@@ -1,62 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a7cb0` (_code @ 0x4a7cb0, 0x104 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: centered panel text register allocation has not matched retail. */
+#include "common.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
-extern "C" {
-
-int drawTextAtSnappedRectangle(int, unsigned int, unsigned int, unsigned int);
-int FUN_0018349c(...);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_5_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
-/* Supplied declaration required: drawTextAtSnappedRectangle. */
-/* Supplied declaration required: FUN_0018349c. */
-extern int curveEvaluateStandard(unsigned int, unsigned int);
-
-
-void FUN_004a7cb0(int param_1,unsigned short param_2,int param_3,int param_4,int param_5)
-
-{
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int in_fpscr;
-  
-  VectorSignedToFloat(0x100 - param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  if (param_4 != 0) {
-    temp_v2 = FUN_0018349c(param_1 + 200,param_3 + 0x42f);
-    temp_v5 = 0x498;
-    temp_v6 = 3;
-    temp_v7 = 0xffffffff;
-  }
-  else {
-    temp_v2 = FUN_0018349c(param_1 + 200,param_3 + 0x40e);
-    temp_v5 = 0x48a;
-    temp_v7 = 0x8262dff;
-    temp_v6 = 2;
-  }
-  temp_v0 = *(short *)(temp_v2 + 8);
-  temp_v1 = *(short *)(temp_v2 + 10);
-  temp_v3 = FUN_0014bf3c(param_2,0);
-  temp_v2 = curveEvaluateStandard(temp_v3,2);
-  temp_v4 = FUN_0018349c(param_1 + 200,temp_v5);
-  VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(((int)temp_v0 + (int)**(short **)(temp_v4 + 0xc) / 2 + (int)*(short *)(temp_v4 + 8))
-                      - temp_v2 / 2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  drawTextAtSnappedRectangle(param_1 + 200,temp_v6,temp_v7,temp_v3);
-  return;
+namespace {
+/* The width reference lies beyond the shared lookup-result prefix. */
+struct CenteredPanelEntryView {
+    PanelTextLayoutEntryPrefixA position;
+    const s16 *width;
+};
+struct PanelLayoutOwnerView {
+    u8 unk00[0xC8];
+    u8 layout[1];
+};
 }
 
-} /* extern "C" */
+extern "C" {
+const PanelTextLayoutEntryPrefixA *FUN_0018349c(TextLayoutContextA *context, s32 entryId);
+u32 FUN_0014bf3c(u16 textId, u32 flags);
+s32 curveEvaluateStandard(u32 textValue, u32 style);
+void drawTextAtSnappedRectangle(TextLayoutContextA *context, u32 style,
+                                u32 color, u32 textValue,
+                                f32 x, f32 y, f32 opacity,
+                                f32 extraZero, f32 scale);
+
+/* Center the selected text in a layout region, with the panel fade and scale. */
+void FUN_004a7cb0(PanelLayoutOwnerView *panel, u32 textId,
+                  s32 entryIndex, s32 alternateStyle, s32 fade, f32 scale)
+{
+    f32 opacity = static_cast<f32>(256 - fade) * (1.0f / 256.0f);
+    const PanelTextLayoutEntryPrefixA *base;
+    s32 offsetEntry;
+    u32 style;
+    u32 color;
+    if (alternateStyle != 0) {
+        base = FUN_0018349c(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x42F);
+        offsetEntry = 0x498;
+        style = 3;
+        color = 0xFFFFFFFF;
+    } else {
+        base = FUN_0018349c(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x40E);
+        offsetEntry = 0x48A;
+        color = 0x08262DFF;
+        style = 2;
+    }
+    s16 baseX = base->x;
+    s16 baseY = base->y;
+    u32 textValue = FUN_0014bf3c(static_cast<u16>(textId), 0);
+    s32 textWidth = curveEvaluateStandard(textValue, 2);
+    const CenteredPanelEntryView *offset = reinterpret_cast<const CenteredPanelEntryView *>(
+        FUN_0018349c(reinterpret_cast<TextLayoutContextA *>(panel->layout), offsetEntry));
+    drawTextAtSnappedRectangle(reinterpret_cast<TextLayoutContextA *>(panel->layout), style, color, textValue,
+        static_cast<f32>(baseX + *offset->width / 2 + offset->position.x - textWidth / 2),
+        static_cast<f32>(offset->position.y + baseY), opacity, 0.0f, scale);
+}
+}

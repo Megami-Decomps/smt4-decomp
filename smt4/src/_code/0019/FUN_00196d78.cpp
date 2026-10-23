@@ -22,7 +22,7 @@ extern int FUN_001f6098(...); /* 0x1f6098 */
 extern int uniteComparePairsDescending(...); /* 0x219260 */
 extern int FUN_002d02b0(...); /* 0x2d02b0 */
 extern int FUN_002dc7a0(...); /* 0x2dc7a0 */
-extern int FUN_002dc8a8(...); /* 0x2dc8a8 */
+extern int fusionComparePairPriority(...); /* 0x2dc8a8 */
 extern int g_unite; /* 0x43dd68 */
 
 /* Supplied declaration required: FUN_0027f3dc. */
@@ -93,7 +93,7 @@ void FUN_00196d78(void)
       FUN_002b7bca(temp_v0 + 0x6ce2,*puVar9,2,FUN_001f6098);
     }
     else {
-      FUN_002b7bca(temp_v0 + 0x6ce2,*puVar9,2,FUN_002dc8a8);
+      FUN_002b7bca(temp_v0 + 0x6ce2,*puVar9,2,fusionComparePairPriority);
     }
   }
   if ((*pbVar10 & 0x7f) == 3) {

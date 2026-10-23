@@ -1,95 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002efa00` (_code @ 0x2efa00, 0x15c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: payload subaddresses use fewer saved registers and success/failure state-store blocks merge differently. */
+#include "gamedata/SaveLoadProcessState.h"
+#include "shard/GameDataBlocks.h"
+#include "AsdSDK/AsdDebug.h"
 
+struct SaveFilePayloadIV {
+    u32 table[32];
+    u32 settings[2];
+    u32 save[0x24d28 / 4];
+};
+typedef char SaveFilePayloadIVSizeCheck[sizeof(SaveFilePayloadIV) == 0x24db0 ? 1 : -1];
 extern "C" {
+SaveLoadProcessWork24 *jobGetWork();
+s32 FUN_001a1d08();
+s32 FUN_002cedbc();
+void FUN_00247af8(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
+void *asdMemoryAlloc(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
+void *gameDataBlocksGetTable();
+void *configGetSettings();
+void FUN_002ad8b4(void *settings, const void *savedSettings);
+GameSaveData *gameDataBlocksGetSaveData();
+void rt_memcpy_w(void *destination, const void *source, u32 size);
+void FUN_0026b4cc();
+extern SaveByteSettings g_byteSettings;
 
-int FUN_001a1d08(void);
-int FUN_00247af8(int, int, unsigned int, unsigned int, unsigned int);
-int FUN_0026b4cc(void);
-int FUN_002ad8b4(unsigned int, int);
-int gameDataBlocksGetSaveData(void);
-int asdMemoryAlloc(int, int, int, unsigned int, int);
-int rt_memcpy_w(unsigned int, int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned char g_byteSettings; /* 0x43e2f0 */
-extern unsigned char DAT_0043e2f3; /* 0x43e2f3 */
-
-/* Supplied declaration required: FUN_001a1d08. */
-/* Supplied declaration required: FUN_00247af8. */
-/* Supplied declaration required: FUN_0026b4cc. */
-extern unsigned int configGetSettings(void);
-extern unsigned int gameDataBlocksGetTable(void);
-/* Supplied declaration required: FUN_002ad8b4. */
-extern int jobGetWork(void);
-/* Supplied declaration required: gameDataBlocksGetSaveData. */
-/* Supplied declaration required: asdMemoryAlloc. */
-extern int FUN_002cedbc(void);
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int FUN_002efa00(void)
-
+u32 FUN_002efa00()
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = jobGetWork();
-  temp_v2 = *(int *)(temp_v0 + 4);
-  if (temp_v2 != 4) {
-    if (temp_v2 != 5) {
-      if (temp_v2 == 6) {
-        DAT_0043e2f3 = 1;
-        g_byteSettings = 1;
-        return 0xffffffff;
-      }
-      if (temp_v2 == 7) {
-        DAT_0043e2f3 = 0;
-        g_byteSettings = 1;
-        return 0xffffffff;
-      }
-    }
-    else {
-      temp_v2 = temp_v0;
-      FUN_001a1d08();
-      if (temp_v2 == 1) {
-        temp_v2 = FUN_002cedbc();
-        if (temp_v2 != 0) {
-          temp_v1 = 7;
+    SaveLoadProcessWork24 *work = jobGetWork();
+    switch (work->state) {
+    case 4:
+        work->bufferSize = sizeof(SaveFilePayloadIV);
+        asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\gamedata\\SaveLoadProcess.cpp", 224);
+        work->buffer = asdMemoryAlloc(0x100, 0x100, 0, work->bufferSize, 1);
+        FUN_00247af8(3, 0, work->option, work->buffer, work->bufferSize);
+        work->state = 5;
+        break;
+    case 5:
+        if (FUN_001a1d08() == 1) {
+            if (FUN_002cedbc() != 0) {
+                work->state = 7;
+            } else {
+                const SaveFilePayloadIV *payload = static_cast<const SaveFilePayloadIV *>(work->buffer);
+                rt_memcpy_w(gameDataBlocksGetTable(), payload->table, sizeof(payload->table));
+                FUN_002ad8b4(configGetSettings(), payload->settings);
+                rt_memcpy_w(gameDataBlocksGetSaveData(), payload->save, sizeof(payload->save));
+                gameDataBlocksGetSaveData()->metadata.option = work->option;
+                FUN_0026b4cc();
+                work->state = 6;
+            }
         }
-        else {
-          temp_v2 = *(int *)(temp_v0 + 8);
-          temp_v1 = gameDataBlocksGetTable();
-          rt_memcpy_w(temp_v1,temp_v2,0x80);
-          temp_v1 = configGetSettings();
-          FUN_002ad8b4(temp_v1,temp_v2 + 0x80);
-          temp_v1 = gameDataBlocksGetSaveData();
-          rt_memcpy_w(temp_v1,temp_v2 + 0x88,0x24d28);
-          temp_v2 = gameDataBlocksGetSaveData();
-          *(char *)(temp_v2 + 3) = (char)*(unsigned int *)(temp_v0 + 0x10);
-          FUN_0026b4cc();
-          temp_v1 = 6;
-        }
-        *(unsigned int *)(temp_v0 + 4) = temp_v1;
-      }
+        break;
+    case 6:
+        g_byteSettings.third = 1;
+        g_byteSettings.selected = 1;
+        return 0xffffffff;
+    case 7:
+        g_byteSettings.third = 0;
+        g_byteSettings.selected = 1;
+        return 0xffffffff;
+    default:
+        break;
     }
-  }
-  else {
-    *(unsigned int *)(temp_v0 + 0xc) = 0x24db0;
-    temp_v1 = 0x100;
-    asdMemoryAlloc(0x100,0x100,0,*(unsigned int *)(temp_v0 + 0xc),1);
-    *(unsigned int *)(temp_v0 + 8) = temp_v1;
-    FUN_00247af8(3,0,*(unsigned int *)(temp_v0 + 0x10),temp_v1,*(unsigned int *)(temp_v0 + 0xc));
-    *(unsigned int *)(temp_v0 + 4) = 5;
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -19,7 +19,7 @@ int FUN_002a09b4(...);
 int modelSelectPrimaryMotion(...);
 int asdModelSlotRelease(...);
 int asdMdlManagerDestroy(...);
-int FUN_002adf00(...);
+int cameraExportParameters(...);
 int FUN_002b2b64(...);
 int FUN_002c159c(...);
 int FUN_002c1e30(...);
@@ -50,7 +50,7 @@ extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: asdModelSlotRelease. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 extern int FUN_002adee0(void);
-/* Supplied declaration required: FUN_002adf00. */
+/* Supplied declaration required: cameraExportParameters. */
 /* Supplied declaration required: FUN_002b2b64. */
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c159c. */
@@ -107,7 +107,7 @@ unsigned int FUN_00205184(void)
       *(romwright_code **)(temp_v1 + 0x4c) = nw_anim_PlayPolicy_Loop;
       *(unsigned char *)(temp_v1 + 0x58) = 1;
       *(unsigned char *)(temp_v0 + 0x56c) = 1;
-      FUN_002adf00(temp_v0 + 0x50c,*(unsigned int *)(temp_v0 + 0x558));
+      cameraExportParameters(temp_v0 + 0x50c,*(unsigned int *)(temp_v0 + 0x558));
       FUN_002c159c(temp_v0 + 4);
       FUN_002c1edc(temp_v0 + 4,temp_v0 + 0x50c,temp_v0 + 0x518,temp_v0 + 0x524);
       FUN_002c1e30(temp_v0 + 4,1);
@@ -143,7 +143,7 @@ unsigned int FUN_00205184(void)
       *(unsigned int *)(temp_v0 + 0x568) = 0;
     }
   case 3:
-    FUN_002adf00(temp_v0 + 0x50c,*(unsigned int *)(temp_v0 + 0x558));
+    cameraExportParameters(temp_v0 + 0x50c,*(unsigned int *)(temp_v0 + 0x558));
     FUN_002c159c(temp_v0 + 4);
     FUN_002c1edc(temp_v0 + 4,temp_v0 + 0x50c,temp_v0 + 0x518,temp_v0 + 0x524);
     FUN_002c1e30(temp_v0 + 4,1);

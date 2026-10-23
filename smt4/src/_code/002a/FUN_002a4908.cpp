@@ -1,63 +1,98 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a4908` (_code @ 0x2a4908, 0x104 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: resource pair load, flag tests, and callback register allocation differ. */
+#include "common.h"
+#include <stddef.h>
 
-extern "C" {
+extern "C" void asdModelRefreshRenderData(void *);
+extern "C" void FUN_00156814(void *, void *);
+extern "C" void nw_gfx_RenderContext_MaterialHash_ResetMaterialHash(void *, u32);
 
-int asdModelRefreshRenderData(int);
-int FUN_00156814(unsigned int, int);
-int nw_gfx_RenderContext_MaterialHash_ResetMaterialHash(int, int);
-
-typedef int romwright_code(...);
-/* Supplied declaration required: asdModelRefreshRenderData. */
-/* Supplied declaration required: FUN_00156814. */
-/* Supplied declaration required: nw_gfx_RenderContext_MaterialHash_ResetMaterialHash. */
-
-
-void FUN_002a4908(int param_1,int *param_2)
-
+// Bind a changed model resource, invalidating cached material state as necessary.
+extern "C" void FUN_002a4908(void *model, void *renderCallback)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  if (*(int *)(param_1 + 0x24) != *(int *)(param_1 + 0x20)) {
-    if ((~*(unsigned int *)(param_1 + 0x14) & 2) != 0) {
-      temp_v1 = *(int *)(*(int *)(param_1 + 0x20) + 0x20);
-      temp_v0 = *(int *)(*(int *)(param_1 + 8) + 8);
-      if (temp_v0 == temp_v1) {
-        *(unsigned char *)(param_1 + 0x13) = 0;
-      }
-      else {
-        if (((temp_v0 != 0) && (-1 < *(int *)(temp_v0 + 0x10))) && (*(int *)(temp_v1 + 0x10) < 0)) {
-          *(unsigned char *)(param_1 + 0x12) = 1;
-          nw_gfx_RenderContext_MaterialHash_ResetMaterialHash(param_1 + 0x100,0x1015);
-          *(unsigned char *)(param_1 + 0xec) = 1;
-          *(unsigned char *)(param_1 + 0xe9) = 1;
-          *(unsigned char *)(param_1 + 0xe8) = 1;
-          *(unsigned char *)(param_1 + 0xea) = 1;
-          *(unsigned char *)(param_1 + 0xeb) = 1;
-          *(unsigned int *)(param_1 + 0x1c) = 0;
+    // Local views include data beyond the existing ModelRefreshState layout.
+    struct Material {
+        u8 unk00[0x10];
+        s32 flags; // 0x10
+    };
+    struct Node {
+        u8 unk00[8];
+        Material *material; // 0x08
+    };
+    struct Resource;
+    struct State;
+    struct Callback;
+    struct CallbackTable {
+        void *unk00[3];
+        void (*bind)(Callback *, State *, Resource *); // 0x0c
+    };
+    struct Callback { CallbackTable *vtable; };
+    struct ResourceOwner {
+        u8 unk00[0x1ec];
+        Callback *callback; // 0x1ec
+    };
+    struct Resource {
+        u8 unk00[0x1c];
+        ResourceOwner *owner; // 0x1c
+        Material *material; // 0x20
+    };
+    struct State {
+        u8 unk00[8];
+        Node *node; // 0x08
+        u8 unk0c[6];
+        u8 materialReset; // 0x12
+        u8 materialChanged; // 0x13
+        u32 flags; // 0x14
+        u32 unk18;
+        u32 commandFlags; // 0x1c
+        Resource *resource; // 0x20
+        Resource *boundResource; // 0x24
+        u8 unk28[0xc0];
+        u8 materialsDirty; // 0xe8
+        u8 bindingDirty; // 0xe9
+        u8 nodesDirty; // 0xea
+        u8 stateDirty; // 0xeb
+        u8 textureDirty; // 0xec
+        u8 unked[0x13];
+        u32 materialHash; // 0x100
+    };
+    typedef char LayoutCheck[offsetof(State, resource) == 0x20 &&
+        offsetof(State, materialsDirty) == 0xe8 &&
+        offsetof(State, materialHash) == 0x100 ? 1 : -1];
+    State *state = static_cast<State *>(model);
+    Callback *callback = static_cast<Callback *>(renderCallback);
+    Resource *resource = state->resource;
+    if (state->boundResource != resource) {
+        if ((~state->flags & 2) != 0) {
+            Material *material = resource->material;
+            Material *oldMaterial = state->node->material;
+            if (oldMaterial == material) {
+                state->materialChanged = 0;
+            } else {
+                if (oldMaterial != NULL && oldMaterial->flags >= 0 && material->flags < 0) {
+                    state->materialReset = 1;
+                    nw_gfx_RenderContext_MaterialHash_ResetMaterialHash(&state->materialHash, 0x1015);
+                    state->textureDirty = 1;
+                    state->bindingDirty = 1;
+                    state->materialsDirty = 1;
+                    state->nodesDirty = 1;
+                    state->stateDirty = 1;
+                    state->commandFlags = 0;
+                }
+                FUN_00156814(state->node, material);
+                state->materialChanged = 1;
+            }
         }
-        FUN_00156814(*(unsigned int *)(param_1 + 8),temp_v1);
-        *(unsigned char *)(param_1 + 0x13) = 1;
-      }
+        asdModelRefreshRenderData(state);
+        if ((~state->flags & 1) != 0) {
+            if (callback == NULL)
+                callback = state->resource->owner->callback;
+            callback->vtable->bind(callback, state, state->resource);
+        }
+        state->textureDirty = 0;
+        state->bindingDirty = 0;
+        state->materialsDirty = 0;
+        state->nodesDirty = 0;
+        state->stateDirty = 0;
+        state->boundResource = state->resource;
     }
-    asdModelRefreshRenderData(param_1);
-    if ((~*(unsigned int *)(param_1 + 0x14) & 1) != 0) {
-      if (param_2 == (int *)0x0) {
-        param_2 = *(int **)(*(int *)(*(int *)(param_1 + 0x20) + 0x1c) + 0x1ec);
-      }
-      (**(romwright_code **)(*param_2 + 0xc))(param_2,param_1,*(unsigned int *)(param_1 + 0x20));
-    }
-    *(unsigned char *)(param_1 + 0xec) = 0;
-    *(unsigned char *)(param_1 + 0xe9) = 0;
-    *(unsigned char *)(param_1 + 0xe8) = 0;
-    *(unsigned char *)(param_1 + 0xea) = 0;
-    *(unsigned char *)(param_1 + 0xeb) = 0;
-    *(unsigned int *)(param_1 + 0x24) = *(unsigned int *)(param_1 + 0x20);
-  }
-  return;
 }
-
-} /* extern "C" */

@@ -1,111 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b73e8` (_code @ 0x4b73e8, 0x1dc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: transition flag chains fold to combined mask tests; pending globals and cache flag use different base addressing. */
+#include "camp/ScriptPanelResources.h"
+#include "shard/Shard004B.h"
 
 extern "C" {
+extern void *g_aocSystem;
+extern s16 DAT_005f17a8, DAT_005f17aa;
+s32 FUN_00471d00(void *system);
+void slotSetRequest(s32 slot, s32 frames, s32 alpha);
+void obj04Finish(void);
+ListEntry20 *menu4CGetCurrentEntry(Menu4C *menu);
+void FUN_004b7694(CampScriptPanelResources *panel);
+void FUN_004b75d0(CampScriptPanelResources *panel);
+void FUN_004b9ff4(CampScriptPanelResources *panel, void *animation);
+void spatialAdvanceTransformTransition(u32 handle);
 
-int slotSetRequest(int, int, int);
-int obj04Finish(void);
-int FUN_00407450(unsigned int);
-int FUN_00471d00(void);
-int FUN_004b75d0(int);
-int FUN_004b7694(int);
-int FUN_004b9ff4(int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern int g_aocSystem; /* 0x570280 */
-extern short DAT_005f17a8; /* 0x5f17a8 */
-extern short DAT_005f17aa; /* 0x5f17aa */
-
-/* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: obj04Finish. */
-/* Supplied declaration required: FUN_00407450. */
-/* Supplied declaration required: FUN_00471d00. */
-/* Supplied declaration required: FUN_004b75d0. */
-/* Supplied declaration required: FUN_004b7694. */
-/* Supplied declaration required: FUN_004b9ff4. */
-extern unsigned int menu4CGetCurrentEntry(int);
-
-
-void FUN_004b73e8(int param_1)
-
+void FUN_004b73e8(CampScriptPanelResources *panel)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  if (DAT_005f17aa != 0) {
-    *(unsigned int *)(param_1 + 0x28) = 0xd;
-    *(unsigned int *)(param_1 + 0x2c) = 0;
-    DAT_005f17aa = 0;
-  }
-  else if (DAT_005f17a8 != 0) {
-    *(unsigned int *)(param_1 + 0x28) = 0xc;
-    *(unsigned int *)(param_1 + 0x2c) = 0;
-    DAT_005f17a8 = 0;
-  }
-  else {
-    temp_v0 = g_aocSystem;
-    FUN_00471d00();
-    if (temp_v0 != 0) {
-      *(unsigned int *)(param_1 + 0x28) = 0xe;
-      *(unsigned int *)(param_1 + 0x2c) = 0;
+    if (DAT_005f17aa != 0) {
+        panel->transition.state = 13;
+        panel->transition.timer = 0;
+        DAT_005f17aa = 0;
+    } else if (DAT_005f17a8 != 0) {
+        panel->transition.state = 12;
+        panel->transition.timer = 0;
+        DAT_005f17a8 = 0;
+    } else if (FUN_00471d00(g_aocSystem)) {
+        panel->transition.state = 14;
+        panel->transition.timer = 0;
+    } else {
+        u32 flags = panel->mikado.flags;
+        if (flags & 0x400000) {
+            slotSetRequest(0, 30, 255);
+            panel->transition.timer = 0;
+            panel->transition.state = 16;
+        } else if ((flags & 0x10) || (flags & 0x200000) || (flags & 0x40000) ||
+                   (flags & 0x800000) || (flags & 0x4000000) || (flags & 0x1000000) ||
+                   (flags & 0x2000000) || (flags & 0x8000000) || (flags & 0x20000000)) {
+            if (!(flags & 0x100))
+                slotSetRequest(0, 10, 255);
+            flags = panel->mikado.flags;
+            if (((flags & 0x800000) || (flags & 0x1000000) || (flags & 0x2000000) ||
+                 (flags & 0x8000000) || (flags & 0x100000) || (flags & 0x80000) ||
+                 (flags & 0x200000) || (flags & 0x40000) || (flags & 0x4000000) ||
+                 (flags & 0x20000000)) && !(flags & 0x100))
+                slotSetRequest(1, 10, 255);
+            panel->transition.timer = 0;
+            panel->transition.state = 16;
+        } else if (flags & 0x2000) {
+            if (flags & 0x40) {
+                panel->mikado.flags = flags & ~0x40;
+                obj04Finish();
+            }
+            panel->transition.state = 6;
+            panel->transition.timer = 0;
+            panel->selected.entry = menu4CGetCurrentEntry(reinterpret_cast<Menu4C *>(panel->selectionMenu.menu));
+            panel->mikado.flags &= ~0x2000;
+        } else {
+            FUN_004b7694(panel);
+        }
     }
-    else {
-      temp_v1 = *(unsigned int *)(param_1 + 0x20);
-      if ((temp_v1 & 0x400000) != 0) {
-        slotSetRequest(0,0x1e,0xff);
-        *(unsigned int *)(param_1 + 0x2c) = 0;
-        *(unsigned int *)(param_1 + 0x28) = 0x10;
-      }
-      else if ((((!((temp_v1 & 0x10) == 0 && (temp_v1 & 0x200000) == 0)) ||
-                (!((temp_v1 & 0x40000) == 0 && (temp_v1 & 0x800000) == 0))) ||
-               (!((temp_v1 & 0x4000000) == 0 && (temp_v1 & 0x1000000) == 0))) ||
-              (!(((temp_v1 & 0x2000000) == 0 && (temp_v1 & 0x8000000) == 0) && (temp_v1 & 0x20000000) == 0
-                ))) {
-        if ((temp_v1 & 0x100) == 0) {
-          slotSetRequest(0,10,0xff);
-        }
-        temp_v1 = *(unsigned int *)(param_1 + 0x20);
-        if (((((temp_v1 & 0x800000) != 0 || (temp_v1 & 0x1000000) != 0) ||
-             ((temp_v1 & 0x2000000) != 0 || (temp_v1 & 0x8000000) != 0)) ||
-            (((temp_v1 & 0x100000) != 0 || (temp_v1 & 0x80000) != 0 ||
-             (((temp_v1 & 0x200000) != 0 || (temp_v1 & 0x40000) != 0 ||
-              ((temp_v1 & 0x4000000) != 0 || (temp_v1 & 0x20000000) != 0)))))) && ((temp_v1 & 0x100) == 0)
-           ) {
-          slotSetRequest(1,10,0xff);
-        }
-        *(unsigned int *)(param_1 + 0x2c) = 0;
-        *(unsigned int *)(param_1 + 0x28) = 0x10;
-      }
-      else if ((temp_v1 & 0x2000) != 0) {
-        if ((temp_v1 & 0x40) != 0) {
-          *(unsigned int *)(param_1 + 0x20) = temp_v1 & 0xffffffbf;
-          obj04Finish();
-        }
-        *(unsigned int *)(param_1 + 0x28) = 6;
-        *(unsigned int *)(param_1 + 0x2c) = 0;
-        temp_v2 = menu4CGetCurrentEntry(param_1 + 0x9c);
-        *(unsigned int *)(param_1 + 0x111c) = temp_v2;
-        *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffdfff;
-      }
-      else {
-        FUN_004b7694(param_1);
-      }
-    }
-  }
-  FUN_004b75d0(param_1);
-  FUN_004b9ff4(param_1,param_1 + 0x58);
-  if (*(char *)(param_1 + 0x1214) != '\0') {
-    FUN_00407450(*(unsigned int *)(param_1 + 0x1218));
-    return;
-  }
-  return;
+    FUN_004b75d0(panel);
+    FUN_004b9ff4(panel, panel->transition.animation);
+    if (panel->cacheLoaded)
+        spatialAdvanceTransformTransition(panel->cacheHandle);
 }
-
-} /* extern "C" */
+}

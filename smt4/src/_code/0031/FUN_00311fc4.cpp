@@ -1,80 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00311fc4` (_code @ 0x311fc4, 0x11c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: second equipment loop exchanges base/index registers and the final success return is not shared. */
+#include "shard/W4_Match6_BtlEntry.h"
+#include "shard/W5_W5Match7_ScriptUnit.h"
+#include "gamedata/Table04Record.h"
+#include "gamedata/DevilRecord.h"
 
 extern "C" {
+Table04Record *FUN_002ae164(u32 skill);
 
-int scrSetResult(unsigned int);
-int FUN_002ae164(void);
-int devilGetRecord(void);
-
-extern unsigned int g_btlScriptUnit; /* 0x43427c */
-
-extern int btlUnitGet(unsigned int);
-/* Supplied declaration required: scrSetResult. */
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: devilGetRecord. */
-
-
-unsigned int FUN_00311fc4(void)
-
+// Check equipped and default demon skills for the requested encoded category.
+u32 FUN_00311fc4()
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = btlUnitGet(g_btlScriptUnit);
-  temp_v1 = *(int *)(temp_v1 + 0x20);
-  if (*(int *)(temp_v1 + 0x278) != 0) {
-    temp_v5 = 0;
-    do {
-      temp_v2 = (unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 0x278) + temp_v5 * 2 + 0x34);
-      FUN_002ae164();
-      if ((temp_v2 != 0) && (temp_v0 == (*(unsigned int *)(temp_v2 + 0x28) & 0x1ffff) >> 0xc)) {
-        temp_v4 = 1;
-        scrSetResult(temp_v4);
-        return 1;
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < 8);
-  }
-  if (*(int *)(temp_v1 + 0x27c) != 0) {
-    temp_v5 = 0;
-    do {
-      temp_v2 = (unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 0x27c) + temp_v5 * 2 + 0x34);
-      FUN_002ae164();
-      if ((temp_v2 != 0) && (temp_v0 == (*(unsigned int *)(temp_v2 + 0x28) & 0x1ffff) >> 0xc)) {
-        temp_v4 = 1;
-        scrSetResult(temp_v4);
-        return 1;
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < 8);
-  }
-  if (*(int *)(temp_v1 + 0x284) != 0) {
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0xce);
-    devilGetRecord();
-    temp_v1 = 0;
-    do {
-      temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + temp_v1 * 2 + 0x3c);
-      FUN_002ae164();
-      if ((temp_v3 != 0) && (temp_v0 == (*(unsigned int *)(temp_v3 + 0x28) & 0x1ffff) >> 0xc)) {
-        temp_v4 = 1;
-        scrSetResult(temp_v4);
-        return 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 8);
-  }
-  temp_v4 = 0;
-  scrSetResult(temp_v4);
-  return 1;
+    u32 category = scrGetArg(0);
+    BtlEntry *entry = reinterpret_cast<BtlEntry *>(btlUnitGet(g_btlScriptUnit)->entryView.entry);
+    if (entry->equipA != NULL) {
+        for (s32 index = 0; index < 8; ++index) {
+            Table04Record *skill = FUN_002ae164(entry->equipA->items[index]);
+            if (skill != NULL && category == skill->skillProperties.category) {
+                scrSetResult(1);
+                return 1;
+            }
+        }
+    }
+    if (entry->equipB != NULL) {
+        for (s32 index = 0; index < 8; ++index) {
+            Table04Record *skill = FUN_002ae164(entry->equipB->items[index]);
+            if (skill != NULL && category == skill->skillProperties.category) {
+                scrSetResult(1);
+                return 1;
+            }
+        }
+    }
+    if (entry->devil != NULL) {
+        DevilRecord *demon = reinterpret_cast<DevilRecord *>(devilGetRecord(entry->id));
+        for (s32 index = 0; index < 8; ++index) {
+            Table04Record *skill = FUN_002ae164(demon->skillList.ids[index]);
+            if (skill != NULL && category == skill->skillProperties.category) {
+                scrSetResult(1);
+                return 1;
+            }
+        }
+    }
+    scrSetResult(0);
+    return 1;
 }
-
-} /* extern "C" */
+}

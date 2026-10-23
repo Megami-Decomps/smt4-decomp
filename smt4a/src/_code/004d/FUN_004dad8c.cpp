@@ -1,72 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004dad8c` (_code @ 0x4dad8c, 0x184 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: histogram bounds fold into conditional loads and threshold-return branches are simplified. */
+#include "gamedata/GameData.h"
 
+struct HistogramSaveRecordA {
+    u16 value;
+    u8 unk02[0x4e];
+};
+struct HistogramSaveViewA {
+    u8 unk0000[0x5e84];
+    HistogramSaveRecordA records[1];
+};
 extern "C" {
+u16 *gameDataGetSmallBlock(void);
+GameDataBlock *gameDataBlocksGetSaveData(void);
+s32 FUN_002a4b28(u32 index);
+void sysMemClear(void *memory, u32 size);
 
-int sysMemClear(char *, int);
-
-extern int gameDataBlocksGetSaveData(void);
-extern int gameDataGetSmallBlock(void);
-extern int FUN_002a4b28(unsigned int);
-/* Supplied declaration required: sysMemClear. */
-
-
-int FUN_004dad8c(void)
-
+// Find the highest populated record value with enough support in its five-value neighborhood.
+s32 FUN_004dad8c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  char acStack_405 [1009];
-  
-  temp_v1 = gameDataGetSmallBlock();
-  temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 8);
-  temp_v1 = gameDataGetSmallBlock();
-  temp_v0 = *(unsigned short *)(temp_v1 + 10);
-  sysMemClear(acStack_405 + 5,1000);
-  if (temp_v3 <= temp_v0) {
-    do {
-      temp_v1 = FUN_002a4b28(temp_v3 & 0xffff);
-      if (temp_v1 != 0) {
-        temp_v1 = gameDataBlocksGetSaveData();
-        temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + temp_v3 * 0x50 + 0x5e84);
-        if ((temp_v2 - 1 < 999) && ((unsigned char)acStack_405[temp_v2 + 5] < 0x14)) {
-          acStack_405[temp_v2 + 5] = acStack_405[temp_v2 + 5] + 1;
+    s32 first = gameDataGetSmallBlock()[4];
+    u16 last = gameDataGetSmallBlock()[5];
+    u8 histogram[1000];
+    sysMemClear(histogram, sizeof(histogram));
+    for (s32 index = first; index <= last; ++index) {
+        if (FUN_002a4b28(static_cast<u16>(index))) {
+            const HistogramSaveViewA *save = reinterpret_cast<const HistogramSaveViewA *>(gameDataBlocksGetSaveData());
+            u32 value = save->records[index].value;
+            if (value - 1 < 999 && histogram[value] < 20)
+                ++histogram[value];
         }
-      }
-      temp_v3 = temp_v3 + 1;
-    } while ((int)temp_v3 <= (int)(unsigned int)temp_v0);
-  }
-  temp_v1 = 999;
-  do {
-    temp_v3 = (unsigned int)(unsigned char)acStack_405[temp_v1 + 5];
-    if (temp_v3 != 0) {
-      if (temp_v3 >= 3) {
-        if (temp_v1 == 0) {
-          return 1;
+    }
+    for (s32 value = 999; value > 0; --value) {
+        s32 frequency = histogram[value];
+        if (frequency != 0) {
+            if (frequency >= 3)
+                return value;
+            s32 support = frequency;
+            if ((value >= 2 && histogram[value - 1] && (support += frequency) >= 3) ||
+                (value >= 3 && histogram[value - 2] && (support += frequency) >= 3) ||
+                (value >= 4 && histogram[value - 3] && (support += frequency) >= 3) ||
+                (value >= 5 && histogram[value - 4] && (support += frequency) >= 3) ||
+                (value >= 6 && histogram[value - 5] && (support += frequency) >= 3))
+                return value;
         }
-        return temp_v1;
-      }
-      temp_v2 = temp_v3;
-      if (((((((temp_v1 >= 2) && (acStack_405[temp_v1 + 4] != '\0')) && (temp_v2 = temp_v3 * 2, temp_v2 >= 3))
-            || (((temp_v1 >= 3 && (acStack_405[temp_v1 + 3] != '\0')) &&
-                (temp_v2 = temp_v2 + temp_v3, temp_v2 >= 3)))) ||
-           (((temp_v1 >= 4 && (acStack_405[temp_v1 + 2] != '\0')) && (temp_v2 = temp_v2 + temp_v3, temp_v2 >= 3)))
-           ) || ((((temp_v1 >= 5 && (acStack_405[temp_v1 + 1] != '\0')) &&
-                  (temp_v2 = temp_v2 + temp_v3, temp_v2 >= 3)) ||
-                 (((temp_v1 >= 6 && (acStack_405[temp_v1] != '\0')) && (temp_v2 + temp_v3 >= 3)))))) &&
-         (temp_v1 != 0)) {
-        return temp_v1;
-      }
     }
-    temp_v1 = temp_v1 - 1;
-    if (temp_v1 < 1) {
-      return 1;
-    }
-  } while( 1 );
+    return 1;
 }
-
-} /* extern "C" */
+}

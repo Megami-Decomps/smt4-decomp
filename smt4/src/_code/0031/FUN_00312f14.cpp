@@ -1,172 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00312f14` (_code @ 0x312f14, 0x1b0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: zero is not kept in a saved register, changing row/weight registers and stack-frame allocation. */
+#include "battle/BattleChoiceWeights.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
+s32 scrGetArg(s32 index);
+void scrSetResult(s32 result);
+void* btlGetMainState(void);
+void* btlMainGetDataTable(void* battle, s32 table);
+void FUN_002ad8b4(BattleChoiceRow* destination, const BattleChoiceRow* source);
+s32 randNextInRange(u16 maximum);
 
-int btlMainGetDataTable(unsigned int, int);
-int scrSetResult(unsigned int);
-int scrGetArg(int);
-int FUN_002ad8b4(unsigned short *, int);
-int dataTableGetCount(unsigned int);
-int SBORROW4(int, int);
-
-/* stack frame of void: 4 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned short sp22; /* 0x22: local_22 */
-    unsigned short sp24; /* 0x24: local_24 */
-    unsigned short sp26; /* 0x26: local_26 */
-    unsigned short sp28; /* 0x28: local_28 */
-} void_stack;
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: btlMainGetDataTable. */
-/* Supplied declaration required: scrSetResult. */
-extern unsigned int btlGetMainState(void);
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_002ad8b4. */
-extern int randNextInRange(unsigned int);
-/* Supplied declaration required: dataTableGetCount. */
-extern int dataTableGetEntries(void);
-extern int __aeabi_idivmod(int, unsigned int);
-
-
-unsigned int FUN_00312f14(void)
-
+s32 FUN_00312f14(void)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  short *psVar6;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  int temp_v11;
-  unsigned char temp_v12;
-  unsigned short temp_v13;
-  unsigned short temp_v14;
-  unsigned short temp_v15;
-  unsigned short temp_v16;
-  
-  temp_v1 = scrGetArg(0);
-  scrGetArg(1);
-  temp_v2 = btlGetMainState();
-  temp_v2 = btlMainGetDataTable(temp_v2,6);
-  temp_v3 = dataTableGetEntries();
-  dataTableGetCount(temp_v2);
-  temp_v2 = btlGetMainState();
-  btlMainGetDataTable(temp_v2,7);
-  temp_v4 = dataTableGetEntries();
-  FUN_002ad8b4(&temp_v13,temp_v4 + temp_v1 * 8);
-  psVar6 = (short *)(temp_v3 + temp_v1 * 8);
-  temp_v7 = 0;
-  if (*psVar6 == 0) {
-    temp_v13 = 0;
-  }
-  if (*psVar6 != 0) {
-    temp_v7 = (unsigned int)temp_v13;
-  }
-  if (psVar6[1] != 0) {
-    temp_v7 = temp_v7 + temp_v14;
-  }
-  else {
-    temp_v14 = 0;
-  }
-  if (psVar6[2] != 0) {
-    temp_v6 = (unsigned int)temp_v15;
-  }
-  else {
-    temp_v15 = 0;
-    temp_v6 = 0;
-  }
-  if (psVar6[2] != 0) {
-    temp_v7 = temp_v7 + temp_v6;
-  }
-  if (psVar6[3] != 0) {
-    temp_v7 = temp_v7 + temp_v16;
-  }
-  else {
-    temp_v16 = 0;
-  }
-  if (temp_v13 == 0) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = __aeabi_idivmod((unsigned int)temp_v13 * 100,temp_v7);
-  }
-  if (temp_v14 == 0) {
-    temp_v3 = 0;
-  }
-  else {
-    temp_v3 = __aeabi_idivmod((unsigned int)temp_v14 * 100,temp_v7);
-  }
-  if (temp_v15 == 0) {
-    temp_v4 = 0;
-  }
-  else {
-    temp_v4 = __aeabi_idivmod((unsigned int)temp_v15 * 100,temp_v7);
-  }
-  if (temp_v16 == 0) {
-    temp_v8 = 0;
-  }
-  else {
-    temp_v8 = __aeabi_idivmod((unsigned int)temp_v16 * 100,temp_v7);
-  }
-  temp_v9 = temp_v3 + temp_v1;
-  temp_v10 = temp_v4 + temp_v9;
-  temp_v11 = temp_v8 + temp_v10;
-  temp_v5 = randNextInRange((temp_v11 - 1U) & 0xffff);
-  temp_v12 = temp_v1 == 0;
-  temp_v0 = temp_v1;
-  if (0 < temp_v1) {
-    temp_v0 = temp_v1 - temp_v5;
-    temp_v12 = temp_v1 == temp_v5;
-  }
-  temp_v2 = 0xffffffff;
-  if (!(temp_v12 || temp_v0 < 0 != (0 < temp_v1 && SBORROW4(temp_v1,temp_v5)))) {
-    temp_v2 = 1;
-  }
-  else {
-    temp_v12 = temp_v3 == 0;
-    temp_v1 = temp_v3;
-    if (0 < temp_v3) {
-      temp_v1 = temp_v9 - temp_v5;
-      temp_v12 = temp_v9 == temp_v5;
+    s32 row = scrGetArg(0);
+    scrGetArg(1);
+    void* table = btlMainGetDataTable(btlGetMainState(), 6);
+    BattleChoiceRow* candidates = static_cast<BattleChoiceRow*>(dataTableGetEntries(table));
+    dataTableGetCount(table);
+    table = btlMainGetDataTable(btlGetMainState(), 7);
+    BattleChoiceRow* weightRows = static_cast<BattleChoiceRow*>(dataTableGetEntries(table));
+    BattleChoiceRow weights;
+    FUN_002ad8b4(&weights, &weightRows[row]);
+    s32 total = 0;
+    if (!candidates[row].values[0]) {
+        weights.values[0] = 0;
+    } else {
+        total = weights.values[0];
     }
-    if (!(temp_v12 || temp_v1 < 0 != (0 < temp_v3 && SBORROW4(temp_v9,temp_v5)))) {
-      temp_v2 = 2;
+    if (!candidates[row].values[1]) {
+        weights.values[1] = 0;
+    } else {
+        total += weights.values[1];
     }
-    else {
-      temp_v12 = temp_v4 == 0;
-      temp_v1 = temp_v4;
-      if (0 < temp_v4) {
-        temp_v1 = temp_v10 - temp_v5;
-        temp_v12 = temp_v10 == temp_v5;
-      }
-      if (!(temp_v12 || temp_v1 < 0 != (0 < temp_v4 && SBORROW4(temp_v10,temp_v5)))) {
-        temp_v2 = 3;
-      }
-      else {
-        temp_v12 = temp_v8 == 0;
-        temp_v1 = temp_v8;
-        if (0 < temp_v8) {
-          temp_v1 = temp_v11 - temp_v5;
-          temp_v12 = temp_v11 == temp_v5;
-        }
-        if (!temp_v12 && temp_v1 < 0 == (0 < temp_v8 && SBORROW4(temp_v11,temp_v5))) {
-          temp_v2 = 4;
-        }
-      }
+    if (!candidates[row].values[2]) {
+        weights.values[2] = 0;
+    } else {
+        total += weights.values[2];
     }
-  }
-  scrSetResult(temp_v2);
-  return 1;
+    if (!candidates[row].values[3]) {
+        weights.values[3] = 0;
+    } else {
+        total += weights.values[3];
+    }
+    s32 first = weights.values[0] ? weights.values[0] * 100 / total : 0;
+    s32 second = weights.values[1] ? weights.values[1] * 100 / total : 0;
+    s32 third = weights.values[2] ? weights.values[2] * 100 / total : 0;
+    s32 fourth = weights.values[3] ? weights.values[3] * 100 / total : 0;
+    s32 secondLimit = second + first;
+    s32 thirdLimit = third + secondLimit;
+    s32 fourthLimit = fourth + thirdLimit;
+    s32 roll = randNextInRange(static_cast<u16>(fourthLimit - 1));
+    s32 result = -1;
+    if (first > 0 && first > roll) {
+        result = 1;
+    } else if (second > 0 && secondLimit > roll) {
+        result = 2;
+    } else if (third > 0 && thirdLimit > roll) {
+        result = 3;
+    } else if (fourth > 0 && fourthLimit > roll) {
+        result = 4;
+    }
+    scrSetResult(result);
+    return 1;
 }
-
-} /* extern "C" */
+}

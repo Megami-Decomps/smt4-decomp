@@ -1,86 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d1b94` (_code @ 0x2d1b94, 0x124 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: transform snapshots use integer copies instead of VFP; scene-base and transition store scheduling differ. */
 #include "map/lmapMain.h"
+#include "map/MapDepartTarget.h"
+#include "map/SceneSpawn.h"
 
 extern "C" {
+extern LmapMainState *g_lmapMainState;
+extern LmapScene *g_lmapScene;
+extern GameState g_gameState;
+void FUN_0027d7b0(s32 map, u32 destination, u32 flags);
+const SceneSpawnRecord *dataTableGetRecord23(void);
+void mapDepartSetTarget(s32 group, s32 map, s32 target);
+void FUN_002702dc(void);
+void FUN_0027b2b4(s32 map, u32 destination, s32 group, s32 target);
+void FUN_00266a2c(void);
+void FUN_00264444(LmapObj *object);
+void objSetBaseAndValue(LmapObj *object, s32 base, u32 value);
+void entryListCollectMatches(LmapObj *object);
 
-void FUN_00264444(LmapObj *);
-int entryListCollectMatches(int);
-int objSetBaseAndValue(int, int, unsigned int);
-int FUN_00266a2c(void);
-int FUN_002702dc(void);
-int mapDepartSetTarget(...);
-int FUN_0027b2b4(unsigned int, unsigned int);
-int FUN_0027d7b0(unsigned int, unsigned int, unsigned int);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern int g_lmapMainState; /* 0x447060 */
-extern int g_lmapScene; /* 0x447e88 */
-extern unsigned int DAT_0049f920; /* 0x49f920 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00264444. */
-/* Supplied declaration required: entryListCollectMatches. */
-/* Supplied declaration required: objSetBaseAndValue. */
-/* Supplied declaration required: FUN_00266a2c. */
-/* Supplied declaration required: FUN_002702dc. */
-/* Supplied declaration required: mapDepartSetTarget. */
-/* Supplied declaration required: FUN_0027b2b4. */
-extern char *dataTableGetRecord23(void);
-/* Supplied declaration required: FUN_0027d7b0. */
-
-
-void FUN_002d1b94(unsigned int param_1,unsigned int param_2)
-
+// Reset the map actor to a destination's spawn and enter its transition state.
+void FUN_002d1b94(u32 destination, u32 flags)
 {
-/* irregular: irregular input(s): in_fpscr; 9 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  char *pcVar3;
-  unsigned int in_fpscr;
-  unsigned int temp_v2;
-  
-  temp_v0 = g_lmapMainState;
-  FUN_0027d7b0(*(unsigned int *)(g_lmapMainState + 0x40),param_1,param_2);
-  pcVar3 = (char *)dataTableGetRecord23();
-  mapDepartSetTarget((int)*pcVar3,(int)pcVar3[1],pcVar3[2]);
-  *(unsigned int *)(temp_v0 + 0x48) = param_1;
-  temp_v1 = g_lmapScene;
-  temp_v2 = VectorSignedToFloat((int)*(short *)(pcVar3 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
-  DAT_0049f920 = param_1;
-  *(unsigned int *)(g_lmapScene + 0x1c) = temp_v2;
-  temp_v2 = VectorSignedToFloat((int)*(short *)(pcVar3 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v1 + 0x20) = temp_v2;
-  temp_v2 = VectorSignedToFloat((int)*(short *)(pcVar3 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
-  *(unsigned int *)(temp_v1 + 0x28) = *(unsigned int *)(temp_v1 + 0x1c);
-  *(unsigned int *)(temp_v1 + 0x2c) = *(unsigned int *)(temp_v1 + 0x20);
-  *(unsigned int *)(temp_v1 + 0x30) = *(unsigned int *)(temp_v1 + 0x24);
-  *(unsigned int *)(temp_v1 + 0x4c) = 0x43340000;
-  *(unsigned int *)(temp_v1 + 0x50) = 0x43340000;
-  *(unsigned int *)(temp_v1 + 0x34) = *(unsigned int *)(temp_v1 + 0x1c);
-  *(unsigned int *)(temp_v1 + 0x38) = *(unsigned int *)(temp_v1 + 0x20);
-  *(unsigned int *)(temp_v1 + 0x3c) = *(unsigned int *)(temp_v1 + 0x24);
-  FUN_002702dc();
-  FUN_0027b2b4(*(unsigned int *)(temp_v0 + 0x40),*(unsigned int *)(temp_v0 + 0x48));
-  FUN_00266a2c();
-  FUN_00264444((LmapObj *)(temp_v0 + 0xec));
-  objSetBaseAndValue(temp_v0 + 0xec,*(int *)(temp_v0 + 0x40) - 100,*(unsigned int *)(temp_v0 + 0x48));
-  entryListCollectMatches(temp_v0 + 0xec);
-  temp_v0 = g_lmapMainState;
-  if (*(int *)(g_lmapMainState + 0xcc) != 3) {
-    *(unsigned int *)(g_lmapMainState + 0xcc) = 3;
-    *(unsigned int *)(temp_v0 + 0xd0) = 0;
-    *(unsigned int *)(temp_v0 + 0xd4) = 0;
-  }
-  mapDepartSetTarget(0xffffffff,0xffffffff);
-  return;
+    LmapMainState *state = g_lmapMainState;
+    FUN_0027d7b0(state->unk40, destination, flags);
+    const SceneSpawnRecord *spawn = dataTableGetRecord23();
+    const MapDepartTargetRecord *target = reinterpret_cast<const MapDepartTargetRecord *>(spawn);
+    mapDepartSetTarget(target->group, target->map, target->target);
+    state->unk48 = destination;
+    g_gameState.unk004Value = destination;
+    LmapSceneTransform *transform = &g_lmapScene->transform;
+    transform->position[0] = static_cast<f32>(spawn->x);
+    transform->position[1] = static_cast<f32>(spawn->y);
+    transform->position[2] = static_cast<f32>(spawn->z);
+    MapVector position = *reinterpret_cast<MapVector *>(transform->position);
+    *reinterpret_cast<MapVector *>(transform->positionSnapshotA) = position;
+    transform->headingDegrees = 180.0f;
+    transform->headingCopy = 180.0f;
+    *reinterpret_cast<MapVector *>(transform->positionSnapshotB) = position;
+    FUN_002702dc();
+    FUN_0027b2b4(state->unk40, state->unk48, state->unk40 == 101 ? 101 : 0,
+                  state->unk40 == 101 ? 10 : 0);
+    FUN_00266a2c();
+    FUN_00264444(&state->obj);
+    objSetBaseAndValue(&state->obj, state->unk40 - 100, state->unk48);
+    entryListCollectMatches(&state->obj);
+    struct MapTransitionView {
+        u32 state;
+        u32 timer;
+        u32 counter;
+    };
+    MapTransitionView *transition = reinterpret_cast<MapTransitionView *>(&g_lmapMainState->unkCC);
+    if (transition->state != 3) {
+        transition->state = 3;
+        transition->timer = 0;
+        transition->counter = 0;
+    }
+    mapDepartSetTarget(-1, -1, -1);
 }
-
-} /* extern "C" */
+}

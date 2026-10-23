@@ -114,7 +114,7 @@ extern unsigned int modelListInit(void);
 extern int lookupConditionalSixBitValue(unsigned int);
 extern int FUN_004bb870(unsigned int);
 /* Supplied declaration required: FUN_004bc420. */
-extern int FUN_004bc5a4(unsigned int);
+extern int textureEntryMeetsUnlockRequirements(unsigned int);
 extern int dataSelectPrioritizedCandidate(int index);
 extern unsigned int __aeabi_idivmod(void);
 
@@ -557,7 +557,7 @@ LAB_00304874:
     if (temp_v0 != 0) {
       if ((*(int *)(temp_v2 + 0xa8) < 0x3e9) && (temp_v4 = gameFlagIsSet(0x52a), temp_v4 != 0)) {
         *(int *)(temp_v2 + 0x1b0) = temp_v0;
-        temp_v0 = FUN_004bc5a4(*(unsigned int *)(temp_v2 + 0xa4));
+        temp_v0 = textureEntryMeetsUnlockRequirements(*(unsigned int *)(temp_v2 + 0xa4));
         if (temp_v0 != 0) {
           *(unsigned char *)(temp_v2 + 0x1ae) = 1;
         }

@@ -15,7 +15,7 @@ int FUN_001835b4(...);
 int FUN_0018408c(...);
 int FUN_00184310(void);
 int FUN_0035ae58(...);
-int FUN_0035d8f0(...);
+int devilDispatchTextureResource(...);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -53,7 +53,7 @@ extern unsigned int FUN_00180114(short);
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_0035ae58. */
-/* Supplied declaration required: FUN_0035d8f0. */
+/* Supplied declaration required: devilDispatchTextureResource. */
 
 
 void FUN_002199fc(int param_1,int param_2,int param_3)
@@ -133,7 +133,7 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
                    (int)**(short **)(temp_v7 + 0xc),
                    (int)(*(short **)(temp_v7 + 0xc))[1] + *(int *)(temp_v5 + param_1 * 4 + 0x74),1);
       temp_v3 = FUN_001834a4(0x1a,0xda);
-      FUN_0035d8f0((int)*psVar5,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
+      devilDispatchTextureResource((int)*psVar5,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                    (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v8,0x68,1);
       temp_v3 = g_renderCtx;
       piVar13 = (int *)(g_renderCtx + 0x1318);

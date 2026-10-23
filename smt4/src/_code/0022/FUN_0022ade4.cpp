@@ -1,90 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022ade4` (_code @ 0x22ade4, 0x1a8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: row-sprite speed addressing, conditional label-coordinate loads and blink branch placement differ. */
+#include "shard/S3SceneWidget.h"
+#include "ui/UiSpriteState.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+void efctSetSpeed(f32);
+const UiLayoutEntryPrefixIV *FUN_002bf4f8(u32, u32);
+void FUN_002bf380(u32, u32, u32, s32, s32, s32);
+void FUN_002bf288(u32, u32, u32, s32, s32, s32);
+void FUN_002be5a4(u32, u32, const char *, f32, f32, f32, f32, f32);
 
-int FUN_002be5a4(unsigned int, unsigned int, unsigned int, int);
-int FUN_002bf288(...);
-int FUN_002bf380(int, int, int, int, int, int);
-int FUN_002bf4f8(...);
-int efctSetSpeed(void);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_5: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_5_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: efctSetSpeed. */
-
-
-void FUN_0022ade4(int param_1,int param_2,int param_3,int param_4,int param_5)
-
+void FUN_0022ade4(SceneWidget *work, s32 row, s32 entryIndex, s32 state, s32 fade)
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned int in_fpscr;
-  unsigned long long temp_v7;
-  
-  efctSetSpeed();
-  if (param_4 != 0) {
-    temp_v2 = FUN_002bf4f8(0x2a,param_2 + 0x15);
-    temp_v6 = (int)*(short *)(temp_v2 + 8);
-    temp_v2 = (int)*(short *)(temp_v2 + 10);
-    FUN_002bf380(2,0x2a,1,temp_v6,temp_v2,param_5);
-  }
-  else {
-    temp_v2 = FUN_002bf4f8(0x2a,param_2 + 5);
-    temp_v6 = (int)*(short *)(temp_v2 + 8);
-    temp_v2 = (int)*(short *)(temp_v2 + 10);
-    FUN_002bf380(2,0x2a,0,temp_v6,temp_v2,param_5);
-  }
-  VectorSignedToFloat(0x100 - param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  if (param_4 != 0) {
-    temp_v7 = FUN_002bf4f8(0x2a,0x14);
-    temp_v5 = (unsigned int)((unsigned long long)temp_v7 >> 0x20);
-    temp_v0 = *(short *)((int)temp_v7 + 8);
-    temp_v1 = *(short *)((int)temp_v7 + 10);
-    if (param_4 == 2) {
-      temp_v5 = 0x72e027ff;
+    // Rows lie in the byte-aligned unk632 padding; adding their alignment would shift it.
+    struct SceneRowSpritesView {
+        u8 unk000[0x654];
+        UiSpriteState rows[10];
+    };
+    typedef char SceneRowSpriteOffset[offsetof(SceneRowSpritesView, rows) == 0x654 ? 1 : -1];
+    f32 scale = reinterpret_cast<SceneRowSpritesView *>(work)->rows[row].unk20;
+    efctSetSpeed(scale);
+    s32 x, y;
+    if (state) {
+        const UiLayoutEntryPrefixIV *layout = FUN_002bf4f8(42, row + 21);
+        x = layout->x;
+        y = layout->y;
+        FUN_002bf380(2, 42, 1, x, y, fade);
+    } else {
+        const UiLayoutEntryPrefixIV *layout = FUN_002bf4f8(42, row + 5);
+        x = layout->x;
+        y = layout->y;
+        FUN_002bf380(2, 42, 0, x, y, fade);
     }
-    temp_v3 = 3;
-    if (param_4 != 2) {
-      temp_v5 = 0xffffffff;
+    f32 opacity = static_cast<f32>(256 - fade) / 256.0f;
+    const UiLayoutEntryPrefixIV *label;
+    u32 color, layer;
+    if (state) {
+        label = FUN_002bf4f8(42, 20);
+        color = state == 2 ? 0x72e027ff : 0xffffffff;
+        layer = 3;
+    } else {
+        label = FUN_002bf4f8(42, 4);
+        color = 0x323232ff;
+        layer = 2;
     }
-  }
-  else {
-    temp_v4 = FUN_002bf4f8(0x2a,4);
-    temp_v0 = *(short *)(temp_v4 + 8);
-    temp_v1 = *(short *)(temp_v4 + 10);
-    temp_v5 = 0x323232ff;
-    temp_v3 = 2;
-  }
-  VectorSignedToFloat(temp_v1 + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(temp_v0 + temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002be5a4(temp_v3,temp_v5,*(unsigned int *)(param_1 + param_3 * 4 + 0x530),temp_v0 + temp_v6);
-  if (param_4 != 0) {
-    temp_v2 = FUN_002bf4f8(0x2a,param_2 + 0x15);
-    if (*(int *)(param_1 + 0xc5c) >= 8) {
-      FUN_002bf288(2,0x2a,0x13,(int)*(short *)(temp_v2 + 8),(int)*(short *)(temp_v2 + 10),param_5);
-      return;
+    FUN_002be5a4(layer, color, reinterpret_cast<const char *>(work->entries[entryIndex]),
+                 static_cast<f32>(label->x + x), static_cast<f32>(label->y + y),
+                 opacity, 0.0f, scale);
+    if (state) {
+        const UiLayoutEntryPrefixIV *layout = FUN_002bf4f8(42, row + 21);
+        if (work->frame >= 8) {
+            FUN_002bf288(2, 42, 19, layout->x, layout->y, fade);
+            return;
+        }
+        FUN_002bf288(2, 42, 18, layout->x, layout->y, fade);
     }
-    FUN_002bf288(2,0x2a,0x12,(int)*(short *)(temp_v2 + 8),(int)*(short *)(temp_v2 + 10),param_5);
-  }
-  return;
 }
-
-} /* extern "C" */
+}

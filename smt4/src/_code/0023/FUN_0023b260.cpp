@@ -1,54 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023b260` (_code @ 0x23b260, 0x17c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: recursive quadrant destination arithmetic scheduling differs from retail. */
+#include "shard/W6_W6Match7_TextureTile.h"
 extern "C" {
+u32 gfxTexFormatGetBitsPerPixel(u32 format, u32 type);
+void rt_memcpy(void *destination, const void *source, u32 bytes);
 
-int rt_memcpy(unsigned char *, unsigned char *, unsigned int);
-
-/* Supplied declaration required: FUN_0023b260. */
-extern unsigned int gfxTexFormatGetBitsPerPixel(unsigned int, unsigned int);
-/* Supplied declaration required: rt_memcpy. */
-
-
-unsigned int FUN_0023b260(unsigned char *param_1,unsigned char *param_2,int param_3,unsigned int *param_4)
-
+u32 FUN_0023b260(const u8 *source, u8 *destination, s32 size, const TextureTileFormat *format)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = gfxTexFormatGetBitsPerPixel(*param_4,param_4[1]);
-  if (param_3 != 1) {
-    if (!(temp_v0 == 4 && param_3 == 2)) {
-      param_3 = param_3 >> 1;
-      if (param_4[8] != 0) {
-        FUN_0023b260(param_1,param_2 + (param_4[6] * param_3 * temp_v0 >> 3),param_3,param_4);
-        temp_v1 = param_3 * param_3 * temp_v0;
-        FUN_0023b260(param_1 + (temp_v1 >> 3),
-                     param_2 + ((param_4[6] * param_3 + param_3) * temp_v0 >> 3),param_3,param_4);
-        FUN_0023b260(param_1 + ((temp_v1 & 0x7fffffff) >> 2),param_2,param_3,param_4);
-        FUN_0023b260(param_1 + (temp_v1 * 3 >> 3),param_2 + (param_3 * temp_v0 >> 3),param_3,param_4);
-      }
-      else {
-        FUN_0023b260(param_1,param_2,param_3,param_4);
-        temp_v1 = param_3 * param_3 * temp_v0;
-        FUN_0023b260(param_1 + (temp_v1 >> 3),param_2 + (param_3 * temp_v0 >> 3),param_3,param_4);
-        FUN_0023b260(param_1 + ((temp_v1 & 0x7fffffff) >> 2),
-                     param_2 + (param_4[6] * param_3 * temp_v0 >> 3),param_3,param_4);
-        FUN_0023b260(param_1 + (temp_v1 * 3 >> 3),
-                     param_2 + ((param_4[6] * param_3 + param_3) * temp_v0 >> 3),param_3,param_4);
-      }
+    u32 bits = gfxTexFormatGetBitsPerPixel(format->format, format->type);
+    if (size != 1) {
+        if (bits == 4 && size == 2) {
+            if (!format->flipVertical) {
+                destination[0] = source[0];
+                destination[(format->rows.rowStride * bits) >> 3] = source[1];
+            }
+        } else {
+            size >>= 1;
+            u32 quadrantPixels = size * size;
+            if (format->flipVertical) {
+                FUN_0023b260(source, destination + ((format->rows.rowStride * size * bits) >> 3), size, format);
+                u32 quadrantBits = quadrantPixels * bits;
+                FUN_0023b260(source + (quadrantBits >> 3), destination + (((format->rows.rowStride * size + size) * bits) >> 3), size, format);
+                FUN_0023b260(source + ((quadrantBits * 2) >> 3), destination, size, format);
+                FUN_0023b260(source + ((quadrantBits * 3) >> 3), destination + ((size * bits) >> 3), size, format);
+            } else {
+                FUN_0023b260(source, destination, size, format);
+                u32 quadrantBits = quadrantPixels * bits;
+                FUN_0023b260(source + (quadrantBits >> 3), destination + ((size * bits) >> 3), size, format);
+                FUN_0023b260(source + ((quadrantBits * 2) >> 3), destination + ((format->rows.rowStride * size * bits) >> 3), size, format);
+                FUN_0023b260(source + ((quadrantBits * 3) >> 3), destination + (((format->rows.rowStride * size + size) * bits) >> 3), size, format);
+            }
+        }
+    } else {
+        rt_memcpy(destination, source, bits >> 3);
     }
-    else if (param_4[8] == 0) {
-      *param_2 = *param_1;
-      param_2[(param_4[6] & 0x3fffffff) >> 1] = param_1[1];
-    }
-  }
-  else {
-    rt_memcpy(param_2,param_1,temp_v0 >> 3);
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

@@ -1,60 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00110d54` (_code @ 0x110d54, 0x110 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: delay validation and integer gains match; VFP load/arithmetic scheduling differs. */
+#include "sound/SoundEffectDelay.h"
+extern "C" void rt_memcpy_w(void *destination, const void *source, u32 size);
 
-extern "C" {
-
-int rt_memcpy_w(int, unsigned int *, int);
-
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int FUN_00110d54(int param_1,unsigned int *param_2)
-
+// Validate delay parameters and derive the fixed-point gains used by the effect.
+extern "C" u32 FUN_00110d54(SoundEffectDelay *effect, const SoundEffectDelayParameters *parameters)
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  unsigned int temp_v0;
-  char temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  float temp_v4;
-  
-  if ((((0.0f <= (float)param_2[2]) && ((int)param_2[2] < 0x3f800001)) && (0.0f <= (float)param_2[1]))
-     && ((int)param_2[1] < 0x3f800001)) {
-    if (*(char *)(param_1 + 0x5e) != '\x01') {
-LAB_00110dc0:
-      temp_v0 = (*param_2 * 1000) / 0x1318;
-      *(unsigned int *)(param_1 + 0x44) = temp_v0;
-      if (temp_v0 == 0) {
-        *(unsigned int *)(param_1 + 0x44) = 1;
-      }
-      if ((char)param_2[3] == '\0') {
-        temp_v2 = 2;
-      }
-      else {
-        temp_v2 = 4;
-      }
-      *(unsigned char *)(param_1 + 0x5d) = temp_v2;
-      *(int *)(param_1 + 0x4c) = (int)((float)param_2[1] * 128.0f);
-      temp_v4 = (float)param_2[2];
-      if ((int)temp_v4 >= 0x3f733334) {
-        temp_v4 = 0.95f;
-      }
-      *(int *)(param_1 + 0x50) = (int)((1.0f - temp_v4) * 128.0f);
-      *(int *)(param_1 + 0x54) = (int)(temp_v4 * 128.0f);
-      rt_memcpy_w(param_1 + 0xc,param_2,0xd);
-      return 1;
+    if (!(0.0f <= parameters->damping && parameters->damping <= 1.0f &&
+          0.0f <= parameters->feedback && parameters->feedback <= 1.0f))
+        return 0;
+    if (effect->initialized == 1) {
+        if (parameters->time > effect->maximumTime)
+            return 0;
+        if (effect->surroundSupported == 0 && parameters->surround == 1)
+            return 0;
     }
-    if (*param_2 <= *(unsigned int *)(param_1 + 0x58)) {
-      temp_v1 = *(char *)(param_1 + 0x5c);
-      temp_v3 = temp_v1 == '\0';
-      if (temp_v3) {
-        temp_v1 = (char)param_2[3];
-      }
-      if (!temp_v3 || temp_v1 != '\x01') goto LAB_00110dc0;
-    }
-  }
-  return 0;
-}
 
-} /* extern "C" */
+    effect->delayBlocks = parameters->time * 1000 / 4888;
+    if (effect->delayBlocks == 0)
+        effect->delayBlocks = 1;
+    effect->channelCount = parameters->surround == 0 ? 2 : 4;
+    effect->feedbackGain = (s32)(parameters->feedback * 128.0f);
+    f32 damping = parameters->damping;
+    if (damping > 0.95f)
+        damping = 0.95f;
+    effect->directGain = (s32)((1.0f - damping) * 128.0f);
+    effect->dampingGain = (s32)(damping * 128.0f);
+    rt_memcpy_w(&effect->parameters, parameters, 13);
+    return 1;
+}

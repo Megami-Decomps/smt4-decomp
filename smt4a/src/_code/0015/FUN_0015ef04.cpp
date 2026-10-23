@@ -1,104 +1,74 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015ef04` (_code @ 0x15ef04, 0x1b8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: resource/header stack spilling, block dispatch ordering and register allocation differ from retail. */
+#include "shard/W6_W6Match7_FontResource.h"
 
 extern "C" {
+s32 nw_ut_IsValidBinaryFile(const NwFontFileHeader *file, u32 signature, u32 version, u32 minimumBlocks);
+void FUN_00175f48(NwResFontBase *font, NwFontFileHeader *file, NwFontInfo *info);
 
-int FUN_00175f48(int, int *);
-int nw_ut_IsValidBinaryFile(int *, int, int, int, int, int *);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00175f48. */
-/* Supplied declaration required: nw_ut_IsValidBinaryFile. */
-
-
-unsigned int FUN_0015ef04(int param_1,int *param_2)
-
+// Relocate CFNT block pointers in place, then bind its FINF data to an unused font object.
+u32 FUN_0015ef04(NwResFontBase *font, NwFontFileHeader *file)
 {
-/* irregular: 1 goto(s); 2 native warning(s); review required */
-  int *piVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  int *piVar4;
-  int temp_v2;
-  
-  if (*(int *)(param_1 + 4) == 0) {
-    if (*param_2 != 0x554e4643) {
-      piVar1 = param_2;
-      nw_ut_IsValidBinaryFile(param_2,0x544e4643,0x3000000,2,param_1,param_2);
-      temp_v0 = 0;
-      if (piVar1 != (int *)0x0) {
-        piVar1 = (int *)0x0;
-        temp_v1 = 0;
-        piVar4 = (int *)((unsigned int)*(unsigned short *)((int)param_2 + 6) + (int)param_2);
-        if ((short)param_2[4] != 0) {
-          do {
-            temp_v2 = *piVar4;
-            if (temp_v2 != 0x50414d43) {
-              if (temp_v2 < 0x50414d43) {
-                if (temp_v2 != 0x464e4946) {
-                  if (temp_v2 != 0x48445743) {
-                    return 0;
-                  }
-                  if (piVar4[3] != 0) {
-                    piVar4[3] = piVar4[3] + (int)param_2;
-                  }
-                }
-                else {
-                  piVar1 = piVar4 + 2;
-                  piVar4[4] = piVar4[4] + (int)param_2;
-                  if (piVar4[5] != 0) {
-                    piVar4[5] = piVar4[5] + (int)param_2;
-                  }
-                  if (piVar4[6] != 0) {
-                    piVar4[6] = piVar4[6] + (int)param_2;
-                  }
-                }
-              }
-              else if (temp_v2 != 0x504c4754) {
-                if (temp_v2 != 0x52474c47) {
-                  return 0;
-                }
-              }
-              else {
-                piVar4[7] = piVar4[7] + (int)param_2;
-              }
-            }
-            else if (piVar4[4] != 0) {
-              piVar4[4] = piVar4[4] + (int)param_2;
-            }
-            temp_v1 = temp_v1 + 1;
-            piVar4 = (int *)((int)piVar4 + piVar4[1]);
-          } while (temp_v1 < (int)(unsigned int)*(unsigned short *)(param_2 + 4));
-        }
-        *param_2 = 0x554e4643;
-LAB_0015f090:
-        if (piVar1 == (int *)0x0) {
-          return 0;
-        }
-        FUN_00175f48(param_1,param_2);
-        temp_v0 = 1;
-      }
-      return temp_v0;
+    if (font->resourceView.resource != NULL) {
+        return 0;
     }
-    temp_v1 = 0;
-    piVar1 = (int *)((unsigned int)*(unsigned short *)((int)param_2 + 6) + (int)param_2);
-    if (*(unsigned short *)(param_2 + 4) != 0) {
-      do {
-        if (*piVar1 == 0x464e4946) {
-          piVar1 = piVar1 + 2;
-          goto LAB_0015f090;
+    NwFontInfo *info = NULL;
+    NwFontBlockHeader *block = (NwFontBlockHeader *)((u8 *)file + file->headerSize);
+    if (file->signature == 0x554E4643) {
+        for (s32 i = 0; i < file->blockCount; ++i) {
+            if (block->signature == 0x464E4946) {
+                info = (NwFontInfo *)(block + 1);
+                break;
+            }
+            block = (NwFontBlockHeader *)((u8 *)block + block->byteSize);
         }
-        temp_v1 = temp_v1 + 1;
-        piVar1 = (int *)((int)piVar1 + piVar1[1]);
-      } while (temp_v1 < (int)(unsigned int)*(unsigned short *)(param_2 + 4));
+    } else {
+        if (!nw_ut_IsValidBinaryFile(file, 0x544E4643, 0x03000000, 2)) {
+            return 0;
+        }
+        for (s32 i = 0; i < file->blockCount; ++i) {
+            switch (block->signature) {
+            case 0x464E4946:
+                info = (NwFontInfo *)(block + 1);
+                info->sheetInfo = (NwFontSheetInfo *)((u8 *)file + (u32)info->sheetInfo);
+                if (info->widthTable != NULL) {
+                    info->widthTable = (NwFontWidthTable *)((u8 *)file + (u32)info->widthTable);
+                }
+                if (info->charMap != NULL) {
+                    info->charMap = (u8 *)file + (u32)info->charMap;
+                }
+                break;
+            case 0x544C4754: {
+                NwFontSheetInfo *sheet = (NwFontSheetInfo *)(block + 1);
+                sheet->sheetImage = (u8 *)file + (u32)sheet->sheetImage;
+                break;
+            }
+            case 0x48445743: {
+                NwFontWidthTable *widths = (NwFontWidthTable *)(block + 1);
+                if (widths->next != NULL) {
+                    widths->next = (NwFontWidthTable *)((u8 *)file + (u32)widths->next);
+                }
+                break;
+            }
+            case 0x50414D43: {
+                NwFontCharacterMap *map = (NwFontCharacterMap *)(block + 1);
+                if (map->next != NULL) {
+                    map->next = (NwFontCharacterMap *)((u8 *)file + (u32)map->next);
+                }
+                break;
+            }
+            case 0x52474C47:
+                break;
+            default:
+                return 0;
+            }
+            block = (NwFontBlockHeader *)((u8 *)block + block->byteSize);
+        }
+        file->signature = 0x554E4643;
     }
-  }
-  return 0;
+    if (info == NULL) {
+        return 0;
+    }
+    FUN_00175f48(font, file, info);
+    return 1;
 }
-
-} /* extern "C" */
+}

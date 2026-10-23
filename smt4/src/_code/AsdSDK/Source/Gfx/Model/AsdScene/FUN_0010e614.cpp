@@ -1,136 +1,98 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010e614` (_code @ 0x10e614, 0x1bc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: description/VFP store grouping and resource-bank indexing differ. */
+#include "AsdSDK/Source/Gfx/Model/AsdSceneLight.h"
+#include "AsdSDK/AsdSceneFog.h"
+#include "AsdSDK/AsdDebug.h"
 
+struct SceneLight;
 extern "C" {
+void *asdMemoryAlloc(u32, u32, u32, u32, u32);
+AsdAllocatorObject *asdMemoryGetDefaultAllocator();
+AsdSceneLightObject *FUN_0011d9c4(const AsdSceneLightDescription *, AsdAllocatorObject *);
+AsdSceneLightObject *FUN_00120000(const AsdSceneLightDescription *, AsdAllocatorObject *);
+u32 nw_ut_FloatColor_ToPicaU32(const f32 *);
+AsdSceneLight *FUN_0011877c();
+SceneLight *FUN_00118d50();
+extern AsdSceneFogRegistry DAT_00464c00;
+extern const char DAT_00409488[];
 
-int FUN_0011877c(void);
-int FUN_00118d50(void);
-int asdMemoryAlloc(int, int, int, int, int);
-
-/* stack frame of void: 6 slot(s), 18 byte(s) */
-typedef struct {
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned char sp47; /* 0x47: local_47 */
-    unsigned char sp48; /* 0x48: local_48 */
-    unsigned int sp50; /* 0x50: local_50 */
-} void_stack;
-
-#ifndef ROMWRIGHT_STORAGE_s__M_F_00464c00_9_1_DEFINED
-#define ROMWRIGHT_STORAGE_s__M_F_00464c00_9_1_DEFINED
-/* Storage views; not a recovered source structure. */
-union romwright_storage_s__M_F_00464c00_9_1 {
-    char whole[9];
-    unsigned char u1[9];
-    signed char s1[9];
-};
-typedef char romwright_storage_s__M_F_00464c00_9_1_size_check[(sizeof(union romwright_storage_s__M_F_00464c00_9_1) == 9) ? 1 : -1];
-typedef char romwright_storage_s__M_F_00464c00_9_1_u1_width_check[(sizeof(((union romwright_storage_s__M_F_00464c00_9_1 *)0)->u1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_s__M_F_00464c00_9_1_s1_width_check[(sizeof(((union romwright_storage_s__M_F_00464c00_9_1 *)0)->s1[0]) == 1) ? 1 : -1];
-#endif
-extern union romwright_storage_s__M_F_00464c00_9_1 s__M_F_00464c00; /* 0x464c00 */
-
-/* Supplied declaration required: FUN_0011877c. */
-/* Supplied declaration required: FUN_00118d50. */
-extern int FUN_0011d9c4(unsigned char *, unsigned int);
-extern int FUN_00120000(unsigned char *, unsigned int);
-extern unsigned int asdMemoryGetDefaultAllocator(void);
-/* Supplied declaration required: asdMemoryAlloc. */
-extern unsigned int nw_ut_FloatColor_ToPicaU32(int);
-
-
-void FUN_0010e614(void)
-
+/* Populate each scene's ambient, hemispheric, point and directional default lights. */
+void FUN_0010e614()
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned char temp_v10;
-  unsigned char temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  unsigned int temp_v14;
-  
-  temp_v3 = 0;
-  temp_v4 = 0x3e4ccccd;
-  temp_v5 = 0x3f800000;
-  temp_v7 = 0x3f666666;
-  temp_v8 = 0x3dcccccd;
-  temp_v6 = 0;
-  temp_v9 = 0x3f000000;
-  do {
-    puVar1 = (unsigned int *)0x100;
-    asdMemoryAlloc(0x100,0x100,0,0xc,1);
-    puVar1[1] = 0;
-    puVar1[2] = 0;
-    *puVar1 = 0xffffffff;
-    temp_v0 = asdMemoryGetDefaultAllocator();
-    temp_v10 = 1;
-    temp_v11 = 1;
-    temp_v14 = 1;
-    temp_v12 = 0;
-    temp_v13 = 0;
-    temp_v1 = FUN_0011d9c4(&temp_v10,temp_v0);
-    puVar1[1] = temp_v1;
-    temp_v1 = *(int *)(temp_v1 + 8);
-    puVar1[2] = temp_v1;
-    *(unsigned int *)(temp_v1 + 0xb8) = temp_v4;
-    *(unsigned int *)(temp_v1 + 0xbc) = temp_v4;
-    *(unsigned int *)(temp_v1 + 0xc0) = temp_v4;
-    *(unsigned int *)(temp_v1 + 0xc4) = temp_v5;
-    temp_v0 = nw_ut_FloatColor_ToPicaU32(puVar1[2] + 0xb8);
-    *(unsigned int *)(puVar1[2] + 200) = temp_v0;
-    *(unsigned int **)((*(unsigned int *)&s__M_F_00464c00.u1[0]) + temp_v3 * 4) = puVar1;
-    puVar1 = (unsigned int *)0x100;
-    asdMemoryAlloc(0x100,0x100,0,0xc,1);
-    puVar1[1] = 0;
-    puVar1[2] = 0;
-    *puVar1 = 0xffffffff;
-    temp_v0 = asdMemoryGetDefaultAllocator();
-    temp_v10 = 1;
-    temp_v11 = 1;
-    temp_v14 = 1;
-    temp_v12 = 0;
-    temp_v13 = 0;
-    temp_v1 = FUN_00120000(&temp_v10,temp_v0);
-    puVar1[1] = temp_v1;
-    temp_v1 = *(int *)(temp_v1 + 8);
-    puVar1[2] = temp_v1;
-    *(unsigned int *)(temp_v1 + 200) = temp_v7;
-    *(unsigned int *)(temp_v1 + 0xcc) = temp_v7;
-    *(unsigned int *)(temp_v1 + 0xd0) = temp_v5;
-    *(unsigned int *)(temp_v1 + 0xd4) = temp_v5;
-    temp_v1 = puVar1[2];
-    *(unsigned int *)(temp_v1 + 0xb8) = temp_v8;
-    *(unsigned int *)(temp_v1 + 0xbc) = temp_v6;
-    *(unsigned int *)(temp_v1 + 0xc0) = temp_v6;
-    *(unsigned int *)(temp_v1 + 0xc4) = temp_v5;
-    temp_v1 = puVar1[2];
-    *(unsigned int *)(temp_v1 + 0xd8) = temp_v6;
-    *(unsigned int *)(temp_v1 + 0xdc) = temp_v5;
-    *(unsigned int *)(temp_v1 + 0xe0) = temp_v6;
-    *(unsigned int *)(puVar1[2] + 0xe4) = temp_v9;
-    temp_v2 = (*(unsigned int *)&s__M_F_00464c00.u1[0]) + temp_v3 * 4;
-    *(unsigned int **)(temp_v2 + 8) = puVar1;
-    FUN_0011877c();
-    *(int *)((*(unsigned int *)&s__M_F_00464c00.u1[0]) + temp_v3 * 4 + 0x10) = temp_v2;
-    FUN_00118d50();
-    temp_v1 = temp_v3 * 4;
-    temp_v3 = temp_v3 + 1;
-    *(int *)((*(unsigned int *)&s__M_F_00464c00.u1[0]) + temp_v1 + 0x18) = temp_v2;
-  } while (temp_v3 < 2);
-  return;
-}
+    struct AmbientParameters {
+        u8 unk00[0xB8];
+        f32 color[4];
+        u32 packedColor;
+    };
+    struct HemisphereParameters {
+        u8 unk00[0xB8];
+        f32 ambient[4], diffuse[4], direction[3], intensity;
+    };
+    struct DefaultLights {
+        AsdSceneLight *ambient[2], *hemisphere[2], *point[2];
+        SceneLight *directional[2];
+    };
+    typedef char ParameterOffsets[
+        offsetof(AmbientParameters, color) == 0xB8 &&
+        offsetof(AmbientParameters, packedColor) == 0xC8 &&
+        offsetof(HemisphereParameters, diffuse) == 0xC8 &&
+        offsetof(HemisphereParameters, direction) == 0xD8 &&
+        offsetof(HemisphereParameters, intensity) == 0xE4 &&
+        sizeof(DefaultLights) == 0x20 ? 1 : -1];
+    for (s32 index = 0; index < 2; ++index) {
+        asdDebugTrace(DAT_00409488, 688);
+        AsdSceneLight *ambient = (AsdSceneLight *)asdMemoryAlloc(0x100, 0x100, 0, sizeof(AsdSceneLight), 1);
+        ambient->object = NULL;
+        ambient->parameters = NULL;
+        ambient->id = -1;
+        AsdAllocatorObject *allocator = asdMemoryGetDefaultAllocator();
+        AsdSceneLightDescription description;
+        description.enabled = 1;
+        description.updateEnabled = 1;
+        description.unk04 = 0;
+        description.unk08 = 0;
+        description.count = 1;
+        ambient->object = FUN_0011d9c4(&description, allocator);
+        ambient->parameters = ambient->object->parameters;
+        f32 *color = ((AmbientParameters *)ambient->parameters)->color;
+        color[0] = 0.2f;
+        color[1] = 0.2f;
+        color[2] = 0.2f;
+        color[3] = 1.0f;
+        ((AmbientParameters *)ambient->parameters)->packedColor =
+            nw_ut_FloatColor_ToPicaU32(((AmbientParameters *)ambient->parameters)->color);
+        ((DefaultLights *)DAT_00464c00.unk00)->ambient[index] = ambient;
 
-} /* extern "C" */
+        asdDebugTrace(DAT_00409488, 801);
+        AsdSceneLight *hemisphere = (AsdSceneLight *)asdMemoryAlloc(0x100, 0x100, 0, sizeof(AsdSceneLight), 1);
+        hemisphere->object = NULL;
+        hemisphere->parameters = NULL;
+        hemisphere->id = -1;
+        allocator = asdMemoryGetDefaultAllocator();
+        description.enabled = 1;
+        description.updateEnabled = 1;
+        description.unk04 = 0;
+        description.unk08 = 0;
+        description.count = 1;
+        hemisphere->object = FUN_00120000(&description, allocator);
+        hemisphere->parameters = hemisphere->object->parameters;
+        f32 *diffuse = ((HemisphereParameters *)hemisphere->parameters)->diffuse;
+        diffuse[0] = 0.9f;
+        diffuse[1] = 0.9f;
+        diffuse[2] = 1.0f;
+        diffuse[3] = 1.0f;
+        f32 *sky = ((HemisphereParameters *)hemisphere->parameters)->ambient;
+        sky[0] = 0.1f;
+        sky[1] = 0.0f;
+        sky[2] = 0.0f;
+        sky[3] = 1.0f;
+        f32 *direction = ((HemisphereParameters *)hemisphere->parameters)->direction;
+        direction[0] = 0.0f;
+        direction[1] = 1.0f;
+        direction[2] = 0.0f;
+        ((HemisphereParameters *)hemisphere->parameters)->intensity = 0.5f;
+        ((DefaultLights *)DAT_00464c00.unk00)->hemisphere[index] = hemisphere;
+        ((DefaultLights *)DAT_00464c00.unk00)->point[index] = FUN_0011877c();
+        ((DefaultLights *)DAT_00464c00.unk00)->directional[index] = FUN_00118d50();
+    }
+}
+}

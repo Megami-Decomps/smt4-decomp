@@ -1,78 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a9308` (_code @ 0x4a9308, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: UI/pane registers differ and the sprite pane address is cached instead of recomputed. */
+#include "battle/btlUI.h"
 
 extern "C" {
+void uiSpriteSetKeyframeThree(BtlUiObjBA *sprite);
+void FUN_00231cdc(BtlUiObjCA *widget, u32 selection, u32 mode, u32 flags);
+void FUN_002cc96c(BtlUiObjCA *widget);
+void FUN_00321500(BtlUiObjAA *widget);
+s32 FUN_0039ebcc(BtlUiObjBA *widget);
+s32 menu32ModeIsNot6(BtlUiObjAA *widget);
+extern BtlUiGlobalsA g_btlUi;
 
-int uiSpriteSetKeyframeThree(int);
-int FUN_00231cdc(int, unsigned int, unsigned int, unsigned int);
-int FUN_002cc96c(int);
-int FUN_00321500(int);
-int FUN_0039ebcc(void);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-extern unsigned char g_btlUi; /* 0x57a9b8 */
-
-/* Supplied declaration required: uiSpriteSetKeyframeThree. */
-/* Supplied declaration required: FUN_00231cdc. */
-/* Supplied declaration required: FUN_002cc96c. */
-/* Supplied declaration required: FUN_00321500. */
-extern int menu32ModeIsNot6(int);
-/* Supplied declaration required: FUN_0039ebcc. */
-
-
-void FUN_004a9308(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Map a battle command to the selection pane's mode, resetting both panes for mode fourteen.
+void FUN_004a9308(u32 unused, u32 selection, u32 command, u32 flags)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_btlUi + 0x10));
-  temp_v2 = 0xffffffff;
-  *(unsigned int *)((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 0x74a0) = 0xb;
-  switch(param_3) {
-  case 1:
-  case 2:
-  case 3:
-    temp_v2 = 1;
-    break;
-  case 4:
-    temp_v2 = 9;
-    break;
-  case 5:
-    temp_v2 = 8;
-    break;
-  case 6:
-    temp_v2 = 5;
-    break;
-  case 7:
-    temp_v2 = 3;
-    break;
-  case 8:
-    temp_v2 = 7;
-    break;
-  case 0xe:
-    temp_v2 = 0xb;
-    temp_v1 = menu32ModeIsNot6(temp_v0 + 8);
-    if (temp_v1 != 0) {
-      temp_v1 = temp_v0 + 0x24bc;
-      FUN_0039ebcc();
-      if (temp_v1 != 0) {
-        FUN_00321500(temp_v0 + 8);
-        uiSpriteSetKeyframeThree(temp_v0 + 0x24bc);
-      }
+    BtlUiA *ui = g_btlUi.ui;
+    u32 mode = static_cast<u32>(-1);
+    ui->state = 11;
+    switch (command) {
+    case 1:
+    case 2:
+    case 3:
+        mode = 1;
+        break;
+    case 4:
+        mode = 9;
+        break;
+    case 5:
+        mode = 8;
+        break;
+    case 6:
+        mode = 5;
+        break;
+    case 7:
+        mode = 3;
+        break;
+    case 8:
+        mode = 7;
+        break;
+    case 14:
+        mode = 11;
+        if (menu32ModeIsNot6(&ui->objA) != 0 && FUN_0039ebcc(&ui->objB) != 0) {
+            FUN_00321500(&ui->objA);
+            uiSpriteSetKeyframeThree(&ui->objB);
+        }
+        FUN_002cc96c(&ui->objC);
+        ui->state = 15;
+        break;
     }
-    FUN_002cc96c(temp_v0 + 0x28c4);
-    *(unsigned int *)(temp_v0 + 0x74a0) = 0xf;
-  }
-  FUN_00231cdc(temp_v0 + 0x28c4,param_2,temp_v2,param_4);
-  return;
+    FUN_00231cdc(&ui->objC, selection, mode, flags);
 }
-
-} /* extern "C" */
+}

@@ -32,7 +32,7 @@ int libc_strcpy(unsigned char [36], unsigned int);
 int FUN_003180c4(int, unsigned char [36]);
 int FUN_0031cf00(void);
 int btlTalkBustUpReleaseAllSlots(void);
-int FUN_00336de4(...);
+int btlTalkBustUpSetDemonTexture(...);
 int FUN_00359974(...);
 int btlTalkBustUpReleaseContent(void);
 int btlTalkBustUpSetUnk2F4(...);
@@ -78,7 +78,7 @@ extern int FUN_00334044(void);
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
-/* Supplied declaration required: FUN_00336de4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 extern int partyPanelIsActive(void);
 extern int battleTalkIsBustReady(void);
 /* Supplied declaration required: FUN_00359974. */
@@ -123,7 +123,7 @@ unsigned int FUN_003193a8(int param_1)
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x360),0x14);
     temp_v3 = btlTalkBustUpGetValue();
     if (temp_v3 == 0) {
-      FUN_00336de4(*(unsigned short *)(temp_v6 + 0x62),1);
+      btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v6 + 0x62),1);
     }
     rt_memcpy_w(param_1 + 0x218,temp_v6,300);
     *(int *)(param_1 + 0x3bc) = *(int *)(param_1 + 0x3bc) + 1;
@@ -302,7 +302,7 @@ unsigned int FUN_003193a8(int param_1)
       return 0;
     }
     btlTalkBustUpReleaseContent();
-    FUN_00336de4(*(unsigned short *)(temp_v6 + 0x62),1);
+    btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v6 + 0x62),1);
     *(unsigned char *)(param_1 + 0x3e6) = 0;
     FUN_002c8538(1);
     FUN_00215bd0();

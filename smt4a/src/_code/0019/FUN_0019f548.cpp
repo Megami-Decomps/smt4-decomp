@@ -1,75 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019f548` (_code @ 0x19f548, 0x12c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved resource/registry registers, array-field writeback and selection-reset scheduling differ. */
+#include "shard/W4_Match1b_RegisteredHandle.h"
+#include <stddef.h>
+
+struct CameraResourceCleanupView {
+    u8 unk000[0x18];
+    RegisteredHandle *primary;
+    RegisteredHandle *secondary;
+    RegisteredHandle *tertiary;
+    RegisteredHandle *areas[10];
+    s32 selectedArea; /* 0x4c */
+    u8 unk050[0x544];
+    RegisteredHandle *auxiliary; /* 0x594 */
+    s32 selectedAuxiliary; /* 0x598 */
+};
+typedef char CameraResourceCleanupOffsets[offsetof(CameraResourceCleanupView, areas) == 0x24 &&
+    offsetof(CameraResourceCleanupView, auxiliary) == 0x594 ? 1 : -1];
 
 extern "C" {
-
-int asdCameraInitAreas(void);
-int ptrListRemoveClearOwner(unsigned int, unsigned int);
-int resourceOwnerReleaseAndReset(unsigned int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-
-/* Supplied declaration required: asdCameraInitAreas. */
-/* Supplied declaration required: ptrListRemoveClearOwner. */
-/* Supplied declaration required: resourceOwnerReleaseAndReset. */
-
-
-void FUN_0019f548(int param_1)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  resourceOwnerReleaseAndReset(g_handleRegistry);
-  if (*(int *)(param_1 + 0x18) != 0) {
-    ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(param_1 + 0x18) + 4));
-    if (*(int **)(param_1 + 0x18) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(param_1 + 0x18) + 4))();
-      *(unsigned int *)(param_1 + 0x18) = 0;
-    }
-  }
-  temp_v0 = 0;
-  do {
-    temp_v1 = param_1 + temp_v0 * 4;
-    if (*(int *)(temp_v1 + 0x24) != 0) {
-      ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v1 + 0x24) + 4));
-      if (*(int **)(temp_v1 + 0x24) != (int *)0x0) {
-        (**(romwright_code **)(**(int **)(temp_v1 + 0x24) + 4))();
-        *(unsigned int *)(temp_v1 + 0x24) = 0;
-      }
-    }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 10);
-  *(unsigned int *)(param_1 + 0x4c) = 0xffffffff;
-  if (*(int *)(param_1 + 0x1c) != 0) {
-    ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(param_1 + 0x1c) + 4));
-    if (*(int **)(param_1 + 0x1c) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(param_1 + 0x1c) + 4))();
-      *(unsigned int *)(param_1 + 0x1c) = 0;
-    }
-  }
-  if (*(int *)(param_1 + 0x20) != 0) {
-    ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(param_1 + 0x20) + 4));
-    if (*(int **)(param_1 + 0x20) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(param_1 + 0x20) + 4))();
-      *(unsigned int *)(param_1 + 0x20) = 0;
-    }
-  }
-  if (*(int **)(param_1 + 0x594) != (int *)0x0) {
-    (**(romwright_code **)(**(int **)(param_1 + 0x594) + 4))();
-    *(unsigned int *)(param_1 + 0x594) = 0;
-  }
-  *(unsigned int *)(param_1 + 0x598) = 0xffffffff;
-  asdCameraInitAreas();
-  return;
+extern void *g_handleRegistry;
+void resourceOwnerReleaseAndReset(void *);
+void ptrListRemoveClearOwner(void *, u32);
+void asdCameraInitAreas();
 }
 
-} /* extern "C" */
+static void releaseRegisteredHandle(RegisteredHandle *&handle)
+{
+    if (handle != NULL) {
+        ptrListRemoveClearOwner(g_handleRegistry, handle->id);
+        if (handle != NULL) {
+            delete handle;
+            handle = NULL;
+        }
+    }
+}
+
+/* Unregister and destroy the owned camera handles, then reset the camera areas. */
+extern "C" void FUN_0019f548(CameraResourceCleanupView *work)
+{
+    resourceOwnerReleaseAndReset(g_handleRegistry);
+    releaseRegisteredHandle(work->primary);
+    for (s32 i = 0; i < 10; ++i)
+        releaseRegisteredHandle(work->areas[i]);
+    work->selectedArea = -1;
+    releaseRegisteredHandle(work->secondary);
+    releaseRegisteredHandle(work->tertiary);
+    if (work->auxiliary != NULL) {
+        delete work->auxiliary;
+        work->auxiliary = NULL;
+    }
+    work->selectedAuxiliary = -1;
+    asdCameraInitAreas();
+}

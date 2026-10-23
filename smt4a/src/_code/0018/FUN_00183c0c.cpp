@@ -1,84 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00183c0c` (_code @ 0x183c0c, 0x180 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: count-pointer caching, paired-handle addressing and selected-field stores differ. */
+#include "ui/ButtonHelp.h"
 
+union HelpRegistrationViewA {
+    ButtonHelpWorkA base;
+    struct {
+        u8 unk000[0x5c4];
+        u16 handles[6];
+        s32 count;
+        s32 selection;
+        u16 selected;
+        u8 pair[6];
+    } touch;
+};
 extern "C" {
-
-int uiSpriteSelectAnim(int, int);
-int FUN_0019d890(int, int);
-int FUN_001a90e0(int);
-
-extern unsigned char g_buttonHelp; /* 0x57f0c4 */
-
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: FUN_0019d890. */
-/* Supplied declaration required: FUN_001a90e0. */
-
-
-void FUN_00183c0c(void)
-
-{
-/* irregular: 3 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned short temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int *piVar6;
-  
-  temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-  temp_v4 = 0;
-  piVar6 = (int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x5d0);
-  do {
-    uiSpriteSelectAnim(temp_v1 + temp_v4 * 0x8c + 0x34,0);
-    temp_v0 = *(char *)(temp_v1 + temp_v4 * 4 + 0x5ac);
-    if (temp_v0 != '\0') {
-      if (!(temp_v0 == '\a' || temp_v0 == '\x13')) {
-        if (temp_v0 != '\b') {
-          if (temp_v0 != '\t') {
-            if (!(temp_v0 == '\x15' || temp_v0 == '\x14')) {
-              temp_v2 = FUN_0019d890(10,temp_v4 + 0x1f);
-              *(unsigned short *)(temp_v1 + temp_v4 * 2 + 0x5c4) = temp_v2;
-              *piVar6 = *(int *)(temp_v1 + 0x5d0) + 1;
-            }
-            else {
-              temp_v2 = FUN_0019d890(10,temp_v4 + 0x1f);
-              temp_v3 = temp_v1 + temp_v4 * 2;
-              *(unsigned short *)(temp_v3 + 0x5c4) = temp_v2;
-              *piVar6 = *(int *)(temp_v1 + 0x5d0) + 1;
-              temp_v2 = FUN_0019d890(10,temp_v4 + 0x20);
-              *(unsigned short *)(temp_v3 + 0x5c6) = temp_v2;
-              *piVar6 = *piVar6 + 1;
-            }
-          }
-          else {
-            temp_v2 = FUN_0019d890(10,0x85);
-            *(unsigned short *)(temp_v1 + temp_v4 * 2 + 0x5c4) = temp_v2;
-            *piVar6 = *(int *)(temp_v1 + 0x5d0) + 1;
-          }
-        }
-        else {
-          temp_v2 = FUN_0019d890(10,0x59);
-          *(unsigned short *)(temp_v1 + temp_v4 * 2 + 0x5c4) = temp_v2;
-          *piVar6 = *(int *)(temp_v1 + 0x5d0) + 1;
-        }
-      }
-      else {
-        temp_v2 = FUN_0019d890(10,0x73);
-        *(unsigned short *)(temp_v1 + temp_v4 * 2 + 0x5c4) = temp_v2;
-        *piVar6 = *(int *)(temp_v1 + 0x5d0) + 1;
-      }
-    }
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 6);
-  *(unsigned int *)(temp_v1 + 0x5d4) = 0;
-  *(unsigned short *)(temp_v1 + 0x5d8) = 0;
-  FUN_001a90e0(temp_v1 + 0x5da);
-  *(unsigned char *)(temp_v1 + 0x5e2) = 0;
-  temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-  *(unsigned int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0xc) = 0;
-  *(unsigned int *)(temp_v1 + 0x10) = 1;
-  return;
+extern ButtonHelpGlobalsA g_buttonHelp;
+void uiSpriteSelectAnim(ButtonHelpUnit *unit, s32 animation);
+u16 FUN_0019d890(u32 group, s32 sprite);
+void FUN_001a90e0(void *pair);
 }
 
-} /* extern "C" */
+static __inline void registerHelpTouch(HelpRegistrationViewA *work, s32 index, s32 sprite)
+{
+    work->touch.handles[index] = FUN_0019d890(10, sprite);
+    ++work->base.count;
+}
+
+// Reset help animations and install touch regions appropriate to each of the six button kinds.
+extern "C" void FUN_00183c0c(void)
+{
+    HelpRegistrationViewA *work = reinterpret_cast<HelpRegistrationViewA *>(g_buttonHelp.work);
+    for (s32 index = 0; index < 6; ++index) {
+        uiSpriteSelectAnim(&work->base.units[index], 0);
+        u8 kind = work->base.kinds[index].kind;
+        if (kind != 0) {
+            if (kind == 7 || kind == 19) {
+                registerHelpTouch(work, index, 0x73);
+            } else if (kind == 8) {
+                registerHelpTouch(work, index, 0x59);
+            } else if (kind == 9) {
+                registerHelpTouch(work, index, 0x85);
+            } else if (kind == 21 || kind == 20) {
+                registerHelpTouch(work, index, index + 0x1f);
+                registerHelpTouch(work, index + 1, index + 0x20);
+            } else {
+                registerHelpTouch(work, index, index + 0x1f);
+            }
+        }
+    }
+    work->touch.selection = 0;
+    work->touch.selected = 0;
+    FUN_001a90e0(work->touch.pair);
+    work->base.unk5E2[0] = 0;
+    ButtonHelpWorkA *current = g_buttonHelp.work;
+    current->unk0C = 0;
+    current->state = 1;
+}

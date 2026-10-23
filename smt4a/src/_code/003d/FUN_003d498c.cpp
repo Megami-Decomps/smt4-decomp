@@ -1,113 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d498c` (_code @ 0x3d498c, 0x1c8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: two instruction-order swaps remain in stack/global setup and fallback-name arguments. */
+#include "shard/W5_W5Match7_UiQuest.h"
+#include "shard/W5_W5Match7_DataRecord.h"
+struct AocSystemA;
 extern "C" {
+extern AocSystemA *g_aocSystem;
+void FUN_003dea6c(u32 id, s32 enabled, s32 flags);
+void *FUN_0046c0f8(AocSystemA *system, u32 id);
+void textFormatBuffer(char *output, const char *format, ...);
+void *asdLoadFileSyncDefault(const char *path);
+void asdTextDrawDirectoryEntry(u32 window, s32 mode, u32 color, u32 flags, s32 type, const void *data, s32 entry);
+s32 partyEntryGetByte1(u32 id);
+s32 FUN_003de464(u32 id, u32 mode);
+char *FUN_001654f8(const char *name, char *output, s32 size);
+void FUN_0023723c(u32 window, s32 mode, u32 color, u32 flags, s32 type, const char *format, const char *text);
+s32 questHasSpecialDetailPage(u32 id);
+s32 itemDataGetCategory(u32 id);
+void uiQuestRefreshDetailPages(u32 id);
 
-int textFormatBuffer(int *, unsigned char *, int);
-int FUN_001654f8(int, int);
-int FUN_001ad9b4(void);
-int asdLoadFileSyncDefault(void);
-int FUN_0023723c(unsigned int, int, unsigned int, int);
-int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
-void uiQuestRefreshDetailPages(int);
-int FUN_003dea6c(...);
-unsigned int questHasSpecialDetailPage(unsigned int);
-
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_2_stack;
-
-extern unsigned char LAB_003d4b5c; /* 0x3d4b5c */
-extern unsigned char LAB_003d4b78; /* 0x3d4b78 */
-extern unsigned int g_aocSystem; /* 0x570280 */
-extern int g_uiQuest; /* 0x57f28c */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_001654f8. */
-/* Supplied declaration required: FUN_001ad9b4. */
-/* Supplied declaration required: asdLoadFileSyncDefault. */
-/* Supplied declaration required: FUN_0023723c. */
-/* Supplied declaration required: asdTextDrawDirectoryEntry. */
-extern int FUN_003de464(int, unsigned int);
-extern int itemDataGetCategory(int);
-/* Supplied declaration required: FUN_003dea6c. */
-extern int partyEntryGetByte1(int);
-extern unsigned char *FUN_0046c0f8(unsigned int, int);
-
-
-void FUN_003d498c(int param_1,unsigned int param_2)
-
+void FUN_003d498c(u32 id, u32 mode)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned int *puVar3;
-  int temp_v1;
-  int temp_v2;
-  unsigned char *temp_v3;
-  int temp_v4;
-  
-  temp_v0 = g_uiQuest;
-  puVar3 = (unsigned int *)&temp_v2;
-  if (param_1 != 0) {
-    FUN_003dea6c(param_1,1);
-    puVar2 = (unsigned char *)FUN_0046c0f8(g_aocSystem,param_1);
-    if (puVar2 != (unsigned char *)0x0) {
-      *(unsigned char **)(temp_v0 + 0x92c) = puVar2;
-      *(unsigned char *)(temp_v0 + 0x943) = 1;
-      puVar3 = (unsigned int *)puVar2;
+    UiQuestApoc *work = g_uiQuest;
+    if (!id)
+        return;
+    FUN_003dea6c(id, 1, 1);
+    void *messages = FUN_0046c0f8(g_aocSystem, id);
+    if (messages) {
+        work->detailMessages = messages;
+        work->messageOwnership.addonOwned = 1;
+    } else {
+        char path[64];
+        textFormatBuffer(path, "event/quest/quest%03d.mbm", id);
+        messages = asdLoadFileSyncDefault(path);
+        work->detailMessages = messages;
+        work->messageOwnership.addonOwned = 0;
     }
-    else {
-      textFormatBuffer(&temp_v2,&LAB_003d4b5c,param_1);
-      asdLoadFileSyncDefault();
-      *(unsigned int **)(temp_v0 + 0x92c) = puVar3;
-      *(unsigned char *)(temp_v0 + 0x943) = 0;
+    asdTextDrawDirectoryEntry(work->sprites[0], 3, 0xFFFFFFFF, 0, 3, messages, 0);
+    s32 extraPage = partyEntryGetByte1(id);
+    if (extraPage > 0)
+        asdTextDrawDirectoryEntry(work->sprites[2], 3, 0xFFFFFFFF, 0, 3, work->detailMessages, extraPage);
+    FUN_003dea6c(id, 1, 0);
+    s32 detail = FUN_003de464(id, mode);
+    if (detail < 0) {
+        const char *name = FUN_001654f8(FUN_001ad9b4(id)->name.encoded, 0, 0);
+        FUN_0023723c(work->sprites[1], 3, 0xFFFFFFFF, 0, 3, "%s", name);
+    } else {
+        asdTextDrawDirectoryEntry(work->sprites[1], 3, 0xFFFFFFFF, 0, 3, reinterpret_cast<const void *>(work->messages), detail);
     }
-    temp_v2 = 3;
-    temp_v4 = 0;
-    temp_v3 = (unsigned char *)puVar3;
-    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x91c),3,0xffffffff,0);
-    temp_v1 = partyEntryGetByte1(param_1);
-    if (0 < temp_v1) {
-      temp_v3 = *(unsigned char **)(temp_v0 + 0x92c);
-      temp_v2 = 3;
-      temp_v4 = temp_v1;
-      asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x924),3,0xffffffff,0);
-    }
-    FUN_003dea6c(param_1,1,0);
-    temp_v1 = FUN_003de464(param_1,param_2);
-    if (temp_v1 < 0) {
-      temp_v1 = param_1;
-      FUN_001ad9b4();
-      temp_v1 = temp_v1 + 0x74;
-      FUN_001654f8(temp_v1,0);
-      temp_v3 = &LAB_003d4b78;
-      temp_v2 = 3;
-      temp_v4 = temp_v1;
-      FUN_0023723c(*(unsigned int *)(temp_v0 + 0x920),3,0xffffffff,0);
-    }
-    else {
-      temp_v3 = *(unsigned char **)(temp_v0 + 0x930);
-      temp_v2 = 3;
-      temp_v4 = temp_v1;
-      asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x920),3,0xffffffff,0);
-    }
-    temp_v1 = questHasSpecialDetailPage(param_1);
-    if (temp_v1 != 0) {
-      temp_v4 = itemDataGetCategory(param_1);
-      temp_v3 = *(unsigned char **)(temp_v0 + 0x92c);
-      temp_v2 = 3;
-      asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x928),3,0xffffffff,0);
-    }
-    uiQuestRefreshDetailPages(param_1);
-    return;
-  }
-  return;
+    if (questHasSpecialDetailPage(id))
+        asdTextDrawDirectoryEntry(work->sprites[3], 3, 0xFFFFFFFF, 0, 3, work->detailMessages, itemDataGetCategory(id));
+    uiQuestRefreshDetailPages(id);
 }
-
-} /* extern "C" */
+}

@@ -1,93 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b2008` (_code @ 0x3b2008, 0x154 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler emits generic memset helpers and different cached-pointer/count registers. */
+#include "battle/btlTalk.h"
 #include "gamedata/DataTable.h"
-struct PtrAt8;
+#include <stddef.h>
+#include <string.h>
 
+struct TalkCandidateRecordA {
+    u8 unk00[6];
+    u8 category;
+    u8 unk07[0xe5];
+    u16 enabled;
+    u16 requiredFlag;
+};
+typedef char TalkCandidateOffsets[sizeof(TalkCandidateRecordA) == 0xf0 &&
+    offsetof(TalkCandidateRecordA, enabled) == 0xec &&
+    offsetof(TalkCandidateRecordA, requiredFlag) == 0xee ? 1 : -1];
 extern "C" {
+extern BtlTalkA *g_btlTalk;
+void *btlTalkGetTableSection0(BtlTalkA *);
+u32 scrGetArg(u32);
+void scrSetResult(s32);
+s32 gameFlagIsSet(u32);
+u32 randRange(u16);
 
-int __aeabi_memset4(...);
-int scrSetResult(void);
-
-extern int g_btlTalk; /* 0x57a7b8 */
-
-extern int randRange(unsigned int);
-extern int gameFlagIsSet(void);
-/* Supplied declaration required: __aeabi_memset4. */
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: scrSetResult. */
-extern void* btlTalkGetTableSection0(PtrAt8* object);
-
-
-unsigned int FUN_003b2008(void)
-
+// Category six contributes twice to category zero's random selection.
+u32 FUN_003b2008(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int *piVar10;
-  unsigned char temp_v9;
-  int aiStack_428 [128];
-  int aiStack_228 [129];
-  
-  piVar10 = aiStack_428;
-  temp_v0 = scrGetArg(0);
-  temp_v1 = (u32)btlTalkGetTableSection0((PtrAt8*)g_btlTalk);
-  temp_v2 = (int)dataTableGetCount((void*)temp_v1);
-  temp_v3 = (int)dataTableGetEntries((void*)temp_v1);
-  __aeabi_memset4(aiStack_428,0x200,0xffffffff);
-  temp_v7 = 0;
-  temp_v5 = 0;
-  if (temp_v7 < temp_v2) {
-    do {
-      temp_v6 = temp_v3 + temp_v7 * 0xf0;
-      temp_v8 = temp_v5;
-      if (*(short *)(temp_v6 + 0xec) != 0) {
-        temp_v4 = (unsigned int)*(unsigned char *)(temp_v6 + 6);
-        temp_v9 = temp_v4 == 6;
-        if (temp_v9) {
-          temp_v4 = 0;
+    // The indexed selection cache extends beyond BtlTalkA's shared prefix.
+    struct TalkSelectionView {
+        u8 unk00[0x34];
+        s32 selections[128];
+    };
+    typedef char TalkSelectionOffset[offsetof(TalkSelectionView, selections) == 0x34 ? 1 : -1];
+    s32 candidates[128];
+    s32 available[128];
+    u32 category = scrGetArg(0);
+    void *table = btlTalkGetTableSection0(g_btlTalk);
+    s32 count = dataTableGetCount(table);
+    TalkCandidateRecordA *records = static_cast<TalkCandidateRecordA *>(dataTableGetEntries(table));
+    memset(candidates, -1, sizeof(candidates));
+    s32 candidateCount = 0;
+    for (s32 index = 0; index < count; ++index) {
+        TalkCandidateRecordA *record = &records[index];
+        if (record->enabled) {
+            u32 kind = record->category;
+            bool doubleWeight = false;
+            if (kind == 6) {
+                kind = 0;
+                doubleWeight = true;
+            }
+            if (category == kind && (!record->requiredFlag || gameFlagIsSet(record->requiredFlag))) {
+                candidates[candidateCount++] = index;
+                if (doubleWeight)
+                    candidates[candidateCount++] = index;
+            }
         }
-        if ((temp_v0 == temp_v4) &&
-           ((*(short *)(temp_v6 + 0xee) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 != 0)))) {
-          aiStack_428[temp_v5] = temp_v7;
-          temp_v8 = temp_v5 + 1;
-          if (temp_v9) {
-            aiStack_428[temp_v8] = temp_v7;
-            temp_v8 = temp_v5 + 2;
-          }
-        }
-      }
-      temp_v7 = temp_v7 + 1;
-      temp_v5 = temp_v8;
-    } while (temp_v7 < temp_v2);
-  }
-  temp_v2 = 0;
-  __aeabi_memset4(aiStack_228,0x200,0xffffffff);
-  temp_v5 = 0x80;
-  do {
-    temp_v3 = *piVar10;
-    if ((temp_v3 != -1) && (*(int *)(g_btlTalk + temp_v3 * 4 + 0x34) == -1)) {
-      aiStack_228[temp_v2] = temp_v3;
-      temp_v2 = temp_v2 + 1;
     }
-    temp_v5 = temp_v5 - 1;
-    piVar10 = piVar10 + 1;
-  } while (temp_v5 != 0);
-  if (temp_v2 == 0) {
-    temp_v2 = 1;
-  }
-  temp_v5 = randRange((temp_v2 - 1U) & 0xffff);
-  *(unsigned int *)(g_btlTalk + aiStack_228[temp_v5] * 4 + 0x34) = 0xffffffff;
-  scrSetResult();
-  return 1;
+    memset(available, -1, sizeof(available));
+    s32 availableCount = 0;
+    s32 *candidateSlot = candidates;
+    for (s32 remaining = 128; remaining; --remaining, ++candidateSlot) {
+        s32 candidate = *candidateSlot;
+        if (candidate != -1 && reinterpret_cast<TalkSelectionView *>(g_btlTalk)->selections[candidate] == -1)
+            available[availableCount++] = candidate;
+    }
+    if (!availableCount)
+        availableCount = 1;
+    s32 selected = available[randRange(static_cast<u16>(availableCount - 1))];
+    reinterpret_cast<TalkSelectionView *>(g_btlTalk)->selections[selected] = -1;
+    scrSetResult(selected);
+    return 1;
 }
-
-} /* extern "C" */
+}

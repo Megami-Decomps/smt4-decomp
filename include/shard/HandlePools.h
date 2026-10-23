@@ -18,8 +18,16 @@ struct LargePoolSlot {
     /* 0x24 */ u8 unk24[0x4];
 };
 
+struct PoolControllerReference {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 handle;
+};
+
 struct SmallPoolSlot {
-    /* 0x00 */ u8 unk00[0x4];
+    union {
+        /* 0x00 */ u8 unk00[0x4];
+        /* 0x00 */ PoolControllerReference *controller;
+    };
     /* 0x04 */ s32 id;
     /* 0x08 */ PoolRequest *request;
     /* 0x0C */ u8 unk0c[0x4];
@@ -33,5 +41,10 @@ struct HandlePools {
 
 typedef char LargePoolSlotSizeCheck[sizeof(LargePoolSlot) == 0x28 ? 1 : -1];
 typedef char HandlePoolsSmallOffsetCheck[offsetof(HandlePools, small) == 0x960 ? 1 : -1];
+typedef char SmallPoolControllerOffsets[
+    offsetof(PoolControllerReference, handle) == 4 &&
+    offsetof(SmallPoolSlot, controller) == 0 &&
+    sizeof(PoolControllerReference) == 8 && sizeof(SmallPoolSlot) == 0x10 &&
+    sizeof(HandlePools) == 0x1030 ? 1 : -1];
 
 #endif

@@ -14,7 +14,7 @@ int soundVolumeSettingGet(void);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_001f3f34(void);
-int FUN_00201ce0(...);
+int soundAllocateSpatialActor(...);
 int FUN_0025ef68(int *, int *, int);
 int FUN_002826dc(int *, int *, int, int);
 int distSpatial(void);
@@ -83,7 +83,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_001f3f34. */
-/* Supplied declaration required: FUN_00201ce0. */
+/* Supplied declaration required: soundAllocateSpatialActor. */
 /* Supplied declaration required: FUN_0025ef68. */
 /* Supplied declaration required: FUN_0027376c. */
 /* Supplied declaration required: FUN_002826dc. */
@@ -289,7 +289,7 @@ LAB_002db724:
         temp_v2 = piVar2[0x75];
         piVar2[0x75] = temp_v2 + 1;
         if (temp_v2 + 1 == 0x19) {
-          FUN_00201ce0(0x10002ea);
+          soundAllocateSpatialActor(0x10002ea);
         }
         piVar2 = g_lmapScene;
         if (g_lmapScene[0x75] == 1) {
@@ -706,7 +706,7 @@ joined_r0x002dbf24:
       DAT_005f19e8 = 0;
       if (piVar2[0x8a] == 0xb) {
         if (piVar2[0x75] == 1) {
-          FUN_00201ce0(0x10002eb);
+          soundAllocateSpatialActor(0x10002eb);
         }
         if (g_lmapScene[0x75] == 5) {
           FUN_003d4ed8(0x1000237);
@@ -718,12 +718,12 @@ joined_r0x002dbf24:
           FUN_003d4ed8(0x1000239);
         }
         if (g_lmapScene[0x75] == 0x36) {
-          FUN_00201ce0(0x10002ec);
+          soundAllocateSpatialActor(0x10002ec);
         }
       }
       if (g_lmapScene[0x8a] == 5) {
         if (g_lmapScene[0x75] == 0x19) {
-          FUN_00201ce0(0x10002ed);
+          soundAllocateSpatialActor(0x10002ed);
           goto LAB_002dc4e4;
         }
       }
@@ -883,7 +883,7 @@ joined_r0x002dc288:
         DAT_005f19e8 = 1;
       }
       if (g_lmapScene[0x75] == 1) {
-        FUN_00201ce0(0x10002eb);
+        soundAllocateSpatialActor(0x10002eb);
       }
       if (g_lmapScene[0x75] == 5) {
         FUN_003d4ed8(0x1000237);
@@ -895,7 +895,7 @@ joined_r0x002dc288:
         FUN_003d4ed8(0x1000239);
       }
       if (g_lmapScene[0x75] == 0x36) {
-        FUN_00201ce0(0x10002ec);
+        soundAllocateSpatialActor(0x10002ec);
       }
       if (g_lmapScene[0x75] == 0x5a) {
         FUN_0027376c(3);

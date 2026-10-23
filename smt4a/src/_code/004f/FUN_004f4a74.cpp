@@ -130,7 +130,7 @@ unsigned int FUN_004f4a74(unsigned int *param_1,int param_2)
       FUN_001631d0(param_1[3],0);
       param_1[3] = 0;
       if (uVar3 < 3) {
-        FUN_004f479c(param_1,param_2,*(unsigned int *)(param_2 + 0x7c),uVar3 & 0xffff);
+        btlCreateCameraEditor(param_1,param_2,*(unsigned int *)(param_2 + 0x7c),uVar3 & 0xffff);
         uVar2 = 8;
         break;
       }

@@ -8,6 +8,7 @@
 #define ASDSDK_SOURCE_SYS_FILE_ASDFILE_H
 
 #include "common.h"
+#include <stddef.h>
 
 #define ASD_FILE_PATH_LEN 0x100
 
@@ -36,8 +37,14 @@ typedef struct AsdFileRequest {
     /* 0x134 */ struct AsdFileRequest *onDoneArg;        /* what onDone gets (the request itself if NULL) */
     /* 0x138 */ void (*onOpen)(void *stream);            /* called with the open file before it is read */
     /* 0x13c */ struct AsdFileRequest *next;
-    /* 0x140 */ struct AsdFileRequest *prev;
+    /* 0x140 */ union {
+        struct AsdFileRequest *prev;
+        s32 readResult; /* Apocalypse hash-pack completion status. */
+    };
 } AsdFileRequest;
+typedef char AsdFileRequestReadResultOffset[
+    offsetof(AsdFileRequest, readResult) == 0x140 &&
+    sizeof(AsdFileRequest) == 0x144 ? 1 : -1];
 
 /* A registered entry: a caller-supplied 0x14c-byte record kept in a doubly linked list. */
 typedef struct AsdFileEntry {

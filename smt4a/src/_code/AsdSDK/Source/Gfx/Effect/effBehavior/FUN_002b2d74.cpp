@@ -1,69 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b2d74` (_code @ 0x2b2d74, 0x14c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Canonical vector fields use VFP zero stores; retail clears weights redundantly, and allocation/pointer scheduling differs. */
+#include "shard/W5_W5Match2_EffectBehaviorQuery.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/Effect/EffectBehaviorBlock.h"
 
 extern "C" {
+extern EffectBehaviorEntry DAT_005c1d60[];
+void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 tag, u32 mode);
+void *rt_memcpy(void *destination, const void *source, u32 size);
 
-int memAlloc(int, int, int, int, int, int);
-int rt_memcpy(...);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: rt_memcpy. */
-
-
-unsigned short * FUN_002b2d74(int param_1,int param_2,int param_3)
-
+/* Allocates one behavior, its value storage and two parameter copies, then resets the two positions. */
+EffectBehaviorBlock *FUN_002b2d74(s32 type, s32 count, const EffectBehaviorParameters *source)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned int *puVar2;
-  unsigned short *puVar3;
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 * 0x14 + 0x5c1d6c);
-  temp_v1 = param_2 * *(int *)(param_3 + 0xc0) * *(int *)(param_3 + 0xc4) + param_2;
-  puVar1 = (unsigned short *)0x10000;
-  memAlloc(0x10000,0x100,0,
-               *(int *)(param_1 * 0x14 + 0x5c1d68) * param_2 + temp_v1 * 0x28 + temp_v0 * 2 + 0x30,0x10,
-               1);
-  puVar3 = puVar1 + 0x18 + temp_v1 * 0x14;
-  *(unsigned short **)(puVar1 + 0xc) = puVar1 + 0x18;
-  *(int *)(puVar1 + 0x12) = (int)puVar3 + temp_v0;
-  *(int *)(puVar1 + 0xe) = (int)puVar3 + temp_v0 + temp_v0;
-  *(unsigned short **)(puVar1 + 0x10) = puVar3;
-  *puVar1 = (short)param_1;
-  *(int *)(puVar1 + 2) = param_2;
-  *(int *)(puVar1 + 4) = temp_v1;
-  *(unsigned int *)(puVar1 + 6) = 0;
-  *(unsigned int *)(puVar1 + 8) = 0;
-  *(unsigned int *)(puVar1 + 10) = 0;
-  *(unsigned short **)(puVar1 + 0x14) = puVar1;
-  rt_memcpy(puVar3,param_3,temp_v0);
-  rt_memcpy(*(unsigned int *)(puVar1 + 0x12),param_3,temp_v0);
-  puVar2 = *(unsigned int **)(puVar1 + 0x10);
-  *puVar2 = 0;
-  puVar2[1] = 0;
-  puVar2[2] = 0;
-  puVar2[3] = 0;
-  puVar2[3] = 0x3f800000;
-  puVar2[4] = 0;
-  puVar2[5] = 0;
-  puVar2[6] = 0;
-  puVar2[7] = 0;
-  puVar2[7] = 0x3f800000;
-  if (*(char *)(puVar2 + 0x2f) != '\0') {
-    *(unsigned int *)(puVar1 + 6) = *(unsigned int *)(puVar1 + 6) | 1;
-  }
-  if (param_1 == 0xc || param_1 == 0xd) {
-    *(unsigned int *)(puVar1 + 6) = *(unsigned int *)(puVar1 + 6) | 2;
-  }
-  return puVar1;
+    s32 parameterSize = DAT_005c1d60[type].storage.parameterSize;
+    s32 valueCount = count * (source->rows * source->columns) + count;
+    s32 valueBytes = valueCount * 0x28;
+    s32 size = DAT_005c1d60[type].storage.elementSize * count + valueBytes + parameterSize * 2 + 0x30;
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Effect\\effBehavior.cpp", 0x1093);
+    EffectBehaviorBlock *behavior = (EffectBehaviorBlock *)memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
+    u8 *values = (u8 *)(behavior + 1);
+    EffectBehaviorParameters *parameters = (EffectBehaviorParameters *)(values + valueBytes);
+    behavior->elements = values;
+    behavior->initialParameters = (EffectBehaviorParameters *)((u8 *)parameters + parameterSize);
+    behavior->workspace = (u8 *)behavior->initialParameters + parameterSize;
+    behavior->parameters = parameters;
+    behavior->type = type;
+    behavior->count = count;
+    behavior->elementCount = valueCount;
+    behavior->flags = 0;
+    behavior->state = 0;
+    behavior->elapsed = 0.0f;
+    behavior->owner = behavior;
+    rt_memcpy(parameters, source, parameterSize);
+    rt_memcpy(behavior->initialParameters, source, parameterSize);
+    parameters = behavior->parameters;
+    parameters->vectors[0].x = 0.0f;
+    parameters->vectors[0].y = 0.0f;
+    parameters->vectors[0].z = 0.0f;
+    parameters->vectors[0].w = 1.0f;
+    parameters->vectors[1].x = 0.0f;
+    parameters->vectors[1].y = 0.0f;
+    parameters->vectors[1].z = 0.0f;
+    parameters->vectors[1].w = 1.0f;
+    if (parameters->enabled != 0) {
+        behavior->flags |= 1;
+    }
+    if (type == 12 || type == 13) {
+        behavior->flags |= 2;
+    }
+    return behavior;
 }
-
-} /* extern "C" */
+}

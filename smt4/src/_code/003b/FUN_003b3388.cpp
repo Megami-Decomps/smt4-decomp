@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002b0750(...);
 int pairSetHalves(...);
 int effectRenderTransformedInstance(...);
-int FUN_002be370(...);
+int itemDrawCategoryBadge(...);
 int FUN_002be650(...);
 int vec2GetXInt(...);
 int efctSetSpeed(...);
@@ -79,7 +79,7 @@ extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_002be370. */
+/* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
@@ -631,7 +631,7 @@ LAB_003b4444:
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002be5a4(2,0x323232ff,temp_v23,(int)*(short *)(temp_v8 + 8));
         temp_v6 = FUN_002bf4f8(0x28,0x42);
-        FUN_002be370((int)(short)*piVar13,
+        itemDrawCategoryBadge((int)(short)*piVar13,
                      (int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v6 + 8) + temp_v5,
                      (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v6 + 10) + param_3,0x6f,0);
         temp_v6 = FUN_002bf4f8(0x28,0x46);

@@ -1,98 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e600c` (_code @ 0x3e600c, 0x174 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The offer pair loads as LDM; offer-copy and item-count/final-state registers differ. */
+#include "gamedata/DataTable.h"
+#include "script/scrScriptProcess.h"
 
+struct ItemExchangeOffer {
+    u32 key;
+    u32 first;
+    u32 second;
+};
+struct ItemExchangeWork {
+    u32 unk00;
+    s32 state;
+    s32 timer;
+    s32 previousState;
+    void *screen;
+    void *scriptResource;
+    ScriptRunState *script;
+    u32 unk1C;
+    u32 key;
+    ItemExchangeOffer offers[3];
+};
 extern "C" {
+s32 loadSlotIsLoaded(u32 slot);
+ScriptRunState *FUN_00275bc8(void *resource, void *screen);
+u32 FUN_001ba3d4(u32 item);
+void FUN_00359974(s32 field, u32 value, u32 color, s32 flags);
+void screenStartOrClear(void *screen, s32 entry);
 
-int FUN_00275bc8(int, unsigned int);
-int FUN_00359974(int, unsigned int, unsigned int, int);
-int screenStartOrClear(unsigned int, int);
-
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int FUN_001ba3d4(unsigned int);
-/* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00359974. */
-/* Supplied declaration required: screenStartOrClear. */
-extern int loadSlotIsLoaded(unsigned int);
-
-
-void FUN_003e600c(int param_1)
-
+/* Starts the loaded exchange script, collects up to three offers and publishes the three held-item counts. */
+void FUN_003e600c(ItemExchangeWork *work)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int *puVar10;
-  int temp_v9;
-  unsigned int temp_v10;
-  unsigned char temp_v11;
-  
-  temp_v11 = *(int *)(param_1 + 0x10) != 0;
-  temp_v0 = 0;
-  if (temp_v11) {
-    temp_v0 = *(int *)(param_1 + 0x14);
-  }
-  if ((temp_v11 && temp_v0 != 0) && (temp_v0 = loadSlotIsLoaded(0x4f), temp_v0 != 0)) {
-    temp_v0 = *(int *)(param_1 + 0x14);
-    FUN_00275bc8(temp_v0,*(unsigned int *)(param_1 + 0x10));
-    *(int *)(param_1 + 0x18) = temp_v0;
-    *(unsigned int *)(temp_v0 + 0x108) = 2;
-    temp_v8 = *(unsigned int *)(param_1 + 0x20);
-    temp_v1 = dataTableGet(0x4f,0);
-    temp_v0 = dataTableGetEntries();
-    if (temp_v0 != 0) {
-      temp_v2 = dataTableGetCount(temp_v1);
-      *(unsigned int *)(param_1 + 0x24) = 0;
-      *(unsigned int *)(param_1 + 0x28) = 0;
-      *(unsigned int *)(param_1 + 0x2c) = 0;
-      *(unsigned int *)(param_1 + 0x30) = 0;
-      *(unsigned int *)(param_1 + 0x34) = 0;
-      *(unsigned int *)(param_1 + 0x38) = 0;
-      *(unsigned int *)(param_1 + 0x3c) = 0;
-      *(unsigned int *)(param_1 + 0x40) = 0;
-      temp_v3 = 0;
-      *(unsigned int *)(param_1 + 0x44) = 0;
-      temp_v9 = 0;
-      if (0 < temp_v2) {
-        do {
-          puVar10 = (unsigned int *)(temp_v0 + temp_v3 * 0xc);
-          temp_v7 = *puVar10;
-          temp_v10 = puVar10[1];
-          temp_v6 = temp_v9;
-          if ((temp_v7 & 0xffff) == temp_v8) {
-            temp_v6 = temp_v9 + 1;
-            temp_v9 = param_1 + temp_v9 * 0xc;
-            *(unsigned int *)(temp_v9 + 0x2c) = puVar10[2];
-            *(unsigned int *)(temp_v9 + 0x24) = temp_v7;
-            *(unsigned int *)(temp_v9 + 0x28) = temp_v10;
-            if (temp_v6 >= 3) break;
-          }
-          temp_v3 = temp_v3 + 1;
-          temp_v9 = temp_v6;
-        } while (temp_v3 < temp_v2);
-      }
+    if (work->screen != NULL && work->scriptResource != NULL && loadSlotIsLoaded(0x4F) != 0) {
+        work->script = FUN_00275bc8(work->scriptResource, work->screen);
+        work->script->mode = 2;
+        u32 key = work->key;
+        void *table = dataTableGet(0x4F, 0);
+        ItemExchangeOffer *records = (ItemExchangeOffer *)dataTableGetEntries(table);
+        if (records != NULL) {
+            s32 count = dataTableGetCount(table);
+            for (s32 index = 0; index < 3; ++index) {
+                work->offers[index].key = 0;
+                work->offers[index].first = 0;
+                work->offers[index].second = 0;
+            }
+            s32 matches = 0;
+            for (s32 index = 0; index < count; ++index) {
+                ItemExchangeOffer offer = records[index];
+                if ((offer.key & 0xFFFF) == key) {
+                    work->offers[matches] = offer;
+                    ++matches;
+                    if (matches >= 3) {
+                        break;
+                    }
+                }
+            }
+        }
+        u32 first = FUN_001ba3d4(0x7C4);
+        u32 second = FUN_001ba3d4(0x7C5);
+        u32 third = FUN_001ba3d4(0x7C6);
+        FUN_00359974(0x18, first, 0xFFFFFFFF, 0);
+        FUN_00359974(0x19, second, 0xFFFFFFFF, 0);
+        FUN_00359974(0x1A, third, 0xFFFFFFFF, 0);
+        screenStartOrClear(work->screen, 0x15);
+        work->previousState = work->state;
+        work->state = 3;
+        work->timer = 0;
     }
-    temp_v1 = FUN_001ba3d4(0x7c4);
-    temp_v4 = FUN_001ba3d4(0x7c5);
-    temp_v5 = FUN_001ba3d4(0x7c6);
-    FUN_00359974(0x18,temp_v1,0xffffffff,0);
-    FUN_00359974(0x19,temp_v4,0xffffffff,0);
-    FUN_00359974(0x1a,temp_v5,0xffffffff,0);
-    screenStartOrClear(*(unsigned int *)(param_1 + 0x10),0x15);
-    *(unsigned int *)(param_1 + 0xc) = *(unsigned int *)(param_1 + 4);
-    *(unsigned int *)(param_1 + 4) = 3;
-    *(unsigned int *)(param_1 + 8) = 0;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -15,7 +15,7 @@ int FUN_00298dc8(int);
 int libc_strcpy(...);
 int gameFlagIsSet(void);
 int FUN_002dfe08(...);
-int FUN_002eaec0(int, unsigned char [20]);
+int cameraGetDistancePreset(int, unsigned char [20]);
 int contentEntryGet(...);
 int dataTable2fSub1GetCount(void);
 int dataTable2fSub2GetCount(void);
@@ -82,7 +82,7 @@ extern unsigned int FUN_002df80c(int);
 /* Supplied declaration required: FUN_002dfe08. */
 extern unsigned int FUN_002e0164(int);
 extern unsigned int FUN_002eac34(int);
-/* Supplied declaration required: FUN_002eaec0. */
+/* Supplied declaration required: cameraGetDistancePreset. */
 extern int categoryReturnsZero(void);
 extern int FUN_002f3614(int);
 /* Supplied declaration required: contentEntryGet. */
@@ -442,7 +442,7 @@ LAB_0027bd40:
         VectorSignedToFloat((int)*(short *)((int)puVar2 + 0x1a),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)(short)puVar2[7],(unsigned char)(in_fpscr >> 0x16) & 3);
         puVar13 = temp_v26;
-        FUN_002eaec0((int)*(char *)((int)puVar2 + 0x1e),temp_v27);
+        cameraGetDistancePreset((int)*(char *)((int)puVar2 + 0x1e),temp_v27);
         temp_v10 = (int)*(char *)((int)puVar2 + 0x1f);
         temp_v2 = (int)*(char *)((int)puVar2 + 0x11);
         if (temp_v1 != 1) {

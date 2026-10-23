@@ -1,65 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027522c` (_code @ 0x27522c, 0x128 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: visibility flag registers and zero/one VFP registers differ; motion resource comparison retains its pointer. */
+#include "map/MapObjects.h"
+#include "map/mapDepart.h"
+#include "shard/W6_W6Match3_NodeEnable.h"
 
 extern "C" {
+extern MapObjectWork *g_mapObj;
+extern GameState g_gameState;
+void nodeSetTranslation(NodeEnableResource *, s32, const MapVector *);
+void FUN_0028c618(NodeEnableResource *, s32, f32, f32, f32);
+void modelSelectPrimaryMotion(NodeEnableResource *, u32, f32);
+void FUN_0029bb14(NodeEnableResource *, f32);
 
-int FUN_0028c618(unsigned int, int);
-int nodeSetTranslation(unsigned int, int, int);
-int FUN_0029bb14(unsigned int);
-int modelSelectPrimaryMotion(unsigned int);
-
-extern int g_mapObj; /* 0x447e70 */
-extern unsigned char g_gameState; /* 0x49f91c */
-
-/* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: FUN_0029bb14. */
-/* Supplied declaration required: modelSelectPrimaryMotion. */
-
-
+// Synchronize visible map-object models with their pending position and motion changes.
 void FUN_0027522c(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = 0;
-  do {
-    temp_v2 = g_mapObj + temp_v1 * 0x48;
-    if (*(char *)(temp_v2 + 0x14) != '\0') {
-      puVar2 = *(unsigned int **)(temp_v2 + 0x3c);
-      temp_v0 = *puVar2;
-      if ((*(signed char *)((unsigned char *)&g_gameState + 0x22)) != '\0') {
-        if ((temp_v0 & 2) == 0) {
-          *puVar2 = temp_v0 | 2;
-          *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 0;
+    // The shared byte padding begins unaligned, so keep this typed state payload local.
+    struct ObjectStateView {
+        u8 active;
+        u8 changed;
+        u8 positionChanged;
+        u8 unk03;
+        MapVector position;
+        u8 unk10[0xC];
+        f32 heading;
+        u32 motion;
+        u8 unk24[4];
+        NodeEnableNode *node;
+        u8 unk2C[8];
+    };
+    struct ObjectView { u8 prefix[0x14]; ObjectStateView state; };
+    struct MotionView { u8 prefix[0x38]; u32 motion; };
+    for (s32 i = 0; i < 24; ++i) {
+        ObjectStateView *object = &reinterpret_cast<ObjectView *>(g_mapObj)[i].state;
+        if (object->active) {
+            NodeEnableNode *node = object->node;
+            if (g_gameState.controllerFlags.mapRangeModelsHidden) {
+                if ((node->flags & 2) == 0) {
+                    node->flags |= 2;
+                    node->resource->target->enabled = 0;
+                }
+            } else {
+                if (node->flags & 2) {
+                    node->flags &= ~2;
+                    node->resource->target->enabled = 1;
+                }
+                if (object->changed) {
+                    if (object->positionChanged) {
+                        nodeSetTranslation(object->node->resource, 0, &object->position);
+                        FUN_0028c618(object->node->resource, 0, 0.0f, object->heading, 0.0f);
+                    }
+                    if (reinterpret_cast<MotionView *>(object->node->resource)->motion != object->motion) {
+                        modelSelectPrimaryMotion(object->node->resource, object->motion, 0.0f);
+                        FUN_0029bb14(object->node->resource, 1.0f);
+                    }
+                    object->changed = 0;
+                }
+            }
         }
-      }
-      else {
-        if ((temp_v0 & 2) != 0) {
-          *puVar2 = temp_v0 & 0xfffffffd;
-          *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 1;
-        }
-        if (*(char *)(temp_v2 + 0x15) != '\0') {
-          if (*(char *)(temp_v2 + 0x16) != '\0') {
-            nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v2 + 0x3c) + 8),0,temp_v2 + 0x18);
-            FUN_0028c618(*(unsigned int *)(*(int *)(temp_v2 + 0x3c) + 8),0);
-          }
-          if (*(int *)(*(int *)(*(int *)(temp_v2 + 0x3c) + 8) + 0x38) != *(int *)(temp_v2 + 0x34)) {
-            modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(temp_v2 + 0x3c) + 8));
-            FUN_0029bb14(*(unsigned int *)(*(int *)(temp_v2 + 0x3c) + 8));
-          }
-          *(unsigned char *)(temp_v2 + 0x15) = 0;
-        }
-      }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x18);
-  return;
 }
-
-} /* extern "C" */
+}

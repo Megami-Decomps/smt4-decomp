@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00241d84(void);
+int gauntletAppSortMenuEntries(void);
 int appCheckPurchaseRequirements(void);
 int FUN_00295eb0(int, int, int);
 int FUN_0029f848(int, unsigned int, int, int, int, int);
@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_00241d84. */
+/* Supplied declaration required: gauntletAppSortMenuEntries. */
 /* Supplied declaration required: FUN_00248738. */
 /* Supplied declaration required: appCheckPurchaseRequirements. */
 extern int flagBitIsSet(unsigned int);
@@ -58,7 +58,7 @@ unsigned int FUN_00248738(int param_1,unsigned int param_2)
         *(unsigned int *)(param_1 + 0x74) = 0x76;
         *(unsigned int *)(param_1 + 0x2a8) = 1;
         FUN_0029f848(param_1 + 0x10,*(unsigned int *)(param_1 + 0x2a8),10,1,1,1);
-        FUN_00241d84();
+        gauntletAppSortMenuEntries();
         break;
       }
       temp_v2 = 1;
@@ -75,7 +75,7 @@ unsigned int FUN_00248738(int param_1,unsigned int param_2)
       } while (temp_v2 < 0x8d);
     }
     FUN_0029f848(param_1 + 0x10,*(unsigned int *)(param_1 + 0x2a8),10,1,1,1);
-    FUN_00241d84();
+    gauntletAppSortMenuEntries();
     break;
   case 1:
     temp_v2 = 1;

@@ -11,7 +11,7 @@ int FUN_0024b660(...);
 int randomAdvanceShiftRegister(...);
 int FUN_0024b7bc(int, float *);
 int FUN_0024b830(...);
-int FUN_002a2c7c(void);
+int gfxQuaternionWorkspaceBuildMatrix(void);
 int FUN_002b70cc(void);
 int VectorSignedToFloat(double, int);
 int VectorUnsignedToFloat(...);
@@ -81,7 +81,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024b7bc. */
 /* Supplied declaration required: FUN_0024b830. */
 extern int effGetFrameCounter(void);
-/* Supplied declaration required: FUN_002a2c7c. */
+/* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -143,7 +143,7 @@ void FUN_002dd168(int param_1)
     temp_v28 = (unsigned int)*(unsigned char *)(pfVar9 + 0x27);
     temp_v17 = (unsigned long long)(unsigned int)pfVar9[0x35] << 0x20;
     DAT_004ea91c = temp_v9;
-    FUN_002a2c7c();
+    gfxQuaternionWorkspaceBuildMatrix();
     if ((temp_v27 != 0.0f) && (*(int *)(param_1 + 0x10) >= (int)temp_v27)) {
       temp_v24 = 0.0f;
       temp_v1 = 0;

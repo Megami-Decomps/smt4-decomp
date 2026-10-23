@@ -21,7 +21,7 @@ int FUN_0029efa8(...);
 int FUN_0029efc0(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002bdf94(...);
-int FUN_002be370(...);
+int itemDrawCategoryBadge(...);
 int FUN_002be5a4(...);
 int FUN_002be650(...);
 int vec2GetXInt(...);
@@ -80,7 +80,7 @@ extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be370. */
+/* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
@@ -225,7 +225,7 @@ LAB_001ccb9c:
         temp_v18 = temp_v8;
       }
       temp_v6 = FUN_002bf4f8(0x1a,0x464);
-      FUN_002be370((short)(int)puVar18,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v7 + 8) + temp_v1,
+      itemDrawCategoryBadge((short)(int)puVar18,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v7 + 8) + temp_v1,
                    (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v6 + 10) + temp_v2,0xb5,0);
       if (temp_v8 != 0) {
         temp_v6 = FUN_002bf4f8(0x1a,0x465);
@@ -295,7 +295,7 @@ LAB_001ccb9c:
         }
       }
       temp_v12 = FUN_002bf4f8(0x1a,0x475);
-      FUN_002be370((int)(short)(int)temp_v17,
+      itemDrawCategoryBadge((int)(short)(int)temp_v17,
                    (int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v1,
                    (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,0xc9,0);
     }

@@ -1,108 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001524cc` (_code @ 0x1524cc, 0x144 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stereo-builder stack argument stores and matrix-copy destination address lifetimes differ; 86 versus retail 83 instructions. */
+#include "gfx/CameraMatrixCache.h"
 
 extern "C" {
+void FUN_0016fd04(void *parameters, f32 stereoParameter, f32 stereoScale, Matrix44 *projection, Matrix34Data *view, Matrix44 *secondaryProjection, Matrix34Data *secondaryView, s32 pivot, s32 useHardwareStereo);
+void FUN_00162330(Matrix34Data *destination, const Matrix34Data *source);
+void nn_math_ARMv6_MTX44TransposeAsm(Matrix44 *destination, const Matrix44 *source);
+void memCopyWords(const void *source, void *destination, u32 bytes);
 
-int FUN_00162330(char *, char *);
-int memCopyWords(char *, char *, int);
-int FUN_0016fd04(char *, char *, char *, char *, char *, int, int);
-int nn_math_ARMv6_MTX44TransposeAsm(char *, char *);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_00162330. */
-/* Supplied declaration required: memCopyWords. */
-/* Supplied declaration required: FUN_0016fd04. */
-/* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
-
-
-void FUN_001524cc(char *param_1)
-
+// Rebuild stereo view/projection matrices and their GPU-facing transposed caches.
+void FUN_001524cc(CameraMatrixCache *camera)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  if (*param_1 != '\0') {
-    FUN_0016fd04(param_1 + 0x4a0,param_1 + 0x248,param_1 + 0x1d8,param_1 + 0x2f8,param_1 + 0x288,1,1
-                );
-    FUN_00162330(param_1 + 0x338,param_1 + 0x1d8);
-    nn_math_ARMv6_MTX44TransposeAsm(param_1 + 0x3a8,param_1 + 0x248);
-    FUN_00162330(param_1 + 1000,param_1 + 0x288);
-    nn_math_ARMv6_MTX44TransposeAsm(param_1 + 0x458,param_1 + 0x2f8);
-    memCopyWords(param_1 + 0x1d8,param_1 + 0x208,0x30);
-    temp_v0 = 0;
-    temp_v1 = 0x3f800000;
-    param_1[0x238] = '\0';
-    param_1[0x239] = '\0';
-    param_1[0x23a] = '\0';
-    param_1[0x23b] = '\0';
-    param_1[0x23c] = '\0';
-    param_1[0x23d] = '\0';
-    param_1[0x23e] = '\0';
-    param_1[0x23f] = '\0';
-    param_1[0x240] = '\0';
-    param_1[0x241] = '\0';
-    param_1[0x242] = '\0';
-    param_1[0x243] = '\0';
-    param_1[0x244] = '\0';
-    param_1[0x245] = '\0';
-    param_1[0x246] = -0x80;
-    param_1[0x247] = '?';
-    *(unsigned int *)(param_1 + 0x368) = *(unsigned int *)(param_1 + 0x208);
-    *(unsigned int *)(param_1 + 0x36c) = *(unsigned int *)(param_1 + 0x20c);
-    *(unsigned int *)(param_1 + 0x370) = *(unsigned int *)(param_1 + 0x210);
-    *(unsigned int *)(param_1 + 0x374) = *(unsigned int *)(param_1 + 0x214);
-    *(unsigned int *)(param_1 + 0x378) = *(unsigned int *)(param_1 + 0x218);
-    *(unsigned int *)(param_1 + 0x37c) = *(unsigned int *)(param_1 + 0x21c);
-    *(unsigned int *)(param_1 + 0x380) = *(unsigned int *)(param_1 + 0x220);
-    *(unsigned int *)(param_1 + 900) = *(unsigned int *)(param_1 + 0x224);
-    *(unsigned int *)(param_1 + 0x388) = *(unsigned int *)(param_1 + 0x228);
-    *(unsigned int *)(param_1 + 0x38c) = *(unsigned int *)(param_1 + 0x22c);
-    *(unsigned int *)(param_1 + 0x390) = *(unsigned int *)(param_1 + 0x230);
-    *(unsigned int *)(param_1 + 0x394) = *(unsigned int *)(param_1 + 0x234);
-    *(unsigned int *)(param_1 + 0x398) = *(unsigned int *)(param_1 + 0x238);
-    *(unsigned int *)(param_1 + 0x39c) = *(unsigned int *)(param_1 + 0x23c);
-    param_1[0x3a0] = '\0';
-    param_1[0x3a1] = '\0';
-    param_1[0x3a2] = '\0';
-    param_1[0x3a3] = '\0';
-    param_1[0x3a4] = '\0';
-    param_1[0x3a5] = '\0';
-    param_1[0x3a6] = -0x80;
-    param_1[0x3a7] = '?';
-    nn_math_ARMv6_MTX44TransposeAsm(param_1 + 0x368,param_1 + 0x368);
-    memCopyWords(param_1 + 0x288,param_1 + 0x2b8,0x30);
-    *(unsigned int *)(param_1 + 0x2e8) = temp_v0;
-    *(unsigned int *)(param_1 + 0x2ec) = temp_v0;
-    *(unsigned int *)(param_1 + 0x2f0) = temp_v0;
-    *(unsigned int *)(param_1 + 0x2f4) = temp_v1;
-    *(unsigned int *)(param_1 + 0x418) = *(unsigned int *)(param_1 + 0x2b8);
-    *(unsigned int *)(param_1 + 0x41c) = *(unsigned int *)(param_1 + 700);
-    *(unsigned int *)(param_1 + 0x420) = *(unsigned int *)(param_1 + 0x2c0);
-    *(unsigned int *)(param_1 + 0x424) = *(unsigned int *)(param_1 + 0x2c4);
-    *(unsigned int *)(param_1 + 0x428) = *(unsigned int *)(param_1 + 0x2c8);
-    *(unsigned int *)(param_1 + 0x42c) = *(unsigned int *)(param_1 + 0x2cc);
-    *(unsigned int *)(param_1 + 0x430) = *(unsigned int *)(param_1 + 0x2d0);
-    *(unsigned int *)(param_1 + 0x434) = *(unsigned int *)(param_1 + 0x2d4);
-    *(unsigned int *)(param_1 + 0x438) = *(unsigned int *)(param_1 + 0x2d8);
-    *(unsigned int *)(param_1 + 0x43c) = *(unsigned int *)(param_1 + 0x2dc);
-    *(unsigned int *)(param_1 + 0x440) = *(unsigned int *)(param_1 + 0x2e0);
-    *(unsigned int *)(param_1 + 0x444) = *(unsigned int *)(param_1 + 0x2e4);
-    *(unsigned int *)(param_1 + 0x448) = *(unsigned int *)(param_1 + 0x2e8);
-    *(unsigned int *)(param_1 + 0x44c) = *(unsigned int *)(param_1 + 0x2ec);
-    *(unsigned int *)(param_1 + 0x450) = *(unsigned int *)(param_1 + 0x2f0);
-    *(unsigned int *)(param_1 + 0x454) = *(unsigned int *)(param_1 + 0x2f4);
-    nn_math_ARMv6_MTX44TransposeAsm(param_1 + 0x418,param_1 + 0x418);
-    return;
-  }
-  return;
+    // The stereo builder also reads one float beyond the documented shared cache prefix.
+    struct StereoCameraView { CameraMatrixCache cache; f32 stereoParameter; };
+    typedef char StereoCameraViewOffsetCheck[offsetof(StereoCameraView, stereoParameter) == 0x508 ? 1 : -1];
+    if (!camera->enabled)
+        return;
+    const StereoCameraView *stereo = reinterpret_cast<const StereoCameraView *>(camera);
+    FUN_0016fd04(camera->parameters, stereo->stereoParameter, camera->stereoScale,
+                  &camera->projection, &camera->view, &camera->secondaryProjection, &camera->secondaryView, 1, 1);
+    FUN_00162330(&camera->viewNormals, &camera->view);
+    nn_math_ARMv6_MTX44TransposeAsm(&camera->projectionTransposed, &camera->projection);
+    FUN_00162330(&camera->secondaryNormals, &camera->secondaryView);
+    nn_math_ARMv6_MTX44TransposeAsm(&camera->secondaryProjectionTransposed, &camera->secondaryProjection);
+    memCopyWords(&camera->view, &camera->viewExpanded, sizeof(Matrix34Data));
+    camera->viewExpanded.values[12] = 0.0f;
+    camera->viewExpanded.values[13] = 0.0f;
+    camera->viewExpanded.values[14] = 0.0f;
+    camera->viewExpanded.values[15] = 1.0f;
+    camera->viewTransposed = camera->viewExpanded;
+    nn_math_ARMv6_MTX44TransposeAsm(&camera->viewTransposed, &camera->viewTransposed);
+    memCopyWords(&camera->secondaryView, &camera->secondaryExpanded, sizeof(Matrix34Data));
+    camera->secondaryExpanded.values[12] = 0.0f;
+    camera->secondaryExpanded.values[13] = 0.0f;
+    camera->secondaryExpanded.values[14] = 0.0f;
+    camera->secondaryExpanded.values[15] = 1.0f;
+    camera->secondaryTransposed = camera->secondaryExpanded;
+    nn_math_ARMv6_MTX44TransposeAsm(&camera->secondaryTransposed, &camera->secondaryTransposed);
 }
-
-} /* extern "C" */
+}

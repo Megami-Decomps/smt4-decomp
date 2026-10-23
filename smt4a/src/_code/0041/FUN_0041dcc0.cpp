@@ -1,115 +1,86 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041dcc0` (_code @ 0x41dcc0, 0x1a8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: operation-start block placement and saved-profile copy/flag argument registers differ. */
+#include "saveLoadUI/SaveLoadControllerA.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
+extern SaveLoadUIBaseA g_saveLoadUIBase;
+s32 saveLoadThreadHasResult(void);
+s32 scrRunOpcodesStub(ScriptRunState *script);
+s32 byteArr5Get3(void);
+s32 byteTripleGetV0(void);
+void gameDataAddHomeButtonHold(u32 bits);
+void gameDataBlocksReleaseHold(u32 bits);
+void messageMainSetFlag(s32 enabled);
+void sysPlaySe(s32 sound);
+void *gameDataBlocksGetSaveData(void);
+void rt_memcpy_w(void *output, const void *input, u32 size);
+void scrScriptProcessStartEntry(ScriptRunState *script, s32 entry);
+void saveLoadProcessCreate(s32 slot, s32 mode);
 
-int gameDataBlocksReleaseHold(int);
-int sysPlaySe(int);
-int scrRunOpcodesStub(unsigned int);
-int scrScriptProcessStartEntry(unsigned int, int);
-int gameDataAddHomeButtonHold(void);
-int messageMainSetFlag(int);
-int saveLoadProcessCreate(int, int);
-int SBORROW4(int, int);
-int rt_memcpy_w(int, int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned char g_saveLoadUIBase; /* 0x588e14 */
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: gameDataBlocksReleaseHold. */
-extern int gameDataBlocksGetSaveData(void);
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: scrRunOpcodesStub. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: gameDataAddHomeButtonHold. */
-extern int saveLoadThreadHasResult(void);
-extern int byteTripleGetV0(void);
-/* Supplied declaration required: messageMainSetFlag. */
-extern int byteArr5Get3(void);
-/* Supplied declaration required: saveLoadProcessCreate. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_0041dcc0(int param_1)
-
+// Run a save operation, maintain the HOME-button hold and finish its success/failure script.
+void FUN_0041dcc0(SaveLoadControllerA *controller)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  
-  if (*(char *)(param_1 + 0xf) != '\0') {
-    temp_v0 = saveLoadThreadHasResult();
-    if ((temp_v0 == 0) && (temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x40)), temp_v0 == 2)) {
-      temp_v0 = byteArr5Get3();
-      if (temp_v0 != 0) {
-        g_saveLoadUIBase = 1;
-      }
-      else {
-        *(unsigned char *)(param_1 + 0x11) = 1;
-      }
+    union ProgressView {
+        SaveLoadControllerA base;
+        struct {
+            u8 unk000[0xe];
+            u8 readyToFinish;
+            u8 finishing;
+            u8 started;
+            u8 done;
+            u8 unk012[0x2e];
+            ScriptRunState *script;
+            u8 unk044[0x18];
+            u8 loading;
+            u8 unk05d[0xf];
+            u32 profiles[5][32];
+        } operation;
+        struct { u8 unk000[0x450]; s32 frame; } timing;
+    };
+    struct SaveProfileView { u8 unk00000[0x27044]; u32 profile[32]; };
+    // The elapsed-frame field lies beyond the canonical controller prefix.
+    ProgressView *work = reinterpret_cast<ProgressView *>(controller);
+    if (work->operation.finishing) {
+        if (!saveLoadThreadHasResult() && scrRunOpcodesStub(work->operation.script) == 2) {
+            if (byteArr5Get3())
+                g_saveLoadUIBase.unk00 = 1;
+            else
+                work->operation.done = 1;
+        }
+    } else if (work->operation.started) {
+        ++work->timing.frame;
+        if (saveLoadThreadHasResult()) {
+            if (work->operation.readyToFinish)
+                work->operation.finishing = 1;
+        } else {
+            scrRunOpcodesStub(work->operation.script);
+        }
+        if (byteTripleGetV0()) {
+            if (work->timing.frame <= 30)
+                gameDataAddHomeButtonHold(1);
+            else
+                gameDataBlocksReleaseHold(1);
+        }
+        if (byteTripleGetV0() && work->timing.frame > 30) {
+            messageMainSetFlag(1);
+            sysPlaySe(0xa0);
+            work->operation.finishing = 1;
+            if (byteArr5Get3()) {
+                gameDataBlocksReleaseHold(1);
+                const SaveProfileView *save = static_cast<const SaveProfileView *>(gameDataBlocksGetSaveData());
+                rt_memcpy_w(work->operation.profiles[controller->selectedSlot], save->profile, sizeof(save->profile));
+                controller->slotFlags[controller->selectedSlot] = 1;
+                scrScriptProcessStartEntry(work->operation.script, 5);
+            } else {
+                gameDataBlocksReleaseHold(1);
+                scrScriptProcessStartEntry(work->operation.script, 6);
+            }
+        }
+    } else if (!work->operation.loading) {
+        work->operation.started = 1;
+        saveLoadProcessCreate(controller->selectedSlot + 1, 0);
+        scrRunOpcodesStub(work->operation.script);
+        work->timing.frame = 0;
     }
-  }
-  else if (*(char *)(param_1 + 0x10) != '\0') {
-    *(int *)(param_1 + 0x450) = *(int *)(param_1 + 0x450) + 1;
-    temp_v0 = saveLoadThreadHasResult();
-    if (temp_v0 != 0) {
-      if (*(char *)(param_1 + 0xe) != '\0') {
-        *(unsigned char *)(param_1 + 0xf) = 1;
-      }
-    }
-    else {
-      scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x40));
-    }
-    temp_v0 = byteTripleGetV0();
-    if (temp_v0 != 0) {
-      if (*(int *)(param_1 + 0x450) < 0x1f) {
-        gameDataAddHomeButtonHold();
-      }
-      else {
-        gameDataBlocksReleaseHold(1);
-      }
-    }
-    temp_v0 = byteTripleGetV0();
-    temp_v2 = temp_v0 != 0;
-    temp_v0 = 0;
-    temp_v1 = 0;
-    if (temp_v2) {
-      temp_v1 = *(int *)(param_1 + 0x450);
-      temp_v0 = temp_v1 - 0x1e;
-    }
-    if ((temp_v2 && temp_v1 != 0x1e) && temp_v0 < 0 == (temp_v2 && SBORROW4(temp_v1,0x1e))) {
-      messageMainSetFlag(1);
-      sysPlaySe(0xa0);
-      *(unsigned char *)(param_1 + 0xf) = 1;
-      temp_v0 = byteArr5Get3();
-      if (temp_v0 != 0) {
-        gameDataBlocksReleaseHold(1);
-        temp_v0 = gameDataBlocksGetSaveData();
-        rt_memcpy_w(param_1 + *(int *)(param_1 + 0x2f8) * 0x80 + 0x6c,temp_v0 + 0x27044,0x80);
-        *(unsigned char *)(*(int *)(param_1 + 0x2f8) + param_1 + 0x2ec) = 1;
-        scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x40),5);
-        return;
-      }
-      gameDataBlocksReleaseHold(1);
-      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x40),6);
-      return;
-    }
-  }
-  else if (*(char *)(param_1 + 0x5c) == '\0') {
-    *(unsigned char *)(param_1 + 0x10) = 1;
-    saveLoadProcessCreate(*(int *)(param_1 + 0x2f8) + 1,0);
-    scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x40));
-    *(unsigned int *)(param_1 + 0x450) = 0;
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -1,102 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030f730` (_code @ 0x30f730, 0x190 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: bounds palette, quad coordinates and float height restored; registry-base retention and render-stack scheduling differ. */
+#include "camp/RenderCtx.h"
 
-extern "C" {
-
-int FUN_00296dc4(unsigned int, unsigned int);
-int FUN_002c1b64(int, int);
-
-typedef int romwright_code(...);
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp58; /* 0x58: local_58 */
-} void_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-extern int DAT_004c3224; /* 0x4c3224 */
-
-/* Supplied declaration required: FUN_00296dc4. */
-/* Supplied declaration required: FUN_002c1b64. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-
-
-void FUN_0030f730(void)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  int temp_v3;
-  unsigned int temp_v4 [4];
-  char acStack_48 [4];
-  char acStack_44 [4];
-  char acStack_40 [4];
-  unsigned int uStack_3c;
-  unsigned int temp_v5;
-  unsigned int uStack_34;
-  char acStack_30 [4];
-  unsigned int temp_v6;
-  
-  temp_v3 = g_titleScene;
-  temp_v4[0] = 0xff000000;
-  temp_v4[1] = 0xff0000;
-  temp_v4[2] = 0xffff0000;
-  temp_v4[3] = 0xff00;
-  acStack_48[0] = '\0';
-  acStack_48[1] = -1;
-  acStack_48[2] = '\0';
-  acStack_48[3] = -1;
-  acStack_44[0] = '\0';
-  acStack_44[1] = -1;
-  acStack_44[2] = -1;
-  acStack_44[3] = '\0';
-  acStack_40[0] = '\0';
-  acStack_40[1] = '\0';
-  acStack_40[2] = '\0';
-  acStack_40[3] = -0x80;
-  uStack_3c = 0x800000;
-  temp_v6 = 0xff8000;
-  temp_v5 = 0xff800000;
-  uStack_34 = 0x8000;
-  acStack_30[0] = '\0';
-  acStack_30[1] = -0x80;
-  acStack_30[2] = '\0';
-  acStack_30[3] = -1;
-  if (DAT_004c3224 != 0) {
-    temp_v0 = FUN_002c5d80(5,1);
-    piVar4 = (int *)(temp_v3 + 0x124c);
-    temp_v1 = *piVar4;
-    temp_v2 = piVar4[temp_v1 + 2];
-    *piVar4 = temp_v1 + 1;
-    piVar4[temp_v1 + 3] = temp_v0;
-    if (*(char *)(temp_v3 + 0x1264) != '\0' || temp_v2 != temp_v0) {
-      (**(romwright_code **)(temp_v3 + 0x1268))();
-      *(unsigned char *)(temp_v3 + 0x1264) = 0;
-    }
-    FUN_002c1b64(g_titleScene,0);
-    temp_v3 = 0;
-    if (temp_v3 < DAT_004c3224) {
-      do {
-        FUN_00296dc4(temp_v4[temp_v3 % 0xc] | 0x70,temp_v4[temp_v3 % 0xc] | 0x70);
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < DAT_004c3224);
-    }
-    temp_v3 = g_titleScene;
-    piVar4 = (int *)(g_titleScene + 0x124c);
-    temp_v0 = *piVar4;
-    temp_v1 = piVar4[temp_v0 + 2];
-    *piVar4 = temp_v0 - 1;
-    if (*(char *)(temp_v3 + 0x1264) != '\0' || temp_v1 != piVar4[temp_v0 + 1]) {
-      (**(romwright_code **)(temp_v3 + 0x1268))();
-      *(unsigned char *)(temp_v3 + 0x1264) = 0;
-    }
-  }
-  return;
+namespace {
+struct BoundsOverlayPalette { u32 colors[12]; };
+struct BoundsPaletteStorage {
+    u8 prefix[0x90];
+    BoundsOverlayPalette palette;
+};
+struct OverlayBounds {
+    f32 minimum[3];
+    f32 maximum[3];
+    u32 flags;
+};
+struct OverlayBoundsList {
+    OverlayBounds bounds[128];
+    s32 count;
+};
 }
+extern "C" {
+extern const BoundsPaletteStorage DAT_0040490c;
+extern OverlayBoundsList DAT_004c2424;
+extern RenderCtx *g_titleScene;
+u32 FUN_002c5d80(u32 mode, u32 option);
+void FUN_002c1b64(RenderCtx *context, u32 mode);
+void FUN_00296dc4(u32 color0, u32 color1, u32 color2, u32 color3,
+    f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
+    f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3);
 
-} /* extern "C" */
+// Draw the registered diagnostic bounds as translucent quads on an elevated horizontal plane.
+void FUN_0030f730(f32 height)
+{
+    BoundsOverlayPalette palette = DAT_0040490c.palette;
+    if (DAT_004c2424.count != 0) {
+        RenderCtx *context = g_titleScene;
+        u32 state = FUN_002c5d80(5, 1);
+        renderStackPush(&context->stackA, state);
+        FUN_002c1b64(g_titleScene, 0);
+        if (DAT_004c2424.count > 0) {
+            height += 100.0f;
+            for (s32 index = 0; index < DAT_004c2424.count; ++index) {
+                const OverlayBounds *bounds = &DAT_004c2424.bounds[index];
+                u32 color = palette.colors[index % 12] | 0x70;
+                FUN_00296dc4(color, color, color, color,
+                    bounds->minimum[0], height, bounds->minimum[2],
+                    bounds->minimum[0], height, bounds->maximum[2],
+                    bounds->maximum[0], height, bounds->minimum[2],
+                    bounds->maximum[0], height, bounds->maximum[2]);
+            }
+        }
+        renderStackPop(&g_titleScene->stackA);
+    }
+}
+}

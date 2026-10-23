@@ -1,94 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010bdb0` (_code @ 0x10bdb0, 0x108 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: config stores, color stores, self-relative addressing and VFP register allocation differ. */
+#include "AsdSDK/AsdSceneFog.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+void *asdMemoryAlloc(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
+AsdAllocator *asdMemoryGetDefaultAllocator();
+AsdFogObject *FUN_001204b8(const AsdFogCreateInfo *info, AsdAllocator *allocator);
+extern AsdSceneFogRegistry DAT_00464c00;
+extern const char DAT_00409488[];
 
-int asdMemoryAlloc(int, int, int, int, int);
-
-/* stack frame of void: 5 slot(s), 14 byte(s) */
-typedef struct {
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned char sp47; /* 0x47: local_47 */
-    unsigned char sp48; /* 0x48: local_48 */
-    unsigned int sp50; /* 0x50: local_50 */
-} void_stack;
-
-extern int DAT_00464c04; /* 0x464c04 */
-
-extern int FUN_001204b8(unsigned char *, unsigned int);
-extern unsigned int asdMemoryGetDefaultAllocator(void);
-/* Supplied declaration required: asdMemoryAlloc. */
-
-
-void FUN_0010bdb0(void)
-
+// Create the two scene fog channels with the engine's default color and range.
+void FUN_0010bdb0()
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar4;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned char temp_v9;
-  unsigned char temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int uStack_3c;
-  
-  temp_v2 = 0;
-  temp_v3 = 0x3e99999a;
-  temp_v4 = 0x3f000000;
-  temp_v5 = 0x3f800000;
-  temp_v8 = 0x41200000;
-  temp_v6 = 0x42c80000;
-  temp_v7 = 0x459c4000;
-  do {
-    puVar1 = (unsigned int *)0x100;
-    asdMemoryAlloc(0x100,0x100,0,0x10,1);
-    *puVar1 = 0;
-    puVar1[1] = 0;
-    puVar1[2] = 0;
-    puVar1[3] = 0;
-    *(char *)puVar1 = (char)temp_v2;
-    *(unsigned char *)((int)puVar1 + 1) = 0;
-    temp_v0 = asdMemoryGetDefaultAllocator();
-    temp_v9 = 1;
-    temp_v12 = 0;
-    uStack_3c = 1;
-    temp_v10 = 1;
-    temp_v11 = 0;
-    temp_v1 = FUN_001204b8(&temp_v9,temp_v0);
-    puVar1[1] = temp_v1;
-    temp_v1 = *(int *)(temp_v1 + 8);
-    puVar1[2] = temp_v1;
-    *(unsigned int *)(temp_v1 + 0xb4) = temp_v3;
-    *(unsigned int *)(temp_v1 + 0xb8) = temp_v3;
-    *(unsigned int *)(temp_v1 + 0xbc) = temp_v4;
-    *(unsigned int *)(temp_v1 + 0xc0) = temp_v5;
-    temp_v1 = *(int *)(puVar1[2] + 200);
-    if (temp_v1 != 0) {
-      puVar4 = (unsigned int *)(puVar1[2] + 200 + temp_v1);
+    for (s32 index = 0; index < 2; ++index) {
+        asdDebugTrace(DAT_00409488, 1477);
+        AsdSceneFog *fog = static_cast<AsdSceneFog *>(asdMemoryAlloc(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(AsdSceneFog), 1));
+        *reinterpret_cast<u32 *>(fog) = 0;
+        fog->object = NULL;
+        fog->resource = NULL;
+        fog->parameters = NULL;
+        fog->id = index;
+        fog->enabled = 0;
+        AsdAllocator *allocator = asdMemoryGetDefaultAllocator();
+        AsdFogCreateInfo info;
+        info.enabled = 1;
+        info.allocateResource = 1;
+        info.unk04 = 0;
+        info.unk08 = 0;
+        info.unk0C = 0;
+        fog->object = FUN_001204b8(&info, allocator);
+        fog->resource = fog->object->resource;
+        f32 *color = fog->resource->color;
+        color[0] = 0.3f;
+        color[1] = 0.3f;
+        color[2] = 0.5f;
+        color[3] = 1.0f;
+        fog->parameters = fog->resource->parameters();
+        fog->parameters->mode = 3;
+        fog->parameters->density = 10.0f;
+        fog->parameters->start = 100.0f;
+        fog->parameters->end = 5000.0f;
+        DAT_00464c00.entries[index] = fog;
     }
-    else {
-      puVar4 = (unsigned int *)0x0;
-    }
-    puVar1[3] = (unsigned int)puVar4;
-    *puVar4 = 3;
-    *(unsigned int *)(puVar1[3] + 0xc) = temp_v8;
-    *(unsigned int *)(puVar1[3] + 4) = temp_v6;
-    *(unsigned int *)(puVar1[3] + 8) = temp_v7;
-    *(unsigned int **)(DAT_00464c04 + temp_v2 * 4) = puVar1;
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 2);
-  return;
 }
-
-} /* extern "C" */
+}

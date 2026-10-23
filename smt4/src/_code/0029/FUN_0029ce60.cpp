@@ -7,7 +7,7 @@ extern "C" {
 int bitsetSetBit(unsigned char [72], int);
 int randomGetUpperSixBits(...);
 int unitRecalculateEffectiveStats(unsigned char [72]);
-int FUN_0029d770(unsigned int, unsigned char [72]);
+int unitInitializeFromSavedRecord(unsigned int, unsigned char [72]);
 int FUN_0029dc74(...);
 int dataTable06Sub1GetRecord(void);
 int devilGetRecord(void);
@@ -66,7 +66,7 @@ extern signed char DAT_0043d9b0; /* 0x43d9b0 */
 extern int flagBitIsSet(unsigned int);
 extern int FUN_002973ec(void);
 /* Supplied declaration required: unitRecalculateEffectiveStats. */
-/* Supplied declaration required: FUN_0029d770. */
+/* Supplied declaration required: unitInitializeFromSavedRecord. */
 /* Supplied declaration required: FUN_0029dc74. */
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
 extern int gameGetSlotTable(void);
@@ -213,7 +213,7 @@ LAB_0029cf80:
       }
     }
     else {
-      FUN_0029d770(temp_v44,temp_v20);
+      unitInitializeFromSavedRecord(temp_v44,temp_v20);
     }
   }
   else {

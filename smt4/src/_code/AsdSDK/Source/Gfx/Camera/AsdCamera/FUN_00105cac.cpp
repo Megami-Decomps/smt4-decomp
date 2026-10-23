@@ -1,60 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00105cac` (_code @ 0x105cac, 0x114 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: default look-at anchoring retains an extra saved register; active-camera and process-argument stores differ. */
+#include "gfx/CameraManager.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char DAT_004092c8[];
+// The retail symbol anchors the up vector; eye and target immediately precede it.
+extern const CameraDefaultVector DAT_004d493c[];
+extern CameraManagerIV g_asdCamera;
+void *asdMemAlloc(u32, u32, u32, u32, u32);
+void memClear(void *, u32);
+void FUN_002c2044(ManagedCameraIV *, s32);
+void FUN_002c1edc(ManagedCameraIV *, const CameraDefaultVector *, const CameraDefaultVector *, const CameraDefaultVector *);
+void FUN_002c1e30(ManagedCameraIV *, s32, f32, f32, f32, f32);
+void asdCameraFreeWork(void);
+void asdCameraTableRelease(void);
+u32 asdProcessCreateSimple(const char *, u32, s32, s32, void (*)(void), void (*)(void), CameraManagerWorkIV *);
 
-int FUN_002c1e30(int, int);
-int FUN_002c1edc(int, unsigned int *, unsigned int *);
-int FUN_002c2044(int, int);
-int memClear(void);
-int asdMemAlloc(int, int, int, int, int);
-int asdProcessCreateSimple(unsigned char *, unsigned int, int, int, unsigned char *, unsigned char *, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern unsigned char LAB_00105df0; /* 0x105df0 */
-extern unsigned char LAB_0010e52c; /* 0x10e52c */
-extern unsigned char LAB_0010e9f0; /* 0x10e9f0 */
-extern unsigned char *g_asdCamera; /* 0x44ea58 */
-extern int DAT_0044ea5c; /* 0x44ea5c */
-extern unsigned int DAT_004d4924; /* 0x4d4924 */
-extern unsigned int DAT_004d4930; /* 0x4d4930 */
-
-/* Supplied declaration required: FUN_002c1e30. */
-/* Supplied declaration required: FUN_002c1edc. */
-/* Supplied declaration required: FUN_002c2044. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-
-
-void FUN_00105cac(unsigned int param_1)
-
+// Initialize the top and bottom screen cameras and start their manager process.
+void FUN_00105cac(u32 priority)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  
-  temp_v0 = 0x100;
-  asdMemAlloc(0x100,0x100,0,0xa98,1);
-  memClear();
-  DAT_0044ea5c = temp_v0;
-  FUN_002c2044(temp_v0 + 0x88,1);
-  FUN_002c1edc(temp_v0 + 0x88,&DAT_004d4924,&DAT_004d4930);
-  FUN_002c1e30(temp_v0 + 0x88,1);
-  FUN_002c2044(temp_v0 + 0x590,1);
-  FUN_002c1edc(temp_v0 + 0x590,&DAT_004d4924,&DAT_004d4930);
-  FUN_002c1e30(temp_v0 + 0x590,1);
-  *(int *)(temp_v0 + 0x80) = temp_v0 + 0x88;
-  *(int *)(temp_v0 + 0x84) = temp_v0 + 0x590;
-  puVar2 = &LAB_00105df0;
-  asdProcessCreateSimple(&LAB_00105df0,param_1,0,0,&LAB_0010e52c,&LAB_0010e9f0,DAT_0044ea5c);
-  g_asdCamera = puVar2;
-  return;
+    asdDebugTrace(DAT_004092c8, 635);
+    CameraManagerWorkIV *work = (CameraManagerWorkIV *)asdMemAlloc(0x100, 0x100, 0, sizeof(CameraManagerWorkIV), 1);
+    memClear(work, sizeof(CameraManagerWorkIV));
+    g_asdCamera.work = work;
+    FUN_002c2044(&work->cameras[0], 1);
+    FUN_002c1edc(&work->cameras[0], DAT_004d493c - 2, DAT_004d493c - 1, DAT_004d493c);
+    FUN_002c1e30(&work->cameras[0], 1, 30.0f, 20.0f, 25600.0f, 400.0f / 240.0f);
+    FUN_002c2044(&work->cameras[1], 1);
+    FUN_002c1edc(&work->cameras[1], DAT_004d493c - 2, DAT_004d493c - 1, DAT_004d493c);
+    FUN_002c1e30(&work->cameras[1], 1, 30.0f, 20.0f, 25600.0f, 320.0f / 240.0f);
+    work->active[0] = &work->cameras[0];
+    work->active[1] = &work->cameras[1];
+    g_asdCamera.job = asdProcessCreateSimple("CamManagerProc", priority, 0, 0,
+        asdCameraTableRelease, asdCameraFreeWork, g_asdCamera.work);
 }
-
-} /* extern "C" */
+}

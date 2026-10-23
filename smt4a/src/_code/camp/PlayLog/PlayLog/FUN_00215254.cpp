@@ -1,96 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00215254` (_code @ 0x215254, 0x1bc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation diagnostic metadata/NOP is absent; sprite/page registers and defaults relocation differ. */
+#include "camp/PlayLog/PlayLog.h"
+#include "classes/Obj4221a4.h"
+#include "ui/UiSpriteState.h"
+#include "shard/W6_W6Match7_DrawParameters.h"
 
+struct PlayLogPageA { u32 count; u32 values[50]; u32 details[25]; };
+struct PlayLogScreenViewA {
+    Params002c312c parameters;
+    UiSpriteState sprites[5];
+    Obj4221a4 window;
+    s32 state;
+    u8 unk348[0x10];
+    s16 count;
+    u16 unk35a;
+    u32 values[50];
+    u32 details[25];
+    u8 hasPlayer;
+    u8 page;
+    u8 unk48a[2];
+    PlayLogPageA pages[2];
+    u32 pending;
+    u32 unk6f0;
+};
+struct PlayLogDrawDefaultsA { u8 first[72]; u8 second[24]; u8 third[224]; };
+struct PlayLogPlayerViewA { u8 unk00[0x66]; u16 id; };
 extern "C" {
+extern PlayLogWorkA *g_playLog;
+extern const PlayLogDrawDefaultsA DAT_0052dd98;
+void *asdMemoryAllocTracked(u32 alignment, u32 size, u32 heap, u32 category, s32 clear);
+void sysMemClear(void *memory, u32 size);
+void asdTMTexTableLoadSprites(u32 table);
+void asdTMTexLoadMainHeap(u32 table, s32 node);
+void loadSlotEnsureLoaded(u32 slot);
+void paramsClearPacket(Params002c312c *parameters);
+void paramsInit(Params002c312c *, u32, u16, u32, u16, u32, u16, u32, u16, u32, u16);
+void FUN_0014e188(UiSpriteState *sprite, u32 table, s32 image, Params002c312c *parameters, s32 active, f32 scale);
+void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 channel, s32 frame);
+void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 image, s32 frame);
+void FUN_0022feb0(void *work);
+void rt_memcpy_w(void *output, const void *input, u32 size);
+void FUN_00203b40(Obj4221a4 *window, u32 count, s32 rows, s32 first, s32 second, s32 third);
+const PlayLogPlayerViewA *gameDataBlocksGetTable(void);
 
-int asdTMTexTableLoadSprites(int);
-int FUN_0014e188(int, int, int, int, int);
-int paramsInit(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int asdMemoryAllocTracked(int, int, int, int, int);
-int uiSpriteSetKeyframe(int, int, int);
-int uiSpriteSetImageKeyframe(...);
-int asdTMTexLoadMainHeap(int, int);
-int FUN_00203b40(...);
-int FUN_0022feb0(...);
-int sysMemClear(void);
-int loadSlotEnsureLoaded(int);
-int paramsClearPacket(int);
-int rt_memcpy_w(...);
-
-/* stack frame of void: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp40; /* 0x40: local_40 */
-} void_stack;
-
-extern unsigned char DAT_0052dd98; /* 0x52dd98 */
-extern unsigned char DAT_0052dde0; /* 0x52dde0 */
-extern unsigned char DAT_0052ddf8; /* 0x52ddf8 */
-extern int g_playLog; /* 0x57f278 */
-
-/* Supplied declaration required: asdTMTexTableLoadSprites. */
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: asdTMTexLoadMainHeap. */
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_0022feb0. */
-extern int gameDataBlocksGetTable(void);
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: loadSlotEnsureLoaded. */
-/* Supplied declaration required: paramsClearPacket. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
+// Allocate play-log resources, build its sprites/pages and display the first page.
 void FUN_00215254(void)
-
 {
-/* irregular: 13 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if (g_playLog == 0) {
-    temp_v0 = 0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x6f4,1);
-    g_playLog = temp_v0;
-  }
-  temp_v0 = g_playLog;
-  sysMemClear();
-  *(unsigned int *)(temp_v0 + 0x344) = 0;
-  *(unsigned int *)(temp_v0 + 0x6ec) = 0;
-  asdTMTexTableLoadSprites(0x25);
-  asdTMTexLoadMainHeap(0x25,0);
-  loadSlotEnsureLoaded(0x37);
-  paramsClearPacket(temp_v0);
-  paramsInit(temp_v0,&DAT_0052dd98,0x48,&DAT_0052dde0,0x18,0,0,0,0,&DAT_0052ddf8,0xe0);
-  temp_v1 = 0;
-  do {
-    temp_v2 = temp_v0 + temp_v1 * 0x8c;
-    FUN_0014e188(temp_v2 + 0x20,0x25,0,temp_v0,1);
-    uiSpriteSetKeyframe(temp_v2 + 0x20,2,0);
-    uiSpriteSetImageKeyframe(temp_v2 + 0x20,0);
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 5);
-  FUN_0022feb0(temp_v0);
-  *(unsigned char *)(temp_v0 + 0x489) = 0;
-  rt_memcpy_w(temp_v0 + 0x35c,temp_v0 + 0x490,200);
-  rt_memcpy_w(temp_v0 + 0x424,temp_v0 + (unsigned int)*(unsigned char *)(temp_v0 + 0x489) * 0x130 + 0x558,100);
-  FUN_00203b40(temp_v0 + 0x2dc,*(unsigned int *)(temp_v0 + (unsigned int)*(unsigned char *)(temp_v0 + 0x489) * 0x130 + 0x48c)
-               ,5,1,0,1);
-  *(unsigned char *)(temp_v0 + 0x488) = 0;
-  temp_v1 = gameDataBlocksGetTable();
-  if (*(short *)(temp_v1 + 0x66) != 0) {
-    *(unsigned char *)(temp_v0 + 0x488) = 1;
-  }
-  return;
+    if (g_playLog == NULL)
+        g_playLog = static_cast<PlayLogWorkA *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(PlayLogScreenViewA), 1));
+    // The page storage follows the canonical play-log prefix.
+    PlayLogScreenViewA *work = reinterpret_cast<PlayLogScreenViewA *>(g_playLog);
+    sysMemClear(work, sizeof(*work));
+    work->state = 0;
+    work->pending = 0;
+    asdTMTexTableLoadSprites(0x25);
+    asdTMTexLoadMainHeap(0x25, 0);
+    loadSlotEnsureLoaded(0x37);
+    paramsClearPacket(&work->parameters);
+    paramsInit(&work->parameters, reinterpret_cast<u32>(DAT_0052dd98.first), sizeof(DAT_0052dd98.first),
+               reinterpret_cast<u32>(DAT_0052dd98.second), sizeof(DAT_0052dd98.second), 0, 0, 0, 0,
+               reinterpret_cast<u32>(DAT_0052dd98.third), sizeof(DAT_0052dd98.third));
+    for (s32 index = 0; index < 5; ++index) {
+        UiSpriteState *sprite = &work->sprites[index];
+        FUN_0014e188(sprite, 0x25, 0, &work->parameters, 1, 1.0f);
+        uiSpriteSetKeyframe(sprite, 2, 0);
+        uiSpriteSetImageKeyframe(sprite, 0, 0);
+    }
+    FUN_0022feb0(work);
+    work->page = 0;
+    rt_memcpy_w(work->values, work->pages[0].values, sizeof(work->values));
+    rt_memcpy_w(work->details, work->pages[work->page].details, sizeof(work->details));
+    FUN_00203b40(&work->window, work->pages[work->page].count, 5, 1, 0, 1);
+    work->hasPlayer = 0;
+    if (gameDataBlocksGetTable()->id != 0)
+        work->hasPlayer = 1;
 }
-
-} /* extern "C" */
+}

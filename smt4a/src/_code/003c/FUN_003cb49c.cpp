@@ -1,71 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cb49c` (_code @ 0x3cb49c, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved camera coordinate/constant VFP registers differ and target X/Y stores coalesce. */
+#include "map/lmapMain.h"
+
+struct FollowCameraTargets {
+    u8 prefix[0x34];
+    MapVector eye;
+    MapVector target;
+};
+typedef char FollowCameraTargetsOffsetCheck[offsetof(FollowCameraTargets, eye) == 0x34 &&
+    offsetof(FollowCameraTargets, target) == 0x40 ? 1 : -1];
 
 extern "C" {
-
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
-
-extern int g_lmapView; /* 0x5806a4 */
-extern int g_lmapScene; /* 0x581288 */
-extern float DAT_005f1a30; /* 0x5f1a30 */
-extern float DAT_005f1a34; /* 0x5f1a34 */
-extern float DAT_005f1a38; /* 0x5f1a38 */
-extern float DAT_005f1a3c; /* 0x5f1a3c */
-extern float DAT_005f1a40; /* 0x5f1a40 */
-extern float DAT_005f1a44; /* 0x5f1a44 */
-
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
-extern int FUN_003033d4(void);
-
+extern LmapExtraA *g_lmapView;
+extern LmapSceneA *g_lmapScene;
+extern FollowCameraTargets DAT_005f19fc;
+s32 FUN_003033d4(void);
+f32 FUN_001bc124(f32);
+f32 FUN_001bbf0c(f32);
 
 void FUN_003cb49c(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  
-  temp_v0 = FUN_003033d4();
-  temp_v6 = 90.0f;
-  temp_v4 = 0.017453292f;
-  temp_v3 = *(float *)(g_lmapScene + 0x1c);
-  temp_v5 = *(float *)(g_lmapScene + 0x24);
-  temp_v7 = *(float *)(g_lmapScene + 0x20) + *(float *)(g_lmapView + temp_v0 * 4 + 0xcc);
-  temp_v2 = (*(float *)(g_lmapView + 0x18) - 90.0f) * 0.017453292f;
-  FUN_001bc124();
-  temp_v3 = temp_v3 + temp_v2 * *(float *)(g_lmapView + temp_v0 * 4 + 0x14c);
-  temp_v2 = (*(float *)(g_lmapView + 0x18) - temp_v6) * temp_v4;
-  FUN_001bbf0c();
-  DAT_005f1a44 = temp_v5 + temp_v2 * *(float *)(g_lmapView + temp_v0 * 4 + 0x14c);
-  temp_v2 = *(float *)(g_lmapView + 0x18) * temp_v4;
-  DAT_005f1a3c = temp_v3;
-  DAT_005f1a40 = temp_v7;
-  FUN_001bc124();
-  temp_v3 = *(float *)(g_lmapScene + 0x1c) - temp_v2 * *(float *)(g_lmapView + temp_v0 * 4 + 0x18c);
-  temp_v2 = *(float *)(g_lmapView + 0x18) * temp_v4;
-  FUN_001bbf0c();
-  temp_v1 = g_lmapView + temp_v0 * 4;
-  temp_v5 = *(float *)(g_lmapScene + 0x24) - temp_v2 * *(float *)(temp_v1 + 0x18c);
-  temp_v7 = *(float *)(g_lmapScene + 0x20) + *(float *)(temp_v1 + 0x10c) +
-          *(float *)(g_lmapView + 0x1c);
-  temp_v2 = (*(float *)(g_lmapView + 0x18) - temp_v6) * temp_v4;
-  FUN_001bc124();
-  temp_v3 = temp_v3 + temp_v2 * *(float *)(g_lmapView + temp_v0 * 4 + 0x14c);
-  temp_v4 = (*(float *)(g_lmapView + 0x18) - temp_v6) * temp_v4;
-  FUN_001bbf0c();
-  DAT_005f1a30 = temp_v3;
-  DAT_005f1a34 = temp_v7;
-  DAT_005f1a38 = temp_v5 + temp_v4 * *(float *)(g_lmapView + temp_v0 * 4 + 0x14c);
-  return;
+    s32 preset = FUN_003033d4();
+    const f32 degreesToRadians = 0.017453292f;
+    f32 targetX = g_lmapScene->transform.position[0];
+    f32 targetY = g_lmapScene->transform.position[1] + g_lmapView->followPresets.targetHeight[preset];
+    f32 targetZ = g_lmapScene->transform.position[2];
+    targetX += FUN_001bc124((g_lmapView->followPose.heading - 90.0f) * degreesToRadians) * g_lmapView->followPresets.lateralDistance[preset];
+    targetZ += FUN_001bbf0c((g_lmapView->followPose.heading - 90.0f) * degreesToRadians) * g_lmapView->followPresets.lateralDistance[preset];
+    DAT_005f19fc.target.x = targetX;
+    DAT_005f19fc.target.y = targetY;
+    DAT_005f19fc.target.z = targetZ;
+    f32 eyeX = g_lmapScene->transform.position[0] - FUN_001bc124(g_lmapView->followPose.heading * degreesToRadians) * g_lmapView->followPresets.rearDistance[preset];
+    f32 eyeZ = g_lmapScene->transform.position[2] - FUN_001bbf0c(g_lmapView->followPose.heading * degreesToRadians) * g_lmapView->followPresets.rearDistance[preset];
+    f32 eyeY = g_lmapScene->transform.position[1] + g_lmapView->followPresets.eyeHeight[preset] + g_lmapView->followPose.heightBias;
+    eyeX += FUN_001bc124((g_lmapView->followPose.heading - 90.0f) * degreesToRadians) * g_lmapView->followPresets.lateralDistance[preset];
+    eyeZ += FUN_001bbf0c((g_lmapView->followPose.heading - 90.0f) * degreesToRadians) * g_lmapView->followPresets.lateralDistance[preset];
+    DAT_005f19fc.eye.x = eyeX;
+    DAT_005f19fc.eye.y = eyeY;
+    DAT_005f19fc.eye.z = eyeZ;
 }
-
-} /* extern "C" */
+}

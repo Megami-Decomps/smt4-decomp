@@ -1,56 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f6f68` (_code @ 0x3f6f68, 0x110 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: loop condition is rotated below its body; retained scroll/page values use different saved registers. */
+#include "shard/W6_W6Match2_ScrollList.h"
+#include <stddef.h>
 
-extern "C" {
-
-int eventQueueAddUniqueIfValid(int);
-int FUN_00228b04(int, int);
-int resourceRunOperationIfUnblocked(int);
-
-/* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: FUN_00228b04. */
-/* Supplied declaration required: resourceRunOperationIfUnblocked. */
-extern int FUN_002a4894(int);
-extern int objectApplyIfUnblocked(int);
-
-
-void FUN_003f6f68(int param_1,int param_2)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = resourceRunOperationIfUnblocked(param_1 + 0xbc);
-  temp_v1 = param_1 + 0xbc;
-  FUN_00228b04(temp_v1,0);
-  if (temp_v1 != 0) {
-    temp_v1 = objectApplyIfUnblocked(param_1 + 0xbc);
-    if (param_2 < temp_v1) {
-      resourceRunOperationIfUnblocked(param_1 + 0xbc);
-      temp_v1 = FUN_002a4894(param_1 + 0xbc);
-      if ((temp_v1 != param_2 - 1) && (temp_v1 = FUN_002a4894(param_1 + 0xbc), temp_v1 != 0)) {
-        eventQueueAddUniqueIfValid(0x100020d);
-      }
-      temp_v1 = resourceRunOperationIfUnblocked(param_1 + 0xbc);
-      while ((temp_v1 == temp_v0 &&
-             ((temp_v1 = resourceRunOperationIfUnblocked(param_1 + 0xbc), temp_v1 != 0 ||
-              (temp_v1 = FUN_002a4894(param_1 + 0xbc), temp_v1 != 0))))) {
-        temp_v1 = resourceRunOperationIfUnblocked(param_1 + 0xbc);
-        temp_v2 = objectApplyIfUnblocked(param_1 + 0xbc);
-        if ((temp_v1 == temp_v2 - param_2) &&
-           (temp_v1 = FUN_002a4894(param_1 + 0xbc), temp_v1 == param_2 - 1)) break;
-        FUN_00228b04(param_1 + 0xbc,0);
-        temp_v1 = resourceRunOperationIfUnblocked(param_1 + 0xbc);
-      }
-    }
-    temp_v3 = resourceRunOperationIfUnblocked(param_1 + 0xbc);
-    *(unsigned int *)(param_1 + 0x50) = temp_v3;
-  }
-  return;
+namespace {
+struct ScrollPageOwner {
+    u8 unk00[0x50];
+    s32 savedTop; // 0x50
+    u8 unk54[0x68];
+    ScrollList list; // 0xBC
+};
+typedef char ScrollPageOwnerOffsetsCheck[
+    offsetof(ScrollPageOwner, savedTop) == 0x50 && offsetof(ScrollPageOwner, list) == 0xBC ? 1 : -1];
 }
 
-} /* extern "C" */
+extern "C" {
+s32 resourceRunOperationIfUnblocked(ScrollList *list);
+s32 FUN_00228b04(ScrollList *list, s32 wrap);
+s32 objectApplyIfUnblocked(ScrollList *list);
+s32 FUN_002a4894(ScrollList *list);
+void eventQueueAddUniqueIfValid(u32 event);
+
+// Advance a page without stopping on an unchanged scroll position or a partial page.
+void FUN_003f6f68(ScrollPageOwner *owner, s32 pageSize)
+{
+    s32 oldTop = resourceRunOperationIfUnblocked(&owner->list);
+    if (FUN_00228b04(&owner->list, 0) != 0) {
+        if (objectApplyIfUnblocked(&owner->list) > pageSize) {
+            resourceRunOperationIfUnblocked(&owner->list);
+            if (FUN_002a4894(&owner->list) != pageSize - 1 && FUN_002a4894(&owner->list) != 0) {
+                eventQueueAddUniqueIfValid(0x100020D);
+            }
+            for (s32 top = resourceRunOperationIfUnblocked(&owner->list);
+                 top == oldTop &&
+                     (resourceRunOperationIfUnblocked(&owner->list) != 0 || FUN_002a4894(&owner->list) != 0);
+                 top = resourceRunOperationIfUnblocked(&owner->list)) {
+                top = resourceRunOperationIfUnblocked(&owner->list);
+                s32 count = objectApplyIfUnblocked(&owner->list);
+                if (top == count - pageSize && FUN_002a4894(&owner->list) == pageSize - 1) {
+                    break;
+                }
+                FUN_00228b04(&owner->list, 0);
+            }
+        }
+        owner->savedTop = resourceRunOperationIfUnblocked(&owner->list);
+    }
+}
+}

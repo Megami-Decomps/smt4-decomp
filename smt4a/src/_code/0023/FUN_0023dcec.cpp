@@ -1,77 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023dcec` (_code @ 0x23dcec, 0x1e8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: option-pulse base folding, pulse-load hoisting and disabled-row join NOPs differ from retail. */
+#include "shard/W5_W5Match2_UniteWork.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+u32 dataTableGetEntry24Byte0(u32 id);
+const char *dataTableGetEntry24Member(u32 id);
+s32 saveOptionIsEnabled(u32 option);
+void efctSetSpeed(f32 value);
+void FUN_00164b5c(u32 layer, u32 group, s32 image, s32 x, s32 y, s32 order);
+void FUN_001835b4(u32 layer, u32 group, s32 image, s32 x, s32 y, s32 order);
+PanelTextLayoutEntryPrefixA *FUN_001834a4(u32 group, u32 image);
+void FUN_00162790(u32 layer, u32 style, const char *text,
+                  f32 x, f32 y, f32 depth, f32 spacing, f32 scale);
 
-int FUN_00162790(...);
-int FUN_00164b5c(...);
-int efctSetSpeed(void);
-int FUN_001835b4(...);
-int VectorSignedToFloat(...);
-
-/* stack frame of param_5: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_5_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-extern unsigned int dataTableGetEntry24Byte0(unsigned int);
-extern unsigned int dataTableGetEntry24Member(unsigned int);
-extern int saveOptionIsEnabled(unsigned int);
-
-
-void FUN_0023dcec(int param_1,int param_2,int param_3,int param_4,int param_5)
-
+void FUN_0023dcec(UniteWork *work, s32 row, s32 x, s32 y, s32 selected,
+                  f32 baseScale, f32 factor)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int in_fpscr;
-  
-  param_1 = param_1 + param_2 * 4;
-  temp_v0 = dataTableGetEntry24Byte0(*(unsigned int *)(param_1 + 0x927c));
-  efctSetSpeed();
-  if (param_5 != 0) {
-    FUN_00164b5c(2,0x1a,0x10,param_3,param_4,0x65);
-    FUN_001835b4(2,0x1a,0x95,param_3,param_4,0x6a);
-    temp_v1 = saveOptionIsEnabled(temp_v0);
-    if (temp_v1 != 0) {
-      efctSetSpeed();
-      FUN_001835b4(2,0x1a,0x97,param_3,param_4,0x6d);
-      efctSetSpeed();
-      FUN_001835b4(2,0x1a,0x91,param_3,param_4,0x6f);
+    u32 option = dataTableGetEntry24Byte0(work->optionNamesA.ids[row]);
+    efctSetSpeed(factor);
+    f32 scale = baseScale * factor;
+    u32 style;
+    if (selected) {
+        FUN_00164b5c(2, 0x1A, 0x10, x, y, 0x65);
+        FUN_001835b4(2, 0x1A, 0x95, x, y, 0x6A);
+        if (saveOptionIsEnabled(option)) {
+            efctSetSpeed(work->optionPulse.amount * factor);
+            FUN_001835b4(2, 0x1A, 0x97, x, y, 0x6D);
+            efctSetSpeed(scale);
+            FUN_001835b4(2, 0x1A, 0x91, x, y, 0x6F);
+        } else {
+            efctSetSpeed(work->optionPulse.amount);
+            FUN_001835b4(2, 0x1A, 0x96, x, y, 0x6F);
+            efctSetSpeed(scale);
+        }
+        style = 0xFF;
+    } else {
+        FUN_00164b5c(2, 0x1A, 0x0F, x, y, 0x65);
+        FUN_001835b4(2, 0x1A, 0x90, x, y, 0x6A);
+        if (saveOptionIsEnabled(option))
+            FUN_001835b4(2, 0x1A, 0x91, x, y, 0x6F);
+        style = ~0u;
     }
-    else {
-      efctSetSpeed();
-      FUN_001835b4(2,0x1a,0x96,param_3,param_4,0x6f);
-      efctSetSpeed();
-    }
-    temp_v0 = 0xff;
-  }
-  else {
-    FUN_00164b5c(2,0x1a,0xf,param_3,param_4,0x65);
-    FUN_001835b4(2,0x1a,0x90,param_3,param_4,0x6a);
-    temp_v1 = saveOptionIsEnabled(temp_v0);
-    if (temp_v1 != 0) {
-      FUN_001835b4(2,0x1a,0x91,param_3,param_4,0x6f);
-    }
-    temp_v0 = 0xffffffff;
-  }
-  temp_v2 = dataTableGetEntry24Member(*(unsigned int *)(param_1 + 0x927c));
-  temp_v1 = FUN_001834a4(0x1a,0xa4);
-  VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(2,temp_v0,temp_v2);
-  return;
+    const char *text = dataTableGetEntry24Member(work->optionNamesA.ids[row]);
+    const PanelTextLayoutEntryPrefixA *anchor = FUN_001834a4(0x1A, 0xA4);
+    FUN_00162790(2, style, text, (f32)(anchor->x + x), (f32)(anchor->y + y),
+                 0.55f, 0.0f, scale);
 }
-
-} /* extern "C" */
+}

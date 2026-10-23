@@ -1,75 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00290688` (_code @ 0x290688, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: render-state push hoists the new-top address into ip instead of reusing r3 after the previous-state load. */
+#include "camp/RenderCtx.h"
 
 extern "C" {
+extern RenderCtxA *g_renderCtx;
+void FUN_00157558(RenderCtxA *context);
+s32 FUN_001692ac(s32 preset, s32 index);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
+void FUN_001835b4(s32 layer, s32 index, u32 resource, s32 x, s32 y, s32 enabled);
+void FUN_00183bb0(void);
+void efctSetSpeed(f32 speed);
+void skinObjectUpdateMatrices(RenderCtxA *context);
+void renderCtxResetColorScale(RenderCtxA *context);
 
-int FUN_00157558(int);
-int efctSetSpeed(void);
-int renderCtxResetColorScale(int);
-int skinObjectUpdateMatrices(int);
-int FUN_001835b4(int, int, int, int, unsigned int, int);
-int FUN_00183bb0(void);
-int renderCtxCalculateStereoParallax(int);
-
-typedef int romwright_code(...);
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: skinObjectUpdateMatrices. */
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-
-
-unsigned int FUN_00290688(void)
-
+// Draw the stereo-adjusted overlay with a temporary render preset and restore the context.
+u32 FUN_00290688(void)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  float temp_v4;
-  
-  FUN_00157558(g_renderCtx);
-  temp_v0 = g_renderCtx;
-  temp_v1 = FUN_001692ac(1,0);
-  piVar5 = (int *)(temp_v0 + 0x1258);
-  temp_v2 = *piVar5;
-  temp_v3 = piVar5[temp_v2 + 2];
-  *piVar5 = temp_v2 + 1;
-  piVar5[temp_v2 + 3] = temp_v1;
-  if (*(char *)(temp_v0 + 0x1270) != '\0' || temp_v3 != temp_v1) {
-    (**(romwright_code **)(temp_v0 + 0x1274))();
-    *(unsigned char *)(temp_v0 + 0x1270) = 0;
-  }
-  temp_v4 = 0.33f;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  FUN_001835b4(2,0,0x1ffb8,(int)temp_v4 - 0x38,0xfffffff8,1);
-  FUN_00183bb0();
-  efctSetSpeed();
-  temp_v0 = g_renderCtx;
-  piVar5 = (int *)(g_renderCtx + 0x1258);
-  temp_v1 = *piVar5;
-  temp_v2 = piVar5[temp_v1 + 2];
-  *piVar5 = temp_v1 - 1;
-  if (*(char *)(temp_v0 + 0x1270) != '\0' || temp_v2 != piVar5[temp_v1 + 1]) {
-    (**(romwright_code **)(temp_v0 + 0x1274))();
-    *(unsigned char *)(temp_v0 + 0x1270) = 0;
-  }
-  skinObjectUpdateMatrices(g_renderCtx);
-  renderCtxResetColorScale(g_renderCtx);
-  return 0;
+    FUN_00157558(g_renderCtx);
+    RenderCtxA *context = g_renderCtx;
+    s32 state = FUN_001692ac(1, 0);
+    renderStackPush(&context->stackA, state);
+    f32 parallax = renderCtxCalculateStereoParallax(g_renderCtx, 0.33f);
+    FUN_001835b4(2, 0, 0x1FFB8, (s32)parallax - 56, -8, 1);
+    FUN_00183bb0();
+    efctSetSpeed(1.0f);
+    renderStackPop(&g_renderCtx->stackA);
+    skinObjectUpdateMatrices(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -6,7 +6,7 @@ extern "C" {
 
 int efctSetSpeed(void);
 int FUN_001835b4(...);
-int FUN_00320d78(unsigned int, unsigned int [2], unsigned int [6], int);
+int gfxSelectStatusIconPair(unsigned int, unsigned int [2], unsigned int [6], int);
 
 typedef int romwright_code(...);
 /* stack frame of param_5: 5 slot(s), 20 byte(s) */
@@ -25,7 +25,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00320d78. */
+/* Supplied declaration required: gfxSelectStatusIconPair. */
 
 
 void FUN_002fa1b0(int param_1,unsigned int param_2,int param_3,int param_4,int param_5)
@@ -43,7 +43,7 @@ void FUN_002fa1b0(int param_1,unsigned int param_2,int param_3,int param_4,int p
   
   temp_v5[0] = 0;
   temp_v6[0] = 0;
-  FUN_00320d78(param_2,temp_v5,temp_v6,param_5);
+  gfxSelectStatusIconPair(param_2,temp_v5,temp_v6,param_5);
   efctSetSpeed();
   if (param_5 != 0) {
     temp_v4 = 0;

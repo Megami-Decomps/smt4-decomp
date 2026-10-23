@@ -1,103 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001566a8` (_code @ 0x1566a8, 0x194 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: queue-base hoisting, failure-result register lifetime and request-byte store scheduling differ. */
+#include "sound/VoiceLoadQueue.h"
 
 extern "C" {
-
-int textFormatBuffer(...);
-int libc_strcat(unsigned char [64], unsigned char [76]);
-int asdSoundGetObjectCount(void);
-unsigned int asdLoadFileExists(const char *);
-int FUN_00168750(unsigned char [64], int, int, unsigned char *, unsigned char *);
-int libc_strcpy(int, unsigned char [64]);
-int rt_aeabi_memclr(...);
-
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spF8; /* 0xf8: local_f8 */
-} param_5_stack;
-
-extern unsigned char LAB_00167f44; /* 0x167f44 */
-extern unsigned char DAT_0061978c; /* 0x61978c */
-extern signed char DAT_00619972; /* 0x619972 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: libc_strcat. */
-extern int FUN_00162ea4(void);
-/* Supplied declaration required: asdSoundGetObjectCount. */
-/* Supplied declaration required: FUN_00168750. */
-extern int jyoucyuGetTableEntry(unsigned int);
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: rt_aeabi_memclr. */
-
-
-unsigned int FUN_001566a8(unsigned int param_1,unsigned int param_2,int param_3,unsigned char param_4,
-                 unsigned char param_5)
-
-{
-/* irregular: irregular input(s): in_d0; 7 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  unsigned char *puVar4;
-  unsigned int temp_v1;
-  unsigned long long in_d0;
-  unsigned char temp_v2 [64];
-  unsigned char temp_v3 [64];
-  unsigned char temp_v4 [76];
-  
-  rt_aeabi_memclr(temp_v2,0x40);
-  rt_aeabi_memclr(temp_v3,0x40);
-  rt_aeabi_memclr(temp_v4,0x40);
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if ((((temp_v0 != 0) || (temp_v0 = FUN_00162ea4(), temp_v0 != 0)) || (DAT_00619972 != '\0')) ||
-     (param_3 == 0)) {
-    return 0xffffffff;
-  }
-  textFormatBuffer(temp_v3,"snd/voice/");
-  textFormatBuffer(temp_v4,"%06d",param_2);
-  libc_strcat(temp_v3,temp_v4);
-  textFormatBuffer(temp_v2,"%s.bcwav",temp_v3);
-  asdSoundGetObjectCount();
-  temp_v1 = 0;
-  do {
-    pcVar2 = (char *)(&DAT_0061978c + temp_v1 * 0x78);
-    while( 1 ) {
-      if (*pcVar2 == '\0') {
-        if (temp_v1 == 0xffffffff) {
-          return 0xffffffff;
-        }
-        if (temp_v1 >= 4) {
-          return 0xffffffff;
-        }
-        temp_v0 = temp_v1 * 0x78;
-        puVar4 = &DAT_0061978c + temp_v0;
-        if (puVar4 == (unsigned char *)0x0) {
-          return 0xffffffff;
-        }
-        if (asdLoadFileExists((const char *)temp_v2) == 0) {
-          return 0xffffffff;
-        }
-        *(unsigned int *)(temp_v0 + 0x6197f4) = 0;
-        *(unsigned char *)(temp_v0 + 0x619800) = param_4;
-        *puVar4 = 1;
-        *(unsigned int *)(temp_v0 + 0x6197e0) = param_2;
-        *(unsigned int *)(temp_v0 + 0x6197dc) = param_1;
-        *(int *)(temp_v0 + 0x6197e4) = (int)in_d0;
-        *(int *)(temp_v0 + 0x6197e8) = (int)((unsigned long long)in_d0 >> 0x20);
-        *(char *)(temp_v0 + 0x619801) = (char)param_3;
-        *(unsigned char *)(temp_v0 + 0x619803) = param_5;
-        libc_strcpy(temp_v0 + 0x61978d,temp_v2);
-        FUN_00168750(temp_v2,0,3,&LAB_00167f44,puVar4);
-        return temp_v1;
-      }
-      temp_v1 = temp_v1 + 1;
-      if ((int)temp_v1 >= 4) {
-        return 0xffffffff;
-      }
-      if (temp_v1 < 4) break;
-      pcVar2 = (char *)0x0;
-    }
-  } while( 1 );
+extern VoiceLoadQueue DAT_0061978c;
+extern const char DAT_0053629c[];
+extern const char DAT_00536294[];
+extern const char DAT_00536288[];
+void rt_aeabi_memclr(void *memory, u32 size);
+void *jyoucyuGetTableEntry(u32 index);
+s32 FUN_00162ea4(void);
+s32 textFormatBuffer(char *buffer, const char *format, ...);
+char *libc_strcat(char *destination, const char *source);
+char *libc_strcpy(char *destination, const char *source);
+u32 asdSoundGetObjectCount(void);
+u32 asdLoadFileExists(const char *path);
+void FUN_00167f44(void *file, VoiceLoadRequest *request);
+void FUN_00168750(const char *path, u32 flags, u32 priority,
+                  void (*callback)(void *, VoiceLoadRequest *), VoiceLoadRequest *request);
 }
 
-} /* extern "C" */
+static inline VoiceLoadRequest *voiceLoadRequestAt(u32 index)
+{
+    return index < 4 ? &DAT_0061978c.entries[index] : NULL;
+}
+static inline s32 findFreeVoiceLoadRequest()
+{
+    for (s32 index = 0; index < 4; ++index) {
+        if (voiceLoadRequestAt(index)->active == 0)
+            return index;
+    }
+    return -1;
+}
+
+// Reserve a voice-load slot and schedule a wave file with per-channel stereo gains.
+extern "C" u32 FUN_001566a8(u32 group, u32 id, s32 kind, u8 flags, u8 priority,
+                             f32 leftGain, f32 rightGain)
+{
+    char path[64], directory[64], number[64];
+    rt_aeabi_memclr(path, sizeof(path));
+    rt_aeabi_memclr(directory, sizeof(directory));
+    rt_aeabi_memclr(number, sizeof(number));
+    if (jyoucyuGetTableEntry(1) != NULL || FUN_00162ea4() != 0 ||
+        DAT_0061978c.disabled != 0 || kind == 0)
+        return (u32)-1;
+    textFormatBuffer(directory, DAT_0053629c);
+    textFormatBuffer(number, DAT_00536294, id);
+    libc_strcat(directory, number);
+    textFormatBuffer(path, DAT_00536288, directory);
+    asdSoundGetObjectCount();
+    s32 index = findFreeVoiceLoadRequest();
+    if (index == -1)
+        return (u32)-1;
+    VoiceLoadRequest *request = voiceLoadRequestAt(index);
+    if (request == NULL || !asdLoadFileExists(path))
+        return (u32)-1;
+    request->counter = 0;
+    request->flags = flags;
+    request->active = 1;
+    request->id = id;
+    request->group = group;
+    request->gains[0] = leftGain;
+    request->gains[1] = rightGain;
+    request->kind = kind;
+    request->priority = priority;
+    libc_strcpy(request->path, path);
+    FUN_00168750(path, 0, 3, FUN_00167f44, request);
+    return index;
+}

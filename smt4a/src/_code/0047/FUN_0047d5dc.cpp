@@ -1,86 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047d5dc` (_code @ 0x47d5dc, 0x170 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: shared-allocation flag becomes AND/LSR instead of retail TST/MOV conditional normalization. */
+#include "gfx/StexLoad.h"
 extern "C" {
+StexHeader *FUN_001ba204(StexHeader *data, u32 mode, u32 alignment);
+s32 rt_memcmp(const void *left, const void *right, u32 size);
+AsdTexture *asdTextureCreate(s32 shared);
+void asdTextureSelectHeap(TextureHeapEntry *entry, u32 heap);
+void asdTextureEntryApply(TextureHeapEntry *entry);
 
-int asdTextureCreate(void);
-int asdTextureEntryApply(int);
-int asdTextureSelectHeap(int, int);
-int FUN_001ba204(int, unsigned int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern unsigned char LAB_0047d74c; /* 0x47d74c */
-
-/* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: asdTextureEntryApply. */
-/* Supplied declaration required: asdTextureSelectHeap. */
-/* Supplied declaration required: FUN_001ba204. */
-extern int rt_memcmp(int, unsigned char *, unsigned int);
-
-
-void FUN_0047d5dc(unsigned int *param_1,int *param_2)
-
+/* Decode a loaded STEX resource and attach its image storage to the texture-table entry. */
+void FUN_0047d5dc(TextureHeapEntry ***reference, const StexLoadPacket *packet)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  temp_v4 = *param_2;
-  temp_v5 = param_2[2];
-  temp_v3 = *(int *)*param_1;
-  if (*(char *)(*(int *)(temp_v3 + 4) + 0xd) != '\0') {
-    temp_v2 = 1;
-    if ((*(unsigned int *)(temp_v3 + 0x10) & 0x10000) != 0) {
-      temp_v2 = 3;
+    StexHeader *header = packet->data;
+    u32 bytes = packet->bytes;
+    TextureHeapEntry *entry = **reference;
+    if (entry->node->compressed) {
+        u32 mode = 1;
+        if (entry->flags & 0x10000)
+            mode = 3;
+        header = FUN_001ba204(header, mode, 0x80);
     }
-    FUN_001ba204(temp_v4,temp_v2,0x80);
-  }
-  temp_v0 = rt_memcmp(temp_v4,&LAB_0047d74c,4);
-  if (temp_v0 != 0) {
-    return;
-  }
-  if (*(int *)(temp_v4 + 0x24) != 0) {
-    *(unsigned int *)(temp_v3 + 8) = 0;
-  }
-  else {
-    temp_v1 = (unsigned int)((*(unsigned int *)(temp_v3 + 0x10) & 0x10000) != 0);
-    asdTextureCreate();
-    *(unsigned int *)(temp_v3 + 8) = temp_v1;
-    *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v4 + 8);
-    *(unsigned int *)(*(int *)(temp_v3 + 8) + 0x14) = *(unsigned int *)(temp_v4 + 0xc);
-    *(unsigned int *)(*(int *)(temp_v3 + 8) + 0x18) = *(unsigned int *)(temp_v4 + 0x10);
-    *(unsigned int *)(*(int *)(temp_v3 + 8) + 0x1c) = *(unsigned int *)(temp_v4 + 0x18);
-    *(unsigned int *)(*(int *)(temp_v3 + 8) + 0x20) = *(unsigned int *)(temp_v4 + 0x14);
-    *(int *)(*(int *)(temp_v3 + 8) + 0x28) = temp_v5 - *(int *)(temp_v4 + 0x20);
-    *(unsigned int *)(*(int *)(temp_v3 + 8) + 0x2c) = *(unsigned int *)(*(int *)(temp_v3 + 8) + 0x2c) | 0x10;
-    if (*(int *)(temp_v4 + 4) == 1) {
-      *(unsigned int *)(*(int *)(temp_v3 + 8) + 0x3c) = 1;
-      *(unsigned int *)(*(int *)(temp_v3 + 8) + 0x40) = 1;
+    if (rt_memcmp(header, "STEX", 4) != 0)
+        return;
+    if (header->external == 0) {
+        entry->texture = asdTextureCreate((entry->flags & 0x10000) != 0);
+        entry->texture->target = header->target;
+        entry->texture->dimensions.width = header->width;
+        entry->texture->dimensions.height = header->height;
+        entry->texture->image.format = header->format;
+        entry->texture->image.type = header->type;
+        entry->texture->storage.unk28 = bytes - header->dataOffset;
+        entry->texture->storage.flags |= 0x10;
+        if (header->version == 1) {
+            entry->texture->unk3c = 1;
+            entry->texture->unk40 = 1;
+        }
+        entry->texture->storage.pixels = reinterpret_cast<u8 *>(header) + header->dataOffset;
+    } else {
+        entry->texture = NULL;
     }
-    *(int *)(*(int *)(temp_v3 + 8) + 0x24) = *(int *)(temp_v4 + 0x20) + temp_v4;
-  }
-  temp_v1 = *(unsigned int *)(temp_v3 + 0x10);
-  *(unsigned int *)(temp_v3 + 0x10) = (temp_v1 & 0xfffffffe) | 2;
-  *(int *)(temp_v3 + 0xc) = temp_v4;
-  if ((temp_v1 & 0x60) != 0) {
-    if ((temp_v1 & 0x20) != 0) {
-      asdTextureSelectHeap(temp_v3,0x20000);
+    entry->flags = (entry->flags & ~1u) | 2;
+    entry->fileData = reinterpret_cast<u8 *>(header);
+    if (entry->flags & 0x60) {
+        if (entry->flags & 0x20)
+            asdTextureSelectHeap(entry, 0x20000);
+        else
+            asdTextureSelectHeap(entry, 0x30000);
     }
-    else {
-      asdTextureSelectHeap(temp_v3,0x30000);
-    }
-  }
-  asdTextureEntryApply(temp_v3);
-  return;
+    asdTextureEntryApply(entry);
 }
-
-} /* extern "C" */
+}

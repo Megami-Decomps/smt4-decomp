@@ -1,84 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049d3f0` (_code @ 0x49d3f0, 0x194 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: parameter-table root relocates as base+108 instead of its final-array symbol; one stack argument uses r0 instead of r2. */
+#include "ui/HowToScreen.h"
 
 extern "C" {
+extern const char DAT_0052cf04[]; // event/HowTo/HowTo.mbm
+extern const char DAT_0052cee8[]; // event/HowTo/HowToHelp.mbm
+extern const HowToDrawTables DAT_0052cd2c;
+void sysMemClear(void *memory, u32 size);
+u32 spriteHandleCreate(u32 argument);
+void FUN_001527d8(u32 handle, u32 color);
+void FUN_0049dd74(HowToScreenWork *work);
+void asdLoadFileAsyncSimple(const char *path, void **result, u32 flags);
+void asdTMTexTableLoadTmx(u32 table, u32 mode);
+void asdTMTexLoadMainHeap(u32 table, u32 mode);
+void paramsClearPacket(Params002c312c *parameters);
+void paramsInit(Params002c312c *parameters, const void *first, u32 firstSize,
+    const void *second, u32 secondSize, u32 third, u32 fourth, u32 fifth, u32 sixth,
+    const void *last, u32 lastSize);
+void FUN_0014e188(UiSpriteState *sprite, u32 table, u32 argument, Params002c312c *parameters, u32 order, f32 scale);
+void uiSpriteSelectAnim(UiSpriteState *sprite, s32 animation);
 
-int asdTMTexTableLoadTmx(int, int);
-int FUN_0014e188(...);
-int paramsInit(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int FUN_001527d8(unsigned int, unsigned int);
-int uiSpriteSelectAnim(...);
-int asdTMTexLoadMainHeap(int, int);
-int asdLoadFileAsyncSimple(...);
-int sysMemClear(int, int);
-int FUN_0049dd74(int);
-int paramsClearPacket(int);
-
-/* stack frame of param_1: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern unsigned char DAT_0052cd2c; /* 0x52cd2c */
-extern unsigned char DAT_0052cd50; /* 0x52cd50 */
-extern unsigned char DAT_0052cd98; /* 0x52cd98 */
-
-/* Supplied declaration required: asdTMTexTableLoadTmx. */
-extern unsigned int spriteHandleCreate(unsigned int);
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: FUN_001527d8. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: asdTMTexLoadMainHeap. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0049dd74. */
-/* Supplied declaration required: paramsClearPacket. */
-
-
-void FUN_0049d3f0(int param_1)
-
+// Load tutorial message/texture resources and initialize the four tutorial UI sprites.
+void FUN_0049d3f0(HowToScreenWork *work)
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  *(unsigned int *)(param_1 + 8) = 0;
-  *(unsigned int *)(param_1 + 0xc) = 0;
-  *(unsigned int *)(param_1 + 0x10) = 0;
-  *(unsigned int *)(param_1 + 0x14) = 0;
-  sysMemClear(param_1 + 0x18,0xd0);
-  temp_v1 = 0;
-  *(unsigned int *)(param_1 + 0x80) = 0;
-  do {
-    temp_v0 = spriteHandleCreate(0);
-    *(unsigned int *)(param_1 + temp_v1 * 4 + 0x88) = temp_v0;
-    FUN_001527d8(temp_v0,0xffffffff);
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 3);
-  FUN_0049dd74(param_1);
-  asdLoadFileAsyncSimple("event/HowTo/HowTo.mbm",param_1 + 8,0);
-  asdLoadFileAsyncSimple("event/HowTo/HowToHelp.mbm",param_1 + 0xc,0);
-  asdTMTexTableLoadTmx(0x33,0);
-  asdTMTexLoadMainHeap(0x33,0);
-  paramsClearPacket(param_1 + 0x21c);
-  paramsInit(param_1 + 0x21c,&DAT_0052cd2c,0x24,&DAT_0052cd50,0x48,0,0,0,0,&DAT_0052cd98,0x150);
-  FUN_0014e188(param_1 + 0x23c,0x33,0,param_1 + 0x21c,0xc9);
-  uiSpriteSelectAnim(param_1 + 0x23c,0);
-  FUN_0014e188(param_1 + 0x2c8,0x33,0,param_1 + 0x21c,0xc9);
-  uiSpriteSelectAnim(param_1 + 0x2c8,0);
-  FUN_0014e188(param_1 + 0x354,0x33,0,param_1 + 0x21c,0xc9);
-  uiSpriteSelectAnim(param_1 + 0x354,2);
-  FUN_0014e188(param_1 + 0x3e0,0x33,0,param_1 + 0x21c,0xc9);
-  uiSpriteSelectAnim(param_1 + 0x3e0,3);
-  return;
+    work->messages[0] = NULL;
+    work->messages[1] = NULL;
+    work->unk010[0] = 0;
+    work->unk010[1] = 0;
+    sysMemClear(work->resetState, sizeof(work->resetState));
+    work->display.selection = 0;
+    for (s32 i = 0; i < 3; ++i) {
+        u32 handle = spriteHandleCreate(0);
+        work->display.handles[i] = handle;
+        FUN_001527d8(handle, ~0u);
+    }
+    FUN_0049dd74(work);
+    asdLoadFileAsyncSimple(DAT_0052cf04, &work->messages[0], 0);
+    asdLoadFileAsyncSimple(DAT_0052cee8, &work->messages[1], 0);
+    asdTMTexTableLoadTmx(51, 0);
+    asdTMTexLoadMainHeap(51, 0);
+    paramsClearPacket(&work->parameters);
+    paramsInit(&work->parameters, DAT_0052cd2c.first, 36, DAT_0052cd2c.second, 72, 0, 0, 0, 0, DAT_0052cd2c.last, 336);
+    FUN_0014e188(&work->sprites[0], 51, 0, &work->parameters, 201, 1.0f);
+    uiSpriteSelectAnim(&work->sprites[0], 0);
+    FUN_0014e188(&work->sprites[1], 51, 0, &work->parameters, 201, 1.0f);
+    uiSpriteSelectAnim(&work->sprites[1], 0);
+    FUN_0014e188(&work->sprites[2], 51, 0, &work->parameters, 201, 1.0f);
+    uiSpriteSelectAnim(&work->sprites[2], 2);
+    FUN_0014e188(&work->sprites[3], 51, 0, &work->parameters, 201, 1.0f);
+    uiSpriteSelectAnim(&work->sprites[3], 3);
 }
-
-} /* extern "C" */
+}

@@ -1,74 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a690c` (_code @ 0x2a690c, 0x114 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: source/preview registers differ and the compiler merges the MP deduction/clamp branches. */
+#include "shard/PassiveSkill.h"
+#include "shard/Shard0031.h"
+#include "shard/W4_Match6_BtlEntry.h"
 
 extern "C" {
+const ActiveSkillRecord *dataTable04FindById(u32 id);
+s32 FUN_0028809c(s32 source, s32 target, const ActiveSkillRecord *skill, s32 preview, s32 flags);
+BtlEquip *gameGetPlayerData();
+BtlEquip *gameGetSlotRecord(s32 index);
+SlotTable *gameGetSlotTable();
+s16 FUN_003df57c(u16 costParameter, u32 mode);
+s16 FUN_004bcbb4(BtlEquip *unit, u16 costParameter);
 
-int dataTable04FindById(void);
-int FUN_0028809c(...);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
-
-extern int gameGetPlayerData(void);
-extern int gameGetSlotRecord(void);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_0028809c. */
-extern short FUN_003df57c(unsigned short, unsigned int);
-extern short FUN_004bcbb4(int, unsigned short);
-
-
-unsigned int FUN_002a690c(int param_1,int param_2,int param_3)
-
+// Apply a skill to the player and all occupied demon slots, charging MP once if it succeeds.
+u32 FUN_002a690c(s32 source, u32 skillId, s32 preview)
 {
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  dataTable04FindById();
-  if (param_2 != 0) {
-    temp_v1 = param_1;
-    FUN_0028809c(param_1,0xffffffff,param_2,param_3,0);
-    temp_v5 = temp_v1 == 0;
-    temp_v1 = gameGetSlotTable();
-    temp_v4 = 0;
-    do {
-      temp_v3 = (int)*(char *)(temp_v1 + temp_v4 + 0x1c88);
-      if ((-1 < temp_v3) &&
-         (temp_v2 = param_1, FUN_0028809c(param_1,temp_v3,param_2,param_3,0), temp_v2 == 0)) {
-        temp_v5 = 1;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 0x18);
-    if (temp_v5) {
-      if (param_3 == 0) {
-        if (param_1 < 0) {
-          temp_v1 = gameGetPlayerData();
-          temp_v0 = FUN_003df57c(*(unsigned short *)(param_2 + 0x20),1);
-          temp_v0 = *(short *)(temp_v1 + 0x2c) - temp_v0;
-          *(short *)(temp_v1 + 0x2c) = temp_v0;
+    u8 applied = 0;
+    const ActiveSkillRecord *skill = dataTable04FindById(skillId);
+    if (skill != NULL) {
+        if (FUN_0028809c(source, -1, skill, preview, 0) == 0) {
+            applied = 1;
         }
-        else {
-          temp_v1 = gameGetSlotRecord();
-          temp_v0 = FUN_004bcbb4(temp_v1,*(unsigned short *)(param_2 + 0x20));
-          temp_v0 = *(short *)(temp_v1 + 0x2c) - temp_v0;
-          *(short *)(temp_v1 + 0x2c) = temp_v0;
+        SlotTable *party = gameGetSlotTable();
+        for (s32 index = 0; index < 24; ++index) {
+            s32 target = party->slots[index];
+            if (target >= 0 && FUN_0028809c(source, target, skill, preview, 0) == 0) {
+                applied = 1;
+            }
         }
-        if (temp_v0 < 0) {
-          *(unsigned short *)(temp_v1 + 0x2c) = 0;
+        if (applied != 0) {
+            if (preview == 0) {
+                BtlEquip *unit;
+                s16 remainingMp;
+                if (source < 0) {
+                    unit = gameGetPlayerData();
+                    s16 cost = FUN_003df57c(skill->cost.costParameter, 1);
+                    remainingMp = unit->mp - cost;
+                    unit->mp = remainingMp;
+                } else {
+                    unit = gameGetSlotRecord(source);
+                    s16 cost = FUN_004bcbb4(unit, skill->cost.costParameter);
+                    remainingMp = unit->mp - cost;
+                    unit->mp = remainingMp;
+                }
+                if (remainingMp < 0) {
+                    unit->mp = 0;
+                }
+            }
+            return 0;
         }
-      }
-      return 0;
     }
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

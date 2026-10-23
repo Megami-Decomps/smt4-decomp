@@ -1,59 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00519740` (_code @ 0x519740, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: key/value-load scheduling, saved registers, VFP ordering and final tail call differ. */
+#include "common.h"
 
 extern "C" {
+const u8 *FUN_0051c338(const void *curve, f32 frame);
+f32 nn_math_ARMv6_HermiteC_FAST(f32 first, f32 firstSlope, f32 second, f32 secondSlope, f32 elapsed, f32 duration);
 
-int FUN_0051c338(void);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(...);
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0051c338. */
-extern int nn_math_ARMv6_HermiteC_FAST(int, int);
-
-
-int FUN_00519740(unsigned char *param_1)
-
+f32 FUN_00519740(const void *data, f32 frame)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char *pbVar2;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v4;
-  
-  pbVar2 = param_1;
-  FUN_0051c338();
-  temp_v4 = (float)VectorUnsignedToFloat((unsigned int)*pbVar2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v4 * *(float *)(param_1 + 0x18) == in_s0) << 0x1e);
-  temp_v3 = romwright_subpiece_4_1_0(temp_v0 >> 0x1e,0);
-  if (!temp_v3) {
-    temp_v3 = pbVar2 == (unsigned char *)(*(int *)(param_1 + 0x20) + ((unsigned int)*(unsigned short *)(param_1 + 0xe) * 6 - 6)
-                              );
-  }
-  if (temp_v3) {
-    temp_v1 = (unsigned int)pbVar2[1] + (unsigned int)pbVar2[2] * 0x100;
-    VectorUnsignedToFloat(temp_v1,(unsigned char)(temp_v0 >> 0x16) & 3);
-    return temp_v1;
-  }
-  VectorUnsignedToFloat((unsigned int)pbVar2[6],(unsigned char)(temp_v0 >> 0x16) & 3);
-  VectorUnsignedToFloat((unsigned int)pbVar2[1] + (unsigned int)pbVar2[2] * 0x100,(unsigned char)(temp_v0 >> 0x16) & 3);
-  VectorUnsignedToFloat((unsigned int)pbVar2[7] + (unsigned int)pbVar2[8] * 0x100,(unsigned char)(temp_v0 >> 0x16) & 3);
-  temp_v1 = (char)pbVar2[5] * 0x10 + (unsigned int)(pbVar2[4] >> 4);
-  temp_v2 = (unsigned int)pbVar2[9] + (char)(pbVar2[10] << 4) * 0x10;
-  VectorSignedToFloat(temp_v2,(unsigned char)(temp_v0 >> 0x16) & 3);
-  VectorSignedToFloat(temp_v1,(unsigned char)(temp_v0 >> 0x16) & 3);
-  temp_v1 = nn_math_ARMv6_HermiteC_FAST(temp_v1,temp_v2);
-  return temp_v1;
+    struct CurveView {
+        u8 prefix[0xE];
+        u16 keyCount;
+        f32 valueScale, valueOffset, timeScale;
+        u32 reserved1C;
+        const u8 *keys;
+    };
+    const CurveView *curve = static_cast<const CurveView *>(data);
+    const u8 *key = FUN_0051c338(data, frame);
+    f32 time = (f32)(u32)key[0] * curve->timeScale;
+    u32 first = key[1] + ((u32)key[2] << 8);
+    if (time == frame || key == curve->keys + curve->keyCount * 6 - 6)
+        return curve->valueOffset + (f32)first * curve->valueScale;
+    const u8 *next = key + 6;
+    u32 second = next[1] + ((u32)next[2] << 8);
+    s32 firstSlope = (s8)key[5] * 16 + (key[4] >> 4);
+    s32 secondSlope = next[3] + (s8)(next[4] << 4) * 16;
+    return nn_math_ARMv6_HermiteC_FAST(
+        curve->valueOffset + (f32)first * curve->valueScale, (f32)firstSlope * 0.03125f,
+        curve->valueOffset + (f32)second * curve->valueScale, (f32)secondSlope * 0.03125f,
+        frame - time, (f32)(u32)next[0] * curve->timeScale - time);
 }
-
-} /* extern "C" */
+}

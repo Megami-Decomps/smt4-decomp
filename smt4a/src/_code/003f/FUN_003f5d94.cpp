@@ -1,62 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f5d94` (_code @ 0x3f5d94, 0x13c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved registers and direct alpha-load addressing differ from retail's position-relative accesses. */
+#include "ui/AnimatedDigitPanel.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
+extern RenderCtxA *g_renderCtx;
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
+void efctSetSpeed(f32 alpha);
+void FUN_001835b4(s32 mode, s32 group, s32 x, s32 y, u32 color, s32 glyph);
+s32 vec2GetXInt(const SpritePlaybackView *position);
+s32 vec2GetYInt(const SpritePlaybackView *position);
+void FUN_003f5b14(DigitPanelDisplay *display, s32 x, s32 y, s32 first, s32 second, f32 alpha);
+void FUN_003f54c4(DigitPanelDisplay *display, s32 x, s32 y, f32 alpha);
+void FUN_003f61b4(DigitPanelDisplay *display, s32 x, s32 y, f32 alpha);
 
-int efctSetSpeed(void);
-int FUN_001835b4(int, int, int, int, unsigned int, int);
-int renderCtxCalculateStereoParallax(unsigned int);
-int FUN_003f54c4(int, int, int);
-int FUN_003f5b14(int, int, int, int, int);
-int FUN_003f61b4(int, int, int);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
-
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-extern int vec2GetXInt(int);
-extern int vec2GetYInt(int);
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_003f54c4. */
-/* Supplied declaration required: FUN_003f5b14. */
-/* Supplied declaration required: FUN_003f61b4. */
-
-
-void FUN_003f5d94(int param_1,int param_2,unsigned int param_3)
-
+// Draw the panel frame and animated digit content using combined position-channel alpha.
+void FUN_003f5d94(DigitPanelDisplay *display, s32 x, u32 color, f32 alpha)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  float temp_v4;
-  
-  temp_v4 = 0.26f;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  param_2 = param_2 + (int)temp_v4;
-  efctSetSpeed();
-  FUN_001835b4(2,0x31,0,param_2,param_3,0x8d);
-  FUN_001835b4(2,0x31,1,param_2,param_3,0x8d);
-  FUN_001835b4(2,0x31,9,param_2,param_3,0x8d);
-  temp_v0 = vec2GetXInt(param_1 + 0x1f8);
-  temp_v1 = vec2GetYInt(param_1 + 0x1f8);
-  FUN_003f5b14(param_1,temp_v0,temp_v1,0x17,0x1a);
-  temp_v2 = vec2GetXInt(param_1 + 0x284);
-  temp_v3 = vec2GetYInt(param_1 + 0x284);
-  if (*(int *)(param_1 + 0x124) == 0) {
-    FUN_003f54c4(param_1,temp_v2 + temp_v0,temp_v3 + temp_v1);
-    FUN_003f61b4(param_1,temp_v0,temp_v1);
-    return;
-  }
-  return;
+    x += (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    efctSetSpeed(alpha);
+    FUN_001835b4(2, 0x31, 0, x, color, 0x8D);
+    FUN_001835b4(2, 0x31, 1, x, color, 0x8D);
+    FUN_001835b4(2, 0x31, 9, x, color, 0x8D);
+    s32 baseX = vec2GetXInt(&display->position);
+    s32 baseY = vec2GetYInt(&display->position);
+    f32 baseAlpha = display->position.alpha;
+    FUN_003f5b14(display, baseX, baseY, 0x17, 0x1A, baseAlpha);
+    s32 contentX = vec2GetXInt(&display->contentPosition) + baseX;
+    s32 contentY = vec2GetYInt(&display->contentPosition) + baseY;
+    f32 contentAlpha = display->contentPosition.alpha * baseAlpha;
+    if (display->state == 0) {
+        FUN_003f54c4(display, contentX, contentY, contentAlpha);
+        FUN_003f61b4(display, baseX, baseY, contentAlpha);
+    }
 }
-
-} /* extern "C" */
+}

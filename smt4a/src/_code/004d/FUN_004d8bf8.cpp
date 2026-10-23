@@ -1,57 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d8bf8` (_code @ 0x4d8bf8, 0x108 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: packed-color channel insertion and floating-point clamp scheduling differ. */
+#include "battle/btlStage.h"
+#include "shard/Shard0036.h"
 
+struct StageColorRegistry {
+    u32 unk00;
+    void *context;
+};
 extern "C" {
-
-int FUN_00406768(unsigned int, int, unsigned int);
-int VectorFloatToUnsigned(double, int);
-
-extern int g_handleRegistry; /* 0x56fcc0 */
-
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00406768. */
-
-
-void FUN_004d8bf8(int param_1)
-
-{
-/* irregular: irregular input(s): in_s0, in_s1, in_s2; 5 native warning(s); review required */
-  float in_s0;
-  float temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  float in_s1;
-  unsigned int temp_v3;
-  float in_s2;
-  float temp_v4;
-  float temp_v5;
-  
-  if (-1 < *(short *)(param_1 + 0xac)) {
-    temp_v4 = 1.0f;
-    temp_v5 = 0.0f;
-    temp_v0 = temp_v4;
-    if ((in_s0 < 1.0f) && (temp_v0 = in_s0, in_s0 <= 0.0f)) {
-      temp_v0 = temp_v5;
-    }
-    temp_v1 = VectorFloatToUnsigned(temp_v0 * 255.0f + 0.5f,3);
-    temp_v0 = temp_v4;
-    if ((in_s1 < 1.0f) && (temp_v0 = in_s1, in_s1 <= 0.0f)) {
-      temp_v0 = temp_v5;
-    }
-    temp_v3 = VectorFloatToUnsigned(temp_v0 * 255.0f + 0.5f,3);
-    if (in_s2 >= 1.0f) {
-      temp_v5 = temp_v4;
-    }
-    if ((in_s2 < 1.0f) && (temp_v5 < in_s2)) {
-      temp_v5 = in_s2;
-    }
-    temp_v2 = VectorFloatToUnsigned(temp_v5 * 255.0f + 0.5f,3);
-    FUN_00406768(*(unsigned int *)(g_handleRegistry + 4),(int)*(short *)(param_1 + 0xac),
-                 (temp_v1 << 0x18) | ((temp_v3 & 0xff) << 0x10) | ((temp_v2 & 0xff) << 8) | 0xff);
-    return;
-  }
-  return;
+extern StageColorRegistry *g_handleRegistry;
+void FUN_00406768(void *context, s32 handle, u32 color);
 }
 
-} /* extern "C" */
+static __inline f32 clampStageColor(f32 value)
+{
+    if (value >= 1.0f)
+        return 1.0f;
+    if (value <= 0.0f)
+        return 0.0f;
+    return value;
+}
+
+/* Set an opaque RGB tint on the stage's registered model. */
+extern "C" void FUN_004d8bf8(BtlStage *stage, f32 red, f32 green, f32 blue)
+{
+    if (stage->apocalypse.selection < 0)
+        return;
+    RgbaWord color;
+    color.rgba.r = static_cast<u8>(clampStageColor(red) * 255.0f + 0.5f);
+    color.rgba.g = static_cast<u8>(clampStageColor(green) * 255.0f + 0.5f);
+    color.rgba.b = static_cast<u8>(clampStageColor(blue) * 255.0f + 0.5f);
+    color.rgba.a = 255;
+    u32 packed = (static_cast<u32>(color.rgba.r) << 24) |
+                 (static_cast<u32>(color.rgba.g) << 16) |
+                 (static_cast<u32>(color.rgba.b) << 8) | color.rgba.a;
+    FUN_00406768(g_handleRegistry->context, stage->apocalypse.selection, packed);
+}

@@ -1,65 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b0c04` (_code @ 0x1b0c04, 0x124 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: global work pointer and saved zero exchange r6/r7; all other instructions and literals agree. */
+#include "addon/SceneResource.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
+extern SceneResourceWork *g_sceneResourceWork;
+void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 mode);
+void FUN_00282bfc(s32 channel, s32 value);
+void FUN_001b4fe8(u32 job);
+s32 FUN_0020ece4(u32 job);
+s32 sceneUpdateOptionalResource(u32 job);
+s32 FUN_0020ed2c(u32 job);
+u32 asdProcessCreateSimple(const char *name, s32 group, s32 priority, u32 parent,
+    AsdProcFunc start, AsdProcUpdateFunc update, void *work);
+u32 taskCreateDraw(const char *name, s32 priority, s32 group, u32 flags,
+    AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
 
-int FUN_00282bfc(int, int);
-int asdMemAlloc(int, int, int, int, int);
-int taskCreateDraw(...);
-int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, unsigned char *, unsigned int *);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned char LAB_001b0d64; /* 0x1b0d64 */
-extern unsigned char LAB_001b0d74; /* 0x1b0d74 */
-extern unsigned char LAB_001b0d80; /* 0x1b0d80 */
-extern unsigned char LAB_001b0d90; /* 0x1b0d90 */
-extern unsigned char LAB_001b4fe8; /* 0x1b4fe8 */
-extern unsigned char LAB_001e470c; /* 0x1e470c */
-extern unsigned char LAB_0020ece4; /* 0x20ece4 */
-extern unsigned char LAB_0020ed2c; /* 0x20ed2c */
-extern unsigned int *g_sceneResourceWork; /* 0x433048 */
-
-/* Supplied declaration required: FUN_00282bfc. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-
-
-void FUN_001b0c04(int param_1)
-
+// Start the optional scene-resource process and its upper/lower screen draw tasks.
+void FUN_001b0c04(s32 preserveChannels)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemAlloc(0x100,0x100,0,0x20,1);
-  g_sceneResourceWork = puVar1;
-  *(unsigned char *)(puVar1 + 6) = 0;
-  *(unsigned char *)((int)puVar1 + 0x19) = 0;
-  puVar1[7] = 0;
-  *(unsigned char *)((int)puVar1 + 0x1a) = 0;
-  if (param_1 == 0) {
-    *(unsigned char *)((int)puVar1 + 0x19) = 1;
-    FUN_00282bfc(0,0xff);
-    FUN_00282bfc(1,0xff);
-  }
-  puVar2 = &LAB_001b0d64;
-  asdProcessCreateSimple(&LAB_001b0d64,2,0,0,&LAB_001b4fe8,&LAB_0020ece4,g_sceneResourceWork);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_001b0d74,0x7d,1,0,&LAB_001e470c,0,g_sceneResourceWork,puVar2);
-  taskCreateDraw(&LAB_001b0d80,0xdb,1,0,&LAB_001e470c,0,g_sceneResourceWork,*puVar1);
-  puVar2 = &LAB_001b0d90;
-  taskCreateDraw(&LAB_001b0d90,0xe7,1,0,&LAB_0020ed2c,0,g_sceneResourceWork,*puVar1);
-  puVar1[3] = (unsigned int)puVar2;
-  return;
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\addon\\aocMain.cpp", 149);
+    SceneResourceWork *work = static_cast<SceneResourceWork *>(asdMemAlloc(0x100, 0x100, 0, sizeof(SceneResourceWork), 1));
+    g_sceneResourceWork = work;
+    work->readyToRelease = 0;
+    work->state.resetChannels = 0;
+    work->resource = NULL;
+    work->state.pending = 0;
+    if (preserveChannels == 0) {
+        work->state.resetChannels = 1;
+        FUN_00282bfc(0, 0xFF);
+        FUN_00282bfc(1, 0xFF);
+    }
+    work->job = asdProcessCreateSimple("AOCMainProc", 2, 0, 0, FUN_001b4fe8, FUN_0020ece4, g_sceneResourceWork);
+    taskCreateDraw("AOCDrawUp L", 0x7D, 1, 0, sceneUpdateOptionalResource, NULL, g_sceneResourceWork, work->job);
+    taskCreateDraw("AOCDrawUp R", 0xDB, 1, 0, sceneUpdateOptionalResource, NULL, g_sceneResourceWork, work->job);
+    work->tasks.drawJob = taskCreateDraw("AOCDrawDown", 0xE7, 1, 0, FUN_0020ed2c, NULL, g_sceneResourceWork, work->job);
 }
-
-} /* extern "C" */
+}

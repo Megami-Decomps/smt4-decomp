@@ -1,70 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a4d70` (_code @ 0x4a4d70, 0x114 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: completion signed load, fallback-name lifetime, and final selected-entry tail call differ. */
+#include "shard/Shard004A.h"
 
-extern "C" {
-
-int textFormatBuffer(...);
-int FUN_00163aa4(...);
-int FUN_0019de98(...);
-int FUN_0032d0c8(...);
-int FUN_003343f0(...);
-int pointConvertToFloat(...);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned int DAT_0057f0a8; /* 0x57f0a8 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: FUN_0019de98. */
-extern int buttonHelpIsNotActive(void);
-/* Supplied declaration required: FUN_0032d0c8. */
-/* Supplied declaration required: FUN_003343f0. */
-extern int dataLookupDisplayName(unsigned char *, unsigned int);
-/* Supplied declaration required: pointConvertToFloat. */
-extern int flaggedValueHolderGetTotal(int);
-
-
-void FUN_004a4d70(int param_1)
-
-{
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [80];
-  unsigned char temp_v4 [8];
-  
-  temp_v2 = param_1 + 0x55c;
-  *(unsigned short *)(param_1 + 0xa872) = 8;
-  FUN_00163aa4(temp_v2);
-  temp_v0 = vec2GetYInt(temp_v2);
-  temp_v1 = vec2GetXInt(temp_v2);
-  pointConvertToFloat(param_1 + 200,temp_v1,temp_v0);
-  if ((*(char *)(param_1 + 0x5e6) != '\0') && (temp_v2 = buttonHelpIsNotActive(), temp_v2 != 0)) {
-    FUN_003343f0(0);
-    *(unsigned int *)(param_1 + 0x14) = 2;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-    pointConvertToFloat(param_1 + 200,0,0);
-    if (*(char *)(param_1 + 0x860) == '\0') {
-      temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
-      FUN_0032d0c8(0,1,*(unsigned short *)(param_1 + temp_v2 * 0x20 + 0x868));
-      return;
-    }
-    temp_v2 = dataLookupDisplayName(temp_v4,*(unsigned int *)(param_1 + 0xa874));
-    if (temp_v2 == 0) {
-      temp_v2 = 0x52b5bc;
-    }
-    textFormatBuffer(temp_v3,"%s%s",temp_v2,DAT_0057f0a8);
-    FUN_0019de98(temp_v3,0x323232ff);
-  }
-  return;
+namespace {
+struct BibleAnalyzeTextGlobals {
+    void *active;
+    u32 unk04;
+    const char *suffix;
+};
 }
+extern "C" {
+void FUN_00163aa4(UiAnimatedSprite *, f32 speed);
+s32 vec2GetXInt(const UiAnimatedSprite *);
+s32 vec2GetYInt(const UiAnimatedSprite *);
+void pointConvertToFloat(f32 *point, s32 x, s32 y);
+s32 buttonHelpIsNotActive();
+void FUN_003343f0(s32 value);
+s32 flaggedValueHolderGetTotal(const void *value);
+void FUN_0032d0c8(s32 channel, s32 kind, u32 id, s32 mode);
+const char *dataLookupDisplayName(void *storage, u32 id);
+s32 textFormatBuffer(char *output, const char *format, ...);
+void FUN_0019de98(const char *message, u32 color);
+extern const char DAT_0052b5bc[];
+extern const char DAT_0052b5c4[];
+extern BibleAnalyzeTextGlobals DAT_0057f0a0;
 
-} /* extern "C" */
+// Finish the analyzer's selection animation and display the selected entry's information.
+void FUN_004a4d70(Screen4A *screen)
+{
+    UiAnimatedSprite *selection = &screen->animation.selection;
+    screen->unkA872 = 8;
+    FUN_00163aa4(selection, 1.0f);
+    s32 y = vec2GetYInt(selection);
+    s32 x = vec2GetXInt(selection);
+    pointConvertToFloat(screen->cursor.position, x, y);
+    if (selection->finished && buttonHelpIsNotActive()) {
+        FUN_003343f0(0);
+        screen->state = 2;
+        screen->unk18 = 0;
+        pointConvertToFloat(screen->cursor.position, 0, 0);
+        if (!screen->unk0860) {
+            // The byte-aligned shared padding cannot contain a typed list without shifting it.
+            struct AnalyzeListView {
+                u8 unk000[0x864];
+                BibleAnalyzeListEntry entries[1];
+            };
+            typedef char AnalyzeListOffsetCheck[offsetof(AnalyzeListView, entries) == 0x864 ? 1 : -1];
+            BibleAnalyzeListEntry *entries = reinterpret_cast<AnalyzeListView *>(screen)->entries;
+            s32 index = flaggedValueHolderGetTotal(screen->listSelection.selectedIndex);
+            FUN_0032d0c8(0, 1, entries[index].id, 0);
+            return;
+        }
+        char message[80];
+        u8 nameStorage[8];
+        const char *name = dataLookupDisplayName(nameStorage, screen->displayNameId);
+        if (!name)
+            name = DAT_0052b5bc;
+        textFormatBuffer(message, DAT_0052b5c4, name, DAT_0057f0a0.suffix);
+        FUN_0019de98(message, 0x323232ff);
+    }
+}
+}

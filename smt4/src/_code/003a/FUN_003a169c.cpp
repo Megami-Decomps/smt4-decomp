@@ -1,120 +1,96 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a169c` (_code @ 0x3a169c, 0x198 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: message-load branches merge, using conditional resource selections and different saved registers. */
+#include "shop/shopMain.h"
+
+// Resource and audio handles lie past the shared creation prefix; retain that prefix's extent.
+struct ShopResourceSetupViewIV {
+    ShopCreateWork startup;
+    u8 unk001C[0x144];
+    void *script;
+    void *messages;
+    u8 unk0168[0x15BD8];
+    u32 messageHandle;
+    u32 soundHandle;
+};
+typedef char ShopResourceSetupOffsets[
+    offsetof(ShopResourceSetupViewIV, script) == 0x160 &&
+    offsetof(ShopResourceSetupViewIV, messages) == 0x164 &&
+    offsetof(ShopResourceSetupViewIV, messageHandle) == 0x15D40 &&
+    offsetof(ShopResourceSetupViewIV, soundHandle) == 0x15D44 ? 1 : -1];
 
 extern "C" {
+void FUN_002898e4(void);
+void FUN_00289880(void);
+void buttonHelpAcquireResources(void);
+void buttonHelpCreate(void);
+void asdLoadFileAsyncSimple(const char *path, void **result, u32 flags);
+void asdTMTexTableLoadSprites(u32 table);
+void FUN_002c58c8(u32 table, u32 variant);
+u32 FUN_002fdff4(u32 resource);
+u32 FUN_00285e44(u32 sound, u32 option, u32 flags);
+void FUN_00247bf4(u32 handle, u32 option, u32 flags);
+extern const char DAT_004075c0[]; // shop/shop.bf
+extern const char DAT_00407600[]; // shop/shop_tkywpn.mbm
+extern const char DAT_004075d0[]; // shop/shop_mkdwpn.mbm
+extern const char DAT_004075e8[]; // shop/shop_ginzawpn.mbm
+extern const char DAT_00407630[]; // shop/shop_tkyitm.mbm
+extern const char DAT_00407618[]; // shop/shop_mkditm.mbm
 
-int FUN_00247bf4(void);
-int FUN_00285e44(int, int);
-int FUN_00289880(void);
-int FUN_002898e4(void);
-int buttonHelpCreate(void);
-int buttonHelpAcquireResources(void);
-int asdLoadFileAsyncSimple(...);
-int asdTMTexTableLoadSprites(int);
-int FUN_002c58c8(int, int);
-int FUN_002fdff4(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_00247bf4. */
-/* Supplied declaration required: FUN_00285e44. */
-/* Supplied declaration required: FUN_00289880. */
-/* Supplied declaration required: FUN_002898e4. */
-/* Supplied declaration required: buttonHelpCreate. */
-/* Supplied declaration required: buttonHelpAcquireResources. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: asdTMTexTableLoadSprites. */
-/* Supplied declaration required: FUN_002c58c8. */
-/* Supplied declaration required: FUN_002fdff4. */
-
-
-void FUN_003a169c(int param_1)
-
+// Load the shop script and the weapon/item message bank appropriate to its location, then start its audio.
+void FUN_003a169c(ShopCreateWork *shop)
 {
-/* irregular: 10 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  FUN_002898e4();
-  FUN_00289880();
-  buttonHelpAcquireResources();
-  buttonHelpCreate();
-  asdLoadFileAsyncSimple("shop/shop.bf",param_1 + 0x160,0);
-  asdTMTexTableLoadSprites(0x2b);
-  FUN_002c58c8(0x2b,0);
-  temp_v1 = 0;
-  temp_v2 = 0;
-  if (*(char *)(param_1 + 0x14) != '\0') {
-    if (*(char *)(param_1 + 0x14) == '\x01') {
-      temp_v0 = *(int *)(param_1 + 0x18);
-      if (temp_v0 != 9) {
-        if (temp_v0 != 5) {
-          if (temp_v0 != 10) {
-            pcVar2 = "shop/shop_tkyitm.mbm";
-            temp_v1 = 0x5b;
-          }
-          else {
-            pcVar2 = "shop/shop_tkyitm.mbm";
-            temp_v1 = 0x89;
-            temp_v2 = 0xa3;
-          }
+    ShopResourceSetupViewIV *resources = (ShopResourceSetupViewIV *)shop;
+    FUN_002898e4();
+    FUN_00289880();
+    buttonHelpAcquireResources();
+    buttonHelpCreate();
+    asdLoadFileAsyncSimple(DAT_004075c0, &resources->script, 0);
+    asdTMTexTableLoadSprites(43);
+    FUN_002c58c8(43, 0);
+    u32 resource = 0;
+    u32 sound = 0;
+    if (shop->unk14 == 0) {
+        const char *messages;
+        if (shop->result == 8) {
+            messages = DAT_004075d0;
+            resource = 88;
+            sound = 25;
+        } else if (shop->result == 6 || shop->result == 7) {
+            messages = DAT_004075e8;
+            resource = 139;
+            sound = 80;
+        } else if (shop->result == 9) {
+            messages = DAT_00407600;
+            resource = 136;
+            sound = 162;
+        } else {
+            messages = DAT_00407600;
+            resource = 90;
         }
-        else {
-          pcVar2 = "shop/shop_tkyitm.mbm";
-          temp_v1 = 0x8b;
-          temp_v2 = 0x50;
+        asdLoadFileAsyncSimple(messages, &resources->messages, 0);
+    } else if (shop->unk14 == 1) {
+        const char *messages;
+        if (shop->result == 9) {
+            messages = DAT_00407618;
+            resource = 89;
+            sound = 26;
+        } else if (shop->result == 5) {
+            messages = DAT_00407630;
+            resource = 139;
+            sound = 80;
+        } else if (shop->result == 10) {
+            messages = DAT_00407630;
+            resource = 137;
+            sound = 163;
+        } else {
+            messages = DAT_00407630;
+            resource = 91;
         }
-      }
-      else {
-        pcVar2 = "shop/shop_mkditm.mbm";
-        temp_v1 = 0x59;
-        temp_v2 = 0x1a;
-      }
-      asdLoadFileAsyncSimple(pcVar2,param_1 + 0x164,0);
+        asdLoadFileAsyncSimple(messages, &resources->messages, 0);
     }
-  }
-  else {
-    temp_v0 = *(int *)(param_1 + 0x18);
-    if (temp_v0 != 8) {
-      if (!(temp_v0 == 6 || temp_v0 == 7)) {
-        if (temp_v0 != 9) {
-          pcVar2 = "shop/shop_tkywpn.mbm";
-          temp_v1 = 0x5a;
-        }
-        else {
-          pcVar2 = "shop/shop_tkywpn.mbm";
-          temp_v1 = 0x88;
-          temp_v2 = 0xa2;
-        }
-      }
-      else {
-        pcVar2 = "shop/shop_ginzawpn.mbm";
-        temp_v1 = 0x8b;
-        temp_v2 = 0x50;
-      }
+    resources->messageHandle = FUN_002fdff4(resource);
+    if (sound) {
+        resources->soundHandle = FUN_00285e44(sound, 0, 0);
+        FUN_00247bf4(resources->soundHandle, 0, 0);
     }
-    else {
-      pcVar2 = "shop/shop_mkdwpn.mbm";
-      temp_v1 = 0x58;
-      temp_v2 = 0x19;
-    }
-    asdLoadFileAsyncSimple(pcVar2,param_1 + 0x164,0);
-  }
-  FUN_002fdff4();
-  *(unsigned int *)(param_1 + 0x15d40) = temp_v1;
-  if (temp_v2 != 0) {
-    FUN_00285e44(temp_v2,0);
-    *(int *)(param_1 + 0x15d44) = temp_v2;
-    FUN_00247bf4();
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

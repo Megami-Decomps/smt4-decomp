@@ -1,128 +1,84 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00387bb8` (_code @ 0x387bb8, 0x180 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: common refresh-byte store is placed after case 6 rather than at case 1; initial scheduling differs. */
+#include "camp/CampCec/CharacterRefreshWork.h"
 
 extern "C" {
+void playerSummaryFill(PlayerSummary *summary);
+void FUN_0032e25c(PlayerSummary *summary, u32 argument);
+s32 cecQueryOptionalProcess(void);
+s32 gameDataTestFlags(u32 flags);
+void cecProcessCall2(void);
+void cecProcessForward(PlayerSummary *summary);
+void rt_aeabi_memclr(void *memory, u32 size);
+void characterInfoPanelPopulate(u32 panel, PlayerSummary *summary, u32 parameter);
+void campCecDispatchMode(PlayerSummary *summary);
+void FUN_002f4014(PlayerSummary *summary);
+void linkHolderApplyFlag(void *link, s32 enabled);
+void campCecSetObjectValue(u32 value);
+void FUN_0031d890(void);
+s32 partyPanelExists(void);
+s32 FUN_00284e94(void);
 
-int linkHolderApplyFlag(unsigned int, int);
-int cecProcessForward(int);
-int campCecDispatchMode(int);
-int campCecSetObjectValue(int);
-int rt_aeabi_memclr(int, int);
-int FUN_002f4014(int);
-int cecProcessCall2(void);
-int FUN_0031d890(void);
-int FUN_0032e25c(int, int);
-int playerSummaryFill(int);
-int characterInfoPanelPopulate(unsigned int, int, unsigned int);
-
-typedef struct fn_00387bb8_arg0 fn_00387bb8_arg0;
-struct fn_00387bb8_arg0 {
-    unsigned char pad_0x0[0x4];
-    unsigned char field_0x4; /* +0x4 */
-    unsigned char pad_0x5[0x3];
-    int field_0x8; /* +0x8 */
-    unsigned char field_0xc; /* +0xc */
-    unsigned char pad_0xd[0x4b];
-    unsigned char field_0x58; /* +0x58 */
-    unsigned char pad_0x59[0x8f];
-    undefined4 field_0xe8; /* +0xe8 */
-    undefined4 field_0xec; /* +0xec */
-    unsigned char pad_0xf0[0x8];
-    undefined4 field_0xf8; /* +0xf8 */
-    unsigned char pad_0xfc[0xc];
-    ushort field_0x108; /* +0x108 */
-    unsigned char pad_0x10a[0x6];
-    byte field_0x110; /* +0x110 */
-    unsigned char pad_0x111[0x1];
-    undefined1 field_0x112; /* +0x112 */
-    unsigned char pad_0x113[0x39];
-    undefined4 field_0x14c; /* +0x14c */
-};
-
-/* Supplied declaration required: linkHolderApplyFlag. */
-extern int FUN_00284e94(void);
-extern int cecQueryOptionalProcess(void);
-/* Supplied declaration required: cecProcessForward. */
-extern int partyPanelExists(void);
-/* Supplied declaration required: campCecDispatchMode. */
-/* Supplied declaration required: campCecSetObjectValue. */
-/* Supplied declaration required: rt_aeabi_memclr. */
-/* Supplied declaration required: FUN_002f4014. */
-/* Supplied declaration required: cecProcessCall2. */
-/* Supplied declaration required: FUN_0031d890. */
-/* Supplied declaration required: FUN_0032e25c. */
-/* Supplied declaration required: playerSummaryFill. */
-extern int gameDataTestFlags(unsigned int);
-/* Supplied declaration required: characterInfoPanelPopulate. */
-
-
-unsigned int FUN_00387bb8(fn_00387bb8_arg0 *param_1)
-
+// Wait for a refresh command, then repopulate the character panel and StreetPass summary.
+u32 FUN_00387bb8(CharacterRefreshWork *work)
 {
-/* irregular: 11 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = 0;
-  if (param_1->field_0x110 != 0) {
-    param_1->field_0x110 = 0;
-    playerSummaryFill(param_1->field_0x8);
-    if (param_1->field_0x108 == 0) {
-      FUN_0032e25c(param_1->field_0x8,0);
-    }
-    temp_v0 = cecQueryOptionalProcess();
-    if ((temp_v0 != 0) && (temp_v0 = gameDataTestFlags(0x20), temp_v0 != 0)) {
-      cecProcessCall2();
-      cecProcessForward(param_1->field_0x8);
-    }
-    if (param_1->field_0x108 == 0) {
-      rt_aeabi_memclr(param_1->field_0x8 + 0x50,0x14);
-    }
-    characterInfoPanelPopulate(*(unsigned int *)&param_1->field_0xc,param_1->field_0x8,
-                 *(unsigned int *)&param_1->field_0x58);
-    campCecDispatchMode(param_1->field_0x8);
-    FUN_002f4014(param_1->field_0x8);
-    linkHolderApplyFlag(*(unsigned int *)&param_1->field_0x4,1);
-    param_1->field_0xe8 = 0xffffffff;
-    param_1->field_0xf8 = 1;
-    param_1->field_0xec = 0xffffffff;
-    param_1->field_0x14c = 0;
-    param_1->field_0x112 = 1;
-    campCecSetObjectValue(0);
-    FUN_0031d890();
-    temp_v1 = 3;
-  }
-  else {
-    switch(param_1->field_0x14c) {
-    default:
-      return temp_v1;
-    case 1:
-      break;
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 7:
-      if (*(int *)(param_1 + 1) < 1) {
-        return 0;
-      }
-      break;
-    case 6:
-      if (param_1->field_0x108 != 0) {
-        temp_v0 = partyPanelExists();
-        if (temp_v0 == 0) {
-          return 0;
+    u32 result = 0;
+    if (work->refresh != 0) {
+        work->refresh = 0;
+        playerSummaryFill(work->summary);
+        if (work->mode == 0) {
+            FUN_0032e25c(work->summary, 0);
         }
-        temp_v0 = FUN_00284e94();
-        if (temp_v0 == 0) {
-          return 0;
+        if (cecQueryOptionalProcess() && gameDataTestFlags(0x20)) {
+            cecProcessCall2();
+            cecProcessForward(work->summary);
         }
-      }
+        if (work->mode == 0) {
+            // The transfer fields follow the published PlayerSummary prefix; do not grow that shared record.
+            struct SummaryTransferView { u8 unk00[0x50]; u8 transfer[0x14]; };
+            typedef char TransferOffsetCheck[offsetof(SummaryTransferView, transfer) == 0x50 ? 1 : -1];
+            rt_aeabi_memclr(((SummaryTransferView *)work->summary)->transfer, 0x14);
+        }
+        characterInfoPanelPopulate(work->panel, work->summary, work->parameter);
+        campCecDispatchMode(work->summary);
+        FUN_002f4014(work->summary);
+        linkHolderApplyFlag(work->link, 1);
+        work->unk0E8 = -1;
+        work->phase = 1;
+        work->unk0EC = -1;
+        work->command = 0;
+        work->ready = 1;
+        campCecSetObjectValue(0);
+        FUN_0031d890();
+        result = 3;
+    } else {
+        switch (work->command) {
+        case 1:
+            work->refresh = 1;
+            break;
+        case 6:
+            if (work->mode != 0) {
+                if (!partyPanelExists()) {
+                    return 0;
+                }
+                if (!FUN_00284e94()) {
+                    return 0;
+                }
+            }
+            work->refresh = 1;
+            break;
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 7:
+            if (work->remaining > 0) {
+                work->refresh = 1;
+            }
+            break;
+        default:
+            return result;
+        }
     }
-    param_1->field_0x110 = 1;
-  }
-  return temp_v1;
+    return result;
 }
-
-} /* extern "C" */
+}

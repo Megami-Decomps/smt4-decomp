@@ -1,107 +1,103 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00153084` (_code @ 0x153084, 0x1c4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: classification registers, paired dimension loads and format-case placement differ. */
+#include "gfx/RenderTargetState.h"
+#include "AsdSDK/AsdDebug.h"
+
+struct AsdGxSurfaceDescription {
+    s32 format;
+    s32 width, height;
+    u32 location;
+    u32 unk10;
+    u32 flags;
+};
+typedef char AsdGxSurfaceDescriptionSize[sizeof(AsdGxSurfaceDescription) == 0x18 ? 1 : -1];
 
 extern "C" {
+void *asdMemoryAlloc(u32, u32, u32, u32, u32);
+void *asdMemoryAllocAligned(u32, u32, u32, u32, u32, u32);
+u32 asdGxGetPhysicalAddress(const void *);
+extern const char DAT_0053d704[];
 
-int asdMemoryAlloc(int, int, int, int, int);
-int asdMemoryAllocAligned(int, int, int, int, int, int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: asdMemoryAllocAligned. */
-extern int asdGxGetPhysicalAddress(void);
-
-
-void FUN_00153084(int param_1,int param_2,int param_3)
-
+/* Describe both framebuffer surfaces and optionally allocate their backing storage. */
+void FUN_00153084(RenderTargetFramebuffer *framebuffer, const AsdGxSurfaceDescription *description, s32 allocate)
 {
-/* irregular: 1 goto(s); 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  int *piVar4;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v2 = 0;
-  do {
-    temp_v3 = 0;
-    temp_v1 = 0;
-    piVar3 = (int *)(param_2 + temp_v2 * 0x18);
-    temp_v4 = *piVar3;
-    piVar4 = (int *)(param_1 + temp_v2 * 0x18);
-    temp_v0 = 0;
-    if (temp_v4 != 0x81a5) {
-      if (temp_v4 < 0x81a6) {
-        if (temp_v4 == 0x8056) {
-          temp_v0 = 4;
-          temp_v3 = piVar3[1] * piVar3[2] * 2;
+    /* Expose the existing opaque color/depth buffers without changing the shared framebuffer. */
+    struct Surface {
+        s32 format;
+        u32 transferFormat;
+        void *data;
+        u32 physicalAddress;
+        u32 byteSize;
+        u32 auxiliaryFormat;
+    };
+    struct FramebufferStorageView {
+        Surface surfaces[2];
+        s32 width, height;
+        u32 flags;
+    };
+    typedef char FramebufferStorageOffsets[
+        sizeof(Surface) == 0x18 && sizeof(FramebufferStorageView) == sizeof(RenderTargetFramebuffer) &&
+        offsetof(FramebufferStorageView, width) == 0x30 &&
+        offsetof(FramebufferStorageView, flags) == 0x38 ? 1 : -1];
+    FramebufferStorageView *storage = (FramebufferStorageView *)framebuffer;
+    for (u32 index = 0; index < 2; ++index) {
+        const AsdGxSurfaceDescription *source = &description[index];
+        Surface *surface = &storage->surfaces[index];
+        const s32 width = source->width;
+        const s32 height = source->height;
+        u32 bytes = 0;
+        u32 transferFormat = 0;
+        u32 auxiliaryFormat = 0;
+        switch (source->format) {
+        case 0x8056: // GL_RGBA4
+            transferFormat = 4;
+            bytes = width * height * 2;
+            break;
+        case 0x8057: // GL_RGB5_A1
+            transferFormat = 2;
+            bytes = width * height * 2;
+            break;
+        case 0x8058: // GL_RGBA8
+            auxiliaryFormat = 2;
+            bytes = width * height * 4;
+            break;
+        case 0x81A5: // GL_DEPTH_COMPONENT16
+            bytes = width * height * 2;
+            break;
+        case 0x88F0: // GL_DEPTH24_STENCIL8
+            transferFormat = 3;
+            bytes = width * height * 4;
+            break;
+        case 0x8D62: // GL_RGB565
+            transferFormat = 3;
+            bytes = width * height * 2;
+            break;
         }
-        else if (temp_v4 == 0x8057) {
-          temp_v0 = 2;
-          temp_v3 = piVar3[1] * piVar3[2] * 2;
+        surface->byteSize = bytes;
+        surface->transferFormat = transferFormat;
+        surface->format = source->format;
+        surface->auxiliaryFormat = auxiliaryFormat;
+        if (allocate) {
+            void *data = NULL;
+            switch (source->location) {
+            case 0x10000:
+                asdDebugTrace(DAT_0053d704, 2663);
+                data = asdMemoryAllocAligned(0x10000, 0x100, 0, bytes, 0x40, 1);
+                break;
+            case 0x20000:
+                asdDebugTrace(DAT_0053d704, 2664);
+                data = asdMemoryAlloc(0x20000, 0x100, 0, bytes, 1);
+                break;
+            case 0x30000:
+                asdDebugTrace(DAT_0053d704, 2665);
+                data = asdMemoryAlloc(0x30000, 0x100, 0, bytes, 1);
+                break;
+            }
+            surface->data = data;
+            surface->physicalAddress = asdGxGetPhysicalAddress(data);
         }
-        else {
-          if (temp_v4 != 0x8058) goto LAB_00153148;
-          temp_v1 = 2;
-          temp_v3 = piVar3[1] * piVar3[2] * 4;
-        }
-      }
-      else if (temp_v4 == 0x88f0) {
-        temp_v0 = 3;
-        temp_v3 = piVar3[1] * piVar3[2] * 4;
-      }
-      else if (temp_v4 == 0x8d62) {
-        temp_v0 = 3;
-        temp_v3 = piVar3[1] * piVar3[2] * 2;
-      }
+        storage->width = source->width;
+        storage->height = source->height;
+        storage->flags = source->flags;
     }
-    else {
-      temp_v3 = piVar3[1] * piVar3[2] * 2;
-    }
-LAB_00153148:
-    piVar4[4] = temp_v3;
-    temp_v4 = *piVar3;
-    piVar4[1] = temp_v0;
-    *piVar4 = temp_v4;
-    piVar4[5] = temp_v1;
-    if (param_3 != 0) {
-      temp_v1 = piVar3[3];
-      temp_v0 = 0;
-      if (temp_v1 != 0x10000) {
-        if (temp_v1 != 0x20000) {
-          if (temp_v1 == 0x30000) {
-            temp_v0 = 0x30000;
-            asdMemoryAlloc(temp_v0,0x100,0,temp_v3,1);
-          }
-        }
-        else {
-          temp_v0 = 0x20000;
-          asdMemoryAlloc(temp_v0,0x100,0,temp_v3,1);
-        }
-      }
-      else {
-        temp_v0 = 0x10000;
-        asdMemoryAllocAligned(0x10000,0x100,0,temp_v3,0x40,1);
-      }
-      piVar4[2] = temp_v0;
-      temp_v3 = asdGxGetPhysicalAddress();
-      piVar4[3] = temp_v3;
-    }
-    temp_v2 = temp_v2 + 1;
-    *(int *)(param_1 + 0x30) = piVar3[1];
-    *(int *)(param_1 + 0x34) = piVar3[2];
-    *(int *)(param_1 + 0x38) = piVar3[5];
-    if (temp_v2 >= 2) {
-      return;
-    }
-  } while( 1 );
 }
-
-} /* extern "C" */
+}

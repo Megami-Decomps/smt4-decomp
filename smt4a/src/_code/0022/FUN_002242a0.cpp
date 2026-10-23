@@ -1,90 +1,90 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002242a0` (_code @ 0x2242a0, 0x158 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: state-machine constants, sprite member bases and result-zero lifetime differ. */
+#include "map/mapTrap.h"
+
+struct FloatTable;
+struct TrapEffectFlags { u32 unk00; u32 flags; };
+struct TrapEffect {
+    u32 unk00;
+    union { FloatTable *scalar; TrapEffectFlags *flags; };
+};
+struct TrapUpdateView {
+    s32 state;
+    s32 frame;
+    u32 unk08;
+    u8 completed;
+    u8 unk0d[3];
+    struct {
+        u8 active;
+        u8 unk01[0x13];
+        s32 animation;
+        u8 animationPending;
+        u8 unk19[0xb];
+        TrapEffect *effect;
+    } sprite;
+    u8 unk38[0x2c];
+    s32 effectState;
+    s32 effectFrame;
+    u8 alternate;
+};
+struct TrapSceneView { u8 unk00[0x1a8]; void *script; };
 
 extern "C" {
+extern MapTrapA *g_mapTrap;
+extern TrapSceneView *g_lmapScene;
+void linkHolderSetFlag(void *script);
+f32 FUN_004ffb30(FloatTable *table);
 
-int linkHolderSetFlag(unsigned int);
-int FUN_004ffb30(unsigned int);
-
-extern int g_lmapScene; /* 0x581288 */
-extern unsigned int *g_mapTrap; /* 0x587f0c */
-
-/* Supplied declaration required: linkHolderSetFlag. */
-/* Supplied declaration required: FUN_004ffb30. */
-
-
-unsigned int FUN_002242a0(void)
-
+// Advance trap activation, recovery and effect visibility state machines.
+u32 FUN_002242a0(void)
 {
-/* irregular: irregular input(s): in_s0; 2 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int in_s0;
-  
-  puVar1 = g_mapTrap;
-  temp_v0 = *g_mapTrap;
-  if (temp_v0 >= 2) {
-    if (temp_v0 != 2) {
-      if (temp_v0 == 3) {
-        temp_v0 = g_mapTrap[1];
-        puVar1 = g_mapTrap + 4;
-        g_mapTrap[1] = temp_v0 + 1;
-        if ((int)(temp_v0 + 1) >= 0x1f) {
-          *(unsigned char *)puVar1 = 0;
-          puVar1 = g_mapTrap;
-          *g_mapTrap = 1;
-          puVar1[1] = 0;
+    TrapUpdateView *trap = reinterpret_cast<TrapUpdateView *>(g_mapTrap);
+    switch (trap->state) {
+    case 0:
+    case 1:
+        break;
+    case 2:
+        if (++trap->frame == 40) {
+            trap->sprite.animation = 1;
+            trap->sprite.animationPending = 1;
         }
-      }
+        if (trap->completed) {
+            trap->sprite.animation = trap->alternate ? 3 : 2;
+            trap->sprite.animationPending = 1;
+            trap->state = 3;
+            trap->frame = 0;
+        }
+        break;
+    case 3:
+        if (++trap->frame > 30) {
+            trap->sprite.active = 0;
+            trap = reinterpret_cast<TrapUpdateView *>(g_mapTrap);
+            trap->state = 1;
+            trap->frame = 0;
+        }
+        break;
     }
-    else {
-      temp_v0 = g_mapTrap[1];
-      g_mapTrap[1] = temp_v0 + 1;
-      if (temp_v0 + 1 == 0x28) {
-        puVar1[9] = 1;
-        *(unsigned char *)(puVar1 + 10) = 1;
-      }
-      if ((char)puVar1[3] != '\0') {
-        if ((char)puVar1[0x1b] != '\0') {
-          puVar1[9] = 3;
-        }
-        else {
-          puVar1[9] = 2;
-        }
-        *(unsigned char *)(puVar1 + 10) = 1;
-        *puVar1 = 3;
-        puVar1[1] = 0;
-      }
+    trap = reinterpret_cast<TrapUpdateView *>(g_mapTrap);
+    switch (trap->effectState) {
+    case 0:
+        break;
+    case 1:
+        trap->sprite.effect->flags->flags &= ~3u;
+        trap->effectState = 2;
+        trap->effectFrame = 0;
+        break;
+    case 2: {
+        union { f32 value; s32 bits; } scalar;
+        scalar.value = FUN_004ffb30(trap->sprite.effect->scalar);
+        if (scalar.bits >= 0x43070000)
+            linkHolderSetFlag(g_lmapScene->script);
+        break;
     }
-  }
-  puVar1 = g_mapTrap;
-  temp_v0 = g_mapTrap[0x19];
-  if (temp_v0 != 0) {
-    if (temp_v0 != 1) {
-      if (temp_v0 != 2) {
-        if (temp_v0 == 3) {
-          *(unsigned int *)(*(int *)(g_mapTrap[0xd] + 4) + 4) =
-               *(unsigned int *)(*(int *)(g_mapTrap[0xd] + 4) + 4) | 3;
-          puVar1[0x19] = 0;
-          puVar1[0x1a] = 0;
-        }
-      }
-      else {
-        FUN_004ffb30(*(unsigned int *)(g_mapTrap[0xd] + 4));
-        if (in_s0 >= 0x43070000) {
-          linkHolderSetFlag(*(unsigned int *)(g_lmapScene + 0x1a8));
-        }
-      }
+    case 3:
+        trap->sprite.effect->flags->flags |= 3;
+        trap->effectState = 0;
+        trap->effectFrame = 0;
+        break;
     }
-    else {
-      *(unsigned int *)(*(int *)(g_mapTrap[0xd] + 4) + 4) =
-           *(unsigned int *)(*(int *)(g_mapTrap[0xd] + 4) + 4) & 0xfffffffc;
-      puVar1[0x19] = 2;
-      puVar1[0x1a] = 0;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

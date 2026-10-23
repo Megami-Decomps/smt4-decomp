@@ -16,11 +16,20 @@ typedef struct NameWork {
 
 /* smt4: the global is a pointer at +4 of a two-word block. */
 typedef struct NameGlobals {
-    /* 0x00 */ u32 unk00;
+    union {
+        /* 0x00 */ u32 unk00;
+        struct {
+            /* 0x00 */ u8 active;
+            /* 0x01 */ u8 restoreHelp;
+            /* 0x02 */ u8 unk02[2];
+        } status;
+    };
     /* 0x04 */ NameWork *work;
 } NameGlobals;
 
 typedef char NameWorkPrefixLayoutCheck[sizeof(NameWork) == 0x10 &&
     offsetof(NameWork, done) == 0xc && offsetof(NameWork, phase) == 0xd ? 1 : -1];
+typedef char NameGlobalsStatusOffsetCheck[offsetof(NameGlobals, status.active) == 0 &&
+    offsetof(NameGlobals, status.restoreHelp) == 1 && sizeof(NameGlobals) == 8 ? 1 : -1];
 
 #endif

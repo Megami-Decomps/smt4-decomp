@@ -1,65 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004cc9dc` (_code @ 0x4cc9dc, 0x124 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Experience-loop block placement, saved registers, and high-level polynomial lowering differ. */
+#include "gamedata/DataTable.h"
+#include "shard/W6_W6Match8_DevilRecordA.h"
 
 extern "C" {
+s32 gameGetUnlockedCountLimit(void);
 
-int FUN_00184310(void);
-int dataTableGet(int, int);
-
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: dataTableGet. */
-extern int dataTableGetEntries(void);
-extern int gameGetUnlockedCountLimit(void);
-
-
-int FUN_004cc9dc(int param_1,int param_2,unsigned int *param_3)
-
+/* Consumes experience with a base-level scaling factor and returns the levels gained. */
+s32 FUN_004cc9dc(u32 id, s32 startingLevel, u32 *experience)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  FUN_00184310();
-  temp_v3 = (param_2 - (unsigned int)*(unsigned short *)(param_1 + 6)) + 1;
-  if (temp_v3 < 1) {
-    temp_v4 = 100;
-  }
-  else {
-    if (temp_v3 >= 11) {
-      temp_v3 = 10;
+    s32 distance = startingLevel - FUN_00184310(id)->level + 1;
+    u32 percentage;
+    if (distance <= 0) {
+        percentage = 100;
+    } else {
+        if (distance > 10) {
+            distance = 10;
+        }
+        const u16 *percentages = (const u16 *)dataTableGetEntries(dataTableGet(9, 2));
+        percentage = percentages[distance - 1];
     }
-    dataTableGet(9,2);
-    temp_v0 = dataTableGetEntries();
-    temp_v4 = (unsigned int)*(unsigned short *)((temp_v0 + temp_v3 * 2) - 2);
-  }
-  for (temp_v3 = param_2; temp_v0 = gameGetUnlockedCountLimit(), temp_v3 < temp_v0; temp_v3 = temp_v3 + 1) {
-    dataTableGet(9,1);
-    temp_v0 = dataTableGetEntries();
-    temp_v1 = gameGetUnlockedCountLimit();
-    if (temp_v3 >= temp_v1) {
-      temp_v2 = 0;
+    s32 level = startingLevel;
+    for (; level < gameGetUnlockedCountLimit(); ++level) {
+        const u32 *requirements = (const u32 *)dataTableGetEntries(dataTableGet(9, 1));
+        u32 required;
+        if (level >= gameGetUnlockedCountLimit()) {
+            required = 0;
+        } else if (level >= 99) {
+            required = level * level * 3 + (u32)(level * level * level) / 100 +
+                level * 3512 + 99526;
+            if (required > 999999) {
+                required = 999999;
+            }
+        } else {
+            required = requirements[level - 1];
+        }
+        required = required * percentage / 100;
+        if (required > 999999) {
+            required = 999999;
+        }
+        if (*experience < required) {
+            break;
+        }
+        *experience -= required;
     }
-    else if (temp_v3 >= 99) {
-      temp_v2 = temp_v3 * temp_v3 * 3 + (unsigned int)(temp_v3 * temp_v3 * temp_v3) / 100 + temp_v3 * 0xdb8 + 0x184c6;
-      if (temp_v2 >= 1000000) {
-        temp_v2 = 999999;
-      }
-    }
-    else {
-      temp_v2 = *(unsigned int *)((temp_v0 + temp_v3 * 4) - 4);
-    }
-    temp_v2 = (temp_v2 * temp_v4) / 100;
-    if (temp_v2 >= 1000000) {
-      temp_v2 = 999999;
-    }
-    if (*param_3 < temp_v2) break;
-    *param_3 = *param_3 - temp_v2;
-  }
-  return temp_v3 - param_2;
+    return level - startingLevel;
 }
-
-} /* extern "C" */
+}

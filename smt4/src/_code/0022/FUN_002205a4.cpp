@@ -10,7 +10,7 @@ int FUN_0024edd4(int, int);
 int FUN_0028703c(unsigned int);
 int FUN_0029bb14(unsigned int);
 void FUN_0029c2cc(unsigned int, int);
-int FUN_002adf00(int, unsigned int);
+int cameraExportParameters(int, unsigned int);
 int VectorSignedToFloat(unsigned int, int);
 int rt_memcpy_w(int, int, int);
 
@@ -32,7 +32,7 @@ extern int g_bustupCutAnim; /* 0x43dfc0 */
 /* Supplied declaration required: FUN_0028703c. */
 /* Supplied declaration required: FUN_0029bb14. */
 /* Supplied declaration required: FUN_0029c2cc. */
-/* Supplied declaration required: FUN_002adf00. */
+/* Supplied declaration required: cameraExportParameters. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -98,7 +98,7 @@ void FUN_002205a4(int param_1,int param_2,unsigned int param_3)
     *(unsigned int *)(temp_v0 + 0x5fc) = *(unsigned int *)(temp_v0 + 0x600);
     return;
   }
-  FUN_002adf00(temp_v0 + 0x50c,*(unsigned int *)(temp_v0 + 0x5e8));
+  cameraExportParameters(temp_v0 + 0x50c,*(unsigned int *)(temp_v0 + 0x5e8));
   if (*(char *)(temp_v0 + 0x5f1) != '\0') {
     FUN_0029c2cc(*(unsigned int *)(temp_v0 + 0x5e8),0);
   }

@@ -1,97 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00380c48` (_code @ 0x380c48, 0x1d8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: r0/r1 are exchanged for percentage operands, status bits and the reciprocal used by signed division; all other instructions match. */
+#include "battle/btlMain.h"
+#include "battle/btlUnit.h"
+#include "battle/BattleMessageMasks.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
+extern u32 g_btlScriptUnit;
+extern BattleMessageFlagMasks g_btlMessageFlagMasks;
+s32 scrGetArg(u32 index);
+BtlUnitA *btlUnitGet(u32 id);
+BtlMainStateA *btlGetMainState(void);
+void FUN_004fb798(s32 mode, BtlUnitA *unit, u32 effect, BattleRosterRecordA *target, s32 first,
+    s32 hp, s32 mp, u32 color, u32 flags, s32 start, s32 end, s32 kind, s32 third, s32 fourth, s32 enabled);
+void FUN_004fb43c(s32 delay, BtlUnitA *unit, u32 effect, s32 first, s32 second, s32 third, s32 fourth);
 
-int FUN_004fb43c(int, unsigned int, int, int, int, int, int);
-int FUN_004fb798(int, unsigned int, int, int, int, int, int, unsigned int, unsigned int, int, int, int, int, int, int);
-
-/* stack frame of void: 12 slot(s), 48 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-} void_stack;
-
-extern unsigned int DAT_005710e8; /* 0x5710e8 */
-extern unsigned int DAT_005710ec; /* 0x5710ec */
-extern unsigned int DAT_00571108; /* 0x571108 */
-extern unsigned int DAT_0057110c; /* 0x57110c */
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-
-extern int btlGetMainState(void);
-extern int scrGetArg(unsigned int);
-extern unsigned int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_004fb43c. */
-/* Supplied declaration required: FUN_004fb798. */
-
-
-unsigned int FUN_00380c48(void)
-
+u32 FUN_00380c48(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int *puVar8;
-  int temp_v7;
-  int temp_v8;
-  unsigned int temp_v9;
-  
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetArg(1);
-  temp_v3 = scrGetArg(2);
-  temp_v4 = btlUnitGet(g_btlScriptUnit);
-  temp_v9 = 0;
-  if (0 < temp_v3) {
-    temp_v9 = 0x3be0;
-  }
-  temp_v7 = 0;
-  temp_v3 = 0;
-  do {
-    temp_v5 = btlGetMainState();
-    puVar8 = (unsigned int *)(*(int *)(temp_v5 + 0x1ffc) + temp_v3 * 0x408);
-    if ((((puVar8[1] & DAT_005710ec) != 0 || (DAT_005710e8 & *puVar8) != 0) &&
-        ((puVar8[1] & DAT_0057110c) == 0 && (DAT_00571108 & *puVar8) == 0)) &&
-       (-1 < (short)puVar8[2])) {
-      temp_v5 = (int)(puVar8[0x97] * temp_v1) / 100;
-      if (!((puVar8[0x9d] & 8) == 0 || temp_v5 < 2)) {
-        temp_v5 = 1;
-      }
-      else if (temp_v5 == 0) {
-        temp_v5 = -1;
-      }
-      temp_v8 = (int)(puVar8[0x99] * temp_v2) / 100;
-      if (!((puVar8[0x9d] & 8) == 0 || temp_v8 < 2)) {
-        temp_v8 = 1;
-      }
-      else if (temp_v8 == 0) {
-        temp_v8 = -1;
-      }
-      temp_v6 = btlGetMainState();
-      temp_v0 = temp_v7 * 5;
-      FUN_004fb798(0,temp_v4,0,*(int *)(temp_v6 + 0x1ed4) + (short)puVar8[2] * 0x1d0,0,temp_v5,temp_v8,
-                   0xffffffff,temp_v9,temp_v0,temp_v0,9,0,0,1);
-      FUN_004fb43c(temp_v0,temp_v4,0x1000263,0,0,0,0);
-      temp_v7 = temp_v7 + 1;
+    s32 hpPercent = scrGetArg(0);
+    s32 mpPercent = scrGetArg(1);
+    s32 show = scrGetArg(2);
+    BtlUnitA *unit = btlUnitGet(g_btlScriptUnit);
+    u32 flags = 0;
+    if (show > 0)
+        flags = 0x3BE0;
+    s32 affected = 0;
+    for (s32 index = 0; index < 4; ++index) {
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        if ((entry->flags & g_btlMessageFlagMasks.required) &&
+            !(entry->flags & g_btlMessageFlagMasks.excluded) && entry->unitIndex >= 0) {
+            s32 hp = (s32)((u32)entry->maxHp * hpPercent) / 100;
+            if ((entry->statusFlags & 8) && hp > 1)
+                hp = 1;
+            else if (hp == 0)
+                hp = -1;
+            s32 mp = (s32)((u32)entry->maxMp * mpPercent) / 100;
+            if ((entry->statusFlags & 8) && mp > 1)
+                mp = 1;
+            else if (mp == 0)
+                mp = -1;
+            BattleRosterRecordA *target = &btlGetMainState()->roster[entry->unitIndex];
+            s32 delay = affected * 5;
+            FUN_004fb798(0, unit, 0, target, 0, hp, mp, ~0u, flags, delay, delay, 9, 0, 0, 1);
+            FUN_004fb43c(delay, unit, 0x1000263, 0, 0, 0, 0);
+            ++affected;
+        }
     }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 4);
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

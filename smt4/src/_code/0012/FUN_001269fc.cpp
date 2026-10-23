@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00138954(...);
 int FUN_002adca0(...);
 int FUN_002adde8(int, unsigned int, int *);
-int FUN_002adf00(int, unsigned int);
+int cameraExportParameters(int, unsigned int);
 
 /* stack frame of void: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -25,7 +25,7 @@ extern int g_bustupCutAnim; /* 0x43dfc0 */
 /* Supplied declaration required: FUN_002adca0. */
 /* Supplied declaration required: FUN_002adde8. */
 extern int FUN_002adee0(void);
-/* Supplied declaration required: FUN_002adf00. */
+/* Supplied declaration required: cameraExportParameters. */
 extern int jobIsValid(void);
 
 
@@ -59,7 +59,7 @@ unsigned int FUN_001269fc(void)
     }
   }
   else {
-    FUN_002adf00(g_bustupCutAnim + 0x594,*(unsigned int *)(g_bustupCutAnim + 0x5e8));
+    cameraExportParameters(g_bustupCutAnim + 0x594,*(unsigned int *)(g_bustupCutAnim + 0x5e8));
     temp_v1 = 0;
 LAB_00126a54:
     do {

@@ -1,93 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c35b0` (_code @ 0x2c35b0, 0x110 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: render-target selection and framebuffer dimension scheduling differ. */
+#include "gfx/RenderTargetState.h"
 
 extern "C" {
+extern RenderTargetSystemView g_asdGxPresets;
+extern RenderTargetBinding DAT_004e3a0c;
+extern RenderTargetBinding DAT_004e3a38;
+extern RenderTargetFramebuffer DAT_004e3aa4;
+extern RenderTargetFramebuffer DAT_004e3ae0;
+void FUN_0011a258(const void *color, const void *depth, s32 width, s32 height);
+void FUN_002bc644(s32 x, s32 y, s32 width, s32 height);
+void asdGfxSetMode(u32 mode);
+void FUN_002c2620(u32 buffer);
 
-int FUN_0011a258(unsigned char *, unsigned char *, unsigned int, unsigned int);
-int FUN_002bc644(int, int, int, int);
-int FUN_002c2620(unsigned int);
-int asdGfxSetMode(unsigned int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned int g_asdGxPresets; /* 0x4e39e0 */
-extern unsigned int DAT_004e3a0c; /* 0x4e3a0c */
-extern unsigned int DAT_004e3a38; /* 0x4e3a38 */
-extern int DAT_004e3a64; /* 0x4e3a64 */
-extern unsigned char DAT_004e3a68; /* 0x4e3a68 */
-extern unsigned char DAT_004e3aa4; /* 0x4e3aa4 */
-extern unsigned char DAT_004e3ae0; /* 0x4e3ae0 */
-extern unsigned int *DAT_004e3b4c; /* 0x4e3b4c */
-extern unsigned char *DAT_004e3b50; /* 0x4e3b50 */
-extern int DAT_004e3bd4; /* 0x4e3bd4 */
-extern unsigned char DAT_004e3be0; /* 0x4e3be0 */
-
-/* Supplied declaration required: FUN_0011a258. */
-/* Supplied declaration required: FUN_002bc644. */
-/* Supplied declaration required: FUN_002c2620. */
-/* Supplied declaration required: asdGfxSetMode. */
-
-
-void FUN_002c35b0(int param_1)
-
+/* Select the screen's framebuffer and apply its scaled viewport and buffer binding. */
+void FUN_002c35b0(s32 target)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v2 = 0;
-  if (param_1 == 0) {
-    DAT_004e3b50 = &DAT_004e3a68;
-    DAT_004e3b4c = &g_asdGxPresets;
-  }
-  else if (param_1 != 1) {
-    if (param_1 == 2) {
-      if (DAT_004e3a64 != 0) {
-        DAT_004e3b50 = &DAT_004e3a68;
-      }
-      else {
-        DAT_004e3b50 = &DAT_004e3ae0;
-      }
-      temp_v2 = 1;
-      DAT_004e3b4c = &DAT_004e3a38;
+    s32 screen = 0;
+    if (target == 0) {
+        g_asdGxPresets.selectedFramebuffer = &g_asdGxPresets.framebuffers[0];
+        g_asdGxPresets.selectedBinding = &g_asdGxPresets.bindings[0];
+    } else if (target != 1) {
+        if (target == 2) {
+            if (g_asdGxPresets.sharePrimaryFramebuffer != 0)
+                g_asdGxPresets.selectedFramebuffer = &g_asdGxPresets.framebuffers[0];
+            else
+                g_asdGxPresets.selectedFramebuffer = &DAT_004e3ae0;
+            screen = 1;
+            g_asdGxPresets.selectedBinding = &DAT_004e3a38;
+        }
+    } else {
+        g_asdGxPresets.selectedBinding = &DAT_004e3a0c;
+        g_asdGxPresets.selectedFramebuffer = &DAT_004e3aa4;
     }
-  }
-  else {
-    DAT_004e3b4c = &DAT_004e3a0c;
-    DAT_004e3b50 = &DAT_004e3aa4;
-  }
-  FUN_0011a258(DAT_004e3b50,DAT_004e3b50 + 0x18,*(unsigned int *)(DAT_004e3b50 + 0x30),
-               *(unsigned int *)(DAT_004e3b50 + 0x34));
-  temp_v0 = *(int *)(DAT_004e3b50 + 0x30);
-  temp_v1 = *(int *)(DAT_004e3b50 + 0x34);
-  temp_v3 = *(int *)(DAT_004e3b50 + 0x38);
-  if (temp_v3 != 0x500) {
-    if (temp_v3 != 0x501) {
-      if ((temp_v3 == 0x502) && ((&DAT_004e3be0)[temp_v2] == '\0')) {
-        temp_v1 = temp_v1 >> 1;
-        temp_v0 = temp_v0 >> 1;
-      }
+    RenderTargetFramebuffer *framebuffer = g_asdGxPresets.selectedFramebuffer;
+    FUN_0011a258(framebuffer->colorBuffer, framebuffer->depthBuffer,
+                  framebuffer->width, framebuffer->height);
+    s32 width = g_asdGxPresets.selectedFramebuffer->width;
+    s32 height = g_asdGxPresets.selectedFramebuffer->height;
+    switch (g_asdGxPresets.selectedFramebuffer->format) {
+    case 0x500:
+        break;
+    case 0x501:
+        if (g_asdGxPresets.fullResolution[screen] == 0)
+            width >>= 1;
+        break;
+    case 0x502:
+        if (g_asdGxPresets.fullResolution[screen] == 0) {
+            width >>= 1;
+            height >>= 1;
+        }
+        break;
     }
-    else if ((&DAT_004e3be0)[temp_v2] == '\0') {
-      temp_v0 = temp_v0 >> 1;
+    FUN_002bc644(0, 0, width, height);
+    RenderTargetBinding *binding = g_asdGxPresets.selectedBinding;
+    if (g_asdGxPresets.bindingEnabled == 1) {
+        s32 index = binding->index;
+        asdGfxSetMode(binding->mode);
+        FUN_002c2620(binding->buffers[index]);
     }
-  }
-  FUN_002bc644(0,0,temp_v0,temp_v1);
-  puVar1 = DAT_004e3b4c;
-  if (DAT_004e3bd4 == 1) {
-    temp_v2 = DAT_004e3b4c[5];
-    asdGfxSetMode(*DAT_004e3b4c);
-    FUN_002c2620(puVar1[temp_v2 + 2]);
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -1,91 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004aace8` (_code @ 0x4aace8, 0x1b4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: center-dimension fallback is laid out before the widget query instead of out of line; coordinate registers and normal-slot float tail differ. */
+#include "battle/btlUI.h"
+#include "shard/S1ListPanel.h"
 
 extern "C" {
+extern BtlUiGlobalsA g_btlUi;
+SpriteInfo *FUN_001834a4(s32 group, s32 sprite);
+s32 FUN_0035fa18(BtlUiObjCA *widget);
+void FUN_004aa0b0(BtlUiA *ui, u32 alternate, u32 mode, f32 x, f32 y, f32 depth);
 
-int FUN_004aa0b0(int, unsigned int, int, int);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_5_stack;
-
-extern unsigned char g_btlUi; /* 0x57a9b8 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_001834a4(unsigned int, unsigned int);
-extern int FUN_0035fa18(int, int, short *, int);
-/* Supplied declaration required: FUN_004aa0b0. */
-
-
-void FUN_004aace8(unsigned int param_1,int param_2,unsigned int param_3,int param_4,int param_5)
-
+void FUN_004aace8(u32 unused, s32 slot, u32 alternate, s32 x, s32 y)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  short *psVar7;
-  int temp_v6;
-  unsigned int in_fpscr;
-  
-  temp_v2 = (*(int *)((unsigned char *)&g_btlUi + 0x10));
-  temp_v4 = 0;
-  if (param_2 == 0) {
-    temp_v4 = 0x3fa;
-  }
-  else if (param_2 == 1) {
-    temp_v4 = 0x403;
-  }
-  else if (param_2 == 2) {
-    temp_v4 = 0x40c;
-  }
-  else if (param_2 == 3) {
-    temp_v4 = 0x415;
-  }
-  else if (param_2 == 4) {
-    temp_v4 = 0x1cc;
-  }
-  temp_v3 = FUN_001834a4(0xd,temp_v4);
-  if (param_2 != 4) {
-    VectorSignedToFloat(param_5 + 0x11 + (int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat((int)*(short *)(temp_v3 + 8) + param_4 + 0x27,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_004aa0b0(temp_v2,param_3,0,param_4 + 0x27);
-    return;
-  }
-  temp_v0 = *(short *)(temp_v3 + 8);
-  temp_v1 = *(short *)(temp_v3 + 10);
-  temp_v3 = FUN_001834a4(0xd,0x416);
-  psVar7 = *(short **)(temp_v3 + 0xc);
-  if (psVar7 != (short *)0x0) {
-    temp_v5 = (int)*(short *)(temp_v3 + 8) + (int)*psVar7 / 2;
-    temp_v6 = (int)*(short *)(temp_v3 + 10);
-    temp_v3 = temp_v6 + (int)psVar7[1] / 2;
-  }
-  else {
-    temp_v6 = (int)*(short *)(temp_v3 + 8);
-    psVar7 = (short *)(*(unsigned short *)(temp_v3 + 6) & 0xffff7fff);
-    temp_v5 = temp_v6 + ((*(unsigned short *)(temp_v3 + 4) & 0xffff7fff) >> 1);
-    temp_v3 = (int)*(short *)(temp_v3 + 10) + ((unsigned int)psVar7 >> 1);
-  }
-  temp_v6 = FUN_0035fa18(temp_v2 + 0x28c4,temp_v5,psVar7,temp_v6);
-  if (temp_v6 != 0) {
-    temp_v6 = FUN_001834a4(0xd,0x71);
-  }
-  else {
-    temp_v6 = FUN_001834a4(0xd,0x70);
-  }
-  temp_v5 = temp_v0 - temp_v5;
-  VectorSignedToFloat(*(short *)(temp_v6 + 10) + param_5 + (temp_v1 - temp_v3),
-                      (unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(*(short *)(temp_v6 + 8) + param_4 + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_004aa0b0(temp_v2,param_3,0,temp_v5);
-  return;
+    BtlUiA *ui = g_btlUi.ui;
+    s32 sprite = 0;
+    if (slot == 0)
+        sprite = 0x3FA;
+    else if (slot == 1)
+        sprite = 0x403;
+    else if (slot == 2)
+        sprite = 0x40C;
+    else if (slot == 3)
+        sprite = 0x415;
+    else if (slot == 4)
+        sprite = 0x1CC;
+    const SpriteInfo *layout = FUN_001834a4(13, sprite);
+    if (slot != 4) {
+        FUN_004aa0b0(ui, alternate, 0, static_cast<f32>(layout->x + (x + 39)),
+                     static_cast<f32>((y + 17) + layout->y) + (alternate ? 0.0f : -2.0f), 0.0f);
+        return;
+    }
+    s32 anchorX = layout->x;
+    s32 anchorY = layout->y;
+    layout = FUN_001834a4(13, 0x416);
+    s32 centerOffsetX, centerOffsetY;
+    if (layout->size) {
+        centerOffsetX = -(layout->x + layout->size[0] / 2);
+        centerOffsetY = -(layout->y + layout->size[1] / 2);
+    } else {
+        centerOffsetX = -(layout->x + ((layout->bounds.width & 0x7FFF) >> 1));
+        centerOffsetY = -(layout->y + ((layout->bounds.height & 0x7FFF) >> 1));
+    }
+    if (FUN_0035fa18(&ui->objC))
+        layout = FUN_001834a4(13, 0x71);
+    else
+        layout = FUN_001834a4(13, 0x70);
+    FUN_004aa0b0(ui, alternate, 0,
+                 static_cast<f32>((layout->x + x) + (anchorX + centerOffsetX)),
+                 static_cast<f32>((layout->y + y) + (anchorY + centerOffsetY)), 0.0f);
 }
-
-} /* extern "C" */
+}

@@ -32,7 +32,7 @@ extern int saveResolvePartySlot(void);
 /* Supplied declaration required: FUN_00269bf0. */
 extern int gameGetUnitRecord(void);
 extern int gameGetPlayerData(void);
-extern int FUN_0033fb2c(unsigned int);
+extern int btlHasReserveReplacement(unsigned int);
 extern int FUN_0033fc50(void);
 
 
@@ -144,7 +144,7 @@ unsigned int FUN_0023d9b8(int param_1,int param_2,fn_0023d9b8_arg2 *param_3)
       }
     }
   }
-  if (((temp_v6 & 0x1000000) != 0) && (temp_v2 = FUN_0033fb2c(0), temp_v2 != 0)) {
+  if (((temp_v6 & 0x1000000) != 0) && (temp_v2 = btlHasReserveReplacement(0), temp_v2 != 0)) {
     temp_v4 = temp_v4 | 0x1000000;
   }
   if (((temp_v6 & 0x2000000) != 0) && (temp_v2 = FUN_0033fc50(), temp_v2 != 0)) {

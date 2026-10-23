@@ -10,7 +10,7 @@ int FUN_002b6db0(...);
 int FUN_002b6dd8(...);
 int cameraSetViewMatrix(int, unsigned char [84]);
 int renderCtxCalculateStereoParallax(int);
-int FUN_002be370(...);
+int itemDrawCategoryBadge(...);
 int FUN_002be5a4(...);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
@@ -70,7 +70,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_002be370. */
+/* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
@@ -290,7 +290,7 @@ unsigned int FUN_0011a434(void)
                     );
       }
       if (*(int *)(temp_v0 + 0x14) == 3) {
-        FUN_002be370((int)*(short *)(temp_v0 + 0x18),temp_v2 - 0xd,8,0x79,0);
+        itemDrawCategoryBadge((int)*(short *)(temp_v0 + 0x18),temp_v2 - 0xd,8,0x79,0);
       }
       if (*(int *)(temp_v0 + 0x14) == 5) {
         FUN_002b6b8c(*(unsigned short *)(temp_v0 + 0x18),temp_v2 - 0xd,8,0x79);

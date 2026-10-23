@@ -1,81 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00118c38` (_code @ 0x118c38, 0x108 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: rectangle semantics restored; float-register scheduling and color initialization order differ. */
+#include "shard/W6_W6Match3_EffectColor.h"
+
+struct ColoredRectangle {
+    f32 left;
+    f32 top;
+    f32 right;
+    f32 bottom;
+    u32 color;
+};
 
 extern "C" {
+extern u32 g_titleScene;
+void FUN_002c1b64(u32 scene, s32 mode);
+void FUN_002b76d0(const EffectColor *topLeft, const EffectColor *topRight,
+                  const EffectColor *bottomLeft, const EffectColor *bottomRight,
+                  f32 x, f32 y, f32 width, f32 height, f32 depth);
 
-int FUN_002b76d0(float *);
-int FUN_002c1b64(unsigned int, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
-
-extern unsigned int g_titleScene; /* 0x44ea00 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002b76d0. */
-/* Supplied declaration required: FUN_002c1b64. */
-
-
-void FUN_00118c38(int param_1,unsigned int param_2)
-
+/* Draw inclusive-coordinate rectangles, unpacking each packed RGBA color. */
+void FUN_00118c38(const ColoredRectangle *rectangles, u32 count)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int in_fpscr;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  
-  temp_v5 = 0;
-  if (param_2 != 0) {
-    temp_v7 = 0.003921569f;
-    temp_v8 = 1.0f;
-    do {
-      temp_v4 = *(unsigned int *)(param_1 + temp_v5 * 0x14 + 0x10);
-      temp_v3 = 0;
-      temp_v9 = temp_v8;
-      temp_v10 = temp_v8;
-      temp_v11 = temp_v8;
-      temp_v12 = temp_v8;
-      do {
-        temp_v6 = (float)VectorUnsignedToFloat(temp_v4 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v6 = temp_v6 * temp_v7;
-        temp_v0 = temp_v10;
-        temp_v1 = temp_v11;
-        temp_v2 = temp_v6;
-        if ((((temp_v3 != 0) && (temp_v1 = temp_v6, temp_v2 = temp_v12, temp_v3 != 1)) &&
-            (temp_v0 = temp_v6, temp_v1 = temp_v11, temp_v3 != 2)) && (temp_v0 = temp_v10, temp_v3 == 3)) {
-          temp_v9 = temp_v6;
+    for (u32 i = 0; i < count; ++i) {
+        EffectColor color;
+        color.red = 1.0f;
+        color.green = 1.0f;
+        color.blue = 1.0f;
+        color.alpha = 1.0f;
+        u32 packed = rectangles[i].color;
+        for (s32 channel = 0; channel < 4; ++channel) {
+            f32 value = (f32)(packed & 0xff) * 0.003921569f;
+            switch (channel) {
+            case 0: color.alpha = value; break;
+            case 1: color.blue = value; break;
+            case 2: color.green = value; break;
+            case 3: color.red = value; break;
+            }
+            packed >>= 8;
         }
-        temp_v12 = temp_v2;
-        temp_v11 = temp_v1;
-        temp_v10 = temp_v0;
-        temp_v3 = temp_v3 + 1;
-        temp_v4 = temp_v4 >> 8;
-      } while (temp_v3 < 4);
-      FUN_002c1b64(g_titleScene,0);
-      in_fpscr = in_fpscr & 0xfffffff;
-      FUN_002b76d0(&temp_v9);
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < param_2);
-  }
-  return;
+        FUN_002c1b64(g_titleScene, 0);
+        f32 x = rectangles[i].left;
+        f32 y = rectangles[i].top;
+        f32 width = rectangles[i].right - x;
+        if (0.0f <= width)
+            width += 1.0f;
+        else
+            width -= 1.0f;
+        f32 height = rectangles[i].bottom - y;
+        if (height >= 0.0f)
+            height += 1.0f;
+        else
+            height -= 1.0f;
+        FUN_002b76d0(&color, &color, &color, &color,
+                      x, y, width, height, 0.0f);
+    }
 }
-
-} /* extern "C" */
+}

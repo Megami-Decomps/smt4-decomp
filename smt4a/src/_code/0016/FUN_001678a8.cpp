@@ -1,118 +1,81 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001678a8` (_code @ 0x1678a8, 0x200 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initial message-state load register and final state-pop tail-call lowering differ. */
+#include "camp/RenderCtx.h"
+#include "ui/UiSpriteState.h"
+#include "ui/MessageMain.h"
 
-extern "C" {
-
-int FUN_001634b4(...);
-int efctSetSpeed(void);
-int renderCtxPopState(...);
-int renderStackPushIndexed(int, int, unsigned int);
-int FUN_00183bb0(void);
-int pairSetSecondResetFirst(byte *, int);
-int renderCtxCalculateStereoParallax(int);
-int VectorSignedToFloat(...);
-
-typedef struct fn_001678a8_arg0 fn_001678a8_arg0;
-struct fn_001678a8_arg0 {
-    unsigned char pad_0x0[0x4];
-    void *field_0x4; /* +0x4 */
-    byte field_0x8; /* +0x8 */
-    byte field_0x9; /* +0x9 */
+struct MessageBoxCategoryViewA {
+    u8 unk00[0x48];
+    u16 category;
 };
+/* A typed sprite view avoids aligning MessageWorkA's odd-sized opaque region. */
+struct MessageSpriteDrawViewA {
+    u32 unk00;
+    const MessageBoxCategoryViewA *config;
+    u8 state;
+    u8 mode;
+    u8 unk00A[0x1AA];
+    UiSpriteState first;
+    u8 unk240[0x8C];
+    UiSpriteState category;
+    UiSpriteState third;
+    u8 unk3E4[0x8C];
+    UiSpriteState fourth;
+    UiSpriteState special;
+    u8 unk588[0x1324];
+    UiSpriteState modeExtra;
+};
+typedef char MessageSpriteDrawOffsetsA[
+    offsetof(MessageSpriteDrawViewA, first) == 0x1B4 &&
+    offsetof(MessageSpriteDrawViewA, category) == 0x2CC &&
+    offsetof(MessageSpriteDrawViewA, third) == 0x358 &&
+    offsetof(MessageSpriteDrawViewA, fourth) == 0x470 &&
+    offsetof(MessageSpriteDrawViewA, special) == 0x4FC &&
+    offsetof(MessageSpriteDrawViewA, modeExtra) == 0x18AC ? 1 : -1];
+extern "C" {
+extern RenderCtxA *g_renderCtx;
+s32 FUN_001692ac(u32, u32);
+void renderStackPushIndexed(RenderCtxA *, s32, s32);
+void renderCtxPopState(RenderCtxA *, s32);
+void efctSetSpeed(f32);
+void FUN_00183bb0();
+f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32);
+s32 packNibblesAndByte(u32, u32, u32);
+void FUN_001634b4(UiSpriteState *, f32);
+void pairSetSecondResetFirst(UiSpriteState *, u32);
 
-typedef int romwright_code(...);
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001634b4. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: renderCtxPopState. */
-/* Supplied declaration required: renderStackPushIndexed. */
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: pairSetSecondResetFirst. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-
-
-void FUN_001678a8(fn_001678a8_arg0 *param_1)
-
+void FUN_001678a8(MessageWorkA *message)
 {
-/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar7;
-  unsigned int in_fpscr;
-  float temp_v6;
-  int temp_v7;
-  
-  if (param_1->field_0x8 != 0) {
-    temp_v3 = FUN_001692ac(1,0);
-    renderStackPushIndexed(g_renderCtx,3,temp_v3);
-    efctSetSpeed();
+    MessageSpriteDrawViewA *work = reinterpret_cast<MessageSpriteDrawViewA *>(message);
+    if (!message->state)
+        return;
+    renderStackPushIndexed(g_renderCtx, 3, FUN_001692ac(1, 0));
+    efctSetSpeed(1.0f);
     FUN_00183bb0();
-    temp_v6 = 0.25f;
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v2 = g_renderCtx;
-    temp_v7 = (int)temp_v6;
-    temp_v0 = param_1->field_0x9;
-    if ((temp_v0 == 7 || temp_v0 == 8) || temp_v0 == 9) {
-      temp_v4 = packNibblesAndByte(6,1,0);
-      piVar7 = (int *)(temp_v2 + 0x12b8);
-      temp_v5 = piVar7[*piVar7 + 2];
-      piVar7[*piVar7 + 2] = temp_v4;
-      if (*(char *)(temp_v2 + 0x12d0) != '\0' || temp_v5 != temp_v4) {
-        (**(romwright_code **)(temp_v2 + 0x12d4))();
-        *(unsigned char *)(temp_v2 + 0x12d0) = 0;
-      }
-      VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_001634b4(&param_1[0x6a].field_0x4);
-      temp_v2 = g_renderCtx;
-      temp_v4 = packNibblesAndByte(6,7,0);
-      piVar7 = (int *)(temp_v2 + 0x12b8);
-      temp_v5 = piVar7[*piVar7 + 2];
-      piVar7[*piVar7 + 2] = temp_v4;
-      if (*(char *)(temp_v2 + 0x12d0) != '\0' || temp_v5 != temp_v4) {
-        (**(romwright_code **)(temp_v2 + 0x12d4))();
-        *(unsigned char *)(temp_v2 + 0x12d0) = 0;
-      }
+    s32 parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.25f));
+    if (work->mode == 7 || work->mode == 8 || work->mode == 9) {
+        RenderCtxA *context = g_renderCtx;
+        renderCtxSetB(context, packNibblesAndByte(6, 1, 0));
+        FUN_001634b4(&work->special, static_cast<f32>(parallax));
+        context = g_renderCtx;
+        renderCtxSetB(context, packNibblesAndByte(6, 7, 0));
     }
-    temp_v1 = *(unsigned short *)((int)param_1->field_0x4 + 0x48);
-    if (temp_v1 < 3) {
-      pairSetSecondResetFirst(&param_1[0x3b].field_0x8,0x1f);
-    }
-    else if (temp_v1 < 5) {
-      pairSetSecondResetFirst(&param_1[0x3b].field_0x8,0x1b);
-    }
-    else if (temp_v1 < 7) {
-      pairSetSecondResetFirst(&param_1[0x3b].field_0x8,0x1c);
-    }
-    else if (temp_v1 < 9) {
-      pairSetSecondResetFirst(&param_1[0x3b].field_0x8,0x1e);
-    }
-    else {
-      pairSetSecondResetFirst(&param_1[0x3b].field_0x8,0x1d);
-    }
-    VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001634b4(&param_1[0x24].field_0x4);
-    VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001634b4(&param_1[0x3b].field_0x8);
-    VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001634b4(&param_1[0x47].field_0x4);
-    if (param_1->field_0x9 == 0xb) {
-      VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_001634b4(&param_1[0x20e].field_0x4);
-    }
-    VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001634b4(&param_1[0x5e].field_0x8);
-    renderCtxPopState(g_renderCtx,3);
-  }
-  return;
+    s32 category = work->config->category;
+    if (category <= 2)
+        pairSetSecondResetFirst(&work->category, 31);
+    else if (category <= 4)
+        pairSetSecondResetFirst(&work->category, 27);
+    else if (category <= 6)
+        pairSetSecondResetFirst(&work->category, 28);
+    else if (category <= 8)
+        pairSetSecondResetFirst(&work->category, 30);
+    else
+        pairSetSecondResetFirst(&work->category, 29);
+    FUN_001634b4(&work->first, static_cast<f32>(parallax));
+    FUN_001634b4(&work->category, static_cast<f32>(parallax));
+    FUN_001634b4(&work->third, static_cast<f32>(parallax));
+    if (work->mode == 11)
+        FUN_001634b4(&work->modeExtra, static_cast<f32>(parallax));
+    FUN_001634b4(&work->fourth, static_cast<f32>(parallax));
+    renderCtxPopState(g_renderCtx, 3);
 }
-
-} /* extern "C" */
+}

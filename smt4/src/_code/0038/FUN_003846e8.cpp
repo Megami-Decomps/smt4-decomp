@@ -1,63 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003846e8` (_code @ 0x3846e8, 0x104 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stack allocation precedes the initialized-byte load; all other instructions match. */
+#include "ui/DummyAttachmentWork.h"
+
+/* The renderer fields lie beyond the shared AsdMdlNode prefix. */
+struct AttachmentRenderer {
+    u8 unk00[0x1f6];
+    u8 dirty;
+};
+struct AttachmentNodeView {
+    u8 unk00[0x2c];
+    AttachmentRenderer *renderer;
+};
 
 extern "C" {
+void nodeSetTranslation(AsdMdlNode *, s32, const f32 *);
+void FUN_00298d50(u32);
+void FUN_002adde8(AsdMdlNode *, const char *, f32 *);
+void textFormatBuffer(char *, const char *, ...);
+void FUN_002c159c(f32, f32);
+u32 FUN_002c501c(void);
 
-int nodeSetTranslation(unsigned int, int, unsigned char [16]);
-int FUN_00298d50(unsigned int);
-int FUN_002adde8(unsigned int, unsigned char [32], unsigned char [16]);
-int textFormatBuffer(unsigned char [32], unsigned char *, unsigned int);
-int FUN_002c159c(void);
-
-extern unsigned char LAB_003847f4; /* 0x3847f4 */
-
-/* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: FUN_00298d50. */
-/* Supplied declaration required: FUN_002adde8. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002c159c. */
-extern unsigned int FUN_002c501c(void);
-
-
-void FUN_003846e8(int param_1)
-
+// Place both sets of markers at the six named dummy points of the source model.
+void FUN_003846e8(DummyAttachmentWork *work)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [32];
-  unsigned char temp_v4 [16];
-  
-  if (*(char *)(param_1 + 0xd40) == '\0') {
-    if (*(char *)(param_1 + 0x21) == '\x01') {
-      temp_v0 = FUN_002c501c();
-      FUN_002c159c();
-      FUN_00298d50(temp_v0);
+    char name[32];
+    f32 position[4];
+    if (work->initialized)
+        return;
+    if (work->mode == 1) {
+        u32 camera = FUN_002c501c();
+        FUN_002c159c(0.25f, 0.3f);
+        FUN_00298d50(camera);
     }
-    temp_v1 = 0;
-    *(unsigned char *)(param_1 + 0xd40) = 1;
-    do {
-      textFormatBuffer(temp_v3,&LAB_003847f4,temp_v1 + 1);
-      if (*(char *)(param_1 + 0x21) != '\x02') {
-        FUN_002adde8(*(unsigned int *)(*(int *)(*(int *)(param_1 + 0xfac) + 0x1c) + 8),temp_v3,
-                     temp_v4);
-      }
-      else {
-        FUN_002adde8(*(unsigned int *)(*(int *)(param_1 + 0xfb8) + 8),temp_v3,temp_v4);
-        puVar2 = *(unsigned int **)(param_1 + 0xfb8);
-        *puVar2 = *puVar2 & 0xfffffffd;
-        *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 1;
-      }
-      temp_v2 = param_1 + temp_v1 * 4;
-      nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v2 + 0xd10) + 8),0,temp_v4);
-      nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v2 + 0xd28) + 8),0,temp_v4);
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 6);
-  }
-  return;
+    work->initialized = 1;
+    for (u32 index = 0; index < 6; ++index) {
+        textFormatBuffer(name, "dummy_npc%d", index + 1);
+        if (work->mode != 2) {
+            FUN_002adde8(work->source->model->node, name, position);
+        } else {
+            FUN_002adde8(work->alternate->node, name, position);
+            AsdMdlObject *model = work->alternate;
+            model->flags &= ~2;
+            reinterpret_cast<AttachmentNodeView *>(model->node)->renderer->dirty = 1;
+        }
+        nodeSetTranslation(work->primary[index]->node, 0, position);
+        nodeSetTranslation(work->secondary[index]->node, 0, position);
+    }
 }
-
-} /* extern "C" */
+}

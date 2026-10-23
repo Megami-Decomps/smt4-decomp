@@ -5,7 +5,7 @@
 extern "C" {
 
 int colorKeyTrackAdvanceRgb(...);
-int FUN_001ca604(...);
+int effCopyTransformColorKeys(...);
 int FUN_001dd974(...);
 int FUN_001dda40(...);
 int FUN_001ee200(...);
@@ -44,7 +44,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: colorKeyTrackAdvanceRgb. */
-/* Supplied declaration required: FUN_001ca604. */
+/* Supplied declaration required: effCopyTransformColorKeys. */
 /* Supplied declaration required: FUN_001dd974. */
 /* Supplied declaration required: FUN_001dda40. */
 /* Supplied declaration required: FUN_001ee200. */
@@ -118,7 +118,7 @@ void FUN_00193c70(int param_1,fn_00193c70_arg1 *param_2)
   *(unsigned int *)(param_1 + 0x230) = 0;
   *(unsigned int *)(param_1 + 0x234) = 0;
   *(unsigned int *)(param_1 + 0x238) = 0;
-  FUN_001ca604(param_1,param_2);
+  effCopyTransformColorKeys(param_1,param_2);
   if (*(int *)(param_1 + 0x50) != 0) {
     if (*(short *)(param_1 + 0x3c) != 0) {
       FUN_00291620(2,*(int *)(param_1 + 0x50),1);

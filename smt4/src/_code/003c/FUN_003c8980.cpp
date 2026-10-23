@@ -1,107 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c8980` (_code @ 0x3c8980, 0x190 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: parent-source pointer registers, zero-store addressing and inherited-count base retention differ. */
+#include "shard/GameOptions.h"
+#include "gamedata/FusionRecipe.h"
+#include "gamedata/DevilRecord.h"
+/* Ingredient sources extend past the shared recipe's ID list. */
+struct FusionParentSources {
+    FusionRecipe recipe;
+    u8 kinds[12];
+};
+typedef char FusionParentSourcesKindsCheck[offsetof(FusionParentSources, kinds) == 0x1A ? 1 : -1];
 extern "C" {
+void memClear(void *memory, u32 bytes);
+GameOptions *partyMemberFindById(u16 id);
+void FUN_0029dc74(u16 id, GameOptions *output);
+void unitInitializeFromSavedRecord(u16 id, GameOptions *output);
+void bitsetSetBit(GameOptions *owner, u32 bit);
+void unitRecalculateEffectiveStats(GameOptions *unit);
 
-int bitsetSetBit(int, int);
-int unitRecalculateEffectiveStats(int);
-int FUN_0029d770(int, unsigned char [1552]);
-int FUN_0029dc74(int, unsigned char [1552]);
-int devilGetRecord(void);
-int memClear(int, int);
-
-/* Supplied declaration required: bitsetSetBit. */
-/* Supplied declaration required: unitRecalculateEffectiveStats. */
-/* Supplied declaration required: FUN_0029d770. */
-/* Supplied declaration required: FUN_0029dc74. */
-extern unsigned char *partyMemberFindById(unsigned short);
-/* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: memClear. */
-
-
-void FUN_003c8980(unsigned int param_1,unsigned short *param_2,int param_3)
-
+void FUN_003c8980(u32 mode, const FusionParentSources *parents, GameOptions *output)
 {
-/* irregular: 6 native warning(s); review required */
-  char temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned char *unaff_r4;
-  int temp_v6;
-  unsigned char temp_v7 [1552];
-  
-  *(unsigned int *)(param_3 + 0x4c) = 0;
-  *(unsigned int *)(param_3 + 0x50) = 0;
-  *(unsigned int *)(param_3 + 0x54) = 0;
-  *(unsigned int *)(param_3 + 0x58) = 0;
-  *(unsigned int *)(param_3 + 0x5c) = 0;
-  *(unsigned int *)(param_3 + 0x60) = 0;
-  *(unsigned int *)(param_3 + 100) = 0;
-  *(unsigned int *)(param_3 + 0x68) = 0;
-  *(unsigned int *)(param_3 + 0x6c) = 0;
-  *(unsigned int *)(param_3 + 0x70) = 0;
-  *(unsigned int *)(param_3 + 0x74) = 0;
-  *(unsigned int *)(param_3 + 0x78) = 0;
-  *(unsigned int *)(param_3 + 0x7c) = 0;
-  *(unsigned int *)(param_3 + 0x80) = 0;
-  *(unsigned int *)(param_3 + 0x84) = 0;
-  *(unsigned int *)(param_3 + 0x88) = 0;
-  memClear(param_3 + 0x8c,0x500);
-  temp_v6 = 0;
-  do {
-    temp_v1 = param_2[temp_v6 + 1];
-    if (temp_v1 != 0) {
-      temp_v0 = *(char *)((int)param_2 + temp_v6 + 0x1a);
-      if (temp_v0 != '\x01') {
-        if (temp_v0 != '\x03') {
-          if (temp_v0 == '\x02') {
-            FUN_0029dc74(temp_v1,temp_v7);
-            unaff_r4 = temp_v7;
-          }
+    u32 *flagWords = reinterpret_cast<u32 *>(output->inheritance.flags);
+    for (s32 i = 0; i < 16; ++i)
+        flagWords[i] = 0;
+    memClear(output->inheritance.counts, sizeof(output->inheritance.counts));
+    GameOptions temporary;
+    GameOptions *parent;
+    for (s32 i = 0; i < 12; ++i) {
+        u16 id = parents->recipe.ingredients[i];
+        if (id) {
+            /* Nonempty ingredients identify a party, compendium or base-record source. */
+            if (parents->kinds[i] == 1) {
+                parent = partyMemberFindById(id);
+            } else if (parents->kinds[i] == 3) {
+                unitInitializeFromSavedRecord(id, &temporary);
+                parent = &temporary;
+            } else if (parents->kinds[i] == 2) {
+                FUN_0029dc74(id, &temporary);
+                parent = &temporary;
+            }
+            for (s32 j = 0; j < 0x40; ++j)
+                output->inheritance.flags[j] |= parent->inheritance.flags[j];
+            for (s32 j = 0; j < 0x500; ++j) {
+                s32 count = output->inheritance.counts[j] + parent->inheritance.counts[j];
+                if (count > 0xFF)
+                    count = 0xFF;
+                output->inheritance.counts[j] = count;
+            }
+            u16 parentId = parent->unk46;
+            if (output->inheritance.counts[parentId] < 0xFF)
+                ++output->inheritance.counts[parentId];
         }
-        else {
-          FUN_0029d770(temp_v1,temp_v7);
-          unaff_r4 = temp_v7;
-        }
-      }
-      else {
-        unaff_r4 = (unsigned char *)partyMemberFindById(temp_v1);
-      }
-      temp_v3 = 0;
-      do {
-        temp_v4 = param_3 + temp_v3;
-        temp_v2 = temp_v3 + 2;
-        *(unsigned char *)(temp_v4 + 0x4c) = *(unsigned char *)(temp_v4 + 0x4c) | unaff_r4[temp_v3 + 0x4c];
-        *(unsigned char *)(temp_v4 + 0x4d) = unaff_r4[temp_v3 + 0x4d] | *(unsigned char *)(temp_v4 + 0x4d);
-        temp_v3 = temp_v2;
-      } while (temp_v2 < 0x40);
-      temp_v3 = 0;
-      do {
-        temp_v4 = param_3 + temp_v3;
-        temp_v2 = temp_v3 + 0x8c;
-        temp_v3 = temp_v3 + 1;
-        temp_v5 = (unsigned int)(unsigned char)unaff_r4[temp_v2] + (unsigned int)*(unsigned char *)(temp_v4 + 0x8c);
-        if (temp_v5 >= 0x100) {
-          temp_v5 = 0xff;
-        }
-        *(char *)(temp_v4 + 0x8c) = (char)temp_v5;
-      } while (temp_v3 < 0x500);
-      temp_v0 = *(char *)((unsigned int)*(unsigned short *)(unaff_r4 + 0x46) + param_3 + 0x8c);
-      if (temp_v0 != -1) {
-        *(char *)((unsigned int)*(unsigned short *)(unaff_r4 + 0x46) + param_3 + 0x8c) = temp_v0 + '\x01';
-      }
     }
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 0xc);
-  temp_v5 = (unsigned int)*param_2;
-  devilGetRecord();
-  bitsetSetBit(param_3,*(unsigned short *)(temp_v5 + 0x38));
-  unitRecalculateEffectiveStats(param_3);
-  return;
+    const DevilRecord *record = reinterpret_cast<const DevilRecord *>(devilGetRecord(parents->recipe.id));
+    bitsetSetBit(output, record->initialization.innateFlag);
+    unitRecalculateEffectiveStats(output);
 }
-
-} /* extern "C" */
+}

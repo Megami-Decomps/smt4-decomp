@@ -11,7 +11,7 @@ int jobSetIntensity(...);
 int messageSlotSet(...);
 int FUN_00324c48(...);
 int FUN_004731d8(void);
-int FUN_0047db34(...);
+int mapRestoreSavedDestination(...);
 int scriptHolderFree2(...);
 
 int textFormatBuffer(...);
@@ -112,7 +112,7 @@ extern int aocPackageGrantsItem(int, unsigned int, unsigned int);
 extern char *gameBlockGetArea27E98(void);
 /* Supplied declaration required: FUN_004731d8. */
 extern int gameBlockByte27E98Is1To3(void);
-/* Supplied declaration required: FUN_0047db34. */
+/* Supplied declaration required: mapRestoreSavedDestination. */
 extern unsigned int scriptHolderUpdateForward(ScriptHolder *);
 /* Supplied declaration required: scriptHolderFree2. */
 /* Supplied declaration required: FUN_0047e430. */
@@ -339,7 +339,7 @@ unsigned int FUN_00225ddc(void)
       *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xffffff8f;
       if (*(char *)(temp_v3 + 0xc0) != '\0') {
         *(unsigned char *)(temp_v3 + 0xc0) = 0;
-        FUN_0047db34(temp_v3 + 0xa8,1);
+        mapRestoreSavedDestination(temp_v3 + 0xa8,1);
       }
       if (*(char *)(puVar2 + 0xe) == '\0') {
         return 0;

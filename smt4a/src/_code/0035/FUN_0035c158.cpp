@@ -7,7 +7,7 @@ f32 scriptReadStackValueAsFloat(s32 index);
 s32 FUN_0039af04(void);
 u32 npc2dCreateDemonPortrait(u32 demonId, u32 style, s32 x, s32 y, f32 alpha);
 void eventTexSetJobParam(u32 handle);
-void FUN_0036f298(u32 handle);
+void eventInsertSortedTextureJob(u32 handle);
 void scrSetResult(u32 result);
 
 /* Creates the script's demon portrait when its event context is available and returns its handle. */
@@ -23,7 +23,7 @@ u32 FUN_0035c158(void)
     if (context != 0) {
         handle = npc2dCreateDemonPortrait(demonId, style, x, y, alpha);
         eventTexSetJobParam(handle);
-        FUN_0036f298(handle);
+        eventInsertSortedTextureJob(handle);
     }
     scrSetResult(handle);
     return 1;

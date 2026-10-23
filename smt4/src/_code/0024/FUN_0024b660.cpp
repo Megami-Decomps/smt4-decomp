@@ -1,73 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024b660` (_code @ 0x24b660, 0x110 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: vector copies and component-subtraction scheduling differ from retail. */
+#include "gfx/ParticleTransform.h"
 extern "C" {
+extern EffectColorProductState DAT_004ea81c;
+void FUN_00207ee8(void);
+f32 FUN_0024c418(f32 y, f32 x);
+f32 FUN_00269508(const void *curve, s32 frame, s32 duration);
+u32 FUN_00269694(const void *curve, const u32 *opacity, s32 frame, s32 duration);
 
-int FUN_00207ee8(void);
-int FUN_0024c418(void);
-int FUN_00269508(int, unsigned int, unsigned int);
-int FUN_00269694(double, int, int, int);
-
-extern float DAT_004ea91c; /* 0x4ea91c */
-extern float DAT_004ea920; /* 0x4ea920 */
-extern float DAT_004ea924; /* 0x4ea924 */
-extern float DAT_004ea928; /* 0x4ea928 */
-extern float DAT_004ea92c; /* 0x4ea92c */
-extern float DAT_004ea930; /* 0x4ea930 */
-extern float DAT_004ea934; /* 0x4ea934 */
-extern float DAT_004ea938; /* 0x4ea938 */
-
-/* Supplied declaration required: FUN_00207ee8. */
-/* Supplied declaration required: FUN_0024c418. */
-/* Supplied declaration required: FUN_00269508. */
-/* Supplied declaration required: FUN_00269694. */
-
-
-void FUN_0024b660(float *param_1,int param_2,unsigned int param_3,float *param_4)
-
+// Sample color and scale, deriving heading from the path when requested.
+void FUN_0024b660(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous)
 {
-/* irregular: irregular input(s): in_s0; 4 native warning(s); review required */
-  float temp_v0;
-  float in_s0;
-  
-  temp_v0 = (float)(param_2 + 0x2c);
-  FUN_00269694(temp_v0,param_2 + 0x50,param_3,*(unsigned int *)(param_2 + 0xb8));
-  param_1[5] = temp_v0;
-  FUN_00269508(param_2 + 0x60,param_3,*(unsigned int *)(param_2 + 0xb8));
-  param_1[6] = in_s0;
-  if (*(char *)(param_2 + 0x9c) != '\x02') {
-    FUN_00269508(param_2 + 0x8c,param_3,*(unsigned int *)(param_2 + 0xb8));
-  }
-  else {
-    DAT_004ea91c = *param_1;
-    DAT_004ea920 = param_1[1];
-    DAT_004ea924 = param_1[2];
-    DAT_004ea928 = param_1[3];
-    FUN_00207ee8();
-    DAT_004ea938 = DAT_004ea928;
-    DAT_004ea92c = DAT_004ea91c;
-    DAT_004ea930 = DAT_004ea920;
-    DAT_004ea934 = DAT_004ea924;
-    DAT_004ea91c = *param_4;
-    DAT_004ea920 = param_4[1];
-    DAT_004ea924 = param_4[2];
-    DAT_004ea928 = param_4[3];
-    FUN_00207ee8();
-    DAT_004ea91c = DAT_004ea91c - DAT_004ea92c;
-    in_s0 = DAT_004ea920 - DAT_004ea930;
-    DAT_004ea924 = DAT_004ea924 - DAT_004ea934;
-    DAT_004ea928 = DAT_004ea928 - DAT_004ea938;
-    DAT_004ea920 = in_s0;
-    if (DAT_004ea91c == 0.0f && in_s0 == 0.0f) {
-      param_1[7] = 0.0f;
-      return;
+    sample->color = FUN_00269694(curves->colorCurve, &curves->opacity, frame, curves->duration);
+    sample->scale = FUN_00269508(curves->scaleCurve, frame, curves->duration);
+    if (curves->angleMode != 2) {
+        sample->angle = FUN_00269508(curves->angleCurve, frame, curves->duration);
+    } else {
+        DAT_004ea81c.color = sample->position;
+        FUN_00207ee8();
+        DAT_004ea81c.factor.alpha = DAT_004ea81c.color.alpha;
+        DAT_004ea81c.factor.red = DAT_004ea81c.color.red;
+        DAT_004ea81c.factor.green = DAT_004ea81c.color.green;
+        DAT_004ea81c.factor.blue = DAT_004ea81c.color.blue;
+        DAT_004ea81c.color = *previous;
+        FUN_00207ee8();
+        DAT_004ea81c.color.red -= DAT_004ea81c.factor.red;
+        DAT_004ea81c.color.green -= DAT_004ea81c.factor.green;
+        DAT_004ea81c.color.blue -= DAT_004ea81c.factor.blue;
+        DAT_004ea81c.color.alpha -= DAT_004ea81c.factor.alpha;
+        if (DAT_004ea81c.color.red == 0.0f && DAT_004ea81c.color.green == 0.0f) {
+            sample->angle = 0.0f;
+            return;
+        }
+        sample->angle = FUN_0024c418(DAT_004ea81c.color.green, DAT_004ea81c.color.red) * 0.024543693f;
     }
-    FUN_0024c418();
-    in_s0 = in_s0 * 0.024543693f;
-  }
-  param_1[7] = in_s0;
-  return;
 }
-
-} /* extern "C" */
+}

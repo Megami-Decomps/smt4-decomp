@@ -1,115 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ae134` (_code @ 0x3ae134, 0x154 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: slot-rank stores reuse the settings pointer instead of the retail panel base. */
+#include "battle/btlUI.h"
 
 extern "C" {
+extern BtlUiGlobals g_btlUi;
+void FUN_001e1104(BtlUiObjB *, s32 mode, s32 options, s32 firstStrike);
+void FUN_00206368(BtlUiObjA *, s32 mode, s32 first, s32 second);
+u16 slotFindNonnegativeRank(void *owner, u32 slot);
+void communicationBeginTransition(s32 mode);
+void communicationSetResultPointer(void);
+void comWinSetText(const char *text);
+void memFill8(void *output, u32 value);
+void FUN_002ad8a8(BtlUiObjC *, const BtlUiSettings *settings);
+void FUN_002dc464(BtlUiObjC *);
+void FUN_002e439c(BtlUiObjC *);
 
-int FUN_001e1104(unsigned int *, int, int, int);
-int FUN_00206368(unsigned int *, unsigned int, int, int);
-int communicationBeginTransition(int);
-int communicationSetResultPointer(void);
-void comWinSetText(const unsigned char* text);
-int memFill8(unsigned int *, unsigned int);
-int FUN_002ad8a8(unsigned int *, unsigned int *);
-int FUN_002dc464(void);
-int FUN_002e439c(unsigned int *);
-
-typedef struct fn_003ae134_arg0 fn_003ae134_arg0;
-struct fn_003ae134_arg0 {
-    unsigned char pad_0x0[0x3044];
-    undefined4 field_0x3044; /* +0x3044 */
-    undefined4 field_0x3048; /* +0x3048 */
-    undefined4 field_0x304c; /* +0x304c */
-    unsigned char pad_0x3050[0xc];
-    undefined4 field_0x305c; /* +0x305c */
-    unsigned char pad_0x3060[0x3ac];
-    undefined4 field_0x340c; /* +0x340c */
-    unsigned char pad_0x3410[0x2304];
-    undefined2 field_0x5714; /* +0x5714 */
-    unsigned char pad_0x5716[0x10];
-    undefined2 field_0x5726; /* +0x5726 */
-    undefined2 field_0x5728; /* +0x5728 */
-    undefined2 field_0x572a; /* +0x572a */
-    unsigned char pad_0x572c[0xc];
-    undefined2 field_0x5738; /* +0x5738 */
-    unsigned char pad_0x573a[0x1e];
-    undefined4 field_0x5758; /* +0x5758 */
-    unsigned char pad_0x575c[0x3];
-    byte field_0x575f; /* +0x575f */
-};
-
-/* stack frame of param_6: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_6_stack;
-
-extern unsigned char LAB_003ae294; /* 0x3ae294 */
-extern unsigned char g_btlUi; /* 0x439c88 */
-
-/* Supplied declaration required: FUN_001e1104. */
-/* Supplied declaration required: FUN_00206368. */
-extern unsigned short slotFindNonnegativeRank(unsigned int, unsigned int);
-/* Supplied declaration required: communicationBeginTransition. */
-/* Supplied declaration required: communicationSetResultPointer. */
-/* Supplied declaration required: memFill8. */
-/* Supplied declaration required: FUN_002ad8a8. */
-/* Supplied declaration required: FUN_002dc464. */
-/* Supplied declaration required: FUN_002e439c. */
-
-
-void FUN_003ae134(fn_003ae134_arg0 *param_1,int param_2,unsigned char param_3,unsigned char param_4,
-                 int param_5,int param_6)
-
+// Open the battle UI and prepare slot ranks, optionally announcing an enemy first strike.
+void FUN_003ae134(void *, s32 mode, u8 first, u8 second, s32 firstStrike, s32 options)
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  unsigned short temp_v0;
-  unsigned int *puVar4;
-  int temp_v1;
-  
-  puVar1 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x20));
-  (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x20))[0x1f8e] = 1;
-  puVar1[0x1f91] = 0;
-  puVar1[0x1f8f] = param_2;
-  *(unsigned char *)((int)puVar1 + 0x7e9d) = param_3;
-  *(unsigned char *)((int)puVar1 + 0x7e9e) = param_4;
-  temp_v1 = param_5;
-  if (param_2 == 0) {
-    temp_v1 = 0;
-  }
-  FUN_001e1104(puVar1 + 0x880,param_2,param_6,temp_v1);
-  FUN_00206368(puVar1 + 2,puVar1[0x1f8f],(int)*(char *)((int)puVar1 + 0x7e9d),
-               (int)*(char *)((int)puVar1 + 0x7e9e));
-  if ((param_2 == 1) && (param_5 != 0)) {
-    *(unsigned char *)(puVar1 + 0x3276) = 1;
-    puVar1[0x3277] = 0x28;
-    puVar1[0x3278] = 0;
-    comWinSetText(&LAB_003ae294);
-    communicationSetResultPointer();
-    communicationBeginTransition(0);
-  }
-  puVar2 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x20));
-  if (param_6 != 0 || param_2 != 0) {
-    puVar4 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x20)) + 0x1fa5;
-    memFill8(puVar4,0xffffffff);
-    temp_v0 = slotFindNonnegativeRank(*puVar2,0);
-    *(unsigned short *)(puVar2 + 0x1fa5) = temp_v0;
-    temp_v0 = slotFindNonnegativeRank(*puVar2,1);
-    *(unsigned short *)((int)puVar2 + 0x7e96) = temp_v0;
-    temp_v0 = slotFindNonnegativeRank(*puVar2,2);
-    *(unsigned short *)(puVar2 + 0x1fa6) = temp_v0;
-    temp_v0 = slotFindNonnegativeRank(*puVar2,3);
-    *(unsigned short *)((int)puVar2 + 0x7e9a) = temp_v0;
-    FUN_002ad8a8(puVar2 + 0x918,puVar4);
-    if (param_2 != 0) {
-      FUN_002dc464();
-      return;
+    union OpeningView {
+        BtlUi base;
+        struct {
+            u8 unk0000[0x7e38];
+            s32 state;
+            s32 mode;
+            u32 unk7e40;
+            u32 counter;
+            u8 unk7e48[0x55];
+            s8 first;
+            s8 second;
+        } opening;
+        struct {
+            u8 unk0000[0xc9d8];
+            u8 active;
+            u8 unkc9d9[3];
+            u32 duration;
+            u32 frame;
+        } notice;
+    };
+    // Local overlays avoid changing opaque storage used by other battle UI panels.
+    OpeningView *ui = reinterpret_cast<OpeningView *>(g_btlUi.ui);
+    ui->opening.state = 1;
+    ui->opening.counter = 0;
+    ui->opening.mode = mode;
+    ui->opening.first = first;
+    ui->opening.second = second;
+    FUN_001e1104(&ui->base.objB, mode, options, mode == 0 ? 0 : firstStrike);
+    FUN_00206368(&ui->base.objA, ui->opening.mode, ui->opening.first, ui->opening.second);
+    if (mode == 1 && firstStrike) {
+        ui->notice.active = 1;
+        ui->notice.duration = 40;
+        ui->notice.frame = 0;
+        comWinSetText("The enemy strikes first!");
+        communicationSetResultPointer();
+        communicationBeginTransition(0);
     }
-    FUN_002e439c(puVar1 + 0x918);
-    return;
-  }
-  return;
+    if (options != 0 || mode != 0) {
+        BtlUi *current = g_btlUi.ui;
+        BtlUiSettings *settings = &current->settings;
+        memFill8(settings, ~0u);
+        settings->slotRanks[0] = slotFindNonnegativeRank(current->owner, 0);
+        settings->slotRanks[1] = slotFindNonnegativeRank(current->owner, 1);
+        settings->slotRanks[2] = slotFindNonnegativeRank(current->owner, 2);
+        settings->slotRanks[3] = slotFindNonnegativeRank(current->owner, 3);
+        FUN_002ad8a8(&current->objC, settings);
+        if (mode != 0)
+            FUN_002dc464(&ui->base.objC);
+        else
+            FUN_002e439c(&ui->base.objC);
+    }
 }
-
-} /* extern "C" */
+}

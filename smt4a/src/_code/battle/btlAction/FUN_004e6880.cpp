@@ -1,76 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e6880` (_code @ 0x4e6880, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Combatant base reuse, flag loads, saved registers, and ailment-branch placement differ. */
+#include "battle/btlMain.h"
+#include "shard/W4_W4Match2_BtlUnits.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
+extern u64 DAT_00571190;
+u32 lcgRandomRange(u16 maximum);
+u16 FUN_004e9ae8(BtlMainStateA **context, s32 *candidates, s32 count, u32 mode);
+BattleActionUnit *btlUnitGet(BtlMainStateA **context);
 
-extern unsigned int DAT_00571190; /* 0x571190 */
-extern unsigned int DAT_00571194; /* 0x571194 */
-
-extern int lcgRandomRange(short);
-extern short FUN_004e9ae8(int *, int *, int, unsigned int);
-extern int btlUnitGet(int *);
-
-
-void FUN_004e6880(int *param_1,unsigned int param_2)
-
+/* Chooses one eligible combatant matching the requested ailment group and marks it selected. */
+void FUN_004e6880(BtlMainStateA **context, u32 status)
 {
-  unsigned short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int *puVar5;
-  int temp_v4;
-  int aiStack_1d8 [109];
-  
-  temp_v3 = 0;
-  temp_v4 = 0;
-  do {
-    temp_v2 = *(int *)(*param_1 + 0x1ffc);
-    puVar5 = (unsigned int *)(temp_v2 + temp_v4 * 0x408);
-    if ((*puVar5 & DAT_00571190) != 0 || (puVar5[1] & DAT_00571194) != 0) {
-      if (param_2 != 0x16) {
-        if (param_2 != 0x1c) {
-          temp_v0 = *(unsigned short *)(temp_v2 + temp_v4 * 0x408 + 0x274);
-          if (param_2 != 0x1f) {
-            if (((unsigned int)temp_v0 & (1 << (param_2 & 0xff))) != 0) {
-              aiStack_1d8[temp_v3] = (int)*(short *)(temp_v2 + temp_v4 * 0x408 + 0x6e);
-              temp_v3 = temp_v3 + 1;
+    s32 candidates[109];
+    s32 count = 0;
+    for (s32 index = 0; index < 109; ++index) {
+        BtlCombatantEntryA *entry = &(*context)->entries[index];
+        if ((entry->flags & DAT_00571190) != 0) {
+            if (status != 22) {
+                if (status != 28) {
+                    u16 flags = entry->statusFlags;
+                    if (status != 31) {
+                        if ((flags & (1U << status)) != 0) {
+                            candidates[count++] = entry->indexView.selectionIndex;
+                        }
+                    } else if ((flags & 0x220) != 0) {
+                        candidates[count++] = entry->indexView.selectionIndex;
+                    }
+                } else if ((entry->statusFlags & 0x39C0) != 0) {
+                    candidates[count++] = entry->indexView.selectionIndex;
+                }
+            } else if ((entry->statusFlags & 0x3BE0) != 0) {
+                candidates[count++] = entry->indexView.selectionIndex;
             }
-          }
-          else {
-            temp_v0 = temp_v0 & 0x220;
-            if (temp_v0 != 0) {
-              aiStack_1d8[temp_v3] = (int)*(short *)(temp_v2 + temp_v4 * 0x408 + 0x6e);
-              temp_v3 = temp_v3 + 1;
-            }
-          }
         }
-        else {
-          temp_v0 = *(unsigned short *)(temp_v2 + temp_v4 * 0x408 + 0x274) & 0x39c0;
-          if (temp_v0 != 0) {
-            aiStack_1d8[temp_v3] = (int)*(short *)(temp_v2 + temp_v4 * 0x408 + 0x6e);
-            temp_v3 = temp_v3 + 1;
-          }
-        }
-      }
-      else {
-        temp_v0 = *(unsigned short *)(temp_v2 + temp_v4 * 0x408 + 0x274) & 0x3be0;
-        if (temp_v0 != 0) {
-          aiStack_1d8[temp_v3] = (int)*(short *)(temp_v2 + temp_v4 * 0x408 + 0x6e);
-          temp_v3 = temp_v3 + 1;
-        }
-      }
     }
-    temp_v4 = temp_v4 + 1;
-    if (temp_v4 >= 0x6d) {
-      temp_v1 = FUN_004e9ae8(param_1,aiStack_1d8,temp_v3,1);
-      temp_v3 = lcgRandomRange(temp_v1 - 1);
-      temp_v4 = btlUnitGet(param_1);
-      *(unsigned char *)(aiStack_1d8[temp_v3] + temp_v4 + 0x38) = 1;
-      return;
-    }
-  } while( 1 );
+    u16 eligibleCount = FUN_004e9ae8(context, candidates, count, 1);
+    u32 chosen = lcgRandomRange((u16)(eligibleCount - 1));
+    BattleActionUnit *unit = btlUnitGet(context);
+    unit->selectedUnits[candidates[chosen]] = 1;
 }
-
-} /* extern "C" */
+}

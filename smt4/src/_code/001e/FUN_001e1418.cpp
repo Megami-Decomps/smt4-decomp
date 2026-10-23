@@ -1,75 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e1418` (_code @ 0x1e1418, 0x118 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: render-stack push address scheduling differs; remaining title draw sequence matches. */
+#include "camp/RenderCtx.h"
 
 extern "C" {
+extern RenderCtx *g_titleScene;
+void FUN_002c39a4(RenderCtx *context);
+s32 FUN_002c5d80(u32 kind, u32 flags);
+f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
+void FUN_002bf288(u32 layer, u32 kind, u32 sprite, s32 x, s32 y, u32 flags);
+void FUN_002bed3c(void);
+void efctSetSpeed(f32 speed);
+void FUN_002c198c(RenderCtx *context);
+void FUN_002c18e4(RenderCtx *context);
 
-int renderCtxCalculateStereoParallax(int);
-int FUN_002bed3c(void);
-int FUN_002bf288(int, int, int, int, unsigned int, int);
-int efctSetSpeed(void);
-int FUN_002c18e4(int);
-int FUN_002c198c(int);
-int FUN_002c39a4(int);
-
-typedef int romwright_code(...);
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-
-
-unsigned int FUN_001e1418(void)
-
+// Draw the title sprite with stereo parallax and restore its render state.
+u32 FUN_001e1418(void)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  float temp_v4;
-  
-  FUN_002c39a4(g_titleScene);
-  temp_v0 = g_titleScene;
-  temp_v1 = FUN_002c5d80(1,0);
-  piVar5 = (int *)(temp_v0 + 0x124c);
-  temp_v2 = *piVar5;
-  temp_v3 = piVar5[temp_v2 + 2];
-  *piVar5 = temp_v2 + 1;
-  piVar5[temp_v2 + 3] = temp_v1;
-  if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v3 != temp_v1) {
-    (**(romwright_code **)(temp_v0 + 0x1268))();
-    *(unsigned char *)(temp_v0 + 0x1264) = 0;
-  }
-  temp_v4 = 0.33f;
-  renderCtxCalculateStereoParallax(g_titleScene);
-  FUN_002bf288(2,2,0x1ffb8,(int)temp_v4 - 0x38,0xfffffff8,1);
-  FUN_002bed3c();
-  efctSetSpeed();
-  temp_v0 = g_titleScene;
-  piVar5 = (int *)(g_titleScene + 0x124c);
-  temp_v1 = *piVar5;
-  temp_v2 = piVar5[temp_v1 + 2];
-  *piVar5 = temp_v1 - 1;
-  if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v2 != piVar5[temp_v1 + 1]) {
-    (**(romwright_code **)(temp_v0 + 0x1268))();
-    *(unsigned char *)(temp_v0 + 0x1264) = 0;
-  }
-  FUN_002c198c(g_titleScene);
-  FUN_002c18e4(g_titleScene);
-  return 0;
+    FUN_002c39a4(g_titleScene);
+    RenderCtx *context = g_titleScene;
+    s32 renderState = FUN_002c5d80(1, 0);
+    renderStackPush(&context->stackA, renderState);
+    f32 parallax = renderCtxCalculateStereoParallax(g_titleScene, 0.33f);
+    FUN_002bf288(2, 2, 0x1FFB8, static_cast<s32>(parallax) - 56, -8, 1);
+    FUN_002bed3c();
+    efctSetSpeed(1.0f);
+    renderStackPop(&g_titleScene->stackA);
+    FUN_002c198c(g_titleScene);
+    FUN_002c18e4(g_titleScene);
+    return 0;
 }
-
-} /* extern "C" */
+}

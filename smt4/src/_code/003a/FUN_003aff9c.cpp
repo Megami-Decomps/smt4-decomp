@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003aff9c` (_code @ 0x3aff9c, 0x188 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: blocked on five polymorphic constructors and complete derived fields; existing Obj4224b0/Obj4224d4/Obj4224f8/Obj42251c headers expose only the base prefix. Raw vtable writes in this draft are not an honest implementation. */
 #include "romwright_types.h"
 
 extern "C" {

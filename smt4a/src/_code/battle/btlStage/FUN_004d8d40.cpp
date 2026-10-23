@@ -1,91 +1,79 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d8d40` (_code @ 0x4d8d40, 0x1a8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: lifecycle switch peels state one instead of a jump table; stage-ID pair load grouping differs. */
+#include "battle/btlStage.h"
+#include "battle/btlCamera.h"
 #include "shard/W6_W6Match1_BattleStageModelA.h"
+#include "shard/W5_W5Match2_CameraRegistry.h"
 
 struct FrameColorUpdateWork;
-
 extern "C" {
+extern BtlStageGlobals g_btlStage;
+extern BtlCameraA *g_btlCamera;
+extern CameraRegistry *g_handleRegistry;
+extern const char DAT_0052a9b8[]; // Light_EFT
+void FUN_002c23cc(u32 value);
+void FUN_00400d80(BtlStage *stage, s32 id, s32 variant, u32 flags);
+s32 FUN_00401440(BtlStage *stage);
+void resourceOwnerSetChildEulerAngles(BtlStage *stage, f32 x, f32 y, f32 z);
+u16 FUN_00406798(void *registry, const char *name);
+void FUN_004d8bf8(BtlStage *stage, f32 x, f32 y, f32 z);
+void FUN_004d896c(BtlStage *stage, u32 first, u32 second);
+void FUN_002c2358(void);
+void objectOwner3Release(BtlStage *stage);
+void FUN_00401198(BtlStage *stage);
+void FUN_0040128c(FrameColorUpdateWork *stage);
 
-int FUN_002c2358(void);
-int FUN_002c23cc(int);
-int FUN_00400d80(void);
-int FUN_00401198(int);
-void FUN_0040128c(FrameColorUpdateWork *);
-int objectOwner3Release(int);
-int resourceOwnerSetChildEulerAngles(int);
-int FUN_004d896c(int, unsigned int, unsigned int);
-int FUN_004d8bf8(int);
-
-extern int g_handleRegistry; /* 0x56fcc0 */
-extern unsigned int g_btlStage; /* 0x57a4f4 */
-extern int g_btlStageModel; /* 0x57a4f8 */
-
-/* Supplied declaration required: FUN_002c2358. */
-/* Supplied declaration required: FUN_002c23cc. */
-/* Supplied declaration required: FUN_00400d80. */
-/* Supplied declaration required: FUN_00401198. */
-/* Supplied declaration required: FUN_0040128c. */
-/* Supplied declaration required: objectOwner3Release. */
-/* Supplied declaration required: resourceOwnerSetChildEulerAngles. */
-extern int FUN_00401440(int);
-extern unsigned short FUN_00406798(unsigned int, char *);
-/* Supplied declaration required: FUN_004d896c. */
-/* Supplied declaration required: FUN_004d8bf8. */
-
-
-unsigned int FUN_004d8d40(int param_1,int param_2)
-
+// Load, initialize, update or release the stage model and saturate its lifecycle frame counter.
+u32 FUN_004d8d40(BtlStage *stage, s32 enabled)
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  if (param_2 == 0) {
-    return 0;
-  }
-  if (g_btlStageModel == 0) {
-    return 0;
-  }
-  switch(*(unsigned int *)(param_1 + 0xa0)) {
-  case 1:
-    FUN_002c23cc(0);
-    *(unsigned int *)(param_1 + 0xc0) = g_btlStage;
-    FUN_00400d80();
-    temp_v2 = 2;
-    *(unsigned int *)(param_1 + 0xa0) = temp_v2;
-    break;
-  case 2:
-    temp_v1 = FUN_00401440(param_1);
-    if (temp_v1 == 0) break;
-    btlStageUpdateNodePositions((BattleStageModelA*)param_1,((BattleStageModelA*)param_1)->position);
-    resourceOwnerSetChildEulerAngles(param_1);
-    temp_v0 = FUN_00406798(*(unsigned int *)(g_handleRegistry + 4),"Light_EFT");
-    *(unsigned short *)(param_1 + 0xac) = temp_v0;
-    FUN_004d8bf8(param_1);
-    FUN_004d896c(param_1,*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
-    temp_v2 = 4;
-    *(unsigned int *)(param_1 + 0xa0) = temp_v2;
-    break;
-  case 3:
-    if (*(int *)(param_1 + 0xc0) != 0) {
-      *(unsigned int *)(param_1 + 0xc0) = 0;
+    if (enabled == 0) {
+        return 0;
     }
-    FUN_002c2358();
-    objectOwner3Release(param_1);
-    *(unsigned int *)(param_1 + 0xa0) = 0;
-    break;
-  case 4:
-    btlStageUpdateNodePositions((BattleStageModelA*)param_1,((BattleStageModelA*)param_1)->position);
-    resourceOwnerSetChildEulerAngles(param_1);
-    FUN_00401198(param_1);
-    FUN_0040128c((FrameColorUpdateWork *)param_1);
-  }
-  if (*(short *)(param_1 + 0xbc) != -1) {
-    *(short *)(param_1 + 0xbc) = *(short *)(param_1 + 0xbc) + 1;
-  }
-  return 0;
+    if (g_btlStage.stage == NULL) {
+        return 0;
+    }
+    switch ((u32)stage->state) {
+    case 1: {
+        FUN_002c23cc(0);
+        stage->context = g_btlStage.context;
+        s32 id = stage->apocalypse.identifiers.stageId;
+        s32 variant = stage->apocalypse.identifiers.stageVariant;
+        if (id < 0 || variant < 0) {
+            id = 1;
+            variant = 1;
+        }
+        FUN_00400d80(stage, id, variant, 0x1C0);
+        stage->state = 2;
+        break;
+    }
+    case 2:
+        if (!FUN_00401440(stage)) {
+            break;
+        }
+        btlStageUpdateNodePositions((BattleStageModelA *)stage, ((BattleStageModelA *)stage)->position);
+        resourceOwnerSetChildEulerAngles(stage, 0.0f, g_btlCamera->basePose.yaw, 0.0f);
+        stage->apocalypse.selection = FUN_00406798(g_handleRegistry->entries, DAT_0052a9b8);
+        FUN_004d8bf8(stage, 0.5f, 0.5f, 0.5f);
+        FUN_004d896c(stage, stage->setupInput.first, stage->setupInput.second);
+        stage->state = 4;
+        break;
+    case 3:
+        if (stage->context != NULL) {
+            stage->context = NULL;
+        }
+        FUN_002c2358();
+        objectOwner3Release(stage);
+        stage->state = 0;
+        break;
+    case 4:
+        btlStageUpdateNodePositions((BattleStageModelA *)stage, ((BattleStageModelA *)stage)->position);
+        resourceOwnerSetChildEulerAngles(stage, 0.0f, g_btlCamera->basePose.yaw, 0.0f);
+        FUN_00401198(stage);
+        FUN_0040128c((FrameColorUpdateWork *)stage);
+        break;
+    }
+    if (stage->apocalypse.frame < 0xFFFF) {
+        ++stage->apocalypse.frame;
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

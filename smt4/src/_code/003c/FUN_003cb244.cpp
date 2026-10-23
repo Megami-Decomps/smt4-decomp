@@ -1,61 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cb244` (_code @ 0x3cb244, 0x198 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: zero-value register lifetime, history-index address synthesis and empty-selection return placement differ. */
+#include "battle/btlAction.h"
+#include "battle/ActionStateChannels.h"
+#include "battle/ActionKindSelection.h"
 #include "shard/W6_W6Match3_BattleQueue.h"
+#include <stddef.h>
 
 extern "C" {
+extern BtlActionGlobals g_btlAction;
 
-
-extern unsigned char g_btlAction; /* 0x434278 */
-
-
-
-unsigned int FUN_003cb244(int *param_1,int param_2)
-
+// Commit the selected action and retain it in the command's five-entry history ring.
+u32 FUN_003cb244(ActionStateChannels *channels, ActionKindSelection *selection)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  btlPruneInvalidQueuedEntries((BtlMainState*)*param_1);
-  *(unsigned char *)((*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1d;
-  if (*(int *)(param_2 + 0x28) != 0) {
-    *(unsigned short *)(*param_1 + 0x2f20) = *(unsigned short *)(param_2 + 0x2c);
-    *(unsigned short *)(*param_1 + 0x2f22) = *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x14c);
-    *(unsigned short *)(*param_1 + 0x2f24) = *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x14e);
-    *(unsigned short *)(*param_1 + 0x2f26) = 0;
-    *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x154) =
-         *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x14c);
-    *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x156) =
-         *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x14e);
-    *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x158) =
-         *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x150);
-    *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x15a) =
-         *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x152);
-    temp_v1 = *(int *)(param_2 + 0x28);
-    temp_v0 = *(int *)(temp_v1 + 0x184);
-    if (temp_v0 < 5) {
-      *(unsigned short *)(temp_v1 + temp_v0 * 8 + 0x15c) = *(unsigned short *)(temp_v1 + 0x14c);
-      *(unsigned short *)(*(int *)(param_2 + 0x28) + temp_v0 * 8 + 0x15e) =
-           *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x14e);
-      *(unsigned short *)(*(int *)(param_2 + 0x28) + temp_v0 * 8 + 0x160) =
-           *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x150);
-      *(unsigned short *)(*(int *)(param_2 + 0x28) + temp_v0 * 8 + 0x162) =
-           *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x152);
+    struct CommandFields { u16 kind, id, option, target; };
+    struct HistoryCommand {
+        u8 unk000[0x14C];
+        CommandFields current, previous;
+        CommandFields history[5];
+        s32 historyIndex;
+    };
+    struct SelectionView {
+        u8 unk00[0x28];
+        HistoryCommand *command;
+        u16 index;
+    };
+    struct BattleSelectionView {
+        u8 unk0000[0x2F20];
+        CommandFields selected;
+    };
+    struct SelectionOwner { BattleSelectionView *battle; };
+    typedef char CommandHistoryOffsets[offsetof(HistoryCommand, current) == 0x14C &&
+        offsetof(HistoryCommand, previous) == 0x154 &&
+        offsetof(HistoryCommand, history) == 0x15C &&
+        offsetof(HistoryCommand, historyIndex) == 0x184 &&
+        offsetof(SelectionView, index) == 0x2C ? 1 : -1];
+    // Command history and selection index extend beyond their canonical prefixes.
+    SelectionView *work = reinterpret_cast<SelectionView *>(selection);
+    btlPruneInvalidQueuedEntries(reinterpret_cast<BtlMainState *>(channels->entries[0].owner));
+    ActionStateChannels *active = static_cast<ActionStateChannels *>(g_btlAction.data);
+    active->entries[channels->entries[0].owner->current].pending = 29;
+    SelectionOwner *owner = reinterpret_cast<SelectionOwner *>(channels);
+    if (work->command != NULL) {
+        owner->battle->selected.kind = work->index;
+        owner->battle->selected.id = work->command->current.kind;
+        owner->battle->selected.option = work->command->current.id;
+        owner->battle->selected.target = 0;
+        work->command->previous.kind = work->command->current.kind;
+        work->command->previous.id = work->command->current.id;
+        work->command->previous.option = work->command->current.option;
+        work->command->previous.target = work->command->current.target;
+        s32 index = work->command->historyIndex;
+        if (index < 5) {
+            work->command->history[index].kind = work->command->current.kind;
+            work->command->history[index].id = work->command->current.id;
+            work->command->history[index].option = work->command->current.option;
+            work->command->history[index].target = work->command->current.target;
+        }
+        ++work->command->historyIndex;
+        if (work->command->historyIndex >= 5)
+            work->command->historyIndex = 0;
+    } else {
+        owner->battle->selected.kind = 0;
+        owner->battle->selected.id = 0;
+        owner->battle->selected.option = 0;
+        owner->battle->selected.target = 0;
     }
-    temp_v0 = *(int *)(*(int *)(param_2 + 0x28) + 0x184) + 1;
-    *(int *)(*(int *)(param_2 + 0x28) + 0x184) = temp_v0;
-    if (temp_v0 >= 5) {
-      *(unsigned int *)(*(int *)(param_2 + 0x28) + 0x184) = 0;
-    }
-  }
-  else {
-    *(unsigned short *)(*param_1 + 0x2f20) = 0;
-    *(unsigned short *)(*param_1 + 0x2f22) = 0;
-    *(unsigned short *)(*param_1 + 0x2f24) = 0;
-    *(unsigned short *)(*param_1 + 0x2f26) = 0;
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

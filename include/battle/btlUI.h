@@ -8,6 +8,7 @@
 
 #include "common.h"
 #include "battle/BattleUiRequests.h"
+#include "battle/BattleUiActionSlot.h"
 #include <stddef.h>
 
 /* Only the byte column is recovered, not the true boundaries of the underlying records. */
@@ -39,6 +40,17 @@ typedef struct BtlUiAvailabilityCell {
 typedef struct BtlUiAvailabilityCellRow {
     BtlUiAvailabilityCell cells[8];
 } BtlUiAvailabilityCellRow;
+struct BtlUiPositionRequest {
+    f32 x, y, z;
+    u8 active; /* 0x0c */
+    u8 mode; /* 0x0d */
+    u8 flags; /* 0x0e */
+    u8 unk0f[5];
+};
+struct BtlUiPositionRequestRow {
+    BtlUiPositionRequest entries[32];
+};
+
 typedef struct BtlUiAnimationGroup {
     s8 active;
     u8 unk01[0x1B];
@@ -82,6 +94,10 @@ typedef struct BtlUiObjD {
             u8 prefix[0x573C];
             s8 counts[1];
         } animationCounts;
+        struct {
+            u8 prefix[0x61EC];
+            BattleUiActionSlot slots[12];
+        } actionRequests;
     };
 } BtlUiObjD;
 typedef char BtlUiObjDAvailabilityOffsetsCheck[
@@ -100,6 +116,9 @@ typedef char BtlUiObjDAnimationOffsetsCheck[
     offsetof(BtlUiAnimationGroup, disabled) == 0x1C &&
     sizeof(BtlUiAnimationGroup) == 0x400 && sizeof(BtlUiAnimationMarker) == 0x18 &&
     sizeof(BtlUiAnimationMarkerRow) == 0xC0 && sizeof(BtlUiObjD) == 0x7180 ? 1 : -1];
+typedef char BtlUiActionRequestsOffsetCheck[
+    offsetof(BtlUiObjD, actionRequests.slots) == 0x61EC &&
+    sizeof(BtlUiObjD) == 0x7180 ? 1 : -1];
 
 /* Panel status is embedded at 0x7e00; its active flag belongs to the sprite animation. */
 typedef struct BtlUiPanelState {
@@ -196,6 +215,14 @@ typedef struct BtlUiA {
             u8 prefix[0x48B8];
             /* 0x11884 */ s8 counts[1];
         } availabilityCounts;
+        struct {
+            u8 prefix[0x20a8];
+            /* 0xF074 */ BtlUiPositionRequestRow rows[16];
+        } positionRequests;
+        struct {
+            u8 prefix[0x4948];
+            /* 0x11914 */ BattleUiActionSlot slots[12];
+        } actionRequests;
     };
     /* 0x12FCC */ u32 unk12FCC;
 } BtlUiA;
@@ -233,5 +260,13 @@ typedef char BtlUiAAvailabilityOffsetsCheck[
     sizeof(BtlUiAvailabilityRow) == 0xA0 &&
     sizeof(BtlUiAvailabilityCell) == 0x14 &&
     sizeof(BtlUiA) == 0x12FD0 ? 1 : -1];
+typedef char BtlUiAActionRequestsOffsetCheck[
+    offsetof(BtlUiA, actionRequests.slots) == 0x11914 &&
+    sizeof(BtlUiA) == 0x12FD0 ? 1 : -1];
+typedef char BtlUiPositionRequestOffsetsCheck[
+    offsetof(BtlUiA, positionRequests.rows) == 0xf074 &&
+    sizeof(BtlUiPositionRequest) == 0x14 &&
+    offsetof(BtlUiPositionRequest, active) == 0xc &&
+    sizeof(BtlUiPositionRequestRow) == 0x280 ? 1 : -1];
 
 #endif

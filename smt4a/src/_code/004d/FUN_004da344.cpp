@@ -1,121 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004da344` (_code @ 0x4da344, 0x1dc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: packed result ID is cached instead of retail's repeated cross-word extraction; branch layout differs. */
+#include "shard/W5_W5Match2_UniteWork.h"
+#include "shard/W5_W5Match5_GameSaveViews.h"
 
+struct FusionAvailability {
+    u8 available;
+    u8 unk01[3];
+    u32 reason;
+    u16 resultId;
+};
 extern "C" {
+GameSlotTable *gameGetSlotTable(void);
+u32 computeCountLimit(void);
+s32 FUN_004da980(UniteWork *, u32, u32);
+s32 entryDefIsAvailable(UniteWork *, u32);
+s32 FUN_004db65c(UniteWork *, u32, u32, u64 *);
+s32 FUN_004dc3b4(UniteWork *, u32, u32, u64 *);
 
-int FUN_00184310(void);
-int entryDefIsAvailable(int, unsigned int);
-
-/* stack frame of param_5: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_5_stack;
-
-/* Supplied declaration required: FUN_00184310. */
-extern int gameGetSlotRecord(void);
-extern int gameGetSlotTable(void);
-extern unsigned int computeCountLimit(void);
-extern int FUN_004da980(int, unsigned int, unsigned int);
-/* Supplied declaration required: entryDefIsAvailable. */
-extern int FUN_004db65c(int, unsigned int, unsigned int, unsigned char *);
-extern int FUN_004dc3b4(int, unsigned int, unsigned int, unsigned char *);
-
-
-unsigned char
-FUN_004da344(int param_1,unsigned int param_2,unsigned int param_3,int param_4,unsigned char *param_5)
-
+// Resolve a fusion result and reject unavailable, over-level or already-owned demons.
+u8 FUN_004da344(UniteWork *work, u32 first, u32 second, s32 special, FusionAvailability *output)
 {
-/* irregular: 2 goto(s); 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  unsigned char temp_v7 [4];
-  unsigned int temp_v8;
-  
-  temp_v6 = 1;
-  temp_v0 = gameGetSlotTable();
-  if (param_5 != (unsigned char *)0x0) {
-    *(unsigned int *)(param_5 + 4) = 0;
-    *(unsigned short *)(param_5 + 8) = 0;
-  }
-  if (param_4 != 0) {
-    *(unsigned int *)(param_1 + 0x1b0) = 0;
-    temp_v1 = FUN_004db65c(param_1,param_2,param_3,temp_v7);
-    if (temp_v1 != 0) {
-      if (param_5 != (unsigned char *)0x0) {
-        *(unsigned short *)(param_5 + 8) = (unsigned short)((temp_v8 << 0xf) >> 0x11);
-      }
+    struct StockView { u8 prefix[0x1C88]; s8 slots[24]; };
+    struct LevelView { u8 prefix[6]; u16 level; };
+    struct FusionStateView { u8 prefix[0x1B0]; u32 state; };
+    u8 available = 1;
+    StockView *stock = reinterpret_cast<StockView *>(gameGetSlotTable());
+    if (output != NULL) {
+        output->reason = 0;
+        output->resultId = 0;
     }
-    else {
-joined_r0x004da498:
-      temp_v6 = 0;
-      if (param_5 != (unsigned char *)0x0) {
-        temp_v6 = 0;
-        *(unsigned int *)(param_5 + 4) = 1;
-        *(unsigned short *)(param_5 + 8) = (unsigned short)((temp_v8 << 0xf) >> 0x11);
-      }
+    u64 result;
+    s32 resolved;
+    if (special != 0) {
+        reinterpret_cast<FusionStateView *>(work)->state = 0;
+        resolved = FUN_004db65c(work, first, second, &result);
+    } else {
+        resolved = FUN_004dc3b4(work, first, second, &result);
     }
-  }
-  else {
-    temp_v1 = FUN_004dc3b4(param_1,param_2,param_3,temp_v7);
-    if (temp_v1 == 0) goto joined_r0x004da498;
-    if (param_5 != (unsigned char *)0x0) {
-      *(unsigned short *)(param_5 + 8) = (unsigned short)((temp_v8 << 0xf) >> 0x11);
+    if (!resolved) {
+        available = 0;
+        if (output != NULL)
+            output->reason = 1;
     }
-  }
-  temp_v2 = (temp_v8 & 0x1ffff) >> 2;
-  FUN_00184310();
-  if ((temp_v2 != 0) && (temp_v3 = computeCountLimit(), temp_v3 < *(unsigned short *)(temp_v2 + 6))) {
-    if (param_5 != (unsigned char *)0x0) {
-      temp_v3 = 2;
+    u32 resultId = (result >> 34) & 0x7FFF;
+    if (output != NULL)
+        output->resultId = resultId;
+    const LevelView *record = reinterpret_cast<LevelView *>(FUN_00184310(resultId));
+    if (record != NULL && computeCountLimit() < record->level) {
+        available = 0;
+        if (output != NULL)
+            output->reason = 2;
     }
-    temp_v6 = 0;
-    if (param_5 != (unsigned char *)0x0) {
-      *(unsigned int *)(param_5 + 4) = temp_v3;
-    }
-  }
-  temp_v1 = 0;
-  while ((*(char *)(temp_v0 + temp_v1 + 0x1c88) < '\0' ||
-         (temp_v4 = gameGetSlotRecord(), (unsigned int)*(unsigned short *)(temp_v4 + 0x62) != (temp_v8 & 0x1ffff) >> 2))) {
-    temp_v1 = temp_v1 + 1;
-    if (temp_v1 >= 0x18) {
-      if (param_5 != (unsigned char *)0x0) {
-LAB_004da4c8:
-        temp_v0 = FUN_004da980(param_1,param_2,param_3);
-        if ((temp_v0 == 5) || (entryDefIsAvailable(param_1,(temp_v8 & 0x1ffff) >> 2), param_1 == 0)) {
-          *(unsigned int *)(param_5 + 4) = 1;
+    for (s32 i = 0; i < 24; ++i) {
+        if (stock->slots[i] >= 0 && gameGetSlotRecord(stock->slots[i])->entryId == resultId) {
+            available = 0;
+            if (output != NULL)
+                output->reason = 3;
+            break;
         }
-        *param_5 = temp_v6;
-      }
-      return temp_v6;
     }
-  }
-  if (temp_v1 < 0x18) {
-    temp_v5 = 0;
-    if (param_5 != (unsigned char *)0x0) {
-      temp_v5 = 3;
+    if (output != NULL) {
+        if (FUN_004da980(work, first, second) == 5 || !entryDefIsAvailable(work, resultId))
+            output->reason = 1;
+        output->available = available;
     }
-    temp_v6 = 0;
-    if (param_5 == (unsigned char *)0x0) {
-      return 0;
-    }
-    *(unsigned int *)(param_5 + 4) = temp_v5;
-    goto LAB_004da4c8;
-  }
-  if (param_5 != (unsigned char *)0x0) {
-    temp_v0 = FUN_004da980(param_1,param_2,param_3);
-    if ((temp_v0 == 5) || (entryDefIsAvailable(param_1,(temp_v8 & 0x1ffff) >> 2), param_1 == 0)) {
-      *(unsigned int *)(param_5 + 4) = 1;
-    }
-    *param_5 = temp_v6;
-  }
-  return temp_v6;
+    return available;
 }
-
-} /* extern "C" */
+}

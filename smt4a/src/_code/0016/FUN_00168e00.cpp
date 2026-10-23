@@ -1,107 +1,70 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00168e00` (_code @ 0x168e00, 0x1b8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Surface-selector load register, one clamp move and the three render-state push register schedules differ. */
+#include "camp/RenderCtx.h"
 
 extern "C" {
+extern RenderCtxA *g_renderCtx;
+u32 FUN_00169d8c(u32 selector);
+u32 FUN_00169db4(u32 selector);
+s32 asdGxPresetsGetEnable(u32 selector);
+s32 stateValuesGetBySelector(u32 selector);
 
-typedef int romwright_code(...);
-extern int g_renderCtx; /* 0x59dbb4 */
-
-extern int stateValuesGetBySelector(unsigned int);
-extern int FUN_00169d8c(void);
-extern int FUN_00169db4(unsigned int);
-extern int asdGxPresetsGetEnable(unsigned int);
-
-
-unsigned int FUN_00168e00(int param_1,int param_2,int param_3,int param_4)
-
+u32 FUN_00168e00(s32 x, s32 y, s32 width, s32 height)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int *piVar7;
-  unsigned int temp_v6;
-  
-  temp_v0 = *(unsigned int *)(g_renderCtx + 0x52c);
-  temp_v1 = FUN_00169d8c();
-  temp_v1 = temp_v1 - 1;
-  temp_v2 = FUN_00169db4(temp_v0);
-  temp_v5 = temp_v2 - 1;
-  temp_v2 = asdGxPresetsGetEnable(temp_v0);
-  if ((temp_v2 != 0x500) && (temp_v2 == 0x501)) {
-    temp_v2 = stateValuesGetBySelector(temp_v0);
-    if (temp_v2 != 0) {
-      param_2 = param_2 << 1;
-      param_4 = param_4 << 1;
+    /* These scissor stacks lie beyond the shared render-context prefix. */
+    struct ScissorContextView {
+        u8 unk0000[0x1318];
+        RenderStateStack mode;
+        RenderStateStack lower;
+        RenderStateStack upper;
+    };
+    typedef char ScissorOffsetsCheck[offsetof(ScissorContextView, lower) == 0x1338 &&
+        offsetof(ScissorContextView, upper) == 0x1358 ? 1 : -1];
+    u32 selector = g_renderCtx->stereoMode;
+    s32 maxX = FUN_00169d8c(selector) - 1;
+    s32 maxY = FUN_00169db4(selector) - 1;
+    switch (asdGxPresetsGetEnable(selector)) {
+    case 0x500:
+        break;
+    case 0x501:
+        if (stateValuesGetBySelector(selector) != 0) {
+            y *= 2;
+            height *= 2;
+        } else {
+            maxY /= 2;
+        }
+        break;
     }
-    else {
-      temp_v5 = (int)temp_v5 / 2;
+    s32 lowerX = maxX - (x + width) + 1;
+    s32 upperX = maxX - x;
+    if (lowerX < 0) {
+        lowerX = 0;
     }
-  }
-  temp_v2 = g_renderCtx;
-  temp_v3 = (temp_v1 - (param_1 + param_3)) + 1;
-  param_1 = temp_v1 - param_1;
-  if (temp_v3 < 0) {
-    temp_v3 = 0;
-  }
-  if (param_1 < 0) {
-    param_1 = 0;
-  }
-  if (temp_v1 < temp_v3) {
-    temp_v3 = temp_v1;
-  }
-  temp_v6 = temp_v5 - param_2;
-  temp_v4 = (temp_v5 - (param_2 + param_4)) + 1;
-  if (temp_v1 < param_1) {
-    param_1 = temp_v1;
-  }
-  if ((int)temp_v4 < 0) {
-    temp_v4 = 0;
-  }
-  if ((int)temp_v6 < 0) {
-    temp_v6 = 0;
-  }
-  if ((int)temp_v5 < (int)temp_v4) {
-    temp_v4 = temp_v5;
-  }
-  piVar7 = (int *)(g_renderCtx + 0x1338);
-  temp_v4 = temp_v4 | (temp_v3 << 0x10);
-  temp_v1 = *piVar7;
-  if ((int)temp_v5 < (int)temp_v6) {
-    temp_v6 = temp_v5;
-  }
-  temp_v5 = piVar7[temp_v1 + 2];
-  *piVar7 = temp_v1 + 1;
-  piVar7[temp_v1 + 3] = temp_v4;
-  if (*(char *)(temp_v2 + 0x1350) != '\0' || temp_v5 != temp_v4) {
-    (**(romwright_code **)(temp_v2 + 0x1354))();
-    *(unsigned char *)(temp_v2 + 0x1350) = 0;
-  }
-  temp_v1 = g_renderCtx;
-  temp_v6 = temp_v6 | (param_1 << 0x10);
-  piVar7 = (int *)(g_renderCtx + 0x1358);
-  temp_v2 = *piVar7;
-  temp_v5 = piVar7[temp_v2 + 2];
-  *piVar7 = temp_v2 + 1;
-  piVar7[temp_v2 + 3] = temp_v6;
-  if (*(char *)(temp_v1 + 0x1370) != '\0' || temp_v5 != temp_v6) {
-    (**(romwright_code **)(temp_v1 + 0x1374))();
-    *(unsigned char *)(temp_v1 + 0x1370) = 0;
-  }
-  temp_v1 = g_renderCtx;
-  piVar7 = (int *)(g_renderCtx + 0x1318);
-  temp_v2 = *piVar7;
-  temp_v3 = piVar7[temp_v2 + 2];
-  *piVar7 = temp_v2 + 1;
-  piVar7[temp_v2 + 3] = 3;
-  if (*(char *)(temp_v1 + 0x1330) != '\0' || temp_v3 != 3) {
-    (**(romwright_code **)(temp_v1 + 0x1334))();
-    *(unsigned char *)(temp_v1 + 0x1330) = 0;
-  }
-  return 1;
+    if (upperX < 0) {
+        upperX = 0;
+    }
+    if (lowerX > maxX) {
+        lowerX = maxX;
+    }
+    if (upperX > maxX) {
+        upperX = maxX;
+    }
+    s32 lowerY = maxY - (y + height) + 1;
+    s32 upperY = maxY - y;
+    if (lowerY < 0) {
+        lowerY = 0;
+    }
+    if (upperY < 0) {
+        upperY = 0;
+    }
+    if (lowerY > maxY) {
+        lowerY = maxY;
+    }
+    if (upperY > maxY) {
+        upperY = maxY;
+    }
+    renderStackPush(&((ScissorContextView *)g_renderCtx)->lower, (u32)lowerY | ((u32)lowerX << 16));
+    renderStackPush(&((ScissorContextView *)g_renderCtx)->upper, (u32)upperY | ((u32)upperX << 16));
+    renderStackPush(&((ScissorContextView *)g_renderCtx)->mode, 3);
+    return 1;
 }
-
-} /* extern "C" */
+}

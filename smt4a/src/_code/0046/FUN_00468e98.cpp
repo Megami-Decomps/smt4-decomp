@@ -1,122 +1,92 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00468e98` (_code @ 0x468e98, 0x14c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: quest selection completion omits linker-eliminated hooks. */
+#include "map/PickObjectResources.h"
+#include "ui/QuestSelectionState.h"
 
 extern "C" {
+extern QuestSelectionNotification DAT_005f16fc;
+QuestSelectionFlags *gameFlagsGetBlock();
+s32 FUN_002a746c();
+s32 FUN_002f153c();
+u8 uiQuestGetPanelMode();
+s32 uiQuestGetActive();
+u8 uiQuestGetState();
+void FUN_0034aae4();
+void clearFlags310To31F();
+u16 FUN_00372140();
+u16 uiQuestRunEnabledAction();
+void FUN_00183318(s32);
+void FUN_0019de98(s32, u32);
+void FUN_0037c8e4(s32, s32);
+void panelSetTarget(s32, s32);
+void messageMainSetTargetFlags(s32);
+void FUN_003a7630(s32);
+s32 FUN_00467df8();
 
-int FUN_00183318(int);
-int FUN_0019de98(int, unsigned int);
-int uiQuestGetActive(void);
-int FUN_0034aae4(...);
-int panelSetTarget(int, int);
-int FUN_0037c8e4(int, int);
-int FUN_003a7630(int);
-int messageMainSetTargetFlags(int);
-
-typedef struct fn_00468e98_arg0 fn_00468e98_arg0;
-struct fn_00468e98_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0xa54];
-    unsigned char field_0xa60; /* +0xa60 */
-    unsigned char pad_0xa61[0x1];
-    byte field_0xa62; /* +0xa62 */
-    unsigned char pad_0xa63[0x1];
-    byte field_0xa64; /* +0xa64 */
-    unsigned char pad_0xa65[0x1];
-    ushort field_0xa66; /* +0xa66 */
-    undefined2 field_0xa68; /* +0xa68 */
-};
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern unsigned char DAT_005f16fc; /* 0x5f16fc */
-
-extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: FUN_00183318. */
-/* Supplied declaration required: FUN_0019de98. */
-extern int FUN_002a746c(void);
-extern int FUN_002f153c(void);
-extern unsigned char uiQuestGetPanelMode(void);
-/* Supplied declaration required: uiQuestGetActive. */
-extern unsigned char uiQuestGetState(void);
-/* Supplied declaration required: FUN_0034aae4. */
-extern unsigned int clearFlags310To31F(void);
-extern unsigned short FUN_00372140(void);
-/* Supplied declaration required: panelSetTarget. */
-/* Supplied declaration required: FUN_0037c8e4. */
-extern unsigned short uiQuestRunEnabledAction(void);
-/* Supplied declaration required: FUN_003a7630. */
-/* Supplied declaration required: messageMainSetTargetFlags. */
-extern int FUN_00467df8(void);
-
-
-void FUN_00468e98(fn_00468e98_arg0 *param_1)
-
+void FUN_00468e98(PickObjectResources *owner)
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned short temp_v1;
-  unsigned short temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  
-  temp_v3 = FUN_002a746c();
-  if (temp_v3 != 0) {
-    temp_v0 = uiQuestGetState();
-    param_1->field_0xa64 = temp_v0;
-    temp_v1 = uiQuestRunEnabledAction();
-    param_1->field_0xa66 = temp_v1;
-    temp_v2 = FUN_00372140();
-    param_1->field_0xa68 = temp_v2;
-    temp_v3 = FUN_002f153c();
-    temp_v0 = uiQuestGetPanelMode();
-    param_1->field_0xa62 = temp_v0;
+    /* The selection state follows the shared resource-owner prefix. */
+    struct QuestWorkView {
+        u8 unk000[4];
+        s32 state;
+        s32 phase;
+        u8 unk00C[0xA54];
+        u8 action;
+        u8 unkA61;
+        u8 panelMode;
+        u8 unkA63;
+        u8 questState;
+        u8 unkA65;
+        u16 quest;
+        u16 result;
+        u8 unkA6A[2];
+        u8 panelOpen;
+    };
+    typedef char QuestWorkOffsets[
+        offsetof(QuestWorkView, action) == 0xA60 &&
+        offsetof(QuestWorkView, questState) == 0xA64 &&
+        offsetof(QuestWorkView, panelOpen) == 0xA6C ? 1 : -1];
+    QuestWorkView *work = (QuestWorkView *)owner;
+    if (!FUN_002a746c())
+        return;
+
+    work->questState = uiQuestGetState();
+    work->quest = uiQuestRunEnabledAction();
+    work->result = FUN_00372140();
+    s32 action = FUN_002f153c();
+    work->panelMode = uiQuestGetPanelMode();
     uiQuestGetActive();
-    temp_v5 = 0;
-    if (param_1->field_0xa64 != 0) {
-      temp_v4 = gameFlagsGetBlock();
-      *(unsigned short *)(temp_v4 + 0x22) = 0;
-      temp_v5 = clearFlags310To31F();
-      if (temp_v3 == 0) {
-        temp_v5 = (unsigned int)param_1->field_0xa66;
-        *(unsigned short *)(temp_v4 + 0x1e) = param_1->field_0xa66;
-      }
-    }
-    FUN_0034aae4(temp_v5);
-    if (param_1->field_0xa62 != 0) {
-      (*(unsigned short *)((unsigned char *)&DAT_005f16fc + 0xac)) = 1;
-      param_1->field_0x4 = 0x11;
-      param_1->field_0x8 = 0;
-      FUN_003a7630(0);
-      return;
-    }
-    if (temp_v3 != 0) {
-      param_1->field_0xa60 = (char)temp_v3;
-      FUN_0019de98(0,0xf4f4f4ff);
-      FUN_00183318(1);
-      param_1->field_0x4 = 0xc;
-      param_1->field_0x8 = 0;
-      FUN_003a7630(0);
-      return;
-    }
-    if (*(char *)(param_1 + 1) != '\0') {
-      FUN_0037c8e4(1,0);
-      temp_v3 = FUN_00467df8();
-      panelSetTarget(-temp_v3,0);
-      messageMainSetTargetFlags(1);
-      *(unsigned char *)(param_1 + 1) = 0;
+    if (work->questState) {
+        QuestSelectionFlags *flags = gameFlagsGetBlock();
+        flags->selection = 0;
+        clearFlags310To31F();
+        if (!action)
+            flags->quest = work->quest;
     }
     FUN_0034aae4();
-    param_1->field_0x4 = 5;
-    param_1->field_0x8 = 0;
-  }
-  return;
+    if (work->panelMode) {
+        DAT_005f16fc.pending = 1;
+        work->state = 17;
+        work->phase = 0;
+        FUN_003a7630(0);
+        return;
+    }
+    if (action) {
+        work->action = action;
+        FUN_0019de98(0, 0xF4F4F4FF);
+        FUN_00183318(1);
+        work->state = 12;
+        work->phase = 0;
+        FUN_003a7630(0);
+        return;
+    }
+    if (work->panelOpen) {
+        FUN_0037c8e4(1, 0);
+        panelSetTarget(-FUN_00467df8(), 0);
+        messageMainSetTargetFlags(1);
+        work->panelOpen = 0;
+    }
+    FUN_0034aae4();
+    work->state = 5;
+    work->phase = 0;
 }
-
-} /* extern "C" */
+}

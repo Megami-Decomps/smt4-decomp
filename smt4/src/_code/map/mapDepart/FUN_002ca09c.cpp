@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0025b670(unsigned int);
-int FUN_002be370(...);
+int itemDrawCategoryBadge(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
 int FUN_002be650(...);
@@ -36,7 +36,7 @@ extern unsigned char DAT_0049fd38; /* 0x49fd38 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0025b670. */
-/* Supplied declaration required: FUN_002be370. */
+/* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
@@ -141,7 +141,7 @@ unsigned int FUN_002ca09c(void)
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v4 + 8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002be370((int)*(short *)(temp_v9 + 0x49fd8c),(int)(temp_v10 + (float)temp_v11 + temp_v12),
+            itemDrawCategoryBadge((int)*(short *)(temp_v9 + 0x49fd8c),(int)(temp_v10 + (float)temp_v11 + temp_v12),
                          (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v4 + 10),0x6f,0);
             if ((*(char *)(temp_v2 + 0x49fdac) != '\0') &&
                (temp_v6 = *(unsigned int *)(temp_v14 + 0x24),

@@ -1,129 +1,118 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00377acc` (_code @ 0x377acc, 0x18c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: enemy selection ownership and model rebinding restored; saved-register assignment and flag-field addressing differ. */
+#include "shard/W4_Match1b_RegisteredHandle.h"
+#include "gamedata/Table00.h"
 
-extern "C" {
-
-int dataTable00FindById(void);
-int ptrListRemoveClearOwner(unsigned int);
-
-typedef struct fn_00377acc_arg0 fn_00377acc_arg0;
-struct fn_00377acc_arg0 {
-    undefined1 field_0x0; /* +0x0 */
-    unsigned char pad_0x1[0x2f];
-    undefined4 field_0x30; /* +0x30 */
-    undefined4 field_0x34; /* +0x34 */
-    unsigned char field_0x38; /* +0x38 */
-    unsigned char pad_0x39[0x37];
-    int field_0x70; /* +0x70 */
-    uint field_0x74; /* +0x74 */
-    unsigned char pad_0x78[0xc4];
-    undefined1 field_0x13c; /* +0x13c */
-    undefined1 field_0x13d; /* +0x13d */
-    unsigned char pad_0x13e[0x1];
-    undefined1 field_0x13f; /* +0x13f */
-    undefined1 field_0x140; /* +0x140 */
-    unsigned char pad_0x141[0x33];
-    ushort field_0x174; /* +0x174 */
-    unsigned char pad_0x176[0x5];
-    undefined1 field_0x17b; /* +0x17b */
-    int field_0x17c; /* +0x17c */
-    undefined4 *field_0x180; /* +0x180 */
-    byte field_0x184; /* +0x184 */
-    byte field_0x185; /* +0x185 */
+namespace {
+struct EnemySelectionRecord {
+    s32 id;
+    s32 behavior;
+    u32 packedUnit;
+    s32 poolIndex;
 };
-
-typedef int romwright_code(...);
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int g_mapEnemy; /* 0x5806d4 */
-
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: ptrListRemoveClearOwner. */
-extern int FUN_004bb870(int);
-
-
-void FUN_00377acc(fn_00377acc_arg0 *param_1,int param_2,unsigned int param_3)
-
-{
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  int temp_v2;
-  int *unaff_r4;
-  
-  temp_v1 = g_mapEnemy;
-  temp_v2 = 0;
-  do {
-    if (param_3 != 1) {
-      if (param_3 == 2) {
-        unaff_r4 = (int *)(g_mapEnemy + temp_v2 * 0x10 + 0x4b7c);
-      }
-      else if (param_3 != 3) {
-        if (param_3 == 4) {
-          unaff_r4 = (int *)(g_mapEnemy + temp_v2 * 0x10 + 0x4c80);
-        }
-      }
-      else {
-        unaff_r4 = (int *)(g_mapEnemy + temp_v2 * 0x10 + 0x4a78);
-      }
-    }
-    else {
-      unaff_r4 = (int *)(g_mapEnemy + temp_v2 * 0x10 + 0x4a78);
-    }
-    if (*unaff_r4 == param_2) {
-      puVar3 = param_1->field_0x180;
-      if (puVar3 != (unsigned int *)0x0) {
-        param_3 = (unsigned int)param_1->field_0x184;
-      }
-      if (puVar3 != (unsigned int *)0x0 && param_3 != 0) {
-        if (param_1->field_0x185 != 0) {
-          if (puVar3[1] != 0) {
-            ptrListRemoveClearOwner(g_handleRegistry);
-          }
-          param_1->field_0x184 = 0;
-        }
-        else {
-          *(unsigned int *)(puVar3[1] + 4) = *(unsigned int *)(puVar3[1] + 4) | 3;
-          param_1->field_0x184 = 0;
-          *(unsigned char *)(temp_v1 + param_1->field_0x17c * 8 + 0x3d91) = 0;
-        }
-      }
-      temp_v1 = g_mapEnemy;
-      if (param_1->field_0x180 != (undefined4 *)0x0) {
-        if (param_1->field_0x185 != 0) {
-          (**(romwright_code **)(*param_1->field_0x180 + 4))();
-          param_1->field_0x180 = (unsigned int *)0x0;
-        }
-        param_1->field_0x180 = (unsigned int *)0x0;
-        param_1->field_0x0 = 0;
-        param_1->field_0x30 = 0;
-        param_1->field_0x34 = 0xffffffff;
-        *(unsigned int *)&param_1->field_0x38 = 1;
-        param_1->field_0x13c = 0;
-        param_1->field_0x13d = 0;
-        param_1->field_0x13f = 0;
-        param_1->field_0x140 = 0;
-        *(int *)(temp_v1 + 0x3d78) = *(int *)(temp_v1 + 0x3d78) - 1;
-      }
-      param_1->field_0x70 = unaff_r4[1];
-      temp_v0 = unaff_r4[2];
-      param_1->field_0x74 = temp_v0;
-      temp_v0 = temp_v0 & 0xffff;
-      dataTable00FindById();
-      param_1->field_0x174 = *(unsigned short *)(temp_v0 + 2) & 0x7fff;
-      temp_v1 = FUN_004bb870(param_1->field_0x70);
-      if (temp_v1 != 0) {
-        param_1->field_0x17b = (char)temp_v1;
-      }
-      param_1->field_0x17c = unaff_r4[3];
-      return;
-    }
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 >= 0x10) {
-      return;
-    }
-  } while( 1 );
+struct EnemySelectionTablesView {
+    u8 prefix[0x4A78];
+    EnemySelectionRecord primary[16];
+    u8 paddingA[4];
+    EnemySelectionRecord secondary[16];
+    u8 paddingB[4];
+    EnemySelectionRecord extra[16];
+};
+struct BorrowedEnemyModel {
+    u8 unk00;
+    u8 active;
+    u8 padding[6];
+};
+struct EnemyModelPoolView {
+    u8 prefix[0x3D78];
+    s32 count;
+    u8 padding[0x14];
+    BorrowedEnemyModel entries[1];
+};
+struct EnemySlotSelectionView {
+    u8 active;
+    u8 padding01[0x2F];
+    u32 script;
+    s32 state;
+    u32 motion;
+    u8 padding3C[0x34];
+    s32 behavior;
+    u32 packedUnit;
+    u8 padding78[0xC4];
+    u8 flag13C;
+    u8 flag13D;
+    u8 padding13E;
+    u8 flag13F;
+    u8 flag140;
+    u8 padding141[0x33];
+    u16 modelId;
+    u8 padding176[5];
+    u8 variant;
+    s32 poolIndex;
+    RegisteredHandle *model;
+    u8 registered;
+    u8 owned;
+};
 }
+extern "C" {
+extern void *g_mapEnemy;
+extern void *g_handleRegistry;
+void ptrListRemoveClearOwner(void *registry, u32 handle);
+Table00Record *dataTable00FindById(u32 id);
+s32 FUN_004bb870(s32 behavior);
 
-} /* extern "C" */
+// Release the previous owned or borrowed model, then bind a matching enemy selection record.
+void FUN_00377acc(EnemySlotSelectionView *slot, s32 id, u32 kind)
+{
+    EnemySelectionTablesView *tables = static_cast<EnemySelectionTablesView *>(g_mapEnemy);
+    // The caller supplies one of the four supported selection kinds.
+    for (s32 index = 0; index < 16; ++index) {
+        EnemySelectionRecord *record;
+        if (kind == 1)
+            record = &tables->primary[index];
+        else if (kind == 2)
+            record = &tables->secondary[index];
+        else if (kind == 3)
+            record = &tables->primary[index];
+        else if (kind == 4)
+            record = &tables->extra[index];
+        if (record->id != id)
+            continue;
+        if (slot->model != NULL && slot->registered != 0) {
+            if (slot->owned != 0) {
+                if (slot->model->id != 0)
+                    ptrListRemoveClearOwner(g_handleRegistry, slot->model->id);
+                slot->registered = 0;
+            } else {
+                struct ModelFlagView { u32 unk00; u32 flags; };
+                reinterpret_cast<ModelFlagView *>(slot->model->id)->flags |= 3;
+                slot->registered = 0;
+                static_cast<EnemyModelPoolView *>(g_mapEnemy)->entries[slot->poolIndex].active = 0;
+            }
+        }
+        EnemyModelPoolView *pool = static_cast<EnemyModelPoolView *>(g_mapEnemy);
+        if (slot->model != NULL) {
+            if (slot->owned != 0)
+                delete slot->model;
+            slot->model = NULL;
+            slot->active = 0;
+            slot->script = 0;
+            slot->state = -1;
+            slot->motion = 1;
+            slot->flag13C = 0;
+            slot->flag13D = 0;
+            slot->flag13F = 0;
+            slot->flag140 = 0;
+            --pool->count;
+        }
+        slot->behavior = record->behavior;
+        slot->packedUnit = record->packedUnit;
+        Table00Record *unit = dataTable00FindById((u16)slot->packedUnit);
+        slot->modelId = *reinterpret_cast<const u16 *>(unit->unk02) & 0x7FFF;
+        s32 variant = FUN_004bb870(slot->behavior);
+        if (variant != 0)
+            slot->variant = variant;
+        slot->poolIndex = record->poolIndex;
+        return;
+    }
+}
+}

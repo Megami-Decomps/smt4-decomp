@@ -19,12 +19,18 @@ struct DevilRecordA {
     u16 flags; /* 0x0a */
     u8 unk0c[0x28];
     u32 fusionRestrictions; /* 0x34 */
-    u8 unk38[4];
+    union {
+        u8 unk38[4];
+        s8 voiceCategory; /* 0x38: selects the demon message archive */
+    };
     u16 saveRequirement;    /* 0x3c */
     u16 unlockFlag;         /* 0x3e */
 };
 
 typedef char DevilRecordACategoryOffsetCheck[offsetof(DevilRecordA, categoryView.category) == 0x09 && offsetof(DevilRecordA, flags) == 0x0a ? 1 : -1];
+typedef char DevilRecordAVoiceCategoryOffsetCheck[
+    offsetof(DevilRecordA, voiceCategory) == 0x38 &&
+    sizeof(DevilRecordA) == 0x40 ? 1 : -1];
 
 extern "C" DevilRecordA *FUN_00184310(u32 id);
 

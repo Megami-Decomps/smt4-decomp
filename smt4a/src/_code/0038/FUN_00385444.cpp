@@ -1,97 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00385444` (_code @ 0x385444, 0x124 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: special-map override branch ordering differs from retail. */
+#include "map/mapMain.h"
 
 extern "C" {
+extern MapMainA *g_mapMain;
+void FUN_00227a70(void);
+s32 gameFlagIsSet(u32 flag);
+void FUN_002a2e98(s32 map, s32 area, s32 overrideMap, s32 overrideArea);
+void hakaiEntriesNotify(void);
+void FUN_00385a10(void);
+void FUN_00353d74(void);
+void FUN_00378000(void);
+void FUN_0020f12c(s32 map, s32 area);
 
-int FUN_0020f12c(unsigned int, unsigned int);
-int FUN_00227a70(void);
-int FUN_002a2e98(...);
-int FUN_00353d74(void);
-int FUN_00378000(void);
-int hakaiEntriesNotify(void);
-int FUN_00385a10(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern int g_mapMain; /* 0x581274 */
-
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0020f12c. */
-/* Supplied declaration required: FUN_00227a70. */
-/* Supplied declaration required: FUN_002a2e98. */
-/* Supplied declaration required: FUN_00353d74. */
-/* Supplied declaration required: FUN_00378000. */
-/* Supplied declaration required: hakaiEntriesNotify. */
-/* Supplied declaration required: FUN_00385a10. */
-
-
+/* Refresh map-dependent resources, selecting special variants for story progression. */
 void FUN_00385444(void)
-
 {
-/* irregular: 4 goto(s); 7 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  
-  temp_v0 = g_mapMain;
-  if (g_mapMain == 0) {
-    return;
-  }
-  FUN_00227a70();
-  if (*(int *)(temp_v0 + 0x30) == 0x11) {
-    if (*(int *)(temp_v0 + 0x34) == 1) {
-      temp_v1 = gameFlagIsSet(0xd9);
-      if (temp_v1 != 0) goto LAB_00385484;
-LAB_003854c8:
-      FUN_002a2e98(*(unsigned int *)(temp_v0 + 0x30),*(unsigned int *)(temp_v0 + 0x34),
-                   *(unsigned int *)(temp_v0 + 0x30),99);
-      hakaiEntriesNotify();
-      FUN_00385a10();
-      FUN_00353d74();
-      FUN_00378000();
-      FUN_0020f12c(*(unsigned int *)(temp_v0 + 0x30),*(unsigned int *)(temp_v0 + 0x34));
-      return;
+    MapMainA *map = g_mapMain;
+    if (map == NULL)
+        return;
+    FUN_00227a70();
+    if ((map->transition.mapId == 17 && map->transition.areaId == 1 && gameFlagIsSet(0xD9) == 0) ||
+        (map->transition.mapId == 5 && map->transition.areaId == 1 && gameFlagIsSet(0x1CA) == 0) ||
+        (map->transition.mapId == 3 && map->transition.areaId == 3 &&
+         gameFlagIsSet(0x171) != 0 && gameFlagIsSet(0x177) == 0)) {
+        FUN_002a2e98(map->transition.mapId, map->transition.areaId, map->transition.mapId, 99);
+    } else {
+        FUN_002a2e98(map->transition.mapId, map->transition.areaId, 0, 0);
     }
-LAB_0038550c:
-    temp_v5 = 0;
-    temp_v2 = *(unsigned int *)(temp_v0 + 0x30);
-    temp_v3 = *(unsigned int *)(temp_v0 + 0x34);
-    temp_v4 = 0;
-  }
-  else {
-LAB_00385484:
-    if (*(int *)(temp_v0 + 0x30) == 5) {
-      if (*(int *)(temp_v0 + 0x34) != 1) goto LAB_0038550c;
-      temp_v1 = gameFlagIsSet(0x1ca);
-      if (temp_v1 == 0) goto LAB_003854c8;
-    }
-    temp_v1 = *(int *)(temp_v0 + 0x30);
-    temp_v6 = temp_v1 != 3;
-    if (!temp_v6) {
-      temp_v1 = *(int *)(temp_v0 + 0x34);
-    }
-    if (((temp_v6 || temp_v1 != 3) || (temp_v1 = gameFlagIsSet(0x171), temp_v1 == 0)) ||
-       (temp_v1 = gameFlagIsSet(0x177), temp_v1 != 0)) goto LAB_0038550c;
-    temp_v2 = *(unsigned int *)(temp_v0 + 0x30);
-    temp_v3 = *(unsigned int *)(temp_v0 + 0x34);
-    temp_v5 = 99;
-    temp_v4 = temp_v2;
-  }
-  FUN_002a2e98(temp_v2,temp_v3,temp_v4,temp_v5);
-  hakaiEntriesNotify();
-  FUN_00385a10();
-  FUN_00353d74();
-  FUN_00378000();
-  FUN_0020f12c(*(unsigned int *)(temp_v0 + 0x30),*(unsigned int *)(temp_v0 + 0x34));
-  return;
+    hakaiEntriesNotify();
+    FUN_00385a10();
+    FUN_00353d74();
+    FUN_00378000();
+    FUN_0020f12c(map->transition.mapId, map->transition.areaId);
 }
-
-} /* extern "C" */
+}

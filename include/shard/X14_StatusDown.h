@@ -20,7 +20,14 @@ typedef struct StatusDownTouchIds {
 
 typedef struct StatusDown {
     /* 0x0000 */ u32 job;
-    /* 0x0004 */ u8 unk0004[0x540];
+    union {
+        /* 0x0004 */ u8 unk0004[0x540];
+        struct {
+            u8 unk0004BeforeIndicators[0x538];
+            /* 0x053c */ s32 first;
+            /* 0x0540 */ s32 second;
+        } indicators;
+    };
     /* 0x0544 */ StatusDownTouchIds touch;
     /* 0x0598 */ u8 unk0598[2];
     /* 0x059A */ u8 touchRegionCount;
@@ -35,5 +42,8 @@ extern "C" StatusDown *g_statusDown;
 typedef char StatusDownOffsets[offsetof(StatusDown, touch) == 0x544 &&
     offsetof(StatusDown, touchRegionCount) == 0x59A && offsetof(StatusDown, slot) == 0x23B8 &&
     offsetof(StatusDown, script) == 0x24AC ? 1 : -1];
+typedef char StatusDownIndicatorOffsets[
+    offsetof(StatusDown, indicators.first) == 0x53c &&
+    offsetof(StatusDown, indicators.second) == 0x540 ? 1 : -1];
 
 #endif

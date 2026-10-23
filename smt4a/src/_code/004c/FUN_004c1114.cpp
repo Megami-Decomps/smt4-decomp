@@ -36,7 +36,7 @@ extern unsigned int DAT_0057149c; /* 0x57149c */
 extern int btlGetMainState(void);
 extern unsigned int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_003f0e20. */
-extern int FUN_004c52ec(int);
+extern int btlGetPropertyMaximum(int);
 
 
 unsigned int FUN_004c1114(unsigned int param_1,int param_2)
@@ -171,7 +171,7 @@ unsigned int FUN_004c1114(unsigned int param_1,int param_2)
       else {
         temp_v1 = 0;
       }
-      temp_v0 = FUN_004c52ec(temp_v3);
+      temp_v0 = btlGetPropertyMaximum(temp_v3);
       if (temp_v1 != temp_v0) {
         return 0;
       }

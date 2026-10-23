@@ -1,99 +1,92 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f97a4` (_code @ 0x3f97a4, 0x1a0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: phase switch uses comparisons instead of a jump table; reveal VFP registers/stores differ. */
+#include "common.h"
 
-extern "C" {
-
-int __aeabi_idivmod(int, unsigned int);
-
-/* Supplied declaration required: __aeabi_idivmod. */
-
-
-void FUN_003f97a4(int param_1)
-
+struct CyclingPanelEntryA {
+    u8 unk00[0x38];
+    s32 imageCount;
+    s32 image;
+    f32 frame;
+    u8 holding;
+    u8 unk45[0x1b];
+};
+struct CyclingPanelWorkA {
+    CyclingPanelEntryA entries[9];
+    s32 count;
+    u8 unk364[0xa8];
+    u32 phase;
+    f32 closing;
+    f32 opening;
+    f32 secondary;
+    f32 reveal;
+};
+static __inline s32 panelFrameBits(f32 frame)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  char temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  unsigned int temp_v8;
-  
-  temp_v7 = 1.0f;
-  switch(*(unsigned int *)(param_1 + 0x40c)) {
-  case 0:
-    temp_v7 = *(float *)(param_1 + 0x414) + 1.0f;
-    *(float *)(param_1 + 0x414) = temp_v7;
-    if ((int)temp_v7 >= 0x40000000) {
-      *(unsigned int *)(param_1 + 0x40c) = 1;
-    }
-    break;
-  case 1:
-    temp_v6 = *(float *)(param_1 + 0x414) + 1.0f;
-    temp_v5 = *(float *)(param_1 + 0x41c) + 1.0f;
-    temp_v7 = *(float *)(param_1 + 0x418) + 1.0f;
-    *(float *)(param_1 + 0x414) = temp_v6;
-    temp_v1 = (int)temp_v6 >= 0x40800000;
-    *(float *)(param_1 + 0x418) = temp_v7;
-    *(float *)(param_1 + 0x41c) = temp_v5;
-    if ((int)temp_v6 >= 0x40800000) {
-      *(unsigned int *)(param_1 + 0x414) = 0x40800000;
-    }
-    if ((int)temp_v7 >= 0x40800000) {
-      temp_v1 = temp_v1 + '\x01';
-      *(unsigned int *)(param_1 + 0x418) = 0x40800000;
-    }
-    if ((int)temp_v5 >= 0x41000000) {
-      temp_v1 = temp_v1 + '\x01';
-      *(unsigned int *)(param_1 + 0x41c) = 0x41000000;
-    }
-    if (temp_v1 == '\x03') {
-      *(unsigned int *)(param_1 + 0x40c) = 2;
-    }
-    return;
-  case 2:
-    temp_v3 = 0;
-    if (0 < *(int *)(param_1 + 0x360)) {
-      temp_v8 = 0;
-      do {
-        temp_v4 = param_1 + temp_v3 * 0x60;
-        if (*(unsigned int *)(temp_v4 + 0x38) >= 2) {
-          temp_v5 = *(float *)(temp_v4 + 0x40) + temp_v7;
-          *(float *)(temp_v4 + 0x40) = temp_v5;
-          if (*(char *)(temp_v4 + 0x44) != '\0') {
-            if ((int)temp_v5 >= 0x41a00000) {
-              *(unsigned int *)(temp_v4 + 0x40) = temp_v8;
-              *(unsigned char *)(temp_v4 + 0x44) = 0;
-            }
-          }
-          else if ((int)temp_v5 >= 0x40800000) {
-            temp_v0 = *(int *)(temp_v4 + 0x3c) + 1;
-            *(int *)(temp_v4 + 0x3c) = temp_v0;
-            __aeabi_idivmod(temp_v0,*(unsigned int *)(temp_v4 + 0x38));
-            *(unsigned int *)(temp_v4 + 0x3c) = temp_v2;
-            *(unsigned int *)(temp_v4 + 0x40) = temp_v8;
-            *(unsigned char *)(temp_v4 + 0x44) = 1;
-          }
-        }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < *(int *)(param_1 + 0x360));
-      return;
-    }
-    break;
-  case 3:
-    temp_v7 = *(float *)(param_1 + 0x410) + 1.0f;
-    *(float *)(param_1 + 0x410) = temp_v7;
-    if ((int)temp_v7 >= 0x40800000) {
-      *(unsigned int *)(param_1 + 0x410) = 0x40800000;
-      *(unsigned int *)(param_1 + 0x40c) = 4;
-      return;
-    }
-  }
-  return;
+    return reinterpret_cast<const s32 &>(frame);
 }
 
-} /* extern "C" */
+// Advance the panel reveal/close phases and cycle entries that have multiple images.
+extern "C" void FUN_003f97a4(CyclingPanelWorkA *work)
+{
+    switch (work->phase) {
+    case 0: {
+        f32 frame = work->opening + 1.0f;
+        work->opening = frame;
+        if (panelFrameBits(frame) >= 0x40000000)
+            work->phase = 1;
+        break;
+    }
+    case 1: {
+        f32 opening = work->opening + 1.0f;
+        f32 secondary = work->secondary + 1.0f;
+        f32 reveal = work->reveal + 1.0f;
+        work->opening = opening;
+        work->secondary = secondary;
+        work->reveal = reveal;
+        s32 completed = 0;
+        if (panelFrameBits(opening) >= 0x40800000) {
+            completed = 1;
+            work->opening = 4.0f;
+        }
+        if (panelFrameBits(secondary) >= 0x40800000) {
+            ++completed;
+            work->secondary = 4.0f;
+        }
+        if (panelFrameBits(reveal) >= 0x41000000) {
+            ++completed;
+            work->reveal = 8.0f;
+        }
+        if (completed == 3)
+            work->phase = 2;
+        break;
+    }
+    case 2:
+        for (s32 index = 0; index < work->count; ++index) {
+            CyclingPanelEntryA *entry = &work->entries[index];
+            if (entry->imageCount == 0 || entry->imageCount == 1)
+                continue;
+            f32 frame = entry->frame + 1.0f;
+            entry->frame = frame;
+            if (entry->holding) {
+                if (panelFrameBits(frame) >= 0x41a00000) {
+                    entry->frame = 0.0f;
+                    entry->holding = 0;
+                }
+            } else if (panelFrameBits(frame) >= 0x40800000) {
+                ++entry->image;
+                entry->image %= entry->imageCount;
+                entry->frame = 0.0f;
+                entry->holding = 1;
+            }
+        }
+        break;
+    case 3: {
+        f32 frame = work->closing + 1.0f;
+        work->closing = frame;
+        if (panelFrameBits(frame) >= 0x40800000) {
+            work->closing = 4.0f;
+            work->phase = 4;
+        }
+        break;
+    }
+    }
+}

@@ -1,79 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038dc84` (_code @ 0x38dc84, 0x12c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: population counting uses an ascending bound instead of a countdown; signed-mask registers and result allocation differ. */
+#include "common.h"
 
 extern "C" {
+s32 scrGetArg(u32 index);
+void scrSetResult(s32 result);
+s32 FUN_00184964(s32 minimum, s32 maximum);
 
-int scrSetResult(...);
-
-extern int FUN_00184964(unsigned int, int);
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_0038dc84(void)
-
+// Pick an ordinal among the set bits in two script masks, then return its bit index.
+u32 FUN_0038dc84(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetArg(1);
-  temp_v3 = 0;
-  if (temp_v1 == 0 && temp_v2 == 0) {
-    scrSetResult(0);
-    return 1;
-  }
-  temp_v4 = 0;
-  temp_v5 = 0x20;
-  do {
-    temp_v0 = 1 << (temp_v4 & 0xff);
-    if ((temp_v1 & temp_v0) != 0) {
-      temp_v3 = temp_v3 + 1;
+    s64 first = scrGetArg(0);
+    s64 second = scrGetArg(1);
+    s32 count = 0;
+    if (first == 0 && second == 0) {
+        scrSetResult(0);
+        return 1;
     }
-    if ((temp_v0 & temp_v2) != 0) {
-      temp_v3 = temp_v3 + 1;
-    }
-    temp_v5 = temp_v5 - 1;
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v5 != 0);
-  temp_v3 = FUN_00184964(0,temp_v3 - 1);
-  temp_v5 = 0;
-  temp_v4 = 0;
-  do {
-    if (((1 << (temp_v4 & 0xff)) & temp_v1) != 0) {
-      if (temp_v3 == temp_v5) {
-        temp_v0 = temp_v4;
-        if (temp_v4 != 0) {
-          scrSetResult(temp_v4);
-          return 1;
+    for (u32 bit = 0; bit < 32; ++bit) {
+        s32 mask = 1 << bit;
+        if ((first & mask) != 0) {
+            ++count;
         }
-        break;
-      }
-      temp_v5 = temp_v5 + 1;
+        if ((second & mask) != 0) {
+            ++count;
+        }
     }
-    temp_v4 = temp_v4 + 1;
-    temp_v0 = 0;
-  } while ((int)temp_v4 < 0x20);
-  temp_v4 = temp_v0;
-  temp_v1 = 0;
-  do {
-    if (((1 << (temp_v1 & 0xff)) & temp_v2) != 0) {
-      if (temp_v3 == temp_v5) {
-        temp_v4 = temp_v1 + 0x20;
-        break;
-      }
-      temp_v5 = temp_v5 + 1;
+    s32 ordinal = FUN_00184964(0, count - 1);
+    s32 seen = 0;
+    s32 result = 0;
+    for (s32 bit = 0; bit < 32; ++bit) {
+        if ((first & (1 << bit)) != 0) {
+            if (ordinal == seen) {
+                result = bit;
+                break;
+            }
+            ++seen;
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while ((int)temp_v1 < 0x20);
-  scrSetResult(temp_v4);
-  return 1;
+    // Zero also acts as the not-found sentinel, including when the first mask selected bit zero.
+    if (result == 0) {
+        for (s32 bit = 0; bit < 32; ++bit) {
+            if ((second & (1 << bit)) != 0) {
+                if (ordinal == seen) {
+                    result = bit + 32;
+                    break;
+                }
+                ++seen;
+            }
+        }
+    }
+    scrSetResult(result);
+    return 1;
 }
-
-} /* extern "C" */
+}

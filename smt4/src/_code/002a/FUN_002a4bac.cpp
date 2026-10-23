@@ -1,93 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a4bac` (_code @ 0x2a4bac, 0x168 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: owner/slot saved-register allocation differs; the adjacent camera-reset tail call matches. */
+#include "shard/S1GfxModel.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "classes/AsdAllocatorObject.h"
+#include <stddef.h>
 
 extern "C" {
-
-int asdMdlManagerMarkDestroy(void);
-int FUN_00152ed8(int *);
-int asdModelSlotRelease(int);
-int asdMdlManagerDestroy(int);
-int asdMemFree(void);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern int DAT_0044ea5c; /* 0x44ea5c */
-
-/* Supplied declaration required: asdMdlManagerMarkDestroy. */
-/* Supplied declaration required: FUN_00152ed8. */
-/* Supplied declaration required: asdModelSlotRelease. */
-/* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: asdMemFree. */
-
-
-void FUN_002a4bac(int *param_1)
-
-{
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  
-  asdModelSlotRelease(0);
-  if (param_1[7] != 0) {
-    asdMdlManagerMarkDestroy();
-    asdMdlManagerDestroy(param_1[7]);
-    param_1[7] = 0;
-  }
-  if (param_1[10] != 0) {
-    asdMdlManagerMarkDestroy();
-    asdMdlManagerDestroy(param_1[10]);
-    param_1[10] = 0;
-  }
-  if (param_1[8] != 0) {
-    asdMdlManagerMarkDestroy();
-    asdMdlManagerDestroy(param_1[8]);
-    param_1[8] = 0;
-  }
-  if (param_1[9] != 0) {
-    asdMdlManagerMarkDestroy();
-    asdMdlManagerDestroy(param_1[9]);
-    param_1[9] = 0;
-  }
-  FUN_00152ed8(param_1);
-  temp_v1 = 0;
-  if (temp_v1 < *param_1) {
-    do {
-      puVar2 = (unsigned int *)param_1[temp_v1 + 0x15b];
-      if (puVar2 != (unsigned int *)0x0) {
-        (**(romwright_code **)*puVar2)(puVar2);
-        (**(romwright_code **)(*(int *)puVar2[1] + 0xc))((int *)puVar2[1],puVar2);
-        param_1[temp_v1 + 0x15b] = 0;
-      }
-      temp_v0 = 0;
-      if (temp_v0 < param_1[2]) {
-        do {
-          puVar2 = (unsigned int *)param_1[temp_v1 * 0x20 + temp_v0 + 0x17b];
-          if (puVar2 != (unsigned int *)0x0) {
-            (**(romwright_code **)*puVar2)(puVar2);
-            (**(romwright_code **)(*(int *)puVar2[1] + 0xc))((int *)puVar2[1],puVar2);
-            param_1[temp_v1 * 0x20 + temp_v0 + 0x17b] = 0;
-          }
-          temp_v0 = temp_v0 + 1;
-        } while (temp_v0 < param_1[2]);
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *param_1);
-  }
-  if (param_1[6] != 0) {
-    asdMemFree();
-    param_1[6] = 0;
-  }
-  temp_v1 = DAT_0044ea5c;
-  temp_v0 = DAT_0044ea5c + 0x590;
-  *(int *)(DAT_0044ea5c + 0x80) = DAT_0044ea5c + 0x88;
-  *(int *)(temp_v1 + 0x84) = temp_v0;
-  return;
+void asdModelSlotRelease(u32);
+void asdMdlManagerMarkDestroy(AsdMdlObject *);
+void asdMdlManagerDestroy(AsdMdlObject *);
+void FUN_00152ed8(ModelSelector *);
+void asdMemFree(void *);
+void asdWorkAreaReset();
 }
 
-} /* extern "C" */
+static inline void destroyManagedModel(AsdMdlObject *&model)
+{
+    if (model != NULL) {
+        asdMdlManagerMarkDestroy(model);
+        asdMdlManagerDestroy(model);
+        model = NULL;
+    }
+}
+
+static inline void releaseOwnedModelSlot(ModelSlot *&slot)
+{
+    ModelSlot *object = slot;
+    if (object != NULL) {
+        struct SlotLifecycle {
+            void (*destroy)(ModelSlot *);
+        };
+        const SlotLifecycle *methods = *reinterpret_cast<const SlotLifecycle *const *>(object);
+        methods->destroy(object);
+        static_cast<AsdAllocatorObject *>(object->sceneObject)->release(object);
+        slot = NULL;
+    }
+}
+
+extern "C" void FUN_002a4bac(ModelSelector *selector)
+{
+    /* Both full banks extend past ModelSelector's two declared slots. */
+    struct ModelOwnerView {
+        s32 count;
+        s32 selected;
+        s32 secondaryCount;
+        u8 prefix0C[0xC];
+        void *storage;
+        AsdMdlObject *mainModel;
+        AsdMdlObject *firstModel;
+        AsdMdlObject *secondModel;
+        AsdMdlObject *optionalModel;
+        u8 prefix2C[0x540];
+        ModelSlot *primary[32];
+        ModelSlot *secondary[32][32];
+    };
+    typedef char ModelOwnerOffsets[
+        offsetof(ModelOwnerView, storage) == 0x18 &&
+        offsetof(ModelOwnerView, optionalModel) == 0x28 &&
+        offsetof(ModelOwnerView, primary) == 0x56C &&
+        offsetof(ModelOwnerView, secondary) == 0x5EC ? 1 : -1];
+    ModelOwnerView *owner = reinterpret_cast<ModelOwnerView *>(selector);
+    asdModelSlotRelease(0);
+    destroyManagedModel(owner->mainModel);
+    destroyManagedModel(owner->optionalModel);
+    destroyManagedModel(owner->firstModel);
+    destroyManagedModel(owner->secondModel);
+    FUN_00152ed8(selector);
+    for (s32 i = 0; i < owner->count; ++i) {
+        releaseOwnedModelSlot(owner->primary[i]);
+        for (s32 j = 0; j < owner->secondaryCount; ++j)
+            releaseOwnedModelSlot(owner->secondary[i][j]);
+    }
+    if (owner->storage != NULL) {
+        asdMemFree(owner->storage);
+        owner->storage = NULL;
+    }
+    asdWorkAreaReset();
+}

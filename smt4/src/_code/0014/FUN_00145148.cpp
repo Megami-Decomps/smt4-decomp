@@ -1,82 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00145148` (_code @ 0x145148, 0x1bc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: indexed-entry alias reloads, capture-copy loop scheduling and branch layout differ from retail. */
+#include "shard/W5_W5Match1_RecordKeys.h"
+#include <stddef.h>
+
+// Source-local extended views: the shared table and state describe only shorter prefixes.
+struct ChannelCaptureEntryView {
+    u8 active;
+    u8 channel;
+    u8 textLength;
+    u8 unk003;
+    u32 first;
+    u32 second;
+    u8 unk00C[0xFC];
+    u16 text[24];
+};
+struct ChannelCaptureTableView {
+    ChannelCaptureEntryView entries[64];
+    s16 selected;
+    u16 channel;
+    u8 unk4E04[0x28];
+    u32 textLength;
+};
+struct ChannelCaptureTextView {
+    u32 unk00;
+    u16 text[24];
+    u16 length;
+};
+struct ChannelCaptureStateView {
+    u8 enabled;
+    u8 ready;
+    u8 unk02[2];
+    ChannelCaptureTableView *table;
+    ChannelCaptureTextView *capture;
+    u32 first;
+    u32 second;
+};
+typedef char ChannelCaptureLayoutCheck[
+    sizeof(ChannelCaptureEntryView) == sizeof(RenderChannelEntry) && offsetof(ChannelCaptureEntryView, text) == 0x108 &&
+    offsetof(ChannelCaptureTableView, selected) == 0x4E00 && offsetof(ChannelCaptureTableView, textLength) == 0x4E2C &&
+    offsetof(ChannelCaptureTextView, length) == 0x34 && offsetof(ChannelCaptureStateView, first) == 0xC ? 1 : -1];
 
 extern "C" {
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-} void_stack;
-
-extern signed char g_textRendererSettings; /* 0x4729b8 */
-extern signed char DAT_004729b9; /* 0x4729b9 */
-extern int DAT_004729bc; /* 0x4729bc */
-extern int DAT_004729c0; /* 0x4729c0 */
-extern unsigned int DAT_004729c4; /* 0x4729c4 */
-extern unsigned int DAT_004729c8; /* 0x4729c8 */
-extern short DAT_004eaa1c; /* 0x4eaa1c */
-
+extern ChannelCaptureStateView g_textRendererSettings;
+extern u16 DAT_004eaa1c[];
 
 void FUN_00145148(void)
-
 {
-  char temp_v0;
-  int temp_v1;
-  short *psVar3;
-  unsigned int temp_v2;
-  unsigned short *puVar5;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v1 = DAT_004729bc;
-  temp_v0 = '\0';
-  if (g_textRendererSettings != '\0') {
-    temp_v0 = DAT_004729b9;
-  }
-  if (g_textRendererSettings != '\0' && temp_v0 != '\0') {
-    psVar3 = (short *)(DAT_004729bc + 0x4e00);
-    *(char *)(DAT_004729bc + *psVar3 * 0x138 + 1) = (char)*(unsigned short *)(DAT_004729bc + 0x4e02);
-    *(char *)(temp_v1 + *psVar3 * 0x138 + 2) = (char)*(unsigned int *)(temp_v1 + 0x4e2c);
-    *(unsigned int *)(temp_v1 + *psVar3 * 0x138 + 4) = DAT_004729c4;
-    *(unsigned int *)(temp_v1 + *psVar3 * 0x138 + 8) = DAT_004729c8;
-    DAT_004729c4 = 0;
-    DAT_004729c8 = 0;
-    if (*(short *)(DAT_004729c0 + 0x34) != 0) {
-      *(char *)(temp_v1 + *psVar3 * 0x138 + 2) = (char)*(short *)(DAT_004729c0 + 0x34);
-      temp_v2 = (unsigned int)*(unsigned short *)(DAT_004729c0 + 0x34);
-      if (temp_v2 != 0) {
-        temp_v3 = 0;
-        puVar5 = (unsigned short *)(DAT_004729c0 + 4);
-        do {
-          temp_v2 = temp_v2 - 1;
-          temp_v4 = temp_v3 * 2;
-          temp_v3 = temp_v3 + 1;
-          *(unsigned short *)(temp_v1 + *psVar3 * 0x138 + temp_v4 + 0x108) = *puVar5;
-          puVar5 = puVar5 + 1;
-        } while (temp_v2 != 0);
-      }
-      *(unsigned short *)(temp_v1 + *psVar3 * 0x138 + (unsigned int)*(unsigned short *)(DAT_004729c0 + 0x34) * 2 + 0x108)
-           = 0;
+    if (!g_textRendererSettings.enabled || !g_textRendererSettings.ready)
+        return;
+    ChannelCaptureTableView *table = g_textRendererSettings.table;
+    table->entries[table->selected].channel = table->channel;
+    table->entries[table->selected].textLength = table->textLength;
+    table->entries[table->selected].first = g_textRendererSettings.first;
+    table->entries[table->selected].second = g_textRendererSettings.second;
+    g_textRendererSettings.first = 0;
+    g_textRendererSettings.second = 0;
+    if (g_textRendererSettings.capture->length) {
+        table->entries[table->selected].textLength = g_textRendererSettings.capture->length;
+        u32 remaining = g_textRendererSettings.capture->length;
+        const u16 *source = g_textRendererSettings.capture->text;
+        for (s32 index = 0; remaining; ++index, --remaining)
+            table->entries[table->selected].text[index] = *source++;
+        table->entries[table->selected].text[g_textRendererSettings.capture->length] = 0;
+    } else {
+        table->entries[table->selected].textLength = 0;
+        if (DAT_004eaa1c[0]) {
+            for (s32 index = 0; index < 24; ++index) {
+                table->entries[table->selected].text[index] = DAT_004eaa1c[index];
+                if (!DAT_004eaa1c[index])
+                    break;
+                ++table->entries[table->selected].textLength;
+            }
+        }
     }
-    else {
-      *(unsigned char *)(temp_v1 + *psVar3 * 0x138 + 2) = 0;
-      if (DAT_004eaa1c != 0) {
-        temp_v3 = 0;
-        do {
-          *(short *)(temp_v1 + *psVar3 * 0x138 + temp_v3 * 2 + 0x108) = (&DAT_004eaa1c)[temp_v3];
-          if ((&DAT_004eaa1c)[temp_v3] == 0) break;
-          temp_v3 = temp_v3 + 1;
-          temp_v4 = temp_v1 + *psVar3 * 0x138;
-          *(char *)(temp_v4 + 2) = *(char *)(temp_v4 + 2) + '\x01';
-        } while (temp_v3 < 0x18);
-      }
-    }
-    if (*psVar3 < 0x40) {
-      *psVar3 = *psVar3 + 1;
-    }
-  }
-  return;
+    if (table->selected < 64)
+        ++table->selected;
 }
-
-} /* extern "C" */
+}

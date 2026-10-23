@@ -1,74 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038aa80` (_code @ 0x38aa80, 0x130 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: flag test keeps TST instead of ANDS; stack push address scheduling and extended speed-field addressing differ. */
+#include "gfx/DrawParameterOwner.h"
+#include "camp/RenderCtx.h"
 
-extern "C" {
-
-int FUN_002bed3c(void);
-int FUN_002bf288(int, int, int, int, int, int);
-int efctSetSpeed(void);
-int FUN_002c18e4(int);
-int FUN_002c198c(int);
-
-typedef int romwright_code(...);
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: efctSetSpeed. */
-extern unsigned int *jobGetWork(void);
-/* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-
-
-unsigned int FUN_0038aa80(void)
-
-{
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar6;
-  
-  puVar2 = (unsigned int *)jobGetWork();
-  temp_v0 = g_titleScene;
-  if ((*(char *)((int)puVar2 + 0x415) != '\0') && ((*puVar2 & 0x10) != 0)) {
-    temp_v1 = FUN_002c5d80(1,0);
-    piVar6 = (int *)(temp_v0 + 0x124c);
-    temp_v2 = *piVar6;
-    temp_v3 = piVar6[temp_v2 + 2];
-    *piVar6 = temp_v2 + 1;
-    piVar6[temp_v2 + 3] = temp_v1;
-    if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v3 != temp_v1) {
-      (**(romwright_code **)(temp_v0 + 0x1268))();
-      *(unsigned char *)(temp_v0 + 0x1264) = 0;
-    }
-    efctSetSpeed();
-    FUN_002bf288(2,0xe,0x14f,0,0,6);
-    efctSetSpeed();
-    temp_v0 = g_titleScene;
-    piVar6 = (int *)(g_titleScene + 0x124c);
-    temp_v1 = *piVar6;
-    temp_v2 = piVar6[temp_v1 + 2];
-    *piVar6 = temp_v1 - 1;
-    if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v2 != piVar6[temp_v1 + 1]) {
-      (**(romwright_code **)(temp_v0 + 0x1268))();
-      *(unsigned char *)(temp_v0 + 0x1264) = 0;
-    }
-    FUN_002bed3c();
-    FUN_002c198c(g_titleScene);
-    FUN_002c18e4(g_titleScene);
-  }
-  return 0;
+namespace {
+// The speed belongs beyond the canonical draw-owner prefix, whose size remains 0x440.
+struct ParameterOverlayWorkView {
+    DrawParameterOwner owner;
+    u8 unk440[0x20];
+    f32 speed; // 0x460
+};
+typedef char ParameterOverlayWorkSpeedOffsetCheck[
+    offsetof(ParameterOverlayWorkView, speed) == 0x460 ? 1 : -1];
 }
 
-} /* extern "C" */
+extern "C" {
+ParameterOverlayWorkView *jobGetWork(void);
+extern RenderCtx *g_titleScene;
+s32 FUN_002c5d80(u32 preset, u32 index);
+void efctSetSpeed(f32 speed);
+void FUN_002bf288(s32 font, s32 text, u32 entry, s32 x, s32 y, s32 layer);
+void FUN_002bed3c(void);
+void FUN_002c198c(RenderCtx *context);
+void FUN_002c18e4(RenderCtx *context);
+
+// Draw the enabled overlay at the owner's animation speed and restore render state.
+u32 FUN_0038aa80(void)
+{
+    ParameterOverlayWorkView *work = jobGetWork();
+    if (work->owner.dirty != 0 && (work->owner.control.flags & 0x10) != 0) {
+        RenderCtx *context = g_titleScene;
+        renderCtxPushA(context, FUN_002c5d80(1, 0));
+        efctSetSpeed(work->speed);
+        FUN_002bf288(2, 14, 0x14F, 0, 0, 6);
+        efctSetSpeed(1.0f);
+        renderStackPop(&g_titleScene->stackA);
+        FUN_002bed3c();
+        FUN_002c198c(g_titleScene);
+        FUN_002c18e4(g_titleScene);
+    }
+    return 0;
+}
+}

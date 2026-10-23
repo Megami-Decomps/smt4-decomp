@@ -1,98 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00291e50` (_code @ 0x291e50, 0x1c8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: direction normalization elides retail's intermediate reloads, and vector copies/saved registers differ. */
+#include "map/lmapMain.h"
+#include "shard/W6_W6Match2_AocTable23.h"
 extern "C" {
+extern LmapMainStateA *g_lmapMainState;
+extern LmapSceneA *g_lmapScene;
+extern GameStateA g_gameState;
+u32 FUN_003b5714(s32 category, s32 subtype, u32 variant);
+Table23Record *dataTableGetRecord23(u32 index);
+f32 distSpatial(f32 x1, f32 y1, f32 z1, f32 x2, f32 y2, f32 z2);
 
-int distSpatial(void);
-int FUN_003b5714(...);
-int VectorSignedToFloat(int, int);
-
-extern int g_lmapMainState; /* 0x580238 */
-extern int g_lmapScene; /* 0x581288 */
-extern unsigned int g_gameState; /* 0x5f15fc */
-extern unsigned int DAT_005f1600; /* 0x5f1600 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: distSpatial. */
-extern int dataTableGetRecord23(void);
-/* Supplied declaration required: FUN_003b5714. */
-
-
-void FUN_00291e50(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+void FUN_00291e50(s32 startId, u32 startVariant, s32 endId, u32 endVariant)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  unsigned int in_fpscr;
-  unsigned int temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  
-  temp_v0 = g_lmapMainState;
-  if (param_1 != 0) {
-    FUN_003b5714(*(unsigned int *)(g_lmapMainState + 0x40),param_1,param_2);
-    temp_v1 = dataTableGetRecord23();
-    temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(unsigned int *)(temp_v0 + 0x9310) = temp_v4;
-    temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(unsigned int *)(temp_v0 + 0x9314) = temp_v4;
-    temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(unsigned int *)(temp_v0 + 0x9318) = temp_v4;
-  }
-  else {
-    temp_v4 = *(unsigned int *)(g_lmapScene + 0x20);
-    temp_v2 = *(unsigned int *)(g_lmapScene + 0x24);
-    *(unsigned int *)(g_lmapMainState + 0x9310) = *(unsigned int *)(g_lmapScene + 0x1c);
-    *(unsigned int *)(temp_v0 + 0x9314) = temp_v4;
-    *(unsigned int *)(temp_v0 + 0x9318) = temp_v2;
-  }
-  FUN_003b5714(*(unsigned int *)(temp_v0 + 0x40),param_3,param_4);
-  temp_v1 = dataTableGetRecord23();
-  temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v0 + 0x931c) = temp_v4;
-  temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v0 + 0x9320) = temp_v4;
-  temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v0 + 0x9324) = temp_v4;
-  temp_v5 = *(float *)(temp_v0 + 0x9310);
-  distSpatial();
-  temp_v7 = *(float *)(temp_v0 + 0x931c) - *(float *)(temp_v0 + 0x9310);
-  *(float *)(temp_v0 + 0x9330) = *(float *)(temp_v0 + 0x9324) - *(float *)(temp_v0 + 0x9318);
-  *(float *)(temp_v0 + 0x9328) = temp_v7;
-  *(float *)(temp_v0 + 0x932c) = *(float *)(temp_v0 + 0x9320) - *(float *)(temp_v0 + 0x9314);
-  temp_v6 = 1.0f / temp_v5;
-  *(float *)(temp_v0 + 0x9328) = temp_v7 * temp_v6;
-  *(float *)(temp_v0 + 0x932c) = *(float *)(temp_v0 + 0x932c) * temp_v6;
-  *(float *)(temp_v0 + 0x9330) = *(float *)(temp_v0 + 0x9330) * temp_v6;
-  *(unsigned int *)(temp_v0 + 0x9334) = 0x41f00000;
-  *(unsigned int *)(temp_v0 + 0x9338) = 0;
-  *(int *)(temp_v0 + 0x933c) = (int)(temp_v5 / 30.0f);
-  temp_v1 = g_lmapScene;
-  temp_v4 = *(unsigned int *)(temp_v0 + 0x9310);
-  temp_v2 = *(unsigned int *)(temp_v0 + 0x9314);
-  temp_v3 = *(unsigned int *)(temp_v0 + 0x9318);
-  puVar5 = (unsigned int *)(g_lmapScene + 0x28);
-  *(unsigned int *)(g_lmapScene + 0x1c) = temp_v4;
-  *(unsigned int *)(temp_v1 + 0x20) = temp_v2;
-  *(unsigned int *)(temp_v1 + 0x24) = temp_v3;
-  *puVar5 = temp_v4;
-  *(unsigned int *)(temp_v1 + 0x2c) = temp_v2;
-  *(unsigned int *)(temp_v1 + 0x30) = temp_v3;
-  temp_v0 = g_lmapMainState;
-  g_gameState = 0x65;
-  DAT_005f1600 = param_3;
-  if (*(int *)(g_lmapMainState + 0xcc) != 5) {
-    *(unsigned int *)(g_lmapMainState + 0xd0) = 0;
-    *(unsigned int *)(temp_v0 + 0xcc) = 5;
-    *(unsigned int *)(temp_v0 + 0xd4) = 0;
-  }
-  return;
+    // The path controller extends far beyond the recovered LmapMainStateA prefix.
+    struct PathView {
+        u8 prefix[0x40];
+        s32 map;
+        u8 unk44[0x9310 - 0x44];
+        MapVector start;
+        MapVector end;
+        MapVector direction;
+        f32 speed;
+        u32 frame;
+        s32 duration;
+    };
+    // The shared record's byte-aligned union cannot gain a short vector without changing alignment.
+    struct WaypointView { u8 prefix[4]; s16 x, y, z; };
+    struct PhaseView { u8 prefix[0xCC]; s32 phase; u32 frame; u32 auxiliary; };
+    typedef char PathViewOffset[offsetof(PathView, start) == 0x9310 && offsetof(PathView, duration) == 0x933C ? 1 : -1];
+    PathView *path = (PathView *)g_lmapMainState;
+    if (startId) {
+        const WaypointView *point = (const WaypointView *)dataTableGetRecord23(FUN_003b5714(path->map, startId, startVariant));
+        path->start.x = (f32)point->x;
+        path->start.y = (f32)point->y;
+        path->start.z = (f32)point->z;
+    } else {
+        path->start = *(const MapVector *)g_lmapScene->transform.position;
+    }
+    const WaypointView *point = (const WaypointView *)dataTableGetRecord23(FUN_003b5714(path->map, endId, endVariant));
+    path->end.x = (f32)point->x;
+    path->end.y = (f32)point->y;
+    path->end.z = (f32)point->z;
+    f32 distance = distSpatial(path->start.x, path->start.y, path->start.z, path->end.x, path->end.y, path->end.z);
+    path->direction.z = path->end.z - path->start.z;
+    path->direction.x = path->end.x - path->start.x;
+    path->direction.y = path->end.y - path->start.y;
+    f32 inverseDistance = 1.0f / distance;
+    path->direction.x *= inverseDistance;
+    path->direction.y *= inverseDistance;
+    path->direction.z *= inverseDistance;
+    path->speed = 30.0f;
+    path->frame = 0;
+    path->duration = (s32)(distance / path->speed);
+    *(MapVector *)g_lmapScene->transform.position = path->start;
+    *(MapVector *)g_lmapScene->transform.positionSnapshotA = path->start;
+    g_gameState.mode = 101;
+    g_gameState.submode = endId;
+    PhaseView *state = (PhaseView *)g_lmapMainState;
+    if (state->phase != 5) {
+        state->frame = 0;
+        state->phase = 5;
+        state->auxiliary = 0;
+    }
 }
-
-} /* extern "C" */
+}

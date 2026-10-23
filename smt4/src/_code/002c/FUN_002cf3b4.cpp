@@ -1,46 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cf3b4` (_code @ 0x2cf3b4, 0x1bc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains an extra clear/set of the last preference before its final store, changing byte-load scheduling and saved registers. */
+#include "shard/GameModeFlags.h"
 
 extern "C" {
-
-extern unsigned char *FUN_002a0d0c(void);
-
+GameModeFlags *FUN_002a0d0c(void);
 
 void FUN_002cf3b4(void)
-
 {
-  unsigned char *pbVar1;
-  
-  pbVar1 = (unsigned char *)FUN_002a0d0c();
-  pbVar1[0x14] = pbVar1[0x14] & 0x80;
-  pbVar1[0x17] = pbVar1[0x17] & 0x80;
-  *pbVar1 = (*pbVar1 & 0x80) | 2;
-  pbVar1[1] = (pbVar1[1] & 0x80) | 0xb;
-  pbVar1[2] = (pbVar1[2] & 0x80) | 0xb;
-  pbVar1[3] = (pbVar1[3] & 0x80) | 0xc;
-  pbVar1[4] = (pbVar1[4] & 0x80) | 0x21;
-  pbVar1[5] = (pbVar1[5] & 0x80) | 6;
-  pbVar1[6] = (pbVar1[6] & 0x80) | 6;
-  pbVar1[7] = (pbVar1[7] & 0x80) | 6;
-  pbVar1[8] = (pbVar1[8] & 0x80) | 4;
-  pbVar1[9] = (pbVar1[9] & 0x80) | 4;
-  pbVar1[10] = (pbVar1[10] & 0x80) | 4;
-  pbVar1[0xb] = (pbVar1[0xb] & 0x80) | 0x33;
-  pbVar1[0xc] = (pbVar1[0xc] & 0x80) | 1;
-  pbVar1[0xd] = (pbVar1[0xd] & 0x80) | 0x21;
-  pbVar1[0xe] = (pbVar1[0xe] & 0x80) | 0x22;
-  pbVar1[0xf] = (pbVar1[0xf] & 0x80) | 1;
-  pbVar1[0x10] = (pbVar1[0x10] & 0x80) | 0xb;
-  pbVar1[0x11] = (pbVar1[0x11] & 0x80) | 1;
-  pbVar1[0x12] = (pbVar1[0x12] & 0x80) | 1;
-  pbVar1[0x13] = (pbVar1[0x13] & 0x80) | 1;
-  pbVar1[0x15] = (pbVar1[0x15] & 0x80) | 1;
-  pbVar1[0x16] = (pbVar1[0x16] & 0x80) | 1;
-  pbVar1[0x18] = (pbVar1[0x18] & 0x80) | 1;
-  pbVar1[0x19] = (pbVar1[0x19] & 0x80) | 0x23;
-  pbVar1[0x1a] = (pbVar1[0x1a] & 0x80) | 0x21;
-  return;
+    GameModeFlags *settings = FUN_002a0d0c();
+    settings->sortModes[20].order = 0;
+    settings->sortModes[23].order = 0;
+    settings->sortModes[0].order = 2;
+    settings->sortModes[1].order = 11;
+    settings->sortModes[2].order = 11;
+    settings->sortModes[3].order = 12;
+    settings->sortModes[4].order = 33;
+    settings->sortModes[5].order = 6;
+    settings->sortModes[6].order = 6;
+    settings->sortModes[7].order = 6;
+    settings->sortModes[8].order = 4;
+    settings->sortModes[9].order = 4;
+    settings->sortModes[10].order = 4;
+    settings->sortModes[11].order = 51;
+    settings->sortModes[12].order = 1;
+    settings->sortModes[13].order = 33;
+    settings->sortModes[14].order = 34;
+    settings->sortModes[15].order = 1;
+    settings->sortModes[16].order = 11;
+    settings->sortModes[17].order = 1;
+    settings->sortModes[18].order = 1;
+    settings->sortModes[19].order = 1;
+    settings->sortModes[21].order = 1;
+    settings->sortModes[22].order = 1;
+    settings->sortModes[24].order = 1;
+    settings->sortModes[25].order = 35;
+    settings->sortModes[26].order = 33;
 }
-
-} /* extern "C" */
+}

@@ -1,75 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031e198` (_code @ 0x31e198, 0x138 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: packet-template final pointer/size stores are paired in a different register order. */
+#include "font/PlaceWin.h"
+#include "AsdSDK/AsdDebug.h"
+#include <stddef.h>
 
+struct PlaceWindowResourceTable {
+    u8 first[0x18];
+    u8 second[0x18];
+    u8 third[0x70];
+};
 extern "C" {
+extern PlaceWindow *g_placeWin;
+extern const u8 DAT_0052fb5c[];
+void *asdMemoryAllocTracked(u32 pool, u32 alignment, u32 flags, u32 bytes, u32 clear);
+void sysMemClear(void *destination, u32 bytes);
+u32 placeWindowUpdateAnimation(u32 job);
+u32 placeWinDraw(u32 job);
+u32 asdProcessCreateSimple(const char *name, u32 group, u32, u32,
+                           u32 (*update)(u32), u32, u32);
+u32 taskCreateDraw(const char *name, u32 group, u32, u32,
+                   u32 (*draw)(u32), u32, u32, u32 parent);
+void paramsClearPacket(void *packet);
+void paramsInit(void *packet, const void *first, u32 firstBytes,
+                const void *second, u32 secondBytes, u32, u32, u32, u32,
+                const void *third, u32 thirdBytes);
+void FUN_0014e188(void *animation, u32 layer, u32 resource, void *packet, u32 mode, f32 scale);
+void uiSpriteSelectAnim(void *animation, u32 index);
 
-int FUN_0014e188(...);
-int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
-int paramsInit(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(int, int, int, int, int);
-int uiSpriteSelectAnim(...);
-int sysMemClear(void);
-int paramsClearPacket(unsigned int *);
-
-/* stack frame of void: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
-
-extern unsigned char LAB_0031e310; /* 0x31e310 */
-extern unsigned char LAB_0031e324; /* 0x31e324 */
-extern unsigned char LAB_0031e338; /* 0x31e338 */
-extern int placeWinDraw(...); /* 0x3d0110 */
-extern unsigned char LAB_003d08c8; /* 0x3d08c8 */
-extern unsigned char DAT_0052fb2c; /* 0x52fb2c */
-extern unsigned char DAT_0052fb44; /* 0x52fb44 */
-extern unsigned char DAT_0052fb5c; /* 0x52fb5c */
-extern unsigned int *g_placeWin; /* 0x57f578 */
-
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: paramsClearPacket. */
-
-
+/* Allocate the place caption window, create its update/draw jobs and initialize its animation. */
 void FUN_0031e198(void)
-
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  
-  if (g_placeWin == (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x140,1);
-    g_placeWin = puVar1;
-  }
-  puVar1 = g_placeWin;
-  sysMemClear();
-  puVar2 = &LAB_0031e310;
-  asdProcessCreateSimple(&LAB_0031e310,3,0,0,&LAB_003d08c8,0,0);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_0031e324,0x86,0,0,placeWinDraw,0,0,puVar2);
-  taskCreateDraw(&LAB_0031e338,0xe2,0,0,placeWinDraw,0,0,*puVar1);
-  puVar1 = g_placeWin;
-  paramsClearPacket(g_placeWin + 5);
-  paramsInit(puVar1 + 5,&DAT_0052fb2c,0x18,&DAT_0052fb44,0x18,0,0,0,0,&DAT_0052fb5c,0x70);
-  FUN_0014e188(puVar1 + 0xd,8,0x87,puVar1 + 5,1);
-  uiSpriteSelectAnim(puVar1 + 0xd,0);
-  return;
+    if (g_placeWin == NULL) {
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\font\\PlaceWin\\PlaceWin.cpp", 166);
+        g_placeWin = static_cast<PlaceWindow *>(asdMemoryAllocTracked(256, 256, 0, sizeof(PlaceWindow), 1));
+    }
+    PlaceWindow *window = g_placeWin;
+    sysMemClear(window, sizeof(PlaceWindow));
+    u32 job = asdProcessCreateSimple("PlaceWin Calc", 3, 0, 0, placeWindowUpdateAnimation, 0, 0);
+    window->job = job;
+    taskCreateDraw("PlaceWin DrawUpLeft", 0x86, 0, 0, placeWinDraw, 0, 0, job);
+    taskCreateDraw("PlaceWin DrawUpRight", 0xE2, 0, 0, placeWinDraw, 0, 0, window->job);
+    window = g_placeWin;
+    paramsClearPacket(window->parameters.packet);
+    /* Retail's symbol anchors the final subtable of the contiguous packet template. */
+    const PlaceWindowResourceTable *defaults = reinterpret_cast<const PlaceWindowResourceTable *>(
+        DAT_0052fb5c - offsetof(PlaceWindowResourceTable, third));
+    paramsInit(window->parameters.packet, defaults->first, 0x18, defaults->second, 0x18,
+               0, 0, 0, 0, defaults->third, 0x70);
+    FUN_0014e188(window->animation, 8, 0x87, window->parameters.packet, 1, 1.0f);
+    uiSpriteSelectAnim(window->animation, 0);
 }
-
-} /* extern "C" */
+}

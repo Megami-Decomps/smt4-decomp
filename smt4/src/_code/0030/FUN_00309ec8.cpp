@@ -1,49 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00309ec8` (_code @ 0x309ec8, 0x104 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: first indicator state spills to the stack; retail keeps it in fp. */
+#include "gfx/UiControlDraw.h"
+#include "shard/S1ListPanel.h"
 
 extern "C" {
+void FUN_002bf288(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 priority);
+SpriteInfo *FUN_002bf4f8(u32 group, u32 sprite);
+void FUN_002b0750(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 width, s32 height, s32 priority);
 
-int FUN_002b0750(int, int, unsigned int, int, int, int, int, int);
-int FUN_002bf288(...);
-
-/* stack frame of param_9: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_9_stack;
-
-/* Supplied declaration required: FUN_002b0750. */
-/* Supplied declaration required: FUN_002bf288. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
-
-
-void FUN_00309ec8(int param_1,int param_2,int param_3,unsigned int param_4,unsigned int param_5,
-                 int param_6,unsigned int param_7,int param_8,int param_9)
-
+/* Draw the two directional indicators and the visible section of the scroll track. */
+void FUN_00309ec8(UiControlDrawPosition *position, s32 x, s32 y,
+                 s32 firstActive, s32 secondActive, s32 trackActive,
+                 s32 unused, s32 firstRow, s32 rowCount)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  FUN_002bf288(2,0x39,0xf5,*(int *)(param_1 + 4) + param_2,param_3,0x6e);
-  FUN_002bf288(2,0x39);
-  FUN_002bf288(2,0x39);
-  if (param_6 == 0) {
-    temp_v3 = 0xf6;
-  }
-  else {
-    temp_v3 = 0xf7;
-  }
-  temp_v1 = FUN_002bf4f8(0x39,temp_v3);
-  temp_v2 = (int)(*(short **)(temp_v1 + 0xc))[1];
-  temp_v0 = (int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1c)) >> 4;
-  FUN_002b0750(2,0x39,temp_v3,*(int *)(param_1 + 4) + param_2,temp_v0 * param_8 + param_3,
-               (int)**(short **)(temp_v1 + 0xc),temp_v2 - temp_v0 * (param_9 - 0xb),0x6f);
-  return;
-}
+    s32 hiddenRows = rowCount - 11;
+    FUN_002bf288(2, 0x39, 0xf5, position->x + x, y, 0x6e);
+    FUN_002bf288(2, 0x39, firstActive ? 0xf3 : 0xf1, position->x + x, y, 0x6f);
+    FUN_002bf288(2, 0x39, secondActive ? 0xf4 : 0xf2, position->x + x, y, 0x6f);
 
-} /* extern "C" */
+    u32 trackSprite = trackActive ? 0xf7 : 0xf6;
+    SpriteInfo *track = FUN_002bf4f8(0x39, trackSprite);
+    s32 height = track->size[1];
+    s32 rowHeight = height / 16;
+    FUN_002b0750(2, 0x39, trackSprite, position->x + x,
+                 rowHeight * firstRow + y, track->size[0],
+                 height - rowHeight * hiddenRows, 0x6f);
+}
+}

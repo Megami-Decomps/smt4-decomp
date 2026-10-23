@@ -30,6 +30,18 @@ typedef char BattleRosterCacheEntryLayoutCheck[
     offsetof(BattleRosterCacheEntry, positionX) == 0xC &&
     sizeof(BattleRosterCacheEntry) == 0x18 ? 1 : -1];
 
+struct BattleRetainedRosterEntry {
+    /* 0x00 */ s32 id;
+    /* 0x04 */ u32 key;
+    /* 0x08 */ f32 scale;
+    /* 0x0C */ BattleVector3 position;
+    /* 0x18 */ s32 parameterIndex;
+};
+typedef char BattleRetainedRosterEntryLayoutCheck[
+    offsetof(BattleRetainedRosterEntry, position) == 0xC &&
+    offsetof(BattleRetainedRosterEntry, parameterIndex) == 0x18 &&
+    sizeof(BattleRetainedRosterEntry) == 0x1C ? 1 : -1];
+
 /* Camera state stored before the per-combatant cache records in newer files. */
 struct BattleRosterCacheSnapshotA {
     /* 0x00 */ BattleVector3 first;

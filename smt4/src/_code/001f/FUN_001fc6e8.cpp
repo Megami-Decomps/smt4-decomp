@@ -10,7 +10,7 @@ int gameDataSlotSetFlag(...);
 int FUN_001f7d50(...);
 int FUN_001f7fac(...);
 int FUN_001f8290(...);
-int FUN_0021af44(...);
+int btlGameOverCreateTasks(...);
 int gameDataEntrySetLevel(...);
 int messageForwardDefaultMode(...);
 int FUN_002903f0(void);
@@ -60,7 +60,7 @@ int FUN_003ae134(...);
 int FUN_003c7c84(...);
 int FUN_003c7f20(...);
 
-int FUN_001a84d8(...);
+int btlUiCreateTasks(...);
 int btlAutoCalcTaskCreate(...);
 int btlUnitInitializeDrawJobs(...);
 int FUN_001e2350(...);
@@ -115,7 +115,7 @@ extern int g_btlUiBlock; /* 0x439ca8 */
 extern int g_mapDepartWork; /* 0x4474d8 */
 extern int DAT_0049fb9c; /* 0x49fb9c */
 
-/* Supplied declaration required: FUN_001a84d8. */
+/* Supplied declaration required: btlUiCreateTasks. */
 /* Supplied declaration required: btlAutoCalcTaskCreate. */
 /* Supplied declaration required: FUN_001d2628. */
 /* Supplied declaration required: btlUnitInitializeDrawJobs. */
@@ -129,7 +129,7 @@ extern int DAT_0049fb9c; /* 0x49fb9c */
 /* Supplied declaration required: FUN_001f8290. */
 /* Supplied declaration required: FUN_00207f68. */
 /* Supplied declaration required: FUN_0021ae40. */
-/* Supplied declaration required: FUN_0021af44. */
+/* Supplied declaration required: btlGameOverCreateTasks. */
 extern int gameDataEntryGetLevel(short);
 /* Supplied declaration required: gameDataEntrySetLevel. */
 /* Supplied declaration required: messageForwardDefaultMode. */
@@ -340,7 +340,7 @@ void FUN_001fc6e8(unsigned int param_1)
     btlAutoCalcTaskCreate(temp_v4);
     temp_v3 = jobIsValid(*(unsigned int *)(temp_v4 + 0x54));
     if (temp_v3 == 0) {
-      FUN_001a84d8(temp_v4);
+      btlUiCreateTasks(temp_v4);
     }
     if ((*(unsigned int *)(temp_v4 + 0x7c) & 1) != 0) {
       FUN_003ad754(g_btlUiBlock,1);
@@ -747,7 +747,7 @@ LAB_001fd348:
     if (temp_v3 != 0) {
       jobStop(*(unsigned int *)(temp_v4 + 0x24),0);
     }
-    FUN_0021af44(temp_v4);
+    btlGameOverCreateTasks(temp_v4);
     return;
   case 0x15:
     temp_v3 = 0;

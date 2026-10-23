@@ -23,7 +23,7 @@ int FUN_004d2124(...);
 int FUN_004d229c(...);
 int FUN_004d290c(...);
 int FUN_004d3360(...);
-int FUN_004d37d4(...);
+int btlDebugCreatePanelMenu(...);
 int FUN_004d3950(...);
 int FUN_004d3df0(...);
 int FUN_004d463c(...);
@@ -32,7 +32,7 @@ int FUN_004d4f54(...);
 int FUN_004d5290(...);
 int FUN_004d542c(...);
 int FUN_004d5578(...);
-int FUN_004d5a70(...);
+int btlDebugOpenCameraUpDownMenu(...);
 int FUN_004d5be4(...);
 int FUN_004d5fc0(...);
 
@@ -138,7 +138,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_004d290c. */
 /* Supplied declaration required: FUN_004d3360. */
 /* Supplied declaration required: FUN_004d352c. */
-/* Supplied declaration required: FUN_004d37d4. */
+/* Supplied declaration required: btlDebugCreatePanelMenu. */
 /* Supplied declaration required: FUN_004d3950. */
 /* Supplied declaration required: FUN_004d3c94. */
 /* Supplied declaration required: FUN_004d3df0. */
@@ -148,7 +148,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_004d5290. */
 /* Supplied declaration required: FUN_004d542c. */
 /* Supplied declaration required: FUN_004d5578. */
-/* Supplied declaration required: FUN_004d5a70. */
+/* Supplied declaration required: btlDebugOpenCameraUpDownMenu. */
 /* Supplied declaration required: FUN_004d5be4. */
 /* Supplied declaration required: FUN_004d5fc0. */
 
@@ -578,7 +578,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
         if (temp_v5 != 2) {
           return 0;
         }
-        FUN_004d5a70(param_1);
+        btlDebugOpenCameraUpDownMenu(param_1);
       }
       else {
         FUN_004d5578(param_1);
@@ -875,7 +875,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     temp_v6 = 0x20;
     break;
   case 0x13:
-    FUN_004d37d4(param_1);
+    btlDebugCreatePanelMenu(param_1);
     temp_v6 = 0x14;
     break;
   case 0x14:

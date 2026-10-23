@@ -14,7 +14,7 @@ int scrCommMessageSetMode(...);
 int btlTalkBustUpCreate(void);
 int eventTexSetFlag(int);
 int scrSetResult(int);
-int FUN_00336de4(unsigned int, int);
+int btlTalkBustUpSetDemonTexture(unsigned int, int);
 int bustupCutAnimSetFlag(int);
 int btlTalkBustUpSetUnk2F4(int);
 int FUN_003deea4(int);
@@ -36,7 +36,7 @@ extern int scrGetCommandFrame(void);
 /* Supplied declaration required: eventTexSetFlag. */
 extern int btlTalkBustUpExists(void);
 /* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: FUN_00336de4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 /* Supplied declaration required: bustupCutAnimSetFlag. */
 extern int FUN_0035fcbc(void);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
@@ -82,7 +82,7 @@ unsigned int FUN_0037dbc8(void)
             btlTalkBustUpCreate();
           }
           if ((temp_v4 != 0) && (temp_v5 = btlTalkBustUpGetId(), temp_v5 != temp_v4)) {
-            FUN_00336de4(temp_v4 & 0xffff,0);
+            btlTalkBustUpSetDemonTexture(temp_v4 & 0xffff,0);
           }
           btlTalkBustUpSetUnk2F4(1);
         }

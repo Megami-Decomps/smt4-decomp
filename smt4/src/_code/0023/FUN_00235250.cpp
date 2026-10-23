@@ -1,83 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00235250` (_code @ 0x235250, 0x118 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/S1Mover.h"
+#include <stddef.h>
 
 extern "C" {
+void memClear(void *memory, u32 size);
+const Vec3f *asdSoundGetListener(void);
 
-int memClear(unsigned int *, int);
-
-extern unsigned int *asdSoundGetListener(void);
-/* Supplied declaration required: memClear. */
-
-
-void FUN_00235250(unsigned int *param_1)
-
+// Clear movement state and seed all eight saved vectors from the current listener position.
+void FUN_00235250(Mover *mover)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  *(unsigned char *)(param_1 + 5) = 0;
-  *(unsigned char *)((int)param_1 + 0x15) = 0;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  memClear(param_1 + 0x15b,0x80);
-  memClear(param_1 + 0x17b,0xa0);
-  puVar1 = (unsigned int *)asdSoundGetListener();
-  temp_v0 = *puVar1;
-  temp_v1 = puVar1[1];
-  param_1[0x57d] = puVar1[2];
-  param_1[0x57b] = temp_v0;
-  param_1[0x57c] = temp_v1;
-  puVar1 = (unsigned int *)asdSoundGetListener();
-  temp_v0 = *puVar1;
-  temp_v1 = puVar1[1];
-  param_1[0x580] = puVar1[2];
-  param_1[0x57e] = temp_v0;
-  param_1[0x57f] = temp_v1;
-  puVar1 = (unsigned int *)asdSoundGetListener();
-  temp_v0 = *puVar1;
-  temp_v1 = puVar1[1];
-  param_1[0x583] = puVar1[2];
-  param_1[0x581] = temp_v0;
-  param_1[0x582] = temp_v1;
-  puVar1 = (unsigned int *)asdSoundGetListener();
-  temp_v0 = *puVar1;
-  temp_v1 = puVar1[1];
-  param_1[0x586] = puVar1[2];
-  param_1[0x584] = temp_v0;
-  param_1[0x585] = temp_v1;
-  puVar1 = (unsigned int *)asdSoundGetListener();
-  temp_v0 = *puVar1;
-  temp_v1 = puVar1[1];
-  param_1[0x589] = puVar1[2];
-  param_1[0x587] = temp_v0;
-  param_1[0x588] = temp_v1;
-  puVar1 = (unsigned int *)asdSoundGetListener();
-  temp_v0 = *puVar1;
-  temp_v1 = puVar1[1];
-  param_1[0x58c] = puVar1[2];
-  param_1[0x58a] = temp_v0;
-  param_1[0x58b] = temp_v1;
-  puVar1 = (unsigned int *)asdSoundGetListener();
-  temp_v0 = *puVar1;
-  temp_v1 = puVar1[1];
-  param_1[0x58f] = puVar1[2];
-  param_1[0x58d] = temp_v0;
-  param_1[0x58e] = temp_v1;
-  puVar1 = (unsigned int *)asdSoundGetListener();
-  temp_v0 = *puVar1;
-  temp_v1 = puVar1[1];
-  param_1[0x592] = puVar1[2];
-  param_1[0x590] = temp_v0;
-  param_1[0x591] = temp_v1;
-  return;
+    // Mover's padding starts at 0x16: a union containing words there would change alignment.
+    struct MoverResetView {
+        u32 unk00;
+        s32 slot;
+        u32 unk08;
+        u32 unk0C;
+        u32 frame;
+        u8 active;
+        u8 moveNode;
+        u8 unk16[2];
+        u32 unk18;
+        u32 unk1C;
+        u8 unk20[0x54C];
+        u8 partState[0x80]; // 0x56C
+        u8 secondaryState[0xA0]; // 0x5EC
+        u8 unk68C[0xF60];
+        Vec3f velocity; // 0x15EC
+        Vec3f velocityB;
+        Vec3f position;
+        Vec3f positionB;
+        Vec3f finalPosition;
+        Vec3f finalPositionB;
+        Vec3f unk1634;
+        Vec3f unk1640;
+    };
+    typedef char MoverResetViewOffsetsCheck[
+        offsetof(MoverResetView, partState) == 0x56C &&
+        offsetof(MoverResetView, secondaryState) == 0x5EC &&
+        offsetof(MoverResetView, velocity) == 0x15EC && sizeof(MoverResetView) == 0x164C ? 1 : -1];
+    MoverResetView *state = reinterpret_cast<MoverResetView *>(mover);
+    state->unk00 = 0;
+    state->slot = 0;
+    state->unk08 = 0;
+    state->unk0C = 0;
+    state->frame = 0;
+    state->active = 0;
+    state->moveNode = 0;
+    state->unk18 = 0;
+    state->unk1C = 0;
+    memClear(state->partState, sizeof(state->partState));
+    memClear(state->secondaryState, sizeof(state->secondaryState));
+    state->velocity = *asdSoundGetListener();
+    state->velocityB = *asdSoundGetListener();
+    state->position = *asdSoundGetListener();
+    state->positionB = *asdSoundGetListener();
+    state->finalPosition = *asdSoundGetListener();
+    state->finalPositionB = *asdSoundGetListener();
+    state->unk1634 = *asdSoundGetListener();
+    state->unk1640 = *asdSoundGetListener();
 }
-
-} /* extern "C" */
+}

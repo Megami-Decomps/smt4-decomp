@@ -21,7 +21,13 @@ typedef struct Menu4C {
     /* 0x048 */ u8 unk048[0x2C];
     /* 0x074 */ u8 block74[0x10];
     /* 0x084 */ u8 flag84;
-    /* 0x085 */ u8 unk085[0x23];
+    union {
+        /* 0x085 */ u8 unk085[0x23];
+        struct {
+            /* 0x085 */ u8 unk085;
+            /* 0x086 */ s8 enabled;
+        } selectionInput;
+    };
     /* 0x0A8 */ u8 blockA8[4];
     /* 0x0AC */ u8 unk0AC[0x73C];
     /* 0x7E8 */ s32 count;
@@ -36,8 +42,19 @@ typedef struct Menu4C {
     /* 0x1018 */ u32 unk1018;
     /* 0x101C */ u32 unk101C;
     /* 0x1020 */ u32 unk1020;
-    /* 0x1024 */ u8 unk1024[0x10];
-    /* 0x1034 */ u8 flags1034[0x40];
+    union {
+        /* 0x1024 */ u8 unk1024[0x10];
+        /* 0x1024 */ s32 selectionIds[4];
+        struct {
+            /* 0x1024 */ u8 unk1024[8];
+            /* 0x102C */ s32 node;
+            /* 0x1030 */ s32 keyframe;
+        } preload;
+    };
+    union {
+        /* 0x1034 */ u8 flags1034[0x40];
+        /* 0x1034 */ u32 resetFlags[16];
+    };
     /* 0x1074 */ u32 unk1074;
 } Menu4C;
 
@@ -97,5 +114,15 @@ struct ItemRankDefinition {
     /* 0x00 */ u8 unk00[0x26];
     /* 0x26 */ u16 category;
 };
+
+typedef char Menu4CPreloadOffsetCheck[
+    sizeof(Menu4C) == 0x1078 &&
+    offsetof(Menu4C, selectionInput.enabled) == 0x86 &&
+    offsetof(Menu4C, preload.node) == 0x102C &&
+    offsetof(Menu4C, preload.keyframe) == 0x1030 ? 1 : -1];
+typedef char Menu4CResetOffsets[
+    offsetof(Menu4C, selectionIds) == 0x1024 &&
+    offsetof(Menu4C, resetFlags) == 0x1034 &&
+    sizeof(Menu4C) == 0x1078 ? 1 : -1];
 
 #endif

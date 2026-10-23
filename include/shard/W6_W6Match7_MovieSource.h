@@ -13,5 +13,6 @@ public:
     virtual void unk18() = 0;
     virtual void unk1c() = 0;
     virtual s32 getSize() = 0;
+    virtual u8 getFormat() = 0;
 };
 #endif

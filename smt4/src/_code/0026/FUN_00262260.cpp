@@ -1,131 +1,71 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00262260` (_code @ 0x262260, 0x1a4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-int passiveSkillLookupRecord(...);
-int FUN_00283ebc(...);
-int FUN_00283f30(...);
-int VectorUnsignedToFloat(...);
-
-typedef struct fn_00262260_arg0 fn_00262260_arg0;
-struct fn_00262260_arg0 {
-    unsigned char pad_0x0[0x16];
-    short field_0x16; /* +0x16 */
-    unsigned char pad_0x18[0x8];
-    ushort field_0x20; /* +0x20 */
-    unsigned char pad_0x22[0x12];
-    undefined4 field_0x34; /* +0x34 */
-    undefined4 field_0x38; /* +0x38 */
-    undefined4 field_0x3c; /* +0x3c */
-    undefined4 field_0x40; /* +0x40 */
-};
-
-/* stack frame of param_3: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_3_stack;
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: passiveSkillLookupRecord. */
-/* Supplied declaration required: FUN_00283ebc. */
-/* Supplied declaration required: FUN_00283f30. */
-extern int gameGetUnitRecord(void);
-extern unsigned int playerGetSkillRank(unsigned short);
-extern int gameGetPlayerData(void);
-extern unsigned int FUN_003bf53c(int, fn_00262260_arg0 *, unsigned int);
-extern unsigned int mathApplyReductionMultiplier(unsigned int, fn_00262260_arg0 *, unsigned int);
-
-
-unsigned int FUN_00262260(fn_00262260_arg0 *param_1,unsigned int param_2,int param_3)
-
-{
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  unsigned short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  fn_00262260_arg0 *pfVar6;
-  unsigned char temp_v5;
-  unsigned int in_fpscr;
-  int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  fn_00262260_arg0 *pfStack_30;
-  unsigned int temp_v11;
-  int iStack_28;
-  
-  temp_v4 = (unsigned int)*(unsigned short *)((int)&param_1->field_0x34 + 2) << 0x14;
-  temp_v5 = temp_v4 == 0;
-  if (temp_v5) {
-    temp_v4 = (unsigned int)*(unsigned char *)((int)&param_1->field_0x40 + 3);
-  }
-  if (temp_v5 && temp_v4 == 0) {
-    temp_v3 = 0;
-  }
-  else {
-    pfVar6 = (fn_00262260_arg0 *)0x0;
-    temp_v6 = 0;
-    temp_v7 = 0;
-    temp_v8 = 0;
-    temp_v9 = 0;
-    temp_v10 = 0;
-    pfStack_30 = param_1;
-    temp_v11 = param_2;
-    iStack_28 = param_3;
-    if (param_3 < 0) {
-      temp_v2 = gameGetPlayerData();
-      temp_v1 = *(short *)(temp_v2 + 0x24);
-      FUN_00283f30(&temp_v6,1);
-      temp_v3 = playerGetSkillRank(param_1->field_0x20);
-      pfVar6 = param_1;
-      FUN_00283ebc(param_1,temp_v3,2);
-    }
-    else {
-      temp_v2 = gameGetUnitRecord();
-      if (temp_v2 == 0) {
-        return 0;
-      }
-      temp_v1 = *(short *)(temp_v2 + 0x16);
-      temp_v6 = *(unsigned int *)(temp_v2 + 0x34);
-      temp_v7 = *(unsigned int *)(temp_v2 + 0x38);
-      temp_v8 = *(unsigned int *)(temp_v2 + 0x3c);
-      temp_v9 = *(unsigned int *)(temp_v2 + 0x40);
-    }
-    temp_v2 = 0;
-    do {
-      if (*(short *)((int)&temp_v6 + temp_v2 * 2) != 0) {
-        passiveSkillLookupRecord();
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 9);
-    temp_v0 = *(unsigned short *)((int)&param_1->field_0x34 + 2);
-    temp_v3 = temp_v11;
-    if ((temp_v0 & 0xfff) != 4000) {
-      if ((temp_v0 & 0xfff) != 0) {
-        VectorUnsignedToFloat(temp_v0 & 0xffff0fff,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v3 = FUN_003bf53c((int)temp_v1,pfVar6,0);
-      }
-      else {
-        temp_v4 = (unsigned int)*(unsigned char *)((int)&param_1->field_0x40 + 3);
-        temp_v3 = 0;
-        if (temp_v4 != 0) {
-          VectorUnsignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v3 = mathApplyReductionMultiplier(temp_v11,pfVar6,0);
-        }
-      }
-    }
-  }
-  return temp_v3;
+/* NON_MATCHING: base-value arguments are retained in registers instead of retail's parameter spills, and result returns are duplicated; 107 vs 105 instructions. */
+#include "shard/PassiveSkill.h"
+#include "shard/PadState.h"
+#include "gamedata/UnitStats.h"
+namespace {
+struct CostSkills { union { UnitSummarySkills main; u16 ids[9]; }; };
 }
+extern "C" {
+extern const f32 DAT_00446d30[];
+PadState *gameGetPlayerData();
+StatBlock *gameGetUnitRecord(s32 unit);
+void FUN_00283f30(CostSkills *skills, s32 includeSource);
+u32 playerGetSkillRank(u16 skill);
+s32 FUN_00283ebc(const ActiveSkillRecord *skill, u32 rank, u32 kind);
+s32 FUN_003bf53c(s32 unitParameter, s32 rankAdjustment, s32 extra, f32 cost, f32 firstScale, f32 secondScale, f32 passiveScale);
+s32 mathApplyReductionMultiplier(s32 value, s32 rankAdjustment, s32 extra, f32 multiplier);
 
-} /* extern "C" */
+// Resolve a skill's fixed or percentage cost, including player rank and passive cost modifiers.
+u32 FUN_00262260(const ActiveSkillRecord *skill, u32 baseValue, s32 unitIndex)
+{
+    // Cost fields extend beyond the shared active-skill prefix.
+    struct SkillCostView { u8 prefix[0x36]; u16 fixed; u8 unk38[0xb]; u8 percent; };
+    // These halfwords lie in byte padding in the persistent record views.
+    struct UnitParameterView { u8 prefix[0x16]; s16 value; };
+    struct PlayerParameterView { u8 prefix[0x24]; s16 value; };
+    typedef char SkillCostOffsets[offsetof(SkillCostView, fixed) == 0x36 && offsetof(SkillCostView, percent) == 0x43 ? 1 : -1];
+    const SkillCostView *cost = reinterpret_cast<const SkillCostView *>(skill);
+    if (!(cost->fixed & 0xfff) && !cost->percent)
+        return 0;
+    CostSkills skills = {0};
+    s32 rankAdjustment = 0;
+    s32 passiveBonuses = 0;
+    s32 unitParameter;
+    if (unitIndex < 0) {
+        unitParameter = reinterpret_cast<PlayerParameterView *>(gameGetPlayerData())->value;
+        FUN_00283f30(&skills, 1);
+        rankAdjustment = FUN_00283ebc(skill, playerGetSkillRank(skill->cost.costParameter), 2);
+    } else {
+        StatBlock *unit = gameGetUnitRecord(unitIndex);
+        if (!unit)
+            return 0;
+        unitParameter = reinterpret_cast<UnitParameterView *>(unit)->value;
+        skills.main = unit->skills;
+    }
+    for (s32 index = 0; index < 9; ++index) {
+        u16 id = skills.ids[index];
+        if (id) {
+            const PassiveSkillRecord *passive = passiveSkillLookupRecord(id);
+            if (passive && ((passive->affinity >> 11) & 31) == 20) {
+                u32 kind = (passive->affinity >> 16) & 15;
+                if (kind == 5)
+                    ++passiveBonuses;
+                else if (kind == 6)
+                    passiveBonuses += 2;
+            }
+        }
+    }
+    u32 result = baseValue;
+    u16 packed = cost->fixed;
+    if ((packed & 0xfff) != 4000) {
+        if (packed & 0xfff) {
+            result = FUN_003bf53c(unitParameter, rankAdjustment, 0, static_cast<f32>(static_cast<u32>(packed & 0xfff)), 1.0f, 1.0f, DAT_00446d30[passiveBonuses]);
+        } else {
+            result = 0;
+            if (cost->percent)
+                result = mathApplyReductionMultiplier(baseValue, rankAdjustment, 0, static_cast<f32>(static_cast<u32>(cost->percent)) * 0.01f);
+        }
+    }
+    return result;
+}
+}

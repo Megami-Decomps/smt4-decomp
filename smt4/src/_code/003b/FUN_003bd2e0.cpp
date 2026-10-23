@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_0022a918(unsigned int, unsigned int);
+int btlGetPassiveAffinityOverride(unsigned int, unsigned int);
 int selectionCopySupportedValue(...);
 int FUN_0022abe0(void);
 int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
@@ -64,7 +64,7 @@ typedef struct {
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_0022a918. */
+/* Supplied declaration required: btlGetPassiveAffinityOverride. */
 /* Supplied declaration required: selectionCopySupportedValue. */
 /* Supplied declaration required: FUN_0022abe0. */
 extern int FUN_0023ea94(void);
@@ -250,7 +250,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
       FUN_00246134(param_5,temp_v28[temp_v9],(int)temp_v21,temp_v8);
       temp_v31[temp_v9] = temp_v6;
       temp_v6 = param_5;
-      FUN_0022a918(param_5,temp_v28[temp_v9]);
+      btlGetPassiveAffinityOverride(param_5,temp_v28[temp_v9]);
       temp_v5 = temp_v31[temp_v9];
       temp_v31[temp_v9] = temp_v6 | temp_v5;
       if (((temp_v6 | temp_v5) & 0x170000) != 0) {

@@ -1,107 +1,102 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b8c40` (_code @ 0x3b8c40, 0x1c0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: script-start inline NOPs, global load ordering and merged state/timer stores differ from retail. */
+#include "camp/CampScriptCleanup.h"
+#include "addon/aocMain.h"
+#include "script/scrScriptProcess.h"
+#include "shard/W6_W6Match4_FlaggedValueHolder.h"
+#include <stddef.h>
+
+struct CampResultMessageView { u8 unk00[0x3F]; u8 message; };
+struct CampResultStateView {
+    u8 unk000[0x28];
+    u32 state;
+    u32 timer;
+    u8 unk030[0x1C];
+    u16 selection;
+    u8 unk04E[0x4E];
+    FlaggedValueHolder value;
+    u8 unkAfterValue[0xD5C - 0x9C - sizeof(FlaggedValueHolder)];
+    CampResultMessageView *message;
+    u8 unkD60[0xC];
+    void *firstMessages;
+    void *firstScript;
+    ScriptRunState *firstProcess;
+    u8 unkD78[8];
+    void *informationWindow;
+    u8 unkD84[0x10];
+    void *secondMessages;
+    void *secondScript;
+    ScriptRunState *secondProcess;
+    void *resultScript;
+    void *resultMessages;
+    ScriptRunState *resultProcess;
+    u8 unkDAC[4];
+    u32 operation;
+};
+typedef char CampResultStateOffsets[
+    offsetof(CampResultStateView, value) == 0x9C && offsetof(CampResultStateView, firstProcess) == offsetof(CampScriptCleanup, firstProcess) &&
+    offsetof(CampResultStateView, informationWindow) == 0xD80 && offsetof(CampResultStateView, operation) == 0xDB0 ? 1 : -1];
 
 extern "C" {
+extern AocMain *g_aocMain;
+s32 FUN_0022b14c(FlaggedValueHolder *value);
+s32 scrRunOpcodesStub(ScriptRunState *process);
+void buttonHelpSelectByProgress(CampResultStateView *work);
+u16 flaggedValueHolderGetTotal(const FlaggedValueHolder *value);
+void buttonHelpSetPreset(u32 preset);
+s32 tableGroupFindEntryIndex(const void *script, const char *entry);
+void scrScriptProcessStartEntry(ScriptRunState *process, s32 entry);
+void *asdLoadFileSyncDefault(const char *path);
+ScriptRunState *FUN_00297060(void *script, void *messages);
+void dialogOpen(s32 mode);
+void infoWinSetMessage(void *window, u32 message);
 
-int buttonHelpSelectByProgress(int);
-int dialogOpen(int);
-int infoWinSetMessage(unsigned int, int);
-int tableGroupFindEntryIndex(...);
-int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int FUN_00297060(int, unsigned int);
-int buttonHelpSetPreset(int);
-
-extern unsigned char LAB_003b8e04; /* 0x3b8e04 */
-extern unsigned char LAB_003b8e14; /* 0x3b8e14 */
-extern unsigned char LAB_003b8e28; /* 0x3b8e28 */
-extern unsigned char LAB_003b8e40; /* 0x3b8e40 */
-extern int g_aocMain; /* 0x432fc8 */
-
-extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: buttonHelpSelectByProgress. */
-extern int FUN_0022b14c(int);
-extern unsigned short flaggedValueHolderGetTotal(int);
-/* Supplied declaration required: dialogOpen. */
-/* Supplied declaration required: infoWinSetMessage. */
-/* Supplied declaration required: tableGroupFindEntryIndex. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-extern unsigned int asdLoadFileSyncDefault(unsigned char *);
-
-
-void FUN_003b8c40(int param_1)
-
+void FUN_003b8c40(CampResultStateView *work)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v1 = FUN_0022b14c(param_1 + 0x9c);
-  temp_v2 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd74));
-  if ((temp_v2 == 2) && (temp_v1 != 0)) {
-    buttonHelpSelectByProgress(param_1);
-    temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x9c);
-    *(unsigned short *)(param_1 + 0x4c) = temp_v0;
-    if (*(char *)(g_aocMain + 0xc1) == '\0') {
-      temp_v1 = *(int *)(param_1 + 0xdb0);
-      if (temp_v1 != 1) {
-        if (temp_v1 == 2) {
-          *(unsigned int *)(param_1 + 0x28) = 9;
-          *(unsigned int *)(param_1 + 0x2c) = 0;
-          buttonHelpSetPreset(0x9e);
-          temp_v3 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0xd94),&LAB_003b8e04);
-          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd9c),temp_v3);
-          *(unsigned int *)(param_1 + 0xdb0) = 0;
-          return;
-        }
-        if (temp_v1 == 3) {
-          *(unsigned int *)(param_1 + 0x28) = 0xb;
-          *(unsigned int *)(param_1 + 0x2c) = 0;
-          temp_v3 = asdLoadFileSyncDefault(&LAB_003b8e14);
-          *(unsigned int *)(param_1 + 0xda0) = temp_v3;
-          temp_v3 = asdLoadFileSyncDefault(&LAB_003b8e28);
-          *(unsigned int *)(param_1 + 0xda4) = temp_v3;
-          temp_v1 = *(int *)(param_1 + 0xda0);
-          FUN_00297060(temp_v1,temp_v3);
-          *(int *)(param_1 + 0xda8) = temp_v1;
-          *(unsigned int *)(temp_v1 + 0x108) = 3;
-          temp_v3 = tableGroupFindEntryIndex(*(int *)(param_1 + 0xda0),&LAB_003b8e40);
-          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xda8),temp_v3);
-          *(unsigned int *)(param_1 + 0xdb0) = 0;
-          return;
-        }
-        if (temp_v1 != 4) {
-          dialogOpen(0);
-          infoWinSetMessage(*(unsigned int *)(param_1 + 0xd80),
-                       *(unsigned char *)(*(int *)(param_1 + 0xd5c) + 0x3f));
-          *(unsigned int *)(param_1 + 0x28) = 5;
-          *(unsigned int *)(param_1 + 0x2c) = 0;
-          return;
-        }
-        dialogOpen(0);
-        infoWinSetMessage(*(unsigned int *)(param_1 + 0xd80),
-                     *(unsigned char *)(*(int *)(param_1 + 0xd5c) + 0x3f));
-        *(unsigned int *)(param_1 + 0x28) = 5;
-        *(unsigned int *)(param_1 + 0x2c) = 0;
-      }
-      else {
-        *(unsigned int *)(param_1 + 0x28) = 9;
-        *(unsigned int *)(param_1 + 0x2c) = 0;
-        temp_v3 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0xd94),&LAB_003b8e04);
-        scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd9c),temp_v3);
-      }
-      *(unsigned int *)(param_1 + 0xdb0) = 0;
-      return;
+    s32 ready = FUN_0022b14c(&work->value);
+    if (scrRunOpcodesStub(work->firstProcess) != 2 || !ready)
+        return;
+    buttonHelpSelectByProgress(work);
+    work->selection = flaggedValueHolderGetTotal(&work->value);
+    if (g_aocMain->unk0A9[0x18]) {
+        g_aocMain->unk0A9[0x18] = 0;
+        work->state = 10;
+        work->timer = 0;
+        return;
     }
-    *(unsigned char *)(g_aocMain + 0xc1) = 0;
-    *(unsigned int *)(param_1 + 0x28) = 10;
-    *(unsigned int *)(param_1 + 0x2c) = 0;
-  }
-  return;
+    switch (work->operation) {
+    case 1:
+        work->state = 9;
+        work->timer = 0;
+        scrScriptProcessStartEntry(work->secondProcess, tableGroupFindEntryIndex(work->secondMessages, "scr_sbq_sysbtl"));
+        break;
+    case 2:
+        work->state = 9;
+        work->timer = 0;
+        buttonHelpSetPreset(158);
+        scrScriptProcessStartEntry(work->secondProcess, tableGroupFindEntryIndex(work->secondMessages, "scr_sbq_sysbtl"));
+        break;
+    case 3:
+        work->state = 11;
+        work->timer = 0;
+        work->resultScript = asdLoadFileSyncDefault("battle/Result.bf");
+        work->resultMessages = asdLoadFileSyncDefault("battle/ResultMsg.mbm");
+        work->resultProcess = FUN_00297060(work->resultScript, work->resultMessages);
+        work->resultProcess->mode = 3;
+        scrScriptProcessStartEntry(work->resultProcess, tableGroupFindEntryIndex(work->resultScript, "ProcCharonRequestFirst"));
+        break;
+    case 4:
+        dialogOpen(0);
+        infoWinSetMessage(work->informationWindow, work->message->message);
+        work->state = 5;
+        work->timer = 0;
+        break;
+    default:
+        dialogOpen(0);
+        infoWinSetMessage(work->informationWindow, work->message->message);
+        work->state = 5;
+        work->timer = 0;
+        return;
+    }
+    work->operation = 0;
 }
-
-} /* extern "C" */
+}

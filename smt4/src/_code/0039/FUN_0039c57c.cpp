@@ -1,113 +1,81 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039c57c` (_code @ 0x39c57c, 0x1ac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: extra context moves, saved registers and section-store registers differ. */
+#include "map/NavigationInterpolation.h"
+#include "gamedata/MapNaviCategories.h"
+struct MapNaviSectionRecord {
+    s8 map;
+    u8 category;
+    u8 unk02;
+    s8 section;
+    u8 unk04[0x10];
+};
+/* Selection and refresh data extend beyond the common navigation prefix. */
+struct NaviSectionSelectionView {
+    union {
+        NavigationInterpolation motion;
+        struct { u8 unk000[0x60]; s8 selection; } state;
+    };
+    u8 unk00164[0x5928];
+    u8 refreshFirst;
+    u8 refreshSecond;
+    u8 unk05A8E[0xC73E];
+    s32 selectedSection;
+};
+typedef char NaviSectionSelectionOffsets[(sizeof(MapNaviSectionRecord) == 0x14 && offsetof(NaviSectionSelectionView, refreshFirst) == 0x5A8C && offsetof(NaviSectionSelectionView, selectedSection) == 0x121CC) ? 1 : -1];
 extern "C" {
-
-int dataTable2bSub1GetCount(void);
-int MapNaviTable_GetCategoryCount(void);
-
-extern int dataTable2bSub1GetRecord(unsigned int *, unsigned int);
-/* Supplied declaration required: dataTable2bSub1GetCount. */
-/* Supplied declaration required: MapNaviTable_GetCategoryCount. */
-extern int MapNaviTable_GetCategoryRecord(unsigned int *, unsigned int);
-extern int NaviMain_GetPosX(void);
-extern int NaviMain_GetPosY(int);
-
-
-void FUN_0039c57c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: 2 unstructured edge(s); 2 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  char *pcVar8;
-  short *psVar9;
-  int uStack_28;
-  
-  uStack_28 = param_4;
-  temp_v1 = NaviMain_GetPosX();
-  temp_v2 = NaviMain_GetPosY(param_1 + 0x162);
-  puVar4 = (unsigned int *)&uStack_28;
-  dataTable2bSub1GetCount();
-  temp_v3 = dataTable2bSub1GetRecord((unsigned int *)&uStack_28,0);
-  temp_v4 = 0;
-  if (temp_v4 < (int)puVar4) {
-    do {
-      pcVar8 = (char *)(temp_v3 + temp_v4 * 0x14);
-      temp_v5 = (int)*pcVar8;
-      if (temp_v5 == -1) break;
-      if ((temp_v5 == temp_v1) && ((unsigned char)pcVar8[1] == param_2)) {
-        temp_v3 = temp_v3 + temp_v4 * 0x14;
-        if (temp_v3 == 0) break;
-        temp_v0 = *(char *)(temp_v3 + 3);
-        *(char *)(param_1 + 0x60) = temp_v0;
-        *(int *)(param_1 + 0x121cc) = (int)temp_v0;
-        *(unsigned char *)(param_1 + 0x5a8c) = 1;
-        *(unsigned char *)(param_1 + 0x5a8d) = 1;
-        return;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < (int)puVar4);
-  }
-  *(unsigned char *)(param_1 + 0x60) = 0;
-  puVar4 = (unsigned int *)&uStack_28;
-  MapNaviTable_GetCategoryCount();
-  temp_v3 = MapNaviTable_GetCategoryRecord((unsigned int *)&uStack_28,0);
-  temp_v4 = 0;
-  if (0 < (int)puVar4) {
-    while( 1 ) {
-      psVar9 = (short *)(temp_v3 + temp_v4 * 0x14);
-      temp_v5 = (int)*psVar9;
-      if (temp_v5 == -1) break;
-      if ((temp_v5 == temp_v1) && (psVar9[1] == temp_v2)) {
-        temp_v3 = temp_v3 + temp_v4 * 0x14;
-        if (temp_v3 == 0) {
-          return;
-        }
-        temp_v0 = *(char *)(temp_v3 + 4);
-        puVar4 = (unsigned int *)&uStack_28;
-        dataTable2bSub1GetCount();
-        temp_v3 = dataTable2bSub1GetRecord((unsigned int *)&uStack_28,0);
-        temp_v2 = 0;
-        if ((int)puVar4 < 1) {
-          return;
-        }
-        while( 1 ) {
-          pcVar8 = (char *)(temp_v3 + temp_v2 * 0x14);
-          temp_v4 = (int)*pcVar8;
-          if (temp_v4 == -1) {
-            return;
-          }
-          if ((temp_v4 == temp_v1) && (pcVar8[1] == temp_v0)) break;
-          temp_v2 = temp_v2 + 1;
-          if ((int)puVar4 <= temp_v2) {
-            return;
-          }
-        }
-        temp_v3 = temp_v3 + temp_v2 * 0x14;
-        if (temp_v3 == 0) {
-          return;
-        }
-        temp_v0 = *(char *)(temp_v3 + 3);
-        *(char *)(param_1 + 0x60) = temp_v0;
-        *(int *)(param_1 + 0x121cc) = (int)temp_v0;
-        *(unsigned char *)(param_1 + 0x5a8c) = 1;
-        *(unsigned char *)(param_1 + 0x5a8d) = 1;
-        return;
-      }
-      temp_v4 = temp_v4 + 1;
-      if ((int)puVar4 <= temp_v4) {
-        return;
-      }
-    }
-  }
-  return;
+s32 NaviMain_GetPosX(const u8 *cursor);
+s32 NaviMain_GetPosY(const u8 *cursor);
+u32 dataTable2bSub1GetCount(MapNaviTableContext *context);
+const MapNaviSectionRecord *dataTable2bSub1GetRecord(MapNaviTableContext *context, u32 index);
+u32 MapNaviTable_GetCategoryCount(MapNaviTableContext *context);
+const MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext *context, u32 index);
 }
-
-} /* extern "C" */
+static inline const MapNaviSectionRecord *findNaviSection(MapNaviTableContext *context, s32 map, u32 category)
+{
+    u32 count = dataTable2bSub1GetCount(context);
+    const MapNaviSectionRecord *records = dataTable2bSub1GetRecord(context, 0);
+    for (s32 i = 0; i < static_cast<s32>(count); ++i) {
+        if (records[i].map == -1)
+            break;
+        if (records[i].map == map && records[i].category == category)
+            return &records[i];
+    }
+    return 0;
+}
+static inline const MapNaviCategoryRecord *findNaviCategory(MapNaviTableContext *context, s32 map, s32 area)
+{
+    u32 count = MapNaviTable_GetCategoryCount(context);
+    const MapNaviCategoryRecord *records = MapNaviTable_GetCategoryRecord(context, 0);
+    for (s32 i = 0; i < static_cast<s32>(count); ++i) {
+        if (records[i].id == -1)
+            break;
+        if (records[i].id == map && static_cast<s16>(records[i].reserved) == area)
+            return &records[i];
+    }
+    return 0;
+}
+static inline void applyNaviSection(NaviSectionSelectionView *work, const MapNaviSectionRecord *record)
+{
+    s8 section = record->section;
+    work->state.selection = section;
+    work->selectedSection = section;
+    work->refreshFirst = 1;
+    work->refreshSecond = 1;
+}
+extern "C" void FUN_0039c57c(NaviSectionSelectionView *work, u32 category)
+{
+    s32 map = NaviMain_GetPosX(work->motion.cursorData);
+    s32 area = NaviMain_GetPosY(work->motion.cursorData);
+    MapNaviTableContext context;
+    const MapNaviSectionRecord *section = findNaviSection(&context, map, category);
+    if (section) {
+        applyNaviSection(work, section);
+        return;
+    }
+    work->state.selection = 0;
+    const MapNaviCategoryRecord *fallback = findNaviCategory(&context, map, area);
+    if (fallback) {
+        section = findNaviSection(&context, map, fallback->category);
+        if (section)
+            applyNaviSection(work, section);
+    }
+}

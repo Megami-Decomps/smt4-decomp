@@ -1,66 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cd5f4` (_code @ 0x3cd5f4, 0x104 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: correct table traversal; register allocation and conditional-null branches differ. */
+#include "gamedata/DataTable.h"
 
-extern "C" {
-
-int dataTableGet(int, int);
-int dataTableGetCount(...);
-int FUN_0046c35c(int, int, int);
-int FUN_0046ea50(int, unsigned int);
-
-extern int g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: dataTableGet. */
-/* Supplied declaration required: dataTableGetCount. */
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0046c35c. */
-/* Supplied declaration required: FUN_0046ea50. */
-
-
-int FUN_003cd5f4(int param_1)
-
-{
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v4 = 0;
-  dataTableGet(0x30,0);
-  temp_v0 = dataTableGetCount();
-  temp_v2 = g_aocSystem;
-  FUN_0046c35c(g_aocSystem,0x27,0);
-  if (0 < temp_v2 + temp_v0) {
-    do {
-      temp_v1 = dataTableGet(0x30,0);
-      temp_v2 = dataTableGetEntries();
-      temp_v3 = dataTableGetCount(temp_v1);
-      if (temp_v4 < temp_v3) {
-        temp_v2 = temp_v2 + temp_v4 * 0x28;
-      }
-      else {
-        temp_v0 = g_aocSystem;
-        FUN_0046c35c(g_aocSystem,0x27,0);
-        temp_v2 = 0;
-        if (temp_v4 < temp_v3 + temp_v0) {
-          temp_v2 = g_aocSystem;
-          FUN_0046ea50(g_aocSystem,temp_v4 - temp_v3);
-        }
-      }
-      if (*(int *)(temp_v2 + 0x20) == param_1) {
-        return (int)*(short *)(temp_v2 + 0x24);
-      }
-      temp_v4 = temp_v4 + 1;
-      dataTableGet(0x30,0);
-      temp_v0 = dataTableGetCount();
-      temp_v2 = g_aocSystem;
-      FUN_0046c35c(g_aocSystem,0x27,0);
-    } while ((int)temp_v4 < temp_v2 + temp_v0);
-  }
-  return -1;
+namespace {
+struct Table30SearchRecord {
+    /* 0x00 */ u8 data[0x20];
+    /* 0x20 */ s32 key;
+    /* 0x24 */ s16 value;
+    /* 0x26 */ u8 padding[2];
+};
 }
 
-} /* extern "C" */
+extern "C" {
+extern void *g_aocSystem;
+u32 FUN_0046c35c(void *system, s32 kind, u32 tableIndex);
+Table30SearchRecord *FUN_0046ea50(void *system, u32 index);
+
+// Find a key in the base and downloadable records and return its associated value.
+s32 FUN_003cd5f4(s32 key)
+{
+    for (u32 index = 0; (s32)index < (s32)(dataTableGetCount(dataTableGet(0x30, 0)) +
+             FUN_0046c35c(g_aocSystem, 0x27, 0)); ++index) {
+        DataTableView<Table30SearchRecord> table(0x30, 0);
+        Table30SearchRecord *record;
+        if (index < table.count) {
+            record = &table.entries[index];
+        } else {
+            u32 total = table.count + FUN_0046c35c(g_aocSystem, 0x27, 0);
+            record = NULL;
+            if (index < total)
+                record = FUN_0046ea50(g_aocSystem, index - table.count);
+        }
+        if (record->key == key)
+            return record->value;
+    }
+    return -1;
+}
+}

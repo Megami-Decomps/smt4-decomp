@@ -1,129 +1,94 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003eaa9c` (_code @ 0x3eaa9c, 0x1e0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains different search bases and reloads stored transform vectors before the handle setters. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "gamedata/DataTable.h"
 
-extern "C" {
-
-int FUN_001568f8(int, int);
-int FUN_00178b04(int, unsigned char *, int);
-int FUN_00201950(int);
-int FUN_00201984(int);
-int FUN_004d854c(unsigned int);
-int callOnHandleField4B(unsigned int);
-int callOnHandleField4C(unsigned int);
-int btlModelCopyContentIfMissing(void);
-int callOnHandleField4D(unsigned int);
-
-extern unsigned char LAB_003eac80; /* 0x3eac80 */
-
-/* Supplied declaration required: FUN_001568f8. */
-/* Supplied declaration required: FUN_00178b04. */
-extern int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableFileGetTable(int, unsigned int);
-/* Supplied declaration required: FUN_00201950. */
-/* Supplied declaration required: FUN_00201984. */
-/* Supplied declaration required: FUN_004d854c. */
-/* Supplied declaration required: callOnHandleField4B. */
-/* Supplied declaration required: callOnHandleField4C. */
-/* Supplied declaration required: btlModelCopyContentIfMissing. */
-extern int FUN_004d87e4(unsigned int);
-/* Supplied declaration required: callOnHandleField4D. */
-extern unsigned int *battleModelOwnerInitialize(unsigned int *value);
-
-
-void FUN_003eaa9c(int param_1)
-
-{
-/* irregular: 2 goto(s); irregular input(s): in_s0, in_s1, in_s2; 9 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  short *psVar6;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int temp_v5;
-  unsigned int in_s2;
-  unsigned int temp_v6;
-  unsigned long long temp_v7;
-  
-  temp_v1 = FUN_004d87e4(*(unsigned int *)(param_1 + 0x22bc));
-  if (temp_v1 != 0) {
-    FUN_004d854c(*(unsigned int *)(param_1 + 0x22bc));
-    temp_v1 = 1;
-    do {
-      temp_v2 = FUN_00178b04(0x24,&LAB_003eac80,0x3649);
-      temp_v3 = 0;
-      if (temp_v2 != 0) {
-        temp_v3 = (unsigned int)battleModelOwnerInitialize((unsigned int *)temp_v2);
-      }
-      temp_v2 = param_1 + temp_v1 * 4;
-      *(unsigned int *)(temp_v2 + 0x22bc) = temp_v3;
-      btlModelCopyContentIfMissing();
-      FUN_004d854c(*(unsigned int *)(temp_v2 + 0x22bc));
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 4);
-    temp_v1 = 4;
-    do {
-      temp_v2 = *(int *)(param_1 + 0x1ffc) + temp_v1 * 0x408;
-      if (*(char *)(temp_v2 + 0x23a) != '\0') {
-        temp_v1 = *(int *)(param_1 + 0x1ed4) + *(short *)(temp_v2 + 8) * 0x1d0;
-        goto LAB_003eab60;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 0x36);
-    temp_v1 = 0;
-LAB_003eab60:
-    temp_v2 = param_1;
-    FUN_001568f8(param_1,(int)*(short *)(temp_v1 + 0x6a));
-    temp_v0 = *(unsigned short *)(temp_v2 + 2);
-    if (*(int *)(param_1 + 0x2294) != 0) {
-      temp_v3 = dataTableFileGetTable(*(int *)(param_1 + 0x2294),0);
-      temp_v1 = dataTableGetEntries();
-      temp_v2 = dataTableGetCount(temp_v3);
-      temp_v4 = 0;
-      if (temp_v4 < temp_v2) {
-        do {
-          psVar6 = (short *)(temp_v1 + temp_v4 * 0x38);
-          if ((int)*psVar6 == (unsigned int)temp_v0) goto LAB_003eabd0;
-          temp_v4 = temp_v4 + 1;
-        } while (temp_v4 < temp_v2);
-      }
-    }
-    psVar6 = (short *)0x0;
-LAB_003eabd0:
-    temp_v1 = 0;
-    temp_v7 = (unsigned long long)*(unsigned int *)(psVar6 + 2);
-    do {
-      FUN_00201950(temp_v1);
-      temp_v4 = param_1 + temp_v1 * 0xc;
-      *(unsigned int *)(temp_v4 + 0x22d0) = in_s0;
-      *(unsigned int *)(temp_v4 + 0x22d4) = in_s1;
-      *(unsigned int *)(temp_v4 + 0x22d8) = in_s2;
-      temp_v2 = param_1 + temp_v1 * 4;
-      temp_v3 = *(unsigned int *)(temp_v4 + 0x22d0);
-      temp_v5 = *(unsigned int *)(temp_v4 + 0x22d4);
-      temp_v6 = *(unsigned int *)(temp_v4 + 0x22d8);
-      callOnHandleField4B(*(unsigned int *)(temp_v2 + 0x22bc));
-      FUN_00201984(temp_v1);
-      *(unsigned int *)(temp_v4 + 0x2300) = temp_v3;
-      *(unsigned int *)(temp_v4 + 0x2304) = temp_v5;
-      *(unsigned int *)(temp_v4 + 0x2308) = temp_v6;
-      callOnHandleField4C(*(unsigned int *)(temp_v2 + 0x22bc));
-      in_s0 = (unsigned int)temp_v7;
-      *(unsigned int *)(temp_v2 + 0x2330) = in_s0;
-      in_s1 = in_s0;
-      in_s2 = in_s0;
-      callOnHandleField4D(*(unsigned int *)(temp_v2 + 0x22bc));
-      temp_v2 = param_1 + temp_v1;
-      temp_v1 = temp_v1 + 1;
-      *(unsigned char *)(temp_v2 + 0x2340) = 1;
-    } while (temp_v1 < 4);
-    *(unsigned char *)(param_1 + 0x22cd) = 1;
-  }
-  return;
+namespace {
+struct EnvironmentCopyView {
+    u8 prefix[0x2294];
+    void *table;
+    u8 padding[0x24];
+    u32 *owners[4];
+    u8 loaded;
+    u8 ready;
+    u8 padding22CE[2];
+    BattleVector3 positions[4];
+    BattleVector3 rotations[4];
+    f32 scales[4];
+    u8 enabled[4];
+};
+struct EnvironmentScaleRecord {
+    s16 id;
+    u16 padding;
+    f32 scale;
+    u8 tail[0x30];
+};
 }
+extern "C" {
+s32 FUN_004d87e4(u32 *owner);
+void FUN_004d854c(u32 *owner);
+void *FUN_00178b04(u32 bytes, const char *file, s32 line);
+u32 *battleModelOwnerInitialize(u32 *owner);
+void btlModelCopyContentIfMissing(u32 *destination, const u32 *source);
+BattleCombatantStatusKey *FUN_001568f8(BtlMainStateA *state, s32 parameterIndex);
+void *dataTableFileGetTable(void *file, u32 index);
+BattleVector3 FUN_00201950(u32 index);
+BattleVector3 FUN_00201984(u32 index);
+void callOnHandleField4B(u32 *owner, f32 x, f32 y, f32 z);
+void callOnHandleField4C(u32 *owner, f32 x, f32 y, f32 z);
+void callOnHandleField4D(u32 *owner, f32 x, f32 y, f32 z);
 
-} /* extern "C" */
+// Duplicate the loaded environment model and apply each battle placement's transform.
+void FUN_003eaa9c(BtlMainStateA *state)
+{
+    EnvironmentCopyView *environment = reinterpret_cast<EnvironmentCopyView *>(state);
+    if (!FUN_004d87e4(environment->owners[0]))
+        return;
+    FUN_004d854c(environment->owners[0]);
+    for (s32 i = 1; i < 4; ++i) {
+        u32 *owner = static_cast<u32 *>(FUN_00178b04(0x24,
+            "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlMain.cpp", 0x3649));
+        if (owner != NULL)
+            owner = battleModelOwnerInitialize(owner);
+        environment->owners[i] = owner;
+        btlModelCopyContentIfMissing(owner, environment->owners[0]);
+        FUN_004d854c(environment->owners[i]);
+    }
+    BattleRosterRecordA *selected = NULL;
+    for (s32 i = 4; i < 0x36; ++i) {
+        BtlCombatantEntryA *entry = &state->entries[i];
+        if (entry->selection.marked != 0) {
+            selected = &state->roster[entry->unitIndex];
+            break;
+        }
+    }
+    u16 id = FUN_001568f8(state, selected->combatant.parameterIndex)->id;
+    EnvironmentScaleRecord *record = NULL;
+    if (environment->table != NULL) {
+        void *table = dataTableFileGetTable(environment->table, 0);
+        EnvironmentScaleRecord *entries = static_cast<EnvironmentScaleRecord *>(dataTableGetEntries(table));
+        s32 count = dataTableGetCount(table);
+        for (s32 i = 0; i < count; ++i) {
+            EnvironmentScaleRecord *candidate = &entries[i];
+            if (candidate->id == id) {
+                record = candidate;
+                break;
+            }
+        }
+    }
+    f32 scale = record->scale;
+    for (s32 i = 0; i < 4; ++i) {
+        environment->positions[i] = FUN_00201950(i);
+        callOnHandleField4B(environment->owners[i], environment->positions[i].x,
+            environment->positions[i].y, environment->positions[i].z);
+        environment->rotations[i] = FUN_00201984(i);
+        callOnHandleField4C(environment->owners[i], environment->rotations[i].x,
+            environment->rotations[i].y, environment->rotations[i].z);
+        environment->scales[i] = scale;
+        callOnHandleField4D(environment->owners[i], scale, scale, scale);
+        environment->enabled[i] = 1;
+    }
+    environment->ready = 1;
+}
+}

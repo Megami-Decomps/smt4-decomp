@@ -69,7 +69,7 @@ int FUN_00480140(...);
 int FUN_004ab734(...);
 int rt_memcpy_w(...);
 
-int FUN_0020aba0(...);
+int partyPanelHandleCursorEdgeInput(...);
 int FUN_002a4964(...);
 int FUN_002c8550(...);
 int FUN_002cbca8(...);
@@ -158,7 +158,7 @@ extern int FUN_001ba3d4(unsigned short);
 /* Supplied declaration required: partyFindSlotById. */
 /* Supplied declaration required: menuStateStartConfirm. */
 /* Supplied declaration required: FUN_0020a760. */
-/* Supplied declaration required: FUN_0020aba0. */
+/* Supplied declaration required: partyPanelHandleCursorEdgeInput. */
 /* Supplied declaration required: FUN_0020b718. */
 /* Supplied declaration required: FUN_0020d934. */
 /* Supplied declaration required: FUN_0021c1e0. */
@@ -816,7 +816,7 @@ LAB_00263038:
     }
     else {
 LAB_00263748:
-      temp_v9 = FUN_0020aba0(temp_v22,0);
+      temp_v9 = partyPanelHandleCursorEdgeInput(temp_v22,0);
       if (temp_v9 != 0) {
         FUN_0023b45c(0);
         FUN_0020b718(3,1);
@@ -1247,7 +1247,7 @@ LAB_00263984:
     else {
 LAB_00264384:
       temp_v15 = FUN_002a4894(temp_v6);
-      if ((0 < temp_v15) && (temp_v15 = FUN_0020aba0(temp_v6,0), temp_v15 != 0)) {
+      if ((0 < temp_v15) && (temp_v15 = partyPanelHandleCursorEdgeInput(temp_v6,0), temp_v15 != 0)) {
         if (*(char *)(temp_v1 + 0x9b4) != '\v') {
           FUN_0023b45c(0);
           temp_v4 = 0;
@@ -2052,7 +2052,7 @@ LAB_00265d94:
           }
           else {
 LAB_00265d24:
-            temp_v4 = FUN_0020aba0(0,1);
+            temp_v4 = partyPanelHandleCursorEdgeInput(0,1);
             if (temp_v4 == 0) {
               if ((*(char *)(g_partyPanel + 0x42) == '\0') && (*(int *)(g_partyPanel + 0x30) >= 2)) {
                 temp_v4 = 4;

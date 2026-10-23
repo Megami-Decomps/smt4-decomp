@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMemoryAlloc(...);
-int FUN_00168fbc(int, int, int);
+float FUN_00168fbc(unsigned int format, unsigned int type, unsigned int *hardwareFormat);
 int asdTextureCreate(void);
 int asdMemoryAllocAligned(...);
 int asdGxGetPhysicalAddress(void);
@@ -51,7 +51,7 @@ int * FUN_00341224(int param_1,int param_2,int param_3,int param_4,int param_5,i
   *(unsigned int *)(piVar1[3] + 4) = 0xde1;
   *(int *)(piVar1[3] + 8) = param_3;
   *(unsigned int *)(piVar1[3] + 0xc) = 0x2000000;
-  FUN_00168fbc(param_4,param_5,piVar1[3] + 0x34);
+  FUN_00168fbc(param_4,param_5,reinterpret_cast<unsigned int *>(piVar1[3] + 0x34));
   temp_v1 = 0;
   if (param_4 != 0x6752) {
     if (param_4 < 0x6752) {

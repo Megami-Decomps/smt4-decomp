@@ -9,7 +9,7 @@ struct PartyMemberList {
 extern "C" {
 PartyMemberList *gameGetPlayerData();
 s32 gameDataFlagTestBit(u32 flag);
-s32 FUN_0019d390(u32 id);
+s32 dataTableCountRecordStages(u32 id);
 
 // Increase an existing member's count to its limit, or add it to the first unlocked empty slot.
 void FUN_003e0174(u32 id)
@@ -28,7 +28,7 @@ void FUN_003e0174(u32 id)
         capacity = 8;
     for (s32 i = 0; i < capacity; ++i) {
         if (party->ids[i] == id) {
-            s32 limit = FUN_0019d390(id);
+            s32 limit = dataTableCountRecordStages(id);
             s8 state = party->states[i];
             if (state < limit)
                 party->states[i] = state + 1;

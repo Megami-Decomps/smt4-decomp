@@ -1,82 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a0164` (_code @ 0x3a0164, 0x120 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: the two power accumulators take swapped r4/r5 registers. */
+#include "gamedata/EquipmentSortPower.h"
+#include "shard/W6_W6Match2_RankedTableRecord.h"
 extern "C" {
-
-int dataTable08Sub0GetRecord(void);
-int dataTable08Sub2GetRecord(void);
-int dataTable08Sub1GetRecord(void);
-
-extern int FUN_00230f44(unsigned short *);
-/* Supplied declaration required: dataTable08Sub0GetRecord. */
-extern unsigned int FUN_002ae3c0(unsigned int);
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
-
-
-int FUN_003a0164(unsigned short *param_1,unsigned short *param_2)
-
-{
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  
-  temp_v4 = (unsigned int)*param_1;
-  temp_v3 = 0;
-  temp_v0 = FUN_002ae3c0(temp_v4);
-  switch(temp_v0) {
-  case 0:
-    dataTable08Sub0GetRecord();
-    temp_v3 = (unsigned int)*(unsigned char *)(temp_v4 + 0x55);
-    break;
-  case 1:
-    dataTable08Sub1GetRecord();
-    temp_v3 = *(unsigned int *)(temp_v4 + 0x70) & 0xff;
-    break;
-  case 2:
-  case 3:
-  case 4:
-  case 5:
-  case 6:
-  case 7:
-  case 8:
-    dataTable08Sub2GetRecord();
-    temp_v3 = (unsigned int)*(unsigned short *)(temp_v4 + 0xa6);
-  }
-  temp_v4 = (unsigned int)*param_2;
-  temp_v5 = 0;
-  temp_v0 = FUN_002ae3c0(temp_v4);
-  switch(temp_v0) {
-  case 0:
-    dataTable08Sub0GetRecord();
-    temp_v5 = (unsigned int)*(unsigned char *)(temp_v4 + 0x55);
-    break;
-  case 1:
-    dataTable08Sub1GetRecord();
-    temp_v5 = *(unsigned int *)(temp_v4 + 0x70) & 0xff;
-    break;
-  case 2:
-  case 3:
-  case 4:
-  case 5:
-  case 6:
-  case 7:
-  case 8:
-    dataTable08Sub2GetRecord();
-    temp_v5 = (unsigned int)*(unsigned short *)(temp_v4 + 0xa6);
-  }
-  temp_v1 = temp_v5 - temp_v3;
-  if (temp_v1 == 0) {
-    temp_v1 = FUN_00230f44(param_1);
-    temp_v2 = FUN_00230f44(param_2);
-    temp_v1 = temp_v1 - temp_v2;
-  }
-  return temp_v1;
+u32 FUN_002ae3c0(u32 id);
+EquipmentSortPowerPrimary *dataTable08Sub0GetRecord(u32 id);
+EquipmentSortPowerSecondary *dataTable08Sub1GetRecord(u32 id);
+s32 FUN_00230f44(const u16 *item);
 }
 
-} /* extern "C" */
+static inline u16 equipmentSortPower(u16 id)
+{
+    // The power field is past RankedTableRecord's known extent; do not grow that shared type.
+    struct ExtendedPowerView { u8 prefix[0xA6]; u16 power; };
+    typedef char ExtendedPowerOffset[offsetof(ExtendedPowerView, power) == 0xA6 ? 1 : -1];
+    u16 power = 0;
+    switch (FUN_002ae3c0(id)) {
+    case 2: case 3: case 4: case 5: case 6: case 7: case 8:
+        power = ((ExtendedPowerView *)dataTable08Sub2GetRecord(id))->power;
+        break;
+    case 0:
+        power = dataTable08Sub0GetRecord(id)->power;
+        break;
+    case 1:
+        power = dataTable08Sub1GetRecord(id)->powerFlags & 0xFF;
+        break;
+    }
+    return power;
+}
+
+// Sort by descending equipment power, then by the existing item ordering.
+extern "C" s32 FUN_003a0164(const u16 *left, const u16 *right)
+{
+    u16 leftPower = equipmentSortPower(*left);
+    u16 rightPower = equipmentSortPower(*right);
+    s32 result = rightPower - leftPower;
+    if (result == 0)
+        result = FUN_00230f44(left) - FUN_00230f44(right);
+    return result;
+}

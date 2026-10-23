@@ -1,85 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bb1f0` (_code @ 0x3bb1f0, 0x158 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initial-state store scheduling, resource-address pooling and sprite-index multiply registers differ. */
+#include "shard/S3SceneWidget.h"
+#include "shard/W6_W6Match7_DrawParameters.h"
+#include "ui/UiSpriteState.h"
+#include <string.h>
 
 extern "C" {
+void uiInitializeEightTimerSet(void *timers);
+void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 image, s32 frame);
+void FUN_002bd954(UiSpriteState *sprite, u32 table, u32 image, Params002c312c *parameters, u32 flags, f32 scale);
+void paramsInit(Params002c312c *parameters, const void *first, u32 firstSize,
+    const void *second, u32 secondSize, u32 a, u32 b, u32 c, u32 d, const void *third, u32 thirdSize);
+void drawParameterBlockClear(Params002c312c *parameters);
+extern const u8 DAT_00404e08[];
+extern const u8 DAT_00404e14[];
+extern const u8 DAT_00404e2c[];
 
-int uiInitializeEightTimerSet(int);
-int uiSpriteSetImageKeyframe(int, int);
-int FUN_002bd954(int, int, int, int, int);
-int paramsInit(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int drawParameterBlockClear(void);
-
-/* stack frame of param_1: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_1_stack;
-
-extern unsigned char DAT_00404e08; /* 0x404e08 */
-extern unsigned char DAT_00404e14; /* 0x404e14 */
-extern unsigned char DAT_00404e2c; /* 0x404e2c */
-
-/* Supplied declaration required: uiInitializeEightTimerSet. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: drawParameterBlockClear. */
-
-
-void FUN_003bb1f0(int param_1)
-
+void FUN_003bb1f0(SceneWidget *widget)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = 0;
-  *(unsigned char *)(param_1 + 0x630) = 0;
-  *(unsigned char *)(param_1 + 0x631) = 0;
-  *(unsigned char *)(param_1 + 0x632) = 0;
-  *(unsigned int *)(param_1 + 0xc58) = 0;
-  *(unsigned int *)(param_1 + 0xc60) = 0xffffffff;
-  *(unsigned int *)(param_1 + 0xc5c) = 0;
-  *(unsigned int *)(param_1 + 0xc64) = 0xffffffff;
-  *(unsigned int *)(param_1 + 0xc68) = 0xffffffff;
-  *(unsigned int *)(param_1 + 0xc6c) = 0xffffffff;
-  *(unsigned int *)(param_1 + 0xc70) = 0xffffffff;
-  *(unsigned int *)(param_1 + 0xc74) = 0xffffffff;
-  *(unsigned int *)(param_1 + 0xc78) = 0;
-  *(unsigned int *)(param_1 + 0xc7c) = 0;
-  *(unsigned int *)(param_1 + 0xc80) = 0;
-  *(unsigned int *)(param_1 + 0xc84) = 0;
-  *(unsigned int *)(param_1 + 0xc88) = 0;
-  *(unsigned int *)(param_1 + 0xc8c) = 0;
-  *(unsigned int *)(param_1 + 0xc90) = 0;
-  *(unsigned int *)(param_1 + 0xc94) = 0;
-  *(unsigned int *)(param_1 + 0xc98) = 0;
-  *(unsigned int *)(param_1 + 0xc9c) = 0;
-  *(unsigned int *)(param_1 + 0xca0) = 0;
-  *(unsigned int *)(param_1 + 0xca4) = 0;
-  *(unsigned int *)(param_1 + 0xca8) = 0;
-  *(unsigned int *)(param_1 + 0xcac) = 0;
-  temp_v0 = param_1 + 0x634;
-  *(unsigned int *)(param_1 + 0xcb0) = 0;
-  *(unsigned int *)(param_1 + 0xcb4) = 0;
-  drawParameterBlockClear();
-  paramsInit(temp_v0,&DAT_00404e08,0xc,&DAT_00404e14,0x18,0,0,0,0,&DAT_00404e2c,0x38);
-  do {
-    temp_v2 = param_1 + temp_v1 * 0x8c + 0x654;
-    FUN_002bd954(temp_v2,0x2a,0,temp_v0,0x15);
-    uiSpriteSetImageKeyframe(temp_v2,0);
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 10);
-  FUN_002bd954(param_1 + 0xbcc,0x2a,0,temp_v0,0x15);
-  uiInitializeEightTimerSet(param_1 + 0xa8);
-  return;
+    // The shared padding begins at unaligned +0x632, so keep the aligned parameter/sprite view local.
+    struct InitializationView {
+        u8 prefix[0x630];
+        u8 hidden, animate, cursorMarked, unk633;
+        Params002c312c parameters;
+        UiSpriteState buttons[10];
+        UiSpriteState image;
+        u32 initialFrame;
+        s32 frame;
+        s32 shownTexture, shownKey, nextTexture, nextKey, queuedTexture, queuedKey;
+        u32 loaded[16];
+    };
+    typedef char LayoutCheck[offsetof(InitializationView, parameters) == 0x634 &&
+        offsetof(InitializationView, buttons) == 0x654 &&
+        offsetof(InitializationView, image) == 0xbcc &&
+        offsetof(InitializationView, loaded) == 0xc78 ? 1 : -1];
+    InitializationView *work = reinterpret_cast<InitializationView *>(widget);
+    work->hidden = 0;
+    work->animate = 0;
+    work->cursorMarked = 0;
+    work->initialFrame = 0;
+    work->shownTexture = -1;
+    work->frame = 0;
+    work->shownKey = -1;
+    work->nextTexture = -1;
+    work->nextKey = -1;
+    work->queuedTexture = -1;
+    work->queuedKey = -1;
+    memset(work->loaded, 0, sizeof(work->loaded));
+    drawParameterBlockClear(&work->parameters);
+    paramsInit(&work->parameters, DAT_00404e08, 12, DAT_00404e14, 24,
+        0, 0, 0, 0, DAT_00404e2c, 56);
+    for (s32 index = 0; index < 10; ++index) {
+        FUN_002bd954(&work->buttons[index], SCENE_TEXTURE_TABLE, 0, &work->parameters, 21, 1.0f);
+        uiSpriteSetImageKeyframe(&work->buttons[index], 0, 0);
+    }
+    FUN_002bd954(&work->image, SCENE_TEXTURE_TABLE, 0, &work->parameters, 21, 1.0f);
+    uiInitializeEightTimerSet(reinterpret_cast<u8 *>(widget) + 0xa8);
 }
-
-} /* extern "C" */
+}

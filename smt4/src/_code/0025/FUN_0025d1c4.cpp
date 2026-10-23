@@ -19,7 +19,7 @@ int btlGetMainState(void);
 int FUN_002b6c34(...);
 int aocIndexValueOrDefault(...);
 int FUN_002bdf94(...);
-int FUN_002be370(...);
+int itemDrawCategoryBadge(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
 int FUN_002be650(...);
@@ -94,7 +94,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: aocIndexValueOrDefault. */
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be370. */
+/* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
@@ -273,7 +273,7 @@ void FUN_0025d1c4(int param_1)
                 FUN_002be5a4(2,0x787878ff,temp_v19,temp_v14);
               }
               temp_v10 = FUN_002bf4f8(0x15,0x8c);
-              FUN_002be370(temp_v5,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v6,
+              itemDrawCategoryBadge(temp_v5,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v6,
                            (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v7,0x49,
                            0);
               temp_v10 = FUN_002bf4f8(0x15,0x8a);
@@ -614,7 +614,7 @@ void FUN_0025d1c4(int param_1)
           }
         }
         temp_v4 = FUN_002bf4f8(0x15,0xa9);
-        FUN_002be370(temp_v5,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v6,
+        itemDrawCategoryBadge(temp_v5,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v6,
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v7,0x74,0);
         temp_v4 = FUN_002bf4f8(0x15,0xa7);
         FUN_002bdf94(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v6,

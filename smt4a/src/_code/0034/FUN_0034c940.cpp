@@ -1,86 +1,82 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034c940` (_code @ 0x34c940, 0x1a4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: large-offset snapshot copies and 64-bit packed-pair setter registers/stores differ. */
+#include "shard/W5_W5Match2_UniteWork.h"
 
 extern "C" {
+extern UniteWork *g_unite;
+void FUN_002f3bc4(void *list, s32 selection, s32 mode);
+void FUN_0033449c(s32 mode);
+void FUN_0031f718(s32 id, s32 first, s32 second);
+void objBInitBlock19D0(void *list, s32 first, s32 second);
+void FUN_003343c0(s32 mode);
+void FUN_002c8550(s32 state);
+void FUN_0037e1b0(s32 first, s32 second);
+u32 FUN_0034a9ac(void);
+void statusPanelSetOpen(s32 open);
+void FUN_0037c8e4(s32 first, s32 second);
+void panelSetTarget(s32 offset, s32 frame);
+void FUN_0019de98(s32 first, u32 color);
+void FUN_0020b908(s32 first, s32 second);
 
-int FUN_0019de98(int, unsigned int);
-int FUN_0020b908(int, int);
-int statusPanelSetOpen(int);
-int FUN_002c8550(int);
-int FUN_002f3bc4(int, int, int);
-int FUN_0031f718(int, int);
-int FUN_003343c0(int);
-int objBInitBlock19D0(int, int);
-int FUN_0033449c(int);
-int panelSetTarget(int, int);
-int FUN_0037c8e4(int, int);
-int FUN_0037e1b0(int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern int g_unite; /* 0x57f290 */
-
-/* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_0020b908. */
-/* Supplied declaration required: statusPanelSetOpen. */
-/* Supplied declaration required: FUN_002c8550. */
-/* Supplied declaration required: FUN_002f3bc4. */
-/* Supplied declaration required: FUN_0031f718. */
-/* Supplied declaration required: FUN_003343c0. */
-/* Supplied declaration required: objBInitBlock19D0. */
-/* Supplied declaration required: FUN_0033449c. */
-extern unsigned int FUN_0034a9ac(void);
-/* Supplied declaration required: panelSetTarget. */
-/* Supplied declaration required: FUN_0037c8e4. */
-/* Supplied declaration required: FUN_0037e1b0. */
-
-
-void FUN_0034c940(int param_1)
-
+// Select a fusion pair, preserve its list view and activate the status/confirmation panels.
+void FUN_0034c940(s32 selection)
 {
-/* irregular: 12 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = g_unite;
-  *(unsigned char *)(g_unite + 0x9071) = 1;
-  FUN_002f3bc4(temp_v0 + 0x669c,param_1,0);
-  temp_v2 = temp_v0 + param_1 * 8;
-  *(unsigned int *)(temp_v0 + 0x8b60) = *(unsigned int *)(temp_v0 + 0x66d0);
-  *(unsigned int *)(temp_v0 + 0x8b64) = *(unsigned int *)(temp_v0 + 0x66d4);
-  *(unsigned int *)(temp_v0 + 0x8b68) = *(unsigned int *)(temp_v0 + 0x66d8);
-  *(unsigned int *)(temp_v0 + 0x8b6c) = *(unsigned int *)(temp_v0 + 0x66dc);
-  temp_v1 = *(unsigned int *)(temp_v2 + 0x907c) & 0x1fffc;
-  temp_v3 = (*(unsigned int *)(temp_v0 + 0x13bc) & 0xfffe0003) | temp_v1;
-  *(unsigned int *)(temp_v0 + 0x13bc) = temp_v3;
-  temp_v4 = *(unsigned int *)(temp_v2 + 0x9078) & 0x7fff;
-  *(unsigned int *)(temp_v0 + 0x13bc) = temp_v3;
-  *(unsigned int *)(temp_v0 + 0x13b8) = temp_v4 | (*(unsigned int *)(temp_v0 + 0x13b8) & 0xffff8000);
-  *(unsigned int *)(temp_v0 + 0x13b8) = temp_v4 | (*(unsigned int *)(temp_v2 + 0x9078) & 0x3fff8000) | 0x40000000;
-  *(unsigned int *)(temp_v0 + 0x13bc) = temp_v1 | 1;
-  FUN_0033449c(1);
-  FUN_0031f718((int)*(short *)(temp_v0 + 0x66fe),0);
-  objBInitBlock19D0(temp_v0 + 0x669c,0);
-  FUN_003343c0(0);
-  FUN_002c8550(9);
-  FUN_0037e1b0(0);
-  temp_v1 = FUN_0034a9ac();
-  statusPanelSetOpen(temp_v1 != *(unsigned short *)(temp_v0 + 0x66fe));
-  if (0 < *(int *)(temp_v0 + 0x418)) {
-    FUN_0037c8e4(1,0);
-    panelSetTarget(-*(int *)(temp_v0 + 0x418),0);
-  }
-  FUN_0019de98(0,0xf4f4f4ff);
-  FUN_002c8550(8);
-  FUN_0020b908(0x13,1);
-  return;
+    // These fields are 64-bit bitfields in this path; keeping the view local avoids changing
+    // the shared work block's alignment and the existing 32-bit packed-pair representation.
+    struct PairView {
+        u64 firstId : 15;
+        u64 secondId : 15;
+        u64 firstType : 2;
+        u64 secondType : 2;
+        u64 resultId : 15;
+        u64 reserved : 15;
+    };
+    struct SelectionView {
+        u8 unk0000[0x418];
+        s32 panelOffset;
+        u8 unk041c[0xf9c];
+        PairView selected;
+        u8 unk13c0[0x52dc];
+        struct {
+            u8 unk00[0x34];
+            u32 current[4];
+            u8 unk44[0x1e];
+            s16 id;
+        } list;
+        u8 unk6700[0x2460];
+        u32 saved[4];
+        u8 unk8b70[0x501];
+        u8 active;
+        u8 unk9072[6];
+        PairView choices[1];
+    };
+    SelectionView *work = reinterpret_cast<SelectionView *>(g_unite);
+    void *list = &work->list;
+    work->active = 1;
+    FUN_002f3bc4(list, selection, 0);
+    work->saved[0] = work->list.current[0];
+    work->saved[1] = work->list.current[1];
+    work->saved[2] = work->list.current[2];
+    work->saved[3] = work->list.current[3];
+    const PairView *choice = &work->choices[selection];
+    work->selected.resultId = choice->resultId;
+    work->selected.firstId = choice->firstId;
+    work->selected.secondId = choice->secondId;
+    work->selected.firstType = 1;
+    work->selected.secondType = 1;
+    work->selected.reserved = 0;
+    FUN_0033449c(1);
+    FUN_0031f718(work->list.id, 0, 0);
+    objBInitBlock19D0(list, 0, 0);
+    FUN_003343c0(0);
+    FUN_002c8550(9);
+    FUN_0037e1b0(0, 0);
+    statusPanelSetOpen(FUN_0034a9ac() != static_cast<u16>(work->list.id));
+    if (work->panelOffset > 0) {
+        FUN_0037c8e4(1, 0);
+        panelSetTarget(-work->panelOffset, 0);
+    }
+    FUN_0019de98(0, 0xf4f4f4ff);
+    FUN_002c8550(8);
+    FUN_0020b908(0x13, 1);
 }
-
-} /* extern "C" */
+}

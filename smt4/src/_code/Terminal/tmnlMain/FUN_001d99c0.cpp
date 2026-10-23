@@ -82,7 +82,7 @@ int FUN_002a04f0(int);
 int FUN_002a09b4(unsigned char *, int);
 int FUN_002a3ab0(void);
 int FUN_002a4e98(void);
-int FUN_002adf00(short [6], unsigned int);
+int cameraExportParameters(short [6], unsigned int);
 int FUN_002c159c(unsigned int *);
 int FUN_002c1e30(...);
 int FUN_002c1edc(...);
@@ -195,7 +195,7 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: placeWinRelease. */
 extern int FUN_002adee0(unsigned int);
-/* Supplied declaration required: FUN_002adf00. */
+/* Supplied declaration required: cameraExportParameters. */
 /* Supplied declaration required: resOwnerRunNodeHandlers. */
 /* Supplied declaration required: FUN_002b827c. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -272,7 +272,7 @@ unsigned int FUN_001d99c0(void)
   puVar2 = g_tmnl;
   psVar12 = temp_v7;
   if ((unsigned int)g_tmnl[4] >= 2) {
-    FUN_002adf00(temp_v7,g_tmnl[g_tmnl[0x154] + 0xf]);
+    cameraExportParameters(temp_v7,g_tmnl[g_tmnl[0x154] + 0xf]);
     FUN_002c159c(puVar2 + 0x12);
     FUN_002c1edc(puVar2 + 0x12,temp_v7,temp_v8,temp_v9);
     FUN_002c1e30(puVar2 + 0x12,1);
@@ -340,7 +340,7 @@ unsigned int FUN_001d99c0(void)
         FUN_002a04f0(0);
         FUN_00263988(puVar7,2);
         FUN_002c2044(puVar7 + 0x12,1);
-        FUN_002adf00(temp_v7,puVar7[puVar7[0x154] + 0xf]);
+        cameraExportParameters(temp_v7,puVar7[puVar7[0x154] + 0xf]);
         FUN_002c159c(puVar7 + 0x12);
         FUN_002c1edc(puVar7 + 0x12,temp_v7,temp_v8,temp_v9);
         FUN_002c1e30(puVar7 + 0x12,1);

@@ -11,7 +11,13 @@ struct LightRegistration {
 extern "C" LightRegistration** FUN_002b74cc(
     LightRegistration**, LightRegistration**, LightRegistration**, LightRegistration* const*);
 struct LightRegistry {
-    u8 unk00[0x18]; // 0x00
+    union {
+        u8 unk00[0x18]; // 0x00
+        struct {
+            u8 unk00BeforeChildren[0x10];
+            u8 childListPrefix[8]; // 0x10: list header preceding begin/end
+        } children;
+    };
     LightRegistration** begin; // 0x18
     LightRegistration** end; // 0x1C
 
@@ -35,4 +41,6 @@ struct LightRegistrationSlots {
 typedef char LightRegistryLayoutCheck[sizeof(LightRegistry) == 0x20 &&
     offsetof(LightRegistry, begin) == 0x18 && offsetof(LightRegistry, end) == 0x1C &&
     sizeof(LightRegistration) == 0x10 && offsetof(LightRegistration, registry) == 0x0C ? 1 : -1];
+typedef char LightRegistryChildListOffsetCheck[
+    offsetof(LightRegistry, children.childListPrefix) == 0x10 ? 1 : -1];
 #endif

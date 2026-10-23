@@ -1,109 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003affe8` (_code @ 0x3affe8, 0x17c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation debug-source hook and its literals are absent; prologue scheduling differs. */
+#include "event/3dEvent/EventTextureJob.h"
+#include "gamedata/Table00.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
+extern const s8 DAT_0052f6a8[];
+extern const s8 DAT_0052f698[];
+void *asdMemoryAllocTracked(u32 category, u32 alignment, u32 flags, u32 size, s32 clear);
+void sysMemClear(void *memory, u32 size);
+Table00Record *dataTable00FindById(u32 id);
+s32 FUN_00162ea4();
+u32 FUN_00409fe8(s32 id, u32 first, u32 second);
+u32 eventUpdateTextureFadeJob(u32 job);
+s32 FUN_00289f10(u32 job);
+void jobWorkDestroy34(u32 job);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+    u32 (*update)(u32), AsdProcFunc destroy, u32 work);
+u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
 
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int dataTable00FindById(...);
-int sysMemClear(...);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern int FUN_00289d8c(...); /* 0x289d8c */
-extern int FUN_00289f10(...); /* 0x289f10 */
-extern int jobWorkDestroy34(...); /* 0x34dab0 */
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-extern int FUN_00162ea4(void);
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: sysMemClear. */
-extern unsigned int FUN_00409fe8(unsigned int, unsigned int);
-
-
-char * FUN_003affe8(unsigned int param_1)
-
+// Create a positioned battle portrait and select its placement-dependent animation.
+u32 FUN_003affe8(u32 id, EventTexturePosition position)
 {
-/* irregular: irregular input(s): in_s0, in_s1; 10 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  float temp_v2;
-  char *pcVar5;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  float temp_v3;
-  unsigned long long temp_v4;
-  float temp_v5;
-  
-  temp_v4 = romwright_piece_4_4(in_s1,in_s0);
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x48,1);
-  sysMemClear();
-  temp_v5 = 0.0f;
-  puVar1[2] = 0x3f800000;
-  puVar1[3] = 0;
-  puVar1[4] = 0x3e800000;
-  *(unsigned char *)(puVar1 + 5) = 0;
-  temp_v0 = param_1 & 0xffff;
-  *(unsigned char *)((int)puVar1 + 0x17) = 0;
-  dataTable00FindById();
-  puVar1[0xe] = (int)*(short *)(temp_v0 + 0x8c);
-  *(unsigned char *)(puVar1 + 0x11) = 1;
-  temp_v1 = FUN_00162ea4();
-  if (temp_v1 != 0) {
-    puVar1[1] = 1;
-  }
-  else {
-    temp_v0 = FUN_00409fe8(puVar1[0xe],1);
-    puVar1[0xd] = temp_v0;
-    puVar1[1] = 2;
-  }
-  temp_v3 = (float)temp_v4;
-  temp_v2 = temp_v3;
-  if (0xc07fffff < (unsigned int)temp_v3) {
-    temp_v2 = 2.38221e-44f;
-  }
-  *puVar1 = -param_1 & 0xffff;
-  if (0xc07fffff >= (unsigned int)temp_v3) {
-    if ((unsigned int)temp_v3 >= 0xc0400000) {
-      temp_v2 = 4.2039e-45f;
+    EventTextureJobWork *work = static_cast<EventTextureJobWork *>(
+        asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(EventTextureJobWork), 1));
+    sysMemClear(work, sizeof(EventTextureJobWork));
+    work->colorScale = 1.0f;
+    work->opacity = 0.0f;
+    work->fadeStep = 0.25f;
+    work->stopWhenHidden = 0;
+    work->unk17 = 0;
+    work->resourceId = dataTable00FindById((u16)id)->battleTexture.resourceId;
+    work->animate = 1;
+    if (FUN_00162ea4()) {
+        work->state = 1;
+    } else {
+        work->resource = FUN_00409fe8(work->resourceId, 1, 1);
+        work->state = 2;
     }
-    else if ((int)temp_v3 >= 0x40400000) {
-      temp_v2 = 2.52234e-44f;
-    }
-    else if ((int)temp_v3 >= 0x3fc00000) {
-      temp_v2 = 5.60519e-45f;
-    }
-    else if (temp_v3 < temp_v5) {
-      temp_v2 = 2.66247e-44f;
-    }
-    else {
-      temp_v2 = 7.00649e-45f;
-    }
-  }
-  puVar1[0xf] = (unsigned int)temp_v2;
-  puVar1[0xb] = (unsigned int)temp_v3;
-  puVar1[0xc] = (unsigned int)((unsigned long long)temp_v4 >> 0x20);
-  *(unsigned char *)((int)puVar1 + 0x16) = 1;
-  *(unsigned char *)((int)puVar1 + 0x15) = 0;
-  pcVar5 = "EVE_BtlTex";
-  asdProcessCreateSimple("EVE_BtlTex",4,0,0,FUN_00289d8c,jobWorkDestroy34,puVar1);
-  taskCreateDraw("EVE_BtlTexDraw",0x71,0,0,FUN_00289f10,0,puVar1,pcVar5);
-  return pcVar5;
+    work->texture = (u16)-id;
+    if (position.x <= -4.0f)
+        work->animation = 17;
+    else if (position.x <= -3.0f)
+        work->animation = 3;
+    else if (position.x >= 3.0f)
+        work->animation = 18;
+    else if (position.x >= 1.5f)
+        work->animation = 4;
+    else if (position.x < 0.0f)
+        work->animation = 19;
+    else
+        work->animation = 5;
+    work->position.x = position.x;
+    work->position.y = position.y;
+    work->visible = 1;
+    work->initialized = 0;
+    u32 job = asdProcessCreateSimple(DAT_0052f6a8, 4, 0, 0, eventUpdateTextureFadeJob,
+        jobWorkDestroy34, reinterpret_cast<u32>(work));
+    taskCreateDraw(DAT_0052f698, 0x71, 0, 0, FUN_00289f10, NULL,
+        reinterpret_cast<u32>(work), reinterpret_cast<void *>(job));
+    return job;
 }
-
-} /* extern "C" */
+}

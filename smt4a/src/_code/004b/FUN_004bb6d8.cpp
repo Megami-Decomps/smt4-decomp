@@ -1,72 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bb6d8` (_code @ 0x4bb6d8, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: group/item spill choice and cache-reset instruction scheduling differ. */
+#include "gamedata/ItemFlagState.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
+s32 gameFlagIsSet(u32);
+void gameFlagSetValue(u32, u32, s32);
+ItemFlagCacheState *gameDataGetTableEntry(u8, u8);
+const ItemFlagVariant *FUN_0015fa74(u8, u8);
+void FUN_00148d68(u8, u8, s32);
 
-int FUN_00148d68(int, int, int);
-int gameFlagSetValue(unsigned int, unsigned int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00148d68. */
-extern int gameDataGetTableEntry(unsigned char, unsigned char);
-extern int FUN_0015fa74(unsigned char, unsigned char);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int gameFlagIsSet(void);
-extern int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: gameFlagSetValue. */
-
-
-void FUN_004bb6d8(unsigned int param_1,unsigned int param_2)
-
+/* Invalidate item caches whose selected variant would change with this flag. */
+void FUN_004bb6d8(u32 flag, u32 value)
 {
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int i;
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  
-  if (param_2 != 0) {
-    temp_v2 = gameFlagIsSet();
-    if (temp_v2 != 0) {
-      return;
+    if (value != 0) {
+        if (gameFlagIsSet(flag)) {
+            return;
+        }
+    } else {
+        if (!gameFlagIsSet(flag)) {
+            return;
+        }
     }
-  }
-  else {
-    temp_v2 = gameFlagIsSet();
-    if (temp_v2 == 0) {
-      return;
+    void *table = dataTableGet(2, 0);
+    ItemFlagDefinitionA *entries = (ItemFlagDefinitionA *)dataTableGetEntries(table);
+    s32 count = dataTableGetCount(table);
+    for (s32 i = 0; i < count; ++i) {
+        const ItemFlagDefinitionA *entry = &entries[i];
+        if (entry->firstFlag == flag || entry->secondFlag == flag) {
+            u8 itemId = entry->itemId;
+            u8 groupId = entry->groupId;
+            ItemFlagCacheState *state = gameDataGetTableEntry(groupId, itemId);
+            const ItemFlagVariant *previous = FUN_0015fa74(groupId, itemId);
+            gameFlagSetValue(flag, value, 0);
+            const ItemFlagVariant *current = FUN_0015fa74(groupId, itemId);
+            if (previous != current) {
+                state->count = 0;
+                state->flags &= ~0x1F;
+                FUN_00148d68(groupId, itemId, 0);
+            }
+            gameFlagSetValue(flag, value ^ 1, 0);
+        }
     }
-  }
-  temp_v3 = dataTableGet(2,0);
-  temp_v2 = dataTableGetEntries();
-  temp_v4 = dataTableGetCount(temp_v3);
-  for (i = 0; i < temp_v4; i++) {
-    if (*(unsigned short *)(temp_v2 + i * 0xa4 + 0xe) == param_1 || *(unsigned short *)(temp_v2 + i * 0xa4 + 0x10) == param_1) {
-      temp_v0 = *(unsigned char *)(temp_v2 + i * 0xa4 + 1);
-      temp_v1 = *(unsigned char *)(temp_v2 + i * 0xa4);
-      temp_v5 = gameDataGetTableEntry(temp_v1,temp_v0);
-      temp_v6 = FUN_0015fa74(temp_v1,temp_v0);
-      gameFlagSetValue(param_1,param_2,0);
-      temp_v7 = FUN_0015fa74(temp_v1,temp_v0);
-      if (temp_v6 != temp_v7) {
-        *(unsigned char *)(temp_v5 + 2) = 0;
-        *(unsigned char *)(temp_v5 + 3) = *(unsigned char *)(temp_v5 + 3) & ~0x1f;
-        FUN_00148d68(temp_v1,temp_v0,0);
-      }
-      gameFlagSetValue(param_1,param_2 ^ 1,0);
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

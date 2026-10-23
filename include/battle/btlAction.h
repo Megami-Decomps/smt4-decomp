@@ -6,13 +6,36 @@
 #include <stddef.h>
 
 struct BtlActionRecord {
-    /* 0x00 */ u8 unk00[0x48];
+    union {
+        /* 0x00 */ u8 unk00[0x48];
+        /* 0x00 */ u32 restoredValue;
+        struct {
+            u8 unk00BeforeKind[0x3c];
+            /* 0x3c */ u8 kind;
+        } animation;
+        struct {
+            u8 unk00BeforeIdentity[0x44];
+            /* 0x44 */ s8 category;
+            /* 0x45 */ s8 variant;
+        } identity;
+        struct {
+            /* 0x00 */ u8 unk00[0xC];
+            /* 0x0C */ u32 value;
+        } history;
+        struct {
+            /* 0x00 */ u8 unk00[0xC];
+            /* 0x0C */ f32 position[3];
+            /* 0x18 */ u8 unk18[0x28];
+            /* 0x40 */ f32 scale;
+        } geometry;
+    };
     /* 0x48 */ u32 task;
     /* 0x4c */ u32 unk4c;
     /* 0x50 */ u32 status;
     /* 0x54 */ u32 flags;
     union {
         /* 0x58 */ u8 unk58[0xa];
+        /* 0x58 */ u16 presentationFlags;
         struct {
             u8 unk58[8];
             /* 0x60 */ s16 combatantIndex;
@@ -40,6 +63,14 @@ typedef char BtlActionRecordLayoutCheck[sizeof(BtlActionRecord) == 0x114 &&
     offsetof(BtlActionRecord, flags) == 0x54 &&
     offsetof(BtlActionRecord, memberId) == 0x62 &&
     offsetof(BtlActionRecord, stateFlags) == 0xf8 ? 1 : -1];
+typedef char BtlActionIdentityOffsetCheck[
+    offsetof(BtlActionRecord, identity.category) == 0x44 &&
+    offsetof(BtlActionRecord, identity.variant) == 0x45 ? 1 : -1];
+typedef char BtlActionHistoryValueOffsetCheck[offsetof(BtlActionRecord, history.value) == 0xC &&
+    sizeof(BtlActionRecord) == 0x114 ? 1 : -1];
+typedef char BtlActionRestoredValueOffsetCheck[
+    offsetof(BtlActionRecord, restoredValue) == 0 &&
+    sizeof(BtlActionRecord) == 0x114 ? 1 : -1];
 typedef char BtlActionApocalypseMemberIdOffsetCheck[
     offsetof(BtlActionRecord, apocalypse.memberId) == 0x6A ? 1 : -1];
 typedef char BtlActionParticipantOffsetCheck[
@@ -47,6 +78,10 @@ typedef char BtlActionParticipantOffsetCheck[
 typedef char BtlActionEditorRestoreOffsetCheck[
     offsetof(BtlActionRecord, editorRestore.current) == 0x64 &&
     offsetof(BtlActionRecord, editorRestore.saved) == 0x68 ? 1 : -1];
+typedef char BtlActionAnimationKindOffsetCheck[
+    offsetof(BtlActionRecord, animation.kind) == 0x3c ? 1 : -1];
+typedef char BtlActionPresentationOffsetCheck[
+    offsetof(BtlActionRecord, presentationFlags) == 0x58 ? 1 : -1];
 
 /* The module global: a word and the action data block's pointer, side by side. */
 typedef struct BtlActionGlobals {
@@ -89,4 +124,20 @@ struct BtlActionResourceEntry {
 
 typedef char BtlActionResourceEntrySizeCheck[sizeof(BtlActionResourceEntry) == 0x1C ? 1 : -1];
 
+
+struct BtlActionSelection {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u16 memberId;
+    /* 0x12 */ s8 category;
+    /* 0x13 */ s8 variant;
+};
+typedef char BtlActionSelectionLayout[sizeof(BtlActionSelection) == 0x14 &&
+    offsetof(BtlActionSelection, memberId) == 0x10 &&
+    offsetof(BtlActionSelection, category) == 0x12 &&
+    offsetof(BtlActionSelection, variant) == 0x13 ? 1 : -1];
+
+typedef char BtlActionGeometryOffsetsCheck[
+    offsetof(BtlActionRecord, geometry.position) == 0xC &&
+    offsetof(BtlActionRecord, geometry.scale) == 0x40 &&
+    sizeof(BtlActionRecord) == 0x114 ? 1 : -1];
 #endif

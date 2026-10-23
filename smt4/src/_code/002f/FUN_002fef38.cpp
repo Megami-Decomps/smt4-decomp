@@ -1,90 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fef38` (_code @ 0x2fef38, 0x154 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W4_Match6_BtlEntry.h"
+#include "shard/PassiveSkill.h"
+#include "gamedata/DevilRecord.h"
 
 extern "C" {
+s32 scrGetArg(u32 index);
+void scrSetResult(s32 result);
+BtlMainState *btlGetMainState();
+const ActiveSkillRecord *FUN_002ae164(u32 skill);
 
-int scrSetResult(int);
-int FUN_002ae164(void);
-int devilGetRecord(void);
-
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: devilGetRecord. */
-
-
-unsigned int FUN_002fef38(void)
-
+u32 FUN_002fef38()
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v4 = 0;
-  do {
-    temp_v1 = btlGetMainState();
-    puVar5 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + temp_v4 * 0x288);
-    temp_v2 = *puVar5;
-    if ((temp_v2 & 0x10) != 0 && (temp_v2 & 1) != 0) {
-      temp_v5 = (temp_v2 & 0x40) == 0;
-      if (temp_v5) {
-        temp_v2 = (unsigned int)*(unsigned short *)((int)puVar5 + 0xce);
-      }
-      if (temp_v5 && temp_v2 == temp_v0) {
-        if (puVar5[0x9e] != 0) {
-          temp_v1 = 0;
-          do {
-            temp_v2 = (unsigned int)*(unsigned short *)(puVar5[0x9e] + temp_v1 * 2 + 0x34);
-            FUN_002ae164();
-            if ((temp_v2 != 0) && (*(char *)(temp_v2 + 0x23) == '\x03')) {
-              scrSetResult(1);
-              return 1;
+    u32 id = scrGetArg(0);
+    for (s32 index = 0; index < BTL_ENTRY_COUNT; ++index) {
+        BtlEntry *entry = &btlGetMainState()->entries[index];
+        if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) != 0 &&
+            (entry->flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&
+            (entry->flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && entry->id == id) {
+            if (entry->equipA != NULL) {
+                for (s32 slot = 0; slot < 8; ++slot) {
+                    const ActiveSkillRecord *skill = FUN_002ae164(entry->equipA->skillIds[slot]);
+                    if (skill != NULL && skill->classification.category == 3) {
+                        scrSetResult(1);
+                        return 1;
+                    }
+                }
             }
-            temp_v1 = temp_v1 + 1;
-          } while (temp_v1 < 8);
-        }
-        if (puVar5[0x9f] != 0) {
-          temp_v1 = 0;
-          do {
-            temp_v2 = (unsigned int)*(unsigned short *)(puVar5[0x9f] + temp_v1 * 2 + 0x34);
-            FUN_002ae164();
-            if ((temp_v2 != 0) && (*(char *)(temp_v2 + 0x23) == '\x03')) {
-              scrSetResult(1);
-              return 1;
+            if (entry->equipB != NULL) {
+                for (s32 slot = 0; slot < 8; ++slot) {
+                    const ActiveSkillRecord *skill = FUN_002ae164(entry->equipB->skillIds[slot]);
+                    if (skill != NULL && skill->classification.category == 3) {
+                        scrSetResult(1);
+                        return 1;
+                    }
+                }
             }
-            temp_v1 = temp_v1 + 1;
-          } while (temp_v1 < 8);
-        }
-        if (puVar5[0xa1] != 0) {
-          temp_v2 = (unsigned int)*(unsigned short *)((int)puVar5 + 0xce);
-          devilGetRecord();
-          temp_v1 = 0;
-          do {
-            temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + temp_v1 * 2 + 0x3c);
-            FUN_002ae164();
-            if ((temp_v3 != 0) && (*(char *)(temp_v3 + 0x23) == '\x03')) {
-              scrSetResult(1);
-              return 1;
+            if (entry->devil != NULL) {
+                const DevilRecord *record = reinterpret_cast<const DevilRecord *>(devilGetRecord(entry->id));
+                for (s32 slot = 0; slot < 8; ++slot) {
+                    const ActiveSkillRecord *skill = FUN_002ae164(record->skillList.ids[slot]);
+                    if (skill != NULL && skill->classification.category == 3) {
+                        scrSetResult(1);
+                        return 1;
+                    }
+                }
             }
-            temp_v1 = temp_v1 + 1;
-          } while (temp_v1 < 8);
         }
-      }
     }
-    temp_v4 = temp_v4 + 1;
-    if (temp_v4 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
-    }
-  } while( 1 );
+    scrSetResult(0);
+    return 1;
 }
-
-} /* extern "C" */
+}

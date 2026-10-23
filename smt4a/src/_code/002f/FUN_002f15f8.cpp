@@ -1,89 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f15f8` (_code @ 0x2f15f8, 0x13c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: speed-store scheduling, reposition constant register and paired menu-state stores differ. */
+#include "shard/W5_W5Match7_UiQuest.h"
+
+/* Local view avoids increasing the alignment/extent of the shared nine-byte unk934 region. */
+struct QuestFocusAnimationView {
+    u8 unk000[0x408];
+    u8 sprite[0x8C];
+    u8 unk494[0x938 - 0x494];
+    f32 speed;
+    u8 reposition;
+};
+typedef char QuestFocusAnimationViewOffsetsCheck[
+    offsetof(QuestFocusAnimationView, sprite) == 0x408 &&
+    offsetof(QuestFocusAnimationView, speed) == 0x938 &&
+    offsetof(QuestFocusAnimationView, reposition) == 0x93C ? 1 : -1];
 
 extern "C" {
+u8 FUN_001bd100(u32 questId);
+void uiSpriteSetKeyframe(void *sprite, s32 frame, s32 flags);
+void uiSpriteSetImageKeyframe(void *sprite, s32 image, s32 flags);
+s32 objectApplyIfUnblocked(void *cursor);
+void FUN_002a4964(void *cursor, s32 index);
+void uiFadeRequestClear(void);
+void sysPlaySe(u32 sound);
+void sysPlayVoice(u32 voice);
 
-int sysPlaySe(int);
-int uiSpriteSetKeyframe(int, int);
-int uiSpriteSetImageKeyframe(int, int, int);
-int FUN_002a4964(int, int);
-int uiFadeRequestClear(void);
-int sysPlayVoice(int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern int g_uiQuest; /* 0x57f28c */
-
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-extern unsigned char FUN_001bd100(unsigned int);
-/* Supplied declaration required: FUN_002a4964. */
-/* Supplied declaration required: uiFadeRequestClear. */
-extern int objectApplyIfUnblocked(int);
-/* Supplied declaration required: sysPlayVoice. */
-
-
-void FUN_002f15f8(unsigned int param_1,int param_2)
-
+// Focus a quest, optionally reposition its list cursor, and enter the voiced transition state.
+void FUN_002f15f8(u32 questId, s32 reposition)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  
-  temp_v0 = g_uiQuest;
-  *(short *)(g_uiQuest + 0xcca) = (short)param_1;
-  temp_v1 = FUN_001bd100(param_1);
-  *(unsigned char *)(temp_v0 + 0x90c) = temp_v1;
-  *(unsigned int *)(temp_v0 + 0x938) = 0x3e55cfab;
-  uiSpriteSetKeyframe(temp_v0 + 0x408,0);
-  uiSpriteSetImageKeyframe(temp_v0 + 0x408,8,0);
-  if (param_2 == 0) {
-    *(unsigned char *)(temp_v0 + 0x93c) = 0;
-  }
-  else {
-    *(unsigned char *)(temp_v0 + 0x93c) = 1;
-    temp_v4 = 0;
-    if (*(char *)(temp_v0 + 0x90c) != '\0') {
-      temp_v6 = temp_v0 + 0x948;
-      temp_v5 = temp_v0 + 0xa10;
-    }
-    else {
-      temp_v6 = temp_v0 + 0x9ac;
-      temp_v5 = temp_v0 + 0xad6;
-    }
-    temp_v2 = objectApplyIfUnblocked(temp_v6);
-    if (0 < temp_v2) {
-      do {
-        if (*(unsigned short *)(temp_v5 + temp_v4 * 2) == param_1) {
-          FUN_002a4964(temp_v6,temp_v4);
-          break;
+    UiQuestApoc *quest = g_uiQuest;
+    QuestFocusAnimationView *animation = (QuestFocusAnimationView *)quest;
+    quest->questId = questId;
+    quest->unk90c = FUN_001bd100(questId);
+    animation->speed = 0.2088f;
+    uiSpriteSetKeyframe(animation->sprite, 0, 0);
+    uiSpriteSetImageKeyframe(animation->sprite, 8, 0);
+    if (!reposition) {
+        animation->reposition = 0;
+    } else {
+        animation->reposition = 1;
+        void *cursor;
+        const u16 *list;
+        if (quest->unk90c) {
+            cursor = quest->alternateView()->cursor;
+            list = quest->alternateView()->list;
+        } else {
+            cursor = quest->cursor;
+            list = quest->list;
         }
-        temp_v4 = temp_v4 + 1;
-        temp_v2 = objectApplyIfUnblocked(temp_v6);
-      } while (temp_v4 < temp_v2);
+        for (s32 index = 0; index < objectApplyIfUnblocked(cursor); ++index) {
+            if (list[index] == questId) {
+                FUN_002a4964(cursor, index);
+                break;
+            }
+        }
+        uiSpriteSetKeyframe(quest->mainSprite, 0, 0);
+        uiSpriteSetImageKeyframe(quest->mainSprite, 8, 0);
     }
-    uiSpriteSetKeyframe(temp_v0 + 0x34,0);
-    uiSpriteSetImageKeyframe(temp_v0 + 0x34,8,0);
-  }
-  uiFadeRequestClear();
-  temp_v0 = g_uiQuest;
-  temp_v3 = *(unsigned int *)(g_uiQuest + 4);
-  *(unsigned int *)(g_uiQuest + 4) = 0x14;
-  *(unsigned int *)(temp_v0 + 8) = temp_v3;
-  *(unsigned int *)(temp_v0 + 0x10) = 0;
-  sysPlaySe(0x1a);
-  sysPlayVoice(0x10000cb);
-  return;
+    uiFadeRequestClear();
+    UiQuestApoc *current = g_uiQuest;
+    s32 previous = current->menuState;
+    current->menuState = 20;
+    current->previousMenuState = previous;
+    current->menuTimer = 0;
+    sysPlaySe(26);
+    sysPlayVoice(0x10000CB);
 }
-
-} /* extern "C" */
+}

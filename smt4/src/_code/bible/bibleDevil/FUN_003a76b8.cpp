@@ -1,86 +1,70 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a76b8` (_code @ 0x3a76b8, 0x178 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: preview state stores, list-entry base caching and party/preview branch placement differ. */
+#include "classes/Obj42247c.h"
+#include "shard/W6_W6Match4_FlaggedValueHolder.h"
+#include "gamedata/UnitStats.h"
 
+struct CompendiumPreviewHandle { u8 prefix[0x108]; s32 mode; };
 extern "C" {
+s32 utilityReturnSuccess(const void *input);
+CompendiumPreviewHandle *FUN_00297060(u32 first, u32 second);
+s32 flaggedValueHolderGetTotal(const FlaggedValueHolder *selection);
+void buttonHelpSetPreset(u32 preset);
+void *partyMemberFindById(u16 id);
+void FUN_0029da34(s32 screen, s32 enabled, u16 id, void *unit);
+s32 FUN_0029ce60(u16 id, u32 source, s32 a, s32 specialMode, s32 b);
+void FUN_0029e648(s32 enabled, s32 value);
+void messageTargetSetValue(s32 target, s32 mode);
+void unitInitializeFromSavedRecord(u16 id, StatBlock *unit);
+void FUN_00233240(void *timers, s32 index);
+void FUN_0022de74(Obj42247c *view);
+extern s32 DAT_0043d9c8[2];
 
-int FUN_0022de74(int *);
-int FUN_00233240(int *, int);
-int FUN_00297060(int, int);
-int FUN_0029ce60(unsigned int, int, int);
-int FUN_0029d770(int, unsigned char [1548]);
-int FUN_0029da34(...);
-int messageTargetSetValue(unsigned int, int);
-int FUN_0029e648(int, int);
-int buttonHelpSetPreset(int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp620; /* 0x620: local_620 */
-} param_1_stack;
-
-extern unsigned char DAT_0043d9c8; /* 0x43d9c8 */
-
-extern int utilityReturnSuccess(int);
-/* Supplied declaration required: FUN_0022de74. */
-/* Supplied declaration required: FUN_00233240. */
-extern int flaggedValueHolderGetTotal(int *);
-/* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_0029ce60. */
-/* Supplied declaration required: FUN_0029d770. */
-/* Supplied declaration required: FUN_0029da34. */
-/* Supplied declaration required: messageTargetSetValue. */
-/* Supplied declaration required: FUN_0029e648. */
-extern unsigned int partyMemberFindById(unsigned short);
-/* Supplied declaration required: buttonHelpSetPreset. */
-
-
-void FUN_003a76b8(int *param_1)
-
+void FUN_003a76b8(Obj42247c *view)
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4 [1548];
-  
-  temp_v1 = (**(romwright_code **)(*param_1 + 0x24))(param_1);
-  if ((temp_v1 != 0) && (temp_v1 = utilityReturnSuccess((int)param_1 + 0x96), temp_v1 == 0)) {
-    temp_v1 = param_1[0x166];
-    FUN_00297060(temp_v1,param_1[0x167]);
-    param_1[0x168] = temp_v1;
-    *(unsigned int *)(temp_v1 + 0x108) = 2;
-    param_1[5] = 1;
-    param_1[6] = 0;
-    *(unsigned char *)((int)param_1 + 0x5a5) = 1;
-    if ((char)param_1[0x169] != '\0') {
-      temp_v1 = flaggedValueHolderGetTotal(param_1 + 8);
-      temp_v1 = param_1[temp_v1 * 8 + 0x16b];
-      buttonHelpSetPreset(0x4c);
-      temp_v2 = partyMemberFindById((short)temp_v1);
-      FUN_0029da34(0,1,(short)temp_v1,temp_v2);
+    // The concrete compendium view's source flag and entry array extend past the shared base.
+    struct DetailView {
+        u8 prefix[0x14];
+        u32 phase, timer;
+        u8 unk1C[4];
+        FlaggedValueHolder selection;
+        s8 sortMode;
+        u8 unk95;
+        u8 input[0x46];
+        u8 timers[0x4bc];
+        u32 handleA, handleB;
+        CompendiumPreviewHandle *preview;
+        u8 fromParty, source;
+        u8 unk5A6[2];
+        struct { u32 unk00; u16 id; u8 unk06[0x1a]; } entries[1];
+    };
+    typedef char LayoutCheck[__INTADDR__(&((DetailView *)0)->input) == 0x96 &&
+        __INTADDR__(&((DetailView *)0)->entries) == 0x5a8 ? 1 : -1];
+    DetailView *state = reinterpret_cast<DetailView *>(view);
+    if (view->isScreenReady() != 0 && utilityReturnSuccess(state->input) == 0) {
+        CompendiumPreviewHandle *preview = FUN_00297060(state->handleA, state->handleB);
+        state->preview = preview;
+        preview->mode = 2;
+        state->phase = 1;
+        state->timer = 0;
+        state->source = 1;
+        if (state->fromParty != 0) {
+            u16 id = state->entries[flaggedValueHolderGetTotal(&state->selection)].id;
+            buttonHelpSetPreset(0x4c);
+            FUN_0029da34(0, 1, id, partyMemberFindById(id));
+        } else {
+            s16 id = state->entries[flaggedValueHolderGetTotal(&state->selection)].id;
+            s32 cost = FUN_0029ce60(static_cast<u16>(id), state->source, 0, state->sortMode >= 100, 0);
+            FUN_0029e648(1, 0);
+            messageTargetSetValue(-cost, 0);
+            buttonHelpSetPreset(0x2d);
+            StatBlock unit;
+            unitInitializeFromSavedRecord(static_cast<u16>(id), &unit);
+            FUN_0029da34(0, 1, static_cast<u16>(id), &unit);
+        }
+        FUN_00233240(state->timers, 0);
+        FUN_00233240(state->timers, 1);
+        DAT_0043d9c8[1] = -1;
+        FUN_0022de74(view);
     }
-    else {
-      temp_v1 = flaggedValueHolderGetTotal(param_1 + 8);
-      temp_v0 = *(unsigned short *)(param_1 + temp_v1 * 8 + 0x16b);
-      temp_v3 = (unsigned int)temp_v0;
-      FUN_0029ce60(temp_v3,*(unsigned char *)((int)param_1 + 0x5a5),0);
-      FUN_0029e648(1,0);
-      messageTargetSetValue(-temp_v3,0);
-      buttonHelpSetPreset(0x2d);
-      FUN_0029d770(temp_v0,temp_v4);
-      FUN_0029da34(0,1,temp_v0,temp_v4);
-    }
-    FUN_00233240(param_1 + 0x37,0);
-    FUN_00233240(param_1 + 0x37,1);
-    (*(unsigned int *)((unsigned char *)&DAT_0043d9c8 + 0x4)) = 0xffffffff;
-    FUN_0022de74(param_1);
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

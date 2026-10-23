@@ -16,7 +16,7 @@ int moveCameraCtrlCreateEntry(...);
 int linkSlotSetFlag1C(...);
 int linkSlotSetFlag20(...);
 int listSelectItem(...);
-int FUN_00407978(void);
+int soundResetSpatialState(void);
 int FUN_00407ab0(...);
 int FUN_00407eb0(...);
 int FUN_004080bc(...);
@@ -110,7 +110,7 @@ extern int screenFadeIsBusy(void);
 /* Supplied declaration required: linkSlotSetFlag1C. */
 /* Supplied declaration required: linkSlotSetFlag20. */
 /* Supplied declaration required: listSelectItem. */
-/* Supplied declaration required: FUN_00407978. */
+/* Supplied declaration required: soundResetSpatialState. */
 /* Supplied declaration required: FUN_00407ab0. */
 /* Supplied declaration required: FUN_00407eb0. */
 /* Supplied declaration required: FUN_004080bc. */
@@ -307,7 +307,7 @@ void FUN_004b990c(int param_1)
         temp_v6 = temp_v6 - 0x4f0;
       }
       *(int *)(param_1 + 0x1218) = temp_v6;
-      FUN_00407978();
+      soundResetSpatialState();
       textFormatBuffer(temp_v9,&LAB_004b9fdc,"mikado/",*(int *)(param_1 + 0x1118) + 0x40);
       if (((*(short *)(*(int *)(param_1 + 0x1118) + 100) != 0) &&
           (temp_v6 = gameFlagIsSet(), temp_v6 != 0)) ||

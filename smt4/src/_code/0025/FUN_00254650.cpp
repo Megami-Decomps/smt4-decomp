@@ -1,89 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00254650` (_code @ 0x254650, 0x1a8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: zoom helper merges eye arguments; VFP constants and scale-load scheduling differ. */
+#include "camp/CampCec/OutfitPreview.h"
+/* Interaction fields extend beyond the shared model-preview prefix. */
+struct PreviewInteractionView {
+    union {
+        OutfitPreview preview;
+        struct {
+            u8 unk00[0x18];
+            f32 scale;
+        } zoom;
+    };
+    u32 unk20;
+    u32 animation;
+    s32 zoomSteps;
+};
+struct PreviewAnimationIds { u32 values[3]; };
+typedef char PreviewInteractionOffsets[(offsetof(PreviewInteractionView, animation) == 0x24 && offsetof(PreviewInteractionView, zoomSteps) == 0x28) ? 1 : -1];
 extern "C" {
-
-int FUN_0020ffe8(unsigned int, unsigned int);
-int statusCameraSetEye(void);
-int objSetAnglesDegrees(unsigned int, int);
-int FUN_00293e08(unsigned int);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0020ffe8. */
-/* Supplied declaration required: statusCameraSetEye. */
-/* Supplied declaration required: objSetAnglesDegrees. */
-/* Supplied declaration required: FUN_00293e08. */
-
-
-void FUN_00254650(int param_1,unsigned int param_2)
-
-{
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int in_fpscr;
-  float temp_v1;
-  unsigned int temp_v2 [8];
-  
-  switch(param_2) {
-  case 0:
-    if ((int)*(float *)(param_1 + 0x18) < 0x3cf5c28f) {
-      *(float *)(param_1 + 0x18) = *(float *)(param_1 + 0x18) + 0.0005f;
-      *(int *)(param_1 + 0x28) = *(int *)(param_1 + 0x28) + 1;
-    }
-    FUN_00293e08(*(unsigned int *)(param_1 + 0x1c));
-    temp_v0 = *(int *)(param_1 + 0x28);
-    break;
-  case 1:
-    if ((int)*(float *)(param_1 + 0x18) >= 0x3c449ba7) {
-      *(float *)(param_1 + 0x18) = *(float *)(param_1 + 0x18) - 0.0005f;
-      *(int *)(param_1 + 0x28) = *(int *)(param_1 + 0x28) - 1;
-    }
-    FUN_00293e08(*(unsigned int *)(param_1 + 0x1c));
-    temp_v0 = *(int *)(param_1 + 0x28);
-    break;
-  case 2:
-    temp_v1 = *(float *)(param_1 + 0x10) + 5.0f;
-    *(float *)(param_1 + 0x10) = temp_v1;
-    if ((int)temp_v1 < 0x43b40001) {
-      objSetAnglesDegrees(*(unsigned int *)(param_1 + 0x1c),param_1 + 0xc);
-      return;
-    }
-    temp_v1 = temp_v1 - 360.0f;
-    *(float *)(param_1 + 0x10) = temp_v1;
-    objSetAnglesDegrees(*(unsigned int *)(param_1 + 0x1c),param_1 + 0xc);
-    return;
-  case 3:
-    temp_v1 = *(float *)(param_1 + 0x10) - 5.0f;
-    *(float *)(param_1 + 0x10) = temp_v1;
-    if (0.0f <= temp_v1) {
-      objSetAnglesDegrees(*(unsigned int *)(param_1 + 0x1c),param_1 + 0xc);
-      return;
-    }
-    temp_v1 = temp_v1 + 360.0f;
-    *(float *)(param_1 + 0x10) = temp_v1;
-    objSetAnglesDegrees(*(unsigned int *)(param_1 + 0x1c),param_1 + 0xc);
-    return;
-  case 4:
-    temp_v2[0] = 0;
-    temp_v2[1] = 2;
-    temp_v2[2] = 0x12;
-    FUN_0020ffe8(*(unsigned int *)(param_1 + 0x1c),temp_v2[*(int *)(param_1 + 0x24)]);
-    return;
-  default:
-    return;
-  }
-  if (0 < temp_v0) {
-    VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  }
-  statusCameraSetEye();
-  return;
+extern const PreviewAnimationIds DAT_004028e0;
+void FUN_00293e08(void *model, f32 x, f32 y, f32 z);
+void statusCameraSetEye(f32 x, f32 y, f32 z);
+void objSetAnglesDegrees(void *model, const f32 *angles);
+void FUN_0020ffe8(void *model, u32 animation, f32 start, f32 blend);
 }
-
-} /* extern "C" */
+static inline void updatePreviewZoom(PreviewInteractionView *work)
+{
+    FUN_00293e08(work->preview.modelGroup, work->zoom.scale, work->zoom.scale, work->zoom.scale);
+    f32 eyeY = 6.3f;
+    if (work->zoomSteps > 0)
+        eyeY += static_cast<f32>(work->zoomSteps) * 0.08f;
+    statusCameraSetEye(0.0f, eyeY, 4.5f);
+}
+extern "C" void FUN_00254650(PreviewInteractionView *work, u32 action)
+{
+    switch (action) {
+    case 0:
+        if (work->zoom.scale < 0.03f) {
+            work->zoom.scale += 0.0005f;
+            ++work->zoomSteps;
+        }
+        updatePreviewZoom(work);
+        break;
+    case 1:
+        if (work->zoom.scale > 0.012f) {
+            work->zoom.scale -= 0.0005f;
+            --work->zoomSteps;
+        }
+        updatePreviewZoom(work);
+        break;
+    case 2:
+        work->preview.rotation[1] += 5.0f;
+        if (work->preview.rotation[1] > 360.0f)
+            work->preview.rotation[1] -= 360.0f;
+        objSetAnglesDegrees(work->preview.modelGroup, work->preview.rotation);
+        break;
+    case 3:
+        work->preview.rotation[1] -= 5.0f;
+        if (work->preview.rotation[1] < 0.0f)
+            work->preview.rotation[1] += 360.0f;
+        objSetAnglesDegrees(work->preview.modelGroup, work->preview.rotation);
+        break;
+    case 4:
+        PreviewAnimationIds ids = DAT_004028e0;
+        FUN_0020ffe8(work->preview.modelGroup, ids.values[work->animation], 0.0f, 0.0f);
+        break;
+    }
+}

@@ -109,6 +109,18 @@ struct FlagWorkBanks {
             s8 height; // 0x0e05
         } gridSize;
         struct {
+            u8 unk07c4BeforeGridSetup[0x63c];
+            s8 firstX; // 0x0e00
+            s8 firstY; // 0x0e01
+            s8 secondX; // 0x0e02
+            s8 secondY; // 0x0e03
+            u8 unk0e04[4];
+            u8 specialCount; // 0x0e08
+            u8 ready; // 0x0e09
+            u8 displayX; // 0x0e0a
+            u8 displayY; // 0x0e0b
+        } gridSetup;
+        struct {
             u8 unk07c4BeforeSavePointMap[0xe08];
             u32 handle; // 0x15cc
         } savePointMap;
@@ -121,6 +133,16 @@ struct FlagWorkBanks {
     /* 0x167c */ u32 third[1];
 };
 typedef char FlagWorkBanksSizeCheck[sizeof(FlagWorkBanks) == 0x1680 ? 1 : -1];
+typedef char FlagWorkBanksGridSetupOffsets[
+    offsetof(FlagWorkBanks, gridSetup.firstX) == 0xe00 &&
+    offsetof(FlagWorkBanks, gridSetup.firstY) == 0xe01 &&
+    offsetof(FlagWorkBanks, gridSetup.secondX) == 0xe02 &&
+    offsetof(FlagWorkBanks, gridSetup.secondY) == 0xe03 &&
+    offsetof(FlagWorkBanks, gridSetup.specialCount) == 0xe08 &&
+    offsetof(FlagWorkBanks, gridSetup.ready) == 0xe09 &&
+    offsetof(FlagWorkBanks, gridSetup.displayX) == 0xe0a &&
+    offsetof(FlagWorkBanks, gridSetup.displayY) == 0xe0b &&
+    sizeof(FlagWorkBanks) == 0x1680 ? 1 : -1];
 typedef char FlagWorkBanksMappedFlagsOffsetCheck[
     offsetof(FlagWorkBanks, mappedFlags.words) == 0xd0c &&
     offsetof(FlagWorkBanks, gridSize.width) == 0xe04 &&

@@ -1,98 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004083a8` (_code @ 0x4083a8, 0x14c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: byte-mask materialization, zero-result return sharing and saved registers differ. */
+#include "map/mapDepart.h"
+#include <stddef.h>
 
+struct InteractionVariantFlags { u8 bits[8]; };
+struct InteractionFlagBankView {
+    u8 unk000[0x2F0];
+    InteractionVariantFlags extended[320];
+    InteractionVariantFlags normal[1];
+};
+typedef char InteractionFlagBankOffsets[offsetof(InteractionFlagBankView, normal) == 0xCF0 ? 1 : -1];
 extern "C" {
+extern GameStateA g_gameState;
+InteractionFlagBankView *FUN_002c2710();
+s32 gameFlagIsSet(u32);
 
-extern int g_gameState; /* 0x5f15fc */
-extern unsigned int *DAT_005f1600; /* 0x5f1600 */
-
-extern int gameFlagIsSet(unsigned int);
-extern int FUN_002c2710(void);
-
-
-unsigned char FUN_004083a8(int param_1,unsigned int param_2)
-
+bool FUN_004083a8(s32 id, u32 variant)
 {
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned char *pbVar3;
-  
-  temp_v0 = FUN_002c2710();
-  temp_v0 = temp_v0 + param_1 * 8;
-  if (param_1 >= 0xc0) {
-    pbVar3 = (unsigned char *)(temp_v0 + 0x2f0);
-  }
-  else {
-    pbVar3 = (unsigned char *)(temp_v0 + 0xcf0);
-  }
-  if (param_1 != 0x93) {
-    if ((param_1 == 0xbb || param_1 == 0xbc) || param_1 == 0xbd) {
-      return 1;
+    InteractionFlagBankView *save = FUN_002c2710();
+    InteractionVariantFlags *flags = id > 191 ? &save->extended[id] : &save->normal[id];
+    if (id == 0x93) {
+        if (gameFlagIsSet(0x9D))
+            return false;
+    } else if (id == 0xBB || id == 0xBC || id == 0xBD) {
+        return true;
+    } else if (id == 0xBE) {
+        if (variant != 2)
+            return true;
+    } else if (id == 0x79) {
+        if (variant == 3)
+            return g_gameState.mode == 0x17 && g_gameState.submode == 6 && (flags->bits[0] & 8);
+    } else if (id == 0x7A) {
+        if (variant == 2)
+            return g_gameState.mode == 0x17 && g_gameState.submode == 1 && (flags->bits[0] & 4);
+    } else if (id == 0xB3) {
+        if (variant == 0x2D || variant == 0x2E)
+            return true;
+        if (variant == 0x2F || variant == 0x30)
+            return true;
+        if (variant == 0x31 || variant == 0x32)
+            return true;
+        if (variant == 0x33 || variant == 0x34)
+            return true;
+        if (variant == 0x2A || variant == 0x2B || variant == 0x2C)
+            return true;
     }
-    if (param_1 != 0xbe) {
-      if (param_1 != 0x79) {
-        if (param_1 != 0x7a) {
-          if (param_1 == 0xb3) {
-            if (param_2 == 0x2d || param_2 == 0x2e) {
-              return 1;
-            }
-            if (param_2 == 0x2f || param_2 == 0x30) {
-              return 1;
-            }
-            if (param_2 == 0x31 || param_2 == 0x32) {
-              return 1;
-            }
-            if (param_2 == 0x33 || param_2 == 0x34) {
-              return 1;
-            }
-            if ((param_2 == 0x2a || param_2 == 0x2b) || param_2 == 0x2c) {
-              return 1;
-            }
-          }
-        }
-        else if (param_2 == 2) {
-          puVar1 = (unsigned int *)&g_gameState;
-          if (g_gameState == 0x17) {
-            puVar1 = DAT_005f1600;
-          }
-          if (g_gameState == 0x17 && puVar1 == (unsigned int *)0x1) {
-            if ((*pbVar3 & 4) != 0) {
-              return 1;
-            }
-            return *pbVar3 & 4;
-          }
-          return 0;
-        }
-      }
-      else if (param_2 == 3) {
-        puVar1 = (unsigned int *)&g_gameState;
-        if (g_gameState == 0x17) {
-          puVar1 = DAT_005f1600;
-        }
-        if (g_gameState == 0x17 && puVar1 == (unsigned int *)0x6) {
-          if ((*pbVar3 & 8) == 0) {
-            return *pbVar3 & 8;
-          }
-          return 1;
-        }
-        return 0;
-      }
-    }
-    else if (param_2 != 2) {
-      return 1;
-    }
-  }
-  else {
-    temp_v0 = gameFlagIsSet(0x9d);
-    if (temp_v0 != 0) {
-      return 0;
-    }
-  }
-  if (((1 << (param_2 & 7)) & 0xffU & (unsigned int)pbVar3[param_2 >> 3]) != 0) {
-    return 1;
-  }
-  return 0;
+    return (flags->bits[variant >> 3] & static_cast<u8>(1 << (variant & 7))) != 0;
 }
-
-} /* extern "C" */
+}

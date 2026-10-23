@@ -1,66 +1,79 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039568c` (_code @ 0x39568c, 0x144 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: global/component base loads, signed modulus and movement VFP multiplication scheduling differ. */
+#include "map/lmapMain.h"
+
+struct AmbientMovementTransform {
+    u32 unk00;
+    MapVector position;
+    u8 unk10[0x24];
+    s32 frame;
+    u32 unk38;
+    u32 sound;
+};
+struct AmbientMovementActor {
+    u8 unk00[0x24];
+    AmbientMovementTransform movement;
+};
+struct AmbientMovementWork {
+    u8 unk00[0xc];
+    AmbientMovementActor *actor;
+    MapVector velocity;
+    s32 state;
+    u32 duration;
+};
+typedef char AmbientMovementOffsets[offsetof(AmbientMovementActor, movement) == 0x24 &&
+    offsetof(AmbientMovementTransform, position) == 4 &&
+    offsetof(AmbientMovementTransform, frame) == 0x34 && offsetof(AmbientMovementTransform, sound) == 0x3c &&
+    offsetof(AmbientMovementWork, velocity) == 0x10 && offsetof(AmbientMovementWork, state) == 0x1c &&
+    offsetof(AmbientMovementWork, duration) == 0x20 ? 1 : -1];
 
 extern "C" {
+extern GameState g_gameState;
+extern LmapScene *g_lmapScene;
+void FUN_0039560c(AmbientMovementWork *work);
+u32 randNextInRange(u32 limit);
+f32 mathDistanceBetweenPoints(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
+void eventSoundPlayByKind(u32 sound, s32 kind, f32 x, f32 y, f32 z);
 
-int eventSoundPlayByKind(unsigned int, int);
-int mathDistanceBetweenPoints(void);
-int FUN_0039560c(int);
-
-extern signed char DAT_0049f934; /* 0x49f934 */
-extern float DAT_0049fb70; /* 0x49fb70 */
-extern unsigned int DAT_0049fb74; /* 0x49fb74 */
-extern int DAT_0049fb78; /* 0x49fb78 */
-extern signed char DAT_0049fc64; /* 0x49fc64 */
-
-/* Supplied declaration required: eventSoundPlayByKind. */
-/* Supplied declaration required: mathDistanceBetweenPoints. */
-extern unsigned int randNextInRange(unsigned int);
-/* Supplied declaration required: FUN_0039560c. */
-
-
-void FUN_0039568c(int param_1)
-
+void FUN_0039568c(AmbientMovementWork *work)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  float temp_v3;
-  
-  temp_v0 = *(int *)(param_1 + 0xc);
-  if ((DAT_0049fc64 == '\0') && (DAT_0049f934 == '\0')) {
-    if (*(int *)(param_1 + 0x1c) != 0) {
-      if (*(int *)(param_1 + 0x1c) == 1) {
-        FUN_0039560c(param_1);
-        *(float *)(temp_v0 + 0x28) = *(float *)(temp_v0 + 0x28) + *(float *)(param_1 + 0x10);
-        *(float *)(temp_v0 + 0x2c) = *(float *)(temp_v0 + 0x2c) + *(float *)(param_1 + 0x14);
-        *(float *)(temp_v0 + 0x30) = *(float *)(temp_v0 + 0x30) + *(float *)(param_1 + 0x18);
-      }
+    // Naming this float range in padding at 0x252 would shift the shared layout.
+    struct AmbientGlobalsView {
+        u8 unk000[0x254];
+        f32 radius;
+        u32 duration;
+        s32 blocked;
+        u8 unk260[0xe8];
+        u8 paused;
+    };
+    typedef char AmbientGlobalsOffsets[offsetof(AmbientGlobalsView, radius) == 0x254 &&
+        offsetof(AmbientGlobalsView, blocked) == 0x25c &&
+        offsetof(AmbientGlobalsView, paused) == 0x348 ? 1 : -1];
+    AmbientMovementTransform *movement = &work->actor->movement;
+    AmbientGlobalsView *globals = reinterpret_cast<AmbientGlobalsView *>(&g_gameState);
+    if (globals->paused || g_gameState.unk18) {
+        return;
     }
-    else if (DAT_0049fb78 == 0) {
-      temp_v1 = *(unsigned int *)(temp_v0 + 0x58);
-      temp_v2 = (int)(((long long)(int)temp_v1 * -0x77777777 + ((unsigned long long)temp_v1 << 0x20)) >> 0x20);
-      if ((temp_v1 + ((temp_v2 >> 3) - (temp_v2 >> 0x1f)) * -0xf == 0) &&
-         (temp_v1 = randNextInRange(100), temp_v1 < 0x1e)) {
-        temp_v3 = *(float *)(temp_v0 + 0x28);
-        mathDistanceBetweenPoints();
-        if (temp_v3 < DAT_0049fb70) {
-          *(unsigned int *)(param_1 + 0x20) = DAT_0049fb74;
-          temp_v2 = *(int *)(temp_v0 + 0x58);
-          if (temp_v2 < 0x3d) {
-            temp_v2 = 0x3c;
-          }
-          *(int *)(temp_v0 + 0x58) = temp_v2;
-          eventSoundPlayByKind(*(unsigned int *)(temp_v0 + 0x60),1);
-          *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-          return;
+    if (work->state != 0) {
+        if (work->state == 1) {
+            FUN_0039560c(work);
+            movement->position.x += work->velocity.x;
+            movement->position.y += work->velocity.y;
+            movement->position.z += work->velocity.z;
         }
-      }
+    } else if (!globals->blocked && movement->frame % 15 == 0 && randNextInRange(100) < 30) {
+        const f32 *center = g_lmapScene->transform.position;
+        f32 distance = mathDistanceBetweenPoints(movement->position.x, movement->position.y, movement->position.z,
+                                                  center[0], center[1], center[2]);
+        if (globals->radius > distance) {
+            work->duration = globals->duration;
+            if (movement->frame <= 60) {
+                movement->frame = 60;
+            }
+            eventSoundPlayByKind(movement->sound, 1, movement->position.x * (1.0f / 3.0f),
+                                  movement->position.y * (1.0f / 3.0f),
+                                  movement->position.z * (1.0f / 3.0f));
+            ++work->state;
+        }
     }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

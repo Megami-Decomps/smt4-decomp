@@ -1,124 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018416c` (_code @ 0x18416c, 0x194 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved-work prefix folded into record offsets, key narrowing and return-tail layout differ. */
+#include "gamedata/GameData.h"
 
 extern "C" {
+extern GameDataBlocksA g_gameDataBlocks;
+s32 gameFlagIsSet(u32);
+u32 FUN_0019e52c(u32);
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-extern int gameFlagIsSet(unsigned int);
-extern unsigned int FUN_0019e52c(unsigned int);
-
-
-unsigned int FUN_0018416c(unsigned int param_1)
-
+// Check whether the unit is in the unlocked portion of either saved availability list.
+u32 FUN_0018416c(u32 unitId)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned short temp_v3;
-  int temp_v4;
-  unsigned short temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  
-  temp_v0 = gameFlagIsSet(0x45b);
-  if (temp_v0 == 0) {
-    return 0;
-  }
-  temp_v6 = 0;
-  temp_v5 = 0;
-  temp_v8 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x88;
-  temp_v0 = gameFlagIsSet(0x4f6);
-  if (temp_v0 != 0) {
-    temp_v0 = 0;
-    do {
-      temp_v4 = temp_v8 + temp_v0 * 4;
-      temp_v3 = *(unsigned short *)(temp_v4 + 0x28312) & 0x3ff;
-      if (temp_v5 != temp_v3) {
-        temp_v6 = temp_v0 + 1;
-        temp_v5 = temp_v3;
-      }
-      if (*(unsigned short *)(temp_v4 + 0x28310) == param_1) {
-        if (temp_v6 < 0xb) {
-          return 1;
-        }
+    struct SavedChoice { u16 id; u16 value; };
+    struct AvailabilityView {
+        u8 prefix[0x28398];
+        SavedChoice ordered[20];
+        SavedChoice categories[7];
+    };
+    if (!gameFlagIsSet(0x45B))
         return 0;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x14);
-  }
-  temp_v0 = gameFlagIsSet(0x4f7);
-  if (temp_v0 != 0) {
-    temp_v0 = 0;
-    do {
-      temp_v6 = temp_v8 + temp_v0 * 4;
-      temp_v4 = 0;
-      temp_v5 = *(unsigned short *)(temp_v6 + 0x28362);
-      temp_v7 = (unsigned int)*(unsigned short *)(temp_v6 + 0x28360);
-      do {
-        if (temp_v7 - 1 < 8) {
-          temp_v1 = 0;
-                    /* WARNING: Switch table taken from the stored dispatch table */
-          if (temp_v7 < 9) {
-            temp_v1 = 0;
-            switch(temp_v7) {
-            case 1:
-              temp_v1 = 0xae;
-              break;
-            case 2:
-              temp_v1 = 0xaf;
-              break;
-            case 3:
-              temp_v1 = 0xb0;
-              break;
-            case 4:
-              if (temp_v4 == 0) {
-                temp_v1 = 0xb2;
-              }
-              else {
-                temp_v1 = 0xb9;
-              }
-              break;
-            case 5:
-              if (temp_v4 == 0) {
-                temp_v1 = 0xb1;
-              }
-              else if (temp_v4 == 1) {
-                temp_v1 = 0xbf;
-              }
-              else {
-                temp_v1 = 0xc0;
-              }
-              break;
-            case 6:
-              if (temp_v4 == 0) {
-                temp_v1 = 0xb3;
-              }
-              else {
-                temp_v1 = 0xba;
-              }
-              break;
-            case 7:
-              temp_v1 = 5;
+    s32 rank = 0;
+    u16 previous = 0;
+    AvailabilityView *save = reinterpret_cast<AvailabilityView *>(g_gameDataBlocks.saveBlock);
+    if (gameFlagIsSet(0x4F6)) {
+        for (s32 i = 0; i < 20; ++i) {
+            u16 value = save->ordered[i].value & 0x3FF;
+            if (previous != value) {
+                rank = i + 1;
+                previous = value;
             }
-          }
-          temp_v2 = FUN_0019e52c(temp_v1);
-          if (param_1 == temp_v2) {
-            if ((temp_v5 >> 10) - 1 < 3) {
-              return 1;
-            }
-            return 0;
-          }
+            if (save->ordered[i].id == unitId)
+                return rank <= 10;
         }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 3);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 7);
-  }
-  return 0;
+    }
+    if (gameFlagIsSet(0x4F7)) {
+        for (s32 i = 0; i < 7; ++i) {
+            u32 level = save->categories[i].value >> 10;
+            u32 category = save->categories[i].id;
+            for (s32 variant = 0; variant < 3; ++variant) {
+                if (category - 1 < 8) {
+                    u16 key = 0;
+                    switch (category) {
+                    case 1: key = 0xAE; break;
+                    case 2: key = 0xAF; break;
+                    case 3: key = 0xB0; break;
+                    case 4: key = variant == 0 ? 0xB2 : 0xB9; break;
+                    case 5:
+                        if (variant == 0) key = 0xB1;
+                        else if (variant == 1) key = 0xBF;
+                        else key = 0xC0;
+                        break;
+                    case 6:
+                    case 8: key = variant == 0 ? 0xB3 : 0xBA; break;
+                    case 7: key = 5; break;
+                    }
+                    if (unitId == FUN_0019e52c(key))
+                        return level - 1 <= 2;
+                }
+            }
+        }
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -1,44 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ef7f0` (_code @ 0x2ef7f0, 0x104 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler merges repeated event category tests and uses unsigned range branches. */
+#include "common.h"
 
 extern "C" {
+u32 FUN_00280bc0(void);
+void FUN_0037aaec(s32, s32 *);
 
-int FUN_0037aaec(int, int);
-
-extern unsigned int FUN_00280bc0(void);
-/* Supplied declaration required: FUN_0037aaec. */
-
-
-unsigned int FUN_002ef7f0(unsigned int param_1,int param_2)
-
+// Classify the current event, optionally clearing the output for transition events.
+s32 FUN_002ef7f0(u32 unused, s32 *output)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v2 = 2;
-  temp_v1 = FUN_00280bc0();
-  if ((temp_v1 & 0x80000000) == 0) {
-    temp_v2 = 0;
-  }
-  else {
-    temp_v0 = (temp_v1 & 0x3fc00) >> 10;
-    if (((temp_v0 == 0x11) && ((temp_v1 & 0x3ff) >= 100)) && ((temp_v1 & 0x3ff) < 0xb4)) {
-      temp_v2 = 3;
+    s32 result = 2;
+    s32 event = FUN_00280bc0();
+    if ((s32)(event & 0x80000000) >= 0)
+        return 0;
+    s32 category = (event & 0x3fc00) >> 10;
+    if (category == 17 && (s32)(event & 0x3ff) >= 100 && (s32)(event & 0x3ff) <= 179) {
+        result = 3;
+    } else if (category == 17 && (s32)(event & 0x3ff) >= 180 && (s32)(event & 0x3ff) <= 199) {
+        // These events retain the default classification.
+    } else if (category == 17 && (s32)(event & 0x3ff) >= 390 && (s32)(event & 0x3ff) < 400) {
+        if (output != NULL)
+            FUN_0037aaec(0, output);
+        result = 1;
+    } else if (category == 17 && (s32)(event & 0x3ff) >= 230 && (s32)(event & 0x3ff) < 340) {
+        // These events retain the default classification.
+    } else if (category == 17 && (s32)(event & 0x3ff) >= 200 && (s32)(event & 0x3ff) <= 219) {
+        if (output != NULL)
+            FUN_0037aaec(0, output);
+        result = 1;
     }
-    else if ((((temp_v0 != 0x11) || ((temp_v1 & 0x3ff) < 0xb4)) || ((temp_v1 & 0x3ff) >= 200)) &&
-            ((((temp_v0 == 0x11 && ((temp_v1 & 0x3ff) >= 0x186)) && ((temp_v1 & 0x3ff) < 400)) ||
-             (((((temp_v0 != 0x11 || ((temp_v1 & 0x3ff) < 0xe6)) || ((temp_v1 & 0x3ff) >= 0x154)) &&
-               ((temp_v0 == 0x11 && ((temp_v1 & 0x3ff) >= 200)))) && ((temp_v1 & 0x3ff) < 0xdc)))))) {
-      if (param_2 != 0) {
-        FUN_0037aaec(0,param_2);
-      }
-      temp_v2 = 1;
-    }
-  }
-  return temp_v2;
+    return result;
 }
-
-} /* extern "C" */
+}

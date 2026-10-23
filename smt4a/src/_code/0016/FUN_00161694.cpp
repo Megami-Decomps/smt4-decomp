@@ -1,111 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00161694` (_code @ 0x161694, 0x190 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: format/byte-size registers, pixel-address scheduling and stereo branch placement differ. */
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
+extern AsdGfxContext g_asdGfxContext;
+void FUN_0017e1a0(s32 screen, u32 index, const void *left, const void *right,
+    u32 stride, u32 format, u32 active);
 
-int FUN_0017e1a0(int, unsigned int, unsigned int, int, unsigned int, unsigned int, unsigned int);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern int DAT_0061a478; /* 0x61a478 */
-extern int DAT_0061a5a0; /* 0x61a5a0 */
-extern int DAT_0061a5ac; /* 0x61a5ac */
-extern int DAT_0061a5b8; /* 0x61a5b8 */
-extern int DAT_0061a5d4; /* 0x61a5d4 */
-
-/* Supplied declaration required: FUN_0017e1a0. */
-
-
-void FUN_00161694(int param_1)
-
+void FUN_00161694(s32 requestedScreen)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  unsigned char temp_v8;
-  
-  temp_v6 = 0;
-  do {
-    temp_v0 = temp_v6 + 0x400;
-    temp_v8 = param_1 != temp_v0;
-    if (temp_v8) {
-      temp_v0 = param_1 - 0x400;
-    }
-    temp_v5 = 0;
-    if (!temp_v8 || temp_v0 == 2) {
-      temp_v0 = temp_v6 * 4;
-      temp_v4 = *(int *)(temp_v0 + 0x61a598);
-      temp_v2 = *(int *)(temp_v4 + 8);
-      if (temp_v2 == 0x8057) {
-        temp_v1 = 3;
-        temp_v3 = 2;
-      }
-      else if (temp_v2 < 0x8058) {
-        if (temp_v2 == 0x8051) {
-          temp_v1 = 1;
-          temp_v3 = 3;
+    // Display presentation fields follow the shared graphics-context prefix.
+    struct DisplayBuffer { u32 unk00; u8 *pixels; s32 format, width, height; u32 heap; };
+    struct PresentationView {
+        AsdGfxContext prefix;
+        DisplayBuffer *buffers[2];
+        DisplayBuffer *stereo;
+        s32 x[2], stereoX;
+        s32 y[2], stereoY;
+        u32 indices[2];
+        u8 unk154[0x10];
+        s32 displayMode;
+    };
+    typedef char LayoutCheck[offsetof(PresentationView, buffers) == 0x128 &&
+        offsetof(PresentationView, indices) == 0x14c &&
+        offsetof(PresentationView, displayMode) == 0x164 ? 1 : -1];
+    PresentationView *state = reinterpret_cast<PresentationView *>(&g_asdGfxContext);
+    for (s32 screen = 0; screen < 2; ++screen) {
+        if (requestedScreen == screen + 0x400 || requestedScreen == 0x402) {
+            DisplayBuffer *buffer = state->buffers[screen];
+            u32 format, bytesPerPixel;
+            switch (buffer->format) {
+            case 0x8051: format = 1; bytesPerPixel = 3; break; // RGB8
+            case 0x8056: format = 4; bytesPerPixel = 2; break; // RGBA4
+            case 0x8057: format = 3; bytesPerPixel = 2; break; // RGB5A1
+            case 0x8058: format = 0; bytesPerPixel = 4; break; // RGBA8
+            case 0x8d62: format = 2; bytesPerPixel = 2; break; // RGB565
+            default: format = 0; bytesPerPixel = 0; break;
+            }
+            format |= buffer->heap == 0x10000 ? 0x100 : 0x300;
+            const u8 *right = NULL;
+            u32 flags = format;
+            if (screen == 0) {
+                switch (state->displayMode) {
+                case 0x701:
+                    break;
+                case 0x702: {
+                    DisplayBuffer *stereo = state->stereo;
+                    right = stereo->pixels + bytesPerPixel *
+                        (stereo->width * (stereo->height - state->prefix.presentation.croppedRows[0] - state->stereoY) + state->stereoX);
+                    flags = format | 0x20;
+                    break;
+                }
+                default:
+                    flags = format | 0x40;
+                    break;
+                }
+            }
+            const u8 *left = buffer->pixels + bytesPerPixel *
+                (buffer->width * (buffer->height - state->prefix.presentation.croppedRows[screen] - state->y[screen]) + state->x[screen]);
+            FUN_0017e1a0(screen, state->indices[screen], left, right,
+                buffer->width * bytesPerPixel, flags, state->indices[screen]);
+            state->indices[screen] = state->indices[screen] == 0;
         }
-        else if (temp_v2 == 0x8056) {
-          temp_v1 = 4;
-          temp_v3 = 2;
-        }
-        else {
-          temp_v1 = 0;
-          temp_v3 = 0;
-        }
-      }
-      else if (temp_v2 == 0x8058) {
-        temp_v1 = 0;
-        temp_v3 = 4;
-      }
-      else if (temp_v2 == 0x8d62) {
-        temp_v1 = 2;
-        temp_v3 = temp_v1;
-      }
-      else {
-        temp_v1 = 0;
-        temp_v3 = 0;
-      }
-      if (*(int *)(temp_v4 + 0x14) == 0x10000) {
-        temp_v7 = 0x100;
-      }
-      else {
-        temp_v7 = 0x300;
-      }
-      temp_v1 = temp_v1 | temp_v7;
-      temp_v7 = temp_v1;
-      if ((((temp_v6 == 0) && (temp_v7 = temp_v1 | 0x40, DAT_0061a5d4 != 0x700)) &&
-          (temp_v7 = temp_v1, DAT_0061a5d4 != 0x701)) && (temp_v7 = temp_v1 | 0x40, DAT_0061a5d4 == 0x702))
-      {
-        temp_v5 = temp_v3 * (*(int *)(DAT_0061a5a0 + 0xc) *
-                         ((*(int *)(DAT_0061a5a0 + 0x10) - DAT_0061a478) - DAT_0061a5b8) +
-                        DAT_0061a5ac) + *(int *)(DAT_0061a5a0 + 4);
-        temp_v7 = temp_v1 | 0x20;
-      }
-      FUN_0017e1a0(temp_v6,*(unsigned int *)(temp_v0 + 0x61a5bc),
-                   temp_v3 * (*(int *)(temp_v4 + 0xc) *
-                            ((*(int *)(temp_v4 + 0x10) - (&DAT_0061a478)[temp_v6]) -
-                            *(int *)(temp_v0 + 0x61a5b0)) + *(int *)(temp_v0 + 0x61a5a4)) +
-                   *(int *)(temp_v4 + 4),temp_v5,*(int *)(temp_v4 + 0xc) * temp_v3,temp_v7,
-                   *(unsigned int *)(temp_v0 + 0x61a5bc));
-      *(unsigned int *)(temp_v0 + 0x61a5bc) = (unsigned int)(*(int *)(temp_v0 + 0x61a5bc) == 0);
     }
-    temp_v6 = temp_v6 + 1;
-    if (temp_v6 >= 2) {
-      return;
-    }
-  } while( 1 );
 }
-
-} /* extern "C" */
+}

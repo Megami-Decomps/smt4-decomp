@@ -1,112 +1,80 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041e9d4` (_code @ 0x41e9d4, 0x1b0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: slot-condition lowering, transition-store scheduling and constant register lifetimes differ. */
+#include "saveLoadUI/SaveLoadControllerA.h"
 
+struct SaveLoadScriptEntryViewA {
+    u8 unk00[0x40];
+    void *process;
+    u8 started;
+    u8 unk45[7];
+    u32 entry;
+    u8 entryStarted;
+};
+struct SaveLoadResultFlagsViewA {
+    SaveLoadUIBaseA prefix;
+    u8 load;
+    u8 save;
+};
 extern "C" {
+extern SaveLoadResultFlagsViewA g_saveLoadUIBase;
+void ifTouchRegionRemove();
+void fillThreeWordsWithByte(u32 *, s32);
+void eventQueueAddUnique(u32);
+void FUN_0019de98(s32, u32);
+void scrScriptProcessStartEntry(void *, u32);
 
-int ifTouchRegionRemove(void);
-int eventQueueAddUnique(int);
-int FUN_0019de98(int, unsigned int);
-int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int fillThreeWordsWithByte(int, unsigned int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned char DAT_00588e16; /* 0x588e16 */
-extern unsigned char DAT_00588e17; /* 0x588e17 */
-
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: fillThreeWordsWithByte. */
-
-
-void FUN_0041e9d4(int param_1)
-
+void FUN_0041e9d4(SaveLoadControllerA *work)
 {
-/* irregular: 5 native warning(s); review required */
-  char temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v2 = 0;
-  if (temp_v2 < *(int *)(param_1 + 0x448)) {
-    do {
-      ifTouchRegionRemove();
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < *(int *)(param_1 + 0x448));
-  }
-  *(unsigned int *)(param_1 + 0x448) = 0;
-  fillThreeWordsWithByte(param_1 + 0x43c,0xffffffff);
-  *(unsigned char *)(param_1 + 0x44c) = 0;
-  *(unsigned char *)(param_1 + 0x44d) = 0;
-  *(unsigned char *)(param_1 + 0x44e) = 0;
-  temp_v0 = *(char *)(*(int *)(param_1 + 0x2f8) + param_1 + 0x2ec);
-  temp_v3 = temp_v0 == '\0';
-  if (temp_v3) {
-    temp_v0 = *(char *)(param_1 + 5);
-  }
-  if ((temp_v3 && temp_v0 == '\0') ||
-     (((*(char *)(param_1 + 5) == '\x01' && (0 < *(int *)(param_1 + 0x2f8))) &&
-      (*(char *)(param_1 + 0x13) == '\0')))) {
-    *(unsigned char *)(param_1 + 0x12) = 0;
-    eventQueueAddUnique(0x100020f);
-    return;
-  }
-  FUN_0019de98(0,0xf4f4f4ff);
-  eventQueueAddUnique(0x100020e);
-  *(unsigned char *)(param_1 + 0x12) = 1;
-  if ((*(char *)(param_1 + 0x50) == '\0') && (0 < *(int *)(param_1 + 0x2f8))) {
-    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x40),*(unsigned int *)(param_1 + 0x4c));
-    *(unsigned char *)(param_1 + 0x50) = 1;
-    temp_v0 = *(char *)(param_1 + 5);
-    if (temp_v0 == '\0') {
-      DAT_00588e17 = 1;
+    for (s32 i = 0; i < work->touch.count; ++i)
+        ifTouchRegionRemove();
+    work->touch.count = 0;
+    fillThreeWordsWithByte(work->touch.handles, -1);
+    work->pending = 0;
+    work->confirmed = 0;
+    work->canceled = 0;
+    if ((!work->slotFlags[work->selectedSlot] && work->colorIndex == 0) ||
+        (work->colorIndex == 1 && work->selectedSlot > 0 && !work->unk013[0])) {
+        work->busy = 0;
+        eventQueueAddUnique(0x100020F);
+        return;
     }
-    else if (temp_v0 == '\x01') {
-      DAT_00588e16 = 1;
+    FUN_0019de98(0, 0xF4F4F4FF);
+    eventQueueAddUnique(0x100020E);
+    work->busy = 1;
+    SaveLoadScriptEntryViewA *script = reinterpret_cast<SaveLoadScriptEntryViewA *>(work);
+    if (!script->entryStarted && work->selectedSlot > 0) {
+        scrScriptProcessStartEntry(script->process, script->entry);
+        script->entryStarted = 1;
+        s8 mode = work->colorIndex;
+        if (mode == 0)
+            g_saveLoadUIBase.save = 1;
+        else if (mode == 1)
+            g_saveLoadUIBase.load = 1;
+        script->started = 1;
+        if (mode == 0) {
+            u8 previous = work->state;
+            work->frame = 0;
+            work->state = 0x15;
+            work->previousState = previous;
+            work->nextState = 7;
+        } else if (mode == 1) {
+            u8 previous = work->state;
+            work->frame = 0;
+            work->state = 0x15;
+            work->previousState = previous;
+            work->nextState = 10;
+        }
+    } else if (work->colorIndex == 0) {
+        u8 previous = work->state;
+        work->state = 7;
+        work->previousState = previous;
+        work->frame = 0;
+        work->nextState = 0;
+    } else if (work->colorIndex == 1) {
+        u8 previous = work->state;
+        work->state = 10;
+        work->previousState = previous;
+        work->frame = 0;
+        work->nextState = 0;
     }
-    *(unsigned char *)(param_1 + 0x44) = 1;
-    if (temp_v0 == '\0') {
-      temp_v1 = *(unsigned char *)(param_1 + 7);
-      *(unsigned int *)(param_1 + 8) = 0;
-      *(unsigned char *)(param_1 + 7) = 0x15;
-      *(unsigned char *)(param_1 + 0xd) = temp_v1;
-      *(unsigned char *)(param_1 + 0xc) = 7;
-      return;
-    }
-    if (temp_v0 == '\x01') {
-      temp_v1 = *(unsigned char *)(param_1 + 7);
-      *(unsigned int *)(param_1 + 8) = 0;
-      *(unsigned char *)(param_1 + 7) = 0x15;
-      *(unsigned char *)(param_1 + 0xd) = temp_v1;
-      *(unsigned char *)(param_1 + 0xc) = 10;
-    }
-  }
-  else {
-    if (*(char *)(param_1 + 5) == '\0') {
-      temp_v1 = *(unsigned char *)(param_1 + 7);
-      *(unsigned char *)(param_1 + 7) = 7;
-      *(unsigned char *)(param_1 + 0xd) = temp_v1;
-      *(unsigned int *)(param_1 + 8) = 0;
-      *(unsigned char *)(param_1 + 0xc) = 0;
-      return;
-    }
-    if (*(char *)(param_1 + 5) == '\x01') {
-      temp_v1 = *(unsigned char *)(param_1 + 7);
-      *(unsigned char *)(param_1 + 7) = 10;
-      *(unsigned char *)(param_1 + 0xd) = temp_v1;
-      *(unsigned int *)(param_1 + 8) = 0;
-      *(unsigned char *)(param_1 + 0xc) = 0;
-      return;
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -1,70 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00282e70` (_code @ 0x282e70, 0x10c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: part address computation uses r5 instead of r0, and common success block is placed earlier. */
+#include "ui/PartyPanelState.h"
 
 extern "C" {
+extern PartyPanelState *g_partyPanel;
+s32 objectPartRunUnlessLocked(void *part);
+s32 FUN_0029efa8(void *part);
 
-extern int g_partyPanel; /* 0x43dcf0 */
-
-extern int objectPartRunUnlessLocked(int);
-extern int FUN_0029efa8(void);
-
-
-/* WARNING: Type propagation algorithm not settling */
-
-unsigned int FUN_00282e70(unsigned int param_1,unsigned int param_2,int param_3)
-
+/* Report whether the current or pending panel mode has finished its transition. */
+u32 FUN_00282e70(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = *(int *)(g_partyPanel + 0x20);
-  if (temp_v1 != 6) {
-    param_3 = *(int *)(g_partyPanel + 0x1c);
-  }
-  if (temp_v1 == 6 || param_3 == 6) {
-    return 0;
-  }
-  if (!(temp_v1 == 4 || param_3 == 4)) {
-    if (temp_v1 != 8 && param_3 != 8) {
-      if (temp_v1 != 10 && param_3 != 10) {
-        return 0;
-      }
-      if (*(short *)(g_partyPanel + 0x38) < 0) {
-        return 1;
-      }
-      return 0;
+    u32 ready = 0;
+    PartyPanelState *panel = g_partyPanel;
+    u32 pending = panel->history.unk20;
+    if (pending != 6 && panel->sceneState != 6) {
+        if (pending == 4 || panel->sceneState == 4) {
+            void *part = panel->transitionParts.stateFourPart;
+            if (!FUN_0029efa8(part) && !objectPartRunUnlessLocked(part))
+                ready = 1;
+        } else if (pending == 8 || panel->sceneState == 8) {
+            if (panel->unk42) {
+                void *part = panel->transitionParts.secondaryPart;
+                if (!FUN_0029efa8(part) && !objectPartRunUnlessLocked(part))
+                    ready = 1;
+            } else {
+                void *part = panel->transitionParts.primaryPart;
+                if (!FUN_0029efa8(part) && !objectPartRunUnlessLocked(part))
+                    ready = 1;
+            }
+        } else if (pending == 10 || panel->sceneState == 10) {
+            if (panel->pendingSelection.selection < 0)
+                ready = 1;
+        }
     }
-    if (*(char *)(g_partyPanel + 0x42) != '\0') {
-      temp_v1 = g_partyPanel + 0xa6c;
-      temp_v0 = FUN_0029efa8();
-      if (temp_v0 != 0) {
-        return 0;
-      }
-      temp_v1 = objectPartRunUnlessLocked(temp_v1);
-    }
-    else {
-      temp_v1 = g_partyPanel + 0xa08;
-      temp_v0 = FUN_0029efa8();
-      if (temp_v0 != 0) {
-        return 0;
-      }
-      temp_v1 = objectPartRunUnlessLocked(temp_v1);
-    }
-  }
-  else {
-    temp_v1 = g_partyPanel + 0x8dc;
-    temp_v0 = FUN_0029efa8();
-    if (temp_v0 != 0) {
-      return 0;
-    }
-    temp_v1 = objectPartRunUnlessLocked(temp_v1);
-  }
-  if (temp_v1 == 0) {
-    return 1;
-  }
-  return 0;
+    return ready;
 }
-
-} /* extern "C" */
+}

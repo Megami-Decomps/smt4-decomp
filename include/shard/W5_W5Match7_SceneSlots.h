@@ -16,7 +16,14 @@ struct SceneSlot {
     /* 0x07e */ u8 unk07e[6];
     /* 0x084 */ s32 state;
     /* 0x088 */ s32 stateTime;
-    /* 0x08c */ u8 unk08c[0x78];
+    union {
+        /* 0x08c */ u8 unk08c[0x78];
+        struct {
+            u8 prefix[0x28];
+            /* 0x0b4 */ u32 mode;
+            /* 0x0b8 */ f32 height;
+        } approach;
+    };
     /* 0x104 */ f32 origin[4];
     /* 0x114 */ f32 destination[4];
     /* 0x124 */ f32 duration;
@@ -37,6 +44,9 @@ struct SceneSlotList {
     /* 0x3d7c */ s32 activeCount;
 };
 typedef char SceneSlotListOffsets[offsetof(SceneSlotList, unk10) == 0x10 && offsetof(SceneSlotList, slots) == 0x34 ? 1 : -1];
+typedef char SceneSlotApproachOffsetCheck[sizeof(SceneSlot) == 0x188 &&
+    offsetof(SceneSlot, approach.mode) == 0xB4 &&
+    offsetof(SceneSlot, approach.height) == 0xB8 ? 1 : -1];
 
 class SceneResourceObject {
 public:

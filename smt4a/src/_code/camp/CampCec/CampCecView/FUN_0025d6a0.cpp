@@ -8,7 +8,7 @@ int FUN_00167c14(...);
 int FUN_0036c7a8(...);
 int uiGetFloatValue(void);
 int textureRequestCacheGet(...);
-int FUN_003aedc8(...);
+int gfxAdvanceTextureRequestQueue(...);
 int FUN_003e54b8(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
@@ -72,7 +72,7 @@ extern int FUN_0039a2d8(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0039bb48. */
 /* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: devilIsTextureLoaded. */
-/* Supplied declaration required: FUN_003aedc8. */
+/* Supplied declaration required: gfxAdvanceTextureRequestQueue. */
 /* Supplied declaration required: FUN_003b60c0. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003e54b8. */
@@ -729,7 +729,7 @@ LAB_0025e4d4:
     }
   }
 LAB_0025e5ec:
-  FUN_003aedc8(*(unsigned int *)(temp_v0 + 0x110),*(unsigned char *)(*(int *)(temp_v0 + 0xc) + 0x22));
+  gfxAdvanceTextureRequestQueue(*(unsigned int *)(temp_v0 + 0x110),*(unsigned char *)(*(int *)(temp_v0 + 0xc) + 0x22));
   if (*(char *)(temp_v0 + 0x134) == '\0') {
     temp_v1 = 0;
     do {

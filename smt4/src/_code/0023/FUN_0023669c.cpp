@@ -1,65 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023669c` (_code @ 0x23669c, 0x124 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: capacity load grouping, copy-loop registers, and final vector update scheduling differ. */
+#include "classes/AllocatorWordVector.h"
+#include <new>
 
-extern "C" {
-
-typedef int romwright_code(...);
-
-unsigned int FUN_0023669c(int *param_1,unsigned int *param_2)
-
+// Grow an allocator-owned word vector geometrically and append one copied value.
+extern "C" u32 FUN_0023669c(AllocatorWordVector *vector, const u32 *value)
 {
-  int *piVar1;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  unsigned int temp_v0;
-  unsigned int *puVar5;
-  unsigned int temp_v1;
-  unsigned int *puVar7;
-  int temp_v2;
-  
-  temp_v1 = param_1[3];
-  temp_v0 = temp_v1 & 0x3fffffff;
-  if ((int)temp_v0 <= (param_1[2] - param_1[1]) >> 2) {
-    if (temp_v0 != 0) {
-      temp_v0 = temp_v0 << 1;
+    s32 capacity = vector->capacityFlags & 0x3FFFFFFF;
+    if (capacity <= vector->end - vector->begin) {
+        s32 newCapacity = capacity != 0 ? capacity * 2 : 1;
+        if ((s32)(vector->capacityFlags & 0x3FFFFFFF) < newCapacity) {
+            if (vector->allocator == NULL || (vector->capacityFlags & 0xC0000000) != 0x40000000)
+                return 0;
+            u32 *allocation = (u32 *)vector->allocator->allocate(newCapacity * sizeof(u32), 32);
+            u32 *source = vector->begin;
+            u32 *sourceEnd = vector->end;
+            u32 *destination = allocation;
+            s32 count = 0;
+            if (source != sourceEnd) {
+                do {
+                    if (destination != NULL)
+                        new (destination) u32(*source);
+                    ++source;
+                    ++destination;
+                } while (source != sourceEnd);
+                count = vector->end - vector->begin;
+            }
+            if (vector->begin != NULL)
+                vector->allocator->release(vector->begin);
+            vector->end = allocation + count;
+            vector->begin = allocation;
+            vector->capacityFlags = (vector->capacityFlags & 0xC0000000) | newCapacity;
+        }
     }
-    else {
-      temp_v0 = 1;
-    }
-    if ((temp_v1 & 0x3fffffff) < temp_v0) {
-      piVar1 = (int *)*param_1;
-      if ((piVar1 == (int *)0x0) || ((temp_v1 & 0xc0000000) != 0x40000000)) {
-        return 0;
-      }
-      puVar2 = (unsigned int *)(**(romwright_code **)(*piVar1 + 8))(piVar1,temp_v0 << 2,0x20);
-      puVar3 = (unsigned int *)param_1[1];
-      puVar7 = (unsigned int *)param_1[2];
-      temp_v2 = 0;
-      puVar5 = puVar2;
-      if (puVar3 != puVar7) {
-        do {
-          if (puVar5 != (unsigned int *)0x0) {
-            *puVar5 = *puVar3;
-          }
-          puVar3 = puVar3 + 1;
-          puVar5 = puVar5 + 1;
-        } while (puVar3 != puVar7);
-        temp_v2 = (param_1[2] - param_1[1]) >> 2;
-      }
-      if (param_1[1] != 0) {
-        (**(romwright_code **)(*(int *)*param_1 + 0xc))();
-      }
-      param_1[2] = (int)(puVar2 + temp_v2);
-      param_1[1] = (int)puVar2;
-      param_1[3] = (param_1[3] & 0xc0000000U) | temp_v0;
-    }
-  }
-  if ((unsigned int *)param_1[2] != (unsigned int *)0x0) {
-    *(unsigned int *)param_1[2] = *param_2;
-  }
-  param_1[2] = param_1[2] + 4;
-  return 1;
+    if (vector->end != NULL)
+        new (vector->end) u32(*value);
+    ++vector->end;
+    return 1;
 }
-
-} /* extern "C" */

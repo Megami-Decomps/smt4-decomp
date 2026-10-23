@@ -15,7 +15,7 @@ int FUN_001835b4(int, int, int, int, int, int);
 int pairSetSecondResetFirst(...);
 int FUN_002199fc(...);
 int fadeObjectResetIfActive(...);
-int FUN_003346a8(...);
+int uiDrawRotatingGridHighlights(...);
 int SBORROW4(int, int);
 int VectorSignedToFloat(...);
 
@@ -50,7 +50,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: pairSetSecondResetFirst. */
 /* Supplied declaration required: FUN_002199fc. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
-/* Supplied declaration required: FUN_003346a8. */
+/* Supplied declaration required: uiDrawRotatingGridHighlights. */
 
 
 unsigned int FUN_003da030(void)
@@ -210,7 +210,7 @@ unsigned int FUN_003da030(void)
       VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_00162790(4,0x57d8ffff,&LAB_003da414);
-      FUN_003346a8(0x220,*(unsigned int *)(temp_v3 + 0x84));
+      uiDrawRotatingGridHighlights(0x220,*(unsigned int *)(temp_v3 + 0x84));
     }
     temp_v3 = g_renderCtx;
     piVar7 = (int *)(g_renderCtx + 0x1258);

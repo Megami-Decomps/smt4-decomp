@@ -1,74 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002942c4` (_code @ 0x2942c4, 0x144 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: texture-table constants remain immediates instead of saved registers, and alternate/default resource exits are laid out differently. */
+#include "status/StatusBustUp.h"
+#include "gamedata/DevilModel.h"
+#include "addon/aocMain.h"
 
 extern "C" {
+extern StatusBustUpResources DAT_0044e158;
+extern AocSystem *g_aocSystem;
+DevilModelOverride *dataTable00FindById(u16 id);
+s32 asdTMTexTableNodeIsLoaded(s32 table, s32 entry);
+void asdTMTexTableLoadEntryAsync(s32 table, s32 entry);
+s32 aocRunByName(AocSystem *system, s32 table, s32 entry, s32 mode);
+void FUN_002a5ee4(AocSystem *system, s32 table, s32 entry, u32 options);
 
-int asdTMTexTableLoadEntryAsync(...);
-int FUN_002a5ee4(unsigned int, int, unsigned int, int);
-int asdTMTexTableNodeIsLoaded(...);
-int dataTable00FindById(void);
-int devilGetRecord(void);
-
-extern unsigned int g_aocSystem; /* 0x433158 */
-extern int DAT_0044e15c; /* 0x44e15c */
-extern int DAT_0044e160; /* 0x44e160 */
-
-/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
-/* Supplied declaration required: FUN_002a5ee4. */
-/* Supplied declaration required: asdTMTexTableNodeIsLoaded. */
-extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: devilGetRecord. */
-
-
-void FUN_002942c4(unsigned int param_1,int param_2)
-
+/* Acquire a portrait by table index or resolve a demon's normal/alternate portrait. */
+void FUN_002942c4(s32 id, s32 byDevilId)
 {
-/* irregular: 1 goto(s); 5 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if (param_2 != 0) {
-    if (-1 < (int)param_1) {
-      temp_v0 = param_1;
-      devilGetRecord();
-      if (temp_v0 != 0) {
-        param_1 = param_1 & 0xffff;
-        dataTable00FindById();
-        if ((*(unsigned char *)(param_1 + 3) & 1) != 0) {
-          temp_v2 = (int)*(short *)(param_1 + 0x88);
-          if (temp_v2 < 0x81) {
-            if ((*(char *)(DAT_0044e160 + temp_v2) < '\x01') &&
-               (temp_v1 = asdTMTexTableNodeIsLoaded(0x23,temp_v2), temp_v1 == 0)) {
-              asdTMTexTableLoadEntryAsync(0x23,temp_v2);
+    if (byDevilId) {
+        if (id >= 0) {
+            const DevilRecord *devil = (const DevilRecord *)devilGetRecord((u16)id);
+            if (!devil)
+                return;
+            const DevilModelOverride *override = dataTable00FindById((u16)id);
+            if (override->flags & 1) {
+                id = override->model;
+                if (id < 0x81) {
+                    if (((s8 *)DAT_0044e158.workB)[id] <= 0 &&
+                        !asdTMTexTableNodeIsLoaded(0x23, id))
+                        asdTMTexTableLoadEntryAsync(0x23, id);
+                    ++((s8 *)DAT_0044e158.workB)[id];
+                }
+                return;
             }
-            *(char *)(DAT_0044e160 + temp_v2) = *(char *)(DAT_0044e160 + temp_v2) + '\x01';
-          }
+            id = devil->model + 1;
+            if (id >= 0x266)
+                return;
+        } else {
+            id = 0;
         }
-        else {
-          param_1 = *(unsigned short *)(temp_v0 + 0x90) + 1;
-          if (param_1 < 0x266) goto LAB_00294358;
-        }
-      }
-      return;
     }
-    param_1 = 0;
-  }
-LAB_00294358:
-  if ((*(char *)(DAT_0044e15c + param_1) < '\x01') &&
-     (temp_v2 = asdTMTexTableNodeIsLoaded(0x17,param_1), temp_v2 == 0)) {
-    temp_v2 = aocRunByName(g_aocSystem,0x17,param_1,1);
-    if (temp_v2 != 0) {
-      FUN_002a5ee4(g_aocSystem,0x17,param_1,0x10000);
+    if (((s8 *)DAT_0044e158.workA)[id] <= 0 &&
+        !asdTMTexTableNodeIsLoaded(0x17, id)) {
+        if (aocRunByName(g_aocSystem, 0x17, id, 1))
+            FUN_002a5ee4(g_aocSystem, 0x17, id, 0x10000);
+        else
+            asdTMTexTableLoadEntryAsync(0x17, id);
     }
-    else {
-      asdTMTexTableLoadEntryAsync(0x17,param_1);
-    }
-  }
-  *(char *)(DAT_0044e15c + param_1) = *(char *)(DAT_0044e15c + param_1) + '\x01';
-  return;
+    ++((s8 *)DAT_0044e158.workA)[id];
 }
-
-} /* extern "C" */
+}

@@ -23,7 +23,7 @@ int drawSetColorFromRGBA8(...);
 int renderCtxCalculateStereoParallax(...);
 int FUN_0025cc78(...);
 int effectSpawnDefaultArguments(...);
-int FUN_0035d8f0(int, int, int, int, int);
+int devilDispatchTextureResource(int, int, int, int, int);
 int devilIsTextureLoaded(int, int);
 int VectorSignedToFloat(...);
 
@@ -71,7 +71,7 @@ extern unsigned int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: FUN_0025cc78. */
 extern unsigned int requestIdToCode(unsigned char);
 /* Supplied declaration required: effectSpawnDefaultArguments. */
-/* Supplied declaration required: FUN_0035d8f0. */
+/* Supplied declaration required: devilDispatchTextureResource. */
 extern unsigned short FUN_0036fcd0(unsigned int, unsigned int);
 /* Supplied declaration required: devilIsTextureLoaded. */
 
@@ -172,7 +172,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
         FUN_00168e00((int)*(short *)(temp_v7 + 8) + (int)temp_v13 + param_4,
                      *(short *)(temp_v7 + 10) + param_5,(int)**(short **)(temp_v7 + 0xc),
                      (int)(*(short **)(temp_v7 + 0xc))[1]);
-        FUN_0035d8f0((int)*(short *)(param_1 + 0x24),
+        devilDispatchTextureResource((int)*(short *)(param_1 + 0x24),
                      (int)*(short *)(temp_v5 + 8) + (int)temp_v13 + param_4,
                      *(short *)(temp_v5 + 10) + param_5,0x72,1);
         temp_v5 = g_renderCtx;

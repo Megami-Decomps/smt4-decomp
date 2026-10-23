@@ -1,80 +1,81 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002302d8` (_code @ 0x2302d8, 0x154 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scene/tail register assignment, paired page-controller loads and controller flag-update addressing differ. */
+#include "shard/S2Scene3a.h"
 
 extern "C" {
+void ifTouchRegionClearAll(void *controller);
+void FUN_00233818(void *work);
+void ifTouchRegionRemove(void);
+void FUN_00233670(void *work, s32 kind, u32 sprite, u32 state);
+u16 FUN_002b8584(u32 bank, u32 entry);
+void buttonHelpSelectMenuPreset(Scene3a *scene);
 
-int buttonHelpSelectMenuPreset(unsigned int *);
-int FUN_00233670(unsigned int *, int, unsigned int, unsigned int);
-int FUN_00233818(void);
-int ifTouchRegionClearAll(unsigned int);
-int ifTouchRegionRemove(void);
-
-typedef int romwright_code(...);
-/* Supplied declaration required: buttonHelpSelectMenuPreset. */
-/* Supplied declaration required: FUN_00233670. */
-/* Supplied declaration required: FUN_00233818. */
-/* Supplied declaration required: ifTouchRegionClearAll. */
-extern unsigned short FUN_002b8584(unsigned int, unsigned int);
-/* Supplied declaration required: ifTouchRegionRemove. */
-
-
-void FUN_002302d8(unsigned int *param_1,int param_2)
-
+// Rebind the selected menu page, rebuild its touch regions, and choose its help flags.
+void FUN_002302d8(Scene3a *scene, s32 refreshHelp)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  
-  ifTouchRegionClearAll(param_1[0x217]);
-  FUN_00233818();
-  temp_v4 = 0;
-  if (temp_v4 < (short)param_1[0x5754]) {
-    do {
-      ifTouchRegionRemove();
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < (short)param_1[0x5754]);
-  }
-  *(unsigned short *)(param_1 + 0x5754) = 0;
-  *(unsigned short *)(param_1 + 0x5753) = 0xffff;
-  *(unsigned short *)((int)param_1 + 0x15d4e) = 0xffff;
-  (**(romwright_code **)(*(int *)param_1[0x217] + 8))
-            ((int *)param_1[0x217],param_1 + param_1[0x218] * 0x1d + 0x220);
-  temp_v3 = 9;
-  temp_v2 = 0x29;
-  *(unsigned short *)(param_1[0x217] + 4) = *(unsigned short *)(param_1[0x217] + 4) | 0x1000;
-  *(unsigned int **)(param_1[0x217] + 100) = param_1 + 0xe0;
-  if (param_1[0x218] == 7 || param_1[0x218] == 8) {
-    temp_v3 = 10;
-    temp_v2 = 0x28;
-  }
-  FUN_00233670(param_1 + 0x20a,0x2b,temp_v2,temp_v3);
-  *(unsigned char *)(param_1 + 0x20e) = 1;
-  temp_v0 = FUN_002b8584(0x1d,0x576);
-  *(unsigned short *)(param_1 + 0x5753) = temp_v0;
-  temp_v0 = FUN_002b8584(0x1d,0x577);
-  *(unsigned short *)((int)param_1 + 0x15d4e) = temp_v0;
-  *(short *)(param_1 + 0x5754) = (short)param_1[0x5754] + 2;
-  if (param_2 != 0) {
-    buttonHelpSelectMenuPreset(param_1);
-  }
-  temp_v1 = *param_1 & 0xfffff1ff;
-  *param_1 = temp_v1;
-  if (param_1[0x218] == 8) {
-    temp_v1 = temp_v1 | 0x800;
-  }
-  else {
-    if (param_1[0x218] == 7) {
-      *param_1 = temp_v1 | 0x400;
-      return;
+    // This menu indexes nine pages, beyond the canonical two-slot scene view.
+    struct Controller;
+    struct ControllerVtable {
+        void *unk00[2];
+        void (*bind)(Controller *, const Scene3aSlotInfo *);
+    };
+    struct Controller {
+        ControllerVtable *vtable;
+        u16 flags;
+        u8 unk06[0x5E];
+        void *context;
+    };
+    struct MenuWork {
+        u8 unk00[0x10];
+        u8 active;
+        u8 unk11[0x23];
+    };
+    struct MenuView {
+        u32 flags;
+        u8 unk04[0x824];
+        MenuWork menu;
+        Controller *controller;
+        s32 page;
+        u8 unk864[0x1C];
+        Scene3aSlotInfo pages[9];
+        u8 unkC94[0x150B8];
+        s16 regions[2];
+        s16 regionCount;
+    };
+    typedef char MenuViewOffsets[offsetof(MenuView, controller) == 0x85C &&
+        offsetof(MenuView, regions) == 0x15D4C &&
+        offsetof(MenuView, regionCount) == 0x15D50 ? 1 : -1];
+    MenuView *work = reinterpret_cast<MenuView *>(scene);
+    ifTouchRegionClearAll(work->controller);
+    FUN_00233818(&work->menu);
+    for (s32 index = 0; index < work->regionCount; ++index)
+        ifTouchRegionRemove();
+    work->regionCount = 0;
+    work->regions[0] = -1;
+    work->regions[1] = -1;
+    work->controller->vtable->bind(work->controller, &work->pages[work->page]);
+    work->controller->flags |= 0x1000;
+    work->controller->context = reinterpret_cast<u8 *>(scene) + 0x380;
+    u32 state = 9, sprite = 0x29;
+    if (work->page == 7 || work->page == 8) {
+        state = 10;
+        sprite = 0x28;
     }
-    temp_v1 = temp_v1 | 0x200;
-  }
-  *param_1 = temp_v1;
-  return;
+    FUN_00233670(&work->menu, 0x2B, sprite, state);
+    work->menu.active = 1;
+    work->regions[0] = FUN_002b8584(0x1D, 0x576);
+    work->regions[1] = FUN_002b8584(0x1D, 0x577);
+    work->regionCount += 2;
+    if (refreshHelp)
+        buttonHelpSelectMenuPreset(scene);
+    u32 flags = work->flags & ~0xE00;
+    work->flags = flags;
+    if (work->page == 8)
+        flags |= 0x800;
+    else if (work->page == 7) {
+        work->flags = flags | 0x400;
+        return;
+    } else
+        flags |= 0x200;
+    work->flags = flags;
 }
-
-} /* extern "C" */
+}

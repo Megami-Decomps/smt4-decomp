@@ -1,122 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049d770` (_code @ 0x49d770, 0x1c4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: r4/r5/r6 assignments for owner, row and record are permuted; qsort count/stride moves are also swapped. */
+#include "shard/W5_W5Match6_CallbackController.h"
+#include <stdlib.h>
 
 extern "C" {
+void *textureGetIndexedResource(u32 group);
+s32 asdTMTexTableNodeIsLoaded(u32 group, u32 image);
+u32 dataTableGet(u32 table, u32 kind);
+CallbackCatalogRecord *dataTableGetEntries(void);
+u32 dataTableGetCount(u32 table);
+u8 flagsAtGetBit0(s32 id);
+s32 gameFlagIsSet(u16 flag);
+void flagsAtSetBits01(s32 id);
+s32 FUN_0049ebf0(const void *left, const void *right);
+void FUN_00203b40(GridNavigation *navigation, s32 count, s32 rows, s32 columns, s32 wrap, s32 alternateKeys);
+u16 FUN_001643b4(u32 group, s32 image);
+void FUN_00202400(void);
+void FUN_0049d140(CallbackControllerWork *work, s32 state, s32 nextState);
 
-int qsort(...);
-int FUN_001643b4(...);
-int FUN_00202400(...);
-int FUN_00203b40(...);
-int flagsAtSetBits01(...);
-int FUN_0049d140(...);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern int FUN_0049ebf0(...); /* 0x49ebf0 */
-
-/* Supplied declaration required: qsort. */
-/* Supplied declaration required: FUN_001643b4. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int gameFlagIsSet(unsigned short);
-extern int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_00202400. */
-/* Supplied declaration required: FUN_00203b40. */
-extern int textureGetIndexedResource(unsigned int);
-/* Supplied declaration required: flagsAtSetBits01. */
-extern int flagsAtGetBit0(void);
-/* Supplied declaration required: FUN_0049d140. */
-
-
-void FUN_0049d770(int param_1)
-
+void FUN_0049d770(CallbackControllerWork *work)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned short *puVar7;
-  int temp_v6;
-  unsigned char temp_v7;
-  
-  temp_v7 = *(int *)(param_1 + 8) == 0;
-  temp_v1 = 0;
-  if (!temp_v7) {
-    temp_v1 = *(int *)(param_1 + 0xc);
-  }
-  if (((temp_v7 || temp_v1 == 0) || (temp_v1 = textureGetIndexedResource(0x33), temp_v1 == 0)) ||
-     (temp_v1 = asdTMTexTableNodeIsLoaded(0x33,0), temp_v1 == 0)) {
-    return;
-  }
-  temp_v2 = dataTableGet(0x46,0);
-  temp_v3 = dataTableGetEntries();
-  *(unsigned int *)(param_1 + 0x10) = temp_v3;
-  temp_v1 = dataTableGetCount(temp_v2);
-  temp_v6 = 0;
-  temp_v5 = 0;
-  *(int *)(param_1 + 0x14) = temp_v1;
-  if (temp_v1 != 0) {
-    do {
-      temp_v4 = temp_v5 * 0x11;
-      puVar7 = (unsigned short *)(*(int *)(param_1 + 0x10) + temp_v5 * 0x44);
-      if (puVar7 != (unsigned short *)0x0) {
-        temp_v4 = (unsigned int)*puVar7;
-      }
-      if (puVar7 != (unsigned short *)0x0 && temp_v4 != 0) {
-        temp_v1 = flagsAtGetBit0();
-        if (temp_v1 == 0) {
-          temp_v1 = gameFlagIsSet(puVar7[1]);
-          if (temp_v1 != 0) {
-            flagsAtSetBits01(*puVar7);
-            temp_v1 = temp_v6 * 2;
-            temp_v6 = temp_v6 + 1;
-            *(short *)(param_1 + temp_v1 + 0x18) = (short)temp_v5;
-          }
+    if (work->bufferA == NULL || work->bufferB == NULL ||
+        textureGetIndexedResource(51) == NULL || !asdTMTexTableNodeIsLoaded(51, 0))
+        return;
+    u32 table = dataTableGet(70, 0);
+    work->catalog.entries = dataTableGetEntries();
+    work->catalog.count = dataTableGetCount(table);
+    s32 available = 0;
+    for (u32 index = 0; index < work->catalog.count; ++index) {
+        CallbackCatalogRecord *record = &work->catalog.entries[index];
+        if (record != NULL && record->id != 0) {
+            if (!flagsAtGetBit0(record->id)) {
+                if (!gameFlagIsSet(record->unlockFlag))
+                    continue;
+                flagsAtSetBits01(record->id);
+            }
+            work->catalog.indices[available++] = (u16)index;
         }
-        else {
-          temp_v1 = temp_v6 * 2;
-          temp_v6 = temp_v6 + 1;
-          *(short *)(param_1 + temp_v1 + 0x18) = (short)temp_v5;
-        }
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < *(unsigned int *)(param_1 + 0x14));
-  }
-  *(int *)(param_1 + 0x80) = temp_v6;
-  qsort(param_1 + 0x18,temp_v6,2,FUN_0049ebf0);
-  FUN_00203b40(param_1 + 0x18c,*(unsigned int *)(param_1 + 0x80),10,1,1,1);
-  *(unsigned int *)(param_1 + 0x1f0) = 0;
-  *(unsigned int *)(param_1 + 500) = 0;
-  temp_v1 = 0;
-  *(unsigned int *)(param_1 + 0x1f8) = 0;
-  do {
-    if (*(int *)(param_1 + 0x80) <= temp_v1) break;
-    temp_v0 = FUN_001643b4(0x33,temp_v1 + 0x5d);
-    temp_v6 = temp_v1 * 2;
-    temp_v1 = temp_v1 + 1;
-    *(unsigned short *)(param_1 + temp_v6 + 0x1fc) = temp_v0;
-    *(short *)(param_1 + 0x218) = *(short *)(param_1 + 0x218) + 1;
-  } while (temp_v1 < 10);
-  temp_v0 = FUN_001643b4(0x33,0x58);
-  *(unsigned short *)(param_1 + 0x212) = temp_v0;
-  temp_v0 = FUN_001643b4(0x33,0x59);
-  *(unsigned short *)(param_1 + 0x214) = temp_v0;
-  temp_v0 = FUN_001643b4(0x33,0x57);
-  *(unsigned short *)(param_1 + 0x216) = temp_v0;
-  *(short *)(param_1 + 0x218) = *(short *)(param_1 + 0x218) + 3;
-  FUN_00202400();
-  FUN_0049d140(param_1,1,3);
-  return;
+    }
+    work->catalog.availableCount = available;
+    qsort(work->catalog.indices, available, sizeof(u16), FUN_0049ebf0);
+    FUN_00203b40(&work->list.navigation, work->catalog.availableCount, 10, 1, 1, 1);
+    work->list.rowState[0] = 0;
+    work->list.rowState[1] = 0;
+    work->list.rowState[2] = 0;
+    for (s32 row = 0; row < 10; ++row) {
+        if (work->catalog.availableCount <= row)
+            break;
+        work->list.touchRows[row] = FUN_001643b4(51, row + 93);
+        ++work->touchRegionCount;
+    }
+    work->list.touchPrevious = FUN_001643b4(51, 88);
+    work->list.touchNext = FUN_001643b4(51, 89);
+    work->list.touchScroll = FUN_001643b4(51, 87);
+    work->touchRegionCount += 3;
+    FUN_00202400();
+    FUN_0049d140(work, 1, 3);
 }
-
-} /* extern "C" */
+}

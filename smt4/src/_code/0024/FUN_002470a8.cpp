@@ -1,79 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002470a8` (_code @ 0x2470a8, 0x128 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: block/table saved registers and default-table block placement differ; final variant selection is shared later. */
+#include "gamedata/NamedVariantTable.h"
 
 extern "C" {
-
-int FUN_0024ba44(...);
-int binFileGetValue(void);
-int tbcrBlockGetPayload(void);
-int libc_strcmp(int, unsigned char *);
-int dataTableFileGetTable(...);
-
-/* Supplied declaration required: FUN_0024ba44. */
-/* Supplied declaration required: binFileGetValue. */
-/* Supplied declaration required: tbcrBlockGetPayload. */
-/* Supplied declaration required: libc_strcmp. */
-/* Supplied declaration required: dataTableFileGetTable. */
-extern unsigned int fileSlotGetBuffer(unsigned int);
-extern int dataTableGetEntries(void);
-
-
-int FUN_002470a8(int param_1,int param_2,int param_3)
-
-{
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char *pbVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  
-  pbVar4 = (unsigned char *)0x439d20;
-  temp_v4 = 0;
-  do {
-    temp_v0 = param_2;
-    libc_strcmp(param_2,pbVar4 + 2);
-    if (temp_v0 == 0) {
-      if (pbVar4 != (unsigned char *)0x0) {
-        temp_v5 = (unsigned int)*pbVar4;
-        temp_v3 = (unsigned int)pbVar4[1];
-        temp_v1 = fileSlotGetBuffer(7);
-        temp_v2 = binFileGetValue();
-        if (temp_v2 <= temp_v5) {
-          temp_v5 = 0;
-        }
-        FUN_0024ba44(temp_v1,temp_v5);
-        temp_v2 = tbcrBlockGetPayload();
-        if (temp_v2 <= temp_v3) {
-          temp_v3 = 0;
-        }
-        dataTableFileGetTable(temp_v1,temp_v3);
-        temp_v4 = dataTableGetEntries();
-        temp_v2 = (unsigned int)(param_1 != 0);
-        if (param_3 != 0) {
-          temp_v2 = 1 - temp_v2;
-        }
-        return temp_v4 + temp_v2 * 0x19c;
-      }
-      break;
-    }
-    temp_v4 = temp_v4 + 1;
-    pbVar4 = pbVar4 + 0x22;
-  } while (temp_v4 < 0x1c7);
-  temp_v1 = fileSlotGetBuffer(7);
-  binFileGetValue();
-  FUN_0024ba44(temp_v1,0);
-  tbcrBlockGetPayload();
-  dataTableFileGetTable(temp_v1,0);
-  temp_v4 = dataTableGetEntries();
-  temp_v2 = (unsigned int)(param_1 != 0);
-  if (param_3 != 0) {
-    temp_v2 = 1 - temp_v2;
-  }
-  return temp_v4 + temp_v2 * 0x19c;
+extern NamedVariantTableKey DAT_00439d20[455];
+s32 libc_strcmp(const char *left, const char *right);
+void *fileSlotGetBuffer(u32 slot);
+u32 binFileGetValue(const void *file);
+void *FUN_0024ba44(void *file, u32 block);
+u32 tbcrBlockGetPayload(const void *block);
+void *dataTableFileGetTable(void *block, u32 table);
+NamedVariantTableEntry *dataTableGetEntries(void *table);
 }
 
-} /* extern "C" */
+static __inline const NamedVariantTableKey *findVariantKey(const char *name)
+{
+    const NamedVariantTableKey *key = DAT_00439d20;
+    for (s32 index = 0; index < 455; ++index, ++key) {
+        if (libc_strcmp(name, key->name) == 0) {
+            return key;
+        }
+    }
+    return NULL;
+}
+
+// Select a named table's first or second variant, falling back to the default table.
+extern "C" NamedVariantTableEntry *FUN_002470a8(s32 alternate, const char *name, s32 invert)
+{
+    const NamedVariantTableKey *key = findVariantKey(name);
+    NamedVariantTableEntry *entries;
+    if (key != NULL) {
+        u32 blockIndex = key->block;
+        u32 tableIndex = key->table;
+        void *file = fileSlotGetBuffer(7);
+        if (binFileGetValue(file) <= blockIndex) {
+            blockIndex = 0;
+        }
+        void *block = FUN_0024ba44(file, blockIndex);
+        if (tbcrBlockGetPayload(block) <= tableIndex) {
+            tableIndex = 0;
+        }
+        entries = dataTableGetEntries(dataTableFileGetTable(block, tableIndex));
+    } else {
+        void *file = fileSlotGetBuffer(7);
+        binFileGetValue(file);
+        void *block = FUN_0024ba44(file, 0);
+        tbcrBlockGetPayload(block);
+        entries = dataTableGetEntries(dataTableFileGetTable(block, 0));
+    }
+    u32 variant = alternate != 0;
+    if (invert != 0) {
+        variant = 1 - variant;
+    }
+    return entries + variant;
+}

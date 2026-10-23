@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdMdlNodeCopyData` (_code @ 0x192694, 0x1a4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: BLOCKED: native model construction-description class and its packed/default constructor are required. */
 #include "romwright_types.h"
 
 extern "C" {

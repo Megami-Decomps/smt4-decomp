@@ -1,79 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00227af0` (_code @ 0x227af0, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: menu tail addressing and count-clamp condition scheduling differ from retail. */
+#include "shard/Shard0033.h"
+#include "shard/PassiveSkill.h"
 
 extern "C" {
+extern MenuState *g_menuState;
+void sysMemClear(void *destination, u32 size);
+void rt_memcpy(void *destination, const void *source, u32 size);
+s32 padGetMappedValue(s32 id);
+void *gameGetSlotRecord(s32 index);
+s32 partyFindSlotById(u32 id);
+s32 FUN_004bd098(void *unit, s32 skillId);
+s32 FUN_004c6bd0(s16 id, const ActiveSkillRecord *skill);
+const ActiveSkillRecord *dataTable04FindById(s32 id);
 
-int dataTable04FindById(int);
-int sysMemClear(int, int);
-int rt_memcpy(int, int, int);
-
-extern int g_menuState; /* 0x57f56c */
-
-extern int padGetMappedValue(int);
-extern unsigned int gameGetSlotRecord(void);
-/* Supplied declaration required: dataTable04FindById. */
-extern int partyFindSlotById(unsigned int);
-/* Supplied declaration required: sysMemClear. */
-extern int FUN_004bd098(unsigned int, int);
-extern int FUN_004c6bd0(int, int);
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_00227af0(int param_1)
-
+// Set the short menu message and refresh its skill-use count for the current unit.
+void FUN_00227af0(const char *text)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = g_menuState;
-  *(unsigned char *)(g_menuState + 0x10) = 0;
-  if (param_1 != 0) {
-    sysMemClear(temp_v0 + 0x26c,0x3d);
-    temp_v1 = 0;
-    do {
-      if (*(char *)(param_1 + temp_v1) == '\0') {
-        rt_memcpy(temp_v0 + 0x26c,param_1,temp_v1 + 1);
-        *(unsigned char *)(temp_v0 + 0x10) = 1;
-        break;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 0x3d);
-    temp_v0 = g_menuState;
-    *(unsigned int *)(g_menuState + 0x2b4) = 0;
-    if ((*(int *)(temp_v0 + 0x14) == 2) && (*(char *)(temp_v0 + 0x2b8) != '\x01')) {
-      if (*(char *)(temp_v0 + 0x11) != '\0') {
-        temp_v1 = padGetMappedValue((int)*(short *)(temp_v0 + 0x18));
-        temp_v1 = temp_v1 - 1;
-        *(int *)(temp_v0 + 0x2b4) = temp_v1;
-        if (temp_v1 < 1) {
-          temp_v1 = 0;
+    // The menu's message/count tail extends beyond the shared MenuState prefix.
+    struct MessageView {
+        u8 unk000[0x10];
+        u8 hasText;
+        u8 useMappedCount;
+        u8 unk012[2];
+        s32 mode;
+        s16 skillId;
+        u8 unk01A[0x252];
+        char text[61];
+        u8 unk2A9[3];
+        s32 unitId;
+        u8 usePartySlot;
+        u8 unk2B1[3];
+        s32 count;
+        u8 hideCount;
+    };
+    MessageView *menu = reinterpret_cast<MessageView *>(g_menuState);
+    menu->hasText = 0;
+    if (text != NULL) {
+        sysMemClear(menu->text, sizeof(menu->text));
+        for (s32 length = 0; length < 61; ++length) {
+            if (text[length] == '\0') {
+                rt_memcpy(menu->text, text, length + 1);
+                menu->hasText = 1;
+                break;
+            }
         }
-      }
-      else {
-        if ((int)*(unsigned int *)(temp_v0 + 0x2ac) < 1) {
-          return;
+        menu = reinterpret_cast<MessageView *>(g_menuState);
+        menu->count = 0;
+        if (menu->mode == 2 && menu->hideCount != 1) {
+            s32 count;
+            if (menu->useMappedCount != 0) {
+                count = padGetMappedValue(menu->skillId) - 1;
+                menu->count = count;
+                if (count <= 0) {
+                    count = 0;
+                }
+            } else {
+                if (menu->unitId <= 0) {
+                    return;
+                }
+                if (menu->usePartySlot != 0) {
+                    s32 slot = partyFindSlotById(static_cast<u16>(menu->unitId));
+                    if (slot < 0) {
+                        return;
+                    }
+                    void *unit = gameGetSlotRecord(slot);
+                    count = FUN_004bd098(unit, menu->skillId);
+                } else {
+                    const ActiveSkillRecord *skill = dataTable04FindById(menu->skillId);
+                    count = FUN_004c6bd0(static_cast<s16>(menu->unitId), skill);
+                }
+            }
+            menu->count = count;
         }
-        if (*(char *)(temp_v0 + 0x2b0) != '\0') {
-          temp_v1 = partyFindSlotById(*(unsigned int *)(temp_v0 + 0x2ac) & 0xffff);
-          if (temp_v1 < 0) {
-            return;
-          }
-          temp_v2 = gameGetSlotRecord();
-          temp_v1 = FUN_004bd098(temp_v2,(int)*(short *)(temp_v0 + 0x18));
-        }
-        else {
-          temp_v1 = (int)*(short *)(temp_v0 + 0x18);
-          dataTable04FindById(temp_v1);
-          temp_v1 = FUN_004c6bd0((int)(short)*(unsigned int *)(temp_v0 + 0x2ac),temp_v1);
-        }
-      }
-      *(int *)(temp_v0 + 0x2b4) = temp_v1;
     }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

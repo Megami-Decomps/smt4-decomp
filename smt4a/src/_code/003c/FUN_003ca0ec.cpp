@@ -1,79 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ca0ec` (_code @ 0x3ca0ec, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match2_LinkedItems.h"
 
-extern "C" {
+extern "C" void FUN_003c2df0(LinkedItems *, LinkedItem *, LinkedItem *);
 
-int FUN_003c2df0(...);
-
-/* Supplied declaration required: FUN_003c2df0. */
-
-
-void FUN_003ca0ec(int param_1,int param_2)
-
+static LinkedItem *findReference(LinkedItems *items, void *resource)
 {
-/* irregular: 3 goto(s); 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v0 = *(unsigned int *)(param_2 + 0x98);
-  *(unsigned int *)(param_2 + 0x98) = temp_v0 & 0xfffffffd;
-  if ((temp_v0 & 1) == 0) {
-    for (temp_v2 = *(int *)(param_1 + 0x8c); temp_v2 != 0; temp_v2 = *(int *)(temp_v2 + 0xac)) {
-      temp_v0 = *(unsigned int *)(temp_v2 + 0x98) & 3;
-      temp_v3 = temp_v0 == 2;
-      if (temp_v3) {
-        temp_v0 = *(unsigned int *)(temp_v2 + 0x94);
-      }
-      if (temp_v3 && temp_v0 == *(unsigned int *)(param_2 + 0x90)) {
-        if (temp_v2 != 0) {
-          *(unsigned int *)(temp_v2 + 0x98) = *(unsigned int *)(temp_v2 + 0x98) & 0xfffffffd;
-          *(unsigned int *)(temp_v2 + 0x94) = 0;
-          FUN_003c2df0(param_1,temp_v2);
-          temp_v1 = *(int *)(param_1 + 0x8c);
-          goto joined_r0x003ca16c;
-        }
-        break;
-      }
+    for (LinkedItem *item = items->head; item != NULL; item = item->next) {
+        if ((item->reference.flags & 3) == 2 && item->reference.source == resource)
+            return item;
     }
-  }
-  *(unsigned int *)(param_2 + 0x94) = 0;
-  return;
-joined_r0x003ca16c:
-  if (temp_v1 == 0) {
-    *(unsigned int *)(param_2 + 0x94) = 0;
-    return;
-  }
-  temp_v0 = *(unsigned int *)(temp_v1 + 0x98) & 3;
-  temp_v3 = temp_v0 == 2;
-  if (temp_v3) {
-    temp_v0 = *(unsigned int *)(temp_v1 + 0x94);
-  }
-  if (temp_v3 && temp_v0 == *(unsigned int *)(param_2 + 0x90)) goto joined_r0x003ca18c;
-  temp_v1 = *(int *)(temp_v1 + 0xac);
-  goto joined_r0x003ca16c;
-joined_r0x003ca18c:
-  while (temp_v1 != 0) {
-    FUN_003c2df0(param_1,temp_v1,temp_v2);
-    temp_v1 = *(int *)(param_1 + 0x8c);
-    while( 1 ) {
-      if (temp_v1 == 0) {
-        *(unsigned int *)(param_2 + 0x94) = 0;
-        return;
-      }
-      temp_v0 = *(unsigned int *)(temp_v1 + 0x98) & 3;
-      temp_v3 = temp_v0 == 2;
-      if (temp_v3) {
-        temp_v0 = *(unsigned int *)(temp_v1 + 0x94);
-      }
-      if (temp_v3 && temp_v0 == *(unsigned int *)(param_2 + 0x90)) break;
-      temp_v1 = *(int *)(temp_v1 + 0xac);
-    }
-  }
-  *(unsigned int *)(param_2 + 0x94) = 0;
-  return;
+    return NULL;
 }
 
-} /* extern "C" */
+/* Promote the first dependent resource, then redirect the remaining references to it. */
+extern "C" void FUN_003ca0ec(LinkedItems *items, LinkedItem *item)
+{
+    item->reference.flags &= ~2u;
+    if (!(item->reference.flags & 1)) {
+        LinkedItem *replacement = findReference(items, item->resource);
+        if (replacement != NULL) {
+            replacement->reference.flags &= ~2u;
+            replacement->reference.source = NULL;
+            FUN_003c2df0(items, replacement, replacement);
+            LinkedItem *reference = findReference(items, item->resource);
+            while (reference != NULL) {
+                FUN_003c2df0(items, reference, replacement);
+                reference = findReference(items, item->resource);
+            }
+        }
+    }
+    item->reference.source = NULL;
+}

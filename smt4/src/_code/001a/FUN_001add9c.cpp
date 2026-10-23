@@ -19,7 +19,7 @@ int FUN_002bf380(...);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int FUN_002c39a4(int);
-int FUN_002cf814(...);
+int uiDrawRotatingLoadingGrid(...);
 int FUN_002d96d4(...);
 
 typedef int romwright_code(...);
@@ -60,7 +60,7 @@ extern int FUN_002a0d0c(void);
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002cf814. */
+/* Supplied declaration required: uiDrawRotatingLoadingGrid. */
 /* Supplied declaration required: FUN_002d96d4. */
 
 
@@ -232,7 +232,7 @@ unsigned int FUN_001add9c(void)
       temp_v9 = (*(unsigned char *)(temp_v3 + 0x95f4) + 1) & 0xff;
       temp_v10 = temp_v9 % 0x28;
       *(unsigned char *)(temp_v3 + 0x95f4) = (unsigned char)temp_v10;
-      FUN_002cf814(0x1e0,temp_v10,temp_v9 * -0x33333333);
+      uiDrawRotatingLoadingGrid(0x1e0,temp_v10,temp_v9 * -0x33333333);
     }
   }
   temp_v3 = g_titleScene;

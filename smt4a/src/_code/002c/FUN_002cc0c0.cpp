@@ -1,79 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cc0c0` (_code @ 0x2cc0c0, 0x15c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads each selected-widget value through separate pointer reloads; direct fields combine into LDRD. */
+#include "ui/PartyPanelState.h"
+#include "shard/Shard0031.h"
 
+// The sortable preview table follows the published Apocalypse panel prefix.
+struct PartyPanelPreviewWorkA {
+    PartyPanelStateA panel;
+    /* 0xA80 */ SelectedUnitListEntry units[24];
+};
+struct PartyPanelValueWidget {
+    u8 unk00[0x40];
+    /* 0x40 */ s32 first;
+    /* 0x44 */ s32 second;
+};
 extern "C" {
-
-int FUN_003344b4(unsigned int, unsigned int);
-int pair40Set(unsigned int, int, unsigned int);
-int btlItemComputeValues(...);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern int g_partyPanel; /* 0x57f268 */
-
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_003344b4. */
-/* Supplied declaration required: pair40Set. */
-/* Supplied declaration required: btlItemComputeValues. */
-
+extern PartyPanelPreviewWorkA* g_partyPanel;
+PartyStatusSlots* gameGetSlotTable(void);
+void btlItemComputeValues(s32 unit, u16 item, s32* first, s32* second);
+void pair40Set(u32 widget, s32 first, s32 second);
+void FUN_003344b4(s32 first, s32 second);
 
 void FUN_002cc0c0(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5 [2];
-  
-  temp_v0 = g_partyPanel;
-  temp_v1 = gameGetSlotTable();
-  temp_v4 = 0;
-  temp_v5[0] = 0;
-  if (*(char *)(temp_v0 + 0x9c0) != '\0') {
-    btlItemComputeValues(0xffffffff,*(unsigned short *)(temp_v0 + 0x36),&temp_v4,temp_v5);
-    pair40Set(*(unsigned int *)(temp_v0 + 0xa10),temp_v4,temp_v5[0]);
-  }
-  temp_v3 = 0;
-  do {
-    temp_v2 = (int)*(char *)(temp_v1 + temp_v3 + 0x1ca0);
-    if (-1 < temp_v2) {
-      btlItemComputeValues(temp_v2,*(unsigned short *)(temp_v0 + 0x36),&temp_v4,temp_v5);
-      pair40Set(*(unsigned int *)(temp_v0 + temp_v3 * 4 + 0xa14),temp_v4,temp_v5[0]);
+    PartyPanelPreviewWorkA* work = g_partyPanel;
+    PartyStatusSlots* slots = gameGetSlotTable();
+    s32 first = 0;
+    s32 second = 0;
+    if (work->panel.animation.preview.protagonistAvailable) {
+        btlItemComputeValues(-1, work->panel.preview.item, &first, &second);
+        pair40Set(work->panel.handlesA[0], first, second);
     }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 3);
-  temp_v1 = 0;
-  do {
-    temp_v3 = *(int *)(temp_v0 + temp_v1 * 8 + 0xa80);
-    if (-1 < temp_v3) {
-      btlItemComputeValues(temp_v3,*(unsigned short *)(temp_v0 + 0x36),&temp_v4,temp_v5);
-      pair40Set(*(unsigned int *)(temp_v0 + temp_v1 * 4 + 0xa20),temp_v4,temp_v5[0]);
+    for (s32 index = 0; index < 3; ++index) {
+        s32 unit = slots->reserve[index];
+        if (unit >= 0) {
+            btlItemComputeValues(unit, work->panel.preview.item, &first, &second);
+            pair40Set(work->panel.handlesA[index + 1], first, second);
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x18);
-  if (*(short *)(temp_v0 + 0x38) < 0) {
-    FUN_003344b4(*(unsigned int *)(*(int *)(temp_v0 + 0xa10) + 0x40),
-                 *(unsigned int *)(*(int *)(temp_v0 + 0xa10) + 0x44));
-    return;
-  }
-  temp_v1 = 0;
-  do {
-    if (*(int *)(temp_v0 + temp_v1 * 8 + 0xa80) == (int)*(short *)(temp_v0 + 0x38)) {
-      temp_v3 = temp_v0 + temp_v1 * 4;
-      FUN_003344b4(*(unsigned int *)(*(int *)(temp_v3 + 0xa20) + 0x40),
-                   *(unsigned int *)(*(int *)(temp_v3 + 0xa20) + 0x44));
+    for (s32 index = 0; index < 24; ++index) {
+        s32 unit = static_cast<s32>(work->units[index].packedIndex);
+        if (unit >= 0) {
+            btlItemComputeValues(unit, work->panel.preview.item, &first, &second);
+            pair40Set(work->panel.handlesB[index], first, second);
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x18);
-  return;
+    if (work->panel.preview.selection < 0) {
+        PartyPanelValueWidget* widget = reinterpret_cast<PartyPanelValueWidget*>(work->panel.handlesA[0]);
+        FUN_003344b4(widget->first, widget->second);
+    } else {
+        for (s32 index = 0; index < 24; ++index) {
+            if (static_cast<s32>(work->units[index].packedIndex) == work->panel.preview.selection) {
+                PartyPanelValueWidget* widget = reinterpret_cast<PartyPanelValueWidget*>(work->panel.handlesB[index]);
+                FUN_003344b4(widget->first, widget->second);
+            }
+        }
+    }
 }
-
-} /* extern "C" */
+}

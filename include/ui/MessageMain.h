@@ -149,7 +149,18 @@ typedef struct MessagePanelA {
     /* 0x91 */ u8 unk91;
     /* 0x92 */ u8 unk92;
     /* 0x93 */ u8 unk93;
-    /* 0x94 */ u8 unk94[0xD4];
+    union {
+        /* 0x94 */ u8 unk94[0xD4];
+        struct {
+            /* 0x94 */ u8 unk94BeforeLast[8];
+            /* 0x9C */ s32 lastIndex;
+            /* 0xA0 */ u8 states[12];
+            /* 0xAC */ u32 ids[12];
+            /* 0xDC */ u8 special[12];
+            /* 0xE8 */ u8 unkE8;
+            /* 0xE9 */ u8 pending;
+        } removal;
+    };
     /* 0x168 */ u32 unk168;
     /* 0x16C */ u8 unk16C;
     /* 0x16D */ u8 unk16D;
@@ -167,7 +178,13 @@ typedef struct MessagePanelA {
     /* 0xB00 */ u8 blockB00[4];
     /* 0xB04 */ u8 unkB04[0x114];
     /* 0xC18 */ u8 spriteC18[0x8C];
-    /* 0xCA4 */ u8 spritesCA4[21][0x8C]; // the sprites after spriteC18 in the same table
+    union {
+        /* 0xCA4 */ u8 spritesCA4[21][0x8C]; // the sprites after spriteC18 in the same table
+        struct {
+            /* 0xCA4 */ u8 unkCA4BeforeRows[0x118];
+            /* 0xDBC */ u8 rows[12][0x8C];
+        } removalSprites;
+    };
     /* 0x1820 */ u8 block1820[4];
     /* 0x1824 */ u8 unk1824[0x1D5];
     /* 0x19F9 */ u8 unk19F9;
@@ -203,6 +220,14 @@ typedef char MessageWorkASizeCheck[sizeof(MessageWorkA) == 0x19EC ? 1 : -1];
 typedef char MessagePanelASizeCheck[sizeof(MessagePanelA) == 0x1A14 ? 1 : -1];
 typedef char MessagePanelAFadeOffsetsCheck[offsetof(MessagePanelA, spritesCA4) == 0xCA4 && offsetof(MessagePanelA, unk19F9) == 0x19F9 && offsetof(MessagePanelA, unk19FC) == 0x19FC ? 1 : -1];
 typedef char MessagePanelAModeOffsetsCheck[offsetof(MessagePanelA, unk7C) == 0x7C && offsetof(MessagePanelA, unk88) == 0x88 && offsetof(MessagePanelA, unk91) == 0x91 && offsetof(MessagePanelA, unk17D) == 0x17D ? 1 : -1];
+typedef char MessagePanelARemovalOffsetsCheck[
+    offsetof(MessagePanelA, removal.lastIndex) == 0x9C &&
+    offsetof(MessagePanelA, removal.states) == 0xA0 &&
+    offsetof(MessagePanelA, removal.ids) == 0xAC &&
+    offsetof(MessagePanelA, removal.special) == 0xDC &&
+    offsetof(MessagePanelA, removal.pending) == 0xE9 &&
+    offsetof(MessagePanelA, removalSprites.rows) == 0xDBC &&
+    sizeof(MessagePanelA) == 0x1A14 ? 1 : -1];
 typedef char MessageGlobalsSizeCheck[sizeof(MessageGlobals) == 0x10 ? 1 : -1];
 typedef char MessageGlobalsASizeCheck[sizeof(MessageGlobalsA) == 0xC ? 1 : -1];
 

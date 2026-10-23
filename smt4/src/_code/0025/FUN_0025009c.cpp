@@ -5,7 +5,7 @@
 extern "C" {
 
 int matrix44SetIdentity(void);
-int FUN_002a2c7c(void);
+int gfxQuaternionWorkspaceBuildMatrix(void);
 int FUN_003f6c7c(void);
 
 extern unsigned int DAT_004ea91c; /* 0x4ea91c */
@@ -23,7 +23,7 @@ extern unsigned int DAT_004ea980; /* 0x4ea980 */
 extern unsigned int DAT_004ea984; /* 0x4ea984 */
 
 /* Supplied declaration required: matrix44SetIdentity. */
-/* Supplied declaration required: FUN_002a2c7c. */
+/* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: FUN_003f6c7c. */
 
 
@@ -40,7 +40,7 @@ void FUN_0025009c(unsigned int *param_1,unsigned int *param_2)
   DAT_004ea924 = param_2[2];
   DAT_004ea928 = param_2[3];
   FUN_003f6c7c();
-  FUN_002a2c7c();
+  gfxQuaternionWorkspaceBuildMatrix();
   temp_v1 = DAT_004ea964;
   temp_v0 = DAT_004ea960;
   *param_1 = DAT_004ea95c;

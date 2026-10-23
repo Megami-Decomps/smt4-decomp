@@ -1,117 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00309bc8` (_code @ 0x309bc8, 0x1cc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only count-label/text stack placement, frame size and prologue global-load scheduling differ. */
+#include "ui/ButtonHelp.h"
+#include "shard/W6_W6Match2_RankedTableRecord.h"
 
 extern "C" {
+extern ButtonHelpGlobals g_buttonHelp;
+PlayerEquipmentAppearance *gameGetPlayerData();
+void FUN_0029ede8(u32 slot, u32 value, u32 color, s32 mode);
+void FUN_002907c4(char *buffer, u32 value);
+void textFormatBuffer(char *buffer, const char *format, ...);
+void textEncodeFontSlot(u32 slot, const char *text);
+void btlFormatCategoryLabel(char *buffer, u32 value);
+void skillFormatTargetLabel(char *buffer, u32 target);
+void asdTextDrawDirectoryEntry(u32 handle, u32 directory, u32 color, s32 mode,
+    s32 style, u32 context, u32 depth);
 
-int skillFormatTargetLabel(unsigned char [100], int);
-int FUN_0024bda8(unsigned char [100], unsigned int);
-int FUN_002907c4(...);
-int textEncodeFontSlot(int, unsigned char [100]);
-int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
-int FUN_0029ede8(int, int, unsigned int, int);
-int dataTable08Sub2GetRecord(void);
-int textFormatBuffer(...);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp90; /* 0x90: local_90 */
-} param_2_stack;
-
-extern unsigned char LAB_00309d98; /* 0x309d98 */
-extern unsigned char LAB_00309da0; /* 0x309da0 */
-extern unsigned char LAB_00309dac; /* 0x309dac */
-extern unsigned char LAB_00309db4; /* 0x309db4 */
-extern unsigned char LAB_00309dc4; /* 0x309dc4 */
-extern unsigned char LAB_00309dd0; /* 0x309dd0 */
-extern unsigned char LAB_00309ddc; /* 0x309ddc */
-extern unsigned char LAB_00309de8; /* 0x309de8 */
-extern int DAT_0043da2c; /* 0x43da2c */
-extern int DAT_0043da30; /* 0x43da30 */
-
-/* Supplied declaration required: skillFormatTargetLabel. */
-/* Supplied declaration required: FUN_0024bda8. */
-/* Supplied declaration required: FUN_002907c4. */
-/* Supplied declaration required: textEncodeFontSlot. */
-/* Supplied declaration required: asdTextDrawDirectoryEntry. */
-/* Supplied declaration required: FUN_0029ede8. */
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
-extern int gameGetPlayerData(void);
-/* Supplied declaration required: textFormatBuffer. */
-
-
-void FUN_00309bc8(int param_1,unsigned int param_2)
-
+void FUN_00309bc8(u32 context, u32 depth)
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int iStack_8c;
-  unsigned int temp_v6 [2];
-  unsigned char temp_v7 [100];
-  
-  temp_v1 = DAT_0043da2c;
-  temp_v2 = gameGetPlayerData();
-  temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 2);
-  dataTable08Sub2GetRecord();
-  temp_v2 = gameGetPlayerData();
-  temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + 4);
-  dataTable08Sub2GetRecord();
-  if (temp_v3 == 0 || temp_v4 == 0) {
-    *(unsigned char *)(temp_v1 + 0x4cb) = 0;
-  }
-  else {
-    *(unsigned char *)(temp_v1 + 0x55c) = 1;
-    *(unsigned char *)(temp_v1 + 0x4cb) = 1;
-    temp_v0 = *(unsigned char *)(temp_v3 + 0x58);
-    if ((temp_v0 & 0xf) == temp_v0 >> 4) {
-      FUN_0029ede8(0x25,temp_v0 & 0xf,0xffffffff,0);
+    ButtonHelpWork *work = g_buttonHelp.work;
+    RankedTableRecord *firearm = dataTable08Sub2GetRecord(gameGetPlayerData()->equipped.firearm);
+    RankedTableRecord *ammunition = dataTable08Sub2GetRecord(gameGetPlayerData()->equipped.ammunition);
+    char text[100];
+    if (firearm == NULL || ammunition == NULL) {
+        work->unk4CB = 0;
+        return;
     }
-    else {
-      FUN_002907c4(&temp_v5,temp_v0 & 0xf);
-      FUN_002907c4(temp_v6,*(unsigned char *)(temp_v3 + 0x58) >> 4);
-      textFormatBuffer(temp_v7,&LAB_00309d98,&temp_v5,temp_v6);
-      textEncodeFontSlot(0x25,temp_v7);
+    work->unk55C = 1;
+    work->unk4CB = 1;
+    u8 attackCount = firearm->attack.attackCount;
+    if ((attackCount & 0xF) == attackCount >> 4) {
+        FUN_0029ede8(0x25, attackCount & 0xF, 0xFFFFFFFF, 0);
+    } else {
+        char countLabels[2][8];
+        FUN_002907c4(countLabels[0], attackCount & 0xF);
+        FUN_002907c4(countLabels[1], firearm->attack.attackCount >> 4);
+        textFormatBuffer(text, "%s\x81\x60%s", countLabels[0], countLabels[1]);
+        textEncodeFontSlot(0x25, text);
     }
-    FUN_0024bda8(temp_v7,*(unsigned int *)(temp_v4 + 0x54) >> 0x14);
-    textEncodeFontSlot(0x26,temp_v7);
-    skillFormatTargetLabel(temp_v7,*(unsigned char *)(temp_v3 + 0x59));
-    textEncodeFontSlot(0x27,temp_v7);
-    if (*(char *)(temp_v4 + 0x5b) == '\0') {
-      textFormatBuffer(temp_v7,&LAB_00309da0);
-    }
-    if (*(char *)(temp_v4 + 0x5b) == '\x01') {
-      textFormatBuffer(temp_v7,&LAB_00309dac);
-    }
-    if (*(char *)(temp_v4 + 0x5b) == '\x05') {
-      textFormatBuffer(temp_v7,&LAB_00309db4);
-    }
-    if (*(char *)(temp_v4 + 0x5b) == '\x06') {
-      textFormatBuffer(temp_v7,&LAB_00309dc4);
-    }
-    if (*(char *)(temp_v4 + 0x5b) == '\a') {
-      textFormatBuffer(temp_v7,&LAB_00309dd0);
-    }
-    if (*(char *)(temp_v4 + 0x5b) == '\b') {
-      textFormatBuffer(temp_v7,&LAB_00309ddc);
-    }
-    if (*(char *)(temp_v4 + 0x5b) == '\t') {
-      textFormatBuffer(temp_v7,&LAB_00309de8);
-    }
-    textEncodeFontSlot(0x28,temp_v7);
-    if (param_1 == 0) {
-      param_1 = DAT_0043da30;
-    }
-    temp_v5 = 3;
-    iStack_8c = param_1;
-    temp_v6[0] = param_2;
-    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v1 + 0x558),3,0xffffffff,0);
-  }
-  return;
+    btlFormatCategoryLabel(text, rankedTableRecordGetSortFlags(ammunition) >> 20);
+    textEncodeFontSlot(0x26, text);
+    skillFormatTargetLabel(text, firearm->category);
+    textEncodeFontSlot(0x27, text);
+    // Full-width English ailment labels in the retail font's Shift-JIS encoding.
+    if (ammunition->ailment == 0) // None
+        textFormatBuffer(text, "\x82\x6D\x82\x8F\x82\x8E\x82\x85");
+    if (ammunition->ailment == 1) // KO
+        textFormatBuffer(text, "\x82\x6A\x82\x6E");
+    if (ammunition->ailment == 5) // Poison
+        textFormatBuffer(text, "\x82\x6F\x82\x8F\x82\x89\x82\x93\x82\x8F\x82\x8E");
+    if (ammunition->ailment == 6) // Panic
+        textFormatBuffer(text, "\x82\x6F\x82\x81\x82\x8E\x82\x89\x82\x83");
+    if (ammunition->ailment == 7) // Sleep
+        textFormatBuffer(text, "\x82\x72\x82\x8C\x82\x85\x82\x85\x82\x90");
+    if (ammunition->ailment == 8) // Bind
+        textFormatBuffer(text, "\x82\x61\x82\x89\x82\x8E\x82\x84");
+    if (ammunition->ailment == 9) // Sick
+        textFormatBuffer(text, "\x82\x72\x82\x89\x82\x83\x82\x8B");
+    textEncodeFontSlot(0x28, text);
+    if (context == 0)
+        context = g_buttonHelp.mbm;
+    asdTextDrawDirectoryEntry(work->unk558, 3, 0xFFFFFFFF, 0, 3, context, depth);
 }
-
-} /* extern "C" */
+}

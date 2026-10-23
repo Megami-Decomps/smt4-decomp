@@ -1,119 +1,89 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00291728` (_code @ 0x291728, 0x1d8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: flag-clear order, optional-request branch outlining and task argument scheduling differ. */
+#include "addon/aocMain.h"
+#include "shard/W6_W6Match5_QueuedRequest.h"
+#include "shard/JobWork.h"
 
+struct EventJobRequestPrefix { u32 id; s32 entry; char path[1]; };
 extern "C" {
+extern AocJobStateA *g_aocJob;
+extern EventJobRequestPrefix DAT_005e1f70;
+void scrScriptProcessDestroy(void *script);
+void asdMemFree(void *memory);
+void rt_aeabi_memclr(void *memory, u32 size);
+char *libc_strcpy(char *destination, const char *source);
+const void *jyoucyuGetTableEntry(u32 id);
+void dataTableReload(u32 table);
+void dataTableResolveEntryVariants();
+void FUN_00225ddc(JobWork *job);
+void FUN_00298978(JobWork *job);
+void aocJobRequest(JobWork *job);
+void resourceDefaultFalseCallback(JobWork *job);
+void resourceEmptyCallback(JobWork *job);
+void FUN_0032878c(JobWork *job);
+void FUN_00379d54(JobWork *job);
+u32 asdProcessCreateSimple(const char *name, s32 priority, s32 first, s32 second,
+    void (*update)(JobWork *), void (*finish)(JobWork *), void *data);
+u32 taskCreateDraw(const char *name, s32 priority, s32 first, s32 second,
+    void (*update)(JobWork *), void (*finish)(JobWork *), void *data, u32 parent);
 
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdMemFree(void);
-int scrScriptProcessDestroy(void);
-int dataTableResolveEntryVariants(void);
-int libc_strcpy(unsigned char *, unsigned int *);
-int rt_aeabi_memclr(unsigned int *, int);
-int dataTableReload(int);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern int FUN_00225ddc(...); /* 0x225ddc */
-extern unsigned char LAB_00291910; /* 0x291910 */
-extern unsigned char LAB_00291920; /* 0x291920 */
-extern unsigned char LAB_00291938; /* 0x291938 */
-extern unsigned char LAB_00291954; /* 0x291954 */
-extern int FUN_00298978(...); /* 0x298978 */
-extern unsigned char LAB_002df90c; /* 0x2df90c */
-extern unsigned char LAB_00328774; /* 0x328774 */
-extern unsigned char LAB_0032878c; /* 0x32878c */
-extern unsigned char LAB_00357f98; /* 0x357f98 */
-extern unsigned char LAB_00379d54; /* 0x379d54 */
-extern unsigned int *g_aocJob; /* 0x57f568 */
-extern unsigned int DAT_005e1f70; /* 0x5e1f70 */
-extern int DAT_005e1f74; /* 0x5e1f74 */
-extern unsigned char DAT_005e1f78; /* 0x5e1f78 */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-extern int jyoucyuGetTableEntry(unsigned int);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: dataTableResolveEntryVariants. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: rt_aeabi_memclr. */
-/* Supplied declaration required: dataTableReload. */
-
-
-void FUN_00291728(unsigned int *param_1)
-
+void FUN_00291728(const RequestParameters *parameters)
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  int temp_v0;
-  
-  puVar1 = g_aocJob;
-  if (g_aocJob[0xc] != 0) {
-    scrScriptProcessDestroy();
-    puVar1[0xc] = 0;
-  }
-  if (puVar1[0xb] != 0) {
-    asdMemFree();
-    puVar1[0xb] = 0;
-  }
-  if (puVar1[0xd] != 0) {
-    asdMemFree();
-    puVar1[0xd] = 0;
-  }
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1[4] = 0;
-  puVar1[5] = 0;
-  puVar1[6] = 0;
-  puVar1[7] = 0;
-  puVar1[10] = 0;
-  puVar1[0xb] = 0;
-  puVar1[0xc] = 0;
-  *(unsigned char *)(puVar1 + 8) = 0;
-  *(unsigned char *)((int)puVar1 + 0x21) = 0;
-  *(unsigned char *)((int)puVar1 + 0x22) = 0;
-  *(unsigned char *)((int)puVar1 + 0x23) = 0;
-  *(unsigned char *)(puVar1 + 9) = 0;
-  *(unsigned char *)(puVar1 + 0xe) = 0;
-  *(unsigned char *)(puVar1 + 0x1f) = 0;
-  rt_aeabi_memclr(puVar1 + 0xf,0x40);
-  *(unsigned char *)(puVar1 + 1) = 0;
-  if (param_1 == (unsigned int *)0x0) {
-    temp_v0 = jyoucyuGetTableEntry(0);
-    if (temp_v0 != 0) {
-      dataTableReload(0x19);
-      dataTableReload(0x1b);
-      dataTableReload(0x1c);
-      dataTableResolveEntryVariants();
+    struct EventJobView {
+        AocJobStateA prefix;
+        u32 parameters[6];
+        u8 flags[4], status, unk25[3];
+        u32 state;
+        void *resource, *script, *auxiliary;
+        u8 complete, unk39[3];
+        char path[64];
+        u8 pathReady;
+    };
+    typedef char EventJobViewOffsetsCheck[offsetof(EventJobView, script) == 0x30 &&
+        offsetof(EventJobView, path) == 0x3C && offsetof(EventJobView, pathReady) == 0x7C ? 1 : -1];
+    EventJobView *work = reinterpret_cast<EventJobView *>(g_aocJob);
+    if (work->script != NULL) {
+        scrScriptProcessDestroy(work->script);
+        work->script = NULL;
     }
-    puVar2 = &LAB_00291920;
-    asdProcessCreateSimple(&LAB_00291920,4,0,0,FUN_00298978,&LAB_00328774,0);
-    *puVar1 = (unsigned int)puVar2;
-    taskCreateDraw(&LAB_00291938,0x75,0,0,&LAB_002df90c,&LAB_00357f98,0,puVar2);
-    taskCreateDraw(&LAB_00291954,0xea,0,0,&LAB_0032878c,&LAB_00379d54,0,*puVar1);
-    return;
-  }
-  DAT_005e1f70 = *param_1;
-  DAT_005e1f74 = param_1[1];
-  if (DAT_005e1f74 != -1) {
-    DAT_005e1f78 = 0;
-  }
-  else {
-    libc_strcpy(&DAT_005e1f78,param_1 + 2);
-  }
-  puVar2 = &LAB_00291910;
-  asdProcessCreateSimple(&LAB_00291910,4,0,0,FUN_00225ddc,&LAB_00328774,0);
-  *puVar1 = (unsigned int)puVar2;
-  return;
+    if (work->resource != NULL) {
+        asdMemFree(work->resource);
+        work->resource = NULL;
+    }
+    if (work->auxiliary != NULL) {
+        asdMemFree(work->auxiliary);
+        work->auxiliary = NULL;
+    }
+    for (s32 index = 0; index < 6; ++index)
+        work->parameters[index] = 0;
+    work->state = 0;
+    work->resource = NULL;
+    work->script = NULL;
+    work->flags[0] = work->flags[1] = work->flags[2] = work->flags[3] = 0;
+    work->status = work->complete = work->pathReady = 0;
+    rt_aeabi_memclr(work->path, sizeof(work->path));
+    work->prefix.started = 0;
+    if (parameters == NULL) {
+        if (jyoucyuGetTableEntry(0) != NULL) {
+            dataTableReload(0x19);
+            dataTableReload(0x1B);
+            dataTableReload(0x1C);
+            dataTableResolveEntryVariants();
+        }
+        work->prefix.id = asdProcessCreateSimple("EVENT VIEW CALC", 4, 0, 0,
+            FUN_00298978, aocJobRequest, NULL);
+        taskCreateDraw("EVENT VIEW UDRAW", 0x75, 0, 0,
+            resourceDefaultFalseCallback, resourceEmptyCallback, NULL, work->prefix.id);
+        taskCreateDraw("EVENT VIEW DDRAW", 0xEA, 0, 0,
+            FUN_0032878c, FUN_00379d54, NULL, work->prefix.id);
+        return;
+    }
+    DAT_005e1f70.id = parameters->words[0];
+    DAT_005e1f70.entry = parameters->words[1];
+    if (DAT_005e1f70.entry != -1)
+        DAT_005e1f70.path[0] = 0;
+    else
+        libc_strcpy(DAT_005e1f70.path, reinterpret_cast<const char *>(&parameters->words[2]));
+    work->prefix.id = asdProcessCreateSimple("EVENT CALC", 4, 0, 0,
+        FUN_00225ddc, aocJobRequest, NULL);
 }
-
-} /* extern "C" */
+}

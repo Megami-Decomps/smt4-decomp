@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00236578` (_code @ 0x236578, 0x124 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: allocator-backed vector push needs native container/placement-copy semantics. */
 #include "romwright_types.h"
 
 extern "C" {

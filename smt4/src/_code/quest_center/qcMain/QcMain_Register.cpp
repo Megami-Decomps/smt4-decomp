@@ -1,97 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `QcMain_Register` (_code @ 0x1a97a4, 0x1f0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation debug-source hook is absent; first draw-task argument registers differ. */
+#include "common.h"
 
-extern "C" {
-
-int gameFlagSetValue(...);
-int asdMemAlloc(...);
-int taskCreateDraw(...);
-int jyoucyuGetTableEntry(...);
-int asdProcessCreateSimple(...);
-int QcMain_SetFlag(...);
-
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-extern unsigned char LAB_001a99dc; /* 0x1a99dc */
-extern unsigned char LAB_001a99f4; /* 0x1a99f4 */
-extern unsigned char LAB_001a9a10; /* 0x1a9a10 */
-extern int QuestCenterMainProcUpdate(...); /* 0x1a9a74 */
-extern unsigned char LAB_001d960c; /* 0x1d960c */
-extern unsigned char LAB_001fe158; /* 0x1fe158 */
-extern unsigned char LAB_001fe19c; /* 0x1fe19c */
-extern unsigned char LAB_001fe1d8; /* 0x1fe1d8 */
-extern unsigned int *DAT_0044db8c; /* 0x44db8c */
-extern int DAT_0044db90; /* 0x44db90 */
-extern int DAT_0044db94; /* 0x44db94 */
-extern int DAT_0044db98; /* 0x44db98 */
-
-/* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: QcMain_SetFlag. */
-
-
-void QcMain_Register(int *param_1,int param_2)
-
-{
-/* irregular: 7 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  unsigned char *puVar3;
-  
-  jyoucyuGetTableEntry(0);
-  puVar1 = (unsigned int *)0x100;
-  asdMemAlloc(0x100,0x100,0,0x20,1);
-  DAT_0044db8c = puVar1;
-  *(unsigned char *)(puVar1 + 6) = 0;
-  puVar1[7] = 0;
-  *(unsigned char *)((int)puVar1 + 0x19) = 0;
-  if (param_1 != (int *)0x0) {
-    if (param_2 != 0xc) {
-      if (param_2 == 4) {
-        DAT_0044db90 = *param_1;
-        DAT_0044db94 = 0;
-        DAT_0044db98 = 0;
-      }
-    }
-    else {
-      if (*param_1 != -1) {
-        DAT_0044db90 = *param_1;
-      }
-      DAT_0044db94 = param_1[1];
-      DAT_0044db98 = param_1[2];
-    }
-    QcMain_SetFlag(DAT_0044db90,1);
-  }
-  else {
-    DAT_0044db94 = 0;
-    DAT_0044db98 = 1;
-    gameFlagSetValue(0x50,1);
-    gameFlagSetValue(0x20,1);
-    gameFlagSetValue(0x5f,1);
-    gameFlagSetValue(0x143,1);
-    gameFlagSetValue(0x157,1);
-  }
-  puVar2 = &LAB_001a99dc;
-  asdProcessCreateSimple(&LAB_001a99dc,2,0,0,QuestCenterMainProcUpdate,&LAB_001fe158,DAT_0044db8c);
-  *puVar1 = (unsigned int)puVar2;
-  puVar3 = &LAB_001a99f4;
-  taskCreateDraw(&LAB_001a99f4,0x6f,1,0,&LAB_001fe1d8,0,DAT_0044db8c,puVar2);
-  puVar1[1] = (unsigned int)puVar3;
-  taskCreateDraw(&LAB_001a99f4,0x7d,1,0,&LAB_001d960c,0,DAT_0044db8c,*puVar1);
-  taskCreateDraw(&LAB_001a99f4,0xdb,1,0,&LAB_001d960c,0,DAT_0044db8c,*puVar1);
-  puVar2 = &LAB_001a9a10;
-  taskCreateDraw(&LAB_001a9a10,0xe7,1,0,&LAB_001fe19c,0,DAT_0044db8c,*puVar1);
-  puVar1[3] = (unsigned int)puVar2;
-  return;
+namespace {
+struct QuestCenterRegistrationWork {
+    u32 process, backgroundDraw, reserved08, foregroundDraw;
+    u32 reserved10[2];
+    u8 active, pending;
+    u8 padding1A[2];
+    u32 value;
+};
+struct QuestCenterRegistrationGlobals {
+    u32 reserved;
+    QuestCenterRegistrationWork *work;
+    s32 id, argument, initial;
+};
 }
+extern "C" {
+extern QuestCenterRegistrationGlobals g_qcMain;
+void *jyoucyuGetTableEntry(u32 index);
+void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+void QcMain_SetFlag(s32 id, s32 value);
+void gameFlagSetValue(u32 id, s32 mode, s32 value);
+u32 QuestCenterMainProcUpdate();
+u32 effectQcFinish();
+u32 qcMainEndBackgroundPass();
+u32 qcMainJobUpdateEntry();
+u32 FUN_001fe19c();
+u32 asdProcessCreateSimple(const char *, s32, u32, u32, u32 (*)(), u32 (*)(), void *);
+u32 taskCreateDraw(const char *, s32, u32, u32, u32 (*)(), u32 (*)(), void *, u32);
 
-} /* extern "C" */
+void QcMain_Register(const s32 *parameters, s32 mode)
+{
+    jyoucyuGetTableEntry(0);
+    QuestCenterRegistrationWork *work = static_cast<QuestCenterRegistrationWork *>(
+        asdMemAlloc(0x100, 0x100, 0, sizeof(QuestCenterRegistrationWork), 1));
+    g_qcMain.work = work;
+    work->active = 0;
+    work->value = 0;
+    work->pending = 0;
+    if (parameters != NULL) {
+        if (mode == 12) {
+            if (parameters[0] != -1)
+                g_qcMain.id = parameters[0];
+            g_qcMain.argument = parameters[1];
+            g_qcMain.initial = parameters[2];
+        } else if (mode == 4) {
+            g_qcMain.id = parameters[0];
+            g_qcMain.argument = 0;
+            g_qcMain.initial = 0;
+        }
+        QcMain_SetFlag(g_qcMain.id, 1);
+    } else {
+        g_qcMain.argument = 0;
+        g_qcMain.initial = 1;
+        gameFlagSetValue(0x50, 1, 1);
+        gameFlagSetValue(0x20, 1, 1);
+        gameFlagSetValue(0x5F, 1, 1);
+        gameFlagSetValue(0x143, 1, 1);
+        gameFlagSetValue(0x157, 1, 1);
+    }
+    work->process = asdProcessCreateSimple("QuestCenterMainProc", 2, 0, 0,
+        QuestCenterMainProcUpdate, effectQcFinish, g_qcMain.work);
+    work->backgroundDraw = taskCreateDraw("QuestCenterDrawUp L", 0x6F, 1, 0,
+        qcMainEndBackgroundPass, NULL, g_qcMain.work, work->process);
+    taskCreateDraw("QuestCenterDrawUp L", 0x7D, 1, 0,
+        qcMainJobUpdateEntry, NULL, g_qcMain.work, work->process);
+    taskCreateDraw("QuestCenterDrawUp L", 0xDB, 1, 0,
+        qcMainJobUpdateEntry, NULL, g_qcMain.work, work->process);
+    work->foregroundDraw = taskCreateDraw("QuestCenterDrawDown", 0xE7, 1, 0,
+        FUN_001fe19c, NULL, g_qcMain.work, work->process);
+}
+}

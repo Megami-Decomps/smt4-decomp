@@ -1,84 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00125e64` (_code @ 0x125e64, 0x1a8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: title debug labels and float coordinates restored; render-stack scheduling and common text-argument hoisting differ. */
+#include "camp/RenderCtx.h"
 
-extern "C" {
-
-int FUN_002aed34(int, int);
-int FUN_002be5a4(int, unsigned int, unsigned char *);
-int FUN_002bed3c(void);
-int FUN_002bf288(int, int, int, int, int, int);
-int efctSetSpeed(void);
-
-typedef int romwright_code(...);
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-extern unsigned char LAB_00126024; /* 0x126024 */
-extern unsigned char LAB_00126030; /* 0x126030 */
-extern unsigned char LAB_00126040; /* 0x126040 */
-extern int DAT_0044e2e8; /* 0x44e2e8 */
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_002aed34. */
-/* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int jyoucyuGetTableEntry(unsigned int);
-extern int FUN_002c5d80(unsigned int, unsigned int);
-
-
-unsigned int FUN_00125e64(void)
-
-{
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int *piVar6;
-  
-  temp_v2 = g_titleScene;
-  temp_v0 = DAT_0044e2e8;
-  if (*(int *)(DAT_0044e2e8 + 8) == 1) {
-    temp_v1 = FUN_002c5d80(1,0);
-    piVar6 = (int *)(temp_v2 + 0x124c);
-    temp_v3 = *piVar6;
-    temp_v4 = piVar6[temp_v3 + 2];
-    *piVar6 = temp_v3 + 1;
-    piVar6[temp_v3 + 3] = temp_v1;
-    if (*(char *)(temp_v2 + 0x1264) != '\0' || temp_v4 != temp_v1) {
-      (**(romwright_code **)(temp_v2 + 0x1268))();
-      *(unsigned char *)(temp_v2 + 0x1264) = 0;
-    }
-    efctSetSpeed();
-    FUN_002bed3c();
-    FUN_002bf288(2,0,0,0,0,0xb);
-    temp_v2 = g_titleScene;
-    piVar6 = (int *)(g_titleScene + 0x124c);
-    temp_v1 = *piVar6;
-    temp_v3 = piVar6[temp_v1 + 2];
-    *piVar6 = temp_v1 - 1;
-    if (*(char *)(temp_v2 + 0x1264) != '\0' || temp_v3 != piVar6[temp_v1 + 1]) {
-      (**(romwright_code **)(temp_v2 + 0x1268))();
-      *(unsigned char *)(temp_v2 + 0x1264) = 0;
-    }
-    temp_v2 = jyoucyuGetTableEntry(0);
-    if (temp_v2 != 0) {
-      FUN_002be5a4(3,0xffffffff,&LAB_00126024);
-    }
-    else {
-      FUN_002be5a4(3,0xffffffff,&LAB_00126030);
-    }
-    FUN_002be5a4(3,0xffffffff,&LAB_00126040);
-    FUN_002aed34(1,temp_v0 + 0x10);
-  }
-  return 0;
+namespace {
+struct TitleDebugBackgroundView {
+    u8 prefix[8];
+    s32 state;
+    u8 padding[4];
+    u8 parameters[1];
+};
 }
+extern "C" {
+extern TitleDebugBackgroundView *DAT_0044e2e8;
+extern RenderCtx *g_titleScene;
+u32 FUN_002c5d80(u32 mode, u32 option);
+void efctSetSpeed(f32 speed);
+void FUN_002bed3c();
+void FUN_002bf288(s32 layer, s32 group, s32 sprite, s32 x, s32 y, s32 flags);
+void *jyoucyuGetTableEntry(u32 index);
+void FUN_002be5a4(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 z, f32 scale, f32 opacity);
+void FUN_002aed34(s32 layer, void *parameters, f32 x, f32 y);
 
-} /* extern "C" */
+// Draw the title debug background, PC/ROM loading indicator and the game title label.
+u32 FUN_00125e64()
+{
+    TitleDebugBackgroundView *work = DAT_0044e2e8;
+    if (work->state == 1) {
+        RenderCtx *context = g_titleScene;
+        u32 state = FUN_002c5d80(1, 0);
+        renderStackPush(&context->stackA, state);
+        efctSetSpeed(1.0f);
+        FUN_002bed3c();
+        FUN_002bf288(2, 0, 0, 0, 0, 0xB);
+        renderStackPop(&g_titleScene->stackA);
+        if (jyoucyuGetTableEntry(0) != NULL) {
+            // Shift-JIS: full-width "PC load".
+            FUN_002be5a4(3, 0xFFFFFFFF, "\x82\x6F\x82\x62\x83\x8D\x81\x5B\x83\x68", 296.0f, 194.0f, 0.0f, 1.0f, 1.0f);
+        } else {
+            // Shift-JIS: full-width "ROM load".
+            FUN_002be5a4(3, 0xFFFFFFFF, "\x82\x71\x82\x6E\x82\x6C\x83\x8D\x81\x5B\x83\x68", 296.0f, 194.0f, 0.0f, 1.0f, 1.0f);
+        }
+        // Shift-JIS: the Japanese Shin Megami Tensei IV title.
+        FUN_002be5a4(3, 0xFFFFFFFF, "\x90\x5E\x81\x45\x8F\x97\x90\x5F\x93\x5D\x90\xB6\x87\x57", 296.0f, 208.0f, 0.0f, 1.0f, 1.0f);
+        FUN_002aed34(1, work->parameters, 228.0f, 228.0f);
+    }
+    return 0;
+}
+}

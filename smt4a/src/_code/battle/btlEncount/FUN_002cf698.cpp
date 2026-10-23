@@ -1,85 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cf698` (_code @ 0x2cf698, 0x160 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation debug hooks are absent; candidate-reset loop and 64-bit mask scheduling differ. */
+#include "battle/btlEncount.h"
+#include "battle/btlMain.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
+extern BtlEncounterGlobalsA g_btlEncount;
+s32 btlEncounterUpdateFromJob(u32 job);
+void btlEncountDestroy(u32 job);
+u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
+void *asdMemoryAllocTracked(u32 category, u32 alignment, u32 flags, u32 size, s32 clear);
+void asdMemFree(void *memory);
+void FUN_00408184(s32 kind, s32 enabled);
+void FUN_002e5924(s32 state);
 
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int asdMemFree(...);
-int FUN_002e5924(...);
-int FUN_00408184(...);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern int btlEncounterUpdateFromJob(...); /* 0x2ba964 */
-extern unsigned char LAB_002cf800; /* 0x2cf800 */
-extern int btlEncountDestroy(...); /* 0x33f9a0 */
-extern unsigned int *g_btlEncount; /* 0x573828 */
-extern unsigned int DAT_00573858; /* 0x573858 */
-extern unsigned int DAT_0057385c; /* 0x57385c */
-extern unsigned int DAT_00573888; /* 0x573888 */
-extern unsigned int DAT_0057388c; /* 0x57388c */
-
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002e5924. */
-/* Supplied declaration required: FUN_00408184. */
-
-
-void FUN_002cf698(unsigned int *param_1)
-
+// Create the encounter job, reset its candidate slots and queue the initial encounter state.
+void FUN_002cf698(BtlMainStateA *battle)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char *puVar2;
-  unsigned int *puVar3;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar6;
-  
-  puVar2 = &LAB_002cf800;
-  taskCreateDraw(&LAB_002cf800,4,0,0,btlEncounterUpdateFromJob,btlEncountDestroy,param_1,*param_1);
-  param_1[2] = (unsigned int)puVar2;
-  puVar3 = (unsigned int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x14,1);
-  g_btlEncount = puVar3;
-  *puVar3 = 0;
-  puVar3[4] = 0;
-  puVar3[3] = 0;
-  if (puVar3[1] != 0) {
-    asdMemFree();
-    puVar3[1] = 0;
-  }
-  temp_v2 = 0x32;
-  temp_v1 = 0;
-  do {
-    temp_v2 = temp_v2 - 1;
-    param_1[temp_v1 * 8 + 0x10c] = 0xffffffff;
-    *(unsigned char *)((int)param_1 + temp_v1 * 0x20 + 0x436) = 0xff;
-    *(unsigned short *)(param_1 + temp_v1 * 8 + 0x10d) = 0xffff;
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v2 != 0);
-  FUN_00408184(2,1);
-  if (((*(char *)((int)param_1 + 0x45bb) == '\0') && (-1 < (int)param_1[0x3b])) &&
-     ((param_1[0x43] & 0x2000000) == 0)) {
-    puVar6 = param_1 + 0x1168;
-    if ((DAT_00573858 & *puVar6) == 0 && (DAT_0057385c & param_1[0x1169]) == 0) {
-      if ((*puVar6 & DAT_00573888) == 0 && (param_1[0x1169] & DAT_0057388c) == 0) {
-        FUN_002e5924(2);
-        temp_v0 = DAT_00573888;
-        param_1[0x1169] = param_1[0x1169] | DAT_0057388c;
-        *puVar6 = temp_v0 | *puVar6;
-      }
+    // The retail allocation and extra global mask extend beyond the shared prefix views.
+    struct EncounterWork { BtlEncount base; u32 pending; };
+    struct EncounterGlobalsView { BtlEncounterGlobalsA base; u64 initializedMask; };
+    typedef char EncounterLocalViewOffsets[
+        sizeof(EncounterWork) == 0x14 && offsetof(EncounterGlobalsView, initializedMask) == 0x60 ? 1 : -1];
+    battle->encounterTask.job = taskCreateDraw(reinterpret_cast<const s8 *>("btlEncount Calc"), 4, 0, 0,
+        btlEncounterUpdateFromJob, btlEncountDestroy, reinterpret_cast<u32>(battle), reinterpret_cast<void *>(battle->job));
+    EncounterWork *work = static_cast<EncounterWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(EncounterWork), 1));
+    g_btlEncount.work = &work->base;
+    work->base.state = 0;
+    work->pending = 0;
+    work->base.flags = 0;
+    if (work->base.data != NULL) {
+        asdMemFree(work->base.data);
+        work->base.data = NULL;
     }
-  }
-  return;
+    for (s32 index = 0; index < 50; ++index) {
+        BattleEncounterSlotA *entry = &battle->encounterSlots.entries[index];
+        entry->id = -1;
+        entry->category = -1;
+        entry->listedId = -1;
+    }
+    FUN_00408184(2, 1);
+    if (battle->encounterGate.disabled == 0 && battle->encounterSelection.id >= 0 &&
+        !(battle->encounter.statusFlags & 0x2000000)) {
+        const EncounterGlobalsView *globals = reinterpret_cast<const EncounterGlobalsView *>(&g_btlEncount);
+        if (!(g_btlEncount.initialStateMask & battle->stateFlags64.bits) &&
+            !(battle->stateFlags64.bits & globals->initializedMask)) {
+            FUN_002e5924(2);
+            battle->stateFlags64.bits |= globals->initializedMask;
+        }
+    }
 }
-
-} /* extern "C" */
+}

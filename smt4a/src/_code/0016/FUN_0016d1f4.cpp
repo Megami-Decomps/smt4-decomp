@@ -1,137 +1,94 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016d1f4` (_code @ 0x16d1f4, 0x108 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: default draw-settings initialization scheduling differs from retail. */
+#include "shard/W6_W6Match4_GxDrawSettings.h"
+#include <stddef.h>
 
-extern "C" {
-
-typedef struct fn_0016d1f4_arg0 fn_0016d1f4_arg0;
-struct fn_0016d1f4_arg0 {
-    undefined1 field_0x0; /* +0x0 */
-    undefined1 field_0x1; /* +0x1 */
-    undefined1 field_0x2; /* +0x2 */
-    undefined1 field_0x3; /* +0x3 */
-    undefined1 field_0x4; /* +0x4 */
-    undefined1 field_0x5; /* +0x5 */
-    undefined1 field_0x6; /* +0x6 */
-    undefined1 field_0x7; /* +0x7 */
-    undefined1 field_0x8; /* +0x8 */
-    undefined1 field_0x9; /* +0x9 */
-    undefined1 field_0xa; /* +0xa */
-    unsigned char pad_0xb[0x1];
-    void *field_0xc; /* +0xc */
-    undefined1 field_0x10; /* +0x10 */
-    undefined1 field_0x11; /* +0x11 */
-    unsigned char pad_0x12[0x2];
-    void *field_0x14; /* +0x14 */
-    undefined1 field_0x18; /* +0x18 */
-    undefined1 field_0x19; /* +0x19 */
-    unsigned char pad_0x1a[0x2];
-    undefined4 field_0x1c; /* +0x1c */
-    undefined4 field_0x20; /* +0x20 */
-    undefined4 field_0x24; /* +0x24 */
-    undefined4 field_0x28; /* +0x28 */
-    void *field_0x2c; /* +0x2c */
-    undefined1 field_0x30; /* +0x30 */
-    undefined1 field_0x31; /* +0x31 */
-    undefined1 field_0x32; /* +0x32 */
-    unsigned char pad_0x33[0x1];
-    void *field_0x34; /* +0x34 */
-    undefined1 field_0x38; /* +0x38 */
-    undefined1 field_0x39; /* +0x39 */
-    unsigned char pad_0x3a[0x2];
-    undefined1 field_0x3c; /* +0x3c */
-    unsigned char pad_0x3d[0x3];
-    undefined4 field_0x40; /* +0x40 */
-    undefined4 field_0x44; /* +0x44 */
-    undefined1 field_0x48; /* +0x48 */
-    undefined1 field_0x49; /* +0x49 */
-    undefined1 field_0x4a; /* +0x4a */
-    unsigned char pad_0x4b[0x1];
-    void *field_0x4c; /* +0x4c */
-    undefined1 field_0x50; /* +0x50 */
-    unsigned char pad_0x51[0x3];
-    undefined1 field_0x54; /* +0x54 */
-    undefined1 field_0x55; /* +0x55 */
-    undefined1 field_0x56; /* +0x56 */
-    unsigned char pad_0x57[0x1];
-    void *field_0x58; /* +0x58 */
-    undefined1 field_0x5c; /* +0x5c */
-    undefined1 field_0x5d; /* +0x5d */
-    undefined1 field_0x5e; /* +0x5e */
-    unsigned char pad_0x5f[0x1];
-    void *field_0x60; /* +0x60 */
-    undefined4 field_0x64; /* +0x64 */
-    undefined1 field_0x68; /* +0x68 */
-    unsigned char pad_0x69[0x3];
-    undefined4 field_0x6c; /* +0x6c */
-    undefined4 field_0x70; /* +0x70 */
-    undefined4 field_0x74; /* +0x74 */
-    undefined1 field_0x78; /* +0x78 */
-    unsigned char pad_0x79[0x3];
-    void *field_0x7c; /* +0x7c */
+namespace {
+/* Local view: pointer-bearing fields cannot be added to the byte-aligned shared unions. */
+struct DrawSettingsInitializationView {
+    u8 enabled, unk01, unk02, sourceFactor, destinationFactor;
+    u8 colorEquation, alphaEquation, blendRed, blendGreen, blendBlue, blendAlpha, unk0B;
+    DrawSettingsInitializationView *blendOwner;
+    u8 logicEnabled, logicOperation, unk12[2];
+    DrawSettingsInitializationView *logicOwner;
+    u8 overrideAccess, accessEnabled, unk1A[2];
+    f32 colorMinimum, colorMaximum, alphaMinimum, alphaMaximum;
+    DrawSettingsInitializationView *accessOwner;
+    u8 alphaEnabled, alphaReference, alphaFunction, unk33;
+    DrawSettingsInitializationView *alphaOwner;
+    u8 stencilEnabled, stencilWrite, unk3A[2], stencilFunction, unk3D[3];
+    u32 stencilReference, stencilMask;
+    u8 stencilFail, stencilDepthFail, stencilPass, unk4B;
+    DrawSettingsInitializationView *stencilOwner;
+    u8 colorWriteMask, unk51[3];
+    u8 depthEnabled, depthWrite, depthFunction, unk57;
+    DrawSettingsInitializationView *depthOwner;
+    u8 outputEnabled, outputColor, outputDepth, unk5F;
+    DrawSettingsInitializationView *outputOwner;
+    f32 polygonOffset;
+    u8 polygonOffsetEnabled, unk69[3];
+    f32 depthOffset, depthMinimum, depthMaximum;
+    u8 depthBits, unk79[3];
+    DrawSettingsInitializationView *depthRangeOwner;
 };
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-
-void FUN_0016d1f4(fn_0016d1f4_arg0 *param_1)
-
-{
-  param_1->field_0x0 = 0;
-  param_1->field_0x1 = 0;
-  param_1->field_0x2 = 0;
-  param_1->field_0x3 = 6;
-  param_1->field_0x4 = 6;
-  param_1->field_0x5 = 7;
-  param_1->field_0x6 = 7;
-  param_1->field_0x7 = 0xff;
-  param_1->field_0x8 = 0xff;
-  param_1->field_0x9 = 0xff;
-  param_1->field_0xa = 0xff;
-  param_1->field_0xc = param_1;
-  param_1->field_0x10 = 0;
-  param_1->field_0x11 = 6;
-  param_1->field_0x14 = param_1;
-  param_1->field_0x18 = 0;
-  param_1->field_0x19 = 1;
-  param_1->field_0x1c = 0;
-  param_1->field_0x20 = 0x3f800000;
-  param_1->field_0x24 = 0;
-  param_1->field_0x28 = 0x3f800000;
-  param_1->field_0x2c = param_1;
-  param_1->field_0x30 = 0;
-  param_1->field_0x31 = 0;
-  param_1->field_0x32 = 0;
-  param_1->field_0x34 = param_1;
-  param_1->field_0x38 = 0;
-  param_1->field_0x39 = 0xff;
-  param_1->field_0x3c = 1;
-  param_1->field_0x40 = 0;
-  param_1->field_0x44 = 0xff;
-  param_1->field_0x48 = 0;
-  param_1->field_0x49 = 0;
-  param_1->field_0x4a = 0;
-  param_1->field_0x4c = param_1;
-  param_1->field_0x50 = 0xf;
-  param_1->field_0x54 = 1;
-  param_1->field_0x55 = 1;
-  param_1->field_0x56 = 4;
-  param_1->field_0x58 = param_1;
-  param_1->field_0x5c = 1;
-  param_1->field_0x5d = 1;
-  param_1->field_0x5e = 1;
-  param_1->field_0x60 = param_1;
-  param_1->field_0x64 = 0;
-  param_1->field_0x68 = 0;
-  param_1->field_0x6c = 0;
-  param_1->field_0x70 = 0;
-  param_1->field_0x74 = 0x3f800000;
-  param_1->field_0x78 = 0x18;
-  param_1->field_0x7c = param_1;
-  return;
+typedef char DrawSettingsInitializationViewLayout[
+    sizeof(DrawSettingsInitializationView) == sizeof(GxDrawSettings) &&
+    offsetof(DrawSettingsInitializationView, blendOwner) == 0x0C &&
+    offsetof(DrawSettingsInitializationView, depthRangeOwner) == 0x7C ? 1 : -1];
 }
 
-} /* extern "C" */
+/* Initialize the cached GPU draw settings and their owner back-pointers. */
+extern "C" void FUN_0016d1f4(GxDrawSettings *settings)
+{
+    DrawSettingsInitializationView *state = reinterpret_cast<DrawSettingsInitializationView *>(settings);
+    state->enabled = 0;
+    state->unk01 = 0;
+    state->unk02 = 0;
+    state->sourceFactor = 6;
+    state->destinationFactor = 6;
+    state->colorEquation = 7;
+    state->alphaEquation = 7;
+    state->blendRed = 255;
+    state->blendGreen = 255;
+    state->blendBlue = 255;
+    state->blendAlpha = 255;
+    state->blendOwner = state;
+    state->logicEnabled = 0;
+    state->logicOperation = 6;
+    state->logicOwner = state;
+    state->overrideAccess = 0;
+    state->accessEnabled = 1;
+    state->colorMinimum = 0.0f;
+    state->colorMaximum = 1.0f;
+    state->alphaMinimum = 0.0f;
+    state->alphaMaximum = 1.0f;
+    state->accessOwner = state;
+    state->alphaEnabled = 0;
+    state->alphaReference = 0;
+    state->alphaFunction = 0;
+    state->alphaOwner = state;
+    state->stencilEnabled = 0;
+    state->stencilWrite = 255;
+    state->stencilFunction = 1;
+    state->stencilReference = 0;
+    state->stencilMask = 255;
+    state->stencilFail = 0;
+    state->stencilDepthFail = 0;
+    state->stencilPass = 0;
+    state->stencilOwner = state;
+    state->colorWriteMask = 15;
+    state->depthEnabled = 1;
+    state->depthWrite = 1;
+    state->depthFunction = 4;
+    state->depthOwner = state;
+    state->outputEnabled = 1;
+    state->outputColor = 1;
+    state->outputDepth = 1;
+    state->outputOwner = state;
+    state->polygonOffset = 0.0f;
+    state->polygonOffsetEnabled = 0;
+    state->depthOffset = 0.0f;
+    state->depthMinimum = 0.0f;
+    state->depthMaximum = 1.0f;
+    state->depthBits = 24;
+    state->depthRangeOwner = state;
+}

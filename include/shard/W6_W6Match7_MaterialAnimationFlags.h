@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "shard/W6_W6Match8_BattleSpritePlacement.h"
 
 /* Prefixes used by the animation-to-material binding pass. */
 struct MaterialFlagMember {
@@ -39,7 +40,10 @@ struct MaterialMergeChannel {
 };
 struct MaterialMergeTiming {
     /* 0x00 */ f32 first;
-    /* 0x04 */ f32 second;
+    union {
+        /* 0x04 */ f32 second;
+        /* 0x04 */ u32 mode;
+    };
 };
 struct MaterialMergeNode {
     /* 0x000 */ u16 flags;
@@ -59,10 +63,17 @@ struct MaterialMergeResource {
     /* 0x110 */ u8 unk110[0x100];
     /* 0x210 */ MaterialMergeMetadata *metadata;
 };
+struct MaterialMergePose {
+    u8 unk00[0xC];
+    s32 state;
+};
 struct MaterialMergeModel {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ MaterialMergeResource *resource;
-    /* 0x08 */ u8 unk08[0x18];
+    union {
+        /* 0x08 */ u8 unk08[0x18];
+        /* 0x08 */ MaterialMergePose *pose;
+    };
 };
 struct MaterialMergeOriginal {
     /* 0x00 */ MaterialMergeModel *model;
@@ -89,6 +100,21 @@ struct MaterialMergeSlotState {
     /* 0x00 */ s32 handle;
     /* 0x04 */ u32 unk04;
 };
+struct MaterialMergePlacement {
+    /* 0x00 */ s32 key;
+    union {
+        /* 0x04 */ u32 unk04;
+        /* 0x04 */ BattleFrameSprite *resource;
+    };
+    /* 0x08 */ BattleSpritePlacement placement;
+    union {
+        /* 0x28 */ u8 unk28[8];
+        struct {
+            u8 unk28[4];
+            /* 0x2C */ u32 flags;
+        } activation;
+    };
+};
 struct MaterialMergeOwner {
     union {
         struct {
@@ -104,10 +130,20 @@ struct MaterialMergeOwner {
             /* 0x0000 */ u8 unk0000[0x371C];
             /* 0x371C */ MaterialMergeGroup groups[50];
         } routing;
+        struct {
+            /* 0x0000 */ u8 unk0000[0x1398];
+            /* 0x1398 */ MaterialMergePlacement entries[50];
+        } placements;
     };
 };
 struct MaterialMergeVariants {
-    /* 0x00 */ u8 unk00[0x0C];
+    union {
+        /* 0x00 */ u8 unk00[0x0C];
+        struct {
+            u8 unk00[2];
+            /* 0x02 */ u16 kind;
+        } identity;
+    };
     /* 0x0C */ s32 keys[1];
 };
 static __inline void materialMergeSetKind(MaterialMergeNode *node, u8 mask, bool enabled)
@@ -130,4 +166,18 @@ typedef char MaterialMergeOwnerStateOffsetCheck[
 typedef char MaterialMergeOwnerGroupOffsetCheck[
     offsetof(MaterialMergeOwner, routing.groups) == 0x371C ? 1 : -1];
 
+typedef char MaterialMergePlacementOffsetsCheck[
+    sizeof(MaterialMergePlacement) == 0x30 &&
+    offsetof(MaterialMergePlacement, placement) == 8 &&
+    offsetof(MaterialMergeOwner, placements.entries) == 0x1398 &&
+    offsetof(MaterialMergeModel, pose) == 8 &&
+    sizeof(MaterialMergeOwner) == 0x9D74 ? 1 : -1];
+typedef char MaterialMergeActivationOffsets[
+    offsetof(MaterialMergePlacement, resource) == 4 &&
+    offsetof(MaterialMergePlacement, activation.flags) == 0x2c &&
+    sizeof(MaterialMergePlacement) == 0x30 &&
+    offsetof(MaterialMergeVariants, identity.kind) == 2 &&
+    sizeof(MaterialMergeVariants) == 0x10 ? 1 : -1];
+typedef char MaterialMergeTimingModeOffsetCheck[sizeof(MaterialMergeTiming) == 8 &&
+    offsetof(MaterialMergeTiming, mode) == 4 ? 1 : -1];
 #endif

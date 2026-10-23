@@ -8,7 +8,7 @@ int messageKindForward(...);
 int dataTable08Sub2GetRecord(void);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
-int FUN_002be370(...);
+int itemDrawCategoryBadge(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
 int FUN_002be650(int, int);
@@ -48,7 +48,7 @@ extern int recordAcceptsStickDirection(int);
 extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_002be370. */
+/* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
@@ -116,7 +116,7 @@ void FUN_00283f80(int param_1,int param_2,int param_3,int param_4,int param_5)
                temp_v12);
   FUN_002bed3c();
   temp_v5 = FUN_002bf4f8(0x1d,0x513);
-  FUN_002be370((int)(short)temp_v13,
+  itemDrawCategoryBadge((int)(short)temp_v13,
                (int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v2 + 8) + param_4,
                (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v5 + 10) + param_5,0x6f,1);
   switch(param_1) {

@@ -18,7 +18,7 @@ EventTexJobWork *jobGetWork(u32 handle);
 s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 s32 FUN_0039af04(void);
 u32 FUN_003b6820(u32 id, s32 mode, u32 arg);
-void FUN_0036f298(u32 handle);
+void eventInsertSortedTextureJob(u32 handle);
 
 /* Script command: on its first frame creates the event texture job from arguments 0 and 1 and
  * makes it current; then waits (returns 0) until the current job's texture is loaded. */
@@ -39,7 +39,7 @@ u32 scrCommEventTexCreateWait(void)
         u32 handle = FUN_003b6820(id, 1, arg);
         if (handle != 0) {
             eventTexSetCurrent(handle);
-            FUN_0036f298(handle);
+            eventInsertSortedTextureJob(handle);
             return 0;
         }
     }

@@ -1,76 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013c00c` (_code @ 0x13c00c, 0x15c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: inline render-stack scheduling, target-query hooks and VFP draw-argument scheduling differ. */
+#include "camp/RenderCtx.h"
+#include "shard/W6_W6Match3_SlotState.h"
 
 extern "C" {
+extern W6Match3SlotState DAT_006357d8[2];
+extern RenderCtxA *g_renderCtx;
+u32 FUN_001692ac(u32 kind, bool enabled);
+void FUN_0016c4b8(RenderCtxA *context, void *preset);
+u32 asdGxPresetsGetByKind(u32 kind);
+u32 asdGxPresetsGetHeightByKind(u32 kind);
+void FUN_0014e314(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
+    f32 x, f32 y, f32 width, f32 height, f32 depth);
 
-int FUN_0014e314(unsigned int);
-int FUN_0016c4b8(int, int);
-int VectorFloatToUnsigned(double, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-typedef int romwright_code(...);
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_0014e314. */
-extern unsigned int asdGxPresetsGetByKind(unsigned int);
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
-extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
-
-
-void FUN_0013c00c(int param_1)
-
+// Draw the requested fade slot's color over the full selected render target.
+void FUN_0013c00c(s32 index)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar7;
-  unsigned int in_fpscr;
-  float temp_v6;
-  unsigned int temp_v7;
-  
-  temp_v0 = g_renderCtx;
-  temp_v3 = *(unsigned int *)(param_1 * 0x14 + 0x6357e4);
-  temp_v6 = (float)VectorUnsignedToFloat(temp_v3 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v7 = VectorFloatToUnsigned(*(float *)(param_1 * 0x14 + 0x6357d8) * temp_v6,3);
-  if (temp_v7 != 0) {
-    if (temp_v7 >= 0x100) {
-      temp_v7 = 0xff;
+    W6Match3SlotState *fade = &DAT_006357d8[index];
+    u32 color = fade->index;
+    u32 alpha = static_cast<u32>(fade->value * static_cast<f32>(color & 0xFF));
+    if (alpha != 0) {
+        if (alpha > 255)
+            alpha = 255;
+        color = (color & 0xFFFFFF00) | alpha;
+        RenderCtxA *context = g_renderCtx;
+        renderStackPush(&context->stackA, FUN_001692ac(1, false));
+        FUN_0016c4b8(g_renderCtx, NULL);
+        f32 height = static_cast<f32>(asdGxPresetsGetByKind(g_renderCtx->stereoMode));
+        f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(g_renderCtx->stereoMode));
+        FUN_0014e314(color, color, color, color, 0.0f, 0.0f, width, height, 0.0f);
+        renderStackPop(&g_renderCtx->stackA);
     }
-    temp_v1 = FUN_001692ac(1,0);
-    piVar7 = (int *)(temp_v0 + 0x1258);
-    temp_v4 = *piVar7;
-    temp_v5 = piVar7[temp_v4 + 2];
-    *piVar7 = temp_v4 + 1;
-    piVar7[temp_v4 + 3] = temp_v1;
-    if (*(char *)(temp_v0 + 0x1270) != '\0' || temp_v5 != temp_v1) {
-      (**(romwright_code **)(temp_v0 + 0x1274))();
-      *(unsigned char *)(temp_v0 + 0x1270) = 0;
-    }
-    FUN_0016c4b8(g_renderCtx,0);
-    temp_v2 = asdGxPresetsGetByKind(*(unsigned int *)(g_renderCtx + 0x52c));
-    VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v2 = asdGxPresetsGetHeightByKind(*(unsigned int *)(g_renderCtx + 0x52c));
-    VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_0014e314((temp_v3 & 0xffffff00) | temp_v7);
-    temp_v0 = g_renderCtx;
-    piVar7 = (int *)(g_renderCtx + 0x1258);
-    temp_v1 = *piVar7;
-    temp_v4 = piVar7[temp_v1 + 2];
-    *piVar7 = temp_v1 - 1;
-    if (*(char *)(temp_v0 + 0x1270) != '\0' || temp_v4 != piVar7[temp_v1 + 1]) {
-      (**(romwright_code **)(temp_v0 + 0x1274))();
-      *(unsigned char *)(temp_v0 + 0x1270) = 0;
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

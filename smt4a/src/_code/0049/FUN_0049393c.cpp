@@ -1,84 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049393c` (_code @ 0x49393c, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction/control-flow layout matches, but item ids and first/second priority values trade r4/r5. */
+#include "gamedata/ItemPriorityRecords.h"
 
 extern "C" {
-
-int dataTable8FindRecord(void);
-int FUN_00192608(void);
-int contentEntryFindById2(void);
-
-/* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: FUN_00192608. */
-/* Supplied declaration required: contentEntryFindById2. */
-extern unsigned int FUN_00192718(unsigned int);
-extern int FUN_0049c9a0(unsigned short *);
-
-
-int FUN_0049393c(unsigned short *param_1,unsigned short *param_2)
-
-{
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  
-  temp_v4 = (unsigned int)*param_1;
-  temp_v3 = 0;
-  temp_v0 = FUN_00192718(temp_v4);
-  switch(temp_v0) {
-  case 0:
-    contentEntryFindById2();
-    temp_v3 = (unsigned int)*(unsigned char *)(temp_v4 + 0x25);
-    break;
-  case 1:
-  case 0xc:
-    dataTable8FindRecord();
-    temp_v3 = *(unsigned int *)(temp_v4 + 0x44) & 0xff;
-    break;
-  case 2:
-  case 3:
-  case 4:
-  case 5:
-  case 6:
-  case 7:
-  case 8:
-    FUN_00192608();
-    temp_v3 = (unsigned int)*(unsigned short *)(temp_v4 + 0x7e);
-  }
-  temp_v4 = (unsigned int)*param_2;
-  temp_v5 = 0;
-  temp_v0 = FUN_00192718(temp_v4);
-  switch(temp_v0) {
-  case 0:
-    contentEntryFindById2();
-    temp_v5 = (unsigned int)*(unsigned char *)(temp_v4 + 0x25);
-    break;
-  case 1:
-  case 0xc:
-    dataTable8FindRecord();
-    temp_v5 = *(unsigned int *)(temp_v4 + 0x44) & 0xff;
-    break;
-  case 2:
-  case 3:
-  case 4:
-  case 5:
-  case 6:
-  case 7:
-  case 8:
-    FUN_00192608();
-    temp_v5 = (unsigned int)*(unsigned short *)(temp_v4 + 0x7e);
-  }
-  temp_v1 = temp_v3 - temp_v5;
-  if (temp_v1 == 0) {
-    temp_v1 = FUN_0049c9a0(param_1);
-    temp_v2 = FUN_0049c9a0(param_2);
-    temp_v1 = temp_v1 - temp_v2;
-  }
-  return temp_v1;
+u32 FUN_00192718(u32 id);
+ContentItemPriorityRecord *contentEntryFindById2(u32 id);
+Table8Record *dataTable8FindRecord(u32 id);
+EquipmentItemPriorityRecord *FUN_00192608(u32 id);
+u16 FUN_0049c9a0(const u16 *id);
 }
 
-} /* extern "C" */
+static inline u32 itemPriority(const u16 *item)
+{
+    u32 id = *item;
+    u32 priority = 0;
+    switch (FUN_00192718(id)) {
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+        priority = FUN_00192608(id)->priority;
+        break;
+    case 0:
+        priority = contentEntryFindById2(id)->priority;
+        break;
+    case 1:
+    case 12: {
+        // A word alias inside Table8Record's +0x42 padding would shift union alignment.
+        struct PriorityView { u8 unk00[0x44]; u32 properties; };
+        typedef char PriorityOffsetCheck[offsetof(PriorityView, properties) == 0x44 ? 1 : -1];
+        priority = ((PriorityView *)dataTable8FindRecord(id))->properties & 0xFF;
+        break;
+    }
+    }
+    return priority;
+}
+
+// Compare mixed item ids by their category's priority field, breaking ties by secondary ordering.
+extern "C" s32 FUN_0049393c(const u16 *left, const u16 *right)
+{
+    u32 first = itemPriority(left);
+    u32 second = itemPriority(right);
+    s32 difference = first - second;
+    if (difference == 0) {
+        difference = FUN_0049c9a0(left) - FUN_0049c9a0(right);
+    }
+    return difference;
+}

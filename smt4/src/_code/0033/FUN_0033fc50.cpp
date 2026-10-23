@@ -1,61 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033fc50` (_code @ 0x33fc50, 0x110 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler peels the stock-copy loop and calls unaligned memset; retail uses a single copy loop and memset4. */
+#include "shard/W7_W7Match2_PartyDamage.h"
+#include <string.h>
 
+struct PartyUnit;
 extern "C" {
+PartyDamageSlotsIV *gameGetSlotTable(void);
+PartyUnit *gameGetUnitRecord(s32 slot);
+s32 FUN_003bc9b8(const PartyUnit *unit);
+bool FUN_00295d7c(PartyUnit *unit);
+u8 flagWordTestBit(PartyUnit *unit, u32 bit);
 
-int __aeabi_memset4(char [28], int, unsigned int);
-
-extern int FUN_00295d7c(int);
-extern int flagWordTestBit(int, unsigned int);
-extern int gameGetUnitRecord(int);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: __aeabi_memset4. */
-extern int FUN_003bc9b8(void);
-
-
-unsigned int FUN_0033fc50(void)
-
+// Find an available reserve unit which is not active or excluded by its status flags.
+u32 FUN_0033fc50(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  char acStack_30 [28];
-  
-  temp_v0 = gameGetSlotTable();
-  temp_v4 = 0;
-  __aeabi_memset4(acStack_30,0x18,0xffffffff);
-  temp_v3 = (unsigned int)*(unsigned char *)(temp_v0 + 0x910b);
-  if (temp_v3 != 0) {
-    pcVar2 = (char *)(temp_v0 + 0x90f0);
-    do {
-      if (-1 < *pcVar2) {
-        acStack_30[temp_v4] = *pcVar2;
-        temp_v4 = temp_v4 + 1;
-      }
-      temp_v3 = temp_v3 - 1;
-      pcVar2 = pcVar2 + 1;
-    } while (temp_v3 != 0);
-    temp_v0 = 0;
-    if (temp_v4 != 0) {
-      do {
-        temp_v1 = gameGetUnitRecord((int)acStack_30[temp_v0]);
-        if ((((temp_v1 != 0) && (temp_v2 = FUN_003bc9b8(), temp_v2 != 0)) &&
-            (temp_v2 = FUN_00295d7c(temp_v1), temp_v2 == 0)) &&
-           (((temp_v2 = flagWordTestBit(temp_v1,1), temp_v2 == 0 &&
-             (temp_v2 = flagWordTestBit(temp_v1,10), temp_v2 == 0)) &&
-            (temp_v1 = flagWordTestBit(temp_v1,2), temp_v1 == 0)))) {
-          return 1;
+    // The stock-capacity byte follows the established party-slot view.
+    struct StockCapacityView {
+        PartyDamageSlotsIV slots;
+        u8 capacity;
+    };
+    typedef char CapacityOffsetCheck[offsetof(StockCapacityView, capacity) == 0x910B ? 1 : -1];
+    StockCapacityView *stock = (StockCapacityView *)gameGetSlotTable();
+    u8 count = 0;
+    s8 slots[24];
+    memset(slots, -1, sizeof(slots));
+    u32 remaining = stock->capacity;
+    if (remaining != 0) {
+        s8 *slot = stock->slots.stock;
+        do {
+            if (*slot >= 0) {
+                slots[count++] = *slot;
+            }
+            --remaining;
+            ++slot;
+        } while (remaining != 0);
+        for (s32 index = 0; index < count; ++index) {
+            PartyUnit *unit = gameGetUnitRecord(slots[index]);
+            if (unit != NULL && FUN_003bc9b8(unit) != 0 && !FUN_00295d7c(unit) &&
+                flagWordTestBit(unit, 1) == 0 && flagWordTestBit(unit, 10) == 0 &&
+                flagWordTestBit(unit, 2) == 0) {
+                return 1;
+            }
         }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < (int)temp_v4);
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

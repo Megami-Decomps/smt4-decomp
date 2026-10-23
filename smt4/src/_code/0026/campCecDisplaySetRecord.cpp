@@ -10,7 +10,7 @@ struct RecordDisplayWork {
     /* 0x20 */ const void* record;
 };
 
-extern "C" void FUN_00343ce4(void* display, const void* record, u32 kind);
+extern "C" void playerLoadEquipmentModelParts(void* display, const void* record, u32 kind);
 
 // Reset display tuning and delegate the selected record's rendering.
 extern "C" void campCecDisplaySetRecord(RecordDisplayWork* work, const void* record)
@@ -23,6 +23,6 @@ extern "C" void campCecDisplaySetRecord(RecordDisplayWork* work, const void* rec
         work->tuning.x = 1.2f;
         work->tuning.y = 5.3f;
         work->tuning.z = 0.5f;
-        FUN_00343ce4(display, record, 7);
+        playerLoadEquipmentModelParts(display, record, 7);
     }
 }

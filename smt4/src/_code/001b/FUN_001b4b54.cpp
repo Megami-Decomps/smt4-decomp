@@ -1,67 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b4b54` (_code @ 0x1b4b54, 0x114 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: visible-node flag clear uses r1/r0 instead of retail r0/r1. */
+#include "map/SingleModelState.h"
 
 extern "C" {
-
-int modelSelectSecondaryMotion(unsigned int, unsigned int);
-int FUN_0028c618(unsigned int, int);
-int nodeSetTranslation(unsigned int, int, int);
-int modelSelectPrimaryMotion(unsigned int, unsigned int);
-
-extern int g_mapModelWork; /* 0x44cda0 */
-extern unsigned char g_gameState; /* 0x49f91c */
-
-/* Supplied declaration required: modelSelectSecondaryMotion. */
-/* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: modelSelectPrimaryMotion. */
-
+extern MapSingleModelWork *g_mapModelWork;
+extern GameState g_gameState;
+void nodeSetTranslation(NodeEnableResource *, s32, const MapVector *);
+void FUN_0028c618(NodeEnableResource *, s32, f32, f32, f32);
+void modelSelectPrimaryMotion(NodeEnableResource *, u32, f32);
+void modelSelectSecondaryMotion(NodeEnableResource *, u32, f32);
 
 void FUN_001b4b54(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *unaff_r4;
-  char *pcVar3;
-  
-  temp_v0 = g_mapModelWork;
-  pcVar3 = (char *)(g_mapModelWork + 0x10);
-  if (pcVar3 != (char *)0x0) {
-    unaff_r4 = *(unsigned int **)(g_mapModelWork + 0x2c);
-  }
-  if (pcVar3 != (char *)0x0 && unaff_r4 != (unsigned int *)0x0) {
-    if ((*(signed char *)((unsigned char *)&g_gameState + 0x22)) != '\0') {
-      if ((*unaff_r4 & 2) == 0) {
-        *unaff_r4 = *unaff_r4 | 2;
-        *(unsigned char *)(*(int *)(unaff_r4[2] + 0x2c) + 0x1f6) = 0;
-      }
-    }
-    else {
-      temp_v1 = *unaff_r4;
-      if (*pcVar3 != '\0') {
-        if ((temp_v1 & 2) != 0) {
-          *unaff_r4 = temp_v1 & 0xfffffffd;
-          *(unsigned char *)(*(int *)(unaff_r4[2] + 0x2c) + 0x1f6) = 1;
+    MapSingleModelState *state = &g_mapModelWork->model;
+    if (state && state->node) {
+        NodeEnableNode *node = state->node;
+        if (g_gameState.controllerFlags.mapRangeModelsHidden) {
+            if (!(node->flags & 2)) {
+                node->flags |= 2;
+                node->resource->target->enabled = 0;
+            }
+        } else {
+            if (state->active) {
+                if (node->flags & 2) {
+                    node->flags &= ~2;
+                    node->resource->target->enabled = 1;
+                }
+            } else if (!(node->flags & 2)) {
+                node->flags |= 2;
+                node->resource->target->enabled = 0;
+            }
+            if (state->changed) {
+                nodeSetTranslation(node->resource, 0, &state->position);
+                FUN_0028c618(node->resource, 0, 0.0f, state->heading, 0.0f);
+                modelSelectPrimaryMotion(node->resource, state->motion, 0.0f);
+                modelSelectSecondaryMotion(node->resource, state->motion, 0.0f);
+                state->changed = 0;
+            }
         }
-      }
-      else if ((temp_v1 & 2) == 0) {
-        *unaff_r4 = temp_v1 | 2;
-        *(unsigned char *)(*(int *)(unaff_r4[2] + 0x2c) + 0x1f6) = 0;
-      }
-      if (*(char *)(temp_v0 + 0x28) != '\0') {
-        nodeSetTranslation(unaff_r4[2],0,temp_v0 + 0x14);
-        FUN_0028c618(unaff_r4[2],0);
-        modelSelectPrimaryMotion(unaff_r4[2],*(unsigned int *)(temp_v0 + 0x24));
-        modelSelectSecondaryMotion(unaff_r4[2],*(unsigned int *)(temp_v0 + 0x24));
-        *(unsigned char *)(temp_v0 + 0x28) = 0;
-        return;
-      }
     }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

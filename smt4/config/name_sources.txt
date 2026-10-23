@@ -3482,3 +3482,67 @@
 00295660 textEncodeFontSlot inferred [high] Expands ASCII through font-code lookup, preserves multibyte glyphs, and encodes newlines.
 00102a10 ifTouchAcquire inferred [high] Reference-counted creation of shared touch state and TOUCH CALC process.
 00116968 gfxDrawSolidRectangle inferred [high] Normalizes packed ARGB channels and draws a rectangle with identical corner colors.
+0022a918 btlGetPassiveAffinityOverride inferred [high] Accumulates the affinity override bit when a learned passive supports the requested affinity.
+002adf00 cameraExportParameters inferred [high] Exports camera eye, orientation-mode controls and projection values, converting field of view to degrees.
+0026ce14 partyPanelHandleCursorEdgeInput inferred [high] Handles page-changing directional input at cursor edges, accounting for a partial final row.
+001028bc messageInitializeDisplay inferred [high] Loads message graphics, creates three panels and installs the draw task, render flags and text callbacks.
+0039e8b8 uiDrawTransientSprites inferred [high] Draw a list of up to 256 transient sprites relative to its copied origin
+00324f18 btlScriptGroupUnitAcceptsArgument inferred [med] Test whether an active group unit of the requested ID accepts the script argument
+0024bda8 btlFormatCategoryLabel inferred [high] Format full-width damage category and ailment names into a text buffer
+00325048 scrCheckCombatantCommandSlot inferred [high] Test matching live group combatants and the active entry for ownership of a requested command-slot ID.
+00111a5c dataTableFindCategoryVariant inferred [high] Find table-24 category/kind record using selected variant bank
+0021af44 btlGameOverCreateTasks inferred [high] Creates calculation and upper-left/right draw tasks, allocates game-over state and enables continuation.
+002e4178 btlScriptQueuePercentHealthChange inferred [high] Calculates percent of active member max HP, queues its health action and accompanying effect.
+002eaec0 cameraGetDistancePreset inferred [high] Returns distance, height and offset values for ten camera presets without changing unknown presets.
+00241d84 gauntletAppSortMenuEntries inferred [high] Sorts current menu entries by category, purchase order, alternate item key or app sort keys in configured direction.
+00275a30 mapDepartSyncModelVisibility inferred [high] Updates both departure model node flags, nested visibility bytes and animation/property scales when visibility changes.
+002f72bc btlScriptHasEntryGroupBit inferred [high] Script result tests a requested combatant ID's group-mask bit, also checking special active entry.
+002f1338 btlScriptApplyPercentHpMpEffect inferred [high] Calculates percentage HP/MP amounts with special-group clamp and enqueues unit effect.
+002a2c7c gfxQuaternionWorkspaceBuildMatrix inferred [high] Builds homogeneous rotation matrix from quaternion workspace, reusing squared components.
+0030f214 effEmitterReplaceResourceByKind inferred [high] Lazily creates emitter, propagates owner buffer, dispatches kind-specific resource replacement and records kind.
+003d8c88 btlCameraEditorInitializeList inferred [high] Creates camera editor list with native text callbacks and three vector rows or one ranged scalar row.
+00245854 btlEntryHasActionSkillCategory inferred [high] Tests selected or available skill/item action categories and matching equipped weapon attack category.
+00300050 scrBattleDamageListedTarget inferred [high] Applies scripted damage to listed target arg0 using amount arg1 and displays standard damage message
+00191c64 statusRefundPlayerStatAllocation inferred [high] Restores the selected five-stat snapshot and returns every removed point to the allocation balance
+002dc8a8 fusionComparePairPriority inferred [high] Sort descending pair priority then ingredient race/level/id
+00324000 btlScriptHasMatchingEffectCounter inferred [high] Tests requested group and active entry for matching ID and positive primary or secondary effect counter
+003b82c4 mikadoLoadSceneResources inferred [high] Loads location-specific BF/MBM, texture theme and shared map system script resources
+002f7984 btlScriptDamageFirstCombatantNonlethally inferred [high] Queues first-combatant damage clamped to one remaining HP and a keyed scalar action
+0029974c campPreviewSelectedEquipment inferred [high] Copies player data and previews the current equipment-list selection without changing the save
+0033774c btlInitializePlayerUnitData inferred [high] Initializes player battle HP MP stats encoded values and initial control mode
+002893ec mapConsumePendingJumpRequest inferred [high] Consume saved jump request, set destination and optionally request matching sequence
+00328880 btlScriptHasAlternateEffectCounter inferred [high] Test listed unit in requested group or active selection for positive alternate effect counters
+0029d770 unitInitializeFromSavedRecord inferred [high] Initialize runtime unit level/stats/skills/experience and innate flag from saved record, then recalculate stats
+00322b80 saveLoadCreateBootProcess inferred [high] Allocates the save/load boot process, resets settings and creates its two screen draw tasks.
+002cdc1c nameScriptRunEntryScreen inferred [high] Runs name entry from a script, waits for completion, updates the text slot and restores help.
+00389168 aocFindQuestPayloadById inferred [high] Searches kind-27 tables in active add-on packages and returns the matching quest payload.
+001e00c0 uiStepAnimatedContentTask inferred [high] Loads requested animated content, activates it, advances frames and clamps the fade or stops its job.
+002e3cdc btlScriptAnyLiveUnitHasFlag inferred [high] Script predicate scanning a group plus active entry for a flag-mask bit
+0033fb2c btlHasReserveReplacement inferred [high] Tests whether a live reserve exists, excluding the selected demon identity when required
+003c45f4 btlDebugCreatePanelMenu inferred [high] Creates and initializes seven integer/float rows of the battle panel debug menu
+003d88dc btlDebugNavigateActionEditor inferred [high] Navigates action group/member selection with wrapping and restores action editor values
+002cf150 smokeFadeInitialize inferred [high] Allocates/reset smoke fade state, creates calc and draw jobs, requests texture nodes and fade table.
+001ce0fc statusReplaceSkillList inferred [high] Copies status skills and recomputes higher-level learned skill list for selected member
+001e121c clearSaveCreate inferred [high] Allocates clear-save work loads script resources and creates update and stereo draw tasks
+0030a0f0 eventCreateResourceBattleTexture inferred [high] Creates a positioned battle texture from a resource record and starts update and draw tasks
+0010aff8 infoWindowCreate inferred [high] Allocates information popup starts update and stereo draw tasks and initializes sprites and text
+002be370 itemDrawCategoryBadge inferred [high] Draws item or equipment category icon with optional currently-equipped marker
+003bcc70 btlGetApplicableAilmentMask inferred [high] Maps skill or item ailment selectors to grouped masks and tests active or stored target ailments
+001ca604 effCopyTransformColorKeys inferred [high] Copies four transform/color keys, metadata and low mode bits and resets current scalar from the last key.
+0039fd44 equipmentComparePowerThenOrder inferred [high] Compares subtype-specific equipment power, using the secondary item order on equal power.
+003183ac btlScriptAnySelectedNegativeStat inferred [high] Tests selected eligible group entries and active entry for the requested negative stat modifier.
+001a84d8 btlUiCreateTasks inferred [high] Allocates BtlUi and creates calculation and four screen/number draw passes.
+0038b544 systemKeyboardReadUtf8 inferred [high] Configures and submits the software keyboard and converts accepted UTF-16 text to UTF-8.
+002d9014 saveUiRefreshSelectedSlotPreview inferred [high] Copies selected save metadata into player preview and refreshes names, options and equipped models.
+002a019c uniteRebuildFusionCatalog inferred [high] Rebuilds filtered demon, distinct race and selectable skill catalogs for the fusion menu.
+00387b54 aocFinishHandleOperation inferred [med] Completes resource handle operation and updates AOC completion flag
+00336a84 btlApplyOptionAndSnapshotReserve inferred [high] Applies the option action and queues the reserve unit snapshot using canonical combatant storage
+0033fd64 btlClassifySkillUse inferred [high] Classifies skill availability and resource failures for a battle unit
+00343ce4 playerLoadEquipmentModelParts inferred [high] Formats and loads head, body and leg BAM paths from equipped records
+00323044 btlScriptGroupHasReadyId inferred [high] Tests group and active combatant for a ready unit with the requested ID
+002cf814 uiDrawRotatingLoadingGrid inferred [high] Draws a three-by-three loading grid with two phase-shifted bright dots and trails
+001fb3a0 questClassifyCompletionNotification inferred [high] Classifies completed quest requirements and fallback quest availability
+0027accc mapGimicUpdateVisualBounds inferred [med] Updates seven active gimmick kinds using their position and fixed bounds presets
+00294e18 statusCameraSelectPreset inferred [high] Selects close-up, full-body or origin camera vectors and lens parameters for status models
+002427f8 effResourcePromoteReferences inferred [high] Promotes the first dependent resource and redirects remaining resource references
+0028f1bc questPassesAvailabilityConditions inferred [high] Checks quest requirements, excluded quests, alignment route and hide-window flags

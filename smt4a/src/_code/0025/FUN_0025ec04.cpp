@@ -1,110 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025ec04` (_code @ 0x25ec04, 0x1c0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: camp menu switch lowering and render-state stack register scheduling differ. */
+#include "camp/CampState.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
+extern CampStateA *g_camp;
+extern RenderCtxA *g_renderCtx;
+void FUN_00157558(RenderCtxA *context);
+s32 FUN_001692ac(u32 enabled, u32 mode);
+u32 FUN_002a4878(const void *selection);
+s32 FUN_003da8f4(s32 kind, u32 selected);
+void FUN_00227294(s32 first, s32 second, s32 enabled);
+void skinObjectUpdateMatrices(RenderCtxA *context);
+void renderCtxResetColorScale(RenderCtxA *context);
 
-int FUN_00157558(int);
-int renderCtxResetColorScale(int);
-int skinObjectUpdateMatrices(int);
-int FUN_00227294(int, int, int);
-
-typedef int romwright_code(...);
-extern int g_camp; /* 0x57f108 */
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00157558. */
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: skinObjectUpdateMatrices. */
-/* Supplied declaration required: FUN_00227294. */
-extern unsigned int FUN_002a4878(int);
-extern int FUN_003da8f4(int, unsigned int);
-
-
-unsigned int FUN_0025ec04(void)
-
+/* Draw the special camp-menu pass under a temporary render state, then restore transforms and color. */
+u32 FUN_0025ec04(void)
 {
-/* irregular: 7 goto(s); 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar7;
-  
-  temp_v3 = g_camp;
-  FUN_00157558(g_renderCtx);
-  temp_v1 = g_renderCtx;
-  temp_v0 = FUN_001692ac(1,0);
-  piVar7 = (int *)(temp_v1 + 0x1258);
-  temp_v4 = *piVar7;
-  temp_v5 = piVar7[temp_v4 + 2];
-  *piVar7 = temp_v4 + 1;
-  piVar7[temp_v4 + 3] = temp_v0;
-  if (*(char *)(temp_v1 + 0x1270) != '\0' || temp_v5 != temp_v0) {
-    (**(romwright_code **)(temp_v1 + 0x1274))();
-    *(unsigned char *)(temp_v1 + 0x1270) = 0;
-  }
-  temp_v1 = *(int *)(temp_v3 + 0x1c);
-  if (temp_v1 == 0x47) {
-    temp_v1 = *(int *)(temp_v3 + 0x28);
-  }
-  if (temp_v1 != 0x26) {
-    if (temp_v1 < 0x27) {
-      if (temp_v1 != 0x11) {
-        if (temp_v1 < 0x12) {
-          if (temp_v1 != 10) {
-            if (temp_v1 < 0xb) {
-              if (temp_v1 != 4 && temp_v1 != 5) goto LAB_0025ed64;
-            }
-            else if (temp_v1 != 0xf && temp_v1 != 0x10) goto LAB_0025ed64;
-          }
-        }
-        else if (temp_v1 != 0x13 && temp_v1 != 0x1d) {
-          if (temp_v1 != 0x24) {
-            if (temp_v1 != 0x25) goto LAB_0025ed64;
-          }
-          else {
-            temp_v2 = FUN_002a4878(temp_v3 + 0x40);
-            temp_v3 = FUN_003da8f4((int)*(char *)(temp_v3 + 0xa4),temp_v2);
-            if (temp_v3 != 0x1b) goto LAB_0025ed64;
-          }
-        }
-      }
+    CampStateA *camp = g_camp;
+    FUN_00157558(g_renderCtx);
+    RenderCtxA *context = g_renderCtx;
+    renderCtxPushA(context, FUN_001692ac(1, 0));
+    s32 menu = camp->menu.current;
+    if (menu == 0x47)
+        menu = camp->menu.previous;
+    switch (menu) {
+    case 0x24:
+        if (FUN_003da8f4(camp->unkA4, FUN_002a4878(camp->block40)) != 0x1B)
+            break;
+        // This menu shares the pass only for the selected special entry.
+    case 4: case 5: case 10: case 15: case 16: case 17: case 19: case 29:
+    case 0x25: case 0x26: case 0x27: case 0x28: case 0x29: case 0x2B: case 0x2C:
+    case 0x2E: case 0x2F: case 0x50: case 0x51: case 0x52:
+        FUN_00227294(0, 0, 1);
+        break;
     }
-    else if (temp_v1 != 0x2e) {
-      if (temp_v1 < 0x2f) {
-        switch(temp_v1) {
-        case 0x27:
-        case 0x28:
-        case 0x29:
-        case 0x2b:
-        case 0x2c:
-          goto LAB_0025ed54;
-        default:
-          goto LAB_0025ed64;
-        }
-      }
-      if ((temp_v1 != 0x2f && temp_v1 != 0x50) && (temp_v1 != 0x51 && temp_v1 != 0x52)) goto LAB_0025ed64;
-    }
-  }
-LAB_0025ed54:
-  FUN_00227294(0,0,1);
-LAB_0025ed64:
-  temp_v3 = g_renderCtx;
-  piVar7 = (int *)(g_renderCtx + 0x1258);
-  temp_v1 = *piVar7;
-  temp_v0 = piVar7[temp_v1 + 2];
-  *piVar7 = temp_v1 - 1;
-  if (*(char *)(temp_v3 + 0x1270) != '\0' || temp_v0 != piVar7[temp_v1 + 1]) {
-    (**(romwright_code **)(temp_v3 + 0x1274))();
-    *(unsigned char *)(temp_v3 + 0x1270) = 0;
-  }
-  skinObjectUpdateMatrices(g_renderCtx);
-  renderCtxResetColorScale(g_renderCtx);
-  return 0;
+    renderStackPop(&g_renderCtx->stackA);
+    skinObjectUpdateMatrices(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
+    return 0;
 }
-
-} /* extern "C" */
+}

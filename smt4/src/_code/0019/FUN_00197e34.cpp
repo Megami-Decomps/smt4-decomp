@@ -13,7 +13,7 @@ int FUN_002b75ec(...);
 int effectRenderTransformedInstance(...);
 int renderCtxCalculateStereoParallax(...);
 int FUN_002bdf94(...);
-int FUN_002be370(...);
+int itemDrawCategoryBadge(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
 int FUN_002be650(...);
@@ -54,7 +54,7 @@ extern int g_titleScene; /* 0x44ea00 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern unsigned int dataTableGetNamePayload(unsigned int);
-extern int FUN_0028f1bc(unsigned int);
+extern int questPassesAvailabilityConditions(unsigned int);
 extern bool questIsOfferable(unsigned short);
 /* Supplied declaration required: FUN_0028f4b4. */
 extern unsigned int FUN_002903f0(void);
@@ -73,7 +73,7 @@ extern int gameGetFlagBlock(void);
 extern unsigned int FUN_002bcddc(unsigned int, unsigned int);
 extern unsigned int FUN_002bd068(unsigned int);
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be370. */
+/* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
@@ -255,7 +255,7 @@ void FUN_00197e34(void)
     }
     else if (psVar14[1] != 0) {
       temp_v13 = FUN_002bf4f8(0x29,0x1b);
-      FUN_002be370((int)psVar14[1],*(short *)(temp_v13 + 8) + temp_v11,*(short *)(temp_v13 + 10) + temp_v5,
+      itemDrawCategoryBadge((int)psVar14[1],*(short *)(temp_v13 + 8) + temp_v11,*(short *)(temp_v13 + 10) + temp_v5,
                    0x6a,0);
       temp_v13 = FUN_002bf4f8(0x29,0x1c);
       temp_v7 = (unsigned int)(unsigned short)psVar14[1];
@@ -459,7 +459,7 @@ LAB_00198518:
     } while (temp_v6 < 6);
     if (*(char *)(temp_v7 + 6) == '\0') {
       temp_v6 = idIsAtLeast350(temp_v25);
-      if ((temp_v6 != 0) && (temp_v6 = FUN_0028f1bc(temp_v25), temp_v6 == 0)) {
+      if ((temp_v6 != 0) && (temp_v6 = questPassesAvailabilityConditions(temp_v25), temp_v6 == 0)) {
         temp_v30 = 0;
       }
       if ((*(char *)(temp_v7 + 6) == '\0') && (temp_v30 != 0)) {

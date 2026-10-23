@@ -1,89 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004babd8` (_code @ 0x4babd8, 0x134 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: counter-bound branches and selected-flag loads differ; retail retains a separate +0x900 base and signed completion accessor. */
+#include "shard/Shard004B.h"
 
 extern "C" {
+s32 flaggedValueHolderGetTotal(Menu4C *menu);
+void menuSynchronizeFlaggedSelection(void *selection, Menu4C *menu);
+void sub10OwnerStart(Menu4C *menu);
+void *asdTMTexLoadMainHeap(u32 table, u32 index);
+u32 selectOwnerGetSelected(void *selection);
+s32 FUN_004d0058(Menu4C *menu, u32 selected);
+s32 FUN_004d0584();
 
-int asdTMTexLoadMainHeap(int);
-int flaggedValueHolderGetTotal(...);
-int sub10OwnerStart(int);
-int menuSynchronizeFlaggedSelection(int, int);
-
-/* Supplied declaration required: asdTMTexLoadMainHeap. */
-/* Supplied declaration required: flaggedValueHolderGetTotal. */
-extern int FUN_004d0058(int, unsigned int);
-/* Supplied declaration required: sub10OwnerStart. */
-extern int FUN_004d0584(void);
-extern unsigned int selectOwnerGetSelected(int);
-/* Supplied declaration required: menuSynchronizeFlaggedSelection. */
-
-
-unsigned int FUN_004babd8(int param_1)
-
+// Preload the selected entry's image after the selection has remained stable.
+u32 FUN_004babd8(Menu4C *menu)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v4 = 0;
-  temp_v0 = flaggedValueHolderGetTotal();
-  if (*(char *)(param_1 + 0x9ee) == '\0') {
-    menuSynchronizeFlaggedSelection(param_1 + 0x74,param_1);
-    sub10OwnerStart(param_1);
-  }
-  temp_v1 = flaggedValueHolderGetTotal(param_1);
-  if (temp_v1 != temp_v0) {
-    *(unsigned int *)(param_1 + 0x1074) = 0;
-  }
-  else {
-    temp_v0 = *(int *)(param_1 + 0x1074);
-    *(int *)(param_1 + 0x1074) = temp_v0 + 1;
-    if (temp_v0 + 1 < 0) {
-      temp_v0 = 0;
+    u32 changed = 0;
+    s32 oldSelection = flaggedValueHolderGetTotal(menu);
+    if (!menu->unk9EE) {
+        menuSynchronizeFlaggedSelection(menu->block74, menu);
+        sub10OwnerStart(menu);
     }
-    else {
-      *(int *)(param_1 + 0x1074) = temp_v0 + 2;
-      if (temp_v0 + 2 < 0x101) {
-        temp_v0 = temp_v0 + 3;
-        *(int *)(param_1 + 0x1074) = temp_v0;
-      }
-      else {
-        temp_v0 = 0x100;
-      }
-    }
-    *(int *)(param_1 + 0x1074) = temp_v0;
-    if (temp_v0 >= 0x10) {
-      temp_v0 = flaggedValueHolderGetTotal(param_1);
-      temp_v2 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + temp_v0 * 4 + 0x7ec) + 0x5a);
-      temp_v0 = temp_v2 + 1;
-      temp_v1 = param_1 + temp_v0;
-      if (*(char *)(temp_v1 + 0x1034) == '\0') {
-        *(unsigned int *)(param_1 + 0x102c) = temp_v2 + 2;
-        *(int *)(param_1 + 0x1030) = temp_v0;
-        if (*(char *)(temp_v1 + 0x1034) == '\0') {
-          asdTMTexLoadMainHeap(0x1f);
-          *(unsigned char *)(temp_v1 + 0x1034) = 1;
+    if (flaggedValueHolderGetTotal(menu) != oldSelection) {
+        menu->unk1074 = 0;
+    } else {
+        // The legacy bound checks each advance this counter before testing it.
+        s32 timer = ++menu->unk1074;
+        if (timer < 0) {
+            timer = 0;
+        } else {
+            timer = ++menu->unk1074;
+            if (timer <= 256)
+                timer = ++menu->unk1074;
+            else
+                timer = 256;
         }
-      }
+        menu->unk1074 = timer;
+        if (timer >= 16) {
+            s32 selection = flaggedValueHolderGetTotal(menu);
+            u32 keyframe = menu->list[selection]->unk5A + 1;
+            if (!menu->flags1034[keyframe]) {
+                menu->preload.node = keyframe + 1;
+                menu->preload.keyframe = keyframe;
+                if (!menu->flags1034[keyframe]) {
+                    asdTMTexLoadMainHeap(0x1F, keyframe);
+                    menu->flags1034[keyframe] = 1;
+                }
+            }
+        }
     }
-  }
-  if (*(char *)(param_1 + 0x9ee) == '\0') {
-    if (*(char *)(param_1 + 0x86) != '\0') {
-      temp_v3 = selectOwnerGetSelected(param_1 + 0x74);
-      temp_v0 = FUN_004d0058(param_1,temp_v3);
-      if (temp_v0 != 0) {
-        temp_v4 = 1;
-      }
+    if (!menu->unk9EE) {
+        if (menu->selectionInput.enabled) {
+            u32 selected = selectOwnerGetSelected(menu->block74);
+            if (FUN_004d0058(menu, selected))
+                changed = 1;
+        }
+        if (FUN_004d0584())
+            changed = 1;
     }
-    temp_v0 = FUN_004d0584();
-    if (temp_v0 != 0) {
-      temp_v4 = 1;
-    }
-  }
-  return temp_v4;
+    return changed;
 }
-
-} /* extern "C" */
+}

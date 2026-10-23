@@ -1,78 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `configOpen` (_code @ 0x202d2c, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: zero-constant lifetimes, saved global/size registers and final state-store merging differ. */
+#include "camp/Config/Config.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern ConfigWorkA *g_config;
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tracked);
+void sysMemClear(void *memory, u32 size);
+void *textureGetIndexedResource(u32 id);
+void asdTMTexTableLoadSprites(u32 id);
+s32 asdTMTexTableNodeIsLoaded(u32 id, u32 node);
+void asdTMTexLoadMainHeap(u32 id, u32 node);
+void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
+void loadSlotEnsureLoaded(u32 id);
+void sysPlaySe(u32 id);
+void FUN_0019de98(u32 index, u32 color);
+void FUN_003d05a4(ConfigWorkA *config, u32 parent);
 
-int asdTMTexTableLoadSprites(int);
-int asdMemoryAllocTracked(int, int, int, int, int);
-int sysPlaySe(int);
-int FUN_0019de98(int, unsigned int);
-int asdTMTexLoadMainHeap(int, int);
-int asdLoadFileAsyncSimple(unsigned char *, int, int);
-int sysMemClear(void);
-int FUN_003d05a4(int, unsigned int);
-int loadSlotEnsureLoaded(int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern unsigned char LAB_00202e80; /* 0x202e80 */
-extern unsigned char LAB_00202e90; /* 0x202e90 */
-extern int g_config; /* 0x57f230 */
-
-/* Supplied declaration required: asdTMTexTableLoadSprites. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: sysPlaySe. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: asdTMTexLoadMainHeap. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: sysMemClear. */
-extern int textureGetIndexedResource(unsigned int);
-/* Supplied declaration required: FUN_003d05a4. */
-/* Supplied declaration required: loadSlotEnsureLoaded. */
-
-
-void configOpen(unsigned int param_1,unsigned char param_2)
-
+// Open the options screen, acquiring only texture resources it must own.
+void configOpen(u32 parent, u8 mode)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  if (g_config == 0) {
-    temp_v0 = 0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x4cc,1);
-    g_config = temp_v0;
-  }
-  temp_v0 = g_config;
-  sysMemClear();
-  *(unsigned char *)(temp_v0 + 0xc0) = param_2;
-  *(unsigned char *)(temp_v0 + 0x4c0) = 0;
-  *(unsigned char *)(temp_v0 + 0x4c1) = 0;
-  temp_v1 = textureGetIndexedResource(0x24);
-  if (temp_v1 == 0) {
-    *(unsigned char *)(temp_v0 + 0x4c0) = 1;
-    asdTMTexTableLoadSprites(0x24);
-  }
-  temp_v1 = asdTMTexTableNodeIsLoaded(0x24,0);
-  if (temp_v1 == 0) {
-    *(unsigned char *)(temp_v0 + 0x4c1) = 1;
-    asdTMTexLoadMainHeap(0x24,0);
-  }
-  asdLoadFileAsyncSimple(&LAB_00202e80,temp_v0 + 0x7c,0);
-  asdLoadFileAsyncSimple(&LAB_00202e90,temp_v0 + 0x80,0);
-  loadSlotEnsureLoaded(0x36);
-  sysPlaySe(5);
-  FUN_0019de98(0,0xf4f4f4ff);
-  FUN_003d05a4(temp_v0,param_1);
-  temp_v0 = g_config;
-  *(unsigned int *)(g_config + 100) = 0;
-  *(unsigned int *)(temp_v0 + 0x68) = 0;
-  return;
+    if (g_config == NULL) {
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Config\\Config.cpp", 1224);
+        g_config = static_cast<ConfigWorkA *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(ConfigWorkA), 1));
+    }
+    ConfigWorkA *config = g_config;
+    sysMemClear(config, sizeof(*config));
+    config->param = mode;
+    config->hasType24A = 0;
+    config->hasType24B = 0;
+    if (textureGetIndexedResource(0x24) == NULL) {
+        config->hasType24A = 1;
+        asdTMTexTableLoadSprites(0x24);
+    }
+    if (!asdTMTexTableNodeIsLoaded(0x24, 0)) {
+        config->hasType24B = 1;
+        asdTMTexLoadMainHeap(0x24, 0);
+    }
+    asdLoadFileAsyncSimple("camp/config.bf", &config->heapA, 0);
+    asdLoadFileAsyncSimple("camp/config.mbm", &config->heapB, 0);
+    loadSlotEnsureLoaded(0x36);
+    sysPlaySe(5);
+    FUN_0019de98(0, 0xF4F4F4FF);
+    FUN_003d05a4(config, parent);
+    config = g_config;
+    config->state = 0;
+    config->unk68 = 0;
 }
-
-} /* extern "C" */
+}

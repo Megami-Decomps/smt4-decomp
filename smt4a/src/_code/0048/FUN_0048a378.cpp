@@ -1,85 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048a378` (_code @ 0x48a378, 0x138 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Background-reset and alternate-feedback cold blocks are placed differently from retail. */
+#include "map/mapDepart.h"
 
+struct NavigationFeedbackRequest {
+    u8 unk00[0xC];
+    u8 alternate;
+};
+struct NavigationFeedbackFlags {
+    u8 unk00[0x60];
+    u8 blocked;
+    u8 unk61;
+    u8 ready;
+};
+struct NavigationFeedbackMode {
+    u8 unk0000[0x1514];
+    s32 mode;
+};
 extern "C" {
+NavigationFeedbackMode *gameFlagsGetBlock(void);
+s32 gameFlagIsSet(u32 flag);
+void commonBgReset(void);
+void FUN_003b61ec(void);
+s32 FUN_00384cf4(void);
+void FUN_00183e58(void);
+void sysPlaySe(s32 sound);
+void uiPlayGatedActionFeedback(void);
+extern GameStateA g_gameState;
+extern NavigationFeedbackFlags DAT_005f19fc;
 
-int sysPlaySe(int);
-int FUN_00183e58(void);
-int uiPlayGatedActionFeedback(void);
-int FUN_003b61ec(void);
-int commonBgReset(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern signed char DAT_005f161d; /* 0x5f161d */
-extern signed char DAT_005f1891; /* 0x5f1891 */
-extern signed char DAT_005f1a5c; /* 0x5f1a5c */
-extern signed char DAT_005f1a5e; /* 0x5f1a5e */
-
-extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00183e58. */
-extern int gameFlagIsSet(unsigned int);
-extern int FUN_00384cf4(void);
-/* Supplied declaration required: uiPlayGatedActionFeedback. */
-/* Supplied declaration required: FUN_003b61ec. */
-/* Supplied declaration required: commonBgReset. */
-
-
-void FUN_0048a378(int param_1)
-
+/* Refreshes map background state and chooses navigation feedback after tearing down button help. */
+void FUN_0048a378(NavigationFeedbackRequest *request)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = gameFlagsGetBlock();
-  if (DAT_005f1891 != '\0') {
-    DAT_005f1891 = '\0';
-    temp_v1 = gameFlagIsSet(0x49a);
-    if (temp_v1 != 0) {
-      commonBgReset();
+    NavigationFeedbackMode *settings = gameFlagsGetBlock();
+    if (g_gameState.mapFlags.unk295 != 0) {
+        g_gameState.mapFlags.unk295 = 0;
+        if (gameFlagIsSet(0x49A) != 0) {
+            commonBgReset();
+        } else {
+            FUN_003b61ec();
+        }
+        if (gameFlagIsSet(12) != 0 && gameFlagIsSet(16) == 0) {
+            FUN_003b61ec();
+        }
     }
-    else {
-      FUN_003b61ec();
-    }
-    temp_v1 = gameFlagIsSet(0xc);
-    if ((temp_v1 != 0) && (temp_v1 = gameFlagIsSet(0x10), temp_v1 == 0)) {
-      FUN_003b61ec();
-    }
-  }
-  if (DAT_005f1a5c == '\0') {
-    if (DAT_005f161d == '\0') {
-      uiPlayGatedActionFeedback();
-      return;
-    }
-    if (*(char *)(param_1 + 0xc) != '\0') {
-      if ((DAT_005f1a5e != '\0') && (temp_v0 = FUN_00384cf4(), temp_v0 == 0)) {
+    if (DAT_005f19fc.blocked == 0) {
+        if (g_gameState.controllerFlags.primary == 0) {
+            uiPlayGatedActionFeedback();
+            return;
+        }
+        if (request->alternate != 0) {
+            if (DAT_005f19fc.ready != 0 && FUN_00384cf4() == 0) {
+                FUN_00183e58();
+                sysPlaySe(0x114);
+                return;
+            }
+            sysPlaySe(0xF5);
+            return;
+        }
         FUN_00183e58();
-        sysPlaySe(0x114);
-        return;
-      }
-      sysPlaySe(0xf5);
-      return;
+        s32 mode = settings->mode;
+        if (mode == 0) {
+            FUN_00183e58();
+            sysPlaySe(0x10A);
+            return;
+        }
+        if (mode == 1 || mode == 2) {
+            FUN_00183e58();
+            sysPlaySe(0xF6);
+            return;
+        }
     }
-    FUN_00183e58();
-    temp_v0 = *(int *)(temp_v0 + 0x1514);
-    if (temp_v0 == 0) {
-      FUN_00183e58();
-      sysPlaySe(0x10a);
-      return;
-    }
-    if (temp_v0 == 1 || temp_v0 == 2) {
-      FUN_00183e58();
-      sysPlaySe(0xf6);
-      return;
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

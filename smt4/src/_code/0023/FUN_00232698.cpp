@@ -1,70 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00232698` (_code @ 0x232698, 0x13c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: memset lowers to __aeabi_memset instead of retail __aeabi_memset4; all other instructions agree. */
+#include "ui/TouchRegionLayout.h"
+#include <string.h>
 
 extern "C" {
+void ifTouchRegionRemove(void);
+u16 FUN_002b8584(u32 group, s32 region);
 
-int FUN_002b8584(int, int);
-int ifTouchRegionRemove(void);
-int __aeabi_memset4(int, int, unsigned int);
-
-/* Supplied declaration required: FUN_002b8584. */
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: __aeabi_memset4. */
-
-
-void FUN_00232698(int param_1)
-
+// Replace the layout's touch registrations with the current mode's sprite regions.
+void FUN_00232698(TouchRegionLayout *layout)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  
-  if (0 < *(short *)(param_1 + 0x93e)) {
-    temp_v2 = 0;
-    do {
-      ifTouchRegionRemove();
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < *(short *)(param_1 + 0x93e));
-    __aeabi_memset4(param_1 + 0x820,0x11e,0xffffffff);
-    *(unsigned short *)(param_1 + 0x93e) = 0;
-  }
-  if (*(char *)(param_1 + 0x29) != '\0') {
-    temp_v1 = FUN_002b8584(0x2e,0x14c);
-    *(unsigned short *)(param_1 + 0x820) = temp_v1;
-    temp_v1 = FUN_002b8584(0x2e,0x14d);
-    *(unsigned short *)(param_1 + 0x822) = temp_v1;
-    temp_v1 = FUN_002b8584(0x2e,0x14e);
-    *(unsigned short *)(param_1 + 0x824) = temp_v1;
-    temp_v2 = 0;
-    *(short *)(param_1 + 0x93e) = *(short *)(param_1 + 0x93e) + 3;
-    do {
-      temp_v1 = FUN_002b8584(0x2e,temp_v2 + 0xce);
-      temp_v0 = temp_v2 * 2;
-      temp_v2 = temp_v2 + 1;
-      *(unsigned short *)(param_1 + temp_v0 + 0x826) = temp_v1;
-      *(short *)(param_1 + 0x93e) = *(short *)(param_1 + 0x93e) + 1;
-    } while (temp_v2 < 0x7e);
-    return;
-  }
-  temp_v2 = 0;
-  do {
-    temp_v1 = FUN_002b8584(0x2e,temp_v2 + 0x56);
-    temp_v0 = temp_v2 * 2;
-    temp_v2 = temp_v2 + 1;
-    *(unsigned short *)(param_1 + temp_v0 + 0x826) = temp_v1;
-    *(short *)(param_1 + 0x93e) = *(short *)(param_1 + 0x93e) + 1;
-  } while (temp_v2 < 0x5a);
-  temp_v2 = 0;
-  do {
-    temp_v1 = FUN_002b8584(0x2e,temp_v2 + 0xc6);
-    temp_v0 = temp_v2 * 2;
-    temp_v2 = temp_v2 + 1;
-    *(unsigned short *)(param_1 + temp_v0 + 0x936) = temp_v1;
-    *(short *)(param_1 + 0x93e) = *(short *)(param_1 + 0x93e) + 1;
-  } while (temp_v2 < 3);
-  return;
+    if (layout->count > 0) {
+        for (s32 index = 0; index < layout->count; ++index)
+            ifTouchRegionRemove();
+        memset(layout->handles, -1, sizeof(layout->handles));
+        layout->count = 0;
+    }
+    if (layout->alternate) {
+        layout->regions.controls[0] = FUN_002b8584(46, 332);
+        layout->regions.controls[1] = FUN_002b8584(46, 333);
+        layout->regions.controls[2] = FUN_002b8584(46, 334);
+        layout->count += 3;
+        for (s32 index = 0; index < 126; ++index) {
+            layout->regions.entries[index] = FUN_002b8584(46, index + 206);
+            ++layout->count;
+        }
+    } else {
+        for (s32 index = 0; index < 90; ++index) {
+            layout->regions.entries[index] = FUN_002b8584(46, index + 86);
+            ++layout->count;
+        }
+        for (s32 index = 0; index < 3; ++index) {
+            layout->regions.footer[index] = FUN_002b8584(46, index + 198);
+            ++layout->count;
+        }
+    }
 }
-
-} /* extern "C" */
+}

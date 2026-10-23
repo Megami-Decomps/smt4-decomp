@@ -1,108 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e69e8` (_code @ 0x4e69e8, 0x178 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: action camera masks and record lookups restored; 64-bit mask loads, early-return sharing and register allocation differ. */
+#include "battle/btlAction.h"
+#include "battle/btlUnit.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "gamedata/Table8Record.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
+extern BtlActionGlobals g_btlAction;
+Table8Record *dataTable8FindRecord(s32 id);
+Table04Record *dataTable04FindById(s32 id);
 
-int dataTable8FindRecord(void);
-int dataTable04FindById(void);
-
-extern unsigned int DAT_00571148; /* 0x571148 */
-extern unsigned int DAT_0057114c; /* 0x57114c */
-extern unsigned int DAT_00571178; /* 0x571178 */
-extern unsigned int DAT_0057117c; /* 0x57117c */
-extern unsigned int DAT_00571210; /* 0x571210 */
-extern unsigned int DAT_00571214; /* 0x571214 */
-extern unsigned int DAT_00571218; /* 0x571218 */
-extern unsigned int DAT_0057121c; /* 0x57121c */
-extern unsigned int DAT_00571228; /* 0x571228 */
-extern unsigned int DAT_0057122c; /* 0x57122c */
-extern unsigned int DAT_005712c0; /* 0x5712c0 */
-extern unsigned int DAT_005712c4; /* 0x5712c4 */
-
-/* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: dataTable04FindById. */
-
-
-void FUN_004e69e8(int *param_1,int param_2,int param_3)
-
+// Select an action's camera mode unless battle-state or marked-target flags suppress it.
+void FUN_004e69e8(BtlMainStateA **owner, BtlUnitA *unit, s32 forced)
 {
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int *puVar7;
-  int temp_v6;
-  unsigned char temp_v7;
-  
-  if (param_3 != 0) {
-    *(unsigned int *)(param_2 + 0x594) = 1;
-  }
-  else {
-    *(unsigned int *)(param_2 + 0x594) = 0;
-    temp_v6 = *param_1;
-    if ((*(unsigned int *)(temp_v6 + 0x10c) & 0x4000000) != 0) {
-      *(unsigned int *)(param_2 + 0x594) = 0x16;
+    struct ActionMasksView {
+        BtlActionGlobals action;
+        u8 padding80[0x58];
+        u64 required;
+        u64 excluded;
+        u8 paddingE8[8];
+        u64 cameraExcluded;
+        u8 paddingF8[0x90];
+        u64 overrideRequired;
+    };
+    struct UnitCameraView {
+        BtlUnitA unit;
+        u8 padding[0x568];
+        u32 mode;
+    };
+    struct RecordCameraView {
+        u8 prefix[0x61];
+        u8 mode;
+    };
+    UnitCameraView *camera = reinterpret_cast<UnitCameraView *>(unit);
+    if (forced != 0) {
+        camera->mode = 1;
+        return;
     }
-    else {
-      temp_v3 = *(unsigned int *)(temp_v6 + 0x45a0);
-      temp_v5 = *(unsigned int *)(temp_v6 + 0x45a4);
-      if ((((DAT_00571210 & temp_v3) == 0 && (DAT_00571214 & temp_v5) == 0) ||
-          ((DAT_005712c0 & temp_v3) != 0 || (DAT_005712c4 & temp_v5) != 0)) &&
-         ((temp_v5 & DAT_0057121c) == 0 && (temp_v3 & DAT_00571218) == 0)) {
-        temp_v1 = (temp_v3 & DAT_00571228) == 0;
-        temp_v2 = (temp_v5 & DAT_0057122c) == 0;
-        temp_v7 = temp_v1 && temp_v2;
-        if (temp_v1 && temp_v2) {
-          temp_v7 = (*(unsigned int *)(temp_v6 + 0x10c) & 0x8000000) == 0;
-        }
-        if (temp_v7) {
-          temp_v4 = 4;
-          do {
-            puVar7 = (unsigned int *)(*(int *)(temp_v6 + 0x1ffc) + temp_v4 * 0x408);
-            if (puVar7 != (unsigned int *)0x0) {
-              if ((((*puVar7 & DAT_00571148) != 0 || (puVar7[1] & DAT_0057114c) != 0) &&
-                  ((*puVar7 & DAT_00571178) == 0 && (puVar7[1] & DAT_0057117c) == 0)) &&
-                 (*(char *)((int)puVar7 + 0x23a) != '\0')) {
-                return;
-              }
-            }
-            temp_v4 = (int)(short)((short)temp_v4 + 1);
-          } while (temp_v4 < 0x36);
-          temp_v6 = *(int *)(param_2 + 0x28);
-          temp_v0 = *(short *)(temp_v6 + 0x1be);
-          if (temp_v0 == 2 || temp_v0 == 3) {
-            temp_v3 = (unsigned int)*(short *)(temp_v6 + 0x1c0);
-          }
-          else {
-            if (temp_v0 != 8) {
-              return;
-            }
-            temp_v6 = (int)*(short *)(temp_v6 + 0x1c0);
-            dataTable8FindRecord();
-            temp_v3 = (unsigned int)*(unsigned short *)(temp_v6 + 0x32);
-            if (temp_v3 == 0) {
-              return;
-            }
-          }
-          if (0 < (int)temp_v3) {
-            dataTable04FindById();
-            temp_v5 = 0;
-            if (temp_v3 != 0) {
-              temp_v5 = (unsigned int)*(unsigned char *)(temp_v3 + 0x61);
-            }
-            if ((temp_v3 != 0 && temp_v5 != 1) && (temp_v5 != 0)) {
-              *(unsigned int *)(param_2 + 0x594) = temp_v5;
-            }
-          }
-        }
-      }
+    camera->mode = 0;
+    BtlMainStateA *state = *owner;
+    if ((state->encounter.statusFlags & 0x4000000) != 0) {
+        camera->mode = 0x16;
+        return;
     }
-  }
-  return;
+    ActionMasksView *masks = reinterpret_cast<ActionMasksView *>(&g_btlAction);
+    u64 flags = state->stateFlags64.bits;
+    if (((flags & masks->required) != 0 && (flags & masks->overrideRequired) == 0) ||
+        (flags & masks->excluded) != 0 || (flags & masks->cameraExcluded) != 0 ||
+        (state->encounter.statusFlags & 0x8000000) != 0)
+        return;
+    for (s16 index = 4; index < 0x36; ++index) {
+        BtlCombatantEntryA *entry = &state->entries[index];
+        if (entry != NULL && (entry->flags & g_btlAction.targetableMask) != 0 &&
+            (entry->flags & g_btlAction.interaction.excludedMask) == 0 && entry->selection.marked != 0)
+            return;
+    }
+    s16 kind = (s16)unit->data->unk1BE;
+    s32 id;
+    if (kind == 2 || kind == 3) {
+        id = *reinterpret_cast<const s16 *>(unit->data->unk1C0);
+    } else {
+        if (kind != 8)
+            return;
+        id = dataTable8FindRecord(*reinterpret_cast<const s16 *>(unit->data->unk1C0))->unk32;
+        if (id == 0)
+            return;
+    }
+    if (id > 0) {
+        const RecordCameraView *record = reinterpret_cast<const RecordCameraView *>(dataTable04FindById(id));
+        if (record != NULL && record->mode != 1 && record->mode != 0)
+            camera->mode = record->mode;
+    }
 }
-
-} /* extern "C" */
+}

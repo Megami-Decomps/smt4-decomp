@@ -1,90 +1,82 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d0bec` (_code @ 0x3d0bec, 0x130 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail selects side values before storing; conditional-store tail sharing and saved-register allocation differ. */
+#include "shard/W4_Match6_BtlEntry.h"
+#include "gamedata/EquipmentTable.h"
 
 extern "C" {
+EquipmentTableRecord *FUN_002ae164(u32 id);
 
-int FUN_002ae164(void);
-
-/* Supplied declaration required: FUN_002ae164. */
-
-
-void FUN_003d0bec(unsigned int param_1,unsigned int *param_2,int param_3,unsigned int *param_4,unsigned int *param_5)
-
+// Decode the equipment target mode into target side and target scope.
+void FUN_003d0bec(u32 unused, const BtlEntry *entry, u32 itemId, u32 *side, u32 *scope)
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  FUN_002ae164();
-  if (param_3 == 0) {
-    return;
-  }
-  temp_v1 = 1;
-  temp_v0 = 0;
-  switch((*(unsigned int *)(param_3 + 0x28) & 0x1ff) >> 5) {
-  case 0:
-    if ((*param_2 & 0x10) != 0) {
-      temp_v1 = 0;
+    EquipmentTableRecord *item = FUN_002ae164(itemId);
+    if (item == NULL)
+        return;
+    // A word overlay on EquipmentTableRecord's unaligned padding would shift its layout.
+    struct ItemTargetView {
+        u8 prefix[0x28];
+        u32 target;
+    };
+    const ItemTargetView *target = reinterpret_cast<const ItemTargetView *>(item);
+    switch ((target->target >> 5) & 0xF) {
+    case 0:
+        if (entry->flags & 0x10)
+            *side = 0;
+        else
+            *side = 1;
+        *scope = 0;
+        return;
+    case 1:
+        if (entry->flags & 0x10)
+            *side = 0;
+        else
+            *side = 1;
+        *scope = 1;
+        return;
+    case 2:
+        if (entry->flags & 0x10)
+            *side = 1;
+        else
+            *side = 0;
+        *scope = 0;
+        return;
+    case 3:
+        if (entry->flags & 0x10)
+            *side = 1;
+        else
+            *side = 0;
+        *scope = 1;
+        return;
+    case 4:
+        if (entry->flags & 0x10)
+            *side = 1;
+        else
+            *side = 0;
+        *scope = 0;
+        return;
+    case 5:
+        *scope = 2;
+        return;
+    case 6:
+        if (entry->flags & 0x10)
+            *side = 0;
+        else
+            *side = 1;
+        *scope = 1;
+        return;
+    case 7:
+        if (entry->flags & 0x10)
+            *side = 1;
+        else
+            *side = 0;
+        *scope = 0;
+        return;
+    case 8:
+        if (entry->flags & 0x10)
+            *side = 1;
+        else
+            *side = 0;
+        *scope = 1;
+        return;
     }
-    *param_4 = temp_v1;
-    *param_5 = temp_v0;
-    return;
-  case 1:
-    temp_v1 = *param_2;
-    break;
-  case 2:
-    temp_v2 = *param_2;
-    temp_v1 = 1;
-    if ((temp_v2 & 0x10) == 0) {
-      temp_v1 = temp_v0;
-    }
-    *param_4 = temp_v1;
-    *param_5 = temp_v0;
-    return;
-  case 3:
-    temp_v1 = *param_2;
-    goto joined_r0x003d0d10;
-  case 4:
-    temp_v2 = *param_2;
-    temp_v1 = 1;
-    if ((temp_v2 & 0x10) == 0) {
-      temp_v1 = temp_v0;
-    }
-    *param_4 = temp_v1;
-    *param_5 = temp_v0;
-    return;
-  case 5:
-    temp_v0 = 2;
-    *param_5 = temp_v0;
-    return;
-  case 6:
-    temp_v1 = *param_2;
-    break;
-  case 7:
-    *param_4 = (unsigned int)((*param_2 & 0x10) != 0);
-    *param_5 = 0;
-    return;
-  case 8:
-    temp_v1 = *param_2;
-joined_r0x003d0d10:
-    if ((temp_v1 & 0x10) != 0) {
-      temp_v0 = 1;
-    }
-    *param_4 = temp_v0;
-    *param_5 = 1;
-    return;
-  default:
-    return;
-  }
-  temp_v0 = 0;
-  if ((temp_v1 & 0x10) == 0) {
-    temp_v0 = 1;
-  }
-  *param_4 = temp_v0;
-  *param_5 = 1;
-  return;
 }
-
-} /* extern "C" */
+}

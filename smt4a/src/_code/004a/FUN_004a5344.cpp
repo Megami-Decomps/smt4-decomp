@@ -10,7 +10,7 @@ int FUN_00493518(int, int, int);
 int words2Copy(int, float [2]);
 int FUN_004935c8(int, int, int);
 int pairAt8Get(int, float [5]);
-int FUN_004a5ea0(...);
+void FUN_004a5ea0(int, int, int, unsigned int, float scale);
 int owner4ASetSizeAndCall(int, double);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -76,7 +76,7 @@ void FUN_004a5344(int param_1)
           if ((*(int *)(param_1 + 0x14) != 2) ||
              (temp_v3 = FUN_0031d174(param_1 + 0x20), temp_v3 != temp_v5)) {
             FUN_004a5ea0(param_1,temp_v5,0,
-                         (int)*(short *)(param_1 + 0x864 + (temp_v1 + temp_v5) * 0x20 + 4));
+                         (int)*(short *)(param_1 + 0x864 + (temp_v1 + temp_v5) * 0x20 + 4),temp_v6);
           }
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < temp_v2);
@@ -85,7 +85,7 @@ void FUN_004a5344(int param_1)
         temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
         temp_v0 = *(short *)(param_1 + 0x864 + temp_v1 * 0x20 + 4);
         temp_v4 = FUN_0031d174(param_1 + 0x20);
-        FUN_004a5ea0(param_1,temp_v4,1,(int)temp_v0);
+        FUN_004a5ea0(param_1,temp_v4,1,(int)temp_v0,temp_v6);
       }
       owner4ASetSizeAndCall(param_1,temp_v6);
       efctSetSpeed();

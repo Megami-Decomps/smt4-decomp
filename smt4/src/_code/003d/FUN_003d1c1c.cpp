@@ -1,127 +1,94 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d1c1c` (_code @ 0x3d1c1c, 0x1fc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains dead inline no-op loads and a constant-true phase-four guard; phase-store joins differ. */
+#include "battle/ActionStateChannels.h"
+#include "battle/ActionKindSelection.h"
+#include "battle/btlMain.h"
+#include "battle/btlAction.h"
 
+struct BtlSkill;
 extern "C" {
+extern BtlMain *g_btlMain;
+extern void *DAT_00435d18;
+extern BtlActionGlobals g_btlAction;
+extern const char DAT_00400468[]; // battle/army_summon/army_summon.bccam
+void FUN_003d6fd4(BtlMain *battle, const char *path);
+s32 cameraCreateFromStateResource(BtlMain *battle);
+void FUN_003dba3c(void *auxiliary);
+s32 btlAuxAreResourcesReady(void *auxiliary);
+void FUN_00246730(void *auxiliary);
+void FUN_00339eec(ActionStateChannelOwner *owner);
+s32 FUN_00339860(ActionStateChannelOwner *owner);
+BtlSkill *FUN_002ae164(s32 skill);
+void FUN_003398e4(ActionStateChannelOwner *owner);
+s32 FUN_0033ac58(ActionStateChannelOwner *owner);
+void FUN_003392cc(ActionStateChannelOwner *owner);
+void FUN_00339fa8(ActionStateChannelOwner *owner);
+s32 FUN_0023fad8(ActionStateChannelOwner *owner);
+void FUN_0033a360(ActionStateChannelOwner *owner);
+s32 FUN_00339e90(ActionStateChannelOwner *owner);
+void FUN_00339f38(ActionStateChannelOwner *owner);
+void FUN_00338358(ActionStateChannelOwner *owner);
+s32 FUN_00293ed0(ActionStateChannelOwner *owner);
+void commandResetThreeChannels(ActionStateChannelOwner *owner);
 
-int FUN_00246730(...);
-int commandResetThreeChannels(...);
-int FUN_002ae164(...);
-int FUN_00338358(...);
-int FUN_003392cc(...);
-int FUN_003398e4(...);
-int FUN_00339eec(...);
-int FUN_00339f38(...);
-int FUN_00339fa8(...);
-int FUN_0033a360(...);
-int FUN_003d6fd4(...);
-int FUN_003dba3c(...);
-int btlAuxAreResourcesReady(...);
-
-extern int g_btlScriptUnit; /* 0x43427c */
-extern unsigned int g_btlMain; /* 0x4342c8 */
-extern int DAT_00435d18; /* 0x435d18 */
-
-extern int FUN_0023fad8(int);
-/* Supplied declaration required: FUN_00246730. */
-extern int FUN_00293ed0(int);
-/* Supplied declaration required: commandResetThreeChannels. */
-/* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_00338358. */
-/* Supplied declaration required: FUN_003392cc. */
-extern int FUN_00339860(int);
-/* Supplied declaration required: FUN_003398e4. */
-extern int FUN_00339e90(int);
-/* Supplied declaration required: FUN_00339eec. */
-/* Supplied declaration required: FUN_00339f38. */
-/* Supplied declaration required: FUN_00339fa8. */
-/* Supplied declaration required: FUN_0033a360. */
-extern int FUN_0033ac58(int);
-extern int cameraCreateFromStateResource(unsigned int);
-/* Supplied declaration required: FUN_003d6fd4. */
-/* Supplied declaration required: FUN_003dba3c. */
-/* Supplied declaration required: btlAuxAreResourcesReady. */
-
-
-unsigned int FUN_003d1c1c(int *param_1,int param_2)
-
+u32 FUN_003d1c1c(ActionStateChannelOwner **owner, ActionKindSelection *work)
 {
-/* irregular: 13 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  switch(*(unsigned int *)(param_2 + 8)) {
-  case 0:
-    FUN_003d6fd4(g_btlMain,"battle/army_summon/army_summon.bccam");
-    *(unsigned int *)(param_2 + 8) = 1;
+    switch (work->sequence.phase) {
+    case 0:
+        FUN_003d6fd4(g_btlMain, DAT_00400468);
+        work->sequence.phase = 1;
+        break;
+    case 1:
+        if (!cameraCreateFromStateResource(g_btlMain))
+            return 0;
+        FUN_003dba3c(DAT_00435d18);
+        work->sequence.phase = 2;
+        break;
+    case 2:
+        if (!btlAuxAreResourcesReady(DAT_00435d18))
+            return 0;
+        FUN_00246730(DAT_00435d18);
+        FUN_00339eec(*owner);
+        work->sequence.phase = 3;
+        break;
+    case 3:
+        if (!FUN_00339860(*owner))
+            return 0;
+        FUN_002ae164(work->command->skill);
+        work->sequence.phase = 4;
+        break;
+    case 4:
+        FUN_003398e4(*owner);
+        work->sequence.phase = 5;
+        break;
+    case 5:
+        if (!FUN_0033ac58(*owner))
+            return 0;
+        FUN_003392cc(*owner);
+        FUN_00339fa8(*owner);
+        work->sequence.phase = 6;
+        break;
+    case 6:
+        if (!FUN_0023fad8(*owner))
+            return 0;
+        FUN_0033a360(*owner);
+        work->sequence.phase = 7;
+        // Fall through: phase seven may finish in the same update.
+    case 7:
+        if (!FUN_00339e90(*owner))
+            return 0;
+        FUN_00339f38(*owner);
+        work->sequence.phase = 8;
+        break;
+    case 8:
+        FUN_00338358(*owner);
+        if (FUN_00293ed0(*owner)) {
+            commandResetThreeChannels(*owner);
+            ActionStateChannels *channels = (ActionStateChannels *)g_btlAction.data;
+            channels->entries[(*owner)->current].pending = 13;
+            return 1;
+        }
+        break;
+    }
     return 0;
-  case 1:
-    temp_v1 = cameraCreateFromStateResource(g_btlMain);
-    if (temp_v1 == 0) {
-      return 0;
-    }
-    FUN_003dba3c(DAT_00435d18);
-    temp_v0 = 2;
-    break;
-  case 2:
-    temp_v1 = DAT_00435d18;
-    btlAuxAreResourcesReady();
-    if (temp_v1 == 0) {
-      return 0;
-    }
-    FUN_00246730(DAT_00435d18);
-    FUN_00339eec(*param_1);
-    temp_v0 = 3;
-    break;
-  case 3:
-    temp_v1 = FUN_00339860(*param_1);
-    if (temp_v1 == 0) {
-      return 0;
-    }
-    FUN_002ae164();
-    temp_v0 = 4;
-    break;
-  case 4:
-    FUN_003398e4(*param_1);
-    temp_v0 = 5;
-    break;
-  case 5:
-    temp_v1 = FUN_0033ac58(*param_1);
-    if (temp_v1 == 0) {
-      return 0;
-    }
-    FUN_003392cc(*param_1);
-    FUN_00339fa8(*param_1);
-    temp_v0 = 6;
-    break;
-  case 6:
-    temp_v1 = FUN_0023fad8(*param_1);
-    if (temp_v1 == 0) {
-      return 0;
-    }
-    FUN_0033a360(*param_1);
-    *(unsigned int *)(param_2 + 8) = 7;
-  case 7:
-    temp_v1 = FUN_00339e90(*param_1);
-    if (temp_v1 == 0) {
-      return 0;
-    }
-    FUN_00339f38(*param_1);
-    temp_v0 = 8;
-    break;
-  case 8:
-    FUN_00338358(*param_1);
-    temp_v1 = FUN_00293ed0(*param_1);
-    if (temp_v1 != 0) {
-      commandResetThreeChannels(*param_1);
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0xd;
-      return 1;
-    }
-  default:
-    return 0;
-  }
-  *(unsigned int *)(param_2 + 8) = temp_v0;
-  return 0;
 }
-
-} /* extern "C" */
+}

@@ -41,7 +41,7 @@ int FUN_00284ee4(...);
 int FUN_00291e14(void);
 int FUN_002c39dc(...);
 int FUN_002ccde8(int, unsigned int *, unsigned int *);
-int FUN_00336de4(int, int);
+int btlTalkBustUpSetDemonTexture(int, int);
 int FUN_003493dc(...);
 int FUN_0035d0e4(void);
 int btlTalkBustUpReleaseContent(void);
@@ -149,7 +149,7 @@ extern int menu32State387CIs6(int);
 /* Supplied declaration required: FUN_00336aec. */
 extern int menu32ModeIsNot4(int);
 /* Supplied declaration required: uiWorkEndState1. */
-/* Supplied declaration required: FUN_00336de4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 extern int partyPanelGetFlag(void);
 extern unsigned int partyPanelGetState(void);
 /* Supplied declaration required: FUN_003493dc. */
@@ -462,7 +462,7 @@ unsigned int FUN_002248f8(void)
       else {
         g_btlUi = 0;
         btlTalkBustUpReleaseContent();
-        FUN_00336de4(*puVar8,1);
+        btlTalkBustUpSetDemonTexture(*puVar8,1);
         btlTalkBustUpSetUnk2F4(1);
       }
     }

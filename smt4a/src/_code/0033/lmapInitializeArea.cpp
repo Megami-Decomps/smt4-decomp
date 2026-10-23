@@ -47,7 +47,7 @@ void lmapApplyMapAndArea();
 void FUN_00378000();
 void FUN_00483acc(LmapObj *);
 void stateSetterSetFromBase(LmapObj *, s32, u32);
-void FUN_004839b4(LmapObj *);
+void fieldBuildAreaPlacementList(LmapObj *);
 void FUN_004bc95c(s32, u32);
 void FUN_0036a434(AreaMainState *);
 void FUN_003699e4();
@@ -83,7 +83,7 @@ void lmapInitializeArea(u32 area, u32 spawnId)
     FUN_00378000();
     FUN_00483acc(&state->setter);
     stateSetterSetFromBase(&state->setter, state->map - 100, state->area);
-    FUN_004839b4(&state->setter);
+    fieldBuildAreaPlacementList(&state->setter);
     FUN_004bc95c(state->map, area);
     FUN_0036a434(state);
     FUN_003699e4();

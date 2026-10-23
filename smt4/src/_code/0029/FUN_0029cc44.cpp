@@ -1,109 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029cc44` (_code @ 0x29cc44, 0x194 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: counter clamps are folded into branched stores and the widget's global pointer reload is eliminated; 103 vs 102 instructions. */
+#include "ui/MessageMain.h"
 
 extern "C" {
-
-int titleOverlaySetModeAnimation(...);
-int FUN_002bee58(unsigned int, unsigned int);
-
-extern unsigned int DAT_0043e18c; /* 0x43e18c */
-extern int DAT_0043e190; /* 0x43e190 */
-
-/* Supplied declaration required: titleOverlaySetModeAnimation. */
-/* Supplied declaration required: FUN_002bee58. */
-
-
-unsigned int FUN_0029cc44(int param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  
-  temp_v2 = DAT_0043e190;
-  if (*(char *)(DAT_0043e190 + 0x7c) == '\x03') {
-    if (*(char *)(DAT_0043e190 + 0x7d) != '\0') {
-      temp_v4 = *(int *)(DAT_0043e190 + 0x78) + *(int *)(DAT_0043e190 + 0x70);
-      *(int *)(DAT_0043e190 + 0x6c) = temp_v4;
-      *(unsigned int *)(temp_v2 + 100) = 10;
-      *(unsigned int *)(temp_v2 + 0x74) = 0;
-      *(int *)(temp_v2 + 0x78) = temp_v4;
-      if (temp_v4 < 1) {
-        temp_v4 = 0;
-      }
-      *(int *)(temp_v2 + 0x6c) = temp_v4;
-      if (temp_v4 >= 1000000000) {
-        temp_v4 = 999999999;
-      }
-      *(int *)(temp_v2 + 0x6c) = temp_v4;
-      *(unsigned char *)(temp_v2 + 0x7c) = 0;
-    }
-    if (*(char *)(temp_v2 + 0x7e) != '\0') {
-      temp_v4 = *(int *)(temp_v2 + 0x78) + *(int *)(temp_v2 + 0x70);
-      *(int *)(temp_v2 + 0x6c) = temp_v4;
-      *(unsigned int *)(temp_v2 + 100) = 10;
-      *(unsigned int *)(temp_v2 + 0x74) = 0;
-      *(int *)(temp_v2 + 0x78) = temp_v4;
-      if (temp_v4 < 1) {
-        temp_v4 = 0;
-      }
-      *(int *)(temp_v2 + 0x6c) = temp_v4;
-      if (temp_v4 >= 100) {
-        temp_v4 = 99;
-      }
-      *(int *)(temp_v2 + 0x6c) = temp_v4;
-      *(unsigned char *)(temp_v2 + 0x7c) = 0;
-    }
-  }
-  temp_v3 = DAT_0043e190 + 0x754;
-  if (((param_1 != 0) && (*(char *)(temp_v2 + 9) == '\v')) && (*(char *)(temp_v2 + 8) != '\0')) {
-    if (*(char *)(temp_v2 + 0x7c) == '\0' || *(char *)(temp_v2 + 0x7c) == '\x02') {
-      *(unsigned char *)(temp_v2 + 0x7c) = 4;
-      if (*(char *)(temp_v2 + 0x7f) == '\0') {
-        temp_v5 = 7;
-      }
-      else {
-        temp_v5 = 2;
-      }
-      FUN_002bee58(temp_v3,temp_v5);
-      temp_v1 = DAT_0043e18c;
-      if (DAT_0043e18c != 0) {
-        temp_v3 = (unsigned int)*(unsigned char *)(DAT_0043e18c + 8);
-      }
-      if (DAT_0043e18c != 0 && temp_v3 != 0) {
-        temp_v3 = DAT_0043e18c;
-        titleOverlaySetModeAnimation(DAT_0043e18c,*(unsigned char *)(DAT_0043e18c + 9));
-        *(unsigned char *)(temp_v1 + 8) = 3;
-        *(unsigned char *)(temp_v1 + 0x35) = 0;
-      }
-      if (temp_v2 != 0) {
-        temp_v3 = (unsigned int)*(unsigned char *)(temp_v2 + 8);
-      }
-      if (temp_v2 != 0 && temp_v3 != 0) {
-        titleOverlaySetModeAnimation(temp_v2,*(unsigned char *)(temp_v2 + 9));
-        *(unsigned char *)(temp_v2 + 8) = 3;
-        *(unsigned char *)(temp_v2 + 0x35) = 0;
-      }
-    }
-    return 0;
-  }
-  temp_v0 = *(char *)(temp_v2 + 0x7c);
-  if ((temp_v0 == '\0' || temp_v0 == '\x02') || temp_v0 == '\x01') {
-    *(unsigned char *)(temp_v2 + 0x7c) = 4;
-    if (*(char *)(temp_v2 + 0x7f) == '\0') {
-      temp_v5 = 7;
-    }
-    else {
-      temp_v5 = 2;
-    }
-    FUN_002bee58(temp_v3,temp_v5);
-  }
-  return 1;
+extern MessageGlobals g_messageMain;
+void FUN_002bee58(void *widget, u32 animation);
+void titleOverlaySetModeAnimation(void *overlay, u32 mode);
 }
-
-} /* extern "C" */
+namespace {
+inline void commitCounter(MessagePanel *panel, s32 maximum)
+{
+    panel->unk6C = panel->unk78 + panel->unk70;
+    panel->unk64 = 10;
+    panel->unk74 = 0;
+    panel->unk78 = panel->unk6C;
+    if (static_cast<s32>(panel->unk6C) <= 0)
+        panel->unk6C = 0;
+    if (static_cast<s32>(panel->unk6C) > maximum)
+        panel->unk6C = maximum;
+    panel->unk7C = 0;
+}
+inline void closeOverlay(void *overlay)
+{
+    MessageObject *object = static_cast<MessageObject *>(overlay);
+    if (object && object->close.state) {
+        titleOverlaySetModeAnimation(object, object->close.mode);
+        object->close.state = 3;
+        object->close.pending = 0;
+    }
+}
+}
+extern "C" {
+// Finish an active numeric counter and advance its widget or close both message overlays.
+u32 FUN_0029cc44(s32 closeMessage)
+{
+    MessagePanel *panel = g_messageMain.banner;
+    if (panel->unk7C == 3) {
+        if (panel->unk7D)
+            commitCounter(panel, 999999999);
+        if (panel->unk7E)
+            commitCounter(panel, 99);
+    }
+    void *widget = g_messageMain.banner->widget754;
+    if (closeMessage && panel->mode == 11 && panel->state) {
+        if (panel->unk7C == 0 || panel->unk7C == 2) {
+            panel->unk7C = 4;
+            FUN_002bee58(widget, panel->unk7F ? 2 : 7);
+            closeOverlay(g_messageMain.state);
+            closeOverlay(panel);
+        }
+        return 0;
+    }
+    if (panel->unk7C == 0 || panel->unk7C == 2 || panel->unk7C == 1) {
+        panel->unk7C = 4;
+        FUN_002bee58(widget, panel->unk7F ? 2 : 7);
+    }
+    return 1;
+}
+}

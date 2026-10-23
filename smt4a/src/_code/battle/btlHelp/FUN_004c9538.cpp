@@ -1,81 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c9538` (_code @ 0x4c9538, 0x188 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: help-entry allocation, payload copy and list-link register scheduling differ. */
+#include "battle/btlHelp.h"
+#include "battle/btlMain.h"
+#include "AsdSDK/AsdDebug.h"
 
-extern "C" {
-
-int asdMemoryAllocTracked(int, int, int, int, int);
-int libc_strcpy(unsigned short *, unsigned int);
-int rt_memcpy_w(unsigned short *, int, int);
-
-/* stack frame of param_4: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_4_stack;
-
-extern int *g_btlHelp; /* 0x5738e8 */
-extern unsigned int DAT_00573908; /* 0x573908 */
-extern unsigned int DAT_0057390c; /* 0x57390c */
-extern unsigned int DAT_00573910; /* 0x573910 */
-extern unsigned int DAT_00573914; /* 0x573914 */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned short * FUN_004c9538(unsigned int param_1,int param_2,unsigned int param_3,unsigned char param_4)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  unsigned short *puVar3;
-  unsigned int temp_v1;
-  
-  temp_v0 = btlGetMainState();
-  if ((((*(unsigned int *)(temp_v0 + 0x45a4) & DAT_0057390c) == 0 &&
-        (*(unsigned int *)(temp_v0 + 0x45a0) & DAT_00573908) == 0) &&
-      ((*(unsigned int *)(temp_v0 + 0x45a0) & DAT_00573910) == 0 &&
-       (*(unsigned int *)(temp_v0 + 0x45a4) & DAT_00573914) == 0)) && (param_2 != 0)) {
-    temp_v1 = *(unsigned int *)(temp_v0 + 0x2268);
-    puVar3 = (unsigned short *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x880,1);
-    *puVar3 = 7;
-    puVar3[1] = 0;
-    puVar3[2] = 0;
-    puVar3[3] = 0;
-    *(unsigned int *)(puVar3 + 4) = param_1;
-    *(unsigned int *)(puVar3 + 6) = temp_v1;
-    rt_memcpy_w(puVar3 + 8,param_2,0x408);
-    *(unsigned char *)(puVar3 + 0x410) = param_4;
-    *(unsigned int *)(puVar3 + 0x436) = 0;
-    *(unsigned int *)(puVar3 + 0x412) = 0xd;
-    *(unsigned int *)(puVar3 + 0x414) = 0xe;
-    puVar3[0x438] = 0;
-    puVar3[0x439] = 1;
-    libc_strcpy(puVar3 + 0x416,param_3);
-    *(unsigned int *)(puVar3 + 0x43a) = 0;
-    *(unsigned int *)(puVar3 + 0x43c) = 0;
-    piVar1 = g_btlHelp;
-    if (*g_btlHelp == 0) {
-      *g_btlHelp = (int)puVar3;
-    }
-    if (piVar1[1] == 0) {
-      piVar1[1] = (int)puVar3;
-    }
-    else {
-      *(unsigned short **)(piVar1[1] + 0x874) = puVar3;
-      *(int *)(puVar3 + 0x43c) = piVar1[1];
-      piVar1[1] = (int)puVar3;
-    }
-    piVar1[2] = piVar1[2] + 1;
-    return puVar3;
-  }
-  return (unsigned short *)0x0;
+namespace {
+/* An aligned view avoids rounding the shared byte-padding union ending at 0x872. */
+struct BtlHelpTextEntryView {
+    u16 type;
+    s16 kind;
+    u16 state, phase;
+    u32 id, context;
+    u8 payload[0x408], unk418[0x408];
+    u8 mode, unk821[3];
+    u32 row, column;
+    char caption[0x40];
+    u32 counter;
+    u16 frame;
+    s16 dialogIndex;
+    BtlHelpEntryA *next, *prev;
+};
+typedef char BtlHelpTextEntryOffsets[offsetof(BtlHelpTextEntryView, mode) == 0x820 &&
+    offsetof(BtlHelpTextEntryView, caption) == 0x82C &&
+    offsetof(BtlHelpTextEntryView, next) == 0x874 &&
+    sizeof(BtlHelpTextEntryView) == sizeof(BtlHelpEntryA) ? 1 : -1];
 }
+extern "C" {
+extern BtlHelpGlobalsA g_btlHelp;
+BtlMainStateA *btlGetMainState(void);
+void *asdMemoryAllocTracked(u32 alignment, u32 granularity, s32 heap, u32 bytes, s32 clear);
+void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+char *libc_strcpy(char *destination, const char *source);
 
-} /* extern "C" */
+BtlHelpEntryA *FUN_004c9538(u32 id, const void *payload, const char *caption, u8 mode)
+{
+    BtlMainStateA *battle = btlGetMainState();
+    u64 blockedStates = static_cast<u64>(g_btlHelp.blockedStates[0]) |
+                        (static_cast<u64>(g_btlHelp.blockedStates[1]) << 32);
+    u64 blockedTransitions = static_cast<u64>(g_btlHelp.blockedTransitions[0]) |
+                             (static_cast<u64>(g_btlHelp.blockedTransitions[1]) << 32);
+    if ((battle->stateFlags64.bits & blockedStates) != 0 ||
+        (battle->stateFlags64.bits & blockedTransitions) != 0 || payload == NULL)
+        return NULL;
+    u32 context = battle->helpMessages.context;
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlHelp.cpp", 275);
+    BtlHelpTextEntryView *entry = static_cast<BtlHelpTextEntryView *>(
+        asdMemoryAllocTracked(0x100, 0x100, 0, 0x880, 1));
+    entry->type = 7;
+    entry->kind = 0;
+    entry->state = 0;
+    entry->phase = 0;
+    entry->id = id;
+    entry->context = context;
+    rt_memcpy_w(entry->payload, payload, sizeof(entry->payload));
+    entry->mode = mode;
+    entry->counter = 0;
+    entry->row = 13;
+    entry->column = 14;
+    entry->frame = 0;
+    entry->dialogIndex = 1;
+    libc_strcpy(entry->caption, caption);
+    entry->next = NULL;
+    entry->prev = NULL;
+    BtlHelpEntryA *message = reinterpret_cast<BtlHelpEntryA *>(entry);
+    BtlHelpListA *list = g_btlHelp.list;
+    if (list->head == NULL)
+        list->head = message;
+    if (list->tail == NULL)
+        list->tail = message;
+    else {
+        list->tail->next = message;
+        entry->prev = list->tail;
+        list->tail = message;
+    }
+    list->count++;
+    return message;
+}
+}

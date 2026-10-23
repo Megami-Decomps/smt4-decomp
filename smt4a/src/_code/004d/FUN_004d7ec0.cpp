@@ -1,92 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d7ec0` (_code @ 0x4d7ec0, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: auxiliary-loading switch block placement has not matched retail. */
 #include "battle/btlMain.h"
 
-extern "C" {
-
-int sysPlaySe(int);
-int scrScriptProcessStartEntry(unsigned int);
-int btlActionStepFinishPendingChanges(unsigned int *, int);
-int FUN_004f741c(int);
-int FUN_004f89e8(int);
-u32 btlAuxAreResourcesReady(BtlAuxA*);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern int g_btlAux; /* 0x573808 */
-extern unsigned int DAT_005738b8; /* 0x5738b8 */
-extern unsigned int DAT_005738bc; /* 0x5738bc */
-
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: btlActionStepFinishPendingChanges. */
-/* Supplied declaration required: FUN_004f741c. */
-/* Supplied declaration required: FUN_004f89e8. */
-extern int FUN_004f9c2c(int);
-
-
-void FUN_004d7ec0(unsigned int *param_1,int param_2)
-
-{
-/* irregular: 1 goto(s); 6 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *puVar4;
-  
-  temp_v0 = *(char *)(param_1 + 0xb);
-  if (temp_v0 != '\0') {
-    if (temp_v0 != '\x01') {
-      if (temp_v0 != '\x02') goto LAB_004d7eec;
-    }
-    else {
-      temp_v1 = btlAuxAreResourcesReady((BtlAuxA*)g_btlAux);
-      if (temp_v1 == 0) {
-        return;
-      }
-      FUN_004f89e8(g_btlAux);
-      *(unsigned char *)(param_1 + 0xb) = 2;
-    }
-  }
-  else {
-    FUN_004f741c(g_btlAux);
-    *(unsigned char *)(param_1 + 0xb) = 1;
-    temp_v1 = btlAuxAreResourcesReady((BtlAuxA*)g_btlAux);
-    if (temp_v1 == 0) {
-      return;
-    }
-    FUN_004f89e8(g_btlAux);
-    *(unsigned char *)(param_1 + 0xb) = 2;
-  }
-  temp_v1 = FUN_004f9c2c(g_btlAux);
-  if (temp_v1 == 0) {
-    return;
-  }
-  *(unsigned char *)(param_1 + 0xb) = 3;
-LAB_004d7eec:
-  *param_1 = 9;
-  if ((int)param_1[8] < 0) {
-    return;
-  }
-  scrScriptProcessStartEntry(param_1[5]);
-  *param_1 = 10;
-  puVar4 = (unsigned int *)(param_2 + 0x45a0);
-  param_1[10] = 0;
-  if ((*puVar4 & DAT_005738b8) != 0 || (*(unsigned int *)(param_2 + 0x45a4) & DAT_005738bc) != 0) {
-    sysPlaySe(0xdf);
-  }
-  if (param_1[9] == 5) {
-    temp_v2 = *(unsigned int *)(param_2 + 0x45a4) | DAT_005738bc;
-    *puVar4 = DAT_005738b8 | *puVar4;
-    *(unsigned int *)(param_2 + 0x45a4) = temp_v2;
-    sysPlaySe(0xdf);
-  }
-  btlActionStepFinishPendingChanges(param_1,param_2);
-  return;
+namespace {
+/* The shared BtlEvent view ends before Apocalypse's pending state mask. */
+struct BattleEventMaskView {
+    u8 unk00[0x20];
+    u64 pendingMask;
+};
 }
+extern "C" {
+extern BtlAuxA *g_btlAux;
+extern BattleEventMaskView g_btlEvent;
+void FUN_004f741c(BtlAuxA *aux);
+u32 btlAuxAreResourcesReady(BtlAuxA *aux);
+void FUN_004f89e8(BtlAuxA *aux);
+s32 FUN_004f9c2c(BtlAuxA *aux);
+void scrScriptProcessStartEntry(u32 entry);
+void sysPlaySe(u32 sound);
+void btlActionStepFinishPendingChanges(BtlStep *step, BtlMainStateA *battle);
 
-} /* extern "C" */
+/* Wait for auxiliary resources, then run the step's script and apply its state mask. */
+void FUN_004d7ec0(BtlStep *step, BtlMainStateA *battle)
+{
+    switch (step->unk2C) {
+    case 0:
+        FUN_004f741c(g_btlAux);
+        step->unk2C = 1;
+        /* Fall through while the resources are already available. */
+    case 1:
+        if (btlAuxAreResourcesReady(g_btlAux) == 0)
+            return;
+        FUN_004f89e8(g_btlAux);
+        step->unk2C = 2;
+        /* Fall through to the auxiliary operation's completion check. */
+    case 2:
+        if (FUN_004f9c2c(g_btlAux) == 0)
+            return;
+        step->unk2C = 3;
+        break;
+    }
+    step->state = 9;
+    if (step->completion.selectedIndex < 0)
+        return;
+    scrScriptProcessStartEntry(step->completion.scriptEntry);
+    step->state = 10;
+    step->completion.pendingChanges = 0;
+    if ((battle->stateFlags64.bits & g_btlEvent.pendingMask) != 0)
+        sysPlaySe(223);
+    if (step->completion.kind == 5) {
+        battle->stateFlags64.bits |= g_btlEvent.pendingMask;
+        sysPlaySe(223);
+    }
+    btlActionStepFinishPendingChanges(step, battle);
+}
+}

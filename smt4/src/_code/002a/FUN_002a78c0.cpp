@@ -1,77 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a78c0` (_code @ 0x2a78c0, 0x17c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: archive argument setup, stream registers and scoped-close block layout differ. */
+#include "shard/S3SoundArchiveLoader.h"
+#include <stddef.h>
 
-extern "C" {
+extern "C" void *FUN_00150c4c(void *, u32, void *, u32, u64, u32);
 
-int FUN_00150c4c(int *, unsigned int, int, int, int, int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_6: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_6_stack;
-
-/* Supplied declaration required: FUN_00150c4c. */
-
-
-int FUN_002a78c0(int param_1,unsigned int param_2,int param_3,int param_4,unsigned int param_5,
-                int param_6)
-
+extern "C" s32 FUN_002a78c0(SoundArchiveLoader *loader, u32 fileId, void *destination,
+    s32 size, u32 offset, s32 chunkSize)
 {
-/* irregular: 4 unstructured edge(s); 1 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  piVar1 = *(int **)(param_1 + 4);
-  FUN_00150c4c(piVar1,param_2,param_1 + 8,0x200,0,0,1);
-  if (piVar1 != (int *)0x0) {
-    temp_v0 = (**(romwright_code **)(*piVar1 + 0x4c))();
-    if ((temp_v0 != 0) && (temp_v0 = (**(romwright_code **)(*piVar1 + 0xc))(piVar1), temp_v0 != 0)) {
-      (**(romwright_code **)(*piVar1 + 0x40))(piVar1,param_5,0);
-      temp_v0 = param_4;
-      if (param_6 != 0) {
-        do {
-          if (0 >= temp_v0) {
-            if (piVar1 != (int *)0x0) {
-              (**(romwright_code **)(*piVar1 + 0x38))();
-            }
-            return param_4;
-          }
-          if (*(char *)(param_1 + 0x20a) != '\0') break;
-          temp_v1 = temp_v0;
-          if (param_6 <= temp_v0) {
-            temp_v1 = param_6;
-          }
-          temp_v1 = (**(romwright_code **)(*piVar1 + 0x24))(piVar1,param_3,(temp_v1 + 0x1fU) & 0xffffffe0);
-          if (temp_v1 < 0) break;
-          if (temp_v0 <= temp_v1) {
-            if (piVar1 != (int *)0x0) {
-              (**(romwright_code **)(*piVar1 + 0x38))();
-            }
-            return param_4;
-          }
-          param_3 = param_3 + temp_v1;
-          temp_v0 = temp_v0 - temp_v1;
-        } while( 1 );
-      }
-      else {
-        temp_v0 = (**(romwright_code **)(*piVar1 + 0x24))(piVar1,param_3,(param_4 + 0x1fU) & 0xffffffe0);
-        if (-1 < temp_v0) {
-          if (piVar1 != (int *)0x0) {
-            (**(romwright_code **)(*piVar1 + 0x38))();
-          }
-          return param_4;
+    struct ArchiveInputStream;
+    struct StreamMethods {
+        u8 prefix00[0xC];
+        u32 (*canRead)(ArchiveInputStream *);
+        u8 prefix10[0x14];
+        s32 (*read)(ArchiveInputStream *, void *, u32);
+        u8 prefix28[0x10];
+        void (*close)(ArchiveInputStream *);
+        u8 prefix3C[4];
+        void (*seek)(ArchiveInputStream *, u32, u32);
+        u8 prefix44[8];
+        u32 (*isOpen)(ArchiveInputStream *);
+    };
+    struct ArchiveInputStream {
+        const StreamMethods *methods;
+    };
+    struct StreamGuard {
+        ArchiveInputStream *stream;
+        ~StreamGuard()
+        {
+            if (stream != NULL)
+                stream->methods->close(stream);
         }
-      }
+    };
+    /* The transfer workspace/cancellation byte lie beyond the shared loader prefix. */
+    struct LoaderReadState {
+        SoundArchiveLoader shared;
+        u8 workspace[0x200];
+        u8 padding208[2];
+        u8 cancelled;
+    };
+    typedef char LoaderReadOffsets[
+        offsetof(LoaderReadState, workspace) == 8 &&
+        offsetof(LoaderReadState, cancelled) == 0x20A &&
+        offsetof(StreamMethods, read) == 0x24 &&
+        offsetof(StreamMethods, close) == 0x38 &&
+        offsetof(StreamMethods, seek) == 0x40 &&
+        offsetof(StreamMethods, isOpen) == 0x4C ? 1 : -1];
+    LoaderReadState *state = reinterpret_cast<LoaderReadState *>(loader);
+    StreamGuard input = { static_cast<ArchiveInputStream *>(FUN_00150c4c(
+        loader->archive, fileId, state->workspace, sizeof(state->workspace), 0, 1)) };
+    ArchiveInputStream *stream = input.stream;
+    if (stream == NULL || stream->methods->isOpen(stream) == 0 ||
+        stream->methods->canRead(stream) == 0)
+        return -1;
+    stream->methods->seek(stream, offset, 0);
+    if (chunkSize != 0) {
+        s32 remaining = size;
+        u8 *output = static_cast<u8 *>(destination);
+        while (remaining > 0) {
+            if (state->cancelled)
+                return -1;
+            s32 requested = chunkSize <= remaining ? chunkSize : remaining;
+            s32 completed = stream->methods->read(stream, output,
+                (static_cast<u32>(requested) + 31) & ~31u);
+            if (completed < 0)
+                return -1;
+            if (remaining <= completed)
+                break;
+            output += completed;
+            remaining -= completed;
+        }
     }
-    if (piVar1 != (int *)0x0) {
-      (**(romwright_code **)(*piVar1 + 0x38))();
-    }
-  }
-  return -1;
+    else if (stream->methods->read(stream, destination,
+        (static_cast<u32>(size) + 31) & ~31u) < 0)
+        return -1;
+    return size;
 }
-
-} /* extern "C" */

@@ -1,86 +1,70 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fa64c` (_code @ 0x4fa64c, 0x168 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail's placement search compares two entries per iteration and keeps a zero value in a saved register. */
+#include "battle/btlMain.h"
+#include "battle/BattleRosterCache.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "shard/Shard0042.h"
 
+struct BattleTransitionAssetA { u8 data[0x34]; };
+struct BattleTransitionPlacementA {
+    u32 key;
+    u32 unk04;
+    BattleTransitionAssetA asset;
+};
+// Apocalypse uses 0x3C-byte placements, unlike MaterialMergeOwner's 0x30-byte view.
+struct BattlePlacementTransitionViewA {
+    u8 prefix[0x1398];
+    BattleTransitionPlacementA placements[50];
+    u8 unk1F50[0x1464];
+    /* 0x33B4 */ u8 state;
+    u8 unk33B5[7];
+    /* 0x33BC */ BattleRosterRecordA* roster;
+    /* 0x33C0 */ State2C* controller;
+    u32 unk33C4;
+    /* 0x33C8 */ struct BattleTransitionCommandA* command;
+};
+struct BattleTransitionCommandA { u32 unk00; s16 kind; };
+struct BattleTransitionStatusViewA { u8 prefix[0x164]; BattleCombatantStatusKey status; };
 extern "C" {
+BtlMainStateA* btlGetMainState(void);
+BtlCombatantEntryA* FUN_003f0e20(BtlMainStateA* battle, s32 group);
+s32 state2CIsNot1(State2C* controller);
+void FUN_00421514(State2C* controller, BattleTransitionAssetA* asset, f32 scale);
+void attachmentsSetOffset(State2C* controller, const f32* position);
+void FUN_00421858(State2C* controller);
+void FUN_004cae0c(BtlMainStateA* battle, BattleRosterRecordA* roster, u32 first, u32 second);
+void FUN_00421078(State2C* controller);
+void FUN_004fa15c(BattlePlacementTransitionViewA* work);
+void FUN_004fb43c(u32 first, u32 second, u32 sound, u32 fourth, u32 fifth, u32 sixth, u32 seventh);
 
-int btlGetMainState(void);
-int FUN_003f0e20(int, int);
-int attachmentsSetOffset(unsigned int, int);
-int FUN_00421078(unsigned int);
-int FUN_00421514(unsigned int, int);
-int FUN_00421858(unsigned int);
-int FUN_004cae0c(unsigned int, unsigned int, int);
-int FUN_004fa15c(int);
-int FUN_004fb43c(int, int, int, int, int, int, int);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: attachmentsSetOffset. */
-/* Supplied declaration required: FUN_00421078. */
-extern int state2CIsNot1(unsigned int);
-/* Supplied declaration required: FUN_00421514. */
-/* Supplied declaration required: FUN_00421858. */
-/* Supplied declaration required: FUN_004cae0c. */
-/* Supplied declaration required: FUN_004fa15c. */
-/* Supplied declaration required: FUN_004fb43c. */
-
-
-void FUN_004fa64c(int param_1)
-
+void FUN_004fa64c(BattlePlacementTransitionViewA* work)
 {
-/* irregular: 2 goto(s); 9 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  
-  temp_v1 = state2CIsNot1(*(unsigned int *)(param_1 + 0x33c0));
-  if (temp_v1 != 0) {
-    temp_v1 = btlGetMainState();
-    FUN_003f0e20(temp_v1,(int)*(short *)(*(int *)(param_1 + 0x33bc) + 0x6a));
-    temp_v2 = 0;
-    do {
-      temp_v4 = param_1 + temp_v2 * 0x3c;
-      if (*(int *)(temp_v1 + 0x170) == *(int *)(temp_v4 + 0x1398)) {
-        temp_v1 = param_1 + temp_v2 * 0x3c + 0x1398;
-LAB_004fa6d8:
-        temp_v3 = btlGetMainState();
-        if (temp_v1 != 0) {
-          FUN_00421514(*(unsigned int *)(param_1 + 0x33c0),temp_v1 + 8);
-          attachmentsSetOffset(*(unsigned int *)(param_1 + 0x33c0),*(int *)(param_1 + 0x33bc) + 0xc);
-          FUN_00421858(*(unsigned int *)(param_1 + 0x33c0));
-          FUN_004cae0c(temp_v3,*(unsigned int *)(param_1 + 0x33bc),0);
-        }
-        goto LAB_004fa72c;
-      }
-      if (*(int *)(temp_v1 + 0x170) == *(int *)(temp_v4 + 0x13d4)) {
-        temp_v1 = param_1 + temp_v2 * 0x3c + 0x13d4;
-        goto LAB_004fa6d8;
-      }
-      temp_v2 = temp_v2 + 2;
-    } while (temp_v2 < 0x32);
-    btlGetMainState();
-LAB_004fa72c:
-    FUN_00421078(*(unsigned int *)(param_1 + 0x33c0));
-    *(unsigned char *)(param_1 + 0x33b4) = 8;
-    FUN_004fa15c(param_1);
-    temp_v0 = *(short *)(*(int *)(param_1 + 0x33c8) + 4);
-    if (temp_v0 == 0xf || temp_v0 == 0x10) {
-      FUN_004fb43c(0,0,0x1000131,0,0,0,0);
-      return;
+    if (!state2CIsNot1(work->controller)) {
+        return;
     }
-    FUN_004fb43c(0,0,0x1000133,0,0,0,0);
-  }
-  return;
+    BtlCombatantEntryA* combatant = FUN_003f0e20(btlGetMainState(), work->roster->motion.group);
+    u32 key = reinterpret_cast<BattleTransitionStatusViewA*>(combatant)->status.key;
+    BattleTransitionPlacementA* placement = NULL;
+    for (s32 index = 0; index < 50; ++index) {
+        if (work->placements[index].key == key) {
+            placement = &work->placements[index];
+            break;
+        }
+    }
+    BtlMainStateA* battle = btlGetMainState();
+    if (placement) {
+        FUN_00421514(work->controller, &placement->asset, work->roster->marker.scale);
+        attachmentsSetOffset(work->controller, work->roster->motion.position);
+        FUN_00421858(work->controller);
+        FUN_004cae0c(battle, work->roster, 0, 0);
+    }
+    FUN_00421078(work->controller);
+    work->state = 8;
+    FUN_004fa15c(work);
+    if (work->command->kind == 15 || work->command->kind == 16) {
+        FUN_004fb43c(0, 0, 0x1000131, 0, 0, 0, 0);
+    } else {
+        FUN_004fb43c(0, 0, 0x1000133, 0, 0, 0, 0);
+    }
 }
-
-} /* extern "C" */
+}

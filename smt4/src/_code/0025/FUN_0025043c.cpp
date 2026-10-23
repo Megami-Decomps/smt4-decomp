@@ -1,88 +1,83 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025043c` (_code @ 0x25043c, 0x184 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: result code three is not retained across skill validation, and shared return-zero/three blocks have different placement. */
+#include "shard/W4_Match6_BtlEntry.h"
+#include "gamedata/Table04Record.h"
+#include <stddef.h>
 
-extern "C" {
-
-int FUN_0023d9b8(int, int, unsigned int);
-int FUN_002ae164(void);
-int dataTable08Sub1GetRecord(void);
-int FUN_0033fe6c(int, int, int);
-
-/* Supplied declaration required: FUN_0023d9b8. */
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
-/* Supplied declaration required: FUN_0033fe6c. */
-
-
-unsigned int FUN_0025043c(int param_1,int param_2)
-
-{
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  if ((param_2 == 0) || (dataTable08Sub1GetRecord(), param_2 == 0)) {
-    return 1;
-  }
-  if ((*(char *)(param_2 + 0x6d) != '\x02' && *(char *)(param_2 + 0x6d) != '\x03') ||
-     (*(char *)(param_2 + 0x6b) != '\x01')) {
-    return 2;
-  }
-  temp_v0 = (unsigned int)*(unsigned short *)(param_2 + 0x62);
-  if (temp_v0 == 0) {
-    temp_v1 = btlGetMainState();
-    if ((*(unsigned int *)(temp_v1 + 0x44a8) & 0x2000000) != 0) {
-      return 0;
-    }
-    FUN_0033fe6c(param_1,1,param_2);
-    temp_v2 = 0;
-    if (param_1 != 0) {
-      temp_v2 = 3;
-    }
-    return temp_v2;
-  }
-  FUN_002ae164();
-  if (temp_v0 == 0) {
-    return 1;
-  }
-  if ((*(unsigned int *)(temp_v0 + 0x28) & 0x7ff) >> 9 != 2 && (*(unsigned int *)(temp_v0 + 0x28) & 0x7ff) >> 9 != 3) {
-    return 2;
-  }
-  switch(*(unsigned char *)(temp_v0 + 0x23)) {
-  case 0:
-  case 1:
-  case 2:
-  case 5:
-  case 6:
-  case 10:
-    break;
-  default:
-    temp_v1 = btlGetMainState();
-    if ((*(unsigned int *)(temp_v1 + 0x44a8) & 0x2000000) == 0) {
-      if (*(char *)(temp_v0 + 0x23) != '\x03') {
-        switch((*(unsigned int *)(temp_v0 + 0x28) & 0x1ff) >> 5) {
-        case 0:
-        case 1:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 8:
-          return 0;
-        }
-      }
-      FUN_0023d9b8(param_1,1,temp_v0);
-      temp_v2 = 0;
-      if (param_1 != 0) {
-        temp_v2 = 3;
-      }
-      return temp_v2;
-    }
-  }
-  return 0;
+namespace {
+struct BattleActionDefinition {
+    u8 unk00[0x60];
+    u16 id;
+    u16 skill;
+    u8 unk64[7];
+    u8 kind;
+    u8 unk6C;
+    u8 mode;
+    u8 unk6E[0x12];
+};
+typedef char BattleActionDefinitionOffsetsCheck[sizeof(BattleActionDefinition) == 0x80 &&
+    offsetof(BattleActionDefinition, skill) == 0x62 &&
+    offsetof(BattleActionDefinition, kind) == 0x6B &&
+    offsetof(BattleActionDefinition, mode) == 0x6D ? 1 : -1];
 }
 
-} /* extern "C" */
+extern "C" {
+BattleActionDefinition *dataTable08Sub1GetRecord(u16 id);
+Table04Record *FUN_002ae164(u32 skillId);
+BtlMainState *btlGetMainState(void);
+s32 FUN_0033fe6c(s32 side, s32 mode, BattleActionDefinition *action, s32 enabled);
+s32 FUN_0023d9b8(s32 side, s32 mode, Table04Record *skill);
+
+// Dispatch supported table-eight actions and skill targets unless the battle suppresses them.
+u32 FUN_0025043c(s32 side, u16 actionId)
+{
+    if (actionId == 0)
+        return 1;
+    BattleActionDefinition *action = dataTable08Sub1GetRecord(actionId);
+    if (action == NULL)
+        return 1;
+    if ((action->mode != 2 && action->mode != 3) || action->kind != 1)
+        return 2;
+    if (action->skill != 0) {
+        Table04Record *skill = FUN_002ae164(action->skill);
+        if (skill == NULL)
+            return 1;
+        if (skill->effectProperties.mode != 2 && skill->effectProperties.mode != 3)
+            return 2;
+        switch (skill->sort.category) {
+        case 0:
+        case 1:
+        case 2:
+        case 5:
+        case 6:
+        case 10:
+            break;
+        default:
+            if ((btlGetMainState()->editorControl.flags & 0x02000000) == 0) {
+                if (skill->sort.category != 3) {
+                    switch (skill->effectProperties.targeting) {
+                    case 0:
+                    case 1:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 8:
+                        return 0;
+                    }
+                }
+                u32 result = FUN_0023d9b8(side, 1, skill);
+                if (result != 0)
+                    result = 3;
+                return result;
+            }
+        }
+        return 0;
+    }
+    if ((btlGetMainState()->editorControl.flags & 0x02000000) != 0)
+        return 0;
+    u32 result = FUN_0033fe6c(side, 1, action, 1);
+    if (result != 0)
+        result = 3;
+    return result;
+}
+}

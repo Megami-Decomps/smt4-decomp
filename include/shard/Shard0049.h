@@ -7,6 +7,7 @@
 
 #include "shard/Shard0048.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 typedef struct Entry8C {
     /* 0x00 */ u8 data[0x8C];
@@ -21,6 +22,10 @@ struct EquipmentMenuCursor {
     union {
         u8 data[0x74];
         FlaggedValueHolder holder;
+        struct {
+            u8 unk00[8];
+            /* 0x08 */ s32 count;
+        } range;
     };
 };
 struct EquipmentMenuItem {
@@ -52,6 +57,15 @@ struct EquipmentMenuState {
             u32 unk0C;
             u32 previousState;
         } transition;
+        struct {
+            u8 prefix[0x3A0];
+            u32 color;
+            AsdTextureRegion region;
+        } detail;
+        struct {
+            u8 prefix[0xB3C];
+            /* 0xB3C */ void *indicator;
+        } scroll;
     };
     /* 0x00B40 */ s32 page;
     union {
@@ -84,6 +98,10 @@ typedef char EquipmentMenuSoundOffsetCheck[
     offsetof(EquipmentMenuState, sound.restricted) == 0x18 &&
     offsetof(EquipmentMenuState, selection.index) == 0xB44 &&
     sizeof(EquipmentMenuState) == 0x1602C ? 1 : -1];
+typedef char EquipmentMenuDetailOffsetCheck[
+    offsetof(EquipmentMenuState, detail.color) == 0x3A0 &&
+    offsetof(EquipmentMenuState, detail.region) == 0x3A4 &&
+    sizeof(EquipmentMenuState) == 0x1602C ? 1 : -1];
 typedef char EquipmentMenuSelectionLayoutCheck[
     sizeof(EquipmentMenuCursor) == 0x74 && offsetof(EquipmentMenuCursor, holder) == 0 &&
     offsetof(EquipmentMenuState, transition.state) == 4 &&
@@ -95,5 +113,10 @@ typedef char EquipmentMenuSelectionLayoutCheck[
     offsetof(EquipmentMenuState, selection.delay) == 0xB54 &&
     offsetof(EquipmentMenuState, cursors) == 0xB60 &&
     offsetof(EquipmentMenuState, pages) == 0xF74 ? 1 : -1];
+typedef char EquipmentMenuScrollOffsetCheck[
+    offsetof(EquipmentMenuCursor, range.count) == 8 &&
+    sizeof(EquipmentMenuCursor) == 0x74 &&
+    offsetof(EquipmentMenuState, scroll.indicator) == 0xB3C &&
+    sizeof(EquipmentMenuState) == 0x1602C ? 1 : -1];
 
 #endif

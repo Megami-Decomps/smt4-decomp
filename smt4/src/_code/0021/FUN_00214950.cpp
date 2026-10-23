@@ -1,44 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00214950` (_code @ 0x214950, 0x108 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: range predicate inlining folds the group shift and changes upper-bound comparisons and constant placement. */
+#include "common.h"
 
-extern "C" {
-
-int FUN_002f530c(int, int);
-
-extern unsigned int FUN_001db8fc(void);
-/* Supplied declaration required: FUN_002f530c. */
-
-
-unsigned int FUN_00214950(unsigned int param_1,int param_2)
-
+static inline bool eventIsInRange(u32 event, s32 group, s32 first, s32 last)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v2 = 2;
-  temp_v1 = FUN_001db8fc();
-  if ((temp_v1 & 0x80000000) == 0) {
-    temp_v2 = 0;
-  }
-  else {
-    temp_v0 = (temp_v1 & 0x3fc00) >> 10;
-    if (((temp_v0 == 0x11) && ((temp_v1 & 0x3ff) >= 100)) && ((temp_v1 & 0x3ff) < 0xb4)) {
-      temp_v2 = 3;
+    if ((s32)((event & 0x3FC00) >> 10) != group) {
+        return false;
     }
-    else if ((((temp_v0 != 0x11) || ((temp_v1 & 0x3ff) < 0xb4)) || ((temp_v1 & 0x3ff) >= 200)) &&
-            ((((temp_v0 == 0x11 && ((temp_v1 & 0x3ff) >= 0x186)) && ((temp_v1 & 0x3ff) < 400)) ||
-             (((((temp_v0 != 0x11 || ((temp_v1 & 0x3ff) < 0xe6)) || ((temp_v1 & 0x3ff) >= 0x154)) &&
-               ((temp_v0 == 0x11 && ((temp_v1 & 0x3ff) >= 200)))) && ((temp_v1 & 0x3ff) < 0xdc)))))) {
-      if (param_2 != 0) {
-        FUN_002f530c(0,param_2);
-      }
-      temp_v2 = 1;
+    s32 index = event & 0x3FF;
+    if (index < first || index > last) {
+        return false;
     }
-  }
-  return temp_v2;
+    return true;
 }
 
-} /* extern "C" */
+extern "C" {
+u32 FUN_001db8fc(void);
+void FUN_002f530c(s32 kind, s32 message);
+
+// Classify the current packed event and optionally display its restriction message.
+u32 FUN_00214950(u32 context, s32 message)
+{
+    u32 result = 2;
+    s32 event = FUN_001db8fc();
+    if ((s32)(event & 0x80000000) >= 0) {
+        return 0;
+    }
+    if (eventIsInRange(event, 17, 100, 179)) {
+        result = 3;
+    } else if (eventIsInRange(event, 17, 180, 199)) {
+        // These events retain the default classification.
+    } else if (eventIsInRange(event, 17, 390, 399)) {
+        if (message != 0) {
+            FUN_002f530c(0, message);
+        }
+        result = 1;
+    } else if (eventIsInRange(event, 17, 230, 339)) {
+        // These events retain the default classification.
+    } else if (eventIsInRange(event, 17, 200, 219)) {
+        if (message != 0) {
+            FUN_002f530c(0, message);
+        }
+        result = 1;
+    }
+    return result;
+}
+}

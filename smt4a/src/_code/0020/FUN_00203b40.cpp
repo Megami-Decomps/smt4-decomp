@@ -1,90 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00203b40` (_code @ 0x203b40, 0x1c4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: grid navigation behavior restored; quotient argument moves and final mode/selection store scheduling differ. */
+#include "ui/GridNavigation.h"
 
 extern "C" {
+void rowWidgetInit(RowWidget *widget, s32 visible, u32 count);
+void colorSlotSet(RowWidget *widget, u8 first, u8 second, u8 third, u8 fourth);
+void colorHolderSet(RowWidget *widget, u8 first, u8 second, u8 third, u8 fourth);
+void FUN_0038755c(RowWidget *widget, u32 mode);
 
-int rowWidgetInit(...);
-int colorSlotSet(int, int, int, int, int);
-int colorHolderSet(...);
-int SBORROW4(int, int);
-
-/* stack frame of param_6: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_6_stack;
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: rowWidgetInit. */
-/* Supplied declaration required: colorSlotSet. */
-/* Supplied declaration required: colorHolderSet. */
-extern long long __aeabi_idivmod(int, int, int, int, int);
-
-
-void FUN_00203b40(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6)
-
+// Configure the row and column navigation ranges, directional inputs and optional alternate keys.
+void FUN_00203b40(GridNavigation *work, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  long long temp_v3;
-  
-  temp_v2 = param_5 != 0;
-  temp_v1 = 0;
-  if (temp_v2) {
-    temp_v1 = param_4 - 1;
-  }
-  if ((temp_v2 && param_4 != 1) && temp_v1 < 0 == (temp_v2 && SBORROW4(param_4,1))) {
-    param_5 = 0;
-  }
-  if (0 < param_2) {
-    temp_v1 = param_3;
-    if ((param_4 == 1) && (param_2 < param_3)) {
-      temp_v1 = param_2;
+    if (wrap != 0 && columns > 1)
+        wrap = 0;
+    if (count <= 0) {
+        work->empty = 1;
+        return;
     }
-    *(int *)(param_1 + 0x50) = param_2;
-    *(unsigned char *)(param_1 + 0x62) = 0;
-    temp_v3 = __aeabi_idivmod(param_2,param_4,param_3,param_4,param_4);
-    temp_v0 = (int)temp_v3;
-    if (0xffffffff < temp_v3) {
-      temp_v0 = temp_v0 + 1;
+    if (columns == 1 && visibleRows > count)
+        visibleRows = count;
+    work->count = count;
+    work->empty = 0;
+    s32 rows = count / columns;
+    if (count % columns > 0)
+        ++rows;
+    if (wrap != 0) {
+        rowWidgetInit(&work->rows, visibleRows, rows);
+        colorSlotSet(&work->rows, 6, 5, 3, 4);
+        if (alternateKeys != 0)
+            colorHolderSet(&work->rows, 15, 14, 12, 13);
+    } else {
+        rowWidgetInit(&work->rows, visibleRows, rows);
+        colorSlotSet(&work->rows, 6, 5, 32, 32);
+        if (alternateKeys != 0)
+            colorHolderSet(&work->rows, 15, 14, 32, 32);
     }
-    if (param_5 != 0) {
-      rowWidgetInit(param_1,temp_v1,temp_v0);
-      colorSlotSet(param_1,6,5,3,4);
-      if (param_6 != 0) {
-        colorHolderSet(param_1,0xf,0xe,0xc,0xd);
-      }
+    if (visibleRows == 1 && columns > 1) {
+        if (columns > count)
+            columns = count;
+        rowWidgetInit(&work->columns, columns, work->count);
+    } else {
+        rowWidgetInit(&work->columns, columns, columns);
     }
-    else {
-      rowWidgetInit(param_1,temp_v1,temp_v0);
-      colorSlotSet(param_1,6,5,0x20,0x20);
-      if (param_6 != 0) {
-        colorHolderSet(param_1,0xf,0xe,0x20,0x20);
-      }
-    }
-    if ((temp_v1 == 1) && (param_4 >= 2)) {
-      if (param_2 < param_4) {
-        param_4 = param_2;
-      }
-      rowWidgetInit(param_1 + 0x28,param_4,*(unsigned int *)(param_1 + 0x50));
-    }
-    else {
-      rowWidgetInit(param_1 + 0x28,param_4);
-    }
-    colorSlotSet(param_1 + 0x28,3,4,0x20,0x20);
-    if (param_6 != 0) {
-      colorHolderSet(param_1 + 0x28,0xc,0xd,0x20,0x20);
-    }
-    *(unsigned short *)(param_1 + 0x5c) = 0;
-    *(unsigned short *)(param_1 + 0x5e) = 0;
-    *(unsigned int *)(param_1 + 0x14) = 1;
-    *(unsigned int *)(param_1 + 0x3c) = 1;
-    return;
-  }
-  *(unsigned char *)(param_1 + 0x62) = 1;
-  return;
+    colorSlotSet(&work->columns, 3, 4, 32, 32);
+    if (alternateKeys != 0)
+        colorHolderSet(&work->columns, 12, 13, 32, 32);
+    work->row = 0;
+    work->column = 0;
+    work->rows.mode = 1;
+    FUN_0038755c(&work->columns, 1);
 }
-
-} /* extern "C" */
+}

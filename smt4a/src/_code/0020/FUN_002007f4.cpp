@@ -1,84 +1,80 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002007f4` (_code @ 0x2007f4, 0x1b0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: completion-byte signedness, cached display bases and state/animation register allocation differ. */
+#include "ui/UiSpriteState.h"
 
+struct BufferedRowsDisplay {
+    u8 unk00[0x68];
+    u32 finished;
+    u8 unk6c[0x14];
+    u8 primaryData[200];
+    u8 secondaryData[100];
+    u8 unk1ac;
+    u8 activeBuffer;
+    u8 unk1ae[2];
+};
+struct BufferedRowsPayload {
+    u32 source;
+    u8 primaryData[200];
+    u8 secondaryData[100];
+};
+struct BufferedRowsWork {
+    u8 unk000[0x20];
+    UiSpriteState rows[5];
+    BufferedRowsDisplay display;
+    BufferedRowsPayload buffers[2];
+    u32 state;
+    u8 selected;
+};
+typedef char BufferedRowsOffsets[
+    offsetof(BufferedRowsWork, display) == 0x2dc &&
+    offsetof(BufferedRowsWork, display.finished) == 0x344 &&
+    offsetof(BufferedRowsWork, display.primaryData) == 0x35c &&
+    offsetof(BufferedRowsWork, display.secondaryData) == 0x424 &&
+    offsetof(BufferedRowsWork, display.activeBuffer) == 0x489 &&
+    offsetof(BufferedRowsWork, buffers) == 0x48c &&
+    offsetof(BufferedRowsWork, state) == 0x6ec &&
+    offsetof(BufferedRowsWork, selected) == 0x6f0 &&
+    sizeof(BufferedRowsPayload) == 0x130 ? 1 : -1];
 extern "C" {
+void FUN_00163aa4(UiSpriteState *, f32);
+void uiSpriteSelectAnim(UiSpriteState *, s32);
+void rt_memcpy_w(void *, const void *, u32);
+void FUN_00203b40(BufferedRowsDisplay *, u32, u32, u32, u32, u32);
 
-int FUN_00163aa4(int);
-int uiSpriteSelectAnim(int, int);
-int FUN_00203b40(int, unsigned int, int, int, int, int);
-int rt_memcpy_w(int, unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_002007f4(int param_1)
-
+void FUN_002007f4(BufferedRowsWork *work)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  
-  temp_v1 = *(int *)(param_1 + 0x6ec);
-  if (temp_v1 == 0) {
-    temp_v1 = 0;
-    do {
-      FUN_00163aa4(param_1 + temp_v1 * 0x8c + 0x20);
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 5);
-    if (*(char *)(param_1 + 0x2da) == '\0') {
-      return;
-    }
-    *(unsigned int *)(param_1 + 0x6ec) = 1;
-  }
-  else if (temp_v1 != 1) {
-    if (temp_v1 == 2) {
-      temp_v1 = 0;
-      do {
-        FUN_00163aa4(param_1 + temp_v1 * 0x8c + 0x20);
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 5);
-      if (*(char *)(param_1 + 0x2da) == '\0') {
+    switch (work->state) {
+    case 0:
+        for (s32 index = 0; index < 5; ++index)
+            FUN_00163aa4(&work->rows[index], 1.0f);
+        if (!work->rows[4].animationFlags.completed)
+            return;
+        work->state = 1;
+        break;
+    case 1:
+        break;
+    case 2:
+        for (s32 index = 0; index < 5; ++index)
+            FUN_00163aa4(&work->rows[index], 1.0f);
+        if (!work->rows[4].animationFlags.completed)
+            return;
+        work->state = 3;
+        // fall through
+    case 3:
+        work->display.finished = 1;
+        work->state = 0;
         return;
-      }
-      *(unsigned int *)(param_1 + 0x6ec) = 3;
+    default:
+        return;
     }
-    else if (temp_v1 != 3) {
-      return;
-    }
-    *(unsigned int *)(param_1 + 0x344) = 1;
-    *(unsigned int *)(param_1 + 0x6ec) = 0;
-    return;
-  }
-  if (*(char *)(param_1 + 0x489) == '\0') {
-    *(unsigned char *)(param_1 + 0x489) = 1;
-  }
-  else {
-    *(unsigned char *)(param_1 + 0x489) = 0;
-  }
-  rt_memcpy_w(param_1 + 0x35c,param_1 + (unsigned int)*(unsigned char *)(param_1 + 0x489) * 0x130 + 0x490,200);
-  rt_memcpy_w(param_1 + 0x424,param_1 + (unsigned int)*(unsigned char *)(param_1 + 0x489) * 0x130 + 0x558,100);
-  FUN_00203b40(param_1 + 0x2dc,
-               *(unsigned int *)(param_1 + (unsigned int)*(unsigned char *)(param_1 + 0x489) * 0x130 + 0x48c),5,1,0,1);
-  temp_v0 = 0;
-  temp_v1 = 0;
-  if (*(char *)(param_1 + 0x6f0) == '\0') {
-    temp_v0 = 2;
-  }
-  do {
-    uiSpriteSelectAnim(param_1 + temp_v1 * 0x8c + 0x20,temp_v0);
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 5);
-  *(unsigned int *)(param_1 + 0x6ec) = 2;
-  return;
+    work->display.activeBuffer = !work->display.activeBuffer;
+    rt_memcpy_w(work->display.primaryData,
+                work->buffers[work->display.activeBuffer].primaryData, 200);
+    rt_memcpy_w(work->display.secondaryData,
+                work->buffers[work->display.activeBuffer].secondaryData, 100);
+    FUN_00203b40(&work->display, work->buffers[work->display.activeBuffer].source, 5, 1, 0, 1);
+    s16 animation = work->selected ? 0 : 2;
+    for (s32 index = 0; index < 5; ++index)
+        uiSpriteSelectAnim(&work->rows[index], animation);
+    work->state = 2;
 }
-
-} /* extern "C" */
+}

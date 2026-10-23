@@ -7,7 +7,7 @@ extern "C" {
 int uiSpriteSetKeyframe(int, int, int);
 int dialogOpen(...);
 int dialogClose(int);
-int FUN_002392b8(...);
+int infoWinExpandAndSetText(...);
 int infoWinSetTimer(...);
 int FUN_002d22c0(int);
 int naviRequestSelectedMap(void);
@@ -41,7 +41,7 @@ extern int gameFlagsGetBlock(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: dialogClose. */
-/* Supplied declaration required: FUN_002392b8. */
+/* Supplied declaration required: infoWinExpandAndSetText. */
 /* Supplied declaration required: infoWinSetTimer. */
 /* Supplied declaration required: FUN_002d22c0. */
 extern int lmapSceneGetUnk0(void);
@@ -155,7 +155,7 @@ unsigned int FUN_00489480(int param_1)
       if ((temp_v1 != 1) && (g_gameState < 100)) {
         if ((((DAT_005f1a5c == '\0') && (DAT_005f161d != '\0')) &&
             (temp_v1 = mapIfGetState(), temp_v1 == 0)) && (*(char *)(param_1 + 0x65) != '\0')) {
-          FUN_002392b8(&DAT_00532760);
+          infoWinExpandAndSetText(&DAT_00532760);
           dialogOpen(1);
           infoWinSetTimer(0xffffffff);
           *(unsigned char *)(param_1 + 0x65) = 0;
@@ -182,7 +182,7 @@ LAB_00489788:
   }
   if ((((DAT_005f1a5c == '\0') && (DAT_005f161d != '\0')) && (temp_v1 = mapIfGetState(), temp_v1 == 0))
      && (*(char *)(param_1 + 0x65) != '\0')) {
-    FUN_002392b8(&DAT_00532760);
+    infoWinExpandAndSetText(&DAT_00532760);
     dialogOpen(1);
     infoWinSetTimer(0xffffffff);
     *(unsigned char *)(param_1 + 0x65) = 0;

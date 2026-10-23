@@ -1,69 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f533c` (_code @ 0x3f533c, 0x174 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: digit/coordinate saved registers and formatted-text stack argument scheduling differ. */
+#include "shard/S1ListPanel.h"
 
 extern "C" {
+extern RenderCtx* g_renderCtx;
+f32 renderCtxCalculateStereoParallax(RenderCtx* context, f32 depth);
+void efctSetSpeed(f32 speed);
+void drawSetColorFromRGBA8(u32 color);
+SpriteInfo* FUN_001834a4(u32 table, u32 id);
+void FUN_001835b4(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
+void FUN_00180310(u32 font, s32 x, s32 y, u32 flags, u32 kind, u32 parameter,
+    const char* format, ...);
 
-int efctSetSpeed(void);
-int FUN_00180310(...);
-int FUN_001835b4(int, int, int, int, int, unsigned int);
-int drawSetColorFromRGBA8(...);
-int renderCtxCalculateStereoParallax(unsigned int);
-
-/* stack frame of param_10: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_10_stack;
-
-extern unsigned char LAB_003f54bc; /* 0x3f54bc */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00180310. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-
-
-void FUN_003f533c(unsigned int param_1,int param_2,int param_3,unsigned int param_4,int param_5,
-                 unsigned int param_6,unsigned int param_7,unsigned int param_8,unsigned int param_9,
-                 int param_10)
-
+void FUN_003f533c(u32 unused, s32 x, s32 y, u32 parameter, s32 number,
+    u32 iconLayout, u32 onesLayout, u32 tensLayout, u32 color, s32 alternate, f32 speed)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  float temp_v2;
-  float temp_v3;
-  
-  temp_v3 = 0.26f;
-  temp_v2 = temp_v3;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  efctSetSpeed();
-  drawSetColorFromRGBA8(param_9);
-  temp_v0 = FUN_001834a4(0x31,param_6);
-  temp_v1 = (int)*(short *)(temp_v0 + 8) + param_2 + (int)temp_v3;
-  temp_v0 = *(short *)(temp_v0 + 10) + param_3;
-  if (param_10 != 0) {
-    FUN_001835b4(2,0x31,2,temp_v1,temp_v0,param_4);
-  }
-  else {
-    FUN_001835b4(2,0x31,0xa0,temp_v1,temp_v0,param_4);
-  }
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  temp_v0 = FUN_001834a4(0x31,param_7);
-  FUN_00180310(6,(int)*(short *)(temp_v0 + 8) + param_2 + (int)temp_v2,*(short *)(temp_v0 + 10) + param_3,
-               0,4,param_4,&LAB_003f54bc,param_5 % 10);
-  temp_v0 = FUN_001834a4(0x31,param_8);
-  FUN_00180310(6,(int)*(short *)(temp_v0 + 8) + param_2 + (int)temp_v2,*(short *)(temp_v0 + 10) + param_3,
-               0,4,param_4,&LAB_003f54bc,param_5 / 10);
-  drawSetColorFromRGBA8(0xffffffff);
-  efctSetSpeed();
-  return;
+    s32 parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f));
+    efctSetSpeed(speed);
+    drawSetColorFromRGBA8(color);
+    SpriteInfo* sprite = FUN_001834a4(0x31, iconLayout);
+    s32 iconX = sprite->x + (x + parallax);
+    s32 iconY = sprite->y + y;
+    if (alternate) {
+        FUN_001835b4(2, 0x31, 2, iconX, iconY, parameter);
+    } else {
+        FUN_001835b4(2, 0x31, 0xA0, iconX, iconY, parameter);
+    }
+    parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f));
+    s32 tens = number / 10;
+    s32 ones = number % 10;
+    sprite = FUN_001834a4(0x31, onesLayout);
+    x += parallax;
+    FUN_00180310(6, sprite->x + x, sprite->y + y, 0, 4, parameter, "%d", ones);
+    sprite = FUN_001834a4(0x31, tensLayout);
+    FUN_00180310(6, sprite->x + x, sprite->y + y, 0, 4, parameter, "%d", tens);
+    drawSetColorFromRGBA8(0xFFFFFFFF);
+    efctSetSpeed(1.0f);
 }
-
-} /* extern "C" */
+}

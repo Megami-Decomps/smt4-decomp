@@ -17,7 +17,7 @@ int FUN_002b6c34(...);
 int devilGetRecord(void);
 int renderCtxCalculateStereoParallax(...);
 int FUN_002bdf94(...);
-int FUN_002be370(...);
+int itemDrawCategoryBadge(...);
 int FUN_002be650(...);
 int FUN_002be90c(...);
 int gameDataBlocksGetSaveData(void);
@@ -136,7 +136,7 @@ extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_002be370. */
+/* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
@@ -1606,7 +1606,7 @@ LAB_001a68b0:
                              (int)*(short *)(temp_v10 + 10) + (int)temp_v30,0xdd);
               }
               temp_v11 = FUN_002bf4f8(0x1a,0xa0);
-              FUN_002be370(temp_v14,(unsigned char *)
+              itemDrawCategoryBadge(temp_v14,(unsigned char *)
                                   ((int)temp_v28 +
                                   (int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v10 + 8)),
                            (int)temp_v30 +

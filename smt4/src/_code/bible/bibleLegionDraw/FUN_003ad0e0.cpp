@@ -1,107 +1,97 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ad0e0` (_code @ 0x3ad0e0, 0x1e8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation debug-source hook is absent; resource packing and saved registers differ. */
+#include "ui/UiSpriteState.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 
-extern "C" {
-
-int uiSpriteSetImageKeyframe(...);
-int FUN_002bd954(...);
-int paramsInit(unsigned int *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int memClear(unsigned int *, int);
-int asdMemAlloc(int, int, int, int, int);
-int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
-int drawParameterBlockClear(unsigned int *);
-
-/* stack frame of void: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp40; /* 0x40: local_40 */
-} void_stack;
-
-extern unsigned char LAB_003ac480; /* 0x3ac480 */
-extern unsigned char LAB_003ad31c; /* 0x3ad31c */
-extern unsigned char DAT_004023c4; /* 0x4023c4 */
-extern unsigned char DAT_004023e8; /* 0x4023e8 */
-extern unsigned char DAT_00402400; /* 0x402400 */
-extern signed char g_countdown; /* 0x43d9e0 */
-extern unsigned int *DAT_0043d9e4; /* 0x43d9e4 */
-
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_002bd954. */
-extern short randNextInRange(unsigned int);
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: drawParameterBlockClear. */
-
-
-void FUN_003ad0e0(void)
-
-{
-/* irregular: 7 native warning(s); review required */
-  short temp_v0;
-  unsigned int *puVar2;
-  unsigned char *puVar3;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  if (g_countdown < '\x01') {
-    temp_v2 = 0x3f800000;
-    if (DAT_0043d9e4 == (unsigned int *)0x0) {
-      puVar2 = (unsigned int *)0x100;
-      asdMemAlloc(0x100,0x100,0,0x474,1);
-      DAT_0043d9e4 = puVar2;
-      puVar2[1] = 0;
-      *(unsigned short *)(puVar2 + 2) = 0xffff;
-      puVar2[3] = 0;
-      *(unsigned short *)(puVar2 + 4) = 0xffff;
-      puVar2[5] = 0;
-      *(unsigned short *)(puVar2 + 6) = 0xffff;
-      *(unsigned char *)(puVar2 + 0x11c) = 0;
-      *(unsigned char *)(puVar2 + 7) = 0;
-      *(unsigned char *)((int)puVar2 + 0x1d) = 0;
-      *(unsigned char *)((int)puVar2 + 0x1f) = 0;
-      *(unsigned char *)((int)puVar2 + 0x1e) = 0;
-      temp_v3 = 0;
-      *(unsigned short *)(puVar2 + 0x9c) = 0;
-      *(unsigned short *)((int)puVar2 + 0x272) = 0;
-      puVar2[0x9d] = 0;
-      puVar2[0x9f] = temp_v2;
-      *(unsigned short *)(puVar2 + 0xa1) = 0;
-      temp_v0 = randNextInRange(200);
-      *(short *)(puVar2 + 0xa2) = temp_v0 + 100;
-      *(unsigned char *)(puVar2 + 0xa3) = 0;
-      puVar2[0x9e] = temp_v3;
-      puVar2[0xa0] = 0xc0400000;
-      *(unsigned short *)((int)puVar2 + 0x286) = 0;
-      temp_v0 = randNextInRange(200);
-      *(short *)((int)puVar2 + 0x28a) = temp_v0 + 100;
-      *(unsigned char *)((int)puVar2 + 0x28d) = 0;
-      memClear(puVar2 + 0xa4,0x1e0);
-    }
-    puVar2 = DAT_0043d9e4;
-    puVar3 = &LAB_003ad31c;
-    asdProcessCreateSimple(&LAB_003ad31c,2,0,0,&LAB_003ac480,0,0);
-    *puVar2 = (unsigned int)puVar3;
-    drawParameterBlockClear(puVar2 + 8);
-    paramsInit(puVar2 + 8,&DAT_004023c4,0x24,&DAT_004023e8,0x18,0,0,0,0,&DAT_00402400,0x70);
-    temp_v1 = 0;
-    do {
-      FUN_002bd954(puVar2 + temp_v1 * 0x23 + 0x10,0x23,0,puVar2 + 8,0x15);
-      uiSpriteSetImageKeyframe(puVar2 + temp_v1 * 0x23 + 0x10,0);
-      FUN_002bd954(puVar2 + temp_v1 * 0x23 + 0x56,0x23,0,puVar2 + 8,0x15);
-      uiSpriteSetImageKeyframe(puVar2 + temp_v1 * 0x23 + 0x56,1,0);
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 2);
-  }
-  g_countdown = g_countdown + '\x01';
-  return;
+namespace {
+struct LegionDrawState {
+    u32 process, value04;
+    s16 selection08;
+    u16 reserved0A;
+    u32 value0C;
+    s16 selection10;
+    u16 reserved12;
+    u32 value14;
+    s16 selection18;
+    u16 reserved1A;
+    u8 flags[4];
+    UiResourceParameters parameters;
+    UiSpriteState sprites[4];
+    u16 phase270, phase272;
+    f32 progress274, progress278, scale, speed;
+    u16 timer284, timer286;
+    s16 duration288, duration28A;
+    u8 phase28C, phase28D;
+    u8 padding28E[2];
+    u8 particles[0x1E0];
+    u8 visible;
+    u8 padding471[3];
+};
+struct LegionDrawGlobals { s8 count; u8 padding01[3]; LegionDrawState *state; };
+typedef char LegionDrawLayout[sizeof(LegionDrawState) == 0x474 &&
+    offsetof(LegionDrawState, sprites) == 0x40 &&
+    offsetof(LegionDrawState, particles) == 0x290 ? 1 : -1];
 }
+extern "C" {
+extern LegionDrawGlobals g_countdown;
+extern const u8 DAT_004023c4[];
+extern const u8 DAT_004023e8[];
+extern const u8 DAT_00402400[];
+void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+s16 randNextInRange(u32 maximum);
+void memClear(void *memory, u32 size);
+u32 FUN_003ac480();
+u32 asdProcessCreateSimple(const char *, s32, u32, u32, u32 (*)(), u32 (*)(), void *);
+void drawParameterBlockClear(UiResourceParameters *parameters);
+void paramsInit(UiResourceParameters *, const void *, u32, const void *, u32,
+    const void *, u32, const void *, u32, const void *, u32);
+void FUN_002bd954(UiSpriteState *, u32, u32, UiSpriteSource *, u16, f32);
+void uiSpriteSetImageKeyframe(UiSpriteState *, s32 image, s32 frame);
 
-} /* extern "C" */
+void FUN_003ad0e0()
+{
+    if (g_countdown.count <= 0) {
+        if (g_countdown.state == NULL) {
+            LegionDrawState *state = static_cast<LegionDrawState *>(asdMemAlloc(0x100, 0x100, 0,
+                sizeof(LegionDrawState), 1));
+            g_countdown.state = state;
+            state->value04 = 0;
+            state->selection08 = -1;
+            state->value0C = 0;
+            state->selection10 = -1;
+            state->value14 = 0;
+            state->selection18 = -1;
+            state->visible = 0;
+            state->flags[0] = 0;
+            state->flags[1] = 0;
+            state->flags[3] = 0;
+            state->flags[2] = 0;
+            state->phase270 = 0;
+            state->phase272 = 0;
+            state->progress274 = 0.0f;
+            state->scale = 1.0f;
+            state->timer284 = 0;
+            state->duration288 = randNextInRange(200) + 100;
+            state->phase28C = 0;
+            state->progress278 = 0.0f;
+            state->speed = -3.0f;
+            state->timer286 = 0;
+            state->duration28A = randNextInRange(200) + 100;
+            state->phase28D = 0;
+            memClear(state->particles, sizeof(state->particles));
+        }
+        LegionDrawState *state = g_countdown.state;
+        state->process = asdProcessCreateSimple("LegionDrawUp CALC", 2, 0, 0, FUN_003ac480, NULL, NULL);
+        drawParameterBlockClear(&state->parameters);
+        paramsInit(&state->parameters, DAT_004023c4, 0x24, DAT_004023e8, 0x18,
+            NULL, 0, NULL, 0, DAT_00402400, 0x70);
+        UiSpriteSource *source = reinterpret_cast<UiSpriteSource *>(&state->parameters);
+        for (s32 index = 0; index < 2; ++index) {
+            FUN_002bd954(&state->sprites[index], 0x23, 0, source, 0x15, 1.0f);
+            uiSpriteSetImageKeyframe(&state->sprites[index], 0, 0);
+            FUN_002bd954(&state->sprites[index + 2], 0x23, 0, source, 0x15, 1.0f);
+            uiSpriteSetImageKeyframe(&state->sprites[index + 2], 1, 0);
+        }
+    }
+    ++g_countdown.count;
+}
+}

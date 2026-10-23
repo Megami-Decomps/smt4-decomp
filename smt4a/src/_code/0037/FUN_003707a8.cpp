@@ -17,7 +17,7 @@ int libc_strcpy(...);
 int sysMemClear(...);
 int FUN_003180c4(...);
 int FUN_0031bca4(...);
-int FUN_0036f298(unsigned int);
+int eventInsertSortedTextureJob(unsigned int);
 unsigned int npc2dCreateDemonPortrait(unsigned int, unsigned int, int, int, float);
 int dispatchIfFound(unsigned int, unsigned int, int);
 
@@ -47,7 +47,7 @@ extern int scrGetCommandFrame(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_0031bca4. */
-/* Supplied declaration required: FUN_0036f298. */
+/* Supplied declaration required: eventInsertSortedTextureJob. */
 /* Supplied declaration required: dispatchIfFound. */
 extern unsigned int FUN_004d0cd4(void);
 
@@ -108,7 +108,7 @@ unsigned int FUN_003707a8(void)
     temp_v2 = scrWorkGetValue(1);
     temp_v2 = npc2dCreateDemonPortrait(temp_v2,0,0,0,1.0f);
     eventTexSetJobParam(temp_v2);
-    FUN_0036f298(temp_v2);
+    eventInsertSortedTextureJob(temp_v2);
     scrWorkSetValue(2,temp_v2);
     FUN_0031bca4(temp_v2,0,1);
     scrWorkSetValue(0,2);

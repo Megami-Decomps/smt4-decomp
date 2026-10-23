@@ -1,66 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00402f58` (_code @ 0x402f58, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: image-keyframe constant reuse and page-transition argument scheduling differ (73 rows each). */
+#include "ui/UiSpriteState.h"
 
 extern "C" {
+s32 FUN_001517b4(u32 button, s32 repeat);
+void eventQueueAddUniqueIfValid(u32 event);
+void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 frame, s32 initial);
+void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 frame, s32 initial);
+void FUN_004029f4(void *work, s32 state, s32 next);
+void contentListUpdateNavigation();
 
-int FUN_001517b4(...);
-int eventQueueAddUniqueIfValid(int);
-int uiSpriteSetKeyframe(int, int, int);
-int uiSpriteSetImageKeyframe(int, int, int);
-int FUN_004029f4(int, int, int);
-int contentListUpdateNavigation(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_004029f4. */
-/* Supplied declaration required: contentListUpdateNavigation. */
-
-
-void FUN_00402f58(int param_1)
-
+// Process page changes and cancellation, including their button sprite animations.
+void FUN_00402f58(void *work)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  
-  contentListUpdateNavigation();
-  if (*(char *)(param_1 + 0x104) != '\0') {
-    temp_v0 = 8;
-    FUN_001517b4(8,1);
-    if (temp_v0 != 0) {
-      eventQueueAddUniqueIfValid(0x1000210);
-      uiSpriteSetKeyframe(param_1 + 0x264,6,0);
-      uiSpriteSetImageKeyframe(param_1 + 0x264,1,0);
-      *(unsigned char *)(param_1 + 0x668) = 1;
-      FUN_004029f4(param_1,6,7);
+    struct ContentListInputView {
+        /* 0x000 */ u8 prefix[0x104];
+        /* 0x104 */ u8 pagesEnabled;
+        /* 0x105 */ u8 unk105[0xD3];
+        /* 0x1D8 */ UiSpriteState cancelButton;
+        /* 0x264 */ UiSpriteState pageButton;
+        /* 0x2F0 */ u8 unk2F0[0x378];
+        /* 0x668 */ u8 previousPage;
+        /* 0x669 */ u8 nextPage;
+    };
+    ContentListInputView *view = static_cast<ContentListInputView *>(work);
+    contentListUpdateNavigation();
+    if (view->pagesEnabled != 0) {
+        if (FUN_001517b4(8, 1) != 0) {
+            eventQueueAddUniqueIfValid(0x1000210);
+            uiSpriteSetKeyframe(&view->pageButton, 6, 0);
+            uiSpriteSetImageKeyframe(&view->pageButton, 1, 0);
+            view->previousPage = 1;
+            FUN_004029f4(work, 6, 7);
+        }
+        if (FUN_001517b4(7, 1) != 0) {
+            eventQueueAddUniqueIfValid(0x1000210);
+            uiSpriteSetKeyframe(&view->pageButton, 7, 0);
+            uiSpriteSetImageKeyframe(&view->pageButton, 1, 0);
+            view->nextPage = 1;
+            FUN_004029f4(work, 6, 7);
+        }
     }
-    temp_v0 = 7;
-    FUN_001517b4(7,1);
-    if (temp_v0 != 0) {
-      eventQueueAddUniqueIfValid(0x1000210);
-      uiSpriteSetKeyframe(param_1 + 0x264,7,0);
-      uiSpriteSetImageKeyframe(param_1 + 0x264,1,0);
-      *(unsigned char *)(param_1 + 0x669) = 1;
-      FUN_004029f4(param_1,6,7);
+    if (FUN_001517b4(1, 1) != 0) {
+        eventQueueAddUniqueIfValid(0x100020F);
+        uiSpriteSetKeyframe(&view->cancelButton, 2, 0);
+        uiSpriteSetImageKeyframe(&view->cancelButton, 1, 0);
+        FUN_004029f4(work, 5, 3);
     }
-  }
-  temp_v0 = 1;
-  FUN_001517b4();
-  if (temp_v0 != 0) {
-    eventQueueAddUniqueIfValid(0x100020f);
-    uiSpriteSetKeyframe(param_1 + 0x1d8,2,0);
-    uiSpriteSetImageKeyframe(param_1 + 0x1d8,1,0);
-    FUN_004029f4(param_1,5,3);
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

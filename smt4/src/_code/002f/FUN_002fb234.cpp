@@ -5,7 +5,7 @@ extern "C" {
 
 int FUN_002702dc(void);
 int FUN_00277d2c(unsigned int, unsigned int);
-int FUN_0027accc(void);
+int mapGimicUpdateVisualBounds(void);
 int FUN_0027ae90(void);
 int FUN_0027b1b4(void);
 int mapRangeEntriesRun(void);
@@ -18,7 +18,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002702dc. */
 /* Supplied declaration required: FUN_00277d2c. */
-/* Supplied declaration required: FUN_0027accc. */
+/* Supplied declaration required: mapGimicUpdateVisualBounds. */
 /* Supplied declaration required: FUN_0027ae90. */
 /* Supplied declaration required: FUN_0027b1b4. */
 /* Supplied declaration required: mapRangeEntriesRun. */
@@ -53,7 +53,7 @@ void FUN_002fb234(void)
       mapRangeEntriesRun();
       FUN_0027b1b4();
       FUN_0027ae90();
-      FUN_0027accc();
+      mapGimicUpdateVisualBounds();
       FUN_00277d2c(*(unsigned int *)(temp_v5 + 0x2c),*(unsigned int *)(temp_v5 + 0x30));
       return;
     }
@@ -80,7 +80,7 @@ LAB_002fb2cc:
   mapRangeEntriesRun();
   FUN_0027b1b4();
   FUN_0027ae90();
-  FUN_0027accc();
+  mapGimicUpdateVisualBounds();
   FUN_00277d2c(*(unsigned int *)(temp_v5 + 0x2c),*(unsigned int *)(temp_v5 + 0x30));
   return;
 }

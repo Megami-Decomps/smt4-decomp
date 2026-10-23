@@ -9,7 +9,7 @@ int FUN_00169548(int);
 int scrRunOpcodesStub(unsigned int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int obj04Finish(void);
-int FUN_00474734(unsigned int *, int);
+int windowCreateStatusOperation(unsigned int *, int);
 int FUN_00476e58(unsigned int *, int, int);
 int FUN_00477d10(...);
 int jobFlagsWorkStop(unsigned int *);
@@ -38,7 +38,7 @@ extern int FUN_002e1a18(unsigned int);
 extern int panelIsMissingOrFlagClear(void);
 /* Supplied declaration required: obj04Finish. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_00474734. */
+/* Supplied declaration required: windowCreateStatusOperation. */
 /* Supplied declaration required: FUN_00476e58. */
 /* Supplied declaration required: FUN_00477d10. */
 /* Supplied declaration required: jobFlagsWorkStop. */
@@ -118,7 +118,7 @@ void FUN_00478edc(unsigned int *param_1)
         if ((temp_v3 != 0) && ((*param_1 & 0x200) != 0)) {
           scrRunOpcodesStub(param_1[0xd6]);
           puVar5 = param_1 + 0x83;
-          FUN_00474734(puVar5,3);
+          windowCreateStatusOperation(puVar5,3);
           param_1[0x82] = (unsigned int)puVar5;
           temp_v3 = flaggedValueHolderGetTotal(param_1 + 0x90);
           puVar5[5] = (unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 0x678) + temp_v3 * 0x9c8 + 0x9aa);

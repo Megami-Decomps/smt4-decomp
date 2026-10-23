@@ -1,75 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001962c0` (_code @ 0x1962c0, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: texture transfer record scheduling has not matched retail. */
+#include "gfx/TextureTransferCommand.h"
 
 extern "C" {
+extern AsdGfxContext g_asdGfxContext;
+void globalCriticalSectionEnterForward(void);
+void globalCriticalSectionLeaveForward(void);
+void FUN_001963e0(void);
 
-int globalCriticalSectionEnterForward(void);
-int globalCriticalSectionLeaveForward(void);
-int FUN_001963e0(void);
-
-/* stack frame of param_6: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_6_stack;
-
-extern signed char DAT_0061a481; /* 0x61a481 */
-extern signed char DAT_0061a482; /* 0x61a482 */
-extern int DAT_0061a510; /* 0x61a510 */
-
-/* Supplied declaration required: globalCriticalSectionEnterForward. */
-/* Supplied declaration required: globalCriticalSectionLeaveForward. */
-/* Supplied declaration required: FUN_001963e0. */
-
-
-void FUN_001962c0(int param_1,unsigned int param_2,unsigned int param_3,unsigned short param_4,
-                 unsigned short param_5,int param_6)
-
+/* Append a same-size texture transfer, converting GL pixel formats to GPU formats. */
+void FUN_001962c0(AsdCmdBuffer *buffer, const void *source, void *destination,
+              u16 width, u16 height, s32 pixelFormat)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char *puVar2;
-  
-  if (param_6 == 0x8057) {
-    temp_v0 = 3;
-  }
-  else if (param_6 < 0x8057) {
-    if (param_6 == 0x8051) {
-      temp_v0 = 1;
+    u32 format;
+    switch (pixelFormat) {
+    case 0x8051: format = 1; break;
+    case 0x8056: format = 4; break;
+    case 0x8057: format = 3; break;
+    case 0x8058: format = 0; break;
+    case 0x8D62: format = 2; break;
+    default: return;
     }
-    else {
-      if (param_6 != 0x8056) {
-        return;
-      }
-      temp_v0 = 4;
+    TextureTransferCommand *command = reinterpret_cast<TextureTransferCommand *>(
+        &buffer->entries[buffer->listCount]);
+    command->kind = 3;
+    command->source = source;
+    command->destination = destination;
+    command->input.size.width = width;
+    command->output.size.width = static_cast<u16>(command->input.value);
+    command->input.size.height = height;
+    command->output.size.height = static_cast<u16>(command->input.value >> 16);
+    command->format.inputFormat = format;
+    command->format.outputFormat = command->format.inputFormat;
+    command->format.options = 4;
+    command->format.enabled = 1;
+    globalCriticalSectionEnterForward();
+    buffer->listCount++;
+    if (g_asdGfxContext.activeBuffer == buffer &&
+        g_asdGfxContext.submission.enabled != 0 && g_asdGfxContext.submission.pending == 0) {
+        g_asdGfxContext.submission.pending = 1;
+        FUN_001963e0();
     }
-  }
-  else if (param_6 == 0x8058) {
-    temp_v0 = 0;
-  }
-  else {
-    if (param_6 != 0x8d62) {
-      return;
-    }
-    temp_v0 = 2;
-  }
-  puVar2 = (unsigned char *)(*(int *)(param_1 + 0x18) + *(int *)(param_1 + 0x20) * 0x1c);
-  *puVar2 = 3;
-  *(unsigned int *)(puVar2 + 4) = param_2;
-  *(unsigned int *)(puVar2 + 8) = param_3;
-  *(unsigned short *)(puVar2 + 0x10) = param_4;
-  *(short *)(puVar2 + 0xc) = (short)*(unsigned int *)(puVar2 + 0x10);
-  *(unsigned short *)(puVar2 + 0x12) = param_5;
-  *(short *)(puVar2 + 0xe) = (short)((unsigned int)*(unsigned int *)(puVar2 + 0x10) >> 0x10);
-  *(unsigned int *)(puVar2 + 0x14) = (temp_v0 << 3) | (*(unsigned int *)(puVar2 + 0x14) & 0xfffff800) | temp_v0 | 0x900;
-  globalCriticalSectionEnterForward();
-  *(int *)(param_1 + 0x20) = *(int *)(param_1 + 0x20) + 1;
-  if (((DAT_0061a510 == param_1) && (DAT_0061a482 != '\0')) && (DAT_0061a481 == '\0')) {
-    DAT_0061a481 = '\x01';
-    FUN_001963e0();
-  }
-  globalCriticalSectionLeaveForward();
-  return;
+    globalCriticalSectionLeaveForward();
 }
-
-} /* extern "C" */
+}

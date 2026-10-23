@@ -1,75 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002637c8` (_code @ 0x2637c8, 0x138 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: contiguous template arguments use different stack-store grouping and base-relative arithmetic. */
+#include "font/PlaceWin.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "sys/Task.h"
+#include <stddef.h>
+
+struct PlaceWindowTemplateResources {
+    u8 first[0x18];
+    u8 second[0x18];
+    u8 commands[0x70];
+};
 
 extern "C" {
+extern PlaceWindow *g_placeWin;
+extern const u8 DAT_00403a58[];
+void *asdMemAlloc(u32, u32, u32, u32, u32);
+void memClear(void *, u32);
+s32 FUN_0032a9fc(u32);
+void placeWindowDrawLabel(void *);
+u32 asdProcessCreateSimple(const char *, s32, s32, s32, AsdProcUpdateFunc, AsdProcFunc, void *);
+u32 taskCreateDraw(const char *, s32, s32, s32, TaskFunc, TaskFunc, void *, u32);
+void drawParameterBlockClear(void *);
+void paramsInit(void *, const void *, u32, const void *, u32, const void *, u32, const void *, u32, const void *, u32);
+void FUN_002bd954(void *, u32, u32, void *, u32, f32);
+void FUN_002bee58(void *, u32);
 
-int FUN_002bd954(...);
-int FUN_002bee58(...);
-int paramsInit(...);
-int memClear(void);
-int asdMemAlloc(int, int, int, int, int);
-int taskCreateDraw(...);
-int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
-int drawParameterBlockClear(unsigned int *);
-
-/* stack frame of void: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
-
-extern unsigned char LAB_00263940; /* 0x263940 */
-extern unsigned char LAB_00263954; /* 0x263954 */
-extern unsigned char LAB_00263968; /* 0x263968 */
-extern int placeWindowDrawLabel(...); /* 0x32a850 */
-extern unsigned char LAB_0032a9fc; /* 0x32a9fc */
-extern unsigned char DAT_00403a28; /* 0x403a28 */
-extern unsigned char DAT_00403a40; /* 0x403a40 */
-extern unsigned char DAT_00403a58; /* 0x403a58 */
-extern unsigned int *g_placeWin; /* 0x43e140 */
-
-/* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: drawParameterBlockClear. */
-
-
-void FUN_002637c8(void)
-
+/* Create the place-name window's update process, stereo draw tasks and animation data. */
+void FUN_002637c8()
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  
-  if (g_placeWin == (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)0x100;
-    asdMemAlloc(0x100,0x100,0,0x140,1);
-    g_placeWin = puVar1;
-  }
-  puVar1 = g_placeWin;
-  memClear();
-  puVar2 = &LAB_00263940;
-  asdProcessCreateSimple(&LAB_00263940,1,0,0,&LAB_0032a9fc,0,0);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_00263954,0x81,0,0,placeWindowDrawLabel,0,0,puVar2);
-  taskCreateDraw(&LAB_00263968,0xdf,0,0,placeWindowDrawLabel,0,0,*puVar1);
-  puVar1 = g_placeWin;
-  drawParameterBlockClear(g_placeWin + 5);
-  paramsInit(puVar1 + 5,&DAT_00403a28,0x18,&DAT_00403a40,0x18,0,0,0,0,&DAT_00403a58,0x70);
-  FUN_002bd954(puVar1 + 0xd,0xe,0x87,puVar1 + 5,1);
-  FUN_002bee58(puVar1 + 0xd,0);
-  return;
+    if (g_placeWin == NULL) {
+        asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\font\\PlaceWin\\PlaceWin.cpp", 166);
+        g_placeWin = static_cast<PlaceWindow *>(asdMemAlloc(0x100, 0x100, 0, sizeof(PlaceWindow), 1));
+    }
+    PlaceWindow *window = g_placeWin;
+    memClear(window, sizeof(PlaceWindow));
+    window->job = asdProcessCreateSimple("PlaceWin Calc", 1, 0, 0, FUN_0032a9fc, NULL, NULL);
+    taskCreateDraw("PlaceWin DrawUpLeft", 0x81, 0, 0, placeWindowDrawLabel, NULL, NULL, window->job);
+    taskCreateDraw("PlaceWin DrawUpRight", 0xdf, 0, 0, placeWindowDrawLabel, NULL, NULL, window->job);
+    window = g_placeWin;
+    drawParameterBlockClear(window->parameters.packet);
+    /* The retail symbol names the command member of this contiguous resource block. */
+    const PlaceWindowTemplateResources *resources = reinterpret_cast<const PlaceWindowTemplateResources *>(
+        DAT_00403a58 - offsetof(PlaceWindowTemplateResources, commands));
+    paramsInit(window->parameters.packet, resources->first, sizeof(resources->first),
+               resources->second, sizeof(resources->second), NULL, 0, NULL, 0,
+               resources->commands, sizeof(resources->commands));
+    FUN_002bd954(window->animation, 0xe, 0x87, window->parameters.packet, 1, 1.0f);
+    FUN_002bee58(window->animation, 0);
 }
-
-} /* extern "C" */
+}

@@ -1,101 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002aff74` (_code @ 0x2aff74, 0x1a0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: packed-color float24 behavior restored; exponent extraction, argument spills and word-store scheduling differ. */
+#include "shard/W6_W6Match8_GpuDepth.h"
+#include "shard/Shard0036.h"
 
 extern "C" {
-
-int FUN_002a9170(unsigned int *, unsigned int *, unsigned int *);
-
-/* stack frame of param_1: 11 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned char sp5; /* 0x5: local_5 */
-    unsigned char sp6; /* 0x6: local_6 */
-    unsigned char sp7; /* 0x7: local_7 */
-    unsigned char sp8; /* 0x8: local_8 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_1_stack;
-
-extern int DAT_004e339c; /* 0x4e339c */
-
-/* Supplied declaration required: FUN_002a9170. */
-
-
-void FUN_002aff74(unsigned int param_1)
-
-{
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3, in_s4; 7 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int in_s3;
-  unsigned int in_s4;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int uStack_38;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  
-  if ((in_s0 & 0x7fffffff) == 0) {
-    temp_v2 = (in_s0 >> 0x1f) << 0x17;
-  }
-  else {
-    temp_v2 = *(unsigned int *)(((in_s0 & 0x7fffffff) >> 0x17) * 4 + 0x4e31a0) |
-               ((in_s0 & 0x7fffff) >> 7) | ((in_s0 >> 0x1f) << 0x17);
-  }
-  if ((in_s1 & 0x7fffffff) == 0) {
-    temp_v0 = (in_s1 >> 0x1f) << 0x17;
-  }
-  else {
-    temp_v0 = ((in_s1 & 0x7fffff) >> 7) | ((in_s1 >> 0x1f) << 0x17) |
-            *(unsigned int *)(((in_s1 & 0x7fffffff) >> 0x17) * 4 + 0x4e31a0);
-  }
-  if ((in_s2 & 0x7fffffff) == 0) {
-    temp_v1 = (in_s2 >> 0x1f) << 0x17;
-  }
-  else {
-    temp_v1 = ((in_s2 & 0x7fffff) >> 7) | ((in_s2 >> 0x1f) << 0x17) |
-            *(unsigned int *)(((in_s2 & 0x7fffffff) >> 0x17) * 4 + 0x4e31a0);
-  }
-  temp_v2 = temp_v2 | (temp_v0 << 0x18);
-  uStack_38 = (DAT_004e339c << 8) | (temp_v1 >> 0x10);
-  temp_v3 = (temp_v1 << 0x10) | (temp_v0 >> 8);
-  if ((in_s3 & 0x7fffffff) == 0) {
-    temp_v7 = (in_s3 >> 0x1f) << 0x17;
-  }
-  else {
-    temp_v7 = *(unsigned int *)(((in_s3 & 0x7fffffff) >> 0x17) * 4 + 0x4e31a0) |
-               ((in_s3 & 0x7fffff) >> 7) | ((in_s3 >> 0x1f) << 0x17);
-  }
-  if ((in_s4 & 0x7fffffff) == 0) {
-    temp_v8 = (in_s4 >> 0x1f) << 0x17;
-  }
-  else {
-    temp_v8 = ((in_s4 & 0x7fffff) >> 7) | ((in_s4 >> 0x1f) << 0x17) |
-               *(unsigned int *)(((in_s4 & 0x7fffffff) >> 0x17) * 4 + 0x4e31a0);
-  }
-  temp_v7 = temp_v7 | (temp_v8 << 0x18);
-  temp_v8 = temp_v8 >> 8;
-  temp_v0 = *(unsigned int *)(((param_1 >> 0x10) & 0xff) * 4 + 0x4e35a0);
-  temp_v4 = *(unsigned int *)((param_1 >> 0x18) * 4 + 0x4e35a0) | (temp_v0 << 0x18);
-  temp_v1 = *(unsigned int *)(((param_1 >> 8) & 0xff) * 4 + 0x4e35a0);
-  temp_v5 = (temp_v1 << 0x10) | (temp_v0 >> 8);
-  temp_v6 = (*(int *)((param_1 & 0xff) * 4 + 0x4e35a0) << 8) | (temp_v1 >> 0x10);
-  temp_v9 = param_1;
-  FUN_002a9170(&temp_v2,&temp_v4,&temp_v7);
-                    /* WARNING: Treating indirect jump as return */
-  return;
+extern u32 DAT_004e31a0[256];
+extern u32 DAT_004e35a0[256];
+void FUN_002a9170(const u32 *position, const u32 *color, const u32 *coordinates);
 }
 
-} /* extern "C" */
+static __forceinline u32 encodeGpuFloat24(f32 value)
+{
+    GpuFloatEncoding encoding;
+    encoding.value = value;
+    if ((encoding.bits & 0x7FFFFFFF) == 0)
+        return encoding.ieee.sign << 23;
+    return DAT_004e31a0[encoding.ieee.exponent] | (encoding.ieee.fraction >> 7) |
+           (encoding.ieee.sign << 23);
+}
+
+// Submit position, normalized packed-color bytes and texture coordinates as GPU float24 words.
+extern "C" void FUN_002aff74(RgbaWord color, f32 x, f32 y, f32 z, f32 u, f32 v)
+{
+    GpuFloat24Vectors packed;
+    u32 positionX = encodeGpuFloat24(x);
+    u32 positionY = encodeGpuFloat24(y);
+    u32 positionZ = encodeGpuFloat24(z);
+    packed.first[0] = positionX | (positionY << 24);
+    packed.first[1] = (positionY >> 8) | (positionZ << 16);
+    packed.first[2] = (positionZ >> 16) | (DAT_004e31a0[127] << 8);
+    u32 coordinateU = encodeGpuFloat24(u);
+    u32 coordinateV = encodeGpuFloat24(v);
+    packed.coordinates[0] = coordinateU | (coordinateV << 24);
+    packed.coordinates[1] = coordinateV >> 8;
+    u32 color0 = DAT_004e35a0[color.rgba.a];
+    u32 color1 = DAT_004e35a0[color.rgba.b];
+    packed.second[0] = color0 | (color1 << 24);
+    u32 color2 = DAT_004e35a0[color.rgba.g];
+    packed.second[1] = (color1 >> 8) | (color2 << 16);
+    u32 color3 = DAT_004e35a0[color.rgba.r];
+    packed.second[2] = (color2 >> 16) | (color3 << 8);
+    FUN_002a9170(packed.first, packed.second, packed.coordinates);
+}

@@ -28,7 +28,7 @@ int FUN_00384830(void);
 int FUN_00385384(void);
 int gameFlagSetValue(int, int);
 int FUN_00408184(...);
-int FUN_0046e800(unsigned short *, unsigned int);
+int aocFindPackagePayload(unsigned short *, unsigned int);
 int flagValueAdd(...);
 int gamePackedFlagTest(...);
 
@@ -139,7 +139,7 @@ extern int mathCirclesOverlap(void);
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00408184. */
-/* Supplied declaration required: FUN_0046e800. */
+/* Supplied declaration required: aocFindPackagePayload. */
 extern unsigned int FUN_00480738(unsigned int);
 extern unsigned int FUN_00480c28(void);
 /* Supplied declaration required: flagValueAdd. */
@@ -262,7 +262,7 @@ joined_r0x00249fd4:
                   }
                   temp_v2 = (unsigned int)*puVar4;
                   puVar4 = g_aocSystem;
-                  FUN_0046e800(g_aocSystem,temp_v2);
+                  aocFindPackagePayload(g_aocSystem,temp_v2);
                   if (puVar4 == (unsigned short *)0x0) {
                     temp_v17 = dataTableGet(0x20,1);
                     temp_v18 = dataTableGetEntries();

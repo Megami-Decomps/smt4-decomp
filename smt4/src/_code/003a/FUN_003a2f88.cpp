@@ -1,110 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a2f88` (_code @ 0x3a2f88, 0x1a0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-int FUN_002bed3c(...);
-int FUN_002bf380(...);
-int FUN_002c18e4(...);
-int FUN_002c198c(...);
-int FUN_002c39a4(...);
-int FUN_003a37dc(...);
-
-typedef struct fn_003a2f88_arg0 fn_003a2f88_arg0;
-struct fn_003a2f88_arg0 {
-    unsigned char pad_0x0[0x10];
-    unsigned char field_0x10; /* +0x10 */
-    unsigned char pad_0x11[0xb];
-    unsigned char field_0x1c; /* +0x1c */
-    unsigned char field_0x1d; /* +0x1d */
-    unsigned char pad_0x1e[0x11ae];
-    undefined4 field_0x11cc; /* +0x11cc */
-    undefined4 field_0x11d0; /* +0x11d0 */
-    undefined4 field_0x11d4; /* +0x11d4 */
-    undefined4 field_0x11d8; /* +0x11d8 */
-    undefined1 field_0x11dc; /* +0x11dc */
+/* NON_MATCHING: render-stack push scheduling, saved registers and sprite-coordinate load order differ. */
+#include "camp/RenderCtx.h"
+struct SceneArrowDrawWork {
+    u8 unk00[0x10];
+    u32 mode;
+    u8 unk14[8];
+    u8 secondArrow;
+    u8 firstArrow;
 };
+struct SpriteInfo;
+/* SpriteInfo's header also defines the incompatible Apocalypse RenderCtx. */
+struct SpriteOriginView {
+    u8 unk00[8];
+    s16 x, y;
+};
+struct ArrowSpritePositions { u32 ids[2]; };
+extern "C" {
+extern RenderCtx *g_titleScene;
+extern const ArrowSpritePositions DAT_00407540;
+void FUN_002c39a4(RenderCtx *context);
+void FUN_002bed3c(void);
+s32 FUN_002c5d80(u32 mode, u32 flags);
+void FUN_003a37dc(SceneArrowDrawWork *work);
+s32 placeWinGetValue(void);
+s32 FUN_001dd8f0(void);
+s32 FUN_001dd910(void);
+const SpriteInfo *FUN_002bf4f8(u32 table, u32 sprite);
+u32 FUN_002bf380(u32 flags, u32 table, u32 spriteId, s32 x, s32 y, s32 z);
+void FUN_002c198c(RenderCtx *context);
+void FUN_002c18e4(RenderCtx *context);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-
-extern int placeWinGetValue(void);
-extern int FUN_001dd8f0(void);
-extern int FUN_001dd910(void);
-/* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bf380. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003a37dc. */
-
-
-void FUN_003a2f88(fn_003a2f88_arg0 *param_1)
-
+void FUN_003a2f88(SceneArrowDrawWork *work)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  unsigned char temp_v4;
-  unsigned int temp_v5 [2];
-  
-  FUN_002c39a4(g_titleScene);
-  FUN_002bed3c();
-  temp_v1 = g_titleScene;
-  temp_v0 = FUN_002c5d80(1,0);
-  piVar5 = (int *)(temp_v1 + 0x124c);
-  temp_v2 = *piVar5;
-  temp_v3 = piVar5[temp_v2 + 2];
-  *piVar5 = temp_v2 + 1;
-  piVar5[temp_v2 + 3] = temp_v0;
-  if (*(char *)(temp_v1 + 0x1264) != '\0' || temp_v3 != temp_v0) {
-    (**(romwright_code **)(temp_v1 + 0x1268))();
-    *(unsigned char *)(temp_v1 + 0x1264) = 0;
-  }
-  if (*(int *)&param_1->field_0x10 != 1) {
-    FUN_003a37dc(param_1);
-    temp_v1 = placeWinGetValue();
-    if (temp_v1 != 0) {
-      temp_v1 = FUN_001dd8f0();
-      temp_v0 = FUN_001dd910();
-      temp_v5[0] = 0xf5;
-      temp_v5[1] = 0xf6;
-      temp_v4 = param_1->field_0x1d != '\0';
-      if (temp_v4) {
-        temp_v2 = FUN_002bf4f8(0x2b,0xf5);
-        FUN_002bf380(2,0x2b,6,*(short *)(temp_v2 + 8) + temp_v1,*(short *)(temp_v2 + 10) + temp_v0,0xd);
-      }
-      if (param_1->field_0x1c != '\0') {
-        temp_v2 = FUN_002bf4f8(0x2b,temp_v5[temp_v4]);
-        FUN_002bf380(2,0x2b,7,*(short *)(temp_v2 + 8) + temp_v1,*(short *)(temp_v2 + 10) + temp_v0,0xd);
-      }
+    FUN_002c39a4(g_titleScene);
+    FUN_002bed3c();
+    RenderCtx *context = g_titleScene;
+    s32 state = FUN_002c5d80(1, 0);
+    renderStackPush(&context->stackA, state);
+    if (work->mode != 1) {
+        FUN_003a37dc(work);
+        if (placeWinGetValue()) {
+            s32 x = FUN_001dd8f0();
+            s32 y = FUN_001dd910();
+            ArrowSpritePositions positions = DAT_00407540;
+            u32 position = 0;
+            if (work->firstArrow) {
+                const SpriteOriginView *origin = reinterpret_cast<const SpriteOriginView *>(FUN_002bf4f8(0x2B, positions.ids[position]));
+                FUN_002bf380(2, 0x2B, 6, origin->x + x, origin->y + y, 13);
+                ++position;
+            }
+            if (work->secondArrow) {
+                const SpriteOriginView *origin = reinterpret_cast<const SpriteOriginView *>(FUN_002bf4f8(0x2B, positions.ids[position]));
+                FUN_002bf380(2, 0x2B, 7, origin->x + x, origin->y + y, 13);
+            }
+        }
     }
-  }
-  temp_v1 = g_titleScene;
-  piVar5 = (int *)(g_titleScene + 0x124c);
-  temp_v0 = *piVar5;
-  temp_v2 = piVar5[temp_v0 + 2];
-  *piVar5 = temp_v0 - 1;
-  if (*(char *)(temp_v1 + 0x1264) != '\0' || temp_v2 != piVar5[temp_v0 + 1]) {
-    (**(romwright_code **)(temp_v1 + 0x1268))();
-    *(unsigned char *)(temp_v1 + 0x1264) = 0;
-  }
-  FUN_002c198c(g_titleScene);
-  FUN_002c18e4(g_titleScene);
-  return;
+    renderStackPop(&g_titleScene->stackA);
+    FUN_002c198c(g_titleScene);
+    FUN_002c18e4(g_titleScene);
 }
-
-} /* extern "C" */
+}

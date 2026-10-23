@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00474734(int, int);
+int windowCreateStatusOperation(int, int);
 int FUN_00476e58(int, int, int);
 int FUN_0047bc90(int, unsigned int *);
 int timeInitializeActiveState(unsigned int *);
@@ -20,7 +20,7 @@ typedef struct {
 extern int g_aocMain; /* 0x570260 */
 
 extern int byteIsAtLeast100(unsigned int *);
-/* Supplied declaration required: FUN_00474734. */
+/* Supplied declaration required: windowCreateStatusOperation. */
 /* Supplied declaration required: FUN_00476e58. */
 /* Supplied declaration required: FUN_0047bc90. */
 extern int isEmptyString(unsigned int *);
@@ -83,7 +83,7 @@ void FUN_0047bd94(int param_1)
     }
     if (temp_v0 == 0) {
       temp_v2 = param_1 + 0x20c;
-      FUN_00474734(temp_v2,0);
+      windowCreateStatusOperation(temp_v2,0);
       *(unsigned int *)(param_1 + 8) = 1;
       *(int *)(param_1 + 0x208) = temp_v2;
       return;
@@ -96,7 +96,7 @@ void FUN_0047bd94(int param_1)
         (**(romwright_code **)(**(int **)(param_1 + 0x208) + 4))();
       }
       temp_v0 = param_1 + 0x20c;
-      FUN_00474734(temp_v0,4);
+      windowCreateStatusOperation(temp_v0,4);
       *(int *)(param_1 + 0x208) = temp_v0;
       temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x240);
       *(unsigned int *)(temp_v0 + 0x14) = (unsigned int)*(unsigned short *)(*(int *)(temp_v2 + 0x678) + temp_v1 * 0x9c8 + 0x9aa);

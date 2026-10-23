@@ -13,7 +13,7 @@ int efctSetSpeed(void);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int FUN_002c39a4(int);
-int FUN_002cf814(...);
+int uiDrawRotatingLoadingGrid(...);
 int SBORROW4(int, int);
 
 typedef int romwright_code(...);
@@ -39,7 +39,7 @@ extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002cf814. */
+/* Supplied declaration required: uiDrawRotatingLoadingGrid. */
 
 
 unsigned int FUN_00330ac8(void)
@@ -181,7 +181,7 @@ unsigned int FUN_00330ac8(void)
   }
   else {
     FUN_002bf288(2,0x24,0x21d,0,0,0x79);
-    FUN_002cf814(0x220,*(unsigned int *)(temp_v1 + 0x78));
+    uiDrawRotatingLoadingGrid(0x220,*(unsigned int *)(temp_v1 + 0x78));
   }
   temp_v1 = g_titleScene;
   piVar8 = (int *)(g_titleScene + 0x124c);

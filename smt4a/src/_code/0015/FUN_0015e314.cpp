@@ -1,77 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015e314` (_code @ 0x15e314, 0x10c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: counter loop restored; binding-store inline shape, two compiler hints and register allocation differ. */
+#include "common.h"
 
-extern "C" {
-
-int listAppendNode(int, int);
-int objectCommandReserveWords(int, int);
-int FUN_00194f94(unsigned int);
-
-typedef struct fn_0015e314_arg0 fn_0015e314_arg0;
-struct fn_0015e314_arg0 {
-    unsigned char pad_0x0[0x10];
-    undefined1 field_0x10; /* +0x10 */
-    unsigned char pad_0x11[0x7];
-    undefined4 field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
-    unsigned char pad_0x20[0x64];
-    unsigned char field_0x84; /* +0x84 */
-    unsigned char pad_0x85[0x10b];
-    undefined4 field_0x190; /* +0x190 */
+struct ObjectCounterTable {
+    u32 count;
+    u32 values[1];
 };
 
-extern int objectCommandQueueGet(void);
-/* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: objectCommandReserveWords. */
-/* Supplied declaration required: FUN_00194f94. */
+struct ObjectCounterTableOwner {
+    u8 unk00[0x0c];
+    struct {
+        u32 unk00;
+        u32 resource;
+    } binding;                         /* 0x0c */
+    u8 unk14[0x204];
+    ObjectCounterTable *counters;       /* 0x218 */
+};
+struct ObjectCounterBindCommand {
+    u32 next;
+    u8 operation;                      /* 0x04 */
+    u8 unk05[7];
+    u32 renderState;                   /* 0x0c */
+    ObjectCounterTableOwner *owner;     /* 0x10 */
+};
+struct ObjectCounterCommandQueue {
+    u8 unk00[0x184];
+    u32 renderState;                   /* 0x184 */
+};
 
+extern "C" {
+void listAppendNode(ObjectCounterCommandQueue *queue, ObjectCounterBindCommand *command);
+ObjectCounterBindCommand *objectCommandReserveWords(ObjectCounterCommandQueue *queue, u32 words);
+ObjectCounterCommandQueue *objectCommandQueueGet(void);
+u32 FUN_00194f94(u32 resource);
 
-unsigned int FUN_0015e314(fn_0015e314_arg0 *param_1,unsigned int param_2,int param_3,int param_4)
-
+/* Initialize caller-provided counter storage and enqueue its resource binding. */
+u32 FUN_0015e314(ObjectCounterTableOwner *owner, u32 resource, void *buffer, u32 bytes)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = FUN_00194f94(param_2);
-  if ((int)(((temp_v0 * 4 + param_3 + 7U) & 0xfffffffc) - (param_3 + param_4)) >= 1) {
-    temp_v1 = 0;
-  }
-  else {
-    *(int *)&param_1[1].field_0x84 = param_3;
-    temp_v2 = FUN_00194f94(param_2);
-    **(unsigned int **)&param_1[1].field_0x84 = temp_v2;
-    if (temp_v2 != 0) {
-      temp_v2 = temp_v2 & 1;
-      if (temp_v2 == 1) {
-        *(unsigned int *)(*(int *)&param_1[1].field_0x84 + 4) = 0;
-      }
-      temp_v4 = (unsigned int)(temp_v2 == 1);
-      if (temp_v2 < **(unsigned int **)&param_1[1].field_0x84) {
-        do {
-          temp_v0 = temp_v4 + 1;
-          temp_v2 = temp_v2 + 2;
-          *(unsigned int *)(*(int *)&param_1[1].field_0x84 + temp_v4 * 4 + 4) = 0;
-          temp_v4 = temp_v4 + 2;
-          *(unsigned int *)(*(int *)&param_1[1].field_0x84 + temp_v0 * 4 + 4) = 0;
-        } while (temp_v2 < **(unsigned int **)&param_1[1].field_0x84);
-      }
-    }
-    *(unsigned int *)&param_1->field_0x10 = param_2;
-    temp_v3 = objectCommandQueueGet();
-    temp_v0 = temp_v3;
-    objectCommandReserveWords(temp_v3,5);
-    *(unsigned int *)(temp_v0 + 0xc) = *(unsigned int *)(temp_v3 + 0x184);
-    *(unsigned char *)(temp_v0 + 4) = 0x32;
-    *(fn_0015e314_arg0 **)(temp_v0 + 0x10) = param_1;
-    listAppendNode(temp_v3,temp_v0);
-    temp_v1 = 1;
-  }
-  return temp_v1;
-}
+    u32 end = (u32)buffer + bytes;
+    u32 requiredBytes = 4 + FUN_00194f94(resource) * sizeof(u32);
+    u32 requiredEnd = ((u32)buffer + requiredBytes + 3) & ~3u;
+    if ((s32)(requiredEnd - end) > 0)
+        return 0;
 
-} /* extern "C" */
+    owner->counters = (ObjectCounterTable *)buffer;
+    owner->counters->count = FUN_00194f94(resource);
+    for (u32 i = 0; i < owner->counters->count; ++i)
+        owner->counters->values[i] = 0;
+    owner->binding.resource = resource;
+    ObjectCounterCommandQueue *queue = objectCommandQueueGet();
+    ObjectCounterBindCommand *command = objectCommandReserveWords(queue, 5);
+    command->renderState = queue->renderState;
+    command->operation = 0x32;
+    command->owner = owner;
+    listAppendNode(queue, command);
+    return 1;
+}
+}

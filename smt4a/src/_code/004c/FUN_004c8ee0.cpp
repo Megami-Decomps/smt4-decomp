@@ -1,87 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c8ee0` (_code @ 0x4c8ee0, 0x1b8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: 64-bit masks combine retail's scalar loads and early-zero returns share an epilogue; 111 vs 105 instructions. */
+#include "battle/btlMain.h"
+#include "battle/btlHelp.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 extern "C" {
+extern BtlHelpGlobalsA g_btlHelp;
+BtlMainStateA *btlGetMainState();
+s32 playerHasFlagBit(u32 flag);
+s32 btlFindEntryValue(s32 unit, u32 kind);
+u32 FUN_004c9160(u32 message, BtlCombatantEntryA *entry, s32 mode, u32 argument);
+u32 FUN_004c8e30(u32 message, s32 mode, u32 argument);
 
-int FUN_004c8e30(int, int, unsigned int);
-int FUN_004c9160(int, unsigned int *, int, unsigned int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
-
-extern unsigned int DAT_005738f8; /* 0x5738f8 */
-extern unsigned int DAT_005738fc; /* 0x5738fc */
-extern unsigned int DAT_00573900; /* 0x573900 */
-extern unsigned int DAT_00573904; /* 0x573904 */
-extern unsigned int DAT_00573908; /* 0x573908 */
-extern unsigned int DAT_0057390c; /* 0x57390c */
-extern unsigned int DAT_00573910; /* 0x573910 */
-extern unsigned int DAT_00573914; /* 0x573914 */
-extern unsigned int DAT_00573918; /* 0x573918 */
-extern unsigned int DAT_0057391c; /* 0x57391c */
-
-extern int btlGetMainState(void);
-extern int playerHasFlagBit(unsigned int);
-extern int btlFindEntryValue(int, unsigned int);
-/* Supplied declaration required: FUN_004c8e30. */
-/* Supplied declaration required: FUN_004c9160. */
-
-
-unsigned int FUN_004c8ee0(unsigned int *param_1,unsigned int param_2,unsigned int param_3)
-
+// Choose the highest-priority newly gained ailment/help message, unless battle state suppresses it.
+u32 FUN_004c8ee0(BtlCombatantEntryA *entry, u32 oldStatus, u32 argument)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = btlGetMainState();
-  temp_v1 = *(unsigned int *)(temp_v0 + 0x45a0);
-  temp_v3 = *(unsigned int *)(temp_v0 + 0x45a4);
-  if ((((temp_v3 & DAT_0057390c) != 0 || (temp_v1 & DAT_00573908) != 0) ||
-      ((DAT_00573910 & temp_v1) != 0 || (DAT_00573914 & temp_v3) != 0)) ||
-     ((temp_v1 & DAT_00573918) != 0 || (temp_v3 & DAT_0057391c) != 0)) {
+    // The final suppression mask lies beyond the documented help-global prefix.
+    struct HelpMaskView {
+        u8 prefix[0x10];
+        u64 specialEntry;
+        u64 restrictedEntry;
+        u64 blockedStates;
+        u64 blockedTransitions;
+        u64 blockedMessages;
+    };
+    typedef char HelpMaskOffsets[offsetof(HelpMaskView, blockedStates) == 0x20 && offsetof(HelpMaskView, blockedMessages) == 0x30 ? 1 : -1];
+    const HelpMaskView *masks = reinterpret_cast<const HelpMaskView *>(&g_btlHelp);
+    u64 battleFlags = btlGetMainState()->stateFlags64.bits;
+    if ((battleFlags & masks->blockedStates) ||
+        (battleFlags & masks->blockedTransitions) ||
+        (battleFlags & masks->blockedMessages))
+        return 0;
+    u32 status = entry->statusFlags;
+    if ((status & 8) && !(oldStatus & 8))
+        return FUN_004c9160(0x24, entry, 0, argument);
+    if ((status & 0x200) && !(oldStatus & 0x200))
+        return FUN_004c9160(0x13, entry, 0, argument);
+    if ((status & 0x20) && !(oldStatus & 0x20))
+        return FUN_004c9160(0x14, entry, 0, argument);
+    if ((status & 0x2000) && !(oldStatus & 0x2000) && !(entry->flags & masks->restrictedEntry))
+        return FUN_004c9160(0x3d, entry, 0, argument);
+    if (btlFindEntryValue(entry->unitIndex, 0xd) > 0)
+        return FUN_004c9160(0x1f, entry, 0, argument);
+    if ((entry->flags & masks->specialEntry) && playerHasFlagBit(1))
+        return FUN_004c8e30(0x15, 0, argument);
     return 0;
-  }
-  temp_v1 = param_1[0x9d];
-  if (((temp_v1 & 8) != 0) && ((param_2 & 8) == 0)) {
-    temp_v2 = 0x24;
-    FUN_004c9160(0x24,param_1,0,param_3);
-    return temp_v2;
-  }
-  if (((temp_v1 & 0x200) != 0) && ((param_2 & 0x200) == 0)) {
-    temp_v2 = 0x13;
-    FUN_004c9160(0x13,param_1,0,param_3);
-    return temp_v2;
-  }
-  if (((temp_v1 & 0x20) != 0) && ((param_2 & 0x20) == 0)) {
-    temp_v2 = 0x14;
-    FUN_004c9160(0x14,param_1,0,param_3);
-    return temp_v2;
-  }
-  if ((((temp_v1 & 0x2000) != 0) && ((param_2 & 0x2000) == 0)) &&
-     ((param_1[1] & DAT_00573904) == 0 && (*param_1 & DAT_00573900) == 0)) {
-    temp_v2 = 0x3d;
-    FUN_004c9160(0x3d,param_1,0,param_3);
-    return temp_v2;
-  }
-  temp_v0 = btlFindEntryValue((int)(short)param_1[2],0xd);
-  if (0 < temp_v0) {
-    temp_v2 = 0x1f;
-    FUN_004c9160(0x1f,param_1,0,param_3);
-    return temp_v2;
-  }
-  if (((param_1[1] & DAT_005738fc) != 0 || (*param_1 & DAT_005738f8) != 0) &&
-     (temp_v0 = playerHasFlagBit(1), temp_v0 != 0)) {
-    temp_v2 = 0x15;
-    FUN_004c8e30(0x15,0,param_3);
-    return temp_v2;
-  }
-  return 0;
 }
-
-} /* extern "C" */
+}

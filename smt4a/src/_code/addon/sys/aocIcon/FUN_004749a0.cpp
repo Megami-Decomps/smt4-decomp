@@ -1,61 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004749a0` (_code @ 0x4749a0, 0x10c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+/* NON_MATCHING: strip destination offset is hoisted into an extra saved register. */
+#include "addon/aocIcon.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+void *asdMemoryAllocAligned(u32 heap, u32 type, u32 options, u32 size, u32 alignment, u32 clear);
+void rt_memclr(void *memory, u32 size);
+void nnnstdMemCpy(void *destination, const void *source, u32 size);
+AsdTexture *asdTextureCreate(s32 type);
+void FUN_00281024(void);
 
-int asdTextureCreate(void);
-int asdMemoryAllocAligned(int, int, int, int, int, int);
-int FUN_00281024(void);
-int rt_memclr(void);
-int nnnstdMemCpy(unsigned int, unsigned int, int);
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-/* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: asdMemoryAllocAligned. */
-/* Supplied declaration required: FUN_00281024. */
-/* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: nnnstdMemCpy. */
-
-
-void FUN_004749a0(int param_1,int param_2)
-
+// Expand the six packed icon strips into a zero-padded 64x64 RGB565 texture.
+void FUN_004749a0(AocIcon *icon, const u8 *source)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = 0x10000;
-  asdMemoryAllocAligned(0x10000,0x100,0,0x2000,0x80,1);
-  *(unsigned int *)(param_1 + 4) = temp_v0;
-  rt_memclr();
-  temp_v1 = 0;
-  do {
-    nnnstdMemCpy(*(int *)(param_1 + 4) + temp_v1 * 0x400 + 0x800,param_2 + temp_v1 * 0x300,0x300);
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 6);
-  temp_v0 = 0;
-  asdTextureCreate();
-  *(unsigned int *)(param_1 + 8) = temp_v0;
-  FUN_00281024();
-  *(unsigned int *)(*(int *)(param_1 + 8) + 4) = 0xde1;
-  *(unsigned int *)(*(int *)(param_1 + 8) + 8) = 0x10000;
-  *(unsigned int *)(*(int *)(param_1 + 8) + 0xc) = 0x1000000;
-  *(unsigned int *)(*(int *)(param_1 + 8) + 0x10) = 0;
-  *(unsigned int *)(*(int *)(param_1 + 8) + 0x14) = 0x40;
-  *(unsigned int *)(*(int *)(param_1 + 8) + 0x18) = 0x40;
-  *(unsigned int *)(*(int *)(param_1 + 8) + 0x1c) = 0x6754;
-  *(unsigned int *)(*(int *)(param_1 + 8) + 0x20) = 0x8363;
-  *(unsigned int *)(*(int *)(param_1 + 8) + 0x24) = *(unsigned int *)(param_1 + 4);
-  *(unsigned int *)(*(int *)(param_1 + 8) + 0x28) = 0x2000;
-  asdTextureSetImage(*(AsdTexture**)(param_1 + 8));
-  return;
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\addon\\sys\\aocIcon.cpp", 63);
+    icon->pixels = (AocIconPixels *)asdMemoryAllocAligned(0x10000, 0x100, 0, 0x2000, 0x80, 1);
+    rt_memclr(icon->pixels, 0x2000);
+    for (u32 strip = 0; strip < 6; ++strip)
+        nnnstdMemCpy(icon->pixels->strips[strip], source + strip * 0x300, 0x300);
+    icon->texture = asdTextureCreate(0);
+    FUN_00281024();
+    icon->texture->target = ASDTEXTURE_TARGET_2D;
+    icon->texture->unk08 = 0x10000;
+    icon->texture->image.flags = 0x1000000;
+    icon->texture->image.mip.level = 0;
+    icon->texture->dimensions.width = 64;
+    icon->texture->dimensions.height = 64;
+    icon->texture->image.format = 0x6754;
+    icon->texture->image.type = 0x8363;
+    icon->texture->storage.pixels = icon->pixels;
+    icon->texture->storage.unk28 = 0x2000;
+    asdTextureSetImage(icon->texture);
 }
-
-} /* extern "C" */
+}

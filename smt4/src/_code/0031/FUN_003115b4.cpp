@@ -1,79 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003115b4` (_code @ 0x3115b4, 0x108 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: selector stores schedule differently; state transition uses strd instead of retail's writeback stores. */
+#include "shard/W4_W4Match2_UiQuest.h"
 
 extern "C" {
+void uiQuestLoadResources();
+void FUN_0028fe0c(u32 questId, s32 mode);
+void FUN_0029eb5c(void *cursor, s32 index);
+s32 FUN_00298f88(u32 questId);
+s32 FUN_0029ee54(void *cursor);
+void buttonHelpSetPreset(s32 preset);
+void timerStart(void *timer, s32 animation, s32 initial);
+void FUN_002bf810(u32 message);
 
-int uiQuestLoadResources(void);
-int FUN_0028fe0c(unsigned int, int);
-int FUN_0029eb5c(int, int);
-int buttonHelpSetPreset(int);
-int timerStart(...);
-int FUN_002bf810(int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern int g_uiQuest; /* 0x43dd50 */
-
-/* Supplied declaration required: uiQuestLoadResources. */
-/* Supplied declaration required: FUN_0028fe0c. */
-extern int FUN_00298f88(unsigned int);
-/* Supplied declaration required: FUN_0029eb5c. */
-extern int FUN_0029ee54(int);
-/* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bf810. */
-
-
-void FUN_003115b4(unsigned int param_1)
-
+// Focus the quest in the appropriate list, then open its detail panel.
+void FUN_003115b4(u32 questId)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int unaff_r6;
-  int unaff_r8;
-  
-  temp_v0 = g_uiQuest;
-  *(short *)(g_uiQuest + 0x97e) = (short)param_1;
-  temp_v1 = FUN_00298f88(param_1);
-  if (temp_v1 != 0) {
-    unaff_r8 = temp_v0 + 0x5fc;
-    unaff_r6 = temp_v0 + 0x6c4;
-  }
-  *(char *)(temp_v0 + 0x5c4) = (char)temp_v1;
-  if (temp_v1 == 0) {
-    unaff_r8 = temp_v0 + 0x660;
-    unaff_r6 = temp_v0 + 0x78a;
-  }
-  temp_v2 = 0;
-  *(unsigned char *)(temp_v0 + 0x5f2) = 1;
-  temp_v1 = FUN_0029ee54(unaff_r8);
-  if (0 < temp_v1) {
-    do {
-      if (*(unsigned short *)(unaff_r6 + temp_v2 * 2) == param_1) {
-        FUN_0029eb5c(unaff_r8,temp_v2);
-        break;
-      }
-      temp_v2 = temp_v2 + 1;
-      temp_v1 = FUN_0029ee54(unaff_r8);
-    } while (temp_v2 < temp_v1);
-  }
-  uiQuestLoadResources();
-  FUN_0028fe0c(param_1,0);
-  timerStart(temp_v0 + 0x34,0);
-  timerStart(temp_v0 + 0x494,2,0);
-  temp_v0 = g_uiQuest;
-  *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
-  *(unsigned int *)(temp_v0 + 4) = 0x17;
-  *(unsigned int *)(temp_v0 + 0x10) = 0;
-  buttonHelpSetPreset(0x1a);
-  FUN_002bf810(0x100025c);
-  return;
+    UiQuest *quest = g_uiQuest;
+    quest->questId = questId;
+    s32 alternate = FUN_00298f88(questId);
+    void *cursor;
+    u16 *ids;
+    if (alternate != 0) {
+        cursor = quest->panel.alternate.cursor;
+        ids = quest->cursor.alternate.ids;
+    }
+    quest->panel.detailMode = alternate;
+    if (alternate == 0) {
+        cursor = &quest->cursor;
+        ids = quest->list;
+    }
+    quest->panel.unkF2 = 1;
+    for (s32 index = 0; index < FUN_0029ee54(cursor); ++index) {
+        if (ids[index] == questId) {
+            FUN_0029eb5c(cursor, index);
+            break;
+        }
+    }
+    uiQuestLoadResources();
+    FUN_0028fe0c(questId, 0);
+    timerStart(quest->mainSprite, 0, 0);
+    timerStart(quest->detailAnimation.timer, 2, 0);
+    quest = g_uiQuest;
+    quest->previousState = quest->state;
+    quest->state = 0x17;
+    quest->timer = 0;
+    buttonHelpSetPreset(0x1A);
+    FUN_002bf810(0x100025C);
 }
-
-} /* extern "C" */
+}

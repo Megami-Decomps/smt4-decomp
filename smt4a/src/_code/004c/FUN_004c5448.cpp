@@ -1,101 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c5448` (_code @ 0x4c5448, 0x198 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: mask word loads, native ID getter instructions and shared zero-modifier branches differ. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "gamedata/Table04Record.h"
+#include "gamedata/DevilRecordA.h"
+#include "shard/W9_W9Match7_ModifierLists.h"
+struct IdOwner;
+/* Modifier lists lie beyond the common skill-table prefix. */
+union BattleModifierSkillView {
+    Table04Record skill;
+    AttributeModifierLists modifiers;
+    struct {
+        u8 unk00[0x26];
+        u16 category;
+    } classification;
+};
+struct BattleModifierCategoryMasks {
+    u8 unk00[8];
+    u64 pad;
+    u8 unk10[8];
+    u64 equipment;
+    u64 innate;
+};
 extern "C" {
-
-int FUN_00184310(void);
-int dataTable04FindById(void);
-int FUN_002efc44(int, unsigned int, int);
-int FUN_0034a304(...);
-int FUN_003f0e20(unsigned int *, unsigned int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern unsigned int DAT_005713f8; /* 0x5713f8 */
-extern unsigned int DAT_005713fc; /* 0x5713fc */
-extern unsigned int DAT_00571408; /* 0x571408 */
-extern unsigned int DAT_0057140c; /* 0x57140c */
-extern unsigned int DAT_00571410; /* 0x571410 */
-extern unsigned int DAT_00571414; /* 0x571414 */
-
-extern unsigned int *btlGetMainState(void);
-/* Supplied declaration required: FUN_00184310. */
-extern unsigned int padGetMappedValue(int);
-/* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_002efc44. */
-/* Supplied declaration required: FUN_0034a304. */
-/* Supplied declaration required: FUN_003f0e20. */
-extern unsigned int FUN_004bd098(unsigned int, int);
-
-
-int FUN_004c5448(unsigned int param_1,int param_2)
-
-{
-/* irregular: 5 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  
-  puVar2 = (unsigned int *)btlGetMainState();
-  FUN_003f0e20(puVar2,param_1);
-  temp_v1 = *puVar2;
-  temp_v5 = puVar2[1];
-  if (!((DAT_005713f8 & temp_v1) == 0 && (DAT_005713fc & temp_v5) == 0)) {
-    temp_v3 = param_2;
-    dataTable04FindById();
-    if (temp_v3 != 0) {
-      temp_v2 = padGetMappedValue(param_2);
-      FUN_002efc44(temp_v3,temp_v2,1);
-      return temp_v3;
-    }
-  }
-  else if (!((temp_v5 & DAT_0057140c) == 0 && (temp_v1 & DAT_00571408) == 0)) {
-    temp_v3 = param_2;
-    dataTable04FindById();
-    if (temp_v3 != 0) {
-      temp_v2 = FUN_004bd098(puVar2[0xff],param_2);
-      temp_v6 = temp_v3;
-      FUN_0034a304(temp_v3,temp_v2,1);
-      temp_v2 = FUN_004bd098(puVar2[0xff],param_2);
-      FUN_0034a304(temp_v3,temp_v2,5);
-      return temp_v3 + temp_v6;
-    }
-  }
-  else if (((temp_v1 & DAT_00571410) != 0 || (temp_v5 & DAT_00571414) != 0) &&
-          (dataTable04FindById(), param_2 != 0)) {
-    temp_v0 = *(unsigned short *)(param_2 + 0x26);
-    temp_v6 = 0;
-    temp_v3 = temp_v6;
-    if (temp_v0 < 0x12) {
-      temp_v1 = (unsigned int)*(unsigned short *)((int)puVar2 + 0x166);
-      FUN_00184310();
-      if (temp_v1 != 0) {
-        temp_v3 = (int)*(char *)(temp_v1 + temp_v0 + 0xa0);
-      }
-    }
-    temp_v4 = param_2;
-    FUN_0034a304(param_2,temp_v3,1);
-    temp_v0 = *(unsigned short *)(param_2 + 0x26);
-    if (temp_v0 < 0x12) {
-      temp_v1 = (unsigned int)*(unsigned short *)((int)puVar2 + 0x166);
-      FUN_00184310();
-      if (temp_v1 != 0) {
-        temp_v6 = (int)*(char *)(temp_v1 + temp_v0 + 0xa0);
-      }
-    }
-    FUN_0034a304(param_2,temp_v6,5);
-    return param_2 + temp_v4;
-  }
-  return 0;
+extern BattleModifierCategoryMasks DAT_005713f0;
+BtlMainStateA *btlGetMainState(void);
+BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
+BattleModifierSkillView *dataTable04FindById(u32 id);
+s32 padGetMappedValue(s32 id);
+s32 FUN_002efc44(const AttributeModifierLists *record, s32 count, s32 kind);
+s32 FUN_0034a304(const AttributeModifierLists *record, s32 count, s32 kind);
+s32 FUN_004bd098(IdOwner *owner, u32 id);
+DevilRecordA *FUN_00184310(u32 id);
 }
-
-} /* extern "C" */
+static inline s32 nativeCategoryModifier(const BtlCombatantEntryA *entry, const BattleModifierSkillView *skill)
+{
+    u16 category = skill->classification.category;
+    if (category < 18) {
+        const DevilTableRecordA *record = reinterpret_cast<const DevilTableRecordA *>(FUN_00184310(entry->id));
+        if (record)
+            return record->categoryModifiers.values[category];
+    }
+    return 0;
+}
+extern "C" s32 FUN_004c5448(u32 entryId, u32 skillId)
+{
+    BtlCombatantEntryA *entry = FUN_003f0e20(btlGetMainState(), entryId);
+    u64 flags = entry->flags;
+    if (flags & DAT_005713f0.pad) {
+        const BattleModifierSkillView *skill = dataTable04FindById(skillId);
+        if (skill)
+            return FUN_002efc44(&skill->modifiers, padGetMappedValue(skillId), 1);
+    } else if (flags & DAT_005713f0.equipment) {
+        const BattleModifierSkillView *skill = dataTable04FindById(skillId);
+        if (skill) {
+            s32 first = FUN_0034a304(&skill->modifiers, FUN_004bd098(reinterpret_cast<IdOwner *>(entry->secondaryRecord), skillId), 1);
+            s32 second = FUN_0034a304(&skill->modifiers, FUN_004bd098(reinterpret_cast<IdOwner *>(entry->secondaryRecord), skillId), 5);
+            return first + second;
+        }
+    } else if (flags & DAT_005713f0.innate) {
+        const BattleModifierSkillView *skill = dataTable04FindById(skillId);
+        if (skill) {
+            s32 first = FUN_0034a304(&skill->modifiers, nativeCategoryModifier(entry, skill), 1);
+            s32 second = FUN_0034a304(&skill->modifiers, nativeCategoryModifier(entry, skill), 5);
+            return first + second;
+        }
+    }
+    return 0;
+}

@@ -1,12 +1,6 @@
 #include "AsdSDK/AsdDebug.h"
 
-/* The bust-up resources, shared by reference count. */
-struct StatusBustUpResources {
-    /* 0x0 */ s8 refCount;
-    /* 0x1 */ u8 unk1[3];
-    /* 0x4 */ void *workA;
-    /* 0x8 */ void *workB;
-};
+#include "status/StatusBustUp.h"
 
 extern "C" {
 extern StatusBustUpResources DAT_0044e158;

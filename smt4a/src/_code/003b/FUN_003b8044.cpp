@@ -1,69 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b8044` (_code @ 0x3b8044, 0x104 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The required mask uses LDM instead of retail's two word loads. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
 extern "C" {
+s32 scrGetArg(s32 index);
+void scrSetResult(s32 result);
+BtlMainStateA *btlGetMainState(void);
 
-int scrGetArg(int);
-int scrSetResult(int);
-
-extern unsigned int g_btlCandidateMasks; /* 0x570288 */
-extern unsigned int DAT_0057028c; /* 0x57028c */
-extern unsigned int DAT_005702a0; /* 0x5702a0 */
-extern unsigned int DAT_005702a4; /* 0x5702a4 */
-extern unsigned int DAT_005702b0; /* 0x5702b0 */
-extern unsigned int DAT_005702b4; /* 0x5702b4 */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_003b8044(void)
-
+/* Tests whether an eligible combatant has a positive value for the requested category. */
+s32 FUN_003b8044(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int *puVar6;
-  int temp_v5;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v5 = 0;
-  if (temp_v1 == 0) {
-    temp_v5 = 7;
-  }
-  else if (temp_v1 == 1) {
-    temp_v5 = 8;
-  }
-  else if (temp_v1 == 2) {
-    temp_v5 = 10;
-  }
-  else if (temp_v1 == 3) {
-    temp_v5 = 0xb;
-  }
-  temp_v1 = 0;
-  while( 1 ) {
-    temp_v2 = btlGetMainState();
-    puVar6 = (unsigned int *)(*(int *)(temp_v2 + 0x1ffc) + temp_v1 * 0x408);
-    temp_v3 = *puVar6;
-    temp_v4 = puVar6[1];
-    if (((((DAT_005702a0 & temp_v3) != 0 || (DAT_005702a4 & temp_v4) != 0) &&
-         ((DAT_0057028c & temp_v4) != 0 || (g_btlCandidateMasks & temp_v3) != 0)) &&
-        ((temp_v3 & DAT_005702b0) == 0 && (temp_v4 & DAT_005702b4) == 0)) &&
-       ((*(unsigned short *)((int)puVar6 + 0x166) == temp_v0 && (0 < (int)puVar6[temp_v5 + 0x1d])))) break;
-    temp_v1 = temp_v1 + 1;
-    if (temp_v1 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
-    }
-  }
-  scrSetResult(1);
-  return 1;
-}
+    /* The existing entry's halfword-aligned union cannot gain these words without moving it. */
+    struct EntryQueryView {
+        /* 0x000 */ u64 flags;
+        /* 0x008 */ u8 unk008[0x6C];
+        /* 0x074 */ s32 categoryValues[12];
+        /* 0x0A4 */ u8 unk0A4[0xC2];
+        /* 0x166 */ u16 id;
+        /* 0x168 */ u8 unk168[0x2A0];
+    };
+    typedef char EntryQuerySizeCheck[sizeof(EntryQueryView) == 0x408 ? 1 : -1];
+    typedef char EntryQueryOffsetsCheck[
+        offsetof(EntryQueryView, categoryValues) == 0x74 &&
+        offsetof(EntryQueryView, id) == 0x166 ? 1 : -1];
 
-} /* extern "C" */
+    u32 id = scrGetArg(0);
+    s32 category = scrGetArg(1);
+    s32 valueIndex = 0;
+    if (category == 0) {
+        valueIndex = 7;
+    } else if (category == 1) {
+        valueIndex = 8;
+    } else if (category == 2) {
+        valueIndex = 10;
+    } else if (category == 3) {
+        valueIndex = 11;
+    }
+    for (s32 index = 0; index < 109; ++index) {
+        EntryQueryView *entry = &((EntryQueryView *)btlGetMainState()->entries)[index];
+        u64 flags = entry->flags;
+        if ((g_btlCandidateMasks.unavailable & flags) != 0 &&
+            (g_btlCandidateMasks.required & flags) != 0 &&
+            (g_btlCandidateMasks.excluded & flags) == 0 &&
+            entry->id == id && entry->categoryValues[valueIndex] >= 1) {
+            scrSetResult(1);
+            return 1;
+        }
+    }
+    scrSetResult(0);
+    return 1;
+}
+}

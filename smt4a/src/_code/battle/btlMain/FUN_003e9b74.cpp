@@ -1,128 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e9b74` (_code @ 0x3e9b74, 0x108 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: inlined marked-opponent search omits retail's state-pointer copy and allocates the roster-index arithmetic differently. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
-extern "C" {
-
-int textFormatBuffer(...);
-int FUN_00178b04(...);
-int FUN_003f0e20(...);
-int modelOwnerLoadNamed(...);
-
-typedef struct fn_003e9b74_arg0 fn_003e9b74_arg0;
-struct fn_003e9b74_arg0 {
-    unsigned char pad_0x0[0x404];
-    void *field_0x404; /* +0x404 */
-    unsigned char pad_0x408[0x1acc];
-    unsigned char field_0x1ed4; /* +0x1ed4 */
-    unsigned char pad_0x1ed5[0x127];
-    unsigned char field_0x1ffc; /* +0x1ffc */
-    unsigned char pad_0x1ffd[0x2bf];
-    undefined4 field_0x22bc; /* +0x22bc */
-    unsigned char pad_0x22c0[0xc];
-    undefined1 field_0x22cc; /* +0x22cc */
-};
-
-/* stack frame of param_1: 16 slot(s), 64 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_1_stack;
-
-extern unsigned char LAB_003e9c80; /* 0x3e9c80 */
-extern unsigned char LAB_003e9cb4; /* 0x3e9cb4 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: modelOwnerLoadNamed. */
-extern unsigned int *battleModelOwnerInitialize(unsigned int *value);
-
-
-void FUN_003e9b74(fn_003e9b74_arg0 *param_1)
-
+static inline BattleRosterRecordA *findFirstMarkedOpponent(BtlMainStateA *state)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  fn_003e9b74_arg0 *pfVar2;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  unsigned int temp_v14;
-  unsigned int temp_v15;
-  unsigned int temp_v16;
-  unsigned int temp_v17;
-  unsigned int temp_v18;
-  
-  temp_v0 = FUN_00178b04(0x24,&LAB_003e9c80,0x3626);
-  if (temp_v0 == 0) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = (unsigned int)battleModelOwnerInitialize((unsigned int *)temp_v0);
-  }
-  param_1->field_0x22bc = temp_v1;
-  temp_v3 = 0;
-  temp_v4 = 0;
-  temp_v5 = 0;
-  temp_v6 = 0;
-  temp_v7 = 0;
-  temp_v8 = 0;
-  temp_v9 = 0;
-  temp_v10 = 0;
-  temp_v11 = 0;
-  temp_v12 = 0;
-  temp_v13 = 0;
-  temp_v14 = 0;
-  temp_v15 = 0;
-  temp_v16 = 0;
-  temp_v17 = 0;
-  temp_v18 = 0;
-  temp_v0 = 4;
-  do {
-    temp_v2 = *(int *)&param_1->field_0x1ffc + temp_v0 * 0x408;
-    if (*(char *)(temp_v2 + 0x23a) != '\0') {
-      temp_v0 = *(int *)&param_1->field_0x1ed4 + *(short *)(temp_v2 + 8) * 0x1d0;
-      pfVar2 = param_1;
-      FUN_003f0e20(param_1,(int)*(short *)(temp_v0 + 0x6a));
-      textFormatBuffer(&temp_v3,&LAB_003e9cb4,(int)*(short *)((int)pfVar2->field_0x404 + 0x8c));
-      modelOwnerLoadNamed(param_1->field_0x22bc,&temp_v3);
-      param_1->field_0x22cc = 1;
-      return;
+    for (s32 index = 4; index < 54; ++index) {
+        BtlCombatantEntryA *entry = &state->entries[index];
+        if (entry->selection.marked != 0) {
+            return &state->roster[entry->unitIndex];
+        }
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x36);
-  temp_v0 = 0;
-  pfVar2 = param_1;
-  FUN_003f0e20(param_1,(int)*(short *)(temp_v0 + 0x6a));
-  textFormatBuffer(&temp_v3,&LAB_003e9cb4,(int)*(short *)((int)pfVar2->field_0x404 + 0x8c));
-  modelOwnerLoadNamed(param_1->field_0x22bc,&temp_v3);
-  param_1->field_0x22cc = 1;
-  return;
+    return NULL;
 }
 
-} /* extern "C" */
+extern "C" {
+void *FUN_00178b04(u32 size, const char *file, s32 line);
+u32 *battleModelOwnerInitialize(u32 *owner);
+BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 group);
+s32 textFormatBuffer(char *buffer, const char *format, ...);
+void modelOwnerLoadNamed(u32 *owner, const char *name);
+
+// Load the environment submodel belonging to the first marked opponent.
+void FUN_003e9b74(BtlMainStateA *state)
+{
+    // The identifier is beyond the established BattleCandidateRecord prefix.
+    struct EnvironmentResourceView {
+        u8 unk00[0x8C];
+        s16 identifier;
+    };
+    typedef char IdentifierOffsetCheck[offsetof(EnvironmentResourceView, identifier) == 0x8C ? 1 : -1];
+
+    u32 *owner = (u32 *)FUN_00178b04(0x24, "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlMain.cpp", 0x3626);
+    state->environmentModel.owner = owner != NULL ? battleModelOwnerInitialize(owner) : NULL;
+    char name[64] = {};
+    BattleRosterRecordA *selected = findFirstMarkedOpponent(state);
+    BtlCombatantEntryA *entry = FUN_003f0e20(state, selected->motion.group);
+    EnvironmentResourceView *resource = (EnvironmentResourceView *)entry->candidate.record;
+    textFormatBuffer(name, "battle/model/en%03d_sub.bam", resource->identifier);
+    modelOwnerLoadNamed(state->environmentModel.owner, name);
+    state->environmentModel.loaded = 1;
+}
+}

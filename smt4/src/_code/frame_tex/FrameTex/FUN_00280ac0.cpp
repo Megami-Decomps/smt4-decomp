@@ -1,104 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00280ac0` (_code @ 0x280ac0, 0x1c8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Inlined texture initialization retains heap argument registers and groups format/dimension stores differently; cleanup branch placement differs. */
+#include "ui/FrameTex.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-
-int asdTextureCreate(void);
-int asdMemoryAlloc(int, int, int, unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern int g_frameTex; /* 0x43e278 */
-
-extern unsigned int osVirtToPhysAddress(void);
-/* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: asdMemoryAlloc. */
-
-
-void FUN_00280ac0(int param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = g_frameTex;
-  temp_v1 = 0;
-  asdTextureCreate();
-  if (*(int *)(temp_v0 + 0xfdc) == 0) {
-    if (param_1 != 0) {
-      *(unsigned char *)(temp_v0 + 0xfe0) = 0;
-      *(unsigned int *)(temp_v1 + 0x28) = 0x64000;
-      *(unsigned int *)(temp_v1 + 0x10) = 0;
-      *(unsigned int *)(temp_v1 + 0x34) = 3;
-      *(unsigned int *)(temp_v1 + 0x14) = 0x200;
-      *(unsigned int *)(temp_v1 + 0x18) = 400;
-      *(unsigned int *)(temp_v1 + 0x1c) = 0x8d62;
-      *(unsigned int *)(temp_v1 + 0x20) = 0x1403;
-      temp_v2 = 0x30000;
-      asdMemoryAlloc(0x30000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
-      *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
-      temp_v2 = osVirtToPhysAddress();
-      *(unsigned int *)(temp_v1 + 0x30) = temp_v2;
-      *(int *)(temp_v0 + 0xfdc) = temp_v1;
-    }
-    else {
-      *(unsigned char *)(temp_v0 + 0xfe0) = 1;
-      *(unsigned int *)(temp_v1 + 0x28) = 0x64000;
-      *(unsigned int *)(temp_v1 + 0x10) = 0;
-      *(unsigned int *)(temp_v1 + 0x34) = 3;
-      *(unsigned int *)(temp_v1 + 0x14) = 0x200;
-      *(unsigned int *)(temp_v1 + 0x18) = 400;
-      *(unsigned int *)(temp_v1 + 0x1c) = 0x8d62;
-      *(unsigned int *)(temp_v1 + 0x20) = 0x1403;
-      temp_v2 = 0x20000;
-      asdMemoryAlloc(0x20000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
-      *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
-      temp_v2 = osVirtToPhysAddress();
-      *(unsigned int *)(temp_v1 + 0x30) = temp_v2;
-      temp_v3 = 0;
-      *(int *)(temp_v0 + 0xfdc) = temp_v1;
-      asdTextureCreate();
-      *(unsigned int *)(temp_v3 + 0x14) = 0x100;
-      *(unsigned int *)(temp_v3 + 0x28) = 0x20000;
-      *(unsigned int *)(temp_v3 + 0x10) = 0;
-      *(unsigned int *)(temp_v3 + 0x34) = 3;
-      *(unsigned int *)(temp_v3 + 0x18) = 0x100;
-      *(unsigned int *)(temp_v3 + 0x1c) = 0x8d62;
-      *(unsigned int *)(temp_v3 + 0x20) = 0x1403;
-      temp_v2 = 0x20000;
-      asdMemoryAlloc(0x20000,0x100,0,*(unsigned int *)(temp_v3 + 0x28),1);
-      *(unsigned int *)(temp_v3 + 0x24) = temp_v2;
-      temp_v2 = osVirtToPhysAddress();
-      *(unsigned int *)(temp_v3 + 0x30) = temp_v2;
-      temp_v1 = 0;
-      *(int *)(temp_v0 + 0xfe4) = temp_v3;
-      asdTextureCreate();
-      *(unsigned int *)(temp_v1 + 0x14) = 0x80;
-      *(unsigned int *)(temp_v1 + 0x28) = 0x8000;
-      *(unsigned int *)(temp_v1 + 0x10) = 0;
-      *(unsigned int *)(temp_v1 + 0x34) = 3;
-      *(unsigned int *)(temp_v1 + 0x18) = 0x80;
-      *(unsigned int *)(temp_v1 + 0x1c) = 0x8d62;
-      *(unsigned int *)(temp_v1 + 0x20) = 0x1403;
-      temp_v2 = 0x20000;
-      asdMemoryAlloc(0x20000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
-      *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
-      temp_v2 = osVirtToPhysAddress();
-      *(unsigned int *)(temp_v1 + 0x30) = temp_v2;
-      *(int *)(temp_v0 + 0xfe8) = temp_v1;
-    }
-    *(unsigned char *)(temp_v0 + 0xfd8) = 0;
-    *(unsigned char *)(temp_v0 + 0xe96) = 0;
-    *(unsigned char *)(temp_v0 + 0xe95) = 0;
-  }
-  return;
+extern FrameWork *g_frameTex;
+AsdTexture *asdTextureCreate(u32 flags);
+void *asdMemoryAlloc(u32 heap, u32 tag, u32 mode, u32 size, u32 flags);
+u32 osVirtToPhysAddress(const void *address);
 }
 
-} /* extern "C" */
+static __inline void frameTexAllocateImage(AsdTexture *texture, u32 heap, s32 width, s32 height,
+    u32 bytes, s32 line)
+{
+    texture->storage.unk28 = bytes;
+    texture->image.mip.level = 0;
+    texture->image.hardwareFormat = 3;
+    texture->dimensions.width = width;
+    texture->dimensions.height = height;
+    texture->image.format = 0x8D62;
+    texture->image.type = 0x1403;
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\frame_tex\\FrameTex.cpp", line);
+    texture->storage.pixels = asdMemoryAlloc(heap, 0x100, 0, texture->storage.unk28, 1);
+    texture->image.physicalAddress = osVirtToPhysAddress(texture->storage.pixels);
+}
+
+extern "C" void FUN_00280ac0(s32 useSpecialHeap)
+{
+    /* The texture ownership fields follow the shared FrameWork prefix. */
+    struct TextureOwnerView {
+        u8 unk000[0xFDC];
+        AsdTexture *primary;
+        u8 useSystemMemory;
+        u8 unkFE1[3];
+        AsdTexture *secondary;
+        AsdTexture *tertiary;
+    };
+    typedef char TextureOwnerOffsetsCheck[offsetof(TextureOwnerView, primary) == 0xFDC &&
+        offsetof(TextureOwnerView, secondary) == 0xFE4 && offsetof(TextureOwnerView, tertiary) == 0xFE8 ? 1 : -1];
+    FrameWork *work = g_frameTex;
+    AsdTexture *texture = asdTextureCreate(0);
+    TextureOwnerView *owner = (TextureOwnerView *)work;
+    if (owner->primary == NULL) {
+        if (useSpecialHeap != 0) {
+            owner->useSystemMemory = 0;
+            frameTexAllocateImage(texture, 0x30000, 512, 400, 0x64000, 352);
+            owner->primary = texture;
+        } else {
+            owner->useSystemMemory = 1;
+            frameTexAllocateImage(texture, 0x20000, 512, 400, 0x64000, 418);
+            owner->primary = texture;
+            texture = asdTextureCreate(0);
+            frameTexAllocateImage(texture, 0x20000, 256, 256, 0x20000, 437);
+            owner->secondary = texture;
+            texture = asdTextureCreate(0);
+            frameTexAllocateImage(texture, 0x20000, 128, 128, 0x8000, 456);
+            owner->tertiary = texture;
+        }
+        work->unkFD8 = 0;
+        work->unkE96 = 0;
+        work->unkE95 = 0;
+    }
+}

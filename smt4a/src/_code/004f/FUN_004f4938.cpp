@@ -1,41 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f4938` (_code @ 0x4f4938, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: guide positions and modes reconstructed; constant hoisting and VFP allocation differ. */
+#include "gfx/DebugGuides.h"
+#include "shard/S1ListPanel.h"
 
 extern "C" {
+extern RenderCtx *g_renderCtx;
+s32 padButtonIsPressed(u32 button);
+void FUN_0016c4b8(RenderCtx *context, s32 layer);
+void FUN_0014e314(u32 color0, u32 color1, u32 color2, u32 color3,
+                  f32 x, f32 y, f32 width, f32 height, f32 z);
 
-int FUN_0014e314(...);
-int FUN_0016c4b8(unsigned int, int);
-
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_0014e314. */
-extern int padButtonIsPressed(unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
-
-
-unsigned int FUN_004f4938(int param_1)
-
+// Cycle between no guides, a center guide, and quarter-screen guides.
+u32 FUN_004f4938(DebugGuidesWork *work)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = padButtonIsPressed(9);
-  if ((temp_v0 != 0) && (temp_v1 = *(int *)(param_1 + 8) + 1, *(unsigned int *)(param_1 + 8) = temp_v1, temp_v1 >= 3)
-     ) {
-    *(unsigned int *)(param_1 + 8) = 0;
-  }
-  FUN_0016c4b8(g_renderCtx,0);
-  if (*(int *)(param_1 + 8) != 1) {
-    if (*(int *)(param_1 + 8) != 2) {
-      return 0;
+    if (padButtonIsPressed(9) != 0) {
+        ++work->mode;
+        if (work->mode >= 3)
+            work->mode = 0;
     }
-    FUN_0014e314(0xff7f);
-    FUN_0014e314(0xff7f);
-  }
-  FUN_0014e314(0xff7f,0xff7f);
-  return 0;
+    FUN_0016c4b8(g_renderCtx, 0);
+    switch (work->mode) {
+    case 1:
+        FUN_0014e314(0xFF7F, 0xFF7F, 0xFF7F, 0xFF7F,
+                     200.0f, 0.0f, 1.0f, 240.0f, 0.0f);
+        break;
+    case 2:
+        FUN_0014e314(0xFF7F, 0xFF7F, 0xFF7F, 0xFF7F,
+                     100.0f, 0.0f, 1.0f, 240.0f, 0.0f);
+        FUN_0014e314(0xFF7F, 0xFF7F, 0xFF7F, 0xFF7F,
+                     200.0f, 0.0f, 1.0f, 240.0f, 0.0f);
+        FUN_0014e314(0xFF7F, 0xFF7F, 0xFF7F, 0xFF7F,
+                     300.0f, 0.0f, 1.0f, 240.0f, 0.0f);
+        break;
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -1,62 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c8778` (_code @ 0x2c8778, 0x110 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: counter-sprite address registers and menu-state stores differ; both versions have 71 instructions. */
+#include "shard/W5_W5Match7_UiQuest.h"
+#include "ui/UiSpriteState.h"
+#include <stddef.h>
 
 extern "C" {
+void uiSpriteSetKeyframe(UiSpriteState *, s32 animation, s32 frame);
+void uiSpriteSetImageKeyframe(UiSpriteState *, s32 animation, s32 frame);
+void uiSpriteSelectAnim(UiSpriteState *, s32 animation);
+void sysPlaySe(u32 sound);
+void sysPlayVoice(u32 voice);
 
-int sysPlaySe(int);
-int uiSpriteSelectAnim(int, int);
-int uiSpriteSetKeyframe(int, int, int);
-int uiSpriteSetImageKeyframe(int, int, int);
-int sysPlayVoice(int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern int g_uiQuest; /* 0x57f28c */
-
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: sysPlayVoice. */
-
-
-void FUN_002c8778(unsigned short param_1)
-
+// Reset the quest detail animations, select the quest, and enter the confirmation state.
+void FUN_002c8778(u16 questId)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = g_uiQuest;
-  *(unsigned short *)(g_uiQuest + 0xcca) = param_1;
-  *(unsigned int *)(temp_v0 + 0x934) = 0;
-  uiSpriteSetKeyframe(temp_v0 + 0x34,1,0);
-  uiSpriteSetImageKeyframe(temp_v0 + 0x34,8,0);
-  if (temp_v0 != 0) {
-    uiSpriteSetKeyframe(temp_v0 + 0x5ac,7,0);
-    uiSpriteSetImageKeyframe(temp_v0 + 0x5ac,0xb,0);
-    uiSpriteSetKeyframe(temp_v0 + 0x638,8,0);
-    uiSpriteSetImageKeyframe(temp_v0 + 0x638,0xb,0);
-    uiSpriteSelectAnim(temp_v0 + 0x6c4,6);
-    uiSpriteSelectAnim(temp_v0 + 0x750,7);
-    uiSpriteSelectAnim(temp_v0 + 0x7dc,8);
-    *(unsigned short *)(temp_v0 + 0x816) = 2;
-    uiSpriteSelectAnim(temp_v0 + 0x868,10);
-    *(unsigned int *)(temp_v0 + 0xd48) = 0;
-    *(unsigned int *)(temp_v0 + 0xd4c) = 0;
-  }
-  temp_v0 = g_uiQuest;
-  temp_v1 = *(unsigned int *)(g_uiQuest + 4);
-  *(unsigned int *)(g_uiQuest + 4) = 0x11;
-  *(unsigned int *)(temp_v0 + 8) = temp_v1;
-  *(unsigned int *)(temp_v0 + 0x10) = 0;
-  sysPlaySe(0x1a);
-  sysPlayVoice(0x10000ca);
-  return;
+    // The trailing counters are beyond the currently documented UiQuestApoc layout.
+    struct QuestEntryView {
+        u8 unk000[0x34];
+        UiSpriteState mainSprite;
+        u8 unk0c0[0x4ec];
+        UiSpriteState details[6]; // 0x5ac
+        u8 unk8f4[0x40];
+        u32 detailTimer; // 0x934
+        u8 unk938[0x392];
+        u16 questId; // 0xcca
+        u8 unkccc[0x7c];
+        u32 firstCounter; // 0xd48
+        u32 secondCounter; // 0xd4c
+    };
+    struct QuestSpritePlaybackView {
+        u8 unk00[0x3a];
+        u16 repeatCount;
+    };
+    typedef char QuestEntryViewOffsetCheck[offsetof(QuestEntryView, details) == 0x5ac && offsetof(QuestEntryView, questId) == 0xcca && offsetof(QuestEntryView, firstCounter) == 0xd48 ? 1 : -1];
+    QuestEntryView *menu = reinterpret_cast<QuestEntryView *>(g_uiQuest);
+    menu->questId = questId;
+    menu->detailTimer = 0;
+    uiSpriteSetKeyframe(&menu->mainSprite, 1, 0);
+    uiSpriteSetImageKeyframe(&menu->mainSprite, 8, 0);
+    if (menu) {
+        uiSpriteSetKeyframe(&menu->details[0], 7, 0);
+        uiSpriteSetImageKeyframe(&menu->details[0], 11, 0);
+        uiSpriteSetKeyframe(&menu->details[1], 8, 0);
+        uiSpriteSetImageKeyframe(&menu->details[1], 11, 0);
+        uiSpriteSelectAnim(&menu->details[2], 6);
+        uiSpriteSelectAnim(&menu->details[3], 7);
+        QuestSpritePlaybackView *counterSprite =
+            reinterpret_cast<QuestSpritePlaybackView *>(&menu->details[4]);
+        uiSpriteSelectAnim(reinterpret_cast<UiSpriteState *>(counterSprite), 8);
+        counterSprite->repeatCount = 2;
+        uiSpriteSelectAnim(&menu->details[5], 10);
+        menu->firstCounter = 0;
+        menu->secondCounter = 0;
+    }
+    UiQuestApoc *state = g_uiQuest;
+    s32 previousState = state->menuState;
+    state->menuState = 0x11;
+    state->previousMenuState = previousState;
+    state->menuTimer = 0;
+    sysPlaySe(0x1a);
+    sysPlayVoice(0x10000ca);
 }
-
-} /* extern "C" */
+}

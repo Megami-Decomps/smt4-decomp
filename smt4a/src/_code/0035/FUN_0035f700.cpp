@@ -1,86 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035f700` (_code @ 0x35f700, 0x17c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "battle/btlMain.h"
+#include "shard/W5_W5Match7_ScriptUnit.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
+BtlMainStateA *btlGetMainState(void);
+BtlCombatantEntryA *FUN_003eaf20(void);
+s32 jobIsValid(u32 handle);
+void FUN_003ee0c0(BtlMainStateA *battle);
+void FUN_004fc094(s32, ScriptUnit *, s32, BattleRosterRecordA *,
+    s32, s32, s32, s32, s32, s32, s32, s32, s32,
+    s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
+void FUN_004fb43c(s32 side, ScriptUnit *source, u32 message, s32, s32, s32, s32);
+void FUN_004fbc30(s32 kind, ScriptUnit *source, BattleRosterRecordA *target, s32 flags);
 
-int FUN_003eaf20(void);
-int FUN_003ee0c0(int);
-int FUN_004fb43c(...);
-int FUN_004fbc30(...);
-int FUN_004fc094(int, unsigned int, int, int, int, int, unsigned int, unsigned int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
-
-/* stack frame of void: 16 slot(s), 64 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-} void_stack;
-
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-
-extern int btlGetMainState(void);
-extern int jobIsValid(unsigned int);
-extern int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_003eaf20. */
-/* Supplied declaration required: FUN_003ee0c0. */
-extern unsigned int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_004fb43c. */
-/* Supplied declaration required: FUN_004fbc30. */
-/* Supplied declaration required: FUN_004fc094. */
-
-
-unsigned int FUN_0035f700(void)
-
+// Damage the current combatant by max-HP percentage; only the auxiliary mode permits defeat.
+u32 FUN_0035f700(void)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = btlGetMainState();
-  temp_v2 = temp_v1;
-  FUN_003eaf20();
-  temp_v0 = (*(int *)(temp_v2 + 0x25c) * temp_v0) / 100;
-  temp_v3 = btlUnitGet(g_btlScriptUnit);
-  temp_v6 = 0;
-  temp_v4 = jobIsValid(*(unsigned int *)(temp_v1 + 0x40));
-  temp_v5 = *(int *)(temp_v2 + 600);
-  if (temp_v4 != 0) {
-    temp_v6 = temp_v5 <= temp_v0;
-  }
-  else if (temp_v5 <= temp_v0) {
-    temp_v0 = temp_v5 - 1;
-  }
-  if (-1 < *(short *)(temp_v2 + 8)) {
-    FUN_003ee0c0(temp_v1);
-    FUN_004fc094(0,temp_v3,0,*(int *)(temp_v1 + 0x1ed4) + *(short *)(temp_v2 + 8) * 0x1d0,0,temp_v0,
-                 0xffffffff,0xffffffff,*(unsigned int *)(temp_v2 + 600),*(unsigned int *)(temp_v2 + 0x25c),0
-                 ,0,temp_v6,0,1,0,0,0,0,0,1,0,1,1,0,1);
-    FUN_004fb43c(0,temp_v3,0x1000257,0,0,0,0);
-    if (temp_v6 != 0) {
-      FUN_004fbc30(0x19,temp_v3,*(int *)(temp_v1 + 0x1ed4) + *(short *)(temp_v2 + 8) * 0x1d0,0);
+    s32 percentage = scrGetArg(0);
+    BtlMainStateA *battle = btlGetMainState();
+    BtlCombatantEntryA *entry = FUN_003eaf20();
+    s32 damage = entry->maxHp * percentage / 100;
+    ScriptUnit *source = btlUnitGet(g_btlScriptUnit);
+    bool defeated = false;
+    if (jobIsValid(battle->auxiliaryTask.job) != 0) {
+        if (entry->hp <= damage)
+            defeated = true;
+    } else if (entry->hp <= damage) {
+        damage = entry->hp - 1;
     }
-  }
-  return 1;
+    if (entry->unitIndex >= 0) {
+        FUN_003ee0c0(battle);
+        FUN_004fc094(0, source, 0, &battle->roster[entry->unitIndex],
+            0, damage, -1, -1, entry->hp, entry->maxHp,
+            0, 0, defeated, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);
+        FUN_004fb43c(0, source, 0x01000257, 0, 0, 0, 0);
+        if (defeated)
+            FUN_004fbc30(25, source, &battle->roster[entry->unitIndex], 0);
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

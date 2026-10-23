@@ -1,57 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022dcac` (_code @ 0x22dcac, 0x114 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: branch layout and icon-coordinate registers differ; texture lookup is a retail debug forwarding stub with a recovered call ABI. */
+#include "ui/DemonIconPanel.h"
+#include "shard/S1ListPanel.h"
 
 extern "C" {
+SpriteInfo *FUN_002bf4f0(AsdTextureRegion *region, u32 image);
+void devilDrawIconRelative(AsdTextureRegion *region, s32 demon, s32 x, s32 y, u32 color);
+s32 partyHasStoredDemon(u16 demon);
+void FUN_00231bcc(AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color, u32 flags);
 
-int FUN_00231bcc(int, int, int, int, unsigned int, int);
-int FUN_002bf4f0(int, int);
-int devilDrawIconRelative(int, int, int, int, unsigned int);
-
-/* stack frame of param_6: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_6_stack;
-
-/* Supplied declaration required: FUN_00231bcc. */
-extern int partyHasStoredDemon(short);
-/* Supplied declaration required: FUN_002bf4f0. */
-/* Supplied declaration required: devilDrawIconRelative. */
-
-
-void FUN_0022dcac(int param_1,int param_2,short param_3,int param_4,int param_5,unsigned int param_6)
-
+// Draw a row's demon icon and, when requested, its stored-demon badge.
+void FUN_0022dcac(DemonIconPanel *panel, s32 showOwned, s32 demon,
+                  s32 row, s32 alternate, u32 color)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if (param_5 != 0) {
-    temp_v0 = FUN_002bf4f0(param_1 + 200,param_4 + 0x42f);
-  }
-  else {
-    temp_v0 = FUN_002bf4f0(param_1 + 200,param_4 + 0x40e);
-  }
-  temp_v2 = (int)*(short *)(temp_v0 + 8);
-  temp_v0 = (int)*(short *)(temp_v0 + 10);
-  if (param_5 != 0) {
-    temp_v1 = FUN_002bf4f0(param_1 + 200,0x495);
-  }
-  else {
-    temp_v1 = FUN_002bf4f0(param_1 + 200,0x487);
-  }
-  devilDrawIconRelative(param_1 + 200,(int)param_3,*(short *)(temp_v1 + 8) + temp_v2,
-               *(short *)(temp_v1 + 10) + temp_v0,param_6);
-  if ((param_2 != 0) && (temp_v1 = partyHasStoredDemon(param_3), temp_v1 != 0)) {
-    if (param_5 == 0) {
-      FUN_00231bcc(param_1 + 200,0x486,temp_v2,temp_v0,param_6,1);
-      return;
+    SpriteInfo *rowInfo;
+    if (alternate)
+        rowInfo = FUN_002bf4f0(&panel->region, row + 0x42F);
+    else
+        rowInfo = FUN_002bf4f0(&panel->region, row + 0x40E);
+    s32 x = rowInfo->x;
+    s32 y = rowInfo->y;
+    SpriteInfo *iconInfo;
+    if (alternate)
+        iconInfo = FUN_002bf4f0(&panel->region, 0x495);
+    else
+        iconInfo = FUN_002bf4f0(&panel->region, 0x487);
+    devilDrawIconRelative(&panel->region, (s16)demon, iconInfo->x + x, iconInfo->y + y, color);
+    if (showOwned && partyHasStoredDemon(demon)) {
+        if (!alternate) {
+            FUN_00231bcc(&panel->region, 0x486, x, y, color, 1);
+            return;
+        }
+        FUN_00231bcc(&panel->region, 0x494, x, y, color, 1);
     }
-    FUN_00231bcc(param_1 + 200,0x494,temp_v2,temp_v0,param_6,1);
-  }
-  return;
 }
-
-} /* extern "C" */
+}

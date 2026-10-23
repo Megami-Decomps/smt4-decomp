@@ -12,8 +12,8 @@ int FUN_00493518(...);
 int words2Copy(int, float [2]);
 int FUN_004935c8(int, int, int);
 int pairAt8Get(int, float [5]);
-int FUN_004a2a30(...);
-int FUN_004a3238(...);
+void FUN_004a2a30(void *, int entry, int alternate, unsigned int textId, float scale);
+void FUN_004a3238(int, int, unsigned int, int, unsigned int textId, float scale);
 int owner4ASetSizeAndCall(int, double);
 int FUN_004a7950(int, int, double);
 
@@ -136,7 +136,8 @@ void FUN_004a24a8(int param_1)
             if ((*(int *)(param_1 + 0x14) != 2) ||
                (temp_v3 = FUN_0031d174(param_1 + 0x20), temp_v3 != temp_v5)) {
               temp_v9[0] = (float)(int)*(short *)(temp_v6 + (temp_v1 + temp_v5) * 0x20 + 4);
-              FUN_004a3238(param_1,temp_v5,temp_v7,0);
+              FUN_004a3238(param_1,temp_v5,temp_v7,0,
+                  (int)*(short *)(temp_v6 + (temp_v1 + temp_v5) * 0x20 + 4),temp_v8);
             }
             temp_v5 = temp_v5 + 1;
           } while (temp_v5 < temp_v2);
@@ -162,7 +163,8 @@ void FUN_004a24a8(int param_1)
           }
           else {
             temp_v9[0] = (float)(int)*(short *)(temp_v6 + (temp_v1 + temp_v7) * 0x20 + 4);
-            FUN_004a3238(param_1,temp_v7,5,0);
+            FUN_004a3238(param_1,temp_v7,5,0,
+                (int)*(short *)(temp_v6 + (temp_v1 + temp_v7) * 0x20 + 4),temp_v8);
           }
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < temp_v2);
@@ -174,7 +176,7 @@ void FUN_004a24a8(int param_1)
         temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
         temp_v0 = *(short *)(temp_v6 + temp_v1 * 0x20 + 4);
         temp_v4 = FUN_0031d174(param_1 + 0x20);
-        FUN_004a2a30(param_1,temp_v4,1,(int)temp_v0);
+        FUN_004a2a30(reinterpret_cast<void *>(param_1),temp_v4,1,(int)temp_v0,temp_v8);
       }
       efctSetSpeed();
       owner4ASetSizeAndCall(param_1,temp_v8);

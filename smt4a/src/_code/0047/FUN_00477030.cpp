@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00473980(int *, unsigned int);
-int FUN_00474734(int, int);
+int windowCreateStatusOperation(int, int);
 int FUN_00476e58(int, int, int);
 int FUN_0047bc90(int, unsigned int *);
 int timeInitializeActiveState(unsigned int *);
@@ -25,7 +25,7 @@ extern unsigned int g_aocMain; /* 0x570260 */
 extern int byteIsAtLeast100(unsigned int *);
 extern int legacyResourceIdRemap(unsigned int *);
 /* Supplied declaration required: FUN_00473980. */
-/* Supplied declaration required: FUN_00474734. */
+/* Supplied declaration required: windowCreateStatusOperation. */
 /* Supplied declaration required: FUN_00476e58. */
 /* Supplied declaration required: FUN_0047bc90. */
 extern int isEmptyString(unsigned int *);
@@ -97,7 +97,7 @@ void FUN_00477030(int param_1)
     }
     if (temp_v0 == 0) {
       temp_v0 = param_1 + 0x20c;
-      FUN_00474734(temp_v0,0);
+      windowCreateStatusOperation(temp_v0,0);
       *(unsigned int *)(param_1 + 8) = 1;
       *(int *)(param_1 + 0x208) = temp_v0;
       return;
@@ -110,7 +110,7 @@ void FUN_00477030(int param_1)
         (**(romwright_code **)(**(int **)(param_1 + 0x208) + 4))();
       }
       temp_v0 = param_1 + 0x20c;
-      FUN_00474734(temp_v0,5);
+      windowCreateStatusOperation(temp_v0,5);
       *(unsigned int *)(param_1 + 8) = 3;
       *(int *)(param_1 + 0x208) = temp_v0;
       return;

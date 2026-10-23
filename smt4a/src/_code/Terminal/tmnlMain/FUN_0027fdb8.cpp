@@ -1,111 +1,92 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027fdb8` (_code @ 0x27fdb8, 0x1d4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "Terminal/tmnlMain.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern TmnlWorkA* g_tmnl;
+void* asdMemoryAllocTracked(u32, u32, u32, u32, u32);
+void gameFlagSetValue(u32, u32, u32);
+bool gameFlagIsSet(u32);
+void messageSetMode(u32);
+void questSetPackedFlag(u32, u32);
+void FUN_00408184(u32, u32);
+void FUN_0022677c(u32, u32);
+void FUN_0027e0d8(void);
+void terminalSignalComplete(void);
+void FUN_002bd4f8(void);
+void FUN_00358a40(void);
+void FUN_003161b4(void);
+u32 asdProcessCreateSimple(const char*, u32, u32, u32, void (*)(void), void (*)(void), u32);
+u32 taskCreateDraw(const char*, u32, u32, u32, void (*)(void), u32, u32, u32);
 
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int messageSetMode(...);
-int FUN_0022677c(...);
-int gameFlagSetValue(...);
-int FUN_00408184(...);
-int FUN_0040a470(...);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern int FUN_0027e0d8(...); /* 0x27e0d8 */
-extern unsigned char LAB_0027ffd8; /* 0x27ffd8 */
-extern unsigned char LAB_0027ffe4; /* 0x27ffe4 */
-extern unsigned char LAB_0027fff4; /* 0x27fff4 */
-extern unsigned char LAB_002bd4f8; /* 0x2bd4f8 */
-extern unsigned char LAB_0031619c; /* 0x31619c */
-extern unsigned char LAB_003161b4; /* 0x3161b4 */
-extern unsigned char LAB_00358a40; /* 0x358a40 */
-extern unsigned int *g_tmnl; /* 0x56fd30 */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: messageSetMode. */
-/* Supplied declaration required: FUN_0022677c. */
-/* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: FUN_00408184. */
-/* Supplied declaration required: FUN_0040a470. */
-
-
-void FUN_0027fdb8(unsigned int *param_1)
-
+void FUN_0027fdb8(const u32* destination)
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned char *puVar3;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x604,1);
-  g_tmnl = puVar1;
-  gameFlagSetValue(0x465,0,1);
-  *(unsigned char *)((int)puVar1 + 5) = 1;
-  puVar1[4] = 0;
-  puVar1[5] = 0;
-  *(unsigned char *)((int)puVar1 + 9) = 0x14;
-  puVar1[3] = 0;
-  puVar1[8] = 0;
-  puVar1[9] = 0;
-  puVar1[10] = 0;
-  puVar1[0xe] = 0;
-  puVar1[0xf] = 0;
-  puVar1[0x10] = 0;
-  puVar1[0x11] = 0;
-  puVar1[0x12] = 0;
-  puVar1[0x13] = 0;
-  puVar1[0x14] = 0;
-  puVar1[0x159] = 0;
-  *(unsigned char *)(puVar1 + 0x15a) = 0;
-  puVar1[0x15b] = 0;
-  puVar1[0x15f] = 0;
-  puVar1[0x15e] = 0;
-  puVar1[0x162] = 0;
-  puVar1[0x161] = 0;
-  puVar1[0x165] = 0;
-  puVar1[0x164] = 0;
-  puVar1[0x168] = 0;
-  puVar1[0x167] = 0;
-  messageSetMode(0);
-  puVar1[0x15] = 0;
-  *(unsigned char *)(puVar1 + 1) = 0;
-  if (param_1 != (unsigned int *)0x0) {
-    *(char *)((int)puVar1 + 9) = (char)*param_1;
-    *(unsigned char *)((int)puVar1 + 5) = 0;
-    temp_v0 = gameFlagIsSet(0x304);
-    if (temp_v0 == 0) {
-      FUN_0040a470(*(unsigned char *)((int)puVar1 + 9),1);
-      FUN_00408184(0x1c,1);
+    // The published padding starts at byte five; a word-aligned union there would move it.
+    struct DrawBinding { u32 reserved; u32 primary; u32 secondary; };
+    struct InitializationView {
+        u32 task;
+        u8 done;
+        u8 initialVisit;
+        u8 reservedHead[3];
+        u8 destination;
+        u8 reservedDestination[2];
+        u32 phase;
+        u32 openingMode;
+        u32 transition;
+        u8 reservedOpening[8];
+        u32 graphicsState[3];
+        u8 reservedGraphics[12];
+        u32 selectionState[8];
+        u8 reservedBody[0x50C];
+        u32 pendingState;
+        u8 active;
+        u8 reservedActive[3];
+        u32 completionState;
+        u32 reservedBindings;
+        DrawBinding drawBindings[4];
+    };
+    typedef char ViewFits[sizeof(InitializationView) <= sizeof(TmnlWorkA) ? 1 : -1];
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\Terminal\\tmnlMain.cpp", 0x176);
+    g_tmnl = static_cast<TmnlWorkA*>(asdMemoryAllocTracked(0x100, 0x100, 0, 0x604, 1));
+    InitializationView* work = reinterpret_cast<InitializationView*>(g_tmnl);
+    gameFlagSetValue(0x465, 0, 1);
+    work->initialVisit = 1;
+    work->openingMode = 0;
+    work->transition = 0;
+    work->destination = 20;
+    work->phase = 0;
+    work->graphicsState[0] = 0;
+    work->graphicsState[1] = 0;
+    work->graphicsState[2] = 0;
+    for (u32 index = 0; index < 7; ++index) {
+        work->selectionState[index] = 0;
     }
-    puVar1[4] = 0;
-    puVar1[5] = 0;
-  }
-  else {
-    puVar1[5] = 0;
-    puVar1[4] = 1;
-    FUN_0022677c(0,0xff);
-  }
-  puVar3 = &LAB_0027ffd8;
-  asdProcessCreateSimple(&LAB_0027ffd8,4,0,0,FUN_0027e0d8,&LAB_0031619c,0);
-  *puVar1 = (unsigned int)puVar3;
-  taskCreateDraw(&LAB_0027ffe4,0x77,0,0,&LAB_002bd4f8,0,0,puVar3);
-  taskCreateDraw(&LAB_0027ffe4,0xd3,0,0,&LAB_00358a40,0,0,*puVar1);
-  taskCreateDraw(&LAB_0027fff4,0xeb,0,0,&LAB_003161b4,0,0,*puVar1);
-  return;
+    work->pendingState = 0;
+    work->active = 0;
+    work->completionState = 0;
+    for (u32 index = 0; index < 4; ++index) {
+        work->drawBindings[index].secondary = 0;
+        work->drawBindings[index].primary = 0;
+    }
+    messageSetMode(0);
+    work->selectionState[7] = 0;
+    work->done = 0;
+    if (destination) {
+        work->destination = *destination;
+        work->initialVisit = 0;
+        if (!gameFlagIsSet(0x304)) {
+            questSetPackedFlag(work->destination, 1);
+            FUN_00408184(0x1C, 1);
+        }
+        work->openingMode = 0;
+        work->transition = 0;
+    } else {
+        work->transition = 0;
+        work->openingMode = 1;
+        FUN_0022677c(0, 0xFF);
+    }
+    work->task = asdProcessCreateSimple("TMNL C", 4, 0, 0, FUN_0027e0d8, terminalSignalComplete, 0);
+    taskCreateDraw("TMNL UD", 0x77, 0, 0, FUN_002bd4f8, 0, 0, work->task);
+    taskCreateDraw("TMNL UD", 0xD3, 0, 0, FUN_00358a40, 0, 0, work->task);
+    taskCreateDraw("TMNL DD", 0xEB, 0, 0, FUN_003161b4, 0, 0, work->task);
 }
-
-} /* extern "C" */
+}

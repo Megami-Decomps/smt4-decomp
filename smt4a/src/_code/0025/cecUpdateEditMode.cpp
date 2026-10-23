@@ -13,7 +13,7 @@ extern "C" {
 extern StateAtF4 *g_campCecEdit;
 void linkHolderApplyFlag(u32 holder, s32 flags);
 f32 uiGetFloatValue(u32 holder);
-void FUN_003aedc8(u32 handle, s32 selection);
+void gfxAdvanceTextureRequestQueue(u32 handle, s32 selection);
 void FUN_003e54b8(u32 handle, f32 value);
 
 u32 cecUpdateEditMode(void)
@@ -51,7 +51,7 @@ u32 cecUpdateEditMode(void)
         }
     }
     const CecEditInput *input = reinterpret_cast<const CecEditInput *>(edit->unk08);
-    FUN_003aedc8(reinterpret_cast<u32>(edit->unk0C), input->selection);
+    gfxAdvanceTextureRequestQueue(reinterpret_cast<u32>(edit->unk0C), input->selection);
     if (edit->unk04) {
         f32 value = uiGetFloatValue(edit->unk04);
         CecEditLinkHolder *holder = reinterpret_cast<CecEditLinkHolder *>(edit->unk04);

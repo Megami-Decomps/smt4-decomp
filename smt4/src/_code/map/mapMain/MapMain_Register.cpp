@@ -1,113 +1,106 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `MapMain_Register` (_code @ 0x1b4514, 0x15c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: map registration initialization and process-argument scheduling differ. */
+#include "map/mapMain.h"
+#include "map/mapDepart.h"
+#include "shard/SaveWork.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
-extern "C" {
-
-int mapDepartResetWork(...);
-int FUN_00192420(...);
-int FUN_001924d0(...);
-int FUN_001a8c6c(...);
-int FUN_001b3da4(...);
-int FUN_001b4764(...);
-int FUN_00280ac0(...);
-int asdMemAlloc(...);
-int taskCreateDraw(...);
-int asdProcessCreateSimple(...);
-int MapEpl_InitState(...);
-
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern unsigned char LAB_001b46b0; /* 0x1b46b0 */
-extern unsigned char LAB_001b46c0; /* 0x1b46c0 */
-extern int FUN_001b7f78(...); /* 0x1b7f78 */
-extern unsigned char LAB_001e9508; /* 0x1e9508 */
-extern unsigned char LAB_0020fe90; /* 0x20fe90 */
-extern unsigned char LAB_002ca6dc; /* 0x2ca6dc */
-extern unsigned int *g_mapMain; /* 0x447e28 */
-extern unsigned char DAT_0049fb47; /* 0x49fb47 */
-
-/* Supplied declaration required: mapDepartResetWork. */
-/* Supplied declaration required: FUN_00192420. */
-/* Supplied declaration required: FUN_001924d0. */
-/* Supplied declaration required: FUN_001a8c6c. */
-/* Supplied declaration required: FUN_001b3da4. */
-/* Supplied declaration required: FUN_001b4764. */
-/* Supplied declaration required: FUN_00280ac0. */
-extern int gameGetMapBlock(void);
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: MapEpl_InitState. */
-
-
-void MapMain_Register(void)
-
-{
-/* irregular: 12 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned char *puVar3;
-  unsigned char *puVar4;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemAlloc(0x100,0x100,0,200,1);
-  g_mapMain = puVar1;
-  temp_v0 = gameGetMapBlock();
-  FUN_00280ac0(1);
-  *(unsigned char *)((int)puVar1 + 0xd) = 0;
-  *(unsigned char *)((int)puVar1 + 0xe) = 0;
-  *(unsigned char *)((int)puVar1 + 0xf) = 0;
-  *(unsigned char *)(puVar1 + 4) = 0;
-  *(unsigned char *)((int)puVar1 + 0x11) = 0;
-  *(unsigned char *)((int)puVar1 + 0x12) = 0;
-  *(unsigned char *)((int)puVar1 + 0x13) = 0;
-  *(unsigned char *)(puVar1 + 5) = 0;
-  puVar1[6] = 0;
-  *(unsigned char *)(puVar1 + 7) = 0;
-  *(unsigned char *)((int)puVar1 + 0x1d) = 0;
-  *(unsigned char *)((int)puVar1 + 0x1e) = 0;
-  *(unsigned char *)((int)puVar1 + 0x1f) = 0;
-  *(unsigned char *)(puVar1 + 8) = 0;
-  *(unsigned char *)((int)puVar1 + 0x3d) = 0;
-  puVar1[0x10] = 0;
-  puVar1[9] = 0;
-  puVar1[10] = 0;
-  puVar1[0xb] = 1;
-  puVar1[0xd] = 0;
-  puVar1[0xc] = 1;
-  *(unsigned char *)(puVar1 + 0xf) = 0;
-  *(unsigned char *)((int)puVar1 + 0x47) = 1;
-  *(unsigned char *)(puVar1 + 0x12) = 0;
-  *(unsigned char *)((int)puVar1 + 0x46) = 0;
-  MapEpl_InitState();
-  FUN_001b4764();
-  FUN_001b3da4();
-  FUN_00192420();
-  mapDepartResetWork();
-  FUN_001924d0();
-  FUN_001a8c6c();
-  puVar1[0x2a] = 0x1c2;
-  puVar1[0x2b] = 0;
-  puVar1[0x2d] = 0;
-  *(unsigned char *)(puVar1 + 0x2e) = 0;
-  *(unsigned char *)((int)puVar1 + 0xb9) = 0;
-  DAT_0049fb47 = 0;
-  *(unsigned char *)(temp_v0 + 0x790) = 0;
-  puVar1[0x31] = 0;
-  *(unsigned char *)(puVar1 + 3) = 0;
-  puVar3 = &LAB_001b46b0;
-  asdProcessCreateSimple(&LAB_001b46b0,2,0,0,FUN_001b7f78,&LAB_0020fe90,0);
-  *puVar1 = (unsigned int)puVar3;
-  puVar4 = &LAB_001b46c0;
-  taskCreateDraw(&LAB_001b46c0,0x6f,0,0,&LAB_001e9508,&LAB_002ca6dc,0,puVar3);
-  puVar1[1] = (unsigned int)puVar4;
-  return;
+namespace {
+/* This initialization view avoids increasing alignment of MapMain's byte padding at 0x0D. */
+struct MapMainInitializationView {
+    u32 job, drawJob, unk08;
+    u8 freeOnEnd, startupFlags[8], unk15[3];
+    u32 counter18;
+    u8 transitionFlags[5], unk21[3];
+    u32 counter24, counter28, mapId, areaId, counter34;
+    u8 unk38[4], flag3C, flag3D, unk3E[2];
+    u32 tint;
+    u8 unk44[2], flag46, enabled, flag48, unk49[0x5F];
+    u32 messageId, messageState;
+    u8 unkB0[4];
+    u32 counterB4;
+    u8 messageFlags[2], unkBA[0xA];
+    s32 scriptState;
+};
+typedef char MapMainInitializationOffsets[sizeof(MapMainInitializationView) == sizeof(MapMain) &&
+    offsetof(MapMainInitializationView, startupFlags) == 0xD &&
+    offsetof(MapMainInitializationView, messageId) == 0xA8 &&
+    offsetof(MapMainInitializationView, scriptState) == 0xC4 ? 1 : -1];
 }
 
-} /* extern "C" */
+extern "C" {
+extern MapMain *g_mapMain;
+extern GameState g_gameState;
+void *asdMemAlloc(u32 alignment, u32 granularity, s32 heap, u32 bytes, s32 clear);
+SaveWork *gameGetMapBlock(void);
+void FUN_00280ac0(s32 mode);
+void MapEpl_InitState(void);
+void FUN_001b4764(void);
+void FUN_001b3da4(void);
+void FUN_00192420(void);
+void mapDepartResetWork(void);
+void FUN_001924d0(void);
+void FUN_001a8c6c(void);
+s32 FUN_001b7f78(u32 job);
+void mapMainRequest(u32 job);
+void FUN_001e9508(u32 job);
+void FUN_002ca6dc(u32 job);
+u32 asdProcessCreateSimple(const char *name, s32 group, s32 priority, s32 flags,
+                          AsdProcUpdateFunc update, AsdProcFunc request, u32 data);
+u32 taskCreateDraw(const char *name, s32 group, s32 priority, s32 flags,
+                   AsdProcFunc draw, AsdProcFunc request, u32 data, u32 parent);
+
+void MapMain_Register(void)
+{
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\map\\mapMain.cpp", 392);
+    MapMainInitializationView *map = static_cast<MapMainInitializationView *>(
+        asdMemAlloc(0x100, 0x100, 0, sizeof(MapMain), 1));
+    g_mapMain = reinterpret_cast<MapMain *>(map);
+    SaveWork *save = gameGetMapBlock();
+    FUN_00280ac0(1);
+    map->startupFlags[0] = 0;
+    map->startupFlags[1] = 0;
+    map->startupFlags[2] = 0;
+    map->startupFlags[3] = 0;
+    map->startupFlags[4] = 0;
+    map->startupFlags[5] = 0;
+    map->startupFlags[6] = 0;
+    map->startupFlags[7] = 0;
+    map->counter18 = 0;
+    map->transitionFlags[0] = 0;
+    map->transitionFlags[1] = 0;
+    map->transitionFlags[2] = 0;
+    map->transitionFlags[3] = 0;
+    map->transitionFlags[4] = 0;
+    map->flag3D = 0;
+    map->tint = 0;
+    map->counter24 = 0;
+    map->counter28 = 0;
+    map->mapId = 1;
+    map->counter34 = 0;
+    map->areaId = 1;
+    map->flag3C = 0;
+    map->enabled = 1;
+    map->flag48 = 0;
+    map->flag46 = 0;
+    MapEpl_InitState();
+    FUN_001b4764();
+    FUN_001b3da4();
+    FUN_00192420();
+    mapDepartResetWork();
+    FUN_001924d0();
+    FUN_001a8c6c();
+    map->messageId = 0x1C2;
+    map->messageState = 0;
+    map->counterB4 = 0;
+    map->messageFlags[0] = 0;
+    map->messageFlags[1] = 0;
+    g_gameState.mapRegistration.pending = 0;
+    save->mapRegistration.pending = 0;
+    map->scriptState = 0;
+    map->freeOnEnd = 0;
+    u32 job = asdProcessCreateSimple("MAP C", 2, 0, 0, FUN_001b7f78, mapMainRequest, 0);
+    map->job = job;
+    map->drawJob = taskCreateDraw("MAP U", 0x6F, 0, 0, FUN_001e9508, FUN_002ca6dc, 0, job);
+}
+}

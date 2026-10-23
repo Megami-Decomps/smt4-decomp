@@ -13,7 +13,7 @@ int FUN_001834a4(...);
 int FUN_001835b4(...);
 int jobGetScalarValue(void);
 int FUN_0037245c(...);
-int FUN_003c40b4(...);
+void uiDrawItemListRow(int x, int y, int message, int category, unsigned int color, unsigned int id, float effect);
 int FUN_0047fc38(void);
 int VectorSignedToFloat(...);
 
@@ -46,7 +46,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int resourceRunOperationIfUnblocked(void);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_0037245c. */
-/* Supplied declaration required: FUN_003c40b4. */
+/* Supplied declaration required: uiDrawItemListRow. */
 /* Supplied declaration required: FUN_0047fc38. */
 extern int equipmentHasPositiveUpgrade(int);
 
@@ -222,8 +222,9 @@ void FUN_00288538(int param_1)
             }
           }
         }
-        FUN_003c40b4(temp_v12 + *(short *)(temp_v1 + 8),temp_v13 + *(short *)(temp_v1 + 10),temp_v9,
-                     temp_v10,temp_v6,(int)*(short *)(temp_v11 + temp_v0 * 2 + 0x1b3e));
+        uiDrawItemListRow(temp_v12 + *(short *)(temp_v1 + 8),temp_v13 + *(short *)(temp_v1 + 10),temp_v9,
+                     temp_v10,temp_v6,(int)*(short *)(temp_v11 + temp_v0 * 2 + 0x1b3e),
+                     *(float *)(g_camp + 0xA5C));
         efctSetSpeed();
         return;
       }

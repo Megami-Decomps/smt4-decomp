@@ -1,82 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f5e6c` (_code @ 0x4f5e6c, 0x120 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: global-camera flag update uses a split address; final resource-loop base and registers differ. */
+#include "battle/btlCamera.h"
 
 extern "C" {
+void asdMemFree(void *allocation);
+void sysMemClear(void *buffer, u32 size);
+void textureCacheReleaseAll();
+void FUN_0035bbc4();
+void workOwnerRelease(void *owner);
+void btlCameraFinishTransition(void *controller);
+void FUN_004f6e68(void *controller);
+void obj4FSlots28Reset(void *controller);
+void panelReset(void *controller);
+void FUN_004f8fa0(void *controller);
+extern BtlCameraA *g_btlCamera;
 
-int asdMemFree(void);
-int sysMemClear(int, int);
-int textureCacheReleaseAll(void);
-int FUN_0035bbc4(void);
-int workOwnerRelease(int);
-int btlCameraFinishTransition(int);
-int FUN_004f6e68(int);
-int obj4FSlots28Reset(int);
-int panelReset(void);
-int FUN_004f8fa0(int);
-
-typedef int romwright_code(...);
-extern int g_btlCamera; /* 0x571508 */
-
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: textureCacheReleaseAll. */
-/* Supplied declaration required: FUN_0035bbc4. */
-/* Supplied declaration required: workOwnerRelease. */
-/* Supplied declaration required: btlCameraFinishTransition. */
-/* Supplied declaration required: FUN_004f6e68. */
-/* Supplied declaration required: obj4FSlots28Reset. */
-/* Supplied declaration required: panelReset. */
-/* Supplied declaration required: FUN_004f8fa0. */
-
-
-void FUN_004f5e6c(int param_1)
-
+// Release transient camera panels and resources and clear the active transition state.
+void FUN_004f5e6c(void *controller)
 {
-/* irregular: 10 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  *(unsigned int *)(param_1 + 0x33bc) = 0;
-  panelReset();
-  FUN_004f6e68(param_1);
-  temp_v1 = 0;
-  do {
-    temp_v0 = param_1 + temp_v1 * 0x8c;
-    *(unsigned char *)(temp_v0 + 0x281c) = 0xff;
-    sysMemClear(temp_v0 + 0x2824,0x80);
-    if (*(int *)(temp_v0 + 0x2820) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v0 + 0x2820) = 0;
+    struct ResourceSlot { s32 id; u32 state; u8 owner[0x30]; u32 pending; };
+    struct PanelSlot {
+        u8 kind;
+        u8 unk01[3];
+        void *allocation;
+        u8 data[0x80];
+        u8 active;
+        u8 unk89[3];
+    };
+    // The controller's resource arrays extend well beyond the shared camera prefix.
+    struct CleanupView {
+        u8 unk0000[0x1398];
+        ResourceSlot resources[50];
+        CameraBackend *backend;
+        u8 unk1F54[0x8C8];
+        PanelSlot panels[11];
+        u8 unk2E20[0x230];
+        u32 animation;
+        u8 unk3054[0x368];
+        u32 pending;
+    };
+    CleanupView *state = static_cast<CleanupView *>(controller);
+    state->pending = 0;
+    panelReset(controller);
+    FUN_004f6e68(controller);
+    for (s32 index = 0; index < 11; ++index) {
+        PanelSlot *panel = &state->panels[index];
+        panel->kind = 0xff;
+        sysMemClear(panel->data, sizeof(panel->data));
+        if (panel->allocation != NULL) {
+            asdMemFree(panel->allocation);
+            panel->allocation = NULL;
+        }
+        panel->active = 0;
     }
-    temp_v1 = temp_v1 + 1;
-    *(unsigned char *)(temp_v0 + 0x28a4) = 0;
-  } while (temp_v1 < 0xb);
-  piVar1 = *(int **)(param_1 + 0x1f50);
-  if (piVar1 != (int *)0x0) {
-    (**(romwright_code **)(*piVar1 + 4))();
-    *(int *)(param_1 + 0x1f50) = 0;
-  }
-  btlCameraFinishTransition(param_1);
-  *(unsigned int *)(param_1 + 0x3050) = 0;
-  FUN_0035bbc4();
-  textureCacheReleaseAll();
-  if (g_btlCamera != 0) {
-    *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) & 0xf7ffffff;
-  }
-  FUN_004f8fa0(param_1);
-  obj4FSlots28Reset(param_1);
-  temp_v1 = 0;
-  do {
-    temp_v0 = param_1 + temp_v1 * 0x3c;
-    *(unsigned int *)(temp_v0 + 0x1398) = 0xffffffff;
-    *(unsigned int *)(temp_v0 + 0x139c) = 0;
-    workOwnerRelease(temp_v0 + 0x13a0);
-    temp_v1 = temp_v1 + 1;
-    *(unsigned int *)(temp_v0 + 0x13d0) = 0;
-  } while (temp_v1 < 0x32);
-  return;
+    if (state->backend != NULL) {
+        state->backend->release();
+        state->backend = NULL;
+    }
+    btlCameraFinishTransition(controller);
+    state->animation = 0;
+    FUN_0035bbc4();
+    textureCacheReleaseAll();
+    BtlCameraA *camera = g_btlCamera;
+    if (camera != NULL) {
+        camera->flags &= ~0x8000000;
+    }
+    FUN_004f8fa0(controller);
+    obj4FSlots28Reset(controller);
+    for (s32 index = 0; index < 50; ++index) {
+        ResourceSlot *resource = &state->resources[index];
+        resource->id = -1;
+        resource->state = 0;
+        workOwnerRelease(resource->owner);
+        resource->pending = 0;
+    }
 }
-
-} /* extern "C" */
+}

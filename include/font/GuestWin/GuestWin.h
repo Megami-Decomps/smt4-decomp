@@ -3,15 +3,21 @@
 #define FONT_GUESTWIN_GUESTWIN_H
 
 #include "common.h"
+#include <stddef.h>
 
 /* The guest window's work area. */
 typedef struct GuestWinWork {
-    /* 0x00 */ u8 unk00[0x8];
+    union {
+        /* 0x00 */ u8 unk00[0x8];
+        /* 0x00 */ u32 job;
+    };
     /* 0x08 */ s32 state;                  /* 0 idle, 1 opening, 2 shown, 3 closing */
     /* 0x0C */ s32 frames;                 /* frames since the window was shown */
     /* 0x10 */ u8 unk10[0x20];
     /* 0x30 */ u8 ui[0x20];                /* UI object of the window */
 } GuestWinWork;
+typedef char GuestWinJobPrefixLayoutCheck[offsetof(GuestWinWork, job) == 0 &&
+    sizeof(GuestWinWork) == 0x50 ? 1 : -1];
 
 /* Apocalypse: the guest window's work area. */
 typedef struct GuestWinWorkA {

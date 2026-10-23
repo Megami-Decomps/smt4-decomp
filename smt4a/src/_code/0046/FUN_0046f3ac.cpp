@@ -19,7 +19,7 @@ int deletingDtor_002e56ec(...);
 int FUN_002fb0d4(...);
 int asdFsIsSdCardDetected(...);
 int FUN_0046c528(...);
-int FUN_0046e334(...);
+int aocFinishHandleOperation(...);
 int FUN_0046fb60(...);
 int FUN_00473e44(...);
 int FUN_004740b4(...);
@@ -61,7 +61,7 @@ extern int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: FUN_002fb0d4. */
 /* Supplied declaration required: asdFsIsSdCardDetected. */
 /* Supplied declaration required: FUN_0046c528. */
-/* Supplied declaration required: FUN_0046e334. */
+/* Supplied declaration required: aocFinishHandleOperation. */
 /* Supplied declaration required: FUN_0046fb60. */
 /* Supplied declaration required: FUN_00473e44. */
 /* Supplied declaration required: FUN_004740b4. */
@@ -133,7 +133,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
         deletingDtor_002e56ec(*(int *)(param_2 + 0x318),_ZN9Obj4221d4D1Ev);
         *(unsigned int *)(param_2 + 0x318) = 0;
       }
-      FUN_0046e334(&temp_v8,param_2);
+      aocFinishHandleOperation(&temp_v8,param_2);
       temp_v3 = byteIsAtLeast100(&temp_v8);
       if (temp_v3 != 0) {
         temp_v12 = temp_v9;

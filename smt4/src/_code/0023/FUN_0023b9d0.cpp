@@ -1,86 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023b9d0` (_code @ 0x23b9d0, 0x130 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: attribute slot search and initialization allocate fewer callee-saved registers than retail. */
+#include "gfx/VertexAttributeState.h"
 
 extern "C" {
+void nn_gr_CTR_Vertex_DisableAttr(VertexAttributeState* state, u32 attribute);
 
-int nn_gr_CTR_Vertex_DisableAttr(unsigned int *, unsigned int);
-
-/* Supplied declaration required: nn_gr_CTR_Vertex_DisableAttr. */
-
-
-void FUN_0023b9d0(unsigned int *param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+// Register one vertex stream with its packed format size and clear the remaining components.
+void FUN_0023b9d0(VertexAttributeState* state, const VertexAttributeDescription* description,
+                  u32 address, u32 format)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  
-  temp_v2 = (unsigned int)*(unsigned char *)(param_2 + 2);
-  switch(param_4) {
-  case 0:
-  case 1:
-    temp_v3 = 1;
-    break;
-  case 2:
-  case 4:
-  case 5:
-    temp_v3 = 2;
-    break;
-  case 3:
-  case 6:
-  case 0xc:
-  case 0xd:
-    temp_v3 = 4;
-    break;
-  case 7:
-  case 0xe:
-    temp_v3 = 8;
-    break;
-  case 8:
-  case 9:
-    temp_v3 = 3;
-    break;
-  case 10:
-    temp_v3 = 6;
-    break;
-  case 0xb:
-    temp_v3 = 0xc;
-    break;
-  case 0xf:
-    temp_v3 = 0x10;
-    break;
-  default:
-    temp_v3 = 0;
-  }
-  nn_gr_CTR_Vertex_DisableAttr(param_1,temp_v2);
-  puVar5 = (unsigned int *)0x0;
-  temp_v1 = 0;
-  do {
-    if (param_1[temp_v1 * 0x1c + 0x58] == 0) {
-      puVar5 = param_1 + temp_v1 * 0x1c + 0x58;
-      break;
+    u32 attribute = description->index;
+    u32 stride;
+    switch (format) {
+    case 0: case 1: stride = 1; break;
+    case 2: case 4: case 5: stride = 2; break;
+    case 8: case 9: stride = 3; break;
+    case 10: stride = 6; break;
+    case 11: stride = 12; break;
+    case 3: case 6: case 12: case 13: stride = 4; break;
+    case 7: case 14: stride = 8; break;
+    case 15: stride = 16; break;
+    default: stride = 0; break;
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0xc);
-  *(unsigned char *)((int)param_1 + temp_v2 + 0x154) = 1;
-  *puVar5 = param_3;
-  *(char *)(puVar5 + 1) = (char)param_4;
-  puVar5[0x10] = temp_v2;
-  temp_v0 = 0xb;
-  puVar5[4] = temp_v3;
-  temp_v1 = 0;
-  do {
-    temp_v0 = temp_v0 - 1;
-    puVar5[temp_v1 + 5] = 0;
-    puVar5[temp_v1 + 0x11] = 0xffffffff;
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v0 != 0);
-  *param_1 = 0;
-  return;
+    nn_gr_CTR_Vertex_DisableAttr(state, attribute);
+    VertexAttributeSlot* slot = NULL;
+    for (s32 index = 0; index < 12; ++index) {
+        if (state->slots[index].address == 0) {
+            slot = &state->slots[index];
+            break;
+        }
+    }
+    state->enabled[attribute] = 1;
+    slot->address = address;
+    slot->format = format;
+    slot->attribute = attribute;
+    slot->stride = stride;
+    for (s32 index = 0; index < 11; ++index) {
+        slot->values[index] = 0;
+        slot->indices[index] = -1;
+    }
+    state->dirty = 0;
 }
-
-} /* extern "C" */
+}

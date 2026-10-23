@@ -10,7 +10,7 @@ int FUN_0024b660(float *, float *, double, float *);
 int randomAdvanceShiftRegister(...);
 int FUN_0024b7bc(int, float *);
 int FUN_0024b830(...);
-int FUN_002a2c7c(void);
+int gfxQuaternionWorkspaceBuildMatrix(void);
 int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int VectorSignedToFloat(...);
@@ -74,7 +74,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0024b7bc. */
 /* Supplied declaration required: FUN_0024b830. */
 extern int effGetFrameCounter(void);
-/* Supplied declaration required: FUN_002a2c7c. */
+/* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: __aeabi_uidivmod. */
@@ -234,7 +234,7 @@ void FUN_002e65b0(int param_1)
               DAT_004ea920 = pfVar8[4];
               DAT_004ea924 = pfVar8[5];
               DAT_004ea928 = pfVar8[6];
-              FUN_002a2c7c();
+              gfxQuaternionWorkspaceBuildMatrix();
               DAT_004ea91c = temp_v16 * DAT_004ea95c + temp_v14 * DAT_004ea96c + temp_v11 * DAT_004ea97c;
               DAT_004ea920 = temp_v16 * DAT_004ea960 + temp_v14 * DAT_004ea970 + temp_v11 * DAT_004ea980;
               DAT_004ea924 = temp_v16 * DAT_004ea964 + temp_v14 * DAT_004ea974 + temp_v11 * DAT_004ea984;
@@ -310,7 +310,7 @@ void FUN_002e65b0(int param_1)
               DAT_004ea928 = (float)temp_v21;
               DAT_004ea920 = temp_v12;
               DAT_004ea924 = temp_v3;
-              FUN_002a2c7c();
+              gfxQuaternionWorkspaceBuildMatrix();
               DAT_004ea930 = (float)temp_v20;
               DAT_004ea934 = (float)((unsigned long long)temp_v20 >> 0x20);
               DAT_004ea91c = temp_v16 * DAT_004ea95c + temp_v14 * DAT_004ea96c + temp_v4 * DAT_004ea97c +
@@ -384,7 +384,7 @@ void FUN_002e65b0(int param_1)
                 DAT_004ea928 = (float)temp_v21;
                 DAT_004ea920 = temp_v12;
                 DAT_004ea924 = temp_v3;
-                FUN_002a2c7c();
+                gfxQuaternionWorkspaceBuildMatrix();
                 DAT_004ea930 = (float)temp_v20;
                 DAT_004ea934 = (float)((unsigned long long)temp_v20 >> 0x20);
                 DAT_004ea91c = temp_v4 * DAT_004ea95c + temp_v16 * DAT_004ea96c + temp_v11 * DAT_004ea97c

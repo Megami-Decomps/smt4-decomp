@@ -1,69 +1,82 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a8ecc` (_code @ 0x3a8ecc, 0x104 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: confirmation signed-byte load, fallback selection and description tail-call differ. */
+#include "common.h"
+#include <stddef.h>
+
+/* This analysis screen extends beyond the shared BibleScreen work area. */
+struct BibleAnalyzeCursorView {
+    u8 unk00[0x8a];
+    s8 confirmed; /* 0x8a */
+};
+struct BibleAnalyzeEntryView {
+    u32 unk00;
+    u16 demonId; /* 0x04 */
+    u8 unk06[0x1a];
+};
+struct BibleAnalyzeWorkView {
+    u8 unk000[0x14];
+    s32 state;
+    s32 stateArg;
+    u8 unk01c[0x4];
+    u8 selection[0xa8];
+    u8 position[0x34];
+    BibleAnalyzeCursorView cursor; /* 0x0fc */
+    u8 unk187[0x41d];
+    u8 customName; /* 0x5a4 */
+    u8 unk5a5[3];
+    BibleAnalyzeEntryView entries[1280]; /* 0x5a8 */
+    u8 unka5a8[0xc];
+    u32 nameId; /* 0xa5b4 */
+};
+struct BibleAnalyzeTextView {
+    u8 unk00[8];
+    const char *suffix;
+};
+typedef char BibleAnalyzeCursorOffset[offsetof(BibleAnalyzeWorkView, cursor) == 0xfc ? 1 : -1];
+typedef char BibleAnalyzeNameOffset[offsetof(BibleAnalyzeWorkView, nameId) == 0xa5b4 ? 1 : -1];
 
 extern "C" {
+void FUN_002b8ee0(BibleAnalyzeCursorView *, s32);
+s32 vec2GetYInt(BibleAnalyzeCursorView *);
+s32 vec2GetXInt(BibleAnalyzeCursorView *);
+void pointConvertToFloat(void *, s32, s32);
+s32 buttonHelpIsNotActive(void);
+void FUN_002a0cc8(s32);
+s32 flaggedValueHolderGetTotal(void *);
+void FUN_0029da34(s32, s32, u16, s32);
+const char *dataLookupDisplayName(u8 *, u32);
+void textFormatBuffer(char *, const char *, ...);
+void FUN_0029ee6c(const char *, u32);
+extern const char DAT_0040226c[];
+extern const char DAT_00402274[];
+extern BibleAnalyzeTextView DAT_0043d990;
 
-int pointConvertToFloat(...);
-int FUN_0029da34(...);
-int FUN_0029ee6c(...);
-int FUN_002a0cc8(...);
-int FUN_002b8ee0(...);
-int textFormatBuffer(...);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned int DAT_0043d998; /* 0x43d998 */
-
-extern int dataLookupDisplayName(unsigned char *, unsigned int);
-extern int buttonHelpIsNotActive(void);
-/* Supplied declaration required: pointConvertToFloat. */
-extern int flaggedValueHolderGetTotal(int);
-/* Supplied declaration required: FUN_0029da34. */
-/* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: FUN_002b8ee0. */
-/* Supplied declaration required: textFormatBuffer. */
-extern unsigned int vec2GetYInt(int);
-extern unsigned int vec2GetXInt(int);
-
-
-void FUN_003a8ecc(int param_1)
-
+/* Follow the cursor, then open the selected demon's description on confirmation. */
+void FUN_003a8ecc(BibleAnalyzeWorkView *work)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [64];
-  unsigned char temp_v4 [8];
-  
-  temp_v2 = param_1 + 0xfc;
-  FUN_002b8ee0(temp_v2,0);
-  temp_v0 = vec2GetYInt(temp_v2);
-  temp_v1 = vec2GetXInt(temp_v2);
-  pointConvertToFloat(param_1 + 200,temp_v1,temp_v0);
-  if ((*(char *)(param_1 + 0x186) != '\0') && (temp_v2 = buttonHelpIsNotActive(), temp_v2 != 0)) {
-    FUN_002a0cc8(0);
-    *(unsigned int *)(param_1 + 0x14) = 2;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-    pointConvertToFloat(param_1 + 200,0,0);
-    if (*(char *)(param_1 + 0x5a4) == '\0') {
-      temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
-      FUN_0029da34(0,1,*(unsigned short *)(param_1 + temp_v2 * 0x20 + 0x5ac));
-      return;
+    char text[64];
+    u8 nameBuffer[8];
+    BibleAnalyzeCursorView *cursor = &work->cursor;
+    FUN_002b8ee0(cursor, 0);
+    s32 y = vec2GetYInt(cursor);
+    s32 x = vec2GetXInt(cursor);
+    pointConvertToFloat(work->position, x, y);
+    if (cursor->confirmed && buttonHelpIsNotActive()) {
+        FUN_002a0cc8(0);
+        work->state = 2;
+        work->stateArg = 0;
+        pointConvertToFloat(work->position, 0, 0);
+        if (!work->customName) {
+            BibleAnalyzeEntryView *entries = work->entries;
+            s32 selected = flaggedValueHolderGetTotal(work->selection);
+            FUN_0029da34(0, 1, entries[selected].demonId, 0);
+            return;
+        }
+        const char *name = DAT_0040226c;
+        const char *displayName = dataLookupDisplayName(nameBuffer, work->nameId);
+        if (displayName != NULL)
+            name = displayName;
+        textFormatBuffer(text, DAT_00402274, name, DAT_0043d990.suffix);
+        FUN_0029ee6c(text, 0x323232ff);
     }
-    temp_v2 = dataLookupDisplayName(temp_v4,*(unsigned int *)(param_1 + 0xa5b4));
-    if (temp_v2 == 0) {
-      temp_v2 = 0x40226c;
-    }
-    textFormatBuffer(temp_v3,"%s%s",temp_v2,DAT_0043d998);
-    FUN_0029ee6c(temp_v3,0x323232ff);
-  }
-  return;
 }
-
-} /* extern "C" */
+}

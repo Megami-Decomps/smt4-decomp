@@ -1,75 +1,84 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b2988` (_code @ 0x2b2988, 0x10c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: payload validation remains inline instead of moving after the epilogue; initialization stores and saved registers differ. */
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/ModelContainer.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/Source/Util/AsdList.h"
+#include "shard/S1GfxModel.h"
 
 extern "C" {
+extern AsdList DAT_004dae3c;
+extern GfxModelState g_gfxSettings;
+extern const char DAT_00409428[];
+extern const char DAT_00409438[];
+void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+void asdListAdd(AsdList *list, void *item, s32 index);
+s32 rt_memcmp(const void *left, const void *right, u32 size);
 
-int asdListAdd(unsigned char *, unsigned int *, int);
-int asdMemoryAlloc(int, int, int, int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern int DAT_00464b28; /* 0x464b28 */
-extern unsigned char DAT_004dae3c; /* 0x4dae3c */
-
-/* Supplied declaration required: asdListAdd. */
-extern int rt_memcmp(int, char *, unsigned int);
-/* Supplied declaration required: asdMemoryAlloc. */
-
-
-unsigned int * FUN_002b2988(int param_1,unsigned int param_2)
-
+// An unwrapped model already points at its payload; ATBC adds a validated header.
+static __inline void *modelContainerGetPayload(u8 *file, u32 *payloadSize)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAlloc(0x100,0x100,0,0x1c,1);
-  puVar1[1] = 0;
-  puVar1[2] = 0;
-  puVar1[4] = 0;
-  puVar1[5] = 0;
-  puVar1[6] = 0;
-  *puVar1 = 1;
-  *(unsigned char *)(puVar1 + 1) = 1;
-  temp_v2 = 0;
-  puVar1[3] = param_1;
-  temp_v0 = rt_memcmp(param_1,"ATBC",4);
-  temp_v1 = param_1;
-  if (temp_v0 == 0) {
-    temp_v1 = *(int *)(param_1 + 0x14);
-    if (temp_v1 == 0) {
-      temp_v1 = *(int *)(param_1 + 0x10);
+    if (rt_memcmp(file, DAT_00409428, 4) != 0) {
+        return file;
     }
-    temp_v1 = param_1 + temp_v1;
-    temp_v0 = rt_memcmp(temp_v1,"MDLSIGN",7);
-    if (temp_v0 == 0) {
-      temp_v2 = *(int *)(temp_v1 + 8);
-      temp_v1 = temp_v1 + 0x80;
+    AsdModelContainerHeader *container = reinterpret_cast<AsdModelContainerHeader *>(file);
+    u32 offset = container->payloadOffset;
+    if (offset == 0) {
+        offset = container->fallbackOffset;
     }
-    else {
-      temp_v1 = 0;
+    AsdModelPayloadHeader *header = reinterpret_cast<AsdModelPayloadHeader *>(file + offset);
+    if (rt_memcmp(header, DAT_00409438, 7) == 0) {
+        *payloadSize = header->payloadSize;
+        return header + 1;
     }
-  }
-  puVar1[2] = temp_v1;
-  temp_v0 = 0;
-  temp_v1 = rt_memcmp(param_1,"ATBC",4);
-  if (temp_v1 == 0) {
-    temp_v0 = *(int *)(param_1 + 0xc) + param_1;
-  }
-  puVar1[4] = temp_v0;
-  if (temp_v2 == 0) {
-    puVar1[5] = param_2;
-  }
-  asdListAdd(&DAT_004dae3c,puVar1,0);
-  DAT_00464b28 = DAT_00464b28 + 1;
-  return puVar1;
+    return NULL;
 }
 
-} /* extern "C" */
+// Register a model image, accepting either raw data or an ATBC-wrapped MDLSIGN payload.
+AsdModelEntry *FUN_002b2988(u8 *file, u32 parameter)
+{
+    // AsdModelEntry only describes the first 0xC bytes; this registration owns 0x1C.
+    struct LoadedModelView {
+        u32 references; // 0x00
+        union {
+            u32 flags; // 0x04
+            struct { u8 active; u8 unk05[3]; } state;
+        };
+        void *payload; // 0x08
+        u8 *file; // 0x0C
+        void *auxiliary; // 0x10
+        u32 parameter; // 0x14
+        void *next; // 0x18
+    };
+    typedef char LoadedModelViewLayoutCheck[
+        sizeof(LoadedModelView) == 0x1C && offsetof(LoadedModelView, payload) == 8 &&
+        offsetof(LoadedModelView, file) == 0xC && offsetof(LoadedModelView, auxiliary) == 0x10 &&
+        offsetof(LoadedModelView, parameter) == 0x14 && offsetof(LoadedModelView, next) == 0x18 ? 1 : -1];
+
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Model\\AsdModel.cpp", 0x7C8);
+    LoadedModelView *model = static_cast<LoadedModelView *>(
+        asdMemoryAlloc(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(LoadedModelView), 1));
+    model->flags = 0;
+    model->payload = NULL;
+    model->auxiliary = NULL;
+    model->parameter = 0;
+    model->next = NULL;
+    model->references = 1;
+    model->state.active = 1;
+    model->file = file;
+
+    u32 payloadSize = 0;
+    model->payload = modelContainerGetPayload(file, &payloadSize);
+    void *auxiliary = NULL;
+    if (rt_memcmp(file, DAT_00409428, 4) == 0) {
+        auxiliary = file + reinterpret_cast<AsdModelContainerHeader *>(file)->auxiliary.offset;
+    }
+    model->auxiliary = auxiliary;
+    if (payloadSize == 0) {
+        model->parameter = parameter;
+    }
+    asdListAdd(&DAT_004dae3c, model, 0);
+    ++g_gfxSettings.loadedModels.count;
+    return reinterpret_cast<AsdModelEntry *>(model);
+}
+}

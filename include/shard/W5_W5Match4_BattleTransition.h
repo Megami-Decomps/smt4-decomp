@@ -2,6 +2,8 @@
 #define SHARD_W5_W5MATCH4_BATTLETRANSITION_H
 
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include <stddef.h>
 
 union BattleTransitionParameter {
     u32 value;
@@ -10,7 +12,15 @@ union BattleTransitionParameter {
 
 /* Work fields used when starting the battle's timed transitions. */
 struct BattleTransitionState {
-    /* 0x000 */ u8 unk000[0x5a4];
+    union {
+        /* 0x000 */ u8 unk000[0x5A4];
+        struct {
+            u8 unk000[0xC8];
+            /* 0x0C8 */ AsdTextureRegion region;
+            u8 unk0E8[0x14C];
+            /* 0x234 */ f32 opacity;
+        } frameDraw;
+    };
     /* 0x5a4 */ BattleTransitionParameter current;
     /* 0x5a8 */ u8 unk5a8[0x40];
     /* 0x5e8 */ f32 duration;
@@ -42,5 +52,10 @@ struct BattleTransitionState {
     /* 0x7e0 */ s32 alternateFrame;
     /* 0x7e4 */ s32 alternateMode;
 };
+typedef char BattleTransitionFrameDrawOffsetsCheck[
+    offsetof(BattleTransitionState, frameDraw.region) == 0xC8 &&
+    offsetof(BattleTransitionState, frameDraw.opacity) == 0x234 &&
+    offsetof(BattleTransitionState, secondaryElapsed) == 0x7AC &&
+    sizeof(BattleTransitionState) == 0x7E8 ? 1 : -1];
 
 #endif

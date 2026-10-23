@@ -1,81 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049d244` (_code @ 0x49d244, 0x198 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: native text-scale calculation folds to a constant; saved-register and outgoing argument scheduling differ. */
+#include "shard/S1ListPanel.h"
+struct MenuCaptionText { u16 length; u16 unk02; u16 text[1]; };
+struct MenuCaptionView {
+    u32 unk00;
+    u8 mode;
+    u8 unk05[0x7F];
+    MenuCaptionText *caption;
+};
+typedef char MenuCaptionOffset[offsetof(MenuCaptionView, caption) == 0x84 ? 1 : -1];
 extern "C" {
+extern RenderCtx *g_renderCtx;
+f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
+void efctSetSpeed(f32 speed);
+void FUN_001835b4(u32 layer, u32 group, u32 index, s32 x, s32 y, u32 color);
+SpriteInfo *FUN_001834a4(u32 group, u32 id);
+void FUN_00162790(u32 layer, u32 color, const u16 *text, f32 x, f32 y, f32 scale, f32 angle, f32 alpha);
 
-int FUN_00162790(...);
-int efctSetSpeed(void);
-int FUN_001835b4(int, int, int, int, int, int);
-int renderCtxCalculateStereoParallax(unsigned int);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_3_stack;
-
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-
-
-void FUN_0049d244(int param_1,int param_2,int param_3)
-
+void FUN_0049d244(MenuCaptionView *view, s32 x, s32 y, f32 alpha)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  short temp_v0;
-  short *psVar2;
-  int temp_v1;
-  int temp_v2;
-  unsigned int in_fpscr;
-  float temp_v3;
-  float temp_v4;
-  unsigned long long temp_v5;
-  
-  temp_v4 = 0.25f;
-  temp_v5 = 0x3e80000000000000;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  if (*(char *)(param_1 + 4) == '\b' || *(char *)(param_1 + 4) == '\t') {
-    efctSetSpeed();
-    temp_v3 = (float)((unsigned long long)temp_v5 >> 0x20);
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    FUN_001835b4(2,0x33,0x2e,(int)temp_v3,0,0x65);
-    efctSetSpeed();
-  }
-  efctSetSpeed();
-  temp_v2 = 0;
-  do {
-    FUN_001835b4(2,0x33,temp_v2,(int)temp_v4 + param_2,param_3,0x65);
-    temp_v3 = (float)((unsigned long long)temp_v5 >> 0x20);
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 3);
-  psVar2 = *(short **)(param_1 + 0x84);
-  temp_v0 = 0;
-  if (psVar2 != (short *)0x0) {
-    temp_v0 = *psVar2;
-  }
-  if (psVar2 == (short *)0x0 || temp_v0 == 0) {
-    return;
-  }
-  temp_v4 = temp_v3;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  FUN_001835b4(2,0x33,3,param_2 + (int)temp_v3,param_3,0x65);
-  temp_v2 = FUN_001834a4(0x33,4);
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  temp_v1 = (int)*(short *)(temp_v2 + 8) + (int)temp_v4 + param_2;
-  VectorSignedToFloat(0x96,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(3,0xffffffff,*(int *)(param_1 + 0x84) + 4,temp_v1);
-  return;
+    s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
+    if (view->mode == 8 || view->mode == 9) {
+        efctSetSpeed(alpha);
+        FUN_001835b4(2, 51, 46, (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f), 0, 101);
+        efctSetSpeed(1.0f);
+    }
+    efctSetSpeed(alpha);
+    for (s32 index = 0; index < 3; ++index)
+        FUN_001835b4(2, 51, index, parallax + x, y, 101);
+    if (!view->caption || !view->caption->length)
+        return;
+    FUN_001835b4(2, 51, 3, x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f), y, 101);
+    SpriteInfo *info = FUN_001834a4(51, 4);
+    s32 captionX = info->x + ((s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f) + x);
+    FUN_00162790(3, 0xFFFFFFFF, view->caption->text,
+        (f32)captionX, (f32)(info->y + y), (f32)150 * (1.0f / 256.0f), 0.0f, alpha);
 }
-
-} /* extern "C" */
+}

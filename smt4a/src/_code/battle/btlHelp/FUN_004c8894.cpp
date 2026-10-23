@@ -1,74 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c8894` (_code @ 0x4c8894, 0x120 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: mask-load merging and allocation/entry constant lifetimes retain fewer registers than retail. */
+#include "battle/btlHelp.h"
+#include "battle/btlMain.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern BtlHelpGlobalsA g_btlHelp;
+BtlMainStateA *btlGetMainState(void);
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tracked);
+char *libc_strcpy(char *destination, const char *source);
 
-int asdMemoryAllocTracked(int, int, int, int, int);
-int libc_strcpy(unsigned short *, unsigned int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern int *g_btlHelp; /* 0x5738e8 */
-extern unsigned int DAT_00573908; /* 0x573908 */
-extern unsigned int DAT_0057390c; /* 0x57390c */
-extern unsigned int DAT_00573910; /* 0x573910 */
-extern unsigned int DAT_00573914; /* 0x573914 */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: libc_strcpy. */
-
-
-unsigned short * FUN_004c8894(unsigned int param_1,unsigned char param_2)
-
+// Append a help message unless the battle is in a state that suppresses messages.
+BtlHelpEntryA *FUN_004c8894(const char *text, u8 mode)
 {
-/* irregular: 2 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  unsigned short *puVar3;
-  
-  temp_v0 = btlGetMainState();
-  if (((DAT_00573908 & *(unsigned int *)(temp_v0 + 0x45a0)) == 0 &&
-       (DAT_0057390c & *(unsigned int *)(temp_v0 + 0x45a4)) == 0) &&
-     ((*(unsigned int *)(temp_v0 + 0x45a4) & DAT_00573914) == 0 &&
-      (DAT_00573910 & *(unsigned int *)(temp_v0 + 0x45a0)) == 0)) {
-    puVar3 = (unsigned short *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x880,1);
-    *puVar3 = 6;
-    puVar3[1] = 0;
-    puVar3[2] = 0;
-    puVar3[3] = 0;
-    *(unsigned int *)(puVar3 + 4) = 0;
-    *(unsigned int *)(puVar3 + 6) = 0;
-    *(unsigned char *)(puVar3 + 0x410) = param_2;
-    *(unsigned int *)(puVar3 + 0x412) = 0;
-    *(unsigned int *)(puVar3 + 0x414) = 0;
-    *(unsigned int *)(puVar3 + 0x436) = 0;
-    puVar3[0x438] = 0;
-    puVar3[0x439] = 1;
-    libc_strcpy(puVar3 + 0x416,param_1);
-    *(unsigned int *)(puVar3 + 0x43a) = 0;
-    *(unsigned int *)(puVar3 + 0x43c) = 0;
-    piVar1 = g_btlHelp;
-    if (*g_btlHelp == 0) {
-      *g_btlHelp = (int)puVar3;
+    BtlMainStateA *battle = btlGetMainState();
+    u64 flags = battle->stateFlags64.bits;
+    if (((g_btlHelp.blockedStates[0] & static_cast<u32>(flags)) |
+         (g_btlHelp.blockedStates[1] & static_cast<u32>(flags >> 32))) != 0 ||
+        ((g_btlHelp.blockedTransitions[0] & static_cast<u32>(flags)) |
+         (g_btlHelp.blockedTransitions[1] & static_cast<u32>(flags >> 32))) != 0) {
+        return NULL;
     }
-    if (piVar1[1] == 0) {
-      piVar1[1] = (int)puVar3;
+    // The shared entry padding cannot hold this aligned view without changing its extent.
+    struct HelpMessageView {
+        u16 type;
+        s16 kind;
+        u16 state;
+        u16 frame;
+        u32 value;
+        u32 timer;
+        u8 unk010[0x810];
+        u8 mode;
+        u8 unk821[3];
+        u32 request;
+        u32 resource;
+        char text[0x40];
+        u32 textHandle;
+        u16 active;
+        s16 dialogIndex;
+        BtlHelpEntryA *next;
+        BtlHelpEntryA *prev;
+    };
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlHelp.cpp", 237);
+    HelpMessageView *message = static_cast<HelpMessageView *>(asdMemoryAllocTracked(0x100, 0x100, 0, 0x880, 1));
+    message->type = 6;
+    message->kind = 0;
+    message->state = 0;
+    message->frame = 0;
+    message->value = 0;
+    message->timer = 0;
+    message->mode = mode;
+    message->request = 0;
+    message->resource = 0;
+    message->textHandle = 0;
+    message->active = 0;
+    message->dialogIndex = 1;
+    libc_strcpy(message->text, text);
+    message->next = NULL;
+    message->prev = NULL;
+    BtlHelpEntryA *entry = reinterpret_cast<BtlHelpEntryA *>(message);
+    BtlHelpListA *list = g_btlHelp.list;
+    if (list->head == NULL) {
+        list->head = entry;
     }
-    else {
-      *(unsigned short **)(piVar1[1] + 0x874) = puVar3;
-      *(int *)(puVar3 + 0x43c) = piVar1[1];
-      piVar1[1] = (int)puVar3;
+    if (list->tail == NULL) {
+        list->tail = entry;
+    } else {
+        list->tail->next = entry;
+        entry->prev = list->tail;
+        list->tail = entry;
     }
-    piVar1[2] = piVar1[2] + 1;
-    return puVar3;
-  }
-  return (unsigned short *)0x0;
+    ++list->count;
+    return entry;
 }
-
-} /* extern "C" */
+}

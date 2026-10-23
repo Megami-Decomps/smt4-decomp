@@ -431,7 +431,7 @@ code_r0x00343274:
           characterInfoPanelPopulate(*(unsigned int *)(DAT_0057f118 + 0xc),*(unsigned int *)(DAT_0057f118 + 8),
                        *(unsigned int *)(DAT_0057f118 + 0x58));
         }
-        FUN_0039a41c(0);
+        campCecPreviewEquipmentChoice(0);
         *(unsigned char *)(param_1 + 0x188) = 0;
         *(unsigned int *)(param_1 + 0x18c) = 1;
         return 0;

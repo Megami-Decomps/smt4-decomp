@@ -2,6 +2,7 @@
 #define SHARD_W5_W5MATCH5_GAME_SAVE_VIEWS_H
 
 #include "gamedata/GameData.h"
+#include <stddef.h>
 
 /* Apocalypse's work image follows the save header. */
 struct GameSaveWork {
@@ -17,11 +18,20 @@ struct GameSaveImage {
 };
 
 struct SlotRecord {
-    /* 0x00 */ u8 unk00[0x62];
+    union {
+        /* 0x00 */ u8 unk00[0x62];
+        struct {
+            u8 unk00BeforeStatus[0x60];
+            /* 0x60 */ u16 mask;
+        } status;
+    };
     /* 0x62 */ u16 entryId;
     /* 0x64 */ u16 sortKey;
     /* 0x66 */ u8 unk66[0x5E];
 };
+typedef char SlotRecordStatusOffsetCheck[
+    offsetof(SlotRecord, status.mask) == 0x60 &&
+    sizeof(SlotRecord) == 0xC4 ? 1 : -1];
 
 struct GameSlotEntry {
     /* 0x00 */ u8 unk00[0x68];

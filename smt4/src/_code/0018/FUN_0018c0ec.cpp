@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001ce0fc(...);
+int statusReplaceSkillList(...);
 int FUN_001cea8c(...);
 int FUN_00295214(...);
 int devilCreateRaceEffect(...);
@@ -140,7 +140,7 @@ extern int g_result; /* 0x44dc20 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: scrRunOpcodesStub. */
-/* Supplied declaration required: FUN_001ce0fc. */
+/* Supplied declaration required: statusReplaceSkillList. */
 /* Supplied declaration required: FUN_001cea8c. */
 /* Supplied declaration required: mapDepartAdvanceState. */
 extern int FUN_00203610(void);
@@ -1730,7 +1730,7 @@ joined_r0x0018edf0:
           FUN_0029c424(0);
           *(short *)(temp_v4 + *(int *)(temp_v2 + 0xd038) * 2 + 0x34) =
                (short)*(unsigned int *)(temp_v2 + 0xd03c);
-          FUN_001ce0fc(temp_v4 + 0x34);
+          statusReplaceSkillList(temp_v4 + 0x34);
           temp_v4 = 99;
           *(int *)(temp_v2 + 0x3534) = temp_v4;
         }

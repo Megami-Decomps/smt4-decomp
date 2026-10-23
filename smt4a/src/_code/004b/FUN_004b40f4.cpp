@@ -1,63 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b40f4` (_code @ 0x4b40f4, 0x1ac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved panel register and numeric text coordinate/width load scheduling differ. */
+#include "shard/S1ListPanel.h"
+
+// Observed prefix of the panel owning the packed numeric value.
+struct PackedNumberPanelView {
+    u8 prefix[0x7E3C];
+    u32 packedValue;
+};
+typedef char PackedNumberPanelValueOffsetCheck[offsetof(PackedNumberPanelView, packedValue) == 0x7E3C ? 1 : -1];
 
 extern "C" {
+const SpriteInfo *FUN_001834a4(u32, u32);
+void FUN_001835b4(u32, u32, u32, s32, s32, u32);
+void FUN_002c0940(char *, u32);
+f32 FUN_00168594(const char *, u32, f32);
+void FUN_00162790(u32, u32, const char *, f32, f32, f32, f32, f32);
+void FUN_00183bb0(void);
 
-int FUN_00162790(...);
-int FUN_00168594(...);
-int FUN_001835b4(int, int, int, int, int, int);
-int FUN_00183bb0(void);
-int FUN_002c0940(...);
-int VectorSignedToFloat(...);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp68; /* 0x68: local_68 */
-} param_3_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_00168594. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_002c0940. */
-
-
-void FUN_004b40f4(int param_1,int param_2,int param_3)
-
+void FUN_004b40f4(PackedNumberPanelView *panel, s32 x, s32 y)
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  unsigned char temp_v5 [72];
-  
-  temp_v0 = FUN_001834a4(0x1d,0xca);
-  FUN_001835b4(2,0x1d,0xc2,*(short *)(temp_v0 + 8) + param_2,*(short *)(temp_v0 + 10) + param_3,0x65);
-  FUN_001835b4(2,0x1d,0xc3,*(short *)(temp_v0 + 8) + param_2,*(short *)(temp_v0 + 10) + param_3,0x6a);
-  FUN_001835b4(2,0x1d,0xc4,*(short *)(temp_v0 + 8) + param_2,*(short *)(temp_v0 + 10) + param_3,0x6f);
-  FUN_001835b4(2,0x1d,0xc5,*(short *)(temp_v0 + 8) + param_2,*(short *)(temp_v0 + 10) + param_3,0x74);
-  FUN_001835b4(2,0x1d,0xc6,*(short *)(temp_v0 + 8) + param_2,*(short *)(temp_v0 + 10) + param_3,0x79);
-  temp_v3 = *(unsigned int *)(param_1 + 0x7e3c) >> 0xc;
-  if (temp_v3 >= 10000) {
-    temp_v3 = 9999;
-  }
-  temp_v1 = FUN_001834a4(0x1d,0xcb);
-  FUN_002c0940(temp_v5,temp_v3);
-  temp_v4 = 1.0f;
-  FUN_00168594(temp_v5,3);
-  temp_v2 = (int)*(short *)(temp_v0 + 8) + (int)*(short *)(temp_v1 + 8);
-  VectorSignedToFloat((int)*(short *)(temp_v0 + 10) + (int)*(short *)(temp_v1 + 10) + param_3,
-                      (unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(temp_v2 + param_2 + (0x38 - (int)temp_v4) / 2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(3,0x9fddddff,temp_v5,temp_v2);
-  FUN_00183bb0();
-  return;
+    char text[64];
+    const SpriteInfo *anchor = FUN_001834a4(0x1D, 0xCA);
+    FUN_001835b4(2, 0x1D, 0xC2, anchor->x + x, anchor->y + y, 0x65);
+    FUN_001835b4(2, 0x1D, 0xC3, anchor->x + x, anchor->y + y, 0x6A);
+    FUN_001835b4(2, 0x1D, 0xC4, anchor->x + x, anchor->y + y, 0x6F);
+    FUN_001835b4(2, 0x1D, 0xC5, anchor->x + x, anchor->y + y, 0x74);
+    FUN_001835b4(2, 0x1D, 0xC6, anchor->x + x, anchor->y + y, 0x79);
+    u32 value = panel->packedValue >> 12;
+    if (value > 9999)
+        value = 9999;
+    const SpriteInfo *number = FUN_001834a4(0x1D, 0xCB);
+    FUN_002c0940(text, value);
+    s32 width = static_cast<s32>(FUN_00168594(text, 3, 1.0f));
+    s32 textX = anchor->x + number->x + x + (56 - width) / 2;
+    s32 textY = anchor->y + number->y + y;
+    FUN_00162790(3, 0x9FDDDDFF, text, static_cast<f32>(textX), static_cast<f32>(textY), 0.0f, 1.0f, 1.0f);
+    FUN_00183bb0();
 }
-
-} /* extern "C" */
+}

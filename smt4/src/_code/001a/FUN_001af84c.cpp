@@ -18,7 +18,7 @@ typedef struct {
 
 extern int g_uiQuest; /* 0x43dd50 */
 
-extern int FUN_0028f1bc(int);
+extern int questPassesAvailabilityConditions(int);
 extern bool questIsOfferable(unsigned short);
 extern int FUN_002903f0(void);
 extern int FUN_00298dc8(void);
@@ -74,7 +74,7 @@ FUN_001af84c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         }
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 6);
-      temp_v1 = FUN_0028f1bc(temp_v5);
+      temp_v1 = questPassesAvailabilityConditions(temp_v5);
       if (temp_v1 != 0) {
         if (temp_v0) {
           FUN_002bf380(2,0x29,0xe,temp_v6,param_3,param_4);

@@ -47,7 +47,7 @@ int gameDataFlagsClear(...);
 int VectorSignedToFloat(...);
 int software_interrupt(...);
 
-int FUN_001028bc(...);
+int messageInitializeDisplay(...);
 int ifTouchAcquire(...);
 int gameDataAllocBlocks(...);
 int FUN_00102e34(...);
@@ -271,7 +271,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00102438. */
 /* Supplied declaration required: FUN_0010250c. */
-/* Supplied declaration required: FUN_001028bc. */
+/* Supplied declaration required: messageInitializeDisplay. */
 /* Supplied declaration required: ifTouchAcquire. */
 /* Supplied declaration required: FUN_00102b10. */
 /* Supplied declaration required: gameDataAllocBlocks. */
@@ -577,7 +577,7 @@ void FUN_00101308(void)
   asdTMTexTableLoadList(&LAB_001017ec);
   FUN_00103cec();
   ifTouchAcquire();
-  FUN_001028bc();
+  messageInitializeDisplay();
   FUN_00105948();
   FUN_001071a0();
   FUN_001070ac();

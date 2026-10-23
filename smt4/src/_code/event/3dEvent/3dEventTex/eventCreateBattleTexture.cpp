@@ -31,7 +31,7 @@ void memClear(void *memory, u32 size);
 EventBattleTextureRecord *dataTable00FindById(u16 id);
 s32 FUN_002c1d5c(void);
 u32 FUN_00294090(s32 textureId, s32 flags);
-u32 FUN_001e00c0(void *job);
+u32 uiStepAnimatedContentTask(void *job);
 u32 FUN_001e023c(void *job);
 void jobWorkRelease(void *job);
 void *asdProcessCreateSimple(const char *name, s32 priority, s32 flags, s32 owner,
@@ -77,7 +77,7 @@ void *eventCreateBattleTexture(u32 id, f32 x, f32 y)
     work->position[1] = y;
     work->enabled = 1;
     work->unk15 = 0;
-    void *process = asdProcessCreateSimple(k_eventBattleTextureProcessName, 2, 0, 0, FUN_001e00c0, jobWorkRelease, work);
+    void *process = asdProcessCreateSimple(k_eventBattleTextureProcessName, 2, 0, 0, uiStepAnimatedContentTask, jobWorkRelease, work);
     taskCreateDraw(k_eventBattleTextureDrawName, 0x6f, 0, 0, FUN_001e023c, 0, work, process);
     return process;
 }

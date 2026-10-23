@@ -1,71 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `event3dEventEffectCreate` (_code @ 0x39b2d0, 0x130 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the translation destination address uses r5 instead of retail r9. */
+#include "event/2dEvent/EventEffect.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include <string.h>
 
 extern "C" {
+extern const char DAT_0052f558[];
+extern const char DAT_0052f548[];
+extern const char DAT_0052f534[];
+s32 effectJobUpdateSpawn(u32 job);
+s32 FUN_0032063c(u32 job);
+void eventWorkRelease(u32 job);
+u32 asdProcessCreateSimple(const char *name, s32 group, s32 startDelay, s32 endDelay,
+                           AsdProcUpdateFunc update, AsdProcFunc end, void *work);
+u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 workSize,
+                   AsdProcUpdateFunc run, AsdProcFunc destroy, void *work, u32 parent);
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+void asdLoadFileAsyncWrap(const char *path, const void **result, u32 flags, u32 priority);
 
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int asdLoadFileAsyncWrap(...);
-int VectorSignedToFloat(...);
-
-/* stack frame of param_4: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_4_stack;
-
-extern int effectJobUpdateSpawn(...); /* 0x3205a4 */
-extern int FUN_0032063c(...); /* 0x32063c */
-extern unsigned char LAB_0038b7f0; /* 0x38b7f0 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: asdLoadFileAsyncWrap. */
-
-
-unsigned int event3dEventEffectCreate(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Create an EPL effect process and its two screen draw tasks, then load the definition.
+u32 event3dEventEffectCreate(const char *path, s32 x, s32 y, s32 z)
 {
-/* irregular: irregular input(s): in_fpscr; 7 native warning(s); review required */
-  unsigned int *puVar1;
-  char *pcVar2;
-  unsigned int in_fpscr;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x2c,1);
-  *puVar1 = 0;
-  puVar1[1] = 0;
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1[4] = 0;
-  puVar1[5] = 0;
-  puVar1[6] = 0;
-  puVar1[7] = 0;
-  puVar1[8] = 0;
-  puVar1[9] = 0;
-  puVar1[10] = 0;
-  pcVar2 = "EventEplEffect";
-  asdProcessCreateSimple("EventEplEffect",4,0,0,effectJobUpdateSpawn,&LAB_0038b7f0,puVar1);
-  *puVar1 = (unsigned int)pcVar2;
-  taskCreateDraw("EventEplEffect_Draw",0x77,0,0,FUN_0032063c,0,puVar1,pcVar2);
-  taskCreateDraw("EventEplEffect_Draw",0xd3,0,0,FUN_0032063c,0,puVar1,*puVar1);
-  temp_v2 = VectorSignedToFloat(param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v0 = VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  puVar1[7] = temp_v0;
-  puVar1[8] = temp_v1;
-  puVar1[9] = temp_v2;
-  asdLoadFileAsyncWrap(param_1,puVar1 + 2,1,0x80);
-  return *puVar1;
+    // The EPL work tail extends beyond the shared EventEffectA job/state prefix.
+    struct EffectWorkView {
+        EventEffectA base;
+        const void *pending;
+        void *current;
+        u32 started;
+        u32 unk14;
+        u32 resource;
+        f32 translation[4];
+    };
+    asdDebugTrace(DAT_0052f558, 112);
+    EffectWorkView *work = static_cast<EffectWorkView *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(EffectWorkView), 1));
+    memset(work, 0, sizeof(EffectWorkView));
+    work->base.job = asdProcessCreateSimple(DAT_0052f548, 4, 0, 0, effectJobUpdateSpawn, eventWorkRelease, work);
+    taskCreateDraw(DAT_0052f534, 0x77, 0, 0, FUN_0032063c, NULL, work, work->base.job);
+    taskCreateDraw(DAT_0052f534, 0xd3, 0, 0, FUN_0032063c, NULL, work, work->base.job);
+    work->translation[0] = static_cast<f32>(x);
+    work->translation[1] = static_cast<f32>(y);
+    work->translation[2] = static_cast<f32>(z);
+    asdLoadFileAsyncWrap(path, &work->pending, 1, 0x80);
+    return work->base.job;
 }
-
-} /* extern "C" */
+}

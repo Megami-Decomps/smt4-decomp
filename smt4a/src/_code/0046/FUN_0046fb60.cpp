@@ -1,101 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0046fb60` (_code @ 0x46fb60, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retry delay/state registers, record-pointer registers and loop comparison operands differ. */
+#include "addon/AocContentEnumeration.h"
+#include "addon/aocMain.h"
+#include "nn/Result.h"
 
 extern "C" {
+extern AocMain *g_aocMain;
+AocHandleJob *FUN_001d25a0(u32 job, u32 kind);
+WindowStatusResult FUN_005004a8(u32 *parameters, AocEnumerationResult *enumeration,
+                              AocContentRecord *records, s32 capacity, s32 offset);
+u32 legacyResourceIdRemap(WindowStatusResult *result);
+void *jyoucyuGetTableEntry(s32 index);
+s32 objGetFlagBit1(const AocContentRecord *record);
+s32 objGetFlagBit0(const AocContentRecord *record);
 
-int jyoucyuGetTableEntry(int);
-int FUN_005004a8(int *, int, int [2], unsigned int [192], int, int);
-
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp330; /* 0x330: local_330 */
-} param_2_stack;
-
-extern int g_aocMain; /* 0x570260 */
-
-/* Supplied declaration required: jyoucyuGetTableEntry. */
-extern int objGetFlagBit0(unsigned int *);
-extern int objGetFlagBit1(void);
-extern unsigned char *FUN_001d25a0(unsigned int, unsigned int);
-extern int legacyResourceIdRemap(unsigned char *);
-/* Supplied declaration required: FUN_005004a8. */
-
-
-void FUN_0046fb60(unsigned int param_1,int param_2)
-
+// Enumerate installed content, retaining enabled entries and counting flagged ones.
+void FUN_0046fb60(u32 job, AocContentEnumeration *content)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned char *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7 [192];
-  int temp_v8 [2];
-  int temp_v9;
-  unsigned int uStack_1c;
-  
-  puVar1 = (unsigned char *)FUN_001d25a0(param_1,0);
-  temp_v8[0] = 0;
-  FUN_005004a8(&temp_v9,param_2 + 8,temp_v8,temp_v7,0x20,0);
-  *(unsigned int *)(puVar1 + 4) = temp_v9;
-  *(unsigned int *)(puVar1 + 8) = uStack_1c;
-  temp_v0 = legacyResourceIdRemap(puVar1 + 4);
-  if (temp_v0 < 0) {
-    *puVar1 = 100;
-    temp_v0 = legacyResourceIdRemap(puVar1 + 4);
-    if (temp_v0 != -0x36bec6eb) {
-      if ((*(unsigned int *)(g_aocMain + 0x754) & 0x100) == 0) {
-        temp_v1 = 0x96;
-      }
-      else {
-        temp_v1 = 0x32;
-      }
-      *(unsigned int *)(puVar1 + 0x10) = temp_v1;
-      *puVar1 = 0x6a;
-      return;
-    }
-    jyoucyuGetTableEntry(0);
-  }
-  else {
-    *(unsigned int *)(param_2 + 0x310) = 0;
-    *(unsigned int *)(param_2 + 0x314) = 0;
-    temp_v0 = 0;
-    if (0 < temp_v8[0]) {
-      do {
-        temp_v2 = objGetFlagBit1();
-        if (temp_v2 != 0) {
-          temp_v2 = *(int *)(param_2 + 0x310);
-          *(int *)(param_2 + 0x310) = temp_v2 + 1;
-          temp_v1 = temp_v7[temp_v0 * 6 + 1];
-          temp_v3 = temp_v7[temp_v0 * 6 + 2];
-          temp_v4 = temp_v7[temp_v0 * 6 + 3];
-          temp_v5 = temp_v7[temp_v0 * 6 + 4];
-          temp_v6 = temp_v7[temp_v0 * 6 + 5];
-          temp_v2 = param_2 + temp_v2 * 0x18;
-          *(unsigned int *)(temp_v2 + 0x10) = temp_v7[temp_v0 * 6];
-          *(unsigned int *)(temp_v2 + 0x14) = temp_v1;
-          *(unsigned int *)(temp_v2 + 0x18) = temp_v3;
-          *(unsigned int *)(temp_v2 + 0x1c) = temp_v4;
-          *(unsigned int *)(temp_v2 + 0x20) = temp_v5;
-          *(unsigned int *)(temp_v2 + 0x24) = temp_v6;
-          temp_v2 = objGetFlagBit0(temp_v7 + temp_v0 * 6);
-          if (temp_v2 != 0) {
-            *(int *)(param_2 + 0x314) = *(int *)(param_2 + 0x314) + 1;
-          }
+    AocHandleJob *request = FUN_001d25a0(job, 0);
+    AocContentRecord records[32];
+    AocEnumerationResult enumeration;
+    enumeration.count = 0;
+    request->result = FUN_005004a8(content->parameters, &enumeration, records, 32, 0);
+    if (nnResultIsFailure(legacyResourceIdRemap(&request->result))) {
+        request->state = 100;
+        if (legacyResourceIdRemap(&request->result) == 0xC9413915) {
+            jyoucyuGetTableEntry(0);
+            return;
         }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < temp_v8[0]);
-      return;
+        request->delay = (g_aocMain->flags & 0x100) == 0 ? 150 : 50;
+        request->state = 106;
+        return;
     }
-  }
-  return;
+    content->count = 0;
+    content->flaggedCount = 0;
+    for (s32 index = 0; index < enumeration.count; ++index) {
+        const AocContentRecord *record = &records[index];
+        if (objGetFlagBit1(record)) {
+            content->entries[content->count++] = *record;
+            if (objGetFlagBit0(record))
+                ++content->flaggedCount;
+        }
+    }
 }
-
-} /* extern "C" */
+}

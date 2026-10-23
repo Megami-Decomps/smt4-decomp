@@ -33,7 +33,14 @@ struct DeferredModelWork {
     /* 0xE0C */ u8 pending;
     /* 0xE0D */ u8 unkE0D[3];
     /* 0xE10 */ u32 pendingCount;
-    /* 0xE14 */ u8 unkE14[0x28];
+    union {
+        /* 0xE14 */ u8 unkE14[0x28];
+        struct {
+            /* 0xE14 */ s32 id;
+            /* 0xE18 */ u8 unkE18[4];
+            /* 0xE1C */ char label[0x20];
+        } selection;
+    };
     /* 0xE3C */ u8 updating;
 };
 
@@ -42,5 +49,9 @@ typedef char DeferredModelIdOffsetCheck[offsetof(DeferredModelEntry, id) == 6 ? 
 typedef char DeferredModelWorkEntriesCheck[offsetof(DeferredModelWork, entries) == 0xC ? 1 : -1];
 typedef char DeferredModelWorkPendingCheck[offsetof(DeferredModelWork, pending) == 0xE0C ? 1 : -1];
 typedef char DeferredModelWorkUpdatingCheck[offsetof(DeferredModelWork, updating) == 0xE3C ? 1 : -1];
+typedef char DeferredModelSelectionOffsetsCheck[
+    offsetof(DeferredModelWork, selection.id) == 0xE14 &&
+    offsetof(DeferredModelWork, selection.label) == 0xE1C &&
+    sizeof(DeferredModelWork) == 0xE40 ? 1 : -1];
 
 #endif

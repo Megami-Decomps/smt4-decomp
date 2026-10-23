@@ -1,59 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039dda4` (_code @ 0x39dda4, 0x104 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: effect calls and arguments match; compiler orders the shared return and exceptional-effect blocks differently. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
+s32 scrGetArg(s32 index);
+u32 btlUnitGet(u32 unitId);
+BtlMainStateA *btlGetMainState(void);
+extern u32 g_btlScriptUnit;
+void FUN_004fb43c(s32 kind, u32 unit, u32 effect, s32, s32, s32, s32);
+void FUN_004fcffc(s32 kind, u32 unit, BattleRosterRecordA *record, u32 mask);
+void FUN_004fdb18(s32 kind, u32 unit, BattleRosterRecordA *record, u32 mask, s32 enabled);
 
-int scrGetArg(int);
-int FUN_004fb43c(int, unsigned int, int, int, int, int, int);
-int FUN_004fcffc(int, unsigned int, int, int);
-int FUN_004fdb18(int, unsigned int, int, int, int);
-
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrGetArg. */
-extern unsigned int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_004fb43c. */
-/* Supplied declaration required: FUN_004fcffc. */
-/* Supplied declaration required: FUN_004fdb18. */
-
-
-unsigned int FUN_0039dda4(void)
-
+// Apply or remove a roster effect selected by a battle script argument.
+u32 FUN_0039dda4(void)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = scrGetArg(2);
-  temp_v3 = btlUnitGet(g_btlScriptUnit);
-  if (temp_v2 != 0) {
-    temp_v2 = btlGetMainState();
-    FUN_004fdb18(0,temp_v3,*(int *)(temp_v2 + 0x1ed4) + temp_v0 * 0x1d0,1 << (temp_v1 & 0xff),1);
-    if (temp_v1 != 4) {
-      FUN_004fb43c(0,temp_v3,0x100025f,0,0,0,0);
+    s32 rosterIndex = scrGetArg(0);
+    s32 effectIndex = scrGetArg(1);
+    s32 enabled = scrGetArg(2);
+    u32 unit = btlUnitGet(g_btlScriptUnit);
+    if (enabled != 0) {
+        FUN_004fdb18(0, unit, &btlGetMainState()->roster[rosterIndex], 1 << effectIndex, 1);
+        if (effectIndex != 4) {
+            FUN_004fb43c(0, unit, 0x100025F, 0, 0, 0, 0);
+        } else {
+            FUN_004fb43c(0, unit, 0x1000275, 0, 0, 0, 0);
+        }
+    } else {
+        FUN_004fcffc(0, unit, &btlGetMainState()->roster[rosterIndex], 1 << effectIndex);
     }
-    else {
-      FUN_004fb43c(0,temp_v3,0x1000275,0,0,0,0);
-    }
-  }
-  else {
-    temp_v2 = btlGetMainState();
-    FUN_004fcffc(0,temp_v3,*(int *)(temp_v2 + 0x1ed4) + temp_v0 * 0x1d0,1 << (temp_v1 & 0xff));
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

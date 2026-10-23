@@ -1,85 +1,74 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00264548` (_code @ 0x264548, 0x188 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains a redundant state-1 test; callback body and cleanup instructions otherwise agree. */
+#include "map/lmapMain.h"
 
 extern "C" {
+extern LmapMainState *g_lmapMainState;
+s32 FUN_002c2a04(u32 channel);
+s32 FUN_002897e0();
+void FUN_002897d0(s32 enabled);
+s32 FUN_002897c0();
+void FUN_002897b0(s32 enabled);
+s32 FUN_002c1d5c();
+void FUN_002a03d8(u32 channel, u32 duration);
+s32 scrRunOpcodesStub(void *script);
+void gameFlagSetValue(u32 flag, u32 value, u32 width);
+void messageSlotSet(u32 slot);
+void scrScriptProcessDestroy(void *script);
+void asdMemFree(void *allocation);
+s32 FUN_002896bc();
 
-int gameFlagSetValue(int, int);
-int FUN_002897b0(int);
-int FUN_002897d0(int);
-int messageSlotSet(int);
-int FUN_002a03d8(int, int);
-int scrScriptProcessDestroy(unsigned int);
-int asdMemFree(unsigned int);
-
-extern int g_lmapMainState; /* 0x447060 */
-
-extern int scrRunOpcodesStub(unsigned int);
-extern int FUN_002896bc(void);
-/* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: FUN_002897b0. */
-extern int FUN_002897c0(void);
-/* Supplied declaration required: FUN_002897d0. */
-extern int FUN_002897e0(void);
-/* Supplied declaration required: messageSlotSet. */
-/* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-extern int FUN_002c1d5c(void);
-extern int FUN_002c2a04(unsigned int);
-/* Supplied declaration required: asdMemFree. */
-
-
-unsigned int FUN_00264548(void)
-
+u32 FUN_00264548()
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  
-  temp_v1 = g_lmapMainState;
-  piVar3 = (int *)(g_lmapMainState + 0x4f00);
-  temp_v0 = *piVar3;
-  if (temp_v0 != 0) {
-    if (((temp_v0 != 1) && (temp_v0 == 2)) && (temp_v1 = FUN_002896bc(), temp_v1 != 0)) {
-      *piVar3 = 0;
+    // The script owner and transition state extend beyond the shared map-state prefix.
+    struct ScriptView {
+        u8 unk0000[0x9e4];
+        void *firstBuffer;
+        void *secondBuffer;
+        void *script;
+        u32 completionFlag;
+        u8 unk09f4[0x450c];
+        s32 state;
+    };
+    typedef char ScriptViewOffsets[offsetof(ScriptView, firstBuffer) == 0x9e4 &&
+        offsetof(ScriptView, secondBuffer) == 0x9e8 && offsetof(ScriptView, script) == 0x9ec &&
+        offsetof(ScriptView, completionFlag) == 0x9f0 && offsetof(ScriptView, state) == 0x4f00 ? 1 : -1];
+    ScriptView *work = reinterpret_cast<ScriptView *>(g_lmapMainState);
+    switch (work->state) {
+    case 0:
+        if ((FUN_002c2a04(0) != 3 || FUN_002c2a04(1) != 3) && FUN_002897e0()) {
+            FUN_002897d0(0);
+        }
+        if (FUN_002897c0()) {
+            FUN_002897b0(0);
+            FUN_002897d0(0);
+        }
+        if (FUN_002897e0() && !FUN_002c1d5c()) {
+            FUN_002a03d8(0, 5);
+            FUN_002a03d8(1, 5);
+            FUN_002897d0(0);
+            work->state = 2;
+            return 0;
+        }
+        if (scrRunOpcodesStub(work->script) == 2) {
+            if (work->completionFlag) {
+                gameFlagSetValue(work->completionFlag, 1, 1);
+            }
+            messageSlotSet(0);
+            scrScriptProcessDestroy(work->script);
+            work->script = NULL;
+            asdMemFree(work->firstBuffer);
+            work->firstBuffer = NULL;
+            asdMemFree(work->secondBuffer);
+            work->secondBuffer = NULL;
+            return 1;
+        }
+        break;
+    case 2:
+        if (FUN_002896bc()) {
+            work->state = 0;
+        }
+        break;
     }
-  }
-  else {
-    temp_v0 = FUN_002c2a04(0);
-    if (((temp_v0 != 3) || (temp_v0 = FUN_002c2a04(1), temp_v0 != 3)) &&
-       (temp_v0 = FUN_002897e0(), temp_v0 != 0)) {
-      FUN_002897d0(0);
-    }
-    temp_v0 = FUN_002897c0();
-    if (temp_v0 != 0) {
-      FUN_002897b0(0);
-      FUN_002897d0(0);
-    }
-    temp_v0 = FUN_002897e0();
-    if ((temp_v0 != 0) && (temp_v0 = FUN_002c1d5c(), temp_v0 == 0)) {
-      FUN_002a03d8(0,5);
-      FUN_002a03d8(1,5);
-      FUN_002897d0(0);
-      *piVar3 = 2;
-      return 0;
-    }
-    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x9ec));
-    if (temp_v0 == 2) {
-      if (*(int *)(temp_v1 + 0x9f0) != 0) {
-        gameFlagSetValue(*(int *)(temp_v1 + 0x9f0),1);
-      }
-      messageSlotSet(0);
-      scrScriptProcessDestroy(*(unsigned int *)(temp_v1 + 0x9ec));
-      *(unsigned int *)(temp_v1 + 0x9ec) = 0;
-      asdMemFree(*(unsigned int *)(temp_v1 + 0x9e4));
-      *(unsigned int *)(temp_v1 + 0x9e4) = 0;
-      asdMemFree(*(unsigned int *)(temp_v1 + 0x9e8));
-      *(unsigned int *)(temp_v1 + 0x9e8) = 0;
-      return 1;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

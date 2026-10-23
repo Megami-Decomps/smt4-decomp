@@ -1,66 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002512c4` (_code @ 0x2512c4, 0x14c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: effect-speed load lacks retail's member-relative address add and two inline-call NOPs; other instructions match. */
+#include "camp/RenderCtx.h"
+#include "ui/PartyPanel.h"
+#include "shard/S3UiLookup.h"
 
 extern "C" {
+extern PartyPanel *g_partyPanel;
+extern RenderCtx *g_titleScene;
+const UiTextMetrics *FUN_002bf4f8(u32 bank, s32 entry);
+void efctSetSpeed(f32 speed);
+s32 packNibblesAndByte(u32 first, u32 second, u32 third);
+void FUN_002bf288(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
 
-int FUN_002bf288(int, int, int, int, int, unsigned int);
-int efctSetSpeed(void);
-
-typedef int romwright_code(...);
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_5_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_002bf288. */
-extern int FUN_002bf4f8(unsigned int, int);
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-
-
-void FUN_002512c4(int param_1,int param_2,int param_3,unsigned int param_4,int param_5)
-
+// Draw the normal or animated panel sprite inside the temporary alpha-blend state.
+void FUN_002512c4(s32 entry, s32 x, s32 y, u32 flags, s32 selected)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  
-  temp_v1 = FUN_002bf4f8(0x19,param_1 + 0x2d);
-  temp_v0 = g_titleScene;
-  temp_v2 = packNibblesAndByte(6,1,0);
-  piVar5 = (int *)(temp_v0 + 0x12ac);
-  temp_v3 = piVar5[*piVar5 + 2];
-  piVar5[*piVar5 + 2] = temp_v2;
-  if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v3 != temp_v2) {
-    (**(romwright_code **)(temp_v0 + 0x12c8))();
-    *(unsigned char *)(temp_v0 + 0x12c4) = 0;
-  }
-  if (param_5 != 0) {
-    efctSetSpeed();
-    FUN_002bf288(2,0x19,0x10,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,
-                 param_4);
-    efctSetSpeed();
-  }
-  else {
-    FUN_002bf288(2,0x19,0xf,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,param_4
-                );
-  }
-  temp_v0 = g_titleScene;
-  temp_v1 = packNibblesAndByte(6,7,0);
-  piVar5 = (int *)(temp_v0 + 0x12ac);
-  temp_v2 = piVar5[*piVar5 + 2];
-  piVar5[*piVar5 + 2] = temp_v1;
-  if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v2 != temp_v1) {
-    (**(romwright_code **)(temp_v0 + 0x12c8))();
-    *(unsigned char *)(temp_v0 + 0x12c4) = 0;
-  }
-  return;
+    PartyPanel *panel = g_partyPanel;
+    const UiTextMetrics *position = FUN_002bf4f8(0x19, entry + 0x2D);
+    RenderCtx *context = g_titleScene;
+    s32 blend = packNibblesAndByte(6, 1, 0);
+    renderStackSet(&context->stackB, blend);
+    if (selected != 0) {
+        efctSetSpeed(panel->members[3].effectSpeed);
+        FUN_002bf288(2, 0x19, 0x10, position->x + x, position->y + y, flags);
+        efctSetSpeed(1.0f);
+    } else {
+        FUN_002bf288(2, 0x19, 0xF, position->x + x, position->y + y, flags);
+    }
+    context = g_titleScene;
+    blend = packNibblesAndByte(6, 7, 0);
+    renderStackSet(&context->stackB, blend);
 }
-
-} /* extern "C" */
+}

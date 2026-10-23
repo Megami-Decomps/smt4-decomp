@@ -1,74 +1,83 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d5698` (_code @ 0x3d5698, 0x190 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: adjacent snapshot globals are separately addressed, with different vector register/store grouping. */
+#include "shard/W5_W5Match4_BattleVectorTransition.h"
 
 extern "C" {
+extern f32 DAT_00493518;
+extern f32 DAT_00493524;
+extern BattleVector3 DAT_00493530;
+extern BattleVector3 DAT_0049353c;
+f32 FUN_00227280(s32 mode, s32 duration, u32 frame);
+void FUN_003d7298(BattleVectorTransition *, u32);
 
-int FUN_00227280(int, unsigned int, unsigned int);
-int FUN_003d7298(int, unsigned int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern float DAT_00493518; /* 0x493518 */
-extern float DAT_00493524; /* 0x493524 */
-extern float DAT_00493530; /* 0x493530 */
-extern float DAT_00493534; /* 0x493534 */
-extern float DAT_00493538; /* 0x493538 */
-extern float DAT_0049353c; /* 0x49353c */
-extern float DAT_00493540; /* 0x493540 */
-extern float DAT_00493544; /* 0x493544 */
-
-/* Supplied declaration required: FUN_00227280. */
-/* Supplied declaration required: FUN_003d7298. */
-
-
-void FUN_003d5698(int param_1,unsigned int param_2)
-
+/* Evaluate the shared-frame scalar and vector channels, then the extended channels. */
+void FUN_003d5698(BattleVectorTransition *owner, u32 frame)
 {
-/* irregular: irregular input(s): in_s0; 2 native warning(s); review required */
-  unsigned int *puVar1;
-  float in_s0;
-  float temp_v0;
-  float temp_v1;
-  
-  if ((*(unsigned int *)(param_1 + 0x634) & 0x100000) == 0) {
-    puVar1 = (unsigned int *)(param_1 + 0x680);
-    FUN_00227280(0,*(unsigned int *)(param_1 + 0x680),param_2);
-    *(float *)(param_1 + 0x658) = DAT_00493518 + (DAT_00493524 - DAT_00493518) * in_s0;
-    *(float *)(param_1 + 0x6cc) =
-         *(float *)(param_1 + 0x5f0) +
-         (*(float *)(param_1 + 0x5ac) - *(float *)(param_1 + 0x5f0)) * in_s0;
-    *(float *)(param_1 + 0x6d0) =
-         *(float *)(param_1 + 0x5f4) +
-         (*(float *)(param_1 + 0x5b0) - *(float *)(param_1 + 0x5f4)) * in_s0;
-    *(float *)(param_1 + 0x6d4) =
-         *(float *)(param_1 + 0x5f8) +
-         (*(float *)(param_1 + 0x5b4) - *(float *)(param_1 + 0x5f8)) * in_s0;
-    temp_v1 = DAT_00493544 - DAT_00493538;
-    temp_v0 = DAT_00493540 - DAT_00493534;
-    *(float *)(param_1 + 0x6e4) = DAT_00493530 + (DAT_0049353c - DAT_00493530) * in_s0;
-    *(float *)(param_1 + 0x6e8) = DAT_00493534 + temp_v0 * in_s0;
-    *(float *)(param_1 + 0x6ec) = DAT_00493538 + temp_v1 * in_s0;
-    temp_v0 = *(float *)(param_1 + 0x5e8);
-    temp_v1 = temp_v0 - *(float *)(param_1 + 0x62c);
-    FUN_00227280(0,*puVar1,param_2);
-    *(float *)(param_1 + 0x5a4) = *(float *)(param_1 + 0x62c) + temp_v1 * temp_v0;
-    temp_v0 = *(float *)(param_1 + 0x5ec);
-    temp_v1 = temp_v0 - *(float *)(param_1 + 0x630);
-    FUN_00227280(0,*puVar1,param_2);
-    *(float *)(param_1 + 0x6a8) = *(float *)(param_1 + 0x630) + temp_v1 * temp_v0;
-    temp_v0 = *(float *)(param_1 + 0x5dc);
-    temp_v1 = temp_v0 - *(float *)(param_1 + 0x620);
-    FUN_00227280(0,*puVar1,param_2);
-    *(float *)(param_1 + 0x698) = *(float *)(param_1 + 0x620) + temp_v1 * temp_v0;
-    FUN_00227280(0,*puVar1,param_2);
-    FUN_003d7298(param_1,param_2);
-    return;
-  }
-  return;
-}
+    struct BlendChannels {
+        u8 unk000[0x5A4];
+        f32 primary;
+        u8 unk5A8[0x34];
+        f32 angleTarget;
+        u8 unk5E0[8];
+        f32 primaryTarget;
+        f32 secondaryTarget;
+        BattleVector3 origin;
+        u8 unk5FC[0x24];
+        f32 angleStart;
+        u8 unk624[8];
+        f32 primaryStart;
+        f32 secondaryStart;
+        u32 flags;
+        u8 unk638[0x20];
+        f32 scale;
+        u8 unk65C[0x24];
+        s32 duration;
+        u8 unk684[0x14];
+        f32 angle;
+        u8 unk69C[0xC];
+        f32 secondary;
+    };
+    union BlendView {
+        BattleVectorTransition vectors;
+        BlendChannels channels;
+    };
+    typedef char BlendChannelOffsets[
+        offsetof(BlendChannels, primaryTarget) == 0x5E8 &&
+        offsetof(BlendChannels, primaryStart) == 0x62C &&
+        offsetof(BlendChannels, scale) == 0x658 &&
+        offsetof(BlendChannels, duration) == 0x680 &&
+        offsetof(BlendChannels, secondary) == 0x6A8 ? 1 : -1];
+    BlendView *work = (BlendView *)owner;
+    if (work->vectors.flags & 0x100000)
+        return;
+    f32 factor = FUN_00227280(0, work->channels.duration, frame);
+    work->channels.scale = DAT_00493518 + (DAT_00493524 - DAT_00493518) * factor;
+    BattleVector3 delta = {
+        work->vectors.destination.x - work->channels.origin.x,
+        work->vectors.destination.y - work->channels.origin.y,
+        work->vectors.destination.z - work->channels.origin.z
+    };
+    work->vectors.elapsed.x = work->channels.origin.x + delta.x * factor;
+    work->vectors.elapsed.y = work->channels.origin.y + delta.y * factor;
+    work->vectors.elapsed.z = work->channels.origin.z + delta.z * factor;
+    BattleVector3 currentDelta = {
+        DAT_0049353c.x - DAT_00493530.x,
+        DAT_0049353c.y - DAT_00493530.y,
+        DAT_0049353c.z - DAT_00493530.z
+    };
+    work->vectors.current.x = DAT_00493530.x + currentDelta.x * factor;
+    work->vectors.current.y = DAT_00493530.y + currentDelta.y * factor;
+    work->vectors.current.z = DAT_00493530.z + currentDelta.z * factor;
 
-} /* extern "C" */
+    f32 primaryDelta = work->channels.primaryTarget - work->channels.primaryStart;
+    factor = FUN_00227280(0, work->channels.duration, frame);
+    work->channels.primary = work->channels.primaryStart + primaryDelta * factor;
+    f32 secondaryDelta = work->channels.secondaryTarget - work->channels.secondaryStart;
+    factor = FUN_00227280(0, work->channels.duration, frame);
+    work->channels.secondary = work->channels.secondaryStart + secondaryDelta * factor;
+    f32 angleDelta = work->channels.angleTarget - work->channels.angleStart;
+    factor = FUN_00227280(0, work->channels.duration, frame);
+    work->channels.angle = work->channels.angleStart + angleDelta * factor;
+    FUN_00227280(0, work->channels.duration, frame);
+    FUN_003d7298(owner, frame);
+}
+}

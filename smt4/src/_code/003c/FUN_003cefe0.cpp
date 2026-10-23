@@ -1,93 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cefe0` (_code @ 0x3cefe0, 0x1c4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: candidate flags collapse to an OR test, loop branches and status-query scratch allocation differ. */
+#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlAction.h"
 
+struct PartyRescueEntryView {
+    u16 timer;
+    u16 flags;
+};
 extern "C" {
+void *asdOperatorNewC(u32);
+void asdMemFreeIfNotNull(void *);
+u32 FUN_00246134(s32, u32, s32, s32);
+u32 btlGetPassiveAffinityOverride(s32, u32);
+s32 randRange(u16);
+void FUN_00246e24(u32, u32, BtlActionRecord *, u32, s32);
+BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32);
+void FUN_0022a5d8(u32, BtlEntry *, s32);
 
-int FUN_0022a5d8(int, int, int);
-int FUN_0022a918(unsigned int, int);
-int FUN_00246134(unsigned int, int, int, unsigned int);
-int FUN_00246e24(unsigned int, unsigned int, int, int, int);
-int asdMemFreeIfNotNull(int);
-int btlMainFindEntryByListedId(int, int);
-int asdOperatorNewC(void);
-
-/* stack frame of param_3: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_3_stack;
-
-/* Supplied declaration required: FUN_0022a5d8. */
-/* Supplied declaration required: FUN_0022a918. */
-extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_00246134. */
-/* Supplied declaration required: FUN_00246e24. */
-/* Supplied declaration required: asdMemFreeIfNotNull. */
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: asdOperatorNewC. */
-
-
-void FUN_003cefe0(int *param_1,unsigned int param_2,unsigned int param_3)
-
+void FUN_003cefe0(BtlMainState **owner, u32 action, u32 parameter)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned int *puVar8;
-  int temp_v7;
-  
-  if ((*(unsigned int *)(*param_1 + 0x44a0) & 4) != 0) {
-    return;
-  }
-  temp_v1 = 1;
-  temp_v6 = 0;
-  temp_v2 = 1;
-  temp_v3 = 0x10;
-  asdOperatorNewC();
-  temp_v7 = 0;
-  do {
-    puVar8 = (unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v6 * 0x288);
-    if ((((*puVar8 & 1) != 0) && ((*puVar8 & 0x40) == 0)) &&
-       (temp_v0 = *(unsigned short *)((int)puVar8 + 0x1c6), (temp_v0 & 0x400) == 0 && (temp_v0 & 4) == 0)) {
-      if ((temp_v0 & 0x200) != 0) {
-        temp_v2 = 0;
-      }
-      else {
-        temp_v4 = (unsigned int)(short)puVar8[2];
-        FUN_00246134(temp_v4,0xf,2,0xffffffff);
-        temp_v5 = (unsigned int)(short)puVar8[2];
-        FUN_0022a918(temp_v5,0xf);
-        if (((temp_v4 | temp_v5) & 0x170000) == 0) {
-          temp_v1 = 0;
-          *(int *)(temp_v3 + temp_v7 * 4) = (int)(short)puVar8[2];
-          temp_v7 = (int)(char)((char)temp_v7 + '\x01');
+    if ((*owner)->battleFlags & 4)
+        return;
+    bool noCandidates = true;
+    bool noIncapacitated = true;
+    s32 *candidates = static_cast<s32 *>(asdOperatorNewC(4 * sizeof(s32)));
+    s8 count = 0;
+    for (s32 i = 0; i < 4; ++i) {
+        BtlEntry *entry = &(*owner)->entries[i];
+        if ((entry->flags & BTL_ENTRY_FLAG_ACTIVE) && !(entry->flags & BTL_ENTRY_FLAG_BLOCKED) &&
+            !(entry->groupMask & 0x400) && !(entry->groupMask & 4)) {
+            if (entry->groupMask & 0x200) {
+                noIncapacitated = false;
+            } else {
+                u32 status = FUN_00246134(entry->members.ids[0], 15, 2, -1);
+                u32 passive = btlGetPassiveAffinityOverride(entry->members.ids[0], 15);
+                if (!((status | passive) & 0x170000)) {
+                    noCandidates = false;
+                    candidates[count++] = entry->members.ids[0];
+                }
+            }
         }
-      }
     }
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 4);
-  if (((!temp_v1 && !temp_v2) && (temp_v7 != 0)) &&
-     ((temp_v6 = randRange(99), temp_v6 < 0xf || ((*(unsigned int *)(*param_1 + 0x44a8) & 0x1000000) != 0))))
-  {
-    temp_v6 = randRange((temp_v7 - 1U) & 0xffff);
-    temp_v7 = *(int *)(*param_1 + 0x1e98) + *(int *)(temp_v3 + temp_v6 * 4) * 0x114;
-    FUN_00246e24(param_3,param_2,temp_v7,0x200,1);
-    temp_v6 = *param_1;
-    btlMainFindEntryByListedId(temp_v6,(int)*(short *)(temp_v7 + 0x62));
-    *(unsigned short *)(temp_v6 + 0x1c8) = 0;
-    *(unsigned short *)(temp_v6 + 0x1ca) = *(unsigned short *)(temp_v6 + 0x1ca) | 0x10;
-    FUN_0022a5d8(0x1c,temp_v6,1);
-  }
-  asdMemFreeIfNotNull(temp_v3);
-  return;
+    if (!noCandidates && !noIncapacitated && count &&
+        (randRange(99) < 15 || ((*owner)->editorControl.flags & 0x1000000))) {
+        BtlActionRecord *record = &(*owner)->actions.records[candidates[randRange(static_cast<u16>(count - 1))]];
+        FUN_00246e24(parameter, action, record, 0x200, 1);
+        BtlEntry *entry = btlMainFindEntryByListedId(*owner, record->memberId);
+        PartyRescueEntryView *rescue = reinterpret_cast<PartyRescueEntryView *>(entry->unk1c8);
+        rescue->timer = 0;
+        rescue->flags |= 0x10;
+        FUN_0022a5d8(0x1C, entry, 1);
+    }
+    asdMemFreeIfNotNull(candidates);
 }
-
-} /* extern "C" */
+}

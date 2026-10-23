@@ -14,7 +14,7 @@ int flaggedEntrySetValueB(...);
 int FUN_002ae164(void);
 int dataTable08Sub1GetRecord(...);
 int buttonHelpSetPreset(int);
-int FUN_0033fd64(...);
+int btlClassifySkillUse(...);
 
 /* stack frame of param_1: 8 slot(s), 20 byte(s) */
 typedef struct {
@@ -41,7 +41,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_0033fd64. */
+/* Supplied declaration required: btlClassifySkillUse. */
 
 
 void FUN_00218480(int param_1)
@@ -111,7 +111,7 @@ void FUN_00218480(int param_1)
       *(unsigned int *)(param_1 + 0x3048) = 0x24;
       flaggedEntrySetValueB(temp_v11,*(unsigned int *)(param_1 + 0x305c));
     }
-    temp_v6 = FUN_0033fd64(0xffffffff,(int)temp_v8[0]);
+    temp_v6 = btlClassifySkillUse(0xffffffff,(int)temp_v8[0]);
     temp_v3 = 0;
     if (temp_v6 != 0) {
       *(unsigned char *)puVar8 = 0;
@@ -119,7 +119,7 @@ void FUN_00218480(int param_1)
     do {
       temp_v6 = gameGetSlotTable();
       if ((*(char *)(temp_v6 + temp_v3 + 0x9108) < '\0') ||
-         (temp_v6 = FUN_0033fd64(temp_v3,(int)temp_v8[0]), temp_v6 != 0)) {
+         (temp_v6 = btlClassifySkillUse(temp_v3,(int)temp_v8[0]), temp_v6 != 0)) {
         *(unsigned char *)(param_1 + temp_v3 + 0x345d) = 0;
       }
       temp_v3 = temp_v3 + 1;

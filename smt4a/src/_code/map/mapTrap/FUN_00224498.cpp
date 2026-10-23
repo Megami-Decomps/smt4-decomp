@@ -1,84 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00224498` (_code @ 0x224498, 0x158 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: inlined load helper hoists model-path addresses across allocation calls and changes literal order. */
+#include "map/mapTrap.h"
+#include "map/mapDepart.h"
+#include "Model/ModelList.h"
+#include "classes/Obj4209cc.h"
 
 extern "C" {
-
-int FUN_00178b04(int, unsigned char *, int);
-int mapTrapClearState(void);
-int FUN_0040aa6c(void);
-int FUN_0040aad4(unsigned int, int);
-int handleRegistryRegisterObject(unsigned int, int);
-
-extern unsigned char LAB_002245fc; /* 0x2245fc */
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern unsigned int *g_mapTrap; /* 0x587f0c */
-extern unsigned char g_gameState; /* 0x5f15fc */
-
-/* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: mapTrapClearState. */
-/* Supplied declaration required: FUN_0040aa6c. */
-/* Supplied declaration required: FUN_0040aad4. */
-extern unsigned int modelListInit(void);
-/* Supplied declaration required: handleRegistryRegisterObject. */
-
-
-void FUN_00224498(int param_1,int param_2)
-
-{
-/* irregular: 5 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  mapTrapClearState();
-  temp_v0 = (*(int *)((unsigned char *)&g_gameState + 0x210));
-  puVar1 = g_mapTrap;
-  g_mapTrap[2] = (*(int *)((unsigned char *)&g_gameState + 0x210));
-  if (0 < temp_v0) {
-    *(unsigned char *)(puVar1 + 4) = 0;
-    temp_v0 = 0x20;
-    FUN_00178b04(0x20,&LAB_002245fc,0x7e);
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      temp_v1 = modelListInit();
-    }
-    puVar1[0xb] = temp_v1;
-    FUN_0040aa6c();
-    FUN_0040aad4(puVar1[0xb],0);
-    temp_v0 = *(int *)(puVar1[0xb] + 4);
-    handleRegistryRegisterObject(g_handleRegistry,temp_v0);
-    *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
-    temp_v0 = 0x20;
-    FUN_00178b04(0x20,&LAB_002245fc,0x87);
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      temp_v1 = modelListInit();
-    }
-    puVar1[0xc] = temp_v1;
-    FUN_0040aa6c();
-    FUN_0040aad4(puVar1[0xc],0);
-    temp_v0 = *(int *)(puVar1[0xc] + 4);
-    handleRegistryRegisterObject(g_handleRegistry,temp_v0);
-    *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
-    *g_mapTrap = 1;
-  }
-  puVar1 = g_mapTrap;
-  if ((param_1 == 0x1a) && (param_2 == 0xb || param_2 == 0xd)) {
-    temp_v0 = 0x20;
-    FUN_00178b04(0x20,&LAB_002245fc,0x99);
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      temp_v1 = modelListInit();
-    }
-    puVar1[0xd] = temp_v1;
-    FUN_0040aa6c();
-    FUN_0040aad4(puVar1[0xd],0);
-    temp_v0 = *(int *)(puVar1[0xd] + 4);
-    handleRegistryRegisterObject(g_handleRegistry,temp_v0);
-    *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
-  }
-  return;
+extern MapTrapA *g_mapTrap;
+extern GameStateA g_gameState;
+extern void *g_handleRegistry;
+void mapTrapClearState();
+void *FUN_00178b04(u32 size, const char *source, s32 line);
+ModelList *modelListInit(ModelList *model);
+void FUN_0040aa6c(ModelList *model, const char *path);
+void FUN_0040aad4(ModelList *model, s32 index);
+void handleRegistryRegisterObject(void *registry, ModelResourceItem *model);
 }
 
-} /* extern "C" */
+static inline void loadTrapModel(ModelList **slot, const char *path, s32 line)
+{
+    ModelList *model = static_cast<ModelList *>(FUN_00178b04(sizeof(ModelList),
+        "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTrap.cpp", line));
+    if (model != NULL)
+        model = modelListInit(model);
+    *slot = model;
+    FUN_0040aa6c(model, path);
+    FUN_0040aad4(*slot, 0);
+    ModelResourceItem *body = reinterpret_cast<ModelResourceItem *>((*slot)->content.body);
+    handleRegistryRegisterObject(g_handleRegistry, body);
+    body->flags |= 3;
+}
+
+extern "C" {
+// Build the trap effect models, including the map-specific extra display.
+void FUN_00224498(s32 area, s32 map)
+{
+    // A pointer-bearing view cannot be added to MapTrapA's byte-aligned union at 0x0D.
+    struct DisplayModels {
+        u8 phase;
+        u8 padding[0x1B];
+        ModelList *models[3];
+    };
+    typedef char DisplayModelsOffsetsCheck[offsetof(DisplayModels, models) == 0x1C ? 1 : -1];
+    mapTrapClearState();
+    MapTrapA *trap = g_mapTrap;
+    trap->setup.count = g_gameState.trapSetup.count;
+    if (trap->setup.count > 0) {
+        DisplayModels *display = reinterpret_cast<DisplayModels *>(&trap->display.phase);
+        display->phase = 0;
+        loadTrapModel(&display->models[0], "map/unit/u006.bam", 0x7E);
+        loadTrapModel(&display->models[1], "map/unit/u061.bam", 0x87);
+        g_mapTrap->setup.active = 1;
+    }
+    if (area == 0x1A && (map == 0xB || map == 0xD)) {
+        DisplayModels *display = reinterpret_cast<DisplayModels *>(&g_mapTrap->display.phase);
+        loadTrapModel(&display->models[2], "map/unit/u097.bam", 0x99);
+    }
+}
+}

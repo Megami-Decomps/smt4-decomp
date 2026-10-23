@@ -30,7 +30,7 @@ extern int FUN_00287800(void);
 extern int FUN_00287874(unsigned short);
 extern int FUN_00287894(unsigned short);
 extern int dataTable2fSub1GetRecord(int);
-extern int FUN_0028f1bc(unsigned short);
+extern int questPassesAvailabilityConditions(unsigned short);
 /* Supplied declaration required: FUN_00295a18. */
 extern int FUN_00298dc8(unsigned short);
 extern int FUN_00298e40(unsigned short, int, unsigned int *);
@@ -92,7 +92,7 @@ int FUN_001a9104(void)
           temp_v15 = 0;
           temp_v3 = FUN_00287874(temp_v2);
           if (temp_v3 != 0) {
-            temp_v3 = FUN_0028f1bc(temp_v2);
+            temp_v3 = questPassesAvailabilityConditions(temp_v2);
             if (temp_v3 != 0) {
               temp_v8 = 0;
               temp_v3 = 0;

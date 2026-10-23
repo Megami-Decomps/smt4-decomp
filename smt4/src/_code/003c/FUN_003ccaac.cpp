@@ -166,7 +166,7 @@ extern int FUN_0028299c(int);
 /* Supplied declaration required: passiveSkillLookupRecord. */
 extern int FUN_00293230(int);
 /* Supplied declaration required: FUN_002ae164. */
-extern int FUN_003bcc70(unsigned int, unsigned int, int, int, unsigned int);
+extern int btlGetApplicableAilmentMask(unsigned int, unsigned int, int, int, unsigned int);
 /* Supplied declaration required: FUN_003bcda0. */
 /* Supplied declaration required: btlRollPassiveSkill. */
 /* Supplied declaration required: FUN_003bd1d8. */
@@ -294,7 +294,7 @@ void FUN_003ccaac(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   temp_v4 = temp_v71;
   FUN_003bd2e0(temp_v71,param_5,param_6,param_7,param_8,0);
   temp_v59 = temp_v4;
-  temp_v38 = FUN_003bcc70(temp_v71,param_6,param_7,param_8,0);
+  temp_v38 = btlGetApplicableAilmentMask(temp_v71,param_6,param_7,param_8,0);
   temp_v32 = 0;
   temp_v16 = param_2[0x161];
   temp_v4 = temp_v71;

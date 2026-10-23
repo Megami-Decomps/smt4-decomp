@@ -1,89 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c3bb8` (_code @ 0x1c3bb8, 0x168 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: prefix-terminator branch folding, saved-register roles and shared success/failure exit placement differ. */
+#include "shard/W6_W6Match5_ShaderBinding.h"
+
+struct ShaderUniformSymbolRecordView {
+    u32 nameOffset;
+    u32 registerRange;
+};
+struct ShaderExecutableSymbolsView {
+    u8 unk00[0x30];
+    u32 symbolsOffset;
+    u32 symbolCount;
+    u32 stringsOffset;
+};
+/* Executable tables lie beyond NativeShaderPrefix's recovered leading byte. */
+struct ShaderUniformLookupView {
+    s32 vertexExecutable;
+    s32 geometryExecutable;
+    u8 unk08[8];
+    ShaderExecutableSymbolsView *executables[1];
+};
 
 extern "C" {
+u32 wstrlen(const char *text);
+s32 libc_strncmp(const char *first, const char *second, u32 count);
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-extern int libc_strncmp(unsigned int, int, int, unsigned int, int *, char *);
-extern int wstrlen(unsigned int);
-
-
-unsigned char FUN_001c3bb8(int *param_1,char *param_2,unsigned int param_3,unsigned int param_4)
-
+u8 FUN_001c3bb8(NativeShaderPrefix *shader, ShaderBindSymbol *binding, const char *name)
 {
-  char temp_v0;
-  char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar7;
-  unsigned int temp_v6;
-  int temp_v7;
-  char *pcVar10;
-  
-  if (*param_2 == '\x01') {
-    temp_v3 = param_1[1];
-  }
-  else {
-    temp_v3 = *param_1;
-  }
-  temp_v5 = param_1[temp_v3 + 4];
-  temp_v4 = *(int *)(temp_v5 + 0x30);
-  temp_v7 = *(int *)(temp_v5 + 0x38) + temp_v5;
-  pcVar10 = param_2;
-  temp_v3 = wstrlen(param_3);
-  temp_v6 = 0;
-  if (*(int *)(temp_v5 + 0x34) != 0) {
-    do {
-      piVar7 = (int *)(temp_v4 + temp_v5 + temp_v6 * 8);
-      temp_v2 = libc_strncmp(param_3,*piVar7 + temp_v7,temp_v3,param_4,param_1,pcVar10);
-      if ((temp_v2 == 0) &&
-         ((temp_v0 = *(char *)(*piVar7 + temp_v7 + temp_v3), temp_v0 == '\0' || (temp_v0 == '.')))) {
-        *(int *)(param_2 + 4) = *piVar7 + temp_v7;
-        temp_v6 = piVar7[1] & 0xff;
-        temp_v0 = (char)piVar7[1];
-        param_2[2] = temp_v0;
-        temp_v1 = (char)((unsigned int)piVar7[1] >> 0x10);
-        param_2[3] = temp_v1;
-        if (temp_v6 >= 0x88) {
-          return 0;
+    const ShaderUniformLookupView *lookup = (const ShaderUniformLookupView *)shader;
+    s32 executable = binding->uniform.stage == 1 ? lookup->geometryExecutable : lookup->vertexExecutable;
+    ShaderExecutableSymbolsView *binary = lookup->executables[executable];
+    const char *strings = (const char *)binary + binary->stringsOffset;
+    const ShaderUniformSymbolRecordView *symbols = (const ShaderUniformSymbolRecordView *)((const u8 *)binary + binary->symbolsOffset);
+    u32 length = wstrlen(name);
+    for (u32 i = 0; i < binary->symbolCount; ++i) {
+        const ShaderUniformSymbolRecordView *entry = &symbols[i];
+        if (!libc_strncmp(name, strings + entry->nameOffset, length) &&
+            (strings[entry->nameOffset + length] == '\0' || strings[entry->nameOffset + length] == '.')) {
+            binding->uniform.name = strings + entry->nameOffset;
+            u32 first = entry->registerRange & 0xff;
+            binding->uniform.first = first;
+            u32 last = (entry->registerRange >> 16) & 0xff;
+            binding->uniform.last = last;
+            if (first >= 0x88)
+                return 0;
+            if (first >= 0x78) {
+                binding->uniform.first = first - 0x78;
+                binding->uniform.last = last - 0x78;
+                if (binding->uniform.category != 4)
+                    return 0;
+            } else if (first >= 0x70) {
+                binding->uniform.first = first - 0x70;
+                binding->uniform.last = last - 0x70;
+                if (binding->uniform.category != 3)
+                    return 0;
+            } else if (first >= 0x10) {
+                binding->uniform.first = first - 0x10;
+                binding->uniform.last = last - 0x10;
+                if (binding->uniform.category != 2)
+                    return 0;
+            } else if (binding->uniform.category != 1) {
+                return 0;
+            }
+            return 1;
         }
-        if (temp_v6 >= 0x78) {
-          param_2[2] = temp_v0 - 'x';
-          param_2[3] = temp_v1 - 'x';
-          if (param_2[1] != '\x04') {
-            return 0;
-          }
-        }
-        else if (temp_v6 >= 0x70) {
-          param_2[2] = temp_v0 - 'p';
-          param_2[3] = temp_v1 - 'p';
-          if (param_2[1] != '\x03') {
-            return 0;
-          }
-        }
-        else if (temp_v6 >= 0x10) {
-          param_2[2] = temp_v0 - '\x10';
-          param_2[3] = temp_v1 - '\x10';
-          if (param_2[1] != '\x02') {
-            return 0;
-          }
-        }
-        else if (param_2[1] != '\x01') {
-          return 0;
-        }
-        return 1;
-      }
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < *(unsigned int *)(temp_v5 + 0x34));
-  }
-  return 0;
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

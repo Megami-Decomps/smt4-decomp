@@ -1,87 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036fad8` (_code @ 0x36fad8, 0x15c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: snow-noise allocation, stereo tasks and textures restored; compiler retains allocated work and lays out texture branches differently. */
+#include "event/2dEvent/SnowNoise.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern EventEffectGlobalsA g_eventEffect;
+extern EventFilterTexture DAT_0057f430;
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+u32 FUN_002a4488();
+u32 FUN_002a4334();
+u32 asdProcessCreateSimple(const char *name, s32 priority, u32 flags, u32 stack,
+                            u32 (*update)(), u32 destroy, void *work);
+u32 taskCreateDraw(const char *name, s32 priority, u32 flags, u32 stack,
+                   u32 (*draw)(), u32 destroy, void *work, u32 parent);
+void *textureGetIndexedResource(u32 texture);
+void asdTMTexTableLoadTmx(u32 texture, u32 flags);
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
+void asdTMTexLoadMainHeap(u32 table, u32 node);
 
-int asdTMTexTableLoadTmx(...);
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int asdTMTexLoadMainHeap(...);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern unsigned char LAB_002a4334; /* 0x2a4334 */
-extern int FUN_002a4488(...); /* 0x2a4488 */
-extern unsigned char LAB_0036fc7c; /* 0x36fc7c */
-extern unsigned char LAB_0036fc94; /* 0x36fc94 */
-extern unsigned char LAB_0036fcac; /* 0x36fcac */
-extern unsigned int *DAT_0057f3bc; /* 0x57f3bc */
-extern int DAT_0057f3c4; /* 0x57f3c4 */
-extern unsigned int DAT_0057f430; /* 0x57f430 */
-extern unsigned int DAT_0057f434; /* 0x57f434 */
-extern unsigned char DAT_0057f438; /* 0x57f438 */
-
-/* Supplied declaration required: asdTMTexTableLoadTmx. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: asdTMTexLoadMainHeap. */
-extern int textureGetIndexedResource(unsigned int);
-
-
-void FUN_0036fad8(unsigned char param_1)
-
+// Initialize the snow-noise effect, its two stereo draw tasks and shared texture requests.
+void FUN_0036fad8(u8 style)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  int temp_v0;
-  
-  if (DAT_0057f3bc == (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x18,1);
-    DAT_0057f3bc = puVar1;
-  }
-  puVar1 = DAT_0057f3bc;
-  *DAT_0057f3bc = 0;
-  puVar1[1] = 0;
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1[4] = 0;
-  puVar1[5] = 0;
-  puVar2 = &LAB_0036fc7c;
-  asdProcessCreateSimple(&LAB_0036fc7c,3,0,0,FUN_002a4488,0,0);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_0036fc94,0x85,0,0,&LAB_002a4334,0,0,puVar2);
-  taskCreateDraw(&LAB_0036fcac,0xe1,0,0,&LAB_002a4334,0,0,*puVar1);
-  puVar1[3] = 0;
-  puVar1[4] = 0;
-  *(unsigned char *)(puVar1 + 5) = 0;
-  *(unsigned char *)((int)puVar1 + 0x15) = param_1;
-  temp_v0 = textureGetIndexedResource(0x35);
-  if (temp_v0 != 0) {
-    DAT_0057f3c4 = DAT_0057f3c4 + 1;
-  }
-  else {
-    asdTMTexTableLoadTmx(0x35,0);
-    DAT_0057f3c4 = 0;
-  }
-  temp_v0 = asdTMTexTableNodeIsLoaded(DAT_0057f430,DAT_0057f434);
-  if (temp_v0 == 0) {
-    asdTMTexLoadMainHeap(DAT_0057f430,DAT_0057f434);
-    DAT_0057f438 = 1;
-  }
-  puVar1[2] = 0;
-  return;
+    if (g_eventEffect.unk08 == NULL) {
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\event\\2dEvent\\EventEffect.cpp", 1031);
+        g_eventEffect.unk08 = asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(EventSnowNoiseWork), 1);
+    }
+    EventSnowNoiseWork *work = static_cast<EventSnowNoiseWork *>(g_eventEffect.unk08);
+    for (u32 word = 0; word < sizeof(*work) / sizeof(u32); ++word)
+        reinterpret_cast<u32 *>(work)[word] = 0;
+    u32 process = asdProcessCreateSimple("EvtSnowNoise Calc", 3, 0, 0, FUN_002a4488, 0, NULL);
+    work->job = process;
+    taskCreateDraw("EvtSnowNoise DrawUpLeft", 0x85, 0, 0, FUN_002a4334, 0, NULL, process);
+    taskCreateDraw("EvtSnowNoise DrawUpRight", 0xE1, 0, 0, FUN_002a4334, 0, NULL, work->job);
+    work->frame = 0;
+    work->opacity = 0.0f;
+    work->complete = 0;
+    work->style = style;
+    if (textureGetIndexedResource(0x35) != NULL) {
+        ++g_eventEffect.textureUsers;
+    } else {
+        asdTMTexTableLoadTmx(0x35, 0);
+        g_eventEffect.textureUsers = 0;
+    }
+    if (!asdTMTexTableNodeIsLoaded(DAT_0057f430.table, DAT_0057f430.node)) {
+        asdTMTexLoadMainHeap(DAT_0057f430.table, DAT_0057f430.node);
+        DAT_0057f430.requested = 1;
+    }
+    work->state = 0;
 }
-
-} /* extern "C" */
+}

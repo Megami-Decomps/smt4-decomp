@@ -1,80 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f67ec` (_code @ 0x1f67ec, 0x18c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: shared angular phase uses one extra VFP register; descriptor and render-stack push scheduling differ. */
+#include "camp/RenderCtx.h"
+#include "shard/Shard0036.h"
+
+struct TitleRadialGradient {
+    u8 prefix[0xC];
+    RgbaWord color;
+    u8 unk10[4];
+    f32 firstX, firstY;
+    f32 lastX, lastY;
+};
+typedef char TitleRadialGradientOffsets[offsetof(TitleRadialGradient, color) == 0xC &&
+    offsetof(TitleRadialGradient, firstX) == 0x14 && offsetof(TitleRadialGradient, lastX) == 0x1C ? 1 : -1];
 
 extern "C" {
+extern RenderCtx *g_titleScene;
+void FUN_002c1b64(RenderCtx *, u32);
+s32 FUN_002c5d80(u32, u32);
+void FUN_002573d8(void);
+void effectSpawnPositionDefault(RgbaWord, f32, f32, f32);
+f32 phaseCosInterpolate(f32);
+f32 FUN_002b70cc(f32);
+void forwardRecoveredCallback(void);
 
-int effectSpawnPositionDefault(unsigned int);
-int FUN_002573d8(void);
-int forwardRecoveredCallback(void);
-int phaseCosInterpolate(void);
-int FUN_002b70cc(void);
-int FUN_002c1b64(int, int);
-int VectorSignedToFloat(int, int);
-
-typedef int romwright_code(...);
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: effectSpawnPositionDefault. */
-/* Supplied declaration required: FUN_002573d8. */
-/* Supplied declaration required: forwardRecoveredCallback. */
-/* Supplied declaration required: phaseCosInterpolate. */
-/* Supplied declaration required: FUN_002b70cc. */
-/* Supplied declaration required: FUN_002c1b64. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-
-
-void FUN_001f67ec(int param_1)
-
+void FUN_001f67ec(const TitleRadialGradient *gradient)
 {
-/* irregular: irregular input(s): in_fpscr; 7 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int *piVar6;
-  int temp_v5;
-  unsigned int in_fpscr;
-  
-  temp_v1 = *(unsigned int *)(param_1 + 0xc);
-  temp_v0 = *(unsigned char *)(param_1 + 0xf);
-  temp_v1 = (temp_v1 << 0x18) | (((temp_v1 >> 8) & 0xff) << 0x10) | (((temp_v1 >> 0x10) & 0xff) << 8);
-  FUN_002c1b64(g_titleScene,0);
-  temp_v5 = g_titleScene;
-  temp_v2 = FUN_002c5d80(1,0);
-  piVar6 = (int *)(temp_v5 + 0x124c);
-  temp_v3 = *piVar6;
-  temp_v4 = piVar6[temp_v3 + 2];
-  *piVar6 = temp_v3 + 1;
-  piVar6[temp_v3 + 3] = temp_v2;
-  if (*(char *)(temp_v5 + 0x1264) != '\0' || temp_v4 != temp_v2) {
-    (**(romwright_code **)(temp_v5 + 0x1268))();
-    *(unsigned char *)(temp_v5 + 0x1264) = 0;
-  }
-  FUN_002573d8();
-  effectSpawnPositionDefault(temp_v1 | temp_v0);
-  temp_v5 = 0;
-  do {
-    VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-    phaseCosInterpolate();
-    VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002b70cc();
-    effectSpawnPositionDefault(temp_v1);
-    temp_v5 = temp_v5 + 1;
-  } while (temp_v5 < 0x13);
-  forwardRecoveredCallback();
-  temp_v5 = g_titleScene;
-  piVar6 = (int *)(g_titleScene + 0x124c);
-  temp_v2 = *piVar6;
-  temp_v3 = piVar6[temp_v2 + 2];
-  *piVar6 = temp_v2 - 1;
-  if (*(char *)(temp_v5 + 0x1264) != '\0' || temp_v3 != piVar6[temp_v2 + 1]) {
-    (**(romwright_code **)(temp_v5 + 0x1268))();
-    *(unsigned char *)(temp_v5 + 0x1264) = 0;
-  }
-  return;
+    RgbaWord centerColor;
+    centerColor.word = (__rev(gradient->color.word) & ~0xFFu) | gradient->color.rgba.a;
+    RgbaWord edgeColor;
+    edgeColor.word = centerColor.word & ~0xFFu;
+    FUN_002c1b64(g_titleScene, 0);
+    RenderCtx *context = g_titleScene;
+    renderCtxPushA(context, FUN_002c5d80(1, 0));
+    f32 centerX = gradient->firstX + (gradient->lastX - gradient->firstX) * 0.5f;
+    f32 centerY = gradient->firstY + (gradient->lastY - gradient->firstY) * 0.5f;
+    f32 radius = (gradient->lastX - gradient->firstX) * 0.5f;
+    FUN_002573d8();
+    effectSpawnPositionDefault(centerColor, centerX, centerY, 0.0f);
+    for (s32 i = 0; i < 19; ++i) {
+        f32 phase = static_cast<f32>(i) * 6.2831855f * (1.0f / 18.0f) * 40.743664f;
+        f32 x = centerX + radius * phaseCosInterpolate(phase);
+        f32 y = centerY + radius * FUN_002b70cc(phase);
+        effectSpawnPositionDefault(edgeColor, x, y, 0.0f);
+    }
+    forwardRecoveredCallback();
+    renderStackPop(&g_titleScene->stackA);
 }
-
-} /* extern "C" */
+}

@@ -1,81 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00123254` (_code @ 0x123254, 0x130 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: next-handle store is unconditional; null-head unlink block and saved context registers differ. */
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "gfx/HandleRegistry.h"
 
 extern "C" {
+extern AsdGfxContext g_asdGfxContext;
+extern GfxHandleAllocator g_gfxAllocateCallback;
+extern u8 *g_commandBufferCursor;
+extern u8 *g_commandBufferEnd;
 
-typedef int romwright_code(...);
-extern romwright_code *g_gfxReleaseCallback; /* 0x44e334 */
-extern unsigned int DAT_0044e338; /* 0x44e338 */
-extern unsigned int g_commandBufferCursor; /* 0x4652a0 */
-extern unsigned int g_commandBufferEnd; /* 0x4652a4 */
-extern unsigned char DAT_004c62a2; /* 0x4c62a2 */
-extern unsigned int *DAT_004c632c; /* 0x4c632c */
-extern unsigned int *DAT_004c6330; /* 0x4c6330 */
-
-
-void FUN_00123254(int param_1,int param_2)
-
+// Delete named command buffers from the sorted hash buckets, releasing bound buffers as needed.
+void FUN_00123254(s32 count, const u32 *handles)
 {
-/* irregular: irregular input(s): in_r12 */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  unsigned int temp_v1;
-  int temp_v2;
-  romwright_code *in_r12;
-  
-  temp_v2 = 0;
-  if (temp_v2 < param_1) {
-    do {
-      temp_v1 = *(unsigned int *)(param_2 + temp_v2 * 4);
-      if (temp_v1 != 0) {
-        puVar2 = (unsigned int *)0x0;
-        for (puVar3 = *(unsigned int **)((temp_v1 & 0x1f) * 4 + 0x4c62ac); puVar3 != (unsigned int *)0x0;
-            puVar3 = (unsigned int *)puVar3[0x10]) {
-          if (temp_v1 <= *puVar3) {
-            if ((puVar3 != (unsigned int *)0x0) && (*puVar3 == temp_v1)) {
-              if (DAT_004c6330 == puVar3) {
-                DAT_004c6330 = (unsigned int *)0x0;
-                DAT_004c62a2 = 0;
-              }
-              if (DAT_004c632c == puVar3) {
-                g_commandBufferEnd = 0;
-                g_commandBufferCursor = 0;
-                DAT_004c632c = (unsigned int *)0x0;
-              }
-              if (puVar3[1] != 0) {
-                in_r12 = g_gfxReleaseCallback;
-              }
-              if (puVar3[1] != 0 && in_r12 != (romwright_code *)0x0) {
-                (*in_r12)(0x10000,0x105,*puVar3);
-              }
-              temp_v1 = *(unsigned int *)(param_2 + temp_v2 * 4);
-              if (temp_v1 < DAT_0044e338) {
-                DAT_0044e338 = temp_v1;
-              }
-              if (puVar2 != (unsigned int *)0x0) {
-                puVar2[0x10] = puVar3[0x10];
-              }
-              else {
-                temp_v0 = (temp_v1 & 0x1f) * 4;
-                *(unsigned int *)(temp_v0 + 0x4c62ac) =
-                     *(unsigned int *)(*(int *)(temp_v0 + 0x4c62ac) + 0x40);
-              }
-              in_r12 = g_gfxReleaseCallback;
-              if (g_gfxReleaseCallback != (romwright_code *)0x0) {
-                (*g_gfxReleaseCallback)(0x10000,0x100,0,puVar3);
-              }
+    // The linked-list pointer follows the shared buffer prefix; do not grow that prefix.
+    struct BufferNode { AsdCmdBuffer buffer; AsdCmdBuffer *next; };
+    for (s32 index = 0; index < count; ++index) {
+        u32 handle = handles[index];
+        if (handle != 0) {
+            BufferNode *previous = NULL;
+            BufferNode *node = reinterpret_cast<BufferNode *>(g_asdGfxContext.bufferRegistry.buckets[handle & 31]);
+            while (node != NULL) {
+                if (handle <= node->buffer.unk00) {
+                    break;
+                }
+                previous = node;
+                node = reinterpret_cast<BufferNode *>(node->next);
             }
-            break;
-          }
-          puVar2 = puVar3;
+            if (node != NULL && node->buffer.unk00 == handle) {
+                if (g_asdGfxContext.activeBuffer == &node->buffer) {
+                    g_asdGfxContext.activeBuffer = NULL;
+                    g_asdGfxContext.submission.enabled = 0;
+                }
+                if (g_asdGfxContext.cmdBuffer == &node->buffer) {
+                    g_commandBufferEnd = NULL;
+                    g_commandBufferCursor = NULL;
+                    g_asdGfxContext.cmdBuffer = NULL;
+                }
+                if (node->buffer.start != NULL && g_gfxAllocateCallback.release != NULL) {
+                    g_gfxAllocateCallback.release(0x10000, 0x105, node->buffer.unk00, node->buffer.start);
+                }
+                handle = handles[index];
+                if (handle < g_gfxAllocateCallback.nextBufferId) {
+                    g_gfxAllocateCallback.nextBufferId = handle;
+                }
+                if (previous != NULL) {
+                    previous->next = node->next;
+                } else {
+                    BufferNode *head = reinterpret_cast<BufferNode *>(g_asdGfxContext.bufferRegistry.buckets[handle & 31]);
+                    g_asdGfxContext.bufferRegistry.buckets[handle & 31] = head->next;
+                }
+                if (g_gfxAllocateCallback.release != NULL) {
+                    g_gfxAllocateCallback.release(0x10000, 0x100, 0, node);
+                }
+            }
         }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < param_1);
-  }
-  return;
+    }
 }
-
-} /* extern "C" */
+}

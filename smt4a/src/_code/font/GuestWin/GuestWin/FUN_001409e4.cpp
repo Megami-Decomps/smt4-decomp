@@ -1,75 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001409e4` (_code @ 0x1409e4, 0x138 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: parameter tables load independent addresses instead of retail's adjacent-table subtractions. */
+#include "font/GuestWin/GuestWin.h"
+#include "ui/UiSpriteState.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
+void sysMemClear(void *, u32);
+u32 asdProcessCreateSimple(const char *, u32, u32, u32, void (*)(), u32, u32);
+void taskCreateDraw(const char *, u32, u32, u32, void (*)(), u32, u32, u32);
+void guestWinUpdate(void);
+void FUN_00155840(void);
+void paramsClearPacket(void *);
+void paramsInit(void *, const void *, u32, const void *, u32, u32, u32, u32, u32, const void *, u32);
+void FUN_0014e188(UiSpriteState *, u32, u32, void *, u32, f32);
+void uiSpriteSelectAnim(UiSpriteState *, s32);
+extern u8 DAT_0052fa2c[], DAT_0052fa44[], DAT_0052fa5c[];
+extern GuestWinWorkA *g_guestWin;
 
-int FUN_0014e188(...);
-int asdProcessCreateSimple(...);
-int paramsInit(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int uiSpriteSelectAnim(...);
-int sysMemClear(...);
-int paramsClearPacket(...);
-
-/* stack frame of void: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
-
-extern unsigned char LAB_00140b5c; /* 0x140b5c */
-extern unsigned char LAB_00140b70; /* 0x140b70 */
-extern unsigned char LAB_00140b84; /* 0x140b84 */
-extern int FUN_00155840(...); /* 0x155840 */
-extern int guestWinUpdate(...); /* 0x1563dc */
-extern unsigned char DAT_0052fa2c; /* 0x52fa2c */
-extern unsigned char DAT_0052fa44; /* 0x52fa44 */
-extern unsigned char DAT_0052fa5c; /* 0x52fa5c */
-extern unsigned int *g_guestWin; /* 0x57f570 */
-
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: paramsClearPacket. */
-
-
+// Allocate the guest window and create its update, left-screen and right-screen draw tasks.
 void FUN_001409e4(void)
-
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  
-  if (g_guestWin == (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0xbc,1);
-    g_guestWin = puVar1;
-  }
-  puVar1 = g_guestWin;
-  sysMemClear();
-  puVar2 = &LAB_00140b5c;
-  asdProcessCreateSimple(&LAB_00140b5c,3,0,0,guestWinUpdate,0,0);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_00140b70,0x86,0,0,FUN_00155840,0,0,puVar2);
-  taskCreateDraw(&LAB_00140b84,0xe2,0,0,FUN_00155840,0,0,*puVar1);
-  puVar1 = g_guestWin;
-  paramsClearPacket(g_guestWin + 4);
-  paramsInit(puVar1 + 4,&DAT_0052fa2c,0x18,&DAT_0052fa44,0x18,0,0,0,0,&DAT_0052fa5c,0x70);
-  FUN_0014e188(puVar1 + 0xc,8,0x87,puVar1 + 4,1);
-  uiSpriteSelectAnim(puVar1 + 0xc,0);
-  return;
+    // Full sprite extends beyond GuestWinWorkA's shared prefix.
+    struct GuestWindowView {
+        u32 process;
+        u8 unk04[0xc];
+        u8 parameters[0x20];
+        UiSpriteState sprite;
+    };
+    typedef char GuestWindowOffsets[offsetof(GuestWindowView, sprite) == 0x30 &&
+        sizeof(GuestWindowView) == 0xbc ? 1 : -1];
+    if (!g_guestWin) {
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\font\\GuestWin\\GuestWin.cpp", 248);
+        g_guestWin = static_cast<GuestWinWorkA *>(asdMemoryAllocTracked(0x100, 0x100, 0, 0xbc, 1));
+    }
+    GuestWindowView *work = reinterpret_cast<GuestWindowView *>(g_guestWin);
+    sysMemClear(work, sizeof(*work));
+    u32 process = asdProcessCreateSimple("GuestWin Calc", 3, 0, 0, guestWinUpdate, 0, 0);
+    work->process = process;
+    taskCreateDraw("GuestWin DrawUpLeft", 0x86, 0, 0, FUN_00155840, 0, 0, process);
+    taskCreateDraw("GuestWin DrawUpRight", 0xe2, 0, 0, FUN_00155840, 0, 0, work->process);
+    work = reinterpret_cast<GuestWindowView *>(g_guestWin);
+    paramsClearPacket(work->parameters);
+    paramsInit(work->parameters, DAT_0052fa2c, 0x18, DAT_0052fa44, 0x18, 0, 0, 0, 0, DAT_0052fa5c, 0x70);
+    FUN_0014e188(&work->sprite, 8, 0x87, work->parameters, 1, 1.0f);
+    uiSpriteSelectAnim(&work->sprite, 0);
 }
-
-} /* extern "C" */
+}

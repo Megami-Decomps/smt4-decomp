@@ -1,74 +1,83 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f0c80` (_code @ 0x4f0c80, 0x198 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: adjacent snapshot globals are separately addressed, with different vector register/store grouping. */
+#include "shard/W5_W5Match8_CameraTransition.h"
 
 extern "C" {
+extern f32 DAT_005e1518;
+extern f32 DAT_005e1524;
+extern W5Match8Vec3 g_cameraAlternateProgressStart;
+extern W5Match8Vec3 g_cameraAlternateProgressPrevious;
+f32 FUN_003d4dd4(s32 mode, s32 duration, u32 frame);
+void FUN_004f2ae4(W5Match8CameraTransition *, u32);
 
-int FUN_003d4dd4(int, unsigned int, unsigned int);
-int FUN_004f2ae4(int, unsigned int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern float DAT_005e1518; /* 0x5e1518 */
-extern float DAT_005e1524; /* 0x5e1524 */
-extern float g_cameraAlternateProgressStart; /* 0x5e1530 */
-extern float DAT_005e1534; /* 0x5e1534 */
-extern float DAT_005e1538; /* 0x5e1538 */
-extern float g_cameraAlternateProgressPrevious; /* 0x5e153c */
-extern float DAT_005e1540; /* 0x5e1540 */
-extern float DAT_005e1544; /* 0x5e1544 */
-
-/* Supplied declaration required: FUN_003d4dd4. */
-/* Supplied declaration required: FUN_004f2ae4. */
-
-
-void FUN_004f0c80(int param_1,unsigned int param_2)
-
+/* Evaluate the common-frame camera channels, then the extended transition channels. */
+void FUN_004f0c80(W5Match8CameraTransition *owner, u32 frame)
 {
-/* irregular: irregular input(s): in_s0; 2 native warning(s); review required */
-  unsigned int *puVar1;
-  float in_s0;
-  float temp_v0;
-  float temp_v1;
-  
-  if ((*(unsigned int *)(param_1 + 0x64c) & 0x100000) == 0) {
-    puVar1 = (unsigned int *)(param_1 + 0x6ec);
-    FUN_003d4dd4(0,*(unsigned int *)(param_1 + 0x6ec),param_2);
-    *(float *)(param_1 + 0x6c4) = DAT_005e1518 + (DAT_005e1524 - DAT_005e1518) * in_s0;
-    *(float *)(param_1 + 0x738) =
-         *(float *)(param_1 + 0x608) +
-         (*(float *)(param_1 + 0x5c4) - *(float *)(param_1 + 0x608)) * in_s0;
-    *(float *)(param_1 + 0x73c) =
-         *(float *)(param_1 + 0x60c) +
-         (*(float *)(param_1 + 0x5c8) - *(float *)(param_1 + 0x60c)) * in_s0;
-    *(float *)(param_1 + 0x740) =
-         *(float *)(param_1 + 0x610) +
-         (*(float *)(param_1 + 0x5cc) - *(float *)(param_1 + 0x610)) * in_s0;
-    temp_v1 = DAT_005e1544 - DAT_005e1538;
-    temp_v0 = DAT_005e1540 - DAT_005e1534;
-    *(float *)(param_1 + 0x750) = g_cameraAlternateProgressStart + (g_cameraAlternateProgressPrevious - g_cameraAlternateProgressStart) * in_s0;
-    *(float *)(param_1 + 0x754) = DAT_005e1534 + temp_v0 * in_s0;
-    *(float *)(param_1 + 0x758) = DAT_005e1538 + temp_v1 * in_s0;
-    temp_v0 = *(float *)(param_1 + 0x600);
-    temp_v1 = temp_v0 - *(float *)(param_1 + 0x644);
-    FUN_003d4dd4(0,*puVar1,param_2);
-    *(float *)(param_1 + 0x5bc) = *(float *)(param_1 + 0x644) + temp_v1 * temp_v0;
-    temp_v0 = *(float *)(param_1 + 0x604);
-    temp_v1 = temp_v0 - *(float *)(param_1 + 0x648);
-    FUN_003d4dd4(0,*puVar1,param_2);
-    *(float *)(param_1 + 0x714) = *(float *)(param_1 + 0x648) + temp_v1 * temp_v0;
-    temp_v0 = *(float *)(param_1 + 0x5f4);
-    temp_v1 = temp_v0 - *(float *)(param_1 + 0x638);
-    FUN_003d4dd4(0,*puVar1,param_2);
-    *(float *)(param_1 + 0x704) = *(float *)(param_1 + 0x638) + temp_v1 * temp_v0;
-    FUN_003d4dd4(0,*puVar1,param_2);
-    FUN_004f2ae4(param_1,param_2);
-    return;
-  }
-  return;
-}
+    struct BlendChannels {
+        u8 unk000[0x5BC];
+        f32 primary;
+        u8 unk5C0[0x34];
+        f32 angleTarget;
+        u8 unk5F8[8];
+        f32 primaryTarget;
+        f32 secondaryTarget;
+        W5Match8Vec3 origin;
+        u8 unk614[0x24];
+        f32 angleStart;
+        u8 unk63C[8];
+        f32 primaryStart;
+        f32 secondaryStart;
+        u32 flags;
+        u8 unk650[0x74];
+        f32 scale;
+        u8 unk6C8[0x24];
+        s32 duration;
+        u8 unk6F0[0x14];
+        f32 angle;
+        u8 unk708[0xC];
+        f32 secondary;
+    };
+    union BlendView {
+        W5Match8CameraTransition camera;
+        BlendChannels channels;
+    };
+    typedef char BlendChannelOffsets[
+        offsetof(BlendChannels, primaryTarget) == 0x600 &&
+        offsetof(BlendChannels, primaryStart) == 0x644 &&
+        offsetof(BlendChannels, scale) == 0x6C4 &&
+        offsetof(BlendChannels, duration) == 0x6EC &&
+        offsetof(BlendChannels, secondary) == 0x714 ? 1 : -1];
+    BlendView *work = (BlendView *)owner;
+    if (work->camera.flags & 0x100000)
+        return;
+    f32 factor = FUN_003d4dd4(0, work->channels.duration, frame);
+    work->channels.scale = DAT_005e1518 + (DAT_005e1524 - DAT_005e1518) * factor;
+    W5Match8Vec3 delta = {
+        work->camera.target.x - work->channels.origin.x,
+        work->camera.target.y - work->channels.origin.y,
+        work->camera.target.z - work->channels.origin.z
+    };
+    work->camera.targetProgress.x = work->channels.origin.x + delta.x * factor;
+    work->camera.targetProgress.y = work->channels.origin.y + delta.y * factor;
+    work->camera.targetProgress.z = work->channels.origin.z + delta.z * factor;
+    W5Match8Vec3 currentDelta = {
+        g_cameraAlternateProgressPrevious.x - g_cameraAlternateProgressStart.x,
+        g_cameraAlternateProgressPrevious.y - g_cameraAlternateProgressStart.y,
+        g_cameraAlternateProgressPrevious.z - g_cameraAlternateProgressStart.z
+    };
+    work->camera.alternateProgress.x = g_cameraAlternateProgressStart.x + currentDelta.x * factor;
+    work->camera.alternateProgress.y = g_cameraAlternateProgressStart.y + currentDelta.y * factor;
+    work->camera.alternateProgress.z = g_cameraAlternateProgressStart.z + currentDelta.z * factor;
 
-} /* extern "C" */
+    f32 primaryDelta = work->channels.primaryTarget - work->channels.primaryStart;
+    factor = FUN_003d4dd4(0, work->channels.duration, frame);
+    work->channels.primary = work->channels.primaryStart + primaryDelta * factor;
+    f32 secondaryDelta = work->channels.secondaryTarget - work->channels.secondaryStart;
+    factor = FUN_003d4dd4(0, work->channels.duration, frame);
+    work->channels.secondary = work->channels.secondaryStart + secondaryDelta * factor;
+    f32 angleDelta = work->channels.angleTarget - work->channels.angleStart;
+    factor = FUN_003d4dd4(0, work->channels.duration, frame);
+    work->channels.angle = work->channels.angleStart + angleDelta * factor;
+    FUN_003d4dd4(0, work->channels.duration, frame);
+    FUN_004f2ae4(owner, frame);
+}
+}

@@ -317,7 +317,16 @@ struct RenderUpdateOutputPrefixA {
 /* Opaque source storage; no matrix representation is established here.
  * This prefix's end does not establish the context object's end. */
 struct RenderUpdateContextPrefixA {
-    u8 unk000[0xA8];
+    union {
+        u8 unk000[0xA8];
+        struct {
+            u8 prefix[0x28];
+            f32 fieldOfView;
+            f32 nearClip;
+            f32 farClip;
+            f32 aspect;
+        } projection;
+    };
     u8 transform[0x40];
 };
 
@@ -327,7 +336,14 @@ struct RenderUpdateStatePrefixA {
     u32 flags;
     u8 unk008[0x10];
     RenderUpdateOutputPrefixA *output;
-    u8 unk01C[0xB8];
+    union {
+        u8 unk01C[0xB8];
+        struct {
+            u8 prefix[0xB0];
+            s32 kind;
+            f32 depthOffset;
+        } projection;
+    };
     f32 value3;
     f32 value4;
     u8 unk0DC[4];
@@ -367,6 +383,15 @@ typedef char RenderUpdateStatePrefixALayoutCheck[
     offsetof(RenderUpdateStatePrefixA, attribute1) == 0x191 &&
     offsetof(RenderUpdateStatePrefixA, attribute2) == 0x192 &&
     offsetof(RenderUpdateStatePrefixA, mode) == 0x193 ? 1 : -1];
+typedef char RenderUpdateProjectionOffsets[
+    offsetof(RenderUpdateContextPrefixA, projection.fieldOfView) == 0x28 &&
+    offsetof(RenderUpdateContextPrefixA, projection.nearClip) == 0x2c &&
+    offsetof(RenderUpdateContextPrefixA, projection.farClip) == 0x30 &&
+    offsetof(RenderUpdateContextPrefixA, projection.aspect) == 0x34 &&
+    offsetof(RenderUpdateStatePrefixA, projection.kind) == 0xcc &&
+    offsetof(RenderUpdateStatePrefixA, projection.depthOffset) == 0xd0 &&
+    sizeof(RenderUpdateContextPrefixA) == 0xe8 &&
+    sizeof(RenderUpdateStatePrefixA) == 0x194 ? 1 : -1];
 
 /* Pointer-only dependency; allocation size does not recover its members. */
 struct EnemyDrawResourcesA;

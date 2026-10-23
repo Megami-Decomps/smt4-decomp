@@ -1,79 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033a670` (_code @ 0x33a670, 0x110 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler places the shared zero-HP store in the demon branch rather than the player branch. */
+#include "shard/W4_Match6_BtlEntry.h"
+#include "shard/Shard0031.h"
 
 extern "C" {
+void unitStateClearEventBits(u16 *flags);
+SlotTable *gameGetSlotTable();
+BtlEquip *gameGetPlayerData();
+BtlEquip *gameGetUnitRecord(s32 index);
 
-int unitStateClearEventBits(...);
-int SCARRY4(unsigned int, int);
-
-/* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
-/* Supplied declaration required: unitStateClearEventBits. */
-extern int gameGetUnitRecord(int);
-extern int gameGetSlotTable(void);
-extern int gameGetPlayerData(void);
-
-
-void FUN_0033a670(int param_1)
-
+// Clear transient event state, retaining KO state and its zero-HP consequence.
+void FUN_0033a670(BtlMainState *battle)
 {
-/* irregular: 1 goto(s); 2 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int *puVar6;
-  
-  temp_v3 = 0;
-  do {
-    puVar6 = (unsigned int *)(*(int *)(param_1 + 0x1fc0) + temp_v3 * 0x288);
-    if ((((puVar6 != (unsigned int *)0x0) && (temp_v1 = *puVar6, (temp_v1 & 1) != 0)) && ((temp_v1 & 0x40) == 0))
-       && ((temp_v1 & 0x10) == 0)) {
-      if (puVar6[0x9e] != 0) {
-        unitStateClearEventBits(puVar6[0x9e] + 0x72);
-        temp_v1 = puVar6[0x9e];
-        temp_v0 = *(unsigned short *)(temp_v1 + 0x72);
-        if ((temp_v0 & 2) != 0) {
-          *(unsigned short *)(temp_v1 + 0x2a) = 0;
+    // These event fields and the count lie past the ends of the shared prefix types.
+    struct PlayerEventView { u8 prefix[0x72]; u16 flags; };
+    struct DemonEventView { u8 prefix[0x44]; u16 flags; };
+    struct PartyCountView { u8 prefix[0x910B]; u8 count; };
+    for (s32 index = 0; index < BTL_ENTRY_COUNT; ++index) {
+        BtlEntry *entry = &battle->entries[index];
+        if (entry != NULL && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) &&
+            !(entry->flags & BTL_ENTRY_FLAG_BLOCKED) && !(entry->flags & BTL_ENTRY_FLAG_PRESENT)) {
+            if (entry->equipA != NULL) {
+                unitStateClearEventBits(&reinterpret_cast<PlayerEventView *>(entry->equipA)->flags);
+                BtlEquip *unit = entry->equipA;
+                if (reinterpret_cast<PlayerEventView *>(unit)->flags & 2)
+                    unit->hp = 0;
+            } else if (entry->equipB != NULL) {
+                unitStateClearEventBits(&reinterpret_cast<DemonEventView *>(entry->equipB)->flags);
+                BtlEquip *unit = entry->equipB;
+                if (reinterpret_cast<DemonEventView *>(unit)->flags & 2)
+                    unit->hp = 0;
+            } else if (entry->reserve != NULL) {
+                unitStateClearEventBits(&reinterpret_cast<DemonEventView *>(entry->reserve)->flags);
+            }
         }
-      }
-      else if (puVar6[0x9f] != 0) {
-        unitStateClearEventBits(puVar6[0x9f] + 0x44);
-        temp_v1 = puVar6[0x9f];
-        temp_v0 = *(unsigned short *)(temp_v1 + 0x44);
-        if ((temp_v0 & 2) != 0) {
-          *(unsigned short *)(temp_v1 + 0x2a) = 0;
+    }
+    PartyCountView *party = reinterpret_cast<PartyCountView *>(gameGetSlotTable());
+    for (s32 index = -1; index < party->count; ++index) {
+        if (index < 0) {
+            unitStateClearEventBits(&reinterpret_cast<PlayerEventView *>(gameGetPlayerData())->flags);
+        } else {
+            BtlEquip *unit = gameGetUnitRecord(index);
+            if (unit != NULL)
+                unitStateClearEventBits(&reinterpret_cast<DemonEventView *>(unit)->flags);
         }
-      }
-      else if (puVar6[0xa0] != 0) {
-        unitStateClearEventBits(puVar6[0xa0] + 0x44);
-      }
     }
-    temp_v3 = temp_v3 + 1;
-    if (temp_v3 >= 0x6d) {
-      temp_v3 = gameGetSlotTable();
-      temp_v4 = -1;
-      if (*(unsigned char *)(temp_v3 + 0x910b) == 0xffffffff || SCARRY4((unsigned int)*(unsigned char *)(temp_v3 + 0x910b),1)) {
-        return;
-      }
-LAB_0033a748:
-      temp_v2 = gameGetPlayerData();
-      temp_v2 = temp_v2 + 0x72;
-      do {
-        unitStateClearEventBits(temp_v2);
-        do {
-          temp_v4 = temp_v4 + 1;
-          if ((int)(unsigned int)*(unsigned char *)(temp_v3 + 0x910b) <= temp_v4) {
-            return;
-          }
-          if (temp_v4 < 0) goto LAB_0033a748;
-          temp_v2 = gameGetUnitRecord(temp_v4);
-        } while (temp_v2 == 0);
-        temp_v2 = temp_v2 + 0x44;
-      } while( 1 );
-    }
-  } while( 1 );
 }
-
-} /* extern "C" */
+}

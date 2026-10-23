@@ -1,51 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cd2c4` (_code @ 0x3cd2c4, 0x1c4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: camp frame resource constants and scale address scheduling differ. */
+#include "camp/CampState.h"
 
 extern "C" {
+extern CampStateA *g_camp;
+f32 jobGetScalarValue(void);
+void efctSetSpeed(f32 scale);
+void FUN_001835b4(u32 style, u32 bank, u32 resource, u32 first, u32 second, u32 layer);
 
-int efctSetSpeed(void);
-int FUN_001835b4(...);
-int jobGetScalarValue(void);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: jobGetScalarValue. */
-
-
-void FUN_003cd2c4(unsigned int param_1,unsigned int param_2,int param_3)
-
+void FUN_003cd2c4(u32 first, u32 second, s32 alternate, f32 scale)
 {
-/* irregular: 3 native warning(s); review required */
-  jobGetScalarValue();
-  efctSetSpeed();
-  FUN_001835b4(2,0x12,0x46d,param_1,param_2,0xbf);
-  FUN_001835b4(2,0x12,0x46e,param_1,param_2,0xbf);
-  FUN_001835b4(2,0x12,0x46f,param_1,param_2,0xbf);
-  efctSetSpeed();
-  FUN_001835b4(2,0x12,0x470,param_1,param_2,0xc4);
-  if (param_3 != 0) {
-    FUN_001835b4(2,0x12,0x5a9,param_1,param_2,0xc4);
-    FUN_001835b4(2,0x12,0x5aa,param_1,param_2,0xc4);
-    FUN_001835b4(2,0x12,0x5ab,param_1,param_2,0xc5);
-    efctSetSpeed();
-    FUN_001835b4(2,0x12,0x5ac,param_1,param_2,0xc6);
-    efctSetSpeed();
-    return;
-  }
-  FUN_001835b4(2,0x12,0x471,param_1,param_2,0xc4);
-  FUN_001835b4(2,0x12,0x472,param_1,param_2,0xc4);
-  FUN_001835b4(2,0x12,0x473,param_1,param_2,0xc5);
-  efctSetSpeed();
-  FUN_001835b4(2,0x12,0x59d,param_1,param_2,0xc6);
-  efctSetSpeed();
-  return;
+    CampStateA *camp = g_camp;
+    f32 savedScale = jobGetScalarValue();
+    efctSetSpeed(camp->primaryAnimation.properties.scale * scale);
+    FUN_001835b4(2, 18, 0x46D, first, second, 0xBF);
+    FUN_001835b4(2, 18, 0x46E, first, second, 0xBF);
+    FUN_001835b4(2, 18, 0x46F, first, second, 0xBF);
+    efctSetSpeed(savedScale);
+    FUN_001835b4(2, 18, 0x470, first, second, 0xC4);
+    if (alternate != 0) {
+        FUN_001835b4(2, 18, 0x5A9, first, second, 0xC4);
+        FUN_001835b4(2, 18, 0x5AA, first, second, 0xC4);
+        FUN_001835b4(2, 18, 0x5AB, first, second, 0xC5);
+        efctSetSpeed(camp->primaryAnimation.properties.scale);
+        FUN_001835b4(2, 18, 0x5AC, first, second, 0xC6);
+        efctSetSpeed(savedScale);
+    } else {
+        FUN_001835b4(2, 18, 0x471, first, second, 0xC4);
+        FUN_001835b4(2, 18, 0x472, first, second, 0xC4);
+        FUN_001835b4(2, 18, 0x473, first, second, 0xC5);
+        efctSetSpeed(camp->primaryAnimation.properties.scale);
+        FUN_001835b4(2, 18, 0x59D, first, second, 0xC6);
+        efctSetSpeed(savedScale);
+    }
 }
-
-} /* extern "C" */
+}

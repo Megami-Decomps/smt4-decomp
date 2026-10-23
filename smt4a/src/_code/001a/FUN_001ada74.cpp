@@ -17,7 +17,7 @@ extern int gameOptionsClassifyMode(void);
 extern int gameDataTableGetFlag(void);
 /* Supplied declaration required: bitArrayCountSet1to500. */
 extern unsigned int gameCountersGetWord(unsigned short);
-extern int FUN_001b5660(int);
+extern int gameFindRosterEntry(int);
 extern unsigned int FUN_001ba3d4(unsigned short);
 extern int bitSetTest(unsigned int, unsigned short);
 extern int partyFindSlotById(unsigned short);
@@ -94,7 +94,7 @@ void FUN_001ada74(int param_1)
                 }
               }
               else {
-                temp_v9 = FUN_001b5660(param_1);
+                temp_v9 = gameFindRosterEntry(param_1);
                 if ((temp_v9 == 0) ||
                    ((unsigned int)*(unsigned short *)(temp_v9 + temp_v2 * 2 + 4) < *(unsigned int *)(temp_v10 + 0x104))) {
                   return;

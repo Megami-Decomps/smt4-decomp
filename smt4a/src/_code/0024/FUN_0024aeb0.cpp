@@ -1,114 +1,86 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024aeb0` (_code @ 0x24aeb0, 0x1b8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: global-state and zero saved registers swap; reverse-motion counter scratch registers also differ. */
+#include "map/mapTrap.h"
+#include "shard/W5_W5Match7_ControllerPose.h"
 
+struct MapTrapControllerLink { u32 unk00; ControllerPose* controller; };
+// The shared trap's padding union starts at an unaligned byte offset; do not enlarge its alignment.
+struct MapTrapDisplayView {
+    u8 enabled;
+    u8 unk01[3];
+    MapVector destination;
+    f32 heading;
+    u32 mode;
+    u8 dirty;
+    u8 unk19[3];
+    MapTrapControllerLink* primary;
+    MapTrapControllerLink* secondary;
+};
 extern "C" {
-
-int FUN_001f3f34(void);
-int controllerSetDestination(int, int);
-int controllerSetPosition(int);
-int controllerSetRotationEulerDegrees(int);
-int FUN_003fe86c(int, unsigned int, int);
-int VectorSignedToFloat(...);
-
-extern int g_mapTrap; /* 0x587f0c */
-extern unsigned char g_gameState; /* 0x5f15fc */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001f3f34. */
-/* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: controllerSetPosition. */
-/* Supplied declaration required: controllerSetRotationEulerDegrees. */
-/* Supplied declaration required: FUN_003fe86c. */
-
+extern MapTrapA* g_mapTrap;
+extern GameStateA g_gameState;
+f32 FUN_001f3f34(f32 first, f32 second, f32 duration, f32 frame);
+void controllerSetDestination(ControllerPose* controller, const MapVector* destination);
+void controllerSetRotationEulerDegrees(ControllerPose* controller, f32 x, f32 y, f32 z);
+void controllerSetPosition(ControllerPose* controller, f32 x, f32 y, f32 z);
+void FUN_003fe86c(ControllerPose* controller, u32 kind, s32 option, f32 first, f32 second);
 
 void FUN_0024aeb0(void)
-
 {
-/* irregular: irregular input(s): in_fpscr; 7 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  unsigned int temp_v5;
-  float temp_v6;
-  unsigned int temp_v7;
-  
-  temp_v0 = g_mapTrap;
-  if ((char *)(g_mapTrap + 0x10) != (char *)0x0) {
-    if (*(char *)(g_mapTrap + 0x61) == '\0') {
-      temp_v2 = *(int *)(g_mapTrap + 0x2c);
+    MapTrapA* work = g_mapTrap;
+    MapTrapDisplayView* display = reinterpret_cast<MapTrapDisplayView*>(&work->display.phase);
+    if (display) {
+        MapTrapControllerLink* owner;
+        if (!work->motion.alternateController) {
+            owner = display->primary;
+        } else {
+            owner = display->secondary;
+        }
+        if (owner) {
+            ControllerPose* controller = owner->controller;
+            if (g_gameState.controllerFlags.secondary) {
+                controller->flags.value |= 3;
+                return;
+            }
+            if (display->enabled) {
+                controller->flags.value &= ~3u;
+            } else {
+                controller->flags.value |= 3;
+            }
+            if (work->motion.active && display->mode == 1) {
+                s32 frame = work->motion.alternating ? work->motion.count : work->motion.reverseCount;
+                f32 offset = FUN_001f3f34(work->motion.initialValue, 0.0f,
+                    static_cast<f32>(work->motion.halfCount), static_cast<f32>(frame));
+                MapTrapA* motion = g_mapTrap;
+                if (motion->motion.alternating) {
+                    motion->motion.alternating = 0;
+                    ++motion->motion.count;
+                } else {
+                    offset = -offset;
+                    motion->motion.alternating = 1;
+                    ++motion->motion.reverseCount;
+                }
+                s32 integralOffset = static_cast<s32>(offset);
+                motion->motion.delta = static_cast<f32>(integralOffset);
+                motion->motion.previousDelta = static_cast<f32>(integralOffset);
+                display->destination.x += motion->motion.delta;
+                display->destination.z += motion->motion.previousDelta;
+                controllerSetDestination(controller, &display->destination);
+                motion = g_mapTrap;
+                if (motion->motion.count >= motion->motion.halfCount) {
+                    motion->motion.halfCount = 0;
+                    motion->motion.active = 0;
+                    motion->motion.delta = 0.0f;
+                    motion->motion.previousDelta = 0.0f;
+                }
+            }
+            if (display->dirty) {
+                controllerSetDestination(controller, &display->destination);
+                controllerSetRotationEulerDegrees(controller, 0.0f, display->heading, 0.0f);
+                controllerSetPosition(controller, 1.0f, 1.0f, 1.0f);
+                FUN_003fe86c(controller, display->mode, 2, 0.0f, 0.0f);
+                display->dirty = 0;
+            }
+        }
     }
-    else {
-      temp_v2 = *(int *)(g_mapTrap + 0x30);
-    }
-    if (temp_v2 != 0) {
-      temp_v2 = *(int *)(temp_v2 + 4);
-      if ((*(signed char *)((unsigned char *)&g_gameState + 0x23)) != '\0') {
-        *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
-      }
-      else {
-        temp_v7 = 0;
-        if (*(char *)(g_mapTrap + 0x10) != '\0') {
-          temp_v3 = *(unsigned int *)(temp_v2 + 4) & 0xfffffffc;
-        }
-        else {
-          temp_v3 = *(unsigned int *)(temp_v2 + 4) | 3;
-        }
-        *(unsigned int *)(temp_v2 + 4) = temp_v3;
-        if ((*(char *)(temp_v0 + 0x40) != '\0') && (*(int *)(temp_v0 + 0x24) == 1)) {
-          temp_v4 = *(float *)(temp_v0 + 0x50);
-          if (*(char *)(temp_v0 + 0x60) != '\0') {
-            temp_v5 = *(unsigned int *)(temp_v0 + 0x48);
-          }
-          else {
-            temp_v5 = *(unsigned int *)(temp_v0 + 0x4c);
-          }
-          VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x44),(unsigned char)(in_fpscr >> 0x16) & 3);
-          VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001f3f34();
-          temp_v1 = g_mapTrap;
-          if (*(char *)(g_mapTrap + 0x60) != '\0') {
-            piVar1 = (int *)(g_mapTrap + 0x48);
-            *(unsigned char *)(g_mapTrap + 0x60) = 0;
-            *(int *)(temp_v1 + 0x48) = *piVar1 + 1;
-          }
-          else {
-            piVar1 = (int *)(g_mapTrap + 0x4c);
-            temp_v4 = -temp_v4;
-            *(unsigned char *)(g_mapTrap + 0x60) = 1;
-            *(int *)(temp_v1 + 0x4c) = *piVar1 + 1;
-          }
-          temp_v6 = (float)VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v5 = VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(float *)(temp_v1 + 0x58) = temp_v6;
-          *(unsigned int *)(temp_v1 + 0x5c) = temp_v5;
-          *(float *)(temp_v0 + 0x14) = *(float *)(temp_v0 + 0x14) + temp_v6;
-          *(float *)(temp_v0 + 0x1c) = *(float *)(temp_v0 + 0x1c) + *(float *)(temp_v1 + 0x5c);
-          controllerSetDestination(temp_v2,temp_v0 + 0x14);
-          temp_v1 = g_mapTrap;
-          if (*(int *)(g_mapTrap + 0x44) <= *(int *)(g_mapTrap + 0x48)) {
-            *(unsigned int *)(g_mapTrap + 0x44) = 0;
-            *(unsigned char *)(temp_v1 + 0x40) = 0;
-            *(unsigned int *)(temp_v1 + 0x58) = temp_v7;
-            *(unsigned int *)(temp_v1 + 0x5c) = temp_v7;
-          }
-        }
-        if (*(char *)(temp_v0 + 0x28) != '\0') {
-          controllerSetDestination(temp_v2,temp_v0 + 0x14);
-          controllerSetRotationEulerDegrees(temp_v2);
-          controllerSetPosition(temp_v2);
-          FUN_003fe86c(temp_v2,*(unsigned int *)(temp_v0 + 0x24),2);
-          *(unsigned char *)(temp_v0 + 0x28) = 0;
-          return;
-        }
-      }
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -1,101 +1,85 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a39bc` (_code @ 0x4a39bc, 0x188 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: choice initialization block placement, state/zero registers and selected-entry address/narrowing differ. */
+#include "shard/Shard004A.h"
+
+// A local aligned view avoids adding u16 list entries to Screen4A's odd-address opaque byte region.
+struct BibleSummonConfirmationView {
+    u8 unk000[0x94];
+    s8 rank;
+    u8 unk095[0x7CC];
+    u8 mode;
+    u8 unk862[2];
+    BibleAnalyzeListEntry entries[1];
+};
+typedef char BibleSummonConfirmationOffsets[
+    offsetof(BibleSummonConfirmationView, rank) == 0x94 &&
+    offsetof(BibleSummonConfirmationView, mode) == 0x861 &&
+    offsetof(BibleSummonConfirmationView, entries) == 0x864 ? 1 : -1];
 
 extern "C" {
+s32 scrRunOpcodesStub(u32 script);
+s32 FUN_00370794(void);
+s32 messageGetChoiceResult(void);
+s32 flaggedValueHolderGetTotal(const FlaggedValueHolder *holder);
+u32 FUN_004a8750(u16 id, u8 mode, u32 option, u32 highRank, u32 flags);
+void panelSetMode3(u32 value, s32 option);
+void FUN_003343f0(u32 enabled);
+void objBInitBlocks274300(void);
+void messageMainSetTargetFlags(u32 flags);
+void flagValueSub(u32 id, s32 value);
+void sysPlaySe(u32 sound);
 
-int sysPlaySe(int);
-int panelSetMode3(unsigned int, int);
-int FUN_003343f0(int);
-int objBInitBlocks274300(void);
-int messageMainSetTargetFlags(int);
-int flagValueSub(int, int);
-int FUN_004a8750(unsigned int, int, int);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-/* Supplied declaration required: sysPlaySe. */
-extern int scrRunOpcodesStub(unsigned int);
-extern int messageGetChoiceResult(void);
-/* Supplied declaration required: panelSetMode3. */
-/* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: objBInitBlocks274300. */
-extern int FUN_00370794(void);
-/* Supplied declaration required: messageMainSetTargetFlags. */
-/* Supplied declaration required: flagValueSub. */
-/* Supplied declaration required: FUN_004a8750. */
-extern int flaggedValueHolderGetTotal(int);
-
-
-void FUN_004a39bc(int param_1)
-
+// Resolve the dynamically arranged summon/cancel/alternate choices after the message script completes.
+void FUN_004a39bc(Screen4A *screen)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2 [4];
-  
-  temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x85c));
-  if (temp_v0 == 2) {
-    temp_v0 = FUN_00370794();
-    if (temp_v0 != 3) {
-      if (*(char *)(param_1 + 0xa870) == '\a') {
-        temp_v2[0] = 3;
-        temp_v2[1] = 2;
-        *(char *)(param_1 + 0xa870) = '\0';
-      }
-      else {
-        temp_v2[0] = 1;
-        temp_v2[1] = 2;
-      }
+    if (scrRunOpcodesStub(screen->job) != 2)
+        return;
+    s32 choices[4];
+    if (FUN_00370794() != 3) {
+        if (screen->unkA870 == 7) {
+            choices[0] = 3;
+            choices[1] = 2;
+            screen->unkA870 = 0;
+        } else {
+            choices[0] = 1;
+            choices[1] = 2;
+        }
+    } else {
+        choices[0] = 1;
+        choices[1] = 3;
+        choices[2] = 2;
     }
-    else {
-      temp_v2[0] = 1;
-      temp_v2[1] = 3;
-      temp_v2[2] = 2;
+    switch (choices[messageGetChoiceResult()]) {
+    case 1: {
+        BibleSummonConfirmationView *details = (BibleSummonConfirmationView *)screen;
+        s32 index = flaggedValueHolderGetTotal(&screen->selection.holder);
+        u32 cost = FUN_004a8750(details->entries[index].id, details->mode, 0, details->rank >= 100, 0);
+        panelSetMode3(-cost, 0);
+        FUN_003343f0(1);
+        screen->state = 4;
+        screen->unk18 = 0;
+        objBInitBlocks274300();
+        break;
     }
-    temp_v0 = messageGetChoiceResult();
-    temp_v0 = temp_v2[temp_v0];
-    if (temp_v0 != 1) {
-      if (temp_v0 == 2) {
+    case 2:
         messageMainSetTargetFlags(0);
         FUN_003343f0(0);
-        *(unsigned int *)(param_1 + 0x14) = 2;
-        *(unsigned int *)(param_1 + 0x18) = 0;
-        sysPlaySe(0x2f);
+        screen->state = 2;
+        screen->unk18 = 0;
+        sysPlaySe(47);
         return;
-      }
-      if (temp_v0 != 3) {
+    case 3:
+        flagValueSub(0x7C3, 1);
         FUN_003343f0(0);
-        *(unsigned int *)(param_1 + 0x14) = 2;
-        *(unsigned int *)(param_1 + 0x18) = 0;
-      }
-      else {
-        flagValueSub(0x7c3,1);
-        FUN_003343f0(0);
-        *(unsigned int *)(param_1 + 0x14) = 5;
-        *(unsigned int *)(param_1 + 0x18) = 0;
+        screen->state = 5;
+        screen->unk18 = 0;
         objBInitBlocks274300();
-      }
+        break;
+    default:
+        FUN_003343f0(0);
+        screen->state = 2;
+        screen->unk18 = 0;
+        break;
     }
-    else {
-      temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
-      temp_v1 = (unsigned int)*(unsigned short *)(param_1 + temp_v0 * 0x20 + 0x868);
-      FUN_004a8750(temp_v1,*(unsigned char *)(param_1 + 0x861),0);
-      panelSetMode3(-temp_v1,0);
-      FUN_003343f0(1);
-      *(unsigned int *)(param_1 + 0x14) = 4;
-      *(unsigned int *)(param_1 + 0x18) = 0;
-      objBInitBlocks274300();
-    }
-    sysPlaySe(0x2f);
-  }
-  return;
+    sysPlaySe(47);
 }
-
-} /* extern "C" */
+}

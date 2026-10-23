@@ -1,106 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdVramHeapFree` (_code @ 0x138430, 0x164 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: null/zero setup and adjacent-node link loads schedule differently. */
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 extern "C" {
-
-int asdVramBlockListInsert(int *, int *);
-int asdMemFree(void);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: asdVramBlockListInsert. */
-/* Supplied declaration required: asdMemFree. */
-
-
-void asdVramHeapFree(int *param_1,int param_2)
-
-{
-/* irregular: 1 goto(s); 2 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int *piVar4;
-  
-  for (piVar4 = (int *)*param_1; piVar4 != (int *)0x0; piVar4 = (int *)piVar4[3]) {
-    if (*piVar4 == param_2) goto LAB_00138464;
-  }
-  piVar4 = (int *)0x0;
-LAB_00138464:
-  temp_v0 = piVar4[2];
-  temp_v1 = piVar4[3];
-  if (temp_v0 != 0) {
-    *(int *)(temp_v0 + 0xc) = temp_v1;
-  }
-  else {
-    *param_1 = temp_v1;
-  }
-  if (temp_v1 != 0) {
-    *(int *)(temp_v1 + 8) = temp_v0;
-  }
-  else {
-    param_1[1] = temp_v0;
-  }
-  piVar4[2] = 0;
-  piVar4[3] = 0;
-  param_1[2] = param_1[2] - 1;
-  param_1[6] = param_1[6] + piVar4[1];
-  piVar2 = param_1 + 3;
-  asdVramBlockListInsert(piVar2,piVar4);
-  if (piVar4 != (int *)0x0) {
-    piVar2 = (int *)piVar4[3];
-  }
-  if ((piVar4 != (int *)0x0 && piVar2 != (int *)0x0) && (*piVar4 + piVar4[1] == *piVar2)) {
-    piVar4[1] = piVar2[1] + piVar4[1];
-    temp_v0 = piVar2[2];
-    temp_v1 = piVar2[3];
-    if (temp_v0 != 0) {
-      *(int *)(temp_v0 + 0xc) = temp_v1;
-    }
-    else {
-      param_1[3] = temp_v1;
-    }
-    if (temp_v1 != 0) {
-      *(int *)(temp_v1 + 8) = temp_v0;
-    }
-    else {
-      param_1[4] = temp_v0;
-    }
-    piVar2[2] = 0;
-    piVar2[3] = 0;
-    param_1[5] = param_1[5] - 1;
-    asdMemFree();
-  }
-  piVar4 = (int *)piVar4[2];
-  if (piVar4 != (int *)0x0) {
-    piVar2 = (int *)piVar4[3];
-  }
-  if ((piVar4 != (int *)0x0 && piVar2 != (int *)0x0) && (*piVar4 + piVar4[1] == *piVar2)) {
-    piVar4[1] = piVar4[1] + piVar2[1];
-    temp_v0 = piVar2[2];
-    temp_v1 = piVar2[3];
-    if (temp_v0 != 0) {
-      *(int *)(temp_v0 + 0xc) = temp_v1;
-    }
-    else {
-      param_1[3] = temp_v1;
-    }
-    if (temp_v1 != 0) {
-      *(int *)(temp_v1 + 8) = temp_v0;
-    }
-    else {
-      param_1[4] = temp_v0;
-    }
-    piVar2[2] = 0;
-    piVar2[3] = 0;
-    param_1[5] = param_1[5] - 1;
-    asdMemFree();
-    return;
-  }
-  return;
+void asdVramBlockListInsert(AsdVramBlockList *list, AsdVramBlock *block);
+void asdMemFree(void *memory);
 }
 
-} /* extern "C" */
+static __inline void vramRemoveBlock(AsdVramBlockList *list, AsdVramBlock *block)
+{
+    AsdVramBlock *previous = block->prev;
+    AsdVramBlock *next = block->next;
+    if (previous != NULL)
+        previous->next = next;
+    else
+        list->head = next;
+    if (next != NULL)
+        next->prev = previous;
+    else
+        list->tail = previous;
+    block->prev = NULL;
+    block->next = NULL;
+    --list->count;
+}
+
+static __inline void vramMergeNext(AsdVramBlockList *list, AsdVramBlock *block)
+{
+    if (block != NULL) {
+        AsdVramBlock *next = block->next;
+        if (next != NULL && block->addr + block->size == next->addr) {
+            block->size += next->size;
+            vramRemoveBlock(list, next);
+            asdMemFree(next);
+        }
+    }
+}
+
+static __inline AsdVramBlock *vramFindBlock(AsdVramBlockList *list, u32 address)
+{
+    for (AsdVramBlock *block = list->head; block != NULL; block = block->next) {
+        if (block->addr == address)
+            return block;
+    }
+    return NULL;
+}
+
+/* Return a used VRAM allocation to the free list and merge its neighboring spans. */
+extern "C" void asdVramHeapFree(AsdVramHeap *heap, u32 address)
+{
+    AsdVramBlock *block = vramFindBlock(&heap->used, address);
+    vramRemoveBlock(&heap->used, block);
+    heap->freeBytes += block->size;
+    asdVramBlockListInsert(&heap->free, block);
+    vramMergeNext(&heap->free, block);
+    vramMergeNext(&heap->free, block->prev);
+}

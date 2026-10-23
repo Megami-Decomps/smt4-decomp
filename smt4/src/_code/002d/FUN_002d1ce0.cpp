@@ -1,74 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d1ce0` (_code @ 0x2d1ce0, 0x134 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: switch dispatch pivots at a different state and merges the completion branches. */
+#include "map/mapDepart.h"
 
 extern "C" {
+void asdLoadFileAsyncNoCallback(const char *path, void **result, s32 flags, s32 priority);
+s32 textFormatBuffer(char *destination, const char *format, ...);
+extern MapDepartWork *g_mapDepartWork;
 
-int asdLoadFileAsyncNoCallback(unsigned char [128], int, int, int);
-int textFormatBuffer(...);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp90; /* 0x90: local_90 */
-} void_stack;
-
-extern unsigned char LAB_002d1e18; /* 0x2d1e18 */
-extern unsigned char LAB_002d1e30; /* 0x2d1e30 */
-extern int g_mapDepartWork; /* 0x4474d8 */
-
-/* Supplied declaration required: asdLoadFileAsyncNoCallback. */
-/* Supplied declaration required: textFormatBuffer. */
-
-
-unsigned int FUN_002d1ce0(void)
-
+// Advance asynchronous loading of the optional sky and the destination map's model archive.
+u32 FUN_002d1ce0()
 {
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned char temp_v2 [128];
-  
-  temp_v1 = g_mapDepartWork;
-  temp_v0 = *(short *)(g_mapDepartWork + 0x14);
-  if (temp_v0 != 3) {
-    if (temp_v0 < 3) {
-      if (temp_v0 == 0) {
+    // Word fields inside the prefix's byte padding at +0x16 cannot be inserted without realignment.
+    struct LoadView {
+        u8 unk00[0x14];
+        s16 state;
+        u16 unk16;
+        s32 skyId;
+        s16 mapId;
+        s16 areaId;
+        void *model;
+        u32 modelState;
+        void *sky;
+        u32 skyState;
+    };
+    LoadView *work = reinterpret_cast<LoadView *>(g_mapDepartWork);
+    char path[128];
+    switch (work->state) {
+    case 0:
+    case 99:
         return 1;
-      }
-      if ((temp_v0 != 1) && (temp_v0 == 2)) {
-        if (*(int *)(g_mapDepartWork + 0x18) < 1) {
-          *(unsigned short *)(g_mapDepartWork + 0x14) = 10;
+    case 2:
+        if (work->skyId <= 0) {
+            work->state = 10;
+        } else {
+            textFormatBuffer(path, "map/sky/sky_%02d.bam", work->skyId);
+            asdLoadFileAsyncNoCallback(path, &reinterpret_cast<LoadView *>(g_mapDepartWork)->sky, 3, 0x80);
+            ++g_mapDepartWork->state;
         }
-        else {
-          textFormatBuffer(temp_v2,&LAB_002d1e18);
-          asdLoadFileAsyncNoCallback(temp_v2,g_mapDepartWork + 0x28,3,0x80);
-          *(short *)(g_mapDepartWork + 0x14) = *(short *)(g_mapDepartWork + 0x14) + 1;
+        break;
+    case 3:
+        if (work->sky != NULL) {
+            work->modelState = 4;
+            work->state = 10;
         }
-      }
-    }
-    else if (temp_v0 != 10) {
-      if (temp_v0 != 0xb) {
-        if (temp_v0 == 99) {
-          return 1;
+        break;
+    case 10:
+        textFormatBuffer(path, "map/m%03d/m%03d_%02d.bam", work->mapId, work->mapId, work->areaId);
+        asdLoadFileAsyncNoCallback(path, &reinterpret_cast<LoadView *>(g_mapDepartWork)->model, 3, 0x80);
+        ++g_mapDepartWork->state;
+        break;
+    case 11:
+        if (work->model != NULL) {
+            work->modelState = 4;
+            work->state = 99;
         }
-      }
-      else if (*(int *)(g_mapDepartWork + 0x20) != 0) {
-        *(unsigned int *)(g_mapDepartWork + 0x24) = 4;
-        *(unsigned short *)(temp_v1 + 0x14) = 99;
-      }
+        break;
     }
-    else {
-      textFormatBuffer(temp_v2,&LAB_002d1e30,(int)*(short *)(g_mapDepartWork + 0x1c),
-                   (int)*(short *)(g_mapDepartWork + 0x1c),(int)*(short *)(g_mapDepartWork + 0x1e));
-      asdLoadFileAsyncNoCallback(temp_v2,g_mapDepartWork + 0x20,3,0x80);
-      *(short *)(g_mapDepartWork + 0x14) = *(short *)(g_mapDepartWork + 0x14) + 1;
-    }
-  }
-  else if (*(int *)(g_mapDepartWork + 0x28) != 0) {
-    *(unsigned int *)(g_mapDepartWork + 0x24) = 4;
-    *(unsigned short *)(temp_v1 + 0x14) = 10;
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

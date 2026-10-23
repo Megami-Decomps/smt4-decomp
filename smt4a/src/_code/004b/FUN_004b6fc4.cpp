@@ -13,7 +13,7 @@ int campCommonBgAcquire(void);
 int FUN_0031e198(void);
 int campButtonHelpAcquire(void);
 int FUN_003b61ec(void);
-int FUN_00407978(void);
+int soundResetSpatialState(void);
 int FUN_004930e4(int);
 void mikadoInitUpdateHandlers(UiScreen*);
 int FUN_004ba1f4(int);
@@ -35,7 +35,7 @@ extern int floatPairClear(int);
 /* Supplied declaration required: FUN_0031e198. */
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_003b61ec. */
-/* Supplied declaration required: FUN_00407978. */
+/* Supplied declaration required: soundResetSpatialState. */
 /* Supplied declaration required: FUN_004930e4. */
 /* Supplied declaration required: FUN_004ba1f4. */
 /* Supplied declaration required: resetFlagGroup1F. */
@@ -94,7 +94,7 @@ void FUN_004b6fc4(int param_1)
     temp_v1 = temp_v1 - 0x4f0;
   }
   *(int *)(param_1 + 0x1218) = temp_v1;
-  FUN_00407978();
+  soundResetSpatialState();
   FUN_0031e198();
   return;
 }

@@ -1,97 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00330f80` (_code @ 0x330f80, 0x1d8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: ordinal and accepted-count values remain in registers instead of retail argument homing; scene gate folds to direct addressing and return tails differ. */
+#include "shard/PlayScene.h"
+#include "shard/W4_Match6_BtlEntry.h"
 
+struct ContextCommandDefinition {
+    u8 kind, enabled;
+    u8 unk02[0x59];
+    u8 blockedInBattleMode;
+    u16 requiredGameFlag, requiredStatusFlag;
+};
 extern "C" {
+const ContextCommandDefinition *FUN_00292960(u8 index, bool protagonist);
+void *gameGetSlotTable(void);
+void *gameGetUnitRecord(s32 index);
+s32 idOwnerHasActiveObject(void *unit);
+s32 gameFlagIsSet(u16 flag);
+s32 flagBitIsSet(u16 flag);
+BtlMainState *btlGetMainState(void);
+s32 FUN_00293988(BtlMainState *battle);
+s32 FUN_0023dcb8(void);
 
-int FUN_00292960(char *, int, unsigned int, unsigned int, int);
-int btlGetMainState(void);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-} param_4_stack;
-
-extern int FUN_0023dcb8(void);
-extern int idOwnerHasActiveObject(int);
-/* Supplied declaration required: FUN_00292960. */
-extern int flagBitIsSet(void);
-extern int FUN_00293988(void);
-/* Supplied declaration required: btlGetMainState. */
-extern int gameGetUnitRecord(void);
-extern int gameGetSlotTable(void);
-extern int gameFlagIsSet(void);
-
-
-char FUN_00330f80(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+u8 FUN_00330f80(PlayScene *scene, s32 ordinal)
 {
-/* irregular: 4 unstructured edge(s); 6 goto(s); 2 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  temp_v4 = 0;
-  temp_v5 = param_1;
-  temp_v0 = gameGetSlotTable();
-  temp_v2 = 0;
-  do {
-    pcVar2 = (char *)(temp_v2 & 0xff);
-    FUN_00292960(pcVar2,*(int *)(param_1 + 0x305c) == 0,param_3,param_4,temp_v5);
-    temp_v3 = 0;
-    if ((*(int *)(param_1 + 0x305c) != 0) &&
-       (-1 < *(char *)(*(int *)(param_1 + 0x305c) + temp_v0 + 0x9107))) {
-      temp_v3 = gameGetUnitRecord();
+    // These byte columns are accessed inside canonical opaque scene/party-manager data.
+    struct CommandSceneGate { u8 prefix[0x38D1]; u8 blocked; };
+    struct CommandPartySlots { u8 prefix[0x9107]; s8 units[1]; };
+    const CommandPartySlots *slots = static_cast<const CommandPartySlots *>(gameGetSlotTable());
+    s32 accepted = 0;
+    for (s32 index = 0; index < 9; ++index) {
+        const ContextCommandDefinition *command = FUN_00292960(static_cast<u8>(index), scene->unk305C == 0);
+        void *unit = NULL;
+        if (scene->unk305C != 0 && slots->units[scene->unk305C] >= 0)
+            unit = gameGetUnitRecord(slots->units[scene->unk305C]);
+        if (command == NULL || command->enabled != 1)
+            continue;
+        if (command->requiredGameFlag && !gameFlagIsSet(command->requiredGameFlag))
+            continue;
+        if (command->requiredStatusFlag && !flagBitIsSet(command->requiredStatusFlag))
+            continue;
+        if (command->blockedInBattleMode && (btlGetMainState()->battleFlags & 0x40000))
+            continue;
+        if (command->kind == 5) {
+            if (scene->unk305C != 0 && reinterpret_cast<const CommandSceneGate *>(scene)->blocked)
+                continue;
+        } else {
+            if (command->kind == 2 &&
+                (!FUN_00293988(btlGetMainState()) || (btlGetMainState()->battleFlags & 0x40000)))
+                continue;
+            if (command->kind == 3 && scene->unk305C != 0 && unit != NULL && !idOwnerHasActiveObject(unit))
+                continue;
+        }
+        if (command->kind != 6 && command->kind != 8 && scene->unk305C == 0 && FUN_0023dcb8())
+            continue;
+        if (accepted == ordinal)
+            return command->kind;
+        ++accepted;
     }
-    if (((((pcVar2 != (char *)0x0) && (pcVar2[1] == '\x01')) &&
-         ((*(short *)(pcVar2 + 0x5c) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
-        ((*(short *)(pcVar2 + 0x5e) == 0 || (temp_v1 = flagBitIsSet(), temp_v1 != 0)))) &&
-       ((pcVar2[0x5b] == '\0' ||
-        (temp_v1 = btlGetMainState(), (*(unsigned int *)(temp_v1 + 0x44a0) & 0x40000) == 0)))) {
-      if (*pcVar2 != '\x05') {
-        if (*pcVar2 == '\x02') {
-          btlGetMainState();
-          temp_v1 = FUN_00293988();
-          if ((temp_v1 == 0) || (temp_v1 = btlGetMainState(), (*(unsigned int *)(temp_v1 + 0x44a0) & 0x40000) != 0))
-          goto LAB_00331128;
-        }
-        if (*pcVar2 == '\x03') {
-          if (*(int *)(param_1 + 0x305c) == 0) goto LAB_00331118;
-          if (temp_v3 == 0) goto LAB_00331140;
-          temp_v3 = idOwnerHasActiveObject(temp_v3);
-          if (temp_v3 == 0) goto LAB_00331128;
-        }
-        if ((*pcVar2 != '\x06' && *pcVar2 != '\b') && (*(int *)(param_1 + 0x305c) == 0)) {
-LAB_00331118:
-          temp_v3 = FUN_0023dcb8();
-          if (temp_v3 != 0) goto LAB_00331128;
-        }
-LAB_00331140:
-        if (temp_v4 == param_2) {
-          return *pcVar2;
-        }
-        temp_v4 = temp_v4 + 1;
-      }
-      else {
-        if (*(int *)(param_1 + 0x305c) == 0) goto LAB_00331118;
-        if (*(char *)(param_1 + 0x38d1) == '\0') {
-          if (temp_v4 == param_2) {
-            return *pcVar2;
-          }
-          temp_v4 = temp_v4 + 1;
-        }
-      }
-    }
-LAB_00331128:
-    temp_v2 = temp_v2 + 1;
-    if ((int)temp_v2 >= 9) {
-      return '\0';
-    }
-  } while( 1 );
+    return 0;
 }
-
-} /* extern "C" */
+}

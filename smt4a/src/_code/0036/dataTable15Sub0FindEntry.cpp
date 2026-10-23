@@ -1,87 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `dataTable15Sub0FindEntry` (_code @ 0x36d18c, 0x160 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail unrolls the record search in pairs and places the hour/minute formatting blocks differently. */
+#include "gamedata/DataTable.h"
 
-extern "C" {
+struct StatusDescriptionRecord {
+    u8 id;
+    u8 unk01[3];
+    char text[96];
+};
 
-int textFormatBuffer(...);
-
-extern unsigned char LAB_0036d2f4; /* 0x36d2f4 */
-extern unsigned char LAB_0036d304; /* 0x36d304 */
-extern unsigned char LAB_0036d310; /* 0x36d310 */
-extern unsigned char DAT_005e1ebc; /* 0x5e1ebc */
-
-/* Supplied declaration required: textFormatBuffer. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern int gameDataBlocksGetSelectedValue(int);
-
-
-unsigned char * dataTable15Sub0FindEntry(unsigned int param_1)
-
+static __inline StatusDescriptionRecord *findStatusDescriptionRecord(u32 id)
 {
-/* irregular: 3 unstructured edge(s); 2 goto(s); 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned char *puVar5;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6 [128];
-  
-  temp_v0 = dataTableGet(0x15,0);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  temp_v3 = 0;
-  if (temp_v2 != 0) {
-    temp_v3 = temp_v2 & 1;
-    temp_v5 = 0;
-    if (temp_v3 != 0) {
-      do {
-        if (*(unsigned char *)(temp_v1 + temp_v5 * 100) == param_1) goto LAB_0036d220;
-        temp_v5 = temp_v5 + 1;
-        if ((int)temp_v5 >= (int)temp_v3) break;
-      } while( 1 );
-    }
-  }
-  do {
-    temp_v5 = temp_v3;
-    if (temp_v2 <= temp_v5) {
-      return (unsigned char *)0x0;
-    }
-    if (*(unsigned char *)(temp_v1 + temp_v5 * 100) == param_1) {
-LAB_0036d220:
-      temp_v4 = temp_v5 * 0x19;
-      temp_v1 = temp_v1 + temp_v5 * 100;
-      goto LAB_0036d248;
-    }
-    if (*(unsigned char *)(temp_v1 + temp_v5 * 100 + 100) == param_1) {
-      temp_v4 = temp_v1 + temp_v5 * 100;
-      temp_v1 = temp_v4 + 100;
-LAB_0036d248:
-      if (temp_v1 != 0) {
-        if (param_1 != 0x35) {
-          puVar5 = (unsigned char *)(temp_v1 + 4);
+    void *table = dataTableGet(0x15, 0);
+    StatusDescriptionRecord *records = (StatusDescriptionRecord *)dataTableGetEntries(table);
+    u32 count = dataTableGetCount(table);
+    for (s32 index = 0; index < count; ++index) {
+        if (records[index].id == id) {
+            return &records[index];
         }
-        else {
-          temp_v4 = gameDataBlocksGetSelectedValue(temp_v4);
-          if ((temp_v4 + 0x3bU) / 0xe10 != 0) {
-            textFormatBuffer(temp_v6,&LAB_0036d2f4);
-          }
-          else {
-            textFormatBuffer(temp_v6,&LAB_0036d310,((temp_v4 + 0x3bU) % 0xe10) / 0x3c);
-          }
-          textFormatBuffer(&DAT_005e1ebc,&LAB_0036d304,temp_v1 + 4,temp_v6);
-          puVar5 = &DAT_005e1ebc;
-        }
-        return puVar5;
-      }
-      return (unsigned char *)0x0;
     }
-    temp_v3 = temp_v5 + 2;
-  } while( 1 );
+    return NULL;
 }
 
-} /* extern "C" */
+extern "C" {
+extern char DAT_005e1ebc[];
+u32 gameDataBlocksGetSelectedValue(void);
+void textFormatBuffer(char *output, const char *format, ...);
+
+/* Finds a status description, appending the rounded-up play time for the duration entry. */
+char *dataTable15Sub0FindEntry(u32 id)
+{
+    StatusDescriptionRecord *match = findStatusDescriptionRecord(id);
+    if (match == NULL) {
+        return NULL;
+    }
+    if (id != 53) {
+        return match->text;
+    }
+    char time[128];
+    u32 seconds = gameDataBlocksGetSelectedValue() + 59;
+    u32 hours = seconds / 3600;
+    u32 minutes = (seconds % 3600) / 60;
+    if (hours != 0) {
+        textFormatBuffer(time, "%d\x82\x67\x81\x40%02d\x82\x6c", hours, minutes);
+    } else {
+        textFormatBuffer(time, "%02d\x82\x6c", minutes);
+    }
+    textFormatBuffer(DAT_005e1ebc, "%s%s", match->text, time);
+    return DAT_005e1ebc;
+}
+}

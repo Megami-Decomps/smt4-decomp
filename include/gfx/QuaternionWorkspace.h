@@ -2,6 +2,7 @@
 #define GFX_QUATERNIONWORKSPACE_H
 
 #include "common.h"
+#include "shard/S1Mover.h"
 #include <stddef.h>
 
 struct RotationQuaternion {
@@ -9,9 +10,15 @@ struct RotationQuaternion {
 };
 struct QuaternionWorkspace {
     u8 unk000[0x100];
-    RotationQuaternion rotation;
+    union {
+        RotationQuaternion rotation;
+        Vec3f direction;
+    };
 };
 typedef char QuaternionWorkspaceLayoutCheck[sizeof(RotationQuaternion) == 0x10 &&
     offsetof(QuaternionWorkspace, rotation) == 0x100 ? 1 : -1];
+typedef char QuaternionWorkspaceDirectionOffsetCheck[
+    offsetof(QuaternionWorkspace, direction) == 0x100 &&
+    sizeof(QuaternionWorkspace) == 0x110 ? 1 : -1];
 
 #endif

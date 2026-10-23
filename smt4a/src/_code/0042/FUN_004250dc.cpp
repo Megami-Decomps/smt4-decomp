@@ -1,67 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004250dc` (_code @ 0x4250dc, 0x108 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: sleep-loop constant hoisting and current-stream pointer register allocation differ. */
+#include "mobiclip_ctrl/MovieStreamSelection.h"
+extern "C" void svcSleepThread(s64 nanoseconds);
 
-extern "C" {
-
-int svcSleepThread(int, int);
-int SBORROW4(int, int);
-int SCARRY4(int, int);
-
-typedef int romwright_code(...);
-/* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: svcSleepThread. */
-
-
-unsigned int FUN_004250dc(int param_1,int param_2)
-
+/* Select a movie stream after the packet worker finishes its current operation. */
+extern "C" s32 FUN_004250dc(void *player, s32 index)
 {
-/* irregular: 3 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v4 = SCARRY4(param_2,1);
-  temp_v2 = param_2 + 1;
-  temp_v3 = param_2 == -1;
-  if (-2 < param_2) {
-    temp_v1 = *(int *)(param_1 + 0x484);
-    temp_v4 = SBORROW4(temp_v1,param_2);
-    temp_v2 = temp_v1 - param_2;
-    temp_v3 = temp_v1 == param_2;
-  }
-  if (temp_v3 || temp_v2 < 0 != temp_v4) {
-    return 0;
-  }
-  if (*(int *)(param_1 + 0x548) != param_2) {
-    if (*(int *)(param_1 + 0x1c0) == 0) {
-      *(unsigned int *)(param_1 + 0x550) = *(unsigned int *)(param_1 + 0x550) | 0x1000;
-      return 0;
+    /* Local view: flags lie beyond the shared MoviePacketPump prefix. */
+    struct SelectionView {
+        u8 unk000[0x14];
+        u32 context;
+        u8 unk018[0x1A0];
+        MovieStreamBackend *backend;
+        u32 unk1BC;
+        MoviePacketConsumer *consumer;
+        u8 unk1C4[0x2C0];
+        s32 streamCount;
+        MoviePacketFilter *filters[MOVIE_SYNC_ENTRIES];
+        MoviePacketStream streams[MOVIE_SYNC_ENTRIES];
+        u32 handles[MOVIE_SYNC_ENTRIES];
+        s32 current;
+        u8 prepared;
+        u8 unk54D[3];
+        u32 flags;
+    };
+    SelectionView *work = static_cast<SelectionView *>(player);
+    if (index < -1 || index >= work->streamCount)
+        return 0;
+    if (work->current != index) {
+        if (work->consumer == NULL) {
+            work->flags |= 0x1000;
+            return 0;
+        }
+        while (work->prepared == 1)
+            svcSleepThread(500000);
+        s32 previous = work->current;
+        if (previous != index && previous >= 0) {
+            work->backend->closeStream(work->context, work->filters[previous]);
+            work->filters[work->current] = NULL;
+            work->current = -1;
+        }
+        if (index >= 0) {
+            work->backend->openStream(work->context, &work->streams[index], &work->filters[index]);
+            work->current = index;
+        }
     }
-    temp_v0 = *(char *)(param_1 + 0x54c);
-    while (temp_v0 == '\x01') {
-      svcSleepThread(500000,0);
-      temp_v0 = *(char *)(param_1 + 0x54c);
-    }
-    temp_v2 = *(int *)(param_1 + 0x548);
-    if ((temp_v2 != param_2) && (-1 < temp_v2)) {
-      (**(romwright_code **)(**(int **)(param_1 + 0x1b8) + 0xc))
-                (*(int **)(param_1 + 0x1b8),*(unsigned int *)(param_1 + 0x14),
-                 *(unsigned int *)(param_1 + temp_v2 * 4 + 0x488));
-      *(unsigned int *)(param_1 + *(int *)(param_1 + 0x548) * 4 + 0x488) = 0;
-      *(int *)(param_1 + 0x548) = -1;
-    }
-    if (-1 < param_2) {
-      (**(romwright_code **)(**(int **)(param_1 + 0x1b8) + 8))
-                (*(int **)(param_1 + 0x1b8),*(unsigned int *)(param_1 + 0x14),
-                 param_1 + param_2 * 0x10 + 0x4a8,param_1 + param_2 * 4 + 0x488);
-      *(int *)(param_1 + 0x548) = param_2;
-    }
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */

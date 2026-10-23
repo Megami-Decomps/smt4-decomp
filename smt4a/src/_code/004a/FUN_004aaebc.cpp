@@ -5,7 +5,7 @@
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
 u32 resourceRequestRegisterOrUpdate(void *registry, const ResourceRequest *request);
-void FUN_0036d318(u32 kind, void *scratch);
+void unitInitializeFromTemplate(u32 kind, void *scratch);
 u32 randomGetUpperSixBits(const void *scratch, u32 index);
 
 void FUN_004aaebc(u32, u32 kind, u32 parameter, u16 option, u16 variant, u16 flags, const ResourceRequestLabel *label, f32 x, f32 y, f32 z)
@@ -24,7 +24,7 @@ void FUN_004aaebc(u32, u32 kind, u32 parameter, u16 option, u16 variant, u16 fla
     if (label != NULL) {
         request.label = *label;
     } else {
-        FUN_0036d318(kind, scratch);
+        unitInitializeFromTemplate(kind, scratch);
         for (s32 index = 0; index < 8; ++index) {
             request.label.text[index] = (char)randomGetUpperSixBits(scratch, index & 0xff);
         }

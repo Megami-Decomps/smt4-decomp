@@ -1,137 +1,105 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002306f8` (_code @ 0x2306f8, 0x1fc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: inlined price-return paths use fewer saved registers and reload constants on demand; common money-settlement block placement differs. */
+#include "gamedata/Table8Record.h"
+
+struct InventoryTransactionItem {
+    u16 id;
+    union {
+        u16 priceFlags;
+        struct {
+            u16 flags : 2;
+            u16 percent : 8;
+            u16 remaining : 6;
+        } pricing;
+    };
+};
+typedef char InventoryTransactionItemSizeCheck[sizeof(InventoryTransactionItem) == 4 ? 1 : -1];
+// Prices lie beyond the shared table-8 record prefix.
+struct ConsumableTransactionPrices {
+    Table8Record prefix;
+    u8 unk6C[0xC];
+    s32 purchase;
+    s32 sale;
+};
+struct EquipmentTransactionPrices {
+    Table8Record prefix;
+    u8 unk6C[0x30];
+    s32 purchase;
+    s32 sale;
+};
+struct ContentTransactionPrice {
+    u8 prefix[0x2C];
+    s32 sale;
+};
+typedef char InventoryTransactionPriceOffsets[
+    offsetof(ConsumableTransactionPrices, purchase) == 0x78 &&
+    offsetof(ConsumableTransactionPrices, sale) == 0x7C &&
+    offsetof(EquipmentTransactionPrices, purchase) == 0x9C &&
+    offsetof(EquipmentTransactionPrices, sale) == 0xA0 ? 1 : -1];
 
 extern "C" {
-
-int aocRecordLookup84(void);
-int FUN_00250d84(int, int);
-int FUN_00295a18(void);
-int FUN_00295c04(int);
-int gameCounterAddSaturating(int, int);
-int dataTable08Sub2GetRecord(void);
-int dataTable08Sub1GetRecord(void);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_3_stack;
-
-/* Supplied declaration required: aocRecordLookup84. */
-/* Supplied declaration required: FUN_00250d84. */
-/* Supplied declaration required: FUN_00295a18. */
-/* Supplied declaration required: FUN_00295c04. */
-extern int FUN_002973ec(void);
-/* Supplied declaration required: gameCounterAddSaturating. */
-extern unsigned int aocEntryGetKind(unsigned int);
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
-
-
-void FUN_002306f8(unsigned short *param_1,int param_2,int param_3)
-
-{
-/* irregular: 7 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  if (*param_1 != 0) {
-    temp_v3 = 99999999;
-    if (param_2 < 0) {
-      FUN_00250d84(*param_1,-param_2);
-      if (param_3 != 0) {
-        temp_v1 = (unsigned int)*param_1;
-        temp_v0 = aocEntryGetKind(temp_v1);
-        temp_v2 = 0;
-        switch(temp_v0) {
-        case 1:
-          dataTable08Sub1GetRecord();
-          temp_v2 = temp_v3;
-          if (temp_v1 != 0) {
-            temp_v2 = *(int *)(temp_v1 + 0x7c);
-          }
-          break;
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-        case 8:
-          dataTable08Sub2GetRecord();
-          temp_v2 = temp_v3;
-          if (temp_v1 != 0) {
-            temp_v2 = *(int *)(temp_v1 + 0xa0);
-          }
-          break;
-        case 10:
-          aocRecordLookup84();
-          temp_v2 = temp_v3;
-          if (temp_v1 != 0) {
-            temp_v2 = *(int *)(temp_v1 + 0x2c);
-          }
-        }
-        if ((param_1[1] & 2) != 0) {
-          temp_v2 = (int)(((param_1[1] & 0x3ff) >> 2) * temp_v2) / 100;
-        }
-        temp_v2 = temp_v2 * -param_2;
-        FUN_00295c04(temp_v2);
-        if (-1 < temp_v2) {
-          gameCounterAddSaturating(0x1f,temp_v2);
-          return;
-        }
-        gameCounterAddSaturating(0x1e,-temp_v2);
-        return;
-      }
-    }
-    else {
-      FUN_00295a18();
-      if (param_3 != 0) {
-        temp_v1 = (unsigned int)*param_1;
-        temp_v0 = aocEntryGetKind(temp_v1);
-        temp_v2 = 0;
-        switch(temp_v0) {
-        case 1:
-          dataTable08Sub1GetRecord();
-          temp_v2 = temp_v3;
-          if (temp_v1 != 0) {
-            temp_v2 = *(int *)(temp_v1 + 0x78);
-          }
-          break;
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-        case 8:
-          dataTable08Sub2GetRecord();
-          temp_v2 = temp_v3;
-          if (temp_v1 != 0) {
-            temp_v2 = *(int *)(temp_v1 + 0x9c);
-          }
-        }
-        if ((param_1[1] & 2) != 0) {
-          temp_v2 = (int)(((param_1[1] & 0x3ff) >> 2) * temp_v2) / 100;
-        }
-        temp_v3 = FUN_002973ec();
-        if (temp_v3 == 2) {
-          temp_v2 = temp_v2 * 3;
-        }
-        temp_v2 = -temp_v2 * param_2;
-        FUN_00295c04(temp_v2);
-        if (-1 < temp_v2) {
-          gameCounterAddSaturating(0x1f,temp_v2);
-          return;
-        }
-        gameCounterAddSaturating(0x1e,-temp_v2);
-        return;
-      }
-    }
-  }
-  return;
+u32 aocEntryGetKind(u32 id);
+ConsumableTransactionPrices *dataTable08Sub1GetRecord(u32 id);
+EquipmentTransactionPrices *dataTable08Sub2GetRecord(u32 id);
+ContentTransactionPrice *aocRecordLookup84(u32 id);
+void FUN_00250d84(u32 id, s32 quantity);
+void FUN_00295a18(u32 id, u32 quantity);
+void FUN_00295c04(s32 amount);
+s32 FUN_002973ec(void);
+void gameCounterAddSaturating(s32 counter, s32 amount);
 }
 
-} /* extern "C" */
+static __inline s32 inventoryGetTransactionPrice(u16 id, bool selling)
+{
+    switch (aocEntryGetKind(id)) {
+    case 1: {
+        const ConsumableTransactionPrices *record = dataTable08Sub1GetRecord(id);
+        return record != NULL ? (selling ? record->sale : record->purchase) : 99999999;
+    }
+    case 2: case 3: case 4: case 5: case 6: case 7: case 8: {
+        const EquipmentTransactionPrices *record = dataTable08Sub2GetRecord(id);
+        return record != NULL ? (selling ? record->sale : record->purchase) : 99999999;
+    }
+    case 10:
+        if (selling) {
+            const ContentTransactionPrice *record = aocRecordLookup84(id);
+            return record != NULL ? record->sale : 99999999;
+        }
+        break;
+    }
+    return 0;
+}
+
+extern "C" void FUN_002306f8(const InventoryTransactionItem *item, s32 quantity, s32 settleMoney)
+{
+    if (item->id == 0)
+        return;
+    if (quantity < 0) {
+        FUN_00250d84(item->id, -quantity);
+        if (!settleMoney)
+            return;
+        s32 price = inventoryGetTransactionPrice(item->id, true);
+        if (item->priceFlags & 2)
+            price = (s32)((u32)item->pricing.percent * price) / 100;
+        s32 amount = (s32)((u32)price * -quantity);
+        FUN_00295c04(amount);
+        if (amount >= 0)
+            gameCounterAddSaturating(31, amount);
+        else
+            gameCounterAddSaturating(30, -amount);
+    } else {
+        FUN_00295a18(item->id, quantity);
+        if (!settleMoney)
+            return;
+        s32 price = inventoryGetTransactionPrice(item->id, false);
+        if (item->priceFlags & 2)
+            price = (s32)((u32)item->pricing.percent * price) / 100;
+        if (FUN_002973ec() == 2)
+            price = (s32)((u32)price * 3);
+        s32 amount = (s32)((0u - (u32)price) * quantity);
+        FUN_00295c04(amount);
+        if (amount >= 0)
+            gameCounterAddSaturating(31, amount);
+        else
+            gameCounterAddSaturating(30, -amount);
+    }
+}

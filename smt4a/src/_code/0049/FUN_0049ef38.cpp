@@ -1,66 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049ef38` (_code @ 0x49ef38, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: choice-field load scheduling and zero-group branch conditions differ. */
+#include "gfx/StereoSpriteSelection.h"
+#include "shard/S1ListPanel.h"
 
 extern "C" {
+extern RenderCtx* g_renderCtx;
+s32 asdTMTexTableNodeIsLoaded(u32 id);
+SpriteInfo* FUN_001834a4(s32 group, s32 id);
+f32 renderCtxCalculateStereoParallax(RenderCtx* context, f32 depth);
+void efctSetSpeed(f32 speed);
+void FUN_001835b4(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 mode);
 
-int efctSetSpeed(void);
-int FUN_001834a4(int, int);
-int FUN_001835b4(int, int, int, int, int, int);
-int renderCtxCalculateStereoParallax(unsigned int);
-
-/* stack frame of param_5: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_5_stack;
-
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: efctSetSpeed. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int);
-/* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-
-
-void FUN_0049ef38(int param_1,int param_2,int param_3,int param_4,int param_5)
-
+// Center the selected sprite on the reference frame with stereo parallax and a temporary speed.
+void FUN_0049ef38(const StereoSpriteOwner* owner, const StereoSpriteSelection* selection,
+                  s32 x, s32 y, s32 mode, f32 speed)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  short temp_v3;
-  short temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  float temp_v8;
-  
-  temp_v5 = *(int *)(param_1 + 0x84);
-  temp_v6 = (unsigned int)*(unsigned short *)(temp_v5 + *(int *)(param_2 + 0x10) * 10 + 0x36);
-  temp_v0 = *(unsigned short *)(temp_v5 + *(int *)(param_2 + 0x10) * 10 + 0x38);
-  if ((((*(short *)(temp_v5 + 0x36) == 0) || (temp_v5 = asdTMTexTableNodeIsLoaded(0x33), temp_v5 != 0)) &&
-      ((*(short *)(*(int *)(param_1 + 0x84) + 0x40) == 0 || (temp_v5 = asdTMTexTableNodeIsLoaded(0x33), temp_v5 != 0)
-       ))) && (temp_v6 != 0)) {
-    temp_v7 = (unsigned int)temp_v0 + temp_v6 * 1000;
-    temp_v5 = FUN_001834a4(0x33,temp_v7);
-    temp_v8 = 0.25f;
-    temp_v1 = **(short **)(temp_v5 + 0xc);
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v5 = FUN_001834a4(0x33,0x1d);
-    temp_v2 = *(short *)(temp_v5 + 8);
-    temp_v3 = *(short *)(temp_v5 + 10);
-    temp_v4 = **(short **)(temp_v5 + 0xc);
-    efctSetSpeed();
-    FUN_001835b4(2,0x33,temp_v7,temp_v2 + param_3 + (int)temp_v8 + ((int)temp_v4 - (int)temp_v1) / 2,
-                 temp_v3 + param_4,param_5 + 5);
-    efctSetSpeed();
-    return;
-  }
-  return;
+    u32 group = owner->resource->choices[selection->index].group;
+    u16 id = owner->resource->choices[selection->index].id;
+    if (((s32)owner->resource->choices[0].group <= 0 || asdTMTexTableNodeIsLoaded(0x33)) &&
+        ((s32)owner->resource->choices[1].group <= 0 || asdTMTexTableNodeIsLoaded(0x33)) && (s32)group > 0) {
+        s32 spriteId = id + group * 1000;
+        s16 width = FUN_001834a4(0x33, spriteId)->size[0];
+        s32 parallax = renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
+        SpriteInfo* reference = FUN_001834a4(0x33, 29);
+        s32 drawX = reference->x + x + parallax + (reference->size[0] - width) / 2;
+        s32 drawY = reference->y + y;
+        efctSetSpeed(speed);
+        FUN_001835b4(2, 0x33, spriteId, drawX, drawY, mode + 5);
+        efctSetSpeed(1.0f);
+    }
 }
-
-} /* extern "C" */
+}

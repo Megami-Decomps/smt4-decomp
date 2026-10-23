@@ -1,142 +1,122 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00343f44` (_code @ 0x343f44, 0x1fc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: action-index addressing, successful phase-store predication and draw-default load order differ; the fourth alpha-fade argument is restored. */
+#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlAction.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "shard/W6_W6Match3_BattleQueue.h"
+#include "shard/W6_W6Match3_ColorFade.h"
 
-extern "C" {
-
-int FUN_0023f79c(int, int);
-int btlReflectInitKind9(int, unsigned int, int, unsigned int, int);
-int FUN_0024057c(int, int, int);
-int FUN_002451c4(int, unsigned int, int, int, int, int);
-int FUN_0033b1ac(int, int);
-int FUN_003c1248(int, int, int, int);
-
-typedef struct fn_00343f44_arg1 fn_00343f44_arg1;
-struct fn_00343f44_arg1 {
-    unsigned char pad_0x0[0x2];
-    undefined2 field_0x2; /* +0x2 */
-    unsigned char pad_0x4[0x4];
-    unsigned char field_0x8; /* +0x8 */
-    unsigned char pad_0x9[0x17];
-    byte field_0x20; /* +0x20 */
-    unsigned char pad_0x21[0x3];
-    short field_0x24; /* +0x24 */
-    short field_0x26; /* +0x26 */
-    unsigned char pad_0x28[0x20];
-    short field_0x48; /* +0x48 */
-    short field_0x4a; /* +0x4a */
+namespace {
+struct BattleQueuedActionStep {
+    u16 unk00;
+    u16 active;
+    u32 unk04;
+    u32 context;
+    u8 unk0C[0x14];
+    u8 phase;
+    u8 unk21[3];
+    s16 mode;
+    s16 queue;
+    u8 unk28[0x20];
+    s16 actor;
+    s16 target;
 };
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-extern int DAT_00435d18; /* 0x435d18 */
-extern unsigned int DAT_00439a24; /* 0x439a24 */
-extern unsigned int DAT_00439a28; /* 0x439a28 */
-extern unsigned int DAT_00439a38; /* 0x439a38 */
-extern unsigned int g_btlUiBlock; /* 0x439ca8 */
-
-/* Supplied declaration required: FUN_0023f79c. */
-/* Supplied declaration required: btlReflectInitKind9. */
-/* Supplied declaration required: FUN_0024057c. */
-/* Supplied declaration required: FUN_002451c4. */
-extern int btlGetMainState(void);
-extern int FUN_0033a7f8(int, int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0033b1ac. */
-extern int FUN_003ae820(unsigned int);
-extern int FUN_003c0ab4(int);
-/* Supplied declaration required: FUN_003c1248. */
-
-
-void FUN_00343f44(unsigned int param_1,fn_00343f44_arg1 *param_2)
-
-{
-/* irregular: 3 unstructured edge(s); 2 goto(s); 8 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  
-  temp_v3 = btlGetMainState();
-  if (param_2->field_0x20 == 0) {
-    btlPruneInvalidQueuedEntries((BtlMainState*)temp_v3);
-    FUN_003c1248((int)param_2->field_0x24,(int)param_2->field_0x26,(int)param_2->field_0x48,
-                 (int)param_2->field_0x4a);
-    if (param_2->field_0x24 != 0) {
-      if (param_2->field_0x24 == 1) {
-        if ((*(unsigned int *)(temp_v3 + 0x44a0) & 4) != 0) {
-          if ((*(unsigned int *)(DAT_00435d18 + 0x3028) & 0x400) != 0) {
-            FUN_00240614(reinterpret_cast<BattleVersionResources*>(DAT_00435d18));
-          }
-          param_2->field_0x20 = 1;
-          goto LAB_00343fdc;
-        }
-        param_2->field_0x2 = 0;
-        return;
-      }
-    }
-    else {
-      FUN_0023f79c(temp_v3,0x200);
-      if ((*(unsigned int *)(temp_v3 + 0x44a0) & 4) == 0) {
-        param_2->field_0x20 = 2;
-        goto LAB_003440fc;
-      }
-      param_2->field_0x2 = 0;
-      return;
-    }
-  }
-  if (param_2->field_0x20 == 1) {
-LAB_00343fdc:
-    temp_v6 = *(int *)(temp_v3 + 0x1e98) + param_2->field_0x48 * 0x114;
-    temp_v4 = FUN_003c0ab4(temp_v6);
-    if (temp_v4 != 0) {
-      *(unsigned int *)(temp_v6 + 0x54) = *(unsigned int *)(temp_v6 + 0x54) & 0xfffffff7;
-      *(unsigned short *)(temp_v6 + 0x58) = *(unsigned short *)(temp_v6 + 0x58) | 0x800;
-      temp_v4 = temp_v3 + param_2->field_0x26 * 8;
-      temp_v4 = FUN_0033a7f8(temp_v3,temp_v6,*(unsigned int *)(temp_v4 + 0x1fd0),
-                           *(unsigned int *)(temp_v4 + 0x1fd4));
-      if (temp_v4 == 0) {
-        param_2->field_0x2 = 0;
-        return;
-      }
-      param_2->field_0x20 = 3;
-      temp_v0 = (short)DAT_00439a24;
-      temp_v1 = (short)DAT_00439a38;
-      temp_v2 = (short)DAT_00439a28;
-      FUN_0024057c(temp_v3,temp_v6,0);
-      FUN_002451c4((int)temp_v1 + (int)temp_v0,*(unsigned int *)&param_2->field_0x8,temp_v6,0xff,(int)temp_v2,
-                   0);
-      temp_v5 = 6;
-      if ((*(unsigned int *)(temp_v6 + 0x50) & 0x10) != 0) {
-        temp_v5 = 7;
-      }
-      btlReflectInitKind9((int)temp_v1,*(unsigned int *)&param_2->field_0x8,temp_v6,temp_v5,0xd);
-    }
-  }
-  if (param_2->field_0x20 == 2) {
-LAB_003440fc:
-    temp_v4 = FUN_003ae820(g_btlUiBlock);
-    if (temp_v4 != 0) {
-      param_2->field_0x20 = 3;
-      FUN_0033b1ac(temp_v3,(int)param_2->field_0x48);
-      param_2->field_0x2 = 0;
-      return;
-    }
-  }
-  if (param_2->field_0x20 != 3) {
-    param_2->field_0x2 = 1;
-    return;
-  }
-  FUN_0033b1ac(temp_v3,(int)param_2->field_0x48);
-  param_2->field_0x2 = 0;
-  return;
+struct BattleQueuedActionsView {
+    u8 unk0000[0x1FD0];
+    u64 commands[2];
+};
+// The version-resource prefix ends before the readiness flags used by this step.
+struct BattleVersionReadinessView {
+    BattleVersionResources resources;
+    u8 unk2BC4[0x3028 - 0x2BC4];
+    u32 flags;
+};
+struct BattleQueuedActionDrawDefaults {
+    u32 unk00;
+    s32 first;
+    s32 priority;
+    u8 unk0C[0xC];
+    s32 second;
+};
+typedef char BattleQueuedActionStepLayoutCheck[offsetof(BattleQueuedActionStep, phase) == 0x20 &&
+    offsetof(BattleQueuedActionStep, actor) == 0x48 &&
+    offsetof(BattleVersionReadinessView, flags) == 0x3028 ? 1 : -1];
 }
 
-} /* extern "C" */
+struct BtlUi;
+extern "C" {
+extern BattleVersionResources *DAT_00435d18;
+extern const BattleQueuedActionDrawDefaults DAT_00439a20;
+extern BtlUi *g_btlUiBlock;
+BtlMainState *btlGetMainState(void);
+void FUN_003c1248(s32 mode, s32 queue, s32 actor, s32 target);
+void FUN_0023f79c(BtlMainState *state, u32 flags);
+s32 FUN_003c0ab4(BtlActionRecord *action);
+s32 FUN_0033a7f8(BtlMainState *state, BtlActionRecord *action, u64 command);
+void FUN_0024057c(u32 owner, ColorFadeWork *action, s32 duration, u32 alpha);
+void FUN_002451c4(s32 layer, u32 context, BtlActionRecord *action, u32 mask, s32 priority, u32 flags);
+void btlReflectInitKind9(s32 layer, u32 context, BtlActionRecord *action, u32 kind, u32 mode);
+s32 FUN_003ae820(BtlUi *ui);
+void FUN_0033b1ac(BtlMainState *state, s32 actor);
+
+void FUN_00343f44(u32, BattleQueuedActionStep *work)
+{
+    BtlMainState *state = btlGetMainState();
+    if (work->phase == 0) {
+        btlPruneInvalidQueuedEntries(state);
+        FUN_003c1248(work->mode, work->queue, work->actor, work->target);
+        if (work->mode != 0) {
+            if (work->mode == 1) {
+                if ((state->battleFlags & 4) != 0) {
+                    if ((reinterpret_cast<BattleVersionReadinessView *>(DAT_00435d18)->flags & 0x400) != 0) {
+                        FUN_00240614(DAT_00435d18);
+                    }
+                    work->phase = 1;
+                } else {
+                    work->active = 0;
+                    return;
+                }
+            }
+        } else {
+            FUN_0023f79c(state, 0x200);
+            if ((state->battleFlags & 4) == 0) {
+                work->phase = 2;
+            } else {
+                work->active = 0;
+                return;
+            }
+        }
+    }
+    if (work->phase == 1) {
+        BtlActionRecord *action = &state->actions.records[work->actor];
+        if (FUN_003c0ab4(action) != 0) {
+            action->flags &= ~8;
+            action->presentationFlags |= 0x800;
+            const BattleQueuedActionsView *queued = reinterpret_cast<const BattleQueuedActionsView *>(state);
+            if (FUN_0033a7f8(state, action, queued->commands[work->queue]) == 0) {
+                work->active = 0;
+                return;
+            }
+            work->phase = 3;
+            const s16 first = static_cast<s16>(DAT_00439a20.first);
+            const s16 second = static_cast<s16>(DAT_00439a20.second);
+            const s16 priority = static_cast<s16>(DAT_00439a20.priority);
+            FUN_0024057c(reinterpret_cast<u32>(state), reinterpret_cast<ColorFadeWork *>(action), 0, 0);
+            FUN_002451c4(second + first, work->context, action, 0xFF, priority, 0);
+            u32 kind = 6;
+            if ((action->status & 0x10) != 0) {
+                kind = 7;
+            }
+            btlReflectInitKind9(second, work->context, action, kind, 13);
+        }
+    }
+    if (work->phase == 2 && FUN_003ae820(g_btlUiBlock) != 0) {
+        work->phase = 3;
+    }
+    if (work->phase == 3) {
+        FUN_0033b1ac(state, work->actor);
+        work->active = 0;
+    } else {
+        work->active = 1;
+    }
+}
+}

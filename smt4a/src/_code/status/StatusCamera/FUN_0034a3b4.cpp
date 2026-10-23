@@ -1,91 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034a3b4` (_code @ 0x34a3b4, 0x160 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: defaults are not held in VFP registers across the clear; vector assignment and multiply-add lowering differ. */
+#include "status/StatusCamera.h"
+#include <stddef.h>
 
 extern "C" {
+extern StatusCameraWorkA *g_statusCamera;
+extern void *g_handleRegistry;
+void sysMemClear(void *memory, u32 size);
+void FUN_00154180(s32 x, s32 y, s32 width, s32 height);
+void FUN_0013c884(StatusCameraWorkA *camera, s32 mode);
+void FUN_0014f0dc(StatusCameraWorkA *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
+void FUN_001523b8(StatusCameraWorkA *camera, s32 mode, f32 fov, f32 nearClip, f32 farClip, f32 aspect);
+void FUN_0036b824(StatusCameraWorkA *camera);
+void uiSetFloatPair(StatusCameraWorkA *camera, f32 first, f32 second);
 
-int FUN_0013c884(int, int);
-int uiSetFloatPair(int);
-int FUN_0014f0dc(int, float *, float *, float [7]);
-int FUN_001523b8(int, int);
-int FUN_00154180(int, int, int, int);
-int sysMemClear(int, int);
-int FUN_0036b824(int);
-
-/* stack frame of void: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
-
-extern int g_handleRegistry; /* 0x56fcc0 */
-extern int g_statusCamera; /* 0x588fe4 */
-
-/* Supplied declaration required: FUN_0013c884. */
-/* Supplied declaration required: uiSetFloatPair. */
-/* Supplied declaration required: FUN_0014f0dc. */
-/* Supplied declaration required: FUN_001523b8. */
-/* Supplied declaration required: FUN_00154180. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0036b824. */
-
-
+// Reset the status-screen camera, construct its view/lens and register it for rendering.
 void FUN_0034a3b4(void)
-
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  float *pfVar2;
-  float temp_v1;
-  float temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9 [7];
-  
-  temp_v0 = g_statusCamera;
-  if (g_statusCamera != 0) {
-    temp_v2 = 0.0f;
-    temp_v3 = 0x40900000;
-    temp_v4 = 0x40c9999a;
-    temp_v5 = 0xbf800000;
-    sysMemClear(g_statusCamera,0x540);
-    *(unsigned int *)(temp_v0 + 0x534) = 0x420c0000;
-    *(unsigned int *)(temp_v0 + 0x538) = 0x3dcccccd;
-    *(unsigned int *)(temp_v0 + 0x53c) = 0x46c80000;
-    *(float *)(temp_v0 + 0x518) = temp_v2;
-    *(float *)(temp_v0 + 0x51c) = temp_v2;
-    pfVar2 = (float *)(temp_v0 + 0x50c);
-    *(unsigned int *)(temp_v0 + 0x520) = temp_v5;
-    *pfVar2 = temp_v2;
-    *(unsigned int *)(temp_v0 + 0x510) = temp_v4;
-    *(unsigned int *)(temp_v0 + 0x514) = temp_v3;
-    *(float *)(temp_v0 + 0x524) = temp_v2;
-    *(float *)(temp_v0 + 0x528) = temp_v2;
-    *(float *)(temp_v0 + 0x52c) = temp_v2;
-    *(unsigned int *)(temp_v0 + 0x530) = temp_v3;
-    temp_v9[1] = 1.0f;
-    temp_v1 = *(float *)(temp_v0 + 0x530);
-    temp_v6 = *pfVar2 + *(float *)(temp_v0 + 0x518) * temp_v1;
-    temp_v7 = *(float *)(temp_v0 + 0x510) + *(float *)(temp_v0 + 0x51c) * temp_v1;
-    temp_v8 = *(float *)(temp_v0 + 0x514) + *(float *)(temp_v0 + 0x520) * temp_v1;
-    temp_v9[0] = temp_v2;
-    temp_v9[2] = temp_v2;
-    FUN_00154180(200,0,200,0xf0);
-    FUN_0013c884(temp_v0,1);
-    FUN_0014f0dc(temp_v0,pfVar2,&temp_v6,temp_v9);
-    FUN_001523b8(temp_v0,1);
-    FUN_0036b824(temp_v0);
-    *(int *)(g_handleRegistry + 0xc) = temp_v0;
-    uiSetFloatPair(temp_v0);
-  }
-  return;
+    StatusCameraWorkA *camera = g_statusCamera;
+    if (camera != NULL) {
+        sysMemClear(camera, sizeof(*camera));
+        camera->lens.fov = 35.0f;
+        camera->lens.nearClip = 0.1f;
+        camera->lens.farClip = 25600.0f;
+        camera->dir.x = 0.0f;
+        camera->dir.y = 0.0f;
+        camera->dir.z = -1.0f;
+        camera->eye.x = 0.0f;
+        camera->eye.y = 6.3f;
+        camera->eye.z = 4.5f;
+        camera->unk524.x = 0.0f;
+        camera->unk524.y = 0.0f;
+        camera->unk524.z = 0.0f;
+        camera->dist = 4.5f;
+        Vec3 up = {0.0f, 1.0f, 0.0f};
+        Vec3 target = camera->eye;
+        target.x += camera->dir.x * camera->dist;
+        target.y += camera->dir.y * camera->dist;
+        target.z += camera->dir.z * camera->dist;
+        FUN_00154180(200, 0, 200, 240);
+        FUN_0013c884(camera, 1);
+        FUN_0014f0dc(camera, &camera->eye, &target, &up);
+        FUN_001523b8(camera, 1, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip, 1.6666666f);
+        FUN_0036b824(camera);
+        struct CameraRegistryView { u8 unk00[0xC]; StatusCameraWorkA *camera; };
+        typedef char CameraRegistryOffsetCheck[offsetof(CameraRegistryView, camera) == 0xC ? 1 : -1];
+        ((CameraRegistryView *)g_handleRegistry)->camera = camera;
+        uiSetFloatPair(camera, 2.8f, 1.0f);
+    }
 }
-
-} /* extern "C" */
+}

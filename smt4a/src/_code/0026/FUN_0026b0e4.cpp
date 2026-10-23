@@ -20,7 +20,7 @@ int FUN_001835b4(...);
 int FUN_0018408c(...);
 int FUN_00184310(void);
 int FUN_001fc720(int, int);
-int FUN_0022fb78(...);
+int statusDownDrawIndicatorPairs(...);
 int resourceRunOperationIfUnblocked(...);
 int FUN_00344cd0(...);
 int FUN_003d3a4c(...);
@@ -66,7 +66,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00184310. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001fc720. */
-/* Supplied declaration required: FUN_0022fb78. */
+/* Supplied declaration required: statusDownDrawIndicatorPairs. */
 extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4878(int);
@@ -163,7 +163,7 @@ unsigned int FUN_0026b0e4(void)
     FUN_00164b5c(2,0x12,0xc,temp_v0,temp_v1,0xb3);
     FUN_001835b4(2,0x12,0x52b,temp_v0,temp_v1,0xb5);
     FUN_001835b4(2,0x12,0x52c,temp_v0,temp_v1,0xb5);
-    FUN_0022fb78(temp_v0,temp_v1);
+    statusDownDrawIndicatorPairs(temp_v0,temp_v1);
     temp_v20 = temp_v4 + 0x600;
     temp_v11 = 0;
 LAB_0026b298:
@@ -340,7 +340,7 @@ LAB_0026b644:
     temp_v11 = FUN_002a4878(temp_v11);
     efctSetSpeed();
     FUN_00164b5c(2,0x12,0x10,temp_v0,temp_v1,0xb3);
-    FUN_0022fb78(temp_v0,temp_v1);
+    statusDownDrawIndicatorPairs(temp_v0,temp_v1);
     temp_v24 = temp_v4 + 0x2300;
     if (*(short *)(temp_v4 + 0x234a) < 1) {
       efctSetSpeed();
@@ -469,7 +469,7 @@ LAB_0026b644:
     efctSetSpeed();
     FUN_00164b5c(2,0x12,0xf,temp_v0,temp_v1,0xb3);
     FUN_00164b5c(2,0x12,0xe,temp_v0,temp_v1,0xb3);
-    FUN_0022fb78(temp_v0,temp_v1);
+    statusDownDrawIndicatorPairs(temp_v0,temp_v1);
     temp_v9 = (unsigned int)*(unsigned short *)(temp_v4 + 0x598);
     FUN_00184310();
     if (temp_v9 != 0) {

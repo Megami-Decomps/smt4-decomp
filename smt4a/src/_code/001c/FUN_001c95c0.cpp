@@ -1,82 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c95c0` (_code @ 0x1c95c0, 0x184 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: material color bitfield packing and VFP scheduling differ from retail. */
+#include "gfx/MaterialColorCommand.h"
 
 extern "C" {
+extern u32 *g_commandBufferCursor;
+void FUN_001cefe0(const void *commands, u32 registerIndex);
 
-int FUN_001cefe0(int, int);
-int VectorFloatToUnsigned(double, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
-
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_001cefe0. */
-
-
-void FUN_001c95c0(int param_1)
-
+void FUN_001c95c0(MaterialColorOwner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  unsigned int temp_v6;
-  float temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  
-  if (*(int *)(param_1 + 0xa0) != 0) {
-    temp_v1 = *(int *)(*(int *)(param_1 + 0xa0) + 8);
-    temp_v4 = 1.0f;
-    temp_v0 = 0;
-    temp_v5 = *(float *)(temp_v1 + 0xb4);
-    temp_v3 = 0.0f;
-    if (*(int *)(temp_v1 + 0xc4) != 0) {
-      temp_v0 = *(int *)(temp_v1 + 0xc4) + temp_v1 + 0xc4;
-    }
-    temp_v7 = temp_v4;
-    if ((temp_v5 <= 1.0f) && (temp_v7 = temp_v5, temp_v5 < 0.0f)) {
-      temp_v7 = temp_v3;
-    }
-    temp_v6 = VectorFloatToUnsigned(temp_v7 * 255.0f + 0.5f,3);
-    temp_v7 = *(float *)(temp_v1 + 0xb8);
-    temp_v5 = temp_v4;
-    if ((temp_v7 <= 1.0f) && (temp_v5 = temp_v7, temp_v7 < 0.0f)) {
-      temp_v5 = temp_v3;
-    }
-    temp_v8 = VectorFloatToUnsigned(temp_v5 * 255.0f + 0.5f,3);
-    temp_v7 = *(float *)(temp_v1 + 0xbc);
-    temp_v5 = temp_v4;
-    if ((temp_v7 <= 1.0f) && (temp_v5 = temp_v7, temp_v7 < 0.0f)) {
-      temp_v5 = temp_v3;
-    }
-    temp_v9 = VectorFloatToUnsigned(temp_v5 * 255.0f + 0.5f,3);
-    temp_v5 = *(float *)(temp_v1 + 0xc0);
-    if ((temp_v5 <= 1.0f) && (temp_v4 = temp_v3, 0.0f <= temp_v5)) {
-      temp_v4 = temp_v5;
-    }
-    VectorFloatToUnsigned(temp_v4 * 255.0f + 0.5f,3);
-    temp_v2 = 0;
-    if ((*(unsigned int *)(temp_v1 + 0x18) & 2) != 0) {
-      temp_v2 = 0x10000;
-    }
-    g_commandBufferCursor[3] = 0xf00e1;
-    *g_commandBufferCursor = temp_v2;
-    g_commandBufferCursor[1] = 0x400e0;
-    g_commandBufferCursor[2] = ((temp_v8 & 0xff) << 8) | (temp_v6 & 0xff) | ((temp_v9 & 0xff) << 0x10);
-    g_commandBufferCursor = g_commandBufferCursor + 4;
-    FUN_001cefe0(temp_v0,0x17);
-    return;
-  }
-  return;
+    if (owner->material == NULL)
+        return;
+    MaterialColorResource *material = owner->material->resource;
+    const void *commands = NULL;
+    if (material->commandsOffset != 0)
+        commands = reinterpret_cast<const u8 *>(&material->commandsOffset) + material->commandsOffset;
+    MaterialPackedColor color = materialPackColor(material->color);
+    u32 enabled = (material->flags & 2) != 0 ? 0x10000 : 0;
+    g_commandBufferCursor[3] = 0x000F00E1;
+    g_commandBufferCursor[0] = enabled;
+    g_commandBufferCursor[1] = 0x000400E0;
+    g_commandBufferCursor[2] = color.value & 0x00FFFFFF;
+    g_commandBufferCursor += 4;
+    FUN_001cefe0(commands, 23);
 }
-
-} /* extern "C" */
+}

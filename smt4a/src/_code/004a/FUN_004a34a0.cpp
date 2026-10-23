@@ -1,88 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a34a0` (_code @ 0x4a34a0, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: validation result-code merging, predicate formation and register lifetimes differ. */
+#include "shard/Shard004A.h"
 
 extern "C" {
+void FUN_00184310(u16 id);
+u32 FUN_004a8750(u32 id, u32 mode, s32 first, s32 special, s32 second);
+s32 flaggedValueHolderGetTotal(void *selection);
+s32 FUN_002a4b28(u32 id);
+u32 FUN_004d05b4();
+s32 FUN_001ba3d4(u32 flag);
+s32 gameStockContainsEntry(u32 id);
+s32 FUN_004d0cd4();
 
-int FUN_00184310(int);
-int FUN_004a8750(unsigned int, int, int, int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00184310. */
-extern int FUN_001ba3d4(unsigned int);
-extern int FUN_002a4b28(unsigned int);
-/* Supplied declaration required: FUN_004a8750. */
-extern int flaggedValueHolderGetTotal(int);
-extern unsigned int FUN_004d05b4(void);
-extern int gameStockContainsEntry(unsigned int);
-extern int FUN_004d0cd4(void);
-
-
-unsigned int FUN_004a34a0(int param_1,unsigned int param_2)
-
+/* Set the reason a stock selection cannot proceed, allowing the override-warning result. */
+u32 FUN_004a34a0(Screen4A *screen, u32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  char *pcVar5;
-  
-  temp_v1 = param_2;
-  FUN_004a8750(param_2,*(unsigned char *)(param_1 + 0x861),0,'c' < *(char *)(param_1 + 0x94),0);
-  temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
-  if (*(char *)(param_1 + 0x861) == '\0') {
-    FUN_00184310(*(unsigned short *)(param_1 + temp_v2 * 0x20 + 0x868));
-  }
-  temp_v2 = FUN_002a4b28(param_2);
-  pcVar5 = (char *)(param_1 + 0xa870);
-  if (temp_v2 == 0) {
-    temp_v0 = '\x06';
-  }
-  else {
-    temp_v3 = FUN_004d05b4();
-    if ((temp_v3 < temp_v1) && (temp_v2 = FUN_001ba3d4(0x7c3), temp_v2 < 1)) {
-      temp_v0 = '\x01';
+    struct Candidate { u16 id; u8 unk02[0x1e]; };
+    // Naming fields in the shared byte span beginning at 0x861 would raise its alignment.
+    struct ValidationView {
+        u8 prefix[0x20];
+        u8 selection[0x74];
+        s8 rank;
+        u8 unk095[0x7cc];
+        u8 mode;
+        u8 unk862[6];
+        Candidate candidates[1];
+    };
+    typedef char ValidationViewLayout[offsetof(ValidationView, mode) == 0x861 &&
+        offsetof(ValidationView, candidates) == 0x868 ? 1 : -1];
+    ValidationView *view = reinterpret_cast<ValidationView *>(screen);
+    u32 cost = FUN_004a8750(id, view->mode, 0, view->rank >= 100, 0);
+    s32 selection = flaggedValueHolderGetTotal(view->selection);
+    Candidate *selected = &view->candidates[selection];
+    if (view->mode == 0) {
+        FUN_00184310(selected->id);
     }
-    else {
-      temp_v2 = gameStockContainsEntry(param_2);
-      if (temp_v2 != 0) {
-        temp_v0 = '\x02';
-      }
-      else {
-        if (*(char *)(param_1 + 0x861) != '\x02') {
-          temp_v2 = FUN_004d0cd4();
-          if (temp_v2 == -1) {
-            *pcVar5 = '\x05';
+    u8 reason;
+    if (!FUN_002a4b28(id)) {
+        reason = 6;
+    } else if (FUN_004d05b4() < cost && FUN_001ba3d4(0x7c3) <= 0) {
+        reason = 1;
+    } else if (gameStockContainsEntry(id)) {
+        reason = 2;
+    } else if (view->mode == 2) {
+        reason = 3;
+    } else {
+        if (FUN_004d0cd4() == -1) {
+            screen->unkA870 = 5;
             return 0;
-          }
-          temp_v0 = *pcVar5;
-          if (temp_v0 == '\0') {
-            temp_v3 = FUN_004d05b4();
-            if ((temp_v3 < temp_v1) && (temp_v2 = FUN_001ba3d4(0x7c3), 0 < temp_v2)) {
-              *pcVar5 = '\a';
-              return 1;
-            }
-            temp_v0 = *pcVar5;
-            if (temp_v0 == '\0') {
-              return 1;
-            }
-          }
-          if (temp_v0 != '\a') {
-            return 0;
-          }
-          return 1;
         }
-        temp_v0 = '\x03';
-      }
+        reason = screen->unkA870;
+        if (reason == 0) {
+            if (FUN_004d05b4() < cost && FUN_001ba3d4(0x7c3) > 0) {
+                screen->unkA870 = 7;
+                return 1;
+            }
+            reason = screen->unkA870;
+            if (reason == 0) {
+                return 1;
+            }
+        }
+        return reason == 7;
     }
-  }
-  *pcVar5 = temp_v0;
-  return 0;
+    screen->unkA870 = reason;
+    return 0;
 }
-
-} /* extern "C" */
+}

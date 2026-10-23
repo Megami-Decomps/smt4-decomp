@@ -25,6 +25,14 @@ typedef struct MapIfRecord {
         struct {
             s32 restart; // 0x08
         } transition;
+        struct {
+            u8 unk08[4];
+            u16 frame; // 0x0c
+            u8 unk0e[2];
+            u32 first; // 0x10
+            u8 unk14[8];
+            u32 second; // 0x1c
+        } initialization;
     };
     /* 0x24 */ u32 handle;
     /* 0x28 */ union {
@@ -44,6 +52,33 @@ typedef struct MapIfRecord {
             u8 unk2a[0x1a];
             s32 timer; // 0x44
         } update;
+        struct {
+            u8 unk28[4];
+            u16 timer; // 0x2c
+        } proximity;
+        struct {
+            u16 counters[3]; // 0x28
+            u8 unk2e[2];
+            f32 progress; // 0x30
+            f32 limits[3]; // 0x34
+            u8 flags[3]; // 0x40
+            u8 unk43;
+            u32 timer; // 0x44
+            f32 heading; // 0x48
+            u8 hidden; // 0x4c
+            u8 unk4d[0xf];
+            f32 start[3]; // 0x5c
+            f32 current[3]; // 0x68
+            f32 angle; // 0x74
+            f32 size[2]; // 0x78
+            s32 target; // 0x80
+            u8 unk84[8];
+            f32 offset; // 0x8c
+            f32 transform[12]; // 0x90
+            u8 unkc0[0xc4];
+            u32 values[3]; // 0x184
+            u32 handle; // 0x190
+        } reset;
     };
 } MapIfRecord;
 
@@ -52,6 +87,29 @@ typedef char MapIfRecordPositionCheck[sizeof(MapIfRecord) == 0x194 &&
 typedef char MapIfRecordUpdateCheck[sizeof(MapIfRecord) == 0x194 &&
     offsetof(MapIfRecord, update.counter) == 0x28 &&
     offsetof(MapIfRecord, update.timer) == 0x44 ? 1 : -1];
+typedef char MapIfRecordProximityCheck[sizeof(MapIfRecord) == 0x194 &&
+    offsetof(MapIfRecord, proximity.timer) == 0x2c ? 1 : -1];
+typedef char MapIfRecordInitializationOffsets[
+    offsetof(MapIfRecord, initialization.frame) == 0xc &&
+    offsetof(MapIfRecord, initialization.first) == 0x10 &&
+    offsetof(MapIfRecord, initialization.second) == 0x1c &&
+    offsetof(MapIfRecord, reset.counters) == 0x28 &&
+    offsetof(MapIfRecord, reset.progress) == 0x30 &&
+    offsetof(MapIfRecord, reset.limits) == 0x34 &&
+    offsetof(MapIfRecord, reset.flags) == 0x40 &&
+    offsetof(MapIfRecord, reset.timer) == 0x44 &&
+    offsetof(MapIfRecord, reset.heading) == 0x48 &&
+    offsetof(MapIfRecord, reset.hidden) == 0x4c &&
+    offsetof(MapIfRecord, reset.start) == 0x5c &&
+    offsetof(MapIfRecord, reset.current) == 0x68 &&
+    offsetof(MapIfRecord, reset.angle) == 0x74 &&
+    offsetof(MapIfRecord, reset.size) == 0x78 &&
+    offsetof(MapIfRecord, reset.target) == 0x80 &&
+    offsetof(MapIfRecord, reset.offset) == 0x8c &&
+    offsetof(MapIfRecord, reset.transform) == 0x90 &&
+    offsetof(MapIfRecord, reset.values) == 0x184 &&
+    offsetof(MapIfRecord, reset.handle) == 0x190 &&
+    sizeof(MapIfRecord) == 0x194 ? 1 : -1];
 
 #define MAP_IF_WIDGETS 0x23
 #define MAP_IF_SLOTS 4
@@ -81,6 +139,26 @@ typedef struct MapIfFastModelState {
     f32 heading;
 } MapIfFastModelState;
 
+struct NodeEnableNode;
+
+struct MapIfModelMarker {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 state;
+    /* 0x02 */ u8 flags;
+    /* 0x03 */ u8 unk03;
+    /* 0x04 */ u32 first;
+    /* 0x08 */ u32 second;
+    /* 0x0C */ f32 position[3];
+    /* 0x18 */ f32 heading;
+    /* 0x1C */ union {
+        u32 elapsed;
+        u32 motionIndex;
+    };
+    /* 0x20 */ NodeEnableNode *model;
+};
+typedef char MapIfModelMarkerMotionOffset[
+    offsetof(MapIfModelMarker, motionIndex) == 0x1c && sizeof(MapIfModelMarker) == 0x24 ? 1 : -1];
+
 /* The interface's state block (Shin Megami Tensei IV layout). */
 typedef struct MapIfState {
     /* 0x0000 */ u32 job;
@@ -92,7 +170,10 @@ typedef struct MapIfState {
     /* 0x0030 */ s32 unk30;
     /* 0x0034 */ s32 unk34;
     /* 0x0038 */ s32 unk38;
-    /* 0x003C */ u8 unk3C[0x194];
+    union {
+        /* 0x003C */ u8 unk3C[0x194];
+        /* 0x003C */ MapIfRecord primary;
+    };
     /* 0x01D0 */ MapIfRecord records[128];
     union {
         /* 0xCBD0 */ u8 unkCBD0[0x1C];
@@ -100,7 +181,10 @@ typedef struct MapIfState {
     };
     /* 0xCBEC */ u32 unkCBEC;
     /* 0xCBF0 */ MapIfSlot slots[MAP_IF_SLOTS];
-    /* 0xCC70 */ u8 unkCC70[0x48];
+    union {
+        /* 0xCC70 */ u8 unkCC70[0x48];
+        /* 0xCC70 */ MapIfModelMarker modelMarkers[2];
+    };
     /* 0xCCB8 */ s16 unkCCB8;
     /* 0xCCBA */ s16 unkCCBA;
     /* 0xCCBC */ u8 unkCCBC[0x1C];
@@ -108,6 +192,8 @@ typedef struct MapIfState {
     /* 0xCCD9 */ u8 unkCCD9[3];
     /* 0xCCDC */ u32 unkCCDC;
 } MapIfState;
+typedef char MapIfPrimaryRecordOffset[offsetof(MapIfState, primary) == 0x3c &&
+    sizeof(MapIfState) == 0xcce0 ? 1 : -1];
 
 /* The module global: the state block and the widget table's pointers, side by side. */
 typedef struct MapIfGlobals {
@@ -152,7 +238,10 @@ typedef struct MapIfStateA {
     /* 0x003C */ s32 unk3C;
     /* 0x0040 */ s32 unk40;
     /* 0x0044 */ s32 unk44;
-    /* 0x0048 */ u8 unk48[0x194];
+    union {
+        /* 0x0048 */ u8 unk48[0x194];
+        /* 0x0048 */ MapIfRecord primary;
+    };
     /* 0x01DC */ MapIfRecord records[128];
     /* 0xCBDC */ MapIfSlotA slots[MAP_IF_SLOTS_A];
     /* 0xCC7C */ u8 unkCC7C[0x6C];
@@ -184,10 +273,24 @@ typedef char MapIfStateASizeCheck[sizeof(MapIfStateA) == 0xCD28 ? 1 : -1];
 typedef char MapIfGlobalsSizeCheck[sizeof(MapIfGlobals) == 0x8 ? 1 : -1];
 typedef char MapIfGlobalsASizeCheck[sizeof(MapIfGlobalsA) == 0x8 ? 1 : -1];
 typedef char MapIfStateAHeadCheck[offsetof(MapIfStateA, head.unk1C) == 0x1C ? 1 : -1];
+typedef char MapIfStateAPrimaryOffsetCheck[
+    offsetof(MapIfStateA, primary) == 0x48 && sizeof(MapIfStateA) == 0xCD28 ? 1 : -1];
 typedef char MapIfFastModelOffsetsCheck[sizeof(MapIfFastModelState) == 0x1c &&
     offsetof(MapIfFastModelState, active) == 0 && offsetof(MapIfFastModelState, first) == 4 &&
     offsetof(MapIfFastModelState, second) == 8 && offsetof(MapIfFastModelState, position) == 0xc &&
     offsetof(MapIfFastModelState, heading) == 0x18 &&
     offsetof(MapIfState, fastModel) == 0xcbd0 ? 1 : -1];
+
+typedef char MapIfModelMarkerOffsetsCheck[
+    sizeof(MapIfModelMarker) == 0x24 &&
+    offsetof(MapIfModelMarker, state) == 1 &&
+    offsetof(MapIfModelMarker, flags) == 2 &&
+    offsetof(MapIfModelMarker, first) == 4 &&
+    offsetof(MapIfModelMarker, second) == 8 &&
+    offsetof(MapIfModelMarker, position) == 0x0C &&
+    offsetof(MapIfModelMarker, heading) == 0x18 &&
+    offsetof(MapIfModelMarker, elapsed) == 0x1C &&
+    offsetof(MapIfModelMarker, model) == 0x20 &&
+    offsetof(MapIfState, modelMarkers) == 0xCC70 ? 1 : -1];
 
 #endif

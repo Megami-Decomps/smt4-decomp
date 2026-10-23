@@ -1,78 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00430f98` (_code @ 0x430f98, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: the two regional language masks load inside their cases instead of before the switch. */
+#include "nn/Result.h"
 extern "C" {
-
-int FUN_00431270(void);
-
-/* stack frame of void: 1 slot(s), 1 byte(s) */
-typedef struct {
-    unsigned char sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern int FUN_0016e800(int, unsigned int);
-extern int FUN_00189738(unsigned int *, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00431270. */
-
-
-unsigned int FUN_00430f98(void)
-
-{
-/* irregular: 1 goto(s); irregular input(s): in_r3; 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int in_r3;
-  unsigned char temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v3 = in_r3 & 0xffffff00;
-  temp_v0 = FUN_00189738(&temp_v3,1,0xa0002);
-  if (temp_v0 < 0) {
-    temp_v0 = FUN_0016e800(temp_v0,0x430fc0);
-  }
-  temp_v2 = temp_v3;
-  FUN_00431270();
-  switch(temp_v0) {
-  case 0:
-    temp_v1 = (1 << temp_v2) & 1;
-    break;
-  case 1:
-    if (((1 << temp_v2) & 0x226U) != 0) {
-      return temp_v2;
-    }
-    goto LAB_00431060;
-  case 2:
-    temp_v1 = (1 << temp_v2) & 0x73e;
-    break;
-  default:
-    return temp_v2;
-  case 4:
-    temp_v1 = ((1 << temp_v2) & 0x40U) >> 6;
-    break;
-  case 5:
-    temp_v1 = ((1 << temp_v2) & 0x80U) >> 7;
-    break;
-  case 6:
-    temp_v1 = ((1 << temp_v2) & 0x800U) >> 0xb;
-  }
-  if (temp_v1 == 0) {
-LAB_00431060:
-    switch(temp_v0) {
-    default:
-      return 0;
-    case 1:
-    case 2:
-      return 1;
-    case 4:
-      return 6;
-    case 5:
-      return 7;
-    case 6:
-      return 0xb;
-    }
-  }
-  return temp_v2;
+extern u8 DAT_0053f34c;
+s32 FUN_00189738(void *value, u32 size, u32 block);
+void FUN_0016e800(s32 result, u32 location);
+u32 FUN_00431270(void);
 }
 
-} /* extern "C" */
+static __inline void checkLanguageResult(s32 result, u32 location)
+{
+    if (nnResultIsFailure(result))
+        FUN_0016e800(result, location);
+}
+
+/* Use the configured language only if it is supported by the console's region. */
+extern "C" u32 FUN_00430f98(void)
+{
+    u8 language = DAT_0053f34c;
+    s32 result = FUN_00189738(&language, 1, 0xA0002);
+    checkLanguageResult(result, __current_pc());
+    u8 configuredLanguage = language;
+    u32 region = FUN_00431270();
+    bool supported;
+    switch (region) {
+    case 0:
+        supported = (1u << configuredLanguage) & 1;
+        break;
+    case 1:
+        supported = ((1u << configuredLanguage) & 0x226) != 0;
+        break;
+    case 2:
+        supported = ((1u << configuredLanguage) & 0x73e) != 0;
+        break;
+    case 4:
+        supported = ((1u << configuredLanguage) & 0x40) >> 6;
+        break;
+    case 5:
+        supported = ((1u << configuredLanguage) & 0x80) >> 7;
+        break;
+    case 6:
+        supported = ((1u << configuredLanguage) & 0x800) >> 11;
+        break;
+    default:
+        return configuredLanguage;
+    }
+    if (supported)
+        return configuredLanguage;
+    switch (region) {
+    default:
+        return 0;
+    case 1:
+    case 2:
+        return 1;
+    case 4:
+        return 6;
+    case 5:
+        return 7;
+    case 6:
+        return 11;
+    }
+}

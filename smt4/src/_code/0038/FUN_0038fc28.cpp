@@ -1,65 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038fc28` (_code @ 0x38fc28, 0x114 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: cursor signed-byte load/base calculation and switch NOP placement differ. */
+#include "ui/SceneWindowWork.h"
 
 extern "C" {
+TimedState *timeInitializeActiveState(TimedState *);
+void FUN_0027ea28(void *job, u32 message, s32 argument, s32 flags);
+void FUN_0023392c(SceneWindowWork *, s32, s32);
+void FUN_0027e9c0(void *job);
+void jobOwnerFreeSlotAndStop(void *job);
+void eventQueueAddUniqueIfValid(u32 eventId);
+s32 buttonHelpHasEnabledEntryForId(u32);
 
-int FUN_0023392c(...);
-int timeInitializeActiveState(unsigned char [20]);
-int FUN_0027e9c0(int);
-int FUN_0027ea28(int, int, int);
-int jobOwnerFreeSlotAndStop(int);
-int eventQueueAddUniqueIfValid(int);
-
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_0023392c. */
-/* Supplied declaration required: timeInitializeActiveState. */
-extern int buttonHelpHasEnabledEntryForId(unsigned int);
-/* Supplied declaration required: FUN_0027e9c0. */
-/* Supplied declaration required: FUN_0027ea28. */
-/* Supplied declaration required: jobOwnerFreeSlotAndStop. */
-/* Supplied declaration required: eventQueueAddUniqueIfValid. */
-
-
-void FUN_0038fc28(int param_1)
-
+/* Open the dialog, await confirmation, and finish its close transition. */
+void FUN_0038fc28(SceneWindowWork *work)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [20];
-  
-  timeInitializeActiveState(temp_v3);
-  temp_v1 = *(int *)(param_1 + 8);
-  temp_v2 = param_1 + 0x11b0;
-  if (temp_v1 == 0) {
-    FUN_0027ea28(temp_v2,0x67,0);
-    FUN_0023392c(param_1,3,1);
-    temp_v0 = 1;
-    *(unsigned int *)(param_1 + 8) = temp_v0;
-    return;
-  }
-  if (temp_v1 != 1) {
-    if ((temp_v1 == 2) && (*(char *)(param_1 + 0x167a) != '\0')) {
-      jobOwnerFreeSlotAndStop(temp_v2);
-      *(unsigned int *)(param_1 + 4) = 0xf;
-      *(unsigned int *)(param_1 + 8) = 0;
-      if (*(int **)(param_1 + 0x208) != (int *)0x0) {
-        (**(romwright_code **)(**(int **)(param_1 + 0x208) + 4))();
-        *(unsigned int *)(param_1 + 0x208) = 0;
-      }
+    TimedState time;
+    timeInitializeActiveState(&time);
+    void *job = &work->dialogJob;
+    switch (work->transition.phase) {
+    case 0:
+        FUN_0027ea28(job, 0x67, 0, 0);
+        FUN_0023392c(work, 3, 1);
+        work->transition.phase = 1;
+        break;
+    case 1:
+        if (work->dialog.cursor.confirmed && buttonHelpHasEnabledEntryForId(0x10)) {
+            eventQueueAddUniqueIfValid(0x100016d);
+            FUN_0027e9c0(job);
+            FUN_0023392c(work, -1, 0);
+            work->transition.phase = 2;
+        }
+        break;
+    case 2:
+        if (work->dialog.cursor.confirmed) {
+            jobOwnerFreeSlotAndStop(job);
+            work->transition.state = 0xf;
+            work->transition.phase = 0;
+            if (work->transition.callback != NULL) {
+                ScreenTransitionCallback *callback = work->transition.callback;
+                callback->vtable->destroy(callback);
+                work->transition.callback = NULL;
+            }
+        }
+        break;
     }
-  }
-  else if ((*(char *)(param_1 + 0x167a) != '\0') && (temp_v1 = buttonHelpHasEnabledEntryForId(0x10), temp_v1 != 0)) {
-    eventQueueAddUniqueIfValid(0x100016d);
-    FUN_0027e9c0(temp_v2);
-    FUN_0023392c(param_1,0xffffffff,0);
-    temp_v0 = 2;
-    *(unsigned int *)(param_1 + 8) = temp_v0;
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

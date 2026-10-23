@@ -8,9 +8,9 @@ extern u32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
 extern u32 btlScriptResolveGroupArg(void);
 extern s32 FUN_002499fc(u32 group, s32 *start, s32 *count);
-extern s32 FUN_00245854(BtlUnitEntry *unit, u32 arg);
+extern s32 btlEntryHasActionSkillCategory(BtlUnitEntry *unit, u32 arg);
 
-/* Script command: pushes whether FUN_00245854 accepts argument 0 for a present, non-excluded unit of the current group
+/* Script command: pushes whether btlEntryHasActionSkillCategory accepts argument 0 for a present, non-excluded unit of the current group
  * or the active entry. */
 u32 scrCommBtlGroupUnitCheck(void)
 {
@@ -24,7 +24,7 @@ u32 scrCommBtlGroupUnitCheck(void)
     for (index = start; index < start + count; index++) {
         BtlUnitEntry *unit = &btlGetMainState()->units[index];
 
-        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && FUN_00245854(unit, arg) != 0) {
+        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && btlEntryHasActionSkillCategory(unit, arg) != 0) {
             scrSetResult(1);
             return 1;
         }
@@ -34,7 +34,7 @@ u32 scrCommBtlGroupUnitCheck(void)
 
         btlGetMainState();
         active = btlMainFindActiveEntry();
-        if (active != NULL && FUN_00245854(active, arg) != 0) {
+        if (active != NULL && btlEntryHasActionSkillCategory(active, arg) != 0) {
             scrSetResult(1);
             return 1;
         }

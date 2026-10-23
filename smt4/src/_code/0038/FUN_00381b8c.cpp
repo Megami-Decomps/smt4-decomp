@@ -1,120 +1,105 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00381b8c` (_code @ 0x381b8c, 0x19c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: final reset-store scheduling differs and grouped defaults use a base-plus-offset relocation. */
+#include "shard/W6_W6Match7_DrawParameters.h"
+#include "quest_center/QuestRuntime.h"
 
+struct QuestCenterScreenStateIV {
+    u32 flags;
+    u8 unk004[8];
+    u32 frame;
+    u32 unk010;
+    u32 state;
+    u32 unk018;
+    s32 selectedQuest;
+    u32 tableControl;
+    Params002c312c parameters;
+    u8 unk044[0x248];
+    u32 texts[4];
+    u8 unk29c[0x300];
+    u32 counter;
+    u32 messageFile;
+    u32 modelFile;
+    u32 resources[7];
+    u8 unk5c4[0x108];
+    u8 entries[0x640];
+    u8 unkd0c[0x34];
+    u8 active;
+    u8 unkd41[0x4b];
+    u32 selection;
+    u8 unkd90[0x14];
+    u32 pending;
+    u8 unkda8[0x208];
+    u32 first;
+    u32 second;
+};
+struct QuestCenterDrawDefaultsIV {
+    u8 first[24];
+    u8 second[168];
+};
 extern "C" {
+extern const QuestCenterDrawDefaultsIV DAT_004057a8;
+void FUN_003852c8(void);
+void memClear(void *buffer, u32 size);
+void asdLoadFileAsyncSimple(const char *path, u32 *result, u32 options);
+void drawParameterBlockClear(Params002c312c *parameters);
+void paramsInit(Params002c312c *, u32, u16, u32, u16, u32, u16, u32, u16, u32, u16);
+void dataTable27Load(u32 *control);
+void FUN_00385aec(u32 *control);
+void FUN_00385af4(u32 *control);
+void asdTMTexTableLoadSprites(u32 table);
+void asdTMTexTableLoadEntryAsync(u32 table, s32 entry);
+u32 asdTextCreate(u32 options);
+void FUN_002637c8(void);
+void messageStatesSetFirst(s32 state);
+void qcMainSetMode(s32 mode);
+const QuestRuntimeDefinition *dataTable1bOr1cGetRecord(u32 id);
+s32 questReadRuntimeFlag(u32 id, u32 flag);
+void FUN_0028eeb8(u32 id);
 
-int qcMainSetMode(int);
-int FUN_002637c8(void);
-int FUN_0028eeb8(unsigned int);
-int asdLoadFileAsyncSimple(unsigned char *, unsigned int *, int);
-int asdTMTexTableLoadEntryAsync(int, int);
-int messageStatesSetFirst(int);
-int dataTable1bOr1cGetRecord(void);
-int paramsInit(unsigned int *, int, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int memClear(unsigned int *, int);
-int asdTMTexTableLoadSprites(int);
-int FUN_003852c8(void);
-int dataTable27Load(unsigned int *);
-int FUN_00385aec(unsigned int *);
-int FUN_00385af4(unsigned int *);
-int drawParameterBlockClear(unsigned int *);
-
-/* stack frame of param_1: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern unsigned char LAB_00381d28; /* 0x381d28 */
-extern unsigned char LAB_00381d4c; /* 0x381d4c */
-extern unsigned char DAT_004057a8; /* 0x4057a8 */
-extern unsigned char DAT_004057c0; /* 0x4057c0 */
-
-/* Supplied declaration required: qcMainSetMode. */
-/* Supplied declaration required: FUN_002637c8. */
-/* Supplied declaration required: FUN_0028eeb8. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-extern int questReadRuntimeFlag(unsigned int, unsigned int);
-/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
-/* Supplied declaration required: messageStatesSetFirst. */
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-extern unsigned int asdTextCreate(unsigned int);
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdTMTexTableLoadSprites. */
-/* Supplied declaration required: FUN_003852c8. */
-/* Supplied declaration required: dataTable27Load. */
-/* Supplied declaration required: FUN_00385aec. */
-/* Supplied declaration required: FUN_00385af4. */
-/* Supplied declaration required: drawParameterBlockClear. */
-
-
-void FUN_00381b8c(unsigned int *param_1)
-
+// Initialize the quest-center screen resources and enable eligible late quest entries.
+void FUN_00381b8c(QuestCenterScreenStateIV *work)
 {
-/* irregular: 15 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  FUN_003852c8();
-  *param_1 = 0;
-  param_1[3] = 0;
-  param_1[5] = 0;
-  param_1[0x168] = 0;
-  param_1[0x16a] = 0;
-  param_1[0x16b] = 0;
-  param_1[0x16c] = 0;
-  param_1[0x16d] = 0;
-  param_1[0x16e] = 0;
-  param_1[0x16f] = 0;
-  param_1[0x170] = 0;
-  param_1[0x169] = 0;
-  memClear(param_1 + 0x1b3,0x640);
-  asdLoadFileAsyncSimple(&LAB_00381d28,param_1 + 0x168,0);
-  asdLoadFileAsyncSimple(&LAB_00381d4c,param_1 + 0x169,0);
-  drawParameterBlockClear(param_1 + 9);
-  paramsInit(param_1 + 9,0,0,&DAT_004057a8,0x18,0,0,0,0,&DAT_004057c0,0xa8);
-  dataTable27Load(param_1 + 8);
-  FUN_00385aec(param_1 + 8);
-  FUN_00385af4(param_1 + 8);
-  param_1[0x369] = 0;
-  param_1[0x3ed] = 0;
-  param_1[0x3ec] = 0;
-  param_1[0x363] = 0;
-  param_1[7] = 0xffffffff;
-  param_1[0x167] = 0;
-  *(unsigned char *)(param_1 + 0x350) = 0;
-  asdTMTexTableLoadSprites(0x31);
-  asdTMTexTableLoadEntryAsync(0x31,0);
-  temp_v2 = 0;
-  do {
-    param_1[temp_v2 + 0xa3] = 0;
-    temp_v0 = asdTextCreate(0);
-    temp_v3 = temp_v2 + 1;
-    param_1[temp_v2 + 0xa3] = temp_v0;
-    temp_v2 = temp_v3;
-  } while (temp_v3 < 4);
-  FUN_002637c8();
-  messageStatesSetFirst(0);
-  qcMainSetMode(0);
-  temp_v2 = 0x15e;
-  do {
-    temp_v3 = temp_v2;
-    dataTable1bOr1cGetRecord();
-    if (((temp_v3 != 0) && (*(char *)(temp_v3 + 6) == '\0')) &&
-       (temp_v1 = questReadRuntimeFlag(temp_v2,1), temp_v1 == 0)) {
-      FUN_0028eeb8(temp_v2);
+    FUN_003852c8();
+    work->flags = 0;
+    work->frame = 0;
+    work->state = 0;
+    work->messageFile = 0;
+    work->resources[0] = 0;
+    work->resources[1] = 0;
+    work->resources[2] = 0;
+    work->resources[3] = 0;
+    work->resources[4] = 0;
+    work->resources[5] = 0;
+    work->resources[6] = 0;
+    work->modelFile = 0;
+    memClear(work->entries, sizeof(work->entries));
+    asdLoadFileAsyncSimple("quest_center/common/qc_common.bf", &work->messageFile, 0);
+    asdLoadFileAsyncSimple("quest_center/common/qc_common.mbm", &work->modelFile, 0);
+    drawParameterBlockClear(&work->parameters);
+    paramsInit(&work->parameters, 0, 0, reinterpret_cast<u32>(DAT_004057a8.first), sizeof(DAT_004057a8.first),
+               0, 0, 0, 0, reinterpret_cast<u32>(DAT_004057a8.second), sizeof(DAT_004057a8.second));
+    dataTable27Load(&work->tableControl);
+    FUN_00385aec(&work->tableControl);
+    FUN_00385af4(&work->tableControl);
+    work->pending = 0;
+    work->second = 0;
+    work->first = 0;
+    work->selection = 0;
+    work->selectedQuest = -1;
+    work->counter = 0;
+    work->active = 0;
+    asdTMTexTableLoadSprites(0x31);
+    asdTMTexTableLoadEntryAsync(0x31, 0);
+    for (u32 index = 0; index < 4; ++index) {
+        work->texts[index] = 0;
+        work->texts[index] = asdTextCreate(0);
     }
-    temp_v2 = (temp_v2 + 1) & 0xffff;
-  } while (temp_v2 < 400);
-  return;
+    FUN_002637c8();
+    messageStatesSetFirst(0);
+    qcMainSetMode(0);
+    for (u16 id = 350; id < 400; ++id) {
+        const QuestRuntimeDefinition *record = dataTable1bOr1cGetRecord(id);
+        if (record != NULL && record->kind == 0 && !questReadRuntimeFlag(id, 1))
+            FUN_0028eeb8(id);
+    }
 }
-
-} /* extern "C" */
+}

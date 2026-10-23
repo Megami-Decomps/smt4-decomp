@@ -1,77 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e5c6c` (_code @ 0x2e5c6c, 0x114 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: directory/entry lifetimes swap r5/r6; width comparison and text-right addition scheduling differ. */
+#include "shard/W4_Match3_InfoWindow.h"
 
 extern "C" {
+void *FUN_00333750(void);
+void *fileSectionGetData(void *section, u32 entry, u32 subsection);
+void asdTextDrawDirectoryEntry(void *text, s32 font, u32 color, s32 flags,
+                               s32 mode, void *directory, u32 entry);
+f32 effectSpawnDefaultArguments(void *text);
+void uiSpriteSetKeyframe(void *sprite, s32 frame, s32 flags);
+void uiSpriteSetImageKeyframe(void *sprite, s32 frame, s32 flags);
+s32 vec2GetXInt(void *sprite);
 
-int uiSpriteSetKeyframe(...);
-int uiSpriteSetImageKeyframe(int, int);
-int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int, int, int, unsigned int);
-int effectSpawnDefaultArguments(unsigned int);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern int g_infoWin; /* 0x57f574 */
-
-extern int vec2GetXInt(int);
-extern int fileSectionGetData(int, unsigned int, unsigned int);
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: asdTextDrawDirectoryEntry. */
-/* Supplied declaration required: effectSpawnDefaultArguments. */
-extern int FUN_00333750(void);
-
-
-void FUN_002e5c6c(unsigned int param_1)
-
+/* Set and measure a directory message before opening the information popup. */
+void FUN_002e5c6c(u32 entry)
 {
-/* irregular: irregular input(s): in_s0; 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  float in_s0;
-  
-  temp_v1 = FUN_00333750();
-  temp_v2 = fileSectionGetData(temp_v1,param_1,0);
-  temp_v0 = g_infoWin;
-  if (temp_v2 != 0) {
-    *(unsigned char *)(g_infoWin + 0x31) = 0;
-    if (temp_v1 != 0) {
-      *(unsigned char *)(temp_v0 + 0x31) = 1;
-      asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x328),3,0xffffffff,0,3,temp_v1,param_1);
-      effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0x328));
-      if ((int)in_s0 >= 0x43a68000) {
-        *(unsigned char *)(temp_v0 + 0x32) = 1;
-        *(int *)(temp_v0 + 0x14) = (int)in_s0;
-      }
-      else {
-        *(unsigned char *)(temp_v0 + 0x32) = 0;
-      }
-      uiSpriteSetKeyframe(temp_v0 + 0x16c,2,0);
-      temp_v1 = vec2GetXInt(temp_v0 + 0x16c);
-      *(int *)(temp_v0 + 0x18) = temp_v1;
-      *(int *)(temp_v0 + 0x1c) = temp_v1 + *(int *)(temp_v0 + 0x14) + 0x2a;
-      if (*(int *)(temp_v0 + 8) == 3) {
-        *(unsigned int *)(temp_v0 + 8) = 2;
-      }
-      *(unsigned int *)(temp_v0 + 0x10) = 0x1e;
+    void *directory = FUN_00333750();
+    if (fileSectionGetData(directory, entry, 0)) {
+        InfoWindow *window = g_infoWin;
+        window->hasText = 0;
+        if (directory) {
+            window->hasText = 1;
+            asdTextDrawDirectoryEntry(window->text, 3, ~0u, 0, 3, directory, entry);
+            f32 width = effectSpawnDefaultArguments(window->text);
+            union { f32 value; s32 bits; } measured;
+            measured.value = width;
+            if (0x43a68000 <= measured.bits) {
+                window->wideText = 1;
+                window->textWidth = (s32)width;
+            } else {
+                window->wideText = 0;
+            }
+            uiSpriteSetKeyframe(window->labelSprite, 2, 0);
+            s32 x = vec2GetXInt(window->labelSprite);
+            window->labelX = x;
+            window->textRight = (x + window->textWidth) + 42;
+            if (window->state == 3)
+                window->state = 2;
+            window->timer = 30;
+        }
+        window = g_infoWin;
+        window->state = 1;
+        uiSpriteSetKeyframe(window->sprite, 0, 0);
+        uiSpriteSetImageKeyframe(window->sprite, 0, 0);
+        window->style = 1;
+        window->shown = 1;
+        window->active = 0;
+        window->timer = 30;
+        window->unk32D = 0;
     }
-    temp_v0 = g_infoWin;
-    temp_v1 = g_infoWin + 0x54;
-    *(unsigned int *)(g_infoWin + 8) = 1;
-    uiSpriteSetKeyframe(temp_v1,0);
-    uiSpriteSetImageKeyframe(temp_v0 + 0x54,0);
-    *(unsigned char *)(temp_v0 + 0x33) = 1;
-    *(unsigned char *)(temp_v0 + 0x30) = 1;
-    *(unsigned int *)(temp_v0 + 0x20) = 0;
-    *(unsigned int *)(temp_v0 + 0x10) = 0x1e;
-    *(unsigned char *)(temp_v0 + 0x32d) = 0;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -1,67 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00388068` (_code @ 0x388068, 0x13c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved-unit list addressing and HP clamp stores/registers differ from retail. */
+#include "shard/W4_Match6_BtlEntry.h"
+#include "shard/Shard003D.h"
+#include "addon/aocMain.h"
 
 extern "C" {
+void partyRefreshSlotValues();
+void gameFlagSetValue(u32 flag, u32 bank, u32 value);
+extern AocSystem *g_aocSystem;
+const GameBlock2830C *gameDataBlocksGetSaveData();
+s32 recordGetScaledMaximum(const BtlEquip *unit);
+s32 gameFlagIsSet(u32 flag);
+BtlEquip *slotRecordFindById(u16 id);
+s32 aocHasType36(AocSystem *system, u32 id);
+s32 bitsAt60Test(const BtlEquip *unit, u32 mask);
 
-int partyRefreshSlotValues(void);
-int gameFlagSetValue(int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned int g_aocSystem; /* 0x570280 */
-
-extern int gameDataBlocksGetSaveData(void);
-extern int recordGetScaledMaximum(int);
-extern int gameFlagIsSet(unsigned int);
-extern int slotRecordFindById(void);
-/* Supplied declaration required: partyRefreshSlotValues. */
-/* Supplied declaration required: gameFlagSetValue. */
-extern int aocHasType36(unsigned int, unsigned int);
-extern int bitsAt60Test(int, unsigned int);
-
-
-void FUN_00388068(void)
-
+// Apply each newly installed stat bonus once, preserving current damage when maximum HP grows.
+void FUN_00388068()
 {
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v1 = aocHasType36(g_aocSystem,0x4f6);
-  if ((temp_v1 != 0) && (temp_v1 = gameFlagIsSet(0x4f6), temp_v1 == 0)) {
-    temp_v1 = gameDataBlocksGetSaveData();
-    gameFlagSetValue(0x45b,1);
-    gameFlagSetValue(0x4f6,1);
-    temp_v4 = 0;
-    do {
-      if ((((*(unsigned int *)(temp_v1 + temp_v4 * 4 + 0x28310) & 0xffff) != 0) &&
-          (temp_v2 = slotRecordFindById(), temp_v2 != 0)) && (temp_v3 = bitsAt60Test(temp_v2,1), temp_v3 == 0)) {
-        temp_v3 = recordGetScaledMaximum(temp_v2);
-        temp_v0 = ((short)temp_v3 - *(short *)(temp_v2 + 0xe)) + *(short *)(temp_v2 + 0x2a);
-        if (temp_v0 <= temp_v3) {
-          temp_v3 = (int)temp_v0;
+    if (aocHasType36(g_aocSystem, 0x4f6) != 0 && gameFlagIsSet(0x4f6) == 0) {
+        // The saved bonus-unit list begins just past the recovered GameBlock2830C prefix.
+        struct BonusUnitsView { GameBlock2830C prefix; u32 ids[10]; };
+        const BonusUnitsView *save = reinterpret_cast<const BonusUnitsView *>(gameDataBlocksGetSaveData());
+        gameFlagSetValue(0x45b, 1, 1);
+        gameFlagSetValue(0x4f6, 1, 1);
+        for (s32 index = 0; index < 10; ++index) {
+            u16 id = static_cast<u16>(save->ids[index]);
+            if (id != 0) {
+                BtlEquip *unit = slotRecordFindById(id);
+                if (unit != NULL && bitsAt60Test(unit, 1) == 0) {
+                    s32 maximum = recordGetScaledMaximum(unit);
+                    unit->hp = static_cast<s16>(maximum - unit->maxHp + unit->hp);
+                    if (unit->hp > maximum) {
+                        unit->hp = static_cast<s16>(maximum);
+                    }
+                }
+            }
         }
-        *(short *)(temp_v2 + 0x2a) = temp_v0;
-        *(short *)(temp_v2 + 0x2a) = (short)temp_v3;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 10);
-  }
-  temp_v1 = aocHasType36(g_aocSystem,0x4f7);
-  if ((temp_v1 != 0) && (temp_v1 = gameFlagIsSet(0x4f7), temp_v1 == 0)) {
-    gameFlagSetValue(0x45b,1);
-    gameFlagSetValue(0x4f7,1);
-    partyRefreshSlotValues();
-    return;
-  }
-  return;
+    }
+    if (aocHasType36(g_aocSystem, 0x4f7) != 0 && gameFlagIsSet(0x4f7) == 0) {
+        gameFlagSetValue(0x45b, 1, 1);
+        gameFlagSetValue(0x4f7, 1, 1);
+        partyRefreshSlotValues();
+    }
 }
-
-} /* extern "C" */
+}

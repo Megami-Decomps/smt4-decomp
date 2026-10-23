@@ -1,112 +1,130 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00233170` (_code @ 0x233170, 0x178 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initial vector-address scheduling and slot-loop base/index registers differ. */
+#include "map/mapGimic.h"
+#include <string.h>
+
+struct GimmickResetPrefixA {
+    u32 state;
+    u8 active;
+    u8 unk05;
+    u16 parameters[4];
+    u8 unk0e[2];
+    u32 resource;
+    struct { u8 active; u8 unk01[7]; } channels[4];
+    u32 vector[3];
+    u32 stateWords[10];
+    u8 pending;
+    u8 unk69[3];
+    u32 auxiliary[5];
+    u32 counter;
+    u32 references[3];
+};
+struct GimmickResetTailA {
+    u8 active;
+    u8 unk01;
+    s16 id;
+    f32 values[4];
+    u32 resource;
+    u32 state;
+    u8 pending;
+    u8 unk1d;
+    s16 delay;
+    u8 requested;
+    u8 unk21[3];
+    u32 first;
+    u32 second;
+};
+union GimmickResetEntryA {
+    MapGimicEntry base;
+    struct {
+        u8 unk00[0x10];
+        f32 angle;
+        u8 unk14[0x14];
+        f32 transform[4];
+        u32 state;
+    } reset;
+};
+struct GimmickResetViewA {
+    union { MapGimic base; GimmickResetPrefixA control; };
+    GimmickResetTailA tail;
+};
 
 extern "C" {
+extern MapGimic *g_mapGimic;
+void wordTripleClear(u32 *words);
 
-int wordTripleClear(unsigned int *);
-
-extern unsigned int *g_mapGimic; /* 0x580ca0 */
-
-/* Supplied declaration required: wordTripleClear. */
-
-
+// Reset all map gimmick controllers, keeping padding and untouched resource storage intact.
 void FUN_00233170(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  int temp_v0;
-  int temp_v1;
-  
-  puVar1 = g_mapGimic;
-  puVar2 = g_mapGimic + 0xd;
-  *g_mapGimic = 0;
-  *(unsigned char *)(puVar1 + 1) = 0;
-  *(unsigned short *)((int)puVar1 + 6) = 0;
-  *(unsigned short *)(puVar1 + 2) = 0;
-  *(unsigned short *)((int)puVar1 + 10) = 0;
-  *(unsigned short *)(puVar1 + 3) = 0;
-  puVar1[4] = 0;
-  *(unsigned char *)(puVar1 + 5) = 0;
-  *(unsigned char *)(puVar1 + 7) = 0;
-  *(unsigned char *)(puVar1 + 9) = 0;
-  *(unsigned char *)(puVar1 + 0xb) = 0;
-  wordTripleClear(puVar2);
-  puVar1 = g_mapGimic;
-  g_mapGimic[0x10] = 0;
-  puVar1[0x11] = 0;
-  puVar1[0x12] = 0;
-  puVar1[0x13] = 0;
-  puVar1[0x14] = 0;
-  puVar1[0x15] = 0;
-  puVar1[0x16] = 0;
-  puVar1[0x17] = 0;
-  puVar1[0x18] = 0;
-  puVar1[0x19] = 0;
-  *(unsigned char *)(puVar1 + 0x1a) = 0;
-  puVar1[0x1b] = 0;
-  puVar1[0x1c] = 0;
-  puVar1[0x1d] = 0;
-  puVar1[0x1e] = 0;
-  puVar1[0x1f] = 0;
-  puVar1[0x21] = 0;
-  puVar1[0x22] = 0;
-  puVar1[0x23] = 0;
-  puVar1[0x20] = 0;
-  temp_v1 = 0;
-  do {
-    puVar1 = g_mapGimic;
-    temp_v0 = temp_v1 + 1;
-    *(unsigned char *)(g_mapGimic + temp_v1 * 0xf + 0x24) = 0;
-    *(unsigned char *)((int)puVar1 + temp_v1 * 0x3c + 0x91) = 0;
-    puVar1[temp_v1 * 0xf + 0x25] = 0;
-    puVar1[temp_v1 * 0xf + 0x26] = 0;
-    puVar1[temp_v1 * 0xf + 0x27] = 0;
-    puVar1[temp_v1 * 0xf + 0x28] = 0x42b40000;
-    *(unsigned short *)(puVar1 + temp_v1 * 0xf + 0x29) = 0;
-    *(unsigned short *)((int)puVar1 + temp_v1 * 0x3c + 0xa6) = 0;
-    puVar1[temp_v1 * 0xf + 0x2a] = 0;
-    puVar1[temp_v1 * 0xf + 0x2b] = 0;
-    *(unsigned short *)(puVar1 + temp_v1 * 0xf + 0x2c) = 0;
-    *(unsigned short *)((int)puVar1 + temp_v1 * 0x3c + 0xb2) = 0;
-    puVar1[temp_v1 * 0xf + 0x2e] = 0;
-    puVar1[temp_v1 * 0xf + 0x2f] = 0;
-    puVar1[temp_v1 * 0xf + 0x30] = 0;
-    puVar1[temp_v1 * 0xf + 0x31] = 0;
-    puVar1[temp_v1 * 0xf + 0x32] = 0;
-    temp_v1 = temp_v0;
-  } while (temp_v0 < 0x23);
-  temp_v1 = 0;
-  do {
-    puVar1 = g_mapGimic;
-    temp_v0 = temp_v1 + 1;
-    *(unsigned char *)(g_mapGimic + temp_v1 * 6 + 0x231) = 0;
-    *(unsigned short *)((int)puVar1 + temp_v1 * 0x18 + 0x8c6) = 0;
-    *(unsigned short *)(puVar1 + temp_v1 * 6 + 0x232) = 0;
-    puVar1[temp_v1 * 6 + 0x233] = 0;
-    puVar1[temp_v1 * 6 + 0x234] = 0;
-    *(unsigned char *)(puVar1 + temp_v1 * 6 + 0x235) = 0;
-    *(unsigned short *)((int)puVar1 + temp_v1 * 0x18 + 0x8d6) = 0;
-    *(unsigned char *)(puVar1 + temp_v1 * 6 + 0x236) = 0;
-    puVar1 = g_mapGimic;
-    temp_v1 = temp_v0;
-  } while (temp_v0 < 10);
-  *(unsigned char *)(g_mapGimic + 0x26d) = 0;
-  *(unsigned short *)((int)puVar1 + 0x9b6) = 0;
-  puVar1[0x26e] = 0;
-  puVar1[0x26f] = 0;
-  puVar1[0x270] = 0;
-  puVar1[0x271] = 0;
-  puVar1[0x272] = 0;
-  puVar1[0x273] = 0;
-  *(unsigned char *)(puVar1 + 0x274) = 0;
-  *(unsigned short *)((int)puVar1 + 0x9d2) = 0;
-  *(unsigned char *)(puVar1 + 0x275) = 0;
-  puVar1[0x276] = 0;
-  puVar1[0x277] = 0;
-  return;
+    // The extra controller follows the canonical MapGimic prefix; do not grow that shared type.
+    GimmickResetViewA *work = reinterpret_cast<GimmickResetViewA *>(g_mapGimic);
+    work->control.state = 0;
+    work->control.active = 0;
+    work->control.parameters[0] = 0;
+    work->control.parameters[1] = 0;
+    work->control.parameters[2] = 0;
+    work->control.parameters[3] = 0;
+    work->control.resource = 0;
+    work->control.channels[0].active = 0;
+    work->control.channels[1].active = 0;
+    work->control.channels[2].active = 0;
+    work->control.channels[3].active = 0;
+    wordTripleClear(work->control.vector);
+    work = reinterpret_cast<GimmickResetViewA *>(g_mapGimic);
+    memset(work->control.stateWords, 0, sizeof(work->control.stateWords));
+    work->control.pending = 0;
+    work->control.auxiliary[0] = 0;
+    work->control.auxiliary[1] = 0;
+    work->control.auxiliary[2] = 0;
+    work->control.auxiliary[3] = 0;
+    work->control.auxiliary[4] = 0;
+    work->control.references[0] = 0;
+    work->control.references[1] = 0;
+    work->control.references[2] = 0;
+    work->control.counter = 0;
+    for (s32 index = 0; index < MAP_GIMIC_ENTRIES; ++index) {
+        GimmickResetEntryA *entry = reinterpret_cast<GimmickResetEntryA *>(&g_mapGimic->entries[index]);
+        entry->base.active = 0;
+        entry->base.requested = 0;
+        entry->base.position[0] = 0.0f;
+        entry->base.position[1] = 0.0f;
+        entry->base.position[2] = 0.0f;
+        entry->reset.angle = 90.0f;
+        entry->base.requestState = 0;
+        entry->base.id = 0;
+        entry->base.obj = NULL;
+        entry->base.gates.entryId = 0;
+        entry->base.gates.required = 0;
+        entry->base.gates.excluded = 0;
+        entry->reset.transform[0] = 0.0f;
+        entry->reset.transform[1] = 0.0f;
+        entry->reset.transform[2] = 0.0f;
+        entry->reset.transform[3] = 0.0f;
+        entry->reset.state = 0;
+    }
+    for (s32 index = 0; index < MAP_GIMIC_SLOTS; ++index) {
+        MapGimicSlot *slot = &g_mapGimic->slots[index];
+        slot->active = 0;
+        slot->animationId = 0;
+        slot->id = 0;
+        slot->obj = NULL;
+        slot->unk0C = 0;
+        slot->requested = 0;
+        slot->delay = 0;
+        slot->unk14[0] = 0;
+    }
+    GimmickResetTailA *tail = &reinterpret_cast<GimmickResetViewA *>(g_mapGimic)->tail;
+    tail->active = 0;
+    tail->id = 0;
+    tail->values[0] = 0.0f;
+    tail->values[1] = 0.0f;
+    tail->values[2] = 0.0f;
+    tail->values[3] = 0.0f;
+    tail->resource = 0;
+    tail->state = 0;
+    tail->pending = 0;
+    tail->delay = 0;
+    tail->requested = 0;
+    tail->first = 0;
+    tail->second = 0;
 }
-
-} /* extern "C" */
+}

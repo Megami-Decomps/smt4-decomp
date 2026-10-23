@@ -1,123 +1,70 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0046868c` (_code @ 0x46868c, 0x1bc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: world-vector copy formation, projected-coordinate VFP scheduling and stack slots differ. */
+#include "map/NpcDummyBindings.h"
+#include "shard/S1ListPanel.h"
+#include "shard/W6_W6Match6_ProjectionCamera.h"
 
-extern "C" {
-
-int efctSetSpeed(void);
-int FUN_001835b4(...);
-int renderCtxCalculateStereoParallax(unsigned int);
-int FUN_002a1850(float *, int, unsigned int, float *);
-int messageGetActiveValue(int);
-int VectorSignedToFloat(...);
-
-/* stack frame of param_3: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-    unsigned int sp7C; /* 0x7c: local_7c */
-    unsigned int sp80; /* 0x80: local_80 */
-} param_3_stack;
-
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-extern unsigned int FUN_00152f54(void);
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001834a4(void);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_002a1850. */
-/* Supplied declaration required: messageGetActiveValue. */
-
-
-void FUN_0046868c(int param_1,unsigned int param_2,int param_3)
-
-{
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  unsigned int in_fpscr;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  unsigned int temp_v11;
-  long long temp_v12;
-  float temp_v13;
-  float fStack_70;
-  unsigned int temp_v14;
-  unsigned int temp_v15;
-  float temp_v16;
-  float temp_v17;
-  unsigned int temp_v18;
-  
-  temp_v15 = 8;
-  temp_v14 = 0x18d;
-  temp_v1 = FUN_001834a4();
-  temp_v7 = 0.31f;
-  temp_v5 = (int)**(short **)(temp_v1 + 0xc);
-  temp_v0 = (*(short **)(temp_v1 + 0xc))[1];
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  temp_v12 = (unsigned long long)(unsigned int)(int)temp_v7 << 0x20;
-  temp_v4 = 0;
-  do {
-    temp_v11 = (unsigned int)((unsigned long long)temp_v12 >> 0x20);
-    temp_v1 = param_1 + temp_v4 * 10;
-    if (*(char *)(temp_v1 + 0xe46) != '\0') {
-      temp_v3 = *(unsigned short *)(temp_v1 + 0xe48) - 1;
-      temp_v6 = temp_v3 == 0;
-      if (-1 < temp_v3) {
-        param_3 = *(int *)(param_1 + 0xabc);
-        temp_v6 = param_3 == temp_v3;
-      }
-      if ((!temp_v6 && (-1 < temp_v3 && temp_v3 <= param_3)) &&
-         (temp_v3 = *(int *)(param_1 + temp_v3 * 4 + 0xa34), temp_v3 != 0)) {
-        temp_v3 = *(int *)(temp_v3 + 4);
-        temp_v18 = *(unsigned int *)(temp_v3 + 0x1bc);
-        temp_v16 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 0xe4c),
-                                              (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v16 = *(float *)(temp_v3 + 0x1b4) + temp_v16;
-        temp_v17 = (float)VectorSignedToFloat((int)*(char *)(temp_v1 + 0xe4e),
-                                              (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v17 = *(float *)(temp_v3 + 0x1b8) + temp_v17;
-        temp_v2 = FUN_00152f54();
-        FUN_002a1850(&temp_v13,0,temp_v2,&temp_v16);
-        temp_v7 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v10 = (float)VectorSignedToFloat(temp_v5 / 2,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v8 = (float)VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v9 = (float)VectorSignedToFloat((int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v12 = romwright_piece_4_4(temp_v11,(int)(fStack_70 - temp_v9));
-        temp_v3 = (int)((temp_v13 - temp_v7) + temp_v10 + temp_v8);
-        FUN_001835b4(2,temp_v15,temp_v14,temp_v3,(int)(fStack_70 - temp_v9),2);
-        temp_v1 = 0;
-        do {
-          messageGetActiveValue(temp_v1);
-          efctSetSpeed();
-          param_3 = temp_v1 + 0x18e;
-          FUN_001835b4(2,8,param_3,temp_v3,(int)temp_v12,6);
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < 3);
-        efctSetSpeed();
-      }
-    }
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 4);
-  return;
+namespace {
+struct ProjectedNpcMarker {
+    u8 active;
+    u8 unk01;
+    u16 actor;
+    u8 unk04[2];
+    s16 offsetX;
+    s8 offsetY;
+    u8 unk09;
+};
+typedef char ProjectedNpcMarkerLayoutCheck[sizeof(ProjectedNpcMarker) == 10 &&
+    offsetof(ProjectedNpcMarker, actor) == 2 &&
+    offsetof(ProjectedNpcMarker, offsetX) == 6 &&
+    offsetof(ProjectedNpcMarker, offsetY) == 8 ? 1 : -1];
 }
 
-} /* extern "C" */
+struct RenderCtxA;
+extern "C" {
+extern RenderCtxA *g_renderCtx;
+SpriteInfo *FUN_001834a4(u32 group, s32 sprite);
+void FUN_001835b4(u32 display, u32 group, s32 sprite, s32 x, s32 y, u32 flags);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32 depth);
+const ProjectionMatrices *FUN_00152f54();
+void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *, const f32 *world);
+f32 messageGetActiveValue(u32 channel);
+void efctSetSpeed(f32 opacity);
+
+void FUN_0046868c(NpcDummyBindings *owner, u32, s32)
+{
+    // The marker array lies beyond the currently recovered bindings prefix.
+    struct MarkerView {
+        u8 unk000[0xE46];
+        ProjectedNpcMarker markers[4];
+    };
+    const MarkerView *view = reinterpret_cast<const MarkerView *>(owner);
+    SpriteInfo *sprite = FUN_001834a4(8, 0x18D);
+    s32 width = sprite->size[0];
+    s32 height = sprite->size[1];
+    s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.31f);
+    for (u32 index = 0; index < 4; ++index) {
+        const ProjectedNpcMarker &marker = view->markers[index];
+        if (marker.active) {
+            s32 actor = marker.actor - 1;
+            if (actor >= 0 && actor < owner->count) {
+                NpcDummyControllerLink *link = owner->second[actor];
+                if (link != NULL) {
+                    MapVector world = link->controller->destination;
+                    world.x += (f32)marker.offsetX;
+                    world.y += (f32)marker.offsetY;
+                    f32 screen[3];
+                    FUN_002a1850(screen, 0, FUN_00152f54(), &world.x);
+                    s32 x = (s32)((screen[0] - (f32)width) + (f32)(width / 2) + (f32)parallax);
+                    s32 y = (s32)(screen[1] - (f32)height);
+                    FUN_001835b4(2, 8, 0x18D, x, y, 2);
+                    for (u32 channel = 0; channel < 3; ++channel) {
+                        efctSetSpeed(messageGetActiveValue(channel));
+                        FUN_001835b4(2, 8, 0x18E + channel, x, y, 6);
+                    }
+                    efctSetSpeed(1.0f);
+                }
+            }
+        }
+    }
+}
+}

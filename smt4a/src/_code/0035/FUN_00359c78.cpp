@@ -1,68 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00359c78` (_code @ 0x359c78, 0x144 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stack push uses ip and stack-pop comparison/callback registers differ. */
+#include "ui/SpriteIndicator.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
+extern RenderCtxA *g_renderCtx;
+void FUN_00183bb0(void);
+void FUN_00164b5c(u32 flags, u32 group, s32 sprite, s32 x, s32 y, u32 layer);
+void FUN_001835b4(u32 flags, u32 group, s32 sprite, s32 x, s32 y, u32 layer);
+void efctSetSpeed(f32 speed);
+s32 packNibblesAndByte(u32 first, u32 second, u32 byte);
 
-int FUN_00164b5c(int, int, int, int, unsigned int, int);
-int efctSetSpeed(void);
-int FUN_001835b4(int, int, int, int, unsigned int, int);
-int FUN_00183bb0(void);
-
-typedef int romwright_code(...);
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00183bb0. */
-
-
-void FUN_00359c78(int param_1,int param_2,unsigned int param_3)
-
+// Draw two blended background layers, then a horizontally shifted foreground sprite.
+void FUN_00359c78(SpriteLayerBlendState *blend, s32 x, s32 y)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  
-  FUN_00183bb0();
-  FUN_00164b5c(2,0x2e,0xb,param_2,param_3,0x6a);
-  efctSetSpeed();
-  temp_v0 = g_renderCtx;
-  temp_v1 = packNibblesAndByte(6,1,0);
-  piVar5 = (int *)(temp_v0 + 0x12b8);
-  temp_v2 = *piVar5;
-  temp_v3 = piVar5[temp_v2 + 2];
-  *piVar5 = temp_v2 + 1;
-  piVar5[temp_v2 + 3] = temp_v1;
-  if (*(char *)(temp_v0 + 0x12d0) != '\0' || temp_v3 != temp_v1) {
-    (**(romwright_code **)(temp_v0 + 0x12d4))();
-    *(unsigned char *)(temp_v0 + 0x12d0) = 0;
-  }
-  FUN_00164b5c(2,0x2e,0xc,param_2,param_3,0x6b);
-  temp_v0 = g_renderCtx;
-  piVar5 = (int *)(g_renderCtx + 0x12b8);
-  temp_v1 = *piVar5;
-  temp_v2 = piVar5[temp_v1 + 2];
-  *piVar5 = temp_v1 - 1;
-  if (*(char *)(temp_v0 + 0x12d0) != '\0' || temp_v2 != piVar5[temp_v1 + 1]) {
-    (**(romwright_code **)(temp_v0 + 0x12d4))(piVar5[temp_v1 + 1]);
-    *(unsigned char *)(temp_v0 + 0x12d0) = 0;
-  }
-  FUN_00183bb0();
-  efctSetSpeed();
-  FUN_001835b4(2,0x2e,0x92,*(int *)(param_1 + 4) + param_2,param_3,0x6c);
-  return;
+    FUN_00183bb0();
+    FUN_00164b5c(2, 46, 11, x, y, 106);
+    efctSetSpeed(blend->speed);
+    RenderCtxA *context = g_renderCtx;
+    s32 state = packNibblesAndByte(6, 1, 0);
+    renderStackPush(&context->stackB, state);
+    FUN_00164b5c(2, 46, 12, x, y, 107);
+    renderStackPop(&g_renderCtx->stackB);
+    FUN_00183bb0();
+    efctSetSpeed(1.0f);
+    FUN_001835b4(2, 46, 146, blend->offset + x, y, 108);
 }
-
-} /* extern "C" */
+}

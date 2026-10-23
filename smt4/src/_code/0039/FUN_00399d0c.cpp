@@ -14,7 +14,7 @@ float FUN_00231d2c(int);
 int FUN_00232554(...);
 int FUN_002b04e8(...);
 int gameGetMapBlock(void);
-int FUN_0039e8b8(...);
+int uiDrawTransientSprites(...);
 int FUN_0039eb4c(...);
 int NaviMain_GetPosY(int);
 float NaviMain_GetState(void);
@@ -65,7 +65,7 @@ extern int FUN_00288f78(int);
 extern int FUN_002b8694(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: gameGetMapBlock. */
-/* Supplied declaration required: FUN_0039e8b8. */
+/* Supplied declaration required: uiDrawTransientSprites. */
 /* Supplied declaration required: FUN_0039eb4c. */
 extern unsigned int *NaviMain_GetCursorPos(int);
 extern int NaviMain_GetPosX(void);
@@ -859,7 +859,7 @@ LAB_00399f14:
       temp_v13 = (float)((unsigned long long)temp_v27 >> 0x20);
       if (temp_v12 == 0) {
         FUN_0039eb4c(temp_v44);
-        FUN_0039e8b8(temp_v44);
+        uiDrawTransientSprites(temp_v44);
       }
     }
   }

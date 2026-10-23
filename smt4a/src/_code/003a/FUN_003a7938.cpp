@@ -1,78 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a7938` (_code @ 0x3a7938, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stack push uses ip, context/zero saved registers swap, and parallax conversion scheduling differs. */
+#include "camp/RenderCtx.h"
+#include "saveLoadUI/SaveLoadState.h"
 
 extern "C" {
+extern RenderCtxA *g_renderCtx;
+extern SaveLoadProcessA g_saveLoadProcess;
+s32 saveLoadThreadValueGet(void);
+s32 saveLoadJobIsReady(void);
+void FUN_00157558(RenderCtxA *context);
+u32 FUN_001692ac(u32 state, u32 options);
+void efctSetSpeed(f32 speed);
+void FUN_00183bb0(void);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
+void FUN_001835b4(u32 flags, u32 group, s32 sprite, s32 x, s32 y, u32 layer);
 
-int FUN_00157558(int);
-int efctSetSpeed(void);
-int FUN_001835b4(int, int, int, int, int, int);
-int FUN_00183bb0(void);
-int renderCtxCalculateStereoParallax(int);
-
-typedef int romwright_code(...);
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern unsigned char g_saveLoadProcess; /* 0x57f6bc */
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-extern int saveLoadThreadValueGet(void);
-extern int saveLoadJobIsReady(void);
-
-
-unsigned int FUN_003a7938(void)
-
+// Draw the animated save/load activity icon while its worker or job is active.
+u32 FUN_003a7938(void)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  float temp_v4;
-  
-  temp_v0 = saveLoadThreadValueGet();
-  if ((temp_v0 != 0) || (temp_v0 = saveLoadJobIsReady(), temp_v0 != 0)) {
-    FUN_00157558(g_renderCtx);
-    temp_v0 = g_renderCtx;
-    temp_v1 = FUN_001692ac(1,0);
-    piVar5 = (int *)(temp_v0 + 0x1258);
-    temp_v2 = *piVar5;
-    temp_v3 = piVar5[temp_v2 + 2];
-    *piVar5 = temp_v2 + 1;
-    piVar5[temp_v2 + 3] = temp_v1;
-    if (*(char *)(temp_v0 + 0x1270) != '\0' || temp_v3 != temp_v1) {
-      (**(romwright_code **)(temp_v0 + 0x1274))();
-      *(unsigned char *)(temp_v0 + 0x1270) = 0;
+    // Animation frame follows the established six-byte save-process prefix.
+    struct SaveLoadActivityView {
+        u8 prefix[6];
+        u16 frame;
+    };
+    typedef char SaveLoadActivityViewOffsetCheck[
+        offsetof(SaveLoadActivityView, frame) == 6 ? 1 : -1];
+    if (saveLoadThreadValueGet() || saveLoadJobIsReady()) {
+        FUN_00157558(g_renderCtx);
+        RenderCtxA *context = g_renderCtx;
+        s32 state = FUN_001692ac(1, 0);
+        renderStackPush(&context->stackA, state);
+        efctSetSpeed(1.0f);
+        FUN_00183bb0();
+        f32 x = renderCtxCalculateStereoParallax(g_renderCtx, 0.27f);
+        const SaveLoadActivityView *activity = (const SaveLoadActivityView *)&g_saveLoadProcess;
+        FUN_001835b4(2, 8, activity->frame + 389, (s32)x, 0, 6);
+        renderStackPop(&g_renderCtx->stackA);
+        efctSetSpeed(1.0f);
+        FUN_00183bb0();
     }
-    efctSetSpeed();
-    FUN_00183bb0();
-    temp_v4 = 0.27f;
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    FUN_001835b4(2,8,(*(unsigned short *)((unsigned char *)&g_saveLoadProcess + 0x6)) + 0x185,(int)temp_v4,0,6);
-    temp_v0 = g_renderCtx;
-    piVar5 = (int *)(g_renderCtx + 0x1258);
-    temp_v1 = *piVar5;
-    temp_v2 = piVar5[temp_v1 + 2];
-    *piVar5 = temp_v1 - 1;
-    if (*(char *)(temp_v0 + 0x1270) != '\0' || temp_v2 != piVar5[temp_v1 + 1]) {
-      (**(romwright_code **)(temp_v0 + 0x1274))();
-      *(unsigned char *)(temp_v0 + 0x1270) = 0;
-    }
-    efctSetSpeed();
-    FUN_00183bb0();
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -17,7 +17,7 @@ typedef struct {
 
 extern int FUN_0039fcd8(...); /* 0x39fcd8 */
 extern int FUN_0039fd24(...); /* 0x39fd24 */
-extern int FUN_0039fd44(...); /* 0x39fd44 */
+extern int equipmentComparePowerThenOrder(...); /* 0x39fd44 */
 extern int FUN_003a0078(...); /* 0x3a0078 */
 extern int FUN_003a0118(...); /* 0x3a0118 */
 extern int FUN_003a0164(...); /* 0x3a0164 */
@@ -99,7 +99,7 @@ void FUN_003a3f28(int param_1)
           FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,FUN_003a0164);
           return;
         }
-        FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,FUN_0039fd44);
+        FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,equipmentComparePowerThenOrder);
         return;
       }
       if (temp_v0 == 7) {

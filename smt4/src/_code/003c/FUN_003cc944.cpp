@@ -1,83 +1,83 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cc944` (_code @ 0x3cc944, 0x160 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: cache-array addressing and source position copy grouping differ, with different action/state register roles. */
+#include "shard/W4_Match6_BtlEntry.h"
+#include "shard/BtlScriptTargets.h"
+#include "battle/btlAction.h"
+#include "battle/BattleRosterCache.h"
+
+struct BattleActionCacheRecord {
+    s32 model;
+    u32 key;
+    f32 scale;
+    f32 position[3];
+    s32 memberId;
+};
+struct BattleActionCacheView {
+    u8 unk0000[0x2318];
+    BattleActionCacheRecord records[109];
+};
+/* A u32 member at 0x5c cannot be inserted into the shared action's 10-byte union. */
+struct BattleActionCacheKeyView {
+    u8 unk00[0x5c];
+    u32 key;
+};
+/* Lookup returns a subobject whose common key is followed by further member keys. */
+struct BattleMemberKeysView {
+    u8 unk00[0xc];
+    s32 keys[50];
+};
 
 extern "C" {
+BattleCombatantStatusKey *FUN_0027da30(BtlMainState *battle, s32 id);
+s32 FUN_0027dab0(BtlMainState *battle, const BtlActionRecord *action);
 
-int FUN_0027da30(int, int);
-
-/* Supplied declaration required: FUN_0027da30. */
-extern int FUN_0027dab0(int, int);
-
-
-void FUN_003cc944(int *param_1,int param_2,int param_3)
-
+void FUN_003cc944(BtlMainState **battle, const BtlScriptActor *actor, s32 allActors)
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  temp_v5 = 0;
-  do {
-    temp_v3 = *param_1;
-    temp_v4 = *(int *)(temp_v3 + 0x1e98) + temp_v5 * 0x114;
-    temp_v0 = (unsigned int)*(short *)(temp_v4 + 0x60);
-    if (-1 < (int)temp_v0) {
-      if (param_3 == 0) {
-        temp_v0 = (unsigned int)*(unsigned char *)(temp_v0 + param_2 + 0x38);
-      }
-      if ((param_3 != 0 || temp_v0 != 0) &&
-         (temp_v0 = *(unsigned int *)(temp_v4 + 0x50), (temp_v0 & 1) != 0 && (temp_v0 & 0x80) != 0)) {
-        if (param_3 != 0) {
-          temp_v0 = temp_v0 & 0x8000;
+    for (s32 i = 0; i < 133; ++i) {
+        BtlMainState *state = *battle;
+        const BtlActionRecord *action = &state->actions.records[i];
+        if (action->participant.combatantIndex < 0 ||
+            (!allActors && !actor->targets[action->participant.combatantIndex]) ||
+            !(action->status & 1) || !(action->status & 0x80))
+            continue;
+        if (allActors) {
+            if (!(action->status & 0x8000))
+                continue;
+        } else if (!(action->status & 0x400)) {
+            continue;
         }
-        else {
-          temp_v0 = temp_v0 & 0x400;
-        }
-        if (((temp_v0 != 0) && ((*(unsigned int *)(temp_v4 + 0xf8) & 2) == 0)) &&
-           (FUN_0027da30(temp_v3,(int)*(short *)(temp_v4 + 0x62)), temp_v3 != 0)) {
-          temp_v1 = FUN_0027dab0(*param_1,temp_v4);
-          if (temp_v1 < 0) {
-            temp_v1 = 0;
-          }
-          temp_v2 = 0;
-          temp_v3 = *(int *)(temp_v3 + temp_v1 * 4 + 0xc);
-          do {
-            piVar4 = (int *)(temp_v2 * 0x1c + 0x2318 + *param_1);
-            if ((*piVar4 == temp_v3) && (piVar4[1] == *(int *)(temp_v4 + 0x5c))) goto LAB_003cca94;
-            temp_v2 = temp_v2 + 1;
-          } while (temp_v2 < 0x6d);
-          temp_v1 = 0;
-          do {
-            piVar4 = (int *)(temp_v1 * 0x1c + 0x2318 + *param_1);
-            if (*piVar4 < 0) {
-              *piVar4 = temp_v3;
-              piVar4[1] = *(int *)(temp_v4 + 0x5c);
-              piVar4[2] = *(int *)(temp_v4 + 0x40);
-              temp_v3 = *(int *)(temp_v4 + 0x10);
-              temp_v1 = *(int *)(temp_v4 + 0x14);
-              piVar4[3] = *(int *)(temp_v4 + 0xc);
-              piVar4[4] = temp_v3;
-              piVar4[5] = temp_v1;
-              piVar4[6] = (int)*(short *)(temp_v4 + 0x62);
-              break;
+        if (action->stateFlags & 2)
+            continue;
+        const BattleCombatantStatusKey *member = FUN_0027da30(state, action->memberId);
+        if (!member)
+            continue;
+        s32 memberIndex = FUN_0027dab0(*battle, action);
+        if (memberIndex < 0)
+            memberIndex = 0;
+        s32 model = ((const BattleMemberKeysView *)member)->keys[memberIndex];
+        BattleActionCacheView *cache = (BattleActionCacheView *)*battle;
+        const BattleActionCacheKeyView *identity = (const BattleActionCacheKeyView *)action;
+        bool present = false;
+        for (s32 slot = 0; slot < 109; ++slot) {
+            if (cache->records[slot].model == model && cache->records[slot].key == identity->key) {
+                present = true;
+                break;
             }
-            temp_v1 = temp_v1 + 1;
-          } while (temp_v1 < 0x6d);
         }
-      }
+        if (present)
+            continue;
+        for (s32 slot = 0; slot < 109; ++slot) {
+            BattleActionCacheRecord *record = &cache->records[slot];
+            if (record->model < 0) {
+                record->model = model;
+                record->key = identity->key;
+                record->scale = action->geometry.scale;
+                record->position[0] = action->geometry.position[0];
+                record->position[1] = action->geometry.position[1];
+                record->position[2] = action->geometry.position[2];
+                record->memberId = action->memberId;
+                break;
+            }
+        }
     }
-LAB_003cca94:
-    temp_v5 = temp_v5 + 1;
-    if (temp_v5 >= 0x85) {
-      return;
-    }
-  } while( 1 );
 }
-
-} /* extern "C" */
+}

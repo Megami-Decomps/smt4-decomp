@@ -1,71 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038bc60` (_code @ 0x38bc60, 0x10c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: entry-address registers differ, and required mask uses two LDRs instead of one LDM. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
 extern "C" {
+u32 scrGetArg(s32 index);
+void scrSetResult(s32 result);
+BtlMainStateA *btlGetMainState(void);
 
-int scrGetArg(int);
-int scrSetResult(int);
-
-extern unsigned int g_btlCandidateMasks; /* 0x570288 */
-extern unsigned int DAT_0057028c; /* 0x57028c */
-extern unsigned int DAT_005702a0; /* 0x5702a0 */
-extern unsigned int DAT_005702a4; /* 0x5702a4 */
-extern unsigned int DAT_005702b0; /* 0x5702b0 */
-extern unsigned int DAT_005702b4; /* 0x5702b4 */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_0038bc60(void)
-
+/* Test whether an eligible combatant has the requested ID and property value. */
+u32 FUN_0038bc60(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int *puVar7;
-  int temp_v6;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v6 = 0;
-  if (temp_v1 == 0) {
-    temp_v6 = 7;
-  }
-  else if (temp_v1 == 1) {
-    temp_v6 = 8;
-  }
-  else if (temp_v1 == 2) {
-    temp_v6 = 10;
-  }
-  else if (temp_v1 == 3) {
-    temp_v6 = 0xb;
-  }
-  temp_v2 = scrGetArg(2);
-  temp_v1 = 0;
-  while( 1 ) {
-    temp_v3 = btlGetMainState();
-    puVar7 = (unsigned int *)(*(int *)(temp_v3 + 0x1ffc) + temp_v1 * 0x408);
-    temp_v4 = *puVar7;
-    temp_v5 = puVar7[1];
-    if (((((DAT_005702a0 & temp_v4) != 0 || (DAT_005702a4 & temp_v5) != 0) &&
-         ((g_btlCandidateMasks & temp_v4) != 0 || (DAT_0057028c & temp_v5) != 0)) &&
-        ((temp_v4 & DAT_005702b0) == 0 && (temp_v5 & DAT_005702b4) == 0)) &&
-       ((*(unsigned short *)((int)puVar7 + 0x166) == temp_v0 && (puVar7[temp_v6 + 0x1d] == temp_v2)))) break;
-    temp_v1 = temp_v1 + 1;
-    if (temp_v1 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
+    /* A u32 overlay in the shared union at +0xA would change its alignment. */
+    struct PropertyView {
+        u8 prefix[0x74];
+        u32 values[12];
+    };
+    u32 unitId = scrGetArg(0);
+    s32 kind = scrGetArg(1);
+    s32 property = 0;
+    if (kind == 0)
+        property = 7;
+    else if (kind == 1)
+        property = 8;
+    else if (kind == 2)
+        property = 10;
+    else if (kind == 3)
+        property = 11;
+    u32 value = scrGetArg(2);
+    for (s32 index = 0; index < 109; ++index) {
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        u64 flags = entry->flags;
+        if ((g_btlCandidateMasks.unavailable & flags) != 0 &&
+            (g_btlCandidateMasks.required & flags) != 0 &&
+            (flags & g_btlCandidateMasks.excluded) == 0 &&
+            entry->id == unitId &&
+            reinterpret_cast<const PropertyView *>(entry)->values[property] == value) {
+            scrSetResult(1);
+            return 1;
+        }
     }
-  }
-  scrSetResult(1);
-  return 1;
+    scrSetResult(0);
+    return 1;
 }
-
-} /* extern "C" */
+}

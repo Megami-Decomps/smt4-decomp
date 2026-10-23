@@ -1,93 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Battle_PlayCommonEffect` (_code @ 0x30b874, 0x118 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: effect-name initialization registers and final owner-load scheduling differ. */
+#include "battle/btlMain.h"
+#include "battle/btlAction.h"
+#include "battle/btlEffect.h"
 extern "C" {
+extern u32 g_btlScriptUnit;
+extern u32 g_btlEvent;
+extern BtlEffectOwner *DAT_00435d18;
+extern const char DAT_00400428[];
+extern const char DAT_00400434[];
+s32 scrGetArg(s32 index);
+s32 FUN_0027e3b8(u32 event);
+s32 FUN_0024550c(BtlEffectOwner *owner);
+void ARM_common_memcpy4_9(char *destination, const char *source);
+void FUN_002454c4(BtlEffectOwner *owner, const char *name, s32 count, s32 flags);
+u32 btlUnitGet(u32 unit);
+BtlMainState *btlGetMainState(void);
+void FUN_00245420(s32 actor, u32 unit, BtlActionRecord *target, u32 value, s32 effect, s32 lookup, s32 extra);
+void FUN_001b1a48(s32 effect, u32 unit, BtlEffectSlotBlock *slots, s32 flags, s32 firstMember, s32 secondMember);
 
-int ARM_common_memcpy4_9(int *, char *);
-int FUN_001b1a48(int, unsigned int, unsigned int, int);
-int FUN_00245420(int, unsigned int, int, unsigned int);
-int FUN_002454c4(int, int *, int, int);
-int FUN_0024550c(void);
-int scrGetArg(int);
-
-/* stack frame of void: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} void_stack;
-
-extern unsigned int g_btlScriptUnit; /* 0x43427c */
-extern int DAT_00435d18; /* 0x435d18 */
-extern unsigned int g_btlEvent; /* 0x435d48 */
-
-/* Supplied declaration required: ARM_common_memcpy4_9. */
-/* Supplied declaration required: FUN_001b1a48. */
-/* Supplied declaration required: FUN_00245420. */
-/* Supplied declaration required: FUN_002454c4. */
-/* Supplied declaration required: FUN_0024550c. */
-extern int FUN_0027e3b8(unsigned int);
-extern unsigned int btlUnitGet(unsigned int);
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrGetArg. */
-
-
-void scrComm_Battle_PlayCommonEffect(void)
-
+// Play the common up/down effect for the script's current battle unit.
+u32 scrComm_Battle_PlayCommonEffect(void)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  char *pcVar5;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = FUN_0027e3b8(g_btlEvent);
-  if (((temp_v2 == 0) || (temp_v2 = DAT_00435d18, FUN_0024550c(), temp_v2 != 0)) && (temp_v1 != 0)) {
-    temp_v4 = 0;
-    temp_v5 = 0;
-    temp_v6 = 0;
-    if (temp_v1 < 0) {
-      pcVar5 = "commonDw";
+    u32 value = scrGetArg(0);
+    s32 effect = scrGetArg(1);
+    if (FUN_0027e3b8(g_btlEvent) && !FUN_0024550c(DAT_00435d18))
+        return 0;
+    if (effect != 0) {
+        {
+            char name[32] = {0};
+            ARM_common_memcpy4_9(name, effect < 0 ? DAT_00400428 : DAT_00400434);
+            FUN_002454c4(DAT_00435d18, name, 1, 0);
+        }
+        u32 unit = btlUnitGet(g_btlScriptUnit);
+        BtlActionRecord *target = btlGetMainState()->actions;
+        FUN_00245420(0, unit, target, value, effect, 0, -1);
+        s32 member = target->memberId;
+        FUN_001b1a48(effect, unit, DAT_00435d18->slots, 0, member, member);
     }
-    else {
-      pcVar5 = "commonUp";
-    }
-    temp_v7 = 0;
-    temp_v8 = 0;
-    temp_v9 = 0;
-    temp_v10 = 0;
-    temp_v11 = 0;
-    ARM_common_memcpy4_9(&temp_v4,pcVar5);
-    FUN_002454c4(DAT_00435d18,&temp_v4,1,0);
-    temp_v3 = btlUnitGet(g_btlScriptUnit);
-    temp_v2 = btlGetMainState();
-    temp_v2 = *(int *)(temp_v2 + 0x1e98);
-    temp_v6 = 0xffffffff;
-    temp_v5 = 0;
-    temp_v4 = temp_v1;
-    FUN_00245420(0,temp_v3,temp_v2,temp_v0);
-    temp_v4 = (int)*(short *)(temp_v2 + 0x62);
-    temp_v5 = temp_v4;
-    FUN_001b1a48(temp_v1,temp_v3,*(unsigned int *)(DAT_00435d18 + 0x1cfc),0);
-  }
-  return;
+    return 1;
 }
-
-} /* extern "C" */
+}

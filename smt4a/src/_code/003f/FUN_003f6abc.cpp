@@ -1,72 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f6abc` (_code @ 0x3f6abc, 0x104 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: first text-count load uses cached text-member address rather than window base. */
+#include "ui/DirectoryEntryWindow.h"
 extern "C" {
+void *fileSectionGetData(void *file, u32 id, s32 section);
+s32 FUN_001688c4(void *text);
+void FUN_00203b40(void *control, s32 count, s32 mode, s32 enabled, s32 initial, s32 step);
+int asdTextDrawDirectoryEntry(void *text, s32 kind, u32 color, s32 alignment, s32 mode, void *file, u32 id);
+void flagsSetOrClearBit(void *control, s32 value);
+s32 flagsBGetBit1(u16 id);
+s32 flagsBGetBit2(u16 id);
+void gameFlagsSetAlternateMode(u32 id, s32 value);
+void FUN_003ff20c(u32 id, s32 value);
 
-int fileSectionGetData(unsigned int, int, int);
-int FUN_001688c4(unsigned int);
-int FUN_00203b40(int, int, int, int, int, int);
-int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int, int, unsigned int, int);
-int flagsSetOrClearBit(int, int);
-int gameFlagsSetAlternateMode(int, int);
-int FUN_003ff20c(int, int);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-/* Supplied declaration required: fileSectionGetData. */
-/* Supplied declaration required: FUN_001688c4. */
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: asdTextDrawDirectoryEntry. */
-/* Supplied declaration required: flagsSetOrClearBit. */
-extern int flagsBGetBit1(unsigned short);
-/* Supplied declaration required: gameFlagsSetAlternateMode. */
-extern int flagsBGetBit2(unsigned short);
-/* Supplied declaration required: FUN_003ff20c. */
-
-
-void FUN_003f6abc(int param_1)
-
+// Populate a directory entry and consume its pending alternate-mode flag.
+void FUN_003f6abc(DirectoryEntryWindow *window)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = **(unsigned short **)(param_1 + 0x5e0);
-  *(unsigned char *)(param_1 + 0x120) = 0;
-  *(unsigned int *)(param_1 + 0x128) = 0;
-  temp_v1 = **(unsigned short **)(param_1 + 0x5e0);
-  fileSectionGetData(*(unsigned int *)(param_1 + 0x28),temp_v1,0);
-  asdTextDrawDirectoryEntry(*(unsigned int *)(param_1 + 0x5d8),3,0xffffffff,0,3,*(unsigned int *)(param_1 + 0x28),
-               temp_v1);
-  temp_v2 = FUN_001688c4(*(unsigned int *)(param_1 + 0x5d8));
-  *(unsigned int *)(param_1 + 0x5dc) = temp_v2;
-  temp_v3 = FUN_001688c4(*(unsigned int *)(param_1 + 0x5d8));
-  FUN_00203b40(param_1 + 0xbc,*(int *)(param_1 + 0x128) + temp_v3,7,1,0,1);
-  flagsSetOrClearBit(param_1 + 0xbc,0);
-  *(unsigned int *)(param_1 + 0x124) = 0;
-  temp_v3 = flagsBGetBit2(temp_v0);
-  if (temp_v3 == 0) {
-    FUN_003ff20c(temp_v0,1);
-  }
-  *(unsigned int *)(param_1 + 0x3c) = 0;
-  temp_v3 = flagsBGetBit1(temp_v0);
-  if (temp_v3 != 0) {
-    gameFlagsSetAlternateMode(temp_v0,0);
-    temp_v4 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x5e0) + 0x30);
-    if (temp_v4 != 0) {
-      *(unsigned int *)(param_1 + 0x3c) = temp_v4;
+    u16 id = window->entry->id;
+    window->active = 0;
+    window->lineOffset = 0;
+    u16 textId = window->entry->id;
+    fileSectionGetData(window->file, textId, 0);
+    asdTextDrawDirectoryEntry(window->text, 3, 0xFFFFFFFF, 0, 3, window->file, textId);
+    window->lineCount = FUN_001688c4(window->text);
+    FUN_00203b40(window->textControl, window->lineOffset + FUN_001688c4(window->text), 7, 1, 0, 1);
+    flagsSetOrClearBit(window->textControl, 0);
+    window->scroll = 0;
+    if (!flagsBGetBit2(id))
+        FUN_003ff20c(id, 1);
+    window->alternateId = 0;
+    if (flagsBGetBit1(id)) {
+        gameFlagsSetAlternateMode(id, 0);
+        u32 alternateId = window->entry->alternateId;
+        if (alternateId)
+            window->alternateId = alternateId;
     }
-  }
-  *(unsigned int *)(param_1 + 0x50) = 0;
-  return;
+    window->state = 0;
 }
-
-} /* extern "C" */
+}

@@ -1,89 +1,76 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c7150` (_code @ 0x2c7150, 0x190 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation/global-store and process-create argument scratch registers differ; local full-allocation view preserves shared prefix. */
+#include "title/S4Load.h"
+#include "AsdSDK/AsdDebug.h"
+#include <stddef.h>
 
 extern "C" {
+extern S4Load *g_s4Load;
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
+void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
+void rt_aeabi_memclr(void *memory, u32 size);
+void asdLoadFileAsyncSimple(const char *path, void **result, u32 flags);
+u32 spriteHandleCreate(u32 kind);
+u32 asdProcessCreateSimple(const char *name, s32 priority, u32 flags, u32 stack,
+                            u32 (*update)(), void (*destroy)(), void *work);
+u32 taskCreateDraw(const char *name, s32 priority, u32 flags, u32 stack,
+                   u32 (*draw)(), u32 destroy, void *work, u32 parent);
+u32 FUN_002364fc();
+void s4LoadDestroy();
+u32 FUN_0027dbac();
+u32 FUN_002bd488();
+void asdProcessClearSelectedFlags(u32 job, u32 flags, u32 option);
 
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int asdMemoryAlloc(...);
-int asdLoadFileAsyncSimple(...);
-int asdProcessClearSelectedFlags(...);
-int rt_aeabi_memclr(...);
-
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern unsigned char LAB_002364fc; /* 0x2364fc */
-extern int FUN_0027dbac(...); /* 0x27dbac */
-extern int s4LoadDestroy(...); /* 0x2bd408 */
-extern int FUN_002bd488(...); /* 0x2bd488 */
-extern unsigned char LAB_002c7314; /* 0x2c7314 */
-extern unsigned char LAB_002c7324; /* 0x2c7324 */
-extern unsigned char LAB_002c7340; /* 0x2c7340 */
-extern unsigned char LAB_002c7354; /* 0x2c7354 */
-extern unsigned char LAB_002c7364; /* 0x2c7364 */
-extern unsigned char LAB_002c7378; /* 0x2c7378 */
-extern unsigned int *g_s4Load; /* 0x589154 */
-
-extern unsigned int spriteHandleCreate(unsigned int);
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: asdProcessClearSelectedFlags. */
-/* Supplied declaration required: rt_aeabi_memclr. */
-
-
-unsigned int FUN_002c7150(void)
-
+// Create the title load screen, its two save-slot buffers, asynchronous script loads and tasks.
+u32 FUN_002c7150(void)
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  unsigned char *puVar3;
-  int temp_v1;
-  int temp_v2;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x3bc,1);
-  g_s4Load = puVar1;
-  puVar1[2] = 0;
-  temp_v1 = 0;
-  do {
-    rt_aeabi_memclr(puVar1 + temp_v1 * 0x20 + 0xaf,0x80);
-    temp_v2 = temp_v1 + 1;
-    *(unsigned char *)((int)puVar1 + temp_v1 + 0xa4) = 0;
-    temp_v1 = temp_v2;
-  } while (temp_v2 < 2);
-  puVar1[0x27] = 0;
-  puVar1[0x28] = 1;
-  *(unsigned char *)(puVar1 + 0xad) = 0;
-  asdLoadFileAsyncSimple(&LAB_002c7314,puVar1 + 0xaa,0);
-  asdLoadFileAsyncSimple(&LAB_002c7324,puVar1 + 0xab,0);
-  puVar1[6] = 0x80;
-  puVar1[0xac] = 0;
-  temp_v0 = 0x100;
-  asdMemoryAlloc(0x100,0x100,0,puVar1[6],1);
-  puVar1[5] = temp_v0;
-  temp_v0 = spriteHandleCreate(0);
-  puVar1[0xae] = temp_v0;
-  *(unsigned char *)(puVar1 + 1) = 0;
-  puVar3 = &LAB_002c7340;
-  asdProcessCreateSimple(&LAB_002c7340,4,0,0,&LAB_002364fc,s4LoadDestroy,0);
-  *puVar1 = (unsigned int)puVar3;
-  taskCreateDraw(&LAB_002c7354,0x7e,0,0,FUN_0027dbac,0,0,puVar3);
-  taskCreateDraw(&LAB_002c7364,0xda,0,0,FUN_0027dbac,0,0,*puVar1);
-  taskCreateDraw(&LAB_002c7378,0xec,0,0,FUN_002bd488,0,0,*puVar1);
-  asdProcessClearSelectedFlags(*puVar1,0x80000,0);
-  return *puVar1;
+    // Save-slot buffers extend beyond the canonical script-resource prefix.
+    struct LoadInitializationView {
+        u32 job;
+        u8 closing;
+        u8 unk005[3];
+        u32 state;
+        u8 unk00C[8];
+        void *data;
+        u32 dataSize;
+        u8 unk01C[0x80];
+        u32 selection, page;
+        u8 slotState[2];
+        u8 unk0A6[0x202];
+        void *dataA, *dataB, *process;
+        u8 loaded;
+        u8 unk2B5[3];
+        u32 sprite;
+        u8 slotData[2][0x80];
+    };
+    typedef char LoadInitializationOffsets[offsetof(LoadInitializationView, slotState) == 0xA4 &&
+        offsetof(LoadInitializationView, dataA) == 0x2A8 &&
+        offsetof(LoadInitializationView, slotData) == 0x2BC && sizeof(LoadInitializationView) == 0x3BC ? 1 : -1];
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\title\\S4Load.cpp", 134);
+    LoadInitializationView *work = static_cast<LoadInitializationView *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(LoadInitializationView), 1));
+    g_s4Load = reinterpret_cast<S4Load *>(work);
+    work->state = 0;
+    s32 index = 0;
+    do {
+        rt_aeabi_memclr(work->slotData[index], sizeof(work->slotData[index]));
+        work->slotState[index] = 0;
+        ++index;
+    } while (index < 2);
+    work->selection = 0;
+    work->page = 1;
+    work->loaded = 0;
+    asdLoadFileAsyncSimple("title/loadS4.bf", &work->dataA, 0);
+    asdLoadFileAsyncSimple("title/loadS4.mbm", &work->dataB, 0);
+    work->dataSize = 0x80;
+    work->process = NULL;
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\title\\S4Load.cpp", 215);
+    work->data = asdMemoryAlloc(0x100, 0x100, 0, work->dataSize, 1);
+    work->sprite = spriteHandleCreate(0);
+    work->closing = 0;
+    work->job = asdProcessCreateSimple("S4 LOAD TEST C", 4, 0, 0, FUN_002364fc, s4LoadDestroy, NULL);
+    taskCreateDraw("S4 LOAD TEST UL", 0x7E, 0, 0, FUN_0027dbac, 0, NULL, work->job);
+    taskCreateDraw("S4 LOAD TEST UR", 0xDA, 0, 0, FUN_0027dbac, 0, NULL, work->job);
+    taskCreateDraw("S4 LOAD TEST D", 0xEC, 0, 0, FUN_002bd488, 0, NULL, work->job);
+    asdProcessClearSelectedFlags(work->job, 0x80000, 0);
+    return work->job;
 }
-
-} /* extern "C" */
+}

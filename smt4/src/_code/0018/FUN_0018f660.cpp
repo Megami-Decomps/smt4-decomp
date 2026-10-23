@@ -28,7 +28,7 @@ int FUN_002945a4(...);
 int playerModelListCreate(void);
 int FUN_00294834(int, int, int, int);
 int FUN_00294d6c(void);
-int FUN_00294e18(int);
+int statusCameraSelectPreset(int);
 int FUN_00294f64(void);
 int FUN_00294fe0(...);
 int FUN_002950e8(...);
@@ -98,7 +98,7 @@ extern unsigned int FUN_00294090(int, unsigned int);
 extern unsigned int *_ZN9Obj4206e8C1Ev(void);
 /* Supplied declaration required: FUN_00294834. */
 /* Supplied declaration required: FUN_00294d6c. */
-/* Supplied declaration required: FUN_00294e18. */
+/* Supplied declaration required: statusCameraSelectPreset. */
 /* Supplied declaration required: FUN_00294f64. */
 /* Supplied declaration required: FUN_00294fe0. */
 extern int nkdwHeaderParse(unsigned int);
@@ -308,7 +308,7 @@ unsigned int FUN_0018f660(void)
       pcVar4[0x1ea1] = '\0';
       pcVar4[0x1ea2] = '\0';
       pcVar4[0x1ea3] = '\0';
-      FUN_00294e18(0);
+      statusCameraSelectPreset(0);
       pcVar4[0x1ea4] = '\0';
       FUN_00294d6c();
       temp_v7 = lmapSceneGetScript();

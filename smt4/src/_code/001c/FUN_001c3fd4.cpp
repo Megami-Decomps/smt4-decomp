@@ -61,7 +61,7 @@ int buttonHelpSetPreset(...);
 int rt_memcpy_w(...);
 
 int FUN_0026cba4(...);
-int FUN_0026ce14(...);
+int partyPanelHandleCursorEdgeInput(...);
 int FUN_0026d144(...);
 int FUN_0026d3e0(...);
 int FUN_00292be4(...);
@@ -139,7 +139,7 @@ extern int gameGetNavigationState(void);
 /* Supplied declaration required: FUN_0026c868. */
 /* Supplied declaration required: FUN_0026c9c0. */
 /* Supplied declaration required: FUN_0026cba4. */
-/* Supplied declaration required: FUN_0026ce14. */
+/* Supplied declaration required: partyPanelHandleCursorEdgeInput. */
 /* Supplied declaration required: FUN_0026cf4c. */
 /* Supplied declaration required: FUN_0026d144. */
 /* Supplied declaration required: FUN_0026d3e0. */
@@ -759,7 +759,7 @@ LAB_001c4748:
     }
     else {
 LAB_001c4df0:
-      temp_v11 = FUN_0026ce14(temp_v24,0);
+      temp_v11 = partyPanelHandleCursorEdgeInput(temp_v24,0);
       if (temp_v11 != 0) {
         FUN_0029dfc0(0);
         partyPanelSetState(3,1);
@@ -1140,7 +1140,7 @@ LAB_001c545c:
     else {
 LAB_001c589c:
       temp_v16 = FUN_0029efa8(temp_v8);
-      if ((temp_v16 >= 1) && (temp_v16 = FUN_0026ce14(temp_v8,0), temp_v16 != 0)) {
+      if ((temp_v16 >= 1) && (temp_v16 = partyPanelHandleCursorEdgeInput(temp_v8,0), temp_v16 != 0)) {
         if (*(char *)(temp_v1 + 0x66c) != '\v') {
           FUN_0029dfc0(0);
           temp_v6 = 0;
@@ -1847,7 +1847,7 @@ LAB_001c6f28:
           }
           else {
 LAB_001c6eb8:
-            temp_v6 = FUN_0026ce14(0,1);
+            temp_v6 = partyPanelHandleCursorEdgeInput(0,1);
             if (temp_v6 == 0) {
               if ((*(char *)(g_partyPanel + 0x42) == '\0') && (*(int *)(g_partyPanel + 0x30) >= 2)) {
                 temp_v6 = 4;

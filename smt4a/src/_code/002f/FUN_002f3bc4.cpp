@@ -1,96 +1,70 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f3bc4` (_code @ 0x2f3bc4, 0x1bc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: packed-result zero test, pair address folding and shared success-return allocation differ from retail. */
+#include "shard/W5_W5Match2_UniteWork.h"
+#include "shard/Shard0032.h"
+
+// The packed pair uses a 64-bit allocation unit. Keep this view local so its
+// alignment does not change the published, partial UniteWork layout.
+struct FusionResultPairView {
+    u64 firstId : 15;
+    u64 secondId : 15;
+    u64 firstType : 2;
+    u64 secondType : 2;
+    u64 resultId : 15;
+    u64 reserved : 15;
+};
+typedef char FusionResultPairViewSizeCheck[sizeof(FusionResultPairView) == 8 ? 1 : -1];
 
 extern "C" {
+extern UniteWork *g_unite;
+UnitRecord *slotRecordFindById(u32 id);
+void unitRecordBuild(s32 id, UnitRecord *out);
+void rt_memcpy_w(void *out, const void *source, u32 size);
+void FUN_004da6e0(void *context, UnitRecord *first, UnitRecord *second,
+                  s32 option, UnitRecord *out);
+void FUN_0028a538(u32 resultId, UnitRecord *first, UnitRecord *second);
+s32 FUN_0032fea0(const u16 *skills, s32 count, u16 skill);
+s32 getUnlockedSlotCount(UnitRecord *unit);
+void FUN_004bcd90(UnitRecord *unit);
 
-int FUN_0028a538(unsigned int, int, int);
-int FUN_0032fea0(int, int);
-int unitRecordBuild(unsigned int, int, int, unsigned int, unsigned int);
-int FUN_004bcd90(int);
-int FUN_004da6e0(unsigned int, int, int, int, int);
-int rt_memcpy_w(int, int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-extern unsigned int *g_unite; /* 0x57f290 */
-
-extern int slotRecordFindById(unsigned int);
-/* Supplied declaration required: FUN_0028a538. */
-/* Supplied declaration required: FUN_0032fea0. */
-/* Supplied declaration required: unitRecordBuild. */
-/* Supplied declaration required: FUN_004bcd90. */
-extern int getUnlockedSlotCount(int);
-/* Supplied declaration required: FUN_004da6e0. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int FUN_002f3bc4(int param_1,int param_2,int param_3,unsigned int param_4)
-
+u32 FUN_002f3bc4(UnitRecord *out, s32 index, s32 mode, u32)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  puVar1 = g_unite;
-  if (param_3 != 0) {
-    if (param_3 != 1) {
-      if (param_3 != 2) {
-        return 0;
-      }
-      temp_v2 = slotRecordFindById((g_unite[param_2 * 2 + 0x241e] & 0x3fffffff) >> 0xf);
-    }
-    else {
-      temp_v2 = slotRecordFindById(g_unite[param_2 * 2 + 0x241e] & 0x7fff);
-    }
-    if (temp_v2 == 0) {
-      return 0;
-    }
-    rt_memcpy_w(param_1,temp_v2,300);
-  }
-  else {
-    if ((g_unite[param_2 * 2 + 0x241f] & 0x1fffc) == 0) {
-      return 0;
-    }
-    unitRecordBuild((g_unite[param_2 * 2 + 0x241f] & 0x1ffff) >> 2,param_1,0x1fffc,param_4,param_4
-                );
-    temp_v2 = slotRecordFindById(puVar1[param_2 * 2 + 0x241e] & 0x7fff);
-    temp_v0 = slotRecordFindById((puVar1[param_2 * 2 + 0x241e] & 0x3fffffff) >> 0xf);
-    if (temp_v2 == 0 || temp_v0 == 0) {
-      return 0;
-    }
-    FUN_004da6e0(*puVar1,temp_v2,temp_v0,0,param_1);
-    FUN_0028a538((puVar1[param_2 * 2 + 0x241f] & 0x1ffff) >> 2,temp_v2,temp_v0);
-    temp_v2 = 0;
-    do {
-      if (*(short *)((int)puVar1 + temp_v2 * 2 + 0x8b70) != 0) {
-        temp_v0 = param_1 + 0x34;
-        FUN_0032fea0(temp_v0,8);
-        if (temp_v0 == 0) {
-          temp_v0 = getUnlockedSlotCount(param_1);
-          temp_v1 = 0;
-          if (temp_v1 < temp_v0) {
-            do {
-              if (*(short *)(param_1 + temp_v1 * 2 + 0x34) == 0) {
-                *(unsigned short *)(param_1 + temp_v1 * 2 + 0x34) =
-                     *(unsigned short *)((int)puVar1 + temp_v2 * 2 + 0x8b70);
-                break;
-              }
-              temp_v1 = temp_v1 + 1;
-            } while (temp_v1 < temp_v0);
-          }
+    UniteWork *work = g_unite;
+    FusionResultPairView *pair = (FusionResultPairView *)&work->resultPairsA.pairs[index];
+    if (mode == 0) {
+        if (pair->resultId == 0)
+            return 0;
+        unitRecordBuild(pair->resultId, out);
+        UnitRecord *first = slotRecordFindById(pair->firstId);
+        UnitRecord *second = slotRecordFindById(pair->secondId);
+        if (!first || !second)
+            return 0;
+        FUN_004da6e0(work->context, first, second, 0, out);
+        FUN_0028a538(pair->resultId, first, second);
+        for (s32 i = 0; i < 24; ++i) {
+            if (work->inheritanceA.skills[i] != 0 &&
+                !FUN_0032fea0(out->skillList.skills, 8, work->inheritanceA.skills[i])) {
+                s32 count = getUnlockedSlotCount(out);
+                for (s32 slot = 0; slot < count; ++slot) {
+                    if (out->skillList.skills[slot] == 0) {
+                        out->skillList.skills[slot] = work->inheritanceA.skills[i];
+                        break;
+                    }
+                }
+            }
         }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x18);
-    FUN_004bcd90(param_1);
-  }
-  return 1;
+        FUN_004bcd90(out);
+    } else {
+        UnitRecord *source;
+        if (mode == 1)
+            source = slotRecordFindById(pair->firstId);
+        else if (mode == 2)
+            source = slotRecordFindById(pair->secondId);
+        else
+            return 0;
+        if (!source)
+            return 0;
+        rt_memcpy_w(out, source, sizeof(UnitRecord));
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

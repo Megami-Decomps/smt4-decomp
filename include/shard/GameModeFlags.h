@@ -20,6 +20,7 @@ struct GameModeFlagGroup {
 struct GameModeFlags {
     /* 0x00 */ union {
         u8 unk00[0x1c];
+        CollectionSortMode sortModes[0x1C];
         struct {
             u8 unk00[0x10];
             CollectionSortMode collection;
@@ -29,5 +30,8 @@ struct GameModeFlags {
 };
 typedef char GameModeFlagsSortLayoutCheck[sizeof(CollectionSortMode) == 1 &&
     offsetof(GameModeFlags, sortSettings.collection) == 0x10 && sizeof(GameModeFlags) == 0x34 ? 1 : -1];
+typedef char GameModeFlagsSortModesOffsetCheck[
+    offsetof(GameModeFlags, sortModes) == 0 &&
+    sizeof(GameModeFlags) == 0x34 ? 1 : -1];
 
 #endif

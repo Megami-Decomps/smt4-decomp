@@ -1,74 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `jobStop` (_code @ 0x1631d0, 0x124 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: handle lookup scheduling and ending-state jump-table formation differ from retail. */
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+
+extern "C" void asdProcessEnd(AsdProcess *process);
+extern "C" AsdProcessState g_asdProcess;
+
+static __inline AsdProcess *findProcess(u32 handle)
+{
+    u32 id = handle & ASD_PROC_ID_MASK;
+    for (AsdProcess *process = g_asdProcess.groups[handle >> ASD_PROC_GROUP_SHIFT].head;
+         process != NULL; process = process->next) {
+        if (process->id == id) {
+            return process;
+        }
+    }
+    return NULL;
+}
+
+static __inline void stopChildren(AsdProcess *process)
+{
+    for (AsdProcess *child = process->firstChild; child != NULL;) {
+        AsdProcess *next = child->nextSibling;
+        child->endDelay = process->endDelay;
+        asdProcessEnd(child);
+        child = next;
+    }
+}
 
 extern "C" {
 
-int asdProcessEnd(void);
-
-extern int g_asdProcess; /* 0x640118 */
-
-/* Supplied declaration required: asdProcessEnd. */
-
-
-unsigned int jobStop(unsigned int param_1,unsigned short param_2)
-
+/* End a job and its children after the requested delay. */
+u32 jobStop(u32 handle, u16 delay)
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if (param_1 == 0) {
-    return 0;
-  }
-  for (temp_v1 = *(int *)(g_asdProcess + (param_1 >> 0x14) * 8); temp_v1 != 0;
-      temp_v1 = *(int *)(temp_v1 + 0x4c)) {
-    if (*(unsigned int *)(temp_v1 + 0x24) == (param_1 & 0xfffff)) goto LAB_00163218;
-  }
-  temp_v1 = 0;
-LAB_00163218:
-  switch(*(unsigned char *)(temp_v1 + 0x98)) {
-  default:
-    return 0;
-  case 1:
-  case 2:
-  case 3:
-    *(unsigned short *)(temp_v1 + 0x36) = param_2;
-    temp_v0 = *(int *)(temp_v1 + 0x58);
-    while (temp_v0 != 0) {
-      temp_v2 = *(int *)(temp_v0 + 0x5c);
-      *(unsigned short *)(temp_v0 + 0x36) = *(unsigned short *)(temp_v1 + 0x36);
-      asdProcessEnd();
-      temp_v0 = temp_v2;
+    if (handle == 0) {
+        return 0;
     }
-    switch(*(unsigned char *)(temp_v1 + 0x98)) {
-    case 1:
-    case 2:
-    case 3:
-      *(unsigned char *)(temp_v1 + 0x98) = 4;
+    AsdProcess *process = findProcess(handle);
+    switch (process->state) {
+    case ASD_PROC_WAIT_START:
+    case ASD_PROC_START_DELAY:
+    case ASD_PROC_RUNNING:
+        process->endDelay = delay;
+        stopChildren(process);
+        switch (process->state) {
+        case ASD_PROC_WAIT_START:
+        case ASD_PROC_START_DELAY:
+        case ASD_PROC_RUNNING:
+            process->state = ASD_PROC_ENDING;
+            break;
+        default:
+            break;
+        }
+        return 1;
+    case ASD_PROC_ENDING:
+    case ASD_PROC_END_DELAY:
+        process->endDelay = delay;
+        stopChildren(process);
+        switch (process->state) {
+        case ASD_PROC_WAIT_START:
+        case ASD_PROC_START_DELAY:
+        case ASD_PROC_RUNNING:
+            process->state = ASD_PROC_ENDING;
+            break;
+        default:
+            break;
+        }
+        return 1;
+    default:
+        return 0;
     }
-    return 1;
-  case 4:
-  case 5:
-    *(unsigned short *)(temp_v1 + 0x36) = param_2;
-    temp_v0 = *(int *)(temp_v1 + 0x58);
-    while (temp_v0 != 0) {
-      temp_v2 = *(int *)(temp_v0 + 0x5c);
-      *(unsigned short *)(temp_v0 + 0x36) = *(unsigned short *)(temp_v1 + 0x36);
-      asdProcessEnd();
-      temp_v0 = temp_v2;
-    }
-  }
-  switch(*(unsigned char *)(temp_v1 + 0x98)) {
-  default:
-    return 1;
-  case 1:
-  case 2:
-  case 3:
-    *(unsigned char *)(temp_v1 + 0x98) = 4;
-    return 1;
-  }
 }
-
-} /* extern "C" */
+}

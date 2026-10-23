@@ -1,97 +1,76 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026fe0c` (_code @ 0x26fe0c, 0x144 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: default destination lookup constant lifetimes and common return blocks differ; restored target headers store separately. */
+#include "shard/SaveWork.h"
+#include "map/MapDepartTarget.h"
+#include "map/SceneSpawn.h"
+#include "map/mapDepart.h"
 
 extern "C" {
-
-extern unsigned int DAT_0049fd14; /* 0x49fd14 */
-extern unsigned int DAT_0049fd18; /* 0x49fd18 */
-extern unsigned int DAT_0049fd1c; /* 0x49fd1c */
-extern unsigned int DAT_0049fd20; /* 0x49fd20 */
-extern unsigned int DAT_0049fd24; /* 0x49fd24 */
-extern unsigned int DAT_0049fd28; /* 0x49fd28 */
-extern unsigned int DAT_0049fd2c; /* 0x49fd2c */
-extern unsigned int DAT_0049fd30; /* 0x49fd30 */
-extern unsigned int DAT_0049fd34; /* 0x49fd34 */
-
-extern int dataTable23Type1CountWithAoc(void);
-extern char *dataTableGetRecord23(int);
-extern char *gameGetMapBlock(void);
-
-
-void FUN_0026fe0c(void)
-
+extern MapDepartTarget DAT_0049fd14;
+SaveWork *gameGetMapBlock(void);
+s32 dataTable23Type1CountWithAoc(void);
+const SceneSpawnRecord *dataTableGetRecord23(s32);
+static __inline s32 findSpawnDestination(s32 map, s32 area, u32 entrance)
 {
-  char temp_v0;
-  char *pcVar2;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  
-  pcVar2 = (char *)gameGetMapBlock();
-  temp_v0 = *pcVar2;
-  if (temp_v0 == '\0') {
-    temp_v2 = 0;
-    DAT_0049fd14 = 1;
-    DAT_0049fd18 = 2;
-    DAT_0049fd1c = 0;
-    temp_v1 = dataTable23Type1CountWithAoc();
-    if (0 < temp_v1) {
-      do {
-        pcVar2 = (char *)dataTableGetRecord23(temp_v2);
-        temp_v0 = *pcVar2;
-        temp_v3 = temp_v0 == '\x01';
-        if (temp_v3) {
-          temp_v0 = pcVar2[1];
-        }
-        temp_v4 = temp_v3 && temp_v0 == '\x02';
-        if (temp_v3 && temp_v0 == '\x02') {
-          temp_v4 = pcVar2[2] == '\0';
-        }
-        if (temp_v4) {
-          if ((unsigned char)pcVar2[3] == 0xff) {
-            DAT_0049fd20 = 0xffffffff;
-            return;
-          }
-          DAT_0049fd20 = (unsigned int)(unsigned char)pcVar2[3];
-          return;
-        }
-        temp_v2 = temp_v2 + 1;
-        temp_v1 = dataTable23Type1CountWithAoc();
-      } while (temp_v2 < temp_v1);
+    for (s32 i = 0; i < dataTable23Type1CountWithAoc(); ++i) {
+        const SceneSpawnRecord *record = dataTableGetRecord23(i);
+        if (record->key.map == map && record->key.area == area && record->key.unk02 == entrance)
+            return record->key.variant == 0xFF ? -1 : record->key.variant;
     }
-    DAT_0049fd20 = 0xffffffff;
-    return;
-  }
-  if (temp_v0 == '\x01') {
-    DAT_0049fd14 = (unsigned int)(unsigned char)pcVar2[1];
-    DAT_0049fd18 = (unsigned int)(unsigned char)pcVar2[2];
-    DAT_0049fd1c = 0xffffffff;
-    DAT_0049fd20 = *(unsigned int *)(pcVar2 + 0xdd8);
-    DAT_0049fd24 = *(unsigned int *)(pcVar2 + 4);
-    DAT_0049fd28 = *(unsigned int *)(pcVar2 + 8);
-    DAT_0049fd2c = *(unsigned int *)(pcVar2 + 0xc);
-    DAT_0049fd30 = *(unsigned int *)(pcVar2 + 0x10);
-    DAT_0049fd34 = *(unsigned int *)(pcVar2 + 0x14);
-    return;
-  }
-  if (temp_v0 == '\x02') {
-    DAT_0049fd14 = (unsigned int)(unsigned char)pcVar2[1];
-    DAT_0049fd18 = (unsigned int)(unsigned char)pcVar2[2];
-    DAT_0049fd1c = 0xffffffff;
-    DAT_0049fd20 = *(unsigned int *)(pcVar2 + 0xdd8);
-    DAT_0049fd24 = *(unsigned int *)(pcVar2 + 4);
-    DAT_0049fd28 = *(unsigned int *)(pcVar2 + 8);
-    DAT_0049fd2c = *(unsigned int *)(pcVar2 + 0xc);
-    return;
-  }
-  if (temp_v0 == '\x03') {
-    DAT_0049fd14 = (unsigned int)(unsigned char)pcVar2[1];
-    DAT_0049fd18 = (unsigned int)(unsigned char)pcVar2[2];
-    DAT_0049fd20 = 0xffffffff;
-  }
-  return;
+    return -1;
 }
 
-} /* extern "C" */
+void FUN_0026fe0c(void)
+{
+    // Both the saved destination and the target's coordinates extend beyond the shared prefixes.
+    struct SavedMapView {
+        u8 kind, map, area, unk03;
+        MapVector position;
+        f32 heading;
+        f32 parameter;
+        u8 unk18[0xDC0];
+        s32 destination;
+    };
+    struct TargetView {
+        MapDepartTarget selection;
+        MapVector position;
+        f32 heading;
+        f32 parameter;
+    };
+    SavedMapView *saved = reinterpret_cast<SavedMapView *>(gameGetMapBlock());
+    TargetView *target = reinterpret_cast<TargetView *>(&DAT_0049fd14);
+    switch (saved->kind) {
+    case 0: {
+        target->selection.group = 1;
+        target->selection.map = 2;
+        target->selection.target = 0;
+        target->selection.destination = findSpawnDestination(1, 2, 0);
+        break;
+    }
+    case 1:
+        target->selection.group = saved->map;
+        target->selection.map = saved->area;
+        target->selection.target = ~0u;
+        target->selection.destination = saved->destination;
+        target->position.x = saved->position.x;
+        target->position.y = saved->position.y;
+        target->position.z = saved->position.z;
+        target->heading = saved->heading;
+        target->parameter = saved->parameter;
+        break;
+    case 2:
+        target->selection.group = saved->map;
+        target->selection.map = saved->area;
+        target->selection.target = ~0u;
+        target->selection.destination = saved->destination;
+        target->position.x = saved->position.x;
+        target->position.y = saved->position.y;
+        target->position.z = saved->position.z;
+        break;
+    case 3:
+        target->selection.group = saved->map;
+        target->selection.map = saved->area;
+        target->selection.destination = -1;
+        break;
+    }
+}
+}

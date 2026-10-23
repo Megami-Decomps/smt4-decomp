@@ -1,76 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00183f58` (_code @ 0x183f58, 0x128 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: prologue placement, queued-value array base folding, and selection-store if-conversion differ. */
+#include "ui/ButtonHelp.h"
 
 extern "C" {
+extern ButtonHelpGlobalsA g_buttonHelp;
+extern ButtonHelpQueuedSelections DAT_0057f0d8;
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-} param_4_stack;
-
-extern int DAT_0057f0c8; /* 0x57f0c8 */
-
-
-void FUN_00183f58(unsigned int param_1,int param_2,int param_3,int param_4)
-
+// Queue a help selection while another unit animates, or start its appropriate animation.
+void FUN_00183f58(u32 index, s32 kind, s32 value, s32 queue)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = DAT_0057f0c8;
-  if (param_1 >= 6) {
-    return;
-  }
-  if (DAT_0057f0c8 == 0) {
-    return;
-  }
-  if (param_4 != 0) {
-    temp_v1 = *(int *)(param_1 * 4 + 0x57f0d8);
-    if (temp_v1 < 0) {
-      param_4 = 0;
-      do {
-        if (*(char *)(DAT_0057f0c8 + param_4 + 0x5d4) != '\0') {
-          *(int *)(param_1 * 4 + 0x57f0d8) = param_2;
-          *(int *)(param_1 * 4 + 0x57f0f0) = param_3;
-          return;
+    if (index >= 6)
+        return;
+    ButtonHelpWorkA *work = g_buttonHelp.work;
+    if (!work)
+        return;
+    if (queue) {
+        s32 queuedKind = DAT_0057f0d8.kinds[index];
+        if (queuedKind < 0) {
+            const ButtonHelpCompatibility *activity = reinterpret_cast<const ButtonHelpCompatibility *>(work);
+            for (s32 unit = 0; unit < 6; ++unit) {
+                if (activity->active[unit]) {
+                    DAT_0057f0d8.kinds[index] = kind;
+                    DAT_0057f0d8.values[index] = value;
+                    return;
+                }
+            }
         }
-        param_4 = param_4 + 1;
-      } while (param_4 < 6);
+        if (queuedKind == kind && DAT_0057f0d8.values[index] == value) {
+            DAT_0057f0d8.kinds[index] = -1;
+            DAT_0057f0d8.values[index] = -1;
+        }
     }
-    if (temp_v1 == param_2) {
-      param_4 = *(int *)(param_1 * 4 + 0x57f0f0);
+    work->kinds[index].kind = static_cast<u8>(kind);
+    work->kinds[index].value = static_cast<u16>(value);
+    ButtonHelpDisplayUnit *unit = reinterpret_cast<ButtonHelpDisplayUnit *>(&work->units[index]);
+    if (kind != 7 && kind != 9 && kind != 10 && kind != 11 &&
+        kind != 12 && kind != 13 && kind != 14 && kind != 15 &&
+        kind != 16 && kind != 17 && kind != 19) {
+        if (kind == 8) {
+            unit->selection.target = 4;
+            unit->selection.state = 10;
+            unit->selection.current = -1;
+        } else {
+            unit->selection.state = 10;
+            unit->selection.current = 3;
+            unit->selection.target = -1;
+        }
+        return;
     }
-    if (temp_v1 == param_2 && param_4 == param_3) {
-      *(unsigned int *)(param_1 * 4 + 0x57f0d8) = 0xffffffff;
-      *(unsigned int *)(param_1 * 4 + 0x57f0f0) = 0xffffffff;
-    }
-  }
-  temp_v1 = temp_v0 + param_1 * 4;
-  *(char *)(temp_v1 + 0x5ac) = (char)param_2;
-  *(short *)(temp_v1 + 0x5ae) = (short)param_3;
-  if ((((param_2 != 7 && param_2 != 9) && (param_2 != 10 && param_2 != 0xb)) &&
-      (param_2 != 0xc && param_2 != 0xd)) &&
-     ((param_2 != 0xe && param_2 != 0xf && ((param_2 != 0x10 && param_2 != 0x11) && param_2 != 0x13)
-      ))) {
-    temp_v0 = temp_v0 + param_1 * 0x8c;
-    if (param_2 == 8) {
-      *(unsigned int *)(temp_v0 + 0x3c) = 4;
-      *(unsigned int *)(temp_v0 + 0x34) = 10;
-      *(unsigned int *)(temp_v0 + 0x38) = 0xffffffff;
-    }
-    else {
-      *(unsigned int *)(temp_v0 + 0x34) = 10;
-      *(unsigned int *)(temp_v0 + 0x38) = 3;
-      *(unsigned int *)(temp_v0 + 0x3c) = 0xffffffff;
-    }
-    return;
-  }
-  temp_v0 = temp_v0 + param_1 * 0x8c;
-  *(unsigned int *)(temp_v0 + 0x3c) = 1;
-  *(unsigned int *)(temp_v0 + 0x34) = 10;
-  *(unsigned int *)(temp_v0 + 0x38) = 0xffffffff;
-  return;
+    unit->selection.target = 1;
+    unit->selection.state = 10;
+    unit->selection.current = -1;
 }
-
-} /* extern "C" */
+}

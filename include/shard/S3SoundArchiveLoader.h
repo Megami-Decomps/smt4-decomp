@@ -4,6 +4,7 @@
 #define SHARD_S3SOUNDARCHIVELOADER_H
 
 #include "common.h"
+#include <stddef.h>
 
 #define SOUNDARCHIVE_ITEM_INVALID 0xFFFFFFFF
 #define SOUNDARCHIVE_ITEM_TYPE(id) ((id) >> 24)
@@ -15,9 +16,20 @@
 struct SoundArchiveLoader;
 
 typedef struct SoundArchiveLoaderVtbl {
-    /* 0x00 */ void *unk00[4];
+    union {
+        /* 0x00 */ void *unk00[4];
+        struct {
+            /* 0x00 */ void *unk00[2];
+            /* 0x08 */ void (*registerFile)(SoundArchiveLoader *self, u32 fileId, void *data);
+            /* 0x0C */ void *(*getFile)(SoundArchiveLoader *self, u32 fileId);
+        } files;
+    };
     /* 0x10 */ s32 (*loadItem)(struct SoundArchiveLoader *self, u32 item);
 } SoundArchiveLoaderVtbl;
+typedef char SoundArchiveLoaderCallbackOffsets[
+    offsetof(SoundArchiveLoaderVtbl, files.registerFile) == 8 &&
+    offsetof(SoundArchiveLoaderVtbl, files.getFile) == 12 &&
+    sizeof(SoundArchiveLoaderVtbl) == 0x14 ? 1 : -1];
 
 typedef struct SoundArchiveLoader {
     /* 0x00 */ const SoundArchiveLoaderVtbl *vtbl;

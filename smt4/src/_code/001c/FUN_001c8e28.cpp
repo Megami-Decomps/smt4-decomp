@@ -314,7 +314,7 @@ unsigned int FUN_001c8e28(void)
     if (DAT_0044de30 != iVar8) {
       FUN_002b8e84(0x100016c);
     }
-    FUN_002d9014();
+    saveUiRefreshSelectedSlotPreview();
     iVar8 = DAT_0044de30 + 1;
     puVar4[DAT_0044de30 + 0xb] = 0x3f800000;
     puVar4[iVar8 % 2 + 0xb] = 0x3f000000;
@@ -351,7 +351,7 @@ code_r0x001c9900:
         FUN_002b8e84(0x100016d);
         if (*(char *)(puVar4 + 10) != '\0') {
           *(unsigned char *)(puVar4 + 10) = 0;
-          FUN_002d9014();
+          saveUiRefreshSelectedSlotPreview();
         }
         *(unsigned char *)(puVar4 + 0x15) = 1;
         iVar8 = FUN_00299fc0();
@@ -729,7 +729,7 @@ code_r0x001c9900:
     puVar2[3] = puVar2[3] + 1;
     break;
   case 0x11:
-    FUN_00322b80();
+    saveLoadCreateBootProcess();
     puVar2[2] = 0x12;
     puVar2[3] = 0;
     break;

@@ -3,7 +3,7 @@
 #include "classes/Obj4207c0.h"
 
 extern "C" {
-void FUN_003fcfe8(Obj4207c0Resource *resource);
+void gfxResourceTableReleaseTexturesAndBuffers(Obj4207c0Resource *resource);
 extern Obj4207c0Registry DAT_005cc508;
 }
 
@@ -22,7 +22,7 @@ Obj4207c0::~Obj4207c0()
             for (s32 j = 0; j < 16; j++) {
                 Obj4207c0Resource *entry = registry->entries[j];
                 if (entry != NULL && entry->id == id) {
-                    FUN_003fcfe8(entry);
+                    gfxResourceTableReleaseTexturesAndBuffers(entry);
                     delete registry->entries[j];
                     registry->entries[j] = NULL;
                     break;

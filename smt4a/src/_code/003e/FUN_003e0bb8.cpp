@@ -1,81 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e0bb8` (_code @ 0x3e0bb8, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only request initialization differs: compiler interleaves state=24 between the two argument-clear stores. */
+#include "battle/BattleTransitionRequest.h"
+#include "battle/btlMain.h"
 
 extern "C" {
+u32 FUN_003e0f94(BattleTransitionRequest *request, const BtlMainStateA *state);
+s32 FUN_0013def0(u32 channel);
+void FUN_0013cab8(u32 channel, u32 state, u32 value);
+s32 FUN_002e07f4(void);
+void FUN_003e16cc(BattleTransitionRequest *, BtlMainStateA *);
+void FUN_003e1a30(BattleTransitionRequest *, BtlMainStateA *);
+void FUN_003e1b80(BattleTransitionRequest *, BtlMainStateA *);
+void FUN_003e2504(BattleTransitionRequest *, BtlMainStateA *);
+void FUN_003e26f0(BattleTransitionRequest *, BtlMainStateA *);
+void FUN_003e2a88(BattleTransitionRequest *, BtlMainStateA *);
 
-int FUN_0013cab8(int, int, int);
-int FUN_003e0f94(...);
-int FUN_003e16cc(unsigned int *, unsigned int);
-int FUN_003e1a30(unsigned int *, unsigned int);
-int FUN_003e1b80(unsigned int *, unsigned int);
-int FUN_003e2504(unsigned int *, unsigned int);
-int FUN_003e26f0(unsigned int *, unsigned int);
-int FUN_003e2a88(unsigned int *, unsigned int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_0013cab8. */
-extern int FUN_0013def0(unsigned int);
-extern int FUN_002e07f4(void);
-/* Supplied declaration required: FUN_003e0f94. */
-/* Supplied declaration required: FUN_003e16cc. */
-/* Supplied declaration required: FUN_003e1a30. */
-/* Supplied declaration required: FUN_003e1b80. */
-/* Supplied declaration required: FUN_003e2504. */
-/* Supplied declaration required: FUN_003e26f0. */
-/* Supplied declaration required: FUN_003e2a88. */
-
-
-void FUN_003e0bb8(unsigned int *param_1,unsigned int param_2)
-
+// Wait for ordinary transitions to become ready, then initialize and dispatch the encounter transition.
+void FUN_003e0bb8(BattleTransitionRequest *request, BtlMainStateA *state)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_003e0f94();
-  if (temp_v0 != 2 && temp_v0 != 5) {
-    temp_v0 = FUN_0013def0(0);
-    if (temp_v0 == 3) {
-      FUN_0013cab8(0,10,0xff);
+    u32 mode = FUN_003e0f94(request, state);
+    if (mode != 2 && mode != 5) {
+        if (FUN_0013def0(0) == 3) {
+            FUN_0013cab8(0, 10, 255);
+        }
+        if (FUN_0013def0(1) == 3) {
+            FUN_0013cab8(1, 10, 255);
+        }
+        if (FUN_002e07f4() == 0) {
+            return;
+        }
     }
-    temp_v0 = FUN_0013def0(1);
-    if (temp_v0 == 3) {
-      FUN_0013cab8(1,10,0xff);
+    request->secondArgument = 0;
+    request->firstArgument = 0;
+    request->state = 24;
+    switch (FUN_003e0f94(request, state)) {
+    case 2: FUN_003e1b80(request, state); return;
+    case 1: FUN_003e26f0(request, state); return;
+    case 3: FUN_003e1a30(request, state); return;
+    case 4: FUN_003e2a88(request, state); return;
+    case 5: FUN_003e2504(request, state); return;
+    default: FUN_003e16cc(request, state); return;
     }
-    temp_v0 = FUN_002e07f4();
-    if (temp_v0 == 0) {
-      return;
-    }
-  }
-  param_1[4] = 0;
-  param_1[3] = 0;
-  *param_1 = 0x18;
-  temp_v1 = FUN_003e0f94(param_1,param_2);
-  switch(temp_v1) {
-  default:
-    FUN_003e16cc(param_1,param_2);
-    return;
-  case 1:
-    FUN_003e26f0(param_1,param_2);
-    return;
-  case 2:
-    FUN_003e1b80(param_1,param_2);
-    return;
-  case 3:
-    FUN_003e1a30(param_1,param_2);
-    return;
-  case 4:
-    FUN_003e2a88(param_1,param_2);
-    return;
-  case 5:
-    FUN_003e2504(param_1,param_2);
-    return;
-  }
 }
-
-} /* extern "C" */
+}

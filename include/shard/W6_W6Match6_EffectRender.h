@@ -3,6 +3,7 @@
 
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/W6_W6Match4_EffectEditorSnapshot.h"
+#include <stddef.h>
 
 struct EffectRenderVector { f32 x, y, z, w; };
 struct EffectRenderSource {
@@ -38,6 +39,23 @@ struct EffectRenderGlobals {
     union { EffectEditorWords words; EffectRenderVector vector; };
 };
 struct EffectHandlerRequest { u32 unk00; u16 index, unk06; u32 argument; };
+
+struct EffectPositionControl {
+    /* 0x00 */ u8 unk00[0x40];
+    /* 0x40 */ EffectRenderVector position;
+    /* 0x50 */ u8 unk50[0x18];
+    /* 0x68 */ u32 flags;
+};
+struct EffectPositionDefaults {
+    /* 0x00 */ u8 unk00[0xD0];
+    /* 0xD0 */ EffectRenderVector position;
+};
+typedef char EffectPositionControlOffsets[
+    offsetof(EffectPositionControl, position) == 0x40 &&
+    offsetof(EffectPositionControl, flags) == 0x68 &&
+    sizeof(EffectPositionControl) == 0x6C &&
+    offsetof(EffectPositionDefaults, position) == 0xD0 &&
+    sizeof(EffectPositionDefaults) == 0xE0 ? 1 : -1];
 
 struct EffectParameterBlock {
     /* 0x00 */ f32 values[6];

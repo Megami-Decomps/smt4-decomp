@@ -1,75 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001df78c` (_code @ 0x1df78c, 0x11c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "gfx/TransformHistory.h"
 extern "C" {
+extern void (*FUN_001790bc)(TransformHistoryWork *work);
+extern void (*FUN_0017f6bc)(TransformHistoryWork *work);
+extern void (*FUN_00172abc)(TransformHistoryWork *work);
 
-typedef int romwright_code(...);
-
-unsigned int FUN_001df78c(unsigned int *param_1,unsigned short *param_2)
-
+// Prepare six recent and following block addresses, then dispatch the block transform.
+u32 FUN_001df78c(TransformHistory *history, const u16 *input)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  
-  puVar4 = (unsigned int *)*param_1;
-  temp_v1 = 0;
-  do {
-    temp_v2 = param_1[3] - temp_v1;
-    if (temp_v2 < 0) {
-      temp_v2 = temp_v2 + param_1[2];
+    TransformHistoryWork *work = history->work;
+    for (s32 index = 0; index < 6; ++index) {
+        s32 slot = history->cursor - index;
+        if (slot < 0)
+            slot += history->capacity;
+        work->recent[index] = history->entries[slot];
+        work->next[index] = history->entries[slot] + history->blockSize * work->stride;
     }
-    temp_v0 = temp_v1 + 1;
-    puVar4[temp_v1 + 3] = *(unsigned int *)(param_1[1] + temp_v2 * 4);
-    puVar4[temp_v1 + 9] = param_1[6] * puVar4[2] + *(int *)(param_1[1] + temp_v2 * 4);
-    temp_v1 = temp_v0;
-  } while (temp_v0 < 6);
-  temp_v1 = param_1[3];
-  param_1[3] = temp_v1 + 1;
-  if (temp_v1 + 1 == param_1[2]) {
-    param_1[3] = 0;
-  }
-  param_1[4] = (unsigned int)(*param_2 >> 0xf);
-  *puVar4 = (unsigned int)param_2;
-  if (param_1[6] == 0x100) {
-    temp_v1 = param_1[7];
-    temp_v3 = temp_v1 != 1;
-    if (!temp_v3) {
-      temp_v1 = param_1[5];
+    ++history->cursor;
+    if (history->cursor == history->capacity)
+        history->cursor = 0;
+    history->sign = (*input & 0x8000) >> 15;
+    work->input = input;
+    if (history->blockSize == 256) {
+        if (history->enabled != 1 || history->mode != 0)
+            return work->recent[0];
+        FUN_001790bc(work);
     }
-    if (temp_v3 || temp_v1 != 0) {
-      return puVar4[3];
+    if (history->blockSize == 512) {
+        if (history->enabled != 1 || history->mode != 0)
+            return work->recent[0];
+        FUN_0017f6bc(work);
     }
-    (*(romwright_code *)0x172b00)(puVar4);
-  }
-  if (param_1[6] == 0x200) {
-    temp_v1 = param_1[7];
-    temp_v3 = temp_v1 != 1;
-    if (!temp_v3) {
-      temp_v1 = param_1[5];
-    }
-    if (temp_v3 || temp_v1 != 0) {
-      return puVar4[3];
-    }
-    (*(romwright_code *)0x179100)(puVar4);
-  }
-  temp_v1 = param_1[6];
-  temp_v3 = temp_v1 == 0x400;
-  if (temp_v3) {
-    temp_v1 = param_1[7];
-  }
-  temp_v4 = temp_v3 && temp_v1 == 1;
-  if (temp_v3 && temp_v1 == 1) {
-    temp_v4 = param_1[5] == 0;
-  }
-  if (temp_v4) {
-    (*(romwright_code *)0x16c500)(puVar4);
-  }
-  return puVar4[3];
+    if (history->blockSize == 1024 && history->enabled == 1 && history->mode == 0)
+        FUN_00172abc(work);
+    return work->recent[0];
 }
-
-} /* extern "C" */
+}

@@ -1,115 +1,76 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00271d28` (_code @ 0x271d28, 0x1f4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation debug hooks are absent; color copy, reference reloads and saved registers differ. */
+#include "shard/W6_W6Match2_GeometryResources.h"
+#include <string.h>
 
 extern "C" {
+extern const char DAT_0054baf8[];
+extern const u32 DAT_005c1fb4[4];
+void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 dataAlignment, u32 clear);
+void *FUN_00178b04(u32 size, const char *file, s32 line);
+void *FUN_002b3324(u32 count, u32 flags, s32 mode);
+void refCountIncrement(void *resource);
+OwnedBufferPair *slotReset(OwnedBufferPair *buffers);
+void slotInit(OwnedBufferPair *buffers, u32 kind, u32 count, u32 format);
 
-int memAlloc(int, int, int, int, int, int);
-int FUN_00178b04(int, unsigned char *, int);
-int refCountIncrement(void);
-int FUN_002b3324(unsigned int, unsigned int, int);
-int slotInit(void);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned char DAT_0054baf8; /* 0x54baf8 */
-extern unsigned int DAT_005c1fb4; /* 0x5c1fb4 */
-extern unsigned int DAT_005c1fb8; /* 0x5c1fb8 */
-extern unsigned int DAT_005c1fbc; /* 0x5c1fbc */
-extern unsigned int DAT_005c1fc0; /* 0x5c1fc0 */
-
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: refCountIncrement. */
-/* Supplied declaration required: FUN_002b3324. */
-/* Supplied declaration required: slotInit. */
-extern unsigned int slotReset(void);
-
-
-unsigned short * FUN_00271d28(unsigned short *param_1)
-
+GeometryResources *FUN_00271d28(const GeometryResources *source)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  unsigned short *puVar4;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  
-  temp_v1 = *param_1;
-  if ((temp_v1 & 0x200) != 0) {
-    temp_v6 = *(unsigned int *)(*(int *)(param_1 + 6) + 0x14);
-    temp_v7 = *(unsigned int *)(*(int *)(param_1 + 6) + 4) & 0xffff;
-    puVar4 = (unsigned short *)0x10000;
-    memAlloc(0x10000,0x100,0,0x58,0x10,1);
-    *puVar4 = 0x300;
-    puVar4[1] = 0;
-    FUN_002b3324(temp_v7,temp_v6,0);
-    *(unsigned int *)(puVar4 + 6) = temp_v7;
-    temp_v2 = DAT_005c1fc0;
-    temp_v8 = DAT_005c1fbc;
-    temp_v4 = DAT_005c1fb8;
-    if ((temp_v6 & 0x80000) != 0) {
-      *(unsigned int *)(temp_v7 + 0x40) = DAT_005c1fb4;
-      *(unsigned int *)(temp_v7 + 0x44) = temp_v4;
-      *(unsigned int *)(temp_v7 + 0x48) = temp_v8;
-      *(unsigned int *)(temp_v7 + 0x4c) = temp_v2;
+    // The allocation tail and engine-specific metadata extend beyond the shared prefixes.
+    struct GeometryView { GeometryResources base; u8 padding10[0x44]; u32 kind; };
+    struct EngineView {
+        u32 reserved00, count;
+        u8 padding08[0xC];
+        u32 flags;
+        u8 padding18[0x28];
+        u32 color[4];
+        u8 padding50[0x10];
+        u32 reset;
+        u8 padding64[0x50];
+        void *retained;
+    };
+    struct BufferView {
+        u8 prefix[0xC]; u32 format;
+        u8 padding10[8]; u32 count;
+        u8 padding1C[0x2C]; u16 *indices;
+    };
+    u16 flags = source->flags;
+    GeometryView *copy;
+    if (flags & 0x200) {
+        const EngineView *original = static_cast<const EngineView *>(source->special);
+        u32 engineFlags = original->flags;
+        u16 count = original->count;
+        copy = static_cast<GeometryView *>(memAlloc(0x10000, 0x100, 0, sizeof(GeometryView), 0x10, 1));
+        copy->base.flags = 0x300;
+        copy->base.vertexCount = 0;
+        EngineView *engine = static_cast<EngineView *>(FUN_002b3324(count, engineFlags, 0));
+        copy->base.special = engine;
+        if (engineFlags & 0x80000)
+            memcpy(engine->color, DAT_005c1fb4, sizeof(engine->color));
+        static_cast<EngineView *>(copy->base.special)->reset = 0;
+        original = static_cast<const EngineView *>(source->special);
+        if (original->retained != NULL) {
+            static_cast<EngineView *>(copy->base.special)->retained = original->retained;
+            refCountIncrement(original->retained);
+        }
+    } else {
+        const BufferView *original = reinterpret_cast<const BufferView *>(source->buffers);
+        u32 format = original->format;
+        u32 count = original->count;
+        copy = static_cast<GeometryView *>(memAlloc(0x10000, 0x100, 0, sizeof(GeometryView), 0x10, 1));
+        OwnedBufferPair *buffers = static_cast<OwnedBufferPair *>(FUN_00178b04(sizeof(OwnedBufferPair), DAT_0054baf8, 0x73));
+        if (buffers != NULL)
+            buffers = slotReset(buffers);
+        slotInit(buffers, 0x25, count, format);
+        copy->base.flags = flags;
+        copy->base.buffers = buffers;
+        copy->base.vertexCount = format;
+        copy->kind = 0xA5;
+        if (source->texture != NULL) {
+            copy->base.texture = source->texture;
+            refCountIncrement(source->texture);
+        }
+        for (u32 index = 0; index < reinterpret_cast<const BufferView *>(source->buffers)->count; ++index)
+            copy->base.buffers->indices[index] = source->buffers->indices[index];
     }
-    *(unsigned int *)(*(int *)(puVar4 + 6) + 0x60) = 0;
-    if (*(int *)(*(int *)(param_1 + 6) + 0xb4) != 0) {
-      *(int *)(*(int *)(puVar4 + 6) + 0xb4) = *(int *)(*(int *)(param_1 + 6) + 0xb4);
-      refCountIncrement();
-    }
-  }
-  else {
-    temp_v8 = *(unsigned int *)(*(int *)(param_1 + 4) + 0xc);
-    puVar4 = (unsigned short *)0x10000;
-    memAlloc(0x10000,0x100,0,0x58,0x10,1);
-    temp_v3 = 0x4c;
-    FUN_00178b04(0x4c,&DAT_0054baf8,0x73);
-    temp_v4 = 0;
-    if (temp_v3 != 0) {
-      temp_v4 = slotReset();
-    }
-    slotInit();
-    *puVar4 = temp_v1;
-    *(unsigned int *)(puVar4 + 4) = temp_v4;
-    puVar4[1] = (unsigned short)temp_v8;
-    puVar4[0x2a] = 0xa5;
-    puVar4[0x2b] = 0;
-    if (*(int *)(param_1 + 2) != 0) {
-      *(int *)(puVar4 + 2) = *(int *)(param_1 + 2);
-      refCountIncrement();
-    }
-    temp_v6 = *(unsigned int *)(*(int *)(param_1 + 4) + 0x18);
-    temp_v7 = 0;
-    if ((temp_v6 != 0) && (temp_v7 = temp_v6 & 1, temp_v7 == 1)) {
-      **(unsigned short **)(*(int *)(puVar4 + 4) + 0x48) =
-           **(unsigned short **)(*(int *)(param_1 + 4) + 0x48);
-    }
-    if (temp_v7 < *(unsigned int *)(*(int *)(param_1 + 4) + 0x18)) {
-      do {
-        temp_v5 = temp_v7 * 2 + 2;
-        temp_v3 = temp_v7 * 2;
-        temp_v0 = temp_v7 * 2;
-        temp_v7 = temp_v7 + 2;
-        *(unsigned short *)(*(int *)(*(int *)(puVar4 + 4) + 0x48) + temp_v0) =
-             *(unsigned short *)(*(int *)(*(int *)(param_1 + 4) + 0x48) + temp_v3);
-        *(unsigned short *)(*(int *)(*(int *)(puVar4 + 4) + 0x48) + temp_v5) =
-             *(unsigned short *)(*(int *)(*(int *)(param_1 + 4) + 0x48) + temp_v5);
-      } while (temp_v7 < *(unsigned int *)(*(int *)(param_1 + 4) + 0x18));
-    }
-  }
-  return puVar4;
+    return &copy->base;
 }
-
-} /* extern "C" */
+}

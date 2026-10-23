@@ -1,64 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00420a2c` (_code @ 0x420a2c, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: position snapshot stores use integer loads instead of retail's float/register grouping. */
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+void FUN_00163aa4(void *sprite, f32 delta);
+s32 vec2GetXInt(const void *sprite);
+s32 vec2GetYInt(const void *sprite);
 
-int FUN_00163aa4(...);
-
-/* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-
-
-void FUN_00420a2c(int param_1)
-
+// Advance the revealed sprites and save their positions as transition origins.
+void FUN_00420a2c(void *context)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  FUN_00163aa4();
-  temp_v2 = 0;
-  if (temp_v2 < *(int *)(param_1 + 0x18)) {
-    do {
-      if (*(int *)(param_1 + 0x620) < temp_v2) {
-        *(int *)(param_1 + 0x620) = *(int *)(param_1 + 0x620) + 1;
-        break;
-      }
-      FUN_00163aa4(param_1 + temp_v2 * 0x8c + 0x500);
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < *(int *)(param_1 + 0x18));
-  }
-  temp_v0 = vec2GetXInt(param_1 + 0x474);
-  temp_v1 = vec2GetYInt(param_1 + 0x474);
-  *(unsigned int *)(param_1 + 0x624) = temp_v0;
-  *(unsigned int *)(param_1 + 0x628) = temp_v1;
-  *(unsigned int *)(param_1 + 0x62c) = *(unsigned int *)(param_1 + 0x494);
-  temp_v2 = 0;
-  if (0 < *(int *)(param_1 + 0x18)) {
-    do {
-      temp_v3 = param_1 + temp_v2 * 0x8c;
-      temp_v0 = vec2GetXInt(temp_v3 + 0x500);
-      temp_v1 = vec2GetYInt(temp_v3 + 0x500);
-      temp_v4 = *(unsigned int *)(temp_v3 + 0x520);
-      temp_v3 = temp_v2 + 1;
-      temp_v2 = param_1 + temp_v2 * 0x44;
-      *(unsigned int *)(temp_v2 + 0x664) = temp_v0;
-      *(unsigned int *)(temp_v2 + 0x668) = temp_v1;
-      *(unsigned int *)(temp_v2 + 0x66c) = temp_v4;
-      temp_v2 = temp_v3;
-    } while (temp_v3 < *(int *)(param_1 + 0x18));
-  }
-  temp_v0 = vec2GetXInt(param_1 + 0x500);
-  temp_v1 = vec2GetYInt(param_1 + 0x500);
-  *(unsigned int *)(param_1 + 0x710) = temp_v0;
-  *(unsigned int *)(param_1 + 0x714) = temp_v1;
-  *(unsigned int *)(param_1 + 0x718) = *(unsigned int *)(param_1 + 0x520);
-  return;
+    struct SpritePositionView { u8 unk00[0x20]; f32 depth; u8 unk24[0x68]; };
+    struct PositionSnapshot { s32 x, y; f32 depth; };
+    struct SpriteSnapshot { PositionSnapshot position; u8 unk0c[0x38]; };
+    union CaptureView {
+        SaveLoadTransitionPrefixA state;
+        struct {
+            u8 unk000[0x474];
+            SpritePositionView header;
+            SpritePositionView entries[1];
+        } sprites;
+        struct {
+            u8 unk000[0x624];
+            PositionSnapshot header;
+            u8 unk630[0x34];
+            SpriteSnapshot entries[1];
+        } snapshots;
+        struct {
+            u8 unk000[0x710];
+            PositionSnapshot position;
+        } selected;
+    };
+    // Local overlapping views avoid growing the shared prefix or changing sprite alignment.
+    CaptureView *work = static_cast<CaptureView *>(context);
+    FUN_00163aa4(&work->sprites.header, 1.0f);
+    for (s32 index = 0; index < work->state.spriteCount; ++index) {
+        if (static_cast<s32>(work->state.transitionCounter) < index) {
+            ++work->state.transitionCounter;
+            break;
+        }
+        FUN_00163aa4(&work->sprites.entries[index], 1.0f);
+    }
+    s32 x = vec2GetXInt(&work->sprites.header);
+    s32 y = vec2GetYInt(&work->sprites.header);
+    work->snapshots.header.x = x;
+    work->snapshots.header.y = y;
+    work->snapshots.header.depth = work->sprites.header.depth;
+    for (s32 index = 0; index < work->state.spriteCount; ++index) {
+        s32 x = vec2GetXInt(&work->sprites.entries[index]);
+        s32 y = vec2GetYInt(&work->sprites.entries[index]);
+        f32 depth = work->sprites.entries[index].depth;
+        work->snapshots.entries[index].position.x = x;
+        work->snapshots.entries[index].position.y = y;
+        work->snapshots.entries[index].position.depth = depth;
+    }
+    x = vec2GetXInt(&work->sprites.entries[0]);
+    y = vec2GetYInt(&work->sprites.entries[0]);
+    work->selected.position.x = x;
+    work->selected.position.y = y;
+    work->selected.position.depth = work->sprites.entries[0].depth;
 }
-
-} /* extern "C" */
+}

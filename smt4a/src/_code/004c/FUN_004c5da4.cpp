@@ -1,92 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c5da4` (_code @ 0x4c5da4, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initial 64-bit exclusion mask load pairing and registers differ. */
+#include "shard/W5_W5Match7_BattleMask.h"
+#include "gamedata/Table04Record.h"
 
+struct Source4C;
 extern "C" {
+Table04ExtraRecord *FUN_0034a290(u32 skill);
+Source4C *FUN_003f0e20(BattleMaskState *battle, u32 unit);
+void source4CCopyHalves(Source4C *source, u16 *skills);
+s32 lcgRandomRange(u32 maximum);
 
-int FUN_0034a290(void);
-int FUN_003f0e20(int, unsigned int);
-int source4CCopyHalves(void);
-
-/* stack frame of param_2: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-extern unsigned int DAT_00571490; /* 0x571490 */
-extern unsigned int DAT_00571494; /* 0x571494 */
-
-extern int btlGetMainState(void);
-extern int lcgRandomRange(unsigned int);
-/* Supplied declaration required: FUN_0034a290. */
-/* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: source4CCopyHalves. */
-
-
-int FUN_004c5da4(unsigned int param_1,int param_2)
-
+// Choose the first passive-triggered skill whose activation chance succeeds.
+s32 FUN_004c5da4(u32 unit, s32 rollChance)
 {
-/* irregular: 3 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int unaff_r6;
-  unsigned char temp_v4;
-  unsigned short temp_v5 [12];
-  
-  temp_v1 = btlGetMainState();
-  if ((*(unsigned int *)(temp_v1 + 0x45a0) & DAT_00571490) == 0 &&
-      (*(unsigned int *)(temp_v1 + 0x45a4) & DAT_00571494) == 0) {
-    FUN_003f0e20(temp_v1,param_1);
-    temp_v1 = *(int *)(temp_v1 + 0xf0);
-    if (temp_v1 != 0x16c) {
-      if (temp_v1 < 0x16d) {
-        if (temp_v1 - 0x169U < 2 || temp_v1 == 0x16b) {
-          return 0;
-        }
-      }
-      else if (temp_v1 == 0x17d || temp_v1 == 0x17e) {
+    struct TriggerMaskView {
+        u8 unk00[0xa0];
+        u64 blockedStates; // 0xa0
+    };
+    extern TriggerMaskView DAT_005713f0;
+    BattleMaskState *battle = btlGetMainState();
+    if ((battle->mask & DAT_005713f0.blockedStates) != 0)
         return 0;
-      }
-      temp_v5[0] = 0;
-      temp_v5[1] = 0;
-      temp_v5[2] = 0;
-      temp_v5[3] = 0;
-      temp_v5[4] = 0;
-      temp_v5[5] = 0;
-      temp_v5[6] = 0;
-      temp_v5[7] = 0;
-      temp_v5[8] = 0;
-      temp_v5[9] = 0;
-      source4CCopyHalves();
-      temp_v1 = 0;
-      do {
-        temp_v2 = (unsigned int)temp_v5[temp_v1];
-        if (temp_v2 != 0) {
-          FUN_0034a290();
-          temp_v4 = temp_v2 != 0;
-          temp_v0 = 0;
-          if (temp_v4) {
-            temp_v0 = *(short *)(temp_v2 + 0x34);
-          }
-          if (temp_v4 && temp_v0 != 0) {
-            unaff_r6 = (int)*(short *)(temp_v2 + 0x36);
-          }
-          if (((temp_v4 && temp_v0 != 0) && unaff_r6 != 0) &&
-             ((param_2 == 0 || (temp_v3 = lcgRandomRange(99), temp_v3 < unaff_r6)))) {
-            return (int)*(short *)(temp_v2 + 0x34);
-          }
-        }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 9);
+    Source4C *source = FUN_003f0e20(battle, unit);
+    switch (battle->activity.currentAction) {
+    case 0x169:
+    case 0x16a:
+    case 0x16b:
+    case 0x16c:
+    case 0x17d:
+    case 0x17e:
+        return 0;
     }
-  }
-  return 0;
+    u16 skills[10] = {0};
+    source4CCopyHalves(source, skills);
+    for (s32 index = 0; index < 9; ++index) {
+        if (skills[index] != 0) {
+            Table04ExtraRecord *skill = FUN_0034a290(skills[index]);
+            if (skill != NULL && skill->trigger.triggeredSkill != 0) {
+                s32 chance = skill->trigger.triggerChance;
+                if (chance != 0 && (!rollChance || lcgRandomRange(99) < chance))
+                    return skill->trigger.triggeredSkill;
+            }
+        }
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

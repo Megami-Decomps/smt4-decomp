@@ -1,70 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bfd84` (_code @ 0x3bfd84, 0x114 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: all loop and binding operations match, but saved-register allocation and the uniqueness-count comparison differ. */
+#include "gfx/ModelDummyBindings.h"
+#include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 
-extern "C" {
+extern "C" s32 FUN_00102c30(const char *name, const char *substring);
+extern "C" const char DAT_005271f4[];
 
-extern int FUN_00102c30(unsigned int, char *);
-
-
-void FUN_003bfd84(int param_1,int param_2)
-
+static inline bool containsDummyNode(const ModelDummyBindings *output, const ModelDummyNodeBinding *binding)
 {
-/* irregular: 3 goto(s) */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned short *puVar6;
-  int temp_v5;
-  
-  *(unsigned int *)(param_1 + 0x100) = 0;
-  *(unsigned int *)(param_1 + 0x204) = 0;
-  temp_v4 = 0;
-  temp_v5 = *(int *)(*(int *)(param_2 + 0x210) + 0x44);
-  if (0 < temp_v5) {
-    do {
-      temp_v2 = 0;
-      puVar6 = (unsigned short *)(*(int *)(*(int *)(param_2 + 0x210) + 0x40) + temp_v4 * 0x38);
-      temp_v3 = *(int *)(*(int *)(param_2 + 0x210) + 0x34) + (unsigned int)*puVar6 * 0x2c;
-      do {
-        if (temp_v2 == 0) {
-          temp_v0 = *(int *)(temp_v3 + 4);
-LAB_003bfdfc:
-          if ((temp_v0 != 0) &&
-             (temp_v0 = FUN_00102c30(*(unsigned int *)(temp_v0 + 0x1c),"dami"), temp_v0 != 0)) {
-            temp_v1 = *(int *)(param_1 + 0x204);
-            temp_v0 = 0;
-            if (temp_v0 < temp_v1) {
-              do {
-                if ((int)*(short *)(param_1 + temp_v0 * 4 + 0x104) == (unsigned int)*puVar6)
-                goto LAB_003bfe7c;
-                temp_v0 = temp_v0 + 1;
-              } while (temp_v0 < temp_v1);
-            }
-            *(unsigned short *)(param_1 + temp_v1 * 4 + 0x104) = *puVar6;
-            *(short *)(param_1 + *(int *)(param_1 + 0x204) * 4 + 0x106) = (short)temp_v2;
-            *(int *)(param_1 + 0x204) = *(int *)(param_1 + 0x204) + 1;
-          }
+    for (s32 index = 0; index < output->count; ++index) {
+        if (output->bindings[index].node == binding->node) {
+            return true;
         }
-        else {
-          if (temp_v2 == 1) {
-            temp_v0 = *(int *)(temp_v3 + 8);
-            goto LAB_003bfdfc;
-          }
-          if (temp_v2 == 2) {
-            temp_v0 = *(int *)(temp_v3 + 0xc);
-            goto LAB_003bfdfc;
-          }
-        }
-LAB_003bfe7c:
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 3);
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < temp_v5);
-  }
-  return;
+    }
+    return false;
 }
 
-} /* extern "C" */
+static inline ModelNamedPart *getDummyPart(const ModelDummyNode *node, s32 index)
+{
+    switch (index) {
+    case 0: return node->first;
+    case 1: return node->second;
+    case 2: return node->third;
+    default: return NULL;
+    }
+}
+
+// Collect the first part named "dami" for each distinct bound model node.
+extern "C" void FUN_003bfd84(ModelDummyBindings *output, MaterialMergeResource *resource)
+{
+    // These binding arrays lie beyond the established metadata prefix.
+    struct MetadataView {
+        u8 unk00[0x34];
+        ModelDummyNode *nodes;
+        u8 unk38[8];
+        ModelDummyNodeBinding *bindings;
+        s32 count;
+    };
+    typedef char MetadataOffsetsCheck[offsetof(MetadataView, nodes) == 0x34 &&
+        offsetof(MetadataView, bindings) == 0x40 && offsetof(MetadataView, count) == 0x44 ? 1 : -1];
+    output->primaryCount = 0;
+    output->count = 0;
+    s32 count = ((MetadataView *)resource->metadata)->count;
+    for (s32 index = 0; index < count; ++index) {
+        MetadataView *metadata = (MetadataView *)resource->metadata;
+        ModelDummyNodeBinding *binding = &metadata->bindings[index];
+        ModelDummyNode *node = &metadata->nodes[binding->node];
+        for (s32 partIndex = 0; partIndex < 3; ++partIndex) {
+            ModelNamedPart *part = getDummyPart(node, partIndex);
+            if (part != NULL && FUN_00102c30(part->name, DAT_005271f4) != 0) {
+                if (!containsDummyNode(output, binding)) {
+                    output->bindings[output->count].node = binding->node;
+                    output->bindings[output->count].part = partIndex;
+                    ++output->count;
+                }
+            }
+        }
+    }
+}

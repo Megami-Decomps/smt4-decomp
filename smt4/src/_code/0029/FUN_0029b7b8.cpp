@@ -1,77 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029b7b8` (_code @ 0x29b7b8, 0x134 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: inlined ownership search retains an extra ID base, spills the unit pointer and assigns different saved registers. */
+#include "shard/W7_W7Match2_PartyDamage.h"
+#include "shard/W6_W6Match3_ContentWordList.h"
+#include "gamedata/UnitStats.h"
 
 extern "C" {
-
-int FUN_0029cde0(unsigned int *, int, int);
-int FUN_0029f7d4(void);
-
-/* Supplied declaration required: FUN_0029cde0. */
-extern int FUN_0029ea68(unsigned short);
-extern int flagWordTestBit(int, unsigned int);
-/* Supplied declaration required: FUN_0029f7d4. */
-extern int gameGetUnitRecord(void);
-extern int gameGetSlotTable(void);
-extern int gameCountUnits(void);
-
-
-void FUN_0029b7b8(unsigned int param_1,int param_2,unsigned int *param_3)
-
-{
-/* irregular: 1 goto(s); 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  short *psVar5;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  
-  temp_v6 = 0;
-  temp_v0 = gameGetSlotTable();
-  FUN_0029f7d4();
-  if (param_2 != 0) {
-    *param_3 = 0;
-    param_3[1] = 0;
-    param_3[2] = 0;
-    param_3[3] = 0;
-    param_3[4] = 0;
-    temp_v4 = 0;
-    param_3[5] = 0;
-    do {
-      temp_v5 = param_2 + temp_v4 * 2;
-      if (*(short *)(temp_v5 + 2) != 0) {
-        temp_v3 = 0;
-        temp_v1 = gameCountUnits();
-        if (0 < temp_v1) {
-          do {
-            if (-1 < *(char *)(temp_v0 + temp_v3 + 0x90f0)) {
-              temp_v1 = gameGetUnitRecord();
-              temp_v2 = flagWordTestBit(temp_v1,10);
-              if (((temp_v2 == 0) && (temp_v2 = flagWordTestBit(temp_v1,2), temp_v2 == 0)) &&
-                 (*(short *)(temp_v1 + 0x46) == *(short *)(temp_v5 + 2))) {
-                *(unsigned short *)((int)param_3 + temp_v4 * 2) = 1;
-                goto LAB_0029b8c4;
-              }
-            }
-            temp_v3 = temp_v3 + 1;
-            temp_v1 = gameCountUnits();
-          } while (temp_v3 < temp_v1);
-        }
-        psVar5 = (short *)((int)param_3 + temp_v4 * 2);
-        if ((*psVar5 == 0) && (temp_v5 = FUN_0029ea68(*(unsigned short *)(temp_v5 + 2)), temp_v5 != 0)) {
-          *psVar5 = 2;
-        }
-LAB_0029b8c4:
-        temp_v6 = temp_v6 + 1;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 0xc);
-    FUN_0029cde0(param_3,temp_v6,0);
-  }
-  return;
+PartyDamageSlotsIV *gameGetSlotTable(void);
+const ContentWordList *FUN_0029f7d4(u32 id);
+s32 gameCountUnits(void);
+StatBlock *gameGetUnitRecord(s32 slot);
+s32 flagWordTestBit(const StatBlock *unit, u32 bit);
+s32 FUN_0029ea68(u16 id);
+u32 FUN_0029cde0(u16 *sources, s32 count, u32 mode);
 }
 
-} /* extern "C" */
+static __inline bool findOwnedSource(const PartyDamageSlotsIV *party,
+                                     const ContentWordList *list, s32 index, u16 *sources)
+{
+    for (s32 slot = 0; slot < gameCountUnits(); ++slot) {
+        if (party->stock[slot] >= 0) {
+            StatBlock *unit = gameGetUnitRecord(party->stock[slot]);
+            if (!flagWordTestBit(unit, 10) && !flagWordTestBit(unit, 2) && unit->id == list->ids[index]) {
+                sources[index] = 1;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+// Classify selected unit IDs as owned or otherwise available, then validate the set.
+extern "C" u32 FUN_0029b7b8(u32, u32 listId, u16 *sources)
+{
+    s32 count = 0;
+    PartyDamageSlotsIV *party = gameGetSlotTable();
+    const ContentWordList *list = FUN_0029f7d4(listId);
+    if (list == NULL) {
+        return 0;
+    }
+    u32 *words = reinterpret_cast<u32 *>(sources);
+    for (s32 index = 0; index < 6; ++index) {
+        words[index] = 0;
+    }
+    for (s32 index = 0; index < 12; ++index) {
+        if (list->ids[index] != 0) {
+            if (!findOwnedSource(party, list, index, sources)) {
+                if (sources[index] == 0 && FUN_0029ea68(list->ids[index])) {
+                    sources[index] = 2;
+                }
+            }
+            ++count;
+        }
+    }
+    return FUN_0029cde0(sources, count, 0) ^ 1;
+}

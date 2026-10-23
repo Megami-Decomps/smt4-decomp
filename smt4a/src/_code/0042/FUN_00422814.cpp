@@ -1,65 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00422814` (_code @ 0x422814, 0x120 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: slot field-address hoisting and paired-counter zero initialization differ. */
+#include "gfx/LockedResourcePool.h"
 
 extern "C" {
+extern LockedResourcePool DAT_005880d0;
+extern u32 DAT_00618518;
+void nn_os_CriticalSection_Enter(void *);
+void nn_os_CriticalSection_Leave(void *);
+u32 FUN_001af874(u32, u32, u32);
 
-typedef int romwright_code(...);
-extern int *DAT_005880d4; /* 0x5880d4 */
-extern int DAT_005880d8; /* 0x5880d8 */
-extern unsigned int DAT_005880e4; /* 0x5880e4 */
-extern unsigned int DAT_00618518; /* 0x618518 */
-
-extern unsigned int FUN_001af874(unsigned int, unsigned int);
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-unsigned int FUN_00422814(int param_1,int param_2,int param_3)
-
+/* Allocate storage and a protected handle for the first unused pool slot. */
+u32 FUN_00422814(s32 width, s32 height, s32 capacity)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  int *piVar3;
-  unsigned int temp_v2;
-  
-  temp_v2 = 0;
-  if (temp_v2 < DAT_005880e4) {
-    do {
-      if (*(int *)(DAT_005880d8 + temp_v2 * 0x70) == 0) {
-        *(int *)(DAT_005880d8 + temp_v2 * 0x70 + 0x38) = param_3;
-        temp_v0 = (**(romwright_code **)*DAT_005880d4)(DAT_005880d4,param_3 * 0x18,4);
-        *(int *)(DAT_005880d8 + temp_v2 * 0x70 + 4) = temp_v0;
-        if (temp_v0 == 0) {
-          return 0;
+    for (u32 index = 0; index < DAT_005880d0.count; ++index) {
+        if (DAT_005880d0.slots[index].handle == 0) {
+            DAT_005880d0.slots[index].capacity = capacity;
+            Obj557f00Allocator *allocator = DAT_005880d0.allocator;
+            DAT_005880d0.slots[index].elements = (LockedPoolElement *)
+                allocator->vtable->allocate(allocator, capacity * sizeof(LockedPoolElement), 4);
+            if (DAT_005880d0.slots[index].elements == NULL) {
+                return 0;
+            }
+            nn_os_CriticalSection_Enter(&DAT_00618518);
+            DAT_005880d0.slots[index].handle = FUN_001af874(0x80, 0, 0);
+            nn_os_CriticalSection_Leave(&DAT_00618518);
+            LockedResourceSlot *slot = &DAT_005880d0.slots[index];
+            if (slot->handle == 0) {
+                allocator = DAT_005880d0.allocator;
+                allocator->vtable->release(allocator, slot->elements);
+                return 0;
+            }
+            slot->cursors[0] = 0;
+            slot->cursors[1] = 0;
+            slot->cursors[2] = 0;
+            slot->cursors[3] = 0;
+            slot->submitted = 0;
+            slot->completed = 0;
+            slot->scaleX = 1.0f;
+            slot->scaleY = 1.0f;
+            slot->width = width;
+            slot->height = height;
+            return index;
         }
-        nn_os_CriticalSection_Enter((unsigned int)&DAT_00618518);
-        temp_v1 = FUN_001af874(0x80,0);
-        *(unsigned int *)(DAT_005880d8 + temp_v2 * 0x70) = temp_v1;
-        nn_os_CriticalSection_Leave((unsigned int)&DAT_00618518);
-        piVar3 = (int *)(DAT_005880d8 + temp_v2 * 0x70);
-        if (*piVar3 == 0) {
-          (**(romwright_code **)(*DAT_005880d4 + 4))(DAT_005880d4,piVar3[1]);
-          return 0;
-        }
-        piVar3[0x11] = 0;
-        piVar3[0x12] = 0;
-        piVar3[0x13] = 0;
-        piVar3[0x14] = 0;
-        piVar3[0x16] = 0;
-        piVar3[0x17] = 0;
-        piVar3[0x18] = 0;
-        piVar3[0x19] = 0;
-        piVar3[2] = 0x3f800000;
-        piVar3[3] = 0x3f800000;
-        piVar3[0xf] = param_1;
-        piVar3[0x10] = param_2;
-        return temp_v2;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < DAT_005880e4);
-  }
-  return 0xffffffff;
+    }
+    return 0xFFFFFFFF;
 }
-
-} /* extern "C" */
+}

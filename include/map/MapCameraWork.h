@@ -7,7 +7,14 @@
 struct MapCameraScalarTrack {
     u32 state;
     f32 value;
-    u8 unk08[0x38];
+    union {
+        u8 unk08[0x38];
+        struct {
+            u8 prefix08[4];
+            f32 values[3];
+            u8 suffix18[0x28];
+        } controls;
+    };
 };
 
 /* Recovered prefix of the local-map camera work area. */
@@ -15,7 +22,10 @@ struct MapCameraWork {
     /* 0x000 */ u32 states[3];
     /* 0x00C */ u8 unk00C[8];
     /* 0x014 */ u32 active;
-    /* 0x018 */ u8 unk018[4];
+    union {
+        /* 0x018 */ u8 unk018[4];
+        /* 0x018 */ f32 heading;
+    };
     /* 0x01C */ MapVector up;
     /* 0x028 */ u8 unk028[0xC];
     /* 0x034 */ MapVector eye;
@@ -37,7 +47,17 @@ struct MapCameraWork {
     /* 0x0B4 */ u16 elapsed;
     /* 0x0B6 */ u8 unk0B6[2];
     /* 0x0B8 */ f32 transition[3];
-    /* 0x0C4 */ MapCameraScalarTrack tracks[5];
+    union {
+        /* 0x0C4 */ MapCameraScalarTrack tracks[5];
+        struct {
+            u32 base;
+            f32 targetHeight[16];
+            f32 eyeHeight[16];
+            f32 lateralDistance[16];
+            f32 rearDistance[16];
+            u8 suffix1C8[0x3C];
+        } followPresets;
+    };
     /* 0x204 */ u32 unk204;
     /* 0x208 */ s32 target;
     /* 0x20C */ f32 values[4];
@@ -47,7 +67,14 @@ struct MapCameraWork {
     /* 0x2A0 */ u32 counters[2];
     /* 0x2A8 */ u16 range[4];
     /* 0x2B0 */ u8 moving;
-    /* 0x2B1 */ u8 unk2B1[0xB];
+    union {
+        /* 0x2B1 */ u8 unk2B1[0xB];
+        struct {
+            u8 prefix2B1[7];
+            u8 enabled;
+            u8 suffix2B9[3];
+        } preset;
+    };
     /* 0x2BC */ f32 weight;
 };
 
@@ -76,5 +103,14 @@ typedef char MapCameraWorkLayoutCheck[sizeof(MapCameraScalarTrack) == 0x40 &&
     offsetof(MapCameraWork, counters) == 0x2A0 && offsetof(MapCameraWork, range) == 0x2A8 &&
     offsetof(MapCameraWork, moving) == 0x2B0 && offsetof(MapCameraWork, weight) == 0x2BC &&
     sizeof(MapCameraGlobals) == 8 && offsetof(MapCameraGlobals, work) == 4 ? 1 : -1];
+typedef char MapCameraPresetOffsetCheck[
+    offsetof(MapCameraScalarTrack, controls.values) == 0xC &&
+    offsetof(MapCameraWork, preset.enabled) == 0x2B8 &&
+    sizeof(MapCameraScalarTrack) == 0x40 && sizeof(MapCameraWork) == 0x2C0 ? 1 : -1];
+typedef char MapCameraFollowPresetOffsetCheck[
+    offsetof(MapCameraWork, heading) == 0x18 &&
+    offsetof(MapCameraWork, followPresets.base) == 0xC4 &&
+    offsetof(MapCameraWork, followPresets.rearDistance) == 0x188 &&
+    sizeof(MapCameraWork) == 0x2C0 ? 1 : -1];
 
 #endif

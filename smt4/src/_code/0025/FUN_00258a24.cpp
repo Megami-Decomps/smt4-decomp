@@ -1,134 +1,86 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00258a24` (_code @ 0x258a24, 0x1d0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains a separate primary-skill base and different saved registers; refresh behavior is reconstructed. */
+#include "shard/GameGlobals.h"
 
-extern "C" {
-
-int statusBuildFlaggedDemonList(short *);
-int FUN_001ee8b4(short *);
-int FUN_00215a8c(short *);
-int FUN_00215b5c(int, int);
-int FUN_0026a978(unsigned int *, int);
-int FUN_0026ae64(void);
-int statusDownRestoreTabForMode(void);
-int statusDownSetSelectedEntryDescription(void);
-int FUN_002e2fb0(int, int);
-
-/* stack frame of param_1: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern unsigned char g_gameGlobals; /* 0x44e140 */
-
-/* Supplied declaration required: statusBuildFlaggedDemonList. */
-/* Supplied declaration required: FUN_001ee8b4. */
-/* Supplied declaration required: FUN_00215a8c. */
-/* Supplied declaration required: FUN_00215b5c. */
-/* Supplied declaration required: FUN_0026a978. */
-extern char FUN_0026a9cc(short, short, short *, unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_0026ae64. */
-extern int FUN_00293aac(void);
-/* Supplied declaration required: statusDownRestoreTabForMode. */
-extern unsigned char FUN_0029aafc(void);
-extern unsigned char flagCountUnlockedSlots(unsigned int);
-extern int partyMemberFindById(short);
-/* Supplied declaration required: statusDownSetSelectedEntryDescription. */
-/* Supplied declaration required: FUN_002e2fb0. */
-
-
-void FUN_00258a24(int param_1)
-
-{
-/* irregular: 9 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  char temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int *puVar7;
-  short *psVar8;
-  short *psVar9;
-  int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  
-  temp_v1 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
-  temp_v2 = 8;
-  psVar9 = (short *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1300);
-  psVar8 = (short *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1300);
-  temp_v0 = *psVar9;
-  if (param_1 != 0) {
-    psVar8 = (short *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x18b0);
-  }
-  if (temp_v0 < 0) {
-    temp_v2 = FUN_0029aafc();
-  }
-  else if ((0 < temp_v0) && (*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e66) != '\x06')) {
-    temp_v2 = flagCountUnlockedSlots(0);
-  }
-  FUN_00215b5c(temp_v1 + 0x1348,temp_v2);
-  if (param_1 != 0) {
-    FUN_002e2fb0(temp_v1 + 0x18f8,temp_v2);
-  }
-  temp_v6 = 0;
-  temp_v7 = 0;
-  temp_v8 = 0;
-  temp_v9 = 0;
-  if ((*psVar8 >= 1) && (temp_v3 = *(char *)(temp_v1 + 0x1e66), temp_v3 != '\x06')) {
-    if (temp_v3 == '\x02' || temp_v3 == '\x03') {
-      temp_v4 = partyMemberFindById(*psVar9);
-      temp_v3 = '\0';
-      if (temp_v4 != 0) {
-        temp_v3 = *(char *)(temp_v4 + 0x4b);
-      }
-      if (temp_v4 == 0 || temp_v3 == '\0') {
-        temp_v5 = 0;
-      }
-      else {
-        temp_v5 = 1;
-      }
-    }
-    else {
-      temp_v5 = 0;
-    }
-    temp_v3 = FUN_0026a9cc(*psVar8,psVar8[1],psVar8 + 0x24,(unsigned int *)&temp_v6,temp_v5);
-    temp_v4 = (int)temp_v3;
-    puVar7 = (unsigned int *)&temp_v6;
-  }
-  else {
-    temp_v4 = -1;
-    puVar7 = (unsigned int *)0x0;
-  }
-  FUN_0026a978(puVar7,temp_v4);
-  temp_v4 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
-  if (*(char *)(temp_v1 + 0x1e67) == '\x06') {
-    *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) = 0;
-    statusDownRestoreTabForMode();
-    *(unsigned char *)(temp_v4 + 0x1e63) = 0;
-  }
-  if ((*psVar8 < 0) && (FUN_00215a8c(psVar8 + 0x1d), *(int *)(temp_v1 + 0x12e4) >= 2)) {
-    *(unsigned int *)(temp_v1 + 0x12e4) = 1;
-    statusDownRestoreTabForMode();
-  }
-  if (0 < *psVar8) {
-    statusDownSetSelectedEntryDescription();
-    statusBuildFlaggedDemonList(psVar8 + 0x2c);
-    FUN_001ee8b4(psVar8 + 0x4c);
-    temp_v4 = FUN_00293aac();
-    if (temp_v4 == 2) {
-      *(unsigned int *)(temp_v1 + 0x12e4) = 1;
-      statusDownRestoreTabForMode();
-    }
-  }
-  FUN_0026ae64();
-  return;
+namespace {
+struct StatusRefreshMemberView { u8 prefix[0x4B]; u8 available; };
+struct StatusSelectionRecord {
+    s16 memberId;
+    u16 level;
+    u8 padding04[0x36];
+    u8 entryData[0xE];
+    u16 skills[8];
+    u8 flags[0x40];
+    u8 inventory[0x500];
+};
 }
+extern "C" {
+u32 FUN_0029aafc();
+u32 flagCountUnlockedSlots(u32 flags);
+void FUN_00215b5c(u16 *skills, u8 count);
+void FUN_002e2fb0(u16 *skills, u8 count);
+StatusRefreshMemberView *partyMemberFindById(u32 id);
+s32 FUN_0026a9cc(u16 memberId, u32 level, const u16 *skills, u32 *result, s32 skip);
+void FUN_0026a978(const u32 *result, s32 selection);
+void statusDownRestoreTabForMode();
+void FUN_00215a8c(const void *entry);
+void statusDownSetSelectedEntryDescription(s32 id);
+void statusBuildFlaggedDemonList(const u8 *flags);
+void FUN_001ee8b4(const u8 *inventory);
+s32 FUN_00293aac();
+void FUN_0026ae64();
 
-} /* extern "C" */
+// Refresh either stored status selection and synchronize its skill, description and inventory tabs.
+void FUN_00258a24(s32 alternate)
+{
+    GameData *data = g_gameGlobals.data;
+    StatusSelectionRecord *primary = reinterpret_cast<StatusSelectionRecord *>(&data->unk1300);
+    StatusSelectionRecord *selection = primary;
+    if (alternate != 0)
+        selection = reinterpret_cast<StatusSelectionRecord *>(data->unk18B0);
+    u32 count = 8;
+    if (primary->memberId < 0)
+        count = FUN_0029aafc();
+    else if (primary->memberId > 0 && data->unk1E66 != 6)
+        count = flagCountUnlockedSlots(0);
+    FUN_00215b5c(primary->skills, count);
+    if (alternate != 0)
+        FUN_002e2fb0(reinterpret_cast<StatusSelectionRecord *>(data->unk18B0)->skills, count);
+    u32 result[4] = {0, 0, 0, 0};
+    if (selection->memberId > 0 && data->unk1E66 != 6) {
+        s32 skip;
+        if (data->unk1E66 == 2 || data->unk1E66 == 3) {
+            StatusRefreshMemberView *member = partyMemberFindById((u16)primary->memberId);
+            skip = member != NULL && member->available != 0;
+        } else {
+            skip = 0;
+        }
+        s8 selected = (s8)FUN_0026a9cc(selection->memberId, selection->level, selection->skills, result, skip);
+        FUN_0026a978(result, selected);
+    } else {
+        FUN_0026a978(NULL, -1);
+    }
+    if (data->unk1E67 == 6) {
+        GameData *current = g_gameGlobals.data;
+        current->unk12E4 = 0;
+        statusDownRestoreTabForMode();
+        current->unk1E63 = 0;
+    }
+    if (selection->memberId < 0) {
+        FUN_00215a8c(selection->entryData);
+        if ((s32)data->unk12E4 > 1) {
+            data->unk12E4 = 1;
+            statusDownRestoreTabForMode();
+        }
+    }
+    if (selection->memberId > 0) {
+        statusDownSetSelectedEntryDescription(selection->memberId);
+        statusBuildFlaggedDemonList(selection->flags);
+        FUN_001ee8b4(selection->inventory);
+        if (FUN_00293aac() == 2) {
+            data->unk12E4 = 1;
+            statusDownRestoreTabForMode();
+        }
+    }
+    FUN_0026ae64();
+}
+}

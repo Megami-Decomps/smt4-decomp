@@ -5,6 +5,7 @@
 #include "gamedata/GameData.h"
 #include "gamedata/SaveFlagViews.h"
 #include "gamedata/StatusChoices.h"
+#include "gamedata/UnitStats.h"
 #include <stddef.h>
 
 typedef struct GameSavedItem {
@@ -46,7 +47,16 @@ typedef struct GameSaveData {
     /* 0x00088 */ u8 linkTable[1];
     /* 0x00089 */ u8 unk00089[7];
     /* 0x00090 */ StatusChoiceData statusChoices;
-    /* 0x00118 */ u8 unk00118[0x9758];
+    union {
+        /* 0x00118 */ u8 unk00118[0x9758];
+        struct {
+            /* 0x00118 */ u8 unk118[4];
+            /* 0x0011C */ StatBlock units[24];
+            /* 0x0917C */ s8 stock[24];
+            /* 0x09194 */ s8 active[3];
+            /* 0x09197 */ u8 stockCount;
+        } party;
+    };
     /* 0x09870 */ u32 unk09870;
     /* 0x09874 */ u8 block09874[1];
     /* 0x09875 */ u8 unk09875[0x2983];
@@ -73,7 +83,13 @@ typedef struct GameSaveData {
         } questSnapshot;
     };
     /* 0x244B0 */ u32 unk244B0;
-    /* 0x244B4 */ u8 unk244B4[0x6C8];
+    union {
+        /* 0x244B4 */ u8 unk244B4[0x6C8];
+        struct {
+            u8 prefix[0x675];
+            /* 0x24B29 */ u8 gameOverContinueEnabled;
+        } gameOver;
+    };
     /* 0x24B7C */ u8 configOptions[4];
     /* 0x24B80 */ u8 hasConfig;
     /* 0x24B81 */ u8 unk24B81[7];
@@ -99,5 +115,14 @@ typedef char GameSaveDataQuestBookkeepingOffsetCheck[
     offsetof(GameSaveData, questCurrentValue) == 0x1F458 &&
     offsetof(GameSaveData, questSnapshot.value) == 0x1F85C &&
     sizeof(GameSaveData) == 0x24BC4 ? 1 : -1];
+typedef char GameSaveDataGameOverContinueOffsetCheck[
+    offsetof(GameSaveData, gameOver.gameOverContinueEnabled) == 0x24B29 ? 1 : -1];
+typedef char GameSaveDataPartyOffsets[
+    offsetof(GameSaveData, party.units) == 0x11C &&
+    offsetof(GameSaveData, party.stock) == 0x917C &&
+    offsetof(GameSaveData, party.active) == 0x9194 &&
+    sizeof(GameSaveData) == 0x24BC4 ? 1 : -1];
+typedef char GameSaveDataPartyStockCountOffsetCheck[
+    offsetof(GameSaveData, party.stockCount) == 0x9197 && sizeof(GameSaveData) == 0x24BC4 ? 1 : -1];
 
 #endif

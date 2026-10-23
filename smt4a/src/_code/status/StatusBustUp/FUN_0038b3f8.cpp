@@ -1,93 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038b3f8` (_code @ 0x38b3f8, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: texture table constants are rematerialized rather than retained in saved registers. */
+#include "status/StatusBustUp.h"
+#include "gamedata/DevilRecordA.h"
 extern "C" {
+extern StatusBustUpResources DAT_00588fd8;
+extern void *g_aocSystem;
+void *dataTable00FindById(u16 id);
+s32 gameFlagIsSet(u32 flag);
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
+void asdTMTexTableReleaseNode(u32 table, u32 node);
+void FUN_001b2d54(void *system, u32 table, u32 node);
 
-int FUN_00184310(void);
-int asdTMTexTableReleaseNode(int, unsigned int);
-int dataTable00FindById(void);
-int FUN_001b2d54(unsigned int, int, unsigned int);
-
-extern unsigned int g_aocSystem; /* 0x570280 */
-extern int DAT_00588fdc; /* 0x588fdc */
-extern int DAT_00588fe0; /* 0x588fe0 */
-
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00184310. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_001b2d54. */
-
-
-void FUN_0038b3f8(unsigned int param_1,int param_2)
-
+// Release one portrait reference and unload its texture when the last user leaves.
+void FUN_0038b3f8(s32 id, s32 resolveRecord)
 {
-/* irregular: 4 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned short temp_v2;
-  int temp_v3;
-  
-  if (param_2 != 0) {
-    if ((int)param_1 < 0) {
-      temp_v1 = gameFlagIsSet(0x11);
-      if (temp_v1 == 0) {
-        param_1 = 0x25e;
-      }
-      else {
-        param_1 = 0;
-      }
+    if (resolveRecord) {
+        if (id < 0) {
+            id = gameFlagIsSet(17) ? 0 : 606;
+        } else {
+            DevilTableRecordA *record = (DevilTableRecordA *)FUN_00184310((u16)id);
+            if (record == NULL)
+                return;
+            // The alternate portrait metadata extends the shared table-zero view.
+            struct AlternatePortraitView {
+                u16 id;
+                u16 flags;
+                u8 prefix[0x88];
+                s16 portrait;
+            };
+            typedef char AlternatePortraitOffsets[offsetof(AlternatePortraitView, portrait) == 0x8C ? 1 : -1];
+            AlternatePortraitView *alternate = (AlternatePortraitView *)dataTable00FindById((u16)id);
+            if (alternate->flags & 0x8000) {
+                id = alternate->portrait;
+                if (id >= 154)
+                    return;
+                s8 *references = (s8 *)DAT_00588fd8.workB;
+                if (--references[id] > 0)
+                    return;
+                if (asdTMTexTableNodeIsLoaded(25, id)) {
+                    asdTMTexTableReleaseNode(25, id);
+                    FUN_001b2d54(g_aocSystem, 25, id);
+                }
+                ((s8 *)DAT_00588fd8.workB)[id] = 0;
+                return;
+            }
+            id = record->unk9C + 1;
+            if (id >= 631)
+                return;
+        }
     }
-    else {
-      temp_v2 = param_1;
-      FUN_00184310();
-      if (temp_v2 == 0) {
+    s8 *references = (s8 *)DAT_00588fd8.workA;
+    if (--references[id] > 0)
         return;
-      }
-      param_1 = param_1 & 0xffff;
-      dataTable00FindById();
-      if ((*(unsigned short *)(param_1 + 2) & 0x8000) != 0) {
-        param_1 = (unsigned int)*(short *)(param_1 + 0x8c);
-        if ((int)param_1 >= 0x9a) {
-          return;
-        }
-        temp_v0 = *(char *)(DAT_00588fe0 + param_1) - '\x01';
-        *(char *)(DAT_00588fe0 + param_1) = temp_v0;
-        if ('\0' < temp_v0) {
-          return;
-        }
-        temp_v3 = asdTMTexTableNodeIsLoaded(0x19,param_1);
-        temp_v1 = DAT_00588fe0;
-        if (temp_v3 != 0) {
-          asdTMTexTableReleaseNode(0x19,param_1);
-          FUN_001b2d54(g_aocSystem,0x19,param_1);
-          temp_v1 = DAT_00588fe0;
-        }
-        *(unsigned char *)(temp_v1 + param_1) = 0;
-        return;
-      }
-      param_1 = *(unsigned short *)(temp_v2 + 0x9c) + 1;
-      if (param_1 >= 0x277) {
-        return;
-      }
+    if (asdTMTexTableNodeIsLoaded(15, id)) {
+        asdTMTexTableReleaseNode(15, id);
+        FUN_001b2d54(g_aocSystem, 15, id);
     }
-  }
-  temp_v0 = *(char *)(DAT_00588fdc + param_1) - '\x01';
-  *(char *)(DAT_00588fdc + param_1) = temp_v0;
-  if ('\0' < temp_v0) {
-    return;
-  }
-  temp_v3 = asdTMTexTableNodeIsLoaded(0xf,param_1);
-  temp_v1 = DAT_00588fdc;
-  if (temp_v3 != 0) {
-    asdTMTexTableReleaseNode(0xf,param_1);
-    FUN_001b2d54(g_aocSystem,0xf,param_1);
-    temp_v1 = DAT_00588fdc;
-  }
-  *(unsigned char *)(temp_v1 + param_1) = 0;
-  return;
+    ((s8 *)DAT_00588fd8.workA)[id] = 0;
 }
-
-} /* extern "C" */
+}

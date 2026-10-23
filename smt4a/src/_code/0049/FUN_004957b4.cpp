@@ -1,85 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004957b4` (_code @ 0x4957b4, 0x1c0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: extended-view address caching, category branch outlining and label-coordinate register lifetimes differ. */
+#include "shop/shopMain.h"
+#include "shard/S1ListPanel.h"
 
 extern "C" {
+s32 FUN_0031d174(const void *selection);
+const SpriteInfo *FUN_0018349c(void *group, u32 sprite);
+void FUN_0049339c(void *group, u32 sprite, s32 x, s32 y, s32 depth);
+void FUN_0049368c(void *group, u32 sprite, s32 x, s32 y, s32 depth, s32 enabled);
+void textFormatBuffer(char *buffer, const char *format, ...);
+void drawTextAtRelativePosition(void *group, u32 font, s32 x, s32 y, s32 mode,
+    s32 alignment, u32 color, s32 depth, const char *text);
+extern const char DAT_0053617c[];
 
-int textFormatBuffer(...);
-int FUN_0018349c(...);
-int FUN_0049339c(int, int, int, int, int);
-int drawTextAtRelativePosition(...);
-int FUN_0049368c(...);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_1_stack;
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_0018349c. */
-extern int FUN_0031d174(int);
-/* Supplied declaration required: FUN_0049339c. */
-/* Supplied declaration required: drawTextAtRelativePosition. */
-/* Supplied declaration required: FUN_0049368c. */
-
-
-void FUN_004957b4(int param_1)
-
+void FUN_004957b4(ShopWork *base)
 {
-/* irregular: 5 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned char temp_v8 [32];
-  
-  temp_v3 = *(int *)(param_1 + 0x3a0);
-  temp_v2 = *(int *)(param_1 + 0xb40);
-  temp_v4 = temp_v3 + 6;
-  temp_v5 = 2;
-  if (temp_v2 == 7 || temp_v2 == 8) {
-    temp_v5 = 1;
-  }
-  temp_v2 = FUN_0031d174(param_1 + temp_v2 * 0x74 + 0xb60);
-  temp_v2 = FUN_0018349c(param_1 + 0x3b8,temp_v2 + temp_v5 + 0x4f);
-  temp_v0 = *(short *)(temp_v2 + 8);
-  temp_v1 = *(short *)(temp_v2 + 10);
-  temp_v2 = FUN_0018349c(param_1 + 0x3b8,200);
-  temp_v5 = (int)*(short *)(temp_v2 + 8) + (int)temp_v0;
-  temp_v2 = (int)temp_v1 + (int)*(short *)(temp_v2 + 10);
-  if (*(int *)(param_1 + 0xb40) != 8) {
-    FUN_0049339c(param_1 + 0x3b8,8,temp_v5,temp_v2,temp_v4);
-  }
-  else {
-    FUN_0049339c(param_1 + 0x3b8,9,temp_v5,temp_v2,temp_v4);
-  }
-  FUN_0049368c(param_1 + 0x3b8,0xc2,temp_v5,temp_v2,temp_v4,1);
-  FUN_0049368c(param_1 + 0x3b8,0xc3,temp_v5,temp_v2,temp_v4,1);
-  if (*(char *)(param_1 + 0xb58) != '\0') {
-    FUN_0049368c(param_1 + 0x3b8,0xc4,temp_v5,temp_v2,temp_v3 + 7,1);
-  }
-  if (*(char *)(param_1 + 0xb59) != '\0') {
-    FUN_0049368c(param_1 + 0x3b8,0xc5,temp_v5,temp_v2,temp_v3 + 7,1);
-  }
-  temp_v7 = *(unsigned int *)(param_1 + 0xb48);
-  temp_v3 = FUN_0018349c(param_1 + 0x3b8,199);
-  temp_v6 = 0xffffffff;
-  temp_v0 = *(short *)(temp_v3 + 8);
-  temp_v1 = *(short *)(temp_v3 + 10);
-  if (*(int *)(param_1 + 0xb48) == *(int *)(param_1 + 0xb4c)) {
-    temp_v6 = 0x57d8ffff;
-  }
-  textFormatBuffer(temp_v8,
-               "㈥d㩣卜呍䘴卜呍䘴獜摤㑳灜潲牧浡獜潨屰桳灯慍湩挮灰",temp_v7);
-  drawTextAtRelativePosition(param_1 + 0x3b8,0,temp_v0 + temp_v5,temp_v1 + temp_v2,0,7,temp_v6,temp_v4,temp_v8);
-  return;
+    // The shared ShopWork exposes only the task prefix, not this Apocalypse screen's body.
+    struct QuantityView {
+        ShopWork prefix;
+        u8 unk01C[0x3A0 - sizeof(ShopWork)];
+        s32 depth;
+        u8 unk3A4[0x14];
+        u8 sprites[0x788];
+        s32 category;
+        u32 unkB44, quantity, maximum;
+        u8 unkB50[8];
+        u8 showDecrease, showIncrease;
+        u8 unkB5A[6];
+        u8 selections[9][0x74];
+    };
+    typedef char QuantityViewOffsetsCheck[offsetof(QuantityView, sprites) == 0x3B8 &&
+        offsetof(QuantityView, category) == 0xB40 &&
+        offsetof(QuantityView, showIncrease) == 0xB59 &&
+        offsetof(QuantityView, selections) == 0xB60 ? 1 : -1];
+    QuantityView *work = reinterpret_cast<QuantityView *>(base);
+    s32 depth = work->depth + 6;
+    s32 spriteOffset = 2;
+    if (work->category == 7 || work->category == 8)
+        spriteOffset = 1;
+    s32 row = FUN_0031d174(work->selections[work->category]);
+    const SpriteInfo *position = FUN_0018349c(work->sprites, row + spriteOffset + 0x4F);
+    s16 positionX = position->x, positionY = position->y;
+    const SpriteInfo *origin = FUN_0018349c(work->sprites, 200);
+    s32 x = origin->x + positionX, y = positionY + origin->y;
+    if (work->category != 8)
+        FUN_0049339c(work->sprites, 8, x, y, depth);
+    else
+        FUN_0049339c(work->sprites, 9, x, y, depth);
+    FUN_0049368c(work->sprites, 0xC2, x, y, depth, 1);
+    FUN_0049368c(work->sprites, 0xC3, x, y, depth, 1);
+    if (work->showDecrease)
+        FUN_0049368c(work->sprites, 0xC4, x, y, depth + 1, 1);
+    if (work->showIncrease)
+        FUN_0049368c(work->sprites, 0xC5, x, y, depth + 1, 1);
+    u32 quantity = work->quantity;
+    const SpriteInfo *label = FUN_0018349c(work->sprites, 199);
+    u32 color = 0xFFFFFFFF;
+    s16 labelX = label->x, labelY = label->y;
+    if (work->quantity == work->maximum)
+        color = 0x57D8FFFF;
+    char text[32];
+    textFormatBuffer(text, DAT_0053617c, quantity);
+    drawTextAtRelativePosition(work->sprites, 0, labelX + x, labelY + y, 0, 7, color, depth, text);
 }
-
-} /* extern "C" */
+}

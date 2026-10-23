@@ -1,83 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041eeec` (_code @ 0x41eeec, 0x128 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only state-transition byte-store scheduling/register choices differ. */
+#include "saveLoadUI/SaveLoadControllerA.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
+extern void* g_handleRegistry;
+extern SaveLoadUIBaseA g_saveLoadUIBase;
+s32 objBStateAllowsAction(void);
+void FUN_002f0384(s32 enabled);
+void FUN_0041de6c(SaveLoadControllerA* controller);
+void ptrListRemoveClearOwner(void* registry, u32 handle);
+void FUN_0022e774(void);
+void FUN_0019de98(void* color, u32 rgba);
+void FUN_0041f020(SaveLoadControllerA* controller, s32 enabled);
 
-int dataTableGet(int, int);
-int FUN_0019de98(int, unsigned int);
-int ptrListRemoveClearOwner(unsigned int, unsigned int);
-int FUN_0022e774(void);
-int FUN_002f0384(int);
-int FUN_0041de6c(int);
-int FUN_0041f020(int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern unsigned char g_saveLoadUIBase; /* 0x588e14 */
-
-/* Supplied declaration required: dataTableGet. */
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: ptrListRemoveClearOwner. */
-/* Supplied declaration required: FUN_0022e774. */
-/* Supplied declaration required: FUN_002f0384. */
-extern int objBStateAllowsAction(void);
-/* Supplied declaration required: FUN_0041de6c. */
-/* Supplied declaration required: FUN_0041f020. */
-
-
-void FUN_0041eeec(int param_1)
-
+// Exit to the suspended state or reset the idle save/load screen for another selection.
+void FUN_0041eeec(SaveLoadControllerA* controller)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned char temp_v0;
-  char temp_v1;
-  int temp_v2;
-  
-  temp_v2 = objBStateAllowsAction();
-  if ((temp_v2 != 0) && (*(char *)(*(int *)(param_1 + 0x2f8) + param_1 + 0x2ec) != '\0')) {
-    FUN_002f0384(1);
-    *(unsigned char *)(param_1 + 0x68) = 1;
-  }
-  FUN_0041de6c(param_1);
-  if ((*(signed char *)((unsigned char *)&g_saveLoadUIBase + 0x1)) != '\0') {
-    if (*(int *)(param_1 + 0x58) != 0) {
-      ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(param_1 + 0x58) + 4));
-      if (*(int **)(param_1 + 0x58) != (int *)0x0) {
-        (**(romwright_code **)(**(int **)(param_1 + 0x58) + 4))();
-        *(unsigned int *)(param_1 + 0x58) = 0;
-      }
+    if (objBStateAllowsAction() && controller->slotFlags[controller->selectedSlot]) {
+        FUN_002f0384(1);
+        controller->suspended = 1;
     }
-    FUN_0022e774();
-    temp_v0 = *(unsigned char *)(param_1 + 7);
-    *(unsigned int *)(param_1 + 8) = 0;
-    *(unsigned char *)(param_1 + 7) = 0x10;
-    *(unsigned char *)(param_1 + 0xd) = temp_v0;
-    *(unsigned char *)(param_1 + 0xc) = 0xc;
-  }
-  else if (*(char *)(param_1 + 0x12) == '\0') {
-    temp_v1 = *(char *)(param_1 + 5);
-    dataTableGet(0x3d,0);
-    temp_v2 = dataTableGetEntries();
-    FUN_0019de98(temp_v2 + temp_v1 * 0x54 + 0x14,0xf4f4f4ff);
-    temp_v0 = *(unsigned char *)(param_1 + 7);
-    *(unsigned int *)(param_1 + 8) = 0;
-    *(unsigned char *)(param_1 + 7) = 4;
-    *(unsigned char *)(param_1 + 0xd) = temp_v0;
-    *(unsigned char *)(param_1 + 0xc) = 0;
-    *(unsigned char *)(param_1 + 0x44c) = 0;
-    *(unsigned char *)(param_1 + 0x44d) = 0;
-    *(unsigned char *)(param_1 + 0x44e) = 0;
-    FUN_0041f020(param_1,1);
-    return;
-  }
-  return;
+    FUN_0041de6c(controller);
+    if (g_saveLoadUIBase.unk01) {
+        if (controller->resource != NULL) {
+            ptrListRemoveClearOwner(g_handleRegistry, controller->resource->handle);
+            if (controller->resource != NULL) {
+                controller->resource->destroy();
+                controller->resource = NULL;
+            }
+        }
+        FUN_0022e774();
+        u8 previous = controller->state;
+        controller->frame = 0;
+        controller->state = 16;
+        controller->previousState = previous;
+        controller->nextState = 12;
+    } else if (!controller->busy) {
+        s32 colorIndex = controller->colorIndex;
+        void* section = dataTableGet(0x3D, 0);
+        SaveLoadColorRecordA* colors = static_cast<SaveLoadColorRecordA*>(dataTableGetEntries(section));
+        FUN_0019de98(colors[colorIndex].color, 0xF4F4F4FF);
+        u8 previous = controller->state;
+        controller->frame = 0;
+        controller->state = 4;
+        controller->previousState = previous;
+        controller->nextState = 0;
+        controller->pending = 0;
+        controller->confirmed = 0;
+        controller->canceled = 0;
+        FUN_0041f020(controller, 1);
+    }
 }
-
-} /* extern "C" */
+}

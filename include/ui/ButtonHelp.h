@@ -7,7 +7,14 @@ typedef struct ButtonHelpValueEntry {
     /* 0x02 */ u16 unk02;
 } ButtonHelpValueEntry;
 typedef struct ButtonHelpDisplayUnit {
-    /* 0x00 */ u8 unk00[0xC];
+    union {
+        /* 0x00 */ u8 unk00[0xC];
+        struct {
+            /* 0x00 */ s32 state;
+            /* 0x04 */ s32 current;
+            /* 0x08 */ s32 target;
+        } selection;
+    };
     /* 0x0C */ s32 unk0C;
     /* 0x10 */ s32 unk10;
     /* 0x14 */ s32 unk14;
@@ -17,7 +24,13 @@ typedef struct ButtonHelpDisplayUnit {
     /* 0x3D */ u8 unk3D[0x4F];
 } ButtonHelpDisplayUnit;
 typedef struct ButtonHelpWork {
-    /* 0x0000 */ u8 unk0000[0x10];
+    union {
+        /* 0x0000 */ u8 unk0000[0x10];
+        struct {
+            u8 unk0000[0xC];
+            /* 0x000C */ s32 phase;
+        } transition;
+    };
     /* 0x0010 */ s32 state;
     /* 0x0014 */ u8 unk0014[0x368];
     /* 0x037C */ ButtonHelpDisplayUnit units[2];
@@ -31,7 +44,13 @@ typedef struct ButtonHelpWork {
     /* 0x04C9 */ u8 unk4C9;
     /* 0x04CA */ u8 unk04CA[0x1];
     /* 0x04CB */ s8 unk4CB;
-    /* 0x04CC */ u8 unk04CC[0x84];
+    union {
+        /* 0x04CC */ u8 unk04CC[0x84];
+        struct {
+            /* 0x04CC */ u32 style;
+            /* 0x04D0 */ char lines[2][64];
+        } text;
+    };
     /* 0x0550 */ u32 unk550;
     /* 0x0554 */ u8 unk554;
     /* 0x0555 */ u8 unk555;
@@ -116,6 +135,27 @@ typedef struct ButtonHelpCompatibility {
     /* 0x5D4 */ u8 active[7];
 } ButtonHelpCompatibility;
 
+/* IV's six indexed selection animations occupy the otherwise opaque work prefix. */
+struct ButtonHelpSelectionViewIV {
+    /* 0x000 */ u8 unk000[0x34];
+    /* 0x034 */ ButtonHelpDisplayUnit units[6];
+    /* 0x37C */ u8 unk37C[0x118];
+    /* 0x494 */ ButtonHelpKind kinds[6];
+    /* 0x4AC */ u8 unk4AC[0xC];
+    /* 0x4B8 */ u8 active[6];
+};
+struct ButtonHelpQueuedSelections {
+    s32 kinds[6];
+    s32 values[6];
+};
+typedef char ButtonHelpSelectionViewIVOffsetCheck[
+    __INTADDR__(&((ButtonHelpDisplayUnit *)0)->selection.state) == 0 &&
+    __INTADDR__(&((ButtonHelpDisplayUnit *)0)->selection.current) == 4 &&
+    __INTADDR__(&((ButtonHelpDisplayUnit *)0)->selection.target) == 8 &&
+    __INTADDR__(&((ButtonHelpSelectionViewIV *)0)->units) == 0x34 &&
+    __INTADDR__(&((ButtonHelpSelectionViewIV *)0)->kinds) == 0x494 &&
+    __INTADDR__(&((ButtonHelpSelectionViewIV *)0)->active) == 0x4B8 ? 1 : -1];
+
 /* Retail 32-bit layout invariants. */
 typedef char ButtonHelpDisplayUnitSizeCheck[sizeof(ButtonHelpDisplayUnit) == 0x8C ? 1 : -1];
 typedef char ButtonHelpWorkSizeCheck[sizeof(ButtonHelpWork) == 0x564 ? 1 : -1];
@@ -124,5 +164,13 @@ typedef char ButtonHelpGlobalsSizeCheck[sizeof(ButtonHelpGlobals) == 0x10 ? 1 : 
 typedef char ButtonHelpGlobalsASizeCheck[sizeof(ButtonHelpGlobalsA) == 0x8 ? 1 : -1];
 typedef char ButtonHelpJobOffsetCheck[__INTADDR__(&((ButtonHelpWorkA *)0)->job) == 0 ? 1 : -1];
 typedef char ButtonHelpReferencesOffsetCheck[__INTADDR__(&((ButtonHelpGlobalsA *)0)->references) == 0 ? 1 : -1];
+typedef char ButtonHelpTextOffsetsCheck[
+    __INTADDR__(&((ButtonHelpWork *)0)->text.style) == 0x4CC &&
+    __INTADDR__(&((ButtonHelpWork *)0)->text.lines) == 0x4D0 &&
+    sizeof(ButtonHelpWork) == 0x564 ? 1 : -1];
+
+typedef char ButtonHelpTransitionPhaseOffsetCheck[
+    __INTADDR__(&((ButtonHelpWork *)0)->transition.phase) == 0xC &&
+    sizeof(ButtonHelpWork) == 0x564 ? 1 : -1];
 
 #endif

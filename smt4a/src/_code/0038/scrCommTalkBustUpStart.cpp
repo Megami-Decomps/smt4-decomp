@@ -4,7 +4,7 @@ extern "C" {
 
 extern u32 scrGetArg(void);
 extern s32 scrGetCommandFrame(void);
-extern void FUN_00336de4(u16 id, s32 arg);
+extern void btlTalkBustUpSetDemonTexture(u16 id, s32 arg);
 extern void btlTalkBustUpSetUnk2F4(s32 value);
 extern s32 btlTalkBustupTextureIsLoaded(u16 id);
 
@@ -14,7 +14,7 @@ u8 scrCommTalkBustUpStart(void)
     u32 id = scrGetArg();
 
     if (scrGetCommandFrame() == 0) {
-        FUN_00336de4(id, 1);
+        btlTalkBustUpSetDemonTexture(id, 1);
         btlTalkBustUpSetUnk2F4(1);
     }
     return btlTalkBustupTextureIsLoaded(id) != 0;

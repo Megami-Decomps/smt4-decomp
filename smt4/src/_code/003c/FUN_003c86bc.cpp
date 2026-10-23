@@ -1,111 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c86bc` (_code @ 0x3c86bc, 0x188 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: candidate-loop base registers differ and repeated stat groups become block copies rather than retained scalar halfwords. */
+#include "shard/GameOptions.h"
+#include "gamedata/SupportUnitRecord.h"
 
 extern "C" {
-
-int gameGetSupportUnitData(void);
-int memClear(unsigned short *, int);
-
-extern int gameGetPlayerData(void);
-extern int supportUnitGetEntry(unsigned int, unsigned int);
-/* Supplied declaration required: gameGetSupportUnitData. */
-extern int randNextInRange(short);
-/* Supplied declaration required: memClear. */
-extern unsigned int tableEntryIndexByKey(unsigned int, unsigned char);
-
+GameOptions *gameGetSupportUnitData(void);
+void *gameGetPlayerData(void);
+s32 randNextInRange(u16);
+u32 tableEntryIndexByKey(s32, u8);
+void memClear(void *, u32);
+SupportUnitRecord *supportUnitGetEntry(s32, u32);
 
 void FUN_003c86bc(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  unsigned short temp_v2;
-  unsigned short temp_v3;
-  unsigned short temp_v4;
-  unsigned short temp_v5;
-  unsigned short temp_v6;
-  short temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  unsigned short *puVar12;
-  unsigned short temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  
-  temp_v8 = gameGetSupportUnitData();
-  temp_v11 = (unsigned short)(*(short *)(temp_v8 + 0x60a) != 0);
-  if (*(short *)(temp_v8 + 0x60c) != 0) {
-    temp_v11 = temp_v11 + 1;
-  }
-  if (*(short *)(temp_v8 + 0x60e) != 0) {
-    temp_v11 = temp_v11 + 1;
-  }
-  temp_v9 = randNextInRange(temp_v11 - 1);
-  temp_v10 = 0;
-  do {
-    if (*(short *)(temp_v8 + temp_v10 * 2 + 0x60a) != 0) {
-      if (temp_v9 == 0) {
-        temp_v7 = *(short *)(temp_v8 + temp_v10 * 2 + 0x60a);
-        temp_v12 = (unsigned int)temp_v7;
-        puVar12 = (unsigned short *)gameGetSupportUnitData();
-        temp_v13 = 0xffffffff;
-        temp_v8 = 0;
-        break;
-      }
-      temp_v9 = temp_v9 - 1;
+    struct Candidates { u8 prefix[0x60A]; u16 ids[3]; };
+    struct PlayerVariant { u8 prefix[0x76]; u8 key; };
+    struct StatCopies {
+        u16 base[7];
+        u16 current[7];
+        u16 maximum[7];
+        u16 copy[2];
+    };
+    GameOptions *options = gameGetSupportUnitData();
+    u32 count = options->unk60A != 0;
+    if (options->unk60C != 0)
+        ++count;
+    if (options->unk60E != 0)
+        ++count;
+    s32 choice = randNextInRange(count - 1);
+    for (s32 i = 0; i < 3; ++i) {
+        s16 id = reinterpret_cast<Candidates *>(options)->ids[i];
+        if (id) {
+            if (choice == 0) {
+                options = gameGetSupportUnitData();
+                u32 variant = ~0u;
+                for (s32 j = 0; j < 3; ++j) {
+                    if (reinterpret_cast<Candidates *>(options)->ids[j] == id) {
+                        PlayerVariant *player = static_cast<PlayerVariant *>(gameGetPlayerData());
+                        variant = tableEntryIndexByKey(id, player->key);
+                        break;
+                    }
+                }
+                memClear(options, 0x604);
+                const SupportUnitRecord *record = supportUnitGetEntry(id, variant);
+                options->unk604 = id;
+                options->supportIndex = variant;
+                options->unk46 = 0x4B1;
+                options->unk0048[0] = record->flags & 0x7F;
+                // These stat copies overlay the legacy settings prefix; keep the context-specific interpretation local.
+                StatCopies *stats = reinterpret_cast<StatCopies *>(options);
+                for (s32 stat = 0; stat < 7; ++stat)
+                    stats->base[stat] = record->stats.base[stat];
+                for (s32 stat = 0; stat < 7; ++stat)
+                    stats->maximum[stat] = stats->current[stat] = stats->base[stat];
+                stats->copy[0] = stats->base[0];
+                stats->copy[1] = stats->base[1];
+                return;
+            }
+            --choice;
+        }
     }
-    temp_v10 = temp_v10 + 1;
-    if (temp_v10 >= 3) {
-      return;
-    }
-  } while( 1 );
-  while (temp_v8 = temp_v8 + 1, temp_v8 < 3) {
-    if ((unsigned short)puVar12[temp_v8 + 0x305] == temp_v12) {
-      temp_v8 = gameGetPlayerData();
-      temp_v13 = tableEntryIndexByKey(temp_v12,*(unsigned char *)(temp_v8 + 0x76));
-      break;
-    }
-  }
-  memClear(puVar12,0x604);
-  temp_v8 = supportUnitGetEntry(temp_v12,temp_v13);
-  puVar12[0x302] = temp_v7;
-  puVar12[0x303] = (short)temp_v13;
-  puVar12[0x23] = 0x4b1;
-  *(unsigned char *)(puVar12 + 0x24) = (unsigned char)*(unsigned int *)(temp_v8 + 8) & 0x7f;
-  temp_v0 = *(unsigned short *)(temp_v8 + 0x14);
-  *puVar12 = temp_v0;
-  temp_v1 = *(unsigned short *)(temp_v8 + 0x16);
-  puVar12[1] = temp_v1;
-  temp_v2 = *(unsigned short *)(temp_v8 + 0x18);
-  puVar12[2] = temp_v2;
-  temp_v3 = *(unsigned short *)(temp_v8 + 0x1c);
-  puVar12[4] = temp_v3;
-  temp_v4 = *(unsigned short *)(temp_v8 + 0x1e);
-  puVar12[5] = temp_v4;
-  temp_v5 = *(unsigned short *)(temp_v8 + 0x20);
-  puVar12[6] = temp_v5;
-  temp_v6 = *(unsigned short *)(temp_v8 + 0x1a);
-  puVar12[3] = temp_v6;
-  puVar12[0xe] = temp_v0;
-  puVar12[7] = temp_v0;
-  puVar12[0xf] = temp_v1;
-  puVar12[8] = temp_v1;
-  puVar12[0x10] = temp_v2;
-  puVar12[9] = temp_v2;
-  puVar12[0x12] = temp_v3;
-  puVar12[0xb] = temp_v3;
-  puVar12[0x13] = temp_v4;
-  puVar12[0xc] = temp_v4;
-  puVar12[0x14] = temp_v5;
-  puVar12[0xd] = temp_v5;
-  puVar12[0x11] = temp_v6;
-  puVar12[10] = temp_v6;
-  puVar12[0x15] = temp_v0;
-  puVar12[0x16] = temp_v1;
-  return;
 }
-
-} /* extern "C" */
+}

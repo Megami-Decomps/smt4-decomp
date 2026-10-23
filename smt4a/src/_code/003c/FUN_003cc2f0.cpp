@@ -1,84 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cc2f0` (_code @ 0x3cc2f0, 0x168 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: range stack slots, excluded-mask loading and active-entry byte addressing differ. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
 extern "C" {
+s32 scrGetArg(s32 index);
+s32 btlResolveEntryChoice(s32 choice);
+void FUN_00301a08(s32 kind, s32 *first, s32 *count);
+BtlMainStateA *btlGetMainState();
+BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+s32 btlFindEntryValue(s32 unitIndex, u32 kind);
+void scrSetResult(s32 value);
 
-int scrGetArg(int);
-int FUN_00301a08(unsigned int, int [7], int *);
-int scrSetResult(int);
-int FUN_003eaf20(void);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-extern unsigned int g_btlCandidateMasks; /* 0x570288 */
-extern unsigned int DAT_0057028c; /* 0x57028c */
-extern unsigned int DAT_005702a0; /* 0x5702a0 */
-extern unsigned int DAT_005702a4; /* 0x5702a4 */
-extern unsigned int DAT_005702b0; /* 0x5702b0 */
-extern unsigned int DAT_005702b4; /* 0x5702b4 */
-
-extern int btlGetMainState(void);
-extern unsigned int btlResolveEntryChoice(void);
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_00301a08. */
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: FUN_003eaf20. */
-extern int btlFindEntryValue(int, unsigned int);
-
-
-unsigned int FUN_003cc2f0(void)
-
+// Test matching eligible combatants for a positive parameter of the queried kind.
+u32 FUN_003cc2f0()
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int *puVar6;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7 [7];
-  
-  temp_v0 = scrGetArg(0);
-  scrGetArg(1);
-  temp_v1 = btlResolveEntryChoice();
-  FUN_00301a08(temp_v1,temp_v7,&temp_v6);
-  temp_v5 = temp_v7[0];
-  if (temp_v7[0] < temp_v6 + temp_v7[0]) {
-    do {
-      temp_v2 = btlGetMainState();
-      puVar6 = (unsigned int *)(*(int *)(temp_v2 + 0x1ffc) + temp_v5 * 0x408);
-      temp_v3 = *puVar6;
-      temp_v4 = puVar6[1];
-      if (((((DAT_005702a0 & temp_v3) == 0 && (DAT_005702a4 & temp_v4) == 0) &&
-           ((g_btlCandidateMasks & temp_v3) != 0 || (DAT_0057028c & temp_v4) != 0)) &&
-          ((temp_v3 & DAT_005702b0) == 0 && (temp_v4 & DAT_005702b4) == 0)) &&
-         ((*(unsigned short *)((int)puVar6 + 0x166) == temp_v0 &&
-          (temp_v2 = btlFindEntryValue((int)(short)puVar6[2],0x13), 0 < temp_v2)))) {
-        scrSetResult(1);
-        return 1;
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < temp_v7[0] + temp_v6);
-  }
-  temp_v5 = btlGetMainState();
-  if (*(char *)(temp_v5 + 0x4cd1) != '\0') {
-    temp_v5 = btlGetMainState();
-    FUN_003eaf20();
-    if (((temp_v5 != 0) && (*(unsigned short *)(temp_v5 + 0x166) == temp_v0)) &&
-       (temp_v5 = btlFindEntryValue((int)*(short *)(temp_v5 + 8),0x13), 0 < temp_v5)) {
-      scrSetResult(1);
-      return 1;
+    u32 id = scrGetArg(0);
+    s32 first, count;
+    FUN_00301a08(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
+    for (s32 index = first; index < first + count; ++index) {
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        u64 flags = entry->flags;
+        if (!(g_btlCandidateMasks.unavailable & flags) &&
+            (g_btlCandidateMasks.required & flags) && !(flags & g_btlCandidateMasks.excluded) &&
+            entry->id == id && btlFindEntryValue(entry->unitIndex, 0x13) > 0) {
+            scrSetResult(1);
+            return 1;
+        }
     }
-  }
-  scrSetResult(0);
-  return 1;
+    if (btlGetMainState()->unk4cd1) {
+        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        if (entry != NULL && entry->id == id && btlFindEntryValue(entry->unitIndex, 0x13) > 0) {
+            scrSetResult(1);
+            return 1;
+        }
+    }
+    scrSetResult(0);
+    return 1;
 }
-
-} /* extern "C" */
+}

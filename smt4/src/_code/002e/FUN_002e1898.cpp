@@ -1,110 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e1898` (_code @ 0x2e1898, 0x164 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: CEC idle dispatch branches and stripped-call NOPs differ from retail. */
+#include "camp/CecMenu.h"
+#include "shard/Shard0042.h"
 
 extern "C" {
+extern CampCecMenu *g_campCec;
+HalfPair48 *saveGetIndexedMapValue(s32 index);
+s32 gameDataBlockTestFlag(u32 mask);
+void buttonHelpSetPreset(u32 preset);
+s32 partyPanelIsActive(void);
+void FUN_0029e648(s32 enabled, s32 mode);
+void messageInitializeSavedBanner(void);
+u32 FUN_0031e384(void *polling);
+u32 FUN_002228d4(void);
 
-int messageInitializeSavedBanner(void);
-int FUN_0029e648(int, int);
-int buttonHelpSetPreset(...);
-int FUN_0031e384(void);
-
-extern int g_campCec; /* 0x43daa8 */
-
-extern unsigned int FUN_002228d4(void);
-extern int gameDataBlockTestFlag(unsigned int);
-extern int partyPanelIsActive(void);
-extern int saveGetIndexedMapValue(int);
-/* Supplied declaration required: messageInitializeSavedBanner. */
-/* Supplied declaration required: FUN_0029e648. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_0031e384. */
-
-
-unsigned int FUN_002e1898(int param_1)
-
+/* Dispatch the selected CEC action and maintain idle help, saved banner and visibility flags. */
+u32 FUN_002e1898(CampCecMenu *menu)
 {
-/* irregular: 2 goto(s); 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  
-  temp_v0 = *(int *)(param_1 + 0xd34);
-  temp_v6 = 0;
-  if (temp_v0 != -1) {
-    if (temp_v0 != 1) {
-      if (temp_v0 == 2) {
-        temp_v5 = 0;
-        temp_v0 = temp_v5;
-        do {
-          temp_v2 = saveGetIndexedMapValue(temp_v5);
-          temp_v5 = temp_v5 + 1;
-          if (*(short *)(temp_v2 + 0x48) != 0) {
-            temp_v0 = temp_v0 + 1;
-          }
-        } while (temp_v5 < 0xc);
-        if (temp_v0 != 0) {
-          temp_v3 = 8;
+    u32 result = 0;
+    if (menu->substate != -1) {
+        if (menu->substate == 1) {
+            if (menu->optionalProcessAvailable != 0 && gameDataBlockTestFlag(0x20) != 0)
+                menu->state = 7;
+            else {
+                buttonHelpSetPreset(60);
+                menu->state = 11;
+            }
+        } else if (menu->substate == 2) {
+            s32 occupied = 0;
+            for (s32 index = 0; index < 12; ++index) {
+                if (saveGetIndexedMapValue(index)->unk48 != 0)
+                    occupied++;
+            }
+            if (occupied != 0)
+                menu->state = 8;
+            else {
+                buttonHelpSetPreset(60);
+                menu->state = 10;
+            }
+        } else if (menu->substate == 3) {
+            menu->state = 9;
         }
-        else {
-          buttonHelpSetPreset(0x3c);
-          temp_v3 = 10;
-        }
-        *(unsigned int *)(param_1 + 0xd2c) = temp_v3;
-      }
-      else if (temp_v0 == 3) {
-        *(unsigned int *)(param_1 + 0xd2c) = 9;
-        goto LAB_002e191c;
-      }
+        if (menu->substate != 0)
+            result = 2;
+    } else {
+        result = 2;
     }
-    else {
-      if ((*(char *)(param_1 + 0xd60) != '\0') && (temp_v0 = gameDataBlockTestFlag(0x20), temp_v0 != 0)) {
-        temp_v3 = 7;
-      }
-      else {
-        buttonHelpSetPreset(0x3c);
-        temp_v3 = 0xb;
-      }
-      *(unsigned int *)(param_1 + 0xd2c) = temp_v3;
+    if (menu->helpInitialized == 0) {
+        buttonHelpSetPreset(partyPanelIsActive() != 0 ? 4 : 3);
+        menu->helpInitialized = 1;
     }
-    if (*(int *)(param_1 + 0xd34) == 0) goto LAB_002e1920;
-  }
-LAB_002e191c:
-  temp_v6 = 2;
-LAB_002e1920:
-  if (*(char *)(param_1 + 0xd61) == '\0') {
-    temp_v0 = partyPanelIsActive();
-    if (temp_v0 == 0) {
-      temp_v3 = 3;
+    if (menu->savedBannerPending != 0) {
+        menu->savedBannerPending = 0;
+        FUN_0029e648(1, 0);
+        messageInitializeSavedBanner();
     }
-    else {
-      temp_v3 = 4;
+    if ((FUN_0031e384(menu->polling.work) & 2) != 0) {
+        if ((FUN_002228d4() & 2) != 0)
+            g_campCec->visibility.flags |= 2;
+        else
+            g_campCec->visibility.flags &= ~2;
     }
-    buttonHelpSetPreset(temp_v3);
-    *(unsigned char *)(param_1 + 0xd61) = 1;
-  }
-  if (*(char *)(param_1 + 0xd63) != '\0') {
-    *(unsigned char *)(param_1 + 0xd63) = 0;
-    FUN_0029e648(1,0);
-    messageInitializeSavedBanner();
-  }
-  temp_v1 = param_1 + 0xd44;
-  FUN_0031e384();
-  if ((temp_v1 & 2) != 0) {
-    temp_v1 = FUN_002228d4();
-    if ((temp_v1 & 2) != 0) {
-      temp_v4 = *(unsigned char *)(g_campCec + 0x68) | 2;
-    }
-    else {
-      temp_v4 = *(unsigned char *)(g_campCec + 0x68) & 0xfd;
-    }
-    *(unsigned char *)(g_campCec + 0x68) = temp_v4;
-  }
-  return temp_v6;
+    return result;
 }
-
-} /* extern "C" */
+}

@@ -9,7 +9,7 @@ int FUN_0015f490(...);
 int FUN_0016432c(...);
 int FUN_00168980(...);
 int FUN_0023acdc(...);
-int FUN_0026c3c4(...);
+int statusCommitSelectedSkills(...);
 int FUN_0026cbb8(...);
 int FUN_002a5e7c(...);
 int statusReplaceSkills(...);
@@ -33,7 +33,7 @@ int scrScriptProcessStartEntry(...);
 int FUN_002a6894(...);
 int statusDownRestartTransition(void);
 int FUN_002f5064(...);
-int FUN_00336de4(...);
+int btlTalkBustUpSetDemonTexture(...);
 int FUN_0034a968(void);
 int FUN_00359974(...);
 int btlTalkBustUpSetUnk2F4(...);
@@ -222,7 +222,7 @@ extern int *FUN_0025e684(int);
 extern int dialogIsActive(void);
 extern int messageMainIsIdle(void);
 extern int FUN_0026c3a0(void);
-/* Supplied declaration required: FUN_0026c3c4. */
+/* Supplied declaration required: statusCommitSelectedSkills. */
 /* Supplied declaration required: FUN_0026cbb8. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -253,7 +253,7 @@ extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
-/* Supplied declaration required: FUN_00336de4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 /* Supplied declaration required: FUN_00340a94. */
 /* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_0034a968. */
@@ -1571,7 +1571,7 @@ LAB_00206230:
       if (temp_v16 != 0) {
         temp_v16 = btlTalkBustUpGetValue();
         if (temp_v16 == 0) {
-          FUN_00336de4(*(unsigned short *)(temp_v7 + 0x62),1);
+          btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v7 + 0x62),1);
           btlTalkBustUpSetUnk2F4(1);
         }
         scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43ac),7);
@@ -1628,7 +1628,7 @@ joined_r0x002075ac:
       scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43ac),5);
       temp_v16 = btlTalkBustupMatchesEntry(*(unsigned short *)(temp_v7 + 0x62));
       if (temp_v16 == 0) {
-        FUN_00336de4(*(unsigned short *)(temp_v7 + 0x62),1);
+        btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v7 + 0x62),1);
       }
       btlTalkBustUpSetUnk2F4(0);
       temp_v7 = 2;
@@ -1790,7 +1790,7 @@ joined_r0x002075ac:
     case 2:
       temp_v7 = btlTalkBustupMatchesEntry(*(unsigned short *)(temp_v13 + 0x62));
       if (temp_v7 == 0) {
-        FUN_00336de4(*(unsigned short *)(temp_v13 + 0x62),1);
+        btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v13 + 0x62),1);
       }
       btlTalkBustUpSetUnk2F4(*(int *)(temp_v6 + 0x4368) == 0xd);
       scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43ac),6);
@@ -1995,7 +1995,7 @@ joined_r0x002075ac:
         if (temp_v16 != 0) {
           temp_v16 = btlTalkBustUpGetValue();
           if (temp_v16 == 0) {
-            FUN_00336de4(*(unsigned short *)(temp_v7 + 0x62),1);
+            btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v7 + 0x62),1);
             btlTalkBustUpSetUnk2F4(1);
           }
           scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43ac),8);
@@ -2073,7 +2073,7 @@ joined_r0x002073c8:
           FUN_00333dc8(0);
           *(short *)(temp_v7 + *(int *)(temp_v6 + 0x75c8) * 2 + 0x34) =
                (short)*(unsigned int *)(temp_v6 + 0x75cc);
-          FUN_0026c3c4(temp_v7 + 0x34);
+          statusCommitSelectedSkills(temp_v7 + 0x34);
           temp_v7 = 99;
           *(int *)(temp_v6 + 0x436c) = temp_v7;
         }
@@ -2182,7 +2182,7 @@ joined_r0x002073c8:
       if ((temp_v16 != 0) && (temp_v16 = FUN_002effbc(), temp_v16 != 0)) {
         temp_v16 = btlTalkBustUpGetValue();
         if (temp_v16 == 0) {
-          FUN_00336de4(*(unsigned short *)(temp_v7 + 0x62),1);
+          btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v7 + 0x62),1);
           btlTalkBustUpSetUnk2F4(1);
         }
         temp_v11 = *(unsigned int *)(temp_v6 + 0x43ac);
@@ -2531,7 +2531,7 @@ LAB_00207d0c:
       if (temp_v7 != 0) {
         temp_v7 = btlTalkBustUpGetValue();
         if (temp_v7 == 0) {
-          FUN_00336de4(*(unsigned short *)(temp_v13 + 0x62),1);
+          btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v13 + 0x62),1);
           btlTalkBustUpSetUnk2F4(1);
         }
         temp_v22 = 7;

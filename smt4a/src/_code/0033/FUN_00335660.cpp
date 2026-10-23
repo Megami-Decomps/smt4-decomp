@@ -1,79 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00335660` (_code @ 0x335660, 0x128 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: inlined table resolver merges fallback tail; table/block index saved registers and bool materialization differ. */
+#include "gamedata/NamedVariantTable.h"
 
 extern "C" {
-
-int dataTableFileGetTable(...);
-int FUN_002bf384(...);
-int libc_strcmp(int, unsigned char *);
-int binFileGetValue(void);
-int tbcrBlockGetPayload(void);
-
-extern unsigned int dataTableValueOrZero(unsigned int);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: dataTableFileGetTable. */
-/* Supplied declaration required: FUN_002bf384. */
-/* Supplied declaration required: libc_strcmp. */
-/* Supplied declaration required: binFileGetValue. */
-/* Supplied declaration required: tbcrBlockGetPayload. */
-
-
-int FUN_00335660(int param_1,int param_2,int param_3)
-
-{
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char *pbVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  
-  pbVar4 = (unsigned char *)0x57aaa0;
-  temp_v4 = 0;
-  do {
-    temp_v0 = param_2;
-    libc_strcmp(param_2,pbVar4 + 2);
-    if (temp_v0 == 0) {
-      if (pbVar4 != (unsigned char *)0x0) {
-        temp_v5 = (unsigned int)*pbVar4;
-        temp_v3 = (unsigned int)pbVar4[1];
-        temp_v1 = dataTableValueOrZero(7);
-        temp_v2 = binFileGetValue();
-        if (temp_v2 <= temp_v5) {
-          temp_v5 = 0;
-        }
-        FUN_002bf384(temp_v1,temp_v5);
-        temp_v2 = tbcrBlockGetPayload();
-        if (temp_v2 <= temp_v3) {
-          temp_v3 = 0;
-        }
-        dataTableFileGetTable(temp_v1,temp_v3);
-        temp_v4 = dataTableGetEntries();
-        temp_v2 = (unsigned int)(param_1 != 0);
-        if (param_3 != 0) {
-          temp_v2 = 1 - temp_v2;
-        }
-        return temp_v4 + temp_v2 * 0x19c;
-      }
-      break;
-    }
-    temp_v4 = temp_v4 + 1;
-    pbVar4 = pbVar4 + 0x22;
-  } while (temp_v4 < 0x20f);
-  temp_v1 = dataTableValueOrZero(7);
-  binFileGetValue();
-  FUN_002bf384(temp_v1,0);
-  tbcrBlockGetPayload();
-  dataTableFileGetTable(temp_v1,0);
-  temp_v4 = dataTableGetEntries();
-  temp_v2 = (unsigned int)(param_1 != 0);
-  if (param_3 != 0) {
-    temp_v2 = 1 - temp_v2;
-  }
-  return temp_v4 + temp_v2 * 0x19c;
+extern const NamedVariantTableKey DAT_0057aaa0[527];
+s32 libc_strcmp(const char *left, const char *right);
+void *dataTableValueOrZero(u32 table);
+u32 binFileGetValue(void *file);
+void *FUN_002bf384(void *file, u32 block);
+u32 tbcrBlockGetPayload(void *block);
+void *dataTableFileGetTable(void *block, u32 table);
+NamedVariantTableEntry *dataTableGetEntries(void *table);
 }
 
-} /* extern "C" */
+static inline NamedVariantTableEntry *namedVariantResolve(u32 blockIndex, u32 tableIndex)
+{
+    void *file = dataTableValueOrZero(7);
+    if (binFileGetValue(file) <= blockIndex)
+        blockIndex = 0;
+    void *block = FUN_002bf384(file, blockIndex);
+    if (tbcrBlockGetPayload(block) <= tableIndex)
+        tableIndex = 0;
+    return dataTableGetEntries(dataTableFileGetTable(block, tableIndex));
+}
+
+static inline const NamedVariantTableKey *namedVariantFind(const char *name)
+{
+    const NamedVariantTableKey *key = DAT_0057aaa0;
+    for (s32 index = 0; index < 527; ++index, ++key) {
+        if (libc_strcmp(name, key->name) == 0)
+            return key;
+    }
+    return NULL;
+}
+
+extern "C" {
+// Resolve a named table section, falling back to section zero, then select either variant.
+NamedVariantTableEntry *FUN_00335660(s32 variant, const char *name, s32 invert)
+{
+    const NamedVariantTableKey *key = namedVariantFind(name);
+    NamedVariantTableEntry *entries;
+    if (key)
+        entries = namedVariantResolve(key->block, key->table);
+    else
+        entries = namedVariantResolve(0, 0);
+    u32 selected = variant != 0;
+    if (invert)
+        selected = 1 - selected;
+    return entries + selected;
+}
+}

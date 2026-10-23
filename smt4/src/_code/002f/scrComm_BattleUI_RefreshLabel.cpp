@@ -23,7 +23,7 @@ extern u32 g_btlUiBlock;
 
 BattleState *btlGetMainState(void);
 GameOptions *gameGetSupportUnitData(void);
-s32 FUN_00336a84(void);
+s32 btlApplyOptionAndSnapshotReserve(void);
 Label *supportUnitGetEntry(s32 a, u16 b);
 s32 FUN_002942c4(s32 number, s32 arg);
 s32 FUN_003ae620(u32 block);
@@ -35,7 +35,7 @@ u32 scrComm_BattleUI_RefreshLabel(void)
     u16 labelB;
     Label *label;
 
-    FUN_00336a84();
+    btlApplyOptionAndSnapshotReserve();
     labelB = gameGetSupportUnitData()->labelB;
     label = supportUnitGetEntry(gameGetSupportUnitData()->labelA, labelB);
     FUN_002942c4((s16)(label->number + 1), 0);

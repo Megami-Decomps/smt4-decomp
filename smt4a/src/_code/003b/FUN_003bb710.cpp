@@ -1,128 +1,90 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bb710` (_code @ 0x3bb710, 0x1f4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Innate-skill aggregate copy grouping, merged-buffer/source addressing and the inherited-skill count loop unrolling differ. */
+#include "shard/W5_W5Match2_UniteWork.h"
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
-
-int FUN_00184310(void);
-int FUN_00203b40(int, int, int, int, int, int);
-int sysMemClear(int, int);
-int FUN_0032fea0(int, int);
-int rt_memcpy_w(int, int, int);
-
-typedef struct fn_003bb710_arg0 fn_003bb710_arg0;
-struct fn_003bb710_arg0 {
-    unsigned char pad_0x0[0x40];
-    undefined4 field_0x40; /* +0x40 */
-    unsigned char field_0x44; /* +0x44 */
-    unsigned char pad_0x45[0x3];
-    undefined4 field_0x48; /* +0x48 */
-    undefined4 field_0x4c; /* +0x4c */
-};
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern int g_unite; /* 0x57f290 */
-
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0032fea0. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_003bb710(fn_003bb710_arg0 *param_1)
-
-{
-/* irregular: 5 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  int temp_v9;
-  
-  temp_v1 = g_unite;
-  FUN_00184310();
-  temp_v6 = param_1->field_0x48;
-  temp_v7 = param_1->field_0x40;
-  temp_v8 = *(unsigned int *)&param_1->field_0x44;
-  *(unsigned int *)(temp_v1 + 0x8b6c) = param_1->field_0x4c;
-  *(unsigned int *)(temp_v1 + 0x8b68) = temp_v6;
-  temp_v2 = temp_v1 + 0x8cf0;
-  *(unsigned int *)(temp_v1 + 0x8b60) = temp_v7;
-  *(unsigned int *)(temp_v1 + 0x8b64) = temp_v8;
-  sysMemClear(temp_v2,0xc0);
-  temp_v9 = 0;
-  do {
-    temp_v3 = temp_v1 + temp_v9 * 2;
-    if (*(short *)(temp_v3 + 0x8b60) != 0) {
-      temp_v4 = temp_v2;
-      FUN_0032fea0(temp_v2,0x18);
-      temp_v5 = 0;
-      if (temp_v4 == 0) {
-        do {
-          if (*(short *)(temp_v1 + temp_v5 * 2 + 0x8cf0) == 0) {
-            *(unsigned short *)(temp_v1 + temp_v5 * 2 + 0x8cf0) = *(unsigned short *)(temp_v3 + 0x8b60);
-            break;
-          }
-          temp_v5 = temp_v5 + 1;
-        } while (temp_v5 < 0x60);
-      }
-    }
-    temp_v9 = temp_v9 + 1;
-  } while (temp_v9 < 8);
-  temp_v9 = 0;
-  do {
-    temp_v3 = temp_v1 + temp_v9 * 2;
-    if (*(short *)(temp_v3 + 0x8b70) == 0) break;
-    temp_v4 = temp_v2;
-    FUN_0032fea0(temp_v2,0x18);
-    temp_v5 = 0;
-    if (temp_v4 == 0) {
-      do {
-        if (*(short *)(temp_v1 + temp_v5 * 2 + 0x8cf0) == 0) {
-          *(unsigned short *)(temp_v1 + temp_v5 * 2 + 0x8cf0) = *(unsigned short *)(temp_v3 + 0x8b70);
-          break;
-        }
-        temp_v5 = temp_v5 + 1;
-      } while (temp_v5 < 0x60);
-    }
-    temp_v9 = temp_v9 + 1;
-  } while (temp_v9 < 0x60);
-  temp_v9 = 0x18;
-  if (*(int *)(temp_v1 + 0x400) == 0x1c) {
-    temp_v9 = 0x60;
-  }
-  rt_memcpy_w(temp_v1 + 0x8b70,temp_v2,temp_v9 << 1);
-  temp_v2 = 0;
-  temp_v9 = 0;
-  do {
-    if (*(short *)(temp_v1 + temp_v9 * 2 + 0x8b70) == 0) break;
-    temp_v9 = temp_v9 + 1;
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v9 < 0x60);
-  *(int *)(temp_v1 + 0x8e80) = temp_v2;
-  temp_v9 = 0;
-  do {
-    temp_v0 = *(short *)(temp_v1 + temp_v9 * 2 + 0x8c30);
-    if (temp_v0 == 0) break;
-    temp_v3 = temp_v2 * 2;
-    temp_v9 = temp_v9 + 1;
-    temp_v2 = temp_v2 + 1;
-    *(short *)(temp_v1 + temp_v3 + 0x8b70) = temp_v0;
-  } while (temp_v9 < 0x60);
-  *(int *)(temp_v1 + 0x8e84) = temp_v2;
-  FUN_00203b40(temp_v1 + 0x8e14,temp_v2 + 1,9,1,1,1);
-  return;
+extern UniteWork *g_unite;
+DevilRecordA *FUN_00184310(u32 id);
+void sysMemClear(void *memory, u32 size);
+u32 FUN_0032fea0(const u16 *skills, s32 count, u16 skill);
+void rt_memcpy_w(void *destination, const void *source, u32 size);
+void FUN_00203b40(void *cursor, s32 count, s32 visibleRows, s32 first, s32 second, s32 third);
 }
 
-} /* extern "C" */
+static __inline void fusionAppendUniqueSkill(u16 *merged, const u16 *skill)
+{
+    if (FUN_0032fea0(merged, 24, *skill) == 0) {
+        for (s32 index = 0; index < 96; ++index) {
+            if (merged[index] == 0) {
+                merged[index] = *skill;
+                break;
+            }
+        }
+    }
+}
+
+extern "C" void FUN_003bb710(u32 devilId)
+{
+    /* These skill fields extend the demon prefix and the shared 24-slot inheritance view. */
+    struct InitialSkills {
+        u16 ids[8];
+    };
+    struct SkillRecordView {
+        DevilRecordA header;
+        InitialSkills skills;
+    };
+    struct InheritanceView {
+        u8 unk0000[0x8B60];
+        InitialSkills initial;
+        u16 inherited[96];
+        u16 additional[96];
+        u16 merged[96];
+        u8 unk8DB0[0x64];
+        u8 cursor[0x64];
+        u8 unk8E78[8];
+        s32 inheritedCount;
+        s32 totalCount;
+    };
+    typedef char SkillLayoutCheck[offsetof(SkillRecordView, skills) == 0x40 &&
+        offsetof(InheritanceView, inherited) == 0x8B70 && offsetof(InheritanceView, additional) == 0x8C30 &&
+        offsetof(InheritanceView, merged) == 0x8CF0 && offsetof(InheritanceView, cursor) == 0x8E14 &&
+        offsetof(InheritanceView, inheritedCount) == 0x8E80 && offsetof(InheritanceView, totalCount) == 0x8E84 ? 1 : -1];
+    UniteWork *work = g_unite;
+    SkillRecordView *record = (SkillRecordView *)FUN_00184310(devilId);
+    InheritanceView *inheritance = (InheritanceView *)work;
+    inheritance->initial = record->skills;
+    sysMemClear(inheritance->merged, sizeof(inheritance->merged));
+    for (s32 index = 0; index < 8; ++index) {
+        if (inheritance->initial.ids[index] != 0) {
+            fusionAppendUniqueSkill(inheritance->merged, &inheritance->initial.ids[index]);
+        }
+    }
+    for (s32 index = 0; index < 96; ++index) {
+        if (inheritance->inherited[index] == 0) {
+            break;
+        }
+        fusionAppendUniqueSkill(inheritance->merged, &inheritance->inherited[index]);
+    }
+    s32 capacity = 24;
+    if (work->state == 28) {
+        capacity = 96;
+    }
+    rt_memcpy_w(inheritance->inherited, inheritance->merged, capacity * sizeof(u16));
+    s32 count = 0;
+    for (s32 index = 0; index < 96; ++index) {
+        if (inheritance->inherited[index] == 0) {
+            break;
+        }
+        ++count;
+    }
+    inheritance->inheritedCount = count;
+    for (s32 index = 0; index < 96; ++index) {
+        u16 skill = inheritance->additional[index];
+        if (skill == 0) {
+            break;
+        }
+        inheritance->inherited[count++] = skill;
+    }
+    inheritance->totalCount = count;
+    FUN_00203b40(inheritance->cursor, count + 1, 9, 1, 1, 1);
+}

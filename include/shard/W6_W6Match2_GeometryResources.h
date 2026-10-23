@@ -3,14 +3,26 @@
 
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
-struct OwnedBufferPair;
+#include <stddef.h>
+
+struct OwnedBufferPair {
+    u8 unk00[0x48];
+    u16 *indices;           // 0x48
+};
+typedef char OwnedBufferPairLayoutCheck[sizeof(OwnedBufferPair) == 0x4C &&
+    offsetof(OwnedBufferPair, indices) == 0x48 ? 1 : -1];
 struct GeometryResources {
     u16 flags;              // 0x00
-    u16 unk02;              // 0x02
+    union {
+        u16 unk02;          // 0x02
+        u16 vertexCount;
+    };
     AsdTexture* texture;    // 0x04
     OwnedBufferPair* buffers; // 0x08
     void* special;          // 0x0c
 };
+typedef char GeometryResourcesLayoutCheck[sizeof(GeometryResources) == 0x10 &&
+    offsetof(GeometryResources, vertexCount) == 2 ? 1 : -1];
 
 extern "C" void bufferReleaseOwnedPair(OwnedBufferPair* buffers);
 extern "C" OwnedBufferPair* bufferDestroyOwnedPair(OwnedBufferPair* buffers);

@@ -78,7 +78,7 @@ int FUN_00203b40(...);
 int FUN_00228b04(...);
 int FUN_002a4878(...);
 int FUN_002a4964(int *, int);
-int FUN_002cb438(...);
+int screenSetContextHint(...);
 int FUN_002cc9e0(...);
 int FUN_003450d4(...);
 int FUN_003756c8(...);
@@ -189,7 +189,7 @@ extern int FUN_002a6a24(unsigned short);
 extern int widgetSubCallIfVisible(int);
 /* Supplied declaration required: uiNavigatorStart. */
 extern int FUN_002c7c54(void);
-/* Supplied declaration required: FUN_002cb438. */
+/* Supplied declaration required: screenSetContextHint. */
 /* Supplied declaration required: FUN_002cc9e0. */
 /* Supplied declaration required: FUN_002ccde8. */
 /* Supplied declaration required: FUN_0031f208. */
@@ -234,7 +234,7 @@ extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: FUN_004bcbb4. */
 /* Supplied declaration required: bitsAt60Test. */
 extern int btlFindEntryValue(int, unsigned int);
-extern int FUN_004c52ec(unsigned int);
+extern int btlGetPropertyMaximum(unsigned int);
 extern int FUN_004c87e0(void);
 /* Supplied declaration required: FUN_004c8e30. */
 /* Supplied declaration required: FUN_004f9450. */
@@ -592,7 +592,7 @@ LAB_0021d964:
     FUN_003450d4(temp_v7,0,param_1 + 0x480e,0xffffffff);
     if (temp_v7 != 0) {
       temp_v8 = FUN_002cc9e0(param_1,1);
-      FUN_002cb438(param_1,temp_v8,*piVar16);
+      screenSetContextHint(param_1,temp_v8,*piVar16);
       temp_v7 = param_1 + *piVar16 * 100 + 0x38bc;
       if (temp_v4 == 0) {
         temp_v4 = FUN_002a4878(temp_v7);
@@ -608,7 +608,7 @@ LAB_0021d964:
     FUN_00228b04(temp_v7,1);
     if (temp_v7 != 0) {
       temp_v8 = FUN_002cc9e0(param_1,1);
-      FUN_002cb438(param_1,temp_v8,*piVar16);
+      screenSetContextHint(param_1,temp_v8,*piVar16);
       temp_v7 = param_1 + *piVar16 * 100 + 0x38bc;
       if (temp_v4 != 0) {
         temp_v4 = FUN_002a4878(temp_v7);
@@ -645,7 +645,7 @@ joined_r0x0021db60:
         if (temp_v4 < 1) break;
         FUN_002a4914(param_1 + *piVar16 * 100 + 0x38bc,0);
         temp_v8 = FUN_002cc9e0(param_1,1);
-        FUN_002cb438(param_1,temp_v8,*piVar16);
+        screenSetContextHint(param_1,temp_v8,*piVar16);
         FUN_003756c8(1);
         temp_v8 = 0x100020f;
         eventQueueAddUniqueIfValid(temp_v8);
@@ -703,7 +703,7 @@ joined_r0x0021db60:
       }
       else {
         temp_v8 = FUN_002cc9e0(param_1,0);
-        FUN_002cb438(param_1,temp_v8,*piVar16);
+        screenSetContextHint(param_1,temp_v8,*piVar16);
       }
       FUN_0020ad6c(param_1,*(int *)(param_1 + 0x3880),0);
     }
@@ -1039,7 +1039,7 @@ LAB_0021e5b0:
             *(unsigned int *)(param_1 + *piVar16 * 4 + 0x3c88) = 0;
             *(unsigned int *)(param_1 + *piVar16 * 4 + 0x3c98) = 0;
             temp_v8 = FUN_002cc9e0(param_1,1);
-            FUN_002cb438(param_1,temp_v8,*piVar16);
+            screenSetContextHint(param_1,temp_v8,*piVar16);
             FUN_0020ad6c(param_1,1);
             FUN_002cc9e0(param_1,1);
             temp_v8 = 0x100020f;
@@ -1069,7 +1069,7 @@ LAB_0021e950:
                   *(unsigned int *)(param_1 + 0x3dac) = 0;
                   FUN_0020ad6c(param_1,1);
                   temp_v8 = FUN_002cc9e0(param_1,1);
-                  FUN_002cb438(param_1,temp_v8,*piVar16);
+                  screenSetContextHint(param_1,temp_v8,*piVar16);
                   temp_v4 = FUN_002cc9e0(param_1,1);
                   if ((temp_v4 == 1 || temp_v4 == 2) || ((temp_v4 == 7 || temp_v4 == 3) || temp_v4 == 0xc)) {
                     FUN_0020a320(param_1);
@@ -1352,7 +1352,7 @@ LAB_0021ed20:
 LAB_0021f098:
       FUN_0020ad6c(param_1,1);
       temp_v8 = FUN_002cc9e0(param_1,1);
-      FUN_002cb438(param_1,temp_v8,*piVar16);
+      screenSetContextHint(param_1,temp_v8,*piVar16);
       temp_v4 = FUN_002cc9e0(param_1,1);
       if ((temp_v4 != 1 && temp_v4 != 2) && ((temp_v4 != 7 && temp_v4 != 3) && temp_v4 != 0xc)) break;
       FUN_0020a320(param_1);
@@ -1360,7 +1360,7 @@ LAB_0021f098:
     }
     *puVar20 = 1;
     temp_v8 = FUN_002cc9e0(param_1,1);
-    FUN_002cb438(param_1,temp_v8,*piVar16);
+    screenSetContextHint(param_1,temp_v8,*piVar16);
     FUN_0020ad6c(param_1,1);
     temp_v8 = 0x100020f;
     eventQueueAddUniqueIfValid(temp_v8);
@@ -1437,7 +1437,7 @@ LAB_0021f28c:
 LAB_0021f338:
         FUN_0020ad6c(param_1,1);
         temp_v8 = FUN_002cc9e0(param_1,1);
-        FUN_002cb438(param_1,temp_v8,*piVar16);
+        screenSetContextHint(param_1,temp_v8,*piVar16);
         temp_v4 = FUN_002cc9e0(param_1,1);
         if ((temp_v4 != 1 && temp_v4 != 2) && ((temp_v4 != 7 && temp_v4 != 3) && temp_v4 != 0xc)) break;
         FUN_0020a320(param_1);
@@ -1451,7 +1451,7 @@ LAB_0021f338:
     }
     *puVar20 = 1;
     temp_v8 = FUN_002cc9e0(param_1,1);
-    FUN_002cb438(param_1,temp_v8,*piVar16);
+    screenSetContextHint(param_1,temp_v8,*piVar16);
     FUN_0020ad6c(param_1,1);
     temp_v8 = 0x100020f;
     eventQueueAddUniqueIfValid(temp_v8);
@@ -2485,7 +2485,7 @@ LAB_0022129c:
           }
         }
         if ((temp_v5 & 0x10) != 0) {
-          temp_v7 = FUN_004c52ec(0x22);
+          temp_v7 = btlGetPropertyMaximum(0x22);
           temp_v9 = btlFindEntryValue(temp_v4,0x22);
           if ((temp_v9 == temp_v7) || (temp_v9 < *temp_v34 + (temp_v7 - 1))) {
             *(unsigned short *)(temp_v29 + 0x3e44) = 0;

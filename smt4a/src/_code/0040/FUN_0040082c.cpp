@@ -1,100 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040082c` (_code @ 0x40082c, 0x1a0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved registers, mask loads and constant front-line loop bound differ. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "gamedata/Table8Record.h"
 
 extern "C" {
+extern BattleCandidateMasks DAT_00573c90;
+Table8Record *dataTable8FindRecord(u32 id);
+BtlMainStateA *btlGetMainState();
+BtlPartyBlockA *gameGetSlotTable();
+s32 FUN_003ff73c(BtlCombatantEntryA *entry, const Table8Record *skill);
+s32 FUN_00400284(s32 index, s32 mode, const Table8Record *skill, u32 flags);
+s32 FUN_004009d0(u32 id, s32 mode);
 
-int dataTable8FindRecord(void);
-int FUN_003ff73c(unsigned int *, int);
-int FUN_00400284(int, int, int);
-int FUN_004009d0(unsigned int, int);
-int SCARRY4(unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern unsigned int DAT_00573c90; /* 0x573c90 */
-extern unsigned int DAT_00573c94; /* 0x573c94 */
-extern unsigned int DAT_00573ca8; /* 0x573ca8 */
-extern unsigned int DAT_00573cac; /* 0x573cac */
-extern unsigned int DAT_00573cb8; /* 0x573cb8 */
-extern unsigned int DAT_00573cbc; /* 0x573cbc */
-
-/* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
-extern int btlGetMainState(void);
-/* Supplied declaration required: dataTable8FindRecord. */
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_003ff73c. */
-/* Supplied declaration required: FUN_00400284. */
-/* Supplied declaration required: FUN_004009d0. */
-
-
-unsigned int FUN_0040082c(int param_1)
-
+s32 FUN_0040082c(u32 id)
 {
-/* irregular: 5 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int *puVar5;
-  int temp_v4;
-  
-  if ((param_1 == 0) || (dataTable8FindRecord(), param_1 == 0)) {
-    return 1;
-  }
-  if ((*(char *)(param_1 + 0x41) == '\x02' || *(char *)(param_1 + 0x41) == '\x03') &&
-     (*(char *)(param_1 + 0x3b) == '\x01' || *(char *)(param_1 + 0x3b) == '\f')) {
-    temp_v1 = (unsigned int)*(unsigned short *)(param_1 + 0x32);
-    if (temp_v1 != 0) {
-      FUN_004009d0(temp_v1,1);
-      return temp_v1;
-    }
-    temp_v2 = btlGetMainState();
-    if ((*(unsigned int *)(temp_v2 + 0x45ac) & DAT_00573cbc) == 0 &&
-        (*(unsigned int *)(temp_v2 + 0x45a8) & DAT_00573cb8) == 0) {
-      if ((*(unsigned int *)(param_1 + 0x68) & 0x10) != 0) {
-        temp_v0 = *(short *)(temp_v2 + 0x4c70);
-        if (temp_v0 < 8) {
-          temp_v0 = *(short *)(temp_v2 + 0x4c72);
-        }
-        if (temp_v0 >= 8) {
-          return 3;
-        }
-      }
-      temp_v4 = 0;
-      while( 1 ) {
-        puVar5 = (unsigned int *)(*(int *)(temp_v2 + 0x1ffc) + temp_v4 * 0x408);
-        if ((((DAT_00573c90 & *puVar5) != 0 || (DAT_00573c94 & puVar5[1]) != 0) &&
-            ((*puVar5 & DAT_00573ca8) == 0 && (puVar5[1] & DAT_00573cac) == 0)) &&
-           (FUN_003ff73c(puVar5,param_1), puVar5 == (unsigned int *)0x0)) break;
-        temp_v4 = temp_v4 + 1;
-        if (temp_v4 >= 4) {
-          if (((*(unsigned char *)(param_1 + 0x3a) & 0x7f) == 1) || ((*(unsigned int *)(param_1 + 0x68) & 4) != 0)) {
-            temp_v2 = gameGetSlotTable();
-            temp_v4 = -1;
-            temp_v1 = (unsigned int)*(unsigned char *)(temp_v2 + 0x1ca3);
-            if (temp_v1 != 0xffffffff && !SCARRY4(temp_v1,1)) {
-              do {
-                temp_v3 = temp_v4;
-                FUN_00400284(temp_v4,0,param_1);
-                if (temp_v3 == 0) {
-                  return 0;
-                }
-                temp_v4 = temp_v4 + 1;
-              } while (temp_v4 < (int)(unsigned int)*(unsigned char *)(temp_v2 + 0x1ca3));
-            }
-          }
-          return 3;
-        }
-      }
-      return 0;
-    }
-    return 0;
-  }
-  return 2;
-}
+    if (id == 0)
+        return 1;
+    Table8Record *skill = dataTable8FindRecord(id);
+    if (skill == NULL)
+        return 1;
+    if ((skill->type != 2 && skill->type != 3) || (skill->kind != 1 && skill->kind != 12))
+        return 2;
+    if (skill->unk32 != 0)
+        return FUN_004009d0(skill->unk32, 1);
 
-} /* extern "C" */
+    // A local view avoids raising the alignment of the shared, halfword-aligned record.
+    struct TargetProperties {
+        u8 prefix[0x3A];
+        u8 target;
+        u8 padding[0x2D];
+        u32 flags;
+    };
+    const TargetProperties *properties = reinterpret_cast<const TargetProperties *>(skill);
+    BtlMainStateA *battle = btlGetMainState();
+    if (battle->markerMasks.bits & DAT_00573c90.excluded)
+        return 0;
+    if ((properties->flags & 0x10) &&
+        (battle->targetCapacity.counts[0] >= 8 || battle->targetCapacity.counts[1] >= 8))
+        return 3;
+    for (s32 index = 0; index < 4; ++index) {
+        BtlCombatantEntryA *entry = &battle->entries[index];
+        u64 flags = entry->flags;
+        if ((DAT_00573c90.required & flags) && !(flags & DAT_00573c90.unavailable) &&
+            FUN_003ff73c(entry, skill) == 0)
+            return 0;
+    }
+    if ((properties->target & 0x7F) == 1 || (properties->flags & 4)) {
+        BtlPartyBlockA *party = gameGetSlotTable();
+        for (s32 index = -1; index < party->count; ++index) {
+            if (FUN_00400284(index, 0, skill, 0) == 0)
+                return 0;
+        }
+    }
+    return 3;
+}
+}

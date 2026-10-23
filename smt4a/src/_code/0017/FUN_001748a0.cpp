@@ -1,82 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001748a0` (_code @ 0x1748a0, 0x15c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: inlined conversion loops use fewer saved registers, and native result-assert macro lowering differs. */
+#include "nw/snd/SoundArchiveDisk.h"
 
 extern "C" {
-
-int refIsNullOrZero(int *);
-int FUN_0016e800(void);
-int FUN_001883b0(int, unsigned short [264], int);
-int FUN_002e3c44(unsigned short *, int, int, int *);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-/* Supplied declaration required: refIsNullOrZero. */
-extern int FUN_00100836(int, unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_0016e800. */
-/* Supplied declaration required: FUN_001883b0. */
-/* Supplied declaration required: FUN_002e3c44. */
-
-
-int FUN_001748a0(int param_1,int param_2,int param_3)
-
-{
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned short *puVar2;
-  unsigned short *puVar3;
-  int temp_v1;
-  unsigned short temp_v2 [264];
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  puVar3 = temp_v2;
-  puVar2 = temp_v2;
-  *(char *)(param_1 + 0x1c) = (char)param_3;
-  if (param_3 != 0) {
-    temp_v1 = param_1 + 4;
-    temp_v3 = 0;
-    temp_v4 = 0;
-    refIsNullOrZero(&temp_v3);
-    while ((temp_v0 = FUN_00100836(param_2,0x105,(unsigned int *)&temp_v3), temp_v0 != 0 &&
-           (puVar2 = puVar3, FUN_002e3c44(puVar3,param_2,temp_v0,&temp_v3),
-           puVar2 != (unsigned short *)0x0))) {
-      puVar3 = puVar3 + 1;
-      param_2 = param_2 + temp_v0;
-    }
-    *puVar3 = 0;
-    *(unsigned int *)(param_1 + 0x10) = 0;
-    *(unsigned int *)(param_1 + 0x14) = 0;
-    *(unsigned int *)(param_1 + 8) = 0;
-    *(unsigned int *)(param_1 + 0xc) = 0;
-    FUN_001883b0(temp_v1,temp_v2,1);
-    *(int *)(param_1 + 0x18) = temp_v1;
-    return (temp_v1 >> 0x1f) + 1;
-  }
-  temp_v1 = param_1 + 4;
-  temp_v3 = 0;
-  temp_v4 = 0;
-  refIsNullOrZero(&temp_v3);
-  while ((temp_v0 = FUN_00100836(param_2,0x105,(unsigned int *)&temp_v3), temp_v0 != 0 &&
-         (puVar3 = puVar2, FUN_002e3c44(puVar2,param_2,temp_v0,&temp_v3), puVar3 != (unsigned short *)0x0
-         ))) {
-    puVar2 = puVar2 + 1;
-    param_2 = param_2 + temp_v0;
-  }
-  *puVar2 = 0;
-  *(unsigned int *)(param_1 + 0x10) = 0;
-  *(unsigned int *)(param_1 + 0x14) = 0;
-  *(unsigned int *)(param_1 + 8) = 0;
-  *(unsigned int *)(param_1 + 0xc) = 0;
-  FUN_001883b0(temp_v1,temp_v2,1);
-  if ((temp_v1 < 0) && (temp_v1 < 0)) {
-    FUN_0016e800();
-  }
-  return 1;
+void refIsNullOrZero(MoviePathConversionState *conversion);
+u32 FUN_00100836(const char *text, u32 encoding, MoviePathConversionState *conversion);
+s32 FUN_002e3c44(u16 *output, const char *text, u32 bytes, MoviePathConversionState *conversion);
+s32 FUN_001883b0(MovieOpenFile *file, const u16 *path, u32 mode);
+void FUN_0016e800(u32 result, const void *location);
 }
 
-} /* extern "C" */
+static inline s32 openNativeFile(MovieOpenFile *file, const char *path)
+{
+    u16 widePath[264];
+    u16 *output = widePath;
+    MoviePathConversionState conversion = {0, 0};
+    refIsNullOrZero(&conversion);
+    u32 bytes;
+    while ((bytes = FUN_00100836(path, 0x105, &conversion)) != 0 &&
+        FUN_002e3c44(output, path, bytes, &conversion)) {
+        ++output;
+        path += bytes;
+    }
+    *output = 0;
+    file->sizeLow = 0;
+    file->sizeHigh = 0;
+    file->positionLow = 0;
+    file->positionHigh = 0;
+    return FUN_001883b0(file, widePath, 1);
+}
+
+// Convert a multibyte path and open its native file, optionally retaining errors instead of asserting.
+extern "C" s32 FUN_001748a0(NativeFileReader *reader, const char *path, s32 suppressErrors)
+{
+    reader->suppressErrors = suppressErrors;
+    if (suppressErrors) {
+        s32 result = openNativeFile(&reader->file, path);
+        reader->result = result;
+        return result >= 0;
+    }
+    s32 result = openNativeFile(&reader->file, path);
+    if (result < 0) {
+        FUN_0016e800(result, (const void *)__current_pc());
+    }
+    return 1;
+}

@@ -9,7 +9,7 @@ int uiSpriteSelectAnim(int, int);
 int FUN_0020acd8(int, unsigned int, unsigned int);
 int FUN_0020ad6c(...);
 int FUN_0020d3d4(int);
-int FUN_002cb438(int, unsigned int, unsigned int);
+int screenSetContextHint(int, unsigned int, unsigned int);
 int flaggedEntrySetValueB(int, int);
 int FUN_003363a8(int, unsigned int, int, unsigned int);
 
@@ -26,7 +26,7 @@ extern unsigned int DAT_00573bac; /* 0x573bac */
 /* Supplied declaration required: FUN_0020acd8. */
 /* Supplied declaration required: FUN_0020ad6c. */
 /* Supplied declaration required: FUN_0020d3d4. */
-/* Supplied declaration required: FUN_002cb438. */
+/* Supplied declaration required: screenSetContextHint. */
 extern unsigned int FUN_002cc9e0(int, unsigned int);
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: FUN_003363a8. */
@@ -94,7 +94,7 @@ void FUN_00231cdc(int param_1,unsigned int param_2,int param_3,unsigned int para
     if ((temp_v1 == 0x1a) || (temp_v1 == 0x1b)) {
       FUN_0020ad6c(param_1,1);
       temp_v0 = FUN_002cc9e0(param_1,1);
-      FUN_002cb438(param_1,temp_v0,*(unsigned int *)(param_1 + 0x3890));
+      screenSetContextHint(param_1,temp_v0,*(unsigned int *)(param_1 + 0x3890));
       return;
     }
     if (temp_v1 != 0x11) {

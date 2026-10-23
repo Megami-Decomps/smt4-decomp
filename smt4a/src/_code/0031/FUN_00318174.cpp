@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00186e2c(int, unsigned int);
+int cameraExportParameters(int, unsigned int);
 int jobSavePositionSnapshot(unsigned int);
 int animationEvaluateCallback(unsigned int);
 int faderSetValue(unsigned int);
@@ -27,7 +27,7 @@ extern int g_bustupCutAnim; /* 0x57f4c4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_00186e2c. */
+/* Supplied declaration required: cameraExportParameters. */
 /* Supplied declaration required: jobSavePositionSnapshot. */
 /* Supplied declaration required: animationEvaluateCallback. */
 /* Supplied declaration required: faderSetValue. */
@@ -98,7 +98,7 @@ void FUN_00318174(int param_1,int param_2,unsigned int param_3)
     *(unsigned int *)(temp_v0 + 0x600) = *(unsigned int *)(temp_v0 + 0x604);
     return;
   }
-  FUN_00186e2c(temp_v0 + 0x510,*(unsigned int *)(temp_v0 + 0x5ec));
+  cameraExportParameters(temp_v0 + 0x510,*(unsigned int *)(temp_v0 + 0x5ec));
   if (*(char *)(temp_v0 + 0x5f5) != '\0') {
     FUN_00359370(*(unsigned int *)(temp_v0 + 0x5ec),0);
   }

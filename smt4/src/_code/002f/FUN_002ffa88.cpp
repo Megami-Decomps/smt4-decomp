@@ -1,80 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ffa88` (_code @ 0x2ffa88, 0x130 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: first-loop unit/flags registers prevent retail's writeback flags load; remaining code matches. */
+#include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
+u32 scrGetArg(s32);
+u32 btlScriptResolveGroupArg(u32);
+void FUN_002499fc(u32, s32 *, s32 *);
+BtlState *btlGetMainState();
+BtlUnitEntry *btlMainFindActiveEntry(BtlState *);
+void scrSetResult(s32);
 
-int FUN_002499fc(unsigned int, int *, int [2]);
-int scrSetResult(int);
-int btlGetMainState(void);
-int scrGetArg(int);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern int btlMainFindActiveEntry(void);
-/* Supplied declaration required: FUN_002499fc. */
-extern unsigned int btlScriptResolveGroupArg(void);
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: scrGetArg. */
-
-
-unsigned int FUN_002ffa88(void)
-
+/* Test whether a matching unit in the selected group has status kind two. */
+u32 FUN_002ffa88()
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int *puVar5;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  int temp_v7;
-  int temp_v8 [2];
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  scrGetArg(2);
-  temp_v2 = btlScriptResolveGroupArg();
-  FUN_002499fc(temp_v2,&temp_v7,temp_v8);
-  temp_v5 = temp_v7;
-  if (temp_v7 < temp_v8[0] + temp_v7) {
-    do {
-      temp_v3 = btlGetMainState();
-      puVar5 = (unsigned int *)(*(int *)(temp_v3 + 0x1fc0) + temp_v5 * 0x288);
-      temp_v4 = *puVar5;
-      if (((temp_v4 & 0x10) == 0) && ((temp_v4 & 1) != 0)) {
-        temp_v6 = (temp_v4 & 0x40) == 0;
-        if (temp_v6) {
-          temp_v4 = (unsigned int)*(unsigned short *)((int)puVar5 + 0xce);
+    u32 groupId = scrGetArg(0);
+    s32 status = scrGetArg(1);
+    u32 group = btlScriptResolveGroupArg(scrGetArg(2));
+    s32 first, count;
+    FUN_002499fc(group, &first, &count);
+    for (s32 i = first; i < first + count; ++i) {
+        BtlUnitEntry *unit = &btlGetMainState()->units[i];
+        u32 flags = unit->flags;
+        if (!(flags & 0x10) && (flags & 1) && !(flags & 0x40) && unit->groupId == groupId &&
+            (unit->values[status] >> 10) == 2) {
+            scrSetResult(1);
+            return 1;
         }
-        if ((temp_v6 && temp_v4 == temp_v0) && (*(unsigned short *)((int)puVar5 + temp_v1 * 2 + 0x1f2) >> 10 == 2))
-        {
-          scrSetResult(1);
-          return 1;
-        }
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < temp_v7 + temp_v8[0]);
-  }
-  temp_v5 = btlGetMainState();
-  if (*(char *)(temp_v5 + 0x49c5) != '\0') {
-    btlGetMainState();
-    temp_v5 = btlMainFindActiveEntry();
-    if (((temp_v5 != 0) && (*(unsigned short *)(temp_v5 + 0xce) == temp_v0)) &&
-       (*(unsigned short *)(temp_v5 + temp_v1 * 2 + 0x1f2) >> 10 == 2)) {
-      scrSetResult(1);
-      return 1;
     }
-  }
-  scrSetResult(0);
-  return 1;
+    if (btlGetMainState()->hasActiveEntry) {
+        BtlUnitEntry *unit = btlMainFindActiveEntry(btlGetMainState());
+        if (unit != NULL && unit->groupId == groupId && (unit->values[status] >> 10) == 2) {
+            scrSetResult(1);
+            return 1;
+        }
+    }
+    scrSetResult(0);
+    return 1;
 }
-
-} /* extern "C" */
+}

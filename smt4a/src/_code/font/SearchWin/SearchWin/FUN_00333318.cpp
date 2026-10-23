@@ -1,71 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00333318` (_code @ 0x333318, 0x138 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: parameter size argument registers and resource-pool relocation base differ. */
+#include "font/SearchWin/SearchWin.h"
+#include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern SearchWinWork *DAT_0057f584;
+extern const char DAT_0052fd6c[];
+extern const char DAT_0052fdd8[];
+extern const char DAT_0052fdc0[];
+extern const char DAT_0052fda8[];
+struct SearchWindowResources {
+    u8 first[0x24];
+    u8 second[0x24];
+    u8 fifth[0x70];
+};
+extern const SearchWindowResources DAT_0052fcb4;
+u32 FUN_0023a9a0(void *work);
+u32 FUN_0023a5f8(void *work);
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tracked);
+void sysMemClear(void *memory, u32 bytes);
+u32 asdProcessCreateSimple(const char *name, u32 priority, u32 flags, void *work,
+    u32 (*callback)(void *), u32 argument, u32 parent);
+u32 taskCreateDraw(const char *name, u32 priority, u32 flags, void *work,
+    u32 (*callback)(void *), u32 argument, u32 target, u32 parent);
+void paramsClearPacket(void *packet);
+void paramsInit(void *packet, const void *first, u32 firstBytes, const void *second,
+    u32 secondBytes, const void *third, u32 thirdBytes, const void *fourth,
+    u32 fourthBytes, const void *fifth, u32 fifthBytes);
+void FUN_0014e188(UiAnimatedSprite *sprite, u32 kind, u32 priority, void *packet, f32 scale, u32 enabled);
+void uiSpriteSelectAnim(UiAnimatedSprite *sprite, s32 animation);
 
-int FUN_0014e188(...);
-int asdProcessCreateSimple(...);
-int paramsInit(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int uiSpriteSelectAnim(...);
-int sysMemClear(...);
-int paramsClearPacket(...);
-
-/* stack frame of void: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-extern int FUN_0023a5f8(...); /* 0x23a5f8 */
-extern unsigned char LAB_0023a9a0; /* 0x23a9a0 */
-extern unsigned char DAT_0052fcb4; /* 0x52fcb4 */
-extern unsigned char DAT_0052fcd8; /* 0x52fcd8 */
-extern unsigned char DAT_0052fcfc; /* 0x52fcfc */
-extern unsigned int *DAT_0057f584; /* 0x57f584 */
-
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: paramsClearPacket. */
-
-
+// Create the search window's update task, stereo draw tasks and animated sprite.
 void FUN_00333318(void)
-
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned int *puVar1;
-  char *pcVar2;
-  
-  if (DAT_0057f584 == (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0xe4,1);
-    DAT_0057f584 = puVar1;
-  }
-  puVar1 = DAT_0057f584;
-  sysMemClear();
-  pcVar2 = "SearchWin Calc";
-  asdProcessCreateSimple("SearchWin Calc",3,0,0,&LAB_0023a9a0,0,0);
-  *puVar1 = (unsigned int)pcVar2;
-  taskCreateDraw("SearchWin DrawUpLeft",0x86,0,0,FUN_0023a5f8,0,0,pcVar2);
-  taskCreateDraw("SearchWin DrawUpRight",0xe2,0,0,FUN_0023a5f8,0,0,*puVar1);
-  paramsClearPacket(puVar1 + 6);
-  paramsInit(puVar1 + 6,&DAT_0052fcb4,0x24,&DAT_0052fcd8,0x24,0,0,0,0,&DAT_0052fcfc,0x70);
-  FUN_0014e188(puVar1 + 0xe,8,0x87,puVar1 + 6,1);
-  uiSpriteSelectAnim(puVar1 + 0xe,0);
-  return;
+    // The packet and sprite are inside byte-aligned shared padding; keep this aligned view local.
+    struct SearchWindowRenderView {
+        u8 unk00[0x18];
+        u32 packet[8];
+        UiAnimatedSprite sprite;
+    };
+    if (DAT_0057f584 == NULL) {
+        asdDebugTrace(DAT_0052fd6c, 135);
+        DAT_0057f584 = static_cast<SearchWinWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(SearchWinWork), 1));
+    }
+    SearchWinWork *window = DAT_0057f584;
+    sysMemClear(window, sizeof(*window));
+    window->job = asdProcessCreateSimple(DAT_0052fdd8, 3, 0, NULL, FUN_0023a9a0, 0, 0);
+    taskCreateDraw(DAT_0052fdc0, 0x86, 0, NULL, FUN_0023a5f8, 0, 0, window->job);
+    taskCreateDraw(DAT_0052fda8, 0xE2, 0, NULL, FUN_0023a5f8, 0, 0, window->job);
+    SearchWindowRenderView *render = reinterpret_cast<SearchWindowRenderView *>(window);
+    paramsClearPacket(render->packet);
+    paramsInit(render->packet, DAT_0052fcb4.first, sizeof(DAT_0052fcb4.first),
+        DAT_0052fcb4.second, sizeof(DAT_0052fcb4.second),
+        NULL, 0, NULL, 0, DAT_0052fcb4.fifth, sizeof(DAT_0052fcb4.fifth));
+    FUN_0014e188(&render->sprite, 8, 0x87, render->packet, 1.0f, 1);
+    uiSpriteSelectAnim(&render->sprite, 0);
 }
-
-} /* extern "C" */
+}

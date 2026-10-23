@@ -36,7 +36,7 @@ extern short FUN_0023dcfc(unsigned int);
 /* Supplied declaration required: battleGetEntryHalfword. */
 extern int btlGetMainState(void);
 extern int FUN_0033f8ec(unsigned int *, int, int, int);
-extern int FUN_0033fb2c(unsigned int *);
+extern int btlHasReserveReplacement(unsigned int *);
 extern int FUN_0033fc50(void);
 
 
@@ -219,7 +219,7 @@ unsigned int FUN_0023d488(unsigned int *param_1,fn_0023d488_arg1 *param_2,int pa
       ((*(unsigned int *)(temp_v5 + 0xe0) & 0x40000) == 0)))) {
     temp_v8 = temp_v8 | 0x800000;
   }
-  if (((temp_v6 & 0x1000000) != 0) && (temp_v5 = FUN_0033fb2c(param_1), temp_v5 != 0)) {
+  if (((temp_v6 & 0x1000000) != 0) && (temp_v5 = btlHasReserveReplacement(param_1), temp_v5 != 0)) {
     temp_v8 = temp_v8 | 0x1000000;
   }
   if (((temp_v6 & 0x2000000) != 0) && (temp_v5 = FUN_0033fc50(), temp_v5 != 0)) {

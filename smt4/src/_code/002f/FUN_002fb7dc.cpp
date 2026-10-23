@@ -1,105 +1,93 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fb7dc` (_code @ 0x2fb7dc, 0x18c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: state dispatch uses comparisons instead of a jump table; vector registers differ. */
+#include "map/lmapMain.h"
 
 extern "C" {
+extern LmapMainState *g_lmapMainState;
+extern LmapScene *g_lmapScene;
+extern GameState g_gameState;
+void FUN_002702dc();
+void FUN_0027b2b4(s32 map, u32 entry, s32 secondaryMap, s32 mode);
+void FUN_002d508c(LmapMainState *state);
+void FUN_00266a2c();
+void FUN_00281784();
+void mapInitializeStoryMarkerEffects(u32 map);
+void objSetBaseAndValue(LmapObj *object, s32 base, u32 value);
+void entryListCollectMatches(LmapObj *object);
 
-int entryListCollectMatches(int);
-int mapInitializeStoryMarkerEffects(unsigned int);
-int objSetBaseAndValue(int, int, unsigned int);
-int FUN_00266a2c(void);
-int FUN_002702dc(void);
-int FUN_0027b2b4(unsigned int, unsigned int);
-int FUN_00281784(void);
-int FUN_002d508c(int);
-int VectorSignedToFloat(int, int);
-
-extern int g_lmapMainState; /* 0x447060 */
-extern int g_lmapScene; /* 0x447e88 */
-extern unsigned int DAT_0049f920; /* 0x49f920 */
-extern unsigned char DAT_0049f934; /* 0x49f934 */
-extern unsigned char DAT_0049fb46; /* 0x49fb46 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: entryListCollectMatches. */
-/* Supplied declaration required: mapInitializeStoryMarkerEffects. */
-/* Supplied declaration required: objSetBaseAndValue. */
-/* Supplied declaration required: FUN_00266a2c. */
-/* Supplied declaration required: FUN_002702dc. */
-/* Supplied declaration required: FUN_0027b2b4. */
-/* Supplied declaration required: FUN_00281784. */
-/* Supplied declaration required: FUN_002d508c. */
-
-
-unsigned int FUN_002fb7dc(void)
-
+// Raise the scene over thirty frames, then restore story-marker tracking on completion.
+u32 FUN_002fb7dc()
 {
-/* irregular: irregular input(s): in_fpscr; 9 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int *puVar6;
-  unsigned int in_fpscr;
-  float temp_v5;
-  
-  temp_v0 = g_lmapMainState;
-  switch(*(unsigned int *)(g_lmapMainState + 0x18)) {
-  case 0:
-    puVar6 = (unsigned int *)(g_lmapMainState + 0x28);
-    temp_v3 = *(unsigned int *)(g_lmapScene + 0x1c);
-    temp_v4 = *(unsigned int *)(g_lmapScene + 0x20);
-    temp_v1 = *(unsigned int *)(g_lmapScene + 0x24);
-    *(unsigned int *)(g_lmapMainState + 0x20) = temp_v3;
-    *(unsigned int *)(temp_v0 + 0x24) = temp_v4;
-    *puVar6 = temp_v1;
-    *(unsigned int *)(temp_v0 + 0x2c) = temp_v3;
-    *(unsigned int *)(temp_v0 + 0x30) = temp_v4;
-    *(unsigned int *)(temp_v0 + 0x34) = temp_v1;
-    *(unsigned int *)(temp_v0 + 0x30) = 0x44480000;
-    *(unsigned int *)(temp_v0 + 0xdc) = 0;
-    *(unsigned char *)(temp_v0 + 0xe0) = 1;
-    *(unsigned int *)(temp_v0 + 0x48) = 99;
-    DAT_0049f920 = 99;
-    FUN_002702dc();
-    FUN_0027b2b4(*(unsigned int *)(temp_v0 + 0x40),*(unsigned int *)(temp_v0 + 0x48));
-    *(unsigned int *)(temp_v0 + 0x18) = 1;
-    *(unsigned int *)(temp_v0 + 0x1c) = 0;
-    break;
-  case 1:
-    FUN_002d508c(g_lmapMainState);
-    temp_v2 = *(int *)(temp_v0 + 0x1c) + 1;
-    *(int *)(temp_v0 + 0x1c) = temp_v2;
-    temp_v5 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(float *)(g_lmapScene + 0x20) =
-         *(float *)(temp_v0 + 0x24) +
-         (*(float *)(temp_v0 + 0x30) - *(float *)(temp_v0 + 0x24)) * temp_v5 * 0.033333335f;
-    if (*(int *)(temp_v0 + 0x1c) >= 0x1e) {
-      DAT_0049f934 = 0;
-      DAT_0049fb46 = 1;
-      *(unsigned int *)(temp_v0 + 0xdc) = 0x3f800000;
-      *(unsigned char *)(temp_v0 + 0xe0) = 1;
-      *(unsigned int *)(temp_v0 + 0x18) = 2;
+    // The shared state's padding begins at unaligned 0x09 and its tracker is only a prefix.
+    struct EntryTransitionView {
+        u8 prefix[0xB];
+        u8 frozen;
+        u8 padding0C[0xC];
+        u32 phase;
+        s32 frame;
+        MapVector start;
+        MapVector end;
+        u8 padding38[8];
+        s32 map;
+        u8 padding44[4];
+        u32 entry;
+        u8 padding4C[0x44];
+        f32 distance;
+        u8 padding94[0x48];
+        f32 alpha;
+        u8 dirty;
+        u8 paddingE1[0xB];
+        u32 trackerFlags;
+    };
+    typedef char EntryTransitionOffsetsCheck[offsetof(EntryTransitionView, phase) == 0x18 &&
+        offsetof(EntryTransitionView, start) == 0x20 && offsetof(EntryTransitionView, alpha) == 0xDC &&
+        offsetof(EntryTransitionView, trackerFlags) == 0xEC ? 1 : -1];
+    EntryTransitionView *transition = reinterpret_cast<EntryTransitionView *>(g_lmapMainState);
+    switch (transition->phase) {
+    case 0:
+        transition->start = *reinterpret_cast<const MapVector *>(g_lmapScene->transform.position);
+        transition->end = transition->start;
+        transition->end.y = 800.0f;
+        transition->alpha = 0.0f;
+        transition->dirty = 1;
+        transition->entry = 99;
+        g_gameState.unk004Value = 99;
+        FUN_002702dc();
+        FUN_0027b2b4(transition->map, transition->entry,
+            transition->map == 101 ? 101 : 0, transition->map == 101 ? 10 : 0);
+        transition->phase = 1;
+        transition->frame = 0;
+        break;
+    case 1:
+        FUN_002d508c(g_lmapMainState);
+        ++transition->frame;
+        g_lmapScene->transform.position[1] = transition->start.y +
+            (transition->end.y - transition->start.y) * (f32)transition->frame * 0.033333335f;
+        if (transition->frame >= 30) {
+            g_gameState.unk18 = 0;
+            g_gameState.entryTransition.completed = 1;
+            transition->alpha = 1.0f;
+            transition->dirty = 1;
+            transition->phase = 2;
+        }
+        break;
+    case 2:
+        FUN_002d508c(g_lmapMainState);
+        break;
+    case 5:
+        transition->distance = 200.0f;
+        FUN_00266a2c();
+        transition = reinterpret_cast<EntryTransitionView *>(g_lmapMainState);
+        transition->frozen = 0;
+        transition->trackerFlags &= ~2;
+        FUN_00281784();
+        mapInitializeStoryMarkerEffects(transition->map);
+        LmapObj *tracker = reinterpret_cast<LmapObj *>(&transition->trackerFlags);
+        objSetBaseAndValue(tracker, transition->map - 100, transition->entry);
+        entryListCollectMatches(tracker);
+        g_gameState.unk18 = 0;
+        g_gameState.entryTransition.completed = 1;
+        break;
     }
-    break;
-  case 2:
-    FUN_002d508c(g_lmapMainState);
-    break;
-  case 5:
-    *(unsigned int *)(g_lmapMainState + 0x90) = 0x43480000;
-    FUN_00266a2c();
-    temp_v0 = g_lmapMainState;
-    *(unsigned char *)(g_lmapMainState + 0xb) = 0;
-    *(unsigned int *)(temp_v0 + 0xec) = *(unsigned int *)(temp_v0 + 0xec) & 0xfffffffd;
-    FUN_00281784();
-    mapInitializeStoryMarkerEffects(*(unsigned int *)(temp_v0 + 0x40));
-    objSetBaseAndValue(temp_v0 + 0xec,*(int *)(temp_v0 + 0x40) - 100,*(unsigned int *)(temp_v0 + 0x48));
-    entryListCollectMatches(temp_v0 + 0xec);
-    DAT_0049f934 = 0;
-    DAT_0049fb46 = 1;
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -15,7 +15,7 @@ int FUN_002571e8(...);
 int FUN_00257374(...);
 int refCountIncrement(void);
 int FUN_0028186c(...);
-int FUN_002a2c7c(void);
+int gfxQuaternionWorkspaceBuildMatrix(void);
 int FUN_002a353c(...);
 int memCopy(...);
 int FUN_002c7d18(...);
@@ -115,7 +115,7 @@ extern int effectQuerySelectedBehavior(void *);
 /* Supplied declaration required: FUN_00257374. */
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_0028186c. */
-/* Supplied declaration required: FUN_002a2c7c. */
+/* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: FUN_002a353c. */
 /* Supplied declaration required: memCopy. */
 /* Supplied declaration required: FUN_002c7d18. */
@@ -242,7 +242,7 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
         DAT_004ea920 = fStack_84;
         DAT_004ea924 = fStack_80;
         DAT_004ea928 = fStack_7c;
-        FUN_002a2c7c();
+        gfxQuaternionWorkspaceBuildMatrix();
         temp_v32 = DAT_004ea988;
         temp_v26 = DAT_004ea984;
         temp_v25 = DAT_004ea980;
@@ -410,7 +410,7 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
         DAT_004ea920 = fStack_84;
         DAT_004ea924 = fStack_80;
         DAT_004ea928 = fStack_7c;
-        FUN_002a2c7c();
+        gfxQuaternionWorkspaceBuildMatrix();
         DAT_004ea98c = temp_v35;
         temp_v1 = 0;
         DAT_004ea990 = temp_v36;

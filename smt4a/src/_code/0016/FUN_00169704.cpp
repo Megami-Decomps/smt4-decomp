@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00185830(...);
 int FUN_00186ce4(...);
-int FUN_00186e2c(int, unsigned int);
+int cameraExportParameters(int, unsigned int);
 int FUN_001ad7cc(int, unsigned int, int *);
 
 /* stack frame of void: 6 slot(s), 24 byte(s) */
@@ -24,7 +24,7 @@ extern int g_bustupCutAnim; /* 0x57f4c4 */
 extern int jobIsValid(void);
 /* Supplied declaration required: FUN_00185830. */
 /* Supplied declaration required: FUN_00186ce4. */
-/* Supplied declaration required: FUN_00186e2c. */
+/* Supplied declaration required: cameraExportParameters. */
 extern int FUN_001ab8c0(void);
 /* Supplied declaration required: FUN_001ad7cc. */
 
@@ -59,7 +59,7 @@ unsigned int FUN_00169704(void)
     }
   }
   else {
-    FUN_00186e2c(g_bustupCutAnim + 0x598,*(unsigned int *)(g_bustupCutAnim + 0x5ec));
+    cameraExportParameters(g_bustupCutAnim + 0x598,*(unsigned int *)(g_bustupCutAnim + 0x5ec));
     temp_v1 = 0;
 LAB_0016975c:
     do {

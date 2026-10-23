@@ -1,75 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ed878` (_code @ 0x3ed878, 0x12c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: partner-state branch folding and 64-bit mask load/store grouping differ. */
+#include "battle/btlMain.h"
+#include "battle/btlPartnerAttack.h"
+#include "battle/btlUnit.h"
 
+// The queued command lies beyond the published BtlMainStateA extent.
+struct BattleTransitionStateView {
+    BtlMainStateA battle;
+    /* 0x4CF0 */ u8 unk4CF0[0x78];
+    /* 0x4D68 */ u32 command;
+};
+struct BattleTransitionSource {
+    /* 0x000 */ u8 unk000[0x400];
+    /* 0x400 */ u32 command;
+};
+typedef char BattleTransitionCommandOffsetCheck[
+    offsetof(BattleTransitionStateView, command) == 0x4D68 ? 1 : -1];
 extern "C" {
+extern BtlMainGlobalsA g_btlMain;
+extern BtlPartnerAttackA* g_btlPartnerAttack;
+extern u32 g_btlScriptUnit;
+extern void* g_btlUiBlock;
+BattleTransitionSource* FUN_003eaf20(BtlMainStateA* battle);
+BtlUnitA* btlUnitGet(u32 id);
+s32 hasFlag80Or1000(u32 id, BtlUnitA* unit);
+void FUN_004abba8(void* ui, u32 enabled);
 
-int FUN_003eaf20(void);
-int FUN_004abba8(unsigned int, unsigned int);
-int hasFlag80Or1000(unsigned int);
-
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-extern int g_btlMain; /* 0x573920 */
-extern unsigned int DAT_00573a28; /* 0x573a28 */
-extern unsigned int DAT_00573a2c; /* 0x573a2c */
-extern unsigned int DAT_00573ab0; /* 0x573ab0 */
-extern unsigned int DAT_00573ab4; /* 0x573ab4 */
-extern int g_btlPartnerAttack; /* 0x573c50 */
-extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
-
-/* Supplied declaration required: FUN_003eaf20. */
-/* Supplied declaration required: FUN_004abba8. */
-/* Supplied declaration required: hasFlag80Or1000. */
-extern int btlUnitGet(unsigned int);
-
-
-unsigned int FUN_003ed878(int param_1)
-
+// Begin the next partner-attack phase or queue the current unit's transition command.
+u32 FUN_003ed878(BattleTransitionStateView* state)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  
-  temp_v0 = g_btlMain;
-  puVar3 = (unsigned int *)(param_1 + 0x45a0);
-  if (!((DAT_00573ab0 & *puVar3) == 0 && (DAT_00573ab4 & *(unsigned int *)(param_1 + 0x45a4)) == 0)) {
-    if (*(int *)(g_btlPartnerAttack + 0x18) != 2) {
-      *(int *)(g_btlPartnerAttack + 0x18) = *(int *)(g_btlPartnerAttack + 0x18) + 1;
-      temp_v1 = 0xf;
+    BtlMainStateA* main = g_btlMain.state;
+    u32 phase;
+    u64 flags = state->battle.stateFlags64.bits;
+    u64 partnerMask = (u64)g_btlMain.selectionGate.words[0] |
+                      ((u64)g_btlMain.selectionGate.words[1] << 32);
+    if (flags & partnerMask) {
+        if (g_btlPartnerAttack->state != 2) {
+            ++g_btlPartnerAttack->state;
+            phase = 15;
+        } else {
+            phase = 17;
+        }
+    } else {
+        if (flags & g_btlMain.transition.mask)
+            return 0;
+        state->command = FUN_003eaf20(&state->battle)->command;
+        BtlUnitA* unit = btlUnitGet(g_btlScriptUnit);
+        u32 special = 0;
+        if (unit != NULL && hasFlag80Or1000(g_btlScriptUnit, unit))
+            special = 1;
+        FUN_004abba8(g_btlUiBlock, special ^ 1);
+        unit = btlUnitGet(g_btlScriptUnit);
+        if (unit != NULL)
+            hasFlag80Or1000(g_btlScriptUnit, unit);
+        state->battle.stateFlags64.bits |= g_btlMain.transition.mask;
+        phase = 14;
+        main = g_btlMain.state;
     }
-    else {
-      temp_v1 = 0x11;
-    }
-  }
-  else {
-    if ((*puVar3 & DAT_00573a28) != 0 || (*(unsigned int *)(param_1 + 0x45a4) & DAT_00573a2c) != 0) {
-      return 0;
-    }
-    temp_v0 = param_1;
-    FUN_003eaf20();
-    *(unsigned int *)(param_1 + 0x4d68) = *(unsigned int *)(temp_v0 + 0x400);
-    temp_v0 = btlUnitGet(g_btlScriptUnit);
-    temp_v2 = 0;
-    if ((temp_v0 != 0) && (temp_v0 = hasFlag80Or1000(g_btlScriptUnit), temp_v0 != 0)) {
-      temp_v2 = 1;
-    }
-    FUN_004abba8(g_btlUiBlock,temp_v2 ^ 1);
-    temp_v0 = btlUnitGet(g_btlScriptUnit);
-    if (temp_v0 != 0) {
-      hasFlag80Or1000(g_btlScriptUnit);
-    }
-    temp_v2 = *(unsigned int *)(param_1 + 0x45a4) | DAT_00573a2c;
-    *puVar3 = *puVar3 | DAT_00573a28;
-    *(unsigned int *)(param_1 + 0x45a4) = temp_v2;
-    temp_v1 = 0xe;
-    temp_v0 = g_btlMain;
-  }
-  if (temp_v0 != 0) {
-    *(unsigned int *)(temp_v0 + 0x8c) = temp_v1;
-  }
-  return 1;
+    if (main != NULL)
+        main->phase = phase;
+    return 1;
 }
-
-} /* extern "C" */
+}

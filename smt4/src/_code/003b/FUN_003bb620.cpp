@@ -1,90 +1,70 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bb620` (_code @ 0x3bb620, 0x140 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: idle-clock clamp, texture queue reloads, and embedded-selector register allocation differ. */
+#include "shard/S3SceneWidget.h"
+#include "shard/S1ListMenu.h"
+#include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "classes/Obj55ca08.h"
 
+// The idle counter extends the recovered widget prefix. The other views share its existing bytes.
+struct SelectionTextureWork {
+    SceneWidget widget;
+    s32 idleFrames;
+};
+typedef char SelectionTextureWorkLayoutCheck[
+    offsetof(SelectionTextureWork, idleFrames) == 0xcb8 ? 1 : -1];
+
 extern "C" {
+s32 flaggedValueHolderGetTotal(const FlaggedValueHolder *values);
+void FUN_00233410(FlaggedValueHolder *values);
+s32 FUN_002333f0(Obj55ca08 *selector);
+s32 stateCounterBelowLimit(FlaggedValueHolder *values, s32 offset);
+s32 FUN_0027ee9c();
+void asdTMTexTableLoadEntryAsync(u32 table, u32 key);
 
-int FUN_00233410(int);
-int flaggedValueHolderGetTotal(...);
-int asdTMTexTableLoadEntryAsync(int, unsigned int);
-
-extern int stateCounterBelowLimit(int, unsigned int);
-extern unsigned int FUN_002333f0(int);
-/* Supplied declaration required: FUN_00233410. */
-/* Supplied declaration required: flaggedValueHolderGetTotal. */
-extern int FUN_0027ee9c(void);
-/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
-
-
-unsigned int FUN_003bb620(int param_1)
-
+u32 FUN_003bb620(SelectionTextureWork *work)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v4 = 0;
-  temp_v0 = flaggedValueHolderGetTotal();
-  if (*(char *)(param_1 + 0x632) == '\0') {
-    ((Obj55ca08 *)(param_1 + 0x74))->Obj55ca08::synchronize((const u8 *)param_1);
-    FUN_00233410(param_1);
-  }
-  temp_v1 = flaggedValueHolderGetTotal(param_1);
-  piVar3 = (int *)(param_1 + 0xcb8);
-  if (temp_v1 != temp_v0) {
-    *(unsigned int *)(param_1 + 0xcb8) = 0;
-  }
-  else {
-    temp_v0 = *(int *)(param_1 + 0xcb8);
-    *piVar3 = temp_v0 + 1;
-    if (temp_v0 + 1 < 0) {
-      temp_v0 = 0;
+    FlaggedValueHolder *values = reinterpret_cast<FlaggedValueHolder *>(work);
+    Obj55ca08 *selector = reinterpret_cast<Obj55ca08 *>(reinterpret_cast<u8 *>(work) + 0x74);
+    ListMenu *list = reinterpret_cast<ListMenu *>(work);
+    u32 result = 0;
+    s32 previous = flaggedValueHolderGetTotal(values);
+    if (list->cursorMarked == 0) {
+        selector->Obj55ca08::synchronize(reinterpret_cast<const u8 *>(work));
+        FUN_00233410(values);
     }
-    else {
-      *piVar3 = temp_v0 + 2;
-      if (temp_v0 + 2 < 0x101) {
-        temp_v0 = temp_v0 + 3;
-        *piVar3 = temp_v0;
-      }
-      else {
-        temp_v0 = 0x100;
-      }
-    }
-    *(int *)(param_1 + 0xcb8) = temp_v0;
-    if (temp_v0 >= 0x10) {
-      temp_v0 = flaggedValueHolderGetTotal(param_1);
-      temp_v3 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + temp_v0 * 4 + 0x530) + 0x5a);
-      temp_v0 = temp_v3 + 1;
-      temp_v1 = param_1 + temp_v0;
-      if (*(char *)(temp_v1 + 0xc78) == '\0') {
-        *(int *)(param_1 + 0xc74) = temp_v0;
-        *(unsigned int *)(param_1 + 0xc70) = temp_v3 + 2;
-        if (*(char *)(temp_v1 + 0xc78) == '\0') {
-          asdTMTexTableLoadEntryAsync(0x2a,*(unsigned int *)(param_1 + 0xc74));
-          *(unsigned char *)(temp_v1 + 0xc78) = 1;
+    if (flaggedValueHolderGetTotal(values) != previous) {
+        work->idleFrames = 0;
+    } else {
+        // The range test advances the idle clock on each successful bound check.
+        if (++work->idleFrames < 0) {
+            work->idleFrames = 0;
+        } else if (++work->idleFrames > 256) {
+            work->idleFrames = 256;
+        } else {
+            ++work->idleFrames;
         }
-      }
+        if (work->idleFrames >= 16) {
+            s32 selected = flaggedValueHolderGetTotal(values);
+            u32 key = work->widget.entries[selected]->lastKey;
+            u32 nextKey = key + 1;
+            if (work->widget.loaded[nextKey] == 0) {
+                work->widget.queuedKey = nextKey;
+                work->widget.queuedTex = key + 2;
+                if (work->widget.loaded[nextKey] == 0) {
+                    asdTMTexTableLoadEntryAsync(SCENE_TEXTURE_TABLE, work->widget.queuedKey);
+                    work->widget.loaded[nextKey] = 1;
+                }
+            }
+        }
     }
-  }
-  if (*(char *)(param_1 + 0x632) == '\0') {
-    if (*(char *)(param_1 + 0x86) != '\0') {
-      temp_v2 = FUN_002333f0(param_1 + 0x74);
-      temp_v0 = stateCounterBelowLimit(param_1,temp_v2);
-      if (temp_v0 != 0) {
-        temp_v4 = 1;
-      }
+    if (list->cursorMarked == 0) {
+        if (static_cast<s8>(selector->released) != 0 &&
+            stateCounterBelowLimit(values, FUN_002333f0(selector)) != 0) {
+            result = 1;
+        }
+        if (FUN_0027ee9c() != 0) {
+            result = 1;
+        }
     }
-    temp_v0 = FUN_0027ee9c();
-    if (temp_v0 != 0) {
-      temp_v4 = 1;
-    }
-  }
-  return temp_v4;
+    return result;
 }
-
-} /* extern "C" */
+}

@@ -19,7 +19,7 @@ int FUN_001835b4(int, int, int, int, int, int);
 int pairSetHalves(int, int, int);
 int renderCtxCalculateStereoParallax(...);
 int jobGetScalarValue(void);
-int FUN_002a6c3c(...);
+int devilDrawResolvedTexture(...);
 int FUN_002fb5c4(int);
 int FUN_003210bc(int, int);
 int FUN_003217d0(int);
@@ -66,7 +66,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: jobGetScalarValue. */
-/* Supplied declaration required: FUN_002a6c3c. */
+/* Supplied declaration required: devilDrawResolvedTexture. */
 /* Supplied declaration required: FUN_002fb5c4. */
 /* Supplied declaration required: FUN_003210bc. */
 /* Supplied declaration required: FUN_003217d0. */
@@ -218,7 +218,7 @@ unsigned int FUN_0024e31c(void)
           temp_v2 = *(int *)(temp_v1 + 0x12ff0) + *(int *)(temp_v1 + 0x12fdc);
           FUN_00168e00(*(short *)(temp_v6 + 8) + temp_v4,(int)*(short *)(temp_v6 + 10),
                        *(unsigned short *)(temp_v6 + 4) & 0x7fff,*(unsigned short *)(temp_v6 + 6) & 0x7fff);
-          FUN_002a6c3c(0xffffffff,temp_v3 + temp_v5 + temp_v4,temp_v2,0x18,1);
+          devilDrawResolvedTexture(0xffffffff,temp_v3 + temp_v5 + temp_v4,temp_v2,0x18,1);
           renderPopStateStacks();
           temp_v9 = *(unsigned int *)(temp_v1 + 0x12fdc);
           efctSetSpeed();
@@ -248,7 +248,7 @@ unsigned int FUN_0024e31c(void)
           temp_v14 = *(int *)(temp_v1 + 0x1300c) + *(int *)(temp_v1 + 0x12ff8);
           FUN_00168e00(*(short *)(temp_v6 + 8) + temp_v4,(int)*(short *)(temp_v6 + 10),
                        *(unsigned short *)(temp_v6 + 4) & 0x7fff,*(unsigned short *)(temp_v6 + 6) & 0x7fff);
-          FUN_002a6c3c(0x29d,temp_v5,temp_v14,0x18,1);
+          devilDrawResolvedTexture(0x29d,temp_v5,temp_v14,0x18,1);
           renderPopStateStacks();
           temp_v9 = *(unsigned int *)(temp_v1 + 0x12ff8);
           efctSetSpeed();

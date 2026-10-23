@@ -1,74 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00327a24` (_code @ 0x327a24, 0x108 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: the loop reloads the adjacent group-range outputs with LDM instead of retail's two scalar loads. */
+#include "shard/W4_Match6_BtlEntry.h"
 extern "C" {
+s32 scrGetArg(s32 index);
+u32 btlScriptResolveGroupArg(s32 group);
+void FUN_002499fc(u32 group, s32 *range, s32 *count);
+BtlMainState *btlGetMainState(void);
+BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
+void scrSetResult(s32 result);
 
-int FUN_002499fc(unsigned int, int [3], int *);
-int scrSetResult(int);
-int btlGetMainState(void);
-int scrGetArg(int);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern int btlMainFindActiveEntry(void);
-/* Supplied declaration required: FUN_002499fc. */
-extern unsigned int btlScriptResolveGroupArg(void);
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: scrGetArg. */
-
-
-unsigned int FUN_00327a24(void)
-
+// Test whether a selected combatant has either alternate pending effect.
+u32 FUN_00327a24(void)
 {
-/* irregular: 4 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6 [3];
-  
-  scrGetArg(0);
-  temp_v1 = btlScriptResolveGroupArg();
-  FUN_002499fc(temp_v1,temp_v6,&temp_v5);
-  temp_v4 = temp_v6[0];
-  if (temp_v6[0] < temp_v5 + temp_v6[0]) {
-    do {
-      temp_v2 = btlGetMainState();
-      puVar4 = (unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v4 * 0x288);
-      temp_v3 = *puVar4;
-      if ((((temp_v3 & 0x10) == 0) && ((temp_v3 & 1) != 0)) && ((temp_v3 & 0x40) == 0)) {
-        temp_v0 = (short)puVar4[0x24];
-        if (temp_v0 < 1) {
-          temp_v0 = (short)puVar4[0x25];
+    s32 first;
+    s32 count;
+    FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(0)), &first, &count);
+    for (s32 index = first; index < first + count; ++index) {
+        BtlEntry *entry = &btlGetMainState()->entries[index];
+        if (!(entry->flags & BTL_ENTRY_FLAG_PRESENT) &&
+            (entry->flags & BTL_ENTRY_FLAG_ACTIVE) &&
+            !(entry->flags & BTL_ENTRY_FLAG_BLOCKED)) {
+            s16 effect = entry->effects.primaryAlternate;
+            if (effect <= 0)
+                effect = entry->effects.secondaryAlternate;
+            if (effect > 0) {
+                scrSetResult(1);
+                return 1;
+            }
         }
-        if (0 < temp_v0) {
-          scrSetResult(1);
-          return 1;
-        }
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < temp_v6[0] + temp_v5);
-  }
-  temp_v4 = btlGetMainState();
-  if (*(char *)(temp_v4 + 0x49c5) != '\0') {
-    btlGetMainState();
-    temp_v4 = btlMainFindActiveEntry();
-    if ((temp_v4 != 0) && ((0 < *(short *)(temp_v4 + 0x90) || (0 < *(short *)(temp_v4 + 0x94))))) {
-      scrSetResult(1);
-      return 1;
     }
-  }
-  scrSetResult(0);
-  return 1;
+    if (btlGetMainState()->hasActiveEntry) {
+        BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
+        if (entry && (entry->effects.primaryAlternate > 0 || entry->effects.secondaryAlternate > 0)) {
+            scrSetResult(1);
+            return 1;
+        }
+    }
+    scrSetResult(0);
+    return 1;
 }
-
-} /* extern "C" */
+}

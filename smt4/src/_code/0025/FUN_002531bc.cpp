@@ -1,63 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002531bc` (_code @ 0x2531bc, 0x134 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only motion comparison load scheduling differs; built reuses the resource pointer across the test. */
+#include "map/mapIf.h"
+#include "map/mapDepart.h"
+#include "shard/W6_W6Match3_NodeEnable.h"
+
+/* The selected motion lies past NodeEnableResource's recovered prefix. */
+struct MapMarkerMotionResourceView {
+    NodeEnableResource resource;
+    u8 unk30[8];
+    u32 secondaryMotion; /* 0x38 */
+};
 
 extern "C" {
+extern GameState g_gameState;
+void nodeSetTranslation(NodeEnableResource *, s32, const f32 *);
+void FUN_0028c618(NodeEnableResource *, s32, f32, f32, f32);
+void modelSelectPrimaryMotion(NodeEnableResource *, f32);
+void modelSelectSecondaryMotion(NodeEnableResource *, u32, f32);
 
-int modelSelectSecondaryMotion(unsigned int, unsigned int);
-int FUN_0028c618(unsigned int, int);
-int nodeSetTranslation(unsigned int, int, char *);
-int modelSelectPrimaryMotion(unsigned int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern unsigned char g_gameState; /* 0x49f91c */
-
-/* Supplied declaration required: modelSelectSecondaryMotion. */
-/* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: modelSelectPrimaryMotion. */
-
-
-void FUN_002531bc(char *param_1)
-
+/* Keep marker visibility, position, heading and animation synchronized with map state. */
+void FUN_002531bc(MapIfModelMarker *marker)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  if (*param_1 != '\0') {
-    if ((*(signed char *)((unsigned char *)&g_gameState + 0x22)) != '\0') {
-      puVar1 = *(unsigned int **)(param_1 + 0x20);
-      if ((*puVar1 & 2) == 0) {
-        *puVar1 = *puVar1 | 2;
-        *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-      }
-    }
-    else if (param_1[2] != '\0') {
-      puVar1 = *(unsigned int **)(param_1 + 0x20);
-      if (param_1[1] != '\0') {
-        if ((*puVar1 & 2) != 0) {
-          *puVar1 = *puVar1 & 0xfffffffd;
-          *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 1;
+    if (marker->active) {
+        if (g_gameState.controllerFlags.mapRangeModelsHidden) {
+            NodeEnableNode *node = marker->model;
+            if (!(node->flags & 2)) {
+                node->flags |= 2;
+                node->resource->target->enabled = 0;
+            }
+        } else if (marker->flags) {
+            NodeEnableNode *node = marker->model;
+            if (marker->state) {
+                if (node->flags & 2) {
+                    node->flags &= ~2u;
+                    node->resource->target->enabled = 1;
+                }
+            } else if (!(node->flags & 2)) {
+                node->flags |= 2;
+                node->resource->target->enabled = 0;
+            }
+            nodeSetTranslation(marker->model->resource, 0, marker->position);
+            FUN_0028c618(marker->model->resource, 0, 0.0f, marker->heading, 0.0f);
+            if (reinterpret_cast<MapMarkerMotionResourceView *>(marker->model->resource)->secondaryMotion != marker->motionIndex) {
+                modelSelectPrimaryMotion(marker->model->resource, 0.0f);
+                modelSelectSecondaryMotion(marker->model->resource, marker->motionIndex, 0.0f);
+            }
         }
-      }
-      else if ((*puVar1 & 2) == 0) {
-        *puVar1 = *puVar1 | 2;
-        *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-      }
-      nodeSetTranslation(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8),0,param_1 + 0xc);
-      FUN_0028c618(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8),0);
-      if (*(int *)(*(int *)(*(int *)(param_1 + 0x20) + 8) + 0x38) != *(int *)(param_1 + 0x1c)) {
-        modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8));
-        modelSelectSecondaryMotion(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8),*(unsigned int *)(param_1 + 0x1c));
-        return;
-      }
     }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

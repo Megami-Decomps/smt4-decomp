@@ -69,7 +69,7 @@ int VectorSignedToFloat(...);
 int saveSlotFindSelected(void);
 int FUN_001695a0(void);
 int FUN_0021c118(...);
-int FUN_0023244c(...);
+int btlCreateUiDrawJobs(...);
 int btlAutoStartCalculation(...);
 int FUN_0027249c(...);
 int FUN_002726b8(...);
@@ -187,7 +187,7 @@ extern int gameGetSlotTable(void);
 extern int gameDataBlocksGetTableFlag(void);
 /* Supplied declaration required: FUN_0021c118. */
 extern unsigned int gameGetSaveSlotData(unsigned int);
-/* Supplied declaration required: FUN_0023244c. */
+/* Supplied declaration required: btlCreateUiDrawJobs. */
 /* Supplied declaration required: messageForwardDefaultMode. */
 extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_00270c18. */
@@ -412,7 +412,7 @@ void FUN_002ba998(unsigned int param_1)
     btlAutoStartCalculation(temp_v7);
     temp_v6 = jobIsValid(*(unsigned int *)(temp_v7 + 0x78));
     if (temp_v6 == 0) {
-      FUN_0023244c(temp_v7);
+      btlCreateUiDrawJobs(temp_v7);
     }
     FUN_004a8edc(g_btlUiBlock,0);
     FUN_002726b8(temp_v7);

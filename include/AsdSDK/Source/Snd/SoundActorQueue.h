@@ -2,6 +2,7 @@
 #define ASDSDK_SOURCE_SND_SOUNDACTORQUEUE_H
 
 #include "common.h"
+#include <stddef.h>
 
 struct SoundActorQueuePosition {
     /* 0x00 */ f32 x;
@@ -16,7 +17,10 @@ struct SoundActorQueueEntry {
     /* 0x08 */ u32 handle;
     /* 0x0c */ u32 unk0c;
     /* 0x10 */ u16 unk10;
-    /* 0x12 */ u8 unk12[2];
+    union {
+        /* 0x12 */ u8 unk12[2];
+        /* 0x12 */ s16 inactiveFrames;
+    };
     /* 0x14 */ SoundActorQueuePosition position;
 };
 
@@ -30,5 +34,7 @@ struct SoundActorQueue {
 };
 
 typedef char SoundActorQueueEntrySizeCheck[sizeof(SoundActorQueueEntry) == 0x20 ? 1 : -1];
+typedef char SoundActorQueueTimerOffsetCheck[offsetof(SoundActorQueueEntry, inactiveFrames) == 0x12 &&
+    sizeof(SoundActorQueueEntry) == 0x20 ? 1 : -1];
 
 #endif

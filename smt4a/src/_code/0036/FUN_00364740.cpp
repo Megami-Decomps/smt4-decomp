@@ -13,7 +13,7 @@ int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int sceneRegisterBoxEffect(...);
 int FUN_0035363c(...);
-int FUN_003686f4(int, unsigned char [8]);
+int sceneLoadParameterPreset(int, unsigned char [8]);
 int aocDataTable23GetEntry(...);
 int FUN_003799d0(void);
 int contentEntryGet(...);
@@ -81,7 +81,7 @@ extern unsigned int gameFlags2Get(unsigned char *);
 extern int FUN_00356380(int);
 extern unsigned int FUN_00356528(int);
 extern unsigned int FUN_003683c8(int);
-/* Supplied declaration required: FUN_003686f4. */
+/* Supplied declaration required: sceneLoadParameterPreset. */
 extern unsigned int FUN_00368868(unsigned int);
 extern int gameOwnedBitTest(int);
 /* Supplied declaration required: aocDataTable23GetEntry. */
@@ -485,7 +485,7 @@ LAB_00364eac:
                       VectorSignedToFloat((int)*(short *)((int)puVar4 + 0x1a),
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
                       param_3 = temp_v25;
-                      FUN_003686f4((int)*(char *)((int)puVar4 + 0x1e),temp_v22);
+                      sceneLoadParameterPreset((int)*(char *)((int)puVar4 + 0x1e),temp_v22);
                       temp_v16 = (int)*(char *)((int)puVar4 + 0x11);
                       if (((!(temp_v8 == 3 || temp_v8 == 0x2c)) &&
                           (!(temp_v8 == 0x23 || temp_v8 == 0x24))) &&

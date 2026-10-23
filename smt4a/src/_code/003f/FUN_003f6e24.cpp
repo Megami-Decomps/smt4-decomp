@@ -1,63 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f6e24` (_code @ 0x3f6e24, 0x13c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail retains an unused alpha load; track alpha addressing and saved-register allocation differ. */
+#include "camp/RenderCtx.h"
 
+struct MenuLayerTrack {
+    u8 unk00[0x20];
+    f32 alpha;
+};
+struct MenuLayerComposition {
+    u8 unk000[0x1F8];
+    MenuLayerTrack position;
+    u8 unk21C[0x68];
+    MenuLayerTrack offset;
+    u8 unk2A8[0x298];
+    MenuLayerTrack background;
+};
 extern "C" {
+extern RenderCtxA *g_renderCtx;
+s32 vec2GetXInt(MenuLayerTrack *track);
+s32 vec2GetYInt(MenuLayerTrack *track);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
+void efctSetSpeed(f32 alpha);
+void FUN_001835b4(s32 layer, s32 font, s32 glyph, s32 y, u32 color, s32 frame);
+void FUN_003f5b14(MenuLayerComposition *owner, s32 x, s32 y, s32 first, s32 second, f32 alpha);
+void FUN_003f54c4(MenuLayerComposition *owner, s32 x, s32 y, f32 alpha);
+void FUN_003f61b4(MenuLayerComposition *owner, s32 x, s32 y, f32 alpha);
 
-int vec2GetXInt(int);
-int vec2GetYInt(int);
-int efctSetSpeed(void);
-int FUN_001835b4(int, int, int, int, unsigned int, int);
-int renderCtxCalculateStereoParallax(unsigned int);
-int FUN_003f54c4(...);
-int FUN_003f5b14(int, int, int, int, int);
-int FUN_003f61b4(...);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
-
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: vec2GetYInt. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_003f54c4. */
-/* Supplied declaration required: FUN_003f5b14. */
-/* Supplied declaration required: FUN_003f61b4. */
-
-
-void FUN_003f6e24(int param_1,int param_2,unsigned int param_3)
-
+/* Draws background glyphs followed by the positioned, faded content and its overlay. */
+void FUN_003f6e24(MenuLayerComposition *owner, s32 y, u32 color, f32 alpha)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  float temp_v4;
-  
-  vec2GetXInt(param_1 + 0x540);
-  vec2GetYInt(param_1 + 0x540);
-  temp_v4 = 0.26f;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  param_2 = param_2 + (int)temp_v4;
-  efctSetSpeed();
-  FUN_001835b4(2,0x31,0,param_2,param_3,0x8d);
-  FUN_001835b4(2,0x31,1,param_2,param_3,0x8d);
-  FUN_001835b4(2,0x31,9,param_2,param_3,0x8d);
-  temp_v0 = vec2GetXInt(param_1 + 0x1f8);
-  temp_v1 = vec2GetYInt(param_1 + 0x1f8);
-  FUN_003f5b14(param_1,temp_v0,temp_v1,0x17,0x1a);
-  temp_v2 = vec2GetXInt(param_1 + 0x284);
-  temp_v3 = vec2GetYInt(param_1 + 0x284);
-  FUN_003f54c4(param_1,temp_v2 + temp_v0,temp_v3 + temp_v1);
-  FUN_003f61b4(param_1,temp_v0,temp_v1);
-  return;
+    vec2GetXInt(&owner->background);
+    vec2GetYInt(&owner->background);
+    y += (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    efctSetSpeed(alpha);
+    FUN_001835b4(2, 0x31, 0, y, color, 0x8D);
+    FUN_001835b4(2, 0x31, 1, y, color, 0x8D);
+    FUN_001835b4(2, 0x31, 9, y, color, 0x8D);
+    s32 x = vec2GetXInt(&owner->position);
+    s32 positionY = vec2GetYInt(&owner->position);
+    f32 contentAlpha = owner->position.alpha;
+    FUN_003f5b14(owner, x, positionY, 0x17, 0x1A, contentAlpha);
+    s32 offsetX = vec2GetXInt(&owner->offset) + x;
+    s32 offsetY = vec2GetYInt(&owner->offset) + positionY;
+    contentAlpha *= owner->offset.alpha;
+    FUN_003f54c4(owner, offsetX, offsetY, contentAlpha);
+    FUN_003f61b4(owner, x, positionY, contentAlpha);
 }
-
-} /* extern "C" */
+}

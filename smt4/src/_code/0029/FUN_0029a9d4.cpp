@@ -1,73 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029a9d4` (_code @ 0x29a9d4, 0x128 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: learned-rank search remains scalar instead of pair-unrolled, and branch-local discount accumulation differs. */
+#include "gamedata/Table04Record.h"
+#include "shard/Shard004B.h"
 
-extern "C" {
-
-int FUN_00283ebc(unsigned int, int, int);
-int FUN_002ae164(void);
-int FUN_002ae584(void);
-
-/* Supplied declaration required: FUN_00283ebc. */
-extern int flagBitIsSet(unsigned int);
-/* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002ae584. */
-extern int gameGetPlayerData(void);
-
-
-void FUN_0029a9d4(unsigned int param_1,int param_2)
-
-{
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  int temp_v4;
-  
-  temp_v0 = param_1;
-  FUN_002ae164();
-  if (temp_v0 != 0) {
-    if (param_2 != 0) {
-      temp_v1 = gameGetPlayerData();
-      temp_v2 = 0;
-      do {
-        temp_v4 = temp_v1 + temp_v2 * 2;
-        if (*(unsigned short *)(temp_v4 + 0x34) == param_1) {
-          temp_v3 = *(unsigned char *)(temp_v2 + temp_v1 + 0x44);
-          FUN_00283ebc(temp_v0,temp_v3,4);
-          return;
-        }
-        if (*(unsigned short *)(temp_v4 + 0x36) == param_1) {
-          temp_v3 = *(unsigned char *)(temp_v2 + temp_v1 + 0x45);
-          FUN_00283ebc(temp_v0,temp_v3,4);
-          return;
-        }
-        temp_v2 = temp_v2 + 2;
-      } while (temp_v2 < 8);
-      temp_v3 = 0;
-      FUN_00283ebc(temp_v0,temp_v3,4);
-    }
-    else {
-      temp_v1 = flagBitIsSet(0xc);
-      if (temp_v1 != 0) {
-        FUN_002ae584();
-      }
-      temp_v1 = flagBitIsSet(0xd);
-      if (temp_v1 != 0) {
-        FUN_002ae584();
-      }
-      temp_v1 = flagBitIsSet(0xe);
-      if (temp_v1 != 0) {
-        FUN_002ae584();
-      }
-      temp_v1 = flagBitIsSet(0xf);
-      if (temp_v1 != 0) {
-        FUN_002ae584();
-      }
-    }
-  }
-  return;
+namespace {
+struct SkillCostDiscountView {
+    u8 unk00[0x38];
+    s32 discount;
+};
+typedef char SkillCostDiscountOffsetCheck[
+    offsetof(SkillCostDiscountView, discount) == 0x38 ? 1 : -1];
 }
 
-} /* extern "C" */
+static __inline u8 findLearnedSkillRank(const ItemRankRecord *player, u32 skillId)
+{
+    for (s32 index = 0; index < 8; ++index) {
+        if (player->items[index] == skillId) {
+            return (u8)player->ranks[index];
+        }
+    }
+    return 0;
+}
+
+extern "C" {
+Table04Record *FUN_002ae164(u32 skillId);
+s32 FUN_00283ebc(Table04Record *skill, s32 rank, u32 modifier);
+s32 flagBitIsSet(u32 flag);
+SkillCostDiscountView *FUN_002ae584(u16 id);
+ItemRankRecord *gameGetPlayerData(void);
+
+// Apply learned-rank or global cost discounts, keeping a nonzero skill's cost at least one.
+s32 FUN_0029a9d4(u32 skillId, s32 useLearnedRank)
+{
+    Table04Record *skill = FUN_002ae164(skillId);
+    if (skill == NULL) {
+        return 0;
+    }
+    s32 baseCost = skill->cost.baseCost;
+    s32 discount = 0;
+    if (useLearnedRank != 0) {
+        discount += FUN_00283ebc(skill, findLearnedSkillRank(gameGetPlayerData(), skillId), 4);
+    } else {
+        if (flagBitIsSet(12) != 0) {
+            discount = FUN_002ae584(12)->discount;
+        }
+        if (flagBitIsSet(13) != 0) {
+            discount += FUN_002ae584(13)->discount;
+        }
+        if (flagBitIsSet(14) != 0) {
+            discount += FUN_002ae584(14)->discount;
+        }
+        if (flagBitIsSet(15) != 0) {
+            discount += FUN_002ae584(15)->discount;
+        }
+    }
+    s32 cost = baseCost - discount;
+    return cost > 0 ? cost : 1;
+}
+}

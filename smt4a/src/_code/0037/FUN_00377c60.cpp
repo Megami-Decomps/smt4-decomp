@@ -1,53 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00377c60` (_code @ 0x377c60, 0x1dc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: vector argument loads split differently, record address lifetime and VMUL/VADD versus VMLA lowering differ. */
+#include "shard/W9_W9Match8_WorkRecords.h"
+#include "shard/S1Mover.h"
 
+struct DebugBoundsShapeA {
+    u32 unk00;
+    s32 subtype;
+    u8 unk08[0x14];
+    const s32 *kind;
+};
+struct DebugBoundsObjectA {
+    u8 unk00[0x14];
+    const DebugBoundsShapeA *shape;
+};
 extern "C" {
+extern s32 DAT_00580c90;
+extern DebugBoundsObjectA *DAT_005f3020[];
+void FUN_002039a0(u32, Vec3f, Vec3f);
 
-int FUN_002039a0(...);
-
-extern int DAT_00580c90; /* 0x580c90 */
-
-/* Supplied declaration required: FUN_002039a0. */
-
-
-void FUN_00377c60(void)
-
+void FUN_00377c60()
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  if (temp_v2 < DAT_00580c90) {
-    do {
-      temp_v0 = *(int *)(*(int *)(temp_v2 * 4 + 0x5f3020) + 0x14);
-      temp_v1 = **(int **)(temp_v0 + 0x1c);
-      if (temp_v1 != 0) {
-        if (temp_v1 != 1) {
-          if (temp_v1 == 2) {
-            FUN_002039a0(0xff00ff);
-            FUN_002039a0(0xff00ff);
-            FUN_002039a0(0xff00ff);
-            FUN_002039a0(0xff00ff);
-            FUN_002039a0(0xff0000ff);
-          }
+    EntryPoolRecordA *records = reinterpret_cast<EntryPoolRecordA *>(reinterpret_cast<u8 *>(DAT_005f3020) + 0x280);
+    for (s32 i = 0; i < DAT_00580c90; ++i) {
+        const DebugBoundsShapeA *shape = DAT_005f3020[i]->shape;
+        s32 kind = *shape->kind;
+        EntryPoolRecordA *record = &records[i];
+        const Vec3f *vertices = reinterpret_cast<const Vec3f *>(record->primaryVectors);
+        if (kind == 1) {
+            if (shape->subtype == 0x27) {
+                FUN_002039a0(0x00FF00FF, vertices[0], vertices[1]);
+                FUN_002039a0(0x00FF00FF, vertices[0], vertices[2]);
+                FUN_002039a0(0x00FF00FF, vertices[1], vertices[3]);
+            }
+            FUN_002039a0(0x00FF00FF, vertices[2], vertices[3]);
+            const Vec3f *origin = reinterpret_cast<const Vec3f *>(record->unk060);
+            const Vec3f *direction = reinterpret_cast<const Vec3f *>(record->vector6C);
+            Vec3f end = {origin->x + direction->x * 300.0f, origin->y + direction->y * 300.0f, origin->z + direction->z * 300.0f};
+            FUN_002039a0(0xFF0000FF, *origin, end);
+        } else if (kind == 2) {
+            FUN_002039a0(0x00FF00FF, vertices[4], vertices[5]);
+            FUN_002039a0(0x00FF00FF, vertices[5], vertices[7]);
+            FUN_002039a0(0x00FF00FF, vertices[6], vertices[7]);
+            FUN_002039a0(0x00FF00FF, vertices[4], vertices[6]);
+            const Vec3f *origin = reinterpret_cast<const Vec3f *>(record->unk060);
+            const Vec3f *direction = reinterpret_cast<const Vec3f *>(record->vector6C);
+            Vec3f end = {origin->x + direction->x * 300.0f, origin->y + direction->y * 300.0f, origin->z + direction->z * 300.0f};
+            FUN_002039a0(0xFF0000FF, *origin, end);
         }
-        else {
-          if (*(int *)(temp_v0 + 4) == 0x27) {
-            FUN_002039a0(0xff00ff);
-            FUN_002039a0(0xff00ff);
-            FUN_002039a0(0xff00ff);
-          }
-          FUN_002039a0(0xff00ff);
-          FUN_002039a0(0xff0000ff);
-        }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < DAT_00580c90);
-  }
-  return;
+    }
 }
-
-} /* extern "C" */
+}

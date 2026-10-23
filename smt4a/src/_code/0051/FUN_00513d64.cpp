@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00513d64` (_code @ 0x513d64, 0x1f8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: BLOCKED: factory needs the allocator-interface class at DAT_00557da8 and full movie class inheritance for _ZTV9Obj557b68 + 0x18; current class header is only a 0x174-byte prefix, not the allocated 0x14D0 object. */
 #include "romwright_types.h"
 
 extern "C" {

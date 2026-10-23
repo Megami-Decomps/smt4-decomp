@@ -1,61 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bcbb4` (_code @ 0x4bcbb4, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved-register assignment differs, including reduction accumulator reuse after the holder scan; instruction count agrees. */
+#include "gamedata/Table04Record.h"
+#include "shard/Shard004B.h"
+#include "shard/PassiveSkill.h"
+#include "shard/W9_W9Match7_ModifierLists.h"
 
 extern "C" {
+Table04Record *dataTable04FindById(u32 id);
+const PassiveSkillRecord *dataFindKeyedRecordWithOverrides(u32 id);
+s32 gameDataFlagTestBit(u32 bit);
+s32 FUN_0034a304(const AttributeModifierLists *record, s32 rank, s32 kind);
 
-int dataFindKeyedRecordWithOverrides(void);
-int dataTable04FindById(void);
-int FUN_0034a304(unsigned int, int, int);
-
-/* Supplied declaration required: dataFindKeyedRecordWithOverrides. */
-/* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_0034a304. */
-extern int gameDataFlagTestBit(unsigned int);
-
-
-void FUN_004bcbb4(int param_1,unsigned int param_2)
-
+// Apply unlocked cost reductions and the holder's skill-rank modifiers, clamping to one.
+s32 FUN_004bcbb4(const ItemRankRecord *holder, u32 skillId)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = param_2;
-  dataTable04FindById();
-  if (temp_v0 != 0) {
-    temp_v1 = gameDataFlagTestBit(0xc);
-    if (temp_v1 != 0) {
-      dataFindKeyedRecordWithOverrides();
-    }
-    temp_v1 = gameDataFlagTestBit(0xd);
-    if (temp_v1 != 0) {
-      dataFindKeyedRecordWithOverrides();
-    }
-    temp_v1 = gameDataFlagTestBit(0xe);
-    if (temp_v1 != 0) {
-      dataFindKeyedRecordWithOverrides();
-    }
-    temp_v1 = gameDataFlagTestBit(0xf);
-    if (temp_v1 != 0) {
-      dataFindKeyedRecordWithOverrides();
-    }
-    temp_v1 = 0;
-    if (param_1 != 0) {
-      temp_v2 = 0;
-      do {
-        if (*(unsigned short *)(param_1 + temp_v2 * 2 + 0x34) == param_2) {
-          temp_v1 = (int)*(char *)(temp_v2 + param_1 + 0x44);
-          break;
+    Table04Record *record = dataTable04FindById(skillId);
+    if (record) {
+        s32 baseCost = record->cost.baseCost;
+        s32 reduction = 0;
+        if (gameDataFlagTestBit(12))
+            reduction = dataFindKeyedRecordWithOverrides(12)->affinity;
+        if (gameDataFlagTestBit(13))
+            reduction += dataFindKeyedRecordWithOverrides(13)->affinity;
+        if (gameDataFlagTestBit(14))
+            reduction += dataFindKeyedRecordWithOverrides(14)->affinity;
+        if (gameDataFlagTestBit(15))
+            reduction += dataFindKeyedRecordWithOverrides(15)->affinity;
+        s32 rank = 0;
+        if (holder) {
+            for (s32 index = 0; index < 8; ++index) {
+                if (holder->items[index] == skillId) {
+                    rank = holder->ranks[index];
+                    break;
+                }
+            }
         }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 8);
+        // Modifier lists follow the currently recovered table-four prefix.
+        const AttributeModifierLists *modifiers = (const AttributeModifierLists *)record;
+        reduction += FUN_0034a304(modifiers, rank, 4);
+        s32 result = baseCost - (FUN_0034a304(modifiers, rank, 7) + reduction);
+        if (result <= 0)
+            result = 1;
+        return result;
     }
-    FUN_0034a304(temp_v0,temp_v1,4);
-    FUN_0034a304(temp_v0,temp_v1,7);
-  }
-  return;
+    return 0;
 }
-
-} /* extern "C" */
+}

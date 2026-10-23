@@ -1,75 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `btlTalkBustUpCreate` (_code @ 0x2cd8fc, 0x144 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: default-value/callback load scheduling and contiguous parameter-stream pointer calculation differ. */
+#include "battle/Talk/btlTalkBustUp.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "shard/W6_W6Match7_DrawParameters.h"
+#include <stddef.h>
 
-extern "C" {
-
-int asdProcessCreateSimple(...);
-int paramsInit(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int sysMemClear(...);
-int paramsClearPacket(...);
-
-/* stack frame of void: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-extern int FUN_002cd414(...); /* 0x2cd414 */
-extern unsigned char LAB_002cda90; /* 0x2cda90 */
-extern unsigned char LAB_002cdaa0; /* 0x2cdaa0 */
-extern unsigned char LAB_002cdab4; /* 0x2cdab4 */
-extern int FUN_00321544(...); /* 0x321544 */
-extern unsigned char DAT_0052738c; /* 0x52738c */
-extern unsigned char DAT_005273ec; /* 0x5273ec */
-extern unsigned char DAT_00527530; /* 0x527530 */
-extern unsigned char DAT_005275c0; /* 0x5275c0 */
-extern int g_btlTalkBustUp; /* 0x5710dc */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: paramsClearPacket. */
-
-
-void btlTalkBustUpCreate(void)
-
-{
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  
-  if (g_btlTalkBustUp == 0) {
-    temp_v0 = 0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x30c,1);
-    g_btlTalkBustUp = temp_v0;
-    sysMemClear();
-    *(unsigned int *)(temp_v0 + 0x2f8) = 0xffffffff;
-    *(unsigned int *)(temp_v0 + 0x308) = 0;
-    *(unsigned int *)(temp_v0 + 0x2fc) = 0x3f800000;
-    *(unsigned int *)(temp_v0 + 0x300) = 0x3f800000;
-    *(unsigned int *)(temp_v0 + 0x304) = 0;
-    *(unsigned int *)(temp_v0 + 0x2e8) = 0;
-    *(unsigned int *)(temp_v0 + 0x2ec) = 0;
-    puVar2 = &LAB_002cda90;
-    asdProcessCreateSimple(&LAB_002cda90,4,0,0,FUN_002cd414,0,0);
-    *(unsigned char **)(temp_v0 + 0x2e4) = puVar2;
-    taskCreateDraw(&LAB_002cdaa0,0x81,0,0,FUN_00321544,0,0,puVar2);
-    taskCreateDraw(&LAB_002cdab4,0xdd,0,0,FUN_00321544,0,0,*(unsigned int *)(temp_v0 + 0x2e4));
-    paramsClearPacket(temp_v0);
-    paramsInit(temp_v0,&DAT_0052738c,0x60,&DAT_005273ec,0x144,&DAT_00527530,0x90,0,0,&DAT_005275c0,
-                 0x9bc);
-  }
-  return;
+namespace {
+// The allocation has additional presentation fields after the shared 0x2fc-byte prefix.
+struct TalkBustUpWork {
+    BtlTalkBustUp state;
+    f32 scaleX;
+    f32 scaleY;
+    f32 progress;
+    u32 flags;
+};
+typedef char TalkBustUpWorkLayoutCheck[sizeof(TalkBustUpWork) == 0x30C &&
+    offsetof(TalkBustUpWork, scaleX) == 0x2FC && offsetof(TalkBustUpWork, flags) == 0x308 ? 1 : -1];
 }
 
-} /* extern "C" */
+extern "C" {
+extern TalkBustUpWork *g_btlTalkBustUp;
+extern const u8 DAT_005275c0[];
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+void sysMemClear(void *data, u32 size);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
+u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
+s32 FUN_002cd414(u32 handle);
+s32 FUN_00321544(u32 handle);
+void paramsClearPacket(Params002c312c *parameters);
+void paramsInit(Params002c312c *parameters, const void *first, u16 firstSize,
+    const void *second, u16 secondSize, const void *third, u16 thirdSize,
+    const void *fourth, u16 fourthSize, const void *fifth, u16 fifthSize);
+
+void btlTalkBustUpCreate(void)
+{
+    if (g_btlTalkBustUp == NULL) {
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\Talk\\btlTalkBustUp.cpp", 0x3D5);
+        g_btlTalkBustUp = static_cast<TalkBustUpWork *>(asdMemoryAllocTracked(
+            ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(TalkBustUpWork), 1));
+        TalkBustUpWork *work = g_btlTalkBustUp;
+        sysMemClear(work, sizeof(TalkBustUpWork));
+        work->state.textureNode = -1;
+        work->flags = 0;
+        work->scaleX = 1.0f;
+        work->scaleY = 1.0f;
+        work->progress = 0.0f;
+        work->state.state = 0;
+        work->state.unk2EC = 0;
+        work->state.job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TMD CALC"),
+            4, 0, 0, FUN_002cd414, NULL, 0);
+        taskCreateDraw(reinterpret_cast<const s8 *>("TalkBustUp DrawLeft"), 0x81, 0, 0,
+            FUN_00321544, NULL, 0, reinterpret_cast<void *>(work->state.job));
+        taskCreateDraw(reinterpret_cast<const s8 *>("TalkBustUp DrawRight"), 0xDD, 0, 0,
+            FUN_00321544, NULL, 0, reinterpret_cast<void *>(work->state.job));
+        Params002c312c *parameters = reinterpret_cast<Params002c312c *>(&work->state);
+        paramsClearPacket(parameters);
+        // The three preceding parameter streams immediately precede the final resource stream.
+        paramsInit(parameters, DAT_005275c0 - 0x90 - 0x144 - 0x60, 0x60,
+            DAT_005275c0 - 0x90 - 0x144, 0x144, DAT_005275c0 - 0x90, 0x90,
+            NULL, 0, DAT_005275c0, 0x9BC);
+    }
+}
+}

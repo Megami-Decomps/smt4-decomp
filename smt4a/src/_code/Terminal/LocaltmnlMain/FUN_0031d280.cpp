@@ -1,88 +1,70 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031d280` (_code @ 0x31d280, 0x17c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "Terminal/LocaltmnlMain.h"
+#include "AsdSDK/AsdDebug.h"
+#include <string.h>
 
 extern "C" {
+extern LocalTmnlWork *g_localTmnl;
+void *asdMemoryAllocTracked(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
+void messageSetMode(s32 mode);
+s32 FUN_00328838(u32 job);
+void localTmnlOnComplete(u32 job);
+s32 FUN_00357f9c(u32 job);
+s32 localTerminalDrawOverlays(u32 job);
+s32 FUN_0037a068(u32 job);
+u32 asdProcessCreateSimple(const char *name, s32 priority, s32 flags, s32 workSize,
+    s32 (*run)(u32), void (*destroy)(u32), u32 parent);
+u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 workSize,
+    s32 (*run)(u32), void (*destroy)(u32), void *work, u32 parent);
 
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int messageSetMode(...);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned char LAB_0031d444; /* 0x31d444 */
-extern unsigned char LAB_0031d454; /* 0x31d454 */
-extern unsigned char LAB_0031d468; /* 0x31d468 */
-extern int FUN_00328838(...); /* 0x328838 */
-extern unsigned char LAB_00357f9c; /* 0x357f9c */
-extern unsigned char LAB_0037a050; /* 0x37a050 */
-extern unsigned char LAB_0037a068; /* 0x37a068 */
-extern unsigned char LAB_003a3c40; /* 0x3a3c40 */
-extern unsigned int *g_localTmnl; /* 0x56fccc */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: messageSetMode. */
-
-
-void FUN_0031d280(unsigned int *param_1)
-
+void FUN_0031d280(const u32 *options)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x598,1);
-  g_localTmnl = puVar1;
-  *(unsigned char *)((int)puVar1 + 5) = 1;
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1[6] = 0;
-  puVar1[7] = 0;
-  puVar1[8] = 0;
-  puVar1[9] = 0;
-  puVar1[10] = 0;
-  puVar1[0xb] = 0;
-  puVar1[0xc] = 0;
-  puVar1[0xd] = 0;
-  puVar1[0xe] = 0;
-  puVar1[0x153] = 0;
-  *(unsigned char *)(puVar1 + 0x154) = 0;
-  puVar1[0x155] = 0;
-  puVar1[0x157] = 0;
-  puVar1[0x158] = 0;
-  puVar1[0x15a] = 0;
-  puVar1[0x159] = 0;
-  puVar1[0x15d] = 0;
-  puVar1[0x15c] = 0;
-  puVar1[0x160] = 0;
-  puVar1[0x15f] = 0;
-  puVar1[0x163] = 0;
-  puVar1[0x162] = 0;
-  messageSetMode(0);
-  puVar1[0xf] = 0;
-  *(unsigned char *)(puVar1 + 1) = 0;
-  if (param_1 != (unsigned int *)0x0) {
-    puVar1[0x158] = *param_1 & 0xff;
-    puVar1[2] = 0;
-    puVar1[3] = 0;
-  }
-  puVar2 = &LAB_0031d444;
-  asdProcessCreateSimple(&LAB_0031d444,4,0,0,FUN_00328838,&LAB_0037a050,0);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_0031d454,0x77,0,0,&LAB_00357f9c,0,0,puVar2);
-  taskCreateDraw(&LAB_0031d454,0xd3,0,0,&LAB_003a3c40,0,0,*puVar1);
-  taskCreateDraw(&LAB_0031d468,0xeb,0,0,&LAB_0037a068,0,0,*puVar1);
-  return;
+    // Apocalypse's allocation extends well beyond the shared terminal prefix.
+    struct TerminalStateView {
+        LocalTmnlWork prefix;
+        u32 phase, result;
+        u8 unk10[8];
+        u32 unk18[9];
+        u32 mode;
+        u8 unk40[0x50c];
+        u32 flags;
+        u8 ready;
+        u8 unk551[3];
+        u32 unk554, unk558, selected, option;
+        u32 unk564, unk568, unk56C;
+        struct { u32 current, target, resource; } transitions[3];
+        u32 unk594;
+    };
+    typedef char LayoutCheck[sizeof(TerminalStateView) == 0x598 &&
+        __INTADDR__(&((TerminalStateView *)0)->option) == 0x560 ? 1 : -1];
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\Terminal\\LocaltmnlMain.cpp", 211);
+    g_localTmnl = static_cast<LocalTmnlWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(TerminalStateView), 1));
+    TerminalStateView *state = reinterpret_cast<TerminalStateView *>(g_localTmnl);
+    state->prefix.enabled = 1;
+    state->phase = 0;
+    state->result = 0;
+    memset(state->unk18, 0, sizeof(state->unk18));
+    state->flags = 0;
+    state->ready = 0;
+    state->unk554 = 0;
+    state->selected = 0;
+    state->option = 0;
+    state->unk568 = 0;
+    state->unk564 = 0;
+    for (s32 index = 0; index < 3; ++index) {
+        state->transitions[index].target = 0;
+        state->transitions[index].current = 0;
+    }
+    messageSetMode(0);
+    state->mode = 0;
+    state->prefix.done = 0;
+    if (options != NULL) {
+        state->option = *options & 0xff;
+        state->phase = 0;
+        state->result = 0;
+    }
+    state->prefix.task = asdProcessCreateSimple("TMNL LO C", 4, 0, 0, FUN_00328838, localTmnlOnComplete, 0);
+    taskCreateDraw("TMNL LO UD", 0x77, 0, 0, FUN_00357f9c, NULL, NULL, state->prefix.task);
+    taskCreateDraw("TMNL LO UD", 0xd3, 0, 0, localTerminalDrawOverlays, NULL, NULL, state->prefix.task);
+    taskCreateDraw("TMNL LO DD", 0xeb, 0, 0, FUN_0037a068, NULL, NULL, state->prefix.task);
 }
-
-} /* extern "C" */
+}

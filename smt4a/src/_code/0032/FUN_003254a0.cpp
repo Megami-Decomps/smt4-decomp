@@ -5,7 +5,7 @@
 extern "C" {
 
 int dialogClose(int);
-int FUN_002392b8(...);
+int infoWinExpandAndSetText(...);
 int nameTableFind(int, int);
 int infoWindowShow(int, int, int);
 int infoWinSetTimer(unsigned int);
@@ -45,7 +45,7 @@ extern unsigned char DAT_005f187c; /* 0x5f187c */
 extern int infoWinHasValue(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dialogClose. */
-/* Supplied declaration required: FUN_002392b8. */
+/* Supplied declaration required: infoWinExpandAndSetText. */
 /* Supplied declaration required: nameTableFind. */
 /* Supplied declaration required: infoWindowShow. */
 extern int dataTableEntryNameById(void);
@@ -130,14 +130,14 @@ LAB_00325644:
             temp_v6 = gameFlagIsSetByBlockAt14f8(temp_v6);
             if ((temp_v6 == 0) && (temp_v6 = gameFlagIsSetByBlockAt14f8(temp_v7), temp_v6 == 0)) goto LAB_003256bc;
           }
-          FUN_002392b8(temp_v4);
+          infoWinExpandAndSetText(temp_v4);
           infoWindowShow(g_gameState,DAT_005f1600,1);
           infoWinSetTimer(0xffffffff);
           DAT_005f185f = '\x01';
         }
         else {
 LAB_003256bc:
-          FUN_002392b8(&LAB_00325978);
+          infoWinExpandAndSetText(&LAB_00325978);
           infoWindowShow(g_gameState,DAT_005f1600,1);
           infoWinSetTimer(0xffffffff);
           DAT_005f185f = '\x01';

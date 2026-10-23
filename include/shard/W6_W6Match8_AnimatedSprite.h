@@ -2,6 +2,7 @@
 #define SHARD_W6_W6MATCH8_ANIMATED_SPRITE_H
 
 #include "common.h"
+#include <stddef.h>
 
 struct UiAnimatedSprite {
     u8 unk00[0x5e];
@@ -53,8 +54,21 @@ struct SpritePlaybackView {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ s32 sequenceValue;
     /* 0x08 */ u32 sequenceSentinel;
-    /* 0x0C */ u8 unk0c[0x14];
-    /* 0x20 */ u32 frameValue;
+    union {
+        /* 0x0C */ u8 unk0c[0x14];
+        struct {
+            /* 0x0C */ s32 displacement;
+            /* 0x10 */ u8 unk10[0x10];
+        } transition;
+        struct {
+            /* 0x0C */ u8 unk0C[4];
+            /* 0x10 */ s32 displacement;
+        } verticalTransition;
+    };
+    union {
+        /* 0x20 */ u32 frameValue;
+        /* 0x20 */ f32 alpha;
+    };
     /* 0x24 */ u32 colors[3];
     /* 0x30 */ u8 unk30[0x18];
     /* 0x48 */ SpriteAnimationResource *resource;
@@ -82,13 +96,26 @@ struct SpritePlaybackView {
     /* 0x80 */ u16 animationTime;
     /* 0x82 */ u16 animationStep;
     /* 0x84 */ u8 running;
-    /* 0x85 */ u8 unk85;
+    union {
+        /* 0x85 */ u8 unk85;
+        /* 0x85 */ u8 active;
+    };
     /* 0x86 */ u8 completed[4];
     /* 0x8A */ u8 finished;
     /* 0x8B */ u8 unk8b;
 };
 typedef char SpriteAnimationCommandSizeCheck[sizeof(SpriteAnimationCommand) == 0x1C ? 1 : -1];
 typedef char SpritePlaybackViewSizeCheck[sizeof(SpritePlaybackView) == 0x8C ? 1 : -1];
+typedef char SpritePlaybackTransitionOffsetsCheck[
+    offsetof(SpritePlaybackView, transition.displacement) == 0xC &&
+    offsetof(SpritePlaybackView, positionFrame) == 0x52 &&
+    offsetof(SpritePlaybackView, active) == 0x85 &&
+    offsetof(SpritePlaybackView, completed) == 0x86 &&
+    offsetof(SpritePlaybackView, finished) == 0x8A ? 1 : -1];
+typedef char SpritePlaybackVerticalTransitionOffsetCheck[
+    offsetof(SpritePlaybackView, verticalTransition.displacement) == 0x10 ? 1 : -1];
+typedef char SpritePlaybackAlphaOffsetCheck[
+    offsetof(SpritePlaybackView, alpha) == 0x20 ? 1 : -1];
 
 /* Its integer view makes this value use the core-register/stack aggregate ABI. */
 union SpriteDrawVector2 {

@@ -21,7 +21,7 @@ int FUN_001a1ee0(void);
 int FUN_001f3e80(...);
 int fadeObjectResetIfActive(...);
 int efctCallRoutineWithSpeedOverride(...);
-int FUN_0035d8f0(...);
+int devilDispatchTextureResource(...);
 int devilIsTextureLoaded(...);
 int FUN_003c2690(...);
 int FUN_003eb200(void);
@@ -143,7 +143,7 @@ extern int valueAtMostFifthOfTotal(int, int);
 /* Supplied declaration required: efctCallRoutineWithSpeedOverride. */
 /* Supplied declaration required: FUN_0034ea70. */
 /* Supplied declaration required: FUN_0035ae58. */
-/* Supplied declaration required: FUN_0035d8f0. */
+/* Supplied declaration required: devilDispatchTextureResource. */
 /* Supplied declaration required: FUN_003a6404. */
 /* Supplied declaration required: devilIsTextureLoaded. */
 /* Supplied declaration required: FUN_003c2690. */
@@ -716,7 +716,7 @@ LAB_002afb00:
       temp_v14 = (int)(short)*(unsigned int *)(temp_v7 + 0x4bb0);
       devilIsTextureLoaded(temp_v14,1);
       if (temp_v14 != 0) {
-        FUN_0035d8f0((int)(short)*(unsigned int *)(temp_v7 + 0x4bb0),
+        devilDispatchTextureResource((int)(short)*(unsigned int *)(temp_v7 + 0x4bb0),
                      temp_v8 + temp_v6 + (int)*(short *)(temp_v9 + 8),
                      (int)*(short *)(temp_v9 + 10) + temp_v5 + temp_v13,0x15,1);
       }
@@ -1188,7 +1188,7 @@ LAB_002afb00:
             }
             temp_v11 = (unsigned int)*(unsigned short *)(temp_v4 + 0x62);
             FUN_00184310();
-            FUN_0035d8f0((int)(short)(*(short *)(temp_v11 + 0x9c) + 1),*(short *)(temp_v5 + 8) + temp_v16,
+            devilDispatchTextureResource((int)(short)(*(short *)(temp_v11 + 0x9c) + 1),*(short *)(temp_v5 + 8) + temp_v16,
                          (int)*(short *)(temp_v5 + 10),0x54,0);
             temp_v3 = g_renderCtx;
             piVar6 = (int *)(g_renderCtx + 0x1318);

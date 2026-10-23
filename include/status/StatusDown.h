@@ -2,6 +2,8 @@
 #ifndef STATUS_STATUSDOWN_H
 #define STATUS_STATUSDOWN_H
 #include "common.h"
+#include "ui/GridNavigation.h"
+struct AsdText;
 
 typedef struct StatusDownState {
     /* 0x0000 */ u32 job;
@@ -25,7 +27,19 @@ typedef struct StatusDownState {
     /* 0x0482 */ u8 unk482[0x52];
     /* 0x04D4 */ u8 list[0x68];
     /* 0x053C */ u32 unk53C;
-    /* 0x0540 */ u8 unk540[0x1D60];
+    union {
+        /* 0x0540 */ u8 unk540[0x1D60];
+        struct {
+            /* 0x0540 */ u8 prefix[0x8F0];
+            /* 0x0E30 */ u16 entries[0x500][2];
+            /* 0x2230 */ s16 count;
+            /* 0x2232 */ u16 ownedCount;
+            /* 0x2234 */ s16 column;
+            /* 0x2236 */ s16 row;
+            /* 0x2238 */ u32 unk2238;
+            /* 0x223C */ GridNavigation navigation;
+        } inventory;
+    };
     /* 0x22A0 */ u32 memorySlot;
     /* 0x22A4 */ u8 unk22A4[0xED];
     /* 0x2391 */ u8 unk2391;
@@ -78,6 +92,12 @@ typedef struct StatusDownStateA {
             /* 0x2350 */ u32 unk2350;
             u8 controller[0x148]; /* 0x2354 */
         } inventory;
+        struct {
+            u8 prefix[0x1D58];
+            /* 0x23B8 */ AsdText *text;
+            u8 padding23BC[4];
+            /* 0x23C0 */ GridNavigation navigation;
+        } caption;
     };
     /* 0x249c */ u32 value249c;
     /* 0x24a0 */ s8 state;
@@ -97,5 +117,16 @@ typedef struct StatusDownStateA {
 /* Retail 32-bit layout invariants. */
 typedef char StatusDownStateSizeCheck[sizeof(StatusDownState) == 0x2394 ? 1 : -1];
 typedef char StatusDownStateASizeCheck[sizeof(StatusDownStateA) == 0x259C ? 1 : -1];
+typedef char StatusDownStateACaptionOffsetsCheck[
+    offsetof(StatusDownStateA, caption.text) == 0x23B8 &&
+    offsetof(StatusDownStateA, caption.navigation) == 0x23C0 &&
+    sizeof(StatusDownStateA) == 0x259C ? 1 : -1];
+typedef char StatusDownInventoryOffsetsCheck[
+    offsetof(StatusDownState, inventory.entries) == 0xE30 &&
+    offsetof(StatusDownState, inventory.count) == 0x2230 &&
+    offsetof(StatusDownState, inventory.column) == 0x2234 &&
+    offsetof(StatusDownState, inventory.row) == 0x2236 &&
+    offsetof(StatusDownState, inventory.navigation) == 0x223C &&
+    sizeof(StatusDownState) == 0x2394 ? 1 : -1];
 
 #endif

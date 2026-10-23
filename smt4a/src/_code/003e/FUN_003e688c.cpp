@@ -1,84 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e688c` (_code @ 0x3e688c, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The shared transition-to-cleanup block is placed after the load phase rather than the run phase. */
+#include "battle/btlAIScript.h"
+#include "script/scrScriptProcess.h"
 
+struct BtlMainStateA;
 extern "C" {
+BtlMainStateA *btlGetMainState(void);
+void asdMemFree(void *data);
+void scrScriptProcessDestroy(void *process);
+ScriptRunState *FUN_00275bc8(void *data, s32 mode);
+void scrScriptProcessStartEntry(void *process, s32 entry);
+void asdLoadFileAsyncSimple(const char *path, void **data, s32 mode);
+void aocQueueType1d(BtlAiScriptAocSystem *aoc, s32 id, void **data, const char *path);
+s32 scrRunOpcodesStub(void *process);
+s32 FUN_003efb18(BtlMainStateA *battle);
+extern BtlAiScriptAocSystem *g_aocSystem;
 
-int btlGetMainState(void);
-int asdMemFree(void);
-int scrScriptProcessDestroy(void);
-int FUN_00275bc8(int, int);
-int scrScriptProcessStartEntry(int, int);
-int asdLoadFileAsyncSimple(int *, int *, int);
-int aocQueueType1d(int, int, int *, int *);
-
-extern int g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-extern int scrRunOpcodesStub(int);
-/* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-extern int FUN_003efb18(void);
-/* Supplied declaration required: aocQueueType1d. */
-
-
-unsigned int FUN_003e688c(int *param_1)
-
+/* Loads and executes a battle AI script, then releases both its process and file data. */
+s32 FUN_003e688c(BtlAiScript *runner)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  
-  switch(param_1[3]) {
-  case 1:
-    if (*(int *)(g_aocSystem + 0x460) != -1) {
-      aocQueueType1d(g_aocSystem,*(int *)(g_aocSystem + 0x460),param_1,param_1 + 4);
-      *(unsigned int *)(g_aocSystem + 0x460) = 0xffffffff;
+    switch (runner->unk0C) {
+    case 0: // Idle until a script is requested.
+        return 0;
+    case 1:
+        if (g_aocSystem->aiDemonId != -1) {
+            aocQueueType1d(g_aocSystem, g_aocSystem->aiDemonId, &runner->data, runner->path);
+            g_aocSystem->aiDemonId = -1;
+        } else {
+            asdLoadFileAsyncSimple(runner->path, &runner->data, 0);
+        }
+        if (FUN_003efb18(btlGetMainState()) == 0) {
+            runner->unk0C = 2;
+        } else {
+            runner->unk0C = 4;
+        }
+        break;
+    case 2:
+        if (runner->data == NULL) {
+            return 0;
+        }
+        runner->process = FUN_00275bc8(runner->data, 0);
+        ((ScriptRunState *)runner->process)->mode = 1;
+        scrScriptProcessStartEntry(runner->process, 0);
+        runner->unk0C = 3;
+        break;
+    case 3:
+        if (scrRunOpcodesStub(runner->process) != 2) {
+            return 0;
+        }
+        runner->unk0C = 4;
+        break;
+    case 4:
+        if (runner->process != NULL) {
+            scrScriptProcessDestroy(runner->process);
+            runner->process = NULL;
+        }
+        if (runner->data != NULL) {
+            asdMemFree(runner->data);
+            runner->data = NULL;
+        }
+        break;
     }
-    else {
-      asdLoadFileAsyncSimple(param_1 + 4,param_1,0);
-    }
-    btlGetMainState();
-    temp_v0 = FUN_003efb18();
-    if (temp_v0 == 0) {
-      temp_v0 = 2;
-      param_1[3] = temp_v0;
-      break;
-    }
-    param_1[3] = 4;
-    break;
-  case 2:
-    temp_v0 = *param_1;
-    if (temp_v0 == 0) {
-      return 0;
-    }
-    FUN_00275bc8(temp_v0,0);
-    param_1[1] = temp_v0;
-    *(unsigned int *)(temp_v0 + 0x108) = 1;
-    scrScriptProcessStartEntry(param_1[1],0);
-    temp_v0 = 3;
-    param_1[3] = temp_v0;
-    break;
-  case 3:
-    temp_v0 = scrRunOpcodesStub(param_1[1]);
-    if (temp_v0 != 2) {
-      return 0;
-    }
-    param_1[3] = 4;
-    break;
-  case 4:
-    if (param_1[1] != 0) {
-      scrScriptProcessDestroy();
-      param_1[1] = 0;
-    }
-    if (*param_1 != 0) {
-      asdMemFree();
-      *param_1 = 0;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -9,7 +9,7 @@ int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_0035ae58(int, int, int, int, int);
-int FUN_0035d8f0(int, int, int, int, int);
+int devilDispatchTextureResource(int, int, int, int, int);
 int devilIsTextureLoaded(int, int);
 int VectorSignedToFloat(int, int);
 
@@ -35,7 +35,7 @@ extern int vec2GetXInt(void);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0035ae58. */
-/* Supplied declaration required: FUN_0035d8f0. */
+/* Supplied declaration required: devilDispatchTextureResource. */
 /* Supplied declaration required: devilIsTextureLoaded. */
 
 
@@ -116,7 +116,7 @@ void FUN_0034ea70(int param_1)
   }
   FUN_0035ae58(*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v5,
                (int)**(short **)(temp_v3 + 0xc),(*(short **)(temp_v3 + 0xc))[1] + temp_v5,1);
-  FUN_0035d8f0((int)*(short *)(param_1 + 0x4b14),*(short *)(temp_v1 + 8) + temp_v6,
+  devilDispatchTextureResource((int)*(short *)(param_1 + 0x4b14),*(short *)(temp_v1 + 8) + temp_v6,
                *(short *)(temp_v1 + 10) + temp_v5,0x15,1);
   temp_v1 = g_renderCtx;
   piVar8 = (int *)(g_renderCtx + 0x1318);

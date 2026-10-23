@@ -17,7 +17,7 @@ int btlUiIdsRefresh(unsigned int);
 int FUN_004c1114(...);
 int btlSlotSetStoreValue(...);
 int FUN_004c571c(...);
-int FUN_004c6cb0(int, int);
+int btlSelectSourceTriggeredSkill(int, int);
 int hasFlag80Or1000(...);
 int FUN_004fcffc(...);
 
@@ -87,7 +87,7 @@ extern int FUN_003e4978(void);
 /* Supplied declaration required: btlSlotSetStoreValue. */
 extern unsigned int FUN_004c53fc(unsigned int);
 /* Supplied declaration required: FUN_004c571c. */
-/* Supplied declaration required: FUN_004c6cb0. */
+/* Supplied declaration required: btlSelectSourceTriggeredSkill. */
 /* Supplied declaration required: hasFlag80Or1000. */
 extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004fbeac. */
@@ -172,7 +172,7 @@ void FUN_003984ac(int param_1)
         if (((!temp_v8 || temp_v0 != 0) || ((temp_v3 & DAT_00573ae0) != 0 || (temp_v5 & DAT_00573ae4) != 0)
             ) || (temp_v6 = param_1, FUN_003eaf20(), temp_v6 == 0)) goto LAB_003987dc;
         temp_v6 = (int)*(short *)(temp_v6 + 8);
-        FUN_004c6cb0(temp_v6,1);
+        btlSelectSourceTriggeredSkill(temp_v6,1);
         if ((temp_v6 == 0) || (temp_v7 = temp_v6, dataTable04FindById(), temp_v7 == 0)) goto LAB_003987dc;
         temp_v3 = *(unsigned int *)(param_1 + 0x45a4) | DAT_00573ae4;
         *puVar6 = *puVar6 | DAT_00573ae0;

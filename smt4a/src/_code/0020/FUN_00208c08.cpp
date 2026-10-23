@@ -31,7 +31,7 @@ int FUN_00163aa4(...);
 int dataTable00FindById(void);
 int gameStateChange(...);
 int FUN_00240170(void);
-int FUN_002a6fb8(int);
+int statusCameraSelectPreset(int);
 int aocDataBlockResolveEntries(void);
 int FUN_0031416c(...);
 int FUN_00316580(...);
@@ -91,7 +91,7 @@ extern unsigned int dataTableFileGetTable(int, unsigned int);
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_00240170. */
 extern int FUN_0026264c(unsigned short);
-/* Supplied declaration required: FUN_002a6fb8. */
+/* Supplied declaration required: statusCameraSelectPreset. */
 /* Supplied declaration required: aocDataBlockResolveEntries. */
 extern int statusDownGetFlag(void);
 extern int FUN_002c7cb4(void);
@@ -292,7 +292,7 @@ unsigned int FUN_00208c08(void)
     }
     else {
       *(unsigned int *)(temp_v2 + 0x2054) = 0;
-      FUN_002a6fb8(0);
+      statusCameraSelectPreset(0);
       *(unsigned char *)(temp_v2 + 0x2058) = 0;
       FUN_00240170();
       temp_v3 = lmapSceneGetScript();

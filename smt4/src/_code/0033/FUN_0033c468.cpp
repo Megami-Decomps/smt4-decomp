@@ -1,90 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033c468` (_code @ 0x33c468, 0x154 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: ailment-count accumulator registers and equivalent count/blink threshold comparisons differ. */
+#include "ui/SlotPlacement.h"
+#include "shard/PadState.h"
+#include "shard/W7_W7Match2_PartyDamage.h"
+
+/* The cycle fields occupy unaligned-union padding, and the blink fields extend the shared prefix. */
+struct AnimatedSlotPlacementView {
+    u32 state;
+    s32 frame;
+    s32 stepX, stepY;
+    s32 currentX, currentY;
+    s32 cycleFrames, cycleIndex;
+    u8 unk20[0xc];
+    s32 x, y;
+    s32 unitIndex;
+    u8 unk38[0x10];
+    u8 blinking;
+    u8 unk49[7];
+    s32 blinkFrames;
+};
 
 extern "C" {
+PadState *gameGetPlayerData(void);
+PartyDamageUnitIV *gameGetUnitRecord(s32 index);
+void slotPlacementGetPosition(const SlotPlacement *placement, s32 *x, s32 *y);
 
-int slotPlacementGetPosition(int *, int *, int [2]);
-int __aeabi_idivmod(int);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-/* Supplied declaration required: slotPlacementGetPosition. */
-extern int gameGetUnitRecord(void);
-extern int gameGetPlayerData(void);
-/* Supplied declaration required: __aeabi_idivmod. */
-
-
-void FUN_0033c468(int *param_1)
-
+void FUN_0033c468(AnimatedSlotPlacementView *placement)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7 [2];
-  
-  if (*param_1 != 0) {
-    if (*param_1 == 1) {
-      temp_v2 = param_1[4];
-      temp_v4 = param_1[5];
-      param_1[4] = temp_v2 + param_1[2];
-      param_1[5] = temp_v4 + param_1[3];
-      param_1[0xb] = (temp_v2 + param_1[2]) >> 0xc;
-      param_1[0xc] = (temp_v4 + param_1[3]) >> 0xc;
-      if (param_1[1] >= 8) {
-        temp_v6 = 0;
-        temp_v7[0] = 0;
-        slotPlacementGetPosition(param_1,&temp_v6,temp_v7);
-        param_1[0xb] = temp_v6;
-        param_1[0xc] = temp_v7[0];
-        *param_1 = 0;
-      }
+    switch (placement->state) {
+    case 0: {
+        u16 ailments;
+        if (placement->unitIndex < 0)
+            ailments = gameGetPlayerData()->unk72;
+        else
+            ailments = gameGetUnitRecord(placement->unitIndex)->ailments;
+        s32 count = 0;
+        for (s32 bit = 1; bit <= 10; ++bit)
+            if (ailments & (1 << bit))
+                ++count;
+        if (count >= 2 && ++placement->cycleFrames >= 24) {
+            placement->cycleIndex = (placement->cycleIndex + 1) % count;
+            placement->cycleFrames = 0;
+        }
+        break;
     }
-  }
-  else {
-    temp_v2 = 0;
-    if (param_1[0xd] < 0) {
-      temp_v4 = gameGetPlayerData();
-      temp_v0 = *(unsigned short *)(temp_v4 + 0x72);
+    case 1:
+        placement->currentX += placement->stepX;
+        placement->currentY += placement->stepY;
+        placement->x = placement->currentX >> 12;
+        placement->y = placement->currentY >> 12;
+        if (placement->frame >= 8) {
+            s32 x = 0, y = 0;
+            slotPlacementGetPosition((const SlotPlacement *)placement, &x, &y);
+            placement->x = x;
+            placement->y = y;
+            placement->state = 0;
+        }
+        break;
     }
-    else {
-      temp_v4 = gameGetUnitRecord();
-      temp_v0 = *(unsigned short *)(temp_v4 + 0x44);
-    }
-    temp_v1 = 1;
-    temp_v4 = 0;
-    temp_v5 = 5;
-    do {
-      if (((unsigned int)temp_v0 & (1 << (temp_v1 & 0xff))) != 0) {
-        temp_v2 = temp_v2 + 1;
-      }
-      if (((unsigned int)temp_v0 & (1 << ((temp_v1 + 1) & 0xff))) != 0) {
-        temp_v4 = temp_v4 + 1;
-      }
-      temp_v5 = temp_v5 - 1;
-      temp_v1 = temp_v1 + 2;
-    } while (temp_v5 != 0);
-    if ((temp_v2 + temp_v4 >= 2) && (temp_v2 = param_1[6], param_1[6] = temp_v2 + 1, temp_v2 + 1 >= 0x18)) {
-      __aeabi_idivmod(param_1[7] + 1);
-      param_1[7] = temp_v3;
-      param_1[6] = 0;
-    }
-  }
-  if (((char)param_1[0x12] != '\0') &&
-     (temp_v2 = param_1[0x14], param_1[0x14] = temp_v2 + 1, temp_v2 + 1 >= 0xe)) {
-    *(unsigned char *)(param_1 + 0x12) = 0;
-  }
-  param_1[1] = param_1[1] + 1;
-  return;
+    if (placement->blinking && ++placement->blinkFrames >= 14)
+        placement->blinking = 0;
+    ++placement->frame;
 }
-
-} /* extern "C" */
+}

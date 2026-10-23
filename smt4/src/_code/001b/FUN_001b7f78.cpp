@@ -100,7 +100,7 @@ int FUN_00273840(...);
 int saveSetNavigationPosition(...);
 int FUN_0027fc14(...);
 int FUN_0027fca0(...);
-int FUN_002893ec(...);
+int mapConsumePendingJumpRequest(...);
 int gameJumpRequestClear(void);
 int FUN_002895a8(...);
 int FUN_00289608(...);
@@ -132,7 +132,7 @@ int mapEnemyHasAvailableSecondaryState(void);
 int FUN_0027581c(void);
 int FUN_002758d8(void);
 int FUN_002759bc(void);
-int FUN_00275a30(void);
+int mapDepartSyncModelVisibility(void);
 int FUN_00275bc8(void);
 int FUN_00275be8(...);
 int frameTexResetFlags(void);
@@ -207,7 +207,7 @@ int FUN_00276a3c(void);
 int FUN_00277b5c(...);
 int FUN_00277bdc(void);
 int FUN_00277d2c(...);
-int FUN_0027accc(void);
+int mapGimicUpdateVisualBounds(void);
 int FUN_0027ae90(void);
 int FUN_0027b1b4(void);
 int mapRangeEntriesRun(void);
@@ -252,7 +252,7 @@ int FUN_002d3e88(...);
 int FUN_00342078(...);
 
 int FUN_0010bb84(int, int);
-int FUN_001fb3a0(void);
+int questClassifyCompletionNotification(void);
 int FUN_0021bc04(unsigned int, unsigned int);
 int actorApplyAlpha(void);
 int dataTableGetRecord23(...);
@@ -467,7 +467,7 @@ extern int FUN_001e2760(unsigned int);
 /* Supplied declaration required: mapGimicMarkModelsDestroy. */
 /* Supplied declaration required: mapRangeReleaseModels. */
 /* Supplied declaration required: lmapSceneShutdownScript. */
-/* Supplied declaration required: FUN_001fb3a0. */
+/* Supplied declaration required: questClassifyCompletionNotification. */
 extern int gameMapHasActiveSlotId(int);
 /* Supplied declaration required: FUN_001fdebc. */
 /* Supplied declaration required: FUN_00208160. */
@@ -542,7 +542,7 @@ extern char *campGetState(void);
 /* Supplied declaration required: FUN_0027581c. */
 /* Supplied declaration required: FUN_002758d8. */
 /* Supplied declaration required: FUN_002759bc. */
-/* Supplied declaration required: FUN_00275a30. */
+/* Supplied declaration required: mapDepartSyncModelVisibility. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00275be8. */
 /* Supplied declaration required: FUN_00275dc4. */
@@ -573,7 +573,7 @@ extern int FUN_00276348(int);
 /* Supplied declaration required: FUN_00277b5c. */
 /* Supplied declaration required: FUN_00277bdc. */
 /* Supplied declaration required: FUN_00277d2c. */
-/* Supplied declaration required: FUN_0027accc. */
+/* Supplied declaration required: mapGimicUpdateVisualBounds. */
 /* Supplied declaration required: FUN_0027ae90. */
 /* Supplied declaration required: FUN_0027b1b4. */
 /* Supplied declaration required: mapRangeEntriesRun. */
@@ -627,7 +627,7 @@ extern int FUN_00287894(void);
 extern int dataTable2fSub1GetRecord(int);
 /* Supplied declaration required: FUN_002878e4. */
 /* Supplied declaration required: FUN_00287c34. */
-/* Supplied declaration required: FUN_002893ec. */
+/* Supplied declaration required: mapConsumePendingJumpRequest. */
 /* Supplied declaration required: gameJumpRequestClear. */
 /* Supplied declaration required: FUN_00289574. */
 /* Supplied declaration required: FUN_002895a8. */
@@ -851,7 +851,7 @@ unsigned int FUN_001b7f78(void)
         }
         temp_v10 = FUN_0027db24(0);
         temp_v19 = 1;
-        FUN_001fb3a0();
+        questClassifyCompletionNotification();
         if (temp_v10 == 3) {
           *(unsigned char *)((int)puVar14 + 0x45) = 1;
         }
@@ -1399,7 +1399,7 @@ LAB_001b8e80:
         mapRangeEntriesRun();
         FUN_0027b1b4();
         FUN_0027ae90();
-        FUN_0027accc();
+        mapGimicUpdateVisualBounds();
         FUN_00277d2c(puVar14[0xb],puVar14[0xc]);
         DAT_0049f93d = 1;
       }
@@ -2969,7 +2969,7 @@ LAB_001bb1d4:
     if (puVar14[10] == 0xb) {
       DAT_0049f93e = 1;
       *(unsigned char *)(g_mapDepartWork + 10) = 0;
-      FUN_00275a30();
+      mapDepartSyncModelVisibility();
       frameTexResetFlags();
     }
     temp_v9 = puVar14[10];
@@ -3016,7 +3016,7 @@ LAB_001bb1d4:
     FUN_00274fac();
     FUN_00274798();
     *(unsigned char *)(g_mapDepartWork + 10) = 1;
-    FUN_00275a30();
+    mapDepartSyncModelVisibility();
     FUN_0029ae60(*(unsigned int *)(g_lmapScene + 0x194));
     FUN_00273fc0();
     mapObjectVisibilityRestore();
@@ -3211,7 +3211,7 @@ LAB_001bbd00:
     temp_v9 = mapIfHasSelection();
     if (temp_v9 == 0) {
       temp_v9 = g_aocMain + 0xa8;
-      FUN_002893ec(temp_v9,0);
+      mapConsumePendingJumpRequest(temp_v9,0);
       if (temp_v9 != 0) {
         puVar14[9] = 0x6f;
         puVar14[10] = 0;
@@ -3249,7 +3249,7 @@ LAB_001bbd00:
     break;
   case 0x1f:
     temp_v9 = g_aocMain + 0xa8;
-    FUN_002893ec(temp_v9,0);
+    mapConsumePendingJumpRequest(temp_v9,0);
     goto joined_r0x001bfcb4;
   case 0x20:
     mapPerFrameUpdate();
@@ -5328,7 +5328,7 @@ LAB_001bf6c8:
         mapRangeEntriesRun();
         FUN_0027b1b4();
         FUN_0027ae90();
-        FUN_0027accc();
+        mapGimicUpdateVisualBounds();
         FUN_00277d2c(puVar14[0xb],puVar14[0xc]);
         DAT_0049f93d = 1;
       }

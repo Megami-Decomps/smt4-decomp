@@ -1,90 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037116c` (_code @ 0x37116c, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gamedata/SaveLoadProcessState.h"
 
 extern "C" {
+SaveLoadProcessWork24 *jobGetWork(u32 job);
+s32 saveLoadGetValue(void);
+void saveLoadSetValue(s32 value);
+void FUN_00268250(s32 mode, u32 resource, s32 first, s32 second, s32 third);
+s32 FUN_002a60f8(void);
+void FUN_002bf464(void);
+void helpTexturesRelease(void);
+void campButtonHelpAcquire(void);
+void campCommonBgRelease(void);
+void campButtonHelpRelease(void);
+void messageMainSetFlag(s32 enabled);
 
-int saveLoadSetValue(int);
-int FUN_00268250(int, unsigned int, int, int, int);
-int FUN_002bf464(void);
-int helpTexturesRelease(void);
-int campButtonHelpAcquire(void);
-int campCommonBgRelease(void);
-int campButtonHelpRelease(void);
-int messageMainSetFlag(int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned char DAT_0057f6be; /* 0x57f6be */
-extern unsigned short DAT_0057f6c2; /* 0x57f6c2 */
-extern int DAT_0057f6c4; /* 0x57f6c4 */
-
-extern int jobGetWork(void);
-extern int saveLoadGetValue(void);
-/* Supplied declaration required: saveLoadSetValue. */
-/* Supplied declaration required: FUN_00268250. */
-extern int FUN_002a60f8(void);
-/* Supplied declaration required: FUN_002bf464. */
-/* Supplied declaration required: helpTexturesRelease. */
-/* Supplied declaration required: campButtonHelpAcquire. */
-/* Supplied declaration required: campCommonBgRelease. */
-/* Supplied declaration required: campButtonHelpRelease. */
-/* Supplied declaration required: messageMainSetFlag. */
-
-
-unsigned int FUN_0037116c(void)
-
+// Run the save/load overlay, animate its waiting indicator, then release shared help resources.
+s32 FUN_0037116c(u32 job)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = jobGetWork();
-  temp_v1 = *(int *)(temp_v0 + 4);
-  if (temp_v1 != 0xc) {
-    if (temp_v1 != 0xd) {
-      if (temp_v1 != 0xe) {
-        return 0;
-      }
-      temp_v0 = saveLoadGetValue();
-      if (temp_v0 != 0) {
-        campCommonBgRelease();
-        saveLoadSetValue(0);
-      }
-      messageMainSetFlag(1);
-      campButtonHelpRelease();
-      helpTexturesRelease();
-      DAT_0057f6be = 1;
-      return 0xffffffff;
+    // The indicator fields lie beyond the shared SaveLoadProcessA prefix.
+    struct SaveLoadAnimationView {
+        u8 unk00[2];
+        u8 done; // 0x02
+        u8 unk03[3];
+        u16 frame; // 0x06
+        s32 timer; // 0x08
+    };
+    extern SaveLoadAnimationView g_saveLoadProcess;
+    SaveLoadProcessWork24 *work = jobGetWork(job);
+    switch (work->state) {
+    case 12:
+        FUN_002bf464();
+        campButtonHelpAcquire();
+        messageMainSetFlag(0);
+        FUN_00268250(0, work->unk14, 0, 0, 0);
+        work->state = 13;
+        break;
+    case 13:
+        if (FUN_002a60f8() == 1) {
+            work->state = 14;
+        } else {
+            if (++g_saveLoadProcess.timer < 8)
+                return 0;
+            if (++g_saveLoadProcess.frame >= 3)
+                g_saveLoadProcess.frame = 0;
+            g_saveLoadProcess.timer = 0;
+        }
+        break;
+    case 14:
+        if (saveLoadGetValue()) {
+            campCommonBgRelease();
+            saveLoadSetValue(0);
+        }
+        messageMainSetFlag(1);
+        campButtonHelpRelease();
+        helpTexturesRelease();
+        g_saveLoadProcess.done = 1;
+        return -1;
     }
-    temp_v1 = FUN_002a60f8();
-    if (temp_v1 != 1) {
-      if (DAT_0057f6c4 + 1 < 8) {
-        DAT_0057f6c4 = DAT_0057f6c4 + 1;
-        return 0;
-      }
-      DAT_0057f6c2 = DAT_0057f6c2 + 1;
-      if (DAT_0057f6c2 >= 3) {
-        DAT_0057f6c2 = 0;
-      }
-      DAT_0057f6c4 = 0;
-      return 0;
-    }
-    temp_v2 = 0xe;
-  }
-  else {
-    FUN_002bf464();
-    campButtonHelpAcquire();
-    messageMainSetFlag(0);
-    FUN_00268250(0,*(unsigned int *)(temp_v0 + 0x14),0,0,0);
-    temp_v2 = 0xd;
-  }
-  *(unsigned int *)(temp_v0 + 4) = temp_v2;
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -12,7 +12,7 @@ int ifTouchRegionRemove(...);
 int uiSpriteBankApplyPreset(...);
 int scrScriptProcessStartEntry(...);
 int asdFsIsSdCardDetected(...);
-int FUN_00474734(...);
+int windowCreateStatusOperation(...);
 int FUN_00476e58(...);
 int FUN_00477d10(...);
 int jobFlagsWorkStop(...);
@@ -51,7 +51,7 @@ extern int messageGetChoiceResult(void);
 extern int FUN_002e1a18(unsigned int);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: asdFsIsSdCardDetected. */
-/* Supplied declaration required: FUN_00474734. */
+/* Supplied declaration required: windowCreateStatusOperation. */
 /* Supplied declaration required: FUN_00476e58. */
 /* Supplied declaration required: FUN_00477d10. */
 /* Supplied declaration required: jobFlagsWorkStop. */
@@ -169,7 +169,7 @@ void FUN_0047b78c(unsigned int *param_1)
         asdFsIsSdCardDetected();
         if (temp_v0 != 0) {
           puVar2 = param_1 + 0x83;
-          FUN_00474734(puVar2,0);
+          windowCreateStatusOperation(puVar2,0);
           param_1[2] = 1;
           param_1[0x82] = (unsigned int)puVar2;
           FUN_0047bcdc(param_1,0);

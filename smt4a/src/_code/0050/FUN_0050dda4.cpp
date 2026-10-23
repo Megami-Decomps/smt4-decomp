@@ -1,86 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0050dda4` (_code @ 0x50dda4, 0x170 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: early saved FP register, polynomial scheduling and constant-folded invalid result differ; strict FP mode suspected. */
+#include "common.h"
 
 extern "C" {
+f32 FUN_001c4370(s32* quadrant, f32 value);
+s32 __softfp ARM_fpclassifyf(f32 value);
+void FUN_001c4360(void);
+void __set_errno(s32 error);
 
-int __set_errno(int);
-int FUN_001c4360(void);
-int FUN_001c4370(unsigned int [4]);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+f32 FUN_0050dda4(f32 value)
 {
-    return value < (float)0 ? -value : value;
+    union { f32 value; u32 bits; } representation;
+    representation.value = value;
+    s32 quadrant;
+    if ((representation.bits << 1) < 0x7E921FB6) {
+        quadrant = (representation.bits << 1) < 0x73000000 ? -1 : 0;
+    } else if ((representation.bits & 0x7FFFFFFF) < 0x46490E49) {
+        f32 multiple = value * 0.6366197466850281f;
+        if (representation.bits & 0x80000000) {
+            multiple = (multiple - 8388608.0f) + 8388608.0f;
+        } else {
+            multiple = (multiple + 8388608.0f) - 8388608.0f;
+        }
+        quadrant = static_cast<s32>(multiple) & 3;
+        value -= multiple * 1.5703125f;
+        value -= multiple * 0.0004837512969970703f;
+        value -= multiple * 7.549533620476723e-8f;
+        value -= multiple * 2.5633440682570896e-12f;
+    } else {
+        value = FUN_001c4370(&quadrant, value);
+    }
+    if (quadrant < 0) {
+        representation.value = value;
+        u32 magnitude = representation.bits << 1;
+        if (magnitude < 0xFF000000) {
+            if (ARM_fpclassifyf(value) == 4) {
+                FUN_001c4360();
+            }
+            return value;
+        }
+        if (magnitude > 0xFF000000) {
+            return value + value;
+        }
+        __set_errno(1);
+        return 0.0f / 0.0f;
+    }
+    f32 square = value * value;
+    f32 polynomial = 0.0020511774346232414f + square * 0.009943420998752117f;
+    polynomial = 0.025203008204698563f + square * polynomial;
+    polynomial = 0.05315177142620087f + square * polynomial;
+    polynomial = 0.1334274560213089f + square * polynomial;
+    polynomial = 0.3333294689655304f + square * polynomial;
+    f32 tangent = value + value * (polynomial * square);
+    return (quadrant & 1) ? -1.0f / tangent : tangent;
 }
-#endif
-extern int ARM_fpclassifyf(float);
-/* Supplied declaration required: __set_errno. */
-/* Supplied declaration required: FUN_001c4360. */
-/* Supplied declaration required: FUN_001c4370. */
-
-
-void FUN_0050dda4(void)
-
-{
-/* irregular: irregular input(s): in_s0; 9 native warning(s); review required */
-  int temp_v0;
-  float in_s0;
-  float temp_v1;
-  unsigned int temp_v2 [4];
-  
-  if ((unsigned int)((int)in_s0 * 2) < 0x7e921fb6) {
-    if ((unsigned int)((int)in_s0 * 2) < 0x73000000) {
-      temp_v2[0] = 0xffffffff;
-    }
-    else {
-      temp_v2[0] = 0;
-    }
-  }
-  else if ((unsigned int)romwright_fabs_4(in_s0) < 0x46490e49) {
-    if (((unsigned int)in_s0 & 0x80000000) != 0) {
-      temp_v1 = (in_s0 * 0.63661975f - 8388608.0f) + 8388608.0f;
-    }
-    else {
-      temp_v1 = (in_s0 * 0.63661975f + 8388608.0f) - 8388608.0f;
-    }
-    temp_v2[0] = (int)temp_v1 & 3;
-    in_s0 = (((in_s0 - temp_v1 * 1.5703125f) - temp_v1 * 0.0004837513f) - temp_v1 * 7.5495336e-08f) -
-            temp_v1 * 2.563344e-12f;
-  }
-  else {
-    FUN_001c4370(temp_v2);
-  }
-  if (-1 < (int)temp_v2[0]) {
-    if ((temp_v2[0] & 1) != 0) {
-                    /* WARNING: Treating indirect jump as return */
-      return;
-    }
-                    /* WARNING: Treating indirect jump as return */
-    return;
-  }
-  if ((unsigned int)((int)in_s0 * 2) < 0xff000000) {
-    temp_v0 = ARM_fpclassifyf(in_s0);
-    if (temp_v0 == 4) {
-      FUN_001c4360();
-    }
-                    /* WARNING: Treating indirect jump as return */
-    return;
-  }
-  if ((int)in_s0 * 2 == 0xff000000) {
-    __set_errno(1);
-                    /* WARNING: Treating indirect jump as return */
-    return;
-  }
-                    /* WARNING: Treating indirect jump as return */
-  return;
 }
-
-} /* extern "C" */

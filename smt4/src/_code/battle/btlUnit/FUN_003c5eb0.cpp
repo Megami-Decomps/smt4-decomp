@@ -1,73 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c5eb0` (_code @ 0x3c5eb0, 0x134 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only first coordinate-row literal and argument load scheduling differ. */
+#include "shard/W6_W6Match8_BattleDebug.h"
+#include "AsdSDK/Source/Util/AsdListBox.h"
+#include "battle/btlMain.h"
 
 extern "C" {
+extern BtlMain* g_btlMain;
+extern AsdListBoxEntry DAT_00435be8[];
+extern const char DAT_004004f8[];
+extern f32 DAT_004342cc;
+extern f32 DAT_004342d0;
+u32 asdListBoxCreateDefault(u32 parent, u32 priority, u32 flags, u32 option);
+void asdListBoxAddItems(u32 listBox, const AsdListBoxEntry* entries, u32 count);
+void asdListBoxSetByteValue(u32 listBox, u8 value);
+void jobSetText(u32 job, const char* text);
+void asdListBoxSetItemMode2(u32 listBox, s32 index, u32 enabled);
+void asdListBoxSetFloatItem(u32 listBox, s32 index, s32 minimum, s32 maximum, f32 value);
 
-int asdListBoxSetFloatItem(...);
-int asdListBoxSetItemMode2(...);
-int asdListBoxSetByteValue(...);
-int asdListBoxAddItems(...);
-int asdListBoxCreateDefault(...);
-int jobSetText(...);
-
-typedef struct fn_003c5eb0_arg0 fn_003c5eb0_arg0;
-struct fn_003c5eb0_arg0 {
-    void *field_0x0; /* +0x0 */
-    undefined1 field_0x4; /* +0x4 */
-    unsigned char pad_0x5[0xb];
-    unsigned char field_0x10; /* +0x10 */
-    unsigned char pad_0x11[0x3f];
-    undefined4 field_0x50; /* +0x50 */
-    undefined4 field_0x54; /* +0x54 */
-    undefined4 field_0x58; /* +0x58 */
-    void *field_0x5c; /* +0x5c */
-    unsigned char pad_0x60[0x8];
-    undefined4 field_0x68; /* +0x68 */
-    undefined4 field_0x6c; /* +0x6c */
-    unsigned char pad_0x70[0xc];
-    undefined4 field_0x7c; /* +0x7c */
-    undefined4 field_0x80; /* +0x80 */
-    unsigned char pad_0x84[0x190];
-    undefined4 field_0x214; /* +0x214 */
-};
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern int g_btlMain; /* 0x4342c8 */
-
-/* Supplied declaration required: asdListBoxSetFloatItem. */
-/* Supplied declaration required: asdListBoxSetItemMode2. */
-/* Supplied declaration required: asdListBoxSetByteValue. */
-/* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: asdListBoxCreateDefault. */
-/* Supplied declaration required: jobSetText. */
-
-
-void FUN_003c5eb0(fn_003c5eb0_arg0 *param_1,int param_2)
-
+// Build the camera up/down menu from battle flags and camera coordinates.
+void FUN_003c5eb0(BattleDebugWork* work, const BattleDebugOwnerView* owner)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = *(unsigned int *)(param_2 + 0x5c);
-  asdListBoxCreateDefault(temp_v0,0x73,0);
-  *(unsigned int *)&param_1->field_0x10 = temp_v0;
-  asdListBoxAddItems();
-  asdListBoxSetByteValue(*(unsigned int *)&param_1->field_0x10,1);
-  jobSetText(*(unsigned int *)&param_1->field_0x10,"Camera UpDown Menu");
-  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0,(*(unsigned int *)(g_btlMain + 0x634) & 0x20) >> 5);
-  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,1,(*(unsigned int *)(g_btlMain + 0x634) & 0x40) >> 6);
-  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,2,(*(unsigned int *)(g_btlMain + 0x634) & 0x80) >> 7);
-  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,3,0xfffffff6,10);
-  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,4,0,10);
-  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,5,0xfffffc19,999);
-  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,6,0xfffffc19,999);
-  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,7,0xfffffc19,999);
-  return;
+    u32 listBox = asdListBoxCreateDefault(owner->job, 0x73, 0, 0);
+    work->listBox = listBox;
+    asdListBoxAddItems(listBox, DAT_00435be8, 8);
+    asdListBoxSetByteValue(work->listBox, 1);
+    jobSetText(work->listBox, DAT_004004f8);
+    asdListBoxSetItemMode2(work->listBox, 0, (g_btlMain->flags & 0x20) >> 5);
+    asdListBoxSetItemMode2(work->listBox, 1, (g_btlMain->flags & 0x40) >> 6);
+    asdListBoxSetItemMode2(work->listBox, 2, (g_btlMain->flags & 0x80) >> 7);
+    asdListBoxSetFloatItem(work->listBox, 3, -10, 10, DAT_004342cc);
+    asdListBoxSetFloatItem(work->listBox, 4, 0, 10, DAT_004342d0);
+    asdListBoxSetFloatItem(work->listBox, 5, -999, 999, g_btlMain->cameraPosition[0]);
+    asdListBoxSetFloatItem(work->listBox, 6, -999, 999, g_btlMain->cameraPosition[1]);
+    asdListBoxSetFloatItem(work->listBox, 7, -999, 999, g_btlMain->cameraPosition[2]);
 }
-
-} /* extern "C" */
+}

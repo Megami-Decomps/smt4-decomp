@@ -1,67 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fd2cc` (_code @ 0x4fd2cc, 0x120 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: argument homing adds stack saves; model flags fold into conditional loads and slot addresses differ. */
+#include "battle/btlMain.h"
+#include "battle/btlReflect.h"
 
 extern "C" {
+BtlMainStateA *btlGetMainState(void);
+ReflectAction *FUN_004102d8(ReflectContext *context, s32 actor, s32 target, u32 options);
 
-int FUN_004102d8(int, int, int, unsigned int);
-
-extern int g_btlActionReflect; /* 0x5712f0 */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_004102d8. */
-
-
-unsigned char
-FUN_004fd2cc(short param_1,unsigned int param_2,int param_3,unsigned short param_4,unsigned short param_5,
-            unsigned int param_6)
-
+/* Queue scalar actions for the requested model slot, or every enabled model slot. */
+u8 FUN_004fd2cc(s32 actor, u32 options, s32 allSlots, s32 slot,
+                s32 parameter, u32 scalarBits, f32 value)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int in_s0;
-  
-  temp_v1 = btlGetMainState();
-  if ((*(char *)(temp_v1 + 0x22cc) != '\0') && (*(char *)(temp_v1 + 0x22cd) != '\0')) {
-    if (param_3 != 0) {
-      temp_v3 = 0;
-      temp_v4 = temp_v3;
-      do {
-        if (*(char *)(temp_v1 + temp_v3 + 0x2340) != '\0') {
-          temp_v0 = *(short *)(temp_v1 + temp_v4 * 2 + 0x2344);
-          if (temp_v0 < 0) {
-            return 0;
-          }
-          temp_v2 = g_btlActionReflect;
-          FUN_004102d8(g_btlActionReflect,(int)(short)(temp_v0 + param_1),0,param_2);
-          *(unsigned char *)(temp_v2 + 4) = 0x46;
-          *(short *)(temp_v2 + 0x24) = (short)temp_v3;
-          *(unsigned short *)(temp_v2 + 0x26) = param_5;
-          *(unsigned int *)(temp_v2 + 0x30) = in_s0;
-          *(unsigned int *)(temp_v2 + 0x28) = param_6;
-          temp_v4 = temp_v4 + 1;
-          *(unsigned int *)(temp_v2 + 0x4c) = 0;
+    BtlMainStateA *battle = btlGetMainState();
+    if (battle->environmentModel.loaded && battle->environmentModel.ready) {
+        if (allSlots) {
+            s32 index = 0;
+            for (s32 i = 0; i < 4; ++i) {
+                if (battle->reflectedSlots.enabled[i]) {
+                    s16 offset = battle->reflectedSlots.actorOffsets[index];
+                    if (offset < 0)
+                        return 0;
+                    ReflectAction *action = FUN_004102d8(g_btlActionReflect, (s16)(actor + offset), 0, options);
+                    action->kind = 0x46;
+                    action->first = i;
+                    action->second = (s16)parameter;
+                    action->scalarPayload.scalar = value;
+                    action->value = scalarBits;
+                    ++index;
+                    action->parameter = 0;
+                }
+            }
+        } else {
+            ReflectAction *action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, options);
+            action->kind = 0x46;
+            action->first = slot;
+            action->second = (s16)parameter;
+            action->scalarPayload.scalar = value;
+            action->value = scalarBits;
+            action->parameter = 0;
         }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < 4);
+        return 1;
     }
-    else {
-      temp_v1 = g_btlActionReflect;
-      FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
-      *(unsigned char *)(temp_v1 + 4) = 0x46;
-      *(unsigned short *)(temp_v1 + 0x24) = param_4;
-      *(unsigned short *)(temp_v1 + 0x26) = param_5;
-      *(unsigned int *)(temp_v1 + 0x30) = in_s0;
-      *(unsigned int *)(temp_v1 + 0x28) = param_6;
-      *(unsigned int *)(temp_v1 + 0x4c) = 0;
-    }
-    return 1;
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

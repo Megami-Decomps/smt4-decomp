@@ -1,130 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031eba0` (_code @ 0x31eba0, 0x1ec bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: first portrait lookup spills the record pointer and second validation uses different scratch registers. */
+#include "gamedata/DevilRecord.h"
+#include "gamedata/Table00.h"
 
+struct PortraitClipBounds {
+    s32 top;
+    s32 bottom;
+    s32 left;
+    s32 right;
+};
+struct PortraitImageDimensions {
+    u16 width;
+    u16 height;
+};
 extern "C" {
-
-int FUN_002b04e8(int, unsigned int, int, int, int, unsigned int, int *);
-int dataTable00FindById(void);
-int devilGetRecord(...);
-int FUN_00389f74(unsigned int, unsigned int, int, unsigned int, int, int, unsigned int, int);
-
-/* stack frame of param_9: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_9_stack;
-
-extern unsigned int g_aocSystem; /* 0x433158 */
-
-extern int recordPrepareLinkedOwner(unsigned int, unsigned int, unsigned int);
-extern int asdTMTexTableNodeIsLoaded(unsigned int);
-/* Supplied declaration required: FUN_002b04e8. */
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: devilGetRecord. */
-extern unsigned short *FUN_002bf4f8(unsigned int, int);
-/* Supplied declaration required: FUN_00389f74. */
-
-
-void FUN_0031eba0(unsigned int param_1,int param_2,int param_3,unsigned int param_4,int param_5,int param_6,
-                 int param_7,int param_8,int param_9)
-
-{
-/* irregular: 4 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  unsigned short *puVar4;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned int uStack_34;
-  int iStack_30;
-  int temp_v10;
-  unsigned int temp_v11;
-  
-  temp_v5 = 0x17;
-  temp_v3 = param_1;
-  uStack_34 = param_1;
-  iStack_30 = param_2;
-  temp_v10 = param_3;
-  temp_v11 = param_4;
-  if (param_5 != 0) {
-    if ((int)param_1 < 0) {
-      temp_v3 = 0;
-    }
-    else {
-      temp_v3 = param_1 & 0xffff;
-      devilGetRecord();
-      if (temp_v3 == 0) {
-        return;
-      }
-      temp_v0 = param_1;
-      dataTable00FindById();
-      if ((*(unsigned char *)(temp_v0 + 3) & 1) != 0) {
-        temp_v3 = (unsigned int)*(short *)(temp_v0 + 0x88);
-        temp_v5 = 0x23;
-        if ((int)temp_v3 >= 0x81) {
-          return;
-        }
-      }
-      else {
-        temp_v3 = *(unsigned short *)(temp_v3 + 0x90) + 1;
-        if (temp_v3 >= 0x266) {
-          return;
-        }
-      }
-    }
-  }
-  temp_v4 = 0x17;
-  if ((param_5 != 0) && (-1 < (int)param_1)) {
-    temp_v0 = param_1;
-    devilGetRecord(temp_v0,param_1);
-    if (temp_v0 == 0) {
-      return;
-    }
-    temp_v1 = param_1;
-    dataTable00FindById();
-    if ((*(unsigned char *)(temp_v1 + 3) & 1) != 0) {
-      temp_v4 = 0x23;
-      if (*(short *)(temp_v1 + 0x88) >= 0x81) {
-        return;
-      }
-    }
-    else if (*(unsigned short *)(temp_v0 + 0x90) + 1 >= 0x266) {
-      return;
-    }
-  }
-  temp_v2 = asdTMTexTableNodeIsLoaded(temp_v4);
-  if (temp_v2 != 0) {
-    temp_v2 = recordPrepareLinkedOwner(g_aocSystem,temp_v5,temp_v3);
-    if (temp_v2 == 0) {
-      temp_v2 = temp_v3 * 1000 + 1;
-      puVar4 = (unsigned short *)FUN_002bf4f8(temp_v5,temp_v2);
-      temp_v8 = (unsigned int)*puVar4 + (param_6 - param_2);
-      temp_v9 = temp_v8 + param_8;
-      temp_v6 = (unsigned int)puVar4[1] + (param_7 - temp_v10);
-      temp_v7 = temp_v6 + param_9;
-      FUN_002b04e8(2,temp_v5,temp_v2,param_6,param_7,temp_v11,&temp_v6);
-      return;
-    }
-    temp_v6 = param_7;
-    temp_v7 = param_8;
-    temp_v8 = param_9;
-    FUN_00389f74(g_aocSystem,param_1,2,temp_v3,param_2,temp_v10,temp_v11,param_6);
-  }
-  return;
+extern void *g_aocSystem;
+const Table00Record *dataTable00FindById(u16);
+s32 asdTMTexTableNodeIsLoaded(u32);
+s32 recordPrepareLinkedOwner(void *, u32, s32);
+const PortraitImageDimensions *FUN_002bf4f8(u32, s32);
+void FUN_002b04e8(s32, u32, s32, s32, s32, u32, const PortraitClipBounds *);
+void FUN_00389f74(void *, s32, s32, s32, s32, s32, u32, s32, s32, s32, s32);
 }
 
-} /* extern "C" */
+static inline bool resolveClippedPortrait(s32 unit, s32 lookup, u32 &bank, s32 &image)
+{
+    bank = 23;
+    image = unit;
+    if (lookup) {
+        if (unit < 0) {
+            image = 0;
+        } else {
+            const DevilRecord *devil = reinterpret_cast<const DevilRecord *>(devilGetRecord(static_cast<u16>(unit)));
+            if (!devil)
+                return false;
+            const Table00Record *record = dataTable00FindById(static_cast<u16>(unit));
+            if (record->unk02[1] & 1) {
+                image = record->portrait.id;
+                bank = 35;
+                if (image >= 129)
+                    return false;
+            } else {
+                image = devil->model + 1;
+                if (image >= 614)
+                    return false;
+            }
+        }
+    }
+    return true;
+}
+
+extern "C" void FUN_0031eba0(s32 unit, s32 sourceX, s32 sourceY, u32 color, s32 lookup,
+                              s32 x, s32 y, s32 width, s32 height)
+{
+    u32 bank;
+    s32 image;
+    if (!resolveClippedPortrait(unit, lookup, bank, image))
+        return;
+    u32 loadedBank;
+    s32 loadedImage;
+    if (!resolveClippedPortrait(unit, lookup, loadedBank, loadedImage))
+        return;
+    if (!asdTMTexTableNodeIsLoaded(loadedBank))
+        return;
+    if (!recordPrepareLinkedOwner(g_aocSystem, bank, image)) {
+        s32 sprite = image * 1000 + 1;
+        const PortraitImageDimensions *dimensions = FUN_002bf4f8(bank, sprite);
+        PortraitClipBounds clip;
+        clip.left = dimensions->width + (x - sourceX);
+        clip.right = clip.left + width;
+        clip.top = dimensions->height + (y - sourceY);
+        clip.bottom = clip.top + height;
+        FUN_002b04e8(2, bank, sprite, x, y, color, &clip);
+    } else {
+        FUN_00389f74(g_aocSystem, unit, 2, image, sourceX, sourceY, color, x, y, width, height);
+    }
+}

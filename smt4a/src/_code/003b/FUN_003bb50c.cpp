@@ -1,118 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bb50c` (_code @ 0x3bb50c, 0x198 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: original/clip position registers and crop/add-on argument store grouping differ. */
+#include "gamedata/DevilRecordA.h"
+#include "gamedata/Table00.h"
+#include "shard/W9_W9Match1_PositionedLayoutTask.h"
 
+struct DemonPortraitCropA { s32 top, bottom, left, right; };
 extern "C" {
+extern u32 g_aocSystem;
+const Table00Record *dataTable00FindById(u32 id);
+bool gameFlagIsSet(u32 flag);
+bool devilIsTextureLoaded(s32 id, s32 resolve);
+s32 recordPrepareLinkedOwner(u32 package, u32 table, s32 image);
+u16 *FUN_001834a4(u32 table, s32 image);
+void FUN_001849bc(u32 flags, u32 table, s32 image, PositionedLayoutPosition position, const void *crop);
+void FUN_00471a04(u32 package, s32 id, u32 flags, s32 image, s32 x, s32 y, s32 z,
+                  s32 clipX, s32 clipY, s32 clipWidth, s32 clipHeight);
 
-int FUN_00184310(void);
-int FUN_001849bc(int, unsigned int, int, int, int, unsigned int, int *);
-int dataTable00FindById(void);
-int devilIsTextureLoaded(unsigned int, int);
-int FUN_00471a04(unsigned int, unsigned int, int, unsigned int, int, int, unsigned int, int);
-
-/* stack frame of param_9: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_9_stack;
-
-extern unsigned int g_aocSystem; /* 0x570280 */
-
-extern unsigned short *FUN_001834a4(unsigned int, int);
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_001849bc. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: devilIsTextureLoaded. */
-extern int recordPrepareLinkedOwner(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00471a04. */
-
-
-void FUN_003bb50c(unsigned int param_1,int param_2,int param_3,unsigned int param_4,int param_5,int param_6,
-                 int param_7,int param_8,int param_9)
-
+// Draw a clipped demon portrait from its add-on resource or the built-in portrait atlas.
+void FUN_003bb50c(s32 id, s32 x, s32 y, s32 z, s32 resolve,
+                  s32 clipX, s32 clipY, s32 clipWidth, s32 clipHeight)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned short *puVar3;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int uStack_34;
-  int iStack_30;
-  int iStack_2c;
-  unsigned int temp_v8;
-  
-  temp_v3 = 0xf;
-  temp_v2 = param_1;
-  uStack_34 = param_1;
-  iStack_30 = param_2;
-  iStack_2c = param_3;
-  temp_v8 = param_4;
-  if (param_5 != 0) {
-    if ((int)param_1 < 0) {
-      temp_v0 = gameFlagIsSet(0x11);
-      if (temp_v0 == 0) {
-        temp_v2 = 0x25e;
-      }
-      else {
-        temp_v2 = 0;
-      }
-    }
-    else {
-      temp_v2 = param_1 & 0xffff;
-      FUN_00184310();
-      if (temp_v2 == 0) {
-        return;
-      }
-      temp_v1 = param_1 & 0xffff;
-      dataTable00FindById();
-      if ((*(unsigned short *)(temp_v1 + 2) & 0x8000) != 0) {
-        temp_v2 = (unsigned int)*(short *)(temp_v1 + 0x8c);
-        temp_v3 = 0x19;
-        if ((int)temp_v2 >= 0x9a) {
-          return;
+    u32 table = 15;
+    s32 image = id;
+    if (resolve) {
+        if (id < 0) {
+            image = gameFlagIsSet(17) ? 0 : 0x25e;
+        } else {
+            const DevilTableRecordA *record = reinterpret_cast<const DevilTableRecordA *>(FUN_00184310(static_cast<u16>(id)));
+            if (record == NULL)
+                return;
+            const Table00Record *base = dataTable00FindById(static_cast<u16>(id));
+            // The texture-kind flag is in the table header, distinct from the flags at 0x16.
+            if (*reinterpret_cast<const u16 *>(base->unk02) & 0x8000) {
+                image = base->battleTexture.resourceId;
+                table = 25;
+                if (image >= 154)
+                    return;
+            } else {
+                image = record->unk9C + 1;
+                if (image >= 0x277)
+                    return;
+            }
         }
-      }
-      else {
-        temp_v2 = *(unsigned short *)(temp_v2 + 0x9c) + 1;
-        if (temp_v2 >= 0x277) {
-          return;
+    }
+    if (devilIsTextureLoaded(id, resolve)) {
+        if (recordPrepareLinkedOwner(g_aocSystem, table, image)) {
+            FUN_00471a04(g_aocSystem, id, 2, image, x, y, z, clipX, clipY, clipWidth, clipHeight);
+        } else {
+            s32 sprite = image * 1000 + 1;
+            const u16 *origin = FUN_001834a4(table, sprite);
+            DemonPortraitCropA crop;
+            crop.left = origin[0] + (clipX - x);
+            crop.right = crop.left + clipWidth;
+            crop.top = origin[1] + (clipY - y);
+            crop.bottom = crop.top + clipHeight;
+            PositionedLayoutPosition destination = { clipX, clipY, z };
+            FUN_001849bc(2, table, sprite, destination, &crop);
         }
-      }
     }
-  }
-  temp_v1 = param_1;
-  devilIsTextureLoaded(param_1,param_5);
-  if (temp_v1 != 0) {
-    temp_v0 = recordPrepareLinkedOwner(g_aocSystem,temp_v3,temp_v2);
-    if (temp_v0 == 0) {
-      temp_v0 = temp_v2 * 1000 + 1;
-      puVar3 = (unsigned short *)FUN_001834a4(temp_v3,temp_v0);
-      temp_v6 = (unsigned int)*puVar3 + (param_6 - param_2);
-      temp_v7 = temp_v6 + param_8;
-      temp_v4 = (unsigned int)puVar3[1] + (param_7 - param_3);
-      temp_v5 = temp_v4 + param_9;
-      FUN_001849bc(2,temp_v3,temp_v0,param_6,param_7,temp_v8,&temp_v4);
-      return;
-    }
-    temp_v4 = param_7;
-    temp_v5 = param_8;
-    temp_v6 = param_9;
-    FUN_00471a04(g_aocSystem,param_1,2,temp_v2,param_2,param_3,temp_v8,param_6);
-  }
-  return;
 }
-
-} /* extern "C" */
+}

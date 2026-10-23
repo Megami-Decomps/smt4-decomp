@@ -17,7 +17,7 @@ void FUN_00249b18(u32 party, s32 force);
 void FUN_002a03d8(u32 slot, u32 value);
 void mapDepartSetTarget(s32 map, s32 area, u32 place);
 void FUN_002bd808(void *destination, const void *source);
-void FUN_003b82c4(ContentTransition *transition);
+void mikadoLoadSceneResources(ContentTransition *transition);
 void FUN_003b8b0c(ContentTransition *transition);
 
 void contentTransitionProcessDeparture(ContentTransition *transition)
@@ -59,7 +59,7 @@ void contentTransitionProcessDeparture(ContentTransition *transition)
         } else {
             FUN_003b8b0c(transition);
             FUN_002bd808(&transition->sourceMap, &transition->destination);
-            FUN_003b82c4(transition);
+            mikadoLoadSceneResources(transition);
             transition->state = 2;
             transition->phase = 0;
             transition->flags &= ~0x10u;

@@ -1,127 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00340a94` (_code @ 0x340a94, 0x178 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Initial-frame/speed branch scheduling, shifted subtraction lowering and completion return ordering differ. */
+#include "ui/UiSpriteState.h"
 
 extern "C" {
+void FUN_001807a0(UiSpriteState *sprite, f32 scale);
+void FUN_00182348(UiSpriteState *sprite, f32 scale);
+void FUN_00181948(UiSpriteState *sprite, f32 scale);
 
-int FUN_001807a0(...);
-int FUN_00181948(...);
-int FUN_00182348(...);
-
-typedef struct fn_00340a94_arg0 fn_00340a94_arg0;
-struct fn_00340a94_arg0 {
-    unsigned char pad_0x0[0xc];
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x3e];
-    short field_0x52; /* +0x52 */
-    unsigned char pad_0x54[0x31];
-    undefined1 field_0x85; /* +0x85 */
-    byte field_0x86; /* +0x86 */
-    byte field_0x87; /* +0x87 */
-    byte field_0x88; /* +0x88 */
-    byte field_0x89; /* +0x89 */
-    char field_0x8a; /* +0x8a */
-};
-
-extern unsigned char LAB_00140000; /* 0x140000 */
-
-/* Supplied declaration required: FUN_001807a0. */
-/* Supplied declaration required: FUN_00181948. */
-/* Supplied declaration required: FUN_00182348. */
-
-
-int FUN_00340a94(fn_00340a94_arg0 *param_1,int param_2,int param_3)
-
+/* Slides the sprite in from either side, slowing toward zero, and updates its other animation tracks. */
+s32 FUN_00340a94(UiSpriteState *sprite, s32 reverse, s32 vertical)
 {
-/* irregular: 2 goto(s); 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v2 = (int)param_1->field_0x52;
-  if (temp_v2 == 0) {
-    if (param_3 == 0) {
-      param_1->field_0xc = (undefined4)&LAB_00140000;
-      param_1->field_0x10 = 0;
+    s32 frame = sprite->motionFrame;
+    if (frame == 0) {
+        if (vertical == 0) {
+            sprite->slide.x = 320 * 4096;
+            sprite->slide.y = 0;
+        } else {
+            sprite->slide.y = 320 * 4096;
+            sprite->slide.x = 0;
+        }
+        if (reverse != 0) {
+            sprite->slide.x = -sprite->slide.x;
+            sprite->slide.y = -sprite->slide.y;
+        }
     }
-    else {
-      param_1->field_0x10 = (undefined4)&LAB_00140000;
-      param_1->field_0xc = 0;
+    s32 speed = 75;
+    if (frame > 0) {
+        speed = 75 - frame * 5;
+        if (speed < 0) {
+            speed = 0;
+        }
     }
-    if (param_2 != 0) {
-      param_1->field_0xc = -param_1->field_0xc;
-      param_1->field_0x10 = -param_1->field_0x10;
+    if (reverse != 0) {
+        speed = -speed;
     }
-  }
-  temp_v1 = 0x4b;
-  if ((0 < temp_v2) && (temp_v1 = temp_v2 * -5 + 0x4b, temp_v1 < 0)) {
-    temp_v1 = 0;
-  }
-  if (param_2 != 0) {
-    temp_v1 = -temp_v1;
-  }
-  if (param_3 != 0) {
-    temp_v2 = param_1->field_0x10 + temp_v1 * -0x1000;
-    param_1->field_0x10 = temp_v2;
-    temp_v2 = temp_v2 >> 0xc;
-    if (param_2 != 0) {
-      if (temp_v2 >= 0) {
-        param_1->field_0x10 = 0;
-        param_1->field_0x86 = 1;
-      }
-      else {
-        param_1->field_0x8a = '\0';
-      }
+    if (vertical != 0) {
+        sprite->slide.y -= speed * 4096;
+        s32 position = sprite->slide.y >> 12;
+        if ((reverse != 0 && position >= 0) || (reverse == 0 && position <= 0)) {
+            sprite->slide.y = 0;
+            sprite->completion.horizontal = 1;
+        } else {
+            sprite->animationFlags.completed = 0;
+        }
+    } else {
+        sprite->slide.x -= speed * 4096;
+        s32 position = sprite->slide.x >> 12;
+        if ((reverse != 0 && position >= 0) || (reverse == 0 && position <= 0)) {
+            sprite->slide.x = 0;
+            sprite->completion.horizontal = 1;
+        } else {
+            sprite->animationFlags.completed = 0;
+        }
     }
-    else if (0 >= temp_v2) {
-      param_1->field_0x10 = 0;
-LAB_00340b88:
-      param_1->field_0x86 = 1;
+    sprite->motionFrame = frame + 1;
+    FUN_001807a0(sprite, 1.0f);
+    FUN_00182348(sprite, 1.0f);
+    FUN_00181948(sprite, 1.0f);
+    if (sprite->completion.horizontal != 0 && sprite->completion.vertical != 0 &&
+        sprite->completion.scale != 0 && sprite->completion.opacity != 0) {
+        sprite->animationFlags.completed = 1;
+    } else {
+        sprite->animationFlags.completed = 0;
     }
-    else {
-      param_1->field_0x8a = '\0';
-    }
-  }
-  else {
-    temp_v2 = param_1->field_0xc + temp_v1 * -0x1000;
-    param_1->field_0xc = temp_v2;
-    temp_v2 = temp_v2 >> 0xc;
-    if (param_2 != 0) {
-      if (-1 < temp_v2) {
-LAB_00340b84:
-        param_1->field_0xc = 0;
-        goto LAB_00340b88;
-      }
-    }
-    else if (temp_v2 < 1) goto LAB_00340b84;
-    param_1->field_0x8a = '\0';
-  }
-  param_1->field_0x52 = param_1->field_0x52 + 1;
-  FUN_001807a0(param_1);
-  FUN_00182348(param_1);
-  FUN_00181948(param_1);
-  temp_v3 = param_1->field_0x86 != 0;
-  temp_v0 = 0;
-  if (temp_v3) {
-    temp_v0 = param_1->field_0x87;
-  }
-  if (temp_v3 && temp_v0 != 0) {
-    temp_v3 = param_1->field_0x88 != 0;
-    temp_v0 = 0;
-    if (temp_v3) {
-      temp_v0 = param_1->field_0x89;
-    }
-    if (temp_v3 && temp_v0 != 0) {
-      param_1->field_0x8a = '\x01';
-      param_1->field_0x85 = 1;
-      return (int)param_1->field_0x8a;
-    }
-  }
-  param_1->field_0x8a = '\0';
-  param_1->field_0x85 = 1;
-  return (int)param_1->field_0x8a;
+    sprite->visibility.active = 1;
+    return sprite->animationFlags.completed;
 }
-
-} /* extern "C" */
+}

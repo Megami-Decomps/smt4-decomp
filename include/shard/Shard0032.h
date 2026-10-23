@@ -103,6 +103,36 @@ typedef struct UnitTemplate {
     /* 0xA0 */ u16 name[9];
 } UnitTemplate;
 
+struct UnitSavedSkillData {
+    u32 words[6];
+};
+
+struct SavedUnitRecordA {
+    /* 0x00 */ u16 sortKey;
+    /* 0x02 */ u16 baseStats[5];
+    /* 0x0C */ u16 currentStats[5];
+    /* 0x16 */ u8 status;
+    /* 0x17 */ u8 unk17;
+    /* 0x18 */ u16 hp;
+    /* 0x1A */ u16 mp;
+    /* 0x1C */ UnitSavedSkillData skills;
+    /* 0x34 */ u32 unk34;
+    /* 0x38 */ u32 bits;
+    /* 0x3C */ u16 name[9];
+    /* 0x4E */ u8 unk4E[2];
+};
+
+typedef char SavedUnitRecordALayoutCheck[
+    sizeof(SavedUnitRecordA) == 0x50 &&
+    offsetof(SavedUnitRecordA, baseStats) == 0x02 &&
+    offsetof(SavedUnitRecordA, currentStats) == 0x0C &&
+    offsetof(SavedUnitRecordA, status) == 0x16 &&
+    offsetof(SavedUnitRecordA, hp) == 0x18 &&
+    offsetof(SavedUnitRecordA, mp) == 0x1A &&
+    offsetof(SavedUnitRecordA, skills) == 0x1C &&
+    offsetof(SavedUnitRecordA, bits) == 0x38 &&
+    offsetof(SavedUnitRecordA, name) == 0x3C ? 1 : -1];
+
 /* A 300-byte unit record built from a table entry. */
 typedef struct UnitRecord {
     /* 0x00 */ u16 stats[7];
@@ -116,13 +146,36 @@ typedef struct UnitRecord {
     /* 0x2C */ u16 unk2C;
     /* 0x2E */ u8 unk2E[0x2];
     /* 0x30 */ u32 unk30;
-    /* 0x34 */ u8 unk34[0x18];
+    union {
+        /* 0x34 */ u8 unk34[0x18];
+        struct {
+            /* 0x34 */ u16 skills[8];
+            /* 0x44 */ u8 unk44[8];
+        } skillList;
+    };
     /* 0x4C */ u16 name[9];
     /* 0x5E */ u8 unk5E[0x4];
     /* 0x62 */ u16 id;
     /* 0x64 */ u16 unk64;
-    /* 0x66 */ u8 unk66[0xC6];
+    union {
+        /* 0x66 */ u8 unk66[0xC6];
+        struct {
+            /* 0x66 */ u8 unk66BeforeStatus[0xC5];
+            /* 0x12B */ u8 status;
+        } savedState;
+        struct {
+            u8 unk66BeforeInheritance[2];
+            /* 0x68 */ u8 flags[0x40];
+        } inheritance;
+    };
 } UnitRecord;
+
+typedef char UnitRecordSkillsOffsetCheck[
+    offsetof(UnitRecord, skillList.skills) == 0x34 &&
+    offsetof(UnitRecord, savedState.status) == 0x12B &&
+    sizeof(UnitRecord) == 0x12C ? 1 : -1];
+typedef char UnitRecordInheritanceOffsetCheck[
+    offsetof(UnitRecord, inheritance.flags) == 0x68 ? 1 : -1];
 
 /* Party manager data (gameGetSlotTable). */
 /* Party manager data (gameGetSlotTable). */
@@ -196,7 +249,13 @@ typedef struct StateAtF4 {
         /* 0x150 */ s32 frameCounter;
     };
     /* 0x16C */ u8 unk16C[0xE];
-    /* 0x17A */ u8 unk17A[0xF];
+    union {
+        /* 0x17A */ u8 unk17A[0xF];
+        struct {
+            u8 unk17A[0xE];
+            /* 0x188 */ u8 outfitSelectionActive;
+        } preview;
+    };
     /* 0x189 */ u8 unk189;
 } StateAtF4;
 typedef char StateAtF4DispatchOffsetCheck[
@@ -204,6 +263,8 @@ typedef char StateAtF4DispatchOffsetCheck[
     offsetof(StateAtF4, dispatch.previousMode) == 0xF0 &&
     offsetof(StateAtF4, frameCounter) == 0x150 &&
     sizeof(StateAtF4) == 0x18C ? 1 : -1];
+typedef char StateAtF4OutfitSelectionOffsetCheck[
+    offsetof(StateAtF4, preview.outfitSelectionActive) == 0x188 ? 1 : -1];
 
 typedef struct FlagAt4 {
     /* 0x00 */ u8 unk00[4];

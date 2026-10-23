@@ -1,66 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004941fc` (_code @ 0x4941fc, 0x188 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: inline field-getter moves and outgoing numeric-glyph argument scheduling differ. */
+#include "ui/NumberPanelWork.h"
 
 extern "C" {
+void words2Copy(u32, FloatPoint *);
+void FUN_004934ac(u32, u32, s32, s32, u32);
+void FUN_00344cd0(u32 sprite, s32 x, s32 y, s32 style,
+    s32 firstDigit, s32 secondDigit, s32 thirdDigit, s32 leading,
+    s32 separator, s32 alternateSeparator, s32 trailing, s32 value,
+    s32 first, s32 second, u32 flags, s32 mode);
 
-int FUN_00344cd0(...);
-int FUN_004934ac(unsigned int, int, int, int, unsigned int);
-int words2Copy(unsigned int, float *);
-
-typedef struct fn_004941fc_arg0 fn_004941fc_arg0;
-struct fn_004941fc_arg0 {
-    unsigned char pad_0x0[0x8];
-    unsigned char field_0x8; /* +0x8 */
-    unsigned char pad_0x9[0x2f];
-    int field_0x38; /* +0x38 */
-    unsigned char pad_0x3c[0x14];
-    unsigned char field_0x50; /* +0x50 */
-    unsigned char pad_0x51[0x3];
-    short field_0x54; /* +0x54 */
-    short field_0x56; /* +0x56 */
-    short field_0x58; /* +0x58 */
-};
-
-/* stack frame of param_2: 10 slot(s), 40 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00344cd0. */
-/* Supplied declaration required: FUN_004934ac. */
-/* Supplied declaration required: words2Copy. */
-
-
-void FUN_004941fc(fn_004941fc_arg0 *param_1,unsigned int param_2)
-
+/* Render the numeric panel using the normal or alternate glyph set. */
+void FUN_004941fc(NumberPanelWork *work, u32 flags)
 {
-/* irregular: 3 native warning(s); review required */
-  float temp_v0;
-  float fStack_1c;
-  
-  words2Copy(*(unsigned int *)&param_1[1].field_0x8,&temp_v0);
-  if (param_1->field_0x38 != 9) {
-    FUN_004934ac(*(unsigned int *)&param_1[1].field_0x8,0x103,(int)temp_v0,(int)fStack_1c,param_2);
-    FUN_00344cd0(*(unsigned int *)&param_1->field_0x50,(int)temp_v0,(int)fStack_1c,0x20,0x3d,0x3e,
-                 0x3f,0x39,0x3b,0x3a,0x3c,(int)param_1->field_0x58,(int)param_1->field_0x54,
-                 (int)param_1->field_0x56,param_2,0);
-    return;
-  }
-  FUN_004934ac(*(unsigned int *)&param_1[1].field_0x8,0x104,(int)temp_v0,(int)fStack_1c,param_2);
-  FUN_00344cd0(*(unsigned int *)&param_1->field_0x50,(int)temp_v0,(int)fStack_1c,0x20,0x44,0x45,0x46,
-               0x40,0x42,0x41,0x43,(int)param_1->field_0x58,(int)param_1->field_0x54,
-               (int)param_1->field_0x56,param_2,0);
-  return;
+    FloatPoint position;
+    words2Copy(work->position, &position);
+    if (work->kind != 9) {
+        FUN_004934ac(work->position, 0x103, (s32)position.x, (s32)position.y, flags);
+        FUN_00344cd0(work->sprite, (s32)position.x, (s32)position.y, 0x20,
+            0x3D, 0x3E, 0x3F, 0x39, 0x3B, 0x3A, 0x3C,
+            work->value, work->first, work->second, flags, 0);
+    } else {
+        FUN_004934ac(work->position, 0x104, (s32)position.x, (s32)position.y, flags);
+        FUN_00344cd0(work->sprite, (s32)position.x, (s32)position.y, 0x20,
+            0x44, 0x45, 0x46, 0x40, 0x42, 0x41, 0x43,
+            work->value, work->first, work->second, flags, 0);
+    }
 }
-
-} /* extern "C" */
+}

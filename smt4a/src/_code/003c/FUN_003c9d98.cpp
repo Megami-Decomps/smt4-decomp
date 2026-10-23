@@ -1,80 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c9d98` (_code @ 0x3c9d98, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: selection output stack layout, mask-load registers and active-entry byte addressing differ. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
 extern "C" {
+u32 scrGetArg(u32 index);
+u32 btlResolveEntryChoice(u32 choice);
+void FUN_00301a08(u32 choice, s32 *entries, s32 *count);
+BtlMainStateA *btlGetMainState(void);
+BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
+s32 btlFindEntryValue(s32 unitIndex, u32 kind);
+void scrSetResult(s32 result);
 
-int scrGetArg(int);
-int FUN_00301a08(unsigned int, int [6], int *);
-int scrSetResult(int);
-int FUN_003eaf20(void);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern unsigned int g_btlCandidateMasks; /* 0x570288 */
-extern unsigned int DAT_0057028c; /* 0x57028c */
-extern unsigned int DAT_005702a0; /* 0x5702a0 */
-extern unsigned int DAT_005702a4; /* 0x5702a4 */
-extern unsigned int DAT_005702b0; /* 0x5702b0 */
-extern unsigned int DAT_005702b4; /* 0x5702b4 */
-
-extern int btlGetMainState(void);
-extern unsigned int btlResolveEntryChoice(void);
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_00301a08. */
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: FUN_003eaf20. */
-extern int btlFindEntryValue(int, unsigned int);
-
-
-unsigned int FUN_003c9d98(void)
-
+// Check whether any eligible combatant has a positive value in entry category 19.
+u32 FUN_003c9d98(void)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6 [6];
-  
-  scrGetArg(0);
-  temp_v0 = btlResolveEntryChoice();
-  FUN_00301a08(temp_v0,temp_v6,&temp_v5);
-  temp_v4 = temp_v6[0];
-  if (temp_v6[0] < temp_v5 + temp_v6[0]) {
-    do {
-      temp_v1 = btlGetMainState();
-      puVar5 = (unsigned int *)(*(int *)(temp_v1 + 0x1ffc) + temp_v4 * 0x408);
-      temp_v2 = *puVar5;
-      temp_v3 = puVar5[1];
-      if (((((DAT_005702a0 & temp_v2) == 0 && (DAT_005702a4 & temp_v3) == 0) &&
-           ((DAT_0057028c & temp_v3) != 0 || (g_btlCandidateMasks & temp_v2) != 0)) &&
-          ((temp_v3 & DAT_005702b4) == 0 && (DAT_005702b0 & temp_v2) == 0)) &&
-         (temp_v1 = btlFindEntryValue((int)(short)puVar5[2],0x13), 0 < temp_v1)) {
-        scrSetResult(1);
-        return 1;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < temp_v6[0] + temp_v5);
-  }
-  temp_v4 = btlGetMainState();
-  if (*(char *)(temp_v4 + 0x4cd1) != '\0') {
-    temp_v4 = btlGetMainState();
-    FUN_003eaf20();
-    if ((temp_v4 != 0) && (temp_v4 = btlFindEntryValue((int)*(short *)(temp_v4 + 8),0x13), 0 < temp_v4)) {
-      scrSetResult(1);
-      return 1;
+    u32 choice = btlResolveEntryChoice(scrGetArg(0));
+    s32 entries[6], count;
+    FUN_00301a08(choice, entries, &count);
+    for (s32 index = entries[0]; index < count + entries[0]; ++index) {
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        u64 flags = entry->flags;
+        if ((g_btlCandidateMasks.unavailable & flags) == 0 &&
+            (g_btlCandidateMasks.required & flags) != 0 &&
+            (flags & g_btlCandidateMasks.excluded) == 0 &&
+            btlFindEntryValue(entry->unitIndex, 19) > 0) {
+            scrSetResult(1);
+            return 1;
+        }
     }
-  }
-  scrSetResult(0);
-  return 1;
+    if (btlGetMainState()->unk4cd1 != 0) {
+        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        if (entry != NULL && btlFindEntryValue(entry->unitIndex, 19) > 0) {
+            scrSetResult(1);
+            return 1;
+        }
+    }
+    scrSetResult(0);
+    return 1;
 }
-
-} /* extern "C" */
+}

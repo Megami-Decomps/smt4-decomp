@@ -1,98 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001402d0` (_code @ 0x1402d0, 0x1fc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instructions match, but the defaults use a base-plus-member relocation and zero/one float literals have opposite pool order. */
+#include "shard/W4_Match3_InfoWindow.h"
+#include "AsdSDK/AsdDebug.h"
 
+struct InfoWindowParameterDefaults { u8 primary[0x48]; u8 secondary[0x18]; };
 extern "C" {
-
-int FUN_0014e188(...);
-int asdProcessCreateSimple(...);
-int paramsInit(...);
-int positionStateSet(...);
-int taskCreateDraw(...);
-int FUN_001527d8(...);
-int asdMemoryAllocTracked(...);
-int uiSpriteSetKeyframe(...);
-int uiSpriteSetImageKeyframe(...);
-int sysMemClear(...);
-int paramsClearPacket(...);
-
-/* stack frame of void: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} void_stack;
-
-extern unsigned char LAB_00140510; /* 0x140510 */
-extern unsigned char LAB_00140524; /* 0x140524 */
-extern unsigned char LAB_00140538; /* 0x140538 */
-extern int FUN_00155ca8(...); /* 0x155ca8 */
-extern int FUN_00156478(...); /* 0x156478 */
-extern unsigned char DAT_0052facc; /* 0x52facc */
-extern unsigned char DAT_0052fb14; /* 0x52fb14 */
-extern unsigned int *g_infoWin; /* 0x57f574 */
-
-extern unsigned int spriteHandleCreate(unsigned int);
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: positionStateSet. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: FUN_001527d8. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: paramsClearPacket. */
-
+extern const InfoWindowParameterDefaults DAT_0052facc;
+void* asdMemoryAllocTracked(u32, u32, u32, u32, u32);
+void sysMemClear(void* memory, u32 size);
+void FUN_00156478(void);
+void FUN_00155ca8(void);
+u32 asdProcessCreateSimple(const char*, u32, u32, u32, void (*)(void), void (*)(void), u32);
+u32 taskCreateDraw(const char*, u32, u32, u32, void (*)(void), u32, u32, u32);
+void paramsClearPacket(Params002c312c* parameters);
+void paramsInit(Params002c312c*, const void*, u16, const void*, u16, const void*, u16, const void*, u16, const void*, u16);
+void FUN_0014e188(UiSpriteState*, u32 group, u32 id, const Params002c312c*, u16 flags, f32 speed);
+void uiSpriteSetKeyframe(UiSpriteState*, u32 keyframe, u32 flags);
+void uiSpriteSetImageKeyframe(UiSpriteState*, u32 keyframe, u32 flags);
+void* spriteHandleCreate(u32 flags);
+void FUN_001527d8(void* sprite, s32 value);
+void positionStateSet(void* sprite, u32 first, u32 second, f32 scale);
 
 void FUN_001402d0(void)
-
 {
-/* irregular: 13 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  unsigned int temp_v0;
-  
-  if (g_infoWin == (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x330,1);
-    g_infoWin = puVar1;
-  }
-  puVar1 = g_infoWin;
-  sysMemClear();
-  puVar2 = &LAB_00140510;
-  asdProcessCreateSimple(&LAB_00140510,3,0,0,FUN_00156478,0,0);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_00140524,0x86,0,0,FUN_00155ca8,0,0,puVar2);
-  taskCreateDraw(&LAB_00140538,0xe2,0,0,FUN_00155ca8,0,0,*puVar1);
-  puVar1 = g_infoWin;
-  paramsClearPacket(g_infoWin + 0xd);
-  paramsInit(puVar1 + 0xd,&DAT_0052facc,0x48,&DAT_0052fb14,0x18,0,0,0,0,0,0);
-  FUN_0014e188(puVar1 + 0x15,8,0x87,puVar1 + 0xd,1);
-  uiSpriteSetKeyframe(puVar1 + 0x15,0);
-  FUN_0014e188(puVar1 + 0x5b,8,0x87,puVar1 + 0xd,1);
-  uiSpriteSetKeyframe(puVar1 + 0x5b,2,0);
-  FUN_0014e188(puVar1 + 0x38,0x1b,4000,puVar1 + 0xd,1);
-  uiSpriteSetKeyframe(puVar1 + 0x38,3,0);
-  uiSpriteSetImageKeyframe(puVar1 + 0x38,0);
-  temp_v0 = spriteHandleCreate(0);
-  puVar1[0xca] = temp_v0;
-  FUN_001527d8(temp_v0,0xffffffff);
-  positionStateSet(puVar1[0xca],0,0x646464ff);
-  puVar1[4] = 0x1e;
-  puVar1[8] = 0;
-  puVar1[9] = 0;
-  puVar1[10] = 0;
-  puVar1[0xb] = 0;
-  puVar1[0xa1] = 0;
-  *(unsigned char *)(puVar1 + 0xcb) = 0;
-  *(unsigned char *)((int)puVar1 + 0x32d) = 0;
-  return;
+    if (!g_infoWin) {
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\font\\InfoWin\\InfoWin.cpp", 0x197);
+        g_infoWin = static_cast<InfoWindow*>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(InfoWindow), 1));
+    }
+    InfoWindow* window = g_infoWin;
+    sysMemClear(window, sizeof(InfoWindow));
+    window->task = asdProcessCreateSimple("InfoWin Calc", 3, 0, 0, FUN_00156478, NULL, 0);
+    taskCreateDraw("InfoWin DrawUpLeft", 0x86, 0, 0, FUN_00155ca8, 0, 0, window->task);
+    taskCreateDraw("InfoWin DrawUpRight", 0xE2, 0, 0, FUN_00155ca8, 0, 0, window->task);
+    window = g_infoWin;
+    paramsClearPacket(&window->parameters);
+    paramsInit(&window->parameters, DAT_0052facc.primary, sizeof(DAT_0052facc.primary),
+               DAT_0052facc.secondary, sizeof(DAT_0052facc.secondary), NULL, 0, NULL, 0, NULL, 0);
+    FUN_0014e188(&window->sprites.background, 8, 135, &window->parameters, 1, 0.0f);
+    uiSpriteSetKeyframe(&window->sprites.background, 0, 0);
+    FUN_0014e188(&window->labelAnimation, 8, 135, &window->parameters, 1, 0.0f);
+    uiSpriteSetKeyframe(&window->labelAnimation, 2, 0);
+    FUN_0014e188(&window->sprites.content, 27, 4000, &window->parameters, 1, 0.0f);
+    uiSpriteSetKeyframe(&window->sprites.content, 3, 0);
+    uiSpriteSetImageKeyframe(&window->sprites.content, 0, 0);
+    window->text = spriteHandleCreate(0);
+    FUN_001527d8(window->text, -1);
+    positionStateSet(window->text, 0, 0x646464FF, 1.0f);
+    window->timer = 30;
+    window->active = 0;
+    window->argA = 0;
+    window->argB = 0;
+    window->pending = 0;
+    window->initialization.resetState = 0;
+    window->unk32C = 0;
+    window->unk32D = 0;
 }
-
-} /* extern "C" */
+}

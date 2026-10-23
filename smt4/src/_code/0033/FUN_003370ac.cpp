@@ -8,7 +8,7 @@ int FUN_00255e38(int, unsigned char [2], int, int, int);
 int randomGetLowerTenBits(int, unsigned int);
 int randomGetUpperSixBits(int, unsigned int);
 int devilGetRecord(void);
-int FUN_0033774c(int, unsigned char [2], unsigned int);
+int btlInitializePlayerUnitData(int, unsigned char [2], unsigned int);
 int FUN_0033adf8(void);
 
 /* stack frame of param_1: 39 slot(s), 124 byte(s) */
@@ -66,7 +66,7 @@ extern int saveResolvePartySlot(unsigned int);
 extern int gameGetSlotTable(void);
 extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: FUN_0033774c. */
+/* Supplied declaration required: btlInitializePlayerUnitData. */
 /* Supplied declaration required: FUN_0033adf8. */
 
 
@@ -130,7 +130,7 @@ void FUN_003370ac(int param_1)
   }
   temp_v2 = gameGetSlotTable();
   temp_v3 = gameGetPlayerData();
-  FUN_0033774c(temp_v48,temp_v9,temp_v3);
+  btlInitializePlayerUnitData(temp_v48,temp_v9,temp_v3);
   FUN_00255e38(temp_v48,temp_v9,0,0,0);
   temp_v8 = 0;
   do {

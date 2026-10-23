@@ -1,50 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00400164` (_code @ 0x400164, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: one marker-mask word load is scheduled before rather than after the paired combatant load. */
+#include "battle/btlMain.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
+const Table04Record *dataTable04FindById(u32 id);
+BtlMainStateA *btlGetMainState();
+s32 FUN_00400564(void *owner, s32 mode, const Table04Record *skill);
+extern u8 DAT_00573c90[];
 
-int dataTable04FindById(void);
-int FUN_00400564(int, int, int);
-
-extern unsigned int DAT_00573cb8; /* 0x573cb8 */
-extern unsigned int DAT_00573cbc; /* 0x573cbc */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_00400564. */
-
-
-unsigned int FUN_00400164(int param_1,int param_2)
-
+/* Validate a skill's effect mode, then request the eligible effect. */
+u32 FUN_00400164(void *owner, u32 skillId)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  
-  if ((param_2 != 0) && (dataTable04FindById(), param_2 != 0)) {
-    temp_v2 = 2;
-    temp_v3 = (*(unsigned int *)(param_2 + 0x28) & 0x7ff) >> 9 != 2;
-    if (temp_v3) {
-      temp_v2 = 3;
+    if (skillId == 0) {
+        return 1;
     }
-    if (!temp_v3 || temp_v2 == (*(unsigned int *)(param_2 + 0x28) & 0x7ff) >> 9) {
-      switch(*(unsigned char *)(param_2 + 0x23)) {
-      case 0:
-      case 1:
-      case 2:
-      case 5:
-      case 6:
-      case 10:
-        break;
-      default:
-        temp_v1 = btlGetMainState();
-        if ((*(unsigned int *)(temp_v1 + 0x45a8) & DAT_00573cb8) == 0 &&
-            (*(unsigned int *)(temp_v1 + 0x45ac) & DAT_00573cbc) == 0) {
-          if (*(char *)(param_2 + 0x23) != '\x03') {
-            switch((*(unsigned int *)(param_2 + 0x28) & 0x1ff) >> 5) {
+    const Table04Record *skill = dataTable04FindById(skillId);
+    if (skill == NULL) {
+        return 1;
+    }
+    if (2 != skill->effectProperties.mode && 3 != skill->effectProperties.mode) {
+        return 2;
+    }
+    switch (skill->sort.category) {
+    case 0:
+    case 1:
+    case 2:
+    case 5:
+    case 6:
+    case 10:
+        return 0;
+    default: {
+        struct GateMasks {
+            u8 unk00[0x28];
+            u32 words[2];
+        };
+        BtlMainStateA *state = btlGetMainState();
+        GateMasks *masks = reinterpret_cast<GateMasks *>(DAT_00573c90);
+        u64 flags = state->markerMasks.bits;
+        if ((masks->words[0] & (u32)flags) | (masks->words[1] & (u32)(flags >> 32))) {
+            return 0;
+        }
+        if (skill->sort.category != 3) {
+            switch (skill->effectProperties.targeting) {
             case 0:
             case 1:
             case 3:
@@ -52,25 +49,11 @@ unsigned int FUN_00400164(int param_1,int param_2)
             case 5:
             case 6:
             case 8:
-              return 0;
+                return 0;
             }
-          }
-          FUN_00400564(param_1,1,param_2);
-          temp_v0 = 0;
-          if (param_1 != 0) {
-            temp_v0 = 3;
-          }
-          return temp_v0;
         }
-      }
-      return 0;
+        return FUN_00400564(owner, 1, skill) ? 3 : 0;
     }
-    temp_v0 = 2;
-  }
-  else {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    }
 }
-
-} /* extern "C" */
+}

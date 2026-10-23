@@ -1,78 +1,71 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036bca0` (_code @ 0x36bca0, 0x15c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: playback-base folding, return-byte test and early-exit layout differ. */
+#include "sound/SoundHandlePlayback.h"
 
 extern "C" {
+extern SoundHandlePlaybackStateA g_asdSoundSystem;
+s32 nw_snd_SoundArchive_IsAvailable(void *archive);
+u32 nw_snd_SoundArchive_GetSoundType(void *archive, s32 id);
+s32 asd3dSoundActorIsPlaying(u32 channel);
+u32 asdSoundEnsureArchiveItemLoaded(u32 id);
+u8 FUN_0015e2bc(void *actor, s32 *handle, s32 id, s32 flags);
 
-unsigned int asdSoundEnsureArchiveItemLoaded(unsigned int id);
-int FUN_0015e2bc(unsigned int, unsigned int, int, int);
-int nw_snd_SoundArchive_GetSoundType(unsigned char *, int);
-int asd3dSoundActorIsPlaying(void);
-int VectorUnsignedToFloat(unsigned int, int);
-
-extern unsigned char g_asdSoundSystem; /* 0x63e1e8 */
-extern unsigned int DAT_0063f4bc; /* 0x63f4bc */
-extern signed char DAT_0063f4c4; /* 0x63f4c4 */
-extern unsigned char DAT_0063f4c5; /* 0x63f4c5 */
-extern int DAT_0063f50c; /* 0x63f50c */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0015e2bc. */
-extern int nw_snd_SoundArchive_IsAvailable(unsigned char *);
-/* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
-/* Supplied declaration required: asd3dSoundActorIsPlaying. */
-
-
-unsigned char FUN_0036bca0(int param_1,unsigned int param_2)
-
+u8 FUN_0036bca0(s32 id, u32 channel)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned char *puVar5;
-  unsigned char temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  
-  temp_v1 = DAT_0063f50c;
-  temp_v3 = 0;
-  puVar5 = &g_asdSoundSystem;
-  if ((((DAT_0063f4c4 != '\0') && (param_2 < 0x10)) &&
-      (temp_v0 = nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem), temp_v0 != 0)) &&
-     ((puVar2 = puVar5, nw_snd_SoundArchive_GetSoundType(&g_asdSoundSystem,param_1),
-      puVar2 != (unsigned char *)0x0 && temp_v1 != 0 && (temp_v2 = param_2, asd3dSoundActorIsPlaying(), temp_v2 == 0))))
-  {
-    nw_snd_SoundArchive_GetSoundType(&g_asdSoundSystem,param_1);
-    if ((*(char *)(temp_v1 + 0x3b) != '\0') && (puVar5 == (unsigned char *)0x3)) {
-      temp_v1 = asdSoundEnsureArchiveItemLoaded((unsigned int)param_1);
-      if (temp_v1 == 0) {
-        return 0;
-      }
+    struct Actor {
+        u8 unk00[0x48];
+        f32 volume;
+        u8 unk4c[0x3c];
+    };
+    // The actor array and playback controls lie beyond the shared Apocalypse prefix.
+    struct PlaybackView {
+        u8 unk000[0x890];
+        Actor actors[16];
+        s32 handles[16];
+        u8 unk1150[0x184];
+        u32 active;
+        u8 unk12d8[4];
+        u8 ready;
+        u8 volume;
+        u8 unk12de[0x46];
+        AsdSndSlotA *slot;
+    };
+    typedef char PlaybackOffsets[sizeof(Actor) == 0x88 &&
+        offsetof(PlaybackView, handles) == 0x1110 &&
+        offsetof(PlaybackView, active) == 0x12d4 &&
+        offsetof(PlaybackView, ready) == 0x12dc &&
+        offsetof(PlaybackView, volume) == 0x12dd &&
+        offsetof(PlaybackView, slot) == 0x1324 ? 1 : -1];
+    PlaybackView *playback = reinterpret_cast<PlaybackView *>(&g_asdSoundSystem);
+    AsdSndSlotA *slot = playback->slot;
+    u8 success = 0;
+    if (playback->ready && channel < 16 &&
+        nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem) &&
+        nw_snd_SoundArchive_GetSoundType(&g_asdSoundSystem, id) &&
+        slot && !asd3dSoundActorIsPlaying(channel)) {
+        u32 type = nw_snd_SoundArchive_GetSoundType(&g_asdSoundSystem, id);
+        if (slot->hasHeap && type == 3) {
+            if (!asdSoundEnsureArchiveItemLoaded(id)) {
+                return 0;
+            }
+        } else if (type != 2) {
+            return 0;
+        }
+        Actor *actor = &playback->actors[channel];
+        success = FUN_0015e2bc(actor, &playback->handles[channel], id, 0) == 0;
+        f32 volume;
+        if (playback->volume == 0) {
+            volume = 0.0f;
+        } else {
+            volume = ((f32)(u32)playback->volume - 64.0f) * 0.015748031f + 1.0f;
+            if (volume > 1.0f) {
+                volume = 1.0f;
+            }
+        }
+        actor->volume = volume;
+        if (success) {
+            playback->active |= 1u << channel;
+        }
     }
-    else if (puVar5 != (unsigned char *)0x2) {
-      return 0;
-    }
-    temp_v2 = param_2 * 0x88 + 0x63ea78;
-    FUN_0015e2bc(temp_v2,param_2 * 4 + 0x63f2f8,param_1,0);
-    temp_v3 = (temp_v2 & 0xff) == 0;
-    if (DAT_0063f4c5 == 0) {
-      temp_v4 = 0.0f;
-    }
-    else {
-      temp_v4 = (float)VectorUnsignedToFloat((unsigned int)DAT_0063f4c5,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v4 = (temp_v4 - 64.0f) * 0.015748031f + 1.0f;
-      if ((int)temp_v4 >= 0x3f800001) {
-        temp_v4 = 1.0f;
-      }
-    }
-    *(float *)(param_2 * 0x88 + 0x63eac0) = temp_v4;
-    if (temp_v3) {
-      DAT_0063f4bc = DAT_0063f4bc | (1 << (param_2 & 0xff));
-    }
-  }
-  return temp_v3;
+    return success;
 }
-
-} /* extern "C" */
+}

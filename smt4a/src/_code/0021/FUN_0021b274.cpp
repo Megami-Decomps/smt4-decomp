@@ -1,100 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021b274` (_code @ 0x21b274, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: track/image selection merges branches; camp pointer loaded twice and register allocation differs. */
+#include "camp/CampState.h"
 
 extern "C" {
+extern CampStateA *g_camp;
+void uiSpriteSetKeyframe(u8 *, s32, u32);
+void uiSpriteSetImageKeyframe(u8 *, s32, u32);
 
-int uiSpriteSetKeyframe(int, int, unsigned int);
-int uiSpriteSetImageKeyframe(...);
-
-typedef struct fn_0021b274_arg0 fn_0021b274_arg0;
-struct fn_0021b274_arg0 {
-    unsigned char pad_0x0[0x20];
-    undefined4 field_0x20; /* +0x20 */
-    unsigned char pad_0x24[0x34];
-    undefined4 field_0x58; /* +0x58 */
-    undefined2 field_0x5c; /* +0x5c */
-    undefined2 field_0x5e; /* +0x5e */
-    undefined1 field_0x60; /* +0x60 */
-    unsigned char pad_0x61[0x26];
-    undefined1 field_0x87; /* +0x87 */
-    unsigned char pad_0x88[0x2];
-    undefined1 field_0x8a; /* +0x8a */
-};
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
-
-extern int g_camp; /* 0x57f108 */
-
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-
-
-void FUN_0021b274(fn_0021b274_arg0 *param_1,short param_2,unsigned int param_3)
-
+// Select paired camp animation/image tracks and start the corresponding transition.
+void FUN_0021b274(s32 mode, s32 image, u32 frame)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1;
-  unsigned int *puVar3;
-  short temp_v2;
-  unsigned char *pbVar5;
-  
-  temp_v0 = g_camp;
-  puVar3 = (unsigned int *)&g_camp;
-  pbVar5 = (unsigned char *)(g_camp + 0x1b20);
-  if (!(param_1 == (fn_0021b274_arg0 *)0x1 || param_1 == (fn_0021b274_arg0 *)0x2)) {
-    if (param_1 == (fn_0021b274_arg0 *)0x3 || param_1 == (fn_0021b274_arg0 *)0x4) {
-      if (g_camp != 0) {
-        puVar3 = (unsigned int *)(unsigned int)*pbVar5;
-      }
-      if ((g_camp != 0 && puVar3 != (unsigned int *)0x4) && puVar3 != (unsigned int *)0x3) {
-        uiSpriteSetImageKeyframe(g_camp + 0x1a08,0x18,0);
-        temp_v1 = 3;
-        *pbVar5 = temp_v1;
-      }
+    CampStateA *camp = g_camp;
+    if (mode == 1 || mode == 2) {
+        if (camp != NULL && camp->spriteState != 2 && camp->spriteState != 1) {
+            uiSpriteSetImageKeyframe(camp->transitionSprite, 23, 0);
+            camp->spriteState = 1;
+        }
+    } else if (mode == 3 || mode == 4) {
+        if (camp != NULL && camp->spriteState != 4 && camp->spriteState != 3) {
+            uiSpriteSetImageKeyframe(camp->transitionSprite, 24, 0);
+            camp->spriteState = 3;
+        }
     }
-  }
-  else {
-    if (g_camp != 0) {
-      puVar3 = (unsigned int *)(unsigned int)*pbVar5;
-    }
-    if ((g_camp != 0 && puVar3 != (unsigned int *)0x2) && puVar3 != (unsigned int *)0x1) {
-      uiSpriteSetImageKeyframe(g_camp + 0x1a08,0x17,0);
-      temp_v1 = 1;
-      *pbVar5 = temp_v1;
-    }
-  }
-  temp_v2 = (short)(int)param_1;
-  if (param_1 == (fn_0021b274_arg0 *)0x1) {
-    temp_v2 = 9;
-  }
-  else {
-    if (param_1 == (fn_0021b274_arg0 *)0x2) {
-      temp_v2 = 10;
-    }
-    else if (param_1 == (fn_0021b274_arg0 *)0x3) {
-      temp_v2 = 0xb;
-    }
-    else if (param_1 == (fn_0021b274_arg0 *)0x4) {
-      temp_v2 = 0xc;
-    }
-    if (param_1 != (fn_0021b274_arg0 *)0x2) {
-      if (param_1 == (fn_0021b274_arg0 *)0x3 || param_1 == (fn_0021b274_arg0 *)0x4) {
-        param_2 = 0x14;
-      }
-      uiSpriteSetKeyframe(temp_v0 + 0x6e4,(int)temp_v2,param_3);
-      uiSpriteSetImageKeyframe(temp_v0 + 0x6e4,(int)param_2,param_3);
-      return;
-    }
-  }
-  param_2 = 0x13;
-  uiSpriteSetKeyframe(temp_v0 + 0x6e4,(int)temp_v2,param_3);
-  uiSpriteSetImageKeyframe(temp_v0 + 0x6e4,(int)param_2,param_3);
-  return;
+    s32 track = mode;
+    if (mode == 1)
+        track = 9;
+    else if (mode == 2)
+        track = 10;
+    else if (mode == 3)
+        track = 11;
+    else if (mode == 4)
+        track = 12;
+    if (mode == 1 || mode == 2)
+        image = 19;
+    else if (mode == 3 || mode == 4)
+        image = 20;
+    uiSpriteSetKeyframe(camp->primarySprite, (s16)track, frame);
+    uiSpriteSetImageKeyframe(camp->primarySprite, (s16)image, frame);
 }
-
-} /* extern "C" */
+}

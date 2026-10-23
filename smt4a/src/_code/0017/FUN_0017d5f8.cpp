@@ -1,102 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017d5f8` (_code @ 0x17d5f8, 0x1ac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: command-pair STM versus STRD selection, cursor lifetime and record-index scratch registers differ. */
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
+extern u32 *g_commandBufferCursor;
+extern u32 g_commandBufferEnd;
+extern AsdGfxContext g_asdGfxContext;
+void globalCriticalSectionEnterForward();
+void globalCriticalSectionLeaveForward();
+void FUN_001963e0();
 
-int globalCriticalSectionEnterForward(void);
-int globalCriticalSectionLeaveForward(void);
-int FUN_001963e0(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
-extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
-extern signed char DAT_0061a481; /* 0x61a481 */
-extern signed char DAT_0061a482; /* 0x61a482 */
-extern int DAT_0061a50c; /* 0x61a50c */
-extern int DAT_0061a510; /* 0x61a510 */
-
-/* Supplied declaration required: globalCriticalSectionEnterForward. */
-/* Supplied declaration required: globalCriticalSectionLeaveForward. */
-/* Supplied declaration required: FUN_001963e0. */
-
-
-void FUN_0017d5f8(unsigned int param_1)
-
+void FUN_0017d5f8(u32 parameter)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned char *puVar3;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = DAT_0061a50c;
-  puVar1 = g_commandBufferCursor;
-  temp_v2 = (int)g_commandBufferCursor - *(int *)(DAT_0061a50c + 4);
-  *(unsigned int *)(DAT_0061a50c + 0xc) = temp_v2;
-  if (*(unsigned int *)(temp_v0 + 0x14) == temp_v2) {
-    return;
-  }
-  if ((temp_v2 & 8) != 0) {
-    *(unsigned int *)(temp_v0 + 0xc) = temp_v2 + 0x18;
-  }
-  else {
-    *(unsigned int *)(temp_v0 + 0xc) = temp_v2 + 0x20;
-    if ((unsigned int)puVar1 < g_commandBufferEnd) {
-      g_commandBufferCursor = puVar1 + 2;
-      puVar1[1] = 0x8025e;
-      *puVar1 = 0;
+    AsdCmdBuffer *buffer = g_asdGfxContext.cmdBuffer;
+    u32 *cursor = g_commandBufferCursor;
+    u32 offset = reinterpret_cast<u32>(cursor) - reinterpret_cast<u32>(buffer->start);
+    buffer->writeOffset = offset;
+    if (buffer->committedOffset == offset)
+        return;
+    if (offset & 8) {
+        buffer->writeOffset = offset + 0x18;
+    } else {
+        buffer->writeOffset = offset + 0x20;
+        if (reinterpret_cast<u32>(cursor) < g_commandBufferEnd) {
+            g_commandBufferCursor = cursor + 2;
+            cursor[1] = 0x8025E;
+            cursor[0] = 0;
+        }
     }
-  }
-  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
-    *g_commandBufferCursor = 1;
-    g_commandBufferCursor[1] = 0xf0111;
-    g_commandBufferCursor = g_commandBufferCursor + 2;
-  }
-  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
-    *g_commandBufferCursor = 1;
-    g_commandBufferCursor[1] = 0xf0110;
-    g_commandBufferCursor = g_commandBufferCursor + 2;
-  }
-  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
-    g_commandBufferCursor[1] = 0xf0010;
-    *g_commandBufferCursor = 0x12345678;
-    g_commandBufferCursor = g_commandBufferCursor + 2;
-  }
-  puVar3 = (unsigned char *)(*(int *)(temp_v0 + 0x18) + *(int *)(temp_v0 + 0x20) * 0x1c);
-  *puVar3 = 1;
-  temp_v1 = *(int *)(temp_v0 + 4) + *(int *)(temp_v0 + 0x14);
-  *(int *)(puVar3 + 4) = temp_v1;
-  if (*(int *)(temp_v0 + 0x34) != 0) {
-    temp_v3 = *(int *)(temp_v0 + 0xc) - *(int *)(temp_v0 + 0x14);
-    *(int *)(puVar3 + 8) = temp_v3;
-    *(unsigned int *)(*(int *)(temp_v0 + 0x34) + 8) =
-         (((temp_v3 + temp_v1) - *(int *)(temp_v0 + 0x34)) - 0x18U) >> 3;
-    *(unsigned int *)(puVar3 + 8) = *(unsigned int *)(temp_v0 + 0x30);
-    *(unsigned int *)(temp_v0 + 0x34) = 0;
-    *(unsigned int *)(temp_v0 + 0x30) = 0;
-  }
-  *(unsigned int *)(puVar3 + 8) = param_1;
-  temp_v2 = *(unsigned int *)(puVar3 + 0xc);
-  *(unsigned int *)(puVar3 + 0xc) = (temp_v2 & 0xfffffffd) | 4;
-  if (*(char *)(temp_v0 + 0x3d) != '\0') {
-    *(unsigned int *)(puVar3 + 0xc) = (temp_v2 & 0xfffffffd) | 5;
-  }
-  *(unsigned int *)(temp_v0 + 0x14) = *(unsigned int *)(temp_v0 + 0xc);
-  globalCriticalSectionEnterForward();
-  *(int *)(temp_v0 + 0x20) = *(int *)(temp_v0 + 0x20) + 1;
-  if (((DAT_0061a510 == temp_v0) && (DAT_0061a482 != '\0')) && (DAT_0061a481 == '\0')) {
-    DAT_0061a481 = '\x01';
-    FUN_001963e0();
-  }
-  globalCriticalSectionLeaveForward();
-  return;
+    if (reinterpret_cast<u32>(g_commandBufferCursor) < g_commandBufferEnd) {
+        g_commandBufferCursor[0] = 1;
+        g_commandBufferCursor[1] = 0xF0111;
+        g_commandBufferCursor += 2;
+    }
+    if (reinterpret_cast<u32>(g_commandBufferCursor) < g_commandBufferEnd) {
+        g_commandBufferCursor[0] = 1;
+        g_commandBufferCursor[1] = 0xF0110;
+        g_commandBufferCursor += 2;
+    }
+    if (reinterpret_cast<u32>(g_commandBufferCursor) < g_commandBufferEnd) {
+        g_commandBufferCursor[1] = 0xF0010;
+        g_commandBufferCursor[0] = 0x12345678;
+        g_commandBufferCursor += 2;
+    }
+    AsdCmdRecord *record = &buffer->entries[buffer->listCount];
+    record->kind = 1;
+    record->commands = buffer->start + buffer->committedOffset;
+    if (buffer->unk34) {
+        record->byteCount = buffer->writeOffset - buffer->committedOffset;
+        u32 *jump = reinterpret_cast<u32 *>(buffer->unk34);
+        jump[2] = ((reinterpret_cast<u32>(record->commands) + record->byteCount - reinterpret_cast<u32>(jump)) - 0x18) >> 3;
+        record->byteCount = buffer->unk30;
+        buffer->unk34 = 0;
+        buffer->unk30 = 0;
+    }
+    record->byteCount = parameter;
+    record->flags = (record->flags & ~2U) | 4;
+    if (buffer->flag3d)
+        record->flags |= 1;
+    buffer->committedOffset = buffer->writeOffset;
+    globalCriticalSectionEnterForward();
+    ++buffer->listCount;
+    if (g_asdGfxContext.activeBuffer == buffer && g_asdGfxContext.submission.enabled && !g_asdGfxContext.submission.pending) {
+        g_asdGfxContext.submission.pending = 1;
+        FUN_001963e0();
+    }
+    globalCriticalSectionLeaveForward();
 }
-
-} /* extern "C" */
+}

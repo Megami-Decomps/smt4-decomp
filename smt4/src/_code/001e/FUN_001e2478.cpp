@@ -1,94 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e2478` (_code @ 0x1e2478, 0x1c8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: direction intermediate stores are folded, and scene-position snapshots use integer copies. */
+#include "map/lmapMain.h"
+#include "shard/W6_W6Match2_AocTable23.h"
 
 extern "C" {
+extern LmapMainState *g_lmapMainState;
+extern LmapScene *g_lmapScene;
+u32 FUN_0027d7b0(s32 map, s32 group, u32 point);
+const Table23Record *dataTableGetRecord23(u32 key);
+f32 mathDistanceBetweenPoints(MapVector first, MapVector second);
 
-int FUN_0027d7b0(...);
-int mathDistanceBetweenPoints(void);
-int VectorSignedToFloat(int, int);
-
-extern int g_lmapMainState; /* 0x447060 */
-extern int g_lmapScene; /* 0x447e88 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int dataTableGetRecord23(void);
-/* Supplied declaration required: FUN_0027d7b0. */
-/* Supplied declaration required: mathDistanceBetweenPoints. */
-
-
-void FUN_001e2478(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Move the map scene from its current position or a named waypoint toward another waypoint.
+void FUN_001e2478(s32 startGroup, u32 startPoint, s32 targetGroup, u32 targetPoint)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int in_fpscr;
-  unsigned int temp_v2;
-  float temp_v3;
-  float temp_v4;
-  unsigned int temp_v5;
-  float temp_v6;
-  unsigned int temp_v7;
-  
-  temp_v0 = g_lmapMainState;
-  if (param_1 != 0) {
-    FUN_0027d7b0(*(unsigned int *)(g_lmapMainState + 0x40),param_1,param_2);
-    temp_v1 = dataTableGetRecord23();
-    temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(unsigned int *)(temp_v0 + 0x4ebc) = temp_v2;
-    temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(unsigned int *)(temp_v0 + 0x4ec0) = temp_v2;
-    temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(unsigned int *)(temp_v0 + 0x4ec4) = temp_v2;
-  }
-  else {
-    temp_v2 = *(unsigned int *)(g_lmapScene + 0x20);
-    temp_v5 = *(unsigned int *)(g_lmapScene + 0x24);
-    *(unsigned int *)(g_lmapMainState + 0x4ebc) = *(unsigned int *)(g_lmapScene + 0x1c);
-    *(unsigned int *)(temp_v0 + 0x4ec0) = temp_v2;
-    *(unsigned int *)(temp_v0 + 0x4ec4) = temp_v5;
-  }
-  FUN_0027d7b0(*(unsigned int *)(temp_v0 + 0x40),param_3,param_4);
-  temp_v1 = dataTableGetRecord23();
-  temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v0 + 0x4ec8) = temp_v2;
-  temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v0 + 0x4ecc) = temp_v2;
-  temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v0 + 0x4ed0) = temp_v2;
-  temp_v3 = *(float *)(temp_v0 + 0x4ebc);
-  mathDistanceBetweenPoints();
-  temp_v6 = *(float *)(temp_v0 + 0x4ec8) - *(float *)(temp_v0 + 0x4ebc);
-  *(float *)(temp_v0 + 0x4edc) = *(float *)(temp_v0 + 0x4ed0) - *(float *)(temp_v0 + 0x4ec4);
-  *(float *)(temp_v0 + 0x4ed4) = temp_v6;
-  *(float *)(temp_v0 + 0x4ed8) = *(float *)(temp_v0 + 0x4ecc) - *(float *)(temp_v0 + 0x4ec0);
-  temp_v4 = 1.0f / temp_v3;
-  *(float *)(temp_v0 + 0x4ed4) = temp_v6 * temp_v4;
-  *(float *)(temp_v0 + 0x4ed8) = *(float *)(temp_v0 + 0x4ed8) * temp_v4;
-  *(float *)(temp_v0 + 0x4edc) = *(float *)(temp_v0 + 0x4edc) * temp_v4;
-  *(unsigned int *)(temp_v0 + 0x4ee0) = 0x41f00000;
-  *(unsigned int *)(temp_v0 + 0x4ee4) = 0;
-  *(int *)(temp_v0 + 0x4ee8) = (int)(temp_v3 / 30.0f);
-  temp_v1 = g_lmapScene;
-  temp_v2 = *(unsigned int *)(temp_v0 + 0x4ebc);
-  temp_v5 = *(unsigned int *)(temp_v0 + 0x4ec0);
-  temp_v7 = *(unsigned int *)(temp_v0 + 0x4ec4);
-  puVar3 = (unsigned int *)(g_lmapScene + 0x28);
-  *(unsigned int *)(g_lmapScene + 0x1c) = temp_v2;
-  *(unsigned int *)(temp_v1 + 0x20) = temp_v5;
-  *(unsigned int *)(temp_v1 + 0x24) = temp_v7;
-  *puVar3 = temp_v2;
-  *(unsigned int *)(temp_v1 + 0x2c) = temp_v5;
-  *(unsigned int *)(temp_v1 + 0x30) = temp_v7;
-  temp_v0 = g_lmapMainState;
-  if (*(int *)(g_lmapMainState + 0xcc) != 5) {
-    *(unsigned int *)(g_lmapMainState + 0xd0) = 0;
-    *(unsigned int *)(temp_v0 + 0xcc) = 5;
-    *(unsigned int *)(temp_v0 + 0xd4) = 0;
-  }
-  return;
+    struct WaypointView { u32 key; s16 x, y, z; };
+    struct MovementView {
+        u8 unk0000[0x40];
+        s32 map;
+        u8 unk0044[0x88];
+        u32 mode;
+        u32 frame;
+        u32 counter;
+        u8 unk00d8[0x4de4];
+        MapVector start;
+        MapVector target;
+        MapVector direction;
+        f32 speed;
+        u32 elapsed;
+        s32 duration;
+    };
+    // This movement tail is outside the canonical LmapMainState prefix.
+    MovementView *work = reinterpret_cast<MovementView *>(g_lmapMainState);
+    if (startGroup != 0) {
+        const WaypointView *point = reinterpret_cast<const WaypointView *>(
+            dataTableGetRecord23(FUN_0027d7b0(work->map, startGroup, startPoint)));
+        work->start.x = point->x;
+        work->start.y = point->y;
+        work->start.z = point->z;
+    } else {
+        work->start = *reinterpret_cast<const MapVector *>(g_lmapScene->transform.position);
+    }
+    const WaypointView *target = reinterpret_cast<const WaypointView *>(
+        dataTableGetRecord23(FUN_0027d7b0(work->map, targetGroup, targetPoint)));
+    work->target.x = target->x;
+    work->target.y = target->y;
+    work->target.z = target->z;
+    f32 distance = mathDistanceBetweenPoints(work->start, work->target);
+    work->direction.x = work->target.x - work->start.x;
+    work->direction.y = work->target.y - work->start.y;
+    work->direction.z = work->target.z - work->start.z;
+    f32 inverseDistance = 1.0f / distance;
+    work->direction.x *= inverseDistance;
+    work->direction.y *= inverseDistance;
+    work->direction.z *= inverseDistance;
+    work->speed = 30.0f;
+    work->elapsed = 0;
+    work->duration = static_cast<s32>(distance / work->speed);
+    LmapScene *scene = g_lmapScene;
+    MapVector start = work->start;
+    scene->transform.position[0] = start.x;
+    scene->transform.position[1] = start.y;
+    scene->transform.position[2] = start.z;
+    scene->transform.positionSnapshotA[0] = start.x;
+    scene->transform.positionSnapshotA[1] = start.y;
+    scene->transform.positionSnapshotA[2] = start.z;
+    MovementView *current = reinterpret_cast<MovementView *>(g_lmapMainState);
+    if (current->mode != 5) {
+        current->frame = 0;
+        current->mode = 5;
+        current->counter = 0;
+    }
 }
-
-} /* extern "C" */
+}

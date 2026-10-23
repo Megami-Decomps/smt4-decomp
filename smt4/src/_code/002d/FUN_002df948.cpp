@@ -1,33 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002df948` (_code @ 0x2df948, 0x11c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler caches diagonal positions across calls, increasing saved VFP registers. */
+#include "common.h"
 
 extern "C" {
+void FUN_002566b4(s32 kind, f32 x, f32 y, f32 z, f32 angle, f32 size);
 
-int FUN_002566b4(int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-/* Supplied declaration required: FUN_002566b4. */
-
-
-void FUN_002df948(void)
-
+// Spawn a center effect and eight surrounding effects in the horizontal plane.
+void FUN_002df948(f32 x, f32 y, f32 z)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002566b4(0x14);
-  FUN_002566b4(0x16);
-  FUN_002566b4(0x13);
-  FUN_002566b4(0x12);
-  FUN_002566b4(0x15);
-  FUN_002566b4(0x14);
-  FUN_002566b4(0x13);
-  FUN_002566b4(0x15);
-  FUN_002566b4(0x12);
-  return;
+    FUN_002566b4(20, x, y, z, 0.0f, 50.0f);
+    FUN_002566b4(22, x - 70.0f, y, z, 0.0f, 45.0f);
+    FUN_002566b4(19, x + 70.0f, y, z, 0.0f, 45.0f);
+    FUN_002566b4(18, x, y, z - 70.0f, 0.0f, 45.0f);
+    FUN_002566b4(21, x, y, z + 70.0f, 0.0f, 45.0f);
+    FUN_002566b4(20, x - 60.0f, y, z - 60.0f, 0.0f, 45.0f);
+    FUN_002566b4(19, x + 60.0f, y, z - 60.0f, 0.0f, 45.0f);
+    FUN_002566b4(21, x - 60.0f, y, z + 60.0f, 0.0f, 45.0f);
+    FUN_002566b4(18, x + 60.0f, y, z + 60.0f, 0.0f, 45.0f);
 }
-
-} /* extern "C" */
+}

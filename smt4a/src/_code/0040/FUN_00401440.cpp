@@ -1,73 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00401440` (_code @ 0x401440, 0x12c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail's zero-vector additions are omitted; VFP constants and position loads differ. */
+#include "Model/ModelActivationGroup.h"
 
 extern "C" {
+extern void *g_handleRegistry;
+u8 FUN_0040ab8c(LockedObj *object);
+void FUN_0040a908(LockedObj *object, u32 flags);
+void FUN_0040a918(LockedObj *object, u32 flags);
+void FUN_0040aad4(LockedObj *object, s32 mode);
+void FUN_003fe86c(u32 model, s32 first, s32 second, f32 x, f32 y);
+void controllerSetPosition(u32 model, f32 x, f32 y, f32 z);
+void handleRegistryRegisterObject(void *registry, u32 model);
+void FUN_003fd7b4(u32 model, f32 x, f32 y, f32 z);
 
-int controllerSetPosition(unsigned int);
-int FUN_003fd7b4(unsigned int);
-int FUN_003fe86c(unsigned int, int, int);
-int FUN_0040a908(int, int);
-int FUN_0040a918(unsigned int, int);
-int FUN_0040aad4(unsigned int, int);
-int handleRegistryRegisterObject(unsigned int, unsigned int);
-
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-
-/* Supplied declaration required: controllerSetPosition. */
-/* Supplied declaration required: FUN_003fd7b4. */
-/* Supplied declaration required: FUN_003fe86c. */
-/* Supplied declaration required: FUN_0040a908. */
-/* Supplied declaration required: FUN_0040a918. */
-/* Supplied declaration required: FUN_0040aad4. */
-extern int FUN_0040ab8c(void);
-/* Supplied declaration required: handleRegistryRegisterObject. */
-
-
-unsigned int FUN_00401440(int param_1)
-
+/* Activate all loaded models, reset their common scale, and apply local positions. */
+u32 FUN_00401440(ModelActivationGroup *group)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned long long temp_v3;
-  
-  temp_v1 = 0;
-  while ((*(int *)(param_1 + temp_v1 * 4 + 0x1c) == 0 || (temp_v0 = FUN_0040ab8c(), temp_v0 != 0))) {
-    temp_v1 = temp_v1 + 1;
-    if (temp_v1 >= 3) {
-      temp_v3 = 0x3f80000000000000;
-      temp_v1 = 0;
-      do {
-        temp_v0 = param_1 + temp_v1 * 4;
-        if (*(int *)(temp_v0 + 0x1c) != 0) {
-          FUN_0040a908(*(int *)(temp_v0 + 0x1c),0x10000);
-          FUN_0040a918(*(unsigned int *)(temp_v0 + 0x1c),0x30000);
-          FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x1c),0);
-          temp_v2 = *(unsigned int *)(*(int *)(temp_v0 + 0x1c) + 4);
-          FUN_003fe86c(temp_v2,0,2);
-          controllerSetPosition(temp_v2);
-          handleRegistryRegisterObject(g_handleRegistry,temp_v2);
+    for (s32 index = 0; index < 3; ++index) {
+        if (group->models[index] != NULL && !FUN_0040ab8c(group->models[index])) {
+            return 0;
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 3);
-      temp_v2 = (unsigned int)((unsigned long long)temp_v3 >> 0x20);
-      *(unsigned int *)(param_1 + 0x4c) = temp_v2;
-      *(unsigned int *)(param_1 + 0x50) = temp_v2;
-      *(unsigned int *)(param_1 + 0x54) = temp_v2;
-      temp_v1 = 0;
-      do {
-        temp_v0 = *(int *)(param_1 + temp_v1 * 4 + 0x1c);
-        if (temp_v0 != 0) {
-          FUN_003fd7b4(*(unsigned int *)(temp_v0 + 4));
-        }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 3);
-      return 1;
     }
-  }
-  return 0;
+    for (s32 index = 0; index < 3; ++index) {
+        if (group->models[index] != NULL) {
+            FUN_0040a908(group->models[index], 0x10000);
+            FUN_0040a918(group->models[index], 0x30000);
+            FUN_0040aad4(group->models[index], 0);
+            u32 model = group->models[index]->locked;
+            FUN_003fe86c(model, 0, 2, 0.0f, 0.0f);
+            controllerSetPosition(model, 1.0f, 1.0f, 1.0f);
+            handleRegistryRegisterObject(g_handleRegistry, model);
+        }
+    }
+    group->scale.x = 1.0f;
+    group->scale.y = 1.0f;
+    group->scale.z = 1.0f;
+    for (s32 index = 0; index < 3; ++index) {
+        if (group->models[index] != NULL) {
+            FUN_003fd7b4(group->models[index]->locked,
+                group->positions[index].x,
+                group->positions[index].y,
+                group->positions[index].z);
+        }
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

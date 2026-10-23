@@ -1,90 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039c3fc` (_code @ 0x39c3fc, 0x180 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-struct MapNaviDisplay;
+/* NON_MATCHING: outgoing/incoming block placement and retained sprite pointers differ; completion byte uses direct unsigned load. */
+#include "map/NaviDisplayTransition.h"
 
 extern "C" {
+s32 FUN_002bf818(UiSpriteState *sprite);
+void FUN_002b8ee0(UiSpriteState *sprite, s32 mode);
+s32 vec2GetXInt(const UiSpriteState *sprite);
+s32 vec2GetYInt(const UiSpriteState *sprite);
+void pointConvertToFloat(f32 *point, s32 x, s32 y);
+void naviMainSetCurrentMap(u16 *state, u32 map);
+void FUN_0039f860(u16 *state, s32 option);
+void FUN_002316e8(MapNaviDisplay *display);
+void mapNaviDisplayLoadMap(MapNaviDisplay *display, s32 map);
+void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 option);
 
-int pointConvertToFloat(...);
-void mapNaviDisplayLoadMap(MapNaviDisplay*, int);
-int FUN_002316e8(void);
-int uiSpriteSetImageKeyframe(int, int, int);
-int FUN_002b8ee0(int, int);
-int FUN_002bf818(int);
-int naviMainSetCurrentMap(int, unsigned int);
-int FUN_0039f860(int, int);
-
-/* Supplied declaration required: pointConvertToFloat. */
-/* Supplied declaration required: FUN_002316e8. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_002b8ee0. */
-extern unsigned int vec2GetYInt(int);
-extern unsigned int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf818. */
-/* Supplied declaration required: naviMainSetCurrentMap. */
-/* Supplied declaration required: FUN_0039f860. */
-
-
-void FUN_0039c3fc(int param_1)
-
+// Animate the map switch, loading the new map between its outgoing and incoming phases.
+void FUN_0039c3fc(MapNaviDisplay *display)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  if ((*(unsigned int *)(param_1 + 0x10) & 8) != 0) {
-    temp_v3 = param_1 + 0x8d4;
-    if (*(char *)(param_1 + 0x5b) != '\0') {
-      if (*(char *)(param_1 + 0x5b) == '\x01') {
-        FUN_002bf818(temp_v3);
-        FUN_002bf818(param_1 + 0x960);
-        temp_v3 = param_1 + 0x198;
-        FUN_002b8ee0(temp_v3,0);
-        if (*(char *)(param_1 + 0x222) != '\0') {
-          pointConvertToFloat(param_1 + 0x164,0);
-          *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xffffeff7;
+    NaviDisplayTransitionView *work = reinterpret_cast<NaviDisplayTransitionView *>(display);
+    if ((work->flags & 8) != 0) {
+        if (work->phase != 0) {
+            if (work->phase == 1) {
+                FUN_002bf818(&work->indicator);
+                FUN_002bf818(&work->overlay);
+                FUN_002b8ee0(&work->outgoing, 0);
+                if (work->outgoing.animationFlags.completed != 0) {
+                    pointConvertToFloat(work->origin, 0, 0);
+                    work->flags &= ~0x1008u;
+                } else {
+                    s32 y = vec2GetYInt(&work->outgoing);
+                    s32 x = vec2GetXInt(&work->outgoing);
+                    pointConvertToFloat(work->origin, x, y);
+                }
+                work->mapDirty = 1;
+                work->overlayDirty = 1;
+                return;
+            }
+        } else {
+            FUN_002bf818(&work->indicator);
+            if (FUN_002bf818(&work->incoming) != 0) {
+                naviMainSetCurrentMap(&work->mapState, work->map);
+                FUN_0039f860(&work->mapState, 0);
+                work->counter = 0;
+                if (work->map >= 100) {
+                    work->mapVisible = 0;
+                    FUN_002316e8(display);
+                } else {
+                    work->mapVisible = 1;
+                    mapNaviDisplayLoadMap(display, work->map);
+                }
+                uiSpriteSetImageKeyframe(&work->indicator, 2, 0);
+                work->phase = 1;
+            }
+            s32 y = vec2GetYInt(&work->incoming);
+            s32 x = vec2GetXInt(&work->incoming);
+            pointConvertToFloat(work->origin, x, y);
+            work->mapDirty = 1;
+            work->overlayDirty = 1;
         }
-        else {
-          temp_v1 = vec2GetYInt(temp_v3);
-          temp_v2 = vec2GetXInt(temp_v3);
-          pointConvertToFloat(param_1 + 0x164,temp_v2,temp_v1);
-        }
-        *(unsigned char *)(param_1 + 0x5a8c) = 1;
-        *(unsigned char *)(param_1 + 0x5a8d) = 1;
-        return;
-      }
     }
-    else {
-      FUN_002bf818(temp_v3);
-      temp_v4 = param_1 + 0x224;
-      temp_v0 = FUN_002bf818(temp_v4);
-      if (temp_v0 != 0) {
-        naviMainSetCurrentMap(param_1 + 0x162,*(unsigned int *)(param_1 + 0x5c));
-        FUN_0039f860(param_1 + 0x162,0);
-        *(unsigned int *)(param_1 + 0x18) = 0;
-        if (*(int *)(param_1 + 0x5c) >= 100) {
-          *(unsigned char *)(param_1 + 0xc) = 0;
-          FUN_002316e8();
-        }
-        else {
-          *(unsigned char *)(param_1 + 0xc) = 1;
-          mapNaviDisplayLoadMap((MapNaviDisplay*)param_1,*(int *)(param_1 + 0x5c));
-        }
-        uiSpriteSetImageKeyframe(temp_v3,2,0);
-        *(unsigned char *)(param_1 + 0x5b) = 1;
-      }
-      temp_v1 = vec2GetYInt(temp_v4);
-      temp_v2 = vec2GetXInt(temp_v4);
-      pointConvertToFloat(param_1 + 0x164,temp_v2,temp_v1);
-      *(unsigned char *)(param_1 + 0x5a8c) = 1;
-      *(unsigned char *)(param_1 + 0x5a8d) = 1;
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

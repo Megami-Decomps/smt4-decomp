@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00111184` (_code @ 0x111184, 0x200 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: BLOCKED: chained native base/member constructors need the owning thread/process class layout and inheritance; WindowStatusResult alone is defined. */
 #include "romwright_types.h"
 
 extern "C" {

@@ -1,89 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d2c20` (_code @ 0x3d2c20, 0x104 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: equivalent status-mask code, but compiler shares the final OR tail from the opposite cure branch. */
+#include "common.h"
+#include <stddef.h>
+
+/* This view reaches beyond the shared ActiveSkillRecord prefix. */
+struct ActiveSkillStatusView {
+    u8 unk00[0x3c];
+    u32 effect; // 0x3c
+    u8 unk40[0x46];
+    s16 targetKind; // 0x86
+};
+typedef char ActiveSkillStatusOffsets[
+    offsetof(ActiveSkillStatusView, effect) == 0x3c &&
+    offsetof(ActiveSkillStatusView, targetKind) == 0x86 ? 1 : -1];
 
 extern "C" {
-
-
-unsigned int FUN_003d2c20(int param_1,unsigned int param_2)
-
+// Select the current status ailments affected by a skill's cure effect.
+u32 FUN_003d2c20(const ActiveSkillStatusView *skill, u32 ailments)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = 0;
-  if (((*(unsigned int *)(param_1 + 0x3c) & 0x7f) != 0 && param_2 != 0) && (*(short *)(param_1 + 0x86) != 6)
-     ) {
-    temp_v1 = *(unsigned int *)(param_1 + 0x3c) & 0x7f;
-    if (temp_v1 != 0x16) {
-      if (temp_v1 == 0x17) {
-        if ((param_2 & 0x80) != 0) {
-          temp_v0 = 0x80;
+    u32 result = 0;
+    if ((skill->effect & 0x7f) != 0 && ailments != 0 && skill->targetKind != 6) {
+        u32 effect = skill->effect & 0x7f;
+        if (effect == 22) {
+            if (ailments & 0x20) result = 0x20;
+            if (ailments & 0x40) result |= 0x40;
+            if (ailments & 0x80) result |= 0x80;
+            if (ailments & 0x100) result |= 0x100;
+            if (ailments & 0x200) result |= 0x200;
+            if (ailments & 0x800) result |= 0x800;
+            if (ailments & 0x1000) result |= 0x1000;
+            if (ailments & 0x2000) result |= 0x2000;
+        } else if (effect == 23) {
+            if (ailments & 0x80) result = 0x80;
+        } else if (effect == 28) {
+            if (ailments & 0x40) result = 0x40;
+            if (ailments & 0x80) result |= 0x80;
+            if (ailments & 0x100) result |= 0x100;
+            if (ailments & 0x800) result |= 0x800;
+            if (ailments & 0x1000) result |= 0x1000;
+            if (ailments & 0x2000) result |= 0x2000;
+        } else if (effect == 24) {
+            result = ailments;
+        } else if (effect == 31) {
+            if (ailments & 0x20) result = 0x20;
+            if (ailments & 0x200) result |= 0x200;
+        } else {
+            if (ailments & (1 << effect)) result = 1 << effect;
         }
-        return temp_v0;
-      }
-      if (temp_v1 != 0x1c) {
-        if (temp_v1 == 0x18) {
-          return param_2;
-        }
-        if (temp_v1 != 0x1f) {
-          if ((param_2 & (1 << temp_v1)) == 0) {
-            return 0;
-          }
-          return 1 << temp_v1;
-        }
-        if ((param_2 & 0x20) != 0) {
-          temp_v0 = 0x20;
-        }
-        if ((param_2 & 0x200) != 0) {
-          temp_v0 = temp_v0 | 0x200;
-        }
-        return temp_v0;
-      }
-      if ((param_2 & 0x40) != 0) {
-        temp_v0 = 0x40;
-      }
-      if ((param_2 & 0x80) != 0) {
-        temp_v0 = temp_v0 | 0x80;
-      }
-      if ((param_2 & 0x100) != 0) {
-        temp_v0 = temp_v0 | 0x100;
-      }
-      if ((param_2 & 0x800) != 0) {
-        temp_v0 = temp_v0 | 0x800;
-      }
-      if ((param_2 & 0x1000) != 0) {
-        temp_v0 = temp_v0 | 0x1000;
-      }
     }
-    else {
-      if ((param_2 & 0x20) != 0) {
-        temp_v0 = 0x20;
-      }
-      if ((param_2 & 0x40) != 0) {
-        temp_v0 = temp_v0 | 0x40;
-      }
-      if ((param_2 & 0x80) != 0) {
-        temp_v0 = temp_v0 | 0x80;
-      }
-      if ((param_2 & 0x100) != 0) {
-        temp_v0 = temp_v0 | 0x100;
-      }
-      if ((param_2 & 0x200) != 0) {
-        temp_v0 = temp_v0 | 0x200;
-      }
-      if ((param_2 & 0x800) != 0) {
-        temp_v0 = temp_v0 | 0x800;
-      }
-      if ((param_2 & 0x1000) != 0) {
-        temp_v0 = temp_v0 | 0x1000;
-      }
-    }
-    if ((param_2 & 0x2000) != 0) {
-      return temp_v0 | 0x2000;
-    }
-  }
-  return temp_v0;
+    return result;
 }
-
-} /* extern "C" */
+}

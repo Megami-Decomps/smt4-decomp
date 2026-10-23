@@ -1,75 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00417a60` (_code @ 0x417a60, 0x110 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: flag-byte update registers and the packed flag-clearing loop use different instructions and saved registers. */
+#include "shard/Shard0041.h"
+#include "gamedata/EntrySortRecord.h"
 
 extern "C" {
+PartyBlockB *gameFlagBlockGet();
+u32 FUN_001bd100(u32 id);
+EntrySortRecord *FUN_001ad9b4(u32 id);
+void FUN_004bb6d8(u32 flag, u32 value);
 
-int FUN_001ad9b4(void);
-int FUN_004bb6d8(unsigned int, int);
-
-extern int gameFlagBlockGet(void);
-/* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_001bd100(unsigned int);
-/* Supplied declaration required: FUN_004bb6d8. */
-
-
-unsigned char FUN_00417a60(unsigned int param_1)
-
+// Deactivate a party record and remove its selected-role references.
+u8 FUN_00417a60(u32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned char *pbVar7;
-  
-  temp_v2 = gameFlagBlockGet();
-  temp_v2 = temp_v2 + param_1 * 4;
-  pbVar7 = (unsigned char *)(temp_v2 + 0x2a0);
-  temp_v1 = *pbVar7 & 2;
-  if ((*pbVar7 & 2) != 0) {
-    temp_v3 = gameFlagBlockGet();
-    *(unsigned char *)(temp_v2 + 0x2a2) = *(unsigned char *)(temp_v2 + 0x2a2) & 0xfb;
-    *pbVar7 = (*pbVar7 & 0xfd) | 0x1c;
-    temp_v2 = FUN_001bd100(param_1);
-    if (temp_v2 != 0) {
-      temp_v5 = param_1;
-      FUN_001ad9b4();
-      if (*(char *)(temp_v5 + 6) == '\x01') {
-        if (*(unsigned short *)(temp_v3 + 0x8e4) == param_1) {
-          *(unsigned short *)(temp_v3 + 0x8e4) = 0;
+    struct RoleSlot { u16 id; u8 unk02[10]; };
+    // Role slots are beyond the shared PartyBlockB prefix.
+    struct RoleSlotsView { u8 prefix[0x8E4]; RoleSlot slots[4]; };
+    PartyEntryB *entry = &gameFlagBlockGet()->e[id];
+    u8 changed = entry->flags & 2;
+    if (changed != 0) {
+        PartyBlockB *block = gameFlagBlockGet();
+        entry->bits &= ~4;
+        entry->flags = (entry->flags & ~2) | 0x1C;
+        if (FUN_001bd100(id)) {
+            if (FUN_001ad9b4(id)->category == 1) {
+                RoleSlotsView *roles = reinterpret_cast<RoleSlotsView *>(block);
+                for (s32 index = 0; index < 4; ++index) {
+                    if (roles->slots[index].id == id)
+                        roles->slots[index].id = 0;
+                }
+            }
+        } else if (gameFlagBlockGet()->unk8E0 == id) {
+            block->unk8E0 = 0;
+            for (u32 flag = 0x500; flag < 0x520; ++flag) {
+                PartyBlockB *flags = gameFlagBlockGet();
+                FUN_004bb6d8(flag, 0);
+                flags->unk00[flag >> 3] &= ~(1 << (flag & 7));
+            }
         }
-        if (*(unsigned short *)(temp_v3 + 0x8f0) == param_1) {
-          *(unsigned short *)(temp_v3 + 0x8f0) = 0;
-        }
-        if (*(unsigned short *)(temp_v3 + 0x8fc) == param_1) {
-          *(unsigned short *)(temp_v3 + 0x8fc) = 0;
-        }
-        if (*(unsigned short *)(temp_v3 + 0x908) == param_1) {
-          *(unsigned short *)(temp_v3 + 0x908) = 0;
-        }
-      }
+        changed = 1;
     }
-    else {
-      temp_v2 = gameFlagBlockGet();
-      if (*(unsigned short *)(temp_v2 + 0x8e0) == param_1) {
-        temp_v5 = 0x500;
-        *(unsigned short *)(temp_v3 + 0x8e0) = 0;
-        do {
-          temp_v2 = gameFlagBlockGet();
-          FUN_004bb6d8(temp_v5,0);
-          temp_v4 = temp_v5 & 7;
-          temp_v0 = temp_v5 >> 3;
-          temp_v5 = temp_v5 + 1;
-          *(unsigned char *)(temp_v2 + temp_v0) = ~(unsigned char)(1 << temp_v4) & *(unsigned char *)(temp_v2 + temp_v0);
-        } while (temp_v5 < 0x520);
-      }
-    }
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    return changed;
 }
-
-} /* extern "C" */
+}

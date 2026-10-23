@@ -11,7 +11,7 @@ int efctSetSpeed(void);
 int FUN_0018152c(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_0022fb78(int, int);
+int statusDownDrawIndicatorPairs(int, int);
 int dataTable0cFindByKey(void);
 int FUN_00344cd0(...);
 int FUN_0035ae58(...);
@@ -46,7 +46,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0022fb78. */
+/* Supplied declaration required: statusDownDrawIndicatorPairs. */
 extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: dataTable0cFindByKey. */
 extern int resourceRunOperationIfUnblocked(void);
@@ -104,7 +104,7 @@ void FUN_003d3a4c(int param_1,int param_2)
   efctSetSpeed();
   FUN_00164b5c(2,0x12,5,param_1,param_2,0xb3);
   FUN_00164b5c(2,0x12,0xb,param_1,param_2,0xb5);
-  FUN_0022fb78(param_1,param_2);
+  statusDownDrawIndicatorPairs(param_1,param_2);
   temp_v6 = 0;
   do {
     temp_v7 = temp_v2 + (temp_v4 + temp_v6) * 4;

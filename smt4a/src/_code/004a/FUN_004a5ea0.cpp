@@ -10,7 +10,7 @@ int dataTable00FindById(void);
 int drawTextAtRelativePosition(...);
 int FUN_004a7814(...);
 int FUN_004a7a50(int, int, unsigned int, int, int, int);
-int FUN_004a7cb0(int, unsigned int, int, int, int);
+void FUN_004a7cb0(void *, unsigned int, int, int, int, float scale);
 int FUN_004a7dc8(int, int, int, int);
 int FUN_004a7fb8(int, unsigned int, int, int, int, int);
 int VectorFloatToUnsigned(double, int);
@@ -41,7 +41,7 @@ extern unsigned char LAB_004a612c; /* 0x4a612c */
 /* Supplied declaration required: FUN_004a7fb8. */
 
 
-void FUN_004a5ea0(int param_1,int param_2,int param_3,unsigned int param_4)
+void FUN_004a5ea0(int param_1,int param_2,int param_3,unsigned int param_4,float in_s0)
 
 {
 /* irregular: irregular input(s): in_s0; 11 native warning(s); review required */
@@ -54,7 +54,6 @@ void FUN_004a5ea0(int param_1,int param_2,int param_3,unsigned int param_4)
   int temp_v6;
   unsigned short temp_v7;
   unsigned int temp_v8;
-  float in_s0;
   unsigned int temp_v9;
   unsigned char temp_v10 [60];
   int iStack_34;
@@ -83,7 +82,7 @@ void FUN_004a5ea0(int param_1,int param_2,int param_3,unsigned int param_4)
     FUN_004a7dc8(param_1,temp_v11,temp_v6,(int)*(char *)(param_1 + 0x829));
   }
   FUN_004a7a50(param_1,1,param_4,temp_v11,param_3,temp_v6);
-  FUN_004a7cb0(param_1,param_4,temp_v11,param_3,temp_v6);
+  FUN_004a7cb0(reinterpret_cast<void *>(param_1),param_4,temp_v11,param_3,temp_v6,in_s0);
   FUN_004a7fb8(param_1,param_4,temp_v11,param_3,(int)*(char *)(param_1 + 0x829),temp_v6);
   temp_v5 = param_4 & 0xffff;
   temp_v7 = 0;

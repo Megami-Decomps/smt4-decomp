@@ -1,135 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026e8a4` (_code @ 0x26e8a4, 0x1b8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: float minimum/maximum accumulators and loop loads occupy different VFP registers. */
+#include "shard/S1Mover.h"
 
 extern "C" {
-
-/* stack frame of param_4: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_4_stack;
-
-
-void FUN_0026e8a4(int param_1,int param_2,float *param_3,float *param_4)
-
+// Project a triangle or quad onto the plane perpendicular to the selected axis and find its bounds.
+void FUN_0026e8a4(s32 axis, s32 count, f32 *minimum, f32 *maximum,
+                  Vec3f first, Vec3f second, Vec3f third, Vec3f fourth)
 {
-/* irregular: irregular input(s): in_d1, in_s0, in_s1; 3 native warning(s); review required */
-  float *pfVar1;
-  float *pfVar2;
-  float in_s0;
-  float temp_v0;
-  float in_s1;
-  unsigned long long in_d1;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5 [3];
-  unsigned int uStack_2c;
-  float fStack_28;
-  float afStack_24 [8];
-  
-  pfVar1 = temp_v5;
-  pfVar2 = temp_v5;
-  temp_v0 = (float)in_d1;
-  uStack_2c = (int)((unsigned long long)in_d1 >> 0x20);
-  param_2 = param_2 - 1;
-  if (param_1 == 0) {
-    temp_v1 = in_s1;
-    temp_v2 = temp_v0;
-    if (0 < param_2) {
-      pfVar1 = &fStack_28;
-      pfVar2 = afStack_24;
-      do {
-        temp_v4 = *pfVar1;
-        pfVar1 = pfVar1 + 3;
-        temp_v3 = *pfVar2;
-        pfVar2 = pfVar2 + 3;
-        if (temp_v4 < in_s1) {
-          in_s1 = temp_v4;
+    Vec3f points[4];
+    points[0] = first;
+    points[1] = second;
+    points[2] = third;
+    if (count == 4)
+        points[3] = fourth;
+    if (axis == 0) {
+        f32 minY = points[0].y, minZ = points[0].z;
+        f32 maxY = minY, maxZ = minZ;
+        for (s32 i = 1; i < count; ++i) {
+            if (points[i].y < minY) minY = points[i].y;
+            if (points[i].z < minZ) minZ = points[i].z;
+            if (maxY < points[i].y) maxY = points[i].y;
+            if (maxZ < points[i].z) maxZ = points[i].z;
         }
-        if (temp_v3 < temp_v0) {
-          temp_v0 = temp_v3;
+        minimum[0] = minY;
+        minimum[1] = minZ;
+        maximum[0] = maxY;
+        maximum[1] = maxZ;
+    } else if (axis == 1) {
+        f32 minX = points[0].x, minZ = points[0].z;
+        f32 maxX = minX, maxZ = minZ;
+        for (s32 i = 1; i < count; ++i) {
+            if (points[i].x < minX) minX = points[i].x;
+            if (points[i].z < minZ) minZ = points[i].z;
+            if (maxX < points[i].x) maxX = points[i].x;
+            if (maxZ < points[i].z) maxZ = points[i].z;
         }
-        if (temp_v1 < temp_v4) {
-          temp_v1 = temp_v4;
+        minimum[0] = minX;
+        minimum[1] = minZ;
+        maximum[0] = maxX;
+        maximum[1] = maxZ;
+    } else if (axis == 2) {
+        f32 minX = points[0].x, minY = points[0].y;
+        f32 maxX = minX, maxY = minY;
+        for (s32 i = 1; i < count; ++i) {
+            if (points[i].x < minX) minX = points[i].x;
+            if (points[i].y < minY) minY = points[i].y;
+            if (maxX < points[i].x) maxX = points[i].x;
+            if (maxY < points[i].y) maxY = points[i].y;
         }
-        if (temp_v2 < temp_v3) {
-          temp_v2 = temp_v3;
-        }
-        param_2 = param_2 - 1;
-      } while (param_2 != 0);
+        minimum[0] = minX;
+        minimum[1] = minY;
+        maximum[0] = maxX;
+        maximum[1] = maxY;
     }
-    *param_3 = in_s1;
-    param_3[1] = temp_v0;
-    *param_4 = temp_v1;
-    param_4[1] = temp_v2;
-    return;
-  }
-  if (param_1 == 1) {
-    temp_v1 = temp_v0;
-    temp_v2 = in_s0;
-    if (0 < param_2) {
-      pfVar1 = afStack_24;
-      do {
-        pfVar2 = pfVar2 + 3;
-        temp_v3 = *pfVar2;
-        temp_v4 = *pfVar1;
-        pfVar1 = pfVar1 + 3;
-        if (temp_v3 < in_s0) {
-          in_s0 = temp_v3;
-        }
-        if (temp_v4 < temp_v1) {
-          temp_v1 = temp_v4;
-        }
-        if (temp_v2 < temp_v3) {
-          temp_v2 = temp_v3;
-        }
-        if (temp_v0 < temp_v4) {
-          temp_v0 = temp_v4;
-        }
-        param_2 = param_2 - 1;
-      } while (param_2 != 0);
-    }
-    *param_3 = in_s0;
-    param_3[1] = temp_v1;
-    *param_4 = temp_v2;
-    param_4[1] = temp_v0;
-    return;
-  }
-  if (param_1 == 2) {
-    temp_v0 = in_s1;
-    temp_v1 = in_s0;
-    if (0 < param_2) {
-      pfVar2 = &fStack_28;
-      do {
-        pfVar1 = pfVar1 + 3;
-        temp_v2 = *pfVar1;
-        temp_v3 = *pfVar2;
-        pfVar2 = pfVar2 + 3;
-        if (temp_v2 < in_s0) {
-          in_s0 = temp_v2;
-        }
-        if (temp_v3 < temp_v0) {
-          temp_v0 = temp_v3;
-        }
-        if (temp_v1 < temp_v2) {
-          temp_v1 = temp_v2;
-        }
-        if (in_s1 < temp_v3) {
-          in_s1 = temp_v3;
-        }
-        param_2 = param_2 - 1;
-      } while (param_2 != 0);
-    }
-    *param_3 = in_s0;
-    param_3[1] = temp_v0;
-    *param_4 = temp_v1;
-    param_4[1] = in_s1;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

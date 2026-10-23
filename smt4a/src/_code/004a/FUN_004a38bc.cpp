@@ -18,7 +18,7 @@ extern AnimatedPreviewSelection g_animatedPageSelection;
 s32 scrRunOpcodesStub(u32 script);
 s32 messageGetChoiceResult();
 u32 flaggedValueHolderGetTotal(const PreviewMenuWindow *window);
-void FUN_004a37a0(PreviewMenuWork *work, u16 option);
+void demonRefreshSavedSnapshot(PreviewMenuWork *work, u16 option);
 s32 FUN_0031d174(PreviewMenuWindow *window);
 s32 FUN_002a482c(PreviewMenuWindow *window);
 void FUN_004a1958(PreviewMenuWork *work);
@@ -36,7 +36,7 @@ void FUN_004a38bc(PreviewMenuWork *work)
         return;
     if (messageGetChoiceResult() == 0) {
         u32 index = flaggedValueHolderGetTotal(&work->window);
-        FUN_004a37a0(work, work->entries[index].option);
+        demonRefreshSavedSnapshot(work, work->entries[index].option);
         g_animatedPageSelection.selected = 0xffffffff;
         s32 count = FUN_0031d174(&work->window);
         s32 first = FUN_002a482c(&work->window);

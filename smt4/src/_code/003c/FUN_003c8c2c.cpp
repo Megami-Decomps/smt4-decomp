@@ -1,112 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c8c2c` (_code @ 0x3c8c2c, 0x174 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only r0/r1 assignment in the two-ingredient recipe comparison differs. */
+#include "shard/W6_W6Match5_DevilSort.h"
+#include "gamedata/FusionRecipe.h"
+#include "camp/Unite/FusionCandidates.h"
 
 extern "C" {
+u32 dataTable05Sub4GetCount(void);
+FusionRecipe *FUN_0029f7d4(u16 index);
+void *dataTable05FindByPriorityAndKey(u8 firstRace, u8 secondRace);
+FusionRaceRule *dataTable5Sub3Lookup(u8 race, u16 id);
+void *dataFindSymmetricPair(u8 firstRace, u8 secondRace);
 
-int dataTable5Sub3Lookup(unsigned int *, int);
-int dataTable05Sub4GetCount(void);
-int FUN_0029f7d4(void);
-int devilGetRecord(void);
-int dataFindSymmetricPair(unsigned int, int);
-int dataTable05FindByPriorityAndKey(unsigned int, int);
-
-/* Supplied declaration required: dataTable5Sub3Lookup. */
-/* Supplied declaration required: dataTable05Sub4GetCount. */
-/* Supplied declaration required: FUN_0029f7d4. */
-/* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: dataFindSymmetricPair. */
-/* Supplied declaration required: dataTable05FindByPriorityAndKey. */
-
-
-/* WARNING: Type propagation algorithm not settling */
-
-unsigned char FUN_003c8c2c(unsigned int param_1,unsigned short *param_2,unsigned short *param_3)
-
+// Distinguish special two-ingredient recipes, race exceptions and ordinary race-pair fusion.
+u8 FUN_003c8c2c(void *owner, u16 firstId, u16 secondId)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  short *psVar3;
-  short *psVar4;
-  unsigned int *puVar5;
-  unsigned int *puVar6;
-  int temp_v2;
-  int temp_v3;
-  short *psVar9;
-  unsigned char temp_v4;
-  
-  devilGetRecord();
-  devilGetRecord();
-  temp_v1 = (unsigned int)*param_3;
-  if (*param_2 == temp_v1) {
-    return 0;
-  }
-  psVar9 = (short *)0x0;
-  dataTable05Sub4GetCount();
-  if (temp_v1 != 0) {
-    do {
-      psVar4 = psVar9;
-      FUN_0029f7d4();
-      if (psVar4 != (short *)0x0) {
-        temp_v2 = 0;
-        temp_v3 = 0xc;
-        psVar3 = psVar4;
-        do {
-          psVar3 = psVar3 + 1;
-          if (*psVar3 != 0) {
-            temp_v2 = temp_v2 + 1;
-          }
-          temp_v3 = temp_v3 - 1;
-        } while (temp_v3 != 0);
-        if (temp_v2 == 2) {
-          temp_v0 = *param_2;
-          if ((psVar4[1] == temp_v0) && (psVar4[2] == *param_3)) {
-            return (unsigned char)5;
-          }
-          temp_v4 = psVar4[2] == temp_v0;
-          if (temp_v4) {
-            temp_v0 = *param_3;
-          }
-          if (temp_v4 && psVar4[1] == temp_v0) {
-            return (unsigned char)5;
-          }
+    const DevilSortRecord *first = devilGetRecord(firstId);
+    const DevilSortRecord *second = devilGetRecord(secondId);
+    if (first->id == second->id)
+        return 0;
+    for (u16 index = 0; index < dataTable05Sub4GetCount(); ++index) {
+        const FusionRecipe *recipe = FUN_0029f7d4(index);
+        if (recipe) {
+            s32 ingredients = 0;
+            for (s32 slot = 0; slot < 12; ++slot) {
+                if (recipe->ingredients[slot])
+                    ++ingredients;
+            }
+            if (ingredients == 2 &&
+                ((recipe->ingredients[0] == first->id && recipe->ingredients[1] == second->id) ||
+                 (recipe->ingredients[1] == first->id && recipe->ingredients[0] == second->id)))
+                return 5;
         }
-      }
-      psVar4 = (short *)((int)psVar9 + 1);
-      psVar9 = (short *)((unsigned int)psVar4 & 0xffff);
-      dataTable05Sub4GetCount();
-    } while (psVar9 < psVar4);
-  }
-  temp_v1 = (unsigned int)(unsigned char)param_2[1];
-  dataTable05FindByPriorityAndKey(temp_v1,(char)param_3[1]);
-  if (temp_v1 != 0) {
-    return (unsigned char)4;
-  }
-  puVar5 = (unsigned int *)(unsigned int)(unsigned char)param_2[1];
-  dataTable5Sub3Lookup(puVar5,*param_3);
-  puVar6 = (unsigned int *)(unsigned int)(unsigned char)param_3[1];
-  dataTable5Sub3Lookup(puVar6,*param_2);
-  if (puVar5 != (unsigned int *)0x0) {
-    temp_v1 = *puVar5;
-  }
-  else {
-    if (puVar6 == (unsigned int *)0x0) {
-      temp_v1 = (unsigned int)(unsigned char)param_2[1];
-      dataFindSymmetricPair(temp_v1,(char)param_3[1]);
-      return temp_v1 != 0;
     }
-    temp_v1 = *puVar6;
-  }
-  if (temp_v1 >> 0x18 == 1) {
-    return (unsigned char)2;
-  }
-  if (temp_v1 >> 0x18 == 3) {
-    return (unsigned char)3;
-  }
-  temp_v1 = (unsigned int)(unsigned char)param_2[1];
-  dataFindSymmetricPair(temp_v1,(char)param_3[1]);
-  return temp_v1 != 0;
+    if (dataTable05FindByPriorityAndKey(first->race, second->race))
+        return 4;
+    const FusionRaceRule *firstRule = dataTable5Sub3Lookup(first->race, second->id);
+    const FusionRaceRule *secondRule = dataTable5Sub3Lookup(second->race, first->id);
+    if (firstRule) {
+        if (firstRule->kind == 1)
+            return 2;
+        if (firstRule->kind == 3)
+            return 3;
+    } else if (secondRule) {
+        if (secondRule->kind == 1)
+            return 2;
+        if (secondRule->kind == 3)
+            return 3;
+    }
+    return dataFindSymmetricPair(first->race, second->race) != 0;
 }
-
-} /* extern "C" */
+}

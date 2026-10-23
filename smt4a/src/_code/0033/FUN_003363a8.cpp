@@ -1,91 +1,76 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003363a8` (_code @ 0x3363a8, 0x1b8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: command panel transitions restored; extended-widget flag base, 64-bit mask loads and loop scratch registers differ. */
+#include "battle/btlUI.h"
+#include "battle/btlMain.h"
+#include "ui/UiSpriteState.h"
 
-extern "C" {
-
-int btlGetMainState(void);
-int sysPlaySe(int);
-int uiSpriteSelectAnim(int, int);
-int uiSpriteSetImageKeyframe(int, int);
-int FUN_0019de98(int, unsigned int);
-int FUN_0020acd8(int, unsigned int, unsigned int);
-int FUN_0020ad6c(int, int, int);
-int FUN_0021a9e8(int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-extern unsigned int DAT_00573ba8; /* 0x573ba8 */
-extern unsigned int DAT_00573bac; /* 0x573bac */
-
-/* Supplied declaration required: btlGetMainState. */
-extern int ifTouchGetButtonHelpValue(void);
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_0020acd8. */
-/* Supplied declaration required: FUN_0020ad6c. */
-/* Supplied declaration required: FUN_0021a9e8. */
-extern int btlScriptUnitHasFlags(void);
-
-
-void FUN_003363a8(int param_1,unsigned int param_2,unsigned char param_3,unsigned int param_4)
-
-{
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  
-  *(unsigned char *)(param_1 + 0x38b1) = param_3;
-  *(char *)(param_1 + 0x38b2) = (char)param_4;
-  *(unsigned int *)(param_1 + 0x3890) = param_2;
-  FUN_0021a9e8(param_1);
-  if (*(char *)(param_1 + 0x38b4) == '\0') {
-    temp_v0 = 0;
-    do {
-      uiSpriteSetImageKeyframe(param_1 + temp_v0 * 0x8c + 0xe58,0);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 6);
-    if (*(char *)(param_1 + 0x38b4) == '\0') {
-      btlGetMainState();
-      temp_v0 = btlScriptUnitHasFlags();
-      if ((temp_v0 == 0) &&
-         (temp_v0 = btlGetMainState(),
-         (*(unsigned int *)(temp_v0 + 0x45a0) & DAT_00573ba8) == 0 &&
-         (*(unsigned int *)(temp_v0 + 0x45a4) & DAT_00573bac) == 0)) {
-        if (*(int *)(param_1 + 0x387c) == 0x17) {
-          FUN_0020acd8(param_1,*(unsigned int *)(param_1 + 0x3890),param_4);
-          return;
-        }
-        uiSpriteSelectAnim(param_1 + 0x20,0x1b);
-        temp_v0 = 0;
-        do {
-          uiSpriteSelectAnim(param_1 + temp_v0 * 0x8c + 0x138,0x1b);
-          temp_v0 = temp_v0 + 1;
-        } while (temp_v0 < 8);
-        *(unsigned int *)(param_1 + 0x3888) = 0x11;
-        FUN_0020ad6c(param_1,0x10,1);
-        return;
-      }
-      FUN_0019de98(0,0xf4f4f4ff);
-      FUN_0020ad6c(param_1,0x28,1);
-      temp_v0 = ifTouchGetButtonHelpValue();
-      if (temp_v0 != 0x3f) {
-        btlGetMainState();
-        temp_v0 = btlScriptUnitHasFlags();
-        if (temp_v0 != 0) {
-          sysPlaySe(0x3f);
-          return;
-        }
-      }
-      return;
-    }
-  }
-  FUN_0020ad6c(param_1,0x2a,1);
-  return;
+namespace {
+struct CommandPanelMasks { u8 prefix[0x20]; u64 blocked; };
 }
+extern "C" {
+extern CommandPanelMasks DAT_00573b88;
+BtlMainStateA *btlGetMainState();
+s32 btlScriptUnitHasFlags(BtlMainStateA *state);
+s32 ifTouchGetButtonHelpValue();
+void sysPlaySe(u32 sound);
+void uiSpriteSelectAnim(UiSpriteState *sprite, s32 animation);
+void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 mode);
+void FUN_0019de98(s32 layer, u32 color);
+void FUN_0020acd8(BtlUiObjCA *panel, u32 selection, u32 mode);
+void FUN_0020ad6c(BtlUiObjCA *panel, s32 state, s32 enabled);
+void FUN_0021a9e8(BtlUiObjCA *panel);
 
-} /* extern "C" */
+// Reset command icons and select the normal, disabled or special battle-panel transition.
+void FUN_003363a8(BtlUiObjCA *panel, u32 selection, u8 first, u32 second)
+{
+    // These selection controls extend beyond the currently recovered widget prefix.
+    struct CommandPanelView {
+        u8 prefix[0x20];
+        UiSpriteState main;
+        u8 paddingAC[0x8C];
+        UiSpriteState children[8];
+        u8 padding598[0x8C0];
+        UiSpriteState icons[6];
+        u8 padding11A0[0x26DC];
+        s32 mode;
+        u8 padding3880[8];
+        s32 savedState;
+        u8 padding388C[4];
+        u32 selection;
+        u8 padding3894[0x1D];
+        u8 first;
+        u8 second;
+        u8 padding38B3;
+        u8 disabled;
+    };
+    CommandPanelView *work = reinterpret_cast<CommandPanelView *>(panel);
+    work->first = first;
+    work->second = second;
+    work->selection = selection;
+    FUN_0021a9e8(panel);
+    if (work->disabled == 0) {
+        for (s32 index = 0; index < 6; ++index)
+            uiSpriteSetImageKeyframe(&work->icons[index], 0, 0);
+    }
+    if (work->disabled != 0) {
+        FUN_0020ad6c(panel, 0x2A, 1);
+        return;
+    }
+    if (btlScriptUnitHasFlags(btlGetMainState()) != 0 ||
+        (btlGetMainState()->stateFlags64.bits & DAT_00573b88.blocked) != 0) {
+        FUN_0019de98(0, 0xF4F4F4FF);
+        FUN_0020ad6c(panel, 0x28, 1);
+        if (ifTouchGetButtonHelpValue() != 0x3F && btlScriptUnitHasFlags(btlGetMainState()) != 0)
+            sysPlaySe(0x3F);
+        return;
+    }
+    if (work->mode == 0x17) {
+        FUN_0020acd8(panel, work->selection, second);
+        return;
+    }
+    uiSpriteSelectAnim(&work->main, 0x1B);
+    for (s32 index = 0; index < 8; ++index)
+        uiSpriteSelectAnim(&work->children[index], 0x1B);
+    work->savedState = 0x11;
+    FUN_0020ad6c(panel, 0x10, 1);
+}
+}

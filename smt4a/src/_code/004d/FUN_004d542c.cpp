@@ -1,71 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d542c` (_code @ 0x4d542c, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: base-position copy registers differ; fast floating-point mode folds the two degree-conversion multiplies into vnmls, unlike retail. */
+#include "battle/btlCamera.h"
+#include "AsdSDK/Source/Util/AsdListBox.h"
 
-extern "C" {
-
-extern float *g_btlCamera; /* 0x571508 */
-
-extern int listBoxItemHasOwner(unsigned int);
-extern float *asdListBoxGetFloatValuePtr(unsigned int);
-
-
-void FUN_004d542c(int param_1,unsigned int param_2,unsigned int param_3)
-
-{
-  float *pfVar1;
-  int temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  
-  temp_v2 = g_btlCamera[0x162];
-  temp_v1 = g_btlCamera[0x160];
-  temp_v3 = g_btlCamera[0x161];
-  switch(param_3) {
-  case 0:
-    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
-    if (temp_v0 != 0) {
-      temp_v1 = (float)((unsigned int)g_btlCamera[0x193] | 0x10000000);
-    }
-    else {
-      temp_v1 = (float)((unsigned int)g_btlCamera[0x193] & 0xefffffff);
-    }
-    break;
-  case 1:
-    pfVar1 = (float *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
-    *g_btlCamera = *pfVar1 - temp_v1;
-    return;
-  case 2:
-    pfVar1 = (float *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
-    g_btlCamera[1] = *pfVar1 - temp_v3;
-    return;
-  case 3:
-    pfVar1 = (float *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
-    g_btlCamera[2] = *pfVar1 - temp_v2;
-    return;
-  case 4:
-    pfVar1 = (float *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
-    g_btlCamera[4] = *pfVar1 * 256.0f * 0.0027777778f - g_btlCamera[0x16d];
-    return;
-  case 5:
-    pfVar1 = (float *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
-    g_btlCamera[3] = *pfVar1 - g_btlCamera[0x170];
-    return;
-  case 6:
-    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
-    if (temp_v0 != 0) {
-      temp_v1 = (float)((unsigned int)g_btlCamera[0x193] | 0x20000000);
-    }
-    else {
-      temp_v1 = (float)((unsigned int)g_btlCamera[0x193] & 0xdfffffff);
-    }
-    break;
-  default:
-    return;
-  }
-  g_btlCamera[0x193] = temp_v1;
-  return;
+namespace {
+struct CameraDebugMenu {
+    u8 prefix[0x10];
+    AsdListBox *list;
+};
 }
+extern "C" {
+extern BtlCameraA *g_btlCamera;
+s32 listBoxItemHasOwner(AsdListBox *list);
+f32 *asdListBoxGetFloatValuePtr(AsdListBox *list, u32 index);
 
-} /* extern "C" */
+// Convert absolute editor values into offsets from the current base camera pose.
+void FUN_004d542c(CameraDebugMenu *menu, u32 unused, u32 index)
+{
+    BtlCameraVector3 position = g_btlCamera->basePose.position;
+    switch (index) {
+    case 0:
+        if (listBoxItemHasOwner(menu->list))
+            g_btlCamera->flags |= 0x10000000;
+        else
+            g_btlCamera->flags &= ~0x10000000;
+        return;
+    case 1:
+        g_btlCamera->vector[0] = *asdListBoxGetFloatValuePtr(menu->list, index) - position.x;
+        return;
+    case 2:
+        g_btlCamera->vector[1] = *asdListBoxGetFloatValuePtr(menu->list, index) - position.y;
+        return;
+    case 3:
+        g_btlCamera->vector[2] = *asdListBoxGetFloatValuePtr(menu->list, index) - position.z;
+        return;
+    case 4:
+        g_btlCamera->unk10 = *asdListBoxGetFloatValuePtr(menu->list, index) * 256.0f * 0.0027777778f - g_btlCamera->basePose.angle;
+        return;
+    case 5:
+        g_btlCamera->unk0C = *asdListBoxGetFloatValuePtr(menu->list, index) - g_btlCamera->basePose.distance;
+        return;
+    case 6:
+        if (listBoxItemHasOwner(menu->list))
+            g_btlCamera->flags |= 0x20000000;
+        else
+            g_btlCamera->flags &= ~0x20000000;
+        return;
+    default:
+        return;
+    }
+}
+}

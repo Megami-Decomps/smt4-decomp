@@ -1,79 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001bbf0c` (_code @ 0x1bbf0c, 0x13c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP scheduling differs and infinity's runtime invalid division folds to a NaN constant. */
+#include "common.h"
 
 extern "C" {
+void __set_errno(s32);
+f32 FUN_001c4370(s32 *, f32);
 
-int __set_errno(int);
-int FUN_001c4370(unsigned int [2]);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+// Reduce to a quadrant and evaluate the short sine or cosine polynomial.
+f32 FUN_001bbf0c(f32 value)
 {
-    return value < (float)0 ? -value : value;
+    union FloatEncoding { f32 value; u32 bits; } encoding;
+    encoding.value = value;
+    s32 quadrant;
+    if ((encoding.bits << 1) < 0x7E921FB6) {
+        quadrant = (encoding.bits << 1) < 0x73000000 ? -1 : 0;
+    } else if ((encoding.bits & 0x7FFFFFFF) < 0x46490E49) {
+        f32 halfPiUnits = value * 0.63661974668502808f;
+        f32 multiple;
+        if (encoding.bits & 0x80000000)
+            multiple = (halfPiUnits - 8388608.0f) + 8388608.0f;
+        else
+            multiple = (halfPiUnits + 8388608.0f) - 8388608.0f;
+        quadrant = static_cast<s32>(multiple) & 3;
+        value = (((value - multiple * 1.5703125f) - multiple * 0.00048375129699707031f) -
+                 multiple * 7.5495336204767227e-8f) - multiple * 2.5633440682570896e-12f;
+    } else {
+        value = FUN_001c4370(&quadrant, value);
+    }
+
+    if (quadrant < 0) {
+        encoding.value = value;
+        if ((encoding.bits << 1) < 0xFF000000)
+            return 1.0f;
+        if ((encoding.bits << 1) > 0xFF000000)
+            return value + value;
+        __set_errno(1);
+        return 0.0f / 0.0f;
+    }
+
+    f32 squared = value * value;
+    if (quadrant & 1) {
+        f32 polynomial = 0.0083319786936044693f - squared * 0.000194956359337084f;
+        polynomial = -0.16666650772094727f + squared * polynomial;
+        f32 sine = value + value * (squared * polynomial);
+        return (quadrant & 2) ? sine : -sine;
+    }
+    f32 polynomial = 0.041656292974948883f + squared * -0.0013597822980955243f;
+    polynomial = -0.49999895691871643f + squared * polynomial;
+    f32 cosine = 1.0f + squared * polynomial;
+    return (quadrant & 2) ? -cosine : cosine;
 }
-#endif
-/* Supplied declaration required: __set_errno. */
-/* Supplied declaration required: FUN_001c4370. */
-
-
-void FUN_001bbf0c(void)
-
-{
-/* irregular: irregular input(s): in_r3, in_s0; 4 native warning(s); review required */
-  unsigned int in_r3;
-  float in_s0;
-  float temp_v0;
-  unsigned int temp_v1 [2];
-  
-  if ((unsigned int)((int)in_s0 * 2) < 0x7e921fb6) {
-    if ((unsigned int)((int)in_s0 * 2) < 0x73000000) {
-      temp_v1[0] = 0xffffffff;
-    }
-    else {
-      temp_v1[0] = 0;
-    }
-  }
-  else if ((unsigned int)romwright_fabs_4(in_s0) < 0x46490e49) {
-    if (((unsigned int)in_s0 & 0x80000000) != 0) {
-      temp_v0 = (in_s0 * 0.63661975f - 8388608.0f) + 8388608.0f;
-    }
-    else {
-      temp_v0 = (in_s0 * 0.63661975f + 8388608.0f) - 8388608.0f;
-    }
-    temp_v1[0] = (int)temp_v0 & 3;
-    in_s0 = (((in_s0 - temp_v0 * 1.5703125f) - temp_v0 * 0.0004837513f) - temp_v0 * 7.5495336e-08f) -
-            temp_v0 * 2.563344e-12f;
-  }
-  else {
-    temp_v1[0] = in_r3;
-    FUN_001c4370(temp_v1);
-  }
-  if (-1 < (int)temp_v1[0]) {
-    if ((temp_v1[0] & 1) != 0) {
-      if ((temp_v1[0] & 2) != 0) {
-        return;
-      }
-    }
-    else if ((temp_v1[0] & 2) == 0) {
-      return;
-    }
-    return;
-  }
-  if ((unsigned int)((int)in_s0 * 2) < 0xff000000) {
-    return;
-  }
-  if ((int)in_s0 * 2 == 0xff000000) {
-    __set_errno(1);
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */

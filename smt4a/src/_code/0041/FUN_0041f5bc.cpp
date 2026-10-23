@@ -1,59 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041f5bc` (_code @ 0x41f5bc, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: transition reset stores and completion-field address scheduling differ. */
+#include "shard/W9_W9Match8_WorkRecords.h"
+#include "ui/UiSpriteState.h"
 extern "C" {
+extern SaveLoadUiSharedPrefixA g_saveLoadUIBase;
+void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 animation, s32 frame);
+void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 frame, s32 flags);
+void FUN_00420a2c(SaveLoadTransitionPrefixA *work);
 
-int uiSpriteSetKeyframe(int, int, int);
-int uiSpriteSetImageKeyframe(int, int);
-int FUN_00420a2c(int);
-
-extern unsigned char g_saveLoadUIBase; /* 0x588e14 */
-
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_00420a2c. */
-
-
-void FUN_0041f5bc(int param_1)
-
+// Reset all transition sprites and resume the pending state once the last completes.
+void FUN_0041f5bc(SaveLoadTransitionPrefixA *work)
 {
-/* irregular: 3 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  uiSpriteSetKeyframe(param_1 + 0x474,5,0);
-  uiSpriteSetImageKeyframe(param_1 + 0x474,0);
-  temp_v1 = 0;
-  if (temp_v1 < *(int *)(param_1 + 0x18)) {
-    do {
-      temp_v2 = param_1 + temp_v1 * 0x8c;
-      uiSpriteSetKeyframe(temp_v2 + 0x500,5,0);
-      uiSpriteSetImageKeyframe(temp_v2 + 0x500,0);
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *(int *)(param_1 + 0x18));
-  }
-  *(unsigned int *)(param_1 + 0x6ec) = 0;
-  *(unsigned int *)(param_1 + 0x6f0) = 0;
-  *(unsigned int *)(param_1 + 0x6f4) = 0;
-  *(unsigned int *)(param_1 + 0x620) = 0;
-  *(unsigned char *)(param_1 + 0xd) = *(unsigned char *)(param_1 + 7);
-  *(unsigned char *)(param_1 + 7) = 0xf;
-  *(unsigned int *)(param_1 + 8) = 0;
-  FUN_00420a2c(param_1);
-  if (*(char *)(param_1 + *(int *)(param_1 + 0x18) * 0x8c + 0x4fe) != '\0') {
-    temp_v0 = *(char *)(param_1 + 0xc);
-    *(unsigned char *)(param_1 + 0xd) = *(unsigned char *)(param_1 + 7);
-    *(char *)(param_1 + 7) = temp_v0;
-    *(unsigned int *)(param_1 + 8) = 0;
-    *(unsigned char *)(param_1 + 0xc) = 0;
-    if (temp_v0 == '\x16') {
-      (*(unsigned int *)((unsigned char *)&g_saveLoadUIBase + 0x14)) = *(unsigned int *)(param_1 + 0x2f8);
-      *(unsigned char *)(param_1 + 4) = 1;
+    // Sprite storage overlaps the known transition prefix.
+    struct SpriteView {
+        u8 prefix[0x474];
+        UiSpriteState first;
+        UiSpriteState additional[1];
+    };
+    typedef char SpriteViewOffsets[offsetof(SpriteView, additional) == 0x500 ? 1 : -1];
+    SpriteView *sprites = (SpriteView *)work;
+    uiSpriteSetKeyframe(&sprites->first, 5, 0);
+    uiSpriteSetImageKeyframe(&sprites->first, 0, 0);
+    for (s32 index = 0; index < work->spriteCount; ++index) {
+        uiSpriteSetKeyframe(&sprites->additional[index], 5, 0);
+        uiSpriteSetImageKeyframe(&sprites->additional[index], 0, 0);
     }
-  }
-  return;
+    work->transitionValue0 = 0;
+    work->transitionValue1 = 0;
+    work->transitionProgress = 0.0f;
+    work->transitionCounter = 0;
+    work->previousState = work->currentState;
+    work->currentState = 15;
+    work->stateCounter = 0;
+    FUN_00420a2c(work);
+    if (sprites->additional[work->spriteCount - 1].animationFlags.completed) {
+        u8 nextState = work->pendingState;
+        work->previousState = work->currentState;
+        work->currentState = nextState;
+        work->stateCounter = 0;
+        work->pendingState = 0;
+        if (nextState == 22) {
+            g_saveLoadUIBase.selectedValue = work->selectedValue;
+            work->completionFlag = 1;
+        }
+    }
 }
-
-} /* extern "C" */
+}

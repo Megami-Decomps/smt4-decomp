@@ -1,121 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f5bd8` (_code @ 0x3f5bd8, 0x1b8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: native temporary zero-initialization, post-cap discard loop and pair-unrolled original-index lookup differ. */
+#include "common.h"
+#include <stddef.h>
+#include <stdlib.h>
 
-extern "C" {
-
-int qsort(...);
-int asdOperatorNewD(...);
-int asdOperatorDeleteC(...);
-int rt_memclr(...);
-int FUN_003ff160(...);
-int rt_memcpy(...);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern int entryCompareByRank(...); /* 0x2b26b0 */
-
-/* Supplied declaration required: qsort. */
-extern int gameFlagIsSet(void);
-/* Supplied declaration required: asdOperatorNewD. */
-/* Supplied declaration required: asdOperatorDeleteC. */
-/* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: FUN_003ff160. */
-extern int flagsBGetBit0(unsigned short);
-extern unsigned long long flagsBGetBit1(unsigned short);
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_003f5bd8(int param_1,int param_2)
-
+struct RankedUnlockEntry {
+    u16 id;
+    u8 rank;
+    u8 category;
+    u8 unk04[0x2e];
+    u16 requiredFlag;
+};
+struct RankedUnlockListWork {
+    u8 unk000[0x20];
+    RankedUnlockEntry *entries;
+    u8 unk024[0x14];
+    s32 entryCount;
+    u8 unk03c[4];
+    u8 hasNew;
+    u8 unk041[0x5a5];
+    s16 visibleIndices[100];
+    u8 unk6ae[2];
+    s32 visibleCount;
+};
+typedef char RankedUnlockOffsets[sizeof(RankedUnlockEntry) == 0x34 &&
+    offsetof(RankedUnlockEntry, requiredFlag) == 0x32 &&
+    offsetof(RankedUnlockListWork, visibleIndices) == 0x5e6 &&
+    offsetof(RankedUnlockListWork, visibleCount) == 0x6b0 ? 1 : -1];
+static inline s32 findRankedUnlockEntry(const RankedUnlockEntry *entries, s32 count, u16 id)
 {
-/* irregular: 2 goto(s); 7 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned short *puVar8;
-  unsigned int temp_v7;
-  unsigned long long temp_v8;
-  
-  *(unsigned int *)(param_1 + 0x6b0) = 0;
-  *(unsigned char *)(param_1 + 0x40) = 0;
-  temp_v1 = param_2 * 0x34;
-  asdOperatorNewD();
-  rt_memclr();
-  rt_memcpy(temp_v1,*(unsigned int *)(param_1 + 0x20),param_2 * 0x34);
-  temp_v4 = 0x34;
-  qsort(temp_v1,param_2,0x34,entryCompareByRank);
-  temp_v6 = 0;
-  if (param_2 < 1) {
-    asdOperatorDeleteC(temp_v1);
-    return;
-  }
-  do {
-    puVar8 = (unsigned short *)(temp_v1 + temp_v6 * 0x34);
-    temp_v0 = *puVar8;
-    if (temp_v0 != 0) {
-      temp_v2 = flagsBGetBit0(temp_v0);
-      if (temp_v2 == 0) {
-        if ((puVar8[0x19] != 0) && (temp_v2 = gameFlagIsSet(), temp_v2 == 0)) goto LAB_003f5d78;
-        FUN_003ff160(temp_v0);
-      }
-      temp_v8 = flagsBGetBit1(temp_v0);
-      temp_v2 = (int)((unsigned long long)temp_v8 >> 0x20);
-      if ((int)temp_v8 != 0) {
-        *(unsigned char *)(param_1 + 0x40) = 1;
-      }
-      temp_v5 = *(unsigned int *)(param_1 + 0x38);
-      if ((int)temp_v5 < 1) {
-        temp_v7 = 0;
-      }
-      else {
-        temp_v7 = temp_v5 & 1;
-        if (temp_v7 != 0) {
-          temp_v2 = *(int *)(param_1 + 0x20);
-          temp_v4 = (unsigned int)*puVar8;
-        }
-        temp_v3 = 0;
-        if (temp_v7 != 0) {
-          do {
-            if (*(unsigned short *)(temp_v2 + temp_v3 * 0x34) == temp_v4) goto LAB_003f5d5c;
-            temp_v3 = temp_v3 + 1;
-          } while ((int)temp_v3 < (int)temp_v7);
-        }
-      }
-      temp_v3 = 0xffffffff;
-      if ((int)temp_v7 < (int)temp_v5) {
-        temp_v4 = (unsigned int)*puVar8;
-        do {
-          temp_v3 = temp_v7;
-          if (*(unsigned short *)(*(int *)(param_1 + 0x20) + temp_v7 * 0x34) == temp_v4) break;
-          if (*(unsigned short *)(*(int *)(param_1 + 0x20) + temp_v7 * 0x34 + 0x34) == temp_v4) {
-            temp_v3 = temp_v7 + 1;
-            break;
-          }
-          temp_v7 = temp_v7 + 2;
-          temp_v3 = 0xffffffff;
-        } while ((int)temp_v7 < (int)temp_v5);
-      }
-LAB_003f5d5c:
-      *(short *)(param_1 + *(int *)(param_1 + 0x6b0) * 2 + 0x5e6) = (short)temp_v3;
-      *(int *)(param_1 + 0x6b0) = *(int *)(param_1 + 0x6b0) + 1;
-    }
-LAB_003f5d78:
-    do {
-      temp_v6 = temp_v6 + 1;
-      if (param_2 <= temp_v6) {
-        asdOperatorDeleteC(temp_v1);
-        return;
-      }
-    } while (temp_v6 >= 100);
-  } while( 1 );
+    for (s32 index = 0; index < count; ++index)
+        if (entries[index].id == id)
+            return index;
+    return -1;
 }
 
-} /* extern "C" */
+extern "C" {
+void *asdOperatorNewD(u32);
+void asdOperatorDeleteC(void *);
+void rt_memcpy(void *, const void *, u32);
+s32 entryCompareByRank(const void *, const void *);
+s32 flagsBGetBit0(u32);
+s32 flagsBGetBit1(u32);
+s32 gameFlagIsSet(u32);
+void FUN_003ff160(u32);
+
+void FUN_003f5bd8(RankedUnlockListWork *work, s32 count)
+{
+    work->visibleCount = 0;
+    work->hasNew = 0;
+    u32 bytes = count * sizeof(RankedUnlockEntry);
+    RankedUnlockEntry *sorted = static_cast<RankedUnlockEntry *>(asdOperatorNewD(bytes));
+    rt_memcpy(sorted, work->entries, bytes);
+    qsort(sorted, count, sizeof(RankedUnlockEntry), entryCompareByRank);
+    for (s32 index = 0; index < count && index < 100; ++index) {
+        const RankedUnlockEntry *entry = &sorted[index];
+        const u16 id = entry->id;
+        if (!id)
+            continue;
+        if (!flagsBGetBit0(id)) {
+            if (entry->requiredFlag && !gameFlagIsSet(entry->requiredFlag))
+                continue;
+            FUN_003ff160(id);
+        }
+        if (flagsBGetBit1(id))
+            work->hasNew = 1;
+        work->visibleIndices[work->visibleCount] =
+            findRankedUnlockEntry(work->entries, work->entryCount, entry->id);
+        ++work->visibleCount;
+    }
+    asdOperatorDeleteC(sorted);
+}
+}

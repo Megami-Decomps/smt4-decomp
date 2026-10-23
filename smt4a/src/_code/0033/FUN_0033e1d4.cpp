@@ -1,96 +1,80 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033e1d4` (_code @ 0x33e1d4, 0x16c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: phase-two test direction and shared zero-return epilogue merging differ. */
+#include "map/mapDepart.h"
+#include "shard/W4_Match1b_RegisteredHandle.h"
 
 extern "C" {
+extern MapDepartExtraA *DAT_00581280;
+extern void *g_handleRegistry;
+s32 flagPairCondition(s16, s16);
+void ptrListRemoveClearOwner(void *, u32);
+void clearByte(void *);
+s32 FUN_00295e54(s16, s16, u32);
 
-int ptrListRemoveClearOwner(unsigned int);
-int clearByte(void);
-
-typedef int romwright_code(...);
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int DAT_00581280; /* 0x581280 */
-
-/* Supplied declaration required: ptrListRemoveClearOwner. */
-extern int FUN_00295e54(int, int, unsigned int);
-/* Supplied declaration required: clearByte. */
-extern int flagPairCondition(int, int);
-
-
-unsigned int FUN_0033e1d4(void)
-
+u32 FUN_0033e1d4(void)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  short temp_v3;
-  int unaff_r4;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v3 = *(short *)(DAT_00581280 + 0xf42);
-  if (temp_v3 != 0) {
-    if (temp_v3 != 1) {
-      if (temp_v3 != 2) {
+    struct Entry {
+        u8 active;
+        u8 unk01[2];
+        u8 pending;
+        u8 unk04[0x24];
+        s16 firstFlag;
+        s16 secondFlag;
+        u8 unk2C[4];
+        void *state;
+        RegisteredHandle *handle;
+        u8 unk38[4];
+    };
+    // The final flag pair extends beyond MapDepartExtraA's recovered prefix.
+    struct CleanupView {
+        u8 prefix[0xC];
+        Entry entries[64];
+        u8 unkF0C[0x36];
+        s16 phase;
+        s16 timer;
+        s16 firstFlag;
+        s16 secondFlag;
+    };
+    CleanupView *work = reinterpret_cast<CleanupView *>(DAT_00581280);
+    if (work->phase == 0) {
+        for (s32 i = 0; i < 64; ++i) {
+            Entry *entry = &reinterpret_cast<CleanupView *>(DAT_00581280)->entries[i];
+            if (entry->active && !flagPairCondition(entry->firstFlag, entry->secondFlag) && entry->handle) {
+                RegisteredHandle *handle = reinterpret_cast<CleanupView *>(DAT_00581280)->entries[i].handle;
+                if (handle->id)
+                    ptrListRemoveClearOwner(g_handleRegistry, handle->id);
+                entry->pending = 1;
+            }
+        }
+    } else if (work->phase == 1) {
+        s16 timer = work->timer + 1;
+        work->timer = timer;
+        if (timer < 2)
+            return 0;
+        for (s32 i = 0; i < 64; ++i) {
+            Entry *entry = &reinterpret_cast<CleanupView *>(DAT_00581280)->entries[i];
+            if (entry->active && entry->pending) {
+                if (entry->handle) {
+                    delete entry->handle;
+                    entry->handle = NULL;
+                }
+                if (entry->state) {
+                    clearByte(entry->state);
+                    entry->state = NULL;
+                }
+                entry->active = 0;
+                entry->pending = 0;
+            }
+        }
+    } else if (work->phase == 2) {
+        if (FUN_00295e54(work->firstFlag, work->secondFlag, 1))
+            return 1;
         return 0;
-      }
-      temp_v2 = FUN_00295e54((int)*(short *)(DAT_00581280 + 0xf46),
-                           (int)*(short *)(DAT_00581280 + 0xf48),1);
-      if (temp_v2 == 0) {
+    } else {
         return 0;
-      }
-      return 1;
     }
-    temp_v3 = *(short *)(DAT_00581280 + 0xf44) + 1;
-    if (temp_v3 >= 2) {
-      unaff_r4 = 0;
-    }
-    *(short *)(DAT_00581280 + 0xf44) = temp_v3;
-    if (temp_v3 < 2) {
-      return 0;
-    }
-    do {
-      temp_v2 = DAT_00581280 + unaff_r4 * 0x3c;
-      temp_v5 = *(char *)(temp_v2 + 0xc) != '\0';
-      temp_v0 = '\0';
-      if (temp_v5) {
-        temp_v0 = *(char *)(temp_v2 + 0xf);
-      }
-      if (temp_v5 && temp_v0 != '\0') {
-        if (*(int **)(temp_v2 + 0x40) != (int *)0x0) {
-          (**(romwright_code **)(**(int **)(temp_v2 + 0x40) + 4))();
-          *(unsigned int *)(temp_v2 + 0x40) = 0;
-        }
-        if (*(int *)(temp_v2 + 0x3c) != 0) {
-          clearByte();
-          *(unsigned int *)(temp_v2 + 0x3c) = 0;
-        }
-        *(char *)(temp_v2 + 0xc) = '\0';
-        *(unsigned char *)(temp_v2 + 0xf) = 0;
-      }
-      unaff_r4 = unaff_r4 + 1;
-    } while (unaff_r4 < 0x40);
-  }
-  else {
-    temp_v2 = 0;
-    do {
-      temp_v4 = DAT_00581280 + temp_v2 * 0x3c;
-      if (((*(char *)(temp_v4 + 0xc) != '\0') &&
-          (temp_v1 = flagPairCondition((int)*(short *)(temp_v4 + 0x34),(int)*(short *)(temp_v4 + 0x36)),
-          temp_v1 == 0)) && (*(int *)(temp_v4 + 0x40) != 0)) {
-        if (*(int *)(*(int *)(DAT_00581280 + temp_v2 * 0x3c + 0x40) + 4) != 0) {
-          ptrListRemoveClearOwner(g_handleRegistry);
-        }
-        *(unsigned char *)(temp_v4 + 0xf) = 1;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x40);
-  }
-  temp_v2 = DAT_00581280;
-  *(short *)(DAT_00581280 + 0xf42) = *(short *)(DAT_00581280 + 0xf42) + 1;
-  *(unsigned short *)(temp_v2 + 0xf44) = 0;
-  return 0;
+    work = reinterpret_cast<CleanupView *>(DAT_00581280);
+    ++work->phase;
+    work->timer = 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

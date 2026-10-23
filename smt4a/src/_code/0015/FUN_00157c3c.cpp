@@ -1,74 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00157c3c` (_code @ 0x157c3c, 0x114 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: writer/selector load scheduling, model-command argument registers and segment metadata store merging differ. */
+#include "gfx/ModelMatrixUpload.h"
 
 extern "C" {
+void FUN_00177684(u32 program, u32 mode, u32 enabled);
+u32 *asdGxGetCommandCursor(void);
+void FUN_0016d338(ModelCommandWriter *writer, u32 *begin);
+void FUN_0019a2ac(u32 *commands, const f32 *matrix, u32 header);
+void FUN_0019a270(u32 *commands, const f32 *matrix, u32 header);
+u32 *FUN_001a0778(u32 *commands, u32 bytes);
+u32 *FUN_001a07c4(u32 *commands, u32 **sizePatch, const u32 *source, u32 bytes);
 
-int FUN_0016d338(int *, unsigned int);
-int FUN_00177684(unsigned int, int);
-int FUN_0019a270(unsigned int *, int, int);
-int FUN_0019a2ac(unsigned int *, int, int);
-int asdGxGetCommandCursor(void);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_0016d338. */
-/* Supplied declaration required: FUN_00177684. */
-/* Supplied declaration required: FUN_0019a270. */
-/* Supplied declaration required: FUN_0019a2ac. */
-/* Supplied declaration required: asdGxGetCommandCursor. */
-extern int FUN_001a0778(unsigned int *, int);
-extern int FUN_001a07c4(int, int *, int, int);
-
-
-void FUN_00157c3c(int param_1,int param_2,unsigned int param_3,int param_4)
-
+// Upload projection/model matrices and append a linked segment of model commands.
+void FUN_00157c3c(ModelMatrixUploadOwner *owner, ModelMatrixUploadSource *source,
+                  u32, u32 *)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  int temp_v3;
-  unsigned int *puVar6;
-  int temp_v4;
-  
-  temp_v0 = *(unsigned int *)(param_2 + 4);
-  piVar4 = *(int **)(param_1 + 0xac);
-  temp_v4 = param_4;
-  FUN_00177684(temp_v0,1);
-  asdGxGetCommandCursor();
-  FUN_0016d338(piVar4,temp_v0);
-  puVar6 = (unsigned int *)*piVar4;
-  *puVar6 = *(unsigned char *)(param_1 + 0xb2) | 0x80000000;
-  puVar6[1] = 0xf02c0;
-  FUN_0019a2ac(puVar6 + 2,param_2 + 0x3c,0xff02c1);
-  *piVar4 = (int)(puVar6 + 0x14);
-  puVar6[0x14] = *(unsigned char *)(param_1 + 0xba) | 0x80000000;
-  puVar6[0x15] = 0xf02c0;
-  FUN_0019a270(puVar6 + 0x16,param_2 + 0x7c,0xbf02c1);
-  puVar6 = puVar6 + 0x24;
-  *piVar4 = (int)puVar6;
-  temp_v3 = *(int *)(param_2 + 0x10);
-  temp_v2 = *(int *)(param_2 + 0x14);
-  if (puVar6 != (unsigned int *)0x0 && temp_v3 != 0) {
-    temp_v1 = FUN_001a0778(puVar6,(((int)puVar6 - piVar4[2]) & 0xfffffffcU) + 0x18);
-    *piVar4 = temp_v1;
-    temp_v2 = FUN_001a07c4(temp_v1,&temp_v4,temp_v3,temp_v2 << 2);
-    *piVar4 = temp_v2;
-    if ((unsigned int *)piVar4[3] != (unsigned int *)0x0) {
-      *(unsigned int *)piVar4[3] = (unsigned int)(temp_v2 - piVar4[2]) >> 3;
+    const f32 *projection = source->projection;
+    const f32 *model = source->model;
+    ModelCommandWriter *writer = owner->writer;
+    FUN_00177684(source->program, 1, 1);
+    FUN_0016d338(writer, asdGxGetCommandCursor());
+    u32 *commands = writer->cursor;
+    *commands++ = owner->projectionRegister | 0x80000000u;
+    *commands++ = 0xF02C0;
+    FUN_0019a2ac(commands, projection, 0xFF02C1);
+    commands += 18;
+    writer->cursor = commands;
+    *commands++ = owner->modelRegister | 0x80000000u;
+    *commands++ = 0xF02C0;
+    FUN_0019a270(commands, model, 0xBF02C1);
+    commands += 14;
+    writer->cursor = commands;
+    const u32 *modelCommands = source->commands;
+    u32 bytes = source->wordCount << 2;
+    if (commands != NULL && modelCommands != NULL) {
+        commands = FUN_001a0778(commands,
+            ((reinterpret_cast<u32>(commands) - reinterpret_cast<u32>(writer->segmentBegin)) & ~3u) + 24);
+        writer->cursor = commands;
+        u32 *sizePatch;
+        commands = FUN_001a07c4(commands, &sizePatch, modelCommands, bytes);
+        writer->cursor = commands;
+        if (writer->segmentSize != NULL) {
+            *writer->segmentSize = (reinterpret_cast<u32>(commands) -
+                reinterpret_cast<u32>(writer->segmentBegin)) >> 3;
+        }
+        writer->segmentBegin = writer->cursor;
+        writer->segmentSize = sizePatch;
+        if (writer->firstSegmentBytes == 0) {
+            writer->firstSegmentBytes = (reinterpret_cast<u32>(writer->cursor) -
+                reinterpret_cast<u32>(writer->begin)) & ~3u;
+        }
     }
-    piVar4[2] = *piVar4;
-    piVar4[3] = temp_v4;
-    if (piVar4[4] == 0) {
-      piVar4[4] = (*piVar4 - piVar4[1]) & 0xfffffffc;
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -12,7 +12,7 @@ typedef struct {
 } param_6_stack;
 
 /* Supplied declaration required: btlFindEntryValue. */
-extern short FUN_004c52ec(unsigned int);
+extern short btlGetPropertyMaximum(unsigned int);
 extern short FUN_004c53fc(unsigned int);
 
 
@@ -33,7 +33,7 @@ unsigned char FUN_003ff22c(int param_1,int param_2,int param_3,int param_4,int p
       if (param_2 != -6) {
         if (param_2 != -5) {
           if (param_2 >= 1) {
-            temp_v1 = FUN_004c52ec(7);
+            temp_v1 = btlGetPropertyMaximum(7);
             if (temp_v0 < temp_v1) {
 LAB_003ff30c:
               if ((param_6 == 0) || (temp_v0 != 0)) {
@@ -55,7 +55,7 @@ LAB_003ff30c:
       if (param_3 != -6) {
         if (param_3 != -5) {
           if (param_3 >= 1) {
-            temp_v1 = FUN_004c52ec(8);
+            temp_v1 = btlGetPropertyMaximum(8);
             if (temp_v0 < temp_v1) {
 LAB_003ff3b0:
               if ((param_6 == 0) || (temp_v0 != 0)) {
@@ -77,7 +77,7 @@ LAB_003ff3b0:
       if (param_4 != -6) {
         if (param_4 != -5) {
           if (param_4 >= 1) {
-            temp_v1 = FUN_004c52ec(10);
+            temp_v1 = btlGetPropertyMaximum(10);
             if (temp_v0 < temp_v1) {
 LAB_003ff458:
               if ((param_6 == 0) || (temp_v0 != 0)) {
@@ -99,7 +99,7 @@ LAB_003ff458:
       if (param_5 != -6) {
         if (param_5 != -5) {
           if (param_5 >= 1) {
-            temp_v1 = FUN_004c52ec(0xb);
+            temp_v1 = btlGetPropertyMaximum(0xb);
             if (temp_v1 <= temp_v0) {
               return temp_v2 == 0;
             }

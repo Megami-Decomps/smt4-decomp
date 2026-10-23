@@ -1,107 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00403b84` (_code @ 0x403b84, 0x1c4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: record pointer and completed-flag counter use opposite saved registers; progress comparison/update lowers to a conditional call instead of retail's branch. */
+#include "gamedata/FlagGatedCatalog.h"
 
 extern "C" {
+void sysMemClear(void *memory, u32 bytes);
+const FlagGatedCatalogRecord *FUN_0039b984(u16 index);
+s32 gameFlagIsSet(u16 flag);
+u32 tableByteGet1(u32 index);
+s32 tableFlagBit0(u32 index);
+void FUN_0040a790(u32 index);
+void FUN_0040a7b4(u32 index);
+void FUN_0040a844(u32 index, s32 mode);
+void gameDataSetEnabledBit(u32 index, s32 enabled);
+void gameDataSetModeAndFlag(u32 index, u32 mode);
 
-int sysMemClear(int, int, unsigned int, unsigned int, unsigned int);
-int FUN_0039b984(void);
-int gameDataSetModeAndFlag(unsigned int, unsigned int);
-int FUN_0040a790(unsigned int);
-int FUN_0040a7b4(unsigned int);
-int FUN_0040a844(unsigned int, int);
-int gameDataSetEnabledBit(unsigned int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-extern int gameFlagIsSet(short);
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0039b984. */
-extern unsigned int tableByteGet1(unsigned int);
-/* Supplied declaration required: gameDataSetModeAndFlag. */
-/* Supplied declaration required: FUN_0040a790. */
-/* Supplied declaration required: FUN_0040a7b4. */
-extern int tableFlagBit0(unsigned int);
-/* Supplied declaration required: FUN_0040a844. */
-/* Supplied declaration required: gameDataSetEnabledBit. */
-
-
-void FUN_00403b84(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+void FUN_00403b84(FlagGatedCatalogList *list, s32 limit)
 {
-/* irregular: 1 goto(s); 7 native warning(s); review required */
-  short *psVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  
-  sysMemClear(param_1 + 0x408,600,param_3,param_4,param_4);
-  temp_v4 = 0;
-  temp_v3 = 0;
-  *(unsigned int *)(param_1 + 0x660) = 0;
-  do {
-    if (param_2 <= temp_v4) break;
-    psVar1 = (short *)(temp_v3 & 0xffff);
-    FUN_0039b984();
-    if ((psVar1 != (short *)0x0) && (temp_v4 = temp_v4 + 1, *psVar1 != 0)) {
-      temp_v0 = gameFlagIsSet(psVar1[0x2d]);
-      if (!(psVar1[0x2d] == 0 || temp_v0 == 0)) {
-        temp_v0 = tableFlagBit0(temp_v3);
-        if (temp_v0 != 0) {
-          FUN_0040a7b4(temp_v3);
+    sysMemClear(list->entries, sizeof(list->entries));
+    list->count = 0;
+    s32 processed = 0;
+    for (s32 index = 0; index < 300 && processed < limit; ++index) {
+        const FlagGatedCatalogRecord *record = FUN_0039b984(static_cast<u16>(index));
+        if (record == NULL)
+            continue;
+        ++processed;
+        if (record->id == 0)
+            continue;
+        s32 hidden = gameFlagIsSet(record->hideFlag);
+        if (record->hideFlag != 0 && hidden) {
+            if (tableFlagBit0(index))
+                FUN_0040a7b4(index);
+            continue;
         }
-      }
-      else {
-        temp_v0 = tableFlagBit0(temp_v3);
-        if (temp_v0 == 0) {
-          temp_v0 = gameFlagIsSet(psVar1[0x2e]);
-          if ((psVar1[0x2e] != 0) && (temp_v0 == 0)) goto LAB_00403d24;
-          FUN_0040a790(temp_v3);
-          if (psVar1[0x2c] != 1) {
-            if (psVar1[0x2c] == 2) {
-              gameDataSetEnabledBit(temp_v3,0);
-              FUN_0040a844(temp_v3,0);
+        if (!tableFlagBit0(index)) {
+            s32 unlocked = gameFlagIsSet(record->requiredFlag);
+            if (record->requiredFlag != 0 && !unlocked)
+                continue;
+            FUN_0040a790(index);
+            if (record->initialMode == 1) {
+                gameDataSetEnabledBit(index, 0);
+                FUN_0040a844(index, 1);
+            } else if (record->initialMode == 2) {
+                gameDataSetEnabledBit(index, 0);
+                FUN_0040a844(index, 0);
             }
-          }
-          else {
-            gameDataSetEnabledBit(temp_v3,0);
-            FUN_0040a844(temp_v3,1);
-          }
         }
-        temp_v1 = tableByteGet1(temp_v3);
-        temp_v5 = temp_v1;
-        if (temp_v1 < 5) {
-          temp_v2 = 0;
-          temp_v1 = temp_v2;
-          do {
-            temp_v0 = gameFlagIsSet(psVar1[temp_v2 + 0x2f]);
-            if (temp_v0 != 0) {
-              temp_v1 = (temp_v1 + 1) & 0xff;
+        u32 previousProgress = tableByteGet1(index);
+        u32 progress = previousProgress;
+        if (progress < 5) {
+            u8 completedFlags = 0;
+            for (u8 flag = 0; flag < 5; ++flag) {
+                if (gameFlagIsSet(record->progressFlags[flag]))
+                    ++completedFlags;
             }
-            temp_v2 = temp_v2 + 1;
-          } while (temp_v2 < 5);
+            progress = completedFlags;
         }
-        if (temp_v5 < temp_v1) {
-          gameDataSetModeAndFlag(temp_v3,temp_v1);
-        }
-        *(short *)(param_1 + *(int *)(param_1 + 0x660) * 2 + 0x408) = *psVar1;
-        *(int *)(param_1 + 0x660) = *(int *)(param_1 + 0x660) + 1;
-      }
+        if (previousProgress < progress)
+            gameDataSetModeAndFlag(index, progress);
+        list->entries[list->count] = record->id;
+        ++list->count;
     }
-LAB_00403d24:
-    temp_v3 = temp_v3 + 1;
-  } while ((int)temp_v3 < 300);
-  *(unsigned int *)(param_1 + 0xfc) = 10;
-  if (*(int *)(param_1 + 0x660) < 10) {
-    *(int *)(param_1 + 0xfc) = *(int *)(param_1 + 0x660);
-  }
-  return;
+    list->visibleCount = 10;
+    if (list->count < 10)
+        list->visibleCount = list->count;
 }
-
-} /* extern "C" */
+}

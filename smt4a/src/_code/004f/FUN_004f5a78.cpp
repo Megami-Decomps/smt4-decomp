@@ -1,137 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f5a78` (_code @ 0x4f5a78, 0x200 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: work/global pointers and path buffers use different saved registers; return branches differ. */
+#include "battle/BattleMovementEffects.h"
+#include "battle/btlEffect.h"
 
 extern "C" {
+extern BtlEffectGlobals g_btlEffect;
+extern const char DAT_00528380[4][32];
+extern const char DAT_005284c0[];
+void sysMemClear(void *, u32);
+void asdMemFree(void *);
+void textFormatBuffer(char *, const char *, ...);
+char *libc_strcpy(char *, const char *);
+char *FUN_00100d60(char *, s32);
+u32 findRecordByKey(const char *);
+void asdLoadFileAsyncSimple(const char *, char **, s32);
+void rt_memcpy_w(void *, const void *, u32);
+u32 keyedRecordRegisterName(const char *);
+u32 FUN_003478dc(u32, const void *);
+void FUN_003afd30(void);
+s32 FUN_003c5d8c(void);
 
-int textFormatBuffer(...);
-int asdMemFree(...);
-int asdLoadFileAsyncSimple(...);
-int libc_strcpy(...);
-int sysMemClear(...);
-int FUN_003478dc(...);
-int FUN_003afd30(...);
-int rt_memcpy_w(...);
-
-/* stack frame of param_1: 2 slot(s), 5 byte(s) */
-typedef struct {
-    unsigned char spA0; /* 0xa0: local_a0 */
-    unsigned int sp124; /* 0x124: local_124 */
-} param_1_stack;
-
-extern int g_btlAux; /* 0x573808 */
-
-/* Supplied declaration required: textFormatBuffer. */
-extern int FUN_00100d60(unsigned char *, unsigned int);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: libc_strcpy. */
-extern unsigned int keyedRecordRegisterName(int);
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003478dc. */
-extern int findRecordByKey(int);
-/* Supplied declaration required: FUN_003afd30. */
-extern int FUN_003c5d8c(void);
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int FUN_004f5a78(int param_1)
-
+// Load and register the four common battle movement effects, then wait for their setup to finish.
+u32 FUN_004f5a78(BattleMovementEffects *work)
 {
-/* irregular: 8 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  char *pcVar7;
-  unsigned char temp_v6;
-  unsigned char temp_v7;
-  unsigned char temp_v8 [4];
-  int temp_v9;
-  unsigned char temp_v10 [8];
-  unsigned char temp_v11;
-  
-  temp_v5 = g_btlAux;
-  temp_v1 = *(int *)(param_1 + 0x3050);
-  if (temp_v1 != 0) {
-    if (temp_v1 != 1) {
-      if (temp_v1 != 2) {
+    if (work->loadState == 0) {
+        BattleMovementEffects *effects = static_cast<BattleMovementEffects *>(g_btlEffect.data);
+        for (s32 i = 0; i < 4; ++i) {
+            BattleMovementEffectResource *resource = &effects->resources[i];
+            resource->id = 0xFF;
+            sysMemClear(resource->key, 128);
+            if (resource->file != NULL) {
+                asdMemFree(resource->file);
+                resource->file = NULL;
+            }
+            resource->flags = 0;
+            char path[128];
+            char formatted[128];
+            sysMemClear(path, 128);
+            sysMemClear(formatted, 128);
+            textFormatBuffer(formatted, DAT_005284c0, DAT_00528380[i]);
+            libc_strcpy(path, formatted);
+            libc_strcpy(resource->key, FUN_00100d60(path, '/') + 1);
+            if (findRecordByKey(resource->key) == 0xFF) {
+                asdLoadFileAsyncSimple(path, &resource->file, 1);
+                resource->flags |= 1;
+            }
+        }
+        work->loadState = 1;
+    } else if (work->loadState != 1 && work->loadState != 2) {
         return 1;
-      }
-      temp_v5 = FUN_003c5d8c();
-      if (temp_v5 != 0) {
-        *(unsigned int *)(param_1 + 0x3050) = 3;
+    }
+    if (work->loadState == 1) {
+        BattleMovementEffects *effects = static_cast<BattleMovementEffects *>(g_btlEffect.data);
+        for (s32 i = 0; i < 4; ++i) {
+            BattleMovementEffectResource snapshot;
+            rt_memcpy_w(&snapshot, &effects->resources[i], sizeof(snapshot));
+            if ((snapshot.flags & 1) && snapshot.file == NULL)
+                return 0;
+        }
+        for (s32 i = 0; i < 4; ++i) {
+            BattleMovementEffectResource *resource = &effects->resources[i];
+            const char *file = resource->file;
+            if (file[0] == 'V' && file[1] == 'E' && file[2] == 'R') {
+                u32 id = keyedRecordRegisterName(resource->key);
+                resource->id = id;
+                resource->id = FUN_003478dc(id, file);
+            }
+        }
+        FUN_003afd30();
+        work->loadState = 2;
+    }
+    if (FUN_003c5d8c()) {
+        work->loadState = 3;
         return 1;
-      }
-      return 0;
     }
-  }
-  else {
-    temp_v1 = 0;
-    do {
-      temp_v3 = temp_v5 + temp_v1 * 0x8c;
-      *(unsigned char *)(temp_v3 + 0x2e20) = 0xff;
-      sysMemClear(temp_v3 + 0x2e28,0x80);
-      if (*(int *)(temp_v3 + 0x2e24) != 0) {
-        asdMemFree();
-        *(unsigned int *)(temp_v3 + 0x2e24) = 0;
-      }
-      *(unsigned char *)(temp_v3 + 0x2ea8) = 0;
-      sysMemClear(temp_v8,0x80);
-      sysMemClear(temp_v10,0x80);
-      textFormatBuffer(temp_v10,"battle/effect/%s.eft","Move_out_c" + temp_v1 * 0x20);
-      libc_strcpy(temp_v8,temp_v10);
-      temp_v2 = FUN_00100d60(temp_v8,0x2f);
-      libc_strcpy(temp_v3 + 0x2e28,temp_v2 + 1);
-      temp_v2 = findRecordByKey(temp_v3 + 0x2e28);
-      if (temp_v2 == 0xff) {
-        asdLoadFileAsyncSimple(temp_v8,temp_v3 + 0x2e24,1);
-        *(unsigned char *)(temp_v3 + 0x2ea8) = *(unsigned char *)(temp_v3 + 0x2ea8) | 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 4);
-    *(unsigned int *)(param_1 + 0x3050) = 1;
-  }
-  temp_v5 = g_btlAux;
-  temp_v1 = 0;
-  do {
-    rt_memcpy_w(temp_v8,temp_v5 + temp_v1 * 0x8c + 0x2e20,0x8c);
-    if (((temp_v11 & 1) != 0) && (temp_v9 == 0)) {
-      return 0;
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 4);
-  temp_v1 = 0;
-  do {
-    temp_v3 = temp_v5 + temp_v1 * 0x8c;
-    pcVar7 = *(char **)(temp_v3 + 0x2e24);
-    temp_v0 = *pcVar7;
-    temp_v6 = temp_v0 == 'V';
-    if (temp_v6) {
-      temp_v0 = pcVar7[1];
-    }
-    temp_v7 = temp_v6 && temp_v0 == 'E';
-    if (temp_v6 && temp_v0 == 'E') {
-      temp_v7 = pcVar7[2] == 'R';
-    }
-    if (temp_v7) {
-      temp_v4 = keyedRecordRegisterName(temp_v3 + 0x2e28);
-      *(char *)(temp_v3 + 0x2e20) = (char)temp_v4;
-      FUN_003478dc(temp_v4,pcVar7);
-      *(char *)(temp_v3 + 0x2e20) = (char)temp_v4;
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 4);
-  FUN_003afd30();
-  *(unsigned int *)(param_1 + 0x3050) = 2;
-  temp_v5 = FUN_003c5d8c();
-  if (temp_v5 != 0) {
-    *(unsigned int *)(param_1 + 0x3050) = 3;
-    return 1;
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -14,7 +14,7 @@ int textEncodeFontSlot(int, int [388]);
 int scrScriptProcessStartEntry(...);
 int beginStatusPanelClose(void);
 int FUN_0029cc44(int);
-int FUN_0029d770(int, int [388]);
+int unitInitializeFromSavedRecord(int, int [388]);
 int FUN_0029da34(...);
 int FUN_0029ee6c(int, int);
 int FUN_002a0cc8(...);
@@ -46,7 +46,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029cc44. */
-/* Supplied declaration required: FUN_0029d770. */
+/* Supplied declaration required: unitInitializeFromSavedRecord. */
 /* Supplied declaration required: FUN_0029da34. */
 extern int gameGetFlagByte12e8(void);
 /* Supplied declaration required: FUN_0029ee6c. */
@@ -160,7 +160,7 @@ void FUN_003a6f80(int param_1)
         FUN_0029da34(0,1,temp_v0,temp_v5);
         return;
       }
-      FUN_0029d770(temp_v0,temp_v10);
+      unitInitializeFromSavedRecord(temp_v0,temp_v10);
       FUN_0029da34(0,1,temp_v0,temp_v10);
       return;
     }

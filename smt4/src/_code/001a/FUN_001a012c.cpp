@@ -8,7 +8,7 @@ int FUN_0019715c(...);
 int FUN_001978b4(void);
 int FUN_001f20b4(...);
 int dataTable15GetUnlockedEntryId(...);
-int FUN_002be370(...);
+int itemDrawCategoryBadge(...);
 int FUN_002be5a4(...);
 int FUN_002be650(...);
 int vec2GetYInt(...);
@@ -41,7 +41,7 @@ extern int uniteGetState(void);
 /* Supplied declaration required: dataTable15GetUnlockedEntryId. */
 extern unsigned int objectPartRunUnlessLocked(int);
 extern unsigned short *gameGetPlayerData(void);
-/* Supplied declaration required: FUN_002be370. */
+/* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: vec2GetYInt. */
@@ -179,7 +179,7 @@ LAB_001a03b8:
         FUN_002bf380(2,0x1a,0xd,*(short *)(temp_v8 + 8) + temp_v2,*(short *)(temp_v8 + 10) + temp_v3,0xbf)
         ;
         temp_v5 = FUN_002bf4f8(0x1a,0xa0);
-        FUN_002be370(temp_v10,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
+        itemDrawCategoryBadge(temp_v10,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
                      (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,0xc4,0);
         temp_v5 = FUN_002bf4f8(0x1a,0xa1);
         if (temp_v9 != 0) {

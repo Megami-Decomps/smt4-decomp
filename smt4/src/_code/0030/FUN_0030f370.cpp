@@ -8,7 +8,7 @@ int FUN_0024f8a4(void);
 int effEmitterCreateSmall(void);
 int FUN_002691d8(unsigned int, unsigned int, int);
 int objectBufferFree(void);
-int FUN_0030f214(unsigned int *, int);
+int effEmitterReplaceResourceByKind(unsigned int *, int);
 
 typedef struct fn_0030f370_arg0 fn_0030f370_arg0;
 struct fn_0030f370_arg0 {
@@ -27,7 +27,7 @@ extern int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: effEmitterCreateSmall. */
 /* Supplied declaration required: FUN_002691d8. */
 /* Supplied declaration required: objectBufferFree. */
-/* Supplied declaration required: FUN_0030f214. */
+/* Supplied declaration required: effEmitterReplaceResourceByKind. */
 
 
 unsigned int * FUN_0030f370(fn_0030f370_arg0 *param_1)
@@ -50,7 +50,7 @@ unsigned int * FUN_0030f370(fn_0030f370_arg0 *param_1)
   puVar2[0xc] = temp_v1;
   temp_v0 = resourceResolveDataPointer(param_1);
   if (temp_v0 != 0) {
-    FUN_0030f214(puVar2,param_1->field_0x1c);
+    effEmitterReplaceResourceByKind(puVar2,param_1->field_0x1c);
   }
   return puVar2;
 }

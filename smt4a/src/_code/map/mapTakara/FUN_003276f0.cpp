@@ -1,113 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003276f0` (_code @ 0x3276f0, 0x16c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: engine record/model-slot register allocation and position stores differ. */
+#include "gfx/EngineRecordList.h"
 
+struct HandleRegistry;
 extern "C" {
+extern EngineRecordList *g_engineRecordList;
+extern HandleRegistry *g_handleRegistry;
+void *gameFlagsGetBlock(void);
+EngineRecordModelList *FUN_00178b04(u32 bytes, const char *file, s32 line);
+EngineRecordModelList *modelListInit(EngineRecordModelList *models);
+void FUN_0040aa6c(EngineRecordModelList *models, const char *path);
+void FUN_0040aad4(EngineRecordModelList *models, s32 index);
+void handleRegistryRegisterObject(HandleRegistry *registry, u32 handle);
 
-int gameFlagsGetBlock(void);
-int FUN_00178b04(int, unsigned char *, int);
-int FUN_0040aa6c(void);
-int FUN_0040aad4(unsigned int, int);
-int handleRegistryRegisterObject(unsigned int, unsigned int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern unsigned char LAB_00327864; /* 0x327864 */
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-#ifndef ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
-#define ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
-/* Storage views; not a recovered source structure. */
-union romwright_storage_s__a_a_00587f08_9_1 {
-    char whole[9];
-    unsigned char u1[9];
-    signed char s1[9];
-};
-typedef char romwright_storage_s__a_a_00587f08_9_1_size_check[(sizeof(union romwright_storage_s__a_a_00587f08_9_1) == 9) ? 1 : -1];
-typedef char romwright_storage_s__a_a_00587f08_9_1_u1_width_check[(sizeof(((union romwright_storage_s__a_a_00587f08_9_1 *)0)->u1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_s__a_a_00587f08_9_1_s1_width_check[(sizeof(((union romwright_storage_s__a_a_00587f08_9_1 *)0)->s1[0]) == 1) ? 1 : -1];
-#endif
-extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 */
-
-/* Supplied declaration required: gameFlagsGetBlock. */
-/* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_0040aa6c. */
-/* Supplied declaration required: FUN_0040aad4. */
-extern unsigned int modelListInit(void);
-/* Supplied declaration required: handleRegistryRegisterObject. */
-
-
-void FUN_003276f0(int param_1,int param_2)
-
+/* Initialize the treasure marker model list and create its delayed visible effect record. */
+void FUN_003276f0(s32 delay, s32 alternate, f32 x, f32 y, f32 z, f32 w)
 {
-/* irregular: 1 goto(s); irregular input(s): in_d0, in_d1; 5 native warning(s); review required */
-  int *piVar1;
-  short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned long long in_d0;
-  unsigned long long in_d1;
-  
-  gameFlagsGetBlock();
-  temp_v2 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);
-  *(unsigned short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 8) = 0;
-  *(unsigned short *)(temp_v2 + 4) = 0x18;
-  *(unsigned short *)(temp_v2 + 6) = 1;
-  *(unsigned int *)(temp_v2 + 0x18) = 0;
-  *(unsigned int *)(temp_v2 + 0xce0) = 0;
-  *(unsigned short *)(temp_v2 + 10) = 1;
-  temp_v1 = 0x20;
-  FUN_00178b04(0x20,&LAB_00327864,0x3cb);
-  temp_v2 = 0;
-  if (temp_v1 != 0) {
-    temp_v2 = modelListInit();
-  }
-  *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) = temp_v2
-  ;
-  FUN_0040aa6c();
-  FUN_0040aad4(*(unsigned int *)
-                ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0);
-  temp_v2 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);
-  temp_v1 = 0;
-  do {
-    if (*(char *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + temp_v1 * 0x58 + 0xa4) == '\0') goto LAB_003277b0;
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x20);
-  temp_v1 = -1;
-LAB_003277b0:
-  piVar1 = (int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0x10);
-  *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xc) = (short)temp_v1;
-  temp_v1 = temp_v2 + (short)temp_v1 * 0x58;
-  *(int *)(temp_v2 + 0x10) = *piVar1 + 1;
-  if (param_2 != 0) {
-    *(unsigned char *)(temp_v1 + 0xa4) = 1;
-    *(unsigned int *)(temp_v1 + 0xc0) = 2;
-    *(unsigned int *)(temp_v1 + 0xa8) = 0xb;
-  }
-  else {
-    *(unsigned char *)(temp_v1 + 0xa4) = 1;
-    *(unsigned int *)(temp_v1 + 0xc0) = 0;
-    *(unsigned int *)(temp_v1 + 0xa8) = 1;
-  }
-  *(unsigned int *)(temp_v1 + 0xac) = 0;
-  *(int *)(temp_v1 + 0xb0) = (int)in_d0;
-  *(int *)(temp_v1 + 0xb4) = (int)((unsigned long long)in_d0 >> 0x20);
-  *(int *)(temp_v1 + 0xb8) = (int)in_d1;
-  *(int *)(temp_v1 + 0xbc) = (int)((unsigned long long)in_d1 >> 0x20);
-  *(unsigned char *)(temp_v1 + 0xc4) = 1;
-  *(unsigned short *)(temp_v1 + 0xc6) = 0;
-  *(unsigned short *)(temp_v1 + 200) = 4;
-  *(int *)(temp_v1 + 0xcc) = -param_1;
-  *(unsigned char *)(temp_v1 + 0xd0) = 0;
-  *(unsigned int *)(temp_v1 + 0xd4) = 0;
-  *(unsigned char *)(temp_v1 + 0xd8) = 0;
-  temp_v2 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);
-  temp_v0 = *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10);
-  *(int *)(temp_v1 + 0xdc) = (int)temp_v0;
-  handleRegistryRegisterObject(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + temp_v0 * 8 + 0x20) + 4));
-  return;
+    gameFlagsGetBlock();
+    EngineRecordList *list = g_engineRecordList;
+    list->count = 0;
+    list->capacity = 24;
+    list->enabled = 1;
+    list->counter18 = 0;
+    list->counterCE0 = 0;
+    list->modelSlot = 1;
+    EngineRecordModelList *models = FUN_00178b04(32,
+        "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp", 971);
+    if (models != NULL)
+        models = modelListInit(models);
+    g_engineRecordList->models[g_engineRecordList->modelSlot].models = models;
+    FUN_0040aa6c(models, "map/unit/u007.bam");
+    FUN_0040aad4(g_engineRecordList->models[g_engineRecordList->modelSlot].models, 0);
+    list = g_engineRecordList;
+    s32 index;
+    for (index = 0; index < 32; ++index) {
+        if (list->records[index].active == 0)
+            break;
+    }
+    if (index == 32)
+        index = -1;
+    list->selectedRecord = static_cast<s16>(index);
+    EngineEffectRecord *record = &list->records[static_cast<s16>(index)];
+    list->activeCount++;
+    if (alternate != 0) {
+        record->active = 1;
+        record->variant = 2;
+        record->state = 11;
+    } else {
+        record->active = 1;
+        record->variant = 0;
+        record->state = 1;
+    }
+    record->phase = 0;
+    record->position[0] = x;
+    record->position[1] = y;
+    record->position[2] = z;
+    record->position[3] = w;
+    record->visible = 1;
+    record->frame = 0;
+    record->duration = 4;
+    record->delay = -delay;
+    record->flag2C = 0;
+    record->counter30 = 0;
+    record->flag34 = 0;
+    record->modelSlot = g_engineRecordList->modelSlot;
+    handleRegistryRegisterObject(g_handleRegistry,
+        g_engineRecordList->models[g_engineRecordList->modelSlot].models->registryHandle);
 }
-
-} /* extern "C" */
+}

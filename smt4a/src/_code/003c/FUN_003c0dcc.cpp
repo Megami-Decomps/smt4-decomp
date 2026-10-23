@@ -1,123 +1,91 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c0dcc` (_code @ 0x3c0dcc, 0x1e8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved record/count registers and progress-counter return scheduling differ; retail and built both have 124 rows. */
+#include "addon/PackageSelection.h"
+#include "addon/aocMain.h"
 
 extern "C" {
+extern AocSystemA *g_aocSystem;
+void *dataTableGet(s32 table, s32 section);
+s32 gameFlagIsSet(u32 flag);
+s32 aocCountTableRecords(AocSystemA *system);
+PackageSelectableRecord *FUN_0039b984(u16 id);
+s32 tableFlagBit0(s32 index);
+s32 tableFlagBit1(s32 index);
+s32 tableFlagBit2(s32 index);
+u8 tableByteGet1(s32 index);
+void FUN_0040a790(s32 index);
+void FUN_0040a7b4(s32 index);
+void FUN_0040a844(s32 index, s32 enabled);
+void gameDataSetEnabledBit(s32 index, s32 enabled);
+void gameDataSetModeAndFlag(s32 index, u32 count);
 
-int gameFlagIsSet(int);
-int dataTableGetEntries(void);
-int FUN_0039b984(void);
-int gameDataSetModeAndFlag(unsigned int, unsigned int);
-int FUN_0040a790(unsigned int);
-int FUN_0040a7b4(void);
-int FUN_0040a844(unsigned int, int);
-int gameDataSetEnabledBit(unsigned int, int);
-
-extern unsigned int g_aocSystem; /* 0x570280 */
-
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: gameFlagIsSet. */
-extern int dataTableGetCount(unsigned int);
-/* Supplied declaration required: dataTableGetEntries. */
-/* Supplied declaration required: FUN_0039b984. */
-extern unsigned int tableByteGet1(unsigned int);
-/* Supplied declaration required: gameDataSetModeAndFlag. */
-/* Supplied declaration required: FUN_0040a790. */
-/* Supplied declaration required: FUN_0040a7b4. */
-extern int tableFlagBit2(unsigned int);
-extern int tableFlagBit0(unsigned int);
-extern int tableFlagBit1(unsigned int);
-/* Supplied declaration required: FUN_0040a844. */
-/* Supplied declaration required: gameDataSetEnabledBit. */
-extern int aocCountTableRecords(unsigned int);
-
-
-unsigned int FUN_003c0dcc(void)
-
+// Refresh available quest records, stopping when a newly relevant entry needs attention.
+u32 FUN_003c0dcc()
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  short *psVar4;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned char temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  
-  temp_v0 = gameFlagIsSet(0x40e);
-  if (temp_v0 != 0) {
-    temp_v1 = dataTableGet(0x45,0);
-    dataTableGetEntries();
-    temp_v0 = dataTableGetCount(temp_v1);
-    temp_v2 = aocCountTableRecords(g_aocSystem);
-    temp_v8 = 0;
-    temp_v7 = 0;
-    do {
-      if (temp_v0 + temp_v2 <= temp_v8) {
+    if (!gameFlagIsSet(0x40E))
         return 0;
-      }
-      psVar4 = (short *)(temp_v7 & 0xffff);
-      FUN_0039b984();
-      if ((psVar4 != (short *)0x0) && (temp_v8 = temp_v8 + 1, *psVar4 != 0)) {
-        temp_v3 = tableFlagBit0(temp_v7);
-        if (temp_v3 != 0) {
-          temp_v3 = gameFlagIsSet(psVar4[0x2d]);
-          if (!(psVar4[0x2d] == 0 || temp_v3 == 0)) {
-            FUN_0040a7b4();
-          }
-          else {
-            temp_v3 = tableFlagBit1(temp_v7);
-            if (temp_v3 != 0) {
-              return 1;
+    void *table = dataTableGet(0x45, 0);
+    dataTableGetEntries(table);
+    s32 count = dataTableGetCount(table);
+    count += aocCountTableRecords(g_aocSystem);
+    s32 visited = 0;
+    u32 needsAttention = 0;
+    for (s32 index = 0; index < 300; ++index) {
+        if (visited >= count)
+            break;
+        PackageSelectableRecord *record = FUN_0039b984(static_cast<u16>(index));
+        if (record == NULL)
+            continue;
+        ++visited;
+        if (record->id == 0)
+            continue;
+        if (tableFlagBit0(index)) {
+            s32 completed = gameFlagIsSet(record->progress.completionFlag);
+            if (record->progress.completionFlag != 0 && completed != 0) {
+                FUN_0040a7b4(index);
+                continue;
             }
-            temp_v3 = tableFlagBit2(temp_v7);
-            if (temp_v3 != 0) {
-              return 1;
+            if (tableFlagBit1(index) || tableFlagBit2(index)) {
+                needsAttention = 1;
+                break;
             }
-            temp_v4 = tableByteGet1(temp_v7);
-            temp_v6 = temp_v4;
-            if (temp_v4 < 5) {
-              temp_v5 = 0;
-              temp_v6 = temp_v5;
-              do {
-                temp_v3 = gameFlagIsSet(psVar4[temp_v5 + 0x2f]);
-                if (temp_v3 != 0) {
-                  temp_v6 = (temp_v6 + 1) & 0xff;
+            u32 previous = tableByteGet1(index);
+            u32 progress = previous;
+            if (previous < 5) {
+                u8 satisfied = 0;
+                for (u8 i = 0; i < 5; ++i) {
+                    if (gameFlagIsSet(record->options[i]))
+                        ++satisfied;
                 }
-                temp_v5 = temp_v5 + 1;
-              } while (temp_v5 < 5);
+                progress = satisfied;
             }
-            if (temp_v4 < temp_v6) {
-              gameDataSetModeAndFlag(temp_v7,temp_v6);
-              return 1;
+            if (previous < progress) {
+                gameDataSetModeAndFlag(index, progress);
+                needsAttention = 1;
+                break;
             }
-          }
+        } else {
+            s32 completed = gameFlagIsSet(record->progress.completionFlag);
+            if (record->progress.completionFlag != 0 && completed != 0)
+                continue;
+            s32 unlocked = gameFlagIsSet(record->progress.unlockFlag);
+            if (record->progress.unlockFlag != 0 && unlocked == 0)
+                continue;
+            FUN_0040a790(index);
+            if (record->progress.mode == 1) {
+                gameDataSetEnabledBit(index, 0);
+                FUN_0040a844(index, 1);
+                needsAttention = 1;
+                break;
+            }
+            if (record->progress.mode == 2) {
+                gameDataSetEnabledBit(index, 0);
+                FUN_0040a844(index, 0);
+            } else {
+                needsAttention = 1;
+                break;
+            }
         }
-        else {
-          temp_v3 = gameFlagIsSet(psVar4[0x2d]);
-          if ((psVar4[0x2d] == 0 || temp_v3 == 0) &&
-             ((temp_v3 = gameFlagIsSet(psVar4[0x2e]), psVar4[0x2e] == 0 || (temp_v3 != 0)))) {
-            FUN_0040a790(temp_v7);
-            if (psVar4[0x2c] == 1) {
-              gameDataSetEnabledBit(temp_v7,0);
-              FUN_0040a844(temp_v7,1);
-              return 1;
-            }
-            if (psVar4[0x2c] != 2) {
-              return 1;
-            }
-            gameDataSetEnabledBit(temp_v7,0);
-            FUN_0040a844(temp_v7,0);
-          }
-        }
-      }
-      temp_v7 = temp_v7 + 1;
-    } while ((int)temp_v7 < 300);
-  }
-  return 0;
+    }
+    return needsAttention;
 }
-
-} /* extern "C" */
+}

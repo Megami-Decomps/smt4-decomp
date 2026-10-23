@@ -1,113 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00242080` (_code @ 0x242080, 0x19c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains inline menu-builder setup/NOPs and a loop bound register; clean C++ factors result branches and defaults differently. */
+#include "shard/W6_W6Match2_EffectEditor.h"
+#include "shard/W5_W5Match2_LinkedItems.h"
+#include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"
 
 extern "C" {
+extern const char DAT_00400002;
+void FUN_002f82ac(EffectTextRequest *request);
+s32 formattedTextCopyLabel(EffectTextRequest *request, char *buffer);
+s32 FUN_00318cac(EffectTextRequest *request);
+void FUN_00247240(EffectTextRequest *request);
+void nodeListOwnerFree(void *owner);
+void textFormatBuffer(char *buffer, const char *format, ...);
+void effMenuAddEntry(void *owner, const char *label, s32 kind, u32 value, s32 flags);
+EffectTextRequest *FUN_0030ed8c(void *owner);
+LinkedItem *linkedFindItemByIndex(LinkedItems *items, s32 index);
+void effResourcePromoteReferences(LinkedItems *items, LinkedItem *item);
+void FUN_0025c650(LinkedItems *items, LinkedItem *item, LinkedItem *replacement);
+void effBlockSetBlobB(EffBlock *block, const void *data, s32 size, u16 tag);
 
-int FUN_002427f8(...);
-int nodeListOwnerFree(unsigned int *);
-int FUN_00247240(unsigned int *);
-int FUN_0025c650(unsigned int, int, int);
-int effBlockSetBlobB(unsigned int, int *, int);
-int textFormatBuffer(unsigned char [104], unsigned char *, unsigned int);
-int effMenuAddEntry(unsigned int *, unsigned char [104], int, unsigned int, int);
-int FUN_002f82ac(unsigned int *);
-int FUN_0030ed8c(unsigned int *, unsigned int);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp84; /* 0x84: local_84 */
-    unsigned int sp88; /* 0x88: local_88 */
-    unsigned int sp8C; /* 0x8c: local_8c */
-    unsigned int sp158; /* 0x158: local_158 */
-} param_1_stack;
-
-extern unsigned char LAB_00242224; /* 0x242224 */
-extern unsigned char DAT_00400002; /* 0x400002 */
-extern unsigned int DAT_0044ea94; /* 0x44ea94 */
-extern unsigned int DAT_0044ea9c; /* 0x44ea9c */
-extern int DAT_0044eaa4; /* 0x44eaa4 */
-extern unsigned int *DAT_0044eabc; /* 0x44eabc */
-extern unsigned int *DAT_0044eac0; /* 0x44eac0 */
-
-/* Supplied declaration required: FUN_002427f8. */
-extern int linkedFindItemByIndex(unsigned int, int);
-/* Supplied declaration required: nodeListOwnerFree. */
-/* Supplied declaration required: FUN_00247240. */
-/* Supplied declaration required: FUN_0025c650. */
-/* Supplied declaration required: effBlockSetBlobB. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: effMenuAddEntry. */
-/* Supplied declaration required: FUN_002f82ac. */
-/* Supplied declaration required: FUN_0030ed8c. */
-extern int FUN_00318cac(unsigned int *);
-extern int formattedTextCopyLabel(unsigned int *, unsigned char *);
-
-
-unsigned char * FUN_00242080(unsigned int param_1)
-
+// Run the editor's selection dialog and apply the selected reference or general index.
+u32 FUN_00242080(u32 flags)
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char *puVar4;
-  unsigned char temp_v3 [200];
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned char temp_v7 [104];
-  
-  temp_v5 = 0;
-  puVar4 = (unsigned char *)0x600001;
-  if (DAT_0044eabc != (unsigned int *)0x0) {
-    FUN_002f82ac(DAT_0044eac0);
-    temp_v5 = DAT_0044eac0[2];
-    temp_v4 = formattedTextCopyLabel(DAT_0044eac0,temp_v3);
-    temp_v6 = FUN_00318cac(DAT_0044eac0);
-    if (temp_v5 == 1) {
-      FUN_00247240(DAT_0044eac0);
-      DAT_0044eac0 = (unsigned int *)0x0;
-      nodeListOwnerFree(DAT_0044eabc);
-      DAT_0044eabc = (unsigned int *)0x0;
+    struct DialogResult {
+        char label[200];
+        s32 kind, state, index;
+    } result;
+    result.state = 0;
+    char generalLabel[104];
+    if (g_effectEditor.textRequest.owner != NULL) {
+        FUN_002f82ac(g_effectEditor.textRequest.request);
+        result.state = g_effectEditor.textRequest.request->state;
+        result.kind = formattedTextCopyLabel(g_effectEditor.textRequest.request, result.label);
+        result.index = FUN_00318cac(g_effectEditor.textRequest.request);
+        if (result.state == 1) {
+            FUN_00247240(g_effectEditor.textRequest.request);
+            g_effectEditor.textRequest.request = NULL;
+            nodeListOwnerFree(g_effectEditor.textRequest.owner);
+            g_effectEditor.textRequest.owner = NULL;
+        }
+    } else {
+        g_effectEditor.textRequest.owner = NULL;
+        if (flags & 8) {
+            for (u32 index = 0; index < 22; ++index) {
+                textFormatBuffer(generalLabel, "GENERAL %d", index);
+                effMenuAddEntry(g_effectEditor.textRequest.owner, generalLabel, 8, index, 0);
+            }
+        }
+        EffectTextRequest *request = FUN_0030ed8c(g_effectEditor.textRequest.owner);
+        g_effectEditor.textRequest.request = request;
+        request->type = 186;
+        request->size = 28;
     }
-  }
-  else {
-    DAT_0044eabc = (unsigned int *)0x0;
-    if ((param_1 & 8) != 0) {
-      temp_v2 = 0;
-      do {
-        textFormatBuffer(temp_v7,&LAB_00242224,temp_v2);
-        effMenuAddEntry(DAT_0044eabc,temp_v7,8,temp_v2,0);
-        temp_v2 = temp_v2 + 1;
-        param_1 = temp_v1;
-      } while (temp_v2 < 0x16);
+    if (result.state == 2)
+        return 0x400000;
+    if (result.state == 1) {
+        if (result.kind != 8) {
+            LinkedItem *replacement = linkedFindItemByIndex(
+                static_cast<LinkedItems *>(g_effectEditor.selection.list), -result.index);
+            if (reinterpret_cast<LinkedItem *>(g_effectEditor.selection.item) != replacement) {
+                effResourcePromoteReferences(static_cast<LinkedItems *>(g_effectEditor.selection.list),
+                             reinterpret_cast<LinkedItem *>(g_effectEditor.selection.item));
+                FUN_0025c650(static_cast<LinkedItems *>(g_effectEditor.selection.list),
+                             reinterpret_cast<LinkedItem *>(g_effectEditor.selection.item), replacement);
+            }
+        } else {
+            effResourcePromoteReferences(static_cast<LinkedItems *>(g_effectEditor.selection.list),
+                         reinterpret_cast<LinkedItem *>(g_effectEditor.selection.item));
+            effBlockSetBlobB(reinterpret_cast<EffBlock *>(g_effectEditor.selection.block), &result.index, 4, 4);
+        }
+        return reinterpret_cast<u32>(&DAT_00400002);
     }
-    puVar1 = DAT_0044eabc;
-    FUN_0030ed8c(DAT_0044eabc,param_1);
-    DAT_0044eac0 = puVar1;
-    *puVar1 = 0xba;
-    puVar1[1] = 0x1c;
-  }
-  if (temp_v5 == 2) {
-    puVar4 = (unsigned char *)0x400000;
-  }
-  else if (temp_v5 == 1) {
-    if (temp_v4 != 8) {
-      temp_v0 = linkedFindItemByIndex(DAT_0044ea94,-temp_v6);
-      if (DAT_0044eaa4 != temp_v0) {
-        FUN_002427f8(DAT_0044ea94);
-        FUN_0025c650(DAT_0044ea94,DAT_0044eaa4,temp_v0);
-      }
-    }
-    else {
-      FUN_002427f8(DAT_0044ea94,DAT_0044eaa4);
-      effBlockSetBlobB(DAT_0044ea9c,&temp_v6,4);
-    }
-    puVar4 = &DAT_00400002;
-  }
-  return puVar4;
+    return 0x600001;
 }
-
-} /* extern "C" */
+}

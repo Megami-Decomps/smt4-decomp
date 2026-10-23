@@ -1,90 +1,91 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b726c` (_code @ 0x4b726c, 0x17c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: switch block ordering, shared flags tail and paired mode/frame stores differ. */
+#include "common.h"
+#include <stddef.h>
 
+struct MapMenuDestination { u16 values[3]; };
+struct MapMenuActionWork {
+    u8 unk00[0x20];
+    u32 flags;
+    u32 unk24;
+    u32 mode;
+    u32 frame;
+    u8 unk30[0xc];
+    s16 map;
+    u8 unk3e[4];
+    MapMenuDestination destination;
+};
+struct MapMenuActionRecord {
+    u8 unk00[0x21];
+    u8 action;
+    u8 unk22[0x32];
+    MapMenuDestination destination;
+};
+typedef char MapMenuActionOffsets[
+    offsetof(MapMenuActionWork, flags) == 0x20 &&
+    offsetof(MapMenuActionWork, map) == 0x3c &&
+    offsetof(MapMenuActionWork, destination) == 0x42 &&
+    offsetof(MapMenuActionRecord, action) == 0x21 &&
+    offsetof(MapMenuActionRecord, destination) == 0x54 ? 1 : -1];
 extern "C" {
+void FUN_001d1438(MapMenuDestination *, const MapMenuDestination *);
+void FUN_004b7a08(MapMenuActionWork *);
+void FUN_004b6bc4(MapMenuActionWork *, s32, s32);
 
-int FUN_001d1438(int, unsigned short *);
-int FUN_004b6bc4(int, int, int);
-int FUN_004b7a08(int);
-
-/* stack frame of param_2: 3 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short spC; /* 0xc: local_c */
-    unsigned short spE; /* 0xe: local_e */
-    unsigned short sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_001d1438. */
-/* Supplied declaration required: FUN_004b6bc4. */
-/* Supplied declaration required: FUN_004b7a08. */
-
-
-void FUN_004b726c(int param_1,int param_2)
-
+void FUN_004b726c(MapMenuActionWork *work, const MapMenuActionRecord *record)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned short temp_v1;
-  unsigned short temp_v2;
-  unsigned short temp_v3;
-  
-  *(unsigned int *)(param_1 + 0x2c) = 0;
-  *(unsigned int *)(param_1 + 0x28) = 5;
-  temp_v1 = 0;
-  temp_v2 = 0;
-  temp_v3 = 0;
-  switch(*(unsigned char *)(param_2 + 0x21)) {
-  default:
-    return;
-  case 1:
-    temp_v1 = *(unsigned short *)(param_2 + 0x54);
-    FUN_001d1438(param_1 + 0x42,&temp_v1);
-    temp_v0 = *(unsigned int *)(param_1 + 0x20) | 0x10;
-    break;
-  case 2:
-    temp_v1 = *(unsigned short *)(param_2 + 0x54);
-    temp_v2 = *(unsigned short *)(param_2 + 0x56);
-    temp_v3 = *(unsigned short *)(param_2 + 0x58);
-    FUN_001d1438(param_1 + 0x42,&temp_v1);
-    *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) | 0x100010;
-    *(unsigned int *)(param_1 + 0x28) = 5;
-    *(unsigned int *)(param_1 + 0x2c) = 0;
-    return;
-  case 3:
-    FUN_004b7a08(param_1);
-    temp_v0 = *(unsigned int *)(param_1 + 0x20) | 0x1000000;
-    break;
-  case 4:
-    FUN_004b7a08(param_1);
-    temp_v0 = *(unsigned int *)(param_1 + 0x20) | 0x2000000;
-    break;
-  case 5:
-    FUN_004b7a08(param_1);
-    temp_v0 = *(unsigned int *)(param_1 + 0x20) | 0x4000000;
-    break;
-  case 6:
-    temp_v0 = *(unsigned int *)(param_1 + 0x20) | 0x800000;
-    break;
-  case 7:
-    FUN_004b7a08(param_1);
-    temp_v0 = *(unsigned int *)(param_1 + 0x20) | 0x200000;
-    break;
-  case 8:
-    FUN_004b6bc4(param_1,(int)*(short *)(param_1 + 0x3c),*(unsigned short *)(param_2 + 0x54));
-    *(unsigned int *)(param_1 + 0x28) = 4;
-    *(unsigned int *)(param_1 + 0x2c) = 0;
-    return;
-  case 9:
-    FUN_004b7a08(param_1);
-    temp_v0 = *(unsigned int *)(param_1 + 0x20) | 0x8000000;
-    break;
-  case 10:
-    FUN_004b7a08(param_1);
-    temp_v0 = *(unsigned int *)(param_1 + 0x20) | 0x20000000;
-  }
-  *(unsigned int *)(param_1 + 0x20) = temp_v0;
-  return;
+    work->frame = 0;
+    work->mode = 5;
+    MapMenuDestination destination;
+    destination.values[0] = 0;
+    destination.values[1] = 0;
+    destination.values[2] = 0;
+    switch (record->action) {
+    case 1:
+        destination.values[0] = record->destination.values[0];
+        FUN_001d1438(&work->destination, &destination);
+        work->flags |= 0x10;
+        break;
+    case 2:
+        destination.values[0] = record->destination.values[0];
+        destination.values[1] = record->destination.values[1];
+        destination.values[2] = record->destination.values[2];
+        FUN_001d1438(&work->destination, &destination);
+        work->flags |= 0x100010;
+        work->mode = 5;
+        work->frame = 0;
+        break;
+    case 3:
+        FUN_004b7a08(work);
+        work->flags |= 0x1000000;
+        break;
+    case 4:
+        FUN_004b7a08(work);
+        work->flags |= 0x2000000;
+        break;
+    case 5:
+        FUN_004b7a08(work);
+        work->flags |= 0x4000000;
+        break;
+    case 6:
+        work->flags |= 0x800000;
+        break;
+    case 7:
+        FUN_004b7a08(work);
+        work->flags |= 0x200000;
+        break;
+    case 8:
+        FUN_004b6bc4(work, work->map, record->destination.values[0]);
+        work->mode = 4;
+        work->frame = 0;
+        break;
+    case 9:
+        FUN_004b7a08(work);
+        work->flags |= 0x8000000;
+        break;
+    case 10:
+        FUN_004b7a08(work);
+        work->flags |= 0x20000000;
+        break;
+    }
 }
-
-} /* extern "C" */
+}

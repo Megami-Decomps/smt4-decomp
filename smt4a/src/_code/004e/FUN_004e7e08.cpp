@@ -42,7 +42,7 @@ extern int btlScriptUnitHasFlags(int);
 extern int chainCountIdUnflagged(unsigned int, fn_004e7e08_arg1 *);
 /* Supplied declaration required: FUN_004aa3d4. */
 extern int btlFindEntryValue(int, unsigned int);
-extern int FUN_004c52ec(unsigned int);
+extern int btlGetPropertyMaximum(unsigned int);
 /* Supplied declaration required: FUN_004c8284. */
 /* Supplied declaration required: FUN_004f6d34. */
 /* Supplied declaration required: FUN_004f7b84. */
@@ -67,13 +67,13 @@ unsigned int FUN_004e7e08(int *param_1,fn_004e7e08_arg1 *param_2)
   temp_v0 = btlScriptUnitHasFlags(*param_1);
   if (temp_v0 != 0) {
     temp_v0 = btlFindEntryValue((int)*(short *)((int)param_2->field_0x24 + 0x6a),7);
-    temp_v1 = FUN_004c52ec(7);
+    temp_v1 = btlGetPropertyMaximum(7);
     temp_v2 = btlFindEntryValue((int)*(short *)((int)param_2->field_0x24 + 0x6a),8);
-    temp_v3 = FUN_004c52ec(8);
+    temp_v3 = btlGetPropertyMaximum(8);
     temp_v4 = btlFindEntryValue((int)*(short *)((int)param_2->field_0x24 + 0x6a),9);
-    temp_v5 = FUN_004c52ec(9);
+    temp_v5 = btlGetPropertyMaximum(9);
     temp_v6 = btlFindEntryValue((int)*(short *)((int)param_2->field_0x24 + 0x6a),10);
-    temp_v7 = FUN_004c52ec(10);
+    temp_v7 = btlGetPropertyMaximum(10);
     if ((temp_v6 != temp_v7) || (temp_v4 != temp_v5 || (temp_v2 != temp_v3 || temp_v0 != temp_v1))) {
       FUN_004c8284((int)*(short *)((int)param_2->field_0x24 + 0x6a),3,1,0);
     }
@@ -114,13 +114,13 @@ unsigned int FUN_004e7e08(int *param_1,fn_004e7e08_arg1 *param_2)
     FUN_004aa3d4(g_btlUiBlock,2,0x1cc,*(unsigned int *)((int)param_2->field_0x20 + 0x3f8),
                  *(unsigned short *)((int)param_2->field_0x28 + 2),0);
     temp_v0 = btlFindEntryValue((int)*(short *)((int)param_2->field_0x24 + 0x6a),7);
-    temp_v1 = FUN_004c52ec(7);
+    temp_v1 = btlGetPropertyMaximum(7);
     temp_v2 = btlFindEntryValue((int)*(short *)((int)param_2->field_0x24 + 0x6a),8);
-    temp_v3 = FUN_004c52ec(8);
+    temp_v3 = btlGetPropertyMaximum(8);
     temp_v4 = btlFindEntryValue((int)*(short *)((int)param_2->field_0x24 + 0x6a),9);
-    temp_v5 = FUN_004c52ec(9);
+    temp_v5 = btlGetPropertyMaximum(9);
     temp_v6 = btlFindEntryValue((int)*(short *)((int)param_2->field_0x24 + 0x6a),10);
-    temp_v7 = FUN_004c52ec(10);
+    temp_v7 = btlGetPropertyMaximum(10);
     if ((temp_v6 == temp_v7) && (temp_v4 == temp_v5 && (temp_v2 == temp_v3 && temp_v0 == temp_v1))) {
       FUN_004fdc0c(10,param_2,0x40,param_2->field_0x20,0);
     }

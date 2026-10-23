@@ -19,6 +19,7 @@ typedef struct BtlGameOver {
 typedef struct BtlGameOverA {
     union {
         /* 0x00 */ u8 unk00[0x10];
+        /* 0x00 */ u32 state;
         struct {
             u8 unk00[8];
             /* 0x08 */ u32 frameCounter;
@@ -39,6 +40,8 @@ struct BtlGameOverGlobalsA {
 
 typedef char BtlGameOverFrameOffsetCheck[offsetof(BtlGameOverA, timing.frameCounter) == 8 ? 1 : -1];
 typedef char BtlGameOverGlobalsSizeCheck[sizeof(BtlGameOverGlobalsA) == 0x20 ? 1 : -1];
+typedef char BtlGameOverAStateOffsetCheck[
+    offsetof(BtlGameOverA, state) == 0 && sizeof(BtlGameOverA) == 0x1C ? 1 : -1];
 
 /* Work area of the job that owns the game-over state. */
 typedef struct BtlGameOverOwner {
@@ -52,7 +55,10 @@ typedef struct BtlGameOverOwnerA {
 } BtlGameOverOwnerA;
 
 struct BtlGameOverJobWork {
-    /* 0x0000 */ u8 unk0000[0x2C];
+    union {
+        /* 0x0000 */ u8 unk0000[0x2C];
+        /* 0x0000 */ u32 parentJob;
+    };
     /* 0x002C */ u32 job;
     /* 0x0030 */ u8 unk0030[0x58];
     /* 0x0088 */ s32 mode;
@@ -75,5 +81,8 @@ typedef char BtlGameOverASizeCheck[sizeof(BtlGameOverA) == 0x1C ? 1 : -1];
 typedef char BtlGameOverOwnerSizeCheck[sizeof(BtlGameOverOwner) == 0x30 ? 1 : -1];
 typedef char BtlGameOverOwnerASizeCheck[sizeof(BtlGameOverOwnerA) == 0x50 ? 1 : -1];
 typedef char BtlGameOverSequenceSizeCheck[sizeof(BtlGameOverSequence) == 0x18 ? 1 : -1];
+typedef char BtlGameOverJobWorkParentOffsetCheck[
+    offsetof(BtlGameOverJobWork, parentJob) == 0 &&
+    sizeof(BtlGameOverJobWork) == 0x44A8 ? 1 : -1];
 
 #endif

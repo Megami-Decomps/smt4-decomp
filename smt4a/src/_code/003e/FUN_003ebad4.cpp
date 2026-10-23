@@ -1,82 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ebad4` (_code @ 0x3ebad4, 0x130 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Visibility conditions are if-converted and model/transform base registers differ. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
+void setHandleEnabled(u32 handle, s32 enabled);
+void callOnHandleField4B(u32 handle, f32 x, f32 y, f32 z);
+void callOnHandleField4C(u32 handle, f32 x, f32 y, f32 z);
+void callOnHandleField4D(u32 handle, f32 x, f32 y, f32 z);
 
-int callOnHandleField4B(unsigned int);
-int callOnHandleField4C(unsigned int);
-int setHandleEnabled(int, int);
-int callOnHandleField4D(unsigned int);
-
-/* Supplied declaration required: callOnHandleField4B. */
-/* Supplied declaration required: callOnHandleField4C. */
-/* Supplied declaration required: setHandleEnabled. */
-/* Supplied declaration required: callOnHandleField4D. */
-
-
-void FUN_003ebad4(int param_1)
-
+/* Updates environment model visibility from the marked combatant and reapplies each slot's transform. */
+void FUN_003ebad4(BtlMainStateA *battle)
 {
-/* irregular: 2 goto(s); 4 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned short temp_v5;
-  int temp_v6;
-  unsigned char temp_v7;
-  
-  temp_v1 = param_1 + 0x2200;
-  temp_v7 = *(char *)(param_1 + 0x22cc) != '\0';
-  if (temp_v7) {
-    temp_v1 = (unsigned int)*(unsigned char *)(param_1 + 0x22cd);
-  }
-  if (temp_v7 && temp_v1 != 0) {
-    temp_v2 = 4;
-    do {
-      temp_v6 = *(int *)(param_1 + 0x1ffc) + temp_v2 * 0x408;
-      if (*(char *)(temp_v6 + 0x23a) != '\0') {
-        temp_v2 = *(int *)(param_1 + 0x1ed4) + *(short *)(temp_v6 + 8) * 0x1d0;
-        goto LAB_003ebb40;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x36);
-    temp_v2 = 0;
-LAB_003ebb40:
-    temp_v6 = 0;
-    do {
-      temp_v3 = param_1 + temp_v6 * 4;
-      temp_v4 = *(int *)(temp_v3 + 0x22bc);
-      if (temp_v4 != 0) {
-        if (*(char *)(param_1 + temp_v6 + 0x2340) != '\0') {
-          if (temp_v2 != 0) {
-            temp_v0 = *(unsigned short *)(temp_v2 + 0x60);
-            if (((temp_v0 & 0x800) == 0) || ((*(unsigned int *)(temp_v2 + 0x50) & 0x4000) != 0))
-            goto LAB_003ebb8c;
-            temp_v5 = temp_v0 & 0x2000;
-            if ((temp_v0 & 0x2000) != 0) {
-              temp_v5 = 1;
+    struct EnvironmentView {
+        /* 0x0000 */ u8 unk0000[0x22BC];
+        /* 0x22BC */ u32 handles[4];
+        /* 0x22CC */ u8 loaded;
+        /* 0x22CD */ u8 ready;
+        /* 0x22CE */ u8 unk22CE[2];
+        /* 0x22D0 */ BattleVector3 positions[4];
+        /* 0x2300 */ BattleVector3 rotations[4];
+        /* 0x2330 */ f32 scales[4];
+        /* 0x2340 */ u8 reflected[4];
+    };
+    typedef char EnvironmentViewOffsetsCheck[offsetof(EnvironmentView, positions) == 0x22D0 &&
+        offsetof(EnvironmentView, rotations) == 0x2300 &&
+        offsetof(EnvironmentView, scales) == 0x2330 &&
+        offsetof(EnvironmentView, reflected) == 0x2340 ? 1 : -1];
+    EnvironmentView *environment = (EnvironmentView *)battle;
+    if (environment->loaded == 0 || environment->ready == 0) {
+        return;
+    }
+    BattleRosterRecordA *marked = NULL;
+    for (s32 index = 4; index < 54; ++index) {
+        BtlCombatantEntryA *entry = &battle->entries[index];
+        if (entry->selection.marked != 0) {
+            marked = &battle->roster[entry->unitIndex];
+            break;
+        }
+    }
+    for (s32 index = 0; index < 4; ++index) {
+        if (environment->handles[index] != 0) {
+            bool enabled = true;
+            if (environment->reflected[index] != 0 && marked != NULL &&
+                (marked->marker.flags & 0x800) != 0 && (marked->render.flags & 0x4000) == 0) {
+                enabled = (marked->marker.flags & 0x2000) != 0;
             }
-          }
-          else {
-            temp_v5 = 1;
-          }
-          setHandleEnabled(temp_v4,temp_v5);
+            setHandleEnabled(environment->handles[index], enabled);
+            const BattleVector3 &position = environment->positions[index];
+            callOnHandleField4B(environment->handles[index], position.x, position.y, position.z);
+            const BattleVector3 &rotation = environment->rotations[index];
+            callOnHandleField4C(environment->handles[index], rotation.x, rotation.y, rotation.z);
+            f32 scale = environment->scales[index];
+            callOnHandleField4D(environment->handles[index], scale, scale, scale);
         }
-        else {
-LAB_003ebb8c:
-          setHandleEnabled(temp_v4,1);
-        }
-        callOnHandleField4B(*(unsigned int *)(temp_v3 + 0x22bc));
-        callOnHandleField4C(*(unsigned int *)(temp_v3 + 0x22bc));
-        callOnHandleField4D(*(unsigned int *)(temp_v3 + 0x22bc));
-      }
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < 4);
-  }
-  return;
+    }
 }
-
-} /* extern "C" */
+}

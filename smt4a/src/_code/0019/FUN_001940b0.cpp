@@ -1,101 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001940b0` (_code @ 0x1940b0, 0x1f4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: record-prefix addressing and uniform-array offsets are hoisted differently; shared float20 encoding retains explicit zero-exponent initialization. */
+#include "gfx/ShaderUniformUploads.h"
+#include "gfx/ViewportEncoding.h"
 
-extern "C" {
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-} param_4_stack;
-
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
-{
-    return value < (float)0 ? -value : value;
-}
-#endif
-
-
-void FUN_001940b0(int param_1,int *param_2,unsigned int param_3,int param_4)
-
-{
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  float temp_v4;
-  float temp_v5;
-  
-  param_3 = param_3 & 0xffff;
-  temp_v0 = *param_2 + param_3 * 0x278;
-  temp_v3 = temp_v0 + 4;
-  if (*(char *)(param_1 + 0x29) == '\0') {
-    *(unsigned char *)(temp_v3 + param_4 + 0x164) = 0;
-  }
-  else {
-    temp_v1 = temp_v3 + param_4;
-    *(unsigned char *)(temp_v1 + 0x164) = 1;
-    if (*(char *)(param_1 + 0x28) != '\v') {
-      *(unsigned char *)(temp_v1 + 0x16c) = 0;
-      *(unsigned int *)(*param_2 + param_3 * 0x278 + param_4 * 4 + 0x238) = 0;
-    }
-    else {
-      *(unsigned char *)(temp_v1 + 0x16c) = 1;
-      *(unsigned int *)(*param_2 + param_3 * 0x278 + param_4 * 4 + 0x238) =
-           *(unsigned int *)(param_1 + 0x50);
-      *(unsigned char *)(temp_v0 + 0x1a0) = *(unsigned char *)(param_1 + 0x2b) & 0xf;
-      *(unsigned char *)(temp_v0 + 0x1a2) = *(unsigned char *)(param_1 + 0x2b) >> 4;
-      *(unsigned char *)(temp_v0 + 0x1a1) = **(unsigned char **)(param_1 + 0x50) & 1;
-    }
-    if ((*(unsigned char *)(param_1 + 0x2a) & 2) != 0) {
-      *(unsigned char *)(temp_v1 + 0x174) = 1;
-      temp_v1 = temp_v3 + param_4 * 0x2c;
-      temp_v4 = 1.0f / (*(float *)(param_1 + 0x58) - *(float *)(param_1 + 0x54));
-      temp_v5 = -(*(float *)(param_1 + 0x54) * temp_v4);
-      temp_v0 = 0;
-      if ((romwright_fabs_4(temp_v4) != 0.0f) && (temp_v0 = ((unsigned int)romwright_fabs_4(temp_v4) >> 0x17) - 0x40, -1 >= temp_v0)) {
-        temp_v2 = ((unsigned int)temp_v4 >> 0x1f) << 0x13;
-      }
-      else {
-        temp_v2 = (((unsigned int)temp_v4 & 0x7fffff) >> 0xb) | (temp_v0 << 0xc) | (((unsigned int)temp_v4 >> 0x1f) << 0x13)
-        ;
-      }
-      *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
-      temp_v0 = 0;
-      if ((romwright_fabs_4(temp_v5) != 0.0f) && (temp_v0 = ((unsigned int)romwright_fabs_4(temp_v5) >> 0x17) - 0x40, -1 >= temp_v0)) {
-        temp_v2 = ((unsigned int)temp_v5 >> 0x1f) << 0x13;
-      }
-      else {
-        temp_v2 = (((unsigned int)temp_v5 & 0x7fffff) >> 0xb) | (temp_v0 << 0xc) | (((unsigned int)temp_v5 >> 0x1f) << 0x13)
-        ;
-      }
-      *(unsigned int *)(temp_v1 + 0x20) = temp_v2;
-      *(unsigned int *)(*param_2 + param_3 * 0x278 + param_4 * 4 + 600) =
-           *(unsigned int *)(param_1 + 0x4c);
-    }
-    else {
-      *(unsigned char *)(temp_v1 + 0x174) = 0;
-      *(unsigned int *)(*param_2 + param_3 * 0x278 + param_4 * 4 + 600) = 0;
-    }
-    temp_v3 = temp_v3 + param_4 * 0x2c;
-    if ((*(unsigned char *)(param_1 + 0x2a) & 1) != 0) {
-      *(unsigned char *)(temp_v3 + 5) = 1;
-    }
-    else {
-      *(unsigned char *)(temp_v3 + 5) = 0;
-    }
-    *(unsigned int *)(*param_2 + param_3 * 0x278 + param_4 * 0x10 + 0x1b4) =
-         *(unsigned int *)(param_1 + 0x30);
-    *(unsigned int *)(*param_2 + param_3 * 0x278 + param_4 * 0x10 + 0x1b8) =
-         *(unsigned int *)(param_1 + 0x34);
-    *(unsigned int *)(*param_2 + param_3 * 0x278 + param_4 * 0x10 + 0x1bc) =
-         *(unsigned int *)(param_1 + 0x38);
-    *(unsigned int *)(*param_2 + param_3 * 0x278 + param_4 * 0x10 + 0x1c0) =
-         *(unsigned int *)(param_1 + 0x3c);
-  }
-  return;
+namespace {
+struct ShaderUniformBindingSource {
+    u8 unk00[0x28];
+    u8 type;
+    u8 enabled;
+    u8 flags;
+    u8 binding;
+    u8 unk2C[4];
+    u32 values[4];
+    u8 unk40[0xC];
+    ShaderUniformData *geometry;
+    ShaderUniformData *vertex;
+    f32 minimum;
+    f32 maximum;
+};
+typedef char ShaderUniformBindingSourceLayoutCheck[
+    offsetof(ShaderUniformBindingSource, enabled) == 0x29 &&
+    offsetof(ShaderUniformBindingSource, values) == 0x30 &&
+    offsetof(ShaderUniformBindingSource, minimum) == 0x54 ? 1 : -1];
 }
 
-} /* extern "C" */
+extern "C" void FUN_001940b0(const ShaderUniformBindingSource *source, ShaderUniformRecord **records,
+    u32 index, s32 slot)
+{
+    index &= 0xFFFF;
+    ShaderUniformBindingState *binding = &(*records)[index].binding;
+    if (source->enabled == 0) {
+        binding->enabled[slot] = 0;
+        return;
+    }
+    binding->enabled[slot] = 1;
+    if (source->type != 11) {
+        binding->vertexEnabled[slot] = 0;
+        (*records)[index].vertex[slot] = NULL;
+    } else {
+        binding->vertexEnabled[slot] = 1;
+        (*records)[index].vertex[slot] = source->vertex;
+        binding->firstBinding = source->binding & 0xF;
+        binding->secondBinding = source->binding >> 4;
+        binding->bindingFlags = *reinterpret_cast<const u8 *>(source->vertex) & 1;
+    }
+    if ((source->flags & 2) != 0) {
+        binding->geometryEnabled[slot] = 1;
+        const f32 scale = 1.0f / (source->maximum - source->minimum);
+        const f32 bias = -(source->minimum * scale);
+        binding->slots[slot].scale = gpuViewportEncode<12>(scale);
+        binding->slots[slot].bias = gpuViewportEncode<12>(bias);
+        (*records)[index].geometry[slot] = source->geometry;
+    } else {
+        binding->geometryEnabled[slot] = 0;
+        (*records)[index].geometry[slot] = NULL;
+    }
+    if ((source->flags & 1) != 0) {
+        binding->slots[slot].enabled = 1;
+    } else {
+        binding->slots[slot].enabled = 0;
+    }
+    (*records)[index].binding.values[slot][0] = source->values[0];
+    (*records)[index].binding.values[slot][1] = source->values[1];
+    (*records)[index].binding.values[slot][2] = source->values[2];
+    (*records)[index].binding.values[slot][3] = source->values[3];
+}

@@ -1,83 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b980c` (_code @ 0x3b980c, 0x120 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains each release field's address across calls; built uses direct root-relative stores. */
+#include "script/scrScriptProcess.h"
+#include <stddef.h>
+
+struct ScriptScreenBundleView {
+    void *bytecode;
+    void *messages;
+    ScriptRunState *script;
+};
+struct ScriptScreenCleanupView {
+    u8 unk000[0x9c];
+    u8 sprites[0xcbc];
+    u8 fileSlot[0x24]; /* 0xd58 */
+    ScriptScreenBundleView primary; /* 0xd7c */
+    ScriptScreenBundleView secondary; /* 0xd88 */
+};
+typedef char ScriptScreenCleanupOffsets[offsetof(ScriptScreenCleanupView, secondary.script) == 0xd90 ? 1 : -1];
 
 extern "C" {
-
-int buttonHelpTexturesUnref(void);
-int buttonHelpRelease(void);
-int uiFadeRelease(void);
-int FUN_00291998(void);
-int infoWinStartTimer(int);
-int scrScriptProcessDestroy(void);
-int asdTMTexTableFreeEntry(int);
-int FUN_002b827c(int);
-int asdMemFree(void);
-int spriteTable2aFree(int);
-int FUN_003bbafc(int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: buttonHelpTexturesUnref. */
-/* Supplied declaration required: buttonHelpRelease. */
-/* Supplied declaration required: uiFadeRelease. */
-/* Supplied declaration required: FUN_00291998. */
-/* Supplied declaration required: infoWinStartTimer. */
-extern int dialogIsActive(void);
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002b827c. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: spriteTable2aFree. */
-/* Supplied declaration required: FUN_003bbafc. */
-
-
-void FUN_003b980c(int param_1)
-
-{
-/* irregular: 11 native warning(s); review required */
-  int temp_v0;
-  
-  if (*(int *)(param_1 + 0xd90) != 0) {
-    scrScriptProcessDestroy();
-    *(unsigned int *)(param_1 + 0xd90) = 0;
-  }
-  if (*(int *)(param_1 + 0xd88) != 0) {
-    asdMemFree();
-    *(unsigned int *)(param_1 + 0xd88) = 0;
-  }
-  if (*(int *)(param_1 + 0xd8c) != 0) {
-    asdMemFree();
-    *(unsigned int *)(param_1 + 0xd8c) = 0;
-  }
-  if (*(int *)(param_1 + 0xd84) != 0) {
-    scrScriptProcessDestroy();
-    *(unsigned int *)(param_1 + 0xd84) = 0;
-  }
-  if (*(int *)(param_1 + 0xd7c) != 0) {
-    asdMemFree();
-    *(unsigned int *)(param_1 + 0xd7c) = 0;
-  }
-  if (*(int *)(param_1 + 0xd80) != 0) {
-    asdMemFree();
-    *(unsigned int *)(param_1 + 0xd80) = 0;
-  }
-  spriteTable2aFree(param_1 + 0x9c);
-  FUN_003bbafc(param_1 + 0xd58);
-  FUN_00291998();
-  temp_v0 = dialogIsActive();
-  if (temp_v0 != 0) {
-    infoWinStartTimer(0);
-  }
-  FUN_002b827c(3);
-  buttonHelpRelease();
-  buttonHelpTexturesUnref();
-  uiFadeRelease();
-  asdTMTexTableFreeEntry(0x21);
-  return;
+void scrScriptProcessDestroy(ScriptRunState *);
+void asdMemFree(void *);
+void spriteTable2aFree(void *);
+void FUN_003bbafc(void *);
+void FUN_00291998();
+s32 dialogIsActive();
+void infoWinStartTimer(s32);
+void FUN_002b827c(s32);
+void buttonHelpRelease();
+void buttonHelpTexturesUnref();
+void uiFadeRelease();
+void asdTMTexTableFreeEntry(s32);
 }
 
-} /* extern "C" */
+static void releaseScript(ScriptRunState *&script)
+{
+    if (script != NULL) {
+        scrScriptProcessDestroy(script);
+        script = NULL;
+    }
+}
+static void releaseBuffer(void *&buffer)
+{
+    if (buffer != NULL) {
+        asdMemFree(buffer);
+        buffer = NULL;
+    }
+}
+
+/* Release both script bundles and the screen's shared UI resources. */
+extern "C" void FUN_003b980c(ScriptScreenCleanupView *work)
+{
+    releaseScript(work->secondary.script);
+    releaseBuffer(work->secondary.bytecode);
+    releaseBuffer(work->secondary.messages);
+    releaseScript(work->primary.script);
+    releaseBuffer(work->primary.bytecode);
+    releaseBuffer(work->primary.messages);
+    spriteTable2aFree(work->sprites);
+    FUN_003bbafc(work->fileSlot);
+    FUN_00291998();
+    if (dialogIsActive())
+        infoWinStartTimer(0);
+    FUN_002b827c(3);
+    buttonHelpRelease();
+    buttonHelpTexturesUnref();
+    uiFadeRelease();
+    asdTMTexTableFreeEntry(0x21);
+}

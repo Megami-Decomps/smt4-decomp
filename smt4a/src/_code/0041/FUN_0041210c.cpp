@@ -1,91 +1,70 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041210c` (_code @ 0x41210c, 0x124 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: transition stores split instead of STRD; animation argument loads and ordered float comparison orientation differ. */
+#include "shard/Shard0034.h"
 
-extern "C" {
-
-int FUN_00410f84(int *);
-int FUN_00412248(int *);
-int FUN_00416840(void);
-int asdAnimGetTrackLastFrame(int, unsigned int);
-int VectorSignedToFloat(int, int);
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_00410f84. */
-/* Supplied declaration required: FUN_00412248. */
-/* Supplied declaration required: FUN_00416840. */
-/* Supplied declaration required: asdAnimGetTrackLastFrame. */
-
-
-unsigned int FUN_0041210c(int *param_1)
-
-{
-/* irregular: irregular input(s): in_fpscr, in_s0; 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int in_fpscr;
-  float in_s0;
-  int temp_v5;
-  float temp_v6;
-  
-  temp_v2 = *param_1;
-  if (temp_v2 != param_1[2]) {
-    *param_1 = param_1[2];
-    param_1[1] = temp_v2;
-    FUN_00410f84(param_1);
-    param_1[3] = 0;
-    param_1[4] = 0;
-    param_1[5] = 0;
-  }
-  FUN_00412248(param_1);
-  temp_v2 = btlGetMainState();
-  if (*param_1 != 1 && *param_1 != 2) {
-    temp_v4 = 0;
-    do {
-      temp_v3 = temp_v2 + temp_v4 * 0x10;
-      if (*(int *)(temp_v3 + 0x4d78) != 0) {
-        *(int *)(temp_v3 + 0x4d80) = *(int *)(temp_v3 + 0x4d80) + 2;
-        asdAnimGetTrackLastFrame(*(int *)(temp_v3 + 0x4d78),*(unsigned int *)(temp_v3 + 0x4d7c));
-        temp_v5 = *(int *)(temp_v3 + 0x4d80);
-        temp_v6 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(in_s0 == temp_v6) << 0x1e) |
-                ((unsigned int)(temp_v6 <= in_s0) << 0x1d);
-        temp_v1 = (unsigned char)(temp_v0 >> 0x18);
-        if (!(unsigned char)((temp_v1 >> 5) & 1) || (unsigned char)(temp_v1 >> 6)) {
-          temp_v6 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(temp_v0 >> 0x16) & 3);
-          temp_v5 = (int)(temp_v6 - in_s0);
-          *(int *)(temp_v3 + 0x4d80) = temp_v5;
-        }
-        temp_v6 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(temp_v0 >> 0x16) & 3);
-        temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v6 < in_s0) << 0x1f);
-        in_fpscr = temp_v0 | ((unsigned int)((temp_v6 != temp_v6) || (in_s0 != in_s0)) << 0x1c);
-        if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-          *(unsigned int *)(temp_v3 + 0x4d80) = 0;
-        }
-        if (((0 < *(int *)(temp_v3 + 0x4d84)) &&
-            (temp_v5 = *(int *)(temp_v3 + 0x4d84) - 1, *(int *)(temp_v3 + 0x4d84) = temp_v5, temp_v5 < 1)) &&
-           (0 < *(int *)(temp_v3 + 0x4d7c))) {
-          *(unsigned int *)(temp_v3 + 0x4d7c) = 0;
-          *(unsigned int *)(temp_v3 + 0x4d80) = 0;
-        }
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 0xc);
-  }
-  temp_v2 = param_1[3];
-  param_1[3] = temp_v2 + 1U;
-  if (temp_v2 + 1U >= 0x10000) {
-    param_1[3] = 0xffff;
-  }
-  if (param_1[0xc] != 0) {
-    FUN_00416840();
-  }
-  return 0;
+namespace {
+// BtlStep ends at 0x30; this controller additionally reads a callback argument at that offset.
+struct BattleAnimationControllerView {
+    s32 state;
+    s32 previous;
+    s32 requested;
+    u32 frames;
+    u32 unk10;
+    u32 unk14;
+    u8 unk18[0x18];
+    void *callbackArgument;
+};
+typedef char BattleAnimationControllerViewOffsetsCheck[
+    __INTADDR__(&((BattleAnimationControllerView *)0)->frames) == 0xC &&
+    __INTADDR__(&((BattleAnimationControllerView *)0)->callbackArgument) == 0x30 ? 1 : -1];
 }
 
-} /* extern "C" */
+extern "C" {
+void FUN_00410f84(BattleAnimationControllerView *controller);
+void FUN_00412248(BattleAnimationControllerView *controller);
+void FUN_00416840(void *argument);
+BtlStateB *btlGetMainState(void);
+f32 asdAnimGetTrackLastFrame(void *animation, u32 track);
+
+// Apply state transitions, advance looping animation slots and saturate the elapsed-frame count.
+u32 FUN_0041210c(BattleAnimationControllerView *controller)
+{
+    if (controller->state != controller->requested) {
+        s32 previous = controller->state;
+        controller->state = controller->requested;
+        controller->previous = previous;
+        FUN_00410f84(controller);
+        controller->frames = 0;
+        controller->unk10 = 0;
+        controller->unk14 = 0;
+    }
+    FUN_00412248(controller);
+    BtlStateB *battle = btlGetMainState();
+    if (controller->state != 1 && controller->state != 2) {
+        for (s32 index = 0; index < 12; ++index) {
+            LinkEntry10 *entry = &battle->entries4D78[index];
+            if (entry->obj != NULL) {
+                entry->animation.frame += 2;
+                f32 lastFrame = asdAnimGetTrackLastFrame(entry->obj, entry->animation.track);
+                if (lastFrame <= (f32)entry->animation.frame) {
+                    entry->animation.frame = (s32)((f32)entry->animation.frame - lastFrame);
+                }
+                if ((f32)entry->animation.frame >= lastFrame) {
+                    entry->animation.frame = 0;
+                }
+                if (entry->animation.remaining > 0 && --entry->animation.remaining <= 0 && entry->animation.track > 0) {
+                    entry->animation.track = 0;
+                    entry->animation.frame = 0;
+                }
+            }
+        }
+    }
+    ++controller->frames;
+    if (controller->frames >= 0x10000) {
+        controller->frames = 0xFFFF;
+    }
+    if (controller->callbackArgument != NULL) {
+        FUN_00416840(controller->callbackArgument);
+    }
+    return 0;
+}
+}

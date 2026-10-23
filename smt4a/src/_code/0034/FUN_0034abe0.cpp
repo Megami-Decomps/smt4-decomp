@@ -24,7 +24,7 @@ int slotRecordFindById(...);
 int FUN_002a4b28(...);
 int FUN_00344cd0(...);
 int FUN_0035ae58(...);
-int FUN_0035d8f0(...);
+int devilDispatchTextureResource(...);
 int contentEntryFindById(void);
 int VectorSignedToFloat(...);
 
@@ -106,7 +106,7 @@ extern unsigned int computeCountLimit(void);
 extern int uiSearchSecondary(unsigned int *);
 extern int uiSearchPrimary(unsigned int *);
 /* Supplied declaration required: FUN_0035ae58. */
-/* Supplied declaration required: FUN_0035d8f0. */
+/* Supplied declaration required: devilDispatchTextureResource. */
 /* Supplied declaration required: contentEntryFindById. */
 extern int FUN_004db07c(unsigned int, unsigned int, unsigned char *);
 
@@ -262,7 +262,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
                      (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
                      (int)**(short **)(temp_v4 + 0xc),(int)(*(short **)(temp_v4 + 0xc))[1],1);
         temp_v6 = FUN_001834a4(0x1a,0xda);
-        FUN_0035d8f0((int)*(short *)((int)puVar2 + temp_v2 * 2 + 0x62a0),
+        devilDispatchTextureResource((int)*(short *)((int)puVar2 + temp_v2 * 2 + 0x62a0),
                      (int)&param_1->field_0x0 +
                      (int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v6 + 8),
                      (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,0x68,1);

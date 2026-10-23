@@ -1,51 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001bc460` (_code @ 0x1bc460, 0x13c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gfx/QuaternionWorkspace.h"
 
-extern "C" {
+/* The matrix lies beyond QuaternionWorkspace's recovered prefix. */
+struct QuaternionMatrixWorkspaceView {
+    QuaternionWorkspace workspace;
+    u8 unk110[0x30];
+    f32 matrix[4][4];
+};
+extern "C" QuaternionMatrixWorkspaceView DAT_006471dc;
 
-extern float DAT_006472dc; /* 0x6472dc */
-extern float DAT_006472e0; /* 0x6472e0 */
-extern float DAT_006472e4; /* 0x6472e4 */
-extern float DAT_006472e8; /* 0x6472e8 */
-extern float DAT_0064731c; /* 0x64731c */
-extern float DAT_00647320; /* 0x647320 */
-extern float DAT_00647324; /* 0x647324 */
-extern unsigned int DAT_00647328; /* 0x647328 */
-extern float DAT_0064732c; /* 0x64732c */
-extern float DAT_00647330; /* 0x647330 */
-extern float DAT_00647334; /* 0x647334 */
-extern unsigned int DAT_00647338; /* 0x647338 */
-extern float DAT_0064733c; /* 0x64733c */
-extern float DAT_00647340; /* 0x647340 */
-extern float DAT_00647344; /* 0x647344 */
-extern unsigned int DAT_00647348; /* 0x647348 */
-extern unsigned int DAT_0064734c; /* 0x64734c */
-extern unsigned int DAT_00647350; /* 0x647350 */
-extern unsigned int DAT_00647354; /* 0x647354 */
-extern unsigned int DAT_00647358; /* 0x647358 */
-
-
-void FUN_001bc460(void)
-
+/* Convert the workspace quaternion into its homogeneous rotation matrix. */
+extern "C" void FUN_001bc460(void)
 {
-  DAT_0064731c = 1.0f - (DAT_006472e0 * DAT_006472e0 + DAT_006472e4 * DAT_006472e4) * 2.0f;
-  DAT_00647320 = (DAT_006472dc * DAT_006472e0 - DAT_006472e8 * DAT_006472e4) * 2.0f;
-  DAT_00647324 = (DAT_006472e8 * DAT_006472e0 + DAT_006472dc * DAT_006472e4) * 2.0f;
-  DAT_00647328 = 0;
-  DAT_0064732c = (DAT_006472dc * DAT_006472e0 + DAT_006472e8 * DAT_006472e4) * 2.0f;
-  DAT_00647330 = 1.0f - (DAT_006472dc * DAT_006472dc + DAT_006472e4 * DAT_006472e4) * 2.0f;
-  DAT_00647334 = (DAT_006472e0 * DAT_006472e4 - DAT_006472e8 * DAT_006472dc) * 2.0f;
-  DAT_00647338 = 0;
-  DAT_0064733c = (DAT_006472dc * DAT_006472e4 - DAT_006472e8 * DAT_006472e0) * 2.0f;
-  DAT_00647340 = (DAT_006472e0 * DAT_006472e4 + DAT_006472e8 * DAT_006472dc) * 2.0f;
-  DAT_00647344 = 1.0f - (DAT_006472dc * DAT_006472dc + DAT_006472e0 * DAT_006472e0) * 2.0f;
-  DAT_00647348 = 0;
-  DAT_0064734c = 0;
-  DAT_00647350 = 0;
-  DAT_00647354 = 0;
-  DAT_00647358 = 0x3f800000;
-  return;
+    const RotationQuaternion *q = &DAT_006471dc.workspace.rotation;
+    f32 (*m)[4] = DAT_006471dc.matrix;
+    f32 xx = q->x * q->x;
+    f32 yy = q->y * q->y;
+    f32 zz = q->z * q->z;
+    m[0][0] = 1.0f - (yy + zz) * 2.0f;
+    m[0][1] = (q->x * q->y - q->w * q->z) * 2.0f;
+    m[0][2] = (q->w * q->y + q->x * q->z) * 2.0f;
+    m[0][3] = 0.0f;
+    m[1][0] = (q->x * q->y + q->w * q->z) * 2.0f;
+    m[1][1] = 1.0f - (xx + zz) * 2.0f;
+    m[1][2] = (q->y * q->z - q->w * q->x) * 2.0f;
+    m[1][3] = 0.0f;
+    m[2][0] = (q->x * q->z - q->w * q->y) * 2.0f;
+    m[2][1] = (q->y * q->z + q->w * q->x) * 2.0f;
+    m[2][2] = 1.0f - (xx + yy) * 2.0f;
+    m[2][3] = 0.0f;
+    m[3][0] = 0.0f;
+    m[3][1] = 0.0f;
+    m[3][2] = 0.0f;
+    m[3][3] = 1.0f;
 }
-
-} /* extern "C" */

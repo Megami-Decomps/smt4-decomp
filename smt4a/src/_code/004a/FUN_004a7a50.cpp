@@ -1,71 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a7a50` (_code @ 0x4a7a50, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: alternate-row branches are laid out inline rather than in retail's out-of-line tails. */
+#include "shard/W9_W9Match8_WorkRecords.h"
 
+struct DemonIconPanelView {
+    u8 unk00[0x95];
+    u8 showUnknown;
+    u8 unk96[0x32];
+    u8 layout[1];
+};
+typedef char DemonIconPanelOffsets[offsetof(DemonIconPanelView, layout) == 0xc8 &&
+    offsetof(DemonIconPanelView, showUnknown) == 0x95 ? 1 : -1];
 extern "C" {
+const PanelTextLayoutEntryPrefixA *FUN_0018349c(void *, s32);
+void devilDrawIconRelative(void *, s32, s32, s32, u32);
+void FUN_004934ac(void *, s32, s32, s32, u32);
+u32 FUN_002a4b28(u16);
+s32 gameStockContainsEntry(u16);
 
-int FUN_0018349c(int, int);
-int devilDrawIconRelative(int, int, int, int, unsigned int);
-int FUN_004934ac(int, int, int, int, unsigned int);
-
-/* stack frame of param_6: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_6_stack;
-
-/* Supplied declaration required: FUN_0018349c. */
-extern unsigned int FUN_002a4b28(short);
-/* Supplied declaration required: devilDrawIconRelative. */
-/* Supplied declaration required: FUN_004934ac. */
-extern int gameStockContainsEntry(short);
-
-
-void FUN_004a7a50(int param_1,int param_2,short param_3,int param_4,int param_5,unsigned int param_6)
-
+// Draw a known demon icon or its unknown substitute, with an optional stock marker.
+void FUN_004a7a50(DemonIconPanelView *panel, s32 markStock, u32 demon, s32 row, s32 alternate, u32 opacity)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  if (param_5 != 0) {
-    temp_v0 = FUN_0018349c(param_1 + 200,param_4 + 0x42f);
-  }
-  else {
-    temp_v0 = FUN_0018349c(param_1 + 200,param_4 + 0x40e);
-  }
-  temp_v3 = (int)*(short *)(temp_v0 + 8);
-  temp_v0 = (int)*(short *)(temp_v0 + 10);
-  if (param_5 != 0) {
-    temp_v1 = FUN_0018349c(param_1 + 200,0x495);
-  }
-  else {
-    temp_v1 = FUN_0018349c(param_1 + 200,0x487);
-  }
-  temp_v4 = *(short *)(temp_v1 + 8) + temp_v3;
-  temp_v1 = *(short *)(temp_v1 + 10) + temp_v0;
-  temp_v2 = FUN_002a4b28(param_3);
-  temp_v5 = temp_v2 == 0;
-  if (temp_v5) {
-    temp_v2 = (unsigned int)*(unsigned char *)(param_1 + 0x95);
-  }
-  if (!(temp_v5 && temp_v2 == 0)) {
-    devilDrawIconRelative(param_1 + 200,(int)param_3,temp_v4,temp_v1,param_6);
-  }
-  else {
-    devilDrawIconRelative(param_1 + 200,0,temp_v4,temp_v1,param_6);
-  }
-  if ((param_2 != 0) && (temp_v1 = gameStockContainsEntry(param_3), temp_v1 != 0)) {
-    if (param_5 == 0) {
-      FUN_004934ac(param_1 + 200,0x486,temp_v3,temp_v0,param_6);
-      return;
+    const PanelTextLayoutEntryPrefixA *base;
+    if (alternate)
+        base = FUN_0018349c(panel->layout, row + 0x42f);
+    else
+        base = FUN_0018349c(panel->layout, row + 0x40e);
+    s32 baseX = base->x;
+    s32 baseY = base->y;
+    const PanelTextLayoutEntryPrefixA *offset;
+    if (alternate)
+        offset = FUN_0018349c(panel->layout, 0x495);
+    else
+        offset = FUN_0018349c(panel->layout, 0x487);
+    s32 x = offset->x + baseX;
+    s32 y = offset->y + baseY;
+    if (FUN_002a4b28(demon) || panel->showUnknown)
+        devilDrawIconRelative(panel->layout, (s16)demon, x, y, opacity);
+    else
+        devilDrawIconRelative(panel->layout, 0, x, y, opacity);
+    if (markStock && gameStockContainsEntry(demon)) {
+        if (!alternate) {
+            FUN_004934ac(panel->layout, 0x486, baseX, baseY, opacity);
+            return;
+        }
+        FUN_004934ac(panel->layout, 0x494, baseX, baseY, opacity);
     }
-    FUN_004934ac(param_1 + 200,0x494,temp_v3,temp_v0,param_6);
-  }
-  return;
 }
-
-} /* extern "C" */
+}

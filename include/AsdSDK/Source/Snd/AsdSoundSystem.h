@@ -113,11 +113,26 @@ typedef struct AsdSndDuck {
     /* 0x1b */ u8 pad1b;
 } AsdSndDuck;
 
+typedef struct SoundDataFileTable {
+    /* 0x00 */ u32 count;
+    /* 0x04 */ void *files[1]; /* variable-length array supplied by the caller */
+} SoundDataFileTable;
+
 typedef struct AsdSndDataManagerView {
     /* 0x000 */ u8 unk000[0xc];
     /* 0x00c */ SoundArchiveLoader loader;
-    /* 0x014 */ u8 unk014[0x20c];
+    union {
+        /* 0x014 */ u8 unk014[0x20c];
+        struct {
+            /* 0x014 */ u8 unk014Table[0x204];
+            /* 0x218 */ SoundDataFileTable *fileTable;
+            /* 0x21c */ u32 unk21cTable;
+        } tableState;
+    };
 } AsdSndDataManagerView;
+typedef char AsdSndDataManagerFileTableOffset[
+    offsetof(AsdSndDataManagerView, tableState.fileTable) == 0x218 &&
+    sizeof(AsdSndDataManagerView) == 0x220 ? 1 : -1];
 
 /* Everything the sound system owns, in one block. Some functions reach a member through its own
  * symbol (the duck state, the current-slot pointers) rather than through the block. */

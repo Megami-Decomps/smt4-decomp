@@ -1,84 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00321544` (_code @ 0x321544, 0x148 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: render-state push address scheduling and null/return control flow differ; stereo draw body matches. */
+#include "camp/RenderCtx.h"
+#include "battle/Talk/btlTalkBustUp.h"
 
 extern "C" {
+extern BtlTalkBustUp *g_btlTalkBustUp;
+extern RenderCtxA *g_renderCtx;
+void FUN_00157558(RenderCtxA *context);
+s32 FUN_001692ac(s32 enabled, s32 mode);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
+s32 aocJobIsValid();
+s32 btlMainIsSecondJobValid();
+void FUN_003d939c(BtlTalkBustUp *portrait, f32 parallax);
+void skinObjectUpdateMatrices(RenderCtxA *context);
+void renderCtxResetColorScale(RenderCtxA *context);
 
-int FUN_00157558(int);
-int renderCtxResetColorScale(int);
-int skinObjectUpdateMatrices(int);
-int renderCtxCalculateStereoParallax(int);
-int FUN_003d939c(int);
-int VectorSignedToFloat(int, int);
-
-typedef int romwright_code(...);
-extern int g_btlTalkBustUp; /* 0x5710dc */
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00157558. */
-extern int aocJobIsValid(void);
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: skinObjectUpdateMatrices. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-extern int btlMainIsSecondJobValid(void);
-/* Supplied declaration required: FUN_003d939c. */
-
-
-unsigned int FUN_00321544(void)
-
+u32 FUN_00321544()
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int *piVar6;
-  unsigned int in_fpscr;
-  float temp_v5;
-  
-  temp_v0 = g_btlTalkBustUp;
-  if (g_btlTalkBustUp != 0) {
-    FUN_00157558(g_renderCtx);
-    temp_v2 = g_renderCtx;
-    temp_v1 = FUN_001692ac(1,0);
-    piVar6 = (int *)(temp_v2 + 0x1258);
-    temp_v3 = *piVar6;
-    temp_v4 = piVar6[temp_v3 + 2];
-    *piVar6 = temp_v3 + 1;
-    piVar6[temp_v3 + 3] = temp_v1;
-    if (*(char *)(temp_v2 + 0x1270) != '\0' || temp_v4 != temp_v1) {
-      (**(romwright_code **)(temp_v2 + 0x1274))();
-      *(unsigned char *)(temp_v2 + 0x1270) = 0;
+    BtlTalkBustUp *portrait = g_btlTalkBustUp;
+    if (portrait != NULL) {
+        FUN_00157558(g_renderCtx);
+        RenderCtxA *context = g_renderCtx;
+        renderStackPush(&context->stackA, FUN_001692ac(1, 0));
+        if (portrait->unk2F4 != 0 && portrait->state == 2) {
+            s32 parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
+            if (aocJobIsValid() != 0 || btlMainIsSecondJobValid() != 0) {
+                parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f));
+            }
+            FUN_003d939c(portrait, static_cast<f32>(parallax));
+        }
+        renderStackPop(&g_renderCtx->stackA);
+        skinObjectUpdateMatrices(g_renderCtx);
+        renderCtxResetColorScale(g_renderCtx);
     }
-    if ((*(char *)(temp_v0 + 0x2f4) != '\0') && (*(int *)(temp_v0 + 0x2e8) == 2)) {
-      temp_v5 = 0.27f;
-      renderCtxCalculateStereoParallax(g_renderCtx);
-      temp_v1 = (int)temp_v5;
-      temp_v2 = aocJobIsValid();
-      if ((temp_v2 != 0) || (temp_v2 = btlMainIsSecondJobValid(), temp_v2 != 0)) {
-        temp_v5 = 0.26f;
-        renderCtxCalculateStereoParallax(g_renderCtx);
-        temp_v1 = (int)temp_v5;
-      }
-      VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_003d939c(temp_v0);
-    }
-    temp_v0 = g_renderCtx;
-    piVar6 = (int *)(g_renderCtx + 0x1258);
-    temp_v2 = *piVar6;
-    temp_v1 = piVar6[temp_v2 + 2];
-    *piVar6 = temp_v2 - 1;
-    if (*(char *)(temp_v0 + 0x1270) != '\0' || temp_v1 != piVar6[temp_v2 + 1]) {
-      (**(romwright_code **)(temp_v0 + 0x1274))();
-      *(unsigned char *)(temp_v0 + 0x1270) = 0;
-    }
-    skinObjectUpdateMatrices(g_renderCtx);
-    renderCtxResetColorScale(g_renderCtx);
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -1,74 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f7e10` (_code @ 0x2f7e10, 0x13c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler does not hoist effect/zero constants into saved registers, and clear-status exits duplicate the epilogue. */
+#include "battle/btlMain.h"
+#include "battle/btlAction.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 
 extern "C" {
+extern u32 g_btlScriptUnit;
+s32 scrGetArg(s32 index);
+u32 btlUnitGet(u32 id);
+BtlMainState *btlGetMainState(void);
+GameUnitSortRecord *gameGetUnitRecord(s32 slot);
+u32 FUN_00246d38(s32 actor, u32 unit, BtlActionRecord *target, u32 mask);
+u32 FUN_00246e24(s32 actor, u32 unit, BtlActionRecord *target, u32 mask, s32 clearStatus);
+void objectFlagsClear(GameUnitSortRecord *unit, u16 mask);
+void objectFlagSetBit(GameUnitSortRecord *unit, u16 bit);
+u8 flagWordTestBit(GameUnitSortRecord *unit, u32 bit);
+void FUN_002505c0(s32 kind, u32 unit, u32 effect, s32, s32, s32, s32);
 
-int FUN_00246d38(int, unsigned int, int, int);
-int FUN_00246e24(int, unsigned int, int, int, int);
-int FUN_002505c0(int, unsigned int, int, int, int, int, int);
-int objectFlagsClear(unsigned int, int);
-int objectFlagSetBit(unsigned int, unsigned int);
-int scrGetArg(int);
-
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-extern unsigned int g_btlScriptUnit; /* 0x43427c */
-
-/* Supplied declaration required: FUN_00246d38. */
-/* Supplied declaration required: FUN_00246e24. */
-/* Supplied declaration required: FUN_002505c0. */
-/* Supplied declaration required: objectFlagsClear. */
-/* Supplied declaration required: objectFlagSetBit. */
-extern unsigned int btlUnitGet(unsigned int);
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrGetArg. */
-extern int flagWordTestBit(unsigned int, unsigned int);
-extern unsigned int gameGetUnitRecord(int);
-
-
-unsigned int FUN_002f7e10(void)
-
+// Set or clear a status bit on a battle target or stored unit, playing the status effect when set.
+u32 FUN_002f7e10(void)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = scrGetArg(2);
-  temp_v3 = btlUnitGet(g_btlScriptUnit);
-  if (temp_v0 < 0x6d) {
-    temp_v4 = btlGetMainState();
-    temp_v0 = *(int *)(temp_v4 + 0x1e98) + temp_v0 * 0x114;
-    if (temp_v2 == 0) {
-      FUN_00246d38(0,temp_v3,temp_v0,1 << (temp_v1 & 0xff));
-      return 1;
+    s32 target = scrGetArg(0);
+    u16 bit = scrGetArg(1);
+    s32 enabled = scrGetArg(2);
+    u32 actor = btlUnitGet(g_btlScriptUnit);
+    if (target < 109) {
+        BtlActionRecord *record = &btlGetMainState()->actions[target];
+        if (enabled == 0) {
+            FUN_00246d38(0, actor, record, 1 << bit);
+            return 1;
+        }
+        FUN_00246e24(0, actor, record, 1 << bit, 1);
+    } else {
+        GameUnitSortRecord *unit = gameGetUnitRecord(target - 109);
+        if (enabled == 0) {
+            objectFlagsClear(unit, (u16)(1 << bit));
+            return 1;
+        }
+        objectFlagSetBit(unit, bit);
+        if (bit != 4 && flagWordTestBit(unit, 4)) {
+            objectFlagsClear(unit, 16);
+        }
     }
-    FUN_00246e24(0,temp_v3,temp_v0,1 << (temp_v1 & 0xff),1);
-  }
-  else {
-    temp_v5 = gameGetUnitRecord(temp_v0 - 0x6d);
-    if (temp_v2 == 0) {
-      objectFlagsClear(temp_v5,(1 << (temp_v1 & 0xff)) & 0xffff);
-      return 1;
-    }
-    objectFlagSetBit(temp_v5,temp_v1 & 0xffff);
-    if (((temp_v1 & 0xffff) != 4) && (temp_v0 = flagWordTestBit(temp_v5,4), temp_v0 != 0)) {
-      objectFlagsClear(temp_v5,0x10);
-    }
-  }
-  FUN_002505c0(0,temp_v3,0x10001bd,0,0,0,0);
-  return 1;
+    FUN_002505c0(0, actor, 0x10001BD, 0, 0, 0, 0);
+    return 1;
 }
-
-} /* extern "C" */
+}

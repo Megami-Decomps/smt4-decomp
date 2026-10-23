@@ -17,6 +17,21 @@ struct AllocationHeader {
     u8 unk14[0x24];
     AllocationHeader *owner; // 0x38: back-pointer immediately before aligned payload
 };
+/* Apocalypse adds an optional release callback ahead of the allocation-list link. */
+struct AllocationHeaderA {
+    /* 0x00 */ u32 size;
+    /* 0x04 */ u16 alignment;
+    /* 0x06 */ u16 flags;
+    /* 0x08 */ u16 tag;
+    /* 0x0A */ u8 unk0A[2];
+    /* 0x0C */ void (*release)(void *payload, void *argument);
+    /* 0x10 */ void *releaseArgument;
+    /* 0x14 */ AllocationLink link;
+};
+typedef char AllocationHeaderAOffsetsCheck[
+    offsetof(AllocationHeaderA, release) == 0xC &&
+    offsetof(AllocationHeaderA, releaseArgument) == 0x10 &&
+    offsetof(AllocationHeaderA, link) == 0x14 && sizeof(AllocationHeaderA) == 0x1C ? 1 : -1];
 struct AllocationUsage {
     AllocationLink *head;
     AllocationLink *tail;

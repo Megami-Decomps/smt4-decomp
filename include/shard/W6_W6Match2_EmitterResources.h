@@ -2,12 +2,23 @@
 #define SHARD_W6_W6MATCH2_EMITTER_RESOURCES_H
 
 #include "common.h"
+#include <stddef.h>
+
+struct EffEmitter;
 
 struct ResourceEmitter {
     u32 key;         // 0x00
-    u8 unk04[0x2c]; // 0x04
+    union {
+        u8 unk04[0x2c]; // 0x04
+        struct {
+            u8 unk04BeforeEmitter[0x28];
+            EffEmitter *emitter; // 0x2C
+        } resource;
+    };
     void* buffer;    // 0x30
 };
+typedef char ResourceEmitterLayoutCheck[offsetof(ResourceEmitter, resource.emitter) == 0x2C &&
+    offsetof(ResourceEmitter, buffer) == 0x30 && sizeof(ResourceEmitter) == 0x34 ? 1 : -1];
 
 struct EmitterSource {
     u16 id;          // 0x00

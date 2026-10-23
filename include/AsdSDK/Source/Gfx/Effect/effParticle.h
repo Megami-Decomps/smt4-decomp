@@ -3,6 +3,7 @@
 #define ASDSDK_SOURCE_GFX_EFFECT_EFFPARTICLE_H
 
 #include "common.h"
+#include "shard/S1Mover.h"
 #include <stddef.h>
 
 /* The block a particle parameter block takes its array size from. */
@@ -36,12 +37,34 @@ typedef char EffParticleAuxiliaryOffsetCheck[sizeof(EffParticleParam) == 0x5C &&
     offsetof(EffParticleParam, auxiliary) == 0x50 ? 1 : -1];
 
 struct EffObjectParticleState {
-    /* 0x00 */ u8 data[0x1C];
+    union {
+        /* 0x00 */ u8 data[0x1C];
+        struct {
+            u32 unk00;
+            /* 0x04 */ Vec3f direction;
+            /* 0x10 */ f32 angle;
+            /* 0x14 */ f32 speed;
+            /* 0x18 */ s8 face;
+        } motion;
+    };
 };
 
 struct EffObjectParticle {
     /* 0x00 */ u32 owner;
-    /* 0x04 */ u8 unk04[0x98];
+    union {
+        /* 0x04 */ u8 unk04[0x98];
+        struct {
+            u8 unk04[0xC];
+            /* 0x10 */ u8 randomDirection;
+            u8 unk11[3];
+            /* 0x14 */ Vec3f direction;
+            u8 unk20[4];
+            /* 0x24 */ f32 speed;
+            /* 0x28 */ f32 variance;
+            u8 unk2C[8];
+            /* 0x34 */ s32 faceMode;
+        } initialMotion;
+    };
     /* 0x9C */ EffParticleSource *source;
     /* 0xA0 */ EffObjectParticleState *states;
     /* 0xA4 */ void *allocation;
@@ -53,6 +76,17 @@ typedef char EffObjectParticleLayoutCheck[
     offsetof(EffObjectParticle, states) == 0xA0 &&
     offsetof(EffObjectParticle, allocation) == 0xA4 &&
     sizeof(EffObjectParticle) == 0xA8 ? 1 : -1];
+typedef char EffObjectParticleInitialMotionOffsets[
+    offsetof(EffObjectParticle, initialMotion.randomDirection) == 0x10 &&
+    offsetof(EffObjectParticle, initialMotion.direction) == 0x14 &&
+    offsetof(EffObjectParticle, initialMotion.speed) == 0x24 &&
+    offsetof(EffObjectParticle, initialMotion.variance) == 0x28 &&
+    offsetof(EffObjectParticle, initialMotion.faceMode) == 0x34 ? 1 : -1];
+typedef char EffObjectParticleMotionOffsets[
+    offsetof(EffObjectParticleState, motion.direction) == 4 &&
+    offsetof(EffObjectParticleState, motion.angle) == 0x10 &&
+    offsetof(EffObjectParticleState, motion.speed) == 0x14 &&
+    offsetof(EffObjectParticleState, motion.face) == 0x18 ? 1 : -1];
 
 struct EffParticleSeed {
     /* 0x00 */ u8 unk00[0x14];

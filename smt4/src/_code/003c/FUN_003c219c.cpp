@@ -1,112 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c219c` (_code @ 0x3c219c, 0x170 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: cached stat register assignment, weight summation scheduling, and result narrowing differ. */
+#include "gamedata/UnitStats.h"
 
 extern "C" {
+void FUN_003eb068(void *);
+u32 randNextInRange(u16);
 
-int FUN_003eb068(short *);
-
-/* stack frame of param_2: 5 slot(s), 10 byte(s) */
-typedef struct {
-    unsigned short sp28; /* 0x28: local_28 */
-    unsigned short sp2A; /* 0x2a: local_2a */
-    unsigned short sp2C; /* 0x2c: local_2c */
-    unsigned short sp2E; /* 0x2e: local_2e */
-    unsigned short sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-extern unsigned int randNextInRange(short);
-/* Supplied declaration required: FUN_003eb068. */
-
-
-unsigned int FUN_003c219c(int param_1,unsigned char *param_2)
-
+/* Increment one weighted base stat; capped stats are removed from the distribution. */
+u32 FUN_003c219c(StatBlock *unit, u8 *weights)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  short temp_v3;
-  short temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  short temp_v8;
-  short temp_v9;
-  short temp_v10;
-  short temp_v11;
-  short temp_v12;
-  
-  temp_v7 = 0;
-  FUN_003eb068(&temp_v8);
-  temp_v0 = *(short *)(param_1 + 4);
-  temp_v1 = *(short *)(param_1 + 6);
-  temp_v2 = *(short *)(param_1 + 8);
-  temp_v3 = *(short *)(param_1 + 10);
-  temp_v4 = *(short *)(param_1 + 0xc);
-  if (temp_v0 >= 0x3e7) {
-    *param_2 = 0;
-  }
-  if (temp_v1 >= 0x3e7) {
-    param_2[1] = 0;
-  }
-  if (temp_v2 >= 0x3e7) {
-    param_2[2] = 0;
-  }
-  if (temp_v3 >= 0x3e7) {
-    param_2[3] = 0;
-  }
-  if (temp_v4 >= 0x3e7) {
-    param_2[4] = 0;
-  }
-  temp_v8 = temp_v0;
-  temp_v9 = temp_v1;
-  temp_v10 = temp_v2;
-  temp_v11 = temp_v3;
-  temp_v12 = temp_v4;
-  temp_v5 = randNextInRange(((unsigned short)param_2[3] +
-                        (unsigned short)*param_2 + (unsigned short)param_2[1] + (unsigned short)param_2[2] +
-                       (unsigned short)param_2[4]) - 1);
-  temp_v6 = (unsigned int)*param_2;
-  if (!(temp_v6 == 0 || temp_v6 <= temp_v5)) {
-    temp_v8 = temp_v0 + 1;
-  }
-  else {
-    temp_v7 = 1;
-    temp_v6 = temp_v6 + param_2[1];
-    if (!(param_2[1] == 0 || temp_v6 <= temp_v5)) {
-      temp_v9 = temp_v1 + 1;
-    }
-    else {
-      temp_v7 = 2;
-      temp_v6 = temp_v6 + param_2[2];
-      if (!(param_2[2] == 0 || temp_v6 <= temp_v5)) {
-        temp_v10 = temp_v2 + 1;
-      }
-      else {
-        temp_v7 = 3;
-        temp_v6 = temp_v6 + param_2[3];
-        if (!(param_2[3] == 0 || temp_v6 <= temp_v5)) {
-          temp_v11 = temp_v3 + 1;
-        }
-        else {
-          temp_v7 = 4;
-          if (!(param_2[4] == 0 || temp_v6 + param_2[4] <= temp_v5)) {
-            temp_v12 = temp_v4 + 1;
-          }
-          else {
-            temp_v7 = 5;
-          }
-        }
-      }
-    }
-  }
-  *(short *)(param_1 + 4) = temp_v8;
-  *(short *)(param_1 + 6) = temp_v9;
-  *(short *)(param_1 + 8) = temp_v10;
-  *(short *)(param_1 + 10) = temp_v11;
-  *(short *)(param_1 + 0xc) = temp_v12;
-  return temp_v7;
-}
+    u8 selected = 0;
+    s16 updated[5];
+    FUN_003eb068(updated);
+    s16 strength = unit->summary.stats[0];
+    updated[0] = strength;
+    s16 dexterity = unit->summary.stats[1];
+    updated[1] = dexterity;
+    s16 magic = unit->summary.stats[2];
+    updated[2] = magic;
+    s16 agility = unit->summary.stats[3];
+    updated[3] = agility;
+    s16 luck = unit->summary.stats[4];
+    updated[4] = luck;
+    if (strength >= 999) weights[0] = 0;
+    if (dexterity >= 999) weights[1] = 0;
+    if (magic >= 999) weights[2] = 0;
+    if (agility >= 999) weights[3] = 0;
+    if (luck >= 999) weights[4] = 0;
 
-} /* extern "C" */
+    u32 roll = randNextInRange(static_cast<u16>(weights[0] + weights[1] +
+        weights[2] + weights[3] + weights[4] - 1));
+    u32 cumulative = weights[0];
+    if (weights[0] && cumulative > roll) {
+        updated[0] = strength + 1;
+    } else {
+        selected = 1;
+        cumulative += weights[1];
+        if (weights[1] && cumulative > roll) {
+            updated[1] = dexterity + 1;
+        } else {
+            selected = 2;
+            cumulative += weights[2];
+            if (weights[2] && cumulative > roll) {
+                updated[2] = magic + 1;
+            } else {
+                selected = 3;
+                cumulative += weights[3];
+                if (weights[3] && cumulative > roll) {
+                    updated[3] = agility + 1;
+                } else {
+                    selected = 4;
+                    cumulative += weights[4];
+                    if (weights[4] && cumulative > roll)
+                        updated[4] = luck + 1;
+                    else
+                        selected = 5;
+                }
+            }
+        }
+    }
+    unit->summary.stats[0] = updated[0];
+    unit->summary.stats[1] = updated[1];
+    unit->summary.stats[2] = updated[2];
+    unit->summary.stats[3] = updated[3];
+    unit->summary.stats[4] = updated[4];
+    return selected;
+}
+}

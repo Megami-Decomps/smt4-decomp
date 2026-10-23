@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00474734(unsigned int *, int);
+int windowCreateStatusOperation(unsigned int *, int);
 int FUN_00476e58(unsigned int *, int, int);
 int FUN_00477d10(...);
 int jobFlagsWorkStop(...);
@@ -35,7 +35,7 @@ extern int g_aocMain; /* 0x570260 */
 extern int FUN_001834a4(unsigned int, unsigned int);
 extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_002e19f8(void);
-/* Supplied declaration required: FUN_00474734. */
+/* Supplied declaration required: windowCreateStatusOperation. */
 /* Supplied declaration required: FUN_00476e58. */
 /* Supplied declaration required: FUN_00477d10. */
 /* Supplied declaration required: jobFlagsWorkStop. */
@@ -87,7 +87,7 @@ void FUN_00477894(unsigned int *param_1)
       (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
     }
     puVar4 = param_1 + 0x83;
-    FUN_00474734(puVar4,1);
+    windowCreateStatusOperation(puVar4,1);
     param_1[2] = 4;
     param_1[0x82] = (unsigned int)puVar4;
     FUN_0047bcdc(param_1,1);
@@ -145,7 +145,7 @@ void FUN_00477894(unsigned int *param_1)
         releaseEntriesA(param_1 + 0xad);
         FUN_0047bcdc(param_1,0);
         puVar4 = param_1 + 0x83;
-        FUN_00474734(puVar4,0);
+        windowCreateStatusOperation(puVar4,0);
         param_1[2] = 2;
         param_1[0x82] = (unsigned int)puVar4;
         return;

@@ -1,88 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002177e8` (_code @ 0x2177e8, 0x160 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: damage-call stack arguments use STM/scalar stores instead of retail's STRD pairs, changing constant registers. */
+#include "battle/btlAction.h"
+#include "shard/W4_Match6_BtlEntry.h"
+#include "shard/W5_W5Match7_ScriptUnit.h"
 
 extern "C" {
+BtlMainState *btlGetMainState(void);
+BtlEntry *btlMainFindEntryByListedId(BtlMainState *battle, s32 id);
+void FUN_00250720(BtlMainState *battle);
+void FUN_002551ac(s32 channel, ScriptUnit *unit, BtlActionRecord *record, s32 kind,
+                  s32 maximum, s32 source, s32 target, s32 current, s32 previousMaximum,
+                  s32 a10, s32 a11, s32 a12, s32 a13, s32 a14, s32 a15, s32 a16,
+                  s32 a17, s32 a18, s32 a19, s32 a20, s32 a21, s32 a22,
+                  s32 a23, s32 a24, s32 a25);
+void FUN_00250680(s32 action, ScriptUnit *unit, BtlActionRecord *record, s32 flags);
+BtlEquip *gameGetUnitRecord(s32 index);
+void objectFlagSetBit(BtlEquip *record, u32 bit);
+void FUN_003ddc70(s32 channel, ScriptUnit *unit, s32 action, f32 duration);
+void FUN_002505c0(s32 channel, ScriptUnit *unit, u32 resource, s32 a4, s32 a5, s32 a6, s32 a7);
+void FUN_003ddbcc(s32 channel, ScriptUnit *unit, s32 a3, s32 a4, s32 a5, s32 frames, s32 a7);
 
-int FUN_002505c0(...);
-int FUN_00250680(...);
-int FUN_00250720(void);
-int FUN_002551ac(int, unsigned int, int, int, int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
-int objectFlagSetBit(...);
-int btlMainFindEntryByListedId(int, int);
-int btlGetMainState(void);
-int FUN_003ddbcc(...);
-int FUN_003ddc70(...);
-
-/* stack frame of void: 17 slot(s), 68 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-} void_stack;
-
-extern unsigned int g_btlScriptUnit; /* 0x43427c */
-
-/* Supplied declaration required: FUN_002505c0. */
-/* Supplied declaration required: FUN_00250680. */
-/* Supplied declaration required: FUN_00250720. */
-/* Supplied declaration required: FUN_002551ac. */
-/* Supplied declaration required: objectFlagSetBit. */
-extern unsigned int btlUnitGet(unsigned int);
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: btlGetMainState. */
-extern int scrGetArg(unsigned int);
-extern int gameGetUnitRecord(int);
-/* Supplied declaration required: FUN_003ddbcc. */
-/* Supplied declaration required: FUN_003ddc70. */
-
-
-unsigned int FUN_002177e8(void)
-
+// Defeat a battle or reserve unit and queue its sound and visual action sequence.
+u32 FUN_002177e8(void)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = btlUnitGet(g_btlScriptUnit);
-  if (temp_v0 < 0x6d) {
-    temp_v2 = btlGetMainState();
-    temp_v3 = *(int *)(temp_v2 + 0x1e98) + temp_v0 * 0x114;
-    temp_v2 = btlGetMainState();
-    btlMainFindEntryByListedId(temp_v2,temp_v0);
-    btlGetMainState();
-    FUN_00250720();
-    FUN_002551ac(0,temp_v1,temp_v3,0,(int)*(short *)(temp_v2 + 0x1b6),0xffffffff,0xffffffff,
-                 (int)*(short *)(temp_v2 + 0x1b4),(int)*(short *)(temp_v2 + 0x1b6),0,0,1,0,0,0,0,0,0,0,1
-                 ,0,1,1,0,1);
-    FUN_00250680(0x19,temp_v1,temp_v3,0);
-  }
-  else {
-    temp_v0 = gameGetUnitRecord(temp_v0 - 0x6d);
-    *(unsigned short *)(temp_v0 + 0x2a) = 0;
-    objectFlagSetBit(temp_v0,1);
-    FUN_003ddc70(0,temp_v1,0xf);
-  }
-  FUN_002505c0(0,temp_v1,0x1000178,0,0,0,0);
-  FUN_003ddbcc(0,temp_v1,0,1,2,0xb4,3);
-  return 1;
+    s32 id = scrGetArg(0);
+    ScriptUnit *unit = btlUnitGet(g_btlScriptUnit);
+    if (id < BTL_ENTRY_COUNT) {
+        BtlActionRecord *record = &btlGetMainState()->actions.records[id];
+        BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
+        FUN_00250720(btlGetMainState());
+        FUN_002551ac(0, unit, record, 0, entry->maxHp, -1, -1, entry->value,
+                      entry->maxHp, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);
+        FUN_00250680(0x19, unit, record, 0);
+    } else {
+        BtlEquip *record = gameGetUnitRecord(id - BTL_ENTRY_COUNT);
+        record->hp = 0;
+        objectFlagSetBit(record, 1);
+        FUN_003ddc70(0, unit, 15, 8.0f);
+    }
+    FUN_002505c0(0, unit, 0x1000178, 0, 0, 0, 0);
+    FUN_003ddbcc(0, unit, 0, 1, 2, 180, 3);
+    return 1;
 }
-
-} /* extern "C" */
+}

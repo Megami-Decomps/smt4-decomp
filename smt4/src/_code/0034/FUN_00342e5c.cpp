@@ -1,40 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00342e5c` (_code @ 0x342e5c, 0x144 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: connector coordinate scheduling and floating-point register allocation differ. */
+#include "gfx/RoutedConnector.h"
+#include "title/titleMain.h"
+#include <math.h>
 
 extern "C" {
+extern TitleScene* g_titleScene;
+void FUN_002c1b64(TitleScene* scene, s32 mode);
+void FUN_002d5900(u32 firstColor, u32 secondColor, f32 startX, f32 startY,
+                  f32 endX, f32 endY, f32 opacity, f32 width);
 
-int FUN_002c1b64(unsigned int, int);
-int FUN_002d5900(unsigned int);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned int g_titleScene; /* 0x44ea00 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002c1b64. */
-/* Supplied declaration required: FUN_002d5900. */
-
-
-void FUN_00342e5c(void)
-
+// Draw a two-segment connector with a clamped diagonal and a horizontal end segment.
+void FUN_00342e5c(const RoutedConnectorState* state, const f32* start, const f32* end,
+                  u32 color, s32 fade)
 {
-/* irregular: irregular input(s): in_fpscr, in_r3, in_stack_00000000; 5 native warning(s); review required */
-  unsigned int in_r3;
-  unsigned int in_fpscr;
-  int in_stack_00000000;
-  
-  FUN_002c1b64(g_titleScene,0);
-  in_fpscr = in_fpscr & 0xfffffff;
-  VectorSignedToFloat(0x100 - in_stack_00000000,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002d5900(in_r3);
-  VectorSignedToFloat(0x100 - in_stack_00000000,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002d5900(in_r3);
-  return;
+    FUN_002c1b64(g_titleScene, 0);
+    f32 bendX;
+    f32 pixelOffset = 0.0f;
+    f32 bendY = end[1];
+    if (state->reverse) {
+        bendX = end[0] - 16.0f;
+        if (fabsf(bendX - start[0]) < 1.0f)
+            bendX = start[0];
+        f32 vertical = fabsf(end[1] - start[1]);
+        if (vertical - fabsf(bendX - start[0]) < 0.0f) {
+            bendX = start[0] + vertical;
+            pixelOffset = -0.5f;
+        }
+    } else {
+        bendX = end[0] + 16.0f;
+        if (fabsf(bendX - start[0]) < 1.0f)
+            bendX = start[0];
+        f32 vertical = fabsf(end[1] - start[1]);
+        if (vertical - fabsf(bendX - start[0]) < 0.0f) {
+            bendX = start[0] - vertical;
+            pixelOffset = 0.5f;
+        }
+    }
+    FUN_002d5900(color, color, start[0], start[1], bendX + pixelOffset, bendY,
+                  (256 - fade) * (1.0f / 256.0f), 1.0f);
+    FUN_002d5900(color, color, bendX + pixelOffset, bendY, end[0], end[1],
+                  (256 - fade) * (1.0f / 256.0f), 1.0f);
 }
-
-} /* extern "C" */
+}

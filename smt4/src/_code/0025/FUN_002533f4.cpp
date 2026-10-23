@@ -1,106 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002533f4` (_code @ 0x2533f4, 0x1dc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: return-slot/count spills and template lookup register allocation differ from retail. */
+#include "addon/aocMain.h"
+#include "gamedata/DataTable.h"
+#include "gamedata/Table00.h"
 
-extern "C" {
-
-struct AocSystem;
+struct EncounterTemplateChoice { u16 templateId; u16 weight; };
+struct EncounterTemplateChoices { EncounterTemplateChoice entries[15]; };
+struct EncounterTemplateUnits { u8 prefix[12]; u16 units[6]; u8 suffix[4]; };
 struct Table02Sub2Entry;
-Table02Sub2Entry *aocFindSpriteTemplateByKey(AocSystem *, unsigned int);
-int dataTable00FindById(void);
-int gameDataGetTableEntry(...);
-int FUN_002c0a9c(unsigned int, unsigned int, int);
-int dataTableGet(...);
-int FUN_00389168(int, unsigned int);
+extern "C" {
+extern AocSystem* g_aocSystem;
+u16* gameDataGetTableEntry(u32 category, u32 index);
+void FUN_002c0a9c(u32 category, u32 index, u32 initialize);
+EncounterTemplateChoices* aocFindQuestPayloadById(AocSystem*, u32);
+Table02Sub2Entry* aocFindSpriteTemplateByKey(AocSystem*, u32);
+Table00Record* dataTable00FindById(u32 id);
+s32 randNextInRange(u16 maximum);
 
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-extern int g_aocSystem; /* 0x433158 */
-
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: gameDataGetTableEntry. */
-extern int randNextInRange(short);
-/* Supplied declaration required: FUN_002c0a9c. */
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: dataTableGet. */
-/* Supplied declaration required: FUN_00389168. */
-
-
-unsigned short FUN_002533f4(unsigned int param_1,unsigned int param_2,int param_3)
-
+u16 FUN_002533f4(u32 category, u32 index, s32 filterArrangements)
 {
-/* irregular: 1 goto(s); 6 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  short *psVar6;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  short temp_v7;
-  
-  puVar1 = (unsigned short *)gameDataGetTableEntry(param_1);
-  temp_v4 = (unsigned int)*puVar1;
-  if (temp_v4 == 0) {
-    FUN_002c0a9c(param_1,param_2,1);
-    puVar1 = (unsigned short *)gameDataGetTableEntry(param_1,param_2);
-    temp_v4 = (unsigned int)*puVar1;
-  }
-  temp_v0 = dataTableGet(2,1);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  temp_v6 = temp_v1;
-  if ((temp_v4 < temp_v2) && (temp_v6 = g_aocSystem, FUN_00389168(g_aocSystem,temp_v4), temp_v6 == 0)) {
-    temp_v6 = temp_v1 + temp_v4 * 0x3c;
-  }
-  temp_v7 = 0;
-  temp_v1 = 0;
-  do {
-    puVar1 = (unsigned short *)(temp_v6 + temp_v1 * 4);
-    temp_v4 = (unsigned int)*puVar1;
-    if (temp_v4 != 0) {
-      if (param_3 != 0) {
-        temp_v0 = dataTableGet(2);
-        temp_v3 = dataTableGetEntries();
-        temp_v2 = dataTableGetCount(temp_v0);
-        temp_v5 = temp_v3;
-        if ((temp_v4 < temp_v2) && (temp_v5 = (int)aocFindSpriteTemplateByKey((AocSystem *)g_aocSystem,temp_v4), temp_v5 == 0))
-        {
-          temp_v5 = temp_v3 + temp_v4 * 0x1c;
-        }
-        temp_v3 = 0;
-        do {
-          temp_v4 = (unsigned int)*(unsigned short *)(temp_v5 + temp_v3 * 2 + 0xc);
-          if (((temp_v4 != 0) && (dataTable00FindById(), temp_v4 != 0)) &&
-             ((*(char *)(temp_v4 + 0x9e) != '\0' || (*(char *)(temp_v4 + 0x9f) != '\0'))))
-          goto LAB_00253568;
-          temp_v3 = temp_v3 + 1;
-        } while (temp_v3 < 6);
-      }
-      temp_v7 = temp_v7 + puVar1[1];
+    s32 choicesId = *gameDataGetTableEntry(category, index);
+    if (!choicesId) {
+        FUN_002c0a9c(category, index, 1);
+        choicesId = *gameDataGetTableEntry(category, index);
     }
-LAB_00253568:
-    temp_v1 = temp_v1 + 1;
-    if (temp_v1 >= 0xf) {
-      temp_v1 = randNextInRange(temp_v7 - 1);
-      temp_v5 = 0;
-      while ((psVar6 = (short *)(temp_v6 + temp_v5 * 4), *psVar6 == 0 ||
-             (temp_v1 = temp_v1 - (unsigned int)(unsigned short)psVar6[1], -1 < temp_v1))) {
-        temp_v5 = temp_v5 + 1;
-        if (temp_v5 >= 0xf) {
-          return 0;
+    void* table = dataTableGet(2, 1);
+    EncounterTemplateChoices* choices = static_cast<EncounterTemplateChoices*>(dataTableGetEntries(table));
+    if (choicesId >= 0 && static_cast<u32>(choicesId) < dataTableGetCount(table)) {
+        EncounterTemplateChoices* addon = aocFindQuestPayloadById(g_aocSystem, choicesId);
+        if (addon) {
+            choices = addon;
+        } else {
+            choices += choicesId;
         }
-      }
-      return *(unsigned short *)(temp_v6 + temp_v5 * 4);
     }
-  } while( 1 );
+    u32 totalWeight = 0;
+    for (s32 choiceIndex = 0; choiceIndex < 15; ++choiceIndex) {
+        EncounterTemplateChoice* choice = &choices->entries[choiceIndex];
+        s32 templateId = choice->templateId;
+        if (templateId) {
+            bool accepted = true;
+            if (filterArrangements) {
+                void* unitTable = dataTableGet(2, 2);
+                EncounterTemplateUnits* units = static_cast<EncounterTemplateUnits*>(dataTableGetEntries(unitTable));
+                if (templateId >= 0 && static_cast<u32>(templateId) < dataTableGetCount(unitTable)) {
+                    EncounterTemplateUnits* addon = reinterpret_cast<EncounterTemplateUnits*>(aocFindSpriteTemplateByKey(g_aocSystem, templateId));
+                    units = addon ? addon : units + templateId;
+                }
+                for (s32 unitIndex = 0; unitIndex < 6; ++unitIndex) {
+                    u16 id = units->units[unitIndex];
+                    if (id) {
+                        Table00Record* record = dataTable00FindById(id);
+                        if (record && (record->arrangement.first || record->arrangement.second)) {
+                            accepted = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (accepted) {
+                totalWeight += choice->weight;
+            }
+        }
+    }
+    s32 roll = randNextInRange(static_cast<u16>(totalWeight - 1));
+    // Retail filters the total above, but walks every nonempty choice when spending the roll.
+    for (s32 choiceIndex = 0; choiceIndex < 15; ++choiceIndex) {
+        EncounterTemplateChoice* choice = &choices->entries[choiceIndex];
+        if (choice->templateId && (roll -= choice->weight) < 0) {
+            return choice->templateId;
+        }
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

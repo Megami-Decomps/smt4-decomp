@@ -1,113 +1,82 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00346f2c` (_code @ 0x346f2c, 0x1f0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: default stream-binding initialization scheduling and shared-one constant lifetime add a saved register. */
+#include "gfx/VertexAttributeState.h"
+#include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 
+struct VertexStreamBinding {
+    VertexAttributeDescription attribute;
+    u8 scalarFormat;
+    u32 step;
+    VertexStreamBinding()
+    {
+        attribute.unk00[0] = 0;
+        attribute.unk00[1] = 1;
+        attribute.index = 0xFF;
+        scalarFormat = 0xFF;
+        step = 0;
+    }
+};
 extern "C" {
+void* asdPrimAlloc(u32 size);
+void memClear(void* memory, u32 size);
+void* rt_memcpy(void* destination, const void* source, u32 size);
+u32 osVirtToPhysAddress(const void* address);
+void FUN_0023b9d0(VertexAttributeState*, const VertexAttributeDescription*, u32 address, u32 format);
 
-int asdPrimAlloc(int);
-int FUN_0023b9d0(int, unsigned char *, unsigned int, int);
-int memClear(int, int);
-int rt_memcpy(int, unsigned int);
-
-/* stack frame of param_1: 15 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned char sp1D; /* 0x1d: local_1d */
-    unsigned char sp1E; /* 0x1e: local_1e */
-    unsigned char sp1F; /* 0x1f: local_1f */
-    unsigned char sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned char sp25; /* 0x25: local_25 */
-    unsigned char sp26; /* 0x26: local_26 */
-    unsigned char sp27; /* 0x27: local_27 */
-    unsigned char sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned char sp2D; /* 0x2d: local_2d */
-    unsigned char sp2E; /* 0x2e: local_2e */
-    unsigned char sp2F; /* 0x2f: local_2f */
-    unsigned char sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-/* Supplied declaration required: asdPrimAlloc. */
-/* Supplied declaration required: FUN_0023b9d0. */
-extern unsigned int osVirtToPhysAddress(int);
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_00346f2c(int param_1)
-
+void FUN_00346f2c(PolyGeomBuf* geometry)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  unsigned char temp_v5;
-  unsigned char temp_v6;
-  unsigned int temp_v7;
-  unsigned char temp_v8;
-  unsigned char temp_v9;
-  unsigned char temp_v10;
-  unsigned char temp_v11;
-  unsigned int temp_v12;
-  unsigned char temp_v13;
-  unsigned char temp_v14;
-  unsigned char temp_v15;
-  unsigned char temp_v16;
-  unsigned int temp_v17;
-  
-  temp_v2 = param_1 + 0x4c;
-  memClear(temp_v2,0x790);
-  temp_v17 = 0;
-  temp_v8 = 0;
-  temp_v13 = 0;
-  temp_v3 = 0;
-  temp_v9 = 1;
-  temp_v14 = 1;
-  temp_v4 = 1;
-  temp_v10 = 0xff;
-  temp_v15 = 0xff;
-  temp_v5 = 0xff;
-  temp_v11 = 0xff;
-  temp_v12 = 0;
-  temp_v16 = 0xff;
-  temp_v6 = 0xff;
-  temp_v7 = 0;
-  if ((*(unsigned int *)(param_1 + 4) & 1) != 0) {
-    temp_v0 = *(int *)(param_1 + 0xc) * 0xc;
-    asdPrimAlloc(temp_v0);
-    rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x30));
-    temp_v10 = 0;
-    temp_v1 = osVirtToPhysAddress(temp_v0);
-    FUN_0023b9d0(temp_v2,&temp_v8,temp_v1,0xb);
-  }
-  if ((*(unsigned int *)(param_1 + 4) & 2) != 0) {
-    temp_v0 = *(int *)(param_1 + 0xc) << 4;
-    asdPrimAlloc(temp_v0);
-    rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x34));
-    temp_v5 = 1;
-    temp_v1 = osVirtToPhysAddress(temp_v0);
-    FUN_0023b9d0(temp_v2,&temp_v3,temp_v1,0xf);
-  }
-  if ((*(unsigned int *)(param_1 + 4) & 0x20) != 0) {
-    temp_v0 = *(int *)(param_1 + 0xc) << 2;
-    asdPrimAlloc(temp_v0);
-    rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x38));
-    temp_v5 = 1;
-    temp_v1 = osVirtToPhysAddress(temp_v0);
-    FUN_0023b9d0(temp_v2,&temp_v3,temp_v1,0xd);
-  }
-  if ((*(unsigned int *)(param_1 + 4) & 4) != 0) {
-    temp_v0 = *(int *)(param_1 + 0xc) << 3;
-    asdPrimAlloc(temp_v0);
-    rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x3c));
-    temp_v15 = 2;
-    temp_v1 = osVirtToPhysAddress(temp_v0);
-    FUN_0023b9d0(temp_v2,&temp_v13,temp_v1,7);
-  }
-  return;
+    // The upload state follows the published buffer prefix; do not grow that shared type.
+    struct UploadView {
+        union {
+            PolyGeomBuf buffers;
+            struct {
+                u32 reserved;
+                u32 flags;
+                u32 reservedFlags;
+                u32 vertexCount;
+                u8 reservedStreams[0x20];
+                const void* positions;
+                const void* floatColors;
+                const void* packedColors;
+                const void* texcoords;
+            } streams;
+        };
+        u8 reservedState[12];
+        VertexAttributeState attributes;
+        u8 attributeTail[0xF0];
+        u32 streamBytes(u32 flag, u32 stride) const
+        {
+            return (streams.flags & flag) ? streams.vertexCount * stride : 0;
+        }
+    };
+    UploadView* upload = reinterpret_cast<UploadView*>(geometry);
+    VertexAttributeState* attributes = &upload->attributes;
+    memClear(attributes, 0x790);
+    VertexStreamBinding position;
+    VertexStreamBinding color;
+    VertexStreamBinding texcoord;
+    if (upload->streams.flags & 1) {
+        void* data = asdPrimAlloc(upload->streamBytes(1, 12));
+        rt_memcpy(data, upload->streams.positions, upload->streamBytes(1, 12));
+        position.attribute.index = 0;
+        FUN_0023b9d0(attributes, &position.attribute, osVirtToPhysAddress(data), 11);
+    }
+    if (upload->streams.flags & 2) {
+        void* data = asdPrimAlloc(upload->streamBytes(2, 16));
+        rt_memcpy(data, upload->streams.floatColors, upload->streamBytes(2, 16));
+        color.attribute.index = 1;
+        FUN_0023b9d0(attributes, &color.attribute, osVirtToPhysAddress(data), 15);
+    }
+    if (upload->streams.flags & 0x20) {
+        void* data = asdPrimAlloc(upload->streamBytes(0x20, 4));
+        rt_memcpy(data, upload->streams.packedColors, upload->streamBytes(0x20, 4));
+        color.attribute.index = 1;
+        FUN_0023b9d0(attributes, &color.attribute, osVirtToPhysAddress(data), 13);
+    }
+    if (upload->streams.flags & 4) {
+        void* data = asdPrimAlloc(upload->streamBytes(4, 8));
+        rt_memcpy(data, upload->streams.texcoords, upload->streamBytes(4, 8));
+        texcoord.attribute.index = 2;
+        FUN_0023b9d0(attributes, &texcoord.attribute, osVirtToPhysAddress(data), 7);
+    }
 }
-
-} /* extern "C" */
+}

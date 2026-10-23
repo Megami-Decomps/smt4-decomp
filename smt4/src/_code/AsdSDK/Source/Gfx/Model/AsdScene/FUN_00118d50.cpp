@@ -1,92 +1,70 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00118d50` (_code @ 0x118d50, 0x174 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: default light colors, direction and native object creation restored; color-field bases and VFP store grouping differ. */
+#include "AsdSDK/Source/Gfx/Model/AsdSceneLight.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 clear);
+AsdAllocatorObject *asdMemoryGetDefaultAllocator();
+AsdSceneLightObject *FUN_0012b48c(const AsdSceneLightDescription *description, AsdAllocatorObject *allocator);
+u32 nw_ut_FloatColor_ToPicaU32(const f32 *color);
 
-int asdMemoryAlloc(int, int, int, int, int);
-
-/* stack frame of void: 5 slot(s), 14 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned char sp27; /* 0x27: local_27 */
-    unsigned char sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-extern int FUN_0012b48c(unsigned char *, unsigned int);
-extern unsigned int asdMemoryGetDefaultAllocator(void);
-/* Supplied declaration required: asdMemoryAlloc. */
-extern unsigned int nw_ut_FloatColor_ToPicaU32(int);
-
-
-unsigned int * FUN_00118d50(void)
-
+// Create a single enabled scene light with the standard four colors and normalized direction.
+AsdSceneLight *FUN_00118d50()
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  unsigned char temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int uStack_1c;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAlloc(0x100,0x100,0,0xc,1);
-  puVar1[1] = 0;
-  *puVar1 = 0xffffffff;
-  puVar1[2] = 0;
-  temp_v0 = asdMemoryGetDefaultAllocator();
-  temp_v4 = 1;
-  temp_v5 = 1;
-  temp_v6 = 0;
-  temp_v7 = 0;
-  uStack_1c = 1;
-  temp_v1 = FUN_0012b48c(&temp_v4,temp_v0);
-  puVar1[1] = temp_v1;
-  temp_v1 = *(int *)(temp_v1 + 8);
-  puVar1[2] = temp_v1;
-  *(unsigned int *)(temp_v1 + 0xb8) = 0;
-  temp_v1 = puVar1[2];
-  temp_v3 = 0x3f800000;
-  *(unsigned int *)(temp_v1 + 0x10c) = 0xbed105eb;
-  *(unsigned int *)(temp_v1 + 0x110) = 0xbf5105eb;
-  *(unsigned int *)(temp_v1 + 0x114) = 0xbed105eb;
-  temp_v1 = puVar1[2];
-  *(unsigned int *)(temp_v1 + 0xbc) = 0x3e4ccccd;
-  *(unsigned int *)(temp_v1 + 0xc0) = 0x3e4ccccd;
-  *(unsigned int *)(temp_v1 + 0xc4) = 0x3e4ccccd;
-  *(unsigned int *)(temp_v1 + 200) = 0x3f800000;
-  temp_v0 = nw_ut_FloatColor_ToPicaU32(puVar1[2] + 0xbc);
-  *(unsigned int *)(puVar1[2] + 0xfc) = temp_v0;
-  temp_v1 = puVar1[2];
-  *(unsigned int *)(temp_v1 + 0xcc) = temp_v3;
-  *(unsigned int *)(temp_v1 + 0xd0) = temp_v3;
-  *(unsigned int *)(temp_v1 + 0xd4) = temp_v3;
-  *(unsigned int *)(temp_v1 + 0xd8) = temp_v3;
-  temp_v0 = nw_ut_FloatColor_ToPicaU32(puVar1[2] + 0xcc);
-  temp_v2 = 0x3f4ccccd;
-  *(unsigned int *)(puVar1[2] + 0x100) = temp_v0;
-  temp_v1 = puVar1[2];
-  *(unsigned int *)(temp_v1 + 0xdc) = 0x3f4ccccd;
-  *(unsigned int *)(temp_v1 + 0xe0) = 0x3f4ccccd;
-  *(unsigned int *)(temp_v1 + 0xe4) = 0x3f4ccccd;
-  *(unsigned int *)(temp_v1 + 0xe8) = temp_v3;
-  temp_v0 = nw_ut_FloatColor_ToPicaU32(puVar1[2] + 0xdc);
-  *(unsigned int *)(puVar1[2] + 0x104) = temp_v0;
-  temp_v1 = puVar1[2];
-  *(unsigned int *)(temp_v1 + 0xec) = temp_v2;
-  *(unsigned int *)(temp_v1 + 0xf0) = temp_v2;
-  *(unsigned int *)(temp_v1 + 0xf4) = temp_v2;
-  *(unsigned int *)(temp_v1 + 0xf8) = temp_v3;
-  temp_v0 = nw_ut_FloatColor_ToPicaU32(puVar1[2] + 0xec);
-  *(unsigned int *)(puVar1[2] + 0x108) = temp_v0;
-  return puVar1;
+    // The native parameter object extends beyond the currently recovered shared prefix.
+    struct LightColorView {
+        u8 prefix[0xB8];
+        u32 kind;
+        f32 ambient[4];
+        f32 diffuse[4];
+        f32 specular0[4];
+        f32 specular1[4];
+        u32 packedColors[4];
+        f32 direction[3];
+    };
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Model\\AsdScene.cpp", 1215);
+    AsdSceneLight *light = static_cast<AsdSceneLight *>(asdMemoryAlloc(0x100, 0x100, 0, sizeof(AsdSceneLight), 1));
+    light->object = NULL;
+    light->id = -1;
+    light->parameters = NULL;
+    AsdAllocatorObject *allocator = asdMemoryGetDefaultAllocator();
+    AsdSceneLightDescription description;
+    description.enabled = 1;
+    description.updateEnabled = 1;
+    description.unk04 = 0;
+    description.unk08 = 0;
+    description.count = 1;
+    light->object = FUN_0012b48c(&description, allocator);
+    light->parameters = light->object->parameters;
+    reinterpret_cast<LightColorView *>(light->parameters)->kind = 0;
+    LightColorView *parameters = reinterpret_cast<LightColorView *>(light->parameters);
+    parameters->direction[0] = -0.40824828f;
+    parameters->direction[1] = -0.81649655f;
+    parameters->direction[2] = -0.40824828f;
+    parameters = reinterpret_cast<LightColorView *>(light->parameters);
+    parameters->ambient[0] = 0.2f;
+    parameters->ambient[1] = 0.2f;
+    parameters->ambient[2] = 0.2f;
+    parameters->ambient[3] = 1.0f;
+    reinterpret_cast<LightColorView *>(light->parameters)->packedColors[0] = nw_ut_FloatColor_ToPicaU32(parameters->ambient);
+    parameters = reinterpret_cast<LightColorView *>(light->parameters);
+    parameters->diffuse[0] = 1.0f;
+    parameters->diffuse[1] = 1.0f;
+    parameters->diffuse[2] = 1.0f;
+    parameters->diffuse[3] = 1.0f;
+    reinterpret_cast<LightColorView *>(light->parameters)->packedColors[1] = nw_ut_FloatColor_ToPicaU32(parameters->diffuse);
+    parameters = reinterpret_cast<LightColorView *>(light->parameters);
+    parameters->specular0[0] = 0.8f;
+    parameters->specular0[1] = 0.8f;
+    parameters->specular0[2] = 0.8f;
+    parameters->specular0[3] = 1.0f;
+    reinterpret_cast<LightColorView *>(light->parameters)->packedColors[2] = nw_ut_FloatColor_ToPicaU32(parameters->specular0);
+    parameters = reinterpret_cast<LightColorView *>(light->parameters);
+    parameters->specular1[0] = 0.8f;
+    parameters->specular1[1] = 0.8f;
+    parameters->specular1[2] = 0.8f;
+    parameters->specular1[3] = 1.0f;
+    reinterpret_cast<LightColorView *>(light->parameters)->packedColors[3] = nw_ut_FloatColor_ToPicaU32(parameters->specular1);
+    return light;
 }
-
-} /* extern "C" */
+}

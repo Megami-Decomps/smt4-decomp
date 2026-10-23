@@ -1,62 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00324e38` (_code @ 0x324e38, 0x128 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: variant alternation folds to BIC and random-position VFP register allocation differs. */
+#include "shard/W5_W5Match7_SceneState.h"
 
 extern "C" {
+extern u32 DAT_005806c0;
+s32 FUN_00184964(s32, s32);
+void FUN_003d4ed8(u32, f32, f32, f32);
 
-int FUN_003d4ed8(unsigned int);
-int VectorSignedToFloat(unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned int DAT_005806c0; /* 0x5806c0 */
-extern int DAT_005f184c; /* 0x5f184c */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int FUN_00184964(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003d4ed8. */
-
-
-void FUN_00324e38(int param_1)
-
+/* Alternate a regional map effect and scatter it near the scene position. */
+void FUN_00324e38(s32 variant)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int in_fpscr;
-  
-  DAT_005806c0 = (DAT_005806c0 + 1) & 1;
-  temp_v0 = FUN_00184964(0xfffffff6,10);
-  VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v0 = FUN_00184964(0xfffffff1,0xf);
-  VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = FUN_00184964(0xfffffff1,0xf);
-  temp_v2 = temp_v1;
-  if (param_1 == 0) {
-    temp_v2 = 0;
-  }
-  VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  if ((param_1 != 0) && (temp_v2 = DAT_005806c0, param_1 == 1)) {
-    temp_v2 = 1;
-  }
-  DAT_005806c0 = temp_v2;
-  if (DAT_005f184c == 0) {
-    FUN_003d4ed8(DAT_005806c0 + 0x10002a0);
-    return;
-  }
-  if (DAT_005f184c == 1) {
-    FUN_003d4ed8(DAT_005806c0 + 0x10002a2);
-    return;
-  }
-  if (DAT_005f184c == 2) {
-    FUN_003d4ed8(DAT_005806c0 + 0x10002a4);
-    return;
-  }
-  return;
+    struct RegionView {
+        u8 unk000[0x250];
+        s32 region;
+    };
+    typedef char RegionViewOffset[offsetof(RegionView, region) == 0x250 ? 1 : -1];
+    DAT_005806c0 = (DAT_005806c0 + 1) & 1;
+    MapVector position = g_lmapScene->position;
+    position.y += 140.0f;
+    position.y += (f32)FUN_00184964(-10, 10);
+    position.x += (f32)FUN_00184964(-15, 15);
+    position.z += (f32)FUN_00184964(-15, 15);
+    if (variant == 0) {
+        DAT_005806c0 = 0;
+    } else if (variant == 1) {
+        DAT_005806c0 = 1;
+    }
+    switch (((const RegionView *)&g_gameState)->region) {
+    case 0:
+        FUN_003d4ed8(DAT_005806c0 + 0x10002A0, position.x, position.y, position.z);
+        break;
+    case 1:
+        FUN_003d4ed8(DAT_005806c0 + 0x10002A2, position.x, position.y, position.z);
+        break;
+    case 2:
+        FUN_003d4ed8(DAT_005806c0 + 0x10002A4, position.x, position.y, position.z);
+        break;
+    }
 }
-
-} /* extern "C" */
+}

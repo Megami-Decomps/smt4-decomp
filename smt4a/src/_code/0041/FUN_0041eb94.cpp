@@ -1,93 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041eb94` (_code @ 0x41eb94, 0x1b0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: snapshot copy addressing and changed-state branch placement differ. */
+#include "gamedata/SavedUnitSelection.h"
 
 extern "C" {
+void FUN_003fd7b4(u32, f32, f32, f32);
+void rt_memcpy_w(void *, const void *, u32);
+char *libc_strcpy(char *, const char *);
+void *gameDataBlocksGetSaveData();
+void FUN_0033440c(u32);
+void gameGlobalsQueueValues(UnitRecord *, s32);
+void FUN_0034aac8(s32);
+void FUN_0033449c(s32);
+void FUN_0023b45c(s32);
+void FUN_002c8538(s32);
+void FUN_002f0384(s32);
+void objBSetWordByIndex(s32, u16);
 
-int FUN_0023b45c(int);
-int FUN_002c8538(int);
-int libc_strcpy(...);
-int FUN_002f0384(int);
-int FUN_0033440c(int);
-int FUN_0033449c(int);
-int objBSetWordByIndex(int, int);
-int FUN_0034aac8(int);
-int gameGlobalsQueueValues(unsigned int, int);
-int FUN_003fd7b4(unsigned int);
-int rt_memcpy_w(unsigned int *, int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int gameDataBlocksGetSaveData(void);
-/* Supplied declaration required: FUN_0023b45c. */
-/* Supplied declaration required: FUN_002c8538. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002f0384. */
-/* Supplied declaration required: FUN_0033440c. */
-/* Supplied declaration required: FUN_0033449c. */
-/* Supplied declaration required: objBSetWordByIndex. */
-/* Supplied declaration required: FUN_0034aac8. */
-/* Supplied declaration required: gameGlobalsQueueValues. */
-/* Supplied declaration required: FUN_003fd7b4. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_0041eb94(int param_1)
-
+/* Restore the selected snapshot, its display name and the live session's mode flags. */
+void FUN_0041eb94(SavedUnitSelection *work)
 {
-/* irregular: 11 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned char temp_v2;
-  
-  FUN_003fd7b4(*(unsigned int *)(*(int *)(param_1 + 0x58) + 4));
-  *(int *)(param_1 + 100) = *(int *)(param_1 + 0x2f8);
-  temp_v0 = param_1 + *(int *)(param_1 + 0x2f8) * 0x80;
-  puVar3 = *(unsigned int **)(param_1 + 0x54);
-  *puVar3 = *(unsigned int *)(temp_v0 + 0x7e);
-  puVar3[1] = *(unsigned int *)(temp_v0 + 0x82);
-  puVar3[2] = *(unsigned int *)(temp_v0 + 0x86);
-  *(unsigned short *)(puVar3 + 3) = *(unsigned short *)(temp_v0 + 0x8a);
-  *(unsigned int *)((int)puVar3 + 0xe) = *(unsigned int *)(temp_v0 + 0xaa);
-  *(unsigned int *)((int)puVar3 + 0x12) = *(unsigned int *)(temp_v0 + 0xae);
-  *(unsigned int *)((int)puVar3 + 0x16) = *(unsigned int *)(temp_v0 + 0xb2);
-  *(unsigned short *)((int)puVar3 + 0x1a) = *(unsigned short *)(temp_v0 + 0xb6);
-  rt_memcpy_w(puVar3 + 7,temp_v0 + 0x9c,0xe);
-  *(unsigned short *)((int)puVar3 + 0x2a) = *(unsigned short *)(temp_v0 + 0x90);
-  *(unsigned short *)(puVar3 + 0xb) = *(unsigned short *)(temp_v0 + 0x92);
-  puVar3[0xc] = *(unsigned int *)(temp_v0 + 0x8c);
-  libc_strcpy(puVar3 + 0x13,temp_v0 + 0x6c);
-  *(unsigned short *)((int)puVar3 + 0x62) = *(unsigned short *)(temp_v0 + 0xd0);
-  temp_v1 = gameDataBlocksGetSaveData();
-  libc_strcpy(temp_v1 + 0x54,temp_v0 + 0x6c);
-  FUN_0033440c(*(unsigned char *)(param_1 + *(int *)(param_1 + 0x2f8) * 0x80 + 0xd6));
-  gameGlobalsQueueValues(*(unsigned int *)(param_1 + 0x54),0);
-  temp_v0 = param_1 + *(int *)(param_1 + 0x2f8) * 0x80;
-  if (temp_v0 != -0x6c) {
-    FUN_0034aac8(*(char *)(temp_v0 + 0xb8) != '\0');
-  }
-  temp_v2 = *(char *)(*(int *)(param_1 + 0x2f8) + param_1 + 0x2ec) == '\0';
-  if (!temp_v2) {
-    FUN_0033449c(0);
-    FUN_0023b45c(1);
-    FUN_002c8538(1);
-    FUN_002f0384(1);
-  }
-  else {
-    FUN_0033449c(0);
-    FUN_0023b45c(0);
-    FUN_002c8538(1);
-    FUN_002f0384(0);
-  }
-  *(unsigned char *)(param_1 + 0x68) = !temp_v2;
-  objBSetWordByIndex(1,*(unsigned short *)(*(int *)(param_1 + 0x54) + 8));
-  objBSetWordByIndex(2,*(unsigned short *)(*(int *)(param_1 + 0x54) + 10));
-  objBSetWordByIndex(0,*(unsigned short *)(*(int *)(param_1 + 0x54) + 6));
-  return;
+    /* The maximum/current groups overlap several public UnitRecord fields: keep its API intact. */
+    struct UnitRestoreFields {
+        UnitSevenStats base, maximum, current;
+        u16 hp, mp;
+        u8 unk2E[2];
+        u32 bits;
+        u8 unk34[0x18];
+        char name[0x12];
+        u8 unk5E[4];
+        u16 id;
+    };
+    struct SaveNameView { u8 unk00[0x54]; char name[0x12]; };
+    typedef char UnitRestoreOffsets[
+        offsetof(UnitRestoreFields, maximum) == 0xE &&
+        offsetof(UnitRestoreFields, current) == 0x1C &&
+        offsetof(UnitRestoreFields, name) == 0x4C &&
+        offsetof(UnitRestoreFields, id) == 0x62 &&
+        offsetof(SaveNameView, name) == 0x54 ? 1 : -1];
+    FUN_003fd7b4(work->resource->handle, 0.0f, -10000.0f, 0.0f);
+    work->current = work->selected;
+    SavedUnitChoice *choice = &work->choices[work->selected];
+    UnitRestoreFields *unit = (UnitRestoreFields *)work->unit;
+    unit->base = choice->base;
+    unit->maximum = choice->maximum;
+    rt_memcpy_w(&unit->current, &choice->current, sizeof(UnitSevenStats));
+    unit->hp = choice->hp;
+    unit->mp = choice->mp;
+    unit->bits = choice->bits;
+    libc_strcpy(unit->name, choice->name);
+    unit->id = choice->id;
+    SaveNameView *save = (SaveNameView *)gameDataBlocksGetSaveData();
+    libc_strcpy(save->name, choice->name);
+    FUN_0033440c(work->choices[work->selected].kind);
+    gameGlobalsQueueValues(work->unit, 0);
+    choice = &work->choices[work->selected];
+    if (choice != NULL)
+        FUN_0034aac8(choice->alternate != 0);
+    if (work->changes[work->selected] != 0) {
+        FUN_0033449c(0);
+        FUN_0023b45c(1);
+        FUN_002c8538(1);
+        FUN_002f0384(1);
+        work->changed = 1;
+    } else {
+        FUN_0033449c(0);
+        FUN_0023b45c(0);
+        FUN_002c8538(1);
+        FUN_002f0384(0);
+        work->changed = 0;
+    }
+    objBSetWordByIndex(1, work->unit->stats[4]);
+    objBSetWordByIndex(2, work->unit->stats[5]);
+    objBSetWordByIndex(0, work->unit->stats[3]);
 }
-
-} /* extern "C" */
+}

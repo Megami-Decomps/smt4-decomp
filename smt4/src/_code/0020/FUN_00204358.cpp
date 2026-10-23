@@ -10,7 +10,7 @@ int FUN_0029a0cc(void);
 int FUN_0029c424(...);
 int SBORROW4(...);
 
-int FUN_00191c64(...);
+int statusRefundPlayerStatAllocation(...);
 int scrScriptProcessStartEntry(...);
 int flaggedEntrySetValueA(...);
 int ifTouchRegionAdd(int, int, int, int);
@@ -44,7 +44,7 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00191c64. */
+/* Supplied declaration required: statusRefundPlayerStatAllocation. */
 extern int scrRunOpcodesStub(unsigned int);
 extern int statsAreAllCapped(int);
 extern int FUN_0029563c(void);
@@ -288,7 +288,7 @@ LAB_002049f8:
           temp_v10 = 1;
           FUN_002c1658();
           if (temp_v10 != 0) {
-            FUN_00191c64(param_1);
+            statusRefundPlayerStatAllocation(param_1);
             temp_v7 = 0x100016e;
             goto LAB_00204cb8;
           }
@@ -312,7 +312,7 @@ LAB_002049f8:
               temp_v7 = 0x100016e;
             }
             eventQueueAddUniqueIfValid(temp_v7);
-            FUN_00191c64(param_1);
+            statusRefundPlayerStatAllocation(param_1);
             if (0 < *piVar14) {
               temp_v10 = 0;
               do {

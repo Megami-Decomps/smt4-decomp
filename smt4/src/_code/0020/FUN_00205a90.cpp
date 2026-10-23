@@ -1,79 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00205a90` (_code @ 0x205a90, 0x160 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: item preview stack values and selected-widget coordinate access differ. */
+#include "ui/PartyPanelState.h"
+#include "shard/W7_W7Match2_PartyDamage.h"
 
-extern "C" {
-
-int btlItemComputeValues(...);
-int FUN_00292be4(unsigned int, int, unsigned int);
-int FUN_00298d28(unsigned int, unsigned int);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern int g_partyPanel; /* 0x43dcf0 */
-
-/* Supplied declaration required: btlItemComputeValues. */
-/* Supplied declaration required: FUN_00292be4. */
-/* Supplied declaration required: FUN_00298d28. */
-extern int gameGetSlotTable(void);
-
-
-void FUN_00205a90(void)
-
+namespace {
+/* The coordinate getters reach past PartyPanelWidget's shared transition prefix. */
+struct PartyPreviewWidgetView {
+    u8 unk00[0x40];
+    s32 x, y;
+};
+static __inline s32 partyPreviewWidgetX(const PartyPanelWidget *widget)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5 [2];
-  
-  temp_v0 = g_partyPanel;
-  temp_v1 = gameGetSlotTable();
-  temp_v4 = 0;
-  temp_v5[0] = 0;
-  if (*(char *)(temp_v0 + 0x678) != '\0') {
-    btlItemComputeValues(0xffffffff,*(unsigned short *)(temp_v0 + 0x36),&temp_v4,temp_v5);
-    FUN_00292be4(*(unsigned int *)(temp_v0 + 0x6c8),temp_v4,temp_v5[0]);
-  }
-  temp_v3 = 0;
-  do {
-    temp_v2 = (int)*(char *)(temp_v1 + temp_v3 + 0x9108);
-    if (-1 < temp_v2) {
-      btlItemComputeValues(temp_v2,*(unsigned short *)(temp_v0 + 0x36),&temp_v4,temp_v5);
-      FUN_00292be4(*(unsigned int *)(temp_v0 + temp_v3 * 4 + 0x6cc),temp_v4,temp_v5[0]);
-    }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 3);
-  temp_v1 = 0;
-  do {
-    temp_v3 = *(int *)(temp_v0 + temp_v1 * 8 + 0x738);
-    if (-1 < temp_v3) {
-      btlItemComputeValues(temp_v3,*(unsigned short *)(temp_v0 + 0x36),&temp_v4,temp_v5);
-      FUN_00292be4(*(unsigned int *)(temp_v0 + temp_v1 * 4 + 0x6d8),temp_v4,temp_v5[0]);
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x18);
-  if (*(short *)(temp_v0 + 0x38) < 0) {
-    FUN_00298d28(*(unsigned int *)(*(int *)(temp_v0 + 0x6c8) + 0x40),
-                 *(unsigned int *)(*(int *)(temp_v0 + 0x6c8) + 0x44));
-    return;
-  }
-  temp_v1 = 0;
-  do {
-    if (*(int *)(temp_v0 + temp_v1 * 8 + 0x738) == (int)*(short *)(temp_v0 + 0x38)) {
-      temp_v3 = temp_v0 + temp_v1 * 4;
-      FUN_00298d28(*(unsigned int *)(*(int *)(temp_v3 + 0x6d8) + 0x40),
-                   *(unsigned int *)(*(int *)(temp_v3 + 0x6d8) + 0x44));
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x18);
-  return;
+    return reinterpret_cast<const PartyPreviewWidgetView *>(widget)->x;
 }
+static __inline s32 partyPreviewWidgetY(const PartyPanelWidget *widget)
+{
+    return reinterpret_cast<const PartyPreviewWidgetView *>(widget)->y;
+}
+}
+extern "C" {
+extern PartyPanelState *g_partyPanel;
+PartyDamageSlotsIV *gameGetSlotTable(void);
+void btlItemComputeValues(s32 unit, u16 item, s32 *first, s32 *second);
+void FUN_00292be4(PartyPanelWidget *widget, s32 first, s32 second);
+void FUN_00298d28(s32 x, s32 y);
 
-} /* extern "C" */
+/* Refresh all visible character and demon item values, then position the selection marker. */
+void FUN_00205a90(void)
+{
+    PartyPanelState *panel = g_partyPanel;
+    PartyDamageSlotsIV *slots = gameGetSlotTable();
+    s32 first = 0, second = 0;
+    if (panel->availability.activeSlots[0] != 0) {
+        btlItemComputeValues(-1, panel->previewItem, &first, &second);
+        FUN_00292be4(panel->characters[0], first, second);
+    }
+    for (s32 index = 0; index < 3; ++index) {
+        s32 unit = slots->active[index];
+        if (unit >= 0) {
+            btlItemComputeValues(unit, panel->previewItem, &first, &second);
+            FUN_00292be4(panel->characters[index + 1], first, second);
+        }
+    }
+    for (s32 index = 0; index < 24; ++index) {
+        s32 unit = static_cast<s32>(panel->previewUnits[index].packedIndex);
+        if (unit >= 0) {
+            btlItemComputeValues(unit, panel->previewItem, &first, &second);
+            FUN_00292be4(panel->demons[index], first, second);
+        }
+    }
+    if (panel->pendingSelection.selection < 0) {
+        FUN_00298d28(partyPreviewWidgetX(panel->characters[0]), partyPreviewWidgetY(panel->characters[0]));
+        return;
+    }
+    for (s32 index = 0; index < 24; ++index) {
+        if (static_cast<s32>(panel->previewUnits[index].packedIndex) == panel->pendingSelection.selection) {
+            FUN_00298d28(partyPreviewWidgetX(panel->demons[index]), partyPreviewWidgetY(panel->demons[index]));
+        }
+    }
+}
+}

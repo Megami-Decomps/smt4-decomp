@@ -1,69 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e45bc` (_code @ 0x3e45bc, 0x134 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: bitmap loads/stores use different address bases and unlock-flag switch tests are reordered. */
+#include "gamedata/AppUnlockState.h"
+#include "gamedata/AppPurchaseRecord.h"
 
 extern "C" {
+const AppPurchaseSortRecord *dataFindKeyedRecordWithOverrides(u32 id);
+void FUN_002f0bd8(u32 cost);
+void updateUnlockedEntryCount();
+void gameFlagSetValue(u32 flag, u32 bank, u32 value);
+AppUnlockState *gameDataBlockGetArea2D68();
+s32 FUN_003e4230(u32 id);
 
-int dataFindKeyedRecordWithOverrides(void);
-int FUN_002f0bd8(void);
-int updateUnlockedEntryCount(void);
-int gameFlagSetValue(...);
-
-/* Supplied declaration required: dataFindKeyedRecordWithOverrides. */
-/* Supplied declaration required: FUN_002f0bd8. */
-extern int gameDataBlockGetArea2D68(void);
-extern int FUN_003e4230(unsigned int);
-/* Supplied declaration required: updateUnlockedEntryCount. */
-/* Supplied declaration required: gameFlagSetValue. */
-
-
-unsigned int FUN_003e45bc(unsigned int param_1,int param_2,int param_3)
-
+// Unlock or preview an app purchase, charging points and updating category counts and unlock flags.
+u32 FUN_003e45bc(u32 id, s32 ignoreRequirements, s32 preview)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char *pbVar4;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v1 = gameDataBlockGetArea2D68();
-  temp_v2 = gameDataBlockGetArea2D68();
-  if ((((unsigned int)*(unsigned char *)(temp_v2 + (param_1 >> 3)) & (1 << (param_1 & 7))) == 0) &&
-     ((param_2 != 0 || (temp_v2 = FUN_003e4230(param_1), temp_v2 == 0)))) {
-    if (param_3 == 0) {
-      pbVar4 = (unsigned char *)(((int)(param_1 + ((unsigned int)((int)param_1 >> 0x1f) >> 0x1d)) >> 3) + temp_v1);
-      temp_v0 = (unsigned char)(1 << (((int)param_1 % 8) & 0xffU));
-      *pbVar4 = *pbVar4 | temp_v0;
-      pbVar4[0x12] = temp_v0 | pbVar4[0x12];
-      updateUnlockedEntryCount();
-      dataFindKeyedRecordWithOverrides();
-      FUN_002f0bd8();
-      temp_v3 = param_1;
-      dataFindKeyedRecordWithOverrides();
-      if (*(char *)(temp_v3 + 0x22) == '\0') {
-        temp_v1 = temp_v1 + (*(unsigned short *)(temp_v3 + 0x2a) & 0x3f) * 2;
-        *(short *)(temp_v1 + 0x24) = *(short *)(temp_v1 + 0x24) + 1;
-      }
-      if (param_1 != 0x2e) {
-        if (param_1 != 0x18) {
-          if (param_1 != 0x76) {
-            return 1;
-          }
-          gameFlagSetValue(0x527,0,1);
-          return 1;
+    AppUnlockState *state = gameDataBlockGetArea2D68();
+    const AppUnlockState *current = gameDataBlockGetArea2D68();
+    if ((current->unlocked[id >> 3] & (1 << (id & 7))) != 0 ||
+        (ignoreRequirements == 0 && FUN_003e4230(id) != 0)) {
+        return 0;
+    }
+    if (preview == 0) {
+        s32 signedId = static_cast<s32>(id);
+        s32 byte = signedId / 8;
+        u8 mask = static_cast<u8>(1 << (signedId % 8));
+        state->unlocked[byte] |= mask;
+        state->newlyUnlocked[byte] |= mask;
+        updateUnlockedEntryCount();
+        const AppPurchaseSortRecord *cost = dataFindKeyedRecordWithOverrides(id);
+        FUN_002f0bd8(cost != NULL ? cost->primaryKey : 0);
+        // The category extends past the shared sorting prefix.
+        struct CatalogView {
+            u8 unk00[0x22];
+            u8 type;
+            u8 unk23[7];
+            u16 category;
+        };
+        const CatalogView *record = reinterpret_cast<const CatalogView *>(dataFindKeyedRecordWithOverrides(id));
+        if (record->type == 0) {
+            ++state->categoryCounts[record->category & 0x3f];
         }
-        temp_v4 = 0x521;
-      }
-      else {
-        temp_v4 = 0x520;
-      }
-      gameFlagSetValue(temp_v4,0,1);
+        switch (id) {
+        case 46:
+            gameFlagSetValue(0x520, 0, 1);
+            break;
+        case 24:
+            gameFlagSetValue(0x521, 0, 1);
+            break;
+        case 118:
+            gameFlagSetValue(0x527, 0, 1);
+            break;
+        }
     }
     return 1;
-  }
-  return 0;
 }
-
-} /* extern "C" */
+}

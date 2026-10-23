@@ -1,101 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027461c` (_code @ 0x27461c, 0x1a8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: camera-vector load grouping, saved angle registers, and visibility flag predication differ. */
+#include "map/DestructibleModels.h"
+#include "map/lmapMain.h"
 
 extern "C" {
-
-int mathAngleDeltaDegrees(void);
-int mathPositionHeadingDegrees(void);
-int controllerSetDestination(int, int);
-int controllerSetRotationEulerDegrees(int);
-int FUN_003fe86c(int, int, int);
-
-extern int g_lmapView; /* 0x5806a4 */
-extern int g_mapHakai; /* 0x581038 */
-extern signed char DAT_005f161f; /* 0x5f161f */
-
-/* Supplied declaration required: mathAngleDeltaDegrees. */
-/* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: controllerSetRotationEulerDegrees. */
-/* Supplied declaration required: FUN_003fe86c. */
-extern int slots4FGetActiveValue(int);
-
+extern MapDestructibleModels *g_mapHakai;
+extern LmapExtraA *g_lmapView;
+extern GameStateA g_gameState;
+f32 mathPositionHeadingDegrees(f32, f32, f32, f32, f32, f32);
+f32 mathAngleDeltaDegrees(f32, f32);
+void controllerSetDestination(ControllerPose *, const MapVector *);
+void controllerSetRotationEulerDegrees(ControllerPose *, f32, f32, f32);
+s32 slots4FGetActiveValue(ControllerPose *);
+void FUN_003fe86c(ControllerPose *, s32, s32, f32, f32);
 
 void FUN_0027461c(void)
-
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  float temp_v6;
-  float temp_v7;
-  unsigned long long temp_v8;
-  float temp_v9;
-  unsigned long long temp_v10;
-  
-  temp_v6 = *(float *)(g_lmapView + 0x50);
-  mathPositionHeadingDegrees();
-  temp_v3 = 0;
-  temp_v10 = 0x42480000;
-  temp_v8 = 0x428c000000000000;
-  do {
-    temp_v4 = g_mapHakai + temp_v3 * 0x54;
-    temp_v5 = *(char *)(temp_v4 + 0x5c) != '\0';
-    temp_v2 = 0;
-    if (temp_v5) {
-      temp_v2 = *(int *)(temp_v4 + 0x60);
+    // ControllerPose's legacy header also defines LmapScene; avoid that conflicting definition here.
+    struct ControllerFlagsView { u32 unk00; u32 flags; };
+    LmapExtraA *view = g_lmapView;
+    f32 viewHeading = mathPositionHeadingDegrees(view->camera.savedEye.x, view->camera.savedEye.y, view->camera.savedEye.z,
+                                               view->camera.savedTarget.x, view->camera.savedTarget.y, view->camera.savedTarget.z);
+    for (s32 i = 0; i < 16; ++i) {
+        MapDestructibleModels *work = g_mapHakai;
+        MapDestructibleEntry *entry = &work->entries[i];
+        if (entry->active && entry->state != 3) {
+            MapDestructibleModel *model = entry->direct ? entry->model : work->groups.entries[entry->group].models[entry->index];
+            ControllerPose *controller = model->controller;
+            ControllerFlagsView *flags = reinterpret_cast<ControllerFlagsView *>(controller);
+            if (g_gameState.controllerFlags.secondary) {
+                if (!(flags->flags & 1))
+                    flags->flags |= 3;
+            } else {
+                if (flags->flags & 1)
+                    flags->flags &= ~3u;
+                if (entry->index == 2 && !(flags->flags & 1)) {
+                    f32 limit = 50.0f;
+                    MapVector *viewPosition = &g_lmapView->camera.savedEye;
+                    f32 heading = mathPositionHeadingDegrees(viewPosition->x, viewPosition->y, viewPosition->z,
+                                                            entry->position.x, entry->position.y, entry->position.z);
+                    if (g_lmapView->unkB0 == -1)
+                        limit = 70.0f;
+                    f32 delta = mathAngleDeltaDegrees(viewHeading, heading);
+                    if (!(delta > -limit && delta < limit))
+                        flags->flags |= 3;
+                }
+                if (entry->changed) {
+                    controllerSetDestination(controller, &entry->position);
+                    controllerSetRotationEulerDegrees(controller, 0.0f, entry->heading, 0.0f);
+                    if (slots4FGetActiveValue(controller) != entry->motion)
+                        FUN_003fe86c(controller, entry->motion, 2, 0.0f, 0.0f);
+                    entry->changed = 0;
+                }
+            }
+        }
     }
-    if (temp_v5 && temp_v2 != 3) {
-      if (*(char *)(temp_v4 + 0x84) != '\0') {
-        temp_v2 = *(int *)(temp_v4 + 0x88);
-      }
-      else {
-        temp_v2 = *(int *)(g_mapHakai + *(int *)(temp_v4 + 0x90) * 0x20 + *(short *)(temp_v4 + 0xac) * 4
-                        + 0x20);
-      }
-      temp_v2 = *(int *)(temp_v2 + 4);
-      temp_v0 = *(unsigned int *)(temp_v2 + 4);
-      if (DAT_005f161f != '\0') {
-        if ((temp_v0 & 1) == 0) {
-          *(unsigned int *)(temp_v2 + 4) = temp_v0 | 3;
-        }
-      }
-      else {
-        if ((temp_v0 & 1) != 0) {
-          *(unsigned int *)(temp_v2 + 4) = temp_v0 & 0xfffffffc;
-        }
-        if ((*(short *)(temp_v4 + 0xac) == 2) && ((*(unsigned int *)(temp_v2 + 4) & 1) == 0)) {
-          temp_v9 = (float)temp_v10;
-          temp_v7 = temp_v6;
-          mathPositionHeadingDegrees();
-          if (*(int *)(g_lmapView + 0xb0) == -1) {
-            temp_v9 = (float)((unsigned long long)temp_v8 >> 0x20);
-          }
-          temp_v6 = temp_v7;
-          mathAngleDeltaDegrees();
-          if ((temp_v7 <= -temp_v9) || (temp_v9 <= temp_v7)) {
-            *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
-          }
-        }
-        if (*(char *)(temp_v4 + 0x7c) != '\0') {
-          controllerSetDestination(temp_v2,temp_v4 + 0x68);
-          controllerSetRotationEulerDegrees(temp_v2);
-          temp_v1 = slots4FGetActiveValue(temp_v2);
-          if (temp_v1 != *(int *)(temp_v4 + 0x78)) {
-            FUN_003fe86c(temp_v2,*(int *)(temp_v4 + 0x78),2);
-          }
-          *(unsigned char *)(temp_v4 + 0x7c) = 0;
-        }
-      }
-    }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 0x10);
-  return;
 }
-
-} /* extern "C" */
+}

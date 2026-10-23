@@ -1,128 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b77bc` (_code @ 0x2b77bc, 0x1f8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: saved registers, local buffer placement, flag preloads and position conversion order differ. */
+#include "map/mapEpl.h"
+#include "AsdSDK/AsdDebug.h"
+struct MapEplPlacementRecord {
+    s8 map, area;
+    s16 x, y, z;
+    char name[16];
+    s16 requiredFlag, excludedFlag;
+};
+typedef char MapEplPlacementLayout[(sizeof(MapEplPlacementRecord) == 0x1C && offsetof(MapEplPlacementRecord, requiredFlag) == 0x18) ? 1 : -1];
 extern "C" {
-
-int textFormatBuffer(unsigned char [44], unsigned char *, char *);
-int asdMemoryAllocTracked(int, int, int, int);
-int FUN_001642e4(unsigned char *, unsigned int [2], int, int);
-int gameFlagIsSet(...);
-int FUN_001abbc4(void);
-int FUN_001b4eb8(void);
-int aocDataTable2dGetEntryKind3(void);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp58; /* 0x58: local_58 */
-} param_2_stack;
-
-extern unsigned char LAB_002b79c0; /* 0x2b79c0 */
-extern unsigned int *g_mapEpl; /* 0x580c88 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_001642e4. */
-/* Supplied declaration required: gameFlagIsSet. */
-/* Supplied declaration required: FUN_001abbc4. */
-/* Supplied declaration required: FUN_001b4eb8. */
-/* Supplied declaration required: aocDataTable2dGetEntryKind3. */
-extern int FUN_0038589c(void);
-
-
-void FUN_002b77bc(int param_1,int param_2)
-
-{
-/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
-  short temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  char *pcVar4;
-  unsigned char *puVar5;
-  int temp_v2;
-  char *pcVar7;
-  unsigned char temp_v3;
-  unsigned int in_fpscr;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned long long temp_v7;
-  unsigned int temp_v8 [2];
-  unsigned char temp_v9 [44];
-  
-  temp_v7 = 0;
-  if (g_mapEpl == (unsigned int *)0x0) {
-    puVar2 = (unsigned int *)0x100;
-    temp_v8[0] = 1;
-    asdMemoryAllocTracked(0x100,0x100,0,0x188);
-    g_mapEpl = puVar2;
-    *puVar2 = 0;
-    puVar2[1] = 0;
-    temp_v1 = 0;
-    do {
-      temp_v2 = temp_v1 + 1;
-      puVar2[temp_v1 * 6 + 6] = 0;
-      puVar2[temp_v1 * 6 + 7] = 0;
-      temp_v4 = (unsigned int)temp_v7;
-      puVar2[temp_v1 * 6 + 2] = temp_v4;
-      puVar2[temp_v1 * 6 + 3] = temp_v4;
-      puVar2[temp_v1 * 6 + 4] = temp_v4;
-      puVar2[temp_v1 * 6 + 5] = temp_v4;
-      temp_v1 = temp_v2;
-    } while (temp_v2 < 0x10);
-  }
-  pcVar7 = (char *)0x0;
-  temp_v1 = FUN_0038589c();
-  if (0 < temp_v1) {
-    do {
-      pcVar4 = pcVar7;
-      aocDataTable2dGetEntryKind3();
-      if (((*pcVar4 != -1) &&
-          ((temp_v0 = *(short *)(pcVar4 + 0x1a), *(short *)(pcVar4 + 0x18) == 0 ||
-           (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
-         ((temp_v0 == 0 || (temp_v1 = gameFlagIsSet((int)temp_v0), temp_v1 == 0)))) {
-        temp_v1 = (int)*pcVar4;
-        temp_v3 = temp_v1 == param_1;
-        if (temp_v3) {
-          temp_v1 = (int)pcVar4[1];
-        }
-        if (temp_v3 && temp_v1 == param_2) {
-          textFormatBuffer(temp_v9,&LAB_002b79c0,pcVar4 + 8);
-          puVar2 = g_mapEpl;
-          puVar5 = temp_v9;
-          temp_v1 = 0;
-          do {
-            if (g_mapEpl[temp_v1 * 6 + 7] == 0) {
-              FUN_001642e4(puVar5,temp_v8,1,0x80);
-              puVar2[temp_v1 * 6 + 6] = (unsigned int)puVar5;
-              FUN_001abbc4();
-              puVar2[temp_v1 * 6 + 7] = (unsigned int)puVar5;
-              temp_v2 = temp_v1;
-              break;
-            }
-            temp_v1 = temp_v1 + 1;
-            temp_v2 = -1;
-          } while (temp_v1 < 0x10);
-          puVar2 = g_mapEpl;
-          temp_v6 = VectorSignedToFloat((int)*(short *)(pcVar4 + 2),(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v4 = VectorSignedToFloat((int)*(short *)(pcVar4 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v5 = VectorSignedToFloat((int)*(short *)(pcVar4 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-          if (g_mapEpl[temp_v2 * 6 + 7] != 0) {
-            g_mapEpl[temp_v2 * 6 + 2] = temp_v6;
-            puVar2[temp_v2 * 6 + 5] = (int)temp_v7;
-            puVar2[temp_v2 * 6 + 3] = temp_v4;
-            puVar2[temp_v2 * 6 + 4] = temp_v5;
-            FUN_001b4eb8();
-          }
-        }
-      }
-      pcVar7 = pcVar7 + 1;
-      temp_v1 = FUN_0038589c();
-    } while ((int)pcVar7 < temp_v1);
-  }
-  return;
+extern MapEpl *g_mapEpl;
+extern const char DAT_005319ec[];
+void *asdMemoryAllocTracked(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
+s32 FUN_0038589c(void);
+const MapEplPlacementRecord *aocDataTable2dGetEntryKind3(u32 index);
+s32 gameFlagIsSet(s32 flag);
+s32 textFormatBuffer(char *buffer, const char *format, ...);
+void *FUN_001642e4(const char *path, u32 *size, s32 heap, u32 flags);
+void *FUN_001abbc4(void *data);
+void FUN_001b4eb8(void *object, const f32 *position);
 }
-
-} /* extern "C" */
+static inline s32 loadMapEffect(const char *path)
+{
+    MapEpl *pool = g_mapEpl;
+    for (s32 slot = 0; slot < MAP_EPL_ENTRIES; ++slot) {
+        MapEplEntry *entry = &pool->entries[slot];
+        if (!entry->object) {
+            u32 size;
+            entry->data = FUN_001642e4(path, &size, 1, 0x80);
+            entry->object = FUN_001abbc4(entry->data);
+            return slot;
+        }
+    }
+    return -1;
+}
+extern "C" void FUN_002b77bc(s32 map, s32 area)
+{
+    char path[36];
+    if (!g_mapEpl) {
+        asdDebugTrace(DAT_005319ec, 100);
+        MapEpl *pool = static_cast<MapEpl *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(MapEpl), 1));
+        g_mapEpl = pool;
+        pool->state[0] = 0;
+        pool->state[1] = 0;
+        for (s32 i = 0; i < MAP_EPL_ENTRIES; ++i) {
+            MapEplEntry *entry = &pool->entries[i];
+            entry->data = 0;
+            entry->object = 0;
+            entry->position[0] = 0.0f;
+            entry->position[1] = 0.0f;
+            entry->position[2] = 0.0f;
+            entry->position[3] = 0.0f;
+        }
+    }
+    for (s32 i = 0; i < FUN_0038589c(); ++i) {
+        const MapEplPlacementRecord *record = aocDataTable2dGetEntryKind3(i);
+        if (record->map != -1 &&
+            (!record->requiredFlag || gameFlagIsSet(record->requiredFlag)) &&
+            (!record->excludedFlag || !gameFlagIsSet(record->excludedFlag)) &&
+            record->map == map && record->area == area) {
+            textFormatBuffer(path, "effect_editor/%s.EPL", record->name);
+            s32 slot = loadMapEffect(path);
+            MapEplEntry *entry = &g_mapEpl->entries[slot];
+            f32 x = record->x, y = record->y, z = record->z;
+            if (entry->object) {
+                entry->position[0] = x;
+                entry->position[3] = 0.0f;
+                entry->position[1] = y;
+                entry->position[2] = z;
+                FUN_001b4eb8(entry->object, entry->position);
+            }
+        }
+    }
+}

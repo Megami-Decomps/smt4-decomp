@@ -1,106 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001448a8` (_code @ 0x1448a8, 0x194 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: free-slot search remains a loop rather than unrolled tests; global-base reuse and float setup differ. */
+#include "sound/AuxiliaryPlayback.h"
+#include "sound/SoundHandlePlayback.h"
 
-extern "C" {
+// This slot pointer lies beyond the IV sound-system prefix and beyond the auxiliary-pool view.
+struct SecondaryPlaybackSystemViewA {
+    u8 unk0000[0x1324];
+    AsdSndSlotA *slots;
+};
+typedef char SecondaryPlaybackSystemSlotOffset[
+    offsetof(SecondaryPlaybackSystemViewA, slots) == 0x1324 ? 1 : -1];
 
-unsigned int asdSoundEnsureArchiveItemLoaded(unsigned int id);
-int FUN_0015e2bc(unsigned char *, int, int, int);
-int FUN_0015e874(...);
-int nw_snd_SoundArchive_GetSoundType(unsigned char *, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-extern unsigned char g_asdSoundSystem; /* 0x63e1e8 */
-extern unsigned char DAT_0063e37c; /* 0x63e37c */
-extern int DAT_0063f50c; /* 0x63f50c */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0015e2bc. */
-/* Supplied declaration required: FUN_0015e874. */
-extern int nw_snd_SoundArchive_IsAvailable(unsigned char *);
-/* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
-
-
-int FUN_001448a8(int param_1,unsigned int param_2,unsigned int param_3)
-
+static inline s32 secondaryFindFreeSoundSlot(AsdSndSlotA *slots)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char *puVar4;
-  unsigned char *puVar5;
-  unsigned int in_fpscr;
-  
-  temp_v2 = DAT_0063f50c;
-  puVar4 = &g_asdSoundSystem;
-  if (DAT_0063f50c == 0) {
+    for (s32 index = 0; index < 4; ++index) {
+        if (!slots->handles[index])
+            return index;
+    }
     return -1;
-  }
-  if (*(int *)(DAT_0063f50c + 0x20) == 0) {
-    temp_v1 = 0;
-  }
-  else if (*(int *)(DAT_0063f50c + 0x24) == 0) {
-    temp_v1 = 1;
-  }
-  else if (*(int *)(DAT_0063f50c + 0x28) == 0) {
-    temp_v1 = 2;
-  }
-  else {
-    if (*(int *)(DAT_0063f50c + 0x2c) != 0) {
-      return -1;
-    }
-    temp_v1 = 3;
-  }
-  puVar5 = &g_asdSoundSystem;
-  temp_v0 = nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem);
-  if (temp_v0 == 0) {
-    return temp_v1;
-  }
-  nw_snd_SoundArchive_GetSoundType(&g_asdSoundSystem,param_1);
-  if (puVar5 == (unsigned char *)0x0) {
-    return temp_v1;
-  }
-  nw_snd_SoundArchive_GetSoundType(&g_asdSoundSystem,param_1);
-  if (*(char *)(temp_v2 + 0x3b) != '\0') {
-    if (puVar4 == (unsigned char *)0x3) {
-      temp_v0 = asdSoundEnsureArchiveItemLoaded((unsigned int)param_1);
-      if (temp_v0 == 0) {
-        return temp_v1;
-      }
-    }
-    else if (puVar4 != (unsigned char *)0x2) {
-      return temp_v1;
-    }
-  }
-  else {
-    if (puVar4 == (unsigned char *)0x3) {
-      return temp_v1;
-    }
-    if (puVar4 != (unsigned char *)0x2) {
-      return temp_v1;
-    }
-  }
-  temp_v2 = temp_v2 + temp_v1 * 4;
-  puVar4 = &DAT_0063e37c;
-  FUN_0015e2bc(&DAT_0063e37c,temp_v2 + 0x20,param_1,0);
-  if (param_2 >= 0x80) {
-    param_2 = 0x7f;
-    VectorUnsignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  }
-  else if (param_2 != 0) {
-    VectorUnsignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  }
-  if (*(int *)(temp_v2 + 0x20) != 0) {
-    FUN_0015e874(*(int *)(temp_v2 + 0x20),0);
-  }
-  if (*(int *)(temp_v2 + 0x20) != 0) {
-    FUN_0015e874(*(int *)(temp_v2 + 0x20),param_3);
-  }
-  if (((unsigned int)puVar4 & 0xff) != 0) {
-    temp_v1 = -1;
-  }
-  return temp_v1;
 }
 
-} /* extern "C" */
+extern "C" {
+extern AsdSoundSystem g_asdSoundSystem;
+s32 nw_snd_SoundArchive_IsAvailable(void *archive);
+u32 nw_snd_SoundArchive_GetSoundType(void *archive, u32 id);
+u32 asdSoundEnsureArchiveItemLoaded(u32 id);
+u32 FUN_0015e2bc(void *player, AuxiliarySoundHandle *handle, u32 id, u32 flags);
+
+// Play a wave sound or an allowed streamed sound in the first free slot, with a bounded volume fade.
+s32 FUN_001448a8(u32 id, u32 level, u32 frames)
+{
+    AsdSndSlotA *slots = ((SecondaryPlaybackSystemViewA *)&g_asdSoundSystem)->slots;
+    if (!slots)
+        return -1;
+    s32 index = secondaryFindFreeSoundSlot(slots);
+    if (index == -1)
+        return -1;
+    if (!nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem) ||
+        !nw_snd_SoundArchive_GetSoundType(&g_asdSoundSystem, id))
+        return index;
+    u32 type = nw_snd_SoundArchive_GetSoundType(&g_asdSoundSystem, id);
+    if (slots->hasHeap) {
+        if (type == 3) {
+            if (!asdSoundEnsureArchiveItemLoaded(id))
+                return index;
+        } else if (type != 2) {
+            return index;
+        }
+    } else if (type != 2) {
+        return index;
+    }
+    AuxiliarySoundHandle *handle = (AuxiliarySoundHandle *)&slots->handles[index];
+    bool started = (u8)FUN_0015e2bc(((SoundHandlePlaybackStateA *)&g_asdSoundSystem)->archivePlayer, handle, id, 0) == 0;
+    if (level > 127)
+        level = 127;
+    f32 volume = 0.0f;
+    if (level != 0) {
+        volume = 1.0f + ((f32)level - 64.0f) * (2.0f / 127.0f);
+        if (volume > 2.0f)
+            volume = 2.0f;
+    }
+    handle->setVolume(0.0f, 0);
+    handle->setVolume(volume, frames);
+    if (!started)
+        index = -1;
+    return index;
+}
+}

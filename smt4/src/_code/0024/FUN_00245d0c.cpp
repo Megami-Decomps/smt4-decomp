@@ -1,128 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00245d0c` (_code @ 0x245d0c, 0x188 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Saved float registers, zero-buffer/conversion scheduling and ailment-name block order differ. */
+#include "shard/W4_Match6_BtlEntry.h"
 
+/* Ailment modifiers extend past the shared stat[12] prefix; this view avoids changing that boundary. */
+struct BattleAilmentChanceView {
+    u8 unk000[0x72];
+    s16 modifiers[26];
+    u8 unk0A6[0x11E];
+    s16 luck;
+};
 extern "C" {
+BtlMainState *btlGetMainState(void);
+BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, u32 id);
+void textFormatBuffer(char *output, const char *format, ...);
+u32 randRange(u32 maximum);
 
-int btlMainFindEntryByListedId(int, unsigned int);
-int textFormatBuffer(int *, unsigned char *);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* stack frame of param_2: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_2_stack;
-
-extern unsigned char LAB_00245eb0; /* 0x245eb0 */
-extern unsigned char LAB_00245eb8; /* 0x245eb8 */
-extern unsigned char LAB_00245ec0; /* 0x245ec0 */
-extern unsigned char LAB_00245ec8; /* 0x245ec8 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int randRange(unsigned int);
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-extern int btlGetMainState(void);
-/* Supplied declaration required: textFormatBuffer. */
-
-
-unsigned int FUN_00245d0c(unsigned int param_1,int param_2)
-
+/* Rolls an ailment's luck-adjusted base chance plus the combatant's corresponding modifier. */
+u32 FUN_00245d0c(u32 id, s32 ailment)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int in_fpscr;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  
-  temp_v0 = btlGetMainState();
-  btlMainFindEntryByListedId(temp_v0,param_1);
-  temp_v5 = 20.0f;
-  if (param_2 == 3) {
-    temp_v2 = 0x19;
-    temp_v3 = 5.0f;
-  }
-  else if (param_2 == 6) {
-    temp_v2 = 0x17;
-    temp_v3 = 25.0f;
-  }
-  else if (param_2 == 7) {
-    temp_v2 = 0x16;
-    temp_v3 = 30.0f;
-  }
-  else {
-    if (param_2 != 8) {
-      return 1;
+    BattleAilmentChanceView *entry = (BattleAilmentChanceView *)btlMainFindEntryByListedId(btlGetMainState(), id);
+    s32 modifier;
+    f32 base;
+    if (ailment == 3) {
+        modifier = 25;
+        base = 5.0f;
+    } else if (ailment == 6) {
+        modifier = 23;
+        base = 25.0f;
+    } else if (ailment == 7) {
+        modifier = 22;
+        base = 30.0f;
+    } else if (ailment == 8) {
+        modifier = 24;
+        base = 20.0f;
+    } else {
+        return 1;
     }
-    temp_v2 = 0x18;
-    temp_v3 = temp_v5;
-  }
-  temp_v4 = (float)VectorSignedToFloat((int)*(short *)(temp_v0 + 0x1c4),(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v0 = btlGetMainState();
-  btlMainFindEntryByListedId(temp_v0,param_1);
-  if (temp_v0 != 0) {
-    temp_v0 = (int)*(short *)(temp_v0 + temp_v2 * 2 + 0x72);
-  }
-  else {
-    temp_v0 = 0;
-  }
-  temp_v6 = 0;
-  temp_v3 = temp_v3 + temp_v3 * temp_v4 * 0.01f;
-  temp_v7 = 0;
-  temp_v8 = 0;
-  temp_v4 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v9 = 0;
-  temp_v10 = 0;
-  temp_v11 = 0;
-  temp_v12 = 0;
-  temp_v13 = 0;
-  if ((int)temp_v3 >= 0x42a00001) {
-    temp_v3 = 80.0f;
-  }
-  temp_v3 = temp_v3 + temp_v4 * temp_v5;
-  if (param_2 != 3) {
-    if (param_2 != 6) {
-      if (param_2 != 7) {
-        if (param_2 == 8) {
-          textFormatBuffer(&temp_v6,&LAB_00245ec0);
-        }
-      }
-      else {
-        textFormatBuffer(&temp_v6,&LAB_00245eb0);
-      }
+    f32 luck = entry->luck;
+    entry = (BattleAilmentChanceView *)btlMainFindEntryByListedId(btlGetMainState(), id);
+    s32 adjustment = entry != NULL ? entry->modifiers[modifier] : 0;
+    f32 chance = base + base * luck * 0.01f;
+    char text[32] = {0};
+    if (chance > 80.0f) {
+        chance = 80.0f;
     }
-    else {
-      textFormatBuffer(&temp_v6,&LAB_00245eb8);
+    chance += (f32)adjustment * 20.0f;
+    if (ailment == 3) {
+        textFormatBuffer(text, "\x8d\x8f\x88\xf3");
+    } else if (ailment == 6) {
+        textFormatBuffer(text, "\x8d\xac\x97\x90");
+    } else if (ailment == 7) {
+        textFormatBuffer(text, "\x90\x87\x96\xb0");
+    } else if (ailment == 8) {
+        textFormatBuffer(text, "\x8b\xd9\x94\x9b");
     }
-  }
-  else {
-    textFormatBuffer(&temp_v6,&LAB_00245ec8);
-  }
-  temp_v1 = randRange(99);
-  temp_v5 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  if (temp_v5 < temp_v3) {
-    return 1;
-  }
-  return 0;
+    return (f32)randRange(99) < chance;
 }
-
-} /* extern "C" */
+}

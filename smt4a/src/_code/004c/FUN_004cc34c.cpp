@@ -35,7 +35,7 @@ void countersAddSaturating(u32 index, s32 value);
 s32 FUN_0026c3a0();
 s32 FUN_002effbc();
 s32 btlTalkBustUpGetValue();
-void FUN_00336de4(u16 entry, u32 option);
+void btlTalkBustUpSetDemonTexture(u16 entry, u32 option);
 void btlTalkBustUpSetUnk2F4(u32 value);
 void scrScriptProcessStartEntry(WorkflowScriptProcess *process, u32 entry);
 s32 btlTalkBustupMatchesEntry(u16 entry);
@@ -97,7 +97,7 @@ extern "C" s32 FUN_004cc34c(CallbackWorkflow *work)
             if (!FUN_0026c3a0() || !FUN_002effbc())
                 break;
             if (!btlTalkBustUpGetValue()) {
-                FUN_00336de4(record->entryId, 1);
+                btlTalkBustUpSetDemonTexture(record->entryId, 1);
                 btlTalkBustUpSetUnk2F4(1);
             }
             scrScriptProcessStartEntry(work->process, 13);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_002a2c7c(void);
+int gfxQuaternionWorkspaceBuildMatrix(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -42,7 +42,7 @@ extern unsigned int DAT_004ea994; /* 0x4ea994 */
 extern unsigned int DAT_004ea998; /* 0x4ea998 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_002a2c7c. */
+/* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 
 
 void FUN_002a3ab0(float *param_1,float *param_2)
@@ -107,7 +107,7 @@ void FUN_002a3ab0(float *param_1,float *param_2)
   DAT_004ea924 = param_1[0x16];
   DAT_004ea928 = param_1[0x17];
   temp_v17 = CONCAT44(temp_v7,temp_v6);
-  FUN_002a2c7c();
+  gfxQuaternionWorkspaceBuildMatrix();
   temp_v5 = DAT_004ea994;
   temp_v4 = DAT_004ea990;
   temp_v3 = DAT_004ea98c;

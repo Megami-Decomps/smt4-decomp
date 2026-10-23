@@ -1,89 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027cc6c` (_code @ 0x27cc6c, 0x12c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: global/index register allocation and auxiliary-loop zero initialization differ. */
+#include "map/MapStateSlots.h"
 
-extern "C" {
+extern "C" MapStateSlots *g_mapStateSlots;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern unsigned int *g_mapStateSlots; /* 0x44cd88 */
-
-
-void FUN_0027cc6c(void)
-
+static __inline void resetSlot(MapStateSlot *slot, bool clearTimer)
 {
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  puVar1 = g_mapStateSlots;
-  *g_mapStateSlots = 0;
-  *(unsigned short *)(puVar1 + 1) = 0;
-  *(unsigned short *)((int)puVar1 + 6) = 0;
-  *(unsigned short *)(puVar1 + 2) = 0;
-  *(unsigned short *)((int)puVar1 + 10) = 0;
-  puVar1[4] = 0;
-  temp_v2 = 0;
-  do {
-    puVar1 = g_mapStateSlots;
-    temp_v0 = temp_v2 + 1;
-    *(unsigned char *)(g_mapStateSlots + temp_v2 * 0x13 + 0x16) = 0;
-    puVar1[temp_v2 * 0x13 + 0x17] = 0;
-    puVar1[temp_v2 * 0x13 + 0x18] = 0;
-    puVar1[temp_v2 * 0x13 + 0x19] = 0;
-    puVar1[temp_v2 * 0x13 + 0x1a] = 0;
-    puVar1[temp_v2 * 0x13 + 0x1b] = 0;
-    puVar1[temp_v2 * 0x13 + 0x1c] = 0;
-    puVar1[temp_v2 * 0x13 + 0x1d] = 0;
-    *(unsigned char *)(puVar1 + temp_v2 * 0x13 + 0x1e) = 0;
-    *(unsigned short *)((int)puVar1 + temp_v2 * 0x4c + 0x7a) = 0;
-    *(unsigned short *)(puVar1 + temp_v2 * 0x13 + 0x1f) = 0;
-    puVar1[temp_v2 * 0x13 + 0x20] = 0;
-    *(unsigned char *)(puVar1 + temp_v2 * 0x13 + 0x21) = 0;
-    puVar1[temp_v2 * 0x13 + 0x22] = 0;
-    *(unsigned char *)(puVar1 + temp_v2 * 0x13 + 0x23) = 0;
-    puVar1[temp_v2 * 0x13 + 0x24] = 0;
-    *(unsigned char *)(puVar1 + temp_v2 * 0x13 + 0x25) = 0;
-    puVar1[temp_v2 * 0x13 + 0x26] = 0xffffffff;
-    puVar1 = g_mapStateSlots;
-    temp_v2 = temp_v0;
-  } while (temp_v0 < 0x20);
-  temp_v0 = 8;
-  temp_v2 = 0;
-  do {
-    temp_v0 = temp_v0 - 1;
-    puVar1[temp_v2 * 2 + 6] = 0;
-    puVar1[temp_v2 * 2 + 7] = 0;
-    temp_v2 = temp_v2 + 1;
-    temp_v1 = 0;
-  } while (temp_v0 != 0);
-  do {
-    puVar1 = g_mapStateSlots;
-    temp_v2 = temp_v1 + 1;
-    *(unsigned char *)(g_mapStateSlots + temp_v1 * 0x13 + 0x276) = 0;
-    puVar1[temp_v1 * 0x13 + 0x277] = 0;
-    puVar1[temp_v1 * 0x13 + 0x278] = 0;
-    puVar1[temp_v1 * 0x13 + 0x279] = 0;
-    puVar1[temp_v1 * 0x13 + 0x27a] = 0;
-    puVar1[temp_v1 * 0x13 + 0x27b] = 0;
-    puVar1[temp_v1 * 0x13 + 0x27c] = 0;
-    puVar1[temp_v1 * 0x13 + 0x27d] = 0;
-    *(unsigned char *)(puVar1 + temp_v1 * 0x13 + 0x27e) = 0;
-    *(unsigned short *)(puVar1 + temp_v1 * 0x13 + 0x27f) = 0;
-    puVar1[temp_v1 * 0x13 + 0x280] = 0;
-    *(unsigned char *)(puVar1 + temp_v1 * 0x13 + 0x281) = 0;
-    puVar1[temp_v1 * 0x13 + 0x282] = 0;
-    *(unsigned char *)(puVar1 + temp_v1 * 0x13 + 0x283) = 0;
-    puVar1[temp_v1 * 0x13 + 0x284] = 0;
-    *(unsigned char *)(puVar1 + temp_v1 * 0x13 + 0x285) = 0;
-    puVar1[temp_v1 * 0x13 + 0x286] = 0xffffffff;
-    temp_v1 = temp_v2;
-  } while (temp_v2 < 3);
-  return;
+    slot->active = 0;
+    slot->state = 0;
+    slot->motion.flags = 0;
+    slot->motion.position[0] = 0.0f;
+    slot->motion.position[1] = 0.0f;
+    slot->motion.position[2] = 0.0f;
+    slot->motion.heading = 0.0f;
+    slot->motion.elapsed = 0;
+    slot->motion.mode = 0;
+    if (clearTimer)
+        slot->motion.timer = 0;
+    slot->motion.modelIndex = 0;
+    slot->motion.speed = 0;
+    slot->motion.ready = 0;
+    slot->motion.model = NULL;
+    slot->motion.pending = 0;
+    slot->motion.sourceIndex = 0;
+    slot->motion.resourcePending = 0;
+    slot->motion.resourceId = -1;
 }
 
-} /* extern "C" */
+// Clear the map's regular slots, model references, and three auxiliary slots.
+extern "C" void FUN_0027cc6c(void)
+{
+    struct ExtendedSlotsView { MapStateSlots base; MapStateSlot auxiliary[3]; };
+    g_mapStateSlots->state = 0;
+    g_mapStateSlots->unk04 = 0;
+    g_mapStateSlots->unk06 = 0;
+    g_mapStateSlots->unk08 = 0;
+    g_mapStateSlots->unk0A = 0;
+    g_mapStateSlots->allocation.count = 0;
+    for (s32 index = 0; index < 32; ++index)
+        resetSlot(&g_mapStateSlots->slots[index], true);
+    MapStateSlots *slots = g_mapStateSlots;
+    for (s32 index = 0; index < 8; ++index) {
+        slots->references.models[index].unk00 = 0;
+        slots->references.models[index].model = NULL;
+    }
+    // The auxiliary slots lie beyond the shared MapStateSlots extent.
+    for (s32 index = 0; index < 3; ++index)
+        resetSlot(&reinterpret_cast<ExtendedSlotsView *>(g_mapStateSlots)->auxiliary[index], false);
+}

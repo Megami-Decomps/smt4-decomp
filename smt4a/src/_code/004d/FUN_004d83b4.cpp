@@ -1,63 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d83b4` (_code @ 0x4d83b4, 0x128 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: loader/source saved registers are swapped and state-store/null-check scheduling differs. */
+#include "battle/BattleEventAssets.h"
 
 extern "C" {
+extern void *g_aocSystem;
+extern const char DAT_005285a0[];
+extern const char DAT_00528588[];
+void sysMemClear(void *buffer, u32 size);
+s32 textFormatBuffer(char *buffer, const char *format, ...);
+s32 FUN_0046c4b4(void *system, u32 archiveId);
+void aocQueueType20(void *system, u32 archiveId, void **output, const char *path);
+void aocQueueType1f(void *system, u32 archiveId, void **output, const char *path);
+void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
+void FUN_004d7e20(BattleEventAssetLoadState *, const BattleEventAssetSourceA *);
 
-int textFormatBuffer(...);
-int asdLoadFileAsyncSimple(unsigned char [128], unsigned int *, int);
-int sysMemClear(unsigned char [128], int);
-int aocQueueType20(unsigned int, unsigned int, unsigned int *, unsigned char [128]);
-int aocQueueType1f(unsigned int, unsigned int, unsigned int *, unsigned char [128]);
-int FUN_004d7e20(unsigned int *, int);
-
-extern unsigned int g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: aocQueueType20. */
-/* Supplied declaration required: aocQueueType1f. */
-extern int FUN_0046c4b4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_004d7e20. */
-
-
-void FUN_004d83b4(unsigned int *param_1,int param_2)
-
+// Load event images and font from add-on storage when available, then initialize the event.
+void FUN_004d83b4(BattleEventAssetLoadState *loader, const BattleEventAssetSourceA *source)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [128];
-  unsigned char temp_v2 [128];
-  
-  sysMemClear(temp_v1,0x80);
-  textFormatBuffer(temp_v1,"battle/event/%s/%s.mbm",param_2 + 0x130);
-  temp_v0 = FUN_0046c4b4(g_aocSystem,*(unsigned int *)(param_2 + 0xf0));
-  if (temp_v0 != 0) {
-    aocQueueType20(g_aocSystem,*(unsigned int *)(param_2 + 0xf0),param_1 + 3,temp_v1);
-  }
-  else {
-    asdLoadFileAsyncSimple(temp_v1,param_1 + 3,0);
-  }
-  *param_1 = 4;
-  if (param_1[3] != 0) {
-    *param_1 = 5;
-    sysMemClear(temp_v2,0x80);
-    textFormatBuffer(temp_v2,"battle/event/%s/%s.bf",param_2 + 0x130);
-    temp_v0 = FUN_0046c4b4(g_aocSystem,*(unsigned int *)(param_2 + 0xf0));
-    if (temp_v0 != 0) {
-      aocQueueType1f(g_aocSystem,*(unsigned int *)(param_2 + 0xf0),param_1 + 4,temp_v2);
+    char imagePath[128];
+    char fontPath[128];
+    sysMemClear(imagePath, sizeof(imagePath));
+    textFormatBuffer(imagePath, DAT_005285a0, source->name, source->name);
+    if (FUN_0046c4b4(g_aocSystem, source->archiveId))
+        aocQueueType20(g_aocSystem, source->archiveId, &loader->images, imagePath);
+    else
+        asdLoadFileAsyncSimple(imagePath, &loader->images, 0);
+    loader->state = 4;
+    if (loader->images) {
+        loader->state = 5;
+        sysMemClear(fontPath, sizeof(fontPath));
+        textFormatBuffer(fontPath, DAT_00528588, source->name, source->name);
+        if (FUN_0046c4b4(g_aocSystem, source->archiveId))
+            aocQueueType1f(g_aocSystem, source->archiveId, &loader->font, fontPath);
+        else
+            asdLoadFileAsyncSimple(fontPath, &loader->font, 0);
+        loader->state = 6;
+        if (loader->font) {
+            loader->state = 7;
+            FUN_004d7e20(loader, source);
+        }
     }
-    else {
-      asdLoadFileAsyncSimple(temp_v2,param_1 + 4,0);
-    }
-    *param_1 = 6;
-    if (param_1[4] != 0) {
-      *param_1 = 7;
-      FUN_004d7e20(param_1,param_2);
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

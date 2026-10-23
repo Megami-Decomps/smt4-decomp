@@ -1,92 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bf5a8` (_code @ 0x3bf5a8, 0x15c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler interleaves each special gate with its unlock check; retail outlines the checks. */
+#include "shard/W5_W5Match7_SceneState.h"
 extern "C" {
+s32 gameFlagIsSet(u32 flag);
+s32 FUN_004083a8(u32 id, u32 kind);
 
-extern unsigned int uRam00580cd4; /* 0x580cd4 */
-extern unsigned int uRam00580d94; /* 0x580d94 */
-extern unsigned int uRam00580e54; /* 0x580e54 */
-extern unsigned int uRam00580f74; /* 0x580f74 */
-extern unsigned int uRam00581034; /* 0x581034 */
-
-extern int gameFlagIsSet(unsigned int);
-extern int FUN_004083a8(unsigned int, unsigned int);
-
-
-unsigned int FUN_003bf5a8(int param_1)
-
+// Gate map entries by their unlock flags and the special encounter requirements.
+u32 FUN_003bf5a8(s32 index)
 {
-  int temp_v0;
-  
-  if (param_1 * 0x30 == -0x580ca8) {
-    return 0;
-  }
-  if (param_1 != 0) {
-    if (param_1 != 4) {
-      if (param_1 != 8) {
-        if (param_1 != 0xe) {
-          if (param_1 != 0x12) {
-            temp_v0 = gameFlagIsSet(*(unsigned int *)(param_1 * 0x30 + 0x580cd4));
-            if (temp_v0 == 0) {
-              return 0;
-            }
-          }
-          else {
-            temp_v0 = FUN_004083a8(0xed,4);
-            if (temp_v0 != 0) {
-              return 0;
-            }
-            temp_v0 = gameFlagIsSet(uRam00581034);
-            if (temp_v0 == 0) {
-              return 0;
-            }
-          }
-        }
-        else {
-          temp_v0 = FUN_004083a8(0xda,5);
-          if (temp_v0 != 0) {
-            return 0;
-          }
-          temp_v0 = gameFlagIsSet(uRam00580f74);
-          if (temp_v0 == 0) {
-            return 0;
-          }
-        }
-      }
-      else {
-        temp_v0 = FUN_004083a8(0xcd,3);
-        if (temp_v0 != 0) {
-          return 0;
-        }
-        temp_v0 = gameFlagIsSet(uRam00580e54);
-        if (temp_v0 == 0) {
-          return 0;
-        }
-      }
-    }
-    else {
-      temp_v0 = FUN_004083a8(0xbf,7);
-      if (temp_v0 != 0) {
+    MapEntry *entry = &g_mapEntries[index];
+    if (entry == NULL)
         return 0;
-      }
-      temp_v0 = gameFlagIsSet(uRam00580d94);
-      if (temp_v0 == 0) {
-        return 0;
-      }
+    if (index != 0) {
+        if (index != 4) {
+            if (index != 8) {
+                if (index != 14) {
+                    if (index != 18) {
+                        if (!gameFlagIsSet(entry->status))
+                            return 0;
+                    } else {
+                        if (FUN_004083a8(237, 4))
+                            return 0;
+                        if (!gameFlagIsSet(entry->status))
+                            return 0;
+                    }
+                } else {
+                    if (FUN_004083a8(218, 5))
+                        return 0;
+                    if (!gameFlagIsSet(entry->status))
+                        return 0;
+                }
+            } else {
+                if (FUN_004083a8(205, 3))
+                    return 0;
+                if (!gameFlagIsSet(entry->status))
+                    return 0;
+            }
+        } else {
+            if (FUN_004083a8(191, 7))
+                return 0;
+            if (!gameFlagIsSet(entry->status))
+                return 0;
+        }
+    } else {
+        if (FUN_004083a8(78, 8))
+            return 0;
+        if (!gameFlagIsSet(entry->status))
+            return 0;
     }
-  }
-  else {
-    temp_v0 = FUN_004083a8(0x4e,8);
-    if (temp_v0 != 0) {
-      return 0;
-    }
-    temp_v0 = gameFlagIsSet(uRam00580cd4);
-    if (temp_v0 == 0) {
-      return 0;
-    }
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

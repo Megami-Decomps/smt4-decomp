@@ -21,6 +21,10 @@ typedef struct SaveWork {
             /* 0x003c */ MapCellGrid grid;
             /* 0x0744 */ u8 unk0744[0x494];
         } mapCells;
+        struct {
+            /* 0x0022 */ u8 unk0022BeforeMapRegistration[0x76E];
+            /* 0x0790 */ u8 pending;
+        } mapRegistration;
     };
     /* 0x0BD8 */ u8 unkBD8[1];
 } SaveWork;
@@ -28,6 +32,9 @@ typedef struct SaveWork {
 typedef char SaveWorkLayoutCheck[sizeof(SaveWork) == 0xbdc &&
     offsetof(SaveWork, mapCells.grid) == 0x3c &&
     offsetof(SaveWork, unkBD8) == 0xbd8 ? 1 : -1];
+typedef char SaveWorkMapRegistrationOffsetCheck[
+    offsetof(SaveWork, mapRegistration.pending) == 0x790 &&
+    sizeof(SaveWork) == 0xBDC ? 1 : -1];
 
 struct MapTriggerFlagView {
     /* 0x000 */ u8 unk000[0x7D4];

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_003fcfe8(void);
+int gfxResourceTableReleaseTexturesAndBuffers(void);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_003fcfe8. */
+/* Supplied declaration required: gfxResourceTableReleaseTexturesAndBuffers. */
 
 
 void FUN_0040a244(int param_1)
@@ -28,7 +28,7 @@ void FUN_0040a244(int param_1)
         return;
       }
     }
-    FUN_003fcfe8();
+    gfxResourceTableReleaseTexturesAndBuffers();
     if (*(int **)(temp_v0 + 0x5cc50c) != (int *)0x0) {
       (**(romwright_code **)(**(int **)(temp_v0 + 0x5cc50c) + 4))();
     }

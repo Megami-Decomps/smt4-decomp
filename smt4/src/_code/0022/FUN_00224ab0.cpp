@@ -1,79 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00224ab0` (_code @ 0x224ab0, 0x11c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Boolean status extraction, reference-vector loads and VFP distance-expression scheduling differ. */
+#include "battle/btlMain.h"
+#include "battle/btlAction.h"
+#include "shard/W5_W5Match4_BattleVectorTransition.h"
+#include <math.h>
 
+namespace {
+struct BattleDistanceReference {
+    u32 unk00;
+    BattleVector3 position;
+};
+}
 extern "C" {
+BtlMainState *btlGetMainState();
+void FUN_0027dab0(BtlMainState *, BtlActionRecord *);
+void FUN_0027da30(BtlMainState *, s32 index);
+BattleDistanceReference *FUN_002c501c();
+BattleVector3 FUN_0024d434(BtlMainState *, s32 index, s32 mode);
 
-int FUN_0024d434(unsigned int, int, int);
-int FUN_0027da30(unsigned int, int);
-int FUN_0027dab0(unsigned int, int);
-int btlGetMainState(void);
-
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+// Normalize the actor's distance from the reference point into an effect scale.
+bool FUN_00224ab0(f32 *scale, s32 index, s32 mode)
 {
-    return (float)sqrt((double)value);
-}
-#endif
-/* Supplied declaration required: FUN_0024d434. */
-/* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: FUN_0027dab0. */
-/* Supplied declaration required: btlGetMainState. */
-extern int FUN_002c501c(void);
-
-
-unsigned char FUN_00224ab0(float *param_1,int param_2,int param_3)
-
-{
-/* irregular: irregular input(s): in_s0, in_s1, in_s2; 4 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  unsigned char temp_v5;
-  unsigned char temp_v6;
-  float in_s0;
-  float in_s1;
-  float in_s2;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  
-  if ((param_2 != 0) && ((param_3 < 0 || (param_3 == 1 || param_3 == 4)))) {
-    temp_v1 = btlGetMainState();
-    temp_v1 = *(int *)(temp_v1 + 0x1e98) + param_2 * 0x114;
-    if (temp_v1 != 0) {
-      temp_v2 = btlGetMainState();
-      FUN_0027dab0(temp_v2,temp_v1);
-      temp_v2 = btlGetMainState();
-      FUN_0027da30(temp_v2,param_2);
-      temp_v3 = *(unsigned int *)(temp_v1 + 0x50);
-      temp_v4 = (temp_v3 & 0x10) != 0;
-      temp_v5 = (temp_v3 & 0x8000) != 0;
-      temp_v0 = temp_v5 || temp_v4;
-      temp_v6 = (temp_v3 & 0x10) == 0;
-      if (temp_v6) {
-        temp_v3 = (unsigned int)*(unsigned char *)(temp_v1 + 0x3c);
-      }
-      if ((temp_v6 && temp_v3 == 1) || (temp_v5 || temp_v4)) {
-        temp_v1 = FUN_002c501c();
-        temp_v9 = *(float *)(temp_v1 + 4);
-        temp_v8 = *(float *)(temp_v1 + 8);
-        temp_v7 = *(float *)(temp_v1 + 0xc);
-        temp_v2 = btlGetMainState();
-        FUN_0024d434(temp_v2,param_2,0);
-        temp_v0 = 1;
-        *param_1 = (romwright_sqrt_4((temp_v9 - in_s0) * (temp_v9 - in_s0) + (temp_v8 - in_s1) * (temp_v8 - in_s1) +
-                         (temp_v7 - in_s2) * (temp_v7 - in_s2)) /
-                   romwright_sqrt_4(temp_v9 * temp_v9 + temp_v8 * temp_v8 + temp_v7 * temp_v7)) * 5.6f;
-      }
-      return temp_v0;
+    if (!index || !(mode < 0 || mode == 1 || mode == 4))
+        return false;
+    BtlActionRecord *action = &btlGetMainState()->actions[index];
+    if (!action)
+        return false;
+    FUN_0027dab0(btlGetMainState(), action);
+    FUN_0027da30(btlGetMainState(), index);
+    bool enabled = (action->status & 0x10) != 0;
+    if (action->status & 0x8000)
+        enabled = true;
+    if ((!(action->status & 0x10) && action->animation.kind == 1) || enabled) {
+        BattleVector3 reference = FUN_002c501c()->position;
+        BattleVector3 position = FUN_0024d434(btlGetMainState(), index, 0);
+        *scale = sqrtf((reference.x - position.x) * (reference.x - position.x) +
+                       (reference.y - position.y) * (reference.y - position.y) +
+                       (reference.z - position.z) * (reference.z - position.z)) /
+                 sqrtf(reference.x * reference.x + reference.y * reference.y +
+                       reference.z * reference.z) * 5.6f;
+        enabled = true;
     }
-  }
-  return 0;
+    return enabled;
 }
-
-} /* extern "C" */
+}

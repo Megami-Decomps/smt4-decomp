@@ -1,110 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023f788` (_code @ 0x23f788, 0x178 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: snapshot default-clear stores are absent; saved registers and optional-subject branch layout differ. */
+#include "battle/BattleCommandTargets.h"
+#include "shard/Shard0032.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
+UnitRecord *gameGetPlayerData();
+UnitRecord *gameGetSlotRecord(s32 slot);
+UnitRecord *btlMainGetUnk14();
+Table04Record *dataTable04FindById(u32 skill);
+s32 idIsAbove400(u32 skill);
+u32 FUN_0033896c();
 
-int dataTable04FindById(void);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern int gameGetPlayerData(void);
-extern int idIsAbove400(unsigned int);
-extern int gameGetSlotRecord(void);
-/* Supplied declaration required: dataTable04FindById. */
-extern int btlMainGetUnk14(void);
-extern int FUN_0033896c(void);
-
-
-void FUN_0023f788(int param_1)
-
+// Collect valid regular skills for four command subjects and determine the available special skill.
+void FUN_0023f788(BattleCommandTargets *command)
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  unsigned short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  
-  temp_v6 = 0;
-  *(unsigned int *)(param_1 + 0x3c44) = 0;
-  *(unsigned int *)(param_1 + 0x3c48) = 0;
-  *(unsigned int *)(param_1 + 0x3c4c) = 0;
-  *(unsigned int *)(param_1 + 0x3c50) = 0;
-  *(unsigned int *)(param_1 + 0x3c54) = 0;
-  *(unsigned int *)(param_1 + 0x3c58) = 0;
-  *(unsigned int *)(param_1 + 0x3c5c) = 0;
-  *(unsigned int *)(param_1 + 0x3c60) = 0;
-  *(unsigned int *)(param_1 + 0x3c64) = 0;
-  *(unsigned int *)(param_1 + 0x3c68) = 0;
-  *(unsigned int *)(param_1 + 0x3c6c) = 0;
-  *(unsigned int *)(param_1 + 0x3c70) = 0;
-  *(unsigned int *)(param_1 + 0x3c74) = 0;
-  *(unsigned int *)(param_1 + 0x3c78) = 0;
-  *(unsigned int *)(param_1 + 0x3c7c) = 0;
-  *(unsigned int *)(param_1 + 0x3c80) = 0;
-  do {
-    temp_v7 = 0;
-    temp_v8 = 0;
-    temp_v9 = 0;
-    temp_v10 = 0;
-    temp_v1 = *(short *)(param_1 + temp_v6 * 2 + 0x4210);
-    if (temp_v1 != -4) {
-      if (temp_v1 != -1) {
-        if (temp_v1 != -2) {
-          temp_v2 = gameGetSlotRecord();
+    struct SkillList { u16 ids[8]; };
+    struct SkillLists { SkillList entries[4]; };
+    // These fields lie beyond the shared command prefix, so keep a function-local view.
+    struct SkillSelectionView {
+        u8 prefix[0x3C44];
+        SkillLists skills;
+        u8 padding3C84[0x194];
+        u32 specialSkill;
+        u8 padding3E1C[0x3F4];
+        s16 subjects[4];
+    };
+    typedef char SkillSelectionOffsetsCheck[offsetof(SkillSelectionView, skills) == 0x3C44 &&
+        offsetof(SkillSelectionView, specialSkill) == 0x3E18 &&
+        offsetof(SkillSelectionView, subjects) == 0x4210 ? 1 : -1];
+    SkillSelectionView *selection = reinterpret_cast<SkillSelectionView *>(command);
+    selection->skills = SkillLists();
+    for (s32 subject = 0; subject < 4; ++subject) {
+        s16 id = selection->subjects[subject];
+        if (id == -4)
+            continue;
+        UnitRecord *unit;
+        if (id == -1) {
+            unit = gameGetPlayerData();
+        } else {
+            unit = id == -2 ? btlMainGetUnk14() : gameGetSlotRecord(id);
+            if (unit == NULL)
+                continue;
         }
-        else {
-          temp_v2 = btlMainGetUnk14();
+        SkillList skills = *reinterpret_cast<const SkillList *>(unit->skillList.skills);
+        s32 written = 0;
+        for (s32 index = 0; index < 8; ++index) {
+            u16 skill = skills.ids[index];
+            if (dataTable04FindById(skill) != NULL && !idIsAbove400(skill))
+                selection->skills.entries[subject].ids[written++] = skill;
         }
-        if (temp_v2 == 0) goto LAB_0023f8c4;
-      }
-      else {
-        temp_v2 = gameGetPlayerData();
-      }
-      temp_v5 = 0;
-      temp_v10 = *(unsigned int *)(temp_v2 + 0x40);
-      temp_v4 = 0;
-      temp_v7 = *(unsigned int *)(temp_v2 + 0x34);
-      temp_v8 = *(unsigned int *)(temp_v2 + 0x38);
-      temp_v9 = *(unsigned int *)(temp_v2 + 0x3c);
-      do {
-        temp_v0 = *(unsigned short *)((int)&temp_v7 + temp_v4 * 2);
-        temp_v3 = (unsigned int)temp_v0;
-        dataTable04FindById();
-        if ((temp_v3 != 0) && (temp_v2 = idIsAbove400((unsigned int)temp_v0), temp_v2 == 0)) {
-          temp_v2 = temp_v5 * 2;
-          temp_v5 = temp_v5 + 1;
-          *(unsigned short *)(param_1 + temp_v6 * 0x10 + temp_v2 + 0x3c44) = temp_v0;
-        }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 8);
     }
-LAB_0023f8c4:
-    temp_v6 = temp_v6 + 1;
-    if (temp_v6 >= 4) {
-      temp_v2 = FUN_0033896c();
-      temp_v6 = temp_v2;
-      dataTable04FindById();
-      if (*(char *)(temp_v6 + 0x36) == '\0') {
-        temp_v2 = 0;
-      }
-      *(int *)(param_1 + 0x3e18) = temp_v2;
-      return;
-    }
-  } while( 1 );
+    u32 special = FUN_0033896c();
+    if (!dataTable04FindById(special)->specialAvailability.enabled)
+        special = 0;
+    selection->specialSkill = special;
 }
-
-} /* extern "C" */
+}

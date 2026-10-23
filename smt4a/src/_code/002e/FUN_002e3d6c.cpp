@@ -1,171 +1,100 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e3d6c` (_code @ 0x2e3d6c, 0x184 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: flag-table PC-relative addressing, parser register pressure and field-parser block layout differ. */
+#include "common.h"
 
+struct FormatConversionContext {
+    u32 flags;
+    void (*emit)(u32, void *);
+    void *sink;
+    u32 (*read)(FormatConversionContext *);
+    u32 unk10[2];
+    union {
+        struct { s32 width; s32 precision; } dimensions;
+        s32 numericFields[2];
+    };
+    u32 written;
+};
 extern "C" {
+s32 isAsciiDigit(u32);
+s32 FUN_00135b64(FormatConversionContext *, u32, u32 *);
 
-int isAsciiDigit(...);
-
-typedef int romwright_code(...);
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-extern int FUN_00135b64(unsigned int *, unsigned int);
-/* Supplied declaration required: isAsciiDigit. */
-
-
-unsigned long long FUN_002e3d6c(unsigned int *param_1,unsigned int *param_2)
-
+u32 FUN_002e3d6c(FormatConversionContext *context, u32 *arguments)
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  romwright_code *pcVar5;
-  int temp_v4;
-  unsigned int *temp_v5;
-  unsigned int *temp_v6;
-  
-  temp_v0 = 0;
-  temp_v6 = param_2;
-  do {
-    param_1[8] = temp_v0;
-LAB_002e3d76:
-    temp_v0 = (*(romwright_code *)param_1[3])(param_1);
-    if (temp_v0 == 0) {
-      return romwright_piece_4_4(temp_v5,param_1[8]);
-    }
-    if (temp_v0 != 0x25) {
-      pcVar5 = (romwright_code *)param_1[1];
-      temp_v3 = param_1[2];
-    }
-    else {
-      temp_v3 = 0;
-      while (((temp_v0 = (*(romwright_code *)param_1[3])(param_1), (int)temp_v0 >= 0x20 && (temp_v0 < 0x31)) &&
-             (*(unsigned char *)(temp_v0 + 0x54ef7c) != 0))) {
-        temp_v3 = temp_v3 | *(unsigned char *)(temp_v0 + 0x54ef7c);
-      }
-      if ((int)(temp_v3 << 0x1e) < 0) {
-        temp_v3 = temp_v3 & 0xfffffffb;
-      }
-      param_1[7] = 0;
-      temp_v4 = 0;
-      param_1[6] = 0;
-      do {
-        if (temp_v0 != 0x2a) {
-          temp_v1 = isAsciiDigit(temp_v0);
-          if (temp_v1 != 0) {
-            temp_v5 = param_1 + temp_v4;
-            temp_v5[6] = temp_v0 - 0x30;
-            while( 1 ) {
-              temp_v0 = (*(romwright_code *)param_1[3])(param_1);
-              temp_v1 = isAsciiDigit();
-              if (temp_v1 == 0) break;
-              temp_v5[6] = (temp_v5[6] * 10 + temp_v0) - 0x30;
+    // Retail's ASCII flag-classification table has no standalone data symbol.
+    const u8 *flagTable = reinterpret_cast<const u8 *>(0x54EF7C);
+    context->written = 0;
+    for (;;) {
+        u32 character = context->read(context);
+        if (!character)
+            return context->written;
+        if (character == '%') {
+            u32 flags = 0;
+            character = context->read(context);
+            while (character >= 32 && character <= 48 && flagTable[character]) {
+                flags |= flagTable[character];
+                character = context->read(context);
             }
-          }
-          if (temp_v4 == 1) break;
-        }
-        else {
-          temp_v0 = *temp_v6;
-          temp_v6 = temp_v6 + 1;
-          param_1[temp_v4 + 6] = temp_v0;
-          temp_v0 = (*(romwright_code *)param_1[3])(param_1);
-          if (temp_v4 == 1) {
-            if ((int)param_1[7] < 0) {
-              temp_v3 = temp_v3 & 0xffffffdf;
+            if (flags & 2)
+                flags &= ~4;
+            context->dimensions.precision = 0;
+            context->dimensions.width = 0;
+            for (s32 field = 0; field < 2; ++field) {
+                s32 *value = &context->numericFields[field];
+                if (character == '*') {
+                    *value = *arguments++;
+                    character = context->read(context);
+                    if (field == 1 && context->dimensions.precision < 0)
+                        flags &= ~0x20;
+                } else if (isAsciiDigit(character)) {
+                    *value = character - '0';
+                    character = context->read(context);
+                    while (isAsciiDigit(character)) {
+                        *value = *value * 10 + character - '0';
+                        character = context->read(context);
+                    }
+                }
+                if (field == 1 || character != '.')
+                    break;
+                character = context->read(context);
+                flags |= 0x20;
             }
-            break;
-          }
-        }
-        if (temp_v0 != 0x2e) break;
-        temp_v0 = (*(romwright_code *)param_1[3])(param_1);
-        temp_v3 = temp_v3 | 0x20;
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 2);
-      if ((int)param_1[6] < 0) {
-        param_1[6] = -param_1[6];
-        temp_v3 = temp_v3 | 1;
-      }
-      if ((temp_v3 & 1) != 0) {
-        temp_v3 = temp_v3 & 0xffffffef;
-      }
-      if ((temp_v0 != 0x6c) && (temp_v0 != 0x68)) {
-        if (temp_v0 != 0x4c) {
-          if (temp_v0 != 0x6a) {
-            if ((temp_v0 == 0x74) || (temp_v0 == 0x7a)) {
-              temp_v0 = 0;
-              temp_v3 = temp_v3 | temp_v0;
-              temp_v0 = (*(romwright_code *)param_1[3])(param_1);
+            if (context->dimensions.width < 0) {
+                context->dimensions.width = -context->dimensions.width;
+                flags |= 1;
             }
-          }
-          else {
-            temp_v0 = 0x80;
-            temp_v3 = temp_v3 | temp_v0;
-            temp_v0 = (*(romwright_code *)param_1[3])(param_1);
-          }
+            if (flags & 1)
+                flags &= ~0x10;
+            if (character == 'l' || character == 'h') {
+                u32 next = context->read(context);
+                if (next == character) {
+                    flags |= character == 'l' ? 0x80 : 0x400;
+                    character = context->read(context);
+                } else {
+                    flags |= character == 'l' ? 0x40 : 0x100;
+                    character = next;
+                }
+            } else if (character == 'L' || character == 'j' || character == 't' || character == 'z') {
+                if (character == 'j')
+                    flags |= 0x80;
+                character = context->read(context);
+            }
+            if (!character)
+                return context->written;
+            if (character >= 'A' && character <= 'Z') {
+                flags |= 0x800;
+                character += 'a' - 'A';
+            }
+            context->flags = flags;
+            s32 consumed = FUN_00135b64(context, character, arguments);
+            if (consumed) {
+                if (consumed == 1)
+                    ++arguments;
+                else
+                    arguments = reinterpret_cast<u32 *>(((reinterpret_cast<u32>(arguments) + 7) & ~7U) + 8);
+                continue;
+            }
         }
-        else {
-          temp_v0 = 0;
-          temp_v3 = temp_v3 | temp_v0;
-          temp_v0 = (*(romwright_code *)param_1[3])(param_1);
-        }
-      }
-      else {
-        temp_v2 = (*(romwright_code *)param_1[3])(param_1);
-        if (temp_v2 == temp_v0) {
-          if (temp_v0 == 0x6c) {
-            temp_v0 = 0x80;
-          }
-          else {
-            temp_v0 = 0x400;
-          }
-          temp_v3 = temp_v3 | temp_v0;
-          temp_v0 = (*(romwright_code *)param_1[3])(param_1);
-        }
-        else {
-          if (temp_v0 == 0x6c) {
-            temp_v0 = 0x40;
-          }
-          else {
-            temp_v0 = 0x100;
-          }
-          temp_v3 = temp_v3 | temp_v0;
-          temp_v0 = temp_v2;
-        }
-      }
-      if (temp_v0 == 0) {
-        return romwright_piece_4_4(temp_v5,param_1[8]);
-      }
-      if (temp_v0 - 0x41 < 0x1a) {
-        temp_v3 = temp_v3 | 0x800;
-        temp_v0 = temp_v0 + 0x20;
-      }
-      *param_1 = temp_v3;
-      temp_v4 = FUN_00135b64(param_1,temp_v0);
-      if (temp_v4 != 0) {
-        if (temp_v4 != 1) {
-          temp_v6 = (unsigned int *)((((int)temp_v6 + 7U) & 0xfffffff8) + 8);
-        }
-        else {
-          temp_v6 = temp_v6 + 1;
-        }
-        goto LAB_002e3d76;
-      }
-      pcVar5 = (romwright_code *)param_1[1];
-      temp_v3 = param_1[2];
+        context->emit(character, context->sink);
+        ++context->written;
     }
-    (*pcVar5)(temp_v0,temp_v3);
-    temp_v0 = param_1[8] + 1;
-  } while( 1 );
 }
-
-} /* extern "C" */
+}

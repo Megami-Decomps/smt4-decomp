@@ -10,7 +10,7 @@ struct EffectEditorLoadRequest {
 extern "C" {
 extern const u8 DAT_00400002;
 void FUN_002430c8(u32 source, u32 index, EffectEditorLoadRequest *request);
-void FUN_002427f8(void *list, EffectSelectionItem *item);
+void effResourcePromoteReferences(void *list, EffectSelectionItem *item);
 void taskRunWithObject(EffectSelectionBlock *block, const void *payload, u32 type);
 void effBlockSetBlobB(EffectSelectionBlock *block, const void *blob, u32 size, u32 mode);
 
@@ -22,7 +22,7 @@ u32 FUN_00242234(u32 source, u32 index)
     if (request.state == 2)
         return 0x400000;
     if (request.state == 1) {
-        FUN_002427f8(g_effectEditor.selection.list, g_effectEditor.selection.item);
+        effResourcePromoteReferences(g_effectEditor.selection.list, g_effectEditor.selection.item);
         if (request.kind == 8) {
             effBlockSetBlobB(g_effectEditor.selection.block, &request.blob, 4, 4);
         } else {

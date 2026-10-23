@@ -1,82 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e03b0` (_code @ 0x3e03b0, 0x130 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: battle/record saved registers exchange, destination pointer is formed earlier, and immediate-file dispatch lacks retail's null-result helper shape. */
+#include "battle/BattleArrangementLoad.h"
+#include "battle/btlMain.h"
+#include "battle/btlEncount.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "gamedata/Table00.h"
+#include "addon/aocMain.h"
 
 extern "C" {
+extern BtlEncounterGlobalsA g_btlEncount;
+extern AocSystemA *g_aocSystem;
+s32 FUN_003eebf4(BtlMainStateA *battle, s32 kind);
+Table00Record *dataTable00FindById(u32 id);
+void sysMemClear(void *destination, u32 size);
+s32 textFormatBuffer(char *destination, const char *format, ...);
+s32 aocReadyAndAccepts(AocSystemA *system, u16 id);
+void aocQueueType38(AocSystemA *system, u16 id, void **destination, const char *path);
+void asdLoadFileAsyncSimple(const char *path, void **destination, u32 flags);
+void FUN_003e12a8(BattleArrangementLoadState *load, BtlMainStateA *battle);
+void FUN_003e3188(BattleArrangementLoadState *load, BtlMainStateA *battle);
 
-int textFormatBuffer(unsigned char [132], unsigned char *, int, int);
-int dataTable00FindById(void);
-int asdLoadFileAsyncSimple(unsigned char [132], int *, int);
-int sysMemClear(unsigned char [132], int);
-int FUN_003e12a8(unsigned int *, int);
-int FUN_003e3188(unsigned int *, int);
-int FUN_003eebf4(int, int);
-int aocQueueType38(unsigned int, int, int *, unsigned char [132]);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-} param_2_stack;
-
-extern unsigned char LAB_003e04ec; /* 0x3e04ec */
-extern unsigned int g_aocSystem; /* 0x570280 */
-extern unsigned int DAT_00573880; /* 0x573880 */
-extern unsigned int DAT_00573884; /* 0x573884 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003e12a8. */
-/* Supplied declaration required: FUN_003e3188. */
-/* Supplied declaration required: FUN_003eebf4. */
-extern int aocReadyAndAccepts(unsigned int, unsigned short);
-/* Supplied declaration required: aocQueueType38. */
-
-
-void FUN_003e03b0(unsigned int *param_1,int param_2)
-
+// Load the selected combatant's arrangement from base or add-on content, then advance loading.
+void FUN_003e03b0(BattleArrangementLoadState *load, BtlMainStateA *battle)
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned short *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  int *piVar4;
-  unsigned char temp_v2 [132];
-  
-  temp_v0 = param_2;
-  FUN_003eebf4(param_2,1);
-  if (-1 < temp_v0) {
-    temp_v1 = DAT_00573884 | *(unsigned int *)(param_2 + 0x45a4);
-    *(unsigned int *)(param_2 + 0x45a0) = DAT_00573880 | *(unsigned int *)(param_2 + 0x45a0);
-    *(unsigned int *)(param_2 + 0x45a4) = temp_v1;
-    puVar1 = (unsigned short *)(unsigned int)*(unsigned short *)(*(int *)(param_2 + 0x1ffc) + temp_v0 * 0x408 + 0x166);
-    dataTable00FindById();
-    sysMemClear(temp_v2,0x80);
-    textFormatBuffer(temp_v2,&LAB_003e04ec,*(unsigned char *)(puVar1 + 0x51),
-                 *(unsigned char *)((int)puVar1 + 0xa3));
-    temp_v0 = aocReadyAndAccepts(g_aocSystem,*puVar1);
-    piVar4 = (int *)(param_2 + 0x1ec4);
-    if (temp_v0 != 0) {
-      aocQueueType38(g_aocSystem,*puVar1,piVar4,temp_v2);
+    // This pointer lies inside padding beginning at an unaligned offset in BtlMainStateA.
+    struct ArrangementFileView { u8 prefix[0x1EC4]; void *file; };
+    s32 index = FUN_003eebf4(battle, 1);
+    if (index >= 0) {
+        battle->stateFlags64.bits |= g_btlEncount.queuedStateMask;
+        Table00Record *record = dataTable00FindById(battle->entries[index].id);
+        char path[128];
+        sysMemClear(path, sizeof(path));
+        textFormatBuffer(path, "battle/arngmt/%02d_%02d.earg", record->bustUp.value, record->bustUp.variation);
+        void **destination = &reinterpret_cast<ArrangementFileView *>(battle)->file;
+        if (aocReadyAndAccepts(g_aocSystem, record->id))
+            aocQueueType38(g_aocSystem, record->id, destination, path);
+        else
+            asdLoadFileAsyncSimple(path, destination, 0);
+        load->state = 9;
+        load->count = 0;
+        load->frame = 0;
+        if (*destination != NULL) {
+            load->state = 10;
+            FUN_003e12a8(load, battle);
+        }
+        return;
     }
-    else {
-      asdLoadFileAsyncSimple(temp_v2,piVar4,0);
-    }
-    *param_1 = 9;
-    param_1[4] = 0;
-    param_1[3] = 0;
-    if (*piVar4 != 0) {
-      *param_1 = 10;
-      FUN_003e12a8(param_1,param_2);
-    }
-    return;
-  }
-  param_1[4] = 0;
-  *param_1 = 0x11;
-  param_1[3] = 0;
-  FUN_003e3188(param_1,param_2);
-  return;
+    load->count = 0;
+    load->state = 17;
+    load->frame = 0;
+    FUN_003e3188(load, battle);
 }
-
-} /* extern "C" */
+}

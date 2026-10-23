@@ -1,92 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f80e4` (_code @ 0x4f80e4, 0x174 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail retains an unused first-label minimum accumulator; readable maximum loop differs. */
+#include "battle/LabelValues.h"
 extern "C" {
+void *btlGetMainState(void);
+s32 btlScriptUnitHasFlags(void *state);
+u32 wstrlen(const char *text);
+s32 libc_strcmp(const char *left, const char *right);
 
-int btlGetMainState(void);
-int libc_strcmp(int, unsigned char *);
-
-extern unsigned char LAB_004f8260; /* 0x4f8260 */
-
-/* Supplied declaration required: btlGetMainState. */
-extern int wstrlen(int);
-/* Supplied declaration required: libc_strcmp. */
-extern int btlScriptUnitHasFlags(void);
-
-
-int FUN_004f80e4(int param_1)
-
+// Return the largest nonnegative value attached to a nonempty, nonzero battle label.
+s32 FUN_004f80e4(BattleLabelValueState *state)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  unsigned char temp_v2;
-  
-  if ((*(int *)(param_1 + 0x1f54) != 0) && (piVar3 = (int *)(param_1 + 0x1f58), *piVar3 != 0)) {
-    btlGetMainState();
-    temp_v0 = btlScriptUnitHasFlags();
-    if (temp_v0 == 0) {
-      temp_v0 = 0;
-      temp_v1 = wstrlen(*piVar3);
-      if (temp_v1 != 0) {
-        temp_v1 = *piVar3;
-        libc_strcmp(temp_v1,&LAB_004f8260);
-        if (((temp_v1 != 0) && (temp_v1 = (int)*(short *)(*piVar3 + 0x10), -1 < temp_v1)) && (0 < temp_v1))
-        {
-          temp_v0 = temp_v1;
+    if (state->resource == NULL || state->labels == NULL || btlScriptUnitHasFlags(btlGetMainState()))
+        return -1;
+    s32 maximum = 0;
+    for (s32 index = 0; index < 4; ++index) {
+        const BattleLabelValue *label = &state->labels[index];
+        if (wstrlen(label->label) && libc_strcmp(label->label, "0")) {
+            s32 value = state->labels[index].value;
+            if (value >= 0 && value > maximum)
+                maximum = value;
         }
-      }
-      temp_v1 = wstrlen(*piVar3 + 0x16);
-      if (temp_v1 != 0) {
-        temp_v1 = *piVar3 + 0x16;
-        libc_strcmp(temp_v1,&LAB_004f8260);
-        if (temp_v1 != 0) {
-          temp_v1 = (int)*(short *)(*piVar3 + 0x26);
-          temp_v2 = temp_v1 == 0;
-          if (-1 < temp_v1) {
-            temp_v2 = temp_v1 == temp_v0;
-          }
-          if (!temp_v2 && (-1 < temp_v1 && temp_v0 <= temp_v1)) {
-            temp_v0 = temp_v1;
-          }
-        }
-      }
-      temp_v1 = wstrlen(*piVar3 + 0x2c);
-      if (temp_v1 != 0) {
-        temp_v1 = *piVar3 + 0x2c;
-        libc_strcmp(temp_v1,&LAB_004f8260);
-        if (temp_v1 != 0) {
-          temp_v1 = (int)*(short *)(*piVar3 + 0x3c);
-          temp_v2 = temp_v1 == 0;
-          if (-1 < temp_v1) {
-            temp_v2 = temp_v1 == temp_v0;
-          }
-          if (!temp_v2 && (-1 < temp_v1 && temp_v0 <= temp_v1)) {
-            temp_v0 = temp_v1;
-          }
-        }
-      }
-      temp_v1 = wstrlen(*piVar3 + 0x42);
-      if (temp_v1 != 0) {
-        temp_v1 = *piVar3 + 0x42;
-        libc_strcmp(temp_v1,&LAB_004f8260);
-        if (temp_v1 != 0) {
-          temp_v1 = (int)*(short *)(*piVar3 + 0x52);
-          temp_v2 = temp_v1 == 0;
-          if (-1 < temp_v1) {
-            temp_v2 = temp_v1 == temp_v0;
-          }
-          if (!temp_v2 && (-1 < temp_v1 && temp_v0 <= temp_v1)) {
-            temp_v0 = temp_v1;
-          }
-        }
-      }
-      return temp_v0;
     }
-  }
-  return -1;
+    return maximum;
 }
-
-} /* extern "C" */
+}

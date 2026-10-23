@@ -9,7 +9,7 @@ int uiSpriteSetImageKeyframe(...);
 int randRange(...);
 int FUN_0014e188(...);
 int FUN_001517b4(...);
-int FUN_00162ec0(...);
+int uiApplyIndexedPanelSpriteSizes(...);
 int pairSetSecondResetFirst(...);
 int uiSpriteSelectAnim(...);
 int pairSetFirstResetSecond(...);
@@ -38,7 +38,7 @@ extern unsigned short DAT_005e2058; /* 0x5e2058 */
 /* Supplied declaration required: randRange. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_00162ec0. */
+/* Supplied declaration required: uiApplyIndexedPanelSpriteSizes. */
 extern int FUN_00163fd4(unsigned int);
 /* Supplied declaration required: pairSetSecondResetFirst. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
@@ -48,7 +48,7 @@ extern int FUN_0019be8c(unsigned int);
 /* Supplied declaration required: sentinelLookupGetValue. */
 /* Supplied declaration required: FUN_0019e330. */
 /* Supplied declaration required: FUN_00202188. */
-extern unsigned short FUN_0033885c(unsigned int, int);
+extern unsigned short textMeasureLineWidth(unsigned int, int);
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: FUN_003872b8. */
 
@@ -269,7 +269,7 @@ joined_r0x0028baa4:
     *(unsigned int *)(param_1 + 0x1a1c) = 0;
     *(unsigned int *)(param_1 + 0x1a20) = 0;
     *(unsigned int *)(param_1 + 0x1a24) = 0;
-    FUN_00162ec0(param_1);
+    uiApplyIndexedPanelSpriteSizes(param_1);
     return;
   case 0xc:
     temp_v14[0] = 0;
@@ -391,7 +391,7 @@ LAB_0028bd98:
     return;
   case 0xd:
     *(unsigned char *)(param_1 + 0x5d) = 0;
-    temp_v5 = FUN_0033885c(*(unsigned int *)(param_1 + 4),(int)*(short *)(param_1 + 0x5a));
+    temp_v5 = textMeasureLineWidth(*(unsigned int *)(param_1 + 4),(int)*(short *)(param_1 + 0x5a));
     *(unsigned short *)(param_1 + 0x60) = temp_v5;
     temp_v6 = 0;
     switch(DAT_005e2058) {

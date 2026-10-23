@@ -32,7 +32,7 @@ int engineForwardVariadicCommand(...);
 int FUN_0036cf98(...);
 int FUN_0038b57c(...);
 int FUN_0038b5fc(...);
-int FUN_0039a41c(...);
+int campCecPreviewEquipmentChoice(...);
 int sysPlayVoice(...);
 int FUN_003df7c4(...);
 
@@ -41,7 +41,7 @@ int gameGetPlayerData(void);
 int statusPanelSetOpen(int);
 int FUN_002c85b0(...);
 int FUN_002f0384(...);
-int FUN_00320940(...);
+int campPreviewSelectedEquipment(...);
 int objBStateAllowsAction(void);
 int FUN_003343d8(...);
 int FUN_0033449c(...);
@@ -107,7 +107,7 @@ extern int widgetSubCallIfVisible(int);
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: sortMenuAcquire. */
-/* Supplied declaration required: FUN_00320940. */
+/* Supplied declaration required: campPreviewSelectedEquipment. */
 /* Supplied declaration required: objBStateAllowsAction. */
 /* Supplied declaration required: FUN_003343d8. */
 /* Supplied declaration required: FUN_0033449c. */
@@ -124,7 +124,7 @@ extern int FUN_0036cf78(void);
 /* Supplied declaration required: messageRestoreBanner. */
 /* Supplied declaration required: FUN_0038b57c. */
 /* Supplied declaration required: FUN_0038b5fc. */
-/* Supplied declaration required: FUN_0039a41c. */
+/* Supplied declaration required: campCecPreviewEquipmentChoice. */
 /* Supplied declaration required: sysPlayVoice. */
 extern int FUN_003da8f4(int, unsigned int);
 /* Supplied declaration required: FUN_003df7c4. */
@@ -307,7 +307,7 @@ void FUN_001fdde8(int param_1)
         *(unsigned char *)(temp_v5 + 0x3c) = 1;
       }
       else if (temp_v10 == 0) {
-        FUN_00320940(param_1);
+        campPreviewSelectedEquipment(param_1);
       }
     }
     if ((*(char *)(temp_v13 + 0x61) != '\0') || (*(char *)(temp_v13 + 0x60) != '\0')) {
@@ -344,7 +344,7 @@ void FUN_001fdde8(int param_1)
             FUN_0038b5fc(temp_v3,temp_v2);
           }
           else if ((param_1 == 0x4b || param_1 == 0x4c) || param_1 == 0x4d) {
-            FUN_0039a41c();
+            campCecPreviewEquipmentChoice();
           }
         }
         else {
@@ -352,7 +352,7 @@ void FUN_001fdde8(int param_1)
         }
         *(unsigned char *)(temp_v5 + 0x3c) = 0;
         if ((temp_v12 & ~temp_v10) != 0) {
-          FUN_00320940(param_1);
+          campPreviewSelectedEquipment(param_1);
         }
       }
       else {
@@ -383,7 +383,7 @@ void FUN_001fdde8(int param_1)
       if (temp_v10 != 0) {
         return;
       }
-      FUN_00320940(param_1);
+      campPreviewSelectedEquipment(param_1);
       return;
     }
     temp_v4 = temp_v13;
@@ -393,7 +393,7 @@ void FUN_001fdde8(int param_1)
       if (temp_v10 != 0) {
         return;
       }
-      FUN_00320940(param_1);
+      campPreviewSelectedEquipment(param_1);
       return;
     }
     temp_v4 = 0;
@@ -460,7 +460,7 @@ void FUN_001fdde8(int param_1)
     FUN_001517b4();
     if (temp_v4 != 0) {
       if (temp_v10 != 0) {
-        FUN_0039a41c();
+        campCecPreviewEquipmentChoice();
         FUN_0036cf98(0);
       }
       else {
@@ -754,19 +754,19 @@ LAB_001fe16c:
     case 0x4e:
       FUN_0026f148(0x4e);
       gameSetStatusCameraHeightMode(0);
-      FUN_0039a41c(0);
+      campCecPreviewEquipmentChoice(0);
     default:
       goto LAB_001fe410;
     }
 LAB_001fe40c:
-    FUN_0039a41c(temp_v2);
+    campCecPreviewEquipmentChoice(temp_v2);
   }
 LAB_001fe410:
   *(unsigned char *)(temp_v5 + 0x3d) = 0;
   FUN_002cb278(temp_v13,0);
   FUN_0028b088(param_1);
   if (temp_v12 == 0 && temp_v10 == 0) {
-    FUN_00320940(param_1);
+    campPreviewSelectedEquipment(param_1);
   }
   temp_v9 = *(int *)(temp_v5 + 0x20) + 1;
   *(int *)(temp_v5 + 0x20) = temp_v9;

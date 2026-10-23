@@ -28,7 +28,7 @@ s32 flaggedValueHolderGetTotal(void *cursor);
 s32 rangeLimitMin(void *cursor);
 s32 FUN_0029e924(void *cursor);
 void uiOwnerUpdateAnimationChannels(DevilListWork *work);
-void FUN_0029d770(u16 id, void *record);
+void unitInitializeFromSavedRecord(u16 id, void *record);
 void FUN_0029da34(s32 screen, s32 mode, u16 id, const void *record);
 void *partyMemberFindById(u16 id);
 void FUN_003a72a4(DevilListWork *work);
@@ -59,7 +59,7 @@ void devilListUpdatePreviewAndVisibility(DevilListWork *work)
                 void *record = partyMemberFindById(id);
                 FUN_0029da34(0, 1, id, record);
             } else {
-                FUN_0029d770(id, temporaryRecord);
+                unitInitializeFromSavedRecord(id, temporaryRecord);
                 FUN_0029da34(0, 1, id, temporaryRecord);
             }
         }

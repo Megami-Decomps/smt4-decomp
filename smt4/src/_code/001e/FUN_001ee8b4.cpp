@@ -1,82 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ee8b4` (_code @ 0x1ee8b4, 0x17c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: count-increment load scheduling, navigation pointer lifetime and cursor-clamp arithmetic registers differ; 96 instructions each. */
+#include "status/StatusDown.h"
+#include "gamedata/DevilRecord.h"
 
 extern "C" {
+extern StatusDownState *g_statusDown;
+void memClear(void *memory, u32 bytes);
+void FUN_0029f848(GridNavigation *navigation, s32 count, s32 rows, s32 columns, s32 firstPolicy, s32 secondPolicy);
+void FUN_0029eb5c(GridNavigation *navigation, s32 row);
+void FUN_0029e8b8(GridNavigation *navigation, s32 column);
+void statusInventorySort();
 
-int FUN_0029e8b8(int, int);
-int FUN_0029eb5c(...);
-int FUN_0029f848(int, int, int, int, int, int);
-int devilGetRecord(void);
-int memClear(int, int);
-int statusInventorySort(void);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern int g_statusDown; /* 0x44e190 */
-
-/* Supplied declaration required: FUN_0029e8b8. */
-/* Supplied declaration required: FUN_0029eb5c. */
-/* Supplied declaration required: FUN_0029f848. */
-/* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: statusInventorySort. */
-
-
-void FUN_001ee8b4(int param_1)
-
+// Rebuild the status inventory from owned demon quantities and keep its grid cursor in range.
+void FUN_001ee8b4(const u8 *quantities)
 {
-/* irregular: 6 native warning(s); review required */
-  short temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  unsigned short *puVar4;
-  int temp_v3;
-  int temp_v4;
-  unsigned short *puVar7;
-  
-  temp_v2 = g_statusDown;
-  *(unsigned short *)(g_statusDown + 0x2230) = 0;
-  *(unsigned short *)(temp_v2 + 0x2232) = 0;
-  memClear(temp_v2 + 0xe30,0x1400);
-  puVar7 = (unsigned short *)0x0;
-  do {
-    puVar4 = puVar7;
-    devilGetRecord();
-    if ((puVar4 != (unsigned short *)0x0) && ((puVar4[3] & 1) != 0)) {
-      if (*(char *)(param_1 + (unsigned int)*puVar4) != '\0') {
-        *(unsigned short *)(temp_v2 + *(short *)(temp_v2 + 0x2230) * 4 + 0xe30) = *puVar4;
-        temp_v1 = *(unsigned char *)(param_1 + (unsigned int)*puVar4);
-        *(unsigned short *)(temp_v2 + *(short *)(temp_v2 + 0x2230) * 4 + 0xe32) = (unsigned short)temp_v1;
-        if (temp_v1 != 0) {
-          *(short *)(temp_v2 + 0x2232) = *(short *)(temp_v2 + 0x2232) + 1;
+    StatusDownState *status = g_statusDown;
+    status->inventory.count = 0;
+    status->inventory.ownedCount = 0;
+    memClear(status->inventory.entries, sizeof(status->inventory.entries));
+    for (u16 index = 0; index < 0x500; ++index) {
+        const DevilRecord *record = reinterpret_cast<const DevilRecord *>(devilGetRecord(index));
+        if (record && (record->fusion.flags & 1) && quantities[record->header.id]) {
+            status->inventory.entries[status->inventory.count][0] = record->header.id;
+            u8 quantity = quantities[record->header.id];
+            status->inventory.entries[status->inventory.count][1] = quantity;
+            if (quantity)
+                ++status->inventory.ownedCount;
+            ++status->inventory.count;
         }
-        *(short *)(temp_v2 + 0x2230) = *(short *)(temp_v2 + 0x2230) + 1;
-      }
     }
-    puVar7 = (unsigned short *)(((int)puVar7 + 1U) & 0xffff);
-  } while (puVar7 < (unsigned short *)0x500);
-  temp_v3 = temp_v2 + 0x223c;
-  FUN_0029f848(temp_v3,(int)*(short *)(temp_v2 + 0x2230),9,4,1,1);
-  temp_v4 = (int)*(short *)(temp_v2 + 0x2230);
-  if ((temp_v4 >= 1) && ((int)*(short *)(temp_v2 + 0x2234) + *(short *)(temp_v2 + 0x2236) * 4 >= temp_v4)) {
-    temp_v0 = (short)((int)((temp_v4 - 1) + ((unsigned int)((temp_v4 - 1) >> 0x1f) >> 0x1e)) >> 2);
-    *(short *)(temp_v2 + 0x2236) = temp_v0;
-    *(short *)(temp_v2 + 0x2234) = *(short *)(temp_v2 + 0x2230) + (temp_v0 * -4 - 1);
-    FUN_0029eb5c(temp_v3);
-    FUN_0029e8b8(temp_v3,(int)*(short *)(temp_v2 + 0x2234));
-  }
-  else {
-    FUN_0029eb5c(temp_v3,(int)*(short *)(temp_v2 + 0x2236));
-    FUN_0029e8b8(temp_v3,(int)*(short *)(temp_v2 + 0x2234));
-  }
-  statusInventorySort();
-  *(unsigned char *)(temp_v2 + 0x410) = 1;
-  return;
+    GridNavigation *navigation = &status->inventory.navigation;
+    FUN_0029f848(navigation, status->inventory.count, 9, 4, 1, 1);
+    s32 count = status->inventory.count;
+    if (count > 0 && status->inventory.column + status->inventory.row * 4 >= count) {
+        status->inventory.row = (count - 1) / 4;
+        status->inventory.column = status->inventory.count - status->inventory.row * 4 - 1;
+        FUN_0029eb5c(navigation, status->inventory.row);
+        FUN_0029e8b8(navigation, status->inventory.column);
+    } else {
+        FUN_0029eb5c(navigation, status->inventory.row);
+        FUN_0029e8b8(navigation, status->inventory.column);
+    }
+    statusInventorySort();
+    status->unk410 = 1;
 }
-
-} /* extern "C" */
+}

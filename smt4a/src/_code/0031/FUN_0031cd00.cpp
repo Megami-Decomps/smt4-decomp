@@ -1,97 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031cd00` (_code @ 0x31cd00, 0x19c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: common forced/normal game-over decision is merged and retail's post-dereference null guard is omitted. */
+#include "battle/btlMain.h"
+#include "battle/btlGameOver.h"
 
-extern "C" {
-
-int FUN_00231464(...);
-int btlCreateGameOverJobs(...);
-int gameFlagSetValue(...);
-
-typedef struct fn_0031cd00_arg0 fn_0031cd00_arg0;
-struct fn_0031cd00_arg0 {
-    unsigned char pad_0x0[0x4c];
-    undefined4 field_0x4c; /* +0x4c */
-    unsigned char pad_0x50[0x58];
-    int field_0xa8; /* +0xa8 */
-    unsigned char pad_0xac[0x44f4];
-    uint field_0x45a0; /* +0x45a0 */
-    uint field_0x45a4; /* +0x45a4 */
-    uint field_0x45a8; /* +0x45a8 */
-    uint field_0x45ac; /* +0x45ac */
-};
-
-extern unsigned int *DAT_0057f678; /* 0x57f678 */
-extern unsigned int DAT_0057f680; /* 0x57f680 */
-extern unsigned int DAT_0057f684; /* 0x57f684 */
-extern unsigned int DAT_0057f688; /* 0x57f688 */
-extern unsigned int DAT_0057f68c; /* 0x57f68c */
-extern unsigned int DAT_0057f690; /* 0x57f690 */
-extern unsigned int DAT_0057f694; /* 0x57f694 */
-
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_00231464. */
-/* Supplied declaration required: btlCreateGameOverJobs. */
-extern int gameDataFlagTestBit(unsigned int);
-/* Supplied declaration required: gameFlagSetValue. */
-
-
-void FUN_0031cd00(fn_0031cd00_arg0 *param_1)
-
+static inline bool gameOverMaskMatches(u64 flags, const u32 mask[2])
 {
-/* irregular: 1 goto(s); 3 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  FUN_00231464();
-  puVar1 = DAT_0057f678;
-  if (param_1->field_0xa8 == 2) {
-    if (!((param_1->field_0x45a8 & DAT_0057f690) == 0 && (param_1->field_0x45ac & DAT_0057f694) == 0
-         )) {
-      temp_v0 = gameFlagIsSet(0x1fc);
-      if ((temp_v0 != 0) || (temp_v0 = gameDataFlagTestBit(0x80), temp_v0 != 0)) {
-        temp_v0 = gameFlagIsSet(0x1fe);
-joined_r0x0031ce38:
-        if (temp_v0 != 0) {
-          gameFlagSetValue(0x1fe,0,1);
-          gameFlagSetValue(0x1fc,0,1);
-        }
-        *(unsigned char *)(puVar1 + 2) = 2;
-        *(unsigned char *)((int)puVar1 + 0x25) = 0;
-        puVar1[3] = 2;
-        puVar1[4] = 0;
-        param_1->field_0x4c = *puVar1;
-        return;
-      }
-      *(unsigned char *)(puVar1 + 2) = 1;
-    }
-    else {
-      if (((DAT_0057f680 & param_1->field_0x45a0) != 0 ||
-           (DAT_0057f684 & param_1->field_0x45a4) != 0) ||
-         ((DAT_0057f68c & param_1->field_0x45a4) != 0 || (param_1->field_0x45a0 & DAT_0057f688) != 0
-         )) {
-        puVar1[3] = 3;
-        puVar1[4] = 0;
-        return;
-      }
-      temp_v0 = gameFlagIsSet(0x1fc);
-      if ((temp_v0 != 0) || (temp_v0 = gameDataFlagTestBit(0x80), temp_v0 != 0)) {
-        temp_v0 = gameFlagIsSet(0x1fe);
-        goto joined_r0x0031ce38;
-      }
-      *(unsigned char *)(puVar1 + 2) = 1;
-    }
-    if (param_1 != (fn_0031cd00_arg0 *)0x0) {
-      btlCreateGameOverJobs(param_1);
-      puVar1[1] = param_1->field_0x4c;
-      puVar1[3] = 0;
-      puVar1[4] = 0;
-      return;
-    }
-  }
-  puVar1[3] = 3;
-  puVar1[4] = 0;
-  return;
+    return (flags & ((u64)mask[0] | ((u64)mask[1] << 32))) != 0;
 }
 
-} /* extern "C" */
+extern "C" {
+extern BtlGameOverGlobalsA DAT_0057f678;
+void FUN_00231464();
+s32 gameFlagIsSet(u32 flag);
+s32 gameDataFlagTestBit(u32 flag);
+void gameFlagSetValue(u32 flag, u32 value, u32 width);
+void btlCreateGameOverJobs(BtlMainStateA *state);
+
+void FUN_0031cd00(BtlMainStateA *state)
+{
+    // The reset byte extends beyond the shared sequence prefix.
+    struct SequenceView {
+        BtlGameOverSequence sequence;
+        u8 unk18[0xd];
+        u8 reset;
+    };
+    typedef char SequenceResetOffset[offsetof(SequenceView, reset) == 0x25 ? 1 : -1];
+    FUN_00231464();
+    SequenceView *work = reinterpret_cast<SequenceView *>(DAT_0057f678.state);
+    if (state->commandFilter.mode != 2 ||
+        (!gameOverMaskMatches(state->markerMasks.bits, DAT_0057f678.forcedStates) &&
+         (gameOverMaskMatches(state->stateFlags64.bits, DAT_0057f678.blockedStates) ||
+          gameOverMaskMatches(state->stateFlags64.bits, DAT_0057f678.blockedTransitions)))) {
+        work->sequence.state = 3;
+        work->sequence.phase = 0;
+        return;
+    }
+    if (gameFlagIsSet(0x1fc) || gameDataFlagTestBit(0x80)) {
+        if (gameFlagIsSet(0x1fe)) {
+            gameFlagSetValue(0x1fe, 0, 1);
+            gameFlagSetValue(0x1fc, 0, 1);
+        }
+        work->sequence.mode = 2;
+        work->reset = 0;
+        work->sequence.state = 2;
+        work->sequence.phase = 0;
+        state->jobB = work->sequence.unk00;
+    } else {
+        work->sequence.mode = 1;
+        btlCreateGameOverJobs(state);
+        work->sequence.job = state->jobB;
+        work->sequence.state = 0;
+        work->sequence.phase = 0;
+    }
+}
+}

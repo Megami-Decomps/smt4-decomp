@@ -9,7 +9,10 @@
 
 /* One effect slot's record (Shin Megami Tensei IV layout). */
 typedef struct BtlEffectSlot {
-    /* 0x00 */ u8 unk00[0x10];
+    union {
+        /* 0x00 */ u8 unk00[0x10];
+        /* 0x00 */ char name[0x10];
+    };
     /* 0x10 */ s16 unk10;
     /* 0x12 */ u16 id;
     /* 0x14 */ u8 unk14[2];
@@ -25,6 +28,8 @@ typedef struct BtlEffectSlotBlock {
 typedef char BtlEffectSlotSizeCheck[sizeof(BtlEffectSlot) == 0x16 ? 1 : -1];
 typedef char BtlEffectSlotBlockTableCheck[offsetof(BtlEffectSlotBlock, entries) == 0x58 ? 1 : -1];
 typedef char BtlEffectSlotBlockFallbackCheck[offsetof(BtlEffectSlotBlock, unk190) == 0x190 ? 1 : -1];
+typedef char BtlEffectSlotNameOffsetCheck[offsetof(BtlEffectSlot, name) == 0 &&
+    sizeof(BtlEffectSlot) == 0x16 ? 1 : -1];
 
 /* The block that owns the slot table. */
 typedef struct BtlEffectOwner {

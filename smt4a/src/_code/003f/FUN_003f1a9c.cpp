@@ -23,7 +23,7 @@ struct BattleEntryView {
 extern "C" {
 extern BattleMaskView g_btlMain;
 BattleEntryView* FUN_003eaf20(BattleObjectView* object);
-s32 FUN_004c6cb0(s32 entryId, s32 mode);
+s32 btlSelectSourceTriggeredSkill(s32 entryId, s32 mode);
 void* dataTable04FindById(s32 id);
 
 // Resolve a valid table ID and optionally test and set the object's battle mask.
@@ -38,7 +38,7 @@ s32 FUN_003f1a9c(BattleObjectView* object, s32 mode)
         return 0;
     }
 
-    s32 id = FUN_004c6cb0(entry->unk08, mode);
+    s32 id = btlSelectSourceTriggeredSkill(entry->unk08, mode);
     if (id == 0) {
         return 0;
     }

@@ -1,117 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001807a0` (_code @ 0x1807a0, 0x1d4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scalar-track narrow-index casts, reverse-byte loads and interpolation VFP allocation differ from retail. */
+#include "ui/UiSpriteState.h"
 
-extern "C" {
-
-int VectorFloatToUnsigned(double, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-
-
-void FUN_001807a0(int param_1)
-
+static inline void uiBeginSpriteScalarKey(UiSpriteState *sprite, s16 index, s8 reverse)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 4 native warning(s); review required */
-  short temp_v0;
-  char temp_v1;
-  float *pfVar3;
-  unsigned int *puVar4;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v6;
-  unsigned int temp_v7;
-  float temp_v8;
-  
-  if ((*(char *)(param_1 + 0x87) == '\0') && (*(int *)(param_1 + 0x58) != 0)) {
-    pfVar3 = (float *)(*(int *)(param_1 + 0x58) + *(short *)(param_1 + 0x5c) * 0xc);
-    temp_v6 = (float)VectorUnsignedToFloat((unsigned int)*(unsigned short *)(pfVar3 + 2),(unsigned char)(in_fpscr >> 0x16) & 3)
-    ;
-    temp_v7 = VectorFloatToUnsigned(temp_v6 / in_s0,3);
-    if ((int)*(short *)(param_1 + 0x5e) < (int)(temp_v7 & 0xffff)) {
-      temp_v6 = (float)VectorUnsignedToFloat
-                               ((unsigned int)*(unsigned short *)(pfVar3 + 2),(unsigned char)(in_fpscr >> 0x16) & 3);
-      if (*(char *)(param_1 + 0x60) != '\0') {
-        temp_v8 = *pfVar3 - pfVar3[1];
-      }
-      else {
-        temp_v8 = pfVar3[1] - *pfVar3;
-      }
-      *(short *)(param_1 + 0x5e) = *(short *)(param_1 + 0x5e) + 1;
-      *(float *)(param_1 + 0x20) = temp_v8 / (temp_v6 / in_s0) + *(float *)(param_1 + 0x20);
-      return;
-    }
-    if (*(char *)((int)pfVar3 + 10) != '\0') {
-      if (*(char *)(param_1 + 0x60) != '\0') {
-        temp_v6 = pfVar3[1];
-      }
-      else {
-        temp_v6 = *pfVar3;
-      }
-      *(float *)(param_1 + 0x20) = temp_v6;
-      *(unsigned short *)(param_1 + 0x5e) = 0;
-      return;
-    }
-    if (*(char *)(param_1 + 0x60) != '\0') {
-      temp_v6 = *pfVar3;
-    }
-    else {
-      temp_v6 = pfVar3[1];
-    }
-    *(float *)(param_1 + 0x20) = temp_v6;
-    temp_v5 = *(char *)(param_1 + 0x84) != '\0';
-    if (temp_v5) {
-      temp_v6 = *(float *)(param_1 + 0x78);
-    }
-    if ((temp_v5 && temp_v6 != 0.0f) &&
-       (*(int *)((int)temp_v6 + *(short *)(param_1 + 0x7e) * 0x1c + 0xc) != -1)) {
-      temp_v0 = *(short *)(param_1 + 0x7e) + 1;
-      *(short *)(param_1 + 0x7e) = temp_v0;
-      temp_v4 = (int)temp_v6 + temp_v0 * 0x1c;
-      temp_v3 = *(int *)(temp_v4 + 0xc);
-      if (temp_v3 != -1 && temp_v3 != -3) {
-        if (temp_v3 != -2) {
-          temp_v1 = *(char *)(temp_v4 + 0x10);
-          *(short *)(param_1 + 0x5c) = (short)temp_v3;
-          *(unsigned short *)(param_1 + 0x5e) = 0;
-          *(char *)(param_1 + 0x60) = temp_v1;
-          *(unsigned char *)(param_1 + 0x8a) = 0;
-          puVar4 = (unsigned int *)(*(int *)(param_1 + 0x58) + (short)temp_v3 * 0xc);
-        }
-        else {
-          *(unsigned short *)(param_1 + 0x7e) = 0;
-          temp_v1 = *(char *)((int)temp_v6 + 0x10);
-          temp_v0 = (short)*(unsigned int *)((int)temp_v6 + 0xc);
-          *(short *)(param_1 + 0x5c) = temp_v0;
-          *(unsigned short *)(param_1 + 0x5e) = 0;
-          *(char *)(param_1 + 0x60) = temp_v1;
-          *(unsigned char *)(param_1 + 0x8a) = 0;
-          puVar4 = (unsigned int *)(*(int *)(param_1 + 0x58) + temp_v0 * 0xc);
-        }
-        if (temp_v1 != '\0') {
-          temp_v2 = puVar4[1];
-        }
-        else {
-          temp_v2 = *puVar4;
-        }
-        *(unsigned int *)(param_1 + 0x20) = temp_v2;
-        return;
-      }
-    }
-  }
-  *(unsigned char *)(param_1 + 0x87) = 1;
-  return;
+    sprite->mode = index;
+    sprite->verticalTrack.frame = 0;
+    sprite->verticalTrack.reverse = reverse;
+    sprite->completion.complete = 0;
+    const UiSpriteScalarKey *key = &sprite->verticalKeys[index];
+    sprite->unk20 = reverse ? key->last : key->first;
 }
 
-} /* extern "C" */
+extern "C" void FUN_001807a0(UiSpriteState *sprite, f32 rate)
+{
+    if (!sprite->completion.vertical && sprite->verticalKeys) {
+        const UiSpriteScalarKey *key = &sprite->verticalKeys[sprite->mode];
+        u16 duration = (u32)((f32)(u32)key->duration / rate);
+        if (sprite->verticalTrack.frame >= duration) {
+            if (key->loop) {
+                sprite->unk20 = sprite->verticalTrack.reverse ? key->last : key->first;
+                sprite->verticalTrack.frame = 0;
+                return;
+            }
+            sprite->unk20 = sprite->verticalTrack.reverse ? key->first : key->last;
+            if (sprite->sequence.enabled && sprite->sequenceSteps &&
+                sprite->sequenceSteps[sprite->sequence.step].key != -1) {
+                UiSpriteSequenceStep *steps = sprite->sequenceSteps;
+                ++sprite->sequence.step;
+                UiSpriteSequenceStep *next = &steps[sprite->sequence.step];
+                if (next->key != -1 && next->key != -3) {
+                    if (next->key != -2) {
+                        uiBeginSpriteScalarKey(sprite, next->key, next->reverse);
+                    } else {
+                        sprite->sequence.step = 0;
+                        uiBeginSpriteScalarKey(sprite, steps[0].key, steps[0].reverse);
+                    }
+                    return;
+                }
+            }
+        } else {
+            f32 frames = (f32)(u32)key->duration / rate;
+            f32 step;
+            if (sprite->verticalTrack.reverse)
+                step = (key->first - key->last) / frames;
+            else
+                step = (key->last - key->first) / frames;
+            ++sprite->verticalTrack.frame;
+            sprite->unk20 += step;
+            return;
+        }
+    }
+    sprite->completion.vertical = 1;
+}

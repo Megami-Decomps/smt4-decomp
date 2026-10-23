@@ -1,94 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f2094` (_code @ 0x4f2094, 0x1f4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: vector load/store grouping, separate history-global literals, saved registers and final multiply/add contraction differ. */
+#include "shard/W5_W5Match8_CameraTransition.h"
 
-extern "C" {
-
-int FUN_003d4dd4(unsigned int, unsigned int, unsigned int);
-
-extern int DAT_00571530; /* 0x571530 */
-extern float g_cameraAlternateProgressStart; /* 0x5e1530 */
-extern float DAT_005e1534; /* 0x5e1534 */
-extern float DAT_005e1538; /* 0x5e1538 */
-extern float g_cameraAlternateProgressPrevious; /* 0x5e153c */
-extern float DAT_005e1540; /* 0x5e1540 */
-extern float DAT_005e1544; /* 0x5e1544 */
-extern float g_cameraUnoffsetStartPosition; /* 0x5e1548 */
-extern float DAT_005e154c; /* 0x5e154c */
-extern float DAT_005e1550; /* 0x5e1550 */
-
-/* Supplied declaration required: FUN_003d4dd4. */
-
-
-void FUN_004f2094(int param_1)
-
+static inline W5Match8Vec3 operator-(const W5Match8Vec3& first, const W5Match8Vec3& second)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  float temp_v0;
-  float temp_v1;
-  float *pfVar3;
-  float *pfVar4;
-  float in_s0;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  
-  temp_v1 = DAT_005e1544;
-  temp_v0 = DAT_005e1540;
-  pfVar4 = (float *)(param_1 + 0x5dc);
-  if (DAT_00571530 == 2) {
-    temp_v2 = *(float *)(param_1 + 0x5e0);
-    temp_v3 = *pfVar4 - g_cameraUnoffsetStartPosition;
-    temp_v4 = temp_v2 - DAT_005e154c;
-    temp_v5 = *(float *)(param_1 + 0x5e4) - DAT_005e1550;
-    FUN_003d4dd4(*(unsigned int *)(param_1 + 0x8b0),*(unsigned int *)(param_1 + 0x8a8),
-                 *(unsigned int *)(param_1 + 0x8ac));
-    *(float *)(param_1 + 0x854) = *(float *)(param_1 + 0x608) + temp_v3 * temp_v2;
-    *(float *)(param_1 + 0x858) = *(float *)(param_1 + 0x60c) + temp_v4 * temp_v2;
-    *(float *)(param_1 + 0x85c) = *(float *)(param_1 + 0x610) + temp_v5 * temp_v2;
-    return;
-  }
-  pfVar3 = (float *)(param_1 + 0x884);
-  if (DAT_00571530 != 1) {
-    temp_v2 = *(float *)(param_1 + 0x5a8) - *(float *)(param_1 + 0x888);
-    temp_v5 = *pfVar4 - (*(float *)(param_1 + 0x5a4) - *pfVar3);
-    temp_v4 = *(float *)(param_1 + 0x5e0) - temp_v2;
-    temp_v3 = *(float *)(param_1 + 0x5e4) -
-            (*(float *)(param_1 + 0x5ac) - *(float *)(param_1 + 0x88c));
-    FUN_003d4dd4(*(unsigned int *)(param_1 + 0x8b0),*(unsigned int *)(param_1 + 0x8a8),
-                 *(unsigned int *)(param_1 + 0x8ac));
-    *(float *)(param_1 + 0x88c) = temp_v3 * temp_v2;
-    *(float *)(param_1 + 0x884) = temp_v5 * temp_v2;
-    *(float *)(param_1 + 0x888) = temp_v4 * temp_v2;
-    return;
-  }
-  *pfVar3 = g_cameraAlternateProgressPrevious;
-  *(float *)&*(unsigned int *)(param_1 + 0x888) = temp_v0;
-  *(float *)&*(unsigned int *)(param_1 + 0x88c) = temp_v1;
-  FUN_003d4dd4(*(unsigned int *)(param_1 + 0x8b0),*(unsigned int *)(param_1 + 0x8a8),
-               *(unsigned int *)(param_1 + 0x8ac));
-  *(float *)(param_1 + 0x884) = (*pfVar4 - (*(float *)(param_1 + 0x5a4) - *pfVar3)) * in_s0;
-  *(float *)(param_1 + 0x888) =
-       (*(float *)(param_1 + 0x5e0) - (*(float *)(param_1 + 0x5a8) - *(float *)(param_1 + 0x888))) *
-       in_s0;
-  *(float *)(param_1 + 0x88c) =
-       (*(float *)(param_1 + 0x5e4) - (*(float *)(param_1 + 0x5ac) - *(float *)(param_1 + 0x88c))) *
-       in_s0;
-  temp_v2 = DAT_005e1538;
-  temp_v0 = DAT_005e1534;
-  g_cameraAlternateProgressPrevious = *(float *)(param_1 + 0x884);
-  DAT_005e1540 = *(float *)(param_1 + 0x888);
-  DAT_005e1544 = *(float *)(param_1 + 0x88c);
-  *pfVar3 = g_cameraAlternateProgressStart;
-  *(float *)&*(unsigned int *)(param_1 + 0x888) = temp_v0;
-  *(float *)(param_1 + 0x88c) = temp_v2;
-  *(float *)(param_1 + 0x854) = g_cameraAlternateProgressPrevious + *(float *)(param_1 + 0x608);
-  *(float *)(param_1 + 0x858) = DAT_005e1540 + *(float *)(param_1 + 0x60c);
-  temp_v2 = DAT_005e1544 + *(float *)(param_1 + 0x610);
-  *(float *)(param_1 + 0x85c) = temp_v2;
-  *(float *)(param_1 + 0x740) = temp_v2 + (*(float *)(param_1 + 0x5e4) - DAT_005e1538) * in_s0;
-  return;
+    W5Match8Vec3 result = { first.x - second.x, first.y - second.y, first.z - second.z };
+    return result;
+}
+static inline W5Match8Vec3 operator+(const W5Match8Vec3& first, const W5Match8Vec3& second)
+{
+    W5Match8Vec3 result = { first.x + second.x, first.y + second.y, first.z + second.z };
+    return result;
+}
+static inline W5Match8Vec3 operator*(const W5Match8Vec3& vector, f32 scale)
+{
+    W5Match8Vec3 result = { vector.x * scale, vector.y * scale, vector.z * scale };
+    return result;
 }
 
-} /* extern "C" */
+extern "C" {
+extern CameraTransitionGlobals g_btlCamera;
+extern W5Match8Vec3 g_cameraAlternateProgressStart;
+extern W5Match8Vec3 g_cameraAlternateProgressPrevious;
+extern W5Match8Vec3 g_cameraUnoffsetStartPosition;
+f32 FUN_003d4dd4(s32 mode, s32 duration, s32 frame);
+
+void FUN_004f2094(W5Match8CameraTransition* camera)
+{
+    // These transition fields follow the canonical camera prefix; keep its published size intact.
+    struct AlternateTransitionView {
+        W5Match8CameraTransition camera;
+        W5Match8Vec3 progress;
+        u8 reserved[0x18];
+        u32 duration;
+        u32 frame;
+        u32 mode;
+    };
+    AlternateTransitionView* state = reinterpret_cast<AlternateTransitionView*>(camera);
+    if (g_btlCamera.mode == 2) {
+        W5Match8Vec3 delta = camera->alternateTarget - g_cameraUnoffsetStartPosition;
+        f32 factor = FUN_003d4dd4(state->mode, state->duration, state->frame);
+        camera->positionProgress = camera->targetStart + delta * factor;
+    } else if (g_btlCamera.mode == 1) {
+        state->progress = g_cameraAlternateProgressPrevious;
+        f32 factor = FUN_003d4dd4(state->mode, state->duration, state->frame);
+        state->progress = (camera->alternateTarget - (camera->reference.position - state->progress)) * factor;
+        g_cameraAlternateProgressPrevious = state->progress;
+        state->progress = g_cameraAlternateProgressStart;
+        camera->positionProgress = g_cameraAlternateProgressPrevious + camera->targetStart;
+        camera->targetProgress.z = camera->positionProgress.z +
+            (camera->alternateTarget.z - g_cameraAlternateProgressStart.z) * factor;
+    } else {
+        W5Match8Vec3 delta = camera->alternateTarget - (camera->reference.position - state->progress);
+        f32 factor = FUN_003d4dd4(state->mode, state->duration, state->frame);
+        state->progress = delta * factor;
+    }
+}
+}

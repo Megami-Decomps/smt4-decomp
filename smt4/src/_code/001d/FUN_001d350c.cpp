@@ -1,93 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d350c` (_code @ 0x1d350c, 0x178 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: caching the label removes retail's repeated address calculation and changes byte-test registers. */
+#include "map/DeferredModels.h"
+#include "map/ModelSelectionLabel.h"
+#include "map/mapDepart.h"
 
 extern "C" {
+extern DeferredModelWork *g_deferredMapModels;
+extern GameState g_gameState;
+void FUN_00266fac(s32 mode, s32 id);
+f32 mathDistanceBetweenPoints(f32, f32, f32, f32, f32, f32);
+f32 FUN_00287a78(f32, f32, f32, f32, f32, f32, f32);
+ModelSelectionLabel *FUN_00266f30(u32);
+char *libc_strcpy(char *, const char *);
 
-int FUN_00266f30(void);
-int FUN_00266fac(int);
-int FUN_00287a78(void);
-int mathDistanceBetweenPoints(void);
-int libc_strcpy(int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern int g_deferredMapModels; /* 0x447e58 */
-extern unsigned char g_gameState; /* 0x49f91c */
-
-/* Supplied declaration required: FUN_00266f30. */
-/* Supplied declaration required: FUN_00266fac. */
-/* Supplied declaration required: FUN_00287a78. */
-/* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: libc_strcpy. */
-
-
-void FUN_001d350c(void)
-
+/* Select the nearest active model within the interaction distance and facing cone. */
+void FUN_001d350c(f32 x, f32 y, f32 z, f32 heading)
 {
-/* irregular: irregular input(s): in_s0; 6 native warning(s); review required */
-  char temp_v0;
-  char *pcVar2;
-  int temp_v1;
-  int temp_v2;
-  unsigned int in_s0;
-  float temp_v3;
-  int temp_v4;
-  float temp_v5;
-  unsigned long long temp_v6;
-  
-  temp_v2 = -1;
-  temp_v6 = (unsigned long long)in_s0;
-  temp_v5 = 0.0f;
-  if (*(char *)(g_deferredMapModels + 0xe3c) == '\0') {
-    FUN_00266fac(0);
-    *(unsigned char *)(g_deferredMapModels + 0xe0c) = 0;
-    if ((*(signed char *)((unsigned char *)&g_gameState + 0x18)) == '\0') {
-      temp_v1 = 0;
-      do {
-        if (*(char *)(g_deferredMapModels + temp_v1 * 0x38 + 0xc) != '\0') {
-          temp_v3 = (float)temp_v6;
-          mathDistanceBetweenPoints();
-          if ((int)temp_v3 < 0x42b40000) {
-            temp_v4 = (int)temp_v6;
-            FUN_00287a78();
-            if ((temp_v4 < 0x428c0000) && ((temp_v2 == -1 || (temp_v3 < temp_v5)))) {
-              temp_v2 = temp_v1;
-              temp_v5 = temp_v3;
+    s32 selected = -1;
+    f32 nearest = 0.0f;
+    if (g_deferredMapModels->updating)
+        return;
+    FUN_00266fac(0, 0);
+    g_deferredMapModels->pending = 0;
+    if (g_gameState.unk18)
+        return;
+    for (s32 i = 0; i < 64; ++i) {
+        if (g_deferredMapModels->entries[i].active) {
+            f32 distance = mathDistanceBetweenPoints(x, y, z,
+                g_deferredMapModels->entries[i].offset,
+                g_deferredMapModels->entries[i].x,
+                g_deferredMapModels->entries[i].y);
+            if (distance < 90.0f &&
+                FUN_00287a78(x, y, z, heading,
+                    g_deferredMapModels->entries[i].offset,
+                    g_deferredMapModels->entries[i].x,
+                    g_deferredMapModels->entries[i].y) < 70.0f &&
+                (selected == -1 || distance < nearest)) {
+                selected = i;
+                nearest = distance;
             }
-          }
         }
-        temp_v4 = g_deferredMapModels;
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 0x40);
-      if (temp_v2 != -1) {
-        temp_v1 = g_deferredMapModels + temp_v2 * 0x38;
-        *(unsigned char *)(g_deferredMapModels + 0xe0c) = 1;
-        *(int *)(temp_v4 + 0xe10) = temp_v2;
-        *(int *)(temp_v4 + 0xe14) = (int)*(short *)(temp_v1 + 0x12);
-        temp_v1 = (int)*(short *)(temp_v1 + 0x14);
-        FUN_00266f30();
-        temp_v2 = g_deferredMapModels;
-        pcVar2 = (char *)(temp_v1 + 8);
-        if (pcVar2 != (char *)0x0) {
-          temp_v0 = *pcVar2;
-          if (temp_v0 == '0') {
-            pcVar2 = (char *)(unsigned int)*(unsigned char *)(temp_v1 + 9);
-          }
-          if (temp_v0 != '0' || pcVar2 != (char *)0x0) {
-            libc_strcpy(g_deferredMapModels + 0xe1c,temp_v1 + 8);
-            return;
-          }
-        }
-        *(unsigned char *)(g_deferredMapModels + 0xe1c) = 0;
-        *(unsigned char *)(temp_v2 + 0xe1d) = 0;
-      }
     }
-  }
-  return;
+    if (selected != -1) {
+        g_deferredMapModels->pending = 1;
+        g_deferredMapModels->pendingCount = selected;
+        g_deferredMapModels->selection.id = g_deferredMapModels->entries[selected].id;
+        const char *name = FUN_00266f30(g_deferredMapModels->entries[selected].modelId)->name;
+        if (name != NULL && (name[0] != '0' || name[1] != '\0')) {
+            libc_strcpy(g_deferredMapModels->selection.label, name);
+        } else {
+            g_deferredMapModels->selection.label[0] = '\0';
+            g_deferredMapModels->selection.label[1] = '\0';
+        }
+    }
 }
-
-} /* extern "C" */
+}

@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int lookupNameEntry(unsigned int, unsigned char [32], unsigned char [16]);
 int controllerSetDestination(unsigned int, unsigned char [16]);
-int FUN_00407450(unsigned int);
+int spatialAdvanceTransformTransition(unsigned int);
 int FUN_00407eb0(unsigned int, int, int);
 
 typedef int romwright_code(...);
@@ -18,7 +18,7 @@ extern unsigned char LAB_0046af54; /* 0x46af54 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: lookupNameEntry. */
 /* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_00407450. */
+/* Supplied declaration required: spatialAdvanceTransformTransition. */
 /* Supplied declaration required: FUN_00407eb0. */
 
 
@@ -50,7 +50,7 @@ void FUN_0046adec(int param_1)
       *(int *)(param_1 + 0xce4) = temp_v1;
       FUN_00407eb0(*(unsigned int *)(param_1 + 0xcdc),temp_v1,0);
     }
-    FUN_00407450(*(unsigned int *)(param_1 + 0xcdc));
+    spatialAdvanceTransformTransition(*(unsigned int *)(param_1 + 0xcdc));
   }
   temp_v0 = *(char *)(param_1 + 0xa58);
   temp_v4 = temp_v0 == '\0';

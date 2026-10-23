@@ -72,7 +72,7 @@ unsigned int FUN_002169cc(void)
       break;
     case 3:
       *(unsigned char *)(iVar2 + 0x5f0) = 1;
-      FUN_002adf00(iVar8,*(unsigned int *)(iVar2 + 0x5e8));
+      cameraExportParameters(iVar8,*(unsigned int *)(iVar2 + 0x5e8));
       iVar5 = FUN_00263720(*(int *)(iVar2 + 0x5e8));
       if ((iVar5 != 0) &&
          ((func_0x002d5808(*(unsigned int *)(*(int *)(iVar2 + 0x5e4) + 8)), in_s0 == fVar12 ||

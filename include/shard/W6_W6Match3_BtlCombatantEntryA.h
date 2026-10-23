@@ -44,6 +44,10 @@ struct BtlCombatantEntryA {
             /* 0x00A */ u8 unk00aBeforeSelectionIndex[0x64];
             /* 0x06E */ s16 selectionIndex;
         } indexView;
+        struct {
+            /* 0x00A */ u8 unk00aBeforeParameterBlock[0x15A];
+            /* 0x164 */ u16 parameterBlock;
+        } unitParameters;
     };
     /* 0x166 */ u16 id;
     union {
@@ -121,6 +125,10 @@ struct BtlCombatantEntryA {
             /* 0x3FC */ u8 unk3FC[8];
             /* 0x404 */ BattleCandidateRecord *record;
         } candidate;
+        struct {
+            /* 0x3FC */ u8 unk3FC[4];
+            /* 0x400 */ BtlUnitRecordA *record;
+        } specialMaximum;
     };
 };
 
@@ -150,5 +158,11 @@ typedef char BtlCombatantSecondaryRecordOffsetCheck[
     offsetof(BtlCombatantEntryA, secondaryRecord) == 0x3FC ? 1 : -1];
 typedef char BtlCombatantCandidateRecordOffsetCheck[
     offsetof(BtlCombatantEntryA, candidate.record) == 0x404 ? 1 : -1];
+typedef char BtlCombatantParameterBlockOffsetCheck[
+    offsetof(BtlCombatantEntryA, unitParameters.parameterBlock) == 0x164 &&
+    sizeof(BtlCombatantEntryA) == 0x408 ? 1 : -1];
+typedef char BtlCombatantSpecialMaximumOffsetCheck[
+    offsetof(BtlCombatantEntryA, specialMaximum.record) == 0x400 &&
+    sizeof(BtlCombatantEntryA) == 0x408 ? 1 : -1];
 
 #endif

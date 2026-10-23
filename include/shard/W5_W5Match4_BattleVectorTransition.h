@@ -13,6 +13,10 @@ struct BattleVectorTransition {
             u8 unk000Position[0x68];
             /* 0x068 */ BattleVector3 position;
         } positionData;
+        struct {
+            u8 unk000Reference[0x58C];
+            /* 0x58C */ BattleVector3 position;
+        } reference;
     };
     /* 0x5ac */ BattleVector3 destination;
     /* 0x5b8 */ u8 unk5b8[0xc];
@@ -48,6 +52,10 @@ struct BattleVectorTransition {
             /* 0x720 */ s32 horizontalOffset;
             /* 0x724 */ s32 depthOffset;
         } path;
+        struct {
+            /* 0x6FC */ u8 unk6FC[0x3C];
+            /* 0x738 */ BattleVector3 current;
+        } axis;
     };
     /* 0x744 */ BattleVector3 axisDestination;
     /* 0x750 */ s32 axisTarget;
@@ -74,6 +82,9 @@ struct BattleVectorTransition {
     /* 0x810 */ s32 secondaryFrame;
     /* 0x814 */ s32 secondaryMode;
 };
+typedef char BattleVectorReferenceOffsetCheck[
+    offsetof(BattleVectorTransition, reference.position) == 0x58C &&
+    sizeof(BattleVectorTransition) == 0x818 ? 1 : -1];
 
 typedef char BattleVectorPathOffsetsCheck[sizeof(BattleVectorTransition) == 0x818 &&
     offsetof(BattleVectorTransition, path.start) == 0x6fc &&
@@ -85,5 +96,7 @@ typedef char BattleVectorPathOffsetsCheck[sizeof(BattleVectorTransition) == 0x81
     offsetof(BattleVectorTransition, path.depthOffset) == 0x724 &&
     offsetof(BattleVectorTransition, anchors.start) == 0x77c &&
     offsetof(BattleVectorTransition, anchors.end) == 0x788 ? 1 : -1];
+typedef char BattleVectorAxisOffsetCheck[offsetof(BattleVectorTransition, axis.current) == 0x738 &&
+    sizeof(BattleVectorTransition) == 0x818 ? 1 : -1];
 
 #endif

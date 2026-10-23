@@ -3,6 +3,7 @@
 #define SHARD_S1LISTPANEL_H
 
 #include "common.h"
+#include <stddef.h>
 
 /* Sprite description returned by FUN_001834a4(group, id). */
 typedef struct SpriteInfo {
@@ -71,6 +72,22 @@ typedef struct RenderCtx {
             u8 unk0000[0x1258];
             /* 0x1258 */ RenderCtxCachedState state;
         } drawStateView;
+        struct {
+            u8 unk0000[0x12b8];
+            /* 0x12B8 */ RenderCtxCachedState state;
+        } blendStateView;
+        struct {
+            /* 0x0000 */ u8 unk0000[0x14];
+            /* 0x0014 */ u32 state;
+            /* 0x0018 */ u8 unk0018[8];
+            /* 0x0020 */ u32 flags;
+            /* 0x0024 */ u8 unk0024[0x80];
+            /* 0x00A4 */ void *camera;
+            /* 0x00A8 */ u8 unk00A8[4];
+            /* 0x00AC */ void **cameras;
+            /* 0x00B0 */ u8 unk00B0[8];
+            /* 0x00B8 */ s32 cameraIndex;
+        } modelPass;
     };
     /* 0x1318 */ s32 stateIndex;
     /* 0x131C */ s32 unk131C;
@@ -81,6 +98,15 @@ typedef struct RenderCtx {
     /* 0x1338 */ RenderCtxCachedState scissorMinimum;
     /* 0x1358 */ RenderCtxCachedState scissorMaximum;
 } RenderCtx;
+typedef char RenderCtxBlendStateLayoutCheck[
+    offsetof(RenderCtx, blendStateView.state) == 0x12b8 && sizeof(RenderCtx) == 0x1378 ? 1 : -1];
+typedef char RenderCtxModelPassOffsetCheck[
+    offsetof(RenderCtx, modelPass.state) == 0x14 &&
+    offsetof(RenderCtx, modelPass.flags) == 0x20 &&
+    offsetof(RenderCtx, modelPass.camera) == 0xA4 &&
+    offsetof(RenderCtx, modelPass.cameras) == 0xAC &&
+    offsetof(RenderCtx, modelPass.cameraIndex) == 0xB8 &&
+    sizeof(RenderCtx) == 0x1378 ? 1 : -1];
 
 enum {
     RENDER_STATE_SCISSOR = 3

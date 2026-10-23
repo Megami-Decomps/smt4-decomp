@@ -65,7 +65,7 @@ extern UniteStateView* g_unite;
 extern "C" {
 PartyMemberView* partyMemberFindById(u32 id);
 void rt_memcpy_w(void* destination, const void* source, u32 size);
-void FUN_0029d770(u32 id, PartyMemberView* destination);
+void unitInitializeFromSavedRecord(u32 id, PartyMemberView* destination);
 int FUN_003c88f0(void* context, PartyMemberView* first, PartyMemberView* second);
 int FUN_003c92b8(void* context, u32 firstId,
                  u32 secondId, UnitePairEntryIV* selection);
@@ -106,7 +106,7 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
         rt_memcpy_w(&first, partyMemberFindById(firstId), 0x604);
         break;
     case 3:
-        FUN_0029d770(firstId, &first);
+        unitInitializeFromSavedRecord(firstId, &first);
         break;
     }
 
@@ -116,7 +116,7 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
         rt_memcpy_w(&second, partyMemberFindById(secondId), 0x604);
         break;
     case 3:
-        FUN_0029d770(secondId, &second);
+        unitInitializeFromSavedRecord(secondId, &second);
         break;
     }
 

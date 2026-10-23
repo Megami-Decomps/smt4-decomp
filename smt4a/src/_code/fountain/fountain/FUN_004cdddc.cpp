@@ -1,131 +1,105 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004cdddc` (_code @ 0x4cdddc, 0x1e4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: camera-parameter aggregate register loads, allocation scratch and stripped-call NOPs differ. */
+#include "Model/ModelList.h"
+#include "gfx/CameraMatrixCache.h"
+#include "gfx/CameraParameters.h"
+#include "status/StatusCamera.h"
+#include "shard/Shard0040.h"
 
-extern "C" {
-
-int textFormatBuffer(unsigned char [136], unsigned char *, int);
-int FUN_0013c884(int, int);
-int uiSetFloatPair(int);
-int FUN_0014f0dc(int, unsigned char [12], unsigned char [12], unsigned char [48]);
-int FUN_001523b8(int, int);
-int FUN_00178b04(int, unsigned char *, int);
-int FUN_00186e2c(unsigned char [12], unsigned int);
-int FUN_001cd3ec(void);
-int mapLoadSkyTable(int);
-int asdLoadFileAsyncSimple(...);
-int mapEnvironmentApplyPreset(int, int);
-int campCommonBgAcquire(void);
-int FUN_0031e198(void);
-int campButtonHelpAcquire(void);
-int FUN_0036b824(...);
-int FUN_0040ae70(unsigned int, int);
-int resourceOwnerLoadNamed(int, unsigned char *);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spBC; /* 0xbc: local_bc */
-} param_1_stack;
-
-extern unsigned char LAB_004cdfc4; /* 0x4cdfc4 */
-extern unsigned char LAB_004ce028; /* 0x4ce028 */
-extern unsigned char LAB_004ce044; /* 0x4ce044 */
-extern unsigned char LAB_004ce05c; /* 0x4ce05c */
-extern unsigned char LAB_004ce07c; /* 0x4ce07c */
-extern unsigned char LAB_004ce094; /* 0x4ce094 */
-extern unsigned char LAB_004ce0ac; /* 0x4ce0ac */
-extern int g_handleRegistry; /* 0x56fcc0 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_0013c884. */
-/* Supplied declaration required: uiSetFloatPair. */
-/* Supplied declaration required: FUN_0014f0dc. */
-/* Supplied declaration required: FUN_001523b8. */
-/* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_00186e2c. */
-/* Supplied declaration required: FUN_001cd3ec. */
-/* Supplied declaration required: mapLoadSkyTable. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: mapEnvironmentApplyPreset. */
-/* Supplied declaration required: campCommonBgAcquire. */
-/* Supplied declaration required: FUN_0031e198. */
-/* Supplied declaration required: campButtonHelpAcquire. */
-/* Supplied declaration required: FUN_0036b824. */
-extern unsigned int FUN_00387350(unsigned char *);
-extern unsigned int modelListInit(void);
-/* Supplied declaration required: FUN_0040ae70. */
-extern int FUN_0040af60(unsigned int);
-/* Supplied declaration required: resourceOwnerLoadNamed. */
-
-
-void FUN_004cdddc(int param_1)
-
-{
-/* irregular: 17 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [12];
-  unsigned char temp_v4 [12];
-  unsigned char temp_v5 [48];
-  unsigned char temp_v6 [136];
-  
-  temp_v0 = 0x20;
-  FUN_00178b04(0x20,&LAB_004cdfc4,0x18d);
-  temp_v1 = 0;
-  if (temp_v0 != 0) {
-    temp_v1 = modelListInit();
-  }
-  *(unsigned int *)(param_1 + 0x20) = temp_v1;
-  FUN_001cd3ec();
-  temp_v0 = 0x20;
-  FUN_00178b04(0x20,&LAB_004cdfc4,0x191);
-  temp_v1 = 0;
-  if (temp_v0 != 0) {
-    temp_v1 = modelListInit();
-  }
-  *(unsigned int *)(param_1 + 0x24) = temp_v1;
-  FUN_001cd3ec();
-  temp_v0 = 0;
-  do {
-    textFormatBuffer(temp_v6,&LAB_004ce028,temp_v0 + 1);
-    temp_v2 = 0x20;
-    FUN_00178b04(0x20,&LAB_004cdfc4,0x198);
-    temp_v1 = 0;
-    if (temp_v2 != 0) {
-      temp_v1 = modelListInit();
-    }
-    *(unsigned int *)(param_1 + temp_v0 * 4 + 0x28) = temp_v1;
-    FUN_001cd3ec();
-    temp_v2 = g_handleRegistry;
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 3);
-  *(int *)(param_1 + 0x558) = g_handleRegistry;
-  resourceOwnerLoadNamed(temp_v2,&LAB_004ce044);
-  temp_v0 = FUN_0040af60(*(unsigned int *)(param_1 + 0x558));
-  if (temp_v0 != 0) {
-    FUN_0040ae70(*(unsigned int *)(param_1 + 0x558),1);
-  }
-  mapLoadSkyTable(200);
-  mapEnvironmentApplyPreset(4,0);
-  temp_v1 = FUN_00387350(&LAB_004ce05c);
-  *(unsigned int *)(param_1 + 0x34) = 0;
-  *(unsigned int *)(param_1 + 0x544) = temp_v1;
-  FUN_0013c884(param_1 + 0x38,1);
-  temp_v0 = param_1 + 0x38;
-  FUN_00186e2c(temp_v3,*(unsigned int *)(param_1 + 0x544));
-  uiSetFloatPair(temp_v0);
-  FUN_0014f0dc(temp_v0,temp_v3,temp_v4,temp_v5);
-  FUN_001523b8(temp_v0,1);
-  FUN_0036b824(param_1 + 0x38);
-  *(int *)(g_handleRegistry + 0xc) = param_1 + 0x38;
-  campCommonBgAcquire();
-  campButtonHelpAcquire();
-  asdLoadFileAsyncSimple(&LAB_004ce07c,param_1 + 0x10,0);
-  asdLoadFileAsyncSimple(&LAB_004ce094,param_1 + 0x14,0);
-  asdLoadFileAsyncSimple(&LAB_004ce0ac,param_1 + 0x58c,0);
-  FUN_0031e198();
-  return;
+namespace {
+struct FountainInitializationView {
+    u8 unk000[0x10];
+    void *effectFile;
+    void *messageFile;
+    u8 unk018[8];
+    ModelList *environment;
+    ModelList *character;
+    ModelList *objects[3];
+    u32 mode;
+    CameraMatrixCache camera;
+    /* The float-pair setter writes one float beyond the canonical camera prefix. */
+    f32 cameraRange;
+    CameraParameterOwner *cameraParameters;
+    u8 unk548[0x10];
+    LockedObj *resources;
+    u8 unk55C[0x30];
+    void *tableFile;
+};
+typedef char FountainInitializationOffsets[
+    offsetof(FountainInitializationView, environment) == 0x20 &&
+    offsetof(FountainInitializationView, camera) == 0x38 &&
+    offsetof(FountainInitializationView, cameraParameters) == 0x544 &&
+    offsetof(FountainInitializationView, resources) == 0x558 &&
+    offsetof(FountainInitializationView, tableFile) == 0x58C ? 1 : -1];
 }
+extern "C" {
+extern LockedObj *g_handleRegistry;
+void *FUN_00178b04(u32 bytes, const char *file, u32 line);
+ModelList *modelListInit(ModelList *list);
+void FUN_001cd3ec(ModelList *list, const char *name);
+s32 textFormatBuffer(char *output, const char *format, ...);
+void resourceOwnerLoadNamed(LockedObj *owner, const char *name);
+u8 FUN_0040af60(LockedObj *owner);
+void FUN_0040ae70(LockedObj *owner, u32 enabled);
+void mapLoadSkyTable(u32 number);
+void mapEnvironmentApplyPreset(s32 preset, s32 mode);
+CameraParameterOwner *FUN_00387350(const char *name);
+void FUN_0013c884(CameraMatrixCache *camera, u32 mode);
+void cameraExportParameters(CameraParameters *output, const CameraParameterOwner *owner);
+void uiSetFloatPair(CameraMatrixCache *camera, f32 first, f32 second);
+void FUN_0014f0dc(CameraMatrixCache *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
+void FUN_001523b8(CameraMatrixCache *camera, u32 pivot, f32 first, f32 second, f32 third, f32 fourth);
+void FUN_0036b824(CameraMatrixCache *camera);
+void campCommonBgAcquire();
+void campButtonHelpAcquire();
+void asdLoadFileAsyncSimple(const char *name, void **output, u32 mode);
+void FUN_0031e198();
 
-} /* extern "C" */
+void FUN_004cdddc(FountainInitializationView *work)
+{
+    const char *file = "c:\\SMT4F\\SMT4F\\sdds4\\program\\fountain\\fountain.cpp";
+    ModelList *list = static_cast<ModelList *>(FUN_00178b04(sizeof(ModelList), file, 0x18D));
+    if (list != NULL)
+        list = modelListInit(list);
+    work->environment = list;
+    FUN_001cd3ec(list, "fountain/fountain.bam");
+    list = static_cast<ModelList *>(FUN_00178b04(sizeof(ModelList), file, 0x191));
+    if (list != NULL)
+        list = modelListInit(list);
+    work->character = list;
+    FUN_001cd3ec(list, "fountain/ch001.bam");
+    char name[128];
+    for (s32 index = 0; index < 3; ++index) {
+        textFormatBuffer(name, "fountain/obj%03d.bam", index + 1);
+        list = static_cast<ModelList *>(FUN_00178b04(sizeof(ModelList), file, 0x198));
+        if (list != NULL)
+            list = modelListInit(list);
+        work->objects[index] = list;
+        FUN_001cd3ec(list, name);
+    }
+    LockedObj *resources = g_handleRegistry;
+    work->resources = resources;
+    resourceOwnerLoadNamed(resources, "fountain/fountain.bch");
+    if (FUN_0040af60(work->resources) != 0)
+        FUN_0040ae70(work->resources, 1);
+    mapLoadSkyTable(200);
+    mapEnvironmentApplyPreset(4, 0);
+    CameraParameterOwner *parameters = FUN_00387350("fountain/fountain.bccam");
+    work->mode = 0;
+    work->cameraParameters = parameters;
+    FUN_0013c884(&work->camera, 1);
+    CameraParameters pose;
+    cameraExportParameters(&pose, work->cameraParameters);
+    uiSetFloatPair(&work->camera, 5.0f, 1.0f);
+    FUN_0014f0dc(&work->camera, reinterpret_cast<const Vec3 *>(&pose.eye),
+                reinterpret_cast<const Vec3 *>(&pose.target), reinterpret_cast<const Vec3 *>(&pose.up));
+    FUN_001523b8(&work->camera, 1, pose.fieldOfView, pose.nearClip, pose.farClip, pose.aspect);
+    FUN_0036b824(&work->camera);
+    g_handleRegistry->fountain.camera = &work->camera;
+    campCommonBgAcquire();
+    campButtonHelpAcquire();
+    asdLoadFileAsyncSimple("fountain/fountain.bf", &work->effectFile, 0);
+    asdLoadFileAsyncSimple("fountain/mes_data.mbm", &work->messageFile, 0);
+    asdLoadFileAsyncSimple("fountain/Fountain.tbb", &work->tableFile, 0);
+    FUN_0031e198();
+}
+}

@@ -14,7 +14,7 @@ int FUN_00203b40(int, int, int, int, int, int);
 int FUN_00270104(void);
 int FUN_002a4878(int);
 int widgetSubCallIfVisible(...);
-int FUN_002cb438(int, unsigned int, int);
+int screenSetContextHint(int, unsigned int, int);
 int buttonHelpGetValue(void);
 int FUN_003756c8(void);
 int gameDataFlagTestBit(int);
@@ -37,7 +37,7 @@ extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: FUN_002a4878. */
 /* Supplied declaration required: widgetSubCallIfVisible. */
 extern int objectApplyIfUnblocked(unsigned int);
-/* Supplied declaration required: FUN_002cb438. */
+/* Supplied declaration required: screenSetContextHint. */
 extern unsigned int FUN_002cc9e0(int, unsigned int);
 /* Supplied declaration required: buttonHelpGetValue. */
 extern int uiSearchPrimary(unsigned int);
@@ -90,7 +90,7 @@ void FUN_0020ad6c(int param_1,int param_2,int param_3)
     }
     else {
       temp_v2 = FUN_002cc9e0(param_1,1);
-      FUN_002cb438(param_1,temp_v2,*piVar8);
+      screenSetContextHint(param_1,temp_v2,*piVar8);
     }
   }
   if (param_2 != 2) {

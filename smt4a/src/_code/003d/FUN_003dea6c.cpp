@@ -1,122 +1,91 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dea6c` (_code @ 0x3dea6c, 0x1e0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: argument/count address sharing, saved frame, title cold-branch and switch tail layout differ. */
+#include "common.h"
 
+struct DefinitionMessageArgument { u16 kind; u16 id; u32 count; };
+struct DefinitionMessageRecord {
+    u8 prefix[8];
+    char title[0xF8];
+    DefinitionMessageArgument arguments[4];
+};
+struct DefinitionMessageDescriptor {
+    s16 id;
+    char name[53];
+    char suffix[1];
+};
 extern "C" {
+DefinitionMessageRecord* FUN_001ad9b4(u16 id);
+const char* FUN_0015f858(u16 id, s32 converted);
+const char* FUN_00180118(u16 id);
+const char* dataTable0cFindByKey(u16 id);
+char* libc_strcpy(char* destination, const char* source);
+void FUN_001654f0(const char* input, char* output);
+void FUN_003180c4(s32 parameter, const char* value);
+void FUN_00359974(s32 parameter, u32 value, s32 width, u32 flags);
+s32 FUN_002ebda8(void);
+DefinitionMessageDescriptor* dataTableGetEntry37(s32 index);
 
-int FUN_0015f858(unsigned int, int);
-int FUN_001654f0(unsigned char [128], unsigned char [132]);
-int FUN_00180118(unsigned int);
-int FUN_001ad9b4(void);
-int dataTable0cFindByKey(unsigned int);
-int libc_strcpy(...);
-int FUN_002ebda8(void);
-int FUN_003180c4(...);
-int FUN_00359974(...);
-
-/* Supplied declaration required: FUN_0015f858. */
-/* Supplied declaration required: FUN_001654f0. */
-/* Supplied declaration required: FUN_00180118. */
-/* Supplied declaration required: FUN_001ad9b4. */
-/* Supplied declaration required: dataTable0cFindByKey. */
-extern short *dataTableGetEntry37(int);
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002ebda8. */
-/* Supplied declaration required: FUN_003180c4. */
-/* Supplied declaration required: FUN_00359974. */
-
-
-void FUN_003dea6c(int param_1,int param_2,int param_3)
-
+void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle)
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned int temp_v0;
-  short *psVar2;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned char temp_v4 [128];
-  unsigned char temp_v5 [132];
-  
-  temp_v2 = 0;
-  if (param_3 != 0) {
-    temp_v3 = param_1;
-    FUN_001ad9b4();
-    if (temp_v3 != 0) {
-      temp_v2 = temp_v3 + 8;
-    }
-    libc_strcpy(temp_v4,temp_v2);
-    FUN_001654f0(temp_v4,temp_v5);
-    FUN_003180c4(0x28,temp_v5);
-  }
-  else {
-    temp_v3 = param_1;
-    FUN_001ad9b4();
-    if (temp_v3 != 0) {
-      temp_v2 = temp_v3 + 8;
-    }
-    FUN_003180c4(0x28,temp_v2);
-  }
-  if ((param_2 != 0) && (FUN_001ad9b4(), param_1 != 0)) {
-    temp_v2 = 0;
-    do {
-      temp_v3 = param_1 + temp_v2 * 8;
-      temp_v0 = (unsigned int)*(unsigned short *)(temp_v3 + 0x100);
-      switch(temp_v0) {
-      case 1:
-      case 7:
-        temp_v0 = (unsigned int)*(unsigned short *)(temp_v3 + 0x102);
-        FUN_0015f858(temp_v0,param_3);
-        libc_strcpy(temp_v4,temp_v0);
-        temp_v1 = temp_v2;
-        FUN_003180c4(temp_v1,temp_v4);
-        FUN_00359974(temp_v2 + 0x18,*(unsigned int *)(temp_v3 + 0x104),0xffffffff,0);
-        break;
-      case 2:
-        temp_v0 = (unsigned int)*(unsigned short *)(temp_v3 + 0x102);
-        FUN_00180118(temp_v0);
-        libc_strcpy(temp_v4,temp_v0);
-        temp_v1 = temp_v2 + 8;
-        FUN_003180c4(temp_v1,temp_v4);
-        FUN_00359974(temp_v2 + 0x18,*(unsigned int *)(temp_v3 + 0x104),0xffffffff,0);
-        break;
-      case 5:
-        temp_v0 = (unsigned int)*(unsigned short *)(temp_v3 + 0x102);
-        dataTable0cFindByKey(temp_v0);
-        temp_v3 = temp_v2 + 0x29;
-        FUN_003180c4(temp_v3,temp_v0);
-        break;
-      case 6:
-        FUN_00359974(temp_v2 + 0x18,*(unsigned int *)(temp_v3 + 0x104),0xffffffff,0);
-        break;
-      case 8:
-        FUN_002ebda8();
-        temp_v1 = 0;
-        if (0 < (int)temp_v0) {
-          do {
-            psVar2 = (short *)dataTableGetEntry37(temp_v1);
-            if (*psVar2 == *(short *)(temp_v3 + 0x102)) {
-              if (psVar2 != (short *)0x0) {
-                FUN_003180c4(temp_v2 + 0x29,psVar2 + 1);
-                FUN_00359974(temp_v2 + 0x2a,*(unsigned int *)(temp_v3 + 0x104),0xffffffff,0);
-                if (*(char *)((int)psVar2 + 0x37) == '0') {
-                  temp_v0 = 0x3dec4c;
-                  temp_v3 = temp_v2 + 0x2b;
-                  FUN_003180c4(temp_v3,temp_v0);
-                  break;
-                }
-                FUN_003180c4(temp_v2 + 0x2b,(int)psVar2 + 0x37);
-              }
-              break;
-            }
-            temp_v1 = temp_v1 + 1;
-          } while (temp_v1 < (int)temp_v0);
+    char text[128];
+    char converted[128];
+    const char* title = NULL;
+    if (convertTitle) {
+        DefinitionMessageRecord* definition = FUN_001ad9b4(definitionId);
+        if (definition) {
+            title = definition->title;
         }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 4);
-  }
-  return;
+        libc_strcpy(text, title);
+        FUN_001654f0(text, converted);
+        FUN_003180c4(40, converted);
+    } else {
+        DefinitionMessageRecord* definition = FUN_001ad9b4(definitionId);
+        if (definition) {
+            title = definition->title;
+        }
+        FUN_003180c4(40, title);
+    }
+    if (includeArguments) {
+        DefinitionMessageRecord* definition = FUN_001ad9b4(definitionId);
+        if (definition) {
+            for (s32 index = 0; index < 4; ++index) {
+                DefinitionMessageArgument* argument = &definition->arguments[index];
+                switch (argument->kind) {
+                case 1:
+                case 7:
+                    libc_strcpy(text, FUN_0015f858(argument->id, convertTitle));
+                    FUN_003180c4(index, text);
+                    FUN_00359974(index + 24, argument->count, -1, 0);
+                    break;
+                case 2:
+                    libc_strcpy(text, FUN_00180118(argument->id));
+                    FUN_003180c4(index + 8, text);
+                    FUN_00359974(index + 24, argument->count, -1, 0);
+                    break;
+                case 5:
+                    FUN_003180c4(index + 41, dataTable0cFindByKey(argument->id));
+                    break;
+                case 6:
+                    FUN_00359974(index + 24, argument->count, -1, 0);
+                    break;
+                case 8: {
+                    s32 count = FUN_002ebda8();
+                    for (s32 descriptorIndex = 0; descriptorIndex < count; ++descriptorIndex) {
+                        DefinitionMessageDescriptor* descriptor = dataTableGetEntry37(descriptorIndex);
+                        // The retail lookup compares the key before checking the returned pointer.
+                        if (descriptor->id == static_cast<s16>(argument->id)) {
+                            if (descriptor) {
+                                FUN_003180c4(index + 41, descriptor->name);
+                                FUN_00359974(index + 42, argument->count, -1, 0);
+                                FUN_003180c4(index + 43, descriptor->suffix[0] == '0' ? "" : descriptor->suffix);
+                            }
+                            break;
+                        }
+                    }
+                    break;
+                }
+                }
+            }
+        }
+    }
 }
-
-} /* extern "C" */
+}

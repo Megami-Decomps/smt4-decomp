@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022a918(...);
+int btlGetPassiveAffinityOverride(...);
 int FUN_0022aa38(unsigned int *, unsigned int);
 int selectionCopySupportedValue(unsigned int, unsigned int *);
 int FUN_0022abe0(...);
@@ -55,7 +55,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0022a918. */
+/* Supplied declaration required: btlGetPassiveAffinityOverride. */
 /* Supplied declaration required: FUN_0022aa38. */
 /* Supplied declaration required: selectionCopySupportedValue. */
 /* Supplied declaration required: FUN_0022abe0. */
@@ -259,7 +259,7 @@ LAB_00228c48:
         FUN_00246134(param_5,(&temp_v16)[temp_v8],*(unsigned char *)(param_1 + 0x23),0xffffffff);
         temp_v25[temp_v8] = temp_v9;
         temp_v9 = param_5;
-        FUN_0022a918(param_5,(&temp_v16)[temp_v8]);
+        btlGetPassiveAffinityOverride(param_5,(&temp_v16)[temp_v8]);
         temp_v7 = temp_v25[temp_v8];
         temp_v25[temp_v8] = temp_v9 | temp_v7;
         if ((((temp_v9 | temp_v7) & 0x80000000) != 0) &&

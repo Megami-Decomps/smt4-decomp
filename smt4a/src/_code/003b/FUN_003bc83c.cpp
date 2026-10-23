@@ -1,120 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bc83c` (_code @ 0x3bc83c, 0x1dc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: vector/end-pointer registers and encoded-category loop strength reduction differ. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "gamedata/Table8Record.h"
+#include "gamedata/Table04Record.h"
+#include <vector>
 
 extern "C" {
+s32 scrGetArg(s32);
+void sysMemClear(void *, u32);
+BtlMainStateA *btlGetMainState();
+const Table8Record *dataTable8FindRecord(u32);
+const Table04Record *dataTable04FindById(u32);
 
-int dataTable8FindRecord(void);
-int dataTable04FindById(void);
-int scrGetArg(int);
-int sysMemClear(int [21], int);
-
-extern unsigned int g_btlCandidateMasks; /* 0x570288 */
-extern unsigned int DAT_0057028c; /* 0x57028c */
-extern unsigned int DAT_005702a0; /* 0x5702a0 */
-extern unsigned int DAT_005702a4; /* 0x5702a4 */
-extern unsigned int DAT_005702b0; /* 0x5702b0 */
-extern unsigned int DAT_005702b4; /* 0x5702b4 */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: sysMemClear. */
-
-
-unsigned int FUN_003bc83c(void)
-
+/* Keep only candidates whose skill category is supplied by a matching active combatant. */
+u32 FUN_003bc83c()
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned short *puVar7;
-  unsigned int temp_v6;
-  int *piVar9;
-  unsigned short *puVar10;
-  unsigned short *puVar11;
-  int temp_v7;
-  unsigned int *puVar13;
-  unsigned short *puVar14;
-  int *piVar15;
-  int *piVar16;
-  int aiStack_70 [21];
-  
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetArg(1);
-  sysMemClear(aiStack_70,0x54);
-  temp_v3 = btlGetMainState();
-  if (temp_v1 != 0) {
-    piVar15 = (int *)(temp_v3 + 0x4e58);
-    piVar16 = (int *)(temp_v3 + 0x4e5c);
-    if (*piVar15 != *piVar16) {
-      temp_v1 = 0;
-      do {
-        temp_v4 = btlGetMainState();
-        puVar13 = (unsigned int *)(*(int *)(temp_v4 + 0x1ffc) + temp_v1 * 0x408);
-        temp_v5 = *puVar13;
-        temp_v6 = puVar13[1];
-        if ((((DAT_005702a0 & temp_v5) != 0 || (DAT_005702a4 & temp_v6) != 0) &&
-            ((g_btlCandidateMasks & temp_v5) != 0 || (DAT_0057028c & temp_v6) != 0)) &&
-           ((temp_v5 & DAT_005702b0) == 0 && (temp_v6 & DAT_005702b4) == 0)) {
-          temp_v4 = 0;
-          temp_v7 = 0x15;
-          piVar9 = aiStack_70;
-          do {
-            temp_v0 = temp_v4 * 2;
-            temp_v4 = temp_v4 + 1;
-            if (temp_v2 == *(unsigned short *)((int)puVar13 + temp_v0 + 0x2b6) >> 10) {
-              *piVar9 = 1;
+    /* These members lie beyond the shared main-state prefix. */
+    struct CandidateListView {
+        u8 unk0000[0x4E58];
+        std::vector<u16> candidates;
+    };
+    struct EncodedCategoryValues { u16 values[21]; };
+    typedef char CandidateListOffsets[
+        offsetof(CandidateListView, candidates) == 0x4E58 &&
+        sizeof(std::vector<u16>) == 12 &&
+        offsetof(BtlCombatantEntryA, encodedStats.values) == 0x2B6 ? 1 : -1];
+    s32 enabled = scrGetArg(0);
+    u32 category = scrGetArg(1);
+    s32 supported[21];
+    sysMemClear(supported, sizeof(supported));
+    BtlMainStateA *battle = btlGetMainState();
+    if (enabled) {
+        std::vector<u16> &candidates = ((CandidateListView *)battle)->candidates;
+        if (!candidates.empty()) {
+            for (s32 index = 0; index < 109; ++index) {
+                BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+                u64 flags = entry->flags;
+                if ((flags & g_btlCandidateMasks.unavailable) &&
+                    (flags & g_btlCandidateMasks.required) &&
+                    !(flags & g_btlCandidateMasks.excluded)) {
+                    const EncodedCategoryValues *values =
+                        (const EncodedCategoryValues *)entry->encodedStats.values;
+                    for (s32 column = 0; column < 21; ++column) {
+                        if (category == (u32)(values->values[column] >> 10))
+                            supported[column] = 1;
+                    }
+                }
             }
-            temp_v7 = temp_v7 - 1;
-            piVar9 = piVar9 + 1;
-          } while (temp_v7 != 0);
+            std::vector<u16>::iterator candidate = candidates.begin();
+            while (candidate != candidates.end()) {
+                const Table8Record *mapping = dataTable8FindRecord(*candidate);
+                const Table04Record *skill = dataTable04FindById(mapping->unk32);
+                if (skill != NULL && supported[(skill->properties & 0xF800) >> 11] > 0)
+                    ++candidate;
+                else
+                    candidate = candidates.erase(candidate);
+            }
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 0x6d);
-      puVar14 = (unsigned short *)*piVar15;
-      if ((unsigned short *)*piVar16 != puVar14) {
-        do {
-          temp_v2 = (unsigned int)*puVar14;
-          dataTable8FindRecord();
-          temp_v2 = (unsigned int)*(unsigned short *)(temp_v2 + 0x32);
-          dataTable04FindById();
-          if ((temp_v2 != 0) &&
-             (*(int *)((int)aiStack_70 + ((*(unsigned int *)(temp_v2 + 0x28) & 0xf800) >> 9)) >= 1)) {
-            puVar14 = puVar14 + 1;
-          }
-          else {
-            puVar7 = *(unsigned short **)(temp_v3 + 0x4e5c);
-            if ((unsigned short *)*piVar15 != puVar7) {
-              puVar10 = puVar14 + 1;
-              if ((puVar7 != puVar10) && (temp_v1 = (int)puVar7 - (int)puVar10, 0 < temp_v1 >> 1)) {
-                puVar7 = puVar14;
-                puVar11 = puVar14 + -1;
-                if (temp_v1 * 0x40000000 < 0) {
-                  *puVar14 = *puVar10;
-                  puVar7 = puVar10;
-                  puVar11 = puVar14;
-                }
-                for (temp_v1 = temp_v1 >> 2; temp_v1 != 0; temp_v1 = temp_v1 - 1) {
-                  puVar11[1] = puVar7[1];
-                  puVar7 = puVar7 + 2;
-                  puVar11 = puVar11 + 2;
-                  *puVar11 = *puVar7;
-                }
-              }
-              *(int *)(temp_v3 + 0x4e5c) = *(int *)(temp_v3 + 0x4e5c) - 2;
-            }
-          }
-        } while ((unsigned short *)*piVar16 != puVar14);
-      }
     }
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

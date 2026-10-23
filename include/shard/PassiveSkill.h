@@ -38,9 +38,26 @@ typedef char PassiveSkillRecordScalingOffsetCheck[
 
 /* An active skill record (ids up to 400). */
 struct ActiveSkillRecord {
-    /* 0x00 */ u8 unk00[0x24];
+    union {
+        /* 0x00 */ u8 unk00[0x24];
+        struct {
+            /* 0x00 */ u8 unk00[0x20];
+            /* 0x20 */ u16 costParameter;
+        } cost;
+        struct {
+            u8 prefix00[0x23];
+            u8 category;
+        } classification;
+    };
     /* 0x24 */ u16 sortKey;
 };
+
+typedef char ActiveSkillRecordCostOffsetCheck[
+    offsetof(ActiveSkillRecord, cost.costParameter) == 0x20 &&
+    sizeof(ActiveSkillRecord) == 0x26 ? 1 : -1];
+typedef char ActiveSkillRecordCategoryOffsetCheck[
+    offsetof(ActiveSkillRecord, classification.category) == 0x23 &&
+    sizeof(ActiveSkillRecord) == 0x26 ? 1 : -1];
 
 /* A skill list entry: the skill id and the unit that holds it (negative for none). */
 struct SkillListEntry {

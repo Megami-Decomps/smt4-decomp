@@ -111,10 +111,21 @@ typedef struct StateObject {
 
 /* A range [used, total) style counter pair at +0x14/+0x18. */
 typedef struct RangeObject {
-    /* 0x00 */ u8 unk00[0x14];
+    union {
+        /* 0x00 */ u8 unk00[0x14];
+        struct {
+            u8 prefix[0xc];
+            u8 *base;
+            u32 length;
+        } payload;
+    };
     /* 0x14 */ s32 end;
     /* 0x18 */ s32 pos;
 } RangeObject;
+typedef char RangeObjectPayloadOffsets[
+    offsetof(RangeObject, payload.base) == 0xc &&
+    offsetof(RangeObject, payload.length) == 0x10 &&
+    sizeof(RangeObject) == 0x1c ? 1 : -1];
 
 typedef struct Child22 {
     /* 0x00 */ u8 unk00[0x22];

@@ -7,7 +7,7 @@ extern "C" {
 int wordTripleClear(...);
 int FUN_002039d0(...);
 int colorKeyTrackAdvanceRgb(...);
-int FUN_00268334(...);
+int effCopyTransformColorKeys(...);
 int FUN_00285320(...);
 int FUN_002853ec(...);
 int FUN_002a65fc(...);
@@ -46,7 +46,7 @@ typedef struct {
 /* Supplied declaration required: wordTripleClear. */
 /* Supplied declaration required: FUN_002039d0. */
 /* Supplied declaration required: colorKeyTrackAdvanceRgb. */
-/* Supplied declaration required: FUN_00268334. */
+/* Supplied declaration required: effCopyTransformColorKeys. */
 /* Supplied declaration required: FUN_00285320. */
 /* Supplied declaration required: FUN_002853ec. */
 /* Supplied declaration required: FUN_002a65fc. */
@@ -118,7 +118,7 @@ void FUN_00213d1c(int param_1,fn_00213d1c_arg1 *param_2)
   *(unsigned int *)(param_1 + 0x230) = 0;
   *(unsigned int *)(param_1 + 0x234) = 0;
   *(unsigned int *)(param_1 + 0x238) = 0;
-  FUN_00268334(param_1,param_2);
+  effCopyTransformColorKeys(param_1,param_2);
   if (*(int *)(param_1 + 0x50) != 0) {
     if (*(short *)(param_1 + 0x3c) != 0) {
       FUN_002039d0(2,*(int *)(param_1 + 0x50),1);

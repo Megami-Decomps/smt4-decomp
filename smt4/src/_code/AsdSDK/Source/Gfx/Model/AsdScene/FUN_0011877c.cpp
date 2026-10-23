@@ -1,81 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011877c` (_code @ 0x11877c, 0x128 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initializer stores, VFP constant scheduling and light-parameter groups use different registers. */
+#include "AsdSDK/Source/Gfx/Model/AsdSceneLight.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+void *asdMemoryAlloc(u32, u32, u32, u32, u32);
+AsdAllocatorObject *asdMemoryGetDefaultAllocator(void);
+AsdSceneLightObject *FUN_0012abd0(const AsdSceneLightDescription *, AsdAllocatorObject *);
 
-int asdMemoryAlloc(int, int, int, int, int);
-
-/* stack frame of void: 5 slot(s), 14 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned char sp1F; /* 0x1f: local_1f */
-    unsigned char sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern int FUN_0012abd0(unsigned char *, unsigned int);
-extern unsigned int asdMemoryGetDefaultAllocator(void);
-/* Supplied declaration required: asdMemoryAlloc. */
-
-
-unsigned int * FUN_0011877c(void)
-
+// Allocate a point light with default color, position, attenuation and cone parameters.
+AsdSceneLight *FUN_0011877c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int uStack_14;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAlloc(0x100,0x100,0,0xc,1);
-  puVar1[1] = 0;
-  *puVar1 = 0xffffffff;
-  puVar1[2] = 0;
-  temp_v0 = asdMemoryGetDefaultAllocator();
-  temp_v2 = 1;
-  temp_v3 = 1;
-  temp_v4 = 0;
-  temp_v5 = 0;
-  uStack_14 = 1;
-  temp_v1 = FUN_0012abd0(&temp_v2,temp_v0);
-  puVar1[1] = temp_v1;
-  temp_v1 = *(int *)(temp_v1 + 8);
-  puVar1[2] = temp_v1;
-  *(unsigned int *)(temp_v1 + 0xb8) = 2;
-  temp_v1 = puVar1[2];
-  *(unsigned int *)(temp_v1 + 0x50) = 0x40a00000;
-  *(unsigned int *)(temp_v1 + 0x48) = 0;
-  *(unsigned int *)(temp_v1 + 0x4c) = 0x41700000;
-  temp_v1 = puVar1[2];
-  *(unsigned int *)(temp_v1 + 0xbc) = 0x3e4ccccd;
-  *(unsigned int *)(temp_v1 + 0xc0) = 0x3e4ccccd;
-  *(unsigned int *)(temp_v1 + 0xc4) = 0x3e4ccccd;
-  *(unsigned int *)(temp_v1 + 200) = 0x3f800000;
-  temp_v1 = puVar1[2];
-  *(unsigned int *)(temp_v1 + 0xcc) = 0x3f800000;
-  *(unsigned int *)(temp_v1 + 0xd0) = 0x3f800000;
-  *(unsigned int *)(temp_v1 + 0xd4) = 0x3f800000;
-  *(unsigned int *)(temp_v1 + 0xd8) = 0x3f800000;
-  temp_v1 = puVar1[2];
-  *(unsigned int *)(temp_v1 + 0xe8) = 0x3c23d70a;
-  *(unsigned int *)(temp_v1 + 0xec) = 0x3a83126f;
-  *(unsigned int *)(temp_v1 + 0xf0) = 0x38d1b717;
-  *(unsigned int *)(puVar1[2] + 0xf4) = 0x3f800000;
-  temp_v1 = puVar1[2];
-  *(unsigned int *)(temp_v1 + 0xf8) = 0x3f800000;
-  *(unsigned int *)(temp_v1 + 0xfc) = 0x3fc90fdb;
-  temp_v1 = puVar1[2];
-  *(unsigned int *)(temp_v1 + 0xdc) = 0;
-  *(unsigned int *)(temp_v1 + 0xe0) = 0;
-  *(unsigned int *)(temp_v1 + 0xe4) = 0xbf800000;
-  return puVar1;
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Model\\AsdScene.cpp", 976);
+    AsdSceneLight *light = static_cast<AsdSceneLight *>(asdMemoryAlloc(0x100, 0x100, 0, sizeof(AsdSceneLight), 1));
+    light->object = NULL;
+    light->id = -1;
+    light->parameters = NULL;
+    AsdAllocatorObject *allocator = asdMemoryGetDefaultAllocator();
+    AsdSceneLightDescription description;
+    description.enabled = 1;
+    description.updateEnabled = 1;
+    description.unk04 = 0;
+    description.unk08 = 0;
+    description.count = 1;
+    light->object = FUN_0012abd0(&description, allocator);
+    light->parameters = light->object->parameters;
+    light->parameters->kind = 2;
+    f32 *position = light->parameters->position;
+    position[2] = 5.0f;
+    position[0] = 0.0f;
+    position[1] = 15.0f;
+    f32 *ambient = light->parameters->ambient;
+    ambient[0] = 0.2f;
+    ambient[1] = 0.2f;
+    ambient[2] = 0.2f;
+    ambient[3] = 1.0f;
+    f32 *diffuse = light->parameters->diffuse;
+    diffuse[0] = 1.0f;
+    diffuse[1] = 1.0f;
+    diffuse[2] = 1.0f;
+    diffuse[3] = 1.0f;
+    f32 *attenuation = light->parameters->attenuation;
+    attenuation[0] = 0.01f;
+    attenuation[1] = 0.001f;
+    attenuation[2] = 0.0001f;
+    light->parameters->intensity = 1.0f;
+    f32 *cutoff = light->parameters->cutoff;
+    cutoff[0] = 1.0f;
+    cutoff[1] = 1.57079637f;
+    f32 *direction = light->parameters->direction;
+    direction[0] = 0.0f;
+    direction[1] = 0.0f;
+    direction[2] = -1.0f;
+    return light;
 }
-
-} /* extern "C" */
+}

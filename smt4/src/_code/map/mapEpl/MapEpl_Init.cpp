@@ -1,113 +1,71 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `MapEpl_Init` (_code @ 0x1fa4ac, 0x1b0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: free-slot sentinel lifetime, path/file-size stack slots and position conversion/store grouping differ. */
+#include "map/mapEpl.h"
+#include "AsdSDK/AsdDebug.h"
+
+struct MapEffectPlacementRecord {
+    s8 map;
+    s8 area;
+    s16 x;
+    s16 y;
+    s16 z;
+    char name[16];
+};
+typedef char MapEffectPlacementRecordSize[sizeof(MapEffectPlacementRecord) == 0x18 ? 1 : -1];
 
 extern "C" {
+extern MapEpl *g_mapEpl;
+extern const char DAT_0040442c[];
+void *asdMemAlloc(s32 heap, s32 category, s32 flags, u32 bytes, s32 count);
+void textFormatBuffer(char *buffer, const char *format, ...);
+void *asdLoadFileSync(const char *path, u32 *size, u32 heap, u32 alignment);
+void *FUN_002a4e98(void *data);
+void FUN_002a3ab0(void *object, const f32 *position);
+s32 FUN_002fb3f4(void);
+MapEffectPlacementRecord *aocDataTable2dGetEntryKind3(u32 index);
 
-int FUN_002a3ab0(void);
-int FUN_002a4e98(void);
-int textFormatBuffer(unsigned char [44], unsigned char *, char *);
-int asdMemAlloc(int, int, int, int);
-int aocDataTable2dGetEntryKind3(void);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp58; /* 0x58: local_58 */
-} param_2_stack;
-
-extern unsigned char LAB_001fa668; /* 0x1fa668 */
-extern unsigned int *g_mapEpl; /* 0x447a10 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002a3ab0. */
-/* Supplied declaration required: FUN_002a4e98. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: asdMemAlloc. */
-extern unsigned int asdLoadFileSync(unsigned char *, unsigned int *, unsigned int, unsigned int);
-/* Supplied declaration required: aocDataTable2dGetEntryKind3. */
-extern int FUN_002fb3f4(void);
-
-
-void MapEpl_Init(int param_1,int param_2)
-
+void MapEpl_Init(s32 map, s32 area)
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  char *pcVar3;
-  int temp_v1;
-  unsigned int *puVar5;
-  char *pcVar6;
-  unsigned int in_fpscr;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned long long temp_v5;
-  unsigned int temp_v6 [2];
-  unsigned char temp_v7 [44];
-  
-  temp_v5 = 0;
-  if (g_mapEpl == (unsigned int *)0x0) {
-    temp_v6[0] = 1;
-    puVar1 = (unsigned int *)0x100;
-    asdMemAlloc(0x100,0x100,0,0x188);
-    g_mapEpl = puVar1;
-    *puVar1 = 0;
-    puVar1[1] = 0;
-    temp_v0 = 0;
-    do {
-      temp_v1 = temp_v0 + 1;
-      puVar1[temp_v0 * 6 + 6] = 0;
-      puVar1[temp_v0 * 6 + 7] = 0;
-      temp_v2 = (unsigned int)temp_v5;
-      puVar1[temp_v0 * 6 + 2] = temp_v2;
-      puVar1[temp_v0 * 6 + 3] = temp_v2;
-      puVar1[temp_v0 * 6 + 4] = temp_v2;
-      puVar1[temp_v0 * 6 + 5] = temp_v2;
-      temp_v0 = temp_v1;
-    } while (temp_v1 < 0x10);
-  }
-  pcVar6 = (char *)0x0;
-  temp_v0 = FUN_002fb3f4();
-  if (0 < temp_v0) {
-    do {
-      pcVar3 = pcVar6;
-      aocDataTable2dGetEntryKind3();
-      if (((*pcVar3 != -1) && (*pcVar3 == param_1)) && (pcVar3[1] == param_2)) {
-        textFormatBuffer(temp_v7,&LAB_001fa668,pcVar3 + 8);
-        puVar1 = g_mapEpl;
-        temp_v0 = 0;
-        do {
-          if (g_mapEpl[temp_v0 * 6 + 7] == 0) {
-            temp_v2 = asdLoadFileSync(temp_v7,temp_v6,1,0x80);
-            puVar1[temp_v0 * 6 + 6] = temp_v2;
-            FUN_002a4e98();
-            puVar1[temp_v0 * 6 + 7] = temp_v2;
-            temp_v1 = temp_v0;
-            break;
-          }
-          temp_v0 = temp_v0 + 1;
-          temp_v1 = -1;
-        } while (temp_v0 < 0x10);
-        puVar1 = g_mapEpl;
-        temp_v2 = VectorSignedToFloat((int)*(short *)(pcVar3 + 2),(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v3 = VectorSignedToFloat((int)*(short *)(pcVar3 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v4 = VectorSignedToFloat((int)*(short *)(pcVar3 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-        puVar5 = g_mapEpl + temp_v1 * 6 + 2;
-        if (g_mapEpl[temp_v1 * 6 + 7] != 0) {
-          g_mapEpl[temp_v1 * 6 + 5] = (int)temp_v5;
-          *puVar5 = temp_v2;
-          puVar1[temp_v1 * 6 + 3] = temp_v3;
-          puVar1[temp_v1 * 6 + 4] = temp_v4;
-          FUN_002a3ab0();
+    if (g_mapEpl == NULL) {
+        asdDebugTrace(DAT_0040442c, 67);
+        MapEpl *work = (MapEpl *)asdMemAlloc(0x100, 0x100, 0, sizeof(MapEpl), 1);
+        g_mapEpl = work;
+        work->state[0] = 0;
+        work->state[1] = 0;
+        for (s32 index = 0; index < MAP_EPL_ENTRIES; ++index) {
+            MapEplEntry *entry = &work->entries[index];
+            entry->data = NULL;
+            entry->object = NULL;
+            entry->position[0] = 0.0f;
+            entry->position[1] = 0.0f;
+            entry->position[2] = 0.0f;
+            entry->position[3] = 0.0f;
         }
-      }
-      pcVar6 = pcVar6 + 1;
-      temp_v0 = FUN_002fb3f4();
-    } while ((int)pcVar6 < temp_v0);
-  }
-  return;
+    }
+    for (s32 index = 0; index < FUN_002fb3f4(); ++index) {
+        MapEffectPlacementRecord *placement = aocDataTable2dGetEntryKind3(index);
+        if (placement->map != -1 && placement->map == map && placement->area == area) {
+            char path[32];
+            u32 fileSize;
+            textFormatBuffer(path, "effect_editor/%s.EPL", placement->name);
+            s32 slot = -1;
+            for (s32 candidate = 0; candidate < MAP_EPL_ENTRIES; ++candidate) {
+                MapEplEntry *entry = &g_mapEpl->entries[candidate];
+                if (entry->object == NULL) {
+                    entry->data = asdLoadFileSync(path, &fileSize, 1, 0x80);
+                    entry->object = FUN_002a4e98(entry->data);
+                    slot = candidate;
+                    break;
+                }
+            }
+            MapEplEntry *entry = &g_mapEpl->entries[slot];
+            if (entry->object != NULL) {
+                entry->position[3] = 0.0f;
+                entry->position[0] = (f32)placement->x;
+                entry->position[1] = (f32)placement->y;
+                entry->position[2] = (f32)placement->z;
+                FUN_002a3ab0(entry->object, entry->position);
+            }
+        }
+    }
 }
-
-} /* extern "C" */
+}

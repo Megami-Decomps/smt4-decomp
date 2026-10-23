@@ -1,74 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f7fac` (_code @ 0x1f7fac, 0x13c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: editor flag address register and literal-pool order differ from retail. */
+#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/EnemyEditor.h"
+#include "AsdSDK/AsdDebug.h"
+#include <stddef.h>
+struct BtlUi;
+/* The allocated session extends beyond the shared EnemyEditorWork prefix. */
+struct EditorSessionState {
+    union {
+        EnemyEditorWork editor;
+        struct {
+            u32 mode;
+            u32 actor;
+            u8 unk08[8];
+            s16 selection;
+            s8 leftSelection;
+            s8 rightSelection;
+        } initial;
+    };
+    u32 unk14;
+};
+typedef char EditorSessionStateLayoutCheck[(sizeof(EditorSessionState) == 0x18 && offsetof(EditorSessionState, initial.leftSelection) == 0x12) ? 1 : -1];
 extern "C" {
+extern BtlMainState *g_btlMain;
+extern BtlUi *g_btlUiBlock;
+extern void *DAT_00435ce8;
+u32 jobDispatchOptionalOwner(u32 job);
+u32 battleEditorRunForJob(u32 job);
+void FUN_002c9edc(u32 job);
+u32 taskCreateDraw(const char *name, s32 group, s32 startDelay, s32 endDelay, u32 (*update)(u32), void (*end)(u32), void *work, u32 parent);
+void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+s32 FUN_00256940(BtlMainState *battle, BtlMainState *owner, u32 enabled);
+void FUN_002568c4(s32 mode, s32 index);
+void FUN_00256898(s32 enabled, s32 mode);
+void FUN_0025c2d0(BtlUi *ui, u32 enabled);
 
-int FUN_00256898(int, int);
-int FUN_002568c4(int);
-int FUN_0025c2d0(int, int);
-int asdMemAlloc(int, int, int, int, int);
-int taskCreateDraw(...);
-
-/* stack frame of param_1: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern int jobDispatchOptionalOwner(...); /* 0x1e4a50 */
-extern unsigned char LAB_001f80f0; /* 0x1f80f0 */
-extern unsigned char LAB_001f8104; /* 0x1f8104 */
-extern int battleEditorRunForJob(...); /* 0x20edd8 */
-extern int FUN_002c9edc(...); /* 0x2c9edc */
-extern int g_btlMain; /* 0x4342c8 */
-extern unsigned int *DAT_00435ce8; /* 0x435ce8 */
-extern int g_btlUiBlock; /* 0x439ca8 */
-
-/* Supplied declaration required: FUN_00256898. */
-/* Supplied declaration required: FUN_002568c4. */
-extern int FUN_00256940(int, unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_0025c2d0. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-
-
-void FUN_001f7fac(unsigned int *param_1)
-
+void FUN_001f7fac(BtlMainState *battle)
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned char *puVar1;
-  unsigned int *puVar2;
-  int temp_v0;
-  
-  puVar1 = &LAB_001f80f0;
-  taskCreateDraw(&LAB_001f80f0,2,0,0,jobDispatchOptionalOwner,FUN_002c9edc,param_1,*param_1);
-  param_1[0x16] = (unsigned int)puVar1;
-  taskCreateDraw(&LAB_001f8104,0x73,0,0,battleEditorRunForJob,0,param_1,puVar1);
-  puVar2 = (unsigned int *)0x100;
-  asdMemAlloc(0x100,0x100,0,0x18,1);
-  DAT_00435ce8 = puVar2;
-  *puVar2 = 0;
-  puVar2[1] = (unsigned int)*(unsigned char *)((int)param_1 + 0x1e9d);
-  *(unsigned short *)(puVar2 + 4) = 0xffff;
-  *(unsigned char *)((int)puVar2 + 0x12) = 0xff;
-  *(unsigned char *)((int)puVar2 + 0x13) = 0xff;
-  if (g_btlMain != 0) {
-    if ((-1 < *(int *)(g_btlMain + 0x760)) &&
-       (temp_v0 = FUN_00256940(g_btlMain,param_1,1), temp_v0 != 0)) {
-      FUN_002568c4(0);
+    u32 editorJob = taskCreateDraw("btlEditor Calc", 2, 0, 0, jobDispatchOptionalOwner, FUN_002c9edc, battle, battle->encounter.ownerJob);
+    battle->editor.job = editorJob;
+    taskCreateDraw("btlEditor DrawUp", 0x73, 0, 0, battleEditorRunForJob, 0, battle, editorJob);
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlEditor.cpp", 972);
+    EditorSessionState *session = static_cast<EditorSessionState *>(asdMemAlloc(0x100, 0x100, 0, sizeof(EditorSessionState), 1));
+    DAT_00435ce8 = session;
+    session->initial.mode = 0;
+    session->initial.actor = battle->actions.completedCount;
+    session->editor.selection = -1;
+    session->initial.leftSelection = -1;
+    session->initial.rightSelection = -1;
+    if (g_btlMain) {
+        if (g_btlMain->talk.unitIndex >= 0 && FUN_00256940(g_btlMain, battle, 1))
+            FUN_002568c4(0, 0);
+        FUN_00256898(1, 0);
     }
-    FUN_00256898(1,0);
-  }
-  param_1[0x112a] = param_1[0x112a] | 0x80000;
-  if (g_btlUiBlock != 0) {
-    FUN_0025c2d0(g_btlUiBlock,1);
-    return;
-  }
-  return;
+    battle->editorControl.flags |= 0x80000;
+    if (g_btlUiBlock)
+        FUN_0025c2d0(g_btlUiBlock, 1);
 }
-
-} /* extern "C" */
+}

@@ -1,70 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e1540` (_code @ 0x1e1540, 0x178 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: extracted ID/register lifetimes and second-ingredient helper inlining use different saved registers. */
+#include "shard/W5_W5Match2_UniteWork.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 
 extern "C" {
-
-int devilGetRecord(void);
-
-extern int g_unite; /* 0x43dd68 */
-
-extern int dataTableGetEntry0102Value(unsigned short);
-/* Supplied declaration required: devilGetRecord. */
-
-
-int FUN_001e1540(unsigned short *param_1,unsigned short *param_2)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned short *puVar2;
-  int temp_v0;
-  int temp_v1;
-  unsigned short *puVar5;
-  unsigned short *puVar6;
-  int temp_v2;
-  
-  temp_v2 = g_unite;
-  puVar5 = (unsigned short *)(*(unsigned int *)(g_unite + (unsigned int)*param_1 * 8 + 0x1390) & 0x7fff);
-  puVar6 = (unsigned short *)(*(unsigned int *)(g_unite + (unsigned int)*param_2 * 8 + 0x1390) & 0x7fff);
-  puVar1 = puVar5;
-  devilGetRecord();
-  puVar2 = puVar6;
-  devilGetRecord();
-  temp_v0 = dataTableGetEntry0102Value(*puVar1);
-  temp_v1 = dataTableGetEntry0102Value(*puVar2);
-  temp_v0 = temp_v0 - temp_v1;
-  if (temp_v0 == 0) {
-    devilGetRecord();
-    devilGetRecord();
-    temp_v0 = (unsigned int)(unsigned char)puVar5[1] - (unsigned int)(unsigned char)puVar6[1];
-    if ((temp_v0 == 0) &&
-       (temp_v0 = (unsigned int)*(unsigned char *)((int)puVar6 + 3) - (unsigned int)*(unsigned char *)((int)puVar5 + 3), temp_v0 == 0)) {
-      temp_v0 = (unsigned int)*puVar5 - (unsigned int)*puVar6;
-    }
-  }
-  if (temp_v0 == 0) {
-    puVar5 = (unsigned short *)((*(unsigned int *)(temp_v2 + (unsigned int)*param_1 * 8 + 0x1390) & 0x3fffffff) >> 0xf);
-    puVar6 = (unsigned short *)((*(unsigned int *)(temp_v2 + (unsigned int)*param_2 * 8 + 0x1390) & 0x3fffffff) >> 0xf);
-    puVar1 = puVar5;
-    devilGetRecord();
-    puVar2 = puVar6;
-    devilGetRecord();
-    temp_v0 = dataTableGetEntry0102Value(*puVar1);
-    temp_v2 = dataTableGetEntry0102Value(*puVar2);
-    temp_v0 = temp_v0 - temp_v2;
-    if (temp_v0 == 0) {
-      devilGetRecord();
-      devilGetRecord();
-      temp_v0 = (unsigned int)(unsigned char)puVar5[1] - (unsigned int)(unsigned char)puVar6[1];
-      if ((temp_v0 == 0) &&
-         (temp_v0 = (unsigned int)*(unsigned char *)((int)puVar6 + 3) - (unsigned int)*(unsigned char *)((int)puVar5 + 3), temp_v0 == 0))
-      {
-        temp_v0 = (unsigned int)*puVar5 - (unsigned int)*puVar6;
-      }
-    }
-  }
-  return temp_v0;
+extern UniteWork *g_unite;
+s32 dataTableGetEntry0102Value(u16 id);
 }
 
-} /* extern "C" */
+static inline s32 fusionCompareRaceLevelIdIV(u16 firstId, u16 secondId)
+{
+    const DevilSortRecord *first = devilGetRecord(firstId);
+    const DevilSortRecord *second = devilGetRecord(secondId);
+    s32 result = first->race - second->race;
+    if (result == 0) {
+        result = second->level - first->level;
+        if (result == 0)
+            result = first->id - second->id;
+    }
+    return result;
+}
+
+static inline s32 fusionComparePriorityIV(u16 firstId, u16 secondId)
+{
+    const DevilSortRecord *first = devilGetRecord(firstId);
+    const DevilSortRecord *second = devilGetRecord(secondId);
+    s32 result = dataTableGetEntry0102Value(first->id) - dataTableGetEntry0102Value(second->id);
+    if (result == 0)
+        result = fusionCompareRaceLevelIdIV(firstId, secondId);
+    return result;
+}
+
+extern "C" {
+// Compare candidate pairs lexicographically by ingredient priority, race, descending level and ID.
+s32 FUN_001e1540(const u16 *firstIndex, const u16 *secondIndex)
+{
+    UniteWork *work = g_unite;
+    u16 firstId = work->pairListIV.pairs[*firstIndex].firstId;
+    u16 secondId = work->pairListIV.pairs[*secondIndex].firstId;
+    s32 result = fusionComparePriorityIV(firstId, secondId);
+    if (result == 0) {
+        firstId = work->pairListIV.pairs[*firstIndex].secondId;
+        secondId = work->pairListIV.pairs[*secondIndex].secondId;
+        result = fusionComparePriorityIV(firstId, secondId);
+    }
+    return result;
+}
+}

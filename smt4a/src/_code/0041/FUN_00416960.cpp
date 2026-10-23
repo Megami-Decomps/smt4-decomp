@@ -1,106 +1,79 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00416960` (_code @ 0x416960, 0x1ec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: text-pointer load and projected-coordinate arithmetic are scheduled differently; retail also retains removed message-debug hook setup/NOPs. */
+#include "ui/AnimatedMessageSlots.h"
+#include "battle/btlMain.h"
+#include "shard/W5_W5Match1_RecordKeys.h"
+#include "shard/W6_W6Match6_ProjectionCamera.h"
+
+struct PartnerMessageOwnerView {
+    AnimatedMessageSlot slots[12];
+    UiSpriteSource source;
+};
+struct PartnerMessageOffset {
+    f32 x, y;
+};
+// The message directory is beyond the shared battle-state prefix.
+struct PartnerMessageBattleView {
+    BtlMainStateA prefix;
+    u8 unk4CF0[0x74];
+    void *directory;
+};
+typedef char PartnerMessageViewOffsets[offsetof(PartnerMessageOwnerView, source) == 0x840 &&
+    offsetof(PartnerMessageBattleView, directory) == 0x4D64 ? 1 : -1];
 
 extern "C" {
+void asdMemFreeSlot(void *object);
+void FUN_0014e188(UiSpriteState *sprite, u32 kind, u32 color, const UiSpriteSource *source, u16 priority, f32 scale);
+void pairSetFirstResetSecond(UiSpriteState *sprite, s32 image);
+void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 image, s32 frame);
+void FUN_0019e330(UiSpriteState *sprite, s32 mode, s32 state);
+const ProjectionMatrices *FUN_00152f54(void);
+void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
+PartnerMessageOffset FUN_00416388(PartnerMessageOwnerView *owner, s32 index, UiSpriteState *sprite);
+void pairSetHalves(UiSpriteState *sprite, s32 x, s32 y);
+BtlMainStateA *btlGetMainState(void);
+TextMeasureState *spriteHandleCreate(u32 kind);
+void FUN_001527d8(TextMeasureState *text, u32 color);
+void positionStateSet(TextMeasureState *text, u32 first, u32 second, f32 scale);
+void objFlagsSetBits(TextMeasureState *text, u32 flags);
+void asdTextDrawDirectoryEntry(TextMeasureState *text, s32 type, u32 color, s32 first, s32 second, void *directory, u32 entry);
+s32 textMeasureLineWidth(TextMeasureState *text, s32 line);
 
-int objFlagsSetBits(...);
-int FUN_0014e188(unsigned int *, int, unsigned int, int, int);
-int positionStateSet(unsigned int, int, int);
-int FUN_001527d8(int, int);
-int pairSetFirstResetSecond(unsigned int *, int);
-int uiSpriteSetImageKeyframe(unsigned int *, int, int);
-int pairSetHalves(unsigned int *, int, int);
-int FUN_0019e330(unsigned int *, int, int);
-int asdMemFreeSlot(void);
-int FUN_002a1850(unsigned int *, int, unsigned int, unsigned char [16]);
-int asdTextDrawDirectoryEntry(...);
-int FUN_00416388(int, int, unsigned int *);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp48; /* 0x48: local_48 */
-} param_3_stack;
-
-extern int btlGetMainState(void);
-extern int spriteHandleCreate(unsigned int);
-/* Supplied declaration required: objFlagsSetBits. */
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: positionStateSet. */
-/* Supplied declaration required: FUN_001527d8. */
-extern unsigned int FUN_00152f54(void);
-/* Supplied declaration required: pairSetFirstResetSecond. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: pairSetHalves. */
-/* Supplied declaration required: FUN_0019e330. */
-/* Supplied declaration required: asdMemFreeSlot. */
-/* Supplied declaration required: FUN_002a1850. */
-/* Supplied declaration required: asdTextDrawDirectoryEntry. */
-extern unsigned int FUN_0033885c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00416388. */
-
-
-void FUN_00416960(int param_1,int param_2,unsigned int param_3)
-
+void FUN_00416960(PartnerMessageOwnerView *owner, s32 index, u32 message, Vector4 world)
 {
-/* irregular: irregular input(s): in_s1; 12 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  float temp_v3;
-  float in_s1;
-  unsigned char temp_v4 [16];
-  int iStack_24;
-  int iStack_20;
-  unsigned int uStack_1c;
-  
-  puVar4 = (unsigned int *)(param_1 + param_2 * 0xb0);
-  *puVar4 = 0;
-  puVar4[1] = 0;
-  *(unsigned char *)(puVar4 + 0x28) = 0;
-  puVar4[0x29] = 0;
-  puVar4[3] = 0;
-  puVar4[2] = 0;
-  puVar4[4] = 0;
-  iStack_24 = param_1;
-  iStack_20 = param_2;
-  uStack_1c = param_3;
-  if (puVar4[0x2a] != 0) {
-    asdMemFreeSlot();
-    puVar4[0x2a] = 0;
-  }
-  puVar4[0x2b] = 0;
-  *(unsigned char *)(puVar4 + 0x28) = 1;
-  puVar4[0x29] = 1;
-  *puVar4 = param_3;
-  puVar4[1] = 0;
-  temp_v3 = 1.0f;
-  FUN_0014e188(puVar4 + 5,8,0xffffffff,param_1 + 0x840,0xb);
-  pairSetFirstResetSecond(puVar4 + 5,0x8b);
-  uiSpriteSetImageKeyframe(puVar4 + 5,4,0);
-  FUN_0019e330(puVar4 + 5,6,0);
-  temp_v0 = FUN_00152f54();
-  FUN_002a1850(puVar4 + 2,0,temp_v0,temp_v4);
-  FUN_00416388(param_1,param_2,puVar4 + 5);
-  puVar4[2] = (float)puVar4[2] + temp_v3;
-  temp_v3 = (float)puVar4[3];
-  puVar4[3] = temp_v3 + in_s1;
-  pairSetHalves(puVar4 + 5,(int)(short)(int)(float)puVar4[2],(int)(short)(int)(temp_v3 + in_s1));
-  temp_v1 = btlGetMainState();
-  temp_v2 = puVar4[0x2a];
-  if (temp_v2 == 0) {
-    temp_v2 = spriteHandleCreate(0);
-    puVar4[0x2a] = temp_v2;
-  }
-  FUN_001527d8(temp_v2,0x320202ff);
-  positionStateSet(puVar4[0x2a],0,0x646464ff);
-  objFlagsSetBits(puVar4[0x2a],8);
-  objFlagsSetBits(puVar4[0x2a],0x100);
-  asdTextDrawDirectoryEntry(puVar4[0x2a],3,0xffffffff,0,3,*(unsigned int *)(temp_v1 + 0x4d64),*puVar4);
-  temp_v0 = FUN_0033885c(puVar4[0x2a],0);
-  puVar4[0x2b] = temp_v0;
-  return;
+    AnimatedMessageSlot *slot = &owner->slots[index];
+    slot->messageId = 0;
+    slot->frame = 0;
+    slot->active = 0;
+    slot->state = 0;
+    slot->position.y = 0.0f;
+    slot->position.x = 0.0f;
+    slot->position.z = 0.0f;
+    if (slot->text != NULL) {
+        asdMemFreeSlot(slot->text);
+        slot->text = NULL;
+    }
+    slot->width = 0;
+    slot->active = 1;
+    slot->state = 1;
+    slot->messageId = message;
+    slot->frame = 0;
+    FUN_0014e188(&slot->sprite, 8, ~0u, &owner->source, 11, 1.0f);
+    pairSetFirstResetSecond(&slot->sprite, 139);
+    uiSpriteSetImageKeyframe(&slot->sprite, 4, 0);
+    FUN_0019e330(&slot->sprite, 6, 0);
+    FUN_002a1850(&slot->position.x, 0, FUN_00152f54(), &world.x);
+    PartnerMessageOffset offset = FUN_00416388(owner, index, &slot->sprite);
+    slot->position.x += offset.x;
+    slot->position.y += offset.y;
+    pairSetHalves(&slot->sprite, (s16)(s32)slot->position.x, (s16)(s32)slot->position.y);
+    PartnerMessageBattleView *battle = (PartnerMessageBattleView *)btlGetMainState();
+    if (slot->text == NULL)
+        slot->text = spriteHandleCreate(0);
+    FUN_001527d8(slot->text, 0x320202FF);
+    positionStateSet(slot->text, 0, 0x646464FF, 0.0f);
+    objFlagsSetBits(slot->text, 8);
+    objFlagsSetBits(slot->text, 0x100);
+    asdTextDrawDirectoryEntry(slot->text, 3, ~0u, 0, 3, battle->directory, slot->messageId);
+    slot->width = textMeasureLineWidth(slot->text, 0);
 }
-
-} /* extern "C" */
+}

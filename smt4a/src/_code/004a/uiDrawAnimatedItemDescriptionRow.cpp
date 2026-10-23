@@ -27,7 +27,7 @@ SpriteInfo *FUN_001834a4(s32 group, s32 index);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 value);
 s32 vec2GetXInt(const void *position);
 s32 vec2GetYInt(const void *position);
-void FUN_004abc68(ItemRowContext *context, s32 x, s32 y, s32 label);
+void btlDrawLayeredHud(ItemRowContext *context, s32 x, s32 y, s32 label);
 void efctSetSpeed(f32 speed);
 void FUN_00185e84(s32 effect, s32 x, s32 y, s32 layer, s32 first, s32 second);
 const char *FUN_0014bd84(s32 effect);
@@ -52,7 +52,7 @@ extern "C" void uiDrawAnimatedItemDescriptionRow(ItemRowContext *context, s32 ro
     f32 speed = row->speed;
     s32 x = placement->x + rowX + horizontalOffset;
     s32 y = spacing * rowIndex + placement->y + rowY;
-    FUN_004abc68(context, x, y, entry->label);
+    btlDrawLayeredHud(context, x, y, entry->label);
     const char *text;
     if (entry->effect) {
         s16 effect = static_cast<s16>(entry->effect);

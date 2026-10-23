@@ -3,6 +3,8 @@
 #define UI_PARTYPANELSTATE_H
 #include "common.h"
 #include "shard/W6_W6Match6_PartyPanel.h"
+#include "gamedata/SelectedUnitQuery.h"
+#include "ui/GridNavigation.h"
 #include <stddef.h>
 typedef struct TimerSlot {
     /* 0x00 */ u8 data[0x8C];
@@ -35,9 +37,29 @@ typedef struct PartyPanelState {
     /* 0x0030 */ u8 unk0030[0x4];
     /* 0x0034 */ u8 unk34;
     /* 0x0035 */ u8 unk35;
-    /* 0x0036 */ u8 unk0036[0xC];
+    union {
+        /* 0x0036 */ u8 unk0036[0xC];
+        struct {
+            /* 0x0036 */ u8 prefix36[2];
+            /* 0x0038 */ s16 selection;
+            /* 0x003A */ u8 suffix3A[8];
+        } pendingSelection;
+        struct {
+            u8 prefix36[4];
+            s16 previousSelection;
+            u8 suffix3C[6];
+        } helpHistory;
+        u16 previewItem;
+    };
     /* 0x0042 */ u8 unk42;
-    /* 0x0043 */ u8 unk0043[0x13D];
+    union {
+        /* 0x0043 */ u8 unk0043[0x13D];
+        struct {
+            u8 prefix43;
+            s8 mode;
+            u8 suffix45[0x13B];
+        } helpSelection;
+    };
     /* 0x0180 */ u8 timerC[1];
     /* 0x0181 */ u8 unk0181[0xab];
     /* 0x022C */ f32 effectSpeed;
@@ -64,12 +86,44 @@ typedef struct PartyPanelState {
     };
     /* 0x0738 */ union {
         u8 sortableEntries[0xC0];
+        SelectedUnitListEntry previewUnits[24];
         struct {
             /* 0x0738 */ u32 unk738;
             /* 0x073C */ PartyPanelEntry entries[0x18];
         } entryView;
     };
-    /* 0x07FC */ u8 unk7FC[0x95C];
+    union {
+        /* 0x07FC */ u8 unk7FC[0x95C];
+        struct {
+            /* 0x07FC */ u8 prefix7FC[0xE0];
+            /* 0x08DC */ u8 stateFourPart[0x64];
+            union {
+                /* 0x0940 */ u8 gap940[0xC8];
+                struct {
+                    /* 0x0940 */ u8 primary[0x64];
+                    /* 0x09A4 */ u8 secondary[0x64];
+                } stateSixParts;
+            };
+            /* 0x0A08 */ u8 primaryPart[0x64];
+            /* 0x0A6C */ u8 secondaryPart[0x64];
+            /* 0x0AD0 */ u8 suffixAD0[0x688];
+        } transitionParts;
+        struct {
+            u8 prefix7FC[0x144];
+            GridNavigation base;
+            u8 gap9A4[0x64];
+            GridNavigation expanded;
+        } capacityGrids;
+        struct {
+            u8 prefix7FC[0x340];
+            s32 mode;
+        } detailSelection;
+        struct {
+            u8 prefix7FC[0x338];
+            s32 ids[2]; /* 0xB34 */
+            s32 count; /* 0xB3C */
+        } exclusions;
+    };
     /* 0x1158 */ u32 statusValue;
     union {
         /* 0x115C */ u8 unk115C[0x694];
@@ -83,27 +137,63 @@ typedef struct PartyPanelAnimationStateA {
     /* 0x0AC */ f32 effectSpeed;
     /* 0x0B0 */ u8 unk0B0[0x784];
     /* 0x834 */ u8 mode;
-    /* 0x835 */ u8 unk835[0x4F];
+    union {
+        /* 0x835 */ u8 unk835[0x4F];
+        struct {
+            u8 prefix835[0xB];
+            /* 0x840 */ u8 protagonistAvailable;
+            /* 0x841 */ u8 partyAvailable[3];
+        } preview;
+    };
     /* 0x884 */ u16 unk884;
     /* 0x886 */ u8 unk886[0xA];
 } PartyPanelAnimationStateA;
 
 typedef struct PartyPanelStateA {
-    /* 0x000 */ u8 unk000[0x1C];
+    union {
+        /* 0x000 */ u8 unk000[0x1C];
+        struct {
+            u8 unk000[0x18];
+            /* 0x018 */ u32 phase;
+        } lifecycle;
+    };
     /* 0x01C */ s32 state;
     /* 0x020 */ u32 unk20;
-    /* 0x024 */ u8 unk24[8];
+    union {
+        /* 0x024 */ u8 unk24[8];
+        /* 0x024 */ s32 previousState;
+    };
     /* 0x02C */ u32 toggle;
-    /* 0x030 */ u8 unk30[0xC];
+    union {
+        /* 0x030 */ u8 unk30[0xC];
+        struct {
+            u8 prefix30[6];
+            /* 0x036 */ u16 item;
+            /* 0x038 */ s16 selection;
+        } preview;
+    };
     /* 0x03C */ s16 unk3C;
-    /* 0x03E */ u8 unk3E[0x142];
+    union {
+        /* 0x03E */ u8 unk3E[0x142];
+        struct {
+            u8 prefix3E[4];
+            /* 0x042 */ u8 alternate;
+        } activeGrid;
+    };
     /* 0x180 */ PartyPanelAnimationStateA animation;
-    /* 0xA10 */ u32 handlesA[4];
-    /* 0xA20 */ u32 handlesB[0x18];
+    union {
+        /* 0xA10 */ u32 handlesA[4];
+        /* 0xA10 */ PartyPanelWidget *characters[4];
+    };
+    union {
+        /* 0xA20 */ u32 handlesB[0x18];
+        /* 0xA20 */ PartyPanelWidget *demons[0x18];
+    };
 } PartyPanelStateA;
 
 /* Retail 32-bit layout invariants. */
 typedef char PartyPanelStateSizeCheck[sizeof(PartyPanelState) == 0x17F4 ? 1 : -1];
+typedef char PartyPanelExclusionOffsetsCheck[offsetof(PartyPanelState, exclusions.ids) == 0xB34 && offsetof(PartyPanelState, exclusions.count) == 0xB3C && sizeof(PartyPanelState) == 0x17F4 ? 1 : -1];
 typedef char PartyPanelAnimationStateASizeCheck[sizeof(PartyPanelAnimationStateA) == 0x890 ? 1 : -1];
 typedef char PartyPanelStateASizeCheck[sizeof(PartyPanelStateA) == 0xA80 ? 1 : -1];
 typedef char PartyPanelStateResourcesOffsetCheck[
@@ -111,5 +201,44 @@ typedef char PartyPanelStateResourcesOffsetCheck[
     offsetof(PartyPanelState, resources.files) == 0xC &&
     offsetof(PartyPanelState, resources.script) == 0x14 &&
     offsetof(PartyPanelState, ownedBuffer) == 0x115C ? 1 : -1];
+typedef char PartyPanelStateTransitionOffsetsCheck[
+    offsetof(PartyPanelState, pendingSelection.selection) == 0x38 &&
+    offsetof(PartyPanelState, transitionParts.stateFourPart) == 0x8DC &&
+    offsetof(PartyPanelState, transitionParts.primaryPart) == 0xA08 &&
+    offsetof(PartyPanelState, transitionParts.secondaryPart) == 0xA6C ? 1 : -1];
+typedef char PartyPanelPreviewOffsetCheck[
+    offsetof(PartyPanelState, previewItem) == 0x36 &&
+    offsetof(PartyPanelState, previewUnits) == 0x738 &&
+    sizeof(PartyPanelState) == 0x17F4 ? 1 : -1];
+typedef char PartyPanelStateSixPartOffsetsCheck[
+    offsetof(PartyPanelState, transitionParts.stateSixParts.primary) == 0x940 &&
+    offsetof(PartyPanelState, transitionParts.stateSixParts.secondary) == 0x9A4 &&
+    sizeof(PartyPanelState) == 0x17F4 ? 1 : -1];
+typedef char PartyPanelCapacityGridOffsetsCheck[
+    offsetof(PartyPanelState, capacityGrids.base) == 0x940 &&
+    offsetof(PartyPanelState, capacityGrids.expanded) == 0xA08 &&
+    sizeof(PartyPanelState) == 0x17F4 ? 1 : -1];
+typedef char PartyPanelHelpHistoryOffsetCheck[
+    offsetof(PartyPanelState, helpHistory.previousSelection) == 0x3A &&
+    offsetof(PartyPanelState, helpSelection.mode) == 0x44 &&
+    sizeof(PartyPanelState) == 0x17F4 ? 1 : -1];
+typedef char PartyPanelDetailSelectionOffsetCheck[
+    offsetof(PartyPanelState, detailSelection.mode) == 0xB3C &&
+    sizeof(PartyPanelState) == 0x17F4 ? 1 : -1];
+typedef char PartyPanelStateAPreviewOffsetsCheck[
+    offsetof(PartyPanelStateA, preview.item) == 0x36 &&
+    offsetof(PartyPanelStateA, preview.selection) == 0x38 &&
+    offsetof(PartyPanelStateA, animation.preview.protagonistAvailable) == 0x9C0 &&
+    sizeof(PartyPanelStateA) == 0xA80 ? 1 : -1];
+typedef char PartyPanelStateATransitionOffsetCheck[
+    offsetof(PartyPanelStateA, lifecycle.phase) == 0x18 &&
+    offsetof(PartyPanelStateA, previousState) == 0x24 &&
+    offsetof(PartyPanelStateA, characters) == 0xA10 &&
+    offsetof(PartyPanelStateA, demons) == 0xA20 &&
+    offsetof(PartyPanelStateA, animation.preview.partyAvailable) == 0x9C1 &&
+    sizeof(PartyPanelStateA) == 0xA80 ? 1 : -1];
+typedef char PartyPanelStateAActiveGridOffsetCheck[
+    offsetof(PartyPanelStateA, activeGrid.alternate) == 0x42 &&
+    sizeof(PartyPanelStateA) == 0xA80 ? 1 : -1];
 
 #endif

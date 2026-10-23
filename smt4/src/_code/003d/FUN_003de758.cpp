@@ -1,66 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003de758` (_code @ 0x3de758, 0x114 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: reflection scan saved-register allocation differs from retail. */
+#include "battle/btlAction.h"
+#include "battle/btlMain.h"
+#include "battle/btlReflect.h"
 
 extern "C" {
+BtlMainState *btlGetMainState(void);
+ReflectAction *btlQueueReflectAction(ReflectContext *queue, s16 actor, s16 secondary, u32 options);
 
-int btlQueueReflectAction(int, int, int, unsigned int);
-
-/* stack frame of param_3: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_3_stack;
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: btlQueueReflectAction. */
-extern int btlGetMainState(void);
-
-
-unsigned int FUN_003de758(short param_1,unsigned int param_2,unsigned int param_3)
-
+/* Queue the pending color/opacity updates for active battle action records. */
+u32 FUN_003de758(u32 actor, u32 options, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  
-  temp_v0 = btlGetMainState();
-  temp_v3 = 4;
-  do {
-    temp_v4 = *(int *)(temp_v0 + 0x1e98) + temp_v3 * 0x114;
-    temp_v1 = *(unsigned int *)(temp_v4 + 0x50);
-    if (((temp_v1 & 1) != 0 && (temp_v1 & 2) != 0) && (temp_v1 & 0x10000) != 0) {
-      if (*(int *)(temp_v4 + 100) == 0x4c4c4cff) {
-        temp_v5 = *(unsigned int *)(temp_v4 + 0x68);
-        temp_v2 = g_btlActionReflect;
-        btlQueueReflectAction(g_btlActionReflect,(int)param_1,0,param_2);
-        *(unsigned char *)(temp_v2 + 5) = *(unsigned char *)(temp_v2 + 5) | 4;
-        *(int *)(temp_v2 + 0x14) = temp_v4;
-        *(unsigned char *)(temp_v2 + 4) = 0x21;
-        *(unsigned int *)(temp_v2 + 0x28) = param_3;
-        *(unsigned int *)(temp_v2 + 0x4c) = temp_v5;
-      }
-      else {
-        temp_v2 = g_btlActionReflect;
-        btlQueueReflectAction(g_btlActionReflect,(int)param_1,0,param_2);
-        *(unsigned char *)(temp_v2 + 5) = *(unsigned char *)(temp_v2 + 5) | 4;
-        *(int *)(temp_v2 + 0x14) = temp_v4;
-        *(unsigned char *)(temp_v2 + 4) = 0x22;
-        *(unsigned int *)(temp_v2 + 0x28) = param_3;
-        *(unsigned int *)(temp_v2 + 0x4c) = 0xff;
-      }
-      *(unsigned int *)(temp_v4 + 0x50) = *(unsigned int *)(temp_v4 + 0x50) & 0xfffeffff;
+    BtlMainState *battle = btlGetMainState();
+    for (s32 index = 4; index < 54; ++index) {
+        BtlActionRecord *entry = &battle->actions[index];
+        u32 status = entry->status;
+        if ((status & 1) != 0 && (status & 2) != 0 && (status & 0x10000) != 0) {
+            if (entry->editorRestore.current == 0x4C4C4CFF) {
+                f32 amount = *reinterpret_cast<const f32 *>(&entry->editorRestore.saved);
+                ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, static_cast<s16>(actor), 0, options);
+                action->flagView.flags |= 4;
+                action->target = reinterpret_cast<u32>(entry);
+                action->kind = 0x21;
+                action->value = value;
+                action->parameterScalar = amount;
+            } else {
+                ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, static_cast<s16>(actor), 0, options);
+                action->flagView.flags |= 4;
+                action->target = reinterpret_cast<u32>(entry);
+                action->kind = 0x22;
+                action->value = value;
+                action->parameter = 255;
+            }
+            entry->status &= ~0x10000;
+        }
     }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 0x36);
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

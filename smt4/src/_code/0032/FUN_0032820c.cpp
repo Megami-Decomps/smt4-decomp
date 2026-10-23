@@ -1,88 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032820c` (_code @ 0x32820c, 0x130 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the final matrix-row base is hoisted outside the column loop instead of recomputed each iteration. */
+#include "map/lmapMain.h"
 
 extern "C" {
+extern LmapMainState *g_lmapMainState;
+extern s8 DAT_0049f08c[80];
+void sceneAttachLightChild(void *, s32);
+void FUN_00265b78(s32, s32);
 
-int sceneAttachLightChild(unsigned int, int);
-int FUN_00265b78(int, int);
-
-extern int g_lmapMainState; /* 0x447060 */
-
-/* Supplied declaration required: sceneAttachLightChild. */
-/* Supplied declaration required: FUN_00265b78. */
-
-
-void FUN_0032820c(int param_1)
-
+void FUN_0032820c(const s8 grid[10][8])
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  char *pcVar4;
-  char temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  temp_v1 = g_lmapMainState;
-  temp_v2 = 0;
-  temp_v5 = 0;
-  do {
-    pcVar4 = (char *)(param_1 + temp_v5);
-    temp_v4 = 4;
-    temp_v0 = *pcVar4;
-    if (temp_v0 != '\t') {
-      *(char *)(temp_v2 + 0x49f08c) = temp_v0;
-    }
-    temp_v3 = pcVar4[8];
-    if (temp_v0 != '\t') {
-      temp_v2 = temp_v2 + 1;
-    }
-    do {
-      temp_v0 = pcVar4[0x10];
-      if (temp_v3 != '\t') {
-        *(char *)(temp_v2 + 0x49f08c) = temp_v3;
-        temp_v2 = temp_v2 + 1;
-      }
-      temp_v3 = pcVar4[0x18];
-      if (temp_v0 != '\t') {
-        *(char *)(temp_v2 + 0x49f08c) = temp_v0;
-        temp_v2 = temp_v2 + 1;
-      }
-      temp_v4 = temp_v4 - 1;
-      pcVar4 = pcVar4 + 0x10;
-    } while (temp_v4 != 0);
-    temp_v4 = temp_v5 + 0x48;
-    temp_v5 = temp_v5 + 1;
-    temp_v0 = *(char *)(param_1 + temp_v4);
-    if (temp_v0 != '\t') {
-      *(char *)(temp_v2 + 0x49f08c) = temp_v0;
-      temp_v2 = temp_v2 + 1;
-    }
-  } while (temp_v5 < 8);
-  temp_v2 = 0;
-  if (temp_v2 < *(int *)(*(int *)(temp_v1 + 0xa9c) + 4)) {
-    do {
-      if (*(char *)(temp_v2 + 0x49f08c) != '\x01') {
-        if ((g_lmapMainState != 0) &&
-           (temp_v5 = g_lmapMainState + temp_v2 * 0x88, *(char *)(temp_v5 + 0xb30) != '\0')) {
-          *(unsigned char *)(temp_v5 + 0xb30) = 0;
+    // The light collection and per-child state lie beyond the shared recovered map-state prefix.
+    struct LightCollection { u32 unk00; s32 count; };
+    struct LightState { u8 enabled; u8 suffix[0x87]; };
+    struct MapLightView {
+        u8 prefix[0xA9C];
+        LightCollection *collection;
+        u8 unkAA0[0x90];
+        LightState children[1];
+    };
+    MapLightView *work = reinterpret_cast<MapLightView *>(g_lmapMainState);
+    s32 count = 0;
+    for (s32 column = 0; column < 8; ++column) {
+        for (s32 row = 0; row < 10; ++row) {
+            s8 visible = grid[row][column];
+            if (visible != 9)
+                DAT_0049f08c[count++] = visible;
         }
-        FUN_00265b78(temp_v2,0);
-      }
-      else {
-        sceneAttachLightChild(*(unsigned int *)(temp_v1 + 0xa9c),temp_v2);
-        if ((g_lmapMainState != 0) &&
-           (temp_v5 = g_lmapMainState + temp_v2 * 0x88, *(char *)(temp_v5 + 0xb30) == '\0')) {
-          *(unsigned char *)(temp_v5 + 0xb30) = 1;
+    }
+    for (s32 i = 0; i < work->collection->count; ++i) {
+        if (DAT_0049f08c[i] == 1) {
+            sceneAttachLightChild(work->collection, i);
+            MapLightView *current = reinterpret_cast<MapLightView *>(g_lmapMainState);
+            if (current && !current->children[i].enabled)
+                current->children[i].enabled = 1;
+            FUN_00265b78(i, 1);
+        } else {
+            MapLightView *current = reinterpret_cast<MapLightView *>(g_lmapMainState);
+            if (current && current->children[i].enabled)
+                current->children[i].enabled = 0;
+            FUN_00265b78(i, 0);
         }
-        FUN_00265b78(temp_v2,1);
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < *(int *)(*(int *)(temp_v1 + 0xa9c) + 4));
-  }
-  return;
+    }
 }
-
-} /* extern "C" */
+}

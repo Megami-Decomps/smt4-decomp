@@ -1,80 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cee94` (_code @ 0x3cee94, 0x148 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: availability constant lifetime, saved registers and resource-dispatch block placement differ. */
+#include "battle/ActionKindSelection.h"
+#include "shard/W4_W4Match2_BtlUnits.h"
 
+struct BtlMainState;
+struct BattleResourceOwner;
+struct BattleActionDescription {
+    u32 id;
+    u8 unk04[0x10];
+    u32 category;
+    u8 unk18[0xA];
+};
+struct BattleResourceLookupView { u8 unk00[0x28]; u32 attributes; };
+struct BattleItemResourceView { u8 unk00[0x62]; u16 resourceId; };
 extern "C" {
+extern BattleResourceOwner *DAT_00435d18;
+BattleActionDescription FUN_00247478(BtlMainState *, BtlUnitEntry *);
+BattleResourceLookupView *FUN_002ae164(u32);
+BattleItemResourceView *dataTable08Sub1GetRecord(u32);
+void aocEntryBlockStore(BattleResourceOwner *, u32, u32, s32, u32);
+void objectSetResultFromLookup(BattleResourceOwner *, u32, u32, u32);
+void FUN_003daf3c(BattleResourceOwner *, s32, u32, s32);
 
-int FUN_00247478(...);
-int FUN_002ae164(void);
-int dataTable08Sub1GetRecord(void);
-int FUN_003daf3c(unsigned int, unsigned int, int, int);
-int objectSetResultFromLookup(unsigned int, unsigned int, int, int);
-int aocEntryBlockStore(unsigned int, unsigned int, int, int);
-
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_2_stack;
-
-extern unsigned int DAT_00435d18; /* 0x435d18 */
-
-/* Supplied declaration required: FUN_00247478. */
-/* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
-/* Supplied declaration required: FUN_003daf3c. */
-/* Supplied declaration required: objectSetResultFromLookup. */
-/* Supplied declaration required: aocEntryBlockStore. */
-
-
-void FUN_003cee94(unsigned int *param_1,int param_2)
-
+void FUN_003cee94(BtlMainState **battle, ActionKindSelection *selection)
 {
-/* irregular: 6 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4 [5];
-  unsigned int temp_v5;
-  
-  temp_v0 = *(short *)(*(int *)(param_2 + 0x28) + 0x14c);
-  temp_v3 = (unsigned int)*(short *)(*(int *)(param_2 + 0x28) + 0x14e);
-  if (temp_v0 == 1) {
-    temp_v3 = **(unsigned int **)(param_2 + 0x20);
-    FUN_00247478(temp_v4,*param_1);
-    FUN_00247478(temp_v4,*param_1,*(unsigned int *)(param_2 + 0x20));
-    temp_v4[0] = temp_v4[0] & 0xffff;
-    aocEntryBlockStore(DAT_00435d18,temp_v5 & 0xff,(temp_v3 & 0x2a) == 0,0);
-    return;
-  }
-  temp_v1 = temp_v3;
-  if (temp_v0 != 2 && temp_v0 != 3) {
-    if (temp_v0 != 8) {
-      return;
+    s16 kind = selection->command->kind;
+    s32 resourceId = selection->command->skill;
+    if (kind == 1) {
+        u32 enabled = 1;
+        if (reinterpret_cast<BtlUnitEntry *>(selection->entry)->flags & 0x2A)
+            enabled = 0;
+        u16 id = FUN_00247478(*battle, reinterpret_cast<BtlUnitEntry *>(selection->entry)).id;
+        u8 category = FUN_00247478(*battle, reinterpret_cast<BtlUnitEntry *>(selection->entry)).category;
+        aocEntryBlockStore(DAT_00435d18, category, enabled, 0, id);
+        return;
     }
-    dataTable08Sub1GetRecord();
-    temp_v1 = (unsigned int)*(unsigned short *)(temp_v1 + 0x62);
-    if (temp_v1 == 0) {
-      FUN_003daf3c(DAT_00435d18,temp_v3,(**(unsigned int **)(param_2 + 0x20) & 0x10) == 0,0);
-      return;
+    if (kind != 2 && kind != 3) {
+        if (kind != 8)
+            return;
+        u16 itemResource = dataTable08Sub1GetRecord(resourceId)->resourceId;
+        if (!itemResource) {
+            u32 enabled = 1;
+            if (reinterpret_cast<BtlUnitEntry *>(selection->entry)->flags & 0x10)
+                enabled = 0;
+            FUN_003daf3c(DAT_00435d18, resourceId, enabled, 0);
+            return;
+        }
+        resourceId = itemResource;
     }
-  }
-  temp_v3 = temp_v1;
-  FUN_002ae164();
-  temp_v3 = (*(unsigned int *)(temp_v3 + 0x28) & 0x1ff) >> 5;
-  if ((**(unsigned int **)(param_2 + 0x20) & 0x2a) != 0) {
-    temp_v2 = (temp_v3 == 2 || temp_v3 == 3) || temp_v3 == 4;
-  }
-  else {
-    temp_v2 = 1;
-    if ((**(unsigned int **)(param_2 + 0x20) & 0x10) != 0) {
-      temp_v2 = (temp_v3 != 2 && temp_v3 != 3) && temp_v3 != 4;
-    }
-  }
-  objectSetResultFromLookup(DAT_00435d18,temp_v1,temp_v2,0);
-  return;
+    u32 category = (FUN_002ae164(resourceId)->attributes >> 5) & 0xF;
+    bool normal = true;
+    if (category == 2 || category == 3 || category == 4)
+        normal = false;
+    u32 enabled = 1;
+    if (reinterpret_cast<BtlUnitEntry *>(selection->entry)->flags & 0x2A)
+        enabled = !normal;
+    else if (reinterpret_cast<BtlUnitEntry *>(selection->entry)->flags & 0x10)
+        enabled = normal;
+    objectSetResultFromLookup(DAT_00435d18, resourceId, enabled, 0);
 }
-
-} /* extern "C" */
+}

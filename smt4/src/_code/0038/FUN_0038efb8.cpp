@@ -1,89 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038efb8` (_code @ 0x38efb8, 0x170 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: target object truncates the UTF-16 hint after two characters; cancellation-state constant loads also swap order. */
+#include "addon/aocMain.h"
+#include "shard/W6_W6Match5_SelectionTransition.h"
 
 extern "C" {
+extern AocMain *g_aocMain;
+u32 systemKeyboardReadUtf8(AocMain *main, char *output, const u16 *hint, u32 capacity, s32 password, s32 filter, void *requestOption);
+void multibyteToUtf16(u16 *destination, const char *source, u32 capacity);
+void FUN_00233db8(SelectionTransition *transition, u32 request);
+void FUN_0023392c(SelectionTransition *transition, u32 selection, s32 mode);
 
-int FUN_0023392c(int, unsigned int, int);
-int FUN_00233db8(int, int);
-int multibyteToUtf16(int, int, int);
-int FUN_0038b544(int, int, unsigned char *, int, int, int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern unsigned char LAB_0038f12c; /* 0x38f12c */
-extern int g_aocMain; /* 0x432fc8 */
-
-/* Supplied declaration required: FUN_0023392c. */
-/* Supplied declaration required: FUN_00233db8. */
-/* Supplied declaration required: multibyteToUtf16. */
-/* Supplied declaration required: FUN_0038b544. */
-
-
-void FUN_0038efb8(int param_1)
-
+// Read the add-on code through the numeric software keyboard, retrying after a cancelled input.
+void FUN_0038efb8(SelectionTransition *transition)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = g_aocMain;
-  temp_v0 = *(int *)(param_1 + 8);
-  if (temp_v0 == 0) {
-    *(unsigned int *)(param_1 + 8) = 1;
-  }
-  else {
-    if (temp_v0 == 1) {
-      *(unsigned int *)(g_aocMain + 0x694) = 0;
-      *(unsigned int *)(temp_v1 + 0x698) = 0;
-      *(unsigned int *)(temp_v1 + 0x69c) = 0;
-      *(unsigned int *)(temp_v1 + 0x6a0) = 0;
-      *(unsigned int *)(temp_v1 + 0x6a4) = 0;
-      *(unsigned int *)(temp_v1 + 0x6a8) = 0;
-      *(unsigned int *)(temp_v1 + 0x6ac) = 0;
-      *(unsigned int *)(temp_v1 + 0x6b0) = 0;
-      *(unsigned int *)(temp_v1 + 0x6b4) = 0;
-      *(unsigned int *)(temp_v1 + 0x6b8) = 0;
-      *(unsigned int *)(temp_v1 + 0x6bc) = 0;
-      *(unsigned int *)(temp_v1 + 0x6c0) = 0;
-      *(unsigned int *)(temp_v1 + 0x6c4) = 0;
-      *(unsigned int *)(temp_v1 + 0x6c8) = 0;
-      *(unsigned int *)(temp_v1 + 0x6cc) = 0;
-      *(unsigned int *)(temp_v1 + 0x6d0) = 0;
-      FUN_0038b544(temp_v1,temp_v1 + 0x694,&LAB_0038f12c,0x10,0,1,temp_v1 + 0x6d4);
-      if (temp_v1 == 0) {
-        *(unsigned int *)(param_1 + 8) = 2;
-        *(unsigned int *)(param_1 + 0xc) = 3;
-        return;
-      }
-      multibyteToUtf16(g_aocMain + 0x6d4,g_aocMain + 0x694,0x40);
-      *(unsigned int *)(param_1 + 4) = 0xe;
-      *(unsigned int *)(param_1 + 8) = 0;
-      if (*(int **)(param_1 + 0x208) != (int *)0x0) {
-        (**(romwright_code **)(**(int **)(param_1 + 0x208) + 4))();
-        *(unsigned int *)(param_1 + 0x208) = 0;
-      }
-      FUN_00233db8(param_1,0);
-      FUN_0023392c(param_1,0xffffffff,0);
-      return;
+    // These text buffers lie in the shared main block's byte-aligned padding.
+    struct InputBuffers {
+        u8 prefix[0x694];
+        union { char text[64]; u32 words[16]; } multibyte;
+        u16 wide[64];
+    };
+    typedef char InputBufferOffsets[offsetof(InputBuffers, multibyte) == 0x694 && offsetof(InputBuffers, wide) == 0x6d4 ? 1 : -1];
+    if (transition->progress == 0) {
+        transition->progress = 1;
+    } else if (transition->progress == 1) {
+        InputBuffers *input = reinterpret_cast<InputBuffers *>(g_aocMain);
+        for (s32 index = 0; index < 16; ++index)
+            input->multibyte.words[index] = 0;
+        if (!systemKeyboardReadUtf8(g_aocMain, input->multibyte.text,
+                reinterpret_cast<const u16 *>(L"16\u30b1\u30bf\u306e\u756a\u53f7\u5165\u529b\u30c6\u30b9\u30c8"),
+                16, 0, 1, input->wide)) {
+            transition->progress = 2;
+            transition->timer = 3;
+            return;
+        }
+        input = reinterpret_cast<InputBuffers *>(g_aocMain);
+        multibyteToUtf16(input->wide, input->multibyte.text, 64);
+        transition->state = 14;
+        transition->progress = 0;
+        if (transition->resource) {
+            transition->resource->vtable->release(transition->resource);
+            transition->resource = 0;
+        }
+        FUN_00233db8(transition, 0);
+        FUN_0023392c(transition, -1, 0);
+    } else if (transition->progress == 2 && --transition->timer <= 0) {
+        TransitionResource *resource = transition->resource;
+        transition->state = 6;
+        transition->progress = 0;
+        if (resource) {
+            resource->vtable->release(resource);
+            transition->resource = 0;
+        }
     }
-    if ((temp_v0 == 2) &&
-       (temp_v1 = *(int *)(param_1 + 0xc) - 1, *(int *)(param_1 + 0xc) = temp_v1, temp_v1 < 1)) {
-      *(unsigned int *)(param_1 + 4) = 6;
-      *(unsigned int *)(param_1 + 8) = 0;
-      if (*(int **)(param_1 + 0x208) != (int *)0x0) {
-        (**(romwright_code **)(**(int **)(param_1 + 0x208) + 4))();
-        *(unsigned int *)(param_1 + 0x208) = 0;
-      }
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

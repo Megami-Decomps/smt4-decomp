@@ -1,104 +1,83 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001dce30` (_code @ 0x1dce30, 0x148 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: vector initializer grouping, projection constant loads and packed-color initialization differ. */
+#include "shard/W6_W6Match2_EffectEditor.h"
+#include "shard/S1Mover.h"
+#include <stddef.h>
+
+struct EditorCameraVectors {
+    Vec3f eye, up, target;
+    Vec3f additional[2];
+};
+struct EditorInitialColor {
+    u8 enabled;
+    u8 unk01[0x3f];
+    f32 rgba[4];
+};
+struct CameraPerspective { f32 fovy, nearZ, farZ, aspect; };
+struct FloatPair { f32 first, second; };
+typedef char EditorInitializationOffsets[offsetof(EditorCameraVectors, up) == 0xc &&
+    offsetof(EditorCameraVectors, target) == 0x18 &&
+    offsetof(EditorInitialColor, rgba) == 0x40 ? 1 : -1];
 
 extern "C" {
+extern EditorCameraVectors DAT_004d9228;
+extern EditorInitialColor DAT_004d8bd0;
+extern u8 DAT_004d8d20[];
+void randomStateSeed(u32 stream, u32 seed);
+void FUN_002fc1a8();
+void FUN_002c2044(void *camera, s32 enabled);
+void FUN_002c1edc(void *camera, const Vec3f *eye, const Vec3f *target, const Vec3f *up);
+void FUN_002c1e30(void *camera, u32 pivot, CameraPerspective perspective);
+void FUN_00298d50(void *camera);
+void floatPairStore(FloatPair value);
 
-int randomStateSeed(int, int);
-int FUN_00298d50(unsigned char *);
-int FUN_002c1e30(unsigned char *, int);
-int FUN_002c1edc(unsigned char *, unsigned int *);
-int FUN_002c2044(unsigned char *, int);
-int FUN_002fc1a8(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern unsigned char DAT_0044ea81; /* 0x44ea81 */
-extern unsigned char DAT_0044ea87; /* 0x44ea87 */
-extern unsigned char DAT_0044ea88; /* 0x44ea88 */
-extern unsigned char DAT_0044ea89; /* 0x44ea89 */
-extern unsigned int DAT_0044ea8c; /* 0x44ea8c */
-extern unsigned char *DAT_0044eaa8; /* 0x44eaa8 */
-extern unsigned char DAT_0044f820; /* 0x44f820 */
-extern unsigned int DAT_004724cc; /* 0x4724cc */
-extern unsigned int DAT_004724d0; /* 0x4724d0 */
-extern unsigned char DAT_004d8bd0; /* 0x4d8bd0 */
-extern unsigned int DAT_004d8c10; /* 0x4d8c10 */
-extern unsigned int DAT_004d8c14; /* 0x4d8c14 */
-extern unsigned int DAT_004d8c18; /* 0x4d8c18 */
-extern unsigned int DAT_004d8c1c; /* 0x4d8c1c */
-extern unsigned char DAT_004d8d20; /* 0x4d8d20 */
-extern unsigned int DAT_004d9228; /* 0x4d9228 */
-extern unsigned int DAT_004d922c; /* 0x4d922c */
-extern unsigned int DAT_004d9230; /* 0x4d9230 */
-extern unsigned int DAT_004d9234; /* 0x4d9234 */
-extern unsigned int DAT_004d9238; /* 0x4d9238 */
-extern unsigned int DAT_004d923c; /* 0x4d923c */
-extern unsigned int DAT_004d9240; /* 0x4d9240 */
-extern unsigned int DAT_004d9244; /* 0x4d9244 */
-extern unsigned int DAT_004d9248; /* 0x4d9248 */
-extern unsigned int DAT_004d924c; /* 0x4d924c */
-extern unsigned int DAT_004d9250; /* 0x4d9250 */
-extern unsigned int DAT_004d9254; /* 0x4d9254 */
-extern unsigned int DAT_004d9258; /* 0x4d9258 */
-extern unsigned int DAT_004d925c; /* 0x4d925c */
-extern unsigned int DAT_004d9260; /* 0x4d9260 */
-
-/* Supplied declaration required: randomStateSeed. */
-/* Supplied declaration required: FUN_00298d50. */
-/* Supplied declaration required: FUN_002c1e30. */
-/* Supplied declaration required: FUN_002c1edc. */
-/* Supplied declaration required: FUN_002c2044. */
-/* Supplied declaration required: FUN_002fc1a8. */
-
-
-void FUN_001dce30(void)
-
+void FUN_001dce30()
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  randomStateSeed(0,0x12345678);
-  FUN_002fc1a8();
-  temp_v0 = 0;
-  DAT_004d9228 = 0;
-  DAT_004d922c = 0x42c80000;
-  DAT_004d9230 = 0x44160000;
-  temp_v1 = 0x3f800000;
-  DAT_004d9234 = 0;
-  DAT_004d9238 = 0x3f800000;
-  DAT_004d923c = 0;
-  DAT_004d9240 = 0;
-  DAT_004d9244 = 0;
-  DAT_004d9248 = 0;
-  DAT_004d924c = 0;
-  DAT_004d9250 = 0;
-  DAT_004d9254 = 0;
-  DAT_004d9258 = 0;
-  DAT_004d925c = 0;
-  DAT_004d9260 = 0;
-  FUN_002c2044(&DAT_004d8d20,1);
-  FUN_002c1edc(&DAT_004d8d20,&DAT_004d9228);
-  FUN_002c1e30(&DAT_004d8d20,1);
-  FUN_00298d50(&DAT_004d8d20);
-  DAT_0044eaa8 = &DAT_0044f820;
-  DAT_0044ea8c = 0;
-  DAT_004d8bd0 = 0;
-  DAT_0044ea88 = 0;
-  DAT_0044ea87 = 0;
-  DAT_0044ea89 = 0;
-  DAT_0044ea81 = 0;
-  DAT_004d8c10 = 0;
-  DAT_004d8c14 = 0;
-  DAT_004d8c18 = 0;
-  DAT_004d8c1c = temp_v1;
-  DAT_004724cc = temp_v0;
-  DAT_004724d0 = temp_v0;
-  return;
+    randomStateSeed(0, 0x12345678);
+    FUN_002fc1a8();
+    DAT_004d9228.eye.x = 0.0f;
+    DAT_004d9228.eye.y = 100.0f;
+    DAT_004d9228.eye.z = 600.0f;
+    DAT_004d9228.up.x = 0.0f;
+    DAT_004d9228.up.y = 1.0f;
+    DAT_004d9228.up.z = 0.0f;
+    DAT_004d9228.target.x = 0.0f;
+    DAT_004d9228.target.y = 0.0f;
+    DAT_004d9228.target.z = 0.0f;
+    for (s32 i = 0; i < 2; ++i) {
+        DAT_004d9228.additional[i].x = 0.0f;
+        DAT_004d9228.additional[i].y = 0.0f;
+        DAT_004d9228.additional[i].z = 0.0f;
+    }
+    FUN_002c2044(DAT_004d8d20, 1);
+    FUN_002c1edc(DAT_004d8d20, &DAT_004d9228.eye, &DAT_004d9228.target, &DAT_004d9228.up);
+    CameraPerspective perspective = { 30.0f, 20.0f, 25600.0f, 5.0f / 3.0f };
+    FUN_002c1e30(DAT_004d8d20, 1, perspective);
+    FUN_00298d50(DAT_004d8d20);
+    struct StartupView {
+        u8 unk00[7];
+        u8 first;
+        u8 second;
+        u8 unk09[0x1f];
+        void *resource;
+    };
+    // The default resource's storage extends past the shared menu-state prefix.
+    struct StorageView { u8 unk000[0xda0]; u8 resource[1]; };
+    typedef char EditorStartupOffsets[offsetof(StartupView, first) == 7 &&
+        offsetof(StartupView, second) == 8 && offsetof(StartupView, resource) == 0x28 &&
+        offsetof(StorageView, resource) == 0xda0 ? 1 : -1];
+    StartupView *startup = reinterpret_cast<StartupView *>(&g_effectEditor);
+    startup->resource = reinterpret_cast<StorageView *>(&g_effectEditor)->resource;
+    g_effectEditor.selection.index = 0;
+    DAT_004d8bd0.enabled = 0;
+    startup->second = 0;
+    startup->first = 0;
+    g_effectEditor.dispatch.mode = 0;
+    g_effectEditor.dispatch.inhibited = 0;
+    DAT_004d8bd0.rgba[0] = 0.0f;
+    DAT_004d8bd0.rgba[1] = 0.0f;
+    DAT_004d8bd0.rgba[2] = 0.0f;
+    DAT_004d8bd0.rgba[3] = 1.0f;
+    FloatPair zero = { 0.0f, 0.0f };
+    floatPairStore(zero);
 }
-
-} /* extern "C" */
+}

@@ -1,65 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041b060` (_code @ 0x41b060, 0x198 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Centered text metric loads, integer-to-float conversion order and color/zero literal order differ. */
+#include "gfx/UiControlDraw.h"
+#include "shard/S3UiLookup.h"
 
+struct FramedBadgeOwner {
+    u8 unk00[0x40];
+    u32 frame;
+};
 extern "C" {
+void efctSetSpeed(f32 alpha);
+void FUN_001835b4(s32 layer, u32 texture, u32 frame, s32 x, s32 y, u32 mode);
+UiTextMetrics *FUN_001834a4(u32 texture, u32 frame);
+s32 FUN_0018408c(const char *text, s32 font);
+void FUN_00162790(s32 font, u32 color, const char *text, f32 x, f32 y, f32 z, f32 extra, f32 alpha);
+void FUN_0041af74(FramedBadgeOwner *owner, s32 value, const UiScaledDrawPosition *position, u32 color);
 
-int FUN_00162790(...);
-int efctSetSpeed(void);
-int FUN_001835b4(...);
-int FUN_0018408c(int, int);
-int FUN_0041af74(...);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: FUN_0041af74. */
-
-
-void FUN_0041b060(int param_1,int *param_2,int param_3,unsigned int param_4)
-
+/* Draws the framed label and its numeric badge using the supplied position and opacity. */
+void FUN_0041b060(FramedBadgeOwner *owner, const UiScaledDrawPosition *position, const char *text, s32 value)
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int in_fpscr;
-  
-  efctSetSpeed();
-  FUN_001835b4(2,0x2b,0x8c,*param_2,param_2[1],2);
-  FUN_001835b4(2,0x2b,0x8d,*param_2,param_2[1],7);
-  temp_v2 = 0;
-  do {
-    FUN_001835b4(2,0x2b,temp_v2 + 0x8e,*param_2,param_2[1],0xc);
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 4);
-  temp_v2 = 0;
-  do {
-    FUN_001835b4(2,0x2b,temp_v2 + 0x92,*param_2,param_2[1],0x11);
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 4);
-  temp_v0 = FUN_001834a4(0x2b,0x8a);
-  temp_v2 = param_3;
-  FUN_0018408c(param_3,4);
-  temp_v1 = *param_2 + (int)*(short *)(temp_v0 + 8);
-  VectorSignedToFloat((**(short **)(temp_v0 + 0xc) - temp_v2) / 2 + temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat((int)*(short *)(temp_v0 + 10) + param_2[1],(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(4,0x646464ff,param_3,temp_v1);
-  FUN_001835b4(2,0x2b,0x96,*param_2,param_2[1],2);
-  FUN_001835b4(2,0x2b,*(unsigned int *)(param_1 + 0x40),*param_2,param_2[1],2);
-  FUN_0041af74(param_1,param_4,param_2,0x646464ff);
-  efctSetSpeed();
-  return;
+    efctSetSpeed(position->speed);
+    FUN_001835b4(2, 0x2B, 0x8C, position->x, position->y, 2);
+    FUN_001835b4(2, 0x2B, 0x8D, position->x, position->y, 7);
+    for (s32 index = 0; index < 4; ++index) {
+        FUN_001835b4(2, 0x2B, index + 0x8E, position->x, position->y, 12);
+    }
+    for (s32 index = 0; index < 4; ++index) {
+        FUN_001835b4(2, 0x2B, index + 0x92, position->x, position->y, 17);
+    }
+    UiTextMetrics *metrics = FUN_001834a4(0x2B, 0x8A);
+    s32 width = FUN_0018408c(text, 4);
+    FUN_00162790(4, 0x646464FF, text,
+                 (f32)((metrics->dimensions[0] - width) / 2 + (position->x + metrics->x)),
+                 (f32)(metrics->y + position->y), 0.0f, 0.0f, position->speed);
+    FUN_001835b4(2, 0x2B, 0x96, position->x, position->y, 2);
+    FUN_001835b4(2, 0x2B, owner->frame, position->x, position->y, 2);
+    FUN_0041af74(owner, value, position, 0x646464FF);
+    efctSetSpeed(1.0f);
 }
-
-} /* extern "C" */
+}

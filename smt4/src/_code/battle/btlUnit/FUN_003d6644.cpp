@@ -1,124 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d6644` (_code @ 0x3d6644, 0x1a8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: vector copies split into two-word plus scalar transfers rather than retail's three-word LDM/STM; selection/gate address materialization differs. */
+#include "shard/W5_W5Match4_BattleVectorTransition.h"
+#include "shard/W4_Match6_BtlEntry.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 
 extern "C" {
+extern BattleVectorTransition *g_btlMain;
+extern BattleVector3 DAT_00493554;
 
-int devilGetRecord(void);
-
-extern int g_btlMain; /* 0x4342c8 */
-extern unsigned int DAT_00493554; /* 0x493554 */
-extern unsigned int DAT_00493558; /* 0x493558 */
-extern unsigned int DAT_0049355c; /* 0x49355c */
-
-/* Supplied declaration required: devilGetRecord. */
-
-
-void FUN_003d6644(int param_1,int param_2,int param_3)
-
+void FUN_003d6644(BattleVectorTransition *camera, BtlMainState *battle, s32 slot)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  unsigned int *puVar4;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v3 = 0;
-  *(unsigned int *)(param_1 + 0x740) = 0;
-  *(unsigned int *)(param_1 + 0x73c) = 0;
-  *(unsigned int *)(param_1 + 0x738) = 0;
-  *(unsigned int *)(param_1 + 0x634) = *(unsigned int *)(param_1 + 0x634) & 0xff7fffff;
-  puVar3 = (unsigned int *)(param_1 + 0x764);
-  *(unsigned int *)(param_1 + 0x76c) = 0;
-  *(unsigned int *)(param_1 + 0x768) = 0;
-  *puVar3 = 0;
-  puVar4 = (unsigned int *)(param_2 + 0x44a0);
-  if (((*(unsigned int *)(param_2 + 0x44a8) & 0x40000000) != 0) && ((*puVar4 & 0x4000000) != 0)) {
-    return;
-  }
-  if ((*puVar4 & 4) != 0) {
-    return;
-  }
-  if ((*(unsigned int *)(param_2 + 0xe4) & 0x10) != 0 || (*puVar4 & 0x200) != 0) {
-    return;
-  }
-  if ((g_btlMain != 0) && ((*(unsigned int *)(g_btlMain + 0x634) & 0x2000000) != 0)) {
-    return;
-  }
-  *(unsigned int *)(param_1 + 0x75c) = *(unsigned int *)(param_1 + 0x760);
-  *(int *)(param_1 + 0x760) = param_3;
-  if (param_3 != 0) {
-    if (param_3 != 1) {
-      if (param_3 != 2) {
-        if (param_3 != 3) {
-          return;
-        }
-        *(unsigned int *)(param_1 + 0x738) = 0x41400000;
-        temp_v0 = DAT_0049355c;
-        temp_v2 = DAT_00493558;
-        *puVar3 = DAT_00493554;
-        *(unsigned int *)(param_1 + 0x768) = temp_v2;
-        *(unsigned int *)(param_1 + 0x76c) = temp_v0;
-        if ((*puVar4 & 0x4000000) != 0) {
-          temp_v2 = 0x3fc00000;
-          *(unsigned int *)(param_1 + 0x764) = temp_v2;
-        }
-      }
-      else {
-        *(unsigned int *)(param_1 + 0x738) = 0x40c00000;
-        temp_v0 = DAT_0049355c;
-        temp_v2 = DAT_00493558;
-        *puVar3 = DAT_00493554;
-        *(unsigned int *)(param_1 + 0x768) = temp_v2;
-        *(unsigned int *)(param_1 + 0x76c) = temp_v0;
-      }
-    }
-    else {
-      *(unsigned int *)(param_1 + 0x738) = 0xc0c00000;
-      temp_v0 = DAT_0049355c;
-      temp_v2 = DAT_00493558;
-      *puVar3 = DAT_00493554;
-      *(unsigned int *)(param_1 + 0x768) = temp_v2;
-      *(unsigned int *)(param_1 + 0x76c) = temp_v0;
-    }
-  }
-  else {
-    *(unsigned int *)(param_1 + 0x738) = 0xc1400000;
-    temp_v0 = DAT_0049355c;
-    temp_v2 = DAT_00493558;
-    *puVar3 = DAT_00493554;
-    *(unsigned int *)(param_1 + 0x768) = temp_v2;
-    *(unsigned int *)(param_1 + 0x76c) = temp_v0;
-    if ((*puVar4 & 0x4000000) != 0) {
-      temp_v2 = 0xbfc00000;
-      *(unsigned int *)(param_1 + 0x764) = temp_v2;
-    }
-  }
-  puVar4 = (unsigned int *)(*(int *)(param_2 + 0x1fc0) + param_3 * 0x288);
-  temp_v1 = *puVar4;
-  if (((temp_v1 & 2) == 0) && ((temp_v1 & 8) != 0)) {
-    temp_v1 = (unsigned int)*(unsigned short *)((int)puVar4 + 0xce);
-    devilGetRecord();
-    temp_v1 = (*(unsigned int *)(temp_v1 + 0x2c) & 0x1fffffff) >> 0x19;
-    if (temp_v1 == 0) {
-      *(unsigned int *)(param_1 + 0x73c) = temp_v3;
-    }
-    else {
-      if (temp_v1 == 1) {
-        temp_v3 = 0xc0600000;
-      }
-      else {
-        if (temp_v1 != 2) {
-          return;
-        }
-        temp_v3 = 0x40400000;
-      }
-      *(unsigned int *)(param_1 + 0x73c) = temp_v3;
-    }
-  }
-  return;
-}
+    // Local views name the selection words and encounter gate in existing opaque padding.
+    struct SlotSelection { s32 previous, current; };
+    struct EncounterGate { u32 flags; };
+    // The sort record's published prefix ends before the packed body-size attributes.
+    struct DevilBodyAttributes { u8 prefix[0x2C]; u32 flags; };
+    SlotSelection *selection = reinterpret_cast<SlotSelection *>(camera->unk75c);
+    EncounterGate *gate = reinterpret_cast<EncounterGate *>(battle->encounter.unke4);
 
-} /* extern "C" */
+    camera->axis.current.z = 0.0f;
+    camera->axis.current.y = 0.0f;
+    camera->axis.current.x = 0.0f;
+    camera->flags &= ~0x800000;
+    camera->originData.originOffset.z = 0.0f;
+    camera->originData.originOffset.y = 0.0f;
+    camera->originData.originOffset.x = 0.0f;
+    if ((battle->editorControl.flags & 0x40000000) && (battle->battleFlags & 0x4000000))
+        return;
+    if (battle->battleFlags & 4)
+        return;
+    if ((gate->flags & 0x10) || (battle->battleFlags & 0x200))
+        return;
+    if (g_btlMain && (g_btlMain->flags & 0x2000000))
+        return;
+
+    selection->previous = selection->current;
+    selection->current = slot;
+    switch (slot) {
+    case 0:
+        camera->axis.current.x = -12.0f;
+        camera->originData.originOffset = DAT_00493554;
+        if (battle->battleFlags & 0x4000000)
+            camera->originData.originOffset.x = -1.5f;
+        break;
+    case 1:
+        camera->axis.current.x = -6.0f;
+        camera->originData.originOffset = DAT_00493554;
+        break;
+    case 2:
+        camera->axis.current.x = 6.0f;
+        camera->originData.originOffset = DAT_00493554;
+        break;
+    case 3:
+        camera->axis.current.x = 12.0f;
+        camera->originData.originOffset = DAT_00493554;
+        if (battle->battleFlags & 0x4000000)
+            camera->originData.originOffset.x = 1.5f;
+        break;
+    default:
+        return;
+    }
+    BtlEntry *entry = &battle->entries[slot];
+    if (!(entry->flags & 2) && (entry->flags & 8)) {
+        const DevilBodyAttributes *attributes = reinterpret_cast<const DevilBodyAttributes *>(devilGetRecord(entry->id));
+        switch ((attributes->flags >> 25) & 15) {
+        case 0: camera->axis.current.y = 0.0f; break;
+        case 1: camera->axis.current.y = -3.5f; break;
+        case 2: camera->axis.current.y = 3.0f; break;
+        }
+    }
+}
+}

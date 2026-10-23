@@ -1,94 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b01e8` (_code @ 0x3b01e8, 0x120 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler merges lifecycle and resource owner pointers, changing saved-register allocation. */
+#include "ui/HunterDatabaseWork.h"
 extern "C" {
+extern HunterDatabaseWork *DAT_0057f244;
+extern void *g_aocSystem;
+void ifTouchRegionRemove(void);
+void asdMemFreeSlot(u32 slot);
+void asdTMTexTableFreeEntry(u32 table);
+void asdTMTexTableReleaseNode(u32 table, s32 node);
+void asdMemFree(void *memory);
+void loadedRecordTableClear(void *system);
+void jobStop(u32 job, s32 flags);
+void asdOperatorDelete(void *object);
 
-int jobStop(unsigned int, int);
-int ifTouchRegionRemove(void);
-int asdMemFree(void);
-int asdTMTexTableReleaseNode(int, int);
-int asdMemFreeSlot(unsigned int);
-int asdTMTexTableFreeEntry(...);
-int asdOperatorDelete(void);
-int loadedRecordTableClear(unsigned int);
-
-extern unsigned int g_aocSystem; /* 0x570280 */
-extern unsigned int *DAT_0057f244; /* 0x57f244 */
-
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: asdMemFreeSlot. */
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: loadedRecordTableClear. */
-
-
+// Release the database UI's touch regions, sprite slots, tables and message buffers.
 void FUN_003b01e8(void)
-
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  puVar1 = DAT_0057f244;
-  temp_v1 = 0;
-  if (*(short *)(DAT_0057f244 + 0x4a) != 0) {
-    do {
-      ifTouchRegionRemove();
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < (int)(unsigned int)*(unsigned short *)(puVar1 + 0x4a));
-  }
-  temp_v1 = 0;
-  do {
-    asdMemFreeSlot(puVar1[temp_v1 + 0x19b]);
-    temp_v2 = temp_v1 + 1;
-    puVar1[temp_v1 + 0x19b] = 0;
-    temp_v1 = temp_v2;
-  } while (temp_v2 < 6);
-  temp_v3 = 0;
-  do {
-    if (*(char *)((int)puVar1 + temp_v3 + 0x18) != '\0') {
-      if ((temp_v3 & 0xff) == 0) {
-        temp_v0 = 1;
-      }
-      else if ((temp_v3 & 0xff) == 1) {
-        temp_v0 = 0xf;
-      }
-      else {
-        temp_v0 = 0xffffffff;
-      }
-      asdTMTexTableFreeEntry(temp_v0);
-      *(unsigned char *)((int)puVar1 + temp_v3 + 0x18) = 0;
+    HunterDatabaseWork *work = DAT_0057f244;
+    for (s32 index = 0; index < work->touch.touchRegionCount; ++index)
+        ifTouchRegionRemove();
+    for (s32 index = 0; index < 6; ++index) {
+        asdMemFreeSlot(work->sprites[index]);
+        work->sprites[index] = 0;
     }
-    temp_v3 = temp_v3 + 1;
-  } while ((int)temp_v3 < 2);
-  temp_v1 = 0;
-  do {
-    asdTMTexTableReleaseNode(0x32,temp_v1);
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 2);
-  asdTMTexTableFreeEntry(0x32);
-  if (puVar1[2] != 0) {
-    asdMemFree();
-    puVar1[2] = 0;
-  }
-  if (puVar1[3] != 0) {
-    asdMemFree();
-    puVar1[3] = 0;
-  }
-  loadedRecordTableClear(g_aocSystem);
-  jobStop(*puVar1,0);
-  if (DAT_0057f244 != (unsigned int *)0x0) {
-    asdOperatorDelete();
-    DAT_0057f244 = (unsigned int *)0x0;
-  }
-  return;
+    for (s32 index = 0; index < 2; ++index) {
+        if (work->acquiredTables[index]) {
+            u32 table;
+            switch ((u8)index) {
+            case 0: table = 1; break;
+            case 1: table = 15; break;
+            default: table = 0xFFFFFFFF; break;
+            }
+            asdTMTexTableFreeEntry(table);
+            work->acquiredTables[index] = 0;
+        }
+    }
+    for (s32 index = 0; index < 2; ++index)
+        asdTMTexTableReleaseNode(50, index);
+    asdTMTexTableFreeEntry(50);
+    if (work->messages) {
+        asdMemFree((void *)work->messages);
+        work->messages = 0;
+    }
+    if (work->helpMessages) {
+        asdMemFree((void *)work->helpMessages);
+        work->helpMessages = 0;
+    }
+    loadedRecordTableClear(g_aocSystem);
+    jobStop(work->lifecycle.job, 0);
+    if (DAT_0057f244 != NULL) {
+        asdOperatorDelete(DAT_0057f244);
+        DAT_0057f244 = NULL;
+    }
 }
-
-} /* extern "C" */
+}

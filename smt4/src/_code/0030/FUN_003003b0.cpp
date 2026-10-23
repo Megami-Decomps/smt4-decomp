@@ -1,71 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003003b0` (_code @ 0x3003b0, 0x138 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: regular apply and remove blocks are laid out in the opposite order, changing branch and literal-pool offsets. */
+#include "battle/btlMain.h"
+#include "battle/btlAction.h"
+#include "shard/W5_W5Match7_ScriptUnit.h"
 
 extern "C" {
+BtlMainState *btlGetMainState(void);
+u32 FUN_002463e8(u32 status);
+u32 FUN_00246134(s32 side, u32 status, s32 kind, u32 mask);
+void FUN_00246080(s32 side, s32 actor, ScriptUnit *source, BtlActionRecord *action, s32 kind);
+void FUN_00246e24(s32 side, ScriptUnit *source, BtlActionRecord *action, u32 mask, s32 enabled);
+void FUN_00246d38(s32 side, ScriptUnit *source, BtlActionRecord *action, u32 mask);
+void FUN_002505c0(s32 side, ScriptUnit *source, u32 message, s32 value, s32 option, s32 extra, s32 flags);
 
-int FUN_00246080(int, int, unsigned int, unsigned int, int);
-int FUN_00246134(int, unsigned int, int, unsigned int);
-int FUN_00246d38(...);
-int FUN_00246e24(int, unsigned int, unsigned int, int, int);
-int FUN_002505c0(...);
-int scrGetArg(int);
-
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern unsigned int g_btlScriptUnit; /* 0x43427c */
-
-/* Supplied declaration required: FUN_00246080. */
-/* Supplied declaration required: FUN_00246134. */
-extern unsigned int FUN_002463e8(unsigned int);
-/* Supplied declaration required: FUN_00246d38. */
-/* Supplied declaration required: FUN_00246e24. */
-/* Supplied declaration required: FUN_002505c0. */
-extern unsigned int btlUnitGet(unsigned int);
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrGetArg. */
-
-
-unsigned int FUN_003003b0(void)
-
+// Add or remove one status; optionally handle status immunity before applying it.
+u32 FUN_003003b0(void)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = scrGetArg(2);
-  temp_v3 = btlUnitGet(g_btlScriptUnit);
-  temp_v4 = btlGetMainState();
-  if (temp_v1 != 0) {
-    if (temp_v2 != 0) {
-      temp_v5 = FUN_002463e8(temp_v0);
-      temp_v6 = 0;
-      FUN_00246134(0,temp_v5,2,0xffffffff);
-      if ((temp_v6 & 0x10000) != 0) {
-        FUN_00246080(0,0,temp_v3,*(unsigned int *)(temp_v4 + 0x1e98),4);
-        FUN_002505c0(0,temp_v3,0x10001ea,0,1,0,0);
-        return 1;
-      }
+    u32 status = scrGetArg(0);
+    s32 apply = scrGetArg(1);
+    s32 checkImmunity = scrGetArg(2);
+    ScriptUnit *source = btlUnitGet(g_btlScriptUnit);
+    BtlMainState *battle = btlGetMainState();
+    if (apply != 0) {
+        if (checkImmunity != 0 &&
+            (FUN_00246134(0, FUN_002463e8(status), 2, ~0u) & 0x10000) != 0) {
+            FUN_00246080(0, 0, source, battle->actions, 4);
+            FUN_002505c0(0, source, 0x10001EA, 0, 1, 0, 0);
+        } else {
+            FUN_00246e24(0, source, battle->actions, 1u << status, 1);
+            FUN_002505c0(0, source, 0x10001BD, 0, 0, 0, 0);
+        }
+    } else {
+        FUN_00246d38(0, source, battle->actions, 1u << status);
     }
-    FUN_00246e24(0,temp_v3,*(unsigned int *)(temp_v4 + 0x1e98),1 << (temp_v0 & 0xff),1);
-    FUN_002505c0(0,temp_v3,0x10001bd,0,0,0,0);
-  }
-  else {
-    FUN_00246d38(0,temp_v3,*(unsigned int *)(temp_v4 + 0x1e98),1 << (temp_v0 & 0xff));
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

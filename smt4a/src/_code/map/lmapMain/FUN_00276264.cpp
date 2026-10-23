@@ -90,7 +90,7 @@ int uiPlayGatedActionFeedback(void);
 int FUN_003b5c54(...);
 int gameDataSaveSetValues(...);
 int FUN_004731d8(void);
-int FUN_0047db34(...);
+int mapRestoreSavedDestination(...);
 int FUN_00483294(...);
 int FUN_00294a84(...);
 int FUN_00482fd4(...);
@@ -164,7 +164,7 @@ int mapEnvironmentSelectPreset(...);
 int FUN_00399290(...);
 int FUN_003d502c(...);
 int FUN_0048389c(...);
-int FUN_004839b4(...);
+int fieldBuildAreaPlacementList(...);
 int stateSetterSetFromBase(...);
 int applyIfIdValid(...);
 int rt_memcpy_w(...);
@@ -587,7 +587,7 @@ extern int FUN_004186e0(void);
 /* Supplied declaration required: gameDataSaveSetValues. */
 /* Supplied declaration required: FUN_004731d8. */
 extern int gameBlockByte27E98Is1To3(void);
-/* Supplied declaration required: FUN_0047db34. */
+/* Supplied declaration required: mapRestoreSavedDestination. */
 /* Supplied declaration required: scriptHolderFree1. */
 /* Supplied declaration required: scriptHolderBReset. */
 extern unsigned int scriptHolderUpdateForward(ScriptHolder *);
@@ -602,7 +602,7 @@ extern int scriptHolderUpdateSimple(int);
 /* Supplied declaration required: FUN_00483294. */
 /* Supplied declaration required: FUN_00483834. */
 /* Supplied declaration required: FUN_0048389c. */
-/* Supplied declaration required: FUN_004839b4. */
+/* Supplied declaration required: fieldBuildAreaPlacementList. */
 /* Supplied declaration required: stateSetterSetFromBase. */
 /* Supplied declaration required: FUN_00483acc. */
 /* Supplied declaration required: twoObjectsRelease. */
@@ -1219,7 +1219,7 @@ LAB_00276f5c:
   case 0xb:
     goto LAB_00276f5c;
   case 0xc:
-    FUN_004839b4(puVar2 + 0x3d);
+    fieldBuildAreaPlacementList(puVar2 + 0x3d);
     puVar2[4] = puVar2[4] + 1;
     FUN_003d502c(0);
     puVar2[3] = puVar2[3] + 1;
@@ -2514,7 +2514,7 @@ LAB_00279834:
       return 0;
     }
     temp_v8 = g_aocMain + 0xa8;
-    FUN_0047db34(temp_v8,0);
+    mapRestoreSavedDestination(temp_v8,0);
     goto joined_r0x0027ce58;
   case 0x14:
     FUN_00387014();
@@ -2541,7 +2541,7 @@ LAB_00279834:
     break;
   case 0x15:
     temp_v8 = g_aocMain + 0xa8;
-    FUN_0047db34(temp_v8,0);
+    mapRestoreSavedDestination(temp_v8,0);
     goto joined_r0x0027ce58;
   case 0x16:
     FUN_00387014();
@@ -3098,7 +3098,7 @@ LAB_0027a030:
     if (g_lmapMainState != (unsigned int *)0x0) {
       FUN_00483acc(g_lmapMainState + 0x3d);
       stateSetterSetFromBase(puVar19 + 0x3d,puVar19[0x10] - 100,puVar19[0x12]);
-      FUN_004839b4(puVar19 + 0x3d);
+      fieldBuildAreaPlacementList(puVar19 + 0x3d);
     }
     sub68OwnerCall3();
     FUN_002df914();
@@ -3277,7 +3277,7 @@ LAB_0027a030:
     if (g_lmapMainState != (unsigned int *)0x0) {
       FUN_00483acc(g_lmapMainState + 0x3d);
       stateSetterSetFromBase(puVar19 + 0x3d,puVar19[0x10] - 100,puVar19[0x12]);
-      FUN_004839b4(puVar19 + 0x3d);
+      fieldBuildAreaPlacementList(puVar19 + 0x3d);
     }
     sub68OwnerCall3();
     FUN_002df914();
@@ -4159,7 +4159,7 @@ LAB_0027a030:
     puVar2[3] = puVar2[3] + 1;
     break;
   case 100:
-    FUN_004839b4(puVar2 + 0x3d);
+    fieldBuildAreaPlacementList(puVar2 + 0x3d);
     FUN_003d502c(0);
     if (puVar2[0x2b9] != 0) {
       for (temp_v10 = 0; temp_v10 < *(unsigned int *)(*(int *)(puVar2[0x2b9] + 8) + 0x10); temp_v10 = temp_v10 + 1)
@@ -4310,7 +4310,7 @@ LAB_0027ca0c:
     FUN_002df914();
     FUN_00483acc(puVar2 + 0x3d);
     stateSetterSetFromBase(puVar2 + 0x3d,puVar2[0x10] - 100,puVar2[0x12]);
-    FUN_004839b4(puVar2 + 0x3d);
+    fieldBuildAreaPlacementList(puVar2 + 0x3d);
     puVar2[3] = puVar2[3] + 1;
     break;
   case 0x6b:

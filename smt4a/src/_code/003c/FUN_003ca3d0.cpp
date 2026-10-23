@@ -1,129 +1,94 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ca3d0` (_code @ 0x3ca3d0, 0x1b4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation initialization uses a branch instead of predication; terminal-state tests and constant-one lifetime differ. */
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
+struct SaintGermainScriptWork {
+    u32 job;
+    s32 state;
+    u32 frame;
+    s32 previousState;
+    void *messages;
+    void *scriptData;
+    void *process;
+    u8 ownsSlot;
+    u8 unk1D[3];
+    u32 argument;
+    u8 unk24[0x2C];
+};
 extern "C" {
+extern SaintGermainScriptWork *DAT_00588130;
+extern const s8 DAT_00533364[], DAT_00533350[];
+extern const char DAT_0053328c[], DAT_00533264[];
+s32 scrGetCommandFrame();
+u32 scrGetArg(u32);
+void *asdOperatorNew(u32);
+s32 FUN_00349b14(u32);
+s32 FUN_003710f8(u32);
+u32 asdProcessCreateSimple(const s8 *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32);
+u32 taskCreateDraw(const s8 *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, void *);
+void asdLoadFileAsyncSimple(const char *, void **, s32);
+s32 loadSlotIsLoaded(u32);
+void loadSlotRequestAsync(u32, u32);
+void campButtonHelpAcquire();
+void campButtonHelpRelease();
+void FUN_0019de98(s32, u32);
+void scrScriptProcessDestroy(void *);
+void asdMemFree(void *);
+void dataTableFree(u32);
+void jobStop(u32, s32);
+void asdOperatorDelete(void *);
 
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdOperatorNew(...);
-int jobStop(...);
-int asdMemFree(...);
-int scrScriptProcessDestroy(...);
-int FUN_0019de98(...);
-int dataTableFree(...);
-int asdLoadFileAsyncSimple(...);
-int asdOperatorDelete(...);
-int campButtonHelpAcquire(...);
-int campButtonHelpRelease(...);
-int loadSlotRequestAsync(...);
-
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern unsigned char LAB_00349b14; /* 0x349b14 */
-extern unsigned char LAB_003710f8; /* 0x3710f8 */
-extern unsigned int *DAT_00588130; /* 0x588130 */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: dataTableFree. */
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-extern int scrGetCommandFrame(void);
-/* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: campButtonHelpAcquire. */
-/* Supplied declaration required: campButtonHelpRelease. */
-extern int loadSlotIsLoaded(unsigned int);
-/* Supplied declaration required: loadSlotRequestAsync. */
-
-
-unsigned int FUN_003ca3d0(void)
-
+u32 FUN_003ca3d0()
 {
-/* irregular: 13 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  char *pcVar4;
-  
-  temp_v0 = scrGetCommandFrame();
-  if (temp_v0 == 0) {
-    temp_v1 = scrGetArg(0);
-    puVar3 = (unsigned int *)0x50;
-    asdOperatorNew();
-    if (puVar3 != (unsigned int *)0x0) {
-      puVar3[4] = 0;
-      puVar3[5] = 0;
-      puVar3[6] = 0;
+    if (scrGetCommandFrame() == 0) {
+        u32 argument = scrGetArg(0);
+        SaintGermainScriptWork *work = static_cast<SaintGermainScriptWork *>(asdOperatorNew(sizeof(SaintGermainScriptWork)));
+        if (work) {
+            work->messages = NULL;
+            work->scriptData = NULL;
+            work->process = NULL;
+        }
+        DAT_00588130 = work;
+        work->job = asdProcessCreateSimple(DAT_00533364, 4, 0, 0, FUN_00349b14, NULL, 0);
+        taskCreateDraw(DAT_00533350, 0xEB, 0, 0, FUN_003710f8, NULL, 0, reinterpret_cast<void *>(work->job));
+        work->argument = argument;
+        asdLoadFileAsyncSimple(DAT_0053328c, &work->messages, 0);
+        asdLoadFileAsyncSimple(DAT_00533264, &work->scriptData, 0);
+        work->ownsSlot = 0;
+        if (!loadSlotIsLoaded(0x4F)) {
+            loadSlotRequestAsync(0x4F, 0);
+            work->ownsSlot = 1;
+        }
+        campButtonHelpAcquire();
+        work->previousState = work->state;
+        work->state = 1;
+        work->frame = 0;
     }
-    else {
-      puVar3 = (unsigned int *)0x0;
+    SaintGermainScriptWork *work = DAT_00588130;
+    if (work && work->state != 0 && work->state != 8)
+        return 0;
+    if (work) {
+        FUN_0019de98(0, 0xF4F4F4FF);
+        campButtonHelpRelease();
+        if (work->process) {
+            scrScriptProcessDestroy(work->process);
+            work->process = NULL;
+        }
+        if (work->messages) {
+            asdMemFree(work->messages);
+            work->messages = NULL;
+        }
+        if (work->scriptData) {
+            asdMemFree(work->scriptData);
+            work->scriptData = NULL;
+        }
+        if (work->ownsSlot)
+            dataTableFree(0x4F);
+        jobStop(work->job, 0);
+        if (DAT_00588130) {
+            asdOperatorDelete(DAT_00588130);
+            DAT_00588130 = NULL;
+        }
     }
-    pcVar4 = "SAINT_GERMAIN PROC";
-    DAT_00588130 = puVar3;
-    asdProcessCreateSimple("SAINT_GERMAIN PROC",4,0,0,&LAB_00349b14,0,0);
-    *puVar3 = (unsigned int)pcVar4;
-    taskCreateDraw("SAINT_GERMAIN DD",0xeb,0,0,&LAB_003710f8,0,0,pcVar4);
-    puVar3[8] = temp_v1;
-    asdLoadFileAsyncSimple("npc_shop/SaintGermain/SaintGermain.mbm",puVar3 + 4,0);
-    asdLoadFileAsyncSimple("npc_shop/SaintGermain/SaintGermain.bf",puVar3 + 5,0);
-    *(unsigned char *)(puVar3 + 7) = 0;
-    temp_v0 = loadSlotIsLoaded(0x4f);
-    if (temp_v0 == 0) {
-      loadSlotRequestAsync(0x4f,0);
-      *(unsigned char *)(puVar3 + 7) = 1;
-    }
-    campButtonHelpAcquire();
-    temp_v0 = 1;
-    puVar3[3] = puVar3[1];
-    puVar3[1] = 1;
-    puVar3[2] = 0;
-  }
-  puVar3 = DAT_00588130;
-  if (DAT_00588130 != (unsigned int *)0x0) {
-    temp_v0 = DAT_00588130[1];
-  }
-  if ((DAT_00588130 != (unsigned int *)0x0 && temp_v0 != 0) && (temp_v0 != 8)) {
-    temp_v1 = 0;
-  }
-  else {
-    if (DAT_00588130 != (unsigned int *)0x0) {
-      FUN_0019de98(0,0xf4f4f4ff);
-      campButtonHelpRelease();
-      if (puVar3[6] != 0) {
-        scrScriptProcessDestroy();
-        puVar3[6] = 0;
-      }
-      if (puVar3[4] != 0) {
-        asdMemFree();
-        puVar3[4] = 0;
-      }
-      if (puVar3[5] != 0) {
-        asdMemFree();
-        puVar3[5] = 0;
-      }
-      if (*(char *)(puVar3 + 7) != '\0') {
-        dataTableFree(0x4f);
-      }
-      jobStop(*puVar3,0);
-      if (DAT_00588130 != (unsigned int *)0x0) {
-        asdOperatorDelete();
-        DAT_00588130 = (unsigned int *)0x0;
-      }
-    }
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    return 1;
 }
-
-} /* extern "C" */
+}

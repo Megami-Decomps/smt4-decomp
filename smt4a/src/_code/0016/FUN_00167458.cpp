@@ -1,98 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00167458` (_code @ 0x167458, 0x10c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: -O2 restores retail branch layout; displacement negation and final result-pointer allocation still differ. */
+#include "shard/W6_W6Match8_AnimatedSprite.h"
 
 extern "C" {
+void FUN_001807a0(SpritePlaybackView *sprite, f32 speed);
+void FUN_00182348(SpritePlaybackView *sprite, f32 speed);
+void FUN_00181948(SpritePlaybackView *sprite, f32 speed);
 
-int FUN_001807a0(...);
-int FUN_00181948(...);
-int FUN_00182348(...);
-
-typedef struct fn_00167458_arg0 fn_00167458_arg0;
-struct fn_00167458_arg0 {
-    unsigned char pad_0x0[0xc];
-    undefined4 field_0xc; /* +0xc */
-    unsigned char pad_0x10[0x42];
-    short field_0x52; /* +0x52 */
-    unsigned char pad_0x54[0x31];
-    undefined1 field_0x85; /* +0x85 */
-    byte field_0x86; /* +0x86 */
-    byte field_0x87; /* +0x87 */
-    byte field_0x88; /* +0x88 */
-    byte field_0x89; /* +0x89 */
-    char field_0x8a; /* +0x8a */
-};
-
-extern unsigned char LAB_00140000; /* 0x140000 */
-
-/* Supplied declaration required: FUN_001807a0. */
-/* Supplied declaration required: FUN_00181948. */
-/* Supplied declaration required: FUN_00182348. */
-
-
-int FUN_00167458(fn_00167458_arg0 *param_1,int param_2)
-
+// Slide a sprite toward zero displacement while advancing its other animation channels.
+s32 FUN_00167458(SpritePlaybackView *sprite, s32 reverse)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v2 = (int)param_1->field_0x52;
-  if ((temp_v2 == 0) && (param_1->field_0xc = (undefined4)&LAB_00140000, param_2 != 0)) {
-    param_1->field_0xc = 0xffec0000;
-  }
-  temp_v1 = 0x37;
-  if ((0 < temp_v2) && (temp_v1 = temp_v2 * -5 + 0x37, temp_v1 < 0)) {
-    temp_v1 = 0;
-  }
-  if (param_2 != 0) {
-    temp_v1 = -temp_v1;
-  }
-  temp_v2 = param_1->field_0xc + temp_v1 * -0x1000;
-  param_1->field_0xc = temp_v2;
-  temp_v2 = temp_v2 >> 0xc;
-  if (param_2 != 0) {
-    if (temp_v2 >= 0) {
-      param_1->field_0xc = 0;
-      param_1->field_0x86 = 1;
+    s32 frame = (s16)sprite->positionFrame;
+    if (frame == 0) {
+        sprite->transition.displacement = 320 * 4096;
+        if (reverse != 0) {
+            sprite->transition.displacement = -320 * 4096;
+        }
     }
-    else {
-      param_1->field_0x8a = '\0';
+    s32 step = 55;
+    if (frame > 0) {
+        step = -frame * 5 + 55;
+        if (step < 0) {
+            step = 0;
+        }
     }
-  }
-  else if (temp_v2 < 1) {
-    param_1->field_0xc = 0;
-    param_1->field_0x86 = 1;
-  }
-  else {
-    param_1->field_0x8a = '\0';
-  }
-  param_1->field_0x52 = param_1->field_0x52 + 1;
-  FUN_001807a0(param_1);
-  FUN_00182348(param_1);
-  FUN_00181948(param_1);
-  temp_v3 = param_1->field_0x86 != 0;
-  temp_v0 = 0;
-  if (temp_v3) {
-    temp_v0 = param_1->field_0x87;
-  }
-  if (temp_v3 && temp_v0 != 0) {
-    temp_v3 = param_1->field_0x88 != 0;
-    temp_v0 = 0;
-    if (temp_v3) {
-      temp_v0 = param_1->field_0x89;
+    if (reverse != 0) {
+        step = -step;
     }
-    if (temp_v3 && temp_v0 != 0) {
-      param_1->field_0x8a = '\x01';
-      param_1->field_0x85 = 1;
-      return (int)param_1->field_0x8a;
+    sprite->transition.displacement += step * -4096;
+    s32 position = sprite->transition.displacement >> 12;
+    if (reverse != 0) {
+        if (position >= 0) {
+            sprite->transition.displacement = 0;
+            sprite->completed[0] = 1;
+        } else {
+            sprite->finished = 0;
+        }
+    } else if (position <= 0) {
+        sprite->transition.displacement = 0;
+        sprite->completed[0] = 1;
+    } else {
+        sprite->finished = 0;
     }
-  }
-  param_1->field_0x8a = '\0';
-  param_1->field_0x85 = 1;
-  return (int)param_1->field_0x8a;
+    sprite->positionFrame = frame + 1;
+    FUN_001807a0(sprite, 1.0f);
+    FUN_00182348(sprite, 1.0f);
+    FUN_00181948(sprite, 1.0f);
+    if (sprite->completed[0] != 0 && sprite->completed[1] != 0 &&
+        sprite->completed[2] != 0 && sprite->completed[3] != 0) {
+        sprite->finished = 1;
+    } else {
+        sprite->finished = 0;
+    }
+    sprite->active = 1;
+    return (s8)sprite->finished;
 }
-
-} /* extern "C" */
+}

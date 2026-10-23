@@ -6,7 +6,7 @@ struct GameTransferRecord {
 };
 
 extern "C" {
-void FUN_0029d770(u32 source, GameTransferRecord* record);
+void unitInitializeFromSavedRecord(u32 source, GameTransferRecord* record);
 void btlBuildUnitSnapshot(u16* destination, const GameTransferRecord* record);
 
 // Transfers a record into game data and sets its update-state flags.
@@ -14,7 +14,7 @@ void FUN_0029d8a0(u32 source)
 {
     GameData* data = g_gameGlobals.data;
     GameTransferRecord record;
-    FUN_0029d770(source, &record);
+    unitInitializeFromSavedRecord(source, &record);
     btlBuildUnitSnapshot(&data->unk1300, &record);
     data->unk1E66 = 4;
     data->unk1EB8 = 1;

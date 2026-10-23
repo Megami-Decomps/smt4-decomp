@@ -1,62 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00272310` (_code @ 0x272310, 0x110 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler hoists mask loads and allocates more registers; decoder address scheduling differs. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 extern "C" {
+extern BtlMainGlobalsA g_btlMain;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int g_btlMain; /* 0x573920 */
-extern unsigned int DAT_00573978; /* 0x573978 */
-extern unsigned int DAT_0057397c; /* 0x57397c */
-extern unsigned int DAT_00573988; /* 0x573988 */
-extern unsigned int DAT_0057398c; /* 0x57398c */
-extern unsigned int DAT_005739a0; /* 0x5739a0 */
-extern unsigned int DAT_005739a4; /* 0x5739a4 */
-
-
-int FUN_00272310(unsigned int param_1)
-
+// Decode the selected active combatant's 21 packed stat levels.
+u8 *FUN_00272310(u32 id)
 {
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  if (g_btlMain != 0) {
-    temp_v0 = 0;
-    do {
-      puVar1 = (unsigned int *)(*(int *)(g_btlMain + 0x1ffc) + temp_v0 * 0x408);
-      if (puVar1 != (unsigned int *)0x0) {
-        temp_v2 = *puVar1;
-        temp_v3 = puVar1[1];
-        if (((((DAT_00573978 & temp_v2) != 0 || (DAT_0057397c & temp_v3) != 0) &&
-             ((DAT_005739a4 & temp_v3) == 0 && (DAT_005739a0 & temp_v2) == 0)) &&
-            ((temp_v2 & DAT_00573988) != 0 || (temp_v3 & DAT_0057398c) != 0)) &&
-           (*(unsigned short *)((int)puVar1 + 0x166) == param_1)) {
-          temp_v1 = 1;
-          *(unsigned char *)((int)puVar1 + 0x30a) =
-               (unsigned char)((unsigned short)*(unsigned short *)((int)puVar1 + 0x2b6) >> 10);
-          temp_v0 = 1;
-          do {
-            *(unsigned char *)((int)puVar1 + temp_v0 + 0x30a) =
-                 (unsigned char)((unsigned short)*(unsigned short *)((int)puVar1 + temp_v0 * 2 + 0x2b6) >> 10);
-            temp_v1 = temp_v1 + 2;
-            *(unsigned char *)((int)puVar1 + temp_v0 + 0x30b) =
-                 (unsigned char)((unsigned short)*(unsigned short *)((int)puVar1 + (temp_v0 + 1) * 2 + 0x2b6) >> 10);
-            temp_v0 = temp_v0 + 2;
-          } while (temp_v1 < 0x15);
-          return (int)puVar1 + 0x30a;
+    if (g_btlMain.state != NULL) {
+        for (s32 index = 0; index < 109; ++index) {
+            BtlCombatantEntryA *entry = &g_btlMain.state->entries[index];
+            if (entry != NULL &&
+                (entry->flags & g_btlMain.combatantMasks.required) &&
+                !(entry->flags & g_btlMain.exclusionMask) &&
+                (entry->flags & g_btlMain.actorCategories[1]) && entry->id == id) {
+                for (s32 stat = 0; stat < 21; ++stat)
+                    entry->encodedLevels.levels[stat] = (u8)(entry->encodedStats.values[stat] >> 10);
+                return entry->encodedLevels.levels;
+            }
         }
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x6d);
-  }
-  return 0;
+    }
+    return NULL;
 }
-
-} /* extern "C" */
+}

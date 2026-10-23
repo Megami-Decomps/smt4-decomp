@@ -1,167 +1,82 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e3a20` (_code @ 0x3e3a20, 0x1ac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stack aggregate placement, choice-record integer/VFP copying and saved pointer registers differ. */
+#include "shard/Shard0032.h"
+#include <stddef.h>
+
+struct InheritanceChoiceRecord {
+    u32 unk00[2];
+    u16 skills[8];
+    u32 unk18[3];
+};
+struct InheritancePreviewWork {
+    u8 unk00[0xA0];
+    s32 selected;
+    s32 skillCount;
+    s32 unlockedCount;
+    const InheritanceChoiceRecord *choices() const { return (const InheritanceChoiceRecord *)((const u8 *)this + 0x20); }
+};
+struct InheritanceTargetStats {
+    u16 unk00;
+    u16 id;
+    u8 unk04[0x14];
+    u16 level;
+    u16 stats[5];
+};
+struct InheritanceSkillList { u16 skills[8]; };
+typedef char InheritancePreviewLayoutCheck[
+    offsetof(InheritanceChoiceRecord, skills) == 8 && sizeof(InheritanceChoiceRecord) == 0x24 &&
+    offsetof(InheritanceTargetStats, level) == 0x18 && offsetof(InheritanceTargetStats, stats) == 0x1A &&
+    offsetof(InheritancePreviewWork, selected) == 0xA0 && offsetof(InheritancePreviewWork, skillCount) == 0xA4 ? 1 : -1];
 
 extern "C" {
+void unitRecordBuild(u16 id, UnitRecord *record);
+void FUN_004cd4b8(UnitRecord *record, s16 levelDelta);
+void FUN_004bcd90(UnitRecord *record);
+s32 FUN_004cc8d8(u16 id, u16 level);
+void rt_memcpy_w(void *destination, const void *source, u32 size);
+s32 getUnlockedSlotCount(u32 mode);
+void FUN_004bd6b0(UnitRecord *record, u16 skill, s32 slot);
+void FUN_0033449c(u32 enabled);
+void statusDisplayBindUnitRecord(const UnitRecord *record, u32 option, u32 mode, u32 flags);
+void objBInitBlock19D0(const UnitRecord *record, u32 option, u32 flags);
+void statusPanelSetOpen(u32 open);
+void statusReplaceSkills(const u16 *skills, u32 count);
+void statusMarkNewSkills(const u16 *skills, u32 count);
 
-int statusPanelSetOpen(int);
-int statusReplaceSkills(int *, int);
-int unitRecordBuild(int, unsigned char [4]);
-int statusDisplayBindUnitRecord(unsigned char [4], int, int);
-int objBInitBlock19D0(unsigned char [300], int, int);
-int FUN_0033449c(int);
-int statusMarkNewSkills(short [10], int);
-int FUN_004bcd90(unsigned char [4]);
-int FUN_004bd6b0(unsigned char [300], int, int);
-int FUN_004cd4b8(unsigned char [4], int);
-int rt_memcpy_w(unsigned char [300], unsigned char [4], int);
-
-typedef struct fn_003e3a20_arg1 fn_003e3a20_arg1;
-struct fn_003e3a20_arg1 {
-    unsigned char pad_0x0[0x2];
-    ushort field_0x2; /* +0x2 */
-    unsigned char pad_0x4[0x14];
-    ushort field_0x18; /* +0x18 */
-    ushort field_0x1a; /* +0x1a */
-    ushort field_0x1c; /* +0x1c */
-    ushort field_0x1e; /* +0x1e */
-    ushort field_0x20; /* +0x20 */
-    ushort field_0x22; /* +0x22 */
-};
-
-/* stack frame of param_2: 16 slot(s), 50 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned short sp25C; /* 0x25c: local_25c */
-    unsigned short sp25E; /* 0x25e: local_25e */
-    unsigned int sp28C; /* 0x28c: local_28c */
-    unsigned int sp290; /* 0x290: local_290 */
-    unsigned short sp2B4; /* 0x2b4: local_2b4 */
-    unsigned short sp2B6; /* 0x2b6: local_2b6 */
-    unsigned short sp2B8; /* 0x2b8: local_2b8 */
-    unsigned short sp2BA; /* 0x2ba: local_2ba */
-    unsigned short sp2BC; /* 0x2bc: local_2bc */
-} param_2_stack;
-
-/* Supplied declaration required: statusPanelSetOpen. */
-/* Supplied declaration required: statusReplaceSkills. */
-/* Supplied declaration required: unitRecordBuild. */
-/* Supplied declaration required: statusDisplayBindUnitRecord. */
-/* Supplied declaration required: objBInitBlock19D0. */
-/* Supplied declaration required: FUN_0033449c. */
-/* Supplied declaration required: statusMarkNewSkills. */
-/* Supplied declaration required: FUN_004bcd90. */
-extern int getUnlockedSlotCount(unsigned int);
-/* Supplied declaration required: FUN_004bd6b0. */
-extern int FUN_004cc8d8(unsigned short, short);
-/* Supplied declaration required: FUN_004cd4b8. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_003e3a20(int param_1,fn_003e3a20_arg1 *param_2)
-
+// Build a leveled/stat-adjusted target record and compare its original skills with the compacted inheritance choice.
+void FUN_003e3a20(InheritancePreviewWork *work, const InheritanceTargetStats *target)
 {
-/* irregular: 11 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned char temp_v4 [4];
-  unsigned short temp_v5;
-  unsigned short temp_v6;
-  unsigned short temp_v7;
-  unsigned short temp_v8;
-  unsigned short temp_v9;
-  int temp_v10;
-  unsigned int temp_v11;
-  unsigned int uStack_288;
-  unsigned int uStack_284;
-  unsigned int uStack_280;
-  unsigned short temp_v12;
-  short temp_v13;
-  unsigned char temp_v14 [300];
-  int temp_v15;
-  unsigned int uStack_64;
-  unsigned int uStack_60;
-  unsigned int uStack_5c;
-  unsigned int temp_v16;
-  unsigned int uStack_54;
-  int uStack_50;
-  unsigned int uStack_4c;
-  unsigned int uStack_48;
-  unsigned int uStack_44;
-  unsigned int uStack_40;
-  unsigned int uStack_3c;
-  unsigned int temp_v17;
-  short temp_v18 [10];
-  
-  unitRecordBuild(param_2->field_0x2,temp_v4);
-  temp_v15 = temp_v11;
-  uStack_64 = uStack_288;
-  uStack_60 = uStack_284;
-  uStack_5c = uStack_280;
-  FUN_004cd4b8(temp_v4,(int)(short)(param_2->field_0x18 - temp_v13));
-  temp_v5 = param_2->field_0x1a;
-  temp_v6 = param_2->field_0x1c;
-  temp_v7 = param_2->field_0x1e;
-  temp_v8 = param_2->field_0x20;
-  temp_v9 = param_2->field_0x22;
-  FUN_004bcd90(temp_v4);
-  temp_v10 = FUN_004cc8d8(temp_v12,temp_v13);
-  temp_v10 = temp_v10 - 1;
-  rt_memcpy_w(temp_v14,temp_v4,300);
-  temp_v18[0] = 0;
-  temp_v18[1] = 0;
-  temp_v18[2] = 0;
-  temp_v18[3] = 0;
-  temp_v18[4] = 0;
-  temp_v18[5] = 0;
-  temp_v18[6] = 0;
-  temp_v18[7] = 0;
-  temp_v1 = param_1 + *(int *)(param_1 + 0xa0) * 0x24;
-  temp_v16 = *(unsigned int *)(temp_v1 + 0x20);
-  uStack_54 = *(unsigned int *)(temp_v1 + 0x24);
-  uStack_50 = *(unsigned int *)(temp_v1 + 0x28);
-  uStack_4c = *(unsigned int *)(temp_v1 + 0x2c);
-  uStack_48 = *(unsigned int *)(temp_v1 + 0x30);
-  uStack_44 = *(unsigned int *)(temp_v1 + 0x34);
-  uStack_40 = *(unsigned int *)(temp_v1 + 0x38);
-  uStack_3c = *(unsigned int *)(temp_v1 + 0x3c);
-  temp_v17 = *(unsigned int *)(temp_v1 + 0x40);
-  temp_v1 = getUnlockedSlotCount(0);
-  temp_v3 = 0;
-  temp_v2 = 0;
-  do {
-    FUN_004bd6b0(temp_v14,0,temp_v2);
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 8);
-  temp_v2 = 0;
-  do {
-    temp_v0 = *(short *)((int)&uStack_50 + temp_v2 * 2);
-    if (temp_v0 != 0) {
-      temp_v18[temp_v3] = temp_v0;
-      if (temp_v3 < temp_v1) {
-        FUN_004bd6b0(temp_v14,temp_v0,temp_v3);
-      }
-      temp_v3 = temp_v3 + 1;
+    UnitRecord original;
+    unitRecordBuild(target->id, &original);
+    InheritanceSkillList previous = *(const InheritanceSkillList *)original.skillList.skills;
+    FUN_004cd4b8(&original, (s16)(target->level - original.unk64));
+    for (s32 index = 0; index < 5; ++index)
+        original.stats[index + 2] = target->stats[index];
+    FUN_004bcd90(&original);
+    original.unk30 = FUN_004cc8d8(original.id, original.unk64) - 1;
+    UnitRecord preview;
+    rt_memcpy_w(&preview, &original, sizeof(preview));
+    u16 inherited[8] = {0};
+    InheritanceChoiceRecord choice = work->choices()[work->selected];
+    s32 unlocked = getUnlockedSlotCount(0);
+    s32 count = 0;
+    for (s32 index = 0; index < 8; ++index)
+        FUN_004bd6b0(&preview, 0, index);
+    for (s32 index = 0; index < 8; ++index) {
+        u16 skill = choice.skills[index];
+        if (skill) {
+            inherited[count] = skill;
+            if (count < unlocked)
+                FUN_004bd6b0(&preview, skill, count);
+            ++count;
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 8);
-  *(int *)(param_1 + 0xa4) = temp_v3;
-  *(int *)(param_1 + 0xa8) = temp_v1;
-  FUN_0033449c(1);
-  statusDisplayBindUnitRecord(temp_v4,0,0);
-  objBInitBlock19D0(temp_v14,1,0);
-  statusPanelSetOpen(1);
-  statusReplaceSkills(&temp_v15,8);
-  statusMarkNewSkills(temp_v18,8);
-  return;
+    work->skillCount = count;
+    work->unlockedCount = unlocked;
+    FUN_0033449c(1);
+    statusDisplayBindUnitRecord(&original, 0, 0, 0);
+    objBInitBlock19D0(&preview, 1, 0);
+    statusPanelSetOpen(1);
+    statusReplaceSkills(previous.skills, 8);
+    statusMarkNewSkills(inherited, 8);
 }
-
-} /* extern "C" */
+}

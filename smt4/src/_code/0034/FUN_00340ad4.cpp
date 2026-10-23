@@ -1,107 +1,74 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00340ad4` (_code @ 0x340ad4, 0x1a8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: dimension helper registers, descriptor constructor's redundant zero stores, and allocator argument scheduling differ. */
+#include "AsdSDK/Source/Gfx/Effect/EffectBounds.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
-extern "C" {
+struct EffectTargetConfigurationViewIV {
+    u8 unk00[4];
+    u16 kind;
+    u8 unk06[0x92];
+    u8 alternateMode;
+};
+typedef char EffectTargetConfigurationOffsets[
+    offsetof(EffectTargetConfigurationViewIV, kind) == 4 &&
+    offsetof(EffectTargetConfigurationViewIV, alternateMode) == 0x98 ? 1 : -1];
 
-int FUN_002bd498(int, unsigned int, int);
-int FUN_002d5a08(int, int, unsigned int, int, int, int, unsigned int);
-int FUN_003407d0(int, int);
-
-/* stack frame of param_4: 9 slot(s), 30 byte(s) */
-typedef struct {
-    unsigned char sp23; /* 0x23: local_23 */
-    unsigned char sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_002bd498. */
-extern unsigned int asdMemoryGetAllocatorA(void);
-/* Supplied declaration required: FUN_002d5a08. */
-/* Supplied declaration required: FUN_003407d0. */
-extern unsigned int FUN_0036ec8c(unsigned int *, unsigned int);
-
-
-void FUN_00340ad4(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
-
+static inline s32 effectTargetNextSize(u16 dimension)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int uStack_34;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned char temp_v9;
-  unsigned char temp_v10;
-  unsigned char temp_v11;
-  
-  *(unsigned int *)(param_1 + 0x10) = 0;
-  *(unsigned int *)(param_1 + 0x14) = 0;
-  *(unsigned char *)(param_1 + 0x1c) = 0;
-  *(unsigned char *)(param_1 + 0x1d) = 0;
-  temp_v4 = 8;
-  temp_v2 = 8;
-  temp_v3 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-  temp_v0 = 3;
-  do {
-    if ((int)(unsigned int)*(unsigned short *)(temp_v3 + 0x24) < 1 << (temp_v0 & 0xff)) {
-      temp_v4 = 1 << (temp_v0 & 0xff);
-      break;
+    s32 size = 8;
+    for (s32 bit = 3; bit < 11; ++bit) {
+        if (dimension < (1 << bit)) {
+            size = 1 << bit;
+            break;
+        }
     }
-    temp_v0 = temp_v0 + 1;
-  } while ((int)temp_v0 < 0xb);
-  temp_v0 = 3;
-  do {
-    if ((int)(unsigned int)*(unsigned short *)(temp_v3 + 0x26) < 1 << (temp_v0 & 0xff)) {
-      temp_v2 = 1 << (temp_v0 & 0xff);
-      if (temp_v2 >= 0x201) {
-        temp_v2 = 0x200;
-      }
-      break;
-    }
-    temp_v0 = temp_v0 + 1;
-  } while ((int)temp_v0 < 0xb);
-  if (temp_v4 >= 0x201) {
-    temp_v4 = 0x200;
-  }
-  if (param_4 != 0) {
-    if (*(short *)(param_4 + 4) == 0xf) {
-      temp_v2 = 0x200;
-      temp_v4 = 0x200;
-      *(unsigned char *)(param_1 + 0x1c) = 1;
-    }
-    if ((*(short *)(param_4 + 4) == 0x10) && (*(char *)(param_4 + 0x98) != '\0')) {
-      *(unsigned char *)(param_1 + 0x1d) = 1;
-    }
-  }
-  FUN_002d5a08(temp_v4,temp_v2,param_2,0x1908,0x8033,0x81a5,param_3);
-  *(int *)(param_1 + 8) = temp_v4;
-  temp_v1 = asdMemoryGetAllocatorA();
-  uStack_34 = 1;
-  temp_v7 = 0x2020000;
-  temp_v10 = 0;
-  temp_v11 = 1;
-  temp_v8 = *(unsigned int *)(*(int *)(param_1 + 8) + 8);
-  temp_v9 = *(unsigned int *)(*(int *)(*(int *)(param_1 + 8) + 0xc) + 0x34);
-  temp_v6 = *(unsigned int *)(*(int *)(*(int *)(param_1 + 8) + 0xc) + 0x14);
-  temp_v5 = *(unsigned int *)(*(int *)(*(int *)(param_1 + 8) + 0xc) + 0x18);
-  temp_v1 = FUN_0036ec8c((unsigned int *)&temp_v5,temp_v1);
-  *(unsigned int *)(param_1 + 0xc) = temp_v1;
-  temp_v1 = asdMemoryGetAllocatorA();
-  FUN_002bd498(param_1 + 0xc,temp_v1,0);
-  FUN_003407d0(param_1,param_4);
-  return;
+    return size;
 }
 
-} /* extern "C" */
+extern "C" {
+TextureUploadResourcePrefixIV *FUN_002d5a08(s32 width, s32 height, u32 parameter, u32 format, u32 type, u32 depthFormat, u32 flags);
+MemoryAllocator *asdMemoryGetAllocatorA(void);
+TextureObject *FUN_0036ec8c(const TextureCreateInfoIV *info, MemoryAllocator *allocator);
+void FUN_002bd498(TextureObject **object, MemoryAllocator *allocator, u32 flags);
+void FUN_003407d0(EffectBoundsSource *source, const EffectTargetConfigurationViewIV *configuration);
+
+// Choose bounded target dimensions, apply special effect modes, and create a texture object over its upload resource.
+void FUN_00340ad4(EffectBoundsSource *source, u32 parameter, u32 flags, const EffectTargetConfigurationViewIV *configuration)
+{
+    source->marginX = 0.0f;
+    source->marginY = 0.0f;
+    source->useCustomSize = 0;
+    source->useAlternateMode = 0;
+    const EffectBoundsImage *image = source->binding->image;
+    s32 width = effectTargetNextSize(image->width);
+    s32 height = effectTargetNextSize(image->height);
+    if (height > 512)
+        height = 512;
+    if (width > 512)
+        width = 512;
+    if (configuration) {
+        if (configuration->kind == 15) {
+            height = 512;
+            width = 512;
+            source->useCustomSize = 1;
+        }
+        if (configuration->kind == 16 && configuration->alternateMode)
+            source->useAlternateMode = 1;
+    }
+    TextureBindingPrefixIV *binding = (TextureBindingPrefixIV *)source;
+    binding->resource = FUN_002d5a08(width, height, parameter, 0x1908, 0x8033, 0x81A5, flags);
+    MemoryAllocator *allocator = asdMemoryGetAllocatorA();
+    TextureCreateInfoIV info;
+    info.unk08 = 0;
+    info.unk0C = 0x02020000;
+    info.flag18 = 0;
+    info.flag19 = 1;
+    info.data = binding->resource->data;
+    info.hardwareFormat = (u8)binding->resource->texture->image.hardwareFormat;
+    info.width = binding->resource->texture->dimensions.width;
+    info.height = binding->resource->texture->dimensions.height;
+    binding->object = FUN_0036ec8c(&info, allocator);
+    FUN_002bd498(&binding->object, asdMemoryGetAllocatorA(), 0);
+    FUN_003407d0(source, configuration);
+}
+}

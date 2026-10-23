@@ -1,102 +1,81 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017d43c` (_code @ 0x17d43c, 0x19c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Command pairs use a shared constant table, and cursor/zero registers and saved-register allocation differ. */
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
+struct CommandSegmentLink {
+    u32 header[2];
+    u32 commandCount;
+};
+struct CommandSegmentPair {
+    u32 value;
+    u32 header;
+};
 extern "C" {
+extern AsdGfxContext g_asdGfxContext;
+extern u32 *g_commandBufferCursor;
+extern u32 g_commandBufferEnd;
+void globalCriticalSectionEnterForward(void);
+void globalCriticalSectionLeaveForward(void);
+void FUN_001963e0(void);
 
-int globalCriticalSectionEnterForward(void);
-int globalCriticalSectionLeaveForward(void);
-int FUN_001963e0(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
-extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
-extern signed char DAT_0061a481; /* 0x61a481 */
-extern signed char DAT_0061a482; /* 0x61a482 */
-extern int DAT_0061a50c; /* 0x61a50c */
-extern int DAT_0061a510; /* 0x61a510 */
-
-/* Supplied declaration required: globalCriticalSectionEnterForward. */
-/* Supplied declaration required: globalCriticalSectionLeaveForward. */
-/* Supplied declaration required: FUN_001963e0. */
-
-
+/* Terminates the current GPU command segment, queues its descriptor and wakes the submitter when needed. */
 void FUN_0017d43c(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned char *puVar3;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v0 = DAT_0061a50c;
-  puVar1 = g_commandBufferCursor;
-  temp_v2 = (int)g_commandBufferCursor - *(int *)(DAT_0061a50c + 4);
-  *(unsigned int *)(DAT_0061a50c + 0xc) = temp_v2;
-  if (*(unsigned int *)(temp_v0 + 0x14) == temp_v2) {
-    return;
-  }
-  if ((temp_v2 & 8) != 0) {
-    *(unsigned int *)(temp_v0 + 0xc) = temp_v2 + 0x18;
-  }
-  else {
-    *(unsigned int *)(temp_v0 + 0xc) = temp_v2 + 0x20;
-    if ((unsigned int)puVar1 < g_commandBufferEnd) {
-      g_commandBufferCursor = puVar1 + 2;
-      *puVar1 = 0;
-      puVar1[1] = 0x8025e;
+    AsdCmdBuffer *buffer = g_asdGfxContext.cmdBuffer;
+    u32 *cursor = g_commandBufferCursor;
+    u32 used = (u32)cursor - (u32)buffer->start;
+    buffer->writeOffset = used;
+    if (buffer->committedOffset == used) {
+        return;
     }
-  }
-  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
-    *g_commandBufferCursor = 1;
-    g_commandBufferCursor[1] = 0xf0111;
-    g_commandBufferCursor = g_commandBufferCursor + 2;
-  }
-  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
-    *g_commandBufferCursor = 1;
-    g_commandBufferCursor[1] = 0xf0110;
-    g_commandBufferCursor = g_commandBufferCursor + 2;
-  }
-  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
-    *g_commandBufferCursor = 0x12345678;
-    g_commandBufferCursor[1] = 0xf0010;
-    g_commandBufferCursor = g_commandBufferCursor + 2;
-  }
-  puVar3 = (unsigned char *)(*(int *)(temp_v0 + 0x18) + *(int *)(temp_v0 + 0x20) * 0x1c);
-  *puVar3 = 1;
-  temp_v3 = *(int *)(temp_v0 + 0x14) + *(int *)(temp_v0 + 4);
-  *(int *)(puVar3 + 4) = temp_v3;
-  temp_v4 = *(int *)(temp_v0 + 0xc) - *(int *)(temp_v0 + 0x14);
-  *(int *)(puVar3 + 8) = temp_v4;
-  temp_v1 = *(int *)(temp_v0 + 0x34);
-  if (temp_v1 != 0) {
-    *(unsigned int *)(temp_v1 + 8) = (((temp_v3 + temp_v4) - temp_v1) - 0x18U) >> 3;
-    *(unsigned int *)(puVar3 + 8) = *(unsigned int *)(temp_v0 + 0x30);
-    *(unsigned int *)(temp_v0 + 0x34) = 0;
-    *(unsigned int *)(temp_v0 + 0x30) = 0;
-  }
-  temp_v2 = *(unsigned int *)(puVar3 + 0xc);
-  *(unsigned int *)(puVar3 + 0xc) = (temp_v2 & 0xfffffffd) | 4;
-  if (*(char *)(temp_v0 + 0x3d) != '\0') {
-    *(unsigned int *)(puVar3 + 0xc) = (temp_v2 & 0xfffffffd) | 5;
-  }
-  *(unsigned int *)(temp_v0 + 0x14) = *(unsigned int *)(temp_v0 + 0xc);
-  globalCriticalSectionEnterForward();
-  *(int *)(temp_v0 + 0x20) = *(int *)(temp_v0 + 0x20) + 1;
-  if (((DAT_0061a510 == temp_v0) && (DAT_0061a482 != '\0')) && (DAT_0061a481 == '\0')) {
-    DAT_0061a481 = '\x01';
-    FUN_001963e0();
-  }
-  globalCriticalSectionLeaveForward();
-  return;
+    if ((used & 8) != 0) {
+        buffer->writeOffset = used + 24;
+    } else {
+        buffer->writeOffset = used + 32;
+        if ((u32)cursor < g_commandBufferEnd) {
+            const CommandSegmentPair padding = {0, 0x8025E};
+            *(CommandSegmentPair *)cursor = padding;
+            g_commandBufferCursor = cursor + 2;
+        }
+    }
+    if ((u32)g_commandBufferCursor < g_commandBufferEnd) {
+        const CommandSegmentPair flush = {1, 0xF0111};
+        *(CommandSegmentPair *)g_commandBufferCursor = flush;
+        g_commandBufferCursor += 2;
+    }
+    if ((u32)g_commandBufferCursor < g_commandBufferEnd) {
+        const CommandSegmentPair invalidate = {1, 0xF0110};
+        *(CommandSegmentPair *)g_commandBufferCursor = invalidate;
+        g_commandBufferCursor += 2;
+    }
+    if ((u32)g_commandBufferCursor < g_commandBufferEnd) {
+        const CommandSegmentPair marker = {0x12345678, 0xF0010};
+        *(CommandSegmentPair *)g_commandBufferCursor = marker;
+        g_commandBufferCursor += 2;
+    }
+    AsdCmdRecord *entry = &buffer->entries[buffer->listCount];
+    entry->kind = 1;
+    entry->commands = buffer->start + buffer->committedOffset;
+    entry->byteCount = buffer->writeOffset - buffer->committedOffset;
+    CommandSegmentLink *link = (CommandSegmentLink *)buffer->unk34;
+    if (link != NULL) {
+        link->commandCount = ((u32)entry->commands + entry->byteCount - (u32)link - 24) >> 3;
+        entry->byteCount = buffer->unk30;
+        buffer->unk34 = 0;
+        buffer->unk30 = 0;
+    }
+    u32 flags = (entry->flags & ~2) | 4;
+    entry->flags = flags;
+    if (buffer->flag3d != 0) {
+        entry->flags = flags | 1;
+    }
+    buffer->committedOffset = buffer->writeOffset;
+    globalCriticalSectionEnterForward();
+    ++buffer->listCount;
+    if (g_asdGfxContext.activeBuffer == buffer && g_asdGfxContext.submission.enabled != 0 &&
+        g_asdGfxContext.submission.pending == 0) {
+        g_asdGfxContext.submission.pending = 1;
+        FUN_001963e0();
+    }
+    globalCriticalSectionLeaveForward();
 }
-
-} /* extern "C" */
+}

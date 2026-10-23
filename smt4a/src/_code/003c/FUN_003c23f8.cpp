@@ -1,102 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c23f8` (_code @ 0x3c23f8, 0x1cc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: mode/actor spill allocation, division constant hoisting and event-argument stores differ from retail. */
+#include "shard/W5_W5Match7_BattleMask.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
+struct BtlUnitA;
 extern "C" {
+extern u32 g_btlScriptUnit;
+s32 scrGetArg(s32 index);
+BtlUnitA *btlUnitGet(u32 index);
+void FUN_003ee0c0(BattleMaskState *state);
+u32 FUN_004fc094(s32 mode, BtlUnitA *actor, s32 option, BattleRosterRecordA *target,
+                 s32 value5, s32 damage, s32 value7, u32 value8,
+                 u32 hp, u32 maxHp, s32 value11, u32 value12,
+                 s32 value13, s32 value14, s32 value15, s32 value16,
+                 s32 value17, s32 value18, s32 value19, s32 value20,
+                 s32 value21, s16 value22, s32 value23, s32 value24,
+                 s32 value25, s32 value26);
 
-int btlGetMainState(void);
-int FUN_003ee0c0(void);
-int FUN_004fc094(int, unsigned int, int, int, int, int, unsigned int, unsigned int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
-
-/* stack frame of void: 21 slot(s), 84 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp78; /* 0x78: local_78 */
-    unsigned int sp7C; /* 0x7c: local_7c */
-    unsigned int sp80; /* 0x80: local_80 */
-    unsigned int sp84; /* 0x84: local_84 */
-    unsigned int sp88; /* 0x88: local_88 */
-} void_stack;
-
-extern unsigned int g_battleMaskPresets; /* 0x570d78 */
-extern unsigned int DAT_00570d7c; /* 0x570d7c */
-extern unsigned int DAT_00570d90; /* 0x570d90 */
-extern unsigned int DAT_00570d94; /* 0x570d94 */
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-
-/* Supplied declaration required: btlGetMainState. */
-extern int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_003ee0c0. */
-extern unsigned int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_004fc094. */
-
-
-unsigned int FUN_003c23f8(void)
-
+u32 FUN_003c23f8(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int *puVar8;
-  
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetArg(1);
-  temp_v3 = btlUnitGet(g_btlScriptUnit);
-  temp_v6 = 0;
-  do {
-    temp_v4 = btlGetMainState();
-    puVar8 = (unsigned int *)(*(int *)(temp_v4 + 0x1ffc) + temp_v6 * 0x408);
-    if ((((g_battleMaskPresets & *puVar8) != 0 || (DAT_00570d7c & puVar8[1]) != 0) &&
-        ((puVar8[1] & DAT_00570d94) == 0 && (DAT_00570d90 & *puVar8) == 0)) &&
-       (-1 < (short)puVar8[2])) {
-      if (temp_v2 != 0) {
-        if (temp_v2 != 1) {
-          temp_v4 = 0;
-          if (temp_v2 == 2) {
-            temp_v4 = temp_v1;
-          }
+    s32 amount = scrGetArg(0);
+    s32 mode = scrGetArg(1);
+    BtlUnitA *actor = btlUnitGet(g_btlScriptUnit);
+    for (s32 index = 0; index < 4; ++index) {
+        BattleMaskEntry *entry = &btlGetMainState()->entryView.entries[index];
+        if ((entry->mask & g_battleMaskPresets.eligibility.active) != 0 &&
+            (entry->mask & g_battleMaskPresets.eligibility.excluded) == 0 &&
+            entry->id >= 0) {
+            s32 damage = 0;
+            if (mode == 0)
+                damage = entry->maxHp * amount / 100;
+            else if (mode == 1)
+                damage = entry->hp * amount / 100;
+            else if (mode == 2)
+                damage = amount;
+            if (damage >= entry->hp)
+                damage = entry->hp - 1;
+            FUN_003ee0c0(btlGetMainState());
+            BattleRosterRecordA *target = &btlGetMainState()->rosterView.roster[entry->id];
+            s32 eventFlags = index << 3;
+            FUN_004fc094(0, actor, 0, target, 0, damage, -1, ~0u,
+                         entry->hp, entry->maxHp, 0, 0, 0, 0, 1, 0,
+                         eventFlags, eventFlags, eventFlags, eventFlags,
+                         1, 0, 1, 1, 0, 1);
         }
-        else {
-          temp_v4 = (int)(puVar8[0x96] * temp_v1) / 100;
-        }
-      }
-      else {
-        temp_v4 = (int)(puVar8[0x97] * temp_v1) / 100;
-      }
-      if ((int)puVar8[0x96] <= temp_v4) {
-        temp_v4 = puVar8[0x96] - 1;
-      }
-      btlGetMainState();
-      FUN_003ee0c0();
-      temp_v5 = btlGetMainState();
-      temp_v0 = temp_v6 << 3;
-      FUN_004fc094(0,temp_v3,0,*(int *)(temp_v5 + 0x1ed4) + (short)puVar8[2] * 0x1d0,0,temp_v4,0xffffffff,
-                   0xffffffff,puVar8[0x96],puVar8[0x97],0,0,0,0,1,0,temp_v0,temp_v0,temp_v0,temp_v0,1,0,1,1,
-                   0,1);
     }
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 4);
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

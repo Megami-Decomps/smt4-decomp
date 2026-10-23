@@ -1,120 +1,86 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b6820` (_code @ 0x3b6820, 0x1ec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: constructor store order, placement dispatch, variant reload and task argument scheduling differ. */
+#include "event/NpcTextureWork.h"
+#include "AsdSDK/AsdDebug.h"
+#include "shard/JobWork.h"
+struct AocSystemA;
 extern "C" {
+extern AocSystemA *g_aocSystem;
+extern const char DAT_0052f4fc[], DAT_0052f4f0[];
+s32 gameFlagIsSet(u32 flag);
+u32 FUN_00283498(u32 id);
+const u16 *dataTable19FindAddonWord(u32 id, u32 variant);
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tracking);
+void sysMemClear(void *memory, u32 size);
+s32 FUN_00162ea4();
+s32 aocRunByName(AocSystemA *system, u32 table, u32 file, s32 mode);
+void aocLoadTextureNode(AocSystemA *system, u32 table, u32 file, u32 flags);
+void asdTMTexLoadMainHeap(u32 table, u32 file);
+void FUN_002897cc(JobWork *job);
+void FUN_0034da3c(JobWork *job);
+u32 asdProcessCreateSimple(const char *name, s32 priority, s32 first, s32 second,
+    void (*update)(JobWork *), void (*finish)(JobWork *), void *data);
 
-int asdProcessCreateSimple(...);
-int asdMemoryAllocTracked(...);
-int aocLoadTextureNode(...);
-int dataTable19FindAddonWord(...);
-int asdTMTexLoadMainHeap(...);
-int FUN_00283498(...);
-int sysMemClear(...);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-extern int FUN_002897cc(...); /* 0x2897cc */
-extern int FUN_0034da3c(...); /* 0x34da3c */
-extern unsigned int g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-extern int FUN_00162ea4(void);
-/* Supplied declaration required: asdMemoryAllocTracked. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: aocLoadTextureNode. */
-/* Supplied declaration required: dataTable19FindAddonWord. */
-extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: asdTMTexLoadMainHeap. */
-/* Supplied declaration required: FUN_00283498. */
-/* Supplied declaration required: sysMemClear. */
-
-
-void FUN_003b6820(unsigned int param_1,int param_2,unsigned int param_3)
-
+void FUN_003b6820(u32 id, s32 placement, u32 variant)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned short *puVar3;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = gameFlagIsSet(0x522);
-  if (temp_v0 != 0) {
-    FUN_00283498(param_1);
-    temp_v0 = dataTable19FindAddonWord();
-    if (temp_v0 == 0) {
-      return;
+    // This constructor's Apocalypse allocation extends the shared NPC work prefix to 0xBC.
+    union PortraitTaskWorkA {
+        NpcTextureWork base;
+        struct {
+            u8 prefix[0x34];
+            f32 opacity;
+            u32 screenRegion, mode, table, file, handle;
+            u8 unk4C[8];
+            u32 variant, normalizedId;
+            u8 unk5C[0x14];
+            u32 cached[6];
+            u8 tail[0x34];
+        } create;
+    };
+    typedef char PortraitTaskWorkSizeCheck[sizeof(PortraitTaskWorkA) == 0xBC &&
+        offsetof(PortraitTaskWorkA, create.variant) == 0x54 ? 1 : -1];
+    if (gameFlagIsSet(0x522) && dataTable19FindAddonWord(FUN_00283498(id), variant) == NULL)
+        return;
+    asdDebugTrace(DAT_0052f4fc, 0x380);
+    PortraitTaskWorkA *work = static_cast<PortraitTaskWorkA *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(PortraitTaskWorkA), 1));
+    sysMemClear(work, sizeof(PortraitTaskWorkA));
+    work->base.scale.x = work->base.scale.y = 1.0f;
+    work->base.scale.z = 0.0f;
+    work->create.handle = 0xFFFFFFFF;
+    work->base.state = 0x41;
+    work->create.variant = variant;
+    work->base.npcId = id;
+    work->base.y = 0;
+    work->create.table = 1;
+    work->create.opacity = 1.0f;
+    for (s32 index = 0; index < 6; ++index)
+        work->create.cached[index] = 0;
+    work->create.normalizedId = FUN_00283498(id);
+    work->create.file = *dataTable19FindAddonWord(work->create.normalizedId, variant);
+    if (placement == 0) {
+        work->base.x = -20;
+        work->base.rotation = -48.0f;
+        work->create.mode = 3;
+    } else if (placement == 1) {
+        work->base.x = 160;
+        work->base.rotation = 48.0f;
+        work->create.mode = 4;
+    } else if (placement == 2) {
+        work->base.x = 72;
+        work->base.scale.z = 0.25f;
+        work->base.rotation = 0.0f;
+        work->base.scale.y = 0.0f;
+        work->create.mode = 5;
     }
-  }
-  puVar2 = (unsigned int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0xbc,1);
-  sysMemClear();
-  temp_v2 = 0;
-  puVar2[8] = 0x3f800000;
-  puVar2[9] = 0x3f800000;
-  puVar2[10] = 0;
-  puVar2[0x12] = 0xffffffff;
-  puVar2[1] = 0x41;
-  puVar2[0x15] = param_3;
-  *puVar2 = param_1;
-  puVar2[5] = 0;
-  puVar2[0x10] = 1;
-  puVar2[0xd] = 0x3f800000;
-  puVar2[0x1c] = 0;
-  puVar2[0x1d] = 0;
-  puVar2[0x1e] = 0;
-  puVar2[0x1f] = 0;
-  puVar2[0x20] = 0;
-  puVar2[0x21] = 0;
-  FUN_00283498();
-  puVar2[0x16] = param_1;
-  puVar3 = (unsigned short *)dataTable19FindAddonWord();
-  puVar2[0x11] = (unsigned int)*puVar3;
-  if (param_2 != 0) {
-    if (param_2 != 1) {
-      if (param_2 == 2) {
-        puVar2[4] = 0x48;
-        puVar2[10] = 0x3e800000;
-        puVar2[7] = temp_v2;
-        temp_v1 = 5;
-        puVar2[9] = temp_v2;
-        puVar2[0xf] = temp_v1;
-      }
+    if (FUN_00162ea4()) {
+        work->base.deferred = 1;
+    } else {
+        work->base.deferred = 0;
+        if (aocRunByName(g_aocSystem, work->create.table, work->create.file, 1))
+            aocLoadTextureNode(g_aocSystem, work->create.table, work->create.file, 0x10000);
+        else
+            asdTMTexLoadMainHeap(work->create.table, work->create.file);
     }
-    else {
-      puVar2[4] = 0xa0;
-      temp_v1 = 4;
-      puVar2[7] = 0x42400000;
-      puVar2[0xf] = temp_v1;
-    }
-  }
-  else {
-    puVar2[4] = 0xffffffec;
-    puVar2[7] = 0xc2400000;
-    puVar2[0xf] = 3;
-  }
-  temp_v0 = FUN_00162ea4();
-  if (temp_v0 != 0) {
-    puVar2[3] = 1;
-  }
-  else {
-    puVar2[3] = 0;
-    temp_v0 = aocRunByName(g_aocSystem,puVar2[0x10],puVar2[0x11],1);
-    if (temp_v0 != 0) {
-      aocLoadTextureNode(g_aocSystem,puVar2[0x10],puVar2[0x11],0x10000);
-    }
-    else {
-      asdTMTexLoadMainHeap(puVar2[0x10],puVar2[0x11]);
-    }
-  }
-  puVar2[6] = 0x3e851eb8;
-  asdProcessCreateSimple("EVE_2dTex",4,0,0,FUN_002897cc,FUN_0034da3c,puVar2);
-  return;
+    work->base.speed = 0.26f;
+    asdProcessCreateSimple(DAT_0052f4f0, 4, 0, 0, FUN_002897cc, FUN_0034da3c, work);
 }
-
-} /* extern "C" */
+}

@@ -1,126 +1,74 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c2044` (_code @ 0x2c2044, 0x1b4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: guard-finalization NOPs are absent; shared identity pointer caching/register allocation differs. */
+#include "gfx/CameraMatrixCache.h"
 
 extern "C" {
-
-int FUN_0011cfb4(unsigned char *);
-int mtx44Copy(unsigned char *, unsigned int *);
-int memClear(unsigned char *, int);
-int nn_math_ARMv6_MTX34CopyAsm(unsigned char *, unsigned int *);
-
-extern unsigned int DAT_00476634; /* 0x476634 */
-extern unsigned int DAT_00476638; /* 0x476638 */
-extern unsigned int DAT_004efd6c; /* 0x4efd6c */
-extern unsigned int DAT_004efd70; /* 0x4efd70 */
-extern unsigned int DAT_004efd74; /* 0x4efd74 */
-extern unsigned int DAT_004efd78; /* 0x4efd78 */
-extern unsigned int DAT_004efd7c; /* 0x4efd7c */
-extern unsigned int DAT_004efd80; /* 0x4efd80 */
-extern unsigned int DAT_004efd84; /* 0x4efd84 */
-extern unsigned int DAT_004efd88; /* 0x4efd88 */
-extern unsigned int DAT_004efd8c; /* 0x4efd8c */
-extern unsigned int DAT_004efd90; /* 0x4efd90 */
-extern unsigned int DAT_004efd94; /* 0x4efd94 */
-extern unsigned int DAT_004efd98; /* 0x4efd98 */
-extern unsigned int DAT_004efd9c; /* 0x4efd9c */
-extern unsigned int DAT_004efda0; /* 0x4efda0 */
-extern unsigned int DAT_004efda4; /* 0x4efda4 */
-extern unsigned int DAT_004efda8; /* 0x4efda8 */
-extern unsigned int DAT_004efdac; /* 0x4efdac */
-extern unsigned int DAT_004efdb0; /* 0x4efdb0 */
-extern unsigned int DAT_004efdb4; /* 0x4efdb4 */
-extern unsigned int DAT_004efdb8; /* 0x4efdb8 */
-extern unsigned int DAT_004efdbc; /* 0x4efdbc */
-extern unsigned int DAT_004efdc0; /* 0x4efdc0 */
-extern unsigned int DAT_004efdc4; /* 0x4efdc4 */
-extern unsigned int DAT_004efdc8; /* 0x4efdc8 */
-extern unsigned int DAT_004efdcc; /* 0x4efdcc */
-extern unsigned int DAT_004efdd0; /* 0x4efdd0 */
-extern unsigned int DAT_004efdd4; /* 0x4efdd4 */
-extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
-
-/* Supplied declaration required: FUN_0011cfb4. */
-/* Supplied declaration required: mtx44Copy. */
-extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
-
-
-void FUN_002c2044(unsigned char *param_1,int param_2)
-
-{
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  memClear(param_1,0x508);
-  param_1[1] = 0;
-  temp_v1 = 0;
-  temp_v2 = 0x3f800000;
-  if (((DAT_00476634 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476634), temp_v0 != 0)) {
-    DAT_004efd6c = temp_v2;
-    DAT_004efd70 = temp_v1;
-    DAT_004efd74 = temp_v1;
-    DAT_004efd78 = temp_v1;
-    DAT_004efd7c = temp_v1;
-    DAT_004efd80 = temp_v2;
-    DAT_004efd84 = temp_v1;
-    DAT_004efd88 = temp_v1;
-    DAT_004efd8c = temp_v1;
-    DAT_004efd90 = temp_v1;
-    DAT_004efd94 = temp_v2;
-    DAT_004efd98 = temp_v1;
-  }
-  nn_math_ARMv6_MTX34CopyAsm(param_1 + 0x38,&DAT_004efd6c);
-  if (((DAT_00476638 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476638), temp_v0 != 0)) {
-    DAT_004efd9c = temp_v2;
-    DAT_004efda0 = temp_v1;
-    DAT_004efda4 = temp_v1;
-    DAT_004efda8 = temp_v1;
-    DAT_004efdac = temp_v1;
-    DAT_004efdb0 = temp_v2;
-    DAT_004efdb4 = temp_v1;
-    DAT_004efdb8 = temp_v1;
-    DAT_004efdbc = temp_v1;
-    DAT_004efdc0 = temp_v1;
-    DAT_004efdc4 = temp_v2;
-    DAT_004efdc8 = temp_v1;
-    DAT_004efdcc = temp_v1;
-    DAT_004efdd0 = temp_v1;
-    DAT_004efdd4 = temp_v1;
-    DAT_004efdd8 = temp_v2;
-  }
-  mtx44Copy(param_1 + 0xa8,&DAT_004efd9c);
-  if (((DAT_00476638 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476638), temp_v0 != 0)) {
-    DAT_004efd9c = temp_v2;
-    DAT_004efda0 = temp_v1;
-    DAT_004efda4 = temp_v1;
-    DAT_004efda8 = temp_v1;
-    DAT_004efdac = temp_v1;
-    DAT_004efdb0 = temp_v2;
-    DAT_004efdb4 = temp_v1;
-    DAT_004efdb8 = temp_v1;
-    DAT_004efdbc = temp_v1;
-    DAT_004efdc0 = temp_v1;
-    DAT_004efdc4 = temp_v2;
-    DAT_004efdc8 = temp_v1;
-    DAT_004efdcc = temp_v1;
-    DAT_004efdd0 = temp_v1;
-    DAT_004efdd4 = temp_v1;
-    DAT_004efdd8 = temp_v2;
-  }
-  mtx44Copy(param_1 + 0xe8,&DAT_004efd9c);
-  temp_v1 = 0x40a00000;
-  *(unsigned int *)(param_1 + 0x498) = 0x40a00000;
-  *param_1 = (char)param_2;
-  if (param_2 != 0) {
-    FUN_0011cfb4(param_1 + 0x4a0);
-    *(unsigned int *)(param_1 + 0x504) = temp_v1;
-    *(unsigned int *)(param_1 + 0x500) = temp_v2;
-  }
-  return;
+extern u32 DAT_00476634;
+extern u32 DAT_00476638;
+extern Matrix34Data DAT_004efd6c;
+extern Matrix44 DAT_004efd9c;
+s32 __cxa_guard_acquire(u32 *guard);
+void memClear(void *memory, u32 size);
+void nn_math_ARMv6_MTX34CopyAsm(Matrix34Data *output, const Matrix34Data *input);
+void mtx44Copy(Matrix44 *output, const Matrix44 *input);
+void FUN_0011cfb4(void *parameters);
 }
 
-} /* extern "C" */
+static __inline void initializeIdentityRows(f32 *values)
+{
+    values[0] = 1.0f;
+    values[1] = 0.0f;
+    values[2] = 0.0f;
+    values[3] = 0.0f;
+    values[4] = 0.0f;
+    values[5] = 1.0f;
+    values[6] = 0.0f;
+    values[7] = 0.0f;
+    values[8] = 0.0f;
+    values[9] = 0.0f;
+    values[10] = 1.0f;
+    values[11] = 0.0f;
+}
+
+static __inline void initializeSharedIdentity44(void)
+{
+    if (!(DAT_00476638 & 1) && __cxa_guard_acquire(&DAT_00476638)) {
+        initializeIdentityRows(DAT_004efd9c.values);
+        DAT_004efd9c.values[12] = 0.0f;
+        DAT_004efd9c.values[13] = 0.0f;
+        DAT_004efd9c.values[14] = 0.0f;
+        DAT_004efd9c.values[15] = 1.0f;
+    }
+}
+
+// Reset a camera's matrices and initialize stereo calibration when requested.
+extern "C" void FUN_002c2044(CameraMatrixCache *camera, s32 enabled)
+{
+    union InitialCameraView {
+        CameraMatrixCache base;
+        struct {
+            u8 unk000[0x38];
+            Matrix34Data view;
+            u8 unk068[0x40];
+            Matrix44 projection;
+            Matrix44 transform;
+        } initial;
+        struct { u8 unk000[0x498]; f32 distance; } defaults;
+    };
+    InitialCameraView *work = reinterpret_cast<InitialCameraView *>(camera);
+    memClear(camera, sizeof(*camera));
+    camera->unk001[0] = 0;
+    if (!(DAT_00476634 & 1) && __cxa_guard_acquire(&DAT_00476634))
+        initializeIdentityRows(DAT_004efd6c.values);
+    nn_math_ARMv6_MTX34CopyAsm(&work->initial.view, &DAT_004efd6c);
+    initializeSharedIdentity44();
+    mtx44Copy(&work->initial.projection, &DAT_004efd9c);
+    initializeSharedIdentity44();
+    mtx44Copy(&work->initial.transform, &DAT_004efd9c);
+    work->defaults.distance = 5.0f;
+    camera->enabled = enabled;
+    if (enabled) {
+        FUN_0011cfb4(camera->parameters);
+        camera->stereoScale = 5.0f;
+        camera->stereoOffset = 1.0f;
+    }
+}

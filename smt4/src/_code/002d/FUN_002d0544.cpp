@@ -1,53 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d0544` (_code @ 0x2d0544, 0x198 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: packed-word load grouping and primary-parent comparison branch placement differ. */
+#include "gamedata/PackedIdentifiers.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 
 extern "C" {
-
-int devilGetRecord(void);
-
-/* Supplied declaration required: devilGetRecord. */
-
-
-int FUN_002d0544(unsigned int *param_1,unsigned int *param_2)
-
+/* Compare result and both parent demons by race, descending level, ID and slot state. */
+s32 FUN_002d0544(const PackedIdentifiers *packedLeft, const PackedIdentifiers *packedRight)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (param_1[1] & 0x1ffff) >> 2;
-  devilGetRecord();
-  temp_v1 = (param_2[1] & 0x1ffff) >> 2;
-  devilGetRecord();
-  temp_v2 = (unsigned int)*(unsigned char *)(temp_v0 + 2) - (unsigned int)*(unsigned char *)(temp_v1 + 2);
-  if ((temp_v2 == 0) && (temp_v2 = (unsigned int)*(unsigned char *)(temp_v1 + 3) - (unsigned int)*(unsigned char *)(temp_v0 + 3), temp_v2 == 0))
-  {
-    temp_v2 = ((param_1[1] & 0x1ffff) >> 2) - ((param_2[1] & 0x1ffff) >> 2);
-  }
-  temp_v0 = *param_1 & 0x7fff;
-  devilGetRecord();
-  temp_v1 = *param_2 & 0x7fff;
-  devilGetRecord();
-  if (((temp_v2 == 0) && (temp_v2 = (unsigned int)*(unsigned char *)(temp_v0 + 2) - (unsigned int)*(unsigned char *)(temp_v1 + 2), temp_v2 == 0)
-      ) && (temp_v2 = (unsigned int)*(unsigned char *)(temp_v1 + 3) - (unsigned int)*(unsigned char *)(temp_v0 + 3), temp_v2 == 0)) {
-    temp_v2 = (*param_1 & 0x7fff) - (*param_2 & 0x7fff);
-    if (temp_v2 == 0) {
-      temp_v2 = (*param_1 >> 0x1e) - (*param_2 >> 0x1e);
+    /* Keep the public packed record's upper opaque bit field intact. */
+    struct FusionOrderView {
+        u64 firstIdentifier : 15;
+        u64 secondIdentifier : 15;
+        u64 firstState : 2;
+        u64 secondState : 2;
+        u64 resultIdentifier : 15;
+        u64 unused : 15;
+    };
+    typedef char FusionOrderViewSize[sizeof(FusionOrderView) == sizeof(PackedIdentifiers) ? 1 : -1];
+    const FusionOrderView *left = (const FusionOrderView *)packedLeft;
+    const FusionOrderView *right = (const FusionOrderView *)packedRight;
+    DevilSortRecord *leftRecord = devilGetRecord(left->resultIdentifier);
+    DevilSortRecord *rightRecord = devilGetRecord(right->resultIdentifier);
+    s32 difference = leftRecord->race - rightRecord->race;
+    if (difference == 0) {
+        difference = rightRecord->level - leftRecord->level;
+        if (difference == 0)
+            difference = u32(left->resultIdentifier) - u32(right->resultIdentifier);
     }
-  }
-  temp_v0 = (*param_1 & 0x3fffffff) >> 0xf;
-  devilGetRecord();
-  temp_v1 = (*param_2 & 0x3fffffff) >> 0xf;
-  devilGetRecord();
-  if (((temp_v2 == 0) && (temp_v2 = (unsigned int)*(unsigned char *)(temp_v0 + 2) - (unsigned int)*(unsigned char *)(temp_v1 + 2), temp_v2 == 0)
-      ) && ((temp_v2 = (unsigned int)*(unsigned char *)(temp_v1 + 3) - (unsigned int)*(unsigned char *)(temp_v0 + 3), temp_v2 == 0 &&
-            (temp_v2 = ((*param_1 & 0x3fffffff) >> 0xf) - ((*param_2 & 0x3fffffff) >> 0xf), temp_v2 == 0
-            )))) {
-    temp_v2 = (param_1[1] & 3) - (param_2[1] & 3);
-  }
-  return temp_v2;
+    leftRecord = devilGetRecord(left->firstIdentifier);
+    rightRecord = devilGetRecord(right->firstIdentifier);
+    if (difference == 0) {
+        difference = leftRecord->race - rightRecord->race;
+        if (difference == 0) {
+            difference = rightRecord->level - leftRecord->level;
+            if (difference == 0) {
+                difference = u32(left->firstIdentifier) - u32(right->firstIdentifier);
+                if (difference == 0)
+                    difference = u32(left->firstState) - u32(right->firstState);
+            }
+        }
+    }
+    leftRecord = devilGetRecord(left->secondIdentifier);
+    rightRecord = devilGetRecord(right->secondIdentifier);
+    if (difference == 0) {
+        difference = leftRecord->race - rightRecord->race;
+        if (difference == 0) {
+            difference = rightRecord->level - leftRecord->level;
+            if (difference == 0) {
+                difference = u32(left->secondIdentifier) - u32(right->secondIdentifier);
+                if (difference == 0)
+                    difference = u32(left->secondState) - u32(right->secondState);
+            }
+        }
+    }
+    return difference;
 }
-
-} /* extern "C" */
+}

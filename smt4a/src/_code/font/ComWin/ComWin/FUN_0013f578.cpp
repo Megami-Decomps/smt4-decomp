@@ -1,82 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013f578` (_code @ 0x13f578, 0x1b8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation debug-source hook is absent; resource-address packing and saved registers differ. */
+#include "ui/MenuState.h"
 
 extern "C" {
+extern MenuState *g_menuState;
+extern const u8 DAT_0052f7bc[];
+extern const u8 DAT_0052f7d4[];
+extern const u8 DAT_0052f804[];
+extern const u8 DAT_0052f84c[];
+u32 FUN_00156230();
+u32 FUN_0015519c();
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+void sysMemClear(void *memory, u32 size);
+u32 asdProcessCreateSimple(const char *name, s32 priority, u32 flags, u32 mode,
+    u32 (*update)(), u32 (*destroy)(), void *work);
+u32 taskCreateDraw(const char *name, s32 priority, u32 flags, u32 mode,
+    u32 (*draw)(), u32 (*destroy)(), void *work, u32 parent);
+void paramsClearPacket(UiResourceParameters *parameters);
+void paramsInit(UiResourceParameters *, const void *, u32, const void *, u32,
+    const void *, u32, const void *, u32, const void *, u32);
+void uiSpriteInitializeState(UiSpriteState *, u32, u32, u32, UiSpriteSource *, u16, f32);
+void uiSpriteSelectAnim(UiSpriteState *, s32 animation);
 
-int uiSpriteInitializeState(...);
-int asdProcessCreateSimple(...);
-int paramsInit(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int uiSpriteSelectAnim(...);
-int sysMemClear(...);
-int paramsClearPacket(...);
-
-/* stack frame of void: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} void_stack;
-
-extern unsigned char LAB_0013f76c; /* 0x13f76c */
-extern unsigned char LAB_0013f77c; /* 0x13f77c */
-extern unsigned char LAB_0013f790; /* 0x13f790 */
-extern int FUN_0015519c(...); /* 0x15519c */
-extern int FUN_00156230(...); /* 0x156230 */
-extern unsigned char DAT_0052f7bc; /* 0x52f7bc */
-extern unsigned char DAT_0052f7d4; /* 0x52f7d4 */
-extern unsigned char DAT_0052f804; /* 0x52f804 */
-extern unsigned char DAT_0052f84c; /* 0x52f84c */
-extern unsigned int *g_menuState; /* 0x57f56c */
-
-/* Supplied declaration required: uiSpriteInitializeState. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: paramsClearPacket. */
-
-
-void FUN_0013f578(void)
-
+void FUN_0013f578()
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  unsigned int *puVar3;
-  
-  if (g_menuState == (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x2cc,1);
-    g_menuState = puVar1;
-  }
-  puVar1 = g_menuState;
-  sysMemClear();
-  puVar2 = &LAB_0013f76c;
-  asdProcessCreateSimple(&LAB_0013f76c,3,0,0,FUN_00156230,0,0);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_0013f77c,0x86,0,0,FUN_0015519c,0,0,puVar2);
-  taskCreateDraw(&LAB_0013f790,0xe2,0,0,FUN_0015519c,0,0,*puVar1);
-  puVar1 = g_menuState;
-  paramsClearPacket(g_menuState + 7);
-  paramsInit(puVar1 + 7,&DAT_0052f7bc,0x18,&DAT_0052f7d4,0x30,&DAT_0052f804,0x48,0,0,&DAT_0052f84c
-               ,0x1dc);
-  puVar3 = puVar1 + 7;
-  uiSpriteInitializeState(puVar1 + 0xf,8,0xffffffff,2,puVar3,1);
-  uiSpriteSelectAnim(puVar1 + 0xf,0);
-  uiSpriteInitializeState(puVar1 + 0x32,8,0xffffffff,3,puVar3,1);
-  uiSpriteSelectAnim(puVar1 + 0x32,2);
-  uiSpriteInitializeState(puVar1 + 0x55,8,0x1a8,0xffffffff,puVar3,1);
-  uiSpriteInitializeState(puVar1 + 0x78,8,0x1a9,0xffffffff,puVar3,1);
-  return;
+    if (g_menuState == NULL)
+        g_menuState = static_cast<MenuState *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(MenuState), 1));
+    MenuState *menu = g_menuState;
+    sysMemClear(menu, sizeof(MenuState));
+    menu->process = asdProcessCreateSimple("ComWin Calc", 3, 0, 0, FUN_00156230, NULL, NULL);
+    taskCreateDraw("ComWin DrawUpLeft", 0x86, 0, 0, FUN_0015519c, NULL, NULL, menu->process);
+    taskCreateDraw("ComWin DrawUpRight", 0xE2, 0, 0, FUN_0015519c, NULL, NULL, menu->process);
+    menu = g_menuState;
+    UiResourceParameters *parameters = &menu->resources.parameters;
+    paramsClearPacket(parameters);
+    paramsInit(parameters, DAT_0052f7bc, 0x18, DAT_0052f7d4, 0x30,
+        DAT_0052f804, 0x48, NULL, 0, DAT_0052f84c, 0x1DC);
+    UiSpriteSource *source = reinterpret_cast<UiSpriteSource *>(parameters);
+    uiSpriteInitializeState(&menu->primarySprites[0], 8, -1, 2, source, 1, 1.0f);
+    uiSpriteSelectAnim(&menu->primarySprites[0], 0);
+    uiSpriteInitializeState(&menu->primarySprites[1], 8, -1, 3, source, 1, 1.0f);
+    uiSpriteSelectAnim(&menu->primarySprites[1], 2);
+    uiSpriteInitializeState(&menu->secondarySprites[0], 8, 0x1A8, -1, source, 1, 1.0f);
+    uiSpriteInitializeState(&menu->secondarySprites[1], 8, 0x1A9, -1, source, 1, 1.0f);
 }
-
-} /* extern "C" */
+}

@@ -1,82 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019bea4` (_code @ 0x19bea4, 0x1bc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: indexed-entry alias reloads, capture-copy loop scheduling and branch layout differ from retail. */
+#include "shard/W5_W5Match1_RecordKeys.h"
+#include <stddef.h>
+
+// Source-local extended views: the shared table and state describe only shorter prefixes.
+struct ChannelCaptureEntryView {
+    u8 active;
+    u8 channel;
+    u8 textLength;
+    u8 unk003;
+    u32 first;
+    u32 second;
+    u8 unk00C[0xFC];
+    u16 text[24];
+};
+struct ChannelCaptureTableView {
+    ChannelCaptureEntryView entries[64];
+    s16 selected;
+    u16 channel;
+    u8 unk4E04[0x28];
+    u32 textLength;
+};
+struct ChannelCaptureTextView {
+    u32 unk00;
+    u16 text[24];
+    u16 length;
+};
+struct ChannelCaptureStateView {
+    u8 enabled;
+    u8 ready;
+    u8 unk02[2];
+    ChannelCaptureTableView *table;
+    ChannelCaptureTextView *capture;
+    u32 first;
+    u32 second;
+};
+typedef char ChannelCaptureLayoutCheck[
+    sizeof(ChannelCaptureEntryView) == sizeof(RenderChannelEntry) && offsetof(ChannelCaptureEntryView, text) == 0x108 &&
+    offsetof(ChannelCaptureTableView, selected) == 0x4E00 && offsetof(ChannelCaptureTableView, textLength) == 0x4E2C &&
+    offsetof(ChannelCaptureTextView, length) == 0x34 && offsetof(ChannelCaptureStateView, first) == 0xC ? 1 : -1];
 
 extern "C" {
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-} void_stack;
-
-extern signed char g_inputResetState; /* 0x5c1460 */
-extern signed char DAT_005c1461; /* 0x5c1461 */
-extern int DAT_005c1464; /* 0x5c1464 */
-extern int DAT_005c1468; /* 0x5c1468 */
-extern unsigned int DAT_005c146c; /* 0x5c146c */
-extern unsigned int DAT_005c1470; /* 0x5c1470 */
-extern short DAT_006473dc; /* 0x6473dc */
-
+extern ChannelCaptureStateView g_inputResetState;
+extern u16 DAT_006473dc[];
 
 void FUN_0019bea4(void)
-
 {
-  char temp_v0;
-  int temp_v1;
-  short *psVar3;
-  unsigned int temp_v2;
-  unsigned short *puVar5;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v1 = DAT_005c1464;
-  temp_v0 = '\0';
-  if (g_inputResetState != '\0') {
-    temp_v0 = DAT_005c1461;
-  }
-  if (g_inputResetState != '\0' && temp_v0 != '\0') {
-    psVar3 = (short *)(DAT_005c1464 + 0x4e00);
-    *(char *)(DAT_005c1464 + *psVar3 * 0x138 + 1) = (char)*(unsigned short *)(DAT_005c1464 + 0x4e02);
-    *(char *)(temp_v1 + *psVar3 * 0x138 + 2) = (char)*(unsigned int *)(temp_v1 + 0x4e2c);
-    *(unsigned int *)(temp_v1 + *psVar3 * 0x138 + 4) = DAT_005c146c;
-    *(unsigned int *)(temp_v1 + *psVar3 * 0x138 + 8) = DAT_005c1470;
-    DAT_005c146c = 0;
-    DAT_005c1470 = 0;
-    if (*(short *)(DAT_005c1468 + 0x34) != 0) {
-      *(char *)(temp_v1 + *psVar3 * 0x138 + 2) = (char)*(short *)(DAT_005c1468 + 0x34);
-      temp_v2 = (unsigned int)*(unsigned short *)(DAT_005c1468 + 0x34);
-      if (temp_v2 != 0) {
-        temp_v3 = 0;
-        puVar5 = (unsigned short *)(DAT_005c1468 + 4);
-        do {
-          temp_v2 = temp_v2 - 1;
-          temp_v4 = temp_v3 * 2;
-          temp_v3 = temp_v3 + 1;
-          *(unsigned short *)(temp_v1 + *psVar3 * 0x138 + temp_v4 + 0x108) = *puVar5;
-          puVar5 = puVar5 + 1;
-        } while (temp_v2 != 0);
-      }
-      *(unsigned short *)(temp_v1 + *psVar3 * 0x138 + (unsigned int)*(unsigned short *)(DAT_005c1468 + 0x34) * 2 + 0x108)
-           = 0;
+    if (!g_inputResetState.enabled || !g_inputResetState.ready)
+        return;
+    ChannelCaptureTableView *table = g_inputResetState.table;
+    table->entries[table->selected].channel = table->channel;
+    table->entries[table->selected].textLength = table->textLength;
+    table->entries[table->selected].first = g_inputResetState.first;
+    table->entries[table->selected].second = g_inputResetState.second;
+    g_inputResetState.first = 0;
+    g_inputResetState.second = 0;
+    if (g_inputResetState.capture->length) {
+        table->entries[table->selected].textLength = g_inputResetState.capture->length;
+        u32 remaining = g_inputResetState.capture->length;
+        const u16 *source = g_inputResetState.capture->text;
+        for (s32 index = 0; remaining; ++index, --remaining)
+            table->entries[table->selected].text[index] = *source++;
+        table->entries[table->selected].text[g_inputResetState.capture->length] = 0;
+    } else {
+        table->entries[table->selected].textLength = 0;
+        if (DAT_006473dc[0]) {
+            for (s32 index = 0; index < 24; ++index) {
+                table->entries[table->selected].text[index] = DAT_006473dc[index];
+                if (!DAT_006473dc[index])
+                    break;
+                ++table->entries[table->selected].textLength;
+            }
+        }
     }
-    else {
-      *(unsigned char *)(temp_v1 + *psVar3 * 0x138 + 2) = 0;
-      if (DAT_006473dc != 0) {
-        temp_v3 = 0;
-        do {
-          *(short *)(temp_v1 + *psVar3 * 0x138 + temp_v3 * 2 + 0x108) = (&DAT_006473dc)[temp_v3];
-          if ((&DAT_006473dc)[temp_v3] == 0) break;
-          temp_v3 = temp_v3 + 1;
-          temp_v4 = temp_v1 + *psVar3 * 0x138;
-          *(char *)(temp_v4 + 2) = *(char *)(temp_v4 + 2) + '\x01';
-        } while (temp_v3 < 0x18);
-      }
-    }
-    if (*psVar3 < 0x40) {
-      *psVar3 = *psVar3 + 1;
-    }
-  }
-  return;
+    if (table->selected < 64)
+        ++table->selected;
 }
-
-} /* extern "C" */
+}

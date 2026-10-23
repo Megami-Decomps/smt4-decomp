@@ -32,7 +32,7 @@ int eventTexSetFlag(int);
 int scrSetResult(...);
 int uniteReleaseExit(void);
 int FUN_00331714(int *);
-int FUN_00336de4(unsigned int, int);
+int btlTalkBustUpSetDemonTexture(unsigned int, int);
 int bustupCutAnimSetFlag(int);
 int btlTalkBustUpSetUnk2F4(int);
 int FUN_003deea4(...);
@@ -92,7 +92,7 @@ extern int btlTalkBustUpExists(void);
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: uniteReleaseExit. */
 /* Supplied declaration required: FUN_00331714. */
-/* Supplied declaration required: FUN_00336de4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 /* Supplied declaration required: bustupCutAnimSetFlag. */
 /* Supplied declaration required: FUN_00359974. */
 extern int FUN_0035fcbc(void);
@@ -249,7 +249,7 @@ unsigned int FUN_002ebdcc(void)
           btlTalkBustUpCreate();
         }
         if ((temp_v4 != 0) && (temp_v5 = btlTalkBustUpGetId(), temp_v5 != temp_v4)) {
-          FUN_00336de4(temp_v4 & 0xffff,0);
+          btlTalkBustUpSetDemonTexture(temp_v4 & 0xffff,0);
         }
         btlTalkBustUpSetUnk2F4(1);
       }

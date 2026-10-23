@@ -3,6 +3,7 @@
 #include "common.h"
 #include "shard/W6_W6Match1_BattleCountSlot.h"
 #include <stddef.h>
+struct BattleRosterRecordA;
 /* One 0x408-byte battle entry: its mask and id. */
 struct BattleMaskEntry {
     /* 0x000 */ u64 mask;
@@ -28,9 +29,16 @@ struct BattleMaskState {
             /* 0x1ffc */ BattleMaskEntry *entries;
         } entryView;
         struct {
+            u8 prefix0000[0x1ED4];
+            /* 0x1ED4 */ BattleRosterRecordA *roster;
+        } rosterView;
+        struct {
             /* 0x0000 */ u8 unk0000BeforeActivity[0xec];
             /* 0x00ec */ s32 first;
-            /* 0x00f0 */ u8 unk00f0[0x1c];
+            union {
+                /* 0x00f0 */ u8 unk00f0[0x1c];
+                /* 0x00f0 */ s32 currentAction;
+            };
             /* 0x010c */ s32 second;
         } activity;
     };
@@ -81,6 +89,12 @@ struct BattleMaskPresets {
 };
 typedef char BattleMaskPresetsDownedOffsetCheck[
     offsetof(BattleMaskPresets, eligibility.downed) == 0x20 ? 1 : -1];
+typedef char BattleMaskCurrentActionLayoutCheck[
+    offsetof(BattleMaskState, activity.currentAction) == 0xf0 &&
+    sizeof(BattleMaskState) == 0x4ce0 ? 1 : -1];
+typedef char BattleMaskRosterOffsetCheck[
+    offsetof(BattleMaskState, rosterView.roster) == 0x1ED4 &&
+    sizeof(BattleMaskState) == 0x4CE0 ? 1 : -1];
 extern "C" {
 BattleMaskState *btlGetMainState(void);
 extern BattleMaskPresets g_battleMaskPresets;

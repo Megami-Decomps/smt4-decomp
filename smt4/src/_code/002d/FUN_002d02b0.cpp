@@ -1,70 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d02b0` (_code @ 0x2d02b0, 0x178 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: pair-field address folding and saved comparator ID/record registers differ. */
+#include "shard/W5_W5Match2_UniteWork.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 
 extern "C" {
-
-int devilGetRecord(void);
-
-extern int g_unite; /* 0x43dd68 */
-
-extern int dataTableGetEntry0102Value(unsigned short);
-/* Supplied declaration required: devilGetRecord. */
-
-
-int FUN_002d02b0(unsigned short *param_1,unsigned short *param_2)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned short *puVar2;
-  int temp_v0;
-  int temp_v1;
-  unsigned short *puVar5;
-  unsigned short *puVar6;
-  int temp_v2;
-  
-  temp_v2 = g_unite;
-  puVar5 = (unsigned short *)(*(unsigned int *)(g_unite + (unsigned int)*param_1 * 8 + 0x1390) & 0x7fff);
-  puVar6 = (unsigned short *)(*(unsigned int *)(g_unite + (unsigned int)*param_2 * 8 + 0x1390) & 0x7fff);
-  puVar1 = puVar5;
-  devilGetRecord();
-  puVar2 = puVar6;
-  devilGetRecord();
-  temp_v0 = dataTableGetEntry0102Value(*puVar1);
-  temp_v1 = dataTableGetEntry0102Value(*puVar2);
-  temp_v1 = temp_v1 - temp_v0;
-  if (temp_v1 == 0) {
-    devilGetRecord();
-    devilGetRecord();
-    temp_v1 = (unsigned int)(unsigned char)puVar6[1] - (unsigned int)(unsigned char)puVar5[1];
-    if ((temp_v1 == 0) &&
-       (temp_v1 = (unsigned int)*(unsigned char *)((int)puVar5 + 3) - (unsigned int)*(unsigned char *)((int)puVar6 + 3), temp_v1 == 0)) {
-      temp_v1 = (unsigned int)*puVar6 - (unsigned int)*puVar5;
-    }
-  }
-  if (temp_v1 == 0) {
-    puVar5 = (unsigned short *)((*(unsigned int *)(temp_v2 + (unsigned int)*param_1 * 8 + 0x1390) & 0x3fffffff) >> 0xf);
-    puVar6 = (unsigned short *)((*(unsigned int *)(temp_v2 + (unsigned int)*param_2 * 8 + 0x1390) & 0x3fffffff) >> 0xf);
-    puVar1 = puVar5;
-    devilGetRecord();
-    puVar2 = puVar6;
-    devilGetRecord();
-    temp_v2 = dataTableGetEntry0102Value(*puVar1);
-    temp_v1 = dataTableGetEntry0102Value(*puVar2);
-    temp_v1 = temp_v1 - temp_v2;
-    if (temp_v1 == 0) {
-      devilGetRecord();
-      devilGetRecord();
-      temp_v1 = (unsigned int)(unsigned char)puVar6[1] - (unsigned int)(unsigned char)puVar5[1];
-      if ((temp_v1 == 0) &&
-         (temp_v1 = (unsigned int)*(unsigned char *)((int)puVar5 + 3) - (unsigned int)*(unsigned char *)((int)puVar6 + 3), temp_v1 == 0))
-      {
-        temp_v1 = (unsigned int)*puVar6 - (unsigned int)*puVar5;
-      }
-    }
-  }
-  return temp_v1;
+extern UniteWork *g_unite;
+s32 dataTableGetEntry0102Value(u16);
 }
 
-} /* extern "C" */
+static __inline s32 compareFusionDemons(u16 leftId, u16 rightId)
+{
+    const DevilSortRecord *left = devilGetRecord(leftId);
+    const DevilSortRecord *right = devilGetRecord(rightId);
+    s32 leftRank = dataTableGetEntry0102Value(left->id);
+    s32 result = dataTableGetEntry0102Value(right->id) - leftRank;
+    if (result == 0) {
+        left = devilGetRecord(leftId);
+        right = devilGetRecord(rightId);
+        result = right->race - left->race;
+        if (result == 0) {
+            result = left->level - right->level;
+            if (result == 0)
+                result = right->id - left->id;
+        }
+    }
+    return result;
+}
+
+extern "C" s32 FUN_002d02b0(const u16 *left, const u16 *right)
+{
+    UniteWork *work = g_unite;
+    s32 result = compareFusionDemons(work->pairListIV.pairs[*left].firstId,
+                                    work->pairListIV.pairs[*right].firstId);
+    if (result == 0)
+        result = compareFusionDemons(work->pairListIV.pairs[*left].secondId,
+                                     work->pairListIV.pairs[*right].secondId);
+    return result;
+}

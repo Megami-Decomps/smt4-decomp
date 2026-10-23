@@ -8,7 +8,7 @@ int FUN_0015f858(...);
 int FUN_00180118(...);
 int asdMemFree(void);
 int dialogOpen(...);
-int FUN_002392b8(...);
+int infoWinExpandAndSetText(...);
 int infoWinSetText(...);
 int uiNavigatorStart(...);
 int infoWinSetTimer(void);
@@ -34,7 +34,7 @@ extern int infoWinHasValue(void);
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: dialogOpen. */
-/* Supplied declaration required: FUN_002392b8. */
+/* Supplied declaration required: infoWinExpandAndSetText. */
 extern int dialogIsActive(void);
 /* Supplied declaration required: infoWinSetText. */
 /* Supplied declaration required: uiNavigatorStart. */
@@ -213,7 +213,7 @@ joined_r0x002318b0:
       temp_v2 = *(int *)(puVar1 + 0x436);
       break;
     case 6:
-      FUN_002392b8(puVar1 + 0x416);
+      infoWinExpandAndSetText(puVar1 + 0x416);
       dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
       break;

@@ -1,83 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00291e40` (_code @ 0x291e40, 0x11c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: sound-slot selector register allocation and stack-frame layout differ. */
+#include "common.h"
+#include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
+s32 jyoucyuGetTableEntry(u32 index);
+s32 FUN_002c1d5c(void);
+s32 asd3dSoundActorIsPlaying(s32 slot);
+void FUN_002cc1c0(s32 slot, Vector4 *position);
+void FUN_002ebc68(u32 sound, s32 slot);
+void FUN_002cc08c(u32 sound, s32 slot);
+void *FUN_002ebc34(s32 slot);
+s32 asdSoundGetPlayerPriority(void *player);
 
-int asd3dSoundActorIsPlaying(void);
-int FUN_002cc08c(int, int);
-int FUN_002cc1c0(int, unsigned char [16]);
-int FUN_002ebc68(int, int);
-int asdSoundGetPlayerPriority(void);
-
-/* Supplied declaration required: asd3dSoundActorIsPlaying. */
-extern int FUN_002c1d5c(void);
-extern int jyoucyuGetTableEntry(unsigned int);
-/* Supplied declaration required: FUN_002cc08c. */
-/* Supplied declaration required: FUN_002cc1c0. */
-extern int FUN_002ebc34(int);
-/* Supplied declaration required: FUN_002ebc68. */
-/* Supplied declaration required: asdSoundGetPlayerPriority. */
-
-
-int FUN_00291e40(int param_1)
-
+/* Find an idle sound actor, or replace the player with the greatest priority value. */
+s32 FUN_00291e40(u32 sound)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6 [16];
-  int iStack_28;
-  
-  temp_v4 = -1;
-  temp_v0 = 0;
-  temp_v3 = -1;
-  temp_v5 = -1;
-  iStack_28 = param_1;
-  temp_v1 = jyoucyuGetTableEntry(1);
-  if ((temp_v1 == 0) && (temp_v1 = FUN_002c1d5c(), temp_v1 == 0)) {
-    temp_v1 = 0;
-    do {
-      temp_v2 = temp_v1;
-      asd3dSoundActorIsPlaying();
-      if (temp_v2 == 0) {
-        FUN_002cc1c0(temp_v1,temp_v6);
-        if (param_1 + 0xfeffff94U < 0x100) {
-          FUN_002ebc68(param_1,temp_v1);
-          temp_v4 = temp_v1 + 100000;
+    s32 selected = -1;
+    bool started = false;
+    s32 greatestPriority = -1;
+    s32 replacement = -1;
+    Vector4 position;
+    if (jyoucyuGetTableEntry(1) == 0 && FUN_002c1d5c() == 0) {
+        for (s32 slot = 0; slot < 16; ++slot) {
+            if (asd3dSoundActorIsPlaying(slot) == 0) {
+                selected = slot;
+                FUN_002cc1c0(slot, &position);
+                if (sound - 0x0100006C <= 255) {
+                    FUN_002ebc68(sound, slot);
+                    selected = slot + 100000;
+                } else if (sound - 0x0100016C <= 251) {
+                    FUN_002cc08c(sound, slot);
+                    break;
+                }
+                started = true;
+            }
         }
-        else {
-          temp_v4 = temp_v1;
-          if (param_1 + 0xfefffe94U < 0xfc) {
-            FUN_002cc08c(param_1,temp_v1);
-            break;
-          }
+        if (!started) {
+            for (s32 slot = 0; slot < 16; ++slot) {
+                s32 priority = asdSoundGetPlayerPriority(FUN_002ebc34(slot));
+                if (greatestPriority < priority) {
+                    replacement = slot;
+                    greatestPriority = priority;
+                }
+            }
+            if (replacement != -1)
+                FUN_002cc08c(sound, replacement);
         }
-        temp_v0 = 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 0x10);
-    if (!temp_v0) {
-      temp_v1 = 0;
-      do {
-        temp_v2 = FUN_002ebc34(temp_v1);
-        asdSoundGetPlayerPriority();
-        if (temp_v3 < temp_v2) {
-          temp_v3 = temp_v2;
-          temp_v5 = temp_v1;
-        }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 0x10);
-      if (temp_v5 != -1) {
-        FUN_002cc08c(param_1,temp_v5);
-      }
     }
-  }
-  return temp_v4;
+    return selected;
 }
-
-} /* extern "C" */
+}

@@ -1,128 +1,96 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a3a9c` (_code @ 0x3a3a9c, 0x1d8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved state constants, category-base hoisting, and selected item table address timing differ. */
+#include "shard/S1SelectMenu.h"
+#include "shard/Shard0049.h"
+#include "script/scrScriptProcess.h"
+#include "classes/Obj55ca08.h"
 
 extern "C" {
+s32 scrRunOpcodesStub(ScriptRunState *);
+void FUN_0029ee6c(u32, u32);
+void messageTargetSetValue(u32, u32);
+u32 FUN_0022fbc0(SelectMenu *);
+void FUN_0022fb64(SelectMenu *);
+s32 FUN_0027ee9c(void);
+u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *);
+u32 FUN_00230e04(const EquipmentMenuItem *);
+s32 btlRollClamped(u16, u32);
+void FUN_002328b4(void);
+void FUN_0022e648(SelectMenu *, s32);
+s32 inputIsQuestMenuPressed(void);
+void FUN_00230df0(u32);
+void FUN_00232848(void);
+void FUN_00233240(void *, u32);
+void messageMainFinishWindow(void);
+void ifTouchRegionClearAll(MenuView *);
+void FUN_00233818(Obj55ca08 *);
+void ifTouchRegionRemove(void);
+s32 inputIsQuestCancelPressed(void);
+void FUN_0022fa2c(SelectMenu *);
 
-int scrRunOpcodesStub(unsigned int);
-int FUN_0022e648(int, int);
-int FUN_0022fa2c(int);
-int FUN_0022fb64(int);
-int FUN_00230df0(int);
-int FUN_00232848(void);
-int FUN_002328b4(void);
-int FUN_00233240(int, int);
-int FUN_00233818(int);
-int ifTouchRegionClearAll(unsigned int);
-int messageMainFinishWindow(void);
-int messageTargetSetValue(int);
-int FUN_0029ee6c(int, int);
-int ifTouchRegionRemove(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-/* Supplied declaration required: scrRunOpcodesStub. */
-/* Supplied declaration required: FUN_0022e648. */
-/* Supplied declaration required: FUN_0022fa2c. */
-/* Supplied declaration required: FUN_0022fb64. */
-extern int FUN_0022fbc0(int);
-extern int btlRollClamped(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_00230df0. */
-extern unsigned int FUN_00230e04(unsigned short *);
-/* Supplied declaration required: FUN_00232848. */
-/* Supplied declaration required: FUN_002328b4. */
-/* Supplied declaration required: FUN_00233240. */
-extern int flaggedValueHolderGetTotal(int);
-/* Supplied declaration required: FUN_00233818. */
-/* Supplied declaration required: ifTouchRegionClearAll. */
-extern int inputIsQuestCancelPressed(void);
-extern int inputIsQuestMenuPressed(void);
-extern int FUN_0027ee9c(void);
-/* Supplied declaration required: messageMainFinishWindow. */
-/* Supplied declaration required: messageTargetSetValue. */
-/* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: ifTouchRegionRemove. */
-
-
-void FUN_003a3a9c(int param_1)
-
+void FUN_003a3a9c(SelectMenu *menu)
 {
-/* irregular: 14 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned short *puVar5;
-  
-  if (*(int *)(param_1 + 8) != 0) {
-    if (*(int *)(param_1 + 8) != 1) {
-      return;
-    }
-    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x168));
-    if (temp_v0 != 2) {
-      return;
-    }
-    FUN_0029ee6c(0,0x323232ff);
-    *(unsigned int *)(param_1 + 4) = 3;
-    *(unsigned int *)(param_1 + 8) = 0;
-    return;
-  }
-  scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x168));
-  messageTargetSetValue(0);
-  temp_v0 = FUN_0022fbc0(param_1);
-  FUN_0022fb64(param_1);
-  if ((0 < *(int *)(param_1 + *(int *)(param_1 + 0x860) * 0x74 + 0x888)) &&
-     (temp_v1 = FUN_0027ee9c(), temp_v1 != 0)) {
-    temp_v0 = 1;
-  }
-  temp_v1 = *(int *)(param_1 + 0x860);
-  temp_v2 = flaggedValueHolderGetTotal(param_1 + temp_v1 * 0x74 + 0x880);
-  puVar5 = (unsigned short *)(param_1 + temp_v1 * 0x1002 + 0xc94 + temp_v2 * 4);
-  if (*(int *)(param_1 + 0x860) != 8) {
-    temp_v3 = FUN_00230e04(puVar5);
-    temp_v1 = btlRollClamped(*puVar5,temp_v3);
-    if (temp_v1 != 0) {
-      if (temp_v0 != 0) {
-        FUN_002328b4();
-        FUN_0022e648(param_1,10);
+    // The touch bank and final action field extend past SelectMenu's recovered prefix.
+    struct MenuViewIV {
+        u32 unk00;
+        u32 state;
+        u32 phase;
+        u8 unk0C[0x15C];
+        ScriptRunState *process;
+        u8 unk16C[0x23C];
+        u8 sprites[0x480];
+        u8 controls[0x34];
+        MenuView *handler;
+        s32 category;
+        u8 unk864[0x1C];
+        EquipmentMenuCursor cursors[9];
+        EquipmentMenuPage pages[9];
+        u8 unk9CA6[0xC0AA];
+        s16 touchCount;
+        u8 unk15D52[0xE];
+        u32 action;
+    };
+    typedef char MenuViewIVOffsets[offsetof(MenuViewIV, category) == 0x860 &&
+        offsetof(MenuViewIV, pages) == 0xC94 && offsetof(MenuViewIV, touchCount) == 0x15D50 &&
+        offsetof(MenuViewIV, action) == 0x15D60 ? 1 : -1];
+    MenuViewIV *work = reinterpret_cast<MenuViewIV *>(menu);
+    if (work->phase != 0) {
+        if (work->phase == 1 && scrRunOpcodesStub(work->process) == 2) {
+            FUN_0029ee6c(0, 0x323232FF);
+            work->state = 3;
+            work->phase = 0;
+        }
         return;
-      }
     }
-  }
-  else if (temp_v0 != 0) {
-    FUN_002328b4();
-    FUN_0022e648(param_1,10);
-    return;
-  }
-  temp_v0 = inputIsQuestMenuPressed();
-  if (temp_v0 != 0) {
-    *(unsigned int *)(param_1 + 0x15d60) = 0;
-    FUN_00230df0(0);
-    FUN_00232848();
-    FUN_00233240(param_1 + 0x3a8,1);
-    messageMainFinishWindow();
-    ifTouchRegionClearAll(*(unsigned int *)(param_1 + 0x85c));
-    FUN_00233818(param_1 + 0x828);
-    temp_v0 = 0;
-    if (temp_v0 < *(short *)(param_1 + 0x15d50)) {
-      do {
-        ifTouchRegionRemove();
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < *(short *)(param_1 + 0x15d50));
+    scrRunOpcodesStub(work->process);
+    messageTargetSetValue(0, 0);
+    u32 accepted = FUN_0022fbc0(menu);
+    FUN_0022fb64(menu);
+    if (reinterpret_cast<MenuList *>(&work->cursors[work->category])->marked > 0 && FUN_0027ee9c())
+        accepted = 1;
+    s32 category = work->category;
+    u32 index = flaggedValueHolderGetTotal(&work->cursors[category].holder);
+    EquipmentMenuItem *item = &work->pages[category].items[index];
+    if ((work->category == 8 || btlRollClamped(item->id, FUN_00230e04(item))) && accepted) {
+        FUN_002328b4();
+        FUN_0022e648(menu, 10);
+        return;
     }
-    *(unsigned int *)(param_1 + 8) = 1;
-    return;
-  }
-  temp_v0 = inputIsQuestCancelPressed();
-  if (temp_v0 == 0) {
-    return;
-  }
-  FUN_002328b4();
-  FUN_0022fa2c(param_1);
-  return;
+    if (inputIsQuestMenuPressed()) {
+        work->action = 0;
+        FUN_00230df0(0);
+        FUN_00232848();
+        FUN_00233240(work->sprites, 1);
+        messageMainFinishWindow();
+        ifTouchRegionClearAll(work->handler);
+        FUN_00233818(reinterpret_cast<Obj55ca08 *>(work->controls));
+        for (s32 i = 0; i < work->touchCount; ++i)
+            ifTouchRegionRemove();
+        work->phase = 1;
+        return;
+    }
+    if (inputIsQuestCancelPressed()) {
+        FUN_002328b4();
+        FUN_0022fa2c(menu);
+    }
 }
-
-} /* extern "C" */
+}

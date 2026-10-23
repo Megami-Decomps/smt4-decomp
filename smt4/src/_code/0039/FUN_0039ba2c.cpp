@@ -1,88 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039ba2c` (_code @ 0x39ba2c, 0x190 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: centered-text VFP scheduling and merged unsigned animation-completion check differ. */
+#include "shard/S1ListPanel.h"
+#include "shard/W5_W5Match1_RecordKeys.h"
+#include "ui/UiSpriteState.h"
+struct TitleBannerView {
+    u8 prefix[0x164];
+    Point2 origin;
+    u8 unk16C[0xA84 - 0x16C];
+    u8 complete;
+    u8 unkA85;
+    u8 closing;
+    u8 unkA87;
+    UiSpriteState sprite;
+};
+struct TitleTextColor { u8 prefix[0xC]; u32 color; };
+typedef char TitleBannerSpriteOffset[offsetof(TitleBannerView, sprite) == 0xA88 ? 1 : -1];
 extern "C" {
+extern RenderCtx *g_titleScene;
+extern const u8 DAT_00404c48[];
+extern TitleTextColor DAT_0044cdc8;
+void pairCopy(const Point2 *source, Point2 *destination);
+u32 FUN_002c5d80(u32 mode, u32 flags);
+void FUN_002bee04(RenderCtx *context, s32 stack, u32 state);
+void FUN_002bedb0(RenderCtx *context, s32 stack);
+void efctSetSpeed(f32 speed);
+void FUN_002bed3c(void);
+s32 vec2GetXInt(const UiSpriteState *sprite);
+void FUN_002bf380(u32 layer, u32 group, u32 index, s32 x, s32 y, u32 color);
+SpriteInfo *FUN_002bf4f8(u32 group, u32 id);
+void rt_memcpy_w(void *destination, const void *source, u32 size);
+f32 FUN_0028f4b4(const u8 *text, s32 mode, f32 scale);
+void FUN_002be5a4(u32 layer, u32 color, const u8 *text, f32 x, f32 y, f32 scale, f32 angle, f32 alpha);
+void FUN_002bf818(UiSpriteState *sprite);
 
-int pairCopy(int, float *);
-int FUN_0028f4b4(unsigned char [64], int);
-int FUN_002be5a4(int, unsigned int, unsigned char [64]);
-int FUN_002bed3c(void);
-int vec2GetXInt(...);
-int FUN_002bedb0(unsigned int, int);
-int FUN_002bee04(unsigned int, int, unsigned int);
-int FUN_002bf380(int, int, int, int, int, int);
-int efctSetSpeed(void);
-int FUN_002bf818(int);
-int VectorSignedToFloat(...);
-int rt_memcpy_w(unsigned char [64], unsigned char *, int);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-} param_1_stack;
-
-extern unsigned char DAT_00404c48; /* 0x404c48 */
-extern unsigned char DAT_0044cdc8; /* 0x44cdc8 */
-extern unsigned int g_titleScene; /* 0x44ea00 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: pairCopy. */
-/* Supplied declaration required: FUN_0028f4b4. */
-/* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: FUN_002bedb0. */
-/* Supplied declaration required: FUN_002bee04. */
-/* Supplied declaration required: FUN_002bf380. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002bf818. */
-extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_0039ba2c(int param_1)
-
+void FUN_0039ba2c(TitleBannerView *banner)
 {
-/* irregular: irregular input(s): in_fpscr; 12 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int in_fpscr;
-  float temp_v3;
-  unsigned char temp_v4 [64];
-  float temp_v5;
-  float temp_v6;
-  
-  pairCopy(param_1 + 0x164,&temp_v5);
-  temp_v0 = FUN_002c5d80(1,0);
-  FUN_002bee04(g_titleScene,3,temp_v0);
-  efctSetSpeed();
-  FUN_002bed3c();
-  temp_v0 = vec2GetXInt();
-  temp_v3 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002bf380(2,0x1c,0x1c,(int)(temp_v3 + temp_v5),(int)temp_v6,0xd3);
-  temp_v1 = FUN_002bf4f8(0x1c,0x111b);
-  rt_memcpy_w(temp_v4,&DAT_00404c48,0x2d);
-  temp_v3 = 0.0f;
-  FUN_0028f4b4(temp_v4,2);
-  VectorSignedToFloat(((int)**(short **)(temp_v1 + 0xc) - (int)temp_v3) / 2,(unsigned char)(in_fpscr >> 0x16) & 3
-                     );
-  temp_v2 = vec2GetXInt(param_1 + 0xa88,(int)temp_v3);
-  VectorSignedToFloat(temp_v2 + *(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002be5a4(2,(*(unsigned int *)((unsigned char *)&DAT_0044cdc8 + 0xc)),temp_v4);
-  FUN_002bedb0(g_titleScene,3);
-  efctSetSpeed();
-  FUN_002bf818(param_1 + 0xa88);
-  if ((*(char *)(param_1 + 0xa86) != '\0') && (*(char *)(param_1 + 0xb12) != '\0')) {
-    *(unsigned char *)(param_1 + 0xa84) = 1;
-  }
-  return;
+    Point2 origin;
+    pairCopy(&banner->origin, &origin);
+    FUN_002bee04(g_titleScene, 3, FUN_002c5d80(1, 0));
+    efctSetSpeed(1.0f);
+    FUN_002bed3c();
+    UiSpriteState *sprite = &banner->sprite;
+    FUN_002bf380(2, 28, 28, (s32)((f32)vec2GetXInt(sprite) + origin.x), (s32)origin.y, 211);
+    SpriteInfo *info = FUN_002bf4f8(28, 0x111B);
+    u8 text[64];
+    rt_memcpy_w(text, DAT_00404c48, 45);
+    f32 width = FUN_0028f4b4(text, 2, 0.0f);
+    f32 inset = (f32)((info->size[0] - (s32)width) / 2);
+    f32 x = (f32)(vec2GetXInt(sprite) + info->x) + inset + origin.x;
+    f32 y = (f32)info->y + origin.y;
+    FUN_002be5a4(2, DAT_0044cdc8.color, text, x, y, 0.0f, 0.0f, 1.0f);
+    FUN_002bedb0(g_titleScene, 3);
+    efctSetSpeed(1.0f);
+    FUN_002bf818(sprite);
+    if (banner->closing && sprite->animationFlags.completed)
+        banner->complete = 1;
 }
-
-} /* extern "C" */
+}

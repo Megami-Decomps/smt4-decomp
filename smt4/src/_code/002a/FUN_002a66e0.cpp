@@ -1,119 +1,96 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a66e0` (_code @ 0x2a66e0, 0x190 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Type-comparison CSE, saved registers and float-result hoisting differ; unsupported pairs retain retail's undefined return. */
+#include "common.h"
 
-extern "C" {
-
-
-void FUN_002a66e0(int param_1,int param_2,unsigned int *param_3)
-
+/* Maps GL texture format/type pairs to the hardware format and returns the storage bytes per pixel. */
+extern "C" f32 FUN_002a66e0(s32 format, s32 type, u32 *hardwareFormat)
 {
-/* irregular: 4 goto(s) */
-  unsigned int temp_v0;
-  
-  if (param_1 != 0x6754) {
-    if (param_1 < 0x6754) {
-      if (param_1 != 0x1909) {
-        if (param_1 < 0x1909) {
-          if (param_1 == 0x1906) goto LAB_002a682c;
-          if (param_1 == 0x1907) goto LAB_002a67ac;
-          if (param_1 != 0x1908) {
-            return;
-          }
+    u32 selected;
+    f32 bytesPerPixel;
+    bool supported = true;
+    switch (format) {
+    case 0x1908:
+    case 0x6752:
+        if (type == 0x1401) {
+            selected = 0;
+            bytesPerPixel = 4.0f;
+        } else if (type == 0x8033) {
+            selected = 4;
+            bytesPerPixel = 2.0f;
+        } else if (type == 0x8034) {
+            selected = 2;
+            bytesPerPixel = 2.0f;
+        } else {
+            supported = false;
         }
-        else {
-          if (param_1 == 0x190a) goto LAB_002a67d8;
-          if (param_1 == 0x6700) {
-            temp_v0 = 6;
-            *param_3 = temp_v0;
-            return;
-          }
-          if (param_1 != 0x6752) {
-            return;
-          }
+        break;
+    case 0x1907:
+    case 0x6754:
+        if (type == 0x1401) {
+            selected = 1;
+            bytesPerPixel = 3.0f;
+        } else if (type == 0x8363) {
+            selected = 3;
+            bytesPerPixel = 2.0f;
+        } else {
+            supported = false;
         }
-        if (param_2 == 0x1401) {
-          temp_v0 = 0;
+        break;
+    case 0x190A:
+    case 0x6758:
+        if (type == 0x1401) {
+            selected = 5;
+            bytesPerPixel = 2.0f;
+        } else if (type == 0x6760) {
+            selected = 9;
+            bytesPerPixel = 1.0f;
+        } else {
+            supported = false;
         }
-        else if (param_2 == 0x8033) {
-          temp_v0 = 4;
+        break;
+    case 0x6700:
+    case 0x6759:
+        selected = 6;
+        bytesPerPixel = 2.0f;
+        break;
+    case 0x1909:
+    case 0x6757:
+        if (type == 0x1401) {
+            selected = 7;
+            bytesPerPixel = 1.0f;
+        } else if (type == 0x6761) {
+            selected = 10;
+            bytesPerPixel = 0.5f;
+        } else {
+            supported = false;
         }
-        else {
-          if (param_2 != 0x8034) {
-            return;
-          }
-          temp_v0 = 2;
+        break;
+    case 0x1906:
+    case 0x6756:
+        if (type == 0x1401) {
+            selected = 8;
+            bytesPerPixel = 1.0f;
+        } else if (type == 0x6761) {
+            selected = 11;
+            bytesPerPixel = 0.5f;
+        } else {
+            supported = false;
         }
-      }
-      else {
-LAB_002a6808:
-        if (param_2 == 0x1401) {
-          temp_v0 = 7;
-        }
-        else {
-          if (param_2 != 0x6761) {
-            return;
-          }
-          temp_v0 = 10;
-        }
-      }
+        break;
+    case 0x675A:
+        selected = 12;
+        bytesPerPixel = 0.5f;
+        break;
+    case 0x675B:
+        selected = 13;
+        bytesPerPixel = 1.0f;
+        break;
+    default:
+        supported = false;
+        break;
     }
-    else {
-      switch(param_1) {
-      case 0x6756:
-LAB_002a682c:
-        if (param_2 == 0x1401) {
-          temp_v0 = 8;
-        }
-        else {
-          if (param_2 != 0x6761) {
-            return;
-          }
-          temp_v0 = 0xb;
-        }
-        break;
-      case 0x6757:
-        goto LAB_002a6808;
-      case 0x6758:
-LAB_002a67d8:
-        if (param_2 == 0x1401) {
-          temp_v0 = 5;
-        }
-        else {
-          if (param_2 != 0x6760) {
-            return;
-          }
-          temp_v0 = 9;
-        }
-        break;
-      case 0x6759:
-        temp_v0 = 6;
-        break;
-      case 0x675a:
-        temp_v0 = 0xc;
-        break;
-      case 0x675b:
-        temp_v0 = 0xd;
-        break;
-      default:
-        return;
-      }
+    if (supported) {
+        *hardwareFormat = selected;
+        return bytesPerPixel;
     }
-  }
-  else {
-LAB_002a67ac:
-    if (param_2 == 0x1401) {
-      temp_v0 = 1;
-    }
-    else {
-      if (param_2 != 0x8363) {
-        return;
-      }
-      temp_v0 = 3;
-    }
-  }
-  *param_3 = temp_v0;
-  return;
+    /* Retail leaves both the output and the floating return register unspecified here. */
 }
-
-} /* extern "C" */

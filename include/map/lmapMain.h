@@ -110,11 +110,24 @@ typedef struct LmapExtraA {
             /* 0x0A9 */ u8 unk0A9[3];
             /* 0x0AC */ u32 state;
         } camera;
+        struct {
+            u8 unk000[0x18];
+            f32 heading;
+            f32 heightBias;
+        } followPose;
     };
     /* 0x0B0 */ s32 unkB0;
     /* 0x0B4 */ u8 unk0B4[0x14];
     /* 0x0C8 */ s32 unkC8;
-    /* 0x0CC */ u8 unk0CC[0x140];
+    union {
+        /* 0x0CC */ u8 unk0CC[0x140];
+        struct {
+            f32 targetHeight[16];
+            f32 eyeHeight[16];
+            f32 lateralDistance[16];
+            f32 rearDistance[16];
+        } followPresets;
+    };
     /* 0x20C */ s32 unk20C;
     union {
         /* 0x210 */ u8 unk210[0x98];
@@ -227,5 +240,12 @@ typedef char LmapExtraACameraOffsetsCheck[
     offsetof(LmapExtraA, camera.state) == 0xAC &&
     offsetof(LmapExtraA, unkB0) == 0xB0 &&
     sizeof(LmapExtraA) == 0x308 ? 1 : -1];
+typedef char LmapExtraAFollowOffsetsCheck[
+    offsetof(LmapExtraA, followPose.heading) == 0x18 &&
+    offsetof(LmapExtraA, followPose.heightBias) == 0x1C &&
+    offsetof(LmapExtraA, followPresets.targetHeight) == 0xCC &&
+    offsetof(LmapExtraA, followPresets.eyeHeight) == 0x10C &&
+    offsetof(LmapExtraA, followPresets.lateralDistance) == 0x14C &&
+    offsetof(LmapExtraA, followPresets.rearDistance) == 0x18C ? 1 : -1];
 
 #endif

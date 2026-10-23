@@ -1,83 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a41a0` (_code @ 0x2a41a0, 0x17c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: switch uses comparison tree rather than retail jump table; fade arithmetic scheduling differs. */
+#include "event/2dEvent/EventFilter.h"
 
 extern "C" {
+extern EventEffectGlobalsA g_eventEffect;
+s32 asdTMTexTableNodeIsLoaded(u32, u32);
+f32 FUN_001bbf0c(f32);
+s32 FUN_00203d74(void);
 
-int FUN_001bbf0c(void);
-int VectorSignedToFloat(...);
-
-extern unsigned char g_eventEffect; /* 0x57f3b4 */
-extern unsigned char DAT_0057f3e8; /* 0x57f3e8 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001bbf0c. */
-extern int FUN_00203d74(void);
-
-
-unsigned int FUN_002a41a0(void)
-
+// Advance the filter's texture loading, fade-in, pulse and fade-out phases.
+u32 FUN_002a41a0(void)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int in_fpscr;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_eventEffect + 0x4));
-  temp_v5 = 1.0f;
-  switch(*(unsigned int *)((*(int *)((unsigned char *)&g_eventEffect + 0x4)) + 8)) {
-  case 0:
-    temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&g_eventEffect + 0x4)) + 0x18);
-    if ((temp_v1 < 6) &&
-       (temp_v2 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(&DAT_0057f3e8 + temp_v1 * 0xc),
-                             *(unsigned int *)(temp_v1 * 0xc + 0x57f3ec)), temp_v2 != 0)) {
-      *(unsigned int *)(temp_v0 + 8) = 1;
+    EventFilterWork *work = g_eventEffect.filterState.work;
+    switch (work->state) {
+    case 0:
+        if (work->texture < 6 && asdTMTexTableNodeIsLoaded(
+                g_eventEffect.filterTextures[work->texture].table,
+                g_eventEffect.filterTextures[work->texture].node))
+            work->state = 1;
+        break;
+    case 2:
+        if (work->duration > 0 && FUN_00203d74() == 0) {
+            work->opacity = (f32)work->frame / (f32)work->duration;
+            if (work->opacity < 1.0f)
+                break;
+        }
+        work->state = 3;
+        work->frame = 0;
+        work->opacity = 1.0f;
+        break;
+    case 3:
+        if (work->texture == 3)
+            work->pulse = 1.0f;
+        else
+            work->pulse = (FUN_001bbf0c((f32)work->frame * 0.07f) + 1.0f) * 0.5f * 0.5f + 0.5f;
+        break;
+    case 4:
+        if (work->duration > 0 && FUN_00203d74() == 0) {
+            work->opacity = (f32)(work->duration - work->frame) / (f32)work->duration;
+            if (work->opacity > 0.0f)
+                break;
+        }
+        work->state = 5;
+        work->frame = 0;
+        work->opacity = 0.0f;
+        break;
     }
-    break;
-  case 2:
-    if ((0 < *(int *)((*(int *)((unsigned char *)&g_eventEffect + 0x4)) + 0x1c)) && (temp_v2 = FUN_00203d74(), temp_v2 == 0)) {
-      temp_v3 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v4 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3)
-      ;
-      *(float *)(temp_v0 + 0x14) = temp_v3 / temp_v4;
-      if ((int)(temp_v3 / temp_v4) < 0x3f800000) break;
-    }
-    *(unsigned int *)(temp_v0 + 8) = 3;
-    *(unsigned int *)(temp_v0 + 0xc) = 0;
-    *(float *)(temp_v0 + 0x14) = temp_v5;
-    break;
-  case 3:
-    if (*(int *)((*(int *)((unsigned char *)&g_eventEffect + 0x4)) + 0x18) == 3) {
-      *(unsigned int *)((*(int *)((unsigned char *)&g_eventEffect + 0x4)) + 0x10) = 0x3f800000;
-    }
-    else {
-      temp_v3 = (float)VectorSignedToFloat(*(unsigned int *)((*(int *)((unsigned char *)&g_eventEffect + 0x4)) + 0xc),
-                                         (unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v3 = temp_v3 * 0.07f;
-      FUN_001bbf0c();
-      *(float *)(temp_v0 + 0x10) = (temp_v3 + temp_v5) * 0.5f * 0.5f + 0.5f;
-    }
-    break;
-  case 4:
-    temp_v5 = 0.0f;
-    if ((0 < *(int *)((*(int *)((unsigned char *)&g_eventEffect + 0x4)) + 0x1c)) && (temp_v2 = FUN_00203d74(), temp_v2 == 0)) {
-      temp_v4 = (float)VectorSignedToFloat(*(int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v3 = (float)VectorSignedToFloat(*(int *)(temp_v0 + 0x1c) - *(int *)(temp_v0 + 0xc),
-                                         (unsigned char)(in_fpscr >> 0x16) & 3);
-      *(float *)(temp_v0 + 0x14) = temp_v3 / temp_v4;
-      if (temp_v5 < temp_v3 / temp_v4) break;
-    }
-    *(unsigned int *)(temp_v0 + 8) = 5;
-    *(unsigned int *)(temp_v0 + 0xc) = 0;
-    *(float *)(temp_v0 + 0x14) = temp_v5;
-  }
-  *(int *)(temp_v0 + 0xc) = *(int *)(temp_v0 + 0xc) + 1;
-  return 0;
+    ++work->frame;
+    return 0;
 }
-
-} /* extern "C" */
+}

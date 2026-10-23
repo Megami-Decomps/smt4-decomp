@@ -1,92 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039d87c` (_code @ 0x39d87c, 0x180 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Entry-table address registers and the special-member flag's extra address addition differ. */
+#include "shard/W5_W5Match7_BattleMask.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
 extern "C" {
+s32 scrGetArg(s32 index);
+void scrSetResult(s32 result);
+s32 btlResolveEntryChoice(s32 choice);
+void FUN_00301a08(s32 group, u32 *first, u32 *count);
+s32 FUN_003020fc(BtlCombatantEntryA *entry, u32 category);
+BtlCombatantEntryA *FUN_003eaf20(BattleMaskState *state);
+s32 randRange(u32 maximum);
 
-int scrGetArg(int);
-int FUN_00301a08(unsigned int, int *, int *);
-int FUN_003020fc(...);
-int scrSetResult(...);
-int FUN_003eaf20(void);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-} void_stack;
-
-extern unsigned int g_btlCandidateMasks; /* 0x570288 */
-extern unsigned int DAT_0057028c; /* 0x57028c */
-extern unsigned int DAT_005702a0; /* 0x5702a0 */
-extern unsigned int DAT_005702a4; /* 0x5702a4 */
-extern unsigned int DAT_005702b0; /* 0x5702b0 */
-extern unsigned int DAT_005702b4; /* 0x5702b4 */
-
-extern int btlGetMainState(void);
-extern int randRange(unsigned int);
-extern unsigned int btlResolveEntryChoice(void);
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_00301a08. */
-/* Supplied declaration required: FUN_003020fc. */
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: FUN_003eaf20. */
-
-
-unsigned int FUN_0039d87c(void)
-
+/* Chooses a random eligible group member whose available action matches the requested category. */
+u32 FUN_0039d87c(void)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int *puVar7;
-  int temp_v6;
-  unsigned int temp_v7 [109];
-  int temp_v8;
-  int temp_v9;
-  
-  temp_v0 = scrGetArg(0);
-  scrGetArg(1);
-  temp_v1 = btlResolveEntryChoice();
-  temp_v6 = 0;
-  FUN_00301a08(temp_v1,&temp_v8,&temp_v9);
-  temp_v5 = temp_v8;
-  if (temp_v8 < temp_v9 + temp_v8) {
-    do {
-      temp_v2 = btlGetMainState();
-      puVar7 = (unsigned int *)(*(int *)(temp_v2 + 0x1ffc) + temp_v5 * 0x408);
-      temp_v3 = *puVar7;
-      temp_v4 = puVar7[1];
-      if (((((DAT_005702a0 & temp_v3) == 0 && (DAT_005702a4 & temp_v4) == 0) &&
-           ((g_btlCandidateMasks & temp_v3) != 0 || (DAT_0057028c & temp_v4) != 0)) &&
-          ((temp_v3 & DAT_005702b0) == 0 && (temp_v4 & DAT_005702b4) == 0)) &&
-         (temp_v2 = FUN_003020fc(puVar7,temp_v0), temp_v2 != 0)) {
-        temp_v7[temp_v6] = (unsigned int)*(unsigned short *)((int)puVar7 + 0x166);
-        temp_v6 = temp_v6 + 1;
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < temp_v8 + temp_v9);
-  }
-  temp_v5 = btlGetMainState();
-  if (*(char *)(temp_v5 + 0x4cd1) != '\0') {
-    temp_v5 = btlGetMainState();
-    FUN_003eaf20();
-    if ((temp_v5 != 0) && (temp_v2 = FUN_003020fc(), temp_v2 != 0)) {
-      temp_v7[temp_v6] = (unsigned int)*(unsigned short *)(temp_v5 + 0x166);
-      temp_v6 = temp_v6 + 1;
+    u32 category = scrGetArg(0);
+    s32 group = btlResolveEntryChoice(scrGetArg(1));
+    u32 candidates[109];
+    s32 candidateCount = 0;
+    u32 first, count;
+    FUN_00301a08(group, &first, &count);
+    for (s32 index = first; index < (s32)(first + count); ++index) {
+        BtlCombatantEntryA *entry = &((BtlCombatantEntryA *)btlGetMainState()->entryView.entries)[index];
+        u64 flags = entry->flags;
+        if ((flags & g_btlCandidateMasks.unavailable) == 0 &&
+            (flags & g_btlCandidateMasks.required) != 0 &&
+            (flags & g_btlCandidateMasks.excluded) == 0 && FUN_003020fc(entry, category) != 0) {
+            candidates[candidateCount++] = entry->id;
+        }
     }
-  }
-  if (temp_v6 != 0) {
-    temp_v5 = randRange((temp_v6 - 1U) & 0xffff);
-    scrSetResult(temp_v7[temp_v5]);
+    if (btlGetMainState()->activeEntry.present != 0) {
+        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        if (entry != NULL && FUN_003020fc(entry, category) != 0) {
+            candidates[candidateCount++] = entry->id;
+        }
+    }
+    if (candidateCount != 0) {
+        s32 choice = randRange((candidateCount - 1U) & 0xFFFF);
+        scrSetResult(candidates[choice]);
+        return 1;
+    }
+    scrSetResult(0);
     return 1;
-  }
-  scrSetResult(0);
-  return 1;
 }
-
-} /* extern "C" */
+}

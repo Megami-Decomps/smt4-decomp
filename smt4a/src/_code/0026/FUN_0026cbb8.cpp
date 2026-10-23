@@ -13,7 +13,7 @@ int FUN_0020b490(...);
 int FUN_00228b04(...);
 int FUN_002685cc(void);
 int infoWinSetText(...);
-int FUN_00336de4(...);
+int btlTalkBustUpSetDemonTexture(...);
 int FUN_003450d4(...);
 int obj04Finish(void);
 int FUN_00359b6c(...);
@@ -117,7 +117,7 @@ extern int flaggedEntryGetValueA(void);
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_0032fea0. */
-/* Supplied declaration required: FUN_00336de4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 /* Supplied declaration required: FUN_003450d4. */
 extern int uiSearchPrimary(unsigned int);
 /* Supplied declaration required: obj04Finish. */
@@ -677,7 +677,7 @@ LAB_0026e1e4:
     if (temp_v9 == 0) {
       temp_v9 = btlTalkBustupMatchesEntry(*(unsigned short *)(temp_v5 + 0x62));
       if (temp_v9 == 0) {
-        FUN_00336de4(*(unsigned short *)(temp_v5 + 0x62),1);
+        btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v5 + 0x62),1);
       }
       btlTalkBustUpSetUnk2F4(1);
     }

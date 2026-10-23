@@ -1,85 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002958f8` (_code @ 0x2958f8, 0x114 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: texture table IDs become immediates instead of retained saved-register values. */
+#include "status/StatusBustUp.h"
+#include "gamedata/DevilRecord.h"
 
 extern "C" {
+extern StatusBustUpResources DAT_0044e158;
+extern void *g_aocSystem;
+void FUN_002a60cc(void *system, u32 table, u32 node);
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
+void asdTMTexTableReleaseNode(u32 table, u32 node);
+Table00Record *dataTable00FindById(u16 id);
 
-int FUN_002a60cc(unsigned int, int, unsigned int);
-int asdTMTexTableReleaseNode(int, unsigned int);
-int dataTable00FindById(void);
-int devilGetRecord(void);
-
-extern unsigned int g_aocSystem; /* 0x433158 */
-extern int DAT_0044e15c; /* 0x44e15c */
-extern int DAT_0044e160; /* 0x44e160 */
-
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002a60cc. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: devilGetRecord. */
-
-
-void FUN_002958f8(unsigned int param_1,int param_2)
-
+/* Drop the portrait reference, unloading normal or special portraits on the last user. */
+void FUN_002958f8(s32 portrait, s32 isDevil)
 {
-/* irregular: 4 native warning(s); review required */
-  char temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  if (param_2 != 0) {
-    if ((int)param_1 < 0) {
-      param_1 = 0;
+    struct SpecialPortraitRecord {
+        u8 unk00[3];
+        u8 flags;
+        u8 unk04[0x84];
+        s16 portrait;
+    };
+    if (isDevil) {
+        if (portrait < 0) {
+            portrait = 0;
+        } else {
+            DevilRecord *devil = reinterpret_cast<DevilRecord *>(devilGetRecord((u16)portrait));
+            if (devil == NULL) {
+                return;
+            }
+            SpecialPortraitRecord *record =
+                reinterpret_cast<SpecialPortraitRecord *>(dataTable00FindById((u16)portrait));
+            if (record->flags & 1) {
+                portrait = record->portrait;
+                if (portrait >= 129) {
+                    return;
+                }
+                s8 *references = static_cast<s8 *>(DAT_0044e158.workB);
+                s8 remaining = references[portrait] - 1;
+                references[portrait] = remaining;
+                if (remaining > 0) {
+                    return;
+                }
+                if (asdTMTexTableNodeIsLoaded(0x23, portrait)) {
+                    asdTMTexTableReleaseNode(0x23, portrait);
+                }
+                static_cast<s8 *>(DAT_0044e158.workB)[portrait] = 0;
+                return;
+            }
+            portrait = devil->model + 1;
+            if (portrait >= 614) {
+                return;
+            }
+        }
     }
-    else {
-      temp_v1 = param_1;
-      devilGetRecord();
-      if (temp_v1 == 0) {
+    s8 *references = static_cast<s8 *>(DAT_0044e158.workA);
+    s8 remaining = references[portrait] - 1;
+    references[portrait] = remaining;
+    if (remaining > 0) {
         return;
-      }
-      param_1 = param_1 & 0xffff;
-      dataTable00FindById();
-      if ((*(unsigned char *)(param_1 + 3) & 1) != 0) {
-        param_1 = (unsigned int)*(short *)(param_1 + 0x88);
-        if ((int)param_1 >= 0x81) {
-          return;
-        }
-        temp_v0 = *(char *)(DAT_0044e160 + param_1) - '\x01';
-        *(char *)(DAT_0044e160 + param_1) = temp_v0;
-        if ('\0' < temp_v0) {
-          return;
-        }
-        temp_v2 = asdTMTexTableNodeIsLoaded(0x23,param_1);
-        temp_v3 = DAT_0044e160;
-        if (temp_v2 != 0) {
-          asdTMTexTableReleaseNode(0x23,param_1);
-          temp_v3 = DAT_0044e160;
-        }
-        *(unsigned char *)(temp_v3 + param_1) = 0;
-        return;
-      }
-      param_1 = *(unsigned short *)(temp_v1 + 0x90) + 1;
-      if (param_1 >= 0x266) {
-        return;
-      }
     }
-  }
-  temp_v0 = *(char *)(DAT_0044e15c + param_1) - '\x01';
-  *(char *)(DAT_0044e15c + param_1) = temp_v0;
-  if ('\0' < temp_v0) {
-    return;
-  }
-  temp_v2 = asdTMTexTableNodeIsLoaded(0x17,param_1);
-  temp_v3 = DAT_0044e15c;
-  if (temp_v2 != 0) {
-    asdTMTexTableReleaseNode(0x17,param_1);
-    FUN_002a60cc(g_aocSystem,0x17,param_1);
-    temp_v3 = DAT_0044e15c;
-  }
-  *(unsigned char *)(temp_v3 + param_1) = 0;
-  return;
+    if (asdTMTexTableNodeIsLoaded(0x17, portrait)) {
+        asdTMTexTableReleaseNode(0x17, portrait);
+        FUN_002a60cc(g_aocSystem, 0x17, portrait);
+    }
+    static_cast<s8 *>(DAT_0044e158.workA)[portrait] = 0;
 }
-
-} /* extern "C" */
+}

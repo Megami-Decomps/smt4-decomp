@@ -1,74 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a6acc` (_code @ 0x2a6acc, 0x16c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: century/quad-year arithmetic registers and leap-day branch layout differ. */
+#include "common.h"
 
-extern "C" {
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-
-void FUN_002a6acc(int *param_1,int *param_2,int *param_3,int param_4)
-
+// Convert an epoch-relative day count to a Gregorian year, month and day.
+extern "C" void FUN_002a6acc(s32 *yearOut, s32 *monthOut, s32 *dayOut, s32 days)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  
-  temp_v0 = (param_4 - 0x3c) / 0x23ab1;
-  temp_v5 = (param_4 - 0x3c) % 0x23ab1;
-  if ((int)temp_v5 < 0) {
-    temp_v0 = temp_v0 - 1;
-    temp_v5 = temp_v5 + 0x23ab1;
-  }
-  temp_v1 = (int)(((long long)(int)temp_v5 * -0x1a537e05 + ((unsigned long long)temp_v5 << 0x20)) >> 0x20);
-  temp_v2 = (temp_v1 >> 0xf) - (temp_v1 >> 0x1f);
-  temp_v1 = (int)(((long long)(int)temp_v5 * -0x1a537e05 + ((unsigned long long)temp_v5 << 0x20)) >> 0x20);
-  temp_v6 = temp_v5 + ((temp_v1 >> 0xf) - (temp_v1 >> 0x1f)) * -0x8eac;
-  temp_v5 = temp_v6 % 0x5b5;
-  temp_v1 = (int)(((long long)(int)temp_v5 * -0x4c73064f + ((unsigned long long)temp_v5 << 0x20)) >> 0x20);
-  temp_v3 = (temp_v1 >> 8) - (temp_v1 >> 0x1f);
-  temp_v1 = (int)(((long long)(int)temp_v5 * -0x4c73064f + ((unsigned long long)temp_v5 << 0x20)) >> 0x20);
-  temp_v4 = ((temp_v1 >> 8) - (temp_v1 >> 0x1f)) * -0x16d + temp_v5;
-  temp_v5 = temp_v4 * 5 + 2;
-  temp_v1 = (int)(((long long)(int)temp_v5 * -0x29d47f29 + ((unsigned long long)temp_v5 << 0x20)) >> 0x20);
-  temp_v1 = (temp_v1 >> 7) - (temp_v1 >> 0x1f);
-  temp_v6 = temp_v0 * 400 + temp_v2 * 100 + (temp_v6 / 0x5b5) * 4 + temp_v3;
-  temp_v7 = temp_v6 + 2000;
-  temp_v0 = (temp_v4 - (temp_v1 * 0x99 + 2) / 5) + 1;
-  if (!(temp_v3 == 4 || temp_v2 == 4)) {
-    if (temp_v1 < 10) {
-      temp_v1 = temp_v1 + 3;
+    s32 shiftedDays = days - 60;
+    s32 era = shiftedDays / 146097;
+    s32 dayOfEra = shiftedDays % 146097;
+    if (dayOfEra < 0) {
+        --era;
+        dayOfEra += 146097;
     }
-    else {
-      temp_v1 = temp_v1 - 9;
-      temp_v7 = temp_v7 + 1;
+    s32 century = dayOfEra / 36524;
+    s32 dayOfCentury = dayOfEra % 36524;
+    s32 quadYear = dayOfCentury / 1461;
+    s32 dayOfQuadYear = dayOfCentury % 1461;
+    s32 singleYear = dayOfQuadYear / 365;
+    s32 dayOfYear = dayOfQuadYear % 365;
+    s32 month = (dayOfYear * 5 + 2) / 153;
+    s32 year = era * 400 + century * 100 + quadYear * 4 + singleYear + 2000;
+    s32 day = dayOfYear - (month * 153 + 2) / 5 + 1;
+    if (singleYear == 4 || century == 4) {
+        month = 2;
+        day = 29;
+    } else if (month < 10) {
+        month += 3;
+    } else {
+        month -= 9;
+        ++year;
     }
-  }
-  else {
-    temp_v1 = 0xb;
-    temp_v0 = 0x1d;
-    temp_v7 = temp_v6 + 1999;
-    temp_v1 = temp_v1 - 9;
-    temp_v7 = temp_v7 + 1;
-  }
-  if (param_1 != (int *)0x0) {
-    *param_1 = temp_v7;
-  }
-  if (param_2 != (int *)0x0) {
-    *param_2 = temp_v1;
-  }
-  if (param_3 != (int *)0x0) {
-    *param_3 = temp_v0;
-  }
-  return;
+    if (yearOut != NULL)
+        *yearOut = year;
+    if (monthOut != NULL)
+        *monthOut = month;
+    if (dayOut != NULL)
+        *dayOut = day;
 }
-
-} /* extern "C" */

@@ -1,92 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00387c78` (_code @ 0x387c78, 0x168 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: file availability/data access uses a shared computed address rather than two indexed loads. */
+#include "addon/aocMain.h"
+#include "addon/AocPackage.h"
+#include "gamedata/DataTable.h"
+#include "gamedata/DisplayName.h"
 
 extern "C" {
+s32 FUN_002ac12c(AocPackage *package);
+const AocPackageFileDescription *FUN_002ac0f8(AocPackage *package);
+u32 FUN_002ac0c4(AocPackage *package);
+void *dataTableFileGetTable(void *file, u32 section);
 
-int FUN_002ac0c4(void);
-int FUN_002ac0f8(void);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern unsigned int dataTableFileGetTable(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002ac0c4. */
-/* Supplied declaration required: FUN_002ac0f8. */
-extern int FUN_002ac12c(unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-
-
-int FUN_00387c78(int param_1,int param_2)
-
+// Find the first available display-name override in a loaded package's name tables.
+const char *FUN_00387c78(AocSystem *system, s32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  short *psVar8;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  int temp_v9;
-  
-  temp_v9 = 0;
-  if (temp_v9 < *(int *)(param_1 + 0x310)) {
-    do {
-      temp_v8 = *(int *)(param_1 + 0x318) + temp_v9 * 0x50;
-      temp_v0 = FUN_002ac12c(temp_v8);
-      if (temp_v0 != 0) {
-        temp_v1 = temp_v8;
-        FUN_002ac0f8();
-        temp_v2 = temp_v8;
-        FUN_002ac0c4();
-        temp_v7 = 0;
-        if (temp_v7 < temp_v2) {
-          do {
-            if ((*(char *)(temp_v1 + temp_v7 * 0x40) == '!') &&
-               (*(char *)(*(int *)(temp_v8 + 0x4c) + temp_v7 * 0x10 + 0xc) != '\0')) {
-              temp_v3 = dataTableFileGetTable(*(unsigned int *)(*(int *)(temp_v8 + 0x4c) + temp_v7 * 0x10),1);
-              temp_v0 = dataTableGetEntries();
-              temp_v4 = dataTableGetCount(temp_v3);
-              if ((int)temp_v4 < 1) {
-                temp_v5 = 0;
-              }
-              else {
-                temp_v5 = temp_v4 & 1;
-                temp_v6 = 0;
-                if (temp_v5 != 0) {
-                  do {
-                    if (*(short *)(temp_v0 + temp_v6 * 0x22) == param_2) {
-                      return temp_v0 + temp_v6 * 0x22 + 2;
+    for (s32 packageIndex = 0; packageIndex < system->packages.count; ++packageIndex) {
+        AocPackage *package = &system->packages.entries[packageIndex];
+        if (FUN_002ac12c(package)) {
+            const AocPackageFileDescription *descriptions = FUN_002ac0f8(package);
+            u32 fileCount = FUN_002ac0c4(package);
+            for (u32 fileIndex = 0; fileIndex < fileCount; ++fileIndex) {
+                if (descriptions[fileIndex].kind != 0x21)
+                    continue;
+                AocPackageFile *files = package->fileTable.files;
+                if (files[fileIndex].state.available) {
+                    void *table = dataTableFileGetTable(files[fileIndex].data, 1);
+                    DisplayNameOverride *records = (DisplayNameOverride *)dataTableGetEntries(table);
+                    s32 count = dataTableGetCount(table);
+                    for (s32 recordIndex = 0; recordIndex < count; ++recordIndex) {
+                        if (records[recordIndex].id == id)
+                            return records[recordIndex].text;
                     }
-                    temp_v6 = temp_v6 + 1;
-                  } while (temp_v6 < (int)temp_v5);
                 }
-              }
-              for (; (int)temp_v5 < (int)temp_v4; temp_v5 = temp_v5 + 2) {
-                psVar8 = (short *)(temp_v0 + temp_v5 * 0x22);
-                if (*psVar8 == param_2) {
-                  return temp_v0 + temp_v5 * 0x22 + 2;
-                }
-                if (psVar8[0x11] == param_2) {
-                  return temp_v0 + temp_v5 * 0x22 + 0x24;
-                }
-              }
             }
-            temp_v7 = temp_v7 + 1;
-          } while (temp_v7 < temp_v2);
         }
-      }
-      temp_v9 = temp_v9 + 1;
-    } while (temp_v9 < *(int *)(param_1 + 0x310));
-  }
-  return 0;
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -1,74 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ba204` (_code @ 0x1ba204, 0x18c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail allocation sites retain source-file/line diagnostic setup and NOPs. */
+#include "common.h"
 
 extern "C" {
+u32 FUN_001aeecc(const u8 *source);
+u8 *asdMemoryAllocAligned(u32 alignment, u32 heap, u32 category, u32 size, u32 argument, s32 clear);
+void lzDecompressBytes(const u8 *source, u8 *destination);
+void FUN_001aeddc(const u8 *source, u8 *destination);
+void FUN_001aec9c(const u8 *source, u8 *destination);
+void asdMemFree(void *memory);
 
-int asdMemFree(...);
-int asdMemoryAllocAligned(int, int, int, int, unsigned int, int);
-void lzDecompressBytes(const unsigned char *, unsigned char *);
-int FUN_001aec9c(unsigned char *, unsigned char *);
-int FUN_001aeddc(unsigned char *, unsigned char *);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
-
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdMemoryAllocAligned. */
-/* Supplied declaration required: FUN_001aec9c. */
-/* Supplied declaration required: FUN_001aeddc. */
-extern int FUN_001aeecc(unsigned char *);
-
-
-unsigned char * FUN_001ba204(unsigned char *param_1,unsigned int param_2,unsigned int param_3)
-
+// Expand a supported Nintendo compression stream and transfer ownership from source to output.
+u8 *FUN_001ba204(u8 *source, u32 flags, u32 argument)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned char *pbVar2;
-  unsigned char temp_v1;
-  
-  temp_v1 = *param_1 & 0xf0;
-  pbVar2 = param_1;
-  if (((temp_v1 == 0x10 || temp_v1 == 0x20) || temp_v1 == 0x30) &&
-     (temp_v0 = FUN_001aeecc(param_1), temp_v0 != 0)) {
-    if ((param_2 & 1) != 0) {
-      if ((param_2 & 2) != 0) {
-        pbVar2 = (unsigned char *)0x10000;
-        asdMemoryAllocAligned(0x10000,0x100,0,temp_v0,param_3,0);
-      }
-      else {
-        pbVar2 = (unsigned char *)0x10000;
-        asdMemoryAllocAligned(0x10000,0x100,0,temp_v0,param_3,1);
-      }
-    }
-    else if ((param_2 & 2) != 0) {
-      pbVar2 = (unsigned char *)0x100;
-      asdMemoryAllocAligned(0x100,0x100,0,temp_v0,param_3,0);
-    }
-    else {
-      pbVar2 = (unsigned char *)0x100;
-      asdMemoryAllocAligned(0x100,0x100,0,temp_v0,param_3,1);
-    }
-    if (temp_v1 != 0x10) {
-      if (temp_v1 != 0x20) {
-        if (temp_v1 == 0x30) {
-          FUN_001aec9c(param_1,pbVar2);
+    u32 kind = *source & 0xF0;
+    u8 *output = source;
+    if (kind == 0x10 || kind == 0x20 || kind == 0x30) {
+        u32 size = FUN_001aeecc(source);
+        if (size != 0) {
+            if (flags & 1) {
+                if (flags & 2) {
+                    output = asdMemoryAllocAligned(0x10000, 0x100, 0, size, argument, 0);
+                } else {
+                    output = asdMemoryAllocAligned(0x10000, 0x100, 0, size, argument, 1);
+                }
+            } else {
+                if (flags & 2) {
+                    output = asdMemoryAllocAligned(0x100, 0x100, 0, size, argument, 0);
+                } else {
+                    output = asdMemoryAllocAligned(0x100, 0x100, 0, size, argument, 1);
+                }
+            }
+            if (kind == 0x10) {
+                lzDecompressBytes(source, output);
+            } else if (kind == 0x20) {
+                FUN_001aeddc(source, output);
+            } else if (kind == 0x30) {
+                FUN_001aec9c(source, output);
+            }
+            asdMemFree(source);
         }
-      }
-      else {
-        FUN_001aeddc(param_1,pbVar2);
-      }
     }
-    else {
-      lzDecompressBytes(param_1,pbVar2);
-    }
-    asdMemFree(param_1);
-  }
-  return pbVar2;
+    return output;
 }
-
-} /* extern "C" */
+}

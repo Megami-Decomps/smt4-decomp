@@ -1,86 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ba1f4` (_code @ 0x4ba1f4, 0x158 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: reset-array stores use an offset literal, packet arguments use strd, and sprite/bank pointers remain live; 92 versus retail 88 instructions. */
+#include "shard/Shard004B.h"
+#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match6_SpritePresetBank.h"
+#include "ui/UiSpriteState.h"
 
 extern "C" {
+extern const u8 DAT_00532924[];
+void paramsClearPacket(Params002c312c *packet);
+void paramsInit(Params002c312c *packet, const void *first, u16 firstBytes, const void *second, u16 secondBytes,
+                const void *third, u16 thirdBytes, const void *fourth, u16 fourthBytes, const void *fifth, u16 fifthBytes);
+void FUN_0014e188(UiSpriteState *sprite, s32 imageBank, s32 animation, Params002c312c *packet, s32 flags, f32 scale);
+void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 flags);
+void FUN_004cf7cc(SpritePresetBank *bank);
+void uiSpriteBankApplyPreset(SpritePresetBank *bank, s32 preset);
 
-int FUN_0014e188(int, int, int, int, int);
-int paramsInit(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int uiSpriteBankApplyPreset(int, int);
-int uiSpriteSetImageKeyframe(int, int);
-int FUN_004cf7cc(int);
-int paramsClearPacket(int);
-
-/* stack frame of param_1: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern unsigned char DAT_00532900; /* 0x532900 */
-extern unsigned char DAT_0053290c; /* 0x53290c */
-extern unsigned char DAT_00532924; /* 0x532924 */
-
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: uiSpriteBankApplyPreset. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_004cf7cc. */
-/* Supplied declaration required: paramsClearPacket. */
-
-
-void FUN_004ba1f4(int param_1)
-
+// Reset row-selection state and bind the menu's row and extra sprites to their shared preset packet.
+void FUN_004ba1f4(Menu4C *menu)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = 0;
-  *(unsigned char *)(param_1 + 0x9ec) = 0;
-  *(unsigned char *)(param_1 + 0x9ed) = 0;
-  *(unsigned char *)(param_1 + 0x9ee) = 0;
-  *(unsigned int *)(param_1 + 0x1014) = 0;
-  *(unsigned int *)(param_1 + 0x1018) = 0;
-  *(unsigned int *)(param_1 + 0x1034) = 0;
-  *(unsigned int *)(param_1 + 0x1038) = 0;
-  *(unsigned int *)(param_1 + 0x103c) = 0;
-  *(unsigned int *)(param_1 + 0x1040) = 0;
-  *(unsigned int *)(param_1 + 0x1044) = 0;
-  *(unsigned int *)(param_1 + 0x1048) = 0;
-  *(unsigned int *)(param_1 + 0x104c) = 0;
-  *(unsigned int *)(param_1 + 0x1050) = 0;
-  *(unsigned int *)(param_1 + 0x1054) = 0;
-  *(unsigned int *)(param_1 + 0x1058) = 0;
-  *(unsigned int *)(param_1 + 0x105c) = 0;
-  *(unsigned int *)(param_1 + 0x1060) = 0;
-  *(unsigned int *)(param_1 + 0x1064) = 0;
-  *(unsigned int *)(param_1 + 0x1068) = 0;
-  *(unsigned int *)(param_1 + 0x106c) = 0;
-  *(unsigned int *)(param_1 + 0x101c) = 0xffffffff;
-  *(unsigned int *)(param_1 + 0x1070) = 0;
-  *(unsigned int *)(param_1 + 0x1020) = 0xffffffff;
-  *(unsigned int *)(param_1 + 0x1024) = 0xffffffff;
-  *(unsigned int *)(param_1 + 0x1028) = 0xffffffff;
-  *(unsigned int *)(param_1 + 0x102c) = 0xffffffff;
-  *(unsigned int *)(param_1 + 0x1030) = 0xffffffff;
-  paramsClearPacket(param_1 + 0x9f0);
-  paramsInit(param_1 + 0x9f0,&DAT_00532900,0xc,&DAT_0053290c,0x18,0,0,0,0,&DAT_00532924,0x38);
-  do {
-    temp_v1 = param_1 + temp_v0 * 0x8c;
-    FUN_0014e188(temp_v1 + 0xa10,0x1f,0,param_1 + 0x9f0,0x15);
-    uiSpriteSetImageKeyframe(temp_v1 + 0xa10,0);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 10);
-  FUN_0014e188(param_1 + 0xf88,0x1f,0,param_1 + 0x9f0,0x15);
-  FUN_004cf7cc(param_1 + 0xa8);
-  uiSpriteBankApplyPreset(param_1 + 0xa8,0xc);
-  return;
+    // The packet starts one byte into byte-aligned shared padding, so it needs a local aligned view.
+    struct MenuSpriteParameters {
+        u8 prefix[0x9ec];
+        u8 active, completed, pending, unk9EF;
+        Params002c312c packet;
+    };
+    typedef char MenuSpriteParameterOffsets[offsetof(MenuSpriteParameters, active) == 0x9ec && offsetof(MenuSpriteParameters, packet) == 0x9f0 ? 1 : -1];
+    MenuSpriteParameters *parameters = reinterpret_cast<MenuSpriteParameters *>(menu);
+    parameters->active = 0;
+    parameters->completed = 0;
+    parameters->pending = 0;
+    menu->unk1014 = 0;
+    menu->unk1018 = 0;
+    for (s32 index = 0; index < 16; ++index)
+        menu->resetFlags[index] = 0;
+    menu->unk101C = -1;
+    menu->unk1020 = -1;
+    for (s32 index = 0; index < 4; ++index)
+        menu->selectionIds[index] = -1;
+    paramsClearPacket(&parameters->packet);
+    // These three adjacent tables are anchored by the final table's retail data symbol.
+    paramsInit(&parameters->packet, DAT_00532924 - 0x24, 0xc, DAT_00532924 - 0x18, 0x18, 0, 0, 0, 0, DAT_00532924, 0x38);
+    for (s32 index = 0; index < 10; ++index) {
+        UiSpriteState *sprite = reinterpret_cast<UiSpriteState *>(menu->rowsA10[index]);
+        FUN_0014e188(sprite, 0x1f, 0, &parameters->packet, 0x15, 1.0f);
+        uiSpriteSetImageKeyframe(sprite, 0, 0);
+    }
+    FUN_0014e188(reinterpret_cast<UiSpriteState *>(menu->unkF88), 0x1f, 0, &parameters->packet, 0x15, 1.0f);
+    SpritePresetBank *bank = reinterpret_cast<SpritePresetBank *>(menu->blockA8);
+    FUN_004cf7cc(bank);
+    uiSpriteBankApplyPreset(bank, 0xc);
 }
-
-} /* extern "C" */
+}

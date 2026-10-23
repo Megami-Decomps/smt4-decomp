@@ -1,87 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00227fac` (_code @ 0x227fac, 0x104 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: final entry flag update uses r0 instead of retail r1. */
+#include "common.h"
+#include "shard/PassiveSkill.h"
+#include "shard/W4_Match6_BtlEntry.h"
 
 extern "C" {
+struct BtlMainState;
+BtlMainState *btlGetMainState(void);
+BtlEntry *btlMainFindEntryByListedId(BtlMainState *, u32);
+void FUN_0022abe0(BtlEntry *, u16 *);
+s32 btlQueryMatchingFlagColumn(BtlMainState *, BtlEntry *, s32);
 
-int FUN_0022abe0(void);
-int btlMainFindEntryByListedId(unsigned int *, unsigned int);
-int passiveSkillLookupRecord(void);
-int btlGetMainState(void);
-int btlQueryMatchingFlagColumn(int, unsigned int *, unsigned int);
-
-/* stack frame of param_1: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_0022abe0. */
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: passiveSkillLookupRecord. */
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: btlQueryMatchingFlagColumn. */
-
-
-unsigned int FUN_00227fac(unsigned int param_1)
-
+// Apply the strongest passive affinity that is not already represented by the entry.
+u32 FUN_00227fac(u32 listedId)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned short temp_v4 [12];
-  
-  puVar1 = (unsigned int *)btlGetMainState();
-  btlMainFindEntryByListedId(puVar1,param_1);
-  temp_v4[0] = 0;
-  temp_v4[1] = 0;
-  temp_v4[2] = 0;
-  temp_v4[3] = 0;
-  temp_v4[4] = 0;
-  temp_v4[5] = 0;
-  temp_v4[6] = 0;
-  temp_v4[7] = 0;
-  temp_v4[8] = 0;
-  temp_v4[9] = 0;
-  FUN_0022abe0();
-  temp_v3 = 0;
-  temp_v2 = 0;
-  do {
-    temp_v0 = (unsigned int)temp_v4[temp_v2];
-    if (((temp_v0 != 0) && (passiveSkillLookupRecord(), temp_v0 != 0)) && (temp_v3 < (*(unsigned int *)(temp_v0 + 0x38) & 3))) {
-      temp_v1 = btlGetMainState();
-      btlQueryMatchingFlagColumn(temp_v1,puVar1,*(unsigned int *)(temp_v0 + 0x38) & 3);
-      if (temp_v1 == 0) {
-        temp_v3 = *(unsigned int *)(temp_v0 + 0x38) & 3;
-      }
+    BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), listedId);
+    u16 skills[10] = {};
+    FUN_0022abe0(entry, skills);
+    s32 affinity = 0;
+    for (s32 i = 0; i < 9; ++i) {
+        if (skills[i] != 0) {
+            const PassiveSkillRecord *skill = passiveSkillLookupRecord(skills[i]);
+            if (skill != NULL && (s32)(skill->affinity & 3) > affinity) {
+                if (btlQueryMatchingFlagColumn(btlGetMainState(), entry, skill->affinity & 3) == 0)
+                    affinity = skill->affinity & 3;
+            }
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 9);
-  if (temp_v3 != 0) {
-    temp_v2 = btlGetMainState();
-    btlQueryMatchingFlagColumn(temp_v2,puVar1,temp_v3);
-    if (temp_v2 != 0) {
-      return 0;
+    if (affinity == 0 || btlQueryMatchingFlagColumn(btlGetMainState(), entry, affinity) != 0)
+        return 0;
+    switch (affinity) {
+    case 1:
+        entry->flags |= 0x2000;
+        break;
+    case 2:
+        entry->flags |= 0x4000;
+        break;
     }
-    if (temp_v3 == 1) {
-      temp_v0 = *puVar1 | 0x2000;
-    }
-    else {
-      if (temp_v3 != 2) {
-        return temp_v3;
-      }
-      temp_v0 = *puVar1 | 0x4000;
-    }
-    *puVar1 = temp_v0;
-    return temp_v3;
-  }
-  return 0;
+    return affinity;
 }
-
-} /* extern "C" */
+}

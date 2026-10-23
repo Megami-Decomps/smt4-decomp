@@ -33,7 +33,7 @@ s32 sceneTexturesAreLoaded(void);
 s32 isFlag1F0Set(void *flags);
 SceneScriptProcess *FUN_00275bc8(void *data, u32 size);
 void FUN_001d1438(void *position, void *rotation);
-void FUN_004b7128(SceneSetupWork *work);
+void mikadoLoadSceneResources(SceneSetupWork *work);
 void FUN_004b7d88(SceneSetupWork *work);
 
 /* Once the scene data is loaded, starts both scene scripts and, when setup is pending, places the scene. */
@@ -54,7 +54,7 @@ void FUN_004b91fc(SceneSetupWork *work)
     work->scripts[1].process->mode = 2;
     if (work->flags & 0x10) {
         FUN_001d1438(work->position, work->rotation);
-        FUN_004b7128(work);
+        mikadoLoadSceneResources(work);
         work->step = 2;
         work->frame = 0;
         work->flags &= ~0x10;

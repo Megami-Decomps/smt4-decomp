@@ -1,51 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039a1b8` (_code @ 0x39a1b8, 0x120 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: first indicator state spills; retail retains it in fp, changing the remaining register allocation. */
+#include "gfx/UiControlDraw.h"
+#include "shard/S1ListPanel.h"
 
 extern "C" {
+void FUN_001835b4(s32 layer, u32 group, u32 sprite, s32 x, s32 y, s32 priority);
+SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
+void FUN_00185dd4(s32 layer, u32 group, u32 sprite, s32 x, s32 y, s32 width, s32 height, s32 priority);
 
-int FUN_001835b4(...);
-int FUN_00185dd4(int, int, unsigned int, int, int, int, int, int);
-
-/* stack frame of param_10: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_10_stack;
-
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00185dd4. */
-extern int __aeabi_idivmod(int, unsigned int);
-
-
-void FUN_0039a1b8(int param_1,int param_2,int param_3,unsigned int param_4,unsigned int param_5,
-                 int param_6,unsigned int param_7,int param_8,int param_9,unsigned int param_10)
-
+/* Draw a scroll control with a caller-selected number of track subdivisions. */
+void FUN_0039a1b8(UiControlDrawPosition *position, s32 x, s32 y,
+                 u32 firstActive, u32 secondActive, u32 trackActive, u32 unused,
+                 s32 firstRow, s32 rowCount, s32 subdivisions)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  short *psVar4;
-  
-  FUN_001835b4(2,0x2e,0xf8,*(int *)(param_1 + 4) + param_2,param_3,100);
-  FUN_001835b4(2,0x2e,0xf5,*(int *)(param_1 + 4) + param_2,param_3,100);
-  FUN_001835b4(2,0x2e);
-  FUN_001835b4(2,0x2e);
-  if (param_6 == 0) {
-    temp_v1 = 0xf6;
-  }
-  else {
-    temp_v1 = 0xf7;
-  }
-  temp_v0 = FUN_001834a4(0x2e,temp_v1);
-  psVar4 = *(short **)(temp_v0 + 0xc);
-  temp_v2 = (int)psVar4[1];
-  temp_v0 = __aeabi_idivmod(temp_v2,param_10);
-  FUN_00185dd4(2,0x2e,temp_v1,*(int *)(param_1 + 4) + param_2,param_8 * temp_v0 + param_3,(int)*psVar4,
-               temp_v2 - temp_v0 * (param_9 - 0xb),0x65);
-  return;
+    s32 hiddenRows = rowCount - 11;
+    FUN_001835b4(2, 0x2e, 0xf8, position->x + x, y, 100);
+    FUN_001835b4(2, 0x2e, 0xf5, position->x + x, y, 100);
+    FUN_001835b4(2, 0x2e, firstActive ? 0xf3 : 0xf1, position->x + x, y, 101);
+    FUN_001835b4(2, 0x2e, secondActive ? 0xf4 : 0xf2, position->x + x, y, 101);
+    u32 sprite = trackActive ? 0xf7 : 0xf6;
+    s16 *size = FUN_001834a4(0x2e, sprite)->size;
+    s32 height = size[1];
+    s32 rowHeight = height / subdivisions;
+    FUN_00185dd4(2, 0x2e, sprite, position->x + x, firstRow * rowHeight + y,
+                 size[0], height - rowHeight * hiddenRows, 101);
 }
-
-} /* extern "C" */
+}

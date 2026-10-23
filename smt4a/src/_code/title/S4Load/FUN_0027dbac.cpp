@@ -1,105 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027dbac` (_code @ 0x27dbac, 0x1e8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: shared float constant hoisting and immediate versus saved loop constants change the frame and VFP schedule. */
+#include "title/S4Load.h"
+#include "shard/S1ListPanel.h"
 
 extern "C" {
+extern S4Load* g_s4Load;
+extern RenderCtx* g_renderCtx;
+void efctSetSpeed(f32 alpha);
+void FUN_00183bb0(void);
+void rt_aeabi_memclr(void* memory, u32 size);
+void drawSetColorFromRGBA8(u32 color);
+void FUN_0016c4b8(void* context, const void* selection);
+void screenDrawShadedRect(s32 x, s32 y, s32 width, s32 height, s32 depth);
+SpriteInfo* FUN_001834a4(u32 group, u32 id);
+void FUN_00164168(const void* text, s32 x, s32 y, s32 fade, u32 start, s32 length, f32 scale);
 
-int FUN_00164168(unsigned int, int, int, int, int, int);
-int efctSetSpeed(void);
-int FUN_0016c4b8(unsigned int, int);
-int FUN_00183bb0(void);
-int drawSetColorFromRGBA8(int);
-int screenDrawShadedRect(int, int, int, int, int);
-int rt_aeabi_memclr(unsigned char [72], int);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-} void_stack;
-
-extern int g_s4Load; /* 0x589154 */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00164168. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_0016c4b8. */
-extern int FUN_001834a4(unsigned int, int);
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: screenDrawShadedRect. */
-/* Supplied declaration required: rt_aeabi_memclr. */
-
-
-unsigned int FUN_0027dbac(void)
-
+u32 FUN_0027dbac(void)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [72];
-  
-  temp_v0 = g_s4Load;
-  efctSetSpeed();
-  FUN_00183bb0();
-  rt_aeabi_memclr(temp_v3,0x40);
-  switch(*(unsigned int *)(temp_v0 + 8)) {
-  case 1:
-  case 2:
-    drawSetColorFromRGBA8(0xff);
-    efctSetSpeed();
-    FUN_0016c4b8(g_renderCtx,0);
-    screenDrawShadedRect(0,0,400,0xf0,0x65);
+    // The canonical byte padding starts at five, so expose its word state through a local view.
+    struct PhaseView { u8 prefix[8]; u32 phase; };
+    S4Load* work = g_s4Load;
+    PhaseView* state = reinterpret_cast<PhaseView*>(work);
+    u8 drawScratch[64];
+    efctSetSpeed(0.5f);
     FUN_00183bb0();
-    efctSetSpeed();
-    break;
-  case 3:
-  case 4:
-  case 5:
-  case 6:
-  case 7:
-  case 8:
-  case 9:
-  case 10:
-  case 0xb:
-  case 0xc:
-  case 0xd:
-  case 0xe:
-  case 0xf:
-  case 0x10:
-  case 0x11:
-  case 0x12:
-  case 0x13:
-  case 0x14:
-  case 0x15:
-  case 0x16:
-  case 0x17:
-  case 0x18:
-  case 0x19:
-  case 0x1a:
-  case 0x1b:
-  case 0x1c:
-  case 0x1d:
-  case 0x1e:
-    drawSetColorFromRGBA8(0xff);
-    FUN_0016c4b8(g_renderCtx,0);
-    screenDrawShadedRect(0,0,400,0xf0,0x65);
+    // This scratch initialization is present even though this draw path does not consume it.
+    rt_aeabi_memclr(drawScratch, sizeof(drawScratch));
+    switch (state->phase) {
+    case 1:
+    case 2:
+        drawSetColorFromRGBA8(0xFF);
+        efctSetSpeed(0.5f);
+        FUN_0016c4b8(g_renderCtx, NULL);
+        screenDrawShadedRect(0, 0, 400, 240, 101);
+        FUN_00183bb0();
+        efctSetSpeed(1.0f);
+        break;
+    case 3: case 4: case 5: case 6: case 7: case 8:
+    case 9: case 10: case 11: case 12: case 13: case 14:
+    case 15: case 16: case 17: case 18: case 19: case 20:
+    case 21: case 22: case 23: case 24: case 25: case 26:
+    case 27: case 28: case 29: case 30:
+        drawSetColorFromRGBA8(0xFF);
+        FUN_0016c4b8(g_renderCtx, NULL);
+        screenDrawShadedRect(0, 0, 400, 240, 101);
+        FUN_00183bb0();
+        break;
+    }
+    if (state->phase == 21 || state->phase == 22 || state->phase == 23) {
+        for (s32 index = 0; index < 7; ++index) {
+            SpriteInfo* sprite = FUN_001834a4(8, index + 105);
+            FUN_00164168(reinterpret_cast<const void*>(work->unk2B8), sprite->x - 10,
+                         sprite->y - 10, 101, 6, index, 1.0f);
+        }
+    }
+    efctSetSpeed(1.0f);
     FUN_00183bb0();
-  }
-  temp_v1 = *(int *)(temp_v0 + 8);
-  if ((temp_v1 == 0x15 || temp_v1 == 0x16) || temp_v1 == 0x17) {
-    temp_v1 = 0;
-    do {
-      temp_v2 = FUN_001834a4(8,temp_v1 + 0x69);
-      FUN_00164168(*(unsigned int *)(temp_v0 + 0x2b8),*(short *)(temp_v2 + 8) - 10,
-                   *(short *)(temp_v2 + 10) - 10,0x65,6,temp_v1);
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 7);
-  }
-  efctSetSpeed();
-  FUN_00183bb0();
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

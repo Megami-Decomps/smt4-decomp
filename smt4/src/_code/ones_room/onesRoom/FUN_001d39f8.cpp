@@ -1,85 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d39f8` (_code @ 0x1d39f8, 0x10c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation/initialization register lifetimes and script-argument load scheduling differ. */
+#include "ones_room/onesRoom.h"
+#include "AsdSDK/AsdDebug.h"
+#include <stddef.h>
+
+struct RoomScriptProcess {
+    u8 unk000[0x108];
+    u32 state;
+};
 
 extern "C" {
+void *asdMemoryAlloc(u32, u32, u32, u32, u32);
+void FUN_002898e4(void);
+void buttonHelpCreate(void);
+void FUN_00289880(void);
+void buttonHelpSetPreset(s32);
+void *asdLoadFileSyncDefault(const char *);
+RoomScriptProcess *FUN_00297060(void *, void *);
+void scrScriptProcessStartEntry(RoomScriptProcess *, s32);
+void FUN_00282bfc(s32, s32);
+s32 onesRoomTeardown(u32);
+void onesRoomSetEnabled(void);
+u32 asdProcessCreateSimple(const char *, s32, s32, s32,
+                          s32 (*)(u32), void (*)(void), void *);
+extern OnesRoom *g_onesRoom;
 
-int FUN_00282bfc(...);
-int FUN_00289880(...);
-int FUN_002898e4(...);
-int buttonHelpCreate(...);
-int scrScriptProcessStartEntry(...);
-int FUN_00297060(...);
-int buttonHelpSetPreset(...);
-int asdMemoryAlloc(...);
-int asdProcessCreateSimple(...);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern int onesRoomTeardown(...); /* 0x1a96fc */
-extern unsigned char LAB_001d3b3c; /* 0x1d3b3c */
-extern unsigned char LAB_001d3b54; /* 0x1d3b54 */
-extern unsigned char LAB_001d3b74; /* 0x1d3b74 */
-extern unsigned char LAB_001fc560; /* 0x1fc560 */
-extern unsigned int *g_onesRoom; /* 0x44d1c8 */
-
-/* Supplied declaration required: FUN_00282bfc. */
-/* Supplied declaration required: FUN_00289880. */
-/* Supplied declaration required: FUN_002898e4. */
-/* Supplied declaration required: buttonHelpCreate. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-extern unsigned int asdLoadFileSyncDefault(unsigned char *);
-
-
-void FUN_001d39f8(int param_1)
-
+/* Create the room script, UI, and lifetime job. */
+void FUN_001d39f8(s32 inactive)
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned char *puVar4;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAlloc(0x100,0x100,0,0x14,1);
-  g_onesRoom = puVar1;
-  *puVar1 = 0;
-  puVar1[1] = 0;
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1[4] = 0;
-  if (param_1 == 0) {
-    *(unsigned char *)(puVar1 + 4) = 1;
-  }
-  FUN_002898e4();
-  buttonHelpCreate();
-  FUN_00289880();
-  buttonHelpSetPreset(0xa2);
-  temp_v0 = asdLoadFileSyncDefault(&LAB_001d3b3c);
-  puVar1[1] = temp_v0;
-  temp_v0 = asdLoadFileSyncDefault(&LAB_001d3b54);
-  puVar1[3] = temp_v0;
-  temp_v1 = puVar1[1];
-  FUN_00297060(temp_v1,temp_v0);
-  puVar1[2] = temp_v1;
-  *(unsigned int *)(temp_v1 + 0x108) = 2;
-  scrScriptProcessStartEntry(puVar1[2],0);
-  *(unsigned char *)((int)puVar1 + 0x11) = 0;
-  if (*(char *)(puVar1 + 4) != '\0') {
-    FUN_00282bfc(0,0xff);
-    FUN_00282bfc(1,0xff);
-  }
-  puVar4 = &LAB_001d3b74;
-  asdProcessCreateSimple(&LAB_001d3b74,2,0,0,onesRoomTeardown,&LAB_001fc560,g_onesRoom);
-  *g_onesRoom = (unsigned int)puVar4;
-  return;
+    /* The shared OnesRoom padding begins at 0x04 and ends at 0x11:
+       adding a pointer-aligned resource union there would move freeOnEnd. */
+    struct RoomCreateView {
+        u32 job;
+        void *dataA;
+        RoomScriptProcess *process;
+        void *dataB;
+        union {
+            u32 word;
+            struct {
+                u8 active;
+                u8 freeOnEnd;
+                u8 unk12[2];
+            } bytes;
+        } flags;
+    };
+    typedef char RoomCreateViewOffsets[
+        offsetof(RoomCreateView, flags) == 0x10 &&
+        sizeof(RoomCreateView) == 0x14 ? 1 : -1];
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\ones_room\\onesRoom.cpp", 125);
+    RoomCreateView *room = (RoomCreateView *)asdMemoryAlloc(0x100, 0x100, 0, sizeof(RoomCreateView), 1);
+    g_onesRoom = (OnesRoom *)room;
+    room->job = 0;
+    room->dataA = NULL;
+    room->process = NULL;
+    room->dataB = NULL;
+    room->flags.word = 0;
+    if (inactive == 0) {
+        room->flags.bytes.active = 1;
+    }
+    FUN_002898e4();
+    buttonHelpCreate();
+    FUN_00289880();
+    buttonHelpSetPreset(0xA2);
+    room->dataA = asdLoadFileSyncDefault("ones_room/onesRoom.bf");
+    room->dataB = asdLoadFileSyncDefault("ones_room/onesRoom.mbm");
+    room->process = FUN_00297060(room->dataA, room->dataB);
+    room->process->state = 2;
+    scrScriptProcessStartEntry(room->process, 0);
+    room->flags.bytes.freeOnEnd = 0;
+    if (room->flags.bytes.active) {
+        FUN_00282bfc(0, 0xFF);
+        FUN_00282bfc(1, 0xFF);
+    }
+    g_onesRoom->job = asdProcessCreateSimple("onesRoom C", 2, 0, 0,
+        onesRoomTeardown, onesRoomSetEnabled, g_onesRoom);
 }
-
-} /* extern "C" */
+}

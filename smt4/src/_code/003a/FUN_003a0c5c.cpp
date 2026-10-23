@@ -1,85 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a0c5c` (_code @ 0x3a0c5c, 0x104 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains an animation-ready accessor boundary; readiness load and trailing phase stores differ. */
+#include "ui/SceneExitTransition.h"
 
 extern "C" {
+void pointConvertToFloat(f32 *position, s32 x, s32 y);
+void FUN_00233240(void *transition, s32 mode);
+void FUN_00297684(void *script);
+void FUN_0029ee6c(s32 mode, u32 color);
+void *lmapSceneGetScript(void);
+s32 FUN_002bf818(SceneSprite *animation);
+s32 objSlotsAllEmpty(void *script);
+s32 vec2GetYInt(const SceneSprite *animation);
+s32 vec2GetXInt(const SceneSprite *animation);
 
-int pointConvertToFloat(unsigned int *, unsigned int, unsigned int);
-int FUN_00233240(unsigned int *, int);
-int FUN_00297684(void);
-int FUN_0029ee6c(int, int);
-int lmapSceneGetScript(void);
-int FUN_002bf818(unsigned int *);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-/* Supplied declaration required: pointConvertToFloat. */
-/* Supplied declaration required: FUN_00233240. */
-extern int objSlotsAllEmpty(void);
-/* Supplied declaration required: FUN_00297684. */
-/* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: lmapSceneGetScript. */
-extern unsigned int vec2GetYInt(unsigned int *);
-extern unsigned int vec2GetXInt(unsigned int *);
-/* Supplied declaration required: FUN_002bf818. */
-
-
-void FUN_003a0c5c(unsigned int *param_1)
-
+/* Finish the animated exit, then wait for the scene script's objects to disappear. */
+void FUN_003a0c5c(SceneExitTransition *work)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  
-  temp_v0 = lmapSceneGetScript();
-  if (temp_v0 != 0) {
-    lmapSceneGetScript();
-    FUN_00297684();
-  }
-  temp_v1 = param_1[2];
-  if (temp_v1 == 0) {
-    FUN_00233240(param_1 + 0xea,1);
-    param_1[2] = 1;
-    FUN_0029ee6c(0,0x323232ff);
-    return;
-  }
-  if (temp_v1 != 1) {
-    if (temp_v1 != 2) {
-      return;
-    }
-  }
-  else {
-    puVar5 = param_1 + 0x115;
-    FUN_002bf818(puVar5);
-    temp_v2 = vec2GetYInt(puVar5);
-    temp_v3 = vec2GetXInt(puVar5);
-    pointConvertToFloat(param_1 + 0xe0,temp_v3,temp_v2);
-    if (*(char *)((int)param_1 + 0x4de) == '\0') {
-      return;
-    }
-    *param_1 = *param_1 & 0xfffff1ff;
-    temp_v0 = lmapSceneGetScript();
-    if (temp_v0 == 0) {
-      param_1[1] = 0x12;
-      param_1[2] = 0;
-      return;
-    }
-    param_1[2] = 2;
-  }
-  lmapSceneGetScript();
-  temp_v0 = objSlotsAllEmpty();
-  if (temp_v0 == 0) {
-    return;
-  }
-  param_1[1] = 0x12;
-  param_1[2] = 0;
-  return;
-}
+    if (lmapSceneGetScript() != NULL)
+        FUN_00297684(lmapSceneGetScript());
 
-} /* extern "C" */
+    switch (work->phase) {
+    case 0:
+        FUN_00233240(work->transition, 1);
+        work->phase = 1;
+        FUN_0029ee6c(0, 0x323232ff);
+        return;
+    case 1: {
+        SceneSprite *animation = &work->animation;
+        FUN_002bf818(animation);
+        s32 y = vec2GetYInt(animation);
+        s32 x = vec2GetXInt(animation);
+        pointConvertToFloat(work->position, x, y);
+        if (animation->ready == 0)
+            return;
+        work->flags &= ~0xe00;
+        if (lmapSceneGetScript() == NULL) {
+            work->state = 18;
+            work->phase = 0;
+            return;
+        }
+        work->phase = 2;
+        break;
+    }
+    case 2:
+        break;
+    default:
+        return;
+    }
+    if (objSlotsAllEmpty(lmapSceneGetScript())) {
+        work->state = 18;
+        work->phase = 0;
+    }
+}
+}

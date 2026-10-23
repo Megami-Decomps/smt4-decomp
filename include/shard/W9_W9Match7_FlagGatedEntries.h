@@ -5,9 +5,27 @@
 #include <stddef.h>
 
 struct FlagGatedEntry {
-    /* 0x000 */ u8 unk000[0x12C];
+    union {
+        /* 0x000 */ u8 unk000[0x12C];
+        struct {
+            u8 unk000BeforeCreation[0x124];
+            /* 0x124 */ u32 handle;
+            /* 0x128 */ u8 kind;
+        } creation;
+    };
     /* 0x12C */ void *object;
-    /* 0x130 */ u8 unk130[0x30];
+    union {
+        /* 0x130 */ u8 unk130[0x30];
+        struct {
+            /* 0x130 */ u32 id;
+            /* 0x134 */ s32 state;
+        } creationState;
+        struct {
+            u8 unk130BeforeLifetime[0x2C];
+            /* 0x15C */ u16 frame;
+            /* 0x15E */ s16 index;
+        } lifetime;
+    };
     /* 0x160 */ s16 requiredFlag;
     /* 0x162 */ s16 excludedFlag;
     /* 0x164 */ u8 disabled;
@@ -27,5 +45,12 @@ typedef char FlagGatedEntryLayoutCheck[
     offsetof(FlagGatedEntry, disabled) == 0x164 ? 1 : -1];
 typedef char FlagGatedEntryStateLayoutCheck[
     sizeof(FlagGatedEntryState) == 8 && offsetof(FlagGatedEntryState, count) == 4 ? 1 : -1];
+typedef char FlagGatedEntryCreationOffsetsCheck[
+    offsetof(FlagGatedEntry, creation.handle) == 0x124 &&
+    offsetof(FlagGatedEntry, creation.kind) == 0x128 &&
+    offsetof(FlagGatedEntry, creationState.id) == 0x130 &&
+    offsetof(FlagGatedEntry, creationState.state) == 0x134 &&
+    offsetof(FlagGatedEntry, lifetime.frame) == 0x15C &&
+    offsetof(FlagGatedEntry, lifetime.index) == 0x15E && sizeof(FlagGatedEntry) == 0x17C ? 1 : -1];
 
 #endif

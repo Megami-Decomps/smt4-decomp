@@ -1,63 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022a190` (_code @ 0x22a190, 0x128 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: event asset loader register scheduling has not matched retail. */
+#include "battle/btlEvent.h"
+#include "battle/BattleEventAssets.h"
 
 extern "C" {
+extern void *g_aocSystem;
+extern const char DAT_00400950[]; /* battle/event/%s/%s.mbm */
+extern const char DAT_00400938[]; /* battle/event/%s/%s.bf */
+void memClear(void *destination, u32 bytes);
+s32 textFormatBuffer(char *output, const char *format, ...);
+s32 FUN_0022a2c4(void *system, u32 archive);
+void aocQueueType20(void *system, u32 archive, void **output, const char *path);
+void aocQueueType1f(void *system, u32 archive, void **output, const char *path);
+void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
+void FUN_0022a07c(BtlEvent *event, BattleEventAssetSource *source);
 
-int FUN_0022a07c(unsigned int *, int);
-int aocQueueType1f(unsigned int, unsigned int, unsigned int *, unsigned char [128]);
-int asdLoadFileAsyncSimple(unsigned char [128], unsigned int *, int);
-int textFormatBuffer(...);
-int memClear(unsigned char [128], int);
-int aocQueueType20(unsigned int, unsigned int, unsigned int *, unsigned char [128]);
-
-extern unsigned int g_aocSystem; /* 0x433158 */
-
-/* Supplied declaration required: FUN_0022a07c. */
-/* Supplied declaration required: aocQueueType1f. */
-extern int FUN_0022a2c4(unsigned int, unsigned int);
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: aocQueueType20. */
-
-
-void FUN_0022a190(unsigned int *param_1,int param_2)
-
+/* Load the battle event's message bank and script, using add-on archives when available. */
+void FUN_0022a190(BtlEvent *event, BattleEventAssetSource *source)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [128];
-  unsigned char temp_v2 [128];
-  
-  memClear(temp_v1,0x80);
-  textFormatBuffer(temp_v1,"battle/event/%s/%s.mbm",param_2 + 0x100);
-  temp_v0 = FUN_0022a2c4(g_aocSystem,*(unsigned int *)(param_2 + 0xc4));
-  if (temp_v0 != 0) {
-    aocQueueType20(g_aocSystem,*(unsigned int *)(param_2 + 0xc4),param_1 + 3,temp_v1);
-  }
-  else {
-    asdLoadFileAsyncSimple(temp_v1,param_1 + 3,0);
-  }
-  *param_1 = 4;
-  if (param_1[3] != 0) {
-    *param_1 = 5;
-    memClear(temp_v2,0x80);
-    textFormatBuffer(temp_v2,"battle/event/%s/%s.bf",param_2 + 0x100);
-    temp_v0 = FUN_0022a2c4(g_aocSystem,*(unsigned int *)(param_2 + 0xc4));
-    if (temp_v0 != 0) {
-      aocQueueType1f(g_aocSystem,*(unsigned int *)(param_2 + 0xc4),param_1 + 4,temp_v2);
+    char messagePath[128];
+    char scriptPath[128];
+    memClear(messagePath, sizeof(messagePath));
+    textFormatBuffer(messagePath, DAT_00400950, source->name, source->name);
+    if (FUN_0022a2c4(g_aocSystem, source->archiveId) != 0)
+        aocQueueType20(g_aocSystem, source->archiveId, &event->dataB, messagePath);
+    else
+        asdLoadFileAsyncSimple(messagePath, &event->dataB, 0);
+    event->state = 4;
+    if (event->dataB != NULL) {
+        event->state = 5;
+        memClear(scriptPath, sizeof(scriptPath));
+        textFormatBuffer(scriptPath, DAT_00400938, source->name, source->name);
+        if (FUN_0022a2c4(g_aocSystem, source->archiveId) != 0)
+            aocQueueType1f(g_aocSystem, source->archiveId, &event->dataC, scriptPath);
+        else
+            asdLoadFileAsyncSimple(scriptPath, &event->dataC, 0);
+        event->state = 6;
+        if (event->dataC != NULL) {
+            event->state = 7;
+            FUN_0022a07c(event, source);
+        }
     }
-    else {
-      asdLoadFileAsyncSimple(temp_v2,param_1 + 4,0);
-    }
-    *param_1 = 6;
-    if (param_1[4] != 0) {
-      *param_1 = 7;
-      FUN_0022a07c(param_1,param_2);
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -3,6 +3,7 @@
 #define SHARD_PLAYSCENE_H
 
 #include "common.h"
+#include "ui/UiSpriteState.h"
 #include <stddef.h>
 
 /* A 100-byte part of the scene (see objectPartRunUnlessLocked). */
@@ -11,7 +12,13 @@ typedef struct PlayScenePart {
 } PlayScenePart;
 
 typedef struct PlayScene {
-    /* 0x0000 */ u8 unk0000[0x1C4];
+    union {
+        /* 0x0000 */ u8 unk0000[0x1C4];
+        struct {
+            u8 prefix0000[0xAC];
+            /* 0x00AC */ UiSpriteState animation;
+        } intro;
+    };
     /* 0x01C4 */ u8 timerSub[1];
     /* 0x01C5 */ u8 unk01C5[0x7A7];
     /* 0x096C */ u8 timerC[1];
@@ -45,11 +52,29 @@ typedef struct PlayScene {
     /* 0x3084 */ u8 unk3084;
     /* 0x3085 */ u8 unk3085[0x3];
     /* 0x3088 */ PlayScenePart parts[1]; /* indexed by unk305C */
-    /* 0x30EC */ u8 unk30EC[0x282C];
+    union {
+        /* 0x30EC */ u8 unk30EC[0x282C];
+        struct {
+            u8 unk30EC[0x2BC];
+            /* 0x33A8 */ PlayScenePart selector;
+            u8 unk340C[0x54];
+            /* 0x3460 */ s32 targets[41];
+            /* 0x3504 */ s32 fallback;
+        } targeting;
+    };
     /* 0x5918 */ u32 unk5918;
 } PlayScene;
 
 typedef char PlaySceneOffsets[offsetof(PlayScene, slotCount) == 0x3072 && offsetof(PlayScene, unk307F) == 0x307F &&
     offsetof(PlayScene, parts) == 0x3088 && offsetof(PlayScene, unk5918) == 0x5918 ? 1 : -1];
+typedef char PlaySceneTargetingOffsets[
+    offsetof(PlayScene, targeting.selector) == 0x33A8 &&
+    offsetof(PlayScene, targeting.targets) == 0x3460 &&
+    offsetof(PlayScene, targeting.fallback) == 0x3504 &&
+    sizeof(PlayScene) == 0x591C ? 1 : -1];
+typedef char PlaySceneIntroAnimationOffsets[
+    offsetof(PlayScene, intro.animation) == 0xAC &&
+    offsetof(PlayScene, intro.animation.unk20) == 0xCC &&
+    sizeof(PlayScene) == 0x591C ? 1 : -1];
 
 #endif

@@ -113,7 +113,7 @@ unsigned int FUN_003d8f60(unsigned int *param_1,int param_2)
     if (iVar4 == 0) {
       iVar4 = FUN_002bfde4(1);
       if (iVar4 == 0) {
-        FUN_003d88dc(param_1,param_2);
+        btlDebugNavigateActionEditor(param_1,param_2);
         return 0;
       }
       uVar2 = 0;
@@ -129,7 +129,7 @@ unsigned int FUN_003d8f60(unsigned int *param_1,int param_2)
       FUN_002c43b4(param_1[3],0);
       param_1[3] = 0;
       if (uVar3 < 3) {
-        FUN_003d8c88(param_1,param_2,*(unsigned int *)(param_2 + 0x58),uVar3 & 0xffff);
+        btlCameraEditorInitializeList(param_1,param_2,*(unsigned int *)(param_2 + 0x58),uVar3 & 0xffff);
         uVar2 = 8;
         break;
       }

@@ -1,57 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00405c94` (_code @ 0x405c94, 0x150 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: adjacent parameter table addresses load independently instead of retail's subtractions. */
+#include "ui/HunterDatabaseWork.h"
 
 extern "C" {
+void paramsClearPacket(void *);
+void paramsInit(void *, const void *, u32, const void *, u32, u32, u32, u32, u32, const void *, u32);
+void FUN_0014e188(UiSpriteState *, u32, u32, void *, u32, f32);
+void uiSpriteSetKeyframe(UiSpriteState *, u32, u32);
+void uiSpriteSetImageKeyframe(UiSpriteState *, u32, u32);
+void uiSpriteSelectAnim(UiSpriteState *, s32);
+extern u8 DAT_0052cf4c[], DAT_0052cfb8[], DAT_0052d000[];
 
-int FUN_0014e188(...);
-int paramsInit(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int uiSpriteSelectAnim(...);
-int uiSpriteSetKeyframe(int, int, int);
-int uiSpriteSetImageKeyframe(...);
-int paramsClearPacket(int);
-
-/* stack frame of param_1: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern unsigned char DAT_0052cf4c; /* 0x52cf4c */
-extern unsigned char DAT_0052cfb8; /* 0x52cfb8 */
-extern unsigned char DAT_0052d000; /* 0x52d000 */
-
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: paramsClearPacket. */
-
-
-void FUN_00405c94(int param_1)
-
+// Configure the hunter database's five widgets from its shared parameter packet.
+void FUN_00405c94(HunterDatabaseWork *work)
 {
-/* irregular: 6 native warning(s); review required */
-  paramsClearPacket(param_1 + 300);
-  paramsInit(param_1 + 300,&DAT_0052cf4c,0x6c,&DAT_0052cfb8,0x48,0,0,0,0,&DAT_0052d000,0xe0);
-  FUN_0014e188(param_1 + 0x14c,0x32,0,param_1 + 300,0xc9);
-  uiSpriteSetKeyframe(param_1 + 0x14c,1,0);
-  uiSpriteSetImageKeyframe(param_1 + 0x14c,0);
-  FUN_0014e188(param_1 + 0x1d8,0x32,0,param_1 + 300,0xc9);
-  uiSpriteSetKeyframe(param_1 + 0x1d8,1,0);
-  uiSpriteSetImageKeyframe(param_1 + 0x1d8,0);
-  FUN_0014e188(param_1 + 0x264,0x32,0,param_1 + 300,0xc9);
-  FUN_0014e188(param_1 + 0x2f0,0x32,0,param_1 + 300,0xc9);
-  uiSpriteSelectAnim(param_1 + 0x2f0,0);
-  FUN_0014e188(param_1 + 0x37c,0x32,0,param_1 + 300,0xc9);
-  uiSpriteSelectAnim(param_1 + 0x37c,1);
-  return;
+    paramsClearPacket(work->setup.parameters);
+    paramsInit(work->setup.parameters, DAT_0052cf4c, 0x6c, DAT_0052cfb8, 0x48,
+               0, 0, 0, 0, DAT_0052d000, 0xe0);
+    FUN_0014e188(&work->setup.widgets[0], 0x32, 0, work->setup.parameters, 0xc9, 1.0f);
+    uiSpriteSetKeyframe(&work->setup.widgets[0], 1, 0);
+    uiSpriteSetImageKeyframe(&work->setup.widgets[0], 0, 0);
+    FUN_0014e188(&work->setup.widgets[1], 0x32, 0, work->setup.parameters, 0xc9, 1.0f);
+    uiSpriteSetKeyframe(&work->setup.widgets[1], 1, 0);
+    uiSpriteSetImageKeyframe(&work->setup.widgets[1], 0, 0);
+    FUN_0014e188(&work->setup.widgets[2], 0x32, 0, work->setup.parameters, 0xc9, 1.0f);
+    FUN_0014e188(&work->setup.widgets[3], 0x32, 0, work->setup.parameters, 0xc9, 1.0f);
+    uiSpriteSelectAnim(&work->setup.widgets[3], 0);
+    FUN_0014e188(&work->setup.widgets[4], 0x32, 0, work->setup.parameters, 0xc9, 1.0f);
+    uiSpriteSelectAnim(&work->setup.widgets[4], 1);
 }
-
-} /* extern "C" */
+}

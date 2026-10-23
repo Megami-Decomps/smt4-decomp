@@ -93,8 +93,20 @@ typedef struct Flag8 {
 
 typedef struct LinkEntry10 {
     /* 0x00 */ void *obj;
-    /* 0x04 */ u8 unk04[0xC];
+    union {
+        /* 0x04 */ u8 unk04[0xC];
+        struct {
+            /* 0x04 */ s32 track;
+            /* 0x08 */ s32 frame;
+            /* 0x0C */ s32 remaining;
+        } animation;
+    };
 } LinkEntry10;
+typedef char LinkEntry10AnimationLayoutCheck[
+    sizeof(LinkEntry10) == 0x10 &&
+    __INTADDR__(&((LinkEntry10 *)0)->animation.track) == 4 &&
+    __INTADDR__(&((LinkEntry10 *)0)->animation.frame) == 8 &&
+    __INTADDR__(&((LinkEntry10 *)0)->animation.remaining) == 0xC ? 1 : -1];
 
 typedef struct BtlStateB {
     /* 0x00 */ u8 unk00[0x2002];

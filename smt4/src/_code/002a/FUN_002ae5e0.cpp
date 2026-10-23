@@ -1,105 +1,83 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ae5e0` (_code @ 0x2ae5e0, 0x1b0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Glyph-case tail layout, work/index saved registers, timer argument scheduling and the selected-field address differ. */
+#include "ui/ButtonHelp.h"
+#include <stddef.h>
 
 extern "C" {
-
-int FUN_002a9fdc(int, int);
-int FUN_002aa024(int, int);
-int FUN_002ae028(int);
-int timerStart(int, int, int);
-int FUN_002bee58(int, int);
-
-extern unsigned char g_buttonHelp; /* 0x43da28 */
-
-/* Supplied declaration required: FUN_002a9fdc. */
-/* Supplied declaration required: FUN_002aa024. */
-/* Supplied declaration required: FUN_002ae028. */
-/* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bee58. */
-
+extern ButtonHelpGlobals g_buttonHelp;
+void FUN_002bee58(ButtonHelpDisplayUnit *unit, s32 value);
+u16 FUN_002aa024(s32 resource, s32 glyph);
+void FUN_002a9fdc(ButtonHelpDisplayUnit *unit, s32 value);
+void timerStart(ButtonHelpDisplayUnit *unit, s32 mode, s32 value);
+void FUN_002ae028(void *animation);
 
 void FUN_002ae5e0(void)
-
 {
-/* irregular: 5 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned short temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-  temp_v4 = 0;
-  do {
-    FUN_002bee58(temp_v1 + temp_v4 * 0x8c + 0x34,0);
-    temp_v0 = *(char *)(temp_v1 + temp_v4 * 4 + 0x494);
-    if (temp_v0 != '\0') {
-      if (temp_v0 != '\a') {
-        if (temp_v0 != '\b') {
-          if (temp_v0 != '\t') {
-            if (((!(temp_v0 == '\n' || temp_v0 == '\v')) && (!(temp_v0 == '\f' || temp_v0 == '\r'))) &&
-               (!((temp_v0 == '\x0e' || temp_v0 == '\x0f') || temp_v0 == '\x10'))) {
-              temp_v2 = FUN_002aa024(0x12,temp_v4 + 0x1f);
-              *(unsigned short *)(temp_v1 + temp_v4 * 2 + 0x4ac) = temp_v2;
-            }
-            else {
-              switch(temp_v4) {
-              case 0:
-              case 1:
-                temp_v2 = FUN_002aa024(0x12,0x73);
-                *(unsigned short *)(temp_v1 + temp_v4 * 2 + 0x4ac) = temp_v2;
+    /* The initialization tail extends past the shared selection-only projection. */
+    struct InitializationView {
+        u8 unk000[0xC];
+        s32 phase;
+        s32 state;
+        u8 unk014[0x20];
+        ButtonHelpDisplayUnit choices[6];
+        ButtonHelpDisplayUnit sides[2];
+        ButtonHelpKind kinds[6];
+        u16 glyphs[6];
+        s32 cursor;
+        u16 selected;
+        u8 animation[8];
+        u8 ready;
+        u8 unk4C7;
+        u8 mode;
+    };
+    typedef char InitializationOffsetsCheck[offsetof(InitializationView, choices) == 0x34 &&
+        offsetof(InitializationView, kinds) == 0x494 && offsetof(InitializationView, glyphs) == 0x4AC &&
+        offsetof(InitializationView, animation) == 0x4BE && offsetof(InitializationView, mode) == 0x4C8 ? 1 : -1];
+    InitializationView *work = (InitializationView *)g_buttonHelp.work;
+    for (s32 index = 0; index < 6; ++index) {
+        FUN_002bee58(&work->choices[index], 0);
+        u8 kind = work->kinds[index].kind;
+        if (kind == 0) {
+            continue;
+        }
+        if (kind == 7) {
+            work->glyphs[index] = FUN_002aa024(0x12, 0x73);
+        } else if (kind == 8) {
+            work->glyphs[index] = FUN_002aa024(0x12, 0x59);
+        } else if (kind == 9) {
+            work->glyphs[index] = FUN_002aa024(0x12, 0x85);
+        } else if ((kind == 10 || kind == 11) || (kind == 12 || kind == 13) ||
+                   (kind == 14 || kind == 15 || kind == 16)) {
+            switch (index) {
+            case 0:
+            case 1:
+                work->glyphs[index] = FUN_002aa024(0x12, 0x73);
                 break;
-              case 2:
-              case 3:
-                temp_v2 = FUN_002aa024(0x12,0x85);
-                *(unsigned short *)(temp_v1 + temp_v4 * 2 + 0x4ac) = temp_v2;
+            case 2:
+            case 3:
+                work->glyphs[index] = FUN_002aa024(0x12, 0x85);
                 break;
-              case 4:
-              case 5:
-                temp_v2 = FUN_002aa024(0x12,0x8c);
-                *(unsigned short *)(temp_v1 + temp_v4 * 2 + 0x4ac) = temp_v2;
-              }
+            case 4:
+            case 5:
+                work->glyphs[index] = FUN_002aa024(0x12, 0x8C);
+                break;
             }
-          }
-          else {
-            temp_v2 = FUN_002aa024(0x12,0x85);
-            *(unsigned short *)(temp_v1 + temp_v4 * 2 + 0x4ac) = temp_v2;
-          }
+        } else {
+            work->glyphs[index] = FUN_002aa024(0x12, index + 0x1F);
         }
-        else {
-          temp_v2 = FUN_002aa024(0x12,0x59);
-          *(unsigned short *)(temp_v1 + temp_v4 * 2 + 0x4ac) = temp_v2;
-        }
-      }
-      else {
-        temp_v2 = FUN_002aa024(0x12,0x73);
-        *(unsigned short *)(temp_v1 + temp_v4 * 2 + 0x4ac) = temp_v2;
-      }
     }
-    temp_v4 = temp_v4 + 1;
-    if (temp_v4 >= 6) {
-      temp_v4 = 0;
-      do {
-        temp_v3 = temp_v1 + temp_v4 * 0x8c + 0x37c;
-        if (*(char *)(temp_v1 + 0x4c8) != '\x01') {
-          FUN_002a9fdc(temp_v3,0);
+    for (s32 index = 0; index < 2; ++index) {
+        if (work->mode == 1) {
+            timerStart(&work->sides[index], 2, 0);
+        } else {
+            FUN_002a9fdc(&work->sides[index], 0);
         }
-        else {
-          timerStart(temp_v3,2,0);
-        }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 2);
-      *(unsigned int *)(temp_v1 + 0x4b8) = 0;
-      *(unsigned short *)(temp_v1 + 0x4bc) = 0;
-      FUN_002ae028(temp_v1 + 0x4be);
-      *(unsigned char *)(temp_v1 + 0x4c6) = 1;
-      temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-      *(unsigned int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0xc) = 0;
-      *(unsigned int *)(temp_v1 + 0x10) = 1;
-      return;
     }
-  } while( 1 );
+    work->cursor = 0;
+    work->selected = 0;
+    FUN_002ae028(work->animation);
+    work->ready = 1;
+    work = (InitializationView *)g_buttonHelp.work;
+    work->phase = 0;
+    work->state = 1;
 }
-
-} /* extern "C" */
+}

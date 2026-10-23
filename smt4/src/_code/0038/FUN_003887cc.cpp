@@ -19,7 +19,7 @@ int FUN_002bcc60(...);
 int FUN_002c526c(...);
 int jyoucyuGetTableEntry(...);
 int FUN_00385f74(...);
-int FUN_00387b54(...);
+int aocFinishHandleOperation(...);
 int FUN_00388f3c(...);
 int FUN_0038b4f0(...);
 int FUN_0038b760(...);
@@ -63,7 +63,7 @@ extern int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_00385f74. */
-/* Supplied declaration required: FUN_00387b54. */
+/* Supplied declaration required: aocFinishHandleOperation. */
 /* Supplied declaration required: FUN_00388f3c. */
 /* Supplied declaration required: FUN_0038b4f0. */
 /* Supplied declaration required: FUN_0038b760. */
@@ -133,7 +133,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
         FUN_002b4b88(*(int *)(param_2 + 0x318),destroyObj0055c6e4);
         *(unsigned int *)(param_2 + 0x318) = 0;
       }
-      FUN_00387b54(&temp_v8,param_2);
+      aocFinishHandleOperation(&temp_v8,param_2);
       temp_v3 = byteIsAtLeast100(&temp_v8);
       if (temp_v3 != 0) {
         temp_v12 = temp_v9;

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002cf150(u32 a, u32 b);
+int smokeFadeInitialize(u32 a, u32 b);
 int FUN_002efd64(void);
 extern int FUN_001ca720(void);
 extern int scrGetCommandFrame(void);
@@ -23,7 +23,7 @@ u8 FUN_001a09cc(void)
     }
     a = scrGetArg(0);
     b = scrGetArg(1);
-    FUN_002cf150(a, b);
+    smokeFadeInitialize(a, b);
     return 0;
 }
 

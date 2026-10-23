@@ -1,120 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00316580` (_code @ 0x316580, 0x13c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: horizontal settle animation branch scheduling differs from retail. */
+#include "ui/UiSpriteState.h"
 
 extern "C" {
+void FUN_001807a0(UiSpriteState *sprite, f32 rate);
+void FUN_00182348(UiSpriteState *sprite, f32 rate);
+void FUN_00181948(UiSpriteState *sprite, f32 rate);
 
-int FUN_001807a0(...);
-int FUN_00181948(...);
-int FUN_00182348(...);
-
-typedef struct fn_00316580_arg0 fn_00316580_arg0;
-struct fn_00316580_arg0 {
-    unsigned char pad_0x0[0x10];
-    int field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x3e];
-    short field_0x52; /* +0x52 */
-    unsigned char pad_0x54[0x31];
-    undefined1 field_0x85; /* +0x85 */
-    byte field_0x86; /* +0x86 */
-    byte field_0x87; /* +0x87 */
-    byte field_0x88; /* +0x88 */
-    byte field_0x89; /* +0x89 */
-    byte field_0x8a; /* +0x8a */
-};
-
-/* Supplied declaration required: FUN_001807a0. */
-/* Supplied declaration required: FUN_00181948. */
-/* Supplied declaration required: FUN_00182348. */
-
-
-unsigned int FUN_00316580(fn_00316580_arg0 *param_1,int param_2)
-
+/* Slide a sprite inward from either side, decelerating before the final position. */
+u32 FUN_00316580(UiSpriteState *sprite, s32 fromRight)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v3 = 1;
-  temp_v2 = (int)param_1->field_0x52;
-  if ((temp_v2 == 0) && (param_1->field_0x10 = 0x3c000, param_2 == 0)) {
-    param_1->field_0x10 = -0x3c000;
-    temp_v1 = -0xb;
-  }
-  else {
-    temp_v1 = 0xb;
-    if (param_2 == 0) {
-      temp_v1 = -0xb;
+    u32 settled = 1;
+    s32 frame = sprite->motionFrame;
+    if (frame == 0)
+        sprite->motion.horizontalOffset = fromRight != 0 ? 0x3C000 : -0x3C000;
+    s32 speed = fromRight != 0 ? 11 : -11;
+    if (frame > 0) {
+        if (fromRight != 0) {
+            speed -= frame;
+            if (speed < 0)
+                speed = 0;
+        } else {
+            speed += frame;
+            if (speed > 0)
+                speed = 0;
+        }
     }
-  }
-  if (0 < temp_v2) {
-    if (param_2 != 0) {
-      temp_v1 = temp_v1 - temp_v2;
-      if (temp_v1 < 0) {
-        temp_v1 = 0;
-      }
+    sprite->motion.horizontalOffset -= speed * 0x1000;
+    s32 position = sprite->motion.horizontalOffset >> 12;
+    if ((fromRight != 0 && position <= 0) || (fromRight == 0 && position >= 0)) {
+        sprite->motion.horizontalOffset = 0;
+        sprite->completion.horizontal = 1;
+    } else {
+        settled = 0;
+        sprite->completion.complete = 0;
     }
-    else {
-      temp_v1 = temp_v1 + temp_v2;
-      if (0 < temp_v1) {
-        temp_v1 = 0;
-      }
-    }
-  }
-  temp_v2 = param_1->field_0x10 + temp_v1 * -0x1000;
-  param_1->field_0x10 = temp_v2;
-  temp_v2 = temp_v2 >> 0xc;
-  if (param_2 != 0) {
-    if (0 >= temp_v2) {
-      param_1->field_0x10 = 0;
-      param_1->field_0x86 = 1;
-    }
-    else {
-      temp_v3 = 0;
-      param_1->field_0x8a = 0;
-    }
-  }
-  else if (-1 < temp_v2) {
-    param_1->field_0x10 = 0;
-    param_1->field_0x86 = 1;
-  }
-  else {
-    temp_v3 = 0;
-    param_1->field_0x8a = 0;
-  }
-  param_1->field_0x52 = param_1->field_0x52 + 1;
-  FUN_001807a0(param_1);
-  FUN_00182348(param_1);
-  FUN_00181948(param_1);
-  temp_v4 = param_1->field_0x86 != 0;
-  temp_v0 = 0;
-  if (temp_v4) {
-    temp_v0 = param_1->field_0x87;
-  }
-  if (temp_v4 && temp_v0 != 0) {
-    temp_v4 = param_1->field_0x88 != 0;
-    temp_v0 = 0;
-    if (temp_v4) {
-      temp_v0 = param_1->field_0x89;
-    }
-    if (temp_v4 && temp_v0 != 0) {
-      param_1->field_0x8a = 1;
-      param_1->field_0x85 = 1;
-      if (param_1->field_0x8a == 0) {
-        temp_v3 = 0;
-      }
-      return temp_v3;
-    }
-  }
-  param_1->field_0x8a = 0;
-  param_1->field_0x85 = 1;
-  if (param_1->field_0x8a == 0) {
-    temp_v3 = 0;
-  }
-  return temp_v3;
+    sprite->motionFrame++;
+    FUN_001807a0(sprite, 1.0f);
+    FUN_00182348(sprite, 1.0f);
+    FUN_00181948(sprite, 1.0f);
+    if (sprite->completion.horizontal != 0 && sprite->completion.vertical != 0 &&
+        sprite->completion.scale != 0 && sprite->completion.opacity != 0)
+        sprite->completion.complete = 1;
+    else
+        sprite->completion.complete = 0;
+    sprite->visibility.active = 1;
+    if (sprite->completion.complete == 0)
+        settled = 0;
+    return settled;
 }
-
-} /* extern "C" */
+}

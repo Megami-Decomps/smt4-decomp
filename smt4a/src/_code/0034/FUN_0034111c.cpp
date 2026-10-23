@@ -1,58 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034111c` (_code @ 0x34111c, 0x104 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP endpoint allocation differs and the compiler folds the perpendicular negation into subtraction. */
+#include "common.h"
+#include <math.h>
 
 extern "C" {
+void FUN_0032c808();
+void effectSpawnPositionDefault(u32 effect, f32 x, f32 y, f32 z);
+void FUN_002371b0();
 
-int FUN_002371b0(void);
-int effectSpawnPositionDefault(unsigned int);
-int FUN_0032c808(void);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+// Sort the endpoints, then emit a strip offset along the segment's normal.
+void FUN_0034111c(u32 firstEffect, u32 secondEffect, f32 startX, f32 startY,
+                  f32 endX, f32 endY, f32 height, f32 width)
 {
-    return (float)sqrt((double)value);
+    if (startX < endX || startY > endY) {
+        f32 x = startX;
+        startX = endX;
+        endX = x;
+        f32 y = startY;
+        startY = endY;
+        endY = y;
+    }
+    f32 normalX = endY - startY;
+    f32 normalY = -(endX - startX);
+    f32 length = sqrtf(normalX * normalX + normalY * normalY);
+    if (length != 0.0f) {
+        normalX = normalX / length * width;
+        normalY = normalY / length * width;
+        f32 offsetStartX = normalX + startX;
+        f32 offsetStartY = normalY + startY;
+        f32 offsetEndX = normalX + endX;
+        f32 offsetEndY = normalY + endY;
+        FUN_0032c808();
+        effectSpawnPositionDefault(firstEffect, startX, startY, height);
+        effectSpawnPositionDefault(secondEffect, endX, endY, height);
+        effectSpawnPositionDefault(firstEffect, offsetStartX, offsetStartY, height);
+        effectSpawnPositionDefault(secondEffect, offsetEndX, offsetEndY, height);
+        FUN_002371b0();
+    }
 }
-#endif
-/* Supplied declaration required: FUN_002371b0. */
-/* Supplied declaration required: effectSpawnPositionDefault. */
-/* Supplied declaration required: FUN_0032c808. */
-
-
-void FUN_0034111c(unsigned int param_1,unsigned int param_2)
-
-{
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3; 7 native warning(s); review required */
-  float in_s0;
-  float in_s1;
-  float in_s2;
-  float in_s3;
-  float temp_v0;
-  float temp_v1;
-  
-  if ((in_s0 < in_s2) || (temp_v0 = in_s2, temp_v1 = in_s1, in_s3 < in_s1)) {
-    temp_v0 = in_s0;
-    in_s0 = in_s2;
-    temp_v1 = in_s3;
-    in_s3 = in_s1;
-  }
-  if (romwright_sqrt_4((in_s3 - temp_v1) * (in_s3 - temp_v1) + -(temp_v0 - in_s0) * -(temp_v0 - in_s0)) != 0.0f) {
-    FUN_0032c808();
-    effectSpawnPositionDefault(param_1);
-    effectSpawnPositionDefault(param_2);
-    effectSpawnPositionDefault(param_1);
-    effectSpawnPositionDefault(param_2);
-    FUN_002371b0();
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */

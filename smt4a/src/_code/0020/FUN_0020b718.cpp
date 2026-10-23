@@ -1,106 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020b718` (_code @ 0x20b718, 0x1ec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: repeated zero-byte resets are hoisted into a saved register rather than retail's per-store constants. */
+#include "ui/PartyPanelState.h"
 
-extern "C" {
-
-int FUN_003343f0(void);
-int FUN_003344b4(int);
-int obj48Arm(unsigned int, int);
-int pair40Set(unsigned int, int);
-
-extern int g_partyPanel; /* 0x57f268 */
-
-extern int FUN_002ef9f0(void);
-/* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_003344b4. */
-extern int aocDataBlockHasEntries(void);
-/* Supplied declaration required: obj48Arm. */
-/* Supplied declaration required: pair40Set. */
-
-
-void FUN_0020b718(int param_1,int param_2)
-
-{
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = g_partyPanel;
-  if (param_2 != 0) {
-    *(unsigned int *)(g_partyPanel + 0x24) = *(unsigned int *)(g_partyPanel + 0x1c);
-  }
-  *(int *)(temp_v0 + 0x1c) = param_1;
-  *(unsigned int *)(temp_v0 + 0x18) = 0;
-  if (param_1 == 0x1b) {
-    temp_v1 = aocDataBlockHasEntries();
-    if (temp_v1 == 0) {
-      *(unsigned int *)(temp_v0 + 0x1c) = 0x1c;
-      return;
-    }
-    temp_v1 = FUN_002ef9f0();
-    if (temp_v1 == 0) {
-      FUN_003343f0();
-    }
-    param_1 = *(int *)(temp_v0 + 0x1c);
-  }
-  if (param_1 == 0x15) {
-    temp_v1 = 0;
-    do {
-      temp_v2 = temp_v0 + temp_v1 * 4;
-      pair40Set(*(unsigned int *)(temp_v2 + 0xa10),0);
-      *(unsigned char *)(*(int *)(temp_v2 + 0xa10) + 0x25) = 0;
-      *(unsigned char *)(*(int *)(temp_v2 + 0xa10) + 0x27) = 0;
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 4);
-    temp_v1 = 0;
-    do {
-      temp_v2 = temp_v0 + temp_v1 * 4;
-      pair40Set(*(unsigned int *)(temp_v2 + 0xa20),0);
-      *(unsigned char *)(*(int *)(temp_v2 + 0xa20) + 0x25) = 0;
-      *(unsigned char *)(*(int *)(temp_v2 + 0xa20) + 0x27) = 0;
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 0x18);
-    FUN_003344b4(0);
-  }
-  if (*(int *)(temp_v0 + 0x1c) == 0x16) {
-    temp_v1 = 0;
-    do {
-      temp_v2 = temp_v0 + temp_v1 * 4;
-      pair40Set(*(unsigned int *)(temp_v2 + 0xa10),0);
-      *(unsigned char *)(*(int *)(temp_v2 + 0xa10) + 0x25) = 0;
-      *(unsigned char *)(*(int *)(temp_v2 + 0xa10) + 0x27) = 0;
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 4);
-    temp_v1 = 0;
-    do {
-      temp_v2 = temp_v0 + temp_v1 * 4;
-      pair40Set(*(unsigned int *)(temp_v2 + 0xa20),0);
-      *(unsigned char *)(*(int *)(temp_v2 + 0xa20) + 0x25) = 0;
-      *(unsigned char *)(*(int *)(temp_v2 + 0xa20) + 0x27) = 0;
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 0x18);
-    FUN_003344b4(0);
-    if (*(char *)(temp_v0 + 0x9c0) != '\0') {
-      obj48Arm(*(unsigned int *)(temp_v0 + 0xa10),0xff);
-    }
-    temp_v1 = 0;
-    do {
-      if (*(char *)(temp_v0 + temp_v1 + 0x9c1) != '\0') {
-        obj48Arm(*(unsigned int *)(temp_v0 + temp_v1 * 4 + 0xa14),0xff);
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 3);
-    temp_v1 = 0;
-    do {
-      if (*(short *)(temp_v0 + temp_v1 * 8 + 0xa84) != 0) {
-        obj48Arm(*(unsigned int *)(temp_v0 + temp_v1 * 4 + 0xa20),0xff);
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 0x18);
-  }
-  return;
+namespace {
+/* Demon availability extends past PartyPanelStateA's canonical prefix. */
+struct PartyPanelTransitionEntriesView {
+    PartyPanelStateA panel;
+    u8 unkA80[4];
+    PartyPanelEntry entries[24];
+};
+typedef char PartyPanelTransitionEntriesOffset[
+    offsetof(PartyPanelTransitionEntriesView, entries) == 0xA84 ? 1 : -1];
 }
+extern "C" {
+extern PartyPanelStateA *g_partyPanel;
+s32 aocDataBlockHasEntries();
+u8 FUN_002ef9f0();
+void FUN_003343f0(u8 value);
+void pair40Set(PartyPanelWidget *widget, s32 first, s32 second);
+void FUN_003344b4(u32 first, u32 second);
+void obj48Arm(PartyPanelWidget *widget, u8 value);
 
-} /* extern "C" */
+void FUN_0020b718(s32 state, s32 rememberPrevious)
+{
+    PartyPanelStateA *panel = g_partyPanel;
+    if (rememberPrevious != 0)
+        panel->previousState = panel->state;
+    panel->state = state;
+    panel->lifecycle.phase = 0;
+    if (state == 0x1B) {
+        if (aocDataBlockHasEntries() == 0) {
+            panel->state = 0x1C;
+            return;
+        }
+        if (FUN_002ef9f0() == 0)
+            FUN_003343f0(0);
+        state = panel->state;
+    }
+    if (state == 0x15) {
+        for (s32 index = 0; index < 4; ++index) {
+            pair40Set(panel->characters[index], 0, 0);
+            panel->characters[index]->transitionActive = 0;
+            panel->characters[index]->transitionPending = 0;
+        }
+        for (s32 index = 0; index < 24; ++index) {
+            pair40Set(panel->demons[index], 0, 0);
+            panel->demons[index]->transitionActive = 0;
+            panel->demons[index]->transitionPending = 0;
+        }
+        FUN_003344b4(0, 0);
+    }
+    if (panel->state == 0x16) {
+        for (s32 index = 0; index < 4; ++index) {
+            pair40Set(panel->characters[index], 0, 0);
+            panel->characters[index]->transitionActive = 0;
+            panel->characters[index]->transitionPending = 0;
+        }
+        for (s32 index = 0; index < 24; ++index) {
+            pair40Set(panel->demons[index], 0, 0);
+            panel->demons[index]->transitionActive = 0;
+            panel->demons[index]->transitionPending = 0;
+        }
+        FUN_003344b4(0, 0);
+        if (panel->animation.preview.protagonistAvailable != 0)
+            obj48Arm(panel->characters[0], 0xFF);
+        for (s32 index = 0; index < 3; ++index) {
+            if (panel->animation.preview.partyAvailable[index] != 0)
+                obj48Arm(panel->characters[index + 1], 0xFF);
+        }
+        PartyPanelTransitionEntriesView *extended = reinterpret_cast<PartyPanelTransitionEntriesView *>(panel);
+        for (s32 index = 0; index < 24; ++index) {
+            if (extended->entries[index].available != 0)
+                obj48Arm(panel->demons[index], 0xFF);
+        }
+    }
+}
+}

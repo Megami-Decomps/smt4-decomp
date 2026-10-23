@@ -1,75 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `jobSetParent` (_code @ 0x14bdb4, 0x13c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: handle-mask scheduling and inline lookup register allocation differ; hierarchy operations match. */
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
-extern "C" {
+extern "C" AsdProcessState g_asdProcess;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-extern int g_asdProcess; /* 0x640118 */
-
-
-void jobSetParent(unsigned int param_1,unsigned int param_2)
-
+static __inline AsdProcess *findProcess(u32 handle)
 {
-/* irregular: 3 goto(s) */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  for (temp_v3 = *(int *)(g_asdProcess + (param_1 >> 0x14) * 8); temp_v3 != 0;
-      temp_v3 = *(int *)(temp_v3 + 0x4c)) {
-    if (*(unsigned int *)(temp_v3 + 0x24) == (param_1 & 0xfffff)) goto LAB_0014bdf8;
-  }
-  temp_v3 = 0;
-LAB_0014bdf8:
-  temp_v0 = *(int *)(g_asdProcess + (param_2 >> 0x14) * 8);
-  for (temp_v1 = temp_v0; temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c)) {
-    if (*(unsigned int *)(temp_v1 + 0x24) == (param_2 & 0xfffff)) goto LAB_0014be2c;
-  }
-  temp_v1 = 0;
-LAB_0014be2c:
-  if (*(int *)(temp_v1 + 0x54) != 0) {
-    for (; temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x4c)) {
-      if (*(unsigned int *)(temp_v0 + 0x24) == (param_2 & 0xfffff)) goto LAB_0014be60;
+    u32 id = handle & ASD_PROC_ID_MASK;
+    for (AsdProcess *process = g_asdProcess.groups[handle >> ASD_PROC_GROUP_SHIFT].head;
+         process != NULL; process = process->next) {
+        if (process->id == id)
+            return process;
     }
-    temp_v0 = 0;
-LAB_0014be60:
-    temp_v4 = *(int *)(temp_v0 + 0x54);
-    if (temp_v4 != 0) {
-      temp_v2 = *(int *)(temp_v4 + 0x58);
-      if (temp_v2 == temp_v0) {
-        *(unsigned int *)(temp_v4 + 0x58) = *(unsigned int *)(temp_v0 + 0x5c);
-      }
-      else {
-        for (temp_v4 = *(int *)(temp_v2 + 0x5c); temp_v4 != temp_v0; temp_v4 = *(int *)(temp_v4 + 0x5c)) {
-          temp_v2 = temp_v4;
-        }
-        *(unsigned int *)(temp_v2 + 0x5c) = *(unsigned int *)(temp_v0 + 0x5c);
-      }
-      *(unsigned int *)(temp_v0 + 0x54) = 0;
-      *(unsigned int *)(temp_v0 + 0x5c) = 0;
-    }
-  }
-  if (temp_v3 != 0) {
-    temp_v0 = *(int *)(temp_v3 + 0x58);
-    if (temp_v0 == 0) {
-      *(int *)(temp_v3 + 0x58) = temp_v1;
-    }
-    else {
-      for (temp_v4 = *(int *)(temp_v0 + 0x5c); temp_v4 != 0; temp_v4 = *(int *)(temp_v4 + 0x5c)) {
-        temp_v0 = temp_v4;
-      }
-      *(int *)(temp_v0 + 0x5c) = temp_v1;
-    }
-  }
-  *(int *)(temp_v1 + 0x54) = temp_v3;
-  return;
+    return NULL;
 }
 
-} /* extern "C" */
+static __inline void detachProcess(u32 handle)
+{
+    AsdProcess *process = findProcess(handle);
+    AsdProcess *parent = process->parent;
+    if (parent != NULL) {
+        AsdProcess *previous = parent->firstChild;
+        if (previous == process) {
+            parent->firstChild = process->nextSibling;
+        } else {
+            for (AsdProcess *next = previous->nextSibling; next != process; next = next->nextSibling)
+                previous = next;
+            previous->nextSibling = process->nextSibling;
+        }
+        process->parent = NULL;
+        process->nextSibling = NULL;
+    }
+}
+
+// Reparent a process, appending it after the new parent's existing children.
+extern "C" void jobSetParent(u32 parentHandle, u32 childHandle)
+{
+    AsdProcess *parent = findProcess(parentHandle);
+    AsdProcess *child = findProcess(childHandle);
+    if (child->parent != NULL)
+        detachProcess(childHandle);
+    if (parent != NULL) {
+        AsdProcess *previous = parent->firstChild;
+        if (previous == NULL) {
+            parent->firstChild = child;
+        } else {
+            for (AsdProcess *next = previous->nextSibling; next != NULL; next = next->nextSibling)
+                previous = next;
+            previous->nextSibling = child;
+        }
+    }
+    child->parent = parent;
+}

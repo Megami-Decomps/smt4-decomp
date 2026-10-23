@@ -1,78 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023466c` (_code @ 0x23466c, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: table lookup null/bounds registers and popup-field store grouping differ. */
+#include "gamedata/DataTable.h"
+
+struct PopupConditionRecord {
+    s32 id;
+    s32 kind;
+    s16 requiredFlag;
+    s16 blockingFlag;
+    s16 argument;
+    s16 unk0e;
+    s16 message;
+    u8 unk12[0xe];
+};
+struct PopupMessageResource {
+    u32 unk00;
+    u8 header[0x20];
+    char text[1];
+};
+/* The canonical MapRandomPopupPrefixA ends at 0x18; this local view accesses
+ * additional fields without extending that shared prefix. */
+struct PopupTriggerStateView {
+    s32 state;
+    s32 phase;
+    u8 unk08[0xc];
+    const char *text;
+    s32 trigger;
+    const void *header;
+};
 
 extern "C" {
+extern PopupTriggerStateView *g_popupState;
+s32 gameFlagIsSet(s32 flag);
+void gameFlagSetValue(s32 flag, s32 value);
+PopupMessageResource *FUN_00365bc4(s32 message);
 
-int dataTableGetCount(unsigned int);
-int dataTableGetEntries(void);
-int gameFlagSetValue(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern unsigned int *g_popupState; /* 0x58104c */
-
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int gameFlagIsSet(void);
-/* Supplied declaration required: dataTableGetCount. */
-/* Supplied declaration required: dataTableGetEntries. */
-extern int FUN_00365bc4(int);
-/* Supplied declaration required: gameFlagSetValue. */
-
-
-void FUN_0023466c(int param_1,int param_2)
-
+/* Activate the first matching kind-seven popup and mark its blocking flag. */
+void FUN_0023466c(s32 id, s32 argument)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int *piVar7;
-  unsigned char temp_v5;
-  
-  temp_v0 = dataTableGet(0x43,0);
-  dataTableGetEntries();
-  temp_v1 = dataTableGetCount(temp_v0);
-  temp_v4 = 0;
-  if ((int)temp_v4 < temp_v1) {
-    do {
-      temp_v0 = dataTableGet(0x43,0);
-      temp_v2 = dataTableGetEntries();
-      temp_v3 = dataTableGetCount(temp_v0);
-      piVar7 = (int *)0x0;
-      if (temp_v4 < temp_v3) {
-        piVar7 = (int *)(temp_v2 + temp_v4 * 0x20);
-      }
-      temp_v2 = piVar7[1];
-      temp_v5 = temp_v2 == 7;
-      if (temp_v5) {
-        temp_v2 = *piVar7;
-      }
-      if ((((temp_v5 && temp_v2 == param_1) &&
-           (((short)piVar7[2] == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
-          ((*(short *)((int)piVar7 + 10) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) &&
-         ((short)piVar7[3] == param_2)) {
-        temp_v1 = FUN_00365bc4((int)(short)piVar7[4]);
-        puVar1 = g_popupState;
-        g_popupState[1] = 0;
-        *puVar1 = 9;
-        temp_v2 = *piVar7;
-        puVar1[5] = temp_v1 + 0x24;
-        puVar1[6] = temp_v2;
-        puVar1[7] = temp_v1 + 4;
-        gameFlagSetValue((int)*(short *)((int)piVar7 + 10),1);
-        return;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while ((int)temp_v4 < temp_v1);
-  }
-  return;
+    DataTableView<PopupConditionRecord> table(0x43, 0);
+    s32 count = (s32)table.count;
+    for (u32 i = 0; (s32)i < count; ++i) {
+        DataTableView<PopupConditionRecord> current(0x43, 0);
+        PopupConditionRecord *record = current.at(i);
+        if (record->kind == 7 && record->id == id &&
+            (record->requiredFlag == 0 || gameFlagIsSet(record->requiredFlag)) &&
+            (record->blockingFlag == 0 || !gameFlagIsSet(record->blockingFlag)) &&
+            record->argument == argument) {
+            PopupMessageResource *message = FUN_00365bc4(record->message);
+            PopupTriggerStateView *popup = g_popupState;
+            popup->phase = 0;
+            popup->state = 9;
+            popup->text = message->text;
+            popup->trigger = record->id;
+            popup->header = message->header;
+            gameFlagSetValue(record->blockingFlag, 1);
+            return;
+        }
+    }
 }
-
-} /* extern "C" */
+}

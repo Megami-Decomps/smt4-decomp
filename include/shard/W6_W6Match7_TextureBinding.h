@@ -1,6 +1,7 @@
 #ifndef SHARD_W6_W6MATCH7_TEXTUREBINDING_H
 #define SHARD_W6_W6MATCH7_TEXTUREBINDING_H
 #include "common.h"
+#include <stddef.h>
 
 struct TextureBindingSources {
     /* 0x00 */ u32 unk00;
@@ -11,13 +12,32 @@ struct TextureBindingSources {
 };
 
 struct TextureBindingState {
-    /* 0x000 */ u8 unk000[8];
+    union {
+        /* 0x000 */ u8 unk000[8];
+        struct {
+            /* 0x000 */ u32 dirty;
+            /* 0x004 */ u32 pending;
+        } updates;
+    };
     /* 0x008 */ u32 flags;
-    /* 0x00c */ u8 unk00c[0x4c];
+    union {
+        /* 0x00c */ u8 unk00c[0x4c];
+        struct {
+            u8 prefix[0xC];
+            /* 0x018 */ u8 active;
+            /* 0x019 */ u8 suppress;
+        } flushing;
+    };
     /* 0x058 */ TextureBindingSources sources;
     /* 0x10c */ u8 unk10c[0x664];
     /* 0x770 */ u32 configuration;
 };
+typedef char TextureBindingFlushOffsets[
+    offsetof(TextureBindingState, updates.dirty) == 0 &&
+    offsetof(TextureBindingState, updates.pending) == 4 &&
+    offsetof(TextureBindingState, flushing.active) == 0x18 &&
+    offsetof(TextureBindingState, flushing.suppress) == 0x19 &&
+    sizeof(TextureBindingState) == 0x774 ? 1 : -1];
 
 struct TextureBindingCache {
     /* 0x000 */ u32 defaultPrimary;

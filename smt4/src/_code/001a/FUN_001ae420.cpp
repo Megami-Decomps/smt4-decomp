@@ -1,81 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ae420` (_code @ 0x1ae420, 0x114 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stack-argument load merging, lookup-table base selection and state-allocation failure exit differ. */
+#include "mobiclip_ctrl/VxDecoder.h"
 
 extern "C" {
+extern const u8 DAT_0040bc5c[3][0x2100];
+void *callGlobalHook(u32 bytes);
+void rt_memclr(void *memory, u32 bytes);
 
-int callGlobalHook(...);
-int rt_memclr(int *, int);
-
-extern unsigned char DAT_0040bc5c; /* 0x40bc5c */
-extern unsigned char DAT_0040dd5c; /* 0x40dd5c */
-extern unsigned char DAT_0040fe5c; /* 0x40fe5c */
-
-/* Supplied declaration required: callGlobalHook. */
-/* Supplied declaration required: rt_memclr. */
-
-
-unsigned int FUN_001ae420(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,int param_5,int param_6)
-
+// Allocate a VX decoder and its YUV frame buffers for the supported output mode.
+u32 FUN_001ae420(VxDecoder *decoder, u32 width, u32 height, u32 bufferCount,
+                  u32 format, u32 mode)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  
-  if ((param_6 != 0) && (param_6 == 1)) {
-    temp_v4 = param_2 == 0x400;
-    if (param_2 < 0x401) {
-      temp_v4 = param_5 == 0;
+    switch (mode) {
+    case 0:
+        break;
+    case 1:
+        if (width > 1024 || format != 0) {
+            return 0;
+        }
+        rt_memclr(decoder, sizeof(*decoder));
+        VxDecoderState *state = static_cast<VxDecoderState *>(callGlobalHook(sizeof(VxDecoderState)));
+        decoder->state = state;
+        if (state == NULL) {
+            return 0;
+        }
+        state->decodedFrames = 0;
+        state->tables[0] = DAT_0040bc5c[0];
+        state->tables[1] = DAT_0040bc5c[1];
+        state->tables[2] = DAT_0040bc5c[2];
+        state->width = width;
+        state->height = height;
+        decoder->stride = 1024;
+        if (width <= 512) {
+            decoder->stride = 512;
+        }
+        if (width <= 256) {
+            decoder->stride = 256;
+        }
+        decoder->bufferCount = bufferCount;
+        decoder->mode = mode;
+        decoder->format = format;
+        decoder->buffers = static_cast<void **>(callGlobalHook(bufferCount * sizeof(void *)));
+        if (decoder->buffers == NULL) {
+            return 0;
+        }
+        {
+            u32 bytes = decoder->stride * (height + (height >> 1) + 1);
+            for (u32 index = 0; index < bufferCount; ++index) {
+                void *buffer = callGlobalHook(bytes);
+                decoder->buffers[index] = buffer;
+                if (buffer == NULL) {
+                    return 0;
+                }
+            }
+        }
+        decoder->currentBuffer = bufferCount - 1;
+        return 1;
+    default:
+        break;
     }
-    if (temp_v4) {
-      rt_memclr(param_1,0x20);
-      temp_v0 = callGlobalHook(0x670);
-      *param_1 = temp_v0;
-      temp_v2 = 0;
-      if (temp_v0 != 0) {
-        *(unsigned int *)(temp_v0 + 0x48) = 0;
-        *(unsigned char **)(temp_v0 + 0x3c) = &DAT_0040bc5c;
-        *(unsigned char **)(temp_v0 + 0x40) = &DAT_0040dd5c;
-        *(unsigned char **)(temp_v0 + 0x44) = &DAT_0040fe5c;
-        *(unsigned int *)(temp_v0 + 4) = param_2;
-        *(unsigned int *)(temp_v0 + 8) = param_3;
-        param_1[6] = 0x400;
-        if (param_2 < 0x201) {
-          param_1[6] = 0x200;
-        }
-        if (param_2 < 0x101) {
-          param_1[6] = 0x100;
-        }
-        param_1[2] = param_4;
-        param_1[7] = 1;
-        param_1[5] = param_5;
-        temp_v0 = callGlobalHook(param_4 << 2);
-        param_1[1] = temp_v0;
-        temp_v2 = 0;
-        if (temp_v0 != 0) {
-          temp_v0 = param_1[6];
-          temp_v3 = 0;
-          if (temp_v3 < param_4) {
-            do {
-              temp_v1 = callGlobalHook(temp_v0 * (param_3 + (param_3 >> 1) + 1));
-              *(int *)(param_1[1] + temp_v3 * 4) = temp_v1;
-              if (temp_v1 == 0) {
-                return 0;
-              }
-              temp_v3 = temp_v3 + 1;
-            } while (temp_v3 < param_4);
-          }
-          param_1[3] = param_4 - 1;
-          temp_v2 = 1;
-        }
-      }
-      return temp_v2;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

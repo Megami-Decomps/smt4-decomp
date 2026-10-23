@@ -1,56 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bb9c0` (_code @ 0x4bb9c0, 0x120 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: packed render-state expansion scheduling differs from retail. */
+#include "common.h"
 
-extern "C" {
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_2_stack;
-
-
-void FUN_004bb9c0(unsigned int *param_1,unsigned int *param_2)
-
-{
-  unsigned int temp_v0;
-  
-  *param_1 = (unsigned int)(unsigned short)param_2[5];
-  param_1[1] = (unsigned int)*(unsigned short *)((int)param_2 + 0x16);
-  param_1[2] = (unsigned int)(unsigned short)param_2[6];
-  param_1[3] = (unsigned int)*(unsigned short *)((int)param_2 + 0x1a);
-  param_1[4] = (unsigned int)(unsigned short)param_2[7];
-  param_1[5] = (unsigned int)*(unsigned short *)((int)param_2 + 0x1e);
-  *(unsigned char *)(param_1 + 0xf) = 0;
-  *(char *)(param_1 + 8) = (char)param_2[1];
-  *(unsigned char *)((int)param_1 + 0x21) = *(unsigned char *)((int)param_2 + 5);
-  param_1[9] = param_2[2];
-  temp_v0 = param_1[6];
-  param_1[6] = temp_v0 | 0x40000000;
-  *(unsigned char *)((int)param_1 + 0x1f) = (unsigned char)((*param_2 << 0x1b) >> 0x1d) - 1;
-  if ((*param_2 & 1) != 0) {
-    param_1[6] = temp_v0 | 0x40010000;
-  }
-  if ((*param_2 & 2) != 0) {
-    param_1[6] = param_1[6] | 0x20000;
-  }
-  *(short *)(param_1 + 0x15) = (short)param_2[8];
-  *(unsigned short *)((int)param_1 + 0x56) = *(unsigned short *)((int)param_2 + 0x22);
-  *(short *)(param_1 + 0x16) = (short)param_2[9];
-  *(unsigned short *)((int)param_1 + 0x5a) = *(unsigned short *)((int)param_2 + 0x26);
-  temp_v0 = param_1[7];
-  *(unsigned short *)(param_1 + 10) = 0;
-  *(unsigned short *)((int)param_1 + 0x2a) = 0;
-  param_1[7] = temp_v0 & 0xffffff81;
-  *(unsigned char *)(param_1 + 0xb) = 0;
-  *(unsigned char *)((int)param_1 + 0x2d) = 0;
-  *(unsigned char *)((int)param_1 + 0x2e) = 0;
-  *(unsigned char *)((int)param_1 + 0x2f) = 0;
-  *(unsigned short *)((int)param_1 + 0x5e) = (unsigned short)(unsigned char)((*param_2 << 0xd) >> 0x18);
-  param_1[0x18] = 0;
-  param_1[7] = ((*param_2 >> 0xc) & 0x80) | (temp_v0 & 0xffffff01);
-  param_1[6] = param_1[6] & 0x7fffffff;
-  return;
+namespace {
+struct PackedSpriteSource {
+    u32 flags;
+    u8 variant, kind, unk06[2];
+    u32 resource;
+    u8 unk0C[8];
+    u16 values[6];
+    u16 bounds[4];
+};
+/* Local view extends beyond the shared PackedRenderState's recovered boundary. */
+struct ExpandedSpriteState {
+    u32 values[6];
+    u32 flags;
+    union {
+        u32 word;
+        struct { u8 unk00[3]; u8 format; } fields;
+    } mode;
+    u8 variant, kind, unk22[2];
+    u32 resource;
+    u16 phase, timer;
+    u8 red, green, blue, alpha;
+    u8 unk30[0xC];
+    u8 active;
+    u8 unk3D[0x17];
+    u16 bounds[4];
+    u8 unk5C[2];
+    u16 parameter;
+    u32 frame;
+};
 }
 
-} /* extern "C" */
+/* Expand a compact sprite record and reset its runtime animation state. */
+extern "C" void FUN_004bb9c0(ExpandedSpriteState *state, const PackedSpriteSource *source)
+{
+    state->values[0] = source->values[0];
+    state->values[1] = source->values[1];
+    state->values[2] = source->values[2];
+    state->values[3] = source->values[3];
+    state->values[4] = source->values[4];
+    state->values[5] = source->values[5];
+    state->active = 0;
+    state->variant = source->variant;
+    state->kind = source->kind;
+    state->resource = source->resource;
+    state->flags |= 0x40000000;
+    state->mode.fields.format = static_cast<u8>(((source->flags << 27) >> 29) - 1);
+    if ((source->flags & 1) != 0)
+        state->flags |= 0x10000;
+    if ((source->flags & 2) != 0)
+        state->flags |= 0x20000;
+    state->bounds[0] = source->bounds[0];
+    state->bounds[1] = source->bounds[1];
+    state->bounds[2] = source->bounds[2];
+    state->bounds[3] = source->bounds[3];
+    state->phase = 0;
+    state->timer = 0;
+    state->mode.word &= ~0x7E;
+    state->red = 0;
+    state->green = 0;
+    state->blue = 0;
+    state->alpha = 0;
+    state->parameter = static_cast<u8>((source->flags << 13) >> 24);
+    state->frame = 0;
+    state->mode.word = ((source->flags >> 12) & 0x80) | (state->mode.word & ~0x80);
+    state->flags &= 0x7FFFFFFF;
+}

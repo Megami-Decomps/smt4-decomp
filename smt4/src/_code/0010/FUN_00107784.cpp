@@ -1,76 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00107784` (_code @ 0x107784, 0x15c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: inline stack scheduling, removed target-query hooks, and VFP argument scheduling differ. */
+#include "camp/RenderCtx.h"
+#include "shard/W6_W6Match3_SlotState.h"
 
 extern "C" {
+extern W6Match3SlotState DAT_004d9758[2];
+extern RenderCtx *g_titleScene;
+s32 FUN_002c5d80(u32, u32);
+void FUN_002c1b64(RenderCtx *, s32);
+u32 asdGxPresetsGetByKind(u32);
+u32 FUN_002c15ac(u32);
+void FUN_002c0944(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
+                  f32 x, f32 y, f32 width, f32 height, f32 depth);
 
-int FUN_002c0944(unsigned int);
-int FUN_002c1b64(int, int);
-int VectorFloatToUnsigned(double, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-typedef int romwright_code(...);
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_002c0944. */
-extern unsigned int FUN_002c15ac(unsigned int);
-extern unsigned int asdGxPresetsGetByKind(unsigned int);
-/* Supplied declaration required: FUN_002c1b64. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-
-
-void FUN_00107784(int param_1)
-
+/* Draw the selected screen-fade color with its current interpolated opacity. */
+void FUN_00107784(s32 index)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar7;
-  unsigned int in_fpscr;
-  float temp_v6;
-  unsigned int temp_v7;
-  
-  temp_v0 = g_titleScene;
-  temp_v3 = *(unsigned int *)(param_1 * 0x14 + 0x4d9764);
-  temp_v6 = (float)VectorUnsignedToFloat(temp_v3 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v7 = VectorFloatToUnsigned(*(float *)(param_1 * 0x14 + 0x4d9758) * temp_v6,3);
-  if (temp_v7 != 0) {
-    if (temp_v7 >= 0x100) {
-      temp_v7 = 0xff;
-    }
-    temp_v1 = FUN_002c5d80(1,0);
-    piVar7 = (int *)(temp_v0 + 0x124c);
-    temp_v4 = *piVar7;
-    temp_v5 = piVar7[temp_v4 + 2];
-    *piVar7 = temp_v4 + 1;
-    piVar7[temp_v4 + 3] = temp_v1;
-    if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v5 != temp_v1) {
-      (**(romwright_code **)(temp_v0 + 0x1268))();
-      *(unsigned char *)(temp_v0 + 0x1264) = 0;
-    }
-    FUN_002c1b64(g_titleScene,0);
-    temp_v2 = asdGxPresetsGetByKind(*(unsigned int *)(g_titleScene + 0x528));
-    VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v2 = FUN_002c15ac(*(unsigned int *)(g_titleScene + 0x528));
-    VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002c0944((temp_v3 & 0xffffff00) | temp_v7);
-    temp_v0 = g_titleScene;
-    piVar7 = (int *)(g_titleScene + 0x124c);
-    temp_v1 = *piVar7;
-    temp_v4 = piVar7[temp_v1 + 2];
-    *piVar7 = temp_v1 - 1;
-    if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v4 != piVar7[temp_v1 + 1]) {
-      (**(romwright_code **)(temp_v0 + 0x1268))();
-      *(unsigned char *)(temp_v0 + 0x1264) = 0;
-    }
-  }
-  return;
+    W6Match3SlotState *fade = &DAT_004d9758[index];
+    u32 color = fade->index;
+    u32 alpha = static_cast<u32>(fade->value * static_cast<f32>(color & 0xFF));
+    if (alpha == 0)
+        return;
+    if (alpha > 255)
+        alpha = 255;
+    color = (color & 0xFFFFFF00) | alpha;
+    RenderCtx *context = g_titleScene;
+    renderCtxPushA(context, FUN_002c5d80(1, 0));
+    FUN_002c1b64(g_titleScene, 0);
+    f32 height = static_cast<f32>(asdGxPresetsGetByKind(g_titleScene->unk0528));
+    f32 width = static_cast<f32>(FUN_002c15ac(g_titleScene->unk0528));
+    FUN_002c0944(color, color, color, color, 0.0f, 0.0f, width, height, 0.0f);
+    renderStackPop(&g_titleScene->stackA);
 }
-
-} /* extern "C" */
+}

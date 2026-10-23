@@ -1,102 +1,83 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00238f4c` (_code @ 0x238f4c, 0x1e8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: critical-section/global pointer caching, temporary stack placement and message-header clear ordering differ. */
+#include "shard/CecMessageBox.h"
+#include "shard/W6_W6Match6_CecMessageBox.h"
 
 extern "C" {
+extern CecModuleFlags g_asdCecModuleFlags;
+extern u32 g_asdCecMessageBoxCriticalSection, DAT_004e62b4;
+void nn_os_CriticalSection_Enter(void *section);
+void nn_os_CriticalSection_Leave(void *section);
+u32 nn_cec_CTR_MessageBox_WriteBoxInfo(MessageBox *box, s32 kind, const void *header, const void *data);
+u32 nn_cec_CTR_MessageBox_WriteMessageBoxInfo(MessageBox *box);
+void memClear(void *data, u32 size);
+void FUN_002399ec(u32 handle);
+void FUN_0024ee68(s32 mode);
 
-int FUN_002399ec(int);
-int FUN_0024ee68(int);
-int memClear(int *, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern signed char g_asdCecModuleFlags; /* 0x4656d0 */
-extern unsigned char DAT_004656d1; /* 0x4656d1 */
-extern signed char DAT_004656d3; /* 0x4656d3 */
-extern signed char DAT_004656d4; /* 0x4656d4 */
-extern unsigned int g_asdCecMessageBoxCriticalSection; /* 0x4e62a8 */
-extern unsigned int DAT_004e62b4; /* 0x4e62b4 */
-
-/* Supplied declaration required: FUN_002399ec. */
-/* Supplied declaration required: FUN_0024ee68. */
-/* Supplied declaration required: memClear. */
-extern unsigned int nn_cec_CTR_MessageBox_WriteBoxInfo(unsigned int, int, unsigned int, unsigned int *);
-extern unsigned int nn_cec_CTR_MessageBox_WriteMessageBoxInfo(unsigned int);
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-void FUN_00238f4c(int *param_1,int param_2)
-
+void FUN_00238f4c(MessageBox *box, s32 preserveOpen)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0 [8];
-  
-  nn_os_CriticalSection_Enter((unsigned int)&g_asdCecMessageBoxCriticalSection);
-  if (param_2 == 0) {
-    if (param_1[1] != 0) {
-      if (*(char *)((int)param_1 + 10) != '\0') {
-        nn_cec_CTR_MessageBox_WriteBoxInfo((unsigned int)param_1,0,(unsigned int)(param_1 + 0x7f),(unsigned int *)(param_1 + 0x87));
-      }
-      if (*(char *)((int)param_1 + 0xb) != '\0') {
-        nn_cec_CTR_MessageBox_WriteBoxInfo((unsigned int)param_1,1,(unsigned int)(param_1 + 0xeb),(unsigned int *)(param_1 + 0xf3));
-      }
-      if (g_asdCecModuleFlags != '\0') {
-        (**(romwright_code **)(*param_1 + 8))(param_1,param_1[1],0x96,0x14,temp_v0);
-        nn_cec_CTR_MessageBox_WriteMessageBoxInfo((unsigned int)param_1);
-      }
+    union IndexHeader { u32 words[8]; u16 signature; };
+    struct ResetView {
+        MessageBox prefix;
+        u8 unk1E0[0x1C];
+        IndexHeader inbox;
+        u8 inboxData[0x18C];
+        u32 inboxHandle;
+        IndexHeader outbox;
+        u8 outboxData[0x18C];
+        u32 outboxHandle;
+        union { u32 words[2]; u16 signature; } message;
+        u8 messageData[0x318];
+    };
+    struct ModuleView { CecModuleFlags prefix; u8 unk02; s8 inboxOwned, outboxOwned; };
+    typedef char ResetViewOffsetsCheck[offsetof(ResetView, inbox) == 0x1FC &&
+        offsetof(ResetView, outbox) == 0x3AC && offsetof(ResetView, message) == 0x55C &&
+        offsetof(ModuleView, inboxOwned) == 3 ? 1 : -1];
+    ResetView *work = reinterpret_cast<ResetView *>(box);
+    ModuleView *flags = reinterpret_cast<ModuleView *>(&g_asdCecModuleFlags);
+    nn_os_CriticalSection_Enter(&g_asdCecMessageBoxCriticalSection);
+    if (preserveOpen == 0) {
+        if (box->id != 0) {
+            if (box->unk008[2])
+                nn_cec_CTR_MessageBox_WriteBoxInfo(box, 0, &work->inbox, work->inboxData);
+            if (box->unk008[3])
+                nn_cec_CTR_MessageBox_WriteBoxInfo(box, 1, &work->outbox, work->outboxData);
+            if (g_asdCecModuleFlags.open) {
+                u32 result[2];
+                box->vtbl->read(box, box->id, 0x96, 0x14, result);
+                nn_cec_CTR_MessageBox_WriteMessageBoxInfo(box);
+            }
+        }
+        box->vtbl->closeBox(box, box->id, 0, 0, 5);
     }
-    (**(romwright_code **)(*param_1 + 0x28))(param_1,param_1[1],0,0,5);
-  }
-  param_1[1] = 0;
-  param_1[0x7f] = 0;
-  param_1[0x80] = 0;
-  param_1[0x81] = 0;
-  param_1[0x82] = 0;
-  param_1[0x83] = 0;
-  param_1[0x84] = 0;
-  param_1[0x85] = 0;
-  param_1[0x86] = 0;
-  param_1[0xeb] = 0;
-  param_1[0xec] = 0;
-  param_1[0xed] = 0;
-  param_1[0xee] = 0;
-  param_1[0xef] = 0;
-  param_1[0xf0] = 0;
-  param_1[0xf1] = 0;
-  param_1[0xf2] = 0;
-  memClear(param_1 + 0x87,0x18c);
-  memClear(param_1 + 0xf3,0x18c);
-  param_1[0x157] = 0;
-  param_1[0x158] = 0;
-  memClear(param_1 + 0x159,0x318);
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_004e62b4);
-  if (DAT_004656d3 != '\0') {
-    FUN_002399ec(param_1[0xea]);
-    DAT_004656d3 = '\0';
-  }
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_004e62b4);
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_004e62b4);
-  if (DAT_004656d4 != '\0') {
-    FUN_002399ec(param_1[0x156]);
-    DAT_004656d4 = '\0';
-  }
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_004e62b4);
-  *(unsigned short *)(param_1 + 0x7f) = 0x6262;
-  *(unsigned short *)(param_1 + 0xeb) = 0x6262;
-  *(unsigned short *)(param_1 + 0x157) = 0x6767;
-  if (param_2 == 0) {
-    FUN_0024ee68(0);
-    DAT_004656d1 = 0;
-  }
-  g_asdCecModuleFlags = 0;
-  nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
-  return;
+    box->id = 0;
+    for (s32 index = 0; index < 8; ++index)
+        work->inbox.words[index] = 0;
+    for (s32 index = 0; index < 8; ++index)
+        work->outbox.words[index] = 0;
+    memClear(work->inboxData, sizeof(work->inboxData));
+    memClear(work->outboxData, sizeof(work->outboxData));
+    work->message.words[0] = work->message.words[1] = 0;
+    memClear(work->messageData, sizeof(work->messageData));
+    nn_os_CriticalSection_Enter(&DAT_004e62b4);
+    if (flags->inboxOwned) {
+        FUN_002399ec(work->inboxHandle);
+        flags->inboxOwned = 0;
+    }
+    nn_os_CriticalSection_Leave(&DAT_004e62b4);
+    nn_os_CriticalSection_Enter(&DAT_004e62b4);
+    if (flags->outboxOwned) {
+        FUN_002399ec(work->outboxHandle);
+        flags->outboxOwned = 0;
+    }
+    nn_os_CriticalSection_Leave(&DAT_004e62b4);
+    work->inbox.signature = 0x6262;
+    work->outbox.signature = 0x6262;
+    work->message.signature = 0x6767;
+    if (preserveOpen == 0) {
+        FUN_0024ee68(0);
+        g_asdCecModuleFlags.started = 0;
+    }
+    g_asdCecModuleFlags.open = 0;
+    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
 }
-
-} /* extern "C" */
+}

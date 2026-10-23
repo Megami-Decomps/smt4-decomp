@@ -42,7 +42,7 @@ int FUN_0018408c(...);
 int FUN_00184310(void);
 int drawSetColorFromRGBA8(...);
 int FUN_00230a50(...);
-int FUN_002a6c3c(...);
+int devilDrawResolvedTexture(...);
 int FUN_00334044(void);
 int VectorSignedToFloat(...);
 
@@ -144,7 +144,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0025e704. */
 extern int FUN_0026264c(unsigned short);
 extern int FUN_002a4b28(unsigned short);
-/* Supplied declaration required: FUN_002a6c3c. */
+/* Supplied declaration required: devilDrawResolvedTexture. */
 extern int FUN_002ef9f0(void);
 extern int valueAtMostFifthOfTotal(unsigned char *, unsigned char *);
 extern unsigned int heldAmountLessThan(int, int);
@@ -403,7 +403,7 @@ LAB_0022b9b8:
             }
             else {
               drawSetColorFromRGBA8(temp_v10);
-              FUN_002a6c3c((int)*(short *)(temp_v4 + 0x138c),temp_v27[5] + 2,temp_v27[6],0x83,1);
+              devilDrawResolvedTexture((int)*(short *)(temp_v4 + 0x138c),temp_v27[5] + 2,temp_v27[6],0x83,1);
             }
             FUN_00183bb0();
           }

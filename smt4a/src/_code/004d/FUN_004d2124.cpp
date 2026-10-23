@@ -1,93 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d2124` (_code @ 0x4d2124, 0x168 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: negotiation-mask loads choose LDRD/LDM differently and battle/mask saved-register allocation differs. */
+#include "battle/DebugPanel.h"
+#include "battle/btlMain.h"
+#include "AsdSDK/Source/Util/AsdListBox.h"
+#include "shard/X14_BtlUiClose.h"
 
 extern "C" {
+extern BtlUiCloseState DAT_005715f8;
+extern const AsdListBoxEntry DAT_00572a80[5];
+extern const char DAT_005280e8[];
+s32 jobIsValid(u32 job);
+void FUN_003592dc(u32 job);
+void jobStop(u32 job, s32 mode);
+u32 asdListBoxCreateDefaultFlags(u32 parent, u32 id, u32 argument, u32 flags);
+void asdListBoxAddItems(u32 job, const AsdListBoxEntry *items, u32 count);
+void asdListBoxSetByteValue(u32 job, u32 value);
+void jobSetText(u32 job, const char *text);
+void asdListBoxSetToggleItem(u32 job, s32 item, s32 value);
+void asdListBoxSetIntItem(u32 job, s32 item, s32 value, s32 minimum, s32 maximum, u32 flags);
 
-int jobStop(...);
-int asdListBoxCreateDefaultFlags(...);
-int jobSetText(...);
-int asdListBoxSetIntItem(...);
-int asdListBoxSetByteValue(...);
-int asdListBoxAddItems(...);
-int asdListBoxSetToggleItem(...);
-int FUN_003592dc(...);
-
-typedef struct fn_004d2124_arg0 fn_004d2124_arg0;
-struct fn_004d2124_arg0 {
-    void *field_0x0; /* +0x0 */
-    unsigned char pad_0x4[0xc];
-    unsigned char field_0x10; /* +0x10 */
-    unsigned char pad_0x11[0x3f];
-    undefined4 field_0x50; /* +0x50 */
-    undefined4 field_0x54; /* +0x54 */
-    undefined4 field_0x58; /* +0x58 */
-    undefined4 field_0x5c; /* +0x5c */
-    unsigned char pad_0x60[0x8];
-    undefined4 field_0x68; /* +0x68 */
-    undefined4 field_0x6c; /* +0x6c */
-    unsigned char pad_0x70[0xc];
-    undefined4 field_0x7c; /* +0x7c */
-    undefined4 field_0x80; /* +0x80 */
-};
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern unsigned int DAT_00571690; /* 0x571690 */
-extern unsigned int DAT_00571694; /* 0x571694 */
-extern unsigned int DAT_00571698; /* 0x571698 */
-extern unsigned int DAT_0057169c; /* 0x57169c */
-extern unsigned int DAT_005716c0; /* 0x5716c0 */
-extern unsigned int DAT_005716c4; /* 0x5716c4 */
-extern unsigned int DAT_005716d0; /* 0x5716d0 */
-extern unsigned int DAT_005716d4; /* 0x5716d4 */
-
-/* Supplied declaration required: jobStop. */
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: asdListBoxCreateDefaultFlags. */
-/* Supplied declaration required: jobSetText. */
-/* Supplied declaration required: asdListBoxSetIntItem. */
-/* Supplied declaration required: asdListBoxSetByteValue. */
-/* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: asdListBoxSetToggleItem. */
-/* Supplied declaration required: FUN_003592dc. */
-
-
-void FUN_004d2124(fn_004d2124_arg0 *param_1,int param_2)
-
+// Recreate the negotiation debug controls from the current battle's UI flags and bust-up index.
+void FUN_004d2124(BattleDebugPanelWork *work, BtlMainStateA *battle)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  
-  temp_v0 = jobIsValid(*(unsigned int *)&param_1->field_0x10);
-  if (temp_v0 != 0) {
-    FUN_003592dc(*(unsigned int *)&param_1->field_0x10);
-    jobStop(*(unsigned int *)&param_1->field_0x10,0);
-  }
-  temp_v1 = *(unsigned int *)(param_2 + 0x80);
-  asdListBoxCreateDefaultFlags(temp_v1,0x75,0);
-  *(unsigned int *)&param_1->field_0x10 = temp_v1;
-  asdListBoxAddItems();
-  asdListBoxSetByteValue(*(unsigned int *)&param_1->field_0x10,1);
-  jobSetText(*(unsigned int *)&param_1->field_0x10,"btl Talk Menu");
-  puVar3 = (unsigned int *)(param_2 + 0x45a8);
-  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,0,
-               (*(unsigned int *)(param_2 + 0x45ac) & DAT_00571694) != 0 || (DAT_00571690 & *puVar3) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,1,
-               (DAT_0057169c & *(unsigned int *)(param_2 + 0x45ac)) != 0 || (*puVar3 & DAT_00571698) != 0);
-  asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,2,*(unsigned int *)(param_2 + 0x2364),0,600,0);
-  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,3,
-               (*(unsigned int *)(param_2 + 0x45a4) & DAT_005716c4) != 0 ||
-               (*(unsigned int *)(param_2 + 0x45a0) & DAT_005716c0) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,4,
-               (DAT_005716d0 & *puVar3) != 0 || (DAT_005716d4 & *(unsigned int *)(param_2 + 0x45ac)) != 0);
-  return;
+    if (jobIsValid(work->panelJob)) {
+        FUN_003592dc(work->panelJob);
+        jobStop(work->panelJob, 0);
+    }
+    work->panelJob = asdListBoxCreateDefaultFlags(battle->uiJobs.menuJob, 117, 0, 0);
+    asdListBoxAddItems(work->panelJob, DAT_00572a80, 5);
+    asdListBoxSetByteValue(work->panelJob, 1);
+    jobSetText(work->panelJob, DAT_005280e8);
+    // These masks extend beyond the published module-state prefix; keep that shared type's extent intact.
+    struct TalkDebugMaskView {
+        u8 unk00[0x98];
+        u64 talkAll;
+        u64 bustup;
+        u8 unkA8[0x20];
+        u64 messageWindow;
+        u8 unkD0[8];
+        u64 talkBeginningLife;
+    };
+    typedef char TalkDebugMaskOffsetCheck[
+        offsetof(TalkDebugMaskView, talkAll) == 0x98 &&
+        offsetof(TalkDebugMaskView, bustup) == 0xA0 &&
+        offsetof(TalkDebugMaskView, messageWindow) == 0xC8 &&
+        offsetof(TalkDebugMaskView, talkBeginningLife) == 0xD8 ? 1 : -1];
+    TalkDebugMaskView *masks = (TalkDebugMaskView *)&DAT_005715f8;
+    asdListBoxSetToggleItem(work->panelJob, 0, (battle->markerMasks.bits & masks->talkAll) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 1, (battle->markerMasks.bits & masks->bustup) != 0);
+    asdListBoxSetIntItem(work->panelJob, 2, battle->negotiation.bustupIndex, 0, 600, 0);
+    asdListBoxSetToggleItem(work->panelJob, 3, (battle->stateFlags64.bits & masks->messageWindow) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 4, (battle->markerMasks.bits & masks->talkBeginningLife) != 0);
 }
-
-} /* extern "C" */
+}

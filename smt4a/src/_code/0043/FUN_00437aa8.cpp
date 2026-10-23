@@ -1,87 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00437aa8` (_code @ 0x437aa8, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: iterator registers, loop test placement, split-allocation checks and branch layout differ. */
+#include "shard/W6_W6Match6_IntervalList.h"
+#include <new>
 
 extern "C" {
+void FUN_004387bc(void *, RangeNode *, u32);
+RangeNode *FUN_004387f0(void *, u32);
 
-int FUN_004387bc(int, int *, int);
-int FUN_004387f0(int *, int);
-
-/* Supplied declaration required: FUN_004387bc. */
-/* Supplied declaration required: FUN_004387f0. */
-
-
-void FUN_00437aa8(int *param_1,int param_2)
-
+/* Remove every excluded inclusive interval, splitting destination nodes as needed. */
+u32 FUN_00437aa8(RangeSet *ranges, const RangeSet *excluded)
 {
-/* irregular: 5 goto(s); 2 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  unsigned short temp_v2;
-  unsigned short temp_v3;
-  int *piVar5;
-  int temp_v4;
-  int *piVar7;
-  
-  temp_v4 = *(int *)(param_2 + 4);
-  piVar5 = (int *)param_1[1];
-LAB_00437ac0:
-  while( 1 ) {
-    if (piVar5 == param_1 || temp_v4 == param_2) {
-      return;
+    RangeLink *link = ranges->next;
+    const RangeLink *exclusion = excluded->next;
+    while (link != ranges && exclusion != excluded) {
+        RangeNode *node = static_cast<RangeNode *>(link);
+        const RangeNode *remove = static_cast<const RangeNode *>(exclusion);
+        u16 first = node->range.first;
+        u16 start = remove->range.first;
+        u16 last = node->range.last;
+        u16 end = remove->range.last;
+        if (first == start) {
+            if (last <= end) {
+                RangeLink *next = node->next;
+                node->unlink();
+                FUN_004387bc(ranges->allocator, node, 1);
+                link = next;
+            } else {
+                node->range.first = end + 1;
+                exclusion = exclusion->next;
+            }
+        } else if (first < start) {
+            if (last < start) {
+                link = link->next;
+                continue;
+            }
+            node->range.last = start - 1;
+            if (last <= end) {
+                link = link->next;
+                continue;
+            }
+            RangeLink *following = node->next;
+            RangeNode *split = FUN_004387f0(ranges->allocator, 1);
+            if (split == NULL)
+                return 0;
+            new (split) RangeNode(following);
+            split->range.first = end + 1;
+            split->range.last = last;
+            link = split;
+            exclusion = exclusion->next;
+        } else {
+            if (first <= end) {
+                if (last <= end) {
+                    RangeLink *next = node->next;
+                    node->unlink();
+                    FUN_004387bc(ranges->allocator, node, 1);
+                    link = next;
+                    continue;
+                }
+                node->range.first = end + 1;
+                continue;
+            }
+            exclusion = exclusion->next;
+        }
     }
-    temp_v0 = *(unsigned short *)(piVar5 + 2);
-    temp_v1 = *(unsigned short *)(temp_v4 + 8);
-    temp_v2 = *(unsigned short *)((int)piVar5 + 10);
-    temp_v3 = *(unsigned short *)(temp_v4 + 10);
-    if (temp_v0 != temp_v1) break;
-    if (temp_v3 < temp_v2) {
-      *(unsigned short *)(piVar5 + 2) = temp_v3 + 1;
-      temp_v4 = *(int *)(temp_v4 + 4);
-      continue;
-    }
-LAB_00437af4:
-    piVar7 = (int *)piVar5[1];
-    *(int **)(*piVar5 + 4) = piVar7;
-    *(int *)piVar5[1] = *piVar5;
-    FUN_004387bc(param_1[2],piVar5,1);
-    piVar5 = piVar7;
-  }
-  if (temp_v1 >= temp_v0) {
-    if (temp_v2 < temp_v1) {
-      piVar5 = (int *)piVar5[1];
-      goto LAB_00437ac0;
-    }
-    *(unsigned short *)((int)piVar5 + 10) = temp_v1 - 1;
-    if (temp_v2 <= temp_v3) {
-      piVar5 = (int *)piVar5[1];
-      goto LAB_00437ac0;
-    }
-    piVar7 = (int *)piVar5[1];
-    piVar5 = (int *)param_1[2];
-    FUN_004387f0(piVar5,1);
-    if (piVar5 == (int *)0x0) {
-      piVar5 = (int *)0x0;
-    }
-    else {
-      *piVar5 = *piVar7;
-      piVar5[1] = (int)piVar7;
-      *piVar7 = (int)piVar5;
-      *(int **)(*piVar5 + 4) = piVar5;
-    }
-    if (piVar5 == (int *)0x0) {
-      return;
-    }
-    *(unsigned short *)(piVar5 + 2) = temp_v3 + 1;
-    *(unsigned short *)((int)piVar5 + 10) = temp_v2;
-  }
-  else if (temp_v0 <= temp_v3) {
-    if (temp_v2 <= temp_v3) goto LAB_00437af4;
-    *(unsigned short *)(piVar5 + 2) = temp_v3 + 1;
-    goto LAB_00437ac0;
-  }
-  temp_v4 = *(int *)(temp_v4 + 4);
-  goto LAB_00437ac0;
+    return 1;
 }
-
-} /* extern "C" */
+}

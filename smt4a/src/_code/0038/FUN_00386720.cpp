@@ -1,113 +1,96 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00386720` (_code @ 0x386720, 0x19c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail uses a six-entry jump table; compiler emits a comparison tree and delays common return. */
+#include "map/lmapMain.h"
+struct MapElevationView {
+    u8 prefix[0xB];
+    u8 active;
+    u8 unk0C[0xC];
+    u32 phase;
+    s32 frame;
+    MapVector start;
+    MapVector target;
+    u8 unk38[8];
+    s32 map;
+    u32 unk44;
+    u32 variant;
+    u8 unk4C[0x44];
+    f32 radius;
+    u8 unk94[0x48];
+    f32 opacity;
+    u8 dirty;
+    u8 unkE1[0x13];
+    u32 flags;
+};
+typedef char MapElevationOffsets[offsetof(MapElevationView, phase) == 0x18 &&
+    offsetof(MapElevationView, opacity) == 0xDC && offsetof(MapElevationView, flags) == 0xF4 ? 1 : -1];
 extern "C" {
+extern LmapMainStateA *g_lmapMainState;
+extern LmapSceneA *g_lmapScene;
+extern GameStateA g_gameState;
+void FUN_00227a70(void);
+void FUN_002a2e98(s32 map, u32 variant, u32 specialMap, u32 mode);
+void FUN_0033feb8(LmapMainStateA *state);
+void FUN_002df914(void);
+void FUN_00244ac8(void);
+void FUN_002747dc(void);
+void FUN_00364740(s32 map, u32 variant);
+void FUN_002ddea0(void);
+void stateSetterSetFromBase(LmapObj *object, s32 map, u32 variant);
+void fieldBuildAreaPlacementList(LmapObj *object);
 
-int FUN_00227a70(void);
-int FUN_00244ac8(void);
-int FUN_002747dc(void);
-int FUN_002a2e98(unsigned int, unsigned int);
-int FUN_002ddea0(void);
-int FUN_002df914(void);
-int FUN_0033feb8(int);
-int FUN_00364740(unsigned int, unsigned int);
-int FUN_004839b4(int);
-int stateSetterSetFromBase(int, int, unsigned int);
-int VectorSignedToFloat(int, int);
-
-extern int g_lmapMainState; /* 0x580238 */
-extern int g_lmapScene; /* 0x581288 */
-extern unsigned int DAT_005f1600; /* 0x5f1600 */
-extern unsigned char DAT_005f1614; /* 0x5f1614 */
-extern unsigned char DAT_005f185a; /* 0x5f185a */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00227a70. */
-/* Supplied declaration required: FUN_00244ac8. */
-/* Supplied declaration required: FUN_002747dc. */
-/* Supplied declaration required: FUN_002a2e98. */
-/* Supplied declaration required: FUN_002ddea0. */
-/* Supplied declaration required: FUN_002df914. */
-/* Supplied declaration required: FUN_0033feb8. */
-/* Supplied declaration required: FUN_00364740. */
-/* Supplied declaration required: FUN_004839b4. */
-/* Supplied declaration required: stateSetterSetFromBase. */
-
-
-unsigned int FUN_00386720(void)
-
+u32 FUN_00386720(void)
 {
-/* irregular: irregular input(s): in_fpscr; 11 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  unsigned int temp_v4;
-  unsigned int in_fpscr;
-  float temp_v5;
-  
-  temp_v0 = g_lmapMainState;
-  switch(*(unsigned int *)(g_lmapMainState + 0x18)) {
-  case 0:
-    puVar5 = (unsigned int *)(g_lmapMainState + 0x28);
-    temp_v2 = *(unsigned int *)(g_lmapScene + 0x1c);
-    temp_v3 = *(unsigned int *)(g_lmapScene + 0x20);
-    temp_v4 = *(unsigned int *)(g_lmapScene + 0x24);
-    *(unsigned int *)(g_lmapMainState + 0x20) = temp_v2;
-    *(unsigned int *)(temp_v0 + 0x24) = temp_v3;
-    *puVar5 = temp_v4;
-    *(unsigned int *)(temp_v0 + 0x2c) = temp_v2;
-    *(unsigned int *)(temp_v0 + 0x30) = temp_v3;
-    *(unsigned int *)(temp_v0 + 0x34) = temp_v4;
-    *(unsigned int *)(temp_v0 + 0x30) = 0x44480000;
-    *(unsigned int *)(temp_v0 + 0xdc) = 0;
-    *(unsigned char *)(temp_v0 + 0xe0) = 1;
-    *(unsigned int *)(temp_v0 + 0x48) = 99;
-    DAT_005f1600 = 99;
-    FUN_00227a70();
-    FUN_002a2e98(*(unsigned int *)(temp_v0 + 0x40),*(unsigned int *)(temp_v0 + 0x48));
-    *(unsigned int *)(temp_v0 + 0x18) = 1;
-    *(unsigned int *)(temp_v0 + 0x1c) = 0;
-    break;
-  case 1:
-    FUN_0033feb8(g_lmapMainState);
-    temp_v1 = *(int *)(temp_v0 + 0x1c) + 1;
-    *(int *)(temp_v0 + 0x1c) = temp_v1;
-    temp_v5 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(float *)(g_lmapScene + 0x20) =
-         *(float *)(temp_v0 + 0x24) +
-         (*(float *)(temp_v0 + 0x30) - *(float *)(temp_v0 + 0x24)) * temp_v5 * 0.033333335f;
-    if (*(int *)(temp_v0 + 0x1c) >= 0x1e) {
-      DAT_005f1614 = 0;
-      DAT_005f185a = 1;
-      *(unsigned int *)(temp_v0 + 0xdc) = 0x3f800000;
-      *(unsigned char *)(temp_v0 + 0xe0) = 1;
-      *(unsigned int *)(temp_v0 + 0x18) = 2;
+    // Local view includes the state setter's flags; its full class is not yet recovered.
+    MapElevationView *state = (MapElevationView *)g_lmapMainState;
+    switch (state->phase) {
+    case 0:
+        state->start = *(const MapVector *)g_lmapScene->transform.position;
+        state->target = state->start;
+        state->target.y = 800.0f;
+        state->opacity = 0.0f;
+        state->dirty = 1;
+        state->variant = 99;
+        g_gameState.submode = 99;
+        FUN_00227a70();
+        FUN_002a2e98(state->map, state->variant, state->map == 101 ? 101 : 0, state->map == 101 ? 10 : 0);
+        state->phase = 1;
+        state->frame = 0;
+        break;
+    case 1:
+        FUN_0033feb8((LmapMainStateA *)state);
+        ++state->frame;
+        g_lmapScene->transform.position[1] = state->start.y +
+            (state->target.y - state->start.y) * (f32)state->frame * (1.0f / 30.0f);
+        if (state->frame >= 30) {
+            g_gameState.inputBlocked = 0;
+            g_gameState.request.unk25E = 1;
+            state->opacity = 1.0f;
+            state->dirty = 1;
+            state->phase = 2;
+        }
+        break;
+    case 2:
+        FUN_0033feb8((LmapMainStateA *)state);
+        break;
+    case 5:
+        state->radius = 200.0f;
+        FUN_002df914();
+        state = (MapElevationView *)g_lmapMainState;
+        state->active = 0;
+        state->flags &= ~2;
+        FUN_00244ac8();
+        {
+            s32 map = state->map;
+            LmapMainStateA *current = g_lmapMainState;
+            FUN_002747dc();
+            FUN_00364740(map, ((MapElevationView *)current)->variant);
+        }
+        FUN_002ddea0();
+        stateSetterSetFromBase((LmapObj *)&state->flags, state->map - 100, state->variant);
+        fieldBuildAreaPlacementList((LmapObj *)&state->flags);
+        g_gameState.inputBlocked = 0;
+        g_gameState.request.unk25E = 1;
+        break;
     }
-    break;
-  case 2:
-    FUN_0033feb8(g_lmapMainState);
-    break;
-  case 5:
-    *(unsigned int *)(g_lmapMainState + 0x90) = 0x43480000;
-    FUN_002df914();
-    temp_v0 = g_lmapMainState;
-    *(unsigned char *)(g_lmapMainState + 0xb) = 0;
-    *(unsigned int *)(temp_v0 + 0xf4) = *(unsigned int *)(temp_v0 + 0xf4) & 0xfffffffd;
-    FUN_00244ac8();
-    temp_v1 = g_lmapMainState;
-    temp_v4 = *(unsigned int *)(temp_v0 + 0x40);
-    FUN_002747dc();
-    FUN_00364740(temp_v4,*(unsigned int *)(temp_v1 + 0x48));
-    FUN_002ddea0();
-    stateSetterSetFromBase(temp_v0 + 0xf4,*(int *)(temp_v0 + 0x40) - 100,*(unsigned int *)(temp_v0 + 0x48));
-    FUN_004839b4(temp_v0 + 0xf4);
-    DAT_005f1614 = 0;
-    DAT_005f185a = 1;
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

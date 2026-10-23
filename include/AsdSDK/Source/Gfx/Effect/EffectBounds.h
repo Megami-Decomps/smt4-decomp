@@ -1,6 +1,7 @@
 #ifndef ASDSDK_SOURCE_GFX_EFFECT_EFFECTBOUNDS_H
 #define ASDSDK_SOURCE_GFX_EFFECT_EFFECTBOUNDS_H
 #include "common.h"
+#include <stddef.h>
 
 struct EffectBoundsImage {
     /* 0x00 */ u8 unk00[0x24];
@@ -29,5 +30,8 @@ struct EffectBoundsSource {
     /* 0x14 */ f32 marginY;
     /* 0x18 */ u8 unk18[4];
     /* 0x1C */ u8 useCustomSize;
+    /* 0x1D */ u8 useAlternateMode;
 };
+typedef char EffectBoundsSourceModeOffsetCheck[
+    offsetof(EffectBoundsSource, useAlternateMode) == 0x1D && sizeof(EffectBoundsSource) == 0x20 ? 1 : -1];
 #endif

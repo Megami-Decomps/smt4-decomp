@@ -1,109 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003daaf8` (_code @ 0x3daaf8, 0x170 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Allocation-size CSE, interval cursor folding, percentage constant lifetime and saved registers differ. */
+#include "shard/W6_W6Match8_StatGrowth.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
+void *asdOperatorNewD(u32 size);
+void asdOperatorDeleteC(void *memory);
+void rt_memclr(void *memory, u32 size);
+void aocCollectLevelEntries(LevelEntry *entries, s32 *count, u32 kind, s32 maximumLevel);
 
-int aocCollectLevelEntries(unsigned short *, int *, int, int);
-int asdOperatorNewD(void);
-int asdOperatorDeleteC(unsigned short *, int);
-int rt_memclr(void);
-
-typedef struct fn_003daaf8_arg1 fn_003daaf8_arg1;
-struct fn_003daaf8_arg1 {
-    unsigned char pad_0x0[0x8];
-    ushort field_0x8; /* +0x8 */
-    unsigned char pad_0xa[0x1];
-    byte field_0xb; /* +0xb */
-    unsigned char pad_0xc[0x4];
-    byte field_0x10; /* +0x10 */
-};
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: aocCollectLevelEntries. */
-/* Supplied declaration required: asdOperatorNewD. */
-/* Supplied declaration required: asdOperatorDeleteC. */
-/* Supplied declaration required: rt_memclr. */
-
-
-unsigned int FUN_003daaf8(int param_1,fn_003daaf8_arg1 *param_2,unsigned int param_3,int param_4)
-
+/* Accumulates mana growth over the applicable level intervals, applying the mana scale and the stat cap. */
+u32 FUN_003daaf8(s32 level, const StatGrowthParameters *parameters)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned short *puVar6;
-  unsigned short *puVar7;
-  unsigned char *pbVar8;
-  unsigned short *puVar9;
-  unsigned short *puVar10;
-  unsigned short temp_v5;
-  int temp_v6;
-  unsigned short temp_v7;
-  int temp_v8;
-  
-  temp_v0 = param_2->field_0x10;
-  temp_v8 = param_4;
-  temp_v2 = dataTableGet(9,4);
-  temp_v3 = dataTableGetEntries();
-  temp_v4 = dataTableGetCount(temp_v2);
-  temp_v6 = 0;
-  if (temp_v4 != 0) {
-    pbVar8 = (unsigned char *)(temp_v3 + 4);
-    do {
-      temp_v1 = *pbVar8;
-      pbVar8 = pbVar8 + 8;
-      if (temp_v1 == temp_v0) {
-        temp_v6 = temp_v6 + 1;
-      }
-      temp_v4 = temp_v4 - 1;
-    } while (temp_v4 != 0);
-  }
-  temp_v8 = 0;
-  puVar6 = (unsigned short *)((temp_v6 + 1) * 8);
-  asdOperatorNewD();
-  rt_memclr();
-  aocCollectLevelEntries(puVar6,&temp_v8,temp_v0,param_1);
-  temp_v5 = 0;
-  if (temp_v8 != 0) {
-    puVar9 = puVar6 + 1;
-    puVar7 = puVar6;
-    temp_v3 = temp_v8;
-    puVar10 = puVar6 + 3;
-    do {
-      temp_v7 = 0;
-      if ((int)(unsigned int)*puVar9 < param_1) {
-        temp_v7 = ((unsigned int)*puVar9 - (unsigned int)*puVar7) + 1;
-      }
-      else if ((int)(unsigned int)*puVar7 <= param_1) {
-        temp_v7 = (param_1 - (unsigned int)*puVar7) + 1;
-      }
-      temp_v3 = temp_v3 - 1;
-      puVar9 = puVar9 + 4;
-      puVar7 = puVar7 + 4;
-      temp_v5 = temp_v7 * (((((unsigned int)param_2->field_0xb * (unsigned int)(unsigned char)*puVar10 * 0xa3d7 + 0xa3d7) >>
-                           0x16) * 0x2d) / 100) + temp_v5;
-      puVar10 = puVar10 + 4;
-    } while (temp_v3 != 0);
-  }
-  temp_v3 = (unsigned int)param_2->field_0x8 * 0x66666673;
-  temp_v5 = temp_v5 + ((unsigned int)param_2->field_0x8 * 0x2d) / 100;
-  if (temp_v5 < 10000) {
-    asdOperatorDeleteC(puVar6,temp_v3);
-    return temp_v5;
-  }
-  asdOperatorDeleteC(puVar6,temp_v3);
-  return 9999;
+    u32 kind = parameters->kind;
+    void *section = dataTableGet(9, 4);
+    const LevelEntry *table = (const LevelEntry *)dataTableGetEntries(section);
+    u32 tableCount = dataTableGetCount(section);
+    s32 matching = 0;
+    for (u32 index = 0; index < tableCount; ++index) {
+        if (table[index].kind == kind) {
+            ++matching;
+        }
+    }
+    s32 count = 0;
+    LevelEntry *entries = (LevelEntry *)asdOperatorNewD((matching + 1) * sizeof(LevelEntry));
+    rt_memclr(entries, matching * sizeof(LevelEntry));
+    aocCollectLevelEntries(entries, &count, kind, level);
+    u16 growth = 0;
+    u32 remaining = (u32)count;
+    for (const LevelEntry *entry = entries; remaining != 0; --remaining, ++entry) {
+        u16 levels = 0;
+        if (entry->id < level) {
+            levels = (u16)(entry->id - entry->level + 1);
+        } else if (entry->level <= level) {
+            levels = (u16)(level - entry->level + 1);
+        }
+        u32 rate = ((u32)parameters->mpGrowth * (u32)entry->rateB) / 100;
+        growth += levels * ((rate * 45) / 100);
+    }
+    u16 total = growth + ((u32)parameters->baseMp * 45) / 100;
+    if (total > 9999) {
+        asdOperatorDeleteC(entries);
+        return 9999;
+    }
+    asdOperatorDeleteC(entries);
+    return total;
 }
-
-} /* extern "C" */
+}

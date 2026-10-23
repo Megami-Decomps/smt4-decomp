@@ -1,91 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00399ab4` (_code @ 0x399ab4, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: scissor-stack address calculation, clamp registers and branch layout differ. */
+#include "shard/S1ListPanel.h"
 extern "C" {
+s32 asdGxGetPresetIndex(void);
+u32 FUN_00169d8c(s32 preset);
+u32 FUN_00169db4(s32 preset);
+void cursorResetFromParam(void);
+void asdModelCommandBlockRelease(void);
+extern RenderCtx *g_renderCtx;
+extern u32 *DAT_005b3fe4;
+extern u32 DAT_005b3fe8;
 
-int asdModelCommandBlockRelease(void);
-int cursorResetFromParam(void);
-int asdGxGetPresetIndex(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-extern int DAT_005b3fe4; /* 0x5b3fe4 */
-extern int DAT_005b3fe8; /* 0x5b3fe8 */
-
-/* Supplied declaration required: asdModelCommandBlockRelease. */
-/* Supplied declaration required: cursorResetFromParam. */
-extern unsigned int FUN_00169d8c(void);
-extern unsigned int FUN_00169db4(void);
-/* Supplied declaration required: asdGxGetPresetIndex. */
-
-
-void FUN_00399ab4(unsigned int param_1)
-
+/* Emit the scissor origin and inclusive maximum, clamped to the active viewport. */
+void FUN_00399ab4(u32 origin)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  
-  asdGxGetPresetIndex();
-  temp_v1 = FUN_00169d8c();
-  asdGxGetPresetIndex();
-  temp_v2 = FUN_00169db4();
-  cursorResetFromParam();
-  temp_v0 = DAT_005b3fe4;
-  if (*(int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1318) * 4 + 0x1320) != 0) {
-    temp_v5 = param_1 >> 0x10;
-    param_1 = param_1 & 0xffff;
-    temp_v4 = temp_v5;
-    if (temp_v2 <= temp_v5) {
-      temp_v4 = temp_v2 - 1;
+    u32 width = FUN_00169d8c(asdGxGetPresetIndex());
+    u32 height = FUN_00169db4(asdGxGetPresetIndex());
+    cursorResetFromParam();
+    u32 *buffer = DAT_005b3fe4;
+    u32 minimum;
+    u32 maximum;
+    if (g_renderCtx->states[g_renderCtx->stateIndex] != 0) {
+        u32 top = origin >> 16;
+        u32 left = origin & 0xFFFF;
+        u32 clampedTop = top;
+        if (height <= top)
+            clampedTop = height - 1;
+        u32 clampedLeft = left;
+        if (width <= left)
+            clampedLeft = width - 1;
+        minimum = clampedTop | (clampedLeft << 16);
+        u32 extent = g_renderCtx->scissorMaximum.values[g_renderCtx->scissorMaximum.index];
+        u32 bottom = top + (extent >> 16) - 1;
+        if (static_cast<s32>(bottom) < 0)
+            bottom = 0;
+        else if (height <= bottom)
+            bottom = height - 1;
+        left += extent & 0xFFFF;
+        u32 right = left - 1;
+        u32 rightWord;
+        if (static_cast<s32>(right) < 0) {
+            rightWord = 0;
+        } else {
+            if (right < width)
+                width = left;
+            rightWord = (width - 1) << 16;
+        }
+        maximum = bottom | rightWord;
+    } else {
+        minimum = 0;
+        maximum = (height - 1) | ((width - 1) << 16);
     }
-    temp_v3 = param_1;
-    if (temp_v1 <= param_1) {
-      temp_v3 = temp_v1 - 1;
-    }
-    temp_v4 = temp_v4 | (temp_v3 << 0x10);
-    temp_v3 = *(unsigned int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1358) * 4 + 0x1360);
-    temp_v5 = (temp_v5 + (temp_v3 >> 0x10)) - 1;
-    if ((int)temp_v5 < 0) {
-      temp_v5 = 0;
-    }
-    else if (temp_v2 <= temp_v5) {
-      temp_v5 = temp_v2 - 1;
-    }
-    param_1 = param_1 + (temp_v3 & 0xffff);
-    temp_v2 = param_1 - 1;
-    if ((int)temp_v2 < 0) {
-      temp_v1 = 0;
-    }
-    else {
-      if (temp_v2 < temp_v1) {
-        temp_v1 = param_1;
-      }
-      temp_v1 = (temp_v1 - 1) * 0x10000;
-    }
-    temp_v5 = temp_v5 | temp_v1;
-  }
-  else {
-    temp_v4 = 0;
-    temp_v5 = (temp_v2 - 1) | (temp_v1 * 0x10000 - 0x10000);
-  }
-  *(unsigned int *)(DAT_005b3fe4 + DAT_005b3fe8 * 4) = temp_v4;
-  *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4 + 4) = 0xf0066;
-  DAT_005b3fe8 = DAT_005b3fe8 + 2;
-  *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4) = temp_v5;
-  *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4 + 4) = 0xf0067;
-  DAT_005b3fe8 = DAT_005b3fe8 + 2;
-  asdModelCommandBlockRelease();
-  return;
+    DAT_005b3fe4[DAT_005b3fe8] = minimum;
+    buffer[DAT_005b3fe8 + 1] = 0xF0066;
+    DAT_005b3fe8 += 2;
+    buffer[DAT_005b3fe8] = maximum;
+    buffer[DAT_005b3fe8 + 1] = 0xF0067;
+    DAT_005b3fe8 += 2;
+    asdModelCommandBlockRelease();
 }
-
-} /* extern "C" */
+}

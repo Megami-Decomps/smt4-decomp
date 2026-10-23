@@ -1,85 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00399c90` (_code @ 0x399c90, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: simplified filesystem-result filtering, scratch-frame size and loop registers differ. */
+#include "shard/GlobalBlocks.h"
 
 extern "C" {
+u32 FUN_002e0e04(const char *, u16 *, u32);
+void FUN_002e59f8(const u16 *, u16 *, u32);
+void rt_aeabi_memclr(void *, u32);
+void FUN_001886bc();
+u32 FUN_0042b2c0(const u16 *);
 
-int FUN_001886bc(void);
-int FUN_002e0e04(int, short [248], unsigned int);
-int FUN_002e59f8(short [248], unsigned char [528], int);
-int rt_aeabi_memclr(unsigned char [528], unsigned int);
-int FUN_0042b2c0(void);
-
-extern unsigned char *DAT_005b40c4; /* 0x5b40c4 */
-
-/* Supplied declaration required: FUN_001886bc. */
-/* Supplied declaration required: FUN_002e0e04. */
-/* Supplied declaration required: FUN_002e59f8. */
-/* Supplied declaration required: rt_aeabi_memclr. */
-/* Supplied declaration required: FUN_0042b2c0. */
-
-
-void FUN_00399c90(unsigned int param_1,int param_2)
-
+u32 FUN_00399c90(u32 root, const char *name)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  int temp_v1;
-  int temp_v2;
-  unsigned int unaff_r10;
-  short asStack_420 [248];
-  unsigned char temp_v3 [528];
-  
-  FUN_002e0e04(param_2,asStack_420,param_1);
-  if (param_2 == 0) {
-    return;
-  }
-  temp_v0 = 0;
-  do {
-    temp_v2 = temp_v0;
-    if (asStack_420[temp_v0] == 0) break;
-    temp_v0 = temp_v0 + 1;
-    temp_v2 = 0xf8;
-  } while (temp_v0 < 0xf8);
-  if (0 < temp_v2) {
-    unaff_r10 = 0x1f2;
-  }
-  temp_v1 = 0;
-  temp_v0 = 0;
-  if (temp_v0 < temp_v2) {
-    do {
-      if ((asStack_420[temp_v0] == 0x2f) && (temp_v1 = temp_v1 + 1, temp_v1 != 1)) {
-        rt_aeabi_memclr(temp_v3,unaff_r10);
-        FUN_002e59f8(asStack_420,temp_v3,temp_v0 * 2 + 2);
-        FUN_001886bc();
-        puVar2 = temp_v3;
-        FUN_0042b2c0();
-        if ((int)puVar2 < 0) {
-          if (((((unsigned int)puVar2 & 0x3fc00) == 0x4400) && (((unsigned int)puVar2 & 0x3ff) >= 100)) &&
-             (((unsigned int)puVar2 & 0x3ff) < 0xb4)) {
-            DAT_005b40c4 = puVar2;
-            return;
-          }
-          if (((unsigned int)puVar2 & 0x3fc00) != 0x4400) {
-            DAT_005b40c4 = puVar2;
-            return;
-          }
-          if (((unsigned int)puVar2 & 0x3ff) < 0xb4) {
-            DAT_005b40c4 = puVar2;
-            return;
-          }
-          if (((unsigned int)puVar2 & 0x3ff) >= 200) {
-            DAT_005b40c4 = puVar2;
-            return;
-          }
+    u16 path[248];
+    u16 prefix[264];
+    if (!FUN_002e0e04(name, path, root))
+        return 0xE0E046BC;
+    s32 length = 248;
+    for (s32 i = 0; i < 248; ++i) {
+        if (!path[i]) {
+            length = i;
+            break;
         }
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < temp_v2);
-  }
-  DAT_005b40c4 = (unsigned char *)0x0;
-  return;
+    }
+    s32 slashCount = 0;
+    for (s32 i = 0; i < length; ++i) {
+        if (path[i] == '/' && ++slashCount != 1) {
+            rt_aeabi_memclr(prefix, 498);
+            FUN_002e59f8(path, prefix, i * 2 + 2);
+            FUN_001886bc();
+            u32 result = FUN_0042b2c0(prefix);
+            if (result & 0x80000000) {
+                const u32 module = result & 0x3FC00;
+                const s32 description = result & 0x3FF;
+                if (module != 0x4400 || description < 180 || description >= 200) {
+                    DAT_005b40b4.unk10 = result;
+                    return result;
+                }
+            }
+        }
+    }
+    DAT_005b40b4.unk10 = 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

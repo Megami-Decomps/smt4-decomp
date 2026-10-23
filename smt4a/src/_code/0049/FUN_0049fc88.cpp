@@ -1,125 +1,79 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049fc88` (_code @ 0x49fc88, 0x1cc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: player-affinity comparison splits, mask/unit saved registers swap, and the affinity tail branch reverses. */
+#include "shard/Shard0031.h"
+#include "shard/Shard004B.h"
 
+struct PlayerStatusViewA { u8 prefix[0x5E]; u16 status; };
 extern "C" {
+PlayerStatusViewA* gameGetPlayerData(void);
+ScaledRecordValues* gameGetSlotRecord(s32 slot);
+PartyStatusSlots* gameGetSlotTable(void);
+s32 gameSlotTableFindFree(void);
+s32 randRange(u32 maximum);
+void FUN_003dfad4(u16* affinities, const PlayerStatusViewA* player);
+void affinityResolveUnitSlot(u16* output, const ScaledRecordValues* unit, s32 affinity);
 
-int gameGetPlayerData(void);
-int affinityResolveUnitSlot(unsigned short [11], int, int);
-int FUN_003dfad4(unsigned short [11], unsigned int);
-int VectorSignedToFloat(unsigned int, int);
-
-/* stack frame of param_2: 2 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned short sp3A; /* 0x3a: local_3a */
-    unsigned short sp50; /* 0x50: local_50 */
-} param_2_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-extern unsigned int randRange(unsigned int);
-/* Supplied declaration required: gameGetPlayerData. */
-extern int gameGetSlotRecord(void);
-extern int gameGetSlotTable(void);
-extern int gameSlotTableFindFree(void);
-/* Supplied declaration required: affinityResolveUnitSlot. */
-/* Supplied declaration required: FUN_003dfad4. */
-
-
-void FUN_0049fc88(unsigned int param_1,unsigned int param_2)
-
+void FUN_0049fc88(u32 group, u32 statusBit, f32 chance)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned short temp_v1;
-  unsigned char temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int in_fpscr;
-  unsigned int temp_v8;
-  float in_s0;
-  float temp_v9;
-  unsigned long long temp_v10;
-  unsigned short temp_v11 [11];
-  unsigned short temp_v12;
-  
-  temp_v10 = (unsigned long long)(unsigned int)in_s0;
-  temp_v8 = (in_fpscr & 0xfffffff) | ((unsigned int)(in_s0 == 0.0f) << 0x1e) | ((unsigned int)(0.0f <= in_s0) << 0x1d);
-  temp_v2 = (unsigned char)(temp_v8 >> 0x18);
-  if (!(unsigned char)((temp_v2 >> 5) & 1) || (unsigned char)(temp_v2 >> 6)) {
-    return;
-  }
-  temp_v0 = 1 << (param_2 & 0xff);
-  if (((((param_1 == 0 || param_1 == 2) || param_1 == 3) &&
-       (temp_v3 = gameGetPlayerData(), (*(unsigned short *)(temp_v3 + 0x5e) & 2) == 0)) &&
-      (temp_v3 = gameGetPlayerData(), (*(unsigned short *)(temp_v3 + 0x5e) & 0x400) == 0)) &&
-     (temp_v3 = gameGetPlayerData(), (*(unsigned short *)(temp_v3 + 0x5e) & temp_v0) == 0)) {
-    temp_v4 = randRange(99);
-    temp_v9 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(temp_v8 >> 0x16) & 3);
-    temp_v8 = (temp_v8 & 0xfffffff) | ((unsigned int)((float)temp_v10 <= temp_v9) << 0x1d);
-    if (!romwright_subpiece_4_1_0(temp_v8 >> 0x1d,0)) {
-      if (param_2 != 5) {
-        temp_v3 = gameGetPlayerData();
-        *(unsigned short *)(temp_v3 + 0x5e) = *(unsigned short *)(temp_v3 + 0x5e) | (unsigned short)temp_v0;
-      }
-      else {
-        temp_v4 = gameGetPlayerData();
-        FUN_003dfad4(temp_v11,temp_v4);
-        temp_v12 = temp_v12 >> 10;
-        if (!((temp_v12 == 1 || temp_v12 == 3) || temp_v12 == 4)) {
-          temp_v3 = gameGetPlayerData();
-          *(unsigned short *)(temp_v3 + 0x5e) = *(unsigned short *)(temp_v3 + 0x5e) | (unsigned short)temp_v0;
-        }
-      }
+    if (chance <= 0.0f) {
+        return;
     }
-  }
-  if (param_1 >= 2) {
-    if (param_1 != 2 && param_1 != 3) {
-      return;
-    }
-    temp_v7 = 3;
-    temp_v3 = gameGetSlotTable();
-    temp_v3 = temp_v3 + 0x1ca0;
-  }
-  else {
-    temp_v7 = gameSlotTableFindFree();
-    temp_v3 = gameGetSlotTable();
-    temp_v3 = temp_v3 + 0x1c88;
-  }
-  temp_v6 = 0;
-  if (temp_v6 < temp_v7) {
-    do {
-      if (-1 < *(char *)(temp_v3 + temp_v6)) {
-        temp_v5 = gameGetSlotRecord();
-        temp_v1 = *(unsigned short *)(temp_v5 + 0x60);
-        if (((temp_v1 & 2) == 0 && (temp_v1 & 0x400) == 0) && (temp_v1 & temp_v0) == 0) {
-          temp_v4 = randRange(99);
-          temp_v9 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(temp_v8 >> 0x16) & 3);
-          temp_v8 = (temp_v8 & 0xfffffff) | ((unsigned int)((float)temp_v10 <= temp_v9) << 0x1d);
-          if (!romwright_subpiece_4_1_0(temp_v8 >> 0x1d,0)) {
-            if (param_2 != 5) {
-              *(unsigned short *)(temp_v5 + 0x60) = *(unsigned short *)(temp_v5 + 0x60) | (unsigned short)temp_v0;
+    u32 mask = 1u << statusBit;
+    u16 affinities[21];
+    if ((group == 0 || group == 2 || group == 3) &&
+        !(gameGetPlayerData()->status & 2) && !(gameGetPlayerData()->status & 0x400) &&
+        !(gameGetPlayerData()->status & mask) && static_cast<f32>(randRange(99)) < chance) {
+        if (statusBit != 5) {
+            PlayerStatusViewA* player = gameGetPlayerData();
+            player->status |= mask;
+        } else {
+            FUN_003dfad4(affinities, gameGetPlayerData());
+            u16 state = affinities[11] >> 10;
+            if (!(state == 1 || state == 3 || state == 4)) {
+                PlayerStatusViewA* player = gameGetPlayerData();
+                player->status |= mask;
             }
-            else {
-              affinityResolveUnitSlot(temp_v11,temp_v5,0xb);
-              temp_v1 = temp_v11[0] >> 10;
-              if (!((temp_v1 == 1 || temp_v1 == 3) || temp_v1 == 4)) {
-                *(unsigned short *)(temp_v5 + 0x60) = *(unsigned short *)(temp_v5 + 0x60) | (unsigned short)temp_v0;
-              }
-            }
-          }
         }
-      }
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < temp_v7);
-  }
-  return;
+    }
+    s32 count;
+    s8* slots;
+    switch (group) {
+    case 0:
+    case 1:
+        count = gameSlotTableFindFree();
+        slots = gameGetSlotTable()->active.slots;
+        break;
+    case 2:
+    case 3:
+        count = 3;
+        slots = gameGetSlotTable()->reserve;
+        break;
+    default:
+        return;
+    }
+    for (s32 index = 0; index < count; ++index) {
+        if (slots[index] < 0) {
+            continue;
+        }
+        ScaledRecordValues* unit = gameGetSlotRecord(slots[index]);
+        if (unit->flags & 2) {
+            continue;
+        }
+        if (unit->flags & 0x400) {
+            continue;
+        }
+        if (unit->flags & mask) {
+            continue;
+        }
+        if (static_cast<f32>(randRange(99)) < chance) {
+            if (statusBit == 5) {
+                affinityResolveUnitSlot(affinities, unit, 11);
+                u16 state = affinities[0] >> 10;
+                if (state == 1 || state == 3 || state == 4) {
+                    continue;
+                }
+            }
+            unit->flags |= mask;
+        }
+    }
 }
-
-} /* extern "C" */
+}

@@ -1,73 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003819b8` (_code @ 0x3819b8, 0x108 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retry-loop branch layout and final mask/result register allocation differ. */
+#include "common.h"
+#include <stddef.h>
+
+struct RandomChoiceStateView {
+    u8 unk00[8];
+    u8 usedMask; /* 0x08 */
+    u8 suppressedMask; /* 0x09 */
+    u8 previousChoice; /* 0x0a */
+};
+typedef char RandomChoicePreviousOffset[offsetof(RandomChoiceStateView, previousChoice) == 0xa ? 1 : -1];
 
 extern "C" {
+s32 randNextInRange(u32);
 
-extern int randNextInRange(unsigned int);
-
-
-unsigned int FUN_003819b8(int param_1)
-
+/* Exhaust all four choices before restarting, without repeating the previous choice. */
+u32 FUN_003819b8(RandomChoiceStateView *state)
 {
-/* irregular: 3 goto(s) */
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  if (*(char *)(param_1 + 8) == '\x0f') {
-    *(unsigned char *)(param_1 + 8) = 0;
-  }
-  temp_v3 = randNextInRange(3);
-  temp_v1 = *(unsigned char *)(param_1 + 8);
-  do {
-    while( 1 ) {
-      do {
-        if ((temp_v1 & 1) == 0) {
-          if (temp_v3 != 0) {
-            temp_v3 = temp_v3 - 1;
-          }
-          else if (*(char *)(param_1 + 10) != '\0') {
-            *(unsigned char *)(param_1 + 10) = 0;
-            goto LAB_00381a84;
-          }
+    if (state->usedMask == 0xf)
+        state->usedMask = 0;
+    s32 skip = randNextInRange(3);
+    u8 used = state->usedMask;
+    for (;;) {
+        if (!(used & 1)) {
+            if (skip != 0)
+                --skip;
+            else if (state->previousChoice != 0) {
+                state->previousChoice = 0;
+                break;
+            }
         }
-        if ((temp_v1 & 2) == 0) {
-          if (temp_v3 != 0) {
-            temp_v3 = temp_v3 - 1;
-          }
-          else if (*(char *)(param_1 + 10) != '\x01') {
-            *(unsigned char *)(param_1 + 10) = 1;
-            goto LAB_00381a84;
-          }
+        if (!(used & 2)) {
+            if (skip != 0)
+                --skip;
+            else if (state->previousChoice != 1) {
+                state->previousChoice = 1;
+                break;
+            }
         }
-        if ((temp_v1 & 4) == 0) {
-          if (temp_v3 != 0) {
-            temp_v3 = temp_v3 - 1;
-          }
-          else if (*(char *)(param_1 + 10) != '\x02') {
-            temp_v2 = 2;
-            goto LAB_00381ab8;
-          }
+        if (!(used & 4)) {
+            if (skip != 0)
+                --skip;
+            else if (state->previousChoice != 2) {
+                state->previousChoice = 2;
+                break;
+            }
         }
-      } while ((temp_v1 & 8) != 0);
-      if (temp_v3 == 0) break;
-      temp_v3 = temp_v3 - 1;
+        if (!(used & 8)) {
+            if (skip != 0)
+                --skip;
+            else if (state->previousChoice != 3) {
+                state->previousChoice = 3;
+                break;
+            }
+        }
     }
-  } while (*(char *)(param_1 + 10) == '\x03');
-  temp_v2 = 3;
-LAB_00381ab8:
-  *(unsigned char *)(param_1 + 10) = temp_v2;
-LAB_00381a84:
-  temp_v4 = (unsigned int)*(unsigned char *)(param_1 + 10);
-  temp_v0 = 1 << temp_v4;
-  if ((temp_v0 & *(unsigned char *)(param_1 + 9)) != 0) {
-    temp_v4 = 5;
-  }
-  *(unsigned char *)(param_1 + 8) = temp_v1 | (unsigned char)temp_v0;
-  return temp_v4;
+    u32 choice = state->previousChoice;
+    u32 bit = 1 << choice;
+    if (bit & state->suppressedMask)
+        choice = 5;
+    state->usedMask = used | bit;
+    return choice;
 }
-
-} /* extern "C" */
+}

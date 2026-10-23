@@ -1,93 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004327f8` (_code @ 0x4327f8, 0x198 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stream/input pointer reloads, expansion-ratio VFP registers and marker-selection predication differ. */
+#include "shard/Shard0031.h"
 
-extern "C" {
-
-int FUN_00126d1c(...);
-int FUN_001274fc(...);
-int onlineBufferGetData(...);
-int FUN_002fa010(...);
-int VectorFloatToUnsigned(...);
-int VectorUnsignedToFloat(...);
-int rt_memcpy(...);
-
-typedef struct fn_004327f8_arg2 fn_004327f8_arg2;
-struct fn_004327f8_arg2 {
-    undefined1 field_0x0; /* +0x0 */
-    unsigned char pad_0x1[0xb];
-    int field_0xc; /* +0xc */
-    int field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x4];
-    int field_0x18; /* +0x18 */
+/* Only the six I/O fields of the existing zlib stream are accessed here. */
+struct OnlineCompressionStreamPrefix {
+    u8 *input;
+    u32 availableInput;
+    u32 totalInput;
+    u8 *output;
+    u32 availableOutput;
+    u32 totalOutput;
 };
+struct OnlineCompressionWorkPrefix {
+    u8 unk00[0x38];
+    OnlineCompressionStreamPrefix stream;
+};
+struct OnlineCompressionOwner {
+    u8 unk000[0x120];
+    OnlineCompressionWorkPrefix *work;
+};
+typedef char OnlineCompressionOffsets[
+    offsetof(OnlineCompressionOwner, work) == 0x120 &&
+    offsetof(OnlineCompressionWorkPrefix, stream) == 0x38 &&
+    offsetof(OnlineCompressionStreamPrefix, totalOutput) == 0x14 ? 1 : -1];
+extern "C" {
+s32 FUN_001274fc(OnlineCompressionStreamPrefix *);
+s32 FUN_00126d1c(OnlineCompressionStreamPrefix *, s32);
+s32 rangeObjRemaining(RangeObject *);
+void FUN_002fa010(RangeObject *, u32);
+u8 *onlineBufferGetData(RangeObject *);
+void rt_memcpy(void *, const void *, u32);
 
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00126d1c. */
-/* Supplied declaration required: FUN_001274fc. */
-/* Supplied declaration required: onlineBufferGetData. */
-/* Supplied declaration required: FUN_002fa010. */
-extern unsigned int rangeObjRemaining(fn_004327f8_arg2 *);
-/* Supplied declaration required: rt_memcpy. */
-
-
-unsigned int FUN_004327f8(int param_1,int param_2,fn_004327f8_arg2 *param_3)
-
+// Prefix compressed data with its expansion estimate, or zero followed by the original bytes.
+u32 FUN_004327f8(OnlineCompressionOwner *owner, RangeObject *input, RangeObject *output)
 {
-/* irregular: irregular input(s): in_fpscr; 7 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char *puVar4;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  unsigned int in_fpscr;
-  float temp_v5;
-  float temp_v6;
-  
-  FUN_001274fc(*(int *)(param_1 + 0x120) + 0x38);
-  temp_v0 = rangeObjRemaining(param_3);
-  if (temp_v0 < *(int *)(param_2 + 0x10) + 1U) {
-    FUN_002fa010(param_3,*(int *)(param_2 + 0x10) + 1);
-  }
-  temp_v1 = rangeObjRemaining(param_3);
-  *(unsigned int *)(*(int *)(param_1 + 0x120) + 0x48) = temp_v1;
-  temp_v1 = onlineBufferGetData(param_3);
-  *(unsigned int *)(*(int *)(param_1 + 0x120) + 0x44) = temp_v1;
-  *(unsigned int *)(*(int *)(param_1 + 0x120) + 0x3c) = *(unsigned int *)(param_2 + 0x10);
-  temp_v1 = onlineBufferGetData(param_2);
-  *(unsigned int *)(*(int *)(param_1 + 0x120) + 0x38) = temp_v1;
-  *(int *)(*(int *)(param_1 + 0x120) + 0x44) = *(int *)(*(int *)(param_1 + 0x120) + 0x44) + 1;
-  *(int *)(*(int *)(param_1 + 0x120) + 0x48) = *(int *)(*(int *)(param_1 + 0x120) + 0x48) - 1;
-  temp_v2 = *(int *)(param_1 + 0x120) + 0x38;
-  FUN_00126d1c(temp_v2,4);
-  if ((temp_v2 == 1) && (*(unsigned int *)(*(int *)(param_1 + 0x120) + 0x4c) < *(unsigned int *)(param_2 + 0x10))) {
-    temp_v2 = *(int *)(*(int *)(param_1 + 0x120) + 0x4c);
-    temp_v6 = (float)VectorUnsignedToFloat
-                             (*(unsigned int *)(param_2 + 0x10),(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v5 = (float)VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v5 = temp_v6 / temp_v5 + 1.0f;
-    if ((int)temp_v5 < 0x437f0001) {
-      temp_v1 = VectorFloatToUnsigned(temp_v5,3);
-      temp_v4 = (unsigned char)temp_v1;
+    FUN_001274fc(&owner->work->stream);
+    if (static_cast<u32>(rangeObjRemaining(output)) < input->payload.length + 1)
+        FUN_002fa010(output, input->payload.length + 1);
+    owner->work->stream.availableOutput = rangeObjRemaining(output);
+    owner->work->stream.output = onlineBufferGetData(output);
+    owner->work->stream.availableInput = input->payload.length;
+    owner->work->stream.input = onlineBufferGetData(input);
+    ++owner->work->stream.output;
+    --owner->work->stream.availableOutput;
+    if (FUN_00126d1c(&owner->work->stream, 4) == 1 &&
+        owner->work->stream.totalOutput < input->payload.length) {
+        u32 compressedLength = owner->work->stream.totalOutput;
+        f32 expansion = static_cast<f32>(input->payload.length) / static_cast<f32>(compressedLength) + 1.0f;
+        u8 marker = expansion <= 255.0f ? static_cast<u8>(static_cast<u32>(expansion)) : 255;
+        output->payload.length = compressedLength + 1;
+        *onlineBufferGetData(output) = marker;
+    } else {
+        u8 *destination = output->payload.base + output->pos;
+        output->payload.length = input->payload.length + 1;
+        *destination = 0;
+        u32 length = input->payload.length;
+        u8 *source = onlineBufferGetData(input);
+        rt_memcpy(destination + 1, source, length);
     }
-    else {
-      temp_v4 = 0xff;
-    }
-    param_3->field_0x10 = temp_v2 + 1;
-    puVar4 = (unsigned char *)onlineBufferGetData(param_3);
-    *puVar4 = temp_v4;
-  }
-  else {
-    puVar4 = (unsigned char *)(param_3->field_0xc + param_3->field_0x18);
-    param_3->field_0x10 = *(int *)(param_2 + 0x10) + 1;
-    *puVar4 = 0;
-    temp_v1 = *(unsigned int *)(param_2 + 0x10);
-    temp_v3 = onlineBufferGetData(param_2);
-    rt_memcpy(puVar4 + 1,temp_v3,temp_v1);
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -1,91 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003098b4` (_code @ 0x3098b4, 0x140 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scissor stack addressing and packet constant scheduling differ from retail. */
+#include "camp/RenderCtx.h"
 
-extern "C" {
-
-int asdGxGetCurrentPresetKind(void);
-int asdModelCommandBlockRelease(void);
-int cursorResetFromParam(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-extern int DAT_004729e0; /* 0x4729e0 */
-extern int DAT_004729e4; /* 0x4729e4 */
-
-/* Supplied declaration required: asdGxGetCurrentPresetKind. */
-extern unsigned int FUN_002ae1e8(void);
-extern unsigned int FUN_002ae210(void);
-/* Supplied declaration required: asdModelCommandBlockRelease. */
-/* Supplied declaration required: cursorResetFromParam. */
-
-
-void FUN_003098b4(unsigned int param_1)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  
-  asdGxGetCurrentPresetKind();
-  temp_v1 = FUN_002ae210();
-  asdGxGetCurrentPresetKind();
-  temp_v2 = FUN_002ae1e8();
-  cursorResetFromParam();
-  temp_v0 = DAT_004729e0;
-  if (*(int *)(g_titleScene + *(int *)(g_titleScene + 0x130c) * 4 + 0x1314) != 0) {
-    temp_v5 = param_1 >> 0x10;
-    param_1 = param_1 & 0xffff;
-    temp_v4 = temp_v5;
-    if (temp_v2 <= temp_v5) {
-      temp_v4 = temp_v2 - 1;
-    }
-    temp_v3 = param_1;
-    if (temp_v1 <= param_1) {
-      temp_v3 = temp_v1 - 1;
-    }
-    temp_v4 = temp_v4 | (temp_v3 << 0x10);
-    temp_v3 = *(unsigned int *)(g_titleScene + *(int *)(g_titleScene + 0x134c) * 4 + 0x1354);
-    temp_v5 = (temp_v5 + (temp_v3 >> 0x10)) - 1;
-    if ((int)temp_v5 < 0) {
-      temp_v5 = 0;
-    }
-    else if (temp_v2 <= temp_v5) {
-      temp_v5 = temp_v2 - 1;
-    }
-    param_1 = param_1 + (temp_v3 & 0xffff);
-    temp_v2 = param_1 - 1;
-    if ((int)temp_v2 < 0) {
-      temp_v1 = 0;
-    }
-    else {
-      if (temp_v2 < temp_v1) {
-        temp_v1 = param_1;
-      }
-      temp_v1 = (temp_v1 - 1) * 0x10000;
-    }
-    temp_v5 = temp_v5 | temp_v1;
-  }
-  else {
-    temp_v4 = 0;
-    temp_v5 = (temp_v2 - 1) | (temp_v1 * 0x10000 - 0x10000);
-  }
-  *(unsigned int *)(DAT_004729e0 + DAT_004729e4 * 4) = temp_v4;
-  *(unsigned int *)(temp_v0 + DAT_004729e4 * 4 + 4) = 0xf0066;
-  DAT_004729e4 = DAT_004729e4 + 2;
-  *(unsigned int *)(temp_v0 + DAT_004729e4 * 4) = temp_v5;
-  *(unsigned int *)(temp_v0 + DAT_004729e4 * 4 + 4) = 0xf0067;
-  DAT_004729e4 = DAT_004729e4 + 2;
-  asdModelCommandBlockRelease();
-  return;
+namespace {
+/* Local view extends past the recovered shared render context. */
+struct ScissorContextView {
+    u8 unk0000[0x130C];
+    RenderStateStack enabled;
+    u8 unk132C[0x20];
+    RenderStateStack extent;
+};
 }
+extern "C" {
+extern ScissorContextView *g_titleScene;
+extern u32 *DAT_004729e0;
+extern u32 DAT_004729e4;
+u32 asdGxGetCurrentPresetKind(void);
+u32 FUN_002ae210(u32 kind);
+u32 FUN_002ae1e8(u32 kind);
+void cursorResetFromParam(void);
+void asdModelCommandBlockRelease(void);
 
-} /* extern "C" */
+/* Emit the clamped inclusive scissor rectangle, or the full render-target rectangle. */
+void FUN_003098b4(u32 origin)
+{
+    u32 height = FUN_002ae210(asdGxGetCurrentPresetKind());
+    u32 width = FUN_002ae1e8(asdGxGetCurrentPresetKind());
+    cursorResetFromParam();
+    u32 start, end;
+    if (g_titleScene->enabled.entries[g_titleScene->enabled.count] != 0) {
+        u32 x = origin >> 16;
+        u32 y = origin & 0xFFFF;
+        u32 left = x < width ? x : width - 1;
+        u32 top = y < height ? y : height - 1;
+        start = left | (top << 16);
+        u32 extent = g_titleScene->extent.entries[g_titleScene->extent.count];
+        u32 right = x + (extent >> 16) - 1;
+        if (static_cast<s32>(right) < 0)
+            right = 0;
+        else if (right >= width)
+            right = width - 1;
+        u32 bottom = y + (extent & 0xFFFF) - 1;
+        if (static_cast<s32>(bottom) < 0)
+            bottom = 0;
+        else if (bottom >= height)
+            bottom = height - 1;
+        end = right | (bottom << 16);
+    } else {
+        start = 0;
+        end = (width - 1) | ((height - 1) << 16);
+    }
+    u32 *packet = DAT_004729e0;
+    packet[DAT_004729e4] = start;
+    packet[DAT_004729e4 + 1] = 0xF0066;
+    DAT_004729e4 += 2;
+    packet[DAT_004729e4] = end;
+    packet[DAT_004729e4 + 1] = 0xF0067;
+    DAT_004729e4 += 2;
+    asdModelCommandBlockRelease();
+}
+}

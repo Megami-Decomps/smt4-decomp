@@ -1,90 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010ddcc` (_code @ 0x10ddcc, 0x134 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail retains slot-selector validation and shared result register; inline field selection differs. */
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 extern "C" {
+extern AsdSoundSystem g_asdSound;
+s32 FUN_002bf684(AsdSoundSystem *system);
+s32 FUN_00141fd0(AsdSoundSystem *system, s32 sound);
+void FUN_002bda30(s32 handle, s32 frames);
+u32 nw_snd_SoundStartable_StartSound(void *player, s32 *handle, s32 sound, void *parameters);
+void nw_snd_internal_BasicSound_SetVolume(s32 handle, s32 frames, f32 volume);
 
-int FUN_00141fd0(unsigned char *, int);
-int FUN_002bda30(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
-int nw_snd_SoundStartable_StartSound(unsigned char *, int *, int, int);
-int nw_snd_internal_BasicSound_SetVolume(...);
-
-extern unsigned char g_asdSound; /* 0x4e1f68 */
-extern unsigned char DAT_004e20ec; /* 0x4e20ec */
-extern unsigned int DAT_004e3178; /* 0x4e3178 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00141fd0. */
-/* Supplied declaration required: FUN_002bda30. */
-extern int FUN_002bf684(unsigned char *);
-/* Supplied declaration required: nw_snd_SoundStartable_StartSound. */
-/* Supplied declaration required: nw_snd_internal_BasicSound_SetVolume. */
-
-
-unsigned int FUN_0010ddcc(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+// Replace a one-sound slot and fade it to the requested volume.
+u32 FUN_0010ddcc(u32 slotIndex, s32 sound, u32 level, s32 frames)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int *piVar3;
-  unsigned char *puVar4;
-  unsigned int in_fpscr;
-  
-  if (param_1 >= 2) {
-    return 0;
-  }
-  puVar4 = &g_asdSound;
-  temp_v1 = FUN_002bf684(&g_asdSound);
-  if (temp_v1 == 0) {
-    return 0;
-  }
-  FUN_00141fd0(&g_asdSound,param_2);
-  if (puVar4 == (unsigned char *)0x0) {
-    return 0;
-  }
-  if (param_1 >= 2) {
-    return 0;
-  }
-  piVar3 = (int *)(&DAT_004e3178)[param_1];
-  if (piVar3 == (int *)0x0) {
-    return 0;
-  }
-  if (*piVar3 != 0) {
-    FUN_002bda30(*piVar3,0);
-  }
-  puVar4 = &DAT_004e20ec;
-  nw_snd_SoundStartable_StartSound(&DAT_004e20ec,piVar3,param_2,0);
-  if (((unsigned int)puVar4 & 0xff) != 0) {
-    return 0;
-  }
-  temp_v0 = 0;
-  if (*piVar3 != 0) {
-    temp_v0 = nw_snd_internal_BasicSound_SetVolume(*piVar3,0);
-  }
-  if (param_3 >= 0x80) {
-    temp_v0 = 0x7f;
-  }
-  *(char *)((int)piVar3 + 0xd) = (char)param_3;
-  if (param_3 >= 0x80) {
-    *(unsigned char *)((int)piVar3 + 0xd) = temp_v0;
-  }
-  else if (param_3 == 0) {
-    if (*piVar3 != 0) {
-      nw_snd_internal_BasicSound_SetVolume(*piVar3,param_4);
+    if (slotIndex != 0 && slotIndex != 1)
+        return 0;
+    if (!FUN_002bf684(&g_asdSound) || !FUN_00141fd0(&g_asdSound, sound))
+        return 0;
+    AsdSndSlotC *slot = slotIndex == 0 ? g_asdSound.outputC0 : g_asdSound.outputC1;
+    if (slot == NULL)
+        return 0;
+    if (slot->handle)
+        FUN_002bda30(slot->handle, 0);
+    if ((u8)nw_snd_SoundStartable_StartSound(g_asdSound.player, &slot->handle, sound, NULL))
+        return 0;
+    if (slot->handle)
+        nw_snd_internal_BasicSound_SetVolume(slot->handle, 0, 0.0f);
+    slot->volume = (u8)level;
+    if (level > 127)
+        slot->volume = 127;
+    f32 volume = 0.0f;
+    if (level != 0) {
+        volume = 1.0f + ((f32)(u32)slot->volume - 64.0f) * (2.0f / 127.0f);
+        if (volume > 2.0f)
+            volume = 2.0f;
     }
-    piVar3[2] = param_2;
-    *(unsigned char *)(piVar3 + 3) = *(unsigned char *)(piVar3 + 3) | 2;
+    if (slot->handle)
+        nw_snd_internal_BasicSound_SetVolume(slot->handle, frames, volume);
+    slot->unk08 = sound;
+    slot->flag |= 2;
     return 1;
-  }
-  VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)piVar3 + 0xd),(unsigned char)(in_fpscr >> 0x16) & 3);
-  if (*piVar3 != 0) {
-    nw_snd_internal_BasicSound_SetVolume(*piVar3,param_4);
-  }
-  piVar3[2] = param_2;
-  *(unsigned char *)(piVar3 + 3) = *(unsigned char *)(piVar3 + 3) | 2;
-  return 1;
 }
-
-} /* extern "C" */
+}

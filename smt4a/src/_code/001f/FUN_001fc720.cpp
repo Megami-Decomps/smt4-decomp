@@ -19,7 +19,7 @@ int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00185e84(...);
 int dataTable04FindById(void);
-int FUN_0022fb78(int, int);
+int statusDownDrawIndicatorPairs(int, int);
 int FUN_002c7e24(void);
 int unitRecordBuild(int, unsigned char [300]);
 int FUN_0035ad50(int, unsigned char [300]);
@@ -78,7 +78,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
 extern unsigned char *slotRecordFindById(void);
 /* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_0022fb78. */
+/* Supplied declaration required: statusDownDrawIndicatorPairs. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
 extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: FUN_00288b20. */
@@ -173,7 +173,7 @@ void FUN_001fc720(int param_1,int param_2)
   efctSetSpeed();
   FUN_00164b5c(2,0x12,4,param_1,param_2,0xb3);
   FUN_00164b5c(2,0x12,6,param_1,param_2,0xb5);
-  FUN_0022fb78(param_1,param_2);
+  statusDownDrawIndicatorPairs(param_1,param_2);
   temp_v25 = temp_v2 + 0x500;
   puVar15 = (unsigned char *)0x0;
   if (*(short *)(temp_v2 + 0x598) >= 0) {

@@ -1,84 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00156230` (_code @ 0x156230, 0x1a4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: completion-byte loads fold to direct unsigned addressing instead of retail's accessor/NOP sequence; phase and return branches factor differently. */
+#include "ui/MenuState.h"
+#include "ui/UiSpriteState.h"
+#include <stddef.h>
 
 extern "C" {
+extern MenuState *g_menuState;
+s32 FUN_00163aa4(UiSpriteState *sprite, f32 speed);
+void uiSpriteSelectAnim(UiSpriteState *sprite, s32 animation);
 
-int FUN_00163aa4(int);
-int uiSpriteSelectAnim(int, int);
-
-extern int g_menuState; /* 0x57f56c */
-
-/* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-
-
-unsigned int FUN_00156230(void)
-
+// Advance the opening, closing and delayed multi-panel animation phases.
+u32 FUN_00156230(void)
 {
-/* irregular: 4 unstructured edge(s); 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = g_menuState;
-  switch(*(unsigned int *)(g_menuState + 8)) {
-  case 1:
-    temp_v1 = FUN_00163aa4(g_menuState + 0x3c);
-    if (temp_v1 != 0) {
-      *(unsigned int *)(temp_v0 + 0xc) = 0;
-      *(unsigned int *)(temp_v0 + 8) = 2;
-    }
-    break;
-  case 4:
-    temp_v1 = FUN_00163aa4(g_menuState + 0x3c);
-    if (temp_v1 != 0) {
-      *(unsigned int *)(temp_v0 + 8) = 0;
-    }
-    break;
-  case 5:
-    temp_v1 = *(int *)(g_menuState + 700);
-    if (temp_v1 == 0) {
-      FUN_00163aa4(g_menuState + 0x3c);
-      FUN_00163aa4(temp_v0 + 0x154);
-      if ((*(char *)(temp_v0 + 0xc6) != '\0') && (*(char *)(temp_v0 + 0x1de) != '\0')) {
-        *(unsigned int *)(temp_v0 + 0xc) = 0;
-        *(unsigned int *)(temp_v0 + 700) = 2;
-        FUN_00163aa4(temp_v0 + 200);
-      }
-      break;
-    }
-    if (temp_v1 != 2) {
-      if (temp_v1 != 3) {
-        FUN_00163aa4(temp_v0 + 200);
+    // Timer and all four sprites span unaligned padding in the canonical menu prefix.
+    struct MenuAnimationView {
+        u8 unk000[8];
+        u32 mode;
+        s32 timer;
+        u8 unk010[0x2C];
+        UiSpriteState sprites[4];
+        u8 unk26C[0x50];
+        s32 phase;
+        u32 unk2C0;
+        u32 pending, current;
+    };
+    typedef char MenuAnimationOffsets[offsetof(MenuAnimationView, sprites) == 0x3C &&
+        offsetof(MenuAnimationView, phase) == 0x2BC && sizeof(MenuAnimationView) == sizeof(MenuState) ? 1 : -1];
+    MenuAnimationView *work = reinterpret_cast<MenuAnimationView *>(g_menuState);
+    switch (work->mode) {
+    case 1:
+        if (FUN_00163aa4(&work->sprites[0], 1.0f)) {
+            work->timer = 0;
+            work->mode = 2;
+        }
         break;
-      }
-    }
-    else {
-      if (0x13 >= *(int *)(g_menuState + 0xc)) {
-        FUN_00163aa4(temp_v0 + 200);
+    case 4:
+        if (FUN_00163aa4(&work->sprites[0], 1.0f))
+            work->mode = 0;
         break;
-      }
-      temp_v1 = g_menuState + 0x1e0;
-      *(unsigned int *)(g_menuState + 0x2c8) = *(unsigned int *)(g_menuState + 0x2c4);
-      uiSpriteSelectAnim(temp_v1,5);
-      *(unsigned int *)(temp_v0 + 700) = 3;
+    case 5:
+        if (work->phase == 0) {
+            FUN_00163aa4(&work->sprites[0], 1.0f);
+            FUN_00163aa4(&work->sprites[2], 1.0f);
+            if (work->sprites[0].animationFlags.completed && work->sprites[2].animationFlags.completed) {
+                work->timer = 0;
+                work->phase = 2;
+                FUN_00163aa4(&work->sprites[1], 1.0f);
+            }
+            break;
+        }
+        if (work->phase == 2 && work->timer >= 20) {
+            work->current = work->pending;
+            uiSpriteSelectAnim(&work->sprites[3], 5);
+            work->phase = 3;
+        }
+        if (work->phase == 3 && FUN_00163aa4(&work->sprites[3], 1.0f))
+            work->phase = 4;
+        // The middle panel continues through each delayed transition phase.
+    case 2:
+        FUN_00163aa4(&work->sprites[1], 1.0f);
+        break;
+    case 6:
+        FUN_00163aa4(&work->sprites[0], 1.0f);
+        FUN_00163aa4(&work->sprites[2], 1.0f);
+        if (work->sprites[0].animationFlags.completed && work->sprites[2].animationFlags.completed)
+            work->mode = 0;
+        break;
     }
-    temp_v1 = FUN_00163aa4(temp_v0 + 0x1e0);
-    if (temp_v1 != 0) {
-      *(unsigned int *)(temp_v0 + 700) = 4;
-    }
-  case 2:
-    FUN_00163aa4(temp_v0 + 200);
-    break;
-  case 6:
-    FUN_00163aa4(g_menuState + 0x3c);
-    FUN_00163aa4(temp_v0 + 0x154);
-    if ((*(char *)(temp_v0 + 0xc6) != '\0') && (*(char *)(temp_v0 + 0x1de) != '\0')) {
-      *(unsigned int *)(temp_v0 + 8) = 0;
-    }
-  }
-  *(int *)(temp_v0 + 0xc) = *(int *)(temp_v0 + 0xc) + 1;
-  return 0;
+    ++work->timer;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -7,7 +7,7 @@ struct Table02Record {
 
 extern "C" {
 extern AocSystemA* g_aocSystem;
-Table02Record* FUN_0046e6b8(AocSystemA* system, u32 index);
+Table02Record* aocFindPackageRecord(AocSystemA* system, u32 index);
 
 Table02Record* FUN_004bb80c(s32 index)
 {
@@ -16,7 +16,7 @@ Table02Record* FUN_004bb80c(s32 index)
     if (index < 0 || static_cast<u32>(index) >= dataTableGetCount(section)) {
         return records;
     }
-    Table02Record* record = FUN_0046e6b8(g_aocSystem, index);
+    Table02Record* record = aocFindPackageRecord(g_aocSystem, index);
     if (record == NULL) {
         record = &records[index];
     }

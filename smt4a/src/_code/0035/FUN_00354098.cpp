@@ -1,91 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00354098` (_code @ 0x354098, 0x120 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the state-4 switch case is placed after the reset decision and final clear stores exchange pointer/value registers. */
+#include "map/lmapMain.h"
+#include "map/mapDepart.h"
 
 extern "C" {
+extern LmapSceneA *g_lmapScene;
+extern GameStateA g_gameState;
+s32 gameFlagIsSet(u32 flag);
+void lmapClearExtraFlag();
+void FUN_003d2158(u32 handle, s32 enabled);
 
-int lmapClearExtraFlag(void);
-int FUN_003d2158(int, int);
-
-extern int g_lmapScene; /* 0x581288 */
-extern int g_gameState; /* 0x5f15fc */
-extern int DAT_005f1600; /* 0x5f1600 */
-
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: lmapClearExtraFlag. */
-/* Supplied declaration required: FUN_003d2158. */
-
-
-void FUN_00354098(void)
-
+// Enable the extra map transition during selected story intervals; otherwise clear it.
+void FUN_00354098()
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  if (g_gameState != 1) {
-    if (g_gameState != 2) {
-      if (g_gameState == 4) {
-        if (DAT_005f1600 == 2) {
-          return;
-        }
-        temp_v0 = gameFlagIsSet(0xf4);
-        if (temp_v0 != 0) {
-          temp_v0 = gameFlagIsSet(0xf6);
-          if (temp_v0 == 0) {
-            if (*(int *)(g_lmapScene + 0x288) != 0) {
-              return;
-            }
-            *(unsigned int *)(g_lmapScene + 0x288) = 1;
+    // The extra transition follows the end of the shared LmapSceneA prefix.
+    struct ExtraTransitionView {
+        u8 prefix[0x280];
+        u32 first, second, state, handle;
+    };
+    ExtraTransitionView *extra;
+    bool enable = false;
+    switch (g_gameState.mode) {
+    case 1:
+        if (g_gameState.submode == 1)
             return;
-          }
-        }
-      }
+        enable = gameFlagIsSet(0x72) && !gameFlagIsSet(0xB1);
+        break;
+    case 2:
+        if (g_gameState.submode == 5)
+            return;
+        enable = !gameFlagIsSet(0x91);
+        break;
+    case 4:
+        if (g_gameState.submode == 2)
+            return;
+        enable = gameFlagIsSet(0xF4) && !gameFlagIsSet(0xF6);
+        break;
     }
-    else {
-      if (DAT_005f1600 == 5) {
+    extra = reinterpret_cast<ExtraTransitionView *>(g_lmapScene);
+    if (enable) {
+        if (extra->state == 0)
+            extra->state = 1;
         return;
-      }
-      temp_v0 = gameFlagIsSet(0x91);
-      if (temp_v0 == 0) {
-        if (*(int *)(g_lmapScene + 0x288) != 0) {
-          return;
-        }
-        *(unsigned int *)(g_lmapScene + 0x288) = 1;
+    }
+    if (extra->state == 0)
         return;
-      }
+    if (extra->state == 3) {
+        lmapClearExtraFlag();
+        extra = reinterpret_cast<ExtraTransitionView *>(g_lmapScene);
+        if (extra->handle != 0)
+            FUN_003d2158(extra->handle, 0);
     }
-  }
-  else {
-    if (DAT_005f1600 == 1) {
-      return;
-    }
-    temp_v0 = gameFlagIsSet(0x72);
-    if (temp_v0 != 0) {
-      temp_v0 = gameFlagIsSet(0xb1);
-      if (temp_v0 == 0) {
-        if (*(int *)(g_lmapScene + 0x288) != 0) {
-          return;
-        }
-        *(unsigned int *)(g_lmapScene + 0x288) = 1;
-        return;
-      }
-    }
-  }
-  if (*(int *)(g_lmapScene + 0x288) == 0) {
-    return;
-  }
-  if (*(int *)(g_lmapScene + 0x288) == 3) {
-    lmapClearExtraFlag();
-    if (*(int *)(g_lmapScene + 0x28c) != 0) {
-      FUN_003d2158(*(int *)(g_lmapScene + 0x28c),0);
-    }
-  }
-  temp_v0 = g_lmapScene;
-  *(unsigned int *)(g_lmapScene + 0x280) = 0;
-  *(unsigned int *)(temp_v0 + 0x288) = 0;
-  *(unsigned int *)(temp_v0 + 0x284) = 0;
-  *(unsigned int *)(temp_v0 + 0x28c) = 0;
-  return;
+    extra = reinterpret_cast<ExtraTransitionView *>(g_lmapScene);
+    extra->first = 0;
+    extra->state = 0;
+    extra->second = 0;
+    extra->handle = 0;
 }
-
-} /* extern "C" */
+}

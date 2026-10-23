@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a6fb8(int);
+int statusCameraSelectPreset(int);
 int FUN_0034a3b4(void);
 int linkHolderApplyFirst(unsigned int, int);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002a6fb8. */
+/* Supplied declaration required: statusCameraSelectPreset. */
 /* Supplied declaration required: FUN_0034a3b4. */
 extern int linkHolderCallFirst(unsigned int);
 /* Supplied declaration required: linkHolderApplyFirst. */
@@ -28,7 +28,7 @@ void FUN_0035a204(unsigned int *param_1)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  FUN_002a6fb8(0);
+  statusCameraSelectPreset(0);
   param_1[6] = 0x3c449ba6;
   param_1[4] = 0x43af0000;
   temp_v0 = linkHolderCallFirst(param_1[7]);

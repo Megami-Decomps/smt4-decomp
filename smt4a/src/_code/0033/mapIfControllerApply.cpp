@@ -1,72 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `mapIfControllerApply` (_code @ 0x33def0, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initial global/controller flag-load order and hidden-controller branch predication differ. */
+#include "map/mapIf.h"
+#include "map/mapDepart.h"
+#include "shard/W5_W5Match7_ControllerPose.h"
 
-extern "C" {
-
-int controllerSetDestination(int, char *);
-int controllerSetRotationEulerDegrees(int);
-int FUN_003fe86c(int, int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern signed char DAT_005f161f; /* 0x5f161f */
-
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: controllerSetRotationEulerDegrees. */
-/* Supplied declaration required: FUN_003fe86c. */
-extern int slots4FGetActiveValue(int);
-
-
-void mapIfControllerApply(char *param_1)
-
-{
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if (*param_1 == '\0') {
-    return;
-  }
-  temp_v2 = *(int *)(*(int *)(param_1 + 0x20) + 4);
-  if (DAT_005f161f != '\0') {
-    if ((*(unsigned int *)(temp_v2 + 4) & 1) != 0) {
-      return;
-    }
-    *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
-    return;
-  }
-  if (param_1[2] == '\0') {
-    return;
-  }
-  temp_v0 = *(unsigned int *)(temp_v2 + 4);
-  if (param_1[1] != '\0') {
-    if ((temp_v0 & 1) != 0) {
-      temp_v0 = temp_v0 & 0xfffffffc;
-      *(unsigned int *)(temp_v2 + 4) = temp_v0;
-    }
-  }
-  else if ((temp_v0 & 1) == 0) {
-    temp_v0 = temp_v0 | 3;
-    *(unsigned int *)(temp_v2 + 4) = temp_v0;
-  }
-  temp_v1 = gameFlagIsSet(0xc);
-  if ((temp_v1 != 0) && (temp_v1 = gameFlagIsSet(0x10), temp_v1 == 0)) {
-    *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
-  }
-  controllerSetDestination(temp_v2,param_1 + 0xc);
-  controllerSetRotationEulerDegrees(temp_v2);
-  temp_v1 = slots4FGetActiveValue(temp_v2);
-  if (temp_v1 == *(int *)(param_1 + 0x1c)) {
-    return;
-  }
-  FUN_003fe86c(temp_v2,*(int *)(param_1 + 0x1c),2);
-  return;
+namespace {
+/* The model node's controller pointer is beyond the shared NodeEnableNode view. */
+struct MapMarkerModelView {
+    u32 flags;
+    ControllerPose *controller;
+};
 }
+extern "C" {
+extern GameStateA g_gameState;
+s32 gameFlagIsSet(u32 flag);
+void controllerSetDestination(ControllerPose *controller, const f32 *position);
+void controllerSetRotationEulerDegrees(ControllerPose *controller, f32 x, f32 y, f32 z);
+s32 slots4FGetActiveValue(ControllerPose *controller);
+void FUN_003fe86c(ControllerPose *controller, u32 value, s32 mode, f32 first, f32 second);
 
-} /* extern "C" */
+/* Apply a marker's visibility, destination, heading and selected animation. */
+void mapIfControllerApply(MapIfModelMarker *marker)
+{
+    if (marker->active != 0) {
+        ControllerPose *controller = reinterpret_cast<MapMarkerModelView *>(marker->model)->controller;
+        if (g_gameState.controllerFlags.secondary != 0) {
+            if ((controller->flags.value & 1) == 0)
+                controller->flags.value |= 3;
+        } else if (marker->flags != 0) {
+            if (marker->state != 0) {
+                if ((controller->flags.value & 1) != 0)
+                    controller->flags.value &= ~3;
+            } else if ((controller->flags.value & 1) == 0) {
+                controller->flags.value |= 3;
+            }
+            if (gameFlagIsSet(12) != 0 && gameFlagIsSet(16) == 0)
+                controller->flags.value |= 3;
+            controllerSetDestination(controller, marker->position);
+            controllerSetRotationEulerDegrees(controller, 0.0f, marker->heading, 0.0f);
+            if (slots4FGetActiveValue(controller) != marker->elapsed)
+                FUN_003fe86c(controller, marker->elapsed, 2, 0.0f, 0.0f);
+        }
+    }
+}
+}

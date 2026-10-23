@@ -1,83 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00191df4` (_code @ 0x191df8, 0x18c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: preference pointer and ascending flag occupy swapped r5/r6 registers. */
+#include "shard/W5_W5Match2_UniteWork.h"
 
 extern "C" {
+extern UniteWork *g_unite;
+u8 *FUN_002a0d0c(void);
+s32 devilCompareRaceLevelDescending(const u16 *, const u16 *);
+s32 devilCompareByRankGradeId(const u16 *, const u16 *);
+s32 FUN_001d1d78(const u16 *, const u16 *);
+s32 FUN_002c6e90(const u16 *, const u16 *);
+s32 FUN_00219720(const u16 *, const u16 *);
+s32 devilCompare(const u16 *, const u16 *);
+s32 FUN_001f6524(const u16 *, const u16 *);
+s32 devilCompareByEntryValue(const u16 *, const u16 *);
+void FUN_002b7bca(void *entries, u32 count, u32 stride, s32 (*compare)(const u16 *, const u16 *));
+void FUN_0027f3dc(void *entries, u32 count, u32 stride, s32 (*compare)(const u16 *, const u16 *));
 
-int FUN_0027f3dc(...);
-int FUN_002b7bca(...);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int FUN_001d1d78(...); /* 0x1d1d78 */
-extern int FUN_001f6524(...); /* 0x1f6524 */
-extern int devilCompareRaceLevelDescending(...); /* 0x2073e4 */
-extern int FUN_00219720(...); /* 0x219720 */
-extern int FUN_002c6e90(...); /* 0x2c6e90 */
-extern int devilCompareByEntryValue(...); /* 0x2dcf14 */
-extern int devilCompareByRankGradeId(...); /* 0x2e4b30 */
-extern int devilCompare(...); /* 0x2f28c4 */
-
-/* Supplied declaration required: FUN_0027f3dc. */
-extern int FUN_002a0d0c(void);
-/* Supplied declaration required: FUN_002b7bca. */
-
-
-void FUN_00191df4(int *param_1)
-
+// Apply the saved ascending/descending sort preference to the fusion demon list.
+void FUN_00191df4(void)
 {
-/* irregular: 10 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char *pbVar3;
-  unsigned char temp_v2;
-  
-  temp_v1 = *param_1;
-  if (*(char *)(temp_v1 + 0x420) != '\x01') {
-    temp_v0 = FUN_002a0d0c();
-    pbVar3 = (unsigned char *)(temp_v0 + 0x11);
-  }
-  else {
-    temp_v0 = FUN_002a0d0c();
-    pbVar3 = (unsigned char *)(temp_v0 + 0x12);
-  }
-  temp_v2 = ~(*pbVar3 >> 7) & 1;
-  if ((*pbVar3 & 0x7f) == 1) {
-    if (temp_v2 != 0) {
-      FUN_002b7bca(temp_v1 + 0x6278,*(unsigned int *)(temp_v1 + 0x6670),2,devilCompareRaceLevelDescending);
+    union FusionSortView {
+        UniteWork base;
+        struct { u8 unk0000[0x6670]; u32 count; } list;
+    };
+    FusionSortView *work = reinterpret_cast<FusionSortView *>(g_unite);
+    u8 *preference = work->base.menu.mode == 1 ? FUN_002a0d0c() + 0x12 : FUN_002a0d0c() + 0x11;
+    bool ascending = (*preference & 0x80) == 0;
+    if ((*preference & 0x7f) == 1) {
+        if (ascending)
+            FUN_002b7bca(work->base.portraitSelectionIV.desired, work->list.count, 2, devilCompareRaceLevelDescending);
+        else
+            FUN_002b7bca(work->base.portraitSelectionIV.desired, work->list.count, 2, devilCompareByRankGradeId);
     }
-    else {
-      FUN_002b7bca(temp_v1 + 0x6278,*(unsigned int *)(temp_v1 + 0x6670),2,devilCompareByRankGradeId);
+    if ((*preference & 0x7f) == 2) {
+        if (ascending)
+            FUN_002b7bca(work->base.portraitSelectionIV.desired, work->list.count, 2, FUN_001d1d78);
+        else
+            FUN_002b7bca(work->base.portraitSelectionIV.desired, work->list.count, 2, FUN_002c6e90);
     }
-  }
-  if ((*pbVar3 & 0x7f) == 2) {
-    if (temp_v2 != 0) {
-      FUN_002b7bca(temp_v1 + 0x6278,*(unsigned int *)(temp_v1 + 0x6670),2,FUN_001d1d78);
+    if ((*preference & 0x7f) == 0x31) {
+        if (ascending)
+            FUN_002b7bca(work->base.portraitSelectionIV.desired, work->list.count, 2, FUN_00219720);
+        else
+            FUN_002b7bca(work->base.portraitSelectionIV.desired, work->list.count, 2, devilCompare);
     }
-    else {
-      FUN_002b7bca(temp_v1 + 0x6278,*(unsigned int *)(temp_v1 + 0x6670),2,FUN_002c6e90);
+    if ((*preference & 0x7f) == 3) {
+        if (ascending)
+            FUN_0027f3dc(work->base.portraitSelectionIV.desired, work->list.count, 2, FUN_001f6524);
+        else
+            FUN_0027f3dc(work->base.portraitSelectionIV.desired, work->list.count, 2, devilCompareByEntryValue);
     }
-  }
-  if ((*pbVar3 & 0x7f) == 0x31) {
-    if (temp_v2 != 0) {
-      FUN_002b7bca(temp_v1 + 0x6278,*(unsigned int *)(temp_v1 + 0x6670),2,FUN_00219720);
-    }
-    else {
-      FUN_002b7bca(temp_v1 + 0x6278,*(unsigned int *)(temp_v1 + 0x6670),2,devilCompare);
-    }
-  }
-  if ((*pbVar3 & 0x7f) != 3) {
-    return;
-  }
-  if (temp_v2 == 0) {
-    FUN_0027f3dc(temp_v1 + 0x6278,*(unsigned int *)(temp_v1 + 0x6670),2,devilCompareByEntryValue);
-    return;
-  }
-  FUN_0027f3dc(temp_v1 + 0x6278,*(unsigned int *)(temp_v1 + 0x6670),2,FUN_001f6524);
-  return;
 }
-
-} /* extern "C" */
+}

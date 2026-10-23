@@ -6,7 +6,7 @@ void FUN_00183e58(void);
 void messageSlotSet(s32 value);
 void scrCommMessageSetMode(...);
 void messageStateEndMode2(void);
-void FUN_003457b8(void);
+void campCreateCommonBackground(void);
 void commonBgReset(void);
 s32 scrGetCommandFrame(void);
 s32 ref208StateIs7(void);
@@ -29,7 +29,7 @@ u32 FUN_002a3598(void)
     } else {
         FUN_00183e58();
         commonBgReset();
-        FUN_003457b8();
+        campCreateCommonBackground();
     }
     return 0;
 }

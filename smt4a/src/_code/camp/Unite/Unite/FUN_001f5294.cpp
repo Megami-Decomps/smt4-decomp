@@ -153,7 +153,7 @@ int FUN_00163aa4(...);
 int sysPlaySe(...);
 int uniteStartOrQueueRequest(...);
 int rebuildFusionCatalogLists(void);
-int FUN_002859d8(...);
+int uniteCameraInitialize(...);
 int FUN_002a7b74(void);
 int frameTexSetValue(...);
 int FUN_002c8894(void);
@@ -264,7 +264,7 @@ extern int messageMainIsIdle(void);
 /* Supplied declaration required: ifTouchRegionAdd. */
 extern int FUN_00284e94(void);
 /* Supplied declaration required: FUN_00284ee4. */
-/* Supplied declaration required: FUN_002859d8. */
+/* Supplied declaration required: uniteCameraInitialize. */
 /* Supplied declaration required: FUN_0028a2e8. */
 /* Supplied declaration required: FUN_0028a538. */
 /* Supplied declaration required: resourceRunEmbeddedOperationIfUnblocked. */
@@ -553,7 +553,7 @@ unsigned int FUN_001f5294(void)
           *(unsigned char *)(*(int *)(temp_v5 + 0x14) + 0xc4) = 0;
         }
         controllerRefreshAtUnitScale(piVar3[0x2484],piVar3 + 0x2485,0);
-        FUN_002859d8(piVar3 + 0x2485);
+        uniteCameraInitialize(piVar3 + 0x2485);
         temp_v26 = 0x20000;
         temp_v7 = asdVramBGetFreeBytes();
         if (temp_v7 >= 0x20001) {
@@ -3228,7 +3228,7 @@ LAB_001f9868:
       *(unsigned int *)(temp_v4 + 4) = *(unsigned int *)(temp_v4 + 4) & 0xfffffffc;
       temp_v4 = *(int *)(piVar3[0x2482] + 4);
       controllerRefreshAtUnitScale(piVar3[0x2484],piVar3 + 0x2485,0);
-      FUN_002859d8(piVar3 + 0x2485);
+      uniteCameraInitialize(piVar3 + 0x2485);
       *(unsigned int *)(temp_v4 + 4) = *(unsigned int *)(temp_v4 + 4) & 0xfffffffc;
     }
     piVar3[0xff] = piVar3[0xff] + 1;

@@ -1,130 +1,94 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00348c10` (_code @ 0x348c10, 0x1fc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: requirement/progress bases are folded differently, and the incomplete-test lifetime changes saved registers and saturation block layout. */
+#include "quest_center/QuestRuntime.h"
+#include "quest_center/QuestRequirement.h"
+#include "shard/W6_W6Match5_SecondarySort.h"
+#include "shard/SaveWork.h"
 
 extern "C" {
+s32 FUN_00287894(u32 quest);
+QuestRuntimeFlagBlock *gameGetFlagBlock(void);
+SaveWork *gameGetMapBlock(void);
 
-int dataTable1bOr1cGetRecord(void);
-
-extern int FUN_00287894(unsigned int);
-extern int gameGetFlagBlock(void);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-extern int gameGetMapBlock(void);
-
-
-void FUN_00348c10(unsigned int param_1,int param_2)
-
+void FUN_00348c10(u16 itemId, s32 change)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned char temp_v10;
-  
-  temp_v1 = gameGetFlagBlock();
-  temp_v2 = gameGetFlagBlock();
-  temp_v9 = (unsigned int)*(unsigned short *)(temp_v2 + 0x840);
-  temp_v0 = (unsigned short)param_1;
-  if (temp_v9 != 0) {
-    temp_v2 = FUN_00287894(temp_v9);
-    if (temp_v2 == 1) {
-      temp_v4 = temp_v9;
-      dataTable1bOr1cGetRecord();
-      temp_v2 = gameGetMapBlock();
-      temp_v3 = 0;
-      while( 1 ) {
-        temp_v5 = temp_v4 + temp_v3 * 8;
-        temp_v8 = temp_v5 + 0x100;
-        temp_v10 = *(short *)(temp_v5 + 0x16c) == 2;
-        if (temp_v10) {
-          temp_v8 = (unsigned int)*(unsigned short *)(temp_v5 + 0x16e);
-        }
-        if (temp_v10 && temp_v8 == param_1) break;
-        temp_v3 = temp_v3 + 1;
-        if (temp_v3 >= 6) {
-          return;
-        }
-      }
-      temp_v1 = temp_v1 + 0x87a + temp_v3 * 2;
-      temp_v8 = (unsigned int)*(unsigned short *)(temp_v1 + 2);
-      temp_v10 = *(unsigned int *)(temp_v4 + temp_v3 * 8 + 0x170) <= temp_v8;
-      temp_v8 = temp_v8 + param_2;
-      if ((int)temp_v8 < 0xffff) {
-        *(short *)(temp_v1 + 2) = (short)temp_v8;
-        if (temp_v10) {
-          return;
-        }
-        if ((temp_v8 & 0xffff) >= *(unsigned int *)(temp_v5 + 0x170)) {
-          *(unsigned short *)(temp_v2 + 0x1064) = temp_v0;
-        }
-        else {
-          *(unsigned short *)(temp_v2 + 0x1066) = temp_v0;
-        }
-      }
-      else {
-        *(unsigned short *)(temp_v1 + 2) = 0xffff;
-        if (temp_v10) {
-          return;
-        }
-      }
-      temp_v1 = gameGetFlagBlock();
-      temp_v1 = temp_v1 + temp_v9 * 4;
-      *(unsigned char *)(temp_v1 + 0x202) = *(unsigned char *)(temp_v1 + 0x202) | 2;
-    }
-    return;
-  }
-  temp_v2 = 0;
-  do {
-    temp_v9 = (unsigned int)*(unsigned short *)(temp_v1 + temp_v2 * 0xe + 0x842);
-    if ((temp_v9 != 0) && (temp_v4 = temp_v9, dataTable1bOr1cGetRecord(), *(char *)(temp_v4 + 6) == '\x01')) {
-      temp_v3 = gameGetMapBlock();
-      temp_v5 = 0;
-      do {
-        temp_v7 = temp_v4 + temp_v5 * 8;
-        temp_v8 = temp_v7 + 0x100;
-        temp_v10 = *(short *)(temp_v7 + 0x16c) == 2;
-        if (temp_v10) {
-          temp_v8 = (unsigned int)*(unsigned short *)(temp_v7 + 0x16e);
-        }
-        if (temp_v10 && temp_v8 == param_1) {
-          temp_v6 = temp_v1 + 0x87a + temp_v5 * 2;
-          temp_v8 = (unsigned int)*(unsigned short *)(temp_v6 + 2);
-          temp_v10 = *(unsigned int *)(temp_v4 + temp_v5 * 8 + 0x170) <= temp_v8;
-          temp_v8 = temp_v8 + param_2;
-          if ((int)temp_v8 < 0xffff) {
-            *(short *)(temp_v6 + 2) = (short)temp_v8;
-            if (temp_v10) break;
-            if ((temp_v8 & 0xffff) >= *(unsigned int *)(temp_v7 + 0x170)) {
-              *(unsigned short *)(temp_v3 + 0x1064) = temp_v0;
+    struct AcceptedQuest { u16 id; u16 counts[6]; };
+    struct QuestProgressView {
+        QuestRuntimeFlagBlock base;
+        u16 selected;
+        AcceptedQuest accepted[4];
+        QuestRequirementSavedProgress progress;
+    };
+    struct QuestNotificationView {
+        u8 prefix[0x1064];
+        u16 completedItem;
+        u16 progressingItem;
+    };
+    // Both progress tails lie beyond the canonical flag/map block prefixes.
+    QuestProgressView *flags = reinterpret_cast<QuestProgressView *>(gameGetFlagBlock());
+    u16 selected = reinterpret_cast<QuestProgressView *>(gameGetFlagBlock())->selected;
+    if (selected != 0) {
+        if (FUN_00287894(selected) != 1)
+            return;
+        const QuestRequirementDefinition *quest = reinterpret_cast<const QuestRequirementDefinition *>(
+            dataTable1bOr1cGetRecord(selected));
+        QuestNotificationView *notification = reinterpret_cast<QuestNotificationView *>(gameGetMapBlock());
+        for (s32 index = 0; index < 6; ++index) {
+            const QuestRequirement &requirement = quest->requirements[index];
+            if (static_cast<u16>(requirement.kind) == 2 && requirement.id == itemId) {
+                u16 oldCount = flags->progress.counts[index];
+                bool incomplete = oldCount < static_cast<u32>(requirement.count);
+                u32 updated = static_cast<u32>(oldCount) + change;
+                if (static_cast<s32>(updated) < 0xffff) {
+                    flags->progress.counts[index] = static_cast<u16>(updated);
+                    if (!incomplete)
+                        return;
+                    if (static_cast<u16>(updated) >= static_cast<u32>(requirement.count))
+                        notification->completedItem = itemId;
+                    else
+                        notification->progressingItem = itemId;
+                } else {
+                    flags->progress.counts[index] = 0xffff;
+                    if (!incomplete)
+                        return;
+                }
+                gameGetFlagBlock()->quests[selected].stateFlags |= 2;
+                return;
             }
-            else {
-              *(unsigned short *)(temp_v3 + 0x1066) = temp_v0;
-            }
-          }
-          else {
-            *(unsigned short *)(temp_v6 + 2) = 0xffff;
-            if (temp_v10) break;
-          }
-          temp_v3 = gameGetFlagBlock();
-          temp_v3 = temp_v3 + temp_v9 * 4;
-          *(unsigned char *)(temp_v3 + 0x202) = *(unsigned char *)(temp_v3 + 0x202) | 2;
-          break;
         }
-        temp_v5 = temp_v5 + 1;
-      } while (temp_v5 < 6);
+        return;
     }
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 >= 4) {
-      return;
+    for (s32 slot = 0; slot < 4; ++slot) {
+        u16 questId = flags->accepted[slot].id;
+        if (questId == 0)
+            continue;
+        const QuestRequirementDefinition *quest = reinterpret_cast<const QuestRequirementDefinition *>(
+            dataTable1bOr1cGetRecord(questId));
+        if (quest->kind != 1)
+            continue;
+        QuestNotificationView *notification = reinterpret_cast<QuestNotificationView *>(gameGetMapBlock());
+        for (s32 index = 0; index < 6; ++index) {
+            const QuestRequirement &requirement = quest->requirements[index];
+            if (static_cast<u16>(requirement.kind) == 2 && requirement.id == itemId) {
+                u16 oldCount = flags->progress.counts[index];
+                bool incomplete = oldCount < static_cast<u32>(requirement.count);
+                u32 updated = static_cast<u32>(oldCount) + change;
+                if (static_cast<s32>(updated) < 0xffff) {
+                    flags->progress.counts[index] = static_cast<u16>(updated);
+                    if (!incomplete)
+                        break;
+                    if (static_cast<u16>(updated) >= static_cast<u32>(requirement.count))
+                        notification->completedItem = itemId;
+                    else
+                        notification->progressingItem = itemId;
+                } else {
+                    flags->progress.counts[index] = 0xffff;
+                    if (!incomplete)
+                        break;
+                }
+                gameGetFlagBlock()->quests[questId].stateFlags |= 2;
+                break;
+            }
+        }
     }
-  } while( 1 );
 }
-
-} /* extern "C" */
+}

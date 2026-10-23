@@ -1,106 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00289234` (_code @ 0x289234, 0x188 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: empty-slot bubble-sort branch stays inside the loop and early pair-count comparison differs. */
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
+extern EventTex *g_eventTex;
+s32 jobIsValid(u32);
+s32 jobGetStatus(u32);
 
-int jobGetStatus(...);
-
-extern int g_eventTex; /* 0x43ded0 */
-
-/* Supplied declaration required: jobGetStatus. */
-extern int jobIsValid(unsigned int);
-
-
-void FUN_00289234(unsigned int param_1)
-
+void FUN_00289234(u32 job)
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  
-  temp_v1 = g_eventTex;
-  temp_v5 = 0;
-  if (0 < *(int *)(g_eventTex + 0x2c)) {
-    do {
-      temp_v6 = temp_v1 + temp_v5 * 4;
-      temp_v2 = jobIsValid(*(unsigned int *)(temp_v6 + 4));
-      if (temp_v2 == 0) {
-        *(unsigned int *)(temp_v6 + 4) = 0;
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < *(int *)(temp_v1 + 0x2c));
-  }
-  temp_v5 = 0;
-  do {
-    if (*(int *)(temp_v1 + temp_v5 * 4 + 4) == 0) {
-      *(unsigned int *)(temp_v1 + temp_v5 * 4 + 4) = param_1;
-      break;
+    EventTex *work = g_eventTex;
+    for (s32 index = 0; index < work->count; ++index) {
+        if (!jobIsValid(work->slots[index]))
+            work->slots[index] = 0;
     }
-    temp_v5 = temp_v5 + 1;
-  } while (temp_v5 < 10);
-  temp_v5 = -1;
-  temp_v2 = 0;
-  temp_v6 = 10;
-  do {
-    if (*(int *)(temp_v1 + temp_v2 * 4 + 4) == 0) {
-      temp_v5 = temp_v2;
-    }
-    while( 1 ) {
-      temp_v6 = temp_v6 - 1;
-      temp_v2 = temp_v2 + 1;
-      if (temp_v6 == 0) {
-        *(unsigned int *)(temp_v1 + 0x2c) = 0;
-        goto LAB_00289304;
-      }
-      if (temp_v5 < 0) break;
-      temp_v3 = temp_v1 + temp_v2 * 4;
-      temp_v7 = *(int *)(temp_v3 + 4);
-      if (temp_v7 != 0) {
-        *(int *)(temp_v1 + temp_v5 * 4 + 4) = temp_v7;
-        *(unsigned int *)(temp_v3 + 4) = 0;
-        temp_v5 = temp_v2;
-      }
-    }
-  } while( 1 );
-  while (temp_v5 = *(int *)(temp_v1 + 0x2c) + 1, *(int *)(temp_v1 + 0x2c) = temp_v5, temp_v5 < 10) {
-LAB_00289304:
-    if (*(int *)(temp_v1 + *(int *)(temp_v1 + 0x2c) * 4 + 4) == 0) break;
-  }
-  do {
-    temp_v0 = 0;
-    temp_v5 = 0;
-    if (*(int *)(temp_v1 + 0x2c) - 1 < 1) {
-      return;
-    }
-    do {
-      temp_v2 = temp_v1 + temp_v5 * 4;
-      if (*(int *)(temp_v2 + 4) != 0) {
-        if (*(int *)(temp_v2 + 8) != 0) {
-          temp_v6 = jobGetStatus();
-          temp_v3 = jobGetStatus(*(unsigned int *)(temp_v2 + 8));
-          if (temp_v3 < temp_v6) {
-            temp_v4 = *(unsigned int *)(temp_v2 + 4);
-            temp_v0 = 1;
-            *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 8);
-            *(unsigned int *)(temp_v2 + 8) = temp_v4;
-          }
+    for (s32 index = 0; index < EVENT_TEX_HANDLES; ++index) {
+        if (!work->slots[index]) {
+            work->slots[index] = job;
+            break;
         }
-      }
-      else if (*(int *)(temp_v2 + 8) != 0) {
-        temp_v0 = 1;
-        *(int *)(temp_v2 + 4) = *(int *)(temp_v2 + 8);
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < *(int *)(temp_v1 + 0x2c) - 1);
-  } while (temp_v0);
-  return;
+    }
+    s32 hole = -1;
+    for (s32 index = 0; index < EVENT_TEX_HANDLES; ++index) {
+        if (hole < 0) {
+            if (!work->slots[index])
+                hole = index;
+        } else if (work->slots[index]) {
+            work->slots[hole] = work->slots[index];
+            work->slots[index] = 0;
+            hole = index;
+        }
+    }
+    work->count = 0;
+    while (work->count < EVENT_TEX_HANDLES && work->slots[work->count])
+        ++work->count;
+    bool changed;
+    do {
+        changed = false;
+        s32 index = 0;
+        if (work->count <= 1)
+            return;
+        do {
+            if (work->slots[index]) {
+                if (work->slots[index + 1]) {
+                    s32 currentStatus = jobGetStatus(work->slots[index]);
+                    s32 nextStatus = jobGetStatus(work->slots[index + 1]);
+                    if (nextStatus < currentStatus) {
+                        u32 previous = work->slots[index];
+                        work->slots[index] = work->slots[index + 1];
+                        work->slots[index + 1] = previous;
+                        changed = true;
+                    }
+                }
+            } else if (work->slots[index + 1]) {
+                work->slots[index] = work->slots[index + 1];
+                changed = true;
+            }
+            ++index;
+        } while (index < work->count - 1);
+    } while (changed);
 }
-
-} /* extern "C" */
+}

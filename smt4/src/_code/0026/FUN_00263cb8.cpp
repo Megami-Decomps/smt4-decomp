@@ -1,93 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00263cb8` (_code @ 0x263cb8, 0x188 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: typed vector/scale stores coalesce and descriptor/instance saved-register allocation differs. */
+#include "map/MapEffectReservation.h"
 
 extern "C" {
+extern MapEffectReservationState DAT_00447a28;
+extern MapEffectReservation DAT_004afd64[];
+extern MapEffectInstance DAT_004a1264[];
+s32 FUN_0021c694(MapEffectAttachmentRequest* request);
+u32 mapIfSpawnEffect(u32 resource, u32 first, u32 second, u32 option, f32 x, f32 y, f32 z, f32 heading);
 
-int FUN_0021c694(void);
-int mapIfSpawnEffect(unsigned int, unsigned int, unsigned int, unsigned int);
-
-/* stack frame of param_19: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_19_stack;
-
-extern int DAT_00447a2c; /* 0x447a2c */
-
-/* Supplied declaration required: FUN_0021c694. */
-/* Supplied declaration required: mapIfSpawnEffect. */
-
-
-int FUN_00263cb8(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                unsigned int param_5,unsigned int param_6,unsigned char param_7,unsigned char param_8,
-                unsigned char param_9,unsigned char param_10,unsigned char param_11,unsigned char param_12,
-                unsigned char param_13,unsigned char param_14,unsigned char param_15,unsigned int param_16,
-                unsigned int param_17,unsigned int param_18,unsigned int param_19)
-
+s32 FUN_00263cb8(u32 resource, u32 kind, u32 owner, u32 appearanceResource,
+    u32 first, u32 second, u8 red, u8 green, u8 blue, u8 secondaryRed, u8 secondaryGreen,
+    u8 secondaryBlue, u8 channel, u8 mode, u8 flags, MapEffectFloatWord scaleX,
+    MapEffectFloatWord scaleY, MapEffectFloatWord scaleZ, u32 option,
+    f32 x, f32 y, f32 z, f32 rotationY, f32 rotationX, f32 rotationZ, f32 heading)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3, in_s4, in_s5, in_s6; 9 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int in_s3;
-  unsigned int in_s4;
-  unsigned int in_s5;
-  unsigned int in_s6;
-  
-  temp_v1 = DAT_00447a2c;
-  temp_v2 = DAT_00447a2c * 0x8c;
-  *(unsigned int *)(temp_v2 + 0x4afd6c) = 2;
-  *(unsigned int *)(temp_v2 + 0x4afd74) = in_s3;
-  *(unsigned int *)(temp_v2 + 0x4afd70) = in_s4;
-  *(unsigned int *)(temp_v2 + 0x4afd78) = in_s5;
-  *(unsigned int *)(temp_v2 + 0x4afd8c) = param_4;
-  *(unsigned int *)(temp_v2 + 0x4afd88) = 1;
-  *(unsigned int *)(temp_v2 + 0x4afd90) = param_16;
-  *(unsigned int *)(temp_v2 + 0x4afd94) = param_17;
-  *(unsigned int *)(temp_v2 + 0x4afd98) = param_18;
-  *(unsigned char *)(temp_v2 + 0x4afd9c) = param_7;
-  *(unsigned char *)(temp_v2 + 0x4afd9d) = param_8;
-  *(unsigned char *)(temp_v2 + 0x4afd9e) = param_9;
-  *(unsigned char *)(temp_v2 + 0x4afd9f) = param_10;
-  *(unsigned char *)(temp_v2 + 0x4afda0) = param_11;
-  *(unsigned char *)(temp_v2 + 0x4afda1) = param_12;
-  *(unsigned short *)(temp_v2 + 0x4afda2) = 1;
-  *(int *)(temp_v2 + 0x4afda4) = temp_v2 + 0x4afd6c;
-  *(int *)(temp_v2 + 0x4afdd4) = temp_v2 + 0x4afd88;
-  *(int *)(temp_v2 + 0x4afdcc) = temp_v2 + 0x4afda8;
-  *(unsigned int *)(temp_v2 + 0x4afda8) = in_s0;
-  *(unsigned int *)(temp_v2 + 0x4afdb4) = 0;
-  *(unsigned int *)(temp_v2 + 0x4afdb8) = in_s6;
-  *(unsigned int *)(temp_v2 + 0x4afdbc) = 0;
-  *(unsigned int *)(temp_v2 + 0x4afdac) = in_s1;
-  *(unsigned int *)(temp_v2 + 0x4afdb0) = in_s2;
-  *(unsigned int *)(temp_v2 + 0x4afdc8) = param_3;
-  temp_v2 = temp_v2 + 0x4afdc0;
-  FUN_0021c694();
-  temp_v3 = param_1;
-  mapIfSpawnEffect(param_1,param_5,param_6,param_19);
-  temp_v0 = temp_v2 * 0x178;
-  *(unsigned int *)(temp_v0 + 0x4a1388) = temp_v3;
-  *(unsigned char *)(temp_v0 + 0x4a13d0) = param_13;
-  *(unsigned char *)(temp_v1 * 0x178 + 0x4a13d1) = param_14;
-  *(unsigned int *)(temp_v0 + 0x4a1390) = param_1;
-  *(unsigned int *)(temp_v0 + 0x4a1394) = param_2;
-  *(unsigned int *)(temp_v0 + 0x4a1398) = 0xffffffff;
-  *(unsigned short *)(temp_v0 + 0x4a13c0) = 0;
-  *(unsigned short *)(temp_v0 + 0x4a13c2) = 0xffff;
-  *(unsigned char *)(temp_v0 + 0x4a13c8) = 0;
-  *(unsigned char *)(temp_v0 + 0x4a138c) = param_15;
-  *(unsigned char *)(temp_v0 + 0x4a13d2) = 0;
-  *(unsigned short *)(temp_v0 + 0x4a13c4) = 0;
-  *(unsigned short *)(temp_v0 + 0x4a13c6) = 0;
-  DAT_00447a2c = DAT_00447a2c + 1;
-  return temp_v2;
+    s32 reservationIndex = DAT_00447a28.count;
+    MapEffectReservation* reservation = &DAT_004afd64[reservationIndex];
+    reservation->rotation.kind = 2;
+    reservation->rotation.y = rotationY;
+    reservation->rotation.x = rotationX;
+    reservation->rotation.z = rotationZ;
+    reservation->appearance.resource = appearanceResource;
+    reservation->appearance.kind = 1;
+    reservation->appearance.scale[0] = scaleX;
+    reservation->appearance.scale[1] = scaleY;
+    reservation->appearance.scale[2] = scaleZ;
+    reservation->appearance.color[0] = red;
+    reservation->appearance.color[1] = green;
+    reservation->appearance.color[2] = blue;
+    reservation->appearance.color[3] = secondaryRed;
+    reservation->appearance.color[4] = secondaryGreen;
+    reservation->appearance.color[5] = secondaryBlue;
+    reservation->appearance.enabled = 1;
+    reservation->rotationSource = &reservation->rotation;
+    reservation->attachment.appearance = &reservation->appearance;
+    reservation->attachment.transform = &reservation->transform;
+    reservation->transform.x = x;
+    reservation->transform.offsetX = 0.0f;
+    reservation->transform.heading = heading;
+    reservation->transform.offsetZ = 0.0f;
+    reservation->transform.y = y;
+    reservation->transform.z = z;
+    reservation->attachment.owner = owner;
+    s32 slot = FUN_0021c694(&reservation->attachment);
+    u32 effect = mapIfSpawnEffect(resource, first, second, option, x, y, z, heading);
+    MapEffectInstance* instance = &DAT_004a1264[slot];
+    instance->effect = effect;
+    instance->channel = channel;
+    DAT_004a1264[reservationIndex].mode = mode;
+    instance->resource = resource;
+    instance->kind = kind;
+    instance->target = -1;
+    instance->frame = 0;
+    instance->previous = -1;
+    instance->active = 0;
+    instance->flags = flags;
+    instance->pending = 0;
+    instance->first = 0;
+    instance->second = 0;
+    ++DAT_00447a28.count;
+    return slot;
 }
-
-} /* extern "C" */
+}

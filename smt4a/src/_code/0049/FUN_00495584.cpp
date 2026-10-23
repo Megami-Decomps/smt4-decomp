@@ -1,87 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00495584` (_code @ 0x495584, 0x110 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: sprite completion accessor lacks retail's signed load/NOPs; next-state constant lifetime and stores differ. */
+#include "classes/Obj536044.h"
+#include "shard/W6_W6Match6_SpritePresetBank.h"
+#include <stddef.h>
 
 extern "C" {
+void *lmapSceneGetScript();
+void FUN_003e5858(void *script);
+s32 fourPtrsAllNull(void *script);
+void uiSpriteBankApplyPreset(SpritePresetBank *, s32 preset);
+void FUN_0019de98(s32 channel, u32 color);
+void FUN_00163aa4(UiAnimatedSprite *, f32 speed);
+s32 vec2GetXInt(const UiAnimatedSprite *);
+s32 vec2GetYInt(const UiAnimatedSprite *);
+void pointConvertToFloat(f32 *point, s32 x, s32 y);
 
-int FUN_00163aa4(unsigned int *);
-int uiSpriteBankApplyPreset(unsigned int *, int);
-int FUN_0019de98(int, int);
-int lmapSceneGetScript(void);
-int FUN_003e5858(void);
-int pointConvertToFloat(unsigned int *, unsigned int, unsigned int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int vec2GetXInt(unsigned int *);
-extern unsigned int vec2GetYInt(unsigned int *);
-/* Supplied declaration required: uiSpriteBankApplyPreset. */
-/* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: lmapSceneGetScript. */
-/* Supplied declaration required: FUN_003e5858. */
-extern int fourPtrsAllNull(void);
-/* Supplied declaration required: pointConvertToFloat. */
-
-
-void FUN_00495584(unsigned int *param_1)
-
+// Finish the map-scene animation, then wait for its script before advancing.
+void FUN_00495584(Obj536044 *scene)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  
-  temp_v0 = lmapSceneGetScript();
-  if (temp_v0 != 0) {
-    lmapSceneGetScript();
-    FUN_003e5858();
-  }
-  temp_v1 = param_1[2];
-  if (temp_v1 == 0) {
-    uiSpriteBankApplyPreset(param_1 + 0xf3,1);
-    param_1[2] = 1;
-    FUN_0019de98(0,0x323232ff);
-    return;
-  }
-  if (temp_v1 != 1) {
-    if (temp_v1 != 2) {
-      return;
+    // These animation fields extend beyond the documented class prefix.
+    struct SceneTransitionView {
+        u32 flags;
+        s32 state;
+        u32 substate;
+        u32 unk0c;
+        s32 previousState;
+        u8 unk14[0x390];
+        f32 position[2]; // 0x3a4
+        u8 unk3ac[0x20];
+        SpritePresetBank bank; // 0x3cc
+    };
+    typedef char SceneTransitionViewOffsetCheck[offsetof(SceneTransitionView, bank) == 0x3cc && offsetof(SceneTransitionView, position) == 0x3a4 ? 1 : -1];
+    SceneTransitionView *state = reinterpret_cast<SceneTransitionView *>(scene);
+    if (lmapSceneGetScript())
+        FUN_003e5858(lmapSceneGetScript());
+    if (state->substate == 0) {
+        uiSpriteBankApplyPreset(&state->bank, 1);
+        state->substate = 1;
+        FUN_0019de98(0, 0x323232ff);
+        return;
     }
-  }
-  else {
-    puVar5 = param_1 + 0x11e;
-    FUN_00163aa4(puVar5);
-    temp_v2 = vec2GetYInt(puVar5);
-    temp_v3 = vec2GetXInt(puVar5);
-    pointConvertToFloat(param_1 + 0xe9,temp_v3,temp_v2);
-    if (*(char *)((int)param_1 + 0x502) == '\0') {
-      return;
+    if (state->substate != 1) {
+        if (state->substate != 2)
+            return;
+    } else {
+        UiAnimatedSprite *sprite = &state->bank.sprites[1];
+        FUN_00163aa4(sprite, 1.0f);
+        s32 y = vec2GetYInt(sprite);
+        s32 x = vec2GetXInt(sprite);
+        pointConvertToFloat(state->position, x, y);
+        if (!uiAnimatedSpriteIsFinished(sprite))
+            return;
+        state->flags &= ~0xe00;
+        if (!lmapSceneGetScript()) {
+            state->previousState = state->state;
+            state->state = 0x14;
+            state->substate = 0;
+            return;
+        }
+        state->substate = 2;
     }
-    *param_1 = *param_1 & 0xfffff1ff;
-    temp_v0 = lmapSceneGetScript();
-    if (temp_v0 == 0) {
-      param_1[4] = param_1[1];
-      param_1[1] = 0x14;
-      param_1[2] = 0;
-      return;
-    }
-    param_1[2] = 2;
-  }
-  lmapSceneGetScript();
-  temp_v0 = fourPtrsAllNull();
-  if (temp_v0 == 0) {
-    return;
-  }
-  param_1[4] = param_1[1];
-  param_1[1] = 0x14;
-  param_1[2] = 0;
-  return;
+    if (!fourPtrsAllNull(lmapSceneGetScript()))
+        return;
+    state->previousState = state->state;
+    state->state = 0x14;
+    state->substate = 0;
 }
-
-} /* extern "C" */
+}

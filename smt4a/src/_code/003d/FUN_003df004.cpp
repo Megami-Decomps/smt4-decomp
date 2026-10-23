@@ -1,90 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003df004` (_code @ 0x3df004, 0x164 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Supported-kind result registers, switch block placement and shared remaining-count clamp differ. */
+#include "quest_center/QuestRequirement.h"
 
+/* Apocalypse objectives begin at 0x100 rather than the shared IV definition's 0x16C. */
+struct QuestObjectiveDefinitionA {
+    u8 unk000[6];
+    u8 kind;
+    u8 unk007[0xF9];
+    QuestRequirement objectives[1];
+};
+struct QuestObjectiveCountsA {
+    u8 unk00[4];
+    u16 counts[1];
+};
 extern "C" {
+QuestObjectiveDefinitionA *FUN_001ad9b4(u32 quest);
+s32 FUN_001ba3d4(u16 item);
+void *gameFindRosterEntry(u32 quest);
+s32 partyFindSlotById(u16 id);
+s32 gameCountersGetWord(u16 counter);
 
-int FUN_001ad9b4(void);
-
-/* Supplied declaration required: FUN_001ad9b4. */
-extern int gameCountersGetWord(unsigned short);
-extern int FUN_001b5660(int);
-extern int FUN_001ba3d4(unsigned short);
-extern int partyFindSlotById(unsigned short);
-
-
-void FUN_003df004(int param_1,int param_2,int *param_3)
-
+/* Resolves an objective's current/remaining quantity and returns whether its kind is supported. */
+s32 FUN_003df004(u32 quest, s32 index, QuestRequirementProgress *progress)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  *(unsigned char *)((int)param_3 + 7) = 0;
-  temp_v3 = param_1;
-  FUN_001ad9b4();
-  if (temp_v3 != 0) {
-    temp_v4 = temp_v3 + param_2 * 8;
-    temp_v0 = *(short *)(temp_v4 + 0x100);
-    if (temp_v0 != 1) {
-      if (temp_v0 != 2) {
-        if (temp_v0 != 7) {
-          if (temp_v0 != 8) {
-            return;
-          }
-          temp_v1 = *(unsigned short *)(temp_v4 + 0x102);
-          *(unsigned short *)(param_3 + 1) = temp_v1;
-          temp_v3 = gameCountersGetWord(temp_v1 & 0xff);
-          param_3[2] = temp_v3;
-          temp_v3 = *(int *)(temp_v4 + 0x104) - temp_v3;
-          *param_3 = temp_v3;
-          *(unsigned char *)((int)param_3 + 7) = 1;
-        }
-        else {
-          *(unsigned char *)((int)param_3 + 6) = 1;
-          *(unsigned short *)(param_3 + 1) = *(unsigned short *)(temp_v4 + 0x102);
-          temp_v3 = *(int *)(temp_v4 + 0x104) - param_3[2];
-          *param_3 = temp_v3;
-        }
-      }
-      else {
-        *(unsigned char *)((int)param_3 + 6) = 0;
-        *(unsigned short *)(param_3 + 1) = *(unsigned short *)(temp_v4 + 0x102);
-        if (*(char *)(temp_v3 + 6) != '\x01') {
-          temp_v3 = partyFindSlotById(*(unsigned short *)(temp_v4 + 0x102));
-          if (-1 < temp_v3) {
-            param_3[2] = 1;
-            *param_3 = 0;
-            return;
-          }
-          *param_3 = 1;
-          param_3[2] = 0;
-          return;
-        }
-        temp_v3 = FUN_001b5660(param_1);
-        temp_v2 = (unsigned int)*(unsigned short *)(temp_v3 + param_2 * 2 + 4);
-        param_3[2] = temp_v2;
-        temp_v3 = *(int *)(temp_v4 + 0x104) - temp_v2;
-        *param_3 = temp_v3;
-      }
+    progress->unk07 = 0;
+    QuestObjectiveDefinitionA *definition = FUN_001ad9b4(quest);
+    if (definition == NULL) {
+        return 0;
     }
-    else {
-      temp_v3 = FUN_001ba3d4(*(unsigned short *)(temp_v4 + 0x102));
-      param_3[2] = temp_v3;
-      *(unsigned char *)((int)param_3 + 6) = 1;
-      *(unsigned short *)(param_3 + 1) = *(unsigned short *)(temp_v4 + 0x102);
-      temp_v3 = *(int *)(temp_v4 + 0x104) - temp_v3;
-      *param_3 = temp_v3;
+    QuestRequirement *objective = &definition->objectives[index];
+    switch ((u16)objective->kind) {
+    case 1:
+        progress->current = FUN_001ba3d4(objective->id);
+        progress->isItem = 1;
+        progress->id = objective->id;
+        progress->remaining = objective->count - progress->current;
+        break;
+    case 2:
+        progress->isItem = 0;
+        progress->id = objective->id;
+        if (definition->kind == 1) {
+            QuestObjectiveCountsA *saved = (QuestObjectiveCountsA *)gameFindRosterEntry(quest);
+            progress->current = saved->counts[index];
+            progress->remaining = objective->count - progress->current;
+        } else {
+            if (partyFindSlotById(objective->id) >= 0) {
+                progress->current = 1;
+                progress->remaining = 0;
+            } else {
+                progress->remaining = 1;
+                progress->current = 0;
+            }
+            return 1;
+        }
+        break;
+    case 7:
+        progress->isItem = 1;
+        progress->id = objective->id;
+        progress->remaining = objective->count - progress->current;
+        break;
+    case 8:
+        progress->id = objective->id;
+        progress->current = gameCountersGetWord(objective->id & 0xFF);
+        progress->remaining = objective->count - progress->current;
+        progress->unk07 = 1;
+        break;
+    default:
+        return 0;
     }
-    if (temp_v3 < 1) {
-      temp_v3 = 0;
+    if (progress->remaining < 1) {
+        progress->remaining = 0;
     }
-    *param_3 = temp_v3;
-  }
-  return;
+    return 1;
 }
-
-} /* extern "C" */
+}

@@ -1,80 +1,74 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004964e0` (_code @ 0x4964e0, 0x150 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved menu/touch-bank registers, cursor loads and panel-field instruction scheduling differ. */
+#include "shard/Shard0049.h"
+#include "shard/MessageIdList.h"
 
+class EquipmentMenuPanelView {
+public:
+    virtual void vfunc00();
+    virtual void vfunc04();
+    virtual void bindCursor(EquipmentMenuCursor *);
+    u16 flags;
+    u8 unk06[0x5E];
+    void *owner;
+};
+/* Touch handles extend beyond the shared equipment-menu prefix. */
+struct EquipmentMenuResetView {
+    union {
+        EquipmentMenuState state;
+        struct {
+            u32 flags;
+            u8 unk004[0x3A0];
+            u8 ownerState[0x764];
+            MessageIdList messages;
+            EquipmentMenuPanelView *panel;
+        } reset;
+    };
+    s16 touchHandles[2];
+    s16 touchCount;
+};
+typedef char EquipmentMenuResetOffsets[
+    offsetof(EquipmentMenuResetView, reset.messages) == 0xB08 &&
+    offsetof(EquipmentMenuResetView, reset.panel) == 0xB3C &&
+    offsetof(EquipmentMenuResetView, touchCount) == 0x16030 ? 1 : -1];
 extern "C" {
+void releaseEntriesB(EquipmentMenuPanelView *);
+void releaseEntriesA(MessageIdList *);
+void ifTouchRegionRemove();
+void FUN_004d05c4(MessageIdList *, u32, s32, s32);
+u16 FUN_001643b4(u32, u32);
+void FUN_00498ff0(EquipmentMenuState *);
 
-int ifTouchRegionRemove(void);
-int FUN_00498ff0(unsigned int *);
-int FUN_004d05c4(unsigned int *, int, unsigned int, unsigned int);
-int releaseEntriesA(void);
-int releaseEntriesB(unsigned int);
-
-typedef int romwright_code(...);
-/* Supplied declaration required: ifTouchRegionRemove. */
-extern unsigned short FUN_001643b4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00498ff0. */
-/* Supplied declaration required: FUN_004d05c4. */
-/* Supplied declaration required: releaseEntriesA. */
-/* Supplied declaration required: releaseEntriesB. */
-
-
-void FUN_004964e0(unsigned int *param_1,int param_2)
-
+void FUN_004964e0(EquipmentMenuResetView *menu, s32 refresh)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  
-  releaseEntriesB(param_1[0x2cf]);
-  releaseEntriesA();
-  temp_v4 = 0;
-  if (temp_v4 < (short)param_1[0x580c]) {
-    do {
-      ifTouchRegionRemove();
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < (short)param_1[0x580c]);
-  }
-  *(unsigned short *)(param_1 + 0x580c) = 0;
-  *(unsigned short *)(param_1 + 0x580b) = 0xffff;
-  *(unsigned short *)((int)param_1 + 0x1602e) = 0xffff;
-  (**(romwright_code **)(*(int *)param_1[0x2cf] + 8))
-            ((int *)param_1[0x2cf],param_1 + param_1[0x2d0] * 0x1d + 0x2d8);
-  temp_v3 = 9;
-  temp_v2 = 0x29;
-  *(unsigned short *)(param_1[0x2cf] + 4) = *(unsigned short *)(param_1[0x2cf] + 4) | 0x1000;
-  *(unsigned int **)(param_1[0x2cf] + 100) = param_1 + 0xe9;
-  if (param_1[0x2d0] == 7 || param_1[0x2d0] == 8) {
-    temp_v3 = 10;
-    temp_v2 = 0x28;
-  }
-  FUN_004d05c4(param_1 + 0x2c2,0x20,temp_v2,temp_v3);
-  *(unsigned char *)(param_1 + 0x2c6) = 1;
-  temp_v0 = FUN_001643b4(0x14,0x576);
-  *(unsigned short *)(param_1 + 0x580b) = temp_v0;
-  temp_v0 = FUN_001643b4(0x14,0x577);
-  *(unsigned short *)((int)param_1 + 0x1602e) = temp_v0;
-  *(short *)(param_1 + 0x580c) = (short)param_1[0x580c] + 2;
-  if (param_2 != 0) {
-    FUN_00498ff0(param_1);
-  }
-  temp_v1 = *param_1 & 0xfffff1ff;
-  *param_1 = temp_v1;
-  if (param_1[0x2d0] == 8) {
-    temp_v1 = temp_v1 | 0x800;
-  }
-  else {
-    if (param_1[0x2d0] == 7) {
-      *param_1 = temp_v1 | 0x400;
-      return;
+    releaseEntriesB(menu->reset.panel);
+    releaseEntriesA(&menu->reset.messages);
+    for (s32 i = 0; i < menu->touchCount; ++i)
+        ifTouchRegionRemove();
+    menu->touchCount = 0;
+    menu->touchHandles[0] = -1;
+    menu->touchHandles[1] = -1;
+    menu->reset.panel->bindCursor(&menu->state.cursors[menu->state.page]);
+    menu->reset.panel->flags |= 0x1000;
+    menu->reset.panel->owner = menu->reset.ownerState;
+    s32 firstItem = 0x29;
+    s32 itemCount = 9;
+    if (menu->state.page == 7 || menu->state.page == 8) {
+        firstItem = 0x28;
+        itemCount = 10;
     }
-    temp_v1 = temp_v1 | 0x200;
-  }
-  *param_1 = temp_v1;
-  return;
+    FUN_004d05c4(&menu->reset.messages, 0x20, firstItem, itemCount);
+    menu->reset.messages.unk10 = 1;
+    menu->touchHandles[0] = FUN_001643b4(0x14, 0x576);
+    menu->touchHandles[1] = FUN_001643b4(0x14, 0x577);
+    menu->touchCount += 2;
+    if (refresh)
+        FUN_00498ff0(&menu->state);
+    menu->reset.flags &= ~0xE00;
+    if (menu->state.page == 8)
+        menu->reset.flags |= 0x800;
+    else if (menu->state.page == 7)
+        menu->reset.flags |= 0x400;
+    else
+        menu->reset.flags |= 0x200;
 }
-
-} /* extern "C" */
+}

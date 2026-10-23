@@ -265,7 +265,7 @@ extern int FUN_003eca48(unsigned int, unsigned short);
 /* Supplied declaration required: btlEntryGetSummaryRatio. */
 /* Supplied declaration required: FUN_004c4604. */
 /* Supplied declaration required: btlDowngradeRandomResistance. */
-extern int FUN_004c52ec(void);
+extern int btlGetPropertyMaximum(void);
 /* Supplied declaration required: FUN_004c53fc. */
 /* Supplied declaration required: FUN_004c571c. */
 /* Supplied declaration required: battleRecordUnitMaskHistoryEvents. */
@@ -1573,7 +1573,7 @@ LAB_004e45bc:
             if (temp_v4 != '\0') {
               if (temp_v4 != -5) {
                 if (temp_v4 >= '\x01') {
-                  temp_v5 = FUN_004c52ec();
+                  temp_v5 = btlGetPropertyMaximum();
                   temp_v8 = btlFindEntryValue(param_8,7);
                   if (temp_v5 == temp_v8) {
 LAB_004e49f0:
@@ -1598,7 +1598,7 @@ LAB_004e49f4:
               if (temp_v4 != '\0') {
                 if (temp_v4 != -5) {
                   if (temp_v4 >= '\x01') {
-                    temp_v5 = FUN_004c52ec();
+                    temp_v5 = btlGetPropertyMaximum();
                     temp_v8 = btlFindEntryValue(param_8,8);
                     if (temp_v5 == temp_v8) {
 LAB_004e4a78:
@@ -1623,7 +1623,7 @@ LAB_004e4a7c:
                 if (temp_v4 != '\0') {
                   if (temp_v4 != -5) {
                     if (temp_v4 >= '\x01') {
-                      temp_v5 = FUN_004c52ec();
+                      temp_v5 = btlGetPropertyMaximum();
                       temp_v8 = btlFindEntryValue(param_8,10);
                       if (temp_v5 == temp_v8) {
 LAB_004e4b00:
@@ -1648,7 +1648,7 @@ LAB_004e4b04:
                   if (temp_v4 != '\0') {
                     if (temp_v4 != -5) {
                       if (temp_v4 >= '\x01') {
-                        temp_v5 = FUN_004c52ec();
+                        temp_v5 = btlGetPropertyMaximum();
                         temp_v8 = btlFindEntryValue(param_8,0xb);
                         if (temp_v5 == temp_v8) {
 LAB_004e4b94:

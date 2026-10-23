@@ -1,65 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034e310` (_code @ 0x34e310, 0x120 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: pool field addressing and initialization use scalar stores instead of retail's paired stores. */
+#include "sound/VoicePool.h"
 
 extern "C" {
+extern SoundVoicePool DAT_0044d0f8;
+extern u32 DAT_004c40f8;
+u32 FUN_002bd29c(u32 priority, u32 first, u32 second);
+void nn_os_CriticalSection_Enter(void *section);
+void nn_os_CriticalSection_Leave(void *section);
 
-typedef int romwright_code(...);
-extern int *DAT_0044d0fc; /* 0x44d0fc */
-extern int DAT_0044d100; /* 0x44d100 */
-extern unsigned int DAT_0044d10c; /* 0x44d10c */
-extern unsigned int DAT_004c40f8; /* 0x4c40f8 */
-
-extern unsigned int FUN_002bd29c(unsigned int, unsigned int);
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-unsigned int FUN_0034e310(int param_1,int param_2,int param_3)
-
+/* Allocate an unused voice slot and its event buffer. */
+u32 FUN_0034e310(s32 first, s32 second, s32 capacity)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  int *piVar3;
-  unsigned int temp_v2;
-  
-  temp_v2 = 0;
-  if (temp_v2 < DAT_0044d10c) {
-    do {
-      if (*(int *)(DAT_0044d100 + temp_v2 * 0x70) == 0) {
-        *(int *)(DAT_0044d100 + temp_v2 * 0x70 + 0x38) = param_3;
-        temp_v0 = (**(romwright_code **)*DAT_0044d0fc)(DAT_0044d0fc,param_3 * 0x18,4);
-        *(int *)(DAT_0044d100 + temp_v2 * 0x70 + 4) = temp_v0;
-        if (temp_v0 == 0) {
-          return 0;
+    for (u32 index = 0; index < DAT_0044d0f8.count; ++index) {
+        if (DAT_0044d0f8.entries[index].voice == 0) {
+            DAT_0044d0f8.entries[index].capacity = capacity;
+            void *buffer = DAT_0044d0f8.allocator->allocate(capacity * 24, 4);
+            DAT_0044d0f8.entries[index].buffer = buffer;
+            if (buffer == NULL) {
+                return 0;
+            }
+            nn_os_CriticalSection_Enter(&DAT_004c40f8);
+            DAT_0044d0f8.entries[index].voice = FUN_002bd29c(0x80, 0, 0);
+            nn_os_CriticalSection_Leave(&DAT_004c40f8);
+            SoundVoicePoolEntry *entry = &DAT_0044d0f8.entries[index];
+            if (entry->voice == 0) {
+                DAT_0044d0f8.allocator->release(entry->buffer);
+                return 0;
+            }
+            entry->counters[0] = 0;
+            entry->counters[1] = 0;
+            entry->counters[2] = 0;
+            entry->counters[3] = 0;
+            entry->timing[0] = 0;
+            entry->timing[1] = 0;
+            entry->timing[2] = 0;
+            entry->timing[3] = 0;
+            entry->volume = 0.707f;
+            entry->targetVolume = 0.707f;
+            entry->first = first;
+            entry->second = second;
+            return index;
         }
-        nn_os_CriticalSection_Enter((unsigned int)&DAT_004c40f8);
-        temp_v1 = FUN_002bd29c(0x80,0);
-        *(unsigned int *)(DAT_0044d100 + temp_v2 * 0x70) = temp_v1;
-        nn_os_CriticalSection_Leave((unsigned int)&DAT_004c40f8);
-        piVar3 = (int *)(DAT_0044d100 + temp_v2 * 0x70);
-        if (*piVar3 == 0) {
-          (**(romwright_code **)(*DAT_0044d0fc + 4))(DAT_0044d0fc,piVar3[1]);
-          return 0;
-        }
-        piVar3[0x11] = 0;
-        piVar3[0x12] = 0;
-        piVar3[0x13] = 0;
-        piVar3[0x14] = 0;
-        piVar3[0x16] = 0;
-        piVar3[0x17] = 0;
-        piVar3[0x18] = 0;
-        piVar3[0x19] = 0;
-        piVar3[2] = 0x3f34fdf4;
-        piVar3[3] = 0x3f34fdf4;
-        piVar3[0xf] = param_1;
-        piVar3[0x10] = param_2;
-        return temp_v2;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < DAT_0044d10c);
-  }
-  return 0xffffffff;
+    }
+    return 0xffffffff;
 }
-
-} /* extern "C" */
+}

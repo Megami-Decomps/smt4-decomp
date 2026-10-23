@@ -1,157 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c1658` (_code @ 0x2c1658, 0x1f8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: input/help switch ordering, shared mode-query register allocation and zero-result return paths differ; native active-kind helper boundary restored. */
+#include "common.h"
 
 extern "C" {
-
-int padIsButtonRepeat(...);
-int padIsButtonPressed(...);
-int FUN_002c15fc(...);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern int DAT_0043da2c; /* 0x43da2c */
-
-extern int buttonHelpKindIsTriggered(char);
-extern int buttonHelpKindIsPressed(char);
-/* Supplied declaration required: padIsButtonRepeat. */
-/* Supplied declaration required: padIsButtonPressed. */
-/* Supplied declaration required: FUN_002c15fc. */
-
-
-/* WARNING: Type propagation algorithm not settling */
-
-int FUN_002c1658(int param_1,int param_2)
-
-{
-/* irregular: 4 goto(s); 4 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  char temp_v3;
-  
-  temp_v3 = '\0';
-  switch(param_1) {
-  case 0:
-    temp_v3 = '\x01';
-    break;
-  case 1:
-    temp_v3 = '\x02';
-    break;
-  case 7:
-    temp_v3 = '\x06';
-    break;
-  case 8:
-    temp_v3 = '\x05';
-    break;
-  case 9:
-    temp_v3 = '\x03';
-    break;
-  case 10:
-    temp_v3 = '\x04';
-  }
-  if (param_2 != 0) {
-    if (param_2 != 1) {
-      if (param_2 == 2) {
-        temp_v1 = FUN_002c15fc(param_1);
-        if (temp_v1 != 0) {
-          return temp_v1;
-        }
-      }
-    }
-    else {
-      temp_v1 = padIsButtonPressed(param_1);
-      if (temp_v1 != 0) {
-        return temp_v1;
-      }
-    }
-  }
-  else {
-    temp_v1 = padIsButtonRepeat(param_1);
-    if (temp_v1 != 0) {
-      return temp_v1;
-    }
-  }
-  temp_v1 = 0;
-  if (param_1 != 5) {
-    if (param_1 != 6) {
-      if (param_1 == 4) {
-        temp_v2 = 0xd;
-        goto joined_r0x002c1770;
-      }
-      if (param_1 == 3) {
-        temp_v2 = 0xc;
-        goto joined_r0x002c1770;
-      }
-    }
-    else {
-      temp_v2 = 0xf;
-joined_r0x002c1770:
-      if (param_2 != 0) {
-joined_r0x002c1758:
-        if (param_2 != 1) {
-          if (param_2 != 2) goto LAB_002c17e4;
-          temp_v1 = FUN_002c15fc(temp_v2);
-        }
-        else {
-          temp_v1 = padIsButtonPressed(temp_v2);
-        }
-      }
-      else {
-        temp_v1 = padIsButtonRepeat(temp_v2);
-      }
-    }
-  }
-  else {
-    temp_v2 = 0xe;
-    if (param_2 != 0) goto joined_r0x002c1758;
-    temp_v1 = padIsButtonRepeat(temp_v2);
-  }
-  if (temp_v1 != 0) {
-    return temp_v1;
-  }
-LAB_002c17e4:
-  if (temp_v3 != '\0') {
-    if (param_2 == 0) {
-      temp_v1 = buttonHelpKindIsPressed(temp_v3);
-      return temp_v1;
-    }
-    if (param_2 == 1) {
-      temp_v1 = buttonHelpKindIsTriggered(temp_v3);
-      return temp_v1;
-    }
-    if (param_2 == 2) {
-      if (DAT_0043da2c != 0) {
-        temp_v1 = 0;
-        do {
-          temp_v0 = *(char *)(DAT_0043da2c + temp_v1 * 4 + 0x494);
-          if ((temp_v0 == temp_v3) && (*(char *)(DAT_0043da2c + temp_v1 + 0x4b8) != '\0')) {
-            return 1;
-          }
-          if (temp_v0 != '\b') {
-            if ((temp_v0 == '\t') && (temp_v3 == '\x03')) {
-              temp_v0 = *(char *)(DAT_0043da2c + temp_v1 + 0x4b8);
-              if (temp_v0 != '\0') {
-                return 1;
-              }
-            }
-          }
-          else if (temp_v3 == '\x04') {
-            temp_v0 = *(char *)(DAT_0043da2c + temp_v1 + 0x4b8);
-            if (temp_v0 != '\0') {
-              return 1;
-            }
-          }
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < 6);
-      }
-      return 0;
-    }
-  }
-  return 0;
+bool FUN_00124fe8(u32);
+u32 padIsButtonRepeat(u32);
+u32 padIsButtonPressed(u32);
+u8 FUN_002c15fc(u32);
+s32 buttonHelpKindIsTriggered(s8);
+s32 buttonHelpKindIsPressed(s8);
 }
 
-} /* extern "C" */
+static inline u32 queryPadButton(u32 button, s32 mode)
+{
+    switch (mode) {
+    case 0: return padIsButtonRepeat(button);
+    case 1: return padIsButtonPressed(button);
+    case 2: return FUN_002c15fc(button);
+    default: return 0;
+    }
+}
+
+extern "C" s32 FUN_002c1658(s32 button, s32 mode)
+{
+    s8 helpKind = 0;
+    switch (button) {
+    case 0: helpKind = 1; break;
+    case 1: helpKind = 2; break;
+    case 7: helpKind = 6; break;
+    case 8: helpKind = 5; break;
+    case 9: helpKind = 3; break;
+    case 10: helpKind = 4; break;
+    }
+    u32 result = queryPadButton(button, mode);
+    if (result)
+        return result;
+    switch (button) {
+    case 3: result = queryPadButton(12, mode); break;
+    case 4: result = queryPadButton(13, mode); break;
+    case 5: result = queryPadButton(14, mode); break;
+    case 6: result = queryPadButton(15, mode); break;
+    }
+    if (result)
+        return result;
+    if (!helpKind)
+        return 0;
+    if (mode == 0)
+        return buttonHelpKindIsPressed(helpKind);
+    if (mode == 1)
+        return buttonHelpKindIsTriggered(helpKind);
+    if (mode == 2)
+        return FUN_00124fe8(helpKind);
+    return 0;
+}

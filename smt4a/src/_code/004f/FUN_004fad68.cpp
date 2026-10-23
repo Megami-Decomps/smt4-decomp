@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fad68` (_code @ 0x4fad68, 0x6d4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/S1Mover.h"
+struct BtlMainStateA;
 
 extern "C" {
 
@@ -8,7 +10,7 @@ int btlGetMainState(void);
 int FUN_001aff14(float *, int);
 int FUN_003e7fa4(...);
 int btlScriptUnitHasFlags(void);
-int FUN_003ecab8(...);
+Vec3f FUN_003ecab8(BtlMainStateA *, s32 index, s32 forceAttachment);
 int FUN_003f0e20(unsigned int *, unsigned int);
 int FUN_0043ba3c(...);
 
@@ -112,7 +114,7 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
     break;
   case 1:
     temp_v3 = btlGetMainState();
-    FUN_003ecab8(temp_v3,param_3,0);
+    FUN_003ecab8(reinterpret_cast<BtlMainStateA *>(temp_v3),param_3,0);
     break;
   case 2:
     puVar2 = (unsigned int *)btlGetMainState();
@@ -133,7 +135,7 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
     break;
   case 4:
     temp_v3 = btlGetMainState();
-    FUN_003ecab8(temp_v3,param_4,0);
+    FUN_003ecab8(reinterpret_cast<BtlMainStateA *>(temp_v3),param_4,0);
     break;
   case 5:
     puVar2 = (unsigned int *)btlGetMainState();
@@ -204,7 +206,7 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
     break;
   case 0xe:
     temp_v3 = btlGetMainState();
-    FUN_003ecab8(temp_v3,param_4,1);
+    FUN_003ecab8(reinterpret_cast<BtlMainStateA *>(temp_v3),param_4,1);
     break;
   case 0xf:
   }

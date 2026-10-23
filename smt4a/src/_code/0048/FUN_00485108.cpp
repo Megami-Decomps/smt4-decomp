@@ -1,69 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00485108` (_code @ 0x485108, 0x190 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: sprite opacity uses one direct VFP load rather than a sprite-base addition and load. */
+#include "camp/RenderCtx.h"
+#include "shard/W6_W6Match3_NameFormStateA.h"
+#include "ui/UiSpriteState.h"
 
 extern "C" {
+extern RenderCtxA *g_renderCtx;
+void efctSetSpeed(f32 speed);
+u32 packNibblesAndByte(u32 first, u32 second, u32 byte);
+void FUN_001835b4(s32 mode, u32 table, u32 sprite, s32 x, s32 y, s32 layer);
 
-int efctSetSpeed(void);
-int FUN_001835b4(int, int, int, unsigned int, unsigned int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-
-
-void FUN_00485108(int param_1,unsigned int param_2,unsigned int param_3)
-
+// Draw layered form decorations, fading the foreground separately and restoring effect speed.
+void FUN_00485108(NameFormStateA *form, s32 x, s32 y, f32 speed)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  int temp_v2;
-  
-  efctSetSpeed();
-  FUN_001835b4(2,0x23,0x153,param_2,param_3,0x1f);
-  FUN_001835b4(2,0x23,0x154,param_2,param_3,0x1f);
-  FUN_001835b4(2,0x23,0x150,param_2,param_3,0x24);
-  efctSetSpeed();
-  temp_v2 = g_renderCtx;
-  temp_v0 = packNibblesAndByte(6,1,0);
-  piVar3 = (int *)(temp_v2 + 0x12b8);
-  temp_v1 = piVar3[*piVar3 + 2];
-  piVar3[*piVar3 + 2] = temp_v0;
-  if (*(char *)(temp_v2 + 0x12d0) != '\0' || temp_v1 != temp_v0) {
-    (**(romwright_code **)(temp_v2 + 0x12d4))();
-    *(unsigned char *)(temp_v2 + 0x12d0) = 0;
-  }
-  temp_v2 = 0;
-  do {
-    FUN_001835b4(2,0x23,temp_v2 + 0x155,param_2,param_3,0x29);
-    temp_v0 = g_renderCtx;
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 4);
-  temp_v2 = packNibblesAndByte(6,7,0);
-  piVar3 = (int *)(temp_v0 + 0x12b8);
-  temp_v1 = piVar3[*piVar3 + 2];
-  piVar3[*piVar3 + 2] = temp_v2;
-  if (*(char *)(temp_v0 + 0x12d0) != '\0' || temp_v1 != temp_v2) {
-    (**(romwright_code **)(temp_v0 + 0x12d4))();
-    *(unsigned char *)(temp_v0 + 0x12d0) = 0;
-  }
-  if (0 < *(short *)(param_1 + 0x560)) {
-    FUN_001835b4(2,0x23,0x159,param_2,param_3,0x29);
-  }
-  efctSetSpeed();
-  return;
+    union DecorationView {
+        NameFormStateA base;
+        struct { u8 unk000[0x294]; UiSpriteState sprite; } decoration;
+    };
+    DecorationView *work = reinterpret_cast<DecorationView *>(form);
+    efctSetSpeed(speed);
+    FUN_001835b4(2, 0x23, 0x153, x, y, 0x1f);
+    FUN_001835b4(2, 0x23, 0x154, x, y, 0x1f);
+    FUN_001835b4(2, 0x23, 0x150, x, y, 0x24);
+    efctSetSpeed(work->decoration.sprite.unk20 * speed);
+    RenderCtxA *context = g_renderCtx;
+    s32 blend = packNibblesAndByte(6, 1, 0);
+    renderStackSet(&context->stackB, blend);
+    for (s32 index = 0; index < 4; ++index)
+        FUN_001835b4(2, 0x23, index + 0x155, x, y, 0x29);
+    context = g_renderCtx;
+    blend = packNibblesAndByte(6, 7, 0);
+    renderStackSet(&context->stackB, blend);
+    if (form->countdown > 0)
+        FUN_001835b4(2, 0x23, 0x159, x, y, 0x29);
+    efctSetSpeed(speed);
 }
-
-} /* extern "C" */
+}

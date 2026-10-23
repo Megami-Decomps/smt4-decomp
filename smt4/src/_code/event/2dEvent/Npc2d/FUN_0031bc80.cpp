@@ -1,112 +1,80 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031bc80` (_code @ 0x31bc80, 0x1cc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: independent default-state stores are reordered and process callback arguments use STR plus STM instead of one retail STM. */
+#include "event/NpcTextureWork.h"
+#include "addon/aocMain.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdDebug.h"
+
+struct NpcPortraitVariantRecord {
+    u16 texture;
+    u8 unk02[0x12];
+};
 
 extern "C" {
+extern AocSystem *g_aocSystem;
+extern const char DAT_0040357c[];
+extern const s8 DAT_00403570[];
+s32 gameFlagIsSet(u32 flag);
+NpcTextureSource *FUN_002459d8(u32 npc);
+const NpcPortraitVariantRecord *FUN_002aecd8(const NpcTextureSource *source, u32 variant);
+void *asdMemAlloc(s32 heap, s32 category, s32 flags, u32 bytes, s32 count);
+void memClear(void *memory, u32 bytes);
+s32 FUN_002c1d5c(void);
+s32 aocRunByName(AocSystem *system, s32 table, s32 node, s32 mode);
+void FUN_002ae8e4(AocSystem *system, s32 table, s32 node, u32 flags);
+void FUN_002c58c8(s32 table, s32 node);
+s32 FUN_001dfc64(u32 process);
+void FUN_002db92c(u32 process);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 firstDelay, u16 lastDelay,
+    AsdProcUpdateFunc update, AsdProcFunc end, void *work);
 
-int FUN_002459d8(...);
-int FUN_002ae8e4(...);
-int FUN_002aecd8(...);
-int memClear(...);
-int asdMemAlloc(...);
-int asdProcessCreateSimple(...);
-int FUN_002c58c8(...);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-extern int FUN_001dfc64(...); /* 0x1dfc64 */
-extern int FUN_002db92c(...); /* 0x2db92c */
-extern unsigned int g_aocSystem; /* 0x433158 */
-
-/* Supplied declaration required: FUN_002459d8. */
-/* Supplied declaration required: FUN_002ae8e4. */
-extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002aecd8. */
-extern int gameFlagIsSet(unsigned int);
-extern int FUN_002c1d5c(void);
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_002c58c8. */
-
-
-void FUN_0031bc80(unsigned int param_1,int param_2,unsigned int param_3)
-
+void FUN_0031bc80(u32 npc, s32 position, u32 variant)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned short *puVar3;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = gameFlagIsSet(0x522);
-  if (temp_v0 != 0) {
-    FUN_002459d8(param_1);
-    temp_v0 = FUN_002aecd8();
-    if (temp_v0 == 0) {
-      return;
+    if (gameFlagIsSet(0x522)) {
+        if (FUN_002aecd8(FUN_002459d8(npc), variant) == NULL)
+            return;
     }
-  }
-  puVar2 = (unsigned int *)0x100;
-  asdMemAlloc(0x100,0x100,0,0x98,1);
-  memClear();
-  temp_v2 = 0;
-  puVar2[8] = 0x3f800000;
-  puVar2[9] = 0x3f800000;
-  puVar2[10] = 0;
-  puVar2[0x11] = 0xffffffff;
-  *puVar2 = param_1;
-  puVar2[1] = 0x41;
-  puVar2[0x14] = param_3;
-  puVar2[0xf] = 3;
-  FUN_002459d8();
-  puVar2[0x15] = param_1;
-  puVar3 = (unsigned short *)FUN_002aecd8();
-  puVar2[0x10] = (unsigned int)*puVar3;
-  if (param_2 != 0) {
-    if (param_2 != 1) {
-      if (param_2 == 2) {
-        puVar2[4] = 0x48;
-        puVar2[10] = 0x3e800000;
-        puVar2[7] = temp_v2;
-        temp_v1 = 5;
-        puVar2[9] = temp_v2;
-        puVar2[0xe] = temp_v1;
-      }
+    asdDebugTrace(DAT_0040357c, 788);
+    NpcTextureWork *work = (NpcTextureWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(NpcTextureWork), 1);
+    memClear(work, sizeof(*work));
+    work->scale.x = 1.0f;
+    work->scale.y = 1.0f;
+    work->scale.z = 0.0f;
+    work->npc.lastImage = -1;
+    work->npcId = npc;
+    work->state = 65;
+    work->npcVariant.index = variant;
+    work->textureTable = 3;
+    work->npc.source = FUN_002459d8(npc);
+    work->textureNode = FUN_002aecd8(work->npc.source, work->npcVariant.index)->texture;
+    switch (position) {
+    case 0:
+        work->x = -20;
+        work->rotation = -48.0f;
+        work->display.screenRegion = 3;
+        break;
+    case 1:
+        work->x = 160;
+        work->rotation = 48.0f;
+        work->display.screenRegion = 4;
+        break;
+    case 2:
+        work->x = 72;
+        work->scale.z = 0.25f;
+        work->rotation = 0.0f;
+        work->scale.y = 0.0f;
+        work->display.screenRegion = 5;
+        break;
     }
-    else {
-      puVar2[4] = 0xa0;
-      temp_v1 = 4;
-      puVar2[7] = 0x42400000;
-      puVar2[0xe] = temp_v1;
+    if (FUN_002c1d5c()) {
+        work->deferred = 1;
+    } else {
+        work->deferred = 0;
+        if (aocRunByName(g_aocSystem, work->textureTable, work->textureNode, 1))
+            FUN_002ae8e4(g_aocSystem, work->textureTable, work->textureNode, 0x10000);
+        else
+            FUN_002c58c8(work->textureTable, work->textureNode);
     }
-  }
-  else {
-    puVar2[4] = 0xffffffec;
-    puVar2[7] = 0xc2400000;
-    puVar2[0xe] = 3;
-  }
-  temp_v0 = FUN_002c1d5c();
-  if (temp_v0 != 0) {
-    puVar2[3] = 1;
-  }
-  else {
-    puVar2[3] = 0;
-    temp_v0 = aocRunByName(g_aocSystem,puVar2[0xf],puVar2[0x10],1);
-    if (temp_v0 != 0) {
-      FUN_002ae8e4(g_aocSystem,puVar2[0xf],puVar2[0x10],0x10000);
-    }
-    else {
-      FUN_002c58c8(puVar2[0xf],puVar2[0x10]);
-    }
-  }
-  puVar2[6] = 0x3e99999a;
-  asdProcessCreateSimple("EVE_2dTex",2,0,0,FUN_001dfc64,FUN_002db92c,puVar2);
-  return;
+    work->speed = 0.3f;
+    asdProcessCreateSimple(DAT_00403570, 2, 0, 0, FUN_001dfc64, FUN_002db92c, work);
 }
-
-} /* extern "C" */
+}

@@ -5,6 +5,8 @@
 #include "common.h"
 
 #include "shard/Shard003F.h"
+#include <stddef.h>
+struct CameraMatrixCache;
 
 typedef struct Counters {
     /* 0x000 */ u8 unk000[0x100];
@@ -20,7 +22,13 @@ typedef struct Flag10Obj {
 typedef struct LockedObj {
     /* 0x00 */ u8 unk00[0x4];
     /* 0x04 */ s32 locked;
-    /* 0x08 */ u8 unk08[0x8];
+    union {
+        /* 0x08 */ u8 unk08[0x8];
+        struct {
+            u32 unk08;
+            /* 0x0C */ CameraMatrixCache *camera;
+        } fountain;
+    };
     /* 0x10 */ s32 unk10;
     /* 0x14 */ u32 unk14;
     /* 0x18 */ u32 unk18;
@@ -28,6 +36,9 @@ typedef struct LockedObj {
     /* 0x20 */ u8 unk20[0x18];
     /* 0x38 */ s32 unk38;
 } LockedObj;
+typedef char LockedObjFountainCameraOffsetCheck[
+    offsetof(LockedObj, fountain.camera) == 0x0C &&
+    sizeof(LockedObj) == 0x3C ? 1 : -1];
 
 typedef struct FilterObj {
     /* 0x00 */ const void *vtbl;

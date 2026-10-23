@@ -1,63 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d0d70` (_code @ 0x4d0d70, 0x134 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: bounds guard moves ahead of the prologue; compaction-search tail placement and scratch registers differ. */
+#include "shard/Shard0031.h"
 
 extern "C" {
+Lookup62 *gameGetSlotRecord(u32 slot);
+PartyStatusSlots *gameGetSlotTable(void);
 
-extern int gameGetSlotRecord(unsigned int);
-extern int gameGetSlotTable(void);
-
-
-unsigned int FUN_004d0d70(unsigned int param_1)
-
+// Remove a slot from party selections and compact the active slot ordering.
+u32 FUN_004d0d70(u32 slot)
 {
-/* irregular: 1 goto(s) */
-  int temp_v0;
-  int temp_v1;
-  unsigned char *puVar3;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  if (param_1 >= 0x18) {
-    return 0;
-  }
-  temp_v1 = gameGetSlotRecord(param_1);
-  *(unsigned short *)(temp_v1 + 0x62) = 0;
-  temp_v1 = gameGetSlotTable();
-  if ((int)*(char *)(temp_v1 + 0x1ca0) == param_1) {
-    *(unsigned char *)(temp_v1 + 0x1ca0) = 0xff;
-  }
-  else if ((int)*(char *)(temp_v1 + 0x1ca1) == param_1) {
-    puVar3 = (unsigned char *)(temp_v1 + 0x1ca1);
-    *puVar3 = 0xff;
-  }
-  else if ((int)*(char *)(temp_v1 + 0x1ca2) == param_1) {
-    puVar3 = (unsigned char *)(temp_v1 + 0x1ca2);
-    *puVar3 = 0xff;
-  }
-  temp_v2 = 0;
-  while (temp_v3 = (unsigned int)*(char *)(temp_v1 + temp_v2 + 0x1c88), temp_v3 != param_1) {
-    if (((int)temp_v3 < 0) || (temp_v2 = temp_v2 + 1, temp_v2 >= 0x18)) goto LAB_004d0e24;
-  }
-  *(unsigned char *)(temp_v2 + temp_v1 + 0x1c88) = 0xff;
-LAB_004d0e24:
-  temp_v1 = gameGetSlotTable();
-  temp_v2 = 0;
-  do {
-    temp_v0 = temp_v2;
-    if (*(char *)(temp_v1 + temp_v2 + 0x1c88) < '\0') {
-      do {
-        temp_v0 = temp_v0 + 1;
-        if (temp_v0 >= 0x18) {
-          return 1;
-        }
-      } while (*(char *)(temp_v1 + temp_v0 + 0x1c88) < '\0');
-      *(unsigned char *)(temp_v1 + temp_v2 + 0x1c88) = *(unsigned char *)(temp_v0 + temp_v1 + 0x1c88);
-      *(unsigned char *)(temp_v0 + temp_v1 + 0x1c88) = 0xff;
+    if (slot >= 24) {
+        return 0;
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x18);
-  return 1;
+    gameGetSlotRecord(slot)->id = 0;
+    PartyStatusSlots *table = gameGetSlotTable();
+    if ((u32)table->reserve[0] == slot) {
+        table->reserve[0] = -1;
+    } else if ((u32)table->reserve[1] == slot) {
+        table->reserve[1] = -1;
+    } else if ((u32)table->reserve[2] == slot) {
+        table->reserve[2] = -1;
+    }
+    for (s32 index = 0; index < 24; ++index) {
+        s32 entry = table->active.slots[index];
+        if ((u32)entry == slot) {
+            table->active.slots[index] = -1;
+            break;
+        }
+        if (entry < 0) {
+            break;
+        }
+    }
+    table = gameGetSlotTable();
+    for (s32 index = 0; index < 24; ++index) {
+        if (table->active.slots[index] < 0) {
+            s32 next = index;
+            do {
+                ++next;
+                if (next >= 24) {
+                    return 1;
+                }
+            } while (table->active.slots[next] < 0);
+            table->active.slots[index] = table->active.slots[next];
+            table->active.slots[next] = -1;
+        }
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

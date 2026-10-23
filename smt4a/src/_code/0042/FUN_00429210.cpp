@@ -1,112 +1,92 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00429210` (_code @ 0x429210, 0x190 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: format switch uses comparisons instead of a jump table; hidden result construction tail calls and sign-test registers differ. */
+#include "classes/WindowStatus.h"
+#include "nn/Result.h"
+#include <stddef.h>
 
-extern "C" {
-
-int sysFatalBreak(void);
-int _ZN18WindowStatusResultC1Ej(...);
-int nnAsyncMapOperationResult(unsigned int, unsigned char *);
-int FUN_00427e68(int, int);
-int rt_memcpy(unsigned char *, unsigned int, unsigned int);
-int rt_memcpy_w(unsigned char *, int, int);
-
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_5_stack;
-
-extern unsigned char DAT_0061b000; /* 0x61b000 */
-extern unsigned char DAT_0061b030; /* 0x61b030 */
-extern unsigned int DAT_0061b078; /* 0x61b078 */
-extern unsigned int DAT_0061b07c; /* 0x61b07c */
-extern unsigned char DAT_0061b080; /* 0x61b080 */
-extern unsigned int DAT_0061b100; /* 0x61b100 */
-
-extern int FUN_0015a410(void);
-extern int appletIsExitRequested(void);
-extern unsigned int FUN_0016ccfc(void);
-/* Supplied declaration required: sysFatalBreak. */
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-/* Supplied declaration required: nnAsyncMapOperationResult. */
-extern int FUN_00427e28(unsigned char *, unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_00427e68. */
-extern int tokenResolveAddress(unsigned int, int *, int);
-/* Supplied declaration required: rt_memcpy. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_00429210(unsigned int param_1,int *param_2,unsigned int *param_3,unsigned int param_4,unsigned int param_5)
-
-{
-/* irregular: 6 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6 [4];
-  
-  if (param_5 >= 0x41) {
-    temp_v4 = 0xe0613880;
-    _ZN18WindowStatusResultC1Ej(param_1,temp_v4);
-    return;
-  }
-  temp_v1 = *param_2;
-  FUN_00427e68(temp_v1,8);
-  if (-1 < temp_v1) {
-    temp_v4 = FUN_0016ccfc();
-    temp_v1 = tokenResolveAddress(temp_v4,&temp_v5,*param_2);
-    if (-1 < temp_v1) {
-      rt_memcpy_w(&DAT_0061b030,temp_v5 + 0x54,0x44);
-      switch((char)param_3[1]) {
-      case 0:
-        temp_v2 = 0x8c;
-        break;
-      case 1:
-        temp_v2 = 0xd;
-        break;
-      default:
-        temp_v2 = 0;
-        break;
-      case 3:
-        temp_v2 = 0x10;
-        break;
-      case 4:
-        temp_v2 = 0x30;
-      }
-      temp_v3 = *param_3;
-      temp_v0 = *(unsigned char *)((int)param_3 + 5);
-      temp_v1 = 0;
-      if (*(char *)((int)param_3 + 6) != '\0') {
-        if (*(char *)((int)param_3 + 6) == '\x01') {
-          temp_v1 = 2;
-        }
-        else {
-          sysFatalBreak();
-          temp_v1 = 0;
-        }
-      }
-      DAT_0061b078 = (temp_v1 << 0x1c) | (unsigned int)temp_v0 | ((temp_v3 & 0xfffff) << 8);
-      DAT_0061b07c = temp_v2 | 0x40000;
-      rt_memcpy(&DAT_0061b080,param_4,param_5 << 1);
-      DAT_0061b100 = param_5;
-      temp_v1 = FUN_00427e28(temp_v6,&DAT_0061b000,0);
-      if (-1 < temp_v1) {
-        temp_v1 = appletIsExitRequested();
-        if ((temp_v1 == 0) && (temp_v1 = FUN_0015a410(), temp_v1 == 0)) {
-          nnAsyncMapOperationResult(param_1,&DAT_0061b000);
-          return;
-        }
-        temp_v4 = 0xc9413891;
-        _ZN18WindowStatusResultC1Ej(param_1,temp_v4);
-        return;
-      }
-    }
-  }
-  _ZN18WindowStatusResultC1Ej(param_1,temp_v1);
-  return;
+namespace {
+struct AsyncTransferFormat {
+    u32 id;
+    u8 format;
+    u8 flags;
+    u8 mode;
+    u8 unk07;
+};
+struct AsyncTransferContext {
+    u8 unk00[0x54];
+    u8 metadata[0x44];
+};
+struct AsyncTransferData {
+    u8 metadata[0x44];
+    u8 unk44[4];
+    u64 encoding;
+    u16 payload[64];
+    u32 count;
+};
+typedef char AsyncTransferDataOffsetsCheck[
+    offsetof(AsyncTransferData, encoding) == 0x48 &&
+    offsetof(AsyncTransferData, payload) == 0x50 &&
+    offsetof(AsyncTransferData, count) == 0xD0 ? 1 : -1];
 }
 
-} /* extern "C" */
+extern "C" {
+extern AsyncTransferData DAT_0061b030;
+extern u8 DAT_0061b000[];
+s32 FUN_00427e68(u32 token, u32 operation);
+void *FUN_0016ccfc(void);
+s32 tokenResolveAddress(void *registry, AsyncTransferContext **context, u32 token);
+void rt_memcpy_w(void *destination, const void *source, u32 size);
+void rt_memcpy(void *destination, const void *source, u32 size);
+void sysFatalBreak(void);
+s32 FUN_00427e28(u32 *operation, void *packet, u32 flags);
+s32 appletIsExitRequested(void);
+s32 FUN_0015a410(void);
+WindowStatusResult nnAsyncMapOperationResult(void *operation);
+
+// Validate a token, encode up to sixty-four halfwords and submit the asynchronous operation.
+WindowStatusResult FUN_00429210(const u32 *token, const AsyncTransferFormat *format,
+    const u16 *payload, u32 count)
+{
+    if (count > 64)
+        return WindowStatusResult(0xE0613880);
+    s32 result = FUN_00427e68(*token, 8);
+    if (!nnResultIsFailure(result)) {
+        AsyncTransferContext *context;
+        result = tokenResolveAddress(FUN_0016ccfc(), &context, *token);
+        if (!nnResultIsFailure(result)) {
+            rt_memcpy_w(&DAT_0061b030, context->metadata, sizeof(context->metadata));
+            u32 encoding;
+            switch (format->format) {
+            case 0: encoding = 0x8C; break;
+            case 1: encoding = 0x0D; break;
+            case 3: encoding = 0x10; break;
+            case 4: encoding = 0x30; break;
+            default: encoding = 0; break;
+            }
+            u32 low = format->flags | ((format->id & 0xFFFFF) << 8);
+            u32 mode = format->mode;
+            if (mode != 0) {
+                if (mode == 1) {
+                    mode = 2;
+                } else {
+                    sysFatalBreak();
+                    mode = 0;
+                }
+            }
+            // The signed mode word is extended into the upper command word before the format is added.
+            DAT_0061b030.encoding = static_cast<u64>(low & 0x0FFFFFFF) |
+                static_cast<s64>(static_cast<s32>(mode << 28)) |
+                (static_cast<u64>(encoding | 0x40000) << 32);
+            rt_memcpy(DAT_0061b030.payload, payload, count * sizeof(u16));
+            DAT_0061b030.count = count;
+            u32 operation;
+            result = FUN_00427e28(&operation, DAT_0061b000, 0);
+            if (!nnResultIsFailure(result)) {
+                if (appletIsExitRequested() != 0 || FUN_0015a410() != 0)
+                    return WindowStatusResult(0xC9413891);
+                return nnAsyncMapOperationResult(DAT_0061b000);
+            }
+        }
+    }
+    return WindowStatusResult(result);
+}
+}

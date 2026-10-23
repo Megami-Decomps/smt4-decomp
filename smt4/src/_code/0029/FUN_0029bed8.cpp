@@ -1,105 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029bed8` (_code @ 0x29bed8, 0x1e0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: live snapshot fields copy directly; retail stages a larger temporary, redundant overwritten loads and an unchanged trailing word before its VFP block copy. */
+#include "shard/GameDataBlocks.h"
 
-extern "C" {
+namespace {
+struct UnitSnapshotStatusBytes {
+    u16 current;
+    u8 options;
+    u8 registration;
+};
+// A word-aligned view cannot be added to GameSavedItem's byte union without moving its 0x2E field.
+struct RegisteredUnitSnapshotView {
+    u32 packedStats[3];
+    u32 currentValues[2];
+    union {
+        u32 flags;
+        UnitSnapshotStatusBytes status;
+    };
+    u32 identity;
+    UnitSummarySkills skills;
+    u32 preserved2C;
+    u32 experience;
+};
+// Bonuses lie inside the shared stat block's unaligned byte padding.
+struct UnitSnapshotBonusesView {
+    u8 unk000[0x590];
+    u16 stats[5];
+};
+typedef char RegisteredUnitSnapshotLayoutCheck[sizeof(RegisteredUnitSnapshotView) == sizeof(GameSavedItem) &&
+    offsetof(RegisteredUnitSnapshotView, identity) == 0x18 &&
+    offsetof(RegisteredUnitSnapshotView, experience) == 0x30 ? 1 : -1];
 
-/* stack frame of param_1: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-} param_1_stack;
-
-extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
-
-
-void FUN_0029bed8(unsigned int param_1)
-
+inline u32 packSnapshotPair(u16 low, u16 high)
 {
-/* irregular: 1 goto(s) */
-  unsigned char temp_v0;
-  unsigned short temp_v1;
-  unsigned short temp_v2;
-  unsigned short temp_v3;
-  unsigned short temp_v4;
-  unsigned short temp_v5;
-  unsigned short temp_v6;
-  unsigned short temp_v7;
-  unsigned short temp_v8;
-  unsigned short temp_v9;
-  unsigned short temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  unsigned short temp_v14;
-  int temp_v15;
-  unsigned int *puVar17;
-  unsigned int temp_v16;
-  unsigned int temp_v17;
-  unsigned int temp_v18;
-  unsigned int temp_v19;
-  unsigned int temp_v20;
-  
-  temp_v14 = 0;
-  if (*(char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x9197) != '\0') {
-    do {
-      temp_v15 = (int)*(char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x8c + temp_v14 + 0x90f0);
-      if ((-1 < temp_v15) &&
-         (temp_v15 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x8c + temp_v15 * 0x604, puVar17 = (unsigned int *)(temp_v15 + 0x90),
-         *(unsigned short *)(temp_v15 + 0xd6) == param_1)) goto LAB_0029bf50;
-      temp_v14 = temp_v14 + 1;
-    } while (temp_v14 < *(unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x9197));
-  }
-  puVar17 = (unsigned int *)0x0;
-LAB_0029bf50:
-  if (param_1 < 0x501) {
-    temp_v15 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + param_1 * 0x34;
-    temp_v0 = *(unsigned char *)(puVar17 + 0x12);
-    temp_v11 = *puVar17;
-    temp_v1 = *(unsigned short *)(puVar17 + 1);
-    temp_v2 = *(unsigned short *)((int)puVar17 + 6);
-    temp_v16 = puVar17[0xc];
-    temp_v17 = puVar17[0xd];
-    temp_v18 = puVar17[0xe];
-    temp_v19 = puVar17[0xf];
-    temp_v20 = puVar17[0x10];
-    temp_v12 = puVar17[8];
-    temp_v3 = *(unsigned short *)(puVar17 + 2);
-    temp_v4 = *(unsigned short *)((int)puVar17 + 10);
-    temp_v13 = puVar17[9];
-    temp_v5 = *(unsigned short *)(puVar17 + 3);
-    temp_v6 = *(unsigned short *)((int)puVar17 + 0x592);
-    temp_v7 = *(unsigned short *)(puVar17 + 0x165);
-    temp_v8 = *(unsigned short *)((int)puVar17 + 0x596);
-    temp_v9 = *(unsigned short *)(puVar17 + 0x166);
-    temp_v10 = *(unsigned short *)(puVar17 + 0x164);
-    *(unsigned int *)(temp_v15 + 0xc20c) =
-         (*(unsigned int *)(temp_v15 + 0xc20c) & 0xff000000) | (unsigned int)*(unsigned short *)(puVar17 + 10) |
-         ((((*(unsigned int *)(temp_v15 + 0xc20c) & 0xc30000) >> 0x10) |
-          ((*(unsigned char *)((int)puVar17 + 0x601) & 0xf) << 2)) << 0x10);
-    *(unsigned int *)(temp_v15 + 0xc1f8) = (unsigned int)temp_v0 | (((unsigned int)temp_v10 + (unsigned int)temp_v1) * 0x10000);
-    *(unsigned int *)(temp_v15 + 0xc1fc) =
-         (((unsigned int)temp_v2 + (unsigned int)temp_v6) & 0xffff) | (((unsigned int)temp_v3 + (unsigned int)temp_v7) * 0x10000);
-    *(unsigned int *)(temp_v15 + 0xc200) =
-         (((unsigned int)temp_v4 + (unsigned int)temp_v8) & 0xffff) | (((unsigned int)temp_v5 + (unsigned int)temp_v9) * 0x10000);
-    *(unsigned char *)(temp_v15 + 0xc20e) = *(unsigned char *)(temp_v15 + 0xc20e) | 1;
-    *(unsigned int *)(temp_v15 + 0xc204) = temp_v12;
-    *(unsigned int *)(temp_v15 + 0xc208) = temp_v13;
-    *(unsigned int *)(temp_v15 + 0xc210) = temp_v11;
-    *(unsigned int *)(temp_v15 + 0xc228) = temp_v16;
-    *(unsigned int *)(temp_v15 + 0xc214) = temp_v17;
-    *(unsigned int *)(temp_v15 + 0xc218) = temp_v18;
-    *(unsigned int *)(temp_v15 + 0xc21c) = temp_v19;
-    *(unsigned int *)(temp_v15 + 0xc220) = temp_v20;
-    *(unsigned int *)(temp_v15 + 0xc224) = *(unsigned int *)(temp_v15 + 0xc224);
-  }
-  return;
+    return static_cast<u32>(low) | (static_cast<u32>(high) << 16);
+}
 }
 
-} /* extern "C" */
+extern "C" void FUN_0029bed8(u32 id)
+{
+    GameSaveData *save = g_gameDataBlocks.saveBlock;
+    StatBlock *unit = NULL;
+    for (u16 i = 0; i < save->party.stockCount; ++i) {
+        const s32 index = save->party.stock[i];
+        if (index >= 0 && save->party.units[index].id == id) {
+            unit = &save->party.units[index];
+            break;
+        }
+    }
+    if (id < 0x501) {
+        RegisteredUnitSnapshotView *snapshot = reinterpret_cast<RegisteredUnitSnapshotView *>(&save->items[id]);
+        const UnitSnapshotBonusesView *bonuses = reinterpret_cast<const UnitSnapshotBonusesView *>(unit);
+        snapshot->flags = (snapshot->flags & 0xFFC30000) | unit->cur5 |
+            (static_cast<u32>(unit->encounter.initialization.initializationKind & 0xF) << 18);
+        snapshot->packedStats[0] = packSnapshotPair(unit->level, unit->summary.stats[0] + bonuses->stats[0]);
+        snapshot->packedStats[1] = packSnapshotPair(unit->summary.stats[1] + bonuses->stats[1],
+            unit->summary.stats[2] + bonuses->stats[2]);
+        snapshot->packedStats[2] = packSnapshotPair(unit->summary.stats[3] + bonuses->stats[3],
+            unit->summary.stats[4] + bonuses->stats[4]);
+        snapshot->status.options |= 1;
+        snapshot->currentValues[0] = packSnapshotPair(unit->cur2, unit->cur6);
+        snapshot->currentValues[1] = packSnapshotPair(unit->cur3, unit->cur4);
+        snapshot->identity = packSnapshotPair(unit->summary.id, unit->summary.kind);
+        snapshot->experience = unit->experience;
+        snapshot->skills = unit->skills;
+    }
+}

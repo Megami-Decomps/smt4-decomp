@@ -19,13 +19,24 @@ struct CampCecResumeState {
     u32 state; // 0x144
     u32 unk148;
     u32 unk14c;
-    u8 unk150[0x1c];
+    union {
+        u8 unk150[0x1c];
+        struct {
+            /* 0x150 */ s32 scriptStep;
+            u8 unk154[0x14];
+            /* 0x168 */ u32 exchangeKind;
+        } exchange;
+    };
     u8 optionalProcess; // 0x16c
 };
 typedef char CampCecResumeStateLaunchOffsetsCheck[
     offsetof(CampCecResumeState, launch.resource) == 0xE4 &&
     offsetof(CampCecResumeState, launch.entry) == 0xE8 &&
     offsetof(CampCecResumeState, launch.script) == 0xF4 &&
+    sizeof(CampCecResumeState) == 0x170 ? 1 : -1];
+typedef char CampCecResumeStateExchangeOffsetsCheck[
+    offsetof(CampCecResumeState, exchange.scriptStep) == 0x150 &&
+    offsetof(CampCecResumeState, exchange.exchangeKind) == 0x168 &&
     sizeof(CampCecResumeState) == 0x170 ? 1 : -1];
 
 struct CampCecSceneOwnerView {

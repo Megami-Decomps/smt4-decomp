@@ -12,7 +12,7 @@ int FUN_00124d24(int);
 int titleOverlayDraw(int);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
-int FUN_002be370(...);
+int itemDrawCategoryBadge(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
 int FUN_002be650(...);
@@ -48,7 +48,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bdce0. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_002be370. */
+/* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
@@ -132,7 +132,7 @@ unsigned int FUN_0010a9c8(void)
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002be5a4(2,0xff,temp_v9,(int)*(short *)(temp_v5 + 10));
     temp_v5 = FUN_002bf4f8(0xe,0xc1);
-    FUN_002be370((int)(short)*(unsigned int *)(DAT_0043e190 + 0x68),
+    itemDrawCategoryBadge((int)(short)*(unsigned int *)(DAT_0043e190 + 0x68),
                  (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x10,0);
     drawSetColorFromRGBA8(0xff);

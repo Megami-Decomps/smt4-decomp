@@ -1,65 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00269508` (_code @ 0x269508, 0x184 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: segment dispatch, floating-point register allocation and zero-duration ratio paths differ. */
+#include "gfx/SegmentedScalarCurve.h"
 
-extern "C" {
-
-int VectorSignedToFloat(int, int);
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-
-
-void FUN_00269508(char *param_1,int param_2,int param_3)
-
+static __inline f32 segmentProgress(f32 frame, f32 duration)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  char temp_v0;
-  unsigned int in_fpscr;
-  int temp_v1;
-  int temp_v2;
-  float temp_v3;
-  
-  if (param_3 != 0) {
-    temp_v0 = *param_1;
-    temp_v3 = (float)VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    if (temp_v0 != '\0') {
-      if (temp_v0 != '\x01') {
-        if (temp_v0 == '\x02') {
-          temp_v1 = (int)(*(float *)(param_1 + 0x18) * temp_v3);
-          if (param_2 < temp_v1) {
-            VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-            VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-          }
-          else {
-            temp_v2 = (int)(*(float *)(param_1 + 0x20) * temp_v3);
-            if (param_2 < temp_v2) {
-              VectorSignedToFloat(temp_v2 - temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-              VectorSignedToFloat(param_2 - temp_v1,(unsigned char)((in_fpscr & 0xfffffff) >> 0x16) & 3);
-            }
-            else {
-              VectorSignedToFloat(param_3 - temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-              VectorSignedToFloat(param_2 - temp_v2,(unsigned char)((in_fpscr & 0xfffffff) >> 0x16) & 3);
-            }
-          }
-        }
-      }
-      else {
-        temp_v1 = (int)(*(float *)(param_1 + 0x18) * temp_v3);
-        if (param_2 < temp_v1) {
-          VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-          VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-        }
-        else {
-          VectorSignedToFloat(param_3 - temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-          VectorSignedToFloat(param_2 - temp_v1,(unsigned char)((in_fpscr & 0xfffffff) >> 0x16) & 3);
-        }
-      }
-    }
-    else {
-      VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-  }
-  return;
+    return duration != 0.0f ? frame / duration : 1.0f;
 }
 
-} /* extern "C" */
+// Evaluate a linear scalar track with zero, one or two intermediate keys.
+extern "C" f32 FUN_00269508(const void *data, s32 frame, s32 duration)
+{
+    const SegmentedScalarCurve *curve = static_cast<const SegmentedScalarCurve *>(data);
+    if (duration == 0)
+        return curve->start;
+    f32 total = static_cast<f32>(duration);
+    f32 progress = 0.0f;
+    f32 start, end;
+    if (curve->intermediateCount == 0) {
+        start = curve->start;
+        end = curve->end;
+        progress = static_cast<f32>(frame) / total;
+    } else if (curve->intermediateCount == 1) {
+        s32 split = static_cast<s32>(curve->firstFraction * total);
+        if (frame < split) {
+            start = curve->start;
+            end = curve->firstValue;
+            progress = static_cast<f32>(frame) / static_cast<f32>(split);
+        } else {
+            start = curve->firstValue;
+            end = curve->end;
+            progress = segmentProgress(static_cast<f32>(frame - split), static_cast<f32>(duration - split));
+        }
+    } else if (curve->intermediateCount == 2) {
+        s32 first = static_cast<s32>(curve->firstFraction * total);
+        if (frame < first) {
+            start = curve->start;
+            end = curve->firstValue;
+            progress = static_cast<f32>(frame) / static_cast<f32>(first);
+        } else {
+            s32 second = static_cast<s32>(curve->secondFraction * total);
+            if (frame < second) {
+                start = curve->firstValue;
+                end = curve->secondValue;
+                progress = segmentProgress(static_cast<f32>(frame - first), static_cast<f32>(second - first));
+            } else {
+                start = curve->secondValue;
+                end = curve->end;
+                progress = segmentProgress(static_cast<f32>(frame - second), static_cast<f32>(duration - second));
+            }
+        }
+    } else {
+        start = curve->start;
+        end = curve->end;
+    }
+    return start + (end - start) * progress;
+}

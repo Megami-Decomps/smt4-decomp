@@ -1,67 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00335384` (_code @ 0x335384, 0x188 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Completion getters fold to direct byte tests, and phase-one constant folding/dispatch scheduling differ. */
+#include "shard/W6_W6Match8_AnimatedSprite.h"
 
+struct SpriteIntroTransitionWork {
+    u8 unk000[0x5AC];
+    UiAnimatedSprite sprites[6];
+    u8 unk8F4[0x454];
+    s32 phase;
+    s32 timer;
+};
+typedef char SpriteIntroTransitionOffsetsCheck[
+    offsetof(SpriteIntroTransitionWork, phase) == 0xD48 &&
+    offsetof(SpriteIntroTransitionWork, timer) == 0xD4C ? 1 : -1];
 extern "C" {
+void FUN_00163aa4(UiAnimatedSprite *sprite, f32 speed);
+void uiSpriteSelectAnim(UiAnimatedSprite *sprite, s32 animation);
 
-int FUN_00163aa4(...);
-int uiSpriteSelectAnim(int, int);
-
-/* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-
-
-unsigned int FUN_00335384(int param_1)
-
+/* Finishes the first two sprites, waits seventeen frames, then starts the remaining intro group. */
+u32 FUN_00335384(SpriteIntroTransitionWork *work)
 {
-/* irregular: 1 goto(s); 2 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  unsigned int temp_v1;
-  
-  piVar2 = (int *)(param_1 + 0xd48);
-  temp_v0 = *(int *)(param_1 + 0xd48);
-  temp_v1 = 0;
-  if (temp_v0 != 0) {
-    if (temp_v0 != 1) {
-      if (temp_v0 == 2) goto LAB_00335454;
-      if (temp_v0 != 3) {
-        *(int *)(param_1 + 0xd4c) = *(int *)(param_1 + 0xd4c) + 1;
-        return temp_v1;
-      }
+    u32 result = 0;
+    switch (work->phase) {
+    case 0:
+        FUN_00163aa4(&work->sprites[0], 1.0f);
+        FUN_00163aa4(&work->sprites[1], 1.0f);
+        if (uiAnimatedSpriteIsFinished(&work->sprites[0]) && uiAnimatedSpriteIsFinished(&work->sprites[1])) {
+            ++work->phase;
+            work->timer = 0;
+        }
+        break;
+    case 1:
+        if (work->timer < 17) {
+            break;
+        }
+        ++work->phase;
+        work->timer = 0;
+        /* Continue directly into the second group on the transition frame. */
+    case 2:
+        FUN_00163aa4(&work->sprites[2], 1.0f);
+        FUN_00163aa4(&work->sprites[3], 1.0f);
+        FUN_00163aa4(&work->sprites[4], 1.0f);
+        FUN_00163aa4(&work->sprites[5], 1.0f);
+        if (uiAnimatedSpriteIsFinished(&work->sprites[2]) &&
+            uiAnimatedSpriteIsFinished(&work->sprites[3]) && uiAnimatedSpriteIsFinished(&work->sprites[4])) {
+            uiSpriteSelectAnim(&work->sprites[4], 9);
+            ++work->phase;
+            result = 1;
+        }
+        break;
+    case 3:
+        result = 1;
+        break;
     }
-    else {
-      if (*(int *)(param_1 + 0xd4c) < 0x11) {
-        *(int *)(param_1 + 0xd4c) = *(int *)(param_1 + 0xd4c) + 1;
-        return temp_v1;
-      }
-      *piVar2 = 2;
-      *(unsigned int *)(param_1 + 0xd4c) = 0;
-LAB_00335454:
-      FUN_00163aa4();
-      FUN_00163aa4(param_1 + 0x750);
-      FUN_00163aa4();
-      FUN_00163aa4(param_1 + 0x868);
-      if (((*(char *)(param_1 + 0x74e) == '\0') || (*(char *)(param_1 + 0x7da) == '\0')) ||
-         (*(char *)(param_1 + 0x866) == '\0')) {
-        *(int *)(param_1 + 0xd4c) = *(int *)(param_1 + 0xd4c) + 1;
-        return temp_v1;
-      }
-      uiSpriteSelectAnim(param_1 + 0x7dc,9);
-      *piVar2 = *(int *)(param_1 + 0xd48) + 1;
-    }
-    temp_v1 = 1;
-  }
-  else {
-    FUN_00163aa4();
-    FUN_00163aa4();
-    if ((*(char *)(param_1 + 0x636) != '\0') && (*(char *)(param_1 + 0x6c2) != '\0')) {
-      *piVar2 = *(int *)(param_1 + 0xd48) + 1;
-      *(unsigned int *)(param_1 + 0xd4c) = 0;
-    }
-  }
-  *(int *)(param_1 + 0xd4c) = *(int *)(param_1 + 0xd4c) + 1;
-  return temp_v1;
+    ++work->timer;
+    return result;
 }
-
-} /* extern "C" */
+}

@@ -1,153 +1,86 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00182348` (_code @ 0x182348, 0x1f4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: endpoint/sequence register lifetimes, cold completion exit and interpolation scheduling differ; redundant mirror stores are omitted. */
+#include "ui/UiSpriteState.h"
 
-extern "C" {
+struct UiSpriteScaleSequenceStep {
+    u8 unk00[0x14];
+    s32 key;
+    s8 reverse;
+    u8 unk19[3];
+};
+// A private view of the scale channel, whose sequence uses a different key
+// displacement from the vertical and frame sequence formats.
+struct SpriteScaleTrackView {
+    u8 prefix[0x64];
+    UiSpriteScalarKey *keys;
+    s16 key;
+    u16 elapsed;
+    s8 reverse;
+    u8 unk6D[0xB];
+    UiSpriteScaleSequenceStep *sequence;
+    u8 unk7C[4];
+    s16 step;
+};
+typedef char SpriteScaleTrackViewOffsets[
+    offsetof(SpriteScaleTrackView, keys) == 0x64 &&
+    offsetof(SpriteScaleTrackView, reverse) == 0x6C &&
+    offsetof(SpriteScaleTrackView, sequence) == 0x78 &&
+    offsetof(SpriteScaleTrackView, step) == 0x80 &&
+    sizeof(UiSpriteScaleSequenceStep) == 0x1C ? 1 : -1];
 
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-
-
-void FUN_00182348(int param_1)
-
+static __inline void uiSpriteBeginScaleStep(UiSpriteState *sprite, s16 index, s8 reverse)
 {
-/* irregular: 1 goto(s); irregular input(s): in_fpscr, in_s0; 4 native warning(s); review required */
-  short temp_v0;
-  char temp_v1;
-  unsigned char temp_v2;
-  int temp_v3;
-  unsigned int *puVar5;
-  unsigned int temp_v4;
-  float *pfVar7;
-  int temp_v5;
-  int temp_v6;
-  unsigned char temp_v7;
-  unsigned int in_fpscr;
-  unsigned int temp_v8;
-  float in_s0;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  
-  if ((*(char *)(param_1 + 0x88) != '\0') || (*(int *)(param_1 + 100) == 0)) {
-    *(unsigned char *)(param_1 + 0x88) = 1;
-    return;
-  }
-  temp_v11 = *(float *)(param_1 + 0x24);
-  pfVar7 = (float *)(*(int *)(param_1 + 100) + *(short *)(param_1 + 0x68) * 0xc);
-  temp_v1 = *(char *)(param_1 + 0x6c);
-  temp_v9 = *pfVar7;
-  temp_v10 = pfVar7[1];
-  temp_v12 = temp_v10 - temp_v9;
-  temp_v13 = temp_v12;
-  temp_v14 = temp_v10;
-  if (temp_v1 != '\0') {
-    temp_v13 = temp_v9 - temp_v10;
-    temp_v14 = temp_v9;
-  }
-  if (0.0f > temp_v13) {
-    temp_v8 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v14 < temp_v11) << 0x1f);
-    if (romwright_subpiece_4_1_0(temp_v8 >> 0x1f,0) == ((temp_v14 != temp_v14) || (temp_v11 != temp_v11))) {
-LAB_001823d0:
-      if (*(char *)((int)pfVar7 + 10) != '\0') {
-        if (temp_v1 != '\0') {
-          temp_v9 = temp_v10;
-        }
-        *(float *)(param_1 + 0x24) = temp_v9;
-        *(unsigned short *)(param_1 + 0x6a) = 0;
-        *(unsigned int *)(param_1 + 0x28) = *(unsigned int *)(param_1 + 0x24);
-        *(unsigned int *)(param_1 + 0x2c) = *(unsigned int *)(param_1 + 0x24);
-        return;
-      }
-      if (temp_v1 == '\0') {
-        temp_v9 = temp_v10;
-      }
-      temp_v7 = *(char *)(param_1 + 0x84) != '\0';
-      *(float *)(param_1 + 0x24) = temp_v9;
-      temp_v3 = 0;
-      if (temp_v7) {
-        temp_v3 = *(int *)(param_1 + 0x78);
-      }
-      if ((temp_v7 && temp_v3 != 0) &&
-         (*(int *)(temp_v3 + *(short *)(param_1 + 0x80) * 0x1c + 0x14) != -1)) {
-        temp_v0 = *(short *)(param_1 + 0x80) + 1;
-        *(short *)(param_1 + 0x80) = temp_v0;
-        temp_v6 = temp_v3 + temp_v0 * 0x1c;
-        temp_v5 = *(int *)(temp_v6 + 0x14);
-        if (temp_v5 != -1 && temp_v5 != -3) {
-          if (temp_v5 != -2) {
-            temp_v1 = *(char *)(temp_v6 + 0x18);
-            *(short *)(param_1 + 0x68) = (short)temp_v5;
-            *(unsigned short *)(param_1 + 0x6a) = 0;
-            *(char *)(param_1 + 0x6c) = temp_v1;
-            *(unsigned char *)(param_1 + 0x8a) = 0;
-            puVar5 = (unsigned int *)(*(int *)(param_1 + 100) + (short)temp_v5 * 0xc);
-            if (temp_v1 != '\0') {
-              temp_v4 = puVar5[1];
-            }
-            else {
-              temp_v4 = *puVar5;
-            }
-          }
-          else {
-            *(unsigned short *)(param_1 + 0x80) = 0;
-            temp_v1 = *(char *)(temp_v3 + 0x18);
-            temp_v0 = (short)*(unsigned int *)(temp_v3 + 0x14);
-            *(short *)(param_1 + 0x68) = temp_v0;
-            *(unsigned short *)(param_1 + 0x6a) = 0;
-            *(char *)(param_1 + 0x6c) = temp_v1;
-            *(unsigned char *)(param_1 + 0x8a) = 0;
-            puVar5 = (unsigned int *)(*(int *)(param_1 + 100) + temp_v0 * 0xc);
-            if (temp_v1 != '\0') {
-              temp_v4 = puVar5[1];
-            }
-            else {
-              temp_v4 = *puVar5;
-            }
-          }
-          *(unsigned int *)(param_1 + 0x24) = temp_v4;
-          *(unsigned int *)(param_1 + 0x28) = temp_v4;
-          *(unsigned int *)(param_1 + 0x2c) = temp_v4;
-          *(unsigned int *)(param_1 + 0x28) = *(unsigned int *)(param_1 + 0x24);
-          *(unsigned int *)(param_1 + 0x2c) = *(unsigned int *)(param_1 + 0x24);
-          return;
-        }
-      }
-      *(unsigned char *)(param_1 + 0x88) = 1;
-      *(unsigned int *)(param_1 + 0x28) = *(unsigned int *)(param_1 + 0x24);
-      *(unsigned int *)(param_1 + 0x2c) = *(unsigned int *)(param_1 + 0x24);
-      return;
-    }
-  }
-  else {
-    temp_v8 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v14 == temp_v11) << 0x1e) |
-             ((unsigned int)(temp_v11 <= temp_v14) << 0x1d);
-    temp_v2 = (unsigned char)(temp_v8 >> 0x18);
-    if (!(unsigned char)((temp_v2 >> 5) & 1) || (unsigned char)(temp_v2 >> 6)) goto LAB_001823d0;
-  }
-  temp_v14 = (float)VectorUnsignedToFloat((unsigned int)*(unsigned short *)(pfVar7 + 2),(unsigned char)(temp_v8 >> 0x16) & 3);
-  if (temp_v1 != '\0') {
-    temp_v12 = temp_v9 - temp_v10;
-  }
-  *(float *)(param_1 + 0x24) = temp_v12 / (temp_v14 / in_s0) + temp_v11;
-  *(short *)(param_1 + 0x6a) = *(short *)(param_1 + 0x6a) + 1;
-  *(unsigned int *)(param_1 + 0x28) = *(unsigned int *)(param_1 + 0x24);
-  *(unsigned int *)(param_1 + 0x2c) = *(unsigned int *)(param_1 + 0x24);
-  return;
+    SpriteScaleTrackView *track = (SpriteScaleTrackView *)sprite;
+    track->key = index;
+    track->elapsed = 0;
+    track->reverse = reverse;
+    sprite->animationFlags.completed = 0;
+    const UiSpriteScalarKey *key = &track->keys[index];
+    sprite->unk24 = reverse ? key->last : key->first;
 }
 
-} /* extern "C" */
+extern "C" void FUN_00182348(UiSpriteState *sprite, f32 rate)
+{
+    SpriteScaleTrackView *track = (SpriteScaleTrackView *)sprite;
+    if (sprite->completion.scale || track->keys == NULL) {
+        sprite->completion.scale = 1;
+        return;
+    }
+    const UiSpriteScalarKey *key = &track->keys[track->key];
+    f32 current = sprite->unk24;
+    f32 delta = key->last - key->first;
+    f32 direction = track->reverse ? key->first - key->last : delta;
+    f32 target = track->reverse ? key->first : key->last;
+    bool reached = direction < 0.0f ? target >= current : target <= current;
+    if (reached) {
+        if (key->loop) {
+            sprite->unk24 = track->reverse ? key->last : key->first;
+            track->elapsed = 0;
+        } else {
+            sprite->unk24 = target;
+            if (sprite->sequence.enabled && track->sequence != NULL &&
+                track->sequence[track->step].key != -1) {
+                UiSpriteScaleSequenceStep *sequence = track->sequence;
+                ++track->step;
+                const UiSpriteScaleSequenceStep *step = &sequence[track->step];
+                if (step->key == -1 || step->key == -3) {
+                    sprite->completion.scale = 1;
+                } else if (step->key == -2) {
+                    track->step = 0;
+                    uiSpriteBeginScaleStep(sprite, (s16)sequence[0].key, sequence[0].reverse);
+                } else {
+                    uiSpriteBeginScaleStep(sprite, (s16)step->key, step->reverse);
+                }
+            } else {
+                sprite->completion.scale = 1;
+            }
+        }
+    } else {
+        f32 duration = (f32)(u32)key->duration / rate;
+        if (track->reverse)
+            delta = key->first - key->last;
+        sprite->unk24 = delta / duration + current;
+        ++track->elapsed;
+    }
+    sprite->unk28 = sprite->unk24;
+    sprite->unk2C = sprite->unk24;
+}

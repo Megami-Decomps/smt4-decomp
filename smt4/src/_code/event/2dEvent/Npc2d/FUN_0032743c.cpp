@@ -1,103 +1,80 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032743c` (_code @ 0x32743c, 0x1c0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: optional-origin/deferred-load block placement and callback argument stores differ. */
+#include "event/NpcTextureWork.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+
+struct NpcTextureSource {
+    u8 unk00[0x24];
+    u16 textureId;
+};
+struct NpcTextureImage {
+    u8 unk00[8];
+    s16 width, height;
+    const s16 *origin;
+};
+typedef char NpcTextureRecordOffsets[
+    offsetof(NpcTextureSource, textureId) == 0x24 &&
+    offsetof(NpcTextureImage, width) == 8 &&
+    offsetof(NpcTextureImage, height) == 0xA &&
+    offsetof(NpcTextureImage, origin) == 0xC ? 1 : -1];
 
 extern "C" {
+extern const char DAT_0040357c[], DAT_00403570[];
+extern const u8 DAT_0040356c[3];
+void *asdMemAlloc(u32, u32, u32, u32, u32);
+void memClear(void *, u32);
+NpcTextureSource *FUN_002459d8(s32);
+NpcTextureImage *FUN_002bf4f8(u32, s32);
+s32 FUN_002c1d5c();
+void FUN_002c58c8(s32, s32);
+s32 FUN_001dfc64(u32);
+void FUN_002db92c(u32);
+u32 asdProcessCreateSimple(const char *, s32, s32, s32, AsdProcUpdateFunc, AsdProcFunc, void *);
 
-int FUN_002459d8(...);
-int memClear(...);
-int asdMemAlloc(...);
-int asdProcessCreateSimple(...);
-int FUN_002c58c8(...);
-int VectorSignedToFloat(...);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern int FUN_001dfc64(...); /* 0x1dfc64 */
-extern int FUN_002db92c(...); /* 0x2db92c */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002459d8. */
-extern int FUN_002bf4f8(unsigned int, unsigned char);
-extern int FUN_002c1d5c(void);
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_002c58c8. */
-
-
-void FUN_0032743c(int param_1)
-
+/* Create an NPC texture process with its three image rectangles and optional first-image origin. */
+void FUN_0032743c(s32 npcId)
 {
-/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int in_fpscr;
-  int temp_v2;
-  unsigned long long temp_v3;
-  
-  piVar1 = (int *)0x100;
-  asdMemAlloc(0x100,0x100,0,0x98,1);
-  memClear();
-  temp_v3 = 0;
-  piVar1[8] = 0x3f800000;
-  piVar1[9] = 0x3f800000;
-  piVar1[10] = 0;
-  piVar1[1] = 0x41;
-  piVar1[0xf] = 0x26;
-  piVar1[0x11] = -1;
-  *piVar1 = param_1;
-  *(unsigned char *)(piVar1 + 0x19) = 1;
-  piVar1[0x1a] = 0;
-  piVar1[0x1b] = 0;
-  *(unsigned char *)(piVar1 + 0x1c) = 0;
-  *(unsigned char *)((int)piVar1 + 0x71) = 0;
-  FUN_002459d8();
-  piVar1[0x15] = param_1;
-  temp_v1 = 0;
-  piVar1[0x10] = (unsigned int)*(unsigned short *)(param_1 + 0x24);
-  do {
-    while( 1 ) {
-      temp_v0 = FUN_002bf4f8(0x32,*(unsigned char *)(temp_v1 + 0x40356c));
-      temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v0 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-      piVar1[temp_v1 * 2 + 0x1d] = temp_v2;
-      temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v0 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-      piVar1[temp_v1 * 2 + 0x1e] = temp_v2;
-      if (temp_v1 != 0) break;
-      if (*(short **)(temp_v0 + 0xc) != (short *)0x0) {
-        temp_v2 = VectorSignedToFloat((int)**(short **)(temp_v0 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
-        piVar1[0x23] = temp_v2;
-        temp_v0 = VectorSignedToFloat((int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),
-                                    (unsigned char)(in_fpscr >> 0x16) & 3);
-        piVar1[0x24] = temp_v0;
-      }
-      temp_v1 = 1;
+    asdDebugTrace(DAT_0040357c, 900);
+    NpcTextureWork *work = (NpcTextureWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(NpcTextureWork), 1);
+    memClear(work, sizeof(NpcTextureWork));
+    work->scale.x = 1.0f;
+    work->scale.y = 1.0f;
+    work->scale.z = 0.0f;
+    work->state = 0x41;
+    work->textureTable = 0x26;
+    work->npc.lastImage = -1;
+    work->npcId = npcId;
+    work->npc.active = 1;
+    work->npc.unk68 = 0;
+    work->npc.unk6C = 0;
+    work->npc.unk70 = 0;
+    work->npc.unk71 = 0;
+    work->npc.source = FUN_002459d8(npcId);
+    work->textureNode = work->npc.source->textureId;
+    for (u32 index = 0; index < 3; ++index) {
+        NpcTextureImage *image = FUN_002bf4f8(0x32, DAT_0040356c[index]);
+        work->npc.sizes[index][0] = image->width;
+        work->npc.sizes[index][1] = image->height;
+        if (index == 0 && image->origin != NULL) {
+            work->npc.origin[0] = image->origin[0];
+            work->npc.origin[1] = image->origin[1];
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 3);
-  piVar1[0x1f] = 0x42900000;
-  piVar1[4] = 0x48;
-  piVar1[10] = 0x3e87ae14;
-  piVar1[7] = (int)temp_v3;
-  piVar1[9] = (int)temp_v3;
-  piVar1[0xe] = 5;
-  piVar1[5] = (int)(float)piVar1[0x20];
-  temp_v0 = FUN_002c1d5c();
-  if (temp_v0 != 0) {
-    piVar1[3] = 1;
-  }
-  else {
-    piVar1[3] = 0;
-    FUN_002c58c8(piVar1[0xf],piVar1[0x10]);
-    FUN_002c58c8(0x32,0);
-  }
-  piVar1[6] = 0x3e99999a;
-  asdProcessCreateSimple("EVE_2dTex",2,0,0,FUN_001dfc64,FUN_002db92c,piVar1);
-  return;
+    work->npc.sizes[1][0] = 72.0f;
+    work->x = 72;
+    work->scale.z = 0.265f;
+    work->rotation = 0.0f;
+    work->scale.y = 0.0f;
+    work->display.screenRegion = 5;
+    work->y = (s32)work->npc.sizes[1][1];
+    if (FUN_002c1d5c()) {
+        work->deferred = 1;
+    } else {
+        work->deferred = 0;
+        FUN_002c58c8(work->textureTable, work->textureNode);
+        FUN_002c58c8(0x32, 0);
+    }
+    work->speed = 0.3f;
+    asdProcessCreateSimple(DAT_00403570, 2, 0, 0, FUN_001dfc64, FUN_002db92c, work);
 }
-
-} /* extern "C" */
+}

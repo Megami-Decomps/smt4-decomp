@@ -1,81 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001061ec` (_code @ 0x1061ec, 0x128 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: packed-color initialization and overlay-alpha VFP scheduling differ. */
+#include "shard/W6_W6Match2_TitleCommand.h"
 
 extern "C" {
+extern void *g_titleScene;
+s32 FUN_0010ec60();
+u32 FUN_002c1c0c(u32 group, u32 resource);
+void FUN_002c1b64(void *context, u32 resource);
+void FUN_002c1ac8(const f32 *first, const f32 *second, const f32 *third, const f32 *fourth,
+                  f32 x, f32 y, f32 width, f32 height, f32 firstDepth, f32 secondDepth,
+                  f32 firstScale, f32 secondScale, f32 rotation);
+void FUN_002c198c(void *context);
+void FUN_002c18e4(void *context);
+void FUN_002c5030(u32 flags);
 
-int FUN_002c18e4(unsigned int);
-int FUN_002c198c(unsigned int);
-int FUN_002c1ac8(int *);
-int FUN_002c1b64(unsigned int, unsigned int);
-int FUN_002c5030(int);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(int, int);
-
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern unsigned char DAT_00446db2; /* 0x446db2 */
-extern int DAT_00446dc4; /* 0x446dc4 */
-extern unsigned int g_titleScene; /* 0x44ea00 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_0010ec60(void);
-/* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c1ac8. */
-/* Supplied declaration required: FUN_002c1b64. */
-extern unsigned int FUN_002c1c0c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c5030. */
-
-
-unsigned int FUN_001061ec(void)
-
+/* Draw and advance the temporary overlay used while leaving the active title loop. */
+u32 FUN_001061ec()
 {
-/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int in_fpscr;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  float temp_v5;
-  
-  if (DAT_00446dc4 < 1) {
-    DAT_00446dc4 = 0;
-    DAT_00446db2 = 0;
-  }
-  else {
-    temp_v2 = 0x3f800000;
-    temp_v3 = 0x3f800000;
-    temp_v4 = 0x3f800000;
-    temp_v5 = 1.0f;
-    if (DAT_00446dc4 >= 0x54) {
-      temp_v5 = (float)VectorUnsignedToFloat(0x58 - DAT_00446dc4,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v5 = temp_v5 * 0.2f;
+    if (g_titleFlags.overlay.frame <= 0) {
+        g_titleFlags.overlayActive = 0;
+        g_titleFlags.overlay.frame = 0;
+    } else {
+        f32 color[4];
+        color[0] = color[1] = color[2] = color[3] = 1.0f;
+        if (g_titleFlags.overlay.frame >= 84) {
+            color[3] = 0.2f * (f32)(u32)(88 - g_titleFlags.overlay.frame);
+        } else if (g_titleFlags.overlay.frame < 22) {
+            color[3] = (f32)(g_titleFlags.overlay.frame - 2) * 0.05f;
+        }
+        if (0.0f < color[3]) {
+            u32 resource = FUN_002c1c0c(0x2c, 0);
+            FUN_002c1b64(g_titleScene, resource);
+            FUN_002c1ac8(color, color, color, color, 128.0f, 88.0f, 64.0f, 64.0f,
+                          0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
+            FUN_002c198c(g_titleScene);
+            FUN_002c18e4(g_titleScene);
+        }
+        g_titleFlags.overlay.frame -= FUN_0010ec60() + 1;
     }
-    else if (DAT_00446dc4 < 0x16) {
-      temp_v5 = (float)VectorSignedToFloat(DAT_00446dc4 - 2,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v5 = temp_v5 * 0.05f;
-    }
-    if (0.0f < temp_v5) {
-      temp_v0 = FUN_002c1c0c(0x2c,0);
-      FUN_002c1b64(g_titleScene,temp_v0);
-      FUN_002c1ac8(&temp_v2);
-      FUN_002c198c(g_titleScene);
-      FUN_002c18e4(g_titleScene);
-    }
-    temp_v1 = FUN_0010ec60();
-    DAT_00446dc4 = (DAT_00446dc4 - temp_v1) - 1;
-  }
-  FUN_002c5030(0x401);
-  return 0;
+    FUN_002c5030(0x401);
+    return 0;
 }
-
-} /* extern "C" */
+}

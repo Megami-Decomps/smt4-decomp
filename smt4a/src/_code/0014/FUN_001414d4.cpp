@@ -1,76 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001414d4` (_code @ 0x1414d4, 0x13c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: registry traversal placement, conditional-call selection and saved registers differ. */
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
-extern "C" {
-
-int FUN_0015e76c(int, int, unsigned int);
-
-extern int *g_soundHandleList; /* 0x63e944 */
-extern int DAT_0063e948; /* 0x63e948 */
-
-/* Supplied declaration required: FUN_0015e76c. */
-extern int FUN_00160050(void);
-extern int modeIsOneOrTwo(void);
-
-
-unsigned int FUN_001414d4(int param_1,int param_2,unsigned int param_3)
-
-{
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int *piVar3;
-  
-  temp_v1 = 0;
-  piVar3 = g_soundHandleList;
-  if (0 < DAT_0063e948) {
-    while (piVar3 != (int *)0x0) {
-      if (piVar3[6] == param_1) {
-        if (param_2 != 0) {
-          if ((param_2 == 1) && ((*(unsigned char *)(piVar3 + 3) & 0x20) == 0)) {
-            if (*piVar3 == 0) goto LAB_001415e4;
-            temp_v1 = modeIsOneOrTwo();
-            if (temp_v1 != 0) {
-              if (*piVar3 != 0) {
-                FUN_0015e76c(*piVar3,0,param_3);
-              }
-              temp_v0 = (*(unsigned char *)(piVar3 + 3) & 0xfb) | 0x20;
-              *(unsigned char *)(piVar3 + 3) = temp_v0;
-            }
-          }
-        }
-        else if (((*(unsigned char *)(piVar3 + 3) & 0x10) == 0) &&
-                ((*piVar3 == 0 || (temp_v1 = modeIsOneOrTwo(), temp_v1 == 0)))) {
-          if (*piVar3 != 0) {
-            FUN_0015e76c(*piVar3,1,param_3);
-          }
-          temp_v0 = *(unsigned char *)(piVar3 + 3) | 0x14;
-          *(unsigned char *)(piVar3 + 3) = temp_v0;
-        }
-        if ((*piVar3 != 0) && (temp_v1 = FUN_00160050(), 0 < temp_v1)) {
-          return 0;
-        }
-LAB_001415e4:
-        temp_v0 = *(unsigned char *)(piVar3 + 3);
-        if ((temp_v0 & 0x10) != 0) {
-          temp_v0 = temp_v0 & 0xef;
-          *(unsigned char *)(piVar3 + 3) = temp_v0;
-        }
-        if ((temp_v0 & 0x20) == 0) {
-          return 1;
-        }
-        *(unsigned char *)(piVar3 + 3) = temp_v0 & 0xdf;
-        return 1;
-      }
-      piVar3 = (int *)piVar3[5];
-      temp_v1 = temp_v1 + 1;
-      if (DAT_0063e948 <= temp_v1) {
-        return 0;
-      }
-    }
-  }
-  return 0;
+namespace {
+struct SoundPauseRegistryView {
+    u8 prefix[0x75C];
+    struct {
+        AsdSndHandleNode *first;
+        s32 count;
+    } registered;
+};
 }
+extern "C" {
+extern SoundPauseRegistryView g_asdSoundSystem;
+void FUN_0015e76c(s32 handle, s32 paused, u32 frames);
+s32 FUN_00160050(s32 handle);
+s32 modeIsOneOrTwo(s32 handle);
 
-} /* extern "C" */
+// Request a pause or resume, then acknowledge and clear the pending transition bits.
+u32 FUN_001414d4(s32 id, s32 resume, u32 frames)
+{
+    u32 completed = 0;
+    AsdSndHandleNode *node = g_asdSoundSystem.registered.first;
+    s32 count = g_asdSoundSystem.registered.count;
+    for (s32 index = 0; index < count; ++index, node = node->next) {
+        if (node == NULL)
+            break;
+        if (node->id != id)
+            continue;
+        switch (resume) {
+        case 0:
+            if ((node->value & 0x10) != 0)
+                break;
+            if (node->handle != 0 && modeIsOneOrTwo(node->handle) != 0)
+                break;
+            if (node->handle != 0)
+                FUN_0015e76c(node->handle, 1, frames);
+            node->value |= 0x14;
+            break;
+        case 1:
+            if ((node->value & 0x20) != 0 || node->handle == 0)
+                break;
+            if (modeIsOneOrTwo(node->handle) == 0)
+                break;
+            if (node->handle != 0)
+                FUN_0015e76c(node->handle, 0, frames);
+            node->value = (node->value & ~4) | 0x20;
+            break;
+        }
+        if (node->handle == 0 || FUN_00160050(node->handle) <= 0) {
+            if (node->value & 0x10)
+                node->value &= ~0x10;
+            if (node->value & 0x20)
+                node->value &= ~0x20;
+            completed = 1;
+        }
+        break;
+    }
+    return completed;
+}
+}

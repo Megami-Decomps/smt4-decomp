@@ -1,79 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fdff4` (_code @ 0x2fdff4, 0x130 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: initial state stores combine; image indexing and process-callback argument stores differ. */
+#include "event/NpcTextureWork.h"
+#include "gamedata/DataTable.h"
+#include "addon/aocMain.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 extern "C" {
+extern AocSystem *g_aocSystem;
+extern const char DAT_0040357c[];
+extern const char DAT_00403570[];
+void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+void memClear(void *memory, u32 size);
+s32 FUN_002c1d5c(void);
+s32 aocRunByName(AocSystem *system, s32 table, s32 node, s32 enabled);
+void FUN_002ae8e4(AocSystem *system, s32 table, s32 node, u32 heap);
+void FUN_002c58c8(s32 table, s32 node);
+s32 FUN_001dfc64(u32 handle);
+void FUN_002db92c(u32 handle);
+u32 asdProcessCreateSimple(const char *name, s32 group, s32 startDelay, s32 endDelay, AsdProcUpdateFunc update, AsdProcFunc end, void *work);
 
-int FUN_002ae8e4(...);
-int dataTableGetCount(...);
-int memClear(...);
-int asdMemAlloc(...);
-int asdProcessCreateSimple(...);
-int FUN_002c58c8(...);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern int FUN_001dfc64(...); /* 0x1dfc64 */
-extern int FUN_002db92c(...); /* 0x2db92c */
-extern unsigned int g_aocSystem; /* 0x433158 */
-
-/* Supplied declaration required: FUN_002ae8e4. */
-extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: dataTableGetCount. */
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int FUN_002c1d5c(void);
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_002c58c8. */
-
-
-void FUN_002fdff4(int param_1)
-
+/* Create the 2D NPC texture process using its table-selected image. */
+void FUN_002fdff4(s32 npc)
 {
-/* irregular: 8 native warning(s); review required */
-  short temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  puVar2 = (unsigned int *)0x100;
-  asdMemAlloc(0x100,0x100,0,0x98,1);
-  memClear();
-  puVar2[8] = 0x3f800000;
-  puVar2[9] = 0x3f800000;
-  puVar2[10] = 0;
-  puVar2[1] = 4;
-  *puVar2 = 0;
-  puVar2[0xf] = 2;
-  temp_v1 = dataTableGet(0x1a,0);
-  temp_v2 = dataTableGetEntries();
-  dataTableGetCount(temp_v1);
-  temp_v0 = *(short *)(temp_v2 + (param_1 - 1) * 2);
-  puVar2[5] = 0xfffffff8;
-  puVar2[0x10] = (int)temp_v0;
-  puVar2[4] = 0xffffffc8;
-  temp_v2 = FUN_002c1d5c();
-  if (temp_v2 != 0) {
-    puVar2[3] = 1;
-  }
-  else {
-    puVar2[3] = 0;
-    temp_v2 = aocRunByName(g_aocSystem,puVar2[0xf],puVar2[0x10],1);
-    if (temp_v2 != 0) {
-      FUN_002ae8e4(g_aocSystem,puVar2[0xf],puVar2[0x10],0x10000);
+    asdDebugTrace(DAT_0040357c, 852);
+    NpcTextureWork *work = static_cast<NpcTextureWork *>(asdMemAlloc(0x100, 0x100, 0, sizeof(NpcTextureWork), 1));
+    memClear(work, sizeof(NpcTextureWork));
+    work->scale.x = 1.0f;
+    work->scale.y = 1.0f;
+    work->scale.z = 0.0f;
+    work->state = 4;
+    work->phase = 0;
+    work->textureTable = 2;
+    DataTableView<s16> images(0x1A, 0);
+    work->y = -8;
+    work->textureNode = images.entries[npc - 1];
+    work->x = -56;
+    if (FUN_002c1d5c()) {
+        work->deferred = 1;
+    } else {
+        work->deferred = 0;
+        if (aocRunByName(g_aocSystem, work->textureTable, work->textureNode, 1))
+            FUN_002ae8e4(g_aocSystem, work->textureTable, work->textureNode, 0x10000);
+        else
+            FUN_002c58c8(work->textureTable, work->textureNode);
     }
-    else {
-      FUN_002c58c8(puVar2[0xf],puVar2[0x10]);
-    }
-  }
-  puVar2[6] = 0x3ea8f5c3;
-  asdProcessCreateSimple("EVE_2dTex",2,0,0,FUN_001dfc64,FUN_002db92c,puVar2);
-  return;
+    work->speed = 0.33f;
+    asdProcessCreateSimple(DAT_00403570, 2, 0, 0, FUN_001dfc64, FUN_002db92c, work);
 }
-
-} /* extern "C" */
+}

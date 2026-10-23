@@ -1,60 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fdebc` (_code @ 0x1fdebc, 0x128 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler retains the game-state base in R5 across formatting instead of reloading it. */
+#include "map/mapMain.h"
+#include "map/mapDepart.h"
 extern "C" {
+extern GameState g_gameState;
+extern const char DAT_00404498[];
+extern const char DAT_004044b8[];
+s32 textFormatBuffer(char *destination, const char *format, ...);
+void FUN_002a09b4(const char *path, u32 flags);
 
-int FUN_002a09b4(...);
-int textFormatBuffer(...);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp90; /* 0x90: local_90 */
-} param_1_stack;
-
-extern signed char DAT_0049f942; /* 0x49f942 */
-extern signed char DAT_0049fb44; /* 0x49fb44 */
-
-/* Supplied declaration required: FUN_002a09b4. */
-/* Supplied declaration required: textFormatBuffer. */
-
-
-void FUN_001fdebc(int param_1)
-
+/* Load map environment settings, including the special-map aliases. */
+void FUN_001fdebc(const MapMain *map)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [128];
-  
-  if (DAT_0049fb44 != '\0') {
-    textFormatBuffer(temp_v1,"map/m%03d/e%03d_%02d_dz.bcenv",*(unsigned int *)(param_1 + 0x2c),
-                 *(unsigned int *)(param_1 + 0x2c),*(unsigned int *)(param_1 + 0x30));
-  }
-  if (DAT_0049f942 != '\0') {
-    textFormatBuffer(temp_v1,"map/m%03d/e%03d_%02d.bcenv",0x18,0x18,1);
-  }
-  else {
-    temp_v0 = *(int *)(param_1 + 0x2c);
-    if (temp_v0 != 0x29) {
-      if (temp_v0 != 0x2a) {
-        if (temp_v0 != 0x2b) {
-          textFormatBuffer(temp_v1,"map/m%03d/e%03d_%02d.bcenv",temp_v0,temp_v0,
-                       *(unsigned int *)(param_1 + 0x30));
+    char path[128];
+    if (g_gameState.environment.alternate)
+        textFormatBuffer(path, DAT_00404498, map->mapId, map->mapId, map->areaId);
+    if (g_gameState.unk26) {
+        textFormatBuffer(path, DAT_004044b8, 24, 24, 1);
+    } else {
+        switch (map->mapId) {
+        case 41:
+            textFormatBuffer(path, DAT_004044b8, 2, 2, 6);
+            break;
+        case 42:
+            textFormatBuffer(path, DAT_004044b8, 14, 14, 1);
+            break;
+        case 43:
+            textFormatBuffer(path, DAT_004044b8, 36, 36, 1);
+            break;
+        default:
+            textFormatBuffer(path, DAT_004044b8, map->mapId, map->mapId, map->areaId);
+            break;
         }
-        else {
-          textFormatBuffer(temp_v1,"map/m%03d/e%03d_%02d.bcenv",0x24,0x24,1);
-        }
-      }
-      else {
-        textFormatBuffer(temp_v1,"map/m%03d/e%03d_%02d.bcenv",0xe,0xe,1);
-      }
     }
-    else {
-      textFormatBuffer(temp_v1,"map/m%03d/e%03d_%02d.bcenv",2,2,6);
-    }
-  }
-  FUN_002a09b4(temp_v1,0);
-  return;
+    FUN_002a09b4(path, 0);
 }
-
-} /* extern "C" */
+}

@@ -1,112 +1,70 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e2504` (_code @ 0x3e2504, 0x1e0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: completion work is factored instead of duplicated across retail branches; mask-load scheduling differs. */
+#include "battle/btlMain.h"
+#include "battle/btlEncount.h"
 
+struct BtlEventStateA;
 extern "C" {
+extern BtlEventStateA *g_btlEvent;
+extern BtlEncounterGlobalsA g_btlEncount;
+extern void *g_btlUiBlock;
+u32 isEntryUsable(const BtlEventStateA *event);
+u32 FUN_004d7a70(BtlEventStateA *event, u32 kind, s32 index, s32 flags);
+void FUN_004d7fe4(BtlEventStateA *event);
+void FUN_002e5924(s32 kind);
+u32 FUN_0013def0(u32 display);
+void FUN_0013cab8(u32 display, s32 frames, u32 alpha);
+void FUN_003ed6e8(BtlMainStateA *state);
+void FUN_003f26d4(BtlMainStateA *state);
+s32 FUN_003eebf4(BtlMainStateA *state, s32 flags);
+void FUN_0047f444(s32 kind);
+void FUN_004aa2e0(void *ui, s32 mode);
+u32 FUN_003e0cd4(BtlStep *step, BtlMainStateA *state);
 
-int FUN_0013cab8(int, int, int);
-int FUN_002e5924(int);
-int FUN_003e0cd4(unsigned int *, int);
-int FUN_003ed6e8(int);
-int FUN_003eebf4(int, int);
-int FUN_003f26d4(int);
-int FUN_0047f444(int);
-int FUN_004aa2e0(unsigned int, int);
-int FUN_004d7a70(int, int, unsigned int, int);
-int FUN_004d7fe4(int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern unsigned int DAT_00573858; /* 0x573858 */
-extern unsigned int DAT_0057385c; /* 0x57385c */
-extern unsigned int DAT_00573878; /* 0x573878 */
-extern unsigned int DAT_0057387c; /* 0x57387c */
-extern unsigned int DAT_00573888; /* 0x573888 */
-extern unsigned int DAT_0057388c; /* 0x57388c */
-extern unsigned int DAT_00573890; /* 0x573890 */
-extern unsigned int DAT_00573894; /* 0x573894 */
-extern int g_btlEvent; /* 0x573898 */
-extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
-
-/* Supplied declaration required: FUN_0013cab8. */
-extern int FUN_0013def0(unsigned int);
-/* Supplied declaration required: FUN_002e5924. */
-/* Supplied declaration required: FUN_003e0cd4. */
-/* Supplied declaration required: FUN_003ed6e8. */
-/* Supplied declaration required: FUN_003eebf4. */
-/* Supplied declaration required: FUN_003f26d4. */
-/* Supplied declaration required: FUN_0047f444. */
-/* Supplied declaration required: FUN_004aa2e0. */
-/* Supplied declaration required: FUN_004d7a70. */
-/* Supplied declaration required: FUN_004d7fe4. */
-extern int isEntryUsable(void);
-
-
-unsigned int * FUN_003e2504(unsigned int *param_1,int param_2)
-
+u32 FUN_003e2504(BtlStep *step, BtlMainStateA *state)
 {
-/* irregular: 10 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  
-  puVar3 = (unsigned int *)(param_2 + 0x45a0);
-  if (param_1[4] != 0) {
-    temp_v0 = isEntryUsable();
-    if (temp_v0 == 0) {
-      if ((*(unsigned int *)(param_2 + 0x45a4) & DAT_0057385c) == 0 && (*puVar3 & DAT_00573858) == 0) {
-        FUN_003ed6e8(param_2);
-        FUN_003f26d4(param_2);
-        temp_v1 = *(unsigned int *)(param_2 + 0x45a4) | DAT_0057387c | DAT_00573894;
-        *puVar3 = *puVar3 | DAT_00573878 | DAT_00573890;
-        *(unsigned int *)(param_2 + 0x45a4) = temp_v1;
-        FUN_004aa2e0(g_btlUiBlock,0);
-      }
-      else {
-        FUN_003ed6e8(param_2);
-        FUN_003f26d4(param_2);
-        temp_v1 = *(unsigned int *)(param_2 + 0x45a4) | DAT_0057387c | DAT_00573894;
-        *puVar3 = *puVar3 | DAT_00573878 | DAT_00573890;
-        *(unsigned int *)(param_2 + 0x45a4) = temp_v1;
-        temp_v0 = param_2;
-        FUN_003eebf4(param_2,1);
-        if ((temp_v0 < 0) && ((*(unsigned int *)(param_2 + 0x110) & 0x20) == 0)) {
-          FUN_0047f444(3);
+    // The two final masks extend past the canonical encounter-global prefix.
+    struct CompletionMaskView {
+        u8 prefix[0x50];
+        u64 transition;
+        u8 unk58[8];
+        u64 fadeStarted;
+        u64 completed;
+    };
+    const CompletionMaskView *masks =
+        reinterpret_cast<const CompletionMaskView *>(&g_btlEncount);
+    BtlEventStateA *event = g_btlEvent;
+    if (step->counters.unk10 != 0) {
+        if (isEntryUsable(event)) {
+            return 0;
         }
-      }
-      param_1[4] = 0;
-      param_1[3] = 0;
-      *param_1 = 0x19;
-      FUN_003e0cd4(param_1,param_2);
-      return param_1;
+        bool special = (state->stateFlags64.bits & g_btlEncount.initialStateMask) != 0;
+        FUN_003ed6e8(state);
+        FUN_003f26d4(state);
+        state->stateFlags64.bits |= masks->transition | masks->completed;
+        if (!special) {
+            FUN_004aa2e0(g_btlUiBlock, 0);
+        } else if (FUN_003eebf4(state, 1) < 0 && !(state->encounter.controlFlags & 0x20)) {
+            FUN_0047f444(3);
+        }
+        step->counters.unk10 = 0;
+        step->counters.unk0C = 0;
+        step->state = 0x19;
+        return FUN_003e0cd4(step, state);
     }
-  }
-  else {
-    temp_v0 = g_btlEvent;
-    FUN_004d7a70(g_btlEvent,0xb,0xffffffff,0);
-    if (temp_v0 != 0) {
-      if ((*puVar3 & DAT_00573888) == 0 && (*(unsigned int *)(param_2 + 0x45a4) & DAT_0057388c) == 0) {
-        FUN_002e5924(2);
-        temp_v1 = *(unsigned int *)(param_2 + 0x45a4) | DAT_0057388c;
-        *puVar3 = *puVar3 | DAT_00573888;
-        *(unsigned int *)(param_2 + 0x45a4) = temp_v1;
-      }
-      temp_v0 = FUN_0013def0(0);
-      if (temp_v0 == 3) {
-        FUN_0013cab8(0,10,0xff);
-      }
-      temp_v0 = FUN_0013def0(1);
-      if (temp_v0 == 3) {
-        FUN_0013cab8(1,10,0xff);
-      }
-      FUN_004d7fe4(g_btlEvent);
+    if (FUN_004d7a70(event, 0xB, -1, 0)) {
+        if (!(state->stateFlags64.bits & masks->fadeStarted)) {
+            FUN_002e5924(2);
+            state->stateFlags64.bits |= masks->fadeStarted;
+        }
+        if (FUN_0013def0(0) == 3) {
+            FUN_0013cab8(0, 10, 0xFF);
+        }
+        if (FUN_0013def0(1) == 3) {
+            FUN_0013cab8(1, 10, 0xFF);
+        }
+        FUN_004d7fe4(g_btlEvent);
     }
-    param_1[4] = param_1[4] + 1;
-  }
-  return (unsigned int *)0x0;
+    ++step->counters.unk10;
+    return 0;
 }
-
-} /* extern "C" */
+}

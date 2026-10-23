@@ -1,97 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002248b8` (_code @ 0x2248b8, 0x1f0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: render-stack address computation moves before state encoding and push-index registers differ from retail. */
+#include "camp/RenderCtx.h"
 
 extern "C" {
+extern RenderCtx *g_titleScene;
+void *jobGetWork(void);
+s32 FUN_002865c0(u32 mode, f32 alpha);
+s32 FUN_002c5d80(u32 mode, u32 flags);
+s32 packNibblesAndByte(u32 first, u32 second, u32 value);
+void FUN_0028186c(u32 handle);
 
-int FUN_0028186c(unsigned int);
-
-typedef int romwright_code(...);
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_0028186c. */
-extern int FUN_002865c0(unsigned int);
-extern int jobGetWork(void);
-extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-
-
-unsigned int FUN_002248b8(void)
-
+u32 FUN_002248b8(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int *piVar6;
-  
-  temp_v1 = jobGetWork();
-  temp_v0 = g_titleScene;
-  if (*(char *)(temp_v1 + 0x10) != '\0') {
-    temp_v2 = FUN_002865c0(6);
-    piVar6 = (int *)(temp_v0 + 0x126c);
-    temp_v3 = *piVar6;
-    temp_v4 = piVar6[temp_v3 + 2];
-    *piVar6 = temp_v3 + 1;
-    piVar6[temp_v3 + 3] = temp_v2;
-    if (*(char *)(temp_v0 + 0x1284) != '\0' || temp_v4 != temp_v2) {
-      (**(romwright_code **)(temp_v0 + 0x1288))();
-      *(unsigned char *)(temp_v0 + 0x1284) = 0;
+    struct DrawWork {
+        u8 prefix00[0xC];
+        u32 handle;
+        u8 enabled;
+    };
+    typedef char DrawWorkOffsetsCheck[
+        offsetof(DrawWork, handle) == 0xC && offsetof(DrawWork, enabled) == 0x10 ? 1 : -1];
+    DrawWork *work = (DrawWork *)jobGetWork();
+    if (work->enabled) {
+        RenderCtx *context = g_titleScene;
+        renderStackPush(&context->additional.stackC, FUN_002865c0(6, 0.0f));
+        context = g_titleScene;
+        renderStackPush(&context->stackA, FUN_002c5d80(1, 0));
+        context = g_titleScene;
+        renderStackPush(&context->stackB, packNibblesAndByte(6, 1, 0));
+        FUN_0028186c(work->handle);
+        renderStackPop(&g_titleScene->stackB);
+        renderStackPop(&g_titleScene->stackA);
+        renderStackPop(&g_titleScene->additional.stackC);
     }
-    temp_v0 = g_titleScene;
-    temp_v2 = FUN_002c5d80(1,0);
-    piVar6 = (int *)(temp_v0 + 0x124c);
-    temp_v3 = *piVar6;
-    temp_v4 = piVar6[temp_v3 + 2];
-    *piVar6 = temp_v3 + 1;
-    piVar6[temp_v3 + 3] = temp_v2;
-    if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v4 != temp_v2) {
-      (**(romwright_code **)(temp_v0 + 0x1268))();
-      *(unsigned char *)(temp_v0 + 0x1264) = 0;
-    }
-    temp_v0 = g_titleScene;
-    temp_v2 = packNibblesAndByte(6,1,0);
-    piVar6 = (int *)(temp_v0 + 0x12ac);
-    temp_v3 = *piVar6;
-    temp_v4 = piVar6[temp_v3 + 2];
-    *piVar6 = temp_v3 + 1;
-    piVar6[temp_v3 + 3] = temp_v2;
-    if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v4 != temp_v2) {
-      (**(romwright_code **)(temp_v0 + 0x12c8))();
-      *(unsigned char *)(temp_v0 + 0x12c4) = 0;
-    }
-    FUN_0028186c(*(unsigned int *)(temp_v1 + 0xc));
-    temp_v0 = g_titleScene;
-    piVar6 = (int *)(g_titleScene + 0x12ac);
-    temp_v1 = *piVar6;
-    temp_v2 = piVar6[temp_v1 + 2];
-    *piVar6 = temp_v1 - 1;
-    if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v2 != piVar6[temp_v1 + 1]) {
-      (**(romwright_code **)(temp_v0 + 0x12c8))();
-      *(unsigned char *)(temp_v0 + 0x12c4) = 0;
-    }
-    temp_v0 = g_titleScene;
-    piVar6 = (int *)(g_titleScene + 0x124c);
-    temp_v1 = *piVar6;
-    temp_v2 = piVar6[temp_v1 + 2];
-    *piVar6 = temp_v1 - 1;
-    if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v2 != piVar6[temp_v1 + 1]) {
-      (**(romwright_code **)(temp_v0 + 0x1268))();
-      *(unsigned char *)(temp_v0 + 0x1264) = 0;
-    }
-    temp_v0 = g_titleScene;
-    piVar6 = (int *)(g_titleScene + 0x126c);
-    temp_v1 = *piVar6;
-    temp_v2 = piVar6[temp_v1 + 2];
-    *piVar6 = temp_v1 - 1;
-    if (*(char *)(temp_v0 + 0x1284) != '\0' || temp_v2 != piVar6[temp_v1 + 1]) {
-      (**(romwright_code **)(temp_v0 + 0x1288))();
-      *(unsigned char *)(temp_v0 + 0x1284) = 0;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -1,98 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026c9c0` (_code @ 0x26c9c0, 0x1dc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initialization loops unroll and transition constant/register lifetimes differ. */
+#include "ui/PartyPanelState.h"
+#include "gamedata/UnitStats.h"
+#include "shard/W7_W7Match2_PartyDamage.h"
 
 extern "C" {
+extern PartyPanelState *g_partyPanel;
+const PartyDamageSlotsIV *gameGetSlotTable();
+const StatBlock *gameGetUnitRecord(s32 index);
+const StatBlock *partyMemberFindById(u32 id);
+void __aeabi_memset4(void *destination, u32 size, s32 value);
 
-int __aeabi_memset4(int, int, int);
-
-extern int g_partyPanel; /* 0x43dcf0 */
-
-extern int gameGetUnitRecord(void);
-extern int gameGetSlotTable(void);
-extern int partyMemberFindById(unsigned int);
-/* Supplied declaration required: __aeabi_memset4. */
-
-
-void FUN_0026c9c0(void)
-
+void FUN_0026c9c0()
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  
-  temp_v0 = g_partyPanel;
-  temp_v1 = gameGetSlotTable();
-  __aeabi_memset4(temp_v0 + 0x678,4,1);
-  temp_v6 = 0;
-  do {
-    *(unsigned char *)(*(int *)(temp_v0 + temp_v6 * 4 + 0x6cc) + 0x27) = 0;
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 3);
-  temp_v6 = 0;
-  do {
-    *(unsigned short *)(temp_v0 + temp_v6 * 8 + 0x73c) = 1;
-    *(unsigned char *)(*(int *)(temp_v0 + temp_v6 * 4 + 0x6d8) + 0x27) = 0;
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 0x18);
-  *(unsigned char *)(temp_v0 + 0x678) = 0;
-  temp_v6 = 0;
-  if (*(char *)(temp_v1 + 0x9108) < '\0') {
-    *(unsigned char *)(temp_v0 + 0x679) = 0;
-  }
-  if (*(char *)(temp_v1 + 0x9109) < '\0') {
-    *(unsigned char *)(temp_v0 + 0x67a) = 0;
-  }
-  if (*(char *)(temp_v1 + 0x910a) < '\0') {
-    *(unsigned char *)(temp_v0 + 0x67b) = 0;
-  }
-  do {
-    temp_v7 = temp_v0 + temp_v6 * 8;
-    if ((*(int *)(temp_v7 + 0x738) < 0) ||
-       (temp_v2 = gameGetUnitRecord(), (*(unsigned short *)(temp_v2 + 0x44) & 0x404) != 0)) {
-      *(unsigned short *)(temp_v7 + 0x73c) = 0;
+    // The reset byte lies immediately beyond the recovered widget prefix.
+    struct WidgetTransitionView {
+        u8 unk00[0x28];
+        u8 reset;
+    };
+    PartyPanelState *work = g_partyPanel;
+    const PartyDamageSlotsIV *slots = gameGetSlotTable();
+    __aeabi_memset4(work->availability.activeSlots, sizeof(work->availability.activeSlots), 1);
+    for (s32 index = 0; index < 3; ++index) {
+        work->characters[index + 1]->transitionPending = 0;
     }
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 0x18);
-  temp_v6 = 0;
-  if (temp_v6 < *(int *)(temp_v0 + 0xb3c)) {
-    do {
-      temp_v3 = *(unsigned int *)(temp_v0 + temp_v6 * 4 + 0xb34);
-      if ((-1 < (int)temp_v3) && (temp_v7 = partyMemberFindById(temp_v3 & 0xffff), temp_v7 != 0)) {
-        temp_v2 = 0;
-        do {
-          if ((-1 < *(char *)(temp_v1 + temp_v2 + 0x9108)) &&
-             (temp_v4 = gameGetUnitRecord(), *(short *)(temp_v4 + 0x46) == *(short *)(temp_v7 + 0x46))) {
-            temp_v4 = temp_v0 + temp_v2 * 4;
-            *(unsigned char *)(temp_v0 + temp_v2 + 0x679) = 0;
-            *(unsigned char *)(*(int *)(temp_v4 + 0x6cc) + 0x28) = 0;
-            *(unsigned char *)(*(int *)(temp_v4 + 0x6cc) + 0x27) = 1;
-          }
-          temp_v2 = temp_v2 + 1;
-        } while (temp_v2 < 3);
-        temp_v2 = 0;
-        do {
-          temp_v4 = temp_v0 + temp_v2 * 8;
-          if ((-1 < *(int *)(temp_v4 + 0x738)) &&
-             (temp_v5 = gameGetUnitRecord(), *(short *)(temp_v5 + 0x46) == *(short *)(temp_v7 + 0x46))) {
-            *(unsigned short *)(temp_v4 + 0x73c) = 0;
-            temp_v4 = temp_v0 + temp_v2 * 4;
-            *(unsigned char *)(*(int *)(temp_v4 + 0x6d8) + 0x28) = 0;
-            *(unsigned char *)(*(int *)(temp_v4 + 0x6d8) + 0x27) = 1;
-          }
-          temp_v2 = temp_v2 + 1;
-        } while (temp_v2 < 0x18);
-      }
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < *(int *)(temp_v0 + 0xb3c));
-  }
-  return;
+    for (s32 index = 0; index < 24; ++index) {
+        work->previewUnits[index].available = 1;
+        work->demons[index]->transitionPending = 0;
+    }
+    work->availability.activeSlots[0] = 0;
+    if (slots->active[0] < 0) {
+        work->availability.activeSlots[1] = 0;
+    }
+    if (slots->active[1] < 0) {
+        work->availability.activeSlots[2] = 0;
+    }
+    if (slots->active[2] < 0) {
+        work->availability.activeSlots[3] = 0;
+    }
+    for (s32 index = 0; index < 24; ++index) {
+        s32 unit = work->previewUnits[index].packedIndex;
+        if (unit < 0 ||
+            (reinterpret_cast<const PartyDamageUnitIV *>(gameGetUnitRecord(unit))->ailments & 0x404)) {
+            work->previewUnits[index].available = 0;
+        }
+    }
+    for (s32 exclusion = 0; exclusion < work->exclusions.count; ++exclusion) {
+        s32 id = work->exclusions.ids[exclusion];
+        if (id >= 0) {
+            const StatBlock *excluded = partyMemberFindById((u16)id);
+            if (excluded != NULL) {
+                for (s32 index = 0; index < 3; ++index) {
+                    s32 unit = slots->active[index];
+                    if (unit >= 0 && gameGetUnitRecord(unit)->id == excluded->id) {
+                        work->availability.activeSlots[index + 1] = 0;
+                        reinterpret_cast<WidgetTransitionView *>(work->characters[index + 1])->reset = 0;
+                        work->characters[index + 1]->transitionPending = 1;
+                    }
+                }
+                for (s32 index = 0; index < 24; ++index) {
+                    s32 unit = work->previewUnits[index].packedIndex;
+                    if (unit >= 0 && gameGetUnitRecord(unit)->id == excluded->id) {
+                        work->previewUnits[index].available = 0;
+                        reinterpret_cast<WidgetTransitionView *>(work->demons[index])->reset = 0;
+                        work->demons[index]->transitionPending = 1;
+                    }
+                }
+            }
+        }
+    }
 }
-
-} /* extern "C" */
+}

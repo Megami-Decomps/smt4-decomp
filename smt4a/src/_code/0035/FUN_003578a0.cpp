@@ -1,102 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003578a0` (_code @ 0x3578a0, 0x194 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: global count and box base are materialized separately; stack-push, height addition and vertex/palette load scheduling differ. */
+#include "camp/RenderCtx.h"
+#include <string.h>
 
-extern "C" {
-
-int FUN_0016c4b8(int, int);
-int FUN_00280a08(unsigned int, unsigned int);
-
-typedef int romwright_code(...);
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp58; /* 0x58: local_58 */
-} void_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-extern int DAT_00614d78; /* 0x614d78 */
-
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
-/* Supplied declaration required: FUN_00280a08. */
-
-
-void FUN_003578a0(void)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  int temp_v3;
-  unsigned int temp_v4 [4];
-  char acStack_48 [4];
-  char acStack_44 [4];
-  char acStack_40 [4];
-  unsigned int uStack_3c;
-  unsigned int temp_v5;
-  unsigned int uStack_34;
-  char acStack_30 [4];
-  unsigned int temp_v6;
-  
-  temp_v3 = g_renderCtx;
-  temp_v4[0] = 0xff000000;
-  temp_v4[1] = 0xff0000;
-  temp_v4[2] = 0xffff0000;
-  temp_v4[3] = 0xff00;
-  acStack_48[0] = '\0';
-  acStack_48[1] = -1;
-  acStack_48[2] = '\0';
-  acStack_48[3] = -1;
-  acStack_44[0] = '\0';
-  acStack_44[1] = -1;
-  acStack_44[2] = -1;
-  acStack_44[3] = '\0';
-  acStack_40[0] = '\0';
-  acStack_40[1] = '\0';
-  acStack_40[2] = '\0';
-  acStack_40[3] = -0x80;
-  uStack_3c = 0x800000;
-  temp_v6 = 0xff8000;
-  temp_v5 = 0xff800000;
-  uStack_34 = 0x8000;
-  acStack_30[0] = '\0';
-  acStack_30[1] = -0x80;
-  acStack_30[2] = '\0';
-  acStack_30[3] = -1;
-  if (DAT_00614d78 != 0) {
-    temp_v0 = FUN_001692ac(5,1);
-    piVar4 = (int *)(temp_v3 + 0x1258);
-    temp_v1 = *piVar4;
-    temp_v2 = piVar4[temp_v1 + 2];
-    *piVar4 = temp_v1 + 1;
-    piVar4[temp_v1 + 3] = temp_v0;
-    if (*(char *)(temp_v3 + 0x1270) != '\0' || temp_v2 != temp_v0) {
-      (**(romwright_code **)(temp_v3 + 0x1274))();
-      *(unsigned char *)(temp_v3 + 0x1270) = 0;
-    }
-    FUN_0016c4b8(g_renderCtx,0);
-    temp_v3 = 0;
-    if (temp_v3 < DAT_00614d78) {
-      do {
-        FUN_00280a08(temp_v4[temp_v3 % 0xc] | 0x70,temp_v4[temp_v3 % 0xc] | 0x70);
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < DAT_00614d78);
-    }
-    temp_v3 = g_renderCtx;
-    piVar4 = (int *)(g_renderCtx + 0x1258);
-    temp_v0 = *piVar4;
-    temp_v1 = piVar4[temp_v0 + 2];
-    *piVar4 = temp_v0 - 1;
-    if (*(char *)(temp_v3 + 0x1270) != '\0' || temp_v1 != piVar4[temp_v0 + 1]) {
-      (**(romwright_code **)(temp_v3 + 0x1274))();
-      *(unsigned char *)(temp_v3 + 0x1270) = 0;
-    }
-  }
-  return;
+namespace {
+struct DebugMapBox {
+    f32 minimumX, minimumY, minimumZ;
+    f32 maximumX, maximumY, maximumZ;
+    u32 flags;
+};
+struct DebugMapBoxes {
+    DebugMapBox boxes[256];
+    s32 count;
+};
+struct DebugMapBoxPalette {
+    u8 unk00[0x30];
+    u32 colors[12];
+};
+typedef char DebugMapBoxesLayoutCheck[sizeof(DebugMapBox) == 0x1C &&
+    offsetof(DebugMapBoxes, count) == 0x1C00 ? 1 : -1];
 }
 
-} /* extern "C" */
+extern "C" {
+extern DebugMapBoxes DAT_00613178;
+extern const DebugMapBoxPalette DAT_00532240;
+extern RenderCtxA *g_renderCtx;
+s32 FUN_001692ac(u32 kind, u32 enabled);
+void FUN_0016c4b8(RenderCtxA *context, u32 mode);
+void FUN_00280a08(u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor,
+    f32 firstX, f32 firstY, f32 firstZ, f32 secondX, f32 secondY, f32 secondZ,
+    f32 thirdX, f32 thirdY, f32 thirdZ, f32 fourthX, f32 fourthY, f32 fourthZ);
+
+// Draw the queued map bounds in cycling colors on a plane above the supplied height.
+void FUN_003578a0(f32 height)
+{
+    u32 colors[12];
+    memcpy(colors, DAT_00532240.colors, sizeof(colors));
+    if (DAT_00613178.count != 0) {
+        RenderCtxA *context = g_renderCtx;
+        s32 state = FUN_001692ac(5, 1);
+        renderStackPush(&context->stackA, state);
+        FUN_0016c4b8(g_renderCtx, 0);
+        f32 planeHeight = height + 100.0f;
+        for (s32 index = 0; index < DAT_00613178.count; ++index) {
+            const DebugMapBox *box = &DAT_00613178.boxes[index];
+            u32 color = colors[index % 12] | 0x70;
+            FUN_00280a08(color, color, color, color,
+                box->minimumX, planeHeight, box->minimumZ,
+                box->minimumX, planeHeight, box->maximumZ,
+                box->maximumX, planeHeight, box->minimumZ,
+                box->maximumX, planeHeight, box->maximumZ);
+        }
+        renderStackPop(&g_renderCtx->stackA);
+    }
+}
+}

@@ -1,77 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004aa0b0` (_code @ 0x4aa0b0, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: position entry pointer materialization and full-row failure branch layout differ. */
+#include "battle/btlUI.h"
 
 extern "C" {
+extern BtlUiGlobalsA g_btlUi;
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_3_stack;
-
-extern unsigned char g_btlUi; /* 0x57a9b8 */
-
-
-unsigned int FUN_004aa0b0(unsigned int param_1,unsigned char param_2,unsigned char param_3)
-
+/* Append to the row ending at this position, otherwise use the first empty row. */
+u32 FUN_004aa0b0(u32 request, u8 flags, u8 mode, f32 x, f32 y, f32 z)
 {
-/* irregular: 1 goto(s); irregular input(s): in_s0, in_s1, in_s2; 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  unsigned char temp_v6;
-  float in_s0;
-  float in_s1;
-  float in_s2;
-  
-  temp_v0 = 0xffffffff;
-  temp_v1 = 0;
-  do {
-    temp_v4 = (int)*(char *)((*(int *)((unsigned char *)&g_btlUi + 0x10)) + temp_v1 + 0x11884);
-    if (temp_v4 - 1U < 0x1f) {
-      temp_v4 = (*(int *)((unsigned char *)&g_btlUi + 0x10)) + temp_v1 * 0x280 + temp_v4 * 0x14;
-      temp_v5 = 0;
-      if (*(float *)(temp_v4 + 0xf060) == in_s0) {
-        temp_v5 = *(float *)(temp_v4 + 0xf064) == in_s1;
-      }
-      temp_v6 = 0;
-      if (temp_v5) {
-        temp_v6 = *(float *)(temp_v4 + 0xf068) == in_s2;
-      }
-      if (temp_v6) {
-        temp_v0 = temp_v1;
-        if (-1 < (int)temp_v1) goto LAB_004aa15c;
-        break;
-      }
+    BtlUiA *ui = g_btlUi.ui;
+    s32 row = -1;
+    for (s32 i = 0; i < 16; ++i) {
+        s32 count = ui->availabilityCounts.counts[i];
+        if (static_cast<u32>(count - 1) < 31) {
+            const BtlUiPositionRequest *previous = &ui->positionRequests.rows[i].entries[count - 1];
+            if (previous->x == x && previous->y == y && previous->z == z) {
+                row = i;
+                break;
+            }
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while ((int)temp_v1 < 0x10);
-  temp_v2 = 0;
-  do {
-    temp_v1 = temp_v2;
-    if (*(char *)((*(int *)((unsigned char *)&g_btlUi + 0x10)) + temp_v1 + 0x11884) < '\x01') break;
-    temp_v2 = temp_v1 + 1;
-    temp_v1 = temp_v0;
-  } while ((int)temp_v2 < 0x10);
-LAB_004aa15c:
-  if (temp_v1 < 0x11) {
-    temp_v4 = (*(int *)((unsigned char *)&g_btlUi + 0x10)) + temp_v1;
-    if (*(char *)(temp_v4 + 0x11884) < 0x20) {
-      temp_v3 = (*(int *)((unsigned char *)&g_btlUi + 0x10)) + temp_v1 * 0x280 + *(char *)(temp_v4 + 0x11884) * 0x14;
-      *(unsigned char *)(temp_v3 + 0xf080) = 1;
-      *(unsigned char *)(temp_v3 + 0xf081) = param_3;
-      *(float *)(temp_v3 + 0xf074) = in_s0;
-      *(float *)(temp_v3 + 0xf078) = in_s1;
-      *(float *)(temp_v3 + 0xf07c) = in_s2;
-      *(unsigned char *)(temp_v3 + 0xf082) = param_2;
-      *(char *)(temp_v4 + 0x11884) = *(char *)(temp_v4 + 0x11884) + '\x01';
-      return temp_v1;
+    if (row < 0) {
+        for (s32 i = 0; i < 16; ++i) {
+            if (ui->availabilityCounts.counts[i] <= 0) {
+                row = i;
+                break;
+            }
+        }
     }
-  }
-  return 0xffffffff;
+    if (static_cast<u32>(row) < 17 && ui->availabilityCounts.counts[row] < 32) {
+        BtlUiPositionRequest *entry = &ui->positionRequests.rows[row].entries[ui->availabilityCounts.counts[row]];
+        entry->active = 1;
+        entry->mode = mode;
+        entry->x = x;
+        entry->y = y;
+        entry->z = z;
+        entry->flags = flags;
+        ++ui->availabilityCounts.counts[row];
+        return row;
+    }
+    return -1;
 }
-
-} /* extern "C" */
+}

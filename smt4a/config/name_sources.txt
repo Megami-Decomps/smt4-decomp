@@ -5386,3 +5386,74 @@
 00168770 renderPopStateStacks inferred [high] Pops the three render-context state stacks.
 0031fd08 selectionGetValidatedField inferred [high] Validates the selection and dispatches the requested record field.
 0046af60 eventUpdatePickedObjectEndScript inferred [high] Runs the picked-object end script and advances or resets its end state.
+00380778 scrBattleQueueHpAdjustment inferred [high] Queues the script unit's HP adjustment and effect using its current HP and maximum HP.
+00186e2c cameraExportParameters inferred [high] Exports camera eye, orientation-mode controls and projection values, converting field of view to degrees.
+0035d8f0 devilDispatchTextureResource inferred [high] Resolves demon texture category and resource, then dispatches it or requests its linked owner.
+004c6cb0 btlSelectSourceTriggeredSkill inferred [high] Selects the first eligible source skill after action exclusions and optional boosted chance checks.
+00474734 windowCreateStatusOperation inferred [high] Allocates and constructs one of eight concrete WindowStatus operation subclasses selected by kind.
+004839b4 fieldBuildAreaPlacementList inferred [high] Filters table 41 records by map, area and story flags, then initializes object population.
+0047db34 mapRestoreSavedDestination inferred [high] Restores field/dungeon/world-map destination from saved transition data and optionally changes sequence.
+003705a0 naviScriptSetMarkerPattern inferred [med] Selects a navigation marker set and populates one of four fixed coordinate patterns from a script argument.
+004be36c uiDrawSelectedSpriteIndicator inferred [high] Draws the selected sprite indicator at its stored origin using a temporary blend state.
+0020aba0 partyPanelHandleCursorEdgeInput inferred [high] Handles page-changing directional input at cursor edges, accounting for a partial final row.
+004d5a70 btlDebugOpenCameraUpDownMenu inferred [high] Recreates Camera UpDown Menu with three mode toggles, two global controls and camera position coordinates.
+003c40b4 uiDrawItemListRow inferred [high] Draws a mode-sensitive item row, category icon and message/fallback label with its supplied effect parameter.
+003346a8 uiDrawRotatingGridHighlights inferred [high] Draw nine grid cells with two opposing animated highlights and trailing frames
+004bc5a4 textureEntryMeetsUnlockRequirements inferred [med] Test indexed sprite entry against unlock state, feature blacklists and required player level
+0039a41c campCecPreviewEquipmentChoice inferred [high] Copy player outfit, substitute the selected item's equipment slot and refresh the StreetPass preview model.
+0034858c scrSetEventTextureVisibility inferred [high] Toggle matching 2D event texture jobs and synchronize message mode when enabling.
+003311d4 scrRunNameEntry inferred [high] Start and await name entry, publish the selected name and restore script message mode.
+00290484 clearSaveCreate inferred [high] Allocate clear-save work, load scripts and common UI resources, and create update plus stereo draw tasks.
+001b5660 gameFindRosterEntry inferred [high] Find identifier in four active or nineteen stock persistent roster slots
+00333784 smokeFadeInitialize inferred [high] Allocate smoke fade state create draw jobs and load textures and transition table
+003457b8 campCreateCommonBackground inferred [high] Create common camp background sprites and calculation and draw jobs
+00336de4 btlTalkBustUpSetDemonTexture inferred [high] Selects demon category and texture then starts immediate or deferred loading.
+00151aa4 messageDrawPairedFrameSprites inferred [high] Draws left/right message frame layers at animated positions, including opposite screen-edge slide positions, then resets effect speed.
+003d1bc4 gauntletAppSortMenuEntries inferred [high] Sorts current menu entries by category, purchase order, alternate item key or app sort keys in configured direction.
+0033885c textMeasureLineWidth inferred [high] Selects a text line via control codes and sums signed glyph advances plus spacing.
+003c113c saveLoadCreateBootProcess inferred [high] Creates Boot save-load process and stereo draw tasks, resets settings and holds HOME button
+0023244c btlCreateUiDrawJobs inferred [high] Allocates battle UI and creates its calculation, upper-left/right, lower and number draw jobs
+003686f4 sceneLoadParameterPreset inferred [med] Writes one of eleven float parameter triplets used by the scene box-effect setup; unknown presets leave outputs unchanged
+0035e824 scrBattleRunStatusOperation inferred [high] Drives the requested status operation while suspending and restoring the battle UI widget
+0036b0cc mapSnapshotOffsetTransition inferred [high] Snapshot departure displaced behind player and arrival position
+0034f1bc fusionComparePairPriority inferred [high] Sort descending pair priority then ingredient race/level/id
+004b7128 mikadoLoadSceneResources inferred [high] Load scene textures/scripts and shared map-system interpreter
+00162ec0 uiApplyIndexedPanelSpriteSizes inferred [high] Apply indexed sprite dimensions to primary, secondary and overlay panel objects
+0036d318 unitInitializeFromTemplate inferred [high] Clears unit record and initializes stats, skills and demon name from table records
+003bcddc btlScriptDamageFirstCombatantNonlethally inferred [high] Clamps scripted damage to leave the first combatant at one HP and dispatches the action
+00380628 btlScriptDamageFirstCombatantAndQueueAction inferred [high] Queues first-combatant nonlethal damage followed by the accompanying keyed scalar action
+0019d390 dataTableCountRecordStages inferred [med] Count table-four stage entries or return the extra-record availability flag for DLC ids
+00471bc8 aocFindKindRecordById inferred [high] Find id in section one of loaded add-on files whose descriptor kind is 0x29
+003f6cc0 uiDrawStereoKindIcon inferred [high] Map kind to icon image and draw at anchor plus stereo offset with temporary effect speed
+00289d8c eventUpdateTextureFadeJob inferred [high] Drive event texture loading, looping animation and clamped opacity fade
+002392b8 infoWinExpandAndSetText inferred [high] Expands popup text and updates measured scrolling bounds and display timer.
+004c52ec btlGetPropertyMaximum inferred [high] Returns the upper bound accepted by each combatant property.
+00407978 soundResetSpatialState inferred [med] Clears playback state and seeds eight position records from the sound listener
+00407450 spatialAdvanceTransformTransition inferred [high] Advances position/rotation and optional controller destination over ten frames, snaps to targets and rebuilds transform
+003aedc8 gfxAdvanceTextureRequestQueue inferred [high] Cancels/releases inactive requests, polls texture loads and starts at most one requested node when no load remains pending
+0036f298 eventInsertSortedTextureJob inferred [high] Removes invalid jobs, inserts and compacts a sixteen-job list, then bubble-sorts it by job status
+0039eaa8 statusSynchronizePortraits inferred [high] Releases and retains four status portrait resources when display mode changes
+00191848 itemCategoryHasUsableEntry inferred [high] Scans unlocked item records for a usable entry in the chosen kind category
+0046e6b8 aocFindPackageRecord inferred [high] Searches loaded package kind-0x1B tables for a matching record ID
+00320d78 gfxSelectStatusIconPair inferred [med] Maps status icon kind and display style to foreground and background sprite IDs
+0046e800 aocFindPackagePayload inferred [high] Finds an enabled package record of kind 0x21 by signed ID and returns its payload
+00402e34 hunterDatabaseLoadResources inferred [high] Loads hunter database message files and textures, tracks shared table ownership and allocates six sprite handles.
+00268334 effCopyTransformColorKeys inferred [high] Twin copies four transform/color keys, metadata and low mode bits.
+00201ce0 soundAllocateSpatialActor inferred [high] Chooses free spatial sound actors, sets by-value position and falls back by player priority.
+004704a4 groupedFileFindKindRecord inferred [high] Searches loaded kind-41 grouped file tables for a record with the requested id.
+00473e98 systemKeyboardReadUtf8 inferred [high] Twin software keyboard request and accepted-text conversion.
+0046e334 aocFinishHandleOperation inferred [med] Twin resource handle completion path
+00287648 transformPrepareBlockHistory inferred [high] Prepares six history block addresses and dispatches the selected transform callback
+004abc68 btlDrawLayeredHud inferred [high] Draws HUD layers while changing cached blend state
+004f479c btlCreateCameraEditor inferred [high] Creates a camera axis or duration editing list
+002a6c3c devilDrawResolvedTexture inferred [high] Resolves demon texture metadata and dispatches base or add-on drawing
+0022fb78 statusDownDrawIndicatorPairs inferred [high] Draws two status indicators using active or inactive image pairs
+003fcfe8 gfxResourceTableReleaseTexturesAndBuffers inferred [high] Releases cached or independent table textures, clears add-on flags and frees all owner allocations
+00320940 campPreviewSelectedEquipment inferred [high] Copies player statistics, substitutes the selected equipment category item, recomputes and displays the preview
+002cb438 screenSetContextHint inferred [high] Maps context kind to localized hint and formats a highlighted numeric amount
+004a37a0 demonRefreshSavedSnapshot inferred [high] Refreshes an existing saved demon with current level, attributes, skills and inheritance
+00408610 addonAdvanceBootTransition inferred [med] Waits for AOC boot, performs optional startup work and requests the next sequence
+004d37d4 btlDebugCreatePanelMenu inferred [high] Creates the battle debug panel listbox and binds seven debug controls
+002a6fb8 statusCameraSelectPreset inferred [high] Twin status-model camera preset selector
+0026c3c4 statusCommitSelectedSkills inferred [high] Copies the selected skill list and refreshes its comparison against the active unit
+002859d8 uniteCameraInitialize inferred [high] Initializes fusion camera look direction, projection, stereo settings and active-camera registration

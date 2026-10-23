@@ -1,67 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001bcfb4` (_code @ 0x1bcfb4, 0x108 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: path and path-buffer registers are swapped; parameter-save instruction scheduling differs. */
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char DAT_0053d4c0[];
+extern u8 g_asdLoadFileUseRawPaths;
+void sysMemClear(void *buffer, u32 size);
+s32 asdLoadFileHasDevice(const char *path);
+s32 textFormatBuffer(char *destination, const char *format, ...);
+void *asdMemoryAllocTracked(s32 heap, s32 alignment, s32 flags, u32 size, s32 fromFront);
+u32 asdFileEnqueueRead(const char *path, u8 flags, void (*callback)(void *), void *argument);
+void asdFileFinalizeCompletion(void *job);
+void asdFileRequestSetHeapKind(u32 handle, u8 flags);
+void FUN_001bceb8(u32 handle, u32 priority);
 
-int textFormatBuffer(...);
-int asdMemoryAllocTracked(...);
-void* asdFileEnqueueRead(const char*, unsigned char, void (*)(void*), void*);
-int asdFileRequestSetHeapKind(...);
-int FUN_001bceb8(...);
-int sysMemClear(...);
-
-/* stack frame of param_6: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp130; /* 0x130: local_130 */
-} param_6_stack;
-
-extern int asdFileFinalizeCompletion(...); /* 0x1bcd8c */
-extern signed char g_asdLoadFileUseRawPaths; /* 0x5b3fe0 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-extern int asdLoadFileHasDevice(unsigned int);
-/* Supplied declaration required: asdFileEnqueueRead. */
-/* Supplied declaration required: asdFileRequestSetHeapKind. */
-/* Supplied declaration required: FUN_001bceb8. */
-/* Supplied declaration required: sysMemClear. */
-
-
-void FUN_001bcfb4(unsigned int param_1,unsigned int *param_2,int param_3,int param_4,int param_5,
-                 int param_6)
-
+// Start an asynchronous load and clear its optional completion result.
+void FUN_001bcfb4(const char *path, u32 *result, u32 flags, u32 arg, u32 arg2, u32 priority)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  unsigned char *puVar3;
-  unsigned char temp_v1 [268];
-  
-  sysMemClear(temp_v1,0x100);
-  if ((g_asdLoadFileUseRawPaths != '\0') || (temp_v0 = asdLoadFileHasDevice(param_1), temp_v0 != 0)) {
-    textFormatBuffer(temp_v1,param_1);
-  }
-  else {
-    textFormatBuffer(temp_v1,"rom:/%s",param_1);
-  }
-  piVar2 = (int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x18,0);
-  piVar2[5] = (int)param_2;
-  piVar2[1] = param_4;
-  piVar2[2] = param_5;
-  piVar2[3] = param_3;
-  piVar2[4] = param_6;
-  puVar3 = temp_v1;
-  if (param_2 != (unsigned int *)0x0) {
-    *param_2 = 0;
-  }
-  puVar3 = (unsigned char*)asdFileEnqueueRead((const char*)puVar3,0,
-      reinterpret_cast<void (*)(void*)>(asdFileFinalizeCompletion),piVar2);
-  *piVar2 = (int)puVar3;
-  asdFileRequestSetHeapKind();
-  FUN_001bceb8(*piVar2,param_6);
-  return;
+    char fullPath[ASD_FILE_PATH_LEN];
+    sysMemClear(fullPath, sizeof(fullPath));
+    char *destination = fullPath;
+    if (g_asdLoadFileUseRawPaths != 0 || asdLoadFileHasDevice(path) != 0) {
+        textFormatBuffer(destination, path);
+    } else {
+        textFormatBuffer(destination, DAT_0053d4c0, path);
+    }
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Sys\\File\\AsdLoadFile.cpp", 372);
+    AsdLoadJob *job = static_cast<AsdLoadJob *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(AsdLoadJob), 0));
+    job->result = result;
+    job->arg = arg;
+    job->arg2 = arg2;
+    job->flags = flags;
+    job->priority = priority;
+    if (result != NULL) {
+        *result = 0;
+    }
+    job->handle = asdFileEnqueueRead(fullPath, 0, asdFileFinalizeCompletion, job);
+    u8 heapKind = 0;
+    if ((flags & ASD_LOAD_FLAG_0) != 0) {
+        heapKind = 1;
+    }
+    if ((flags & ASD_LOAD_FLAG_1) != 0) {
+        heapKind |= 0x10;
+    }
+    asdFileRequestSetHeapKind(job->handle, heapKind);
+    FUN_001bceb8(job->handle, priority);
 }
-
-} /* extern "C" */
+}

@@ -1,68 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a66b8` (_code @ 0x2a66b8, 0x120 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: key-search loop lowering and final interpolation register allocation differ. */
+#include "AsdSDK/Source/Gfx/Effect/EffectResourceKeys.h"
 
-extern "C" {
+extern "C" f32 FUN_002039d0(s32, s32, s32);
 
-int FUN_002039d0(int, int, int);
-int VectorSignedToFloat(int, int);
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002039d0. */
-
-
-void FUN_002a66b8(int param_1,int param_2)
-
+// Find the next positive-duration key and interpolate its resource-adjusted value.
+extern "C" void FUN_002a66b8(EffectResourceKeyTrack *track,
+                            const EffectResourceKeyTrack *source)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v4;
-  unsigned int temp_v5;
-  float temp_v6;
-  
-  temp_v2 = 1;
-  if ('\x02' < *(char *)(param_1 + 0x2e6)) {
-    *(unsigned char *)(param_1 + 0x2e6) = 4;
-  }
-  temp_v0 = (int)*(char *)(param_1 + 0x2e6);
-  if (temp_v0 + 1 < 4) {
-    while (temp_v1 = *(int *)(param_2 + (temp_v0 + temp_v2) * 0x44 + 0x1c) -
-                   *(int *)(param_2 + temp_v0 * 0x44 + 0x1c), *(int *)(param_1 + 0x328) = temp_v1,
-          temp_v1 < 1) {
-      temp_v2 = temp_v2 + 1;
-      if (temp_v0 + temp_v2 >= 4) {
-        return;
-      }
+    s32 distance = 1;
+    if (track->index >= 3)
+        track->index = 4;
+    s32 current = track->index;
+    if (current + 1 < 4) {
+        while ((track->duration = source->keys[current + distance].frame -
+                                 source->keys[current].frame) <= 0) {
+            ++distance;
+            if (current + distance >= 4)
+                return;
+        }
+        if (track->keys[current + distance].value != 0 &&
+            track->keys[current + distance].resource > 0) {
+            f32 adjustment = FUN_002039d0(2, track->keys[current + distance].resource, 1);
+            track->keys[track->index + distance].value -= (s32)adjustment;
+        }
+        s32 nextIndex = track->index + distance;
+        const EffectResourceKey *previous = &track->keys[track->index];
+        const EffectResourceKey *next = &track->keys[nextIndex];
+        f32 duration = (f32)(next->frame - previous->frame);
+        f32 difference = (f32)(next->value - previous->value);
+        track->step = difference / duration;
+        track->target = (f32)next->value;
+        track->index = nextIndex;
     }
-    temp_v1 = param_1 + (temp_v0 + temp_v2) * 0x44;
-    temp_v3 = *(short *)(temp_v1 + 0x3c) != 0;
-    temp_v0 = 0;
-    if (temp_v3) {
-      temp_v0 = *(int *)(temp_v1 + 0x50);
-    }
-    if (temp_v3 && 0 < temp_v0) {
-      FUN_002039d0(2,temp_v0,1);
-      temp_v0 = param_1 + (*(char *)(param_1 + 0x2e6) + temp_v2) * 0x44;
-      *(short *)(temp_v0 + 0x3c) = *(short *)(temp_v0 + 0x3c) - (short)(int)in_s0;
-    }
-    temp_v2 = *(char *)(param_1 + 0x2e6) + temp_v2;
-    temp_v1 = param_1 + *(char *)(param_1 + 0x2e6) * 0x44;
-    temp_v0 = param_1 + temp_v2 * 0x44;
-    temp_v6 = (float)VectorSignedToFloat(*(int *)(temp_v0 + 0x1c) - *(int *)(temp_v1 + 0x1c),
-                                       (unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v4 = (float)VectorSignedToFloat((int)*(short *)(temp_v0 + 0x3c) - (int)*(short *)(temp_v1 + 0x3c)
-                                       ,(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(float *)(param_1 + 0x22c) = temp_v4 / temp_v6;
-    temp_v5 = VectorSignedToFloat((int)*(short *)(temp_v0 + 0x3c),(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(unsigned int *)(param_1 + 600) = temp_v5;
-    *(char *)(param_1 + 0x2e6) = (char)temp_v2;
-  }
-  return;
 }
-
-} /* extern "C" */

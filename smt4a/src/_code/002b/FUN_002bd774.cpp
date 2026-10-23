@@ -1,72 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bd774` (_code @ 0x2bd774, 0x138 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: completed/waiting return values are immediate rather than saved-register values; comparison branch placement differs. */
+#include "event/CyclicChoice.h"
 
 extern "C" {
+extern CyclicChoiceGlobals DAT_00589148;
+s32 scrGetArg(u32 index);
+void scrSetResult(s32 result);
+s32 scrGetCommandFrame(void);
+s32 slotIsReady(u32 slot);
+s32 padButtonIsPressed(u32 button);
+void eventQueueAddUnique(u32 event);
 
-int eventQueueAddUnique(int);
-int scrGetArg(int);
-int scrSetResult(...);
-
-extern unsigned char DAT_00589148; /* 0x589148 */
-
-extern int padButtonIsPressed(unsigned int);
-/* Supplied declaration required: eventQueueAddUnique. */
-extern int slotIsReady(unsigned int);
-/* Supplied declaration required: scrGetArg. */
-extern int scrGetCommandFrame(void);
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_002bd774(void)
-
+// Wait for choice input or compare two choices in a three-way cyclic game.
+u32 FUN_002bd774(void)
 {
-/* irregular: 3 native warning(s); review required */
-  short temp_v0;
-  unsigned short temp_v1;
-  unsigned short temp_v2;
-  unsigned short temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v5 = (*(int *)((unsigned char *)&DAT_00589148 + 0x8));
-  if (temp_v0 != 0) {
-    if (temp_v0 == 1) {
-      temp_v1 = scrGetArg(1);
-      temp_v2 = scrGetArg(2);
-      temp_v6 = temp_v1 != temp_v2;
-      if (temp_v1 < temp_v2) {
-        temp_v1 = temp_v1 + 3;
-      }
-      if (temp_v6) {
-        if ((unsigned short)(temp_v1 - temp_v2) != 1) {
-          scrSetResult(1);
-          *(unsigned short *)(temp_v5 + 0x12) = 1;
-          return 1;
+    u16 mode = scrGetArg(0);
+    if (mode != 0) {
+        if (mode == 1) {
+            CyclicChoiceState *state = DAT_00589148.state;
+            u16 choice = scrGetArg(1);
+            u16 other = scrGetArg(2);
+            if (choice != other) {
+                if (choice < other)
+                    choice += 3;
+                if ((u16)(choice - other) != 1) {
+                    scrSetResult(1);
+                    state->result = 1;
+                    return 1;
+                }
+                scrSetResult(-1);
+                state->result = -1;
+                return 1;
+            }
+            scrSetResult(0);
         }
-        scrSetResult(0xffffffff);
-        *(unsigned short *)(temp_v5 + 0x12) = 0xffff;
-        return 1;
-      }
-      scrSetResult(0);
+    } else {
+        CyclicChoiceState *state = DAT_00589148.state;
+        if (state) {
+            if (scrGetCommandFrame() == 0)
+                state->choice = scrGetArg(1);
+            if (slotIsReady(1) || slotIsReady(0))
+                return 0;
+            if (!padButtonIsPressed(1) && !padButtonIsPressed(0))
+                return 0;
+            eventQueueAddUnique(0x1000210);
+        }
     }
-  }
-  else if ((*(int *)((unsigned char *)&DAT_00589148 + 0x8)) != 0) {
-    temp_v4 = scrGetCommandFrame();
-    if (temp_v4 == 0) {
-      temp_v3 = scrGetArg(1);
-      *(unsigned short *)(temp_v5 + 0x10) = temp_v3;
-    }
-    temp_v5 = slotIsReady(1);
-    if (((temp_v5 != 0) || (temp_v5 = slotIsReady(0), temp_v5 != 0)) ||
-       ((temp_v5 = padButtonIsPressed(1), temp_v5 == 0 && (temp_v5 = padButtonIsPressed(0), temp_v5 == 0)))) {
-      return 0;
-    }
-    eventQueueAddUnique(0x1000210);
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

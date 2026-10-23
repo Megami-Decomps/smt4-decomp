@@ -1,81 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004285d4` (_code @ 0x4285d4, 0x148 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: parser context/end pointers occupy different frame slots and error constant loads at exit. */
+#include "ui/FormattedNumericEntry.h"
 
 extern "C" {
+s32 FUN_001029f4(const char *text, char **end, s32 base);
+s32 FUN_00102bbc(char *destination, const u16 *source, u32 size);
+char *libc_strtok(char *text, const char *delimiters, char **context);
+void FUN_0043bd0c(u16 *destination, u32 size, u32 format, s32 integral, s32 fraction);
+s32 stringFormatBounded(char *destination, u32 size, const char *format, ...);
+char *strncpy(char *destination, const char *source, u32 size);
+u32 wstrlen(const char *text);
+extern const char DAT_00536ccc[];
+extern const char DAT_00536cd0[];
+extern const NumericFractionDefaults DAT_00536cd4;
+extern const char DAT_00536cdc[];
 
-int FUN_001029f4(...);
-int FUN_00102bbc(...);
-int libc_strtok(...);
-int FUN_0043bd0c(...);
-int stringFormatBounded(...);
-int strncpy(...);
-
-/* stack frame of param_3: 3 slot(s), 9 byte(s) */
-typedef struct {
-    unsigned char sp21; /* 0x21: local_21 */
-    unsigned int spC4; /* 0xc4: local_c4 */
-    unsigned int spC8; /* 0xc8: local_c8 */
-} param_3_stack;
-
-extern unsigned char DAT_00536ccc; /* 0x536ccc */
-extern unsigned char DAT_00536cd4; /* 0x536cd4 */
-
-/* Supplied declaration required: FUN_001029f4. */
-/* Supplied declaration required: FUN_00102bbc. */
-/* Supplied declaration required: libc_strtok. */
-extern int wstrlen(int);
-/* Supplied declaration required: FUN_0043bd0c. */
-/* Supplied declaration required: stringFormatBounded. */
-
-
-unsigned int FUN_004285d4(int param_1,unsigned int param_2,int param_3)
-
+/* Parse two nonnegative numeric components and format the entry's display value. */
+u32 FUN_004285d4(FormattedNumericEntry *entry, const char *text, const NumericEntryFormat *format)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char *puVar4;
-  unsigned char *temp_v3;
-  char *temp_v4;
-  unsigned char temp_v5 [128];
-  unsigned char temp_v6 [31];
-  unsigned char temp_v7;
-  unsigned char temp_v8 [8];
-  
-  strncpy(temp_v6,param_2,0x20);
-  temp_v7 = 0;
-  temp_v0 = libc_strtok(temp_v6,&DAT_00536ccc,&temp_v3);
-  temp_v1 = libc_strtok(0,&DAT_00536ccc,&temp_v3);
-  FUN_001029f4(temp_v0,&temp_v4,10);
-  if (*temp_v4 == '\0') {
-    if (temp_v1 != 0) {
-      temp_v2 = wstrlen(temp_v1);
-      if (temp_v2 == 1) {
-        temp_v3 = (unsigned char *)0x536cd0;
-      }
-      else {
-        temp_v3 = &DAT_00536cd4;
-      }
+    char buffer[32];
+    strncpy(buffer, text, sizeof(buffer));
+    buffer[31] = 0;
+    char *context;
+    char *integralText = libc_strtok(buffer, DAT_00536ccc, &context);
+    char *fractionText = libc_strtok(NULL, DAT_00536ccc, &context);
+    char *end;
+    s32 integral = FUN_001029f4(integralText, &end, 10);
+    if (*end == 0) {
+        const char *padding;
+        if (fractionText != NULL) {
+            padding = wstrlen(fractionText) == 1 ? DAT_00536cd0 : DAT_00536cd4.padding;
+        } else {
+            fractionText = const_cast<char *>(DAT_00536cd4.empty);
+            padding = DAT_00536cd4.padding;
+        }
+        char fractionBuffer[8];
+        stringFormatBounded(fractionBuffer, 3, DAT_00536cdc, fractionText, padding);
+        s32 fraction = FUN_001029f4(fractionBuffer, &end, 10);
+        if (*end == 0 && integral >= 0 && fraction >= 0) {
+            u16 value[64];
+            FUN_0043bd0c(value, 64, format->format, integral, fraction);
+            FUN_00102bbc(entry->value, value, 64);
+            strncpy(entry->prefix, format->prefix, 32);
+            strncpy(entry->suffix, format->suffix, 32);
+            return 0;
+        }
     }
-    else {
-      temp_v1 = 0x536cd8;
-      temp_v3 = &DAT_00536cd4;
-    }
-    stringFormatBounded(temp_v8,3,"%s%s",temp_v1);
-    puVar4 = temp_v8;
-    FUN_001029f4(puVar4,&temp_v4,10);
-    if ((*temp_v4 == '\0') && (-1 < temp_v0 && -1 < (int)puVar4)) {
-      temp_v3 = puVar4;
-      FUN_0043bd0c(temp_v5,0x40,*(unsigned char *)(param_3 + 0x40),temp_v0);
-      FUN_00102bbc(param_1 + 0x20,temp_v5,0x40);
-      strncpy(param_1,param_3,0x20);
-      strncpy(param_1 + 0x60,param_3 + 0x20,0x20);
-      return 0;
-    }
-  }
-  return 0xe0e1389d;
+    return 0xe0e1389d;
 }
-
-} /* extern "C" */
+}

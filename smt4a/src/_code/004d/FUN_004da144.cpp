@@ -1,111 +1,81 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004da144` (_code @ 0x4da144, 0x184 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: category-count/selection values use different registers, and stat-copy registers differ despite matching store order. */
+#include "gamedata/UnitStatInitialization.h"
+#include "shard/Shard0032.h"
 
 extern "C" {
+InitializedUnitStatsA *gameGetOptions(void);
+UnitRecord *gameGetPlayerData(void);
+u32 randRange(u16 maximum);
+s32 FUN_0036fd64(u32 categoryId, u16 playerId);
+void sysMemClear(void *data, u32 size);
+const CategoryUnitStatsA *dataTableGetCategoryEntry(u32 categoryId, s32 variant);
 
-int gameGetOptions(void);
-int sysMemClear(unsigned short *, int);
-
-extern int randRange(short);
-extern int dataTableGetCategoryEntry(unsigned int, unsigned int);
-extern int gameGetPlayerData(void);
-/* Supplied declaration required: gameGetOptions. */
-/* Supplied declaration required: sysMemClear. */
-extern unsigned int FUN_0036fd64(unsigned int, unsigned short);
-
-
+// Pick a nonzero party category at random, reset the selected unit and initialize its statistics.
 void FUN_004da144(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  unsigned short temp_v2;
-  unsigned short temp_v3;
-  unsigned short temp_v4;
-  unsigned short temp_v5;
-  unsigned short temp_v6;
-  short temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  unsigned short *puVar12;
-  unsigned short temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  
-  temp_v8 = gameGetOptions();
-  temp_v11 = (unsigned short)(*(short *)(temp_v8 + 0x132) != 0);
-  if (*(short *)(temp_v8 + 0x134) != 0) {
-    temp_v11 = temp_v11 + 1;
-  }
-  if (*(short *)(temp_v8 + 0x136) != 0) {
-    temp_v11 = temp_v11 + 1;
-  }
-  temp_v9 = randRange(temp_v11 - 1);
-  temp_v10 = 0;
-  do {
-    if (*(short *)(temp_v8 + temp_v10 * 2 + 0x132) != 0) {
-      if (temp_v9 == 0) {
-        temp_v7 = *(short *)(temp_v8 + temp_v10 * 2 + 0x132);
-        temp_v12 = (unsigned int)temp_v7;
-        puVar12 = (unsigned short *)gameGetOptions();
-        temp_v13 = 0xffffffff;
-        temp_v8 = 0;
-        break;
-      }
-      temp_v9 = temp_v9 - 1;
+    InitializedUnitStatsA *options = gameGetOptions();
+    u32 count = 0;
+    if (options->partyCategories[0] != 0)
+        ++count;
+    if (options->partyCategories[1] != 0)
+        ++count;
+    if (options->partyCategories[2] != 0)
+        ++count;
+    s32 selected = randRange(static_cast<u16>(count - 1));
+    s32 index = 0;
+    for (;;) {
+        if (options->partyCategories[index] != 0) {
+            if (selected == 0)
+                break;
+            --selected;
+        }
+        if (++index >= 3)
+            return;
     }
-    temp_v10 = temp_v10 + 1;
-    if (temp_v10 >= 3) {
-      return;
+    s16 category = options->partyCategories[index];
+    InitializedUnitStatsA *unit = gameGetOptions();
+    s32 variant = -1;
+    for (s32 partyIndex = 0; partyIndex < 3; ++partyIndex) {
+        if (unit->partyCategories[partyIndex] == static_cast<u32>(category)) {
+            variant = FUN_0036fd64(category, gameGetPlayerData()->id);
+            break;
+        }
     }
-  } while( 1 );
-  while (temp_v8 = temp_v8 + 1, temp_v8 < 3) {
-    if ((unsigned short)puVar12[temp_v8 + 0x99] == temp_v12) {
-      temp_v8 = gameGetPlayerData();
-      temp_v13 = FUN_0036fd64(temp_v12,*(unsigned short *)(temp_v8 + 0x62));
-      break;
-    }
-  }
-  sysMemClear(puVar12,300);
-  temp_v8 = dataTableGetCategoryEntry(temp_v12,temp_v13);
-  puVar12[0x96] = temp_v7;
-  puVar12[0x97] = (short)temp_v13;
-  puVar12[0x31] = 0x4b1;
-  puVar12[0x32] = *(unsigned short *)(temp_v8 + 8);
-  temp_v0 = *(unsigned short *)(temp_v8 + 0x18);
-  *puVar12 = temp_v0;
-  temp_v1 = *(unsigned short *)(temp_v8 + 0x1a);
-  puVar12[1] = temp_v1;
-  temp_v2 = *(unsigned short *)(temp_v8 + 0x1c);
-  puVar12[2] = temp_v2;
-  temp_v3 = *(unsigned short *)(temp_v8 + 0x20);
-  puVar12[4] = temp_v3;
-  temp_v4 = *(unsigned short *)(temp_v8 + 0x22);
-  puVar12[5] = temp_v4;
-  temp_v5 = *(unsigned short *)(temp_v8 + 0x24);
-  puVar12[6] = temp_v5;
-  temp_v6 = *(unsigned short *)(temp_v8 + 0x1e);
-  puVar12[3] = temp_v6;
-  puVar12[0xe] = temp_v0;
-  puVar12[7] = temp_v0;
-  puVar12[0xf] = temp_v1;
-  puVar12[8] = temp_v1;
-  puVar12[0x10] = temp_v2;
-  puVar12[9] = temp_v2;
-  puVar12[0x12] = temp_v3;
-  puVar12[0xb] = temp_v3;
-  puVar12[0x13] = temp_v4;
-  puVar12[0xc] = temp_v4;
-  puVar12[0x14] = temp_v5;
-  puVar12[0xd] = temp_v5;
-  puVar12[0x11] = temp_v6;
-  puVar12[10] = temp_v6;
-  puVar12[0x15] = temp_v0;
-  puVar12[0x16] = temp_v1;
-  return;
+    sysMemClear(unit, 300);
+    const CategoryUnitStatsA *entry = dataTableGetCategoryEntry(category, variant);
+    unit->categoryId = category;
+    unit->variant = variant;
+    unit->id = 1201;
+    unit->sortKey = entry->sortKey;
+    u16 health = entry->stats[0];
+    unit->base[0] = health;
+    u16 mana = entry->stats[1];
+    unit->base[1] = mana;
+    u16 stat2 = entry->stats[2];
+    unit->base[2] = stat2;
+    u16 stat4 = entry->stats[4];
+    unit->base[4] = stat4;
+    u16 stat5 = entry->stats[5];
+    unit->base[5] = stat5;
+    u16 stat6 = entry->stats[6];
+    unit->base[6] = stat6;
+    u16 stat3 = entry->stats[3];
+    unit->base[3] = stat3;
+    unit->maximum[0] = health;
+    unit->current[0] = health;
+    unit->maximum[1] = mana;
+    unit->current[1] = mana;
+    unit->maximum[2] = stat2;
+    unit->current[2] = stat2;
+    unit->maximum[4] = stat4;
+    unit->current[4] = stat4;
+    unit->maximum[5] = stat5;
+    unit->current[5] = stat5;
+    unit->maximum[6] = stat6;
+    unit->current[6] = stat6;
+    unit->maximum[3] = stat3;
+    unit->current[3] = stat3;
+    unit->health = health;
+    unit->mana = mana;
 }
-
-} /* extern "C" */
+}

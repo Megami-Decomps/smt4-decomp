@@ -66,7 +66,7 @@ int FUN_00273840(...);
 int mapIfSetMode1(void);
 int mapDepartSetTarget(...);
 int lmapSetSceneId(...);
-int FUN_002893ec(...);
+int mapConsumePendingJumpRequest(...);
 int FUN_002895a8(...);
 int FUN_00289608(...);
 int FUN_002897f0(...);
@@ -150,7 +150,7 @@ int FUN_002c29d8(...);
 int FUN_002e1230(...);
 int rt_memcpy_w(...);
 
-int FUN_001fb3a0(void);
+int questClassifyCompletionNotification(void);
 int FUN_0021bc04(unsigned int, unsigned int);
 int FUN_00277b5c(...);
 int navigationSetArguments(...);
@@ -350,7 +350,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_001d34a8. */
 /* Supplied declaration required: regionFindRecord. */
 /* Supplied declaration required: mapSelectNearbyDeferredModel. */
-/* Supplied declaration required: FUN_001fb3a0. */
+/* Supplied declaration required: questClassifyCompletionNotification. */
 /* Supplied declaration required: FUN_0021bc04. */
 /* Supplied declaration required: cameraRegistryRemove. */
 /* Supplied declaration required: FUN_00263cb8. */
@@ -467,7 +467,7 @@ extern int FUN_0027ee9c(void);
 extern int FUN_00287800(void);
 extern int FUN_00287894(void);
 /* Supplied declaration required: FUN_00287c34. */
-/* Supplied declaration required: FUN_002893ec. */
+/* Supplied declaration required: mapConsumePendingJumpRequest. */
 /* Supplied declaration required: gameJumpRequestClear. */
 /* Supplied declaration required: FUN_002895a8. */
 /* Supplied declaration required: FUN_00289608. */
@@ -643,7 +643,7 @@ unsigned int FUN_001d3e3c(void)
         }
         temp_v6 = FUN_0027db24(0);
         temp_v12 = 1;
-        FUN_001fb3a0();
+        questClassifyCompletionNotification();
         if (temp_v6 == 3) {
           *(unsigned char *)((int)puVar7 + 0x999) = 1;
         }
@@ -1665,7 +1665,7 @@ LAB_001d61bc:
       return 0;
     }
     temp_v6 = g_aocMain + 0xa8;
-    FUN_002893ec(temp_v6,0);
+    mapConsumePendingJumpRequest(temp_v6,0);
     goto joined_r0x001d8c24;
   case 0x12:
     lmapMainStep();
@@ -1695,7 +1695,7 @@ LAB_001d61bc:
     break;
   case 0x13:
     temp_v6 = g_aocMain + 0xa8;
-    FUN_002893ec(temp_v6,0);
+    mapConsumePendingJumpRequest(temp_v6,0);
     goto joined_r0x001d8c24;
   case 0x14:
     lmapMainStep();

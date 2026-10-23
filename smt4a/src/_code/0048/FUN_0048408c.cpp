@@ -1,91 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048408c` (_code @ 0x48408c, 0x1d4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-int stateSetterEnterState(int, int);
-int sendEvent100020D(void);
-int sendEvent100020E(void);
-
-extern int flaggedEntryGetValueB(int);
-/* Supplied declaration required: stateSetterEnterState. */
-/* Supplied declaration required: sendEvent100020D. */
-/* Supplied declaration required: sendEvent100020E. */
-
-
-unsigned int FUN_0048408c(int param_1)
-
+/* NON_MATCHING: duplicate character reads are merged; byte assembly and branch layout differ. */
+#include "ui/GridNavigation.h"
+struct NameConfirmationWork {
+    u8 unk000[8];
+    u8 changed;
+    u8 unk009[0x19];
+    s8 cursor;
+    u8 unk023[0x8D];
+    s8 text[18];
+    u8 unk0C2[0x13A];
+    GridNavigation actions;
+    u8 enabled;
+    u8 unk261[0x307];
+    u32 silent;
+};
+typedef char NameConfirmationOffsets[(offsetof(NameConfirmationWork, text) == 0xB0 && offsetof(NameConfirmationWork, actions) == 0x1FC && offsetof(NameConfirmationWork, enabled) == 0x260 && offsetof(NameConfirmationWork, silent) == 0x568) ? 1 : -1];
+static inline s16 nameCharacter(const NameConfirmationWork *work, s8 index)
 {
-/* irregular: 3 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if (*(char *)(param_1 + 0x260) == '\0') {
-    return 0;
-  }
-  temp_v1 = flaggedEntryGetValueB(param_1 + 0x1fc);
-  if (temp_v1 != 1) {
-    temp_v1 = flaggedEntryGetValueB(param_1 + 0x1fc);
-    if (temp_v1 != 2) {
-      temp_v1 = flaggedEntryGetValueB(param_1 + 0x1fc);
-      if (temp_v1 != 3) {
-        return 0;
-      }
-      temp_v1 = 0;
-      while( 1 ) {
-        temp_v0 = (char)temp_v1;
-        if (((-1 < temp_v0) &&
-            (temp_v2 = param_1 + temp_v0 * 2,
-            (unsigned short)((unsigned short)*(unsigned char *)(temp_v2 + 0xb0) * 0x100 + (unsigned short)*(unsigned char *)(temp_v2 + 0xb1)) !=
-            -0x7ec0)) &&
-           ((temp_v0 < 0 ||
-            (temp_v2 = param_1 + temp_v0 * 2,
-            (unsigned short)((unsigned short)*(unsigned char *)(temp_v2 + 0xb0) * 0x100 + (unsigned short)*(unsigned char *)(temp_v2 + 0xb1)) != 0
-            )))) break;
-        temp_v1 = temp_v1 + 1;
-        if (temp_v1 >= 8) {
-          return 1;
-        }
-      }
-      temp_v1 = 8;
-      do {
-        temp_v0 = (char)temp_v1;
-        if ((((temp_v0 < 0) ||
-             (temp_v2 = param_1 + temp_v0 * 2,
-             (unsigned short)((unsigned short)*(unsigned char *)(temp_v2 + 0xb0) * 0x100 + (unsigned short)*(unsigned char *)(temp_v2 + 0xb1)) !=
-             0)) && (-1 < temp_v0)) &&
-           (temp_v2 = param_1 + temp_v0 * 2,
-           (unsigned short)((unsigned short)*(unsigned char *)(temp_v2 + 0xb0) * 0x100 + (unsigned short)*(unsigned char *)(temp_v2 + 0xb1)) !=
-           -0x7ec0)) break;
-        temp_v1 = temp_v1 - 1;
-        temp_v2 = param_1 + temp_v0 * 2;
-        *(unsigned char *)(temp_v2 + 0xb0) = 0;
-        *(unsigned char *)(temp_v2 + 0xb1) = 0;
-      } while (0 < temp_v1);
-      *(unsigned char *)(param_1 + 8) = 1;
-      stateSetterEnterState(param_1,4);
-      sendEvent100020E();
-      return 1;
-    }
-    if ('\x06' < *(char *)(param_1 + 0x22)) {
-      return 1;
-    }
-    *(char *)(param_1 + 0x22) = *(char *)(param_1 + 0x22) + '\x01';
-    temp_v1 = *(int *)(param_1 + 0x568);
-  }
-  else {
-    if (*(char *)(param_1 + 0x22) < '\x01') {
-      return 1;
-    }
-    *(char *)(param_1 + 0x22) = *(char *)(param_1 + 0x22) - '\x01';
-    temp_v1 = *(int *)(param_1 + 0x568);
-  }
-  if (temp_v1 == 0) {
-    sendEvent100020D();
-  }
-  return 1;
+    const s8 *text = &work->text[index * 2];
+    return static_cast<s16>((static_cast<u16>(static_cast<u8>(text[0])) << 8) + static_cast<u8>(text[1]));
 }
+static inline bool nameIsSpace(const NameConfirmationWork *work, s8 index)
+{
+    bool space = true;
+    if (index >= 0)
+        space = nameCharacter(work, index) == static_cast<s16>(0x8140);
+    return space;
+}
+static inline bool nameIsEmpty(const NameConfirmationWork *work, s8 index)
+{
+    return index >= 0 && nameCharacter(work, index) == 0;
+}
+extern "C" {
+s32 flaggedEntryGetValueB(const GridNavigation *actions);
+void stateSetterEnterState(NameConfirmationWork *work, s32 state);
+void sendEvent100020D(void);
+void sendEvent100020E(void);
 
-} /* extern "C" */
+u32 FUN_0048408c(NameConfirmationWork *work)
+{
+    if (!work->enabled)
+        return 0;
+    if (flaggedEntryGetValueB(&work->actions) == 1) {
+        if (work->cursor < 1)
+            return 1;
+        --work->cursor;
+    } else if (flaggedEntryGetValueB(&work->actions) == 2) {
+        if (work->cursor >= 7)
+            return 1;
+        ++work->cursor;
+    } else if (flaggedEntryGetValueB(&work->actions) == 3) {
+        s32 index = 0;
+        while (index < 8 && (nameIsSpace(work, index) || nameIsEmpty(work, index)))
+            ++index;
+        if (index == 8)
+            return 1;
+        for (s32 tail = 8; tail > 0; --tail) {
+            if (!nameIsEmpty(work, tail) && !nameIsSpace(work, tail))
+                break;
+            s8 position = tail;
+            work->text[position * 2] = 0;
+            work->text[position * 2 + 1] = 0;
+        }
+        work->changed = 1;
+        stateSetterEnterState(work, 4);
+        sendEvent100020E();
+        return 1;
+    } else {
+        return 0;
+    }
+    if (!work->silent)
+        sendEvent100020D();
+    return 1;
+}
+}

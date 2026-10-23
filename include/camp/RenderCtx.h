@@ -26,7 +26,13 @@ typedef struct RenderCtx {
             /* 0x0508 */ f32 parameter;
             /* 0x050C */ f32 minimum;
             /* 0x0510 */ f32 maximum;
-            u8 unk0514[8];
+            union {
+                u8 unk0514[8];
+                struct {
+                    /* 0x0514 */ f32 depth;
+                    /* 0x0518 */ f32 scale;
+                } defaultView;
+            };
             /* 0x051C */ f32 (*transform)(f32 value, f32 parameter);
         } stereo;
     };
@@ -110,6 +116,9 @@ typedef char RenderCtxStereoOffsetCheck[
     offsetof(RenderCtx, stereo.maximum) == 0x510 &&
     offsetof(RenderCtx, stereo.transform) == 0x51C &&
     offsetof(RenderCtx, stereoMode) == 0x528 ? 1 : -1];
+typedef char RenderCtxDefaultViewOffsetsCheck[
+    offsetof(RenderCtx, stereo.defaultView.depth) == 0x514 &&
+    offsetof(RenderCtx, stereo.defaultView.scale) == 0x518 && sizeof(RenderCtx) == 0x12CC ? 1 : -1];
 typedef char RenderCtxAStereoOffsetCheck[
     offsetof(RenderCtxA, stereo.camera) == 0x4A0 &&
     offsetof(RenderCtxA, stereo.parameter) == 0x50C &&
@@ -163,6 +172,28 @@ static __inline void renderStackSet(RenderStateStack *st, int state)
 static __inline void renderCtxPushA(RenderCtx *context, int state)
 {
     renderStackPush(&context->stackA, state);
+}
+
+static __inline void renderCtxPushA(RenderCtxA *context, int state)
+{
+    renderStackPush(&context->stackA, state);
+}
+
+/* Pushes the evaluated state on the context's second stack. */
+static __inline void renderCtxPushB(RenderCtx *context, int state)
+{
+    renderStackPush(&context->stackB, state);
+}
+
+/* Replaces the second stack's current state after the argument has been evaluated. */
+static __inline void renderCtxSetB(RenderCtx *context, int state)
+{
+    renderStackSet(&context->stackB, state);
+}
+
+static __inline void renderCtxSetB(RenderCtxA *context, int state)
+{
+    renderStackSet(&context->stackB, state);
 }
 
 #endif

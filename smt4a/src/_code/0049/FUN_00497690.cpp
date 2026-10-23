@@ -1,97 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00497690` (_code @ 0x497690, 0x1e4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: natural category loops replace retail's unrolled checks and indexed-store scheduling. */
+#include "common.h"
+#include <stddef.h>
 
-extern "C" {
+struct EquipmentCategoryAvailability {
+    s32 count;
+    u8 unk04[0x70];
+};
+struct EquipmentCategoryMenuViewA {
+    u8 unk00000[0xB68];
+    EquipmentCategoryAvailability categories[8];
+    u8 unk00F08[0x15104];
+    s32 visibleCategories[4];
+    s32 visibleCount;
+};
+typedef char EquipmentCategoryMenuOffsetsA[
+    sizeof(EquipmentCategoryAvailability) == 0x74 && offsetof(EquipmentCategoryMenuViewA, visibleCategories) == 0x1600C &&
+    offsetof(EquipmentCategoryMenuViewA, visibleCount) == 0x1601C ? 1 : -1];
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-
-void FUN_00497690(int param_1,int param_2)
-
+extern "C" void FUN_00497690(EquipmentCategoryMenuViewA *menu, s32 level)
 {
-  int temp_v0;
-  
-  *(unsigned int *)(param_1 + 0x1601c) = 0;
-  if (param_2 != 0) {
-    if (param_2 != 1) {
-      if (param_2 == 2) {
-        if (0 < *(int *)(param_1 + 0xcc4)) {
-          *(unsigned int *)(param_1 + 0x1601c) = 1;
-          *(unsigned int *)(param_1 + 0x1600c) = 3;
-        }
-        if (0 < *(int *)(param_1 + 0xd38)) {
-          *(unsigned int *)(param_1 + *(int *)(param_1 + 0x1601c) * 4 + 0x1600c) = 4;
-          *(int *)(param_1 + 0x1601c) = *(int *)(param_1 + 0x1601c) + 1;
-        }
-        if (0 < *(int *)(param_1 + 0xdac)) {
-          *(unsigned int *)(param_1 + *(int *)(param_1 + 0x1601c) * 4 + 0x1600c) = 5;
-          *(int *)(param_1 + 0x1601c) = *(int *)(param_1 + 0x1601c) + 1;
-        }
-        if (0 < *(int *)(param_1 + 0xe20)) {
-          *(unsigned int *)(param_1 + *(int *)(param_1 + 0x1601c) * 4 + 0x1600c) = 6;
-          *(int *)(param_1 + 0x1601c) = *(int *)(param_1 + 0x1601c) + 1;
-        }
-      }
+    menu->visibleCount = 0;
+    if (level == 1) {
+        for (s32 category = 0; category < 3; ++category)
+            if (menu->categories[category].count > 0)
+                menu->visibleCategories[menu->visibleCount++] = category;
+    } else if (level == 2) {
+        for (s32 category = 3; category < 7; ++category)
+            if (menu->categories[category].count > 0)
+                menu->visibleCategories[menu->visibleCount++] = category;
+    } else if (level == 0) {
+        if (menu->categories[0].count > 0 || menu->categories[1].count > 0 || menu->categories[2].count > 0)
+            menu->visibleCategories[menu->visibleCount++] = 0;
+        if (menu->categories[3].count > 0 || menu->categories[4].count > 0 || menu->categories[5].count > 0 || menu->categories[6].count > 0)
+            menu->visibleCategories[menu->visibleCount++] = 1;
+        if (menu->categories[7].count > 0)
+            menu->visibleCategories[menu->visibleCount++] = 2;
+        menu->visibleCategories[menu->visibleCount++] = 3;
     }
-    else {
-      if (0 < *(int *)(param_1 + 0xb68)) {
-        *(unsigned int *)(param_1 + 0x1601c) = 1;
-        *(unsigned int *)(param_1 + 0x1600c) = 0;
-      }
-      if (0 < *(int *)(param_1 + 0xbdc)) {
-        *(unsigned int *)(param_1 + *(int *)(param_1 + 0x1601c) * 4 + 0x1600c) = 1;
-        *(int *)(param_1 + 0x1601c) = *(int *)(param_1 + 0x1601c) + 1;
-      }
-      if (0 < *(int *)(param_1 + 0xc50)) {
-        *(unsigned int *)(param_1 + *(int *)(param_1 + 0x1601c) * 4 + 0x1600c) = 2;
-        *(int *)(param_1 + 0x1601c) = *(int *)(param_1 + 0x1601c) + 1;
-        return;
-      }
-    }
-    return;
-  }
-  temp_v0 = *(int *)(param_1 + 0xb68);
-  if (temp_v0 < 1) {
-    temp_v0 = *(int *)(param_1 + 0xbdc);
-  }
-  if (temp_v0 < 1) {
-    temp_v0 = *(int *)(param_1 + 0xc50);
-  }
-  if (0 < temp_v0) {
-    *(unsigned int *)(param_1 + 0x1601c) = 1;
-    *(unsigned int *)(param_1 + 0x1600c) = 0;
-  }
-  temp_v0 = *(int *)(param_1 + 0xcc4);
-  if (temp_v0 < 1) {
-    temp_v0 = *(int *)(param_1 + 0xd38);
-  }
-  if (temp_v0 < 1) {
-    temp_v0 = *(int *)(param_1 + 0xdac);
-    if (temp_v0 < 1) {
-      temp_v0 = *(int *)(param_1 + 0xe20);
-    }
-    if (temp_v0 >= 1) {
-      *(unsigned int *)(param_1 + *(int *)(param_1 + 0x1601c) * 4 + 0x1600c) = 1;
-      *(int *)(param_1 + 0x1601c) = *(int *)(param_1 + 0x1601c) + 1;
-    }
-  }
-  else {
-    *(unsigned int *)(param_1 + *(int *)(param_1 + 0x1601c) * 4 + 0x1600c) = 1;
-    *(int *)(param_1 + 0x1601c) = *(int *)(param_1 + 0x1601c) + 1;
-  }
-  temp_v0 = *(int *)(param_1 + 0x1601c);
-  if (0 < *(int *)(param_1 + 0xe94)) {
-    *(unsigned int *)(param_1 + temp_v0 * 4 + 0x1600c) = 2;
-    temp_v0 = *(int *)(param_1 + 0x1601c) + 1;
-    *(int *)(param_1 + 0x1601c) = temp_v0;
-  }
-  *(unsigned int *)(param_1 + temp_v0 * 4 + 0x1600c) = 3;
-  *(int *)(param_1 + 0x1601c) = *(int *)(param_1 + 0x1601c) + 1;
-  return;
 }
-
-} /* extern "C" */

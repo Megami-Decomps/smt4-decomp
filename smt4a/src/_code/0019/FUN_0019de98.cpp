@@ -1,94 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019de98` (_code @ 0x19de98, 0x138 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: line-buffer clear bases and parser scratch registers differ; 78 versus retail 79 instructions. */
+#include "ui/ButtonHelp.h"
 
 extern "C" {
+extern ButtonHelpGlobalsA g_buttonHelp;
+void *rt_memcpy(void *destination, const void *source, u32 size);
 
-int SBORROW4(int, int);
-int rt_memcpy(int, int, int);
-
-extern unsigned char g_buttonHelp; /* 0x57f0c4 */
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_0019de98(int param_1,unsigned int param_2)
-
+// Set the button-help text color and split at most two newline-delimited display lines.
+void FUN_0019de98(const s8 *text, u32 color)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-  *(unsigned int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x5ec) = param_2;
-  *(unsigned int *)(temp_v1 + 0x670) = 0;
-  *(unsigned char *)(temp_v1 + 0x674) = 0xff;
-  if (param_1 == 0) {
-    *(unsigned char *)(temp_v1 + 0x5ea) = 0;
-  }
-  else {
-    *(unsigned int *)(temp_v1 + 0x5f0) = 0;
-    *(unsigned int *)(temp_v1 + 0x5f4) = 0;
-    *(unsigned int *)(temp_v1 + 0x5f8) = 0;
-    *(unsigned int *)(temp_v1 + 0x5fc) = 0;
-    *(unsigned int *)(temp_v1 + 0x600) = 0;
-    *(unsigned int *)(temp_v1 + 0x604) = 0;
-    *(unsigned int *)(temp_v1 + 0x608) = 0;
-    *(unsigned int *)(temp_v1 + 0x60c) = 0;
-    *(unsigned int *)(temp_v1 + 0x610) = 0;
-    *(unsigned int *)(temp_v1 + 0x614) = 0;
-    *(unsigned int *)(temp_v1 + 0x618) = 0;
-    *(unsigned int *)(temp_v1 + 0x61c) = 0;
-    *(unsigned int *)(temp_v1 + 0x620) = 0;
-    *(unsigned int *)(temp_v1 + 0x624) = 0;
-    *(unsigned int *)(temp_v1 + 0x628) = 0;
-    *(unsigned int *)(temp_v1 + 0x62c) = 0;
-    *(unsigned int *)(temp_v1 + 0x630) = 0;
-    *(unsigned int *)(temp_v1 + 0x634) = 0;
-    *(unsigned int *)(temp_v1 + 0x638) = 0;
-    *(unsigned int *)(temp_v1 + 0x63c) = 0;
-    *(unsigned int *)(temp_v1 + 0x640) = 0;
-    *(unsigned int *)(temp_v1 + 0x644) = 0;
-    *(unsigned int *)(temp_v1 + 0x648) = 0;
-    *(unsigned int *)(temp_v1 + 0x64c) = 0;
-    *(unsigned int *)(temp_v1 + 0x650) = 0;
-    *(unsigned int *)(temp_v1 + 0x654) = 0;
-    *(unsigned int *)(temp_v1 + 0x658) = 0;
-    *(unsigned int *)(temp_v1 + 0x65c) = 0;
-    *(unsigned int *)(temp_v1 + 0x660) = 0;
-    *(unsigned int *)(temp_v1 + 0x664) = 0;
-    temp_v4 = 0;
-    *(unsigned int *)(temp_v1 + 0x668) = 0;
-    temp_v2 = 0;
-    temp_v3 = 0;
-    *(unsigned int *)(temp_v1 + 0x66c) = 0;
+    // The shared byte-aligned padding starts one byte before this aligned color word.
+    struct TextColorView {
+        u8 unk000[0x5ec];
+        u32 color;
+    };
+    typedef char TextColorOffsetCheck[__INTADDR__(&((TextColorView *)0)->color) == 0x5ec ? 1 : -1];
+    ButtonHelpWorkA *work = g_buttonHelp.work;
+    reinterpret_cast<TextColorView *>(work)->color = color;
+    work->unk670 = 0;
+    work->unk674 = 0xff;
+    if (!text) {
+        work->mode = 0;
+        return;
+    }
+    for (s32 line = 0; line < 2; ++line) {
+        u32 *words = reinterpret_cast<u32 *>(work->entries[line].data);
+        for (s32 word = 0; word < 16; ++word)
+            words[word] = 0;
+    }
+    s32 line = 0;
+    s32 start = 0;
+    s32 offset = 0;
     do {
-      if (*(char *)(param_1 + temp_v3) == '\0') {
-        rt_memcpy(temp_v1 + temp_v4 * 0x40 + 0x5f0,param_1 + temp_v2,temp_v3 - temp_v2);
-        break;
-      }
-      if (*(char *)(param_1 + temp_v3) == '\n') {
-        rt_memcpy(temp_v1 + temp_v4 * 0x40 + 0x5f0,param_1 + temp_v2,temp_v3 - temp_v2);
-        temp_v2 = temp_v3 + 1;
-        temp_v4 = temp_v4 + 1;
-      }
-      temp_v5 = SBORROW4(temp_v4,1);
-      temp_v0 = temp_v4 - 1;
-      if (temp_v4 < 2) {
-        temp_v5 = SBORROW4(temp_v3 + 1,0x80);
-        temp_v0 = temp_v3 - 0x7f;
-        temp_v3 = temp_v3 + 1;
-      }
-    } while (temp_v0 < 0 != temp_v5);
-    *(unsigned char *)(temp_v1 + 0x67c) = 0;
-    *(unsigned char *)(temp_v1 + 0x5ea) = 1;
-  }
-  return;
+        if (text[offset] == '\0') {
+            rt_memcpy(work->entries[line].data, text + start, offset - start);
+            break;
+        }
+        if (text[offset] == '\n') {
+            rt_memcpy(work->entries[line].data, text + start, offset - start);
+            start = offset + 1;
+            ++line;
+        }
+    } while (line <= 1 && ++offset < 128);
+    work->helpState = 0;
+    work->mode = 1;
 }
-
-} /* extern "C" */
+}

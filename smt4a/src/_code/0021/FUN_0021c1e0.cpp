@@ -1,83 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021c1e0` (_code @ 0x21c1e0, 0x170 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: cached widget pointer replaces retail handle reloads across calls. */
+#include "ui/PartyPanelState.h"
+#include "shard/W5_W5Match5_GameSaveViews.h"
 
 extern "C" {
+extern PartyPanelStateA *g_partyPanel;
+void partyStatusIconTick(void *);
+s16 *FUN_002c7e24(void);
+s32 FUN_003f3f08(void *);
 
-int FUN_003f3f08(unsigned int);
-void partyStatusIconTick(void*);
-
-extern int g_partyPanel; /* 0x57f268 */
-
-extern int gameGetSlotRecord(unsigned int);
-extern short *FUN_002c7e24(void);
-/* Supplied declaration required: FUN_003f3f08. */
-
-
-unsigned int FUN_0021c1e0(void)
-
+// Tick both icon lists and return the last selected icon matching the current unit.
+s32 FUN_0021c1e0(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  short *psVar2;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = g_partyPanel;
-  temp_v2 = 0;
-  temp_v4 = 0xffffffff;
-  do {
-    temp_v3 = temp_v0 + temp_v2 * 4;
-    partyStatusIconTick(reinterpret_cast<void*>(*(unsigned int *)(temp_v3 + 0xa10)));
-    psVar2 = (short *)FUN_002c7e24();
-    if (*(int *)(*(int *)(temp_v3 + 0xa10) + 0x34) < 0) {
-      if (*psVar2 < 0) {
-        temp_v1 = FUN_003f3f08(*(unsigned int *)(temp_v3 + 0xa10));
-        if (temp_v1 != -1) {
-          temp_v4 = FUN_003f3f08(*(unsigned int *)(temp_v3 + 0xa10));
+    // The widget's unit binding is beyond the shared widget prefix.
+    struct BoundIcon {
+        u8 prefix[0x34];
+        s32 unitIndex;
+    };
+    PartyPanelStateA *panel = g_partyPanel;
+    s32 result = -1;
+    for (s32 i = 0; i < 4; ++i) {
+        BoundIcon *icon = reinterpret_cast<BoundIcon *>(panel->handlesA[i]);
+        partyStatusIconTick(icon);
+        s16 *current = FUN_002c7e24();
+        if (icon->unitIndex < 0) {
+            if (*current < 0 && FUN_003f3f08(icon) != -1)
+                result = FUN_003f3f08(icon);
+        } else {
+            SlotRecord *unit = gameGetSlotRecord(icon->unitIndex);
+            if (unit->entryId == *current && FUN_003f3f08(icon) != -1)
+                result = FUN_003f3f08(icon);
         }
-      }
     }
-    else {
-      temp_v1 = gameGetSlotRecord(*(unsigned int *)(*(int *)(temp_v3 + 0xa10) + 0x34));
-      if ((unsigned int)*(unsigned short *)(temp_v1 + 0x62) == (int)*psVar2) {
-        temp_v1 = FUN_003f3f08(*(unsigned int *)(temp_v3 + 0xa10));
-        if (temp_v1 != -1) {
-          temp_v4 = FUN_003f3f08(*(unsigned int *)(temp_v3 + 0xa10));
+    for (s32 i = 0; i < 24; ++i) {
+        BoundIcon *icon = reinterpret_cast<BoundIcon *>(panel->handlesB[i]);
+        partyStatusIconTick(icon);
+        s16 *current = FUN_002c7e24();
+        if (icon->unitIndex < 0) {
+            if (*current < 0 && FUN_003f3f08(icon) != -1)
+                result = FUN_003f3f08(icon);
+        } else {
+            SlotRecord *unit = gameGetSlotRecord(icon->unitIndex);
+            if (unit->entryId == *current && FUN_003f3f08(icon) != -1)
+                result = FUN_003f3f08(icon);
         }
-      }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 4);
-  temp_v2 = 0;
-  do {
-    temp_v3 = temp_v0 + temp_v2 * 4;
-    partyStatusIconTick(reinterpret_cast<void*>(*(unsigned int *)(temp_v3 + 0xa20)));
-    psVar2 = (short *)FUN_002c7e24();
-    if (*(int *)(*(int *)(temp_v3 + 0xa20) + 0x34) < 0) {
-      if (*psVar2 < 0) {
-        temp_v1 = FUN_003f3f08(*(unsigned int *)(temp_v3 + 0xa20));
-        if (temp_v1 != -1) {
-          temp_v4 = FUN_003f3f08(*(unsigned int *)(temp_v3 + 0xa20));
-        }
-      }
-    }
-    else {
-      temp_v1 = gameGetSlotRecord(*(unsigned int *)(*(int *)(temp_v3 + 0xa20) + 0x34));
-      if ((unsigned int)*(unsigned short *)(temp_v1 + 0x62) == (int)*psVar2) {
-        temp_v1 = FUN_003f3f08(*(unsigned int *)(temp_v3 + 0xa20));
-        if (temp_v1 != -1) {
-          temp_v4 = FUN_003f3f08(*(unsigned int *)(temp_v3 + 0xa20));
-        }
-      }
-    }
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 >= 0x18) {
-      return temp_v4;
-    }
-  } while( 1 );
+    return result;
 }
-
-} /* extern "C" */
+}

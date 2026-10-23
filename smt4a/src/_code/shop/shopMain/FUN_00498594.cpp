@@ -1,77 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00498594` (_code @ 0x498594, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only previous/current transition state registers differ (r0/r1 exchanged). */
+#include "shard/Shard0049.h"
+#include "shard/W6_W6Match6_SpritePresetBank.h"
 
 extern "C" {
+extern s32 DAT_00588f78[][2];
+void FUN_004954e8(EquipmentMenuState *menu);
+void messageChoiceShowCurrent(EquipmentMenuState *menu);
+s32 inputIsQuestRepeatRight(void);
+s32 recordGetModeForId(s32 itemId);
+s32 FUN_004d0494(void);
+s32 inputIsQuestMenuPressed(void);
+s32 inputIsQuestCancelPressed(void);
+void FUN_00496a0c(EquipmentMenuState *menu, u32 changed);
+void sendEvent1000210(void);
+void sendEvent100020F(void);
+void sendEvent100020E(void);
+void menuOpenCommandList(EquipmentMenuState *menu);
+void uiSpriteBankApplyPreset(SpritePresetBank *bank, u32 preset);
 
-int uiSpriteBankApplyPreset(int, int);
-int FUN_004954e8(void);
-int FUN_00496a0c(int, int);
-int menuOpenCommandList(int);
-int messageChoiceShowCurrent(int);
-int sendEvent100020F(void);
-int sendEvent100020E(void);
-int sendEvent1000210(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-/* Supplied declaration required: uiSpriteBankApplyPreset. */
-extern int recordGetModeForId(int);
-/* Supplied declaration required: FUN_004954e8. */
-/* Supplied declaration required: FUN_00496a0c. */
-/* Supplied declaration required: menuOpenCommandList. */
-/* Supplied declaration required: messageChoiceShowCurrent. */
-/* Supplied declaration required: sendEvent100020F. */
-/* Supplied declaration required: sendEvent100020E. */
-/* Supplied declaration required: sendEvent1000210. */
-extern int inputIsQuestRepeatRight(void);
-extern int FUN_004d0494(void);
-extern int inputIsQuestCancelPressed(void);
-extern int inputIsQuestMenuPressed(void);
-
-
-void FUN_00498594(int param_1)
-
+// Navigate equipment choices or enter the shop's auxiliary menu.
+void FUN_00498594(EquipmentMenuState *menu)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_004954e8();
-  messageChoiceShowCurrent(param_1);
-  temp_v0 = inputIsQuestRepeatRight();
-  if ((temp_v0 != 0) || (temp_v0 = recordGetModeForId((int)*(short *)(param_1 + 0x1602c)), temp_v0 == 6)) {
-    *(unsigned int *)(param_1 + 0xb44) = *(unsigned int *)(*(int *)(param_1 + 0xb44) * 8 + 0x588f78);
-    FUN_00496a0c(param_1,1);
-    sendEvent1000210();
-    return;
-  }
-  temp_v0 = FUN_004d0494();
-  if ((temp_v0 == 0) && (temp_v0 = recordGetModeForId((int)*(short *)(param_1 + 0x1602e)), temp_v0 != 6)) {
-    temp_v0 = inputIsQuestMenuPressed();
-    if (temp_v0 != 0) {
-      uiSpriteBankApplyPreset(param_1 + 0x3cc,1);
-      sendEvent100020F();
-      *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 4);
-      *(unsigned int *)(param_1 + 4) = 0x13;
-      *(unsigned int *)(param_1 + 8) = 0;
-    }
-    else {
-      temp_v0 = inputIsQuestCancelPressed();
-      if (temp_v0 != 0) {
-        sendEvent100020E();
-        menuOpenCommandList(param_1);
+    // Neighbor identifiers lie immediately beyond the recovered shared object prefix.
+    struct ShopNeighborView {
+        EquipmentMenuState menu;
+        s16 nextItem;
+        s16 previousItem;
+    };
+    ShopNeighborView *neighbors = reinterpret_cast<ShopNeighborView *>(menu);
+    FUN_004954e8(menu);
+    messageChoiceShowCurrent(menu);
+    if (inputIsQuestRepeatRight() || recordGetModeForId(neighbors->nextItem) == 6) {
+        menu->selection.index = DAT_00588f78[menu->selection.index][0];
+        FUN_00496a0c(menu, 1);
+        sendEvent1000210();
         return;
-      }
     }
-    return;
-  }
-  *(unsigned int *)(param_1 + 0xb44) = *(unsigned int *)(*(int *)(param_1 + 0xb44) * 8 + 0x588f7c);
-  FUN_00496a0c(param_1,1);
-  sendEvent1000210();
-  return;
+    if (FUN_004d0494() || recordGetModeForId(neighbors->previousItem) == 6) {
+        menu->selection.index = DAT_00588f78[menu->selection.index][1];
+        FUN_00496a0c(menu, 1);
+        sendEvent1000210();
+        return;
+    }
+    if (inputIsQuestMenuPressed()) {
+        uiSpriteBankApplyPreset(reinterpret_cast<SpritePresetBank *>(menu->unk00000 + 0x3CC), 1);
+        sendEvent100020F();
+        menu->transition.previousState = menu->transition.state;
+        menu->transition.frame = 0;
+        menu->transition.state = 0x13;
+    } else if (inputIsQuestCancelPressed()) {
+        sendEvent100020E();
+        menuOpenCommandList(menu);
+    }
 }
-
-} /* extern "C" */
+}

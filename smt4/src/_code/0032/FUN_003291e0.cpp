@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00241d84(void);
+int gauntletAppSortMenuEntries(void);
 int FUN_00241f2c(...);
 int scrScriptProcessStartEntry(...);
 int FUN_00298d64(...);
@@ -45,7 +45,7 @@ typedef struct {
 } param_1_stack;
 
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_00241d84. */
+/* Supplied declaration required: gauntletAppSortMenuEntries. */
 /* Supplied declaration required: FUN_00241f2c. */
 /* Supplied declaration required: dataTable0BFindById. */
 /* Supplied declaration required: FUN_00242000. */
@@ -416,7 +416,7 @@ unsigned int FUN_003291e0(int *param_1)
           } while (temp_v8 < 0x8d);
         }
         FUN_0029f848(temp_v7 + 0x10,*(unsigned int *)(temp_v7 + 0x2a8),10,1,1,1);
-        FUN_00241d84();
+        gauntletAppSortMenuEntries();
         FUN_00298d64(temp_v7 + 0x10,temp_v10);
         flaggedEntrySetValueA(temp_v7 + 0x10,temp_v9);
         FUN_00242000(temp_v7);
@@ -437,7 +437,7 @@ unsigned int FUN_003291e0(int *param_1)
       FUN_00248738(temp_v7,3);
     }
     else {
-      FUN_00241d84();
+      gauntletAppSortMenuEntries();
     }
     break;
   case 7:

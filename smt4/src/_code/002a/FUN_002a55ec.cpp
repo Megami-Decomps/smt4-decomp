@@ -1,78 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a55ec` (_code @ 0x2a55ec, 0x110 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initial channel lookup/call registers and the final dirty-byte store scheduling differ. */
+#include "shard/Shard0034.h"
+#include <stddef.h>
 
-extern "C" {
-
-typedef struct fn_002a55ec_arg0 fn_002a55ec_arg0;
-typedef struct fn_002a55ec_arg0_p2c fn_002a55ec_arg0_p2c;
-struct fn_002a55ec_arg0 {
-    unsigned char pad_0x0[0x28];
-    unsigned char field_0x28; /* +0x28 */
-    unsigned char pad_0x29[0x3];
-    fn_002a55ec_arg0_p2c *field_0x2c; /* +0x2c */
-    unsigned char pad_0x30[0x34];
-    int field_0x64; /* +0x64 */
-    int field_0x68; /* +0x68 */
-    int field_0x6c; /* +0x6c */
-    unsigned char pad_0x70[0x10];
-    undefined4 field_0x80; /* +0x80 */
-};
-struct fn_002a55ec_arg0_p2c {
-    unsigned char pad_0x0[0x28];
-    undefined4 field_0x28; /* +0x28 */
-    unsigned char field_0x2c; /* +0x2c */
-    unsigned char pad_0x2d[0x37];
-    unsigned char field_0x64; /* +0x64 */
-    unsigned char pad_0x65[0x3];
-    unsigned char field_0x68; /* +0x68 */
-    unsigned char pad_0x69[0x3];
-    unsigned char field_0x6c; /* +0x6c */
-    unsigned char pad_0x6d[0x13];
-    unsigned char field_0x80; /* +0x80 */
-    unsigned char pad_0x81[0xcf];
-    undefined4 field_0x150; /* +0x150 */
-    undefined4 field_0x154; /* +0x154 */
-};
-
-typedef int romwright_code(...);
-
-void FUN_002a55ec(fn_002a55ec_arg0 *param_1,int param_2)
-
+extern "C" void FUN_002a55ec(ModelPropertyController *controller, s32 index, f32 time)
 {
-/* irregular: irregular input(s): in_s0 */
-  fn_002a55ec_arg0 *pfVar1;
-  fn_002a55ec_arg0 *pfVar2;
-  fn_002a55ec_arg0_p2c *pfVar3;
-  int temp_v0;
-  int *piVar5;
-  float in_s0;
-  int temp_v1;
-  
-  param_1->field_0x80 = 0x3f800000;
-  pfVar2 = (fn_002a55ec_arg0 *)param_2;
-  pfVar1 = param_1;
-  if (-1 < param_2) {
-    pfVar2 = (fn_002a55ec_arg0 *)param_1->field_0x68;
-    pfVar1 = pfVar2;
-  }
-  if ((((pfVar2 != (fn_002a55ec_arg0 *)0x0 && (-1 < param_2 && -1 < (int)pfVar1)) &&
-       (param_2 < (int)pfVar1)) && (pfVar3 = param_1->field_0x2c, pfVar3->field_0x150 != 0)) &&
-     (piVar5 = *(int **)(*(int *)(pfVar3->field_0x28 + 0x1c) +
-                        pfVar3->field_0x154 * *(int *)(pfVar3->field_0x28 + 0x28) * 4),
-     piVar5 != (int *)0x0)) {
-    (**(romwright_code **)(*piVar5 + 0x24))(piVar5,*(unsigned int *)(param_1->field_0x64 + param_2 * 4));
-    param_1->field_0x6c = param_2;
-    if (in_s0 != 0.0f) {
-      temp_v1 = piVar5[0x11];
-      (*(romwright_code *)piVar5[0x13])(piVar5[0x14]);
-      temp_v0 = piVar5[0xe];
-      piVar5[0xe] = temp_v1;
-      piVar5[0xf] = temp_v0;
-      *(unsigned char *)(piVar5 + 0x16) = 1;
-    }
-  }
-  return;
-}
+    struct AnimationSelectionFields {
+        u8 prefix[0x64];
+        const void **clips;
+        u8 reserved[4];
+        s32 selected;
+    };
+    struct ChannelMethods {
+        u8 prefix[0x24];
+        void (*selectClip)(ScalarAnimationChannel *, const void *);
+    };
+    typedef char SelectionFieldOffsets[
+        offsetof(AnimationSelectionFields, clips) == 0x64 &&
+        offsetof(AnimationSelectionFields, selected) == 0x6C ? 1 : -1];
 
-} /* extern "C" */
+    controller->value = 1.0f;
+    if (index < 0 || controller->count <= 0 || index >= controller->count)
+        return;
+    ScalarAnimationChannel *channel = modelPropertyScalarChannel(controller->node, 0);
+    if (channel == NULL)
+        return;
+
+    /* Keep padding fields and the virtual slot in local views of the shared channel types. */
+    AnimationSelectionFields *selection = reinterpret_cast<AnimationSelectionFields *>(controller);
+    const ChannelMethods *methods = *reinterpret_cast<const ChannelMethods *const *>(channel);
+    methods->selectClip(channel, selection->clips[index]);
+    selection->selected = index;
+    if (time != 0.0f) {
+        f32 end = controller->count > 0
+            ? scalarAnimationEnd(modelPropertyScalarChannel(controller->node, 0)) : 0.0f;
+        if (time > end)
+            time = end;
+        f32 value = channel->interpolate(channel->start, channel->end, time, channel->work);
+        f32 previous = channel->current;
+        channel->current = value;
+        channel->previous = previous;
+        channel->dirty = 1;
+    }
+}

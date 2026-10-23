@@ -1,98 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004db2b8` (_code @ 0x4db2b8, 0x194 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: directional race fusion and packed pair fields restored; register allocation, level-table addressing and mask reuse differ. */
+#include "camp/Unite/FusionCandidates.h"
+#include "shard/W6_W6Match8_DevilRecordA.h"
+#include "shard/W5_W5Match2_UniteWork.h"
 
 extern "C" {
+FusionRaceRule *dataTable5Sub3Lookup(u32 race, u32 id);
+u16 FUN_004dc154(FusionCandidateTables *tables, u32 race, u32 level);
+u16 uniteFindClosestEligibleCandidate(FusionCandidateTables *tables, u32 race, u32 level, u32 flags);
 
-int FUN_00184310(void);
-int dataTable5Sub3Lookup(unsigned int *, int);
-int FUN_004dc154(unsigned int, unsigned int, int);
-int uniteFindClosestEligibleCandidate(unsigned int, int, int, int);
-
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: dataTable5Sub3Lookup. */
-/* Supplied declaration required: FUN_004dc154. */
-/* Supplied declaration required: uniteFindClosestEligibleCandidate. */
-
-
-unsigned int FUN_004db2b8(unsigned int param_1,unsigned short *param_2,unsigned short *param_3,unsigned int *param_4)
-
+// Apply a directional race rule to two demons and encode their resulting fusion pair.
+u32 FUN_004db2b8(FusionCandidateTables *tables, u16 firstId, u16 secondId, UnitePairEntryIV *pair)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  unsigned short temp_v2;
-  unsigned short *puVar4;
-  unsigned short *puVar5;
-  unsigned int *puVar6;
-  unsigned int *puVar7;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  
-  temp_v5 = 0;
-  puVar4 = param_2;
-  FUN_00184310();
-  puVar5 = param_3;
-  FUN_00184310();
-  puVar6 = (unsigned int *)(unsigned int)(unsigned char)puVar4[1];
-  dataTable5Sub3Lookup(puVar6,*puVar5);
-  puVar7 = (unsigned int *)(unsigned int)(unsigned char)puVar5[1];
-  dataTable5Sub3Lookup(puVar7,*puVar4);
-  if ((unsigned int)*puVar4 == (unsigned int)*puVar5) {
-    return 0;
-  }
-  if ((puVar6 == (unsigned int *)0x0) && (puVar6 = puVar7, puVar7 == (unsigned int *)0x0)) {
-    return 0;
-  }
-  if (*puVar6 >> 0x18 == 1) {
-    if ((unsigned int)*puVar4 == (*puVar6 & 0xffffff) >> 8) {
-      temp_v2 = puVar5[3];
-      temp_v0 = (unsigned char)puVar5[1];
+    u16 result = 0;
+    DevilRecordA *first = FUN_00184310(firstId);
+    DevilRecordA *second = FUN_00184310(secondId);
+    FusionRaceRule *rule = dataTable5Sub3Lookup(first->race, second->id);
+    FusionRaceRule *reverse = dataTable5Sub3Lookup(second->race, first->id);
+    if (first->id == second->id)
+        return 0;
+    if (rule == NULL) {
+        if (reverse == NULL)
+            return 0;
+        rule = reverse;
     }
-    else {
-      temp_v2 = puVar4[3];
-      temp_v0 = (unsigned char)puVar4[1];
+    if (rule->kind == 1) {
+        u16 level;
+        u32 race;
+        if (first->id == rule->devilId) {
+            level = second->level;
+            race = second->race;
+        } else {
+            level = first->level;
+            race = first->race;
+        }
+        ++level;
+        FusionCandidateEntry *entries = tables->races[race];
+        if (entries[0].level < level)
+            level = entries[tables->counts[race] - 1].level;
+        result = FUN_004dc154(tables, race, level);
+        if (first->id == result || second->id == result || result == 0)
+            return 0;
     }
-    temp_v4 = (unsigned int)temp_v0;
-    temp_v2 = temp_v2 + 1;
-    temp_v3 = *(int *)(param_1 + temp_v4 * 4 + 0x44);
-    if (*(unsigned short *)(temp_v3 + 2) < temp_v2) {
-      temp_v2 = *(unsigned short *)(temp_v3 + ((unsigned int)*(unsigned char *)(param_1 + temp_v4) * 4 - 2));
+    if (rule->kind == 3) {
+        u16 level;
+        u32 race;
+        if (first->id == rule->devilId) {
+            level = second->level;
+            race = second->race;
+        } else {
+            level = first->level;
+            race = first->race;
+        }
+        result = uniteFindClosestEligibleCandidate(tables, race, (u16)(level - 1), 0);
+        if (first->id == result || second->id == result || result == 0)
+            return 0;
     }
-    temp_v5 = param_1;
-    FUN_004dc154(param_1,temp_v4,temp_v2);
-    temp_v4 = temp_v5;
-    if (*puVar4 != temp_v5) {
-      temp_v4 = (unsigned int)*puVar5;
-    }
-    if ((*puVar4 == temp_v5 || temp_v4 == temp_v5) || temp_v5 == 0) {
-      return 0;
-    }
-  }
-  if (*puVar6 >> 0x18 == 3) {
-    if ((unsigned int)*puVar4 == (*puVar6 & 0xffffff) >> 8) {
-      temp_v2 = puVar5[3];
-      temp_v1 = (unsigned char)puVar5[1];
-    }
-    else {
-      temp_v2 = puVar4[3];
-      temp_v1 = (unsigned char)puVar4[1];
-    }
-    uniteFindClosestEligibleCandidate(param_1,temp_v1,temp_v2 - 1,0);
-    temp_v4 = param_1;
-    if (*puVar4 != param_1) {
-      temp_v4 = (unsigned int)*puVar5;
-    }
-    temp_v5 = param_1;
-    if ((*puVar4 == param_1 || temp_v4 == param_1) || param_1 == 0) {
-      return 0;
-    }
-  }
-  *param_4 = (((*param_4 & 0xffff8000) | ((unsigned int)param_2 & 0xffff7fff)) & 0xc0007fff) |
-             (((unsigned int)param_3 & 0x7fff) << 0xf);
-  param_4[1] = (param_4[1] & 0xfffe0003) | ((temp_v5 & 0x3fff7fff) << 2);
-  return 1;
+    pair->firstId = firstId;
+    pair->secondId = secondId;
+    pair->resultId = result;
+    return 1;
 }
-
-} /* extern "C" */
+}

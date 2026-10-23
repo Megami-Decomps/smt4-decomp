@@ -1,100 +1,71 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00150d2c` (_code @ 0x150d2c, 0x184 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: aligned scratch frame, count/register lifetimes, heap-bound branch lowering and marker-store addressing differ. */
+#include "shard/S3SoundArchiveLoader.h"
+#include "shard/W6_W6Match3_WaveArchiveReader.h"
+
+class WaveArchiveAllocator {
+public:
+    virtual ~WaveArchiveAllocator();
+    virtual void *allocate(u32 size);
+};
+struct WaveArchiveLoadInfo {
+    u32 fileId;
+    u32 waveCount;
+    u8 loadIndividual;
+    u8 unk09[3];
+};
+typedef char WaveArchiveLoadInfoOffsets[
+    offsetof(WaveArchiveLoadInfo, waveCount) == 4 &&
+    offsetof(WaveArchiveLoadInfo, loadIndividual) == 8 && sizeof(WaveArchiveLoadInfo) == 12 ? 1 : -1];
 
 extern "C" {
+u32 FUN_002ac780(void *archive);
+s32 soundArchiveReadWaveArchiveInfo(void *archive, u32 id, WaveArchiveLoadInfo *info);
+u32 FUN_002a78c0(SoundArchiveLoader *loader, u32 fileId, void *buffer, u32 size, u32 offset, u32 flags);
+u32 nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(const void *header);
+u32 nw_snd_internal_WaveArchiveFile_FileHeader_GetInfoBlockOffset(const void *header);
+u32 nnosGetHeapBase(void);
+u32 FUN_002c3984(void);
+void FUN_002a7ac4(WaveArchiveReader *reader, void *file, u32 individual);
+void FUN_00150f34(WaveArchiveReader *reader);
+extern const u32 DAT_004148c4;
 
-int FUN_00150f34(...);
-int FUN_002a78c0(...);
-int FUN_002a7ac4(...);
-int builtin_strncpy(...);
-
-typedef int romwright_code(...);
-/* stack frame of param_4: 3 slot(s), 9 byte(s) */
-typedef struct {
-    unsigned char spA8; /* 0xa8: local_a8 */
-    unsigned int spAC; /* 0xac: local_ac */
-    unsigned int spB0; /* 0xb0: local_b0 */
-} param_4_stack;
-
-/* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
-/* Supplied declaration required: FUN_00150f34. */
-extern int soundArchiveReadWaveArchiveInfo(int, unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_002a78c0. */
-/* Supplied declaration required: FUN_002a7ac4. */
-extern unsigned int FUN_002ac780(int);
-extern int FUN_002c3984(void);
-extern unsigned int nnosGetHeapBase(void);
-extern unsigned int nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(unsigned char *);
-extern unsigned int nw_snd_internal_WaveArchiveFile_FileHeader_GetInfoBlockOffset(unsigned char *);
-
-
-unsigned int FUN_00150d2c(int *param_1,unsigned int param_2,int *param_3,unsigned int param_4)
-
+// Load the archive header/info and reserve a wave-pointer table instead of copying all wave data.
+void *FUN_00150d2c(SoundArchiveLoader *loader, u32 archiveId, WaveArchiveAllocator *allocator, u32 flags)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  int *piVar6;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  unsigned char temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned char temp_v10;
-  unsigned char temp_v11 [104];
-  unsigned char temp_v12 [20];
-  
-  temp_v1 = FUN_002ac780(param_1[1]);
-  temp_v2 = (**(romwright_code **)(*param_1 + 0xc))(param_1,temp_v1);
-  if (temp_v2 == 0) {
-    temp_v8 = 0xffffffff;
-    temp_v10 = 0;
-    temp_v3 = soundArchiveReadWaveArchiveInfo(param_1[1],param_2,(unsigned int *)&temp_v8);
-    temp_v0 = temp_v9;
-    temp_v2 = 0;
-    if ((temp_v3 != 0) && (temp_v2 = 0, temp_v9 != 0)) {
-      temp_v8 = 0;
-      piVar5 = param_1;
-      temp_v9 = param_4;
-      FUN_002a78c0(param_1,temp_v1,temp_v11,0x2c);
-      if (piVar5 == (int *)0x2c) {
-        piVar5 = (int *)nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(temp_v11);
-        piVar6 = (int *)nw_snd_internal_WaveArchiveFile_FileHeader_GetInfoBlockOffset(temp_v11);
-        if (piVar6 <= piVar5) {
-          temp_v2 = (**(romwright_code **)(*param_3 + 8))(param_3,piVar5 + temp_v0 + 1);
-          temp_v4 = nnosGetHeapBase();
-          temp_v3 = FUN_002c3984();
-          temp_v7 = temp_v2 <= temp_v4;
-          temp_v6 = temp_v4 == temp_v2;
-          if (!temp_v7 || temp_v6) {
-            temp_v5 = temp_v2 + (int)(piVar5 + temp_v0 + 1);
-            temp_v7 = temp_v3 + temp_v4 <= temp_v5;
-            temp_v6 = temp_v5 == temp_v3 + temp_v4;
-          }
-          if (!temp_v7 || temp_v6) {
-            temp_v8 = 0;
-            piVar6 = param_1;
-            temp_v9 = param_4;
-            FUN_002a78c0(param_1,temp_v1,temp_v2,piVar5);
-            if (piVar6 == piVar5) {
-              builtin_strncpy((char *)(temp_v2 + (int)piVar5),"CWAT",4);
-              FUN_002a7ac4(temp_v12,temp_v2,1);
-              FUN_00150f34(temp_v12);
-              (**(romwright_code **)(*param_1 + 8))(param_1,temp_v1,temp_v2);
-              return temp_v2;
-            }
-          }
-        }
-      }
-      temp_v2 = 0;
-    }
-  }
-  return temp_v2;
+    u32 fileId = FUN_002ac780(loader->archive);
+    void *loaded = loader->vtbl->files.getFile(loader, fileId);
+    if (loaded)
+        return loaded;
+    WaveArchiveLoadInfo info;
+    info.fileId = 0xFFFFFFFF;
+    info.loadIndividual = 0;
+    if (!soundArchiveReadWaveArchiveInfo(loader->archive, archiveId, &info))
+        return 0;
+    u32 waveCount = info.waveCount;
+    if (!waveCount)
+        return 0;
+    // The archive reader requires a 32-byte-aligned temporary header.
+    u8 storage[0x2C + 31];
+    void *header = (void *)(((u32)storage + 31) & ~31u);
+    if (FUN_002a78c0(loader, fileId, header, 0x2C, 0, flags) != 0x2C)
+        return 0;
+    u32 fileOffset = nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(header);
+    u32 infoOffset = nw_snd_internal_WaveArchiveFile_FileHeader_GetInfoBlockOffset(header);
+    if (infoOffset > fileOffset)
+        return 0;
+    u32 size = fileOffset + waveCount * 4 + 4;
+    u8 *data = (u8 *)allocator->allocate(size);
+    u32 heapBase = nnosGetHeapBase();
+    u32 heapSize = FUN_002c3984();
+    if ((u32)data < heapBase || (u32)data + size > heapBase + heapSize)
+        return 0;
+    if (FUN_002a78c0(loader, fileId, data, fileOffset, 0, flags) != fileOffset)
+        return 0;
+    *(u32 *)(data + fileOffset) = DAT_004148c4;
+    WaveArchiveReader reader;
+    FUN_002a7ac4(&reader, data, 1);
+    FUN_00150f34(&reader);
+    loader->vtbl->files.registerFile(loader, fileId, data);
+    return data;
 }
-
-} /* extern "C" */
+}

@@ -1,109 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e2be4` (_code @ 0x1e2be4, 0x188 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: hint dispatch becomes a jump table; timer initialization combines stores and interval constants load differently. */
+#include "map/MapIfTimer.h"
+#include "map/mapDepart.h"
 
 extern "C" {
+extern GameState g_gameState;
+extern const MapHintRecord DAT_00447ab0[9];
+void *gameGetMapBlock(void);
+u32 FUN_002bfdd4(void);
+s32 gameFlagIsSet(u32 flag);
+s32 gameCountUnits(void);
+u32 gameCountersGetWord(s32 index);
+u32 clockGetSecondsSinceStart(void);
+s32 FUN_00334038(void);
+s32 FUN_0028d310(void);
+u32 FUN_002bfdc4(void);
+void FUN_002bfc24(u32 layer, u32 message, u32 argument, u32 flags, f32 first, f32 second);
 
-int clockGetSecondsSinceStart(void);
-int gameCountersGetWord(int);
-int FUN_002bfc24(int, unsigned int, unsigned int, unsigned int);
-
-extern int *g_mapIfTimer; /* 0x447a98 */
-extern char s______________________00447ab4[85]; /* 0x447ab4 */
-extern signed char DAT_0049f934; /* 0x49f934 */
-
-/* Supplied declaration required: clockGetSecondsSinceStart. */
-extern int FUN_0028d310(void);
-/* Supplied declaration required: gameCountersGetWord. */
-extern int gameCountUnits(void);
-/* Supplied declaration required: FUN_002bfc24. */
-extern unsigned int FUN_002bfdc4(void);
-extern unsigned int FUN_002bfdd4(void);
-extern int gameFlagIsSet(unsigned int);
-extern int gameGetMapBlock(void);
-extern int FUN_00334038(void);
-
-
+// Select the next idle hint, skipping time/party-inapplicable hints, and queue its message.
 void FUN_001e2be4(void)
-
 {
-/* irregular: 2 goto(s); 3 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar8;
-  unsigned int temp_v6;
-  
-  temp_v0 = gameGetMapBlock();
-  temp_v1 = FUN_002bfdd4();
-  if (DAT_0049f934 != '\0') {
-    return;
-  }
-  if (*g_mapIfTimer != 0) {
-    return;
-  }
-  temp_v2 = gameFlagIsSet(0x16);
-  if (temp_v2 == 0) {
-    return;
-  }
-  temp_v2 = (int)*(char *)(temp_v0 + 0xd5b);
-  if (temp_v2 != 1) {
-    if (temp_v2 != 5) {
-      if (temp_v2 == 6) goto LAB_001e2ca0;
-      if (temp_v2 == 7) goto LAB_001e2cc8;
-      if (temp_v2 == 8) {
-        temp_v4 = FUN_00334038();
-        temp_v5 = FUN_0028d310();
-        if (temp_v4 / 2 <= temp_v5) {
-          temp_v2 = 0;
+    struct MapHintProgressView { u8 unk000[0xD5B]; s8 next; };
+    typedef char HintProgressOffsetCheck[offsetof(MapHintProgressView, next) == 0xD5B ? 1 : -1];
+    MapHintProgressView *map = (MapHintProgressView *)gameGetMapBlock();
+    u32 flags = FUN_002bfdd4() | 4;
+    if (g_gameState.unk18 != 0 || g_mapIfTimer->state != 0 || !gameFlagIsSet(22)) {
+        return;
+    }
+    s32 hint = map->next;
+    switch (hint) {
+    case 1:
+        if (gameCountUnits() < 1) {
+            hint = 2;
         }
-      }
-    }
-    else {
-      temp_v4 = gameCountersGetWord(0x20);
-      if ((temp_v4 == 0) || (clockGetSecondsSinceStart(), temp_v4 - 0x708U >= 0x709)) {
-        temp_v2 = 6;
-LAB_001e2ca0:
-        temp_v4 = gameCountersGetWord(0x20);
-        if ((temp_v4 == 0) || (clockGetSecondsSinceStart(), temp_v4 - 0xe10U >= 0xe11)) {
-          temp_v2 = 7;
-LAB_001e2cc8:
-          temp_v3 = gameCountersGetWord(0x20);
-          if ((temp_v3 == 0) || (clockGetSecondsSinceStart(), 0x1c1f >= temp_v3)) {
-            temp_v2 = 8;
-            temp_v4 = FUN_00334038();
-            temp_v5 = FUN_0028d310();
-            if (temp_v4 / 2 <= temp_v5) {
-              temp_v2 = 0;
-            }
-          }
+        break;
+    case 5:
+        if (gameCountersGetWord(32) != 0 && clockGetSecondsSinceStart() - 1800 <= 1800) {
+            break;
         }
-      }
+        hint = 6;
+        // fall through
+    case 6:
+        if (gameCountersGetWord(32) != 0 && clockGetSecondsSinceStart() - 3600 <= 3600) {
+            break;
+        }
+        hint = 7;
+        // fall through
+    case 7:
+        if (gameCountersGetWord(32) != 0 && clockGetSecondsSinceStart() >= 7200) {
+            break;
+        }
+        hint = 8;
+        // fall through
+    case 8: {
+        s32 capacity = FUN_00334038();
+        if (FUN_0028d310() >= capacity / 2) {
+            hint = 0;
+        }
+        break;
     }
-  }
-  else {
-    temp_v4 = gameCountUnits();
-    if (temp_v4 < 1) {
-      temp_v2 = 2;
     }
-  }
-  piVar1 = g_mapIfTimer;
-  piVar8 = g_mapIfTimer + 1;
-  *g_mapIfTimer = 2;
-  *piVar8 = 0;
-  piVar1[5] = (int)(s______________________00447ab4 + temp_v2 * 0x60);
-  temp_v6 = FUN_002bfdc4();
-  FUN_002bfc24(1,*(unsigned int *)(temp_v2 * 0x60 + 0x447ab0),temp_v6,temp_v1 | 4);
-  temp_v2 = temp_v2 + 1;
-  if (temp_v2 >= 9) {
-    temp_v2 = 0;
-  }
-  *(char *)(temp_v0 + 0xd5b) = (char)temp_v2;
-  return;
+    const MapHintRecord *record = &DAT_00447ab0[hint];
+    g_mapIfTimer->state = 2;
+    g_mapIfTimer->frames = 0;
+    g_mapIfTimer->hintLabel = record->label;
+    FUN_002bfc24(1, record->message, FUN_002bfdc4(), flags, 0.707f, 0.707f);
+    ++hint;
+    if (hint >= 9) {
+        hint = 0;
+    }
+    map->next = hint;
 }
-
-} /* extern "C" */
+}

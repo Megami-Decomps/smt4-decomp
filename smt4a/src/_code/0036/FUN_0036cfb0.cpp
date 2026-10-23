@@ -1,108 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036cfb0` (_code @ 0x36cfb0, 0x17c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: script creation store scheduling and merged final step-reset branch differ. */
+#include "shard/W6_W6Match4_CampCecResumeState.h"
+#include "shard/Shard0031.h"
 
+struct SlotRecord;
 extern "C" {
+ScriptRunState *FUN_00275bc8(void *resource, u32 entry);
+void scrScriptProcessStartEntry(ScriptRunState *script, s32 entry);
+s32 scrRunOpcodesStub(ScriptRunState *script);
+void sysPlaySe(s32 sound);
+void cecProcessStart(void);
+void cecProcessCall4(void);
+void cecProcessDestroy(void);
+void FUN_002a6480(s32 mode);
+void FUN_0031d890(void);
+SlotTable *gameGetSlotTable(void);
+SlotRecord *gameGetSlotRecord(s32 slot);
+s32 bitsAt60Test(SlotRecord *record, u32 flags);
+void bitsAt60Clear(SlotRecord *record, u32 flags);
 
-int sysPlaySe(int);
-int gameGetSlotRecord(...);
-int cecProcessStart(void);
-int cecProcessDestroy(void);
-int FUN_00275bc8(void);
-int scrScriptProcessStartEntry(...);
-int FUN_002a6480(int);
-int FUN_0031d890(void);
-int cecProcessCall4(void);
-int bitsAt60Clear(unsigned int, int);
-
-typedef struct fn_0036cfb0_arg0 fn_0036cfb0_arg0;
-struct fn_0036cfb0_arg0 {
-    unsigned char pad_0x0[0xe4];
-    int field_0xe4; /* +0xe4 */
-    int field_0xe8; /* +0xe8 */
-    unsigned char pad_0xec[0x8];
-    int field_0xf4; /* +0xf4 */
-    unsigned char pad_0xf8[0x4c];
-    undefined4 field_0x144; /* +0x144 */
-    unsigned char pad_0x148[0x8];
-    int field_0x150; /* +0x150 */
-    unsigned char pad_0x154[0x14];
-    undefined4 field_0x168; /* +0x168 */
-};
-
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: gameGetSlotRecord. */
-extern int gameGetSlotTable(void);
-extern int scrRunOpcodesStub(int);
-/* Supplied declaration required: cecProcessStart. */
-/* Supplied declaration required: cecProcessDestroy. */
-/* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002a6480. */
-/* Supplied declaration required: FUN_0031d890. */
-/* Supplied declaration required: cecProcessCall4. */
-extern int bitsAt60Test(unsigned int, unsigned int);
-/* Supplied declaration required: bitsAt60Clear. */
-
-
-unsigned int FUN_0036cfb0(fn_0036cfb0_arg0 *param_1)
-
+// Run the CEC exchange scripts and clear exchanged party flags before returning to camp.
+u32 FUN_0036cfb0(CampCecResumeState *state)
 {
-/* irregular: 10 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v4 = 0;
-  temp_v0 = param_1->field_0x150;
-  if (temp_v0 != 0) {
-    if (temp_v0 != 1) {
-      if ((temp_v0 == 2) && (temp_v0 = scrRunOpcodesStub(param_1->field_0xf4), temp_v0 == 2)) {
-        param_1->field_0x144 = 0xc;
-        temp_v4 = 3;
-        param_1->field_0x150 = 0;
-      }
-    }
-    else {
-      temp_v0 = scrRunOpcodesStub(param_1->field_0xf4);
-      if (temp_v0 == 2) {
-        temp_v0 = gameGetSlotTable();
-        temp_v3 = 0;
-        do {
-          if (-1 < *(char *)(temp_v0 + temp_v3 + 0x1c88)) {
-            temp_v1 = gameGetSlotRecord();
-            temp_v2 = bitsAt60Test(temp_v1,2);
-            if (temp_v2 != 0) {
-              temp_v1 = gameGetSlotRecord((int)*(char *)(temp_v0 + temp_v3 + 0x1c88));
-              bitsAt60Clear(temp_v1,4);
+    u32 result = 0;
+    switch (state->exchange.scriptStep) {
+    case 0:
+        if (state->launch.resource != NULL && state->launch.entry != 0) {
+            state->launch.script = FUN_00275bc8(state->launch.resource, state->launch.entry);
+            scrScriptProcessStartEntry(state->launch.script, state->exchange.exchangeKind == 1 ? 25 : 26);
+            sysPlaySe(0x3e);
+            cecProcessStart();
+            cecProcessCall4();
+            cecProcessDestroy();
+            FUN_002a6480(0);
+            ++state->exchange.scriptStep;
+        }
+        break;
+    case 1:
+        if (scrRunOpcodesStub(state->launch.script) == 2) {
+            SlotTable *slots = gameGetSlotTable();
+            for (s32 index = 0; index < 24; ++index) {
+                if (slots->slots[index] >= 0 && bitsAt60Test(gameGetSlotRecord(slots->slots[index]), 2))
+                    bitsAt60Clear(gameGetSlotRecord(slots->slots[index]), 4);
             }
-          }
-          temp_v3 = temp_v3 + 1;
-        } while (temp_v3 < 0x18);
-        FUN_002a6480(0);
-        FUN_0031d890();
-        scrScriptProcessStartEntry(param_1->field_0xf4,0x1e);
-        param_1->field_0x150 = param_1->field_0x150 + 1;
-      }
+            FUN_002a6480(0);
+            FUN_0031d890();
+            scrScriptProcessStartEntry(state->launch.script, 30);
+            ++state->exchange.scriptStep;
+        }
+        break;
+    case 2:
+        if (scrRunOpcodesStub(state->launch.script) == 2) {
+            state->state = 12;
+            result = 3;
+            state->exchange.scriptStep = 0;
+        }
+        break;
     }
-  }
-  else {
-    temp_v0 = param_1->field_0xe4;
-    if ((temp_v0 != 0) && (param_1->field_0xe8 != 0)) {
-      FUN_00275bc8();
-      param_1->field_0xf4 = temp_v0;
-      scrScriptProcessStartEntry();
-      sysPlaySe(0x3e);
-      cecProcessStart();
-      cecProcessCall4();
-      cecProcessDestroy();
-      FUN_002a6480(0);
-      param_1->field_0x150 = param_1->field_0x150 + 1;
-    }
-  }
-  return temp_v4;
+    return result;
 }
-
-} /* extern "C" */
+}

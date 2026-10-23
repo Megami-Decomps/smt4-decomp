@@ -24,7 +24,7 @@ struct UnitStatusBuffer {
 extern "C" {
 
 s32 flaggedValueHolderGetTotal(u8 *cursor);
-void FUN_0029d770(u16 id, UnitStatusBuffer *status);
+void unitInitializeFromSavedRecord(u16 id, UnitStatusBuffer *status);
 void *partyMemberFindById(u16 id);
 void FUN_0029da34(s32 screen, s32 mode, u16 id, void *status);
 
@@ -36,7 +36,7 @@ void FUN_0029d960(UnitListMenu *menu)
 
     if (!menu->previewOnly) {
         UnitStatusBuffer status;
-        FUN_0029d770(id, &status);
+        unitInitializeFromSavedRecord(id, &status);
         FUN_0029da34(0, 1, id, &status);
     } else {
         id = entries[flaggedValueHolderGetTotal(menu->cursor)].id;
@@ -44,7 +44,7 @@ void FUN_0029d960(UnitListMenu *menu)
             FUN_0029da34(0, 1, id, partyMemberFindById(id));
         } else {
             UnitStatusBuffer status;
-            FUN_0029d770(id, &status);
+            unitInitializeFromSavedRecord(id, &status);
             FUN_0029da34(0, 1, id, &status);
         }
     }

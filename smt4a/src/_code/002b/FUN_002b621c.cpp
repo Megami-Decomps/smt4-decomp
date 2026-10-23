@@ -1,95 +1,76 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b621c` (_code @ 0x2b621c, 0x1a8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: vector subtraction batching and conversion/copy saved-register allocation differ. */
+#include "map/mapDepart.h"
 
+// Apocalypse's 0x188-byte enemy entries are not the shared IV 0x180-byte records.
+struct EnemyMotionEntryA {
+    u8 active;
+    u8 unk01[7];
+    MapVector position;
+    u8 unk14[0xc];
+    MapVector previousPosition;
+    f32 heading;
+    u8 unk30[0x54];
+    s32 state, elapsed;
+    u8 unk8C[0x78];
+    MapVector start;
+    f32 startHeading;
+    MapVector target;
+    f32 targetHeading, duration;
+    MapVector step;
+    f32 holdTime;
+    u8 unk138[0x44];
+    s32 kind;
+    u8 unk180[8];
+};
+struct EnemyMotionStateA { u8 prefix[0x34]; EnemyMotionEntryA entries[40]; };
+struct EnemyMotionRecord {
+    u8 prefix[0x1c];
+    s16 start[3], startHeading, target[3], targetHeading, duration, holdTime;
+};
+struct EnemyMotionSelection { u8 prefix[0x84]; s16 id; };
+typedef char EnemyMotionEntryAOffsetsCheck[sizeof(EnemyMotionEntryA) == 0x188 &&
+    offsetof(EnemyMotionEntryA, state) == 0x84 &&
+    offsetof(EnemyMotionEntryA, start) == 0x104 &&
+    offsetof(EnemyMotionEntryA, step) == 0x128 &&
+    offsetof(EnemyMotionEntryA, kind) == 0x17c ? 1 : -1];
 extern "C" {
+extern EnemyMotionStateA *g_mapEnemy;
+extern EnemyMotionSelection DAT_005f17fc;
+const EnemyMotionRecord *FUN_003a315c(s32 id);
+void FUN_00377acc(EnemyMotionEntryA *entry, s32 id, s32 mode);
 
-int FUN_00377acc(char *, int, int);
-int FUN_003a315c(void);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern int g_mapEnemy; /* 0x5806d4 */
-extern short DAT_005f1880; /* 0x5f1880 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00377acc. */
-/* Supplied declaration required: FUN_003a315c. */
-
-
-void FUN_002b621c(void)
-
+void FUN_002b621c()
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  unsigned int in_fpscr;
-  unsigned int temp_v6;
-  float temp_v7;
-  
-  temp_v0 = g_mapEnemy;
-  temp_v1 = (int)DAT_005f1880;
-  FUN_003a315c();
-  temp_v3 = 0;
-  while( 1 ) {
-    temp_v2 = temp_v0 + temp_v3 * 0x188;
-    temp_v5 = *(char *)(temp_v2 + 0x34) != '\0';
-    temp_v4 = 0;
-    if (temp_v5) {
-      temp_v4 = *(int *)(temp_v2 + 0x1b0);
+    EnemyMotionStateA *state = g_mapEnemy;
+    const EnemyMotionRecord *record = FUN_003a315c(DAT_005f17fc.id);
+    for (s32 index = 0; index < 40; ++index) {
+        EnemyMotionEntryA *entry = &state->entries[index];
+        if (entry->active != 0 && entry->kind != 0 && entry->kind < 11 && entry->state == 2) {
+            entry->start.x = static_cast<f32>(record->start[0]);
+            entry->start.y = static_cast<f32>(record->start[1]);
+            entry->start.z = static_cast<f32>(record->start[2]);
+            entry->startHeading = static_cast<f32>(record->startHeading);
+            entry->target.x = static_cast<f32>(record->target[0]);
+            entry->target.y = static_cast<f32>(record->target[1]);
+            entry->target.z = static_cast<f32>(record->target[2]);
+            entry->targetHeading = static_cast<f32>(record->targetHeading);
+            entry->duration = static_cast<f32>(record->duration);
+            entry->step.x = entry->target.x - entry->start.x;
+            entry->step.y = entry->target.y - entry->start.y;
+            entry->step.z = entry->target.z - entry->start.z;
+            f32 inverseDuration = 1.0f / entry->duration;
+            entry->step.x *= inverseDuration;
+            entry->step.y *= inverseDuration;
+            entry->step.z *= inverseDuration;
+            entry->holdTime = static_cast<f32>(record->holdTime);
+            entry->position = entry->start;
+            entry->previousPosition = entry->start;
+            entry->heading = entry->startHeading;
+            entry->state = 26;
+            entry->elapsed = 0;
+            FUN_00377acc(entry, DAT_005f17fc.id, 3);
+            return;
+        }
     }
-    if (((temp_v5 && temp_v4 != 0) && (temp_v4 < 0xb)) && (*(int *)(temp_v2 + 0xb8) == 2)) break;
-    temp_v3 = temp_v3 + 1;
-    if (temp_v3 >= 0x28) {
-      return;
-    }
-  }
-  temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v1 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v2 + 0x138) = temp_v6;
-  temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v1 + 0x1e),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v2 + 0x13c) = temp_v6;
-  temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v1 + 0x20),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v2 + 0x140) = temp_v6;
-  temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v1 + 0x22),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v2 + 0x144) = temp_v6;
-  temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v1 + 0x24),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v2 + 0x148) = temp_v6;
-  temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v1 + 0x26),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v2 + 0x14c) = temp_v6;
-  temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v1 + 0x28),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v2 + 0x150) = temp_v6;
-  temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v1 + 0x2a),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v2 + 0x154) = temp_v6;
-  temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v1 + 0x2c),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v2 + 0x158) = temp_v6;
-  *(float *)(temp_v2 + 0x15c) = *(float *)(temp_v2 + 0x148) - *(float *)(temp_v2 + 0x138);
-  *(float *)(temp_v2 + 0x160) = *(float *)(temp_v2 + 0x14c) - *(float *)(temp_v2 + 0x13c);
-  *(float *)(temp_v2 + 0x164) = *(float *)(temp_v2 + 0x150) - *(float *)(temp_v2 + 0x140);
-  temp_v7 = 1.0f / *(float *)(temp_v2 + 0x158);
-  *(float *)(temp_v2 + 0x15c) = *(float *)(temp_v2 + 0x15c) * temp_v7;
-  *(float *)(temp_v2 + 0x160) = *(float *)(temp_v2 + 0x160) * temp_v7;
-  *(float *)(temp_v2 + 0x164) = *(float *)(temp_v2 + 0x164) * temp_v7;
-  temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v1 + 0x2e),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v2 + 0x168) = temp_v6;
-  *(unsigned int *)(temp_v2 + 0x3c) = *(unsigned int *)(temp_v2 + 0x138);
-  *(unsigned int *)(temp_v2 + 0x40) = *(unsigned int *)(temp_v2 + 0x13c);
-  *(unsigned int *)(temp_v2 + 0x44) = *(unsigned int *)(temp_v2 + 0x140);
-  *(unsigned int *)(temp_v2 + 0x54) = *(unsigned int *)(temp_v2 + 0x138);
-  *(unsigned int *)(temp_v2 + 0x58) = *(unsigned int *)(temp_v2 + 0x13c);
-  *(unsigned int *)(temp_v2 + 0x5c) = *(unsigned int *)(temp_v2 + 0x140);
-  *(unsigned int *)(temp_v2 + 0x60) = *(unsigned int *)(temp_v2 + 0x144);
-  *(unsigned int *)(temp_v2 + 0xb8) = 0x1a;
-  *(unsigned int *)(temp_v2 + 0xbc) = 0;
-  FUN_00377acc((char *)(temp_v2 + 0x34),(int)DAT_005f1880,3);
-  return;
 }
-
-} /* extern "C" */
+}

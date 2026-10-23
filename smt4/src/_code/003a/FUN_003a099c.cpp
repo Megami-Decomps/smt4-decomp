@@ -1,104 +1,100 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a099c` (_code @ 0x3a099c, 0x1b4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Cursor-animation address/accessor inlining and the two shop-script case tails do not merge as in retail. */
+#include "shard/S2Scene3a.h"
+#include "ui/UiSpriteState.h"
 
 extern "C" {
+void FUN_00230df0(s32 enabled);
+void FUN_00233240(void *animation, s32 value);
+void FUN_002b8ee0(UiSpriteState *animation, s32 value);
+s32 vec2GetYInt(const UiSpriteState *animation);
+s32 vec2GetXInt(const UiSpriteState *animation);
+void pointConvertToFloat(f32 *point, s32 x, s32 y);
+s32 FUN_0029e0f8(void);
+u32 tableGroupFindEntryIndex(u32 resource, const char *name);
+void scrScriptProcessStartEntry(u32 process, u32 entry);
+void scrRunOpcodesStub(u32 process);
+s32 FUN_002adee0(void);
+void FUN_002a0428(void *manager, s32 value);
+void nodeSetTranslation3f(void *node, s32 relative, f32 x, f32 y, f32 z);
 
-int scrRunOpcodesStub(unsigned int);
-int FUN_00230df0(int);
-int pointConvertToFloat(int, unsigned int, unsigned int);
-int FUN_00233240(int, int);
-int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int nodeSetTranslation3f(unsigned int, int);
-int FUN_002a0428(int, int);
-int FUN_002b8ee0(int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned char LAB_003a0b50; /* 0x3a0b50 */
-extern unsigned char LAB_003a0b60; /* 0x3a0b60 */
-
-/* Supplied declaration required: scrRunOpcodesStub. */
-/* Supplied declaration required: FUN_00230df0. */
-/* Supplied declaration required: pointConvertToFloat. */
-/* Supplied declaration required: FUN_00233240. */
-extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: nodeSetTranslation3f. */
-extern int FUN_0029e0f8(void);
-/* Supplied declaration required: FUN_002a0428. */
-extern int FUN_002adee0(void);
-/* Supplied declaration required: FUN_002b8ee0. */
-extern unsigned int vec2GetYInt(int);
-extern unsigned int vec2GetXInt(int);
-
-
-void FUN_003a099c(int param_1)
-
+void FUN_003a099c(Scene3a *scene)
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int *piVar3;
-  int temp_v2;
-  
-  if (*(int *)(param_1 + 8) != 0) {
-    if (*(int *)(param_1 + 8) == 1) {
-      temp_v2 = param_1 + 0x3c8;
-      FUN_002b8ee0(temp_v2,0);
-      temp_v0 = vec2GetYInt(temp_v2);
-      temp_v1 = vec2GetXInt(temp_v2);
-      pointConvertToFloat(param_1 + 0x380,temp_v1,temp_v0);
-      if (*(char *)(param_1 + 0x452) != '\0') {
-        switch(*(unsigned int *)(param_1 + 0x860)) {
-        case 0:
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-          temp_v2 = FUN_0029e0f8();
-          if (temp_v2 != 0) {
-            *(unsigned int *)(param_1 + 4) = 5;
-            *(unsigned int *)(param_1 + 8) = 0;
-          }
-          break;
-        case 7:
-          *(unsigned int *)(param_1 + 4) = 6;
-          *(unsigned int *)(param_1 + 8) = 0;
-          temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x160),&LAB_003a0b50);
-          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x168),temp_v0);
-          scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x168));
-          break;
-        case 8:
-          *(unsigned int *)(param_1 + 4) = 7;
-          *(unsigned int *)(param_1 + 8) = 0;
-          temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x160),&LAB_003a0b60);
-          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x168),temp_v0);
-          scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x168));
-          break;
-        default:
+    /* This scene's overlay reuses storage represented as a callback array in the shared prefix. */
+    struct InteractionView {
+        u8 unk000[8];
+        s32 step;
+        u8 unk00C[0x154];
+        u32 scriptResource;
+        u32 unk164;
+        u32 scriptProcess;
+        u8 unk16C[0x214];
+        f32 cursor[2];
+        u8 unk388[0x20];
+        u8 openingAnimation[0x20];
+        UiSpriteState cursorAnimation;
+    };
+    struct PreviewNodeView {
+        u8 unk00[0xC];
+        s32 state;
+    };
+    struct PreviewManagerView {
+        u8 unk00[8];
+        PreviewNodeView *node;
+    };
+    typedef char InteractionOffsetsCheck[offsetof(InteractionView, scriptResource) == 0x160 &&
+        offsetof(InteractionView, scriptProcess) == 0x168 && offsetof(InteractionView, cursor) == 0x380 &&
+        offsetof(InteractionView, cursorAnimation) == 0x3C8 ? 1 : -1];
+    InteractionView *work = (InteractionView *)scene;
+    switch (work->step) {
+    case 0:
+        FUN_00230df0(1);
+        FUN_00233240(work->openingAnimation, 0);
+        work->step = 1;
+        break;
+    case 1: {
+        FUN_002b8ee0(&work->cursorAnimation, 0);
+        s32 y = vec2GetYInt(&work->cursorAnimation);
+        s32 x = vec2GetXInt(&work->cursorAnimation);
+        pointConvertToFloat(work->cursor, x, y);
+        if (work->cursorAnimation.animationFlags.completed != 0) {
+            switch (scene->slot) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+                if (FUN_0029e0f8() != 0) {
+                    scene->phase = 5;
+                    work->step = 0;
+                }
+                break;
+            case 7: {
+                scene->phase = 6;
+                work->step = 0;
+                u32 entry = tableGroupFindEntryIndex(work->scriptResource, "shop_itembuy");
+                scrScriptProcessStartEntry(work->scriptProcess, entry);
+                scrRunOpcodesStub(work->scriptProcess);
+                break;
+            }
+            case 8: {
+                scene->phase = 7;
+                work->step = 0;
+                u32 entry = tableGroupFindEntryIndex(work->scriptResource, "shop_selloff");
+                scrScriptProcessStartEntry(work->scriptProcess, entry);
+                scrRunOpcodesStub(work->scriptProcess);
+                break;
+            }
+            }
         }
-      }
+        break;
     }
-  }
-  else {
-    FUN_00230df0(1);
-    FUN_00233240(param_1 + 0x3a8,0);
-    *(unsigned int *)(param_1 + 8) = 1;
-  }
-  piVar3 = (int *)(param_1 + 0x15d48);
-  if (((*piVar3 != 0) && (temp_v2 = FUN_002adee0(), temp_v2 != 0)) &&
-     (*(int *)(*(int *)(*piVar3 + 8) + 0xc) < 0)) {
-    FUN_002a0428(*piVar3,1);
-    nodeSetTranslation3f(*(unsigned int *)(*piVar3 + 8),0);
-    return;
-  }
-  return;
+    }
+    if (scene->modelManager != NULL && FUN_002adee0() != 0 &&
+        ((PreviewManagerView *)scene->modelManager)->node->state < 0) {
+        FUN_002a0428(scene->modelManager, 1);
+        nodeSetTranslation3f(((PreviewManagerView *)scene->modelManager)->node, 0, 0.0f, -32000.0f, 0.0f);
+    }
 }
-
-} /* extern "C" */
+}

@@ -8,7 +8,10 @@ struct BattleEffectTextureSlot {
     char name[0x40];
     void *file;
     u8 loaded;
-    u8 padding49;
+    union {
+        u8 padding49;
+        s8 loadingState;
+    };
     u8 requested;
     u8 padding4B;
 };
@@ -18,4 +21,6 @@ typedef char BattleEffectTextureSlotLayoutCheck[
     offsetof(BattleEffectTextureSlot, loaded) == 0x48 &&
     offsetof(BattleEffectTextureSlot, requested) == 0x4A &&
     sizeof(BattleEffectTextureSlot) == 0x4C ? 1 : -1];
+typedef char BattleEffectTextureSlotLoadingStateCheck[
+    offsetof(BattleEffectTextureSlot, loadingState) == 0x49 ? 1 : -1];
 #endif

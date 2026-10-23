@@ -1,104 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023e908` (_code @ 0x23e908, 0x1ec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: touch-count base address is hoisted before cleanup and the first-page population branch is laid out earlier. */
+#include "ui/PartyPanelState.h"
+#include "shard/W5_W5Match5_GameSaveViews.h"
 
 extern "C" {
-
-int ifTouchRegionRemove(void);
-int FUN_001643b4(int, int);
-int __aeabi_memset4(int, int, unsigned int);
-
-extern int g_partyPanel; /* 0x57f268 */
-
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_001643b4. */
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: __aeabi_memset4. */
-
+extern PartyPanelStateA *g_partyPanel;
+GameSlotTable *gameGetSlotTable(void);
+void ifTouchRegionRemove(void);
+u16 FUN_001643b4(u32, s32);
+void __aeabi_memset4(void *, u32, s32);
 
 void FUN_0023e908(void)
-
 {
-/* irregular: 1 unstructured edge(s); 1 goto(s); 3 native warning(s); review required */
-  int temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  unsigned int temp_v4;
-  
-  temp_v0 = g_partyPanel;
-  temp_v2 = 0;
-  if (0 < *(int *)(g_partyPanel + 0xa00)) {
-    do {
-      ifTouchRegionRemove();
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < *(int *)(temp_v0 + 0xa00));
-  }
-  *(unsigned int *)(temp_v0 + 0xa00) = 0;
-  __aeabi_memset4(temp_v0 + 0x9c4,0x3c,0xffffffff);
-  temp_v2 = 0;
-  piVar5 = (int *)(temp_v0 + 0xa00);
-  if (*(char *)(temp_v0 + 0x42) == '\0') {
-    do {
-      temp_v1 = FUN_001643b4(0x11,temp_v2 + 0x2d);
-      temp_v3 = temp_v2 * 2;
-      temp_v2 = temp_v2 + 1;
-      *(unsigned short *)(temp_v0 + temp_v3 + 0x9c4) = temp_v1;
-      *piVar5 = *(int *)(temp_v0 + 0xa00) + 1;
-    } while (temp_v2 < 4);
-    temp_v4 = 0xc;
-    if (*(int *)(temp_v0 + 0x2c) != 0) {
-      temp_v2 = gameGetSlotTable();
-      temp_v4 = *(unsigned char *)(temp_v2 + 0x1ca3) - 0xc;
+    // These aligned touch fields lie inside the canonical panel's byte-aligned animation padding.
+    struct TouchPanelView {
+        u8 prefix[0x2C];
+        s32 page;
+        u8 unk30[0x12];
+        u8 alternate;
+        u8 unk43[0x981];
+        u16 handles[30];
+        s32 count;
+    };
+    struct RosterCountView { u8 prefix[0x1CA3]; u8 count; };
+    typedef char TouchPanelOffsets[offsetof(TouchPanelView, handles) == 0x9C4 &&
+        offsetof(TouchPanelView, count) == 0xA00 ? 1 : -1];
+    TouchPanelView *panel = reinterpret_cast<TouchPanelView *>(g_partyPanel);
+    for (s32 i = 0; i < panel->count; ++i)
+        ifTouchRegionRemove();
+    panel->count = 0;
+    __aeabi_memset4(panel->handles, sizeof(panel->handles), -1);
+    if (panel->alternate) {
+        for (s32 i = 0; i < 4; ++i) {
+            panel->handles[i] = FUN_001643b4(0x11, i + 0x57);
+            ++panel->count;
+        }
+        for (s32 i = 0; i < reinterpret_cast<RosterCountView *>(gameGetSlotTable())->count; ++i) {
+            panel->handles[i + 4] = FUN_001643b4(0x11, i + 0x5B);
+            ++panel->count;
+        }
+    } else {
+        for (s32 i = 0; i < 4; ++i) {
+            panel->handles[i] = FUN_001643b4(0x11, i + 0x2D);
+            ++panel->count;
+        }
+        s32 visibleCount = 12;
+        if (panel->page != 0)
+            visibleCount = reinterpret_cast<RosterCountView *>(gameGetSlotTable())->count - 12;
+        else if (reinterpret_cast<RosterCountView *>(gameGetSlotTable())->count < 12)
+            visibleCount = reinterpret_cast<RosterCountView *>(gameGetSlotTable())->count;
+        for (s32 i = 0; i < visibleCount; ++i) {
+            panel->handles[i + 4] = FUN_001643b4(0x11, i + 0x31);
+            ++panel->count;
+        }
+        panel->handles[28] = FUN_001643b4(0x11, 0x24);
+        panel->handles[29] = FUN_001643b4(0x11, 0x25);
+        panel->count += 2;
     }
-    else {
-      temp_v2 = gameGetSlotTable();
-      if (*(unsigned char *)(temp_v2 + 0x1ca3) >= 0xc) {
-        temp_v2 = 0;
-        goto LAB_0023ea5c;
-      }
-      temp_v2 = gameGetSlotTable();
-      temp_v4 = (unsigned int)*(unsigned char *)(temp_v2 + 0x1ca3);
-    }
-    temp_v2 = 0;
-    if ((int)temp_v4 >= 1) {
-LAB_0023ea5c:
-      do {
-        temp_v1 = FUN_001643b4(0x11,temp_v2 + 0x31);
-        temp_v3 = temp_v2 * 2;
-        temp_v2 = temp_v2 + 1;
-        *(unsigned short *)(temp_v0 + temp_v3 + 0x9cc) = temp_v1;
-        *piVar5 = *(int *)(temp_v0 + 0xa00) + 1;
-      } while (temp_v2 < (int)temp_v4);
-    }
-    temp_v1 = FUN_001643b4(0x11,0x24);
-    *(unsigned short *)(temp_v0 + 0x9fc) = temp_v1;
-    temp_v1 = FUN_001643b4(0x11,0x25);
-    *(unsigned short *)(temp_v0 + 0x9fe) = temp_v1;
-    *piVar5 = *(int *)(temp_v0 + 0xa00) + 2;
-    return;
-  }
-  do {
-    temp_v1 = FUN_001643b4(0x11,temp_v2 + 0x57);
-    temp_v3 = temp_v2 * 2;
-    temp_v2 = temp_v2 + 1;
-    *(unsigned short *)(temp_v0 + temp_v3 + 0x9c4) = temp_v1;
-    *piVar5 = *(int *)(temp_v0 + 0xa00) + 1;
-  } while (temp_v2 < 4);
-  temp_v3 = 0;
-  temp_v2 = gameGetSlotTable();
-  if (*(char *)(temp_v2 + 0x1ca3) != '\0') {
-    do {
-      temp_v1 = FUN_001643b4(0x11,temp_v3 + 0x5b);
-      temp_v2 = temp_v3 * 2;
-      temp_v3 = temp_v3 + 1;
-      *(unsigned short *)(temp_v0 + temp_v2 + 0x9cc) = temp_v1;
-      *piVar5 = *(int *)(temp_v0 + 0xa00) + 1;
-      temp_v2 = gameGetSlotTable();
-    } while (temp_v3 < (int)(unsigned int)*(unsigned char *)(temp_v2 + 0x1ca3));
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -1,112 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b75b0` (_code @ 0x2b75b0, 0x1c0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: resource-array initialization lowers to memclr instead of retail's individual word stores, changing saved registers; size-output stack slot also differs. */
+#include "shard/W4_Match3_EplSlots.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-
-int textFormatBuffer(unsigned char [32], unsigned char *);
-int tripleClear(void);
-int asdMemoryAllocTracked(int, int, int, int);
-int FUN_001642e4(unsigned char *, unsigned int [2], int, int);
-int FUN_001abbc4(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
-
-extern unsigned char LAB_002b7784; /* 0x2b7784 */
-extern unsigned char LAB_002b77a0; /* 0x2b77a0 */
-extern int g_eplSlots; /* 0x580c8c */
-extern int g_gameState; /* 0x5f15fc */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: tripleClear. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_001642e4. */
-/* Supplied declaration required: FUN_001abbc4. */
-
+extern s32 g_gameState;
+extern const char DAT_00531a18[];
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
+void tripleClear(void *triple);
+void textFormatBuffer(char *destination, const char *format, ...);
+void *FUN_001642e4(const char *path, u32 *sizes, u32 mode, u32 alignment);
+void *FUN_001abbc4(void *buffer);
 
 void FUN_002b75b0(void)
-
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char *puVar3;
-  int temp_v2;
-  unsigned int temp_v3 [2];
-  unsigned char temp_v4 [32];
-  
-  if (g_eplSlots == 0) {
-    temp_v3[0] = 1;
-    temp_v0 = 0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x64c);
-    g_eplSlots = temp_v0;
-    tripleClear();
-    temp_v1 = 0;
-    do {
-      temp_v2 = temp_v1 + 1;
-      temp_v1 = temp_v0 + temp_v1 * 100;
-      *(unsigned int *)(temp_v1 + 0xc) = 0;
-      *(unsigned int *)(temp_v1 + 0x10) = 0;
-      *(unsigned int *)(temp_v1 + 0x14) = 0;
-      *(unsigned int *)(temp_v1 + 0x18) = 0;
-      *(unsigned int *)(temp_v1 + 0x1c) = 0;
-      *(unsigned int *)(temp_v1 + 0x20) = 0;
-      *(unsigned int *)(temp_v1 + 0x24) = 0;
-      *(unsigned int *)(temp_v1 + 0x28) = 0;
-      *(unsigned int *)(temp_v1 + 0x2c) = 0;
-      *(unsigned int *)(temp_v1 + 0x30) = 0;
-      *(unsigned int *)(temp_v1 + 0x34) = 0;
-      *(unsigned int *)(temp_v1 + 0x38) = 0;
-      *(unsigned int *)(temp_v1 + 0x3c) = 0;
-      *(unsigned int *)(temp_v1 + 0x40) = 0;
-      *(unsigned int *)(temp_v1 + 0x44) = 0;
-      *(unsigned int *)(temp_v1 + 0x48) = 0;
-      *(unsigned int *)(temp_v1 + 0x4c) = 0;
-      *(unsigned int *)(temp_v1 + 0x50) = 0;
-      *(unsigned int *)(temp_v1 + 100) = 0;
-      *(unsigned int *)(temp_v1 + 0x68) = 0;
-      *(unsigned int *)(temp_v1 + 0x54) = 0;
-      *(unsigned int *)(temp_v1 + 0x58) = 0;
-      *(unsigned int *)(temp_v1 + 0x5c) = 0;
-      *(unsigned int *)(temp_v1 + 0x60) = 0;
-      *(unsigned char *)(temp_v1 + 0x6c) = 0;
-      temp_v1 = temp_v2;
-    } while (temp_v2 < 0x10);
-  }
-  if (g_gameState == 0x26) {
-    textFormatBuffer(temp_v4,&LAB_002b7784);
-    temp_v1 = g_eplSlots;
-    puVar3 = temp_v4;
-    if (*(int *)(g_eplSlots + 0x68) == 0) {
-      FUN_001642e4(puVar3,temp_v3,1,0x80);
-      *(unsigned char **)(temp_v1 + 100) = puVar3;
-      FUN_001abbc4();
-      *(unsigned char **)(temp_v1 + 0x68) = puVar3;
+    u32 size;
+    char path[32];
+    if (g_eplSlots == NULL) {
+        asdDebugTrace(DAT_00531a18, 82);
+        g_eplSlots = static_cast<EplSlots *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(EplSlots), 1));
+        EplSlots *pool = g_eplSlots;
+        tripleClear(pool);
+        for (s32 index = 0; index < EPL_SLOT_COUNT; ++index) {
+            EplSlot *slot = &pool->slots[index];
+            for (s32 resource = 0; resource < 18; ++resource)
+                slot->initialization.resources[resource] = 0;
+            slot->buffer = NULL;
+            slot->list = NULL;
+            for (s32 parameter = 0; parameter < 4; ++parameter)
+                slot->initialization.parameters[parameter] = 0.0f;
+            slot->loaded = 0;
+        }
     }
-  }
-  if ((g_gameState == 0x2b || g_gameState == 0x2c) || g_gameState == 0x2f) {
-    textFormatBuffer(temp_v4,&LAB_002b7784);
-    temp_v1 = g_eplSlots;
-    puVar3 = temp_v4;
-    if (*(int *)(g_eplSlots + 0x68) == 0) {
-      FUN_001642e4(puVar3,temp_v3,1,0x80);
-      *(unsigned char **)(temp_v1 + 100) = puVar3;
-      FUN_001abbc4();
-      *(unsigned char **)(temp_v1 + 0x68) = puVar3;
+    if (g_gameState == 0x26) {
+        textFormatBuffer(path, "effect_editor/SIBUKI.EPL");
+        EplSlot *slot = &g_eplSlots->slots[0];
+        if (slot->list == NULL) {
+            slot->buffer = FUN_001642e4(path, &size, 1, 0x80);
+            slot->list = FUN_001abbc4(slot->buffer);
+        }
     }
-  }
-  temp_v1 = g_eplSlots;
-  puVar3 = &LAB_002b77a0;
-  if (*(int *)(g_eplSlots + 0x194) == 0) {
-    FUN_001642e4(&LAB_002b77a0,temp_v3,1,0x80);
-    *(unsigned char **)(temp_v1 + 400) = puVar3;
-    FUN_001abbc4();
-    *(unsigned char **)(temp_v1 + 0x194) = puVar3;
-  }
-  return;
+    if (g_gameState == 0x2B || g_gameState == 0x2C || g_gameState == 0x2F) {
+        textFormatBuffer(path, "effect_editor/SIBUKI.EPL");
+        EplSlot *slot = &g_eplSlots->slots[0];
+        if (slot->list == NULL) {
+            slot->buffer = FUN_001642e4(path, &size, 1, 0x80);
+            slot->list = FUN_001abbc4(slot->buffer);
+        }
+    }
+    EplSlot *slot = &g_eplSlots->slots[3];
+    if (slot->list == NULL) {
+        slot->buffer = FUN_001642e4("effect_editor/NB_003.EPL", &size, 1, 0x80);
+        slot->list = FUN_001abbc4(slot->buffer);
+    }
 }
-
-} /* extern "C" */
+}

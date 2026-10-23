@@ -44,18 +44,38 @@ typedef struct AsdModelIdList {
     /* 0x04 */ u32 id[4];
 } AsdModelIdList;
 
+struct AsdCopyDimensions {
+    u32 size : 23;
+    u32 format : 2;
+    u32 unk19 : 7;
+};
 struct AsdCmdRecord {
     /* 0x00 */ u8 kind;
     u8 unk01[3];
     /* 0x04 */ const void *commands;
     /* 0x08 */ u32 byteCount;
-    /* 0x0C */ u32 flags;
-    u8 unk10[0xC];
+    union {
+        /* 0x0C */ u32 flags;
+        /* 0x0C */ AsdCopyDimensions copySource;
+    };
+    union {
+        /* 0x10 */ u8 unk10[0xC];
+        struct {
+            /* 0x10 */ void *address;
+            /* 0x14 */ u32 pitch;
+            /* 0x18 */ AsdCopyDimensions dimensions;
+        } copyTarget;
+    };
 };
 typedef char AsdCmdRecordLayoutCheck[
     offsetof(AsdCmdRecord, kind) == 0 && offsetof(AsdCmdRecord, commands) == 4 &&
     offsetof(AsdCmdRecord, byteCount) == 8 && offsetof(AsdCmdRecord, flags) == 0xC &&
     sizeof(AsdCmdRecord) == 0x1C ? 1 : -1];
+typedef char AsdCmdCopyRecordLayoutCheck[
+    sizeof(AsdCopyDimensions) == 4 && offsetof(AsdCmdRecord, copySource) == 0xC &&
+    offsetof(AsdCmdRecord, copyTarget.address) == 0x10 &&
+    offsetof(AsdCmdRecord, copyTarget.pitch) == 0x14 &&
+    offsetof(AsdCmdRecord, copyTarget.dimensions) == 0x18 ? 1 : -1];
 
 /* The render command buffer the model code appends to (see g_commandBufferCursor). */
 typedef struct AsdCmdBuffer {
@@ -96,6 +116,14 @@ typedef struct AsdGfxContext {
             /* 0x11 */ u8 pending;
             /* 0x12 */ u8 enabled;
         } submission;
+        struct {
+            u8 prefix[0x1C];
+            /* 0x1C */ AsdCmdBuffer *buckets[32];
+        } bufferRegistry;
+        struct {
+            u8 prefix[8];
+            s32 croppedRows[2];
+        } presentation;
     };
     /* 0x9C */ AsdCmdBuffer *cmdBuffer;
     union {
@@ -114,5 +142,11 @@ typedef char AsdGfxContextSubmissionLayoutCheck[
     offsetof(AsdGfxContext, submission.enabled) == 0x12 &&
     offsetof(AsdGfxContext, activeBuffer) == 0xA0 &&
     sizeof(AsdGfxContext) == 0x128 ? 1 : -1];
+typedef char AsdGfxBufferRegistryOffsetCheck[
+    offsetof(AsdGfxContext, bufferRegistry.buckets) == 0x1C ? 1 : -1];
+typedef char AsdGfxPresentationOffsetCheck[
+    offsetof(AsdGfxContext, presentation.croppedRows) == 8 &&
+    sizeof(AsdGfxContext) == 0x128 ? 1 : -1];
+
 
 #endif

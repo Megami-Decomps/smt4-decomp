@@ -1,74 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `commonBgCreate` (_code @ 0x2d7bb0, 0x12c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: text/task call argument scheduling adds handle moves and shifts the literal pool. */
+#include "shard/W6_W6Match5_CommonBackground.h"
+#include "sys/Task.h"
+#include "AsdSDK/AsdDebug.h"
 
+// The final word lies past the published CommonBackgroundChild prefix.
+struct CommonBackgroundDrawWork {
+    /* 0x00 */ u32 job;
+    /* 0x04 */ u32 state;
+    /* 0x08 */ u32 frame;
+    /* 0x0C */ u32 engageText;
+    /* 0x10 */ u32 touchText;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u32 unk1C;
+    /* 0x20 */ u32 unk20;
+};
 extern "C" {
+void* asdMemoryAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
+u32 asdTextCreate(u32 kind);
+void asdTextDrawFormatted(u32 text, s32 kind, u32 color, s32 x, s32 y, const char* format);
+void asdTMTexTableLoadSprites(u32 id);
+void FUN_002c58c8(u32 id, s32 option);
+u32 taskCreateDraw(const char* name, u32 priority, u32 size, u32 flags,
+                   TaskFunc callback, TaskFunc destroy, void* data, u32 parent);
+void FUN_00221310(void* work);
+void commonBgDestroyJobWork(void* work);
+void FUN_002ed628(void* work);
 
-int asdTextDrawFormatted(unsigned int, int, unsigned int, int, int, unsigned char *);
-int taskCreateDraw(...);
-int asdTMTexTableLoadSprites(int);
-int asdMemoryAlloc(int, int, int, int, int);
-int FUN_002c58c8(int, int);
-
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern int FUN_00221310(...); /* 0x221310 */
-extern unsigned char LAB_002d7d1c; /* 0x2d7d1c */
-extern unsigned char LAB_002d7d2c; /* 0x2d7d2c */
-extern unsigned char LAB_002d7d64; /* 0x2d7d64 */
-extern unsigned char LAB_002d7d78; /* 0x2d7d78 */
-extern int commonBgDestroyJobWork(...); /* 0x2ed5dc */
-extern int FUN_002ed628(...); /* 0x2ed628 */
-extern unsigned int *DAT_0043dc24; /* 0x43dc24 */
-extern unsigned int *DAT_0043dc28; /* 0x43dc28 */
-
-/* Supplied declaration required: asdTextDrawFormatted. */
-extern unsigned int asdTextCreate(unsigned int);
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdTMTexTableLoadSprites. */
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: FUN_002c58c8. */
-
-
+// Create the common background's text prompts and its update/draw tasks.
 void commonBgCreate(void)
-
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  unsigned char *puVar3;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAlloc(0x100,0x100,0,0x24,1);
-  *puVar1 = 0;
-  puVar1[1] = 0;
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1[4] = 0;
-  puVar1[5] = 0;
-  puVar1[6] = 0;
-  puVar1[7] = 0;
-  puVar1[8] = 0;
-  DAT_0043dc28 = puVar1;
-  temp_v0 = asdTextCreate(0);
-  puVar1[3] = temp_v0;
-  asdTextDrawFormatted(temp_v0,3,0xffffffff,0,0,&LAB_002d7d1c);
-  temp_v0 = asdTextCreate(0);
-  puVar1[4] = temp_v0;
-  asdTextDrawFormatted(temp_v0,3,0xffffffff,0,0,&LAB_002d7d2c);
-  asdTMTexTableLoadSprites(0x2d);
-  FUN_002c58c8(0x2d,0);
-  puVar3 = &LAB_002d7d64;
-  taskCreateDraw(&LAB_002d7d64,2,8,0,FUN_00221310,commonBgDestroyJobWork,puVar1,*DAT_0043dc24);
-  *puVar1 = (unsigned int)puVar3;
-  taskCreateDraw(&LAB_002d7d78,0xe7,8,0,FUN_002ed628,0,puVar1,puVar3);
-  return;
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\camp\\CommonBg\\CommonBg.cpp", 1292);
+    CommonBackgroundDrawWork* work = static_cast<CommonBackgroundDrawWork*>(
+        asdMemoryAlloc(0x100, 0x100, 0, sizeof(CommonBackgroundDrawWork), 1));
+    work->job = 0;
+    work->state = 0;
+    work->frame = 0;
+    work->engageText = 0;
+    work->touchText = 0;
+    work->unk14 = 0;
+    work->unk18 = 0;
+    work->unk1C = 0;
+    work->unk20 = 0;
+    g_commonBg.child = reinterpret_cast<CommonBackgroundChild*>(work);
+    u32 text = asdTextCreate(0);
+    work->engageText = text;
+    asdTextDrawFormatted(text, 3, 0xFFFFFFFF, 0, 0,
+        "\x82\x64\x82\x8E\x82\x87\x82\x81\x82\x87\x82\x85");
+    text = asdTextCreate(0);
+    work->touchText = text;
+    asdTextDrawFormatted(text, 3, 0xFFFFFFFF, 0, 0,
+        "\x82\x6F\x82\x8C\x82\x85\x82\x81\x82\x93\x82\x85\x81\x40\x82\x94"
+        "\x82\x8F\x82\x95\x82\x83\x82\x88\x81\x40\x82\x94\x82\x88\x82\x85"
+        "\x81\x40\x82\x89\x82\x83\x82\x8F\x82\x8E\x81\x44");
+    asdTMTexTableLoadSprites(0x2D);
+    FUN_002c58c8(0x2D, 0);
+    u32 job = taskCreateDraw("COMBG EVE CALC", 2, 8, 0, FUN_00221310,
+        commonBgDestroyJobWork, work, g_commonBg.background->counters.unk00);
+    work->job = job;
+    taskCreateDraw("COMBG DDRAW", 0xE7, 8, 0, FUN_002ed628, NULL, work, job);
 }
-
-} /* extern "C" */
+}

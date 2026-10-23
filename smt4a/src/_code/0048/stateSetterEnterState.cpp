@@ -1,71 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `stateSetterEnterState` (_code @ 0x4853fc, 0x110 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail preserves three additional region-store/base-pointer moves; state argument scheduling differs. */
+#include "common.h"
+#include <stddef.h>
 
 extern "C" {
+void ifTouchRegionRemove();
+void sysPlaySe(s32 sound);
+void __aeabi_memset4(void *destination, u32 size, u32 value);
+void scrScriptProcessStartEntry(void *process, s32 entry);
+void obj04Finish();
+u16 FUN_001643b4(u32 group, s32 sprite);
 
-int ifTouchRegionRemove(void);
-int sysPlaySe(int);
-int __aeabi_memset4(int, int, unsigned int);
-int scrScriptProcessStartEntry(unsigned int, int);
-int obj04Finish(void);
-
-/* Supplied declaration required: ifTouchRegionRemove. */
-extern unsigned short FUN_001643b4(unsigned int, int);
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: obj04Finish. */
-
-
-void stateSetterEnterState(int param_1,int param_2)
-
+/* Rebuild touch regions on activation and finish the transition on either exit state. */
+void stateSetterEnterState(void *object, s32 nextState)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  char temp_v1;
-  unsigned short temp_v2;
-  int temp_v3;
-  
-  *(unsigned int *)(param_1 + 0xc) = 0;
-  temp_v1 = *(char *)(param_1 + 1);
-  *(char *)(param_1 + 1) = (char)param_2;
-  if (param_2 == 2) {
-    if (0 < *(short *)(param_1 + 0x55c)) {
-      temp_v3 = 0;
-      do {
-        ifTouchRegionRemove();
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < *(short *)(param_1 + 0x55c));
-      __aeabi_memset4(param_1 + 0x438,0x124,0xffffffff);
-      *(unsigned short *)(param_1 + 0x55c) = 0;
+    // This object's touch table extends beyond the small shared StateSetter prefix.
+    struct EntryView {
+        u8 unk00;
+        u8 state;
+        u8 unk02[0xa];
+        u32 timer;
+        u8 unk10[0x25c];
+        void *process; // 0x26c
+        u8 active;
+        u8 unk271[0x1c7];
+        u16 regions[0x92]; // 0x438
+        s16 regionCount; // 0x55c
+        u16 sound;
+    };
+    typedef char EntryViewLayout[offsetof(EntryView, regions) == 0x438 &&
+        offsetof(EntryView, regionCount) == 0x55c && sizeof(EntryView) == 0x560 ? 1 : -1];
+    EntryView *entry = static_cast<EntryView *>(object);
+    entry->timer = 0;
+    u8 previousState = entry->state;
+    entry->state = nextState;
+    if (nextState == 2) {
+        if (entry->regionCount > 0) {
+            for (s32 i = 0; i < entry->regionCount; ++i) {
+                ifTouchRegionRemove();
+            }
+            __aeabi_memset4(entry->regions, sizeof(entry->regions), 0xffffffff);
+            entry->regionCount = 0;
+        }
+        for (s32 i = 0; i < 90; ++i) {
+            entry->regions[i + 3] = FUN_001643b4(0x23, i + 0x56);
+            ++entry->regionCount;
+        }
+        for (s32 i = 0; i < 4; ++i) {
+            entry->regions[i + 139] = FUN_001643b4(0x23, i + 0xc6);
+            ++entry->regionCount;
+        }
+        if (previousState != 4 && previousState != 5) {
+            sysPlaySe(entry->sound);
+        }
+        scrScriptProcessStartEntry(entry->process, 0);
     }
-    temp_v3 = 0;
-    do {
-      temp_v2 = FUN_001643b4(0x23,temp_v3 + 0x56);
-      temp_v0 = temp_v3 * 2;
-      temp_v3 = temp_v3 + 1;
-      *(unsigned short *)(param_1 + temp_v0 + 0x43e) = temp_v2;
-      *(short *)(param_1 + 0x55c) = *(short *)(param_1 + 0x55c) + 1;
-    } while (temp_v3 < 0x5a);
-    temp_v3 = 0;
-    do {
-      temp_v2 = FUN_001643b4(0x23,temp_v3 + 0xc6);
-      temp_v0 = temp_v3 * 2;
-      temp_v3 = temp_v3 + 1;
-      *(unsigned short *)(param_1 + temp_v0 + 0x54e) = temp_v2;
-      *(short *)(param_1 + 0x55c) = *(short *)(param_1 + 0x55c) + 1;
-    } while (temp_v3 < 4);
-    if (temp_v1 != '\x04' && temp_v1 != '\x05') {
-      sysPlaySe(*(unsigned short *)(param_1 + 0x55e));
+    if (nextState == 4 || nextState == 5) {
+        obj04Finish();
+        entry->active = 0;
     }
-    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x26c),0);
-  }
-  if (param_2 == 4 || param_2 == 5) {
-    obj04Finish();
-    *(unsigned char *)(param_1 + 0x270) = 0;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -1,97 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038791c` (_code @ 0x38791c, 0x1a0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: saved job/portrait/mode registers, position snapshot load scheduling, and final mode branch polarity differ. */
+#include "ui/SpriteTransition.h"
 extern "C" {
+s32 gameFlagIsSet(u32 flag);
+SpriteTransitionWork *jobGetWork(u32 job);
+void aocSlotRelease(SpriteTransitionWork *work);
+s32 FUN_003ae9d8(u32 job, u32 portrait);
+void FUN_0019d96c(SpriteTransitionWork *work, u32 mode, u32 flags);
+void FUN_001ad1ac(Vec3f *target, u32 portrait);
+void bustupCutStartSlotTransition(u32 job, u32 first, u32 second, u32 third, u32 flags);
 
-int bustupCutStartSlotTransition(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-int jobGetWork(int);
-int FUN_0019d96c(...);
-int FUN_001ad0fc(void);
-int FUN_001ad1ac(unsigned int *, unsigned int, unsigned int, unsigned int);
-
-/* stack frame of param_6: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_6_stack;
-
-/* Supplied declaration required: bustupCutStartSlotTransition. */
-/* Supplied declaration required: jobGetWork. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019d96c. */
-/* Supplied declaration required: FUN_001ad0fc. */
-/* Supplied declaration required: FUN_001ad1ac. */
-extern int FUN_003ae9d8(int, unsigned int);
-
-
-void FUN_0038791c(int param_1,unsigned int param_2,int param_3,unsigned int param_4,unsigned int param_5,
-                 unsigned int param_6)
-
+void FUN_0038791c(u32 job, u32 portrait, s32 mode, u32 first, u32 second, u32 third)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  
-  temp_v1 = param_4;
-  temp_v0 = gameFlagIsSet(0x522);
-  if ((temp_v0 != 0) && (param_1 == 0)) {
-    return;
-  }
-  puVar2 = (unsigned int *)jobGetWork(param_1);
-  *(unsigned char *)(puVar2 + 0xc) = 1;
-  FUN_001ad0fc();
-  puVar2[2] = param_2;
-  temp_v0 = FUN_003ae9d8(param_1,param_2);
-  if (temp_v0 == 0) {
-    puVar2[9] = 0;
-    if (puVar2[0x1e] != 0) {
-      puVar2[0x1e] = 1;
-      return;
-    }
-    *(unsigned char *)(puVar2 + 0xc) = 0;
-    puVar2[10] = 0;
-    return;
-  }
-  if (temp_v0 == 1) {
-    FUN_0019d96c(puVar2,2,0);
-    puVar2[0x1e] = 2;
-    return;
-  }
-  if (temp_v0 != 2) {
-    if (temp_v0 != 3) {
-      return;
-    }
-    FUN_0019d96c(puVar2,5,0);
-    temp_v0 = jobGetWork(param_1);
-    *(unsigned int *)(temp_v0 + 0x78) = 1;
-    *(unsigned int *)(temp_v0 + 0x4c) = *(unsigned int *)(temp_v0 + 0x34);
-    *(unsigned int *)(temp_v0 + 0x50) = *(unsigned int *)(temp_v0 + 0x38);
-    *(unsigned int *)(temp_v0 + 0x54) = *(unsigned int *)(temp_v0 + 0x3c);
-    FUN_001ad1ac(puVar2 + 0x10,puVar2[2],*(unsigned int *)(temp_v0 + 0x38),temp_v1);
-    return;
-  }
-  if (param_3 != 0) {
-    if (param_3 != 1) {
-      if (param_3 == 2) {
-        bustupCutStartSlotTransition(*puVar2,param_4,param_5,param_6,0xffffffff);
-        FUN_0019d96c(puVar2,7,0);
-        puVar2[0x1e] = 2;
+    if (gameFlagIsSet(0x522) && job == 0)
         return;
-      }
-      if (param_3 != 3) {
-        puVar2[0x1e] = 2;
-        return;
-      }
-      bustupCutStartSlotTransition(*puVar2,param_4,param_5,param_6,0xffffffff);
+    SpriteTransitionWork *work = jobGetWork(job);
+    work->initialized = 1;
+    aocSlotRelease(work);
+    work->unk08 = portrait;
+    s32 result = FUN_003ae9d8(job, portrait);
+    switch (result) {
+    case 0:
+        work->mode = 0;
+        if (work->state)
+            work->state = 1;
+        else {
+            work->initialized = 0;
+            work->progress = 0.0f;
+        }
+        break;
+    case 1:
+        FUN_0019d96c(work, 2, 0);
+        work->state = 2;
+        break;
+    case 2:
+        switch (mode) {
+        case 0:
+            FUN_0019d96c(work, 7, 0);
+            break;
+        case 1:
+            FUN_0019d96c(work, 6, 0);
+            break;
+        case 2:
+            bustupCutStartSlotTransition(work->job, first, second, third, 0xFFFFFFFF);
+            FUN_0019d96c(work, 7, 0);
+            break;
+        case 3:
+            bustupCutStartSlotTransition(work->job, first, second, third, 0xFFFFFFFF);
+            FUN_0019d96c(work, 6, 0);
+            break;
+        }
+        work->state = 2;
+        break;
+    case 3:
+        FUN_0019d96c(work, 5, 0);
+        {
+            SpriteTransitionWork *current = jobGetWork(job);
+            // A naturally aligned local view avoids enlarging the byte-aligned padding union.
+            struct PositionView { u8 prefix[0x34]; Vec3f position; };
+            current->state = 1;
+            current->start = ((const PositionView *)current)->position;
+        }
+        FUN_001ad1ac(&work->target, work->unk08);
+        break;
     }
-    FUN_0019d96c(puVar2,6,0);
-  }
-  else {
-    FUN_0019d96c(puVar2,7,0);
-  }
-  puVar2[0x1e] = 2;
-  return;
 }
-
-} /* extern "C" */
+}

@@ -15,7 +15,10 @@ struct MobiclipStartTable {
     s32 audioIndex;
 };
 struct MobiclipStartClock {
-    u8 unk00[8];
+    union {
+        u8 unk00[8];
+        /* 0x00 */ u8 stopRequested;
+    };
     s64 position;
 };
 
@@ -24,5 +27,7 @@ typedef char MobiclipStartLayoutCheck[
     offsetof(MobiclipStartRecord, ticks) == 0x10 && sizeof(MobiclipStartRecord) == 0x14 &&
     offsetof(MobiclipStartTable, audioIndex) == 0x548 && sizeof(MobiclipStartTable) == 0x54c &&
     offsetof(MobiclipStartClock, position) == 8 && sizeof(MobiclipStartClock) == 0x10 ? 1 : -1];
+typedef char MobiclipStartStopFlagOffsetCheck[
+    offsetof(MobiclipStartClock, stopRequested) == 0 && sizeof(MobiclipStartClock) == 0x10 ? 1 : -1];
 
 #endif

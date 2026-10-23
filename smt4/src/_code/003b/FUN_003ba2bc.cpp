@@ -36,7 +36,7 @@ s32 stageAssetsLoaded(void);
 s32 spriteTable2aIsLoaded(void *sprites);
 Unk3ba2bcPart *FUN_00297060(void *resourceA, void *resourceB);
 void FUN_002bd808(void *a, void *b);
-void FUN_003b82c4(Unk3ba2bcOwner *owner);
+void mikadoLoadSceneResources(Unk3ba2bcOwner *owner);
 void buttonHelpSelectByProgress(Unk3ba2bcOwner *owner);
 
 /* Once everything is loaded, builds both parts and, if a start is pending, starts the owner. */
@@ -54,7 +54,7 @@ void FUN_003ba2bc(Unk3ba2bcOwner *owner)
     owner->secondPart->mode = 2;
     if (owner->flags & UNK3BA2BC_FLAG_PENDING) {
         FUN_002bd808(owner->unk03C, owner->unk042);
-        FUN_003b82c4(owner);
+        mikadoLoadSceneResources(owner);
         owner->step = 2;
         owner->stepTimer = 0;
         owner->flags &= ~UNK3BA2BC_FLAG_PENDING;

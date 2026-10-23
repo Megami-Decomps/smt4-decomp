@@ -1,54 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f1f78` (_code @ 0x4f1f78, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler batches vector loads/stores and uses a transition-relative base instead of retail camera bases. */
+#include "battle/btlCamera.h"
 
 extern "C" {
+f32 FUN_003d4dd4(u32 mode, s32 duration, s32 frame);
 
-int FUN_003d4dd4(unsigned int, int, unsigned int);
-
-/* Supplied declaration required: FUN_003d4dd4. */
-
-
-void FUN_004f1f78(int param_1)
-
+// Ease camera orientation and its offset toward their targets, then stop at the final values.
+void FUN_004f1f78(BtlCameraA *camera)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  
-  temp_v1 = *(float *)(param_1 + 0x7b8);
-  temp_v2 = *(float *)(param_1 + 0x7b0) - *(float *)(param_1 + 0x7a4);
-  temp_v3 = *(float *)(param_1 + 0x7b4) - *(float *)(param_1 + 0x7a8);
-  temp_v4 = temp_v1 - *(float *)(param_1 + 0x7ac);
-  FUN_003d4dd4(*(unsigned int *)(param_1 + 0x7c4),*(int *)(param_1 + 0x7bc),
-               *(unsigned int *)(param_1 + 0x7c0));
-  *(float *)(param_1 + 0x7a4) = *(float *)(param_1 + 0x7a4) + temp_v2 * temp_v1;
-  *(float *)(param_1 + 0x7a8) = *(float *)(param_1 + 0x7a8) + temp_v3 * temp_v1;
-  *(float *)(param_1 + 0x7ac) = *(float *)(param_1 + 0x7ac) + temp_v4 * temp_v1;
-  *(float *)(param_1 + 2000) =
-       *(float *)(param_1 + 2000) +
-       (*(float *)(param_1 + 0x7dc) - *(float *)(param_1 + 2000)) * temp_v1;
-  *(float *)(param_1 + 0x7d4) =
-       *(float *)(param_1 + 0x7d4) +
-       (*(float *)(param_1 + 0x7e0) - *(float *)(param_1 + 0x7d4)) * temp_v1;
-  *(float *)(param_1 + 0x7d8) =
-       *(float *)(param_1 + 0x7d8) +
-       (*(float *)(param_1 + 0x7e4) - *(float *)(param_1 + 0x7d8)) * temp_v1;
-  temp_v0 = *(int *)(param_1 + 0x7c0) + 1;
-  *(int *)(param_1 + 0x7c0) = temp_v0;
-  if (*(int *)(param_1 + 0x7bc) < temp_v0) {
-    *(float *)(param_1 + 0x7a4) = *(float *)(param_1 + 0x7b0);
-    *(unsigned int *)(param_1 + 0x7a8) = *(unsigned int *)(param_1 + 0x7b4);
-    *(unsigned int *)(param_1 + 0x7ac) = *(unsigned int *)(param_1 + 0x7b8);
-    *(unsigned int *)(param_1 + 2000) = *(unsigned int *)(param_1 + 0x7dc);
-    *(unsigned int *)(param_1 + 0x7d4) = *(unsigned int *)(param_1 + 0x7e0);
-    *(unsigned int *)(param_1 + 0x7d8) = *(unsigned int *)(param_1 + 0x7e4);
-    *(unsigned int *)(param_1 + 0x64c) = *(unsigned int *)(param_1 + 0x64c) & 0xff7fffff;
-  }
-  return;
+    BtlCameraOrientationTransition *transition = &camera->orientation;
+    BtlCameraVector3 delta;
+    delta.x = transition->target.x - transition->current.x;
+    delta.y = transition->target.y - transition->current.y;
+    delta.z = transition->target.z - transition->current.z;
+    f32 factor = FUN_003d4dd4(transition->mode, transition->duration, transition->frame);
+    transition->current.x += delta.x * factor;
+    transition->current.y += delta.y * factor;
+    transition->current.z += delta.z * factor;
+    BtlCameraVector3 offsetDelta;
+    offsetDelta.x = transition->targetOffset.x - transition->currentOffset.x;
+    offsetDelta.y = transition->targetOffset.y - transition->currentOffset.y;
+    offsetDelta.z = transition->targetOffset.z - transition->currentOffset.z;
+    transition->currentOffset.x += offsetDelta.x * factor;
+    transition->currentOffset.y += offsetDelta.y * factor;
+    transition->currentOffset.z += offsetDelta.z * factor;
+    ++transition->frame;
+    if (transition->frame > transition->duration) {
+        transition->current = transition->target;
+        transition->currentOffset = transition->targetOffset;
+        camera->flags &= ~0x800000;
+    }
 }
-
-} /* extern "C" */
+}

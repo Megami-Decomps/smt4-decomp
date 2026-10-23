@@ -1,94 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002945a4` (_code @ 0x2945a4, 0x1c8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the prologue reserves its stack before copying the model argument instead of after; all remaining instructions agree. */
+#include "shard/W6_W6Match2_RankedTableRecord.h"
 
 extern "C" {
+u32 FUN_0023cef0(u32 model, s32 part, u16 group, u16 variant, u16 bodyEquipment);
+void FUN_0023f2e4(u32 model, s32 part, const char* path, u32 option);
+PlayerEquipmentAppearance* gameGetPlayerData(void);
+s32 textFormatBuffer(char* destination, const char* format, ...);
 
-int FUN_0023cef0(...);
-int FUN_0023f2e4(...);
-int dataTable08Sub2GetRecord(void);
-int textFormatBuffer(...);
-
-typedef struct fn_002945a4_arg2 fn_002945a4_arg2;
-struct fn_002945a4_arg2 {
-    unsigned char pad_0x0[0x52];
-    byte field_0x52; /* +0x52 */
-    unsigned char pad_0x53[0x1d];
-    ushort field_0x70; /* +0x70 */
-    ushort field_0x72; /* +0x72 */
-};
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp60; /* 0x60: local_60 */
-} param_4_stack;
-
-extern unsigned char LAB_0029476c; /* 0x29476c */
-extern unsigned char LAB_00294788; /* 0x294788 */
-extern unsigned char LAB_002947a4; /* 0x2947a4 */
-
-/* Supplied declaration required: FUN_0023cef0. */
-/* Supplied declaration required: FUN_0023f2e4. */
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
-extern int gameGetPlayerData(void);
-/* Supplied declaration required: textFormatBuffer. */
-
-
-void FUN_002945a4(unsigned int param_1,int param_2,fn_002945a4_arg2 *param_3,unsigned int param_4)
-
+// Replace one outfit part; changing the body also refreshes compatible head and leg models.
+void FUN_002945a4(u32 model, s32 part, u16 equipment, u32 option)
 {
-/* irregular: 4 native warning(s); review required */
-  fn_002945a4_arg2 *pfVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3 [64];
-  
-  pfVar1 = param_3;
-  dataTable08Sub2GetRecord();
-  if (param_2 != 0) {
-    if (param_2 != 1) {
-      if (param_2 == 2) {
-        if (pfVar1->field_0x52 != 6) {
-          return;
+    RankedTableRecord* record = dataTable08Sub2GetRecord(equipment);
+    char path[64];
+    switch (part) {
+    case 0: {
+        if (record->appearance.kind != 4) {
+            return;
         }
-        temp_v0 = FUN_0023cef0(param_1,2,pfVar1->field_0x70,pfVar1->field_0x72,0);
-        textFormatBuffer(temp_v3,&LAB_002947a4,pfVar1->field_0x70,pfVar1->field_0x72,temp_v0);
-      }
+        u32 variant = FUN_0023cef0(model, 0, record->model.group, record->model.variant, 0);
+        textFormatBuffer(path, "player/pl%02d_%03dhd%d.bam", record->model.group, record->model.variant, variant);
+        break;
     }
-    else {
-      if (pfVar1->field_0x52 != 5) {
-        return;
-      }
-      textFormatBuffer(temp_v3,&LAB_00294788,pfVar1->field_0x70,pfVar1->field_0x72);
+    case 1:
+        if (record->appearance.kind != 5) {
+            return;
+        }
+        textFormatBuffer(path, "player/pl%02d_%03dbd0.bam", record->model.group, record->model.variant);
+        break;
+    case 2: {
+        if (record->appearance.kind != 6) {
+            return;
+        }
+        u32 variant = FUN_0023cef0(model, 2, record->model.group, record->model.variant, 0);
+        textFormatBuffer(path, "player/pl%02d_%03dlg%d.bam", record->model.group, record->model.variant, variant);
+        break;
     }
-  }
-  else {
-    if (pfVar1->field_0x52 != 4) {
-      return;
     }
-    temp_v0 = FUN_0023cef0(param_1,0,pfVar1->field_0x70,pfVar1->field_0x72,0);
-    textFormatBuffer(temp_v3,&LAB_0029476c,pfVar1->field_0x70,pfVar1->field_0x72,temp_v0);
-  }
-  FUN_0023f2e4(param_1,param_2,temp_v3,param_4);
-  if (param_2 == 1) {
-    temp_v1 = gameGetPlayerData();
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 6);
-    dataTable08Sub2GetRecord();
-    temp_v0 = FUN_0023cef0(param_1,0,*(unsigned short *)(temp_v2 + 0x70),*(unsigned short *)(temp_v2 + 0x72),
-                         param_3);
-    textFormatBuffer(temp_v3,&LAB_0029476c,*(unsigned short *)(temp_v2 + 0x70),
-                 *(unsigned short *)(temp_v2 + 0x72),temp_v0);
-    FUN_0023f2e4(param_1,0,temp_v3,param_4);
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 10);
-    dataTable08Sub2GetRecord();
-    temp_v0 = FUN_0023cef0(param_1,2,*(unsigned short *)(temp_v2 + 0x70),*(unsigned short *)(temp_v2 + 0x72),
-                         param_3);
-    textFormatBuffer(temp_v3,&LAB_002947a4,*(unsigned short *)(temp_v2 + 0x70),
-                 *(unsigned short *)(temp_v2 + 0x72),temp_v0);
-    FUN_0023f2e4(param_1,2,temp_v3,param_4);
-  }
-  return;
+    FUN_0023f2e4(model, part, path, option);
+    if (part == 1) {
+        PlayerEquipmentAppearance* player = gameGetPlayerData();
+        record = dataTable08Sub2GetRecord(player->head);
+        u32 variant = FUN_0023cef0(model, 0, record->model.group, record->model.variant, equipment);
+        textFormatBuffer(path, "player/pl%02d_%03dhd%d.bam", record->model.group, record->model.variant, variant);
+        FUN_0023f2e4(model, 0, path, option);
+        record = dataTable08Sub2GetRecord(player->legs);
+        variant = FUN_0023cef0(model, 2, record->model.group, record->model.variant, equipment);
+        textFormatBuffer(path, "player/pl%02d_%03dlg%d.bam", record->model.group, record->model.variant, variant);
+        FUN_0023f2e4(model, 2, path, option);
+    }
 }
-
-} /* extern "C" */
+}

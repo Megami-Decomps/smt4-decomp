@@ -1,83 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a0404` (_code @ 0x4a0404, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: skill ID remains immediate rather than retail's preserved registers; skill-loop and party-register allocation differ. */
+#include "shard/Shard0031.h"
+#include "shard/Shard0032.h"
+#include "shard/Shard004B.h"
 
-extern "C" {
-
-extern int gameGetPlayerData(void);
-extern int gameFlagIsSet(unsigned int);
-extern int gameGetSlotRecord(void);
-extern int gameGetSlotTable(void);
-extern int gameSlotTableFindFree(void);
-extern int FUN_003df57c(unsigned int, unsigned int);
-extern int FUN_004bcbb4(int, unsigned int);
-
-
-unsigned int FUN_004a0404(void)
-
+static __inline bool recoveryUnitHasSkill(const UnitRecord *unit, u16 skill)
 {
-/* irregular: 1 unstructured edge(s) */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned char temp_v8;
-  
-  temp_v0 = gameFlagIsSet(0x401);
-  if (temp_v0 == 0) {
-    return 0;
-  }
-  temp_v0 = gameGetPlayerData();
-  temp_v2 = 0;
-  do {
-    temp_v4 = temp_v0 + temp_v2 * 2;
-    temp_v6 = (unsigned int)*(unsigned short *)(temp_v4 + 0x34);
-    if (temp_v6 != 0x8c) {
-      temp_v4 = (unsigned int)*(unsigned short *)(temp_v4 + 0x36);
+    for (s32 index = 0; index < 8; ++index) {
+        if (unit->skillList.skills[index] == skill)
+            return true;
     }
-    if (temp_v6 == 0x8c || temp_v4 == 0x8c) {
-      temp_v0 = gameGetPlayerData();
-      temp_v2 = FUN_003df57c(0x8c,1);
-      if (temp_v2 >= *(short *)(temp_v0 + 0x2c)) break;
-      return 1;
-    }
-    temp_v2 = temp_v2 + 2;
-  } while (7 >= temp_v2);
-  temp_v0 = gameSlotTableFindFree();
-  temp_v2 = gameGetSlotTable();
-  temp_v7 = 0;
-  if (temp_v7 < temp_v0) {
-    do {
-      if ((-1 < *(char *)(temp_v2 + 0x1c88 + temp_v7)) && (temp_v1 = gameGetSlotRecord(), temp_v1 != 0)) {
-        temp_v3 = 0;
-        do {
-          temp_v5 = temp_v1 + temp_v3 * 2;
-          temp_v8 = *(short *)(temp_v5 + 0x34) == 0x8c;
-          if (!temp_v8) {
-            temp_v6 = (unsigned int)*(unsigned short *)(temp_v5 + 0x36);
-          }
-          if (temp_v8 || temp_v6 == 0x8c) {
-            temp_v3 = FUN_004bcbb4(temp_v1,0x8c);
-            if (temp_v3 < *(short *)(temp_v1 + 0x2c)) {
-              if (!((*(unsigned short *)(temp_v1 + 0x60) & 2) == 0 && (*(unsigned short *)(temp_v1 + 0x60) & 0x400) == 0
-                   )) {
-                return 0;
-              }
-              return 1;
-            }
-            break;
-          }
-          temp_v3 = temp_v3 + 2;
-        } while (temp_v3 < 8);
-      }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < temp_v0);
-  }
-  return 0;
+    return false;
 }
 
-} /* extern "C" */
+extern "C" {
+s32 gameFlagIsSet(u32 flag);
+UnitRecord *gameGetPlayerData();
+s32 FUN_003df57c(u32 skill, u32 mode);
+s32 gameSlotTableFindFree();
+SlotTable *gameGetSlotTable();
+UnitRecord *gameGetSlotRecord(s32 slot);
+s32 FUN_004bcbb4(UnitRecord *unit, u32 skill);
+
+// Check whether the player or a usable party demon can afford the recovery skill.
+u32 FUN_004a0404()
+{
+    if (!gameFlagIsSet(0x401))
+        return 0;
+    UnitRecord *player = gameGetPlayerData();
+    if (recoveryUnitHasSkill(player, 0x8c)) {
+        player = gameGetPlayerData();
+        if (FUN_003df57c(0x8c, 1) < static_cast<s16>(player->unk2C))
+            return 1;
+    }
+    s32 slotCount = gameSlotTableFindFree();
+    const s8 *slots = gameGetSlotTable()->slots;
+    for (s32 slot = 0; slot < slotCount; ++slot) {
+        if (slots[slot] < 0)
+            continue;
+        UnitRecord *unit = gameGetSlotRecord(slots[slot]);
+        if (!unit)
+            continue;
+        if (recoveryUnitHasSkill(unit, 0x8c) &&
+            FUN_004bcbb4(unit, 0x8c) < static_cast<s16>(unit->unk2C)) {
+            const ScaledRecordValues *values = reinterpret_cast<const ScaledRecordValues *>(unit);
+            if (values->flags & 2)
+                return 0;
+            if (values->flags & 0x400)
+                return 0;
+            return 1;
+        }
+    }
+    return 0;
+}
+}

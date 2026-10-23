@@ -16,7 +16,7 @@ extern LmapMainState *g_lmapMainState;
 
 void FUN_00483acc(u8 *setter);
 void stateSetterSetFromBase(u8 *setter, s32 base, u32 value);
-void FUN_004839b4(u8 *setter);
+void fieldBuildAreaPlacementList(u8 *setter);
 
 /* Re-applies the state setter of the lmap main state: reset, set from its base (unk40 - 100, unk48), then finish. */
 void lmapMainStateRefreshSetter(void)
@@ -28,7 +28,7 @@ void lmapMainStateRefreshSetter(void)
         asdDebugHookVoid();
         FUN_00483acc(state->setter);
         stateSetterSetFromBase(state->setter, state->unk40 - 100, state->unk48);
-        FUN_004839b4(state->setter);
+        fieldBuildAreaPlacementList(state->setter);
     }
 }
 

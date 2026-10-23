@@ -1,70 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a15a0` (_code @ 0x4a15a0, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: sound branch placement, paired state stores, and flags write-back addressing differ. */
+#include "classes/Obj55c8d0.h"
+#include "shard/S1ListMenu.h"
+
+struct BibleSelectionEntry {
+    Vec2Int position;
+    u8 data[0x84];
+};
+
+struct BibleSelectionTarget;
+struct BibleSelectionTargetVtbl {
+    void *destructors[2];
+    void (*apply)(BibleSelectionTarget *, const SelectionFlags *);
+};
+struct BibleSelectionTarget {
+    const BibleSelectionTargetVtbl *vtbl;
+    u16 flags;
+};
 
 extern "C" {
+s32 FUN_004cf8dc(void *, s32);
+s32 vec2GetXInt(const Vec2Int *);
+s32 vec2GetYInt(const Vec2Int *);
+void pointConvertToFloat(SelectionRectangle *, s32, s32);
+void sysPlaySe(u32);
+void FUN_0032cfe0(Obj55c8d0 *);
+void FUN_003343f0(u32);
+void FUN_004d05c4(Obj55ca08 *, s32, s32, s32);
 
-int sysPlaySe(...);
-int FUN_0032cfe0(int);
-int FUN_003343f0(int);
-int pointConvertToFloat(...);
-int FUN_004d05c4(int, int, int, int);
-
-typedef int romwright_code(...);
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_0032cfe0. */
-/* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: pointConvertToFloat. */
-extern int FUN_004cf8dc(int, int);
-/* Supplied declaration required: FUN_004d05c4. */
-
-
-void FUN_004a15a0(int param_1)
-
+// Keep the cursor on the selected entry, then reopen touch regions after a selection changes.
+void FUN_004a15a0(Obj55c8d0 *menu)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned short *puVar4;
-  int temp_v3;
-  
-  temp_v0 = FUN_004cf8dc(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa874));
-  temp_v3 = param_1 + *(short *)(param_1 + 0xa874) * 0x8c + 0xfc;
-  temp_v1 = vec2GetYInt(temp_v3);
-  temp_v2 = vec2GetXInt(temp_v3);
-  pointConvertToFloat(param_1 + 200,temp_v2,temp_v1);
-  if (temp_v0 != 0) {
-    if (*(char *)(param_1 + 0x860) != '\0') {
-      if (*(char *)(param_1 + 0x861) == '\x01') {
-        temp_v1 = 0x4e;
-      }
-      else {
-        temp_v1 = 0x4f;
-      }
-      sysPlaySe(temp_v1);
-    }
-    else {
-      sysPlaySe(0x2f);
-    }
-    FUN_0032cfe0(param_1);
-    FUN_003343f0(0);
-    *(unsigned int *)(param_1 + 0x14) = 2;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-    pointConvertToFloat(param_1 + 200,0,0);
-    (**(romwright_code **)(**(int **)(param_1 + 0x84c) + 8))(*(int **)(param_1 + 0x84c),param_1 + 0x20);
-    puVar4 = (unsigned short *)(*(int *)(param_1 + 0x84c) + 4);
-    *puVar4 = *puVar4 | 0x1000;
-    temp_v0 = *(int *)(param_1 + 0x28);
-    if (temp_v0 >= 10) {
-      temp_v0 = 10;
-    }
-    FUN_004d05c4(param_1 + 0x818,0x14,0x40e,temp_v0);
-    *(unsigned char *)(param_1 + 0x828) = 1;
-  }
-  return;
-}
+    struct StateView { u8 prefix[0x14]; u32 state; u32 step; };
+    struct CountView { u8 prefix[8]; s32 count; };
+    struct SelectionView {
+        u8 prefix[0xFC];
+        BibleSelectionEntry entries[13];
+        u8 padding[0xA05C];
+        s16 selectedIndex;
+    };
+    StateView *state = reinterpret_cast<StateView *>(menu);
+    SelectionView *selection = reinterpret_cast<SelectionView *>(menu);
+    s32 changed = FUN_004cf8dc(menu->unk0dc, selection->selectedIndex);
+    const Vec2Int *position = &selection->entries[selection->selectedIndex].position;
+    s32 y = vec2GetYInt(position);
+    s32 x = vec2GetXInt(position);
+    pointConvertToFloat(&menu->rectangle, x, y);
+    if (!changed)
+        return;
 
-} /* extern "C" */
+    if (menu->hasValue)
+        sysPlaySe(menu->unk861[0] == 1 ? 0x4E : 0x4F);
+    else
+        sysPlaySe(0x2F);
+    FUN_0032cfe0(menu);
+    FUN_003343f0(0);
+    state->state = 2;
+    state->step = 0;
+    pointConvertToFloat(&menu->rectangle, 0, 0);
+    BibleSelectionTarget *target = reinterpret_cast<BibleSelectionTarget *>(menu->touchSelection.unk34);
+    target->vtbl->apply(target, &menu->flags);
+    reinterpret_cast<BibleSelectionTarget *>(menu->touchSelection.unk34)->flags |= 0x1000;
+    s32 count = reinterpret_cast<const CountView *>(&menu->flags)->count;
+    if (count >= 10)
+        count = 10;
+    FUN_004d05c4(&menu->touchSelection, 0x14, 0x40E, count);
+    menu->touchSelection.soundEnabled = 1;
+}
+}

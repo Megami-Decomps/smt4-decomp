@@ -8,7 +8,7 @@ void FUN_001919a4(QuestEntry *entry);
 void asdOperatorDelete(void *memory);
 void asdMemFree(void *memory);
 u32 FUN_0019196c(QuestEntry *entry, u32 parameter);
-u32 FUN_00191848(QuestEntry *entry);
+u32 itemCategoryHasUsableEntry(QuestEntry *entry);
 
 u32 FUN_00168d38(u32 parameter)
 {
@@ -45,6 +45,6 @@ u32 FUN_00168d38(u32 parameter)
     if (FUN_0019196c(work->entry, parameter) == 0) {
         return 0;
     }
-    return FUN_00191848(work->entry) != 0 ? 1u : 0u;
+    return itemCategoryHasUsableEntry(work->entry) != 0 ? 1u : 0u;
 }
 }

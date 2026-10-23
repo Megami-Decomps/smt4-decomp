@@ -8,7 +8,7 @@ int asdMemFree(...);
 int scrScriptProcessDestroy(...);
 int slotSetRequest(...);
 int FUN_003180c4(...);
-int FUN_00336de4(...);
+int btlTalkBustUpSetDemonTexture(...);
 int btlTalkBustUpReleaseContent(void);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_0038b3f8(...);
@@ -36,7 +36,7 @@ int FUN_00163aa4(...);
 int FUN_00167458(int, int);
 int FUN_00178b04(...);
 int FUN_0019eb14(void);
-int FUN_002859d8(...);
+int uniteCameraInitialize(...);
 int FUN_002c8894(void);
 int sysPlayVoice(...);
 int soundChannelRequestIfEnabled(int, int, int);
@@ -99,12 +99,12 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002859d8. */
+/* Supplied declaration required: uniteCameraInitialize. */
 /* Supplied declaration required: FUN_002c8894. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: uniteCameraDestroy. */
 /* Supplied declaration required: FUN_003180c4. */
-/* Supplied declaration required: FUN_00336de4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 /* Supplied declaration required: btlTalkBustUpReleaseContent. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_0038b3f8. */
@@ -245,7 +245,7 @@ unsigned int FUN_003cf02c(void)
         *(float *)(temp_v2 + 0xc4) = (float)puVar9[3] * temp_v16;
         FUN_0019eb14();
       }
-      FUN_002859d8(temp_v2 + 0xa0);
+      uniteCameraInitialize(temp_v2 + 0xa0);
       temp_v6 = DAT_0057f2c4;
       *(unsigned int *)(DAT_0057f2c4 + 4) = 3;
       *(unsigned int *)(temp_v6 + 8) = 0;
@@ -411,7 +411,7 @@ unsigned int FUN_003cf02c(void)
         *(float *)(temp_v2 + 0x108) = (float)puVar9[3] * temp_v14;
         FUN_0019eb14();
       }
-      FUN_002859d8(temp_v2 + 0xe4);
+      uniteCameraInitialize(temp_v2 + 0xe4);
       ptrListRemoveClearOwner(g_handleRegistry,temp_v10);
       if (*(int **)(temp_v2 + 0x90) != (int *)0x0) {
         (**(romwright_code **)(**(int **)(temp_v2 + 0x90) + 4))();
@@ -632,7 +632,7 @@ LAB_003cf9bc:
     FUN_003180c4(0x10,temp_v17);
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x338),0x10);
     sysPlaySe(0x5a);
-    FUN_00336de4(*(unsigned short *)(temp_v2 + 0xc),1);
+    btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v2 + 0xc),1);
     btlTalkBustUpSetUnk2F4(1);
     temp_v6 = DAT_0057f2c4;
     *(unsigned int *)(DAT_0057f2c4 + 4) = 6;

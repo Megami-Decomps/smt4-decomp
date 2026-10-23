@@ -1,86 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023ddbc` (_code @ 0x23ddbc, 0x118 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: flag value, entry array/count, and cached state saved-register allocation differs. */
+#include "gamedata/DataTable.h"
+#include <stddef.h>
 
 extern "C" {
+void gameFlagSetValue(u32 flag, u32 value, s32 notify);
+s32 gameFlagIsSet(u32 flag);
+void *aocEntryFind(u8 keyA, u8 keyB);
+void *gameDataGetTableEntry(u8 keyA, u8 keyB);
+void FUN_002c0a9c(u32 keyA, u32 keyB, s32 value);
 
-int gameFlagSetValue(unsigned int, unsigned int, int);
-int FUN_002c0a9c(int, int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-/* Supplied declaration required: gameFlagSetValue. */
-extern int aocEntryFind(unsigned char, unsigned char);
-extern int gameDataGetTableEntry(unsigned char, unsigned char);
-extern int gameFlagIsSet(void);
-/* Supplied declaration required: FUN_002c0a9c. */
-extern int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-
-
-void FUN_0023ddbc(unsigned int param_1,unsigned int param_2)
-
+// Reset cached entry state if changing this flag selects a different add-on variant.
+void FUN_0023ddbc(u32 flag, u32 value)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned char *puVar6;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  int temp_v9;
-  unsigned char temp_v10;
-  
-  if (param_2 != 0) {
-    temp_v2 = gameFlagIsSet();
-    if (temp_v2 != 0) {
-      return;
+    // A local view avoids raising the byte-aligned shared Table02Record's alignment.
+    struct FlagVariantRecord {
+        u8 keyA, keyB;
+        u8 unk02[8];
+        u16 firstFlag; // 0x0a
+        u16 secondFlag; // 0x0c
+        u8 unk0e[0x92];
+    };
+    struct CachedVariantState {
+        u8 unk00[2];
+        u8 status; // 0x02
+        u8 flags; // 0x03
+    };
+    typedef char LayoutCheck[sizeof(FlagVariantRecord) == 0xa0 &&
+        offsetof(FlagVariantRecord, firstFlag) == 0xa &&
+        offsetof(FlagVariantRecord, secondFlag) == 0xc ? 1 : -1];
+    if (value != 0) {
+        if (gameFlagIsSet(flag))
+            return;
+    } else {
+        if (!gameFlagIsSet(flag))
+            return;
     }
-  }
-  else {
-    temp_v2 = gameFlagIsSet();
-    if (temp_v2 == 0) {
-      return;
-    }
-  }
-  temp_v3 = dataTableGet(2,0);
-  temp_v2 = dataTableGetEntries();
-  temp_v4 = dataTableGetCount(temp_v3);
-  temp_v9 = 0;
-  if (temp_v9 < temp_v4) {
-    do {
-      puVar6 = (unsigned char *)(temp_v2 + temp_v9 * 0xa0);
-      temp_v8 = (unsigned int)*(unsigned short *)(puVar6 + 10);
-      temp_v10 = temp_v8 != param_1;
-      if (temp_v10) {
-        temp_v8 = (unsigned int)*(unsigned short *)(puVar6 + 0xc);
-      }
-      if (!temp_v10 || temp_v8 == param_1) {
-        temp_v0 = *puVar6;
-        temp_v1 = puVar6[1];
-        temp_v5 = gameDataGetTableEntry(temp_v0,temp_v1);
-        temp_v6 = aocEntryFind(temp_v0,temp_v1);
-        gameFlagSetValue(param_1,param_2,0);
-        temp_v7 = aocEntryFind(temp_v0,temp_v1);
-        if (temp_v6 != temp_v7) {
-          *(unsigned char *)(temp_v5 + 2) = 0;
-          *(unsigned char *)(temp_v5 + 3) = *(unsigned char *)(temp_v5 + 3) & 0xe0;
-          FUN_002c0a9c(temp_v0,temp_v1,0);
+    void *table = dataTableGet(2, 0);
+    FlagVariantRecord *entries = static_cast<FlagVariantRecord *>(dataTableGetEntries(table));
+    s32 count = dataTableGetCount(table);
+    for (s32 index = 0; index < count; ++index) {
+        FlagVariantRecord *entry = &entries[index];
+        if (entry->firstFlag == flag || entry->secondFlag == flag) {
+            u8 keyA = entry->keyA;
+            u8 keyB = entry->keyB;
+            CachedVariantState *state = static_cast<CachedVariantState *>(gameDataGetTableEntry(keyA, keyB));
+            void *oldVariant = aocEntryFind(keyA, keyB);
+            gameFlagSetValue(flag, value, 0);
+            void *newVariant = aocEntryFind(keyA, keyB);
+            if (oldVariant != newVariant) {
+                state->status = 0;
+                state->flags &= ~0x1f;
+                FUN_002c0a9c(keyA, keyB, 0);
+            }
+            gameFlagSetValue(flag, value ^ 1, 0);
         }
-        gameFlagSetValue(param_1,param_2 ^ 1,0);
-      }
-      temp_v9 = temp_v9 + 1;
-    } while (temp_v9 < temp_v4);
-  }
-  return;
+    }
 }
-
-} /* extern "C" */
+}

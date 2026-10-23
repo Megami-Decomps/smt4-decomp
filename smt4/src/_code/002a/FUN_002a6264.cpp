@@ -1,129 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a6264` (_code @ 0x2a6264, 0x174 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: optimizer folds repeated relative-pointer loads and null/cast tests; 76 versus retail 93 instructions, -O2 candidate. */
+#include "shard/W6_W6Match4_RelativeResourceGraph.h"
+#include "shard/S1NwGfx.h"
 
-extern "C" {
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-
-void FUN_002a6264(int *param_1,unsigned int param_2)
-
+// Set the memory-pool flags on interleaved vertex streams throughout the graphics file.
+extern "C" void FUN_002a6264(GraphicsResourceFile *file, u32 memoryFlags)
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  int *piVar4;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int *piVar8;
-  int temp_v5;
-  unsigned int temp_v6;
-  int *piVar11;
-  int *piVar12;
-  
-  piVar4 = (int *)(*param_1 + 0x20);
-  temp_v5 = *piVar4;
-  if (temp_v5 != 0) {
-    piVar4 = (int *)((int)piVar4 + temp_v5);
-  }
-  if (temp_v5 == 0) {
-    piVar4 = (int *)0x0;
-  }
-  temp_v5 = *(int *)(*param_1 + 0x1c);
-  if (piVar4 != (int *)0x0) {
-    piVar4 = piVar4 + 7;
-  }
-  temp_v2 = *(int *)(*param_1 + 0x20);
-  if (temp_v2 != 0) {
-    temp_v2 = *param_1 + 0x20 + temp_v2;
-  }
-  else {
-    temp_v2 = 0;
-  }
-  if (temp_v2 != 0) {
-    piVar11 = (int *)(temp_v2 + 0x1c);
-  }
-  else {
-    piVar11 = (int *)0x0;
-  }
-  for (; piVar11 != piVar4 + temp_v5 * 4; piVar11 = piVar11 + 4) {
-    if (piVar11[3] != 0) {
-      temp_v2 = (int)piVar11 + piVar11[3] + 0xc;
-    }
-    else {
-      temp_v2 = 0;
-    }
-    temp_v0 = *(int *)(temp_v2 + 0xc4);
-    if (*(int *)(temp_v2 + 200) != 0) {
-      temp_v2 = temp_v2 + 200 + *(int *)(temp_v2 + 200);
-    }
-    else {
-      temp_v2 = 0;
-    }
-    if (piVar11[3] != 0) {
-      temp_v1 = (int)piVar11 + piVar11[3] + 0xc;
-    }
-    else {
-      temp_v1 = 0;
-    }
-    temp_v3 = *(int *)(temp_v1 + 200);
-    if (temp_v3 != 0) {
-      piVar12 = (int *)(temp_v3 + temp_v1 + 200);
-    }
-    else {
-      piVar12 = (int *)0x0;
-    }
-    for (; piVar12 != (int *)(temp_v2 + temp_v0 * 4); piVar12 = piVar12 + 1) {
-      if (*piVar12 != 0) {
-        puVar3 = (unsigned int *)(*piVar12 + (int)piVar12);
-      }
-      else {
-        puVar3 = (unsigned int *)0x0;
-      }
-      if ((puVar3 != (unsigned int *)0x0) && ((~*puVar3 & 0x10000001) != 0)) {
-        puVar3 = (unsigned int *)0x0;
-      }
-      if (puVar3 != (unsigned int *)0x0) {
-        temp_v4 = puVar3[0xf];
-        temp_v1 = 0;
-        if (temp_v4 != 0) {
-          temp_v1 = (int)puVar3 + temp_v4 + 0x3c;
+    // Both records extend past the shared ShapeResource/ShapeStream prefixes.
+    struct ShapeStreamView {
+        u32 flags;
+        u8 unk04[0x34];
+        u32 count;
+        ResourceRelativePointer<ResourceRelativePointer<void> > streams;
+        ResourceRelativePointer<void> *begin() const { return streams.get(); }
+        ResourceRelativePointer<void> *end() const { return streams.get() + count; }
+    };
+    struct InterleavedStreamView {
+        ShapeStream stream;
+        u8 unk08[8];
+        u32 memoryFlags;
+    };
+    typedef char StreamViewOffsets[__INTADDR__(&((ShapeStreamView *)0)->count) == 0x38 && __INTADDR__(&((ShapeStreamView *)0)->streams) == 0x3c && __INTADDR__(&((InterleavedStreamView *)0)->memoryFlags) == 0x10 ? 1 : -1];
+    GraphicsModelDictionaryEntry *modelEnd = file->end();
+    for (GraphicsModelDictionaryEntry *model = file->begin(); model != modelEnd; ++model) {
+        ResourceRelativePointer<void> *shapeEnd = model->model.get()->end();
+        for (ResourceRelativePointer<void> *shapeEntry = model->model.get()->begin(); shapeEntry != shapeEnd; ++shapeEntry) {
+            ShapeStreamView *shape = static_cast<ShapeStreamView *>(shapeEntry->get());
+            if (shape && (~shape->flags & 0x10000001))
+                shape = NULL;
+            if (!shape)
+                continue;
+            ResourceRelativePointer<void> *streamEnd = shape->end();
+            for (ResourceRelativePointer<void> *streamEntry = shape->begin(); streamEntry != streamEnd; ++streamEntry) {
+                InterleavedStreamView *stream = static_cast<InterleavedStreamView *>(streamEntry->get());
+                if (stream && !(stream->stream.flags & 0x40000000))
+                    stream = NULL;
+                if (stream)
+                    stream->memoryFlags = memoryFlags;
+            }
         }
-        temp_v6 = puVar3[0xe];
-        if (temp_v4 == 0) {
-          temp_v1 = 0;
-        }
-        temp_v4 = puVar3[0xf];
-        if (temp_v4 != 0) {
-          piVar8 = (int *)(temp_v4 + (int)(puVar3 + 0xf));
-        }
-        else {
-          piVar8 = (int *)0x0;
-        }
-        while (piVar8 != (int *)(temp_v1 + temp_v6 * 4)) {
-          if (*piVar8 != 0) {
-            puVar3 = (unsigned int *)(*piVar8 + (int)piVar8);
-          }
-          else {
-            puVar3 = (unsigned int *)0x0;
-          }
-          if ((puVar3 != (unsigned int *)0x0) && ((*puVar3 & 0x40000000) == 0)) {
-            puVar3 = (unsigned int *)0x0;
-          }
-          piVar8 = piVar8 + 1;
-          if (puVar3 != (unsigned int *)0x0) {
-            puVar3[4] = param_2;
-          }
-        }
-      }
     }
-  }
-  return;
 }
-
-} /* extern "C" */

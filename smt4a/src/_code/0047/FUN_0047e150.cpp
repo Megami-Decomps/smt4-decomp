@@ -1,108 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047e150` (_code @ 0x47e150, 0x19c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: switch return blocks merge differently, process-mode constant is saved, and argument loads are rescheduled. */
+#include "addon/ItemEventStartup.h"
+#include "addon/aocMain.h"
+#include "shard/W5_W5Match7_DataRecord.h"
 
 extern "C" {
+extern AocSystemA *g_aocSystem;
+u32 FUN_004186e0(void);
+void textFormatBuffer(char *, const char *, ...);
+s32 aocPackageGrantsItem(AocSystemA *, u16, u32);
+void aocQueueType07(AocSystemA *, u32, void **, u32);
+void aocQueueType08(AocSystemA *, u32, void **, u32);
+void sysPlaySe(u32);
+ScriptRunState *FUN_00275bc8(void *, void *);
+u32 tableGroupFindEntryIndex(void *, const char *);
+void scrScriptProcessStartEntry(ScriptRunState *, u32);
+u32 scrRunOpcodesStub(ScriptRunState *);
 
-int textFormatBuffer(...);
-int sysPlaySe(int);
-int FUN_001ad9b4(void);
-int FUN_00275bc8(int, unsigned int);
-int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int aocQueueType08(unsigned int, unsigned int, unsigned int *, int);
-int aocQueueType07(unsigned int, unsigned int, unsigned int *, int);
-
-extern unsigned char LAB_0047e2ec; /* 0x47e2ec */
-extern unsigned char LAB_0047e304; /* 0x47e304 */
-extern unsigned char LAB_0047e320; /* 0x47e320 */
-extern unsigned int g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001ad9b4. */
-extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-extern int FUN_004186e0(void);
-extern int aocPackageGrantsItem(unsigned int, unsigned short, unsigned int);
-/* Supplied declaration required: aocQueueType08. */
-/* Supplied declaration required: aocQueueType07. */
-
-
-unsigned int FUN_0047e150(unsigned int *param_1)
-
+u32 FUN_0047e150(ItemEventStartup *work)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int unaff_r6;
-  unsigned char temp_v3 [128];
-  unsigned char temp_v4 [132];
-  
-  switch(*param_1) {
-  case 0:
-    temp_v2 = FUN_004186e0();
-    FUN_001ad9b4();
-    if (temp_v2 != 0) {
-      unaff_r6 = (unsigned int)*(unsigned short *)(temp_v2 + 0xd4);
+    char path[128];
+    char messagesPath[128];
+    switch (work->state) {
+    case 0: {
+        ItemDataRecord *item = FUN_001ad9b4(FUN_004186e0());
+        if (!item || item->event.package == 0) {
+            work->state = 3;
+            return 0;
+        }
+        u32 package = item->event.package;
+        textFormatBuffer(path, "event/e%03d/e%03d.bf", package, package);
+        textFormatBuffer(messagesPath, "event/e%03d/e%03d.mbm", package, package);
+        if (aocPackageGrantsItem(g_aocSystem, item->event.package, 1)) {
+            aocQueueType07(g_aocSystem, package, &work->script, 0);
+            aocQueueType08(g_aocSystem, package, &work->messages, 0);
+            work->state = 1;
+        } else {
+            work->state = 4;
+        }
+        break;
     }
-    if (temp_v2 == 0 || unaff_r6 == 0) {
-      *param_1 = 3;
-      return 0;
+    case 1: {
+        if (!work->script || !work->messages)
+            return 0;
+        ItemDataRecord *item = FUN_001ad9b4(FUN_004186e0());
+        if (!item)
+            work->state = 3;
+        sysPlaySe(0x92);
+        ScriptRunState *process = FUN_00275bc8(work->script, work->messages);
+        work->process = process;
+        process->mode = 2;
+        textFormatBuffer(path, "e%03d_%02d", item->event.package, item->event.entry);
+        u32 entry = tableGroupFindEntryIndex(work->script, path);
+        scrScriptProcessStartEntry(work->process, entry);
+        work->state = 2;
+        break;
     }
-    textFormatBuffer(temp_v3,&LAB_0047e2ec,unaff_r6,unaff_r6);
-    textFormatBuffer(temp_v4,&LAB_0047e304,unaff_r6);
-    temp_v2 = aocPackageGrantsItem(g_aocSystem,*(unsigned short *)(temp_v2 + 0xd4),1);
-    if (temp_v2 != 0) {
-      aocQueueType07(g_aocSystem,unaff_r6,param_1 + 3,0);
-      aocQueueType08(g_aocSystem,unaff_r6,param_1 + 4,0);
-      *param_1 = 1;
-      return 0;
+    case 2:
+        if (scrRunOpcodesStub(work->process) == 2)
+            work->state = 3;
+        break;
+    case 3:
+        return 1;
+    case 4:
+        return 2;
     }
-    temp_v1 = 4;
-    break;
-  case 1:
-    temp_v2 = 0;
-    if (param_1[3] != 0) {
-      temp_v2 = param_1[4];
-    }
-    if (param_1[3] == 0 || temp_v2 == 0) {
-      return 0;
-    }
-    temp_v2 = FUN_004186e0();
-    FUN_001ad9b4();
-    if (temp_v2 == 0) {
-      *param_1 = 3;
-    }
-    sysPlaySe(0x92);
-    temp_v0 = param_1[3];
-    FUN_00275bc8(temp_v0,param_1[4]);
-    param_1[5] = temp_v0;
-    *(unsigned int *)(temp_v0 + 0x108) = 2;
-    textFormatBuffer(temp_v3,&LAB_0047e320,*(unsigned short *)(temp_v2 + 0xd4),
-                 *(unsigned short *)(temp_v2 + 0xd6));
-    temp_v1 = tableGroupFindEntryIndex(param_1[3],temp_v3);
-    scrScriptProcessStartEntry(param_1[5],temp_v1);
-    temp_v1 = 2;
-    break;
-  case 2:
-    temp_v2 = scrRunOpcodesStub(param_1[5]);
-    if (temp_v2 != 2) {
-      return 0;
-    }
-    *param_1 = 3;
     return 0;
-  case 3:
-    return 1;
-  case 4:
-    return 2;
-  default:
-    return 0;
-  }
-  *param_1 = temp_v1;
-  return 0;
 }
-
-} /* extern "C" */
+}

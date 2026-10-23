@@ -1,70 +1,79 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f7924` (_code @ 0x4f7924, 0x134 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Placement-entry rebasing and subject-id liveness differ from retail. */
+#include "battle/btlMain.h"
+#include "battle/btlAction.h"
+#include "shard/W6_W6Match8_BattleSpritePlacement.h"
 
+struct ActionSubjectKeys {
+    /* 0x00 */ u16 unk00;
+    /* 0x02 */ u16 id;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ s32 keys[1];
+};
 extern "C" {
+BtlMainStateA *btlGetMainState(void);
+s32 idSetFindSubjectIndex(BtlMainStateA *battle, BtlActionRecord *action);
+ActionSubjectKeys *FUN_001568f8(BtlMainStateA *battle, s32 member);
+u32 FUN_003eae20(BtlMainStateA *battle, s32 actor, u16 id);
+void FUN_00401d18(BattleSpritePlacement *placement, u32 mask, u32 flags, u32 value);
+void FUN_00402290(BattleSpritePlacement *placement);
 
-int FUN_001568f8(int, int);
-int FUN_00401d18(int, int, int, unsigned int);
-int FUN_00402290(int);
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_001568f8. */
-extern unsigned int FUN_003eae20(int, int, unsigned short);
-extern int idSetFindSubjectIndex(int, int);
-/* Supplied declaration required: FUN_00401d18. */
-/* Supplied declaration required: FUN_00402290. */
-
-
-unsigned int FUN_004f7924(int param_1,int param_2)
-
+/* Reuses an active placement or starts the matching inactive placement for an action's subject. */
+s32 FUN_004f7924(void *owner, BtlActionRecord *action)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  if ((*(unsigned int *)(param_2 + 0x50) & 0x20000) == 0) {
-    temp_v1 = btlGetMainState();
-    temp_v2 = idSetFindSubjectIndex(temp_v1,param_2);
-    if (temp_v2 < 0) {
-      temp_v2 = 0;
+    /* These Apocalypse entries are 0x3C bytes, beyond the shared 0x30-byte placement record. */
+    struct PlacementEntry {
+        s32 key;
+        BattleFrameSprite *resource;
+        BattleSpritePlacement placement;
+        u8 unk28[0x10];
+        u32 flags;
+    };
+    struct PlacementOwnerView {
+        u8 unk0000[0x1398];
+        PlacementEntry entries[50];
+    };
+    struct ActorView {
+        u8 unk00[0xF0];
+        s32 actor;
+    };
+    typedef char PlacementEntryOffsetsCheck[sizeof(PlacementEntry) == 0x3C &&
+        offsetof(PlacementEntry, flags) == 0x38 &&
+        offsetof(PlacementOwnerView, entries) == 0x1398 ? 1 : -1];
+    if ((action->status & 0x20000) != 0) {
+        return 1;
     }
-    temp_v4 = temp_v1;
-    FUN_001568f8(temp_v1,(int)*(short *)(param_2 + 0x6a));
-    temp_v0 = *(unsigned short *)(temp_v4 + 2);
-    temp_v4 = *(int *)(temp_v4 + temp_v2 * 4 + 0xc);
-    temp_v2 = 0;
-    while ((temp_v5 = param_1 + temp_v2 * 0x3c, *(int *)(temp_v5 + 0x1398) != temp_v4 ||
-           ((*(unsigned int *)(temp_v5 + 0x13d0) & 1) == 0))) {
-      temp_v2 = temp_v2 + 1;
-      if (temp_v2 >= 0x32) {
-        temp_v2 = 0;
-        do {
-          if (*(int *)(param_1 + temp_v2 * 0x3c + 0x1398) == temp_v4) {
-            param_1 = param_1 + temp_v2 * 0x3c;
-            if (*(int *)(param_1 + 0x139c) != 0) {
-              *(int *)(param_1 + 0x13a4) = *(int *)(param_1 + 0x139c);
-              temp_v3 = 0;
-              if (-1 < *(int *)(temp_v1 + 0xf0)) {
-                temp_v3 = FUN_003eae20(temp_v1,(int)(short)*(int *)(temp_v1 + 0xf0),temp_v0);
-              }
-              FUN_00401d18(param_1 + 0x13a0,0x20000,0x20000,temp_v3);
-              FUN_00402290(param_1 + 0x13a0);
-            }
-            *(unsigned int *)(param_1 + 0x13d0) = *(unsigned int *)(param_1 + 0x13d0) | 1;
+    BtlMainStateA *battle = btlGetMainState();
+    s32 subject = idSetFindSubjectIndex(battle, action);
+    if (subject < 0) {
+        subject = 0;
+    }
+    ActionSubjectKeys *subjects = FUN_001568f8(battle, action->apocalypse.memberId);
+    u16 id = subjects->id;
+    s32 key = subjects->keys[subject];
+    PlacementOwnerView *placements = (PlacementOwnerView *)owner;
+    for (s32 index = 0; index < 50; ++index) {
+        PlacementEntry *entry = &placements->entries[index];
+        if (entry->key == key && (entry->flags & 1) != 0) {
             return 1;
-          }
-          temp_v2 = temp_v2 + 1;
-        } while (temp_v2 < 0x32);
-        return 0;
-      }
+        }
     }
-  }
-  return 1;
+    for (s32 index = 0; index < 50; ++index) {
+        PlacementEntry *entry = &placements->entries[index];
+        if (entry->key == key) {
+            if (entry->resource != NULL) {
+                entry->placement.sprite = entry->resource;
+                u32 value = 0;
+                s32 actor = ((ActorView *)battle)->actor;
+                if (actor >= 0) {
+                    value = FUN_003eae20(battle, (s16)actor, id);
+                }
+                FUN_00401d18(&entry->placement, 0x20000, 0x20000, value);
+                FUN_00402290(&entry->placement);
+            }
+            entry->flags |= 1;
+            return 1;
+        }
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

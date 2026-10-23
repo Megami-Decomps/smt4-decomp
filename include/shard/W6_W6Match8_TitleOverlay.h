@@ -2,6 +2,7 @@
 #define SHARD_W6_W6MATCH8_TITLE_OVERLAY_H
 
 #include "common.h"
+#include <stddef.h>
 
 struct TitleDrawElement {
     u8 unk00[0x20];
@@ -22,5 +23,12 @@ struct TitleOverlay {
     TitleDrawElement elements[7]; /* 0x0c4 */
     TitleDrawElement choices[5];  /* 0x498 */
 };
+
+struct TitleOverlayParameters {
+    /* 0x00 */ f32 speed;
+    /* 0x04 */ s32 offset;
+};
+typedef char TitleOverlayParametersLayoutCheck[sizeof(TitleOverlayParameters) == 8 &&
+    offsetof(TitleOverlayParameters, offset) == 4 ? 1 : -1];
 
 #endif

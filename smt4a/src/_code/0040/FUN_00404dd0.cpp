@@ -1,59 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00404dd0` (_code @ 0x404dd0, 0x124 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: fallback-size block is placed inline rather than out of line; coordinate arithmetic scheduling differs. */
+#include "shard/S1ListPanel.h"
+
+struct CenteredSpriteOffsets {
+    u8 unk00[0xc];
+    s16 x;
+    s16 y;
+};
+struct CenteredSpriteWork {
+    u8 unk00[0x1c];
+    u32 group;
+    s32 index;
+    u8 unk24[0x640];
+    CenteredSpriteOffsets *offsets;
+};
 
 extern "C" {
+extern RenderCtx *g_renderCtx;
+void efctSetSpeed(f32 speed);
+SpriteInfo *FUN_001834a4(u32 group, s32 image);
+void FUN_001835b4(s32 layer, u32 group, s32 image, s32 x, s32 y, s32 priority);
+f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
 
-int efctSetSpeed(void);
-int FUN_001834a4(...);
-int FUN_001835b4(int, unsigned int, int, int, int, int);
-int renderCtxCalculateStereoParallax(unsigned int);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
-
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-
-
-void FUN_00404dd0(int param_1,int param_2,int param_3)
-
+/* Center the selected sprite inside a reference sprite and apply stereo parallax. */
+void FUN_00404dd0(CenteredSpriteWork *work, s32 x, s32 y, f32 speed)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  short *psVar3;
-  int temp_v2;
-  float temp_v3;
-  
-  efctSetSpeed();
-  temp_v0 = FUN_001834a4(0x32,0x35);
-  temp_v1 = FUN_001834a4(*(unsigned int *)(param_1 + 0x1c),*(int *)(param_1 + 0x20) * 1000);
-  psVar3 = *(short **)(temp_v1 + 0xc);
-  if (psVar3 != (short *)0x0) {
-    temp_v2 = (int)**(short **)(temp_v0 + 0xc) - (int)*psVar3;
-    temp_v1 = (int)(*(short **)(temp_v0 + 0xc))[1] - (int)psVar3[1];
-  }
-  else {
-    temp_v2 = (int)**(short **)(temp_v0 + 0xc) - (*(unsigned short *)(temp_v1 + 4) & 0xffff7fff);
-    temp_v1 = (int)(*(short **)(temp_v0 + 0xc))[1] - (*(unsigned short *)(temp_v1 + 6) & 0xffff7fff);
-  }
-  temp_v3 = 0.26f;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  FUN_001835b4(2,*(unsigned int *)(param_1 + 0x1c),*(int *)(param_1 + 0x20) * 1000,
-               *(short *)(temp_v0 + 8) + param_2 + (int)temp_v3 + temp_v2 / 2 +
-               (int)*(short *)(*(int *)(param_1 + 0x664) + 0xc),
-               (int)*(short *)(temp_v0 + 10) + (int)*(short *)(*(int *)(param_1 + 0x664) + 0xe) +
-               param_3 + temp_v1 / 2,0x65);
-  efctSetSpeed();
-  return;
+    efctSetSpeed(speed);
+    SpriteInfo *reference = FUN_001834a4(0x32, 0x35);
+    SpriteInfo *sprite = FUN_001834a4(work->group, work->index * 1000);
+    s32 dx, dy;
+    if (sprite->size) {
+        dx = (reference->size[0] - sprite->size[0]) / 2;
+        dy = (reference->size[1] - sprite->size[1]) / 2;
+    } else {
+        dx = (reference->size[0] - (sprite->bounds.width & 0x7fff)) / 2;
+        dy = (reference->size[1] - (sprite->bounds.height & 0x7fff)) / 2;
+    }
+    s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    FUN_001835b4(2, work->group, work->index * 1000,
+                  reference->x + x + parallax + dx + work->offsets->x,
+                  reference->y + work->offsets->y + y + dy, 0x65);
+    efctSetSpeed(1.0f);
 }
-
-} /* extern "C" */
+}

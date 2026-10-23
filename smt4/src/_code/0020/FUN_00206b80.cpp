@@ -1,54 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00206b80` (_code @ 0x206b80, 0x124 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: finished/active sprite accessors fold into owner-relative byte accesses instead of retail's separate accessor address calculations. */
+#include "ui/SpriteTransitionGroup.h"
 
 extern "C" {
+s32 FUN_002bf818(SpriteTransitionMember *sprite);
+void FUN_002bee58(SpriteTransitionMember *sprite, s32 sequence);
 
-int FUN_002bee58(int, int);
-int FUN_002bf818(int);
-
-/* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002bf818. */
-
-
-void FUN_00206b80(int param_1)
-
+// Advance the four-sprite transition and return to idle after its paired exit animation.
+void FUN_00206b80(SpriteTransitionGroup *group)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  if (0 < *(int *)(param_1 + 0x254)) {
-    FUN_002bf818(param_1 + 0x1c4);
-  }
-  temp_v0 = *(unsigned int *)(param_1 + 0x254);
-  if (temp_v0 >= 2) {
-    if (temp_v0 != 2) {
-      if (temp_v0 == 3) {
-        FUN_002bf818(param_1 + 0x20);
-        FUN_002bf818(param_1 + 0xac);
-        if ((*(char *)(param_1 + 0xaa) != '\0') && (*(char *)(param_1 + 0x136) != '\0')) {
-          *(unsigned char *)(param_1 + 0xa5) = 0;
-          *(unsigned char *)(param_1 + 0x131) = 0;
-          *(unsigned char *)(param_1 + 0x1bd) = 0;
-          *(unsigned int *)(param_1 + 0x254) = 1;
-          *(unsigned int *)(param_1 + 0x250) = 0;
+    if (group->state > 0) {
+        FUN_002bf818(&group->sprites[3]);
+    }
+    switch (group->state) {
+    case 0:
+    case 1:
+        break;
+    case 2:
+        if (FUN_002bf818(&group->sprites[0]) && FUN_002bf818(&group->sprites[1]) &&
+            FUN_002bf818(&group->sprites[2])) {
+            FUN_002bee58(&group->sprites[0], 3);
+            FUN_002bee58(&group->sprites[1], 3);
+            group->state = 3;
+            group->frame = 0;
         }
-      }
+        break;
+    case 3:
+        FUN_002bf818(&group->sprites[0]);
+        FUN_002bf818(&group->sprites[1]);
+        if (uiAnimatedSpriteIsFinished(&group->sprites[0].animation) &&
+            uiAnimatedSpriteIsFinished(&group->sprites[1].animation)) {
+            group->sprites[0].playback.active = 0;
+            group->sprites[1].playback.active = 0;
+            group->sprites[2].playback.active = 0;
+            group->state = 1;
+            group->frame = 0;
+        }
+        break;
     }
-    else {
-      temp_v1 = FUN_002bf818(param_1 + 0x20);
-      if (((temp_v1 != 0) && (temp_v1 = FUN_002bf818(param_1 + 0xac), temp_v1 != 0)) &&
-         (temp_v1 = FUN_002bf818(param_1 + 0x138), temp_v1 != 0)) {
-        FUN_002bee58(param_1 + 0x20,3);
-        FUN_002bee58(param_1 + 0xac,3);
-        *(unsigned int *)(param_1 + 0x254) = 3;
-        *(unsigned int *)(param_1 + 0x250) = 0;
-      }
-    }
-  }
-  *(int *)(param_1 + 0x250) = *(int *)(param_1 + 0x250) + 1;
-  return;
+    ++group->frame;
 }
-
-} /* extern "C" */
+}

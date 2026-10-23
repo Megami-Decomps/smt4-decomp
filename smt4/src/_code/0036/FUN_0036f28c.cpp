@@ -1,115 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036f28c` (_code @ 0x36f28c, 0x1cc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: six-face relative-reference addressing, default-mode literal lifetime, mode branch layout and allocation-result registers differ. */
+#include "shard/W6_W6Match8_TextureResourceFixup.h"
 
-extern "C" {
-
-int FUN_002a666c(int *, int, unsigned int);
-int FUN_002c2424(int, unsigned int);
-int nnnstdMemCpy(int, int, unsigned int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern romwright_code *g_gfxAllocateCallback; /* 0x44e330 */
-
-/* Supplied declaration required: FUN_002a666c. */
-/* Supplied declaration required: FUN_002c2424. */
-/* Supplied declaration required: nnnstdMemCpy. */
-
-
-void FUN_0036f28c(unsigned int *param_1)
-
-{
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int *piVar7;
-  unsigned int temp_v5;
-  unsigned int *puVar9;
-  unsigned int temp_v6;
-  unsigned char temp_v7;
-  
-  if ((param_1 == (unsigned int *)0x0) || (puVar9 = param_1, (~*param_1 & 0x20000009) != 0)) {
-    puVar9 = (unsigned int *)0x0;
-  }
-  if (puVar9[0xb] == 0) {
-    puVar9[0xb] = (unsigned int)param_1;
-    temp_v6 = puVar9[0xc];
-    temp_v4 = 0;
-    do {
-      temp_v2 = puVar9[(temp_v4 & 0xff) + 0xe];
-      if (temp_v2 != 0) {
-        piVar7 = (int *)(temp_v2 + (int)(puVar9 + (temp_v4 & 0xff) + 0xe));
-      }
-      else {
-        piVar7 = (int *)0x0;
-      }
-      if (piVar7[6] != 0) {
-        piVar7[7] = 0;
-      }
-      else {
-        temp_v2 = temp_v6;
-        if (temp_v6 == 0) {
-          temp_v2 = 0x2010000;
-        }
-        temp_v5 = piVar7[2];
-        temp_v0 = temp_v2 & 0xffff0000;
-        if (temp_v5 == 0) {
-          temp_v5 = (unsigned int)(piVar7[1] * *piVar7 * piVar7[5]) >> 3;
-        }
-        if (temp_v0 != 0x2010000) {
-          if ((int)temp_v0 < 0x2010000) {
-            if (temp_v0 == 0x1010000) {
-              temp_v1 = (*g_gfxAllocateCallback)(0x10000,0x101,param_1,temp_v5);
-              if ((piVar7[3] != 0) && (temp_v3 = (int)piVar7 + piVar7[3] + 0xc, temp_v3 != 0)) {
-                nnnstdMemCpy(temp_v1,temp_v3,temp_v5);
-                FUN_002c2424(temp_v1,temp_v5);
-              }
-              piVar7[6] = temp_v1;
-              temp_v2 = 0x10000;
-              piVar7[7] = temp_v2;
-            }
-          }
-          else if (temp_v0 == 0x2020000 || temp_v0 == 0x2030000) {
-            temp_v2 = temp_v2 & 0x30000;
-            temp_v1 = (*g_gfxAllocateCallback)(temp_v2,0x101,param_1,temp_v5);
-            piVar2 = piVar7 + 3;
-            temp_v7 = piVar7[3] == 0;
-            if (!temp_v7) {
-              piVar2 = (int *)((int)piVar2 + piVar7[3]);
-              temp_v7 = piVar2 == (int *)0x0;
-            }
-            if (!temp_v7) {
-              FUN_002a666c(piVar2,temp_v1,temp_v5);
-            }
-            piVar7[6] = temp_v1;
-            piVar7[7] = temp_v2;
-          }
-        }
-        else {
-          temp_v1 = piVar7[3];
-          if (temp_v1 != 0) {
-            temp_v1 = temp_v1 + (int)(piVar7 + 3);
-          }
-          else {
-            temp_v1 = 0;
-          }
-          FUN_002c2424(temp_v1,temp_v5);
-        }
-      }
-      temp_v4 = temp_v4 + 1;
-    } while ((int)temp_v4 < 6);
-  }
-  return;
+namespace {
+struct CubeTextureFaceReferences {
+    u8 unk00[0x38];
+    RelativePointer faces[6];
+};
+// Six face references extend beyond the shared single-image resource prefix.
+union CubeTextureResourceView {
+    TextureResourceHeaderView header;
+    CubeTextureFaceReferences cube;
+};
+typedef char CubeTextureResourceLayoutCheck[sizeof(CubeTextureResourceView) == 0x50 &&
+    offsetof(CubeTextureFaceReferences, faces) == 0x38 ? 1 : -1];
 }
 
-} /* extern "C" */
+extern "C" {
+extern void *(*g_gfxAllocateCallback)(u32 memoryArea, u32 usage, TextureResourceHeaderView *owner, u32 size);
+void *nnnstdMemCpy(void *destination, const void *source, u32 size);
+void FUN_002c2424(const void *memory, u32 size);
+void FUN_002a666c(const void *source, void *destination, u32 size);
+
+void FUN_0036f28c(TextureResourceHeaderView *original)
+{
+    CubeTextureResourceView *resource = reinterpret_cast<CubeTextureResourceView *>(original);
+    if (resource == NULL || (0x20000009 & ~static_cast<u32>(resource->header.kind)) != 0) {
+        resource = NULL;
+    }
+    if (resource->header.boundOwner != NULL) {
+        return;
+    }
+    resource->header.boundOwner = original;
+    const u32 allocationFlags = resource->header.allocationFlags;
+    for (s32 i = 0; i < 6; ++i) {
+        TextureImageStorage *image = static_cast<TextureImageStorage *>(resource->cube.faces[static_cast<u8>(i)].get());
+        if (image->address != NULL) {
+            image->memoryArea = 0;
+        } else {
+            u32 mode = allocationFlags;
+            if (mode == 0) {
+                mode = 0x02010000;
+            }
+            mode &= 0xFFFF0000;
+            u32 size = image->byteSize;
+            if (size == 0) {
+                size = (image->height * image->width * image->bitsPerPixel) >> 3;
+            }
+            if (mode != 0x02010000) {
+                if (static_cast<s32>(mode) < 0x02010000) {
+                    if (mode == 0x01010000) {
+                        void *memory = g_gfxAllocateCallback(0x10000, 0x101, original, size);
+                        const void *source = image->data.get();
+                        if (source != NULL) {
+                            nnnstdMemCpy(memory, source, size);
+                            FUN_002c2424(memory, size);
+                        }
+                        image->address = memory;
+                        image->memoryArea = 0x10000;
+                    }
+                } else if (mode == 0x02020000 || mode == 0x02030000) {
+                    const u32 memoryArea = mode & 0x30000;
+                    void *memory = g_gfxAllocateCallback(memoryArea, 0x101, original, size);
+                    const void *source = image->data.get();
+                    if (source != NULL) {
+                        FUN_002a666c(source, memory, size);
+                    }
+                    image->address = memory;
+                    image->memoryArea = memoryArea;
+                }
+            } else {
+                FUN_002c2424(image->data.get(), size);
+            }
+        }
+    }
+}
+}

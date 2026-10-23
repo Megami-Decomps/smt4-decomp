@@ -1,70 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d15fc` (_code @ 0x2d15fc, 0x118 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: description reloads fold; allocation-size constant lifetime and result registers differ. */
+#include "AsdSDK/Source/Gfx/Effect/EmitterCloneResource.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 blockAlignment, s32 kind);
+void rt_memclr(void *memory, u32 size);
+void rt_memcpy_w(void *destination, const void *source, u32 size);
+void FUN_00313760(EffEmitter *emitter, u16 kind, EffEmitterDesc *description);
+void FUN_0031ce4c(EffEmitter *emitter);
+void asdMdlManagerDestroy(EmitterCloneModel *model);
+EmitterCloneModel *asdMdlManagerClone(EmitterCloneModel *model, u32 flags);
+extern const char DAT_004102f4[];
 
-int asdMdlManagerDestroy(void);
-int memAlloc(int, int, int, int, int, int);
-int rt_memclr(void);
-int FUN_00313760(unsigned int *, int, int);
-int FUN_0031ce4c(unsigned int *);
-int rt_memcpy_w(unsigned int *, int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
-/* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: FUN_00313760. */
-/* Supplied declaration required: FUN_0031ce4c. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int * FUN_002d15fc(int param_1)
-
+/* Duplicate emitter parameters and clone the model-backed emitter's rendering object. */
+EffEmitter *FUN_002d15fc(EffEmitter *source)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v1 = *(int *)(*(int *)(param_1 + 0x9c) + 0x24);
-  temp_v0 = *(int *)(temp_v1 + 0x20);
-  if (temp_v0 == 0) {
-    temp_v0 = *(int *)(temp_v1 + 0xb8);
-  }
-  temp_v2 = temp_v0 * *(int *)(*(int *)(*(int *)(param_1 + 0x9c) + 0x24) + 0x24);
-  if (temp_v2 >= 101) {
-    temp_v2 = 100;
-  }
-  puVar1 = (unsigned int *)0x10000;
-  memAlloc(0x10000,0x100,0,0xa8,0x10,1);
-  rt_memclr();
-  puVar1[1] = 0xffffffff;
-  *puVar1 = temp_v2;
-  puVar1[2] = 0x3f800000;
-  rt_memcpy_w(puVar1 + 4,param_1 + 0x10,0x44);
-  FUN_00313760(puVar1,**(unsigned short **)(param_1 + 0x9c),temp_v1);
-  if (*(int *)(puVar1[0x27] + 8) != 0) {
-    if (*(short *)(param_1 + 0xc) == 3) {
-      if (puVar1[0x15] != 0) {
-        asdMdlManagerDestroy();
-      }
-      temp_v2 = asdMdlManagerClone(*(unsigned int *)(param_1 + 0x54),0);
-      puVar1[0x15] = temp_v2;
-      *(unsigned int *)(*(int *)(*(int *)(*(int *)(*(int *)(temp_v2 + 8) + 0x2c) + 0x220) + 8) + 0x28) =
-           1;
+    // The source and destination allocation extend beyond the shared emitter prefix.
+    struct EmitterView {
+        u32 maxCount;
+        s32 handle;
+        f32 scale;
+        u16 kind;
+        u8 unk0e[2];
+        u8 parameters[0x44];
+        EmitterCloneModel *model;
+        u8 unk58[0x44];
+        EmitterCloneResource *resource;
+        u8 unka0[8];
+    };
+    typedef char EmitterViewLayout[sizeof(EmitterView) == 0xa8 &&
+        offsetof(EmitterView, resource) == 0x9c ? 1 : -1];
+    EmitterView *original = reinterpret_cast<EmitterView *>(source);
+    EffEmitterDesc *description = original->resource->description;
+    s32 count = description->countOverride;
+    if (count == 0) {
+        count = description->countDefault;
     }
-    *(unsigned short *)(puVar1 + 3) = *(unsigned short *)(param_1 + 0xc);
-    FUN_0031ce4c(puVar1);
-  }
-  return puVar1;
+    u32 maxCount = count * original->resource->description->multiplier;
+    if (maxCount > 100) {
+        maxCount = 100;
+    }
+    asdDebugTrace(DAT_004102f4, 450);
+    EmitterView *clone = static_cast<EmitterView *>(memAlloc(0x10000, 0x100, 0, 0xa8, 0x10, 1));
+    rt_memclr(clone, 0xa8);
+    clone->handle = -1;
+    clone->maxCount = maxCount;
+    clone->scale = 1.0f;
+    rt_memcpy_w(clone->parameters, original->parameters, sizeof(clone->parameters));
+    EffEmitter *emitter = reinterpret_cast<EffEmitter *>(clone);
+    FUN_00313760(emitter, original->resource->kind, description);
+    if (clone->resource->data != NULL) {
+        if (original->kind == 3) {
+            if (clone->model != NULL) {
+                asdMdlManagerDestroy(clone->model);
+            }
+            clone->model = asdMdlManagerClone(original->model, 0);
+            clone->model->object->body->renderState->state->enabled = 1;
+        }
+        clone->kind = original->kind;
+        FUN_0031ce4c(emitter);
+    }
+    return emitter;
 }
-
-} /* extern "C" */
+}

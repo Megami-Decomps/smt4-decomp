@@ -1,94 +1,70 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00371c3c` (_code @ 0x371c3c, 0x1a0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: texture table constants are immediates instead of saved registers, and the normal/alternate resource blocks have different placement. */
+#include "status/StatusBustUp.h"
+#include "shard/W6_W6Match8_DevilRecordA.h"
+#include "addon/aocMain.h"
+
+// The portrait ID is past the shared DevilRecordA prefix.  Apocalypse's table
+// override flags and model ID also differ from the SMT IV model override layout.
+struct PortraitDevilRecordAView {
+    DevilRecordA prefix;
+    u8 unk40[0x5C];
+    u16 portrait;
+};
+struct PortraitOverrideAView {
+    u16 id;
+    u16 flags;
+    u8 unk04[0x88];
+    s16 portrait;
+};
+typedef char PortraitRecordAOffsets[offsetof(PortraitDevilRecordAView, portrait) == 0x9C &&
+    offsetof(PortraitOverrideAView, portrait) == 0x8C ? 1 : -1];
 
 extern "C" {
+extern StatusBustUpResources DAT_00588fd8;
+extern AocSystem *g_aocSystem;
+s32 gameFlagIsSet(u32 flag);
+PortraitOverrideAView *dataTable00FindById(u16 id);
+s32 asdTMTexTableNodeIsLoaded(s32 table, s32 entry);
+s32 aocRunByName(AocSystem *system, s32 table, s32 entry, s32 mode);
+void FUN_001a6568(AocSystem *system, s32 table, s32 entry, u32 options);
+void asdTMTexLoadMainHeap(s32 table, s32 entry);
 
-int asdTMTexTableNodeIsLoaded(...);
-int FUN_00184310(void);
-int dataTable00FindById(void);
-int aocRunByName(...);
-int FUN_001a6568(...);
-int asdTMTexLoadMainHeap(...);
-
-extern unsigned int g_aocSystem; /* 0x570280 */
-extern int DAT_00588fdc; /* 0x588fdc */
-extern int DAT_00588fe0; /* 0x588fe0 */
-
-/* Supplied declaration required: asdTMTexTableNodeIsLoaded. */
-/* Supplied declaration required: FUN_00184310. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: aocRunByName. */
-/* Supplied declaration required: FUN_001a6568. */
-/* Supplied declaration required: asdTMTexLoadMainHeap. */
-
-
-void FUN_00371c3c(unsigned int param_1,int param_2)
-
+void FUN_00371c3c(s32 id, s32 byDevilId)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  
-  if (param_2 != 0) {
-    if (-1 >= (int)param_1) {
-      temp_v0 = gameFlagIsSet(0x11);
-      if (temp_v0 == 0) {
-        param_1 = 0x25e;
-      }
-      else {
-        param_1 = 0;
-      }
-    }
-    else {
-      temp_v1 = param_1;
-      FUN_00184310();
-      if (temp_v1 != 0) {
-        param_1 = param_1 & 0xffff;
-        dataTable00FindById();
-        if ((*(unsigned short *)(param_1 + 2) & 0x8000) != 0) {
-          temp_v0 = (int)*(short *)(param_1 + 0x8c);
-          if (temp_v0 < 0x9a) {
-            if ((*(char *)(DAT_00588fe0 + temp_v0) < '\x01') &&
-               (temp_v2 = asdTMTexTableNodeIsLoaded(0x19,temp_v0), temp_v2 == 0)) {
-              temp_v2 = aocRunByName(g_aocSystem,0x19,temp_v0,1);
-              if (temp_v2 != 0) {
-                FUN_001a6568(g_aocSystem,0x19,temp_v0,0x10000);
-              }
-              else {
-                asdTMTexLoadMainHeap(0x19,temp_v0);
-              }
+    if (byDevilId) {
+        if (id < 0) {
+            id = gameFlagIsSet(17) ? 0 : 606;
+        } else {
+            PortraitDevilRecordAView *devil = (PortraitDevilRecordAView *)FUN_00184310((u16)id);
+            if (devil == NULL)
+                return;
+            PortraitOverrideAView *override = dataTable00FindById((u16)id);
+            if (override->flags & 0x8000) {
+                id = override->portrait;
+                if (id < 154) {
+                    if (((s8 *)DAT_00588fd8.workB)[id] <= 0 &&
+                        !asdTMTexTableNodeIsLoaded(25, id)) {
+                        if (aocRunByName(g_aocSystem, 25, id, 1))
+                            FUN_001a6568(g_aocSystem, 25, id, 0x10000);
+                        else
+                            asdTMTexLoadMainHeap(25, id);
+                    }
+                    ++((s8 *)DAT_00588fd8.workB)[id];
+                }
+                return;
             }
-            *(char *)(DAT_00588fe0 + temp_v0) = *(char *)(DAT_00588fe0 + temp_v0) + '\x01';
-          }
-          return;
+            id = devil->portrait + 1;
+            if (id >= 631)
+                return;
         }
-        else {
-          param_1 = *(unsigned short *)(temp_v1 + 0x9c) + 1;
-          if (param_1 >= 0x277) {
-            return;
-          }
-        }
-      }
-      else {
-        return;
-      }
     }
-  }
-  if ((*(char *)(DAT_00588fdc + param_1) < '\x01') &&
-     (temp_v0 = asdTMTexTableNodeIsLoaded(0xf,param_1), temp_v0 == 0)) {
-    temp_v0 = aocRunByName(g_aocSystem,0xf,param_1,1);
-    if (temp_v0 != 0) {
-      FUN_001a6568(g_aocSystem,0xf,param_1,0x10000);
+    if (((s8 *)DAT_00588fd8.workA)[id] <= 0 &&
+        !asdTMTexTableNodeIsLoaded(15, id)) {
+        if (aocRunByName(g_aocSystem, 15, id, 1))
+            FUN_001a6568(g_aocSystem, 15, id, 0x10000);
+        else
+            asdTMTexLoadMainHeap(15, id);
     }
-    else {
-      asdTMTexLoadMainHeap(0xf,param_1);
-    }
-  }
-  *(char *)(DAT_00588fdc + param_1) = *(char *)(DAT_00588fdc + param_1) + '\x01';
-  return;
+    ++((s8 *)DAT_00588fd8.workA)[id];
 }
-
-} /* extern "C" */
+}

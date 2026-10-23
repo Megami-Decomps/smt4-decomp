@@ -1,99 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028fe0c` (_code @ 0x28fe0c, 0x184 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: global-pointer load and stack reservation exchange order in the prologue. */
+#include "shard/W4_W4Match2_UiQuest.h"
+#include "shard/W6_W6Match5_SecondarySort.h"
+#include "addon/aocMain.h"
 
 extern "C" {
+extern AocSystem *g_aocSystem;
+void uiBindRecordRewardText(s32 quest, s32 mode, s32 enabled);
+u32 FUN_00385ccc(AocSystem *system, s32 quest);
+void textFormatBuffer(char *output, const char *format, ...);
+u32 asdLoadFileSyncDefault(const char *path);
+void asdTextDrawDirectoryEntry(u32 text, s32 font, s32 mode, s32 x, s32 y, u32 directory, s32 index);
+void asdTextDrawFormatted(u32 text, s32 font, s32 mode, s32 x, s32 y, const char *format, ...);
+s32 FUN_00241c40(s32 quest);
+s32 FUN_003336dc(s32 quest, u32 state);
+u8 *FUN_002bcfc0(const u8 *source, u8 *output);
+void FUN_0028ffb8(s32 quest);
 
-int uiBindRecordRewardText(...);
-int FUN_0028ffb8(int);
-int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
-int asdTextDrawFormatted(unsigned int, int, unsigned int, int);
-int dataTable1bOr1cGetRecord(void);
-int FUN_002bcfc0(int, int);
-int textFormatBuffer(int *, unsigned char *, int);
-
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_2_stack;
-
-extern unsigned char LAB_0028ff98; /* 0x28ff98 */
-extern unsigned char LAB_0028ffb4; /* 0x28ffb4 */
-extern unsigned int g_aocSystem; /* 0x433158 */
-extern int g_uiQuest; /* 0x43dd50 */
-
-extern int FUN_00241c40(int);
-/* Supplied declaration required: uiBindRecordRewardText. */
-/* Supplied declaration required: FUN_0028ffb8. */
-/* Supplied declaration required: asdTextDrawDirectoryEntry. */
-/* Supplied declaration required: asdTextDrawFormatted. */
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-/* Supplied declaration required: FUN_002bcfc0. */
-/* Supplied declaration required: textFormatBuffer. */
-extern unsigned char *asdLoadFileSyncDefault(unsigned int *);
-extern int FUN_003336dc(int, unsigned int);
-extern unsigned char *FUN_00385ccc(unsigned int, int);
-
-
-void FUN_0028fe0c(int param_1,unsigned int param_2)
-
+// Populate title, optional detail and reward text from add-on or retail quest directories.
+void FUN_0028fe0c(u16 quest, u32 state)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char *temp_v3;
-  int temp_v4;
-  
-  temp_v0 = g_uiQuest;
-  if (param_1 != 0) {
-    uiBindRecordRewardText(param_1,1);
-    temp_v3 = (unsigned char *)FUN_00385ccc(g_aocSystem,param_1);
-    if (temp_v3 != (unsigned char *)0x0) {
-      *(unsigned char **)(temp_v0 + 0x5e0) = temp_v3;
-      *(unsigned char *)(temp_v0 + 0x5f7) = 1;
+    UiQuest *menu = g_uiQuest;
+    if (quest != 0) {
+        uiBindRecordRewardText(quest, 1, 1);
+        u32 directory = FUN_00385ccc(g_aocSystem, quest);
+        if (directory != 0) {
+            menu->panel.entryDirectory = directory;
+            menu->panel.entryOwnership.borrowed = 1;
+        } else {
+            char path[64];
+            textFormatBuffer(path, "event/quest/quest%03d.mbm", quest);
+            directory = asdLoadFileSyncDefault(path);
+            menu->panel.entryDirectory = directory;
+            menu->panel.entryOwnership.borrowed = 0;
+        }
+        asdTextDrawDirectoryEntry(menu->panel.texts[0], 3, -1, 0, 3, directory, 0);
+        s32 detail = FUN_00241c40(quest);
+        if (detail > 0)
+            asdTextDrawDirectoryEntry(menu->panel.texts[2], 3, -1, 0, 3, menu->panel.entryDirectory, detail);
+        uiBindRecordRewardText(quest, 1, 0);
+        s32 reward = FUN_003336dc(quest, state);
+        if (reward < 0) {
+            SecondarySortRecord *record = dataTable1bOr1cGetRecord(quest);
+            const u8 *text = FUN_002bcfc0(record->description.encoded, NULL);
+            asdTextDrawFormatted(menu->panel.texts[1], 3, -1, 0, 3, "%s", text);
+        } else {
+            asdTextDrawDirectoryEntry(menu->panel.texts[1], 3, -1, 0, 3, menu->panel.sysImages, reward);
+        }
+        FUN_0028ffb8(quest);
     }
-    else {
-      textFormatBuffer(&temp_v2,&LAB_0028ff98,param_1);
-      temp_v3 = (unsigned char *)asdLoadFileSyncDefault((unsigned int *)&temp_v2);
-      *(unsigned char **)(temp_v0 + 0x5e0) = temp_v3;
-      *(unsigned char *)(temp_v0 + 0x5f7) = 0;
-    }
-    temp_v2 = 3;
-    temp_v4 = 0;
-    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x5d4),3,0xffffffff,0);
-    temp_v1 = FUN_00241c40(param_1);
-    if (0 < temp_v1) {
-      temp_v3 = *(unsigned char **)(temp_v0 + 0x5e0);
-      temp_v2 = 3;
-      temp_v4 = temp_v1;
-      asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x5dc),3,0xffffffff,0);
-    }
-    uiBindRecordRewardText(param_1,1,0);
-    temp_v1 = FUN_003336dc(param_1,param_2);
-    if (temp_v1 < 0) {
-      temp_v1 = param_1;
-      dataTable1bOr1cGetRecord();
-      temp_v1 = temp_v1 + 0xe8;
-      FUN_002bcfc0(temp_v1,0);
-      temp_v3 = &LAB_0028ffb4;
-      temp_v2 = 3;
-      temp_v4 = temp_v1;
-      asdTextDrawFormatted(*(unsigned int *)(temp_v0 + 0x5d8),3,0xffffffff,0);
-    }
-    else {
-      temp_v3 = *(unsigned char **)(temp_v0 + 0x5e4);
-      temp_v2 = 3;
-      temp_v4 = temp_v1;
-      asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x5d8),3,0xffffffff,0);
-    }
-    FUN_0028ffb8(param_1);
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

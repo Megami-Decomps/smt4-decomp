@@ -1,115 +1,79 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a6568` (_code @ 0x1a6568, 0x1b8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only final async-call stack argument store and global-load scheduling differ. */
+#include "shard/S1AsdTexTable.h"
+#include "addon/AocPackage.h"
+#include "addon/aocMain.h"
 
 extern "C" {
+s32 FUN_001b3214(u32 table);
+AocPackageFile *FUN_001b2bd8(AocSystem *system, s32 type, s32 id, char *path);
+TexTableEntry *asdTMTexTableGetNode(u32 table, u32 id);
+u32 optionalWorkGetValue();
+void sysMemClear(void *buffer, u32 size);
+char *libc_strcpy(char *destination, const char *source);
+char *libc_strcat(char *destination, const char *source);
+u32 wstrlen(const char *text);
+void FUN_001b32a4(void *data);
+void FUN_001b3008(AocDisplay *display, const char *packagePath, const char *texturePath,
+    s32 offset, u32 flags, void (*callback)(void *), TexTableEntry *entry, u32 size,
+    AocPackageFile *file);
+extern AocDisplay *g_aocDisplay;
 
-int libc_strcat(...);
-int optionalWorkGetValue(void);
-int FUN_001b3008(unsigned int, unsigned char [132], unsigned char [128], int, unsigned int, unsigned char *, int *, int, int);
-int libc_strcpy(...);
-int sysMemClear(unsigned char [128], int);
-
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1AC; /* 0x1ac: local_1ac */
-    unsigned int sp1B8; /* 0x1b8: local_1b8 */
-} param_4_stack;
-
-extern unsigned char LAB_001a6720; /* 0x1a6720 */
-extern unsigned char LAB_001a6728; /* 0x1a6728 */
-extern unsigned char LAB_001b32a4; /* 0x1b32a4 */
-extern unsigned int g_aocDisplay; /* 0x57027c */
-
-/* Supplied declaration required: libc_strcat. */
-extern int *asdTMTexTableGetNode(unsigned int, unsigned int);
-/* Supplied declaration required: optionalWorkGetValue. */
-extern int FUN_001b2bd8(unsigned int, int, unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_001b3008. */
-extern int FUN_001b3214(unsigned int);
-extern int wstrlen(unsigned int);
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: sysMemClear. */
-
-
-int * FUN_001a6568(unsigned int param_1,unsigned int param_2,unsigned int param_3,int param_4)
-
+TexTableEntry *FUN_001a6568(AocSystem *system, u32 table, u32 id, u32 mode)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  char *pcVar5;
-  int temp_v3;
-  unsigned char temp_v4 [128];
-  unsigned char temp_v5 [128];
-  unsigned char temp_v6 [132];
-  
-  temp_v0 = FUN_001b3214(param_2);
-  if (temp_v0 == -1) {
-    return (int *)0x0;
-  }
-  sysMemClear(temp_v5,0x80);
-  temp_v0 = FUN_001b2bd8(param_1,temp_v0,param_3,temp_v5);
-  if (temp_v0 == 0) {
-    return (int *)0x0;
-  }
-  *(unsigned char *)(temp_v0 + 0xd) = 0;
-  *(unsigned int *)(temp_v0 + 8) = 0;
-  piVar2 = (int *)asdTMTexTableGetNode(param_2,param_3);
-  if (piVar2 == (int *)0x0) {
-    return (int *)0x0;
-  }
-  temp_v3 = piVar2[1];
-  optionalWorkGetValue();
-  libc_strcpy(temp_v4,*piVar2 + 0xc);
-  pcVar5 = *(char **)(temp_v3 + 8);
-  if (*pcVar5 != '-') {
-    libc_strcat(temp_v4);
-  }
-  else {
-    libc_strcat(temp_v4,*(unsigned int *)(piVar2[pcVar5[1] * -8 + 0x181] + 8));
-  }
-  if (*(char *)(piVar2[1] + 0xd) != '\0') {
-    libc_strcat(temp_v4,&LAB_001a6720);
-  }
-  else {
-    libc_strcat(temp_v4,&LAB_001a6728);
-  }
-  temp_v3 = wstrlen(*(unsigned int *)(temp_v3 + 8));
-  if (temp_v3 == 0) {
-    piVar2[2] = 0;
-    return piVar2;
-  }
-  libc_strcpy(temp_v6,temp_v5);
-  temp_v1 = piVar2[4];
-  if ((temp_v1 & 0xfffeffff) != 0) {
-    return piVar2;
-  }
-  if (param_4 == 0x20000) {
-    temp_v1 = temp_v1 | 0x20;
-    piVar2[4] = temp_v1;
-  }
-  else if (param_4 == 0x30000) {
-    temp_v1 = temp_v1 | 0x40;
-    piVar2[4] = temp_v1;
-  }
-  piVar2[4] = temp_v1 | 1;
-  temp_v2 = 1;
-  if ((temp_v1 & 0x10000) != 0) {
-    temp_v2 = 3;
-  }
-  if (*(char *)(piVar2[1] + 0xd) != '\0') {
-    if ((temp_v2 & 2) != 0) {
-      temp_v2 = temp_v2 & 0xfffffffd;
+    char texturePath[128];
+    char packagePath[128];
+    char requestPath[128];
+    s32 type = FUN_001b3214(table);
+    if (type == -1)
+        return NULL;
+    sysMemClear(packagePath, sizeof(packagePath));
+    AocPackageFile *file = FUN_001b2bd8(system, type, id, packagePath);
+    if (file == NULL)
+        return NULL;
+    file->texture.completion = 0;
+    file->texture.result = 0;
+    TexTableEntry *entry = asdTMTexTableGetNode(table, id);
+    if (entry == NULL)
+        return NULL;
+    TexTableNode *node = entry->node;
+    optionalWorkGetValue();
+    libc_strcpy(texturePath, entry->file->directory);
+    if (node->name[0] == '-')
+        libc_strcat(texturePath, entry->slots[-static_cast<s8>(node->name[1])].node->name);
+    else
+        libc_strcat(texturePath, node->name);
+    if (entry->node->compressed)
+        libc_strcat(texturePath, ".cmp");
+    else
+        libc_strcat(texturePath, ".stex");
+    if (wstrlen(node->name) == 0) {
+        entry->state = 0;
+        return entry;
     }
-    else {
-      temp_v2 = temp_v2 | 2;
+    libc_strcpy(requestPath, packagePath);
+    u32 flags = entry->flags;
+    if ((flags & ~TEXENTRY_RETRY) != 0)
+        return entry;
+    if (mode == 0x20000) {
+        flags |= TEXENTRY_MODE_20;
+        entry->flags = flags;
+    } else if (mode == 0x30000) {
+        flags |= TEXENTRY_MODE_40;
+        entry->flags = flags;
     }
-  }
-  FUN_001b3008(g_aocDisplay,temp_v6,temp_v4,0,temp_v2,&LAB_001b32a4,piVar2,0x80,temp_v0);
-  return piVar2;
+    flags |= TEXENTRY_LOADING;
+    entry->flags = flags;
+    u32 loadFlags = 1;
+    if ((flags & TEXENTRY_RETRY) != 0)
+        loadFlags = 3;
+    if (entry->node->compressed) {
+        if ((loadFlags & 2) != 0)
+            loadFlags &= ~2;
+        else
+            loadFlags |= 2;
+    }
+    FUN_001b3008(g_aocDisplay, requestPath, texturePath, 0, loadFlags,
+        FUN_001b32a4, entry, 0x80, file);
+    return entry;
 }
-
-} /* extern "C" */
+}

@@ -1,72 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d7e44` (_code @ 0x2d7e44, 0x118 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: cached-state push/pop scheduling and final float/integer literal-pool order differ. */
+#include "title/titleMain.h"
+#include "shard/W6_W6Match2_EffectEditor.h"
+#include "shard/S1ListPanel.h"
 
 extern "C" {
+extern TitleScene *g_titleScene;
+u32 FUN_002c5d80(u32 mode, u32 option);
+void FUN_002c1b64(TitleScene *scene, s32 layer);
+s32 effMenuGetFlag();
+void effMenuCallHandler(s32 mode, u32 enabled);
+void FUN_001db658(s32 count, u32 colorA, u32 colorB, f32 x, f32 y, f32 z, f32 height);
 
-int FUN_001db658(int, int, unsigned int);
-int effMenuCallHandler(int, unsigned int);
-int FUN_002c1b64(int, int);
-
-typedef int romwright_code(...);
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-extern unsigned char g_effectEditor; /* 0x44ea80 */
-
-/* Supplied declaration required: FUN_001db658. */
-/* Supplied declaration required: effMenuCallHandler. */
-/* Supplied declaration required: FUN_002c1b64. */
-extern int FUN_002c5d80(unsigned int);
-extern int effMenuGetFlag(void);
-
-
-void FUN_002d7e44(void)
-
+// Draw the effect editor under a temporary scene state, with an optional debug backdrop.
+void FUN_002d7e44()
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  unsigned int temp_v4;
-  
-  temp_v1 = g_titleScene;
-  temp_v0 = FUN_002c5d80(1);
-  piVar5 = (int *)(temp_v1 + 0x124c);
-  temp_v2 = *piVar5;
-  temp_v3 = piVar5[temp_v2 + 2];
-  *piVar5 = temp_v2 + 1;
-  piVar5[temp_v2 + 3] = temp_v0;
-  if (*(char *)(temp_v1 + 0x1264) != '\0' || temp_v3 != temp_v0) {
-    (**(romwright_code **)(temp_v1 + 0x1268))();
-    *(unsigned char *)(temp_v1 + 0x1264) = 0;
-  }
-  FUN_002c1b64(g_titleScene,0);
-  temp_v4 = 1;
-  temp_v1 = effMenuGetFlag();
-  if ((temp_v1 != 0) && (*(int *)(g_titleScene + 0x528) == 0)) {
-    temp_v4 = 0;
-  }
-  effMenuCallHandler(0,temp_v4);
-  temp_v1 = g_titleScene;
-  piVar5 = (int *)(g_titleScene + 0x124c);
-  temp_v0 = *piVar5;
-  temp_v2 = piVar5[temp_v0 + 2];
-  *piVar5 = temp_v0 - 1;
-  if (*(char *)(temp_v1 + 0x1264) != '\0' || temp_v2 != piVar5[temp_v0 + 1]) {
-    (**(romwright_code **)(temp_v1 + 0x1268))();
-    *(unsigned char *)(temp_v1 + 0x1264) = 0;
-  }
-  if ((*(int *)((unsigned char *)&g_effectEditor + 0x78)) != 0) {
-    FUN_001db658(0x1e,0x606060ff,0x909090ff);
-    return;
-  }
-  return;
+    // The render cache and debug flag are beyond the shared prefix layouts.
+    struct TitleSceneDrawView {
+        u8 prefix[0x124C];
+        RenderCtxCachedState state;
+    };
+    struct EditorDrawView {
+        u8 prefix[0x78];
+        s32 debugBackdrop;
+    };
+    TitleSceneDrawView *scene = reinterpret_cast<TitleSceneDrawView *>(g_titleScene);
+    u32 state = FUN_002c5d80(1, 1);
+    scene->state.push(state);
+    FUN_002c1b64(g_titleScene, 0);
+    u32 enabled = 1;
+    if (effMenuGetFlag() != 0 && g_titleScene->unk528 == 0)
+        enabled = 0;
+    effMenuCallHandler(0, enabled);
+    reinterpret_cast<TitleSceneDrawView *>(g_titleScene)->state.pop();
+    if (reinterpret_cast<EditorDrawView *>(&g_effectEditor)->debugBackdrop != 0)
+        FUN_001db658(30, 0x606060FF, 0x909090FF, 0.0f, 0.0f, 0.0f, 17.5f);
 }
-
-} /* extern "C" */
+}

@@ -1,89 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b88e0` (_code @ 0x4b88e0, 0x114 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the saved zero/global-pointer registers are swapped (r6/r7 versus retail r7/r6). */
+#include "gfx/TransformInterpolation.h"
+#include "script/scrScriptProcess.h"
+
+struct EventScriptLaunchWorkView {
+    TransformInterpolation transform;
+    u8 unk090[0x10e0];
+    void *bytecode; /* 0x1170 */
+    void *messages; /* 0x1174 */
+    ScriptRunState *script; /* 0x1178 */
+};
+struct EventScriptLaunchGlobalsView {
+    u8 unk00[0x98];
+    u16 result;
+    s16 eventId;
+    char entryName[1];
+};
+typedef char EventScriptLaunchWorkOffsets[offsetof(EventScriptLaunchWorkView, bytecode) == 0x1170 &&
+    offsetof(EventScriptLaunchGlobalsView, entryName) == 0x9c ? 1 : -1];
 
 extern "C" {
+extern EventScriptLaunchGlobalsView DAT_005f16fc;
+void FUN_004b75d0(TransformInterpolation *);
+s32 scrRunOpcodesStub(ScriptRunState *);
+void scrScriptProcessDestroy(ScriptRunState *);
+void asdMemFree(void *);
+void FUN_001695a0();
+void textFormatBuffer(char *, const char *, ...);
+void *asdLoadFileSyncDefault(const char *);
+ScriptRunState *FUN_00275bc8(void *, void *);
+u32 tableGroupFindEntryIndex(void *, const char *);
+void scrScriptProcessStartEntry(ScriptRunState *, u32);
 
-int textFormatBuffer(unsigned char [132], unsigned char *, int, int);
-int FUN_001695a0(void);
-int asdMemFree(...);
-int scrScriptProcessDestroy(int);
-int asdLoadFileSyncDefault(void);
-int FUN_00275bc8(int, unsigned char *);
-int scrScriptProcessStartEntry(int, unsigned int);
-int FUN_004b75d0(void);
-
-typedef struct fn_004b88e0_arg0 fn_004b88e0_arg0;
-struct fn_004b88e0_arg0 {
-    unsigned char pad_0x0[0x28];
-    undefined4 field_0x28; /* +0x28 */
-    int field_0x2c; /* +0x2c */
-    unsigned char pad_0x30[0x1140];
-    undefined4 field_0x1170; /* +0x1170 */
-    void *field_0x1174; /* +0x1174 */
-    int field_0x1178; /* +0x1178 */
-};
-
-extern unsigned char LAB_004b89f8; /* 0x4b89f8 */
-extern unsigned char LAB_004b8a10; /* 0x4b8a10 */
-extern unsigned short DAT_005f1794; /* 0x5f1794 */
-extern short DAT_005f1796; /* 0x5f1796 */
-extern unsigned char DAT_005f1798; /* 0x5f1798 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_001695a0. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: asdLoadFileSyncDefault. */
-extern int scrRunOpcodesStub(int);
-/* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_004b75d0. */
-
-
-void FUN_004b88e0(fn_004b88e0_arg0 *param_1)
-
+/* Load and run an event entry, releasing both resources after the script completes. */
+void FUN_004b88e0(EventScriptLaunchWorkView *work)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned char *puVar3;
-  unsigned int temp_v1;
-  unsigned char temp_v2 [132];
-  
-  puVar2 = temp_v2;
-  puVar3 = temp_v2;
-  FUN_004b75d0();
-  if (param_1->field_0x2c != 0) {
-    if ((param_1->field_0x2c == 1) && (temp_v0 = scrRunOpcodesStub(param_1->field_0x1178), temp_v0 == 2)) {
-      scrScriptProcessDestroy(param_1->field_0x1178);
-      param_1->field_0x1178 = 0;
-      asdMemFree(param_1->field_0x1170);
-      param_1->field_0x1170 = 0;
-      asdMemFree(param_1->field_0x1174);
-      param_1->field_0x1174 = (void *)0x0;
-      param_1->field_0x28 = 5;
-      param_1->field_0x2c = 0;
+    char path[132];
+    FUN_004b75d0(&work->transform);
+    if (work->transform.runtime.phase != 0) {
+        if (work->transform.runtime.phase == 1 && scrRunOpcodesStub(work->script) == 2) {
+            scrScriptProcessDestroy(work->script);
+            work->script = NULL;
+            asdMemFree(work->bytecode);
+            work->bytecode = NULL;
+            asdMemFree(work->messages);
+            work->messages = NULL;
+            work->transform.runtime.state = 5;
+            work->transform.runtime.phase = 0;
+        }
+        return;
     }
-    return;
-  }
-  DAT_005f1794 = 0;
-  FUN_001695a0();
-  textFormatBuffer(temp_v2,&LAB_004b89f8,(int)DAT_005f1796,(int)DAT_005f1796);
-  asdLoadFileSyncDefault();
-  param_1->field_0x1170 = (undefined4)puVar2;
-  textFormatBuffer(temp_v2,&LAB_004b8a10,(int)DAT_005f1796,(int)DAT_005f1796);
-  asdLoadFileSyncDefault();
-  param_1->field_0x1174 = puVar3;
-  temp_v0 = param_1->field_0x1170;
-  FUN_00275bc8(temp_v0,puVar3);
-  param_1->field_0x1178 = temp_v0;
-  *(unsigned int *)(temp_v0 + 0x108) = 2;
-  temp_v1 = tableGroupFindEntryIndex(param_1->field_0x1170,&DAT_005f1798);
-  scrScriptProcessStartEntry(param_1->field_0x1178,temp_v1);
-  param_1->field_0x2c = param_1->field_0x2c + 1;
-  return;
+    DAT_005f16fc.result = 0;
+    FUN_001695a0();
+    textFormatBuffer(path, "event/e%03d/e%03d.bf", DAT_005f16fc.eventId, DAT_005f16fc.eventId);
+    work->bytecode = asdLoadFileSyncDefault(path);
+    textFormatBuffer(path, "event/e%03d/e%03d.mbm", DAT_005f16fc.eventId, DAT_005f16fc.eventId);
+    work->messages = asdLoadFileSyncDefault(path);
+    work->script = FUN_00275bc8(work->bytecode, work->messages);
+    work->script->mode = 2;
+    u32 entry = tableGroupFindEntryIndex(work->bytecode, DAT_005f16fc.entryName);
+    scrScriptProcessStartEntry(work->script, entry);
+    ++work->transform.runtime.phase;
 }
-
-} /* extern "C" */
+}

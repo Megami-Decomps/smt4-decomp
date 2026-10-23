@@ -7,7 +7,7 @@ struct Table02Record {
 
 extern "C" {
 extern AocSystem* g_aocSystem;
-Table02Record* FUN_00389168(AocSystem* system, u32 index);
+Table02Record* aocFindQuestPayloadById(AocSystem* system, u32 index);
 
 // Resolve a valid table index from add-on data, falling back to the base entry or base pointer.
 Table02Record* dataTableGetRecord02(s32 index)
@@ -17,7 +17,7 @@ Table02Record* dataTableGetRecord02(s32 index)
     if (index < 0 || (u32)index >= dataTableGetCount(section)) {
         return entries;
     }
-    Table02Record* entry = FUN_00389168(g_aocSystem, index);
+    Table02Record* entry = aocFindQuestPayloadById(g_aocSystem, index);
     if (entry == NULL) {
         entry = &entries[index];
     }

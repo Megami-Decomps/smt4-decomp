@@ -1,84 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ae418` (_code @ 0x3ae418, 0x154 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: slot-relative addressing and aggregate copy use core registers rather than retail's VFP transfer. */
+#include "battle/btlUI.h"
+#include "shard/W6_W6Match6_ProjectionCamera.h"
 
-extern "C" {
-
-int FUN_002630e0(int *, int, unsigned int);
-int FUN_002bee58(unsigned int *, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
-
-extern unsigned int *g_btlUiBlock; /* 0x439ca8 */
-
-/* Supplied declaration required: FUN_002630e0. */
-extern int FUN_00293230(unsigned int);
-/* Supplied declaration required: FUN_002bee58. */
-extern unsigned int FUN_002c501c(void);
-
-
-unsigned int FUN_003ae418(unsigned int param_1,unsigned int *param_2)
-
+static inline u32 findActionSlot(BtlUi *ui)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2; 5 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int uStack_34;
-  unsigned int uStack_30;
-  
-  puVar1 = g_btlUiBlock;
-  temp_v2 = 0;
-  do {
-    if (*(short *)(g_btlUiBlock + temp_v2 * 0x53 + 0x3871) == 0) {
-      if (temp_v2 >= 0xc) {
-        return 0xffffffff;
-      }
-      temp_v3 = 0;
-      *(unsigned short *)(g_btlUiBlock + temp_v2 * 0x53 + 0x3871) = 2;
-      *(unsigned short *)((int)puVar1 + temp_v2 * 0x14c + 0xe1c6) = 0;
-      puVar1[temp_v2 * 0x53 + 0x3872] = 0;
-      *(unsigned char *)(puVar1 + temp_v2 * 0x53 + 0x3873) = 0;
-      temp_v4 = in_s0;
-      uStack_34 = in_s1;
-      uStack_30 = in_s2;
-      temp_v0 = FUN_002c501c();
-      FUN_002630e0(&temp_v4,0,temp_v0);
-      puVar1[temp_v2 * 0x53 + 0x3874] = temp_v4;
-      puVar1[temp_v2 * 0x53 + 0x3875] = uStack_34;
-      puVar1[temp_v2 * 0x53 + 0x3876] = uStack_30;
-      puVar1[temp_v2 * 0x53 + 0x3879] = temp_v3;
-      puVar1[temp_v2 * 0x53 + 0x3878] = temp_v3;
-      puVar1[temp_v2 * 0x53 + 0x3877] = temp_v3;
-      puVar1[temp_v2 * 0x53 + 0x387c] = temp_v3;
-      puVar1[temp_v2 * 0x53 + 0x387b] = temp_v3;
-      puVar1[temp_v2 * 0x53 + 0x387a] = temp_v3;
-      puVar1[temp_v2 * 0x53 + 0x387d] = (unsigned int)param_2;
-      *param_2 = *param_2 & 0xfdffffff;
-      temp_v1 = FUN_00293230(*puVar1);
-      if (temp_v1 != 0) {
-        *(unsigned char *)(puVar1 + temp_v2 * 0x53 + 0x3873) = 0;
-        *(unsigned short *)(puVar1 + temp_v2 * 0x53 + 0x3871) = 5;
-        *(unsigned int *)puVar1[temp_v2 * 0x53 + 0x387d] = *(unsigned int *)puVar1[temp_v2 * 0x53 + 0x387d] | 0x2000000;
-      }
-      else {
-        FUN_002bee58(puVar1 + temp_v2 * 0x53 + 0x382b,0xb);
-        FUN_002bee58(puVar1 + temp_v2 * 0x53 + 0x384e,0xc);
-      }
-      return temp_v2;
+    for (s32 index = 0; index < 12; ++index) {
+        if (ui->objD.actionRequests.slots[index].state == 0)
+            return index;
     }
-    temp_v2 = temp_v2 + 1;
-  } while ((int)temp_v2 < 0xc);
-  return 0xffffffff;
+    return -1;
 }
 
-} /* extern "C" */
+extern "C" {
+extern BtlUiGlobals g_btlUi;
+ProjectionMatrices *FUN_002c501c();
+void FUN_002630e0(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
+s32 FUN_00293230(void *owner);
+void FUN_002bee58(SpritePlaybackView *sprite, s32 animation);
+
+// Reserve a screen-space action slot and mark the owner complete when the UI is already closing.
+u32 FUN_003ae418(u32 request, u32 *ownerFlags, f32 x, f32 y, f32 z)
+{
+    BtlUi *ui = g_btlUi.ui;
+    u32 index = findActionSlot(ui);
+    if (index >= 12)
+        return -1;
+    BattleUiActionSlot *slot = &ui->objD.actionRequests.slots[index];
+    slot->state = 2;
+    slot->frame = 0;
+    slot->progress = 0.0f;
+    slot->active = 0;
+    BattleUiActionVector position = {x, y, z};
+    FUN_002630e0(&position.x, 0, FUN_002c501c(), &position.x);
+    slot->projected = position;
+    slot->velocity[0] = slot->velocity[1] = slot->velocity[2] = 0.0f;
+    slot->acceleration[0] = slot->acceleration[1] = slot->acceleration[2] = 0.0f;
+    slot->ownerFlags = ownerFlags;
+    *ownerFlags &= ~0x2000000;
+    if (FUN_00293230(ui->owner)) {
+        slot->active = 0;
+        slot->state = 5;
+        *slot->ownerFlags |= 0x2000000;
+    } else {
+        FUN_002bee58(&slot->firstSprite, 11);
+        FUN_002bee58(&slot->secondSprite, 12);
+    }
+    return index;
+}
+}

@@ -1,85 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004be49c` (_code @ 0x4be49c, 0x16c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: wrapped-selection helper changes search branch layout and quotient/remainder scheduling. */
+#include "shard/Shard0037.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
 
-extern "C" {
-
-int FUN_002a4914(int, int);
-int FUN_002a4964(int, int);
-int statusPanelSetOpen(int);
-int flagValueSub(unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_002a4914. */
-/* Supplied declaration required: FUN_002a4964. */
-/* Supplied declaration required: statusPanelSetOpen. */
-extern unsigned int FUN_003e4d68(unsigned int);
-extern int FUN_004801ac(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: flagValueSub. */
-extern int flagValueIsPositive(unsigned int);
-
-
-void FUN_004be49c(int param_1)
-
+static inline s32 findNextEnabledUnit(const Obj25C *menu, s32 start)
 {
-/* irregular: 1 unstructured edge(s); 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  flagValueSub(*(unsigned int *)(param_1 + 0x334),1);
-  temp_v0 = flagValueIsPositive(*(unsigned int *)(param_1 + 0x334));
-  if (temp_v0 == 0) {
-    *(unsigned int *)(param_1 + 8) = 0xd;
-    return;
-  }
-  temp_v1 = FUN_003e4d68(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x32c) * 4 + 0x2c4) & 0xffff);
-  temp_v0 = FUN_004801ac(temp_v1,*(unsigned int *)(param_1 + 0x334),1);
-  if (temp_v0 != 0) {
-    *(unsigned char *)(*(int *)(param_1 + 0x32c) + param_1 + 0x338) = 0;
-    temp_v2 = *(int *)(param_1 + 0x32c);
-    for (temp_v0 = temp_v2; temp_v4 = -1, temp_v0 < 0xc; temp_v0 = temp_v0 + 1) {
-      if ((-1 < *(int *)(param_1 + temp_v0 * 4 + 0x2c4)) &&
-         (*(char *)(param_1 + temp_v0 + 0x338) != '\0')) {
-        temp_v4 = temp_v0;
-        if (-1 >= temp_v0) break;
-        FUN_002a4914(param_1 + 0x260,temp_v0 % 4);
-        FUN_002a4964(param_1 + 0x260,(int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1e)) >> 2);
-        temp_v1 = FUN_003e4d68(*(unsigned int *)(param_1 + temp_v0 * 4 + 0x2c4) & 0xffff);
-        statusRequestUnitDetails((const UnitCategoryRecord*)temp_v1,0,0);
-        statusPanelSetOpen(1);
-        return;
-      }
+    for (s32 index = start; index < 12; ++index) {
+        if ((s32)menu->ids[index] >= 0 && menu->flags[index] != 0)
+            return index;
     }
-    temp_v3 = 0;
-    temp_v0 = temp_v4;
-    if (0 < temp_v2) {
-      do {
-        if ((-1 < *(int *)(param_1 + temp_v3 * 4 + 0x2c4)) &&
-           (temp_v0 = temp_v3, *(char *)(param_1 + temp_v3 + 0x338) != '\0')) break;
-        temp_v3 = temp_v3 + 1;
-        temp_v0 = temp_v4;
-      } while (temp_v3 < temp_v2);
+    for (s32 index = 0; index < start; ++index) {
+        if ((s32)menu->ids[index] >= 0 && menu->flags[index] != 0)
+            return index;
     }
-    if (-1 < temp_v0) {
-      FUN_002a4914(param_1 + 0x260,temp_v0 % 4);
-      FUN_002a4964(param_1 + 0x260,(int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1e)) >> 2);
-      temp_v1 = FUN_003e4d68(*(unsigned int *)(param_1 + temp_v0 * 4 + 0x2c4) & 0xffff);
-      statusRequestUnitDetails((const UnitCategoryRecord*)temp_v1,0,0);
-      statusPanelSetOpen(1);
-      return;
-    }
-  }
-  statusRequestUnitDetails((const UnitCategoryRecord*)temp_v1,0,0);
-  statusPanelSetOpen(1);
-  return;
+    return -1;
 }
 
-} /* extern "C" */
+extern "C" {
+void flagValueSub(u32 flag, s32 amount);
+s32 flagValueIsPositive(u32 flag);
+UnitCategoryRecord *FUN_003e4d68(u32 id);
+s32 FUN_004801ac(UnitCategoryRecord *unit, u32 flag, s32 apply);
+void FUN_002a4914(void *cursor, s32 column);
+void FUN_002a4964(void *cursor, s32 row);
+void statusPanelSetOpen(s32 open);
+
+// Apply the selected unit operation, then advance to another enabled detail entry.
+void FUN_004be49c(Obj25C *menu)
+{
+    flagValueSub(menu->unk334, 1);
+    if (!flagValueIsPositive(menu->unk334)) {
+        menu->transition.state = 13;
+        return;
+    }
+    UnitCategoryRecord *unit = FUN_003e4d68((u16)menu->ids[menu->selectionIndex.selected]);
+    if (FUN_004801ac(unit, menu->unk334, 1)) {
+        menu->flags[menu->selectionIndex.selected] = 0;
+        s32 next = findNextEnabledUnit(menu, menu->selectionIndex.selected);
+        if (next >= 0) {
+            FUN_002a4914(menu->selection.cursor, next % 4);
+            FUN_002a4964(menu->selection.cursor, next / 4);
+            unit = FUN_003e4d68((u16)menu->ids[next]);
+            statusRequestUnitDetails(unit, 0, NULL);
+            statusPanelSetOpen(1);
+            return;
+        }
+    }
+    statusRequestUnitDetails(unit, 0, NULL);
+    statusPanelSetOpen(1);
+}
+}

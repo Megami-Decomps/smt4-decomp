@@ -13,7 +13,7 @@ int FUN_00169548(...);
 int FUN_00169704(void);
 
 int FUN_001517b4(...);
-int FUN_00162ec0(...);
+int uiApplyIndexedPanelSpriteSizes(...);
 int ifTouchRegionRemove(void);
 int workCommandRefreshActiveSlots(void);
 int FUN_00165088(...);
@@ -72,7 +72,7 @@ extern float DAT_005e2054; /* 0x5e2054 */
 /* Supplied declaration required: mathInterpolateTimed. */
 extern int campIsState85(void);
 extern int engineCleanupIsDone(void);
-/* Supplied declaration required: FUN_00162ec0. */
+/* Supplied declaration required: uiApplyIndexedPanelSpriteSizes. */
 extern int querySlotHasHandle(void);
 /* Supplied declaration required: FUN_00163aa4. */
 extern int FUN_00163e84(unsigned int);
@@ -641,7 +641,7 @@ LAB_0014d034:
                             }
                             else {
                               *(int *)(temp_v2 + 0x18) = temp_v10 - 1;
-                              FUN_00162ec0(temp_v2);
+                              uiApplyIndexedPanelSpriteSizes(temp_v2);
                             }
                             *(unsigned char *)(temp_v2 + 0x30) = 0;
                             *(unsigned char *)(temp_v2 + 0x31) = 0;
@@ -741,7 +741,7 @@ LAB_0014d1a4:
 LAB_0014d1e0:
             if (!temp_v12) {
               if (*(int *)(temp_v2 + 0x18) != temp_v21) {
-                FUN_00162ec0(temp_v2);
+                uiApplyIndexedPanelSpriteSizes(temp_v2);
               }
               break;
             }

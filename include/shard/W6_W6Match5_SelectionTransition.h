@@ -15,10 +15,26 @@ struct SelectionTransition {
     u32 unk000;
     s32 state; // 0x004
     s32 progress; // 0x008
-    u8 unk00c[0x1fc];
+    union {
+        u8 unk00c[0x1fc];
+        /* 0x00C */ s32 timer;
+    };
     TransitionResource *resource; // 0x208
-    u8 unk20c[0x18];
+    union {
+        u8 unk20c[0x18];
+        struct {
+            u8 unk20C[4];
+            RequestParameters result; // 0x210
+        } query;
+    };
     RequestParameters parameters; // 0x224
 };
+typedef char SelectionTransitionResultOffsetCheck[
+    __INTADDR__(&((SelectionTransition *)0)->query.result) == 0x210 &&
+    __INTADDR__(&((SelectionTransition *)0)->parameters) == 0x224 &&
+    sizeof(SelectionTransition) == 0x238 ? 1 : -1];
+typedef char SelectionTransitionTimerOffsetCheck[
+    __INTADDR__(&((SelectionTransition *)0)->timer) == 0xC &&
+    sizeof(SelectionTransition) == 0x238 ? 1 : -1];
 
 #endif

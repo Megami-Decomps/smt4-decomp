@@ -1,92 +1,79 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048b8a4` (_code @ 0x48b8a4, 0x18c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: auxiliary flag address hoisting, phase-two placement and one-frame VFP constant lifetime differ. */
+#include "ui/NaviCategorySelection.h"
+#include "ui/UiSpriteState.h"
+#include "shard/W5_W5Match2_ScalarArguments.h"
 
 extern "C" {
+s32 FUN_00163aa4(UiSpriteState *, f32);
+void uiSpriteBankApplyPreset(void *, s32);
+void FUN_0048a378(NaviCategorySelectionWork *);
+void FUN_0048821c(NaviCategorySelectionWork *, u32);
+s32 vec2GetXInt(UiSpriteState *);
+s32 vec2GetYInt(UiSpriteState *);
+void pointConvertToFloat(FloatPoint *, s32, s32);
+u32 NaviMain_GetCurrentMap();
+u32 naviGetActiveStateValue(void *);
+void naviMainSetCurrentMap(void *, u32);
+void FUN_00492ac8(void *, u32);
 
-int FUN_00163aa4(int);
-int uiSpriteBankApplyPreset(int, int);
-int FUN_0048821c(int, unsigned int);
-int FUN_0048a378(int);
-int naviMainSetCurrentMap(int, unsigned int);
-int FUN_00492ac8(int, int);
-int naviGetActiveStateValue(int);
-int pointConvertToFloat(...);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: uiSpriteBankApplyPreset. */
-/* Supplied declaration required: FUN_0048821c. */
-/* Supplied declaration required: FUN_0048a378. */
-/* Supplied declaration required: naviMainSetCurrentMap. */
-/* Supplied declaration required: FUN_00492ac8. */
-/* Supplied declaration required: naviGetActiveStateValue. */
-/* Supplied declaration required: pointConvertToFloat. */
-extern int NaviMain_GetCurrentMap(void);
-
-
-void FUN_0048b8a4(int param_1)
-
+void FUN_0048b8a4(NaviCategorySelectionWork *owner)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  
-  temp_v0 = *(int *)(param_1 + 8);
-  if (temp_v0 != 0) {
-    if (temp_v0 != 1) {
-      if (temp_v0 == 2) {
-        if (*(char *)(param_1 + 0x112a) == '\0') {
-          FUN_00163aa4(param_1 + 0x10a0);
+    /* The shared opaque range starts at 0x65; a typed union there would shift alignment. */
+    struct SceneView { u32 map; FloatPoint position; u8 unk0C[0xC]; };
+    struct EntranceView {
+        u32 job;
+        s32 state;
+        s32 phase;
+        u32 unk0C;
+        u32 flags;
+        u32 timer;
+        u8 unk018[0x4B4];
+        SceneView scene;
+        u8 preset[0x20];
+        UiSpriteState motion;
+        u8 unk590[0xB10];
+        UiSpriteState auxiliary;
+    };
+    typedef char EntranceViewOffsets[
+        offsetof(EntranceView, scene) == 0x4CC &&
+        offsetof(EntranceView, scene.position) == 0x4D0 &&
+        offsetof(EntranceView, motion) == 0x504 &&
+        offsetof(EntranceView, auxiliary) == 0x10A0 ? 1 : -1];
+    EntranceView *work = (EntranceView *)owner;
+    switch (work->phase) {
+    case 0: {
+        pointConvertToFloat(&work->scene.position, -320, 0);
+        FUN_0048a378(owner);
+        uiSpriteBankApplyPreset(work->preset, 0);
+        work->flags = (work->flags & ~2) | 0x1000000;
+        work->phase = 1;
+        work->timer = 0;
+        u32 map = NaviMain_GetCurrentMap();
+        if (map != naviGetActiveStateValue(&work->scene)) {
+            map = naviGetActiveStateValue(&work->scene);
+            naviMainSetCurrentMap(&work->scene, map);
+            FUN_00492ac8(&work->scene, 0);
+            FUN_0048821c(owner, map);
         }
-        *(unsigned int *)(param_1 + 4) = 2;
-        *(unsigned int *)(param_1 + 8) = 0;
-        *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfeffffff;
-      }
-    }
-    else {
-      temp_v4 = param_1 + 0x504;
-      temp_v0 = FUN_00163aa4(temp_v4);
-      if (temp_v0 != 0) {
-        *(unsigned int *)(param_1 + 8) = 2;
-      }
-      temp_v2 = vec2GetYInt(temp_v4);
-      temp_v3 = vec2GetXInt(temp_v4);
-      pointConvertToFloat(param_1 + 0x4d0,temp_v3,temp_v2);
-      if (*(char *)(param_1 + 0x112a) == '\0') {
-        FUN_00163aa4(param_1 + 0x10a0);
         return;
-      }
     }
-  }
-  else {
-    pointConvertToFloat(param_1 + 0x4d0,0xfffffec0);
-    FUN_0048a378(param_1);
-    uiSpriteBankApplyPreset(param_1 + 0x4e4,0);
-    *(unsigned int *)(param_1 + 0x10) = (*(unsigned int *)(param_1 + 0x10) & 0xfffffffd) | 0x1000000;
-    *(unsigned int *)(param_1 + 8) = 1;
-    temp_v0 = param_1 + 0x4cc;
-    *(unsigned int *)(param_1 + 0x14) = 0;
-    temp_v4 = NaviMain_GetCurrentMap();
-    temp_v1 = naviGetActiveStateValue(temp_v0);
-    if (temp_v4 != temp_v1) {
-      temp_v2 = naviGetActiveStateValue(temp_v0);
-      naviMainSetCurrentMap(temp_v0,temp_v2);
-      FUN_00492ac8(temp_v0,0);
-      FUN_0048821c(param_1,temp_v2);
-      return;
+    case 1: {
+        if (FUN_00163aa4(&work->motion, 1.0f))
+            work->phase = 2;
+        s32 y = vec2GetYInt(&work->motion);
+        s32 x = vec2GetXInt(&work->motion);
+        pointConvertToFloat(&work->scene.position, x, y);
+        if (!work->auxiliary.animationFlags.completed)
+            FUN_00163aa4(&work->auxiliary, 1.0f);
+        return;
     }
-  }
-  return;
+    case 2:
+        if (!work->auxiliary.animationFlags.completed)
+            FUN_00163aa4(&work->auxiliary, 1.0f);
+        work->state = 2;
+        work->phase = 0;
+        work->flags &= ~0x1000000;
+        return;
+    }
 }
-
-} /* extern "C" */
+}

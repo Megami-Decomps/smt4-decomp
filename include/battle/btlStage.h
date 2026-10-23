@@ -18,6 +18,11 @@ typedef struct BtlStage {
             /* 0x8E */ u8 unk8E[2];
             /* 0x90 */ f32 parameters[3];
         } setup;
+        struct {
+            /* 0x00 */ u8 unk00BeforeInput[8];
+            /* 0x08 */ u32 first;
+            /* 0x0C */ u32 second;
+        } setupInput;
     };
     /* 0xA0 */ s32 state;      /* 0 = off, 1..4 = setup, run, teardown (see the update function) */
     union {
@@ -27,6 +32,7 @@ typedef struct BtlStage {
             /* 0xAC */ s16 selection;
             u8 unkAE[2];
             /* 0xB0 */ f32 parameters[3];
+            /* 0xBC */ u16 frame;
         } apocalypse;
     };
     /* 0xC0 */ void *context;  /* the stage context copied in on setup */
@@ -50,5 +56,10 @@ typedef char BtlStageSetupOffsets[sizeof(BtlStage) == 0xC4 &&
 typedef char BtlStageApocalypseOffsets[offsetof(BtlStage, apocalypse.identifiers) == 0xA4 &&
     offsetof(BtlStage, apocalypse.selection) == 0xAC &&
     offsetof(BtlStage, apocalypse.parameters) == 0xB0 ? 1 : -1];
+typedef char BtlStageUpdateOffsets[
+    offsetof(BtlStage, setupInput.first) == 8 &&
+    offsetof(BtlStage, setupInput.second) == 0xC &&
+    offsetof(BtlStage, apocalypse.frame) == 0xBC &&
+    sizeof(BtlStage) == 0xC4 ? 1 : -1];
 
 #endif

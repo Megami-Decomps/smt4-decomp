@@ -1,78 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00309a60` (_code @ 0x309a60, 0x138 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler collapses filesystem error-category tests and duplicate delete branches. */
+#include "nn/Result.h"
 
 extern "C" {
+s32 FUN_001db820(u64 id, u32 directories, u32 files, const char *iconPath);
+void FUN_002c3510(u32 result);
+s32 nn_fs_DeleteExtSaveData(u64 id);
 
-int FUN_001db820(unsigned long long id, unsigned int directories, unsigned int files, const char *iconPath);
-int FUN_002c3510(void);
-int SBORROW4(...);
-int nn_fs_DeleteExtSaveData(unsigned int, unsigned int);
-
-/* stack frame of param_7: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_7_stack;
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_001db820. */
-/* Supplied declaration required: FUN_002c3510. */
-/* Supplied declaration required: nn_fs_DeleteExtSaveData. */
-
-
-unsigned int FUN_00309a60(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,unsigned int param_5
-                 ,unsigned int param_6,unsigned int param_7)
-
+// Recreate missing or corrupt external save data while preserving unrelated filesystem errors.
+s32 FUN_00309a60(s32 result, u64 id, u32 directories, u32 files, const char *iconPath)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  
-  if (-1 < (int)param_1) {
-    return param_1;
-  }
-  temp_v0 = (param_1 & 0x3fc00) >> 10;
-  temp_v1 = param_1 & 0x3ff;
-  if (((temp_v0 == 0x11) && (temp_v1 >= 100)) && (temp_v1 < 0xb4)) {
-    if (temp_v1 >= 0x82) {
-      return param_1;
+    if (nnResultIsSuccess(result))
+        return result;
+    u32 module = nnResultModule(result);
+    s32 description = nnResultDescription(result);
+    if (module == 17 && description >= 100 && description < 180) {
+        if (description >= 130)
+            return result;
+    } else {
+        if (module == 17 && description >= 340 && description < 360) {
+            result = nn_fs_DeleteExtSaveData(id);
+            FUN_002c3510(result);
+        } else {
+            if (module == 17 && description >= 360 && description < 390)
+                return result;
+            if (module != 17 || description < 390 || description >= 400)
+                return result;
+            result = nn_fs_DeleteExtSaveData(id);
+            FUN_002c3510(result);
+        }
+        if (nnResultIsFailure(result))
+            return result;
     }
-  }
-  else {
-    temp_v3 = param_3;
-    if (((temp_v0 == 0x11) && (temp_v1 >= 0x154)) && (temp_v1 < 0x168)) {
-      nn_fs_DeleteExtSaveData(param_3,param_4);
-      FUN_002c3510();
-    }
-    else {
-      if (((temp_v0 == 0x11) && (temp_v1 >= 0x168)) && (temp_v1 < 0x186)) {
-        return param_1;
-      }
-      if (temp_v0 != 0x11) {
-        return param_1;
-      }
-      temp_v4 = SBORROW4(0x186,temp_v1);
-      temp_v2 = 0x186 - temp_v1;
-      if (temp_v1 >= 0x186) {
-        temp_v4 = SBORROW4(temp_v1,400);
-        temp_v2 = temp_v1 - 400;
-      }
-      if (temp_v2 < 0 == temp_v4) {
-        return param_1;
-      }
-      nn_fs_DeleteExtSaveData(param_3,param_4);
-      FUN_002c3510();
-    }
-    if ((int)temp_v3 < 0) {
-      return temp_v3;
-    }
-  }
-  FUN_001db820(((unsigned long long)param_4 << 32) | param_3,param_5,param_6,(const char *)param_7);
-  FUN_002c3510();
-  return param_3;
+    result = FUN_001db820(id, directories, files, iconPath);
+    FUN_002c3510(result);
+    return result;
 }
-
-} /* extern "C" */
+}

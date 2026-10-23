@@ -27,7 +27,10 @@ struct CollisionQueueState {
         struct { u32 unk00; s32 triangleCount; } geometry;
     };
     union { s32 firstCount; s32 quadCount; }; // 0x08
-    u8 unk0c[8];
+    union {
+        u8 unk0c[8];
+        s32 segmentCounts[2]; // 0x0c, 0x10
+    };
     s32 secondCount; // 0x14
     union { u32 unk18; CollisionQuad *triangles; };
     union { CollisionQuad *first; CollisionQuad *quads; }; // 0x1c
@@ -37,6 +40,9 @@ struct CollisionQueueState {
 typedef char CollisionQueueStateBuffersCheck[
     offsetof(CollisionQueueState, second) == 0x20 &&
     offsetof(CollisionQueueState, unk24) == 0x24 ? 1 : -1];
+typedef char CollisionSegmentQueueCountsCheck[
+    offsetof(CollisionQueueState, segmentCounts) == 0xC &&
+    sizeof(CollisionQueueState) == 0x28 ? 1 : -1];
 
 struct CollisionVectorState {
     u8 unk000[0x320]; // 0x000

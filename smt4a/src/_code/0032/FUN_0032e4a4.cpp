@@ -31,7 +31,7 @@ unsigned int FUN_0032e4a4(int param_1)
     FUN_00275f44(*(unsigned int *)(param_1 + 0x360),0x15);
     iVar9 = FUN_0032169c();
     if (iVar9 == 0) {
-      FUN_00336de4(*(unsigned short *)(param_1 + 0x14e),1);
+      btlTalkBustUpSetDemonTexture(*(unsigned short *)(param_1 + 0x14e),1);
     }
     break;
   case 1:
@@ -250,7 +250,7 @@ code_r0x0032e99c:
     }
 code_r0x0032ea88:
     uVar2 = FUN_002a469c();
-    FUN_00336de4(uVar2,1);
+    btlTalkBustUpSetDemonTexture(uVar2,1);
     uVar4 = FUN_002a469c();
     uVar4 = uVar4 & 0xffff;
     FUN_00184310();

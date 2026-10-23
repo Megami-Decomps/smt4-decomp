@@ -1,73 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003848b8` (_code @ 0x3848b8, 0x10c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the callback descriptor's two word loads/address register differ. */
+#include "ui/DummyAttachmentWork.h"
 
 extern "C" {
+void FUN_00234cd8(DummyAttachmentSource *, s32, s32);
+void FUN_00341a3c(DummyAttachmentSource *);
+void textFormatBuffer(char *, const char *, ...);
+void FUN_002adde8(AsdMdlNode *, const char *, f32 *);
+void nodeSetTranslation(AsdMdlNode *, s32, const f32 *);
 
-int FUN_00234cd8(unsigned int, int, int);
-int nodeSetTranslation(unsigned int, int, unsigned char [16]);
-int FUN_002adde8(unsigned int, unsigned char [32], unsigned char [16]);
-int textFormatBuffer(unsigned char [32], unsigned char *, unsigned int);
-int FUN_00341a3c(unsigned int);
-
-typedef int romwright_code(...);
-extern unsigned char LAB_003849c4; /* 0x3849c4 */
-
-/* Supplied declaration required: FUN_00234cd8. */
-/* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: FUN_002adde8. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00341a3c. */
-
-
-void FUN_003848b8(int param_1)
-
+/* Run the active member callback, update source playback and bind both sets of dummy markers. */
+void FUN_003848b8(DummyAttachmentWork *work)
 {
-/* irregular: 5 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  romwright_code *pcVar4;
-  unsigned char temp_v3;
-  unsigned char temp_v4 [32];
-  unsigned char temp_v5 [16];
-  
-  temp_v1 = param_1 + *(int *)(param_1 + 4) * 8;
-  pcVar4 = *(romwright_code **)(temp_v1 + 0x5c8);
-  temp_v2 = *(unsigned int *)(temp_v1 + 0x5cc);
-  if ((pcVar4 != (romwright_code *)0x0) || (((temp_v2 & 1) != 0 && (temp_v2 != 0)))) {
-    if ((temp_v2 & 1) != 0) {
-      pcVar4 = *(romwright_code **)((unsigned char *)pcVar4 + *(int *)(param_1 + ((int)temp_v2 >> 1)));
+    typedef void (DummyAttachmentWork::*Callback)();
+    /* The shared byte-aligned prefix cannot contain a pointer-aligned callback union. */
+    struct CallbackView {
+        u8 unk000[4];
+        u32 state;
+        u8 unk008[0x5C0];
+        Callback callbacks[1];
+    };
+    typedef char CallbackOffsets[
+        sizeof(Callback) == 8 && offsetof(CallbackView, state) == 4 &&
+        offsetof(CallbackView, callbacks) == 0x5C8 ? 1 : -1];
+    CallbackView *callbacks = (CallbackView *)work;
+    Callback callback = callbacks->callbacks[callbacks->state];
+    if (callback != NULL)
+        (work->*callback)();
+    if (work->mode == 0) {
+        if (work->playback.applied != work->playback.requested) {
+            work->playback.applied = work->playback.requested;
+            FUN_00234cd8(work->source, work->playback.requested, 0);
+        }
+        FUN_00341a3c(work->source);
     }
-    (*pcVar4)();
-  }
-  if (*(char *)(param_1 + 0x21) == '\0') {
-    temp_v1 = *(int *)(param_1 + 0xfb0);
-    if (*(int *)(param_1 + 0xfb4) != temp_v1) {
-      *(int *)(param_1 + 0xfb4) = temp_v1;
-      FUN_00234cd8(*(unsigned int *)(param_1 + 0xfac),temp_v1,0);
+    if (work->initialized == 0 && work->mode == 0) {
+        char name[32];
+        f32 position[4];
+        work->initialized = 1;
+        for (u32 index = 0; index < 6; ++index) {
+            textFormatBuffer(name, "dummy_npc%d", index + 1);
+            FUN_002adde8(work->source->model->node, name, position);
+            nodeSetTranslation(work->primary[index]->node, 0, position);
+            nodeSetTranslation(work->secondary[index]->node, 0, position);
+        }
     }
-    FUN_00341a3c(*(unsigned int *)(param_1 + 0xfac));
-  }
-  temp_v0 = *(char *)(param_1 + 0xd40);
-  temp_v3 = temp_v0 == '\0';
-  if (temp_v3) {
-    temp_v0 = *(char *)(param_1 + 0x21);
-  }
-  if (temp_v3 && temp_v0 == '\0') {
-    temp_v2 = 0;
-    *(unsigned char *)(param_1 + 0xd40) = 1;
-    do {
-      textFormatBuffer(temp_v4,&LAB_003849c4,temp_v2 + 1);
-      FUN_002adde8(*(unsigned int *)(*(int *)(*(int *)(param_1 + 0xfac) + 0x1c) + 8),temp_v4,
-                   temp_v5);
-      temp_v1 = param_1 + temp_v2 * 4;
-      nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v1 + 0xd10) + 8),0,temp_v5);
-      nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v1 + 0xd28) + 8),0,temp_v5);
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 6);
-  }
-  return;
 }
-
-} /* extern "C" */
+}

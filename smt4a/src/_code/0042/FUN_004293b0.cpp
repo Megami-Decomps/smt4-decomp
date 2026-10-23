@@ -1,114 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004293b0` (_code @ 0x4293b0, 0x1c4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: descriptor packing/store width, format dispatch and result-bit/global-address scheduling differ. */
+#include "classes/WindowStatus.h"
+#include <stddef.h>
 
+struct AsyncMapParameters { u32 id; u8 format, flags, storage; };
+struct AsyncMapHandleObject { u8 prefix[0x54]; u8 header[0x44]; };
+struct AsyncMapMetadata { u32 value; u8 signature[20]; };
+struct AsyncMapPacket {
+    u8 header[0x48];
+    u64 descriptor;
+    char name[32];
+    u32 value;
+    u8 signature[20];
+};
+typedef char AsyncMapPacketOffsetsCheck[offsetof(AsyncMapPacket, descriptor) == 0x48 &&
+    offsetof(AsyncMapPacket, name) == 0x50 && offsetof(AsyncMapPacket, value) == 0x70 ? 1 : -1];
 extern "C" {
+s32 FUN_00427e68(s32 handle, s32 operation);
+u32 FUN_0016ccfc();
+s32 tokenResolveAddress(u32 context, const AsyncMapHandleObject **object, s32 handle);
+void rt_memcpy_w(void *destination, const void *source, u32 size);
+void sysFatalBreak();
+s32 libc_toupper(s32 character);
+void FUN_0019a46c(void *destination, const void *source, u32 size);
+s32 FUN_00427e28(u32 *token, void *request, s32 mode);
+s32 appletIsExitRequested();
+s32 FUN_0015a410();
+WindowStatusResult nnAsyncMapOperationResult(void *request);
+extern AsyncMapPacket DAT_0061b030;
+extern u8 DAT_0061b000[];
 
-int sysFatalBreak(void);
-int FUN_0019a46c(unsigned char *, unsigned int *, int);
-int _ZN18WindowStatusResultC1Ej(...);
-int nnAsyncMapOperationResult(unsigned int, unsigned char *);
-int FUN_00427e68(int, int);
-int rt_memcpy_w(unsigned char *, int, int);
-
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_5_stack;
-
-extern unsigned char DAT_0061b000; /* 0x61b000 */
-extern unsigned char DAT_0061b030; /* 0x61b030 */
-extern unsigned int DAT_0061b078; /* 0x61b078 */
-extern unsigned int DAT_0061b07c; /* 0x61b07c */
-extern unsigned char DAT_0061b080; /* 0x61b080 */
-extern unsigned int DAT_0061b0a0; /* 0x61b0a0 */
-extern unsigned char DAT_0061b0a4; /* 0x61b0a4 */
-
-extern unsigned char libc_toupper(void);
-extern int FUN_0015a410(void);
-extern int appletIsExitRequested(void);
-extern unsigned int FUN_0016ccfc(void);
-/* Supplied declaration required: sysFatalBreak. */
-/* Supplied declaration required: FUN_0019a46c. */
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-/* Supplied declaration required: nnAsyncMapOperationResult. */
-extern int FUN_00427e28(unsigned char *, unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_00427e68. */
-extern int tokenResolveAddress(unsigned int, int *, int);
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_004293b0(unsigned int param_1,int *param_2,unsigned int *param_3,unsigned int *param_4,int param_5)
-
+WindowStatusResult FUN_004293b0(const s32 *handle, const AsyncMapParameters *parameters,
+    const AsyncMapMetadata *metadata, const s8 *name)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned char temp_v7 [4];
-  
-  temp_v2 = *param_2;
-  FUN_00427e68(temp_v2,6);
-  if (-1 < temp_v2) {
-    temp_v3 = FUN_0016ccfc();
-    temp_v2 = tokenResolveAddress(temp_v3,&temp_v6,*param_2);
-    if (-1 < temp_v2) {
-      rt_memcpy_w(&DAT_0061b030,temp_v6 + 0x54,0x44);
-      switch((char)param_3[1]) {
-      case 0:
-        temp_v4 = 0x8c;
-        break;
-      case 1:
-        temp_v4 = 0xd;
-        break;
-      default:
-        temp_v4 = 0;
-        break;
-      case 3:
-        temp_v4 = 0x10;
-        break;
-      case 4:
-        temp_v4 = 0x30;
-      }
-      temp_v5 = *param_3;
-      temp_v0 = *(unsigned char *)((int)param_3 + 5);
-      temp_v2 = 0;
-      if (*(char *)((int)param_3 + 6) != '\0') {
-        if (*(char *)((int)param_3 + 6) == '\x01') {
-          temp_v2 = 2;
-        }
-        else {
-          sysFatalBreak();
-          temp_v2 = 0;
-        }
-      }
-      DAT_0061b078 = (temp_v2 << 0x1c) | (unsigned int)temp_v0 | ((temp_v5 & 0xfffff) << 8);
-      DAT_0061b07c = temp_v4 | 0x40000;
-      for (temp_v5 = 0; (temp_v5 < 0x1f && (*(char *)(param_5 + temp_v5) != '\0')); temp_v5 = temp_v5 + 1) {
-        temp_v1 = libc_toupper();
-        (&DAT_0061b080)[temp_v5] = temp_v1;
-      }
-      (&DAT_0061b080)[temp_v5] = 0;
-      DAT_0061b0a0 = *param_4;
-      FUN_0019a46c(&DAT_0061b0a4,param_4 + 1,0x14);
-      temp_v2 = FUN_00427e28(temp_v7,&DAT_0061b000,0);
-      if (-1 < temp_v2) {
-        temp_v2 = appletIsExitRequested();
-        if ((temp_v2 == 0) && (temp_v2 = FUN_0015a410(), temp_v2 == 0)) {
-          nnAsyncMapOperationResult(param_1,&DAT_0061b000);
-          return;
-        }
-        _ZN18WindowStatusResultC1Ej(param_1,0xc9413891);
-        return;
-      }
+    s32 result = FUN_00427e68(*handle, 6);
+    if (result < 0)
+        return WindowStatusResult(result);
+    const AsyncMapHandleObject *object;
+    result = tokenResolveAddress(FUN_0016ccfc(), &object, *handle);
+    if (result < 0)
+        return WindowStatusResult(result);
+    rt_memcpy_w(DAT_0061b030.header, object->header, 0x44);
+    u32 format;
+    switch (parameters->format) {
+    case 0: format = 0x8C; break;
+    case 1: format = 0x0D; break;
+    case 3: format = 0x10; break;
+    case 4: format = 0x30; break;
+    default: format = 0; break;
     }
-  }
-  _ZN18WindowStatusResultC1Ej(param_1,temp_v2);
-  return;
+    s32 storage = 0;
+    if (parameters->storage != 0) {
+        if (parameters->storage == 1)
+            storage = 2;
+        else
+            sysFatalBreak();
+    }
+    u32 attributes = parameters->flags | ((parameters->id & 0xFFFFF) << 8);
+    DAT_0061b030.descriptor = (static_cast<u64>(format | 0x40000) << 32) |
+        attributes | static_cast<s64>(storage << 28);
+    u32 index;
+    for (index = 0; index < 31 && name[index] != 0; ++index)
+        DAT_0061b030.name[index] = libc_toupper(name[index]);
+    DAT_0061b030.name[index] = 0;
+    DAT_0061b030.value = metadata->value;
+    FUN_0019a46c(DAT_0061b030.signature, metadata->signature, 20);
+    u32 token;
+    result = FUN_00427e28(&token, DAT_0061b000, 0);
+    if (result < 0)
+        return WindowStatusResult(result);
+    if (appletIsExitRequested() || FUN_0015a410())
+        return WindowStatusResult(0xC9413891);
+    return nnAsyncMapOperationResult(DAT_0061b000);
 }
-
-} /* extern "C" */
+}

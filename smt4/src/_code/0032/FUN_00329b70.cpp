@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00241d58(...);
 int statusCameraDestroy(void);
 int FUN_0028bf2c(void);
-int FUN_00294e18(...);
+int statusCameraSelectPreset(...);
 int FUN_00294f64(...);
 int FUN_002958f8(...);
 
@@ -87,7 +87,7 @@ extern unsigned int FUN_00263c1c(unsigned char *);
 /* Supplied declaration required: statusCameraDestroy. */
 /* Supplied declaration required: FUN_0028bf2c. */
 /* Supplied declaration required: asdAnimGetTrackLastFrame. */
-/* Supplied declaration required: FUN_00294e18. */
+/* Supplied declaration required: statusCameraSelectPreset. */
 /* Supplied declaration required: FUN_00294f64. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
@@ -542,7 +542,7 @@ LAB_0032a1a4:
       gfxObjectDestroy(*(unsigned int *)(temp_v2 + 0x90));
       *(unsigned int *)(temp_v2 + 0x90) = 0;
       statusCameraDestroy();
-      FUN_00294e18(1);
+      statusCameraSelectPreset(1);
       temp_v7 = g_screenStateWork;
       *(unsigned int *)(g_screenStateWork + 4) = 8;
       *(unsigned int *)(temp_v7 + 8) = 0;

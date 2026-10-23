@@ -1,85 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015ea28` (_code @ 0x15ea28, 0x14c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: header/path stack lifetimes are not overlaid, and archive status addressing and bounded-copy control flow differ. */
+#include "nw/snd/SoundArchiveDisk.h"
 
 extern "C" {
+s32 FUN_001748a0(NativeFileReader *reader, const char *path, s32 suppressErrors);
+s32 FUN_00174a00(NativeFileReader *reader, void *data, u32 size, u32 *bytesRead);
+void FUN_00175750(ArchiveFileHeader *header, const void *data);
+void FUN_001739d4(SoundArchiveDisk *archive, ArchiveFileHeader *header);
+void FUN_001739f8(SoundArchiveDisk *archive, const char *directory);
+u32 wstrlen(const char *text);
 
-int FUN_001739d4(int, int);
-int FUN_001739f8(int, char *);
-int FUN_001748a0(int, char *, int);
-int FUN_00174a00(int, unsigned char [96], int, int [34]);
-int FUN_00175750(int, unsigned char [96]);
-
-/* Supplied declaration required: FUN_001739d4. */
-/* Supplied declaration required: FUN_001739f8. */
-/* Supplied declaration required: FUN_001748a0. */
-/* Supplied declaration required: FUN_00174a00. */
-/* Supplied declaration required: FUN_00175750. */
-extern unsigned int wstrlen(char *);
-
-
-unsigned int FUN_0015ea28(int param_1,char *param_2)
-
+// Open a CSAR stream, install its header and remember the containing directory.
+u32 FUN_0015ea28(SoundArchiveDisk *archive, const char *path)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  char *pcVar4;
-  char *pcVar5;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  char acStack_119 [25];
-  unsigned char temp_v5 [96];
-  int aiStack_a0 [34];
-  
-  temp_v1 = param_1 + 0x11c;
-  FUN_001748a0(temp_v1,param_2,(int)*(char *)(param_1 + 0x191));
-  if (temp_v1 == 0) {
-    *(unsigned int *)(param_1 + 0x180) = *(unsigned int *)(param_1 + 0x134);
-    return 0;
-  }
-  *(unsigned char *)(param_1 + 400) = 1;
-  temp_v1 = param_1 + 0x11c;
-  aiStack_a0[0] = 0;
-  FUN_00174a00(temp_v1,temp_v5,0x40,aiStack_a0);
-  if (temp_v1 == 0) {
-    *(unsigned int *)(param_1 + 0x180) = *(unsigned int *)(param_1 + 0x134);
-  }
-  else if (aiStack_a0[0] == 0x40) {
-    FUN_00175750(param_1 + 0x13c,temp_v5);
-    FUN_001739d4(param_1,param_1 + 0x13c);
-    temp_v2 = wstrlen(param_2);
-    do {
-      temp_v0 = temp_v2;
-      temp_v2 = temp_v0 - 1;
-      if ((int)temp_v2 < 0) {
-        return 1;
-      }
-    } while (param_2[temp_v2] != '/' && param_2[temp_v2] != '\\');
-    if ((int)temp_v2 < 0x100) {
-      temp_v3 = 0;
-      pcVar4 = acStack_119 + 1;
-      do {
-        temp_v4 = temp_v2;
-        if (temp_v2 >= 0xff) {
-          temp_v4 = 0xff;
-        }
-        pcVar5 = pcVar4;
-        if (temp_v4 <= temp_v3) break;
-        temp_v3 = temp_v3 + 1;
-        pcVar5 = pcVar4 + 1;
-        *pcVar4 = *param_2;
-        param_2 = param_2 + 1;
-        pcVar4 = pcVar5;
-      } while (*param_2 != '\0');
-      *pcVar5 = '\0';
-      acStack_119[temp_v0] = '\0';
-      FUN_001739f8(param_1,acStack_119 + 1);
-      return 1;
+    if (!FUN_001748a0(&archive->reader, path, archive->suppressErrors)) {
+        archive->result = archive->reader.result;
+        return 0;
     }
-  }
-  return 0;
+    archive->opened = 1;
+    {
+        // The native file reader requires a cache-line-aligned destination.
+        u8 storage[64 + 31];
+        void *data = (void *)(((u32)storage + 31) & ~31u);
+        u32 bytesRead = 0;
+        if (!FUN_00174a00(&archive->reader, data, 64, &bytesRead)) {
+            archive->result = archive->reader.result;
+            return 0;
+        }
+        if (bytesRead != 64) {
+            return 0;
+        }
+        FUN_00175750(&archive->header, data);
+        FUN_001739d4(archive, &archive->header);
+    }
+    s32 separator = wstrlen(path) - 1;
+    while (separator >= 0 && path[separator] != '/' && path[separator] != '\\') {
+        --separator;
+    }
+    if (separator < 0) {
+        return 1;
+    }
+    if (separator >= 256) {
+        return 0;
+    }
+    char directory[256];
+    char *destination = directory;
+    u32 count = 0;
+    while (count < ((u32)separator < 255 ? (u32)separator : 255)) {
+        *destination++ = *path++;
+        ++count;
+        if (*path == '\0') {
+            break;
+        }
+    }
+    *destination = '\0';
+    directory[separator] = '\0';
+    FUN_001739f8(archive, directory);
+    return 1;
 }
-
-} /* extern "C" */
+}

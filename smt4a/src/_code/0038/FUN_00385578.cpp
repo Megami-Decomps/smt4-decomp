@@ -1,107 +1,80 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00385578` (_code @ 0x385578, 0x174 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: phase-zero guard is folded into dispatch, the zero register is hoisted, and voice-stop blocks share a different epilogue. */
+#include "map/lmapMain.h"
+#include <string.h>
 
-extern "C" {
-
-int FUN_002d1f40(int, int, int);
-int lmapClearExtraFlag(void);
-int FUN_003d2158(int, int);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp40; /* 0x40: local_40 */
-} void_stack;
-
-extern int *g_lmapScene; /* 0x581288 */
-
-extern int FUN_00184964(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002d1f40. */
-/* Supplied declaration required: lmapClearExtraFlag. */
-extern int sysPlayVoice(unsigned int);
-/* Supplied declaration required: FUN_003d2158. */
-
-
-void FUN_00385578(void)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int *piVar1;
-  int *piVar2;
-  int temp_v0;
-  int temp_v1 [4];
-  unsigned int uStack_30;
-  unsigned int uStack_2c;
-  int temp_v2 [4];
-  unsigned int uStack_18;
-  unsigned int uStack_14;
-  
-  piVar1 = g_lmapScene;
-  temp_v1[0] = 0x960;
-  temp_v1[1] = 900;
-  temp_v1[2] = 0x960;
-  temp_v1[3] = 0x4b0;
-  uStack_30 = 0x5dc;
-  uStack_2c = 0x4b0;
-  temp_v2[0] = 0x5a;
-  temp_v2[1] = 0x5a;
-  temp_v2[2] = 0x5a;
-  temp_v2[3] = 0x5a;
-  uStack_18 = 0x5a;
-  uStack_14 = 0x5a;
-  temp_v0 = g_lmapScene[0xa2];
-  if (temp_v0 != 0) {
-    if (temp_v0 != 1) {
-      if (temp_v0 != 2) {
-        if (temp_v0 == 3) {
-          if ((*g_lmapScene != 1) && (*g_lmapScene != 3)) {
-            lmapClearExtraFlag();
-            temp_v0 = g_lmapScene[0xa3];
-          }
-          else {
-            temp_v0 = g_lmapScene[0xa1];
-            piVar2 = g_lmapScene + 0xa0;
-            g_lmapScene[0xa1] = temp_v0 + 1;
-            if (temp_v0 + 1 < *piVar2) {
-              return;
-            }
-            temp_v0 = piVar1[0xa3];
-          }
-          if (temp_v0 != 0) {
-            FUN_003d2158(temp_v0,0);
-          }
-          piVar1 = g_lmapScene;
-          g_lmapScene[0xa1] = 0;
-          piVar1[0xa2] = 0;
-          return;
-        }
-      }
-      else if (((*g_lmapScene == 1) || (*g_lmapScene == 3)) &&
-              (temp_v0 = g_lmapScene[0xa1], piVar1 = g_lmapScene + 0xa0,
-              g_lmapScene[0xa1] = temp_v0 + 1, *piVar1 <= temp_v0 + 1)) {
-        temp_v0 = FUN_00184964(0,5);
-        temp_v0 = temp_v2[temp_v0];
-        g_lmapScene[0xa0] = temp_v0;
-        FUN_002d1f40(temp_v0,0x28,10);
-        temp_v0 = sysPlayVoice(0x100009e);
-        piVar1 = g_lmapScene;
-        g_lmapScene[0xa1] = 0;
-        piVar1[0xa2] = 3;
-        piVar1[0xa3] = temp_v0;
-        return;
-      }
-    }
-    else {
-      temp_v0 = FUN_00184964(0,5);
-      piVar1 = g_lmapScene;
-      temp_v0 = temp_v1[temp_v0];
-      g_lmapScene[0xa2] = 2;
-      piVar1[0xa0] = temp_v0;
-      piVar1[0xa1] = 0;
-    }
-  }
-  return;
+namespace {
+// Idle-voice fields follow the canonical scene prefix; do not enlarge the shared type.
+struct LmapIdleVoiceScene {
+    LmapSceneA scene;
+    u32 unk27C;
+    s32 duration;
+    s32 frame;
+    u32 phase;
+    u32 voice;
+};
+struct LmapIdleVoiceTables {
+    u8 unk000[0x148];
+    s32 delays[6];
+    s32 durations[6];
+};
+typedef char LmapIdleVoiceOffsetsCheck[
+    offsetof(LmapIdleVoiceScene, duration) == 0x280 &&
+    offsetof(LmapIdleVoiceScene, voice) == 0x28C &&
+    offsetof(LmapIdleVoiceTables, durations) == 0x160 ? 1 : -1];
 }
 
-} /* extern "C" */
+extern "C" {
+extern LmapSceneA *g_lmapScene;
+extern const LmapIdleVoiceTables DAT_00532018;
+s32 FUN_00184964(s32 minimum, s32 maximum);
+void FUN_002d1f40(s32 duration, s32 first, s32 second);
+u32 sysPlayVoice(u32 sound);
+void FUN_003d2158(u32 voice, s32 mode);
+void lmapClearExtraFlag(void);
+
+// Wait a randomized idle interval, play a timed voice, and cancel it when the scene stops idling.
+void FUN_00385578(void)
+{
+    s32 delays[6];
+    s32 durations[6];
+    memcpy(delays, DAT_00532018.delays, sizeof(delays));
+    memcpy(durations, DAT_00532018.durations, sizeof(durations));
+    LmapIdleVoiceScene *scene = reinterpret_cast<LmapIdleVoiceScene *>(g_lmapScene);
+    switch (scene->phase) {
+    case 1: {
+        s32 delay = delays[FUN_00184964(0, 5)];
+        scene = reinterpret_cast<LmapIdleVoiceScene *>(g_lmapScene);
+        scene->phase = 2;
+        scene->duration = delay;
+        scene->frame = 0;
+        break;
+    }
+    case 2:
+        if ((scene->scene.mainState == 1 || scene->scene.mainState == 3) &&
+            ++scene->frame >= scene->duration) {
+            s32 duration = durations[FUN_00184964(0, 5)];
+            reinterpret_cast<LmapIdleVoiceScene *>(g_lmapScene)->duration = duration;
+            FUN_002d1f40(duration, 40, 10);
+            u32 voice = sysPlayVoice(0x0100009E);
+            scene = reinterpret_cast<LmapIdleVoiceScene *>(g_lmapScene);
+            scene->frame = 0;
+            scene->phase = 3;
+            scene->voice = voice;
+        }
+        break;
+    case 3:
+        if (scene->scene.mainState != 1 && scene->scene.mainState != 3) {
+            lmapClearExtraFlag();
+            scene = reinterpret_cast<LmapIdleVoiceScene *>(g_lmapScene);
+        } else if (++scene->frame < scene->duration) {
+            return;
+        }
+        if (scene->voice != 0)
+            FUN_003d2158(scene->voice, 0);
+        scene = reinterpret_cast<LmapIdleVoiceScene *>(g_lmapScene);
+        scene->frame = 0;
+        scene->phase = 0;
+        break;
+    }
+}
+}

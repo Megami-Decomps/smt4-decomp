@@ -1,62 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027fca0` (_code @ 0x27fca0, 0x128 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: alternating-variant stores and saved coordinate registers differ from retail. */
+#include "map/lmapMain.h"
 
 extern "C" {
+void FUN_00291e40(u32 effect, f32 x, f32 y, f32 z);
+s32 randBetween(s32 minimum, s32 maximum);
+extern u32 DAT_00447538;
+extern LmapScene *g_lmapScene;
+extern GameState g_gameState;
 
-int FUN_00291e40(unsigned int);
-int VectorSignedToFloat(unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned int DAT_00447538; /* 0x447538 */
-extern int DAT_0049fb38; /* 0x49fb38 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00291e40. */
-extern unsigned int randBetween(unsigned int, unsigned int);
-
-
-void FUN_0027fca0(int param_1)
-
+// Alternate one of three pairs of player effects at randomized positions above the actor.
+void FUN_0027fca0(s32 variant)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int in_fpscr;
-  
-  DAT_00447538 = (DAT_00447538 + 1) & 1;
-  temp_v0 = randBetween(0xfffffff6,10);
-  VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v0 = randBetween(0xfffffff1,0xf);
-  VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = randBetween(0xfffffff1,0xf);
-  temp_v2 = temp_v1;
-  if (param_1 == 0) {
-    temp_v2 = 0;
-  }
-  VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  if ((param_1 != 0) && (temp_v2 = DAT_00447538, param_1 == 1)) {
-    temp_v2 = 1;
-  }
-  DAT_00447538 = temp_v2;
-  if (DAT_0049fb38 == 0) {
-    FUN_00291e40(DAT_00447538 + 0x10001f5);
-    return;
-  }
-  if (DAT_0049fb38 == 1) {
-    FUN_00291e40(DAT_00447538 + 0x10001f7);
-    return;
-  }
-  if (DAT_0049fb38 == 2) {
-    FUN_00291e40(DAT_00447538 + 0x10001f9);
-    return;
-  }
-  return;
+    DAT_00447538 = (DAT_00447538 + 1) & 1;
+    f32 x = g_lmapScene->transform.position[0];
+    f32 y = g_lmapScene->transform.position[1] + 140.0f;
+    f32 z = g_lmapScene->transform.position[2];
+    y += static_cast<f32>(randBetween(-10, 10));
+    x += static_cast<f32>(randBetween(-15, 15));
+    z += static_cast<f32>(randBetween(-15, 15));
+    if (variant == 0) {
+        DAT_00447538 = 0;
+    } else if (variant == 1) {
+        DAT_00447538 = 1;
+    }
+    // Adding a word in the byte-aligned shared union would move its trailing flags.
+    struct EffectModeView { u8 prefix[0x21c]; s32 mode; };
+    const EffectModeView *state = reinterpret_cast<const EffectModeView *>(&g_gameState);
+    if (state->mode == 0) {
+        FUN_00291e40(DAT_00447538 + 0x10001f5, x, y, z);
+    } else if (state->mode == 1) {
+        FUN_00291e40(DAT_00447538 + 0x10001f7, x, y, z);
+    } else if (state->mode == 2) {
+        FUN_00291e40(DAT_00447538 + 0x10001f9, x, y, z);
+    }
 }
-
-} /* extern "C" */
+}

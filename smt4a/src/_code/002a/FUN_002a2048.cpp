@@ -1,55 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a2048` (_code @ 0x2a2048, 0x144 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: translation-copy registers and local-translation floating-point expression scheduling differ. */
+#include "common.h"
 
 extern "C" {
-
-
-void FUN_002a2048(float *param_1,float *param_2,int param_3)
-
+// Replace with a translation matrix, apply a local translation, or add a world offset.
+f32 *FUN_002a2048(f32 *matrix, const f32 *translation, s32 mode)
 {
-  float temp_v0;
-  
-  if (param_3 == 0) {
-    param_1[0xf] = 1.0f;
-    param_1[10] = 1.0f;
-    param_1[5] = 1.0f;
-    *param_1 = 1.0f;
-    param_1[3] = 0.0f;
-    param_1[4] = 0.0f;
-    param_1[2] = 0.0f;
-    param_1[1] = 0.0f;
-    param_1[7] = 0.0f;
-    param_1[9] = 0.0f;
-    param_1[8] = 0.0f;
-    param_1[6] = 0.0f;
-    param_1[0xb] = 0.0f;
-    param_1[0xe] = 0.0f;
-    param_1[0xd] = 0.0f;
-    param_1[0xc] = 0.0f;
-    param_1[0xc] = *param_2;
-    param_1[0xd] = param_2[1];
-    param_1[0xe] = param_2[2];
-    return;
-  }
-  if (param_3 != 1) {
-    if (param_3 != 2) {
-      return;
+    f32 *m = matrix;
+    switch (mode) {
+    case 0:
+        m[15] = 1.0f;
+        m[10] = 1.0f;
+        m[5] = 1.0f;
+        m[0] = 1.0f;
+        m[3] = 0.0f;
+        m[4] = 0.0f;
+        m[2] = 0.0f;
+        m[1] = 0.0f;
+        m[7] = 0.0f;
+        m[9] = 0.0f;
+        m[8] = 0.0f;
+        m[6] = 0.0f;
+        m[11] = 0.0f;
+        m[14] = 0.0f;
+        m[13] = 0.0f;
+        m[12] = 0.0f;
+        m[12] = translation[0];
+        m[13] = translation[1];
+        m[14] = translation[2];
+        return matrix;
+    case 1:
+        m[12] = translation[1] * m[4] + translation[2] * m[8] +
+                m[12] + translation[0] * m[0];
+        m[13] = translation[1] * m[5] + translation[2] * m[9] +
+                m[13] + translation[0] * m[1];
+        m[14] = translation[1] * m[6] + translation[2] * m[10] +
+                m[14] + translation[0] * m[2];
+        return matrix;
+    case 2:
+        m[12] += translation[0];
+        m[13] += translation[1];
+        m[14] += translation[2];
+        return matrix;
+    default:
+        return NULL;
     }
-    param_1[0xc] = param_1[0xc] + *param_2;
-    param_1[0xd] = param_1[0xd] + param_2[1];
-    temp_v0 = param_1[0xe] + param_2[2];
-  }
-  else {
-    param_1[0xc] = param_2[1] * param_1[4] + param_2[2] * param_1[8] +
-                   param_1[0xc] + *param_2 * *param_1;
-    param_1[0xd] = param_2[1] * param_1[5] + param_2[2] * param_1[9] +
-                   param_1[0xd] + *param_2 * param_1[1];
-    temp_v0 = param_2[1] * param_1[6] + param_2[2] * param_1[10] +
-            param_1[0xe] + *param_2 * param_1[2];
-  }
-  param_1[0xe] = temp_v0;
-  return;
 }
-
-} /* extern "C" */
+}

@@ -1,82 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038ea88` (_code @ 0x38ea88, 0x14c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: phase-register allocation, signed cursor loads and branch padding differ. */
+#include "ui/SceneWindowWork.h"
 
 extern "C" {
+void FUN_0027ea28(void *dialog, s32 entry, u32 mode, u32 flags);
+void FUN_0023392c(SceneWindowWork *window, u32 state, s32 enabled);
+void jobOwnerFreeSlotAndStop(void *owner);
+void FUN_0027e9c0(void *dialog);
+s32 FUN_0027ee9c();
+s32 inputIsQuestMenuPressed();
+void eventQueueAddUniqueIfValid(u32 event);
 
-int FUN_0023392c(...);
-int FUN_0027e9c0(int);
-int FUN_0027ea28(int, int, int, int);
-int jobOwnerFreeSlotAndStop(int);
-int eventQueueAddUniqueIfValid(int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_0023392c. */
-extern int inputIsQuestMenuPressed(void);
-/* Supplied declaration required: FUN_0027e9c0. */
-/* Supplied declaration required: FUN_0027ea28. */
-/* Supplied declaration required: jobOwnerFreeSlotAndStop. */
-extern int FUN_0027ee9c(void);
-/* Supplied declaration required: eventQueueAddUniqueIfValid. */
-
-
-void FUN_0038ea88(int param_1)
-
+// Open the confirmation entry, handle accept/cancel, then retire its callback.
+void FUN_0038ea88(SceneWindowWork *window)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = *(int *)(param_1 + 8);
-  temp_v2 = param_1 + 0x11b0;
-  if (temp_v1 == 0) {
-    FUN_0027ea28(temp_v2,100,1,0);
-    FUN_0023392c(param_1,0,1);
-    temp_v0 = 1;
-    *(unsigned int *)(param_1 + 8) = temp_v0;
-    return;
-  }
-  if (temp_v1 != 1) {
-    if ((temp_v1 == 2) && (*(char *)(param_1 + 0x167a) != '\0')) {
-      jobOwnerFreeSlotAndStop(temp_v2);
-      *(unsigned int *)(param_1 + 4) = 3;
-      *(unsigned int *)(param_1 + 8) = 0;
-      if (*(int **)(param_1 + 0x208) != (int *)0x0) {
-        (**(romwright_code **)(**(int **)(param_1 + 0x208) + 4))();
-        *(unsigned int *)(param_1 + 0x208) = 0;
-      }
+    s32 phase = window->transition.phase;
+    if (phase == 0) {
+        FUN_0027ea28(&window->dialogJob, 100, 1, 0);
+        FUN_0023392c(window, 0, 1);
+        window->transition.phase = 1;
+        return;
     }
-  }
-  else if (*(char *)(param_1 + 0x167a) != '\0') {
-    temp_v1 = FUN_0027ee9c();
-    if (temp_v1 != 0) {
-      eventQueueAddUniqueIfValid(0x100016d);
-      FUN_0023392c(param_1,0xffffffff,0);
-      FUN_0027e9c0(temp_v2);
-      temp_v0 = 2;
-      *(unsigned int *)(param_1 + 8) = temp_v0;
-      return;
+    if (phase != 1) {
+        if (phase == 2 && window->dialog.cursor.confirmed != 0) {
+            jobOwnerFreeSlotAndStop(&window->dialogJob);
+            window->transition.state = 3;
+            window->transition.phase = 0;
+            if (window->transition.callback != NULL) {
+                window->transition.callback->vtable->destroy(window->transition.callback);
+                window->transition.callback = NULL;
+            }
+        }
+    } else if (window->dialog.cursor.confirmed != 0) {
+        if (FUN_0027ee9c()) {
+            eventQueueAddUniqueIfValid(0x100016D);
+            FUN_0023392c(window, -1, 0);
+            FUN_0027e9c0(&window->dialogJob);
+            window->transition.phase = 2;
+            return;
+        }
+        if (inputIsQuestMenuPressed()) {
+            eventQueueAddUniqueIfValid(0x100016D);
+            window->transition.state = 15;
+            window->transition.phase = 0;
+            if (window->transition.callback != NULL) {
+                window->transition.callback->vtable->destroy(window->transition.callback);
+                window->transition.callback = NULL;
+            }
+            FUN_0027e9c0(&window->dialogJob);
+        }
     }
-    temp_v1 = inputIsQuestMenuPressed();
-    if (temp_v1 != 0) {
-      eventQueueAddUniqueIfValid(0x100016d);
-      *(unsigned int *)(param_1 + 4) = 0xf;
-      *(unsigned int *)(param_1 + 8) = 0;
-      if (*(int **)(param_1 + 0x208) != (int *)0x0) {
-        (**(romwright_code **)(**(int **)(param_1 + 0x208) + 4))();
-        *(unsigned int *)(param_1 + 0x208) = 0;
-      }
-      FUN_0027e9c0(temp_v2);
-      return;
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

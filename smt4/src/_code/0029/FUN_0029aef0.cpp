@@ -1,71 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029aef0` (_code @ 0x29aef0, 0x184 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail expands the five lower-level support checks; the readable scan remains a loop and folds the level address. */
+#include "gamedata/SavedUnitInitialization.h"
 
 extern "C" {
+u16 *gameDataBlocksGetCounterPtr(void);
+u8 *gameDataBlocksGetSaveData(void);
+u32 FUN_0029ea68(u32 index);
+void memClear(void *memory, u32 size);
 
-int memClear(char *, int);
-
-extern int gameDataBlocksGetCounterPtr(void);
-extern int FUN_0029ea68(unsigned int);
-extern int gameDataBlocksGetSaveData(void);
-/* Supplied declaration required: memClear. */
-
-
-int FUN_0029aef0(void)
-
+// Find the highest registered level with enough support from its count and nearby occupied levels.
+s32 FUN_0029aef0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  char acStack_7d [109];
-  
-  temp_v1 = gameDataBlocksGetCounterPtr();
-  temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 8);
-  temp_v1 = gameDataBlocksGetCounterPtr();
-  temp_v0 = *(unsigned short *)(temp_v1 + 10);
-  memClear(acStack_7d + 5,100);
-  if (temp_v3 <= temp_v0) {
-    do {
-      temp_v1 = FUN_0029ea68(temp_v3 & 0xffff);
-      if (temp_v1 != 0) {
-        temp_v1 = gameDataBlocksGetSaveData();
-        temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + temp_v3 * 0x34 + 0xc170);
-        if ((temp_v2 - 1 < 99) && ((unsigned char)acStack_7d[temp_v2 + 5] < 0x14)) {
-          acStack_7d[temp_v2 + 5] = acStack_7d[temp_v2 + 5] + 1;
+    s32 first = gameDataBlocksGetCounterPtr()[4];
+    s32 last = gameDataBlocksGetCounterPtr()[5];
+    u8 counts[100];
+    memClear(counts, sizeof(counts));
+    for (s32 index = first; index <= last; ++index) {
+        if (FUN_0029ea68((u16)index)) {
+            SavedUnitDataBody *body = (SavedUnitDataBody *)gameDataBlocksGetSaveData();
+            u32 level = body->units[index].values.level;
+            if (level - 1 <= 98 && counts[level] < 20) {
+                ++counts[level];
+            }
         }
-      }
-      temp_v3 = temp_v3 + 1;
-    } while ((int)temp_v3 <= (int)(unsigned int)temp_v0);
-  }
-  temp_v1 = 99;
-  do {
-    temp_v3 = (unsigned int)(unsigned char)acStack_7d[temp_v1 + 5];
-    if (temp_v3 != 0) {
-      if (temp_v3 >= 3) {
-        if (temp_v1 == 0) {
-          return 1;
+    }
+    for (s32 level = 99; level > 0; --level) {
+        s32 count = counts[level];
+        if (count == 0) {
+            continue;
         }
-        return temp_v1;
-      }
-      temp_v2 = temp_v3;
-      if (((((((temp_v1 >= 2) && (acStack_7d[temp_v1 + 4] != '\0')) && (temp_v2 = temp_v3 * 2, temp_v2 >= 3)) ||
-            (((temp_v1 >= 3 && (acStack_7d[temp_v1 + 3] != '\0')) && (temp_v2 = temp_v2 + temp_v3, temp_v2 >= 3)))
-            ) || (((temp_v1 >= 4 && (acStack_7d[temp_v1 + 2] != '\0')) &&
-                  (temp_v2 = temp_v2 + temp_v3, temp_v2 >= 3)))) ||
-          ((((temp_v1 >= 5 && (acStack_7d[temp_v1 + 1] != '\0')) && (temp_v2 = temp_v2 + temp_v3, temp_v2 >= 3))
-           || (((temp_v1 >= 6 && (acStack_7d[temp_v1] != '\0')) && (temp_v2 + temp_v3 >= 3)))))) &&
-         (temp_v1 != 0)) {
-        return temp_v1;
-      }
+        s32 support = count;
+        if (support >= 3) {
+            return level;
+        }
+        for (s32 distance = 1; distance <= 5 && distance < level; ++distance) {
+            if (counts[level - distance] != 0) {
+                support += count;
+                if (support >= 3) {
+                    return level;
+                }
+            }
+        }
     }
-    temp_v1 = temp_v1 - 1;
-    if (temp_v1 < 1) {
-      return 1;
-    }
-  } while( 1 );
+    return 1;
 }
-
-} /* extern "C" */
+}

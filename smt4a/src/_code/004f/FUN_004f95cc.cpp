@@ -1,77 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f95cc` (_code @ 0x4f95cc, 0x190 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Inlined group checks hoist group pointers and preserve an extra register instead of rebasing each snapshot. */
+#include "classes/Obj420794.h"
+#include <stddef.h>
 
-extern "C" {
+struct BattlePresentationResource {
+    u32 unk00;
+    void *resource;
+    u8 unk08[0x80];
+    u8 flags;
+    u8 unk89[3];
+};
+struct BattlePresentationReadinessWork {
+    u8 unk0000[0x1F54];
+    s32 secondaryEnabled;
+    s32 primaryEnabled;
+    BattlePresentationResource primary[4];
+    BattlePresentationResource secondary[3][4];
+    u8 unk281C[0xB8C];
+    Obj420794 *filter;
+};
+typedef char BattlePresentationResourceOffsetsCheck[sizeof(BattlePresentationResource) == 0x8C &&
+    offsetof(BattlePresentationResource, flags) == 0x88 &&
+    offsetof(BattlePresentationReadinessWork, filter) == 0x33A8 ? 1 : -1];
+extern "C" void *rt_memcpy_w(void *output, const void *input, u32 bytes);
 
-int rt_memcpy_w(unsigned char [4], int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 2 slot(s), 5 byte(s) */
-typedef struct {
-    unsigned char sp18; /* 0x18: local_18 */
-    unsigned int sp9C; /* 0x9c: local_9c */
-} param_1_stack;
-
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int FUN_004f95cc(int param_1)
-
+static __inline bool battlePresentationGroupIsReady(const BattlePresentationResource *resources)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2 [4];
-  int temp_v3;
-  unsigned char temp_v4;
-  
-  if (*(int *)(param_1 + 0x1f58) != 0) {
-    temp_v0 = 0;
-    do {
-      rt_memcpy_w(temp_v2,param_1 + temp_v0 * 0x8c + 0x1f5c,0x8c);
-      if (((temp_v4 & 1) != 0) && (temp_v3 == 0)) {
-        return 0;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 4);
-  }
-  temp_v0 = *(int *)(param_1 + 0x1f54);
-  if (temp_v0 != 0) {
-    temp_v1 = 0;
-    do {
-      rt_memcpy_w(temp_v2,param_1 + temp_v1 * 0x8c + 0x218c,0x8c);
-      if (((temp_v4 & 1) != 0) && (temp_v3 == 0)) {
-        return 0;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 4);
-  }
-  if (temp_v0 != 0) {
-    temp_v1 = 0;
-    do {
-      rt_memcpy_w(temp_v2,param_1 + temp_v1 * 0x8c + 0x23bc,0x8c);
-      if (((temp_v4 & 1) != 0) && (temp_v3 == 0)) {
-        return 0;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 4);
-  }
-  if (temp_v0 != 0) {
-    temp_v0 = 0;
-    do {
-      rt_memcpy_w(temp_v2,param_1 + temp_v0 * 0x8c + 0x25ec,0x8c);
-      if (((temp_v4 & 1) != 0) && (temp_v3 == 0)) {
-        return 0;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 4);
-  }
-  if ((*(int **)(param_1 + 0x33a8) != (int *)0x0) &&
-     (temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 0x33a8) + 0x18))(), temp_v0 == 0)) {
-    return 0;
-  }
-  return 1;
+    for (s32 index = 0; index < 4; ++index) {
+        BattlePresentationResource snapshot;
+        rt_memcpy_w(&snapshot, &resources[index], sizeof(snapshot));
+        if ((snapshot.flags & 1) != 0 && snapshot.resource == NULL) {
+            return false;
+        }
+    }
+    return true;
 }
 
-} /* extern "C" */
+/* Checks enabled presentation resource groups and the optional screen filter before allowing playback. */
+extern "C" u32 FUN_004f95cc(const BattlePresentationReadinessWork *work)
+{
+    if (work->primaryEnabled != 0 && !battlePresentationGroupIsReady(work->primary)) {
+        return 0;
+    }
+    s32 secondaryEnabled = work->secondaryEnabled;
+    if (secondaryEnabled != 0 && !battlePresentationGroupIsReady(work->secondary[0])) {
+        return 0;
+    }
+    if (secondaryEnabled != 0 && !battlePresentationGroupIsReady(work->secondary[1])) {
+        return 0;
+    }
+    if (secondaryEnabled != 0 && !battlePresentationGroupIsReady(work->secondary[2])) {
+        return 0;
+    }
+    if (work->filter != NULL && work->filter->isReady() == 0) {
+        return 0;
+    }
+    return 1;
+}

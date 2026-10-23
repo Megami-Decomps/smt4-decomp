@@ -1,108 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a6dcc` (_code @ 0x2a6dcc, 0x1a0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scalar vector arithmetic fuses multiply/adds; retail uses vector-class temporaries and different VFP saves. */
+#include "status/StatusCamera.h"
+#include "AsdSDK/AsdDebug.h"
 
+struct StatusCameraRegistryView {
+    u8 prefix[0xC];
+    StatusCameraWorkA *camera;
+};
 extern "C" {
+extern StatusCameraWorkA *g_statusCamera;
+extern StatusCameraRegistryView *g_handleRegistry;
+void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
+void sysMemClear(void *, u32);
+void FUN_00154180(s32, s32, s32, s32);
+void FUN_0013c884(StatusCameraWorkA *, s32);
+void FUN_0014f0dc(StatusCameraWorkA *, const Vec3 *, const Vec3 *, const Vec3 *);
+void FUN_001523b8(StatusCameraWorkA *, s32, f32, f32, f32, f32);
+void FUN_0036b824(StatusCameraWorkA *);
+void asdCameraRegister(StatusCameraWorkA *);
+void uiSetFloatPair(StatusCameraWorkA *, f32, f32);
 
-int FUN_0013c884(int, int);
-int asdCameraRegister(int);
-int uiSetFloatPair(int);
-int FUN_0014f0dc(int, float *, float *, int *);
-int FUN_001523b8(int, int);
-int FUN_00154180(int, int, int, int);
-int asdMemoryAllocTracked(int, int, int, int, int);
-int sysMemClear(void);
-int FUN_0036b824(int);
-
-/* stack frame of param_3: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_3_stack;
-
-extern int g_handleRegistry; /* 0x56fcc0 */
-extern int g_statusCamera; /* 0x588fe4 */
-
-/* Supplied declaration required: FUN_0013c884. */
-/* Supplied declaration required: asdCameraRegister. */
-/* Supplied declaration required: uiSetFloatPair. */
-/* Supplied declaration required: FUN_0014f0dc. */
-/* Supplied declaration required: FUN_001523b8. */
-/* Supplied declaration required: FUN_00154180. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0036b824. */
-
-
-void FUN_002a6dcc(float *param_1,float *param_2,unsigned int *param_3)
-
+// Create the status camera, aim it along the requested direction and register its viewport.
+void FUN_002a6dcc(const Vec3 *eye, const Vec3 *direction, const Vec3 *auxiliary,
+                  f32 nearClip, f32 farClip, f32 fieldOfView, f32 distance, f32 viewportScale)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3; 9 native warning(s); review required */
-  int temp_v0;
-  float temp_v1;
-  float temp_v2;
-  unsigned int temp_v3;
-  float *pfVar5;
-  unsigned int temp_v4;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int in_s3;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  
-  if (g_statusCamera == 0) {
-    temp_v0 = 0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x540,1);
-    g_statusCamera = temp_v0;
-  }
-  temp_v0 = g_statusCamera;
-  sysMemClear();
-  *(unsigned int *)(temp_v0 + 0x534) = in_s2;
-  *(unsigned int *)(temp_v0 + 0x538) = in_s0;
-  *(unsigned int *)(temp_v0 + 0x53c) = in_s1;
-  temp_v1 = param_2[1];
-  temp_v2 = param_2[2];
-  pfVar5 = (float *)(temp_v0 + 0x50c);
-  *(float *)(temp_v0 + 0x518) = *param_2;
-  *(float *)(temp_v0 + 0x51c) = temp_v1;
-  *(float *)(temp_v0 + 0x520) = temp_v2;
-  temp_v1 = param_1[1];
-  temp_v2 = param_1[2];
-  *pfVar5 = *param_1;
-  *(float *)(temp_v0 + 0x510) = temp_v1;
-  *(float *)(temp_v0 + 0x514) = temp_v2;
-  temp_v3 = param_3[1];
-  temp_v4 = param_3[2];
-  *(unsigned int *)(temp_v0 + 0x524) = *param_3;
-  *(unsigned int *)(temp_v0 + 0x528) = temp_v3;
-  *(unsigned int *)(temp_v0 + 0x52c) = temp_v4;
-  *(unsigned int *)(temp_v0 + 0x530) = in_s3;
-  temp_v8 = 0;
-  temp_v9 = 0x3f800000;
-  temp_v10 = 0;
-  temp_v1 = *(float *)(temp_v0 + 0x530);
-  temp_v5 = *pfVar5 + *(float *)(temp_v0 + 0x518) * temp_v1;
-  temp_v6 = *(float *)(temp_v0 + 0x510) + *(float *)(temp_v0 + 0x51c) * temp_v1;
-  temp_v7 = *(float *)(temp_v0 + 0x514) + *(float *)(temp_v0 + 0x520) * temp_v1;
-  FUN_00154180(200,0,200,0xf0);
-  FUN_0013c884(temp_v0,1);
-  FUN_0014f0dc(temp_v0,pfVar5,&temp_v5,&temp_v8);
-  FUN_001523b8(temp_v0,1);
-  FUN_0036b824(temp_v0);
-  asdCameraRegister(temp_v0);
-  uiSetFloatPair(temp_v0);
-  *(int *)(g_handleRegistry + 0xc) = temp_v0;
-  return;
+    if (g_statusCamera == NULL) {
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\status\\StatusCamera.cpp", 116);
+        g_statusCamera = static_cast<StatusCameraWorkA *>(asdMemoryAllocTracked(0x100, 0x100, 0, 0x540, 1));
+    }
+    StatusCameraWorkA *camera = g_statusCamera;
+    sysMemClear(camera, 0x540);
+    camera->lens.fov = fieldOfView;
+    camera->lens.nearClip = nearClip;
+    camera->lens.farClip = farClip;
+    camera->dir = *direction;
+    camera->eye = *eye;
+    camera->unk524 = *auxiliary;
+    camera->dist = distance;
+    Vec3 up = {0.0f, 1.0f, 0.0f};
+    Vec3 target = camera->eye;
+    target.x += camera->dir.x * camera->dist;
+    target.y += camera->dir.y * camera->dist;
+    target.z += camera->dir.z * camera->dist;
+    FUN_00154180(200, 0, 200, 240);
+    FUN_0013c884(camera, 1);
+    FUN_0014f0dc(camera, &camera->eye, &target, &up);
+    FUN_001523b8(camera, 1, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip, 1.6666666f);
+    FUN_0036b824(camera);
+    asdCameraRegister(camera);
+    uiSetFloatPair(camera, viewportScale, 1.0f);
+    g_handleRegistry->camera = camera;
 }
-
-} /* extern "C" */
+}

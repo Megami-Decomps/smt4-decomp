@@ -26,7 +26,7 @@ int buttonHelpSetPreset(...);
 int FUN_002bf810(...);
 
 int FUN_002996d8(...);
-int FUN_0029974c(...);
+int campPreviewSelectedEquipment(...);
 int FUN_00299900(...);
 int nodeSetTranslation3f(...);
 int FUN_0029a084(...);
@@ -63,7 +63,7 @@ extern unsigned int dataTable15GetUnlockedEntryId(int, unsigned int);
 extern int recordAcceptsStickDirection(short);
 extern unsigned int FUN_0029963c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002996d8. */
-/* Supplied declaration required: FUN_0029974c. */
+/* Supplied declaration required: campPreviewSelectedEquipment. */
 /* Supplied declaration required: FUN_00299900. */
 /* Supplied declaration required: FUN_00299bc4. */
 /* Supplied declaration required: gameSetStatusCameraHeightMode. */
@@ -272,7 +272,7 @@ void FUN_0018854c(unsigned int param_1)
         *(unsigned char *)(temp_v5 + 0x32) = 1;
       }
       else {
-        FUN_0029974c(param_1);
+        campPreviewSelectedEquipment(param_1);
       }
     }
     if ((*(char *)(temp_v11 + 0x61) != '\0') || (*(char *)(temp_v11 + 0x60) != '\0')) {
@@ -303,7 +303,7 @@ void FUN_0018854c(unsigned int param_1)
       }
       *(unsigned char *)(temp_v5 + 0x32) = 0;
       if (temp_v12) {
-        FUN_0029974c(temp_v3);
+        campPreviewSelectedEquipment(temp_v3);
       }
     }
     else {
@@ -323,7 +323,7 @@ void FUN_0018854c(unsigned int param_1)
                  (int)*(short *)(temp_v5 + 0xe04),(int)*(short *)(temp_v5 + 0xe06),temp_v13,0,1);
     if ((temp_v4 != 0) || (temp_v4 = temp_v11, FUN_0029efd8(temp_v11,1), temp_v4 != 0)) {
       FUN_00299900(param_1);
-      FUN_0029974c(param_1);
+      campPreviewSelectedEquipment(param_1);
       return;
     }
     temp_v4 = 0;
@@ -767,7 +767,7 @@ joined_r0x00188f3c:
   FUN_00299bc4(temp_v11,0);
   FUN_00299900(param_1);
   if (!temp_v12) {
-    FUN_0029974c();
+    campPreviewSelectedEquipment();
   }
   *(int *)(temp_v5 + 0x1c) = *(int *)(temp_v5 + 0x1c) + 1;
   return;

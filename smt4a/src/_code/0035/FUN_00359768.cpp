@@ -1,68 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00359768` (_code @ 0x359768, 0x110 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: global-base address materialization and saved actor/volume register allocation differ. */
+#include "common.h"
+#include <stddef.h>
+
+/* Apocalypse's sound system extends beyond the shared IV work-area layout. */
+struct SpatialSoundActorView {
+    u8 unk00[0x3c];
+    u8 playback[0x48]; /* 0x3c: embedded sound actor playback object */
+    f32 volume; /* 0x84 */
+};
+struct SpatialSoundActorsView {
+    SpatialSoundActorView actors[16];
+    u8 unk880[0x3c];
+    u32 handles[16]; /* 0x8bc */
+    u8 unk8fc[0x184];
+    u32 activeMask; /* 0xa80 */
+};
+struct SpatialSoundDeviceView {
+    u8 unk00[0x10];
+    void *device;
+};
+struct ApocalypseSpatialSoundView {
+    u8 unk000[0x854];
+    SpatialSoundActorsView spatial; /* 0x854 */
+    u8 unk12d8[4];
+    u8 ready; /* 0x12dc */
+    u8 unk12dd[0x3b];
+    SpatialSoundDeviceView *device; /* 0x1318 */
+};
+typedef char SpatialSoundActorOffsets[
+    sizeof(SpatialSoundActorView) == 0x88 &&
+    offsetof(ApocalypseSpatialSoundView, spatial.actors) == 0x854 &&
+    offsetof(ApocalypseSpatialSoundView, spatial.activeMask) == 0x12d4 &&
+    offsetof(ApocalypseSpatialSoundView, device) == 0x1318 ? 1 : -1];
 
 extern "C" {
+extern ApocalypseSpatialSoundView g_asdSoundSystem;
+s32 nw_snd_SoundArchive_IsAvailable(void *);
+s32 nw_snd_SoundArchive_GetSoundType(void *, u32);
+s32 asd3dSoundActorIsPlaying(u32);
+s32 FUN_00151340(u32);
+u32 FUN_0015e2bc(void *, u32 *, u32, s32);
 
-int FUN_00151340(void);
-int FUN_0015e2bc(unsigned int, unsigned int, int, int);
-int nw_snd_SoundArchive_GetSoundType(unsigned char *, int);
-int asd3dSoundActorIsPlaying(void);
-int VectorUnsignedToFloat(int, int);
-
-extern unsigned char g_asdSoundSystem; /* 0x63e1e8 */
-extern unsigned int DAT_0063f4bc; /* 0x63f4bc */
-extern signed char DAT_0063f4c4; /* 0x63f4c4 */
-extern int DAT_0063f500; /* 0x63f500 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00151340. */
-/* Supplied declaration required: FUN_0015e2bc. */
-extern int nw_snd_SoundArchive_IsAvailable(unsigned char *);
-/* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
-/* Supplied declaration required: asd3dSoundActorIsPlaying. */
-
-
-unsigned char FUN_00359768(int param_1,unsigned int param_2,int param_3)
-
+/* Start an idle spatial actor and convert the 0..127 volume to its relative gain. */
+u8 FUN_00359768(u32 soundId, u32 actorIndex, u32 volume)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  unsigned char *puVar4;
-  unsigned int in_fpscr;
-  float temp_v3;
-  
-  temp_v2 = 0;
-  temp_v0 = DAT_0063f500;
-  if (DAT_0063f4c4 != '\0') {
-    temp_v0 = *(int *)(DAT_0063f500 + 0x10);
-  }
-  if ((DAT_0063f4c4 != '\0' && temp_v0 != 0) && (param_2 < 0x10)) {
-    puVar4 = &g_asdSoundSystem;
-    temp_v0 = nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem);
-    if ((temp_v0 != 0) &&
-       (((nw_snd_SoundArchive_GetSoundType(&g_asdSoundSystem,param_1), puVar4 != (unsigned char *)0x0 &&
-         (temp_v1 = param_2, asd3dSoundActorIsPlaying(), temp_v1 == 0)) &&
-        (temp_v0 = param_1, FUN_00151340(), temp_v0 != 0)))) {
-      temp_v1 = param_2 * 0x88 + 0x63ea78;
-      FUN_0015e2bc(temp_v1,param_2 * 4 + 0x63f2f8,param_1,0);
-      temp_v2 = (temp_v1 & 0xff) == 0;
-      if (param_3 == 0) {
-        temp_v3 = 0.0f;
-      }
-      else {
-        temp_v3 = (float)VectorUnsignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v3 = (temp_v3 - 64.0f) * 0.015748031f + 1.0f;
-      }
-      *(float *)(param_2 * 0x88 + 0x63eac0) = temp_v3;
-      if ((temp_v1 & 0xff) == 0) {
-        DAT_0063f4bc = DAT_0063f4bc | (1 << (param_2 & 0xff));
-      }
+    SpatialSoundActorsView *spatial = &g_asdSoundSystem.spatial;
+    SpatialSoundDeviceView *device = g_asdSoundSystem.device;
+    u8 started = 0;
+    if (g_asdSoundSystem.ready && device->device && actorIndex < 16 &&
+        nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem) &&
+        nw_snd_SoundArchive_GetSoundType(&g_asdSoundSystem, soundId) &&
+        !asd3dSoundActorIsPlaying(actorIndex) && FUN_00151340(soundId)) {
+        SpatialSoundActorView *actor = &spatial->actors[actorIndex];
+        started = static_cast<u8>(FUN_0015e2bc(actor->playback, &spatial->handles[actorIndex], soundId, 0)) == 0;
+        f32 gain;
+        if (volume == 0)
+            gain = 0.0f;
+        else
+            gain = (static_cast<f32>(volume) - 64.0f) * 0.015748031f + 1.0f;
+        actor->volume = gain;
+        if (started)
+            spatial->activeMask |= 1 << actorIndex;
     }
-  }
-  return temp_v2;
+    return started;
 }
-
-} /* extern "C" */
+}

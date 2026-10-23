@@ -6,7 +6,14 @@
 struct TransformInterpolation {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ u32 flags;
-    /* 0x24 */ u8 unk24[0x34];
+    union {
+        /* 0x24 */ u8 unk24[0x34];
+        struct {
+            u32 unk24;
+            /* 0x28 */ s32 state;
+            /* 0x2C */ s32 phase;
+        } runtime;
+    };
     /* 0x58 */ f32 x;
     /* 0x5C */ f32 y;
     /* 0x60 */ f32 startX;
@@ -25,4 +32,7 @@ struct TransformInterpolation {
 typedef char TransformInterpolationLayoutCheck[sizeof(TransformInterpolation) == 0x90 &&
     offsetof(TransformInterpolation, flags) == 0x20 &&
     offsetof(TransformInterpolation, elapsed) == 0x88 ? 1 : -1];
+typedef char TransformInterpolationStateLayoutCheck[
+    offsetof(TransformInterpolation, runtime.state) == 0x28 &&
+    offsetof(TransformInterpolation, runtime.phase) == 0x2c ? 1 : -1];
 #endif

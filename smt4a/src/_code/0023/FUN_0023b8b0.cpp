@@ -20,7 +20,7 @@ int FUN_002a968c(...);
 int FUN_002aa038(...);
 int FUN_002c8940(unsigned int, unsigned int);
 int FUN_002f197c(...);
-int FUN_003346a8(...);
+int uiDrawRotatingGridHighlights(...);
 int FUN_00344cd0(...);
 int FUN_0034abe0(...);
 int VectorSignedToFloat(...);
@@ -66,7 +66,7 @@ extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_002aa038. */
 /* Supplied declaration required: FUN_002c8940. */
 /* Supplied declaration required: FUN_002f197c. */
-/* Supplied declaration required: FUN_003346a8. */
+/* Supplied declaration required: uiDrawRotatingGridHighlights. */
 /* Supplied declaration required: FUN_00344cd0. */
 /* Supplied declaration required: FUN_0034abe0. */
 
@@ -247,7 +247,7 @@ unsigned int FUN_0023b8b0(void)
       temp_v6 = (*(unsigned char *)(temp_v0 + 0x9278) + 1) & 0xff;
       temp_v7 = temp_v6 % 0x28;
       *(char *)(temp_v0 + 0x9278) = (char)temp_v7;
-      FUN_003346a8(0x1e0,temp_v7,temp_v6 * -0x33333333);
+      uiDrawRotatingGridHighlights(0x1e0,temp_v7,temp_v6 * -0x33333333);
     }
   }
   temp_v0 = g_renderCtx;

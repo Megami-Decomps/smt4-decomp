@@ -5,7 +5,7 @@
 extern "C" {
 
 int skillFormatTargetLabel(...);
-int FUN_0024bda8(...);
+int btlFormatCategoryLabel(...);
 int FUN_002907c4(...);
 int textEncodeFontSlot(...);
 int asdTextDrawDirectoryEntry(...);
@@ -50,7 +50,7 @@ extern unsigned char LAB_00292838; /* 0x292838 */
 extern int DAT_0043da2c; /* 0x43da2c */
 
 /* Supplied declaration required: skillFormatTargetLabel. */
-/* Supplied declaration required: FUN_0024bda8. */
+/* Supplied declaration required: btlFormatCategoryLabel. */
 /* Supplied declaration required: FUN_002907c4. */
 /* Supplied declaration required: textEncodeFontSlot. */
 extern int FUN_00295cec(void);
@@ -166,7 +166,7 @@ void FUN_0029212c(int param_1)
       textFormatBuffer(&temp_v12,&LAB_0029264c,temp_v13,temp_v14);
       textEncodeFontSlot(0x25,&temp_v12);
     }
-    FUN_0024bda8(&temp_v12,*(unsigned int *)(temp_v5 + 0x54) >> 0x14);
+    btlFormatCategoryLabel(&temp_v12,*(unsigned int *)(temp_v5 + 0x54) >> 0x14);
     textEncodeFontSlot(0x26,&temp_v12);
     skillFormatTargetLabel(&temp_v12,*(unsigned char *)(temp_v5 + 0x59));
     textEncodeFontSlot(0x27,&temp_v12);
@@ -274,7 +274,7 @@ void FUN_0029212c(int param_1)
         if ('\0' < temp_v15[temp_v11]) {
           temp_v3 = temp_v11 * 0x12 - 200;
           do {
-            temp_v7 = FUN_0024bda8((int)&temp_v12 + temp_v8,(int)acStack_c8[temp_v9 + temp_v3 + 200]);
+            temp_v7 = btlFormatCategoryLabel((int)&temp_v12 + temp_v8,(int)acStack_c8[temp_v9 + temp_v3 + 200]);
             temp_v8 = temp_v8 + temp_v7;
             if ((temp_v9 < 0x11) && ('\0' < acStack_c8[temp_v9 + temp_v3 + 0xc9])) {
               temp_v7 = (int)&temp_v12 + temp_v8;

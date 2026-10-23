@@ -1,100 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00349ca4` (_code @ 0x349ca4, 0x19c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: filename literal grouping, backend branch layout and completion-tail scheduling differ. */
+#include "gamedata/SaveLoadThreadRequest.h"
+#include "AsdSDK/Source/Sys/Save/AsdSaveHeader.h"
+#include "shard/Sys43e310.h"
+#include <stddef.h>
 
 extern "C" {
+void rt_aeabi_memclr(void *, u32);
+s32 textFormatBuffer(char *, const char *, ...);
+char *libc_strcpy(char *, const char *);
+void FUN_00399c90(u32, const char *);
+s32 FUN_0032c8c8(void);
+void FUN_002c7388(u32, const char *, u32, u32);
+void FUN_00280bd0(AsdSaveHeader *, u32, u32, u32, u32, u32, u32);
+s32 asdSaveWriteBlock(u32, const char *, const AsdSaveHeader *, const void *, u32);
+s32 FUN_002ef7f0(u32, const char *);
+void colorForMode(u32);
+extern char DAT_005e2114[128];
 
-int textFormatBuffer(...);
-int FUN_00280bd0(unsigned char [132], int, int, int, unsigned int, int, int);
-int FUN_002c7388(...);
-int asdSaveWriteBlock(int, unsigned char [128], unsigned char [132], unsigned int, unsigned int);
-int libc_strcpy(unsigned char [128], unsigned char *);
-int rt_aeabi_memclr(unsigned char *, int);
-int colorForMode(...);
-int FUN_00399c90(int, unsigned char *);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp128; /* 0x128: local_128 */
-    unsigned int sp130; /* 0x130: local_130 */
-} param_1_stack;
-
-extern unsigned char LAB_00349e54; /* 0x349e54 */
-extern unsigned char DAT_0057f6c9; /* 0x57f6c9 */
-extern int DAT_0057f6d0; /* 0x57f6d0 */
-extern unsigned int DAT_0057f6d8; /* 0x57f6d8 */
-extern unsigned char DAT_005e2114; /* 0x5e2114 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00280bd0. */
-/* Supplied declaration required: FUN_002c7388. */
-/* Supplied declaration required: asdSaveWriteBlock. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: rt_aeabi_memclr. */
-extern int FUN_002ef7f0(unsigned int, unsigned char *);
-extern int FUN_0032c8c8(void);
-/* Supplied declaration required: colorForMode. */
-/* Supplied declaration required: FUN_00399c90. */
-
-
-void FUN_00349ca4(unsigned int param_1)
-
+void FUN_00349ca4(u32 job)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4 [128];
-  unsigned char temp_v5 [132];
-  
-  temp_v1 = *(int *)(DAT_0057f6d0 + 4);
-  DAT_0057f6c9 = 1;
-  if (temp_v1 != 1) {
-    temp_v3 = *(unsigned int *)(DAT_0057f6d0 + 8);
-    rt_aeabi_memclr(&DAT_005e2114,0x80);
-    textFormatBuffer(&DAT_005e2114,"sdds4game%d.sav",temp_v3);
-  }
-  else {
-    FUN_00399c90(1,&LAB_00349e54);
-    temp_v2 = FUN_0032c8c8();
-    if (temp_v2 != 0) {
-      FUN_002c7388(param_1,&LAB_00349e54,1,0);
-      return;
+    // Request and result extend beyond the shared controller's four-byte prefix.
+    struct SaveThreadWriteView {
+        u8 unk00;
+        u8 busy;
+        u8 unk02[6];
+        SaveLoadThreadRequest *request;
+        u32 unk0c;
+        s32 result;
+    };
+    typedef char SaveThreadWriteOffsets[offsetof(SaveThreadWriteView, request) == 8 &&
+        offsetof(SaveThreadWriteView, result) == 0x10 ? 1 : -1];
+    SaveThreadWriteView *state = reinterpret_cast<SaveThreadWriteView *>(&g_saveLoadThread);
+    u32 backend = state->request->file;
+    state->busy = 1;
+    if (backend != 1) {
+        u32 slot = state->request->slot;
+        rt_aeabi_memclr(DAT_005e2114, 128);
+        textFormatBuffer(DAT_005e2114, "sdds4game%d.sav", slot);
+    } else {
+        FUN_00399c90(1, "sdds4/");
+        if (FUN_0032c8c8()) {
+            FUN_002c7388(job, "sdds4/", 1, 0);
+            return;
+        }
+        u32 slot = state->request->slot;
+        rt_aeabi_memclr(DAT_005e2114, 128);
+        textFormatBuffer(DAT_005e2114, "%ssdds4game%d.sav", "sdds4/", slot);
     }
-    temp_v3 = *(unsigned int *)(DAT_0057f6d0 + 8);
-    rt_aeabi_memclr(&DAT_005e2114,0x80);
-    textFormatBuffer(&DAT_005e2114,"%ssdds4game%d.sav","sdds4/",temp_v3);
-  }
-  libc_strcpy(temp_v4,&DAT_005e2114);
-  FUN_00280bd0(temp_v5,0x34534444,0x454d4147,0,*(unsigned int *)(DAT_0057f6d0 + 0x18),0,0);
-  temp_v2 = temp_v1;
-  asdSaveWriteBlock(temp_v1,temp_v4,temp_v5,*(unsigned int *)(DAT_0057f6d0 + 0x14),
-               *(unsigned int *)(DAT_0057f6d0 + 0x18));
-  if (temp_v2 == 0) {
-    temp_v2 = 5;
-    if (temp_v1 != 0) {
-      if (temp_v1 == 1) {
-        FUN_002c7388(param_1,temp_v4,1,0);
-        temp_v2 = 3;
-      }
+    char filename[128];
+    AsdSaveHeader header;
+    libc_strcpy(filename, DAT_005e2114);
+    FUN_00280bd0(&header, 0x34534444, 0x454d4147, 0, state->request->payloadSize, 0, 0);
+    if (!asdSaveWriteBlock(backend, filename, &header, state->request->payload, state->request->payloadSize)) {
+        if (backend == 0) {
+            state->result = FUN_002ef7f0(job, filename) == 1 ? 6 : -1;
+        } else if (backend == 1) {
+            FUN_002c7388(job, filename, 1, 0);
+            state->busy = 0;
+            return;
+        }
+        state->busy = 0;
     }
-    else {
-      temp_v0 = FUN_002ef7f0(param_1,temp_v4);
-      if (temp_v0 == 1) {
-        DAT_0057f6d8 = 6;
-      }
-      else {
-        DAT_0057f6d8 = 0xffffffff;
-      }
-    }
-    DAT_0057f6c9 = 0;
-    if (temp_v2 == 3) {
-      return;
-    }
-  }
-  colorForMode(temp_v1);
-  return;
+    colorForMode(backend);
 }
-
-} /* extern "C" */
+}

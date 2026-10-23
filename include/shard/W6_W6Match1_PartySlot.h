@@ -14,7 +14,7 @@ struct PartySlotA {
     /* 0x02E */ u8 unk2E[0x32];
     /* 0x060 */ u16 unk60;
     /* 0x062 */ u16 unk62;
-    /* 0x064 */ u8 unk64[0xC8];
+    /* 0x064 */ union { u8 unk64[0xC8]; u16 level; };
     u16 id; // 0x12c
     u16 unk12e;
     u32 flags; // 0x130
@@ -27,5 +27,7 @@ struct PartySlotTableA {
 typedef char PartySlotASizeCheck[sizeof(PartySlotA) == 0x134 ? 1 : -1];
 typedef char PartySlotAOffsetsCheck[offsetof(PartySlotA, unk2A) == 0x2A && offsetof(PartySlotA, unk62) == 0x62 && offsetof(PartySlotA, id) == 0x12C && offsetof(PartySlotA, flags) == 0x130 && offsetof(PartySlotTableA, slots) == 0x1DDC ? 1 : -1];
 typedef char PartySlotAResetFieldOffsetCheck[offsetof(PartySlotA, unk60) == 0x60 ? 1 : -1];
+typedef char PartySlotALevelOffsetCheck[offsetof(PartySlotA, level) == 0x64 &&
+    sizeof(PartySlotA) == 0x134 ? 1 : -1];
 
 #endif

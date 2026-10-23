@@ -1,65 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00478dc4` (_code @ 0x478dc4, 0x114 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: phase/ready address allocation, unsigned readiness load and branch-padding NOPs differ. */
+#include "shard/ScreenTransitionState.h"
+#include "shard/W5_W5Match2_TimedState.h"
 
 extern "C" {
+void eventQueueAddUniqueIfValid(u32);
+void flagObjAdvance(void *);
+void FUN_0047306c(void *, u32, u32, u32);
+void jobOwnerFreeSlotAndStop(void *);
+void FUN_00477d10(ScreenTransitionState *, s32, u32);
+TimedState *timeInitializeActiveState(TimedState *);
+s32 FUN_002e1a18(u32);
 
-int eventQueueAddUniqueIfValid(int);
-int flagObjAdvance(int);
-int FUN_0047306c(int, int, int);
-int jobOwnerFreeSlotAndStop(int);
-int FUN_00477d10(...);
-int timeInitializeActiveState(unsigned char [20]);
-
-typedef int romwright_code(...);
-/* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern int FUN_002e1a18(unsigned int);
-/* Supplied declaration required: flagObjAdvance. */
-/* Supplied declaration required: FUN_0047306c. */
-/* Supplied declaration required: jobOwnerFreeSlotAndStop. */
-/* Supplied declaration required: FUN_00477d10. */
-/* Supplied declaration required: timeInitializeActiveState. */
-
-
-void FUN_00478dc4(int param_1)
-
+// Wait for the close animation and input, post the transition event, then release its callback.
+void FUN_00478dc4(ScreenTransitionState *transition)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [20];
-  
-  timeInitializeActiveState(temp_v3);
-  temp_v1 = *(int *)(param_1 + 8);
-  temp_v2 = param_1 + 0x11b0;
-  if (temp_v1 == 0) {
-    FUN_0047306c(temp_v2,0x67,0);
-    FUN_00477d10(param_1,3,1);
-    temp_v0 = 1;
-    *(unsigned int *)(param_1 + 8) = temp_v0;
-    return;
-  }
-  if (temp_v1 != 1) {
-    if ((temp_v1 == 2) && (*(char *)(param_1 + 0x167a) != '\0')) {
-      jobOwnerFreeSlotAndStop(temp_v2);
-      *(unsigned int *)(param_1 + 4) = 0xf;
-      *(unsigned int *)(param_1 + 8) = 0;
-      if (*(int **)(param_1 + 0x208) != (int *)0x0) {
-        (**(romwright_code **)(**(int **)(param_1 + 0x208) + 4))();
-        *(unsigned int *)(param_1 + 0x208) = 0;
-      }
+    // The animation controller lies beyond the common screen-transition prefix.
+    struct CloseStateView {
+        ScreenTransitionState base;
+        u8 unk20C[0xfa4];
+        u8 animation[0x4ca]; // 0x11b0
+        s8 ready; // 0x167a
+    };
+    typedef char CloseStateOffsets[
+        offsetof(CloseStateView, animation) == 0x11b0 &&
+        offsetof(CloseStateView, ready) == 0x167a ? 1 : -1];
+    CloseStateView *view = reinterpret_cast<CloseStateView *>(transition);
+    TimedState time;
+    timeInitializeActiveState(&time);
+    s32 phase = transition->phase;
+    void *animation = view->animation;
+    if (phase == 0) {
+        FUN_0047306c(animation, 0x67, 0, 0);
+        FUN_00477d10(transition, 3, 1);
+        transition->phase = 1;
+        return;
     }
-  }
-  else if ((*(char *)(param_1 + 0x167a) != '\0') && (temp_v1 = FUN_002e1a18(0x10), temp_v1 != 0)) {
-    eventQueueAddUniqueIfValid(0x100020e);
-    flagObjAdvance(temp_v2);
-    FUN_00477d10(param_1,0xffffffff,0);
-    temp_v0 = 2;
-    *(unsigned int *)(param_1 + 8) = temp_v0;
-    return;
-  }
-  return;
+    if (phase != 1) {
+        if (phase == 2 && view->ready) {
+            jobOwnerFreeSlotAndStop(animation);
+            transition->flags = 15;
+            transition->phase = 0;
+            if (transition->callback) {
+                transition->callback->vtable->destroy(transition->callback);
+                transition->callback = NULL;
+            }
+        }
+    } else if (view->ready && FUN_002e1a18(0x10)) {
+        eventQueueAddUniqueIfValid(0x100020e);
+        flagObjAdvance(animation);
+        FUN_00477d10(transition, -1, 0);
+        transition->phase = 2;
+    }
 }
-
-} /* extern "C" */
+}

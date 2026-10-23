@@ -1,70 +1,80 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a6e68` (_code @ 0x3a6e68, 0x114 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: preset branch placement, window flag addressing and count clamp condition differ. */
+#include "classes/Obj4223c4.h"
+#include "classes/Obj422594.h"
+#include "shard/MessageIdList.h"
+#include "shard/W5_W5Match2_ScalarArguments.h"
+#include "ui/PartyPanelState.h"
+#include <stddef.h>
 
 extern "C" {
-
-int pointConvertToFloat(...);
-int FUN_00233670(int, int, int, int);
-int FUN_0029d960(int);
-int FUN_002a0cc8(int);
-int buttonHelpSetPreset(...);
-
-typedef int romwright_code(...);
-/* Supplied declaration required: pointConvertToFloat. */
-extern int uiAnimationAdvanceChannel(int, int);
-/* Supplied declaration required: FUN_00233670. */
-/* Supplied declaration required: FUN_0029d960. */
-/* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-extern unsigned int vec2GetYInt(int);
-extern unsigned int vec2GetXInt(int);
-
-
-void FUN_003a6e68(int param_1)
-
-{
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned short *puVar4;
-  int temp_v3;
-  
-  temp_v0 = uiAnimationAdvanceChannel(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa5b4));
-  temp_v3 = param_1 + *(short *)(param_1 + 0xa5b4) * 0x8c + 0xfc;
-  temp_v1 = vec2GetYInt(temp_v3);
-  temp_v2 = vec2GetXInt(temp_v3);
-  pointConvertToFloat(param_1 + 200,temp_v2,temp_v1);
-  if (temp_v0 != 0) {
-    if (*(char *)(param_1 + 0x5a4) != '\0') {
-      if (*(char *)(param_1 + 0x5a5) == '\x01') {
-        temp_v1 = 0x4c;
-      }
-      else {
-        temp_v1 = 0x4d;
-      }
-      buttonHelpSetPreset(temp_v1);
-    }
-    else {
-      buttonHelpSetPreset(0x2d);
-    }
-    FUN_0029d960(param_1);
-    FUN_002a0cc8(0);
-    *(unsigned int *)(param_1 + 0x14) = 2;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-    pointConvertToFloat(param_1 + 200,0,0);
-    (**(romwright_code **)(**(int **)(param_1 + 0x590) + 8))(*(int **)(param_1 + 0x590),param_1 + 0x20);
-    puVar4 = (unsigned short *)(*(int *)(param_1 + 0x590) + 4);
-    *puVar4 = *puVar4 | 0x1000;
-    temp_v0 = *(int *)(param_1 + 0x28);
-    if (temp_v0 >= 10) {
-      temp_v0 = 10;
-    }
-    FUN_00233670(param_1 + 0x55c,0x1d,0x40e,temp_v0);
-    *(unsigned char *)(param_1 + 0x56c) = 1;
-  }
-  return;
+s32 uiAnimationAdvanceChannel(void *, s32);
+s32 vec2GetYInt(const TimerSlot *);
+s32 vec2GetXInt(const TimerSlot *);
+void pointConvertToFloat(FloatPoint *, s32, s32);
+void buttonHelpSetPreset(s32);
+void FUN_0029d960(void *);
+void FUN_002a0cc8(u8);
+void FUN_00233670(MessageIdList *, u32, s32, s32);
 }
 
-} /* extern "C" */
+extern "C" void FUN_003a6e68(Obj4223c4 *screen)
+{
+    /* The selected-channel state extends past the shared class's declared end. */
+    struct AnimationTimerGroup {
+        u8 prefix[0x20];
+        TimerSlot timers[8];
+    };
+    struct CursorParameters {
+        u8 prefix[8];
+        s32 count;
+        u8 remaining[0x9C];
+    };
+    struct OpeningScreenView {
+        u8 prefix[0x14];
+        u32 state;
+        u32 timer;
+        u8 prefix1C[4];
+        CursorParameters cursor;
+        FloatPoint position;
+        u8 prefixD0[0xC];
+        AnimationTimerGroup animation;
+        MessageIdList messages;
+        Obj422594 *window;
+        u8 prefix594[0x10];
+        u8 previewOnly;
+        u8 source;
+        u8 prefix5A6[0xA00E];
+        s16 selectedChannel;
+    };
+    typedef char OpeningScreenOffsets[
+        offsetof(OpeningScreenView, position) == 0xC8 &&
+        offsetof(OpeningScreenView, animation) == 0xDC &&
+        offsetof(OpeningScreenView, messages) == 0x55C &&
+        offsetof(OpeningScreenView, window) == 0x590 &&
+        offsetof(OpeningScreenView, selectedChannel) == 0xA5B4 ? 1 : -1];
+    OpeningScreenView *view = reinterpret_cast<OpeningScreenView *>(screen);
+    s32 completed = uiAnimationAdvanceChannel(&view->animation, view->selectedChannel);
+    TimerSlot *timer = &view->animation.timers[view->selectedChannel];
+    s32 y = vec2GetYInt(timer);
+    s32 x = vec2GetXInt(timer);
+    pointConvertToFloat(&view->position, x, y);
+    if (completed == 0)
+        return;
+
+    if (view->previewOnly)
+        buttonHelpSetPreset(view->source == 1 ? 0x4C : 0x4D);
+    else
+        buttonHelpSetPreset(0x2D);
+    FUN_0029d960(screen);
+    FUN_002a0cc8(0);
+    view->state = 2;
+    view->timer = 0;
+    pointConvertToFloat(&view->position, 0, 0);
+    view->window->initialize(&view->cursor);
+    view->window->state |= 0x1000;
+    s32 count = view->cursor.count;
+    if (count >= 10)
+        count = 10;
+    FUN_00233670(&view->messages, 0x1D, 0x40E, count);
+    view->messages.unk10 = 1;
+}

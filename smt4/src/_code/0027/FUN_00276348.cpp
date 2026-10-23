@@ -1,66 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00276348` (_code @ 0x276348, 0x110 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail hoists the null result into R9; count comparison operands and call-register allocation differ. */
+#include "gamedata/DataTable.h"
+#include "gamedata/Table48Record.h"
+#include "addon/aocMain.h"
 extern "C" {
+extern AocSystem *g_aocSystem;
+u32 FUN_0025bed8(AocSystem *system, s32 table, s32 section);
+Table48Record *FUN_00387eb4(AocSystem *system, u32 index);
 
-int FUN_0025bed8(int, int, int);
-int dataTableGetCount(...);
-int dataTableGet(int, int);
-int FUN_00387eb4(int, unsigned int);
-
-extern int g_aocSystem; /* 0x433158 */
-
-/* Supplied declaration required: FUN_0025bed8. */
-/* Supplied declaration required: dataTableGetCount. */
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: dataTableGet. */
-/* Supplied declaration required: FUN_00387eb4. */
-
-
-unsigned int FUN_00276348(int param_1)
-
+static __inline Table48Record *table48GetCombinedEntry(u32 index)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v4 = 0;
-  dataTableGet(0x30,0);
-  temp_v0 = dataTableGetCount();
-  temp_v2 = g_aocSystem;
-  FUN_0025bed8(g_aocSystem,0x27,0);
-  if (0 < temp_v2 + temp_v0) {
-    do {
-      temp_v1 = dataTableGet(0x30,0);
-      temp_v2 = dataTableGetEntries();
-      temp_v3 = dataTableGetCount(temp_v1);
-      if (temp_v4 < temp_v3) {
-        temp_v2 = temp_v2 + temp_v4 * 0x28;
-      }
-      else {
-        temp_v0 = g_aocSystem;
-        FUN_0025bed8(g_aocSystem,0x27,0);
-        temp_v2 = 0;
-        if (temp_v4 < temp_v3 + temp_v0) {
-          temp_v2 = g_aocSystem;
-          FUN_00387eb4(g_aocSystem,temp_v4 - temp_v3);
-        }
-      }
-      if ((*(int *)(temp_v2 + 0x20) != -1) && (*(int *)(temp_v2 + 0x20) == param_1)) {
-        return temp_v4;
-      }
-      temp_v4 = temp_v4 + 1;
-      dataTableGet(0x30,0);
-      temp_v0 = dataTableGetCount();
-      temp_v2 = g_aocSystem;
-      FUN_0025bed8(g_aocSystem,0x27,0);
-    } while ((int)temp_v4 < temp_v2 + temp_v0);
-  }
-  return 0xffffffff;
+    DataTableView<Table48Record> table(0x30, 0);
+    if (index < table.count)
+        return &table.entries[index];
+    u32 extraCount = FUN_0025bed8(g_aocSystem, 0x27, 0);
+    if (index < table.count + extraCount)
+        return FUN_00387eb4(g_aocSystem, index - table.count);
+    return NULL;
 }
 
-} /* extern "C" */
+/* Find an ID in the base table followed by its downloadable-content extension. */
+s32 FUN_00276348(s32 id)
+{
+    for (s32 index = 0;
+         index < static_cast<s32>(dataTableGetCount(dataTableGet(0x30, 0)) + FUN_0025bed8(g_aocSystem, 0x27, 0));
+         ++index) {
+        Table48Record *entry = table48GetCombinedEntry(index);
+        if (entry->id != -1 && entry->id == id)
+            return index;
+    }
+    return -1;
+}
+}

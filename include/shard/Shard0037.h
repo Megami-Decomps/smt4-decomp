@@ -3,16 +3,36 @@
 #define SHARD_SHARD0037_H
 
 #include "common.h"
+#include <stddef.h>
 
 #include "shard/Shard0036.h"
 
 typedef struct Obj25C {
-    /* 0x00 */ u8 unk00[0x2C4];
+    union {
+        /* 0x00 */ u8 unk00[0x2C4];
+        struct {
+            u8 prefix[8];
+            /* 0x08 */ s32 state;
+        } transition;
+        struct {
+            u8 prefix[0x260];
+            /* 0x260 */ u8 cursor[0x64];
+        } selection;
+    };
     /* 0x2C4 */ u32 ids[12];
-    /* 0x2F4 */ u8 unk2F4[0x40];
+    union {
+        /* 0x2F4 */ u8 unk2F4[0x40];
+        struct {
+            u8 prefix[0x38];
+            /* 0x32C */ s32 selected;
+        } selectionIndex;
+    };
     /* 0x334 */ u32 unk334;
     /* 0x338 */ u8 flags[12];
 } Obj25C;
+typedef char Obj25CSelectionOffsetsCheck[offsetof(Obj25C, transition.state) == 8 &&
+    offsetof(Obj25C, selection.cursor) == 0x260 && offsetof(Obj25C, selectionIndex.selected) == 0x32C &&
+    sizeof(Obj25C) == 0x344 ? 1 : -1];
 
 typedef struct Obj25CRef {
     /* 0x00 */ u32 unk00;

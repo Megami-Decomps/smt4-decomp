@@ -24,13 +24,19 @@ typedef struct TitleConfigA {
     /* 0x004 */ u8 closing;
     /* 0x005 */ u8 unk05[0x15];
     /* 0x01A */ s16 countA;
-    /* 0x01C */ u8 unk1C[8];
+    union {
+        /* 0x01C */ u8 unk1C[8];
+        /* 0x01C */ s16 touchRegions[4];
+    };
     /* 0x024 */ s16 countB;
     /* 0x026 */ u8 unk26[0x12E];
     /* 0x154 */ void *dataA;
     /* 0x158 */ void *dataB;
     /* 0x15C */ void *process;
 } TitleConfigA;
+typedef char TitleConfigATouchRegionsOffsetCheck[
+    __INTADDR__(&((TitleConfigA *)0)->touchRegions) == 0x1C &&
+    sizeof(TitleConfigA) == 0x160 ? 1 : -1];
 
 struct TitleConfigCallbackView {
     /* 0x000 */ u32 job;

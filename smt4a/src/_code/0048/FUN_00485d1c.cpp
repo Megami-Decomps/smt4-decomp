@@ -1,102 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00485d1c` (_code @ 0x485d1c, 0x150 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-int FUN_0031879c(...);
-int FUN_00488ce8(...);
-int FUN_00489480(...);
-int FUN_0048981c(...);
-int naviMainSetValuePair(...);
-int setFullScreenRect(...);
-int VectorSignedToFloat(...);
-
-typedef struct fn_00485d1c_arg0 fn_00485d1c_arg0;
-struct fn_00485d1c_arg0 {
-    unsigned char pad_0x0[0xc];
-    byte field_0xc; /* +0xc */
-    unsigned char pad_0xd[0x3];
-    uint field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x4];
-    int field_0x18; /* +0x18 */
-    float field_0x1c; /* +0x1c */
-    float field_0x20; /* +0x20 */
-    float field_0x24; /* +0x24 */
-    float field_0x28; /* +0x28 */
+/* NON_MATCHING: game-state field loads, inactive-branch placement and interpolation VFP scheduling differ. */
+#include "map/NavigationInterpolation.h"
+#include "map/mapDepart.h"
+/* Scene storage follows the end of the shared interpolation prefix. */
+struct NavigationPollingWork {
+    NavigationInterpolation interpolation;
+    u8 unk164[0x368];
+    u8 scene[1];
 };
+typedef char NavigationPollingSceneCheck[offsetof(NavigationPollingWork, scene) == 0x4CC ? 1 : -1];
+extern "C" {
+extern GameStateA g_gameState;
+void FUN_0031879c(void);
+u32 FUN_0048e40c(NavigationPollingWork *work);
+u32 FUN_00488ce8(NavigationPollingWork *work);
+u32 setFullScreenRect(void);
+void naviMainSetValuePair(void *scene, const NavigationPoint *position);
+void FUN_00489480(NavigationPollingWork *work);
+void FUN_0048981c(NavigationPollingWork *work);
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern signed char DAT_005f1614; /* 0x5f1614 */
-extern signed char DAT_005f1a5c; /* 0x5f1a5c */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0031879c. */
-/* Supplied declaration required: FUN_00488ce8. */
-/* Supplied declaration required: FUN_00489480. */
-/* Supplied declaration required: FUN_0048981c. */
-extern int FUN_0048e40c(fn_00485d1c_arg0 *);
-/* Supplied declaration required: naviMainSetValuePair. */
-/* Supplied declaration required: setFullScreenRect. */
-
-
-int FUN_00485d1c(fn_00485d1c_arg0 *param_1)
-
+u32 FUN_00485d1c(NavigationPollingWork *work)
 {
-/* irregular: irregular input(s): in_fpscr; 7 native warning(s); review required */
-  int temp_v0;
-  fn_00485d1c_arg0 *pfVar2;
-  unsigned int in_fpscr;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  
-  pfVar2 = (fn_00485d1c_arg0 *)0x0;
-  if (DAT_005f1a5c != '\0') {
-    DAT_005f1614 = '\0';
-  }
-  FUN_0031879c();
-  if (param_1->field_0xc != 0) {
-    if ((param_1->field_0x10 & 0x1000) == 0) {
-      if ((param_1->field_0x10 & 0x10) != 0) {
-        temp_v0 = param_1->field_0x18 + 1;
-        param_1->field_0x18 = temp_v0;
-        setFullScreenRect();
-        if (((temp_v0 != 0) && (DAT_005f1614 == '\0')) || (temp_v0 = param_1->field_0x18, temp_v0 >= 0x10)
-           ) {
-          param_1->field_0x10 = param_1->field_0x10 & 0xffffffef;
+    u32 result = 0;
+    if (g_gameState.navigation.alternateNaviMap)
+        g_gameState.inputBlocked = 0;
+    FUN_0031879c();
+    NavigationInterpolation &motion = work->interpolation;
+    if (motion.state.active) {
+        if (!(motion.flags & 0x1000)) {
+            if (motion.flags & 0x10) {
+                ++motion.elapsed;
+                if ((setFullScreenRect() && !g_gameState.inputBlocked) || motion.elapsed > 15) {
+                    motion.flags &= ~0x10;
+                } else {
+                    NavigationPoint point;
+                    point.x = (motion.target.x - motion.source.x) * static_cast<f32>(motion.elapsed) * (1.0f / 15.0f) + motion.source.x;
+                    point.y = (motion.target.y - motion.source.y) * static_cast<f32>(motion.elapsed) * (1.0f / 15.0f) + motion.source.y;
+                    naviMainSetValuePair(work->scene, &point);
+                }
+            }
+            FUN_00489480(work);
+            FUN_0048981c(work);
         }
-        else {
-          temp_v2 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v1 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v3 = (param_1->field_0x24 - param_1->field_0x1c) * temp_v1 * 0.06666667f +
-                     param_1->field_0x1c;
-          temp_v4 = (param_1->field_0x28 - param_1->field_0x20) * temp_v2 * 0.06666667f +
-                     param_1->field_0x20;
-          naviMainSetValuePair(&param_1[0x1b].field_0x28,&temp_v3);
-        }
-      }
-      FUN_00489480(param_1);
-      FUN_0048981c(param_1);
+    } else if (FUN_0048e40c(work)) {
+        result = FUN_00488ce8(work);
     }
-  }
-  else {
-    temp_v0 = FUN_0048e40c(param_1);
-    if (temp_v0 != 0) {
-      FUN_00488ce8();
-      pfVar2 = param_1;
-    }
-  }
-  if (DAT_005f1a5c != '\0') {
-    DAT_005f1614 = '\x01';
-  }
-  return (int)pfVar2;
+    if (g_gameState.navigation.alternateNaviMap)
+        g_gameState.inputBlocked = 1;
+    return result;
 }
-
-} /* extern "C" */
+}

@@ -3,6 +3,7 @@
 #define MAP_MAPENEMY_H
 
 #include "common.h"
+#include <stddef.h>
 
 struct AsdMdlObject;
 
@@ -74,6 +75,8 @@ typedef struct MapEnemy {
             u32 task; // 0x00
             u32 state; // 0x04
             u32 elapsed; // 0x08
+            u32 unk0C;
+            u32 unk10;
         } controller;
     };
     /* 0x0034 */ MapEnemyEntry entries[MAP_ENEMY_COUNT];
@@ -82,11 +85,19 @@ typedef struct MapEnemy {
         struct {
             u32 unk3034;
             u32 modelCount; // 0x3038
+            u32 unk303C;
+            u32 unk3040;
         } render;
     };
     /* 0x3044 */ s32 unk3044;
     /* 0x3048 */ u8 unk3048[4];
     /* 0x304c */ MapEnemyExtraModel extraModels[21];
 } MapEnemy;
+typedef char MapEnemyInitializationOffsetCheck[
+    offsetof(MapEnemy, controller.unk0C) == 0x0C &&
+    offsetof(MapEnemy, controller.unk10) == 0x10 &&
+    offsetof(MapEnemy, render.unk303C) == 0x303C &&
+    offsetof(MapEnemy, render.unk3040) == 0x3040 &&
+    sizeof(MapEnemy) == 0x30F4 ? 1 : -1];
 
 #endif

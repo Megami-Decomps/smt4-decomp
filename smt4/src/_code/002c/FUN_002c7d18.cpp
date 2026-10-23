@@ -10,7 +10,7 @@ int FUN_0024f890(...);
 int gfxResolveTimedTextureFrame(unsigned int, double, unsigned char [16]);
 int forwardRecoveredCallback(...);
 int FUN_0028c92c(...);
-int FUN_002a2c7c(...);
+int gfxQuaternionWorkspaceBuildMatrix(...);
 int FUN_002a34e8(...);
 int mathMatrixTranslateLocal(...);
 int FUN_002aff70(...);
@@ -117,7 +117,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Supplied declaration required: gfxResolveTimedTextureFrame. */
 /* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: FUN_0028c92c. */
-/* Supplied declaration required: FUN_002a2c7c. */
+/* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: FUN_002a34e8. */
 /* Supplied declaration required: mathMatrixTranslateLocal. */
 /* Supplied declaration required: FUN_002aff70. */
@@ -238,7 +238,7 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
       DAT_004ea920 = fStack_7c;
       DAT_004ea924 = fStack_78;
       DAT_004ea928 = fStack_74;
-      FUN_002a2c7c();
+      gfxQuaternionWorkspaceBuildMatrix();
       DAT_004ea98c = temp_v20;
       if (0 < temp_v3) {
         pfVar7 = (float *)&DAT_00472550;

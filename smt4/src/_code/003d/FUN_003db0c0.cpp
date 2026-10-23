@@ -1,70 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003db0c0` (_code @ 0x3db0c0, 0x134 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: indexed placement address formation and saved registers differ across the two slot scans. */
+#include "battle/btlMain.h"
+#include "battle/btlAction.h"
+#include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 
 extern "C" {
+BtlMainState *btlGetMainState();
+s32 FUN_0027dab0(BtlMainState *state, BtlActionRecord *action);
+MaterialMergeVariants *FUN_0027da30(BtlMainState *state, s32 member);
+u32 FUN_00337ba0(BtlMainState *state, s16 selection, u16 kind);
+void FUN_00340ad4(BattleSpritePlacement *placement, u32 mask, u32 flags, u32 variant);
+void FUN_00340c90(BattleSpritePlacement *placement);
 
-int FUN_0027da30(int, int);
-int FUN_00340ad4(int, int, int, unsigned int);
-int FUN_00340c90(int);
-
-/* Supplied declaration required: FUN_0027da30. */
-extern int FUN_0027dab0(int, int);
-extern int btlGetMainState(void);
-extern unsigned int FUN_00337ba0(int, int, unsigned short);
-/* Supplied declaration required: FUN_00340ad4. */
-/* Supplied declaration required: FUN_00340c90. */
-
-
-unsigned int FUN_003db0c0(int param_1,int param_2)
-
+u32 FUN_003db0c0(MaterialMergeOwner *owner, BtlActionRecord *action)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  if ((*(unsigned int *)(param_2 + 0x50) & 0x20000) == 0) {
-    temp_v1 = btlGetMainState();
-    temp_v2 = FUN_0027dab0(temp_v1,param_2);
-    if (temp_v2 < 0) {
-      temp_v2 = 0;
+    if (action->status & 0x20000) {
+        return 1;
     }
-    temp_v4 = temp_v1;
-    FUN_0027da30(temp_v1,(int)*(short *)(param_2 + 0x62));
-    temp_v0 = *(unsigned short *)(temp_v4 + 2);
-    temp_v4 = *(int *)(temp_v4 + temp_v2 * 4 + 0xc);
-    temp_v2 = 0;
-    while ((temp_v5 = param_1 + temp_v2 * 0x30, *(int *)(temp_v5 + 0x1398) != temp_v4 ||
-           ((*(unsigned int *)(temp_v5 + 0x13c4) & 1) == 0))) {
-      temp_v2 = temp_v2 + 1;
-      if (temp_v2 >= 0x32) {
-        temp_v2 = 0;
-        do {
-          if (*(int *)(param_1 + temp_v2 * 0x30 + 0x1398) == temp_v4) {
-            param_1 = param_1 + temp_v2 * 0x30;
-            if (*(int *)(param_1 + 0x139c) != 0) {
-              *(int *)(param_1 + 0x13a4) = *(int *)(param_1 + 0x139c);
-              temp_v3 = 0;
-              if (-1 < *(int *)(temp_v1 + 0xc4)) {
-                temp_v3 = FUN_00337ba0(temp_v1,(int)(short)*(int *)(temp_v1 + 0xc4),temp_v0);
-              }
-              FUN_00340ad4(param_1 + 0x13a0,0x20000,0x20000,temp_v3);
-              FUN_00340c90(param_1 + 0x13a0);
-            }
-            *(unsigned int *)(param_1 + 0x13c4) = *(unsigned int *)(param_1 + 0x13c4) | 1;
+    BtlMainState *state = btlGetMainState();
+    s32 variantIndex = FUN_0027dab0(state, action);
+    if (variantIndex < 0) {
+        variantIndex = 0;
+    }
+    MaterialMergeVariants *variants = FUN_0027da30(state, action->memberId);
+    u16 kind = variants->identity.kind;
+    s32 key = variants->keys[variantIndex];
+    for (s32 i = 0; i < 50; ++i) {
+        const MaterialMergePlacement &slot = owner->placements.entries[i];
+        if (slot.key == key && (slot.activation.flags & 1)) {
             return 1;
-          }
-          temp_v2 = temp_v2 + 1;
-        } while (temp_v2 < 0x32);
-        return 0;
-      }
+        }
     }
-  }
-  return 1;
+    for (s32 i = 0; i < 50; ++i) {
+        MaterialMergePlacement &slot = owner->placements.entries[i];
+        if (slot.key == key) {
+            if (slot.resource) {
+                slot.placement.sprite = slot.resource;
+                // The shared state's byte padding starts at an odd address; keep this view local.
+                struct SelectionView { u8 unk000[0xc4]; s32 index; };
+                typedef char SelectionViewOffset[offsetof(SelectionView, index) == 0xc4 ? 1 : -1];
+                s32 selection = reinterpret_cast<SelectionView *>(state)->index;
+                u32 variant = 0;
+                if (selection >= 0) {
+                    variant = FUN_00337ba0(state, (s16)selection, kind);
+                }
+                FUN_00340ad4(&slot.placement, 0x20000, 0x20000, variant);
+                FUN_00340c90(&slot.placement);
+            }
+            slot.activation.flags |= 1;
+            return 1;
+        }
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

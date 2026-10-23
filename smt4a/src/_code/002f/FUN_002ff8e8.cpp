@@ -1,70 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ff8e8` (_code @ 0x2ff8e8, 0x134 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only mode 2 swaps the old-state and current-slot address registers. */
+#include "camp/RenderCtx.h"
 
-extern "C" {
-
-typedef int romwright_code(...);
-extern int g_renderCtx; /* 0x59dbb4 */
-
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-
-
-void FUN_002ff8e8(unsigned int param_1)
-
+static __inline void renderCtxSetBlend(RenderCtxA *context, s32 state)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  
-  temp_v0 = g_renderCtx;
-  switch(param_1) {
-  case 0:
-  case 1:
-    temp_v1 = packNibblesAndByte(6,7,0);
-    piVar4 = (int *)(temp_v0 + 0x12b8);
-    temp_v2 = piVar4[*piVar4 + 2];
-    piVar4[*piVar4 + 2] = temp_v1;
-    if (*(char *)(temp_v0 + 0x12d0) == '\0' && temp_v2 == temp_v1) {
-      return;
-    }
-    break;
-  case 2:
-    temp_v1 = packNibblesAndByte(6,1,0);
-    piVar4 = (int *)(temp_v0 + 0x12b8);
-    temp_v2 = piVar4[*piVar4 + 2];
-    piVar4[*piVar4 + 2] = temp_v1;
-    if (*(char *)(temp_v0 + 0x12d0) == '\0' && temp_v2 == temp_v1) {
-      return;
-    }
-    break;
-  case 3:
-  case 4:
-    temp_v1 = packNibblesAndByte(6,1,2);
-    piVar4 = (int *)(temp_v0 + 0x12b8);
-    temp_v2 = piVar4[*piVar4 + 2];
-    piVar4[*piVar4 + 2] = temp_v1;
-    if (*(char *)(temp_v0 + 0x12d0) == '\0' && temp_v2 == temp_v1) {
-      return;
-    }
-    break;
-  case 5:
-  case 6:
-    temp_v1 = packNibblesAndByte(5,0,1);
-    piVar4 = (int *)(temp_v0 + 0x12b8);
-    temp_v2 = piVar4[*piVar4 + 2];
-    piVar4[*piVar4 + 2] = temp_v1;
-    if (*(char *)(temp_v0 + 0x12d0) == '\0' && temp_v2 == temp_v1) {
-      return;
-    }
-    break;
-  default:
-    return;
-  }
-  (**(romwright_code **)(temp_v0 + 0x12d4))();
-  *(unsigned char *)(temp_v0 + 0x12d0) = 0;
-  return;
+    renderStackSet(&context->stackB, state);
 }
 
-} /* extern "C" */
+extern "C" {
+extern RenderCtxA *g_renderCtx;
+u32 packNibblesAndByte(s32, s32, u32);
+
+/* Select the packed blend-state preset for the requested draw mode. */
+void FUN_002ff8e8(u32 mode)
+{
+    RenderCtxA *context = g_renderCtx;
+    switch (mode) {
+    case 0:
+    case 1:
+        renderCtxSetBlend(context, packNibblesAndByte(6, 7, 0));
+        break;
+    case 2:
+        renderCtxSetBlend(context, packNibblesAndByte(6, 1, 0));
+        break;
+    case 3:
+    case 4:
+        renderCtxSetBlend(context, packNibblesAndByte(6, 1, 2));
+        break;
+    case 5:
+    case 6:
+        renderCtxSetBlend(context, packNibblesAndByte(5, 0, 1));
+        break;
+    }
+}
+}

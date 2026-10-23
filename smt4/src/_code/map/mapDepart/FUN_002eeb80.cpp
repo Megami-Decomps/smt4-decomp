@@ -17,7 +17,7 @@ int FUN_002757a8(void);
 int FUN_0027581c(void);
 int FUN_002758d8(void);
 int FUN_002759bc(void);
-int FUN_00275a30(void);
+int mapDepartSyncModelVisibility(void);
 int FUN_00275bc8(void);
 int FUN_00275be8(int);
 int FUN_00275dc4(void);
@@ -66,7 +66,7 @@ extern int mikadoIsCameraNotState7(void);
 /* Supplied declaration required: FUN_0027581c. */
 /* Supplied declaration required: FUN_002758d8. */
 /* Supplied declaration required: FUN_002759bc. */
-/* Supplied declaration required: FUN_00275a30. */
+/* Supplied declaration required: mapDepartSyncModelVisibility. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00275be8. */
 /* Supplied declaration required: FUN_00275dc4. */
@@ -137,7 +137,7 @@ unsigned int FUN_002eeb80(void)
     if (DAT_0044751c == 0xb) {
       DAT_0049f93e = 1;
       *(unsigned char *)(g_mapDepartWork + 10) = 0;
-      FUN_00275a30();
+      mapDepartSyncModelVisibility();
       frameTexResetFlags();
     }
     if (0x13 >= DAT_0044751c) {
@@ -178,7 +178,7 @@ unsigned int FUN_002eeb80(void)
       FUN_00274fac();
       FUN_00274798();
       *(unsigned char *)(g_mapDepartWork + 10) = 1;
-      FUN_00275a30();
+      mapDepartSyncModelVisibility();
       FUN_0029ae60(*(unsigned int *)(g_lmapScene + 0x194));
       FUN_00273fc0();
       FUN_00273f90();

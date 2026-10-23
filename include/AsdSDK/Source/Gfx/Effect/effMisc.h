@@ -58,14 +58,26 @@ typedef struct EffEmitter {
             /* 0x2C */ EffParticleParam *parameter;
             /* 0x30 */ void *buffer;
         } particle;
+        struct {
+            /* 0x0C */ u16 kind;
+        } resource;
     };
     /* 0x34 */ u16 unk34;          /* 1 in the small variant */
     /* 0x36 */ u8 unk36[2];
-    /* 0x38 */ u8 unk38[0x24];
+    union {
+        /* 0x38 */ u8 unk38[0x24];
+        struct {
+            u8 unk38[0x14];
+            /* 0x4C */ void *data;
+        } resourceUser;
+    };
 } EffEmitter;
 typedef char EffEmitterParticleOffsetsCheck[sizeof(EffEmitter) == 0x5C &&
     offsetof(EffEmitter, particle.parameter) == 0x2C &&
     offsetof(EffEmitter, particle.buffer) == 0x30 ? 1 : -1];
+typedef char EffEmitterResourceOffsetsCheck[
+    offsetof(EffEmitter, resource.kind) == 0xC &&
+    offsetof(EffEmitter, resourceUser.data) == 0x4C && sizeof(EffEmitter) == 0x5C ? 1 : -1];
 
 /* The emitter description a particle count is derived from. */
 typedef struct EffEmitterDesc {

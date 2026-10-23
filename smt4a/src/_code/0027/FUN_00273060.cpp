@@ -67,7 +67,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: FUN_003fe86c. */
-extern int FUN_004bc5a4(unsigned int);
+extern int textureEntryMeetsUnlockRequirements(unsigned int);
 
 
 void FUN_00273060(void)
@@ -326,7 +326,7 @@ void FUN_00273060(void)
           else {
 LAB_00273700:
             if (*(char *)(temp_v3 + 0x1ae) == '\x01') {
-              temp_v6 = FUN_004bc5a4(*(unsigned int *)(temp_v3 + 0xa4));
+              temp_v6 = textureEntryMeetsUnlockRequirements(*(unsigned int *)(temp_v3 + 0xa4));
               if (temp_v6 == 0) {
                 *(unsigned char *)(temp_v3 + 0x1ae) = 0;
               }

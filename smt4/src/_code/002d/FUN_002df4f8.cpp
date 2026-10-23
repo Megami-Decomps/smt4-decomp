@@ -26,7 +26,7 @@ struct CameraRestoreGlobals {
 
 extern "C" {
 extern CameraRestoreGlobals DAT_004474f0;
-void FUN_002adf00(CameraRestoreSnapshot *snapshot, void *object);
+void cameraExportParameters(CameraRestoreSnapshot *snapshot, void *object);
 void FUN_0029c2cc(void *object, u32 value);
 void gfxObjectDestroy(void *object);
 void FUN_00276a3c();
@@ -34,7 +34,7 @@ void FUN_00276a3c();
 void FUN_002df4f8()
 {
     CameraRestoreSnapshot snapshot;
-    FUN_002adf00(&snapshot, DAT_004474f0.state->object);
+    cameraExportParameters(&snapshot, DAT_004474f0.state->object);
     CameraRestoreState *state = DAT_004474f0.state;
     state->currentVectors[0] = snapshot.vectors[0];
     state->currentVectors[1] = snapshot.vectors[1];

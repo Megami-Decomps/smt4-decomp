@@ -1,81 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Party_ConfirmSwap` (_code @ 0x223044, 0x144 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match5_SecondarySort.h"
 
 extern "C" {
+u32 scrGetArg(u32);
+s32 scrGetCommandFrame(void);
+void FUN_0028eeb8(u32);
+void scrWorkSetValue(s32, s32);
+s32 scrWorkGetValue(s32);
+const void *fileSlotGetBuffer(u32);
+void uiBindRecordRewardText(u32, s32, s32);
+void FUN_002bff50(void);
+s32 messageForwardDefaultMode(const void *, s32, s32, s32, s32);
+s32 FUN_0029022c(void);
+u16 FUN_002903f0(void);
+void gameOptionsEnableAndReset(void);
 
-int scrWorkGetValue(int);
-int scrWorkSetValue(...);
-int messageForwardDefaultMode(int, int, unsigned int, int, int);
-int uiBindRecordRewardText(int, int, int);
-int gameOptionsEnableAndReset(void);
-int FUN_0028eeb8(int);
-int dataTable1bOr1cGetRecord(void);
-int FUN_002bff50(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-/* Supplied declaration required: scrWorkGetValue. */
-/* Supplied declaration required: scrWorkSetValue. */
-/* Supplied declaration required: messageForwardDefaultMode. */
-extern int scrGetCommandFrame(void);
-/* Supplied declaration required: uiBindRecordRewardText. */
-/* Supplied declaration required: gameOptionsEnableAndReset. */
-/* Supplied declaration required: FUN_0028eeb8. */
-extern int FUN_0029022c(void);
-extern int FUN_002903f0(void);
-extern unsigned int scrGetArg(unsigned int);
-extern int fileSlotGetBuffer(unsigned int);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-/* Supplied declaration required: FUN_002bff50. */
-
-
-unsigned int scrComm_Party_ConfirmSwap(void)
-
+/* Run the swap confirmation message and reset options when the selected kinds require it. */
+u32 scrComm_Party_ConfirmSwap(void)
 {
-/* irregular: 8 native warning(s); review required */
-  char temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetCommandFrame();
-  if (temp_v2 == 0) {
-    FUN_0028eeb8(temp_v1);
-    scrWorkSetValue(0);
-    scrWorkSetValue(1,0);
-  }
-  temp_v3 = fileSlotGetBuffer(0x1e);
-  temp_v2 = scrWorkGetValue(0);
-  if (temp_v2 == 0) {
-    uiBindRecordRewardText(temp_v1,0,1);
-    FUN_002bff50();
-    temp_v4 = scrWorkGetValue(1);
-    messageForwardDefaultMode(temp_v3,0,temp_v4,6,0);
-    temp_v2 = scrWorkGetValue(1);
-    scrWorkSetValue(1,temp_v2 + 1);
-    if (temp_v3 == 1) {
-      scrWorkSetValue(1,0);
-      temp_v2 = FUN_0029022c();
-      if (temp_v2 != 0) {
-        temp_v2 = FUN_002903f0();
-        dataTable1bOr1cGetRecord();
-        dataTable1bOr1cGetRecord();
-        if ((temp_v2 != 0 && temp_v1 != 0) &&
-           ((temp_v0 = *(char *)(temp_v2 + 6), (temp_v0 != '\x05' && temp_v0 != '\x04') && temp_v0 != '\x01'
-            || (*(char *)(temp_v1 + 6) != '\0')))) {
-          gameOptionsEnableAndReset();
-        }
-      }
-      return 1;
+    u16 id = scrGetArg(0);
+    if (scrGetCommandFrame() == 0) {
+        FUN_0028eeb8(id);
+        scrWorkSetValue(0, 0);
+        scrWorkSetValue(1, 0);
     }
-  }
-  return 0;
+    const void *messages = fileSlotGetBuffer(0x1E);
+    if (scrWorkGetValue(0) == 0) {
+        uiBindRecordRewardText(id, 0, 1);
+        FUN_002bff50();
+        s32 result = messageForwardDefaultMode(messages, 0, scrWorkGetValue(1), 6, 0);
+        scrWorkSetValue(1, scrWorkGetValue(1) + 1);
+        if (result == 1) {
+            scrWorkSetValue(1, 0);
+            if (FUN_0029022c()) {
+                const SecondarySortRecord *previous = dataTable1bOr1cGetRecord(FUN_002903f0());
+                const SecondarySortRecord *selected = dataTable1bOr1cGetRecord(id);
+                if (previous != NULL && selected != NULL &&
+                    ((previous->classification.kind != 5 && previous->classification.kind != 4 &&
+                      previous->classification.kind != 1) || selected->classification.kind != 0)) {
+                    gameOptionsEnableAndReset();
+                }
+            }
+            return 1;
+        }
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

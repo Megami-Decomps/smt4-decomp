@@ -1,142 +1,110 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ea69c` (_code @ 0x3ea69c, 0x1e8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stats snapshot reloads versus cached HP/MP, packed-entry masks/live registers and initial byte-flag zero stores differ. */
+#include "battle/btlUnit.h"
+#include "shard/PadState.h"
+#include "gamedata/UnitStats.h"
+#include <string.h>
 
 extern "C" {
+void clearTwoWords(void *);
+void rt_memclr(void *, u32);
+void sysMemClear(void *, u32);
+u16 playerPackedEntryLow10(u32);
+s16 playerPackedEntryHigh(u32);
+s32 playerAlignmentClass();
 
-int sysMemClear(unsigned char *, int);
-int rt_memclr(unsigned char *, int);
-int clearTwoWords(unsigned char *);
-
-typedef struct fn_003ea69c_arg2 fn_003ea69c_arg2;
-struct fn_003ea69c_arg2 {
-    unsigned char pad_0x0[0x1c];
-    short field_0x1c; /* +0x1c */
-    short field_0x1e; /* +0x1e */
-    ushort field_0x20; /* +0x20 */
-    ushort field_0x22; /* +0x22 */
-    ushort field_0x24; /* +0x24 */
-    ushort field_0x26; /* +0x26 */
-    ushort field_0x28; /* +0x28 */
-    short field_0x2a; /* +0x2a */
-    short field_0x2c; /* +0x2c */
-    unsigned char pad_0x2e[0x6];
-    undefined4 field_0x34; /* +0x34 */
-    undefined4 field_0x38; /* +0x38 */
-    undefined4 field_0x3c; /* +0x3c */
-    undefined4 field_0x40; /* +0x40 */
-    unsigned char pad_0x44[0x1a];
-    ushort field_0x5e; /* +0x5e */
-    unsigned char pad_0x60[0x2];
-    ushort field_0x62; /* +0x62 */
-};
-
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: rt_memclr. */
-extern unsigned short playerPackedEntryLow10(unsigned int);
-extern int playerAlignmentClass(void);
-extern short playerPackedEntryHigh(unsigned int);
-/* Supplied declaration required: clearTwoWords. */
-
-
-void FUN_003ea69c(unsigned int param_1,unsigned char *param_2,fn_003ea69c_arg2 *param_3)
-
+void FUN_003ea69c(u32, BtlUnitDataA *unit, const PadState *player)
 {
-/* irregular: 3 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  unsigned short temp_v3;
-  short temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  
-  *param_2 = 1;
-  *(unsigned short *)(param_2 + 8) = 0xffff;
-  *(unsigned short *)(param_2 + 2) = 0;
-  *(unsigned short *)(param_2 + 4) = 0xffff;
-  *(unsigned short *)(param_2 + 6) = 0xffff;
-  param_2[0xd4] = 0;
-  param_2[0xd5] = 0;
-  param_2[0xd6] = 0;
-  param_2[0xd7] = 0;
-  temp_v4 = param_3->field_0x2a;
-  *(int *)(param_2 + 0xd8) = (int)temp_v4;
-  temp_v0 = param_3->field_0x1c;
-  *(int *)(param_2 + 0xdc) = (int)temp_v0;
-  temp_v1 = param_3->field_0x2c;
-  *(int *)(param_2 + 0xe0) = (int)temp_v1;
-  temp_v2 = param_3->field_0x1e;
-  *(int *)(param_2 + 0xe4) = (int)temp_v2;
-  *(unsigned short *)(param_2 + 0xe8) = param_3->field_0x20;
-  *(unsigned short *)(param_2 + 0xea) = param_3->field_0x22;
-  *(unsigned short *)(param_2 + 0xec) = param_3->field_0x24;
-  *(unsigned short *)(param_2 + 0xee) = param_3->field_0x26;
-  *(unsigned short *)(param_2 + 0xf0) = param_3->field_0x28;
-  *(int *)(param_2 + 0xf4) = (int)temp_v4;
-  *(int *)(param_2 + 0xf8) = (int)temp_v0;
-  *(int *)(param_2 + 0xfc) = (int)temp_v1;
-  *(int *)(param_2 + 0x100) = (int)temp_v2;
-  *(unsigned int *)(param_2 + 0x104) = *(unsigned int *)(param_2 + 0xe8);
-  *(unsigned int *)(param_2 + 0x108) = *(unsigned int *)(param_2 + 0xec);
-  *(unsigned int *)(param_2 + 0x10c) = *(unsigned int *)(param_2 + 0xf0);
-  *(unsigned short *)(param_2 + 0x110) = param_3->field_0x5e;
-  *(unsigned short *)(param_2 + 0x112) = 0;
-  *(unsigned short *)(param_2 + 0x114) = 0;
-  *(unsigned short *)(param_2 + 0x116) = param_3->field_0x62;
-  *(unsigned int *)(param_2 + 0x228) = 0;
-  clearTwoWords(param_2 + 0x1be);
-  clearTwoWords(param_2 + 0x1c6);
-  clearTwoWords(param_2 + 0x1ce);
-  rt_memclr(param_2 + 0x1d6,0x50);
-  temp_v9 = 0;
-  do {
-    temp_v3 = playerPackedEntryLow10(temp_v9 & 0xff);
-    *(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) =
-         (temp_v3 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) & 0xfc00);
-    temp_v4 = playerPackedEntryHigh(temp_v9 & 0xff);
-    *(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) =
-         (temp_v4 << 10) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) & 0x3ff);
-    temp_v3 = playerPackedEntryLow10(temp_v9 & 0xff);
-    *(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) =
-         (temp_v3 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) & 0xfc00);
-    temp_v4 = playerPackedEntryHigh(temp_v9 & 0xff);
-    *(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) =
-         (temp_v4 << 10) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) & 0x3ff);
-    temp_v10 = temp_v9 + 1;
-    param_2[temp_v9 + 0x1a6] = (unsigned char)temp_v4 & 0x3f;
-    temp_v9 = temp_v10;
-  } while ((int)temp_v10 < 0x15);
-  param_2[0x1bb] = 100;
-  temp_v5 = playerAlignmentClass();
-  if (temp_v5 == 1) {
-    param_2[0x1bc] = 1;
-  }
-  else if (temp_v5 == 4) {
-    param_2[0x1bc] = 0;
-  }
-  else if (temp_v5 == 5) {
-    param_2[0x1bc] = 2;
-  }
-  temp_v6 = param_3->field_0x38;
-  temp_v7 = param_3->field_0x3c;
-  temp_v8 = param_3->field_0x40;
-  *(unsigned int *)(param_2 + 0x118) = param_3->field_0x34;
-  *(unsigned int *)(param_2 + 0x11c) = temp_v6;
-  *(unsigned int *)(param_2 + 0x120) = temp_v7;
-  *(unsigned int *)(param_2 + 0x124) = temp_v8;
-  sysMemClear(param_2 + 0x17c,0x15);
-  *(unsigned int *)(param_2 + 0x191) = 0;
-  *(unsigned int *)(param_2 + 0x195) = 0;
-  *(unsigned int *)(param_2 + 0x199) = 0;
-  *(unsigned int *)(param_2 + 0x19d) = 0;
-  *(unsigned int *)(param_2 + 0x1a1) = 0;
-  param_2[0x1a5] = 0;
-  return;
+    // Four-word skill views would enlarge the shared 0x3a-byte union region.
+    struct Values {
+        s32 hp, maxHp, mp, maxMp;
+        u16 attributes[5];
+        u16 reserved;
+    };
+    struct SnapshotView {
+        u8 initialized, reserved01;
+        u16 header[4];
+        u8 unk00a[0xca];
+        u8 changes[4];
+        Values current, original;
+        u16 flags, counterA, counterB, sourceKind;
+        UnitSummarySkills skills;
+        u16 packed[21], originalPacked[21];
+        u8 flagsBySlot[21], changedBySlot[21], levels[21];
+        u8 percentage, alignment, reserved1bd;
+        u8 groups[3][8];
+        u8 scratch[0x50];
+        u8 reserved226[2];
+        u32 pending;
+    };
+    struct SourceView {
+        u8 unk00[0x1c];
+        s16 maxHp, maxMp;
+        u16 attributes[5];
+        s16 hp, mp;
+        u8 unk2e[6];
+        UnitSummarySkills skills;
+        u8 unk44[0x1a];
+        u16 flags;
+        u8 unk60[2];
+        u16 kind;
+    };
+    typedef char SnapshotOffsets[
+        sizeof(SnapshotView) == sizeof(BtlUnitDataA) &&
+        offsetof(SnapshotView, current) == 0xd8 &&
+        offsetof(SnapshotView, original) == 0xf4 &&
+        offsetof(SnapshotView, skills) == 0x118 &&
+        offsetof(SnapshotView, packed) == 0x128 &&
+        offsetof(SnapshotView, changedBySlot) == 0x191 &&
+        offsetof(SnapshotView, groups) == 0x1be &&
+        offsetof(SnapshotView, scratch) == 0x1d6 &&
+        offsetof(SnapshotView, pending) == 0x228 &&
+        offsetof(SourceView, skills) == 0x34 &&
+        offsetof(SourceView, flags) == 0x5e ? 1 : -1];
+    SnapshotView *snapshot = reinterpret_cast<SnapshotView *>(unit);
+    const SourceView *source = reinterpret_cast<const SourceView *>(player);
+    snapshot->initialized = 1;
+    snapshot->header[3] = 0xffff;
+    snapshot->header[0] = 0;
+    snapshot->header[1] = 0xffff;
+    snapshot->header[2] = 0xffff;
+    memset(snapshot->changes, 0, sizeof(snapshot->changes));
+    snapshot->current.hp = source->hp;
+    snapshot->current.maxHp = source->maxHp;
+    snapshot->current.mp = source->mp;
+    snapshot->current.maxMp = source->maxMp;
+    for (s32 index = 0; index < 5; ++index)
+        snapshot->current.attributes[index] = source->attributes[index];
+    snapshot->original = snapshot->current;
+    snapshot->flags = source->flags;
+    snapshot->counterA = 0;
+    snapshot->counterB = 0;
+    snapshot->sourceKind = source->kind;
+    snapshot->pending = 0;
+    clearTwoWords(snapshot->groups[0]);
+    clearTwoWords(snapshot->groups[1]);
+    clearTwoWords(snapshot->groups[2]);
+    rt_memclr(snapshot->scratch, sizeof(snapshot->scratch));
+    for (s32 index = 0; index < 21; ++index) {
+        u8 entry = index;
+        snapshot->packed[index] = (snapshot->packed[index] & 0xfc00) |
+            (playerPackedEntryLow10(entry) & 0x3ff);
+        snapshot->packed[index] = (snapshot->packed[index] & 0x3ff) |
+            (static_cast<u16>(playerPackedEntryHigh(entry)) << 10);
+        snapshot->originalPacked[index] = (snapshot->originalPacked[index] & 0xfc00) |
+            (playerPackedEntryLow10(entry) & 0x3ff);
+        s16 level = playerPackedEntryHigh(entry);
+        snapshot->originalPacked[index] = (snapshot->originalPacked[index] & 0x3ff) |
+            (static_cast<u16>(level) << 10);
+        snapshot->levels[index] = level & 0x3f;
+    }
+    snapshot->percentage = 100;
+    switch (playerAlignmentClass()) {
+    case 1: snapshot->alignment = 1; break;
+    case 4: snapshot->alignment = 0; break;
+    case 5: snapshot->alignment = 2; break;
+    }
+    snapshot->skills = source->skills;
+    sysMemClear(snapshot->flagsBySlot, sizeof(snapshot->flagsBySlot));
+    memset(snapshot->changedBySlot, 0, sizeof(snapshot->changedBySlot));
 }
-
-} /* extern "C" */
+}

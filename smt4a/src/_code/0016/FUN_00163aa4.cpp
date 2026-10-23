@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001807a0(int);
-int FUN_00181948(int);
+void FUN_001807a0(int, float);
+void FUN_00181948(int, float);
 int FUN_00182348(int);
 int uiSpriteSetKeyframe(int, int, int);
 int VectorFloatToUnsigned(double, int);
@@ -163,9 +163,9 @@ int FUN_00163aa4(int param_1)
   else {
     *(unsigned char *)(param_1 + 0x86) = 1;
   }
-  FUN_001807a0(param_1);
+  FUN_001807a0(param_1,in_s0);
   FUN_00182348(param_1);
-  FUN_00181948(param_1);
+  FUN_00181948(param_1,in_s0);
   temp_v5 = *(char *)(param_1 + 0x86) != '\0';
   temp_v1 = '\0';
   if (temp_v5) {

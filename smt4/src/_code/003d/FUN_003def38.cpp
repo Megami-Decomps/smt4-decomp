@@ -1,91 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003def38` (_code @ 0x3def38, 0x170 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: reciprocal limb-multiply scheduling, lookup branch placement and spill layout differ; candidate -O2. */
+#include "shard/W6_W6Match8_ArchiveValues.h"
+#include "shard/W6_W6Match8_DateTimeValue.h"
 
-extern "C" {
-
-int nn_fnd_DateTime_DateTime_sub_object(unsigned int *, int, int, int, int, int, int, int);
-
-/* stack frame of param_2: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_2_stack;
-
-extern unsigned char LAB_003df0a8; /* 0x3df0a8 */
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-#ifndef ROMWRIGHT_CARRY_4_DEFINED
-#define ROMWRIGHT_CARRY_4_DEFINED
-#define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
-#endif
-extern unsigned long long libc_strtoll(unsigned int, unsigned int, unsigned int);
-extern int libc_strncmp(unsigned int, unsigned char *, unsigned int);
-/* Supplied declaration required: nn_fnd_DateTime_DateTime_sub_object. */
-
-
-void FUN_003def38(int *param_1,int *param_2)
-
+// High 64 bits of a signed 128-bit product, formed from 32-bit limbs.
+static inline s64 multiplyHighSigned(s64 first, s64 second)
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  unsigned long long temp_v0;
-  long long temp_v1;
-  long long temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int *puVar6;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned long long temp_v11;
-  unsigned int temp_v12 [3];
-  
-  temp_v7 = 0;
-  temp_v6 = *param_2;
-  temp_v8 = *(unsigned int *)(temp_v6 + 0x1c);
-  if (temp_v8 != 0) {
-    do {
-      temp_v3 = libc_strncmp(*(unsigned int *)(*(int *)(temp_v6 + 0x18) + temp_v7 * 8),&LAB_003df0a8,0x40);
-      if (temp_v3 == 0) {
-        temp_v4 = *(unsigned int *)(*(int *)(temp_v6 + 0x18) + temp_v7 * 8 + 4);
-        goto LAB_003def90;
-      }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < temp_v8);
-  }
-  temp_v4 = 0;
-LAB_003def90:
-  temp_v11 = libc_strtoll(temp_v4,0,10);
-  puVar6 = temp_v12;
-  nn_fnd_DateTime_DateTime_sub_object(puVar6,0x7b2,1,1,0,0,0,0);
-  temp_v0 = (temp_v11 & 0xffffffff) * 1000000;
-  temp_v9 = (int)(temp_v11 >> 0x20) * 1000000 + (int)(temp_v0 >> 0x20);
-  temp_v5 = *puVar6;
-  temp_v6 = (int)temp_v9 >> 0x1f;
-  temp_v2 = (unsigned long long)temp_v9 * 0xd7b634db +
-          romwright_piece_4_4(temp_v6 * -0x2849cb25,(int)((temp_v0 & 0xffffffff) * 0xd7b634db >> 0x20));
-  temp_v1 = (temp_v0 & 0xffffffff) * 0x431bde82;
-  temp_v8 = (unsigned int)((unsigned long long)temp_v2 >> 0x20);
-  temp_v10 = (unsigned int)((unsigned long long)temp_v9 * 0x431bde82);
-  temp_v7 = (int)((unsigned long long)temp_v1 >> 0x20) + (unsigned int)romwright_carry_4((unsigned int)temp_v2,(unsigned int)temp_v1);
-  temp_v3 = temp_v6 * 0x431bde82 + (int)((unsigned long long)temp_v9 * 0x431bde82 >> 0x20) +
-          ((int)temp_v7 >> 0x1f) + ((int)temp_v8 >> 0x1f) + (unsigned int)romwright_carry_4(temp_v7,temp_v8) +
-          (unsigned int)romwright_carry_4(temp_v10,temp_v7 + temp_v8);
-  temp_v7 = ((temp_v10 + temp_v7 + temp_v8) >> 0x12) | (temp_v3 * 0x4000);
-  temp_v8 = -temp_v6 + temp_v7;
-  param_1[1] = (temp_v3 >> 0x12) + (unsigned int)romwright_carry_4(-temp_v6,temp_v7) + puVar6[1] + (unsigned int)romwright_carry_4(temp_v8,temp_v5)
-  ;
-  *param_1 = temp_v8 + temp_v5;
-  return;
+    u32 firstLow = (u32)first;
+    s64 firstHigh = first >> 32;
+    u32 secondLow = (u32)second;
+    s64 secondHigh = second >> 32;
+    s64 lowerCross = (s64)(((u64)firstLow * secondLow) >> 32) +
+                     firstHigh * secondLow;
+    s64 upperCross = (s64)firstLow * secondHigh + (u32)lowerCross;
+    return firstHigh * secondHigh + (lowerCross >> 32) + (upperCross >> 32);
 }
 
-} /* extern "C" */
+extern "C" {
+s32 libc_strncmp(const char *first, const char *second, u32 length);
+s64 libc_strtoll(const char *text, char **end, s32 base);
+DateTimeValue *nn_fnd_DateTime_DateTime_sub_object(DateTimeValue *value,
+    s32 year, s32 month, s32 day, s32 hour, s32 minute, s32 second, s32 millisecond);
+
+// Interpret NewSince relative to the Unix epoch, preserving the SDK's nanosecond-timespan conversion.
+void FUN_003def38(DateTimeValue *output, const Archive *source)
+{
+    const ArchiveAttributeTable *table = source->table;
+    u32 count = table->count;
+    const char *text = 0;
+    for (u32 index = 0; index < count; ++index) {
+        if (libc_strncmp((const char *)table->entries[index].name, "NewSince", 64) == 0) {
+            text = (const char *)table->entries[index].value;
+            break;
+        }
+    }
+    s64 milliseconds = libc_strtoll(text, 0, 10);
+    DateTimeValue epoch;
+    DateTimeValue *base = nn_fnd_DateTime_DateTime_sub_object(&epoch, 1970, 1, 1, 0, 0, 0, 0);
+    s64 nanoseconds = (s64)((u64)milliseconds * 1000000ULL);
+    // Reciprocal multiplication implements the SDK's truncating division by 1,000,000.
+    s64 span = (multiplyHighSigned(nanoseconds, 0x431bde82d7b634dbLL) >> 18) +
+               (s64)((u64)nanoseconds >> 63);
+    output->milliseconds = (s64)((u64)base->milliseconds + (u64)span);
+}
+}

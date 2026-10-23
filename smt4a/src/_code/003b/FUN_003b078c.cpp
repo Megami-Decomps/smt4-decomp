@@ -1,73 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b078c` (_code @ 0x3b078c, 0x194 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: data-table and qsort argument scheduling differs; large-record section registers swap. */
+#include "gamedata/DataTable.h"
+#include <stdlib.h>
 
 extern "C" {
-
-int qsort(unsigned int, unsigned int, int, unsigned char *);
-int arraySortQsort(...);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern unsigned char LAB_0029092c; /* 0x29092c */
-extern unsigned char LAB_002b2d30; /* 0x2b2d30 */
-extern unsigned char LAB_003370ec; /* 0x3370ec */
-extern unsigned char LAB_003372a8; /* 0x3372a8 */
-extern unsigned char LAB_0034f3a4; /* 0x34f3a4 */
-extern unsigned char LAB_00360378; /* 0x360378 */
-extern unsigned char LAB_00360390; /* 0x360390 */
-extern unsigned char LAB_0038e798; /* 0x38e798 */
-
-/* Supplied declaration required: qsort. */
-extern int *dataTableValueOrZero(unsigned int);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-/* Supplied declaration required: arraySortQsort. */
-
-
-void FUN_003b078c(void)
-
-{
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int *piVar3;
-  
-  temp_v0 = dataTableGet(5,1);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  qsort(temp_v1,temp_v0,4,&LAB_003370ec);
-  temp_v0 = dataTableGet(5,2);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  qsort(temp_v1,temp_v0,4,&LAB_0038e798);
-  temp_v0 = dataTableGet(5,3);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  qsort(temp_v1,temp_v0,4,&LAB_003372a8);
-  temp_v0 = dataTableGet(5,4);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  qsort(temp_v1,temp_v0,0x1c,&LAB_002b2d30);
-  temp_v0 = dataTableGet(5,7);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  qsort(temp_v1,temp_v0,4,&LAB_00360378);
-  temp_v0 = dataTableGet(5,8);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  qsort(temp_v1,temp_v0,0x14,&LAB_00360390);
-  temp_v0 = dataTableGet(6,1);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  qsort(temp_v1,temp_v0,4,&LAB_0034f3a4);
-  piVar3 = (int *)dataTableValueOrZero(0x1f);
-  arraySortQsort(piVar3 + 1,(*piVar3 - 4U) >> 3,8,&LAB_0029092c);
-  return;
+s32 uiCompareBytePriorityAndKey(const void *, const void *);
+s32 uiCompareBytePriorityThenKey(const void *, const void *);
+s32 packedKeyCompare(const void *, const void *);
+s32 contentCompareEntryId(const void *, const void *);
+s32 tableCompareWordByteKeys(const void *, const void *);
+s32 uiCompareHalfwordValues(const void *, const void *);
+s32 uiCompareHalfwordKeys(const void *, const void *);
+s32 intKeyCompare(const void *, const void *);
+u32 *dataTableValueOrZero(u32 table);
+void arraySortQsort(void *entries, u32 count, u32 stride, s32 (*compare)(const void *, const void *));
 }
 
-} /* extern "C" */
+template <typename Record>
+static __inline void sortTableSection(s32 table, s32 section,
+                                     s32 (*compare)(const void *, const void *))
+{
+    DataTableView<Record> records(table, section);
+    qsort(records.entries, records.count, sizeof(Record), compare);
+}
+
+// Sort lookup sections by their record keys before consumers perform binary searches.
+extern "C" void FUN_003b078c(void)
+{
+    sortTableSection<u32>(5, 1, uiCompareBytePriorityAndKey);
+    sortTableSection<u32>(5, 2, uiCompareBytePriorityThenKey);
+    sortTableSection<u32>(5, 3, packedKeyCompare);
+    sortTableSection<u32[7]>(5, 4, contentCompareEntryId);
+    sortTableSection<u32>(5, 7, tableCompareWordByteKeys);
+    sortTableSection<u32[5]>(5, 8, uiCompareHalfwordValues);
+    sortTableSection<u32>(6, 1, uiCompareHalfwordKeys);
+    u32 *table = dataTableValueOrZero(0x1f);
+    arraySortQsort(table + 1, (table[0] - 4) >> 3, 8, intKeyCompare);
+}

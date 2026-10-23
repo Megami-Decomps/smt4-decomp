@@ -1,75 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022f9c8` (_code @ 0x22f9c8, 0x1a4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: selected-option cold block placement, pulse multiply association and centered-text address scheduling differ. */
+#include "shard/W5_W5Match2_UniteWork.h"
+#include "shard/S1ListPanel.h"
 
 extern "C" {
+void efctSetSpeed(f32 speed);
+void FUN_00164b5c(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
+void FUN_001835b4(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
+const char *dataTableGetEntry24Member(u32 id);
+const SpriteInfo *FUN_001834a4(u32 table, u32 frame);
+s32 FUN_0018408c(const char *text, u32 screen);
+void FUN_00162790(u32 screen, u32 color, const char *text,
+    f32 x, f32 y, f32 size, f32 angle, f32 opacity);
 
-int FUN_00162790(...);
-int FUN_00164b5c(...);
-int efctSetSpeed(void);
-int FUN_001835b4(...);
-int FUN_0018408c(...);
-int VectorSignedToFloat(...);
-
-/* stack frame of param_6: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_6_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0018408c. */
-extern int dataTableGetEntry24Member(unsigned int);
-
-
-void FUN_0022f9c8(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6)
-
+void FUN_0022f9c8(UniteWork *work, s32 index, s32 x, s32 y, s32 selected, s32 active,
+    f32 opacity, f32 fade)
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int in_fpscr;
-  
-  efctSetSpeed();
-  if (param_5 != 0) {
-    FUN_00164b5c(2,0x1a,0xb,param_3,param_4,0x65);
-    temp_v3 = 0xff;
-    efctSetSpeed();
-    if (param_6 != 0) {
-      FUN_001835b4(2,0x1a,0xa0,param_3,param_4,0x6f);
+    efctSetSpeed(fade);
+    u32 color;
+    if (selected) {
+        FUN_00164b5c(2, 26, 11, x, y, 101);
+        color = 255;
+        efctSetSpeed(0.5f + (work->optionPulse.amount * 0.5f) * fade);
+        if (active)
+            FUN_001835b4(2, 26, 160, x, y, 111);
+        else
+            FUN_001835b4(2, 26, 156, x, y, 111);
+    } else if (active) {
+        FUN_00164b5c(2, 26, 10, x, y, 101);
+        color = 0xFFFFFFFF;
+        FUN_001835b4(2, 26, 160, x, y, 111);
+    } else {
+        FUN_00164b5c(2, 26, 9, x, y, 101);
+        color = 0xFFFFFFFF;
+        FUN_001835b4(2, 26, 156, x, y, 111);
     }
-    else {
-      FUN_001835b4(2,0x1a,0x9c,param_3,param_4,0x6f);
-    }
-  }
-  else if (param_6 != 0) {
-    FUN_00164b5c(2,0x1a,10,param_3,param_4,0x65);
-    temp_v3 = 0xffffffff;
-    FUN_001835b4(2,0x1a,0xa0,param_3,param_4,0x6f);
-  }
-  else {
-    FUN_00164b5c(2,0x1a,9,param_3,param_4,0x65);
-    temp_v3 = 0xffffffff;
-    FUN_001835b4(2,0x1a,0x9c,param_3,param_4,0x6f);
-  }
-  efctSetSpeed();
-  temp_v0 = dataTableGetEntry24Member(*(unsigned int *)(param_1 + param_2 * 4 + 0x927c));
-  temp_v1 = FUN_001834a4(0x1a,0xa4);
-  temp_v2 = temp_v0;
-  FUN_0018408c(temp_v0,2);
-  VectorSignedToFloat((int)*(short *)(temp_v1 + 8) + (**(short **)(temp_v1 + 0xc) - temp_v2) / 2 + param_3
-                      ,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(2,temp_v3,temp_v0);
-  return;
+    opacity *= fade;
+    efctSetSpeed(opacity);
+    const char *name = dataTableGetEntry24Member(work->optionNamesA.ids[index]);
+    const SpriteInfo *anchor = FUN_001834a4(26, 164);
+    s32 width = FUN_0018408c(name, 2);
+    FUN_00162790(2, color, name, (f32)(anchor->x + (anchor->size[0] - width) / 2 + x),
+        (f32)(anchor->y + y), 0.55f, 0.0f, opacity);
 }
-
-} /* extern "C" */
+}

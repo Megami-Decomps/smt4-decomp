@@ -1,108 +1,86 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002efba0` (_code @ 0x2efba0, 0x180 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: settings-copy destination uses r2 followed by an extra mov r0,r2. */
+#include "gamedata/SaveLoadProcessState.h"
+#include "shard/GameDataBlocks.h"
+#include "AsdSDK/AsdDebug.h"
+
+struct SaveFilePayloadIV {
+    u32 table[32];
+    u32 settings[2];
+    u32 save[0x24d28 / 4];
+};
+struct SaveWriteBodyPrefix {
+    u16 version;
+    u8 mode;
+    u8 slot;
+};
+typedef char SaveWriterPayloadLayoutCheck[
+    sizeof(SaveFilePayloadIV) == 0x24DB0 && offsetof(SaveFilePayloadIV, save) == 0x88 &&
+    offsetof(SaveWriteBodyPrefix, mode) == 2 && sizeof(SaveWriteBodyPrefix) == 4 ? 1 : -1];
 
 extern "C" {
-
-int FUN_001a1d08(void);
-int FUN_00247af8(int, int, unsigned int, unsigned int, unsigned int);
-int FUN_0026b4cc(void);
-int FUN_002ad8b4(int, unsigned int);
-int gameDataBlocksGetSaveData(void);
-int asdMemFree(unsigned int);
-int asdMemAlloc(int, int, int, unsigned int, int);
+SaveLoadProcessWork24 *jobGetWork(void);
+s32 FUN_001a1d08(void);
+s32 FUN_002cedbc(void);
+void asdMemFree(void *memory);
+void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void titleConfigStoreOptions(void);
-int rt_memcpy(unsigned int, unsigned int, int);
-int rt_memcpy_w(unsigned short *, unsigned int, int);
+GameSaveData *gameDataBlocksGetSaveData(void);
+const void *gameDataBlocksGetTable(void);
+const void *configGetSettings(void);
+void rt_memcpy(void *destination, const void *source, u32 size);
+void rt_memcpy_w(void *destination, const void *source, u32 size);
+void FUN_002ad8b4(void *destination, const void *settings);
+void FUN_0026b4cc(void);
+void FUN_00247af8(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
+extern SaveByteSettings g_byteSettings;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned char DAT_0043e2f1; /* 0x43e2f1 */
-extern unsigned char DAT_0043e2f4; /* 0x43e2f4 */
-
-/* Supplied declaration required: FUN_001a1d08. */
-/* Supplied declaration required: FUN_00247af8. */
-/* Supplied declaration required: FUN_0026b4cc. */
-extern unsigned int configGetSettings(void);
-extern unsigned int gameDataBlocksGetTable(void);
-/* Supplied declaration required: FUN_002ad8b4. */
-extern int jobGetWork(void);
-/* Supplied declaration required: gameDataBlocksGetSaveData. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdMemAlloc. */
-extern int FUN_002cedbc(void);
-/* Supplied declaration required: rt_memcpy. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int FUN_002efba0(void)
-
+// Build a complete save image, submit it, and publish the asynchronous write result.
+u32 FUN_002efba0(void)
 {
-/* irregular: 10 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned short *puVar4;
-  
-  temp_v0 = jobGetWork();
-  temp_v2 = *(int *)(temp_v0 + 4);
-  if (temp_v2 != 0) {
-    if (temp_v2 != 1) {
-      if (temp_v2 == 2) {
-        DAT_0043e2f4 = 1;
-      }
-      else {
-        if (temp_v2 != 3) {
-          return 0;
+    SaveLoadProcessWork24 *work = jobGetWork();
+    switch (work->state) {
+    case 0: {
+        work->bufferSize = sizeof(SaveFilePayloadIV);
+        asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\gamedata\\SaveLoadProcess.cpp", 124);
+        work->buffer = asdMemAlloc(0x100, 0x100, 0, work->bufferSize, 1);
+        titleConfigStoreOptions();
+        gameDataBlocksGetSaveData()->metadata.option = work->option;
+        rt_memcpy(work->buffer, gameDataBlocksGetTable(), 0x80);
+        const void *settings = configGetSettings();
+        FUN_002ad8b4(((SaveFilePayloadIV *)work->buffer)->settings, settings);
+        SaveWriteBodyPrefix *body = (SaveWriteBodyPrefix *)((SaveFilePayloadIV *)work->buffer)->save;
+        rt_memcpy_w(body, gameDataBlocksGetSaveData(), 0x24D28);
+        body->version = 3;
+        body->mode = *(const u8 *)&work->unk14;
+        FUN_0026b4cc();
+        FUN_00247af8(2, 0, work->option, work->buffer, work->bufferSize);
+        work->state = 1;
+        break;
+    }
+    case 1:
+        if (FUN_001a1d08() == 1) {
+            if (FUN_002cedbc()) {
+                asdMemFree(work->buffer);
+                work->state = 3;
+                work->buffer = 0;
+            } else {
+                asdMemFree(work->buffer);
+                work->state = 2;
+                work->buffer = 0;
+            }
         }
-        DAT_0043e2f4 = 0;
-      }
-      DAT_0043e2f1 = 1;
-      return 0xffffffff;
+        break;
+    case 2:
+        g_byteSettings.first = 1;
+        g_byteSettings.fourth = 1;
+        return 0xFFFFFFFF;
+    case 3:
+        g_byteSettings.first = 1;
+        g_byteSettings.fourth = 0;
+        return 0xFFFFFFFF;
+    default:
+        break;
     }
-    temp_v2 = temp_v0;
-    FUN_001a1d08();
-    if (temp_v2 == 1) {
-      temp_v2 = FUN_002cedbc();
-      if (temp_v2 != 0) {
-        asdMemFree(*(unsigned int *)(temp_v0 + 8));
-        *(unsigned int *)(temp_v0 + 4) = 3;
-        *(unsigned int *)(temp_v0 + 8) = 0;
-      }
-      else {
-        asdMemFree(*(unsigned int *)(temp_v0 + 8));
-        *(unsigned int *)(temp_v0 + 4) = 2;
-        *(unsigned int *)(temp_v0 + 8) = 0;
-      }
-    }
-  }
-  else {
-    *(unsigned int *)(temp_v0 + 0xc) = 0x24db0;
-    temp_v1 = 0x100;
-    asdMemAlloc(0x100,0x100,0,*(unsigned int *)(temp_v0 + 0xc),1);
-    *(unsigned int *)(temp_v0 + 8) = temp_v1;
-    titleConfigStoreOptions();
-    temp_v2 = gameDataBlocksGetSaveData();
-    *(char *)(temp_v2 + 3) = (char)*(unsigned int *)(temp_v0 + 0x10);
-    temp_v1 = gameDataBlocksGetTable();
-    rt_memcpy(*(unsigned int *)(temp_v0 + 8),temp_v1,0x80);
-    temp_v1 = configGetSettings();
-    FUN_002ad8b4(*(int *)(temp_v0 + 8) + 0x80,temp_v1);
-    temp_v2 = *(int *)(temp_v0 + 8);
-    puVar4 = (unsigned short *)(temp_v2 + 0x88);
-    temp_v1 = gameDataBlocksGetSaveData();
-    rt_memcpy_w(puVar4,temp_v1,0x24d28);
-    *puVar4 = 3;
-    *(unsigned char *)(temp_v2 + 0x8a) = *(unsigned char *)(temp_v0 + 0x14);
-    FUN_0026b4cc();
-    FUN_00247af8(2,0,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 8),
-                 *(unsigned int *)(temp_v0 + 0xc));
-    *(unsigned int *)(temp_v0 + 4) = 1;
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

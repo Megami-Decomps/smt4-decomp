@@ -1,79 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048d248` (_code @ 0x48d248, 0x110 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: redundant retail null check after record dereference omitted; large-field addresses and category-loop registers differ. */
+#include "shard/Shard0048.h"
+#include "gamedata/MapNaviCategories.h"
 extern "C" {
+s32 naviMainGetRequestedMap(void);
+s32 FUN_00492c70(void *selection);
+MapNaviMarkerIcon *FUN_0048b140(Block66Owner *owner, s32 map, u32 category);
+s32 MapNaviTable_GetCategoryCount(MapNaviTableContext *context);
+MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext *context, u32 index);
 
-int FUN_0048b140(...);
-int MapNaviTable_GetCategoryCount(void);
-
-/* Supplied declaration required: FUN_0048b140. */
-extern int naviMainGetRequestedMap(void);
-extern int FUN_00492c70(int);
-/* Supplied declaration required: MapNaviTable_GetCategoryCount. */
-extern int MapNaviTable_GetCategoryRecord(unsigned int *, unsigned int);
-
-
-void FUN_0048d248(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Select the requested category, falling back to the map's category table.
+void FUN_0048d248(Block66Owner *owner, u32 category)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int *puVar5;
-  int temp_v4;
-  short *psVar7;
-  int temp_v5;
-  int uStack_28;
-  
-  uStack_28 = param_4;
-  temp_v1 = naviMainGetRequestedMap();
-  temp_v2 = FUN_00492c70(param_1 + 0x4cc);
-  temp_v3 = FUN_0048b140(param_1,temp_v1,param_2);
-  if (temp_v3 != 0) {
-    temp_v0 = *(char *)(temp_v3 + 3);
-    *(char *)(param_1 + 100) = temp_v0;
-    *(int *)(param_1 + 0x20640) = (int)temp_v0;
-    *(unsigned char *)(param_1 + 0x7b90) = 1;
-    *(unsigned char *)(param_1 + 0x7b91) = 1;
-  }
-  else {
-    *(unsigned char *)(param_1 + 100) = 0;
-    puVar5 = (unsigned int *)&uStack_28;
-    MapNaviTable_GetCategoryCount();
-    temp_v4 = MapNaviTable_GetCategoryRecord((unsigned int *)&uStack_28,0);
-    temp_v3 = 0;
-    if (0 < (int)puVar5) {
-      while( 1 ) {
-        psVar7 = (short *)(temp_v4 + temp_v3 * 0x14);
-        temp_v5 = (int)*psVar7;
-        if (temp_v5 == -1) break;
-        if ((temp_v5 == temp_v1) && (psVar7[1] == temp_v2)) {
-          temp_v4 = temp_v4 + temp_v3 * 0x14;
-          if (temp_v4 == 0) {
-            return;
-          }
-          temp_v3 = FUN_0048b140(param_1,temp_v1,*(unsigned char *)(temp_v4 + 4));
-          if (temp_v3 == 0) {
-            return;
-          }
-          temp_v0 = *(char *)(temp_v3 + 3);
-          *(char *)(param_1 + 100) = temp_v0;
-          *(int *)(param_1 + 0x20640) = (int)temp_v0;
-          *(unsigned char *)(param_1 + 0x7b90) = 1;
-          *(unsigned char *)(param_1 + 0x7b91) = 1;
-          break;
+    // The navigation work extends beyond the shared Block66Owner prefix.
+    struct NavigationWork {
+        u8 unk0000[0x64];
+        s8 categoryState;
+        u8 unk0065[0x467];
+        u8 selection[4]; /* 0x4CC */
+        u8 unk04D0[0x76C0];
+        u8 refreshCategory; /* 0x7B90 */
+        u8 refreshMarker;
+        u8 unk7B92[0x18AAE];
+        s32 categoryStateWide; /* 0x20640 */
+    };
+    typedef char NavigationWorkOffsets[
+        offsetof(NavigationWork, selection) == 0x4CC &&
+        offsetof(NavigationWork, refreshCategory) == 0x7B90 &&
+        offsetof(NavigationWork, categoryStateWide) == 0x20640 ? 1 : -1];
+    NavigationWork *work = (NavigationWork *)owner;
+    s32 map = naviMainGetRequestedMap();
+    s32 section = FUN_00492c70(work->selection);
+    MapNaviMarkerIcon *marker = FUN_0048b140(owner, map, category);
+    if (marker != NULL) {
+        s8 state = (s8)marker->icon;
+        work->categoryState = state;
+        work->categoryStateWide = state;
+        work->refreshCategory = 1;
+        work->refreshMarker = 1;
+    } else {
+        work->categoryState = 0;
+        MapNaviTableContext context;
+        s32 count = MapNaviTable_GetCategoryCount(&context);
+        MapNaviCategoryRecord *records = MapNaviTable_GetCategoryRecord(&context, 0);
+        for (s32 index = 0; index < count; ++index) {
+            MapNaviCategoryRecord *record = &records[index];
+            if (record->id == -1)
+                return;
+            if (record->id == map && (s16)record->reserved == section) {
+                marker = FUN_0048b140(owner, map, record->category);
+                if (marker == NULL)
+                    return;
+                s8 state = (s8)marker->icon;
+                work->categoryState = state;
+                work->categoryStateWide = state;
+                work->refreshCategory = 1;
+                work->refreshMarker = 1;
+                return;
+            }
         }
-        temp_v3 = temp_v3 + 1;
-        if ((int)puVar5 <= temp_v3) {
-          return;
-        }
-      }
     }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

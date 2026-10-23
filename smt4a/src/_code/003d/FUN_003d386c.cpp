@@ -1,133 +1,105 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d386c` (_code @ 0x3d386c, 0x1dc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: status-bit loop control, cycle-array addressing and scratch registers differ. */
+#include "camp/CampState.h"
+#include "gamedata/SelectedUnitQuery.h"
+#include "shard/W5_W5Match5_GameSaveViews.h"
+struct PlayerData;
 
-extern "C" {
-
-int sysMemClear(unsigned char [4], int);
-int mapBlockSetRequest(unsigned int);
-int __aeabi_idivmod(int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern int g_camp; /* 0x57f108 */
-
-extern int gameGetPlayerData(void);
-extern unsigned int markerKindGetColor(int);
-extern int gameGetSlotRecord(int);
-extern int resourceRunOperationIfUnblocked(int);
-extern int FUN_002a4894(int);
-extern int objectApplyIfUnblocked(int);
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: mapBlockSetRequest. */
-/* Supplied declaration required: __aeabi_idivmod. */
-
-
-void FUN_003d386c(int param_1)
-
-{
-/* irregular: 3 unstructured edge(s); 2 goto(s); 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned char temp_v10 [4];
-  int aiStack_8c [25];
-  int temp_v11;
-  
-  temp_v0 = g_camp;
-  temp_v11 = param_1;
-  temp_v1 = objectApplyIfUnblocked(g_camp + 0x1ec);
-  temp_v2 = objectApplyIfUnblocked(temp_v0 + 0x1ec);
-  if (temp_v2 < temp_v1) {
-    temp_v1 = objectApplyIfUnblocked(temp_v0 + 0x1ec);
-  }
-  sysMemClear(temp_v10,100);
-  temp_v2 = 0;
-  if (temp_v2 < temp_v1) {
-    do {
-      temp_v9 = *(int *)(temp_v0 + temp_v2 * 8 + 0x1b74);
-      if (aiStack_8c[temp_v9] == 0) {
-        temp_v8 = 0;
-        aiStack_8c[temp_v9] = 1;
-        if (-1 < temp_v9) {
-          temp_v5 = gameGetSlotRecord(temp_v9);
-          temp_v7 = (unsigned int)*(unsigned short *)(temp_v5 + 0x60);
-          temp_v3 = 1;
-          temp_v5 = 0xd;
-          do {
-            if ((temp_v7 & (1 << (temp_v3 & 0xff))) != 0) {
-              temp_v8 = temp_v8 + 1;
-            }
-            do {
-              temp_v5 = temp_v5 - 1;
-              temp_v3 = temp_v3 + 1;
-              if (temp_v5 == 0) {
-                if (temp_v8 != 0) goto LAB_003d3940;
-                goto LAB_003d395c;
-              }
-            } while (temp_v3 == 2);
-          } while( 1 );
-        }
-        temp_v8 = gameGetPlayerData();
-        temp_v7 = (unsigned int)*(unsigned short *)(temp_v8 + 0x5e);
-LAB_003d3940:
-        temp_v8 = 0;
-        if (temp_v7 != 0) {
-          temp_v5 = temp_v0 + temp_v9 * 4;
-          temp_v3 = 1;
-          while( 1 ) {
-            if ((temp_v7 & (1 << (temp_v3 & 0xff))) != 0) {
-              if (*(int *)(temp_v5 + 0x31e4) == temp_v8) {
-                temp_v4 = markerKindGetColor((int)(short)temp_v3);
-                *(unsigned int *)(temp_v5 + 0x3248) = temp_v4;
-                break;
-              }
-              temp_v8 = temp_v8 + 1;
-            }
-            temp_v3 = temp_v3 + 1;
-            if ((int)temp_v3 >= 0xe) break;
-            while (temp_v3 == 2) {
-              temp_v3 = 3;
-            }
-          }
-        }
-        else {
-LAB_003d395c:
-          temp_v8 = 0;
-          *(unsigned int *)(temp_v0 + temp_v9 * 4 + 0x3248) = 0xffffffff;
-        }
-        temp_v9 = temp_v0 + temp_v9 * 4;
-        temp_v5 = *(int *)(temp_v9 + 0x3180) + 1;
-        *(int *)(temp_v9 + 0x3180) = temp_v5;
-        if (temp_v5 >= 0x18) {
-          __aeabi_idivmod(*(int *)(temp_v9 + 0x31e4) + 1,temp_v8);
-          *(unsigned int *)(temp_v9 + 0x3180) = 0;
-          *(unsigned int *)(temp_v9 + 0x31e4) = temp_v6;
-        }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < temp_v1);
-  }
-  if (temp_v11 == 0) {
-    temp_v1 = *(int *)(temp_v0 + 0xbc);
-  }
-  else {
-    temp_v2 = resourceRunOperationIfUnblocked(temp_v0 + 0x1ec);
-    temp_v1 = FUN_002a4894(temp_v0 + 0x1ec);
-    temp_v1 = temp_v1 + temp_v2;
-  }
-  mapBlockSetRequest(*(unsigned int *)(temp_v0 + *(int *)(temp_v0 + temp_v1 * 8 + 0x1b74) * 4 + 0x3248));
-  return;
+namespace {
+/* Selection fields overlap the canonical camp's byte-aligned padding. */
+struct CampStatusSelectionView {
+    u8 unk000[0xBC];
+    s32 selection;
+    u8 unk0C0[0x12C];
+    u8 selector[1];
+};
+/* The selected-unit and cycle tables are beyond CampStateA's shared prefix. */
+struct CampStatusCyclesView {
+    CampStateA camp;
+    u8 unk1B24[0x50];
+    SelectedUnitListEntry entries[25];
+    u8 unk1C3C[0x1540];
+    s32 elapsed[25];
+    s32 selectedStatus[25];
+    u32 colors[25];
+};
+typedef char CampStatusCycleOffsets[
+    offsetof(CampStatusSelectionView, selector) == 0x1EC &&
+    offsetof(CampStatusCyclesView, entries) == 0x1B74 &&
+    offsetof(CampStatusCyclesView, elapsed) == 0x317C &&
+    offsetof(CampStatusCyclesView, selectedStatus) == 0x31E0 &&
+    offsetof(CampStatusCyclesView, colors) == 0x3244 ? 1 : -1];
 }
+extern "C" {
+extern CampStateA *g_camp;
+s32 objectApplyIfUnblocked(void *selector);
+s32 resourceRunOperationIfUnblocked(void *selector);
+s32 FUN_002a4894(void *selector);
+void sysMemClear(void *memory, u32 bytes);
+PlayerData *gameGetPlayerData();
+u32 markerKindGetColor(s16 status);
+void mapBlockSetRequest(u32 color);
 
-} /* extern "C" */
+void FUN_003d386c(s32 useSelector)
+{
+    CampStateA *camp = g_camp;
+    CampStatusSelectionView *selection = reinterpret_cast<CampStatusSelectionView *>(camp);
+    CampStatusCyclesView *cycles = reinterpret_cast<CampStatusCyclesView *>(camp);
+    s32 count = objectApplyIfUnblocked(selection->selector);
+    if (objectApplyIfUnblocked(selection->selector) < count)
+        count = objectApplyIfUnblocked(selection->selector);
+    u32 visited[25];
+    sysMemClear(visited, sizeof(visited));
+    for (s32 index = 0; index < count; ++index) {
+        s32 slot = static_cast<s32>(cycles->entries[index].packedIndex);
+        if (visited[slot + 1] != 0)
+            continue;
+        visited[slot + 1] = 1;
+        u16 status;
+        s32 statusCount = 0;
+        if (slot < 0) {
+            /* PlayerData's legacy header redeclares GameDataBlocks; keep that dependency out of this unit. */
+            struct PlayerStatusView {
+                u8 unk00[0x5E];
+                u16 mask;
+            };
+            status = reinterpret_cast<const PlayerStatusView *>(gameGetPlayerData())->mask;
+        } else {
+            status = gameGetSlotRecord(slot)->status.mask;
+            for (s32 bit = 1; bit < 14; ++bit) {
+                if (bit != 2 && (status & (1u << bit)) != 0)
+                    ++statusCount;
+            }
+        }
+        s32 ordinal = 0;
+        if ((slot < 0 || statusCount != 0) && status != 0) {
+            for (s32 bit = 1; bit < 14; ++bit) {
+                if (bit == 2)
+                    continue;
+                if ((status & (1u << bit)) != 0) {
+                    if (cycles->selectedStatus[slot + 1] == ordinal) {
+                        cycles->colors[slot + 1] = markerKindGetColor(static_cast<s16>(bit));
+                        break;
+                    }
+                    ++ordinal;
+                }
+            }
+        } else {
+            cycles->colors[slot + 1] = 0xFFFFFFFF;
+        }
+        if (++cycles->elapsed[slot + 1] >= 24) {
+            /* Retail uses the ordinal reached by the scan, not the initial popcount. */
+            cycles->selectedStatus[slot + 1] = (cycles->selectedStatus[slot + 1] + 1) % ordinal;
+            cycles->elapsed[slot + 1] = 0;
+        }
+    }
+    s32 selected;
+    if (useSelector == 0) {
+        selected = selection->selection;
+    } else {
+        s32 first = resourceRunOperationIfUnblocked(selection->selector);
+        selected = first + FUN_002a4894(selection->selector);
+    }
+    s32 slot = static_cast<s32>(cycles->entries[selected].packedIndex);
+    mapBlockSetRequest(cycles->colors[slot + 1]);
+}
+}

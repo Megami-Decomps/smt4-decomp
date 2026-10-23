@@ -1,82 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026c1a8` (_code @ 0x26c1a8, 0x1e8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Sprite-opacity accessors fold to direct field loads and a shared base; initial loads and render-stack push registers differ. */
+#include "shard/Shard0033.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
+extern ObjBRef g_gameGlobals;
+extern RenderCtxA *g_renderCtx;
+void FUN_00157558(RenderCtxA *context);
+s32 FUN_001692ac(s32 kind, s32 value);
+void FUN_00230a50(s32 *x, s32 *y, s32 sprite, f32 scale);
+void efctSetSpeed(f32 alpha);
+void FUN_001835b4(s32 layer, u32 texture, u32 frame, s32 x, s32 y, s32 mode);
 
-int FUN_00157558(int);
-int efctSetSpeed(void);
-int FUN_001835b4(int, int, int, int, unsigned int, int);
-int FUN_00230a50(int *, unsigned int [4], int);
-
-typedef int romwright_code(...);
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-extern unsigned char g_gameGlobals; /* 0x588fd0 */
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00230a50. */
-
-
-unsigned int FUN_0026c1a8(void)
-
+u32 FUN_0026c1a8(void)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  int temp_v4;
-  unsigned int temp_v5 [4];
-  
-  temp_v4 = 0;
-  temp_v5[0] = 0;
-  if ((*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2012) != '\0') &&
-     (*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2018) == '\x03' || *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2018) == '\n')) {
-    FUN_00157558(g_renderCtx);
-    temp_v0 = g_renderCtx;
-    temp_v1 = FUN_001692ac(1,0);
-    piVar5 = (int *)(temp_v0 + 0x1258);
-    temp_v2 = *piVar5;
-    temp_v3 = piVar5[temp_v2 + 2];
-    *piVar5 = temp_v2 + 1;
-    piVar5[temp_v2 + 3] = temp_v1;
-    if (*(char *)(temp_v0 + 0x1270) != '\0' || temp_v3 != temp_v1) {
-      (**(romwright_code **)(temp_v0 + 0x1274))();
-      *(unsigned char *)(temp_v0 + 0x1270) = 0;
+    s32 x = 0;
+    s32 y = 0;
+    ObjB *work = g_gameGlobals.instance;
+    if (work->unk2012 != 0 && (work->unk2018 == 3 || work->unk2018 == 10)) {
+        FUN_00157558(g_renderCtx);
+        RenderCtxA *context = g_renderCtx;
+        s32 state = FUN_001692ac(1, 0);
+        renderStackPush(&context->stackA, state);
+        FUN_00230a50(&x, &y, 10, 0.35f);
+        efctSetSpeed(work->spriteHeaders.headers[2].unk20);
+        FUN_001835b4(2, 0x12, 0, x, y, 1);
+        efctSetSpeed(1.0f);
+        FUN_00230a50(&x, &y, 8, 0.35f);
+        efctSetSpeed(work->spriteHeaders.headers[0].unk20);
+        FUN_001835b4(2, 0x12, 1, x, y, 1);
+        efctSetSpeed(1.0f);
+        FUN_00230a50(&x, &y, 9, 0.35f);
+        efctSetSpeed(work->spriteHeaders.headers[1].unk20);
+        FUN_001835b4(2, 0x12, 2, x, y, 1);
+        renderStackPop(&g_renderCtx->stackA);
     }
-    FUN_00230a50(&temp_v4,temp_v5,10);
-    efctSetSpeed();
-    FUN_001835b4(2,0x12,0,temp_v4,temp_v5[0],1);
-    efctSetSpeed();
-    FUN_00230a50(&temp_v4,temp_v5,8);
-    efctSetSpeed();
-    FUN_001835b4(2,0x12,1,temp_v4,temp_v5[0],1);
-    efctSetSpeed();
-    FUN_00230a50(&temp_v4,temp_v5,9);
-    efctSetSpeed();
-    FUN_001835b4(2,0x12,2,temp_v4,temp_v5[0],1);
-    temp_v0 = g_renderCtx;
-    piVar5 = (int *)(g_renderCtx + 0x1258);
-    temp_v1 = *piVar5;
-    temp_v2 = piVar5[temp_v1 + 2];
-    *piVar5 = temp_v1 - 1;
-    if (*(char *)(temp_v0 + 0x1270) != '\0' || temp_v2 != piVar5[temp_v1 + 1]) {
-      (**(romwright_code **)(temp_v0 + 0x1274))();
-      *(unsigned char *)(temp_v0 + 0x1270) = 0;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

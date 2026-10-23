@@ -3,6 +3,7 @@
 #define SHARD_CECMESSAGEBOX_H
 
 #include "common.h"
+#include <stddef.h>
 
 struct MessageBox;
 typedef struct MessageBoxVtbl {
@@ -10,10 +11,15 @@ typedef struct MessageBoxVtbl {
     /* 0x08 */ void (*read)(struct MessageBox *box, u32 id, int a, int b, u32 *out);
     /* 0x0C */ u8 unk0C[0x18];
     /* 0x24 */ u32 (*remove)(struct MessageBox *box, u32 id, u32 key, int a, int b, int c);
-    /* 0x28 */ u8 unk28[8];
+    union {
+        /* 0x28 */ u8 unk28[8];
+        /* 0x28 */ u32 (*closeBox)(struct MessageBox *box, u32 id, s32 first, s32 second, s32 mode);
+    };
     /* 0x30 */ u32 (*writeList)(struct MessageBox *box, void *list, int size, u32 id, int a, int b);
     /* 0x34 */ u32 (*writeListKeyed)(struct MessageBox *box, void *list, int size, u32 *key, u32 id, int a, int b);
 } MessageBoxVtbl;
+typedef char MessageBoxCloseOffsetCheck[offsetof(MessageBoxVtbl, closeBox) == 0x28 &&
+    sizeof(MessageBoxVtbl) == 0x38 ? 1 : -1];
 
 typedef struct MessageBox {
     /* 0x000 */ MessageBoxVtbl *vtbl;

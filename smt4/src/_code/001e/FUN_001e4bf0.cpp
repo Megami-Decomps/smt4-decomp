@@ -1,88 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e4bf0` (_code @ 0x1e4bf4, 0x144 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: cached draw-state push uses IP rather than R3 and schedules the dirty-clear zero later. */
+#include "battle/btlUI.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
+void FUN_001e071c(BtlUiObjC *);
+void FUN_002c18e4(RenderCtx *);
+void FUN_002c198c(RenderCtx *);
+void FUN_002c39a4(RenderCtx *);
+extern RenderCtx *g_titleScene;
+extern BtlUiGlobals g_btlUi;
+s32 FUN_0028a318(void);
+s32 asdTMTexTableNodeIsLoaded(u32, s32);
+s32 FUN_002c5d80(u32, u32);
 
-int FUN_001e071c(int);
-int FUN_002c18e4(int);
-int FUN_002c198c(int);
-int FUN_002c39a4(int);
-
-typedef int romwright_code(...);
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_001e071c. */
-extern int FUN_0028a318(void);
-extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
-/* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-
-
-unsigned int FUN_001e4bf0(int param_1)
-
+// Draw the lower battle UI only after both texture sets have finished loading.
+u32 FUN_001e4bf0(void)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v4 = *(int *)(param_1 + 0x20);
-  if (temp_v4 != 0) {
-    temp_v2 = 0;
-    temp_v3 = temp_v2;
-    do {
-      temp_v0 = asdTMTexTableNodeIsLoaded(0x14,temp_v2);
-      if (temp_v0 != 0) {
-        temp_v3 = temp_v3 + 1;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 5);
-    temp_v2 = 0;
-    do {
-      temp_v0 = asdTMTexTableNodeIsLoaded(0x15,temp_v2);
-      if (temp_v0 != 0) {
-        temp_v3 = temp_v3 + 1;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 4);
-    if (temp_v3 >= 9) {
-      FUN_002c39a4(g_titleScene);
-      temp_v3 = g_titleScene;
-      temp_v2 = FUN_002c5d80(1,0);
-      piVar3 = (int *)(temp_v3 + 0x124c);
-      temp_v0 = *piVar3;
-      temp_v1 = piVar3[temp_v0 + 2];
-      *piVar3 = temp_v0 + 1;
-      piVar3[temp_v0 + 3] = temp_v2;
-      if (*(char *)(temp_v3 + 0x1264) != '\0' || temp_v1 != temp_v2) {
-        (**(romwright_code **)(temp_v3 + 0x1268))();
-        *(unsigned char *)(temp_v3 + 0x1264) = 0;
-      }
-      temp_v3 = FUN_0028a318();
-      if (temp_v3 != 0) {
-        FUN_001e071c(temp_v4 + 0x2460);
-      }
-      temp_v4 = g_titleScene;
-      piVar3 = (int *)(g_titleScene + 0x124c);
-      temp_v3 = *piVar3;
-      temp_v2 = piVar3[temp_v3 + 2];
-      *piVar3 = temp_v3 - 1;
-      if (*(char *)(temp_v4 + 0x1264) != '\0' || temp_v2 != piVar3[temp_v3 + 1]) {
-        (**(romwright_code **)(temp_v4 + 0x1268))();
-        *(unsigned char *)(temp_v4 + 0x1264) = 0;
-      }
-      FUN_002c198c(g_titleScene);
-      FUN_002c18e4(g_titleScene);
-      return 0;
+    BtlUi *ui = g_btlUi.ui;
+    if (ui) {
+        s32 loaded = 0;
+        for (s32 index = 0; index < 5; ++index) {
+            if (asdTMTexTableNodeIsLoaded(20, index))
+                ++loaded;
+        }
+        for (s32 index = 0; index < 4; ++index) {
+            if (asdTMTexTableNodeIsLoaded(21, index))
+                ++loaded;
+        }
+        if (loaded >= 9) {
+            FUN_002c39a4(g_titleScene);
+            RenderCtx *context = g_titleScene;
+            s32 state = FUN_002c5d80(1, 0);
+            renderStackPush(&context->stackA, state);
+            if (FUN_0028a318())
+                FUN_001e071c(&ui->objC);
+            renderStackPop(&g_titleScene->stackA);
+            FUN_002c198c(g_titleScene);
+            FUN_002c18e4(g_titleScene);
+            return 0;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

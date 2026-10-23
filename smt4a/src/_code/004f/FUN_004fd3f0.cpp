@@ -1,64 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fd3f0` (_code @ 0x4fd3f0, 0x114 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: action stores lack retail writeback addressing and retain fewer zero-valued registers. */
+#include "battle/btlMain.h"
+#include "battle/btlReflect.h"
 
 extern "C" {
+BtlMainStateA *btlGetMainState(void);
+s32 btlScriptUnitHasFlags(BtlMainStateA *);
+void FUN_0047effc(s32, u32, u32);
+ReflectAction *FUN_004102d8(ReflectContext *, s32, s32, u32);
 
-int btlGetMainState(void);
-int FUN_004102d8(int, int, int, unsigned int);
-int FUN_0047effc(int, unsigned int, unsigned int);
-
-extern int g_btlActionReflect; /* 0x5712f0 */
-
-/* Supplied declaration required: btlGetMainState. */
-extern int btlScriptUnitHasFlags(void);
-/* Supplied declaration required: FUN_004102d8. */
-/* Supplied declaration required: FUN_0047effc. */
-
-
-unsigned int FUN_004fd3f0(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Queue paired reflected actions, using a different second value for unflagged units. */
+u32 FUN_004fd3f0(u32 actor, u32 unit, u32 target)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  btlGetMainState();
-  temp_v0 = btlScriptUnitHasFlags();
-  temp_v1 = (int)(short)param_1;
-  if (temp_v0 != 0) {
-    FUN_0047effc(0,param_2,param_1);
-    temp_v2 = 0;
-    temp_v0 = g_btlActionReflect;
-    FUN_004102d8(g_btlActionReflect,temp_v1,0,param_2);
-    *(unsigned char *)(temp_v0 + 5) = *(unsigned char *)(temp_v0 + 5) | 4;
-    *(unsigned char *)(temp_v0 + 4) = 0x2b;
-    *(unsigned int *)(temp_v0 + 0x14) = param_3;
-    *(unsigned int *)(temp_v0 + 0x28) = 0;
-    *(unsigned int *)(temp_v0 + 0x4c) = 0;
-    temp_v0 = g_btlActionReflect;
-    FUN_004102d8(g_btlActionReflect,temp_v1,0,param_2);
-  }
-  else {
-    FUN_0047effc(0,param_2,param_1);
-    temp_v2 = 0x10;
-    temp_v0 = g_btlActionReflect;
-    FUN_004102d8(g_btlActionReflect,temp_v1,0,param_2);
-    *(unsigned char *)(temp_v0 + 5) = *(unsigned char *)(temp_v0 + 5) | 4;
-    *(unsigned char *)(temp_v0 + 4) = 0x2b;
-    *(unsigned int *)(temp_v0 + 0x14) = param_3;
-    *(unsigned int *)(temp_v0 + 0x28) = 0;
-    *(unsigned int *)(temp_v0 + 0x4c) = 0;
-    temp_v0 = g_btlActionReflect;
-    FUN_004102d8(g_btlActionReflect,temp_v1,0,param_2);
-  }
-  *(unsigned char *)(temp_v0 + 5) = *(unsigned char *)(temp_v0 + 5) | 4;
-  *(unsigned int *)(temp_v0 + 0x14) = param_3;
-  *(unsigned char *)(temp_v0 + 4) = 0x2c;
-  *(unsigned int *)(temp_v0 + 0x28) = temp_v2;
-  *(unsigned int *)(temp_v0 + 0x4c) = 0;
-  return 1;
+    ReflectAction *action;
+    u32 secondValue;
+    if (btlScriptUnitHasFlags(btlGetMainState())) {
+        FUN_0047effc(0, unit, actor);
+        secondValue = 0;
+        action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, unit);
+        action->flagView.flags |= 4;
+        action->kind = 0x2B;
+        action->target = target;
+        action->value = 0;
+        action->parameter = 0;
+        action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, unit);
+    } else {
+        FUN_0047effc(0, unit, actor);
+        secondValue = 0x10;
+        action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, unit);
+        action->flagView.flags |= 4;
+        action->kind = 0x2B;
+        action->target = target;
+        action->value = 0;
+        action->parameter = 0;
+        action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, unit);
+    }
+    action->flagView.flags |= 4;
+    action->target = target;
+    action->kind = 0x2C;
+    action->value = secondValue;
+    action->parameter = 0;
+    return 1;
 }
-
-} /* extern "C" */
+}

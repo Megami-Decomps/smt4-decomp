@@ -12,15 +12,26 @@ typedef struct MapDepart {
     /* 0x08 */ u8 freeOnEnd;     /* 0 = keep the block after the job ends */
 } MapDepart;
 
+struct NodeEnableNode;
+
 /* Resources kept while departing (Shin Megami Tensei IV), one block behind a module global. */
 typedef struct MapDepartWork {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ u16 unk04;
     /* 0x06 */ u16 unk06;
     /* 0x08 */ u16 unk08;
-    /* 0x0A */ u8 unk0A[2];
-    /* 0x0C */ u32 handleA;
-    /* 0x10 */ u32 handleB;
+    union {
+        /* 0x0A */ u8 unk0A[2];
+        /* 0x0A */ u8 modelsVisible;
+    };
+    union {
+        /* 0x0C */ u32 handleA;
+        /* 0x0C */ NodeEnableNode *nodeA;
+    };
+    union {
+        /* 0x10 */ u32 handleB;
+        /* 0x10 */ NodeEnableNode *nodeB;
+    };
     /* 0x14 */ s16 state;
     /* 0x16 */ u8 unk16[10];
     /* 0x20 */ void *dataA;      /* heap block */
@@ -28,6 +39,11 @@ typedef struct MapDepartWork {
     /* 0x28 */ void *dataB;      /* heap block */
     /* 0x2C */ u32 sizeB;
 } MapDepartWork;
+typedef char MapDepartWorkVisibilityOffsetsCheck[
+    offsetof(MapDepartWork, modelsVisible) == 0xA &&
+    offsetof(MapDepartWork, nodeA) == 0xC &&
+    offsetof(MapDepartWork, nodeB) == 0x10 &&
+    sizeof(MapDepartWork) == 0x30 ? 1 : -1];
 
 /* A polymorphic object: slot 1 of its vtable destroys it. */
 typedef struct MapDepartObject {
@@ -106,6 +122,14 @@ typedef struct GameState {
             /* 0x03C */ s32 activeGroupId;
             /* 0x040 */ s32 pendingGroupId;
         } groupClear;
+        struct {
+            /* 0x028 */ u8 prefix[6];
+            /* 0x02E */ s8 category;
+        } ambientEffect;
+        struct {
+            /* 0x028 */ u8 unk028BeforeCampCleanup[0xC];
+            /* 0x034 */ u8 retainCampResources;
+        } campCleanup;
     };
     /* 0x054 */ s32 unk54;
     /* 0x058 */ u8 unk058[0x38];
@@ -139,6 +163,18 @@ typedef struct GameState {
             /* 0x1C0 */ u8 unk1C0BeforeGroupUpdate[0x6D];
             /* 0x22D */ u8 updateFlag;
         } groupClearFlags;
+        struct {
+            /* 0x1C0 */ u8 unk1C0BeforeEnvironment[0x68];
+            /* 0x228 */ u8 alternate;
+        } environment;
+        struct {
+            /* 0x1C0 */ u8 unk1C0BeforeMapRegister[0x6B];
+            /* 0x22B */ u8 pending;
+        } mapRegistration;
+        struct {
+            u8 prefix[0x6A];
+            /* 0x22A */ u8 completed;
+        } entryTransition;
     };
     /* 0x251 */ u8 bgResetPending; /* set when the common background must be rebuilt */
     /* 0x252 */ u8 unk252[0x32];
@@ -170,8 +206,18 @@ typedef struct GameState {
     /* 0x364 */ s32 encounterBlocked;
     /* 0x368 */ u32 unk368;
     /* 0x36C */ s32 encounterChangeMapId;
-    /* 0x370 */ u8 unk370[0x308];
+    union {
+        /* 0x370 */ u8 unk370[0x308];
+        struct {
+            /* 0x370 */ u8 unk370[0x70];
+            /* 0x3E0 */ u32 forceVisible;
+            /* 0x3E4 */ u8 unk3E4[0x294];
+        } spriteVisibility;
+    };
 } GameState;
+typedef char GameStateCampCleanupOffsetCheck[
+    offsetof(GameState, campCleanup.retainCampResources) == 0x34 &&
+    sizeof(GameState) == 0x678 ? 1 : -1];
 
 /* The global game state block (Apocalypse). Only the fields read so far are named. */
 
@@ -209,6 +255,14 @@ struct GameStateA {
     /* 0x033 */ s8 overrideKind;
     union {
         /* 0x034 */ u8 unk034[0x498];
+        struct {
+            u8 unk034[0x228];
+            u8 darkZone; /* 0x25C */
+        } environment;
+        struct {
+            u8 prefix[0x1DC];
+            /* 0x210 */ s32 count;
+        } trapSetup;
         struct {
             /* 0x034 */ u8 unk034BeforeReset[8];
             /* 0x03C */ u32 value3C;
@@ -373,6 +427,9 @@ struct GameStateA {
 };
 
 typedef char GameStateLayoutCheck[sizeof(GameState) == 0x678 && sizeof(GameStateA) == 0x698 ? 1 : -1];
+typedef char GameStateATrapCountOffsetCheck[
+    offsetof(GameStateA, trapSetup.count) == 0x210 && sizeof(GameStateA) == 0x698 ? 1 : -1];
+typedef char GameStateAEnvironmentOffset[offsetof(GameStateA, environment.darkZone) == 0x25C ? 1 : -1];
 
 typedef char GameStateScriptPositionRequestCheck[offsetof(GameStateA, scriptPositionRequest.pending) == 0x465 && offsetof(GameStateA, scriptPositionRequest.position) == 0x468 && offsetof(GameStateA, scriptPositionRequest.parameters) == 0x474 ? 1 : -1];
 
@@ -399,6 +456,8 @@ typedef char GameStateGroupClearUpdateOffsetCheck[
     offsetof(GameState, unk1C0) == 0x1C0 &&
     offsetof(GameState, bgResetPending) == 0x251 &&
     sizeof(GameState) == 0x678 ? 1 : -1];
+typedef char GameStateEntryTransitionOffsetCheck[
+    offsetof(GameState, entryTransition.completed) == 0x22A && sizeof(GameState) == 0x678 ? 1 : -1];
 
 typedef char GameStateARandomPopupCountdownOffsetCheck[
     offsetof(GameStateA, randomPopup.countdown) == 0x4C4 &&
@@ -409,5 +468,18 @@ typedef char GameStateAEntryPoolResetOffsetCheck[
     offsetof(GameStateA, entryPoolReset.value3C) == 0x3C &&
     offsetof(GameStateA, mapRequested) == 0x4CC &&
     sizeof(GameStateA) == 0x698 ? 1 : -1];
+
+typedef char GameStateSpriteVisibilityOffsetCheck[
+    offsetof(GameState, spriteVisibility.forceVisible) == 0x3E0 &&
+    sizeof(GameState) == 0x678 ? 1 : -1];
+typedef char GameStateAmbientEffectCategoryOffsetCheck[
+    offsetof(GameState, ambientEffect.category) == 0x2E &&
+    sizeof(GameState) == 0x678 ? 1 : -1];
+typedef char GameStateEnvironmentVariantOffsetCheck[
+    offsetof(GameState, environment.alternate) == 0x228 &&
+    sizeof(GameState) == 0x678 ? 1 : -1];
+typedef char GameStateMapRegistrationOffsetCheck[
+    offsetof(GameState, mapRegistration.pending) == 0x22B &&
+    sizeof(GameState) == 0x678 ? 1 : -1];
 
 #endif

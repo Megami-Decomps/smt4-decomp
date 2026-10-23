@@ -1,83 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d7298` (_code @ 0x3d7298, 0x11c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: channel-relative pointer bases and vector component scheduling differ from retail. */
+#include "shard/W5_W5Match4_BattleVectorTransition.h"
 
-extern "C" {
-
-int FUN_00227280(int, unsigned int, unsigned int);
-
-typedef struct fn_003d7298_arg0 fn_003d7298_arg0;
-struct fn_003d7298_arg0 {
-    unsigned char pad_0x0[0x680];
-    unsigned char field_0x680; /* +0x680 */
-    unsigned char pad_0x681[0x113];
-    float field_0x794; /* +0x794 */
-    float field_0x798; /* +0x798 */
-    float field_0x79c; /* +0x79c */
-    unsigned char pad_0x7a0[0xc];
-    float field_0x7ac; /* +0x7ac */
-    float field_0x7b0; /* +0x7b0 */
-    float field_0x7b4; /* +0x7b4 */
-    unsigned char pad_0x7b8[0xc];
-    float field_0x7c4; /* +0x7c4 */
-    float field_0x7c8; /* +0x7c8 */
-    float field_0x7cc; /* +0x7cc */
-    float field_0x7d0; /* +0x7d0 */
-    float field_0x7d4; /* +0x7d4 */
-    float field_0x7d8; /* +0x7d8 */
-    unsigned char pad_0x7dc[0xc];
-    float field_0x7e8; /* +0x7e8 */
-    float field_0x7ec; /* +0x7ec */
-    float field_0x7f0; /* +0x7f0 */
-    float field_0x7f4; /* +0x7f4 */
-    float field_0x7f8; /* +0x7f8 */
-    float field_0x7fc; /* +0x7fc */
-    float field_0x800; /* +0x800 */
-    float field_0x804; /* +0x804 */
-    float field_0x808; /* +0x808 */
-    unsigned char pad_0x80c[0xc];
-    float field_0x818; /* +0x818 */
-    float field_0x81c; /* +0x81c */
-    float field_0x820; /* +0x820 */
-    float field_0x824; /* +0x824 */
-    float field_0x828; /* +0x828 */
-    float field_0x82c; /* +0x82c */
-    float field_0x830; /* +0x830 */
-    float field_0x834; /* +0x834 */
-    float field_0x838; /* +0x838 */
+// This layout extends past the published BattleVectorTransition prefix.
+struct ScalarTransitionChannel {
+    f32 current, start, end;
 };
+struct VectorTransitionChannel {
+    BattleVector3 current, start, end;
+};
+struct ExtendedTransitionView {
+    /* 0x000 */ u8 unk000[0x680];
+    /* 0x680 */ u32 interpolationMode;
+    /* 0x684 */ u8 unk684[0x110];
+    /* 0x794 */ ScalarTransitionChannel first;
+    /* 0x7A0 */ u8 unk7A0[0xC];
+    /* 0x7AC */ ScalarTransitionChannel second;
+    /* 0x7B8 */ u8 unk7B8[0xC];
+    /* 0x7C4 */ ScalarTransitionChannel third;
+    /* 0x7D0 */ ScalarTransitionChannel fourth;
+    /* 0x7DC */ u8 unk7DC[0xC];
+    /* 0x7E8 */ VectorTransitionChannel position;
+    /* 0x80C */ u8 unk80C[0xC];
+    /* 0x818 */ VectorTransitionChannel target;
+};
+extern "C" f32 FUN_00227280(s32 kind, u32 mode, u32 frame);
 
-/* Supplied declaration required: FUN_00227280. */
-
-
-void FUN_003d7298(fn_003d7298_arg0 *param_1,unsigned int param_2)
-
+static inline void interpolateVector(VectorTransitionChannel* channel, f32 progress)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  float in_s0;
-  
-  FUN_00227280(0,*(unsigned int *)&param_1->field_0x680,param_2);
-  param_1->field_0x7e8 =
-       param_1->field_0x7f4 + (param_1->field_0x800 - param_1->field_0x7f4) * in_s0;
-  param_1->field_0x7ec =
-       param_1->field_0x7f8 + (param_1->field_0x804 - param_1->field_0x7f8) * in_s0;
-  param_1->field_0x7f0 =
-       param_1->field_0x7fc + (param_1->field_0x808 - param_1->field_0x7fc) * in_s0;
-  param_1->field_0x818 =
-       param_1->field_0x824 + (param_1->field_0x830 - param_1->field_0x824) * in_s0;
-  param_1->field_0x81c =
-       param_1->field_0x828 + (param_1->field_0x834 - param_1->field_0x828) * in_s0;
-  param_1->field_0x820 =
-       param_1->field_0x82c + (param_1->field_0x838 - param_1->field_0x82c) * in_s0;
-  param_1->field_0x7d0 =
-       param_1->field_0x7d4 + (param_1->field_0x7d8 - param_1->field_0x7d4) * in_s0;
-  param_1->field_0x7c4 =
-       param_1->field_0x7c8 + (param_1->field_0x7cc - param_1->field_0x7c8) * in_s0;
-  param_1->field_0x7ac =
-       param_1->field_0x7b0 + (param_1->field_0x7b4 - param_1->field_0x7b0) * in_s0;
-  param_1->field_0x794 =
-       param_1->field_0x798 + (param_1->field_0x79c - param_1->field_0x798) * in_s0;
-  return;
+    BattleVector3 delta;
+    delta.x = channel->end.x - channel->start.x;
+    delta.y = channel->end.y - channel->start.y;
+    delta.z = channel->end.z - channel->start.z;
+    channel->current.x = channel->start.x + delta.x * progress;
+    channel->current.y = channel->start.y + delta.y * progress;
+    channel->current.z = channel->start.z + delta.z * progress;
 }
 
-} /* extern "C" */
+// Evaluate the two vector and four scalar channels at the eased frame position.
+extern "C" void FUN_003d7298(ExtendedTransitionView* state, u32 frame)
+{
+    f32 progress = FUN_00227280(0, state->interpolationMode, frame);
+    interpolateVector(&state->position, progress);
+    interpolateVector(&state->target, progress);
+    state->fourth.current = state->fourth.start + (state->fourth.end - state->fourth.start) * progress;
+    state->third.current = state->third.start + (state->third.end - state->third.start) * progress;
+    state->second.current = state->second.start + (state->second.end - state->second.start) * progress;
+    state->first.current = state->first.start + (state->first.end - state->first.start) * progress;
+}

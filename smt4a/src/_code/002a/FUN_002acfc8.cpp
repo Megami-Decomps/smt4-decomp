@@ -1,63 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002acfc8` (_code @ 0x2acfc8, 0x158 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: prefix-length argument setup adds an instruction; segment buffer/source and width saved registers differ. */
+#include "ui/ButtonHelp.h"
+#include <stddef.h>
 
 extern "C" {
-
-int FUN_00162790(int, unsigned int, unsigned char [84]);
-int FUN_0018408c(unsigned char [84], int);
-int VectorSignedToFloat(...);
-int rt_memcpy(...);
-
-extern unsigned char g_buttonHelp; /* 0x57f0c4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_002acfc8(int param_1,int param_2,unsigned int param_3)
-
-{
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned char *puVar3;
-  unsigned char *puVar4;
-  unsigned char *puVar5;
-  unsigned char *pbVar6;
-  unsigned int in_fpscr;
-  unsigned char temp_v2 [84];
-  
-  temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-  puVar3 = temp_v2;
-  puVar4 = temp_v2;
-  temp_v0 = *(unsigned char *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x675);
-  pbVar6 = (unsigned char *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x675);
-  puVar5 = (unsigned char *)0x0;
-  if (temp_v0 != 0) {
-    rt_memcpy(temp_v2,param_1);
-    temp_v2[temp_v0] = 0;
-    VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162790(2,*(unsigned int *)(temp_v1 + 0x5ec),temp_v2);
-    FUN_0018408c(temp_v2,2);
-    puVar5 = puVar3;
-  }
-  temp_v0 = *(unsigned char *)(temp_v1 + 0x676);
-  rt_memcpy(temp_v2,(unsigned int)*(unsigned char *)(temp_v1 + 0x675) + param_1,(unsigned int)temp_v0);
-  temp_v2[temp_v0] = 0;
-  VectorSignedToFloat(puVar5 + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(2,*(unsigned int *)(temp_v1 + 0x670),temp_v2);
-  FUN_0018408c(temp_v2,2);
-  rt_memcpy(temp_v2,(unsigned int)*pbVar6 + (unsigned int)*(unsigned char *)(temp_v1 + 0x676) + param_1,
-            (0x40 - (unsigned int)*pbVar6) - (unsigned int)*(unsigned char *)(temp_v1 + 0x676));
-  VectorSignedToFloat(puVar4 + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(2,*(unsigned int *)(temp_v1 + 0x5ec),temp_v2);
-  return;
+extern ButtonHelpGlobalsA g_buttonHelp;
+void *rt_memcpy(void *destination, const void *source, u32 size);
+void FUN_00162790(u32 layer, u32 style, const char *text, f32 x, f32 y, f32 depth, f32 spacing, f32 scale);
+s32 FUN_0018408c(const char *text, s32 font);
 }
 
-} /* extern "C" */
+static inline u32 buttonHelpNormalTextStyle(ButtonHelpWorkA *work)
+{
+    // The word is inside the byte-aligned +0x5EB padding; inserting a union would shift the layout.
+    struct StyleView { u8 unk000[0x5EC]; u32 style; };
+    typedef char StyleOffsetCheck[offsetof(StyleView, style) == 0x5EC ? 1 : -1];
+    return ((StyleView *)work)->style;
+}
+
+// Draw a fixed-width help line as normal, highlighted and normal text segments.
+extern "C" void FUN_002acfc8(const char *text, s32 x, s32 y)
+{
+    ButtonHelpWorkA *work = g_buttonHelp.work;
+    s32 prefixWidth = 0;
+    char segment[64];
+    u32 length = work->unk675;
+    if (length != 0) {
+        rt_memcpy(segment, text, length);
+        segment[length] = '\0';
+        FUN_00162790(2, buttonHelpNormalTextStyle(work), segment, (f32)x, (f32)y, 0.93f, 0.0f, 1.0f);
+        prefixWidth = FUN_0018408c(segment, 2);
+    }
+    length = work->unk676;
+    rt_memcpy(segment, text + work->unk675, length);
+    segment[length] = '\0';
+    FUN_00162790(2, work->unk670, segment, (f32)(x + prefixWidth), (f32)y, 0.93f, 0.0f, 1.0f);
+    s32 highlightWidth = FUN_0018408c(segment, 2);
+    rt_memcpy(segment, text + work->unk675 + work->unk676, 64 - work->unk675 - work->unk676);
+    FUN_00162790(2, buttonHelpNormalTextStyle(work), segment, (f32)(x + highlightWidth), (f32)y, 0.93f, 0.0f, 1.0f);
+}

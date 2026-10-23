@@ -1,117 +1,74 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cbb60` (_code @ 0x3cbb60, 0x1a0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: reciprocal negation, three-value capture, channel-base addressing and inlined timing-helper registers/tail merging differ. */
+#include "AsdSDK/Source/Gfx/Effect/EffectBounds.h"
+#include "gfx/ModelDummyBindings.h"
+#include "shard/W6_W6Match7_MaterialAnimationFlags.h"
+#include "shard/W6_W6Match7_TextureTransform.h"
+#include "status/StatusCamera.h"
 
-extern "C" {
-
-int FUN_00401a74(...);
-
-typedef struct fn_003cbb60_arg1 fn_003cbb60_arg1;
-struct fn_003cbb60_arg1 {
-    unsigned char pad_0x0[0x8];
-    void *field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x4];
-    undefined4 field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    undefined4 field_0x18; /* +0x18 */
+namespace {
+struct BoundsMaterialParameters {
+    u32 unk00;
+    EffectBoundsImageBinding *binding;
+    EffectBoundsCustomBinding *custom;
+    u32 unk0C;
+    Vec3 values;
 };
+// The format field lies beyond the shared custom-size prefix.
+struct BoundsCustomSizeView {
+    EffectBoundsCustomSize size;
+    u8 unk1C[0x18];
+    u32 format;
+};
+typedef char BoundsMaterialParameterLayoutCheck[offsetof(BoundsMaterialParameters, values) == 0x10 &&
+    offsetof(BoundsCustomSizeView, format) == 0x34 ? 1 : -1];
 
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-/* Supplied declaration required: FUN_00401a74. */
-
-
-void FUN_003cbb60(int param_1,fn_003cbb60_arg1 *param_2,int param_3)
-
+inline void setBoundsTiming(MaterialMergeNode *node, f32 value, bool clamp)
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  int temp_v0;
-  unsigned short *puVar2;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned char temp_v4;
-  unsigned short temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  float temp_v9;
-  unsigned int uStack_2c;
-  float temp_v10;
-  unsigned int uStack_24;
-  
-  FUN_00401a74(param_2,&temp_v10,&temp_v9);
-  temp_v3 = 0;
-  temp_v6 = param_2->field_0x10;
-  temp_v7 = param_2->field_0x14;
-  temp_v8 = param_2->field_0x18;
-  temp_v4 = *(unsigned int *)(*(int *)((int)param_2->field_0x8 + 0xc) + 0x34);
-  if (0 < *(int *)(param_3 + 0x204)) {
-    do {
-      temp_v0 = param_3 + temp_v3 * 4;
-      temp_v2 = (int)*(short *)(temp_v0 + 0x106);
-      puVar2 = (unsigned short *)(*(int *)(param_1 + 0x10c) + *(short *)(temp_v0 + 0x104) * 0x158);
-      if (temp_v2 != 0) {
-        if (temp_v2 == 1) {
-          temp_v5 = *puVar2 | 0x2000;
-          *puVar2 = temp_v5;
-        }
-        else if (temp_v2 == 2) {
-          temp_v5 = *puVar2 | 0x4000;
-          *puVar2 = temp_v5;
-        }
-      }
-      else {
-        *puVar2 = *puVar2 | 0x1000;
-      }
-      *(float *)(puVar2 + temp_v2 * 0xc + 0x7e) = -(temp_v9 * (1.0f / temp_v10));
-      *(unsigned int *)(puVar2 + temp_v2 * 0xc + 0x80) = uStack_2c;
-      *(float *)(puVar2 + temp_v2 * 0xc + 0x78) = temp_v10;
-      *(unsigned int *)(puVar2 + temp_v2 * 0xc + 0x7a) = uStack_24;
-      if (temp_v2 != 0) {
-        if (temp_v2 != 1) {
-          if (temp_v2 == 2) {
-            *(unsigned int *)(puVar2 + 0xa0) = temp_v8;
-            puVar2[0xa2] = 0xc;
-            puVar2[0xa3] = 0;
-            goto joined_r0x003cbcd8;
-          }
-        }
-        else {
-          *(unsigned int *)(puVar2 + 0xa0) = temp_v7;
-          puVar2[0xa2] = 0xc;
-          puVar2[0xa3] = 0;
-joined_r0x003cbcd8:
-          if (temp_v4 == 0xc) {
-            temp_v1 = (unsigned char)puVar2[1] | 1;
-          }
-          else {
-            temp_v1 = (unsigned char)puVar2[1] & 0xfe;
-          }
-          *(unsigned char *)(puVar2 + 1) = temp_v1;
-        }
-      }
-      else {
-        *(unsigned int *)(puVar2 + 0xa0) = temp_v6;
-        puVar2[0xa2] = 0xc;
-        puVar2[0xa3] = 0;
-        if (temp_v4 == 0xc) {
-          temp_v1 = (unsigned char)puVar2[1] | 1;
-          *(unsigned char *)(puVar2 + 1) = temp_v1;
-        }
-        else {
-          temp_v1 = (unsigned char)puVar2[1] & 0xfe;
-          *(unsigned char *)(puVar2 + 1) = temp_v1;
-        }
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < *(int *)(param_3 + 0x204));
-  }
-  return;
+    node->timing[0].first = value;
+    node->timing[0].mode = 12;
+    if (clamp) {
+        node->kinds |= 1;
+    } else {
+        node->kinds &= ~1;
+    }
+}
 }
 
-} /* extern "C" */
+extern "C" void FUN_00401a74(EffectBoundsSource *source, TextureTransformVector2 *scale,
+    TextureTransformVector2 *offset);
+
+extern "C" void FUN_003cbb60(MaterialMergeResource *model, EffectBoundsSource *source,
+    ModelDummyBindings *bindings)
+{
+    TextureTransformVector2 scale;
+    TextureTransformVector2 offset;
+    FUN_00401a74(source, &scale, &offset);
+    offset.x = -(offset.x * (1.0f / scale.x));
+    const BoundsMaterialParameters *parameters = reinterpret_cast<const BoundsMaterialParameters *>(source);
+    const Vec3 values = parameters->values;
+    const u8 format = static_cast<u8>(reinterpret_cast<BoundsCustomSizeView *>(parameters->custom->size)->format);
+    for (s32 i = 0; i < bindings->count; ++i) {
+        const s32 channel = bindings->bindings[i].part;
+        MaterialMergeNode *node = &model->nodes[bindings->bindings[i].node];
+        if (channel == 0) {
+            node->flags |= 0x1000;
+        } else if (channel == 1) {
+            node->flags |= 0x2000;
+        } else if (channel == 2) {
+            node->flags |= 0x4000;
+        }
+        *reinterpret_cast<TextureTransformVector2 *>(&node->channels[channel].second[1]) = offset;
+        *reinterpret_cast<TextureTransformVector2 *>(&node->channels[channel].first[1]) = scale;
+        switch (channel) {
+        case 0:
+            setBoundsTiming(node, values.x, format == 12);
+            break;
+        case 1:
+            setBoundsTiming(node, values.y, format == 12);
+            break;
+        case 2:
+            setBoundsTiming(node, values.z, format == 12);
+            break;
+        }
+    }
+}

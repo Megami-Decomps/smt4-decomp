@@ -1,60 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e81bc` (_code @ 0x4e81bc, 0x130 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: flag-update registers and one float-literal load schedule differ (81 rows each). */
+#include "battle/btlCamera.h"
 
-extern "C" {
-
-int cameraBeginScalarTransition(int, int, int);
-int FUN_004f3f1c(...);
-int FUN_004f41b0(int, int, int);
-
-extern int g_btlCamera; /* 0x571508 */
-
-/* Supplied declaration required: cameraBeginScalarTransition. */
-/* Supplied declaration required: FUN_004f3f1c. */
-/* Supplied declaration required: FUN_004f41b0. */
-
-
-unsigned int FUN_004e81bc(unsigned int param_1,int param_2,int param_3)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = g_btlCamera;
-  temp_v1 = *(int *)(param_2 + 0x56c);
-  if (param_3 != 0) {
-    if (temp_v1 == 0xf) {
-      *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x100000;
-      cameraBeginScalarTransition(temp_v0,0x32,1);
-      FUN_004f3f1c(g_btlCamera,0x32,1,0);
-    }
-    if (*(unsigned int *)(param_2 + 0x56c) < 0x42) {
-      return 0;
-    }
-  }
-  else {
-    if (temp_v1 != 0xf) {
-      if (temp_v1 != 0x23) {
-        if (temp_v1 == 0x29) {
-          FUN_004f41b0(g_btlCamera,0,2);
-        }
-      }
-      else {
-        cameraBeginScalarTransition(g_btlCamera,6,1);
-        FUN_004f3f1c(g_btlCamera,6,1);
-      }
-    }
-    else {
-      cameraBeginScalarTransition(g_btlCamera,0x32,1);
-      FUN_004f3f1c(g_btlCamera,0x32,1,0);
-    }
-    if (*(unsigned int *)(param_2 + 0x56c) < 0x2c) {
-      return 0;
-    }
-  }
-  return 1;
+namespace {
+struct CameraCueWork {
+    u8 prefix[0x56C];
+    u32 frame;
+};
 }
+extern "C" {
+extern BtlCameraA *g_btlCamera;
+void cameraBeginScalarTransition(BtlCameraA *camera, f32 value, u32 duration, u32 mode);
+void FUN_004f3f1c(BtlCameraA *camera, u32 target, u32 parameter, s32 preservePending, f32 duration);
+void FUN_004f41b0(BtlCameraA *camera, u32 first, u32 second);
 
-} /* extern "C" */
+// Run the scripted camera cues and signal when their timeline has completed.
+u32 FUN_004e81bc(u32 unused, CameraCueWork *work, s32 extended)
+{
+    if (extended != 0) {
+        if (work->frame == 15) {
+            g_btlCamera->flags |= 0x100000;
+            cameraBeginScalarTransition(g_btlCamera, 6.0f, 50, 1);
+            FUN_004f3f1c(g_btlCamera, 50, 1, 0, 8.0f);
+        }
+        if (work->frame <= 65)
+            return 0;
+    } else {
+        // A float overlay on the unaligned byte padding would change the shared layout.
+        struct CameraProgressView {
+            u8 prefix[0x704];
+            f32 progress;
+        };
+        f32 progress = reinterpret_cast<CameraProgressView *>(g_btlCamera)->progress;
+        switch (work->frame) {
+        case 15:
+            cameraBeginScalarTransition(g_btlCamera, 6.0f, 50, 1);
+            FUN_004f3f1c(g_btlCamera, 50, 1, 0, 8.0f);
+            break;
+        case 35:
+            cameraBeginScalarTransition(g_btlCamera, -progress - 0.5f, 6, 1);
+            FUN_004f3f1c(g_btlCamera, 6, 1, 1, 0.0f);
+            break;
+        case 41:
+            FUN_004f41b0(g_btlCamera, 0, 2);
+            break;
+        }
+        if (work->frame <= 43)
+            return 0;
+    }
+    return 1;
+}
+}

@@ -1,91 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d3c94` (_code @ 0x4d3c94, 0x150 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler merges the shared scalar case after the switch instead of before integer cases. */
+#include "battle/ReserveEditor.h"
+#include "battle/btlMain.h"
 
 extern "C" {
+extern s32 DAT_00571140;
+extern BtlAuxA *g_btlAux;
+u32 asdListBoxGetSelectedItemId(u32);
+s32 *asdListBoxGetIntValuePtr(u32, s32);
+f32 *asdListBoxGetFloatValuePtr(u32, s32);
+ReserveEditorRecord *btlFindMarkedReserveRecord(u32);
 
-int asdListBoxGetIntValuePtr(unsigned int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern unsigned int DAT_00571140; /* 0x571140 */
-extern int g_btlAux; /* 0x573808 */
-
-/* Supplied declaration required: asdListBoxGetIntValuePtr. */
-extern unsigned int *asdListBoxGetFloatValuePtr(unsigned int, int);
-extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
-extern unsigned int *btlFindMarkedReserveRecord(unsigned int);
-
-
-void FUN_004d3c94(int param_1,unsigned int param_2)
-
+/* Apply the selected debug-list value to a reserve record or its shared scalar. */
+void FUN_004d3c94(ReserveEditorWork *work, u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  unsigned int *puVar5;
-  
-  temp_v1 = asdListBoxGetSelectedItemId(*(unsigned int *)(param_1 + 0x10));
-  puVar3 = (unsigned int *)btlFindMarkedReserveRecord(param_2);
-  temp_v0 = g_btlAux;
-  if (puVar3 != (unsigned int *)0x0) {
-    switch(temp_v1) {
-    case 0:
-      puVar5 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v1);
-      puVar3[0x70] = *puVar5;
-      return;
-    case 1:
-      asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v1);
-      return;
-    case 2:
-      puVar5 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v1);
-      temp_v2 = *puVar5;
-      *puVar3 = temp_v2;
-      puVar3[3] = temp_v2;
-      return;
-    case 3:
-      puVar5 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v1);
-      temp_v2 = *puVar5;
-      puVar3[1] = temp_v2;
-      puVar3[4] = temp_v2;
-      return;
-    case 4:
-      puVar5 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v1);
-      temp_v2 = *puVar5;
-      puVar3[2] = temp_v2;
-      puVar3[5] = temp_v2;
-      return;
-    case 5:
-      puVar5 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v1);
-      puVar3[0x10] = *puVar5;
-      return;
-    case 6:
-      puVar5 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v1);
-      puVar3[10] = *puVar5;
-      return;
-    case 7:
-      puVar3 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v1);
-      *(unsigned int *)(temp_v0 + 0x9c70) = *puVar3;
-      return;
-    case 8:
-      puVar3 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v1);
-      DAT_00571140 = *puVar3;
-      return;
-    default:
-      return;
+    /* The auxiliary scalar is beyond the shared BtlAuxA prefix. */
+    struct AuxEditorView { u8 unk0000[0x9C70]; f32 scalar; };
+    typedef char AuxEditorScalarOffset[offsetof(AuxEditorView, scalar) == 0x9C70 ? 1 : -1];
+    s32 item = asdListBoxGetSelectedItemId(work->listBox);
+    ReserveEditorRecord *record = btlFindMarkedReserveRecord(id);
+    AuxEditorView *aux = (AuxEditorView *)g_btlAux;
+    if (record != NULL) {
+        switch (item) {
+        case 2:
+            record->previousPosition[0] = record->position[0] = *asdListBoxGetFloatValuePtr(work->listBox, item);
+            return;
+        case 3:
+            record->previousPosition[1] = record->position[1] = *asdListBoxGetFloatValuePtr(work->listBox, item);
+            return;
+        case 4:
+            record->previousPosition[2] = record->position[2] = *asdListBoxGetFloatValuePtr(work->listBox, item);
+            return;
+        case 5:
+            record->scale = *asdListBoxGetFloatValuePtr(work->listBox, item);
+            return;
+        case 6:
+            record->yaw = *asdListBoxGetFloatValuePtr(work->listBox, item);
+            return;
+        case 7:
+            aux->scalar = *asdListBoxGetFloatValuePtr(work->listBox, item);
+            return;
+        case 8:
+            DAT_00571140 = *asdListBoxGetIntValuePtr(work->listBox, item);
+            return;
+        case 0:
+            record->value = *asdListBoxGetIntValuePtr(work->listBox, item);
+            return;
+        case 1:
+            asdListBoxGetIntValuePtr(work->listBox, item);
+            return;
+        default:
+            return;
+        }
     }
-  }
-  if (temp_v1 == 7) {
-    puVar3 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v1);
-    *(unsigned int *)(temp_v0 + 0x9c70) = *puVar3;
-    return;
-  }
-  return;
+    if (item == 7) {
+        aux->scalar = *asdListBoxGetFloatValuePtr(work->listBox, item);
+    }
 }
-
-} /* extern "C" */
+}

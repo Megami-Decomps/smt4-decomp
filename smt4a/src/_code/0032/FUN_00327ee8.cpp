@@ -1,95 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00327ee8` (_code @ 0x327ee8, 0x184 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: per-plane VFP argument setup and region-table/count literal anchoring differ. */
+#include "map/SelectionRegion.h"
 
 extern "C" {
+extern SelectionRegions DAT_00614d7c;
+extern GameStateA g_gameState;
+void FUN_003250ac(MapVector *direction, MapVector origin, MapVector target);
+f32 mathVec3Dot(MapVector left, MapVector right);
 
-int mathVec3Dot(void);
-int FUN_003250ac(unsigned char [44]);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp48; /* 0x48: local_48 */
-} void_stack;
-
-extern unsigned char DAT_005f162f; /* 0x5f162f */
-extern unsigned char DAT_005f1631; /* 0x5f1631 */
-extern int DAT_006160dc; /* 0x6160dc */
-
-/* Supplied declaration required: mathVec3Dot. */
-/* Supplied declaration required: FUN_003250ac. */
-
-
-void FUN_00327ee8(void)
-
+/* Find the last containing primary and secondary regions for a point on the map. */
+void FUN_00327ee8(f32 x, f32 z)
 {
-/* irregular: 1 goto(s); irregular input(s): in_d10, in_d8; 3 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  int temp_v3;
-  int temp_v4;
-  float temp_v5;
-  unsigned long long in_d8;
-  unsigned long long in_d10;
-  unsigned long long temp_v6;
-  unsigned long long temp_v7;
-  unsigned char temp_v8 [44];
-  
-  temp_v4 = 0;
-  temp_v6 = in_d10 >> 0x20;
-  DAT_005f162f = 0xff;
-  DAT_005f1631 = 0xff;
-  if (0 < DAT_006160dc) {
-    temp_v6 = 0;
-  }
-  temp_v6 = temp_v6 << 0x20;
-  if (0 < DAT_006160dc) {
-    do {
-      temp_v7 = temp_v6 >> 0x20;
-      temp_v3 = 0;
-      temp_v0 = temp_v4 * 0x7c;
-      do {
-        if (temp_v3 != 0) {
-          if (temp_v3 != 1) {
-            if (temp_v3 != 2) {
-              if (temp_v3 == 3) {
-                in_d8 = (unsigned long long)*(unsigned int *)(temp_v0 + 0x614dec);
-                FUN_003250ac(temp_v8);
-              }
+    /* The second signed override is inside the shared opaque range. */
+    struct RegionOverrides {
+        u8 unk00[0x33];
+        s8 primary;
+        u8 unk34;
+        s8 secondary;
+    };
+    typedef char RegionOverrideOffsets[
+        offsetof(RegionOverrides, primary) == 0x33 &&
+        offsetof(RegionOverrides, secondary) == 0x35 ? 1 : -1];
+    RegionOverrides *overrides = (RegionOverrides *)&g_gameState;
+    overrides->primary = -1;
+    overrides->secondary = -1;
+    for (s32 i = 0; i < DAT_00614d7c.count; ++i) {
+        SelectionRegionQuad *region = &DAT_00614d7c.regions[i];
+        bool inside = true;
+        for (s32 side = 0; side < 4; ++side) {
+            MapVector normal;
+            MapVector point = {x, 0.0f, z};
+            MapVector direction;
+            switch (side) {
+            case 0:
+                normal = region->planes[0].normal;
+                FUN_003250ac(&direction, region->planes[0].origin, point);
+                break;
+            case 1:
+                normal = region->planes[1].normal;
+                FUN_003250ac(&direction, region->planes[1].origin, point);
+                break;
+            case 2:
+                normal = region->planes[2].normal;
+                FUN_003250ac(&direction, region->planes[2].origin, point);
+                break;
+            case 3:
+                normal = region->planes[3].normal;
+                FUN_003250ac(&direction, region->planes[3].origin, point);
+                break;
             }
-            else {
-              in_d8 = (unsigned long long)*(unsigned int *)(temp_v0 + 0x614dd4);
-              FUN_003250ac(temp_v8);
+            if (mathVec3Dot(normal, direction) < 0.0f) {
+                inside = false;
+                break;
             }
-          }
-          else {
-            in_d8 = (unsigned long long)*(unsigned int *)(temp_v0 + 0x614dbc);
-            FUN_003250ac(temp_v8);
-          }
         }
-        else {
-          in_d8 = (unsigned long long)*(unsigned int *)(temp_v0 + 0x614da4);
-          FUN_003250ac(temp_v8);
+        if (inside) {
+            if (region->secondary == 0)
+                overrides->primary = region->kind;
+            else
+                overrides->secondary = region->kind;
         }
-        temp_v5 = (float)in_d8;
-        mathVec3Dot();
-        temp_v2 = DAT_005f162f;
-        if (temp_v5 < (float)temp_v7) goto LAB_00328050;
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < 4);
-      temp_v1 = (unsigned char)*(unsigned short *)(temp_v0 + 0x614d96);
-      temp_v2 = temp_v1;
-      if (*(short *)(temp_v0 + 0x614d94) != 0) {
-        temp_v2 = DAT_005f162f;
-        DAT_005f1631 = temp_v1;
-      }
-LAB_00328050:
-      DAT_005f162f = temp_v2;
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < DAT_006160dc);
-  }
-  return;
+    }
 }
-
-} /* extern "C" */
+}

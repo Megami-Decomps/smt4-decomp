@@ -1,104 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002566b4` (_code @ 0x2566b4, 0x150 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: particle position copy is coalesced and orientation branch ordering differs. */
+#include "gfx/ParticleSlotState.h"
 
 extern "C" {
+extern ParticleSlotGlobals g_activeTextureSlot;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_1_stack;
-
-extern int g_activeTextureSlot; /* 0x4475d0 */
-extern unsigned int DAT_004475d4; /* 0x4475d4 */
-
-
-void FUN_002566b4(unsigned int param_1)
-
+// Allocate a particle and cycle through the four texture-coordinate orientations.
+void FUN_002566b4(u32 state, f32 x, f32 y, f32 z, f32 height, f32 size)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3, in_s4; 5 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int in_s0;
-  float in_s1;
-  unsigned int in_s2;
-  float in_s3;
-  unsigned int in_s4;
-  
-  temp_v1 = g_activeTextureSlot;
-  temp_v2 = 0;
-  while (*(int *)(g_activeTextureSlot + temp_v2 * 4 + 4) != 0) {
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 >= 0x40) {
-      return;
+    ParticleSlotState *slot = reinterpret_cast<ParticleSlotState *>(g_activeTextureSlot.slot);
+    s32 index = 0;
+    while (slot->base.particleState[index] != 0) {
+        if (++index >= 64)
+            return;
     }
-  }
-  temp_v4 = g_activeTextureSlot + temp_v2 * 4;
-  temp_v3 = g_activeTextureSlot + temp_v2 * 0xc;
-  *(unsigned int *)(temp_v3 + 0x104) = in_s0;
-  *(float *)(temp_v3 + 0x108) = in_s1;
-  *(unsigned int *)(temp_v3 + 0x10c) = in_s2;
-  *(float *)(temp_v3 + 0x108) = in_s1 + in_s3;
-  *(unsigned int *)(temp_v4 + 4) = param_1;
-  *(unsigned int *)(temp_v4 + 0x404) = in_s4;
-  *(unsigned int *)(temp_v4 + 0x504) = 0xffffff00;
-  temp_v0 = DAT_004475d4 & 3;
-  if (temp_v0 != 0) {
-    if (temp_v0 != 1) {
-      if (temp_v0 != 2) {
-        if (temp_v0 != 3) {
-          DAT_004475d4 = DAT_004475d4 + 1;
-          return;
-        }
-        temp_v1 = temp_v1 + temp_v2 * 0x20;
-        *(unsigned int *)(temp_v1 + 0x604) = 0x3f800000;
-        *(unsigned int *)(temp_v1 + 0x608) = 0x3f800000;
-        *(unsigned int *)(temp_v1 + 0x60c) = 0x3f800000;
-        *(unsigned int *)(temp_v1 + 0x610) = 0;
-        *(unsigned int *)(temp_v1 + 0x614) = 0;
-        *(unsigned int *)(temp_v1 + 0x618) = 0x3f800000;
-        *(unsigned int *)(temp_v1 + 0x61c) = 0;
-      }
-      else {
-        temp_v1 = temp_v1 + temp_v2 * 0x20;
-        *(unsigned int *)(temp_v1 + 0x604) = 0;
-        *(unsigned int *)(temp_v1 + 0x608) = 0x3f800000;
-        *(unsigned int *)(temp_v1 + 0x60c) = 0;
-        *(unsigned int *)(temp_v1 + 0x610) = 0;
-        *(unsigned int *)(temp_v1 + 0x614) = 0x3f800000;
-        *(unsigned int *)(temp_v1 + 0x618) = 0x3f800000;
-        *(unsigned int *)(temp_v1 + 0x61c) = 0x3f800000;
-      }
-      *(unsigned int *)(temp_v1 + 0x620) = 0;
+    slot->base.particlePosition[index][0] = x;
+    slot->base.particlePosition[index][1] = y;
+    slot->base.particlePosition[index][2] = z;
+    slot->base.particlePosition[index][1] += height;
+    slot->base.particleState[index] = state;
+    slot->sizes[index] = size;
+    slot->colors[index] = 0xFFFFFF00;
+    switch (g_activeTextureSlot.nextOrientation & 3) {
+    case 0:
+        slot->coordinates[index].values[0] = 0.0f;
+        slot->coordinates[index].values[1] = 0.0f;
+        slot->coordinates[index].values[2] = 0.0f;
+        slot->coordinates[index].values[3] = 1.0f;
+        slot->coordinates[index].values[4] = 1.0f;
+        slot->coordinates[index].values[5] = 0.0f;
+        slot->coordinates[index].values[6] = 1.0f;
+        slot->coordinates[index].values[7] = 1.0f;
+        break;
+    case 1:
+        slot->coordinates[index].values[0] = 1.0f;
+        slot->coordinates[index].values[1] = 0.0f;
+        slot->coordinates[index].values[2] = 1.0f;
+        slot->coordinates[index].values[3] = 1.0f;
+        slot->coordinates[index].values[4] = 0.0f;
+        slot->coordinates[index].values[5] = 0.0f;
+        slot->coordinates[index].values[6] = 0.0f;
+        slot->coordinates[index].values[7] = 1.0f;
+        break;
+    case 2:
+        slot->coordinates[index].values[0] = 0.0f;
+        slot->coordinates[index].values[1] = 1.0f;
+        slot->coordinates[index].values[2] = 0.0f;
+        slot->coordinates[index].values[3] = 0.0f;
+        slot->coordinates[index].values[4] = 1.0f;
+        slot->coordinates[index].values[5] = 1.0f;
+        slot->coordinates[index].values[6] = 1.0f;
+        slot->coordinates[index].values[7] = 0.0f;
+        break;
+    case 3:
+        slot->coordinates[index].values[0] = 1.0f;
+        slot->coordinates[index].values[1] = 1.0f;
+        slot->coordinates[index].values[2] = 1.0f;
+        slot->coordinates[index].values[3] = 0.0f;
+        slot->coordinates[index].values[4] = 0.0f;
+        slot->coordinates[index].values[5] = 1.0f;
+        slot->coordinates[index].values[6] = 0.0f;
+        slot->coordinates[index].values[7] = 0.0f;
+        break;
     }
-    else {
-      temp_v1 = temp_v1 + temp_v2 * 0x20;
-      *(unsigned int *)(temp_v1 + 0x604) = 0x3f800000;
-      *(unsigned int *)(temp_v1 + 0x608) = 0;
-      *(unsigned int *)(temp_v1 + 0x60c) = 0x3f800000;
-      *(unsigned int *)(temp_v1 + 0x610) = 0x3f800000;
-      *(unsigned int *)(temp_v1 + 0x614) = 0;
-      *(unsigned int *)(temp_v1 + 0x618) = 0;
-      *(unsigned int *)(temp_v1 + 0x61c) = 0;
-      *(unsigned int *)(temp_v1 + 0x620) = 0x3f800000;
-    }
-  }
-  else {
-    temp_v1 = temp_v1 + temp_v2 * 0x20;
-    *(unsigned int *)(temp_v1 + 0x604) = 0;
-    *(unsigned int *)(temp_v1 + 0x608) = 0;
-    *(unsigned int *)(temp_v1 + 0x60c) = 0;
-    *(unsigned int *)(temp_v1 + 0x610) = 0x3f800000;
-    *(unsigned int *)(temp_v1 + 0x614) = 0x3f800000;
-    *(unsigned int *)(temp_v1 + 0x618) = 0;
-    *(unsigned int *)(temp_v1 + 0x61c) = 0x3f800000;
-    *(unsigned int *)(temp_v1 + 0x620) = 0x3f800000;
-  }
-  DAT_004475d4 = DAT_004475d4 + 1;
-  return;
+    ++g_activeTextureSlot.nextOrientation;
 }
-
-} /* extern "C" */
+}

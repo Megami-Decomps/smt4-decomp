@@ -1,98 +1,82 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00257a50` (_code @ 0x257a50, 0x1d0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: work reload, result-bitfield zero test, parent registers and shared return layout differ. */
+#include "shard/W5_W5Match2_UniteWork.h"
+#include "gamedata/UnitStats.h"
 
 extern "C" {
+extern UniteWork *g_unite;
+StatBlock *partyMemberFindById(u32 id);
+void FUN_0029dc74(u32 id, StatBlock *result);
+void uniteMergeInheritedSkillsAndStats(void *context, const StatBlock *first,
+    const StatBlock *second, const StatBlock *third, StatBlock *result);
+void uniteBuildInheritedSkillCandidates(u32 id, const StatBlock *first, const StatBlock *second);
+s32 FUN_0029cde0(const u16 *skills, s32 count, u16 skill);
+s32 flagCountUnlockedSlots(const StatBlock *unit);
+void unitRecalculateEffectiveStats(StatBlock *unit);
+void rt_memcpy_w(void *destination, const void *source, u32 size);
 
-int uniteBuildInheritedSkillCandidates(unsigned int, int, int);
-int uniteMergeInheritedSkillsAndStats(unsigned int, int, int, int, int);
-int unitRecalculateEffectiveStats(int);
-int FUN_0029cde0(int, int);
-int FUN_0029dc74(unsigned int, int, int, unsigned int, unsigned int);
-int rt_memcpy_w(int, int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-extern unsigned int *g_unite; /* 0x43dd68 */
-
-/* Supplied declaration required: uniteBuildInheritedSkillCandidates. */
-/* Supplied declaration required: uniteMergeInheritedSkillsAndStats. */
-/* Supplied declaration required: unitRecalculateEffectiveStats. */
-extern int flagCountUnlockedSlots(int);
-/* Supplied declaration required: FUN_0029cde0. */
-/* Supplied declaration required: FUN_0029dc74. */
-extern int partyMemberFindById(unsigned int);
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int FUN_00257a50(int param_1,int param_2,int param_3,unsigned int param_4)
-
+u32 FUN_00257a50(StatBlock *result, s32 selection, s32 mode, u32)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar5;
-  
-  puVar1 = g_unite;
-  puVar5 = g_unite + param_2 * 2 + 0x250e;
-  if (param_3 != 0) {
-    if (param_3 != 1) {
-      if (param_3 != 2) {
-        return 0;
-      }
-      temp_v2 = partyMemberFindById((*puVar5 & 0x3fffffff) >> 0xf);
-    }
-    else {
-      temp_v2 = partyMemberFindById(*puVar5 & 0x7fff);
-    }
-    if (temp_v2 == 0) {
-      return 0;
-    }
-    rt_memcpy_w(param_1,temp_v2,0x604);
-  }
-  else {
-    if ((g_unite[param_2 * 2 + 0x250f] & 0x1fffc) == 0) {
-      return 0;
-    }
-    FUN_0029dc74((g_unite[param_2 * 2 + 0x250f] & 0x1ffff) >> 2,param_1,0x1fffc,param_4,param_4
-                );
-    temp_v2 = partyMemberFindById(*puVar5 & 0x7fff);
-    temp_v0 = partyMemberFindById((*puVar5 & 0x3fffffff) >> 0xf);
-    if (temp_v2 == 0 || temp_v0 == 0) {
-      return 0;
-    }
-    uniteMergeInheritedSkillsAndStats(*puVar1,temp_v2,temp_v0,0,param_1);
-    uniteBuildInheritedSkillCandidates((puVar1[param_2 * 2 + 0x250f] & 0x1ffff) >> 2,temp_v2,temp_v0);
-    temp_v2 = 0;
-    do {
-      if (*(short *)((int)puVar1 + temp_v2 * 2 + 0x9020) != 0) {
-        temp_v0 = param_1 + 0x34;
-        FUN_0029cde0(temp_v0,8);
-        if (temp_v0 == 0) {
-          temp_v0 = flagCountUnlockedSlots(param_1);
-          temp_v1 = 0;
-          if (temp_v1 < temp_v0) {
-            do {
-              if (*(short *)(param_1 + temp_v1 * 2 + 0x34) == 0) {
-                *(unsigned short *)(param_1 + temp_v1 * 2 + 0x34) =
-                     *(unsigned short *)((int)puVar1 + temp_v2 * 2 + 0x9020);
-                break;
-              }
-              temp_v1 = temp_v1 + 1;
-            } while (temp_v1 < temp_v0);
-          }
+    // The retail bitfields span one 64-bit allocation unit. A local view avoids
+    // increasing the alignment and size of the shared four-byte-aligned work.
+    struct ResultPairBits {
+        u64 firstId : 15;
+        u64 secondId : 15;
+        u64 firstType : 2;
+        u64 secondType : 2;
+        u64 resultId : 15;
+        u64 reserved : 15;
+    };
+    typedef char ResultPairBitsSizeCheck[sizeof(ResultPairBits) == 8 ? 1 : -1];
+    UniteWork *work = g_unite;
+    const ResultPairBits *pair = reinterpret_cast<const ResultPairBits *>(
+        &work->resultPairsIV.pairs[selection]);
+    switch (mode) {
+    case 0: {
+        if (work->resultPairsIV.pairs[selection].resultId == 0) {
+            return 0;
         }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x18);
-    unitRecalculateEffectiveStats(param_1);
-  }
-  return 1;
+        FUN_0029dc74(pair->resultId, result);
+        StatBlock *first = partyMemberFindById(pair->firstId);
+        StatBlock *second = partyMemberFindById(pair->secondId);
+        if (first == NULL || second == NULL) {
+            return 0;
+        }
+        uniteMergeInheritedSkillsAndStats(work->context, first, second, NULL, result);
+        uniteBuildInheritedSkillCandidates(pair->resultId, first, second);
+        for (s32 candidate = 0; candidate < 24; ++candidate) {
+            u16 skill = work->secondListIV.indices[candidate];
+            if (skill != 0 && !FUN_0029cde0(result->skills.ids, 8, skill)) {
+                s32 count = flagCountUnlockedSlots(result);
+                for (s32 slot = 0; slot < count; ++slot) {
+                    if (result->skills.ids[slot] == 0) {
+                        result->skills.ids[slot] = work->secondListIV.indices[candidate];
+                        break;
+                    }
+                }
+            }
+        }
+        unitRecalculateEffectiveStats(result);
+        break;
+    }
+    case 1: {
+        StatBlock *parent = partyMemberFindById(pair->firstId);
+        if (parent == NULL) {
+            return 0;
+        }
+        rt_memcpy_w(result, parent, sizeof(*result));
+        break;
+    }
+    case 2: {
+        StatBlock *parent = partyMemberFindById(pair->secondId);
+        if (parent == NULL) {
+            return 0;
+        }
+        rt_memcpy_w(result, parent, sizeof(*result));
+        break;
+    }
+    default:
+        return 0;
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

@@ -1,139 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00290404` (_code @ 0x290404, 0x1c4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail's constant-false path is omitted; label lookup and panel-address scheduling differ. */
+#include "shard/W4_W4Match2_UiQuest.h"
+#include "shard/W6_W6Match5_SecondarySort.h"
+#include "gamedata/DataTable.h"
 
-extern "C" {
-
-int FUN_002903f0(void);
-int FUN_0029ee6c(int, int);
-int FUN_0029efc0(...);
-int dataTable1bOr1cGetRecord(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern int g_uiQuest; /* 0x43dd50 */
-
-extern bool questIsOfferable(unsigned short);
-/* Supplied declaration required: FUN_002903f0. */
-extern int FUN_00298dc8(void);
-extern int FUN_00298e00(unsigned int);
-extern int questIsCompleted(unsigned int);
-/* Supplied declaration required: FUN_0029ee6c. */
-extern int FUN_0029efa8(int);
-/* Supplied declaration required: FUN_0029efc0. */
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-
-
-void FUN_00290404(void)
-
-{
-/* irregular: 4 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  
-  temp_v3 = g_uiQuest;
-  if (*(char *)(g_uiQuest + 0x5c4) != '\0') {
-    temp_v1 = g_uiQuest + 0x5fc;
-    temp_v2 = FUN_0029efc0();
-    temp_v1 = FUN_0029efa8(temp_v1);
-    temp_v0 = *(unsigned short *)(temp_v3 + (temp_v1 + temp_v2) * 2 + 0x6c4);
-  }
-  else {
-    temp_v1 = FUN_0029efc0(g_uiQuest + 0x660);
-    temp_v2 = FUN_0029efa8(temp_v3 + 0x660);
-    temp_v0 = *(unsigned short *)(temp_v3 + (temp_v2 + temp_v1) * 2 + 0x78a);
-  }
-  temp_v6 = (unsigned int)temp_v0;
-  if (temp_v6 == 0) {
-    return;
-  }
-  if (*(char *)(temp_v3 + 0x5c4) != '\0') {
-    temp_v3 = FUN_00298dc8();
-    if (temp_v3 != 0) {
-      temp_v3 = FUN_002903f0();
-      if (temp_v3 != 0) {
-        temp_v6 = 6;
-      }
-      else {
-        temp_v6 = 0;
-      }
-    }
-    else {
-      temp_v3 = questIsCompleted(temp_v6);
-      if (temp_v3 == 0) {
-        return;
-      }
-      temp_v6 = 3;
-    }
-  }
-  else {
-    temp_v5 = temp_v6;
-    dataTable1bOr1cGetRecord();
-    if (*(char *)(temp_v5 + 6) != '\0') {
-      temp_v3 = questIsOfferable(temp_v6);
-      if (temp_v3 != 0) {
-        temp_v5 = FUN_002903f0();
-        if (temp_v5 == temp_v6) {
-          temp_v6 = 0;
-        }
-        else {
-          temp_v3 = questIsCompleted(temp_v6);
-          if (temp_v3 == 0) {
-            temp_v6 = 1;
-          }
-          else {
-            temp_v6 = 2;
-          }
-        }
-      }
-      else {
-        temp_v3 = questIsCompleted(temp_v6);
-        if (temp_v3 == 0) {
-          temp_v6 = 5;
-        }
-        else {
-          temp_v6 = 3;
-        }
-      }
-    }
-    else {
-      temp_v3 = questIsCompleted(temp_v6);
-      if (temp_v3 != 0) {
-        temp_v3 = FUN_00298e00(temp_v6);
-        if (temp_v3 != 0) {
-          temp_v6 = 4;
-        }
-        else {
-          temp_v6 = 3;
-        }
-      }
-      else {
-        temp_v6 = 0;
-      }
-    }
-  }
-  temp_v4 = dataTableGet(0x34,0);
-  temp_v3 = dataTableGetEntries();
-  temp_v5 = dataTableGetCount(temp_v4);
-  if (temp_v6 < temp_v5) {
-    temp_v3 = temp_v3 + temp_v6 * 0x4a + 1;
-  }
-  else {
-    temp_v3 = 0;
-  }
-  FUN_0029ee6c(temp_v3,0x323232ff);
-  return;
+namespace {
+struct QuestStatusLabel {
+    u8 key;
+    u8 text[0x49];
+};
+typedef char QuestStatusLabelSizeCheck[sizeof(QuestStatusLabel) == 0x4A ? 1 : -1];
 }
 
-} /* extern "C" */
+extern "C" {
+u32 FUN_002903f0();
+u32 FUN_00298dc8(s32 quest);
+u32 FUN_00298e00(u32 quest);
+u32 questIsCompleted(s32 quest);
+bool questIsOfferable(u16 quest);
+u32 FUN_0029efc0(const void *cursor);
+u32 FUN_0029efa8(const void *cursor);
+void FUN_0029ee6c(const u8 *text, u32 color);
+
+void FUN_00290404()
+{
+    UiQuest *menu = g_uiQuest;
+    UiQuestPanel *panel = &menu->panel;
+    u16 quest;
+    if (panel->detailMode) {
+        const void *cursor = panel->alternate.cursor;
+        u32 row = FUN_0029efc0(cursor);
+        row += FUN_0029efa8(cursor);
+        quest = menu->cursor.alternate.ids[row];
+    } else {
+        u32 row = FUN_0029efc0(&menu->cursor);
+        row += FUN_0029efa8(&menu->cursor);
+        quest = menu->list[row];
+    }
+    if (quest == 0) {
+        return;
+    }
+
+    u32 status;
+    if (panel->detailMode) {
+        if (FUN_00298dc8(quest)) {
+            status = FUN_002903f0() ? 6 : 0;
+        } else {
+            if (!questIsCompleted(quest)) {
+                return;
+            }
+            status = 3;
+        }
+    } else if (dataTable1bOr1cGetRecord(quest)->classification.kind) {
+        if (questIsOfferable(quest)) {
+            if (FUN_002903f0() == quest) {
+                status = 0;
+            } else {
+                status = questIsCompleted(quest) ? 2 : 1;
+            }
+        } else {
+            status = questIsCompleted(quest) ? 3 : 5;
+        }
+    } else if (questIsCompleted(quest)) {
+        status = FUN_00298e00(quest) ? 4 : 3;
+    } else {
+        status = 0;
+    }
+    DataTableView<QuestStatusLabel> labels(0x34, 0);
+    const u8 *text = status < labels.count ? labels.entries[status].text : NULL;
+    FUN_0029ee6c(text, 0x323232FF);
+}
+}

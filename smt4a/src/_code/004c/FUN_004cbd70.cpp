@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0015f490(...);
 int eventQueueAddUnique(...);
-int FUN_0026c3c4(...);
+int statusCommitSelectedSkills(...);
 int statusDownEnterState11(...);
 int FUN_004bd6b0(...);
 
@@ -19,7 +19,7 @@ int FUN_0023acdc(int);
 int scrScriptProcessStartEntry(...);
 int statusDownRestartTransition(void);
 int FUN_00333dc8(...);
-int FUN_00336de4(int, int);
+int btlTalkBustUpSetDemonTexture(int, int);
 int obj04Finish(void);
 int btlTalkBustUpSetUnk2F4(int);
 int FUN_0037dfb0(int, int);
@@ -45,7 +45,7 @@ extern int gameGetSlotRecord(unsigned int);
 extern int FUN_002613f0(unsigned int);
 extern int messageMainIsIdle(void);
 extern int FUN_0026c3a0(void);
-/* Supplied declaration required: FUN_0026c3c4. */
+/* Supplied declaration required: statusCommitSelectedSkills. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: statusDownRestartTransition. */
@@ -53,7 +53,7 @@ extern int FUN_002c7cb4(void);
 extern int FUN_002effbc(void);
 extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_00333dc8. */
-/* Supplied declaration required: FUN_00336de4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 /* Supplied declaration required: obj04Finish. */
 extern int asdSoundIsBankHandleLoaded(unsigned int);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
@@ -198,7 +198,7 @@ LAB_004cbdc8:
       if (temp_v3 != 0) {
         temp_v3 = btlTalkBustUpGetValue();
         if (temp_v3 == 0) {
-          FUN_00336de4(*(unsigned short *)(temp_v1 + 0x62),1);
+          btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v1 + 0x62),1);
           btlTalkBustUpSetUnk2F4(1);
         }
         scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x20),8);
@@ -271,7 +271,7 @@ LAB_004cbdc8:
       if (temp_v3 != 0) {
         FUN_00333dc8(0);
         FUN_004bd6b0(temp_v1,*(unsigned short *)(temp_v0 + 4),temp_v4);
-        FUN_0026c3c4(temp_v1 + 0x34);
+        statusCommitSelectedSkills(temp_v1 + 0x34);
         *(unsigned int *)(param_1 + 8) = 100;
         return;
       }

@@ -1,79 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b50e4` (_code @ 0x2b50e4, 0x14c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: global-address hoisting and 64-bit marker-mask register allocation differ. */
+#include "battle/btlMain.h"
+#include "battle/btlCamera.h"
+#include "battle/BattleEditorState.h"
+#include "sys/Task.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+u32 taskCreateDraw(const char* name, u32 priority, u32 size, u32 flags,
+                   TaskFunc callback, TaskFunc destroy, void* data, u32 parent);
+void* asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
+void FUN_002984d4(void* work);
+void FUN_003285dc(void* work);
+void btlEditorUpdate(void* work);
+s32 FUN_004f2708(BtlCameraA* camera, BtlMainStateA* battle, u32 option);
+void FUN_004fb670(u32 first, u32 second, u32 third);
+void FUN_004feecc(u32 enabled, u32 option);
+void FUN_004aa780(void* work, u32 enabled);
+extern BtlCameraA* g_btlCamera;
+extern void* g_btlUiBlock;
+extern BattleEditorGlobalsA g_btlEditor;
 
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(int, int, int, int, int);
-int FUN_004aa780(int, int);
-int FUN_004fb670(int, int);
-int FUN_004feecc(int, int);
-
-/* stack frame of param_1: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern int FUN_002984d4(...); /* 0x2984d4 */
-extern unsigned char LAB_002b5238; /* 0x2b5238 */
-extern unsigned char LAB_002b524c; /* 0x2b524c */
-extern int btlEditorUpdate(...); /* 0x2decb4 */
-extern int FUN_003285dc(...); /* 0x3285dc */
-extern int g_btlCamera; /* 0x571508 */
-extern unsigned int *g_btlEditor; /* 0x5737e0 */
-extern unsigned int DAT_005737e8; /* 0x5737e8 */
-extern unsigned int DAT_005737ec; /* 0x5737ec */
-extern int g_btlUiBlock; /* 0x57a9c8 */
-
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_004aa780. */
-extern int FUN_004f2708(int, unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_004fb670. */
-/* Supplied declaration required: FUN_004feecc. */
-
-
-void FUN_002b50e4(unsigned int *param_1)
-
+void FUN_002b50e4(BtlMainStateA* battle)
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned char *puVar1;
-  unsigned int *puVar2;
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  puVar1 = &LAB_002b5238;
-  taskCreateDraw(&LAB_002b5238,4,0,0,FUN_002984d4,FUN_003285dc,param_1,*param_1);
-  param_1[0x1f] = (unsigned int)puVar1;
-  taskCreateDraw(&LAB_002b524c,0x75,0,0,btlEditorUpdate,0,param_1,puVar1);
-  puVar2 = (unsigned int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x18,1);
-  g_btlEditor = puVar2;
-  *puVar2 = 0;
-  puVar2[1] = (unsigned int)*(unsigned char *)((int)param_1 + 0x1ed9);
-  *(unsigned short *)(puVar2 + 4) = 0xffff;
-  *(unsigned char *)((int)puVar2 + 0x12) = 0xff;
-  *(unsigned char *)((int)puVar2 + 0x13) = 0xff;
-  if (g_btlCamera != 0) {
-    if ((-1 < *(int *)(g_btlCamera + 0x7cc)) &&
-       (temp_v0 = FUN_004f2708(g_btlCamera,param_1,1), temp_v0 != 0)) {
-      FUN_004fb670(0,0);
+    u32 job = taskCreateDraw("btlEditor Calc", 4, 0, 0, FUN_002984d4,
+        FUN_003285dc, battle, battle->job);
+    battle->uiJobs.editorJob = job;
+    taskCreateDraw("btlEditor DrawUp", 0x75, 0, 0, btlEditorUpdate, 0, battle, job);
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlEditor.cpp", 976);
+    BattleEditorStateA* editor = static_cast<BattleEditorStateA*>(
+        asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(BattleEditorStateA), 1));
+    g_btlEditor.state = editor;
+    editor->mode = 0;
+    editor->rosterCount = battle->flaggedRoster.count;
+    editor->selection = -1;
+    editor->group = -1;
+    editor->member = -1;
+    if (g_btlCamera) {
+        if (g_btlCamera->orientation.editor.selection >= 0 &&
+            FUN_004f2708(g_btlCamera, battle, 1)) {
+            FUN_004fb670(0, 0, 0);
+        }
+        FUN_004feecc(1, 0);
     }
-    FUN_004feecc(1,0);
-  }
-  temp_v1 = param_1[0x116b] | DAT_005737ec;
-  param_1[0x116a] = DAT_005737e8 | param_1[0x116a];
-  param_1[0x116b] = temp_v1;
-  if (g_btlUiBlock != 0) {
-    FUN_004aa780(g_btlUiBlock,1);
-    return;
-  }
-  return;
+    battle->markerMasks.bits |= g_btlEditor.markerMask;
+    if (g_btlUiBlock) {
+        FUN_004aa780(g_btlUiBlock, 1);
+    }
 }
-
-} /* extern "C" */
+}

@@ -4,21 +4,45 @@
 #define UI_MENUSTATE_H
 
 #include "common.h"
+#include "ui/UiSpriteState.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
+#include <stddef.h>
 
 typedef struct MenuState {
-    /* 0x000 */ u8 unk00[8];
+    union {
+        /* 0x000 */ u8 unk00[8];
+        /* 0x000 */ u32 process;
+    };
     /* 0x008 */ u32 mode;
     /* 0x00C */ u8 unk0c[6];
     /* 0x012 */ u8 unk12;
     /* 0x013 */ u8 unk13;
     /* 0x014 */ s32 type;
-    /* 0x018 */ u8 unk18[0x24];
-    /* 0x03C */ u8 panelA[0x118];
-    /* 0x154 */ u8 panelB[0x168];
+    union {
+        /* 0x018 */ u8 unk18[0x24];
+        struct {
+            u8 prefix[4];
+            /* 0x01C */ UiResourceParameters parameters;
+        } resources;
+    };
+    union {
+        /* 0x03C */ u8 panelA[0x118];
+        /* 0x03C */ UiSpriteState primarySprites[2];
+    };
+    union {
+        /* 0x154 */ u8 panelB[0x168];
+        /* 0x154 */ UiSpriteState secondarySprites[2];
+    };
     /* 0x2BC */ u32 unk2bc;
     /* 0x2C0 */ u32 unk2c0;
     /* 0x2C4 */ u32 unk2c4;
     /* 0x2C8 */ u32 unk2c8;
 } MenuState;
+typedef char MenuStateInitializationOffsets[
+    offsetof(MenuState, process) == 0 &&
+    offsetof(MenuState, resources.parameters) == 0x1C &&
+    offsetof(MenuState, primarySprites) == 0x3C &&
+    offsetof(MenuState, secondarySprites) == 0x154 &&
+    sizeof(MenuState) == 0x2CC ? 1 : -1];
 
 #endif

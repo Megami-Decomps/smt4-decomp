@@ -1,105 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00318c3c` (_code @ 0x318c3c, 0x130 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: preview-field address selection and final helpTexturesRelease branch-nop relocation differ. */
+#include "camp/PartyResourceWork.h"
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
+void asdMemFree(void *);
+void FUN_002cc220(void);
+void FUN_0038b3f8(s32, s32);
+PartyTextureSlot *FUN_003e4d68(u32);
+s32 FUN_00187168(const PartyTextureSlot *);
+void ifTouchRegionRemove(void);
+s32 devilIsTextureLoaded(s32, s32);
+void campButtonHelpRelease(void);
+void helpTexturesRelease(void);
 
-int ifTouchRegionRemove(void);
-int FUN_00184310(void);
-int asdMemFree(...);
-int asdTMTexTableReleaseNode(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_002cc220(void);
-int asdTMTexTableFreeEntry(int);
-int helpReleaseDataTable(void);
-int campButtonHelpRelease(void);
-int FUN_0038b3f8(int, int);
-int devilIsTextureLoaded(int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-extern signed char DAT_0057f0c5; /* 0x57f0c5 */
-extern unsigned int DAT_0057f0cc; /* 0x57f0cc */
-extern unsigned int DAT_0057f0d0; /* 0x57f0d0 */
-
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_00184310. */
-extern int FUN_00187168(void);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: FUN_002cc220. */
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: helpReleaseDataTable. */
-/* Supplied declaration required: campButtonHelpRelease. */
-/* Supplied declaration required: FUN_0038b3f8. */
-/* Supplied declaration required: devilIsTextureLoaded. */
-extern int FUN_003e4d68(unsigned int);
-
-
-void FUN_00318c3c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Release party previews, touch regions, and shared help resources. */
+void FUN_00318c3c(PartyResourceWork *work)
 {
-/* irregular: irregular input(s): in_lr; 10 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int unaff_r4;
-  int temp_v2;
-  unsigned int temp_v3;
-  int *piVar5;
-  unsigned int in_lr;
-  
-  if (*(int *)(param_1 + 0x4b98) != 0) {
-    asdMemFree();
-    *(int *)(param_1 + 0x4b98) = 0;
-  }
-  FUN_002cc220();
-  temp_v2 = 0;
-  do {
-    piVar5 = (int *)(param_1 + temp_v2 * 4 + 0x4bb0);
-    temp_v0 = *piVar5;
-    if (temp_v0 != 0) {
-      FUN_0038b3f8((int)(short)temp_v0,1);
-      *piVar5 = 0;
+    if (work->data != NULL) {
+        asdMemFree(work->data);
+        work->data = NULL;
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 4);
-  temp_v3 = 0;
-  do {
-    temp_v2 = FUN_003e4d68(temp_v3 & 0xffff);
-    temp_v0 = FUN_00187168();
-    if (temp_v0 != 0) {
-      temp_v1 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
-      FUN_00184310();
-      FUN_0038b3f8((int)(short)(*(short *)(temp_v1 + 0x9c) + 1),0);
+    FUN_002cc220();
+    for (s32 i = 0; i < 4; ++i) {
+        if (work->loadedTextures[i] != 0) {
+            FUN_0038b3f8((s16)work->loadedTextures[i], 1);
+            work->loadedTextures[i] = 0;
+        }
     }
-    temp_v3 = temp_v3 + 1;
-  } while ((int)temp_v3 < 0xc);
-  temp_v2 = (int)*(short *)(param_1 + 0x4b14);
-  if (((temp_v2 != 0) && (*(char *)(param_1 + 0x4b18) == '\0')) && (devilIsTextureLoaded(temp_v2,1), temp_v2 != 0)
-     ) {
-    FUN_0038b3f8((int)*(short *)(param_1 + 0x4b14),1);
-  }
-  temp_v2 = 0;
-  if (temp_v2 < *(short *)(param_1 + 0x480c)) {
-    do {
-      ifTouchRegionRemove();
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < *(short *)(param_1 + 0x480c));
-  }
-  *(unsigned short *)(param_1 + 0x480c) = 0;
-  campButtonHelpRelease();
-  DAT_0057f0c5 = DAT_0057f0c5 - '\x01';
-  if (DAT_0057f0c5 < '\x01') {
-    helpReleaseDataTable();
-    asdMemFree(DAT_0057f0cc);
-    asdMemFree(DAT_0057f0d0);
-    asdTMTexTableReleaseNode(10,0,param_3,param_4,unaff_r4,in_lr);
-    asdTMTexTableFreeEntry(10);
-    DAT_0057f0c5 = '\0';
-  }
-  return;
+    for (s32 i = 0; i < 12; ++i) {
+        PartyTextureSlot *slot = FUN_003e4d68((u16)i);
+        if (FUN_00187168(slot)) {
+            /* The canonical DevilRecordA is only the 0x40-byte prefix. */
+            const DevilTableRecordA *record = (const DevilTableRecordA *)FUN_00184310(slot->id);
+            FUN_0038b3f8((s16)(record->unk9C + 1), 0);
+        }
+    }
+    if (work->previewTexture != 0 && work->previewShared == 0 &&
+        devilIsTextureLoaded(work->previewTexture, 1)) {
+        FUN_0038b3f8(work->previewTexture, 1);
+    }
+    for (s32 i = 0; i < work->touchRegionCount; ++i) {
+        ifTouchRegionRemove();
+    }
+    work->touchRegionCount = 0;
+    campButtonHelpRelease();
+    helpTexturesRelease();
 }
-
-} /* extern "C" */
+}

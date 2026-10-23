@@ -1,106 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029ec94` (_code @ 0x29ec98, 0x14c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: eight membership equality comparisons use reversed operands; every other instruction matches. */
+#include "shard/W5_W5Match2_UniteWork.h"
 
 extern "C" {
+extern UniteWork *g_unite;
+s32 FUN_0029e93c(const u8 *cursor);
+s32 FUN_00293f10(s32 id, s32 byDevilId);
+void FUN_002958f8(s32 id, s32 byDevilId);
+void FUN_002942c4(s32 id, s32 byDevilId);
 
-int FUN_00293f10(int, int);
-int FUN_002942c4(int, int);
-int FUN_002958f8(int, int);
-
-/* Supplied declaration required: FUN_00293f10. */
-/* Supplied declaration required: FUN_002942c4. */
-/* Supplied declaration required: FUN_002958f8. */
-extern unsigned long long FUN_0029e93c(int);
-
-
-void FUN_0029ec94(int *param_1)
-
+void FUN_0029ec94(void)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  unsigned char temp_v9;
-  unsigned char temp_v10;
-  unsigned long long temp_v11;
-  
-  temp_v8 = *param_1;
-  temp_v11 = FUN_0029e93c(temp_v8 + 0x6214);
-  if (*(char *)(temp_v8 + 0x420) == '\x01') {
-    temp_v11 = FUN_0029e93c(temp_v8 + 0x92d4);
-  }
-  temp_v4 = (unsigned int)((unsigned long long)temp_v11 >> 0x20);
-  temp_v7 = 0;
-  temp_v0 = temp_v8 + (int)temp_v11 * 2;
-  do {
-    temp_v1 = temp_v8 + temp_v7 * 2;
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x6660);
-    if (temp_v2 != 0) {
-      temp_v4 = (unsigned int)*(unsigned short *)(temp_v0 + 0x6278);
-    }
-    if (temp_v2 != 0 && temp_v2 != temp_v4) {
-      temp_v4 = (unsigned int)*(unsigned short *)(temp_v0 + 0x627a);
-      temp_v9 = temp_v2 != temp_v4;
-      if (temp_v9) {
-        temp_v4 = (unsigned int)*(unsigned short *)(temp_v0 + 0x627c);
-      }
-      temp_v10 = temp_v2 != temp_v4;
-      if (temp_v9 && temp_v10) {
-        temp_v4 = (unsigned int)*(unsigned short *)(temp_v0 + 0x627e);
-      }
-      if ((temp_v9 && temp_v10) && temp_v2 != temp_v4) {
-        temp_v3 = (int)*(short *)(temp_v1 + 0x6660);
-        FUN_00293f10(temp_v3,1);
-        temp_v4 = temp_v5;
-        if (temp_v3 != 0) {
-          FUN_002958f8((int)*(short *)(temp_v1 + 0x6660),1);
-          *(unsigned short *)(temp_v1 + 0x6660) = 0;
-          temp_v4 = temp_v6;
-        }
-      }
-    }
-    temp_v7 = temp_v7 + 1;
-  } while (temp_v7 < 4);
-  temp_v0 = 0;
-  do {
-    temp_v7 = temp_v8 + ((int)temp_v11 + temp_v0) * 2;
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v7 + 0x6278);
-    if (temp_v2 != 0) {
-      temp_v4 = (unsigned int)*(unsigned short *)(temp_v8 + 0x6660);
-    }
-    if (temp_v2 != 0 && temp_v2 != temp_v4) {
-      temp_v4 = (unsigned int)*(unsigned short *)(temp_v8 + 0x6662);
-      temp_v9 = temp_v2 != temp_v4;
-      if (temp_v9) {
-        temp_v4 = (unsigned int)*(unsigned short *)(temp_v8 + 0x6664);
-      }
-      if ((temp_v9 && temp_v2 != temp_v4) && (temp_v4 = (unsigned int)*(unsigned short *)(temp_v8 + 0x6666), temp_v2 != temp_v4))
-      {
-        temp_v1 = 0;
-        do {
-          if (*(short *)(temp_v8 + temp_v1 * 2 + 0x6660) == 0) {
-            FUN_002942c4((int)*(short *)(temp_v7 + 0x6278),1);
-            temp_v1 = temp_v8 + temp_v1 * 2;
-            temp_v4 = temp_v1 + 0x6600;
-            *(unsigned short *)(temp_v1 + 0x6660) = *(unsigned short *)(temp_v7 + 0x6278);
-            break;
-          }
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < 4);
-      }
-    }
-    temp_v0 = temp_v0 + 1;
-    if (temp_v0 >= 4) {
-      return;
-    }
-  } while( 1 );
-}
+    UniteWork *work = g_unite;
+    s32 first = FUN_0029e93c(work->portraitSelectionIV.cursor);
+    if (work->menu.mode == 1)
+        first = FUN_0029e93c(work->portraitSelectionIV.alternateCursor);
 
-} /* extern "C" */
+    for (s32 slot = 0; slot < 4; ++slot) {
+        u32 id = (u16)work->portraitSelectionIV.loaded[slot];
+        if (id && work->portraitSelectionIV.desired[first] != id &&
+            work->portraitSelectionIV.desired[first + 1] != id &&
+            work->portraitSelectionIV.desired[first + 2] != id &&
+            work->portraitSelectionIV.desired[first + 3] != id) {
+            if (FUN_00293f10(work->portraitSelectionIV.loaded[slot], 1)) {
+                FUN_002958f8(work->portraitSelectionIV.loaded[slot], 1);
+                work->portraitSelectionIV.loaded[slot] = 0;
+            }
+        }
+    }
+    for (s32 entry = 0; entry < 4; ++entry) {
+        u32 id = work->portraitSelectionIV.desired[first + entry];
+        if (id && (u16)work->portraitSelectionIV.loaded[0] != id &&
+            (u16)work->portraitSelectionIV.loaded[1] != id &&
+            (u16)work->portraitSelectionIV.loaded[2] != id &&
+            (u16)work->portraitSelectionIV.loaded[3] != id) {
+            for (s32 slot = 0; slot < 4; ++slot) {
+                if (!work->portraitSelectionIV.loaded[slot]) {
+                    FUN_002942c4((s16)work->portraitSelectionIV.desired[first + entry], 1);
+                    work->portraitSelectionIV.loaded[slot] = work->portraitSelectionIV.desired[first + entry];
+                    break;
+                }
+            }
+        }
+    }
+}
+}

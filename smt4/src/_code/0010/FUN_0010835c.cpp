@@ -1,118 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010835c` (_code @ 0x10835c, 0x1ec bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: checking frame capture downsample passes; retail's redundant minimum-step clamp is omitted. */
+#include "ui/FrameTex.h"
+#include "shard/JobWork.h"
+#include "shard/S1ListPanel.h"
 extern "C" {
+extern RenderCtx *g_titleScene;
+void FUN_002c39a4(RenderCtx *context);
+u8 FUN_002bfadc(u32 screen, JobSurface *surface);
+s32 FUN_002bff10(u32 screen);
+void surfaceCopy(JobSurface *source, JobSurface *destination);
 
-int surfaceCopy(unsigned int, unsigned int);
-int FUN_002bfadc(int, int);
-int FUN_002c39a4(unsigned int);
-
-extern unsigned int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: surfaceCopy. */
-/* Supplied declaration required: FUN_002bfadc. */
-extern int FUN_002bff10(unsigned int);
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_002c39a4. */
-
-
-char FUN_0010835c(void)
-
+u32 FUN_0010835c(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int unaff_r7;
-  int *piVar6;
-  int unaff_r8;
-  int *piVar7;
-  int *piVar8;
-  unsigned char temp_v5;
-  
-  temp_v2 = jobGetWork();
-  *(unsigned char *)(temp_v2 + 0xe95) = 0;
-  temp_v5 = *(char *)(temp_v2 + 0xe8c) != '\0';
-  temp_v1 = '\0';
-  if (temp_v5) {
-    temp_v1 = *(char *)(temp_v2 + 0xe8d);
-  }
-  if (temp_v5 && temp_v1 != '\0') {
-    piVar8 = (int *)(temp_v2 + 0xfdc);
-    temp_v1 = '\0';
-    if (*(int *)(temp_v2 + 0xfdc) != 0) {
-      if (*(char *)(temp_v2 + 0xfd8) != '\0') {
-        temp_v1 = '\0';
-      }
-      else {
-        FUN_002c39a4(g_titleScene);
-        *(unsigned int *)(*(int *)(temp_v2 + 0xfdc) + 0x14) = 0x200;
-        *(unsigned int *)(*piVar8 + 0x18) = 0x200;
-        temp_v0 = 0;
-        FUN_002bfadc(0,*piVar8);
-        *(unsigned char *)(temp_v2 + 0xe94) = temp_v0;
-        temp_v3 = FUN_002bff10(0);
-        temp_v4 = *(int *)(temp_v2 + 0xe90);
-        if (((temp_v3 == 0) && (temp_v4 >= 2)) && (temp_v4 = temp_v4 - 1, temp_v4 < 1)) {
-          temp_v4 = 1;
+    // The extra source and ping-pong surfaces lie beyond FrameWork's recovered end.
+    struct DownsampleView {
+        FrameWork frame;
+        JobSurface *source;
+        u8 separateSurfaces;
+        u8 unkFE1[3];
+        JobSurface *first;
+        JobSurface *second;
+    };
+    typedef char DownsampleSurfaceOffsets[offsetof(DownsampleView, source) == 0xFDC &&
+        offsetof(DownsampleView, first) == 0xFE4 && offsetof(DownsampleView, second) == 0xFE8 ? 1 : -1];
+    DownsampleView *work = (DownsampleView *)jobGetWork();
+    work->frame.unkE95 = 0;
+    if (!work->frame.unkE8C || !work->frame.quadActive || !work->source || work->frame.unkFD8)
+        return 0;
+    FUN_002c39a4(g_titleScene);
+    work->source->width = 512;
+    work->source->height = 512;
+    work->frame.unkE94 = FUN_002bfadc(0, work->source);
+    s32 ready = FUN_002bff10(0);
+    s32 passes = (s32)work->frame.unkE90;
+    if (!ready && passes > 1)
+        --passes;
+    if (work->separateSurfaces) {
+        for (s32 pass = 0; pass < passes; ++pass) {
+            if (pass == 0) {
+                surfaceCopy(work->source, work->first);
+                work->first->width = work->source->width >> 1;
+                work->first->height = work->source->height >> 1;
+            } else if (pass == 1) {
+                surfaceCopy(work->first, work->second);
+                work->second->width = work->first->width >> 1;
+                work->second->height = work->first->height >> 1;
+            } else {
+                surfaceCopy(work->second, work->second);
+                work->second->width >>= 1;
+                work->second->height >>= 1;
+            }
         }
-        if (*(char *)(temp_v2 + 0xfe0) != '\0') {
-          if (0 < temp_v4) {
-            unaff_r7 = temp_v2 + 0xc00;
-            unaff_r8 = temp_v2 + 0xc00;
-          }
-          temp_v3 = 0;
-          if (0 < temp_v4) {
-            piVar6 = (int *)(unaff_r7 + 1000);
-            piVar7 = (int *)(unaff_r8 + 0x3e4);
-            do {
-              surfaceCopy(*(unsigned int *)(temp_v2 + 0xfdc),*(unsigned int *)(temp_v2 + 0xfe4));
-              *(int *)(*piVar7 + 0x14) = *(int *)(*piVar8 + 0x14) >> 1;
-              *(int *)(*piVar7 + 0x18) = *(int *)(*piVar8 + 0x18) >> 1;
-              while( 1 ) {
-                temp_v3 = temp_v3 + 1;
-                if (temp_v4 <= temp_v3) {
-                  *(unsigned char *)(temp_v2 + 0xe95) = 1;
-                  temp_v1 = '\0';
-                  *(unsigned char *)(temp_v2 + 0xe96) = 0;
-                  return temp_v1;
-                }
-                if (temp_v3 == 0) break;
-                if (temp_v3 != 1) {
-                  surfaceCopy(*(unsigned int *)(temp_v2 + 0xfe8),*(unsigned int *)(temp_v2 + 0xfe8));
-                  *(int *)(*piVar6 + 0x14) = *(int *)(*piVar6 + 0x14) >> 1;
-                  *(int *)(*piVar6 + 0x18) = *(int *)(*piVar6 + 0x18) >> 1;
-                }
-                else {
-                  surfaceCopy(*(unsigned int *)(temp_v2 + 0xfe4),*(unsigned int *)(temp_v2 + 0xfe8));
-                  *(int *)(*piVar6 + 0x14) = *(int *)(*piVar7 + 0x14) >> 1;
-                  *(int *)(*piVar6 + 0x18) = *(int *)(*piVar7 + 0x18) >> 1;
-                }
-              }
-            } while( 1 );
-          }
+    } else {
+        for (s32 pass = 0; pass < passes; ++pass) {
+            surfaceCopy(work->source, work->source);
+            work->source->width >>= 1;
+            work->source->height >>= 1;
         }
-        else {
-          temp_v3 = 0;
-          if (temp_v3 < temp_v4) {
-            do {
-              surfaceCopy(*(unsigned int *)(temp_v2 + 0xfdc),*(unsigned int *)(temp_v2 + 0xfdc));
-              temp_v3 = temp_v3 + 1;
-              *(int *)(*piVar8 + 0x14) = *(int *)(*piVar8 + 0x14) >> 1;
-              *(int *)(*piVar8 + 0x18) = *(int *)(*piVar8 + 0x18) >> 1;
-            } while (temp_v3 < temp_v4);
-          }
-        }
-        *(unsigned char *)(temp_v2 + 0xe95) = 1;
-        temp_v1 = '\0';
-        *(unsigned char *)(temp_v2 + 0xe96) = 0;
-      }
     }
-  }
-  return temp_v1;
+    work->frame.unkE95 = 1;
+    work->frame.unkE96 = 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

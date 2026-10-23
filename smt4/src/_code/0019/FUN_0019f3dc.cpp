@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002893ec(...);
+int mapConsumePendingJumpRequest(...);
 int gameJumpRequestClear(void);
 int FUN_00289574(...);
 int FUN_002895a8(...);
@@ -65,7 +65,7 @@ extern unsigned int DAT_0049fc1c; /* 0x49fc1c */
 #endif
 extern int scrRunOpcodesStub(unsigned int);
 extern int questSysUpdateLoad(int);
-/* Supplied declaration required: FUN_002893ec. */
+/* Supplied declaration required: mapConsumePendingJumpRequest. */
 /* Supplied declaration required: gameJumpRequestClear. */
 /* Supplied declaration required: FUN_00289574. */
 extern char *gameJumpRequestGet(void);
@@ -312,7 +312,7 @@ unsigned int FUN_0019f3dc(void)
         return 0;
       }
       *(unsigned char *)(temp_v3 + 0xc0) = 0;
-      FUN_002893ec(temp_v3 + 0xa8,1);
+      mapConsumePendingJumpRequest(temp_v3 + 0xa8,1);
       return 0;
     }
     if (DAT_0049fc14 != '\0') {

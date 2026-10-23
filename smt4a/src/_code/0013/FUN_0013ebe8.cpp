@@ -1,82 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013ebe8` (_code @ 0x13ebe8, 0x124 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: handle-list loop, return tail and volume-zero branch layout differ from retail. */
+#include "sound/SoundHandlePlayback.h"
 
 extern "C" {
+extern SoundHandlePlaybackStateA g_asdSoundSystem;
+u32 FUN_0015e2bc(void* player, AsdSndHandleNode* handle, s32 soundId, s32 option);
+void asdSoundObjectStop(s32 handle, s32 frames);
+void FUN_0015e874(s32 handle, s32 frames, f32 volume);
 
-int FUN_0015e2bc(unsigned char *, int *, int, int);
-int FUN_0015e874(...);
-int asdSoundObjectStop(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-extern unsigned char DAT_0063e37c; /* 0x63e37c */
-extern int *g_soundHandleList; /* 0x63e944 */
-extern int DAT_0063e948; /* 0x63e948 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0015e2bc. */
-/* Supplied declaration required: FUN_0015e874. */
-/* Supplied declaration required: asdSoundObjectStop. */
-
-
-unsigned int FUN_0013ebe8(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+// Restart a registered sound handle and fade it to the requested 0..127 volume.
+u32 FUN_0013ebe8(s32 id, s32 soundId, u32 volume, u32 fadeFrames)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char *puVar2;
-  int temp_v1;
-  int *piVar4;
-  unsigned int in_fpscr;
-  
-  temp_v1 = 0;
-  piVar4 = g_soundHandleList;
-  if (0 < DAT_0063e948) {
-    while (piVar4 != (int *)0x0) {
-      if (piVar4[6] == param_1) {
-        if (*piVar4 != 0) {
-          asdSoundObjectStop(*piVar4,0);
+    AsdSndHandleNode* node = g_asdSoundSystem.handles;
+    s32 count = g_asdSoundSystem.count;
+    for (s32 index = 0; index < count && node != NULL; ++index, node = node->next) {
+        if (node->id == id) {
+            if (node->handle != 0)
+                asdSoundObjectStop(node->handle, 0);
+            if ((u8)FUN_0015e2bc(g_asdSoundSystem.archivePlayer, node, soundId, 0) != 0)
+                return 0;
+            if (node->handle != 0)
+                FUN_0015e874(node->handle, 0, 0.0f);
+            node->unk0d = volume;
+            if (volume > 127)
+                node->unk0d = 127;
+            f32 gain = 0.0f;
+            if (volume != 0) {
+                gain = 1.0f + ((f32)(u32)node->unk0d - 64.0f) * (1.0f / 63.5f);
+                if (gain > 2.0f)
+                    gain = 2.0f;
+            }
+            if (node->handle != 0)
+                FUN_0015e874(node->handle, fadeFrames, gain);
+            node->unk08 = soundId;
+            node->value |= 2;
+            return 1;
         }
-        puVar2 = &DAT_0063e37c;
-        FUN_0015e2bc(&DAT_0063e37c,piVar4,param_2,0);
-        if (((unsigned int)puVar2 & 0xff) != 0) {
-          return 0;
-        }
-        temp_v0 = 0;
-        if (*piVar4 != 0) {
-          temp_v0 = FUN_0015e874(*piVar4,0);
-        }
-        if (param_3 >= 0x80) {
-          temp_v0 = 0x7f;
-        }
-        *(char *)((int)piVar4 + 0xd) = (char)param_3;
-        if (param_3 >= 0x80) {
-          *(unsigned char *)((int)piVar4 + 0xd) = temp_v0;
-        }
-        else if (param_3 == 0) {
-          if (*piVar4 != 0) {
-            FUN_0015e874(*piVar4,param_4);
-          }
-          piVar4[2] = param_2;
-          *(unsigned char *)(piVar4 + 3) = *(unsigned char *)(piVar4 + 3) | 2;
-          return 1;
-        }
-        VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)piVar4 + 0xd),(unsigned char)(in_fpscr >> 0x16) & 3);
-        if (*piVar4 != 0) {
-          FUN_0015e874(*piVar4,param_4);
-        }
-        piVar4[2] = param_2;
-        *(unsigned char *)(piVar4 + 3) = *(unsigned char *)(piVar4 + 3) | 2;
-        return 1;
-      }
-      piVar4 = (int *)piVar4[5];
-      temp_v1 = temp_v1 + 1;
-      if (DAT_0063e948 <= temp_v1) {
-        return 0;
-      }
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

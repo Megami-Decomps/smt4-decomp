@@ -1,87 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00317af8` (_code @ 0x317af8, 0x134 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: calibration sign extensions, combined flag test, coordinate VFP scheduling and return-block placement differ. */
+#include "input/PadAnalog.h"
+#include "shard/GlobalBlocks.h"
 
 extern "C" {
+extern PadAnalogSample DAT_0063ffd0[2];
+extern PadAnalogSample DAT_0063fff0;
+void FUN_00226c70(f32 *value, f32 deadZone);
 
-int FUN_00226c70(...);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_3_stack;
-
-extern int DAT_005b4000; /* 0x5b4000 */
-extern unsigned int DAT_005b4004; /* 0x5b4004 */
-extern unsigned int DAT_005b4008; /* 0x5b4008 */
-extern float DAT_005b4014; /* 0x5b4014 */
-extern unsigned int DAT_0063ffd0; /* 0x63ffd0 */
-extern unsigned int DAT_0063fff0; /* 0x63fff0 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00226c70. */
-
-
-unsigned int FUN_00317af8(float *param_1,float *param_2,unsigned int param_3)
-
+// Read normalized analog axes, applying the configured dead zone when enabled.
+u32 FUN_00317af8(f32 *outX, f32 *outY, u32 index)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  short temp_v0;
-  unsigned int *puVar2;
-  short temp_v1;
-  unsigned int in_fpscr;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5 [3];
-  
-  if (*(char *)(DAT_005b4000 + 0x18) == '\0') {
-    temp_v1 = *(short *)(DAT_005b4000 + 0xc);
-    temp_v0 = *(short *)(DAT_005b4000 + 0x12);
-  }
-  else if (*(char *)(DAT_005b4000 + 0x18) == '\x01') {
-    temp_v1 = *(short *)(DAT_005b4000 + 0xe);
-    temp_v0 = *(short *)(DAT_005b4000 + 0x14);
-  }
-  else {
-    temp_v1 = *(short *)(DAT_005b4000 + 0x10);
-    temp_v0 = *(short *)(DAT_005b4000 + 0x16);
-  }
-  temp_v2 = (float)VectorSignedToFloat((int)temp_v0 - (int)temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  if ((param_3 < 2) && (param_3 <= DAT_005b4004)) {
-    if (!((DAT_005b4008 & 1) == 0 && (DAT_005b4008 & 2) == 0)) {
-      puVar2 = &DAT_0063fff0;
+    // The dead-zone value lies beyond the recovered shared global prefix.
+    struct AnalogGlobalsView {
+        PadAnalogCalibration *calibration;
+        u32 count;
+        u32 flags;
+        u32 unk0C;
+        u32 unk10;
+        f32 deadZone;
+    };
+    typedef char AnalogGlobalsViewOffsetCheck[
+        offsetof(AnalogGlobalsView, deadZone) == 0x14 ? 1 : -1];
+    AnalogGlobalsView *state = reinterpret_cast<AnalogGlobalsView *>(&DAT_005b4000);
+    PadAnalogCalibration *calibration = state->calibration;
+    s16 minimum;
+    s16 maximum;
+    if (calibration->mode == 0) {
+        minimum = calibration->minimum[0];
+        maximum = calibration->maximum[0];
+    } else if (calibration->mode == 1) {
+        minimum = calibration->minimum[1];
+        maximum = calibration->maximum[1];
+    } else {
+        minimum = calibration->minimum[2];
+        maximum = calibration->maximum[2];
     }
-    else {
-      puVar2 = &DAT_0063ffd0 + param_3 * 4;
-    }
-    if (puVar2 != (unsigned int *)0x0) {
-      temp_v3 = 0.0f;
-      temp_v4 = (float)VectorSignedToFloat((int)*(short *)(puVar2 + 3),(unsigned char)(in_fpscr >> 0x16) & 3
-                                           );
-      temp_v5[0] = (float)VectorSignedToFloat((int)*(short *)((int)puVar2 + 0xe),
-                                               (unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v4 = temp_v4 / temp_v2;
-      temp_v5[0] = temp_v5[0] / temp_v2;
-      if (DAT_005b4014 != 0.0f) {
-        FUN_00226c70(&temp_v4);
-        FUN_00226c70(temp_v5);
-        if ((temp_v4 == temp_v3) && (temp_v5[0] == temp_v3)) {
-          return 0;
+    f32 range = (f32)(maximum - minimum);
+    if (index < 2 && index <= state->count) {
+        PadAnalogSample *sample;
+        if ((state->flags & 1) || (state->flags & 2))
+            sample = &DAT_0063fff0;
+        else
+            sample = &DAT_0063ffd0[index];
+        if (sample) {
+            f32 x = (f32)sample->x / range;
+            f32 y = (f32)sample->y / range;
+            if (state->deadZone != 0.0f) {
+                FUN_00226c70(&x, state->deadZone);
+                FUN_00226c70(&y, state->deadZone);
+                if (x == 0.0f && y == 0.0f)
+                    return 0;
+            }
+            if (outX)
+                *outX = x;
+            if (outY)
+                *outY = y;
+            return 1;
         }
-      }
-      if (param_1 != (float *)0x0) {
-        *param_1 = temp_v4;
-      }
-      if (param_2 != (float *)0x0) {
-        *param_2 = temp_v5[0];
-      }
-      return 1;
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

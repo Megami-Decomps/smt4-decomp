@@ -1,87 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022373c` (_code @ 0x22373c, 0x138 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: merged heading epilogue, VFP register lifetimes and neighbor-field addressing differ. */
+#include "map/MapSpawn.h"
+#include "map/lmapMain.h"
 extern "C" {
+extern LmapScene *g_lmapScene;
+extern MapHeadingState *DAT_004474f4;
+extern MapSpawnPoint DAT_00447f40[];
+MapSpawnGrid *gameGetMapBlock(void);
+s32 FUN_00285574(void);
 
-int VectorSignedToFloat(int, int);
-
-extern int DAT_004474f4; /* 0x4474f4 */
-extern int g_lmapScene; /* 0x447e88 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00285574(void);
-extern int gameGetMapBlock(void);
-
-
+// Restore an explicit spawn point or place the actor at the map's starting cell.
 void FUN_0022373c(void)
-
 {
-/* irregular: irregular input(s): in_fpscr; 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  float *pfVar4;
-  unsigned int in_fpscr;
-  unsigned int temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  unsigned int temp_v7;
-  
-  temp_v1 = gameGetMapBlock();
-  temp_v7 = 0;
-  temp_v2 = FUN_00285574();
-  temp_v0 = g_lmapScene;
-  if (temp_v2 != 0) {
-    temp_v2 = temp_v2 * 0x44;
-    pfVar4 = (float *)(g_lmapScene + 0x24);
-    temp_v5 = (float)VectorSignedToFloat((int)*(char *)(temp_v2 + 0x447f48),(unsigned char)(in_fpscr >> 0x16) & 3
-                                      );
-    temp_v6 = (float)VectorSignedToFloat((int)*(char *)(temp_v2 + 0x447f49),(unsigned char)(in_fpscr >> 0x16) & 3
-                                      );
-    temp_v4 = temp_v5 * 500.0f + 250.0f;
-    temp_v5 = temp_v6 * 500.0f + 250.0f;
-    temp_v3 = VectorSignedToFloat((int)*(short *)(temp_v2 + 0x447f4a),(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(float *)(g_lmapScene + 0x1c) = temp_v4;
-    *(unsigned int *)(temp_v0 + 0x20) = temp_v7;
-    *(unsigned int *)(temp_v0 + 0x2c) = temp_v7;
-    *pfVar4 = temp_v5;
-    *(float *)(temp_v0 + 0x28) = temp_v4;
-    *(float *)(temp_v0 + 0x30) = temp_v5;
-    *(unsigned int *)(temp_v0 + 0x4c) = temp_v3;
-    *(unsigned int *)(temp_v0 + 0x50) = temp_v3;
-    *(unsigned int *)(DAT_004474f4 + 0x18) = temp_v3;
-    return;
-  }
-  temp_v2 = temp_v1 + *(char *)(temp_v1 + 0xdcd) * 0x78 + *(char *)(temp_v1 + 0xdcc) * 8;
-  temp_v5 = (float)VectorSignedToFloat((int)*(char *)(temp_v1 + 0xdcc),(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v6 = (float)VectorSignedToFloat((int)*(char *)(temp_v1 + 0xdcd),(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v4 = temp_v5 * 500.0f + 250.0f;
-  temp_v5 = temp_v6 * 500.0f + 250.0f;
-  *(float *)(g_lmapScene + 0x1c) = temp_v4;
-  *(unsigned int *)(temp_v0 + 0x20) = temp_v7;
-  *(float *)(temp_v0 + 0x24) = temp_v5;
-  *(float *)(temp_v0 + 0x28) = temp_v4;
-  *(unsigned int *)(temp_v0 + 0x2c) = temp_v7;
-  *(float *)(temp_v0 + 0x30) = temp_v5;
-  temp_v3 = temp_v7;
-  if (*(char *)(temp_v2 - 0x3c) == '\x02') {
-    temp_v3 = 0x43340000;
-  }
-  if (*(char *)(temp_v2 + 0xb4) == '\x02') {
-    temp_v3 = temp_v7;
-  }
-  if (*(char *)(temp_v2 + 0x34) == '\x02') {
-    temp_v3 = 0x43870000;
-  }
-  if (*(char *)(temp_v2 + 0x44) == '\x02') {
-    temp_v3 = 0x42b40000;
-  }
-  *(unsigned int *)(temp_v0 + 0x4c) = temp_v3;
-  *(unsigned int *)(temp_v0 + 0x50) = temp_v3;
-  *(unsigned int *)(DAT_004474f4 + 0x18) = temp_v3;
-  return;
+    MapSpawnGrid *grid = gameGetMapBlock();
+    s32 spawn = FUN_00285574();
+    f32 heading = 0.0f;
+    LmapScene *scene = g_lmapScene;
+    if (spawn != 0) {
+        const MapSpawnPoint *point = &DAT_00447f40[spawn];
+        f32 x = (f32)point->x * 500.0f + 250.0f;
+        f32 z = (f32)point->z * 500.0f + 250.0f;
+        heading = (f32)point->heading;
+        scene->transform.position[0] = x;
+        scene->transform.position[1] = 0.0f;
+        scene->transform.positionSnapshotA[1] = 0.0f;
+        scene->transform.position[2] = z;
+        scene->transform.positionSnapshotA[0] = x;
+        scene->transform.positionSnapshotA[2] = z;
+    } else {
+        // Adjacency bytes straddle the current cell in the map's packed grid.
+        struct NeighborView {
+            u8 north;
+            u8 unk01[0x6F];
+            u8 west;
+            u8 unk71[0xF];
+            u8 east;
+            u8 unk81[0x6F];
+            u8 south;
+        };
+        const NeighborView *neighbors = (const NeighborView *)((u8 *)grid + grid->z * 0x78 + grid->x * 8 - 0x3C);
+        f32 x = (f32)grid->x * 500.0f + 250.0f;
+        f32 z = (f32)grid->z * 500.0f + 250.0f;
+        scene->transform.position[0] = x;
+        scene->transform.position[1] = 0.0f;
+        scene->transform.position[2] = z;
+        scene->transform.positionSnapshotA[0] = x;
+        scene->transform.positionSnapshotA[1] = 0.0f;
+        scene->transform.positionSnapshotA[2] = z;
+        if (neighbors->north == 2)
+            heading = 180.0f;
+        if (neighbors->south == 2)
+            heading = 0.0f;
+        if (neighbors->west == 2)
+            heading = 270.0f;
+        if (neighbors->east == 2)
+            heading = 90.0f;
+    }
+    scene->transform.headingDegrees = heading;
+    scene->transform.headingCopy = heading;
+    DAT_004474f4->heading = heading;
 }
-
-} /* extern "C" */
+}

@@ -1,72 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ed6ac` (_code @ 0x1ed6ac, 0x108 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "npc_room/NpcRoomDebug.h"
+#include <stddef.h>
 
 extern "C" {
+void FUN_0026dcd4(u32 roomId);
+void FUN_002a03d8(s32 screen, s32 enabled);
+void asdMemFree(void *);
+void jobStop(u32 job, s32 result);
+s32 npcRoomIsDone(void);
+s32 padIsButtonRepeat(u32 button);
+s32 padIsButtonPressed(u32 button);
 
-int FUN_0026dcd4(int);
-int FUN_002a03d8(...);
-int asdMemFree(unsigned int *);
-int jobStop(unsigned int, int);
-
-extern unsigned int *g_npcRoomDebug; /* 0x44d1b0 */
-
-extern int npcRoomIsDone(void);
-/* Supplied declaration required: FUN_0026dcd4. */
-/* Supplied declaration required: FUN_002a03d8. */
-extern int padIsButtonRepeat(unsigned int);
-extern int padIsButtonPressed(unsigned int);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: jobStop. */
-
-
-unsigned int FUN_001ed6ac(void)
-
+// Select a room to preview, then restore both screens when the room exits.
+u32 FUN_001ed6ac(void)
 {
-/* irregular: 4 native warning(s); review required */
-  short temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  
-  puVar2 = g_npcRoomDebug;
-  temp_v1 = g_npcRoomDebug[1];
-  if (temp_v1 != 0) {
-    if (temp_v1 != 1) {
-      if ((temp_v1 == 2) && (g_npcRoomDebug != (unsigned int *)0x0)) {
-        jobStop(*g_npcRoomDebug,0);
-        asdMemFree(puVar2);
-        g_npcRoomDebug = (unsigned int *)0x0;
-      }
+    // The selection fields lie beyond the shared debug job's currently known extent.
+    struct DebugMenuView {
+        NpcRoomDebug base;
+        s32 state; // 0x04
+        u16 roomId; // 0x08
+    };
+    typedef char LayoutCheck[offsetof(DebugMenuView, state) == 4 &&
+        offsetof(DebugMenuView, roomId) == 8 ? 1 : -1];
+    extern DebugMenuView *g_npcRoomDebug;
+    DebugMenuView *menu = g_npcRoomDebug;
+    switch (menu->state) {
+    case 0:
+        if (padIsButtonRepeat(3) && menu->roomId < 999)
+            ++menu->roomId;
+        if (padIsButtonRepeat(4) && menu->roomId != 0)
+            --menu->roomId;
+        if (padIsButtonPressed(0)) {
+            FUN_0026dcd4(menu->roomId);
+            ++menu->state;
+        }
+        break;
+    case 1:
+        if (npcRoomIsDone()) {
+            FUN_002a03d8(0, 1);
+            FUN_002a03d8(1, 1);
+            ++menu->state;
+        }
+        break;
+    case 2:
+        if (menu != NULL) {
+            jobStop(menu->base.job, 0);
+            asdMemFree(menu);
+            g_npcRoomDebug = NULL;
+        }
+        break;
     }
-    else {
-      temp_v1 = npcRoomIsDone();
-      if (temp_v1 != 0) {
-        FUN_002a03d8(0,1);
-        FUN_002a03d8(1);
-        puVar2[1] = puVar2[1] + 1;
-      }
-    }
-  }
-  else {
-    temp_v1 = padIsButtonRepeat(3);
-    if ((temp_v1 != 0) && (*(unsigned short *)(puVar2 + 2) < 999)) {
-      *(unsigned short *)(puVar2 + 2) = *(unsigned short *)(puVar2 + 2) + 1;
-    }
-    temp_v1 = padIsButtonRepeat(4);
-    temp_v0 = 0;
-    if (temp_v1 != 0) {
-      temp_v0 = *(short *)(puVar2 + 2);
-    }
-    if (temp_v1 != 0 && temp_v0 != 0) {
-      *(short *)(puVar2 + 2) = temp_v0 - 1;
-    }
-    temp_v1 = padIsButtonPressed(0);
-    if (temp_v1 != 0) {
-      FUN_0026dcd4(*(unsigned short *)(puVar2 + 2));
-      puVar2[1] = puVar2[1] + 1;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

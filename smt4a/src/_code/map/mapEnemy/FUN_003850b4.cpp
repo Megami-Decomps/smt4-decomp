@@ -1,72 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003850b4` (_code @ 0x3850b4, 0x12c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: distance bits remain in a GPR rather than VFP across heading call; selector literal base and load scheduling differ. */
+#include "shard/W5_W5Match7_SceneSlots.h"
+
+struct EnemyApproachMode {
+    u32 unk00[2];
+    u32 mode;
+    u8 unk0c[0x10];
+};
+struct EnemyApproachKind {
+    u8 unk00[6];
+    s16 height;
+    u8 unk08[8];
+};
 
 extern "C" {
+extern s8 DAT_005f18bf;
+extern EnemyApproachMode DAT_00580b94[];
+extern EnemyApproachKind DAT_00582204[];
+f32 distSpatial(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
+f32 FUN_00384830(f32 x, f32 y, f32 z, f32 heading, f32 otherX, f32 otherY, f32 otherZ);
+s32 FUN_0036d984(const MapVector *position, const MapVector *other, u32 flags);
 
-int distSpatial(void);
-int FUN_00384830(void);
-int SBORROW4(int, int);
-int VectorSignedToFloat(int, int);
-
-extern int g_mapEnemy; /* 0x5806d4 */
-extern int g_lmapScene; /* 0x581288 */
-extern signed char DAT_005f18bf; /* 0x5f18bf */
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: distSpatial. */
-extern int FUN_0036d984(int, int, unsigned int);
-/* Supplied declaration required: FUN_00384830. */
-
-
-unsigned int FUN_003850b4(void)
-
+/* Start an unobstructed nearby enemy's approach when distance or heading permits. */
+u32 FUN_003850b4(void)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  unsigned int in_fpscr;
-  int temp_v6;
-  unsigned int temp_v7;
-  
-  temp_v1 = g_mapEnemy;
-  temp_v3 = 0;
-  do {
-    temp_v4 = temp_v1 + temp_v3 * 0x188;
-    if ((*(char *)(temp_v4 + 0x34) != '\0') &&
-       (temp_v2 = *(int *)(temp_v4 + 0xb8), (temp_v2 == 6 || temp_v2 == 7) || temp_v2 == 0xf)) {
-      temp_v2 = *(int *)(g_lmapScene + 0x1c);
-      distSpatial();
-      if (temp_v2 < 0x447a0001) {
-        temp_v6 = *(int *)(g_lmapScene + 0x1c);
-        FUN_00384830();
-        temp_v5 = SBORROW4(temp_v2,0x43960000);
-        temp_v0 = temp_v2 - 0x43960000;
-        if (temp_v2 < 0x43960000) {
-          temp_v5 = SBORROW4(temp_v6,0x42f00000);
-          temp_v0 = temp_v6 - 0x42f00000;
+    SceneSlotList *enemies = g_mapEnemy;
+    for (s32 i = 0; i < 40; ++i) {
+        SceneSlot *enemy = &enemies->slots[i];
+        if (enemy->active && (enemy->state == 6 || enemy->state == 7 || enemy->state == 15)) {
+            const MapVector *player = &g_lmapScene->position;
+            union { f32 value; s32 bits; } distance, angle;
+            distance.value = distSpatial(player->x, player->y, player->z,
+                                          enemy->previousPosition.x, enemy->previousPosition.y, enemy->previousPosition.z);
+            if (distance.bits <= 0x447a0000) {
+                player = &g_lmapScene->position;
+                angle.value = FUN_00384830(player->x, player->y, player->z, g_lmapScene->heading,
+                                           enemy->previousPosition.x, enemy->previousPosition.y, enemy->previousPosition.z);
+                if ((distance.bits >= 0x43960000 || angle.bits >= 0x42f00000) &&
+                    FUN_0036d984(&g_lmapScene->position, &enemy->previousPosition, 0) == -1) {
+                    enemy->state = 30;
+                    enemy->approach.mode = DAT_00580b94[DAT_005f18bf].mode;
+                    enemy->approach.height = (f32)DAT_00582204[enemy->kind].height;
+                    return 1;
+                }
+            }
         }
-        if ((temp_v0 < 0 == temp_v5) &&
-           (temp_v2 = FUN_0036d984(g_lmapScene + 0x1c,temp_v4 + 0x54,0), temp_v2 == -1)) {
-          *(unsigned int *)(temp_v4 + 0xb8) = 0x1e;
-          *(unsigned int *)(temp_v4 + 0xe8) = *(unsigned int *)(DAT_005f18bf * 0x1c + 0x580b9c);
-          temp_v7 = VectorSignedToFloat((int)*(short *)(*(int *)(temp_v4 + 0x1b0) * 0x10 + 0x58220a),
-                                      (unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(temp_v4 + 0xec) = temp_v7;
-          return 1;
-        }
-      }
     }
-    temp_v3 = temp_v3 + 1;
-    if (temp_v3 >= 0x28) {
-      return 0;
-    }
-  } while( 1 );
+    return 0;
 }
-
-} /* extern "C" */
+}

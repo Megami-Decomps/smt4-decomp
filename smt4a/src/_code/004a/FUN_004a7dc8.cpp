@@ -1,58 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a7dc8` (_code @ 0x4a7dc8, 0x1c0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: direct opacity field loads replace retail's animated-scalar address setup and removed-hook NOPs. */
+#include "shard/W5_W5Match4_BattleTransition.h"
+#include "shard/S1ListPanel.h"
 
 extern "C" {
+const SpriteInfo *FUN_0018349c(const AsdTextureRegion *region, s32 image);
+void efctSetSpeed(f32 opacity);
+void FUN_004934ac(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color);
+void FUN_0049368c(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color, u32 flags);
 
-int efctSetSpeed(void);
-int FUN_004934ac(...);
-int FUN_0049368c(int, int, int, int, unsigned int, int);
-
-/* stack frame of param_4: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_0018349c(int, int);
-/* Supplied declaration required: FUN_004934ac. */
-/* Supplied declaration required: FUN_0049368c. */
-
-
-void FUN_004a7dc8(int param_1,int param_2,unsigned int param_3,int param_4)
-
+void FUN_004a7dc8(BattleTransitionState *work, s32 anchor, u32 color, s32 alternate)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_0018349c(param_1 + 200,param_2 + 0x42f);
-  temp_v1 = (int)*(short *)(temp_v0 + 8);
-  temp_v0 = (int)*(short *)(temp_v0 + 10);
-  efctSetSpeed();
-  FUN_004934ac(param_1 + 200,0x426,temp_v1,temp_v0,param_3);
-  FUN_004934ac(param_1 + 200,0x427,temp_v1,temp_v0,param_3);
-  FUN_004934ac(param_1 + 200,0x428,temp_v1,temp_v0,param_3);
-  efctSetSpeed();
-  FUN_0049368c(param_1 + 200,0x429,temp_v1,temp_v0,param_3,1);
-  if (param_4 != 0) {
-    FUN_004934ac(param_1 + 200,0x5cf,temp_v1,temp_v0,param_3);
-    FUN_004934ac(param_1 + 200,0x5d0,temp_v1,temp_v0,param_3);
-    FUN_004934ac(param_1 + 200,0x5d2,temp_v1,temp_v0,param_3);
-    efctSetSpeed();
-    FUN_004934ac(param_1 + 200,0x5d1,temp_v1,temp_v0,param_3);
-    efctSetSpeed();
-    return;
-  }
-  FUN_004934ac(param_1 + 200,0x42a,temp_v1,temp_v0,param_3);
-  FUN_004934ac(param_1 + 200,0x42b,temp_v1,temp_v0,param_3);
-  FUN_004934ac(param_1 + 200,0x5c9,temp_v1,temp_v0,param_3);
-  efctSetSpeed();
-  FUN_004934ac(param_1 + 200,0x42c,temp_v1,temp_v0,param_3);
-  efctSetSpeed();
-  return;
+    const SpriteInfo *frame = FUN_0018349c(&work->frameDraw.region, anchor + 0x42F);
+    s32 x = frame->x;
+    s32 y = frame->y;
+    efctSetSpeed(work->frameDraw.opacity);
+    FUN_004934ac(&work->frameDraw.region, 0x426, x, y, color);
+    FUN_004934ac(&work->frameDraw.region, 0x427, x, y, color);
+    FUN_004934ac(&work->frameDraw.region, 0x428, x, y, color);
+    efctSetSpeed(1.0f);
+    FUN_0049368c(&work->frameDraw.region, 0x429, x, y, color, 1);
+    if (alternate) {
+        FUN_004934ac(&work->frameDraw.region, 0x5CF, x, y, color);
+        FUN_004934ac(&work->frameDraw.region, 0x5D0, x, y, color);
+        FUN_004934ac(&work->frameDraw.region, 0x5D2, x, y, color);
+        efctSetSpeed(work->secondaryElapsed);
+        FUN_004934ac(&work->frameDraw.region, 0x5D1, x, y, color);
+        efctSetSpeed(1.0f);
+        return;
+    }
+    FUN_004934ac(&work->frameDraw.region, 0x42A, x, y, color);
+    FUN_004934ac(&work->frameDraw.region, 0x42B, x, y, color);
+    FUN_004934ac(&work->frameDraw.region, 0x5C9, x, y, color);
+    efctSetSpeed(work->secondaryElapsed);
+    FUN_004934ac(&work->frameDraw.region, 0x42C, x, y, color);
+    efctSetSpeed(1.0f);
 }
-
-} /* extern "C" */
+}

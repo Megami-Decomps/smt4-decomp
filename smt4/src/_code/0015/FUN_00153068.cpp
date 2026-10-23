@@ -1,98 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00153068` (_code @ 0x153070, 0x1b4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+/* NON_MATCHING: STEX image setup ordering and retail's retained inline-helper null guards differ. */
+#include "gfx/StexLoad.h"
 
 extern "C" {
+extern const char DAT_00409268[]; // STEX signature
+StexHeader *asdTMSprDecompress(StexHeader *data, u32 mode, u32 alignment);
+s32 rt_memcmp(const void *first, const void *second, u32 bytes);
+void asdMemFree(void *memory);
+AsdTexture *asdTextureCreate(s32 retry);
 
-int asdTMSprDecompress(int, unsigned int, int);
-int asdTextureCreate(void);
-int asdMemFree(int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_3_stack;
-
-/* Supplied declaration required: asdTMSprDecompress. */
-/* Supplied declaration required: asdTextureCreate. */
-extern int rt_memcmp(int, char *, unsigned int);
-/* Supplied declaration required: asdMemFree. */
-
-
-void FUN_00153068(int param_1,int param_2,int param_3)
-
+void FUN_00153068(StexHeader *data, TextureHeapEntry *entry, u32 bytes)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  if (*(char *)(*(int *)(param_2 + 4) + 0xd) != '\0') {
-    temp_v2 = 1;
-    if ((*(unsigned int *)(param_2 + 0x10) & 0x10000) != 0) {
-      temp_v2 = 3;
+    if (data == NULL)
+        return;
+    if (entry->node->compressed != 0) {
+        u32 mode = (entry->flags & TEXENTRY_RETRY) != 0 ? 3 : 1;
+        data = asdTMSprDecompress(data, mode, 0x80);
     }
-    asdTMSprDecompress(param_1,temp_v2,0x80);
-  }
-  temp_v0 = rt_memcmp(param_1,"STEX",4);
-  if (temp_v0 != 0) {
-    asdMemFree(param_1);
-    return;
-  }
-  if (*(int *)(param_1 + 0x24) != 0) {
-    *(unsigned int *)(param_2 + 8) = 0;
-  }
-  else {
-    temp_v1 = (unsigned int)((*(unsigned int *)(param_2 + 0x10) & 0x10000) != 0);
-    asdTextureCreate();
-    *(unsigned int *)(param_2 + 8) = temp_v1;
-    *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(param_1 + 8);
-    *(unsigned int *)(*(int *)(param_2 + 8) + 0x14) = *(unsigned int *)(param_1 + 0xc);
-    *(unsigned int *)(*(int *)(param_2 + 8) + 0x18) = *(unsigned int *)(param_1 + 0x10);
-    *(unsigned int *)(*(int *)(param_2 + 8) + 0x1c) = *(unsigned int *)(param_1 + 0x18);
-    *(unsigned int *)(*(int *)(param_2 + 8) + 0x20) = *(unsigned int *)(param_1 + 0x14);
-    *(int *)(*(int *)(param_2 + 8) + 0x28) = param_3 - *(int *)(param_1 + 0x20);
-    *(unsigned int *)(*(int *)(param_2 + 8) + 0x2c) = *(unsigned int *)(*(int *)(param_2 + 8) + 0x2c) | 0x10;
-    if (*(int *)(param_1 + 4) == 1) {
-      *(unsigned int *)(*(int *)(param_2 + 8) + 0x3c) = 1;
-      *(unsigned int *)(*(int *)(param_2 + 8) + 0x40) = 1;
+    if (rt_memcmp(data, DAT_00409268, 4) != 0) {
+        asdMemFree(data);
+        return;
     }
-    *(int *)(*(int *)(param_2 + 8) + 0x24) = *(int *)(param_1 + 0x20) + param_1;
-  }
-  temp_v1 = *(unsigned int *)(param_2 + 0x10);
-  *(unsigned int *)(param_2 + 0x10) = (temp_v1 & 0xfffffffe) | 2;
-  *(int *)(param_2 + 0xc) = param_1;
-  if ((temp_v1 & 0x60) != 0) {
-    if ((temp_v1 & 0x20) != 0) {
-      if (param_2 == 0) {
-        if (*(int *)(param_2 + 8) != 0) {
-          asdTextureSetImage(*(AsdTexture**)(param_2 + 8));
-          *(unsigned int *)(param_2 + 0x10) = *(unsigned int *)(param_2 + 0x10) | 4;
+    if (data->external != 0)
+        entry->texture = NULL;
+    else {
+        entry->texture = asdTextureCreate((entry->flags & TEXENTRY_RETRY) != 0);
+        entry->texture->target = data->target;
+        entry->texture->dimensions.width = data->width;
+        entry->texture->dimensions.height = data->height;
+        entry->texture->image.format = data->format;
+        entry->texture->image.type = data->type;
+        entry->texture->storage.unk28 = bytes - data->dataOffset;
+        entry->texture->storage.flags |= 0x10;
+        if (data->version == 1) {
+            entry->texture->unk3c = 1;
+            entry->texture->unk40 = 1;
         }
-        return;
-      }
-      if (*(int *)(param_2 + 8) == 0) {
-        return;
-      }
-      *(unsigned int *)(*(int *)(param_2 + 8) + 8) = 0x20000;
-      temp_v1 = *(unsigned int *)(param_2 + 0x10) | 0x20;
-      *(unsigned int *)(param_2 + 0x10) = temp_v1;
+        entry->texture->storage.pixels = reinterpret_cast<u8 *>(data) + data->dataOffset;
     }
-    else if (param_2 != 0) {
-      if (*(int *)(param_2 + 8) == 0) {
-        return;
-      }
-      *(unsigned int *)(*(int *)(param_2 + 8) + 8) = 0x30000;
-      temp_v1 = *(unsigned int *)(param_2 + 0x10) | 0x40;
-      *(unsigned int *)(param_2 + 0x10) = temp_v1;
+    entry->flags = (entry->flags & ~TEXENTRY_LOADING) | 2;
+    entry->fileData = reinterpret_cast<u8 *>(data);
+    if ((entry->flags & 0x60) != 0) {
+        if (entry->texture == NULL)
+            return;
+        entry->texture->unk08 = (entry->flags & TEXENTRY_MODE_20) != 0 ? 0x20000 : 0x30000;
     }
-  }
-  if (*(int *)(param_2 + 8) != 0) {
-    asdTextureSetImage(*(AsdTexture**)(param_2 + 8));
-    *(unsigned int *)(param_2 + 0x10) = *(unsigned int *)(param_2 + 0x10) | 4;
-  }
-  return;
+    if (entry->texture != NULL) {
+        asdTextureSetImage(entry->texture);
+        entry->flags |= 4;
+    }
 }
-
-} /* extern "C" */
+}

@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_003f0e20(int, unsigned int);
-int FUN_004c52ec(...);
+int btlGetPropertyMaximum(...);
 int FUN_004c53fc(...);
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_004c52ec. */
+/* Supplied declaration required: btlGetPropertyMaximum. */
 /* Supplied declaration required: FUN_004c53fc. */
 
 
@@ -31,9 +31,9 @@ void FUN_004c571c(unsigned int param_1,int param_2,int param_3,int param_4)
       param_3 = FUN_004c53fc();
     }
     else {
-      temp_v1 = FUN_004c52ec(param_2);
+      temp_v1 = btlGetPropertyMaximum(param_2);
       if (temp_v1 < param_3) {
-        param_3 = FUN_004c52ec();
+        param_3 = btlGetPropertyMaximum();
       }
     }
     if (param_4 == 0) {

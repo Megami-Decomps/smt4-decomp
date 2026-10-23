@@ -1,89 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00481c28` (_code @ 0x481c28, 0x158 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: actor base versus flags-subobject addressing and shared visibility-branch placement differ. */
+#include "map/DistanceVisibilityWork.h"
+#include "map/lmapMain.h"
 
 extern "C" {
+extern GameStateA g_gameState;
+extern LmapSceneA *g_lmapScene;
+void FUN_00481ba8(DistanceVisibilityWork *);
+f32 distSpatial(MapVector, MapVector);
 
-int distSpatial(void);
-int FUN_00481ba8(int);
-
-extern signed char DAT_005f1614; /* 0x5f1614 */
-extern signed char DAT_005f161d; /* 0x5f161d */
-extern signed char DAT_005f161f; /* 0x5f161f */
-extern int DAT_005f189c; /* 0x5f189c */
-extern signed char DAT_005f1bc4; /* 0x5f1bc4 */
-
-/* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_00481ba8. */
-
-
-void FUN_00481c28(int param_1)
-
+void FUN_00481c28(DistanceVisibilityWork *work)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *puVar4;
-  
-  temp_v1 = *(int *)(param_1 + 0xc);
-  puVar4 = (unsigned int *)(temp_v1 + 0x28);
-  if (DAT_005f1bc4 != '\0') {
-    return;
-  }
-  temp_v0 = DAT_005f1614;
-  if (DAT_005f1614 == '\0') {
-    temp_v0 = DAT_005f161d;
-  }
-  if (DAT_005f1614 != '\0' || temp_v0 != '\0') {
-    return;
-  }
-  if (DAT_005f161f != '\0') {
-    return;
-  }
-  if (*(int *)(param_1 + 0x1c) != 0) {
-    if (*(int *)(param_1 + 0x1c) != 1) {
-      return;
+    // This gate lies in the byte-aligned mapFlags union; do not change its alignment.
+    struct VisibilityGateView {
+        u8 unk000[0x2a0];
+        u32 active;
+    };
+    typedef char VisibilityGateOffset[offsetof(VisibilityGateView, active) == 0x2a0 ? 1 : -1];
+    union OrderedDistance {
+        f32 value;
+        s32 bits;
+    };
+    DistanceVisibilityActor *actor = work->actor;
+    if (g_gameState.unk5C8 || g_gameState.inputBlocked ||
+        g_gameState.controllerFlags.primary || g_gameState.controllerFlags.secondary)
+        return;
+    if (work->mode != 0) {
+        if (work->mode != 1)
+            return;
+        FUN_00481ba8(work);
+        actor->position.x += work->offset.x;
+        actor->position.y += work->offset.y;
+        actor->position.z += work->offset.z;
+        return;
     }
-    FUN_00481ba8(param_1);
-    *(float *)(temp_v1 + 0x2c) = *(float *)(temp_v1 + 0x2c) + *(float *)(param_1 + 0x10);
-    *(float *)(temp_v1 + 0x30) = *(float *)(temp_v1 + 0x30) + *(float *)(param_1 + 0x14);
-    *(float *)(temp_v1 + 0x34) = *(float *)(temp_v1 + 0x34) + *(float *)(param_1 + 0x18);
-    return;
-  }
-  if (DAT_005f189c != 0) {
-    return;
-  }
-  if (*(char *)(temp_v1 + 0x8b) != '\x01') {
-    if (*(char *)(temp_v1 + 0x8b) != '\x02') {
-      return;
+    if (reinterpret_cast<VisibilityGateView *>(&g_gameState)->active)
+        return;
+    bool hidden;
+    OrderedDistance distance;
+    // Positive distances use the engine's ordered IEEE-754 integer representation.
+    if (actor->category == 1) {
+        distance.value = distSpatial(actor->position,
+            *reinterpret_cast<MapVector *>(g_lmapScene->transform.position));
+        hidden = distance.bits >= 0x44960000; // 1200.0f
+    } else if (actor->category == 2) {
+        distance.value = distSpatial(actor->position,
+            *reinterpret_cast<MapVector *>(g_lmapScene->transform.position));
+        hidden = distance.bits >= 0x44160000; // 600.0f
+    } else {
+        return;
     }
-    temp_v1 = *(int *)(temp_v1 + 0x2c);
-    distSpatial();
-    if (temp_v1 >= 0x44160000) {
-      *puVar4 = *puVar4 & 0xfffffff7;
-      temp_v1 = *(int *)(*(int *)(*(int *)(param_1 + 0xc) + 0x78) + 4);
-      temp_v2 = *(unsigned int *)(temp_v1 + 4) | 3;
-      *(unsigned int *)(temp_v1 + 4) = temp_v2;
-      return;
+    if (hidden) {
+        actor->flags &= ~8u;
+        work->actor->graphics->model->flags |= 3;
+    } else {
+        actor->flags |= 8;
+        work->actor->graphics->model->flags &= ~3u;
     }
-  }
-  else {
-    temp_v1 = *(int *)(temp_v1 + 0x2c);
-    distSpatial();
-    if (temp_v1 >= 0x44960000) {
-      *puVar4 = *puVar4 & 0xfffffff7;
-      temp_v1 = *(int *)(*(int *)(*(int *)(param_1 + 0xc) + 0x78) + 4);
-      temp_v2 = *(unsigned int *)(temp_v1 + 4) | 3;
-      *(unsigned int *)(temp_v1 + 4) = temp_v2;
-      return;
-    }
-  }
-  *puVar4 = *puVar4 | 8;
-  temp_v1 = *(int *)(*(int *)(*(int *)(param_1 + 0xc) + 0x78) + 4);
-  temp_v2 = *(unsigned int *)(temp_v1 + 4) & 0xfffffffc;
-  *(unsigned int *)(temp_v1 + 4) = temp_v2;
-  return;
 }
-
-} /* extern "C" */
+}

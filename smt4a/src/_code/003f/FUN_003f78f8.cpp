@@ -9,7 +9,7 @@ int FUN_00162790(...);
 int efctSetSpeed(void);
 int FUN_0018408c(unsigned char *, int);
 int renderCtxCalculateStereoParallax(...);
-int FUN_003f6cc0(...);
+int uiDrawStereoKindIcon(...);
 int FUN_003f707c(int, int, int, int, int, int, int, int);
 int FUN_003f757c(...);
 int VectorSignedToFloat(...);
@@ -38,7 +38,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_003f6cc0. */
+/* Supplied declaration required: uiDrawStereoKindIcon. */
 /* Supplied declaration required: FUN_003f707c. */
 /* Supplied declaration required: FUN_003f757c. */
 
@@ -86,7 +86,7 @@ void FUN_003f78f8(int param_1,int param_2,int param_3)
   VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(3,0xff,puVar5,temp_v1);
   FUN_003f757c(temp_v7,param_2,param_3,0xd8,temp_v4,0xf6,0xf5,0,1);
-  FUN_003f6cc0(temp_v7,param_2,param_3,0xd8,0xb,0x106);
+  uiDrawStereoKindIcon(temp_v7,param_2,param_3,0xd8,0xb,0x106);
   renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v0 = FUN_001834a4(0x31,0xfb);
   temp_v1 = (int)*(short *)(temp_v0 + 8) + param_2 + (int)temp_v2;

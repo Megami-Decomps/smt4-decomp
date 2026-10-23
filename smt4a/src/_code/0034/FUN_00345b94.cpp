@@ -1,74 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00345b94` (_code @ 0x345b94, 0x128 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: render-stack push scheduling, stereo-mode branch padding and overlay literal ordering differ. */
+#include "camp/RenderCtx.h"
+#include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {
+extern RenderCtxA *g_renderCtx;
+s32 FUN_001692ac(u32 kind, u32 flags);
+void FUN_0016c4b8(RenderCtxA *context, u32 mode);
+s32 getFloatPairValue(void);
+s32 displayIsStereoActive(void);
+void FUN_00300100(u32 layer, u32 mono);
+void FUN_00280840(u32 style, u32 firstColor, u32 secondColor,
+                  f32 x, f32 y, f32 depth, f32 size);
 
-int FUN_0016c4b8(int, int);
-int FUN_00280840(int, int, unsigned int);
-int FUN_00300100(int, unsigned int);
-
-typedef int romwright_code(...);
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-extern unsigned char g_effectEditor; /* 0x59dbe0 */
-
-extern int FUN_001692ac(unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
-/* Supplied declaration required: FUN_00280840. */
-/* Supplied declaration required: FUN_00300100. */
-extern int displayIsStereoActive(void);
-extern int getFloatPairValue(void);
-
-
+// Render the editor scene in a temporary state and draw its enabled overlay.
 void FUN_00345b94(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  unsigned int temp_v4;
-  
-  temp_v1 = g_renderCtx;
-  temp_v0 = FUN_001692ac(1);
-  piVar5 = (int *)(temp_v1 + 0x1258);
-  temp_v2 = *piVar5;
-  temp_v3 = piVar5[temp_v2 + 2];
-  *piVar5 = temp_v2 + 1;
-  piVar5[temp_v2 + 3] = temp_v0;
-  if (*(char *)(temp_v1 + 0x1270) != '\0' || temp_v3 != temp_v0) {
-    (**(romwright_code **)(temp_v1 + 0x1274))();
-    *(unsigned char *)(temp_v1 + 0x1270) = 0;
-  }
-  FUN_0016c4b8(g_renderCtx,0);
-  temp_v4 = 1;
-  temp_v1 = getFloatPairValue();
-  if (((temp_v1 != 0) && (*(int *)(g_renderCtx + 0x52c) == 0)) &&
-     (temp_v1 = displayIsStereoActive(), temp_v1 != 0)) {
-    temp_v4 = 0;
-  }
-  FUN_00300100(0,temp_v4);
-  temp_v1 = g_renderCtx;
-  piVar5 = (int *)(g_renderCtx + 0x1258);
-  temp_v0 = *piVar5;
-  temp_v2 = piVar5[temp_v0 + 2];
-  *piVar5 = temp_v0 - 1;
-  if (*(char *)(temp_v1 + 0x1270) != '\0' || temp_v2 != piVar5[temp_v0 + 1]) {
-    (**(romwright_code **)(temp_v1 + 0x1274))();
-    *(unsigned char *)(temp_v1 + 0x1270) = 0;
-  }
-  if ((*(int *)((unsigned char *)&g_effectEditor + 0x78)) != 0) {
-    FUN_00280840(0x1e,0x606060ff,0x909090ff);
-    return;
-  }
-  return;
+    RenderCtxA *context = g_renderCtx;
+    s32 renderState = FUN_001692ac(1, 1);
+    renderStackPush(&context->stackA, renderState);
+    FUN_0016c4b8(g_renderCtx, 0);
+    u32 mono = 1;
+    if (getFloatPairValue() && g_renderCtx->stereoMode == 0 && displayIsStereoActive()) {
+        mono = 0;
+    }
+    FUN_00300100(0, mono);
+    renderStackPop(&g_renderCtx->stackA);
+    // This flag lies beyond the shared editor prefix; do not extend that layout.
+    struct EditorOverlayView {
+        EffectEditorMenuState editor;
+        u8 unk6C[0xC];
+        u32 enabled;
+    };
+    if (reinterpret_cast<EditorOverlayView *>(&g_effectEditor)->enabled) {
+        FUN_00280840(30, 0x606060FF, 0x909090FF, 0.0f, 0.0f, 0.0f, 17.5f);
+    }
 }
-
-} /* extern "C" */
+}

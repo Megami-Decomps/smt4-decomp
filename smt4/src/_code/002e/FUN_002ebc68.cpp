@@ -1,81 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ebc68` (_code @ 0x2ebc68, 0x15c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: global sound-system addresses reload instead of staying saved; actor base and early-return register allocation differ. */
+#include "sound/SpatialSoundPlayback.h"
 
 extern "C" {
+extern AsdSoundSystem g_asdSound;
+s32 FUN_002bf684(AsdSoundSystem *);
+s32 FUN_00141fd0(AsdSoundSystem *, u32);
+s32 asd3dSoundActorIsPlaying(u32);
+s32 FUN_001388dc(u32);
+u32 nw_snd_SoundStartable_StartSound(SpatialSoundActor *, u32 *, u32, u32);
 
-int FUN_001388dc(void);
-int FUN_00141fd0(unsigned char *, int);
-int asd3dSoundActorIsPlaying(void);
-int VectorUnsignedToFloat(unsigned int, int);
-int nw_snd_SoundStartable_StartSound(unsigned int, unsigned char *, int, int);
-
-extern unsigned char g_asdSound; /* 0x4e1f68 */
-extern unsigned char DAT_004e2f68; /* 0x4e2f68 */
-extern unsigned int DAT_004e312c; /* 0x4e312c */
-extern signed char DAT_004e3134; /* 0x4e3134 */
-extern unsigned char DAT_004e3135; /* 0x4e3135 */
-extern int DAT_004e3180; /* 0x4e3180 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001388dc. */
-/* Supplied declaration required: FUN_00141fd0. */
-/* Supplied declaration required: asd3dSoundActorIsPlaying. */
-extern int FUN_002bf684(unsigned char *);
-/* Supplied declaration required: nw_snd_SoundStartable_StartSound. */
-
-
-unsigned char FUN_002ebc68(int param_1,unsigned int param_2)
-
+u8 FUN_002ebc68(u32 soundId, u32 actorIndex)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned char *puVar5;
-  unsigned char temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  
-  temp_v1 = DAT_004e3180;
-  temp_v3 = 0;
-  puVar5 = &g_asdSound;
-  if ((((DAT_004e3134 != '\0') && (param_2 < 0x10)) &&
-      (temp_v0 = FUN_002bf684(&g_asdSound), temp_v0 != 0)) &&
-     ((puVar2 = puVar5, FUN_00141fd0(&g_asdSound,param_1),
-      puVar2 != (unsigned char *)0x0 && temp_v1 != 0 && (temp_v2 = param_2, asd3dSoundActorIsPlaying(), temp_v2 == 0))))
-  {
-    FUN_00141fd0(&g_asdSound,param_1);
-    if ((*(char *)(temp_v1 + 0x3b) != '\0') && (puVar5 == (unsigned char *)0x3)) {
-      temp_v1 = param_1;
-      FUN_001388dc();
-      if (temp_v1 == 0) {
-        return 0;
-      }
+    SpatialSoundPlayback *playback = reinterpret_cast<SpatialSoundPlayback *>(g_asdSound.unk784);
+    AsdSndSlotA *slot = g_asdSound.currentSlotA;
+    u8 started = 0;
+    if (playback->enabled && actorIndex < 16 && FUN_002bf684(&g_asdSound) &&
+        FUN_00141fd0(&g_asdSound, soundId) && slot && !asd3dSoundActorIsPlaying(actorIndex)) {
+        s32 kind = FUN_00141fd0(&g_asdSound, soundId);
+        if (slot->hasHeap && kind == 3) {
+            if (!FUN_001388dc(soundId))
+                return 0;
+        } else if (kind != 2) {
+            return 0;
+        }
+        SpatialSoundActor *actor = &playback->actors[actorIndex];
+        started = static_cast<u8>(nw_snd_SoundStartable_StartSound(actor, &playback->handles[actorIndex], soundId, 0)) == 0;
+        f32 volume;
+        if (!playback->volume) {
+            volume = 0.0f;
+        } else {
+            volume = (static_cast<f32>(playback->volume) - 64.0f) * (2.0f / 127.0f) + 1.0f;
+            if (volume > 1.0f)
+                volume = 1.0f;
+        }
+        actor->volume = volume;
+        if (started)
+            playback->activeMask |= 1u << actorIndex;
     }
-    else if (puVar5 != (unsigned char *)0x2) {
-      return 0;
-    }
-    temp_v2 = param_2 * 0x84 + 0x4e2728;
-    nw_snd_SoundStartable_StartSound(temp_v2,&DAT_004e2f68 + param_2 * 4,param_1,0);
-    temp_v3 = (temp_v2 & 0xff) == 0;
-    if (DAT_004e3135 == 0) {
-      temp_v4 = 0.0f;
-    }
-    else {
-      temp_v4 = (float)VectorUnsignedToFloat((unsigned int)DAT_004e3135,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v4 = (temp_v4 - 64.0f) * 0.015748031f + 1.0f;
-      if ((int)temp_v4 >= 0x3f800001) {
-        temp_v4 = 1.0f;
-      }
-    }
-    *(float *)(param_2 * 0x84 + 0x4e2770) = temp_v4;
-    if (temp_v3) {
-      DAT_004e312c = DAT_004e312c | (1 << (param_2 & 0xff));
-    }
-  }
-  return temp_v3;
+    return started;
 }
-
-} /* extern "C" */
+}

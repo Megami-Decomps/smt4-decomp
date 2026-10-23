@@ -1,60 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00246454` (_code @ 0x246454, 0x118 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail preserves two action parameters on the stack; range checks and saved-register roles also differ. */
+#include "battle/btlReflect.h"
+#include "battle/btlAction.h"
+#include "battle/btlMain.h"
+#include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
+BtlMainState *btlGetMainState();
+ReflectAction *btlQueueReflectAction(ReflectContext *context, s16 actor, u16 secondary, u32 options);
 
-int btlQueueReflectAction(int, int, int, unsigned int);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: btlQueueReflectAction. */
-extern int btlGetMainState(void);
-
-
-unsigned int FUN_00246454(short param_1,unsigned int param_2,unsigned int *param_3)
-
+// Queue reflected records for a selected combatant, then its final state-change action.
+u32 FUN_00246454(s32 actor, u32 options, BtlUnitEntry *unit)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  
-  temp_v4 = 0;
-  do {
-    temp_v0 = *(short *)((int)param_3 + 0x6e);
-    if ((-1 < temp_v0) && (temp_v0 < 0x6d)) {
-      temp_v1 = btlGetMainState();
-      temp_v1 = *(int *)(temp_v1 + 0x1e98) + temp_v4 * 0x114;
-      if ((temp_v1 != 0) &&
-         (((temp_v3 = *(unsigned int *)(temp_v1 + 0x50), (temp_v3 & 1) != 0 && (temp_v3 & 2) != 0 &&
-           (*(short *)(temp_v1 + 0x60) == temp_v0)) && ((temp_v3 & 0x400) != 0)))) {
-        temp_v2 = g_btlActionReflect;
-        btlQueueReflectAction(g_btlActionReflect,(int)param_1,0,param_2);
-        *(unsigned char *)(temp_v2 + 5) = *(unsigned char *)(temp_v2 + 5) | 4;
-        *(int *)(temp_v2 + 0x14) = temp_v1;
-        *(unsigned char *)(temp_v2 + 4) = 0x22;
-        *(unsigned int *)(temp_v2 + 0x28) = 0x14;
-        *(unsigned int *)(temp_v2 + 0x4c) = 0;
-      }
+    for (s32 index = 0; index < 109; ++index) {
+        s16 selected = unit->selectionIndex;
+        if (selected >= 0 && selected < 109) {
+            BtlActionRecord *record = &btlGetMainState()->actions[index];
+            if (record != NULL && (record->status & 1) && (record->status & 2) &&
+                record->participant.combatantIndex == selected && (record->status & 0x400)) {
+                ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
+                action->flagView.flags |= 4;
+                action->target = reinterpret_cast<u32>(record);
+                action->kind = 0x22;
+                action->value = 20;
+                action->parameter = 0;
+            }
+        }
     }
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 0x6d);
-  *param_3 = *param_3 | 0x40;
-  temp_v4 = g_btlActionReflect;
-  btlQueueReflectAction(g_btlActionReflect,(int)(short)(param_1 + 0x14),0,param_2);
-  *(unsigned char *)(temp_v4 + 4) = 0x24;
-  *(unsigned int **)(temp_v4 + 0x18) = param_3;
-  *(unsigned int *)(temp_v4 + 0x28) = 0;
-  return 1;
+    unit->flags |= 0x40;
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)(actor + 20), 0, options);
+    action->kind = 0x24;
+    action->wordValues.unk18 = reinterpret_cast<u32>(unit);
+    action->value = 0;
+    return 1;
 }
-
-} /* extern "C" */
+}

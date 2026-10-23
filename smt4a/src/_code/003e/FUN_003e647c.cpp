@@ -1,72 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e647c` (_code @ 0x3e647c, 0x124 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: state-transition stores and conditional script-start branch layout differ. */
+#include "shop/ShopItemDescription.h"
 
 extern "C" {
+s32 tableGroupFindEntryIndex(u32, const char *);
+s32 scrScriptProcessStartEntry(u32, s32);
+s32 scrRunOpcodesStub(u32);
+extern const char DAT_005332dc[];
 
-int scrScriptProcessStartEntry(unsigned int, int);
-
-extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int tableGroupFindEntryIndex(unsigned int, char *);
-
-
-void FUN_003e647c(int param_1)
-
+// Run the shop description preamble followed by up to three item-specific scripts.
+void FUN_003e647c(ShopItemDescription *description)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + 8);
-  if (temp_v0 != 2) {
-    if (temp_v0 < 2) {
-      if (temp_v0 != 0) {
-        if (temp_v0 != 1) {
-          return;
+    switch (description->state) {
+    case 0:
+        description->progress.nextEntry = 0;
+        description->state = 1;
+        // Fall through to start the preamble immediately.
+    case 1: {
+        s32 entry = tableGroupFindEntryIndex(description->tableGroup, DAT_005332dc);
+        if (entry >= 0)
+            scrScriptProcessStartEntry(description->script, entry);
+        description->state = 3;
+        break;
+    }
+    case 2:
+        for (s32 i = description->progress.nextEntry; i < 3; ++i) {
+            if (description->entries[i].scriptEntry != 0) {
+                scrScriptProcessStartEntry(description->script, description->entries[i].scriptEntry);
+                description->state = 3;
+                ++description->progress.nextEntry;
+                return;
+            }
         }
-      }
-      else {
-        *(unsigned int *)(param_1 + 0x48) = 0;
-        *(unsigned int *)(param_1 + 8) = 1;
-      }
-      temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),"npcShop_ItemDes_start");
-      if (-1 < temp_v0) {
-        scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18),temp_v0);
-      }
-      *(unsigned int *)(param_1 + 8) = 3;
-      return;
-    }
-    if (temp_v0 != 3) {
-      if (temp_v0 == 99) {
-        temp_v1 = *(unsigned int *)(param_1 + 4);
-        *(unsigned int *)(param_1 + 4) = 3;
-        *(unsigned int *)(param_1 + 8) = 0;
-        *(unsigned int *)(param_1 + 0xc) = temp_v1;
-      }
-    }
-    else {
-      temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18));
-      if (temp_v0 == 2) {
-        if (*(int *)(param_1 + 0x48) >= 3) {
-          *(unsigned int *)(param_1 + 8) = 99;
-          return;
+        description->state = 99;
+        break;
+    case 3:
+        if (scrRunOpcodesStub(description->script) == 2) {
+            if (description->progress.nextEntry >= 3)
+                description->state = 99;
+            else
+                description->state = 2;
         }
-        *(unsigned int *)(param_1 + 8) = 2;
-      }
+        break;
+    case 99: {
+        u32 previous = description->mode;
+        description->mode = 3;
+        description->state = 0;
+        description->previousMode = previous;
+        break;
     }
-    return;
-  }
-  for (temp_v0 = *(int *)(param_1 + 0x48); temp_v0 < 3; temp_v0 = temp_v0 + 1) {
-    if (*(short *)(param_1 + temp_v0 * 0xc + 0x2c) != 0) {
-      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18),*(unsigned short *)(param_1 + temp_v0 * 0xc + 0x2c));
-      *(unsigned int *)(param_1 + 8) = 3;
-      *(int *)(param_1 + 0x48) = *(int *)(param_1 + 0x48) + 1;
-      return;
-    }
-  }
-  *(unsigned int *)(param_1 + 8) = 99;
-  return;
 }
-
-} /* extern "C" */
+}
+}

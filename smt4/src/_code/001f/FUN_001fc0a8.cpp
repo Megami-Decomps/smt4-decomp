@@ -1,109 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fc0a8` (_code @ 0x1fc0a8, 0x190 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: selected-slot base is retained separately from its parent, changing registers and one address add; distance arguments schedule differently. */
+#include "map/MapStateSlots.h"
+#include "map/lmapMain.h"
 
 extern "C" {
+extern MapStateSlots *g_mapStateSlots;
+extern LmapScene *g_lmapScene;
+f32 mathDistanceBetweenPoints(f32 firstX, f32 firstY, f32 firstZ, f32 secondX, f32 secondY, f32 secondZ);
 
-int mathDistanceBetweenPoints(void);
-
-extern int g_lmapScene; /* 0x447e88 */
-extern int g_mapStateSlots; /* 0x44cd88 */
-
-/* Supplied declaration required: mathDistanceBetweenPoints. */
-
-
+// Rank the three nearest active eligible map slots and publish their scene positions.
 void FUN_001fc0a8(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned char temp_v8;
-  unsigned char temp_v9;
-  unsigned int temp_v10;
-  float temp_v11;
-  
-  if (*(short *)(g_mapStateSlots + 4) == 0x65) {
-    temp_v3 = 0;
-    do {
-      temp_v5 = g_mapStateSlots + temp_v3 * 0x4c;
-      temp_v8 = *(char *)(temp_v5 + 0x58) != '\0';
-      temp_v0 = '\0';
-      if (temp_v8) {
-        temp_v0 = *(char *)(temp_v5 + 0x94);
-      }
-      if (temp_v8 && temp_v0 != '\0') {
-        temp_v10 = *(unsigned int *)(g_lmapScene + 0x1c);
-        mathDistanceBetweenPoints();
-        *(unsigned int *)(temp_v5 + 0x9c) = temp_v10;
-        *(unsigned int *)(temp_v5 + 0xa0) = 999;
-      }
-      temp_v5 = g_mapStateSlots;
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 0x20);
-    temp_v3 = 0;
-    do {
-      temp_v4 = -1;
-      temp_v1 = 0;
-      temp_v11 = 90000.0f;
-      do {
-        temp_v2 = temp_v5 + temp_v1 * 0x4c;
-        temp_v8 = *(char *)(temp_v2 + 0x58) != '\0';
-        temp_v6 = 0;
-        if (temp_v8) {
-          temp_v6 = *(unsigned int *)(temp_v2 + 0x5c);
+    if (g_mapStateSlots->unk04 != 101) {
+        return;
+    }
+    for (s32 i = 0; i < 32; ++i) {
+        MapStateSlot *slot = &g_mapStateSlots->slots[i];
+        if (slot->active != 0 && slot->ranking.eligible != 0) {
+            slot->ranking.distance = mathDistanceBetweenPoints(
+                g_lmapScene->transform.position[0], g_lmapScene->transform.position[1], g_lmapScene->transform.position[2],
+                slot->motion.position[0], slot->motion.position[1], slot->motion.position[2]);
+            slot->ranking.pendingRank = 999;
         }
-        temp_v9 = temp_v6 != 0;
-        if (temp_v8 && temp_v9) {
-          temp_v6 = (unsigned int)*(unsigned char *)(temp_v2 + 0x94);
+    }
+    MapStateSlots *work = g_mapStateSlots;
+    // Published nearest-slot records follow the canonical work prefix; do not enlarge it.
+    struct SelectedSlotsView {
+        u8 unk000[0x9D8];
+        MapStateSlot selected[3];
+    };
+    typedef char SelectedSlotsOffsetCheck[offsetof(SelectedSlotsView, selected) == 0x9D8 ? 1 : -1];
+    for (s32 rank = 0; rank < 3; ++rank) {
+        s32 nearest = -1;
+        f32 minimum = 90000.0f;
+        for (s32 i = 0; i < 32; ++i) {
+            MapStateSlot *slot = &work->slots[i];
+            if (slot->active != 0 && slot->state != 0 && slot->ranking.eligible != 0 &&
+                slot->ranking.pendingRank == 999 && slot->ranking.distance < minimum) {
+                nearest = i;
+                minimum = slot->ranking.distance;
+            }
         }
-        if ((((temp_v8 && temp_v9) && temp_v6 != 0) && (*(int *)(temp_v2 + 0xa0) == 999)) &&
-           (*(float *)(temp_v2 + 0x9c) < temp_v11)) {
-          temp_v4 = temp_v1;
-          temp_v11 = *(float *)(temp_v2 + 0x9c);
+        MapStateSlot *slot = &work->slots[nearest];
+        slot->ranking.pendingRank = rank;
+        slot->ranking.rank = rank;
+        MapStateSlot *selected = &((SelectedSlotsView *)work)->selected[rank];
+        selected->motion.point = slot->motion.point;
+        selected->motion.heading = slot->motion.heading;
+        selected->motion.elapsed = slot->motion.elapsed;
+        selected->motion.mode = 1;
+    }
+    for (s32 i = 0; i < 32; ++i) {
+        MapStateSlot *slot = &work->slots[i];
+        if (slot->active != 0 && slot->state != 0 && slot->ranking.eligible != 0 &&
+            slot->ranking.pendingRank == 999 && slot->ranking.rank != -1) {
+            slot->ranking.rank = -1;
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 0x20);
-      temp_v4 = temp_v5 + temp_v4 * 0x4c;
-      *(int *)(temp_v4 + 0xa0) = temp_v3;
-      *(int *)(temp_v4 + 0x98) = temp_v3;
-      temp_v10 = *(unsigned int *)(temp_v4 + 0x68);
-      temp_v7 = *(unsigned int *)(temp_v4 + 0x6c);
-      temp_v1 = temp_v5 + temp_v3 * 0x4c;
-      temp_v3 = temp_v3 + 1;
-      *(unsigned int *)(temp_v1 + 0x9e4) = *(unsigned int *)(temp_v4 + 100);
-      *(unsigned int *)(temp_v1 + 0x9e8) = temp_v10;
-      *(unsigned int *)(temp_v1 + 0x9ec) = temp_v7;
-      *(unsigned int *)(temp_v1 + 0x9f0) = *(unsigned int *)(temp_v4 + 0x70);
-      *(unsigned int *)(temp_v1 + 0x9f4) = *(unsigned int *)(temp_v4 + 0x74);
-      *(unsigned char *)(temp_v1 + 0x9f8) = 1;
-    } while (temp_v3 < 3);
-    temp_v3 = 0;
-    do {
-      temp_v4 = temp_v5 + temp_v3 * 0x4c;
-      temp_v8 = *(char *)(temp_v4 + 0x58) != '\0';
-      temp_v6 = 0;
-      if (temp_v8) {
-        temp_v6 = *(unsigned int *)(temp_v4 + 0x5c);
-      }
-      temp_v9 = temp_v6 != 0;
-      if (temp_v8 && temp_v9) {
-        temp_v6 = (unsigned int)*(unsigned char *)(temp_v4 + 0x94);
-      }
-      if ((((temp_v8 && temp_v9) && temp_v6 != 0) && (*(int *)(temp_v4 + 0xa0) == 999)) &&
-         (*(int *)(temp_v4 + 0x98) != -1)) {
-        *(unsigned int *)(temp_v4 + 0x98) = 0xffffffff;
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 0x20);
-  }
-  return;
+    }
 }
-
-} /* extern "C" */
+}

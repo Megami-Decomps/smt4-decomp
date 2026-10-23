@@ -1,91 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00298354` (_code @ 0x298354, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: predecessor job indexing folds into the base rather than a byte index; initial scheduling and scratch registers differ. */
+#include "battle/btlAction.h"
+#include "battle/BattleUnitRecordState.h"
+#include "shard/Shard0032.h"
 
 extern "C" {
-
-int FUN_004eb928(void);
-int FUN_004ec120(int *, int);
-
-extern unsigned char g_btlAction; /* 0x571138 */
-
-extern int jobIsValid(unsigned int);
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_004eb928. */
-/* Supplied declaration required: FUN_004ec120. */
-
-
-unsigned int FUN_00298354(void)
-
-{
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  unsigned char temp_v1;
-  int *piVar3;
-  char temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int *piVar8;
-  unsigned int temp_v6;
-  unsigned char temp_v7;
-  unsigned int *puVar11;
-  
-  temp_v3 = jobGetWork();
-  piVar3 = (*(int * *)((unsigned char *)&g_btlAction + 0x4));
-  temp_v3 = *(int *)(temp_v3 + 0xa4);
-  temp_v1 = 1;
-  puVar11 = (unsigned int *)((*(int * *)((unsigned char *)&g_btlAction + 0x4)) + temp_v3 * 0x495 + 1);
-  temp_v4 = *(int *)(*(*(int * *)((unsigned char *)&g_btlAction + 0x4)) + 0xa4) - 1;
-  if (temp_v4 < 0) {
-    temp_v4 = 0xb;
-  }
-  temp_v4 = jobIsValid(*(unsigned int *)(*(*(int * *)((unsigned char *)&g_btlAction + 0x4)) + temp_v4 * 4 + 0xc));
-  piVar8 = (*(int * *)((unsigned char *)&g_btlAction + 0x4));
-  if (temp_v4 == 0) {
-    temp_v7 = 0xff;
-  }
-  else {
-    temp_v7 = *(unsigned char *)(piVar3 + *(int *)(*piVar3 + 0xa4) * 0x495 + 2);
-  }
-  temp_v6 = *puVar11;
-  if ((temp_v6 & 2) != 0) {
-    temp_v2 = *(char *)((int)piVar3 + temp_v3 * 0x1254 + 9);
-  }
-  else {
-    temp_v2 = (char)piVar3[temp_v3 * 0x495 + 2];
-  }
-  if ((temp_v2 == '\v') && (temp_v7 < 0x1e)) {
-    temp_v1 = 0;
-  }
-  if (((temp_v6 & 0x40) == 0) && (temp_v1)) {
-    if ((temp_v6 & 2) != 0) {
-      if ((char)piVar3[temp_v3 * 0x495 + 2] == '&') {
-        temp_v5 = 0xffffffff;
-      }
-      else {
-        temp_v4 = *(int *)(*(*(int * *)((unsigned char *)&g_btlAction + 0x4)) + 0xa4);
-        *(unsigned char *)((*(int * *)((unsigned char *)&g_btlAction + 0x4)) + temp_v4 * 0x495 + 2) =
-             *(unsigned char *)((int)piVar3 + temp_v3 * 0x1254 + 9);
-        *(unsigned short *)((int)piVar8 + temp_v4 * 0x1254 + 10) = 0;
-        *(unsigned char *)((int)piVar8 + temp_v4 * 0x1254 + 9) = 0;
-        piVar8[temp_v4 * 0x495 + 3] = 0;
-        FUN_004eb928();
-        *puVar11 = *puVar11 & 0xfffffffd;
-        temp_v5 = 0;
-      }
-      return temp_v5;
-    }
-    FUN_004ec120((*(int * *)((unsigned char *)&g_btlAction + 0x4)),(int)(char)piVar3[temp_v3 * 0x495 + 2]);
-    if (piVar8 != (int *)0x0) {
-      *puVar11 = *puVar11 | 2;
-    }
-    temp_v0 = *(short *)((int)piVar3 + temp_v3 * 0x1254 + 10);
-    if (temp_v0 != -1) {
-      *(short *)((int)piVar3 + temp_v3 * 0x1254 + 10) = temp_v0 + 1;
-    }
-  }
-  return 0;
+extern BtlActionGlobals g_btlAction;
+JobPool *jobGetWork(void);
+s32 jobIsValid(u32 job);
+void FUN_004eb928(BattleUnitRecordState *work, s32 state);
+s32 FUN_004ec120(BattleUnitRecordState *work, s32 state);
 }
 
-} /* extern "C" */
+namespace {
+// The halfword at +6 cannot be placed in the existing byte-aligned padding union at +5.
+struct SlotProgressView {
+    u32 flags;
+    s8 state;
+    s8 pendingState;
+    u16 ticks;
+    u32 elapsed;
+};
+typedef char SlotProgressOffsetCheck[offsetof(SlotProgressView, ticks) == 6 &&
+    offsetof(SlotProgressView, elapsed) == 8 ? 1 : -1];
+static inline SlotProgressView *slotProgress(BattleUnitSlotState *slot)
+{
+    return (SlotProgressView *)slot;
+}
+}
+
+// Advance one unit's action state after the preceding job has reached a safe state.
+extern "C" s32 FUN_00298354(void)
+{
+    JobPool *job = jobGetWork();
+    BattleUnitRecordState *work = (BattleUnitRecordState *)g_btlAction.data;
+    SlotProgressView *slot = slotProgress(&work->slots[job->current]);
+    bool canAdvance = true;
+    JobPool *jobs = (JobPool *)work->battle;
+    s32 previous = jobs->current - 1;
+    if (previous < 0) {
+        previous = 11;
+    }
+    u32 previousState;
+    if (jobIsValid(jobs->jobs[previous])) {
+        previousState = slotProgress(&work->slots[((JobPool *)work->battle)->current])->state;
+    } else {
+        previousState = ~0u;
+    }
+    s32 state = (slot->flags & 2) ? slot->pendingState : slot->state;
+    if (state == 11 && previousState <= 29) {
+        canAdvance = false;
+    }
+    if (!(slot->flags & 0x40) && canAdvance) {
+        if (slot->flags & 2) {
+            if (slot->state == 38) {
+                return -1;
+            }
+            BattleUnitRecordState *currentWork = (BattleUnitRecordState *)g_btlAction.data;
+            SlotProgressView *current = slotProgress(&currentWork->slots[((JobPool *)currentWork->battle)->current]);
+            s32 nextState = slot->pendingState;
+            current->state = nextState;
+            current->ticks = 0;
+            current->pendingState = 0;
+            current->elapsed = 0;
+            FUN_004eb928(currentWork, nextState);
+            slot->flags &= ~2u;
+            return 0;
+        }
+        if (FUN_004ec120((BattleUnitRecordState *)g_btlAction.data, slot->state)) {
+            slot->flags |= 2;
+        }
+        if (slot->ticks < 0xFFFF) {
+            ++slot->ticks;
+        }
+    }
+    return 0;
+}

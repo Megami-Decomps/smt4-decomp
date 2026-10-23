@@ -1,97 +1,91 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048c1c0` (_code @ 0x48c1c0, 0x1b0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: global-address caching, sprite-loop temporaries and state-store ordering differ from retail. */
+#include "ui/NaviCategorySelection.h"
+#include "ui/ButtonHelp.h"
+#include "map/mapDepart.h"
+
+struct NaviCategoryTransitionView {
+    u8 unk0000[8];
+    u32 state;
+    u32 unk0C;
+    u32 flags;
+    u8 unk0014[0x4BC];
+    f32 position[2];
+    u8 unk04D8[0xC];
+    ButtonHelpDisplayUnit bank;
+    u8 unk0570[0x20];
+    ButtonHelpDisplayUnit cursor;
+    u8 unk061C[0x624];
+    ButtonHelpDisplayUnit entries[6];
+    u8 unk0F88[0x118];
+    ButtonHelpDisplayUnit lower;
+    ButtonHelpDisplayUnit upper;
+};
+typedef char NaviCategoryTransitionOffsets[
+    offsetof(NaviCategoryTransitionView, flags) == 0x10 && offsetof(NaviCategoryTransitionView, position) == 0x4D0 &&
+    offsetof(NaviCategoryTransitionView, bank) == 0x4E4 && offsetof(NaviCategoryTransitionView, cursor) == 0x590 &&
+    offsetof(NaviCategoryTransitionView, entries) == 0xC40 && offsetof(NaviCategoryTransitionView, lower) == 0x10A0 &&
+    offsetof(NaviCategoryTransitionView, upper) == 0x112C ? 1 : -1];
 
 extern "C" {
+extern GameStateA g_gameState;
+void uiSpriteBankApplyPreset(ButtonHelpDisplayUnit *unit, u32 preset);
+void FUN_00168980(u32 sound);
+s32 FUN_00163aa4(ButtonHelpDisplayUnit *unit, f32 step);
+s32 FUN_002e19f8(void);
+void msgWindowReset(void);
+void sub68OwnerDestroy(void);
+s32 vec2GetYInt(const void *point);
+s32 vec2GetXInt(const void *point);
+void pointConvertToFloat(f32 *point, s32 x, s32 y);
 
-int FUN_00163aa4(int);
-int FUN_00168980(int);
-int uiSpriteBankApplyPreset(int, int);
-int msgWindowReset(void);
-int sub68OwnerDestroy(void);
-int pointConvertToFloat(int, unsigned int, unsigned int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern unsigned char DAT_005f161d; /* 0x5f161d */
-extern signed char DAT_005f1891; /* 0x5f1891 */
-extern unsigned char DAT_005f1a5c; /* 0x5f1a5c */
-extern signed char DAT_005f1a5d; /* 0x5f1a5d */
-extern unsigned char DAT_005f1a5e; /* 0x5f1a5e */
-extern unsigned char DAT_005f1a5f; /* 0x5f1a5f */
-
-/* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: FUN_00168980. */
-/* Supplied declaration required: uiSpriteBankApplyPreset. */
-/* Supplied declaration required: msgWindowReset. */
-extern int FUN_002e19f8(void);
-/* Supplied declaration required: sub68OwnerDestroy. */
-/* Supplied declaration required: pointConvertToFloat. */
-
-
-void FUN_0048c1c0(int param_1)
-
+// Animate category confirmation, commit its selection/refresh requests, and release the temporary panel when closed.
+void FUN_0048c1c0(NaviCategorySelectionWork *work)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = *(int *)(param_1 + 8);
-  if (temp_v0 == 0) {
-    uiSpriteBankApplyPreset(param_1 + 0x4e4,1);
-    if (DAT_005f1891 == '\0') {
-      FUN_00168980(0x1b);
+    NaviCategoryTransitionView *view = (NaviCategoryTransitionView *)work;
+    switch (view->state) {
+    case 0:
+        uiSpriteBankApplyPreset(&view->bank, 1);
+        if (!g_gameState.mapFlags.unk295)
+            FUN_00168980(27);
+        g_gameState.unk034[0x42F] = 1; // Navigation animation active at 0x463.
+        view->state = 1;
+        view->flags |= 0x01000008;
+        return;
+    case 1: {
+        for (s32 index = 0; index < 6; ++index)
+            FUN_00163aa4(&view->entries[index], 1.0f);
+        FUN_00163aa4(&view->upper, 1.0f);
+        FUN_00163aa4(&view->lower, 1.0f);
+        ButtonHelpDisplayUnit *cursor = &view->cursor;
+        if (FUN_00163aa4(cursor, 1.0f) && FUN_002e19f8()) {
+            work->selection = work->selectedIcon;
+            work->refreshFirst = 1;
+            work->refreshSecond = 1;
+            work->unk07B92[0] = 1;
+            work->unk07B92[1] = 1;
+            g_gameState.controllerFlags.primary = 0;
+            g_gameState.navigation.alternateNaviMap = 0;
+            g_gameState.unk034[0x42F] = 0;
+            g_gameState.navigation.naviMapPending = 0;
+            view->state = 2;
+            view->flags |= 2;
+            msgWindowReset();
+        }
+        s32 y = vec2GetYInt(cursor);
+        s32 x = vec2GetXInt(cursor);
+        pointConvertToFloat(view->position, x, y);
+        return;
     }
-    DAT_005f1a5f = 1;
-    *(unsigned int *)(param_1 + 8) = 1;
-    *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x1000008;
-    return;
-  }
-  if (temp_v0 != 1) {
-    if (temp_v0 == 2) {
-      if (DAT_005f1a5d != '\0') {
-        *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffffff7;
-        sub68OwnerDestroy();
-        DAT_005f1a5d = '\0';
-      }
-      *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffffff7;
+    case 2:
+        if (g_gameState.navigation.unk461) {
+            view->flags &= ~8u;
+            sub68OwnerDestroy();
+            g_gameState.navigation.unk461 = 0;
+        }
+        view->flags &= ~8u;
+        return;
+    default:
+        return;
     }
-    return;
-  }
-  temp_v0 = 0;
-  do {
-    FUN_00163aa4(param_1 + temp_v0 * 0x8c + 0xc40);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 6);
-  FUN_00163aa4(param_1 + 0x112c);
-  FUN_00163aa4(param_1 + 0x10a0);
-  temp_v3 = param_1 + 0x590;
-  temp_v0 = FUN_00163aa4(temp_v3);
-  if ((temp_v0 != 0) && (temp_v0 = FUN_002e19f8(), temp_v0 != 0)) {
-    *(char *)(param_1 + 100) = (char)*(unsigned int *)(param_1 + 0x20510);
-    *(unsigned char *)(param_1 + 0x7b90) = 1;
-    *(unsigned char *)(param_1 + 0x7b91) = 1;
-    *(unsigned char *)(param_1 + 0x7b92) = 1;
-    *(unsigned char *)(param_1 + 0x7b93) = 1;
-    DAT_005f161d = 0;
-    DAT_005f1a5c = 0;
-    DAT_005f1a5f = 0;
-    DAT_005f1a5e = 0;
-    *(unsigned int *)(param_1 + 8) = 2;
-    *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 2;
-    msgWindowReset();
-  }
-  temp_v1 = vec2GetYInt(temp_v3);
-  temp_v2 = vec2GetXInt(temp_v3);
-  pointConvertToFloat(param_1 + 0x4d0,temp_v2,temp_v1);
-  return;
 }
-
-} /* extern "C" */
+}

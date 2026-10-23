@@ -12,7 +12,7 @@ int FUN_00258408(...);
 int FUN_00258618(int);
 int statusCameraDestroy(void);
 int FUN_002942c4(...);
-int FUN_00294e18(int);
+int statusCameraSelectPreset(int);
 int FUN_00297060(...);
 int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_002a9fdc(...);
@@ -62,7 +62,7 @@ extern unsigned int FUN_00263c1c(unsigned char *);
 /* Supplied declaration required: statusCameraDestroy. */
 extern unsigned int FUN_00294090(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002942c4. */
-/* Supplied declaration required: FUN_00294e18. */
+/* Supplied declaration required: statusCameraSelectPreset. */
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
@@ -98,7 +98,7 @@ void FUN_001eea88(void)
   
   temp_v0 = g_screenStateWork;
   statusCameraDestroy();
-  FUN_00294e18(2);
+  statusCameraSelectPreset(2);
   temp_v4 = 0;
   if (*(short *)(temp_v0 + 0x1e) != 0) {
     do {

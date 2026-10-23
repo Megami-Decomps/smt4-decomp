@@ -1,103 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00281060` (_code @ 0x281060, 0x108 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: glyph initializer uses a compiler constant rather than the retail data symbol; stack layout and loop scheduling differ. */
+#include "common.h"
 
 extern "C" {
+extern const char DAT_0053d400[];
+extern const char DAT_0053d404[];
+extern const char DAT_0053d40c[];
+s32 textFormatBuffer(char *buffer, const char *format, ...);
 
-int textFormatBuffer(...);
-
-/* stack frame of param_4: 2 slot(s), 5 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned char sp40; /* 0x40: local_40 */
-} param_4_stack;
-
-/* Supplied declaration required: textFormatBuffer. */
-
-
-int FUN_00281060(char *param_1,unsigned int param_2,int param_3,int param_4)
-
+// Write Shift-JIS full-width digits without a terminator; negative width measures the value.
+s32 FUN_00281060(char *destination, u32 value, s32 width, s32 zeroPad)
 {
-/* irregular: 1 native warning(s); review required */
-  char *pcVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  char *pcVar4;
-  char temp_v2;
-  char acStack_3f [9];
-  char acStack_36 [10];
-  char acStack_2c [4];
-  char acStack_28 [4];
-  char acStack_24 [4];
-  char acStack_20 [4];
-  
-  acStack_36[2] = -0x7e;
-  acStack_36[3] = 'O';
-  acStack_36[4] = -0x7e;
-  acStack_36[5] = 'P';
-  acStack_36[6] = -0x7e;
-  acStack_36[7] = 'Q';
-  acStack_36[8] = -0x7e;
-  acStack_36[9] = 'R';
-  acStack_2c[0] = -0x7e;
-  acStack_2c[1] = 'S';
-  acStack_2c[2] = -0x7e;
-  acStack_2c[3] = 'T';
-  acStack_28[0] = -0x7e;
-  acStack_28[1] = 'U';
-  acStack_28[2] = -0x7e;
-  acStack_28[3] = 'V';
-  acStack_24[0] = -0x7e;
-  acStack_24[1] = 'W';
-  acStack_24[2] = -0x7e;
-  acStack_24[3] = 'X';
-  acStack_20[0] = -0x7f;
-  acStack_20[1] = '@';
-  acStack_20[2] = '\0';
-  acStack_20[3] = '\0';
-  temp_v1 = 0;
-  if ((param_3 < 0) && (param_4 == 0)) {
-    textFormatBuffer(&temp_v2,(char *)0x53d400,param_2);
-    temp_v1 = 0;
-    if (temp_v2 == '\0') {
-      return 0;
+    char buffer[11];
+    char digits[12][2] = {
+        {0x82, 0x4F}, {0x82, 0x50}, {0x82, 0x51}, {0x82, 0x52},
+        {0x82, 0x53}, {0x82, 0x54}, {0x82, 0x55}, {0x82, 0x56},
+        {0x82, 0x57}, {0x82, 0x58}, {0x81, 0x40}, {0, 0}
+    };
+    s32 length = 0;
+    if (width < 0 && zeroPad == 0) {
+        textFormatBuffer(buffer, DAT_0053d400, value);
+        width = 0;
+        if (buffer[0] == '\0') {
+            return length;
+        }
+        do {
+            ++width;
+        } while (buffer[width] != '\0');
+        length = width;
+        if (length == 0) {
+            return length;
+        }
     }
-    do {
-      param_3 = temp_v1 + 1;
-      pcVar1 = acStack_3f + temp_v1;
-      temp_v1 = param_3;
-    } while (*pcVar1 != '\0');
-    if (param_3 == 0) {
-      return 0;
+    if (width > 10) {
+        width = 10;
     }
-  }
-  if (param_3 >= 11) {
-    param_3 = 10;
-  }
-  if (param_4 != 0) {
-    textFormatBuffer(&temp_v2,"%010u",param_2);
-  }
-  else {
-    textFormatBuffer(&temp_v2,"%10u",param_2);
-  }
-  if (0 < param_3) {
-    pcVar1 = acStack_36 + -param_3;
-    do {
-      temp_v0 = 10;
-      if ((int)*pcVar1 - 0x30U < 10) {
-        temp_v0 = (int)*pcVar1 - 0x30U;
-      }
-      if (param_1 != (char *)0x0) {
-        pcVar4 = param_1 + 1;
-        *param_1 = acStack_36[temp_v0 * 2 + 2];
-        param_1 = param_1 + 2;
-        *pcVar4 = acStack_36[temp_v0 * 2 + 3];
-      }
-      param_3 = param_3 - 1;
-      pcVar1 = pcVar1 + 1;
-    } while (param_3 != 0);
-  }
-  return temp_v1;
+    if (zeroPad != 0) {
+        textFormatBuffer(buffer, DAT_0053d404, value);
+    } else {
+        textFormatBuffer(buffer, DAT_0053d40c, value);
+    }
+    if (width > 0) {
+        const s8 *character = reinterpret_cast<const s8 *>(buffer + (10 - width));
+        do {
+            u32 digit = 10;
+            if ((u32)(*character - '0') <= 9) {
+                digit = *character - '0';
+            }
+            if (destination != NULL) {
+                *destination++ = digits[digit][0];
+                *destination++ = digits[digit][1];
+            }
+            --width;
+            ++character;
+        } while (width > 0);
+    }
+    return length;
 }
-
-} /* extern "C" */
+}

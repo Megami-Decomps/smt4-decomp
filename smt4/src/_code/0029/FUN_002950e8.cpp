@@ -1,120 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002950e8` (_code @ 0x2950e8, 0x12c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initial frame branch placement, displacement negation and completion-result pointer allocation differ. */
+#include "shard/W6_W6Match8_AnimatedSprite.h"
 
 extern "C" {
+void FUN_002b1e08(SpritePlaybackView *sprite);
+void controllerUpdateUniformScaleTrack(SpritePlaybackView *sprite);
+void spriteSequencePlayerAdvance(SpritePlaybackView *sprite);
 
-int spriteSequencePlayerAdvance(...);
-struct ScaleController;
-void controllerUpdateUniformScaleTrack(ScaleController *);
-int FUN_002b1e08(...);
-
-typedef struct fn_002950e8_arg0 fn_002950e8_arg0;
-struct fn_002950e8_arg0 {
-    unsigned char pad_0x0[0x10];
-    int field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x3e];
-    short field_0x52; /* +0x52 */
-    unsigned char pad_0x54[0x31];
-    undefined1 field_0x85; /* +0x85 */
-    byte field_0x86; /* +0x86 */
-    byte field_0x87; /* +0x87 */
-    byte field_0x88; /* +0x88 */
-    byte field_0x89; /* +0x89 */
-    byte field_0x8a; /* +0x8a */
-};
-
-/* Supplied declaration required: spriteSequencePlayerAdvance. */
-/* Supplied declaration required: FUN_002b1e08. */
-
-
-unsigned int FUN_002950e8(fn_002950e8_arg0 *param_1,int param_2)
-
+// Ease a sprite vertically toward its origin while advancing its remaining animation channels.
+u32 FUN_002950e8(SpritePlaybackView *sprite, s32 fromBelow)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v3 = 1;
-  temp_v2 = (int)param_1->field_0x52;
-  if ((temp_v2 == 0) && (param_1->field_0x10 = 0x3c000, param_2 == 0)) {
-    param_1->field_0x10 = -0x3c000;
-    temp_v1 = -0xb;
-  }
-  else {
-    temp_v1 = 0xb;
-    if (param_2 == 0) {
-      temp_v1 = -0xb;
+    u32 arrived = 1;
+    s32 frame = (s16)sprite->positionFrame;
+    if (frame == 0) {
+        sprite->verticalTransition.displacement = 0x3C000;
+        if (!fromBelow)
+            sprite->verticalTransition.displacement = -sprite->verticalTransition.displacement;
     }
-  }
-  if (0 < temp_v2) {
-    if (param_2 != 0) {
-      temp_v1 = temp_v1 - temp_v2;
-      if (temp_v1 < 0) {
-        temp_v1 = 0;
-      }
+    s32 speed = fromBelow ? 11 : -11;
+    if (frame > 0) {
+        if (fromBelow) {
+            speed -= frame;
+            if (speed < 0)
+                speed = 0;
+        } else {
+            speed += frame;
+            if (speed > 0)
+                speed = 0;
+        }
     }
-    else {
-      temp_v1 = temp_v1 + temp_v2;
-      if (0 < temp_v1) {
-        temp_v1 = 0;
-      }
+    sprite->verticalTransition.displacement -= speed * 0x1000;
+    s32 position = sprite->verticalTransition.displacement >> 12;
+    if ((fromBelow && position <= 0) || (!fromBelow && position >= 0)) {
+        sprite->verticalTransition.displacement = 0;
+        sprite->completed[0] = 1;
+    } else {
+        arrived = 0;
+        sprite->finished = 0;
     }
-  }
-  temp_v2 = param_1->field_0x10 + temp_v1 * -0x1000;
-  param_1->field_0x10 = temp_v2;
-  temp_v2 = temp_v2 >> 0xc;
-  if (param_2 != 0) {
-    if (0 >= temp_v2) {
-      param_1->field_0x10 = 0;
-      param_1->field_0x86 = 1;
-    }
-    else {
-      temp_v3 = 0;
-      param_1->field_0x8a = 0;
-    }
-  }
-  else if (-1 < temp_v2) {
-    param_1->field_0x10 = 0;
-    param_1->field_0x86 = 1;
-  }
-  else {
-    temp_v3 = 0;
-    param_1->field_0x8a = 0;
-  }
-  param_1->field_0x52 = param_1->field_0x52 + 1;
-  FUN_002b1e08(param_1);
-  controllerUpdateUniformScaleTrack((ScaleController *)param_1);
-  spriteSequencePlayerAdvance(param_1);
-  temp_v4 = param_1->field_0x86 != 0;
-  temp_v0 = 0;
-  if (temp_v4) {
-    temp_v0 = param_1->field_0x87;
-  }
-  if (temp_v4 && temp_v0 != 0) {
-    temp_v4 = param_1->field_0x88 != 0;
-    temp_v0 = 0;
-    if (temp_v4) {
-      temp_v0 = param_1->field_0x89;
-    }
-    if (temp_v4 && temp_v0 != 0) {
-      param_1->field_0x8a = 1;
-      param_1->field_0x85 = 1;
-      if (param_1->field_0x8a == 0) {
-        temp_v3 = 0;
-      }
-      return temp_v3;
-    }
-  }
-  param_1->field_0x8a = 0;
-  param_1->field_0x85 = 1;
-  if (param_1->field_0x8a == 0) {
-    temp_v3 = 0;
-  }
-  return temp_v3;
+    sprite->positionFrame = frame + 1;
+    FUN_002b1e08(sprite);
+    controllerUpdateUniformScaleTrack(sprite);
+    spriteSequencePlayerAdvance(sprite);
+    if (sprite->completed[0] && sprite->completed[1] && sprite->completed[2] && sprite->completed[3])
+        sprite->finished = 1;
+    else
+        sprite->finished = 0;
+    sprite->active = 1;
+    if (!sprite->finished)
+        arrived = 0;
+    return arrived;
 }
-
-} /* extern "C" */
+}

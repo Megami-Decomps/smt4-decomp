@@ -1,73 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00207f68` (_code @ 0x207f68, 0x128 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the final battle-flag load/OR/store uses r0 instead of retail r1. */
+#include "battle/btlEncount.h"
+#include "shard/W4_Match6_BtlEntry.h"
+#include "sys/Task.h"
+#include "AsdSDK/AsdDebug.h"
+
+/* The encounter allocation has an additional unrecovered word beyond its shared prefix. */
+struct BattleEncounterAllocation {
+    BtlEncount encounter;
+    u32 unk10;
+};
 
 extern "C" {
+extern BtlEncount *g_btlEncount;
+void battleQueryEncounter(void *);
+void btlEncountDestroy(void *);
+u32 taskCreateDraw(const char *, s32, s32, s32, TaskFunc, TaskFunc, void *, u32);
+void *asdMemAlloc(u32, u32, u32, u32, u32);
+void asdMemFree(void *);
+void gameCounterAddSaturating(s32, s32);
+void frameTexApplyMode(s32);
 
-int frameTexApplyMode(...);
-int gameCounterAddSaturating(...);
-int asdMemFree(...);
-int asdMemAlloc(...);
-int taskCreateDraw(...);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern int battleQueryEncounter(...); /* 0x1fc6b4 */
-extern unsigned char LAB_00208098; /* 0x208098 */
-extern int btlEncountDestroy(...); /* 0x2d5034 */
-extern unsigned int *g_btlEncount; /* 0x435d30 */
-
-/* Supplied declaration required: frameTexApplyMode. */
-/* Supplied declaration required: gameCounterAddSaturating. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-
-
-void FUN_00207f68(unsigned int *param_1)
-
+/* Initialize encounter tracking, its update task and the battle's entry records. */
+void FUN_00207f68(BtlMainState *battle)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned char *puVar1;
-  unsigned int *puVar2;
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar5;
-  
-  puVar1 = &LAB_00208098;
-  taskCreateDraw(&LAB_00208098,2,0,0,battleQueryEncounter,btlEncountDestroy,param_1,*param_1);
-  param_1[2] = (unsigned int)puVar1;
-  puVar2 = (unsigned int *)0x100;
-  asdMemAlloc(0x100,0x100,0,0x14,1);
-  g_btlEncount = puVar2;
-  *puVar2 = 0;
-  puVar2[3] = 0;
-  if (puVar2[1] != 0) {
-    asdMemFree();
-    puVar2[1] = 0;
-  }
-  temp_v1 = 0x32;
-  temp_v0 = 0;
-  do {
-    param_1[temp_v0 * 8 + 0xfd] = 0xffffffff;
-    *(unsigned char *)((int)param_1 + temp_v0 * 0x20 + 0x3fa) = 0xff;
-    temp_v1 = temp_v1 - 1;
-    *(unsigned short *)(param_1 + temp_v0 * 8 + 0xfe) = 0xffff;
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v1 != 0);
-  gameCounterAddSaturating(2,1);
-  if ((((*(char *)((int)param_1 + 0x44b7) == '\0') && (-1 < (int)param_1[0x30])) &&
-      ((param_1[0x38] & 0x2000000) == 0)) &&
-     (puVar5 = param_1 + 0x1128, (*puVar5 & 2) == 0 && (*puVar5 & 0x40000000) == 0)) {
-    frameTexApplyMode(2);
-    *puVar5 = *puVar5 | 0x40000000;
-  }
-  return;
+    battle->encounter.drawJob = taskCreateDraw("btlEncount Calc", 2, 0, 0, battleQueryEncounter,
+                                              btlEncountDestroy, battle, battle->encounter.ownerJob);
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlEncount.cpp", 1308);
+    BattleEncounterAllocation *allocation = static_cast<BattleEncounterAllocation *>(asdMemAlloc(0x100, 0x100, 0, sizeof(BattleEncounterAllocation), 1));
+    BtlEncount *encounter = &allocation->encounter;
+    g_btlEncount = encounter;
+    encounter->state = 0;
+    encounter->flags = 0;
+    if (encounter->data != NULL) {
+        asdMemFree(encounter->data);
+        encounter->data = NULL;
+    }
+    for (s32 i = 0; i < 50; ++i) {
+        battle->encounter.records[i].id = -1;
+        battle->encounter.records[i].category = -1;
+        battle->encounter.records[i].listedId = -1;
+    }
+    gameCounterAddSaturating(2, 1);
+    if (!battle->encounterControl.blocked && battle->encounter.encounterId >= 0 &&
+        !(battle->encounter.flags & 0x2000000) && !(battle->battleFlags & 2) &&
+        !(battle->battleFlags & 0x40000000)) {
+        frameTexApplyMode(2);
+        battle->battleFlags |= 0x40000000;
+    }
 }
-
-} /* extern "C" */
+}

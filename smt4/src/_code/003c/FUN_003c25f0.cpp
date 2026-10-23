@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern unsigned short *FUN_00111a5c(char, char, short);
+extern unsigned short *dataTableFindCategoryVariant(char, char, short);
 extern int gameFlagIsSet(unsigned int);
 extern unsigned int randNextInRange(unsigned int);
 extern unsigned short *FUN_002c0a2c(char, char, short);
@@ -83,7 +83,7 @@ void FUN_003c25f0(int param_1)
       }
       else {
         *(unsigned char *)((int)puVar9 + 3) = temp_v4 & 0xe0;
-        puVar10 = (unsigned short *)FUN_00111a5c(temp_v2,temp_v1,temp_v10);
+        puVar10 = (unsigned short *)dataTableFindCategoryVariant(temp_v2,temp_v1,temp_v10);
         temp_v13 = *puVar9;
         temp_v8 = (unsigned int)puVar10[temp_v6 * 3 + 3];
         if (temp_v8 == 0) {

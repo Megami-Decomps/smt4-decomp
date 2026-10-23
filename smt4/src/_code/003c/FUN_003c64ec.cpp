@@ -15,7 +15,7 @@ int FUN_003c39fc(...);
 int FUN_003c3da4(...);
 int FUN_003c40ac(...);
 int FUN_003c4524(...);
-int FUN_003c45f4(...);
+int btlDebugCreatePanelMenu(...);
 int FUN_003c4748(...);
 int FUN_003c49bc(...);
 int FUN_003c4ac4(...);
@@ -107,7 +107,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 /* Supplied declaration required: FUN_003c3da4. */
 /* Supplied declaration required: FUN_003c40ac. */
 /* Supplied declaration required: FUN_003c4524. */
-/* Supplied declaration required: FUN_003c45f4. */
+/* Supplied declaration required: btlDebugCreatePanelMenu. */
 /* Supplied declaration required: FUN_003c4748. */
 /* Supplied declaration required: FUN_003c49bc. */
 /* Supplied declaration required: FUN_003c4ac4. */
@@ -727,7 +727,7 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     temp_v4 = padIsButtonPressed(0);
     goto joined_r0x003c7184;
   case 0x13:
-    FUN_003c45f4(param_1);
+    btlDebugCreatePanelMenu(param_1);
     temp_v5 = 0x14;
     break;
   case 0x14:

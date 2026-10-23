@@ -1,90 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a1970` (_code @ 0x2a1970, 0x104 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: equivalent glyph search, but register allocation and fallback block placement differ. */
+#include "shard/S2NwFont.h"
 
-extern "C" {
+/* This text-font wrapper has its resource pointer at 4, unlike NwResFontBase. */
+struct TextFontResourceView {
+    u32 reserved;
+    NwFontInfo *info;
+};
 
-int __aeabi_uidivmod(unsigned int, unsigned int);
+struct TextFontMapEntry {
+    u16 code;
+    u16 glyphIndex;
+};
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+struct TextFontCharMap {
+    u16 firstCode;
+    u16 lastCode;
+    u16 method;
+    u16 reserved;
+    TextFontCharMap *next;
+    u16 data[1];
+};
 
-/* Supplied declaration required: __aeabi_uidivmod. */
-
-
-void FUN_002a1970(int param_1,unsigned int param_2)
-
+static inline u32 textFontFindGlyphIndex(NwFontInfo *info, u32 code)
 {
-/* irregular: 4 unstructured edge(s); 1 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned short *puVar2;
-  unsigned short *puVar3;
-  unsigned short *puVar4;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v1 = *(int *)(param_1 + 4);
-  temp_v3 = 0xffff;
-  puVar2 = *(unsigned short **)(temp_v1 + 0x10);
-  do {
-    if (puVar2 == (unsigned short *)0x0) {
-      temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 2);
-      __aeabi_uidivmod(temp_v3,(unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 8) + 0xc) *
-                           (unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 8) + 0xe));
-      return;
-    }
-    temp_v5 = param_2 <= *puVar2;
-    temp_v4 = *puVar2 == param_2;
-    if (!temp_v5 || temp_v4) {
-      temp_v5 = puVar2[1] <= param_2;
-      temp_v4 = param_2 == puVar2[1];
-    }
-    if (!temp_v5 || temp_v4) {
-      temp_v0 = puVar2[2];
-      if (temp_v0 != 0) {
-        if (temp_v0 != 1) {
-          if (temp_v0 == 2) {
-            puVar4 = puVar2 + 7;
-            puVar2 = puVar2 + 6 + ((unsigned int)puVar2[6] * 2 - 1);
-            if (puVar2 >= puVar4) {
-              do {
-                puVar3 = puVar4 + ((((int)puVar2 - (int)puVar4) >> 2) / 2) * 2;
-                temp_v2 = (unsigned int)*puVar3;
-                if (temp_v2 >= param_2 && temp_v2 != param_2) {
-                  puVar2 = puVar3 + -2;
+    for (TextFontCharMap *map = (TextFontCharMap *)info->charMap; map; map = map->next) {
+        if (code < map->firstCode || code > map->lastCode)
+            continue;
+        u32 index = 0xffff;
+        switch (map->method) {
+        case 0:
+            index = (u16)(map->data[0] + (code - map->firstCode));
+            break;
+        case 1:
+            index = map->data[code - map->firstCode];
+            break;
+        case 2: {
+            u16 *data = map->data;
+            TextFontMapEntry *first = (TextFontMapEntry *)(data + 1);
+            TextFontMapEntry *last = (TextFontMapEntry *)(data + 2 * data[0] - 1);
+            while (first <= last) {
+                TextFontMapEntry *middle = first + (last - first) / 2;
+                if (middle->code > code)
+                    last = middle - 1;
+                if (middle->code < code)
+                    first = middle + 1;
+                if (middle->code == code) {
+                    index = middle->glyphIndex;
+                    break;
                 }
-                if (temp_v2 < param_2) {
-                  puVar4 = puVar3 + 2;
-                }
-                if (temp_v2 == param_2) {
-                  temp_v3 = (unsigned int)puVar3[1];
-                  break;
-                }
-              } while (puVar4 <= puVar2);
             }
-          }
+            break;
         }
-        else {
-          temp_v3 = (unsigned int)puVar2[(param_2 - *puVar2) + 6];
         }
-      }
-      else {
-        temp_v3 = ((unsigned int)puVar2[6] + (param_2 - *puVar2)) & 0xffff;
-      }
-      if (temp_v3 == 0xffff) {
-        temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 2);
-      }
-      __aeabi_uidivmod(temp_v3,(unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 8) + 0xc) *
-                           (unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 8) + 0xe));
-      return;
+        return index == 0xffff ? info->alterCharIndex : index;
     }
-    puVar2 = *(unsigned short **)(puVar2 + 4);
-  } while( 1 );
+    return info->alterCharIndex;
 }
 
-} /* extern "C" */
+/* Resolve a character and return the texture sheet that contains its glyph. */
+extern "C" u32 FUN_002a1970(TextFontResourceView *font, u32 code)
+{
+    NwFontInfo *info = font->info;
+    u32 cellsPerSheet = info->sheetInfo->sheetRows * info->sheetInfo->sheetLines;
+    return textFontFindGlyphIndex(info, code) / cellsPerSheet;
+}

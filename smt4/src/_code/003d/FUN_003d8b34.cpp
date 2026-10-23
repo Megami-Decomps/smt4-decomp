@@ -1,58 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d8b34` (_code @ 0x3d8b34, 0x130 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: selected record's stride arithmetic uses r1 where retail uses r2; all other instructions match. */
+#include "battle/EnemyEditor.h"
 
 extern "C" {
+u32 asdListBoxCreate(u32, s32, s32, s32, s32);
+void FUN_00227200(u32, void *, void *);
+void FUN_002271e8(u32, s32, s32);
+void jobSetText(u32, const char *);
+void asdListBoxAddItem(u32, const char *);
+const EnemyEditorUnit *FUN_0027da30(EnemyEditorResourceIV *);
+void asdListBoxSetItemMode3(u32, s32, s32, s32, s32, s32);
+void asdListBoxSetFloatItem(u32, s32, s32, s32, f32);
+void asdListBoxSetByteValue(u32, s32);
+void FUN_00192a9c(void);
+void textMeasureFixedWidth(void);
+extern const char DAT_0040063c[], DAT_00400630[], DAT_00400620[], DAT_00400610[], DAT_00400600[];
 
-int asdListBoxAddItem(...);
-int FUN_002271e8(...);
-int FUN_00227200(...);
-int asdListBoxSetFloatItem(...);
-int asdListBoxSetItemMode3(...);
-int asdListBoxSetByteValue(...);
-int jobSetText(...);
-int asdListBoxCreate(...);
-int FUN_0027da30(...);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
-
-extern unsigned char DAT_00400600; /* 0x400600 */
-
-/* Supplied declaration required: asdListBoxAddItem. */
-/* Supplied declaration required: FUN_002271e8. */
-/* Supplied declaration required: FUN_00227200. */
-/* Supplied declaration required: asdListBoxSetFloatItem. */
-/* Supplied declaration required: asdListBoxSetItemMode3. */
-/* Supplied declaration required: asdListBoxSetByteValue. */
-/* Supplied declaration required: jobSetText. */
-/* Supplied declaration required: asdListBoxCreate. */
-/* Supplied declaration required: FUN_0027da30. */
-
-
-void FUN_003d8b34(int param_1,int param_2,unsigned int param_3)
-
+// Build the enemy-id and XYZ position controls for the selected enemy.
+void FUN_003d8b34(EnemyEditorWork *work, EnemyEditorResourceIV *resource, u32 parent)
 {
-/* irregular: 9 native warning(s); review required */
-  asdListBoxCreate(param_3,0xeb,0x10,0x20,4);
-  *(unsigned int *)(param_1 + 0xc) = param_3;
-  FUN_00227200();
-  FUN_002271e8(param_3,0xc,0x10);
-  jobSetText(param_3,"ENEMY EDIT");
-  asdListBoxAddItem(param_3,"窔疒ꮈ芖");
-  asdListBoxAddItem(param_3,"瞂窔疒쪈疒쾕墍");
-  asdListBoxAddItem(param_3,"碂窔疒쪈疒쾕墍");
-  asdListBoxAddItem(param_3,&DAT_00400600);
-  FUN_0027da30();
-  asdListBoxSetItemMode3(param_3,0,*(unsigned short *)(param_2 + 2),1,999,0);
-  asdListBoxSetFloatItem(param_3,1,0xfffffc18);
-  asdListBoxSetFloatItem(param_3,2,0xfffffc18,1000);
-  asdListBoxSetFloatItem(param_3,3,0xfffffc18,1000);
-  asdListBoxSetByteValue(param_3,1);
-  return;
+    u32 list = asdListBoxCreate(parent, 0xeb, 16, 32, 4);
+    work->list = list;
+    FUN_00227200(list, reinterpret_cast<void *>(FUN_00192a9c), reinterpret_cast<void *>(textMeasureFixedWidth));
+    FUN_002271e8(list, 12, 16);
+    jobSetText(list, DAT_0040063c);
+    asdListBoxAddItem(list, DAT_00400630);
+    asdListBoxAddItem(list, DAT_00400620);
+    asdListBoxAddItem(list, DAT_00400610);
+    asdListBoxAddItem(list, DAT_00400600);
+    EnemyEditorRecordIV *record = &resource->records[work->selection];
+    const EnemyEditorUnit *unit = FUN_0027da30(resource);
+    asdListBoxSetItemMode3(list, 0, unit->id, 1, 999, 0);
+    asdListBoxSetFloatItem(list, 1, -1000, 1000, record->position[0]);
+    asdListBoxSetFloatItem(list, 2, -1000, 1000, record->position[1]);
+    asdListBoxSetFloatItem(list, 3, -1000, 1000, record->position[2]);
+    asdListBoxSetByteValue(list, 1);
 }
-
-} /* extern "C" */
+}

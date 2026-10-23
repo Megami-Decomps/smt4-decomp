@@ -1,91 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00285020` (_code @ 0x285020, 0x174 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdDebug.h"
+#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_AnimatedSprite.h"
+
+struct SWinWork {
+    u32 process;
+    u32 unk04;
+    u32 values[8];
+    Params002c312c parameters;
+    UiAnimatedSprite sprite;
+};
+typedef char SWinWorkLayoutCheck[sizeof(SWinWork) == 0xD4 &&
+    offsetof(SWinWork, parameters) == 0x28 && offsetof(SWinWork, sprite) == 0x48 ? 1 : -1];
 
 extern "C" {
+extern SWinWork *g_sWin;
+extern const u8 DAT_0052fbe4[];
+void *asdMemoryAllocTracked(s32 heap, s32 category, s32 flags, u32 bytes, s32 count);
+void sysMemClear(void *work, u32 bytes);
+void asdTMTexTableLoadTmx(s32 table, s32 entry);
+s32 FUN_003d0958(u32 process);
+s32 FUN_003d02bc(u32 process);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc update, AsdProcFunc end, u32 work);
+u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
+void paramsClearPacket(Params002c312c *packet);
+void paramsInit(Params002c312c *packet, s32 x, s32 y, const void *first, s32 firstCount,
+    const void *second, s32 secondCount, u32 a, u32 b, u32 c, u32 d);
+void FUN_0014e188(UiAnimatedSprite *sprite, s32 group, s32 entry, Params002c312c *parameters,
+    s32 flags, f32 speed);
 
-int asdTMTexTableLoadTmx(...);
-int FUN_0014e188(...);
-int asdProcessCreateSimple(...);
-int paramsInit(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int sysMemClear(...);
-int paramsClearPacket(...);
-
-/* stack frame of param_1: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern unsigned char LAB_002851d0; /* 0x2851d0 */
-extern unsigned char LAB_002851e0; /* 0x2851e0 */
-extern unsigned char LAB_002851f0; /* 0x2851f0 */
-extern int FUN_003d02bc(...); /* 0x3d02bc */
-extern int FUN_003d0958(...); /* 0x3d0958 */
-extern unsigned char DAT_0052fbcc; /* 0x52fbcc */
-extern unsigned char DAT_0052fbe4; /* 0x52fbe4 */
-extern unsigned int *g_sWin; /* 0x57f57c */
-
-/* Supplied declaration required: asdTMTexTableLoadTmx. */
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: paramsClearPacket. */
-
-
-void FUN_00285020(int param_1)
-
+void FUN_00285020(s32 raisedPriority)
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  unsigned int *puVar3;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  if (g_sWin == (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0xd4,1);
-    g_sWin = puVar1;
-  }
-  puVar1 = g_sWin;
-  sysMemClear();
-  temp_v0 = 0x80;
-  temp_v1 = 0xdc;
-  if (param_1 != 0) {
-    temp_v0 = 0x85;
-    temp_v1 = 0xe1;
-  }
-  asdTMTexTableLoadTmx(0x34,0);
-  puVar2 = &LAB_002851d0;
-  asdProcessCreateSimple(&LAB_002851d0,3,0,0,FUN_003d0958,0,0);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_002851e0,temp_v0,0,0,FUN_003d02bc,0,0,puVar2);
-  taskCreateDraw(&LAB_002851f0,temp_v1,0,0,FUN_003d02bc,0,0,*puVar1);
-  puVar1 = g_sWin;
-  puVar3 = g_sWin + 10;
-  g_sWin[2] = 0;
-  puVar1[3] = 0;
-  puVar1[4] = 0;
-  puVar1[5] = 0;
-  puVar1[6] = 0;
-  puVar1[7] = 0;
-  puVar1[8] = 0;
-  puVar1[9] = 0;
-  paramsClearPacket(puVar3);
-  paramsInit(puVar1 + 10,0,0,&DAT_0052fbcc,0x18,&DAT_0052fbe4,0x18,0,0,0,0);
-  FUN_0014e188(puVar1 + 0x12,0x34,0,puVar1 + 10,0x15);
-  return;
+    if (!g_sWin) {
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\font\\SWin\\SWin.cpp", 0x146);
+        g_sWin = (SWinWork *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(SWinWork), 1);
+    }
+    SWinWork *work = g_sWin;
+    sysMemClear(work, sizeof(*work));
+    s32 leftPriority = 0x80;
+    s32 rightPriority = 0xdc;
+    if (raisedPriority) {
+        leftPriority = 0x85;
+        rightPriority = 0xe1;
+    }
+    asdTMTexTableLoadTmx(0x34, 0);
+    work->process = asdProcessCreateSimple((const s8 *)"SWin Calc", 3, 0, 0, FUN_003d0958, 0, 0);
+    taskCreateDraw((const s8 *)"SWin DrawUpLeft", leftPriority, 0, 0, FUN_003d02bc, 0, 0, (void *)work->process);
+    taskCreateDraw((const s8 *)"SWin DrawUpRight", rightPriority, 0, 0, FUN_003d02bc, 0, 0, (void *)work->process);
+    work = g_sWin;
+    work->values[0] = 0;
+    work->values[1] = 0;
+    work->values[2] = 0;
+    work->values[3] = 0;
+    work->values[4] = 0;
+    work->values[5] = 0;
+    work->values[6] = 0;
+    work->values[7] = 0;
+    paramsClearPacket(&work->parameters);
+    /* The first animation packet immediately precedes the second in the shared table. */
+    paramsInit(&work->parameters, 0, 0, DAT_0052fbe4 - 0x18, 0x18, DAT_0052fbe4, 0x18, 0, 0, 0, 0);
+    FUN_0014e188(&work->sprite, 0x34, 0, &work->parameters, 0x15, 1.0f);
 }
-
-} /* extern "C" */
+}

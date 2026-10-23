@@ -1,88 +1,83 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038f5d4` (_code @ 0x38f5d4, 0x15c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: global flag reload is folded and final transition stores use a combined STM. */
+#include "addon/aocMain.h"
+#include "ui/SceneWindowWork.h"
 
 extern "C" {
+extern AocMain *g_aocMain;
+extern AocDisplay *g_aocDisplay;
+void FUN_00233818(const void **dispatch);
+void ifTouchRegionClearAll(void *window);
+void jobStopAndClearFlags(void *owner);
+void jobOwnerFreeSlotAndStop(u32 *job);
+void scrScriptProcessDestroy(void *script);
+void asdMemFreeSlot(u32 slot);
+void asdTMTexTableFreeEntry(s32 entry);
+void asdTMTexTableReleaseNode(s32 entry, s32 node);
+void asdMemFree(void *memory);
+void jobStop(u32 job, s32 mode);
+s32 jobIsValid(u32 job);
 
-int FUN_00233818(unsigned int *);
-int ifTouchRegionClearAll(unsigned int *);
-int jobStopAndClearFlags(unsigned int *);
-int jobOwnerFreeSlotAndStop(unsigned int *);
-int scrScriptProcessDestroy(void);
-int asdMemFreeSlot(unsigned int);
-int asdTMTexTableFreeEntry(int);
-int asdTMTexTableReleaseNode(int, int);
-int ifTouchRegionRemove(void);
-int asdMemFree(void);
-int jobStop(unsigned int, int);
-
-typedef int romwright_code(...);
-extern int g_aocMain; /* 0x432fc8 */
-extern int g_aocDisplay; /* 0x433130 */
-
-/* Supplied declaration required: FUN_00233818. */
-/* Supplied declaration required: ifTouchRegionClearAll. */
-/* Supplied declaration required: jobStopAndClearFlags. */
-/* Supplied declaration required: jobOwnerFreeSlotAndStop. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: asdMemFreeSlot. */
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: ifTouchRegionRemove. */
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: jobStop. */
-
-
-void FUN_0038f5d4(unsigned int *param_1)
-
+// Release the add-on scene's jobs, windows, script and texture resources.
+void FUN_0038f5d4(SceneWindowWork *work)
 {
-/* irregular: 11 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_aocMain;
-  *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffffeff;
-  *(unsigned char *)(temp_v0 + 0xd50) = 1;
-  *(unsigned char *)(temp_v0 + 0xb81) = 1;
-  *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xffffff8f;
-  *(unsigned char *)(g_aocDisplay + 0x450c) = 0;
-  ifTouchRegionClearAll(param_1 + 0xba);
-  FUN_00233818(param_1 + 0xad);
-  jobOwnerFreeSlotAndStop(param_1 + 0x46c);
-  jobStopAndClearFlags(param_1);
-  temp_v0 = jobIsValid(param_1[0x5e8]);
-  if (temp_v0 != 0) {
-    if (param_1[0x5eb] != 0xffffffff) {
-      param_1[0x5eb] = 0xffffffff;
-      ifTouchRegionRemove();
+    union MainView {
+        AocMain base;
+        struct {
+            u8 unk000[0xb81];
+            u8 refreshDisplay;
+            u8 unkb82[0x1ce];
+            u8 refreshContent;
+        } refresh;
+    };
+    union CleanupView {
+        SceneWindowWork base;
+        struct {
+            u8 unk0000[0x350];
+            void *buffer;
+            u32 unk0354;
+            void *script;
+            u8 unk035c[0x1450];
+            s32 touchRegion;
+        } resources;
+    };
+    MainView *main = reinterpret_cast<MainView *>(g_aocMain);
+    CleanupView *scene = reinterpret_cast<CleanupView *>(work);
+    main->base.flags &= ~0x100u;
+    main->refresh.refreshContent = 1;
+    main->refresh.refreshDisplay = 1;
+    g_aocMain->flags &= ~0x70u;
+    g_aocDisplay->operationActive = 0;
+    ifTouchRegionClearAll(work->windowStorage);
+    FUN_00233818(&work->dispatchTable);
+    jobOwnerFreeSlotAndStop(&work->dialogJob);
+    jobStopAndClearFlags(work);
+    if (jobIsValid(work->unk17A0)) {
+        if (scene->resources.touchRegion != -1) {
+            scene->resources.touchRegion = -1;
+            ifTouchRegionRemove();
+        }
+        work->unk0000 &= ~0x3000u;
+        jobStop(work->unk17A0, 0);
     }
-    *param_1 = *param_1 & 0xffffcfff;
-    jobStop(param_1[0x5e8],0);
-  }
-  asdMemFreeSlot(param_1[0x70c]);
-  param_1[0x70c] = 0;
-  if (param_1[0xd6] != 0) {
-    scrScriptProcessDestroy();
-    param_1[0xd6] = 0;
-  }
-  if (param_1[0xd4] != 0) {
-    asdMemFree();
-    param_1[0xd4] = 0;
-  }
-  temp_v0 = 0;
-  do {
-    asdTMTexTableReleaseNode(0x3a,temp_v0);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 3);
-  asdTMTexTableFreeEntry(0x3a);
-  *param_1 = *param_1 | 1;
-  param_1[1] = 0x14;
-  param_1[2] = 0;
-  if ((int *)param_1[0x82] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
-    param_1[0x82] = 0;
-  }
-  return;
+    asdMemFreeSlot(work->unk1C30);
+    work->unk1C30 = 0;
+    if (scene->resources.script != NULL) {
+        scrScriptProcessDestroy(scene->resources.script);
+        scene->resources.script = NULL;
+    }
+    if (scene->resources.buffer != NULL) {
+        asdMemFree(scene->resources.buffer);
+        scene->resources.buffer = NULL;
+    }
+    for (s32 node = 0; node < 3; ++node)
+        asdTMTexTableReleaseNode(0x3a, node);
+    asdTMTexTableFreeEntry(0x3a);
+    work->unk0000 |= 1;
+    work->transition.state = 20;
+    work->transition.phase = 0;
+    if (work->transition.callback != NULL) {
+        work->transition.callback->vtable->destroy(work->transition.callback);
+        work->transition.callback = NULL;
+    }
 }
-
-} /* extern "C" */
+}

@@ -11,7 +11,7 @@ int FUN_0018408c(int, int);
 int renderCtxCalculateStereoParallax(unsigned int);
 int FUN_0019e52c(unsigned int);
 int FUN_003f533c(...);
-int FUN_003f6cc0(...);
+int uiDrawStereoKindIcon(...);
 int FUN_003f707c(int, int, int, int, int, int, int, int);
 int FUN_003f74a8(int, int);
 int FUN_003f757c(...);
@@ -38,7 +38,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_0019e52c. */
 /* Supplied declaration required: FUN_003f533c. */
-/* Supplied declaration required: FUN_003f6cc0. */
+/* Supplied declaration required: uiDrawStereoKindIcon. */
 /* Supplied declaration required: FUN_003f707c. */
 /* Supplied declaration required: FUN_003f74a8. */
 /* Supplied declaration required: FUN_003f757c. */
@@ -118,7 +118,7 @@ void FUN_003f7674(int param_1,int param_2,int param_3)
     temp_v0 = temp_v0 & 0xff;
   }
   FUN_003f533c(param_1,param_2,param_3,0xd8,temp_v0,0x78,0x79,0x7a,0xa6d2e3ff,0);
-  FUN_003f6cc0(param_1,param_2,param_3,0xd8,*(unsigned short *)(*(int *)(param_1 + 0x5e0) + 2) >> 8,0x4a);
+  uiDrawStereoKindIcon(param_1,param_2,param_3,0xd8,*(unsigned short *)(*(int *)(param_1 + 0x5e0) + 2) >> 8,0x4a);
   efctSetSpeed();
   return;
 }

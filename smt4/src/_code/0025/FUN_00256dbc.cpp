@@ -1,117 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00256dbc` (_code @ 0x256dbc, 0x1c8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: frame-duration operand registers, half-size VFP allocation and paired output stores differ from retail. */
+#include "shard/W6_W6Match8_SpriteTextureResource.h"
+#include "gfx/SpriteGroupDrawState.h"
 
-extern "C" {
-
-int VectorSignedToFloat(...);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_2_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-
-
-void FUN_00256dbc(unsigned int *param_1,float *param_2)
-
+extern "C" void FUN_00256dbc(SpriteGroupPlayer *player, SpriteGroupDrawState *out)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  int temp_v0;
-  short *psVar2;
-  int temp_v1;
-  float temp_v2;
-  unsigned short temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int *piVar8;
-  unsigned char temp_v6;
-  unsigned int in_fpscr;
-  unsigned int temp_v7;
-  float temp_v8;
-  unsigned int temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  
-  temp_v1 = param_1[4];
-  piVar8 = (int *)*param_1;
-  temp_v4 = *(int *)(temp_v1 + 0xc);
-  if ((*(unsigned int *)(temp_v4 + 0x10) & 0x10000000) == 0) {
-    if (*(int *)(temp_v1 + 8) >= 1) {
-      temp_v0 = *(int *)(temp_v1 + 8) - 1;
-    }
-    else {
-      temp_v5 = *(int *)(temp_v1 + 4) + 1;
-      *(unsigned int *)(temp_v1 + 4) = temp_v5;
-      if (*(unsigned int *)(temp_v4 + 0xc) <= temp_v5) {
-        if ((*(unsigned int *)(temp_v4 + 0x10) & 0x10) == 0) {
-          *(unsigned int *)(temp_v1 + 4) = 0;
-        }
-        else {
-          *(unsigned short *)(param_1 + 5) = 0;
-          *(int *)(temp_v1 + 4) = *(int *)(temp_v4 + 0xc) - 1;
-        }
-      }
-      temp_v0 = (int)*(short *)(*(int *)(temp_v1 + 0x10) + *(int *)(temp_v1 + 4) * 0x18 + 0x12);
-    }
-    *(int *)(temp_v1 + 8) = temp_v0;
-    psVar2 = (short *)(*(int *)(temp_v1 + 0x10) + *(int *)(temp_v1 + 4) * 0x18);
-    if ((*(unsigned int *)(temp_v4 + 0x10) & 1) == 0) {
-      temp_v2 = -NAN;
-    }
-    else {
-      temp_v2 = *(float *)(*piVar8 + *(int *)(temp_v4 + 4) + *(int *)(temp_v1 + 4) * 4);
-    }
-    param_2[0xb] = temp_v2;
-    temp_v5 = *(unsigned int *)(temp_v4 + 0x10);
-    temp_v2 = *(float *)(piVar8[5] + psVar2[8] * 4);
-    temp_v6 = (temp_v5 & 2) != 0;
-    if (temp_v6) {
-      temp_v5 = 2;
-    }
-    temp_v7 = *(unsigned int *)((int)temp_v2 + 0x14);
-    temp_v9 = *(unsigned int *)((int)temp_v2 + 0x18);
-    if (temp_v6) {
-      *(short *)(param_2 + 10) = (short)temp_v5;
-    }
-    temp_v8 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v10 = (float)VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
-    if (!temp_v6) {
-      if ((temp_v5 & 4) == 0) {
-        temp_v3 = 1;
-      }
-      else {
-        temp_v3 = 3;
-      }
-      *(unsigned short *)(param_2 + 10) = temp_v3;
-    }
-    param_2[4] = *(float *)(psVar2 + 10);
-    temp_v15 = (float)VectorSignedToFloat((int)psVar2[4] >> 4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v12 = (float)VectorSignedToFloat((int)psVar2[1],(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v13 = (float)VectorSignedToFloat((int)psVar2[2],(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v14 = (float)VectorSignedToFloat((int)psVar2[3],(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v11 = (float)VectorSignedToFloat((int)*psVar2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    param_2[6] = temp_v15 / temp_v8;
-    temp_v15 = (float)VectorSignedToFloat((int)psVar2[5] >> 4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    param_2[7] = temp_v15 / temp_v10;
-    temp_v15 = (float)VectorSignedToFloat((int)psVar2[6] >> 4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    param_2[8] = temp_v15 / temp_v8;
-    temp_v15 = (float)VectorSignedToFloat((int)psVar2[7] >> 4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    param_2[9] = temp_v15 / temp_v10;
-    *param_2 = temp_v11 * 0.5f - temp_v13;
-    param_2[1] = temp_v12 * 0.5f - temp_v14;
-    param_2[0xc] = temp_v8;
-    param_2[0xd] = temp_v10;
-    param_2[2] = temp_v11 * 0.5f;
-    param_2[3] = temp_v12 * 0.5f;
-    param_2[5] = temp_v2;
-  }
-  return;
-}
+    // SpriteGroupData publishes only the duration prefix, not the final value.
+    struct FrameView {
+        s16 width, height;
+        s16 originX, originY;
+        s16 u1, v1, u2, v2;
+        s16 texture;
+        s16 duration;
+        f32 value;
+    };
+    typedef char FrameViewSizeCheck[sizeof(FrameView) == 0x18 ? 1 : -1];
 
-} /* extern "C" */
+    SpriteGroupState *state = player->states;
+    SpriteTextureResource *resource = (SpriteTextureResource *)player->resource;
+    SpriteGroupDefinition *definition = state->definition;
+    if (definition->kind & 0x10000000)
+        return;
+    if (state->frameCount > 0) {
+        --state->frameCount;
+    } else {
+        ++state->frame;
+        if ((u32)state->frame >= definition->count) {
+            if (!(definition->kind & 0x10)) {
+                state->frame = 0;
+            } else {
+                player->active = 0;
+                state->frame = definition->count - 1;
+            }
+        }
+        state->frameCount = ((FrameView *)state->data)[state->frame].duration;
+    }
+    FrameView *frame = &((FrameView *)state->data)[state->frame];
+    if (definition->kind & 1)
+        out->optionalValue = ((f32 *)(resource->group.data + definition->unk04))[state->frame];
+    else
+        out->optionalBits = ~0u;
+    AsdTexture *texture = resource->textures[frame->texture];
+    f32 textureWidth = (f32)texture->dimensions.width;
+    f32 textureHeight = (f32)texture->dimensions.height;
+    if (definition->kind & 2)
+        out->mode = 2;
+    else if (definition->kind & 4)
+        out->mode = 3;
+    else
+        out->mode = 1;
+    out->value = frame->value;
+    f32 halfWidth = (f32)frame->width * 0.5f;
+    f32 halfHeight = (f32)frame->height * 0.5f;
+    f32 originX = (f32)frame->originX;
+    f32 originY = (f32)frame->originY;
+    out->u1 = (f32)(frame->u1 >> 4) / textureWidth;
+    out->v1 = (f32)(frame->v1 >> 4) / textureHeight;
+    out->u2 = (f32)(frame->u2 >> 4) / textureWidth;
+    out->v2 = (f32)(frame->v2 >> 4) / textureHeight;
+    out->x = halfWidth - originX;
+    out->y = halfHeight - originY;
+    out->textureWidth = textureWidth;
+    out->textureHeight = textureHeight;
+    out->halfWidth = halfWidth;
+    out->halfHeight = halfHeight;
+    out->texture = texture;
+}

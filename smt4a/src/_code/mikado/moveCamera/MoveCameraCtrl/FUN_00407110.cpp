@@ -1,91 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00407110` (_code @ 0x407110, 0x180 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: movement camera resource and float arguments restored; vector field bases, saved registers and initial key copy scheduling differ. */
+#include "gfx/MoveCameraCtrl.h"
 
 extern "C" {
+extern void *g_handleRegistry;
+extern const char DAT_0053295c[];
+void *FUN_0013c174(u32 resource, u32 *entry, s32 flags);
+void *FUN_00178b04(u32 size, const char *source, u32 line);
+MoveCameraResource *FUN_003f9e80(MoveCameraResource *resource, void *data);
+void FUN_0013c884(ManagedCamera *camera, s32 enabled);
+void uiSetFloatPair(ManagedCamera *camera, f32 distance, f32 scale);
+void FUN_0014f0dc(ManagedCamera *camera, const Vec3f *eye, const Vec3f *target, const Vec3f *up);
+void FUN_001523b8(ManagedCamera *camera, u32 pivot, f32 fieldOfView, f32 nearClip, f32 farClip, f32 aspect);
+void FUN_0036b824(ManagedCamera *camera);
+void FUN_00407598(MoveCameraCtrlWork *work);
 
-int FUN_0013c174(...);
-int FUN_0013c884(...);
-int uiSetFloatPair(...);
-int FUN_0014f0dc(...);
-int FUN_001523b8(...);
-int FUN_00178b04(...);
-int FUN_0036b824(...);
-int FUN_003f9e80(...);
-int FUN_00407598(...);
-
-extern int g_handleRegistry; /* 0x56fcc0 */
-
-/* Supplied declaration required: FUN_0013c174. */
-/* Supplied declaration required: FUN_0013c884. */
-/* Supplied declaration required: uiSetFloatPair. */
-/* Supplied declaration required: FUN_0014f0dc. */
-/* Supplied declaration required: FUN_001523b8. */
-/* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_0036b824. */
-/* Supplied declaration required: FUN_003f9e80. */
-/* Supplied declaration required: FUN_00407598. */
-
-
-void FUN_00407110(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Load a movement-camera track and initialize its native camera, projection and first key.
+void FUN_00407110(MoveCameraCtrlWork *work, u32 resourceId)
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  int uStack_20;
-  
-  uStack_20 = param_4;
-  FUN_0013c174(param_2,&uStack_20,1);
-  temp_v0 = 0x48;
-  FUN_00178b04(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\mikado\\moveCamera\\MoveCameraCtrl.cpp",0x29)
-  ;
-  if (temp_v0 != 0) {
-    FUN_003f9e80();
-  }
-  param_1[0x165] = temp_v0;
-  *param_1 = (unsigned int)*(unsigned short *)(*(int *)(temp_v0 + 0x34) + 0x4c);
-  param_1[2] = (unsigned int)*(unsigned short *)(*(int *)(temp_v0 + 0x34) + 0x94);
-  FUN_0013c884(param_1 + 0x14,1);
-  param_1[0x157] = 0;
-  param_1[0x158] = 0;
-  param_1[0x159] = 0;
-  param_1[0x15a] = 0;
-  param_1[0x15b] = 0;
-  param_1[0x15c] = 0x40a00000;
-  param_1[0x15f] = 0x3f800000;
-  param_1[0x160] = 0x461c4000;
-  param_1[0x15d] = 0;
-  param_1[0x15e] = 0x41f00000;
-  param_1[0x161] = 0;
-  param_1[0x162] = 0x3f800000;
-  param_1[0x163] = 0;
-  param_1[0x164] = 0x40a00000;
-  uiSetFloatPair(param_1 + 0x14);
-  FUN_0014f0dc(param_1 + 0x14,param_1 + 0x157,param_1 + 0x15a,param_1 + 0x161);
-  FUN_001523b8(param_1 + 0x14,1);
-  FUN_0036b824(param_1 + 0x14);
-  *(unsigned int **)(g_handleRegistry + 0xc) = param_1 + 0x14;
-  if (0 < (int)*param_1) {
-    param_1[1] = 0;
-    param_1[0x166] = 0xffffffff;
-    temp_v1 = **(int **)(*(int *)(param_1[0x165] + 0x34) + 0x48);
-    puVar3 = *(unsigned int **)(temp_v1 + 0x30);
-    temp_v0 = *(unsigned int *)(temp_v1 + 0x20);
-    temp_v2 = *(unsigned int *)(temp_v1 + 0x24);
-    param_1[0x16d] = *(unsigned int *)(temp_v1 + 0x1c);
-    param_1[0x16e] = temp_v0;
-    param_1[0x16f] = temp_v2;
-    temp_v0 = *puVar3;
-    temp_v2 = puVar3[1];
-    param_1[0x172] = puVar3[2];
-    param_1[0x170] = temp_v0;
-    param_1[0x171] = temp_v2;
-    FUN_00407598();
-  }
-  return;
+    struct CurrentCameraView {
+        u8 prefix[0xC];
+        ManagedCamera *camera;
+    };
+    u32 entry;
+    void *data = FUN_0013c174(resourceId, &entry, 1);
+    MoveCameraResource *resource = static_cast<MoveCameraResource *>(FUN_00178b04(sizeof(MoveCameraResource), DAT_0053295c, 0x29));
+    if (resource != NULL)
+        resource = FUN_003f9e80(resource, data);
+    work->resource = resource;
+    work->frameCount = resource->track->frameCount;
+    work->auxiliaryCount = resource->track->auxiliaryCount;
+    FUN_0013c884(&work->camera, 1);
+    work->eye.x = 0.0f;
+    work->eye.y = 0.0f;
+    work->eye.z = 0.0f;
+    work->target.x = 0.0f;
+    work->target.y = 0.0f;
+    work->target.z = 5.0f;
+    work->nearClip = 1.0f;
+    work->farClip = 10000.0f;
+    work->roll = 0.0f;
+    work->fieldOfView = 30.0f;
+    work->up.x = 0.0f;
+    work->up.y = 1.0f;
+    work->up.z = 0.0f;
+    work->distance = 5.0f;
+    uiSetFloatPair(&work->camera, 5.0f, 1.0f);
+    FUN_0014f0dc(&work->camera, &work->eye, &work->target, &work->up);
+    FUN_001523b8(&work->camera, 1, work->fieldOfView, work->nearClip, work->farClip, 1.6666666f);
+    FUN_0036b824(&work->camera);
+    static_cast<CurrentCameraView *>(g_handleRegistry)->camera = &work->camera;
+    if (work->frameCount > 0) {
+        work->frame = 0;
+        work->selectedKey = -1;
+        MoveCameraTrackKey *key = work->resource->track->keys[0];
+        Vec3f *target = key->target;
+        work->initialPosition = key->position;
+        work->initialTarget = *target;
+        FUN_00407598(work);
+    }
 }
-
-} /* extern "C" */
+}

@@ -1,85 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035b404` (_code @ 0x35b404, 0x120 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation initialization branches instead of retail conditional stores, and the load-slot/state constant is hoisted. */
+#include "npc_shop/DevilMarket.h"
 
 extern "C" {
+extern DevilMarketWork *DAT_0058812c;
+extern const char DAT_00533250[];
+extern const char DAT_00533240[];
+extern const char DAT_005331dc[];
+extern const char DAT_005331b8[];
+void *asdOperatorNew(u32 size);
+s32 scrTransitionUpdate(void);
+s32 FUN_0036edf4(void);
+u32 asdProcessCreateSimple(const char *, s32, u16, u16, s32 (*)(void), void (*)(u32), u32);
+u32 taskCreateDraw(const char *, s32, u16, u16, s32 (*)(void), void (*)(u32), u32, u32);
+void asdLoadFileAsyncSimple(const char *name, void **destination, u32 flags);
+s32 loadSlotIsLoaded(u32 slot);
+void loadSlotRequestAsync(u32 slot, u32 flags);
+void campButtonHelpAcquire(void);
+void FUN_002c7e6c(void);
+void FUN_002c85b0(s32 enabled);
+void FUN_002c8538(s32 enabled);
+void FUN_003c607c(s32 enabled);
 
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdOperatorNew(...);
-int asdLoadFileAsyncSimple(...);
-int FUN_002c7e6c(...);
-int FUN_002c8538(...);
-int FUN_002c85b0(...);
-int campButtonHelpAcquire(...);
-int FUN_003c607c(...);
-int loadSlotRequestAsync(...);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern unsigned char LAB_003459d4; /* 0x3459d4 */
-extern unsigned char LAB_0036edf4; /* 0x36edf4 */
-extern unsigned int *DAT_0058812c; /* 0x58812c */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: FUN_002c7e6c. */
-/* Supplied declaration required: FUN_002c8538. */
-/* Supplied declaration required: FUN_002c85b0. */
-/* Supplied declaration required: campButtonHelpAcquire. */
-/* Supplied declaration required: FUN_003c607c. */
-extern int loadSlotIsLoaded(unsigned int);
-/* Supplied declaration required: loadSlotRequestAsync. */
-
-
-void FUN_0035b404(unsigned int param_1)
-
+// Allocate the devil-market work, launch its process and draw callback, and request resources.
+void FUN_0035b404(u32 argument)
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int *puVar1;
-  char *pcVar2;
-  int temp_v0;
-  
-  puVar1 = (unsigned int *)0xac;
-  asdOperatorNew();
-  if (puVar1 != (unsigned int *)0x0) {
-    puVar1[4] = 0;
-    puVar1[5] = 0;
-    puVar1[6] = 0;
-  }
-  else {
-    puVar1 = (unsigned int *)0x0;
-  }
-  pcVar2 = "DEVIL_MARKET PROC";
-  DAT_0058812c = puVar1;
-  asdProcessCreateSimple("DEVIL_MARKET PROC",4,0,0,&LAB_003459d4,0,0);
-  *puVar1 = (unsigned int)pcVar2;
-  taskCreateDraw("DEVIL_MARKET DD",0xeb,0,0,&LAB_0036edf4,0,0,pcVar2);
-  puVar1[0x27] = param_1;
-  asdLoadFileAsyncSimple("npc_shop/DevilMarket/DevilMarket.mbm",puVar1 + 4,0);
-  asdLoadFileAsyncSimple("npc_shop/DevilMarket/DevilMarket.bf",puVar1 + 5,0);
-  *(unsigned char *)(puVar1 + 7) = 0;
-  temp_v0 = loadSlotIsLoaded(0x4f);
-  if (temp_v0 == 0) {
-    loadSlotRequestAsync(0x4f,0);
-    *(unsigned char *)(puVar1 + 7) = 1;
-  }
-  campButtonHelpAcquire();
-  FUN_002c7e6c();
-  FUN_002c85b0(0);
-  FUN_002c8538(0);
-  FUN_003c607c(1);
-  puVar1[3] = puVar1[1];
-  puVar1[1] = 1;
-  puVar1[2] = 0;
-  return;
+    DevilMarketWork *work = (DevilMarketWork *)asdOperatorNew(sizeof(DevilMarketWork));
+    if (work != NULL) {
+        work->messages = NULL;
+        work->scriptFile = NULL;
+        work->scriptProcess = NULL;
+    }
+    DAT_0058812c = work;
+    work->process = asdProcessCreateSimple(DAT_00533250, 4, 0, 0, scrTransitionUpdate, NULL, 0);
+    taskCreateDraw(DAT_00533240, 235, 0, 0, FUN_0036edf4, NULL, 0, work->process);
+    work->argument = argument;
+    asdLoadFileAsyncSimple(DAT_005331dc, &work->messages, 0);
+    asdLoadFileAsyncSimple(DAT_005331b8, &work->scriptFile, 0);
+    work->ownsLoadSlot = 0;
+    if (!loadSlotIsLoaded(79)) {
+        loadSlotRequestAsync(79, 0);
+        work->ownsLoadSlot = 1;
+    }
+    campButtonHelpAcquire();
+    FUN_002c7e6c();
+    FUN_002c85b0(0);
+    FUN_002c8538(0);
+    FUN_003c607c(1);
+    work->previousState = work->state;
+    work->state = 1;
+    work->started = 0;
 }
-
-} /* extern "C" */
+}

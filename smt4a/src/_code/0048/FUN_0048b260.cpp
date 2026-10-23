@@ -1,89 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048b260` (_code @ 0x48b260, 0x1a0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: origin/text stack placement, centered-text FP scheduling and completion-flag addressing differ. */
+#include "shard/Shard0033.h"
+#include "shard/S1ListPanel.h"
 
+// The animation spans several already published ObjB members, so keep a local view.
+struct SessionHintAnimationView {
+    u8 prefix[0x1368];
+    u8 finished;
+    u8 unk1369;
+    u8 requested;
+    u8 unk136B;
+    UiSpriteState animation;
+};
+struct HintTextFontSettingsPrefix { u8 prefix[0xC]; u32 font; };
 extern "C" {
+extern RenderCtx* g_renderCtx;
+extern HintTextFontSettingsPrefix g_uiTextFontSettings;
+extern const char DAT_00532728[55];
+void words2Copy(const void* source, void* destination);
+u32 FUN_001692ac(u32 kind, u32 option);
+void renderStackPushIndexed(RenderCtx* context, s32 slot, u32 state);
+void renderCtxPopState(RenderCtx* context, s32 slot);
+void efctSetSpeed(f32 speed);
+void FUN_00183bb0(void);
+s32 vec2GetXInt(UiSpriteState* animation);
+void FUN_00164b5c(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
+SpriteInfo* FUN_001834a4(u32 table, u32 id);
+void rt_memcpy_w(void* destination, const void* source, u32 size);
+f32 FUN_00168594(const char* text, u32 kind, f32 spacing);
+void FUN_00162790(u32 kind, u32 font, const char* text,
+    f32 x, f32 y, f32 depth, f32 rotation, f32 scale);
+void FUN_00163aa4(UiSpriteState* animation, f32 step);
 
-int FUN_00162790(...);
-int FUN_00163aa4(...);
-int FUN_00164b5c(...);
-int vec2GetXInt(...);
-int efctSetSpeed(...);
-int FUN_00168594(...);
-int renderCtxPopState(...);
-int renderStackPushIndexed(...);
-int FUN_00183bb0(...);
-int words2Copy(...);
-int VectorSignedToFloat(...);
-int rt_memcpy_w(...);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp84; /* 0x84: local_84 */
-    unsigned int sp88; /* 0x88: local_88 */
-} param_1_stack;
-
-extern unsigned int DAT_00587f1c; /* 0x587f1c */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00168594. */
-extern unsigned int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: renderCtxPopState. */
-/* Supplied declaration required: renderStackPushIndexed. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: words2Copy. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_0048b260(int param_1)
-
+void FUN_0048b260(ObjB* work)
 {
-/* irregular: irregular input(s): in_fpscr; 12 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int in_fpscr;
-  float temp_v3;
-  unsigned char temp_v4 [80];
-  float temp_v5;
-  float temp_v6;
-  
-  words2Copy(param_1 + 0x4d0,&temp_v5);
-  temp_v0 = FUN_001692ac(1,0);
-  renderStackPushIndexed(g_renderCtx,3,temp_v0);
-  efctSetSpeed();
-  FUN_00183bb0();
-  temp_v0 = vec2GetXInt();
-  temp_v3 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00164b5c(2,0x13,0x1c,(int)(temp_v3 + temp_v5),(int)temp_v6,0xd3);
-  temp_v1 = FUN_001834a4(0x13,0x111b);
-  rt_memcpy_w(temp_v4,
-              "沂膂邂邂薂銂䂁掂薂鎂钂覂躂膂钂覂辂躂䚁䂁璂躂讂躂辂鞂躂",
-              0x37);
-  temp_v3 = 0.0f;
-  FUN_00168594(temp_v4,2);
-  VectorSignedToFloat(((int)**(short **)(temp_v1 + 0xc) - (int)temp_v3) / 2,(unsigned char)(in_fpscr >> 0x16) & 3
-                     );
-  temp_v2 = vec2GetXInt(param_1 + 0x136c,(int)temp_v3);
-  VectorSignedToFloat(temp_v2 + *(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(2,DAT_00587f1c,temp_v4);
-  renderCtxPopState(g_renderCtx,3);
-  efctSetSpeed();
-  FUN_00163aa4(param_1 + 0x136c);
-  if ((*(char *)(param_1 + 0x136a) != '\0') && (*(char *)(param_1 + 0x13f6) != '\0')) {
-    *(unsigned char *)(param_1 + 0x1368) = 1;
-  }
-  return;
+    struct { f32 x, y; } origin;
+    words2Copy(&work->spriteHeaders.headers[0].unk2C, &origin);
+    u32 renderState = FUN_001692ac(1, 0);
+    renderStackPushIndexed(g_renderCtx, 3, renderState);
+    efctSetSpeed(1.0f);
+    FUN_00183bb0();
+    SessionHintAnimationView* hint = reinterpret_cast<SessionHintAnimationView*>(work);
+    FUN_00164b5c(2, 0x13, 0x1C, static_cast<s32>(static_cast<f32>(vec2GetXInt(&hint->animation)) + origin.x),
+        static_cast<s32>(origin.y), 0xD3);
+    SpriteInfo* sprite = FUN_001834a4(0x13, 0x111B);
+    char text[80];
+    rt_memcpy_w(text, DAT_00532728, 55);
+    s32 textWidth = static_cast<s32>(FUN_00168594(text, 2, 0.0f));
+    f32 centeredOffset = static_cast<f32>((sprite->size[0] - textWidth) / 2);
+    s32 animationX = vec2GetXInt(&hint->animation);
+    f32 textX = static_cast<f32>(animationX + sprite->x) + centeredOffset + origin.x;
+    f32 textY = static_cast<f32>(sprite->y) + origin.y;
+    FUN_00162790(2, g_uiTextFontSettings.font, text, textX, textY, 0.0f, 0.0f, 1.0f);
+    renderCtxPopState(g_renderCtx, 3);
+    efctSetSpeed(1.0f);
+    FUN_00163aa4(&hint->animation, 1.0f);
+    if (hint->requested && hint->animation.animationFlags.completed) {
+        hint->finished = 1;
+    }
 }
-
-} /* extern "C" */
+}

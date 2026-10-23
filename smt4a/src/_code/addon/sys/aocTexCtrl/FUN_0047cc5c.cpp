@@ -1,126 +1,76 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047cc5c` (_code @ 0x47cc5c, 0x188 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: bulk header copy grouping, cached header pointer and row allocation/link scheduling differ. */
+#include "addon/sys/aocTexCtrl.h"
+#include "AsdSDK/AsdDebug.h"
 
+union AocTexturePackageHeader {
+    u8 bytes[0x40];
+    struct {
+        u8 unk00[0x20];
+        s32 rowCount;
+        u8 unk24[0x1C];
+    } info;
+};
+struct AocTexturePackageEntry { u32 words[5]; };
+struct AocTexturePackageRow {
+    u32 kind;
+    s32 count;
+    u8 flags;
+    u8 unk09[3];
+    AocTexturePackageEntry *entries;
+    AocTexturePackageRow *next;
+};
+struct AocTexturePackageView {
+    AocTexturePackageHeader *header;
+    AocTexturePackageRow *rows;
+};
+struct PackedAocTextureRow {
+    u8 kind;
+    u8 unk01[3];
+    u8 count;
+    u8 unk05[3];
+    u8 flags;
+    u8 unk09[3];
+};
 extern "C" {
+extern const char DAT_005271bc[];
+void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
+void rt_memcpy_w(void *, const void *, u32);
 
-int asdMemoryAllocTracked(...);
-int rt_memcpy_w(unsigned int, unsigned char *, unsigned int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_0047cc5c(int param_1,int *param_2)
-
+void FUN_0047cc5c(AocTexCtrl *control, const AocTexturePackageHeader *const *source)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  unsigned int *puVar4;
-  unsigned int temp_v2;
-  unsigned char *pbVar6;
-  unsigned char *temp_v3;
-  unsigned int *puVar7;
-  unsigned char *pbVar8;
-  int temp_v4;
-  unsigned int *puVar10;
-  int temp_v5;
-  unsigned char temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  
-  if (*(int *)(param_1 + 4) == 0) {
-    puVar7 = (unsigned int *)*param_2;
-    temp_v1 = 0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,8,1);
-    *(unsigned int *)(param_1 + 4) = temp_v1;
-    puVar3 = (unsigned int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x40,1);
-    temp_v4 = 0;
-    **(int **)(param_1 + 4) = (int)puVar3;
-    temp_v1 = puVar7[1];
-    temp_v7 = puVar7[2];
-    temp_v8 = puVar7[3];
-    temp_v9 = puVar7[4];
-    temp_v10 = puVar7[5];
-    temp_v11 = puVar7[6];
-    temp_v12 = puVar7[7];
-    *puVar3 = *puVar7;
-    puVar3[1] = temp_v1;
-    puVar3[2] = temp_v7;
-    puVar3[3] = temp_v8;
-    puVar3[4] = temp_v9;
-    puVar3[5] = temp_v10;
-    puVar3[6] = temp_v11;
-    puVar3[7] = temp_v12;
-    temp_v1 = puVar7[9];
-    temp_v7 = puVar7[10];
-    temp_v8 = puVar7[0xb];
-    temp_v9 = puVar7[0xc];
-    temp_v10 = puVar7[0xd];
-    temp_v11 = puVar7[0xe];
-    temp_v12 = puVar7[0xf];
-    puVar3[8] = puVar7[8];
-    puVar3[9] = temp_v1;
-    puVar3[10] = temp_v7;
-    puVar3[0xb] = temp_v8;
-    puVar3[0xc] = temp_v9;
-    puVar3[0xd] = temp_v10;
-    puVar3[0xe] = temp_v11;
-    puVar3[0xf] = temp_v12;
-    temp_v5 = **(int **)(param_1 + 4);
-    pbVar8 = (unsigned char *)(*param_2 + 0x40);
-    puVar10 = (unsigned int *)0x0;
-    if (0 < *(int *)(temp_v5 + 0x20)) {
-      do {
-        puVar4 = (unsigned int *)0x100;
-        asdMemoryAllocTracked(0x100,0x100,0,0x14,1);
-        *puVar4 = (unsigned int)*pbVar8;
-        temp_v0 = pbVar8[4];
-        puVar4[1] = (unsigned int)temp_v0;
-        *(unsigned char *)(puVar4 + 2) = pbVar8[8];
-        if (temp_v0 == 0) {
-          temp_v2 = 0;
+    if (!control->state) {
+        const AocTexturePackageHeader *header = *source;
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\addon\\sys\\aocTexCtrl.cpp", 902);
+        control->state = static_cast<AocTexState *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(AocTexturePackageView), 1));
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\addon\\sys\\aocTexCtrl.cpp", 904);
+        AocTexturePackageHeader *copy = static_cast<AocTexturePackageHeader *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(AocTexturePackageHeader), 1));
+        AocTexturePackageView *package = reinterpret_cast<AocTexturePackageView *>(control->state);
+        package->header = copy;
+        *copy = *header;
+        const u8 *cursor = reinterpret_cast<const u8 *>(*source + 1);
+        AocTexturePackageRow *previous = NULL;
+        for (s32 i = 0; i < copy->info.rowCount; ++i) {
+            const PackedAocTextureRow *input = reinterpret_cast<const PackedAocTextureRow *>(cursor);
+            asdDebugTrace(DAT_005271bc, 97);
+            AocTexturePackageRow *row = static_cast<AocTexturePackageRow *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(AocTexturePackageRow), 1));
+            row->kind = input->kind;
+            row->count = input->count;
+            row->flags = input->flags;
+            if (row->count > 0) {
+                asdDebugTrace(DAT_005271bc, 111);
+                row->entries = static_cast<AocTexturePackageEntry *>(asdMemoryAllocTracked(0x100, 0x100, 0, row->count * sizeof(AocTexturePackageEntry), 1));
+            } else {
+                row->entries = NULL;
+            }
+            if (row->count > 0)
+                rt_memcpy_w(row->entries, input + 1, row->count * sizeof(AocTexturePackageEntry));
+            if (!previous)
+                reinterpret_cast<AocTexturePackageView *>(control->state)->rows = row;
+            else
+                previous->next = row;
+            cursor += sizeof(PackedAocTextureRow) + row->count * sizeof(AocTexturePackageEntry);
+            previous = row;
         }
-        else {
-          temp_v2 = 0x100;
-          asdMemoryAllocTracked(0x100,0x100,0,puVar4[1] * 0x14,1);
-        }
-        puVar4[3] = temp_v2;
-        pbVar6 = pbVar8 + 0xc;
-        if (0 < (int)puVar4[1]) {
-          rt_memcpy_w(puVar4[3],pbVar6,puVar4[1] * 0x14);
-          pbVar6 = temp_v3;
-        }
-        temp_v2 = puVar4[1];
-        temp_v6 = puVar10 == (unsigned int *)0x0;
-        if (temp_v6) {
-          pbVar6 = *(unsigned char **)(param_1 + 4);
-        }
-        temp_v4 = temp_v4 + 1;
-        if (temp_v6) {
-          *(unsigned int **)(pbVar6 + 4) = puVar4;
-        }
-        pbVar8 = pbVar8 + temp_v2 * 0x14 + 0xc;
-        if (!temp_v6) {
-          puVar10[4] = (unsigned int)puVar4;
-        }
-        puVar10 = puVar4;
-      } while (temp_v4 < *(int *)(temp_v5 + 0x20));
     }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

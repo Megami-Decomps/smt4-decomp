@@ -1,70 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039e768` (_code @ 0x39e768, 0x12c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: mask loads are hoisted across the combatant scan, changing saved registers and roster-holder addressing. */
+#include "battle/btlMain.h"
+#include "shard/W5_W5Match7_BattleMask.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
+extern BattleMaskPresets g_battleMaskPresets;
+s32 scrGetArg(s32 index);
+void FUN_004d888c(u32 holder, u32 animation, s32 enabled, f32 duration);
 
-int scrGetArg(int);
-int FUN_004d888c(unsigned int, unsigned int, int);
-int VectorSignedToFloat(unsigned int, int);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
-
-extern unsigned int g_battleMaskPresets; /* 0x570d78 */
-extern unsigned int DAT_00570d7c; /* 0x570d7c */
-extern unsigned int DAT_00570d80; /* 0x570d80 */
-extern unsigned int DAT_00570d84; /* 0x570d84 */
-extern unsigned int DAT_00570d90; /* 0x570d90 */
-extern unsigned int DAT_00570d94; /* 0x570d94 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_004d888c. */
-
-
-unsigned int FUN_0039e768(void)
-
+// Set an animation on the first marked enemy matching the requested demon ID.
+u32 FUN_0039e768()
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned int *puVar9;
-  unsigned int in_fpscr;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = scrGetArg(2);
-  VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v3 = scrGetArg(3);
-  temp_v4 = btlGetMainState();
-  temp_v7 = 4;
-  while( 1 ) {
-    puVar9 = (unsigned int *)(*(int *)(temp_v4 + 0x1ffc) + temp_v7 * 0x408);
-    temp_v5 = *puVar9;
-    temp_v6 = puVar9[1];
-    if (((((temp_v6 & DAT_00570d7c) != 0 || (temp_v5 & g_battleMaskPresets) != 0) &&
-         ((DAT_00570d90 & temp_v5) == 0 && (DAT_00570d94 & temp_v6) == 0)) &&
-        ((temp_v5 & DAT_00570d80) != 0 || (temp_v6 & DAT_00570d84) != 0)) &&
-       ((*(char *)((int)puVar9 + 0x23a) != '\0' && (*(unsigned short *)((int)puVar9 + 0x166) == temp_v0))))
-    break;
-    temp_v7 = temp_v7 + 1;
-    if (temp_v7 >= 0x36) {
-      return 1;
+    u32 id = scrGetArg(0);
+    u32 animation = scrGetArg(1);
+    f32 duration = (f32)scrGetArg(2);
+    s32 enabled = scrGetArg(3);
+    BtlMainStateA *state = reinterpret_cast<BtlMainStateA *>(btlGetMainState());
+    for (s32 index = 4; index < 54; ++index) {
+        BtlCombatantEntryA *entry = &state->entries[index];
+        u64 flags = entry->flags;
+        if ((flags & g_battleMaskPresets.eligibility.active) &&
+            !(flags & g_battleMaskPresets.eligibility.excluded) &&
+            (flags & g_battleMaskPresets.eligibility.required) &&
+            entry->selection.marked && entry->id == id) {
+            FUN_004d888c(state->roster[index].script.holder, animation, enabled != 0, duration);
+            break;
+        }
     }
-  }
-  FUN_004d888c(*(unsigned int *)(*(int *)(temp_v4 + 0x1ed4) + temp_v7 * 0x1d0 + 0x1bc),temp_v1,temp_v3 != 0);
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

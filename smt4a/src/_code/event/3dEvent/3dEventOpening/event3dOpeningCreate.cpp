@@ -1,94 +1,104 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `event3dOpeningCreate` (_code @ 0x37d770, 0x198 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: camera float stores are grouped differently, pose addresses are rematerialized, and retail's unused result comparison is omitted. */
+#include "gfx/CameraMatrixCache.h"
+#include "status/StatusCamera.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/AsdDebug.h"
 
-extern "C" {
-
-int FUN_0013c884(...);
-int uiSetFloatPair(...);
-int asdProcessCreateSimple(...);
-int FUN_0014f0dc(...);
-int FUN_001523b8(...);
-int FUN_00162ea4(...);
-int asdMemoryAllocTracked(...);
-int asdEnvResetModelBank(...);
-int sysMemClear(...);
-int FUN_0036b824(...);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern int FUN_002caea0(...); /* 0x2caea0 */
-extern int event3dOpeningDestroy(...); /* 0x372540 */
-extern unsigned char LAB_0037d970; /* 0x37d970 */
-extern unsigned int *g_event3dOpening; /* 0x57f4c0 */
-
-/* Supplied declaration required: FUN_0013c884. */
-/* Supplied declaration required: uiSetFloatPair. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_0014f0dc. */
-/* Supplied declaration required: FUN_001523b8. */
-/* Supplied declaration required: FUN_00162ea4. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: asdEnvResetModelBank. */
-extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0036b824. */
-extern unsigned int FUN_00387350(char *);
-
-
-unsigned int event3dOpeningCreate(void)
-
-{
-/* irregular: 12 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  unsigned int temp_v0;
-  
-  if (g_event3dOpening == (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x578,1);
-    g_event3dOpening = puVar1;
-    sysMemClear();
-    FUN_0013c884(puVar1 + 1,1);
-    puVar1[0x144] = 0;
-    puVar1[0x145] = 0;
-    puVar1[0x146] = 0;
-    puVar1[0x147] = 0;
-    puVar1[0x148] = 0;
-    puVar1[0x149] = 0x40a00000;
-    puVar1[0x14d] = 0x41f00000;
-    puVar1[0x14e] = 0x3f800000;
-    puVar1[0x14f] = 0x461c4000;
-    puVar1[0x14a] = 0;
-    puVar1[0x14b] = 0x3f800000;
-    puVar1[0x14c] = 0;
-    puVar1[0x150] = 0x3fd55555;
-    puVar1[0x155] = 0x40a00000;
-    uiSetFloatPair(puVar1 + 1);
-    FUN_0014f0dc(puVar1 + 1,puVar1 + 0x144,puVar1 + 0x147,puVar1 + 0x14a);
-    FUN_001523b8(puVar1 + 1,1);
-    FUN_0036b824(puVar1 + 1);
-    puVar2 = &LAB_0037d970;
-    asdProcessCreateSimple(&LAB_0037d970,4,0,0,FUN_002caea0,event3dOpeningDestroy,puVar1);
-    *puVar1 = (unsigned int)puVar2;
-    FUN_00162ea4();
-    puVar1[0x15a] = 1;
-    puVar1[0x15b] = 0;
-    asdEnvResetModelBank("event/oc/oc_loop.bcenv",0);
-    puVar1[0x157] = 0;
-    temp_v0 = FUN_00387350("event/oc/oc_loop.bccam");
-    puVar1[0x158] = temp_v0;
-    temp_v0 = FUN_00387350("event/oc/oc_start.bccam");
-    puVar1[0x159] = temp_v0;
-    temp_v0 = asdMdlManagerCreateSecondList("event/oc/oc_loop.bam",0x38);
-    puVar1[0x156] = temp_v0;
-    puVar1[0x15d] = 1;
-  }
-  return *g_event3dOpening;
+namespace {
+// The opening's camera includes a final stereo parameter beyond the shared 0x508-byte prefix.
+struct OpeningCamera {
+    CameraMatrixCache cache;
+    f32 stereoParameter;
+};
+struct OpeningProjection {
+    f32 fieldOfView, nearClip, farClip, aspect;
+};
+struct OpeningEventWork {
+    u32 job;
+    OpeningCamera camera;
+    Vec3 eye;
+    Vec3 target;
+    Vec3 up;
+    OpeningProjection projection;
+    u8 unk544[0x10];
+    f32 distance;
+    u32 models;
+    u32 environment;
+    u32 loopCamera;
+    u32 startCamera;
+    u32 state;
+    u32 substate;
+    u32 unk570;
+    u32 active;
+};
+typedef char OpeningEventWorkOffsetsCheck[sizeof(OpeningCamera) == 0x50C &&
+    offsetof(OpeningEventWork, eye) == 0x510 && offsetof(OpeningEventWork, projection) == 0x534 &&
+    offsetof(OpeningEventWork, models) == 0x558 && sizeof(OpeningEventWork) == 0x578 ? 1 : -1];
 }
 
-} /* extern "C" */
+extern "C" {
+extern OpeningEventWork *g_event3dOpening;
+extern const char DAT_0052f680[]; // event/oc/oc_loop.bcenv
+extern const char DAT_0052f668[]; // event/oc/oc_loop.bccam
+extern const char DAT_0052f650[]; // event/oc/oc_start.bccam
+extern const char DAT_0052f638[]; // event/oc/oc_loop.bam
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+void sysMemClear(void *data, u32 size);
+void FUN_0013c884(CameraMatrixCache *camera, s32 mode);
+void uiSetFloatPair(CameraMatrixCache *camera, f32 first, f32 second);
+void FUN_0014f0dc(CameraMatrixCache *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
+void FUN_001523b8(CameraMatrixCache *camera, s32 mode, f32 fieldOfView, f32 nearClip, f32 farClip, f32 aspect);
+void FUN_0036b824(CameraMatrixCache *camera);
+s32 FUN_002caea0(u32 handle);
+void event3dOpeningDestroy(u32 handle);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
+s32 FUN_00162ea4(void);
+void asdEnvResetModelBank(const char *path, u32 flags);
+u32 FUN_00387350(const char *path);
+u32 asdMdlManagerCreateSecondList(const char *path, u32 group);
+
+u32 event3dOpeningCreate(void)
+{
+    if (g_event3dOpening == NULL) {
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\event\\3dEvent\\3dEventOpening.cpp", 0xF7);
+        g_event3dOpening = static_cast<OpeningEventWork *>(asdMemoryAllocTracked(
+            ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(OpeningEventWork), 1));
+        OpeningEventWork *work = g_event3dOpening;
+        sysMemClear(work, sizeof(OpeningEventWork));
+        FUN_0013c884(&work->camera.cache, 1);
+        work->eye.x = 0.0f;
+        work->eye.y = 0.0f;
+        work->eye.z = 0.0f;
+        work->target.x = 0.0f;
+        work->target.y = 0.0f;
+        work->target.z = 5.0f;
+        work->projection.fieldOfView = 30.0f;
+        work->projection.nearClip = 1.0f;
+        work->projection.farClip = 10000.0f;
+        work->up.x = 0.0f;
+        work->up.y = 1.0f;
+        work->up.z = 0.0f;
+        work->projection.aspect = 5.0f / 3.0f;
+        work->distance = 5.0f;
+        uiSetFloatPair(&work->camera.cache, 5.0f, 1.0f);
+        FUN_0014f0dc(&work->camera.cache, &work->eye, &work->target, &work->up);
+        FUN_001523b8(&work->camera.cache, 1, work->projection.fieldOfView,
+            work->projection.nearClip, work->projection.farClip, work->projection.aspect);
+        FUN_0036b824(&work->camera.cache);
+        work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("3dEventOpening Calc"),
+            4, 0, 0, FUN_002caea0, event3dOpeningDestroy, reinterpret_cast<u32>(work));
+        FUN_00162ea4();
+        work->state = 1;
+        work->substate = 0;
+        asdEnvResetModelBank(DAT_0052f680, 0);
+        work->environment = 0;
+        work->loopCamera = FUN_00387350(DAT_0052f668);
+        work->startCamera = FUN_00387350(DAT_0052f650);
+        work->models = asdMdlManagerCreateSecondList(DAT_0052f638, 0x38);
+        work->active = 1;
+    }
+    return g_event3dOpening->job;
+}
+}

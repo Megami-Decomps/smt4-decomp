@@ -12,7 +12,7 @@ int drawTextAtRelativePosition(...);
 int FUN_004a7814(int, unsigned int, int, int, unsigned int, unsigned int);
 int FUN_004a7a50(int, int, unsigned int, int, int, unsigned int);
 int FUN_004a7ba0(int, unsigned int, int, int, unsigned int);
-int FUN_004a7cb0(int, unsigned int, int, int, unsigned int);
+void FUN_004a7cb0(void *, unsigned int, int, int, int, float scale);
 int FUN_004a80d8(int, int, unsigned int, int);
 
 /* stack frame of param_5: 5 slot(s), 20 byte(s) */
@@ -39,16 +39,17 @@ extern unsigned int DAT_005e1e88; /* 0x5e1e88 */
 /* Supplied declaration required: FUN_004a80d8. */
 
 
-void FUN_004a3238(int param_1,int param_2,unsigned int param_3,int param_4,unsigned int param_5)
+void FUN_004a3238(int param_1,int param_2,unsigned int param_3,int param_4,unsigned int param_5,float scale)
 
 {
 /* irregular: 10 native warning(s); review required */
   char temp_v0;
   int temp_v1;
   unsigned int temp_v2;
+  float textScale;
   
   temp_v2 = *(unsigned int *)(param_1 + 0x850);
-  FUN_002a4b28(param_5 & 0xffff);
+  textScale = FUN_002a4b28(param_5 & 0xffff) != 0 ? 1.0f : 0.5f;
   switch(param_3) {
   case 0:
     if (param_4 != 0) {
@@ -63,7 +64,7 @@ void FUN_004a3238(int param_1,int param_2,unsigned int param_3,int param_4,unsig
     efctSetSpeed();
     return;
   case 2:
-    FUN_004a7cb0(param_1,param_5,param_2,param_4,temp_v2);
+    FUN_004a7cb0(reinterpret_cast<void *>(param_1),param_5,param_2,param_4,temp_v2,scale * textScale);
     break;
   case 3:
     FUN_004a7ba0(param_1,param_5,param_2,param_4,temp_v2);

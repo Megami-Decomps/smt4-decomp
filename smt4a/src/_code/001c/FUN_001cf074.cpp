@@ -1,96 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001cf074` (_code @ 0x1cf074, 0x124 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: half conversion mask scheduling and command store grouping differ. */
+#include "common.h"
 
-extern "C" {
+extern "C" u32 *g_commandBufferCursor;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
-
-
-void FUN_001cf074(int param_1,unsigned int *param_2)
-
+// The GPU conversion flushes subnormals to signed zero and clamps overflow to infinity.
+static __inline u16 floatBitsToGpuHalf(u32 bits)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v2 = *param_2;
-  temp_v1 = param_2[1];
-  temp_v4 = 0;
-  if ((temp_v2 & 0x80000000) != 0) {
-    temp_v4 = 0x8000;
-  }
-  if ((temp_v2 & 0x7fffffff) == 0) {
-    temp_v3 = 0;
-    temp_v4 = ((temp_v2 & 0x7fffff) >> 0xd) | temp_v4 | ((temp_v3 & 0x1f) << 10);
-  }
-  else {
-    temp_v3 = ((temp_v2 & 0x7fffffff) >> 0x17) - 0x70;
-    if (-1 < (int)temp_v3) {
-      if ((int)temp_v3 >= 0x20) {
-        temp_v4 = 0x7c00;
-      }
-      else {
-        temp_v4 = ((temp_v2 & 0x7fffff) >> 0xd) | temp_v4 | ((temp_v3 & 0x1f) << 10);
-      }
+    u32 half = 0;
+    if (bits & 0x80000000)
+        half = 0x8000;
+    u32 exponent;
+    if ((bits & 0x7fffffff) == 0) {
+        exponent = 0;
+        half = ((bits & 0x7fffff) >> 13) | half | ((exponent & 31) << 10);
+    } else {
+        exponent = ((bits & 0x7fffffff) >> 23) - 112;
+        if (static_cast<s32>(exponent) >= 0) {
+            if (static_cast<s32>(exponent) >= 32)
+                half = 0x7c00;
+            else
+                half = ((bits & 0x7fffff) >> 13) | half | ((exponent & 31) << 10);
+        }
     }
-  }
-  temp_v2 = 0;
-  if ((temp_v1 & 0x80000000) != 0) {
-    temp_v2 = 0x8000;
-  }
-  if ((temp_v1 & 0x7fffffff) == 0) {
-    temp_v3 = 0;
-    temp_v2 = ((temp_v1 & 0x7fffff) >> 0xd) | temp_v2 | ((temp_v3 & 0x1f) << 10);
-  }
-  else {
-    temp_v3 = ((temp_v1 & 0x7fffffff) >> 0x17) - 0x70;
-    if (-1 < (int)temp_v3) {
-      if ((int)temp_v3 >= 0x20) {
-        temp_v2 = 0x7c00;
-      }
-      else {
-        temp_v2 = ((temp_v1 & 0x7fffff) >> 0xd) | temp_v2 | ((temp_v3 & 0x1f) << 10);
-      }
-    }
-  }
-  temp_v3 = param_2[2];
-  temp_v1 = 0;
-  if ((temp_v3 & 0x80000000) != 0) {
-    temp_v1 = 0x8000;
-  }
-  if ((temp_v3 & 0x7fffffff) == 0) {
-    temp_v0 = 0;
-    temp_v1 = ((temp_v3 & 0x7fffff) >> 0xd) | temp_v1 | ((temp_v0 & 0x1f) << 10);
-  }
-  else {
-    temp_v0 = ((temp_v3 & 0x7fffffff) >> 0x17) - 0x70;
-    if ((int)temp_v0 >= 0) {
-      if ((int)temp_v0 >= 0x20) {
-        temp_v1 = 0x7c00;
-        g_commandBufferCursor[2] = temp_v1;
-        g_commandBufferCursor[3] = 0;
-        *g_commandBufferCursor = temp_v4 | (temp_v2 << 0x10);
-        g_commandBufferCursor[1] = param_1 * 0x10 + 0x801f0144;
-        g_commandBufferCursor = g_commandBufferCursor + 4;
-        return;
-      }
-      temp_v1 = ((temp_v3 & 0x7fffff) >> 0xd) | temp_v1 | ((temp_v0 & 0x1f) << 10);
-    }
-  }
-  g_commandBufferCursor[2] = temp_v1;
-  g_commandBufferCursor[3] = 0;
-  *g_commandBufferCursor = temp_v4 | (temp_v2 << 0x10);
-  g_commandBufferCursor[1] = param_1 * 0x10 + 0x801f0144;
-  g_commandBufferCursor = g_commandBufferCursor + 4;
-  return;
+    return half;
 }
 
-} /* extern "C" */
+// Write a three-component half-float lighting vector to the selected GPU register.
+extern "C" void FUN_001cf074(s32 index, const u32 *vectorBits)
+{
+    u16 x = floatBitsToGpuHalf(vectorBits[0]);
+    u16 y = floatBitsToGpuHalf(vectorBits[1]);
+    u16 z = floatBitsToGpuHalf(vectorBits[2]);
+    g_commandBufferCursor[2] = z;
+    g_commandBufferCursor[3] = 0;
+    g_commandBufferCursor[0] = x | (y << 16);
+    g_commandBufferCursor[1] = index * 16 + 0x801f0144;
+    g_commandBufferCursor += 4;
+}

@@ -14,7 +14,7 @@ int FUN_00282390(void);
 int FUN_0028250c(void);
 int mathDistanceBetweenPoints(void);
 int FUN_00298d50(...);
-int FUN_002adf00(float [3], int);
+int cameraExportParameters(float [3], int);
 int FUN_002c159c(unsigned char *);
 int FUN_002c1e30(...);
 int FUN_002c1edc(...);
@@ -66,7 +66,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: FUN_00298d50. */
-/* Supplied declaration required: FUN_002adf00. */
+/* Supplied declaration required: cameraExportParameters. */
 /* Supplied declaration required: FUN_002c159c. */
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
@@ -118,7 +118,7 @@ void FUN_00276a3c(void)
   gameGetMapBlock();
   piVar4 = DAT_004474f4;
   if ((char)DAT_004474f4[0xac] != '\0') {
-    FUN_002adf00(temp_v24,DAT_004474f4[0xad]);
+    cameraExportParameters(temp_v24,DAT_004474f4[0xad]);
     piVar4 = DAT_004474f4;
     DAT_004474f4[0x10] = (int)temp_v25;
     piVar4[0x11] = iStack_8c;

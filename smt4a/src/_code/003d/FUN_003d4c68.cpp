@@ -1,78 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d4c68` (_code @ 0x3d4c68, 0x138 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: channel-base retention and fade-transition register lifetimes differ. */
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 extern "C" {
-
-int soundChannelRequest(unsigned int, int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned int DAT_00588fb0; /* 0x588fb0 */
-extern unsigned int DAT_0061951c; /* 0x61951c */
-extern unsigned int DAT_00619520; /* 0x619520 */
-extern unsigned int DAT_00619524; /* 0x619524 */
-extern unsigned int DAT_00619538; /* 0x619538 */
-extern unsigned int DAT_0061953c; /* 0x61953c */
-extern unsigned int DAT_00619540; /* 0x619540 */
-extern unsigned int DAT_00619544; /* 0x619544 */
-extern unsigned int DAT_00619558; /* 0x619558 */
-
-extern int jyoucyuGetTableEntry(unsigned int);
-/* Supplied declaration required: soundChannelRequest. */
-
-
-void FUN_003d4c68(unsigned int param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 == 0) {
-    temp_v0 = jyoucyuGetTableEntry(1);
-    if ((temp_v0 == 0) &&
-       ((((DAT_00619538 & 2) != 0 && ((DAT_00619538 & 0x20) != 0)) ||
-        ((DAT_00619558 & 2) != 0 && (DAT_00619558 & 0x20) != 0)))) {
-      temp_v0 = jyoucyuGetTableEntry(1);
-      if (temp_v0 == 0) {
-        if ((DAT_00619538 & 2) != 0) {
-          if ((DAT_00619538 & 0x20) != 0) {
-            DAT_00619538 = (DAT_00619538 & 0xffffffdf) | 0x40;
-            DAT_00619520 = 0x3c;
-            DAT_00588fb0 = DAT_0061951c;
-          }
-          else if ((DAT_00619538 & 0x400) == 0) {
-            DAT_00619524 = 0x1e;
-            DAT_00619538 = DAT_00619538 | 8;
-          }
-        }
-        if ((DAT_00619558 & 2) != 0) {
-          if ((DAT_00619558 & 0x20) != 0) {
-            DAT_00619558 = (DAT_00619558 & 0xffffffdf) | 0x40;
-            DAT_00619540 = 0x3c;
-            DAT_00588fb0 = DAT_0061953c;
-          }
-          else if ((DAT_00619558 & 0x400) == 0) {
-            DAT_00619544 = 0x1e;
-            DAT_00619558 = DAT_00619558 | 8;
-            return;
-          }
-        }
-      }
-    }
-    else {
-      temp_v0 = jyoucyuGetTableEntry(1);
-      if (temp_v0 == 0) {
-        soundChannelRequest(param_1,0,0x3c);
-        return;
-      }
-    }
-  }
-  return;
+extern BgmRequestChannel DAT_0061951c[2];
+extern BgmChannelSelection g_resourceSharedFlag;
+const void *jyoucyuGetTableEntry(u32);
+void soundChannelRequest(u32, s32, s32);
 }
 
-} /* extern "C" */
+static __inline void bgmResumeChannel(BgmRequestChannel *channel)
+{
+    if (channel->flags & 2) {
+        if (channel->flags & 0x20) {
+            channel->flags = (channel->flags & ~0x20) | 0x40;
+            channel->play.param = 60;
+            g_resourceSharedFlag.selected = channel->play.unk00;
+        } else if (!(channel->flags & 0x400)) {
+            channel->fadeFrames = 30;
+            channel->flags |= 8;
+        }
+    }
+}
+
+extern "C" {
+/* Resume paused BGM channels when possible, otherwise request the desired track. */
+void FUN_003d4c68(u32 track)
+{
+    if (jyoucyuGetTableEntry(1) == NULL) {
+        if (jyoucyuGetTableEntry(1) == NULL &&
+            (((DAT_0061951c[0].flags & 2) && (DAT_0061951c[0].flags & 0x20)) ||
+             ((DAT_0061951c[1].flags & 2) && (DAT_0061951c[1].flags & 0x20)))) {
+            if (jyoucyuGetTableEntry(1) == NULL) {
+                bgmResumeChannel(&DAT_0061951c[0]);
+                bgmResumeChannel(&DAT_0061951c[1]);
+            }
+        } else {
+            if (jyoucyuGetTableEntry(1) == NULL) {
+                soundChannelRequest(track, 0, 60);
+            }
+        }
+    }
+}
+}

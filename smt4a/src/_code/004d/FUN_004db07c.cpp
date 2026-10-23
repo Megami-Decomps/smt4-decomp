@@ -1,76 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004db07c` (_code @ 0x4db07c, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: ingredient/held-unit equality loads and CMP operand ordering differ in one comparison. */
+#include "gamedata/FusionRecipe.h"
+#include "shard/W5_W5Match5_GameSaveViews.h"
+#include <string.h>
 
 extern "C" {
+GameSlotTable *gameGetSlotTable(void);
+const FusionRecipe *contentEntryFindById(u32);
+s32 gameSlotTableFindFree(void);
+s32 bitsAt60Test(const SlotRecord *, u32);
+s32 FUN_002a4b28(u16);
+u32 FUN_0032fea0(u16 *, s32, s32);
 
-int FUN_0032fea0(unsigned int *, int, int);
-int contentEntryFindById(void);
-
-extern int gameGetSlotRecord(void);
-extern int gameGetSlotTable(void);
-extern int gameSlotTableFindFree(void);
-extern int FUN_002a4b28(unsigned short);
-/* Supplied declaration required: FUN_0032fea0. */
-/* Supplied declaration required: contentEntryFindById. */
-extern int bitsAt60Test(int, unsigned int);
-
-
-void FUN_004db07c(unsigned int param_1,int param_2,unsigned int *param_3)
-
+// Classify recipe ingredients as held or summonable, then test the collected availability list.
+u32 FUN_004db07c(u32 unused, u32 recipeId, u16 *statuses)
 {
-/* irregular: 1 goto(s); 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  short *psVar5;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  
-  temp_v6 = 0;
-  temp_v0 = gameGetSlotTable();
-  contentEntryFindById();
-  if (param_2 != 0) {
-    *param_3 = 0;
-    param_3[1] = 0;
-    param_3[2] = 0;
-    param_3[3] = 0;
-    param_3[4] = 0;
-    temp_v4 = 0;
-    param_3[5] = 0;
-    do {
-      temp_v5 = param_2 + temp_v4 * 2;
-      if (*(short *)(temp_v5 + 2) != 0) {
-        temp_v3 = 0;
-        temp_v1 = gameSlotTableFindFree();
-        if (0 < temp_v1) {
-          do {
-            if (-1 < *(char *)(temp_v0 + temp_v3 + 0x1c88)) {
-              temp_v1 = gameGetSlotRecord();
-              temp_v2 = bitsAt60Test(temp_v1,10);
-              if ((temp_v2 == 0) && (*(short *)(temp_v1 + 0x62) == *(short *)(temp_v5 + 2))) {
-                *(unsigned short *)((int)param_3 + temp_v4 * 2) = 1;
-                goto LAB_004db170;
-              }
+    struct StockView { u8 prefix[0x1C88]; s8 slots[24]; };
+    s32 count = 0;
+    StockView *stock = reinterpret_cast<StockView *>(gameGetSlotTable());
+    const FusionRecipe *recipe = contentEntryFindById(recipeId);
+    if (recipe == NULL)
+        return 0;
+    memset(statuses, 0, 12 * sizeof(*statuses));
+    for (s32 i = 0; i < 12; ++i) {
+        if (recipe->ingredients[i] != 0) {
+            for (s32 slot = 0; slot < gameSlotTableFindFree(); ++slot) {
+                if (stock->slots[slot] >= 0) {
+                    SlotRecord *record = gameGetSlotRecord(stock->slots[slot]);
+                    if (!bitsAt60Test(record, 10) && record->entryId == recipe->ingredients[i]) {
+                        statuses[i] = 1;
+                        break;
+                    }
+                }
             }
-            temp_v3 = temp_v3 + 1;
-            temp_v1 = gameSlotTableFindFree();
-          } while (temp_v3 < temp_v1);
+            if (statuses[i] == 0 && FUN_002a4b28(recipe->ingredients[i]))
+                statuses[i] = 2;
+            ++count;
         }
-        psVar5 = (short *)((int)param_3 + temp_v4 * 2);
-        if ((*psVar5 == 0) && (temp_v5 = FUN_002a4b28(*(unsigned short *)(temp_v5 + 2)), temp_v5 != 0)) {
-          *psVar5 = 2;
-        }
-LAB_004db170:
-        temp_v6 = temp_v6 + 1;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 0xc);
-    FUN_0032fea0(param_3,temp_v6,0);
-  }
-  return;
+    }
+    return FUN_0032fea0(statuses, count, 0) ^ 1;
 }
-
-} /* extern "C" */
+}

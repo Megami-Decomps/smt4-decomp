@@ -1,69 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003009fc` (_code @ 0x3009fc, 0x144 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Column-clearing unroll, selection scan guards and multiple-selection result addressing differ. */
+#include "battle/btlUI.h"
 
-extern "C" {
+/* The shared column prefix has byte alignment; use a local aligned view for its id word. */
+struct BtlUiSelectableColumn {
+    u8 value;
+    u8 unk01[3];
+    s32 id;
+    u8 unk08[8];
+    u8 selected;
+    u8 unk11[0x1B];
+};
+struct BtlUiColumnSelectionView {
+    u8 unk0000[0x5758];
+    s32 count;
+    u8 multiple;
+    u8 unk575D[0x1B];
+    BtlUiSelectableColumn columns[1];
+};
+typedef char BtlUiSelectionColumnSizeCheck[sizeof(BtlUiSelectableColumn) == 0x2C ? 1 : -1];
 
-extern unsigned long long runtimeShiftLeftWide(unsigned int, unsigned int);
+extern "C" u64 runtimeShiftLeftWide(u64 value, s32 shift);
 
-
-void FUN_003009fc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Marks all columns whose ids occur in mask and records whether more than one column matched. */
+extern "C" void FUN_003009fc(BtlUiObjC *object, u64 mask)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int *puVar8;
-  unsigned long long temp_v7;
-  
-  puVar8 = (unsigned int *)(param_1 + 0x5758);
-  temp_v2 = *puVar8;
-  if (0 < (int)temp_v2) {
-    temp_v4 = temp_v2 & 1;
-    if (temp_v4 == 1) {
-      *(unsigned char *)(param_1 + 0x5788) = 0;
+    BtlUiColumnSelectionView *view = (BtlUiColumnSelectionView *)object;
+    for (s32 column = 0; column < view->count; ++column) {
+        view->columns[column].selected = 0;
     }
-    temp_v0 = (unsigned int)(temp_v4 == 1);
-    if ((int)temp_v4 < (int)temp_v2) {
-      do {
-        *(unsigned char *)(param_1 + temp_v0 * 0x2c + 0x5788) = 0;
-        *(unsigned char *)(param_1 + (temp_v0 + 1) * 0x2c + 0x5788) = 0;
-        temp_v0 = temp_v0 + 2;
-        temp_v4 = temp_v4 + 2;
-      } while ((int)temp_v4 < (int)*puVar8);
+    s32 matches = 0;
+    for (s32 id = 0; id < view->count; ++id) {
+        if (runtimeShiftLeftWide(1, id) & mask) {
+            for (s32 column = 0; column < view->count; ++column) {
+                if (view->columns[column].id == id) {
+                    ++matches;
+                    view->columns[column].selected = 1;
+                }
+            }
+        }
     }
-  }
-  temp_v6 = 0;
-  temp_v5 = 0;
-  if (0 < (int)*puVar8) {
-    do {
-      temp_v7 = runtimeShiftLeftWide(1,0);
-      if (((unsigned int)temp_v7 & param_3) != 0 || ((unsigned int)((unsigned long long)temp_v7 >> 0x20) & param_4) != 0) {
-        temp_v2 = *puVar8;
-        temp_v1 = 0;
-        do {
-          temp_v3 = param_1 + temp_v1 * 0x2c;
-          if (*(int *)(temp_v3 + 0x577c) == temp_v5) {
-            temp_v6 = temp_v6 + 1;
-            *(unsigned char *)(temp_v3 + 0x5788) = 1;
-          }
-          temp_v2 = temp_v2 - 1;
-          temp_v1 = temp_v1 + 1;
-        } while (0 < (int)temp_v2);
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < (int)*puVar8);
-    if (temp_v6 >= 2) {
-      *(unsigned char *)(param_1 + 0x575c) = 1;
-      return;
+    if (matches > 1) {
+        view->multiple = 1;
+        return;
     }
-  }
-  *(unsigned char *)(param_1 + 0x575c) = 0;
-  return;
+    view->multiple = 0;
 }
-
-} /* extern "C" */

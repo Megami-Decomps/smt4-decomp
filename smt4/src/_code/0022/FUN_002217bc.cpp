@@ -1,79 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002217bc` (_code @ 0x2217bc, 0x10c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: name/global saved registers and cache-count reload after texture store differ. */
+#include "gfx/NamedTextureCache.h"
 
 extern "C" {
-
-int libc_strcmp(int *, unsigned int);
-int asdTextureCreate(void);
-int memClear(int, int);
-int strncpy(int, unsigned int, int);
-
-extern int DAT_0047e500; /* 0x47e500 */
-
-/* Supplied declaration required: libc_strcmp. */
-/* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: memClear. */
-
-
-void FUN_002217bc(unsigned int param_1)
-
-{
-/* irregular: 1 goto(s); 3 native warning(s); review required */
-  int *piVar1;
-  unsigned int temp_v0;
-  int *piVar3;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  piVar3 = (int *)0x4332a0;
-  do {
-    piVar1 = piVar3 + 1;
-    libc_strcmp(piVar1,param_1);
-    if (piVar1 == (int *)0x0) goto LAB_002218b8;
-    temp_v1 = temp_v1 + 1;
-    piVar3 = piVar3 + 0x13;
-  } while (temp_v1 < 0x1a);
-  piVar3 = (int *)0x47d200;
-  temp_v1 = 0;
-  if (temp_v1 < DAT_0047e500) {
-    do {
-      if (*piVar3 != 0) {
-        piVar1 = piVar3 + 1;
-        libc_strcmp(piVar1,param_1);
-        if (piVar1 == (int *)0x0) {
-          if (*piVar3 != 0) {
-            return;
-          }
-          break;
-        }
-      }
-      temp_v1 = temp_v1 + 1;
-      piVar3 = piVar3 + 0x13;
-    } while (temp_v1 < DAT_0047e500);
-  }
-  if (DAT_0047e500 < 0x40) {
-    memClear(DAT_0047e500 * 0x4c + 0x47d200,0x4c);
-    strncpy(DAT_0047e500 * 0x4c + 0x47d204,param_1,0x40);
-    temp_v0 = 0;
-    asdTextureCreate();
-    *(unsigned int *)(DAT_0047e500 * 0x4c + 0x47d200) = temp_v0;
-    DAT_0047e500 = DAT_0047e500 + 1;
-  }
-  return;
-LAB_002218b8:
-  if (*piVar3 != 0) {
-    return;
-  }
-  if (DAT_0047e500 < 0x40) {
-    memClear(DAT_0047e500 * 0x4c + 0x47d200,0x4c);
-    strncpy(DAT_0047e500 * 0x4c + 0x47d204,param_1,0x40);
-    temp_v0 = 0;
-    asdTextureCreate();
-    *(unsigned int *)(DAT_0047e500 * 0x4c + 0x47d200) = temp_v0;
-    DAT_0047e500 = DAT_0047e500 + 1;
-  }
-  return;
+extern NamedTextureEntry DAT_004332a0[26];
+extern NamedTextureEntry g_textureCache[];
+extern NamedTextureCacheState DAT_0047e200;
+s32 libc_strcmp(const char *left, const char *right);
+void memClear(void *data, u32 size);
+char *strncpy(char *destination, const char *source, u32 count);
+u32 asdTextureCreate(u32 flags);
 }
 
-} /* extern "C" */
+static __inline u32 findNamedTexture(const char *name)
+{
+    NamedTextureEntry *entry = DAT_004332a0;
+    for (s32 index = 0; index < 26; ++index, ++entry) {
+        if (libc_strcmp(entry->name, name) == 0) {
+            return entry->texture;
+        }
+    }
+    entry = g_textureCache;
+    for (s32 index = 0; index < DAT_0047e200.count; ++index, ++entry) {
+        if (entry->texture != 0 && libc_strcmp(entry->name, name) == 0) {
+            return entry->texture;
+        }
+    }
+    return 0;
+}
+
+// Reuse a named texture when available; otherwise reserve a dynamic cache entry.
+extern "C" u32 FUN_002217bc(const char *name)
+{
+    u32 texture = findNamedTexture(name);
+    if (texture != 0) {
+        return texture;
+    }
+    if (DAT_0047e200.count >= 64) {
+        return 0;
+    }
+    memClear(&g_textureCache[DAT_0047e200.count], sizeof(NamedTextureEntry));
+    strncpy(g_textureCache[DAT_0047e200.count].name, name, 64);
+    texture = asdTextureCreate(0);
+    g_textureCache[DAT_0047e200.count].texture = texture;
+    ++DAT_0047e200.count;
+    return texture;
+}

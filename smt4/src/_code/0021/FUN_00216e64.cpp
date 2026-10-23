@@ -10,7 +10,7 @@ int buttonHelpSetPreset(...);
 int eventQueueAddUnique(...);
 int FUN_002bee58(...);
 
-int FUN_001ce0fc(int);
+int statusReplaceSkillList(int);
 int FUN_001ddbbc(void);
 int FUN_00215b40(int);
 int FUN_0026a978(...);
@@ -56,7 +56,7 @@ extern unsigned char LAB_00217614; /* 0x217614 */
 extern unsigned char LAB_002c6e64; /* 0x2c6e64 */
 
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_001ce0fc. */
+/* Supplied declaration required: statusReplaceSkillList. */
 /* Supplied declaration required: FUN_001ddbbc. */
 /* Supplied declaration required: FUN_00215b40. */
 /* Supplied declaration required: FUN_0026a978. */
@@ -185,7 +185,7 @@ void FUN_00216e64(int param_1)
       FUN_002954f4(*(unsigned short *)(temp_v2 + 0x46),0);
       btlTalkBustUpSetUnk2F4(1);
       FUN_0029d8f4(temp_v2,0);
-      FUN_001ce0fc(temp_v2 + 0x34);
+      statusReplaceSkillList(temp_v2 + 0x34);
       FUN_00215b40((int)*(short *)(temp_v2 + 0x46));
       if (*(char *)(param_1 + 0xd044) != '\0') {
         temp_v15[0] = 0;

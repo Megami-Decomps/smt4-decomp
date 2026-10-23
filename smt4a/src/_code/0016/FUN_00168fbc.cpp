@@ -1,119 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00168fbc` (_code @ 0x168fbc, 0x190 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: format/type switch lowering differs; unsupported combinations have no defined float result in retail. */
+#include "common.h"
 
-extern "C" {
-
-
-void FUN_00168fbc(int param_1,int param_2,unsigned int *param_3)
-
+namespace {
+enum TextureFormat {
+    TextureRgba8, TextureRgb8, TextureRgba5551, TextureRgb565, TextureRgba4444,
+    TextureLuminanceAlpha8, TextureHilo8, TextureLuminance8, TextureAlpha8,
+    TextureLuminanceAlpha4, TextureLuminance4, TextureAlpha4, TextureEtc1, TextureEtc1Alpha4
+};
+static __inline f32 setTextureFormat(u32 *output, TextureFormat format, f32 bytesPerPixel)
 {
-/* irregular: 4 goto(s) */
-  unsigned int temp_v0;
-  
-  if (param_1 != 0x6754) {
-    if (param_1 < 0x6754) {
-      if (param_1 != 0x1909) {
-        if (param_1 < 0x1909) {
-          if (param_1 == 0x1906) goto LAB_00169108;
-          if (param_1 == 0x1907) goto LAB_00169088;
-          if (param_1 != 0x1908) {
-            return;
-          }
-        }
-        else {
-          if (param_1 == 0x190a) goto LAB_001690b4;
-          if (param_1 == 0x6700) {
-            temp_v0 = 6;
-            *param_3 = temp_v0;
-            return;
-          }
-          if (param_1 != 0x6752) {
-            return;
-          }
-        }
-        if (param_2 == 0x1401) {
-          temp_v0 = 0;
-        }
-        else if (param_2 == 0x8033) {
-          temp_v0 = 4;
-        }
-        else {
-          if (param_2 != 0x8034) {
-            return;
-          }
-          temp_v0 = 2;
-        }
-      }
-      else {
-LAB_001690e4:
-        if (param_2 == 0x1401) {
-          temp_v0 = 7;
-        }
-        else {
-          if (param_2 != 0x6761) {
-            return;
-          }
-          temp_v0 = 10;
-        }
-      }
-    }
-    else {
-      switch(param_1) {
-      case 0x6756:
-LAB_00169108:
-        if (param_2 == 0x1401) {
-          temp_v0 = 8;
-        }
-        else {
-          if (param_2 != 0x6761) {
-            return;
-          }
-          temp_v0 = 0xb;
-        }
-        break;
-      case 0x6757:
-        goto LAB_001690e4;
-      case 0x6758:
-LAB_001690b4:
-        if (param_2 == 0x1401) {
-          temp_v0 = 5;
-        }
-        else {
-          if (param_2 != 0x6760) {
-            return;
-          }
-          temp_v0 = 9;
-        }
-        break;
-      case 0x6759:
-        temp_v0 = 6;
-        break;
-      case 0x675a:
-        temp_v0 = 0xc;
-        break;
-      case 0x675b:
-        temp_v0 = 0xd;
-        break;
-      default:
-        return;
-      }
-    }
-  }
-  else {
-LAB_00169088:
-    if (param_2 == 0x1401) {
-      temp_v0 = 1;
-    }
-    else {
-      if (param_2 != 0x8363) {
-        return;
-      }
-      temp_v0 = 3;
-    }
-  }
-  *param_3 = temp_v0;
-  return;
+    *output = format;
+    return bytesPerPixel;
+}
 }
 
-} /* extern "C" */
+/* Translate standard/DMP pixel format and element type, returning bytes per pixel.
+ * Callers must supply a supported combination; the retail routine leaves both outputs undefined otherwise. */
+extern "C" f32 FUN_00168fbc(u32 format, u32 elementType, u32 *output)
+{
+    switch (format) {
+    case 0x1908: // RGBA
+    case 0x6752:
+        if (elementType == 0x1401)
+            return setTextureFormat(output, TextureRgba8, 4.0f);
+        if (elementType == 0x8033)
+            return setTextureFormat(output, TextureRgba4444, 2.0f);
+        if (elementType == 0x8034)
+            return setTextureFormat(output, TextureRgba5551, 2.0f);
+        break;
+    case 0x1907: // RGB
+    case 0x6754:
+        if (elementType == 0x1401)
+            return setTextureFormat(output, TextureRgb8, 3.0f);
+        if (elementType == 0x8363)
+            return setTextureFormat(output, TextureRgb565, 2.0f);
+        break;
+    case 0x190A: // LUMINANCE_ALPHA
+    case 0x6758:
+        if (elementType == 0x1401)
+            return setTextureFormat(output, TextureLuminanceAlpha8, 2.0f);
+        if (elementType == 0x6760)
+            return setTextureFormat(output, TextureLuminanceAlpha4, 1.0f);
+        break;
+    case 0x1909: // LUMINANCE
+    case 0x6757:
+        if (elementType == 0x1401)
+            return setTextureFormat(output, TextureLuminance8, 1.0f);
+        if (elementType == 0x6761)
+            return setTextureFormat(output, TextureLuminance4, 0.5f);
+        break;
+    case 0x1906: // ALPHA
+    case 0x6756:
+        if (elementType == 0x1401)
+            return setTextureFormat(output, TextureAlpha8, 1.0f);
+        if (elementType == 0x6761)
+            return setTextureFormat(output, TextureAlpha4, 0.5f);
+        break;
+    case 0x6700:
+    case 0x6759:
+        return setTextureFormat(output, TextureHilo8, 2.0f);
+    case 0x675A:
+        return setTextureFormat(output, TextureEtc1, 0.5f);
+    case 0x675B:
+        return setTextureFormat(output, TextureEtc1Alpha4, 1.0f);
+    }
+}

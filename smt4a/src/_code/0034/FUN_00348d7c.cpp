@@ -1,71 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00348d7c` (_code @ 0x348d7c, 0x114 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match6_CallbackController.h"
 
-extern "C" {
-
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdOperatorNew(...);
-int FUN_0049d140(...);
-int FUN_0049d3f0(...);
-
-/* stack frame of param_1: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned char LAB_002840fc; /* 0x2840fc */
-extern unsigned char LAB_002c2b88; /* 0x2c2b88 */
-extern unsigned char LAB_002c2bac; /* 0x2c2bac */
-extern unsigned int *DAT_0057f240; /* 0x57f240 */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdOperatorNew. */
-extern int campIsState85(void);
-extern unsigned int ifTouchGetButtonHelpValue(void);
-/* Supplied declaration required: FUN_0049d140. */
-/* Supplied declaration required: FUN_0049d3f0. */
-
-
-void FUN_00348d7c(int param_1)
-
-{
-/* irregular: 5 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int *puVar2;
-  char *pcVar3;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  puVar2 = (unsigned int *)0x478;
-  asdOperatorNew();
-  pcVar3 = "HOW_TO PROC";
-  DAT_0057f240 = puVar2;
-  asdProcessCreateSimple("HOW_TO PROC",4,0,0,&LAB_002840fc,0,0);
-  *puVar2 = (unsigned int)pcVar3;
-  taskCreateDraw("HOW_TO UL",0x81,0,0,&LAB_002c2bac,0,0,pcVar3);
-  taskCreateDraw("HOW_TO UR",0xdd,0,0,&LAB_002c2bac,0,0,*puVar2);
-  taskCreateDraw("HOW_TO DD",0xeb,0,0,&LAB_002c2b88,0,0,*puVar2);
-  FUN_0049d3f0(puVar2);
-  temp_v1 = ifTouchGetButtonHelpValue();
-  puVar2[0x11b] = temp_v1;
-  puVar2[0x11c] = param_1;
-  temp_v2 = campIsState85();
-  if ((temp_v2 == 0) && (param_1 != 3)) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = 1;
-  }
-  *(unsigned char *)(puVar2 + 0x11d) = temp_v0;
-  FUN_0049d140(puVar2,7,0);
-  return;
+namespace {
+// The canonical controller work stops before the how-to screen's trailing fields.
+struct HowToWorkView {
+    u32 process; // 0x000
+    u8 unk004[0x468];
+    u32 savedButtonHelp; // 0x46C
+    s32 mode; // 0x470
+    u8 alternate; // 0x474
+    u8 unk475[3];
+};
+typedef char HowToWorkViewLayoutCheck[
+    sizeof(HowToWorkView) == 0x478 && offsetof(HowToWorkView, savedButtonHelp) == 0x46C &&
+    offsetof(HowToWorkView, mode) == 0x470 && offsetof(HowToWorkView, alternate) == 0x474 ? 1 : -1];
 }
 
-} /* extern "C" */
+extern "C" {
+extern const char DAT_0052cf40[];
+extern const char DAT_0052cf34[];
+extern const char DAT_0052cf28[];
+extern const char DAT_0052cf1c[];
+void *asdOperatorNew(u32 size);
+s32 FUN_002840fc(void *work);
+void FUN_002c2bac(void *work);
+void FUN_002c2b88(void *work);
+u32 asdProcessCreateSimple(const char *name, s32 group, s32 priority, u32 size,
+                           s32 (*update)(void *), void *work, void (*destroy)(void *));
+u32 taskCreateDraw(const char *name, s32 priority, u32 flags, u32 size,
+                   void (*draw)(void *), void *work, void (*destroy)(void *), u32 process);
+void FUN_0049d3f0(HowToWorkView *work);
+u32 ifTouchGetButtonHelpValue(void);
+s32 campIsState85(void);
+void FUN_0049d140(HowToWorkView *work, s32 state, s32 parameter);
+
+// Create the how-to update process and the three screen-specific draw tasks.
+void FUN_00348d7c(s32 mode)
+{
+    HowToWorkView *work = static_cast<HowToWorkView *>(asdOperatorNew(sizeof(HowToWorkView)));
+    g_callbackController.work = work;
+    work->process = asdProcessCreateSimple(DAT_0052cf40, 4, 0, 0, FUN_002840fc, NULL, NULL);
+    taskCreateDraw(DAT_0052cf34, 0x81, 0, 0, FUN_002c2bac, NULL, NULL, work->process);
+    taskCreateDraw(DAT_0052cf28, 0xDD, 0, 0, FUN_002c2bac, NULL, NULL, work->process);
+    taskCreateDraw(DAT_0052cf1c, 0xEB, 0, 0, FUN_002c2b88, NULL, NULL, work->process);
+    FUN_0049d3f0(work);
+    work->savedButtonHelp = ifTouchGetButtonHelpValue();
+    work->mode = mode;
+    work->alternate = campIsState85() != 0 || mode == 3;
+    FUN_0049d140(work, 7, 0);
+}
+}

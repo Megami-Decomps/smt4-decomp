@@ -1,91 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e48d0` (_code @ 0x1e48d0, 0x140 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: ready-flag lifetime, pending-state copy signedness and saved-register allocation differ. */
+#include "battle/btlAction.h"
+#include "battle/ActionStateChannels.h"
 extern "C" {
+extern BtlActionGlobals g_btlAction;
+ActionStateChannelOwner *jobGetWork(void);
+s32 jobIsValid(u32 job);
+void FUN_003d2140(ActionStateChannels *channels);
+s32 FUN_003d28d0(ActionStateChannels *channels, s32 state);
 
-int FUN_003d2140(void);
-int FUN_003d28d0(int *, int);
-
-extern unsigned char g_btlAction; /* 0x434278 */
-
-extern int jobIsValid(unsigned int);
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_003d2140. */
-/* Supplied declaration required: FUN_003d28d0. */
-
-
-unsigned int FUN_001e48d0(void)
-
+/* Commit a pending action state or start its transition, respecting the previous channel. */
+u32 FUN_001e48d0(void)
 {
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  unsigned char temp_v1;
-  int *piVar3;
-  char temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int *piVar8;
-  unsigned int temp_v6;
-  unsigned char temp_v7;
-  unsigned int *puVar11;
-  
-  temp_v3 = jobGetWork();
-  piVar3 = (*(int * *)((unsigned char *)&g_btlAction + 0x4));
-  temp_v3 = *(int *)(temp_v3 + 0x84);
-  temp_v1 = 1;
-  puVar11 = (unsigned int *)((*(int * *)((unsigned char *)&g_btlAction + 0x4)) + temp_v3 * 0x3c7 + 1);
-  temp_v4 = *(int *)(*(*(int * *)((unsigned char *)&g_btlAction + 0x4)) + 0x84) - 1;
-  if (temp_v4 < 0) {
-    temp_v4 = 3;
-  }
-  temp_v4 = jobIsValid(*(unsigned int *)(*(*(int * *)((unsigned char *)&g_btlAction + 0x4)) + temp_v4 * 4 + 0xc));
-  piVar8 = (*(int * *)((unsigned char *)&g_btlAction + 0x4));
-  if (temp_v4 == 0) {
-    temp_v7 = 0xff;
-  }
-  else {
-    temp_v7 = *(unsigned char *)(piVar3 + *(int *)(*piVar3 + 0x84) * 0x3c7 + 2);
-  }
-  temp_v6 = *puVar11;
-  if ((temp_v6 & 2) != 0) {
-    temp_v2 = *(char *)((int)piVar3 + temp_v3 * 0xf1c + 9);
-  }
-  else {
-    temp_v2 = (char)piVar3[temp_v3 * 0x3c7 + 2];
-  }
-  if ((temp_v2 == '\v') && (temp_v7 < 0x1c)) {
-    temp_v1 = 0;
-  }
-  if (((temp_v6 & 0x40) == 0) && (temp_v1)) {
-    if ((temp_v6 & 2) != 0) {
-      if ((char)piVar3[temp_v3 * 0x3c7 + 2] == '#') {
-        temp_v5 = 0xffffffff;
-      }
-      else {
-        temp_v4 = *(int *)(*(*(int * *)((unsigned char *)&g_btlAction + 0x4)) + 0x84);
-        *(unsigned char *)((*(int * *)((unsigned char *)&g_btlAction + 0x4)) + temp_v4 * 0x3c7 + 2) =
-             *(unsigned char *)((int)piVar3 + temp_v3 * 0xf1c + 9);
-        *(unsigned short *)((int)piVar8 + temp_v4 * 0xf1c + 10) = 0;
-        *(unsigned char *)((int)piVar8 + temp_v4 * 0xf1c + 9) = 0;
-        piVar8[temp_v4 * 0x3c7 + 3] = 0;
-        FUN_003d2140();
-        *puVar11 = *puVar11 & 0xfffffffd;
-        temp_v5 = 0;
-      }
-      return temp_v5;
+    s32 index = jobGetWork()->current;
+    ActionStateChannels *channels = static_cast<ActionStateChannels *>(g_btlAction.data);
+    ActionStateTransition *channel = reinterpret_cast<ActionStateTransition *>(&channels->entries[index].flags);
+    s32 previous = channels->entries[0].owner->current - 1;
+    if (previous < 0)
+        previous = 3;
+    s32 otherState;
+    if (!jobIsValid(channels->entries[0].owner->jobs[previous]))
+        otherState = -1;
+    else
+        otherState = channels->entries[channels->entries[0].owner->current].state;
+    u32 flags = channel->flags;
+    s32 state = (flags & 2) ? channel->pending : channel->state;
+    bool ready = true;
+    if (state == 11 && static_cast<u32>(otherState) <= 27)
+        ready = false;
+    if (!(flags & 0x40) && ready) {
+        if (flags & 2) {
+            if (channel->state == 35)
+                return ~0u;
+            ActionStateChannels *current = static_cast<ActionStateChannels *>(g_btlAction.data);
+            ActionStateChannel *active = &current->entries[current->entries[0].owner->current];
+            active->state = channel->pending;
+            active->frames = 0;
+            active->pending = 0;
+            active->timer = 0;
+            FUN_003d2140(current);
+            channel->flags &= ~2u;
+            return 0;
+        }
+        if (FUN_003d28d0(static_cast<ActionStateChannels *>(g_btlAction.data), channel->state))
+            channel->flags |= 2;
+        if (channel->frames < 0xFFFF)
+            ++channel->frames;
     }
-    FUN_003d28d0((*(int * *)((unsigned char *)&g_btlAction + 0x4)),(int)(char)piVar3[temp_v3 * 0x3c7 + 2]);
-    if (piVar8 != (int *)0x0) {
-      *puVar11 = *puVar11 | 2;
-    }
-    temp_v0 = *(short *)((int)piVar3 + temp_v3 * 0xf1c + 10);
-    if (temp_v0 != -1) {
-      *(short *)((int)piVar3 + temp_v3 * 0xf1c + 10) = temp_v0 + 1;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

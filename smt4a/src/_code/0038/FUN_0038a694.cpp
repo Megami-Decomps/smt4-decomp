@@ -15,7 +15,7 @@ u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdP
 s32 FUN_0037d4b0(u32 process);
 s32 FUN_0039b960(u32 process);
 s32 FUN_0039b93c(u32 process);
-void FUN_00402e34(HunterDataWork *work);
+void hunterDatabaseLoadResources(HunterDataWork *work);
 extern HunterDataWork *DAT_0057f244;
 
 void FUN_0038a694(void)
@@ -31,6 +31,6 @@ void FUN_0038a694(void)
     taskCreateDraw((const s8 *)"HUNTER_DATA_BASE UL", 126, 0, 0, FUN_0039b960, NULL, 0, (void *)work->process);
     taskCreateDraw((const s8 *)"HUNTER_DATA_BASE UR", 218, 0, 0, FUN_0039b960, NULL, 0, (void *)work->process);
     taskCreateDraw((const s8 *)"HUNTER_DATA_BASE DD", 235, 0, 0, FUN_0039b93c, NULL, 0, (void *)work->process);
-    FUN_00402e34(work);
+    hunterDatabaseLoadResources(work);
 }
 }

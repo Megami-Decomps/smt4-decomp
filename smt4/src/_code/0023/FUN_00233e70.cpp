@@ -1,102 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00233e70` (_code @ 0x233e70, 0x150 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: callback destruction branch factoring and five-word error packet copy registers differ; local tail view preserves transition size. */
+#include "addon/aocMain.h"
+#include "addon/AocHandleJob.h"
+#include "shard/ScreenTransitionState.h"
+#include "nn/Result.h"
 
-extern "C" {
-
-int FUN_00234124(int, int *);
-int FUN_002a116c(void);
-int FUN_002a1200(void);
-int legacyResourceIdRemap(int);
-int FUN_002ba8f4(int);
-int FUN_0038b420(int, unsigned int, unsigned int);
-
-typedef int romwright_code(...);
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-extern int g_aocMain; /* 0x432fc8 */
-
-/* Supplied declaration required: FUN_00234124. */
-extern int queryResultFailureOnly(int);
-/* Supplied declaration required: FUN_002a116c. */
-/* Supplied declaration required: FUN_002a1200. */
-/* Supplied declaration required: legacyResourceIdRemap. */
-/* Supplied declaration required: FUN_002ba8f4. */
-/* Supplied declaration required: FUN_0038b420. */
-
-
-void FUN_00233e70(int param_1,unsigned int param_2,unsigned int param_3)
-
+static inline s32 aocResultLevel(u32 result)
 {
-/* irregular: 1 goto(s); 6 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int uStack_2c;
-  unsigned int uStack_28;
-  unsigned int uStack_24;
-  unsigned int uStack_20;
-  
-  temp_v1 = g_aocMain;
-  FUN_002ba8f4(g_aocMain + 0x88);
-  temp_v0 = legacyResourceIdRemap(param_1 + 0x214);
-  if (temp_v0 != -0x36bec76f) {
-    FUN_0038b420(g_aocMain,*(unsigned int *)(param_1 + 0x214),*(unsigned int *)(param_1 + 0x218));
-    temp_v0 = param_1 + 0x214;
-    FUN_002a1200();
-    if (temp_v0 != 0) {
-      piVar2 = *(int **)(param_1 + 0x208);
-      *(unsigned int *)(param_1 + 4) = 4;
-      *(unsigned int *)(param_1 + 8) = 0;
-    }
-    else {
-      temp_v0 = param_1 + 0x214;
-      FUN_002a116c();
-      if ((temp_v0 != 0) || (temp_v1 = queryResultFailureOnly(temp_v1 + 0x80), -1 >= temp_v1)) {
-        piVar2 = *(int **)(param_1 + 0x208);
-        *(unsigned int *)(param_1 + 4) = 3;
-        *(unsigned int *)(param_1 + 8) = 0;
-      }
-      else {
-        temp_v2 = legacyResourceIdRemap(param_1 + 0x214);
-        temp_v3 = temp_v2 >> 0x1b;
-        if ((temp_v2 & 0x80000000) != 0) {
-          temp_v3 = temp_v3 - 0x20;
-        }
-        if (temp_v3 == 0xfffffffc) {
-LAB_00233fa0:
-          temp_v4 = *(unsigned int *)(param_1 + 0x210);
-          uStack_2c = *(unsigned int *)(param_1 + 0x214);
-          uStack_28 = *(unsigned int *)(param_1 + 0x218);
-          uStack_24 = *(unsigned int *)(param_1 + 0x21c);
-          uStack_20 = *(unsigned int *)(param_1 + 0x220);
-          FUN_00234124(param_1,&temp_v4);
-          return;
-        }
-        temp_v2 = legacyResourceIdRemap(param_1 + 0x214);
-        temp_v3 = temp_v2 >> 0x1b;
-        if ((temp_v2 & 0x80000000) != 0) {
-          temp_v3 = temp_v3 - 0x20;
-        }
-        if ((temp_v3 == 0xfffffffb) || (temp_v1 = legacyResourceIdRemap(param_1 + 0x214), temp_v1 == -0x377ec770))
-        goto LAB_00233fa0;
-        *(unsigned int *)(param_1 + 4) = param_3;
-        piVar2 = *(int **)(param_1 + 0x208);
-        *(unsigned int *)(param_1 + 8) = 0;
-      }
-    }
-    if (piVar2 != (int *)0x0) {
-      (**(romwright_code **)(*piVar2 + 4))();
-      *(unsigned int *)(param_1 + 0x208) = 0;
-    }
-  }
-  return;
+    s32 level = result >> 27;
+    if (result & 0x80000000)
+        level -= 32;
+    return level;
 }
 
-} /* extern "C" */
+extern "C" {
+extern AocMain *g_aocMain;
+void FUN_002ba8f4(AocObjA *operation);
+u32 legacyResourceIdRemap(WindowStatusResult *result);
+void FUN_0038b420(AocMain *main, u32 low, u32 high);
+bool FUN_002a1200(WindowStatusResult *result);
+bool FUN_002a116c(WindowStatusResult *result);
+s32 queryResultFailureOnly(u32 *result);
+void FUN_00234124(ScreenTransitionState *transition, const void *result);
+
+// Select the next transition state or dispatch recoverable addon errors.
+void FUN_00233e70(ScreenTransitionState *transition, u32 unused, u32 nextState)
+{
+    // Result data extends beyond the canonical transition prefix.
+    struct ResultPacket { u32 status; WindowStatusResult handle; u32 details[2]; };
+    struct ResultTransitionView {
+        ScreenTransitionState transition;
+        u32 unk20C;
+        ResultPacket result;
+    };
+    ResultTransitionView *work = reinterpret_cast<ResultTransitionView *>(transition);
+    AocMain *main = g_aocMain;
+    FUN_002ba8f4(&main->objA);
+    if (legacyResourceIdRemap(&work->result.handle) == 0xC9413891)
+        return;
+    FUN_0038b420(g_aocMain, work->result.handle.code, work->result.handle.description);
+    if (FUN_002a1200(&work->result.handle)) {
+        transition->flags = 4;
+        transition->phase = 0;
+    } else if (FUN_002a116c(&work->result.handle) ||
+               nnResultIsFailure(queryResultFailureOnly(&main->operation.queryResult))) {
+        transition->flags = 3;
+        transition->phase = 0;
+    } else {
+        if (aocResultLevel(legacyResourceIdRemap(&work->result.handle)) == -4 ||
+            aocResultLevel(legacyResourceIdRemap(&work->result.handle)) == -5 ||
+            legacyResourceIdRemap(&work->result.handle) == 0xC8813890) {
+            ResultPacket result = work->result;
+            FUN_00234124(transition, &result);
+            return;
+        }
+        transition->flags = nextState;
+        transition->phase = 0;
+    }
+    if (transition->callback != NULL) {
+        transition->callback->vtable->destroy(transition->callback);
+        transition->callback = NULL;
+    }
+}
+}

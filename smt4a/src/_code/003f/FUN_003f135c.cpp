@@ -1,93 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f135c` (_code @ 0x3f135c, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: mask operand registers differ and the shared HP-zero store is folded into the opposite branch. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+
+/* Action flags extend beyond the shared BtlUnitRecordA prefix. */
+struct BattleActionFlagRecordView {
+    u8 unk00[0x2a];
+    u16 hp;
+    u8 unk2C[0x32];
+    u16 playerFlags; /* 0x5e */
+    u16 slotFlags;   /* 0x60 */
+};
 
 extern "C" {
+extern BtlMainGlobalsA g_btlMain;
+void flagsClearActionBits(u16 *flags);
+BattleActionFlagRecordView *gameGetPlayerData(void);
+BattleActionFlagRecordView *gameGetSlotRecord(s32 index);
+BtlPartyBlockA *gameGetSlotTable(void);
 
-int flagsClearActionBits(...);
-int SCARRY4(unsigned int, int);
-
-extern unsigned int DAT_00573978; /* 0x573978 */
-extern unsigned int DAT_0057397c; /* 0x57397c */
-extern unsigned int DAT_00573990; /* 0x573990 */
-extern unsigned int DAT_00573994; /* 0x573994 */
-extern unsigned int DAT_005739a0; /* 0x5739a0 */
-extern unsigned int DAT_005739a4; /* 0x5739a4 */
-
-/* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
-extern int gameGetPlayerData(void);
-extern int gameGetSlotRecord(int);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: flagsClearActionBits. */
-
-
-void FUN_003f135c(int param_1)
-
+void FUN_003f135c(BtlMainStateA *battle)
 {
-/* irregular: 1 goto(s); 2 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int *puVar7;
-  
-  temp_v4 = 0;
-  do {
-    puVar7 = (unsigned int *)(*(int *)(param_1 + 0x1ffc) + temp_v4 * 0x408);
-    if (puVar7 != (unsigned int *)0x0) {
-      temp_v1 = *puVar7;
-      temp_v3 = puVar7[1];
-      if ((((DAT_00573978 & temp_v1) != 0 || (DAT_0057397c & temp_v3) != 0) &&
-          ((DAT_005739a0 & temp_v1) == 0 && (DAT_005739a4 & temp_v3) == 0)) &&
-         ((temp_v3 & DAT_00573994) == 0 && (DAT_00573990 & temp_v1) == 0)) {
-        if (puVar7[0xfe] != 0) {
-          flagsClearActionBits(puVar7[0xfe] + 0x5e);
-          temp_v1 = puVar7[0xfe];
-          temp_v0 = *(unsigned short *)(temp_v1 + 0x5e);
-          if ((temp_v0 & 2) != 0) {
-            *(unsigned short *)(temp_v1 + 0x2a) = 0;
-          }
+    for (s32 i = 0; i < 109; ++i) {
+        BtlCombatantEntryA *entry = &battle->entries[i];
+        if (entry && (g_btlMain.combatantMasks.required & entry->flags) &&
+            !(g_btlMain.exclusionMask & entry->flags) &&
+            !(g_btlMain.actorCategories[2] & entry->flags)) {
+            if (entry->record) {
+                flagsClearActionBits(&((BattleActionFlagRecordView *)entry->record)->playerFlags);
+                BattleActionFlagRecordView *record = (BattleActionFlagRecordView *)entry->record;
+                if (record->playerFlags & 2)
+                    record->hp = 0;
+            } else if (entry->secondaryRecord) {
+                flagsClearActionBits(&((BattleActionFlagRecordView *)entry->secondaryRecord)->slotFlags);
+                BattleActionFlagRecordView *record = (BattleActionFlagRecordView *)entry->secondaryRecord;
+                if (record->slotFlags & 2)
+                    record->hp = 0;
+            } else if (entry->specialMaximum.record) {
+                flagsClearActionBits(&((BattleActionFlagRecordView *)entry->specialMaximum.record)->slotFlags);
+            }
         }
-        else if (puVar7[0xff] != 0) {
-          flagsClearActionBits(puVar7[0xff] + 0x60);
-          temp_v1 = puVar7[0xff];
-          temp_v0 = *(unsigned short *)(temp_v1 + 0x60);
-          if ((temp_v0 & 2) != 0) {
-            *(unsigned short *)(temp_v1 + 0x2a) = 0;
-          }
-        }
-        else if (puVar7[0x100] != 0) {
-          flagsClearActionBits(puVar7[0x100] + 0x60);
-        }
-      }
     }
-    temp_v4 = temp_v4 + 1;
-    if (temp_v4 >= 0x6d) {
-      temp_v4 = gameGetSlotTable();
-      temp_v5 = -1;
-      temp_v1 = (unsigned int)*(unsigned char *)(temp_v4 + 0x1ca3);
-      if (temp_v1 == 0xffffffff || SCARRY4(temp_v1,1)) {
-        return;
-      }
-LAB_003f1464:
-      temp_v2 = gameGetPlayerData();
-      temp_v2 = temp_v2 + 0x5e;
-      do {
-        flagsClearActionBits(temp_v2);
-        do {
-          temp_v5 = temp_v5 + 1;
-          if ((int)(unsigned int)*(unsigned char *)(temp_v4 + 0x1ca3) <= temp_v5) {
-            return;
-          }
-          if (temp_v5 < 0) goto LAB_003f1464;
-          temp_v2 = gameGetSlotRecord(temp_v5);
-        } while (temp_v2 == 0);
-        temp_v2 = temp_v2 + 0x60;
-      } while( 1 );
+    BtlPartyBlockA *party = gameGetSlotTable();
+    for (s32 i = -1; i < party->count; ++i) {
+        if (i < 0) {
+            flagsClearActionBits(&gameGetPlayerData()->playerFlags);
+        } else {
+            BattleActionFlagRecordView *record = gameGetSlotRecord(i);
+            if (record)
+                flagsClearActionBits(&record->slotFlags);
+        }
     }
-  } while( 1 );
 }
-
-} /* extern "C" */
+}

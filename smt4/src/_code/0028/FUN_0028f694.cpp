@@ -1,80 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028f694` (_code @ 0x28f694, 0x1c4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: background-speed subobject addressing and one touch-mode scratch copy differ; the selected cold branch now agrees. */
+#include "camp/RenderCtx.h"
+#include "ui/UiSpriteState.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
+struct SpriteInfo;
+// Coordinate-only view avoids including a conflicting Apocalypse RenderCtx definition.
+struct CampButtonSpriteView { u8 prefix[8]; s16 x, y; s16* size; };
+struct CampButtonAnimationViewIV {
+    CampHelpPrefixIV prefix;
+    u8 unk0AE[0x6B2];
+    UiSpriteState marker;
+    UiSpriteState background;
+};
+// The scissor stack lies beyond the published IV render-context prefix.
+struct CampButtonRenderViewIV {
+    RenderCtx context;
+    u8 unk12CC[0x40];
+    RenderStateStack scissor;
+};
 extern "C" {
+extern CampHelpPrefixIV* g_camp;
+extern RenderCtx* g_titleScene;
+void efctSetSpeed(f32 speed);
+void FUN_002bf380(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
+void FUN_002bf288(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
+s32 ifTouchGetSelectionModeForRegion(u32 region);
+SpriteInfo* FUN_002bf4f8(u32 table, u32 id);
+s32 vec2GetXInt(UiSpriteState* animation);
+s32 vec2GetYInt(UiSpriteState* animation);
+void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, u32 enabled);
 
-int FUN_0029a17c(int, int, int, int, int);
-int FUN_002bf288(...);
-int FUN_002bf380(int, int, int, int, int, int);
-int efctSetSpeed(void);
-
-typedef int romwright_code(...);
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-extern int g_camp; /* 0x43da90 */
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_0029a17c. */
-extern int ifTouchGetSelectionModeForRegion(unsigned int);
-extern int vec2GetYInt(int);
-extern int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf380. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: efctSetSpeed. */
-
-
-void FUN_0028f694(int param_1,int param_2,unsigned int param_3)
-
+void FUN_0028f694(s32 x, s32 y, u32 region)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int *piVar6;
-  
-  temp_v0 = g_camp;
-  efctSetSpeed();
-  FUN_002bf380(2,0x1d,6,param_1,param_2,0x79);
-  efctSetSpeed();
-  FUN_002bf288(2,0x1d,0x429,param_1,param_2,0x7e);
-  temp_v1 = ifTouchGetSelectionModeForRegion(param_3);
-  if (!((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6)) {
-    FUN_002bf288(2,0x1d,0x42a,param_1,param_2,0x83);
-  }
-  else {
-    FUN_002bf288(2,0x1d,0x42b,param_1,param_2,0x83);
-  }
-  temp_v1 = FUN_002bf4f8(0x1d,0x42a);
-  temp_v2 = vec2GetXInt(temp_v0 + 0x760);
-  temp_v3 = vec2GetYInt(temp_v0 + 0x760);
-  temp_v0 = g_titleScene;
-  piVar6 = (int *)(g_titleScene + 0x130c);
-  temp_v4 = piVar6[*piVar6 + 2];
-  piVar6[*piVar6 + 2] = 3;
-  if (*(char *)(temp_v0 + 0x1324) != '\0' || temp_v4 != 3) {
-    (**(romwright_code **)(temp_v0 + 0x1328))();
-    *(unsigned char *)(temp_v0 + 0x1324) = 0;
-  }
-  FUN_0029a17c(*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,
-               (int)**(short **)(temp_v1 + 0xc),(int)(*(short **)(temp_v1 + 0xc))[1],1);
-  FUN_002bf288(2,0x1d,0x42c,param_1 + temp_v2,param_2 + temp_v3,0x88);
-  temp_v0 = g_titleScene;
-  piVar6 = (int *)(g_titleScene + 0x130c);
-  temp_v1 = piVar6[*piVar6 + 2];
-  piVar6[*piVar6 + 2] = 0;
-  if (*(char *)(temp_v0 + 0x1324) != '\0' || temp_v1 != 0) {
-    (**(romwright_code **)(temp_v0 + 0x1328))();
-    *(unsigned char *)(temp_v0 + 0x1324) = 0;
-  }
-  return;
+    CampButtonAnimationViewIV* camp = reinterpret_cast<CampButtonAnimationViewIV*>(g_camp);
+    efctSetSpeed(camp->background.unk20);
+    FUN_002bf380(2, 0x1D, 6, x, y, 0x79);
+    efctSetSpeed(1.0f);
+    FUN_002bf288(2, 0x1D, 0x429, x, y, 0x7E);
+    switch (ifTouchGetSelectionModeForRegion(region)) {
+    case 1:
+    case 2:
+    case 6:
+        FUN_002bf288(2, 0x1D, 0x42B, x, y, 0x83);
+        break;
+    default:
+        FUN_002bf288(2, 0x1D, 0x42A, x, y, 0x83);
+        break;
+    }
+    CampButtonSpriteView* sprite = reinterpret_cast<CampButtonSpriteView*>(FUN_002bf4f8(0x1D, 0x42A));
+    s32 markerX = vec2GetXInt(&camp->marker);
+    s32 markerY = vec2GetYInt(&camp->marker);
+    CampButtonRenderViewIV* context = reinterpret_cast<CampButtonRenderViewIV*>(g_titleScene);
+    renderStackSet(&context->scissor, 3);
+    FUN_0029a17c(sprite->x + x, sprite->y + y, sprite->size[0], sprite->size[1], 1);
+    FUN_002bf288(2, 0x1D, 0x42C, x + markerX, y + markerY, 0x88);
+    context = reinterpret_cast<CampButtonRenderViewIV*>(g_titleScene);
+    renderStackSet(&context->scissor, 0);
 }
-
-} /* extern "C" */
+}

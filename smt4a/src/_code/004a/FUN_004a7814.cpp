@@ -1,67 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a7814` (_code @ 0x4a7814, 0x128 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: alternate/normal number branches are laid out differently; coordinate load order differs. */
+#include "shard/W9_W9Match8_WorkRecords.h"
+
+struct NumericPanelView {
+    u8 unk00[0xc8];
+    u8 layout[1];
+};
+typedef char NumericPanelLayoutOffset[offsetof(NumericPanelView, layout) == 0xc8 ? 1 : -1];
 
 extern "C" {
+void textFormatBuffer(char *, const char *, ...);
+const PanelTextLayoutEntryPrefixA *FUN_0018349c(void *, s32);
+void drawTextAtRelativePosition(void *, u32, s32, s32, u32, u32, u32, u32, const char *);
 
-int textFormatBuffer(unsigned char [44], unsigned char *, int);
-int FUN_0018349c(int, int);
-int drawTextAtRelativePosition(int, int, int, int, int, int, int, int, unsigned char [44]);
-
-/* stack frame of param_5: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_5_stack;
-
-extern unsigned char LAB_004a794c; /* 0x4a794c */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_0018349c. */
-/* Supplied declaration required: drawTextAtRelativePosition. */
-
-
-void FUN_004a7814(int param_1,int param_2,int param_3,int param_4,unsigned long long param_5)
-
+// Draw a value at its row anchor using the wider-number offset for three-digit values.
+void FUN_004a7814(NumericPanelView *panel, s32 value, s32 row, s32 alternate, u32 opacity, u32 color)
 {
-/* irregular: 3 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  short temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6 [44];
-  
-  if (param_4 != 0) {
-    if (param_2 >= 100) {
-      temp_v4 = FUN_0018349c(param_1 + 200,param_3 + 0x42f);
-      temp_v5 = FUN_0018349c(param_1 + 200,0x5c8);
+    const PanelTextLayoutEntryPrefixA *base;
+    const PanelTextLayoutEntryPrefixA *offset;
+    char text[32];
+    if (alternate) {
+        if (value > 99) {
+            base = FUN_0018349c(panel->layout, row + 0x42f);
+            offset = FUN_0018349c(panel->layout, 0x5c8);
+        } else {
+            base = FUN_0018349c(panel->layout, row + 0x42f);
+            offset = FUN_0018349c(panel->layout, 0x497);
+        }
+    } else if (value > 99) {
+        base = FUN_0018349c(panel->layout, row + 0x40e);
+        offset = FUN_0018349c(panel->layout, 0x5c5);
+    } else {
+        base = FUN_0018349c(panel->layout, row + 0x40e);
+        offset = FUN_0018349c(panel->layout, 0x489);
     }
-    else {
-      temp_v4 = FUN_0018349c(param_1 + 200,param_3 + 0x42f);
-      temp_v5 = FUN_0018349c(param_1 + 200,0x497);
-    }
-  }
-  else if (param_2 >= 100) {
-    temp_v4 = FUN_0018349c(param_1 + 200,param_3 + 0x40e);
-    temp_v5 = FUN_0018349c(param_1 + 200,0x5c5);
-  }
-  else {
-    temp_v4 = FUN_0018349c(param_1 + 200,param_3 + 0x40e);
-    temp_v5 = FUN_0018349c(param_1 + 200,0x489);
-  }
-  temp_v0 = *(short *)(temp_v5 + 8);
-  temp_v1 = *(short *)(temp_v4 + 8);
-  temp_v2 = *(short *)(temp_v4 + 10);
-  temp_v3 = *(short *)(temp_v5 + 10);
-  textFormatBuffer(temp_v6,&LAB_004a794c,param_2);
-  drawTextAtRelativePosition(param_1 + 200,0,(int)temp_v1 + (int)temp_v0,(int)temp_v2 + (int)temp_v3,0,7,
-               (int)((unsigned long long)param_5 >> 0x20),(int)param_5,temp_v6);
-  return;
+    s16 offsetX = offset->x;
+    s16 baseX = base->x;
+    s16 baseY = base->y;
+    s16 offsetY = offset->y;
+    s32 x = baseX + offsetX;
+    s32 y = baseY + offsetY;
+    textFormatBuffer(text, "%2d", value);
+    drawTextAtRelativePosition(panel->layout, 0, x, y,
+                               0, 7, color, opacity, text);
 }
-
-} /* extern "C" */
+}

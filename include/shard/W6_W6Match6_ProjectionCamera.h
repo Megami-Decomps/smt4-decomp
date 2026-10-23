@@ -29,12 +29,25 @@ struct CameraLookAt {
     f32 eye[3];
     f32 target[3];
     f32 up[3];
-    u8 unk24[0x10];
+    union {
+        u8 unk24[0x10];
+        struct {
+            f32 fieldOfView; // 0x24, degrees
+            f32 nearClip; // 0x28
+            f32 farClip; // 0x2c
+            f32 aspect; // 0x30
+        } projection;
+    };
     f32 rollRadians; // 0x34
 };
 typedef char CameraLookAtLayoutCheck[sizeof(CameraLookAt) == 0x38 &&
     offsetof(CameraLookAt, target) == 0xC && offsetof(CameraLookAt, up) == 0x18 &&
     offsetof(CameraLookAt, rollRadians) == 0x34 ? 1 : -1];
+typedef char CameraLookAtProjectionOffsetsCheck[
+    offsetof(CameraLookAt, projection.fieldOfView) == 0x24 &&
+    offsetof(CameraLookAt, projection.nearClip) == 0x28 &&
+    offsetof(CameraLookAt, projection.farClip) == 0x2C &&
+    offsetof(CameraLookAt, projection.aspect) == 0x30 ? 1 : -1];
 
 struct ProjectionMatrices {
     u8 unk00[0x38];

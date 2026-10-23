@@ -1,102 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a3400` (_code @ 0x3a3400, 0x190 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: palette-copy registers, render-state push scheduling and bounds-registry base caching differ. */
+#include "camp/RenderCtx.h"
+#include <string.h>
 
+struct DebugBoundsRecord { f32 minimum[3], maximum[3]; u32 id; };
+struct DebugBoundsRegistry { DebugBoundsRecord entries[128]; s32 count; };
+struct DebugBoundsPalette { u8 prefix[0x90]; u32 colors[12]; };
 extern "C" {
+extern DebugBoundsRegistry DAT_006160e0;
+extern const DebugBoundsPalette DAT_00532240;
+extern RenderCtxA *g_renderCtx;
+s32 FUN_001692ac(s32 mode, s32 enabled);
+void FUN_0016c4b8(RenderCtxA *context, s32 mode);
+void FUN_00280a08(f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
+    f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3,
+    u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor);
 
-int FUN_0016c4b8(int, int);
-int FUN_00280a08(unsigned int, unsigned int);
-
-typedef int romwright_code(...);
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp58; /* 0x58: local_58 */
-} void_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-extern int DAT_00616ee0; /* 0x616ee0 */
-
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
-/* Supplied declaration required: FUN_00280a08. */
-
-
-void FUN_003a3400(void)
-
+void FUN_003a3400(f32 height)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  int temp_v3;
-  unsigned int temp_v4 [4];
-  char acStack_48 [4];
-  char acStack_44 [4];
-  char acStack_40 [4];
-  unsigned int uStack_3c;
-  unsigned int temp_v5;
-  unsigned int uStack_34;
-  char acStack_30 [4];
-  unsigned int temp_v6;
-  
-  temp_v3 = g_renderCtx;
-  temp_v4[0] = 0xff000000;
-  temp_v4[1] = 0xff0000;
-  temp_v4[2] = 0xffff0000;
-  temp_v4[3] = 0xff00;
-  acStack_48[0] = '\0';
-  acStack_48[1] = -1;
-  acStack_48[2] = '\0';
-  acStack_48[3] = -1;
-  acStack_44[0] = '\0';
-  acStack_44[1] = -1;
-  acStack_44[2] = -1;
-  acStack_44[3] = '\0';
-  acStack_40[0] = '\0';
-  acStack_40[1] = '\0';
-  acStack_40[2] = '\0';
-  acStack_40[3] = -0x80;
-  uStack_3c = 0x800000;
-  temp_v6 = 0xff8000;
-  temp_v5 = 0xff800000;
-  uStack_34 = 0x8000;
-  acStack_30[0] = '\0';
-  acStack_30[1] = -0x80;
-  acStack_30[2] = '\0';
-  acStack_30[3] = -1;
-  if (DAT_00616ee0 != 0) {
-    temp_v0 = FUN_001692ac(5,1);
-    piVar4 = (int *)(temp_v3 + 0x1258);
-    temp_v1 = *piVar4;
-    temp_v2 = piVar4[temp_v1 + 2];
-    *piVar4 = temp_v1 + 1;
-    piVar4[temp_v1 + 3] = temp_v0;
-    if (*(char *)(temp_v3 + 0x1270) != '\0' || temp_v2 != temp_v0) {
-      (**(romwright_code **)(temp_v3 + 0x1274))();
-      *(unsigned char *)(temp_v3 + 0x1270) = 0;
+    u32 colors[12];
+    memcpy(colors, DAT_00532240.colors, sizeof(colors));
+    if (DAT_006160e0.count != 0) {
+        RenderCtxA *context = g_renderCtx;
+        renderStackPush(&context->stackA, FUN_001692ac(5, 1));
+        FUN_0016c4b8(g_renderCtx, 0);
+        if (DAT_006160e0.count > 0) {
+            height += 100.0f;
+            for (s32 index = 0; index < DAT_006160e0.count; ++index) {
+                const DebugBoundsRecord *bounds = &DAT_006160e0.entries[index];
+                u32 color = colors[index % 12] | 0x70;
+                FUN_00280a08(bounds->minimum[0], height, bounds->minimum[2],
+                    bounds->minimum[0], height, bounds->maximum[2],
+                    bounds->maximum[0], height, bounds->minimum[2],
+                    bounds->maximum[0], height, bounds->maximum[2], color, color, color, color);
+            }
+        }
+        renderStackPop(&g_renderCtx->stackA);
     }
-    FUN_0016c4b8(g_renderCtx,0);
-    temp_v3 = 0;
-    if (temp_v3 < DAT_00616ee0) {
-      do {
-        FUN_00280a08(temp_v4[temp_v3 % 0xc] | 0x70,temp_v4[temp_v3 % 0xc] | 0x70);
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < DAT_00616ee0);
-    }
-    temp_v3 = g_renderCtx;
-    piVar4 = (int *)(g_renderCtx + 0x1258);
-    temp_v0 = *piVar4;
-    temp_v1 = piVar4[temp_v0 + 2];
-    *piVar4 = temp_v0 - 1;
-    if (*(char *)(temp_v3 + 0x1270) != '\0' || temp_v1 != piVar4[temp_v0 + 1]) {
-      (**(romwright_code **)(temp_v3 + 0x1274))();
-      *(unsigned char *)(temp_v3 + 0x1270) = 0;
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

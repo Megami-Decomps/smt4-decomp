@@ -11,7 +11,7 @@ int FUN_00245f48(void);
 int matrixCopySelectedToGlobal(float *);
 int randomAdvanceShiftRegister(...);
 int FUN_0024b830(int);
-int FUN_002a2c7c(void);
+int gfxQuaternionWorkspaceBuildMatrix(void);
 int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -97,7 +97,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
 extern int effGetFrameCounter(void);
-/* Supplied declaration required: FUN_002a2c7c. */
+/* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: __aeabi_uidivmod. */
@@ -189,7 +189,7 @@ void FUN_0031a9f4(fn_0031a9f4_arg0 *param_1)
       DAT_004ea920 = param_1->field_0x14;
       DAT_004ea924 = param_1->field_0x18;
       DAT_004ea928 = param_1->field_0x1c;
-      FUN_002a2c7c();
+      gfxQuaternionWorkspaceBuildMatrix();
       DAT_004ea91c = DAT_00472530;
       DAT_004ea920 = DAT_00472534;
       DAT_004ea924 = DAT_00472538;

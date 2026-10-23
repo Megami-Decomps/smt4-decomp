@@ -1,87 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039ba24` (_code @ 0x39ba24, 0x120 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: version arithmetic scheduling and duplicate-search loop unrolling differ. */
+#include "shard/VersionedResource.h"
 
-extern "C" {
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-} param_3_stack;
-
-
-int FUN_0039ba24(unsigned int *param_1,int param_2,int param_3)
-
+// Enumerate distinct identifiers from a versioned resource's single or indexed payload.
+extern "C" s32 FUN_0039ba24(u32 *ids, s32 capacity, const VersionedResourceHeader *resource)
 {
-/* irregular: 1 goto(s) */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  
-  temp_v0 = (((short)(*(char *)(param_3 + 4) - 0x30) * 1000 + *(char *)(param_3 + 5) * 100 +
-           *(char *)(param_3 + 6) * 10) - 0x14d0) + (int)*(char *)(param_3 + 7);
-  if (*(char *)(param_3 + 10) == '\0') {
-    puVar2 = (unsigned int *)((unsigned int)*(unsigned short *)(param_3 + 8) + param_3);
-    if (temp_v0 >= 0x514) {
-      temp_v1 = puVar2[6];
+    struct HeaderView { VersionedResourceHeader header; u32 payloadSize; };
+    struct LegacyPayload { u32 id; u8 unk04[0xd4]; };
+    struct ModernPayload { u8 unk00[0x18]; u32 id; u8 unk1c[0xd4]; };
+    struct IndexRecord { u32 id; u8 unk04[0x1c]; };
+    const HeaderView *header = reinterpret_cast<const HeaderView *>(resource);
+    s32 version = (s16)(resource->version[0] - '0') * 1000 + resource->version[1] * 100 +
+                  resource->version[2] * 10 - 5328 + resource->version[3];
+    const u8 *payload = reinterpret_cast<const u8 *>(resource) + resource->payloadOffset;
+    if (resource->format == 0) {
+        if (version >= 1300)
+            ids[0] = reinterpret_cast<const ModernPayload *>(payload)->id;
+        else
+            ids[0] = reinterpret_cast<const LegacyPayload *>(payload)->id;
+        return 1;
     }
-    else {
-      temp_v1 = *puVar2;
+    if (resource->format != 1)
+        return 0;
+    u32 size;
+    const u8 *indexData;
+    if (version >= 1300) {
+        indexData = payload + sizeof(ModernPayload);
+        size = header->payloadSize - sizeof(ModernPayload);
+    } else {
+        indexData = payload + sizeof(LegacyPayload);
+        size = header->payloadSize - sizeof(LegacyPayload);
     }
-    *param_1 = temp_v1;
-    return 1;
-  }
-  if (*(char *)(param_3 + 10) != '\x01') {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v5 = (unsigned int)*(unsigned short *)(param_3 + 8) + param_3;
-    if (temp_v0 >= 0x514) {
-      temp_v5 = temp_v5 + 0xf0;
+    if (version >= 1100) {
+        indexData += sizeof(u32);
+        if (version >= 1200)
+            size -= sizeof(u32);
     }
-    else {
-      temp_v5 = temp_v5 + 0xd8;
-    }
-    temp_v6 = 0x44c;
-    if (temp_v0 >= 0x514) {
-      temp_v2 = *(int *)(param_3 + 0xc) - 0xf0;
-    }
-    else {
-      temp_v2 = *(int *)(param_3 + 0xc) - 0xd8;
-    }
-    if ((temp_v0 >= 1100) && (temp_v5 = temp_v5 + 4, temp_v0 >= 0x4b0)) {
-      temp_v2 = temp_v2 - 4;
-    }
-    temp_v0 = 0;
-    temp_v4 = 0;
-    if (temp_v2 >> 5 != 0) {
-      do {
-        if (param_2 <= temp_v0) {
-          return temp_v0;
+    const IndexRecord *records = reinterpret_cast<const IndexRecord *>(indexData);
+    s32 count = 0;
+    for (s32 index = 0; index < static_cast<s32>(size / sizeof(IndexRecord)); ++index) {
+        if (count >= capacity)
+            return count;
+        s32 previous;
+        for (previous = 0; previous < count; ++previous) {
+            if (ids[previous] == records[index].id)
+                break;
         }
-        if (0 < temp_v0) {
-          temp_v6 = *(int *)(temp_v5 + temp_v4 * 0x20);
-        }
-        temp_v3 = 0;
-        if (temp_v3 < temp_v0) {
-          do {
-            if (param_1[temp_v3] == temp_v6) goto LAB_0039bb0c;
-            temp_v3 = temp_v3 + 1;
-          } while (temp_v3 < temp_v0);
-        }
-        param_1[temp_v0] = *(unsigned int *)(temp_v5 + temp_v4 * 0x20);
-        temp_v0 = temp_v0 + 1;
-LAB_0039bb0c:
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < (int)(temp_v2 >> 5));
+        if (previous == count)
+            ids[count++] = records[index].id;
     }
-  }
-  return temp_v0;
+    return count;
 }
-
-} /* extern "C" */

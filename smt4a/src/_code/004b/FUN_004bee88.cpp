@@ -14,7 +14,7 @@ int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_0018408c(...);
 int FUN_004bde34(...);
-int FUN_004be36c(...);
+int uiDrawSelectedSpriteIndicator(...);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -40,7 +40,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018408c. */
 extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: FUN_004bde34. */
-/* Supplied declaration required: FUN_004be36c. */
+/* Supplied declaration required: uiDrawSelectedSpriteIndicator. */
 
 
 void FUN_004bee88(int param_1,int param_2,int param_3)
@@ -81,7 +81,7 @@ void FUN_004bee88(int param_1,int param_2,int param_3)
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 0xc);
   if (temp_v0 >= 1) {
-    FUN_004be36c(param_1,param_2,param_3);
+    uiDrawSelectedSpriteIndicator(param_1,param_2,param_3);
   }
   else {
     efctSetSpeed();

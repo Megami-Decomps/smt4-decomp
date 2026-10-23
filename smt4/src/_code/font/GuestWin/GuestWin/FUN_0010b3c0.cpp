@@ -1,75 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010b3c0` (_code @ 0x10b3c0, 0x138 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: paramsInit size-argument scheduling adds one move, shifting the literal pool. */
+#include "font/GuestWin/GuestWin.h"
+#include "sys/Task.h"
+#include "AsdSDK/AsdDebug.h"
 
+// The UI object extends past the shared guest-window prefix.
+struct GuestWinAllocationView {
+    GuestWinWork prefix;
+    /* 0x50 */ u8 uiTail[0x6C];
+};
+struct GuestWinParameterDefaults {
+    u8 first[0x18];
+    u8 second[0x18];
+    u8 geometry[0x70];
+};
 extern "C" {
+extern GuestWinWork* g_guestWin;
+extern const GuestWinParameterDefaults DAT_00403964;
+void* asdMemAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
+void memClear(void* memory, u32 size);
+u32 asdProcessCreateSimple(const char* name, u32 priority, u32 size, u32 flags,
+                           TaskFunc update, TaskFunc destroy, void* work);
+u32 taskCreateDraw(const char* name, u32 priority, u32 size, u32 flags,
+                   TaskFunc update, TaskFunc destroy, void* work, u32 parent);
+void guestWinUpdate(void* work);
+void FUN_0011aa94(void* work);
+void drawParameterBlockClear(void* parameters);
+void paramsInit(void* parameters, const void* first, u32 firstSize, const void* second,
+                u32 secondSize, const void* third, u32 thirdSize, const void* fourth,
+                u32 fourthSize, const void* fifth, u32 fifthSize);
+void FUN_002bd954(void* object, s32 category, s32 resource, void* parameters, u32 enabled, f32 scale);
+void FUN_002bee58(void* object, s32 state);
 
-int FUN_002bd954(...);
-int FUN_002bee58(...);
-int paramsInit(...);
-int memClear(...);
-int asdMemAlloc(...);
-int taskCreateDraw(...);
-int asdProcessCreateSimple(...);
-int drawParameterBlockClear(...);
-
-/* stack frame of void: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
-
-extern unsigned char LAB_0010b538; /* 0x10b538 */
-extern unsigned char LAB_0010b54c; /* 0x10b54c */
-extern unsigned char LAB_0010b560; /* 0x10b560 */
-extern int FUN_0011aa94(...); /* 0x11aa94 */
-extern int guestWinUpdate(...); /* 0x11b208 */
-extern unsigned char DAT_00403964; /* 0x403964 */
-extern unsigned char DAT_0040397c; /* 0x40397c */
-extern unsigned char DAT_00403994; /* 0x403994 */
-extern unsigned int *g_guestWin; /* 0x43e110 */
-
-/* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: drawParameterBlockClear. */
-
-
+// Allocate and initialize the guest message window and its calculation/stereo drawing tasks.
 void FUN_0010b3c0(void)
-
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  
-  if (g_guestWin == (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)0x100;
-    asdMemAlloc(0x100,0x100,0,0xbc,1);
-    g_guestWin = puVar1;
-  }
-  puVar1 = g_guestWin;
-  memClear();
-  puVar2 = &LAB_0010b538;
-  asdProcessCreateSimple(&LAB_0010b538,1,0,0,guestWinUpdate,0,0);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_0010b54c,0x81,0,0,FUN_0011aa94,0,0,puVar2);
-  taskCreateDraw(&LAB_0010b560,0xdf,0,0,FUN_0011aa94,0,0,*puVar1);
-  puVar1 = g_guestWin;
-  drawParameterBlockClear(g_guestWin + 4);
-  paramsInit(puVar1 + 4,&DAT_00403964,0x18,&DAT_0040397c,0x18,0,0,0,0,&DAT_00403994,0x70);
-  FUN_002bd954(puVar1 + 0xc,0xe,0x87,puVar1 + 4,1);
-  FUN_002bee58(puVar1 + 0xc,0);
-  return;
+    if (g_guestWin == NULL) {
+        asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\font\\GuestWin\\GuestWin.cpp", 245);
+        g_guestWin = static_cast<GuestWinWork*>(asdMemAlloc(0x100, 0x100, 0,
+            sizeof(GuestWinAllocationView), 1));
+    }
+    GuestWinWork* work = g_guestWin;
+    memClear(work, sizeof(GuestWinAllocationView));
+    work->job = asdProcessCreateSimple("GuestWin Calc", 1, 0, 0, guestWinUpdate, NULL, NULL);
+    taskCreateDraw("GuestWin DrawUpLeft", 0x81, 0, 0, FUN_0011aa94, NULL, NULL, work->job);
+    taskCreateDraw("GuestWin DrawUpRight", 0xDF, 0, 0, FUN_0011aa94, NULL, NULL, work->job);
+    work = g_guestWin;
+    drawParameterBlockClear(work->unk10);
+    paramsInit(work->unk10, DAT_00403964.first, sizeof(DAT_00403964.first),
+        DAT_00403964.second, sizeof(DAT_00403964.second), NULL, 0, NULL, 0,
+        DAT_00403964.geometry, sizeof(DAT_00403964.geometry));
+    FUN_002bd954(work->ui, 14, 0x87, work->unk10, 1, 1.0f);
+    FUN_002bee58(work->ui, 0);
 }
-
-} /* extern "C" */
+}

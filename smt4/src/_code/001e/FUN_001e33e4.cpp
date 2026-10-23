@@ -1,68 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e33e4` (_code @ 0x1e33e4, 0x10c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scalar vector subtraction load grouping, float comparisons, and loop branch layout differ. */
+#include "shard/W6_W6Match2_VectorQueue.h"
 
 extern "C" {
+extern VectorQueueWork *g_vectorQueueWork;
+f32 mathDistanceBetweenPoints(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 
-int mathDistanceBetweenPoints(void);
-
-extern int g_vectorQueueWork; /* 0x447e40 */
-
-/* Supplied declaration required: mathDistanceBetweenPoints. */
-
-
+// Finish the active path by storing each point's direction toward its predecessor.
 void FUN_001e33e4(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  
-  temp_v0 = 0;
-  temp_v1 = g_vectorQueueWork + *(int *)(g_vectorQueueWork + 0x2840) * 0x284;
-  if (0 < *(int *)(temp_v1 + 0x280)) {
-    temp_v6 = 0.0f;
-    temp_v7 = 1.0f;
-    do {
-      puVar1 = (unsigned int *)(temp_v1 + temp_v0 * 0x28);
-      if (temp_v0 != 0) {
-        *puVar1 = *puVar1 | 1;
-        temp_v2 = (float)puVar1[1];
-        mathDistanceBetweenPoints();
-        if (temp_v2 < temp_v6) {
-          temp_v2 = -temp_v2;
+    VectorQueue *queue = &g_vectorQueueWork->queues[g_vectorQueueWork->activeQueue];
+    for (s32 index = 0; index < (s32)queue->count; ++index) {
+        QueuedVector *point = &queue->entries[index];
+        if (index != 0) {
+            point->kind |= 1;
+            QueuedVector *previous = point - 1;
+            f32 distance = mathDistanceBetweenPoints(point->x, point->y, point->z,
+                                                      previous->x, previous->y, previous->z);
+            if (distance < 0.0f)
+                distance = -distance;
+            f32 x = previous->x - point->x;
+            f32 y = previous->y - point->y;
+            f32 z = previous->z - point->z;
+            if (distance != 0.0f) {
+                f32 inverseDistance = 1.0f / distance;
+                x *= inverseDistance;
+                y *= inverseDistance;
+                z *= inverseDistance;
+            }
+            point->direction.x = x;
+            point->direction.y = y;
+            point->direction.z = z;
+        } else {
+            point->kind |= ~1U;
+            point->direction.x = 0.0f;
+            point->direction.y = 0.0f;
+            point->direction.z = 0.0f;
         }
-        temp_v3 = (float)puVar1[-9] - (float)puVar1[1];
-        temp_v4 = (float)puVar1[-8] - (float)puVar1[2];
-        temp_v5 = (float)puVar1[-7] - (float)puVar1[3];
-        if (temp_v2 != temp_v6) {
-          temp_v2 = temp_v7 / temp_v2;
-          temp_v3 = temp_v3 * temp_v2;
-          temp_v4 = temp_v4 * temp_v2;
-          temp_v5 = temp_v5 * temp_v2;
-        }
-        puVar1[4] = (unsigned int)temp_v3;
-        puVar1[5] = (unsigned int)temp_v4;
-        puVar1[6] = (unsigned int)temp_v5;
-      }
-      else {
-        *puVar1 = *puVar1 | 0xfffffffe;
-        puVar1[4] = (unsigned int)temp_v6;
-        puVar1[5] = (unsigned int)temp_v6;
-        puVar1[6] = (unsigned int)temp_v6;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(int *)(temp_v1 + 0x280));
-  }
-  *(int *)(g_vectorQueueWork + 0x2840) = *(int *)(g_vectorQueueWork + 0x2840) + 1;
-  return;
+    }
+    ++g_vectorQueueWork->activeQueue;
 }
-
-} /* extern "C" */
+}

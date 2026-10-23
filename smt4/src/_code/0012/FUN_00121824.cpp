@@ -1,83 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00121824` (_code @ 0x121824, 0x14c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: read-count scratch is at +96 rather than +120; suppress-errors addressing, path-loop rotation and return sharing differ; 78 versus retail 83 instructions. */
+#include "nw/snd/SoundArchiveDisk.h"
 
 extern "C" {
+s32 FUN_00130320(NativeFileReader *reader, const s8 *path, s32 suppressErrors);
+s32 FUN_002b4e00(NativeFileReader *reader, void *buffer, u32 bytes, u32 *readBytes);
+void FUN_00130e50(ArchiveFileHeader *header, const void *buffer);
+void FUN_0012f5ac(SoundArchiveDiskIV *archive, const ArchiveFileHeader *header);
+u32 libc_strlen(const s8 *path);
+void nw_snd_SoundArchive_SetExternalFileRoot(SoundArchiveDiskIV *archive, const s8 *root);
 
-int FUN_0012f5ac(int, int);
-int FUN_00130e50(int, unsigned char [96]);
-int FUN_002b4e00(int, unsigned char [96], int, int [34]);
-int nw_snd_SoundArchive_SetExternalFileRoot(int, char *);
-
-/* Supplied declaration required: FUN_0012f5ac. */
-extern int FUN_00130320(int, char *, int);
-/* Supplied declaration required: FUN_00130e50. */
-/* Supplied declaration required: FUN_002b4e00. */
-extern unsigned int libc_strlen(char *);
-/* Supplied declaration required: nw_snd_SoundArchive_SetExternalFileRoot. */
-
-
-unsigned int FUN_00121824(int param_1,char *param_2)
-
+// Open a CSAR file, initialize its header and derive the external-file root from its path.
+u32 FUN_00121824(SoundArchiveDiskIV *archive, const s8 *path)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  char *pcVar4;
-  char *pcVar5;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  char acStack_119 [25];
-  unsigned char temp_v5 [96];
-  int aiStack_a0 [34];
-  
-  temp_v1 = FUN_00130320(param_1 + 0x10c,param_2,(int)*(char *)(param_1 + 0x181));
-  if (temp_v1 == 0) {
-    *(unsigned int *)(param_1 + 0x170) = *(unsigned int *)(param_1 + 0x124);
-    return 0;
-  }
-  *(unsigned char *)(param_1 + 0x180) = 1;
-  temp_v1 = param_1 + 0x10c;
-  aiStack_a0[0] = 0;
-  FUN_002b4e00(temp_v1,temp_v5,0x40,aiStack_a0);
-  if (temp_v1 == 0) {
-    *(unsigned int *)(param_1 + 0x170) = *(unsigned int *)(param_1 + 0x124);
-  }
-  else if (aiStack_a0[0] == 0x40) {
-    FUN_00130e50(param_1 + 300,temp_v5);
-    FUN_0012f5ac(param_1,param_1 + 300);
-    temp_v2 = libc_strlen(param_2);
-    do {
-      temp_v0 = temp_v2;
-      temp_v2 = temp_v0 - 1;
-      if ((int)temp_v2 < 0) {
-        return 1;
-      }
-    } while (param_2[temp_v2] != '/' && param_2[temp_v2] != '\\');
-    if ((int)temp_v2 < 0x100) {
-      temp_v3 = 0;
-      pcVar4 = acStack_119 + 1;
-      do {
-        temp_v4 = temp_v2;
-        if (temp_v2 >= 0xff) {
-          temp_v4 = 0xff;
-        }
-        pcVar5 = pcVar4;
-        if (temp_v4 <= temp_v3) break;
-        temp_v3 = temp_v3 + 1;
-        pcVar5 = pcVar4 + 1;
-        *pcVar4 = *param_2;
-        param_2 = param_2 + 1;
-        pcVar4 = pcVar5;
-      } while (*param_2 != '\0');
-      *pcVar5 = '\0';
-      acStack_119[temp_v0] = '\0';
-      nw_snd_SoundArchive_SetExternalFileRoot(param_1,acStack_119 + 1);
-      return 1;
+    // Header I/O and root extraction are disjoint phases of the same scratch workspace.
+    union ArchiveOpenScratch {
+        struct { u8 storage[64 + 31]; u32 readBytes; } header;
+        s8 directory[256];
+    } scratch;
+    if (!FUN_00130320(&archive->reader, path, archive->suppressErrors)) {
+        archive->result = archive->reader.result;
+        return 0;
     }
-  }
-  return 0;
+    archive->opened = 1;
+    {
+        void *header = reinterpret_cast<void *>((reinterpret_cast<u32>(scratch.header.storage) + 31) & ~31u);
+        scratch.header.readBytes = 0;
+        if (!FUN_002b4e00(&archive->reader, header, 64, &scratch.header.readBytes)) {
+            archive->result = archive->reader.result;
+            return 0;
+        }
+        if (scratch.header.readBytes != 64)
+            return 0;
+        FUN_00130e50(&archive->header, header);
+        FUN_0012f5ac(archive, &archive->header);
+    }
+    s32 separator = libc_strlen(path);
+    do {
+        if (--separator < 0)
+            return 1;
+    } while (path[separator] != '/' && path[separator] != '\\');
+    if (separator >= 256)
+        return 0;
+    s8 *destination = scratch.directory;
+    u32 copied = 0;
+    do {
+        u32 limit = static_cast<u32>(separator) < 255u ? static_cast<u32>(separator) : 255u;
+        if (copied >= limit)
+            break;
+        ++copied;
+        *destination++ = *path++;
+    } while (*path);
+    *destination = 0;
+    scratch.directory[separator] = 0;
+    nw_snd_SoundArchive_SetExternalFileRoot(archive, scratch.directory);
+    return 1;
 }
-
-} /* extern "C" */
+}

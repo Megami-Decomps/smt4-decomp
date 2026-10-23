@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002113c0` (_code @ 0x2113c0, 0x138 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: retail inlines SVC 0x23 when closing the thread handle; inline supervisor calls are prohibited. */
 #include "romwright_types.h"
 
 extern "C" {

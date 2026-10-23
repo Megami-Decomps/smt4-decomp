@@ -1,78 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00338fb0` (_code @ 0x338fb0, 0x124 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retained-id scan unrolling, owner register allocation, and final mask stores differ. */
+#include "common.h"
+#include <stddef.h>
 
-extern "C" {
+extern "C" void FUN_00294f64(void *model);
+extern "C" void asdMemFree(void *memory);
+extern "C" void memClear(void *memory, u32 size);
 
-int FUN_00294f64(int);
-int asdMemFree(void);
-int memClear(int, int);
-
-/* Supplied declaration required: FUN_00294f64. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: memClear. */
-
-
-void FUN_00338fb0(int param_1)
-
+// Release unreferenced cached models and clear their transient battle records.
+extern "C" void FUN_00338fb0(void *context)
 {
-/* irregular: 1 goto(s); 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int *puVar8;
-  int temp_v7;
-  unsigned char temp_v8;
-  
-  if (*(int *)(param_1 + 0x2f38) != 0) {
-    asdMemFree();
-    *(int *)(param_1 + 0x2f38) = 0;
-  }
-  temp_v7 = 0;
-  do {
-    temp_v6 = 0;
-    temp_v0 = param_1 + temp_v7 * 4;
-    do {
-      temp_v5 = *(int *)(temp_v0 + 0x2134);
-      if ((temp_v5 != 0) && (*(int *)(temp_v5 + 4) == *(int *)(param_1 + temp_v6 * 0x48 + 0x3580))) {
-        temp_v2 = (int)(short)*(int *)(temp_v5 + 4);
-        temp_v1 = 0;
-        do {
-          temp_v3 = param_1 + temp_v1 * 2;
-          temp_v4 = temp_v3 + 0x2100;
-          temp_v8 = *(short *)(temp_v3 + 0x21dc) == temp_v2;
-          if (!temp_v8) {
-            temp_v4 = (int)*(short *)(temp_v3 + 0x21de);
-          }
-          if (temp_v8 || temp_v4 == temp_v2) goto LAB_0033904c;
-          temp_v1 = temp_v1 + 2;
-        } while (temp_v1 < 0x2a);
-        FUN_00294f64(temp_v5);
-        *(unsigned int *)(temp_v0 + 0x2134) = 0;
-      }
-LAB_0033904c:
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < 0x32);
-    temp_v7 = temp_v7 + 1;
-    if (temp_v7 >= 0x2a) {
-      memClear(param_1 + 0x357c,0xe10);
-      temp_v7 = 0;
-      temp_v0 = 0x2a;
-      do {
-        *(unsigned int *)(*(int *)(param_1 + 0x1e98) + temp_v7 * 0x114 + 0x488c) = 0;
-        puVar8 = (unsigned int *)(*(int *)(param_1 + 0x1fc0) + temp_v7 * 0x288 + 0xa998);
-        temp_v0 = temp_v0 - 1;
-        *puVar8 = 0;
-        puVar8[1] = 0;
-        temp_v7 = temp_v7 + 1;
-      } while (temp_v0 != 0);
-      return;
+    struct CachedModel { u32 unk00; s32 id; };
+    struct PendingModel { u32 unk00; s32 id; u8 unk08[0x40]; };
+    struct ActionFlag { u32 flags; u8 unk04[0x110]; };
+    struct ActionFlags { u8 unk0000[0x488c]; ActionFlag entries[42]; };
+    struct UnitMask { u32 words[2]; u8 unk08[0x280]; };
+    struct UnitMasks { u8 unk0000[0xa998]; UnitMask entries[42]; };
+    struct CacheView {
+        u8 unk0000[0x1e98];
+        ActionFlags *actions; // 0x1e98
+        u8 unk1e9c[0x124];
+        UnitMasks *units; // 0x1fc0
+        u8 unk1fc4[0x170];
+        CachedModel *models[42]; // 0x2134
+        s16 retainedIds[42]; // 0x21dc
+        u8 unk2230[0xd08];
+        void *allocation; // 0x2f38
+        u8 unk2f3c[0x640];
+        PendingModel pending[50]; // 0x357c
+    };
+    typedef char LayoutCheck[offsetof(CacheView, models) == 0x2134 &&
+        offsetof(CacheView, retainedIds) == 0x21dc &&
+        offsetof(CacheView, allocation) == 0x2f38 && offsetof(CacheView, pending) == 0x357c ? 1 : -1];
+    // All cache fields extend beyond the shared battle-state prefix.
+    CacheView *cache = static_cast<CacheView *>(context);
+    if (cache->allocation != NULL) {
+        asdMemFree(cache->allocation);
+        cache->allocation = NULL;
     }
-  } while( 1 );
+    for (s32 slot = 0; slot < 42; ++slot) {
+        for (s32 pending = 0; pending < 50; ++pending) {
+            CachedModel *model = cache->models[slot];
+            if (model != NULL && model->id == cache->pending[pending].id) {
+                s32 retained;
+                for (retained = 0; retained < 42; retained += 2) {
+                    if (cache->retainedIds[retained] == static_cast<s16>(model->id) ||
+                        cache->retainedIds[retained + 1] == static_cast<s16>(model->id))
+                        break;
+                }
+                if (retained == 42) {
+                    FUN_00294f64(model);
+                    cache->models[slot] = NULL;
+                }
+            }
+        }
+    }
+    memClear(cache->pending, sizeof(cache->pending));
+    for (s32 index = 0; index < 42; ++index) {
+        cache->actions->entries[index].flags = 0;
+        cache->units->entries[index].words[0] = 0;
+        cache->units->entries[index].words[1] = 0;
+    }
 }
-
-} /* extern "C" */

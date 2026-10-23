@@ -1,60 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036a33c` (_code @ 0x36a33c, 0x130 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: flag-test form, basis alias reloads and floating normalization/cross-product scheduling differ. */
+#include "shard/W4_Match1b_Node.h"
+#include <math.h>
 
-extern "C" {
+extern "C" f32 g_nodeMinimumBasisLengthSquared;
 
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+/* Rebuild an orthonormal node basis unless the node preserves its supplied basis. */
+extern "C" u32 FUN_0036a33c(NodeTransform *transform)
 {
-    return (float)sqrt((double)value);
-}
-#endif
-
-
-unsigned int FUN_0036a33c(float *param_1)
-
-{
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  
-  if ((~(unsigned int)param_1[0xf] & 0x10) != 0) {
-    temp_v3 = param_1[4];
-    temp_v0 = param_1[1] * param_1[6] - param_1[2] * param_1[5];
-    temp_v1 = param_1[2] * temp_v3 - *param_1 * param_1[6];
-    temp_v3 = *param_1 * param_1[5] - param_1[1] * temp_v3;
-    param_1[8] = temp_v0;
-    param_1[9] = temp_v1;
-    param_1[10] = temp_v3;
-    temp_v2 = *param_1;
-    temp_v4 = param_1[1];
-    temp_v0 = temp_v0 * temp_v0 + temp_v1 * temp_v1 + temp_v3 * temp_v3;
-    temp_v3 = temp_v2 * temp_v2 + temp_v4 * temp_v4 + param_1[2] * param_1[2];
-    if ((temp_v3 < 1e-06f) || (temp_v0 < 1e-06f)) {
-      return 0;
+    if (!(transform->flags & 0x10)) {
+        f32 (*m)[4] = transform->m;
+        f32 x = m[0][1] * m[1][2] - m[0][2] * m[1][1];
+        f32 y = m[0][2] * m[1][0] - m[0][0] * m[1][2];
+        f32 z = m[0][0] * m[1][1] - m[0][1] * m[1][0];
+        m[2][0] = x;
+        m[2][1] = y;
+        m[2][2] = z;
+        f32 crossLengthSquared = x * x + y * y + z * z;
+        f32 firstX = m[0][0], firstY = m[0][1];
+        f32 firstLengthSquared = firstX * firstX + firstY * firstY + m[0][2] * m[0][2];
+        if (firstLengthSquared < g_nodeMinimumBasisLengthSquared ||
+            crossLengthSquared < g_nodeMinimumBasisLengthSquared)
+            return 0;
+        f32 inverseLength = 1.0f / sqrtf(firstLengthSquared);
+        m[0][0] = firstX * inverseLength;
+        m[0][1] = firstY * inverseLength;
+        m[0][2] *= inverseLength;
+        inverseLength = 1.0f / sqrtf(crossLengthSquared);
+        x = m[2][0] * inverseLength;
+        m[2][0] = x;
+        y = m[2][1] * inverseLength;
+        m[2][1] = y;
+        z = m[2][2] * inverseLength;
+        m[2][2] = z;
+        m[1][0] = y * m[0][2] - z * m[0][1];
+        m[1][1] = z * m[0][0] - x * m[0][2];
+        m[1][2] = x * m[0][1] - y * m[0][0];
+        transform->flags |= 0x800;
     }
-    temp_v3 = 1.0f / romwright_sqrt_4(temp_v3);
-    *param_1 = temp_v2 * temp_v3;
-    param_1[1] = temp_v4 * temp_v3;
-    param_1[2] = param_1[2] * temp_v3;
-    temp_v0 = 1.0f / romwright_sqrt_4(temp_v0);
-    temp_v3 = param_1[8] * temp_v0;
-    param_1[8] = temp_v3;
-    temp_v1 = param_1[9] * temp_v0;
-    param_1[9] = temp_v1;
-    temp_v0 = param_1[10] * temp_v0;
-    param_1[10] = temp_v0;
-    param_1[4] = temp_v1 * param_1[2] - temp_v0 * param_1[1];
-    param_1[5] = temp_v0 * *param_1 - temp_v3 * param_1[2];
-    param_1[6] = temp_v3 * param_1[1] - temp_v1 * *param_1;
-    param_1[0xf] = (float)((unsigned int)param_1[0xf] | 0x800);
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */

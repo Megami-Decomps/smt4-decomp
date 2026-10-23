@@ -1,77 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00208a34` (_code @ 0x208a34, 0x128 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "ui/ScreenWindowTransition.h"
+#include "gamedata/DataTable.h"
+#include "addon/aocMain.h"
 extern "C" {
+extern ScreenWindowTransition *g_sWin;
+extern AocSystemA *g_aocSystem;
+s32 FUN_001517b4(s32 category, s32 mode);
+s32 FUN_00163fd4(u32 state);
+s32 FUN_002321f8(const void *key, const void *entry);
+void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+s32 aocRunByName(AocSystemA *system, s32 table, s32 node, u32 enabled);
+void FUN_001a6568(AocSystemA *system, s32 table, s32 node, u32 heap);
+void asdTMTexLoadMainHeap(s32 table, s32 node);
 
-int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
-int FUN_001517b4(int, int);
-int FUN_001a6568(unsigned int, int, int, int);
-int asdTMTexLoadMainHeap(int, int);
-
-/* stack frame of param_2: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern unsigned char LAB_002321f8; /* 0x2321f8 */
-extern unsigned int g_aocSystem; /* 0x570280 */
-extern int g_sWin; /* 0x57f57c */
-
-/* Supplied declaration required: libc_bsearch. */
-/* Supplied declaration required: FUN_001517b4. */
-extern int FUN_00163fd4(unsigned int);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-extern int aocRunByName(unsigned int, unsigned int, int, unsigned int);
-/* Supplied declaration required: FUN_001a6568. */
-/* Supplied declaration required: asdTMTexLoadMainHeap. */
-
-
-void FUN_00208a34(int param_1,unsigned int param_2)
-
+/* Select a new screen-window skin, loading its texture from base or add-on content. */
+void FUN_00208a34(s32 window, u32 flags)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned short *puVar5;
-  int temp_v4;
-  unsigned short temp_v5 [2];
-  
-  temp_v0 = g_sWin;
-  if (*(int *)(g_sWin + 0x14) != param_1) {
-    temp_v1 = 9;
-    FUN_001517b4(9,2);
-    if ((temp_v1 != 0) || (temp_v1 = FUN_00163fd4(6), temp_v1 != 0)) {
-      param_2 = 0;
+    ScreenWindowTransition *work = g_sWin;
+    if (work->current != window) {
+        if (FUN_001517b4(9, 2) || FUN_00163fd4(6))
+            flags = 0;
+        work->previous = work->current;
+        g_sWin->current = window;
+        void *section = dataTableGet(0x47, 0);
+        const void *entries = dataTableGetEntries(section);
+        u32 count = dataTableGetCount(section);
+        u16 id = window;
+        const ScreenWindowTextureRecord *record = static_cast<const ScreenWindowTextureRecord *>(
+            libc_bsearch(&id, entries, count, sizeof(ScreenWindowTextureRecord), FUN_002321f8));
+        if (record != NULL && record->texture >= 0) {
+            s32 node = record->texture;
+            if (aocRunByName(g_aocSystem, 0x34, node, 1))
+                FUN_001a6568(g_aocSystem, 0x34, node, 0x10000);
+            else
+                asdTMTexLoadMainHeap(0x34, node);
+        }
+        work->state = 4;
+        work->frame = 0;
+        work->transition = 0;
+        work->flags = flags;
     }
-    *(unsigned int *)(temp_v0 + 0x18) = *(unsigned int *)(temp_v0 + 0x14);
-    *(int *)(g_sWin + 0x14) = param_1;
-    temp_v2 = dataTableGet(0x47,0);
-    temp_v3 = dataTableGetEntries();
-    temp_v2 = dataTableGetCount(temp_v2);
-    puVar5 = temp_v5;
-    temp_v5[0] = (unsigned short)param_1;
-    libc_bsearch(puVar5,temp_v3,temp_v2,4,&LAB_002321f8);
-    if ((puVar5 != (unsigned short *)0x0) && (temp_v1 = (int)(short)puVar5[1], -1 < temp_v1)) {
-      temp_v4 = aocRunByName(g_aocSystem,0x34,temp_v1,1);
-      if (temp_v4 != 0) {
-        FUN_001a6568(g_aocSystem,0x34,temp_v1,0x10000);
-      }
-      else {
-        asdTMTexLoadMainHeap(0x34,temp_v1);
-      }
-    }
-    *(unsigned int *)(temp_v0 + 8) = 4;
-    *(unsigned int *)(temp_v0 + 0xc) = 0;
-    *(unsigned int *)(temp_v0 + 0x1c) = 0;
-    *(unsigned int *)(temp_v0 + 0x20) = param_2;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

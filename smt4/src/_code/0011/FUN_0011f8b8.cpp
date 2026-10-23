@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011f8b8` (_code @ 0x11f8b8, 0x110 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: needs the native texture class/constructor at FUN_0012c628 and its texture-description value type. */
 #include "romwright_types.h"
 
 extern "C" {

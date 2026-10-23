@@ -2,6 +2,7 @@
 #define SHARD_W6_W6MATCH7_FONTRESOURCE_H
 
 #include "shard/S2NwFont.h"
+#include <stddef.h>
 
 struct NwFontFileHeader {
     /* 0x00 */ u32 signature;
@@ -12,6 +13,21 @@ struct NwFontFileHeader {
     /* 0x10 */ u16 blockCount;
     /* 0x12 */ u16 reserved;
 };
+
+struct NwFontBlockHeader {
+    u32 signature;
+    u32 byteSize;
+};
+struct NwFontCharacterMap {
+    u16 first;
+    u16 last;
+    u16 method;
+    u16 reserved;
+    NwFontCharacterMap *next;
+};
+typedef char NwFontBinaryBlockOffsets[sizeof(NwFontBlockHeader) == 8 &&
+    offsetof(NwFontCharacterMap, next) == 8 &&
+    sizeof(NwFontCharacterMap) == 0xC ? 1 : -1];
 
 struct FontGlyphLookup;
 struct FontGlyphLookupVTable {

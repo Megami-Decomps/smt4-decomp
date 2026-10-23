@@ -1,96 +1,90 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f9ac4` (_code @ 0x3f9ac4, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: channel frame/output addresses are loaded after the sentinel test, and duration comparison reverses the VFP operands. */
+#include "shard/W5_W5Match7_AnimatedObject.h"
+#include "shard/W6_W6Match2_AnimationPlayback.h"
+#include "shard/W6_W6Match6_ProjectionCamera.h"
+#include "status/StatusCamera.h"
+#include <string.h>
 
-extern "C" {
-
-int FUN_001986c4(unsigned int, int *);
-int FUN_00198848(unsigned int, unsigned int *);
-int FUN_0019eb14(unsigned int *);
-int FUN_00522a08(unsigned int, unsigned int *);
-
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_3_stack;
-
-/* Supplied declaration required: FUN_001986c4. */
-/* Supplied declaration required: FUN_00198848. */
-/* Supplied declaration required: FUN_0019eb14. */
-/* Supplied declaration required: FUN_00522a08. */
-
-
-unsigned char FUN_003f9ac4(int param_1,unsigned int *param_2,int param_3)
-
-{
-/* irregular: irregular input(s): in_s0; 4 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned char temp_v3;
-  float in_s0;
-  int temp_v4;
-  unsigned int uStack_44;
-  unsigned int uStack_40;
-  unsigned int uStack_3c;
-  unsigned int uStack_38;
-  unsigned int uStack_34;
-  unsigned int temp_v5;
-  unsigned int uStack_2c;
-  unsigned int temp_v6;
-  
-  temp_v2 = *(int *)(*(int *)(*(int *)(param_1 + 0x34) + 0x90) + param_3 * 4);
-  temp_v1 = *(int *)(*(int *)(*(int *)(param_1 + 0x34) + 0x48) + param_3 * 4);
-  temp_v0 = *(char *)(temp_v2 + 0x1a);
-  puVar4 = *(unsigned int **)(temp_v1 + 0x34);
-  temp_v3 = temp_v0 == -1;
-  if (temp_v3) {
-    temp_v0 = *(char *)(temp_v2 + 0x1c);
-  }
-  if ((temp_v3 && temp_v0 == -1) && (*(unsigned char *)(temp_v2 + 0x1e) == 0xff)) {
-    temp_v3 = 0;
-  }
-  else {
-    temp_v4 = *(unsigned int *)(temp_v1 + 4);
-    uStack_44 = *(unsigned int *)(temp_v1 + 8);
-    uStack_40 = *(unsigned int *)(temp_v1 + 0xc);
-    uStack_3c = *(unsigned int *)(temp_v1 + 0x10);
-    uStack_38 = *(unsigned int *)(temp_v1 + 0x14);
-    uStack_34 = *(unsigned int *)(temp_v1 + 0x18);
-    temp_v5 = *(unsigned int *)(temp_v1 + 0x1c);
-    uStack_2c = *(unsigned int *)(temp_v1 + 0x20);
-    temp_v6 = *(unsigned int *)(temp_v1 + 0x24);
-    if (*(unsigned char *)(temp_v2 + 0x1a) != 0xff) {
-      FUN_001986c4(*(unsigned int *)(*(int *)(temp_v2 + 0xc) + (unsigned int)*(unsigned char *)(temp_v2 + 0x1a) * 4),
-                   &temp_v4);
-    }
-    if (*(unsigned char *)(temp_v2 + 0x1c) != 0xff) {
-      FUN_00522a08(*(unsigned int *)(*(int *)(temp_v2 + 0xc) + (unsigned int)*(unsigned char *)(temp_v2 + 0x1c) * 4),
-                   param_2 + 0xd);
-    }
-    if (*(unsigned char *)(temp_v2 + 0x1e) != 0xff) {
-      FUN_00198848(*(unsigned int *)(*(int *)(temp_v2 + 0xc) + (unsigned int)*(unsigned char *)(temp_v2 + 0x1e) * 4),
-                   param_2 + 0xe);
-    }
-    *param_2 = temp_v5;
-    param_2[1] = uStack_2c;
-    param_2[2] = temp_v6;
-    param_2[10] = *puVar4;
-    param_2[0xb] = puVar4[1];
-    param_2[0xc] = puVar4[2];
-    *(float *)&param_2[9] = (float)puVar4[3] * 57.295776f;
-    FUN_0019eb14(param_2);
-    in_s0 = *(float *)(param_1 + 0x38) + in_s0;
-    *(float *)(param_1 + 0x38) = in_s0;
-    temp_v3 = in_s0 <= *(float *)(temp_v2 + 8);
-    if (*(float *)(temp_v2 + 8) < in_s0) {
-      *(unsigned int *)(param_1 + 0x38) = 0;
-    }
-  }
-  return temp_v3;
+namespace {
+struct CameraMotionCurve;
+struct CameraMotionTransform {
+    Vec3 rotation;
+    Vec3 scale;
+    Vec3 translation;
+};
+struct CameraMotionProjection {
+    f32 nearClip;
+    f32 farClip;
+    f32 aspect;
+    f32 fieldOfView;
+};
+struct CameraMotionDefinition {
+    u32 unk00;
+    CameraMotionTransform transform;
+    u8 unk28[0xC];
+    const CameraMotionProjection *projection;
+};
+struct CameraMotionClip {
+    AnimationClip header;
+    CameraMotionCurve **curves;
+    u8 unk10[0xA];
+    u8 transformIndex;
+    u8 unk1B;
+    u8 rollIndex;
+    u8 unk1D;
+    u8 targetIndex;
+};
+struct CameraMotionResource {
+    u8 unk00[0x48];
+    CameraMotionDefinition **definitions;
+    u8 unk4C[0x44];
+    CameraMotionClip **clips;
+};
+// The sampled target extends beyond the shared 0x38-byte CameraLookAt prefix.
+struct SampledCamera {
+    CameraLookAt camera;
+    Vec3 animationTarget;
+};
+typedef char CameraMotionLayoutCheck[
+    offsetof(CameraMotionDefinition, projection) == 0x34 &&
+    offsetof(CameraMotionResource, clips) == 0x90 &&
+    offsetof(SampledCamera, animationTarget) == 0x38 ? 1 : -1];
 }
 
-} /* extern "C" */
+extern "C" {
+void FUN_001986c4(CameraMotionCurve *curve, CameraMotionTransform *output, f32 frame);
+u32 FUN_00522a08(CameraMotionCurve *curve, f32 *output, f32 frame);
+u32 FUN_00198848(CameraMotionCurve *curve, Vec3 *output, f32 frame);
+void FUN_0019eb14(CameraLookAt *camera);
+
+bool FUN_003f9ac4(AnimatedObject *object, SampledCamera *output, s32 index, f32 delta)
+{
+    bool active = true;
+    CameraMotionResource *resource = static_cast<CameraMotionResource *>(object->animation.resource);
+    CameraMotionClip *clip = resource->clips[index];
+    CameraMotionDefinition *definition = resource->definitions[index];
+    const CameraMotionProjection *projection = definition->projection;
+    if (clip->transformIndex == 0xFF && clip->rollIndex == 0xFF && clip->targetIndex == 0xFF)
+        return false;
+    CameraMotionTransform transform = definition->transform;
+    if (clip->transformIndex != 0xFF)
+        FUN_001986c4(clip->curves[clip->transformIndex], &transform, object->progress);
+    if (clip->rollIndex != 0xFF)
+        FUN_00522a08(clip->curves[clip->rollIndex], &output->camera.rollRadians, object->progress);
+    if (clip->targetIndex != 0xFF)
+        FUN_00198848(clip->curves[clip->targetIndex], &output->animationTarget, object->progress);
+    memcpy(output->camera.eye, &transform.translation, sizeof(transform.translation));
+    output->camera.projection.nearClip = projection->nearClip;
+    output->camera.projection.farClip = projection->farClip;
+    output->camera.projection.aspect = projection->aspect;
+    output->camera.projection.fieldOfView = projection->fieldOfView * 57.295776f;
+    FUN_0019eb14(&output->camera);
+    f32 frame = object->progress + delta;
+    object->progress = frame;
+    if (frame > clip->header.duration) {
+        active = false;
+        object->progress = 0.0f;
+    }
+    return active;
+}
+}

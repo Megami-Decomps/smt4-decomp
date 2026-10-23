@@ -1,112 +1,81 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00275be8` (_code @ 0x275be8, 0x1ac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: tiled frame behavior restored; tile pointer scheduling differs and retail target contains only the first word of the 24-byte tile-kind literal. */
+#include "ui/FrameTex.h"
+#include "ui/UiSpriteState.h"
+#include "shard/W6_W6Match7_DrawParameters.h"
 
-extern "C" {
-
-int FUN_00295eb0(int, int, int);
-int FUN_002a9fdc(int, int);
-int uiSpriteSetImageKeyframe(...);
-int FUN_002bd954(int, int, int, int, int);
-int FUN_002bee58(int, int);
-int FUN_002bf810(int);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_1_stack;
-
-extern int g_frameTex; /* 0x43e278 */
-
-/* Supplied declaration required: FUN_00295eb0. */
-/* Supplied declaration required: FUN_002a9fdc. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002bf810. */
-
-
-void FUN_00275be8(int param_1)
-
-{
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  char temp_v3 [32];
-  
-  temp_v0 = g_frameTex;
-  if (param_1 != 0) {
-    if (param_1 == 1) {
-      *(unsigned char *)(g_frameTex + 0x1c) = 1;
-      *(unsigned int *)(temp_v0 + 0x20) = 0;
-      *(unsigned char *)(temp_v0 + 0x24) = 0;
-      *(unsigned int *)(temp_v0 + 0x28) = 0x3e800000;
-      *(unsigned int *)(temp_v0 + 0x2c) = 0x3e800000;
-      *(unsigned int *)(temp_v0 + 0x30) = 0x41a00000;
-      *(unsigned char *)(temp_v0 + 0x25) = 1;
-      FUN_002bd954(temp_v0 + 0xd74,0x1d,2000,temp_v0 + 0x34,0xb);
-      uiSpriteSetImageKeyframe(temp_v0 + 0xd74,0);
-      FUN_002bd954(temp_v0 + 0xe00,0x1d,2000,temp_v0 + 0x34,0xb);
-      FUN_002bee58(temp_v0 + 0xe00,0);
-      temp_v3[0x14] = '\0';
-      temp_v3[0x15] = '\x01';
-      temp_v3[0x16] = '\x01';
-      temp_v3[0x17] = '\0';
-      temp_v3[0] = '\0';
-      temp_v3[1] = '\x01';
-      temp_v3[2] = '\x01';
-      temp_v3[3] = '\0';
-      temp_v3[4] = '\0';
-      temp_v3[5] = '\0';
-      temp_v3[6] = '\x01';
-      temp_v3[7] = '\x01';
-      temp_v3[8] = '\x01';
-      temp_v3[9] = '\x01';
-      temp_v3[10] = '\0';
-      temp_v3[0xb] = '\0';
-      temp_v3[0xc] = '\0';
-      temp_v3[0xd] = '\0';
-      temp_v3[0xe] = '\x01';
-      temp_v3[0xf] = '\x01';
-      temp_v3[0x10] = '\x01';
-      temp_v3[0x11] = '\x01';
-      temp_v3[0x12] = '\0';
-      temp_v3[0x13] = '\0';
-      temp_v1 = 0;
-      do {
-        temp_v2 = temp_v0 + temp_v1 * 0x8c;
-        FUN_002bd954(temp_v2 + 0x54,0x1d,temp_v3[temp_v1] + 0x7d1,temp_v0 + 0x34,0xb);
-        FUN_002a9fdc(temp_v2 + 0x54,0);
-        FUN_00295eb0(temp_v2 + 0x54,0x1d,temp_v1 + 0x7d5);
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 0x18);
-      return;
-    }
-    if (param_1 == 2) {
-      FUN_002bf810(0x100025b);
-      *(unsigned int *)(temp_v0 + 0x20) = 0;
-      *(unsigned char *)(temp_v0 + 0x24) = 1;
-      *(unsigned int *)(temp_v0 + 0x30) = 0x40e00000;
-      uiSpriteSetImageKeyframe(temp_v0 + 0xd74,0,1);
-      return;
-    }
-  }
-  else {
-    *(unsigned char *)(g_frameTex + 0x1c) = 0;
-    *(unsigned int *)(temp_v0 + 0x20) = 0;
-    *(unsigned char *)(temp_v0 + 0x24) = 0;
-    *(unsigned int *)(temp_v0 + 0x28) = 0x3e800000;
-    *(unsigned int *)(temp_v0 + 0x2c) = 0x3e800000;
-    *(unsigned int *)(temp_v0 + 0x30) = 0x41a00000;
-    *(unsigned char *)(temp_v0 + 0xf28) = 0;
-    *(unsigned char *)(temp_v0 + 0xf2b) = 0;
-    *(unsigned char *)(temp_v0 + 0xf2c) = 0;
-  }
-  return;
+namespace {
+struct TiledFrameView {
+    u8 prefix[0x1C];
+    u8 enabled;
+    u8 padding1D[3];
+    u32 elapsed;
+    u8 closing;
+    u8 active;
+    u8 padding26[2];
+    f32 scaleX;
+    f32 scaleY;
+    f32 duration;
+    Params002c312c parameters;
+    UiSpriteState tiles[24];
+    UiSpriteState frame;
+    UiSpriteState overlay;
+};
 }
+extern "C" {
+extern FrameWork *g_frameTex;
+void FUN_002bd954(UiSpriteState *sprite, s32 group, s32 image, Params002c312c *parameters, s32 flags, f32 scale);
+void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 mode);
+void FUN_002bee58(UiSpriteState *sprite, s32 enabled);
+void FUN_002a9fdc(UiSpriteState *sprite, s32 key, s32 mode);
+void FUN_00295eb0(UiSpriteState *sprite, s32 group, s32 image);
+void FUN_002bf810(u32 sound);
 
-} /* extern "C" */
+// Reset, open or close the tiled frame-texture transition and initialize its 24 animated tiles.
+void FUN_00275be8(s32 mode)
+{
+    FrameWork *owner = g_frameTex;
+    TiledFrameView *work = reinterpret_cast<TiledFrameView *>(owner);
+    switch (mode) {
+    case 0:
+        work->enabled = 0;
+        work->elapsed = 0;
+        work->closing = 0;
+        work->scaleX = 0.25f;
+        work->scaleY = 0.25f;
+        work->duration = 20.0f;
+        owner->unkF28 = 0;
+        owner->unkF2B = 0;
+        owner->unkF2C = 0;
+        break;
+    case 1: {
+        work->enabled = 1;
+        work->elapsed = 0;
+        work->closing = 0;
+        work->scaleX = 0.25f;
+        work->scaleY = 0.25f;
+        work->duration = 20.0f;
+        work->active = 1;
+        FUN_002bd954(&work->frame, 0x1D, 2000, &work->parameters, 0xB, 1.0f);
+        uiSpriteSetImageKeyframe(&work->frame, 0, 0);
+        FUN_002bd954(&work->overlay, 0x1D, 2000, &work->parameters, 0xB, 1.0f);
+        FUN_002bee58(&work->overlay, 0);
+        s8 tileKinds[24] = {0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0,
+                            0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0};
+        for (s32 index = 0; index < 24; ++index) {
+            UiSpriteState *tile = &work->tiles[index];
+            FUN_002bd954(tile, 0x1D, tileKinds[index] + 0x7D1, &work->parameters, 0xB, 1.0f);
+            FUN_002a9fdc(tile, 0, 0);
+            FUN_00295eb0(tile, 0x1D, index + 0x7D5);
+        }
+        break;
+    }
+    case 2:
+        FUN_002bf810(0x100025B);
+        work->elapsed = 0;
+        work->closing = 1;
+        work->duration = 7.0f;
+        uiSpriteSetImageKeyframe(&work->frame, 0, 1);
+        break;
+    }
+}
+}

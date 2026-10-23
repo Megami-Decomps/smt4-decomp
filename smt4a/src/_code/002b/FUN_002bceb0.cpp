@@ -1,78 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bceb0` (_code @ 0x2bceb0, 0x13c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only game-state base address reuse across formatting calls differs. */
+#include "map/mapDepart.h"
 
-extern "C" {
-
-int textFormatBuffer(...);
-int FUN_0040ae70(...);
-int FUN_0040afe0(...);
-int resourceOwnerLoadNamed(...);
-
-typedef struct fn_002bceb0_arg0 fn_002bceb0_arg0;
-struct fn_002bceb0_arg0 {
-    unsigned char pad_0x0[0x30];
-    int field_0x30; /* +0x30 */
-    int field_0x34; /* +0x34 */
-    unsigned char pad_0x38[0x98];
-    undefined4 field_0xd0; /* +0xd0 */
+struct ResourceOwner;
+struct MapSceneResourceView {
+    u8 unk00[0x30];
+    s32 mapId;
+    s32 areaId;
+    u8 unk38[0x98];
+    ResourceOwner *owner;
 };
+extern "C" {
+extern GameStateA g_gameState;
+extern const char DAT_00531b14[], DAT_00531af8[], DAT_00531b50[], DAT_00531b34[];
+s32 textFormatBuffer(char *, const char *, ...);
+void resourceOwnerLoadNamed(ResourceOwner *, const char *);
+s32 FUN_0040af60(ResourceOwner *);
+void FUN_0040afe0(ResourceOwner *, s32, s32);
+void FUN_0040ae70(ResourceOwner *, s32);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp118; /* 0x118: local_118 */
-} param_1_stack;
-
-extern signed char DAT_005f1623; /* 0x5f1623 */
-extern signed char DAT_005f1858; /* 0x5f1858 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_0040ae70. */
-extern int FUN_0040af60(unsigned int);
-/* Supplied declaration required: FUN_0040afe0. */
-/* Supplied declaration required: resourceOwnerLoadNamed. */
-
-
-void FUN_002bceb0(fn_002bceb0_arg0 *param_1)
-
+void FUN_002bceb0(MapSceneResourceView *scene)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2 [128];
-  unsigned char temp_v3 [132];
-  
-  if (DAT_005f1858 != '\0') {
-    textFormatBuffer(temp_v3,"map/m%03d/e%03d_%02d_dz.bcenv",param_1->field_0x30,param_1->field_0x30,
-                 param_1->field_0x34);
-    textFormatBuffer(temp_v2,"map/m%03d/e%03d_%02d_dz.bch",param_1->field_0x30,param_1->field_0x30,
-                 param_1->field_0x34);
-  }
-  if (DAT_005f1623 != '\0') {
-    textFormatBuffer(temp_v3,"map/m%03d/e%03d_%02d.bcenv",0x18,0x18,1);
-    textFormatBuffer(temp_v2,"map/m%03d/e%03d_%02d.bch",0x18,0x18,1);
-  }
-  else {
-    textFormatBuffer(temp_v3,"map/m%03d/e%03d_%02d.bcenv",param_1->field_0x30,param_1->field_0x30,
-                 param_1->field_0x34);
-    textFormatBuffer(temp_v2,"map/m%03d/e%03d_%02d.bch",param_1->field_0x30,param_1->field_0x30,
-                 param_1->field_0x34);
-  }
-  resourceOwnerLoadNamed(param_1->field_0xd0,temp_v2);
-  temp_v0 = FUN_0040af60(param_1->field_0xd0);
-  if (temp_v0 != 0) {
-    temp_v0 = param_1->field_0x30;
-    temp_v1 = temp_v0 == 0x20;
-    if (temp_v1) {
-      temp_v0 = param_1->field_0x34;
+    char environmentPath[128];
+    char modelPath[128];
+    if (g_gameState.environment.darkZone) {
+        textFormatBuffer(environmentPath, DAT_00531b14, scene->mapId, scene->mapId, scene->areaId);
+        textFormatBuffer(modelPath, DAT_00531af8, scene->mapId, scene->mapId, scene->areaId);
     }
-    if (temp_v1 && temp_v0 == 2) {
-      FUN_0040afe0(param_1->field_0xd0,3,0);
-      return;
+    if (g_gameState.progressEnabled) {
+        textFormatBuffer(environmentPath, DAT_00531b50, 24, 24, 1);
+        textFormatBuffer(modelPath, DAT_00531b34, 24, 24, 1);
+    } else {
+        textFormatBuffer(environmentPath, DAT_00531b50, scene->mapId, scene->mapId, scene->areaId);
+        textFormatBuffer(modelPath, DAT_00531b34, scene->mapId, scene->mapId, scene->areaId);
     }
-    FUN_0040ae70(param_1->field_0xd0,1);
-  }
-  return;
+    resourceOwnerLoadNamed(scene->owner, modelPath);
+    if (FUN_0040af60(scene->owner)) {
+        if (scene->mapId == 32 && scene->areaId == 2) {
+            FUN_0040afe0(scene->owner, 3, 0);
+            return;
+        }
+        FUN_0040ae70(scene->owner, 1);
+    }
 }
-
-} /* extern "C" */
+}

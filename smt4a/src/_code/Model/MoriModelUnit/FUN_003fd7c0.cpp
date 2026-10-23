@@ -1,78 +1,91 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fd7c0` (_code @ 0x3fd7c0, 0x114 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: animation-state base is not retained; storage-allocation flag and buffer-size lifetimes differ. */
+#include "Model/MoriModelUnit.h"
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, s32 kind);
+void FUN_0045ab90(MaterialFlagBindingArray *binding, const MaterialFlagAnimation *animation, void *metadata);
+void FUN_0045b384(void *samples, const MaterialFlagAnimation *animation, void *model);
+void FUN_0045b498(void *samples, void *storage, u32 count);
+extern const char DAT_00526108[];
 
-int asdMemoryAlloc(int, int, int, int);
-int FUN_0045ab90(int, int, unsigned int);
-int FUN_0045b384(int, int, int, unsigned int);
-int FUN_0045b498(int, int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: FUN_0045ab90. */
-/* Supplied declaration required: FUN_0045b384. */
-/* Supplied declaration required: FUN_0045b498. */
-
-
-void FUN_003fd7c0(int param_1,unsigned int param_2,unsigned char param_3,unsigned int param_4)
-
+/* Bind a material animation and prepare the optional per-value sample buffer. */
+void FUN_003fd7c0(MoriModelUnit *unit, u32 index, u8 mode, f32 speed)
 {
-/* irregular: irregular input(s): in_s0; 6 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int in_s0;
-  unsigned int temp_v4;
-  
-  temp_v0 = 0;
-  if (*(int *)(param_1 + 0x20c) != 0) {
-    temp_v0 = *(int *)(param_1 + 0x20c) + 0xc;
-  }
-  if ((param_2 < *(unsigned short *)(*(int *)(temp_v0 + 0x30) + 0x70)) &&
-     (temp_v0 = *(int *)(*(int *)(*(int *)(temp_v0 + 0x30) + 0x6c) + param_2 * 4), temp_v0 != 0)) {
-    *(unsigned int *)(param_1 + 0x84) = param_2;
-    *(unsigned int *)(param_1 + 0x88) = in_s0;
-    *(int *)(param_1 + 0x90) = temp_v0;
-    FUN_0045ab90(param_1 + 0x98,temp_v0,*(unsigned int *)(param_1 + 0x210));
-    gfxMarkMaterialAnimationCapabilities(reinterpret_cast<const MaterialFlagAnimation*>(temp_v0),
-                 reinterpret_cast<MaterialFlagStateArray*>(param_1 + 0x10c),
-                 reinterpret_cast<const MaterialFlagBindingArray*>(param_1 + 0x98));
-    *(unsigned char *)(param_1 + 0xa4) = param_3;
-    temp_v0 = *(int *)(param_1 + 0x90);
-    temp_v1 = 0;
-    temp_v3 = *(int *)(temp_v0 + 0x1c);
-    if (*(unsigned int *)(temp_v0 + 0x10) != 0) {
-      do {
-        if (*(short *)(*(int *)(*(int *)(temp_v0 + 0xc) + temp_v1 * 4) + 6) == 6) {
-          temp_v2 = *(int *)(param_1 + 0xb0);
-          temp_v4 = param_4;
-          if (temp_v2 == 0) {
-            temp_v2 = 0x10000;
-            temp_v4 = 1;
-            asdMemoryAlloc(0x10000,0x100,0,temp_v3 << 2);
-            *(int *)(param_1 + 0xb0) = temp_v2;
-          }
-          FUN_0045b498(param_1 + 0xa8,temp_v2,temp_v3);
-          temp_v3 = *(int *)(param_1 + 0x20c) + 0xc;
-          if (temp_v3 == 0) {
-            return;
-          }
-          FUN_0045b384(param_1 + 0xa8,temp_v0,temp_v3,temp_v4);
-          return;
+    struct AnimationView {
+        MaterialFlagAnimation header;
+        u8 unk14[8];
+        u32 valueCount;
+    };
+    struct AnimationLibrary {
+        u8 unk00[0x6c];
+        AnimationView **animations;
+        u16 count;
+    };
+    struct ModelView {
+        u8 unk00[0x30];
+        AnimationLibrary *library;
+    };
+    struct ModelHolder {
+        u8 unk00[0xc];
+        ModelView model;
+    };
+    struct AnimationState {
+        u32 index;
+        f32 speed;
+        u32 unk8c;
+        AnimationView *animation;
+        u32 unk94;
+        MaterialFlagBindingArray binding;
+        u8 unk9c[8];
+        u8 mode;
+        u8 unka5[3];
+        u32 samples[2];
+        void *storage;
+    };
+    // Animation fields extend beyond MoriModelUnit's canonical prefix.
+    struct UnitView {
+        u8 prefix[0x84];
+        AnimationState state;
+        u8 unkb4[0x58];
+        MaterialFlagStateArray materials;
+        u8 unk110[0xfc];
+        ModelHolder *holder;
+        void *metadata;
+    };
+    typedef char UnitViewLayout[offsetof(UnitView, state) == 0x84 &&
+        offsetof(UnitView, materials) == 0x10c && offsetof(UnitView, holder) == 0x20c ? 1 : -1];
+    UnitView *view = reinterpret_cast<UnitView *>(unit);
+    ModelView *model = view->holder ? &view->holder->model : NULL;
+    if (index < model->library->count) {
+        AnimationView *animation = model->library->animations[index];
+        if (animation != NULL) {
+            view->state.index = index;
+            view->state.speed = speed;
+            view->state.animation = animation;
+            FUN_0045ab90(&view->state.binding, &animation->header, view->metadata);
+            gfxMarkMaterialAnimationCapabilities(&animation->header, &view->materials, &view->state.binding);
+            view->state.mode = mode;
+            animation = view->state.animation;
+            u32 count = animation->valueCount;
+            for (u32 member = 0; member < animation->header.count; ++member) {
+                if (animation->header.members[member]->targetKind == 6) {
+                    void *storage = view->state.storage;
+                    if (storage == NULL) {
+                        asdDebugTrace(DAT_00526108, 942);
+                        storage = asdMemoryAlloc(0x10000, 0x100, 0, count * 4, 1);
+                        view->state.storage = storage;
+                    }
+                    FUN_0045b498(view->state.samples, storage, count);
+                    model = &view->holder->model;
+                    if (model != NULL) {
+                        FUN_0045b384(view->state.samples, &animation->header, model);
+                    }
+                    return;
+                }
+            }
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < *(unsigned int *)(temp_v0 + 0x10));
     }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

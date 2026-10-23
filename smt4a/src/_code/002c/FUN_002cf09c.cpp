@@ -1,76 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cf09c` (_code @ 0x2cf09c, 0x1d4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP sqrt/div destination registers, index narrowing and unordered-compare lowering differ. */
+#include "gfx/QuaternionWorkspace.h"
+#include <math.h>
+#include <string.h>
 
 extern "C" {
+extern RotationQuaternion DAT_006472dc;
 
-/* stack frame of param_1: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern float DAT_006472dc; /* 0x6472dc */
-extern float DAT_006472e0; /* 0x6472e0 */
-extern float DAT_006472e4; /* 0x6472e4 */
-extern float DAT_006472e8; /* 0x6472e8 */
-
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+void FUN_002cf09c(const Mtx34 *matrix)
 {
-    return (float)sqrt((double)value);
+    union {
+        f32 value;
+        s32 bits;
+    } trace;
+    trace.value = (matrix->m[0][0] + matrix->m[1][1]) + (matrix->m[2][2] + 1.0f);
+    f32 quaternion[4];
+    // The sign-ordered IEEE representation also selects this path for positive NaNs.
+    if (trace.bits >= 0x3F800000) {
+        f32 scale = sqrtf(trace.value) * 2.0f;
+        quaternion[3] = scale * -0.25f;
+        quaternion[0] = (matrix->m[1][2] - matrix->m[2][1]) / scale;
+        quaternion[1] = (matrix->m[2][0] - matrix->m[0][2]) / scale;
+        quaternion[2] = (matrix->m[0][1] - matrix->m[1][0]) / scale;
+    } else {
+        u32 first = !(matrix->m[1][1] < matrix->m[0][0]);
+        if (matrix->m[first][first] < matrix->m[2][2]) {
+            first = 2;
+        }
+        u8 second = (first + 1u) % 3u;
+        u8 third = (second + 1u) % 3u;
+        f32 scale = sqrtf(((matrix->m[first][first] - matrix->m[second][second]) -
+            matrix->m[third][third]) + 1.0f) * 2.0f;
+        if (scale != 0.0f) {
+            quaternion[first] = scale * 0.25f;
+            quaternion[second] = (matrix->m[first][second] + matrix->m[second][first]) / scale;
+            quaternion[third] = (matrix->m[first][third] + matrix->m[third][first]) / scale;
+            quaternion[3] = (matrix->m[third][second] - matrix->m[second][third]) / scale;
+        } else {
+            quaternion[first] = 1.0f;
+            quaternion[second] = 0.0f;
+            quaternion[third] = 0.0f;
+            quaternion[3] = 0.0f;
+        }
+    }
+    memcpy(&DAT_006472dc, quaternion, sizeof(quaternion));
 }
-#endif
-
-
-void FUN_002cf09c(float *param_1)
-
-{
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  float temp_v3;
-  float temp_v4 [4];
-  
-  temp_v3 = *param_1 + param_1[5] + param_1[10] + 1.0f;
-  if ((int)temp_v3 >= 0x3f800000) {
-    temp_v3 = romwright_sqrt_4(temp_v3) * 2.0f;
-    temp_v4[3] = temp_v3 * -0.25f;
-    temp_v4[0] = (param_1[6] - param_1[9]) / temp_v3;
-    temp_v4[1] = (param_1[8] - param_1[2]) / temp_v3;
-    temp_v4[2] = (param_1[1] - param_1[4]) / temp_v3;
-  }
-  else {
-    temp_v0 = (unsigned int)(*param_1 <= param_1[5]);
-    if (param_1[temp_v0 * 5] < param_1[10]) {
-      temp_v0 = 2;
-    }
-    temp_v1 = (temp_v0 + 1) % 3;
-    temp_v2 = (temp_v1 + 1) % 3;
-    temp_v3 = romwright_sqrt_4(((param_1[temp_v0 * 5] - param_1[temp_v1 * 5]) - param_1[temp_v2 * 5]) + 1.0f) * 2.0f;
-    if (temp_v3 != 0.0f) {
-      temp_v4[temp_v0] = temp_v3 * 0.25f;
-      temp_v4[temp_v1] = (param_1[temp_v0 * 4 + temp_v1] + param_1[temp_v1 * 4 + temp_v0]) / temp_v3;
-      temp_v4[temp_v2] = (param_1[temp_v0 * 4 + temp_v2] + param_1[temp_v2 * 4 + temp_v0]) / temp_v3;
-      temp_v4[3] = (param_1[temp_v2 * 4 + temp_v1] - param_1[temp_v1 * 4 + temp_v2]) / temp_v3;
-    }
-    else {
-      temp_v4[temp_v0] = 1.0f;
-      temp_v4[temp_v1] = 0.0f;
-      temp_v4[temp_v2] = 0.0f;
-      temp_v4[3] = 0.0f;
-    }
-  }
-  DAT_006472dc = temp_v4[0];
-  DAT_006472e0 = temp_v4[1];
-  DAT_006472e4 = temp_v4[2];
-  DAT_006472e8 = temp_v4[3];
-  return;
 }
-
-} /* extern "C" */

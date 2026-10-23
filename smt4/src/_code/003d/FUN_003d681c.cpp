@@ -1,54 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d681c` (_code @ 0x3d681c, 0x11c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Vector loads/stores merge into VLDMIAs/VSTMIAs, changing bases and component scheduling. */
+#include "shard/W5_W5Match4_BattleVectorTransition.h"
 
 extern "C" {
+f32 FUN_00227280(u32 mode, s32 duration, s32 frame);
 
-int FUN_00227280(unsigned int, int, unsigned int);
-
-/* Supplied declaration required: FUN_00227280. */
-
-
-void FUN_003d681c(int param_1)
-
+/* Advances the axis and origin-offset transitions and clears their active bit at completion. */
+void FUN_003d681c(BattleVectorTransition *work)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  
-  temp_v1 = *(float *)(param_1 + 0x74c);
-  temp_v2 = *(float *)(param_1 + 0x744) - *(float *)(param_1 + 0x738);
-  temp_v3 = *(float *)(param_1 + 0x748) - *(float *)(param_1 + 0x73c);
-  temp_v4 = temp_v1 - *(float *)(param_1 + 0x740);
-  FUN_00227280(*(unsigned int *)(param_1 + 0x758),*(int *)(param_1 + 0x750),
-               *(unsigned int *)(param_1 + 0x754));
-  *(float *)(param_1 + 0x738) = *(float *)(param_1 + 0x738) + temp_v2 * temp_v1;
-  *(float *)(param_1 + 0x73c) = *(float *)(param_1 + 0x73c) + temp_v3 * temp_v1;
-  *(float *)(param_1 + 0x740) = *(float *)(param_1 + 0x740) + temp_v4 * temp_v1;
-  *(float *)(param_1 + 0x764) =
-       *(float *)(param_1 + 0x764) +
-       (*(float *)(param_1 + 0x770) - *(float *)(param_1 + 0x764)) * temp_v1;
-  *(float *)(param_1 + 0x768) =
-       *(float *)(param_1 + 0x768) +
-       (*(float *)(param_1 + 0x774) - *(float *)(param_1 + 0x768)) * temp_v1;
-  *(float *)(param_1 + 0x76c) =
-       *(float *)(param_1 + 0x76c) +
-       (*(float *)(param_1 + 0x778) - *(float *)(param_1 + 0x76c)) * temp_v1;
-  temp_v0 = *(int *)(param_1 + 0x754) + 1;
-  *(int *)(param_1 + 0x754) = temp_v0;
-  if (*(int *)(param_1 + 0x750) < temp_v0) {
-    *(float *)(param_1 + 0x738) = *(float *)(param_1 + 0x744);
-    *(unsigned int *)(param_1 + 0x73c) = *(unsigned int *)(param_1 + 0x748);
-    *(unsigned int *)(param_1 + 0x740) = *(unsigned int *)(param_1 + 0x74c);
-    *(float *)(param_1 + 0x764) = *(float *)(param_1 + 0x770);
-    *(unsigned int *)(param_1 + 0x768) = *(unsigned int *)(param_1 + 0x774);
-    *(unsigned int *)(param_1 + 0x76c) = *(unsigned int *)(param_1 + 0x778);
-    *(unsigned int *)(param_1 + 0x634) = *(unsigned int *)(param_1 + 0x634) & 0xff7fffff;
-  }
-  return;
+    BattleVector3 difference = {
+        work->axisDestination.x - work->axis.current.x,
+        work->axisDestination.y - work->axis.current.y,
+        work->axisDestination.z - work->axis.current.z
+    };
+    f32 factor = FUN_00227280(work->axisMode, work->axisTarget, work->axisFrame);
+    work->axis.current.x += difference.x * factor;
+    work->axis.current.y += difference.y * factor;
+    work->axis.current.z += difference.z * factor;
+    BattleVector3 offsetDifference = {
+        work->axisElapsed.x - work->originData.originOffset.x,
+        work->axisElapsed.y - work->originData.originOffset.y,
+        work->axisElapsed.z - work->originData.originOffset.z
+    };
+    work->originData.originOffset.x += offsetDifference.x * factor;
+    work->originData.originOffset.y += offsetDifference.y * factor;
+    work->originData.originOffset.z += offsetDifference.z * factor;
+    if (++work->axisFrame > work->axisTarget) {
+        work->axis.current = work->axisDestination;
+        work->originData.originOffset = work->axisElapsed;
+        work->flags &= ~0x800000;
+    }
 }
-
-} /* extern "C" */
+}

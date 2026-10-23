@@ -1,66 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00229754` (_code @ 0x229754, 0x13c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: channel byte addressing, event-condition block layout and action-call argument scheduling differ. */
+#include "shard/W4_Match6_BtlEntry.h"
+#include "shard/W4_W4Match2_BtlUnits.h"
+#include "battle/btlAction.h"
+#include "battle/ActionKindSelection.h"
+#include "battle/ActionStateChannels.h"
 
+struct BattleActionOwnerView { BtlMainState *battle; };
+struct BattleEventController;
 extern "C" {
-
-int FUN_0023c154(int, int, int, int, unsigned int *);
-int btlEventSelectTrigger(int, int, int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern int g_btlScriptUnit; /* 0x43427c */
-extern int g_btlEvent; /* 0x435d48 */
-
-/* Supplied declaration required: FUN_0023c154. */
-extern int FUN_0027e3b8(int);
-/* Supplied declaration required: btlEventSelectTrigger. */
-extern int btlFindFirstActiveUnit(int);
-extern int FUN_00338584(int);
-
-
-void FUN_00229754(int *param_1,unsigned int *param_2)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *param_1;
-  if (*(int *)(temp_v0 + 0x88) == 8) {
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(temp_v0 + 0x84) * 0xf1c + 9) = 0x23;
-    return;
-  }
-  if ((*param_2 & 0x10000) != 0) {
-    if (*(short *)(temp_v0 + 0x1fc4) >= 1) {
-      temp_v0 = FUN_0027e3b8(g_btlEvent);
-      if ((temp_v0 == 0) &&
-         (temp_v0 = g_btlEvent, btlEventSelectTrigger(g_btlEvent,4,(int)*(short *)(param_2[8] + 0x6e),0),
-         temp_v0 != 0)) {
-        *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x21;
-        return;
-      }
-    }
-  }
-  else if (((*(unsigned int *)param_2[8] & 1) != 0) && ((*(unsigned int *)param_2[8] & 0x40) == 0)) {
-    temp_v0 = FUN_0027e3b8(g_btlEvent);
-    if ((temp_v0 == 0) &&
-       (temp_v0 = g_btlEvent, btlEventSelectTrigger(g_btlEvent,4,(int)*(short *)(param_2[8] + 0x6e),0),
-       temp_v0 != 0)) {
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x21;
-      return;
-    }
-  }
-  temp_v0 = FUN_00338584(*param_1);
-  if (temp_v0 != 0) {
-    temp_v0 = btlFindFirstActiveUnit(*param_1);
-    FUN_0023c154(*param_1,1,(int)*(short *)(*(int *)(*param_1 + 0x1e98) + 0x60),
-                 (int)*(short *)(temp_v0 + 0x6e),param_2);
-  }
-  *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x23;
-  return;
+extern BtlActionGlobals g_btlAction;
+extern BattleEventController *g_btlEvent;
+s32 FUN_0027e3b8(BattleEventController *);
+u32 btlEventSelectTrigger(BattleEventController *, u32, s32, u32);
+s32 FUN_00338584(BtlMainState *);
+BtlUnitEntry *btlFindFirstActiveUnit(BtlMainState *);
+void FUN_0023c154(BtlMainState *, s32, s32, s32, ActionKindSelection *);
 }
 
-} /* extern "C" */
+static void setPendingAction(BtlMainState *battle, s8 kind)
+{
+    static_cast<ActionStateChannel *>(g_btlAction.data)[battle->actionState.index].pending = kind;
+}
+
+/* Prefer a pending battle event; otherwise queue an emergency action and advance the channel. */
+extern "C" void FUN_00229754(BattleActionOwnerView *owner, ActionKindSelection *selection)
+{
+    BtlMainState *battle = owner->battle;
+    if (battle->actionState.mode == 8) {
+        setPendingAction(battle, 0x23);
+        return;
+    }
+    if ((selection->flags & 0x10000) ? battle->eventCount > 0 :
+        ((reinterpret_cast<BtlUnitEntry *>(selection->entry)->flags & 1) &&
+         !(reinterpret_cast<BtlUnitEntry *>(selection->entry)->flags & 0x40))) {
+        if (!FUN_0027e3b8(g_btlEvent) && btlEventSelectTrigger(g_btlEvent, 4, selection->entry->unitIndex, 0)) {
+            setPendingAction(owner->battle, 0x21);
+            return;
+        }
+    }
+    if (FUN_00338584(owner->battle)) {
+        BtlUnitEntry *active = btlFindFirstActiveUnit(owner->battle);
+        FUN_0023c154(owner->battle, 1, owner->battle->actions.records->participant.combatantIndex,
+                     active->selectionIndex, selection);
+    }
+    setPendingAction(owner->battle, 0x23);
+}

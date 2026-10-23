@@ -1,92 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b5a5c` (_code @ 0x3b5a5c, 0x1e4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "ui/MessageMain.h"
+#include "ui/UiSpriteState.h"
+#include <string.h>
+
+struct MessageRemovalModeViewA {
+    u8 unk00[0x98];
+    u32 mode;
+};
+struct MessageIconUnit;
 
 extern "C" {
+extern MessageGlobalsA g_messageMain;
+u32 scrGetArg(u32);
+MessageIconUnit *saveSlotFindById(u32);
+u32 FUN_00187168(const MessageIconUnit *);
+s32 scrGetCommandFrame();
+void FUN_0014e188(UiSpriteState *, s32, s32, void *, s32, f32);
+void uiSpriteSelectAnim(UiSpriteState *, s32);
+void uiSpriteSetKeyframe(UiSpriteState *, s32, s32);
+void sysPlayVoice(u32);
 
-int FUN_0014e188(int, int, int, int, int);
-int uiSpriteSelectAnim(int, int);
-int uiSpriteSetKeyframe(int, int, int);
-int saveSlotFindById(unsigned int);
-int sysPlayVoice(int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern unsigned char g_messageMain; /* 0x57f588 */
-
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: saveSlotFindById. */
-extern int FUN_00187168(void);
-extern unsigned int scrGetArg(unsigned int);
-extern int scrGetCommandFrame(void);
-/* Supplied declaration required: sysPlayVoice. */
-
-
-unsigned int FUN_003b5a5c(void)
-
+u32 FUN_003b5a5c()
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-  temp_v1 = scrGetArg(0);
-  saveSlotFindById(temp_v1 & 0xffff);
-  temp_v2 = FUN_00187168();
-  if (temp_v2 != 0) {
-    temp_v3 = scrGetCommandFrame();
-    temp_v2 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-    if (temp_v3 == 0) {
-      if (*(char *)(temp_v0 + 0x90) != '\0') {
-        *(int *)(temp_v0 + 0x9c) = *(int *)(temp_v0 + 0x9c) + 1;
-        *(unsigned int *)(temp_v0 + 0x98) = 0x14;
-      }
-      else {
-        *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x90) = 1;
-        *(unsigned char *)(temp_v2 + 0x8d) = 1;
-        FUN_0014e188(temp_v2 + 0xb00,0x14,0xbb9,temp_v2 + 0x194,0xb);
-        uiSpriteSelectAnim(temp_v2 + 0xb00,0);
-        *(unsigned int *)(temp_v2 + 0xa0) = 0;
-        *(unsigned int *)(temp_v2 + 0xa4) = 0;
-        *(unsigned int *)(temp_v2 + 0xa8) = 0;
-        *(unsigned int *)(temp_v2 + 0xac) = 0;
-        *(unsigned int *)(temp_v2 + 0xb0) = 0;
-        *(unsigned int *)(temp_v2 + 0xb4) = 0;
-        *(unsigned int *)(temp_v2 + 0xb8) = 0;
-        *(unsigned int *)(temp_v2 + 0xbc) = 0;
-        *(unsigned int *)(temp_v2 + 0xc0) = 0;
-        *(unsigned int *)(temp_v2 + 0xc4) = 0;
-        *(unsigned int *)(temp_v2 + 200) = 0;
-        *(unsigned int *)(temp_v2 + 0xcc) = 0;
-        *(unsigned int *)(temp_v2 + 0xd0) = 0;
-        *(unsigned int *)(temp_v2 + 0xd4) = 0;
-        *(unsigned int *)(temp_v2 + 0xd8) = 0;
-        *(unsigned int *)(temp_v0 + 0x9c) = 0;
-      }
-      *(unsigned char *)(*(int *)(temp_v0 + 0x9c) + temp_v0 + 0xa0) = 2;
-      *(unsigned int *)(temp_v0 + *(int *)(temp_v0 + 0x9c) * 4 + 0xac) = 0;
-      *(unsigned char *)(*(int *)(temp_v0 + 0x9c) + temp_v0 + 0xdc) = 0;
+    MessagePanelA *panel = g_messageMain.panel;
+    u32 id = scrGetArg(0);
+    const MessageIconUnit *unit = saveSlotFindById(static_cast<u16>(id));
+    if (FUN_00187168(unit)) {
+        s32 frame = scrGetCommandFrame();
+        if (frame == 0) {
+            if (!panel->unk90) {
+                MessagePanelA *current = g_messageMain.panel;
+                current->unk90 = 1;
+                current->state = 1;
+                FUN_0014e188(reinterpret_cast<UiSpriteState *>(current->blockB00), 20, 0xBB9, current->block194, 11, 1.0f);
+                uiSpriteSelectAnim(reinterpret_cast<UiSpriteState *>(current->blockB00), 0);
+                memset(current->removal.states, 0, sizeof(current->removal.states) + sizeof(current->removal.ids));
+                panel->removal.lastIndex = 0;
+            } else {
+                ++panel->removal.lastIndex;
+                reinterpret_cast<MessageRemovalModeViewA *>(panel)->mode = 20;
+            }
+            panel->removal.states[panel->removal.lastIndex] = 2;
+            panel->removal.ids[panel->removal.lastIndex] = 0;
+            panel->removal.special[panel->removal.lastIndex] = 0;
+        }
+        if (reinterpret_cast<MessageRemovalModeViewA *>(panel)->mode == 20) {
+            panel->removal.ids[panel->removal.lastIndex] = id;
+            FUN_0014e188(reinterpret_cast<UiSpriteState *>(panel->removalSprites.rows[panel->removal.lastIndex]),
+                         20, 0xC12, panel->block194, 11, 1.0f);
+            uiSpriteSetKeyframe(reinterpret_cast<UiSpriteState *>(panel->removalSprites.rows[panel->removal.lastIndex]), 11, 0);
+            panel->removal.states[panel->removal.lastIndex] = 4;
+            sysPlayVoice(0x100016F);
+        }
+        if (!panel->unk90 || panel->state != 2 || panel->removal.states[panel->removal.lastIndex] != 0)
+            return 0;
     }
-    if (*(int *)(temp_v0 + 0x98) == 0x14) {
-      *(unsigned int *)(temp_v0 + *(int *)(temp_v0 + 0x9c) * 4 + 0xac) = temp_v1;
-      FUN_0014e188(temp_v0 + *(int *)(temp_v0 + 0x9c) * 0x8c + 0xdbc,0x14,0xc12,temp_v0 + 0x194,0xb);
-      uiSpriteSetKeyframe(temp_v0 + *(int *)(temp_v0 + 0x9c) * 0x8c + 0xdbc,0xb,0);
-      *(unsigned char *)(*(int *)(temp_v0 + 0x9c) + temp_v0 + 0xa0) = 4;
-      sysPlayVoice(0x100016f);
-    }
-    if (((*(char *)(temp_v0 + 0x90) == '\0') || (*(char *)(temp_v0 + 0x8d) != '\x02')) ||
-       (*(char *)(*(int *)(temp_v0 + 0x9c) + temp_v0 + 0xa0) != '\0')) {
-      return 0;
-    }
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

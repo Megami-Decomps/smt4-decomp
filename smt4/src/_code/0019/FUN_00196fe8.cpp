@@ -1,86 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00196fe8` (_code @ 0x196fe8, 0x168 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: prologue scheduling, floating constants and centered-label arithmetic/conversion registers differ; 91 instructions each. */
+#include "shard/S1ListPanel.h"
 
-extern "C" {
-
-int FUN_002b6dd8(unsigned char *, int);
-int FUN_002be5a4(int, unsigned int, unsigned char [64], int);
-int textFormatBuffer(unsigned char [64], unsigned char *, int);
-int FUN_002bf380(int, int, int, int, int, int);
-int FUN_002bf4f8(int, int);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_5: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp88; /* 0x88: local_88 */
-} param_5_stack;
-
-extern unsigned char DAT_004028ec; /* 0x4028ec */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002b6dd8. */
-/* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
-
-
-void FUN_00196fe8(int param_1,int param_2,int param_3,int param_4,int param_5)
-
-{
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char *puVar3;
-  int temp_v2;
-  int temp_v3;
-  unsigned int in_fpscr;
-  unsigned char temp_v4 [64];
-  unsigned int temp_v5;
-  int iStack_34;
-  int iStack_30;
-  int iStack_2c;
-  int temp_v6;
-  
-  temp_v3 = 0x42;
-  if (param_1 >= 3) {
-    temp_v3 = 0x44;
-  }
-  temp_v2 = 0;
-  iStack_34 = param_1;
-  iStack_30 = param_2;
-  iStack_2c = param_3;
-  temp_v6 = param_4;
-  if (0 < param_1) {
-    do {
-      temp_v0 = FUN_002bf4f8(0x2f,temp_v3 + temp_v2);
-      temp_v1 = *(short *)(temp_v0 + 10) + param_3;
-      if (temp_v6 == temp_v2) {
-        temp_v5 = 0xff;
-        FUN_002bf380(2,0x2f,9,*(short *)(temp_v0 + 8) + param_2,temp_v1,0x1f);
-      }
-      else {
-        temp_v5 = 0xffffffff;
-        FUN_002bf380(2,0x2f,8,*(short *)(temp_v0 + 8) + param_2,temp_v1,0x1f);
-      }
-      textFormatBuffer(temp_v4,&DAT_004028ec,param_5 + temp_v2 * 10 + 0x1e);
-      temp_v1 = FUN_002bf4f8(0x2f,0x41);
-      puVar3 = temp_v4;
-      FUN_002b6dd8(puVar3,2);
-      VectorSignedToFloat((int)*(short *)(temp_v0 + 10) + (int)*(short *)(temp_v1 + 10) + param_3,
-                          (unsigned char)(in_fpscr >> 0x16) & 3);
-      VectorSignedToFloat((int)*(short *)(temp_v0 + 8) +
-                          param_2 + (int)*(short *)(temp_v1 + 8) +
-                                    ((int)**(short **)(temp_v1 + 0xc) - (int)puVar3) / 2,
-                          (unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002be5a4(2,temp_v5,temp_v4,(int)*(short *)(temp_v0 + 8));
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < param_1);
-  }
-  return;
+namespace {
+struct ConfigurationChoices {
+    char heading[30];
+    char labels[3][10];
+};
 }
+extern "C" {
+extern const char DAT_004028ec[];
+const SpriteInfo *FUN_002bf4f8(u32 archive, s32 index);
+void FUN_002bf380(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);
+s32 textFormatBuffer(char *destination, const char *format, ...);
+s32 FUN_002b6dd8(const char *text, s32 font);
+void FUN_002be5a4(s32 font, u32 color, const char *text, f32 x, f32 y, f32, f32, f32);
 
-} /* extern "C" */
+// Draw configuration choices with the selected background and horizontally centered labels.
+void FUN_00196fe8(s32 count, s32 x, s32 y, s32 selected, const ConfigurationChoices *choices)
+{
+    s32 firstPosition = 0x42;
+    if (count > 2)
+        firstPosition = 0x44;
+    for (s32 index = 0; index < count; ++index) {
+        const SpriteInfo *position = FUN_002bf4f8(0x2f, firstPosition + index);
+        u32 color;
+        if (selected == index) {
+            color = 0xff;
+            FUN_002bf380(2, 0x2f, 9, position->x + x, position->y + y, 0x1f);
+        } else {
+            color = 0xffffffff;
+            FUN_002bf380(2, 0x2f, 8, position->x + x, position->y + y, 0x1f);
+        }
+        char text[64];
+        textFormatBuffer(text, DAT_004028ec, choices->labels[index]);
+        const SpriteInfo *label = FUN_002bf4f8(0x2f, 0x41);
+        s32 width = FUN_002b6dd8(text, 2);
+        s32 labelX = position->x + (x + (label->x + (label->size[0] - width) / 2));
+        s32 labelY = position->y + label->y + y;
+        FUN_002be5a4(2, color, text, static_cast<f32>(labelX), static_cast<f32>(labelY), 0.0f, 0.0f, 1.0f);
+    }
+}
+}

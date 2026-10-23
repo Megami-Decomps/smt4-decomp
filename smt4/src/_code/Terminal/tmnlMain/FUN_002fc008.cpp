@@ -1,61 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fc008` (_code @ 0x2fc008, 0x11c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initial clear loop uses different zero and induction registers. */
+#include "common.h"
+#include <stddef.h>
 
-extern "C" {
+extern "C" s32 questTestPackedFlag(u32 flag);
 
-extern unsigned short DAT_00432cf8; /* 0x432cf8 */
-
-extern int FUN_0026354c(void);
-
-
-void FUN_002fc008(int param_1)
-
+// Collect other terminals in the current group, optionally including locked destinations.
+extern "C" void FUN_002fc008(void *terminal)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  
-  piVar5 = (int *)(param_1 + 0x5e4);
-  temp_v2 = 0;
-  temp_v1 = 0;
-  *(unsigned int *)(param_1 + 0x5e4) = 0;
-  do {
-    temp_v3 = temp_v2 + 1;
-    temp_v1 = temp_v1 + 2;
-    *(unsigned int *)(param_1 + temp_v2 * 4 + 0x594) = 0;
-    temp_v2 = temp_v2 + 2;
-    *(unsigned int *)(param_1 + temp_v3 * 4 + 0x594) = 0;
-  } while (temp_v1 < 0x14);
-  if (*(char *)(param_1 + 5) == '\0') {
-    temp_v0 = 0;
-    do {
-      if (((*(unsigned char *)(param_1 + 9) != temp_v0) &&
-          (*(char *)((unsigned int)*(unsigned char *)(param_1 + 9) * 0x24 + 0x432cfc) ==
-           *(char *)(temp_v0 * 0x24 + 0x432cfc))) &&
-         ((temp_v0 == 0 || (temp_v1 = FUN_0026354c(), temp_v1 != 0)))) {
-        *(unsigned short **)(param_1 + *(int *)(param_1 + 0x5e4) * 4 + 0x594) =
-             &DAT_00432cf8 + temp_v0 * 0x12;
-        *piVar5 = *piVar5 + 1;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x14);
-    return;
-  }
-  temp_v0 = 0;
-  do {
-    if ((*(unsigned char *)(param_1 + 9) != temp_v0) &&
-       (*(char *)((unsigned int)*(unsigned char *)(param_1 + 9) * 0x24 + 0x432cfc) ==
-        *(char *)(temp_v0 * 0x24 + 0x432cfc))) {
-      *(unsigned short **)(param_1 + *(int *)(param_1 + 0x5e4) * 4 + 0x594) =
-           &DAT_00432cf8 + temp_v0 * 0x12;
-      *piVar5 = *piVar5 + 1;
+    struct DestinationRecord {
+        u8 unk00[4];
+        s8 group; // 0x04
+        u8 unk05[0x1f];
+    };
+    // The destination array and count extend beyond the shared TmnlWork prefix.
+    struct DestinationListView {
+        u8 unk00[5];
+        u8 showLocked; // 0x05
+        u8 unk06[3];
+        u8 currentDestination; // 0x09
+        u8 unk0a[0x58a];
+        DestinationRecord *destinations[20]; // 0x594
+        s32 count; // 0x5e4
+    };
+    typedef char LayoutCheck[sizeof(DestinationRecord) == 0x24 &&
+        offsetof(DestinationListView, destinations) == 0x594 &&
+        offsetof(DestinationListView, count) == 0x5e4 ? 1 : -1];
+    extern DestinationRecord DAT_00432cf8[20];
+    DestinationListView *work = static_cast<DestinationListView *>(terminal);
+    work->count = 0;
+    for (s32 index = 0; index < 20; ++index)
+        work->destinations[index] = NULL;
+    if (work->showLocked) {
+        for (s32 index = 0; index < 20; ++index) {
+            if (work->currentDestination != index &&
+                DAT_00432cf8[work->currentDestination].group == DAT_00432cf8[index].group) {
+                work->destinations[work->count] = &DAT_00432cf8[index];
+                ++work->count;
+            }
+        }
+    } else {
+        for (u32 index = 0; index < 20; ++index) {
+            if (work->currentDestination != index &&
+                DAT_00432cf8[work->currentDestination].group == DAT_00432cf8[index].group &&
+                (index == 0 || questTestPackedFlag(index))) {
+                work->destinations[work->count] = &DAT_00432cf8[index];
+                ++work->count;
+            }
+        }
     }
-    temp_v0 = temp_v0 + 1;
-  } while ((int)temp_v0 < 0x14);
-  return;
 }
-
-} /* extern "C" */

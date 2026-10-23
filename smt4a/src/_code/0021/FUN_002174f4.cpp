@@ -22,7 +22,7 @@ extern int FUN_002b28d8(...); /* 0x2b28d8 */
 extern int FUN_002fd93c(...); /* 0x2fd93c */
 extern int fusionComparePackedPairsByMappedKey(const void *, const void *); /* 0x336ef0 */
 extern int FUN_0034f0b4(...); /* 0x34f0b4 */
-extern int FUN_0034f1bc(...); /* 0x34f1bc */
+extern int fusionComparePairPriority(...); /* 0x34f1bc */
 extern int g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: qsort. */
@@ -91,7 +91,7 @@ void FUN_002174f4(void)
       qsort(temp_v0 + 0x6832,*(unsigned int *)(temp_v0 + 0x73ec),2,FUN_002b28d8);
     }
     else {
-      qsort(temp_v0 + 0x6832,*(unsigned int *)(temp_v0 + 0x73ec),2,FUN_0034f1bc);
+      qsort(temp_v0 + 0x6832,*(unsigned int *)(temp_v0 + 0x73ec),2,fusionComparePairPriority);
     }
   }
   if ((*pbVar9 & 0x7f) == 3) {

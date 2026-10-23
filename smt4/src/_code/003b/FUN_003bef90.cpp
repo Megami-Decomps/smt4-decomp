@@ -1,86 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bef90` (_code @ 0x3bef90, 0x114 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: final battleFlags read/modify/write uses r1 rather than retail r2; all other instructions agree. */
+#include "gamedata/UnitStats.h"
+
+/* Function-local views: these fields extend beyond the canonical recovered state/slot prefixes. */
+struct BattleReserveSelectionView {
+    u8 unk0000[0xC4];
+    s32 selectionIndex;
+    u8 unk00C8[0x90];
+    u32 selectedIds[1];
+    u8 unk015C[0x4344];
+    u32 battleFlags;
+    u32 unk44A4;
+    u32 controlFlags;
+};
+struct ReserveSlotSelectionView {
+    u8 unk0000[0x90F0];
+    s8 stock[24];
+    s8 active[3];
+    u8 count;
+};
+typedef char BattleReserveSelectionViewOffsets[
+    offsetof(BattleReserveSelectionView, selectionIndex) == 0xC4 &&
+    offsetof(BattleReserveSelectionView, selectedIds) == 0x158 &&
+    offsetof(BattleReserveSelectionView, battleFlags) == 0x44A0 &&
+    offsetof(BattleReserveSelectionView, controlFlags) == 0x44A8 ? 1 : -1];
+typedef char ReserveSlotSelectionViewOffsets[
+    offsetof(ReserveSlotSelectionView, stock) == 0x90F0 &&
+    offsetof(ReserveSlotSelectionView, count) == 0x910B ? 1 : -1];
 
 extern "C" {
+BattleReserveSelectionView *btlGetMainState(void);
+ReserveSlotSelectionView *gameGetSlotTable(void);
+StatBlock *gameGetUnitRecord(s32 slot);
+s32 flagWordTestBit(const void *flags, u32 bit);
+s32 randRange(u32 maximum);
 
-int SBORROW4(int, int);
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int randRange(unsigned int);
-extern int btlGetMainState(void);
-extern int flagWordTestBit(int, unsigned int);
-extern int gameGetUnitRecord(void);
-extern int gameGetSlotTable(void);
-
-
-unsigned int FUN_003bef90(void)
-
+// Choose at most one eligible reserve unit using its encounter probability tier.
+u32 FUN_003bef90(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned char temp_v8;
-  
-  temp_v1 = btlGetMainState();
-  if (*(int *)(temp_v1 + 0xc4) < 0) {
-    temp_v7 = 0;
-    temp_v1 = gameGetSlotTable();
-    temp_v6 = 0;
-    if (*(char *)(temp_v1 + 0x910b) != '\0') {
-      do {
-        if (-1 < *(char *)(temp_v1 + temp_v6 + 0x90f0)) {
-          temp_v2 = gameGetUnitRecord();
-          temp_v3 = flagWordTestBit(temp_v2,10);
-          if (temp_v3 != 0) {
-            temp_v0 = *(unsigned char *)(temp_v2 + 0x600);
-            if (temp_v0 < 2) {
-              temp_v3 = 0x19;
+    if (btlGetMainState()->selectionIndex < 0) {
+        s32 selected = 0;
+        ReserveSlotSelectionView *slots = gameGetSlotTable();
+        for (s32 index = 0; index < slots->count; ++index) {
+            s32 slot = slots->stock[index];
+            if (slot >= 0) {
+                StatBlock *unit = gameGetUnitRecord(slot);
+                if (flagWordTestBit(unit, 10)) {
+                    s32 chance;
+                    switch (unit->encounter.probabilityTier) {
+                    case 0:
+                    case 1: chance = 25; break;
+                    case 2: chance = 75; break;
+                    case 3: chance = 90; break;
+                    default: chance = 99; break;
+                    }
+                    if (btlGetMainState()->controlFlags & 0x10000)
+                        chance = 100;
+                    if (randRange(99) < chance && selected < 1) {
+                        btlGetMainState()->selectedIds[selected] = unit->id;
+                        ++selected;
+                    }
+                }
             }
-            else if (temp_v0 == 2) {
-              temp_v3 = 0x4b;
-            }
-            else if (temp_v0 == 3) {
-              temp_v3 = 0x5a;
-            }
-            else {
-              temp_v3 = 99;
-            }
-            temp_v4 = btlGetMainState();
-            if ((*(unsigned int *)(temp_v4 + 0x44a8) & 0x10000) != 0) {
-              temp_v3 = 100;
-            }
-            temp_v5 = randRange(99);
-            temp_v8 = SBORROW4(temp_v5,temp_v3);
-            temp_v4 = temp_v5 - temp_v3;
-            if (temp_v5 < temp_v3) {
-              temp_v8 = SBORROW4(temp_v7,1);
-              temp_v4 = temp_v7 - 1;
-            }
-            if (temp_v4 < 0 != temp_v8) {
-              temp_v4 = btlGetMainState();
-              temp_v3 = temp_v7 * 4;
-              temp_v7 = temp_v7 + 1;
-              *(unsigned int *)(temp_v4 + temp_v3 + 0x158) = (unsigned int)*(unsigned short *)(temp_v2 + 0x46);
-            }
-          }
         }
-        temp_v6 = temp_v6 + 1;
-      } while (temp_v6 < (int)(unsigned int)*(unsigned char *)(temp_v1 + 0x910b));
-      if (0 < temp_v7) {
-        temp_v1 = btlGetMainState();
-        *(unsigned int *)(temp_v1 + 0x44a0) = *(unsigned int *)(temp_v1 + 0x44a0) | 0x200;
-        return 1;
-      }
+        if (selected > 0) {
+            btlGetMainState()->battleFlags |= 0x200;
+            return 1;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

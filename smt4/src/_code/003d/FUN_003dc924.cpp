@@ -1,94 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dc924` (_code @ 0x3dc924, 0x188 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: reserved slots are excluded directly; loop setup, cached-slot addressing and member-ID spills differ. */
+#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlAction.h"
+#include "shard/W6_W6Match7_MaterialAnimationFlags.h"
+
+/* Preserve the shared action's 10-byte union alignment when reading its word at 0x5c. */
+struct BattleModelActionKeyView {
+    u8 unk00[0x5c];
+    u32 key;
+};
 
 extern "C" {
+BtlMainState *btlGetMainState(void);
+void modelEffectReleaseEntry(MaterialMergeOwner *owner, s32 index);
+s32 FUN_0027dab0(BtlMainState *battle, const BtlActionRecord *action);
+MaterialMergeVariants *FUN_0027da30(BtlMainState *battle, s32 memberId);
+MaterialMergeModel *asdMdlManagerClone(MaterialMergeModel *model, u32 flags);
 
-int FUN_0027da30(int, int);
-int btlGetMainState(void);
-int modelEffectReleaseEntry(int, int, int, unsigned int, int);
-
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_0027da30. */
-extern int FUN_0027dab0(unsigned int, int);
-extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: modelEffectReleaseEntry. */
-
-
-void FUN_003dc924(int param_1,int param_2,int param_3,unsigned int param_4)
-
+void FUN_003dc924(MaterialMergeOwner *owner, s32 effectKind, s32 allActors)
 {
-/* irregular: 3 unstructured edge(s); 2 goto(s); 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  
-  temp_v10 = param_1;
-  temp_v0 = btlGetMainState();
-  temp_v9 = 0;
-LAB_003dca98:
-  do {
-    do {
-      do {
-        do {
-          do {
-            do {
-              temp_v9 = temp_v9 + 1;
-              if (temp_v9 >= 0x6d) {
-                return;
-              }
-            } while (temp_v9 < 4);
-            temp_v1 = btlGetMainState();
-            temp_v2 = temp_v9 * 0x114 + 0x50;
-          } while ((*(unsigned int *)(*(int *)(temp_v1 + 0x1e98) + temp_v2) & 1) == 0);
-          temp_v3 = *(unsigned int *)(*(int *)(temp_v0 + 0x1e98) + temp_v2);
-          if (param_3 != 0) {
-            if ((temp_v3 & 0x8000) == 0) goto LAB_003dca98;
-          }
-          else if ((temp_v3 & 0x400) == 0) goto LAB_003dca98;
-        } while (!(param_2 != 0 && param_2 != 0x16));
-        modelEffectReleaseEntry(param_1,temp_v9,temp_v9 * 5,param_4,temp_v10);
-        temp_v1 = btlGetMainState();
-        temp_v1 = *(int *)(temp_v1 + 0x1e98) + temp_v9 * 0x114;
-        temp_v2 = (int)*(short *)(temp_v1 + 0x62);
-      } while (*(int *)(param_1 + temp_v9 * 8 + 0x1034) >= 0);
-      temp_v4 = btlGetMainState();
-      temp_v1 = FUN_0027dab0(temp_v4,temp_v1);
-      if (temp_v1 < 0) {
-        temp_v1 = 0;
-      }
-      temp_v5 = btlGetMainState();
-      FUN_0027da30(temp_v5,temp_v2);
-    } while (temp_v5 == 0);
-    temp_v8 = 0;
-    do {
-      temp_v7 = param_1 + temp_v8 * 0x28;
-      if ((*(int *)(temp_v5 + temp_v1 * 4 + 0xc) == *(int *)(temp_v7 + 0x194)) &&
-         (temp_v6 = btlGetMainState(),
-         *(int *)(*(int *)(temp_v6 + 0x1e98) + temp_v9 * 0x114 + 0x5c) == *(int *)(temp_v7 + 0x198))) {
-        temp_v4 = asdMdlManagerClone(*(unsigned int *)(temp_v7 + 400),1);
-        temp_v1 = param_1 + temp_v9 * 0x10;
-        *(unsigned int *)(temp_v1 + 0x960) = temp_v4;
-        *(int *)(temp_v1 + 0x964) = temp_v2;
-        break;
-      }
-      temp_v8 = temp_v8 + 1;
-    } while (temp_v8 < 0x32);
-  } while( 1 );
+    BtlMainState *battle = btlGetMainState();
+    /* The first four action slots are not restored from the model cache. */
+    for (s32 index = 4; index < 109; ++index) {
+        if (!(btlGetMainState()->actions.records[index].status & 1))
+            continue;
+        u32 status = battle->actions.records[index].status;
+        if (allActors) {
+            if (!(status & 0x8000))
+                continue;
+        } else if (!(status & 0x400)) {
+            continue;
+        }
+        if (effectKind == 0 || effectKind == 22)
+            continue;
+        modelEffectReleaseEntry(owner, index);
+        const BtlActionRecord *action = &btlGetMainState()->actions.records[index];
+        s32 memberId = action->memberId;
+        if (owner->state.slots[index].handle >= 0)
+            continue;
+        s32 variant = FUN_0027dab0(btlGetMainState(), action);
+        if (variant < 0)
+            variant = 0;
+        const MaterialMergeVariants *variants = FUN_0027da30(btlGetMainState(), memberId);
+        if (!variants)
+            continue;
+        for (s32 original = 0; original < 50; ++original) {
+            MaterialMergeOriginal *cached = &owner->models.originals[original];
+            if (variants->keys[variant] == cached->key &&
+                ((const BattleModelActionKeyView *)&btlGetMainState()->actions.records[index])->key == cached->context) {
+                owner->models.results[index].model = asdMdlManagerClone(cached->model, 1);
+                owner->models.results[index].group = memberId;
+                break;
+            }
+        }
+    }
 }
-
-} /* extern "C" */
+}

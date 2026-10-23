@@ -1,68 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c781c` (_code @ 0x2c781c, 0x120 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: final segment-delta loads and VFP register allocation differ; all 72 instructions and control flow otherwise agree. */
+#include "gfx/ScalarCurveTransition.h"
 extern "C" {
+f32 FUN_002039d0(s32 mode, s32 maximum, u32 divisor);
 
-int FUN_002039d0(int, int, int);
-int VectorSignedToFloat(int, int);
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002039d0. */
-
-
-void FUN_002c781c(int param_1,int param_2)
-
+// Skip duplicate-frame keys and prepare the next randomized scalar segment.
+void FUN_002c781c(ScalarCurveTransition *curve, const ScalarCurveTransition *timeline)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v4;
-  unsigned int temp_v5;
-  float temp_v6;
-  
-  temp_v2 = 1;
-  if ('\x02' < *(char *)(param_1 + 0x2e8)) {
-    *(unsigned char *)(param_1 + 0x2e8) = 4;
-  }
-  temp_v0 = (int)*(char *)(param_1 + 0x2e8);
-  if (temp_v0 + 1 < 4) {
-    while (temp_v1 = *(int *)(param_2 + (temp_v0 + temp_v2) * 0x44 + 0x2c) -
-                   *(int *)(param_2 + temp_v0 * 0x44 + 0x2c), *(int *)(param_1 + 0x330) = temp_v1,
-          temp_v1 < 1) {
-      temp_v2 = temp_v2 + 1;
-      if (temp_v0 + temp_v2 >= 4) {
+    if (curve->currentKey >= 3)
+        curve->currentKey = 4;
+    s32 current = curve->currentKey;
+    for (s32 step = 1; current + step < 4; ++step) {
+        curve->duration = timeline->keys[current + step].frame - timeline->keys[current].frame;
+        if (curve->duration <= 0)
+            continue;
+        if (curve->keys[current + step].value != 0 &&
+            curve->keys[current + step].randomAmplitude > 0) {
+            f32 adjustment = FUN_002039d0(2, curve->keys[current + step].randomAmplitude, 1);
+            curve->keys[curve->currentKey + step].value -= static_cast<s32>(adjustment);
+        }
+        s32 nextIndex = curve->currentKey + step;
+        const ScalarCurveKey *start = &curve->keys[curve->currentKey];
+        const ScalarCurveKey *end = &curve->keys[nextIndex];
+        f32 frames = static_cast<f32>(end->frame - start->frame);
+        f32 difference = static_cast<f32>(end->value - start->value);
+        curve->slope = difference / frames;
+        curve->target = static_cast<f32>(end->value);
+        curve->currentKey = static_cast<s8>(nextIndex);
         return;
-      }
     }
-    temp_v1 = param_1 + (temp_v0 + temp_v2) * 0x44;
-    temp_v3 = *(short *)(temp_v1 + 0x4a) != 0;
-    temp_v0 = 0;
-    if (temp_v3) {
-      temp_v0 = *(int *)(temp_v1 + 0x50);
-    }
-    if (temp_v3 && 0 < temp_v0) {
-      FUN_002039d0(2,temp_v0,1);
-      temp_v0 = param_1 + (*(char *)(param_1 + 0x2e8) + temp_v2) * 0x44;
-      *(short *)(temp_v0 + 0x4a) = *(short *)(temp_v0 + 0x4a) - (short)(int)in_s0;
-    }
-    temp_v2 = *(char *)(param_1 + 0x2e8) + temp_v2;
-    temp_v1 = param_1 + *(char *)(param_1 + 0x2e8) * 0x44;
-    temp_v0 = param_1 + temp_v2 * 0x44;
-    temp_v6 = (float)VectorSignedToFloat(*(int *)(temp_v0 + 0x2c) - *(int *)(temp_v1 + 0x2c),
-                                       (unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v4 = (float)VectorSignedToFloat((int)*(short *)(temp_v0 + 0x4a) - (int)*(short *)(temp_v1 + 0x4a)
-                                       ,(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(float *)(param_1 + 0x234) = temp_v4 / temp_v6;
-    temp_v5 = VectorSignedToFloat((int)*(short *)(temp_v0 + 0x4a),(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(unsigned int *)(param_1 + 0x260) = temp_v5;
-    *(char *)(param_1 + 0x2e8) = (char)temp_v2;
-  }
-  return;
 }
-
-} /* extern "C" */
+}
