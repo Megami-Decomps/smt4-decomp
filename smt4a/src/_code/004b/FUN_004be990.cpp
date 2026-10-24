@@ -1,54 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004be990` (_code @ 0x4be990, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the direction in a separate register (movs r0, r1) and tests it again after the keyframe chain; the build folds the image selection into the chain and uses fewer compares. */
+#include "common.h"
 
 extern "C" {
 
-int uiSpriteSetKeyframe(int, int, unsigned int);
-int uiSpriteSetImageKeyframe(int, int, unsigned int);
+void uiSpriteSetKeyframe(void *sprite, s16 keyframe, u32 frame);
+void uiSpriteSetImageKeyframe(void *sprite, s16 keyframe, u32 frame);
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-
-
-void FUN_004be990(int param_1,int param_2,short param_3,unsigned int param_4)
-
+/* Sets the sprite at +0x30 to the keyframe for direction `direction` (0-3 map to 4-7) and its image keyframe (0 for directions 0-1, 1 for 2-3). */
+void FUN_004be990(u8 *object, s32 direction, s32 image, u32 frame)
 {
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  
-  temp_v0 = (short)param_2;
-  if (param_2 == 0) {
-    temp_v0 = 4;
-  }
-  else {
-    if (param_2 == 1) {
-      temp_v0 = 5;
+    s32 keyframe = direction;
+
+    if (direction == 0) {
+        keyframe = 4;
+        image = 0;
+    } else {
+        if (direction == 1) {
+            keyframe = 5;
+        } else if (direction == 2) {
+            keyframe = 6;
+        } else if (direction == 3) {
+            keyframe = 7;
+        }
+        if (direction == 1) {
+            image = 0;
+        } else if (direction == 2 || direction == 3) {
+            image = 1;
+        }
     }
-    else if (param_2 == 2) {
-      temp_v0 = 6;
-    }
-    else if (param_2 == 3) {
-      temp_v0 = 7;
-    }
-    if (param_2 != 1) {
-      if (param_2 == 2 || param_2 == 3) {
-        param_3 = 1;
-      }
-      uiSpriteSetKeyframe(param_1 + 0x30,(int)temp_v0,param_4);
-      uiSpriteSetImageKeyframe(param_1 + 0x30,(int)param_3,param_4);
-      return;
-    }
-  }
-  param_3 = 0;
-  uiSpriteSetKeyframe(param_1 + 0x30,(int)temp_v0,param_4);
-  uiSpriteSetImageKeyframe(param_1 + 0x30,(int)param_3,param_4);
-  return;
+    uiSpriteSetKeyframe(object + 0x30, keyframe, frame);
+    uiSpriteSetImageKeyframe(object + 0x30, image, frame);
 }
 
 } /* extern "C" */

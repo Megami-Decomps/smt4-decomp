@@ -16,7 +16,7 @@ s32 recordKindOrderCompare(const void *a, const void *b);
 s32 FUN_00270d74(const void *a, const void *b);
 s32 FUN_00321cc0(const void *a, const void *b);
 s32 FUN_002fe074(const void *a, const void *b);
-s32 FUN_00375b80(const void *a, const void *b);
+s32 devilCompareBySetRaceLevel(const void *a, const void *b);
 s32 FUN_002b2ca8(const void *a, const void *b);
 s32 btlDevilCompareValueKindAndOrder(const void *a, const void *b);
 void arraySortQsort(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
@@ -49,7 +49,7 @@ void uniteSortCandidateList(void)
         if (ascending) {
             qsort(work->candidates.devilIds, work->candidates.count, sizeof(u16), FUN_002fe074);
         } else {
-            qsort(work->candidates.devilIds, work->candidates.count, sizeof(u16), FUN_00375b80);
+            qsort(work->candidates.devilIds, work->candidates.count, sizeof(u16), devilCompareBySetRaceLevel);
         }
     }
     if ((*setting & 0x7f) == 3) {

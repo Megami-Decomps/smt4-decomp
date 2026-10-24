@@ -8,10 +8,10 @@ int FUN_00140918(unsigned int *[3]);
 int FUN_00141fd0(...);
 int soundArchiveReadBankInfo(...);
 int FUN_0014d530(...);
-int FUN_002ac444(unsigned char [20], int);
+int _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(unsigned char [20], int);
 int FUN_002ac4a0(...);
 int FUN_002ac5d8(...);
-int FUN_002ac5f4(...);
+int _ZN2nw3snd8internal14BankFileReaderC1EPKv(...);
 int FUN_002af3b4(int *, unsigned int, unsigned int, unsigned int, unsigned int);
 
 typedef int romwright_code(...);
@@ -52,10 +52,10 @@ extern int FUN_0014d3fc(int, unsigned int, unsigned int *);
 extern int FUN_0014d478(int, unsigned int, unsigned int *);
 extern int FUN_0014d4ec(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_0014d530. */
-/* Supplied declaration required: FUN_002ac444. */
+/* Supplied declaration required: _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv. */
 /* Supplied declaration required: FUN_002ac4a0. */
 /* Supplied declaration required: FUN_002ac5d8. */
-/* Supplied declaration required: FUN_002ac5f4. */
+/* Supplied declaration required: _ZN2nw3snd8internal14BankFileReaderC1EPKv. */
 /* Supplied declaration required: FUN_002af3b4. */
 extern int nw_snd_internal_GroupFileReader_ReadGroupItemInfoEx(unsigned int **, unsigned int *, unsigned int);
 extern int nw_snd_internal_GroupFileReader_ReadGroupItemLocationInfo(unsigned int **, unsigned int *, unsigned int);
@@ -146,7 +146,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
           if (((temp_v1 == 3) && (temp_v20 != 0xffffffff)) &&
              ((temp_v8 = unaff_r8, temp_v0 = soundArchiveReadBankInfo(param_1[1],temp_v20,&temp_v8), temp_v0 != 0
               && (temp_v0 = (**(romwright_code **)(*param_1 + 0xc))(param_1,temp_v8), temp_v0 != 0)))) {
-            FUN_002ac5f4(&temp_v5);
+            _ZN2nw3snd8internal14BankFileReaderC1EPKv(&temp_v5);
             temp_v3 = FUN_002ac5d8(&temp_v5);
             temp_v0 = (int)((unsigned long long)temp_v3 >> 0x20);
             piVar2 = (int *)temp_v3;
@@ -179,7 +179,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
                 temp_v0 = FUN_0014d478(param_1[1],temp_v1,temp_v14 + 2);
                 if ((temp_v0 != 0) &&
                    (temp_v0 = (**(romwright_code **)(*param_1 + 0xc))(param_1,temp_v22), temp_v0 != 0)) {
-                  FUN_002ac444(temp_v25,temp_v0);
+                  _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(temp_v25,temp_v0);
                   temp_v6 = 0;
                   temp_v7 = temp_v7 & 0xffffff00;
                   temp_v0 = nw_snd_internal_WaveSoundFileReader_ReadNoteInfo
@@ -208,7 +208,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
                         (temp_v23 = unaff_r8,
                         temp_v0 = soundArchiveReadBankInfo(param_1[1],unaff_r9[temp_v2 + 1],&temp_v23), temp_v0 != 0))
                        && (temp_v0 = (**(romwright_code **)(*param_1 + 0xc))(param_1,temp_v23), temp_v0 != 0)) {
-                      FUN_002ac5f4(temp_v24);
+                      _ZN2nw3snd8internal14BankFileReaderC1EPKv(temp_v24);
                       temp_v3 = FUN_002ac5d8(temp_v24);
                       temp_v0 = (int)((unsigned long long)temp_v3 >> 0x20);
                       piVar2 = (int *)temp_v3;
@@ -248,7 +248,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
                   (temp_v10 = unaff_r8, temp_v0 = soundArchiveReadBankInfo(param_1[1],temp_v14[temp_v1],&temp_v10),
                   temp_v0 != 0)) &&
                  (temp_v0 = (**(romwright_code **)(*param_1 + 0xc))(param_1,temp_v10), temp_v0 != 0)) {
-                FUN_002ac5f4(&temp_v22,temp_v0);
+                _ZN2nw3snd8internal14BankFileReaderC1EPKv(&temp_v22,temp_v0);
                 temp_v3 = FUN_002ac5d8(&temp_v22);
                 temp_v0 = (int)((unsigned long long)temp_v3 >> 0x20);
                 piVar2 = (int *)temp_v3;

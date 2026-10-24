@@ -11,14 +11,14 @@ struct Object {
 };
 void _ZN9Obj55b28cC1EPv(Guard *,void *);
 void _ZN9Obj55b28cD1Ev(Guard *);
-void *operatorNew(u32);
+void *_Znwj(u32);
 void *FUN_00301490(void *);
 void *FUN_002f3044(Object *object) {
     Guard guard;
     _ZN9Obj55b28cC1EPv(&guard,object->mutex);
     u32 slot=0;
     while(slot<8 && object->slots[slot])++slot;
-    void *result=operatorNew(64);
+    void *result=_Znwj(64);
     if(result)result=FUN_00301490(result);
     object->slots[slot]=result;
     _ZN9Obj55b28cD1Ev(&guard);

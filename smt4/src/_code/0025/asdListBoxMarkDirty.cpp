@@ -1,139 +1,95 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdListBoxMarkDirty` (_code @ 0x259b50, 0x258 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail repeats the "measure the text and add the width" tail in every item-type case (ours is merged into one tail) and keeps the buffer address in r8 for the FUN_0024ee4c call; the frame is 4 bytes larger here */
+#include "AsdSDK/Source/Util/AsdListBox.h"
+
+/* The list box work object as the size calculation sees it (observed fields). */
+struct ListBoxMetrics {
+    /* 0x00 */ AsdList items;
+    /* 0x0C */ u8 unk0C[0x44];
+    /* 0x50 */ f32 width;
+    /* 0x54 */ f32 height;
+    /* 0x58 */ s32 charWidth;
+    /* 0x5C */ s32 rowHeight;
+    /* 0x60 */ u8 unk60[8];
+    /* 0x68 */ s32 maxRows;
+    /* 0x6C */ s32 visibleRows;
+    /* 0x70 */ u8 unk70[0xC];
+    /* 0x7C */ s32 hasMeasure;
+    /* 0x80 */ s32 (*measure)(const char *text);
+    /* 0x84 */ u8 unk84[8];
+    /* 0x8C */ char title[1];
+};
 
 extern "C" {
 
-int FUN_0024ee4c(unsigned char *, unsigned char *);
-int textFormatBuffer(...);
-int libc_strlen(...);
-int SUB84(double, int);
-int VectorSignedToFloat(int, int);
+ListBoxMetrics *jobGetWork(void);
+s32 libc_strlen(const char *text);
+void textFormatBuffer(char *buffer, const char *format, ...);
+void FUN_0024ee4c(char *destination, const char *source);
 
-typedef int romwright_code(...);
-extern unsigned char LAB_00259da8; /* 0x259da8 */
-extern unsigned char LAB_00259dac; /* 0x259dac */
-extern unsigned char LAB_00259db4; /* 0x259db4 */
-extern unsigned char LAB_00259dbc; /* 0x259dbc */
-extern unsigned char LAB_00259dc4; /* 0x259dc4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: SUB84 (SUBPIECE). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Supplied declaration required: FUN_0024ee4c. */
-/* Supplied declaration required: textFormatBuffer. */
-extern int *jobGetWork(void);
-/* Supplied declaration required: libc_strlen. */
-
-
+/* Recomputes the size of the list box from its title and items: the widest item (with its value
+ * text) gives the width, the number of visible rows the height. */
 void asdListBoxMarkDirty(void)
-
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned char *unaff_r8;
-  unsigned char temp_v4;
-  unsigned int in_fpscr;
-  float temp_v5;
-  float temp_v6;
-  unsigned int temp_v7;
-  unsigned char temp_v8 [264];
-  unsigned long long temp_v9;
-  
-  piVar1 = (int *)jobGetWork();
-  temp_v0 = libc_strlen(piVar1 + 0x23);
-  temp_v3 = *piVar1;
-  temp_v4 = temp_v3 != 0;
-  if (temp_v4) {
-    unaff_r8 = temp_v8;
-  }
-  temp_v7 = VectorSignedToFloat(temp_v0 * piVar1[0x16],(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v9 = (unsigned long long)temp_v7;
-  while (temp_v4) {
-    temp_v0 = *(int *)(temp_v3 + 8);
-    if (piVar1[0x1f] != 0) {
-      temp_v1 = (*(romwright_code *)piVar1[0x20])(temp_v0 + 6);
-      switch(*(unsigned char *)(temp_v0 + 4)) {
-      case 1:
-        textFormatBuffer(temp_v8,&LAB_00259da8,temp_v0 + 0x106);
-        temp_v0 = (*(romwright_code *)piVar1[0x20])(temp_v8);
-        temp_v1 = temp_v0 + temp_v1 + piVar1[0x16];
-        break;
-      case 2:
-        FUN_0024ee4c(unaff_r8,&LAB_00259dac);
-        temp_v0 = (*(romwright_code *)piVar1[0x20])(temp_v8);
-        temp_v1 = temp_v0 + temp_v1 + piVar1[0x16];
-        break;
-      case 3:
-        if (*(char *)(temp_v0 + 5) != '\0') {
-          textFormatBuffer(temp_v8,&LAB_00259db4,*(unsigned int *)(temp_v0 + 0x208));
-          temp_v0 = (*(romwright_code *)piVar1[0x20])(temp_v8);
-          temp_v1 = temp_v0 + temp_v1 + piVar1[0x16];
+    char text[256];
+    ListBoxMetrics *box = jobGetWork();
+    f32 width = (f32)(libc_strlen(box->title) * box->charWidth);
+
+    for (AsdListNode *node = box->items.first; node != NULL; node = node->next) {
+        AsdListBoxItem *item = static_cast<AsdListBoxItem *>(node->item);
+        s32 itemWidth;
+
+        if (box->hasMeasure != 0) {
+            itemWidth = box->measure(item->label);
+            switch (item->type) {
+            case ASD_LISTBOX_PLAIN:
+                break;
+            case ASD_LISTBOX_TEXT:
+                textFormatBuffer(text, "_%s", item->text);
+                itemWidth = box->measure(text) + itemWidth + box->charWidth;
+                break;
+            case ASD_LISTBOX_TOGGLE:
+                FUN_0024ee4c(text, "_FALSE");
+                itemWidth = box->measure(text) + itemWidth + box->charWidth;
+                break;
+            case ASD_LISTBOX_INT:
+                if (item->flags != 0) {
+                    textFormatBuffer(text, "0x%08X", item->intValue);
+                } else {
+                    textFormatBuffer(text, "_%8d", item->intValue);
+                }
+                itemWidth = box->measure(text) + itemWidth + box->charWidth;
+                break;
+            case ASD_LISTBOX_FLOAT:
+                textFormatBuffer(text, "_%4.2f", (double)item->floatValue);
+                itemWidth = box->measure(text) + itemWidth + box->charWidth;
+                break;
+            }
+        } else {
+            itemWidth = libc_strlen(item->label) * box->charWidth;
+            switch (item->type) {
+            case ASD_LISTBOX_PLAIN:
+                break;
+            case ASD_LISTBOX_TEXT:
+                itemWidth += (libc_strlen(item->text) + 1) * box->charWidth;
+                break;
+            case ASD_LISTBOX_TOGGLE:
+                itemWidth += box->charWidth * 6;
+                break;
+            case ASD_LISTBOX_INT:
+                itemWidth += box->charWidth * (item->flags != 0 ? 11 : 9);
+                break;
+            case ASD_LISTBOX_FLOAT:
+                itemWidth += box->charWidth * 8;
+                break;
+            }
         }
-        else {
-          textFormatBuffer(temp_v8,&LAB_00259dbc,*(unsigned int *)(temp_v0 + 0x208));
-          temp_v0 = (*(romwright_code *)piVar1[0x20])(temp_v8);
-          temp_v1 = temp_v0 + temp_v1 + piVar1[0x16];
+        if (width < (f32)(itemWidth + 4)) {
+            width = (f32)(itemWidth + 4);
         }
-        break;
-      case 4:
-        textFormatBuffer(temp_v8,&LAB_00259dc4,SUB84((double)*(float *)(temp_v0 + 0x20c),0),
-                     (int)((unsigned long long)(double)*(float *)(temp_v0 + 0x20c) >> 0x20));
-        temp_v0 = (*(romwright_code *)piVar1[0x20])(temp_v8);
-        temp_v1 = temp_v0 + temp_v1 + piVar1[0x16];
-      }
     }
-    else {
-      temp_v1 = libc_strlen(temp_v0 + 6);
-      temp_v2 = piVar1[0x16];
-      temp_v1 = temp_v1 * temp_v2;
-      switch(*(unsigned char *)(temp_v0 + 4)) {
-      case 1:
-        temp_v0 = libc_strlen(temp_v0 + 0x106);
-        temp_v1 = (temp_v0 + 1) * piVar1[0x16] + temp_v1;
-        break;
-      case 2:
-        temp_v1 = temp_v1 + temp_v2 * 6;
-        break;
-      case 3:
-        if (*(char *)(temp_v0 + 5) == '\0') {
-          temp_v2 = temp_v2 * 9;
-        }
-        else {
-          temp_v2 = temp_v2 * 0xb;
-        }
-        temp_v1 = temp_v1 + temp_v2;
-        break;
-      case 4:
-        temp_v1 = temp_v1 + temp_v2 * 8;
-      }
-    }
-    temp_v3 = *(int *)(temp_v3 + 0x18);
-    temp_v5 = (float)VectorSignedToFloat(temp_v1 + 4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v5 <= (float)temp_v9) << 0x1d);
-    if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) {
-      temp_v7 = VectorSignedToFloat(temp_v1 + 4,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v9 = (unsigned long long)temp_v7;
-    }
-    temp_v7 = (unsigned int)temp_v9;
-    temp_v4 = temp_v3 != 0;
-  }
-  piVar1[0x14] = temp_v7;
-  temp_v3 = piVar1[0x1b];
-  if (piVar1[0x1a] <= piVar1[0x1b]) {
-    temp_v3 = piVar1[0x1a];
-  }
-  temp_v6 = (float)VectorSignedToFloat(piVar1[0x17],(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v5 = (float)VectorSignedToFloat(piVar1[0x17] * temp_v3 + 4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  piVar1[0x15] = (int)(temp_v5 + temp_v6);
-  return;
+    box->width = width;
+    s32 rows = box->visibleRows < box->maxRows ? box->visibleRows : box->maxRows;
+    box->height = (f32)(box->rowHeight * rows + 4) + (f32)box->rowHeight;
 }
 
-} /* extern "C" */
+}

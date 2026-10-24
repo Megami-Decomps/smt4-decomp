@@ -9,7 +9,7 @@ extern unsigned char DAT_005585c0; /* 0x5585c0 */
 
 extern unsigned int *_ZN9Obj5593b8C1Ev(void);
 extern int _ZN9Obj55aff4C1Ev(unsigned int *);
-extern int FUN_002ea100(int, unsigned char *);
+extern int _ZN9Obj55aff4C1EPKc(int, unsigned char *);
 
 
 void FUN_00103fd4(void)
@@ -23,7 +23,7 @@ void FUN_00103fd4(void)
   puVar1[4] = 0;
   *puVar1 = (unsigned int)&DAT_005585c0;
   temp_v0 = _ZN9Obj55aff4C1Ev(puVar1 + 5);
-  temp_v0 = FUN_002ea100(temp_v0 + 8,&LAB_00104000);
+  temp_v0 = _ZN9Obj55aff4C1EPKc(temp_v0 + 8,&LAB_00104000);
   *(unsigned int *)(temp_v0 + 8) = 0;
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   *(unsigned int *)(temp_v0 + 0x10) = 0;

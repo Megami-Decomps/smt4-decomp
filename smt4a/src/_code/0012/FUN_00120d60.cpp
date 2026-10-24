@@ -34,7 +34,7 @@ extern int onlineContextGetInstance(void);
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int FUN_002e7168(int, unsigned int);
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern unsigned int *_ZN9Obj5593b8C1Ev(void);
 /* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002ed074(unsigned int *, unsigned int);
@@ -85,7 +85,7 @@ int FUN_00120d60(void)
   DAT_005949f0 = DAT_005949f0 + 1;
   _ZN9Obj55b28cD1Ev(temp_v5);
   FUN_002ed0c0(temp_v0 - 0x30,temp_v0 - 0x4c);
-  temp_v1 = operatorNew(0x1f0);
+  temp_v1 = _Znwj(0x1f0);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = FUN_00123100(temp_v1,8,0);
@@ -94,20 +94,20 @@ int FUN_00120d60(void)
   if (DAT_00594967 != '\0') {
     FUN_00122dd0();
   }
-  temp_v1 = operatorNew(0x60);
+  temp_v1 = _Znwj(0x60);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = FUN_001142fc();
   }
   *(unsigned int *)(temp_v0 - 0x3c) = temp_v2;
-  temp_v3 = operatorNew(0x48);
+  temp_v3 = _Znwj(0x48);
   temp_v1 = 0;
   if (temp_v3 != 0) {
     temp_v1 = FUN_0011081c();
   }
   *(int *)(temp_v0 - 0x38) = temp_v1;
   FUN_002fba58(*(unsigned int *)(temp_v1 + 0x44),*(unsigned int *)(temp_v0 - 0x3c));
-  temp_v1 = operatorNew(0x74);
+  temp_v1 = _Znwj(0x74);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = FUN_001175a4();

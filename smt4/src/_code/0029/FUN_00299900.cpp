@@ -1,112 +1,96 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00299900` (_code @ 0x299900, 0x2bc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail's jump table starts at 0 (no `sub r0, r0, #9`) and the u16 list loads keep the low constant in the LDRH offset (add #0x1d00; ldrh [r0,#0xb4]) where this build adds the whole constant before the load. */
+#include "ui/GridNavigation.h"
+#include <stddef.h>
+
+/* The camp menu's selectable lists: one grid per list, and the table of entry ids each grid indexes. */
+struct CampLists {
+    /* 0x0000 */ u8 unk0000[0xB0];
+    /* 0x00B0 */ GridNavigation grids[12];
+    /* 0x0560 */ u8 unk0560[0xE3C - 0x560];
+    /* 0x0E3C */ struct { u32 id; u32 unk04; } skills[200];
+    /* 0x147C */ u16 listB[60];
+    /* 0x14F4 */ u16 listC[1000];
+    /* 0x1CC4 */ u16 listD[120];
+    /* 0x1DB4 */ u16 listE[100];
+    /* 0x1E7C */ u16 listF[120];
+    /* 0x1F6C */ u16 listG[120];
+    /* 0x205C */ u16 listH[50];
+    /* 0x20C0 */ u16 listI[120];
+    /* 0x21B0 */ u16 listJ[120];
+    /* 0x22A0 */ u16 listK[120];
+    /* 0x2390 */ u16 listL[120];
+};
+typedef char CampListsOffsets[
+    offsetof(CampLists, grids) == 0xB0 && sizeof(GridNavigation) * 12 == 0x4B0 &&
+    offsetof(CampLists, skills) == 0xE3C && offsetof(CampLists, listB) == 0x147C &&
+    offsetof(CampLists, listC) == 0x14F4 && offsetof(CampLists, listD) == 0x1CC4 &&
+    offsetof(CampLists, listE) == 0x1DB4 && offsetof(CampLists, listF) == 0x1E7C &&
+    offsetof(CampLists, listG) == 0x1F6C && offsetof(CampLists, listH) == 0x205C &&
+    offsetof(CampLists, listI) == 0x20C0 && offsetof(CampLists, listJ) == 0x21B0 &&
+    offsetof(CampLists, listK) == 0x22A0 && offsetof(CampLists, listL) == 0x2390 ? 1 : -1];
 
 extern "C" {
+extern CampLists *g_camp;
+u32 FUN_0029efc0(const GridNavigation *grid);
+u32 FUN_0029efa8(const GridNavigation *grid);
+void buttonHelpShowSkillDetails(u32 id);
+void FUN_0029212c(u32 id);
+u32 FUN_00288e68(void);
+void FUN_0029ee6c(s32 mode, u32 color);
 
-int FUN_00288e68(void);
-int FUN_0029212c(int);
-int buttonHelpShowSkillDetails(...);
-int FUN_0029ee6c(int, int);
-int FUN_0029efc0(...);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int g_camp; /* 0x43da90 */
-
-/* Supplied declaration required: FUN_00288e68. */
-/* Supplied declaration required: FUN_0029212c. */
-/* Supplied declaration required: buttonHelpShowSkillDetails. */
-/* Supplied declaration required: FUN_0029ee6c. */
-extern int FUN_0029efa8(int);
-/* Supplied declaration required: FUN_0029efc0. */
-
-
-void FUN_00299900(unsigned int param_1)
-
+/* The index of the grid's highlighted entry. */
+static __inline u32 selectedIndex(const GridNavigation *grid)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = g_camp;
-  switch(param_1) {
-  default:
-    return;
-  case 9:
-    temp_v1 = FUN_0029efc0(g_camp + 0x1dc);
-    temp_v2 = FUN_0029efa8(temp_v0 + 0x1dc);
-    buttonHelpShowSkillDetails(*(unsigned int *)(temp_v0 + (temp_v2 + temp_v1) * 8 + 0xe3c));
-    return;
-  case 10:
-    break;
-  case 0xb:
-    temp_v1 = FUN_0029efc0(g_camp + 0xb0);
-    temp_v2 = FUN_0029efa8(temp_v0 + 0xb0);
-    FUN_0029212c(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x147c));
-    return;
-  case 0xc:
-    temp_v1 = FUN_0029efc0(g_camp + 0x114);
-    temp_v2 = FUN_0029efa8(temp_v0 + 0x114);
-    FUN_0029212c(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x14f4));
-    return;
-  case 0xd:
-    temp_v1 = FUN_0029efc0(g_camp + 0x178);
-    temp_v2 = FUN_0029efa8(temp_v0 + 0x178);
-    FUN_0029212c(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x1cc4));
-    return;
-  case 0x11:
-    temp_v1 = FUN_0029efc0(g_camp + 0x2a4);
-    temp_v2 = FUN_0029efa8(temp_v0 + 0x2a4);
-    FUN_0029212c(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x1e7c));
-    return;
-  case 0x12:
-    temp_v1 = FUN_0029efc0(g_camp + 0x308);
-    temp_v2 = FUN_0029efa8(temp_v0 + 0x308);
-    FUN_0029212c(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x1f6c));
-    return;
-  case 0x13:
-    temp_v1 = FUN_0029efc0(g_camp + 0x36c);
-    temp_v2 = FUN_0029efa8(temp_v0 + 0x36c);
-    FUN_0029212c(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x205c));
-    return;
-  case 0x14:
-    temp_v1 = FUN_0029efc0(g_camp + 0x3d0);
-    temp_v2 = FUN_0029efa8(temp_v0 + 0x3d0);
-    FUN_0029212c(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x20c0));
-    return;
-  case 0x15:
-    temp_v1 = g_camp + 0x434;
-    temp_v2 = FUN_0029efc0();
-    temp_v1 = FUN_0029efa8(temp_v1);
-    FUN_0029212c(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x21b0));
-    return;
-  case 0x16:
-    temp_v1 = g_camp + 0x498;
-    temp_v2 = FUN_0029efc0();
-    temp_v1 = FUN_0029efa8(temp_v1);
-    FUN_0029212c(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x22a0));
-    return;
-  case 0x17:
-    temp_v1 = g_camp + 0x4fc;
-    temp_v2 = FUN_0029efc0();
-    temp_v1 = FUN_0029efa8(temp_v1);
-    FUN_0029212c(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x2390));
-    return;
-  }
-  temp_v1 = FUN_0029efc0(g_camp + 0x240);
-  temp_v2 = FUN_0029efa8(temp_v0 + 0x240);
-  if (*(short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x1db4) != 0) {
-    FUN_00288e68();
-    buttonHelpShowSkillDetails();
-    return;
-  }
-  FUN_0029ee6c(0,0x323232ff);
-  return;
+    u32 row = FUN_0029efc0(grid);
+    return FUN_0029efa8(grid) + row;
+}
+
+/* Shows the help for the highlighted entry of the camp list identified by `list`. */
+void FUN_00299900(u32 list)
+{
+    CampLists *camp = g_camp;
+    switch (list) {
+    case 9:
+        buttonHelpShowSkillDetails(camp->skills[selectedIndex(&camp->grids[3])].id);
+        break;
+    case 10:
+        if (camp->listE[selectedIndex(&camp->grids[4])] != 0) {
+            buttonHelpShowSkillDetails(FUN_00288e68());
+        } else {
+            FUN_0029ee6c(0, 0x323232FF);
+        }
+        break;
+    case 11:
+        FUN_0029212c(camp->listB[selectedIndex(&camp->grids[0])]);
+        break;
+    case 12:
+        FUN_0029212c(camp->listC[selectedIndex(&camp->grids[1])]);
+        break;
+    case 13:
+        FUN_0029212c(camp->listD[selectedIndex(&camp->grids[2])]);
+        break;
+    case 17:
+        FUN_0029212c(camp->listF[selectedIndex(&camp->grids[5])]);
+        break;
+    case 18:
+        FUN_0029212c(camp->listG[selectedIndex(&camp->grids[6])]);
+        break;
+    case 19:
+        FUN_0029212c(camp->listH[selectedIndex(&camp->grids[7])]);
+        break;
+    case 20:
+        FUN_0029212c(camp->listI[selectedIndex(&camp->grids[8])]);
+        break;
+    case 21:
+        FUN_0029212c(camp->listJ[selectedIndex(&camp->grids[9])]);
+        break;
+    case 22:
+        FUN_0029212c(camp->listK[selectedIndex(&camp->grids[10])]);
+        break;
+    case 23:
+        FUN_0029212c(camp->listL[selectedIndex(&camp->grids[11])]);
+        break;
+    }
 }
 
 } /* extern "C" */

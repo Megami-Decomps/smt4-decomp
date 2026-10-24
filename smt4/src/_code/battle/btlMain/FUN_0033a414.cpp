@@ -45,8 +45,8 @@ void FUN_0033a414(BtlMainState *state)
     if (worker->stack == NULL) {
         ThreadStackStorage *stack = (ThreadStackStorage *)asdOperatorNew(sizeof(ThreadStackStorage));
         if (stack) {
-            *(u32 *)&stack->info.unk00[0] = 0;
-            *(u32 *)&stack->info.unk00[4] = 0;
+            stack->info.unk00 = 0;
+            stack->info.unk04 = 0;
             stack->info.address = 0;
             stack->info.size = 0;
             stack->owned = 0;

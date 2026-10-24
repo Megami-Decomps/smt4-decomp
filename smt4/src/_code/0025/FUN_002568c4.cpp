@@ -1,38 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002568c4` (_code @ 0x2568c4, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the order of `ldr next` against `cmp kind, #52` differs (retail loads the kind, then next, then compares). */
+#include "battle/btlReflect.h"
 
 extern "C" {
+ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options);
 
-int btlQueueReflectAction(short *, int, int, unsigned int);
-
-extern short *g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: btlQueueReflectAction. */
-
-
-void FUN_002568c4(short param_1,unsigned int param_2)
-
+/* Queues a kind-0x34 action; if the queue already holds one for the same actor, the new one's secondary id is cleared. */
+void FUN_002568c4(u32 actor, u32 options)
 {
-/* irregular: 1 native warning(s); review required */
-  short *psVar1;
-  short *psVar2;
-  short *psVar3;
-  
-  psVar2 = g_btlActionReflect;
-  btlQueueReflectAction(g_btlActionReflect,(int)param_1,0,param_2);
-  psVar3 = *(short **)(g_btlActionReflect + 4);
-  do {
-    psVar1 = psVar3;
-    if (psVar1 == (short *)0x0) {
-      *(unsigned char *)(psVar2 + 2) = 0x34;
-      return;
-    }
-    psVar3 = *(short **)(psVar1 + 6);
-  } while ((((char)psVar1[2] != '4') || (*psVar1 != *psVar2)) || (psVar2[1] < 0));
-  psVar2[1] = -1;
-  *(unsigned char *)(psVar2 + 2) = 0x34;
-  return;
-}
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
+    ReflectAction *node;
 
-} /* extern "C" */
+    node = g_btlActionReflect->head;
+    while (node != NULL) {
+        ReflectAction *next = node->next;
+        if (node->kind == 0x34 && (s16)node->actorId == (s16)action->actorId && (s16)action->secondaryId >= 0) {
+            action->secondaryId = -1;
+            break;
+        }
+        node = next;
+    }
+    action->kind = 0x34;
+}
+}

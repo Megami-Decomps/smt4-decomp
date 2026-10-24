@@ -2,6 +2,8 @@
 #define CLASSES_OBJ4209D8_H
 #include "common.h"
 
+extern "C" void *asdOperatorNew(u32 bytes);
+
 struct Obj4209d8Position {
     f32 x, y, z;
 };
@@ -32,6 +34,9 @@ struct Obj4209d8Owner {
 /* Independent model/grid query interface, not the Obj4209cc resource owner. */
 class Obj4209d8 {
 public:
+    explicit Obj4209d8(Obj4209d8Owner *newOwner) : owner(newOwner) {}
+
+    static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
     virtual ~Obj4209d8();
     virtual s32 implementationId() const;
     virtual s32 isCellReady(s32 index) const;

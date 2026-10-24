@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int vectorCopyHeader(...);
+int _ZN18OnlineResultRecordaSERKS_(...);
 int FUN_002e9c0c(void);
 int onlineInstanceTableFind(int, unsigned int);
 int onlineJobSetStateDone(int);
@@ -23,16 +23,16 @@ typedef struct {
 extern unsigned char LAB_0011f7c5; /* 0x11f7c5 */
 extern unsigned char LAB_00310854; /* 0x310854 */
 
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int onlineInstanceTableGetCurrent(void);
-/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: FUN_002e9c0c. */
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002f3dc4. */
 /* Supplied declaration required: FUN_002f3dde. */
-extern int refIsNonNegative(int);
+extern int _ZNK18OnlineResultRecord7isValidEv(int);
 extern int FUN_002f71b0(int, int, unsigned int);
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
@@ -53,15 +53,15 @@ void FUN_00310784(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v3 = param_2;
   temp_v4 = param_3;
   temp_v5 = param_4;
-  vectorCopyHeader();
-  temp_v1 = refIsNonNegative(temp_v0);
+  _ZN18OnlineResultRecordaSERKS_();
+  temp_v1 = _ZNK18OnlineResultRecord7isValidEv(temp_v0);
   if ((temp_v1 == 0) && (*(int *)(*(int *)(param_1 + 400) + 0x78) != 0)) {
     FUN_002e9c0c();
     temp_v1 = FUN_002f71b0(*(int *)(param_1 + 400),param_1 + 0x80,
                          *(unsigned int *)(*(int *)(param_1 + 400) + 0x78));
     if (temp_v1 != 0) {
       onlineJobSetStateWaiting(param_1);
-      temp_v0 = operatorNew(0x10);
+      temp_v0 = _Znwj(0x10);
       temp_v2 = 0;
       if (temp_v0 != 0) {
         temp_v2 = FUN_002ea3c0(temp_v0,&LAB_0011f7c5,0,&LAB_00310854);
@@ -74,9 +74,9 @@ void FUN_00310784(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   onlineInstanceTableFind(temp_v1,*(unsigned int *)(param_1 + 0x68));
   if (temp_v1 != 0) {
     if (*(int *)(param_1 + 0x2f8) != 0) {
-      vectorCopyHeader(*(int *)(param_1 + 0x2f8),temp_v0);
+      _ZN18OnlineResultRecordaSERKS_(*(int *)(param_1 + 0x2f8),temp_v0);
     }
-    temp_v0 = refIsNonNegative(temp_v0);
+    temp_v0 = _ZNK18OnlineResultRecord7isValidEv(temp_v0);
     if (temp_v0 != 0) {
       **(unsigned int **)(param_1 + 0x7c) = *(unsigned int *)(*(int *)(param_1 + 400) + 0x78);
       temp_v3 = *(unsigned int *)(param_1 + 0x164);

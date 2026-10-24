@@ -15,7 +15,7 @@ void paramsInit(UiResourceParameters *resources, const void *chunk0, u16 count0,
     const void *chunk3, u16 count3, const void *chunk4, u16 count4);
 void FUN_002bd954(TimerSlot *timer, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
 void timerStart(TimerSlot *timer, s32 animation, s32 flags);
-void FUN_002bee58(TimerSlot *timer, s32 animation);
+void spriteStartAnimationByIndex(TimerSlot *timer, s32 animation);
 extern const u8 DAT_004073c8[];
 extern const u8 DAT_0040741c[];
 extern const u8 DAT_00407434[];
@@ -35,7 +35,7 @@ void uiInitializeEightTimerSet(UiEightTimerSet *set)
             timerStart(&set->timers[1], 1, 0);
             break;
         case 2:
-            FUN_002bee58(&set->timers[2], 0);
+            spriteStartAnimationByIndex(&set->timers[2], 0);
             break;
         case 3:
             timerStart(&set->timers[3], 2, 0);

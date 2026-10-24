@@ -22,7 +22,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: sharedRefRelease. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int FUN_002eb7d0(unsigned int, unsigned int);
 extern int *FUN_002ed258(int, int *);
 /* Supplied declaration required: strHolderAssignOneWide. */
@@ -85,7 +85,7 @@ void FUN_00107b28(int param_1)
       (*pcVar9)(piVar7);
       return;
     }
-    temp_v4 = operatorNew(0x10);
+    temp_v4 = _Znwj(0x10);
     if (temp_v4 != 0) {
       piVar4 = (int *)FUN_002ed258(temp_v4,piVar7);
     }
@@ -96,7 +96,7 @@ void FUN_00107b28(int param_1)
   }
   else {
     temp_v2 = 0;
-    temp_v4 = operatorNew(0x10);
+    temp_v4 = _Znwj(0x10);
     if (temp_v4 != 0) {
       piVar4 = (int *)FUN_002eff90(temp_v4,0xfe);
     }
@@ -136,7 +136,7 @@ void FUN_00107b28(int param_1)
           (*pcVar9)(piVar7);
           return;
         }
-        temp_v5 = operatorNew(0x10);
+        temp_v5 = _Znwj(0x10);
         piVar4 = (int *)0x0;
         if (temp_v5 != 0) {
           piVar4 = (int *)FUN_002ed258(temp_v5,piVar7);
@@ -144,7 +144,7 @@ void FUN_00107b28(int param_1)
         sharedRefRelease(piVar7);
       }
       else {
-        temp_v5 = operatorNew(0x10);
+        temp_v5 = _Znwj(0x10);
         piVar4 = (int *)0x0;
         if (temp_v5 != 0) {
           piVar4 = (int *)FUN_002eff90(temp_v5,0xfe);

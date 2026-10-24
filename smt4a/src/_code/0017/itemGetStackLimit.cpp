@@ -4,7 +4,7 @@ extern "C" {
 
 ItemCategoryEntry *FUN_0019c06c(u32 id);
 ItemRecordA *dataTable8FindRecord(u32 id);
-ItemRecordB *FUN_00192608(u32 id);
+ItemRecordB *dataTable08Sub2GetRecord(u32 id);
 
 /* Returns how many of the item can be held: 1 for unlimited storage, the record's limit for limited
  * types (999 when the record leaves it 0), 0 for unknown items. */
@@ -40,7 +40,7 @@ s32 itemGetStackLimit(u32 id)
     case 6:
     case 7:
     case 8: {
-        ItemRecordB *record = FUN_00192608(id);
+        ItemRecordB *record = dataTable08Sub2GetRecord(id);
         if (record == NULL) {
             return 0;
         }

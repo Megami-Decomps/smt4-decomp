@@ -2,11 +2,15 @@
 #define GFX_ENGINE_RECORD_LIST_H
 #include "common.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
+#include "gfx/ControllerModel.h"
 #include <stddef.h>
 
 struct EngineRecordModelList {
     u32 unk00;
-    u32 registryHandle;
+    union {
+        u32 registryHandle;
+        ControllerModel *model;
+    };
 };
 struct EngineRecordModelSlot {
     EngineRecordModelList *models;
@@ -28,7 +32,10 @@ struct EngineEffectRecord {
     u8 unk26[2];
     s32 delay;
     u8 flag2C, unk2D[3];
-    u32 counter30;
+    union {
+        u32 counter30;
+        EngineRecordModelList *ownModels;
+    };
     u8 flag34, unk35[3];
     s32 modelSlot;
     union {
@@ -40,6 +47,13 @@ struct EngineEffectRecord {
             /* 0x44 */ f32 distance;
             /* 0x48 */ s32 selectedOrder;
         } proximity;
+        struct {
+            /* 0x3C */ u8 unmanaged;
+            u8 unk3D[0x0F];
+            /* 0x4C */ s32 follow;
+            /* 0x50 */ u8 followHold;
+            u8 unk51[7];
+        } control;
     };
 };
 struct EngineRecordList {

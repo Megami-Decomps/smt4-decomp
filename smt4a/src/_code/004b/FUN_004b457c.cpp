@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00162790(...);
 int FUN_001634b4(...);
-int FUN_0016432c(...);
+int dataTable25FindById(...);
 int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_0018152c(...);
@@ -58,7 +58,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_001634b4. */
-/* Supplied declaration required: FUN_0016432c. */
+/* Supplied declaration required: dataTable25FindById. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00180310. */
@@ -184,7 +184,7 @@ void FUN_004b457c(int param_1,int param_2,int param_3)
                 );
     temp_v2 = FUN_001834a4(temp_v28,0x14c);
     temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 300);
-    FUN_0016432c(temp_v3);
+    dataTable25FindById(temp_v3);
     libc_strcpy(&temp_v11,temp_v3);
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v2 + 8) + temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);

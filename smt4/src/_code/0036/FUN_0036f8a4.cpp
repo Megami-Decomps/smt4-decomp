@@ -1,35 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036f8a4` (_code @ 0x36f8a4, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation of the validated resource and its record (retail keeps the resource in r5 and the record in r4, reusing the zero register for NULL). */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern romwright_code *g_gfxReleaseCallback; /* 0x44e334 */
+/* A graphics resource with a relative pointer (at 0x38) to an inner record that holds the native handle. */
+struct GfxRecord {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u32 handle;
+    /* 0x1C */ u32 context;
+};
 
+struct GfxResource {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u8 unk04[0x28];
+    /* 0x2C */ u32 owner;
+    /* 0x30 */ u8 unk30[8];
+    /* 0x38 */ s32 recordOffset;
+};
 
-void FUN_0036f8a4(unsigned int *param_1)
+typedef void (*GfxReleaseCallback)(u32 context, u32 command, u32 owner, u32 handle);
+extern GfxReleaseCallback g_gfxReleaseCallback;
 
+/* The resource itself when it carries the required magic flags, else NULL. */
+static __inline GfxResource *gfxResourceChecked(GfxResource *resource)
 {
-  int temp_v0;
-  
-  if ((param_1 == (unsigned int *)0x0) || ((~*param_1 & 0x20000011) != 0)) {
-    param_1 = (unsigned int *)0x0;
-  }
-  if (param_1[0xb] != 0) {
-    if (param_1[0xe] == 0) {
-      temp_v0 = 0;
+    if (resource == NULL || (~resource->flags & 0x20000011) != 0) {
+        return NULL;
     }
-    else {
-      temp_v0 = (int)param_1 + param_1[0xe] + 0x38;
+    return resource;
+}
+
+/* The inner record of a resource: its offset is relative to the offset field itself. */
+static __inline GfxRecord *gfxResourceRecord(GfxResource *resource)
+{
+    if (resource->recordOffset == 0) {
+        return NULL;
     }
-    if (*(int *)(temp_v0 + 0x1c) != 0) {
-      (*g_gfxReleaseCallback)(*(int *)(temp_v0 + 0x1c),0x101,param_1[0xb],*(unsigned int *)(temp_v0 + 0x18));
-      *(unsigned int *)(temp_v0 + 0x18) = 0;
+    return (GfxRecord *)((u8 *)&resource->recordOffset + resource->recordOffset);
+}
+
+/* Releases the native handle of a resource's record and detaches its owner. */
+void FUN_0036f8a4(GfxResource *resource)
+{
+    GfxResource *checked = gfxResourceChecked(resource);
+
+    if (checked->owner != 0) {
+        GfxRecord *record = gfxResourceRecord(checked);
+        if (record->context != 0) {
+            g_gfxReleaseCallback(record->context, 0x101, checked->owner, record->handle);
+            record->handle = 0;
+        }
+        checked->owner = 0;
     }
-    param_1[0xb] = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

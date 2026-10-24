@@ -2,6 +2,7 @@
 #define SHARD_W5_W5MATCH7_SCENESTATE_H
 
 #include "map/mapDepart.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include <stddef.h>
 
 
@@ -51,6 +52,13 @@ struct LmapScene {
             /* 0x150 */ MapVector step;
             /* 0x15c */ u8 unk15c[0xf8];
         } transition;
+        struct {
+            /* 0x054 */ u8 unk054BeforeModel[0x110];
+            /* 0x164 */ AsdMdlObject *model;
+            /* 0x168 */ s32 unk168;
+            /* 0x16c */ s32 unk16c;
+            /* 0x170 */ s32 modelState;
+        } modelSwap;
         struct {
             /* 0x054 */ u8 unk054BeforeEntry[0x17c];
             /* 0x1d0 */ s32 entryMode;

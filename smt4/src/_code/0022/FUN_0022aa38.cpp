@@ -6,7 +6,7 @@
 extern "C" {
 BtlMainState *btlGetMainState(void);
 void FUN_00247478(BattleEntrySummary *summary, BtlMainState *state, const BtlEntry *entry);
-const ActiveSkillRecord *FUN_002ae164(s32 skillId);
+const ActiveSkillRecord *dataTable40FindById(s32 skillId);
 void FUN_0022abe0(const BtlEntry *entry, u16 *skills);
 
 /* Test the active skill and learned passive skills for a zero-based category. */
@@ -20,7 +20,7 @@ u32 FUN_0022aa38(const BtlEntry *entry, s32 category)
     BattleEntrySummary summary;
     FUN_00247478(&summary, btlGetMainState(), entry);
     if (summary.skill.skillId) {
-        const ActiveSkillRecord *skill = FUN_002ae164(summary.skill.skillId);
+        const ActiveSkillRecord *skill = dataTable40FindById(summary.skill.skillId);
         if (skill) {
             u32 value = reinterpret_cast<const ActiveSkillCategoryView *>(skill)->category;
             if (value && (s32)(value - 1) == category) {

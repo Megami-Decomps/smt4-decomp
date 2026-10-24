@@ -1,51 +1,86 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00145f94` (_code @ 0x145f98, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the manager in two registers (r5 for the first part, r6 for the animation lookup) and hoists the loads of the two readiness words above the override test; the build uses one register and conditional loads. */
+#include "common.h"
+
+/* A model in the manager's list. */
+struct ModelEntry {
+    /* 0x000 */ u8 unk000[0x1fc];
+    /* 0x1fc */ f32 weight;
+};
+
+struct ModelAnimationSet {
+    /* 0x00 */ u8 unk00[0x38];
+};
+
+/* The model manager (the part its calculation process reads). */
+struct ModelManager {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0c */ ModelAnimationSet *animations;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u8 unk14[4];
+    /* 0x18 */ ModelEntry **begin;
+    /* 0x1c */ ModelEntry **end;
+    /* 0x20 */ u8 unk20[0x14];
+    /* 0x34 */ u32 flags;
+};
+
+/* The override model state: when both low flag bits are set its embedded record stands in for the
+ * manager's animation set. */
+struct ModelOverride {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 flags;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ ModelAnimationSet embedded;
+};
 
 extern "C" {
 
-int FUN_00156994(unsigned int, int);
-int FUN_00158038(unsigned int *);
+extern ModelManager *g_handleRegistry;
+extern ModelOverride *DAT_0056fcb8;
 
-extern int DAT_0056fcb8; /* 0x56fcb8 */
+void FUN_00158038(ModelManager *manager);
+void FUN_00156994(f32 weight, ModelAnimationSet *animations);
 
-/* Supplied declaration required: FUN_00156994. */
-/* Supplied declaration required: FUN_00158038. */
-
-
-unsigned int FUN_00145f94(unsigned int *param_1)
-
+// Applies every model's weight to the manager's animation set.
+static __inline void applyModelWeights(ModelManager *self)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int *unaff_r4;
-  unsigned int *puVar2;
-  
-  param_1 = (unsigned int *)*param_1;
-  FUN_00158038(param_1);
-  if ((param_1[0xd] & 2) == 0) {
-    if ((DAT_0056fcb8 != 0) &&
-       (!((*(unsigned int *)(DAT_0056fcb8 + 4) & 1) == 0 || (*(unsigned int *)(DAT_0056fcb8 + 4) & 2) == 0))) {
-      temp_v0 = DAT_0056fcb8 + 0x10;
+    FUN_00158038(self);
+    if ((self->flags & 2) == 0) {
+        ModelAnimationSet *active;
+        ModelOverride *override = DAT_0056fcb8;
+        if (override != NULL && (override->flags & 1) && (override->flags & 2)) {
+            active = &override->embedded;
+        } else {
+            active = self->animations;
+        }
+        if (self->unk10 != 0 && self->unk04 != 0) {
+            ModelEntry **entry;
+            ModelEntry **end;
+            if (active != NULL) {
+                entry = self->begin;
+                end = self->end;
+            }
+            if (active != NULL && entry != end) {
+                ModelAnimationSet *animations = self->animations;
+                if (animations != NULL) {
+                    ModelAnimationSet *base = animations + 1;
+                    do {
+                        FUN_00156994((*entry)->weight, base);
+                        entry++;
+                    } while (entry != end);
+                }
+            }
+        }
     }
-    else {
-      temp_v0 = param_1[3];
-    }
-    if (param_1[4] != 0 && param_1[1] != 0) {
-      puVar2 = param_1;
-      if (temp_v0 != 0) {
-        unaff_r4 = (unsigned int *)param_1[6];
-        puVar2 = (unsigned int *)param_1[7];
-      }
-      if ((temp_v0 != 0 && unaff_r4 != puVar2) && (temp_v0 = param_1[3], temp_v0 != 0)) {
-        do {
-          FUN_00156994(*unaff_r4,temp_v0 + 0x38);
-          unaff_r4 = unaff_r4 + 1;
-        } while (unaff_r4 != puVar2);
-      }
-    }
-  }
-  return 0;
 }
 
-} /* extern "C" */
+// The model calculation process.
+u32 FUN_00145f94(void)
+{
+    ModelManager *manager = g_handleRegistry;
+    applyModelWeights(manager);
+    return 0;
+}
+
+}

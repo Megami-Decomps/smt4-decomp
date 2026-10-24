@@ -7,7 +7,7 @@ extern "C" {
 extern ButtonHelpGlobalsPrefixA g_buttonHelp;
 u32 FUN_0016a0e8(void);
 s32 idIsAbove400(s32 id);
-Table04ExtraRecord *FUN_0034a290(s32 id);
+Table04ExtraRecord *dataTable41FindById(s32 id);
 Table04Record *dataTable04FindById(s32 id);
 s32 battleAttributeFormatName(void *output, u32 attribute);
 s32 skillFormatTargetLabel(void *output, u32 target);
@@ -33,7 +33,7 @@ void FUN_00359b6c(s32 id)
     u32 text[0x6c / sizeof(u32)];
 
     if (idIsAbove400(id) != 0) {
-        Table04ExtraRecord *record = FUN_0034a290(id);
+        Table04ExtraRecord *record = dataTable41FindById(id);
         battleAttributeFormatName(text,
             (static_cast<u32>(record->flags) >> 11) & 31u);
         FUN_003180c4(0x24, text);

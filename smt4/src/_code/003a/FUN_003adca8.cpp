@@ -8,7 +8,7 @@ int FUN_002630e0(float *, int, unsigned int);
 int FUN_00295eb0(...);
 int FUN_002963ec(...);
 int pairSetFirstResetSecond(...);
-int FUN_002bee58(int, int);
+int spriteStartAnimationByIndex(int, int);
 
 /* stack frame of param_7: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern unsigned char g_btlUi; /* 0x439c88 */
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_002963ec. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 extern unsigned int FUN_002c501c(void);
 extern int __aeabi_idivmod(int, unsigned int);
@@ -71,7 +71,7 @@ void FUN_003adca8(unsigned int param_1,int param_2,int param_3,unsigned int para
   do {
     *(unsigned int *)(temp_v4 + temp_v2 * 4 + 0x8330) = 0;
     temp_v5 = temp_v4 + temp_v2 * 0x8c + 0x7f4c;
-    FUN_002bee58(temp_v5,3);
+    spriteStartAnimationByIndex(temp_v5,3);
     FUN_00295eb0(temp_v5,0x15,temp_v2 + 0x41a);
     FUN_002963ec(temp_v5,(int)(short)(int)temp_v6,(int)(short)(int)temp_v7);
     if (param_5 == 0) {
@@ -99,9 +99,9 @@ void FUN_003adca8(unsigned int param_1,int param_2,int param_3,unsigned int para
     temp_v3 = temp_v3 / 10;
   } while (-1 < temp_v2);
   temp_v2 = temp_v4 + 0x8208;
-  FUN_002bee58(temp_v2,9);
+  spriteStartAnimationByIndex(temp_v2,9);
   temp_v4 = temp_v4 + 0x8294;
-  FUN_002bee58(temp_v4,9);
+  spriteStartAnimationByIndex(temp_v4,9);
   if (param_5 == 0) {
     if (param_6 != 0) {
       if (param_6 == 1) {

@@ -14,10 +14,9 @@ struct ModelGroupResumeSlot {
     u8 unk25[7];
 };
 struct ModelGroupsModeView { u8 unk00[0xC]; u16 mode; };
-/* The node's visibility link and animation lie beyond the shared node prefix. */
+/* The node's animation lies beyond the shared node prefix. */
 struct ModelResumeNode {
     AsdMdlNode node;
-    NodeEnableTarget *target;
     u8 unk30[8];
     s32 animation;
 };
@@ -36,7 +35,7 @@ static inline void suspendModelGroupSlot(ModelGroupResumeSlot *slot)
     AsdMdlObject *model = slot->model;
     if (!(model->flags & 2)) {
         model->flags |= 2;
-        reinterpret_cast<ModelResumeNode *>(model->node)->target->enabled = 0;
+        model->node->resource->positionFollowed = 0;
         faderSetValue(slot->model->node, 0.0f);
     }
 }
@@ -45,7 +44,7 @@ static inline void showModelGroupSlot(ModelGroupResumeSlot *slot)
     AsdMdlObject *model = slot->model;
     if (model->flags & 2) {
         model->flags &= ~2;
-        reinterpret_cast<ModelResumeNode *>(model->node)->target->enabled = 1;
+        model->node->resource->positionFollowed = 1;
         faderSetValue(slot->model->node, 1.0f);
     }
 }

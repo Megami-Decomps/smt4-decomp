@@ -1,174 +1,115 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033be90` (_code @ 0x33be90, 0x230 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: logic matches; armcc re-rolls the eight devil skill copies into a loop (retail is straight-line) and allocates rank/bucket/count registers differently. */
+#include "common.h"
+#include "gamedata/DevilRecord.h"
 
-extern "C" {
-
-int dataTable06Sub1GetRecord(void);
-int devilGetRecord(void);
-int randNextInRange(...);
-int dataTable14Sub0GetRecord(void);
-
-typedef struct fn_0033be90_arg2 fn_0033be90_arg2;
-struct fn_0033be90_arg2 {
-    unsigned char pad_0x0[0x4e];
-    ushort field_0x4e; /* +0x4e */
-    unsigned char pad_0x50[0x2];
-    ushort field_0x52; /* +0x52 */
-    unsigned char pad_0x54[0x2];
-    ushort field_0x56; /* +0x56 */
-    unsigned char pad_0x58[0x2];
-    ushort field_0x5a; /* +0x5a */
-    unsigned char pad_0x5c[0x2];
-    ushort field_0x5e; /* +0x5e */
-    unsigned char pad_0x60[0x2];
-    ushort field_0x62; /* +0x62 */
-    unsigned char pad_0x64[0x2];
-    ushort field_0x66; /* +0x66 */
-    unsigned char pad_0x68[0x2];
-    ushort field_0x6a; /* +0x6a */
+/* A skill (data table 6, sub 1): bit 7 of the flags byte marks it learnable, the low bits are its rank. */
+struct SkillRankRecord {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 unk02;
+    /* 0x03 */ u8 flags;
 };
 
-/* stack frame of param_3: 12 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned short sp22; /* 0x22: local_22 */
-    unsigned short sp24; /* 0x24: local_24 */
-    unsigned short sp26; /* 0x26: local_26 */
-    unsigned short sp28; /* 0x28: local_28 */
-    unsigned short sp2A; /* 0x2a: local_2a */
-    unsigned short sp2C; /* 0x2c: local_2c */
-    unsigned short sp2E; /* 0x2e: local_2e */
-    unsigned short sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_3_stack;
+/* Table 14 record: rank id and the odds (percent) of shifting the rank. */
+struct RankShiftRecord {
+    /* 0x00 */ u8 rank;
+    /* 0x01 */ u8 weights[5];
+};
 
-extern int flagBitIsSet(unsigned int);
-/* Supplied declaration required: dataTable06Sub1GetRecord. */
-/* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: randNextInRange. */
-/* Supplied declaration required: dataTable14Sub0GetRecord. */
+struct SkillSet {
+    u16 ids[8];
+};
 
+extern "C" {
+SkillRankRecord *dataTable06Sub1GetRecord(u16 id);
+RankShiftRecord *dataTable14Sub0GetRecord(u8 rank);
+u32 randNextInRange(int limit);
+u8 flagBitIsSet(u32 bit);
 
-short FUN_0033be90(unsigned int *param_1,int param_2,fn_0033be90_arg2 *param_3)
-
+/* Whether a skill is learnable at `rank` and not already known. */
+static inline s32 isNewSkillOfRank(u8 flags, u16 id, u32 rank, const u16 *known)
 {
-/* irregular: 2 goto(s); 4 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  short *psVar6;
-  int temp_v5;
-  unsigned char temp_v6;
-  short *psVar9;
-  unsigned char temp_v7;
-  int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned short temp_v12;
-  unsigned short temp_v13;
-  unsigned short temp_v14;
-  unsigned short temp_v15;
-  unsigned short temp_v16;
-  unsigned short temp_v17;
-  unsigned short temp_v18;
-  unsigned short temp_v19;
-  
-  if (param_2 < 0) {
-    return 0;
-  }
-  temp_v1 = (unsigned int)*(unsigned short *)((int)param_1 + param_2 * 2);
-  dataTable06Sub1GetRecord();
-  temp_v0 = *(unsigned char *)(temp_v1 + 3);
-  temp_v2 = temp_v0 & 0x1f;
-  temp_v1 = temp_v2;
-  dataTable14Sub0GetRecord();
-  temp_v7 = 0;
-  temp_v6 = 0;
-  temp_v3 = randNextInRange(99);
-  do {
-    temp_v6 = *(unsigned char *)(temp_v1 + 1 + temp_v7) + temp_v6;
-    if (temp_v3 < temp_v6) break;
-    temp_v7 = temp_v7 + 1;
-  } while (temp_v7 < 5);
-  if (temp_v7 != 0) {
-    if (temp_v7 != 1) {
-      if (temp_v7 == 3) {
-        temp_v2 = (temp_v2 + 1) & 0xff;
-      }
-      else if (temp_v7 == 4) {
-        temp_v2 = (temp_v2 + 2) & 0xff;
-      }
+    if ((flags & 0x80) == 0 || (flags & 0x1F) != rank) {
+        return 0;
     }
-    else if ((temp_v0 & 0x1f) != 0) {
-      temp_v2 = (temp_v2 - 1) & 0xff;
-    }
-  }
-  else if (temp_v2 >= 2) {
-    temp_v2 = (temp_v2 - 2) & 0xff;
-  }
-  temp_v4 = flagBitIsSet(5);
-  if (temp_v4 != 0) {
-    temp_v2 = (temp_v2 + 1) & 0xff;
-  }
-  temp_v8 = *param_1;
-  temp_v9 = param_1[1];
-  temp_v10 = param_1[2];
-  temp_v11 = param_1[3];
-  devilGetRecord();
-  temp_v12 = param_3->field_0x4e;
-  temp_v4 = 0;
-  psVar9 = (short *)0x1;
-  temp_v13 = param_3->field_0x52;
-  temp_v14 = param_3->field_0x56;
-  temp_v15 = param_3->field_0x5a;
-  temp_v16 = param_3->field_0x5e;
-  temp_v17 = param_3->field_0x62;
-  temp_v18 = param_3->field_0x66;
-  temp_v19 = param_3->field_0x6a;
-  do {
-    psVar6 = psVar9;
-    dataTable06Sub1GetRecord();
-    if (((*(unsigned char *)((int)psVar6 + 3) & 0x80) != 0) && ((*(unsigned char *)((int)psVar6 + 3) & 0x1f) == temp_v2)
-       ) {
-      temp_v5 = 0;
-      do {
-        if (*(short *)((int)&temp_v8 + temp_v5 * 2) == *psVar6) goto LAB_0033c00c;
-        temp_v5 = temp_v5 + 1;
-      } while (temp_v5 < 0x10);
-      temp_v4 = temp_v4 + 1;
-    }
-LAB_0033c00c:
-    psVar9 = (short *)(((int)psVar9 + 1U) & 0xffff);
-  } while (psVar9 < (short *)0x1f5);
-  if (temp_v4 != 0) {
-    temp_v4 = randNextInRange((temp_v4 - 1U) & 0xffff);
-    psVar9 = (short *)0x1;
-    do {
-      psVar6 = psVar9;
-      dataTable06Sub1GetRecord();
-      if (((*(unsigned char *)((int)psVar6 + 3) & 0x80) != 0) &&
-         ((*(unsigned char *)((int)psVar6 + 3) & 0x1f) == temp_v2)) {
-        temp_v5 = 0;
-        do {
-          if (*(short *)((int)&temp_v8 + temp_v5 * 2) == *psVar6) goto LAB_0033c088;
-          temp_v5 = temp_v5 + 1;
-        } while (temp_v5 < 0x10);
-        temp_v4 = temp_v4 - 1;
-        if (temp_v4 == 0) {
-          return *psVar6;
+    for (s32 i = 0; i < 16; i++) {
+        if (known[i] == id) {
+            return 0;
         }
-      }
-LAB_0033c088:
-      psVar9 = (short *)(((int)psVar9 + 1U) & 0xffff);
-    } while (psVar9 < (short *)0x1f5);
-  }
-  return 0;
+    }
+    return 1;
 }
 
-} /* extern "C" */
+// Pick a random skill a demon could newly learn, a rank shifted from the one at `slot` of its current skills.
+u32 FUN_0033be90(const SkillSet *current, s32 slot, u16 devilId)
+{
+    if (slot < 0) {
+        return 0;
+    }
+    u8 rank = dataTable06Sub1GetRecord(current->ids[slot])->flags & 0x1F;
+    const u8 *weights = dataTable14Sub0GetRecord(rank)->weights;
+    u8 bucket = 0;
+    u8 total = 0;
+    u32 roll = randNextInRange(99);
+    do {
+        total = weights[bucket] + total;
+        if (total > roll) {
+            break;
+        }
+        bucket++;
+    } while (bucket < 5);
+    switch (bucket) {
+    case 0:
+        if (rank >= 2) {
+            rank -= 2;
+        }
+        break;
+    case 1:
+        if (rank != 0) {
+            rank -= 1;
+        }
+        break;
+    case 3:
+        rank += 1;
+        break;
+    case 4:
+        rank += 2;
+        break;
+    }
+    if (flagBitIsSet(5)) {
+        rank += 1;
+    }
+
+    u16 known[16];
+    *(SkillSet *)known = *current;
+    const DevilRecord *devil = (const DevilRecord *)devilGetRecord(devilId);
+    known[8] = devil->learnedSkills.entries[0].id;
+    known[9] = devil->learnedSkills.entries[1].id;
+    known[10] = devil->learnedSkills.entries[2].id;
+    known[11] = devil->learnedSkills.entries[3].id;
+    known[12] = devil->learnedSkills.entries[4].id;
+    known[13] = devil->learnedSkills.entries[5].id;
+    known[14] = devil->learnedSkills.entries[6].id;
+    known[15] = devil->learnedSkills.entries[7].id;
+
+    s32 candidates = 0;
+    for (u16 id = 1; id <= 500; id++) {
+        SkillRankRecord *skill = dataTable06Sub1GetRecord(id);
+        if (isNewSkillOfRank(skill->flags, skill->id, rank, known)) {
+            candidates++;
+        }
+    }
+    if (candidates == 0) {
+        return 0;
+    }
+    s32 pick = randNextInRange((u16)(candidates - 1));
+    for (u16 id = 1; id <= 500; id++) {
+        SkillRankRecord *skill = dataTable06Sub1GetRecord(id);
+        u16 skillId = skill->id;
+        if (isNewSkillOfRank(skill->flags, skillId, rank, known) && --pick == 0) {
+            return skillId;
+        }
+    }
+    return 0;
+}
+
+}

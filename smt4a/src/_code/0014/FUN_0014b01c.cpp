@@ -32,8 +32,8 @@ extern int DAT_0057f66c; /* 0x57f66c */
 extern int DAT_0057f670; /* 0x57f670 */
 extern int DAT_0057f674; /* 0x57f674 */
 extern int g_renderCtx; /* 0x59dbb4 */
-extern unsigned int DAT_005c4c30; /* 0x5c4c30 */
-extern unsigned int DAT_0064c084; /* 0x64c084 */
+extern unsigned int _ZGVZN2nw4math5MTX448IdentityEvE8identity; /* 0x5c4c30 */
+extern unsigned int _ZZN2nw4math5MTX448IdentityEvE8identity; /* 0x64c084 */
 extern float DAT_0064c088; /* 0x64c088 */
 extern float DAT_0064c08c; /* 0x64c08c */
 extern float DAT_0064c090; /* 0x64c090 */
@@ -233,8 +233,8 @@ void FUN_0014b01c(int param_1)
   *(unsigned int *)(temp_v3 + 0x38) = 2;
   FUN_0016c4b8(g_renderCtx,temp_v3);
   FUN_0019e3d0(temp_v4);
-  if (((DAT_005c4c30 & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_005c4c30), temp_v3 != 0)) {
-    DAT_0064c084 = temp_v7;
+  if (((_ZGVZN2nw4math5MTX448IdentityEvE8identity & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX448IdentityEvE8identity), temp_v3 != 0)) {
+    _ZZN2nw4math5MTX448IdentityEvE8identity = temp_v7;
     DAT_0064c088 = temp_v6;
     DAT_0064c08c = temp_v6;
     DAT_0064c090 = temp_v6;
@@ -251,7 +251,7 @@ void FUN_0014b01c(int param_1)
     DAT_0064c0bc = temp_v6;
     DAT_0064c0c0 = temp_v7;
   }
-  mtx44Copy(temp_v8,&DAT_0064c084);
+  mtx44Copy(temp_v8,&_ZZN2nw4math5MTX448IdentityEvE8identity);
   camSetMatrixA(g_renderCtx,temp_v8);
   temp_v3 = asdTMTexTableGetHeaderValue(3);
   *(unsigned int *)(temp_v3 + 0x38) = 2;

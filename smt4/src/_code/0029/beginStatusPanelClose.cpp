@@ -16,7 +16,7 @@ void mdlPartsRelease(StatusScreenModel *);
 s32 lmapMainIsRunning();
 void asdModelSlotRelease(s32);
 void timerStart(UiAnimatedSprite *, s32, s32);
-void FUN_002bee58(UiAnimatedSprite *, s32);
+void spriteStartAnimationByIndex(UiAnimatedSprite *, s32);
 
 void beginStatusPanelClose()
 {
@@ -44,13 +44,13 @@ void beginStatusPanelClose()
     }
     UiAnimatedSprite *sprites = (UiAnimatedSprite *)(state->unk0301 + 0x8b); // 0x38c
     timerStart(&sprites[0], 5, 0);
-    FUN_002bee58(&sprites[1], 3);
-    FUN_002bee58(&sprites[2], 3);
-    FUN_002bee58(&sprites[3], 3);
+    spriteStartAnimationByIndex(&sprites[1], 3);
+    spriteStartAnimationByIndex(&sprites[2], 3);
+    spriteStartAnimationByIndex(&sprites[3], 3);
     timerStart(&sprites[4], 5, 0);
     timerStart(&sprites[5], 5, 0);
     timerStart(&sprites[6], 5, 0);
-    FUN_002bee58(&sprites[7], 3);
+    spriteStartAnimationByIndex(&sprites[7], 3);
     for (s32 i = 0; i < 10; ++i) {
         timerStart(&sprites[8 + i], 5, 0);
         timerStart(&sprites[18 + i], 5, 0);

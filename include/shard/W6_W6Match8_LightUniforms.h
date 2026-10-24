@@ -37,6 +37,9 @@ public:
 };
 struct ShaderLightFeatures {
     u32 flags;
+    u8 unk04[0x64];
+    s32 registerCount; /* 0x68 */
+    s32 registerBase;  /* 0x6c: first light register; lights count downwards */
 };
 struct ShaderLightNode {
     u8 unk00[8];
@@ -63,7 +66,7 @@ void nw_gfx_internal_NWCopyVec4Reverse(u32 *out, const f32 *vector);
 static __inline void shaderLightEmitVector(u32 index, const f32 *vector)
 {
     u32 *cursor = g_commandBufferCursor;
-    cursor[0] = 0x80000000 | index;
+    cursor[0] = 0x80000000 + index;
     cursor[1] = 0x804f02c0;
     nw_gfx_internal_NWCopyVec4Reverse(cursor + 2, vector);
     g_commandBufferCursor += 6;

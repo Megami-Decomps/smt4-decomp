@@ -14,7 +14,7 @@ extern unsigned char LAB_0037ad88; /* 0x37ad88 */
 /* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: FUN_002b4f64. */
 extern int FUN_002baed8(void);
-extern int nw_snd_internal_driver_SoundThread_GetInstance(void);
+extern int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 /* Supplied declaration required: FUN_00379cfc. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -69,14 +69,14 @@ unsigned char FUN_0037ab50(int param_1,unsigned int *param_2,unsigned int *param
     *(unsigned int *)(temp_v2 + 0xc) = *(unsigned int *)(temp_v0 + 0x184);
     *(unsigned char *)(temp_v2 + 4) = 0x3a;
     *(int *)(temp_v2 + 0x18) = param_1 + 0x268;
-    temp_v1 = nw_snd_internal_driver_SoundThread_GetInstance();
+    temp_v1 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
     nn_os_CriticalSection_Enter(temp_v1 + 0x1c4);
     temp_v1 = *(int *)(param_1 + 0x528) + 1;
     *(int *)(param_1 + 0x528) = temp_v1;
     *(int *)(temp_v2 + 0x10) = temp_v1;
     *(int *)(temp_v2 + 0x14) = param_1 + 0x528;
     listAppendNode(temp_v0,temp_v2);
-    temp_v2 = nw_snd_internal_driver_SoundThread_GetInstance();
+    temp_v2 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
     nn_os_CriticalSection_Leave(temp_v2 + 0x1c4);
   }
   return temp_v5 != 0;

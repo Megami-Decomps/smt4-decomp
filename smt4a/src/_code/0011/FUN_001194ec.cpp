@@ -39,12 +39,12 @@ extern unsigned char LAB_00119680; /* 0x119680 */
 
 extern int FUN_00124130(int);
 /* Supplied declaration required: sharedRefAddRef. */
-extern int operatorNew(unsigned int);
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
+extern int _Znwj(unsigned int);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 /* Supplied declaration required: FUN_002e9c0c. */
-extern unsigned int FUN_002ea100(unsigned char *, unsigned int);
+extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002ea2e8. */
 /* Supplied declaration required: FUN_002ea3a8. */
 extern unsigned int FUN_002ea3c0(int, unsigned int, unsigned int, unsigned char *);
@@ -96,7 +96,7 @@ void FUN_001194ec(int param_1)
     *(int *)(*(int *)(*(int *)(param_1 + 0x198) + 0x78) + 0x24) = temp_v1;
     (**(romwright_code **)(**(int **)(*(int *)(*(int *)(param_1 + 0x198) + 0x78) + 0x24) + 0x14))();
     temp_v1 = *(int *)(*(int *)(param_1 + 0x198) + 0x78);
-    temp_v0 = FUN_002ea100(temp_v10,*(unsigned int *)(param_1 + 0x74));
+    temp_v0 = _ZN9Obj55aff4C1EPKc(temp_v10,*(unsigned int *)(param_1 + 0x74));
     _ZN9Obj55aff4aSERKS_(temp_v1 + 0x1c,temp_v0);
     _ZN9Obj55aff4D1Ev(temp_v10);
     _ZN9Obj55aff4aSERKS_(*(int *)(*(int *)(param_1 + 0x198) + 0x78) + 0x14,param_1 + 0x6c);
@@ -113,7 +113,7 @@ void FUN_001194ec(int param_1)
     if (temp_v1 != 0) {
       sharedRefAddRef(*(unsigned int *)(param_1 + 0x30c));
       onlineJobSetStateWaiting(param_1);
-      temp_v1 = operatorNew(0x10);
+      temp_v1 = _Znwj(0x10);
       temp_v0 = 0;
       if (temp_v1 != 0) {
         temp_v0 = FUN_002ea3c0(temp_v1,0x1193c9,0,&LAB_0011965c);
@@ -125,7 +125,7 @@ void FUN_001194ec(int param_1)
     }
   }
   temp_v3 = 0x8001000d;
-  temp_v0 = FUN_002e7908(temp_v11,(unsigned int *)&temp_v3);
+  temp_v0 = _ZN12OnlineResultC1ERKj(temp_v11,(unsigned int *)&temp_v3);
   FUN_003054f0(param_1,temp_v0);
   onlineUrlDestroy(temp_v9);
   FUN_002ea3a8(temp_v5);

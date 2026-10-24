@@ -29,7 +29,7 @@ void paramsInit(void* parameters, const void* first, u32 firstSize, const void* 
                 u32 secondSize, const void* third, u32 thirdSize, const void* fourth,
                 u32 fourthSize, const void* fifth, u32 fifthSize);
 void FUN_002bd954(void* object, s32 category, s32 resource, void* parameters, u32 enabled, f32 scale);
-void FUN_002bee58(void* object, s32 state);
+void spriteStartAnimationByIndex(void* object, s32 state);
 
 // Allocate and initialize the guest message window and its calculation/stereo drawing tasks.
 void FUN_0010b3c0(void)
@@ -50,6 +50,6 @@ void FUN_0010b3c0(void)
         DAT_00403964.second, sizeof(DAT_00403964.second), NULL, 0, NULL, 0,
         DAT_00403964.geometry, sizeof(DAT_00403964.geometry));
     FUN_002bd954(work->ui, 14, 0x87, work->unk10, 1, 1.0f);
-    FUN_002bee58(work->ui, 0);
+    spriteStartAnimationByIndex(work->ui, 0);
 }
 }

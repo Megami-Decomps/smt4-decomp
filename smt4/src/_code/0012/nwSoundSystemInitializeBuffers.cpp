@@ -15,7 +15,7 @@ void FUN_001310d4(void *);
 SoundBufferPool *FUN_002baed8();
 SoundBufferPool *FUN_002bae7c();
 void FUN_00130df4(SoundBufferPool *, u8 *, u32);
-SoundThread *nw_snd_internal_driver_SoundThread_GetInstance();
+SoundThread *_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
 void FUN_00130eec(SoundThread *);
 SoundTaskManager *FUN_002bb020();
 void nw_snd_internal_TaskManager_Initialize(SoundTaskManager *);
@@ -54,7 +54,7 @@ void nwSoundSystemInitializeBuffers(const SoundSystemInitParameters *parameters,
             buffer += parameters->soundStackSize;
         }
     }
-    FUN_00130eec(nw_snd_internal_driver_SoundThread_GetInstance());
+    FUN_00130eec(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv());
     u32 taskStackSize = parameters->taskStackSize;
     nw_snd_internal_TaskManager_Initialize(FUN_002bb020());
     g_nwSoundTaskStack.buffer = buffer;
@@ -69,12 +69,12 @@ void nwSoundSystemInitializeBuffers(const SoundSystemInitParameters *parameters,
     FUN_00131288();
     FUN_00130514(FUN_00130498(), parameters->taskPriority, &g_nwSoundTaskStack);
     if (parameters->startThread) {
-        FUN_00130f48(nw_snd_internal_driver_SoundThread_GetInstance(), soundStack, parameters->soundStackSize,
+        FUN_00130f48(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(), soundStack, parameters->soundStackSize,
                      parameters->soundPriority, auxiliaryStack, parameters->soundStackSize,
                      parameters->soundPriority, parameters->threadMode, parameters->profiling);
     }
     if (parameters->profiling && parameters->profileBufferSize > 0)
-        nw_snd_internal_driver_SoundThread_SetProfileBuffer(nw_snd_internal_driver_SoundThread_GetInstance(),
+        nw_snd_internal_driver_SoundThread_SetProfileBuffer(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(),
                                                            profileMemory, parameters->profileBufferSize);
     g_nwSoundSystemInitFlags.usesThread = parameters->startThread;
     g_nwSoundSystemInitFlags.initialized = 1;

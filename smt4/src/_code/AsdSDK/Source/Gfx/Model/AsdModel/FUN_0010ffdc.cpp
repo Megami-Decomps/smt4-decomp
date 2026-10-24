@@ -21,7 +21,6 @@ extern u32 *DAT_00471b94;
 extern u32 DAT_00471b9c;
 extern u8 DAT_004e9db8;
 extern u8 LAB_0011bd5c;
-extern u8 LAB_0011cd24;
 extern u8 LAB_00123c78;
 extern u8 LAB_00123c98;
 extern u8 LAB_00123cb0;
@@ -29,6 +28,7 @@ extern u8 LAB_00123cb0;
 extern s32 FUN_0011cec8(u32 **out);
 extern s32 FUN_002bcc60(u32 *dst, CallbackList *callbacks, void *main, void **context, RegisterInfo info);
 extern void FUN_002c526c(void);
+extern void FUN_0011cd24(void);
 
 /* Fetches DAT_00471b94, then registers the callbacks for DAT_00471b9c. */
 s32 FUN_0010ffdc(void)
@@ -43,7 +43,7 @@ s32 FUN_0010ffdc(void)
         DAT_00471b94 = value;
     }
     if ((s32)(result & 0x80000000) >= 0) {
-        context = &LAB_0011cd24;
+        context = (void *)FUN_0011cd24;
         callbacks.count = 4;
         callbacks.funcs[0] = &LAB_00123c78;
         callbacks.funcs[1] = &LAB_00123cb0;

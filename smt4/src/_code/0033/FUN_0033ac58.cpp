@@ -1,89 +1,138 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033ac58` (_code @ 0x33ac58, 0x19c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: control flow, field-by-field parameter copy and call sequence match; only the register numbering differs (retail resource r4 / i r5 / entry r6 / work r7, armcc picks r7 / r4 / r5 / r6). */
+#include "common.h"
+
+/* A loaded model resource: an id and the model parameters copied into the battle's slot table. */
+struct ModelResource {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 id;
+    /* 0x08 */ u32 param08;
+    /* 0x0C */ u32 param0C;
+    /* 0x10 */ u32 param10;
+    /* 0x14 */ u32 param14;
+    /* 0x18 */ u32 param18;
+    /* 0x1C */ u32 param1C;
+    /* 0x20 */ u32 param20;
+    /* 0x24 */ u32 param24;
+    /* 0x28 */ u32 param28;
+    /* 0x2C */ u32 param2C;
+    /* 0x30 */ u32 param30;
+    /* 0x34 */ u32 param34;
+    /* 0x38 */ u32 param38;
+    /* 0x3C */ u8 flagA;
+    /* 0x3D */ u8 flagB;
+    /* 0x3E */ u8 unk3E[2];
+    /* 0x40 */ u32 unk40;
+    /* 0x44 */ u32 unk44;
+};
+
+/* One slot of the battle's model table (0x48 bytes); only the parameters are copied in. */
+struct ModelSlot {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 id;
+    /* 0x08 */ u32 param08;
+    /* 0x0C */ u32 param0C;
+    /* 0x10 */ u32 param10;
+    /* 0x14 */ u32 param14;
+    /* 0x18 */ u32 param18;
+    /* 0x1C */ u32 param1C;
+    /* 0x20 */ u32 param20;
+    /* 0x24 */ u32 param24;
+    /* 0x28 */ u32 param28;
+    /* 0x2C */ u32 param2C;
+    /* 0x30 */ u32 param30;
+    /* 0x34 */ u32 param34;
+    /* 0x38 */ u32 param38;
+    /* 0x3C */ u8 flagA;
+    /* 0x3D */ u8 flagB;
+    /* 0x3E */ u8 unk3E[2];
+    /* 0x40 */ u32 unk40;
+    /* 0x44 */ u32 unk44;
+
+    void copyParameters(const ModelResource *resource)
+    {
+        id = resource->id;
+        param08 = resource->param08;
+        param0C = resource->param0C;
+        param10 = resource->param10;
+        param14 = resource->param14;
+        param18 = resource->param18;
+        param1C = resource->param1C;
+        param20 = resource->param20;
+        param24 = resource->param24;
+        param28 = resource->param28;
+        param2C = resource->param2C;
+        param30 = resource->param30;
+        param34 = resource->param34;
+        param38 = resource->param38;
+        flagA = resource->flagA;
+        flagB = resource->flagB;
+        unk40 = resource->unk40;
+        unk44 = resource->unk44;
+    }
+};
+
+/* A pending model load: its state flags and the resource id it waits for. */
+struct ModelLoadEntry {
+    /* 0x00 */ u32 flags;      /* 1: header parsed, 2: resources loaded */
+    /* 0x04 */ u32 resourceId;
+};
+
+/* The battle work block as the model loader sees it (Shin Megami Tensei IV layout). */
+struct BattleModelWork {
+    /* 0x0000 */ u8 unk0000[0x1FE4];
+    /* 0x1FE4 */ ModelLoadEntry loads[0x2A];
+    /* 0x2134 */ ModelResource *resources[0x2A];
+    /* 0x21DC */ u8 unk21DC[0x357C - 0x21DC];
+    /* 0x357C */ ModelSlot slots[0x32];
+    /* 0x438C */ s32 loadCount;
+
+    /* The loaded resource with the given id, or NULL. */
+    ModelResource *findResource(u32 wanted)
+    {
+        for (s32 j = 0; j < 0x2A; j++) {
+            if (resources[j] != NULL && resources[j]->id == wanted) {
+                return resources[j];
+            }
+        }
+        return NULL;
+    }
+};
 
 extern "C" {
-
-int modelAnimationEnsureData(int);
-int aocHandleButtons(int, int);
-
-/* Supplied declaration required: modelAnimationEnsureData. */
-/* Supplied declaration required: aocHandleButtons. */
-extern int FUN_00294fe0(int);
-extern int nkdwHeaderParse(int);
-
-
-unsigned int FUN_0033ac58(int param_1)
-
-{
-/* irregular: 1 goto(s); 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int *puVar5;
-  unsigned int temp_v4;
-  
-  temp_v2 = 0;
-  temp_v4 = 1;
-  if (temp_v2 < *(int *)(param_1 + 0x438c)) {
-    do {
-      temp_v3 = param_1 + temp_v2 * 8;
-      temp_v0 = 0;
-      do {
-        temp_v1 = *(int *)(param_1 + temp_v0 * 4 + 0x2134);
-        if ((temp_v1 != 0) && (*(int *)(temp_v1 + 4) == *(int *)(temp_v3 + 0x1fe8))) {
-          temp_v0 = *(int *)(param_1 + temp_v0 * 4 + 0x2134);
-          goto LAB_0033acc8;
-        }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < 0x2a);
-      temp_v0 = 0;
-LAB_0033acc8:
-      puVar5 = (unsigned int *)(temp_v3 + 0x1fe4);
-      if ((*puVar5 & 1) == 0) {
-        temp_v3 = nkdwHeaderParse(temp_v0);
-        if (temp_v3 == 0) {
-          temp_v4 = 0;
-        }
-        else {
-          *puVar5 = *puVar5 | 1;
-          aocHandleButtons(temp_v0,7);
-        }
-      }
-      if ((*puVar5 & 2) == 0) {
-        temp_v3 = FUN_00294fe0(temp_v0);
-        if (temp_v3 == 0) {
-          temp_v4 = 0;
-        }
-        else {
-          modelAnimationEnsureData(temp_v0);
-          *puVar5 = *puVar5 | 2;
-          temp_v3 = param_1 + temp_v2 * 0x48;
-          *(unsigned int *)(temp_v3 + 0x3580) = *(unsigned int *)(temp_v0 + 4);
-          *(unsigned int *)(temp_v3 + 0x3584) = *(unsigned int *)(temp_v0 + 8);
-          *(unsigned int *)(temp_v3 + 0x3588) = *(unsigned int *)(temp_v0 + 0xc);
-          *(unsigned int *)(temp_v3 + 0x358c) = *(unsigned int *)(temp_v0 + 0x10);
-          *(unsigned int *)(temp_v3 + 0x3590) = *(unsigned int *)(temp_v0 + 0x14);
-          *(unsigned int *)(temp_v3 + 0x3594) = *(unsigned int *)(temp_v0 + 0x18);
-          *(unsigned int *)(temp_v3 + 0x3598) = *(unsigned int *)(temp_v0 + 0x1c);
-          *(unsigned int *)(temp_v3 + 0x359c) = *(unsigned int *)(temp_v0 + 0x20);
-          *(unsigned int *)(temp_v3 + 0x35a0) = *(unsigned int *)(temp_v0 + 0x24);
-          *(unsigned int *)(temp_v3 + 0x35a4) = *(unsigned int *)(temp_v0 + 0x28);
-          *(unsigned int *)(temp_v3 + 0x35a8) = *(unsigned int *)(temp_v0 + 0x2c);
-          *(unsigned int *)(temp_v3 + 0x35ac) = *(unsigned int *)(temp_v0 + 0x30);
-          *(unsigned int *)(temp_v3 + 0x35b0) = *(unsigned int *)(temp_v0 + 0x34);
-          *(unsigned int *)(temp_v3 + 0x35b4) = *(unsigned int *)(temp_v0 + 0x38);
-          *(unsigned char *)(temp_v3 + 0x35b8) = *(unsigned char *)(temp_v0 + 0x3c);
-          *(unsigned char *)(temp_v3 + 0x35b9) = *(unsigned char *)(temp_v0 + 0x3d);
-          *(unsigned int *)(temp_v3 + 0x35bc) = *(unsigned int *)(temp_v0 + 0x40);
-          *(unsigned int *)(temp_v3 + 0x35c0) = *(unsigned int *)(temp_v0 + 0x44);
-        }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < *(int *)(param_1 + 0x438c));
-  }
-  return temp_v4;
+void modelAnimationEnsureData(ModelResource *resource);
+void aocHandleButtons(ModelResource *resource, s32 mode);
+s32 FUN_00294fe0(ModelResource *resource);
+s32 nkdwHeaderParse(ModelResource *resource);
 }
 
-} /* extern "C" */
+/* Polls the pending model loads: parses each resource's header, then its data, and copies the
+ * parameters into the slot table; returns 1 once every load has finished. */
+extern "C" u32 FUN_0033ac58(BattleModelWork *work)
+{
+    u32 done = 1;
+    ModelResource *resource;
+    ModelLoadEntry *entry;
+
+    for (s32 i = 0; i < work->loadCount; i++) {
+        resource = work->findResource(work->loads[i].resourceId);
+        entry = &work->loads[i];
+        if ((entry->flags & 1) == 0) {
+            if (nkdwHeaderParse(resource) == 0) {
+                done = 0;
+            } else {
+                entry->flags |= 1;
+                aocHandleButtons(resource, 7);
+            }
+        }
+        if ((entry->flags & 2) == 0) {
+            if (FUN_00294fe0(resource) == 0) {
+                done = 0;
+            } else {
+                modelAnimationEnsureData(resource);
+                entry->flags |= 2;
+                work->slots[i].copyParameters(resource);
+            }
+        }
+    }
+    return done;
+}

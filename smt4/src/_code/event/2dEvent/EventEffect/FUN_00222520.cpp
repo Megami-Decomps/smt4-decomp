@@ -1,126 +1,101 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00222520` (_code @ 0x222520, 0x27c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail derives the work pointer as texture-base - 24 (one pool word, two ldr); here the struct of globals is read with a post-incremented ldr. Everything else (switch layout, texture table walk, interpolation calls) matches. */
+#include "common.h"
+
+struct BlinkFadeWork {
+    u32 job;
+    u32 unk04;
+    s32 state;
+    s32 position;
+    s32 frame;
+    f32 alpha;
+    u8 visible;
+    u8 unk19[3];
+};
 
 extern "C" {
+/* The event effect's globals: the work block pointer and the two textures it waits for. */
+struct EventEffectGlobals {
+    BlinkFadeWork *work;
+    u8 unk04[0x14];
+    u32 textures[6];   /* per texture: table, node, ownership flags */
+};
+extern EventEffectGlobals g_eventEffect;
+s32 lerpIntSplitClamped(s32 start, s32 end, s32 duration, s32 frame);
+f32 mathInterpolateTimed(s32 duration, s32 frame, f32 from, f32 to);
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
+s32 FUN_002c1d5c(void);
+void FUN_00287728(s32 mode);
 
-int lerpIntSplitClamped(...);
-int FUN_00287728(int);
-int mathInterpolateTimed(...);
-
-extern int g_eventEffect; /* 0x43dee8 */
-extern unsigned int DAT_0043df00; /* 0x43df00 */
-extern unsigned int DAT_0043df04; /* 0x43df04 */
-
-/* Supplied declaration required: lerpIntSplitClamped. */
-/* Supplied declaration required: FUN_00287728. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-extern int FUN_002c1d5c(void);
-/* Supplied declaration required: mathInterpolateTimed. */
-
-
-unsigned int FUN_00222520(void)
-
+/* Update the blink-fade event effect: waits for its textures, then slides and fades for 300 frames. */
+s32 FUN_00222520(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  
-  temp_v0 = g_eventEffect;
-  if (*(int *)(g_eventEffect + 8) == 0) {
-    temp_v5 = 0;
-    temp_v2 = temp_v5;
-    do {
-      temp_v3 = asdTMTexTableNodeIsLoaded((&DAT_0043df00)[temp_v5 * 3],(&DAT_0043df04)[temp_v5 * 3]);
-      if (temp_v3 != 0) {
-        temp_v2 = temp_v2 + 1;
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < 2);
-    if (temp_v2 == 2) {
-      FUN_00287728(0);
-      *(unsigned int *)(temp_v0 + 8) = 1;
-      *(unsigned char *)(temp_v0 + 0x18) = 1;
+    u32 *textures = g_eventEffect.textures;
+    BlinkFadeWork *work = g_eventEffect.work;
+    switch (work->state) {
+    case 0: {
+        s32 loaded = 0;
+        for (s32 i = 0; i < 2; i++) {
+            if (asdTMTexTableNodeIsLoaded(textures[i * 3], textures[i * 3 + 1]) != 0) {
+                loaded++;
+            }
+        }
+        if (loaded == 2) {
+            FUN_00287728(0);
+            work->state = 1;
+            work->visible = 1;
+        }
+        break;
     }
-  }
-  else if (*(int *)(g_eventEffect + 8) == 1) {
-    temp_v4 = *(int *)(g_eventEffect + 0x10) - 0xf;
-    if (temp_v4 < 0x79) {
-      temp_v1 = lerpIntSplitClamped(0x28,0xffffff4c,0x78,temp_v4);
-      *(unsigned int *)(temp_v0 + 0xc) = temp_v1;
+    case 1:
+        if ((u32)(work->frame - 15) <= 120) {
+            work->position = lerpIntSplitClamped(40, -180, 120, work->frame - 15);
+        }
+        if ((u32)(work->frame - 136) <= 6) {
+            work->position = lerpIntSplitClamped(-180, 40, 6, work->frame - 136);
+        }
+        if ((u32)(work->frame - 143) <= 7) {
+            work->position = lerpIntSplitClamped(40, -180, 7, work->frame - 143);
+        }
+        if ((u32)(work->frame - 195) <= 4) {
+            work->position = lerpIntSplitClamped(-180, 40, 4, work->frame - 195);
+        }
+        if ((u32)(work->frame - 200) <= 6) {
+            work->position = lerpIntSplitClamped(40, -180, 6, work->frame - 200);
+        }
+        if ((u32)(work->frame - 207) <= 4) {
+            work->position = lerpIntSplitClamped(-180, 40, 4, work->frame - 207);
+        }
+        if (work->frame >= 212) {
+            work->position = lerpIntSplitClamped(40, -180, 45, work->frame - 212);
+        }
+        if ((u32)(work->frame - 15) <= 187) {
+            work->alpha = mathInterpolateTimed(202, work->frame - 15, 1.0f, 0.6f);
+        }
+        if ((u32)(work->frame - 203) <= 7) {
+            work->alpha = mathInterpolateTimed(8, work->frame - 203, 0.6f, 0.7f);
+        }
+        if (work->frame >= 240) {
+            work->alpha = mathInterpolateTimed(60, work->frame - 240, 0.7f, 0.0f);
+        }
+        work->frame++;
+        if (work->frame > 300) {
+            work->visible = 0;
+            work->state = 2;
+        }
+        break;
     }
-    temp_v4 = *(int *)(temp_v0 + 0x10) - 0x88;
-    if (temp_v4 < 7) {
-      temp_v1 = lerpIntSplitClamped(0xffffff4c,0x28,6,temp_v4);
-      *(unsigned int *)(temp_v0 + 0xc) = temp_v1;
+    if (FUN_002c1d5c() != 0) {
+        s32 loaded = 0;
+        for (s32 i = 0; i < 2; i++) {
+            if (asdTMTexTableNodeIsLoaded(textures[i * 3], textures[i * 3 + 1]) != 0) {
+                loaded++;
+            }
+        }
+        if (loaded == 2) {
+            work->state = 2;
+        }
     }
-    temp_v4 = *(int *)(temp_v0 + 0x10) - 0x8f;
-    if (temp_v4 < 8) {
-      temp_v1 = lerpIntSplitClamped(0x28,0xffffff4c,7,temp_v4);
-      *(unsigned int *)(temp_v0 + 0xc) = temp_v1;
-    }
-    temp_v4 = *(int *)(temp_v0 + 0x10) - 0xc3;
-    if (temp_v4 < 5) {
-      temp_v1 = lerpIntSplitClamped(0xffffff4c,0x28,4,temp_v4);
-      *(unsigned int *)(temp_v0 + 0xc) = temp_v1;
-    }
-    temp_v4 = *(int *)(temp_v0 + 0x10) - 200;
-    if (temp_v4 < 7) {
-      temp_v1 = lerpIntSplitClamped(0x28,0xffffff4c,6,temp_v4);
-      *(unsigned int *)(temp_v0 + 0xc) = temp_v1;
-    }
-    temp_v4 = *(int *)(temp_v0 + 0x10) - 0xcf;
-    if (temp_v4 < 5) {
-      temp_v1 = lerpIntSplitClamped(0xffffff4c,0x28,4,temp_v4);
-      *(unsigned int *)(temp_v0 + 0xc) = temp_v1;
-    }
-    if (*(int *)(temp_v0 + 0x10) >= 0xd4) {
-      temp_v1 = lerpIntSplitClamped(0x28,0xffffff4c,0x2d,*(int *)(temp_v0 + 0x10) - 0xd4);
-      *(unsigned int *)(temp_v0 + 0xc) = temp_v1;
-    }
-    temp_v1 = 0x3f19999a;
-    if (*(int *)(temp_v0 + 0x10) - 0xfU < 0xbc) {
-      temp_v6 = 0x3f800000;
-      mathInterpolateTimed(0xca);
-      *(unsigned int *)(temp_v0 + 0x14) = temp_v6;
-    }
-    temp_v6 = 0x3f333333;
-    if (*(int *)(temp_v0 + 0x10) - 0xcbU < 8) {
-      mathInterpolateTimed(8);
-      *(unsigned int *)(temp_v0 + 0x14) = temp_v1;
-    }
-    if (*(int *)(temp_v0 + 0x10) >= 0xf0) {
-      mathInterpolateTimed(0x3c,*(int *)(temp_v0 + 0x10) - 0xf0);
-      *(unsigned int *)(temp_v0 + 0x14) = temp_v6;
-    }
-    temp_v2 = *(int *)(temp_v0 + 0x10) + 1;
-    *(int *)(temp_v0 + 0x10) = temp_v2;
-    if (temp_v2 >= 301) {
-      *(unsigned char *)(temp_v0 + 0x18) = 0;
-      *(unsigned int *)(temp_v0 + 8) = 2;
-    }
-  }
-  temp_v2 = FUN_002c1d5c();
-  if (temp_v2 != 0) {
-    temp_v5 = 0;
-    temp_v2 = temp_v5;
-    do {
-      temp_v3 = asdTMTexTableNodeIsLoaded((&DAT_0043df00)[temp_v5 * 3],(&DAT_0043df04)[temp_v5 * 3]);
-      if (temp_v3 != 0) {
-        temp_v2 = temp_v2 + 1;
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < 2);
-    if (temp_v2 == 2) {
-      *(unsigned int *)(temp_v0 + 8) = 2;
-    }
-  }
-  return 0;
+    return 0;
 }
 
-} /* extern "C" */
+}

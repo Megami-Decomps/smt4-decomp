@@ -1,4 +1,3 @@
-/* NON_MATCHING: allocation result initialization uses r2 for the global store instead of retail r1. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 

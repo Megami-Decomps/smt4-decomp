@@ -1,58 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fea02` (_code @ 0x2fea02, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: logic and calls match (std::list-style unlink with the iterator-compare helper); stack locals differ: retail has `second` at sp+4 and the zero temporary at sp+0 with the frame allocated by `push {r1-r3,...}`, built swaps the slots and uses `sub sp, #12` */
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_002fea02_arg1 fn_002fea02_arg1;
-struct fn_002fea02_arg1 {
-    unsigned char pad_0x0[0x4];
-    int field_0x4; /* +0x4 */
-    int field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x4];
-    int field_0x10; /* +0x10 */
+struct LinkNode {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ LinkNode *first;
+    /* 0x08 */ LinkNode *second;
 };
 
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
+struct LinkList {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ LinkNode *head;
+    /* 0x08 */ LinkNode *tail;
+    /* 0x0c */ u8 unk0c[4];
+    /* 0x10 */ s32 count;
+};
 
-extern int wordRefsDiffer_002fe9f2(int *, unsigned int *);
+u32 wordRefsDiffer_002fe9f2(LinkNode **a, LinkNode **b);
 
-
-void FUN_002fea02(int *param_1,fn_002fea02_arg1 *param_2,int *param_3,unsigned int param_4)
-
+/* Unlinks the node `*nodeRef` from `list`; `*next` receives its first link, its second link is used to patch the neighbour. */
+void FUN_002fea02(LinkNode **next, LinkList *list, LinkNode **nodeRef, u32 unused)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int uStack_18;
-  
-  temp_v2 = *(int *)(*param_3 + 8);
-  *param_1 = *(int *)(*param_3 + 4);
-  temp_v1 = 0;
-  uStack_18 = param_4;
-  temp_v0 = wordRefsDiffer_002fe9f2(&temp_v2,(unsigned int *)&temp_v1);
-  if (temp_v0 != 0) {
-    *(int *)(temp_v2 + 4) = *param_1;
-  }
-  *(unsigned int *)(*param_3 + 8) = 0;
-  temp_v1 = 0;
-  temp_v0 = wordRefsDiffer_002fe9f2(param_1,(unsigned int *)&temp_v1);
-  if (temp_v0 != 0) {
-    *(int *)(*param_1 + 8) = temp_v2;
-  }
-  *(unsigned int *)(*param_3 + 4) = 0;
-  if (param_2->field_0x4 == *param_3) {
-    param_2->field_0x4 = *param_1;
-  }
-  if (param_2->field_0x8 == *param_3) {
-    param_2->field_0x8 = temp_v2;
-  }
-  param_2->field_0x10 = param_2->field_0x10 - 1;
-  return;
+    LinkNode *second = (*nodeRef)->second;
+
+    *next = (*nodeRef)->first;
+    LinkNode *none = NULL;
+    if (wordRefsDiffer_002fe9f2(&second, &none)) {
+        second->first = *next;
+    }
+    (*nodeRef)->second = NULL;
+    none = NULL;
+    if (wordRefsDiffer_002fe9f2(next, &none)) {
+        (*next)->second = second;
+    }
+    (*nodeRef)->first = NULL;
+    if (list->head == *nodeRef) {
+        list->head = *next;
+    }
+    if (list->tail == *nodeRef) {
+        list->tail = second;
+    }
+    list->count--;
 }
 
 } /* extern "C" */

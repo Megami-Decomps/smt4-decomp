@@ -1,155 +1,130 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004cb394` (_code @ 0x4cb394, 0x274 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation and scheduling: retail keeps 0xFFFFFFFF in r2 (also the 0xFFFF test), loads the unit's two flag words separately and uses five callee-saved registers; control flow, tint table and the channel fade arithmetic match. */
+#include "common.h"
 
-extern "C" {
-
-int FUN_003f0e20(unsigned int *, int);
-int VectorSignedToFloat(...);
-
-typedef struct fn_004cb394_arg1 fn_004cb394_arg1;
-struct fn_004cb394_arg1 {
-    unsigned char pad_0x0[0x10];
-    unsigned char field_0x10; /* +0x10 */
-    unsigned char pad_0x11[0xb];
-    unsigned char field_0x1c; /* +0x1c */
-    unsigned char pad_0x1d[0x3];
-    unsigned char field_0x20; /* +0x20 */
-    unsigned char pad_0x21[0x3];
-    unsigned char field_0x24; /* +0x24 */
-    unsigned char pad_0x25[0x2b];
-    uint field_0x50; /* +0x50 */
-    unsigned char pad_0x54[0x16];
-    short field_0x6a; /* +0x6a */
-    int field_0x6c; /* +0x6c */
-    unsigned char pad_0x70[0x4];
-    uint field_0x74; /* +0x74 */
+/* The battle effect settings block (g_battleEffectSettings): only the fields the status tint reads. */
+struct BattleEffectTintSettings {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s32 fadeFrames;
+    /* 0x14 */ u8 unk14[8];
+    /* 0x1C */ u32 defaultColor;
+    /* 0x20 */ u8 unk20[0x48];
+    /* 0x68 */ u32 clearMaskLow;
+    /* 0x6C */ u32 clearMaskHigh;
 };
 
-extern int DAT_0057aa10; /* 0x57aa10 */
-extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
-extern unsigned int g_battleMotionCombatantClearMask; /* 0x57aa68 */
-extern unsigned int DAT_0057aa6c; /* 0x57aa6c */
+/* A battle unit's status flags. */
+struct BattleTintUnit {
+    /* 0x000 */ u32 flagsLow;
+    /* 0x004 */ u32 flagsHigh;
+    /* 0x008 */ u8 unk008[0x26C];
+    /* 0x274 */ u16 statusMask;
+};
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_003f0e20. */
+/* The tint state of one status icon. */
+struct StatusTintRecord {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 flags;
+    /* 0x54 */ u8 unk54[0x16];
+    /* 0x6A */ s16 unitIndex;
+    /* 0x6C */ s32 variant;
+    /* 0x70 */ u8 unk70[4];
+    /* 0x74 */ u32 color;
+    /* 0x78 */ u8 unk78[0x10];
+    /* 0x88 */ s32 step;
+    /* 0x8C */ u8 unk8C[8];
+    /* 0x94 */ u32 fromColor;
+    /* 0x98 */ u32 toColor;
+    /* 0x9C */ s32 current;
+};
 
+extern "C" {
+extern BattleEffectTintSettings g_battleEffectSettings;
+BattleTintUnit *FUN_003f0e20(void *owner, s32 unitIndex);
 
-void FUN_004cb394(unsigned int *param_1,fn_004cb394_arg1 *param_2)
-
+/* Advances the tint of a status icon: picks the color of the unit's current status and fades toward it,
+ * then steps on to the next active status once the fade has held. */
+void FUN_004cb394(void *owner, StatusTintRecord *record)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int in_fpscr;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  
-  temp_v0 = DAT_0057aa10;
-  if (((param_2->field_0x50 & 2) != 0) &&
-     (FUN_003f0e20(param_1,(int)param_2->field_0x6a), param_1 != (unsigned int *)0x0)) {
-    if (((param_1[1] & DAT_0057aa6c) == 0 && (g_battleMotionCombatantClearMask & *param_1) == 0) ||
-       (param_2->field_0x6c == 0xffff)) {
-      param_2->field_0x74 = 0xffffffff;
-    }
-    else {
-      temp_v1 = *(unsigned int *)&param_2[1].field_0x24;
-      temp_v3 = 0;
-      do {
-        if ((temp_v1 == 0) && (((unsigned int)(unsigned short)param_1[0x9d] & (1 << (temp_v3 & 0xff))) != 0)) {
-          *(unsigned int *)&param_2[1].field_0x24 = temp_v3;
-          temp_v1 = temp_v3;
-          break;
-        }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < 0xe);
-      if (temp_v1 == 7) {
-        temp_v3 = 0x52dee7ff;
-      }
-      else if (temp_v1 == 5) {
-        temp_v3 = 0xb252ceff;
-      }
-      else if (temp_v1 == 6) {
-        temp_v3 = 0xf721f9ff;
-      }
-      else if (temp_v1 == 8) {
-        temp_v3 = 0xefd629ff;
-      }
-      else if (temp_v1 == 9) {
-        temp_v3 = 0x7e620cff;
-      }
-      else if (temp_v1 == 3) {
-        temp_v3 = 0xff4000ff;
-      }
-      else if (temp_v1 == 0xb) {
-        temp_v3 = 0xff0055ff;
-      }
-      else if (temp_v1 == 0xc) {
-        temp_v3 = 0x124fd8ff;
-      }
-      else {
-        temp_v3 = DAT_0057aa1c;
-        if (temp_v1 == 0xd) {
-          temp_v3 = 0x6b7296ff;
-        }
-      }
-      if (*(unsigned int *)&param_2[1].field_0x20 != temp_v3) {
-        temp_v4 = param_2->field_0x74;
-        *(unsigned int *)&param_2[1].field_0x20 = temp_v3;
-        *(unsigned int *)&param_2[1].field_0x1c = temp_v4;
-        *(unsigned int *)&param_2[1].field_0x10 = 0;
-      }
-      temp_v5 = *(int *)&param_2[1].field_0x10;
-      if (temp_v5 < temp_v0) {
-        temp_v6 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v7 = (float)VectorSignedToFloat(temp_v5 + 1,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v2 = *(unsigned int *)&param_2[1].field_0x1c;
-        *(int *)&param_2[1].field_0x10 = temp_v5 + 1;
-        temp_v1 = (temp_v2 & 0xff0000) >> 0x10;
-        temp_v7 = temp_v7 / temp_v6;
-        temp_v4 = (temp_v2 & 0xff00) >> 8;
-        temp_v8 = (float)VectorSignedToFloat((temp_v3 >> 0x18) - (temp_v2 >> 0x18),
-                                           (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v9 = (float)VectorSignedToFloat(((temp_v3 & 0xff0000) >> 0x10) - temp_v1,
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v10 = (float)VectorSignedToFloat(((temp_v3 & 0xff00) >> 8) - temp_v4,
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v6 = (float)VectorSignedToFloat((temp_v3 & 0xff) - (temp_v2 & 0xff),
-                                           (unsigned char)(in_fpscr >> 0x16) & 3);
-        param_2->field_0x74 =
-             (int)(temp_v6 * temp_v7) + (temp_v2 & 0xff) +
-             ((int)(temp_v8 * temp_v7) + (temp_v2 >> 0x18)) * 0x1000000 +
-             (temp_v1 + (int)(temp_v9 * temp_v7)) * 0x10000 + ((int)(temp_v10 * temp_v7) + temp_v4) * 0x100;
+    s32 fadeFrames = g_battleEffectSettings.fadeFrames;
+    if ((record->flags & 2) == 0) {
         return;
-      }
-      param_2->field_0x74 = temp_v3;
-      *(int *)&param_2[1].field_0x10 = temp_v5 + 1;
-      temp_v6 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v7 = (float)VectorSignedToFloat(temp_v5 + 1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      if (temp_v6 + 20.0f + 4.0f < temp_v7) {
-        temp_v3 = temp_v1 + 1;
+    }
+    BattleTintUnit *unit = FUN_003f0e20(owner, record->unitIndex);
+    if (unit == NULL) {
+        return;
+    }
+    if (((unit->flagsHigh & g_battleEffectSettings.clearMaskHigh) | (g_battleEffectSettings.clearMaskLow & unit->flagsLow)) == 0 ||
+        record->variant == 0xFFFF) {
+        record->color = 0xFFFFFFFF;
+        return;
+    }
+    s32 status = record->current;
+    for (u32 i = 0; i < 14; i++) {
+        if (status == 0 && (unit->statusMask & (1 << (i & 0xFF))) != 0) {
+            record->current = i;
+            status = i;
+            break;
+        }
+    }
+    u32 target;
+    if (status == 7) {
+        target = 0x52DEE7FF;
+    } else if (status == 5) {
+        target = 0xB252CEFF;
+    } else if (status == 6) {
+        target = 0xF721F9FF;
+    } else if (status == 8) {
+        target = 0xEFD629FF;
+    } else if (status == 9) {
+        target = 0x7E620CFF;
+    } else if (status == 3) {
+        target = 0xFF4000FF;
+    } else if (status == 11) {
+        target = 0xFF0055FF;
+    } else if (status == 12) {
+        target = 0x124FD8FF;
+    } else {
+        target = g_battleEffectSettings.defaultColor;
+        if (status == 13) {
+            target = 0x6B7296FF;
+        }
+    }
+    if (record->toColor != target) {
+        record->fromColor = record->color;
+        record->toColor = target;
+        record->step = 0;
+    }
+    s32 step = record->step;
+    if (step < fadeFrames) {
+        f32 progress = (f32)(step + 1) / (f32)fadeFrames;
+        u32 from = record->fromColor;
+        record->step = step + 1;
+        s32 fromRed = from >> 24;
+        s32 fromGreen = (from & 0xFF0000) >> 16;
+        s32 fromBlue = (from & 0xFF00) >> 8;
+        s32 fromAlpha = from & 0xFF;
+        s32 red = (s32)((f32)((s32)(target >> 24) - fromRed) * progress) + fromRed;
+        s32 green = (s32)((f32)((s32)((target & 0xFF0000) >> 16) - fromGreen) * progress) + fromGreen;
+        s32 blue = (s32)((f32)((s32)((target & 0xFF00) >> 8) - fromBlue) * progress) + fromBlue;
+        s32 alpha = (s32)((f32)((s32)(target & 0xFF) - fromAlpha) * progress) + fromAlpha;
+        record->color = alpha + red * 0x1000000 + green * 0x10000 + blue * 0x100;
+        return;
+    }
+    record->color = target;
+    record->step = step + 1;
+    if ((f32)fadeFrames + 20.0f + 4.0f < (f32)(step + 1)) {
+        s32 next = status + 1;
         do {
-          if (((unsigned int)(unsigned short)param_1[0x9d] & (1 << (temp_v3 & 0xff))) != 0) {
-            *(unsigned int *)&param_2[1].field_0x24 = temp_v3;
-            return;
-          }
-          temp_v3 = temp_v3 + 1;
-          if (temp_v3 >= 0xe) {
-            temp_v3 = 0;
-          }
-        } while (temp_v1 != temp_v3);
-        return;
-      }
+            if ((unit->statusMask & (1 << (next & 0xFF))) != 0) {
+                record->current = next;
+                return;
+            }
+            next++;
+            if (next >= 14) {
+                next = 0;
+            }
+        } while (status != next);
     }
-  }
-  return;
 }
 
-} /* extern "C" */
+}

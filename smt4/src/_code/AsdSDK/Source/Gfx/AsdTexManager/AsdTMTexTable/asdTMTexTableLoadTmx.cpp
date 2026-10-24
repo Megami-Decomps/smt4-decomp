@@ -1,151 +1,122 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdTMTexTableLoadTmx` (_code @ 0x2c5914, 0x268 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: close: relocation loops, string literals and debug traces match; built keeps the flags argument in r9 (retail r5, then spilled to [sp]) and combines the file-flag computation differently */
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-int FUN_002b73a8(int, unsigned int);
-int textFormatBuffer(...);
-int libc_strcpy(...);
+void *FUN_002b73a8(u32 size, u32 flags);
+void *fileLoadSync(char *path, u8 *size, u32 flags);
+char *FUN_0010024c(char *str, u32 ch);
+void libc_strcpy(char *dst, const char *src);
+void textFormatBuffer(char *dst, const char *format, ...);
 
-/* stack frame of param_2: 2 slot(s), 5 byte(s) */
-typedef struct {
-    unsigned char spA8; /* 0xa8: local_a8 */
-    unsigned int sp1B0; /* 0x1b0: local_1b0 */
-} param_2_stack;
+extern const char DAT_00409270[];
+extern TexTable g_texTable;
 
-extern unsigned char LAB_002c5b80; /* 0x2c5b80 */
-extern unsigned char LAB_002c5b84; /* 0x2c5b84 */
-extern unsigned char LAB_002c5b98; /* 0x2c5b98 */
-extern int g_texTable; /* 0x44ea28 */
-extern int DAT_0044ea2c; /* 0x44ea2c */
+/* A group record of the TMX file (0x14 bytes); `texture` is an index until relocated. */
+struct TmxGroup {
+    /* 0x00 */ s32 unk00[3];
+    /* 0x0C */ s32 texture;
+    /* 0x10 */ s32 unk10;
+};
 
-extern unsigned char *FUN_0010024c(char *, unsigned int);
-/* Supplied declaration required: FUN_002b73a8. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: libc_strcpy. */
-extern int fileLoadSync(unsigned char *, unsigned char *, unsigned char);
+/* A set record of the TMX file (0x10 bytes). */
+struct TmxSet {
+    /* 0x00 */ s32 group;        /* index until relocated into a pointer */
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 data;         /* offset until relocated into a pointer */
+    /* 0x0C */ u32 unk0C;
+};
 
-
-int * asdTMTexTableLoadTmx(int param_1,unsigned int param_2)
-
+/* Turns the backslashes of a directory path into slashes. */
+static __inline void pathUseSlashes(char *path)
 {
-/* irregular: 3 native warning(s); review required */
-  char temp_v0;
-  int *piVar2;
-  unsigned char *puVar3;
-  int temp_v1;
-  unsigned int *puVar5;
-  int temp_v2;
-  int temp_v3;
-  char *pcVar8;
-  int *piVar9;
-  unsigned int *puVar10;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned char temp_v7;
-  unsigned char temp_v8 [4];
-  unsigned char temp_v9 [256];
-  char temp_v10;
-  char acStack_a7 [131];
-  
-  temp_v1 = DAT_0044ea2c;
-  puVar10 = (unsigned int *)(g_texTable + param_1 * 0x18);
-  piVar2 = (int *)*puVar10;
-  if (piVar2 == (int *)0x0) {
-    libc_strcpy(&temp_v10,DAT_0044ea2c);
-    pcVar8 = &temp_v10;
-    temp_v0 = temp_v10;
-    while (temp_v0 != '\0') {
-      puVar3 = (unsigned char *)FUN_0010024c(pcVar8,0x5c);
-      if (puVar3 != (unsigned char *)0x0) {
-        *puVar3 = 0x2f;
-      }
-      pcVar8 = pcVar8 + 1;
-      temp_v0 = *pcVar8;
-    }
-    libc_strcpy(temp_v1,&temp_v10);
-    textFormatBuffer(temp_v9,&LAB_002c5b84,temp_v1,puVar10 + 2,&LAB_002c5b80);
-    temp_v7 = (param_2 & 1) != 0;
-    if ((param_2 & 2) != 0) {
-      temp_v7 = temp_v7 | 2;
-    }
-    temp_v1 = fileLoadSync(temp_v9,temp_v8,temp_v7);
-    if (temp_v1 == 0) {
-      *puVar10 = 0;
-      piVar2 = (int *)0x0;
-    }
-    else {
-      temp_v5 = *(int *)(temp_v1 + 0x14);
-      temp_v3 = 0;
-      temp_v4 = *(int *)(temp_v1 + 0x2c);
-      piVar9 = (int *)(*(int *)(temp_v1 + 0x24) + temp_v1);
-      temp_v6 = *(int *)(temp_v1 + 0x1c) + temp_v1;
-      temp_v2 = temp_v6;
-      if (0 < *(int *)(temp_v1 + 0x20)) {
-        do {
-          if (*(int *)(temp_v2 + 0xc) == -1) {
-            *(unsigned int *)(temp_v2 + 0xc) = 0;
-          }
-          else {
-            *(int *)(temp_v2 + 0xc) = temp_v5 + temp_v1 + *(int *)(temp_v2 + 0xc) * 0x50;
-          }
-          temp_v3 = temp_v3 + 1;
-          temp_v2 = temp_v2 + 0x14;
-        } while (temp_v3 < *(int *)(temp_v1 + 0x20));
-      }
-      temp_v2 = 0;
-      piVar2 = piVar9;
-      if (0 < *(int *)(temp_v1 + 0x28)) {
-        do {
-          temp_v2 = temp_v2 + 1;
-          *piVar2 = temp_v6 + *piVar2 * 0x14;
-          piVar2[2] = piVar2[2] + temp_v4 + temp_v1;
-          piVar2 = piVar2 + 4;
-        } while (temp_v2 < *(int *)(temp_v1 + 0x28));
-      }
-      piVar2 = (int *)0x2c;
-      FUN_002b73a8(0x2c,param_2);
-      if (*(int *)(temp_v1 + 0x28) < 1) {
-        *piVar2 = 0;
-      }
-      else {
-        temp_v2 = *(int *)(temp_v1 + 0x28) << 5;
-        FUN_002b73a8(temp_v2,param_2);
-        *piVar2 = temp_v2;
-      }
-      puVar5 = (unsigned int *)*piVar2;
-      temp_v2 = 0;
-      if (temp_v2 < *(int *)(temp_v1 + 0x28)) {
-        do {
-          puVar5[1] = (unsigned int)piVar9;
-          *puVar5 = (unsigned int)piVar2;
-          temp_v2 = temp_v2 + 1;
-          puVar5 = puVar5 + 8;
-          piVar9 = piVar9 + 4;
-        } while (temp_v2 < *(int *)(temp_v1 + 0x28));
-      }
-      piVar2[1] = temp_v1;
-      piVar2[2] = temp_v1;
-      temp_v2 = DAT_0044ea2c;
-      temp_v3 = DAT_0044ea2c + 0x80;
-      libc_strcpy(&temp_v10,temp_v3);
-      pcVar8 = &temp_v10;
-      while (temp_v10 != '\0') {
-        puVar3 = (unsigned char *)FUN_0010024c(pcVar8,0x5c);
-        if (puVar3 != (unsigned char *)0x0) {
-          *puVar3 = 0x2f;
+    char buffer[0x80];
+    char *p;
+
+    libc_strcpy(buffer, path);
+    for (p = buffer; *p != '\0'; p++) {
+        char *slash = FUN_0010024c(p, 0x5C);
+
+        if (slash != NULL) {
+            *slash = '/';
         }
-        pcVar8 = pcVar8 + 1;
-        temp_v10 = *pcVar8;
-      }
-      libc_strcpy(temp_v3,&temp_v10);
-      textFormatBuffer(piVar2 + 3,&LAB_002c5b98,temp_v2 + 0x80,temp_v1 + 4);
-      *puVar10 = (unsigned int)piVar2;
     }
-  }
-  return piVar2;
+    libc_strcpy(path, buffer);
+}
+
+/* Loads the TMX container of table entry `index` (once), relocates its offsets into pointers and builds the node
+ * list for its sets. Returns the loaded file, or NULL when the file is missing. */
+TexFile *asdTMTexTableLoadTmx(s32 index, u32 flags)
+{
+    TexTableEntry *entry = &g_texTable.entries[index];
+    TexFile *loaded = entry->file;
+
+    if (loaded == NULL) {
+        TexTableHeader *header = g_texTable.header;
+        char path[0x100];
+        u8 size[4];
+        TmxHeader *file;
+        u8 fileFlags;
+        u8 *textures;
+        TmxGroup *groups;
+        TmxSet *sets;
+        u8 *data;
+        TmxGroup *group;
+        TmxSet *set;
+        s32 i;
+
+        pathUseSlashes(header->dirPrefix);
+        textFormatBuffer(path, "%s%s.%s", header->dirPrefix, entry->name, "ttd");
+        fileFlags = (flags & 1) != 0 ? 1 : 0;
+        if ((flags & 2) != 0) {
+            fileFlags |= 2;
+        }
+        file = (TmxHeader *)fileLoadSync(path, size, fileFlags);
+        if (file == NULL) {
+            entry->file = NULL;
+            return NULL;
+        }
+        textures = (u8 *)file + file->texOffset;
+        groups = (TmxGroup *)((u8 *)file + file->groupOffset);
+        sets = (TmxSet *)((u8 *)file + file->setOffset);
+        data = (u8 *)file + file->dataOffset;
+        for (group = groups, i = 0; i < file->groupCount; i++, group++) {
+            if (group->texture == -1) {
+                group->texture = 0;
+            } else {
+                group->texture = (s32)(textures + group->texture * 0x50);
+            }
+        }
+        for (set = sets, i = 0; i < file->setCount; i++, set++) {
+            set->group = (s32)&groups[set->group];
+            set->data += (u32)data;
+        }
+        asdDebugTrace(DAT_00409270, 455);
+        loaded = (TexFile *)FUN_002b73a8(0x2C, flags);
+        if (file->setCount <= 0) {
+            loaded->nodes = NULL;
+        } else {
+            asdDebugTrace(DAT_00409270, 458);
+            loaded->nodes = (TexNode *)FUN_002b73a8(file->setCount << 5, flags);
+        }
+        {
+            TexNode *node = loaded->nodes;
+            set = sets;
+            for (i = 0; i < file->setCount; i++) {
+                node->set = (u32 *)set;
+                node->file = loaded;
+                node++;
+                set++;
+            }
+        }
+        loaded->image = (u8 *)file;
+        loaded->image2 = (u8 *)file;
+        pathUseSlashes(header->dirPrefix2);
+        textFormatBuffer(loaded->path, "%s%s/", header->dirPrefix2, (u8 *)file + 4);
+        entry->file = loaded;
+    }
+    return loaded;
 }
 
 } /* extern "C" */

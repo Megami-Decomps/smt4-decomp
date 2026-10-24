@@ -1,39 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035fe34` (_code @ 0x35fe34, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the two count loads at entry differ: retail loads b->count through the saved copy of r1 after comparing a->count; the build loads both before the compare. */
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
 
-int FUN_00184310(void);
-
-/* Supplied declaration required: FUN_00184310. */
-
-
-unsigned int FUN_0035fe34(unsigned short *param_1,unsigned short *param_2)
-
+/* qsort comparator: orders demon stock entries by race, level and ID (all descending race/ID, ascending level); empty entries sort last. */
+int FUN_0035fe34(const void *left, const void *right)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned short *puVar2;
-  unsigned short *puVar3;
-  
-  if (param_1[1] == 0) {
-    return (unsigned int)(param_2[1] != 0);
-  }
-  if (param_2[1] == 0) {
-    temp_v0 = 0xffffffff;
-  }
-  else {
-    puVar2 = (unsigned short *)(unsigned int)*param_1;
-    FUN_00184310();
-    puVar3 = (unsigned short *)(unsigned int)*param_2;
-    FUN_00184310();
-    temp_v0 = (unsigned int)(unsigned char)puVar3[1] - (unsigned int)(unsigned char)puVar2[1];
-    if ((temp_v0 == 0) && (temp_v0 = (unsigned int)puVar2[3] - (unsigned int)puVar3[3], temp_v0 == 0)) {
-      temp_v0 = (unsigned int)*puVar3 - (unsigned int)*puVar2;
+    const DevilStock *a = (const DevilStock *)left;
+    const DevilStock *b = (const DevilStock *)right;
+    int result;
+
+    if (a->count == 0) {
+        if (b->count == 0) {
+            return 0;
+        }
+        return 1;
     }
-  }
-  return temp_v0;
+    if (b->count == 0) {
+        return -1;
+    }
+    const DevilRecordA *devilA = FUN_00184310(a->id);
+    const DevilRecordA *devilB = FUN_00184310(b->id);
+    result = devilB->race - devilA->race;
+    if (result == 0) {
+        result = devilA->level - devilB->level;
+        if (result == 0) {
+            result = devilB->id - devilA->id;
+        }
+    }
+    return result;
 }
 
 } /* extern "C" */

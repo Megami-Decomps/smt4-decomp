@@ -1,11 +1,6 @@
 /* NON_MATCHING: counted destruction uses different node-loop bounds, halfword-loop conditions and saved-register allocation; alternate optimization remains untested. */
 #include "classes/Obj422540.h"
 
-struct OwnerAllocator {
-    virtual void *allocate(u32 size) = 0;
-    virtual void release(void *item) = 0;
-};
-
 struct OwnerNode {
     OwnerAllocator *allocator;
     void *item;

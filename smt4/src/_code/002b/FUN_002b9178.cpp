@@ -1,114 +1,82 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b9178` (_code @ 0x2b9178, 0x220 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only scheduling differs: retail stores the file data before loading the flags (no write-back addressing) and loads dataOffset before the texture pointer. */
+#include "gfx/StexLoad.h"
 
 extern "C" {
+char *libc_strcpy(char *dst, const char *src);
+char *libc_strcat(char *dst, const char *src);
+u32 libc_strlen(const char *s);
+u8 *asdLoadFileSync(const char *path, s32 *size, u32 loadFlags, u32 alignment);
+StexHeader *asdTMSprDecompress(StexHeader *data, u32 mode, u32 alignment);
+s32 rt_memcmp(const void *first, const void *second, u32 bytes);
+void asdMemFree(void *memory);
+AsdTexture *asdTextureCreate(s32 retry);
 
-int asdTMSprDecompress(int, unsigned int, int);
-int libc_strcat(...);
-int asdTextureCreate(void);
-int libc_strcpy(unsigned char [64], int);
-int asdMemFree(int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern unsigned char LAB_002b9398; /* 0x2b9398 */
-extern unsigned char LAB_002b93a0; /* 0x2b93a0 */
-extern unsigned char LAB_002b93a8; /* 0x2b93a8 */
-
-/* Supplied declaration required: asdTMSprDecompress. */
-/* Supplied declaration required: libc_strcat. */
-/* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: libc_strcpy. */
-extern int rt_memcmp(int, unsigned char *, unsigned int);
-extern int libc_strlen(unsigned int);
-/* Supplied declaration required: asdMemFree. */
-extern int asdLoadFileSync(unsigned char *, int *, unsigned int, unsigned int);
-
-
-unsigned int FUN_002b9178(int *param_1)
-
+/* Build the entry's file path and load it synchronously; on success the entry holds the new texture and its file data. */
+u32 FUN_002b9178(TexTableEntry *entry)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4 [64];
-  int temp_v5;
-  
-  temp_v2 = param_1[1];
-  libc_strcpy(temp_v4,*param_1 + 0xc);
-  pcVar2 = *(char **)(temp_v2 + 8);
-  if (*pcVar2 != '-') {
-    libc_strcat(temp_v4);
-  }
-  else {
-    libc_strcat(temp_v4,*(unsigned int *)(param_1[pcVar2[1] * -8 + 0x181] + 8));
-  }
-  if (*(char *)(param_1[1] + 0xd) != '\0') {
-    libc_strcat(temp_v4,&LAB_002b9398);
-  }
-  else {
-    libc_strcat(temp_v4,&LAB_002b93a0);
-  }
-  temp_v2 = libc_strlen(*(unsigned int *)(temp_v2 + 8));
-  if (temp_v2 == 0) {
-    param_1[2] = 0;
-  }
-  else if ((param_1[4] & 0xfffeffffU) == 0) {
-    temp_v3 = 1;
-    if ((param_1[4] & 0x10000U) != 0) {
-      temp_v3 = 3;
-    }
-    temp_v1 = temp_v3;
-    if (*(char *)(param_1[1] + 0xd) != '\0') {
-      if ((temp_v3 & 2) != 0) {
-        temp_v1 = temp_v3 & 0xfffffffd;
-      }
-      else {
-        temp_v1 = temp_v3 | 2;
-      }
-    }
-    temp_v2 = asdLoadFileSync(temp_v4,&temp_v5,temp_v1,0x80);
-    if (temp_v2 != 0) {
-      if (*(char *)(param_1[1] + 0xd) != '\0') {
-        asdTMSprDecompress(temp_v2,temp_v3,0x80);
-      }
-      temp_v0 = rt_memcmp(temp_v2,&LAB_002b93a8,4);
-      if (temp_v0 == 0) {
-        if (*(int *)(temp_v2 + 0x24) != 0) {
-          param_1[2] = 0;
-        }
-        else {
-          temp_v3 = (unsigned int)((param_1[4] & 0x10000U) != 0);
-          asdTextureCreate();
-          param_1[2] = temp_v3;
-          *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v2 + 8);
-          *(unsigned int *)(param_1[2] + 0x14) = *(unsigned int *)(temp_v2 + 0xc);
-          *(unsigned int *)(param_1[2] + 0x18) = *(unsigned int *)(temp_v2 + 0x10);
-          *(unsigned int *)(param_1[2] + 0x1c) = *(unsigned int *)(temp_v2 + 0x18);
-          *(unsigned int *)(param_1[2] + 0x20) = *(unsigned int *)(temp_v2 + 0x14);
-          *(int *)(param_1[2] + 0x28) = temp_v5 - *(int *)(temp_v2 + 0x20);
-          *(unsigned int *)(param_1[2] + 0x2c) = *(unsigned int *)(param_1[2] + 0x2c) | 0x10;
-          if (*(int *)(temp_v2 + 4) == 1) {
-            *(unsigned int *)(param_1[2] + 0x3c) = 1;
-            *(unsigned int *)(param_1[2] + 0x40) = 1;
-          }
-          *(int *)(param_1[2] + 0x24) = *(int *)(temp_v2 + 0x20) + temp_v2;
-        }
-        param_1[3] = temp_v2;
-        param_1[4] = param_1[4] | 2;
-        return 1;
-      }
-      asdMemFree(temp_v2);
-    }
-  }
-  return 0;
-}
+    char path[64];
+    s32 size;
+    TexTableFile *file = entry->file;
+    TexTableNode *node = entry->node;
 
-} /* extern "C" */
+    libc_strcpy(path, file->directory);
+    if (node->name[0] == '-') {
+        libc_strcat(path, entry->slots[-(s8)node->name[1]].node->name);
+    } else {
+        libc_strcat(path, node->name);
+    }
+    if (entry->node->compressed) {
+        libc_strcat(path, ".cmp");
+    } else {
+        libc_strcat(path, ".stex");
+    }
+
+    if (libc_strlen(node->name) == 0) {
+        entry->state = 0;
+    } else if ((entry->flags & ~TEXENTRY_RETRY) == 0) {
+        u32 mode = 1;
+        if (entry->flags & TEXENTRY_RETRY)
+            mode = 3;
+        u32 loadFlags = mode;
+        if (entry->node->compressed) {
+            if (loadFlags & 2) {
+                loadFlags &= ~2;
+            } else {
+                loadFlags |= 2;
+            }
+        }
+        StexHeader *data = (StexHeader *)asdLoadFileSync(path, &size, loadFlags, 0x80);
+        if (data != NULL) {
+            if (entry->node->compressed)
+                data = asdTMSprDecompress(data, mode, 0x80);
+            if (rt_memcmp(data, "STEX", 4) == 0) {
+                if (data->external == 0) {
+                    s32 retry = 0;
+                    if (entry->flags & TEXENTRY_RETRY)
+                        retry = 1;
+                    entry->texture = asdTextureCreate(retry);
+                    entry->texture->target = data->target;
+                    entry->texture->dimensions.width = data->width;
+                    entry->texture->dimensions.height = data->height;
+                    entry->texture->image.format = data->format;
+                    entry->texture->image.type = data->type;
+                    entry->texture->storage.unk28 = size - data->dataOffset;
+                    entry->texture->storage.flags |= 0x10;
+                    if (data->version == 1) {
+                        entry->texture->unk3c = 1;
+                        entry->texture->unk40 = 1;
+                    }
+                    entry->texture->storage.pixels = (u8 *)data + data->dataOffset;
+                } else {
+                    entry->texture = NULL;
+                }
+                entry->fileData = (u8 *)data;
+                entry->flags |= 2;
+                return 1;
+            }
+            asdMemFree(data);
+        }
+    }
+    return 0;
+}
+}

@@ -29,11 +29,11 @@ typedef struct {
 
 extern unsigned char LAB_0012cc2c; /* 0x12cc2c */
 
-extern unsigned char *FUN_002e7908(int *, unsigned int *);
+extern unsigned char *_ZN12OnlineResultC1ERKj(int *, unsigned int *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
-extern unsigned int FUN_002ea100(unsigned char *, int);
+extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, int);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
@@ -107,7 +107,7 @@ LAB_0012cbaa:
       }
       temp_v9 = 0x10001;
       puVar6 = (unsigned int *)&temp_v9;
-      puVar3 = (unsigned char *)FUN_002e7908(piVar4,puVar6);
+      puVar3 = (unsigned char *)_ZN12OnlineResultC1ERKj(piVar4,puVar6);
       FUN_0030c720(param_1,puVar3);
       return;
     }
@@ -119,7 +119,7 @@ LAB_0012cbaa:
       if (temp_v3) {
         FUN_0030c7ea(temp_v0,0);
       }
-      temp_v2 = FUN_002ea100(temp_v15,param_1 + 0x138);
+      temp_v2 = _ZN9Obj55aff4C1EPKc(temp_v15,param_1 + 0x138);
       temp_v7 = strNotEqualNullSafe(temp_v2,temp_v6);
       _ZN9Obj55aff4D1Ev(temp_v15);
       temp_v4 = temp_v7 != 0;
@@ -152,7 +152,7 @@ LAB_0012cbaa:
     temp_v9 = 0x80010004;
     puVar6 = (unsigned int *)&temp_v9;
   }
-  puVar3 = (unsigned char *)FUN_002e7908(piVar4,puVar6);
+  puVar3 = (unsigned char *)_ZN12OnlineResultC1ERKj(piVar4,puVar6);
   FUN_0030c720(param_1,puVar3);
   return;
 }

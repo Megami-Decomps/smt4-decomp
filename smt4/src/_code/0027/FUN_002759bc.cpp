@@ -1,37 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002759bc` (_code @ 0x2759bc, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps each slot's address in r5 across the release call (add r5,r4,#imm before the test) and holds zero in r6; built folds the slot address into the store. */
+#include "ui/FrameTex.h"
+
+// The frame work's texture slots past the shared prefix.
+struct FrameTextureSlots : FrameWork {
+    void *slotA;      // 0xFDC
+    u8 unkFE0[4];
+    void *slotC;      // 0xFE4
+    void *slotB;      // 0xFE8
+};
 
 extern "C" {
 
-int asdTextureRelease(void);
+int asdTextureRelease(void *texture);
+extern FrameTextureSlots *g_frameTex; /* 0x43e278 */
 
-extern int g_frameTex; /* 0x43e278 */
-
-/* Supplied declaration required: asdTextureRelease. */
-
-
-void FUN_002759bc(void)
-
+static __inline void frameTextureSlotRelease(void **slot)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_frameTex;
-  *(unsigned char *)(g_frameTex + 0xe8c) = 0;
-  if (*(int *)(temp_v0 + 0xfdc) != 0) {
-    asdTextureRelease();
-    *(unsigned int *)(temp_v0 + 0xfdc) = 0;
-  }
-  if (*(int *)(temp_v0 + 0xfe8) != 0) {
-    asdTextureRelease();
-    *(unsigned int *)(temp_v0 + 0xfe8) = 0;
-  }
-  if (*(int *)(temp_v0 + 0xfe4) != 0) {
-    asdTextureRelease();
-    *(unsigned int *)(temp_v0 + 0xfe4) = 0;
-  }
-  return;
+    if (*slot != NULL) {
+        asdTextureRelease(*slot);
+        *slot = NULL;
+    }
+}
+
+// Release the frame work's extra textures and mark the quad inactive.
+void FUN_002759bc(void)
+{
+    FrameTextureSlots *work = g_frameTex;
+    work->unkE8C = 0;
+    frameTextureSlotRelease(&work->slotA);
+    frameTextureSlotRelease(&work->slotB);
+    frameTextureSlotRelease(&work->slotC);
 }
 
 } /* extern "C" */

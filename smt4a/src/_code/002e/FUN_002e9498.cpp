@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0012f1f2(int [2], int, int);
-int FUN_002e7908(unsigned int, unsigned int [2]);
+int _ZN12OnlineResultC1ERKj(unsigned int, unsigned int [2]);
 int _ZN9Obj55aff4D1Ev(...);
 int onlineUrlEnsureParsed(int);
 int FUN_002e9510(int, unsigned int);
@@ -19,8 +19,8 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0012f1f2. */
-/* Supplied declaration required: FUN_002e7908. */
-extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, unsigned int);
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
+extern unsigned int _ZN9Obj55aff4C1EPKt(unsigned char *, unsigned int);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: onlineUrlEnsureParsed. */
 /* Supplied declaration required: FUN_002e9510. */
@@ -48,10 +48,10 @@ void FUN_002e9498(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   uStack_1c = param_3;
   temp_v8 = param_4;
   onlineUrlEnsureParsed(param_2);
-  temp_v0 = _ZN9Obj55aff4C1EPKc(temp_v4,param_3);
+  temp_v0 = _ZN9Obj55aff4C1EPKt(temp_v4,param_3);
   FUN_002e9510(param_2 + 0x28,temp_v0);
   _ZN9Obj55aff4D1Ev(temp_v4);
-  temp_v0 = _ZN9Obj55aff4C1EPKc(temp_v5,param_3);
+  temp_v0 = _ZN9Obj55aff4C1EPKt(temp_v5,param_3);
   temp_v1 = _ZN9Obj55aff4C1ERKS_(temp_v3,temp_v0);
   *(unsigned int *)(temp_v1 + 8) = 0;
   FUN_0012f1f2(temp_v2,param_2 + 0xc,temp_v1);
@@ -60,7 +60,7 @@ void FUN_002e9498(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   _ZN9Obj55aff4D1Ev(temp_v5);
   *(unsigned char *)(param_2 + 0x65) = 0;
   temp_v6[0] = 0x10001;
-  FUN_002e7908(temp_v7,temp_v6);
+  _ZN12OnlineResultC1ERKj(temp_v7,temp_v6);
   return;
 }
 

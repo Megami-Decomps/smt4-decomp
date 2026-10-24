@@ -77,12 +77,12 @@ void FUN_00291728(const RequestParameters *parameters)
             FUN_0032878c, FUN_00379d54, NULL, work->prefix.id);
         return;
     }
-    DAT_005e1f70.id = parameters->words[0];
-    DAT_005e1f70.entry = parameters->words[1];
+    DAT_005e1f70.id = parameters->word(0);
+    DAT_005e1f70.entry = parameters->word(1);
     if (DAT_005e1f70.entry != -1)
         DAT_005e1f70.path[0] = 0;
     else
-        libc_strcpy(DAT_005e1f70.path, reinterpret_cast<const char *>(&parameters->words[2]));
+        libc_strcpy(DAT_005e1f70.path, reinterpret_cast<const char *>(&parameters->word(2)));
     work->prefix.id = asdProcessCreateSimple("EVENT CALC", 4, 0, 0,
         FUN_00225ddc, aocJobRequest, NULL);
 }

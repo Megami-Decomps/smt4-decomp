@@ -1,35 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c0944` (_code @ 0x2c0944, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002adba8(unsigned long long *, int, int);
-int FUN_002b7dc4(unsigned int, unsigned int, unsigned int, unsigned int);
-int gpuSubmitDefaultPacket(void);
+void gpuSubmitDefaultPacket(void);
+void FUN_002b7dc4(u32 a, u32 b, u32 c, u32 d, f32 f0, f32 f1, f32 f2, f32 f3, f32 f4, f32 f5, f32 f6, f32 f7, f32 f8);
+void submitDefaultFloatParameters(void);
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_002adba8. */
-/* Supplied declaration required: FUN_002b7dc4. */
-/* Supplied declaration required: gpuSubmitDefaultPacket. */
-
-
-void FUN_002c0944(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Draw setup with the extra float parameters zeroed; restores the default float parameters afterwards. */
+void FUN_002c0944(u32 a, u32 b, u32 c, u32 d, f32 f0, f32 f1, f32 f2, f32 f3, f32 f4)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned long long uStack_20;
-  
-  gpuSubmitDefaultPacket();
-  FUN_002b7dc4(param_1,param_2,param_3,param_4);
-  uStack_20 = 0x1024500000001;
-  FUN_002adba8(&uStack_20,0x18,1);
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    gpuSubmitDefaultPacket();
+    FUN_002b7dc4(a, b, c, d, f0, f1, f2, f3, 0.0f, 0.0f, 0.0f, 0.0f, f4);
+    submitDefaultFloatParameters();
 }
 
 } /* extern "C" */

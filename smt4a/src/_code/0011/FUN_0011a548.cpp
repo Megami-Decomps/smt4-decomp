@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00117300(int, unsigned int);
 int sharedRefRelease(void);
-int vectorCopyHeader(int, unsigned int);
+int _ZN18OnlineResultRecordaSERKS_(int, unsigned int);
 int onlineJobSetStateDone(int);
 int FUN_00306e7a(int);
 
@@ -19,8 +19,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00117300. */
 /* Supplied declaration required: sharedRefRelease. */
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: vectorCopyHeader. */
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: onlineJobSetStateDone. */
 extern int FUN_002ea6fc(void);
 /* Supplied declaration required: FUN_00306e7a. */
@@ -47,8 +47,8 @@ void FUN_0011a548(int param_1)
     FUN_00117300(temp_v0,*(unsigned int *)(param_1 + 0xc4));
     if (temp_v0 == 0) {
       temp_v3[0] = 0x8005000a;
-      temp_v1 = FUN_002e7908(temp_v2,temp_v3);
-      vectorCopyHeader(param_1 + 0x228,temp_v1);
+      temp_v1 = _ZN12OnlineResultC1ERKj(temp_v2,temp_v3);
+      _ZN18OnlineResultRecordaSERKS_(param_1 + 0x228,temp_v1);
     }
     piVar3 = *(int **)(param_1 + 0x1a0);
     if (piVar3 != (int *)0x0) {

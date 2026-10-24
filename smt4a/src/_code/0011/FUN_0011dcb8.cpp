@@ -29,7 +29,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0010b250. */
 extern unsigned int FUN_001214f8(int, unsigned char *, unsigned int, unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: sharedRefAddRef. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: strInit. */
 /* Supplied declaration required: FUN_002ec75c. */
 /* Supplied declaration required: destroyObj0055ae64. */
@@ -79,7 +79,7 @@ void FUN_0011dcb8(int param_1)
     FUN_00303038(temp_v5,temp_v4);
     _ZN12ZeroWordPairC1Ev(temp_v7);
     FUN_00303088(temp_v7);
-    temp_v0 = operatorNew(0x58);
+    temp_v0 = _Znwj(0x58);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_00303146(temp_v8,temp_v7);

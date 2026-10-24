@@ -1,42 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002560a4` (_code @ 0x2560a4, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail preloads 0x2A5 and derives the first flag id from it (sub #67), comparing the second id against the register; armcc here loads and compares each id separately. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001a7dbc(int, unsigned int, int, int);
-int gameFlagSetValue(int, int);
+/* The support-unit data block: an entry's state at 0x604 and flags at 0x608. */
+struct SupportUnitData {
+    /* 0x000 */ u8 unk000[0x604];
+    /* 0x604 */ u16 state;
+    /* 0x606 */ u8 unk606[2];
+    /* 0x608 */ u16 flags;
+};
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+SupportUnitData *gameGetSupportUnitData(void);
+void FUN_001a7dbc(SupportUnitData *data, s32 a, s32 id, s32 b);
+void gameFlagSetValue(s32 flag, s32 value, s32 notify);
 
-/* Supplied declaration required: FUN_001a7dbc. */
-/* Supplied declaration required: gameFlagSetValue. */
-extern int gameGetSupportUnitData(void);
-
-
-void FUN_002560a4(int param_1)
-
+/* Clears the support unit and, for two special ids, marks its story flag. */
+void FUN_002560a4(s32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = gameGetSupportUnitData();
-  if ((*(unsigned short *)(temp_v0 + 0x608) & 1) != 0) {
-    FUN_001a7dbc(temp_v0,0xffffffff,param_1,3);
-    *(unsigned short *)(temp_v0 + 0x604) = 0;
-    if (param_1 == 0x2a3) {
-      gameFlagSetValue(0x262,1);
-      return;
+    SupportUnitData *data = gameGetSupportUnitData();
+
+    if ((data->flags & 1) != 0) {
+        FUN_001a7dbc(data, -1, id, 3);
+        data->state = 0;
+        if (id == 0x2A3) {
+            gameFlagSetValue(0x262, 1, 1);
+            return;
+        }
+        if (id == 0x2A5) {
+            gameFlagSetValue(0x263, 1, 1);
+            return;
+        }
     }
-    if (param_1 == 0x2a5) {
-      gameFlagSetValue(0x263,1);
-      return;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -1,4 +1,3 @@
-/* NON_MATCHING: parameter blocks and scalar arguments occupy different callee-saved registers; all operations otherwise agree. */
 #include "shard/W9_W9Match1_PositionedLayoutTask.h"
 
 extern "C" {

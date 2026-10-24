@@ -1,0 +1,17 @@
+#include "common.h"
+
+extern "C" {
+
+typedef struct Vector {
+    /* 0x00 */ s32 begin;
+    /* 0x04 */ s32 unk04;
+    /* 0x08 */ s32 end;
+} Vector;
+
+/* Returns the number of 4-byte elements between `begin` and `end` (at 8). */
+s32 _ZNKSt6vectorIPv12AsdAllocatorIS0_EE8capacityEv(Vector *vector)
+{
+    return (vector->end - vector->begin) >> 2;
+}
+
+} /* extern "C" */

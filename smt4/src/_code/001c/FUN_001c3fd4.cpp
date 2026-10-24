@@ -17,7 +17,7 @@ int FUN_0029c1c8(...);
 int unitRecalculateEffectiveStats(...);
 int useCounterRelease(void);
 int eventQueueAddUnique(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int memClear(...);
 int FUN_002e3378(...);
 int FUN_003ae34c(...);
@@ -233,7 +233,7 @@ extern int ifTouchGetSelectionMode(void);
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: FUN_002bf818. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
@@ -2196,8 +2196,8 @@ LAB_001c7720:
         FUN_00295eb0(temp_v1 + 0x554,0x19,temp_v4 + 0x31);
         FUN_00295eb0(temp_v1 + 0x5e0,0x19,temp_v4 + 0x31);
       }
-      FUN_002bee58(temp_v1 + 0x554,3);
-      FUN_002bee58(temp_v1 + 0x5e0,4);
+      spriteStartAnimationByIndex(temp_v1 + 0x554,3);
+      spriteStartAnimationByIndex(temp_v1 + 0x5e0,4);
       eventQueueAddUnique(0x10001e1);
     }
     break;

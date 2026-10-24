@@ -43,7 +43,7 @@ int soundChannelRequestIfEnabled(int, int, int);
 int FUN_003d54f8(...);
 int FUN_003f9ac4(...);
 int controllerRefreshAtUnitScale(...);
-int FUN_003f9e80(void);
+int _ZN9Obj557af8C1EPK21AsdAnimCameraResource(void);
 int FUN_003fe86c(...);
 int FUN_0040aa6c(...);
 int FUN_0040aad4(...);
@@ -116,7 +116,7 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_003f9ac4. */
 /* Supplied declaration required: controllerRefreshAtUnitScale. */
-/* Supplied declaration required: FUN_003f9e80. */
+/* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: workOwnerRelease. */
 /* Supplied declaration required: FUN_0040a244. */
@@ -348,7 +348,7 @@ unsigned int FUN_003cf02c(void)
           FUN_00178b04(0x48,&LAB_003cf760,0x310);
         }
         if (temp_v6 != 0) {
-          FUN_003f9e80();
+          _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
         }
         *(int *)(temp_v2 + 0x9c) = temp_v6;
       }
@@ -360,7 +360,7 @@ unsigned int FUN_003cf02c(void)
         temp_v6 = 0x48;
         FUN_00178b04(0x48,&LAB_003cf760,0x319);
         if (temp_v6 != 0) {
-          FUN_003f9e80();
+          _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
         }
         *(int *)(temp_v2 + 0x9c) = temp_v6;
       }
@@ -372,7 +372,7 @@ unsigned int FUN_003cf02c(void)
         temp_v6 = 0x48;
         FUN_00178b04(0x48,&LAB_003cf760,0x321);
         if (temp_v6 != 0) {
-          FUN_003f9e80();
+          _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
         }
         *(int *)(temp_v2 + 0x9c) = temp_v6;
       }

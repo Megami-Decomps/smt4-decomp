@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001d0d64(...);
-int FUN_002ffa9c(...);
+int __aeabi_uldivmod(...);
 
 typedef struct fn_001cc570_arg1 fn_001cc570_arg1;
 struct fn_001cc570_arg1 {
@@ -18,7 +18,7 @@ struct fn_001cc570_arg1 {
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_001d0d64. */
-/* Supplied declaration required: FUN_002ffa9c. */
+/* Supplied declaration required: __aeabi_uldivmod. */
 
 
 unsigned int FUN_001cc570(int *param_1,fn_001cc570_arg1 *param_2)
@@ -37,14 +37,14 @@ unsigned int FUN_001cc570(int *param_1,fn_001cc570_arg1 *param_2)
     else if ((char)param_1[0x1f] == '\x01') {
       temp_v2 = param_1[0x20];
       temp_v0 = param_2->field_0x4;
-      FUN_002ffa9c((int)((unsigned long long)temp_v0 * (unsigned long long)temp_v2),
+      __aeabi_uldivmod((int)((unsigned long long)temp_v0 * (unsigned long long)temp_v2),
                    ((int)temp_v2 >> 0x1f) * temp_v0 + (int)((unsigned long long)temp_v0 * (unsigned long long)temp_v2 >> 0x20)
                    ,1000,0);
       if (temp_v1 != 0) {
         temp_v0 = 0xffffffff;
       }
       else {
-        temp_v0 = FUN_002ffa9c((int)((unsigned long long)temp_v0 * (unsigned long long)temp_v2),
+        temp_v0 = __aeabi_uldivmod((int)((unsigned long long)temp_v0 * (unsigned long long)temp_v2),
                              ((int)temp_v2 >> 0x1f) * temp_v0 +
                              (int)((unsigned long long)temp_v0 * (unsigned long long)temp_v2 >> 0x20),1000,0);
       }

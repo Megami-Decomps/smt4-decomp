@@ -7,14 +7,26 @@
 struct MapNaviTableContext {};
 struct MapNaviCategoryRecord {
     /* 0x00 */ s16 id;
-    /* 0x02 */ u16 reserved;
+    union {
+        /* 0x02 */ u16 reserved;
+        /* 0x02 */ s16 slot; // navigation display slot of the category
+    };
     /* 0x04 */ u8 category;
     /* 0x05 */ u8 reserved05;
     /* 0x06 */ s8 startX;
     /* 0x07 */ s8 startY;
     /* 0x08 */ s8 endX;
     /* 0x09 */ s8 endY;
-    /* 0x0A */ u8 padding0A[0xA];
+    union {
+        /* 0x0A */ u8 padding0A[0xA];
+        struct {
+            /* 0x0A */ s16 unk0A;
+            /* 0x0C */ s16 originX;
+            /* 0x0E */ s16 originY;
+            /* 0x10 */ s16 offsetX;
+            /* 0x12 */ s16 offsetY;
+        } placement;
+    };
 };
 struct MapNaviCategoryGrid {
     u16 firstCell;

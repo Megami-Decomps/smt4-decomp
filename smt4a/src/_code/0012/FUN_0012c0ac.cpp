@@ -30,13 +30,13 @@ typedef struct {
 extern unsigned char LAB_0012c198; /* 0x12c198 */
 extern unsigned char LAB_0012c205; /* 0x12c205 */
 
-extern int operatorNew(unsigned int);
-extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
+extern int _Znwj(unsigned int);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: onlineInstanceTableGetCurrent. */
 /* Supplied declaration required: FUN_002e9c0c. */
 /* Supplied declaration required: onlineInstanceTableFind. */
-extern unsigned int FUN_002ea100(unsigned char *, int);
+extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, int);
 extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002f7c94. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
@@ -74,7 +74,7 @@ void FUN_0012c0ac(int param_1)
     temp_v4 = *(unsigned int *)(param_1 + 0x128);
     temp_v3 = *(unsigned int *)(param_1 + 0x134);
     temp_v2 = *(unsigned int *)(param_1 + 0x130);
-    temp_v1 = FUN_002ea100(temp_v13,param_1 + 0x138);
+    temp_v1 = _ZN9Obj55aff4C1EPKc(temp_v13,param_1 + 0x138);
     temp_v10 = param_1 + 0x408;
     temp_v9 = *(unsigned int *)(param_1 + 0x10c);
     temp_v8 = param_1 + 0x108;
@@ -90,7 +90,7 @@ void FUN_0012c0ac(int param_1)
       temp_v1 = onlineInstanceTableGetCurrent();
       FUN_002f7c94(temp_v1,*(unsigned int *)(param_1 + 0x68),temp_v2);
       onlineJobSetStateWaiting(param_1);
-      temp_v0 = operatorNew(0x10);
+      temp_v0 = _Znwj(0x10);
       temp_v1 = 0;
       if (temp_v0 != 0) {
         temp_v1 = FUN_002ea3c0(temp_v0,&LAB_0012c205,0,&LAB_0012c198);
@@ -103,7 +103,7 @@ void FUN_0012c0ac(int param_1)
   else {
     temp_v7 = 0x80010004;
   }
-  temp_v1 = FUN_002e7908((unsigned int *)&temp_v4,(unsigned int *)&temp_v7);
+  temp_v1 = _ZN12OnlineResultC1ERKj((unsigned int *)&temp_v4,(unsigned int *)&temp_v7);
   FUN_0030c800(param_1,temp_v1);
   return;
 }

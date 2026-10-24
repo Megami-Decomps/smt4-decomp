@@ -8,7 +8,7 @@ int onlineInstanceTableFind(int, unsigned int);
 int onlineJobSetStateDone(int);
 int FUN_002f3dc4(int, unsigned int **, unsigned int, unsigned char *);
 int FUN_002f3dde(int, unsigned int **);
-int refIsNonNegative(...);
+int _ZNK18OnlineResultRecord7isValidEv(...);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002f3dc4. */
 /* Supplied declaration required: FUN_002f3dde. */
-/* Supplied declaration required: refIsNonNegative. */
+/* Supplied declaration required: _ZNK18OnlineResultRecord7isValidEv. */
 
 
 void FUN_002fa474(int param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
@@ -42,15 +42,15 @@ void FUN_002fa474(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
   temp_v0 = onlineInstanceTableGetCurrent();
   onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
-    temp_v1 = refIsNonNegative(param_2);
-    if ((temp_v1 != 0) && (temp_v1 = refIsNonNegative(param_1 + 200), temp_v1 != 0)) {
+    temp_v1 = _ZNK18OnlineResultRecord7isValidEv(param_2);
+    if ((temp_v1 != 0) && (temp_v1 = _ZNK18OnlineResultRecord7isValidEv(param_1 + 200), temp_v1 != 0)) {
       temp_v2 = (unsigned int *)*param_2;
       temp_v3 = param_2[1];
       temp_v4 = param_2[2];
       FUN_002f3dc4(temp_v0,&temp_v2,temp_v4,&uStack_14);
     }
     else {
-      temp_v1 = refIsNonNegative(param_2);
+      temp_v1 = _ZNK18OnlineResultRecord7isValidEv(param_2);
       if (temp_v1 != 0) {
         temp_v2 = *(unsigned int **)(param_1 + 200);
         temp_v3 = *(unsigned int *)(param_1 + 0xcc);

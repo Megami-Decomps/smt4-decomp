@@ -17,7 +17,7 @@ struct MoLiveRingBuffer {
 };
 
 extern "C" {
-extern const char DAT_00543e20[];
+extern const char g_moLiveOutOfMemoryMessage[];
 void *rt_memcpy(void *, const void *, u32 bytes);
 }
 
@@ -28,7 +28,7 @@ static __inline u8 *allocateMoLiveBuffer(MoLiveAllocator *allocator, u32 bytes)
     }
     u8 *memory = allocator->allocate(bytes);
     if (memory == NULL) {
-        allocator->report(DAT_00543e20, bytes);
+        allocator->report(g_moLiveOutOfMemoryMessage, bytes);
     }
     return memory;
 }

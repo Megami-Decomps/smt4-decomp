@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0010dfe8(void);
 int onlineInstanceTableFind(int, int);
-int FUN_002ea20c(unsigned char [8]);
+int _ZN15OnlineTimestampC1Ev(unsigned char [8]);
 int FUN_002ea3d0(int *, unsigned int);
 int onlineJobSetStateTimed(int *, int);
 int FUN_002f2e3c(int *, int *, int, int *, int, int);
@@ -26,7 +26,7 @@ extern unsigned char LAB_0010de38; /* 0x10de38 */
 /* Supplied declaration required: FUN_0010dfe8. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
-/* Supplied declaration required: FUN_002ea20c. */
+/* Supplied declaration required: _ZN15OnlineTimestampC1Ev. */
 extern unsigned int FUN_002ea3c0(int **, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: onlineJobSetStateTimed. */
@@ -52,7 +52,7 @@ void FUN_0010dd48(int *param_1)
   temp_v0 = onlineInstanceTableGetCurrent();
   onlineInstanceTableFind(temp_v0,param_1[0x45]);
   if (temp_v0 != 0) {
-    FUN_002ea20c(temp_v5);
+    _ZN15OnlineTimestampC1Ev(temp_v5);
     temp_v0 = FUN_002eba9c(temp_v5,param_1 + 0x56);
     if (temp_v0 == 0) {
       do {

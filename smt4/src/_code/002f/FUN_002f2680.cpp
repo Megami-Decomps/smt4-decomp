@@ -25,7 +25,7 @@ extern "C" {
 
 s32 idIsAbove400(s32 id);
 PassiveSkillSortRecord *passiveSkillLookupRecord(s32 id);
-SkillSortRecord *FUN_002ae164(s32 id);
+SkillSortRecord *dataTable40FindById(s32 id);
 UnitSortRecord *gameGetUnitRecord(s32 id);
 s32 FUN_002497f8(SkillSortItem *a, SkillSortItem *b);
 
@@ -35,7 +35,7 @@ static __inline u16 skillSortKey(const SkillSortItem *item)
     if (idIsAbove400(item->skillId)) {
         return passiveSkillLookupRecord(item->skillId)->sortKey;
     }
-    return FUN_002ae164(item->skillId)->sortKey;
+    return dataTable40FindById(item->skillId)->sortKey;
 }
 
 /* Returns the sort key of an item's unit, or 0 without one. */

@@ -52,7 +52,7 @@ struct SourceBindingOwner {
     /* 0x1489 */ u8 flag1489;
 };
 extern "C" {
-SourceBindingIterator FUN_003fb11c(SourceBindingMap *map, const f32 &key, SourceBindingIterator position);
+SourceBindingIterator _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE5eraseENS_14__rw_tree_iterIS5_iPS5_RS5_NS_17__rw_rb_tree_nodeISB_S5_jS7_EEEESI_(SourceBindingMap *map, const f32 &key, SourceBindingIterator position);
 void FUN_0022c564(SourceBindingList *list, u32 first, u32 count);
 }
 
@@ -65,7 +65,7 @@ extern "C" u32 FUN_003b21e4(SourceBindingOwner *owner, BoundDataSource *source)
     if (owner->source != NULL) {
         SourceBindingNode *node = owner->map.current;
         f32 key = node->key;
-        FUN_003fb11c(&owner->map, key, SourceBindingIterator(node));
+        _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE5eraseENS_14__rw_tree_iterIS5_iPS5_RS5_NS_17__rw_rb_tree_nodeISB_S5_jS7_EEEESI_(&owner->map, key, SourceBindingIterator(node));
         FUN_0022c564(&owner->list, 0, owner->list.count);
         owner->list.count = 0;
         owner->header.state = 0;

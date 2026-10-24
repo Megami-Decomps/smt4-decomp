@@ -43,7 +43,7 @@ struct RegistrationResultView {
 }
 
 extern "C" {
-void* operatorNew(u32 size);
+void* _Znwj(u32 size);
 void* FUN_002eb7d0(u32 size, u32 flags);
 CreatedObjectView* FUN_002eb108(void* storage, OwnerView* owner,
                               u32 kind, u32 flags,
@@ -77,7 +77,7 @@ extern "C" void FUN_002f012e(OwnerView* owner, CreationInfoView* info,
             return;
         }
     } else {
-        void* storage = operatorNew(0x150);
+        void* storage = _Znwj(0x150);
         if (storage)
             object = FUN_002eb108(storage, owner, 2, 0x2000, info, 0);
         else

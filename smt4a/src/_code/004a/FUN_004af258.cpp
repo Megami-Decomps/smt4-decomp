@@ -21,14 +21,14 @@ struct SourceContainer {
     u8 kind; // 0x1490
     u8 pending; // 0x1491
 };
-extern "C" void FUN_004af308(SourceContainer *container);
+extern "C" void _ZN12MoLivePlayer5resetEv(SourceContainer *container);
 
 // Attach a ready source and reset the container's counters and state.
 extern "C" s32 FUN_004af258(SourceContainer *container, ContainerSource *source)
 {
     if (source == NULL)
         return 64;
-    FUN_004af308(container);
+    _ZN12MoLivePlayer5resetEv(container);
     container->source = source;
     if (!source->isReady())
         return 65;

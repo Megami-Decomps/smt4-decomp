@@ -1,60 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ed6cc` (_code @ 0x3ed6cc, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail writes the three vectors through a walking pointer (vstmia + add) and clears the counters with STM from a zeroed register pair; ours addresses them at fixed offsets and uses separate stores. */
+#include "common.h"
+
+struct InitializationArguments {
+    u32 unk00[2]; // 0x00
+    u32 first;    // 0x08
+    u32 second;   // 0x0c
+};
+struct InitializationCounters {
+    u32 first;
+    u32 second;
+};
+struct Vec3f {
+    f32 x, y, z;
+};
+struct ElementSlot {
+    u32 storage[0x544 / 4];
+};
+/* The scene's camera block: nine floats, a cookie word and two 0x544-byte elements. */
+struct SceneCameraBlock {
+    Vec3f position;       // 0x00
+    Vec3f offset;         // 0x0C
+    Vec3f up;             // 0x18
+    u32 unk24;            // 0x24
+    ElementSlot elements[2]; // 0x28
+};
 
 extern "C" {
+extern InitializationCounters DAT_0044ea68;
+extern SceneCameraBlock DAT_004d4924;
+extern u8 entry;
+void FUN_0033b5a0(void *element);
+void vecContainerDestroy(void *container);
+void *__aeabi_vec_ctor_nocookie_nodtor(void *elements, void (*constructor)(void *), u32 stride, u32 count);
+s32 sceneNotifyNoop(void *object, void (*destructor)(void *), void *module);
 
-int __aeabi_vec_ctor_nocookie_nodtor(unsigned char *, unsigned char *, int, int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
-
-extern unsigned char LAB_0033b5a0; /* 0x33b5a0 */
-extern int vecContainerDestroy(...); /* 0x348784 */
-extern unsigned int DAT_0044ea68; /* 0x44ea68 */
-extern unsigned int DAT_0044ea6c; /* 0x44ea6c */
-extern unsigned int DAT_004d4924; /* 0x4d4924 */
-extern unsigned int DAT_004d4928; /* 0x4d4928 */
-extern unsigned int DAT_004d492c; /* 0x4d492c */
-extern unsigned int DAT_004d4930; /* 0x4d4930 */
-extern unsigned int DAT_004d4934; /* 0x4d4934 */
-extern unsigned int DAT_004d4938; /* 0x4d4938 */
-extern unsigned int DAT_004d493c; /* 0x4d493c */
-extern unsigned int DAT_004d4940; /* 0x4d4940 */
-extern unsigned int DAT_004d4944; /* 0x4d4944 */
-extern unsigned char DAT_004d494c; /* 0x4d494c */
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-
-
-unsigned long long FUN_003ed6cc(unsigned int param_1,unsigned int param_2,int param_3)
-
+// Initializes the scene camera block and registers its destructor.
+s32 FUN_003ed6cc(u32 first, u32 second, InitializationArguments *arguments)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned char *puVar1;
-  
-  *(unsigned int *)(param_3 + 8) = param_1;
-  *(unsigned int *)(param_3 + 0xc) = param_2;
-  DAT_0044ea68 = 0;
-  DAT_0044ea6c = 0;
-  DAT_004d4924 = 0;
-  DAT_004d4928 = 0x42c80000;
-  DAT_004d492c = 0x44a00000;
-  DAT_004d4930 = 0;
-  DAT_004d4934 = 0;
-  DAT_004d4938 = 0;
-  DAT_004d493c = 0;
-  DAT_004d4940 = 0x3f800000;
-  DAT_004d4944 = 0;
-  puVar1 = &DAT_004d494c;
-  __aeabi_vec_ctor_nocookie_nodtor(&DAT_004d494c,&LAB_0033b5a0,0x544,2);
-  return romwright_piece_4_4(vecContainerDestroy,puVar1 + -4);
+    arguments->first = first;
+    arguments->second = second;
+    DAT_0044ea68.first = 0;
+    DAT_0044ea68.second = 0;
+    DAT_004d4924.position.x = 0.0f;
+    DAT_004d4924.position.y = 100.0f;
+    DAT_004d4924.position.z = 1280.0f;
+    DAT_004d4924.offset.x = 0.0f;
+    DAT_004d4924.offset.y = 0.0f;
+    DAT_004d4924.offset.z = 0.0f;
+    DAT_004d4924.up.x = 0.0f;
+    DAT_004d4924.up.y = 1.0f;
+    DAT_004d4924.up.z = 0.0f;
+    u8 *elements = static_cast<u8 *>(
+        __aeabi_vec_ctor_nocookie_nodtor(DAT_004d4924.elements, FUN_0033b5a0, sizeof(ElementSlot), 2));
+    return sceneNotifyNoop(elements - 4, vecContainerDestroy, &entry);
 }
-
-} /* extern "C" */
+}

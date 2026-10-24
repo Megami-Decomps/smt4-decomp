@@ -35,7 +35,7 @@ int FUN_003d9be4(...);
 
 int FUN_001d2628(...);
 int btlEventTaskStart(...);
-int FUN_001f8158(...);
+int btlEffectCreate(...);
 int FUN_00207f68(...);
 int FUN_0021ae40(...);
 int btlUiRefreshSlotRanks(...);
@@ -125,7 +125,7 @@ extern int DAT_0049fb9c; /* 0x49fb9c */
 /* Supplied declaration required: FUN_001f7d50. */
 /* Supplied declaration required: btlCameraCreateDrawTaskAndInitializeStorage. */
 /* Supplied declaration required: FUN_001f7fac. */
-/* Supplied declaration required: FUN_001f8158. */
+/* Supplied declaration required: btlEffectCreate. */
 /* Supplied declaration required: FUN_001f8290. */
 /* Supplied declaration required: FUN_00207f68. */
 /* Supplied declaration required: FUN_0021ae40. */
@@ -350,7 +350,7 @@ void FUN_001fc6e8(unsigned int param_1)
     }
     btlUnitInitializeDrawJobs(temp_v4);
     FUN_001e2350(temp_v4);
-    FUN_001f8158(temp_v4);
+    btlEffectCreate(temp_v4);
     FUN_0021ae40(temp_v4);
     FUN_001d2628(temp_v4);
     btlTalkBustUpCreate();

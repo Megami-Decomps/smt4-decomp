@@ -28,8 +28,8 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern unsigned int DAT_005c4c2c; /* 0x5c4c2c */
-extern unsigned int DAT_0064c054; /* 0x64c054 */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x5c4c2c */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x64c054 */
 extern unsigned int DAT_0064c058; /* 0x64c058 */
 extern unsigned int DAT_0064c05c; /* 0x64c05c */
 extern unsigned int DAT_0064c060; /* 0x64c060 */
@@ -174,8 +174,8 @@ LAB_0016c188:
   }
   else {
     puVar8 = (unsigned int *)*piVar6;
-    if (((DAT_005c4c2c & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v3 != 0)) {
-      DAT_0064c054 = 0x3f800000;
+    if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v3 != 0)) {
+      _ZZN2nw4math5MTX348IdentityEvE8identity = 0x3f800000;
       DAT_0064c058 = 0;
       DAT_0064c05c = 0;
       DAT_0064c060 = 0;
@@ -190,7 +190,7 @@ LAB_0016c188:
     }
     *puVar8 = *(unsigned char *)(temp_v5 + 2) | 0x80000000;
     puVar8[1] = 0xf02c0;
-    FUN_0019a270(puVar8 + 2,&DAT_0064c054,0xbf02c1);
+    FUN_0019a270(puVar8 + 2,&_ZZN2nw4math5MTX348IdentityEvE8identity,0xbf02c1);
     puVar8 = puVar8 + 0x10;
     *piVar6 = (int)puVar8;
   }

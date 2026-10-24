@@ -17,7 +17,7 @@ int buttonHelpGetMode(void);
 int FUN_002b8584(...);
 int buttonHelpSetPreset(void);
 int ifTouchRegionRemove(void);
-int FUN_002bee58(int, int);
+int spriteStartAnimationByIndex(int, int);
 int __aeabi_memset4(int, int, unsigned int);
 int FUN_002cfed0(...);
 
@@ -44,7 +44,7 @@ extern int FUN_0029ee54(unsigned int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int buttonHelpGetStatus(void);
 /* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_002cfed0. */
 
@@ -111,10 +111,10 @@ void FUN_00297f1c(int param_1,unsigned int param_2,int param_3,unsigned int para
     *(unsigned int *)(param_1 + 0x305c) = 0;
     FUN_0028e9ec(param_1);
     flaggedEntrySetValueB(param_1 + 0x33a8,0);
-    FUN_002bee58(param_1 + 0x20,0);
+    spriteStartAnimationByIndex(param_1 + 0x20,0);
     temp_v4 = 0;
     do {
-      FUN_002bee58(param_1 + temp_v4 * 0x8c + 0x138,0);
+      spriteStartAnimationByIndex(param_1 + temp_v4 * 0x8c + 0x138,0);
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 8);
     *(unsigned int *)(param_1 + 0x3054) = 0x2d;

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-void FUN_002e32a4(int kind, ...);
+void _ZN4__rw10__rw_throwEiz(int kind, ...);
 int asdOperatorDeleteArray(int);
-int FUN_003079ae(int *, int, int);
-int FUN_003079c6(int, int, int, int *);
-int vectorCount8_0030fcf6(int *);
+int _ZNSt6vectorI9Obj55aff412AsdAllocatorIS0_EE10_C_destroyEPS0_S4_(int *, int, int);
+int _ZSt18uninitialized_copyIP9Obj55aff4S1_12AsdAllocatorIS0_EET0_T_S5_S4_RT1_(int, int, int, int *);
+int _ZNKSt6vectorI9Obj55aff412AsdAllocatorIS0_EE4sizeEv(int *);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -22,14 +22,14 @@ extern unsigned char LAB_00134258; /* 0x134258 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e32a4. */
-extern int *wordRefMax(unsigned int *, unsigned int *);
+/* Supplied declaration required: _ZN4__rw10__rw_throwEiz. */
+extern int *_ZSt3maxIjERKT_S2_S2_(unsigned int *, unsigned int *);
 /* Supplied declaration required: asdOperatorDeleteArray. */
-extern int allocArrayDwords(int *, int, int);
-/* Supplied declaration required: FUN_003079ae. */
-/* Supplied declaration required: FUN_003079c6. */
-/* Supplied declaration required: vectorCount8_0030fcf6. */
-extern unsigned int vectorGrowCapacity_0030fcfe(unsigned int, int *);
+extern int _ZN12AsdAllocatorI9Obj55aff4E8allocateEjPKv(int *, int, int);
+/* Supplied declaration required: _ZNSt6vectorI9Obj55aff412AsdAllocatorIS0_EE10_C_destroyEPS0_S4_. */
+/* Supplied declaration required: _ZSt18uninitialized_copyIP9Obj55aff4S1_12AsdAllocatorIS0_EET0_T_S5_S4_RT1_. */
+/* Supplied declaration required: _ZNKSt6vectorI9Obj55aff412AsdAllocatorIS0_EE4sizeEv. */
+extern unsigned int _ZN4__rw17__rw_new_capacityISt6vectorI9Obj55aff412AsdAllocatorIS2_EEEEjjPKT_(unsigned int, int *);
 
 
 unsigned long long FUN_001341d4(int *param_1,unsigned int param_2)
@@ -50,18 +50,18 @@ unsigned long long FUN_001341d4(int *param_1,unsigned int param_2)
   temp_v5 = param_2;
   if (param_2 >= 0x20000000) {
     temp_v4 = 0x1fffffff;
-    FUN_002e32a4(8,&LAB_00134258,&LAB_00134258);
+    _ZN4__rw10__rw_throwEiz(8,&LAB_00134258,&LAB_00134258);
   }
   if ((unsigned int)((param_1[2] - *param_1) >> 3) < temp_v5) {
-    temp_v0 = vectorCount8_0030fcf6(param_1);
-    temp_v4 = vectorGrowCapacity_0030fcfe(temp_v0,param_1);
-    piVar2 = (int *)wordRefMax(&temp_v5,(unsigned int *)&temp_v4);
+    temp_v0 = _ZNKSt6vectorI9Obj55aff412AsdAllocatorIS0_EE4sizeEv(param_1);
+    temp_v4 = _ZN4__rw17__rw_new_capacityISt6vectorI9Obj55aff412AsdAllocatorIS2_EEEEjjPKT_(temp_v0,param_1);
+    piVar2 = (int *)_ZSt3maxIjERKT_S2_S2_(&temp_v5,(unsigned int *)&temp_v4);
     temp_v3 = *piVar2;
-    temp_v1 = allocArrayDwords(param_1,temp_v3,*param_1);
-    FUN_003079c6(*param_1,param_1[1],temp_v1,param_1);
-    FUN_003079ae(param_1,*param_1,param_1[1]);
+    temp_v1 = _ZN12AsdAllocatorI9Obj55aff4E8allocateEjPKv(param_1,temp_v3,*param_1);
+    _ZSt18uninitialized_copyIP9Obj55aff4S1_12AsdAllocatorIS0_EET0_T_S5_S4_RT1_(*param_1,param_1[1],temp_v1,param_1);
+    _ZNSt6vectorI9Obj55aff412AsdAllocatorIS0_EE10_C_destroyEPS0_S4_(param_1,*param_1,param_1[1]);
     asdOperatorDeleteArray(*param_1);
-    temp_v2 = vectorCount8_0030fcf6(param_1);
+    temp_v2 = _ZNKSt6vectorI9Obj55aff412AsdAllocatorIS0_EE4sizeEv(param_1);
     *param_1 = temp_v1;
     param_1[2] = temp_v1 + temp_v3 * 8;
     param_1[1] = temp_v2 * 8 + temp_v1;

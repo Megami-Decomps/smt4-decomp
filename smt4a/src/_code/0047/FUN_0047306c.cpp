@@ -1,4 +1,3 @@
-/* NON_MATCHING: Sprite-entry setup registers and flag/load scheduling differ. */
 #include "common.h"
 #include "shard/W4_Match3_AocMainA.h"
 #include "shard/W9_W9Match8_WorkRecords.h"

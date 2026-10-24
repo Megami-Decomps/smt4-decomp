@@ -15,7 +15,7 @@ int FUN_002463e8(...);
 int FUN_00247478(unsigned char [2], unsigned int, unsigned int *);
 int btlMainFindEntryByListedId(unsigned int *, unsigned int);
 int btlGetMainState(void);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int memClear(...);
 int VectorSignedToFloat(...);
 
@@ -48,7 +48,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: memClear. */
 
 
@@ -97,7 +97,7 @@ void FUN_00228220(int param_1,unsigned int param_2,int param_3,unsigned int para
   default:
     if (param_1 != 0xffff) {
       temp_v3 = param_1;
-      FUN_002ae164();
+      dataTable40FindById();
       if (param_1 >= 1) {
         if (param_6 != 0) {
           temp_v0 = *(char *)(temp_v3 + 0x23);

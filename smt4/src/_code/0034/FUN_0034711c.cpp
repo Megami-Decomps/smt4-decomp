@@ -1,53 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034711c` (_code @ 0x34711c, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only register allocation differs (retail reuses r2/r3 for the terms and the running sum) */
+#include "common.h"
+
+struct VertexLayout {
+    u8 unk00[4];     // 0x00
+    u32 attributes;  // 0x04
+    u8 unk08[4];     // 0x08
+    s32 count;       // 0x0C
+};
 
 extern "C" {
 
-
-int FUN_0034711c(int param_1)
-
+/* Size in bytes of a vertex buffer for `count` vertices with the attributes the layout enables. */
+s32 FUN_0034711c(const VertexLayout *layout)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  
-  temp_v0 = *(unsigned int *)(param_1 + 4);
-  temp_v1 = 0;
-  if ((temp_v0 & 1) != 0) {
-    temp_v1 = *(int *)(param_1 + 0xc) * 0xc;
-  }
-  temp_v5 = 0;
-  if ((temp_v0 & 2) != 0) {
-    temp_v5 = *(int *)(param_1 + 0xc) << 4;
-  }
-  temp_v2 = 0;
-  if ((temp_v0 & 0x20) != 0) {
-    temp_v2 = *(int *)(param_1 + 0xc) << 2;
-  }
-  temp_v3 = 0;
-  if ((temp_v0 & 4) != 0) {
-    temp_v3 = *(int *)(param_1 + 0xc) << 3;
-  }
-  temp_v4 = 0;
-  if ((temp_v0 & 8) != 0) {
-    temp_v4 = *(int *)(param_1 + 0xc) * 0xc;
-  }
-  temp_v6 = (temp_v0 & 0x10) != 0;
-  if (temp_v6) {
-    param_1 = *(int *)(param_1 + 0xc);
-  }
-  if (temp_v6) {
-    param_1 = param_1 * 0xc;
-  }
-  else {
-    param_1 = 0;
-  }
-  return param_1 + temp_v4 + temp_v5 + temp_v1 + temp_v2 + temp_v3;
+    u32 attributes = layout->attributes;
+    s32 position = attributes & 1;
+    s32 color;
+    s32 texCoord0;
+    s32 texCoord1;
+    s32 normal;
+    s32 tangent;
+    s32 sum;
+
+    if (position) {
+        position = layout->count * 12;
+    }
+    color = attributes & 2;
+    if (color) {
+        color = layout->count * 16;
+    }
+    sum = color + position;
+    texCoord0 = attributes & 0x20;
+    if (texCoord0) {
+        texCoord0 = layout->count * 4;
+    }
+    sum += texCoord0;
+    texCoord1 = attributes & 4;
+    if (texCoord1) {
+        texCoord1 = layout->count * 8;
+    }
+    sum += texCoord1;
+    normal = attributes & 8;
+    if (normal) {
+        normal = layout->count * 12;
+    }
+    tangent = attributes & 0x10;
+    if (tangent) {
+        tangent = layout->count * 12;
+    }
+    return tangent + (normal + sum);
 }
 
 } /* extern "C" */

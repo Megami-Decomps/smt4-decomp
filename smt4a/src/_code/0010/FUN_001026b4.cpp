@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_002e32a4(int kind, ...);
+void _ZN4__rw10__rw_throwEiz(int kind, ...);
 int FUN_002e40ec(...);
 int FUN_002e410c(unsigned int *, unsigned int, unsigned int);
 int FUN_002e5780(unsigned int *);
@@ -24,10 +24,10 @@ typedef struct {
 extern unsigned char LAB_00102828; /* 0x102828 */
 extern unsigned char DAT_0064c010; /* 0x64c010 */
 
-/* Supplied declaration required: FUN_002e32a4. */
+/* Supplied declaration required: _ZN4__rw10__rw_throwEiz. */
 /* Supplied declaration required: FUN_002e40ec. */
 /* Supplied declaration required: FUN_002e410c. */
-extern unsigned int *wordRefMax(unsigned int *, unsigned int *);
+extern unsigned int *_ZSt3maxIjERKT_S2_S2_(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_002e5780. */
 /* Supplied declaration required: FUN_002e5f10. */
 
@@ -68,7 +68,7 @@ int FUN_001026b4(unsigned int *param_1,unsigned int param_2,unsigned int param_3
     if (temp_v0 < param_2) {
       temp_v4 = param_2;
     }
-    FUN_002e32a4(9,&LAB_00102828,&LAB_00102828,temp_v4,temp_v1);
+    _ZN4__rw10__rw_throwEiz(9,&LAB_00102828,&LAB_00102828,temp_v4,temp_v1);
   }
   temp_v0 = *(int *)(*param_1 - 4) - param_2;
   if (temp_v10 < temp_v0) {
@@ -80,7 +80,7 @@ int FUN_001026b4(unsigned int *param_1,unsigned int param_2,unsigned int param_3
   }
   temp_v4 = *(int *)(*param_1 - 4) - temp_v0;
   if (-temp_v1 - 0xf < temp_v4) {
-    FUN_002e32a4(8,&LAB_00102828,&LAB_00102828,temp_v4,-temp_v1 - 0xf);
+    _ZN4__rw10__rw_throwEiz(8,&LAB_00102828,&LAB_00102828,temp_v4,-temp_v1 - 0xf);
   }
   temp_v4 = *param_1;
   temp_v2 = *(unsigned int *)(temp_v4 - 4);
@@ -96,7 +96,7 @@ int FUN_001026b4(unsigned int *param_1,unsigned int param_2,unsigned int param_3
         temp_v6 = temp_v2 + 0x80;
       }
       temp_v7 = temp_v5;
-      puVar2 = (unsigned int *)wordRefMax(&temp_v6,&temp_v7);
+      puVar2 = (unsigned int *)_ZSt3maxIjERKT_S2_S2_(&temp_v6,&temp_v7);
       puVar3 = param_1;
       FUN_002e410c(param_1,*puVar2,temp_v5);
       if (param_2 != 0) {

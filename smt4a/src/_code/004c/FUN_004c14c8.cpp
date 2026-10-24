@@ -18,7 +18,7 @@ extern BtlPassiveFlagMasks DAT_005713f0;
 BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skillIds);
-const PassiveSkillRecord *FUN_0034a290(u32 id);
+const PassiveSkillRecord *dataTable41FindById(u32 id);
 s32 lcgRandomRange(s32 max);
 
 /* Rolls the listed unit's passive skills in order and returns the first one whose chance hits
@@ -35,7 +35,7 @@ u16 FUN_004c14c8(u32 listedId)
     result = 0;
     for (i = 0; i < 9; i++) {
         if (skillIds[i] != 0) {
-            const PassiveSkillRecord *record = FUN_0034a290(skillIds[i]);
+            const PassiveSkillRecord *record = dataTable41FindById(skillIds[i]);
             s32 chance;
             if (record != NULL && (chance = record->holdChance) != 0) {
                 s32 roll = lcgRandomRange(99);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int onlineInstanceTableFind(int, unsigned int);
-int FUN_002ea20c(...);
+int _ZN15OnlineTimestampC1Ev(...);
 int FUN_002ea3d0(int, unsigned int);
 int onlineUrlGetAddress(void);
 int onlineUrlDestroy(...);
@@ -27,7 +27,7 @@ extern unsigned char LAB_00115f08; /* 0x115f08 */
 
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
-/* Supplied declaration required: FUN_002ea20c. */
+/* Supplied declaration required: _ZN15OnlineTimestampC1Ev. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 extern int FUN_002ea704(void);
@@ -130,7 +130,7 @@ void FUN_00115d60(int param_1)
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 5);
   FUN_002fffd0(param_1,0x9c4);
-  FUN_002ea20c(&temp_v7);
+  _ZN15OnlineTimestampC1Ev(&temp_v7);
   *(unsigned int *)(param_1 + 0x280) = temp_v7;
   *(unsigned int *)(param_1 + 0x284) = temp_v8;
   return;

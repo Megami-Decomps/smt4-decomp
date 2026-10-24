@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0010b270(int, int, unsigned int, unsigned int);
 int FUN_001174c0(int, int, unsigned int, unsigned int);
-int vectorCopyHeader(int, unsigned int);
+int _ZN18OnlineResultRecordaSERKS_(int, unsigned int);
 int FUN_002e9c64(int, unsigned char *, int [2], int);
 int onlineJobSetStateDone(int);
 int onlineJobSetStateWaiting(int);
@@ -25,8 +25,8 @@ extern unsigned char LAB_00103579; /* 0x103579 */
 
 /* Supplied declaration required: FUN_0010b270. */
 /* Supplied declaration required: FUN_001174c0. */
-extern unsigned int FUN_002e7908(int *, int *);
-/* Supplied declaration required: vectorCopyHeader. */
+extern unsigned int _ZN12OnlineResultC1ERKj(int *, int *);
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: FUN_002e9c64. */
 /* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
@@ -76,8 +76,8 @@ void FUN_0011a5f4(int param_1)
   }
 LAB_0011a6a6:
   temp_v3[0] = -0x7ffefff3;
-  temp_v1 = FUN_002e7908(temp_v4,temp_v3);
-  vectorCopyHeader(param_1 + 0x228,temp_v1);
+  temp_v1 = _ZN12OnlineResultC1ERKj(temp_v4,temp_v3);
+  _ZN18OnlineResultRecordaSERKS_(param_1 + 0x228,temp_v1);
   *(unsigned char *)(param_1 + 0x3b) = 5;
   onlineJobSetStateDone(param_1);
   return;

@@ -6,7 +6,7 @@ extern "C" {
 
 int textFormatBuffer(...);
 int FUN_00156ea8(...);
-int FUN_00157d5c(...);
+int moriModelCommandInitBuffers(...);
 int FUN_00157fa0(...);
 int FUN_001642e4(...);
 int FUN_00178b04(...);
@@ -35,8 +35,8 @@ typedef struct {
 
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00156ea8. */
-extern unsigned int FUN_00156f34(void);
-/* Supplied declaration required: FUN_00157d5c. */
+extern unsigned int _ZN9Obj557b28C1Ev(void);
+/* Supplied declaration required: moriModelCommandInitBuffers. */
 /* Supplied declaration required: FUN_00157fa0. */
 extern unsigned int FUN_001581dc(unsigned char **);
 extern unsigned int FUN_001582d0(void);
@@ -81,13 +81,13 @@ void FUN_001463b4(fn_001463b4_arg0 *param_1)
   else {
     FUN_00157fa0();
   }
-  FUN_00157d5c(temp_v1,0x100000,0x200);
+  moriModelCommandInitBuffers(temp_v1,0x100000,0x200);
   temp_v2 = 200;
   param_1->field_0x10 = temp_v1;
   FUN_00178b04(200,"c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelManager.cpp",0x60);
   temp_v0 = 0;
   if (temp_v2 != 0) {
-    temp_v0 = FUN_00156f34();
+    temp_v0 = _ZN9Obj557b28C1Ev();
   }
   param_1->field_0x14 = temp_v0;
   FUN_00156ea8();

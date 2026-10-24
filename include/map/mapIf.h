@@ -251,9 +251,17 @@ typedef struct MapIfStateA {
     /* 0xCD08 */ u8 unkCD08;
     /* 0xCD09 */ u8 unkCD09[3];
     /* 0xCD0C */ u32 unkCD0C;
-    /* 0xCD10 */ u8 unkCD10[0x10];
+    /* 0xCD10 */ u8 unkCD10[8];
+    union {
+        /* 0xCD18 */ f32 fadeProgress;
+        /* 0xCD18 */ s32 fadeProgressBits;
+    };
+    /* 0xCD1C */ u8 fadeMode;
+    /* 0xCD1D */ u8 unkCD1D[3];
     /* 0xCD20 */ f32 unkCD20;
     /* 0xCD24 */ f32 unkCD24;
+    /* 0xCD28 */ s32 fadeStep;
+    /* 0xCD2C */ s32 fadeTimer;
 } MapIfStateA;
 
 typedef struct MapIfWidgetsA {
@@ -269,12 +277,12 @@ typedef struct MapIfGlobalsA {
 /* Retail 32-bit layout invariants. */
 typedef char MapIfRecordSizeCheck[sizeof(MapIfRecord) == 0x194 ? 1 : -1];
 typedef char MapIfStateSizeCheck[sizeof(MapIfState) == 0xCCE0 ? 1 : -1];
-typedef char MapIfStateASizeCheck[sizeof(MapIfStateA) == 0xCD28 ? 1 : -1];
+typedef char MapIfStateASizeCheck[sizeof(MapIfStateA) == 0xCD30 ? 1 : -1];
 typedef char MapIfGlobalsSizeCheck[sizeof(MapIfGlobals) == 0x8 ? 1 : -1];
 typedef char MapIfGlobalsASizeCheck[sizeof(MapIfGlobalsA) == 0x8 ? 1 : -1];
 typedef char MapIfStateAHeadCheck[offsetof(MapIfStateA, head.unk1C) == 0x1C ? 1 : -1];
 typedef char MapIfStateAPrimaryOffsetCheck[
-    offsetof(MapIfStateA, primary) == 0x48 && sizeof(MapIfStateA) == 0xCD28 ? 1 : -1];
+    offsetof(MapIfStateA, primary) == 0x48 && sizeof(MapIfStateA) == 0xCD30 ? 1 : -1];
 typedef char MapIfFastModelOffsetsCheck[sizeof(MapIfFastModelState) == 0x1c &&
     offsetof(MapIfFastModelState, active) == 0 && offsetof(MapIfFastModelState, first) == 4 &&
     offsetof(MapIfFastModelState, second) == 8 && offsetof(MapIfFastModelState, position) == 0xc &&

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002bee58(void *block, int arg);
+int spriteStartAnimationByIndex(void *block, int arg);
 int memClear(void *ptr, int size);
 int rt_memcpy(void *dst, u8 *src, int size);
 
@@ -26,7 +26,7 @@ void placeWinStartText(u8 *text)
 
     obj->unk08 = 1;
     obj->unk10 = 1;
-    FUN_002bee58(obj->block, 0);
+    spriteStartAnimationByIndex(obj->block, 0);
     memClear(obj->text, 0x80);
     length = 0;
     do {

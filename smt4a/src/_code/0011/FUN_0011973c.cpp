@@ -35,8 +35,8 @@ extern unsigned char LAB_001196b9; /* 0x1196b9 */
 extern unsigned char LAB_0011986c; /* 0x11986c */
 
 /* Supplied declaration required: sharedRefAddRef. */
-extern int operatorNew(unsigned int);
-extern unsigned int FUN_002e7908(int *, unsigned int *);
+extern int _Znwj(unsigned int);
+extern unsigned int _ZN12OnlineResultC1ERKj(int *, unsigned int *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: FUN_002e9c0c. */
 /* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
@@ -105,7 +105,7 @@ void FUN_0011973c(int param_1)
     if (temp_v0 != 0) {
       sharedRefAddRef(*(unsigned int *)(param_1 + 0x30c));
       onlineJobSetStateWaiting(param_1);
-      temp_v0 = operatorNew(0x10);
+      temp_v0 = _Znwj(0x10);
       temp_v1 = 0;
       if (temp_v0 != 0) {
         temp_v1 = FUN_002ea3c0(temp_v0,&LAB_001196b9,0,&LAB_0011986c);
@@ -114,7 +114,7 @@ void FUN_0011973c(int param_1)
     }
     else {
       temp_v3 = 0x8001000d;
-      temp_v1 = FUN_002e7908(temp_v4,(unsigned int *)&temp_v3);
+      temp_v1 = _ZN12OnlineResultC1ERKj(temp_v4,(unsigned int *)&temp_v3);
       FUN_003054f0(param_1,temp_v1);
     }
     onlineUrlDestroy(temp_v6);

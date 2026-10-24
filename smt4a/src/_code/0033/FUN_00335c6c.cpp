@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int asdDeallocateArrayStorage(int, int, int);
+int _ZN4__rw15__rw_deallocateEPvji(int, int, int);
 int dataTable8FindRecord(void);
 int dataTable04FindById(void);
 int sysMemClear(int [21], int);
@@ -16,8 +16,8 @@ extern unsigned int DAT_005702a4; /* 0x5702a4 */
 extern unsigned int DAT_005702b0; /* 0x5702b0 */
 extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
-extern unsigned short *FUN_001006c2(int, unsigned int);
-/* Supplied declaration required: asdDeallocateArrayStorage. */
+extern unsigned short *_ZN4__rw13__rw_allocateEji(int, unsigned int);
+/* Supplied declaration required: _ZN4__rw15__rw_deallocateEPvji. */
 extern int btlGetMainState(void);
 /* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: dataTable04FindById. */
@@ -108,7 +108,7 @@ void FUN_00335c6c(void)
           if (temp_v11 < temp_v8 + 0x20) {
             temp_v11 = temp_v8 + 0x20;
           }
-          puVar11 = (unsigned short *)FUN_001006c2(temp_v11 << 1,0);
+          puVar11 = (unsigned short *)_ZN4__rw13__rw_allocateEji(temp_v11 << 1,0);
           puVar16 = puVar11;
           for (puVar15 = (unsigned short *)*piVar22; puVar15 != puVar10; puVar15 = puVar15 + 1) {
             if (puVar16 != (unsigned short *)0x0) {
@@ -130,7 +130,7 @@ void FUN_00335c6c(void)
           }
           temp_v7 = *piVar22;
           temp_v10 = *(int *)(temp_v6 + 0x4e5c);
-          asdDeallocateArrayStorage(temp_v7,(*(int *)(temp_v6 + 0x4e60) - temp_v7) >> 1,0);
+          _ZN4__rw15__rw_deallocateEPvji(temp_v7,(*(int *)(temp_v6 + 0x4e60) - temp_v7) >> 1,0);
           *(unsigned short **)(temp_v6 + 0x4e60) = puVar11 + temp_v11;
           *(unsigned short **)(temp_v6 + 0x4e5c) = puVar11 + ((temp_v10 - temp_v7) >> 1) + 1;
           *piVar22 = (int)puVar11;
@@ -181,7 +181,7 @@ void FUN_00335c6c(void)
           if (temp_v11 < temp_v8 + 0x20) {
             temp_v11 = temp_v8 + 0x20;
           }
-          puVar11 = (unsigned short *)FUN_001006c2(temp_v11 << 1,0);
+          puVar11 = (unsigned short *)_ZN4__rw13__rw_allocateEji(temp_v11 << 1,0);
           puVar16 = puVar11;
           for (puVar15 = (unsigned short *)*piVar22; puVar15 != puVar10; puVar15 = puVar15 + 1) {
             if (puVar16 != (unsigned short *)0x0) {
@@ -203,7 +203,7 @@ void FUN_00335c6c(void)
           }
           temp_v7 = *piVar22;
           temp_v10 = *(int *)(temp_v6 + 0x4e5c);
-          asdDeallocateArrayStorage(temp_v7,(*(int *)(temp_v6 + 0x4e60) - temp_v7) >> 1,0);
+          _ZN4__rw15__rw_deallocateEPvji(temp_v7,(*(int *)(temp_v6 + 0x4e60) - temp_v7) >> 1,0);
           *(unsigned short **)(temp_v6 + 0x4e60) = puVar11 + temp_v11;
           *(unsigned short **)(temp_v6 + 0x4e5c) = puVar11 + ((temp_v10 - temp_v7) >> 1) + 1;
           *piVar22 = (int)puVar11;

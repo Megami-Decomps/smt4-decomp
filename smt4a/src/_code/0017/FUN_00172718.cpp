@@ -5,8 +5,8 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern unsigned int DAT_005c4c2c; /* 0x5c4c2c */
-extern unsigned int DAT_0064c054; /* 0x64c054 */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x5c4c2c */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x64c054 */
 extern unsigned int DAT_0064c058; /* 0x64c058 */
 extern unsigned int DAT_0064c05c; /* 0x64c05c */
 extern unsigned int DAT_0064c060; /* 0x64c060 */
@@ -96,8 +96,8 @@ unsigned int * FUN_00172718(int *param_1,int param_2)
   puVar6[0x12] = 0;
   puVar6[0x13] = 0;
   puVar6[0x14] = 0;
-  if (((DAT_005c4c2c & 1) == 0) && (temp_v7 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v7 != 0)) {
-    DAT_0064c054 = temp_v10;
+  if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v7 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v7 != 0)) {
+    _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v10;
     DAT_0064c058 = temp_v9;
     DAT_0064c05c = temp_v9;
     DAT_0064c060 = temp_v9;
@@ -117,7 +117,7 @@ unsigned int * FUN_00172718(int *param_1,int param_2)
   temp_v0 = DAT_0064c060;
   temp_v10 = DAT_0064c05c;
   temp_v9 = DAT_0064c058;
-  puVar6[0x21] = DAT_0064c054;
+  puVar6[0x21] = _ZZN2nw4math5MTX348IdentityEvE8identity;
   puVar6[0x22] = temp_v9;
   puVar6[0x23] = temp_v10;
   puVar6[0x24] = temp_v0;

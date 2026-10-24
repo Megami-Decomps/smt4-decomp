@@ -1,48 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002550d8` (_code @ 0x2550d8, 0x80 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation: retail keeps the old and new values in r2/r3 across the calls to FUN_00245cc0/FUN_0023dcfc (they are small functions of the same source file whose register use armcc knew), the build saves them in callee-saved registers. */
+#include "battle/btlMain.h"
+
+/* A battle entry; only its array of halfword stats at +0x72 is named. */
+struct BtlStatEntry {
+    /* 0x00 */ u8 unk00[0x72];
+    /* 0x72 */ s16 stats[1];
+};
 
 extern "C" {
 
-int FUN_0023dcfc(...);
-int FUN_00245cc0(...);
-int btlMainFindEntryByListedId(int, unsigned int);
+BtlMainState *btlGetMainState(void);
+BtlStatEntry *btlMainFindEntryByListedId(BtlMainState *battle, s32 id);
+s32 FUN_00245cc0(s32 stat);
+s32 FUN_0023dcfc(s32 stat);
 
-/* Supplied declaration required: FUN_0023dcfc. */
-/* Supplied declaration required: FUN_00245cc0. */
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-extern int btlGetMainState(void);
-
-
-void FUN_002550d8(unsigned int param_1,int param_2,int param_3,int param_4)
-
+/* Changes stat `stat` of the battle entry with listed id `id` by `delta`, clamped to the stat's range (the entry is left alone when `preview` is set); returns the change. */
+s32 FUN_002550d8(s32 id, s32 stat, s32 delta, s32 preview)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = btlGetMainState();
-  btlMainFindEntryByListedId(temp_v1,param_1);
-  if (temp_v1 != 0) {
-    temp_v1 = temp_v1 + param_2 * 2;
-    param_3 = *(short *)(temp_v1 + 0x72) + param_3;
-    temp_v2 = FUN_00245cc0(param_2);
-    if (param_3 < temp_v2) {
-      temp_v0 = FUN_00245cc0();
+    BtlStatEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
+
+    if (entry == NULL) {
+        return 0;
     }
-    else {
-      temp_v2 = FUN_0023dcfc(param_2);
-      if (temp_v2 < param_3) {
-        param_3 = FUN_0023dcfc();
-      }
-      temp_v0 = (unsigned short)param_3;
+    s32 old = entry->stats[stat];
+    s32 value = old + delta;
+
+    if (value < FUN_00245cc0(stat)) {
+        value = FUN_00245cc0(stat);
+    } else if (value > FUN_0023dcfc(stat)) {
+        value = FUN_0023dcfc(stat);
     }
-    if (param_4 == 0) {
-      *(unsigned short *)(temp_v1 + 0x72) = temp_v0;
+    if (preview == 0) {
+        entry->stats[stat] = value;
     }
-  }
-  return;
+    return value - old;
 }
 
 } /* extern "C" */

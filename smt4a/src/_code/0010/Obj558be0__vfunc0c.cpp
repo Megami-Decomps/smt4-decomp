@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int FUN_002e7614(int, unsigned int);
 /* Supplied declaration required: FUN_002f2e3c. */
 
@@ -28,7 +28,7 @@ void Obj558be0::vfunc0c(u32 param_2)
   int temp_v1;
   
   if (*(char *)(param_1 + 0x51) == '\0') {
-    temp_v0 = operatorNew(0x20);
+    temp_v0 = _Znwj(0x20);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_002e7614(temp_v0,param_2);

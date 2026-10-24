@@ -1,71 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e14a4` (_code @ 0x2e14a4, 0xec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the first asdProcessCreateSimple call's stack-argument setup differs (r2/r1/r0 chosen where retail uses r1/r0/ip) */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "test/BustupViewerState.h"
 
 extern "C" {
 
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int asdLoadFileSyncDefault(...);
-int bustupViewerResetState(...);
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
+void *asdLoadFileSyncDefault(const char *path);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+                           AsdProcUpdateFunc update, AsdProcFunc end, u32 work);
+void taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+                    AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
+u32 spriteHandleCreate(u32 arg);
+void bustupViewerResetState(void);
+void bustupViewerActivate(u32 handle);
+s32 FUN_003150f4(u32 handle);
+s32 FUN_003692c0(u32 handle);
+void FUN_003a3b84(u32 handle);
 
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
+extern BustupViewerState *g_bustupViewer;
 
-extern unsigned char LAB_002e15c8; /* 0x2e15c8 */
-extern unsigned char LAB_002e15e8; /* 0x2e15e8 */
-extern unsigned char LAB_002e1600; /* 0x2e1600 */
-extern int FUN_003150f4(...); /* 0x3150f4 */
-extern unsigned char LAB_003692a8; /* 0x3692a8 */
-extern int FUN_003692c0(...); /* 0x3692c0 */
-extern unsigned char LAB_003a3b84; /* 0x3a3b84 */
-extern unsigned int *g_bustupViewer; /* 0x588ff0 */
-
-extern unsigned int spriteHandleCreate(unsigned int);
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: asdLoadFileSyncDefault. */
-/* Supplied declaration required: bustupViewerResetState. */
-
-
+/* Creates the debug bust-up viewer: its work area, the bust-up list, and the update and draw tasks. */
 void FUN_002e14a4(void)
-
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  unsigned int temp_v0;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0xa4,1);
-  g_bustupViewer = puVar1;
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1[4] = 0;
-  puVar1[0x10] = 0;
-  puVar1[0x27] = 0;
-  puVar1[0x26] = 0;
-  *(unsigned char *)(puVar1 + 0x11) = 0;
-  bustupViewerResetState();
-  puVar1[0x12] = 0x1a;
-  puVar1[0x13] = 0x1e;
-  puVar2 = &LAB_002e15c8;
-  asdLoadFileSyncDefault();
-  puVar1[0x26] = (unsigned int)puVar2;
-  temp_v0 = spriteHandleCreate(0);
-  puVar1[0x28] = temp_v0;
-  *(unsigned char *)(puVar1 + 1) = 0;
-  puVar2 = &LAB_002e15e8;
-  asdProcessCreateSimple(&LAB_002e15e8,4,0,0,FUN_003150f4,&LAB_003692a8,0);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_002e1600,0xea,0,0,FUN_003692c0,&LAB_003a3b84,0,puVar2);
-  return;
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\test\\BustupViewer.cpp", 264);
+    BustupViewerState *viewer = g_bustupViewer = (BustupViewerState *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(BustupViewerState), 1);
+    viewer->unk08 = 0;
+    viewer->unk0C = 0;
+    viewer->unk10 = 0;
+    viewer->unk40 = 0;
+    viewer->unk9C = 0;
+    viewer->fileData = 0;
+    viewer->unk44 = 0;
+    bustupViewerResetState();
+    viewer->unk48 = 26;
+    viewer->unk4C = 30;
+    viewer->fileData = asdLoadFileSyncDefault("test/bustup_viewer.bf");
+    viewer->text = spriteHandleCreate(0);
+    viewer->done = 0;
+    u32 process = asdProcessCreateSimple("BUSTUP VIEWER C", 4, 0, 0, FUN_003150f4, bustupViewerActivate, 0);
+    viewer->process = process;
+    taskCreateDraw("BUSTUP VIEWER D", 234, 0, 0, FUN_003692c0, FUN_003a3b84, 0, (void *)process);
 }
 
 } /* extern "C" */

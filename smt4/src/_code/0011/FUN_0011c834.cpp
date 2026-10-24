@@ -1,42 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011c834` (_code @ 0x11c834, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only register allocation differs (retail reuses r5 for the refcount pointer and then the success result; built uses r6 for the pointer and r5 for the result) */
+#include "nn/Result.h"
+#include "nn/os/CriticalSectionLock.h"
+
+static const char g_ndmServiceName[] = "ndm:u";
 
 extern "C" {
 
-int FUN_002c1398(void);
+extern u8 g_ndmLock[];        /* 0x4e6cd0: nn::os::CriticalSection */
+extern s32 g_ndmRefCount;     /* 0x471b10 */
+extern u32 g_ndmSession[];    /* 0x472ad8 */
 
-extern int DAT_00471b10; /* 0x471b10 */
-extern unsigned int DAT_00472ad8; /* 0x472ad8 */
-extern unsigned int DAT_004e6cd0; /* 0x4e6cd0 */
+void FUN_002c1398(void);
+u32 libc_strlen(const char *text);
+s32 asdModelForwardChecked(u32 *session, const char *name, u32 length, u32 flags);
 
-extern int asdModelForwardChecked(unsigned int *, char *, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c1398. */
-extern unsigned int libc_strlen(char *);
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-int FUN_0011c834(void)
-
+/* Opens the "ndm:u" service session on the first reference; returns the failure result or 0. */
+s32 FUN_0011c834(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_004e6cd0);
-  if (DAT_00471b10 == 0) {
-    FUN_002c1398();
-    temp_v0 = libc_strlen("ndm:u");
-    temp_v1 = asdModelForwardChecked(&DAT_00472ad8,"ndm:u",temp_v0,0);
-    if (temp_v1 < 0) {
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_004e6cd0);
-      return temp_v1;
+    CriticalSectionLock guard(g_ndmLock);
+
+    if (g_ndmRefCount == 0) {
+        FUN_002c1398();
+        s32 result = asdModelForwardChecked(g_ndmSession, g_ndmServiceName, libc_strlen(g_ndmServiceName), 0);
+        if (nnResultIsFailure(result)) {
+            return result;
+        }
     }
-  }
-  DAT_00471b10 = DAT_00471b10 + 1;
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_004e6cd0);
-  return 0;
+    g_ndmRefCount++;
+    s32 success = 0;
+    return success;
 }
 
 } /* extern "C" */

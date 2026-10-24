@@ -26,7 +26,7 @@ typedef struct {
     unsigned int sp94; /* 0x94: local_94 */
 } param_1_stack;
 
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: strInit. */
 /* Supplied declaration required: onlineTimeGetNow. */
 /* Supplied declaration required: destroyObj0055ae64. */
@@ -59,7 +59,7 @@ int FUN_0011c864(int param_1)
   unsigned char temp_v12 [28];
   
   *(unsigned int *)(param_1 + 4) = 0;
-  temp_v0 = operatorNew(0xb0);
+  temp_v0 = _Znwj(0xb0);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = FUN_002f7a28();

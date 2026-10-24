@@ -1,42 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00436414` (_code @ 0x436414, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: argument registers r6/r7 swapped and the copy store is scheduled before the header address add. */
+#include "common.h"
 
 extern "C" {
 
-int variantSetPlain(int, int *);
-int FUN_00515618(int [2], int);
+typedef struct Record {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ struct Record *next;
+} Record;
 
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
+typedef struct Cursor {
+    /* 0x0 */ Record *record;
+} Cursor;
 
-/* Supplied declaration required: variantSetPlain. */
-/* Supplied declaration required: FUN_00515618. */
+typedef struct Slot {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ u8 header[1];
+} Slot;
 
+extern void FUN_00515618(Slot **slot, void *key);
+extern void variantSetPlain(void *header, u32 *value);
 
-unsigned int FUN_00436414(int *param_1,int *param_2,unsigned int *param_3,int *param_4)
-
+static __inline void variantAssignPlain(void *header, u32 value)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2 [2];
-  
-  FUN_00515618(temp_v2,*param_4 + 8);
-  if (temp_v2[0] == 0) {
-    temp_v0 = 2;
-  }
-  else {
-    temp_v1 = *param_3;
-    variantSetPlain(temp_v2[0] + 8,&temp_v1);
-    *param_2 = *param_4;
-    *param_1 = *(int *)(*param_1 + 4);
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    variantSetPlain(header, &value);
+}
+
+/* Looks the slot up through `owner`, stores the item's value into it, copies the value to `out` and advances the cursor; 0 on success, 2 when the slot is missing. */
+u32 FUN_00436414(Cursor *cursor, u32 *out, u32 *item, u8 **owner)
+{
+    Slot *slot;
+
+    FUN_00515618(&slot, *owner + 8);
+    if (slot == NULL) {
+        return 2;
+    }
+    variantAssignPlain(slot->header, *item);
+    *out = *(u32 *)owner;
+    cursor->record = cursor->record->next;
+    return 0;
 }
 
 } /* extern "C" */

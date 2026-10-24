@@ -25,8 +25,8 @@ typedef struct {
 extern unsigned char LAB_00116490; /* 0x116490 */
 extern signed char DAT_00594967; /* 0x594967 */
 
-extern int operatorNew(unsigned int);
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
+extern int _Znwj(unsigned int);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 /* Supplied declaration required: FUN_002ea3c0. */
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ec728. */
@@ -67,7 +67,7 @@ void FUN_001163cc(int param_1)
                  param_1 + 0xd8);
     if (temp_v1 == 0) {
       temp_v3[0] = 0x80010001;
-      temp_v0 = FUN_002e7908(temp_v6,temp_v3);
+      temp_v0 = _ZN12OnlineResultC1ERKj(temp_v6,temp_v3);
       onlineJobApplyStateTriple(param_1,3,temp_v0);
       return;
     }
@@ -78,7 +78,7 @@ void FUN_001163cc(int param_1)
   }
   else {
     onlineJobSetStateWaiting(param_1);
-    temp_v1 = operatorNew(0x10);
+    temp_v1 = _Znwj(0x10);
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v0 = FUN_002ea3c0(temp_v1,0x116189,0,&LAB_00116490);

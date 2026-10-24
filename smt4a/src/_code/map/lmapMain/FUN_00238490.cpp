@@ -77,7 +77,7 @@ typedef struct {
 
 extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_005c4c28; /* 0x5c4c28 */
-extern unsigned int DAT_005c4c2c; /* 0x5c4c2c */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x5c4c2c */
 extern float DAT_0064c030; /* 0x64c030 */
 extern float DAT_0064c034; /* 0x64c034 */
 extern float DAT_0064c038; /* 0x64c038 */
@@ -87,7 +87,7 @@ extern float DAT_0064c044; /* 0x64c044 */
 extern float DAT_0064c048; /* 0x64c048 */
 extern float DAT_0064c04c; /* 0x64c04c */
 extern float DAT_0064c050; /* 0x64c050 */
-extern float DAT_0064c054; /* 0x64c054 */
+extern float _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x64c054 */
 extern float DAT_0064c058; /* 0x64c058 */
 extern float DAT_0064c05c; /* 0x64c05c */
 extern float DAT_0064c060; /* 0x64c060 */
@@ -104,7 +104,7 @@ extern float DAT_0064c080; /* 0x64c080 */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
-extern unsigned int FUN_0018aeb8(void);
+extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 extern int FUN_00199f84(unsigned char *, int);
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
@@ -210,7 +210,7 @@ void FUN_00238490(int param_1)
   if (*(char *)(param_1 + 1000) == '\0') {
     return;
   }
-  temp_v0 = FUN_0018aeb8();
+  temp_v0 = _ZN2nw4math5MTX448IdentityEv();
   mtx44Copy(&temp_v25,temp_v0);
   temp_v2 = g_renderCtx;
   temp_v11 = (*(unsigned char *)(param_1 + 0x130) & 7) >> 1;
@@ -278,8 +278,8 @@ void FUN_00238490(int param_1)
   if ((*(unsigned char *)(param_1 + 0x130) & 0x20) != 0) {
     temp_v2 = FUN_00199f84(temp_v66,*(int *)(g_renderCtx + 0x6fc) + 0x38);
     if (temp_v2 == 0) {
-      if (((DAT_005c4c2c & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v2 != 0)) {
-        DAT_0064c054 = temp_v15;
+      if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v2 != 0)) {
+        _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v15;
         DAT_0064c058 = temp_v16;
         DAT_0064c05c = temp_v16;
         DAT_0064c060 = temp_v16;
@@ -292,7 +292,7 @@ void FUN_00238490(int param_1)
         DAT_0064c07c = temp_v15;
         DAT_0064c080 = temp_v16;
       }
-      nn_math_ARMv6_MTX34CopyAsm(temp_v66,&DAT_0064c054);
+      nn_math_ARMv6_MTX34CopyAsm(temp_v66,&_ZZN2nw4math5MTX348IdentityEvE8identity);
     }
     nn_math_ARMv6_MTX34CopyAsm(&temp_v59,temp_v66);
     temp_v61 = temp_v16;

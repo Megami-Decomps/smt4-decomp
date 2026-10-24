@@ -21,7 +21,7 @@ struct OnlineCallbackJob {
 extern "C" {
 OnlineInstanceTable* onlineInstanceTableGetCurrent();
 OnlineInstance* onlineInstanceTableFind(OnlineInstanceTable*, u32);
-s32 refIsNonNegative(s32*);
+s32 _ZNK18OnlineResultRecord7isValidEv(s32*);
 void FUN_002f3dc4(OnlineInstance*, const OnlineCallbackResult*);
 void FUN_002f3dde(OnlineInstance*, const OnlineCallbackResult*);
 u32 FUN_002e9f00(OnlineCallbackRequest*, u32);
@@ -33,7 +33,7 @@ void onlineJobCompleteWithResult(OnlineCallbackJob* job, OnlineCallbackResult* r
     OnlineInstance* instance = onlineInstanceTableFind(onlineInstanceTableGetCurrent(),
                                                        job->instanceId);
     if (instance != NULL) {
-        if (refIsNonNegative(&result->status) != 0) {
+        if (_ZNK18OnlineResultRecord7isValidEv(&result->status) != 0) {
             if (job->output != NULL) {
                 *job->output = job->value;
             }

@@ -1,66 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031c104` (_code @ 0x31c104, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only scheduling differs: retail copies the effect pointer into r4 before clearing it and hoists the FUN_002281a0 pool load above the clears. */
+#include "event/2dEvent/EventEffect.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern EventEffectGlobalsA g_eventEffect;
+void *asdMemoryAllocTracked(s32 pool, s32 alignment, s32 flags, u32 size, s32 clear);
+u32 FUN_002281a0(void *job);
+u32 FUN_00261254(void *job);
+void eventEffectDestroy(void *job);
+u32 asdProcessCreateSimple(const char *name, s32 priority, s32 flags, s32 owner,
+    u32 (*step)(void *), void (*destroy)(void *), void *work);
+u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 owner,
+    u32 (*draw)(void *), void (*destroy)(void *), void *work, u32 process);
 
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern int eventEffectDestroy(...); /* 0x213ad8 */
-extern unsigned char LAB_002281a0; /* 0x2281a0 */
-extern int FUN_00261254(...); /* 0x261254 */
-extern unsigned char LAB_0031c26c; /* 0x31c26c */
-extern unsigned char LAB_0031c280; /* 0x31c280 */
-extern unsigned char LAB_0031c294; /* 0x31c294 */
-extern unsigned int *DAT_0057f3c0; /* 0x57f3c0 */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-
-
-void FUN_0031c104(int param_1)
-
+// Start the pulsing alert effect; a positive stopFrame arms its fade-out at that frame.
+void FUN_0031c104(s32 stopFrame)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  
-  if (DAT_0057f3c0 == (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x1c,1);
-    DAT_0057f3c0 = puVar1;
-  }
-  puVar1 = DAT_0057f3c0;
-  *DAT_0057f3c0 = 0;
-  puVar1[1] = 0;
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1[4] = 0;
-  puVar1[5] = 0;
-  puVar1[6] = 0;
-  puVar2 = &LAB_0031c26c;
-  asdProcessCreateSimple(&LAB_0031c26c,3,0,0,&LAB_002281a0,eventEffectDestroy,0);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_0031c280,0x84,0,0,FUN_00261254,0,0,puVar2);
-  taskCreateDraw(&LAB_0031c294,0xe0,0,0,FUN_00261254,0,0,*puVar1);
-  puVar1[1] = 0;
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1[4] = 0x3ca3d70a;
-  puVar1[6] = param_1;
-  *(unsigned char *)(puVar1 + 5) = 0 < param_1;
-  return;
+    if (g_eventEffect.effect == NULL) {
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\event\\2dEvent\\EventEffect.cpp", 0x716);
+        g_eventEffect.effect = static_cast<EventEffectA *>(
+            asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(EventEffectA), 1));
+    }
+    EventEffectA *effect = g_eventEffect.effect;
+    u32 *words = reinterpret_cast<u32 *>(effect);
+    for (u32 word = 0; word < sizeof(EventEffectA) / sizeof(u32); ++word) {
+        words[word] = 0;
+    }
+    effect->job = asdProcessCreateSimple("EvtAlart Calc", 3, 0, 0, FUN_002281a0, eventEffectDestroy, NULL);
+    taskCreateDraw("EvtAlart DrawUpLeft", 0x84, 0, 0, FUN_00261254, NULL, NULL, effect->job);
+    taskCreateDraw("EvtAlart DrawUpRight", 0xe0, 0, 0, FUN_00261254, NULL, NULL, effect->job);
+    effect->state = 0;
+    effect->frame = 0;
+    effect->level = 0.0f;
+    effect->levelStep = 0.02f;
+    effect->stopFrame = stopFrame;
+    effect->stopArmed = stopFrame > 0;
 }
 
 } /* extern "C" */

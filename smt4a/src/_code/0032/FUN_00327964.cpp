@@ -14,7 +14,7 @@ int FUN_00233e10(int, unsigned int);
 int FUN_002342b8(void);
 int FUN_0025ef68(int, int, int);
 int distSpatial(void);
-int FUN_002b7f58(void);
+int mapIfSpawnManholeAction(void);
 int mapEaseSceneHeading(void);
 int FUN_002e364c(int);
 int FUN_00303460(int);
@@ -54,7 +54,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_0025ef68. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_002b7f58. */
+/* Supplied declaration required: mapIfSpawnManholeAction. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
@@ -200,7 +200,7 @@ void FUN_00327964(void)
             *(unsigned int *)(g_lmapView + 0xb0) = 0xffffffff;
             sysPlaySe(0xdd);
             FUN_00233e10(1,DAT_005f16ac);
-            FUN_002b7f58();
+            mapIfSpawnManholeAction();
             temp_v3 = g_lmapScene;
             temp_v4 = *(int *)(temp_v3 + 4);
             *(int *)(temp_v3 + 4) = temp_v4 + 1;

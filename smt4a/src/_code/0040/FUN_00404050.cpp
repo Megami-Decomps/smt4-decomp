@@ -1,116 +1,113 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00404050` (_code @ 0x404050, 0x290 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the 0xffffffff text color/0x6b in sl/r9 (set after the null check) and the switch flag in r1 */
+#include "common.h"
+
+/* A content list entry: kind selects the frame style, flag adds the badge overlay, name is the displayed text. */
+struct ContentEntry {
+    u8 unk00[4];
+    u16 kind;      /* 0x04 */
+    u16 badge;     /* 0x06 */
+    u8 unk08[8];
+    char name[1];  /* 0x10 */
+};
+
+struct EffectPlacement {
+    u8 unk00[8];
+    s16 x;         /* 0x08 */
+    s16 y;         /* 0x0A */
+};
 
 extern "C" {
 
-int textFormatBuffer(...);
-int FUN_00162790(...);
-int efctSetSpeed(...);
-int gameGetPlayerData(...);
-int FUN_001835b4(...);
-int FUN_00183bb0(...);
-int drawSetColorFromRGBA8(...);
-int sysMemClear(...);
-int libc_strcmp(...);
-int FUN_0039b984(...);
-int efctPlayVariantSet(...);
-int VectorSignedToFloat(...);
+extern const char DAT_0052d134[]; /* "<pc 0>" */
 
-/* stack frame of param_6: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int spBC; /* 0xbc: local_bc */
-    unsigned int spC0; /* 0xc0: local_c0 */
-} param_6_stack;
+ContentEntry *FUN_0039b984(u32 id);
+void sysMemClear(void *buffer, u32 bytes);
+void efctSetSpeed(f32 speed);
+EffectPlacement *FUN_001834a4(u32 table, u32 id);
+s32 FUN_004038e0(u32 unused, u32 kind);
+void drawSetColorFromRGBA8(u32 rgba);
+void FUN_001835b4(s32 category, s32 group, s32 id, s32 x, s32 y, s32 index);
+void FUN_00183bb0(void);
+s32 libc_strcmp(const char *a, const char *b);
+void gameGetPlayerData(void);
+const char *gameGetPlayerName(void);
+void textFormatBuffer(char *buffer, const char *format, ...);
+void FUN_00162790(s32 category, u32 color, const char *text, f32 x, f32 y, f32 scaleX, f32 scaleY, f32 speed);
+void efctPlayVariantSet(u32 unused, u32 target, u32 slot, s32 index, s32 useFirstSet, s32 useSecondSet, f32 speed);
 
-extern unsigned char LAB_004042ec; /* 0x4042ec */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
-extern int gameGetPlayerName(void);
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: gameGetPlayerData. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: libc_strcmp. */
-/* Supplied declaration required: FUN_0039b984. */
-extern unsigned int FUN_004038e0(unsigned int, unsigned short);
-/* Supplied declaration required: efctPlayVariantSet. */
-
-
-void FUN_00404050(unsigned int param_1,unsigned int param_2,int param_3,int param_4,unsigned int param_5,
-                 unsigned int param_6)
-
+/* Draws one content list entry: its frame, name and badge, at the given offset. */
+void FUN_00404050(u32 effect, f32 speed, u32 handle, s32 x, s32 y, s32 useFirstSet, s32 useSecondSet)
 {
-/* irregular: irregular input(s): in_fpscr; 12 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int in_fpscr;
-  unsigned char temp_v4 [128];
-  unsigned int temp_v5;
-  
-  param_2 = param_2 & 0xffff;
-  FUN_0039b984();
-  if (param_2 != 0) {
-    sysMemClear(temp_v4,0x80);
-    efctSetSpeed();
-    temp_v2 = FUN_001834a4(0x32,99);
-    temp_v3 = *(short *)(temp_v2 + 8) + param_3;
-    temp_v2 = *(short *)(temp_v2 + 10) + param_4;
-    temp_v5 = FUN_004038e0(param_1,*(unsigned short *)(param_2 + 4));
-    switch(*(unsigned short *)(param_2 + 4)) {
-    default:
-      FUN_001835b4(2,0x32,temp_v5,temp_v3,temp_v2,0x6b);
-      break;
-    case 2:
-    case 4:
-    case 6:
-    case 8:
-    case 10:
-    case 0xc:
-    case 0xe:
-    case 0x10:
-    case 0x12:
-      drawSetColorFromRGBA8(0x57d8ffff);
-      FUN_001835b4(2,0x32,temp_v5,temp_v3,temp_v2,0x6b);
-      FUN_001835b4(2,0x32,0x3f1,temp_v3,temp_v2,0x6b);
-      FUN_00183bb0();
+    ContentEntry *entry = FUN_0039b984((u16)handle);
+    char text[128];
+    EffectPlacement *placement;
+    s32 frameId;
+    s32 framed;
+    s32 frameX;
+    s32 frameY;
+    const char *name;
+    u32 textColor = 0xffffffff;
+
+    if (entry != NULL) {
+        sysMemClear(text, sizeof(text));
+        efctSetSpeed(speed);
+        placement = FUN_001834a4(0x32, 99);
+        frameX = placement->x + x;
+        frameY = placement->y + y;
+        frameId = FUN_004038e0(effect, entry->kind);
+        framed = 0;
+        switch (entry->kind) {
+        case 0:
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 9:
+        case 11:
+        case 13:
+        case 15:
+        case 17:
+            break;
+        case 2:
+        case 4:
+        case 6:
+        case 8:
+        case 10:
+        case 12:
+        case 14:
+        case 16:
+        case 18:
+            framed = 1;
+            break;
+        }
+        if (framed) {
+            drawSetColorFromRGBA8(0x57d8ffff);
+            FUN_001835b4(2, 0x32, frameId, frameX, frameY, 0x6b);
+            FUN_001835b4(2, 0x32, 0x3f1, frameX, frameY, 0x6b);
+            FUN_00183bb0();
+        } else {
+            FUN_001835b4(2, 0x32, frameId, frameX, frameY, 0x6b);
+        }
+        placement = FUN_001834a4(0x32, 100);
+        name = entry->name;
+        if (libc_strcmp(name, DAT_0052d134) == 0) {
+            gameGetPlayerData();
+            name = gameGetPlayerName();
+        }
+        textFormatBuffer(text, "%s", name);
+        FUN_00162790(2, textColor, text, (f32)(placement->x + x), (f32)(placement->y + y), 0.56640625f, 0.0f, speed);
+        placement = FUN_001834a4(0x32, 0x65);
+        efctPlayVariantSet(effect, placement->x + x, placement->y + y, 0x79, useFirstSet, useSecondSet, speed);
+        if (entry->badge != 0) {
+            efctSetSpeed(speed);
+            placement = FUN_001834a4(0x32, 0x9b);
+            x += placement->x;
+            y += placement->y;
+            FUN_001835b4(2, 0x32, 0x9c, x, y, 0x79);
+            FUN_001835b4(2, 0x32, 0x9d, x, y, 0x7a);
+        }
+        efctSetSpeed(1.0f);
     }
-    temp_v2 = FUN_001834a4(0x32,100);
-    temp_v0 = *(short *)(temp_v2 + 8);
-    temp_v1 = *(short *)(temp_v2 + 10);
-    temp_v3 = param_2 + 0x10;
-    temp_v2 = temp_v3;
-    libc_strcmp(temp_v3,"<pc 0>");
-    if (temp_v2 == 0) {
-      gameGetPlayerData();
-      temp_v3 = gameGetPlayerName();
-    }
-    textFormatBuffer(temp_v4,&LAB_004042ec,temp_v3);
-    VectorSignedToFloat(temp_v1 + param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(temp_v0 + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162790(2,0xffffffff,temp_v4);
-    temp_v2 = FUN_001834a4(0x32,0x65);
-    efctPlayVariantSet(param_1,*(short *)(temp_v2 + 8) + param_3,*(short *)(temp_v2 + 10) + param_4,0x79,
-                 param_5,param_6);
-    if (*(short *)(param_2 + 6) != 0) {
-      efctSetSpeed();
-      temp_v2 = FUN_001834a4(0x32,0x9b);
-      param_3 = param_3 + *(short *)(temp_v2 + 8);
-      param_4 = *(short *)(temp_v2 + 10) + param_4;
-      FUN_001835b4(2,0x32,0x9c,param_3,param_4,0x79);
-      FUN_001835b4(2,0x32,0x9d,param_3,param_4,0x7a);
-    }
-    efctSetSpeed();
-  }
-  return;
 }
 
 } /* extern "C" */

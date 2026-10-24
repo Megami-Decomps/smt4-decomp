@@ -7,14 +7,14 @@ typedef struct DevilRecord {
     /* 0x38 */ u32 flags;      /* bits 16..22: percentage taken off */
 } DevilRecord;
 
-extern DevilRecord *FUN_002ae164(s32 arg);
+extern DevilRecord *dataTable40FindById(s32 arg);
 extern s32 *gameGetSlotTable(void);
 
 /* Returns the slot table's first value reduced by the record's percentage field, 0 without one. */
 s32 slotTableValueReducedByRecord(s32 arg)
 {
     s32 result = 0;
-    DevilRecord *record = FUN_002ae164(arg);
+    DevilRecord *record = dataTable40FindById(arg);
 
     if (record != NULL && (record->flags & 0x7F0000) != 0) {
         result = *gameGetSlotTable() * (100 - (s32)((record->flags >> 16) & 0x7F)) / 100;

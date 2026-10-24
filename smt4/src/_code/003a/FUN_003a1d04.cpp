@@ -4,7 +4,7 @@
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" {
-void FUN_00230cc0(const AsdTextureRegion *, u32 image, s32 x, s32 y, u32 color);
+void uiRectDrawAtBottomRight(const AsdTextureRegion *, u32 image, s32 x, s32 y, u32 color);
 void FUN_00231bcc(const AsdTextureRegion *, u32 image, s32 x, s32 y, u32 color, u32 flags);
 void FUN_003a07a0(Scene3a *scene, s32 category);
 s32 FUN_0029e924(const FlaggedValueHolder *holder);
@@ -42,7 +42,7 @@ void FUN_003a1d04(Scene3a *scene, u32 image)
     case 7: image = 3; break;
     case 8: image = 4; break;
     }
-    FUN_00230cc0(&view->region, image, 0, 0, view->color);
+    uiRectDrawAtBottomRight(&view->region, image, 0, 0, view->color);
     u32 color = view->color;
     FUN_00231bcc(&view->region, 100, 0, 0, color, 1);
     FUN_003a07a0(scene, view->category);

@@ -29,7 +29,7 @@ u32 gameDataCopySaveEntry(u32 id, void *out);
 s32 gameSlotTableFindFree();
 FusionSlotRecord *gameGetSlotRecord(s32 slot);
 s32 FUN_002a4b28(u16 id);
-u32 FUN_0032fea0(const u16 *values, s32 count, u32 value);
+u32 arrayContainsU16(const u16 *values, s32 count, u32 value);
 
 u32 fusionListAvailableSpecialRecipes(void *context, u16 *recipes)
 {
@@ -69,7 +69,7 @@ u32 fusionListAvailableSpecialRecipes(void *context, u16 *recipes)
                 present[ingredient] = 1;
             ++ingredientCount;
         }
-        if (FUN_0032fea0(present, ingredientCount, 1))
+        if (arrayContainsU16(present, ingredientCount, 1))
             recipes[count++] = index;
     }
     return count;

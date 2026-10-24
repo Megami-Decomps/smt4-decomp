@@ -23,8 +23,8 @@ extern unsigned int *initVtable00558510(void);
 extern unsigned int constructObj00558838(int, int);
 /* Supplied declaration required: FUN_0010a0c4. */
 /* Supplied declaration required: FUN_0010d128. */
-extern int operatorNew(unsigned int);
-extern int FUN_002e7908(unsigned int *, unsigned int *);
+extern int _Znwj(unsigned int);
+extern int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 extern unsigned int FUN_002ea268(void);
 /* Supplied declaration required: FUN_002ea2a8. */
 /* Supplied declaration required: FUN_002ea2b4. */
@@ -53,7 +53,7 @@ int FUN_00122a68(void)
   puVar1[0x4a] = 0;
   puVar1[0x4b] = 200;
   temp_v6[0] = 0x10001;
-  temp_v0 = FUN_002e7908(puVar1 + 0x4c,temp_v6);
+  temp_v0 = _ZN12OnlineResultC1ERKj(puVar1 + 0x4c,temp_v6);
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   *(unsigned char *)(temp_v0 + 0x10) = 0;
   *(unsigned char *)(temp_v0 + 0x11) = 0;
@@ -64,7 +64,7 @@ int FUN_00122a68(void)
   FUN_0010a0c4(temp_v1,0);
   temp_v4[0] = temp_v3;
   FUN_0010d128(temp_v3,&LAB_00122799,temp_v4);
-  temp_v2 = operatorNew(0x1c);
+  temp_v2 = _Znwj(0x1c);
   temp_v1 = 0;
   if (temp_v2 != 0) {
     temp_v1 = FUN_002ea268();
@@ -72,7 +72,7 @@ int FUN_00122a68(void)
   temp_v1 = FUN_002ea2a8(temp_v5,temp_v1);
   FUN_002ea2b4(temp_v0,temp_v1);
   ptrHolderDestroy(temp_v5);
-  temp_v2 = operatorNew(8);
+  temp_v2 = _Znwj(8);
   temp_v1 = 0;
   if (temp_v2 != 0) {
     temp_v1 = constructObj00558838(temp_v2,temp_v3);

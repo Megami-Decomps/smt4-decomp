@@ -9,7 +9,7 @@ typedef struct UnitRecord {
 
 extern UnitRecord *gameGetPlayerData(void);
 extern UnitRecord *gameGetUnitRecord(s32 id);
-extern void FUN_002ae164(s32 arg);
+extern void dataTable40FindById(s32 arg);
 extern s32 FUN_0029a9d4(s32 arg, s32 mode);
 extern s32 FUN_0029a924(s32 arg);
 
@@ -20,7 +20,7 @@ s32 FUN_002987d8(s32 unit, s32 arg)
     s32 result = 0;
     UnitRecord *record;
 
-    FUN_002ae164(arg);
+    dataTable40FindById(arg);
     if (unit < 0) {
         record = gameGetPlayerData();
         if (FUN_0029a9d4(arg, 1) <= record->limit) {

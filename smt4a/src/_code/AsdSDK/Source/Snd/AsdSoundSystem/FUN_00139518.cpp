@@ -1,90 +1,95 @@
-/* NON_MATCHING: ARM11 inline data-memory barrier requires an unavailable compiler intrinsic; retained romwright draft. */
-#include "romwright_types.h"
+/* NON_MATCHING: the barrier (mcr c7, c10, 5) now matches via nn/svc.h; retail keeps the sound-system address in r7 from entry and the status pointer in r5/r6 (ldrb [r5,#25]) where armcc folds it into the duck base here. */
+#include "common.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "nn/svc.h"
+
+/* The sound thread object the engine reaches through _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv: its two request words. */
+struct SoundThreadView {
+    u8 unk000[0x1e8];
+    u32 requestLow;
+    u32 requestHigh;
+};
+
+/* Apocalypse's allocation pointer lies past the shared IV sound-system definition. */
+struct SoundSystemMemoryView {
+    u8 unk000[0x4cc];
+    void *buffer;
+};
+
+/* The duck state and the sound layer's status block, which follows it. */
+struct SoundControl {
+    AsdSndDuck duck;
+    AsdSndStatusApoc status;
+};
 
 extern "C" {
-int FUN_00141b24(void);
-int dspUnloadIdleComponent(void);
-int FUN_00146e30(void);
-int FUN_00147120(void);
-int sndSystemFinalize(void);
-int FUN_00150784(void);
-int FUN_00152bf8(int);
-int asdMemFree(void);
-int coproc_moveto_Data_Memory_Barrier(int);
-extern int DAT_0063e6b4;
-extern unsigned int g_asdSoundDuck;
-extern unsigned int DAT_0063f4cc;
-extern unsigned int DAT_0063f4d0;
-extern unsigned int DAT_0063f4d4;
-extern unsigned int DAT_0063f4d8;
-extern unsigned int DAT_0063f4dc;
-extern unsigned char DAT_0063f4e0;
-extern unsigned char DAT_0063f4e1;
-extern unsigned char DAT_0063f4e2;
-extern int g_asdSoundStatus;
-extern unsigned int DAT_0063f4e8;
-extern unsigned int DAT_0063f4f8;
-extern signed char DAT_0063f4fd;
-extern int FUN_001b1f04(void);
+extern SoundSystemMemoryView g_asdSoundSystem;
+extern SoundControl g_asdSoundDuck;
 
-void FUN_00139518(void)
-{
-  int temp_v0;
-  int temp_v1;
-  unsigned int in_r3;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  FUN_00150784();
-  FUN_00141b24();
-  DAT_0063f4cc = 0;
-  g_asdSoundDuck = 0;
-  DAT_0063f4d4 = 0;
-  DAT_0063f4d8 = 0;
-  DAT_0063f4d0 = 0;
-  DAT_0063f4dc = 0;
-  DAT_0063f4e1 = 0;
-  DAT_0063f4e0 = 0;
-  DAT_0063f4e2 = 0;
-  if (DAT_0063f4fd != '\0') {
-    temp_v0 = FUN_001b1f04();
-    *(unsigned int *)(temp_v0 + 0x1e8) = 0;
-    coproc_moveto_Data_Memory_Barrier(0);
-    *(unsigned int *)(temp_v0 + 0x1ec) = 0;
-    temp_v2 = 0;
-    if ((int)temp_v2 < (int)DAT_0063f4e8) {
-      do {
-        temp_v3 = -1 < (int)temp_v2;
-        temp_v4 = temp_v2 == 0;
-        if (temp_v3) {
-          in_r3 = DAT_0063f4e8;
-        }
-        if (temp_v3) {
-          temp_v4 = in_r3 == temp_v2;
-        }
-        temp_v0 = 0;
-        if ((!temp_v4 && (temp_v3 && (int)temp_v2 <= (int)in_r3)) &&
-           (temp_v0 = g_asdSoundStatus, 0 < (int)temp_v2)) {
-          if ((temp_v2 & 1) != 0) {
-            temp_v0 = *(int *)(g_asdSoundStatus + 0xd8);
-          }
-          for (temp_v1 = (int)temp_v2 >> 1; temp_v1 != 0; temp_v1 = temp_v1 - 1) {
-            temp_v0 = *(int *)(*(int *)(temp_v0 + 0xd8) + 0xd8);
-          }
-        }
-        FUN_00152bf8(temp_v0);
-        temp_v2 = temp_v2 + 1;
-      } while ((int)temp_v2 < (int)DAT_0063f4e8);
-    }
-    DAT_0063f4fd = '\0';
-    DAT_0063f4f8 = 0xffffffff;
-  }
-  if (DAT_0063e6b4 != 0) {
-    asdMemFree();
-  }
-  sndSystemFinalize();
-  FUN_00147120();
-  dspUnloadIdleComponent();
-  FUN_00146e30();
+void FUN_00150784(void);
+void FUN_00141b24(void);
+SoundThreadView *_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
+void FUN_00152bf8(AsdSndObject *object);
+void asdMemFree(void *memory);
+void sndSystemFinalize(void);
+void sndSystemShutdown(void);
+void dspUnloadIdleComponent(void);
+void dspCallbackShutdown(void);
 }
+
+/* The index-th live sound object, or NULL when the index is outside the list. */
+static AsdSndObject *asdSoundObjectAt(s32 index)
+{
+    AsdSndStatusApoc *status = &g_asdSoundDuck.status;
+    AsdSndObject *object = NULL;
+
+    if (index >= 0 && status->objectCount > index) {
+        object = status->objects;
+        for (s32 i = 0; i < index; ++i) {
+            object = object->next;
+        }
+    }
+    return object;
+}
+
+/* Clears the ducking state. */
+static void asdSoundDuckReset(AsdSndDuck *duck)
+{
+    duck->holdFrames = 0;
+    duck->level = 0.0f;
+    duck->fadeInFrames = 0;
+    duck->fadeOutFrames = 0;
+    duck->unk08 = 0;
+    duck->timer = 0;
+    duck->fading = 0;
+    duck->flags = 0;
+    duck->active = 0;
+}
+
+/* Shuts the sound layer down: stops the sound objects, drops the allocation and finalizes the
+ * sound system and its DSP component. */
+extern "C" void FUN_00139518(void)
+{
+    FUN_00150784();
+    FUN_00141b24();
+    asdSoundDuckReset(&g_asdSoundDuck.duck);
+    if (g_asdSoundDuck.status.ready != 0) {
+        SoundThreadView *soundThread = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
+        soundThread->requestLow = 0;
+        nn::os::DataMemoryBarrier();
+        soundThread->requestHigh = 0;
+
+        for (s32 i = 0; i < g_asdSoundDuck.status.objectCount; ++i) {
+            FUN_00152bf8(asdSoundObjectAt(i));
+        }
+        g_asdSoundDuck.status.ready = 0;
+        g_asdSoundDuck.status.unk14 = -1;
+    }
+    if (g_asdSoundSystem.buffer != NULL) {
+        asdMemFree(g_asdSoundSystem.buffer);
+    }
+    sndSystemFinalize();
+    sndSystemShutdown();
+    dspUnloadIdleComponent();
+    dspCallbackShutdown();
 }

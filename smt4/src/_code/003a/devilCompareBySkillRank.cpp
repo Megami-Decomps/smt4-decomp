@@ -14,7 +14,7 @@ typedef struct SkillRecord {
 
 extern DevilRecord *FUN_002498ec(u16 id);
 extern s32 FUN_0024c52c(u16 skillId);
-extern SkillRecord *FUN_002ae164(u16 skillId);
+extern SkillRecord *dataTable40FindById(u16 skillId);
 
 /* qsort-style comparison of two devil ids by the skill's rank (FUN_0024c52c), then its sort key, then id (descending). */
 s32 devilCompareBySkillRank(u16 *a, u16 *b)
@@ -26,9 +26,9 @@ s32 devilCompareBySkillRank(u16 *a, u16 *b)
     s32 result = rankB - rankA;
 
     if (result == 0) {
-        u16 keyA = FUN_002ae164(recordA->skillId)->sortKey;
+        u16 keyA = dataTable40FindById(recordA->skillId)->sortKey;
 
-        result = keyA - FUN_002ae164(recordB->skillId)->sortKey;
+        result = keyA - dataTable40FindById(recordB->skillId)->sortKey;
         if (result == 0) {
             result = *b - *a;
         }

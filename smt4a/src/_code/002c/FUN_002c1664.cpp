@@ -1,4 +1,3 @@
-/* NON_MATCHING: the scale-step zero store is scheduled before the integer reset stores instead of after the scales. */
 #include "ui/PanelTransition.h"
 
 static __inline void resetPanelTransition(PanelTransition *transition)

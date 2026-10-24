@@ -1,133 +1,108 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a5ea0` (_code @ 0x4a5ea0, 0x280 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail's prologue pushes r0-r3 with the saved registers and reads the entry argument from its pushed slot ([sp+96]) instead of keeping it in a register (frame 76 vs 92); the panel/alternate/textId registers also differ. */
+#include "common.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
-extern "C" {
+namespace {
+struct ProfileEntryDrawView {
+    u8 unk000[0xC8];
+    u8 layout[0x761];
+    s8 style;
+    u8 unk82A[0x26];
+    s32 fade;
+};
 
-int textFormatBuffer(...);
-int FUN_0018349c(...);
-int dataTable00FindById(void);
-int drawTextAtRelativePosition(...);
-int FUN_004a7814(...);
-int FUN_004a7a50(int, int, unsigned int, int, int, int);
-void FUN_004a7cb0(void *, unsigned int, int, int, int, float scale);
-int FUN_004a7dc8(int, int, int, int);
-int FUN_004a7fb8(int, unsigned int, int, int, int, int);
-int VectorFloatToUnsigned(double, int);
-
-/* stack frame of param_4: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-    unsigned int sp80; /* 0x80: local_80 */
-    unsigned int sp84; /* 0x84: local_84 */
-    unsigned int sp88; /* 0x88: local_88 */
-    unsigned int sp8C; /* 0x8c: local_8c */
-    unsigned int sp90; /* 0x90: local_90 */
-} param_4_stack;
-
-extern unsigned char LAB_004a612c; /* 0x4a612c */
-
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_0018349c. */
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: drawTextAtRelativePosition. */
-/* Supplied declaration required: FUN_004a7814. */
-/* Supplied declaration required: FUN_004a7a50. */
-/* Supplied declaration required: FUN_004a7cb0. */
-/* Supplied declaration required: FUN_004a7dc8. */
-/* Supplied declaration required: FUN_004a7fb8. */
-
-
-void FUN_004a5ea0(int param_1,int param_2,int param_3,unsigned int param_4,float in_s0)
-
-{
-/* irregular: irregular input(s): in_s0; 11 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  short temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned short temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned char temp_v10 [60];
-  int iStack_34;
-  int temp_v11;
-  int iStack_2c;
-  unsigned int uStack_28;
-  
-  temp_v6 = *(int *)(param_1 + 0x850);
-  if (param_3 != 0) {
-    temp_v6 = temp_v6 + 1;
-  }
-  temp_v9 = VectorFloatToUnsigned(in_s0 * 255.0f,3);
-  iStack_34 = param_1;
-  temp_v11 = param_2;
-  iStack_2c = param_3;
-  uStack_28 = param_4;
-  if (param_3 == 0) {
-    temp_v4 = FUN_0018349c(param_1 + 200,param_2 + 0x40e);
-  }
-  else {
-    temp_v4 = FUN_0018349c(param_1 + 200,param_2 + 0x42f);
-  }
-  temp_v0 = *(short *)(temp_v4 + 8);
-  temp_v1 = *(short *)(temp_v4 + 10);
-  if (param_3 != 0) {
-    FUN_004a7dc8(param_1,temp_v11,temp_v6,(int)*(char *)(param_1 + 0x829));
-  }
-  FUN_004a7a50(param_1,1,param_4,temp_v11,param_3,temp_v6);
-  FUN_004a7cb0(reinterpret_cast<void *>(param_1),param_4,temp_v11,param_3,temp_v6,in_s0);
-  FUN_004a7fb8(param_1,param_4,temp_v11,param_3,(int)*(char *)(param_1 + 0x829),temp_v6);
-  temp_v5 = param_4 & 0xffff;
-  temp_v7 = 0;
-  dataTable00FindById();
-  if (temp_v5 != 0) {
-    temp_v7 = *(unsigned short *)(temp_v5 + 2) & 0x7fff;
-  }
-  FUN_004a7814(param_1,temp_v7,temp_v11,param_3,temp_v6,0xffffffff);
-  temp_v5 = param_4 & 0xffff;
-  temp_v8 = 0;
-  dataTable00FindById();
-  if (temp_v5 != 0) {
-    temp_v8 = *(unsigned int *)(temp_v5 + 4);
-  }
-  if (param_3 != 0) {
-    temp_v4 = FUN_0018349c(param_1 + 200,0x49d);
-    temp_v5 = 0xfbeb39ff;
-  }
-  else {
-    temp_v4 = FUN_0018349c(param_1 + 200,0x48f);
-    temp_v5 = 0xffc90fff;
-  }
-  temp_v2 = *(short *)(temp_v4 + 8);
-  temp_v3 = *(short *)(temp_v4 + 10);
-  textFormatBuffer(temp_v10,&LAB_004a612c,temp_v8);
-  drawTextAtRelativePosition(param_1 + 200,0,(int)temp_v2 + (int)temp_v0,(int)temp_v3 + (int)temp_v1,0,7,
-               temp_v5 | (temp_v9 & 0xff),temp_v6,temp_v10);
-  param_4 = param_4 & 0xffff;
-  temp_v8 = 0;
-  dataTable00FindById();
-  if (param_4 != 0) {
-    temp_v8 = *(unsigned int *)(param_4 + 8);
-  }
-  if (param_3 != 0) {
-    temp_v4 = FUN_0018349c(param_1 + 200,0x4a1);
-  }
-  else {
-    temp_v4 = FUN_0018349c(param_1 + 200,0x493);
-  }
-  temp_v2 = *(short *)(temp_v4 + 8);
-  temp_v3 = *(short *)(temp_v4 + 10);
-  textFormatBuffer(temp_v10,&LAB_004a612c,temp_v8);
-  drawTextAtRelativePosition(param_1 + 200,0,(int)temp_v2 + (int)temp_v0,(int)temp_v3 + (int)temp_v1,0,7,0x4abae1ff,temp_v6,
-               temp_v10);
-  return;
+/* The fields of a demon table record this panel shows. */
+struct DemonCaptionRecord {
+    u8 unk00[2];
+    u16 flags;
+    u32 caption;
+    u32 detail;
+};
 }
 
-} /* extern "C" */
+static __inline TextLayoutContextA *panelLayout(ProfileEntryDrawView *panel)
+{
+    return reinterpret_cast<TextLayoutContextA *>(panel->layout);
+}
+
+extern "C" {
+const PanelTextLayoutEntryPrefixA *FUN_0018349c(TextLayoutContextA *context, s32 entryId);
+DemonCaptionRecord *dataTable00FindById(u16 id);
+void FUN_004a7dc8(ProfileEntryDrawView *panel, s32 entry, s32 fade, s32 style);
+void FUN_004a7a50(ProfileEntryDrawView *panel, s32 enabled, u32 textId, s32 entry, s32 alternate, s32 fade);
+void FUN_004a7cb0(ProfileEntryDrawView *panel, u32 textId, s32 entry, s32 alternate, s32 fade, f32 scale);
+void FUN_004a7fb8(ProfileEntryDrawView *panel, u32 textId, s32 entry, s32 alternate, s32 style, s32 fade, f32 scale);
+void FUN_004a7814(ProfileEntryDrawView *panel, u32 first, s32 entry, s32 alternate, s32 fade, u32 second);
+s32 textFormatBuffer(char *destination, const char *format, ...);
+void drawTextAtRelativePosition(TextLayoutContextA *context, u32 style, s32 x, s32 y, s32 first, s32 second,
+                                u32 color, s32 fade, const char *text);
+
+/* Draws one entry of the profile panel: its icon, tags and the two number captions. */
+void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 textId, f32 scale)
+{
+    s32 fade = panel->fade;
+    if (alternate != 0) {
+        fade++;
+    }
+    u32 opacity = (u32)(scale * 255.0f) & 0xff;
+    const PanelTextLayoutEntryPrefixA *base;
+    if (alternate == 0) {
+        base = FUN_0018349c(panelLayout(panel), entry + 0x40E);
+    } else {
+        base = FUN_0018349c(panelLayout(panel), entry + 0x42F);
+    }
+    s32 baseX = base->x;
+    s32 baseY = base->y;
+    if (alternate != 0) {
+        FUN_004a7dc8(panel, entry, fade, panel->style);
+    }
+    FUN_004a7a50(panel, 1, textId, entry, alternate, fade);
+    FUN_004a7cb0(panel, textId, entry, alternate, fade, scale);
+    FUN_004a7fb8(panel, textId, entry, alternate, panel->style, fade, scale);
+
+    u16 id = static_cast<u16>(textId);
+    DemonCaptionRecord *record = dataTable00FindById(id);
+    u32 flags = 0;
+    if (record != NULL) {
+        flags = record->flags & 0x7FFF;
+    }
+    FUN_004a7814(panel, flags, entry, alternate, fade, 0xFFFFFFFF);
+
+    record = dataTable00FindById(id);
+    u32 caption = 0;
+    if (record != NULL) {
+        caption = record->caption;
+    }
+    char text[60];
+    const PanelTextLayoutEntryPrefixA *captionEntry;
+    u32 color;
+    if (alternate != 0) {
+        captionEntry = FUN_0018349c(panelLayout(panel), 0x49D);
+        color = 0xFBEB39FF;
+    } else {
+        captionEntry = FUN_0018349c(panelLayout(panel), 0x48F);
+        color = 0xFFC90FFF;
+    }
+    s32 captionX = captionEntry->x + baseX;
+    s32 captionY = captionEntry->y + baseY;
+    textFormatBuffer(text, "%4d", caption);
+    drawTextAtRelativePosition(panelLayout(panel), 0, captionX, captionY, 0, 7, color | opacity, fade, text);
+
+    record = dataTable00FindById(id);
+    u32 detail = 0;
+    if (record != NULL) {
+        detail = record->detail;
+    }
+    const PanelTextLayoutEntryPrefixA *detailEntry;
+    if (alternate != 0) {
+        detailEntry = FUN_0018349c(panelLayout(panel), 0x4A1);
+    } else {
+        detailEntry = FUN_0018349c(panelLayout(panel), 0x493);
+    }
+    s32 detailX = detailEntry->x + baseX;
+    s32 detailY = detailEntry->y + baseY;
+    textFormatBuffer(text, "%4d", detail);
+    drawTextAtRelativePosition(panelLayout(panel), 0, detailX, detailY, 0, 7, 0x4ABAE1FF | opacity, fade, text);
+}
+
+}

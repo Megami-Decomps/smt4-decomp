@@ -15,7 +15,7 @@ int FUN_0027da30(unsigned int *, unsigned int);
 int btlMainFindEntryByListedId(...);
 int passiveSkillLookupRecord(void);
 int btlGetMainState(void);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int dataTable08Sub1GetRecord(void);
 int memClear(...);
 int SBORROW4(...);
@@ -68,7 +68,7 @@ extern unsigned short FUN_00245cc0(unsigned int);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: memClear. */
 
@@ -125,7 +125,7 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
   temp_v31 = param_4;
   temp_v27 = (unsigned int *)btlGetMainState();
   temp_v30 = 0;
-  FUN_002ae164();
+  dataTable40FindById();
   if (param_1 != 0) {
     switch(*(unsigned char *)(param_1 + 0x23)) {
     case 0:

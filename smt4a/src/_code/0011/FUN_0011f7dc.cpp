@@ -15,7 +15,7 @@ typedef struct {
 extern unsigned char LAB_0011f82c; /* 0x11f82c */
 extern unsigned char LAB_0011f95d; /* 0x11f95d */
 
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 extern int FUN_002eea7c(int);
@@ -39,7 +39,7 @@ void FUN_0011f7dc(int param_1)
   }
   else {
     temp_v4 = 0x8001000a;
-    temp_v1 = FUN_002e7908(temp_v3,(unsigned int *)&temp_v4);
+    temp_v1 = _ZN12OnlineResultC1ERKj(temp_v3,(unsigned int *)&temp_v4);
     FUN_00310784(param_1,temp_v1);
   }
   return;

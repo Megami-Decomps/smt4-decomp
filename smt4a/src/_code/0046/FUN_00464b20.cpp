@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001cc084(unsigned int, int [9], unsigned int, unsigned int, unsigned int, unsigned int, int);
-int FUN_002ffa9c(int, unsigned int, int, int);
+int __aeabi_uldivmod(int, unsigned int, int, int);
 int __aeabi_uidivmod(unsigned int);
 int nw_snd_internal_driver_Voice_Pause(int, int);
 
@@ -16,7 +16,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_001cc084. */
-/* Supplied declaration required: FUN_002ffa9c. */
+/* Supplied declaration required: __aeabi_uldivmod. */
 extern int FUN_0050947c(int);
 extern int FUN_005094c4(unsigned int);
 /* Supplied declaration required: __aeabi_uidivmod. */
@@ -70,14 +70,14 @@ void FUN_00464b20(int param_1,unsigned int param_2,unsigned int param_3,unsigned
         else if (*(char *)(param_1 + 0x7c) == '\x01') {
           temp_v8 = *(unsigned int *)(param_1 + 0x80);
           temp_v3 = *(unsigned int *)(param_1 + 0x8c);
-          FUN_002ffa9c((int)((unsigned long long)temp_v3 * (unsigned long long)temp_v8),
+          __aeabi_uldivmod((int)((unsigned long long)temp_v3 * (unsigned long long)temp_v8),
                        ((int)temp_v8 >> 0x1f) * temp_v3 +
                        (int)((unsigned long long)temp_v3 * (unsigned long long)temp_v8 >> 0x20),1000,0);
           if (temp_v4 != 0) {
             param_4 = 0xffffffff;
           }
           else {
-            param_4 = FUN_002ffa9c((int)((unsigned long long)temp_v3 * (unsigned long long)temp_v8),
+            param_4 = __aeabi_uldivmod((int)((unsigned long long)temp_v3 * (unsigned long long)temp_v8),
                                    ((int)temp_v8 >> 0x1f) * temp_v3 +
                                    (int)((unsigned long long)temp_v3 * (unsigned long long)temp_v8 >> 0x20),1000,0);
           }

@@ -20,10 +20,23 @@ typedef struct BtlUiColumnRecord {
 /* Shin Megami Tensei IV layout. */
 typedef struct BtlUiObjA { /* 0x0000 */ u8 unk[0x21F8]; } BtlUiObjA;
 typedef struct BtlUiObjB { /* 0x000 */ u8 unk[0x260]; } BtlUiObjB;
+/* One unit's UI record, copied in whole from the caller. */
+typedef struct BtlUiUnitRecord {
+    /* 0x000 */ u8 unk000[0x46];
+    /* 0x046 */ u16 unitId;
+    /* 0x048 */ u8 unk048[0x5BC];
+} BtlUiUnitRecord;
 typedef struct BtlUiObjC {
     /* 0x0000 */ u8 unk[0x307c];
     /* 0x307c */ u8 unk307C;
-    /* 0x307d */ u8 unk307D[0x26db];
+    /* 0x307d */ u8 unk307D[1];
+    union {
+        /* 0x307e */ u8 unk307E[0x26da];
+        struct {
+            u8 prefix[0x882];
+            /* 0x3900 */ BtlUiUnitRecord records[4];
+        } unitRecords;
+    };
     /* 0x5758 */ s32 columnCount;
     /* 0x575c */ u8 unk575C[0x1c];
     /* 0x5778 */ BtlUiColumnRecord columns[1];
@@ -180,6 +193,13 @@ typedef struct BtlUiObjDA {
     };
 } BtlUiObjDA;
 
+/* One unit's UI record in Apocalypse, copied in whole from the caller. */
+typedef struct BtlUiUnitRecordA {
+    /* 0x000 */ u8 unk000[0x62];
+    /* 0x062 */ u16 unitId;
+    /* 0x064 */ u8 unk064[0xC8];
+} BtlUiUnitRecordA;
+
 typedef struct BtlUiA {
     /* 0x0000 */ u32 owner;
     /* 0x0004 */ u8 unk0004[4];
@@ -187,7 +207,14 @@ typedef struct BtlUiA {
     /* 0x24BC */ BtlUiObjBA objB;
     /* 0x28C4 */ BtlUiObjCA objC;
     /* 0x6174 */ u8 unk6174;
-    /* 0x6175 */ u8 unk6175[0x1313];
+    /* 0x6175 */ u8 unk6175[1];
+    union {
+        /* 0x6176 */ u8 unk6176[0x1312];
+        struct {
+            u8 prefix[0x97E];
+            /* 0x6AF4 */ BtlUiUnitRecordA records[4];
+        } unitRecords;
+    };
     /* 0x7488 */ u32 unk7488;
     /* 0x748C */ u8 unk748C[0x14];
     /* 0x74A0 */ s32 state;
@@ -233,6 +260,10 @@ typedef struct BtlUiGlobalsA {
     /* 0x10 */ BtlUiA *ui;
 } BtlUiGlobalsA;
 
+typedef char BtlUiUnitRecordLayoutCheck[sizeof(BtlUiUnitRecord) == 0x604 &&
+    offsetof(BtlUiObjC, unitRecords.records) == 0x3900 ? 1 : -1];
+typedef char BtlUiUnitRecordALayoutCheck[sizeof(BtlUiUnitRecordA) == 0x12C &&
+    offsetof(BtlUiA, unitRecords.records) == 0x6AF4 && sizeof(BtlUiA) == 0x12FD0 ? 1 : -1];
 typedef char BtlUiColumnLayoutCheck[sizeof(BtlUiColumnRecord) == 0x2c &&
     sizeof(BtlUiObjC) == 0x59a0 &&
     offsetof(BtlUiObjC, unk307C) == 0x307c &&

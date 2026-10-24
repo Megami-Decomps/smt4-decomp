@@ -9,8 +9,8 @@ int onlineJobWaitComplete(int, unsigned int);
 int sharedRefRelease(int);
 int sharedRefAddRef(int);
 int FUN_002e78d0(unsigned int, int, int);
-int FUN_002e7908(...);
-int vectorCopyHeader(int *, unsigned int *);
+int _ZN12OnlineResultC1ERKj(...);
+int _ZN18OnlineResultRecordaSERKS_(int *, unsigned int *);
 
 /* stack frame of param_7: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -28,10 +28,10 @@ extern unsigned int onlineContextGetInstance(void);
 /* Supplied declaration required: onlineJobWaitComplete. */
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: sharedRefAddRef. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: FUN_002e78d0. */
-/* Supplied declaration required: FUN_002e7908. */
-/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 
 
 unsigned int *
@@ -59,7 +59,7 @@ FUN_0010c9bc(unsigned int *param_1,int param_2,unsigned int param_3,unsigned int
   iStack_20 = param_2;
   temp_v8 = param_3;
   uStack_18 = param_4;
-  temp_v0 = operatorNew(0x2c0);
+  temp_v0 = _Znwj(0x2c0);
   if (temp_v0 != 0) {
     temp_v3 = param_5;
     temp_v4 = param_6;
@@ -76,15 +76,15 @@ FUN_0010c9bc(unsigned int *param_1,int param_2,unsigned int param_3,unsigned int
   if (param_5 != 0) {
     sharedRefRelease(temp_v0);
     temp_v2 = 0x10001;
-    temp_v7 = (unsigned int *)FUN_002e7908(temp_v7,&temp_v2);
+    temp_v7 = (unsigned int *)_ZN12OnlineResultC1ERKj(temp_v7,&temp_v2);
   }
   else {
     temp_v5 = 0x80050001;
-    FUN_002e7908(&temp_v2,&temp_v5);
+    _ZN12OnlineResultC1ERKj(&temp_v2,&temp_v5);
     onlineJobWaitComplete(temp_v0,param_7);
     if (*(char *)(temp_v0 + 0x22) != '\x05') {
       temp_v6 = 0x80050008;
-      puVar3 = (unsigned int *)FUN_002e7908(&uStack_34,&temp_v6);
+      puVar3 = (unsigned int *)_ZN12OnlineResultC1ERKj(&uStack_34,&temp_v6);
     }
     else {
       temp_v6 = *(unsigned int *)(temp_v0 + 0x228);
@@ -92,7 +92,7 @@ FUN_0010c9bc(unsigned int *param_1,int param_2,unsigned int param_3,unsigned int
       uStack_30 = *(unsigned int *)(temp_v0 + 0x230);
       puVar3 = (unsigned int *)&temp_v6;
     }
-    vectorCopyHeader(&temp_v2,puVar3);
+    _ZN18OnlineResultRecordaSERKS_(&temp_v2,puVar3);
     sharedRefRelease(temp_v0);
     *temp_v7 = temp_v2;
     temp_v7[1] = temp_v3;

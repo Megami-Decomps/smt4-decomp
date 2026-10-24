@@ -51,7 +51,13 @@ struct AsdCopyDimensions {
 };
 struct AsdCmdRecord {
     /* 0x00 */ u8 kind;
-    u8 unk01[3];
+    union {
+        u8 unk01[3];
+        struct {
+            /* 0x01 */ u8 runCallback;  /* run the buffer's callback when this list finishes */
+            /* 0x02 */ u8 resetState;   /* clear the context's submit flags */
+        } done;
+    };
     /* 0x04 */ const void *commands;
     /* 0x08 */ u32 byteCount;
     union {
@@ -98,12 +104,21 @@ typedef struct AsdCmdBuffer {
     /* 0x1C */ u32 unk1c;
     /* 0x20 */ s32 listCount;
     /* 0x24 */ u32 unk24;
-    /* 0x28 */ u32 unk28;
+    union {
+        /* 0x28 */ u32 unk28;
+        /* 0x28 */ s32 listIndex;     /* list being executed */
+    };
     /* 0x2C */ u32 unk2c;
     /* 0x30 */ u32 unk30;
     /* 0x34 */ u32 unk34;
-    /* 0x38 */ u32 unk38;
-    /* 0x3C */ u8 unk3c;
+    union {
+        /* 0x38 */ u32 unk38;
+        /* 0x38 */ void (*onListAdvance)(s32 listIndex);  /* run after a list finishes */
+    };
+    union {
+        /* 0x3C */ u8 unk3c;
+        /* 0x3C */ u8 callbackAtEnd;  /* also run the callback when the last list finishes */
+    };
     /* 0x3D */ u8 flag3d;
 } AsdCmdBuffer;
 
@@ -115,6 +130,8 @@ typedef struct AsdGfxContext {
             u8 unk00[0x11];
             /* 0x11 */ u8 pending;
             /* 0x12 */ u8 enabled;
+            u8 unk13[5];
+            /* 0x18 */ u8 unk18;
         } submission;
         struct {
             u8 prefix[0x1C];

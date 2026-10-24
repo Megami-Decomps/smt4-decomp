@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern unsigned int *FUN_002e7908(unsigned int *, unsigned int *);
+extern unsigned int *_ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea41e. */
@@ -59,7 +59,7 @@ void FUN_0012a8a4(int param_1)
       if (*(int *)(param_1 + 0x18c) != *(int *)(param_1 + 0x13c)) {
         temp_v4[0] = 0x80690001;
         puVar2 = temp_v4;
-        puVar2 = (unsigned int *)FUN_002e7908(puVar3,puVar2);
+        puVar2 = (unsigned int *)_ZN12OnlineResultC1ERKj(puVar3,puVar2);
         onlineJobCompleteWithResult(param_1,puVar2);
         return;
       }
@@ -72,7 +72,7 @@ void FUN_0012a8a4(int param_1)
     temp_v4[0] = 0x80010004;
     puVar2 = temp_v4;
   }
-  puVar2 = (unsigned int *)FUN_002e7908(puVar3,puVar2);
+  puVar2 = (unsigned int *)_ZN12OnlineResultC1ERKj(puVar3,puVar2);
   onlineJobCompleteWithResult(param_1,puVar2);
   return;
 }

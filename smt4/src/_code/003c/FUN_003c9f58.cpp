@@ -7,7 +7,7 @@ extern "C" {
 int battleSetActionKind(int *);
 int FUN_00229b10(int *, unsigned int *);
 int FUN_00229c5c(unsigned int, int, int);
-int FUN_002ae164(...);
+int dataTable40FindById(...);
 int dataTable08Sub1GetRecord(void);
 int FUN_003adc20(unsigned int);
 int btlUiGetAcceptedSelection(unsigned int, unsigned int, unsigned int);
@@ -23,7 +23,7 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 extern int FUN_0023dcb8(void);
 extern int battleUiIsFadeAndFieldReady(unsigned int);
 extern int nodeListCountActiveById(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 extern int FUN_002cf124(void);
 /* Supplied declaration required: FUN_003adc20. */
@@ -104,7 +104,7 @@ joined_r0x003ca0e4:
     break;
   case 2:
   case 3:
-    FUN_002ae164((int)*(short *)(param_2[10] + 0x14e));
+    dataTable40FindById((int)*(short *)(param_2[10] + 0x14e));
     temp_v1 = FUN_002cf124();
     if (temp_v1 == 0) {
       temp_v2 = 7;
@@ -138,7 +138,7 @@ joined_r0x003ca0e4:
     temp_v1 = (int)*(short *)(param_2[10] + 0x14e);
     dataTable08Sub1GetRecord();
     if (*(short *)(temp_v1 + 0x62) != 0) {
-      FUN_002ae164();
+      dataTable40FindById();
       temp_v1 = FUN_002cf124();
       if (temp_v1 != 0) {
         temp_v2 = 5;

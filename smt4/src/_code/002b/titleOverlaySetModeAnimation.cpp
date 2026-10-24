@@ -3,7 +3,7 @@
 
 extern "C" {
 void uiSpriteSetImageKeyframe(TitleDrawElement *element, s32 keyframe, s32 flags);
-void FUN_002bee58(TitleDrawElement *element, s32 state);
+void spriteStartAnimationByIndex(TitleDrawElement *element, s32 state);
 void workSetStateByte(TitleDrawElement *element, u8 state);
 
 // Select each title mode's sprite animation and hide the element that mode replaces.
@@ -41,8 +41,8 @@ void titleOverlaySetModeAnimation(TitleOverlay *overlay, u32 mode)
         uiSpriteSetImageKeyframe(&overlay->elements[6], 2, 0);
         return;
     case 11:
-        FUN_002bee58(&overlay->elements[0], 7);
-        FUN_002bee58(&overlay->elements[3], 7);
+        spriteStartAnimationByIndex(&overlay->elements[0], 7);
+        spriteStartAnimationByIndex(&overlay->elements[3], 7);
         hidden = &overlay->elements[5];
         break;
     case 12:

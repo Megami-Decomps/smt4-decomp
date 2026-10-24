@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_002a2dc8(unsigned int);
+int asdLightActivate(unsigned int);
 int sceneTraverserVisit(unsigned int, unsigned int);
 
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
@@ -16,7 +16,7 @@ extern int sceneGroup2Root; /* 0x464b94 */
 extern int sceneGroup5Root; /* 0x464b98 */
 extern unsigned int g_asdLightCount; /* 0x4dad80 */
 
-/* Supplied declaration required: FUN_002a2dc8. */
+/* Supplied declaration required: asdLightActivate. */
 /* Supplied declaration required: sceneTraverserVisit. */
 
 
@@ -33,7 +33,7 @@ void sceneNodeCollectionRegisterGroup(int param_1,int param_2)
     if (param_2 == 2) {
       temp_v0 = 0;
       temp_v1 = sceneGroup2Root;
-      FUN_002a2dc8(temp_v0);
+      asdLightActivate(temp_v0);
     }
     else {
       temp_v1 = sceneGroup4Root;
@@ -43,7 +43,7 @@ void sceneNodeCollectionRegisterGroup(int param_1,int param_2)
         }
         temp_v0 = 1;
         temp_v1 = sceneGroup5Root;
-        FUN_002a2dc8(temp_v0);
+        asdLightActivate(temp_v0);
       }
     }
   }

@@ -15,7 +15,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: sharedRefRelease. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: FUN_002eb108. */
 /* Supplied declaration required: FUN_002ef34c. */
 
@@ -30,7 +30,7 @@ void FUN_00108548(int param_1)
   
   temp_v1 = 0;
   do {
-    temp_v0 = operatorNew(0x150);
+    temp_v0 = _Znwj(0x150);
     if (temp_v0 != 0) {
       FUN_002eb108(temp_v0,param_1,3,0,0,0);
     }

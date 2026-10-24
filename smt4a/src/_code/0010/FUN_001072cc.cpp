@@ -23,7 +23,7 @@ extern unsigned char DAT_00594978; /* 0x594978 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int FUN_002ea704(void);
-extern unsigned long long FUN_002eab1c(unsigned char *, int *);
+extern unsigned long long _ZmiRK15OnlineTimestampS1_(unsigned char *, int *);
 /* Supplied declaration required: FUN_002eb164. */
 /* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002ef01c(int);
@@ -59,13 +59,13 @@ void FUN_001072cc(int *param_1)
       return;
     }
     temp_v0 = (**(romwright_code **)(*param_1 + 0x48))(param_1);
-    temp_v4 = FUN_002eab1c(temp_v7,param_1 + 0x38);
+    temp_v4 = _ZmiRK15OnlineTimestampS1_(temp_v7,param_1 + 0x38);
     temp_v1 = (int)((unsigned long long)temp_v4 >> 0x20);
     temp_v3 = temp_v0 < (unsigned int)temp_v4;
     if ((int)(-(unsigned int)temp_v3 - temp_v1) < 0 == (SBORROW4(0,temp_v1) != SBORROW4(-temp_v1,(unsigned int)temp_v3))) {
       temp_v1 = FUN_002ef01c(param_1[1]);
       temp_v0 = (**(romwright_code **)(*param_1 + 0x44))(param_1);
-      temp_v4 = FUN_002eab1c(temp_v7,param_1 + 0x36);
+      temp_v4 = _ZmiRK15OnlineTimestampS1_(temp_v7,param_1 + 0x36);
       temp_v2 = (int)((unsigned long long)temp_v4 >> 0x20);
       temp_v3 = temp_v0 < (unsigned int)temp_v4;
       if (((int)(-(unsigned int)temp_v3 - temp_v2) < 0 != (SBORROW4(0,temp_v2) != SBORROW4(-temp_v2,(unsigned int)temp_v3)))

@@ -1,35 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003453b0` (_code @ 0x3453b0, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: loop shape: retail runs the 7-slot search as a plain (not unrolled) loop re-deriving each slot address from the save-data pointer; the build unrolls it and hoists the slot base. */
+#include "common.h"
+
+/* A save-data slot: an ID and a packed word whose bits 10+ hold a rank. */
+struct RankedSlot {
+    /* 0x0 */ u16 id;
+    /* 0x2 */ u16 packed;
+};
+
+/* The save-data part (+0x88) of the game data block; only the ranked slots are named. */
+struct SaveRanks {
+    /* 0x00000 */ u8 unk00000[0x28360];
+    /* 0x28360 */ RankedSlot slots[7];
+};
+
+struct GameBlockView {
+    /* 0x00 */ u8 unk00[0x88];
+    /* 0x88 */ SaveRanks save;
+};
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+struct GameDataBlocks {
+    u32 unk00;
+    GameBlockView *block;
+};
 
-extern int gameFlagIsSet(unsigned int);
+extern GameDataBlocks g_gameDataBlocks; /* 0x57f698 */
+s32 gameFlagIsSet(u32 flag);
 
-
-unsigned int FUN_003453b0(unsigned int param_1)
-
+/* With flags 0x45b and 0x4f7 set, returns whether the slot with ID `id` has a rank of 1-3. */
+u32 FUN_003453b0(u32 id)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = gameFlagIsSet(0x45b);
-  if ((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0x4f7), temp_v0 != 0)) {
-    temp_v0 = 0;
-    do {
-      temp_v1 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + temp_v0 * 4;
-      if (*(unsigned short *)(temp_v1 + 0x283e8) == param_1) {
-        if ((*(unsigned short *)(temp_v1 + 0x283ea) >> 10) - 1 >= 3) {
-          return 0;
+    if (gameFlagIsSet(0x45b) != 0 && gameFlagIsSet(0x4f7) != 0) {
+        SaveRanks *save = &g_gameDataBlocks.block->save;
+
+        for (s32 i = 0; i < 7; i++) {
+            if (save->slots[i].id == id) {
+                return (u32)((save->slots[i].packed >> 10) - 1) < 3 ? 1 : 0;
+            }
         }
-        return 1;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 7);
-  }
-  return 0;
+    }
+    return 0;
 }
 
 } /* extern "C" */

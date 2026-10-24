@@ -19,7 +19,7 @@ void paramsInit(SortMenuParameters *, const void *, u32, const void *, u32, cons
                 const void *, u32, const void *, u32);
 void FUN_002bd954(SortMenuSprite *, u32, u32, SortMenuParameters *, u32, f32);
 void uiSpriteSetImageKeyframe(SortMenuSprite *, u32, u32);
-void FUN_002bee58(SortMenuSprite *, u32);
+void spriteStartAnimationByIndex(SortMenuSprite *, u32);
 void timerStart(SortMenuSprite *, u32, u32);
 
 void sortMenuCreate(u32 owner, u8 option)
@@ -42,11 +42,11 @@ void sortMenuCreate(u32 owner, u8 option)
             uiSpriteSetImageKeyframe(&current->sprites[i], 0, 0);
         }
         FUN_002bd954(&current->sprites[10], 30, 0, &current->parameters, 1, 1.0f);
-        FUN_002bee58(&current->sprites[10], 0);
+        spriteStartAnimationByIndex(&current->sprites[10], 0);
         FUN_002bd954(&current->sprites[11], 30, 0, &current->parameters, 1, 1.0f);
         timerStart(&current->sprites[11], 0, 0);
         FUN_002bd954(&current->sprites[12], 30, 0, &current->parameters, 1, 1.0f);
-        FUN_002bee58(&current->sprites[12], 1);
+        spriteStartAnimationByIndex(&current->sprites[12], 1);
         memset(current->ids, -1, sizeof(current->ids));
         current->frame = 0;
         current->initialized = 1;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: effect-resource cleanup needs recovered C++ destructor interfaces for both resource fields; manager constructor FUN_0034a1ec installs vtable address point 0x4208dc. */
+/* NON_MATCHING: effect-resource cleanup needs recovered C++ destructor interfaces for both resource fields; manager constructor _ZN9Obj4208d4C1Ev installs vtable address point 0x4208dc. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -7,7 +7,7 @@ int asdMdlManagerMarkDestroy(void);
 int FUN_0022708c(void);
 int FUN_002276f8(int);
 int FUN_00241d58(int);
-int FUN_0024dc64(void);
+int keyedRecordsFreeAll(void);
 int textureCacheReleaseAll(void);
 int FUN_0027de24(int);
 int asdMdlManagerDestroy(int);
@@ -22,7 +22,7 @@ extern int g_btlMain; /* 0x4342c8 */
 /* Supplied declaration required: FUN_0022708c. */
 /* Supplied declaration required: FUN_002276f8. */
 /* Supplied declaration required: FUN_00241d58. */
-/* Supplied declaration required: FUN_0024dc64. */
+/* Supplied declaration required: keyedRecordsFreeAll. */
 /* Supplied declaration required: textureCacheReleaseAll. */
 /* Supplied declaration required: FUN_0027de24. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
@@ -61,7 +61,7 @@ void FUN_003d9be4(int param_1)
   }
   FUN_002276f8(param_1);
   *(unsigned int *)(param_1 + 0x2f98) = 0;
-  FUN_0024dc64();
+  keyedRecordsFreeAll();
   textureCacheReleaseAll();
   if (g_btlMain != 0) {
     *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) & 0xf7ffffff;

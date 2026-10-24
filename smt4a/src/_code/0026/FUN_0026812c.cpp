@@ -1,46 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026812c` (_code @ 0x26812c, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the build folds the (0 < id && id < 64) range test into one unsigned compare; retail tests both bounds separately (cmp #0; ble / cmp #64; bge) and keeps the ID in r4 afterwards. */
+#include "common.h"
 
 extern "C" {
 
-int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
+/* A 4-byte record of data table 0x47: an ID and a value. */
+typedef struct IdValueRecord {
+    /* 0x0 */ u16 id;
+    /* 0x2 */ s16 value;
+} IdValueRecord;
 
-/* stack frame of param_1: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+s32 FUN_002321f8(const void *left, const void *right);
+u32 dataTableGetCount(u32 table);
+void *dataTableGetEntries(void);
+u32 dataTableGet(u32 id, u32 type);
 
-extern unsigned char LAB_002321f8; /* 0x2321f8 */
-
-/* Supplied declaration required: libc_bsearch. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-
-
-unsigned int FUN_0026812c(int param_1)
-
+/* Returns whether `id` (1-63) has a record in table 0x47 with a non-negative value. */
+u32 FUN_0026812c(s32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned short *puVar3;
-  unsigned short temp_v2 [2];
-  
-  if ((0 < param_1) && (param_1 < 0x40)) {
-    temp_v0 = dataTableGet(0x47,0);
-    temp_v1 = dataTableGetEntries();
-    temp_v0 = dataTableGetCount(temp_v0);
-    puVar3 = temp_v2;
-    temp_v2[0] = (unsigned short)param_1;
-    libc_bsearch(puVar3,temp_v1,temp_v0,4,&LAB_002321f8);
-    if ((puVar3 != (unsigned short *)0x0) && (-1 < (short)puVar3[1])) {
-      return 1;
+    if (id > 0 && id < 0x40) {
+        u32 table = dataTableGet(0x47, 0);
+        void *entries = dataTableGetEntries();
+        u32 count = dataTableGetCount(table);
+        IdValueRecord key;
+        key.id = id;
+        IdValueRecord *record = (IdValueRecord *)libc_bsearch(&key, entries, count, sizeof(IdValueRecord), FUN_002321f8);
+        if (record != NULL && record->value >= 0) {
+            return 1;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

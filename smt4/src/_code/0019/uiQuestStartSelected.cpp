@@ -30,7 +30,7 @@ void FUN_0028ffb8(u32 id);
 void FUN_00290404(void);
 void gameGetOptionProgressStatus(void);
 void buttonHelpSetPreset(s32 preset);
-void FUN_002bee58(u8 *panel, s32 value);
+void spriteStartAnimationByIndex(u8 *panel, s32 value);
 s32 scrScriptProcessStartEntry(u32 script, s32 entry);
 s32 FUN_0029efa8(u8 *list);
 s32 FUN_0029efc0(u8 *list);
@@ -54,7 +54,7 @@ void uiQuestStartSelected(void)
     gameGetOptionProgressStatus();
     gameOptionsEnableAndReset();
     FUN_0028ffb8(id);
-    FUN_002bee58(quest->panel, 2);
+    spriteStartAnimationByIndex(quest->panel, 2);
     uiBindRecordRewardText(id, 0, 1);
     if (scrScriptProcessStartEntry(quest->script, 3) != 0) {
         buttonHelpSetPreset(0x9e);

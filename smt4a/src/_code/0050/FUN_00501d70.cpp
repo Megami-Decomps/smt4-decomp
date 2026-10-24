@@ -1,38 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00501d70` (_code @ 0x501d70, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation: retail keeps both stack arguments in r4/r8 (and saves r3-r9); the build keeps the last one in s16 (vldr/vstr) and saves fewer registers. */
+#include "nn/Result.h"
 
 extern "C" {
 
-int FUN_0042d3d8(int, int);
-int FUN_00430894(int, unsigned int, unsigned int, unsigned int, unsigned int);
+s32 FUN_0042d3d8(s32 first, s32 second);
+s32 FUN_00430894(u32 handle, u32 first, u32 second, u32 third, s32 fourth);
 
-/* stack frame of param_6: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_6_stack;
+extern u8 g_asdCecModuleFlags[]; /* 0x5b448b - 1 */
 
-extern unsigned char g_asdCecModuleFlags; /* 0x5b448b */
-
-/* Supplied declaration required: FUN_0042d3d8. */
-/* Supplied declaration required: FUN_00430894. */
-
-
-void FUN_00501d70(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6)
-
+/* Runs the cec call; when it fails with the not-ready result, starts the module (sets its ready flag) and runs it once more. */
+s32 FUN_00501d70(u32 unused, u32 handle, u32 first, u32 second, u32 third, s32 fourth)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = param_2;
-  FUN_00430894(param_2,param_3,param_4,param_5,param_6);
-  if ((temp_v0 < 0) && (temp_v0 == -0x375ef410)) {
-    FUN_0042d3d8(1,0);
-    (*(unsigned char *)((unsigned char *)&g_asdCecModuleFlags + 0x1)) = 1;
-    FUN_00430894(param_2,param_3,param_4,param_5,param_6);
-  }
-  return;
+    s32 result = FUN_00430894(handle, first, second, third, fourth);
+
+    if (!nnResultIsSuccess(result) && result == (s32)0xc8a10bf0) {
+        FUN_0042d3d8(1, 0);
+        g_asdCecModuleFlags[1] = 1;
+        result = FUN_00430894(handle, first, second, third, fourth);
+    }
+    return result;
 }
 
 } /* extern "C" */

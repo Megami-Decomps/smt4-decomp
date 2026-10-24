@@ -20,7 +20,7 @@ int devilGetRecord(void);
 int timerStart(...);
 int FUN_002bd954(...);
 int textFormatBuffer(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int uiSpriteInitializeState(...);
 int paramsInit(...);
 int FUN_0033dcec(unsigned int, int, int);
@@ -72,7 +72,7 @@ extern unsigned int FUN_00294090(unsigned short, unsigned int);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: paramsInit. */
 extern unsigned int asdLoadFileSyncDefault(unsigned char *);
@@ -192,7 +192,7 @@ void FUN_001eea88(void)
   do {
     temp_v5 = temp_v0 + temp_v4 * 0x8c;
     FUN_002bd954(temp_v5 + 0x2c8,0x24,0,temp_v0 + 0x2a8,1);
-    FUN_002bee58(temp_v5 + 0x2c8,0);
+    spriteStartAnimationByIndex(temp_v5 + 0x2c8,0);
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 10);
   uiSpriteInitializeState(temp_v0 + 0x840,0x24,0xffffffff,0x18,temp_v0 + 0x2a8,0x65);
@@ -201,7 +201,7 @@ void FUN_001eea88(void)
   FUN_00295eb0(temp_v0 + 0x840,0x24,0x21c);
   *(unsigned char *)(temp_v0 + 0x87c) = 1;
   FUN_002bd954(temp_v0 + 0x8cc,0x24,0,temp_v0 + 0x2a8,1);
-  FUN_002bee58(temp_v0 + 0x8cc,2);
+  spriteStartAnimationByIndex(temp_v0 + 0x8cc,2);
   buttonHelpSetPreset(0x61);
   temp_v0 = g_screenStateWork;
   *(unsigned int *)(g_screenStateWork + 4) = 1;

@@ -1,56 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f14b2` (_code @ 0x2f14b2, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: identical except the scheduling of `ldrh r3, [r4, #60]` (the message id argument): retail loads it right after the flag, built after the vtable load */
+#include "classes/Obj55b28c.h"
+
+class OnlineChannel {
+public:
+    virtual void unk00();
+    virtual void unk04();
+    virtual void send(void *session, u32 target, u8 flag);
+    virtual void unk0c();
+    virtual void unk10();
+    virtual void sendWithId(void *session, u32 target, u32 id, u8 flag);
+};
+
+struct OnlineSession {
+    /* 0x00 */ u8 unk00[0x70];
+    /* 0x70 */ OnlineChannel *channel;
+};
+
+struct OnlineMessageExtra {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 flag;
+};
+
+struct OnlineMessage {
+    /* 0x00 */ u8 unk00[0x3c];
+    /* 0x3c */ u16 id;
+    /* 0x3e */ u8 unk3e[0x80 - 0x3e];
+    /* 0x80 */ OnlineMessageExtra extra;
+};
 
 extern "C" {
+void *onlineGetActiveLock(void);
+OnlineChannel *FUN_001117d4(void);
 
-int _ZN9Obj55b28cC1EPv(...);
-int _ZN9Obj55b28cD1Ev(unsigned int *);
-
-typedef int romwright_code(...);
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
-
-extern int *FUN_001117d4(void);
-/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
-/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-extern unsigned int onlineGetActiveLock(void);
-
-
-void FUN_002f14b2(int param_1,unsigned int param_2,int param_3)
-
+/* Sends `message` for `target`: tagged messages (id bit 11) go through the shared channel, the rest through the session's own. */
+void FUN_002f14b2(OnlineSession *session, u32 target, OnlineMessage *message)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int *piVar2;
-  unsigned int *puVar3;
-  unsigned int temp_v1;
-  unsigned char temp_v2 [16];
-  
-  puVar3 = &temp_v1;
-  if ((int)((unsigned int)*(unsigned short *)(param_3 + 0x3c) * 0x100000) < 0) {
-    temp_v0 = onlineGetActiveLock();
-    _ZN9Obj55b28cC1EPv(temp_v2,temp_v0);
-    piVar2 = (int *)FUN_001117d4();
-    if (piVar2 != (int *)0x0) {
-      temp_v1 = (unsigned int)*(unsigned char *)(param_3 + 0x84);
-      (**(romwright_code **)(*piVar2 + 0x14))(piVar2,param_1,param_2,*(unsigned short *)(param_3 + 0x3c));
+    if (message->id & 0x800) {
+        Obj55b28c lock(onlineGetActiveLock());
+        OnlineChannel *channel = FUN_001117d4();
+        if (channel != NULL) {
+            channel->sendWithId(session, target, message->id, message->extra.flag);
+        }
+    } else {
+        if (session->channel == NULL) {
+            return;
+        }
+        Obj55b28c lock(onlineGetActiveLock());
+        session->channel->send(session, target, message->extra.flag);
     }
-    puVar3 = (unsigned int *)temp_v2;
-  }
-  else {
-    if (*(int *)(param_1 + 0x70) == 0) {
-      return;
-    }
-    temp_v0 = onlineGetActiveLock();
-    _ZN9Obj55b28cC1EPv(&temp_v1,temp_v0);
-    (**(romwright_code **)(**(int **)(param_1 + 0x70) + 8))
-              (*(int **)(param_1 + 0x70),param_1,param_2,*(unsigned char *)(param_3 + 0x84));
-  }
-  _ZN9Obj55b28cD1Ev(puVar3);
-  return;
 }
 
 } /* extern "C" */

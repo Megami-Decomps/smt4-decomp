@@ -1,57 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f2fac` (_code @ 0x3f2fac, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same calls, loop and null-checked placement construction as retail; register allocation differs (retail keeps the manager in r4 and ends with `mov r0, r4`, as the inlined constructor of a global would) and unk14/unk18 are stored with strd instead of stm. */
+#include "common.h"
+#include <new>
+
+#define VOICE_COUNT 24
+
+class SndVoiceImpl {
+public:
+    SndVoiceImpl(u32 index);
+    u8 unk00[0x7c];
+};
+
+class SndVoice {
+public:
+    SndVoice(u32 index);
+    u8 unk00[0x68];
+    SndVoiceImpl *impl; // 0x68
+};
+
+/* nn::snd::CTR::VoiceManager: the voices, their implementations and a table of voice pointers. */
+struct SndVoiceManager {
+    u8 unk00[0x10];
+    u32 unk10;                         // 0x10
+    u32 unk14;                         // 0x14
+    s32 unk18;                         // 0x18
+    SndVoice voices[VOICE_COUNT];      // 0x1c
+    SndVoiceImpl impls[VOICE_COUNT];   // 0xa3c
+    SndVoice *voiceTable[VOICE_COUNT]; // 0x15dc
+};
 
 extern "C" {
+extern SndVoiceManager g_nnSndVoiceManager;
+extern u8 entry;
+void FUN_0035ff14(void *object);
+s32 sceneNotifyNoop(void *object, void (*destructor)(void *), void *moduleHandle);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned int DAT_004e8578; /* 0x4e8578 */
-extern unsigned int DAT_004e857c; /* 0x4e857c */
-extern unsigned int DAT_004e8580; /* 0x4e8580 */
-
-extern unsigned int nn_snd_CTR_VoiceImpl_VoiceImpl_sub_object(int, int);
-extern int nn_snd_CTR_Voice_Voice_sub_object(int, int);
-
-
-unsigned long long FUN_003f2fac(void)
-
+// Constructs the global voice manager (every voice, its implementation, and the voice table)
+// and registers its destructor.
+void FUN_003f2fac(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int *piVar6;
-  
-  DAT_004e8578 = 0;
-  DAT_004e857c = 0;
-  DAT_004e8580 = 0xffffffff;
-  temp_v3 = 0x4e8584;
-  temp_v4 = 0x4e8fa4;
-  temp_v2 = 0;
-  do {
-    temp_v0 = 0;
-    if (temp_v3 != 0) {
-      temp_v0 = nn_snd_CTR_Voice_Voice_sub_object(temp_v3,temp_v2);
+    SndVoiceManager *manager = &g_nnSndVoiceManager;
+    SndVoice *voice = manager->voices;
+    SndVoiceImpl *impl = manager->impls;
+    manager->unk10 = 0;
+    manager->unk14 = 0;
+    manager->unk18 = -1;
+    for (s32 i = 0; i < VOICE_COUNT; i++) {
+        manager->voiceTable[i] = new (voice) SndVoice(i);
+        voice++;
+        manager->voiceTable[i]->impl = new (impl) SndVoiceImpl(i);
+        impl++;
     }
-    piVar6 = (int *)(temp_v2 * 4 + 0x4e9b44);
-    *piVar6 = temp_v0;
-    temp_v3 = temp_v3 + 0x6c;
-    if (temp_v4 == 0) {
-      temp_v1 = 0;
-    }
-    else {
-      temp_v1 = nn_snd_CTR_VoiceImpl_VoiceImpl_sub_object(temp_v4,temp_v2);
-    }
-    temp_v2 = temp_v2 + 1;
-    temp_v4 = temp_v4 + 0x7c;
-    *(unsigned int *)(*piVar6 + 0x68) = temp_v1;
-  } while (temp_v2 < 0x18);
-  return 0x35ff14004e8568;
+    sceneNotifyNoop(manager, FUN_0035ff14, &entry);
 }
-
-} /* extern "C" */
+}

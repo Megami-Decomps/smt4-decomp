@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int nw_snd_internal_driver_SoundThread_GetInstance(void);
+extern int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -17,7 +17,7 @@ int nw_snd_internal_driver_VoiceManager_GetVoiceCount(int param_1)
   int *piVar3;
   int temp_v1;
   
-  temp_v0 = nw_snd_internal_driver_SoundThread_GetInstance();
+  temp_v0 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
   nn_os_CriticalSection_Enter(temp_v0 + 0x1c4);
   piVar3 = *(int **)(param_1 + 8);
   temp_v0 = 0;
@@ -28,7 +28,7 @@ int nw_snd_internal_driver_VoiceManager_GetVoiceCount(int param_1)
       temp_v0 = temp_v0 + *piVar1;
     } while (piVar3 != (int *)(param_1 + 8));
   }
-  temp_v1 = nw_snd_internal_driver_SoundThread_GetInstance();
+  temp_v1 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
   nn_os_CriticalSection_Leave(temp_v1 + 0x1c4);
   return temp_v0;
 }

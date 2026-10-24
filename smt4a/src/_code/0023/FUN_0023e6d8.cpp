@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002efc44(...);
-int FUN_0034a290(...);
+int dataTable41FindById(...);
 int playerGetWords(...);
 int FUN_004c6c8c(...);
 int VectorUnsignedToFloat(...);
@@ -40,7 +40,7 @@ extern int gameGetPlayerData(void);
 extern unsigned int padGetMappedValue(unsigned short);
 extern int gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_002efc44. */
-/* Supplied declaration required: FUN_0034a290. */
+/* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: playerGetWords. */
 /* Supplied declaration required: FUN_004c6c8c. */
 extern int mathApplyReductionMultiplier(int, fn_0023e6d8_arg0 *, unsigned int);
@@ -108,7 +108,7 @@ int FUN_0023e6d8(fn_0023e6d8_arg0 *param_1,int param_2,int param_3)
     temp_v2 = 0;
     do {
       if (*(short *)((int)&temp_v7 + temp_v2 * 2) != 0) {
-        FUN_0034a290();
+        dataTable41FindById();
       }
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 9);

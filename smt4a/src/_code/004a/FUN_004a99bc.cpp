@@ -1,50 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a99bc` (_code @ 0x4a99bc, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail sign-extends the s16 id with sxth at the menuStateBeginSelect call; armcc here treats the short parameter as already extended. */
+#include "common.h"
 
 extern "C" {
 
-int textFormatBuffer(unsigned char [64], unsigned char *, unsigned int);
-int FUN_00227af0(unsigned char [64]);
-int menuStateBeginSelect(int);
-int menuStateStartSelect(int);
+/* The battle UI's selection request block at 0xC040 of the UI work area. */
+struct BtlUiWork {
+    /* 0x0000 */ u8 unk0000[0xC040];
+    /* 0xC040 */ u8 active;
+    /* 0xC041 */ u8 unkC041[3];
+    /* 0xC044 */ u32 owner;
+    /* 0xC048 */ u32 unkC048;
+    /* 0xC04C */ u32 kind;
+    /* 0xC050 */ s16 id;
+};
 
-/* stack frame of param_3: 1 slot(s), 1 byte(s) */
-typedef struct {
-    unsigned char sp48; /* 0x48: local_48 */
-} param_3_stack;
+struct BtlUi {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ BtlUiWork *work;
+};
 
-extern unsigned char LAB_004a9a34; /* 0x4a9a34 */
-extern int g_btlUiBlock; /* 0x57a9c8 */
+extern BtlUi g_btlUi;
+s32 textFormatBuffer(char *output, const char *format, ...);
+u32 FUN_00186f54(u16 id);
+void menuStateBeginSelect(s32 id);
+void FUN_00227af0(const char *text);
+void menuStateStartSelect(s32 mode);
 
-/* Supplied declaration required: textFormatBuffer. */
-extern unsigned int FUN_00186f54(unsigned short);
-/* Supplied declaration required: FUN_00227af0. */
-/* Supplied declaration required: menuStateBeginSelect. */
-/* Supplied declaration required: menuStateStartSelect. */
-
-
-void FUN_004a99bc(unsigned int param_1,short param_2,unsigned int param_3)
-
+/* Opens the battle selection menu for `id`, titled with its name. */
+void FUN_004a99bc(u32 unused, s16 id, u32 owner)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2 [64];
-  
-  temp_v0 = g_btlUiBlock;
-  *(unsigned char *)(g_btlUiBlock + 0xc040) = 1;
-  *(unsigned int *)(temp_v0 + 0xc04c) = 0x12;
-  *(short *)(temp_v0 + 0xc050) = param_2;
-  *(unsigned int *)(temp_v0 + 0xc048) = 0;
-  *(unsigned int *)(temp_v0 + 0xc044) = param_3;
-  temp_v2[0] = 0;
-  temp_v1 = FUN_00186f54(*(unsigned short *)(temp_v0 + 0xc050));
-  textFormatBuffer(temp_v2,&LAB_004a9a34,temp_v1);
-  menuStateBeginSelect((int)param_2);
-  FUN_00227af0(temp_v2);
-  menuStateStartSelect(0);
-  return;
+    BtlUiWork *work = g_btlUi.work;
+    char title[64];
+
+    work->active = 1;
+    work->kind = 18;
+    work->id = id;
+    work->unkC048 = 0;
+    work->owner = owner;
+    title[0] = 0;
+    textFormatBuffer(title, "%s", FUN_00186f54(work->id));
+    menuStateBeginSelect(id);
+    FUN_00227af0(title);
+    menuStateStartSelect(0);
 }
 
 } /* extern "C" */

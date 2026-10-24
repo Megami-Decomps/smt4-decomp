@@ -1,54 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036ebc0` (_code @ 0x36ebc0, 0xcc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the destination offset field and the source field as pointers (add r1, r0, #28; ldr r3, [r4, #28]!) while this build folds the self-relative arithmetic into offsets and uses different registers. */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+struct BlockAllocator;
+struct BlockAllocatorVtbl {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ void *(*allocate)(BlockAllocator *allocator, u32 size, u32 alignment);
+};
+struct BlockAllocator {
+    /* 0x00 */ BlockAllocatorVtbl *vtbl;
+};
 
-void FUN_0036ebc0(int *param_1,int *param_2)
+/* A serialized node: a type tag and a self-relative offset to the node it refers to. */
+struct LinkNode {
+    /* 0x00 */ u32 type;
+    /* 0x04 */ u32 unk04[6];
+    /* 0x1C */ s32 offset;
+};
 
+/* Points a self-relative offset field at `target`. */
+static __inline void linkSet(s32 *field, const void *target)
 {
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  puVar1 = (unsigned int *)(**(romwright_code **)(*param_1 + 8))(param_1,0x20,4);
-  if (puVar1 != (unsigned int *)0x0) {
-    temp_v0 = 0;
-    puVar1[1] = 0;
-    puVar1[2] = 0;
-    puVar1[3] = 0;
-    puVar1[4] = 0;
-    puVar1[5] = 0;
-    puVar1[6] = 0;
-    puVar1[7] = 0;
-    *puVar1 = 0x20000004;
-    temp_v1 = *param_2;
-    if (temp_v1 != 0x20000002) {
-      if (temp_v1 == 0x20000004) {
-        temp_v1 = param_2[7];
-        if (temp_v1 != 0) {
-          temp_v0 = temp_v1 + (int)(param_2 + 7);
-        }
-        if (temp_v0 != 0) {
-          puVar1[7] = temp_v0 - (int)(puVar1 + 7);
-        }
+    *field = (u8 *)target - (u8 *)field;
+}
+
+/* Builds a link node that refers to the target of `source`: sources of the plain kinds are the target themselves, a link node
+ * contributes the node its own offset points at. */
+void FUN_0036ebc0(BlockAllocator *allocator, LinkNode *source)
+{
+    LinkNode *node = (LinkNode *)allocator->vtbl->allocate(allocator, sizeof(LinkNode), 4);
+    if (node == NULL) {
         return;
-      }
-      if ((temp_v1 != 0x20000009) && (temp_v1 != 0x20000011)) {
-        return;
-      }
-      if (param_2 == (int *)0x0) {
-        return;
-      }
     }
-    else if (param_2 == (int *)0x0) {
-      return;
+    LinkNode *target = NULL;
+    node->unk04[0] = 0;
+    node->unk04[1] = 0;
+    node->unk04[2] = 0;
+    node->unk04[3] = 0;
+    node->unk04[4] = 0;
+    node->unk04[5] = 0;
+    node->offset = 0;
+    node->type = 0x20000004;
+    if (source->type == 0x20000002) {
+        if (source == NULL) {
+            return;
+        }
+    } else if (source->type == 0x20000004) {
+        if (source->offset != 0) {
+            target = (LinkNode *)((u8 *)&source->offset + source->offset);
+        }
+        if (target != NULL) {
+            linkSet(&node->offset, target);
+        }
+        return;
+    } else {
+        if (source->type != 0x20000009 && source->type != 0x20000011) {
+            return;
+        }
+        if (source == NULL) {
+            return;
+        }
     }
-    puVar1[7] = (int)param_2 - (int)(puVar1 + 7);
-  }
-  return;
+    linkSet(&node->offset, source);
 }
 
 } /* extern "C" */

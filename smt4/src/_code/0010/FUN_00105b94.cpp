@@ -14,7 +14,7 @@ struct TitleSceneStorage {
 
 extern "C" {
 void* asdOperatorNew(u32);
-void FUN_002c2218(void*);
+void _ZN10FloatStateC1Ev(void*);
 void FUN_0010f144(TitleScene*);
 extern TitleScene* g_titleScene;
 
@@ -23,9 +23,9 @@ void FUN_00105b94()
 {
     TitleSceneStorage* scene = (TitleSceneStorage*)asdOperatorNew(sizeof(TitleSceneStorage));
     if (scene != NULL) {
-        FUN_002c2218(scene->firstState);
-        FUN_002c2218(scene->secondState);
-        FUN_002c2218(scene->thirdState);
+        _ZN10FloatStateC1Ev(scene->firstState);
+        _ZN10FloatStateC1Ev(scene->secondState);
+        _ZN10FloatStateC1Ev(scene->thirdState);
         scene->unitValues[0] = 1.0f;
         scene->unitValues[1] = 1.0f;
         scene->unitValues[2] = 1.0f;

@@ -1,47 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00387454` (_code @ 0x387454, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the flag address (ldr r7) before `sub sp, #260`; built emits it after the sub */
+#include "common.h"
 
 extern "C" {
 
-int textFormatBuffer(unsigned char [260], unsigned char *, int);
-int FUN_001642e4(unsigned char [260], int, int, int);
-int asdMemFree(unsigned char *);
-int asdEffectTextureCreate(void);
+s32 textFormatBuffer(char *output, const char *format, ...);
+u32 FUN_001642e4(const char *path, u32 a, u32 b, u32 c);
+void *asdEffectTextureCreate(const void *image);
+void asdMemFree(void *block);
 
-extern unsigned char LAB_003874d4; /* 0x3874d4 */
-extern signed char DAT_005b3270; /* 0x5b3270 */
+extern u8 g_effectTexturesLoaded; /* 0x5b3270 */
+extern void *g_effectTextures[22]; /* 0x635770 */
 
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_001642e4. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdEffectTextureCreate. */
-
-
+/* Loads the 22 numbered effect textures once. */
 void FUN_00387454(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char *puVar1;
-  unsigned char *puVar2;
-  int temp_v0;
-  unsigned char temp_v1 [260];
-  
-  if (DAT_005b3270 == '\0') {
-    temp_v0 = 0;
-    do {
-      textFormatBuffer(temp_v1,&LAB_003874d4,temp_v0 + 1);
-      puVar1 = temp_v1;
-      FUN_001642e4(temp_v1,0,1,0x80);
-      puVar2 = puVar1;
-      asdEffectTextureCreate();
-      *(unsigned char **)(temp_v0 * 4 + 0x635770) = puVar2;
-      asdMemFree(puVar1);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x16);
-    DAT_005b3270 = '\x01';
-  }
-  return;
+    char path[260];
+    s32 i;
+
+    if (g_effectTexturesLoaded == 0) {
+        i = 0;
+        do {
+            textFormatBuffer(path, "effect/tex/be_%04d.stex", i + 1);
+            void *file = (void *)FUN_001642e4(path, 0, 1, 0x80);
+            g_effectTextures[i] = asdEffectTextureCreate(file);
+            asdMemFree(file);
+            i++;
+        } while (i < 22);
+        g_effectTexturesLoaded = 1;
+    }
 }
 
 } /* extern "C" */

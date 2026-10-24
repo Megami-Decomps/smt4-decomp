@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001346ee(int *, unsigned int, int, int *);
+int _ZNSt6vectorIj12AsdAllocatorIjEE13_C_insert_auxEPjjRKj(int *, unsigned int, int, int *);
 int sysMemClear(int, int);
 int FUN_002e7168(...);
 int FUN_002f3340(...);
-int vectorCount4_002f33ac(int *);
+int _ZNKSt6vectorIj12AsdAllocatorIjEE4sizeEv(int *);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -28,17 +28,17 @@ extern int constructObj0055908c(int);
 extern int FUN_00117804(unsigned int *);
 extern int FUN_0012d57c(unsigned int *);
 extern unsigned int FUN_00132c28(unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_001346ee. */
+/* Supplied declaration required: _ZNSt6vectorIj12AsdAllocatorIjEE13_C_insert_auxEPjjRKj. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e7168. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int onlineSockAddrConstruct(int);
 extern int _ZN9Obj55aff4C1Ev(int);
 extern unsigned int FUN_002ea2e8(void);
 extern unsigned int *arrayElementAddress_002f32d4(int *, int);
 /* Supplied declaration required: FUN_002f3340. */
 extern int FUN_002f3378(int);
-/* Supplied declaration required: vectorCount4_002f33ac. */
+/* Supplied declaration required: _ZNKSt6vectorIj12AsdAllocatorIjEE4sizeEv. */
 
 
 unsigned long long
@@ -103,14 +103,14 @@ FUN_0010a3a0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   piVar10 = (int *)(temp_v0 - 0x2c);
   temp_v5 = 0;
   temp_v6 = piVar10;
-  temp_v2 = vectorCount4_002f33ac(piVar10);
+  temp_v2 = _ZNKSt6vectorIj12AsdAllocatorIjEE4sizeEv(piVar10);
   if (temp_v2 < 4) {
     temp_v1 = *(unsigned int *)(temp_v0 - 0x28);
-    temp_v3 = vectorCount4_002f33ac(piVar10);
-    FUN_001346ee(piVar10,temp_v1,4 - temp_v3,&temp_v5);
+    temp_v3 = _ZNKSt6vectorIj12AsdAllocatorIjEE4sizeEv(piVar10);
+    _ZNSt6vectorIj12AsdAllocatorIjEE13_C_insert_auxEPjjRKj(piVar10,temp_v1,4 - temp_v3,&temp_v5);
   }
   else {
-    temp_v2 = vectorCount4_002f33ac(piVar10);
+    temp_v2 = _ZNKSt6vectorIj12AsdAllocatorIjEE4sizeEv(piVar10);
     if (temp_v2 >= 5) {
       puVar7 = *(unsigned int **)(temp_v0 - 0x28);
       puVar8 = (unsigned int *)*piVar10 + 4;
@@ -130,7 +130,7 @@ FUN_0010a3a0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   }
   temp_v3 = 0;
   do {
-    temp_v4 = operatorNew(0x214);
+    temp_v4 = _Znwj(0x214);
     if (temp_v4 != 0) {
       temp_v1 = FUN_002ea2e8();
     }
@@ -141,7 +141,7 @@ FUN_0010a3a0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
     temp_v3 = temp_v3 + 1;
     *puVar2 = temp_v1;
   } while (temp_v3 < 4);
-  temp_v3 = operatorNew(0x20);
+  temp_v3 = _Znwj(0x20);
   if (temp_v3 != 0) {
     temp_v4 = temp_v3;
     sysMemClear(temp_v3,0x20);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7908(...);
+int _ZN12OnlineResultC1ERKj(...);
 int FUN_002e9b30(int, int, unsigned int, int);
 int FUN_002e9ff4(int *);
 int FUN_002f3dde(int, unsigned int *);
@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 /* Supplied declaration required: FUN_002e9b30. */
 /* Supplied declaration required: FUN_002e9ff4. */
 /* Supplied declaration required: FUN_002f3dde. */
@@ -28,7 +28,7 @@ typedef struct {
 extern int FUN_002f4dea(unsigned int);
 /* Supplied declaration required: FUN_002f4e14. */
 extern int FUN_002f4e70(int);
-extern int refIsNonNegative(unsigned int *);
+extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
 
 
 void FUN_0010b6a4(int *param_1,int param_2,unsigned int param_3)
@@ -60,7 +60,7 @@ void FUN_0010b6a4(int *param_1,int param_2,unsigned int param_3)
     return;
   }
   if (*(char *)(param_2 + 4) == '\0') {
-    temp_v1 = refIsNonNegative((unsigned int *)&temp_v4);
+    temp_v1 = _ZNK18OnlineResultRecord7isValidEv((unsigned int *)&temp_v4);
     if (temp_v1 == 0) {
       temp_v5 = temp_v4;
       uStack_24 = uStack_30;
@@ -72,13 +72,13 @@ void FUN_0010b6a4(int *param_1,int param_2,unsigned int param_3)
     (**(romwright_code **)(*param_1 + 0x50))(param_1,param_2,temp_v0);
     if (*(char *)(param_2 + 4) == '\0') {
       temp_v3 = 0x10001;
-      temp_v2 = FUN_002e7908(&temp_v5,&temp_v3);
+      temp_v2 = _ZN12OnlineResultC1ERKj(&temp_v5,&temp_v3);
       FUN_002e9b30(temp_v0,2,temp_v2,1);
       return;
     }
   }
   temp_v6[0] = 0x8001000f;
-  puVar3 = (unsigned int *)FUN_002e7908(&temp_v5,temp_v6);
+  puVar3 = (unsigned int *)_ZN12OnlineResultC1ERKj(&temp_v5,temp_v6);
   FUN_002f3dde(temp_v0,puVar3);
   return;
 }

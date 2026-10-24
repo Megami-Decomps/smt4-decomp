@@ -1,187 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00233fcc` (_code @ 0x233fcc, 0x118 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "classes/WindowStatus.h"
+#include <new>
 
-extern "C" {
+extern "C" void *asdOperatorNew(u32);
 
-int _ZN18WindowStatusResultC1Ej(unsigned int [4], int);
-int asdOperatorNew(void);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned int *);
-/* Supplied declaration required: asdOperatorNew. */
-
-
-unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
-
+/* Construct the requested concrete status operation. */
+extern "C" Obj42217c *FUN_00233fcc(u32 unused, u32 kind)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  unsigned int temp_v0;
-  unsigned int temp_v1 [4];
-  
-  switch(param_2) {
-  case 0:
-    puVar1 = (unsigned int *)0x20;
-    asdOperatorNew();
-    if (puVar1 != (unsigned int *)0x0) {
-      puVar2 = temp_v1;
-      *puVar1 = 0x422184;
-      puVar1[1] = 0;
-      puVar1[2] = 0xe7e3ffff;
-      puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev(puVar1 + 3);
-      puVar1[2] = 0xffffffff;
-      puVar1[-3] = 0x422280;
-      puVar1[3] = 0;
-      *(unsigned char *)(puVar1 + 4) = 0;
-      puVar1[-2] = 0;
-      _ZN18WindowStatusResultC1Ej(temp_v1,0);
-      temp_v0 = puVar2[1];
-      *puVar1 = *puVar2;
-      puVar1[1] = temp_v0;
-      return puVar1 + -3;
+    /* Two concrete classes keep an opaque trailing word beyond their shared prefixes. */
+    switch (kind) {
+    case 0:
+        return new (asdOperatorNew(sizeof(Obj422278))) Obj422278;
+    case 1:
+        return new (asdOperatorNew(0x1C)) Obj422248;
+    case 2:
+        return new (asdOperatorNew(sizeof(Obj4221fc))) Obj4221fc;
+    case 3:
+        return new (asdOperatorNew(sizeof(Obj4221bc))) Obj4221bc;
+    case 4:
+        return new (asdOperatorNew(sizeof(Obj422230))) Obj422230;
+    case 5:
+        return new (asdOperatorNew(sizeof(Obj4221e4))) Obj4221e4;
+    case 6:
+        return new (asdOperatorNew(0x1C)) Obj422290;
+    case 7:
+        return new (asdOperatorNew(sizeof(Obj422260))) Obj422260;
+    default:
+        return NULL;
     }
-    break;
-  case 1:
-    puVar1 = (unsigned int *)0x1c;
-    asdOperatorNew();
-    if (puVar1 != (unsigned int *)0x0) {
-      puVar2 = temp_v1;
-      *puVar1 = 0x422184;
-      puVar1[1] = 0;
-      puVar1[2] = 0xe7e3ffff;
-      puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev(puVar1 + 3);
-      puVar1[2] = 0xffffffff;
-      puVar1[-3] = 0x422250;
-      puVar1[-2] = 0;
-      _ZN18WindowStatusResultC1Ej(temp_v1,0);
-      temp_v0 = puVar2[1];
-      *puVar1 = *puVar2;
-      puVar1[1] = temp_v0;
-      return puVar1 + -3;
-    }
-    break;
-  case 2:
-    puVar1 = (unsigned int *)0x18;
-    asdOperatorNew();
-    if (puVar1 != (unsigned int *)0x0) {
-      puVar2 = temp_v1;
-      *puVar1 = 0x422184;
-      puVar1[1] = 0;
-      puVar1[2] = 0xe7e3ffff;
-      puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev(puVar1 + 3);
-      puVar1[2] = 0xffffffff;
-      puVar1[-3] = 0x422204;
-      puVar1[-2] = 0;
-      _ZN18WindowStatusResultC1Ej(temp_v1,0);
-      temp_v0 = puVar2[1];
-      *puVar1 = *puVar2;
-      puVar1[1] = temp_v0;
-      return puVar1 + -3;
-    }
-    break;
-  case 3:
-    puVar1 = (unsigned int *)0x18;
-    asdOperatorNew();
-    if (puVar1 != (unsigned int *)0x0) {
-      puVar2 = temp_v1;
-      *puVar1 = 0x422184;
-      puVar1[1] = 0;
-      puVar1[2] = 0xe7e3ffff;
-      puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev(puVar1 + 3);
-      puVar1[2] = 0xffffffff;
-      puVar1[-3] = 0x4221c4;
-      puVar1[-2] = 0;
-      _ZN18WindowStatusResultC1Ej(temp_v1,0);
-      temp_v0 = puVar2[1];
-      *puVar1 = *puVar2;
-      puVar1[1] = temp_v0;
-      return puVar1 + -3;
-    }
-    break;
-  case 4:
-    puVar1 = (unsigned int *)0x18;
-    asdOperatorNew();
-    if (puVar1 != (unsigned int *)0x0) {
-      puVar2 = temp_v1;
-      *puVar1 = 0x422184;
-      puVar1[1] = 0;
-      puVar1[2] = 0xe7e3ffff;
-      puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev(puVar1 + 3);
-      puVar1[2] = 0xffffffff;
-      puVar1[-3] = 0x422238;
-      puVar1[-2] = 0;
-      _ZN18WindowStatusResultC1Ej(temp_v1,0);
-      temp_v0 = puVar2[1];
-      *puVar1 = *puVar2;
-      puVar1[1] = temp_v0;
-      return puVar1 + -3;
-    }
-    break;
-  case 5:
-    puVar1 = (unsigned int *)0x18;
-    asdOperatorNew();
-    if (puVar1 != (unsigned int *)0x0) {
-      puVar2 = temp_v1;
-      *puVar1 = 0x422184;
-      puVar1[1] = 0;
-      puVar1[2] = 0xe7e3ffff;
-      puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev(puVar1 + 3);
-      puVar1[2] = 0xffffffff;
-      puVar1[-3] = 0x4221ec;
-      puVar1[-2] = 0;
-      _ZN18WindowStatusResultC1Ej(temp_v1,0);
-      temp_v0 = puVar2[1];
-      *puVar1 = *puVar2;
-      puVar1[1] = temp_v0;
-      return puVar1 + -3;
-    }
-    break;
-  case 6:
-    puVar1 = (unsigned int *)0x1c;
-    asdOperatorNew();
-    if (puVar1 != (unsigned int *)0x0) {
-      puVar2 = temp_v1;
-      *puVar1 = 0x422184;
-      puVar1[1] = 0;
-      puVar1[2] = 0xe7e3ffff;
-      puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev(puVar1 + 3);
-      puVar1[2] = 0xffffffff;
-      puVar1[-3] = 0x422298;
-      puVar1[-2] = 0;
-      _ZN18WindowStatusResultC1Ej(temp_v1,0);
-      temp_v0 = puVar2[1];
-      *puVar1 = *puVar2;
-      puVar1[1] = temp_v0;
-      return puVar1 + -3;
-    }
-    break;
-  case 7:
-    puVar1 = (unsigned int *)0x18;
-    asdOperatorNew();
-    if (puVar1 != (unsigned int *)0x0) {
-      puVar2 = temp_v1;
-      *puVar1 = 0x422184;
-      puVar1[1] = 0;
-      puVar1[2] = 0xe7e3ffff;
-      puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev(puVar1 + 3);
-      puVar1[2] = 0xffffffff;
-      puVar1[-3] = 0x422268;
-      puVar1[-2] = 0;
-      _ZN18WindowStatusResultC1Ej(temp_v1,0);
-      temp_v0 = puVar2[1];
-      *puVar1 = *puVar2;
-      puVar1[1] = temp_v0;
-      return puVar1 + -3;
-    }
-  }
-  return (unsigned int *)0x0;
 }
-
-} /* extern "C" */

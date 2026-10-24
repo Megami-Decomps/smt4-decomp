@@ -1,31 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0043872c` (_code @ 0x43872c, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: id and table base swap registers (r9/r8); retail also saves an unused sl. */
+#include "common.h"
+
+struct TableEntry {
+    u32 key;   // 0x00, zero when the entry is unused
+    u32 limit; // 0x04
+};
 
 extern "C" {
 
-extern int FUN_00102c58(unsigned int);
+extern TableEntry g_stockLimitTable[132]; /* 0x54eb34 */
+s32 FUN_00102c58(u32 id, u32 key, u32 limit);
 
-
-unsigned int FUN_0043872c(unsigned int param_1,unsigned int param_2,unsigned int *param_3)
-
+// Find the first used entry whose limit does not exceed `maximum` and that FUN_00102c58 accepts for `id`;
+// returns its index (0x85 when none) and stores its limit in `limitOut`.
+u32 FUN_0043872c(u32 id, u32 maximum, u32 *limitOut)
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v2 = 0;
-  while( 1 ) {
-    temp_v0 = temp_v2 * 8;
-    if (((*(int *)(temp_v0 + 0x54eb34) != 0) && (*(unsigned int *)(temp_v0 + 0x54eb38) <= param_2)) &&
-       (temp_v1 = FUN_00102c58(param_1), temp_v1 == 0)) break;
-    temp_v2 = temp_v2 + 1;
-    if ((int)temp_v2 >= 0x84) {
-      return 0x85;
+    for (s32 i = 0; i < 132; i++) {
+        TableEntry *entry = &g_stockLimitTable[i];
+        if (entry->key != 0 && entry->limit <= maximum && FUN_00102c58(id, entry->key, entry->limit) == 0) {
+            *limitOut = entry->limit;
+            return i & 0xff;
+        }
     }
-  }
-  *param_3 = *(unsigned int *)(temp_v0 + 0x54eb38);
-  return temp_v2 & 0xff;
+    return 0x85;
 }
 
 } /* extern "C" */

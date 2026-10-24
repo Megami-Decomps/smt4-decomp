@@ -39,7 +39,7 @@ int FUN_002700d0(void);
 int slotPoolReleaseResources(void);
 int mapStatesReleaseMarks(void);
 int entryTableMarkDestroy(void);
-int FUN_002702dc(void);
+int mapCollisionRelease(void);
 int FUN_00277d2c(...);
 int FUN_0027b2b4(...);
 int FUN_0027c3d0(void);
@@ -103,7 +103,7 @@ int gameJumpRequestClear(void);
 int FUN_0028a420(...);
 int helpResourcesRelease(...);
 int dataTable1bOr1cGetRecord(void);
-void FUN_002d582c(unsigned int, float);
+void animOwnerSetScale(unsigned int, float);
 int FUN_003966a4(...);
 int FUN_00396a98(...);
 
@@ -388,7 +388,7 @@ extern int FUN_00264548(void);
 /* Supplied declaration required: slotPoolReleaseResources. */
 /* Supplied declaration required: mapStatesReleaseMarks. */
 /* Supplied declaration required: entryTableMarkDestroy. */
-/* Supplied declaration required: FUN_002702dc. */
+/* Supplied declaration required: mapCollisionRelease. */
 /* Supplied declaration required: navigationRequestFieldMode. */
 /* Supplied declaration required: FUN_0027052c. */
 /* Supplied declaration required: scrLoaderResetWithFlag. */
@@ -527,7 +527,7 @@ extern int FUN_002c2a04(unsigned int);
 extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 extern int FUN_002c8684(unsigned int);
 extern int naviFlag404Active(void);
-/* Supplied declaration required: FUN_002d582c. */
+/* Supplied declaration required: animOwnerSetScale. */
 /* Supplied declaration required: mapProjectPointHeightToCollision. */
 /* Supplied declaration required: FUN_002e1230. */
 extern int FUN_002eb134(void);
@@ -1454,7 +1454,7 @@ joined_r0x001d535c:
         if ((puVar13 != (unsigned int *)0x0) && ((*puVar13 & 2) == 0)) {
           *puVar13 = *puVar13 | 2;
           *(unsigned char *)(*(int *)(puVar13[2] + 0x2c) + 0x1f6) = 0;
-          FUN_002d582c(puVar17[temp_v6 + 0x284], 0.0f);
+          animOwnerSetScale(puVar17[temp_v6 + 0x284], 0.0f);
         }
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 0x20);
@@ -1498,7 +1498,7 @@ joined_r0x001d535c:
       if ((puVar13 != (unsigned int *)0x0) && ((*puVar13 & 2) != 0)) {
         *puVar13 = *puVar13 & 0xfffffffd;
         *(unsigned char *)(*(int *)(puVar13[2] + 0x2c) + 0x1f6) = 1;
-        FUN_002d582c(puVar17[temp_v6 + 0x284], 1.0f);
+        animOwnerSetScale(puVar17[temp_v6 + 0x284], 1.0f);
       }
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 0x20);
@@ -2482,7 +2482,7 @@ LAB_001d6bd0:
   case 0x3d:
     asdModelSlotRelease(0);
     FUN_00281784();
-    FUN_002702dc();
+    mapCollisionRelease();
     temp_v6 = 0;
     do {
       if (puVar7[temp_v6 + 0x284] != 0) {
@@ -2754,7 +2754,7 @@ LAB_001d6bd0:
       puVar7[0x12] = DAT_0049f994;
       puVar17 = g_lmapMainState;
       DAT_0049f920 = temp_v6;
-      FUN_002702dc();
+      mapCollisionRelease();
       FUN_0027b2b4(puVar17[0x10],puVar17[0x12]);
       temp_v14 = 0x40000000;
       puVar17[0x37] = 0x40000000;
@@ -2816,7 +2816,7 @@ LAB_001d6bd0:
   case 0x4a:
     asdModelSlotRelease(0);
     FUN_00281784();
-    FUN_002702dc();
+    mapCollisionRelease();
     temp_v6 = 0;
     do {
       if (puVar7[temp_v6 + 0x284] != 0) {
@@ -3093,7 +3093,7 @@ LAB_001d884c:
     break;
   case 0x57:
     mapStatesReleaseMarks();
-    FUN_002702dc();
+    mapCollisionRelease();
     g_gameState = DAT_0049fd14;
     puVar7[0x10] = DAT_0049fd14;
     DAT_0049f920 = DAT_0049fd18;
@@ -3210,7 +3210,7 @@ joined_r0x001d8c24:
   case 0x60:
     asdModelSlotRelease(0);
     FUN_00281784();
-    FUN_002702dc();
+    mapCollisionRelease();
     temp_v6 = 0;
     do {
       if (puVar7[temp_v6 + 0x284] != 0) {

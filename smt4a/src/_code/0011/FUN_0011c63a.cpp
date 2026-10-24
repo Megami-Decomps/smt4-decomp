@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_002ea41e(...);
-int refIsNonNegative(int *);
+int _ZNK18OnlineResultRecord7isValidEv(int *);
 int FUN_0031126c(int, int, int *);
 
 /* Supplied declaration required: FUN_002ea41e. */
-/* Supplied declaration required: refIsNonNegative. */
+/* Supplied declaration required: _ZNK18OnlineResultRecord7isValidEv. */
 /* Supplied declaration required: FUN_0031126c. */
 
 
@@ -25,7 +25,7 @@ void FUN_0011c63a(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   uStack_14 = param_3;
   uStack_10 = param_4;
   FUN_002ea41e(&uStack_18);
-  refIsNonNegative(&uStack_18);
+  _ZNK18OnlineResultRecord7isValidEv(&uStack_18);
   FUN_002ea41e(&uStack_18,param_1 + 0x70);
   FUN_0031126c(param_1,*(unsigned char *)(param_1 + 0x80),&uStack_18);
   return;

@@ -13,7 +13,7 @@ int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(...);
-int FUN_00192608(void);
+int dataTable08Sub2GetRecord(void);
 int FUN_0047fc38(void);
 int equipmentGetCappedUpgradeBonuses(...);
 int VectorSignedToFloat(...);
@@ -61,7 +61,7 @@ extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_00192608. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern unsigned int FUN_001ba3d4(int);
 extern int unitMatchesAlignment(int);
 /* Supplied declaration required: FUN_0047fc38. */
@@ -110,7 +110,7 @@ void FUN_002ac470(int param_1,int param_2,int param_3,int param_4,int param_5,un
     return;
   }
   temp_v6 = temp_v21;
-  FUN_00192608();
+  dataTable08Sub2GetRecord();
   temp_v17 = 0;
   temp_v18 = 0;
   temp_v19 = 0;
@@ -185,7 +185,7 @@ LAB_002aca54:
         temp_v8 = 0;
       }
       else {
-        FUN_00192608();
+        dataTable08Sub2GetRecord();
         temp_v8 = *(unsigned int *)(temp_v8 + 0x24) & 0x3ff;
       }
       drawSetColorFromRGBA8(param_6);
@@ -261,9 +261,9 @@ LAB_002acc48:
       }
       else {
         temp_v7 = temp_v8;
-        FUN_00192608();
+        dataTable08Sub2GetRecord();
         temp_v6 = (int)*(short *)(temp_v7 + 0x36) + (int)(short)temp_v17;
-        FUN_00192608();
+        dataTable08Sub2GetRecord();
         temp_v3 = (int)*(short *)(temp_v8 + 0x38) + (int)(*(short *)((unsigned char *)&temp_v17 + 2));
       }
       drawSetColorFromRGBA8(param_6);
@@ -307,7 +307,7 @@ LAB_002ac704:
     temp_v8 = 0;
   }
   else {
-    FUN_00192608();
+    dataTable08Sub2GetRecord();
     temp_v8 = *(unsigned int *)(temp_v8 + 0x24) & 0x3ff;
   }
   drawSetColorFromRGBA8(param_6);

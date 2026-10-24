@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_002e32a4(int kind, ...);
+void _ZN4__rw10__rw_throwEiz(int kind, ...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,8 +14,8 @@ typedef struct {
 extern unsigned char LAB_002e4184; /* 0x2e4184 */
 extern unsigned char DAT_0064c004; /* 0x64c004 */
 
-extern unsigned int *FUN_001006c2(int, unsigned int);
-/* Supplied declaration required: FUN_002e32a4. */
+extern unsigned int *_ZN4__rw13__rw_allocateEji(int, unsigned int);
+/* Supplied declaration required: _ZN4__rw10__rw_throwEiz. */
 
 
 unsigned int * FUN_002e410c(unsigned int param_1,unsigned int param_2,unsigned int param_3)
@@ -26,13 +26,13 @@ unsigned int * FUN_002e410c(unsigned int param_1,unsigned int param_2,unsigned i
   unsigned char *puVar2;
   
   if (0xfffffff1 < param_2) {
-    FUN_002e32a4(8,&LAB_002e4184,&LAB_002e4184,param_2,0xfffffff1);
+    _ZN4__rw10__rw_throwEiz(8,&LAB_002e4184,&LAB_002e4184,param_2,0xfffffff1);
   }
   if (param_2 < param_3) {
-    FUN_002e32a4(8,&LAB_002e4184,&LAB_002e4184,param_3,param_2);
+    _ZN4__rw10__rw_throwEiz(8,&LAB_002e4184,&LAB_002e4184,param_3,param_2);
   }
   if (param_2 != 0) {
-    puVar1 = (unsigned int *)FUN_001006c2(param_2 + 0xe,0);
+    puVar1 = (unsigned int *)_ZN4__rw13__rw_allocateEji(param_2 + 0xe,0);
     if (puVar1 != (unsigned int *)0x0) {
       *puVar1 = 0;
       puVar1[1] = 0;

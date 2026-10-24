@@ -8,7 +8,7 @@ extern "C" {
 BtlMainStateA *btlGetMainState();
 Source4C *FUN_003f0e20(BtlMainStateA *, u32);
 void source4CCopyHalves(Source4C *, u16 *);
-const Table04ExtraRecord *FUN_0034a290(u32);
+const Table04ExtraRecord *dataTable41FindById(u32);
 
 u32 FUN_004c60c0(u32 unitId, u32 property)
 {
@@ -20,7 +20,7 @@ u32 FUN_004c60c0(u32 unitId, u32 property)
     for (s32 i = 0; i < 9; ++i) {
         if (!skills[i])
             continue;
-        const Table04ExtraRecord *skill = FUN_0034a290(skills[i]);
+        const Table04ExtraRecord *skill = dataTable41FindById(skills[i]);
         if (!skill)
             continue;
         switch (property) {

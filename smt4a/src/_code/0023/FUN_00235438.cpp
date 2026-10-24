@@ -14,7 +14,7 @@ int rt_aeabi_memclr(unsigned short [300], int);
 int mapIfDispatchCommand(...);
 int mapIfStartTransition(...);
 int FUN_003deea4(...);
-int FUN_003df43c(...);
+int partyEntryTriggerIfLevelAndFlag3(...);
 int FUN_00417b70(...);
 int partyEntryFlagsBit3(...);
 int gameFlagSlotSetEnableBit(...);
@@ -62,7 +62,7 @@ extern int FUN_003dedf0(unsigned int);
 /* Supplied declaration required: FUN_003deea4. */
 extern int FUN_003df004(unsigned int, int, unsigned int *);
 extern int FUN_003df390(unsigned int);
-/* Supplied declaration required: FUN_003df43c. */
+/* Supplied declaration required: partyEntryTriggerIfLevelAndFlag3. */
 /* Supplied declaration required: FUN_00417b70. */
 extern int partyEntryBitsBit5(unsigned int);
 /* Supplied declaration required: partyEntryFlagsBit3. */
@@ -312,7 +312,7 @@ LAB_002358f0:
         if (temp_v17 == 0) {
           temp_v2 = FUN_003dedf0(temp_v10);
           if (temp_v2 != 0) {
-            FUN_003df43c(temp_v10);
+            partyEntryTriggerIfLevelAndFlag3(temp_v10);
           }
           temp_v2 = gameGetPlayerData();
           temp_v1 = *(unsigned short *)(temp_v2 + 0x62);

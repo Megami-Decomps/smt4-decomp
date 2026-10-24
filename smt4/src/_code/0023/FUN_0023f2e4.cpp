@@ -24,15 +24,6 @@ void FUN_0023f2e4(void *owner, s32 index, const char *name, u16 id)
         u32 unk0C;
         ModelSlot slots[1];
     };
-    struct ModelVisibilityView {
-        u8 unk000[0x1F6];
-        u8 visible;
-    };
-    // The visibility link lies immediately beyond the shared model-node prefix.
-    struct ModelNodeVisibilityView {
-        AsdMdlNode node;
-        ModelVisibilityView *visibility;
-    };
     ModelSlotsView *state = static_cast<ModelSlotsView *>(owner);
     ModelSlot *slot = &state->slots[index];
     slot->id = id;
@@ -42,9 +33,9 @@ void FUN_0023f2e4(void *owner, s32 index, const char *name, u16 id)
         if (slot->model != NULL) {
             slot->state = 2;
             slot->model->flags |= 2;
-            ModelNodeVisibilityView *node = reinterpret_cast<ModelNodeVisibilityView *>(slot->model->node);
-            node->visibility->visible = 0;
-            if (node->node.unk0c >= 0) {
+            AsdMdlNode *node = slot->model->node;
+            node->resource->positionFollowed = 0;
+            if (node->unk0c >= 0) {
                 asdMdlManagerMarkDestroy(slot->model->node);
                 return;
             }

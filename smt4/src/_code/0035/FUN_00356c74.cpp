@@ -1,34 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00356c74` (_code @ 0x356c74, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register numbering (this/value halves) and ldrd vs ldm of the minimum differ; retail also keeps the result test as ands r1, r0, #0x80000000 */
+/* Records a new 64-bit sample on a tracked value: stores it as the current one and lowers the minimum when it is smaller. */
+#include "common.h"
+#include "nn/Result.h"
 
 extern "C" {
+/* A 64-bit value stored as two words (the record keeps it 4-byte aligned). */
+struct SplitS64 {
+    u32 low;
+    s32 high;
 
-int SBORROW4(unsigned int, unsigned int);
+    operator s64() const { return ((s64)high << 32) | low; }
+};
 
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_00355db0(unsigned int);
+struct TrackedValue {
+    /* 0x00 */ u32 handle;     /* bit 0 is a flag */
+    /* 0x04 */ SplitS64 minimum;
+    /* 0x0C */ SplitS64 current;
 
-
-void FUN_00356c74(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_00355db0(*param_1 & 0xfffffffe);
-  if (-1 < temp_v0) {
-    param_1[4] = param_4;
-    param_1[3] = param_3;
-    temp_v1 = param_1[2];
-    if ((int)(param_4 - (temp_v1 + (param_3 < param_1[1]))) < 0 !=
-        (SBORROW4(param_4,temp_v1) != SBORROW4(param_4 - temp_v1,(unsigned int)(param_3 < param_1[1])))) {
-      param_1[1] = param_3;
-      param_1[2] = param_4;
+    void setCurrent(s64 value)
+    {
+        current.high = (s32)(value >> 32);
+        current.low = (u32)value;
     }
-  }
-  return;
-}
 
-} /* extern "C" */
+    void lowerMinimum(s64 value)
+    {
+        SplitS64 old = minimum;
+
+        if (value < (s64)old) {
+            minimum.low = (u32)value;
+            minimum.high = (s32)(value >> 32);
+        }
+    }
+};
+
+s32 FUN_00355db0(u32 handle);
+
+void FUN_00356c74(TrackedValue *tracked, s64 value)
+{
+    s32 result = FUN_00355db0(tracked->handle & ~1U);
+
+    if (nnResultIsSuccess(result)) {
+        tracked->setCurrent(value);
+        tracked->lowerMinimum(value);
+    }
+}
+}

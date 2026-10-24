@@ -1,38 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027da30` (_code @ 0x27da30, 0x80 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only (retail uses r0 for the NULL result and r2-r6 for the walk, the build r0/r2-r5); instruction sequence is the same. */
+#include "battle/ListedEntry.h"
+
+/* A battle entry seen through its list of ids at +8 (up to 0x32, ended by a negative one) and the block at +0xCC. */
+struct IdListEntry {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 ids[0x32];
+    /* 0x6C */ u8 unk6C[0x60];
+    /* 0xCC */ u8 block[0x1BC];
+};
+
+struct IdListState {
+    /* 0x0000 */ u8 unk0000[0x1fc0];
+    /* 0x1FC0 */ IdListEntry *entries;
+};
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_2_stack;
-
-
-int FUN_0027da30(int param_1,int param_2)
-
+/* Returns the block (+0xCC) of the first battle entry whose id list contains `id`, or NULL. */
+u8 *FUN_0027da30(IdListState *battle, s32 id)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = 0;
-  do {
-    temp_v0 = 0;
-    do {
-      temp_v2 = (int)*(short *)(*(int *)(param_1 + 0x1fc0) + temp_v1 * 0x288 + temp_v0 * 2 + 8);
-      if (temp_v2 < 0) break;
-      if (temp_v2 == param_2) {
-        return temp_v1 * 0x288 + 0xcc + *(int *)(param_1 + 0x1fc0);
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x32);
-    temp_v1 = temp_v1 + 1;
-    if (temp_v1 >= 0x6d) {
-      return 0;
+    for (s32 i = 0; i < 109; i++) {
+        for (s32 j = 0; j < 0x32; j++) {
+            s32 value = battle->entries[i].ids[j];
+            if (value < 0) {
+                break;
+            }
+            if (value == id) {
+                return battle->entries[i].block;
+            }
+        }
     }
-  } while( 1 );
+    return NULL;
 }
 
 } /* extern "C" */

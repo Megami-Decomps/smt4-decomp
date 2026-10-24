@@ -7,7 +7,7 @@ extern "C" {
 int FUN_005094e4(unsigned int *, int, int, unsigned int);
 
 extern int nw_snd_SoundArchive_IsAvailable(void);
-extern int FUN_001b1f04(void);
+extern int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 /* Supplied declaration required: FUN_005094e4. */
 
 
@@ -23,7 +23,7 @@ unsigned int * FUN_0045e1a4(int param_1,int param_2,int param_3,unsigned int par
   if ((*(int *)(*(int *)(param_1 + 4) + 4) != 0) &&
      (uStack_18 = param_4, temp_v0 = nw_snd_SoundArchive_IsAvailable(), temp_v0 != 0)) {
     FUN_005094e4(puVar2,param_2 + param_3 * 0xc + 0x134,param_2 + param_3 * 0x10 + 0xf4,param_4);
-    temp_v0 = FUN_001b1f04();
+    temp_v0 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
     *(int *)(temp_v0 + 0x1fc) = *(int *)(temp_v0 + 0x1fc) + 1;
     return puVar2;
   }

@@ -1,47 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `loadSlotRequestAsync` (_code @ 0x3f881c, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail tail-merges the two call arms (one `bl FUN_00168750` after per-arm argument setup) and hoists no common setup; armcc here emits the hoisted prefix and trailing hint nops. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00168750(unsigned int, int, int, unsigned char *, unsigned int *);
+#define DATA_TABLE_SLOTS 0x50
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
+typedef struct DataTableSlot {
+    /* 0x00 */ u32 request;
+    /* 0x04 */ void *data;      /* loaded table, NULL when free */
+    /* 0x08 */ u32 unk08;
+    /* 0x0c */ u8 locked;       /* non-zero keeps the table loaded */
+    /* 0x0d */ u8 unk0d[3];
+} DataTableSlot;
 
-extern unsigned char LAB_00226550; /* 0x226550 */
+extern DataTableSlot g_dataTableSlots[DATA_TABLE_SLOTS]; /* 0x5e2214 */
 
-/* Supplied declaration required: FUN_00168750. */
+void mapIfStoreRequestResult(void);
+void FUN_00168750(u32 request, void **result, s32 async, void (*callback)(void), DataTableSlot *slot);
 
-
-unsigned int loadSlotRequestAsync(unsigned int param_1,int param_2)
-
+/* Starts loading data table slot `index` (asynchronously when `async`); false for a bad or locked slot. */
+u32 loadSlotRequestAsync(u32 index, s32 async)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  
-  if (param_1 >= 0x50) {
-    return 0;
-  }
-  temp_v0 = param_1 * 0x10;
-  puVar3 = (unsigned int *)(temp_v0 + 0x5e2214);
-  if (*(int *)(temp_v0 + 0x5e2218) == 0) {
-    if (*(char *)(temp_v0 + 0x5e2220) != '\0') {
-      return 0;
+    if (index >= DATA_TABLE_SLOTS) {
+        return 0;
     }
-    if (param_2 != 0) {
-      temp_v1 = *puVar3;
+    DataTableSlot *slot = &g_dataTableSlots[index];
+    if (slot->data == NULL) {
+        if (slot->locked != 0) {
+            return 0;
+        }
+        if (async != 0) {
+            FUN_00168750(slot->request, &slot->data, 1, mapIfStoreRequestResult, slot);
+        } else {
+            FUN_00168750(slot->request, &slot->data, 0, mapIfStoreRequestResult, slot);
+        }
     }
-    else {
-      temp_v1 = *puVar3;
-    }
-    FUN_00168750(temp_v1,temp_v0 + 0x5e2218,param_2 != 0,&LAB_00226550,puVar3);
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

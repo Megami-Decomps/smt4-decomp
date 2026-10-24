@@ -3,7 +3,7 @@
 #include "shard/W4_Match6_BtlEntry.h"
 
 extern "C" {
-Table04Record *FUN_002ae164(u32 skillId);
+Table04Record *dataTable40FindById(u32 skillId);
 BtlMainState *btlGetMainState();
 u32 FUN_0023d9b8(s32 unit, s32 mode, Table04Record *skill);
 
@@ -23,7 +23,7 @@ u32 btlClassifySkillUse(s32 unit, u32 skillId)
     };
     if (!skillId)
         return 1;
-    Table04Record *skill = FUN_002ae164(skillId);
+    Table04Record *skill = dataTable40FindById(skillId);
     if (!skill)
         return 1;
     const SkillRecordView *record = reinterpret_cast<const SkillRecordView *>(skill);

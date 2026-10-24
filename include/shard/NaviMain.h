@@ -3,28 +3,40 @@
 #define SHARD_NAVIMAIN_H
 
 #include "common.h"
+#include <stddef.h>
 #include "shard/W6_W6Match1_NaviTransitionState.h"
 
 typedef struct NaviMain {
     /* 0x0000 */ u32 job;
-    /* 0x0004 */ u8 unk0004[0x4];
+    /* 0x0004 */ u32 drawTask;       /* "NAVI DOWN" draw task */
     /* 0x0008 */ u8 closeRequested;
     /* 0x0009 */ u8 unk0009[0x1];
     /* 0x000A */ u8 active;
     /* 0x000B */ u8 unk000B[0x1];
     /* 0x000C */ u32 posX;
     /* 0x0010 */ u32 posY;
-    /* 0x0014 */ u8 unk0014[0x14];
+    /* 0x0014 */ u32 third;
+    /* 0x0018 */ f32 argumentValue;
+    /* 0x001C */ u8 unk001C[0xC];
     /* 0x0028 */ u32 currentMap;
     /* 0x002C */ u32 unk2C;
     /* 0x0030 */ s32 busy;
     /* 0x0034 */ f32 value;
-    /* 0x0038 */ u8 cursorPos[1];
-    /* 0x0039 */ u8 unk0039[0x3];
-    /* 0x003C */ u32 alternateMap;
+    union {
+        /* 0x0038 */ u8 cursorPos[1];
+        /* 0x0038 */ f32 unk38f;
+    };
+    union {
+        /* 0x003C */ u32 alternateMap;
+        /* 0x003C */ f32 unk3Cf;
+    };
     /* 0x0040 */ u32 state[1];
     union {
         /* 0x0044 */ u8 unk0044[0x122F0];
+        struct {
+            /* 0x0044 */ u8 unk0044BeforeFade[0x122EC];
+            /* 0x12330 */ u32 fadeTask; /* "NAVI FADE DRAW" draw task */
+        } tasks;
         struct {
             /* 0x0044 */ u8 unk0044BeforeTransition[0x24];
             /* 0x0068 */ NaviTransitionState transition;
@@ -75,7 +87,12 @@ typedef struct NaviMainA {
 
 
 /* Retail 32-bit layout invariants. */
-typedef char NaviMainSizeCheck[sizeof(NaviMain) == 0x12338 ? 1 : -1];
+typedef char NaviMainSizeCheck[sizeof(NaviMain) == 0x12338 &&
+    offsetof(NaviMain, third) == 0x14 &&
+    offsetof(NaviMain, argumentValue) == 0x18 &&
+    offsetof(NaviMain, unk38f) == 0x38 &&
+    offsetof(NaviMain, unk3Cf) == 0x3c &&
+    offsetof(NaviMain, tasks.fadeTask) == 0x12330 ? 1 : -1];
 typedef char NaviMainASizeCheck[sizeof(NaviMainA) == 0x206C0 ? 1 : -1];
 
 #endif

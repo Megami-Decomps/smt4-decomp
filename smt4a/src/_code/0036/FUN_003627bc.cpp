@@ -1,110 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003627bc` (_code @ 0x3627bc, 0x13c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: std::remove's find loop compares against a copy of the end in r0 (retail) and the build keeps the end in place; the build also merges the buffer/slot loads into an ldm and needs two more callee-saved registers. */
+#include "gfx/AsdLightSet.h"
+#include <algorithm>
 
 extern "C" {
-
-int asdMemFree(...);
-int objectBufferFree(void);
-int asdLightSelectActive(int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern int g_asdLightCount; /* 0x636e00 */
-
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: objectBufferFree. */
-/* Supplied declaration required: asdLightSelectActive. */
-
-
-void FUN_003627bc(int param_1)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int *piVar3;
-  int temp_v1;
-  int *piVar5;
-  int temp_v2;
-  unsigned int temp_v3;
-  int unaff_r8;
-  int *piVar8;
-  
-  if (*(int *)(param_1 + 0x9c) != 0) {
-    objectBufferFree();
-  }
-  if (*(int *)(param_1 + 0x54) != 0) {
-    asdLightSelectActive(1);
-    piVar8 = *(int **)(param_1 + 0xa0);
-    temp_v3 = 0;
-    if (*(int *)(*(int *)(param_1 + 0x9c) + 8) != 0) {
-      do {
-        temp_v1 = *piVar8;
-        temp_v0 = *(int *)(temp_v1 + 0xc);
-        piVar2 = *(int **)(temp_v0 + 0x18);
-        piVar5 = *(int **)(temp_v0 + 0x1c);
-        while( 1 ) {
-          if (piVar2 != piVar5) {
-            unaff_r8 = *piVar2;
-          }
-          if (piVar2 == piVar5 || unaff_r8 == temp_v1) break;
-          piVar2 = piVar2 + 1;
-        }
-        if (piVar2 != piVar5) {
-          piVar3 = piVar2 + 1;
-          temp_v2 = (int)piVar5 - (int)piVar3;
-          unaff_r8 = temp_v2 >> 2;
-          if (0 < unaff_r8) {
-            unaff_r8 = temp_v2 * 0x20000000;
-            piVar5 = piVar2;
-            if (unaff_r8 < 0) {
-              unaff_r8 = *piVar3;
-              piVar3 = piVar2 + 2;
-              if (unaff_r8 != temp_v1) {
-                piVar5 = piVar2 + 1;
-                *piVar2 = unaff_r8;
-              }
-            }
-            piVar2 = piVar5;
-            for (temp_v2 = temp_v2 >> 3; temp_v2 != 0; temp_v2 = temp_v2 - 1) {
-              piVar5 = piVar2;
-              if (*piVar3 != temp_v1) {
-                piVar5 = piVar2 + 1;
-                *piVar2 = *piVar3;
-              }
-              unaff_r8 = piVar3[1];
-              piVar3 = piVar3 + 2;
-              piVar2 = piVar5;
-              if (unaff_r8 != temp_v1) {
-                piVar2 = piVar5 + 1;
-                *piVar5 = unaff_r8;
-              }
-            }
-          }
-        }
-        piVar5 = *(int **)(temp_v0 + 0x1c);
-        *(int **)(temp_v0 + 0x1c) = piVar2;
-        temp_v3 = temp_v3 + 1;
-        if (piVar5 != piVar2) {
-          *(unsigned int *)(temp_v1 + 0xc) = 0;
-        }
-        piVar8 = piVar8 + 7;
-        g_asdLightCount = g_asdLightCount - 1;
-      } while (temp_v3 < *(unsigned int *)(*(int *)(param_1 + 0x9c) + 8));
-    }
-  }
-  if (*(int *)(param_1 + 0xa4) != 0) {
-    asdMemFree();
-  }
-  if (*(int *)(param_1 + 0x54) != 0) {
-    *(unsigned int *)(param_1 + 0x54) = 0;
-  }
-  asdMemFree(param_1);
-  return;
+extern s32 g_asdLightCount;
+void objectBufferFree(AsdLightBuffer *buffer);
+void asdLightSelectActive(s32 enable);
+void asdMemFree(void *memory);
 }
 
-} /* extern "C" */
+/* Takes `light` out of the vector; true when it was registered. */
+static __inline bool lightVectorRemove(AsdLightVector &vector, AsdLight *light)
+{
+    AsdLight **newEnd = std::remove(vector.begin, vector.end, light);
+    bool removed = vector.end != newEnd;
+    vector.end = newEnd;
+    return removed;
+}
+
+/* Releases a light set: unregisters each of its lights from its owner and frees the buffers and the set itself. */
+extern "C" void FUN_003627bc(AsdLightSet *set)
+{
+    if (set->buffer != NULL) {
+        objectBufferFree(set->buffer);
+    }
+    if (set->active != 0) {
+        asdLightSelectActive(1);
+        AsdLightSlot *slot = set->slots;
+        for (u32 index = 0; index < set->buffer->count; ++index, ++slot) {
+            AsdLight *light = slot->light;
+            AsdLightOwner *owner = light->owner;
+            if (lightVectorRemove(owner->lights, light)) {
+                light->owner = NULL;
+            }
+            --g_asdLightCount;
+        }
+    }
+    if (set->extra != NULL) {
+        asdMemFree(set->extra);
+    }
+    if (set->active != 0) {
+        set->active = 0;
+    }
+    asdMemFree(set);
+}

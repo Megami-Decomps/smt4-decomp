@@ -1,57 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024b5f0` (_code @ 0x24b5f0, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same element copy; retail loads the first eight words as vldm {s0-s2} + {s3-s7} then stores them with one vstmia and copies the last two words afterwards (via ldr r2,[r1,#36]/ldr r1,[r1,#32]); built uses one vldm and ldrd/strd for the tail */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_2_stack;
+struct PoolElement {
+    /* 0x00 */ f32 values[8];
+    /* 0x20 */ u32 extra[2];
+};
 
+struct PoolDimensions {
+    /* 0x00 */ u8 unk00[0xc0];
+    /* 0xc0 */ s32 columns;
+    /* 0xc4 */ s32 rows;
+};
 
-void FUN_0024b5f0(int param_1,unsigned int *param_2)
+struct ElementPool {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 baseIndex;
+    /* 0x08 */ u8 unk08[0x10];
+    /* 0x18 */ PoolElement *elements;
+    /* 0x1c */ u8 unk1c[4];
+    /* 0x20 */ PoolDimensions *dimensions;
+};
 
+/* Copies `source` into the element `columns * rows` slots further on (scaled by its index), clearing the copy's fifth value to -1. */
+void FUN_0024b5f0(ElementPool *pool, PoolElement *source)
 {
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  
-  temp_v0 = *(int *)(*(int *)(param_1 + 0x20) + 0xc0) * *(int *)(*(int *)(param_1 + 0x20) + 0xc4);
-  if (temp_v0 == 0) {
-    return;
-  }
-  temp_v1 = param_2[1];
-  temp_v2 = param_2[2];
-  puVar1 = (unsigned int *)
-           (*(int *)(param_1 + 0x18) +
-           (((unsigned int)((int)param_2 - *(int *)(param_1 + 0x18)) / 0x28) * temp_v0 + *(int *)(param_1 + 4)
-           ) * 0x28);
-  temp_v3 = param_2[3];
-  temp_v4 = param_2[4];
-  temp_v5 = param_2[5];
-  temp_v6 = param_2[6];
-  temp_v7 = param_2[7];
-  *puVar1 = *param_2;
-  puVar1[1] = temp_v1;
-  puVar1[2] = temp_v2;
-  puVar1[3] = temp_v3;
-  puVar1[4] = temp_v4;
-  puVar1[5] = temp_v5;
-  puVar1[6] = temp_v6;
-  puVar1[7] = temp_v7;
-  temp_v2 = param_2[9];
-  temp_v1 = param_2[8];
-  puVar1[4] = 0xffffffff;
-  puVar1[8] = temp_v1;
-  puVar1[9] = temp_v2;
-  return;
+    s32 stride = pool->dimensions->columns * pool->dimensions->rows;
+    PoolElement *target;
+
+    if (stride == 0) {
+        return;
+    }
+    target = &pool->elements[((u32)source - (u32)pool->elements) / sizeof(PoolElement) * stride + pool->baseIndex];
+    *target = *source;
+    *(u32 *)&target->values[4] = 0xffffffff;
 }
 
 } /* extern "C" */

@@ -40,7 +40,7 @@ BtlUnitLink* partyMemberFindById(u32 id);
 u32 categoryGetColor(s32 category);
 void drawSetColorFromRGBA8(u32 color);
 u32 FUN_0014143c(AocSystem* system, u32 image);
-void FUN_001413d0(AocSystem* system, u32 image, s32 x, s32 y, u32 style);
+void effectSubmitPackageRequest(AocSystem* system, u32 image, s32 x, s32 y, u32 style);
 void FUN_002bf288(s32 layer, u32 group, u32 image, s32 x, s32 y, u32 style);
 void FUN_002b04e8(s32 layer, u32 group, u32 image, s32 x, s32 y, u32 style,
                   const DemonIconRect* region);
@@ -68,7 +68,7 @@ void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight)
     }
 
     if (FUN_0014143c(g_aocSystem, record->image) != 0) {
-        FUN_001413d0(g_aocSystem, record->image, x, y, style);
+        effectSubmitPackageRequest(g_aocSystem, record->image, x, y, style);
     } else {
         const s32 image = record->image;
         DemonIconRect region;

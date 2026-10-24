@@ -16,7 +16,7 @@ int skinObjectUpdateMatrices(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_0018408c(...);
-int FUN_001fc4f0(...);
+int configDrawRowFrame(...);
 int resourceRunOperationIfUnblocked(int);
 int FUN_002a4894(int);
 int VectorSignedToFloat(...);
@@ -54,7 +54,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_001fc4f0. */
+/* Supplied declaration required: configDrawRowFrame. */
 extern int recordGetModeForId(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_002a4894. */
@@ -142,7 +142,7 @@ void FUN_002027fc(void)
           if ((temp_v14 || temp_v15) || temp_v16) {
             temp_v17 = 0xf5ff9fff;
           }
-          FUN_001fc4f0(*(short *)(temp_v6 + 8) + temp_v7,*(short *)(temp_v6 + 10) + temp_v13,1,
+          configDrawRowFrame(*(short *)(temp_v6 + 8) + temp_v7,*(short *)(temp_v6 + 10) + temp_v13,1,
                        (temp_v14 || temp_v15) || temp_v16,0);
           temp_v8 = FUN_001834a4(0x24,temp_v11);
           temp_v11 = g_renderCtx;
@@ -188,7 +188,7 @@ void FUN_002027fc(void)
             temp_v17 = 0xff;
             temp_v3 = 1;
           }
-          FUN_001fc4f0(*(short *)(temp_v6 + 8) + temp_v7,*(short *)(temp_v6 + 10) + temp_v13,0,0,temp_v3);
+          configDrawRowFrame(*(short *)(temp_v6 + 8) + temp_v7,*(short *)(temp_v6 + 10) + temp_v13,0,0,temp_v3);
         }
         textFormatBuffer(temp_v18,&LAB_00202d28,
                      temp_v2 + *(int *)(temp_v0 + temp_v10 * 8 + 0x98) * 0xc + 0x1e);

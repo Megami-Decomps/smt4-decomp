@@ -11,7 +11,7 @@ typedef struct SearchWin00200a18 {
     /* 0x38 */ u8 part[1];
 } SearchWin00200a18;
 
-void FUN_002bee58(u8 *part, s32 value);
+void spriteStartAnimationByIndex(u8 *part, s32 value);
 void FUN_002bf810(u32 message);
 void asdMemFree(SearchWin00200a18 *block);
 void jobStop(u32 job, s32 flags);
@@ -45,7 +45,7 @@ u32 searchWinUpdate(void)
                 } else {
                     DAT_0043e170->stateB = 3;
                 }
-                FUN_002bee58(DAT_0043e170->part, 1);
+                spriteStartAnimationByIndex(DAT_0043e170->part, 1);
                 FUN_002bf810(0x1000181);
             } else if (stateA == 4) {
                 current = DAT_0043e170;

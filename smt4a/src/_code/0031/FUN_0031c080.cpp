@@ -1,55 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031c080` (_code @ 0x31c080, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: branch layout: retail runs the steps != 0 case inline and moves the zero case after the return; built predicates the zero case */
+#include "common.h"
+
+struct FadeWork {
+    u8 unk00[0x0C];  // 0x00
+    f32 alpha;       // 0x0C
+    f32 rate;        // 0x10
+};
 
 extern "C" {
 
-int scrGetArg(int);
-int SBORROW4(int, int);
-int VectorSignedToFloat(int, int);
+s32 scrGetArg(u32 index);
+s32 FUN_00203d74(void);
+FadeWork *jobGetWork(u32 job);
 
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int jobGetWork(unsigned int);
-extern int FUN_00203d74(void);
-/* Supplied declaration required: scrGetArg. */
-
-
-unsigned int FUN_0031c080(void)
-
+/* Script command: sets the job's fade to run over `steps` steps (at most 4 when the check passes), or clears it for 0. */
+s32 FUN_0031c080(void)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = FUN_00203d74();
-  temp_v3 = temp_v2 != 0;
-  temp_v2 = 0;
-  if (temp_v3) {
-    temp_v2 = temp_v1 - 4;
-  }
-  if ((temp_v3 && temp_v1 != 4) && temp_v2 < 0 == (temp_v3 && SBORROW4(temp_v1,4))) {
-    temp_v1 = 4;
-  }
-  temp_v2 = jobGetWork(temp_v0);
-  if (temp_v2 != 0) {
-    if (temp_v1 != 0) {
-      *(unsigned int *)(temp_v2 + 0xc) = 0x3f800000;
-      temp_v4 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      *(float *)(temp_v2 + 0x10) = -1.0f / temp_v4;
+    s32 job = scrGetArg(0);
+    s32 steps = scrGetArg(1);
+
+    if (FUN_00203d74() != 0 && steps > 4) {
+        steps = 4;
     }
-    else {
-      *(unsigned int *)(temp_v2 + 0xc) = 0;
-      *(unsigned int *)(temp_v2 + 0x10) = 0;
+    FadeWork *work = jobGetWork(job);
+    if (work != NULL) {
+        if (steps == 0) {
+            work->alpha = 0.0f;
+            work->rate = 0.0f;
+        } else {
+            work->alpha = 1.0f;
+            work->rate = -1.0f / steps;
+        }
     }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

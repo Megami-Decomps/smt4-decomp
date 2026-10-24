@@ -1,110 +1,84 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00196d78` (_code @ 0x196d78, 0x248 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match2_UniteWork.h"
+#include <stdlib.h>
+
+union FusionPairBits {
+    u64 packed;
+    struct {
+        u64 firstId : 15;
+        u64 secondId : 15;
+        u64 firstType : 2;
+        u64 secondType : 2;
+        u64 resultId : 15;
+        u64 unknown : 15;
+    } fields;
+};
+
+struct FusionSortPreferences {
+    u8 unk00[0x13];
+    u8 setting;     // 0x13: bit 7 clear = ascending; low bits = sort key
+};
 
 extern "C" {
+extern UniteWork *g_unite;
+FusionSortPreferences *FUN_002a0d0c(void);
+s32 FUN_001f5f94(const void *a, const void *b);
+s32 FUN_002dc7a0(const void *a, const void *b);
+s32 fusionComparePairsByParentLevelRaceId(const void *a, const void *b);
+s32 uniteComparePairsDescending(const void *a, const void *b);
+s32 FUN_001f6098(const void *a, const void *b);
+s32 fusionComparePairPriority(const void *a, const void *b);
+s32 FUN_001e1540(const void *a, const void *b);
+s32 FUN_002d02b0(const void *a, const void *b);
+u32 FUN_0029ce60(u32 id, s32 a, s32 b, s32 c, s32 d);
+void FUN_002b7bca(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+void FUN_0027f3dc(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 
-int FUN_0027f3dc(...);
-int FUN_0029ce60(unsigned int, int, int, int, int);
-int FUN_002b7bca(...);
-
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-extern int fusionComparePairsByParentLevelRaceId(const void*, const void*); /* 0x1b16a8 */
-extern int FUN_001e1540(...); /* 0x1e1540 */
-extern int FUN_001f5f94(...); /* 0x1f5f94 */
-extern int FUN_001f6098(...); /* 0x1f6098 */
-extern int uniteComparePairsDescending(...); /* 0x219260 */
-extern int FUN_002d02b0(...); /* 0x2d02b0 */
-extern int FUN_002dc7a0(...); /* 0x2dc7a0 */
-extern int fusionComparePairPriority(...); /* 0x2dc8a8 */
-extern int g_unite; /* 0x43dd68 */
-
-/* Supplied declaration required: FUN_0027f3dc. */
-/* Supplied declaration required: FUN_0029ce60. */
-extern int FUN_002a0d0c(void);
-/* Supplied declaration required: FUN_002b7bca. */
-
-
+/* Sort the fusion pair list by the key the player selected. */
 void FUN_00196d78(void)
-
 {
-/* irregular: 11 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned int *puVar8;
-  unsigned int *puVar9;
-  unsigned char *pbVar10;
-  
-  temp_v0 = g_unite;
-  temp_v2 = FUN_002a0d0c();
-  pbVar10 = (unsigned char *)(temp_v2 + 0x13);
-  temp_v1 = ~(*(unsigned char *)(temp_v2 + 0x13) >> 7) & 1;
-  if ((*(unsigned char *)(temp_v2 + 0x13) & 0x7f) == 1) {
-    if (temp_v1 != 0) {
-      FUN_002b7bca(temp_v0 + 0x6ce2,*(unsigned int *)(temp_v0 + 0x789c),2,FUN_001f5f94);
-    }
-    else {
-      FUN_002b7bca(temp_v0 + 0x6ce2,*(unsigned int *)(temp_v0 + 0x789c),2,FUN_002dc7a0);
-    }
-  }
-  if ((*pbVar10 & 0x7f) == 2) {
-    if (temp_v1 != 0) {
-      FUN_002b7bca(temp_v0 + 0x6ce2,*(unsigned int *)(temp_v0 + 0x789c),2,fusionComparePairsByParentLevelRaceId);
-    }
-    else {
-      FUN_002b7bca(temp_v0 + 0x6ce2,*(unsigned int *)(temp_v0 + 0x789c),2,uniteComparePairsDescending);
-    }
-  }
-  if ((*pbVar10 & 0x7f) == 7) {
-    puVar9 = (unsigned int *)(temp_v0 + 0x789c);
-    temp_v4 = 0;
-    if (temp_v4 < *puVar9) {
-      do {
-        temp_v2 = temp_v0 + temp_v4 * 2;
-        temp_v5 = 0;
-        temp_v6 = temp_v0 + (unsigned int)*(unsigned short *)(temp_v2 + 0x6ce2) * 8;
-        puVar8 = (unsigned int *)(temp_v6 + 0x1390);
-        temp_v3 = *puVar8;
-        if (temp_v3 >> 0x1e == 3) {
-          temp_v5 = temp_v3 & 0x7fff;
-          FUN_0029ce60(temp_v5,1,0,0,0);
+    UniteWork *work = g_unite;
+    const u8 *setting = &FUN_002a0d0c()->setting;
+    bool ascending = (*setting & 0x80) == 0;
+    if ((*setting & 0x7f) == 1) {
+        if (ascending) {
+            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), FUN_001f5f94);
+        } else {
+            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), FUN_002dc7a0);
         }
-        if ((*(unsigned int *)(temp_v6 + 0x1394) & 3) == 3) {
-          temp_v3 = (*puVar8 & 0x3fffffff) >> 0xf;
-          FUN_0029ce60(temp_v3,1,0,0,0);
-          temp_v5 = temp_v5 + temp_v3;
+    }
+    if ((*setting & 0x7f) == 2) {
+        if (ascending) {
+            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairsByParentLevelRaceId);
+        } else {
+            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), uniteComparePairsDescending);
         }
-        temp_v4 = temp_v4 + 1;
-        *(unsigned int *)(temp_v0 + (unsigned int)*(unsigned short *)(temp_v2 + 0x6ce2) * 4 + 0x78a0) = temp_v5;
-      } while (temp_v4 < *puVar9);
     }
-    if (temp_v1 != 0) {
-      FUN_002b7bca(temp_v0 + 0x6ce2,*puVar9,2,FUN_001f6098);
+    if ((*setting & 0x7f) == 7) {
+        // Score every pair by the summed ids of its fused demons, then sort by score.
+        for (u32 i = 0; i < work->pairSortIV.sortedCount; i++) {
+            u16 index = work->pairSortIV.sortedPairs[i];
+            const FusionPairBits *pair = (const FusionPairBits *)&work->pairSortIV.pairs[index];
+            u32 score = 0;
+            if (pair->fields.firstType == 3) {
+                score = FUN_0029ce60(pair->fields.firstId, 1, 0, 0, 0);
+            }
+            if (pair->fields.secondType == 3) {
+                score += FUN_0029ce60(pair->fields.secondId, 1, 0, 0, 0);
+            }
+            work->pairSortIV.pairScores[work->pairSortIV.sortedPairs[i]] = score;
+        }
+        if (ascending) {
+            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), FUN_001f6098);
+        } else {
+            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairPriority);
+        }
     }
-    else {
-      FUN_002b7bca(temp_v0 + 0x6ce2,*puVar9,2,fusionComparePairPriority);
+    if ((*setting & 0x7f) == 3) {
+        if (ascending) {
+            FUN_0027f3dc(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), FUN_001e1540);
+        } else {
+            FUN_0027f3dc(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), FUN_002d02b0);
+        }
     }
-  }
-  if ((*pbVar10 & 0x7f) == 3) {
-    if (temp_v1 != 0) {
-      FUN_0027f3dc(temp_v0 + 0x6ce2,*(unsigned int *)(temp_v0 + 0x789c),2,FUN_001e1540);
-      return;
-    }
-    FUN_0027f3dc(temp_v0 + 0x6ce2,*(unsigned int *)(temp_v0 + 0x789c),2,FUN_002d02b0);
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

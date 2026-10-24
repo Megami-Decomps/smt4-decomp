@@ -9,7 +9,7 @@ int playSceneSetState(void *scene, int a, int b);
 int FUN_0029ee6c(int a, int color);
 int uiSpriteSetImageKeyframe(void *block, int a, int b);
 int buttonHelpSetPreset(int a);
-int FUN_002bee58(void *block, int a);
+int spriteStartAnimationByIndex(void *block, int a);
 extern int FUN_00293230(void);
 extern int buttonHelpGetStatus(void);
 
@@ -60,10 +60,10 @@ void FUN_002cfed0(Scene *scene, u32 a, u8 b, u32 c)
                     FUN_0028cf30(scene, scene->unk305C, c);
                     return;
                 }
-                FUN_002bee58(scene->blockA, 0);
+                spriteStartAnimationByIndex(scene->blockA, 0);
                 i = 0;
                 do {
-                    FUN_002bee58(scene->blocksB[i], 0);
+                    spriteStartAnimationByIndex(scene->blocksB[i], 0);
                     i = i + 1;
                 } while (i < 8);
                 scene->unk3054 = 0x11;

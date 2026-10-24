@@ -58,7 +58,7 @@ int FUN_003e54b8(...);
 int linkHolderSetFlag(...);
 
 int textFormatBuffer(...);
-int FUN_0013c884(...);
+int asdCameraInitializeDefaults(...);
 int FUN_0013cab8(...);
 int FUN_001517b4(...);
 int FUN_001642e4(...);
@@ -93,7 +93,7 @@ int FUN_00178b04(...);
 int FUN_0019c0e0(unsigned int);
 int controllerApplyAtUnitScale(void);
 int cameraAnimationSampleAndAdvance(...);
-int FUN_003f9e80(void);
+int _ZN9Obj557af8C1EPK21AsdAnimCameraResource(void);
 int FUN_003fe86c(...);
 int FUN_0040aa6c(void);
 int FUN_0040aad4(...);
@@ -161,7 +161,7 @@ extern unsigned int DAT_005f1b7c; /* 0x5f1b7c */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_0013c174. */
-/* Supplied declaration required: FUN_0013c884. */
+/* Supplied declaration required: asdCameraInitializeDefaults. */
 /* Supplied declaration required: FUN_0013cab8. */
 extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: uiSetFloatPair. */
@@ -252,7 +252,7 @@ extern int fourPtrsAllNull(unsigned int);
 extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: controllerApplyAtUnitScale. */
 /* Supplied declaration required: cameraAnimationSampleAndAdvance. */
-/* Supplied declaration required: FUN_003f9e80. */
+/* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_003fd8dc. */
 /* Supplied declaration required: FUN_003fe86c. */
@@ -405,7 +405,7 @@ unsigned int FUN_0027e0d8(void)
     temp_v7 = 0x48;
     FUN_00178b04(0x48,&LAB_0027e4bc,0x378);
     if (temp_v7 != 0) {
-      FUN_003f9e80();
+      _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
     puVar8[0x12] = temp_v7;
     controllerApplyAtUnitScale();
@@ -413,7 +413,7 @@ unsigned int FUN_0027e0d8(void)
     temp_v7 = 0x48;
     FUN_00178b04(0x48,&LAB_0027e4bc,0x37c);
     if (temp_v7 != 0) {
-      FUN_003f9e80();
+      _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
     puVar8[0x13] = temp_v7;
     controllerApplyAtUnitScale();
@@ -421,7 +421,7 @@ unsigned int FUN_0027e0d8(void)
     temp_v7 = 0x48;
     FUN_00178b04(0x48,&LAB_0027e4bc,0x380);
     if (temp_v7 != 0) {
-      FUN_003f9e80();
+      _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
     puVar8[0x14] = temp_v7;
     controllerApplyAtUnitScale();
@@ -433,7 +433,7 @@ unsigned int FUN_0027e0d8(void)
       FUN_0040ae70(temp_v7,1);
     }
     modelSetDrawMode(puVar8,2);
-    FUN_0013c884(puVar8 + 0x16,1);
+    asdCameraInitializeDefaults(puVar8 + 0x16,1);
     temp_v8 = (float)VectorSignedToFloat(puVar8[0x15],(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v7 = puVar8[puVar8[0x159] + 0x12];
     temp_v9 = *(float *)(**(int **)(*(int *)(temp_v7 + 0x34) + 0x90) + 8);

@@ -10,7 +10,7 @@ int nameFormSetCharacter(...);
 int FUN_002328b4(void);
 int FUN_00233404(void);
 int flaggedEntryGetValueB(...);
-int FUN_00296ee0(int, int);
+int messageOwnerSetState(int, int);
 int flaggedEntrySetValueB(int, int);
 int flaggedEntryGetValueA(int);
 int FUN_0029efd8(int, int);
@@ -34,7 +34,7 @@ typedef struct {
 extern int inputIsQuestConfirmPressed(void);
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
-/* Supplied declaration required: FUN_00296ee0. */
+/* Supplied declaration required: messageOwnerSetState. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: flaggedEntryGetValueA. */
 /* Supplied declaration required: FUN_0029efd8. */
@@ -104,7 +104,7 @@ void FUN_00397580(int param_1)
       *(unsigned char *)(temp_v6 + 0xb1) = 0;
     } while (0 < temp_v7);
     *(unsigned char *)(param_1 + 8) = 1;
-    FUN_00296ee0(param_1,4);
+    messageOwnerSetState(param_1,4);
     FUN_002328b4();
     return;
   }
@@ -114,7 +114,7 @@ void FUN_00397580(int param_1)
     if (temp_v7 != 0) {
       if (*(char *)(param_1 + 0x29) != '\0') {
         *(unsigned char *)(param_1 + 0x21) = 2;
-        FUN_00296ee0(param_1,10);
+        messageOwnerSetState(param_1,10);
         timerStart(param_1 + 0x708,1,0);
         return;
       }
@@ -125,7 +125,7 @@ void FUN_00397580(int param_1)
              (unsigned short)((unsigned short)*(unsigned char *)(temp_v6 + 0xb0) * 0x100 + (unsigned short)temp_v2) == 0))) {
         temp_v7 = temp_v7 + 1;
         if (temp_v7 >= 8) {
-          FUN_00296ee0(param_1,5);
+          messageOwnerSetState(param_1,5);
           return;
         }
       }

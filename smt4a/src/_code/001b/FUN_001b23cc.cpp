@@ -13,7 +13,7 @@ extern unsigned char DAT_0055c30c; /* 0x55c30c */
 extern unsigned char DAT_0055c340; /* 0x55c340 */
 extern unsigned char DAT_0055c354; /* 0x55c354 */
 
-extern unsigned int *FUN_001b9b28(void);
+extern unsigned int *_ZN9Obj55c244C1Ev(void);
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
@@ -25,7 +25,7 @@ void FUN_001b23cc(void)
   int temp_v0;
   int temp_v1;
   
-  puVar1 = (unsigned int *)FUN_001b9b28();
+  puVar1 = (unsigned int *)_ZN9Obj55c244C1Ev();
   puVar1[0x12] = 0;
   puVar1[0x13] = 0;
   puVar1[0x15] = 0;

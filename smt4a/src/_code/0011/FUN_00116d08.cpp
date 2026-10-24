@@ -23,7 +23,7 @@ typedef struct {
 extern unsigned char LAB_00116e34; /* 0x116e34 */
 extern unsigned char LAB_00116ebd; /* 0x116ebd */
 
-extern unsigned int *FUN_002e7908(unsigned int *, unsigned int *);
+extern unsigned int *_ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 /* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
@@ -55,7 +55,7 @@ void FUN_00116d08(int param_1)
   if (temp_v0 == 0) {
     temp_v5[0] = 0x80010004;
     puVar3 = temp_v5;
-    puVar3 = (unsigned int *)FUN_002e7908((unsigned int *)&temp_v2,puVar3);
+    puVar3 = (unsigned int *)_ZN12OnlineResultC1ERKj((unsigned int *)&temp_v2,puVar3);
     FUN_00302f88(param_1,puVar3);
     return;
   }
@@ -75,7 +75,7 @@ void FUN_00116d08(int param_1)
       if (*(char *)(param_1 + 0xf8) != '\0') {
         temp_v5[0] = 0x8005001a;
         puVar3 = temp_v5;
-        puVar3 = (unsigned int *)FUN_002e7908((unsigned int *)&temp_v2,puVar3);
+        puVar3 = (unsigned int *)_ZN12OnlineResultC1ERKj((unsigned int *)&temp_v2,puVar3);
         FUN_00302f88(param_1,puVar3);
         return;
       }
@@ -84,14 +84,14 @@ void FUN_00116d08(int param_1)
         if (temp_v0 == 0x194) {
           temp_v5[0] = 0x80690004;
           puVar3 = temp_v5;
-          puVar3 = (unsigned int *)FUN_002e7908((unsigned int *)&temp_v2,puVar3);
+          puVar3 = (unsigned int *)_ZN12OnlineResultC1ERKj((unsigned int *)&temp_v2,puVar3);
           FUN_00302f88(param_1,puVar3);
           return;
         }
         if ((temp_v0 != 0x199) && (temp_v0 != 500)) {
           temp_v5[0] = 0x8005001a;
           puVar3 = temp_v5;
-          puVar3 = (unsigned int *)FUN_002e7908((unsigned int *)&temp_v2,puVar3);
+          puVar3 = (unsigned int *)_ZN12OnlineResultC1ERKj((unsigned int *)&temp_v2,puVar3);
           FUN_00302f88(param_1,puVar3);
           return;
         }
@@ -115,7 +115,7 @@ void FUN_00116d08(int param_1)
       }
       puVar3 = (unsigned int *)&temp_v6;
     }
-    puVar3 = (unsigned int *)FUN_002e7908((unsigned int *)&temp_v2,puVar3);
+    puVar3 = (unsigned int *)_ZN12OnlineResultC1ERKj((unsigned int *)&temp_v2,puVar3);
   }
   FUN_00302f88(param_1,puVar3);
   return;

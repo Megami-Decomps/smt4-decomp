@@ -43,7 +43,7 @@ void FUN_0040ae70(LockedObj *owner, u32 enabled);
 void mapLoadSkyTable(u32 number);
 void mapEnvironmentApplyPreset(s32 preset, s32 mode);
 CameraParameterOwner *FUN_00387350(const char *name);
-void FUN_0013c884(CameraMatrixCache *camera, u32 mode);
+void asdCameraInitializeDefaults(CameraMatrixCache *camera, u32 mode);
 void cameraExportParameters(CameraParameters *output, const CameraParameterOwner *owner);
 void uiSetFloatPair(CameraMatrixCache *camera, f32 first, f32 second);
 void FUN_0014f0dc(CameraMatrixCache *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
@@ -86,7 +86,7 @@ void FUN_004cdddc(FountainInitializationView *work)
     CameraParameterOwner *parameters = FUN_00387350("fountain/fountain.bccam");
     work->mode = 0;
     work->cameraParameters = parameters;
-    FUN_0013c884(&work->camera, 1);
+    asdCameraInitializeDefaults(&work->camera, 1);
     CameraParameters pose;
     cameraExportParameters(&pose, work->cameraParameters);
     uiSetFloatPair(&work->camera, 5.0f, 1.0f);

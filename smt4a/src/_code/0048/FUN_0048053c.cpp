@@ -1,127 +1,121 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048053c` (_code @ 0x48053c, 0x1f8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps zero in callee-saved r8 (kind default and the extras zeroing after the upgrade lookup) with the extras at sp+4 and the bonuses at sp+12 in a 32-byte frame, tests `999 > used + limit` with the constant as the first compare operand and `(bonus + step) + extra` left to right, and range-tests the id as `subs; bmi; cmp #119; bhi` (signed sign test, then an unsigned count test); this build reassociates the sums, swaps the compare operands, uses a signed second test and a 36-byte frame. */
+#include "common.h"
+
+// The points an equipment upgrade of one kind can still add: hit points (cap 999) and up to three
+// stats (cap 99), laid out like the bonuses already applied.
+struct UpgradeLimits {
+    s16 hp;        // 0x00
+    u8 unk02[6];
+    s16 statA;     // 0x08
+    s16 statB;     // 0x0a
+    s16 statC;     // 0x0c
+};
+
+struct UpgradeBonuses {
+    s16 hp;        // 0x00
+    u8 unk02[6];
+    s16 statA;     // 0x08
+    s16 statB;     // 0x0a
+    s16 statC;     // 0x0c
+    u8 unk0e[2];
+};
+
+// The signed stat bonuses of an upgrade record.
+struct UpgradeExtras {
+    u8 unk00[2];
+    s8 statA;      // 0x02
+    s8 statB;      // 0x03
+    s8 statC;      // 0x04
+    u8 unk05[3];
+};
+
+struct UpgradeRecord {
+    u8 unk00[0x31];
+    u8 extras[3];  // 0x31
+    u8 unk34[2];
+    s16 hp;        // 0x36
+};
+
+struct ItemRecord {
+    u8 unk00[8];
+    u8 kind;       // 0x08: 4, 5 or 6 for the equipment kinds that can be upgraded
+};
 
 extern "C" {
+s32 FUN_0047fc38(void);
+ItemRecord* FUN_0019c06c(s32 item);
+void equipmentGetCappedUpgradeBonuses(s32 item, UpgradeBonuses* bonuses);
+UpgradeRecord* dataTable08Sub2GetRecord(s32 item);
+void FUN_001a90f0(UpgradeExtras* extras, const u8* source);
 
-int FUN_00192608(void);
-int FUN_001a90f0(int *, int);
-int FUN_0047fc38(void);
-int equipmentGetCappedUpgradeBonuses(int, short [4]);
-
-/* stack frame of param_2: 6 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned short sp20; /* 0x20: local_20 */
-    unsigned short sp22; /* 0x22: local_22 */
-    unsigned short sp24; /* 0x24: local_24 */
-    unsigned short sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00192608. */
-extern int FUN_0019c06c(int);
-/* Supplied declaration required: FUN_001a90f0. */
-/* Supplied declaration required: FUN_0047fc38. */
-/* Supplied declaration required: equipmentGetCappedUpgradeBonuses. */
-
-
-void FUN_0048053c(int param_1,unsigned short *param_2)
-
+// Fills `limits` with how much more an upgrade of equipment `item` may add to its capped values.
+void FUN_0048053c(s32 item, UpgradeLimits* limits)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  char temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  short temp_v5 [4];
-  short temp_v6;
-  short temp_v7;
-  short temp_v8;
-  
-  temp_v0 = param_1;
-  FUN_0047fc38();
-  if (temp_v0 == 0) {
-    temp_v0 = FUN_0019c06c(param_1);
-    if (temp_v0 != 0) {
-      temp_v2 = *(char *)(temp_v0 + 8);
-    }
-    else {
-      temp_v2 = '\0';
-    }
-    equipmentGetCappedUpgradeBonuses(param_1,temp_v5);
-    temp_v0 = param_1;
-    FUN_00192608();
-    temp_v1 = 0;
-    temp_v3 = 0;
-    temp_v4 = 0;
-    if (temp_v0 != 0) {
-      temp_v1 = (int)*(short *)(temp_v0 + 0x36);
-      FUN_001a90f0(&temp_v3,temp_v0 + 0x31);
-    }
-    if (temp_v2 != '\x04') {
-      if (temp_v2 != '\x05') {
-        if (((temp_v2 == '\x06') && (-1 < (int)(param_1 - 0x21dU))) && (param_1 - 0x21dU < 0x78)) {
-          *param_2 = 0x14;
-          param_2[5] = 6;
-          if (temp_v5[0] + temp_v1 + 0x14 >= 0x3e7) {
-            temp_v0 = 999 - (temp_v5[0] + temp_v1);
-            if (temp_v0 < 1) {
-              temp_v0 = 0;
-            }
-            *param_2 = (short)temp_v0;
-          }
-          if (temp_v7 + 6 + (int)(*(signed char *)((unsigned char *)&temp_v3 + 3)) >= 0x63) {
-            temp_v0 = 99 - ((int)temp_v7 + (int)(*(signed char *)((unsigned char *)&temp_v3 + 3)));
-            if (temp_v0 < 1) {
-              temp_v0 = 0;
-            }
-            param_2[5] = (short)temp_v0;
-          }
-        }
-      }
-      else if ((-1 < (int)(param_1 - 0x1a5U)) && (param_1 - 0x1a5U < 0x78)) {
-        *param_2 = 0x1e;
-        if (temp_v5[0] + temp_v1 + 0x1e >= 0x3e7) {
-          temp_v0 = 999 - (temp_v5[0] + temp_v1);
-          if (temp_v0 < 1) {
-            temp_v0 = 0;
-          }
-          *param_2 = (short)temp_v0;
-          return;
-        }
-      }
-    }
-    else if ((-1 < (int)(param_1 - 0x12dU)) && (param_1 - 0x12dU < 0x78)) {
-      *param_2 = 0xf;
-      param_2[4] = 3;
-      param_2[6] = 3;
-      if (temp_v5[0] + temp_v1 + 0xf >= 0x3e7) {
-        temp_v0 = 999 - (temp_v5[0] + temp_v1);
-        if (temp_v0 < 1) {
-          temp_v0 = 0;
-        }
-        *param_2 = (short)temp_v0;
-      }
-      if (temp_v6 + 3 + (int)(*(signed char *)((unsigned char *)&temp_v3 + 2)) >= 0x63) {
-        temp_v0 = 99 - ((int)temp_v6 + (int)(*(signed char *)((unsigned char *)&temp_v3 + 2)));
-        if (temp_v0 < 1) {
-          temp_v0 = 0;
-        }
-        param_2[4] = (short)temp_v0;
-      }
-      if (temp_v8 + 3 + (int)(char)temp_v4 >= 0x63) {
-        temp_v0 = 99 - ((int)temp_v8 + (int)(char)temp_v4);
-        if (temp_v0 < 1) {
-          temp_v0 = 0;
-        }
-        param_2[6] = (short)temp_v0;
+    if (FUN_0047fc38() != 0) {
         return;
-      }
     }
-  }
-  return;
+    ItemRecord* record = FUN_0019c06c(item);
+    s32 kind = record != NULL ? record->kind : 0;
+    UpgradeBonuses bonuses;
+    equipmentGetCappedUpgradeBonuses(item, &bonuses);
+    UpgradeRecord* upgrade = dataTable08Sub2GetRecord(item);
+    UpgradeExtras extras = {};
+    s32 hp = 0;
+    if (upgrade != NULL) {
+        hp = upgrade->hp;
+        FUN_001a90f0(&extras, upgrade->extras);
+    }
+    if (kind == 4) {
+        s32 index = item - 0x12d;
+        if (index >= 0) {
+            if (index <= 0x77) {
+                limits->hp = 15;
+                limits->statA = 3;
+                limits->statC = 3;
+                s32 used = bonuses.hp + hp;
+                if (!(999 > used + 15)) {
+                    s32 value = 999 - used;
+                    limits->hp = value > 0 ? value : 0;
+                }
+                if (bonuses.statA + 3 + extras.statA >= 99) {
+                    s32 value = 99 - (bonuses.statA + extras.statA);
+                    limits->statA = value > 0 ? value : 0;
+                }
+                if (bonuses.statC + 3 + extras.statC >= 99) {
+                    s32 value = 99 - (bonuses.statC + extras.statC);
+                    limits->statC = value > 0 ? value : 0;
+                }
+            }
+        }
+    } else if (kind == 5) {
+        s32 index = item - 0x1a5;
+        if (index >= 0) {
+            if (index <= 0x77) {
+                limits->hp = 30;
+                s32 used = bonuses.hp + hp;
+                if (!(999 > used + 30)) {
+                    s32 value = 999 - used;
+                    limits->hp = value > 0 ? value : 0;
+                }
+            }
+        }
+    } else if (kind == 6) {
+        s32 index = item - 0x21d;
+        if (index >= 0) {
+            if (index <= 0x77) {
+                limits->hp = 20;
+                limits->statB = 6;
+                s32 used = bonuses.hp + hp;
+                if (!(999 > used + 20)) {
+                    s32 value = 999 - used;
+                    limits->hp = value > 0 ? value : 0;
+                }
+                if (bonuses.statB + 6 + extras.statB >= 99) {
+                    s32 value = 99 - (bonuses.statB + extras.statB);
+                    limits->statB = value > 0 ? value : 0;
+                }
+            }
+        }
+    }
 }
-
-} /* extern "C" */
+}

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00103a74(unsigned int, int, unsigned int);
-int FUN_002e7908(unsigned int, unsigned int *);
+int _ZN12OnlineResultC1ERKj(unsigned int, unsigned int *);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 extern unsigned char LAB_00123718; /* 0x123718 */
 
 /* Supplied declaration required: FUN_00103a74. */
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 extern int wstrstrU16(int, unsigned char *);
 
 
@@ -64,7 +64,7 @@ void FUN_0012369c(unsigned int param_1,int param_2,int param_3,unsigned int para
   else {
     temp_v4 = 0x8001000c;
   }
-  FUN_002e7908(param_1,&temp_v4);
+  _ZN12OnlineResultC1ERKj(param_1,&temp_v4);
   return;
 }
 

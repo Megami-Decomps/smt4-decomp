@@ -22,7 +22,7 @@ int FUN_002bff50(void);
 int asdMemFree(void);
 int memClear(unsigned int *, int);
 int jyoucyuGetTableEntry(int);
-void FUN_002d582c(unsigned int, float);
+void animOwnerSetScale(unsigned int, float);
 int FUN_002e1230(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -58,7 +58,7 @@ extern int messageWindowIsState1(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: FUN_002d582c. */
+/* Supplied declaration required: animOwnerSetScale. */
 /* Supplied declaration required: FUN_002e1230. */
 
 
@@ -88,7 +88,7 @@ void FUN_00384be8(unsigned int *param_1)
         return;
       }
       FUN_00210194(param_1[*(int *)(param_1[0x36a] + 4) + 0x343]);
-      FUN_002d582c(param_1[*(int *)(*puVar6 + 4) + 0x343], 0.0f);
+      animOwnerSetScale(param_1[*(int *)(*puVar6 + 4) + 0x343], 0.0f);
       FUN_002e1230(param_1[*(int *)(*puVar6 + 4) + 0x343],0);
       *puVar6 = 0;
     }
@@ -156,7 +156,7 @@ void FUN_00384be8(unsigned int *param_1)
         param_1[0x369] = temp_v2;
         temp_v2 = param_1[temp_v2 + 0x364];
         param_1[0x36a] = (unsigned int)(param_1 + temp_v2 * 2 + 0x357);
-        FUN_002d582c(param_1[param_1[temp_v2 * 2 + 0x358] + 0x343], 1.0f);
+        animOwnerSetScale(param_1[param_1[temp_v2 * 2 + 0x358] + 0x343], 1.0f);
         FUN_002e1230(param_1[*(int *)(*puVar6 + 4) + 0x343],0);
         param_1[2] = param_1[2] + 1;
         *param_1 = *param_1 | 0x100;
@@ -208,7 +208,7 @@ void FUN_00384be8(unsigned int *param_1)
        (temp_v4 = effIsFinished(*(unsigned int *)(param_1[*(int *)(param_1[0x36a] + 4) + 0x343] + 8)),
        temp_v4 != 0)) {
       FUN_00210194(param_1[*(int *)(param_1[0x36a] + 4) + 0x343]);
-      FUN_002d582c(param_1[*(int *)(*puVar6 + 4) + 0x343], 0.0f);
+      animOwnerSetScale(param_1[*(int *)(*puVar6 + 4) + 0x343], 0.0f);
       FUN_002e1230(param_1[*(int *)(*puVar6 + 4) + 0x343],0);
       temp_v2 = param_1[0x16e];
       FUN_00297060(temp_v2,param_1[0x16f]);
@@ -226,7 +226,7 @@ void FUN_00384be8(unsigned int *param_1)
   case 4:
     temp_v4 = scrRunOpcodesStub(param_1[0x170]);
     if (temp_v4 == 2) {
-      FUN_002d582c(param_1[*(int *)(param_1[0x36a] + 4) + 0x343], 1.0f);
+      animOwnerSetScale(param_1[*(int *)(param_1[0x36a] + 4) + 0x343], 1.0f);
       FUN_002e1230(param_1[*(int *)(*puVar6 + 4) + 0x343],0);
       FUN_002bff50();
       if (param_1[0x170] != 0) {

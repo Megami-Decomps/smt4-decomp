@@ -1,44 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002281a4` (_code @ 0x2281a4, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only r0/r1 are swapped in the entry address computation (retail index in r0, base in r1). */
+#include "common.h"
 
 extern "C" {
 
-int btlGetMainState(...);
-int libc_strcmp(...);
+/* A 0x16-byte effect entry: a name string with a value at 0x10. */
+struct EffectEntry {
+    /* 0x00 */ char name[0x10];
+    /* 0x10 */ s16 value;
+    /* 0x12 */ u8 unk12[4];
+};
 
-extern int FUN_00293230(void);
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: libc_strcmp. */
+struct EffectTable {
+    /* 0x0000 */ u8 unk0000[0x1CFC];
+    /* 0x1CFC */ u8 *base;
+};
 
+extern const char DAT_0040090c[]; /* "NOT_EFT" */
+void *btlGetMainState(void);
+s32 FUN_00293230(void);
+s32 libc_strcmp(const char *a, const char *b);
 
-int FUN_002281a4(int param_1)
-
+/* Returns the value of the first of four entries named "NOT_EFT"; -1 while busy, 30 if none. */
+s32 FUN_002281a4(EffectTable *table)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  int temp_v1;
-  
-  btlGetMainState();
-  temp_v0 = FUN_00293230();
-  if (temp_v0 != 0) {
-    temp_v0 = -1;
-  }
-  else {
-    temp_v0 = 0;
-    do {
-      temp_v1 = *(int *)(param_1 + 0x1cfc) + temp_v0 * 0x16 + 0x58;
-      pcVar2 = "NOT_EFT";
-      libc_strcmp("NOT_EFT",temp_v1);
-      if (pcVar2 == (char *)0x0) {
-        return (int)*(short *)(temp_v1 + 0x10);
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 4);
-    temp_v0 = 0x1e;
-  }
-  return temp_v0;
+    s32 result;
+    s32 i;
+
+    btlGetMainState();
+    if (FUN_00293230() != 0) {
+        return -1;
+    }
+    result = 30;
+    for (i = 0; i < 4; i++) {
+        EffectEntry *entry = &((EffectEntry *)(table->base + 0x58))[i];
+        if (libc_strcmp(DAT_0040090c, entry->name) == 0) {
+            return entry->value;
+        }
+    }
+    return result;
 }
 
 } /* extern "C" */

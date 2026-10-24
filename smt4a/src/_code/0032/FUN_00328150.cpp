@@ -1,57 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00328150` (_code @ 0x328150, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTable2CType0Count(void);
+/* A type-0x2C table entry: an owner id (-1 ends the table), a kind at 2, a sub-id at 3 and a link at 0x14. */
+struct Table2CEntry {
+    /* 0x00 */ s8 owner;
+    /* 0x01 */ u8 unk01;
+    /* 0x02 */ u8 kind;
+    /* 0x03 */ s8 subId;
+    /* 0x04 */ u8 unk04[0x10];
+    /* 0x14 */ u16 link;
+};
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+s32 dataTable2CType0Count(void);
+Table2CEntry *dataTable2CGetEntry(s32 index);
+u32 dataTable2CType4GetEntry(u16 index);
 
-extern char *dataTable2CGetEntry(int);
-extern unsigned int dataTable2CType4GetEntry(unsigned short);
-/* Supplied declaration required: dataTable2CType0Count. */
-
-
-unsigned int FUN_00328150(int param_1,unsigned int param_2)
-
+/* Finds the kind-2 entry of `owner` with the given sub-id and returns the type-4 entry it links to. */
+u32 FUN_00328150(s32 owner, s32 subId)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v3 = 0;
-  temp_v0 = param_1;
-  dataTable2CType0Count();
-  if (0 < temp_v0) {
-    do {
-      pcVar2 = (char *)dataTable2CGetEntry(temp_v3);
-      if (*pcVar2 == -1) {
-        return 0;
-      }
-      if (*pcVar2 == param_1) {
-        temp_v2 = (unsigned int)(unsigned char)pcVar2[2];
-        temp_v4 = temp_v2 == 2;
-        if (temp_v4) {
-          temp_v2 = (unsigned int)pcVar2[3];
+    for (s32 i = 0; i < dataTable2CType0Count(); i++) {
+        Table2CEntry *entry = dataTable2CGetEntry(i);
+        if (entry->owner == -1) {
+            return 0;
         }
-        if (temp_v4 && temp_v2 == param_2) {
-          temp_v1 = dataTable2CType4GetEntry(*(unsigned short *)(pcVar2 + 0x14));
-          return temp_v1;
+        if (entry->owner == owner && entry->kind == 2 && entry->subId == subId) {
+            return dataTable2CType4GetEntry(entry->link);
         }
-      }
-      temp_v3 = temp_v3 + 1;
-      dataTable2CType0Count();
-    } while (temp_v3 < (int)pcVar2);
-  }
-  return 0;
+    }
+    return 0;
 }
 
 } /* extern "C" */

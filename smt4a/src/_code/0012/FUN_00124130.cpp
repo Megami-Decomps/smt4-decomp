@@ -15,7 +15,7 @@ extern int FUN_00106db4(void);
 /* Supplied declaration required: FUN_0010afbc. */
 /* Supplied declaration required: FUN_0010b168. */
 extern int *FUN_001144a4(int, unsigned int);
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: FUN_00306d92. */
 
 
@@ -32,7 +32,7 @@ int * FUN_00124130(int param_1)
     piVar1 = (int *)(**(romwright_code **)(param_1 + 0x324))();
   }
   else {
-    temp_v0 = operatorNew(0x2c);
+    temp_v0 = _Znwj(0x2c);
     if (temp_v0 != 0) {
       piVar1 = (int *)FUN_001144a4(temp_v0,10);
     }
@@ -45,7 +45,7 @@ int * FUN_00124130(int param_1)
   FUN_0010afbc(piVar1,*(unsigned short *)(temp_v0 + 0x7c),*(unsigned char *)(temp_v0 + 0x7e),
                *(unsigned int *)(temp_v0 + 0x80));
   if (piVar3 != (int *)0x0) {
-    temp_v1 = operatorNew(0x24);
+    temp_v1 = _Znwj(0x24);
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v0 = FUN_00106db4();

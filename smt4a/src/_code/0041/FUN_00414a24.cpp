@@ -1,4 +1,4 @@
-/* NON_MATCHING: BLOCKED: native polymorphic owner destructor and allocator-backed vector element destructors are required. */
+/* NON_MATCHING: BLOCKED: Obj557c90's destructor (returns this recovered from the embedded base destructor): needs the member classes at +0xAC (0x30-byte virtual elements) and the base object at +4, and retail keeps empty element-destroy loops (parity-unrolled, count by 8/12/16/184 bytes) for the POD vectors that armcc deletes for any source form tried; the Obj55a800 member's inline destructor has the same vptr-load scheduling difference as _ZN9Obj55a800D1Ev. */
 #include "romwright_types.h"
 
 extern "C" {

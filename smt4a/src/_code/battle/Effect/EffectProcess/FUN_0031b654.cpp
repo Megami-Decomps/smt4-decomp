@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0013c884(...);
+int asdCameraInitializeDefaults(...);
 int uiSetFloatPair(...);
 int asdProcessCreateSimple(...);
 int FUN_0014f0dc(...);
@@ -39,7 +39,7 @@ extern unsigned char LAB_0031b8f8; /* 0x31b8f8 */
 extern unsigned char LAB_0031b908; /* 0x31b908 */
 extern int g_effectProcessActive; /* 0x5702f4 */
 
-/* Supplied declaration required: FUN_0013c884. */
+/* Supplied declaration required: asdCameraInitializeDefaults. */
 /* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_0014f0dc. */
@@ -85,7 +85,7 @@ unsigned int FUN_0031b654(unsigned char param_1)
   *(unsigned int *)(temp_v0 + 0x51c) = 0;
   *(unsigned int *)(temp_v0 + 0x520) = 0;
   *(unsigned int *)(temp_v0 + 0x524) = 0x42700000;
-  FUN_0013c884(temp_v0,1);
+  asdCameraInitializeDefaults(temp_v0,1);
   uiSetFloatPair(temp_v0);
   FUN_0014f0dc(temp_v0,(unsigned int *)(temp_v0 + 0x50c),(unsigned int *)(temp_v0 + 0x518),&temp_v1);
   FUN_001523b8(temp_v0,1);

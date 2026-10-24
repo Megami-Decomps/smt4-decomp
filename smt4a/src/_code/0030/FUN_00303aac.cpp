@@ -35,7 +35,7 @@ typedef struct {
 extern unsigned char LAB_00303bcc; /* 0x303bcc */
 extern unsigned char DAT_005592e4; /* 0x5592e4 */
 
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: _ZN9Obj55aff4C1ERKS_. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
@@ -104,7 +104,7 @@ int FUN_00303aac(fn_00303aac_arg0 *param_1,unsigned int param_2,unsigned int par
     temp_v2 = (**(romwright_code **)(**(int **)(param_12 + 4) + 8))();
   }
   else {
-    temp_v1 = operatorNew(8);
+    temp_v1 = _Znwj(8);
     temp_v2 = 0;
     if (temp_v1 != 0) {
       temp_v2 = FUN_002fb018();

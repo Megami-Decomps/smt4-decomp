@@ -10,7 +10,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-extern int *wordRefMax(int *, unsigned int *);
+extern int *_ZSt3maxIjERKT_S2_S2_(int *, unsigned int *);
 extern unsigned int *rt_malloc(void);
 extern unsigned int vectorGrowCapacity_0030c5c6(unsigned int, int *);
 
@@ -31,7 +31,7 @@ int * FUN_002ece70(int *param_1,int param_2,unsigned int param_3,unsigned int pa
   temp_v2 = param_2;
   temp_v3 = param_4;
   temp_v3 = vectorGrowCapacity_0030c5c6(0,param_1);
-  piVar1 = (int *)wordRefMax(&temp_v2,(unsigned int *)&temp_v3);
+  piVar1 = (int *)_ZSt3maxIjERKT_S2_S2_(&temp_v2,(unsigned int *)&temp_v3);
   temp_v0 = *piVar1;
   puVar3 = (unsigned int *)rt_malloc();
   *param_1 = (int)puVar3;

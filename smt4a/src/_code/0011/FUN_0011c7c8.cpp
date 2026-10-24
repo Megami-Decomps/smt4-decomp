@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0011ae64(int *, unsigned int, unsigned int, unsigned int);
 int sharedRefRelease(unsigned int);
 int FUN_002e78d0(unsigned int, unsigned int, int);
-int FUN_002e7908(unsigned int *, unsigned int *);
+int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 
 /* stack frame of param_7: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -23,11 +23,11 @@ typedef struct {
 extern unsigned int FUN_0011afd8(void);
 extern unsigned int onlineContextGetInstance(void);
 /* Supplied declaration required: sharedRefRelease. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
-/* Supplied declaration required: FUN_002e7908. */
-extern int refIsNonNegative(unsigned int *);
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
+extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
 
 
 void FUN_0011c7c8(unsigned int *param_1,unsigned int param_2,int param_3,unsigned int param_4,
@@ -58,7 +58,7 @@ void FUN_0011c7c8(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
   temp_v8 = param_4;
   temp_v0 = FUN_002e789a(param_3);
   if (temp_v0 != 0) {
-    temp_v0 = operatorNew(0x80);
+    temp_v0 = _Znwj(0x80);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_0011afd8();
@@ -67,7 +67,7 @@ void FUN_0011c7c8(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
     temp_v5 = param_7;
     temp_v4 = param_6;
     FUN_0011ae64(&temp_v6,temp_v1,*(unsigned int *)(param_3 + 0x44),temp_v8);
-    temp_v0 = refIsNonNegative((unsigned int *)&temp_v6);
+    temp_v0 = _ZNK18OnlineResultRecord7isValidEv((unsigned int *)&temp_v6);
     if (temp_v0 == 0) {
       sharedRefRelease(temp_v1);
       *param_1 = temp_v6;
@@ -83,7 +83,7 @@ void FUN_0011c7c8(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
   else {
     temp_v3 = 0x8001000d;
   }
-  FUN_002e7908(param_1,puVar4);
+  _ZN12OnlineResultC1ERKj(param_1,puVar4);
   return;
 }
 

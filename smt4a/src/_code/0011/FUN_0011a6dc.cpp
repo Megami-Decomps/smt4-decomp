@@ -36,7 +36,7 @@ typedef struct Object {
 } Object;
 
 extern void FUN_00117044(Helper *helper, u32 a, u32 b, u8 *c);
-extern Helper *operatorNew(u32 size);
+extern Helper *_Znwj(u32 size);
 extern Helper *FUN_002fde5c(Helper *memory);
 
 void FUN_0011a6dc(Object *obj)
@@ -47,7 +47,7 @@ void FUN_0011a6dc(Object *obj)
     if (obj->helper != NULL) {
         obj->helper->vtbl->destroy(obj->helper);
     }
-    helper = operatorNew(0x18);
+    helper = _Znwj(0x18);
     if (helper != NULL) {
         helper = FUN_002fde5c(helper);
     }

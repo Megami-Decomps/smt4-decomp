@@ -1306,7 +1306,7 @@ typedef char Table4SearchRecordIVLayoutCheck[
     offsetof(Table4SearchRecordIV, flags) == 0x38 &&
     sizeof(Table4SearchRecordIV) == 0x3C ? 1 : -1];
 
-// Observed prefix returned by FUN_002ae164, not a recovered object boundary.
+// Observed prefix returned by dataTable40FindById, not a recovered object boundary.
 // Only even byte positions in slotBytes are read here; no slot semantics
 // or independent two-byte record boundaries are asserted.
 struct RecordSlotQueryPrefixIV {

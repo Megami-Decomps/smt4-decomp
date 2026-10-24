@@ -8,7 +8,7 @@ extern "C" {
 int aocReleasePackageOwner(int);
 int jyoucyuGetTableEntry(int);
 int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
-int FUN_001d0fcc(int *, int);
+int _ZN10AocSystemA17getPendingRequestEv(int *, int);
 int asdFsIsSdCardDetected(void);
 int aocClearDisplayFlag(int);
 void aocResetOperationState(AocSystemA*);
@@ -37,7 +37,7 @@ extern int g_aocSystem; /* 0x570280 */
 extern int sysLightEventTryWait(int);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned int *);
-/* Supplied declaration required: FUN_001d0fcc. */
+/* Supplied declaration required: _ZN10AocSystemA17getPendingRequestEv. */
 extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: asdFsIsSdCardDetected. */
 /* Supplied declaration required: aocClearDisplayFlag. */
@@ -177,7 +177,7 @@ unsigned int FUN_0024b280(void)
         jobOwnerFreeSlotAndStop(temp_v0 + 0xc);
       }
       aocClearDisplayFlag(g_aocSystem);
-      FUN_001d0fcc(&temp_v7,g_aocSystem);
+      _ZN10AocSystemA17getPendingRequestEv(&temp_v7,g_aocSystem);
       DAT_00570268 = 1;
       *(unsigned char *)(temp_v0 + 8) = 5;
       return 0xffffffff;

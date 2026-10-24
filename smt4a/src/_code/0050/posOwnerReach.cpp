@@ -15,7 +15,7 @@ typedef struct PosOwner {
     /* 0xA2 */ u8 unkA2;
 } PosOwner;
 
-extern u32 FUN_001b1f04(void);
+extern u32 _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 extern void FUN_001d0b28(u32 a, u8 *block);
 
 /* Marks the owner (at p - 0x44) as reached when its position lies in [low, high]. */
@@ -26,7 +26,7 @@ void posOwnerReach(u8 *member, u32 low, u32 high)
     if (owner->active != 0 && low <= owner->position && owner->position <= high) {
         owner->reached = 1;
         if (owner->unkA2 != 0) {
-            FUN_001d0b28(FUN_001b1f04(), owner->block50);
+            FUN_001d0b28(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(), owner->block50);
             owner->unkA2 = 0;
         }
         if (owner->unk0D != 0) {

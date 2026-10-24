@@ -10,7 +10,7 @@ struct BattleTextureResourceRecord {
 extern "C" {
 void *asdMemAlloc(s32 pool, s32 alignment, s32 flags, u32 bytes, s32 clear);
 void memClear(void *memory, u32 bytes);
-BattleTextureResourceRecord *FUN_002459d8(u32 id);
+BattleTextureResourceRecord *dataTable25FindById(u32 id);
 s32 FUN_002c1d5c();
 u32 FUN_00294090(s32 textureId, s32 flags);
 u32 uiStepAnimatedContentTask(void *job);
@@ -34,7 +34,7 @@ void *eventCreateResourceBattleTexture(u32 id, f32 x, f32 y)
     work->opacityStep = 0.25f;
     work->stopWhenTransparent = 0;
     work->unk17 = 0;
-    work->textureId = -FUN_002459d8(id)->textureId;
+    work->textureId = -dataTable25FindById(id)->textureId;
     if (FUN_002c1d5c()) {
         work->state = 1;
     } else {

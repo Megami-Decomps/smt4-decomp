@@ -1,40 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fb670` (_code @ 0x4fb670, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register numbering in the id compare only: retail loads other->id into r3 (reusing the dead kind register) and action->id into r1; the build uses r1/r3 the other way round. Same instructions otherwise. */
+#include "common.h"
+
+/* A queued reflect action: id and index halfwords, kind at +4, the next action at +0xC. */
+struct ReflectAction {
+    /* 0x00 */ s16 id;
+    /* 0x02 */ s16 index;
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05[7];
+    /* 0x0C */ ReflectAction *next;
+    /* 0x10 */ u8 unk10[0x18];
+    /* 0x28 */ u32 value;
+};
+
+/* The reflect action queue; its first action is at +8. */
+struct ReflectQueue {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ ReflectAction *first;
+};
 
 extern "C" {
 
-int FUN_004102d8(short *, int, int, unsigned int);
+extern ReflectQueue *g_btlActionReflect; /* 0x5712f0 */
+ReflectAction *FUN_004102d8(ReflectQueue *queue, s16 id, u32 mode, s32 target);
 
-extern short *g_btlActionReflect; /* 0x5712f0 */
-
-/* Supplied declaration required: FUN_004102d8. */
-
-
-void FUN_004fb670(short param_1,unsigned int param_2,unsigned int param_3)
-
+/* Queues a kind-63 reflect action; when an earlier kind-63 action has the same id, the new one's index is set to -1. */
+void FUN_004fb670(s32 id, s32 target, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  short *psVar1;
-  short *psVar2;
-  short *psVar3;
-  
-  psVar2 = g_btlActionReflect;
-  FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
-  psVar3 = *(short **)(g_btlActionReflect + 4);
-  do {
-    psVar1 = psVar3;
-    if (psVar1 == (short *)0x0) {
-      *(unsigned int *)(psVar2 + 0x14) = param_3;
-      *(unsigned char *)(psVar2 + 2) = 0x3f;
-      return;
+    ReflectAction *action = FUN_004102d8(g_btlActionReflect, id, 0, target);
+
+    ReflectAction *other = g_btlActionReflect->first;
+    while (other != NULL) {
+        u8 kind = other->kind;
+        ReflectAction *next = other->next;
+        if (kind == 63 && other->id == action->id && action->index >= 0) {
+            action->index = -1;
+            break;
+        }
+        other = next;
     }
-    psVar3 = *(short **)(psVar1 + 6);
-  } while ((((char)psVar1[2] != '?') || (*psVar1 != *psVar2)) || (psVar2[1] < 0));
-  psVar2[1] = -1;
-  *(unsigned int *)(psVar2 + 0x14) = param_3;
-  *(unsigned char *)(psVar2 + 2) = 0x3f;
-  return;
+    action->value = value;
+    action->kind = 63;
 }
 
 } /* extern "C" */

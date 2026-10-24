@@ -1,37 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00331110` (_code @ 0x331110, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "map/lmapMain.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
 
 extern "C" {
 
-int gameFlagsGetBlock(void);
-int FUN_003fd7c0(unsigned int, int, int);
+void FUN_003fd7c0(u32 handle, u32 mode, u32 flags, f32 value);
 
-extern int g_lmapScene; /* 0x581288 */
+extern LmapSceneA *g_lmapScene; /* 0x581288 */
 
-/* Supplied declaration required: gameFlagsGetBlock. */
-/* Supplied declaration required: FUN_003fd7c0. */
-
-
-unsigned int FUN_00331110(void)
-
+/* Puts the map scene into state 12 and plays the default motion on both of its actors. */
+u32 FUN_00331110(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  gameFlagsGetBlock();
-  temp_v0 = g_lmapScene;
-  *(unsigned int *)(g_lmapScene + 0x1d0) = 0xc;
-  *(unsigned char *)(temp_v0 + 0x23d) = 1;
-  *(unsigned int *)(temp_v0 + 0x228) = 1;
-  *(unsigned int *)(temp_v0 + 0x240) = 0;
-  FUN_003fd7c0(*(unsigned int *)(*(int *)(temp_v0 + 0x180) + 4),0,2);
-  temp_v0 = g_lmapScene;
-  *(unsigned int *)(g_lmapScene + 0x1d4) = 0;
-  *(unsigned int *)(temp_v0 + 0x248) = 0;
-  *(unsigned int *)(temp_v0 + 0x238) = 1;
-  FUN_003fd7c0(*(unsigned int *)(*(int *)(temp_v0 + 0x18c) + 4),0,2);
-  return 1;
+    gameFlagsGetBlock();
+    g_lmapScene->unk1D0 = 12;
+    g_lmapScene->flag23D = 1;
+    g_lmapScene->unk228 = 1;
+    g_lmapScene->unk240 = 0.0f;
+    FUN_003fd7c0(g_lmapScene->actor180->controller, 0, 2, 0.0f);
+    g_lmapScene->unk1D4 = 0;
+    g_lmapScene->unk248 = 0;
+    g_lmapScene->unk238 = 1;
+    FUN_003fd7c0(g_lmapScene->actor18C->controller, 0, 2, 0.0f);
+    return 1;
 }
 
 } /* extern "C" */

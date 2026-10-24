@@ -1,44 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f6478` (_code @ 0x4f6478, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only r0/r1 swapped in the slot address computation (base load vs offset) */
+#include "common.h"
+
+struct EffectSlot {
+    char name[0x10];  // 0x00
+    s16 id;           // 0x10
+    u8 unk12[4];      // 0x12
+};
+
+struct EffectUnit {
+    u8 unk00[0x58];      // 0x00
+    EffectSlot slots[4]; // 0x58
+};
+
+struct EffectBattleState {
+    u8 unk0000[0x1F54];  // 0x0000
+    EffectUnit *unit;    // 0x1F54
+};
+
+static const char g_noEffectName[] = "NOT_EFT";
 
 extern "C" {
 
-int btlGetMainState(...);
-int libc_strcmp(...);
+void *btlGetMainState(void);
+s32 btlScriptUnitHasFlags(void);
+s32 libc_strcmp(const char *a, const char *b);
 
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: libc_strcmp. */
-extern int btlScriptUnitHasFlags(void);
-
-
-int FUN_004f6478(int param_1)
-
+/* Finds the id of the first of the unit's four effect slots named "NOT_EFT"; 30 when none, -1 when the script unit has flags. */
+s32 FUN_004f6478(EffectBattleState *state)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  int temp_v1;
-  
-  btlGetMainState();
-  temp_v0 = btlScriptUnitHasFlags();
-  if (temp_v0 != 0) {
-    temp_v0 = -1;
-  }
-  else {
-    temp_v0 = 0;
-    do {
-      temp_v1 = *(int *)(param_1 + 0x1f54) + temp_v0 * 0x16 + 0x58;
-      pcVar2 = "NOT_EFT";
-      libc_strcmp("NOT_EFT",temp_v1);
-      if (pcVar2 == (char *)0x0) {
-        return (int)*(short *)(temp_v1 + 0x10);
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 4);
-    temp_v0 = 0x1e;
-  }
-  return temp_v0;
+    btlGetMainState();
+    if (btlScriptUnitHasFlags() != 0) {
+        return -1;
+    }
+    s32 result = 30;
+    for (s32 i = 0; i < 4; i++) {
+        EffectSlot *slot = &state->unit->slots[i];
+
+        if (libc_strcmp(g_noEffectName, slot->name) == 0) {
+            return slot->id;
+        }
+    }
+    return result;
 }
 
 } /* extern "C" */

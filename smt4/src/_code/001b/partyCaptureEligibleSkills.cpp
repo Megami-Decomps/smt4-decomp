@@ -25,7 +25,7 @@ extern "C" {
 PartySkillRecord *gameGetPlayerData();
 PartySkillSlots *gameGetSlotTable();
 PartySkillRecord *gameGetUnitRecord(s32 slot);
-SkillSnapshotInfo *FUN_002ae164(u32 id);
+SkillSnapshotInfo *dataTable40FindById(u32 id);
 s32 idIsAbove400(u32 id);
 
 // Snapshot the player's and three party members' eligible skill IDs in packed lists.
@@ -37,7 +37,7 @@ void partyCaptureEligibleSkills(PartySkillSnapshot *screen)
     }
     for (s32 index = 0; index < 8; ++index) {
         u16 id = gameGetPlayerData()->skills[index];
-        SkillSnapshotInfo *info = FUN_002ae164(id);
+        SkillSnapshotInfo *info = dataTable40FindById(id);
         if (info != NULL && info->excluded == 0 && !idIsAbove400(id)) {
             screen->snapshot.skills[0][count++] = id;
         }
@@ -49,7 +49,7 @@ void partyCaptureEligibleSkills(PartySkillSnapshot *screen)
                 count = 0;
                 for (s32 index = 0; index < 8; ++index) {
                     u16 id = record->skills[index];
-                    SkillSnapshotInfo *info = FUN_002ae164(id);
+                    SkillSnapshotInfo *info = dataTable40FindById(id);
                     if (info != NULL && info->excluded == 0 && !idIsAbove400(id)) {
                         screen->snapshot.skills[member + 1][count++] = id;
                     }

@@ -25,7 +25,7 @@ u32 taskCreateDraw(const char *, s32, s32, s32, void (*)(u32), void *, void *, u
 void drawParameterBlockClear(Params002c312c *);
 void paramsInit(Params002c312c *, const void *, u32, const void *, u32, u32, u32, u32, u32, const void *, u32);
 void FUN_002bd954(void *, s32, s32, Params002c312c *, s32, f32);
-void FUN_002bee58(void *, s32);
+void spriteStartAnimationByIndex(void *, s32);
 
 // Initialize the search-window process, both stereo draw jobs and its animated parameter block.
 void FUN_002cedd8(void)
@@ -49,6 +49,6 @@ void FUN_002cedd8(void)
     drawParameterBlockClear(&draw->parameters);
     paramsInit(&draw->parameters, DAT_00403b80.primary, 36, DAT_00403b80.secondary, 36, 0, 0, 0, 0, DAT_00403b80.animation, 112);
     FUN_002bd954(draw->animation, 14, 135, &draw->parameters, 1, 1.0f);
-    FUN_002bee58(draw->animation, 0);
+    spriteStartAnimationByIndex(draw->animation, 0);
 }
 }

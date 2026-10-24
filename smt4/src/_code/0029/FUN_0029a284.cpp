@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0029a17c(int, int, int, int, int);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int FUN_002b6c34(...);
 int FUN_002bdf94(...);
 int FUN_002be5a4(...);
@@ -42,7 +42,7 @@ extern unsigned int FUN_0029a9d4(int, unsigned int);
 extern int FUN_0029ac94(void);
 extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(void);
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: FUN_002b6c34. */
 extern unsigned int aocIndexValueOrDefault(int);
 /* Supplied declaration required: FUN_002bdf94. */
@@ -196,7 +196,7 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
           temp_v7 = FUN_0029a924();
         }
         else {
-          FUN_002ae164();
+          dataTable40FindById();
           if (param_3 != 0) {
             temp_v7 = (unsigned int)*(unsigned char *)(param_3 + 0x22);
           }

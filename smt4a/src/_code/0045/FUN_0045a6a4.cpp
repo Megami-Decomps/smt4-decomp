@@ -8,7 +8,7 @@ extern "C" {
 
 int gfxCombinerStateInitialize(unsigned char [124]);
 int FUN_0015fcec(unsigned char *, unsigned char *);
-int FUN_0016d1f4(unsigned int [4]);
+int _ZN9SlotStateC1Ev(unsigned int [4]);
 int gpuEmitDepthBufferCommands(...);
 int gxEmitFramebufferAccessMasks(...);
 int FUN_001b14dc(...);
@@ -41,7 +41,7 @@ extern int setFourMinus1(...); /* 0x45b510 */
 #endif
 /* Supplied declaration required: gfxCombinerStateInitialize. */
 /* Supplied declaration required: FUN_0015fcec. */
-/* Supplied declaration required: FUN_0016d1f4. */
+/* Supplied declaration required: _ZN9SlotStateC1Ev. */
 /* Supplied declaration required: gpuEmitDepthBufferCommands. */
 /* Supplied declaration required: gxEmitFramebufferAccessMasks. */
 extern unsigned char *asdGxAppendStateReset(unsigned char *, unsigned int);
@@ -239,7 +239,7 @@ void FUN_0045a6a4(int *param_1,unsigned int *param_2,int *param_3)
     puVar12 = temp_v16;
     FUN_0015fcec(puVar12,temp_v20);
     temp_v20 = puVar12;
-    FUN_0016d1f4(temp_v8);
+    _ZN9SlotStateC1Ev(temp_v8);
     temp_v14[0] = 0;
     if (*(char *)((int)param_3 + 0xb) != '\0') {
       temp_v8[0] = romwright_piece_3_1((((unsigned int)(temp_v8[0]) >> 8) & 0xffffffU),1);

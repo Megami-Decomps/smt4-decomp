@@ -1,37 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00331550` (_code @ 0x331550, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail recomputes the masked counter index (and #255) before each counter access instead of once; the nop{0} positions follow from that. */
+#include "common.h"
 
 extern "C" {
 
-int gameGetCounters(void);
+/* The counter block: current values at 0 and maximum values at 0x200, one word per counter. */
+struct GameCounters {
+    /* 0x000 */ u32 current[128];
+    /* 0x200 */ u32 maximum[128];
+};
 
-/* Supplied declaration required: gameGetCounters. */
-extern unsigned int scrGetArg(unsigned int);
+GameCounters *gameGetCounters(void);
+u32 scrGetArg(u32 index);
 
-
-unsigned int FUN_00331550(void)
-
+/* Script command: raises counter #arg0 (and its maximum) to arg1 when it is lower. */
+u32 FUN_00331550(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = gameGetCounters();
-  if (*(unsigned int *)(temp_v2 + (temp_v0 & 0xff) * 4) < temp_v1) {
-    temp_v2 = gameGetCounters();
-    *(unsigned int *)(temp_v2 + (temp_v0 & 0xff) * 4) = temp_v1;
-  }
-  gameGetCounters();
-  temp_v2 = gameGetCounters();
-  if (*(unsigned int *)(temp_v2 + (temp_v0 & 0xff) * 4 + 0x200) < temp_v1) {
-    temp_v2 = gameGetCounters();
-    *(unsigned int *)(temp_v2 + (temp_v0 & 0xff) * 4 + 0x200) = temp_v1;
-  }
-  return 1;
+    u32 counter = scrGetArg(0);
+    u32 value = scrGetArg(1);
+
+    if (gameGetCounters()->current[counter & 0xFF] < value) {
+        gameGetCounters()->current[counter & 0xFF] = value;
+    }
+    gameGetCounters();
+    if (gameGetCounters()->maximum[counter & 0xFF] < value) {
+        gameGetCounters()->maximum[counter & 0xFF] = value;
+    }
+    return 1;
 }
 
 } /* extern "C" */

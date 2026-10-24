@@ -29,7 +29,7 @@ typedef struct HelpHolder {
 extern HelpHolder g_buttonHelp;
 
 extern void ifTouchDecrementTimer(void);
-extern void FUN_002bee58(HelpButton *button, s32 flag);
+extern void spriteStartAnimationByIndex(HelpButton *button, s32 flag);
 
 /* Resets every button of the button help block and releases the held slots, then rewinds the
  * block's state. */
@@ -39,7 +39,7 @@ void buttonHelpResetSlots(void)
     s32 i;
 
     for (i = 0; i < 6; i++) {
-        FUN_002bee58(&help->buttons[i], 1);
+        spriteStartAnimationByIndex(&help->buttons[i], 1);
         if (help->slots[i].kind != 0) {
             if (help->slots[i].kind == 7 || help->slots[i].kind == 9) {
                 ifTouchDecrementTimer();

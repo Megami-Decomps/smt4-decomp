@@ -6,7 +6,7 @@ extern "C" {
 
 int textFormatBuffer(...);
 int dataTable8FindRecord(void);
-int FUN_00192608(void);
+int dataTable08Sub2GetRecord(void);
 int dataTable04FindById(void);
 int battleAttributeFormatName(...);
 int skillFormatTargetLabel(...);
@@ -59,7 +59,7 @@ extern unsigned char LAB_0028b084; /* 0x28b084 */
 extern unsigned int FUN_0014bd84(void);
 extern unsigned int itemGetStackLimit(int);
 /* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: FUN_00192608. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern unsigned int aocEntryGetKind(int);
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: battleAttributeFormatName. */
@@ -145,7 +145,7 @@ void FUN_0028a888(int param_1)
   case 2:
   case 3:
   case 8:
-    FUN_00192608();
+    dataTable08Sub2GetRecord();
     FUN_00359974(0x24,*(unsigned int *)(param_1 + 0x24) & 0x3ff,0xffffffff,0);
     temp_v0 = *(unsigned char *)(param_1 + 0x28);
     if ((temp_v0 & 0xf) == temp_v0 >> 4) {
@@ -198,7 +198,7 @@ void FUN_0028a888(int param_1)
   case 6:
   case 7:
     temp_v6 = param_1;
-    FUN_00192608();
+    dataTable08Sub2GetRecord();
     temp_v16 = 0;
     temp_v17 = 0;
     temp_v14 = 0;

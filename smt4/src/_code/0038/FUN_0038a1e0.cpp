@@ -8,7 +8,7 @@ int pairSetSecondResetFirst(...);
 int FUN_00295eb0(...);
 int pairSetFirstResetSecond(...);
 int FUN_002bd954(unsigned int *, int, unsigned int, unsigned int *, int);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int FUN_002bf818(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -20,7 +20,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: FUN_002bf818. */
 extern unsigned int *jobGetWork(void);
 
@@ -50,24 +50,24 @@ unsigned int FUN_0038a1e0(void)
     FUN_002bd954(puVar4,0xe,0xffffffff,puVar2 + 0x108,0xb);
     if ((int)puVar2[4] < 5) {
       pairSetSecondResetFirst(puVar2 + 0x110,6);
-      FUN_002bee58(puVar2 + 0x110,3);
+      spriteStartAnimationByIndex(puVar2 + 0x110,3);
       FUN_00295eb0(puVar2 + 0x110,0xe,0x36);
       pairSetSecondResetFirst(puVar4,7);
-      FUN_002bee58(puVar4,3);
+      spriteStartAnimationByIndex(puVar4,3);
       FUN_00295eb0(puVar4,0xe,0x36);
     }
     else {
       pairSetSecondResetFirst(puVar2 + 0x110,4);
-      FUN_002bee58(puVar2 + 0x110,3);
+      spriteStartAnimationByIndex(puVar2 + 0x110,3);
       FUN_00295eb0(puVar2 + 0x110,0xe,0x22);
       pairSetSecondResetFirst(puVar4,5);
-      FUN_002bee58(puVar4,3);
+      spriteStartAnimationByIndex(puVar4,3);
       FUN_00295eb0(puVar4,0xe,0x22);
     }
     *(unsigned char *)(puVar2 + 0x11f) = 1;
     *(unsigned char *)(puVar2 + 0x165) = 1;
     pairSetFirstResetSecond(puVar3,7);
-    FUN_002bee58(puVar3,4);
+    spriteStartAnimationByIndex(puVar3,4);
     FUN_00295eb0(puVar3,0xe,0x47);
     puVar2 = puVar2 + 0x110;
     break;

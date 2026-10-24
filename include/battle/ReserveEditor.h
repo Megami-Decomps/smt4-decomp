@@ -14,7 +14,8 @@ struct ReserveEditorRecord {
     /* 0x028 */ f32 yaw;
     /* 0x02C */ u8 unk02C[0x14];
     /* 0x040 */ f32 scale;
-    /* 0x044 */ u8 unk044[0x17C];
+    /* 0x044 */ u8 unk044[0x178];
+    /* 0x1BC */ u32 kind;
     /* 0x1C0 */ s32 value;
 };
 typedef char ReserveEditorRecordOffsets[
@@ -22,5 +23,6 @@ typedef char ReserveEditorRecordOffsets[
     offsetof(ReserveEditorRecord, previousPosition) == 0xC &&
     offsetof(ReserveEditorRecord, yaw) == 0x28 &&
     offsetof(ReserveEditorRecord, scale) == 0x40 &&
+    offsetof(ReserveEditorRecord, kind) == 0x1BC &&
     offsetof(ReserveEditorRecord, value) == 0x1C0 ? 1 : -1];
 #endif

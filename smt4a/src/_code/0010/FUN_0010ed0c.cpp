@@ -10,7 +10,7 @@ extern unsigned char LAB_0010ece5; /* 0x10ece5 */
 extern unsigned char DAT_0055b11c; /* 0x55b11c */
 
 /* Supplied declaration required: sharedRefAddRef. */
-extern unsigned int *operatorNew(unsigned int);
+extern unsigned int *_Znwj(unsigned int);
 
 
 void FUN_0010ed0c(unsigned int param_1,unsigned int param_2)
@@ -20,7 +20,7 @@ void FUN_0010ed0c(unsigned int param_1,unsigned int param_2)
   unsigned int *puVar1;
   
   sharedRefAddRef();
-  puVar1 = (unsigned int *)operatorNew(0x14);
+  puVar1 = (unsigned int *)_Znwj(0x14);
   if (puVar1 != (unsigned int *)0x0) {
     puVar1[4] = param_2;
     puVar1[1] = param_1;

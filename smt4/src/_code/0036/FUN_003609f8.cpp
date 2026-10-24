@@ -1,12 +1,16 @@
-/* NON_MATCHING: native TLS access and SVC 0x32 cannot be emitted under the no-intrinsics rule. */
-#include "shard/S1Ipc.h"
+#include "nn/Result.h"
+#include "nn/svc.h"
+#include <string.h>
 extern "C" u32 DAT_00471bac;
 /* Sends the typed scalar parameter to the service. */
 extern "C" s32 FUN_003609f8(u8 value)
 {
-    IpcCommandBuffer *command = nn_getIpcCommandBuffer();
+    nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
     command->header = 0x200040;
-    command->words[0] = value;
-    s32 result = nn_svc_SendSyncRequest(DAT_00471bac);
-    return result < 0 ? result : (s32)command->words[0];
+    memcpy(&command->words[0], &value, sizeof(value));
+    s32 result = nn::svc::SendSyncRequest(DAT_00471bac);
+    if (nnResultIsSuccess(result)) {
+        result = command->words[0];
+    }
+    return result;
 }

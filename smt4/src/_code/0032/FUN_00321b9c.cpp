@@ -7,7 +7,7 @@ u32 scrGetArg(u32 index);
 u32 *gameGetSlotTable(void);
 int pairSetFirstResetSecond(void *pair, s32 value);
 int FUN_002bd954(void *widget, s32 kind, u32 selection, void *text, s32 capacity, f32 scale);
-int FUN_002bee58(void *widget, s32 mode);
+int spriteStartAnimationByIndex(void *widget, s32 mode);
 
 /* Begin a script message using the current game slot and requested message id. */
 u32 FUN_00321b9c(void)
@@ -24,7 +24,7 @@ u32 FUN_00321b9c(void)
     panel->unkA1 = 0;
     FUN_002bd954(panel->widget754, 14, (u32)-1, panel->textBuffer, 11, 1.0f);
     pairSetFirstResetSecond(panel->widget754, 0);
-    FUN_002bee58(panel->widget754, 6);
+    spriteStartAnimationByIndex(panel->widget754, 6);
     panel = g_messageMain.banner;
     g_messageMain.banner->unk81 = 0;
     panel->unk70 = messageId;

@@ -11,7 +11,7 @@ int FUN_00205568(...);
 int idMapLookup(...);
 int passiveSkillLookupRecord(...);
 int dataTable06Sub1GetRecord(...);
-int FUN_002ae164(...);
+int dataTable40FindById(...);
 int FUN_002b7bca(...);
 int devilGetRecord(...);
 int asdMemFree(...);
@@ -57,7 +57,7 @@ extern int FUN_0026a604(unsigned int);
 /* Supplied declaration required: passiveSkillLookupRecord. */
 extern int affinityShouldReplaceState(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: asdMemFree. */
@@ -245,7 +245,7 @@ LAB_0029b3f4:
         temp_v1 = 0;
         do {
           temp_v4 = (unsigned int)*(unsigned short *)(temp_v7 + temp_v1 * 2 + 0x3c);
-          if (((temp_v4 != 0) && (FUN_002ae164(), temp_v4 != 0)) &&
+          if (((temp_v4 != 0) && (dataTable40FindById(), temp_v4 != 0)) &&
              (temp_v5 = FUN_0026a604(temp_v3), temp_v5 != 0)) {
             *(unsigned short *)(temp_v17 + temp_v18 * 2) = *(unsigned short *)(temp_v13 + temp_v2 * 2);
             temp_v18 = temp_v18 + 1;

@@ -21,7 +21,7 @@ extern unsigned char LAB_00113500; /* 0x113500 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern unsigned int FUN_002e7908(int *, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(int *, unsigned int *);
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(int *, unsigned char *, unsigned int, unsigned char *);
@@ -57,7 +57,7 @@ unsigned long long FUN_00113494(int param_1,unsigned int param_2,unsigned int pa
     }
     if ((temp_v0 != '\x02') && (temp_v0 == '\x03')) {
       temp_v3 = 0x80050014;
-      temp_v2 = FUN_002e7908(&iStack_18,(unsigned int *)&temp_v3);
+      temp_v2 = _ZN12OnlineResultC1ERKj(&iStack_18,(unsigned int *)&temp_v3);
       FUN_002fdce8(param_1,temp_v2);
       return romwright_piece_4_4(uStack_14,iStack_18);
     }

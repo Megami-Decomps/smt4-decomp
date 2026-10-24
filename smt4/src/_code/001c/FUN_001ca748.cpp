@@ -45,7 +45,7 @@ int FUN_0029f848(...);
 int buttonHelpSetPreset(...);
 int eventQueueAddUniqueIfValid(...);
 int timerStart(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int FUN_002bf818(...);
 int FUN_002c1658(...);
 
@@ -122,7 +122,7 @@ extern unsigned int demonGetRaceLabel(unsigned int, unsigned int);
 extern unsigned int FUN_002bd068(unsigned int);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: FUN_002bf4f8. */
 extern unsigned int FUN_002bf810(unsigned int);
 /* Supplied declaration required: FUN_002bf818. */
@@ -396,7 +396,7 @@ LAB_001cabe4:
         flaggedEntrySetValueA(temp_v2 + 0x4d4,temp_v15);
         *(unsigned char *)(temp_v2 + 0x410) = 1;
         timerStart(temp_v2 + 0x2e4,0);
-        FUN_002bee58(temp_v2 + 0x370,2);
+        spriteStartAnimationByIndex(temp_v2 + 0x370,2);
         FUN_00295eb0(temp_v2 + 0x370,0x1a,temp_v15 + 0x414);
         *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
       }
@@ -554,7 +554,7 @@ LAB_001cb104:
         }
         *(unsigned char *)(temp_v2 + 0x410) = 1;
         timerStart(temp_v2 + 0x2e4,0);
-        FUN_002bee58(temp_v2 + 0x370,2);
+        spriteStartAnimationByIndex(temp_v2 + 0x370,2);
         FUN_00295eb0(temp_v2 + 0x370,0x1a,*(int *)(temp_v2 + 0x53c) + 0x414);
         *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
       }
@@ -617,7 +617,7 @@ LAB_001cb104:
           temp_v6 = FUN_0029ee54();
           FUN_0029f848(temp_v2 + 0x4d4,temp_v6 - 1,8,1,0,1);
           timerStart(temp_v2 + 0x2e4,0);
-          FUN_002bee58(temp_v2 + 0x370,2);
+          spriteStartAnimationByIndex(temp_v2 + 0x370,2);
           FUN_00295eb0(temp_v2 + 0x370,0x1a,*(int *)(temp_v2 + 0x544) + 0x414);
           *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
         }
@@ -1065,7 +1065,7 @@ LAB_001cbbac:
         flaggedEntrySetValueA(temp_v2 + 0x230c,temp_v15);
         *(unsigned char *)(temp_v2 + 0x410) = 1;
         timerStart(temp_v2 + 0x2e4,0);
-        FUN_002bee58(temp_v2 + 0x370,2);
+        spriteStartAnimationByIndex(temp_v2 + 0x370,2);
         FUN_00295eb0(temp_v2 + 0x370,0x1a,temp_v15 + 0x414);
         *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
       }
@@ -1165,7 +1165,7 @@ LAB_001cbbac:
           flaggedEntrySetValueA(temp_v6,temp_v15);
           *(unsigned char *)(temp_v2 + 0x410) = 1;
           timerStart(temp_v2 + 0x2e4,0);
-          FUN_002bee58(temp_v2 + 0x370,2);
+          spriteStartAnimationByIndex(temp_v2 + 0x370,2);
           FUN_00295eb0(temp_v2 + 0x370,0x1a,temp_v15 + 0x414);
           *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
         }

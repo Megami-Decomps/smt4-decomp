@@ -1,28 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004731d8` (_code @ 0x4731d8, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: not mid-flow: the original reads uninitialised locals (r4 as the base of four byte-field stores, s16/s17 as the last two floats) and armcc leaves them undefined in retail; built defines them as constants and saves s16-s18 */
+#include "common.h"
 
 extern "C" {
 
-extern int gameDataBlocksGetSaveData(void);
+struct PackedBytes {
+    u32 a : 8;
+    u32 b : 8;
+    u32 c : 8;
+    u32 d : 8;
+};
 
+struct SaveBlock27E98 {
+    /* 0x00 */ PackedBytes bytes;
+    /* 0x04 */ f32 x;
+    /* 0x08 */ f32 y;
+    /* 0x0c */ f32 z;
+    /* 0x10 */ f32 w;
+    /* 0x14 */ f32 v;
+};
 
+struct SaveData {
+    u8 unk00000[0x27e98];
+    SaveBlock27E98 block;
+};
+
+SaveData *gameDataBlocksGetSaveData(void);
+
+/* Rebuilds the save block from a partly uninitialised local copy (the original reads uninitialised floats). */
 void FUN_004731d8(void)
-
 {
-/* irregular: irregular input(s): in_s16, in_s17 */
-  int temp_v0;
-  unsigned int in_s16;
-  unsigned int in_s17;
-  
-  temp_v0 = gameDataBlocksGetSaveData();
-  *(unsigned int *)(temp_v0 + 0x27ea8) = in_s17;
-  *(unsigned int *)(temp_v0 + 0x27e98) = 0;
-  *(unsigned int *)(temp_v0 + 0x27eac) = in_s16;
-  *(unsigned int *)(temp_v0 + 0x27e9c) = 0;
-  *(unsigned int *)(temp_v0 + 0x27ea0) = 0;
-  *(unsigned int *)(temp_v0 + 0x27ea4) = 0;
-  return;
+    PackedBytes bytes;
+    f32 w;
+    f32 v;
+    SaveBlock27E98 local;
+
+    bytes.a = 0;
+    bytes.b = 0;
+    bytes.c = 0;
+    bytes.d = 0;
+    local.bytes = bytes;
+    local.x = 0.0f;
+    local.y = 0.0f;
+    local.z = 0.0f;
+    local.w = w;
+    local.v = v;
+    gameDataBlocksGetSaveData()->block = local;
 }
 
 } /* extern "C" */

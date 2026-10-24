@@ -1,4 +1,3 @@
-/* NON_MATCHING: The readiness store is scheduled after the resource load/compare, whose temporary uses r1 instead of r0. */
 #include "addon/SceneResource.h"
 
 extern "C" {

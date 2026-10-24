@@ -1,36 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00253c70` (_code @ 0x253c70, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses the id (0xf26) and the final flag store separately from the flag test (writeback ldrb + recomputed entry address); built shares one entry pointer. */
+#include "common.h"
+
+struct MapBlockEntry {
+    u8 flags;     // 0x00, bit 0 = used, bit 2 = pending, bit 4 = marked
+    u8 unk01[5];
+    s16 id;       // 0x06
+    u8 unk08[0xc];
+};
+
+struct MapBlock {
+    u8 unk0000[0xf20];
+    MapBlockEntry entries[16]; // 0xf20
+};
+
+struct MapObject {
+    u8 unk000[0x13a];
+    s16 id; // 0x13a
+};
 
 extern "C" {
 
-extern int gameGetMapBlock(void);
+MapBlock *gameGetMapBlock(void);
 
-
-void FUN_00253c70(int param_1)
-
+// Mark the first used, pending map block entry that belongs to the object.
+void FUN_00253c70(MapObject *object)
 {
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned char *pbVar5;
-  
-  temp_v1 = gameGetMapBlock();
-  temp_v2 = 0;
-  while( 1 ) {
-    temp_v3 = temp_v1 + temp_v2 * 0x14;
-    pbVar5 = (unsigned char *)(temp_v3 + 0xf20);
-    temp_v0 = *pbVar5;
-    if (((temp_v0 & 1) != 0 && (temp_v0 & 4) != 0) &&
-       (*(short *)(temp_v3 + 0xf26) == *(short *)(param_1 + 0x13a))) break;
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 >= 0x10) {
-      return;
+    MapBlock *block = gameGetMapBlock();
+    s16 id = object->id;
+    for (s32 i = 0; i < 16; i++) {
+        MapBlockEntry *entry = &block->entries[i];
+        if ((entry->flags & 1) != 0 && (entry->flags & 4) != 0 && entry->id == id) {
+            entry->flags |= 0x10;
+            return;
+        }
     }
-  }
-  *pbVar5 = *(unsigned char *)(temp_v1 + temp_v2 * 0x14 + 0xf20) | 0x10;
-  return;
 }
 
 } /* extern "C" */

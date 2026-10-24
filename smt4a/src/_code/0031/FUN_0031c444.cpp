@@ -1,45 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031c444` (_code @ 0x31c444, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the constant 0 in r5 for both the scrGetArg index and the fade channel and clamps with cmpne/movgt; built reloads 0 and branches around the clamp. */
+#include "common.h"
+
+struct EventCommand {
+    u8 unk00[0x10];
+    s32 position; // 0x10
+    s32 length;   // 0x14
+};
 
 extern "C" {
 
-int eventSetUnderMessageFade(int, int, int);
-int SBORROW4(int, int);
+extern EventCommand *g_eventCommand; /* 0x57f554 */
+s32 scrGetCommandFrame(void);
+s32 scrGetArg(u32 index);
+s32 FUN_00203d74(void);
+void eventSetUnderMessageFade(u32 channel, s32 steps, s32 mode, f32 value);
 
-extern int g_eventCommand; /* 0x57f554 */
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_00203d74(void);
-extern int scrGetArg(unsigned int);
-extern int scrGetCommandFrame(void);
-/* Supplied declaration required: eventSetUnderMessageFade. */
-
-
-unsigned char FUN_0031c444(void)
-
+// Script command: start the under-message fade (steps clamped to 4 while FUN_00203d74 is true); while running, report completion.
+u8 FUN_0031c444(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v0 = scrGetCommandFrame();
-  if (temp_v0 == 0) {
-    temp_v1 = scrGetArg(0);
-    temp_v0 = FUN_00203d74();
-    temp_v2 = temp_v0 != 0;
-    temp_v0 = 0;
-    if (temp_v2) {
-      temp_v0 = temp_v1 - 4;
+    if (scrGetCommandFrame() != 0) {
+        return g_eventCommand->position == g_eventCommand->length;
     }
-    if ((temp_v2 && temp_v1 != 4) && temp_v0 < 0 == (temp_v2 && SBORROW4(temp_v1,4))) {
-      temp_v1 = 4;
+    s32 steps = scrGetArg(0);
+    if (FUN_00203d74() != 0 && steps > 4) {
+        steps = 4;
     }
-    eventSetUnderMessageFade(0,temp_v1,0);
+    eventSetUnderMessageFade(0, steps, 0, 1.0f);
     return 0;
-  }
-  return *(int *)(g_eventCommand + 0x10) == *(int *)(g_eventCommand + 0x14);
 }
 
 } /* extern "C" */

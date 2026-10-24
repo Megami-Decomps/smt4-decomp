@@ -10,7 +10,7 @@ int _ZN9Obj55aff4D1Ev(int *);
 int _ZN9Obj55aff4C1Ev(int *);
 int FUN_002fbc1a(int, int *);
 int clearStringVector(...);
-int FUN_0030d3ba(int, int);
+int _ZN12AsdAllocatorI9Obj55aff4E9constructEPS0_RKS0_(int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ typedef struct {
 extern int streamReadU32(int, unsigned int *);
 /* Supplied declaration required: FUN_002fbc1a. */
 /* Supplied declaration required: clearStringVector. */
-/* Supplied declaration required: FUN_0030d3ba. */
+/* Supplied declaration required: _ZN12AsdAllocatorI9Obj55aff4E9constructEPS0_RKS0_. */
 
 
 void FUN_00128ee6(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -58,7 +58,7 @@ void FUN_00128ee6(int param_1,int param_2,unsigned int param_3,unsigned int para
       temp_v0 = *(int *)(param_2 + 4);
       if (temp_v0 != *(int *)(param_2 + 8)) {
         *(int *)(param_2 + 4) = temp_v0 + 8;
-        FUN_0030d3ba(param_2,temp_v0);
+        _ZN12AsdAllocatorI9Obj55aff4E9constructEPS0_RKS0_(param_2,temp_v0);
       }
       else {
         FUN_0013400a(param_2,temp_v0,&iStack_20);

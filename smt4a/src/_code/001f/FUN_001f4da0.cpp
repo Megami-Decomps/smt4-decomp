@@ -1,52 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f4da0` (_code @ 0x1f4da0, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the selection of the found/free entry differs (retail materialises it with `mov r0,#0; movne r0,rX` on each exit path and keeps the free entry in ip) */
+#include "common.h"
+
+struct CacheEntry {
+    u32 key;    // 0x00
+    u32 value;  // 0x04
+};
+
+struct CacheRecord {
+    u8 unk00[0x10];    // 0x00
+    CacheEntry entry;  // 0x10
+    u8 unk18[0x10];    // 0x18
+};
+
+struct SaveBlockView {
+    u8 unk00[0x29500];    // 0x00000
+    CacheRecord slots[16]; // 0x29500
+};
+
+struct DataBlocks {
+    u8 unk00[4];
+    SaveBlockView *save;
+};
 
 extern "C" {
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+extern DataBlocks g_gameDataBlocks;
 
-extern int DAT_0057f69c; /* 0x57f69c */
-
-
-int FUN_001f4da0(int param_1)
-
+/* Looks up the cached value for `key` in the 16-record table; an unused record is picked when the key is absent. */
+u32 FUN_001f4da0(u32 key)
 {
-/* irregular: 2 goto(s) */
-  int *piVar1;
-  int temp_v0;
-  int *piVar3;
-  
-  piVar3 = (int *)0x0;
-  temp_v0 = 0;
-  while( 1 ) {
-    piVar1 = (int *)(DAT_0057f69c + temp_v0 * 0x28 + 0x29510);
-    if (*piVar1 == 0 && piVar3 == (int *)0x0) {
-      piVar3 = piVar1;
+    CacheEntry *freeEntry = NULL;
+    CacheEntry *found = NULL;
+    CacheRecord *slots = g_gameDataBlocks.save->slots;
+
+    for (s32 i = 0; i < 16; i++) {
+        CacheEntry *entry = &slots[i].entry;
+
+        if (entry->key == 0 && freeEntry == NULL) {
+            freeEntry = entry;
+        }
+        if (entry->key == key) {
+            found = entry;
+            break;
+        }
     }
-    if (*piVar1 == param_1) break;
-    temp_v0 = temp_v0 + 1;
-    if (temp_v0 >= 0x10) {
-LAB_001f4dfc:
-      piVar1 = (int *)0x0;
-      if (piVar3 != (int *)0x0) {
-        piVar1 = piVar3;
-      }
-LAB_001f4e04:
-      if (*piVar1 != 0) {
-        temp_v0 = piVar1[1];
-      }
-      else {
-        temp_v0 = 0;
-      }
-      return temp_v0;
-    }
-  }
-  if (piVar1 != (int *)0x0) goto LAB_001f4e04;
-  goto LAB_001f4dfc;
+    CacheEntry *selected = found != NULL ? found : freeEntry;
+
+    return selected->key != 0 ? selected->value : 0;
 }
 
 } /* extern "C" */

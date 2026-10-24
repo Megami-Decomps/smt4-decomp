@@ -19,7 +19,7 @@ typedef struct {
 
 extern unsigned char LAB_001194e4; /* 0x1194e4 */
 
-extern unsigned int *FUN_002e7908(unsigned char *, unsigned int *);
+extern unsigned int *_ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 extern int FUN_002ea6fc(int);
@@ -46,7 +46,7 @@ void FUN_00119444(int param_1)
   
   if (*(char *)(param_1 + 800) != '\0') {
     temp_v4 = 0x80010004;
-    puVar1 = (unsigned int *)FUN_002e7908(temp_v2,(unsigned int *)&temp_v4);
+    puVar1 = (unsigned int *)_ZN12OnlineResultC1ERKj(temp_v2,(unsigned int *)&temp_v4);
   }
   else {
     if (*(char *)(param_1 + 0xf8) == '\x02') {

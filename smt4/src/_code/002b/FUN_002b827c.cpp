@@ -10,7 +10,7 @@ struct ButtonHelpContextRecord {
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;
 ButtonHelpContextRecord *dataTableGetEntry0e(u32 context);
-void FUN_002bee58(ButtonHelpDisplayUnit *unit, s32 selected);
+void spriteStartAnimationByIndex(ButtonHelpDisplayUnit *unit, s32 selected);
 void ifTouchDecrementTimer(void);
 void FUN_002a9fdc(ButtonHelpDisplayUnit *unit, s32 state, s32 mode);
 void timerStart(ButtonHelpDisplayUnit *unit, s32 state, s32 mode);
@@ -19,7 +19,7 @@ void timerStart(ButtonHelpDisplayUnit *unit, s32 state, s32 mode);
 static __inline void buttonHelpReleaseSelections(ButtonHelpSelectionViewIV *work)
 {
     for (s32 index = 0; index < 6; ++index) {
-        FUN_002bee58(&work->units[index], 1);
+        spriteStartAnimationByIndex(&work->units[index], 1);
         if (work->kinds[index].kind != 0) {
             if (work->kinds[index].kind == 7 || work->kinds[index].kind == 9)
                 ifTouchDecrementTimer();
@@ -43,7 +43,7 @@ extern "C" void FUN_002b827c(u32 context)
             buttonHelpReleaseSelections(selection);
         } else if (next->panelMode) {
             for (s32 index = 0; index < 6; ++index) {
-                FUN_002bee58(&selection->units[index], 1);
+                spriteStartAnimationByIndex(&selection->units[index], 1);
                 if (selection->kinds[index].kind != 0) {
                     selection->kinds[index].kind = 0;
                     ifTouchDecrementTimer();

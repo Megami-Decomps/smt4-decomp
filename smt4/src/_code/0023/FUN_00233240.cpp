@@ -10,7 +10,7 @@ typedef struct SpriteSetOwner {
 } SpriteSetOwner;
 
 void timerStart(SpritePlaybackView *sprite, s32 key, s32 mode);
-void FUN_002bee58(SpritePlaybackView *sprite, s32 key);
+void spriteStartAnimationByIndex(SpritePlaybackView *sprite, s32 key);
 
 static __inline void spriteSetStart(SpritePlaybackView *sprite, s32 key)
 {
@@ -34,7 +34,7 @@ void FUN_00233240(SpriteSetOwner *owner, u32 index)
         spriteSetStart(&owner->sprites[5], 4);
         break;
     case 2:
-        FUN_002bee58(&owner->sprites[2], 0);
+        spriteStartAnimationByIndex(&owner->sprites[2], 0);
         break;
     case 3:
         spriteSetStart(&owner->sprites[3], 2);

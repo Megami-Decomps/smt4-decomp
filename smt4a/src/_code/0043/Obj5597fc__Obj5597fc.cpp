@@ -3,7 +3,7 @@
 
 extern "C" {
 extern const ZeroWordPair *g_defaultWordPairValue;
-void assignWordVector(Obj55a5a8RawArray *destination, const Obj55a5a8RawArray *source);
+void _ZNSt6vectorIPv12AsdAllocatorIS0_EEaSERKS3_(Obj55a5a8RawArray *destination, const Obj55a5a8RawArray *source);
 void FUN_00110b28(SmallTextString *destination, const SmallTextString *source);
 }
 
@@ -13,12 +13,12 @@ Obj5597fc::Obj5597fc()
     enabled = 1;
     {
         Obj55a5a8RawArray empty;
-        assignWordVector(&first, &empty);
+        _ZNSt6vectorIPv12AsdAllocatorIS0_EEaSERKS3_(&first, &empty);
     }
     firstFlag = 0;
     {
         Obj55a5a8RawArray empty;
-        assignWordVector(&second, &empty);
+        _ZNSt6vectorIPv12AsdAllocatorIS0_EEaSERKS3_(&second, &empty);
     }
     kind = 0xffff;
     firstPair = *g_defaultWordPairValue;

@@ -22,7 +22,7 @@ typedef struct SortKey {
 UnitData *FUN_002498ec(u16 index);
 s32 idIsAbove400(u32 id);
 s32 FUN_0024c52c(u32 id);
-ItemData *FUN_002ae164(u32 id);
+ItemData *dataTable40FindById(u32 id);
 void FUN_00257568(SortKey *a, SortKey *b);
 
 /* Orders two keys by rank, then by descending item order (ids above 400 rank 99 with order 0). */
@@ -38,14 +38,14 @@ static s32 sortKeyCompare(const SortKey *a, const SortKey *b)
         orderA = 0;
     } else {
         rankA = FUN_0024c52c(a->id);
-        orderA = FUN_002ae164(a->id)->order;
+        orderA = dataTable40FindById(a->id)->order;
     }
     if (idIsAbove400(b->id)) {
         rankB = 99;
         orderB = 0;
     } else {
         rankB = FUN_0024c52c(b->id);
-        orderB = FUN_002ae164(b->id)->order;
+        orderB = dataTable40FindById(b->id)->order;
     }
     s32 diff = rankA - rankB;
 

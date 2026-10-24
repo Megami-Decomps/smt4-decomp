@@ -5,7 +5,7 @@
 extern "C" {
 
 int btlMainFindEntryByListedId(unsigned int *, int);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int dataTable08Sub1GetRecord(void);
 int rt_memclr(int, int);
 int __aeabi_memset4(unsigned int *, int, unsigned int);
@@ -22,7 +22,7 @@ extern unsigned int g_btlAction; /* 0x434278 */
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: __aeabi_memset4. */
@@ -62,7 +62,7 @@ void FUN_003ca6c4(int *param_1,unsigned int *param_2)
   temp_v2 = *(short *)(param_2[10] + 0x14c);
   temp_v4 = *(unsigned int *)(*(int *)(*param_1 + 0x1fc0) + (unsigned int)(unsigned short)param_2[0xb] * 0x288);
   temp_v5 = temp_v10;
-  FUN_002ae164();
+  dataTable40FindById();
   dataTable08Sub1GetRecord();
   if (temp_v2 != 2) {
     if (temp_v2 == 8) {
@@ -71,7 +71,7 @@ void FUN_003ca6c4(int *param_1,unsigned int *param_2)
         temp_v8 = (unsigned int)*(unsigned short *)(temp_v10 + 0x62);
       }
       if ((!(temp_v10 == 0 || temp_v8 == 0)) &&
-         ((FUN_002ae164(), temp_v8 == 0 ||
+         ((dataTable40FindById(), temp_v8 == 0 ||
           (temp_v8 = (*(unsigned int *)(temp_v5 + 0x28) & 0x1ff) >> 5,
           !((temp_v8 != 2 && temp_v8 != 3) && temp_v8 != 4))))) {
         temp_v3 = 0;

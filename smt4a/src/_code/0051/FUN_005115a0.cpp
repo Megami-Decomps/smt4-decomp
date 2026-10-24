@@ -1,58 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_005115a0` (_code @ 0x5115a0, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the call chain, element-array constructors and offsets match; the compiler places the scene-base recomputation (object - 0x1210) and the tail stores differently (retail computes the base first and addresses the tail through base+0x12fc; the build sinks the base and folds the offsets). Really the inlined constructor of a global derived object (this = result of the base constructor). */
+#include "common.h"
+
+/* The global scene object (the part its constructor finishes). */
+struct SceneTail {
+    /* 0x00 */ u8 unk00[0xc];
+    /* 0x0c */ u32 unk0c;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ s32 unk14;
+};
+
+struct SceneObject {
+    /* 0x0000 */ u8 unk0000[0x12fc];
+    /* 0x12fc */ SceneTail tail;
+};
 
 extern "C" {
 
-int emptyStub_002f4370(int, int, int);
-int __aeabi_vec_ctor_nocookie_nodtor(...);
+extern u8 entry;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+typedef void (*ElementCtor)(void *element);
 
-extern int FUN_00401654(...); /* 0x401654 */
-extern int objectRegisterPart(...); /* 0x41306c */
-extern unsigned char LAB_00417a10; /* 0x417a10 */
-extern unsigned char LAB_0045b824; /* 0x45b824 */
-extern int FUN_0045bbdc(...); /* 0x45bbdc */
+void *__aeabi_vec_ctor_nocookie_nodtor(void *array, ElementCtor ctor, u32 elementSize, u32 count);
+void emptyStub_002f4370(void *object, void (*destructor)(void *), void *moduleHandle);
 
-/* Supplied declaration required: emptyStub_002f4370. */
-/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-extern int FUN_0045c0ac(int);
-extern int installVtbl55BDE0(void);
-extern int FUN_0045c310(int);
-extern int FUN_0045e798(int);
-extern int nw_snd_Sound3DListener_Sound3DListener_sub_object(int);
+u8 *installVtbl55BDE0(void);
+u8 *FUN_0045e798(u8 *part);
+u8 *FUN_0045c310(u8 *part);
+u8 *FUN_0045c0ac(u8 *part);
+u8 *nw_snd_Sound3DListener_Sound3DListener_sub_object(u8 *part);
 
+void FUN_00401654(void *element);
+void objectRegisterPart(void *element);
+void FUN_0045bbdc(void *element);
+extern u8 LAB_00417a10, LAB_0045b824;
+void FUN_003f2cb0(void *object);
 
+// Constructs the global scene object: its base parts, the element arrays and the 3D listener,
+// then registers its destructor.
 void FUN_005115a0(void)
-
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = installVtbl55BDE0();
-  temp_v0 = FUN_0045e798(temp_v0 + 0x194);
-  temp_v0 = FUN_0045c310(temp_v0 + 0x118);
-  temp_v0 = temp_v0 + 0x278;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,FUN_00401654,0x70,4);
-  temp_v0 = temp_v0 + 0x1c0;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,&LAB_00417a10,0x3c,2);
-  temp_v0 = temp_v0 + 0x80;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,objectRegisterPart,0x3c,4);
-  temp_v0 = FUN_0045c0ac(temp_v0 + 0xf0);
-  temp_v0 = temp_v0 + 0x3c;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,FUN_0045bbdc,0x88,0x10);
-  temp_v0 = temp_v0 + 0x880;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,&LAB_0045b824,4,0x10);
-  temp_v0 = nw_snd_Sound3DListener_Sound3DListener_sub_object(temp_v0 + 0x100);
-  *(unsigned int *)(temp_v0 + 0xf8) = 0;
-  *(unsigned int *)(temp_v0 + 0xfc) = 0;
-  *(unsigned int *)(temp_v0 + 0x100) = 0xffffffff;
-  emptyStub_002f4370(temp_v0 - 0x1210,0x3f2cb0,0x100000);
-  return;
+    u8 *object = installVtbl55BDE0();
+    object = FUN_0045e798(object + 0x194);
+    object = FUN_0045c310(object + 0x118);
+    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x278, FUN_00401654, 0x70, 4);
+    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x1c0, (ElementCtor)&LAB_00417a10, 0x3c, 2);
+    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x80, objectRegisterPart, 0x3c, 4);
+    object = FUN_0045c0ac(object + 0xf0);
+    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x3c, FUN_0045bbdc, 0x88, 0x10);
+    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x880, (ElementCtor)&LAB_0045b824, 4, 0x10);
+    object = nw_snd_Sound3DListener_Sound3DListener_sub_object(object + 0x100);
+    SceneObject *scene = (SceneObject *)(object - 0x1210);
+    scene->tail.unk0c = 0;
+    scene->tail.unk10 = 0;
+    scene->tail.unk14 = -1;
+    emptyStub_002f4370(scene, FUN_003f2cb0, &entry);
 }
 
-} /* extern "C" */
+}

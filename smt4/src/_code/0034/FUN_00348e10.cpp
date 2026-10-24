@@ -1,44 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00348e10` (_code @ 0x348e10, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTable1bOr1cGetRecord(void);
+typedef struct QuestRecord {
+    /* 0x000 */ u8 unk000[7];
+    /* 0x007 */ u8 flags;
+    /* 0x008 */ u8 unk008[0x194];
+    /* 0x19C */ u16 areaId;
+} QuestRecord;
 
-extern int questRequirementsMet(unsigned int);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-extern int gameGetQuestCenterBlock(void);
+typedef struct QuestCenterBlock {
+    /* 0x000 */ u8 unk000[0x25C];
+    /* 0x25C */ u8 maxAvailable[1]; /* per area: most quests seen as available */
+} QuestCenterBlock;
 
+QuestCenterBlock *gameGetQuestCenterBlock(void);
+QuestRecord *dataTable1bOr1cGetRecord(u16 id);
+s32 questRequirementsMet(u16 id);
 
-void FUN_00348e10(unsigned int param_1)
-
+/* Raises the area's recorded maximum to the number of quests in it that are available now. */
+void FUN_00348e10(u32 area)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned char *pbVar5;
-  
-  temp_v0 = gameGetQuestCenterBlock();
-  temp_v3 = 0;
-  pbVar5 = (unsigned char *)(temp_v0 + param_1 + 0x25c);
-  temp_v2 = 0;
-  do {
-    temp_v1 = temp_v2;
-    dataTable1bOr1cGetRecord();
-    if ((((temp_v1 != 0) && ((*(unsigned char *)(temp_v1 + 7) & 1) == 0)) &&
-        (*(unsigned short *)(temp_v1 + 0x19c) == param_1)) &&
-       (temp_v0 = questRequirementsMet(temp_v2 & 0xffff), temp_v0 != 0)) {
-      temp_v3 = temp_v3 + 1;
+    u8 *maxAvailable = &gameGetQuestCenterBlock()->maxAvailable[area];
+    s32 count = 0;
+
+    for (s32 id = 0; id < 400; id++) {
+        QuestRecord *record = dataTable1bOr1cGetRecord(id);
+
+        if (record != NULL && (record->flags & 1) == 0 && record->areaId == area && questRequirementsMet(id) != 0) {
+            count++;
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while ((int)temp_v2 < 400);
-  if ((int)(unsigned int)*pbVar5 < temp_v3) {
-    *pbVar5 = (unsigned char)temp_v3;
-  }
-  return;
+    if (count > *maxAvailable) {
+        *maxAvailable = count;
+    }
 }
 
 } /* extern "C" */

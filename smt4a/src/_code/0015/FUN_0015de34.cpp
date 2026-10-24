@@ -1,141 +1,114 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015de34` (_code @ 0x15de34, 0x224 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation: retail keeps the pre-advance cursor in a fresh register (mov r6,r5; add r5,..,r6) and emits a stm for the DAT_0059dbac pair; two compiler nop{0} before the VoiceManager call are missing. */
+#include "AsdSDK/AsdDebugHooks.h"
+
+/* Sound system memory layout, read from the caller's setup block. */
+struct SndInitConfig {
+    /* 0x00 */ u32 soundThreadMem;
+    /* 0x04 */ u32 workMode;
+    /* 0x08 */ u32 workSize;
+    /* 0x0C */ u32 cmdQueueSize;
+    /* 0x10 */ u32 taskParam;
+    /* 0x14 */ u32 managerSize;
+    /* 0x18 */ u32 commandSize;
+    /* 0x1C */ u8 workEnabled;
+    /* 0x1D */ u8 profileEnabled;
+    /* 0x1E */ u8 subWorkEnabled;
+    /* 0x20 */ s32 profileSize;
+};
+
+struct SndState {
+    /* 0x0 */ u8 workEnabled;
+    /* 0x1 */ u8 initialized;
+    /* 0x2 */ u8 commandsQueued;
+    /* 0x4 */ u32 voiceCount;
+};
+
+struct SndMemoryRange {
+    /* 0x0 */ s32 base;
+    /* 0x4 */ s32 size;
+};
+
+extern SndState DAT_0059dba4;
+extern SndMemoryRange DAT_0059dbac;
+extern u8 DAT_00646b38;
 
 extern "C" {
 
-int FUN_00174b5c(unsigned int, unsigned int, int *);
-int FUN_0017561c(unsigned int, int, unsigned int);
+int FUN_00174ae0(void);
+int FUN_00174b5c(int, u32, SndMemoryRange *);
+int FUN_0017561c(int, int, u32);
+int objectCommandQueueGet(void);
 int FUN_001757fc(void);
-int FUN_00175858(...);
-int FUN_00175a38(unsigned int, int, unsigned int);
-int FUN_00175a78(unsigned int, unsigned int);
-int FUN_00175a88(unsigned char *, int);
-int FUN_00175bb8(unsigned int, int, unsigned int);
-int FUN_00175c30(unsigned int, unsigned int);
+int FUN_00175858(int, int, u32, u32, int, u32, u32, u32, signed char);
+int FUN_00175a38(int, int, int);
+int FUN_00175a78(int, u32);
+int FUN_00175a88(u8 *);
+int FUN_00175bb8(int, int, int);
+int FUN_00175c30(int, u32);
 int FUN_00175c3c(void);
 int FUN_00175cd8(void);
+int FUN_00191330(void);
+int FUN_00191548(void);
 int FUN_001b1998(void);
-int FUN_001b1f04(void);
+int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
+int nw_snd_internal_driver_VoiceManager_GetInstance(void);
 int nw_snd_internal_TaskManager_Initialize(void);
-int nw_snd_internal_driver_SoundThread_SetProfileBuffer(...);
+int nw_snd_internal_driver_SoundThread_SetProfileBuffer(int, int, s32);
 
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
-
-extern unsigned char DAT_0059dba4; /* 0x59dba4 */
-extern signed char DAT_0059dba5; /* 0x59dba5 */
-extern signed char DAT_0059dba6; /* 0x59dba6 */
-extern unsigned int DAT_0059dba8; /* 0x59dba8 */
-extern int DAT_0059dbac; /* 0x59dbac */
-extern unsigned int DAT_0059dbb0; /* 0x59dbb0 */
-extern unsigned char DAT_00646b38; /* 0x646b38 */
-
-extern unsigned int FUN_00174ae0(void);
-/* Supplied declaration required: FUN_00174b5c. */
-/* Supplied declaration required: FUN_0017561c. */
-extern unsigned int objectCommandQueueGet(void);
-/* Supplied declaration required: FUN_001757fc. */
-/* Supplied declaration required: FUN_00175858. */
-/* Supplied declaration required: FUN_00175a38. */
-/* Supplied declaration required: FUN_00175a78. */
-/* Supplied declaration required: FUN_00175a88. */
-/* Supplied declaration required: FUN_00175bb8. */
-/* Supplied declaration required: FUN_00175c30. */
-/* Supplied declaration required: FUN_00175c3c. */
-/* Supplied declaration required: FUN_00175cd8. */
-extern unsigned int FUN_00191330(void);
-extern unsigned int FUN_00191548(void);
-/* Supplied declaration required: FUN_001b1998. */
-/* Supplied declaration required: FUN_001b1f04. */
-extern unsigned int nw_snd_internal_driver_VoiceManager_GetInstance(void);
-/* Supplied declaration required: nw_snd_internal_TaskManager_Initialize. */
-/* Supplied declaration required: nw_snd_internal_driver_SoundThread_SetProfileBuffer. */
-
-
-void FUN_0015de34(unsigned int *param_1,int param_2)
-
+// Lay out the sound system's memory block after `offset` and start the sound thread.
+void FUN_0015de34(SndInitConfig *cfg, int offset)
 {
-/* irregular: 15 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned char temp_v7;
-  
-  if (DAT_0059dba5 == '\0') {
-    FUN_00175a88(&DAT_00646b38,0x4000163);
-    if (DAT_0059dba6 == '\0') {
-      temp_v0 = param_1[3];
-      temp_v4 = param_1[6];
-      temp_v1 = objectCommandQueueGet();
-      FUN_0017561c(temp_v1,param_2,param_1[3]);
-      temp_v1 = FUN_00191330();
-      FUN_0017561c(temp_v1,temp_v0 + param_2,param_1[6]);
-      param_2 = param_2 + temp_v0 + temp_v4;
-      DAT_0059dba6 = '\x01';
+    asdDebugHookPtrInt(NULL, 0x04000163);
+    if (DAT_0059dba4.initialized == 0) {
+        FUN_00175a88(&DAT_00646b38);
+        if (DAT_0059dba4.commandsQueued == 0) {
+            int queueStart = offset;
+            int commandStart = queueStart + cfg->cmdQueueSize;
+            int queuesSize = cfg->cmdQueueSize + cfg->commandSize;
+            FUN_0017561c(objectCommandQueueGet(), queueStart, cfg->cmdQueueSize);
+            FUN_0017561c(FUN_00191330(), commandStart, cfg->commandSize);
+            offset += queuesSize;
+            DAT_0059dba4.commandsQueued = 1;
+        }
+        int workA = 0;
+        int workB = 0;
+        if (cfg->workEnabled != 0) {
+            workA = offset;
+            offset = cfg->workSize + workA;
+            if (cfg->workMode == 1 && cfg->subWorkEnabled != 0) {
+                workB = offset;
+                offset = cfg->workSize + workB;
+            }
+        }
+        _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
+        FUN_001757fc();
+        int base = offset;
+        offset = cfg->managerSize + base;
+        FUN_001b1998();
+        nw_snd_internal_TaskManager_Initialize();
+        DAT_0059dbac.base = base;
+        DAT_0059dbac.size = cfg->managerSize;
+        int voiceEnd = FUN_00175c30(nw_snd_internal_driver_VoiceManager_GetInstance(), DAT_0059dba4.voiceCount) + offset;
+        int voiceSize = FUN_00175c30(nw_snd_internal_driver_VoiceManager_GetInstance(), DAT_0059dba4.voiceCount);
+        FUN_00175bb8(nw_snd_internal_driver_VoiceManager_GetInstance(), offset, voiceSize);
+        int profileBase = FUN_00175a78(FUN_00191548(), DAT_0059dba4.voiceCount) + voiceEnd;
+        int channelSize = FUN_00175a78(FUN_00191548(), DAT_0059dba4.voiceCount);
+        FUN_00175a38(FUN_00191548(), voiceEnd, channelSize);
+        FUN_00175c3c();
+        FUN_00174b5c(FUN_00174ae0(), cfg->taskParam, &DAT_0059dbac);
+        if (cfg->workEnabled != 0) {
+            FUN_00175858(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(), workA, cfg->workSize,
+                         cfg->soundThreadMem, workB, cfg->workSize, cfg->soundThreadMem, cfg->workMode,
+                         (signed char)cfg->profileEnabled);
+        }
+        if (cfg->profileEnabled != 0 && cfg->profileSize > 0) {
+            nw_snd_internal_driver_SoundThread_SetProfileBuffer(
+                _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(), profileBase, cfg->profileSize);
+        }
+        FUN_00175cd8();
+        DAT_0059dba4.workEnabled = cfg->workEnabled;
+        DAT_0059dba4.initialized = 1;
     }
-    temp_v4 = 0;
-    temp_v0 = param_2;
-    temp_v6 = 0;
-    if (*(char *)(param_1 + 7) != '\0') {
-      temp_v5 = param_1[2] + param_2;
-      temp_v0 = temp_v5;
-      temp_v6 = param_2;
-      if ((param_1[1] == 1) && (*(char *)((int)param_1 + 0x1e) != '\0')) {
-        temp_v0 = param_1[2] + temp_v5;
-        temp_v4 = temp_v5;
-      }
-    }
-    FUN_001b1f04();
-    FUN_001757fc();
-    temp_v5 = param_1[5];
-    FUN_001b1998();
-    nw_snd_internal_TaskManager_Initialize();
-    DAT_0059dbb0 = param_1[5];
-    DAT_0059dbac = temp_v0;
-    temp_v1 = nw_snd_internal_driver_VoiceManager_GetInstance();
-    temp_v2 = FUN_00175c30(temp_v1,DAT_0059dba8);
-    temp_v2 = temp_v2 + temp_v5 + temp_v0;
-    temp_v1 = nw_snd_internal_driver_VoiceManager_GetInstance();
-    temp_v1 = FUN_00175c30(temp_v1,DAT_0059dba8);
-    temp_v3 = nw_snd_internal_driver_VoiceManager_GetInstance();
-    FUN_00175bb8(temp_v3,temp_v5 + temp_v0,temp_v1);
-    temp_v1 = FUN_00191548();
-    temp_v0 = FUN_00175a78(temp_v1,DAT_0059dba8);
-    temp_v1 = FUN_00191548();
-    temp_v1 = FUN_00175a78(temp_v1,DAT_0059dba8);
-    temp_v3 = FUN_00191548();
-    FUN_00175a38(temp_v3,temp_v2,temp_v1);
-    FUN_00175c3c();
-    temp_v1 = FUN_00174ae0();
-    FUN_00174b5c(temp_v1,param_1[4],&DAT_0059dbac);
-    if (*(char *)(param_1 + 7) != '\0') {
-      temp_v1 = FUN_001b1f04();
-      FUN_00175858(temp_v1,temp_v6,param_1[2],*param_1,temp_v4,param_1[2],*param_1,param_1[1],
-                   (int)*(char *)((int)param_1 + 0x1d));
-    }
-    temp_v7 = *(char *)((int)param_1 + 0x1d) != '\0';
-    temp_v4 = 0;
-    if (temp_v7) {
-      temp_v4 = param_1[8];
-    }
-    if (temp_v7 && 0 < temp_v4) {
-      temp_v1 = FUN_001b1f04();
-      nw_snd_internal_driver_SoundThread_SetProfileBuffer(temp_v1,temp_v0 + temp_v2,param_1[8]);
-    }
-    FUN_00175cd8();
-    DAT_0059dba4 = *(unsigned char *)(param_1 + 7);
-    DAT_0059dba5 = '\x01';
-  }
-  return;
 }
 
-} /* extern "C" */
+}

@@ -2,8 +2,6 @@
 #include "ui/ButtonHelp.h"
 
 struct ButtonHelpPresetRecord { u16 buttons[6]; u8 shown; };
-// The pending preset follows the known globals prefix; do not grow the shared type.
-struct ButtonHelpPresetGlobals { ButtonHelpGlobals prefix; s32 pending; };
 extern "C" {
 extern ButtonHelpPresetGlobals g_buttonHelp;
 const ButtonHelpPresetRecord *dataTableGetEntry0e(u32 preset);

@@ -5,8 +5,8 @@
 
 extern "C" {
 
-int FUN_001ba1c0(...);
-u32 FUN_001d1038(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
+int _ZN7AocMain12queueRequestE17RequestParametersji(...);
+u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
 int FUN_001d10c0(void);
 int FUN_001d1108(void);
 
@@ -22,7 +22,7 @@ int _ZN18WindowStatusResultC1Ej(...);
 int FUN_001bcfb4(int, unsigned int, unsigned int);
 int asdLoadFileAsyncWrap(int, unsigned int, unsigned int, unsigned int);
 int FUN_001d0ea0(int *, unsigned int, int);
-int FUN_001d0fcc(...);
+int _ZN10AocSystemA17getPendingRequestEv(...);
 int legacyResourceIdRemap(...);
 int FUN_002e3c44(unsigned int *, int, int, int *);
 
@@ -71,12 +71,12 @@ extern int FUN_00100836(int, unsigned int, unsigned int *);
 extern int sysLightEventTryWait(int);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern unsigned int _ZN18WindowStatusResultC1Ev(char *);
-/* Supplied declaration required: FUN_001ba1c0. */
+/* Supplied declaration required: _ZN7AocMain12queueRequestE17RequestParametersji. */
 /* Supplied declaration required: FUN_001bcfb4. */
 /* Supplied declaration required: asdLoadFileAsyncWrap. */
 /* Supplied declaration required: FUN_001d0ea0. */
-/* Supplied declaration required: FUN_001d0fcc. */
-/* Supplied declaration required: FUN_001d1038. */
+/* Supplied declaration required: _ZN10AocSystemA17getPendingRequestEv. */
+/* Supplied declaration required: _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle. */
 extern int objGetFlagBit16(int);
 extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: FUN_001d10c0. */
@@ -373,7 +373,7 @@ LAB_001ccc7c:
                   vcallSlot12IfValid(temp_v10 & 0xfffffffe);
                   return;
                 }
-                FUN_001d0fcc(&temp_v18,g_aocSystem);
+                _ZN10AocSystemA17getPendingRequestEv(&temp_v18,g_aocSystem);
                 temp_v15 = temp_v18;
                 temp_v16[0] = acStack_288[0];
                 temp_v16[1] = acStack_288[1];
@@ -397,7 +397,7 @@ LAB_001ccc7c:
         }
       }
       jyoucyuGetTableEntry(0);
-      FUN_001d0fcc(&temp_v19,g_aocSystem);
+      _ZN10AocSystemA17getPendingRequestEv(&temp_v19,g_aocSystem);
       *(unsigned int *)(g_aocMain + 0x754) = (*(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff) | 0x10;
       if (*(int *)(param_2 + 0x14) != 0) {
         asdMemFree();
@@ -428,16 +428,16 @@ LAB_001ccc7c:
       temp_v10 = uStack_298;
       temp_v11 = temp_v17;
       temp_v12 = uStack_290;
-      FUN_001ba1c0(g_aocMain,&temp_v8);
+      _ZN7AocMain12queueRequestE17RequestParametersji(g_aocMain,&temp_v8);
       temp_v6 = 1;
 LAB_001cce80:
       {
-        RequestParameters parameters = {{
+        RequestParameters parameters(
           static_cast<u32>(temp_v15), *(unsigned int*)temp_v16,
           uStack_298, temp_v17, uStack_290
-        }};
-        QueuedRequestHandle handle = {parameters.words[1], parameters.words[2]};
-        temp_v3 = FUN_001d1038(reinterpret_cast<QueuedRequestTokenState*>(g_aocMain),
+        );
+        QueuedRequestHandle handle = {parameters.word(1), parameters.word(2)};
+        temp_v3 = _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(reinterpret_cast<QueuedRequestTokenState*>(g_aocMain),
                               &parameters, handle);
       }
       if (temp_v3 != 0) {

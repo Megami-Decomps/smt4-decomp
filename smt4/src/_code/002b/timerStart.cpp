@@ -1,47 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `timerStart` (_code @ 0x2bd8e8, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail is not shrink-wrapped and keeps the keyframe table in ip and zero in r3; built (default -O3) pushes r4 and returns early, and at -O2 -Otime has the same shape with ip/r3 swapped */
+#include "ui/UiSpriteKeyframes.h"
 
 extern "C" {
 
-typedef struct fn_002bd8e8_arg0 fn_002bd8e8_arg0;
-struct fn_002bd8e8_arg0 {
-    unsigned char pad_0x0[0xc];
-    int field_0xc; /* +0xc */
-    int field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x38];
-    int field_0x4c; /* +0x4c */
-    short field_0x50; /* +0x50 */
-    undefined2 field_0x52; /* +0x52 */
-    char field_0x54; /* +0x54 */
-    unsigned char pad_0x55[0x31];
-    undefined1 field_0x86; /* +0x86 */
-    unsigned char pad_0x87[0x3];
-    undefined1 field_0x8a; /* +0x8a */
-};
-
-
-void timerStart(fn_002bd8e8_arg0 *param_1,int param_2,int param_3)
-
+/* Selects keyframe `frame` of the sprite and moves it to the frame's primary (or, with `alternate`, alternate) position. */
+void timerStart(UiSpriteKeyframeState *sprite, u32 frame, u32 alternate)
 {
-  short *psVar1;
-  
-  if (param_1->field_0x4c != 0) {
-    param_1->field_0x50 = (short)param_2;
-    param_1->field_0x52 = 0;
-    param_1->field_0x86 = 0;
-    param_1->field_0x8a = 0;
-    psVar1 = (short *)(param_1->field_0x4c + param_2 * 0xc);
-    param_1->field_0x54 = (char)param_3;
-    if (param_3 == 0) {
-      param_1->field_0xc = (int)*psVar1 << 0xc;
-      param_1->field_0x10 = (int)psVar1[1] << 0xc;
-      return;
+    UiSpriteKeyframe *keyframe;
+
+    if (sprite->keyframes != NULL) {
+        sprite->frame = frame;
+        sprite->elapsed = 0;
+        sprite->flagA = 0;
+        sprite->flagB = 0;
+        keyframe = &sprite->keyframes[frame];
+        sprite->alternate = alternate;
+        if (alternate != 0) {
+            sprite->x = keyframe->altX << 12;
+            sprite->y = keyframe->altY << 12;
+        } else {
+            sprite->x = keyframe->x << 12;
+            sprite->y = keyframe->y << 12;
+        }
     }
-    param_1->field_0xc = (int)psVar1[2] << 0xc;
-    param_1->field_0x10 = (int)psVar1[3] << 0xc;
-  }
-  return;
 }
 
 } /* extern "C" */

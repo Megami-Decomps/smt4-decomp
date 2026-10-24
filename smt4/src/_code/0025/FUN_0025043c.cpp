@@ -22,7 +22,7 @@ typedef char BattleActionDefinitionOffsetsCheck[sizeof(BattleActionDefinition) =
 
 extern "C" {
 BattleActionDefinition *dataTable08Sub1GetRecord(u16 id);
-Table04Record *FUN_002ae164(u32 skillId);
+Table04Record *dataTable40FindById(u32 skillId);
 BtlMainState *btlGetMainState(void);
 s32 FUN_0033fe6c(s32 side, s32 mode, BattleActionDefinition *action, s32 enabled);
 s32 FUN_0023d9b8(s32 side, s32 mode, Table04Record *skill);
@@ -38,7 +38,7 @@ u32 FUN_0025043c(s32 side, u16 actionId)
     if ((action->mode != 2 && action->mode != 3) || action->kind != 1)
         return 2;
     if (action->skill != 0) {
-        Table04Record *skill = FUN_002ae164(action->skill);
+        Table04Record *skill = dataTable40FindById(action->skill);
         if (skill == NULL)
             return 1;
         if (skill->effectProperties.mode != 2 && skill->effectProperties.mode != 3)

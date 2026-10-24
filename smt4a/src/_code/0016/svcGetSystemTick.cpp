@@ -1,20 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `svcGetSystemTick` (_code @ 0x1623d4, 0x8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the SDK wrapper is an embedded-assembler body (svc 0x28; bx lr); the __svc intrinsic of nn/svc.h compiles to a call with push {r4, lr}/pop {r4, pc} around the svc. */
+#include "nn/svc.h"
 
-extern "C" {
-
-int software_interrupt(int);
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-void svcGetSystemTick(void)
-
+/* The kernel's tick counter (268 MHz). */
+extern "C" s64 svcGetSystemTick(void)
 {
-/* irregular: 1 native warning(s); review required */
-  software_interrupt(0x28);
-  return;
+    return nn::svc::GetSystemTick();
 }
-
-} /* extern "C" */

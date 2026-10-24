@@ -1,70 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037667c` (_code @ 0x37667c, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reloads list->tail for node->prev and bumps count/tail through one writeback store; built reuses the loaded tail and uses separate stores. */
+#include "common.h"
+
+struct EffBlock;
+
+struct EffNode {
+    u8 unk00[0x90];
+    EffBlock *block;  // 0x90
+    u8 unk94[0x18];
+    EffNode *next;    // 0xac
+    EffNode *prev;    // 0xb0
+};
+
+struct EffList {
+    u8 unk00[0x80];
+    s32 count;        // 0x80
+    u8 unk84[4];
+    EffNode *tail;    // 0x88
+    EffNode *head;    // 0x8c
+};
 
 extern "C" {
 
-int FUN_001642e4(...);
-int asdMemFree(...);
-int FUN_00290edc(...);
-int FUN_003007a0(...);
+void *FUN_001642e4(const void *path, u32 *size, u32 align, u32 flags);
+EffBlock *FUN_00290edc(void *data);
+void asdMemFree(void *ptr);
+EffNode *FUN_003007a0(void);
 
-typedef struct fn_0037667c_arg0 fn_0037667c_arg0;
-typedef struct fn_0037667c_arg1 fn_0037667c_arg1;
-struct fn_0037667c_arg0 {
-    unsigned char pad_0x0[0x80];
-    int field_0x80; /* +0x80 */
-    unsigned char pad_0x84[0x4];
-    void *field_0x88; /* +0x88 */
-    int field_0x8c; /* +0x8c */
-};
-struct fn_0037667c_arg1 {
-    unsigned char pad_0x0[0x80];
-    unsigned char field_0x80; /* +0x80 */
-    unsigned char pad_0x81[0x7];
-    unsigned char field_0x88; /* +0x88 */
-    unsigned char pad_0x89[0x3];
-    unsigned char field_0x8c; /* +0x8c */
-    unsigned char pad_0x8d[0x3];
-    int field_0x90; /* +0x90 */
-    unsigned char pad_0x94[0x18];
-    undefined4 field_0xac; /* +0xac */
-    undefined4 field_0xb0; /* +0xb0 */
-};
-
-/* Supplied declaration required: FUN_001642e4. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_00290edc. */
-/* Supplied declaration required: FUN_003007a0. */
-
-
-void FUN_0037667c(fn_0037667c_arg0 *param_1,fn_0037667c_arg1 *param_2,unsigned int param_3,
-                 unsigned int param_4)
-
+// Load a block from a file, clone it into a new node and append the node to the list.
+void FUN_0037667c(EffList *list, const void *path)
 {
-/* irregular: 4 native warning(s); review required */
-  fn_0037667c_arg1 *pfVar1;
-  int uStack_18;
-  
-  uStack_18 = param_4;
-  FUN_001642e4(param_2,&uStack_18,1,0x80);
-  pfVar1 = param_2;
-  FUN_00290edc();
-  asdMemFree();
-  FUN_003007a0();
-  param_2->field_0xac = 0;
-  param_2->field_0x90 = (int)pfVar1;
-  if (param_1->field_0x88 != (void *)0x0) {
-    *(fn_0037667c_arg1 **)((int)param_1->field_0x88 + 0xac) = param_2;
-    param_2->field_0xb0 = (undefined4)param_1->field_0x88;
-  }
-  else {
-    param_1->field_0x8c = (int)param_2;
-    param_2->field_0xb0 = 0;
-  }
-  param_1->field_0x80 = param_1->field_0x80 + 1;
-  param_1->field_0x88 = param_2;
-  return;
+    u32 size;
+    void *data = FUN_001642e4(path, &size, 1, 0x80);
+    EffBlock *block = FUN_00290edc(data);
+    asdMemFree(data);
+    EffNode *node = FUN_003007a0();
+    node->next = NULL;
+    node->block = block;
+    if (list->tail != NULL) {
+        list->tail->next = node;
+        node->prev = list->tail;
+    } else {
+        list->head = node;
+        node->prev = NULL;
+    }
+    list->count++;
+    list->tail = node;
 }
 
 } /* extern "C" */

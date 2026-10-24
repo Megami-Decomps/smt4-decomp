@@ -1,46 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fe964` (_code @ 0x2fe964, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct ScreenGameState {
+    u8 unk000[0x251];  // 0x000
+    u8 bgActive;       // 0x251
+};
 
 extern "C" {
 
-int commonBgReset(void);
-int FUN_002757a8(void);
-int FUN_00275bc8(void);
-int FUN_00289880(void);
-int buttonHelpSetPreset(int);
+extern ScreenGameState g_gameState;
 
-extern unsigned char g_gameState; /* 0x49f91c */
+s32 scrGetArg(u32 index);
+void commonBgReset(void);
+void FUN_002757a8(void);
+void FUN_00275bc8(void);
+void FUN_00289880(void);
+void buttonHelpSetPreset(s32 preset);
 
-/* Supplied declaration required: commonBgReset. */
-/* Supplied declaration required: FUN_002757a8. */
-/* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00289880. */
-extern int scrGetArg(void);
-/* Supplied declaration required: buttonHelpSetPreset. */
-
-
-unsigned int FUN_002fe964(void)
-
+/* Script command (called with r0 = 0, which reaches scrGetArg unchanged): switches the common background on (arg != 0) or off (arg == 0), only when it changes. */
+s32 FUN_002fe964(u32 argIndex)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = scrGetArg();
-  if (temp_v0 != 0) {
-    if ((*(signed char *)((unsigned char *)&g_gameState + 0x251)) == '\0') {
-      (*(signed char *)((unsigned char *)&g_gameState + 0x251)) = '\x01';
-      FUN_00275bc8();
-      FUN_00289880();
-      buttonHelpSetPreset(0x90);
+    u8 active;
+    s32 value = scrGetArg(argIndex);
+
+    active = g_gameState.bgActive;
+    if (value == 0) {
+        if (active != 0) {
+            g_gameState.bgActive = 0;
+            commonBgReset();
+            FUN_002757a8();
+        }
+    } else if (active == 0) {
+        g_gameState.bgActive = 1;
+        FUN_00275bc8();
+        FUN_00289880();
+        buttonHelpSetPreset(0x90);
     }
-  }
-  else if ((*(signed char *)((unsigned char *)&g_gameState + 0x251)) != '\0') {
-    (*(signed char *)((unsigned char *)&g_gameState + 0x251)) = '\0';
-    commonBgReset();
-    FUN_002757a8();
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

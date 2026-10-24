@@ -1,159 +1,140 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a66c4` (_code @ 0x3a66c4, 0x2c0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only register allocation differs (retail keeps the base percentage and a zero constant in extra callee-saved registers, and the first side-unit clamp stores the limit register). */
+#include "common.h"
+
+struct StepPlayerData {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u16 id;
+    /* 0x0E */ u8 unk0E[0x0E];
+    /* 0x1C */ s16 maxHp;
+    /* 0x1E */ s16 maxMp;
+    /* 0x20 */ u8 unk20[0x0A];
+    /* 0x2A */ s16 hp;
+    /* 0x2C */ s16 mp;
+    /* 0x2E */ u8 unk2E[0x44];
+    /* 0x72 */ u16 flags;
+};
+
+struct StepUnitRecord {
+    /* 0x00 */ u8 unk00[0x0E];
+    /* 0x0E */ s16 maxHp;
+    /* 0x10 */ s16 maxMp;
+    /* 0x12 */ u8 unk12[0x18];
+    /* 0x2A */ s16 hp;
+    /* 0x2C */ s16 mp;
+    /* 0x2E */ u8 unk2E[6];
+    /* 0x34 */ u16 skills[8];
+    /* 0x44 */ u16 flags;
+};
+
+/* The save's slot table: the three side slots at 0x9108 (-1 = empty). */
+struct StepSlotTable {
+    /* 0x0000 */ u8 unk0000[0x9108];
+    /* 0x9108 */ s8 side[3];
+};
 
 extern "C" {
+s32 flagBitIsSet(u32 bit);
+StepPlayerData *gameGetPlayerData(void);
+StepSlotTable *gameGetSlotTable(void);
+StepUnitRecord *gameGetUnitRecord(s32 slot);
 
-/* stack frame of void: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
-
-extern int flagBitIsSet(unsigned int);
-extern int gameGetUnitRecord(void);
-extern int gameGetSlotTable(void);
-extern int gameGetPlayerData(void);
-
-
-void FUN_003a66c4(void)
-
+/* A percentage of max, never negative. */
+static __inline u32 unitHasFlag(const StepUnitRecord *unit, u32 bit)
 {
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  short temp_v5;
-  short temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  
-  temp_v8 = 0;
-  temp_v1 = gameGetPlayerData();
-  if ((*(unsigned short *)(temp_v1 + 0x72) & 2) == 0) {
-    temp_v1 = flagBitIsSet(0x6b);
-    if ((temp_v1 != 0) || (temp_v1 = flagBitIsSet(0x69), temp_v1 != 0)) {
-      temp_v8 = 5;
+    return (static_cast<u32>(unit->flags) & (1 << (bit & 0xFF))) != 0;
+}
+
+static __inline s32 percentOfMax(s32 max, s32 percent)
+{
+    s32 amount = max * percent / 100;
+    return amount < 0 ? 0 : amount;
+}
+
+/* Heals the unit by a percentage of its maximum HP, keeping the result in 1..max. */
+static __inline void unitHealHpPercent(StepUnitRecord *unit, s32 percent)
+{
+    s32 max = unit->maxHp;
+    s32 hp = unit->hp + percentOfMax(max, percent);
+    if (hp > max)
+        hp = max;
+    s16 value = hp;
+    if (unit != NULL) {
+        s32 limit = unit->maxHp;
+        if (value > limit)
+            value = limit;
+        else if (value < 1)
+            value = 1;
+        unit->hp = value;
     }
-    else {
-      temp_v1 = flagBitIsSet(0x68);
-      if (temp_v1 != 0) {
-        temp_v8 = 2;
-      }
-    }
-    temp_v2 = gameGetPlayerData();
-    temp_v1 = temp_v8;
-    if (*(short *)(temp_v2 + 0xc) == 0x2a6) {
-      temp_v1 = temp_v8 + 2;
-    }
-    if (temp_v1 != 0) {
-      temp_v2 = gameGetPlayerData();
-      temp_v7 = (int)*(short *)(temp_v2 + 0x1c);
-      temp_v2 = gameGetPlayerData();
-      temp_v1 = (temp_v7 * temp_v1) / 100;
-      if (temp_v1 < 0) {
-        temp_v1 = 0;
-      }
-      temp_v1 = *(short *)(temp_v2 + 0x2a) + temp_v1;
-      if (temp_v7 < temp_v1) {
-        temp_v1 = temp_v7;
-      }
-      temp_v5 = (short)temp_v1;
-      temp_v1 = gameGetPlayerData();
-      temp_v6 = *(short *)(temp_v1 + 0x1c);
-      if ((temp_v5 <= temp_v6) && (temp_v6 = temp_v5, temp_v5 < 1)) {
-        temp_v6 = 1;
-      }
-      *(short *)(temp_v1 + 0x2a) = temp_v6;
-    }
-    if ((temp_v8 != 0) && (temp_v1 = flagBitIsSet(0x6b), temp_v1 != 0)) {
-      temp_v1 = gameGetSlotTable();
-      temp_v2 = 0;
-      do {
-        if (-1 < *(char *)(temp_v1 + 0x9108 + temp_v2)) {
-          temp_v7 = gameGetUnitRecord();
-          temp_v0 = *(unsigned short *)(temp_v7 + 0x44);
-          if (((temp_v0 & 2) == 0 && (temp_v0 & 0x400) == 0) && (temp_v0 & 4) == 0) {
-            temp_v3 = (int)*(short *)(temp_v7 + 0xe);
-            temp_v4 = (temp_v3 * temp_v8) / 100;
-            if (temp_v4 < 0) {
-              temp_v4 = 0;
-            }
-            temp_v4 = temp_v4 + *(short *)(temp_v7 + 0x2a);
-            if (temp_v3 < temp_v4) {
-              temp_v4 = temp_v3;
-            }
-            temp_v5 = (short)temp_v4;
-            if (temp_v7 != 0) {
-              temp_v6 = *(short *)(temp_v7 + 0xe);
-              if ((temp_v5 <= temp_v3) && (temp_v6 = temp_v5, temp_v5 < 1)) {
-                temp_v6 = 1;
-              }
-              *(short *)(temp_v7 + 0x2a) = temp_v6;
-            }
-          }
+}
+
+/* Heals every usable side unit by the percentage. */
+static __inline void healSideUnits(s32 percent, s32 count)
+{
+    const s8 *side = gameGetSlotTable()->side;
+    for (s32 i = 0; i < count; ++i) {
+        if (side[i] >= 0) {
+            StepUnitRecord *unit = gameGetUnitRecord(side[i]);
+            if (!unitHasFlag(unit, 1) && !unitHasFlag(unit, 10) && !unitHasFlag(unit, 2))
+                unitHealHpPercent(unit, percent);
         }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 3);
     }
-    temp_v1 = gameGetSlotTable();
-    temp_v8 = 0;
-    do {
-      if (-1 < *(char *)(temp_v1 + 0x9108 + temp_v8)) {
-        temp_v2 = gameGetUnitRecord();
-        temp_v0 = *(unsigned short *)(temp_v2 + 0x44);
-        if (((temp_v0 & 2) == 0 && (temp_v0 & 0x400) == 0) && (temp_v0 & 4) == 0) {
-          temp_v9 = 0;
-          temp_v10 = 0;
-          temp_v11 = 0;
-          temp_v12 = 0;
-          temp_v13 = 0;
-          if (temp_v2 != 0) {
-            temp_v9 = *(unsigned int *)(temp_v2 + 0x34);
-            temp_v10 = *(unsigned int *)(temp_v2 + 0x38);
-            temp_v11 = *(unsigned int *)(temp_v2 + 0x3c);
-            temp_v12 = *(unsigned int *)(temp_v2 + 0x40);
-          }
-          temp_v7 = 0;
-          do {
-            temp_v5 = *(short *)((int)&temp_v9 + temp_v7 * 2);
-            if ((temp_v5 != 0) && (temp_v5 == 0x1c6)) {
-              temp_v5 = *(short *)(temp_v2 + 0xe);
-              temp_v4 = (int)temp_v5;
-              temp_v7 = (temp_v4 * 2) / 100;
-              if (temp_v7 < 0) {
-                temp_v7 = 0;
-              }
-              temp_v7 = *(short *)(temp_v2 + 0x2a) + temp_v7;
-              if (temp_v4 < temp_v7) {
-                temp_v7 = temp_v4;
-              }
-              temp_v6 = (short)temp_v7;
-              if (temp_v2 != 0) {
-                if ((temp_v6 <= temp_v4) && (temp_v5 = temp_v6, temp_v6 < 1)) {
-                  temp_v5 = 1;
+}
+
+/* Heals the usable side units that know the regeneration skill. */
+static __inline void healRegenSkillUnits(s32 percent, s32 count)
+{
+    const s8 *side = gameGetSlotTable()->side;
+    for (s32 i = 0; i < count; ++i) {
+        if (side[i] >= 0) {
+            StepUnitRecord *unit = gameGetUnitRecord(side[i]);
+            if (!unitHasFlag(unit, 1) && !unitHasFlag(unit, 10) && !unitHasFlag(unit, 2)) {
+                u16 skills[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+                if (unit != NULL) {
+                    for (s32 k = 0; k < 8; ++k)
+                        skills[k] = unit->skills[k];
                 }
-                *(short *)(temp_v2 + 0x2a) = temp_v5;
-              }
-              break;
+                for (s32 k = 0; k < 9; ++k) {
+                    if (skills[k] != 0 && skills[k] == 0x1C6) {
+                        unitHealHpPercent(unit, percent);
+                        break;
+                    }
+                }
             }
-            temp_v7 = temp_v7 + 1;
-          } while (temp_v7 < 9);
         }
-      }
-      temp_v8 = temp_v8 + 1;
-    } while (temp_v8 < 3);
-  }
-  return;
+    }
+}
+
+/* Applies the walking HP recovery to the player and the party's side units. */
+void FUN_003a66c4(void)
+{
+    s32 percent = 0;
+    if (!(gameGetPlayerData()->flags & 2)) {
+        if (flagBitIsSet(0x6B) || flagBitIsSet(0x69))
+            percent = 5;
+        else if (flagBitIsSet(0x68))
+            percent = 2;
+        s32 total = percent;
+        if (gameGetPlayerData()->id == 0x2A6)
+            total += 2;
+        if (total > 0) {
+            s32 max = gameGetPlayerData()->maxHp;
+            s32 hp = gameGetPlayerData()->hp + percentOfMax(max, total);
+            if (hp > max)
+                hp = max;
+            s16 value = hp;
+            StepPlayerData *player = gameGetPlayerData();
+            s32 limit = player->maxHp;
+            if (value > limit)
+                value = limit;
+            else if (value < 1)
+                value = 1;
+            player->hp = value;
+        }
+        if (percent > 0 && flagBitIsSet(0x6B))
+            healSideUnits(percent, 3);
+        healRegenSkillUnits(2, 3);
+    }
 }
 
 } /* extern "C" */

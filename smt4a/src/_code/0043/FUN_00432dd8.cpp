@@ -78,7 +78,7 @@ extern unsigned char DAT_0055add0; /* 0x55add0 */
 /* Supplied declaration required: FUN_001304a8. */
 /* Supplied declaration required: rt_malloc. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
-extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, unsigned char *);
+extern unsigned int _ZN9Obj55aff4C1EPKt(unsigned char *, unsigned char *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 /* Supplied declaration required: _ZN9Obj55b1045resetEv. */
@@ -146,7 +146,7 @@ void FUN_00432dd8(unsigned int param_1)
   
   *(unsigned int *)(param_1 + 8) = 0;
   temp_v45 = param_1;
-  temp_v2 = _ZN9Obj55aff4C1EPKc(temp_v43,&LAB_0043313c);
+  temp_v2 = _ZN9Obj55aff4C1EPKt(temp_v43,&LAB_0043313c);
   _ZN9Obj55aff4aSERKS_(param_1 + 0xc,temp_v2);
   _ZN9Obj55aff4D1Ev(temp_v43);
   temp_v1 = temp_v45;

@@ -2,10 +2,10 @@
 #include "gfx/CameraMatrixCache.h"
 
 extern "C" {
-extern u32 DAT_00476634;
-extern u32 DAT_00476638;
-extern Matrix34Data DAT_004efd6c;
-extern Matrix44 DAT_004efd9c;
+extern u32 _ZGVZN2nw4math5MTX348IdentityEvE8identity;
+extern u32 _ZGVZN2nw4math5MTX448IdentityEvE8identity;
+extern Matrix34Data _ZZN2nw4math5MTX348IdentityEvE8identity;
+extern Matrix44 _ZZN2nw4math5MTX448IdentityEvE8identity;
 s32 __cxa_guard_acquire(u32 *guard);
 void memClear(void *memory, u32 size);
 void nn_math_ARMv6_MTX34CopyAsm(Matrix34Data *output, const Matrix34Data *input);
@@ -31,12 +31,12 @@ static __inline void initializeIdentityRows(f32 *values)
 
 static __inline void initializeSharedIdentity44(void)
 {
-    if (!(DAT_00476638 & 1) && __cxa_guard_acquire(&DAT_00476638)) {
-        initializeIdentityRows(DAT_004efd9c.values);
-        DAT_004efd9c.values[12] = 0.0f;
-        DAT_004efd9c.values[13] = 0.0f;
-        DAT_004efd9c.values[14] = 0.0f;
-        DAT_004efd9c.values[15] = 1.0f;
+    if (!(_ZGVZN2nw4math5MTX448IdentityEvE8identity & 1) && __cxa_guard_acquire(&_ZGVZN2nw4math5MTX448IdentityEvE8identity)) {
+        initializeIdentityRows(_ZZN2nw4math5MTX448IdentityEvE8identity.values);
+        _ZZN2nw4math5MTX448IdentityEvE8identity.values[12] = 0.0f;
+        _ZZN2nw4math5MTX448IdentityEvE8identity.values[13] = 0.0f;
+        _ZZN2nw4math5MTX448IdentityEvE8identity.values[14] = 0.0f;
+        _ZZN2nw4math5MTX448IdentityEvE8identity.values[15] = 1.0f;
     }
 }
 
@@ -57,13 +57,13 @@ extern "C" void FUN_002c2044(CameraMatrixCache *camera, s32 enabled)
     InitialCameraView *work = reinterpret_cast<InitialCameraView *>(camera);
     memClear(camera, sizeof(*camera));
     camera->unk001[0] = 0;
-    if (!(DAT_00476634 & 1) && __cxa_guard_acquire(&DAT_00476634))
-        initializeIdentityRows(DAT_004efd6c.values);
-    nn_math_ARMv6_MTX34CopyAsm(&work->initial.view, &DAT_004efd6c);
+    if (!(_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) && __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity))
+        initializeIdentityRows(_ZZN2nw4math5MTX348IdentityEvE8identity.values);
+    nn_math_ARMv6_MTX34CopyAsm(&work->initial.view, &_ZZN2nw4math5MTX348IdentityEvE8identity);
     initializeSharedIdentity44();
-    mtx44Copy(&work->initial.projection, &DAT_004efd9c);
+    mtx44Copy(&work->initial.projection, &_ZZN2nw4math5MTX448IdentityEvE8identity);
     initializeSharedIdentity44();
-    mtx44Copy(&work->initial.transform, &DAT_004efd9c);
+    mtx44Copy(&work->initial.transform, &_ZZN2nw4math5MTX448IdentityEvE8identity);
     work->defaults.distance = 5.0f;
     camera->enabled = enabled;
     if (enabled) {

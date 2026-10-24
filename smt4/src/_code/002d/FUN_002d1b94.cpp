@@ -10,7 +10,7 @@ extern GameState g_gameState;
 void FUN_0027d7b0(s32 map, u32 destination, u32 flags);
 const SceneSpawnRecord *dataTableGetRecord23(void);
 void mapDepartSetTarget(s32 group, s32 map, s32 target);
-void FUN_002702dc(void);
+void mapCollisionRelease(void);
 void FUN_0027b2b4(s32 map, u32 destination, s32 group, s32 target);
 void FUN_00266a2c(void);
 void FUN_00264444(LmapObj *object);
@@ -36,7 +36,7 @@ void FUN_002d1b94(u32 destination, u32 flags)
     transform->headingDegrees = 180.0f;
     transform->headingCopy = 180.0f;
     *reinterpret_cast<MapVector *>(transform->positionSnapshotB) = position;
-    FUN_002702dc();
+    mapCollisionRelease();
     FUN_0027b2b4(state->unk40, state->unk48, state->unk40 == 101 ? 101 : 0,
                   state->unk40 == 101 ? 10 : 0);
     FUN_00266a2c();

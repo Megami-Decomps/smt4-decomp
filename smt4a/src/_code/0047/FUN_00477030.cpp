@@ -1,173 +1,154 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00477030` (_code @ 0x477030, 0x278 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: block layout of the 0x66/default tails, the constants 3/5 in r5/r6 (swapped) and the remap sign test (retail: lsrs #31; here cmp #0). */
+#include "addon/aocMain.h"
+
+/* A result code and its description. */
+struct AocPollCode {
+    u32 code;
+    u32 description;
+};
+
+/* What a status operation reports: a kind byte and four words of detail. */
+struct AocPollResult {
+    /* 0x00 */ u8 kind;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ AocPollCode status;
+    /* 0x0C */ u32 detail[2];
+};
+
+/* The status operation the menu is polling (its deleting destructor is vtable slot 1). */
+class AocPollHandler {
+public:
+    virtual ~AocPollHandler();
+    virtual void vfunc08();
+    virtual AocPollResult poll();
+};
+
+/* The content-status menu's work. */
+struct AocPollMenu {
+    /* 0x000 */ u32 unk000;
+    /* 0x004 */ s32 state;
+    /* 0x008 */ s32 step;
+    /* 0x00C */ s32 counter;
+    /* 0x010 */ u8 unk010[0x1F8];
+    /* 0x208 */ AocPollHandler *handler;
+    /* 0x20C */ u8 handlerStorage[4];
+    /* 0x210 */ AocPollResult result;
+};
 
 extern "C" {
+extern AocMain *g_aocMain;
 
-int FUN_00473980(int *, unsigned int);
-int windowCreateStatusOperation(int, int);
-int FUN_00476e58(int, int, int);
-int FUN_0047bc90(int, unsigned int *);
-int timeInitializeActiveState(unsigned int *);
+void FUN_00476e58(AocPollMenu *menu, s32 first, s32 second);
+AocPollHandler *windowCreateStatusOperation(u8 *storage, s32 kind);
+void timeInitializeActiveState(AocPollResult *result);
+void FUN_0047bc90(AocPollMenu *menu, AocPollResult *result);
+void FUN_00473980(AocPollCode *result, AocMain *main);
+s32 isEmptyString(const AocPollResult *result);
+s32 byteIsAtLeast100(const AocPollResult *result);
+u32 legacyResourceIdRemap(const AocPollCode *result);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_1_stack;
-
-extern unsigned int g_aocMain; /* 0x570260 */
-
-extern int byteIsAtLeast100(unsigned int *);
-extern int legacyResourceIdRemap(unsigned int *);
-/* Supplied declaration required: FUN_00473980. */
-/* Supplied declaration required: windowCreateStatusOperation. */
-/* Supplied declaration required: FUN_00476e58. */
-/* Supplied declaration required: FUN_0047bc90. */
-extern int isEmptyString(unsigned int *);
-/* Supplied declaration required: timeInitializeActiveState. */
-
-
-void FUN_00477030(int param_1)
-
+/* Per-frame update of the content-status menu: starts its two status operations, polls them and reports the result. */
+void FUN_00477030(AocPollMenu *menu)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int uStack_4c;
-  unsigned int uStack_48;
-  unsigned int uStack_44;
-  unsigned int uStack_40;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int uStack_34;
-  int temp_v5;
-  unsigned int uStack_2c;
-  unsigned int temp_v6;
-  unsigned int uStack_24;
-  unsigned int uStack_20;
-  unsigned int uStack_1c;
-  unsigned int uStack_18;
-  
-  timeInitializeActiveState(&temp_v2);
-  temp_v0 = *(int *)(param_1 + 8);
-  if (temp_v0 != 3) {
-    if (temp_v0 >= 3) {
-      if (temp_v0 != 4) {
-        if (temp_v0 != 5) {
-          if (temp_v0 != 9999) {
+    AocPollResult result;
+    timeInitializeActiveState(&result);
+    AocMain *aocMain = g_aocMain;
+    switch (menu->step) {
+    case 0:
+        {
+            AocPollHandler *created = windowCreateStatusOperation(menu->handlerStorage, 0);
+            menu->step = 1;
+            menu->handler = created;
+        }
+        return;
+    case 2:
+        if (menu->handler != NULL) {
+            delete menu->handler;
+        }
+        {
+            AocPollHandler *created = windowCreateStatusOperation(menu->handlerStorage, 5);
+            menu->step = 3;
+            menu->handler = created;
+        }
+        return;
+    case 1: {
+        AocPollResult polled = menu->handler->poll();
+        result = polled;
+        if (isEmptyString(&result) != 0) {
+            menu->step = 2;
             return;
-          }
-          FUN_00476e58(param_1,0xc,3);
-          return;
         }
-        temp_v0 = *(int *)(param_1 + 0xc) - 1;
-        *(int *)(param_1 + 0xc) = temp_v0;
-        if (0 < temp_v0) {
-          return;
+        if (byteIsAtLeast100(&result) == 0) {
+            return;
         }
-        *(unsigned int *)(param_1 + 4) = 6;
-        *(unsigned int *)(param_1 + 8) = 0;
-        if (*(int **)(param_1 + 0x208) == (int *)0x0) {
-          return;
+        if (result.kind == 0x66) {
+            AocPollResult copy = result;
+            FUN_0047bc90(menu, &copy);
+            return;
         }
-        (**(romwright_code **)(**(int **)(param_1 + 0x208) + 4))();
-        *(unsigned int *)(param_1 + 0x208) = 0;
+        if (result.kind != 0x67) {
+            menu->step = 9999;
+            menu->result = result;
+            return;
+        }
+        menu->step = 5;
+        menu->counter = 3;
         return;
-      }
-      FUN_00473980(&temp_v5,g_aocMain);
-      temp_v4 = temp_v5;
-      uStack_34 = uStack_2c;
-      temp_v0 = legacyResourceIdRemap((unsigned int *)&temp_v4);
-      if (temp_v0 < 0) {
-        *(unsigned int *)(param_1 + 8) = 9999;
-        *(unsigned char *)(param_1 + 0x210) = 100;
-        *(unsigned int *)(param_1 + 0x214) = temp_v4;
-        *(unsigned int *)(param_1 + 0x218) = uStack_34;
+    }
+    case 3: {
+        AocPollResult polled = menu->handler->poll();
+        result = polled;
+        if (isEmptyString(&result) != 0) {
+            menu->step = 4;
+            return;
+        }
+        if (byteIsAtLeast100(&result) == 0) {
+            return;
+        }
+        if (result.kind == 0x66) {
+            AocPollResult copy = result;
+            FUN_0047bc90(menu, &copy);
+            return;
+        }
+        if (result.kind != 0x67) {
+            menu->step = 9999;
+            menu->result = result;
+            return;
+        }
+        menu->step = 5;
+        menu->counter = 3;
         return;
-      }
-      *(unsigned int *)(param_1 + 8) = 5;
-      *(unsigned int *)(param_1 + 0xc) = 3;
-      return;
     }
-    if (temp_v0 == 0) {
-      temp_v0 = param_1 + 0x20c;
-      windowCreateStatusOperation(temp_v0,0);
-      *(unsigned int *)(param_1 + 8) = 1;
-      *(int *)(param_1 + 0x208) = temp_v0;
-      return;
-    }
-    if (temp_v0 != 1) {
-      if (temp_v0 != 2) {
+    case 4: {
+        AocPollCode status;
+        FUN_00473980(&status, aocMain);
+        AocPollCode remapped = status;
+        if ((legacyResourceIdRemap(&remapped) >> 31) != 0) {
+            menu->step = 9999;
+            menu->result.kind = 100;
+            menu->result.status = remapped;
+            return;
+        }
+        menu->step = 5;
+        menu->counter = 3;
         return;
-      }
-      if (*(int **)(param_1 + 0x208) != (int *)0x0) {
-        (**(romwright_code **)(**(int **)(param_1 + 0x208) + 4))();
-      }
-      temp_v0 = param_1 + 0x20c;
-      windowCreateStatusOperation(temp_v0,5);
-      *(unsigned int *)(param_1 + 8) = 3;
-      *(int *)(param_1 + 0x208) = temp_v0;
-      return;
     }
-    (**(romwright_code **)(**(int **)(param_1 + 0x208) + 0xc))(&temp_v3);
-    temp_v2 = temp_v3;
-    uStack_4c = temp_v4;
-    uStack_48 = uStack_34;
-    uStack_44 = temp_v5;
-    uStack_40 = uStack_2c;
-    temp_v0 = isEmptyString(&temp_v2);
-    if (temp_v0 != 0) {
-      temp_v1 = 2;
-      *(unsigned int *)(param_1 + 8) = temp_v1;
-      return;
+    case 5:
+        menu->counter--;
+        if (menu->counter > 0) {
+            return;
+        }
+        menu->state = 6;
+        menu->step = 0;
+        if (menu->handler != NULL) {
+            delete menu->handler;
+            menu->handler = NULL;
+        }
+        return;
+    case 9999:
+        FUN_00476e58(menu, 12, 3);
+        return;
     }
-    temp_v0 = byteIsAtLeast100(&temp_v2);
-  }
-  else {
-    (**(romwright_code **)(**(int **)(param_1 + 0x208) + 0xc))(&temp_v3);
-    temp_v2 = temp_v3;
-    uStack_4c = temp_v4;
-    uStack_48 = uStack_34;
-    uStack_44 = temp_v5;
-    uStack_40 = uStack_2c;
-    temp_v0 = isEmptyString(&temp_v2);
-    if (temp_v0 != 0) {
-      temp_v1 = 4;
-      *(unsigned int *)(param_1 + 8) = temp_v1;
-      return;
-    }
-    temp_v0 = byteIsAtLeast100(&temp_v2);
-  }
-  if (temp_v0 == 0) {
-    return;
-  }
-  if ((temp_v2 & 0xff) == 0x66) {
-    temp_v6 = temp_v2;
-    uStack_24 = uStack_4c;
-    uStack_20 = uStack_48;
-    uStack_1c = uStack_44;
-    uStack_18 = uStack_40;
-    FUN_0047bc90(param_1,&temp_v6);
-    return;
-  }
-  if ((temp_v2 & 0xff) != 0x67) {
-    *(unsigned int *)(param_1 + 8) = 9999;
-    *(unsigned int *)(param_1 + 0x210) = temp_v2;
-    *(unsigned int *)(param_1 + 0x214) = uStack_4c;
-    *(unsigned int *)(param_1 + 0x218) = uStack_48;
-    *(unsigned int *)(param_1 + 0x21c) = uStack_44;
-    *(unsigned int *)(param_1 + 0x220) = uStack_40;
-    return;
-  }
-  *(unsigned int *)(param_1 + 8) = 5;
-  *(unsigned int *)(param_1 + 0xc) = 3;
-  return;
 }
 
-} /* extern "C" */
+}

@@ -19,7 +19,7 @@ extern unsigned int FUN_00113e60(void);
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefAddRef. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: emptyStub_002f74e8. */
 
 
@@ -43,13 +43,13 @@ void FUN_0010d300(unsigned int param_1,unsigned int param_2,unsigned int param_3
     temp_v0 = DAT_005949dc;
   }
   else {
-    temp_v0 = operatorNew(0x48);
+    temp_v0 = _Znwj(0x48);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_00113e60();
     }
     DAT_00594abc = temp_v1;
-    temp_v0 = operatorNew(0x1a8);
+    temp_v0 = _Znwj(0x1a8);
     if (temp_v0 != 0) {
       FUN_0010d3a4();
     }

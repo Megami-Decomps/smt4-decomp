@@ -15,7 +15,7 @@ int FUN_00291340(float *, float *, float *, float *);
 int nodeTreeReleaseItemClearOwner(double);
 int FUN_00291620(...);
 int nodeTreeReleaseItem(...);
-int FUN_002a7bc0(...);
+int _ZN2nw4math5MTX448IdentityEv(...);
 int FUN_002b2144(...);
 int mtx44Copy(...);
 int memClear(float *, int);
@@ -74,7 +74,7 @@ extern int DAT_00433238; /* 0x433238 */
 /* Supplied declaration required: FUN_00291620. */
 /* Supplied declaration required: nodeTreeReleaseItem. */
 extern int randBetween(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002a7bc0. */
+/* Supplied declaration required: _ZN2nw4math5MTX448IdentityEv. */
 /* Supplied declaration required: FUN_002b2144. */
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: memClear. */
@@ -244,7 +244,7 @@ void FUN_001c2c70(float *param_1)
         temp_v4 = temp_v4 + 0x168;
       }
       unaff_r6 = 0x168 - temp_v4;
-      temp_v5 = FUN_002a7bc0();
+      temp_v5 = _ZN2nw4math5MTX448IdentityEv();
       mtx44Copy(&uStack_e8,temp_v5);
       temp_v16 = (float *)romwright_f2u((float)((*(float *)((int)temp_v3 + 0x36c) + temp_v11)));
       VectorSignedToFloat(unaff_r6,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -289,7 +289,7 @@ void FUN_001c2c70(float *param_1)
           }
           temp_v4 = temp_v4 + 0x168;
         }
-        temp_v5 = FUN_002a7bc0(temp_v4);
+        temp_v5 = _ZN2nw4math5MTX448IdentityEv(temp_v4);
         mtx44Copy(temp_v27,temp_v5);
         VectorSignedToFloat(0x168 - temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v23 = temp_v20;
@@ -347,7 +347,7 @@ void FUN_001c2c70(float *param_1)
           }
           temp_v4 = temp_v4 + 0x168;
         }
-        temp_v5 = FUN_002a7bc0(temp_v4);
+        temp_v5 = _ZN2nw4math5MTX448IdentityEv(temp_v4);
         mtx44Copy(&temp_v25,temp_v5);
         temp_v21 = *(float *)((int)temp_v9 + 0x36c) + temp_v3;
         VectorSignedToFloat(0x168 - temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);

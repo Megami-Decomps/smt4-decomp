@@ -5,7 +5,7 @@
 extern "C" {
 
 int elemCopyForward(unsigned int, unsigned int, int, int *);
-int vectorCount8_0030fcf6(unsigned int *);
+int _ZNKSt6vectorI9Obj55aff412AsdAllocatorIS0_EE4sizeEv(unsigned int *);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,10 +14,10 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: elemCopyForward. */
-extern int *wordRefMax(unsigned int *, unsigned int *);
+extern int *_ZSt3maxIjERKT_S2_S2_(unsigned int *, unsigned int *);
 extern int rt_malloc(void);
-/* Supplied declaration required: vectorCount8_0030fcf6. */
-extern unsigned int vectorGrowCapacity_0030fcfe(unsigned int, int *);
+/* Supplied declaration required: _ZNKSt6vectorI9Obj55aff412AsdAllocatorIS0_EE4sizeEv. */
+extern unsigned int _ZN4__rw17__rw_new_capacityISt6vectorI9Obj55aff412AsdAllocatorIS2_EEEEjjPKT_(unsigned int, int *);
 
 
 int * FUN_0012211c(int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
@@ -35,14 +35,14 @@ int * FUN_0012211c(int *param_1,unsigned int *param_2,unsigned int param_3,unsig
   param_1[2] = 0;
   temp_v2 = param_3;
   temp_v3 = param_4;
-  temp_v3 = vectorGrowCapacity_0030fcfe(0,param_1);
-  temp_v2 = vectorCount8_0030fcf6(param_2);
-  piVar1 = (int *)wordRefMax((unsigned int *)&temp_v2,(unsigned int *)&temp_v3);
+  temp_v3 = _ZN4__rw17__rw_new_capacityISt6vectorI9Obj55aff412AsdAllocatorIS2_EEEEjjPKT_(0,param_1);
+  temp_v2 = _ZNKSt6vectorI9Obj55aff412AsdAllocatorIS0_EE4sizeEv(param_2);
+  piVar1 = (int *)_ZSt3maxIjERKT_S2_S2_((unsigned int *)&temp_v2,(unsigned int *)&temp_v3);
   temp_v0 = *piVar1;
   temp_v1 = rt_malloc();
   *param_1 = temp_v1;
   elemCopyForward(*param_2,param_2[1],temp_v1,param_1);
-  temp_v1 = vectorCount8_0030fcf6(param_2);
+  temp_v1 = _ZNKSt6vectorI9Obj55aff412AsdAllocatorIS0_EE4sizeEv(param_2);
   param_1[1] = temp_v1 * 8 + *param_1;
   param_1[2] = *param_1 + temp_v0 * 8;
   return param_1;

@@ -1,46 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00188444` (_code @ 0x188444, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail tests the lookup with `cmp r0, #0` and copies it to r5 only on the non-null path (movne r5, r0); built uses movs r5, r0, and keeps the constant 4 in r0 instead of r1 */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00197c78(void);
+int wstrlenU16(const u16 *s);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+/* A mounted archive device; slot 2 services control requests. */
+class ArchiveDevice {
+public:
+    virtual void unk00();
+    virtual void unk04();
+    virtual u32 control(void *request);
+};
 
-/* Supplied declaration required: FUN_00197c78. */
-extern int wstrlenU16(int *);
+struct ArchiveRequest {
+    u32 kind;
+    const u16 *path;
+    u32 size;
+};
 
+ArchiveDevice *FUN_00197c78(const u16 *path);
 
-void FUN_00188444(int *param_1)
-
+/* Sends the path part after the "device:" prefix to the device named in `path`. */
+u32 FUN_00188444(const u16 *path)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  int *piStack_1c;
-  int temp_v2;
-  
-  piVar1 = param_1;
-  FUN_00197c78();
-  if (piVar1 != (int *)0x0) {
-    do {
-      piStack_1c = (int *)((int)param_1 + 2);
-      temp_v0 = *param_1;
-      param_1 = piStack_1c;
-    } while ((short)temp_v0 != 0x3a);
-    temp_v1 = 4;
-    temp_v0 = wstrlenU16(piStack_1c);
-    temp_v2 = (temp_v0 + 1) * 2;
-    (**(romwright_code **)(*piVar1 + 8))(piVar1,&temp_v1);
-  }
-  return;
+    ArchiveDevice *device = FUN_00197c78(path);
+    u32 result;
+
+    if (device == NULL) {
+        result = 0xc8804465;
+    } else {
+        ArchiveRequest request;
+        ArchiveRequest *req = &request;
+        while (*path++ != ':') {
+        }
+        req->kind = 4;
+        req->path = path;
+        req->size = (wstrlenU16(path) + 1) * 2;
+        result = device->control(req);
+    }
+    return result;
 }
 
 } /* extern "C" */

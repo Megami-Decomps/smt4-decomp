@@ -22,7 +22,7 @@ extern unsigned char LAB_00121988; /* 0x121988 */
 extern unsigned char DAT_0055b09c; /* 0x55b09c */
 extern signed char DAT_00594967; /* 0x594967 */
 
-extern int _ZN9Obj55aff4C1EPKc(unsigned int *, unsigned char *);
+extern int _ZN9Obj55aff4C1EPKt(unsigned int *, unsigned char *);
 extern unsigned int *FUN_002eca10(fn_0012193c_arg0 *, unsigned int, unsigned int *);
 extern int vectorInitEmpty2(int);
 
@@ -41,7 +41,7 @@ void FUN_0012193c(fn_0012193c_arg0 *param_1,unsigned int param_2,unsigned int pa
   puVar1[0x1a] = 0;
   puVar1[0x1b] = 0;
   *puVar1 = (unsigned int)&DAT_0055b09c;
-  temp_v0 = _ZN9Obj55aff4C1EPKc(puVar1 + 0x1c,&LAB_00121988);
+  temp_v0 = _ZN9Obj55aff4C1EPKt(puVar1 + 0x1c,&LAB_00121988);
   *(unsigned char *)(temp_v0 + 8) = 0;
   temp_v0 = vectorInitEmpty2(temp_v0 + 0xc);
   *(unsigned char *)(temp_v0 + 0xc) = 0;

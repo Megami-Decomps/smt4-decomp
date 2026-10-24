@@ -14,7 +14,7 @@ typedef struct {
 } param_6_stack;
 
 /* Supplied declaration required: FUN_00111438. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern unsigned int initVtable00558630(void);
 
 
@@ -30,7 +30,7 @@ void FUN_002fb084(unsigned int param_1,unsigned int param_2,unsigned int param_3
   
   temp_v2 = param_2;
   temp_v3 = param_4;
-  temp_v0 = operatorNew(0xc);
+  temp_v0 = _Znwj(0xc);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = initVtable00558630();

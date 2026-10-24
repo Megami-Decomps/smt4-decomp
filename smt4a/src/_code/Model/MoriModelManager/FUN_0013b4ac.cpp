@@ -8,7 +8,7 @@ extern HandleRegistry* g_handleRegistry;
 extern const char LAB_0013b4ec[];
 
 void* FUN_00178b04(u32 size, const char* sourceFile, u32 sourceLine);
-HandleRegistry* FUN_001464b4(void* storage);
+HandleRegistry* _ZN9Obj557c48C1Ev(void* storage);
 void FUN_001463b4(HandleRegistry* registry);
 
 void FUN_0013b4ac(void)
@@ -17,7 +17,7 @@ void FUN_0013b4ac(void)
         HandleRegistry* registry = static_cast<HandleRegistry*>(
             FUN_00178b04(0x4C, LAB_0013b4ec, 0x28));
         if (registry != NULL) {
-            registry = FUN_001464b4(registry);
+            registry = _ZN9Obj557c48C1Ev(registry);
         }
         g_handleRegistry = registry;
         FUN_001463b4(registry);

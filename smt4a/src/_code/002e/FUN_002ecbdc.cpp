@@ -27,7 +27,7 @@ extern unsigned char DAT_0055ae64; /* 0x55ae64 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int *wordRefMax(int *, unsigned int *);
+extern int *_ZSt3maxIjERKT_S2_S2_(int *, unsigned int *);
 extern int rt_malloc(int);
 extern unsigned int *_ZN9Obj5593b8C1Ev(fn_002ecbdc_arg0 *);
 /* Supplied declaration required: FUN_0031066a. */
@@ -58,7 +58,7 @@ unsigned long long FUN_002ecbdc(fn_002ecbdc_arg0 *param_1,int param_2,unsigned i
   puVar1[5] = 0;
   temp_v3 = bufGrowCapacity(0,piVar4);
   temp_v2 = *(int *)(param_2 + 0x10) - *(int *)(param_2 + 0xc);
-  piVar2 = (int *)wordRefMax(&temp_v2,(unsigned int *)&temp_v3);
+  piVar2 = (int *)_ZSt3maxIjERKT_S2_S2_(&temp_v2,(unsigned int *)&temp_v3);
   temp_v1 = *piVar2;
   temp_v0 = rt_malloc(temp_v1);
   *piVar4 = temp_v0;

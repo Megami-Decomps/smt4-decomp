@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00117d74(int, int, int);
 int _ZN9Obj55aff4D1Ev(unsigned char [8]);
-int vectorCopyHeader(int, unsigned int);
+int _ZN18OnlineResultRecordaSERKS_(int, unsigned int);
 int FUN_002ea3c0(...);
 int FUN_002ea3d0(int, unsigned int);
 int onlineJobSetStateWaiting(int);
@@ -23,11 +23,11 @@ extern unsigned char LAB_0010f7d4; /* 0x10f7d4 */
 extern unsigned char LAB_0010f91d; /* 0x10f91d */
 
 /* Supplied declaration required: FUN_00117d74. */
-extern int operatorNew(unsigned int);
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
+extern int _Znwj(unsigned int);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
-/* Supplied declaration required: vectorCopyHeader. */
-extern unsigned int FUN_002ea100(unsigned char *, unsigned int);
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
+extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002ea3c0. */
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
@@ -47,20 +47,20 @@ void FUN_0010f730(int param_1)
   
   (**(romwright_code **)(**(int **)(param_1 + 0xd8) + 0xc))
             (*(int **)(param_1 + 0xd8),*(unsigned int *)(param_1 + 0x6c));
-  temp_v2 = FUN_002ea100(temp_v3,*(unsigned int *)(param_1 + 0x88));
+  temp_v2 = _ZN9Obj55aff4C1EPKc(temp_v3,*(unsigned int *)(param_1 + 0x88));
   temp_v0 = *(int *)(param_1 + 0xd8);
   FUN_00117d74(temp_v0,param_1 + 0x158,param_1 + 0x80);
   _ZN9Obj55aff4D1Ev(temp_v3);
   if (temp_v0 != 1) {
     temp_v2 = 0x8001000d;
-    temp_v1 = FUN_002e7908(temp_v5,(unsigned int *)&temp_v2);
-    vectorCopyHeader(param_1 + 200,temp_v1);
+    temp_v1 = _ZN12OnlineResultC1ERKj(temp_v5,(unsigned int *)&temp_v2);
+    _ZN18OnlineResultRecordaSERKS_(param_1 + 200,temp_v1);
     temp_v1 = FUN_002ea3c0(temp_v4,&LAB_0010f57d,0,&LAB_0010f7d4);
     FUN_002ea3d0(param_1,temp_v1);
   }
   else {
     onlineJobSetStateWaiting(param_1);
-    temp_v0 = operatorNew(0x10);
+    temp_v0 = _Znwj(0x10);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_002ea3c0(temp_v0,&LAB_0010f91d,0,&LAB_0010f7d4);

@@ -1,76 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00207498` (_code @ 0x207498, 0x124 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: with -Ospace (trial cflags override) the code, loop shape and constants match retail; only register numbering differs (retail keeps rows/columns in r6/r7 and the products in sl/r9, armcc here r9/sl and r6/r8; the loop counter lives in r1 before the points store). */
+#include "classes/EffGeomRecord.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char DAT_00414954[];
+void *memAlloc(u32 size, u32 alignment, u32 region, u32 heap, u32 pageSize, u32 flags);
+void recordPrepareActive(EffGeomRecord *record, u32 buffer, s32 indexCount, s32 vertexCount);
+void matrix44SetIdentity(f32 *matrix);
 
-int matrix44SetIdentity(unsigned int *);
-int recordPrepareActive(unsigned int, int, int, int);
-int asdOperatorNew(int, int);
-int memAlloc(int, int, int, int, int, int);
-
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_4_stack;
-
-/* Supplied declaration required: matrix44SetIdentity. */
-/* Supplied declaration required: recordPrepareActive. */
-extern unsigned int FUN_002693e4(void);
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: memAlloc. */
-
-
-unsigned int * FUN_00207498(int param_1,int param_2,int param_3,unsigned short param_4)
-
+// Build a geometry of `count` points, each with a four-float vertex set to one, over a
+// rows x columns element layout.
+EffGeomPointHandle *FUN_00207498(s32 count, u16 rows, u16 columns, u16 flags)
 {
-/* irregular: irregular input(s): in_s0; 4 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int *puVar3;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  unsigned int in_s0;
-  
-  puVar1 = (unsigned int *)0x10000;
-  memAlloc(0x10000,0x100,0,0x5c,0x10,1);
-  temp_v0 = 0x7e8;
-  asdOperatorNew(0x7e8,param_1);
-  if (temp_v0 == 0) {
-    temp_v2 = 0;
-  }
-  else {
-    temp_v2 = FUN_002693e4();
-  }
-  recordPrepareActive(temp_v2,0x25,param_3 * param_1 * 3,param_2 * param_1);
-  *puVar1 = temp_v2;
-  temp_v2 = 0x10000;
-  memAlloc(0x10000,0x100,0,param_1 << 4,0x10,1);
-  if (0 < param_1) {
-    in_s0 = 0x3f800000;
-  }
-  temp_v1 = 0;
-  puVar1[1] = temp_v2;
-  if (0 < param_1) {
-    do {
-      puVar3 = (unsigned int *)(puVar1[1] + temp_v1 * 0x10);
-      temp_v1 = temp_v1 + 1;
-      *puVar3 = in_s0;
-      puVar3[1] = in_s0;
-      puVar3[2] = in_s0;
-      puVar3[3] = in_s0;
-    } while ((int)temp_v1 < param_1);
-  }
-  matrix44SetIdentity(puVar1 + 6);
-  *(unsigned short *)((int)puVar1 + 0x12) = param_4 | 0x100;
-  *(short *)(puVar1 + 2) = (short)param_1;
-  *(short *)((int)puVar1 + 0xe) = (short)(param_2 * param_1);
-  *(short *)(puVar1 + 4) = (short)(param_3 * param_1);
-  puVar1[0x16] = 0xa5;
-  *(short *)((int)puVar1 + 10) = (short)param_2;
-  *(short *)(puVar1 + 3) = (short)param_3;
-  return puVar1;
+    asdDebugTrace(DAT_00414954, 506);
+    EffGeomPointHandle *handle = (EffGeomPointHandle *)memAlloc(0x10000, 0x100, 0, 0x5c, 0x10, 1);
+    EffGeomRecord *record = new (count) EffGeomRecord();
+    s32 elementCount = columns * count;
+    s32 vertexCount = rows * count;
+    recordPrepareActive(record, 0x25, elementCount * 3, vertexCount);
+    handle->record = record;
+    asdDebugTrace(DAT_00414954, 513);
+    handle->points = (f32 *)memAlloc(0x10000, 0x100, 0, count << 4, 0x10, 1);
+    if (count > 0) {
+        u16 i = 0;
+        do {
+            f32 *point = &handle->points[i * 4];
+            point[0] = 1.0f;
+            point[1] = 1.0f;
+            point[2] = 1.0f;
+            point[3] = 1.0f;
+            i++;
+        } while (count > i);
+    }
+    matrix44SetIdentity(handle->transform);
+    handle->flags = flags | 0x100;
+    handle->pointCount = count;
+    handle->vertexCount = vertexCount;
+    handle->elementCount = elementCount;
+    handle->unk58 = 0xa5;
+    handle->rows = rows;
+    handle->columns = columns;
+    return handle;
 }
-
-} /* extern "C" */
+}

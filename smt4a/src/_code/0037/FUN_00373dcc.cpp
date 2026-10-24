@@ -1,50 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00373dcc` (_code @ 0x373dcc, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_004a998c(unsigned int);
-int FUN_004a9c04(unsigned int);
-int FUN_004aa2bc(...);
+s32 scrGetArg(void);
+s32 FUN_004aa2bc(u32 block);
+s32 FUN_004a998c(u32 block);
+s32 FUN_004a9c04(u32 block);
+s32 FUN_004a9d40(u32 block);
+extern u32 g_btlUiBlock; /* 0x57a9c8 */
 
-extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
-
-extern int scrGetArg(void);
-/* Supplied declaration required: FUN_004a998c. */
-/* Supplied declaration required: FUN_004a9c04. */
-extern int FUN_004a9d40(unsigned int);
-/* Supplied declaration required: FUN_004aa2bc. */
-
-
-unsigned int FUN_00373dcc(void)
-
+// Script command: show (nonzero argument) or hide the battle UI block; 1 when it ends up shown / hidden as requested.
+u32 FUN_00373dcc(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = scrGetArg();
-  if (temp_v0 != 0) {
-    temp_v0 = FUN_004aa2bc();
-    if (temp_v0 != 0) {
-      FUN_004a998c(g_btlUiBlock);
+    u32 result;
+    if (scrGetArg() != 0) {
+        if (FUN_004aa2bc(g_btlUiBlock) != 0) {
+            FUN_004a998c(g_btlUiBlock);
+        }
+        result = FUN_004a9d40(g_btlUiBlock) != 0;
+    } else {
+        if (FUN_004a9d40(g_btlUiBlock) != 0) {
+            FUN_004a9c04(g_btlUiBlock);
+        }
+        result = FUN_004aa2bc(g_btlUiBlock) != 0;
     }
-    temp_v0 = FUN_004a9d40(g_btlUiBlock);
-    if (temp_v0 == 0) {
-      return 0;
-    }
-  }
-  else {
-    temp_v0 = FUN_004a9d40(g_btlUiBlock);
-    if (temp_v0 != 0) {
-      FUN_004a9c04(g_btlUiBlock);
-    }
-    temp_v0 = FUN_004aa2bc(g_btlUiBlock);
-    if (temp_v0 == 0) {
-      return 0;
-    }
-  }
-  return 1;
+    return result;
 }
 
 } /* extern "C" */

@@ -1,39 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047f444` (_code @ 0x47f444, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses the mask as DAT_00573cc0 + 8 (pool word has addend 0, two ldr) and loads the entry flags with ldm after it; the build folds +8 into the pool word and loads the mask with ldm; vldr s0 is also hoisted differently. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
 
-int FUN_0015f490(int, unsigned int, int, int);
+BtlMainStateA *btlGetMainState(void);
+void FUN_0015f490(u32 id, u32 sound, s32 enabled, s32 flags, f32 volume);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+/* The battle sound masks at 0x573cc0. */
+struct BattleSoundMasks {
+    /* 0x00 */ u64 entry;
+    /* 0x08 */ u64 selected;
+};
+extern BattleSoundMasks DAT_00573cc0; /* 0x573cc0 */
 
-extern unsigned int DAT_00573cc8; /* 0x573cc8 */
-extern unsigned int DAT_00573ccc; /* 0x573ccc */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_0015f490. */
-
-
-void FUN_0047f444(unsigned int param_1)
-
+/* Plays sound `sound` for the unit of the currently selected battle entry when its flags match the mask at DAT_00573cc0.selected. */
+void FUN_0047f444(u32 sound)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  temp_v0 = btlGetMainState();
-  if (((-1 < *(short *)(temp_v0 + 0x2004)) &&
-      (puVar2 = (unsigned int *)(*(int *)(temp_v0 + 0x1ffc) + *(short *)(temp_v0 + 0x2004) * 0x408),
-      (DAT_00573cc8 & *puVar2) != 0 || (DAT_00573ccc & puVar2[1]) != 0)) &&
-     (-1 < *(short *)((int)puVar2 + 0x166))) {
-    FUN_0015f490((int)*(short *)((int)puVar2 + 0x166),param_1,1,0);
-    return;
-  }
-  return;
+    BtlMainStateA *battle = btlGetMainState();
+    s16 selection = battle->commandEntry.selection;
+
+    if (selection >= 0) {
+        BtlCombatantEntryA *entry = &battle->entries[selection];
+        if ((entry->flags & DAT_00573cc0.selected) != 0 && (s16)entry->id >= 0) {
+            FUN_0015f490((s16)entry->id, sound, 1, 0, 1.0f);
+        }
+    }
 }
 
 } /* extern "C" */

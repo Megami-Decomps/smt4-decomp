@@ -5,7 +5,7 @@
 extern "C" {
 
 int gameDataAddCappedPoints(int);
-int FUN_0034a290(void);
+int dataTable41FindById(void);
 int playerGetWords(unsigned short [10], int);
 int playerMaskSetBit(int);
 int halves34Copy(int, unsigned short [10]);
@@ -28,7 +28,7 @@ extern int gameGetPlayerData(void);
 extern int gameGetSlotRecord(void);
 /* Supplied declaration required: gameDataAddCappedPoints. */
 extern int FUN_002e5c2c(void);
-/* Supplied declaration required: FUN_0034a290. */
+/* Supplied declaration required: dataTable41FindById. */
 extern int FUN_003df4a4(void);
 /* Supplied declaration required: playerGetWords. */
 extern int playerHasFlagBit(unsigned int);
@@ -103,7 +103,7 @@ unsigned int FUN_0035e03c(int param_1,int param_2,int param_3,int param_4)
         temp_v3 = 0;
         do {
           temp_v4 = (unsigned int)temp_v12[temp_v3];
-          FUN_0034a290();
+          dataTable41FindById();
           if ((temp_v4 != 0) && ((*(unsigned int *)(temp_v4 + 0x44) & 0x400000) != 0)) goto LAB_0035e194;
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < 8);

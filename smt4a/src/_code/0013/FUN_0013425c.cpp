@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdOperatorDeleteArray(int);
-int vectorCopyHeader(...);
+int _ZN18OnlineResultRecordaSERKS_(...);
 int vectorSize12A(int *);
 int FUN_00307940(int, int, int, int *);
 int FUN_00307974(...);
@@ -19,7 +19,7 @@ typedef struct {
 
 extern int rt_malloc(void);
 /* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: vectorSize12A. */
 /* Supplied declaration required: FUN_00307940. */
 extern int vectorGrowCapacity_00307962(unsigned int, int *);
@@ -51,9 +51,9 @@ void FUN_0013425c(int *param_1,int param_2,unsigned int param_3)
     while (param_2 != temp_v5) {
       temp_v5 = temp_v5 - 0xc;
       temp_v6 = temp_v6 - 0xc;
-      vectorCopyHeader(temp_v6,temp_v5);
+      _ZN18OnlineResultRecordaSERKS_(temp_v6,temp_v5);
     }
-    vectorCopyHeader(param_2,param_3);
+    _ZN18OnlineResultRecordaSERKS_(param_2,param_3);
   }
   else {
     temp_v2 = vectorSize12A(param_1);

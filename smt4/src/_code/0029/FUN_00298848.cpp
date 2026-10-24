@@ -3,7 +3,7 @@
 #include "shard/Shard0031.h"
 
 extern "C" {
-Table04Record *FUN_002ae164(s32);
+Table04Record *dataTable40FindById(s32);
 s32 FUN_0026c464(void *, s32, s32);
 s32 FUN_0026c654(void *, s32, s32, s32);
 SlotTable *gameGetSlotTable(void);
@@ -11,7 +11,7 @@ SlotTable *gameGetSlotTable(void);
 
 extern "C" u32 FUN_00298848(s32 skillId, void *context)
 {
-    const Table04Record *skill = FUN_002ae164(skillId);
+    const Table04Record *skill = dataTable40FindById(skillId);
     if (skill == NULL) return 0;
     u32 effect = (skill->properties >> 9) & 3;
     if ((effect == 1 || effect == 3) && skill->sort.category == 3) {

@@ -8,7 +8,7 @@ int FUN_0010c97e(unsigned int, unsigned int);
 int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int FUN_002e6e50(int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
-int vectorCopyHeader(int, unsigned int);
+int _ZN18OnlineResultRecordaSERKS_(int, unsigned int);
 int FUN_002eac60(unsigned int, unsigned int);
 int FUN_002eac8e(unsigned int, unsigned int);
 
@@ -22,8 +22,8 @@ extern int onlineContextGetInstance(void);
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: FUN_002e6e50. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: vectorCopyHeader. */
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: FUN_002eac60. */
 /* Supplied declaration required: FUN_002eac8e. */
 
@@ -42,8 +42,8 @@ void FUN_0011a4b8(int param_1,int param_2)
   _ZN9Obj55b28cC1EPv(temp_v2,temp_v0 + 0x58);
   if (*(char *)(param_2 + 0x10) != '\x02') {
     temp_v4[0] = 0x80050001;
-    temp_v1 = FUN_002e7908(temp_v3,temp_v4);
-    vectorCopyHeader(param_1 + 0x228,temp_v1);
+    temp_v1 = _ZN12OnlineResultC1ERKj(temp_v3,temp_v4);
+    _ZN18OnlineResultRecordaSERKS_(param_1 + 0x228,temp_v1);
   }
   else {
     FUN_0010c97e(*(unsigned int *)(param_1 + 0x1a0),*(unsigned int *)(param_1 + 0x1a4));

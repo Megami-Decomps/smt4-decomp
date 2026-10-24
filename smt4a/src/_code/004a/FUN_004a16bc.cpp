@@ -1,144 +1,128 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a16bc` (_code @ 0x4a16bc, 0x22c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "shard/Shard004A.h"
+/* NON_MATCHING: logic and call sequence match; retail turns the final call of every path into a tail call (b after popping lr, `FUN_004d0680`, `uniteCreatePreviewModel`, `FUN_0032d0c8`, `sendEvent100020E`) and keeps the shared zero in r9, while the build keeps plain bl + pop {pc}. */
+#include "common.h"
+
+/* One row of the quest list: the quest id sits at +4. */
+struct QuestListRow {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 id;
+    /* 0x06 */ u8 unk06[0x1A];
+};
+
+/* The menu's control block. */
+struct QuestControls {
+    /* 0x00 */ u8 unk00[0x12];
+    /* 0x12 */ s8 cursorRow;
+    /* 0x13 */ u8 unk13[0x31];
+};
+
+/* The quest menu screen. */
+struct QuestMenu {
+    /* 0x000 */ u8 unk000[0x14];
+    /* 0x014 */ s32 state;
+    /* 0x018 */ u32 stateArg;
+    /* 0x01C */ u8 unk01C[4];
+    /* 0x020 */ u8 holder[0x7F8];      /* flagged value holder: the selected row index */
+    /* 0x818 */ QuestControls controls;
+    /* 0x85C */ u32 job;
+    /* 0x860 */ u8 unk860;
+    /* 0x861 */ s8 page;
+    /* 0x862 */ u8 unk862;
+    /* 0x863 */ u8 pageChanged;
+    /* 0x864 */ s16 rowCount;
+    /* 0x866 */ u8 unk866[2];
+    /* 0x868 */ u8 unk868[0x1C];
+};
 
 extern "C" {
+extern s32 g_animatedPageSelection[];
+s32 inputIsQuestMenuPressed(void);
+s32 FUN_004d0584(void);
+s32 inputIsQuestConfirmPressed(void);
+s32 inputIsQuestCancelPressed(void);
+s32 gameGetMode(void);
+void FUN_004d0680(QuestMenu *menu);
+u32 flaggedValueHolderGetTotal(const void *holder);
+const char *FUN_00180118(u32 id);
+const char *FUN_0014bf3c(u32 id, u32 option);
+char *libc_strcpy(char *destination, const char *source);
+void FUN_003180c4(u32 index, const char *text);
+void scrScriptProcessStartEntry(u32 job, u32 entry);
+void FUN_003343f0(s32 value);
+void sendEvent100020E(void);
+void screen4AEnter(QuestMenu *menu);
+void uniteCreatePreviewModel(void);
+void sysPlaySe(u32 id);
+void *slotRecordFindById(u16 id);
+void FUN_0035ad50(u32 id, char *buffer);
+void FUN_0032d0c8(s32 a, s32 b, u32 id, void *data);
 
-int sysPlaySe(unsigned int);
-int FUN_00180118(unsigned int);
-int scrScriptProcessStartEntry(unsigned int, int);
-int libc_strcpy(unsigned char [304], unsigned int);
-int FUN_003180c4(int, unsigned char [304]);
-int FUN_0032d0c8(...);
-int FUN_003343f0(int);
-int FUN_0035ad50(int, unsigned char [304]);
-int uniteCreatePreviewModel(void);
-int screen4AEnter(int);
-int sendEvent100020E(void);
-void FUN_004d0680(Screen4A*);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern unsigned char g_animatedPageSelection; /* 0x57f0b4 */
-
-extern unsigned int FUN_0014bf3c(unsigned int, unsigned int);
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00180118. */
-extern unsigned int slotRecordFindById(unsigned short);
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: libc_strcpy. */
-extern int gameGetMode(void);
-/* Supplied declaration required: FUN_003180c4. */
-/* Supplied declaration required: FUN_0032d0c8. */
-/* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_0035ad50. */
-/* Supplied declaration required: uniteCreatePreviewModel. */
-/* Supplied declaration required: screen4AEnter. */
-extern int flaggedValueHolderGetTotal(int);
-/* Supplied declaration required: sendEvent100020E. */
-extern int inputIsQuestCancelPressed(void);
-extern int inputIsQuestConfirmPressed(void);
-extern int inputIsQuestMenuPressed(void);
-extern int FUN_004d0584(void);
-
-
-void FUN_004a16bc(int param_1)
-
+// Per-frame input for the quest menu: start the detail view, confirm the page or cancel.
+void FUN_004a16bc(QuestMenu *menu)
 {
-/* irregular: 12 native warning(s); review required */
-  unsigned short temp_v0;
-  char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned char temp_v10 [304];
-  
-  temp_v7 = 0;
-  temp_v8 = 0;
-  temp_v9 = 0;
-  temp_v2 = inputIsQuestMenuPressed();
-  if (0 < *(short *)(param_1 + 0x864)) {
-    temp_v7 = FUN_004d0584();
-    temp_v8 = inputIsQuestConfirmPressed();
-    temp_v9 = inputIsQuestCancelPressed();
-    if (temp_v7 == 0) {
-      temp_v7 = (int)*(char *)(param_1 + 0x82a);
+    s32 selected = 0;
+    s32 confirm = 0;
+    s32 cancel = 0;
+    char text[304];
+
+    s32 menuPressed = inputIsQuestMenuPressed();
+    if (menu->rowCount > 0) {
+        selected = FUN_004d0584();
+        confirm = inputIsQuestConfirmPressed();
+        cancel = inputIsQuestCancelPressed();
+        if (selected == 0) {
+            selected = menu->controls.cursorRow;
+        }
     }
-  }
-  temp_v3 = gameGetMode();
-  if (temp_v3 != 0) {
-    FUN_004d0680(reinterpret_cast<Screen4A*>(param_1));
-    return;
-  }
-  if (temp_v7 != 0) {
-    temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
-    temp_v6 = (unsigned int)*(unsigned short *)(param_1 + 0x864 + temp_v2 * 0x20 + 4);
-    temp_v4 = temp_v6;
-    FUN_00180118(temp_v6);
-    libc_strcpy(temp_v10,temp_v4);
-    FUN_003180c4(8,temp_v10);
-    temp_v5 = FUN_0014bf3c(temp_v6,0);
-    libc_strcpy(temp_v10,temp_v5);
-    FUN_003180c4(0x10,temp_v10);
-    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x85c),7);
-    FUN_003343f0(1);
-    *(unsigned int *)(param_1 + 0x14) = 8;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-    sendEvent100020E();
-  }
-  else {
-    if (temp_v2 != 0) {
-      screen4AEnter(param_1);
-      uniteCreatePreviewModel();
-      return;
-    }
-    if (temp_v8 != 0) {
-      (*(unsigned int *)((unsigned char *)&g_animatedPageSelection + 0x4)) = 0xffffffff;
-      temp_v1 = *(char *)(param_1 + 0x861) + '\x01';
-      *(char *)(param_1 + 0x861) = temp_v1;
-      if ('\x01' < temp_v1) {
-        *(unsigned char *)(param_1 + 0x861) = 0;
-      }
-      sendEvent100020E();
-      *(unsigned char *)(param_1 + 0x863) = 1;
-      if (*(char *)(param_1 + 0x861) == '\x01') {
-        temp_v5 = 0x4e;
-      }
-      else {
-        temp_v5 = 0x4f;
-      }
-      sysPlaySe(temp_v5);
-      temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
-      temp_v0 = *(unsigned short *)(param_1 + 0x864 + temp_v2 * 0x20 + 4);
-      if (*(char *)(param_1 + 0x861) == '\x01') {
-        temp_v5 = slotRecordFindById(temp_v0);
-        FUN_0032d0c8(0,1,temp_v0,temp_v5);
+    if (gameGetMode() != 0) {
+        FUN_004d0680(menu);
         return;
-      }
-      FUN_0035ad50(temp_v0,temp_v10);
-      FUN_0032d0c8(0,1,temp_v0,temp_v10);
-      return;
     }
-    if (temp_v9 != 0) {
-      (*(unsigned int *)((unsigned char *)&g_animatedPageSelection + 0x4)) = 0xffffffff;
-      FUN_003343f0(1);
-      *(unsigned int *)(param_1 + 0x14) = 9;
-      *(unsigned int *)(param_1 + 0x18) = 0;
-      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x85c),8);
-      sendEvent100020E();
-      return;
+    QuestListRow *rows = (QuestListRow *)&menu->rowCount;
+    if (selected != 0) {
+        u32 id = rows[flaggedValueHolderGetTotal(menu->holder)].id;
+        libc_strcpy(text, FUN_00180118(id));
+        FUN_003180c4(8, text);
+        libc_strcpy(text, FUN_0014bf3c(id, 0));
+        FUN_003180c4(16, text);
+        scrScriptProcessStartEntry(menu->job, 7);
+        FUN_003343f0(1);
+        menu->state = 8;
+        menu->stateArg = 0;
+        sendEvent100020E();
+        return;
     }
-  }
-  return;
+    if (menuPressed != 0) {
+        screen4AEnter(menu);
+        uniteCreatePreviewModel();
+        return;
+    }
+    if (confirm != 0) {
+        g_animatedPageSelection[1] = -1;
+        menu->page = menu->page + 1;
+        if (menu->page > 1) {
+            menu->page = 0;
+        }
+        sendEvent100020E();
+        menu->pageChanged = 1;
+        sysPlaySe(menu->page == 1 ? 78 : 79);
+        s16 id = rows[flaggedValueHolderGetTotal(menu->holder)].id;
+        if (menu->page == 1) {
+            FUN_0032d0c8(0, 1, (u16)id, slotRecordFindById((u16)id));
+            return;
+        }
+        FUN_0035ad50((u16)id, text);
+        FUN_0032d0c8(0, 1, (u16)id, text);
+        return;
+    }
+    if (cancel != 0) {
+        g_animatedPageSelection[1] = -1;
+        FUN_003343f0(1);
+        menu->state = 9;
+        menu->stateArg = 0;
+        scrScriptProcessStartEntry(menu->job, 8);
+        sendEvent100020E();
+        return;
+    }
 }
 
-} /* extern "C" */
+}

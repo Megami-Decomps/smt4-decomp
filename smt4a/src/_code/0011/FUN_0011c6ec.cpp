@@ -21,8 +21,8 @@ extern unsigned char LAB_0011c744; /* 0x11c744 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int operatorNew(unsigned int);
-extern unsigned int FUN_002e7908(int *, unsigned int *);
+extern int _Znwj(unsigned int);
+extern unsigned int _ZN12OnlineResultC1ERKj(int *, unsigned int *);
 extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002f71b0. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
@@ -48,7 +48,7 @@ unsigned long long FUN_0011c6ec(int param_1,unsigned int param_2,unsigned int pa
     temp_v2 = param_4;
     FUN_002f71b0();
     onlineJobSetStateWaiting(param_1);
-    temp_v0 = operatorNew(0x10);
+    temp_v0 = _Znwj(0x10);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_002ea3c0(temp_v0,&LAB_0011c63b,0,&LAB_0011c744);
@@ -57,7 +57,7 @@ unsigned long long FUN_0011c6ec(int param_1,unsigned int param_2,unsigned int pa
     return romwright_piece_4_4(uStack_1c,iStack_20);
   }
   temp_v2 = 0x10001;
-  temp_v1 = FUN_002e7908(&iStack_20,(unsigned int *)&temp_v2);
+  temp_v1 = _ZN12OnlineResultC1ERKj(&iStack_20,(unsigned int *)&temp_v2);
   FUN_0031126c(param_1,2,temp_v1);
   return romwright_piece_4_4(uStack_1c,iStack_20);
 }

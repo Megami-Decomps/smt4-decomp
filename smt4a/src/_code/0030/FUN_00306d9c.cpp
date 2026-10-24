@@ -27,7 +27,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_3_stack;
 
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 /* Supplied declaration required: onlineInstanceTableGetCurrent. */
 /* Supplied declaration required: vectorInitEmpty. */
 /* Supplied declaration required: FUN_002e9e8a. */
@@ -76,7 +76,7 @@ void FUN_00306d9c(int param_1,int param_2,int param_3)
       FUN_002e9e8a(temp_v0,temp_v2,&temp_v5);
       FUN_002ff3b0(&temp_v3,temp_v4,temp_v5,temp_v6);
       temp_v10 = 0x80010004;
-      temp_v0 = FUN_002e7908(temp_v11,(unsigned int *)&temp_v10);
+      temp_v0 = _ZN12OnlineResultC1ERKj(temp_v11,(unsigned int *)&temp_v10);
       wordMoveOut_002ff3b8(&temp_v8,&temp_v7,0);
       FUN_002f3dde(*(unsigned int *)(temp_v8 + 0x14),temp_v0);
       vectorDestroyWords(&temp_v5);

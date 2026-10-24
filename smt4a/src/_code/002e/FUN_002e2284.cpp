@@ -8,7 +8,7 @@ s32 asdTMTexTableNodeIsLoaded(u32 slot, u32 node);
 s32 loadSlotIsLoaded(u32 slot);
 s32 bgmGetStateById(u32 id);
 s32 FUN_002e2114(u32 *holder);
-void FUN_0035a204(u32 *holder);
+void campCecResetCameraHolder(u32 *holder);
 void linkHolderApplyFlag(u32 *holder, s32 flags);
 ScriptRunState *FUN_00275bc8(void *resource, u32 entry);
 void progressConditionsUpdateUnlocks(void);
@@ -23,7 +23,7 @@ u32 FUN_002e2284(CampCecResumeState *work)
     if (textureGetIndexedResource(0x2E) && asdTMTexTableNodeIsLoaded(0x2E, 0) &&
         loadSlotIsLoaded(0x4A) && bgmGetStateById(0x1000049) == 1) {
         if (FUN_002e2114(g_campCec.work->holder)) {
-            FUN_0035a204(g_campCec.work->holder);
+            campCecResetCameraHolder(g_campCec.work->holder);
             linkHolderApplyFlag(g_campCec.work->holder, 0);
             work->launch.script = FUN_00275bc8(work->launch.resource, work->launch.entry);
             work->launch.script->mode = 2;

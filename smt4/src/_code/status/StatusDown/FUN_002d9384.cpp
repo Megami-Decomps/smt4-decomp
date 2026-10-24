@@ -8,7 +8,7 @@ int positionStateSet(...);
 int FUN_002bd82c(...);
 int timerStart(...);
 int FUN_002bd954(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int uiSpriteInitializeState(...);
 int paramsInit(...);
 int __aeabi_memset4(...);
@@ -44,7 +44,7 @@ extern unsigned int *g_statusDown; /* 0x44e190 */
 extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: __aeabi_memset4. */
@@ -84,9 +84,9 @@ void FUN_002d9384(void)
   FUN_002bd954(puVar1 + 10,0x1a,1000,puVar1 + 2,1);
   timerStart(puVar1 + 10,0);
   FUN_002bd954(puVar1 + 0x2d,0x1a,1000,puVar1 + 2,1);
-  FUN_002bee58(puVar1 + 0x2d,0);
+  spriteStartAnimationByIndex(puVar1 + 0x2d,0);
   FUN_002bd954(puVar1 + 0x50,0x1a,1000,puVar1 + 2,1);
-  FUN_002bee58(puVar1 + 0x50,1);
+  spriteStartAnimationByIndex(puVar1 + 0x50,1);
   FUN_002bd954(puVar1 + 0x73,0x1a,1000,puVar1 + 2,1);
   timerStart(puVar1 + 0x73,4,0);
   FUN_002bd954(puVar1 + 0x96,0x1a,1000,puVar1 + 2,1);
@@ -94,7 +94,7 @@ void FUN_002d9384(void)
   FUN_002bd954(puVar1 + 0xb9,0x1a,1000,puVar1 + 2,1);
   timerStart(puVar1 + 0xb9,0);
   uiSpriteInitializeState(puVar1 + 0xdc,0x1a,0xffffffff,0x1c,puVar1 + 2,0xc9);
-  FUN_002bee58(puVar1 + 0xdc,2);
+  spriteStartAnimationByIndex(puVar1 + 0xdc,2);
   *(unsigned short *)((int)puVar1 + 0x3aa) = 2;
   temp_v0 = asdTextCreate(0);
   puVar1[0x8a8] = temp_v0;

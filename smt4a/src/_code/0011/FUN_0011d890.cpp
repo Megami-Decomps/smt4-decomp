@@ -24,13 +24,13 @@ typedef struct {
 extern unsigned char LAB_0011d930; /* 0x11d930 */
 extern unsigned char LAB_0011da41; /* 0x11da41 */
 
-extern int operatorNew(unsigned int);
-extern unsigned int FUN_002e7908(int *, unsigned int *);
+extern int _Znwj(unsigned int);
+extern unsigned int _ZN12OnlineResultC1ERKj(int *, unsigned int *);
 /* Supplied declaration required: onlineInstanceTableGetCurrent. */
 /* Supplied declaration required: FUN_002e9c0c. */
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned char *);
-extern int refIsNonNegative(unsigned char *);
+extern int _ZNK18OnlineResultRecord7isValidEv(unsigned char *);
 /* Supplied declaration required: FUN_002f7c94. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
@@ -60,13 +60,13 @@ void FUN_0011d890(int param_1)
     temp_v4[0] = param_1 + 0x68;
     temp_v4[1] = 0x4000;
     FUN_00310eb4(temp_v5,*(unsigned int *)(param_1 + 0x74),temp_v0,param_1 + 0x7c);
-    temp_v1 = refIsNonNegative(temp_v5);
+    temp_v1 = _ZNK18OnlineResultRecord7isValidEv(temp_v5);
     if (temp_v1 != 0) {
       temp_v3 = *(unsigned int *)(param_1 + 0xd4);
       temp_v2 = onlineInstanceTableGetCurrent();
       FUN_002f7c94(temp_v2,*(unsigned int *)(param_1 + 0x6c),temp_v3);
       onlineJobSetStateWaiting(param_1);
-      temp_v1 = operatorNew(0x10);
+      temp_v1 = _Znwj(0x10);
       temp_v2 = 0;
       if (temp_v1 != 0) {
         temp_v2 = FUN_002ea3c0(temp_v1,&LAB_0011da41,0,&LAB_0011d930);
@@ -79,7 +79,7 @@ void FUN_0011d890(int param_1)
   else {
     temp_v6[0] = 0x80010004;
   }
-  temp_v2 = FUN_002e7908(temp_v4,temp_v6);
+  temp_v2 = _ZN12OnlineResultC1ERKj(temp_v4,temp_v6);
   FUN_00310ec8(param_1,temp_v2);
   return;
 }

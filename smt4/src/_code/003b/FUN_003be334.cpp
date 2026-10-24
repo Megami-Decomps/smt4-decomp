@@ -8,7 +8,7 @@ int FUN_00247478(unsigned char [29], int, int);
 int FUN_0027da30(int, int);
 int btlMainFindEntryByListedId(...);
 int gameGetUnitRecord(int);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int dataTable08Sub1GetRecord(void);
 int FUN_003be918(unsigned int, unsigned int, int, int, int);
 int SBORROW4(unsigned int, int);
@@ -37,7 +37,7 @@ extern int randRange(unsigned int);
 extern int btlGetMainState(void);
 extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetUnitRecord. */
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: FUN_003be918. */
 
@@ -73,7 +73,7 @@ unsigned int FUN_003be334(int param_1,unsigned int param_2,unsigned int param_3,
   iStack_28 = param_4;
   temp_v0 = btlGetMainState();
   temp_v1 = temp_v15;
-  FUN_002ae164();
+  dataTable40FindById();
   dataTable08Sub1GetRecord();
   temp_v3 = temp_v0;
   btlMainFindEntryByListedId(temp_v0,param_5);

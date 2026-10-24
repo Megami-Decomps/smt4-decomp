@@ -1,45 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00138aa4` (_code @ 0x138aa4, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same arithmetic; retail loads g_gameDataBlocks.table twice (once for the read, once for the clamped store) and reaches the timer index through a +0x88 sub-struct, built reuses one table pointer */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+struct SaveTable {
+    /* 0x00000 */ u8 unk00000[0x8b];
+    /* 0x0008b */ u8 activeTimer;
+    /* 0x0008c */ u8 unk0008c[0x21e18 - 0x8c];
+    /* 0x21e18 */ u32 playTime;
+};
 
-extern int DAT_0057f69c; /* 0x57f69c */
-extern int DAT_0057f6a8; /* 0x57f6a8 */
+struct GameDataBlocksView {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ SaveTable *table;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ u32 *timers;
+};
 
+extern GameDataBlocksView g_gameDataBlocks;
 
-void FUN_00138aa4(unsigned int param_1)
-
+/* Adds `delta` to the play time (capped just below 10 hours) and takes it off the active countdown timer. */
+void FUN_00138aa4(u32 delta)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = DAT_0057f69c;
-  temp_v2 = *(int *)(DAT_0057f69c + 0x21e18) + param_1;
-  if (temp_v2 >= 36000000) {
-    *(unsigned int *)(DAT_0057f69c + 0x21e18) = 35999999;
-  }
-  else {
-    *(unsigned int *)(DAT_0057f69c + 0x21e18) = temp_v2;
-  }
-  temp_v2 = (unsigned int)*(unsigned char *)(temp_v0 + 0x8b);
-  if (temp_v2 < 5) {
-    temp_v1 = *(unsigned int *)(DAT_0057f6a8 + temp_v2 * 4);
-    if (param_1 >= temp_v1) {
-      temp_v0 = 0;
+    SaveTable *table = g_gameDataBlocks.table;
+    u32 total = table->playTime + delta;
+
+    if (total > 35999999) {
+        g_gameDataBlocks.table->playTime = 35999999;
+    } else {
+        g_gameDataBlocks.table->playTime = total;
     }
-    else {
-      temp_v0 = temp_v1 - param_1;
+    u32 index = table->activeTimer;
+    if (index < 5) {
+        u32 remaining = g_gameDataBlocks.timers[index];
+
+        g_gameDataBlocks.timers[index] = remaining > delta ? remaining - delta : 0;
     }
-    *(int *)(DAT_0057f6a8 + temp_v2 * 4) = temp_v0;
-  }
-  return;
 }
 
 } /* extern "C" */

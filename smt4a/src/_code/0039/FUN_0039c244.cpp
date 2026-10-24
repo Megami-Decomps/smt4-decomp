@@ -13,7 +13,7 @@ extern int DAT_00588e2c; /* 0x588e2c */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002c75c0. */
 /* Supplied declaration required: saveLoadProcessUpdateSdCardDetection. */
-extern int *FUN_00420d08(void);
+extern int *_ZN9Obj557e3cC1Ev(void);
 
 
 void FUN_0039c244(void)
@@ -31,7 +31,7 @@ void FUN_0039c244(void)
   asdOperatorNew();
   piVar3 = (int *)0x0;
   if (temp_v1 != 0) {
-    piVar3 = (int *)FUN_00420d08();
+    piVar3 = (int *)_ZN9Obj557e3cC1Ev();
   }
   *(int **)(temp_v0 + 8) = piVar3;
   (**(romwright_code **)(*piVar3 + 8))();

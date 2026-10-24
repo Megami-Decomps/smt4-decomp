@@ -22,7 +22,7 @@ extern UiQuest *g_uiQuest; /* 0x43dd50 */
 
 extern int buttonHelpSetPreset(int preset);
 extern int timerStart(u8 *timer, int a, int b);
-extern int FUN_002bee58(u8 *anim, int id);
+extern int spriteStartAnimationByIndex(u8 *anim, int id);
 extern int FUN_002bf810(u32 arg);
 
 /* Opens page `page` of the quest screen: starts its timer and animations and enters state 17. */
@@ -33,8 +33,8 @@ void FUN_00203640(u16 page)
     quest->page = page;
     quest->unk5e8 = 0;
     timerStart(quest->timer, 1, 0);
-    FUN_002bee58(quest->anim0, 2);
-    FUN_002bee58(quest->anim1, 3);
+    spriteStartAnimationByIndex(quest->anim0, 2);
+    spriteStartAnimationByIndex(quest->anim1, 3);
     quest = g_uiQuest;
     quest->prevState = quest->state;
     quest->state = 17;

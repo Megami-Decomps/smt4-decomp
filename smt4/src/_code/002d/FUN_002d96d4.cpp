@@ -11,7 +11,7 @@ int FUN_002580d4(...);
 int FUN_0029a17c(...);
 int FUN_0029ea68(...);
 int FUN_0029efc0(...);
-int FUN_0029f7d4(void);
+int dataTable54FindById(void);
 int partyMemberFindById(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6dd8(...);
@@ -88,7 +88,7 @@ extern int FUN_0029e93c(unsigned int *);
 /* Supplied declaration required: FUN_0029ea68. */
 extern int FUN_0029efa8(unsigned int *);
 /* Supplied declaration required: FUN_0029efc0. */
-/* Supplied declaration required: FUN_0029f7d4. */
+/* Supplied declaration required: dataTable54FindById. */
 extern int FUN_002a0d0c(void);
 /* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: FUN_002b6dd8. */
@@ -201,7 +201,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
               if (*(short *)(puVar4 + 0x24ce) != 0) {
                 do {
                   temp_v6 = (unsigned int)*(unsigned short *)((int)puVar4 + temp_v13 * 2 + 0x933c);
-                  FUN_0029f7d4();
+                  dataTable54FindById();
                   if (*(short *)(temp_v6 + 0x1a) == *(short *)((int)puVar4 + temp_v3 * 2 + 0x6278)) {
                     temp_v18 = (unsigned int)*(unsigned short *)((int)puVar4 + temp_v13 * 2 + 0x933c);
                     break;
@@ -305,7 +305,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           if (*(short *)(puVar4 + 0x24ce) != 0) {
             do {
               temp_v6 = (unsigned int)*(unsigned short *)((int)puVar4 + temp_v10 * 2 + 0x933c);
-              FUN_0029f7d4();
+              dataTable54FindById();
               if (*(short *)(temp_v6 + 0x1a) ==
                   *(short *)((int)puVar4 + (temp_v13 + temp_v4) * 2 + 0x6278)) {
                 temp_v18 = (unsigned int)*(unsigned short *)((int)puVar4 + temp_v10 * 2 + 0x933c);
@@ -462,7 +462,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             if (*(short *)(puVar4 + 0x24ce) != 0) {
               do {
                 temp_v6 = (unsigned int)*(unsigned short *)((int)puVar4 + temp_v10 * 2 + 0x933c);
-                FUN_0029f7d4();
+                dataTable54FindById();
                 if (*(short *)(temp_v6 + 0x1a) == *(short *)((int)puVar4 + temp_v4 * 2 + 0x6278)) {
                   temp_v18 = (unsigned int)*(unsigned short *)((int)puVar4 + temp_v10 * 2 + 0x933c);
                   break;

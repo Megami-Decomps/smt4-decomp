@@ -1,34 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00218be0` (_code @ 0x218be0, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail stores cursor/mode with a writeback str pair (no stm) and copies the zero register into the loop counter. */
+#include "common.h"
+
+struct PanelSlot {
+    u8 unk00[0x8c];
+};
+
+struct PanelList {
+    u8 unk0000[0x20];
+    PanelSlot first[10];   // 0x0020, 0x8c bytes each
+    PanelSlot second[10];  // 0x0598
+    u8 unk0b10[0x217c - 0xb10];
+    u32 cursor;            // 0x217c
+    u32 mode;              // 0x2180
+    u8 unk2184[8];
+    s16 count;             // 0x218c
+    u16 selected;          // 0x218e
+};
 
 extern "C" {
 
-int FUN_002bee58(int, int);
+void spriteStartAnimationByIndex(void *slot, s32 size);
 
-/* Supplied declaration required: FUN_002bee58. */
-
-
-void FUN_00218be0(int param_1)
-
+// Reset the list state and initialise both per-slot records of every slot.
+void FUN_00218be0(PanelList *list)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  *(unsigned int *)(param_1 + 0x217c) = 0;
-  *(unsigned int *)(param_1 + 0x2180) = 4;
-  *(unsigned short *)(param_1 + 0x218e) = 0;
-  temp_v0 = 0;
-  if (temp_v0 < *(short *)(param_1 + 0x218c)) {
-    do {
-      temp_v1 = param_1 + temp_v0 * 0x8c;
-      FUN_002bee58(temp_v1 + 0x20,8);
-      FUN_002bee58(temp_v1 + 0x598,8);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(short *)(param_1 + 0x218c));
-  }
-  return;
+    list->cursor = 0;
+    list->mode = 4;
+    list->selected = 0;
+    for (s32 i = 0; i < list->count; i++) {
+        spriteStartAnimationByIndex(&list->first[i], 8);
+        spriteStartAnimationByIndex(&list->second[i], 8);
+    }
 }
 
 } /* extern "C" */

@@ -19,7 +19,7 @@ typedef struct SlotManager {
 
 extern SlotManager *g_btlTalkBustUp;
 
-extern void FUN_002bee58(void *sub, s32 arg);
+extern void spriteStartAnimationByIndex(void *sub, s32 arg);
 
 void btlTalkBustUpReleaseAllSlots(void)
 {
@@ -31,7 +31,7 @@ void btlTalkBustUpReleaseAllSlots(void)
             Slot *slot = &manager->slots[i];
 
             if (slot->inUse != 0) {
-                FUN_002bee58(slot->sub, 1);
+                spriteStartAnimationByIndex(slot->sub, 1);
             }
         }
         manager->active = 0;

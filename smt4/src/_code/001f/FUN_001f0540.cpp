@@ -8,7 +8,7 @@ int FUN_002580d4(...);
 int FUN_0026a9cc(...);
 int FUN_00290994(...);
 int FUN_0029a17c(...);
-int FUN_0029cde0(...);
+int arrayContainsU16(...);
 int FUN_0029dc74(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6c34(...);
@@ -69,7 +69,7 @@ extern int uniteGetWork(void);
 /* Supplied declaration required: FUN_0029a17c. */
 extern unsigned int FUN_0029a924(unsigned short);
 extern int flagCountUnlockedSlots(unsigned char *);
-/* Supplied declaration required: FUN_0029cde0. */
+/* Supplied declaration required: arrayContainsU16. */
 extern int FUN_0029d644(int);
 extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_0029dc74. */
@@ -450,7 +450,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
           temp_v3 = 0xff;
           temp_v8 = temp_v1 + (temp_v5 + temp_v14) * 2;
           temp_v4 = temp_v10;
-          FUN_0029cde0(temp_v10,8,*(unsigned short *)(temp_v8 + 0x9020));
+          arrayContainsU16(temp_v10,8,*(unsigned short *)(temp_v8 + 0x9020));
           if (temp_v10 != 0) {
             temp_v3 = 0x8400ff;
           }
@@ -531,7 +531,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
                   );
       temp_v5 = temp_v1 + (temp_v5 + temp_v14) * 2;
       temp_v3 = 0xffffffff;
-      FUN_0029cde0(temp_v4,8,*(unsigned short *)(temp_v5 + 0x9020));
+      arrayContainsU16(temp_v4,8,*(unsigned short *)(temp_v5 + 0x9020));
       if (temp_v4 != 0) {
         temp_v3 = 0x8400ff;
       }

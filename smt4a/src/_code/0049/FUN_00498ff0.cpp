@@ -9,7 +9,7 @@ struct EquipmentSoundTables {
     u16 normal[10];
     u16 alternate[10];
 };
-extern "C" const EquipmentSoundTables DAT_0053603c;
+extern "C" const EquipmentSoundTables g_equipMenuStateHandlerInit;
 
 extern "C" s32 gameFlagIsSet(u32 flag);
 extern "C" void sysPlaySe(s32 soundId);
@@ -20,8 +20,8 @@ extern "C" void FUN_00498ff0(EquipmentMenuState *menu)
     if (menu->page != 8) {
         u16 normalSounds[10];
         u16 alternateSounds[10];
-        memcpy(normalSounds, DAT_0053603c.normal, sizeof(normalSounds));
-        memcpy(alternateSounds, DAT_0053603c.alternate, sizeof(alternateSounds));
+        memcpy(normalSounds, g_equipMenuStateHandlerInit.normal, sizeof(normalSounds));
+        memcpy(alternateSounds, g_equipMenuStateHandlerInit.alternate, sizeof(alternateSounds));
         if (menu->sound.mode != 1) {
             sound = normalSounds[menu->page];
             if ((menu->sound.restricted || !gameFlagIsSet(0x410)) && menu->page == 0) {
@@ -39,7 +39,7 @@ extern "C" void FUN_00498ff0(EquipmentMenuState *menu)
         }
     } else {
         u16 otherSounds[4];
-        memcpy(otherSounds, DAT_0053603c.other, sizeof(otherSounds));
+        memcpy(otherSounds, g_equipMenuStateHandlerInit.other, sizeof(otherSounds));
         sound = otherSounds[menu->selection.index];
     }
     sysPlaySe(sound);

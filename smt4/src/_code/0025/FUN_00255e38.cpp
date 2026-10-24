@@ -1,142 +1,167 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00255e38` (_code @ 0x255e38, 0x264 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: close: retail pairs the state/zero stores into strd and allocates record/index to r7/r6 (built r5/r7); all fields and control flow match */
+#include "common.h"
+
+/* A unit record as stored in the party tables (0x18C bytes; only the fields this code reads are named). */
+struct UnitRecordIn {
+    /* 0x000 */ u8 flags;           /* bit 0: player */
+    /* 0x001 */ u8 unk001[7];
+    /* 0x008 */ s16 unitIndex;
+    /* 0x00A */ u8 unk00A[0x142];
+    /* 0x14C */ u32 reset14C[13];   /* cleared on entry */
+    /* 0x180 */ u32 reset180;
+    /* 0x184 */ u32 reset184;
+    /* 0x188 */ u8 unk188[4];
+};
+
+/* A spawned unit slot. */
+struct UnitSlot {
+    /* 0x000 */ u32 state;
+    /* 0x004 */ u32 unk004;
+    /* 0x008 */ s16 index;
+    /* 0x00A */ u8 unk00A[0x64];
+    /* 0x06E */ u16 tableId;
+    /* 0x070 */ u8 unk070[2];
+    /* 0x072 */ u8 block72[0x3C];
+    /* 0x0AE */ u8 unk0AE[0x1E];
+    /* 0x0CC */ UnitRecordIn record;
+    /* 0x258 */ u32 cleared258[8];
+    /* 0x278 */ void *playerData;
+    /* 0x27C */ void *unitRecord;
+    /* 0x280 */ struct SlotTableData *slotTable;
+    /* 0x284 */ void *tableRecord;
+};
+
+/* The per-index entry of the world's slot table (0x114 bytes). */
+struct SlotTableEntry {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 flags;
+    /* 0x54 */ u8 unk54[0xC];
+    /* 0x60 */ u16 tableId;
+    /* 0x62 */ s16 index;
+    /* 0x64 */ u8 unk64[0x110 - 0x64 + 4];
+};
+typedef char SlotTableEntrySize[sizeof(SlotTableEntry) == 0x114 ? 1 : -1];
+
+/* The slot-table block inside the game's slot table. */
+struct SlotTableData {
+    /* 0x00 */ u8 unk00[0x44];
+    /* 0x44 */ u16 flags;
+};
+
+struct SlotWorld {
+    /* 0x0000 */ u8 unk0000[0x1E98];
+    /* 0x1E98 */ SlotTableEntry *entries;
+    /* 0x1E9C */ u8 unk1E9C[0x128];
+    /* 0x1FC4 */ u16 playerCount;
+    /* 0x1FC6 */ u16 tableCount;
+    /* 0x1FC8 */ u8 unk1FC8[0x29FC];
+    /* 0x49C4 */ u8 slotTableReady;
+};
 
 extern "C" {
 
-int FUN_002550d8(int, int, unsigned int *, int);
-int dataTable00FindById(void);
-int rt_memclr(int, int);
-int FUN_003be758(unsigned int *);
-int rt_memcpy_w(unsigned int *, int, int);
+UnitSlot *FUN_002561d8(SlotWorld *world, s32 index, u32 arg);
+UnitSlot *FUN_0033a5a0(void);
+void rt_memcpy_w(void *dest, const void *src, s32 size);
+void rt_memclr(void *dest, s32 size);
+void *gameGetPlayerData(void);
+void *gameGetUnitRecord(s32 index);
+u8 *gameGetSlotTable(void);
+void *dataTable00FindById(u32 id);
+s32 FUN_003be758(UnitSlot *slot);
+void FUN_002550d8(s32 index, s32 mode, s32 arg, s32 zero);
 
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_5_stack;
-
-/* Supplied declaration required: FUN_002550d8. */
-extern unsigned int *FUN_002561d8(int, int, unsigned int);
-extern unsigned int gameGetUnitRecord(int);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: dataTable00FindById. */
-extern unsigned int gameGetPlayerData(void);
-/* Supplied declaration required: rt_memclr. */
-extern unsigned int *FUN_0033a5a0(void);
-/* Supplied declaration required: FUN_003be758. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_00255e38(int param_1,int param_2,int param_3,int param_4,int param_5)
-
+/* Spawns a unit slot of the given kind (0: party record, 1: table unit, 2: slot-table unit) from `record` at `index`. */
+void FUN_00255e38(SlotWorld *world, UnitRecordIn *record, s32 kind, s32 index, s32 extra)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *puVar4;
-  
-  *(unsigned int *)(param_2 + 0x184) = 0;
-  *(unsigned int *)(param_2 + 0x14c) = 0;
-  *(unsigned int *)(param_2 + 0x150) = 0;
-  *(unsigned int *)(param_2 + 0x154) = 0;
-  *(unsigned int *)(param_2 + 0x158) = 0;
-  *(unsigned int *)(param_2 + 0x15c) = 0;
-  *(unsigned int *)(param_2 + 0x160) = 0;
-  *(unsigned int *)(param_2 + 0x164) = 0;
-  *(unsigned int *)(param_2 + 0x168) = 0;
-  *(unsigned int *)(param_2 + 0x16c) = 0;
-  *(unsigned int *)(param_2 + 0x170) = 0;
-  *(unsigned int *)(param_2 + 0x174) = 0;
-  *(unsigned int *)(param_2 + 0x178) = 0;
-  *(unsigned int *)(param_2 + 0x17c) = 0;
-  puVar4 = (unsigned int *)0x0;
-  *(unsigned int *)(param_2 + 0x180) = 0;
-  if (param_3 != 0) {
-    if (param_3 != 1) {
-      if (param_3 == 2) {
-        puVar4 = (unsigned int *)FUN_002561d8(param_1,param_4,0);
-        rt_memcpy_w(puVar4 + 0x33,param_2,0x18c);
-        *puVar4 = 0x21;
-        puVar4[1] = 0;
-        temp_v1 = gameGetSlotTable();
-        puVar4[0xa0] = temp_v1 + 0x910c;
-        if ((*(unsigned short *)(temp_v1 + 0x9150) & 2) != 0) {
-          *(unsigned char *)(param_1 + 0x49c4) = 0;
+    UnitSlot *slot = NULL;
+    SlotTableEntry *entry;
+
+    record->reset184 = 0;
+    record->reset14C[0] = 0;
+    record->reset14C[1] = 0;
+    record->reset14C[2] = 0;
+    record->reset14C[3] = 0;
+    record->reset14C[4] = 0;
+    record->reset14C[5] = 0;
+    record->reset14C[6] = 0;
+    record->reset14C[7] = 0;
+    record->reset14C[8] = 0;
+    record->reset14C[9] = 0;
+    record->reset14C[10] = 0;
+    record->reset14C[11] = 0;
+    record->reset14C[12] = 0;
+    record->reset180 = 0;
+    if (kind == 0) {
+        slot = FUN_002561d8(world, index, 0);
+        rt_memcpy_w(&slot->record, record, sizeof(UnitRecordIn));
+        if ((slot->record.flags & 1) != 0) {
+            slot->state = 7;
+            slot->unk004 = 0;
+            slot->playerData = gameGetPlayerData();
+        } else {
+            slot->state = 9;
+            slot->unk004 = 0;
+            slot->unitRecord = gameGetUnitRecord(slot->record.unitIndex);
         }
-        else {
-          *(unsigned char *)(param_1 + 0x49c4) = 1;
+        world->playerCount++;
+    } else if (kind == 1) {
+        slot = FUN_0033a5a0();
+        rt_memcpy_w(&slot->record, record, sizeof(UnitRecordIn));
+        slot->state = 0x11;
+        slot->unk004 = 0;
+        slot->tableRecord = dataTable00FindById(*(u16 *)((u8 *)slot + 0xCE));
+        if (*((u8 *)slot + 0x1A0) == 1) {
+            slot->state |= 0x100;
         }
-      }
+        world->tableCount++;
+    } else if (kind == 2) {
+        u8 *table;
+        SlotTableData *data;
+
+        slot = FUN_002561d8(world, index, 0);
+        rt_memcpy_w(&slot->record, record, sizeof(UnitRecordIn));
+        slot->state = 0x21;
+        slot->unk004 = 0;
+        table = gameGetSlotTable();
+        data = (SlotTableData *)(table + 0x910C);
+        slot->slotTable = data;
+        if ((data->flags & 2) != 0) {
+            world->slotTableReady = 0;
+        } else {
+            world->slotTableReady = 1;
+        }
     }
-    else {
-      puVar4 = (unsigned int *)FUN_0033a5a0();
-      rt_memcpy_w(puVar4 + 0x33,param_2,0x18c);
-      *puVar4 = 0x11;
-      puVar4[1] = 0;
-      temp_v0 = (unsigned int)*(unsigned short *)((int)puVar4 + 0xce);
-      dataTable00FindById();
-      puVar4[0xa1] = temp_v0;
-      if ((char)puVar4[0x68] == '\x01') {
-        *puVar4 = *puVar4 | 0x100;
-      }
-      *(short *)(param_1 + 0x1fc6) = *(short *)(param_1 + 0x1fc6) + 1;
+    slot->index = index;
+    rt_memclr(slot->block72, 0x3C);
+    *(u32 *)((u8 *)slot + 0xAE) = 0;
+    *(u32 *)((u8 *)slot + 0xB2) = 0;
+    *(u32 *)((u8 *)slot + 0xB6) = 0;
+    *(u32 *)((u8 *)slot + 0xBA) = 0;
+    *(u16 *)((u8 *)slot + 0xBE) = 0;
+    slot->cleared258[0] = 0;
+    slot->cleared258[1] = 0;
+    slot->cleared258[2] = 0;
+    slot->cleared258[3] = 0;
+    slot->cleared258[4] = 0;
+    slot->cleared258[5] = 0;
+    slot->cleared258[6] = 0;
+    slot->cleared258[7] = 0;
+    if (extra != 0) {
+        slot->state |= 0x20000000;
     }
-  }
-  else {
-    puVar4 = (unsigned int *)FUN_002561d8(param_1,param_4,0);
-    rt_memcpy_w(puVar4 + 0x33,param_2,0x18c);
-    if ((puVar4[0x33] & 1) != 0) {
-      *puVar4 = 7;
-      puVar4[1] = 0;
-      temp_v0 = gameGetPlayerData();
-      puVar4[0x9e] = temp_v0;
+    entry = &world->entries[index];
+    entry->flags = 0x81;
+    if (index < 4) {
+        entry->flags = 0x281;
+    } else if (index < 0x36) {
+        entry->flags = 0x481;
+    } else {
+        entry->flags = 0x881;
     }
-    else {
-      *puVar4 = 9;
-      puVar4[1] = 0;
-      temp_v0 = gameGetUnitRecord((int)(short)puVar4[0x35]);
-      puVar4[0x9f] = temp_v0;
-    }
-    *(short *)(param_1 + 0x1fc4) = *(short *)(param_1 + 0x1fc4) + 1;
-  }
-  *(short *)(puVar4 + 2) = (short)param_4;
-  rt_memclr((int)puVar4 + 0x72,0x3c);
-  *(unsigned int *)((int)puVar4 + 0xae) = 0;
-  *(unsigned int *)((int)puVar4 + 0xb2) = 0;
-  *(unsigned int *)((int)puVar4 + 0xb6) = 0;
-  *(unsigned int *)((int)puVar4 + 0xba) = 0;
-  *(unsigned short *)((int)puVar4 + 0xbe) = 0;
-  puVar4[0x96] = 0;
-  puVar4[0x97] = 0;
-  puVar4[0x98] = 0;
-  puVar4[0x99] = 0;
-  puVar4[0x9a] = 0;
-  puVar4[0x9b] = 0;
-  puVar4[0x9c] = 0;
-  puVar4[0x9d] = 0;
-  if (param_5 != 0) {
-    *puVar4 = *puVar4 | 0x20000000;
-  }
-  temp_v1 = *(int *)(param_1 + 0x1e98) + param_4 * 0x114;
-  *(unsigned int *)(temp_v1 + 0x50) = 0x81;
-  if (param_4 < 4) {
-    *(unsigned int *)(temp_v1 + 0x50) = 0x281;
-  }
-  else {
-    if (param_4 < 0x36) {
-      temp_v2 = 0x481;
-    }
-    else {
-      temp_v2 = 0x881;
-    }
-    *(unsigned int *)(temp_v1 + 0x50) = temp_v2;
-  }
-  *(unsigned short *)(temp_v1 + 0x60) = *(unsigned short *)((int)puVar4 + 0x6e);
-  *(short *)(temp_v1 + 0x62) = (short)param_4;
-  FUN_003be758(puVar4);
-  FUN_002550d8(param_4,0xc,puVar4,0);
-  return;
+    entry->tableId = slot->tableId;
+    entry->index = index;
+    FUN_002550d8(index, 12, FUN_003be758(slot), 0);
 }
 
 } /* extern "C" */

@@ -32,7 +32,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char g_messageMain; /* 0x57f588 */
-extern unsigned short DAT_005e2058; /* 0x5e2058 */
+extern unsigned short g_battleSlotCount; /* 0x5e2058 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: randRange. */
@@ -394,7 +394,7 @@ LAB_0028bd98:
     temp_v5 = textMeasureLineWidth(*(unsigned int *)(param_1 + 4),(int)*(short *)(param_1 + 0x5a));
     *(unsigned short *)(param_1 + 0x60) = temp_v5;
     temp_v6 = 0;
-    switch(DAT_005e2058) {
+    switch(g_battleSlotCount) {
     case 1:
       temp_v6 = 0x191;
       break;

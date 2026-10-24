@@ -1,4 +1,3 @@
-/* NON_MATCHING: prologue scheduling only: retail stores the 0x40 flag before loading the text pointer; armcc here hoists the load above the store. */
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 

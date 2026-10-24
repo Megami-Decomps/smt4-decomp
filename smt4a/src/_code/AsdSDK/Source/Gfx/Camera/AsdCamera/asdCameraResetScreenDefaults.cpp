@@ -54,7 +54,7 @@ extern ScreenCameraDefaults DAT_006309c4;
 extern BattleVector3 DAT_006309a0;
 extern BattleVector3 DAT_006309b8;
 extern ScreenCameraGlobals g_asdCamera;
-void FUN_0013c884(DefaultScreenCamera*, s32 enabled);
+void asdCameraInitializeDefaults(DefaultScreenCamera*, s32 enabled);
 void FUN_0014f0dc(DefaultScreenCamera*, const BattleVector3* eye,
                  const BattleVector3* target, const BattleVector3* up);
 GfxTransform* FUN_0016fba0(GfxTransform*, f32 fieldOfView, f32 aspect, f32 nearClip, f32 farClip);
@@ -83,7 +83,7 @@ void asdCameraResetScreenDefaults(s32 mode, s32 enabled, f32 period)
         slot->farClip = 25600.0f;
 
         DefaultScreenCamera* camera = &slot->camera;
-        FUN_0013c884(camera, 1);
+        asdCameraInitializeDefaults(camera, 1);
         FUN_0014f0dc(camera, &slot->eye, &slot->target, &DAT_006309b8);
         camera->fieldOfView = 18.267f;
         camera->nearClip = slot->nearClip;

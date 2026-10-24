@@ -1,71 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e5154` (_code @ 0x2e5154, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same stores and calls; retail does not shrink-wrap the null test (push first, `movs r5, r0`, predicated first store, branch to the pop at the end), built returns before the push */
+#include "common.h"
 
 extern "C" {
 
-int nodeTreeReleaseItemClearOwner(...);
-int nodeTreeReleaseItem(...);
-
-typedef struct fn_002e5154_arg0 fn_002e5154_arg0;
-struct fn_002e5154_arg0 {
-    unsigned char pad_0x0[0x2];
-    byte field_0x2; /* +0x2 */
-    unsigned char pad_0x3[0x11];
-    unsigned char field_0x14; /* +0x14 */
-    unsigned char pad_0x15[0x3];
-    unsigned char field_0x18; /* +0x18 */
-    unsigned char pad_0x19[0x3];
-    unsigned char field_0x1c; /* +0x1c */
-    unsigned char pad_0x1d[0x7];
-    void *field_0x24; /* +0x24 */
-    void *field_0x28; /* +0x28 */
-    void *field_0x2c; /* +0x2c */
-    void *field_0x30; /* +0x30 */
+struct OwnerSlot {
+    /* 0x00 */ u32 owner;
 };
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+struct ItemOwnerNode {
+    /* 0x000 */ u8 unk000[0x24];
+    /* 0x024 */ u32 active;
+    /* 0x028 */ u32 unk28;
+    /* 0x02c */ u32 unk2c;
+    /* 0x030 */ u32 unk30;
+    /* 0x034 */ u8 unk34[0x48 - 0x34];
+    /* 0x048 */ f32 scaleX;
+    /* 0x04c */ f32 scaleY;
+    /* 0x050 */ f32 scaleZ;
+    /* 0x054 */ u8 unk54[0x254 - 0x54];
+    /* 0x254 */ OwnerSlot *slot;
+    /* 0x258 */ u8 unk258[0x264 - 0x258];
+    /* 0x264 */ void *items[50];
+};
 
-/* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
-/* Supplied declaration required: nodeTreeReleaseItem. */
+void nodeTreeReleaseItemClearOwner(void *item);
+void nodeTreeReleaseItem(void *item);
 
-
-void FUN_002e5154(fn_002e5154_arg0 *param_1)
-
+/* Releases the node's 50 items, resets its state and scale, clears its owner link and releases the node itself. */
+void FUN_002e5154(ItemOwnerNode *node)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  void *unaff_r6;
-  
-  if (param_1 != (fn_002e5154_arg0 *)0x0) {
-    unaff_r6 = (void *)0x0;
-  }
-  temp_v0 = 0;
-  if (param_1 == (fn_002e5154_arg0 *)0x0) {
-    return;
-  }
-  param_1->field_0x24 = unaff_r6;
-  do {
-    nodeTreeReleaseItemClearOwner((&param_1[0xb].field_0x28)[temp_v0]);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x32);
-  puVar1 = *(unsigned int **)&param_1[0xb].field_0x18;
-  param_1->field_0x24 = unaff_r6;
-  param_1->field_0x28 = unaff_r6;
-  param_1->field_0x2c = unaff_r6;
-  param_1->field_0x30 = unaff_r6;
-  *(unsigned int *)&param_1[1].field_0x14 = 0;
-  *(unsigned int *)&param_1[1].field_0x18 = 0;
-  *(unsigned int *)&param_1[1].field_0x1c = 0;
-  if (puVar1 != (unsigned int *)0x0) {
-    *puVar1 = (unsigned int)unaff_r6;
-  }
-  nodeTreeReleaseItem(param_1);
-  return;
+    s32 i;
+
+    if (node != NULL) {
+        node->active = 0;
+        for (i = 0; i < 50; i++) {
+            nodeTreeReleaseItemClearOwner(node->items[i]);
+        }
+        node->active = 0;
+        node->unk28 = 0;
+        node->unk2c = 0;
+        node->unk30 = 0;
+        node->scaleX = 0.0f;
+        node->scaleY = 0.0f;
+        node->scaleZ = 0.0f;
+        if (node->slot != NULL) {
+            node->slot->owner = 0;
+        }
+        nodeTreeReleaseItem(node);
+    }
 }
 
 } /* extern "C" */

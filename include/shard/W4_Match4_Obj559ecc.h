@@ -8,6 +8,7 @@ class Obj55aff4 {
 public:
     Obj55aff4();
     Obj55aff4(const char *text);
+    Obj55aff4(const unsigned short *text);
     Obj55aff4(const Obj55aff4 &other);
     Obj55aff4 &operator=(const Obj55aff4 &other);
     virtual ~Obj55aff4();

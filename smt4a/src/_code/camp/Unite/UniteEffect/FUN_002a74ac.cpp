@@ -24,7 +24,7 @@ int FUN_00184310(void);
 int FUN_001fc348(...);
 int uniteCameraDestroy(void);
 int FUN_003d2a00(...);
-int FUN_003f9e80(void);
+int _ZN9Obj557af8C1EPK21AsdAnimCameraResource(void);
 int FUN_003fb5d4(unsigned int, int, int);
 int FUN_0040aa6c(void);
 int FUN_0040aad4(...);
@@ -76,7 +76,7 @@ extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: FUN_00371c3c. */
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: FUN_003d2a00. */
-/* Supplied declaration required: FUN_003f9e80. */
+/* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
 /* Supplied declaration required: FUN_003fb5d4. */
 extern unsigned int FUN_00409fe8(unsigned short, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0040aa6c. */
@@ -167,7 +167,7 @@ void FUN_002a74ac(void)
       FUN_00178b04(0x48,&LAB_002a7940,0x6f7);
     }
     if (temp_v3 != 0) {
-      FUN_003f9e80();
+      _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
     *(int *)(temp_v0 + 0x98) = temp_v3;
     FUN_003d2a00(&LAB_002a79ec);
@@ -188,7 +188,7 @@ void FUN_002a74ac(void)
     temp_v3 = 0x48;
     FUN_00178b04(0x48,&LAB_002a7940,0x711);
     if (temp_v3 != 0) {
-      FUN_003f9e80();
+      _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
     *(int *)(temp_v0 + 0x98) = temp_v3;
     FUN_003d2a00(&LAB_002a79ec);
@@ -209,7 +209,7 @@ void FUN_002a74ac(void)
     temp_v3 = 0x48;
     FUN_00178b04(0x48,&LAB_002a7940,0x728);
     if (temp_v3 != 0) {
-      FUN_003f9e80();
+      _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
     *(int *)(temp_v0 + 0x98) = temp_v3;
     FUN_003d2a00(&LAB_002a79ec);

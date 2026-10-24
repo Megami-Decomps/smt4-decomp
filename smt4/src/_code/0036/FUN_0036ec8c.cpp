@@ -1,153 +1,153 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036ec8c` (_code @ 0x36ec8c, 0x26c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: header id/magic/version are stored with post-incremented str instead of one stm (retail keeps the header in r6 and uses stm), the second format table is addressed as base+56 with an immediate offset, and the mip counter/original count registers are swapped. */
+#include "common.h"
 
-extern "C" {
+/* Allocator interface: slot 2 allocates `size` bytes with the given alignment. */
+class TexAllocator {
+public:
+    virtual void vfunc00();
+    virtual void vfunc04();
+    virtual void *alloc(u32 size, u32 alignment);
+};
 
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(int, int);
+struct TexDimensions {
+    s32 width;
+    s32 height;
+    s32 mipCount;
+};
 
-typedef int romwright_code(...);
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
+/* What to build: dimensions, mip count and pixel format. */
+struct TexBuildConfig {
+    /* 0x00 */ TexDimensions size;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ s32 format;
+    /* 0x18 */ u8 clearData;
+    /* 0x19 */ u8 hasData;
+};
 
+/* GL description of each texture format. */
+struct TexFormatTable {
+    u32 internalFormat[14];
+    u32 dataType[14];
+};
 
-unsigned int * FUN_0036ec8c(int *param_1,int *param_2)
+/* The 0x3C-byte file header: a magic, the format description and a self-relative pointer to the body. */
+struct TexFileHeader {
+    u32 id;
+    u32 magic;
+    u32 version;
+    u32 unk0C;
+    u32 unk10;
+    u32 unk14;
+    u32 width;
+    u32 height;
+    u32 internalFormat;
+    u32 dataType;
+    u32 mipLevels;
+    u32 unk2C;
+    u32 unk30;
+    u32 format;
+    s32 bodyOffset;
 
+    TexFileHeader()
+        : id(0), magic(0), version(0), unk0C(0), unk10(0), unk14(0), width(0), height(0), internalFormat(0),
+          dataType(0), mipLevels(0), unk2C(0), unk30(0), format(0), bodyOffset(0)
+    {
+    }
+    static void *operator new(u32 size, TexAllocator *allocator) throw() { return allocator->alloc(size, 4); }
+};
+
+/* The 0x20-byte body: sizes and a self-relative pointer to the pixel data. */
+struct TexFileBody {
+    u32 width;
+    u32 height;
+    u32 dataSize;
+    s32 dataOffset;
+    TexAllocator *allocator;
+    u32 bitsPerTexel;
+    u32 unk18;
+    u32 unk1C;
+
+    TexFileBody() : width(0), height(0), dataSize(0), dataOffset(0), allocator(0), bitsPerTexel(0), unk18(0), unk1C(0) {}
+    static void *operator new(u32 size, TexAllocator *allocator) throw() { return allocator->alloc(size, 4); }
+};
+
+/* Stores the distance from `slot` to `target`, or 0 for no target. */
+static __inline void setRelativePointer(s32 *slot, const void *target)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned int *puVar3;
-  int *piVar4;
-  unsigned char *puVar5;
-  int *piVar6;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  int temp_v5;
-  float temp_v6;
-  int temp_v7;
-  float temp_v8;
-  
-  if (param_1[5] == 0xc) {
-    temp_v2 = 0x10;
-  }
-  else {
-    temp_v2 = 8;
-  }
-  puVar3 = (unsigned int *)(**(romwright_code **)(*param_2 + 8))(param_2,0x3c,4);
-  if (puVar3 != (unsigned int *)0x0) {
-    *puVar3 = 0;
-    puVar3[1] = 0;
-    puVar3[2] = 0;
-    puVar3[3] = 0;
-    puVar3[4] = 0;
-    puVar3[5] = 0;
-    puVar3[6] = 0;
-    puVar3[7] = 0;
-    puVar3[8] = 0;
-    puVar3[9] = 0;
-    puVar3[10] = 0;
-    puVar3[0xb] = 0;
-    puVar3[0xc] = 0;
-    puVar3[0xd] = 0;
-    puVar3[0xe] = 0;
-  }
-  *puVar3 = 0x20000011;
-  puVar3[1] = 0x4d495854;
-  puVar3[2] = 0x5000000;
-  puVar3[3] = 0;
-  puVar3[4] = 0;
-  puVar3[5] = 0;
-  puVar3[6] = *param_1;
-  puVar3[7] = param_1[1];
-  puVar3[8] = *(unsigned int *)(param_1[5] * 4 + 0x409108);
-  puVar3[9] = *(unsigned int *)(param_1[5] * 4 + 0x409140);
-  puVar3[10] = param_1[2];
-  puVar3[0xb] = 0;
-  puVar3[0xc] = param_1[3];
-  puVar3[0xd] = param_1[5];
-  piVar4 = (int *)(**(romwright_code **)(*param_2 + 8))(param_2,0x20,4);
-  if (piVar4 != (int *)0x0) {
-    *piVar4 = 0;
-    piVar4[1] = 0;
-    piVar4[2] = 0;
-    piVar4[3] = 0;
-    piVar4[4] = 0;
-    piVar4[5] = 0;
-    piVar4[6] = 0;
-    piVar4[7] = 0;
-  }
-  piVar4[4] = (int)param_2;
-  *piVar4 = *param_1;
-  temp_v3 = 0;
-  piVar4[1] = param_1[1];
-  piVar4[6] = param_1[4];
-  temp_v4 = *(float *)(param_1[5] * 4 + 0x409178);
-  temp_v5 = VectorFloatToUnsigned(temp_v4 * 8.0f,3);
-  piVar4[5] = temp_v5;
-  temp_v5 = *param_1;
-  temp_v1 = param_1[1];
-  temp_v0 = param_1[2];
-  while (0 < temp_v0) {
-    temp_v6 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v8 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v7 = VectorFloatToUnsigned(temp_v4 * temp_v6 * temp_v8,3);
-    temp_v3 = temp_v3 + temp_v7;
-    if (temp_v5 == temp_v2 && temp_v1 == temp_v2) {
-      puVar3[10] = (param_1[2] - temp_v0) + 1;
-      break;
-    }
-    if (temp_v2 < temp_v5) {
-      temp_v5 = temp_v5 / 2;
-    }
-    temp_v0 = temp_v0 - 1;
-    if (temp_v2 < temp_v1) {
-      temp_v1 = temp_v1 / 2;
-    }
-  }
-  if (*(char *)((int)param_1 + 0x19) == '\0') {
-    piVar4[2] = 0;
-  }
-  else {
-    puVar5 = (unsigned char *)(**(romwright_code **)(*param_2 + 8))(param_2,temp_v3,0x80);
-    puVar2 = puVar5;
-    temp_v2 = temp_v3;
-    if ((char)param_1[6] != '\0') {
-      for (; temp_v2 != 0; temp_v2 = temp_v2 - 1) {
-        *puVar2 = 0;
-        puVar2 = puVar2 + 1;
-      }
-    }
-    temp_v2 = 0;
-    if (puVar5 != (unsigned char *)0x0) {
-      temp_v2 = (int)puVar5 - (int)(piVar4 + 3);
-    }
-    piVar4[2] = temp_v3;
-    if (puVar5 != (unsigned char *)0x0) {
-      piVar4[3] = temp_v2;
-      piVar6 = (int *)(puVar3 + 0xe);
-      if (piVar4 != (int *)0x0) {
-        *piVar6 = (int)piVar4 - (int)piVar6;
-      }
-      else {
-        *piVar6 = 0;
-      }
-      return puVar3;
-    }
-  }
-  piVar4[3] = 0;
-  piVar6 = (int *)(puVar3 + 0xe);
-  if (piVar4 != (int *)0x0) {
-    *piVar6 = (int)piVar4 - (int)piVar6;
-  }
-  else {
-    *piVar6 = 0;
-  }
-  return puVar3;
+    *slot = target != NULL ? (s32)((const u8 *)target - (const u8 *)slot) : 0;
 }
 
-} /* extern "C" */
+static __inline void byteFill(u8 *dst, s32 value, u32 count)
+{
+    for (; count != 0; count--) {
+        *dst++ = (u8)value;
+    }
+}
+
+extern "C" {
+extern TexFormatTable DAT_00409108;
+extern f32 DAT_00409178[14];
+
+/* Builds the texture file image for `config` in memory from `allocator`: header, body and pixel storage. */
+TexFileHeader *FUN_0036ec8c(const TexBuildConfig *config, TexAllocator *allocator)
+{
+    s32 minSize = config->format == 12 ? 16 : 8;
+    TexFileHeader *header = new (allocator) TexFileHeader;
+    header->id = 0x20000011;
+    header->magic = 0x4D495854;
+    header->version = 0x5000000;
+    header->unk0C = 0;
+    header->unk10 = 0;
+    header->unk14 = 0;
+    header->width = config->size.width;
+    header->height = config->size.height;
+    header->internalFormat = DAT_00409108.internalFormat[config->format];
+    header->dataType = DAT_00409108.dataType[config->format];
+    header->mipLevels = config->size.mipCount;
+    header->unk2C = 0;
+    header->unk30 = config->unk0C;
+    header->format = config->format;
+
+    TexFileBody *body = new (allocator) TexFileBody;
+    body->allocator = allocator;
+    body->width = config->size.width;
+    body->height = config->size.height;
+    body->unk18 = config->unk10;
+    f32 bytesPerTexel = DAT_00409178[config->format];
+    body->bitsPerTexel = (u32)(bytesPerTexel * 8.0f);
+
+    u32 total = 0;
+    TexDimensions size = config->size;
+    s32 width = size.width;
+    s32 height = size.height;
+    for (s32 mip = size.mipCount; mip > 0; mip--) {
+        total += (u32)(bytesPerTexel * (f32)width * (f32)height);
+        if (width == minSize && height == minSize) {
+            header->mipLevels = size.mipCount - mip + 1;
+            break;
+        }
+        if (width > minSize) {
+            width /= 2;
+        }
+        if (height > minSize) {
+            height /= 2;
+        }
+    }
+
+    if (config->hasData == 0) {
+        body->dataSize = 0;
+        setRelativePointer(&body->dataOffset, NULL);
+    } else {
+        u8 *data = (u8 *)allocator->alloc(total, 128);
+        if (config->clearData != 0) {
+            byteFill(data, 0, total);
+        }
+        body->dataSize = total;
+        setRelativePointer(&body->dataOffset, data);
+    }
+    setRelativePointer(&header->bodyOffset, body);
+    return header;
+}
+
+}

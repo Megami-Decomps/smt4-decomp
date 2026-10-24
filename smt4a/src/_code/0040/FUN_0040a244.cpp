@@ -1,43 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040a244` (_code @ 0x40a244, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same logic; retail hoists the table base before the use-count test and reuses the use-count register as the loop index (saves only r4), while armcc here allocates r4-r6. */
+#include "common.h"
+
+/* A loaded texture content object (deleted through its virtual destructor). */
+class TextureContent {
+public:
+    virtual ~TextureContent();
+    u32 id;
+};
+
+/* A reference to a texture content by id, with a use count at 0x40. */
+struct TextureRef {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 id;
+    /* 0x08 */ u8 unk08[0x38];
+    /* 0x40 */ s32 useCount;
+};
+
+struct TextureContentTable {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ TextureContent *entries[16];
+};
 
 extern "C" {
 
-int gfxResourceTableReleaseTexturesAndBuffers(void);
+extern TextureContentTable DAT_005cc508;
+void gfxResourceTableReleaseTexturesAndBuffers(void);
 
-typedef int romwright_code(...);
-/* Supplied declaration required: gfxResourceTableReleaseTexturesAndBuffers. */
-
-
-void FUN_0040a244(int param_1)
-
+/* Drops one use of a texture content; on the last use it releases and deletes the registered object. */
+void FUN_0040a244(TextureRef *ref)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  if (*(int *)(param_1 + 0x40) == 1) {
-    temp_v1 = 0;
-    while( 1 ) {
-      temp_v0 = temp_v1 * 4;
-      if ((*(int *)(temp_v0 + 0x5cc50c) != 0) &&
-         (*(int *)(*(int *)(temp_v0 + 0x5cc50c) + 4) == *(int *)(param_1 + 4))) break;
-      temp_v1 = temp_v1 + 1;
-      if (temp_v1 >= 0x10) {
-        return;
-      }
+    if (ref->useCount == 1) {
+        u32 id = ref->id;
+        for (s32 i = 0; i < 16; i++) {
+            TextureContent *content = DAT_005cc508.entries[i];
+            if (content != NULL && content->id == id) {
+                gfxResourceTableReleaseTexturesAndBuffers();
+                if (DAT_005cc508.entries[i] != NULL) {
+                    delete DAT_005cc508.entries[i];
+                }
+                DAT_005cc508.entries[i] = NULL;
+                return;
+            }
+        }
+    } else {
+        ref->useCount--;
     }
-    gfxResourceTableReleaseTexturesAndBuffers();
-    if (*(int **)(temp_v0 + 0x5cc50c) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(temp_v0 + 0x5cc50c) + 4))();
-    }
-    *(unsigned int *)(temp_v0 + 0x5cc50c) = 0;
-  }
-  else {
-    *(int *)(param_1 + 0x40) = *(int *)(param_1 + 0x40) - 1;
-  }
-  return;
 }
 
 } /* extern "C" */

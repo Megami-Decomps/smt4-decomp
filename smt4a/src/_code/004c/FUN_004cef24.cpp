@@ -30,7 +30,7 @@ void FUN_00342334(u32 enabled);
 GameOverScriptProcess* FUN_00275bc8(void* script, void* messages);
 void scrScriptProcessStartEntry(GameOverScriptProcess* process, u32 entry);
 s32 scrRunOpcodesStub(GameOverScriptProcess* process);
-s32 FUN_004cf140(GameOverTransition* transition);
+s32 fountainCrazingSumahoUpdate(GameOverTransition* transition);
 void scrScriptProcessDestroy(GameOverScriptProcess* process);
 void asdMemFree(void* data);
 extern const char DAT_00530edc[];
@@ -84,7 +84,7 @@ extern "C" u32 FUN_004cef24(GameOverTransition* transition)
         transition->state = 4;
         // Fall through to the game-over interaction.
     case 4:
-        if (FUN_004cf140(transition)) {
+        if (fountainCrazingSumahoUpdate(transition)) {
             return 0;
         }
         transition->state = 5;

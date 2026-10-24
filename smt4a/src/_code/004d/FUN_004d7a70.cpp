@@ -1,103 +1,99 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d7a70` (_code @ 0x4d7a70, 0x234 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail tests the 3/4 kinds separately from 7/5 and loads entry masks as word pairs (ldm) with ldrd/strd on the battle mask; u64 mask ops compile differently. */
+#include "common.h"
+#include "shard/W5_W5Match7_BattleMask.h"
+
+/* One 0x24-byte event condition: a kind, a test on a battle unit and a table-group entry name. */
+struct EventCondition {
+    u8 kind;        // 0x00
+    u8 test;        // 0x01
+    u16 unitId;     // 0x02
+    u8 name[0x20];  // 0x04
+};
+
+/* Event condition set; the table group and the entry matched last are tracked in it. */
+struct EventConditionSet {
+    s32 state;                 // 0x00
+    s32 unk04;                 // 0x04
+    s32 unk08[2];              // 0x08
+    void *tableGroup;          // 0x10
+    s32 unk14;                 // 0x14
+    EventCondition *conditions;// 0x18
+    s32 conditionCount;        // 0x1C
+    s32 matchedIndex;          // 0x20
+    s32 matchedKind;           // 0x24
+    s32 unk28;                 // 0x28
+    u8 unk2C;                  // 0x2C
+};
 
 extern "C" {
+extern u64 DAT_005738a0[5];
+extern BattleMaskState *btlGetMainState(void);
+extern s32 tableGroupFindEntryIndex(void *, u8 *);
+extern u8 isOutsideRange4To53(s32);
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-extern unsigned int DAT_005738a0; /* 0x5738a0 */
-extern unsigned int DAT_005738a4; /* 0x5738a4 */
-extern unsigned int DAT_005738a8; /* 0x5738a8 */
-extern unsigned int DAT_005738ac; /* 0x5738ac */
-extern unsigned int DAT_005738b0; /* 0x5738b0 */
-extern unsigned int DAT_005738b4; /* 0x5738b4 */
-extern unsigned int DAT_005738b8; /* 0x5738b8 */
-extern unsigned int DAT_005738bc; /* 0x5738bc */
-
-extern int btlGetMainState(void);
-extern int tableGroupFindEntryIndex(int, unsigned char *);
-extern int isOutsideRange4To53(int);
-
-
-unsigned int FUN_004d7a70(int *param_1,unsigned int param_2,int param_3,int param_4)
-
+/* Find the first condition of the given kind that holds for the battle unit and record it. */
+u32 FUN_004d7a70(EventConditionSet *set, u32 kind, s32 unit, s32 dryRun)
 {
-/* irregular: 5 goto(s) */
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  unsigned char *pbVar5;
-  int temp_v3;
-  
-  if ((*param_1 == 0) || ((*param_1 == 10 && (param_1[10] < 1)))) {
-    if (param_1[6] == 0) {
-      return 0;
-    }
-    if (param_4 == 0) {
-      param_1[9] = 0;
-      param_1[8] = -1;
-      param_1[1] = 0;
-    }
-    temp_v0 = btlGetMainState();
-    pbVar5 = (unsigned char *)param_1[6];
-    temp_v3 = 0;
-    if (temp_v3 < param_1[7]) {
-      do {
-        if (*pbVar5 == param_2) {
-          if (((!(param_2 != 3 && param_2 != 4)) || (!(param_2 != 7 && param_2 != 5))) &&
-             (param_3 >= 0)) {
-            temp_v1 = isOutsideRange4To53(param_3);
-            puVar3 = (unsigned int *)(*(int *)(temp_v0 + 0x1ffc) + param_3 * 0x408);
-            switch(pbVar5[1]) {
-            case 1:
-              if ((temp_v1 == 0) && (*(short *)((int)puVar3 + 0x166) == *(short *)(pbVar5 + 2)))
-              break;
-              goto LAB_004d7c88;
-            case 2:
-              if ((temp_v1 == 0) || (*(short *)((int)puVar3 + 0x166) != *(short *)(pbVar5 + 2)))
-              goto LAB_004d7c88;
-              break;
-            case 3:
-              if ((*puVar3 & DAT_005738a0) == 0 && (DAT_005738a4 & puVar3[1]) == 0)
-              goto LAB_004d7c88;
-              break;
-            case 4:
-              if ((DAT_005738b4 & puVar3[1]) == 0 && (*puVar3 & DAT_005738b0) == 0)
-              goto LAB_004d7c88;
-              break;
-            case 5:
-              if ((DAT_005738ac & puVar3[1]) == 0 && (DAT_005738a8 & *puVar3) == 0)
-              goto LAB_004d7c88;
-            }
-          }
-          if ((param_4 == 0) && ((param_2 == 0 || param_2 == 6 || (param_2 == 7 || param_2 == 8))))
-          {
-            temp_v2 = *(unsigned int *)(temp_v0 + 0x45a4) | DAT_005738bc;
-            *(unsigned int *)(temp_v0 + 0x45a0) = *(unsigned int *)(temp_v0 + 0x45a0) | DAT_005738b8;
-            *(unsigned int *)(temp_v0 + 0x45a4) = temp_v2;
-          }
-          temp_v1 = tableGroupFindEntryIndex(param_1[4],pbVar5 + 4);
-          if (-1 < temp_v1) {
-            if (param_4 == 0) {
-              param_1[8] = temp_v1;
-              *(unsigned char *)(param_1 + 0xb) = 0;
-              param_1[9] = param_2;
-            }
-            return 1;
-          }
+    if (set->state == 0 || (set->state == 10 && set->unk28 < 1)) {
+        if (set->conditions == NULL) {
+            return 0;
         }
-LAB_004d7c88:
-        temp_v3 = temp_v3 + 1;
-        pbVar5 = pbVar5 + 0x24;
-      } while (temp_v3 < param_1[7]);
+        if (dryRun == 0) {
+            set->matchedKind = 0;
+            set->matchedIndex = -1;
+            set->unk04 = 0;
+        }
+        BattleMaskState *battle = btlGetMainState();
+        EventCondition *cond = set->conditions;
+        for (s32 i = 0; i < set->conditionCount; i++, cond++) {
+            if (cond->kind != kind) {
+                continue;
+            }
+            if (((kind == 3 || kind == 4) || (kind == 7 || kind == 5)) && unit >= 0) {
+                u8 outside = isOutsideRange4To53(unit);
+                BattleMaskEntry *entry = &battle->entryView.entries[unit];
+                switch (cond->test) {
+                case 1:
+                    if (outside != 0 || entry->unitId != cond->unitId) {
+                        continue;
+                    }
+                    break;
+                case 2:
+                    if (outside == 0 || entry->unitId != cond->unitId) {
+                        continue;
+                    }
+                    break;
+                case 3:
+                    if ((entry->mask & DAT_005738a0[1]) == 0) {
+                        continue;
+                    }
+                    break;
+                case 4:
+                    if ((entry->mask & DAT_005738a0[3]) == 0) {
+                        continue;
+                    }
+                    break;
+                case 5:
+                    if ((entry->mask & DAT_005738a0[2]) == 0) {
+                        continue;
+                    }
+                    break;
+                }
+            }
+            if (dryRun == 0 && (kind == 0 || kind == 6 || kind == 7 || kind == 8)) {
+                battle->mask |= DAT_005738a0[4];
+            }
+            s32 index = tableGroupFindEntryIndex(set->tableGroup, cond->name);
+            if (index >= 0) {
+                if (dryRun == 0) {
+                    set->matchedIndex = index;
+                    set->unk2C = 0;
+                    set->matchedKind = kind;
+                }
+                return 1;
+            }
+        }
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

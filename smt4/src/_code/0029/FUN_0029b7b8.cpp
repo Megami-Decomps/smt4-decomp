@@ -5,12 +5,12 @@
 
 extern "C" {
 PartyDamageSlotsIV *gameGetSlotTable(void);
-const ContentWordList *FUN_0029f7d4(u32 id);
+const ContentWordList *dataTable54FindById(u32 id);
 s32 gameCountUnits(void);
 StatBlock *gameGetUnitRecord(s32 slot);
 s32 flagWordTestBit(const StatBlock *unit, u32 bit);
 s32 FUN_0029ea68(u16 id);
-u32 FUN_0029cde0(u16 *sources, s32 count, u32 mode);
+u32 arrayContainsU16(u16 *sources, s32 count, u32 mode);
 }
 
 static __inline bool findOwnedSource(const PartyDamageSlotsIV *party,
@@ -33,7 +33,7 @@ extern "C" u32 FUN_0029b7b8(u32, u32 listId, u16 *sources)
 {
     s32 count = 0;
     PartyDamageSlotsIV *party = gameGetSlotTable();
-    const ContentWordList *list = FUN_0029f7d4(listId);
+    const ContentWordList *list = dataTable54FindById(listId);
     if (list == NULL) {
         return 0;
     }
@@ -51,5 +51,5 @@ extern "C" u32 FUN_0029b7b8(u32, u32 listId, u16 *sources)
             ++count;
         }
     }
-    return FUN_0029cde0(sources, count, 0) ^ 1;
+    return arrayContainsU16(sources, count, 0) ^ 1;
 }

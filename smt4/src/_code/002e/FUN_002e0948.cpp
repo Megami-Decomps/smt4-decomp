@@ -1,103 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e0948` (_code @ 0x2e094c, 0x210 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: render-stack pushes: retail loads g_titleScene before the call and computes the stack address after it; armcc hoists the address; push scheduling differs. */
+#include "camp/RenderCtx.h"
 
-extern "C" {
+/* The terminal's four slots (0xC bytes each); only the handle and its in-use flag are used here. */
+struct TerminalSlot {
+    /* 0x0 */ u32 handle;
+    /* 0x4 */ u8 inUse;
+    /* 0x5 */ u8 unk05[7];
+};
 
-int FUN_0028186c(unsigned int);
+struct TerminalScreen {
+    /* 0x000 */ u8 unk000[0x10];
+    /* 0x010 */ s32 page;
+    /* 0x014 */ u8 unk014[0x554];
+    /* 0x568 */ TerminalSlot slots[4];
+};
+typedef char TerminalScreenSlotsOffsetCheck[offsetof(TerminalScreen, slots) == 0x568 ? 1 : -1];
 
-typedef int romwright_code(...);
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_0028186c. */
-extern int FUN_002865c0(unsigned int);
-extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-
-
-unsigned int FUN_002e0948(int *param_1)
-
+static __inline void pushX(RenderStateStack *st, int state)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v3 = g_titleScene;
-  temp_v4 = *param_1;
-  if (*(int *)(temp_v4 + 0x10) - 1U < 0x62) {
-    temp_v0 = FUN_002865c0(6);
-    piVar4 = (int *)(temp_v3 + 0x126c);
-    temp_v1 = *piVar4;
-    temp_v2 = piVar4[temp_v1 + 2];
-    *piVar4 = temp_v1 + 1;
-    piVar4[temp_v1 + 3] = temp_v0;
-    if (*(char *)(temp_v3 + 0x1284) != '\0' || temp_v2 != temp_v0) {
-      (**(romwright_code **)(temp_v3 + 0x1288))();
-      *(unsigned char *)(temp_v3 + 0x1284) = 0;
+    int prev = st->entries[st->count]; ++st->count; st->entries[st->count] = state;
+    if (st->dirty != 0 || prev != state) {
+        st->apply(state);
+        st->dirty = 0;
     }
-    temp_v3 = g_titleScene;
-    temp_v0 = FUN_002c5d80(1,0);
-    piVar4 = (int *)(temp_v3 + 0x124c);
-    temp_v1 = *piVar4;
-    temp_v2 = piVar4[temp_v1 + 2];
-    *piVar4 = temp_v1 + 1;
-    piVar4[temp_v1 + 3] = temp_v0;
-    if (*(char *)(temp_v3 + 0x1264) != '\0' || temp_v2 != temp_v0) {
-      (**(romwright_code **)(temp_v3 + 0x1268))();
-      *(unsigned char *)(temp_v3 + 0x1264) = 0;
-    }
-    temp_v3 = g_titleScene;
-    temp_v0 = packNibblesAndByte(6,1,0);
-    piVar4 = (int *)(temp_v3 + 0x12ac);
-    temp_v1 = *piVar4;
-    temp_v2 = piVar4[temp_v1 + 2];
-    *piVar4 = temp_v1 + 1;
-    piVar4[temp_v1 + 3] = temp_v0;
-    if (*(char *)(temp_v3 + 0x12c4) != '\0' || temp_v2 != temp_v0) {
-      (**(romwright_code **)(temp_v3 + 0x12c8))();
-      *(unsigned char *)(temp_v3 + 0x12c4) = 0;
-    }
-    temp_v3 = 0;
-    do {
-      temp_v0 = temp_v4 + temp_v3 * 0xc;
-      if (*(char *)(temp_v0 + 0x56c) != '\0') {
-        FUN_0028186c(*(unsigned int *)(temp_v0 + 0x568));
-      }
-      temp_v0 = g_titleScene;
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 4);
-    piVar4 = (int *)(g_titleScene + 0x12ac);
-    temp_v3 = *piVar4;
-    temp_v4 = piVar4[temp_v3 + 2];
-    *piVar4 = temp_v3 - 1;
-    if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v4 != piVar4[temp_v3 + 1]) {
-      (**(romwright_code **)(temp_v0 + 0x12c8))();
-      *(unsigned char *)(temp_v0 + 0x12c4) = 0;
-    }
-    temp_v3 = g_titleScene;
-    piVar4 = (int *)(g_titleScene + 0x124c);
-    temp_v4 = *piVar4;
-    temp_v0 = piVar4[temp_v4 + 2];
-    *piVar4 = temp_v4 - 1;
-    if (*(char *)(temp_v3 + 0x1264) != '\0' || temp_v0 != piVar4[temp_v4 + 1]) {
-      (**(romwright_code **)(temp_v3 + 0x1268))();
-      *(unsigned char *)(temp_v3 + 0x1264) = 0;
-    }
-    temp_v3 = g_titleScene;
-    piVar4 = (int *)(g_titleScene + 0x126c);
-    temp_v4 = *piVar4;
-    temp_v0 = piVar4[temp_v4 + 2];
-    *piVar4 = temp_v4 - 1;
-    if (*(char *)(temp_v3 + 0x1284) != '\0' || temp_v0 != piVar4[temp_v4 + 1]) {
-      (**(romwright_code **)(temp_v3 + 0x1288))();
-      *(unsigned char *)(temp_v3 + 0x1284) = 0;
-    }
-  }
-  return 0;
 }
+extern "C" {
+extern TerminalScreen *g_tmnl;
+extern RenderCtx *g_titleScene;
+s32 FUN_002865c0(u32 mode, f32 alpha);
+s32 FUN_002c5d80(u32 first, u32 second);
+s32 packNibblesAndByte(u32 first, u32 second, u32 third);
+s32 FUN_0028186c(u32 handle);
 
-} /* extern "C" */
+/* Draws the terminal's slot handles with the three render stacks pushed, for pages 1..98. */
+u32 FUN_002e0948(void)
+{
+    TerminalScreen *screen = g_tmnl;
+    if ((u32)(screen->page - 1) < 98) {
+        pushX(&g_titleScene->additional.stackC, FUN_002865c0(6, 0.0f));
+        renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+        renderCtxPushB(g_titleScene, packNibblesAndByte(6, 1, 0));
+        for (s32 i = 0; i < 4; ++i) {
+            if (screen->slots[i].inUse != 0) {
+                FUN_0028186c(screen->slots[i].handle);
+            }
+        }
+        renderStackPop(&g_titleScene->stackB);
+        renderStackPop(&g_titleScene->stackA);
+        renderStackPop(&g_titleScene->additional.stackC);
+    }
+    return 0;
+}
+}

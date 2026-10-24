@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a9170(...);
+int gpuSubmitVectorCommand(...);
 
 /* stack frame of param_4: 16 slot(s), 64 byte(s) */
 typedef struct {
@@ -35,7 +35,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_002a9170. */
+/* Supplied declaration required: gpuSubmitVectorCommand. */
 
 
 void FUN_002b13d8(unsigned int *param_1,unsigned int *param_2,unsigned int *param_3,unsigned int *param_4)
@@ -190,7 +190,7 @@ void FUN_002b13d8(unsigned int *param_1,unsigned int *param_2,unsigned int *para
   temp_v16 = temp_v7;
   temp_v23 = temp_v14;
   temp_v24 = temp_v13;
-  FUN_002a9170(&temp_v12,&temp_v18,&temp_v15,temp_v20,temp_v7);
+  gpuSubmitVectorCommand(&temp_v12,&temp_v18,&temp_v15,temp_v20,temp_v7);
   temp_v16 = temp_v6 >> 8;
   temp_v12 = temp_v17 | (temp_v4 << 0x18);
   temp_v15 = temp_v25 | (temp_v6 << 0x18);
@@ -233,7 +233,7 @@ void FUN_002b13d8(unsigned int *param_1,unsigned int *param_2,unsigned int *para
   temp_v18 = temp_v18 | (temp_v1 << 0x18);
   temp_v17 = temp_v16;
   temp_v26 = temp_v13;
-  FUN_002a9170(&temp_v12,&temp_v18,&temp_v15);
+  gpuSubmitVectorCommand(&temp_v12,&temp_v18,&temp_v15);
   temp_v12 = temp_v21 | (temp_v3 << 0x18);
   temp_v15 = temp_v22 | (temp_v5 << 0x18);
   temp_v13 = temp_v24;
@@ -274,7 +274,7 @@ void FUN_002b13d8(unsigned int *param_1,unsigned int *param_2,unsigned int *para
   temp_v20 = (temp_v1 << 8) | (temp_v5 >> 0x10);
   temp_v18 = temp_v18 | (temp_v3 << 0x18);
   temp_v16 = temp_v7;
-  FUN_002a9170(&temp_v12,&temp_v18,&temp_v15);
+  gpuSubmitVectorCommand(&temp_v12,&temp_v18,&temp_v15);
   temp_v12 = temp_v21 | (temp_v4 << 0x18);
   temp_v15 = temp_v22 | (temp_v6 << 0x18);
   temp_v13 = temp_v26;
@@ -315,7 +315,7 @@ void FUN_002b13d8(unsigned int *param_1,unsigned int *param_2,unsigned int *para
   temp_v18 = temp_v18 | (temp_v3 << 0x18);
   temp_v19 = (temp_v4 << 0x10) | (temp_v3 >> 8);
   temp_v20 = (temp_v5 << 8) | (temp_v4 >> 0x10);
-  FUN_002a9170(&temp_v12,&temp_v18,&temp_v15,temp_v18,temp_v7);
+  gpuSubmitVectorCommand(&temp_v12,&temp_v18,&temp_v15,temp_v18,temp_v7);
   return;
 }
 

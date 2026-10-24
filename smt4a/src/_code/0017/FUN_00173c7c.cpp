@@ -20,7 +20,7 @@ extern unsigned int FUN_001911a4(unsigned int, unsigned int);
 /* Supplied declaration required: constructObj0055c19c. */
 /* Supplied declaration required: FUN_00191518. */
 /* Supplied declaration required: FUN_001915bc. */
-extern unsigned int FUN_001b1f04(void);
+extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 /* Supplied declaration required: nw_snd_internal_driver_StreamBufferPool_Finalize. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2AC900. */
 
@@ -83,7 +83,7 @@ void FUN_00173c7c(int param_1)
     }
     nw_ut_internal_LinkListImpl_erase_2AC900
               (param_1 + 0x54,*(unsigned int *)(param_1 + 0x58),param_1 + 0x58);
-    temp_v1 = FUN_001b1f04();
+    temp_v1 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
     FUN_00191518(temp_v1,param_1 + 0x40);
     FUN_001915bc(param_1 + 0xf4,*(unsigned int *)(param_1 + 0x104),*(unsigned int *)(param_1 + 0x108));
     piVar5 = *(int **)(param_1 + 0x6c);
@@ -115,7 +115,7 @@ void FUN_00173c7c(int param_1)
     }
     nw_ut_internal_LinkListImpl_erase_2AC900
               (param_1 + 0xa0,*(unsigned int *)(param_1 + 0xa4),param_1 + 0xa4);
-    temp_v1 = FUN_001b1f04();
+    temp_v1 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
     FUN_00191518(temp_v1,param_1 + 0x8c);
     nw_snd_internal_driver_StreamBufferPool_Finalize(param_1 + 0xd8);
     piVar5 = *(int **)(param_1 + 0xb8);

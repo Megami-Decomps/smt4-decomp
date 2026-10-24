@@ -7,7 +7,7 @@ extern "C" {
 int _ZN9Obj55aff4D1Ev(...);
 int _ZN9Obj55aff4aSERKS_(unsigned int, unsigned int);
 int FUN_002e9c0c(void);
-int FUN_002ea100(...);
+int _ZN9Obj55aff4C1EPKc(...);
 int FUN_002ea214(int, unsigned int);
 int FUN_002ea2b4(int, unsigned int);
 int ptrHolderDestroy(unsigned char [8]);
@@ -31,12 +31,12 @@ typedef struct {
 
 extern unsigned char LAB_00105ba0; /* 0x105ba0 */
 
-extern int operatorNew(unsigned int);
-extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
+extern int _Znwj(unsigned int);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 /* Supplied declaration required: FUN_002e9c0c. */
-/* Supplied declaration required: FUN_002ea100. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
 /* Supplied declaration required: FUN_002ea214. */
 extern unsigned int FUN_002ea268(void);
 extern unsigned int FUN_002ea2a8(unsigned char *, unsigned int);
@@ -76,7 +76,7 @@ void FUN_00105a84(int param_1)
   temp_v12 = param_1 + 0x68;
   FUN_002e9c0c();
   *(unsigned int *)(*(int *)(param_1 + 0xe8) + 0x74) = *(unsigned int *)(param_1 + 0xf8);
-  temp_v0 = operatorNew(0x1c);
+  temp_v0 = _Znwj(0x1c);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = FUN_002ea268();
@@ -85,12 +85,12 @@ void FUN_00105a84(int param_1)
   FUN_002ea2b4(param_1 + 0x108,temp_v1);
   ptrHolderDestroy(temp_v13);
   temp_v4 = *(unsigned int *)(param_1 + 0x10c);
-  temp_v1 = FUN_002ea100(temp_v14,temp_v2);
+  temp_v1 = _ZN9Obj55aff4C1EPKc(temp_v14,temp_v2);
   _ZN9Obj55aff4aSERKS_(temp_v4 + 8,temp_v1);
   _ZN9Obj55aff4D1Ev(temp_v14);
   FUN_002ea2e8(temp_v8);
   FUN_002ea314(temp_v8,*(unsigned int *)(temp_v7 + 0x1c));
-  FUN_002ea100(temp_v10,temp_v2 + 0x248);
+  _ZN9Obj55aff4C1EPKc(temp_v10,temp_v2 + 0x248);
   if (*(char *)(*(int *)(param_1 + 0xe8) + 0x140) != '\0') {
     *(unsigned int *)(*(int *)(param_1 + 0x10c) + 0x18) = 0xffffffff;
   }
@@ -110,7 +110,7 @@ void FUN_00105a84(int param_1)
   }
   else {
     temp_v3 = 0x8001000d;
-    temp_v1 = FUN_002e7908(&temp_v4,(unsigned int *)&temp_v3);
+    temp_v1 = _ZN12OnlineResultC1ERKj(&temp_v4,(unsigned int *)&temp_v3);
     FUN_002ea214(param_1,temp_v1);
     _ZN9Obj55aff4D1Ev(temp_v10);
     FUN_002ea3a8(temp_v8);

@@ -97,7 +97,7 @@ int FUN_00482fd4(...);
 
 int sysPlaySe(...);
 int eventQueueAddUnique(...);
-int FUN_00192608(void);
+int dataTable08Sub2GetRecord(void);
 int FUN_0020ecd4(void);
 int popupTryStartScrollPrompt(...);
 int FUN_00246344(void);
@@ -163,13 +163,13 @@ int FUN_00378000(void);
 int mapEnvironmentSelectPreset(...);
 int FUN_00399290(...);
 int FUN_003d502c(...);
-int FUN_0048389c(...);
+int lmapEnemyCtrlLoadModels(...);
 int fieldBuildAreaPlacementList(...);
 int stateSetterSetFromBase(...);
 int applyIfIdValid(...);
 int rt_memcpy_w(...);
 
-int FUN_0013c884(...);
+int asdCameraInitializeDefaults(...);
 int FUN_00178b04(...);
 int FUN_001cd3ec(...);
 int asdLoadFileAsyncWrap(...);
@@ -387,7 +387,7 @@ extern unsigned int DAT_005f1cb0; /* 0x5f1cb0 */
 /* Supplied declaration required: ARM_common_memcpy4_9. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
-/* Supplied declaration required: FUN_0013c884. */
+/* Supplied declaration required: asdCameraInitializeDefaults. */
 /* Supplied declaration required: FUN_0013cab8. */
 extern int FUN_0013def0(unsigned int);
 extern int gameDataBlocksGetSaveData(void);
@@ -408,7 +408,7 @@ extern int infoWinHasValue(void);
 /* Supplied declaration required: FUN_00178b04. */
 extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_00192608. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: FUN_001927c0. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
@@ -601,7 +601,7 @@ extern int scriptHolderUpdateSimple(int);
 /* Supplied declaration required: FUN_00482c04. */
 /* Supplied declaration required: FUN_00483294. */
 /* Supplied declaration required: FUN_00483834. */
-/* Supplied declaration required: FUN_0048389c. */
+/* Supplied declaration required: lmapEnemyCtrlLoadModels. */
 /* Supplied declaration required: fieldBuildAreaPlacementList. */
 /* Supplied declaration required: stateSetterSetFromBase. */
 /* Supplied declaration required: FUN_00483acc. */
@@ -1130,7 +1130,7 @@ LAB_00276f5c:
           puVar2[0x1e] = 0;
           puVar2[0x1f] = puVar2[0x19];
           puVar2[0x20] = 0x43960000;
-          FUN_0013c884(&g_localCamera,1);
+          asdCameraInitializeDefaults(&g_localCamera,1);
           FUN_0014f0dc(&g_localCamera,puVar2 + 0x18,puVar2 + 0x1b,puVar2 + 0x15);
           FUN_001523b8(&g_localCamera,1);
           FUN_0036b824(&g_localCamera);
@@ -1170,7 +1170,7 @@ LAB_00276f5c:
           *(unsigned int *)(temp_v8 + 0xc4) = temp_v9;
           DAT_005f1614 = '\x01';
           stateSetterSetFromBase(puVar2 + 0x3d,puVar2[0x10] - 100,puVar2[0x12]);
-          FUN_0048389c(puVar2 + 0x3d);
+          lmapEnemyCtrlLoadModels(puVar2 + 0x3d);
           if (g_lmapMainState[0x10] != 100) {
             temp_v10 = puVar2[0x3d] & 0xfffffffe;
           }
@@ -1820,15 +1820,15 @@ LAB_00278b38:
                                       DAT_005f18c8 = (unsigned int)*(unsigned short *)(temp_v8 + 300);
                                       temp_v8 = gameGetPlayerData();
                                       temp_v10 = (unsigned int)*(unsigned short *)(temp_v8 + 6);
-                                      FUN_00192608();
+                                      dataTable08Sub2GetRecord();
                                       DAT_005f18cc = (unsigned int)*(unsigned short *)(temp_v10 + 0x40);
                                       DAT_005f18d8 = (unsigned int)*(unsigned short *)(temp_v10 + 0x42);
                                       temp_v10 = (unsigned int)*(unsigned short *)(temp_v8 + 8);
-                                      FUN_00192608();
+                                      dataTable08Sub2GetRecord();
                                       DAT_005f18d0 = (unsigned int)*(unsigned short *)(temp_v10 + 0x40);
                                       DAT_005f18dc = (unsigned int)*(unsigned short *)(temp_v10 + 0x42);
                                       temp_v10 = (unsigned int)*(unsigned short *)(temp_v8 + 10);
-                                      FUN_00192608();
+                                      dataTable08Sub2GetRecord();
                                       DAT_005f18d4 = (unsigned int)*(unsigned short *)(temp_v10 + 0x40);
                                       DAT_005f18e0 = (unsigned int)*(unsigned short *)(temp_v10 + 0x42);
                                       return 0;
@@ -2305,7 +2305,7 @@ LAB_00278774:
         temp_v23 = 0;
         temp_v8 = gameGetPlayerData();
         temp_v10 = (unsigned int)*(unsigned short *)(temp_v8 + 6);
-        FUN_00192608();
+        dataTable08Sub2GetRecord();
         if ((DAT_005f18cc != *(unsigned short *)(temp_v10 + 0x40)) ||
            (DAT_005f18d8 != *(unsigned short *)(temp_v10 + 0x42))) {
           DAT_005f18d8 = (unsigned int)*(unsigned short *)(temp_v10 + 0x42);
@@ -2313,7 +2313,7 @@ LAB_00278774:
           DAT_005f18cc = (unsigned int)*(unsigned short *)(temp_v10 + 0x40);
         }
         temp_v10 = (unsigned int)*(unsigned short *)(temp_v8 + 8);
-        FUN_00192608();
+        dataTable08Sub2GetRecord();
         if ((DAT_005f18d0 != *(unsigned short *)(temp_v10 + 0x40)) ||
            (DAT_005f18dc != *(unsigned short *)(temp_v10 + 0x42))) {
           temp_v7 = gameFlagIsSet(0x111d);
@@ -2326,7 +2326,7 @@ LAB_00278774:
           DAT_005f18dc = (unsigned int)*(unsigned short *)(temp_v10 + 0x42);
         }
         temp_v10 = (unsigned int)*(unsigned short *)(temp_v8 + 10);
-        FUN_00192608();
+        dataTable08Sub2GetRecord();
         if ((DAT_005f18d4 != *(unsigned short *)(temp_v10 + 0x40)) ||
            (DAT_005f18e0 != *(unsigned short *)(temp_v10 + 0x42))) {
           DAT_005f18e0 = (unsigned int)*(unsigned short *)(temp_v10 + 0x42);
@@ -4136,7 +4136,7 @@ LAB_0027a030:
   case 99:
     mapIfInitializeSceneControllers();
     stateSetterSetFromBase(puVar2 + 0x3d,puVar2[0x10] - 100,puVar2[0x12]);
-    FUN_0048389c(puVar2 + 0x3d);
+    lmapEnemyCtrlLoadModels(puVar2 + 0x3d);
     if (g_lmapMainState[0x10] != 100) {
       temp_v10 = puVar2[0x3d] & 0xfffffffe;
     }

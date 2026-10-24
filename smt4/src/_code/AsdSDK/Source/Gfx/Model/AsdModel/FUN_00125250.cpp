@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00131a2c(unsigned int);
 int FUN_001411bc(int, int);
 int FUN_00141a18(unsigned int, unsigned int, unsigned int, int);
-int FUN_002b74cc(void);
+int _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(void);
 int FUN_002c2968(unsigned int, unsigned int);
 int FUN_002c501c(void);
 int nw_gfx_Camera_UpdateCameraMatrix(...);
@@ -56,7 +56,7 @@ extern int DAT_004dad98; /* 0x4dad98 */
 /* Supplied declaration required: FUN_00141a18. */
 extern int FUN_00145e10(void);
 extern int FUN_002af294(int, int);
-/* Supplied declaration required: FUN_002b74cc. */
+/* Supplied declaration required: _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_. */
 /* Supplied declaration required: FUN_002c2968. */
 /* Supplied declaration required: FUN_002c501c. */
 extern int FUN_002c5210(void);
@@ -135,7 +135,7 @@ void FUN_00125250(unsigned int param_1,unsigned int param_2,int *param_3)
           piVar5 = piVar4;
           if (piVar4 != piVar7) {
             piVar5 = piVar4 + 1;
-            FUN_002b74cc();
+            _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_();
             param_3 = piVar4;
           }
           piVar4 = *(int **)(temp_v1 + 0x1c);
@@ -157,7 +157,7 @@ void FUN_00125250(unsigned int param_1,unsigned int param_2,int *param_3)
           piVar5 = piVar4;
           if (piVar4 != piVar7) {
             piVar5 = piVar4 + 1;
-            FUN_002b74cc();
+            _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_();
             param_3 = piVar4;
           }
           piVar4 = *(int **)(temp_v1 + 0x1c);
@@ -179,7 +179,7 @@ void FUN_00125250(unsigned int param_1,unsigned int param_2,int *param_3)
           piVar5 = piVar4;
           if (piVar4 != piVar7) {
             piVar5 = piVar4 + 1;
-            FUN_002b74cc();
+            _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_();
             param_3 = piVar4;
           }
           piVar4 = *(int **)(temp_v1 + 0x1c);
@@ -205,7 +205,7 @@ void FUN_00125250(unsigned int param_1,unsigned int param_2,int *param_3)
         piVar8 = piVar4;
         if (piVar4 != piVar7) {
           piVar8 = piVar4 + 1;
-          FUN_002b74cc();
+          _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_();
           param_3 = piVar4;
         }
         piVar4 = *(int **)(temp_v1 + 0x1c);
@@ -227,7 +227,7 @@ void FUN_00125250(unsigned int param_1,unsigned int param_2,int *param_3)
         piVar5 = piVar4;
         if (piVar4 != piVar7) {
           piVar5 = piVar4 + 1;
-          FUN_002b74cc();
+          _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_();
           param_3 = piVar4;
         }
         piVar4 = *(int **)(temp_v1 + 0x1c);
@@ -249,7 +249,7 @@ void FUN_00125250(unsigned int param_1,unsigned int param_2,int *param_3)
         piVar5 = piVar4;
         if (piVar4 != piVar7) {
           piVar5 = piVar4 + 1;
-          FUN_002b74cc();
+          _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_();
           param_3 = piVar4;
         }
         piVar4 = *(int **)(temp_v1 + 0x1c);
@@ -271,7 +271,7 @@ void FUN_00125250(unsigned int param_1,unsigned int param_2,int *param_3)
         piVar5 = piVar4;
         if (piVar4 != piVar7) {
           piVar5 = piVar4 + 1;
-          FUN_002b74cc();
+          _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_();
           param_3 = piVar4;
         }
         piVar4 = *(int **)(temp_v1 + 0x1c);

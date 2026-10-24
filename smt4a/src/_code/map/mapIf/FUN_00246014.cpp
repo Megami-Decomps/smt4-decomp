@@ -1,73 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00246014` (_code @ 0x246014, 0xc0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "AsdSDK/AsdDebug.h"
+#include "map/MapIfSpawn.h"
 
 extern "C" {
 
-int FUN_00178b04(int, unsigned char *, int);
-int controllerSetDestination(unsigned int, int);
-int controllerSetRotationEulerDegrees(unsigned int);
-int FUN_003fe86c(unsigned int, int, int);
-int FUN_0040aa6c(void);
-int FUN_0040aad4(unsigned int, int);
-int handleRegistryRegisterObject(unsigned int, unsigned int);
+extern MapIfSpawns *g_mapIf;
+extern u32 g_handleRegistry;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+void *FUN_00178b04(u32 size, const char *file, int line);   /* allocate with source location */
+MoriModelContent *modelListInit(void *mem);                 /* content constructor */
+void FUN_0040aa6c(MoriModelContent *content, const char *name);
+void FUN_0040aad4(MoriModelContent *content, u32 arg);
+void handleRegistryRegisterObject(u32 registry, u32 object);
+void controllerSetDestination(u32 object, const f32 *position);
+void controllerSetRotationEulerDegrees(u32 object, f32 x, f32 y, f32 z);
+void FUN_003fe86c(u32 object, s32 first, s32 second, f32 x, f32 y);
 
-extern unsigned char LAB_002460dc; /* 0x2460dc */
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int g_mapIf; /* 0x58103c */
-
-/* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: controllerSetRotationEulerDegrees. */
-/* Supplied declaration required: FUN_003fe86c. */
-/* Supplied declaration required: FUN_0040aa6c. */
-/* Supplied declaration required: FUN_0040aad4. */
-extern unsigned int modelListInit(void);
-/* Supplied declaration required: handleRegistryRegisterObject. */
-
-
-void FUN_00246014(void)
-
+// Spawns the down action model at the given position and starts it moving there.
+void FUN_00246014(f32 x, f32 y, f32 z, f32 w)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3; 11 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *puVar4;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int in_s3;
-  
-  temp_v0 = g_mapIf;
-  puVar4 = (unsigned int *)(g_mapIf + 0xcc48);
-  *(unsigned char *)(g_mapIf + 0xcc3c) = 1;
-  *(unsigned int *)(temp_v0 + 0xcc40) = 0;
-  *(unsigned int *)(temp_v0 + 0xcc44) = 0;
-  temp_v1 = 0x20;
-  *puVar4 = in_s0;
-  *(unsigned int *)(temp_v0 + 0xcc4c) = in_s1;
-  *(unsigned int *)(temp_v0 + 0xcc50) = in_s2;
-  *(unsigned int *)(temp_v0 + 0xcc54) = in_s3;
-  FUN_00178b04(0x20,&LAB_002460dc,0x1870);
-  temp_v2 = 0;
-  if (temp_v1 != 0) {
-    temp_v2 = modelListInit();
-  }
-  *(unsigned int *)(temp_v0 + 0xcc58) = temp_v2;
-  FUN_0040aa6c();
-  FUN_0040aad4(*(unsigned int *)(temp_v0 + 0xcc58),0);
-  temp_v2 = *(unsigned int *)(*(int *)(temp_v0 + 0xcc58) + 4);
-  handleRegistryRegisterObject(g_handleRegistry,temp_v2);
-  controllerSetDestination(temp_v2,temp_v0 + 0xcc48);
-  controllerSetRotationEulerDegrees(temp_v2);
-  FUN_003fe86c(temp_v2,0,2);
-  return;
+    MapIfSpawnBlock *block = &g_mapIf->down;
+    block->active = 1;
+    block->unk04 = 0;
+    block->unk08 = 0;
+    block->position[0] = x;
+    block->position[1] = y;
+    block->position[2] = z;
+    block->position[3] = w;
+    void *mem = FUN_00178b04(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapIf.cpp", 0x1870);
+    if (mem != NULL) {
+        mem = modelListInit(mem);
+    }
+    block->content = (MoriModelContent *)mem;
+    FUN_0040aa6c(block->content, "map/all/action_down.bam");
+    FUN_0040aad4(block->content, 0);
+    u32 object = (u32)block->content->body;
+    handleRegistryRegisterObject(g_handleRegistry, object);
+    controllerSetDestination(object, block->position);
+    controllerSetRotationEulerDegrees(object, 0.0f, block->position[3], 0.0f);
+    FUN_003fe86c(object, 0, 2, 0.0f, 0.0f);
 }
 
-} /* extern "C" */
+}

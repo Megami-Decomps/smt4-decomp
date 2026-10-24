@@ -18,7 +18,7 @@ struct OnlineValueJob {
 extern "C" {
 void *onlineInstanceTableGetCurrent(void);
 void *onlineInstanceTableFind(void *table, u32 id);
-u32 refIsNonNegative(const s32 *value);
+u32 _ZNK18OnlineResultRecord7isValidEv(const s32 *value);
 void FUN_002f3dc4(void *object, const OnlineCallbackResult *result);
 void FUN_002f3dde(void *object, const OnlineCallbackResult *result);
 u32 FUN_002e9f00(void *notification, u32 state);
@@ -31,7 +31,7 @@ void onlineJobFinishValueRequest(OnlineValueJob *job, const OnlineCallbackResult
     void *table = onlineInstanceTableGetCurrent();
     void *instance = onlineInstanceTableFind(table, job->instanceId);
     if (instance != NULL) {
-        if (refIsNonNegative(&result->status)) {
+        if (_ZNK18OnlineResultRecord7isValidEv(&result->status)) {
             *job->output.destination = job->output.value;
             OnlineCallbackResult copy = *result;
             FUN_002f3dc4(instance, &copy);

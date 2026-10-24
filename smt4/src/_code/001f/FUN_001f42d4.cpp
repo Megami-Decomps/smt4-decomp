@@ -1,124 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f42d4` (_code @ 0x1f42d4, 0x288 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling of the three inlined render-stack pushes (retail interleaves the count update differently) and the origin pair, which retail loads with one vldmia into s0/s1 */
+#include "common.h"
+#include "camp/RenderCtx.h"
+
+/* The title scene's job list: up to ten drawn jobs and the origin they are placed at. */
+struct TitleJobWork {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 jobs[10];
+    /* 0x2C */ s32 count;
+    /* 0x30 */ u8 unk30[0x30];
+    /* 0x60 */ f32 originX;
+    /* 0x64 */ f32 originY;
+};
+
+struct EventTexState {
+    /* 0x00 */ u8 unk00[0x5C];
+    /* 0x5C */ u8 jobsActive; /* draw every valid job, not only the running ones */
+};
 
 extern "C" {
 
-int FUN_00285584(unsigned int, int, int);
-int FUN_002c18e4(int);
-int FUN_002c198c(int);
+extern EventTexState *g_eventTex; /* 0x43ded0 */
+extern RenderCtx *g_titleScene;   /* 0x44ea00 */
 
-typedef int romwright_code(...);
-extern int g_eventTex; /* 0x43ded0 */
-extern int g_titleScene; /* 0x44ea00 */
+TitleJobWork *jobGetWork(void);
+s32 jobIsValid(u32 job);
+s32 jobGetStatus(u32 job);
+s32 FUN_00285584(u32 job, s32 x, s32 y);
+s32 FUN_002865c0(u32 mode, f32 alpha);
+s32 FUN_002c5d80(u32 first, u32 second);
+s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
+void FUN_002c198c(RenderCtx *context);
+void FUN_002c18e4(RenderCtx *context);
 
-/* Supplied declaration required: FUN_00285584. */
-extern int FUN_002865c0(unsigned int);
-extern int jobGetStatus(unsigned int);
-extern int jobIsValid(unsigned int);
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-
-
-unsigned int FUN_001f42d4(void)
-
+/* Draws the title scene's jobs with the three render stacks pushed. */
+u32 FUN_001f42d4(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  int temp_v4;
-  
-  temp_v0 = jobGetWork();
-  temp_v4 = g_titleScene;
-  temp_v1 = FUN_002c5d80(1,0);
-  piVar5 = (int *)(temp_v4 + 0x124c);
-  temp_v2 = *piVar5;
-  temp_v3 = piVar5[temp_v2 + 2];
-  *piVar5 = temp_v2 + 1;
-  piVar5[temp_v2 + 3] = temp_v1;
-  if (*(char *)(temp_v4 + 0x1264) != '\0' || temp_v3 != temp_v1) {
-    (**(romwright_code **)(temp_v4 + 0x1268))();
-    *(unsigned char *)(temp_v4 + 0x1264) = 0;
-  }
-  temp_v4 = g_titleScene;
-  temp_v1 = FUN_002865c0(6);
-  piVar5 = (int *)(temp_v4 + 0x126c);
-  temp_v2 = *piVar5;
-  temp_v3 = piVar5[temp_v2 + 2];
-  *piVar5 = temp_v2 + 1;
-  piVar5[temp_v2 + 3] = temp_v1;
-  if (*(char *)(temp_v4 + 0x1284) != '\0' || temp_v3 != temp_v1) {
-    (**(romwright_code **)(temp_v4 + 0x1288))();
-    *(unsigned char *)(temp_v4 + 0x1284) = 0;
-  }
-  temp_v4 = g_titleScene;
-  temp_v1 = packNibblesAndByte(6,7,0);
-  piVar5 = (int *)(temp_v4 + 0x12ac);
-  temp_v2 = *piVar5;
-  temp_v3 = piVar5[temp_v2 + 2];
-  *piVar5 = temp_v2 + 1;
-  piVar5[temp_v2 + 3] = temp_v1;
-  if (*(char *)(temp_v4 + 0x12c4) != '\0' || temp_v3 != temp_v1) {
-    (**(romwright_code **)(temp_v4 + 0x12c8))();
-    *(unsigned char *)(temp_v4 + 0x12c4) = 0;
-  }
-  temp_v4 = 0;
-  if (temp_v4 < *(int *)(temp_v0 + 0x2c)) {
-    do {
-      temp_v1 = temp_v0 + temp_v4 * 4;
-      if (*(char *)(g_eventTex + 0x5c) != '\0') {
-        temp_v2 = jobIsValid(*(unsigned int *)(temp_v1 + 4));
-        if (temp_v2 != 0) {
-          FUN_00285584(*(unsigned int *)(temp_v1 + 4),(int)*(float *)(temp_v0 + 0x60),
-                       (int)*(float *)(temp_v0 + 100));
+    TitleJobWork *work = jobGetWork();
+    s32 i;
+
+    renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+    renderCtxPushC(g_titleScene, FUN_002865c0(6, 0.0f));
+    renderCtxPushB(g_titleScene, packNibblesAndByte(6, 7, 0));
+    for (i = 0; i < work->count; i++) {
+        if (g_eventTex->jobsActive) {
+            if (jobIsValid(work->jobs[i])) {
+                s32 x = (s32)work->originX;
+                s32 y = (s32)work->originY;
+
+                FUN_00285584(work->jobs[i], x, y);
+            }
+        } else if (jobIsValid(work->jobs[i]) && jobGetStatus(work->jobs[i]) == 4) {
+            s32 x = (s32)work->originX;
+            s32 y = (s32)work->originY;
+
+            FUN_00285584(work->jobs[i], x, y);
         }
-      }
-      else {
-        temp_v2 = jobIsValid(*(unsigned int *)(temp_v1 + 4));
-        if ((temp_v2 != 0) && (temp_v2 = jobGetStatus(*(unsigned int *)(temp_v1 + 4)), temp_v2 == 4)) {
-          FUN_00285584(*(unsigned int *)(temp_v1 + 4),(int)*(float *)(temp_v0 + 0x60),
-                       (int)*(float *)(temp_v0 + 100));
-        }
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < *(int *)(temp_v0 + 0x2c));
-  }
-  temp_v4 = g_titleScene;
-  piVar5 = (int *)(g_titleScene + 0x12ac);
-  temp_v0 = *piVar5;
-  temp_v1 = piVar5[temp_v0 + 2];
-  *piVar5 = temp_v0 - 1;
-  if (*(char *)(temp_v4 + 0x12c4) != '\0' || temp_v1 != piVar5[temp_v0 + 1]) {
-    (**(romwright_code **)(temp_v4 + 0x12c8))();
-    *(unsigned char *)(temp_v4 + 0x12c4) = 0;
-  }
-  temp_v4 = g_titleScene;
-  piVar5 = (int *)(g_titleScene + 0x124c);
-  temp_v0 = *piVar5;
-  temp_v1 = piVar5[temp_v0 + 2];
-  *piVar5 = temp_v0 - 1;
-  if (*(char *)(temp_v4 + 0x1264) != '\0' || temp_v1 != piVar5[temp_v0 + 1]) {
-    (**(romwright_code **)(temp_v4 + 0x1268))();
-    *(unsigned char *)(temp_v4 + 0x1264) = 0;
-  }
-  temp_v4 = g_titleScene;
-  piVar5 = (int *)(g_titleScene + 0x126c);
-  temp_v0 = *piVar5;
-  temp_v1 = piVar5[temp_v0 + 2];
-  *piVar5 = temp_v0 - 1;
-  if (*(char *)(temp_v4 + 0x1284) != '\0' || temp_v1 != piVar5[temp_v0 + 1]) {
-    (**(romwright_code **)(temp_v4 + 0x1288))();
-    *(unsigned char *)(temp_v4 + 0x1284) = 0;
-  }
-  FUN_002c198c(g_titleScene);
-  FUN_002c18e4(g_titleScene);
-  return 0;
+    }
+    renderStackPop(&g_titleScene->stackB);
+    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(&g_titleScene->additional.stackC);
+    FUN_002c198c(g_titleScene);
+    FUN_002c18e4(g_titleScene);
+    return 0;
 }
 
 } /* extern "C" */

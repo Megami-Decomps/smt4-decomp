@@ -61,6 +61,10 @@ struct ReflectAction {
         } command;
         struct {
             /* 0x18 */ u8 unk18[8];
+            /* 0x20 */ u8 color[3]; /* RGB as percent bytes */
+        } colorBytes;
+        struct {
+            /* 0x18 */ u8 unk18[8];
             /* 0x20 */ u8 enabled; /* Dead_12 and Dead_13 animation variants. */
         } specialDeath;
     };
@@ -77,6 +81,7 @@ struct ReflectAction {
     union {
         /* 0x2c */ u8 unk2c[0x20];
         /* 0x2c */ u32 payload;
+        /* 0x2c */ f32 payloadScalar;
         struct {
             /* 0x2c */ u16 first;
             /* 0x2e */ u16 second;

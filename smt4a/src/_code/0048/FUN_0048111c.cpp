@@ -1,117 +1,88 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048111c` (_code @ 0x48111c, 0x290 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include <stddef.h>
+
+/* Counts of carried items: seven categories of 0x78 slots (the last is only 0x32 long), starting at item id 0x3d. */
+struct ItemBoxCounts {
+    /* 0x000 */ u8 unk000[0xF0];
+    /* 0x0F0 */ u16 equipment[0x3C];
+    /* 0x168 */ u16 counts[7][0x78];
+    /* 0x7F8 */ u8 unk7F8[0xF3C - 0x7F8];
+    /* 0xF3C */ u16 skills[0x40];
+    /* 0xFBC */ u8 unkFBC[0xFC];
+};
+
+typedef char ItemBoxCountsOffsets[offsetof(ItemBoxCounts, counts) == 0x168 &&
+    offsetof(ItemBoxCounts, skills) == 0xF3C &&
+    offsetof(ItemBoxCounts, unkFBC) == 0xFBC ? 1 : -1];
 
 extern "C" {
 
-int rt_memcpy(int, int, int);
+s32 itemGetStackLimit(s32 itemId);
+void rt_memcpy(void *dst, const void *src, u32 bytes);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern int itemGetStackLimit(int);
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_0048111c(int param_1,int param_2)
-
+/* Adds the item counts of one box into another, clamping each count to its stack limit. */
+void FUN_0048111c(ItemBoxCounts *dst, const ItemBoxCounts *src)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = 0;
-  do {
-    temp_v1 = param_1 + temp_v0 * 2;
-    temp_v2 = param_2 + temp_v0 * 2;
-    temp_v0 = temp_v0 + 2;
-    *(short *)(temp_v1 + 0xf0) = *(short *)(temp_v1 + 0xf0) + *(short *)(temp_v2 + 0xf0);
-    *(short *)(temp_v1 + 0xf2) = *(short *)(temp_v2 + 0xf2) + *(short *)(temp_v1 + 0xf2);
-  } while (temp_v0 < 0x3c);
-  temp_v0 = 0;
-  do {
-    temp_v1 = param_1 + temp_v0 * 2;
-    temp_v2 = param_2 + temp_v0 * 2;
-    temp_v0 = temp_v0 + 2;
-    *(short *)(temp_v1 + 0xf3c) = *(short *)(temp_v1 + 0xf3c) + *(short *)(temp_v2 + 0xf3c);
-    *(short *)(temp_v1 + 0xf3e) = *(short *)(temp_v2 + 0xf3e) + *(short *)(temp_v1 + 0xf3e);
-  } while (temp_v0 < 0x40);
-  temp_v3 = 0;
-  do {
-    temp_v0 = param_1 + temp_v3 * 2;
-    *(short *)(temp_v0 + 0x168) = *(short *)(temp_v0 + 0x168) + *(short *)(param_2 + temp_v3 * 2 + 0x168);
-    temp_v1 = itemGetStackLimit(temp_v3 + 0x3d);
-    temp_v3 = temp_v3 + 1;
-    if (temp_v1 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x168)) {
-      *(short *)(temp_v0 + 0x168) = (short)temp_v1;
+    u32 i;
+    s32 limit;
+    s32 slot;
+
+    for (slot = 0; slot < 0x3C; slot++) {
+        dst->equipment[slot] += src->equipment[slot];
     }
-  } while (temp_v3 < 0x78);
-  temp_v3 = 0;
-  do {
-    temp_v0 = param_1 + temp_v3 * 2;
-    *(short *)(temp_v0 + 600) = *(short *)(temp_v0 + 600) + *(short *)(param_2 + temp_v3 * 2 + 600);
-    temp_v1 = itemGetStackLimit(temp_v3 + 0xb5);
-    temp_v3 = temp_v3 + 1;
-    if (temp_v1 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 600)) {
-      *(short *)(temp_v0 + 600) = (short)temp_v1;
+    for (slot = 0; slot < 0x40; slot++) {
+        dst->skills[slot] += src->skills[slot];
     }
-  } while (temp_v3 < 0x78);
-  temp_v3 = 0;
-  do {
-    temp_v0 = param_1 + temp_v3 * 2;
-    *(short *)(temp_v0 + 0x348) = *(short *)(temp_v0 + 0x348) + *(short *)(param_2 + temp_v3 * 2 + 0x348);
-    temp_v1 = itemGetStackLimit(temp_v3 + 0x12d);
-    temp_v3 = temp_v3 + 1;
-    if (temp_v1 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x348)) {
-      *(short *)(temp_v0 + 0x348) = (short)temp_v1;
+    for (i = 0; i < 0x78; i++) {
+        dst->counts[0][i] += src->counts[0][i];
+        limit = itemGetStackLimit(0x3d + i);
+        if (limit < dst->counts[0][i]) {
+            dst->counts[0][i] = limit;
+        }
     }
-  } while (temp_v3 < 0x78);
-  temp_v3 = 0;
-  do {
-    temp_v0 = param_1 + temp_v3 * 2;
-    *(short *)(temp_v0 + 0x438) = *(short *)(temp_v0 + 0x438) + *(short *)(param_2 + temp_v3 * 2 + 0x438);
-    temp_v1 = itemGetStackLimit(temp_v3 + 0x1a5);
-    temp_v3 = temp_v3 + 1;
-    if (temp_v1 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x438)) {
-      *(short *)(temp_v0 + 0x438) = (short)temp_v1;
+    for (i = 0; i < 0x78; i++) {
+        dst->counts[1][i] += src->counts[1][i];
+        limit = itemGetStackLimit(0xb5 + i);
+        if (limit < dst->counts[1][i]) {
+            dst->counts[1][i] = limit;
+        }
     }
-  } while (temp_v3 < 0x78);
-  temp_v3 = 0;
-  do {
-    temp_v0 = param_1 + temp_v3 * 2;
-    *(short *)(temp_v0 + 0x528) = *(short *)(temp_v0 + 0x528) + *(short *)(param_2 + temp_v3 * 2 + 0x528);
-    temp_v1 = itemGetStackLimit(temp_v3 + 0x21d);
-    temp_v3 = temp_v3 + 1;
-    if (temp_v1 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x528)) {
-      *(short *)(temp_v0 + 0x528) = (short)temp_v1;
+    for (i = 0; i < 0x78; i++) {
+        dst->counts[2][i] += src->counts[2][i];
+        limit = itemGetStackLimit(0x12d + i);
+        if (limit < dst->counts[2][i]) {
+            dst->counts[2][i] = limit;
+        }
     }
-  } while (temp_v3 < 0x78);
-  temp_v3 = 0;
-  do {
-    temp_v0 = param_1 + temp_v3 * 2;
-    *(short *)(temp_v0 + 0x618) = *(short *)(temp_v0 + 0x618) + *(short *)(param_2 + temp_v3 * 2 + 0x618);
-    temp_v1 = itemGetStackLimit(temp_v3 + 0x295);
-    temp_v3 = temp_v3 + 1;
-    if (temp_v1 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x618)) {
-      *(short *)(temp_v0 + 0x618) = (short)temp_v1;
+    for (i = 0; i < 0x78; i++) {
+        dst->counts[3][i] += src->counts[3][i];
+        limit = itemGetStackLimit(0x1a5 + i);
+        if (limit < dst->counts[3][i]) {
+            dst->counts[3][i] = limit;
+        }
     }
-  } while (temp_v3 < 0x78);
-  temp_v3 = 0;
-  do {
-    temp_v0 = param_1 + temp_v3 * 2;
-    *(short *)(temp_v0 + 0x708) = *(short *)(temp_v0 + 0x708) + *(short *)(param_2 + temp_v3 * 2 + 0x708);
-    temp_v1 = itemGetStackLimit(temp_v3 + 0x30d);
-    temp_v3 = temp_v3 + 1;
-    if (temp_v1 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x708)) {
-      *(short *)(temp_v0 + 0x708) = (short)temp_v1;
+    for (i = 0; i < 0x78; i++) {
+        dst->counts[4][i] += src->counts[4][i];
+        limit = itemGetStackLimit(0x21d + i);
+        if (limit < dst->counts[4][i]) {
+            dst->counts[4][i] = limit;
+        }
     }
-  } while (temp_v3 < 0x32);
-  rt_memcpy(param_1 + 0xfbc,param_2 + 0xfbc,0xfc);
-  return;
+    for (i = 0; i < 0x78; i++) {
+        dst->counts[5][i] += src->counts[5][i];
+        limit = itemGetStackLimit(0x295 + i);
+        if (limit < dst->counts[5][i]) {
+            dst->counts[5][i] = limit;
+        }
+    }
+    for (i = 0; i < 0x32; i++) {
+        dst->counts[6][i] += src->counts[6][i];
+        limit = itemGetStackLimit(0x30d + i);
+        if (limit < dst->counts[6][i]) {
+            dst->counts[6][i] = limit;
+        }
+    }
+    rt_memcpy(dst->unkFBC, src->unkFBC, sizeof(dst->unkFBC));
 }
 
 } /* extern "C" */

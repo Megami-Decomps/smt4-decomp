@@ -40,7 +40,7 @@ void FUN_001b3da4(void);
 void FUN_00192420(void);
 void mapDepartResetWork(void);
 void FUN_001924d0(void);
-void FUN_001a8c6c(void);
+void mapGimicClearAll(void);
 s32 FUN_001b7f78(u32 job);
 void mapMainRequest(u32 job);
 void FUN_001e9508(u32 job);
@@ -89,7 +89,7 @@ void MapMain_Register(void)
     FUN_00192420();
     mapDepartResetWork();
     FUN_001924d0();
-    FUN_001a8c6c();
+    mapGimicClearAll();
     map->messageId = 0x1C2;
     map->messageState = 0;
     map->counterB4 = 0;

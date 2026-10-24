@@ -6,7 +6,7 @@ extern "C" {
 
 int onlineBufferReset(unsigned int);
 int strAssign(int, unsigned int, unsigned int, unsigned int);
-int FUN_002e7908(unsigned char [8], unsigned int *);
+int _ZN12OnlineResultC1ERKj(unsigned char [8], unsigned int *);
 int FUN_002eac34(...);
 int FUN_002eea8a(...);
 
@@ -29,7 +29,7 @@ typedef struct {
 extern int FUN_00121206(int, unsigned char);
 /* Supplied declaration required: onlineBufferReset. */
 /* Supplied declaration required: strAssign. */
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 /* Supplied declaration required: FUN_002eac34. */
 extern int streamReadBytes(int, int, unsigned int);
 /* Supplied declaration required: FUN_002eea8a. */
@@ -146,7 +146,7 @@ unsigned int FUN_0010bf1c(unsigned int param_1,int param_2,int param_3,unsigned 
              (temp_v1 = FUN_002f5c4c(*(int *)(temp_v1 + 0x10),*(unsigned int *)(param_3 + 0xd8)),
              temp_v1 != 0)) {
             temp_v6 = 0x8005000c;
-            FUN_002e7908(temp_v4,&temp_v6);
+            _ZN12OnlineResultC1ERKj(temp_v4,&temp_v6);
             return 0;
           }
         }

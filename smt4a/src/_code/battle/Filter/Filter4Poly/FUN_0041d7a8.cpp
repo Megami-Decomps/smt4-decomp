@@ -17,7 +17,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: asdMemoryAlloc. */
-extern unsigned int FUN_0018aeb8(void);
+extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: resourceApplyNodeFlag. */
@@ -63,7 +63,7 @@ void FUN_0041d7a8(int *param_1,int param_2,unsigned int param_3)
   temp_v0 = 0;
   do {
     temp_v2 = param_1[6];
-    temp_v1 = FUN_0018aeb8();
+    temp_v1 = _ZN2nw4math5MTX448IdentityEv();
     mtx44Copy(temp_v2 + temp_v0 * 0x44,temp_v1);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 2);

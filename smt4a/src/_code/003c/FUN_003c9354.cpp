@@ -21,7 +21,7 @@ int FUN_002a48e0(int, int);
 int FUN_002a4964(int, int);
 int FUN_002a7b74(void);
 int flaggedEntrySetValueA(int, int);
-int FUN_0032fea0(...);
+int arrayContainsU16(...);
 int unitRecordBuild(...);
 int FUN_003450d4(int, unsigned int, int, int);
 int FUN_00359b6c(...);
@@ -61,7 +61,7 @@ extern int FUN_002a4894(int);
 extern unsigned int *objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_002c8550. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
-/* Supplied declaration required: FUN_0032fea0. */
+/* Supplied declaration required: arrayContainsU16. */
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_003450d4. */
 extern int uiSearchPrimary(int);
@@ -228,7 +228,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
       return temp_v15;
     }
     temp_v5 = temp_v16;
-    FUN_0032fea0(temp_v16,8,*(unsigned short *)(param_1 + temp_v4 * 2 + 0x8b70));
+    arrayContainsU16(temp_v16,8,*(unsigned short *)(param_1 + temp_v4 * 2 + 0x8b70));
     if (temp_v5 != 0) {
       FUN_0020b908(0x11,0);
       eventQueueAddUniqueIfValid(0x100020f);
@@ -258,7 +258,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
       do {
         temp_v5 = param_1 + temp_v4 * 2;
         if ((*(short *)(temp_v5 + 0x8b70) != 0) &&
-           (temp_v6 = temp_v16, FUN_0032fea0(temp_v16,8), temp_v6 == 0)) {
+           (temp_v6 = temp_v16, arrayContainsU16(temp_v16,8), temp_v6 == 0)) {
           if (*(int *)(param_1 + 0x8e80) <= temp_v4) {
             return temp_v15;
           }

@@ -8,7 +8,7 @@ int FUN_0029541c(...);
 int FUN_00296774(...);
 int buttonHelpSetPreset(...);
 int eventQueueAddUnique(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 
 int statusReplaceSkillList(int);
 int FUN_001ddbbc(void);
@@ -92,7 +92,7 @@ extern int gameGetUnitRecord(int);
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bf818. */
 extern unsigned int dataTableGetCount(unsigned int);
@@ -378,7 +378,7 @@ LAB_002174ac:
       if (temp_v2 == 2) {
         *piVar17 = 0;
         *piVar13 = *piVar13 + 1;
-        FUN_002bee58(temp_v14,7);
+        spriteStartAnimationByIndex(temp_v14,7);
         FUN_0029bd4c();
         eventQueueAddUnique(0x1000115);
         return;

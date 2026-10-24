@@ -1,35 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_005004a8` (_code @ 0x5004a8, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same layout and calls; retail loads the stack argument pair with `ldm {r2, r6}` and the id with `ldm {r0, ip}`, built uses ldrd/different temporaries for the stack pair */
+#include "classes/WindowStatus.h"
 
 extern "C" {
 
-int _ZN18WindowStatusResultC1Ej(unsigned int, unsigned int);
-int FUN_004267dc(unsigned int, unsigned int, unsigned int, int, int, int, int);
+struct WindowRange {
+    u32 c;
+    u32 d;
+};
 
-/* stack frame of param_6: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_6_stack;
+u32 FUN_004267dc(u32 a, u32 b, u32 c, u32 d, u64 id, u32 e);
 
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-/* Supplied declaration required: FUN_004267dc. */
-
-
-void FUN_005004a8(unsigned int param_1,int *param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,int param_6)
-
+/* Starts the status operation for `id`; an empty id gives the fixed error code. */
+WindowStatusResult FUN_005004a8(const u64 &id, u32 a, u32 b, WindowRange r)
 {
-/* irregular: 2 native warning(s); review required */
-  if (*param_2 == 0 && param_2[1] == 0) {
-    _ZN18WindowStatusResultC1Ej(param_1,0xe0a13882);
-    return;
-  }
-  FUN_004267dc(param_3,param_4,param_5,1,*param_2,param_2[1],param_6 + 1);
-  _ZN18WindowStatusResultC1Ej(param_1,param_3);
-  return;
+    if (id == 0) {
+        return WindowStatusResult(0xe0a13882);
+    }
+    return WindowStatusResult(FUN_004267dc(a, b, r.c, 1, id, r.d + 1));
 }
 
 } /* extern "C" */

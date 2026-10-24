@@ -13,6 +13,11 @@ struct NavigationInterpolation {
             u8 unk000[0xC];
             /* 0x00C */ u8 active;
         } state;
+        struct {
+            /* 0x000 */ u32 unk000;
+            /* 0x004 */ s32 step;
+            /* 0x008 */ s32 substep;
+        } progress;
     };
     /* 0x010 */ u32 flags;
     /* 0x014 */ u32 unk014;

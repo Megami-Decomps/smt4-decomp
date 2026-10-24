@@ -25,7 +25,7 @@ extern int FUN_00123820(unsigned int);
 /* Supplied declaration required: FUN_0012df8a. */
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: onlineSockAddrConstruct. */
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002ea852. */
@@ -72,7 +72,7 @@ int FUN_002ea774(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
     temp_v4 = temp_v2;
     FUN_002ea852(temp_v2,temp_v1,temp_v5);
     if (temp_v4 == 0) {
-      temp_v4 = operatorNew(0x360);
+      temp_v4 = _Znwj(0x360);
       if (temp_v4 != 0) {
         FUN_00109240(temp_v4,param_1,temp_v12,param_1 + 0xa4);
       }

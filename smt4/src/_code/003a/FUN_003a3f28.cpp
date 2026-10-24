@@ -1,157 +1,97 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a3f28` (_code @ 0x3a3f28, 0x2b0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation (retail keeps the screen in r4 and the slot table in r5) and the build merges the identical mode/substep store tails of the variant and category branches, which retail keeps separate. */
+#include "shop/ShopScreen.h"
 
 extern "C" {
+s32 useCounterIsFinished(void);
+void useCounterRelease(void);
+s32 useCounterGetCurrentValue(void);
+s32 useCounterGetValue(void);
+void FUN_002a0cc8(s32 value);
+void buttonHelpSelectMenuPreset(ShopScreen *screen);
+s32 flaggedValueHolderGetTotal(ShopCategoryList *list);
+void FUN_0027f3dc(ShopSlot *slots, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+s32 FUN_0039fcd8(const void *, const void *);
+s32 FUN_0039fd24(const void *, const void *);
+s32 equipmentComparePowerThenOrder(const void *, const void *);
+s32 FUN_003a0028(const void *, const void *);
+s32 FUN_003a0078(const void *, const void *);
+s32 FUN_003a0118(const void *, const void *);
+s32 FUN_003a0164(const void *, const void *);
+s32 FUN_003a05e8(const void *, const void *);
+s32 FUN_003a0674(const void *, const void *);
+s32 FUN_003a06b8(const void *, const void *);
+s32 FUN_003a06fc(const void *, const void *);
+s32 FUN_003a075c(const void *, const void *);
+s32 FUN_003a63a8(const void *, const void *);
+s32 FUN_003a64cc(const void *, const void *);
 
-int buttonHelpSelectMenuPreset(int);
-int flaggedValueHolderGetTotal(int);
-int FUN_0027f3dc(...);
-int useCounterRelease(void);
-int FUN_002a0cc8(int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int FUN_0039fcd8(...); /* 0x39fcd8 */
-extern int FUN_0039fd24(...); /* 0x39fd24 */
-extern int equipmentComparePowerThenOrder(...); /* 0x39fd44 */
-extern int FUN_003a0078(...); /* 0x3a0078 */
-extern int FUN_003a0118(...); /* 0x3a0118 */
-extern int FUN_003a0164(...); /* 0x3a0164 */
-extern int FUN_003a05e8(...); /* 0x3a05e8 */
-extern int FUN_003a0674(...); /* 0x3a0674 */
-extern int FUN_003a06b8(...); /* 0x3a06b8 */
-extern int FUN_003a06fc(...); /* 0x3a06fc */
-extern int FUN_003a075c(...); /* 0x3a075c */
-extern int FUN_003a63a8(...); /* 0x3a63a8 */
-
-extern int useCounterGetValue(void);
-/* Supplied declaration required: buttonHelpSelectMenuPreset. */
-/* Supplied declaration required: flaggedValueHolderGetTotal. */
-/* Supplied declaration required: FUN_0027f3dc. */
-extern int useCounterGetCurrentValue(void);
-/* Supplied declaration required: useCounterRelease. */
-extern int useCounterIsFinished(void);
-/* Supplied declaration required: FUN_002a0cc8. */
-
-
-void FUN_003a3f28(int param_1)
-
+/* Once the use counter has finished, leaves the sort state; otherwise sorts the current category's slots by the chosen key. */
+void FUN_003a3f28(ShopScreen *screen)
 {
-/* irregular: 17 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = useCounterIsFinished();
-  if (temp_v0 != 0) {
-    useCounterRelease();
-    FUN_002a0cc8(0);
-    buttonHelpSelectMenuPreset(param_1);
-    temp_v0 = *(int *)(param_1 + 0x860);
-    if (*(int *)(param_1 + 0x10) == 1) {
-      if (temp_v0 == 8) {
-        temp_v1 = 0x10;
-      }
-      else {
-        temp_v1 = 0xf;
-      }
-      *(unsigned int *)(param_1 + 4) = temp_v1;
-      *(unsigned int *)(param_1 + 8) = 0;
-      return;
-    }
-    if (temp_v0 == 7) {
-      *(unsigned int *)(param_1 + 4) = 6;
-      *(unsigned int *)(param_1 + 8) = 0;
-      return;
-    }
-    if (temp_v0 == 8) {
-      temp_v1 = 7;
-    }
-    else {
-      temp_v1 = 5;
-    }
-    *(unsigned int *)(param_1 + 4) = temp_v1;
-    *(unsigned int *)(param_1 + 8) = 0;
-  }
-  else {
-    temp_v2 = param_1 + *(int *)(param_1 + 0x860) * 0x1002;
-    temp_v3 = temp_v2 + 0xc94;
-    flaggedValueHolderGetTotal(param_1 + *(int *)(param_1 + 0x860) * 0x74 + 0x880);
-    temp_v0 = useCounterGetCurrentValue();
-    if (temp_v0 == 0xf) {
-      temp_v0 = useCounterGetValue();
-      if (temp_v0 == 0) {
-        FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,FUN_003a05e8);
-        return;
-      }
-      FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,FUN_003a0078);
-      return;
-    }
-    if (temp_v0 < 0xf) {
-      if (temp_v0 == 3) {
-        temp_v0 = useCounterGetValue();
-        if (temp_v0 == 0) {
-          FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,FUN_003a0164);
-          return;
-        }
-        FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,equipmentComparePowerThenOrder);
-        return;
-      }
-      if (temp_v0 == 7) {
-        if (*(int *)(param_1 + 0x860) == 8) {
-          temp_v0 = useCounterGetValue();
-          if (temp_v0 == 0) {
-            FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,FUN_003a075c);
+    if (useCounterIsFinished()) {
+        useCounterRelease();
+        FUN_002a0cc8(0);
+        buttonHelpSelectMenuPreset(screen);
+        if (screen->variant == 1) {
+            screen->mode = screen->category != 8 ? 15 : 16;
+            screen->substep = 0;
             return;
-          }
-          FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,FUN_003a06b8);
-          return;
         }
-        temp_v0 = useCounterGetValue();
-        if (temp_v0 == 0) {
-          FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,FUN_003a06fc);
-          return;
+        if (screen->category == 7) {
+            screen->mode = 6;
+            screen->substep = 0;
+            return;
         }
-        FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,FUN_003a0674);
+        screen->mode = screen->category == 8 ? 7 : 5;
+        screen->substep = 0;
         return;
-      }
-      if (temp_v0 == 0xc) {
-        temp_v0 = useCounterGetValue();
-        if (temp_v0 == 0) {
-          FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,FUN_0039fd24);
-          return;
-        }
-        FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,FUN_003a63a8);
-        return;
-      }
     }
-    else {
-      if (temp_v0 == 0x10) {
-        temp_v0 = useCounterGetValue();
-        if (temp_v0 == 0) {
-          FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,FUN_003a0118);
-          return;
+    ShopSlotTable *table = &screen->tables[screen->category];
+    flaggedValueHolderGetTotal(&screen->lists[screen->category]);
+    switch (useCounterGetCurrentValue()) {
+    case 3:
+        if (useCounterGetValue() == 0)
+            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a0164);
+        else
+            FUN_0027f3dc(table->slots, table->count, 4, equipmentComparePowerThenOrder);
+        break;
+    case 7:
+        if (screen->category == 8) {
+            if (useCounterGetValue() == 0)
+                FUN_0027f3dc(table->slots, table->count, 4, FUN_003a075c);
+            else
+                FUN_0027f3dc(table->slots, table->count, 4, FUN_003a06b8);
+        } else if (useCounterGetValue() == 0) {
+            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a06fc);
+        } else {
+            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a0674);
         }
-        FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,FUN_0039fcd8);
-        return;
-      }
-      if (temp_v0 == 0x1c) {
-        temp_v0 = useCounterGetValue();
-        if (temp_v0 == 0) {
-          FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,0x3a0028);
-          return;
-        }
-        FUN_0027f3dc(temp_v3,*(unsigned short *)(temp_v2 + 0x1c94),4,0x3a64cc);
-        return;
-      }
+        break;
+    case 12:
+        if (useCounterGetValue() == 0)
+            FUN_0027f3dc(table->slots, table->count, 4, FUN_0039fd24);
+        else
+            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a63a8);
+        break;
+    case 15:
+        if (useCounterGetValue() == 0)
+            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a05e8);
+        else
+            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a0078);
+        break;
+    case 16:
+        if (useCounterGetValue() == 0)
+            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a0118);
+        else
+            FUN_0027f3dc(table->slots, table->count, 4, FUN_0039fcd8);
+        break;
+    case 28:
+        if (useCounterGetValue() == 0)
+            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a0028);
+        else
+            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a64cc);
+        break;
     }
-  }
-  return;
 }
 
 } /* extern "C" */

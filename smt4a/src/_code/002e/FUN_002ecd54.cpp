@@ -13,7 +13,7 @@ extern unsigned char DAT_00558c08; /* 0x558c08 */
 /* Supplied declaration required: FUN_00109f4e. */
 extern unsigned int *FUN_0011468c(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_002e7168(int, unsigned int);
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ecb04. */
 
@@ -30,7 +30,7 @@ unsigned int * FUN_002ecd54(unsigned int param_1)
   puVar1 = (unsigned int *)FUN_0011468c(param_1,5,0x40);
   *puVar1 = (unsigned int)&DAT_00558c08;
   *(unsigned char *)((int)puVar1 + 0x22a) = 1;
-  temp_v0 = operatorNew(0x30);
+  temp_v0 = _Znwj(0x30);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = FUN_002e7168(temp_v0,0x20000000);

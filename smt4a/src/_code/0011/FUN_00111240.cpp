@@ -15,7 +15,7 @@ extern unsigned char DAT_00558de4; /* 0x558de4 */
 extern unsigned char DAT_00559454; /* 0x559454 */
 
 /* Supplied declaration required: rt_memclr. */
-extern int FUN_002e7908(int, unsigned int *);
+extern int _ZN12OnlineResultC1ERKj(int, unsigned int *);
 extern int vectorInitEmpty2(int);
 extern int FUN_002f5928(int, unsigned int);
 extern int FUN_002fd020(int);
@@ -41,7 +41,7 @@ void FUN_00111240(unsigned int *param_1,unsigned int param_2,unsigned int param_
   temp_v0 = FUN_0043b028(param_1 + 0xe);
   temp_v0 = FUN_002fd020(temp_v0 + 0x10);
   temp_v1 = 0x10001;
-  temp_v0 = FUN_002e7908(temp_v0 + 0x1008,(unsigned int *)&temp_v1);
+  temp_v0 = _ZN12OnlineResultC1ERKj(temp_v0 + 0x1008,(unsigned int *)&temp_v1);
   temp_v0 = FUN_002f5928(temp_v0 + 0xc,0x20000000);
   *(unsigned char *)(temp_v0 + 0x30) = 0;
   *(unsigned char *)(temp_v0 + 0x31) = 0;

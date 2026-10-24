@@ -9,7 +9,7 @@ int fileSlotFree(...);
 int asdTMTexTableReleaseNode(...);
 
 int FUN_001f8da8(int, unsigned int *, unsigned char *, int *);
-int FUN_0021dea8(unsigned int, int, int);
+int entrySetParams(unsigned int, int, int);
 int FUN_0025b670(void);
 int FUN_00273358(...);
 int navigationResetTimer(void);
@@ -64,7 +64,7 @@ extern short DAT_0049fdde; /* 0x49fdde */
 
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_001f8da8. */
-/* Supplied declaration required: FUN_0021dea8. */
+/* Supplied declaration required: entrySetParams. */
 /* Supplied declaration required: FUN_0025b670. */
 extern int unlockFlagTest(unsigned int);
 /* Supplied declaration required: FUN_00273358. */
@@ -369,7 +369,7 @@ LAB_001e5a1c:
       *(unsigned char *)(temp_v2 + 0x3c) = 0;
       if (*(int *)(temp_v2 + 0xc) == 0) {
         FUN_002dfe08(*(unsigned int *)(temp_v2 + 0x10));
-        FUN_0021dea8(*(unsigned int *)(temp_v2 + 0x10),5,0);
+        entrySetParams(*(unsigned int *)(temp_v2 + 0x10),5,0);
         gameCounterAddSaturating(0x13,1);
       }
       temp_v4 = DAT_0049f9c4;

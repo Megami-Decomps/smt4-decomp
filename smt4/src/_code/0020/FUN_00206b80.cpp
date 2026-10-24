@@ -3,7 +3,7 @@
 
 extern "C" {
 s32 FUN_002bf818(SpriteTransitionMember *sprite);
-void FUN_002bee58(SpriteTransitionMember *sprite, s32 sequence);
+void spriteStartAnimationByIndex(SpriteTransitionMember *sprite, s32 sequence);
 
 // Advance the four-sprite transition and return to idle after its paired exit animation.
 void FUN_00206b80(SpriteTransitionGroup *group)
@@ -18,8 +18,8 @@ void FUN_00206b80(SpriteTransitionGroup *group)
     case 2:
         if (FUN_002bf818(&group->sprites[0]) && FUN_002bf818(&group->sprites[1]) &&
             FUN_002bf818(&group->sprites[2])) {
-            FUN_002bee58(&group->sprites[0], 3);
-            FUN_002bee58(&group->sprites[1], 3);
+            spriteStartAnimationByIndex(&group->sprites[0], 3);
+            spriteStartAnimationByIndex(&group->sprites[1], 3);
             group->state = 3;
             group->frame = 0;
         }

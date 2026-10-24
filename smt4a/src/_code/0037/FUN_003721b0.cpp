@@ -1,115 +1,95 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003721b0` (_code @ 0x3721b0, 0x284 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps &g_renderCtx in r9, x in r6 and the record in r7 (x/record swapped here) and the icon in r8 instead of a stack slot */
+#include "common.h"
+
+struct StatusRecord {
+    /* 0x00 */ u8 unk00[0x64];
+    /* 0x64 */ u16 count;
+    /* 0x66 */ u8 unk66[0x12c - 0x66];
+    /* 0x12C */ u16 iconId;
+};
+
+struct LayoutPlacement {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+    /* 0x0C */ s16 *width;
+};
 
 extern "C" {
 
-int textFormatBuffer(...);
-int FUN_00162790(...);
-int efctSetSpeed(void);
-int FUN_00180310(...);
-int FUN_0018152c(int, int, int, int, int);
-int FUN_001835b4(...);
-int FUN_00183bb0(void);
-int FUN_0018408c(...);
-int drawSetColorFromRGBA8(...);
-int renderCtxCalculateStereoParallax(unsigned int);
-int jobGetScalarValue(void);
-int VectorSignedToFloat(...);
+extern void *g_renderCtx; /* 0x59dbb4 */
 
-/* stack frame of param_5: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int spC0; /* 0xc0: local_c0 */
-    unsigned int spC4; /* 0xc4: local_c4 */
-    unsigned int spC8; /* 0xc8: local_c8 */
-} param_5_stack;
+f32 renderCtxCalculateStereoParallax(void *ctx, f32 depth);
+f32 jobGetScalarValue(void);
+void efctSetSpeed(f32 speed);
+s16 FUN_0019e52c(u16 id);
+u32 FUN_00180114(void);
+void textFormatBuffer(char *buffer, const char *format, ...);
+LayoutPlacement *FUN_001834a4(u32 table, s32 id);
+void FUN_001835b4(s32 category, s32 group, s32 id, s32 x, s32 y, s32 index);
+void FUN_0018152c(s32 icon, s32 x, s32 y, s32 index, s32 flags);
+void drawSetColorFromRGBA8(u32 rgba);
+void FUN_00180310(s32 mode, s32 x, s32 y, s32 align, s32 digits, s32 index, const char *text);
+void FUN_00183bb0(void);
+s32 FUN_0018408c(const char *text, s32 mode);
+void FUN_00162790(s32 category, u32 color, const char *text, f32 x, f32 y, f32 scaleX, f32 scaleY, f32 speed);
 
-extern unsigned char LAB_0037243c; /* 0x37243c */
-extern unsigned char LAB_00372450; /* 0x372450 */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: efctSetSpeed. */
-extern unsigned int FUN_00180114(void);
-/* Supplied declaration required: FUN_00180310. */
-/* Supplied declaration required: FUN_0018152c. */
-extern int FUN_001834a4(unsigned int, int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: jobGetScalarValue. */
-extern short FUN_0019e52c(unsigned short);
-
-
-void FUN_003721b0(unsigned int param_1,int param_2,int param_3,int param_4,int param_5)
-
+/* Draws one status badge: its frame, icon, count and name text. */
+void FUN_003721b0(u32 unused, f32 speed, StatusRecord *record, s32 slot, s32 x, s32 y)
 {
-/* irregular: irregular input(s): in_fpscr; 12 native warning(s); review required */
-  unsigned short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned char *puVar6;
-  int temp_v5;
-  unsigned int in_fpscr;
-  float temp_v6;
-  float temp_v7;
-  unsigned char temp_v8 [64];
-  unsigned char temp_v9 [84];
-  
-  temp_v7 = 0.26f;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  jobGetScalarValue();
-  efctSetSpeed();
-  temp_v2 = FUN_0019e52c(*(unsigned short *)(param_2 + 300));
-  temp_v0 = *(unsigned short *)(param_2 + 100);
-  temp_v3 = FUN_00180114();
-  textFormatBuffer(temp_v8,&LAB_0037243c,temp_v3);
-  temp_v6 = temp_v7;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  temp_v3 = 0xbba;
-  if (param_3 == 0) {
-    temp_v3 = 0xbb9;
-  }
-  temp_v4 = FUN_001834a4(0x14,param_3 + 0xbbb);
-  temp_v5 = (int)*(short *)(temp_v4 + 8) + param_4 + (int)temp_v7;
-  temp_v4 = *(short *)(temp_v4 + 10) + param_5;
-  FUN_001835b4(2,0x14,0xc12,temp_v5,temp_v4,0xbf);
-  FUN_001835b4(2,0x14,temp_v3,temp_v5,temp_v4,0xbf);
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  temp_v4 = FUN_001834a4(0x14,param_3 + 0xbda);
-  temp_v5 = param_4 + (int)temp_v6;
-  FUN_0018152c((int)temp_v2,*(short *)(temp_v4 + 8) + temp_v5,*(short *)(temp_v4 + 10) + param_5,0xc4,0);
-  temp_v4 = FUN_001834a4(0x14,param_3 + 0xbc3);
-  FUN_001835b4(2,0x14,0xbc2,*(short *)(temp_v4 + 8) + temp_v5,*(short *)(temp_v4 + 10) + param_5,0xbf);
-  temp_v3 = 2;
-  temp_v4 = param_3 * 2 + 0xc68;
-  if (temp_v0 >= 100) {
-    temp_v3 = 3;
-    temp_v4 = param_3 * 3 + 0xbee;
-  }
-  textFormatBuffer(temp_v9,&LAB_00372450,temp_v0);
-  temp_v4 = FUN_001834a4(0x14,temp_v4);
-  temp_v2 = *(short *)(temp_v4 + 8);
-  temp_v1 = *(short *)(temp_v4 + 10);
-  drawSetColorFromRGBA8(0xffffffff);
-  FUN_00180310(0,temp_v5 + temp_v2,temp_v1 + param_5,1,temp_v3,0xce,temp_v9);
-  FUN_00183bb0();
-  temp_v4 = FUN_001834a4(0x14,param_3 + 0xbe5);
-  puVar6 = temp_v8;
-  FUN_0018408c(puVar6,2);
-  temp_v5 = (int)*(short *)(temp_v4 + 8) + ((int)**(short **)(temp_v4 + 0xc) - (int)puVar6) / 2 + param_4
-          + (int)temp_v6;
-  VectorSignedToFloat(*(short *)(temp_v4 + 10) + param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(2,0xff,temp_v8,temp_v5);
-  efctSetSpeed();
-  return;
+    char name[64];
+    char countText[68];
+    f32 depth = 0.26f;
+    f32 savedSpeed;
+    s16 icon;
+    s32 count;
+    s32 parallax;
+    s32 frameId;
+    s32 frameX;
+    s32 frameY;
+    s32 digits;
+    s32 digitsId;
+    LayoutPlacement *placement;
+
+    renderCtxCalculateStereoParallax(g_renderCtx, depth);
+    savedSpeed = jobGetScalarValue();
+    efctSetSpeed(speed);
+    icon = FUN_0019e52c(record->iconId);
+    count = record->count;
+    textFormatBuffer(name, "%s", FUN_00180114());
+    parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, depth);
+    frameId = 0xbba;
+    if (slot == 0) {
+        frameId = 0xbb9;
+    }
+    placement = FUN_001834a4(20, slot + 0xbbb);
+    frameX = placement->x + (x + parallax);
+    frameY = placement->y + y;
+    FUN_001835b4(2, 20, 0xc12, frameX, frameY, 0xbf);
+    FUN_001835b4(2, 20, frameId, frameX, frameY, 0xbf);
+    parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, depth);
+    placement = FUN_001834a4(20, slot + 0xbda);
+    frameX = x + parallax;
+    FUN_0018152c(icon, placement->x + frameX, placement->y + y, 196, 0);
+    placement = FUN_001834a4(20, slot + 0xbc3);
+    FUN_001835b4(2, 20, 0xbc2, placement->x + frameX, placement->y + y, 0xbf);
+    digits = 2;
+    digitsId = slot * 2 + 0xc68;
+    if (count > 99) {
+        digits = 3;
+        digitsId = slot * 3 + 0xbee;
+    }
+    textFormatBuffer(countText, "%d", count);
+    placement = FUN_001834a4(20, digitsId);
+    frameX += placement->x;
+    frameY = placement->y + y;
+    drawSetColorFromRGBA8(0xffffffff);
+    FUN_00180310(0, frameX, frameY, 1, digits, 0xce, countText);
+    FUN_00183bb0();
+    placement = FUN_001834a4(20, slot + 0xbe5);
+    frameX = placement->x + (*placement->width - FUN_0018408c(name, 2)) / 2 + x + parallax;
+    FUN_00162790(2, 0xff, name, (f32)frameX, (f32)(placement->y + y), 1.0f, 0.0f, speed);
+    efctSetSpeed(savedSpeed);
 }
 
 } /* extern "C" */

@@ -14,10 +14,10 @@ void FUN_003d6fd4(BtlMain *battle, const char *path);
 s32 cameraCreateFromStateResource(BtlMain *battle);
 void FUN_003dba3c(void *auxiliary);
 s32 btlAuxAreResourcesReady(void *auxiliary);
-void FUN_00246730(void *auxiliary);
+void nameEntriesRegisterVerNamesThenContinue(void *auxiliary);
 void FUN_00339eec(ActionStateChannelOwner *owner);
-s32 FUN_00339860(ActionStateChannelOwner *owner);
-BtlSkill *FUN_002ae164(s32 skill);
+s32 modelOwnerResetPlayerIfReady(ActionStateChannelOwner *owner);
+BtlSkill *dataTable40FindById(s32 skill);
 void FUN_003398e4(ActionStateChannelOwner *owner);
 s32 FUN_0033ac58(ActionStateChannelOwner *owner);
 void FUN_003392cc(ActionStateChannelOwner *owner);
@@ -46,14 +46,14 @@ u32 FUN_003d1c1c(ActionStateChannelOwner **owner, ActionKindSelection *work)
     case 2:
         if (!btlAuxAreResourcesReady(DAT_00435d18))
             return 0;
-        FUN_00246730(DAT_00435d18);
+        nameEntriesRegisterVerNamesThenContinue(DAT_00435d18);
         FUN_00339eec(*owner);
         work->sequence.phase = 3;
         break;
     case 3:
-        if (!FUN_00339860(*owner))
+        if (!modelOwnerResetPlayerIfReady(*owner))
             return 0;
-        FUN_002ae164(work->command->skill);
+        dataTable40FindById(work->command->skill);
         work->sequence.phase = 4;
         break;
     case 4:

@@ -1,73 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00471a04` (_code @ 0x471a04, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: identical control flow and rectangle arithmetic; retail loads the last two stack arguments with one ldrd and keeps the draw-request pointer in r6 (this build uses ldm pairs and r4), so the stores are scheduled differently. */
+#include "common.h"
+
+/* Texture description: the pixel size sits at +0x14. */
+struct TextureSize {
+    /* 0x00 */ u16 width;
+    /* 0x02 */ u16 height;
+};
+struct TextureInfo {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ TextureSize size;
+};
+struct TextureLink3 {
+    /* 0x00 */ TextureInfo *info;
+};
+struct TextureLink2 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ TextureLink3 *next;
+};
+struct TextureLink1 {
+    /* 0x00 */ TextureLink2 *next;
+};
+struct TextureLink0 {
+    /* 0x00 */ TextureLink1 *next;
+};
+struct TextureFileRef {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ TextureLink0 *texture;
+};
+
+struct Extent {
+    s32 width;
+    s32 height;
+};
+
+/* The draw request: flags, then the source/destination rectangle at +0x14. */
+struct SpriteDrawRequest {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u8 unk04[0x10];
+    /* 0x14 */ Extent source;
+    /* 0x1C */ s32 top;
+    /* 0x20 */ s32 bottom;
+    /* 0x24 */ s32 left;
+    /* 0x28 */ s32 right;
+    /* 0x2C */ u8 unk2C[0x10];
+};
 
 extern "C" {
 
-int FUN_0019b770(unsigned short *, unsigned int [5], unsigned int, int);
-int FUN_001ab8e0(unsigned int [5], unsigned int, int, int, unsigned int);
+TextureFileRef *FUN_001b2ca4(void *package, u32 kind, void *name);
+void *asdTMTexTableGetNode(s32 table, void *name);
+void FUN_001ab8e0(SpriteDrawRequest *request, u32 a, s32 b, s32 c, u32 d);
+void FUN_0019b770(TextureSize *size, SpriteDrawRequest *request, void *node, u32 flags);
 
-/* stack frame of param_11: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp7C; /* 0x7c: local_7c */
-    unsigned int sp80; /* 0x80: local_80 */
-} param_11_stack;
-
-extern unsigned int asdTMTexTableGetNode(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0019b770. */
-/* Supplied declaration required: FUN_001ab8e0. */
-extern int FUN_001b2ca4(unsigned int, unsigned int, unsigned int);
-
-
-void FUN_00471a04(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 int param_5,int param_6,unsigned int param_7,int param_8,int param_9,int param_10,
-                 int param_11)
-
+void FUN_00471a04(void *package, u32 p2, u32 a, void *name, s32 x0, s32 y0, u32 scale, s32 x1, s32 y1, Extent extent)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned short *puVar3;
-  unsigned int *puVar4;
-  unsigned int temp_v2 [5];
-  int temp_v3;
-  int iStack_64;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int uStack_34;
-  unsigned int uStack_30;
-  unsigned int temp_v8;
-  unsigned int uStack_28;
-  
-  uStack_34 = param_1;
-  uStack_30 = param_2;
-  temp_v8 = param_3;
-  uStack_28 = param_4;
-  temp_v0 = FUN_001b2ca4(param_1,0x17,param_4);
-  puVar4 = (unsigned int *)0x0;
-  if (temp_v0 != 0) {
-    puVar4 = *(unsigned int **)(temp_v0 + 4);
-  }
-  temp_v1 = asdTMTexTableGetNode(0xf,param_4);
-  FUN_001ab8e0(temp_v2,temp_v8,param_8,param_9,param_7);
-  temp_v2[0] = temp_v2[0] | 0x28000;
-  puVar3 = (unsigned short *)(**(int **)(*(int *)*puVar4 + 4) + 0x14);
-  temp_v6 = (unsigned int)*puVar3 + (param_8 - param_5);
-  temp_v7 = temp_v6 + param_10;
-  temp_v3 = param_10;
-  iStack_64 = param_11;
-  temp_v4 = (unsigned int)*(unsigned short *)(**(int **)(*(int *)*puVar4 + 4) + 0x16) + (param_9 - param_6);
-  temp_v5 = temp_v4 + param_11;
-  FUN_0019b770(puVar3,temp_v2,temp_v1,0);
-  return;
+    TextureFileRef *ref = FUN_001b2ca4(package, 23, name);
+    TextureLink0 *texture = NULL;
+    if (ref != NULL) {
+        texture = ref->texture;
+    }
+    void *node = asdTMTexTableGetNode(15, name);
+    SpriteDrawRequest request;
+    FUN_001ab8e0(&request, a, x1, y1, scale);
+    request.flags |= 0x28000;
+    TextureSize *size = &texture->next->next->next->info->size;
+    request.left = size->width + (x1 - x0);
+    request.right = request.left + extent.width;
+    request.top = size->height + (y1 - y0);
+    request.bottom = request.top + extent.height;
+    request.source = extent;
+    FUN_0019b770(size, &request, node, 0);
 }
 
 } /* extern "C" */

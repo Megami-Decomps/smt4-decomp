@@ -19,7 +19,7 @@ typedef struct {
 } param_2_stack;
 
 extern signed char DAT_005c0ac0; /* 0x5c0ac0 */
-extern unsigned int _ZTV9Obj5c14bc; /* 0x5c14bc */
+extern unsigned int g_ipcServiceInitResult; /* 0x5c14bc */
 
 extern int FUN_0016f06c(unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int *);
 extern unsigned int FUN_0016f864(unsigned int);
@@ -58,7 +58,7 @@ unsigned int FUN_00159468(unsigned int *param_1,unsigned int param_2)
       sysFatalBreak();
     }
     temp_v0 = wstrlen(param_2);
-    temp_v2 = FUN_0016f988(&_ZTV9Obj5c14bc,param_2,temp_v0,0);
+    temp_v2 = FUN_0016f988(&g_ipcServiceInitResult,param_2,temp_v0,0);
     if (temp_v2 < 0) {
       sysFatalBreak();
     }

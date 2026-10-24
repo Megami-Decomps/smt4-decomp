@@ -1,42 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003851f8` (_code @ 0x3851f8, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_2_stack;
+struct GimicFlagsObject {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 flags;
+};
 
-extern int g_mapGimic; /* 0x580ca0 */
+struct GimicRef {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ GimicFlagsObject *object;
+};
 
+struct GimicSlot {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ s16 id;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ GimicRef *ref;
+    /* 0x0c */ u8 unk0c[0x0c];
+};
 
-void FUN_003851f8(int param_1,int param_2)
+struct MapGimicSlots {
+    /* 0x000 */ u8 unk000[0x8c4];
+    /* 0x8c4 */ GimicSlot slots[10];
+};
 
+extern MapGimicSlots *g_mapGimic;
+
+/* Sets or clears the low two flag bits on the object behind the active gimic slot with `id`. */
+void FUN_003851f8(s32 id, s32 enable)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = 0;
-  while ((temp_v2 = g_mapGimic + temp_v1 * 0x18, *(char *)(temp_v2 + 0x8c4) == '\0' ||
-         (*(short *)(temp_v2 + 0x8c8) != param_1))) {
-    temp_v1 = temp_v1 + 1;
-    if (temp_v1 >= 10) {
-      return;
+    s32 i;
+
+    for (i = 0; i < 10; i++) {
+        GimicSlot *slot = &g_mapGimic->slots[i];
+        if (slot->active && slot->id == id) {
+            GimicFlagsObject *object = slot->ref->object;
+            if (enable != 0) {
+                object->flags &= ~3u;
+            } else {
+                object->flags |= 3;
+            }
+            return;
+        }
     }
-  }
-  temp_v1 = *(int *)(*(int *)(temp_v2 + 0x8cc) + 4);
-  temp_v0 = *(unsigned int *)(temp_v1 + 4);
-  if (param_2 != 0) {
-    temp_v0 = temp_v0 & 0xfffffffc;
-  }
-  else {
-    temp_v0 = temp_v0 | 3;
-  }
-  *(unsigned int *)(temp_v1 + 4) = temp_v0;
-  return;
 }
 
 } /* extern "C" */

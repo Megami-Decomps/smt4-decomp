@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00192608(void);
+int dataTable08Sub2GetRecord(void);
 int FUN_0034cb50(unsigned short *, int *, int);
 int equipmentGetCappedUpgradeBonuses(unsigned int, int *);
 struct ValuePair;
@@ -27,7 +27,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned short *gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00192608. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: FUN_0034cb50. */
 extern short FUN_003da998(unsigned int, unsigned int *);
 extern short FUN_003daaf4(unsigned int, unsigned int *);
@@ -99,7 +99,7 @@ void FUN_003df7c4(unsigned short *param_1)
     case 6:
       unaff_r6 = (unsigned int)param_1[6];
     }
-    if ((unaff_r6 != 0) && (temp_v4 = unaff_r6, FUN_00192608(), temp_v4 != 0)) {
+    if ((unaff_r6 != 0) && (temp_v4 = unaff_r6, dataTable08Sub2GetRecord(), temp_v4 != 0)) {
       param_1[0x10] = param_1[0x10] + (short)*(char *)(temp_v4 + 0x31);
       param_1[0x11] = param_1[0x11] + (short)*(char *)(temp_v4 + 0x32);
       param_1[0x12] = param_1[0x12] + (short)*(char *)(temp_v4 + 0x33);
@@ -167,7 +167,7 @@ void FUN_003df7c4(unsigned short *param_1)
   param_1[0xe] = param_1[0xe] + (temp_v3 - temp_v1) + temp_v5;
   param_1[0xf] = (param_1[8] - temp_v2) + temp_v8 + param_1[0xf];
   temp_v4 = (unsigned int)param_1[6];
-  FUN_00192608();
+  dataTable08Sub2GetRecord();
   temp_v16 = 0;
   if (temp_v4 != 0) {
     temp_v16 = *(unsigned short *)(temp_v4 + 0x3a);

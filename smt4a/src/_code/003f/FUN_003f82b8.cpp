@@ -1,98 +1,92 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f82b8` (_code @ 0x3f82b8, 0x224 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: logic and call sequence match; retail keeps one more value live (constant 201 hoisted into r11 and x held in r6), so its register assignment and 12-byte frame differ from the build. */
+#include "common.h"
+
+struct SpriteFrame {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+};
+
+struct RenderCtx;
+
+/* A camp status screen with its two sprites. */
+struct CampStatusScreen {
+    /* 0x000 */ u8 unk000[0x14];
+    /* 0x014 */ u32 mode;
+    /* 0x018 */ u8 unk018[0x38];
+    /* 0x050 */ s32 scroll;
+    /* 0x054 */ u8 unk054[0xD4];
+    /* 0x128 */ s32 scrollBase;
+    /* 0x12C */ u8 unk12C[0x40];
+    /* 0x16C */ u8 spriteA[0x118];
+    /* 0x284 */ u8 unk284[0x2BC];
+    /* 0x540 */ u8 spriteB[0x98];
+    /* 0x5D8 */ void *panel;
+};
 
 extern "C" {
+extern RenderCtx *g_renderCtx;
+s32 vec2GetXInt(const void *position);
+s32 vec2GetYInt(const void *position);
+f32 vec2GetSpeed(const void *position);
+f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
+void efctSetSpeed(f32 speed);
+void FUN_001835b4(u32 flags, u32 group, s32 sprite, s32 x, s32 y, u32 layer);
+SpriteFrame *FUN_001834a4(u32 group, s32 sprite);
+void FUN_003f5b14(void *owner, s32 y, u32 color, s32 firstX, s32 secondX, f32 alpha);
+void FUN_003f5d94(void *owner, s32 x, s32 y, f32 alpha);
+void FUN_003f6e24(void *owner, s32 x, s32 y, f32 alpha);
+void FUN_003f78f8(void *owner, s32 x, s32 y, f32 alpha);
+void FUN_00164168(void *panel, s32 x, s32 y, u32 color, u32 layer, s32 value, f32 alpha);
 
-int FUN_00164168(...);
-int vec2GetXInt(int);
-int vec2GetYInt(int);
-int efctSetSpeed(void);
-int FUN_001835b4(int, int, int, int, int, int);
-int renderCtxCalculateStereoParallax(unsigned int);
-int FUN_003f5b14(...);
-int FUN_003f5d94(int, int, int);
-int FUN_003f6e24(int, int, int);
-int FUN_003f78f8(...);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00164168. */
-/* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: vec2GetYInt. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001834a4(unsigned int, int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_003f5b14. */
-/* Supplied declaration required: FUN_003f5d94. */
-/* Supplied declaration required: FUN_003f6e24. */
-/* Supplied declaration required: FUN_003f78f8. */
-
-
-void FUN_003f82b8(int param_1)
-
+// Draw the camp status screen for its current mode at the main sprite's position, then reset the draw speed.
+void FUN_003f82b8(CampStatusScreen *screen)
 {
-/* irregular: 10 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  float temp_v5;
-  
-  temp_v0 = vec2GetXInt(param_1 + 0x16c);
-  temp_v1 = vec2GetYInt(param_1 + 0x16c);
-  switch(*(unsigned int *)(param_1 + 0x14)) {
-  case 0:
-  case 1:
-  case 2:
-  case 3:
-    vec2GetXInt(param_1 + 0x540);
-    vec2GetYInt(param_1 + 0x540);
-    temp_v5 = 0.26f;
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v0 = temp_v0 + (int)temp_v5;
-    efctSetSpeed();
-    FUN_001835b4(2,0x31,0,temp_v0,temp_v1,0x8d);
-    FUN_001835b4(2,0x31,1,temp_v0,temp_v1,0x8d);
-    FUN_001835b4(2,0x31,9,temp_v0,temp_v1,0x8d);
-    break;
-  case 4:
-  case 5:
-    FUN_003f6e24(param_1,temp_v0,temp_v1);
-    break;
-  default:
-    FUN_003f5d94(param_1,temp_v0,temp_v1);
-    break;
-  case 9:
-  case 10:
-  case 0xb:
-    temp_v5 = 0.26f;
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    FUN_003f5b14(param_1,temp_v0,temp_v1,0xe2,0xe5);
-    temp_v3 = 0;
-    do {
-      temp_v4 = (*(int *)(param_1 + 0x50) + temp_v3) - *(int *)(param_1 + 0x128);
-      if (-1 < temp_v4) {
-        temp_v2 = FUN_001834a4(0x31,temp_v3 + 0xfc);
-        FUN_00164168(*(unsigned int *)(param_1 + 0x5d8),
-                     (int)*(short *)(temp_v2 + 8) + temp_v0 + (int)temp_v5,*(short *)(temp_v2 + 10) + temp_v1,
-                     0xc9,6,temp_v4);
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 8);
-    FUN_003f78f8(param_1,temp_v0,temp_v1);
-  }
-  efctSetSpeed();
-  return;
+    s32 x = vec2GetXInt(screen->spriteA);
+    s32 y = vec2GetYInt(screen->spriteA);
+    f32 speed = vec2GetSpeed(screen->spriteA);
+
+    switch (screen->mode) {
+    case 0:
+    case 1:
+    case 2:
+    case 3: {
+        s32 secondX = vec2GetXInt(screen->spriteB);
+        s32 secondY = vec2GetYInt(screen->spriteB);
+        f32 secondSpeed = vec2GetSpeed(screen->spriteB);
+        s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+        s32 drawX = x + parallax;
+        efctSetSpeed(speed);
+        FUN_001835b4(2, 49, 0, drawX, y, 141);
+        FUN_001835b4(2, 49, 1, drawX, y, 141);
+        FUN_001835b4(2, 49, 9, drawX, y, 141);
+        break;
+    }
+    case 4:
+    case 5:
+        FUN_003f6e24(screen, x, y, speed);
+        break;
+    case 9:
+    case 10:
+    case 11: {
+        s32 baseX = x;
+        s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+        FUN_003f5b14(screen, baseX, y, 226, 229, speed);
+        for (s32 i = 0; i < 8; i++) {
+            s32 value = screen->scroll + i - screen->scrollBase;
+            if (value >= 0) {
+                SpriteFrame *frame = FUN_001834a4(49, 252 + i);
+                FUN_00164168(screen->panel, frame->x + baseX + parallax, frame->y + y, 201, 6, value, speed);
+            }
+        }
+        FUN_003f78f8(screen, baseX, y, speed);
+        break;
+    }
+    default:
+        FUN_003f5d94(screen, x, y, speed);
+        break;
+    }
+    efctSetSpeed(1.0f);
 }
 
-} /* extern "C" */
+}

@@ -24,7 +24,7 @@ extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002f3dc4. */
 /* Supplied declaration required: FUN_002f3dde. */
-extern int refIsNonNegative(unsigned int *);
+extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
 /* Supplied declaration required: FUN_002f76ca. */
 
 
@@ -47,7 +47,7 @@ void FUN_00310ec8(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
   temp_v0 = onlineInstanceTableGetCurrent();
   onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x6c));
   if (temp_v0 != 0) {
-    temp_v1 = refIsNonNegative(param_2);
+    temp_v1 = _ZNK18OnlineResultRecord7isValidEv(param_2);
     if (temp_v1 != 0) {
       if (*(char *)(param_1 + 0x168) != '\0') {
         FUN_002f76ca(*(unsigned int *)(param_1 + 0x78),"invalidurl");

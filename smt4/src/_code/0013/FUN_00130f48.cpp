@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00147004(...);
 int __cxa_guard_acquire(...);
 int nn_snd_CTR_StartSoundThread(...);
-int nw_snd_internal_driver_SoundThread_SoundThread_sub_object(...);
+int _ZN2nw3snd8internal6driver11SoundThreadC1Ev(...);
 
 typedef struct fn_00130f48_arg0 fn_00130f48_arg0;
 struct fn_00130f48_arg0 {
@@ -28,13 +28,13 @@ typedef struct {
 } param_9_stack;
 
 extern int nw_snd_internal_driver_SoundThread_SoundThreadFunc(...); /* 0x14c4c8 */
-extern unsigned int DAT_00472364; /* 0x472364 */
-extern unsigned char DAT_004ea4c8; /* 0x4ea4c8 */
+extern unsigned int _ZGVZN2nw3snd8internal6driver11SoundThread11GetInstanceEvE8instance; /* 0x472364 */
+extern unsigned char _ZZN2nw3snd8internal6driver11SoundThread11GetInstanceEvE8instance; /* 0x4ea4c8 */
 
 /* Supplied declaration required: FUN_00147004. */
 /* Supplied declaration required: __cxa_guard_acquire. */
 /* Supplied declaration required: nn_snd_CTR_StartSoundThread. */
-/* Supplied declaration required: nw_snd_internal_driver_SoundThread_SoundThread_sub_object. */
+/* Supplied declaration required: _ZN2nw3snd8internal6driver11SoundThreadC1Ev. */
 
 
 int FUN_00130f48(fn_00130f48_arg0 *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -65,20 +65,20 @@ int FUN_00130f48(fn_00130f48_arg0 *param_1,unsigned int param_2,unsigned int par
   temp_v2 = param_2;
   uStack_38 = param_3;
   uStack_34 = param_4;
-  if ((DAT_00472364 & 1) == 0) {
-    temp_v1 = __cxa_guard_acquire(&DAT_00472364);
+  if ((_ZGVZN2nw3snd8internal6driver11SoundThread11GetInstanceEvE8instance & 1) == 0) {
+    temp_v1 = __cxa_guard_acquire(&_ZGVZN2nw3snd8internal6driver11SoundThread11GetInstanceEvE8instance);
     param_2 = (unsigned int)((unsigned long long)temp_v1 >> 0x20);
     if ((int)temp_v1 != 0) {
-      nw_snd_internal_driver_SoundThread_SoundThread_sub_object(&DAT_004ea4c8);
+      _ZN2nw3snd8internal6driver11SoundThreadC1Ev(&_ZZN2nw3snd8internal6driver11SoundThread11GetInstanceEvE8instance);
       param_2 = 0x141040;
     }
   }
-  if (((DAT_00472364 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00472364,param_2), temp_v0 != 0)) {
-    nw_snd_internal_driver_SoundThread_SoundThread_sub_object(&DAT_004ea4c8);
+  if (((_ZGVZN2nw3snd8internal6driver11SoundThread11GetInstanceEvE8instance & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&_ZGVZN2nw3snd8internal6driver11SoundThread11GetInstanceEvE8instance,param_2), temp_v0 != 0)) {
+    _ZN2nw3snd8internal6driver11SoundThreadC1Ev(&_ZZN2nw3snd8internal6driver11SoundThread11GetInstanceEvE8instance);
   }
   puVar2 = (unsigned int *)&temp_v2;
   nn_snd_CTR_StartSoundThread
-            (puVar2,nw_snd_internal_driver_SoundThread_SoundThreadFunc,&DAT_004ea4c8);
+            (puVar2,nw_snd_internal_driver_SoundThread_SoundThreadFunc,&_ZZN2nw3snd8internal6driver11SoundThread11GetInstanceEvE8instance);
   FUN_00147004(param_9);
   return ((int)puVar2 >> 0x1f) + 1;
 }

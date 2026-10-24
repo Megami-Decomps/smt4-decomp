@@ -25,7 +25,7 @@ extern Globals g_messageMain;
 
 int pairSetFirstResetSecond(void *window, int arg);
 int FUN_002bd954(void *window, int arg1, u32 arg2, void *text, float scale, int arg5);
-int FUN_002bee58(void *window, int arg);
+int spriteStartAnimationByIndex(void *window, int arg);
 u32 FUN_0028fb40(void);
 
 /* Script command: shows the banner with `id`: stamps the time, sets up its window with the text and starts it. */
@@ -42,7 +42,7 @@ u32 bannerShow(u32 id)
     banner->timeCurrent = now;
     FUN_002bd954(banner->window, 14, 0xffffffff, banner->text, 1.0f, 11);
     pairSetFirstResetSecond(banner->window, 10);
-    FUN_002bee58(banner->window, 6);
+    spriteStartAnimationByIndex(banner->window, 6);
     return 1;
 }
 

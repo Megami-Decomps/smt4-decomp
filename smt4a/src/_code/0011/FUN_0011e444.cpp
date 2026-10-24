@@ -9,7 +9,7 @@ int FUN_00114d60(int *, unsigned int, int, int);
 int FUN_0011c964(int *, unsigned int);
 int _ZN9Obj55aff4D1Ev(...);
 int onlineInstanceTableFind(int, unsigned int);
-int FUN_002ea100(...);
+int _ZN9Obj55aff4C1EPKc(...);
 int FUN_002f6be2(int, int *);
 int operatorDeleteArrayNullable(int);
 int FUN_002fbd38(...);
@@ -47,7 +47,7 @@ typedef struct {
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
-/* Supplied declaration required: FUN_002ea100. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
 /* Supplied declaration required: FUN_002f6be2. */
 /* Supplied declaration required: operatorDeleteArrayNullable. */
 /* Supplied declaration required: FUN_002fbd38. */
@@ -88,18 +88,18 @@ void FUN_0011e444(fn_0011e444_arg0 *param_1,int *param_2)
         temp_v0 = temp_v0 + 0x18) {
       piVar2 = param_2;
       FUN_002fbd38(param_2);
-      temp_v1 = FUN_002ea100(temp_v4,piVar2);
+      temp_v1 = _ZN9Obj55aff4C1EPKc(temp_v4,piVar2);
       FUN_00114d60(&param_1->field_0x2c,temp_v1,temp_v0 + 8,temp_v0 + 0x10);
       _ZN9Obj55aff4D1Ev(temp_v4);
     }
     piVar2 = param_2;
     FUN_002fbd38();
-    temp_v1 = FUN_002ea100(&temp_v2,piVar2);
+    temp_v1 = _ZN9Obj55aff4C1EPKc(&temp_v2,piVar2);
     FUN_0011c964(&param_1->field_0x2c,temp_v1);
     _ZN9Obj55aff4D1Ev(&temp_v2);
     piVar2 = param_2;
     FUN_002fbd38(param_2);
-    temp_v1 = FUN_002ea100(&temp_v2,piVar2);
+    temp_v1 = _ZN9Obj55aff4C1EPKc(&temp_v2,piVar2);
     FUN_00110b58(&param_1->field_0x38,temp_v1);
     _ZN9Obj55aff4D1Ev(&temp_v2);
     (**(romwright_code **)(*param_2 + 0x14))

@@ -1,38 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e5558` (_code @ 0x3e5558, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match7_ControllerPose.h"
+
+/* A link to a controller; the controller handle is at +4. */
+struct ControllerLink {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ ControllerPose *controller;
+};
+
+/* One of the three 0x5c-byte slots of the work block; only its link pointer is named. */
+struct ControllerSlot {
+    /* 0x00 */ ControllerLink *link;
+    /* 0x04 */ u8 unk04[0x58];
+};
+
+struct ControllerGroup {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ ControllerLink *mainLink;
+    /* 0x0C */ u8 unk0C[0x18];
+    /* 0x24 */ ControllerSlot slots[3];
+};
 
 extern "C" {
 
-int controllerSetPosition(void);
+void controllerSetPosition(ControllerPose *controller, f32 x, f32 y, f32 z);
 
-/* Supplied declaration required: controllerSetPosition. */
-
-
-void FUN_003e5558(int param_1)
-
+/* Moves the group's main controller and the controllers of its three slots to the given position. */
+void FUN_003e5558(ControllerGroup *group, f32 x, f32 y, f32 z)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if (*(int *)(*(int *)(param_1 + 8) + 4) != 0) {
-    controllerSetPosition();
-  }
-  temp_v2 = 0;
-  do {
-    temp_v0 = *(int *)(param_1 + temp_v2 * 0x5c + 0x24);
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      temp_v1 = *(int *)(temp_v0 + 4);
+    if (group->mainLink->controller != NULL) {
+        controllerSetPosition(group->mainLink->controller, x, y, z);
     }
-    if (temp_v0 != 0 && temp_v1 != 0) {
-      controllerSetPosition();
+    for (s32 i = 0; i < 3; i++) {
+        ControllerLink *link = group->slots[i].link;
+        if (link != NULL && link->controller != NULL) {
+            controllerSetPosition(link->controller, x, y, z);
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 3);
-  return;
 }
 
 } /* extern "C" */

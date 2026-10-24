@@ -1,101 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c33e8` (_code @ 0x3c33e8, 0x248 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling only: the prologue moves of count/color come after the compare in retail, the last call stores its stack arguments with one stm, and the literal pool puts "%d" after the empty-slot string */
+#include "skill/SkillSlotScreen.h"
+#include "shard/S1ListPanel.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
-int FUN_00162790(...);
-int FUN_00180310(...);
-int FUN_001835b4(int, int, int, int, int, int);
-int FUN_00185e84(...);
-int statDrawClampedDelta(...);
-int FUN_004bd6b0(...);
-int VectorSignedToFloat(...);
+void textFormatBuffer(char *buffer, const char *format, ...);
+void FUN_00162790(u32 font, u32 color, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);
+void FUN_00180310(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const void *table, s32 value);
+const SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
+void FUN_001835b4(u32 flags, u32 group, s32 sprite, s32 x, s32 y, u32 layer);
+void FUN_00185e84(s16 id, s32 x, s32 y, u32 layer, u32 a, u32 b);
+void statDrawClampedDelta(u32 unit, s16 id, s32 x, s32 y, u32 layer, u32 a);
+void FUN_004bd6b0(u32 unit, u16 id, s32 index);
+const char *FUN_0014bd84(u16 id);
+s32 recordContainsPairedId(u32 unit, u16 id);
+u32 FUN_004bcbb4(u32 unit, u16 id);
 
-/* stack frame of param_6: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp8C; /* 0x8c: local_8c */
-    unsigned int sp94; /* 0x94: local_94 */
-    unsigned int sp98; /* 0x98: local_98 */
-} param_6_stack;
-
-extern unsigned char LAB_003c363c; /* 0x3c363c */
-extern unsigned char LAB_003c3644; /* 0x3c3644 */
-extern unsigned char LAB_003c3650; /* 0x3c3650 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
-extern unsigned int FUN_0014bd84(unsigned short);
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_00180310. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00185e84. */
-/* Supplied declaration required: statDrawClampedDelta. */
-extern int recordContainsPairedId(unsigned int, unsigned short);
-extern unsigned int FUN_004bcbb4(unsigned int, unsigned short);
-/* Supplied declaration required: FUN_004bd6b0. */
-
-
-void FUN_003c33e8(int param_1,int param_2,unsigned int param_3,int param_4,int param_5,int param_6)
-
+/* Draws one skill row of the skill screen: the skill's name, icon and cost, or the empty-slot label. */
+void FUN_003c33e8(SkillSlotScreen *screen, s32 index, u32 unit, s32 count, s32 x, s32 y, f32 effect)
 {
-/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int in_fpscr;
-  unsigned char temp_v5 [84];
-  int iStack_34;
-  int iStack_30;
-  unsigned int temp_v6;
-  int iStack_28;
-  
-  temp_v0 = param_1 + param_2 * 2;
-  temp_v4 = 0xffffffff;
-  iStack_34 = param_1;
-  iStack_30 = param_2;
-  temp_v6 = param_3;
-  iStack_28 = param_4;
-  if (*(short *)(temp_v0 + 0x8b60) != 0) {
-    FUN_001835b4(2,0x1a,0x174,param_5,param_6,0x6a);
-    FUN_001835b4(2,0x1a,0x175,param_5,param_6,0x6a);
-    FUN_001835b4(2,0x1a,0x176,param_5,param_6,0x6f);
-    if (param_2 < param_4 - *(int *)(param_1 + 0x8e7c)) {
-      temp_v4 = 0x9fe7ffff;
+    char text[64];
+    u32 color = 0xffffffff;
+
+    if (screen->slots[index] == 0) {
+        textFormatBuffer(text, "\x81\x7c \x81\x7c \x81\x7c");
+        const SpriteInfo *label = FUN_001834a4(0x1a, 0x178);
+        FUN_00162790(2, 0xffffffff, text, label->x + x, label->y + y, 0.0f, 0.0f, effect);
+        return;
     }
-    temp_v1 = FUN_0014bd84(*(unsigned short *)(temp_v0 + 0x8b60));
-    textFormatBuffer(temp_v5,&LAB_003c363c,temp_v1);
-    temp_v2 = FUN_001834a4(0x1a,0x178);
-    VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_6,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162790(2,temp_v4,temp_v5);
-    temp_v2 = FUN_001834a4(0x1a,0x177);
-    FUN_00185e84((int)*(short *)(temp_v0 + 0x8b60),*(short *)(temp_v2 + 8) + param_5,
-                 *(short *)(temp_v2 + 10) + param_6,0x74,0,0);
-    temp_v3 = recordContainsPairedId(temp_v6,*(unsigned short *)(temp_v0 + 0x8b60));
-    if (temp_v3 == 0) {
-      FUN_004bd6b0(temp_v6,*(unsigned short *)(temp_v0 + 0x8b60),param_2);
+    FUN_001835b4(2, 0x1a, 0x174, x, y, 0x6a);
+    FUN_001835b4(2, 0x1a, 0x175, x, y, 0x6a);
+    FUN_001835b4(2, 0x1a, 0x176, x, y, 0x6f);
+    if (index < count - screen->freedCount) {
+        color = 0x9fe7ffff;
     }
-    statDrawClampedDelta(temp_v6,(int)*(short *)(temp_v0 + 0x8b60),*(short *)(temp_v2 + 8) + param_5,
-                 *(short *)(temp_v2 + 10) + param_6,0x74,0);
-    temp_v2 = FUN_001834a4(0x1a,0x17c);
-    temp_v4 = FUN_004bcbb4(temp_v6,*(unsigned short *)(temp_v0 + 0x8b60));
-    FUN_00180310(1,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,1,4,0x79,
-                 &LAB_003c3650,temp_v4);
-  }
-  else {
-    textFormatBuffer(temp_v5,&LAB_003c3644);
-    temp_v0 = FUN_001834a4(0x1a,0x178);
-    VectorSignedToFloat(*(short *)(temp_v0 + 10) + param_6,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(*(short *)(temp_v0 + 8) + param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162790(2,0xffffffff,temp_v5);
-  }
-  return;
+    textFormatBuffer(text, "%s", FUN_0014bd84(screen->slots[index]));
+    const SpriteInfo *label = FUN_001834a4(0x1a, 0x178);
+    FUN_00162790(2, color, text, label->x + x, label->y + y, 0.0f, 0.0f, effect);
+    const SpriteInfo *icon = FUN_001834a4(0x1a, 0x177);
+    FUN_00185e84(screen->slots[index], icon->x + x, icon->y + y, 0x74, 0, 0);
+    if (recordContainsPairedId(unit, screen->slots[index]) == 0) {
+        FUN_004bd6b0(unit, screen->slots[index], index);
+    }
+    statDrawClampedDelta(unit, screen->slots[index], icon->x + x, icon->y + y, 0x74, 0);
+    const SpriteInfo *cost = FUN_001834a4(0x1a, 0x17c);
+    FUN_00180310(1, cost->x + x, cost->y + y, 1, 4, 0x79, "%d", FUN_004bcbb4(unit, screen->slots[index]));
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@ extern "C" {
 u32 FUN_00192718(u32 id);
 ContentItemPriorityRecord *contentEntryFindById2(u32 id);
 Table8Record *dataTable8FindRecord(u32 id);
-EquipmentItemPriorityRecord *FUN_00192608(u32 id);
+EquipmentItemPriorityRecord *dataTable08Sub2GetRecord(u32 id);
 u16 FUN_0049c9a0(const u16 *id);
 }
 
@@ -21,7 +21,7 @@ static inline u32 itemPriority(const u16 *item)
     case 6:
     case 7:
     case 8:
-        priority = FUN_00192608(id)->priority;
+        priority = dataTable08Sub2GetRecord(id)->priority;
         break;
     case 0:
         priority = contentEntryFindById2(id)->priority;

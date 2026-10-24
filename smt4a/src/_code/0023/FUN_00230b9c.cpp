@@ -1,74 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00230b9c` (_code @ 0x230b9c, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail compares the original mode in r0 against a separate copy in r4 and shares the image-key tests differently; built merges the compares */
+#include "shard/W6_W6Match8_AnimatedSprite.h"
+
+struct StatusDown {
+    u8 unk00[0x28];             // 0x00
+    SpritePlaybackView sprite;  // 0x28
+};
 
 extern "C" {
 
-int uiSpriteSetKeyframe(int, int, int);
-int uiSpriteSetImageKeyframe(int, int, int);
+extern StatusDown *g_statusDown;
 
-typedef struct fn_00230b9c_arg0 fn_00230b9c_arg0;
-struct fn_00230b9c_arg0 {
-    unsigned char pad_0x0[0xc];
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x38];
-    undefined4 field_0x4c; /* +0x4c */
-    undefined2 field_0x50; /* +0x50 */
-    undefined2 field_0x52; /* +0x52 */
-    undefined1 field_0x54; /* +0x54 */
-    unsigned char pad_0x55[0x31];
-    undefined1 field_0x86; /* +0x86 */
-    unsigned char pad_0x87[0x3];
-    undefined1 field_0x8a; /* +0x8a */
-};
+void uiSpriteSetKeyframe(SpritePlaybackView *sprite, s16 key, s8 mode);
+void uiSpriteSetImageKeyframe(SpritePlaybackView *sprite, s16 key, s8 mode);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern int g_statusDown; /* 0x588fe8 */
-
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-
-
-void FUN_00230b9c(fn_00230b9c_arg0 *param_1,short param_2)
-
+/* Selects the status-down sprite's animation key for the mode (0..3 -> 6..9) and its image key (8 for modes 0/1, 9 for 2/3). */
+void FUN_00230b9c(s32 mode, s32 imageKey)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  short temp_v1;
-  
-  temp_v0 = g_statusDown;
-  temp_v1 = (short)(int)param_1;
-  if (param_1 == (fn_00230b9c_arg0 *)0x0) {
-    temp_v1 = 6;
-  }
-  else {
-    if (param_1 == (fn_00230b9c_arg0 *)0x1) {
-      temp_v1 = 7;
+    StatusDown *status = g_statusDown;
+    s32 key = mode;
+
+    if (mode == 0) {
+        key = 6;
+    } else if (mode == 1) {
+        key = 7;
+    } else if (mode == 2) {
+        key = 8;
+    } else if (mode == 3) {
+        key = 9;
     }
-    else if (param_1 == (fn_00230b9c_arg0 *)0x2) {
-      temp_v1 = 8;
+    if (mode == 0 || mode == 1) {
+        imageKey = 8;
+    } else if (mode == 2 || mode == 3) {
+        imageKey = 9;
     }
-    else if (param_1 == (fn_00230b9c_arg0 *)0x3) {
-      temp_v1 = 9;
-    }
-    if (param_1 != (fn_00230b9c_arg0 *)0x1) {
-      if (param_1 == (fn_00230b9c_arg0 *)0x2 || param_1 == (fn_00230b9c_arg0 *)0x3) {
-        param_2 = 9;
-      }
-      uiSpriteSetImageKeyframe(g_statusDown + 0x28,(int)param_2,0);
-      uiSpriteSetKeyframe(temp_v0 + 0x28,(int)temp_v1,0);
-      return;
-    }
-  }
-  param_2 = 8;
-  uiSpriteSetImageKeyframe(g_statusDown + 0x28,(int)param_2,0);
-  uiSpriteSetKeyframe(temp_v0 + 0x28,(int)temp_v1,0);
-  return;
+    uiSpriteSetImageKeyframe(&status->sprite, imageKey, 0);
+    uiSpriteSetKeyframe(&status->sprite, key, 0);
 }
 
 } /* extern "C" */

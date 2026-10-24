@@ -1,33 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00511a74` (_code @ 0x511a74, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same calls, constants and nops; retail walks the second critical section and the three state words with explicit adds and stores, while armcc folds them into writeback and immediate offsets. */
+#include "common.h"
 
 extern "C" {
 
-int nn_os_CriticalSection_Initialize(...);
+struct CriticalSectionPair {
+    u32 first[3];
+    u32 second[3];
+};
 
-extern unsigned char LAB_0042ce3c; /* 0x42ce3c */
-extern unsigned int DAT_005c0ab0; /* 0x5c0ab0 */
-extern unsigned int g_nngxGpu; /* 0x5c0ab4 */
-extern unsigned int DAT_005c0ab8; /* 0x5c0ab8 */
-extern unsigned int g_nngxCriticalSection; /* 0x643080 */
-extern unsigned int DAT_0064308c; /* 0x64308c */
+extern u32 g_nngxCriticalSection[3];
+extern u8 entry;
+extern const u32 DAT_0053f51c[];
+extern u32 DAT_005c0ab0[3];
+void nn_os_CriticalSection_Initialize(u32 *section);
+void FUN_0042ce3c(void *object);
+__weak s32 __aeabi_atexit(void *object, void (*destructor)(void *), void *module);
 
-/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-
-
+/* Initializes the two GPU critical sections (registering their destructors) and the three GPU state words. */
 void FUN_00511a74(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  g_nngxCriticalSection = 0;
-  nn_os_CriticalSection_Initialize(&g_nngxCriticalSection);
-  DAT_0064308c = 0;
-  nn_os_CriticalSection_Initialize(&DAT_0064308c,&LAB_0042ce3c,0x100000);
-  DAT_005c0ab0 = 0;
-  g_nngxGpu = 0;
-  DAT_005c0ab8 = 0;
-  return;
+    u32 *section = g_nngxCriticalSection;
+
+    section[0] = 0;
+    nn_os_CriticalSection_Initialize(section);
+    __aeabi_atexit(section, FUN_0042ce3c, &entry);
+    section += 3;
+    section[0] = 0;
+    nn_os_CriticalSection_Initialize(section);
+    __aeabi_atexit(section, FUN_0042ce3c, &entry);
+    u32 *state = DAT_005c0ab0;
+    *state++ = DAT_0053f51c[1];
+    *state++ = DAT_0053f51c[1];
+    *state++ = DAT_0053f51c[1];
 }
 
 } /* extern "C" */

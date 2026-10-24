@@ -1,63 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00153e58` (_code @ 0x153e58, 0xd0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: identical code; the literal pool order differs (retail pools 0xf02c0 before the command cursor's address, this build the reverse). */
+#include "common.h"
+#include "nw/math/MTX34.h"
+
+using nw::math::MTX34;
+
+/* The model (the part this reads): its view matrix. */
+struct ModelView {
+    /* 0x000 */ u8 unk000[0x1BC];
+    /* 0x1BC */ MTX34 viewMatrix;
+};
+
+struct ModelMatrixUploader {
+    /* 0x00 */ u8 unk00[0x1c];
+    /* 0x1C */ ModelView *model;
+};
 
 extern "C" {
+extern u32 *g_commandBufferCursor;
+void FUN_002a1828(u32 *out, const void *matrix, u32 header);
 
-int FUN_002a1828(...);
-
-extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
-extern unsigned int DAT_00476634; /* 0x476634 */
-extern unsigned int DAT_004efd6c; /* 0x4efd6c */
-extern unsigned int DAT_004efd70; /* 0x4efd70 */
-extern unsigned int DAT_004efd74; /* 0x4efd74 */
-extern unsigned int DAT_004efd78; /* 0x4efd78 */
-extern unsigned int DAT_004efd7c; /* 0x4efd7c */
-extern unsigned int DAT_004efd80; /* 0x4efd80 */
-extern unsigned int DAT_004efd84; /* 0x4efd84 */
-extern unsigned int DAT_004efd88; /* 0x4efd88 */
-extern unsigned int DAT_004efd8c; /* 0x4efd8c */
-extern unsigned int DAT_004efd90; /* 0x4efd90 */
-extern unsigned int DAT_004efd94; /* 0x4efd94 */
-extern unsigned int DAT_004efd98; /* 0x4efd98 */
-
-/* Supplied declaration required: FUN_002a1828. */
-extern int __cxa_guard_acquire(unsigned int *);
-
-
-void FUN_00153e58(int param_1,int param_2)
-
+// Emit a matrix upload command (register index, 12 floats) and advance the command buffer.
+static inline void modelEmitMatrix(u32 index, const MTX34 *matrix)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  if (((DAT_00476634 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476634), temp_v0 != 0)) {
-    DAT_004efd6c = 0x3f800000;
-    DAT_004efd70 = 0;
-    DAT_004efd74 = 0;
-    DAT_004efd78 = 0;
-    DAT_004efd7c = 0;
-    DAT_004efd80 = 0x3f800000;
-    DAT_004efd84 = 0;
-    DAT_004efd88 = 0;
-    DAT_004efd8c = 0;
-    DAT_004efd90 = 0;
-    DAT_004efd94 = 0x3f800000;
-    DAT_004efd98 = 0;
-  }
-  puVar1 = g_commandBufferCursor;
-  *g_commandBufferCursor = 0x80000000;
-  puVar1[1] = 0xf02c0;
-  FUN_002a1828(puVar1 + 2,&DAT_004efd6c,0xbf02c1);
-  puVar1 = g_commandBufferCursor;
-  g_commandBufferCursor = g_commandBufferCursor + 0x10;
-  *g_commandBufferCursor = 0x80000003;
-  puVar1[0x11] = 0xf02c0;
-  FUN_002a1828(puVar1 + 0x12,param_2 + 0x1bc,0xbf02c1);
-  g_commandBufferCursor = g_commandBufferCursor + 0x10;
-  *(int *)(param_1 + 0x1c) = param_2;
-  return;
+    u32 *cursor = g_commandBufferCursor;
+    cursor[0] = 0x80000000 | index;
+    cursor[1] = 0xf02c0;
+    FUN_002a1828(cursor + 2, matrix, 0xbf02c1);
+    g_commandBufferCursor += 16;
 }
 
-} /* extern "C" */
+// Upload the identity as the world matrix and the model's view matrix.
+void FUN_00153e58(ModelMatrixUploader *uploader, ModelView *model)
+{
+    modelEmitMatrix(0, &MTX34::Identity());
+    modelEmitMatrix(3, &model->viewMatrix);
+    uploader->model = model;
+}
+}

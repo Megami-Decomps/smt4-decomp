@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned char *FUN_002e7908(unsigned char *, unsigned int *);
+extern unsigned char *_ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea41e. */
@@ -38,7 +38,7 @@ void FUN_00116a5c(int param_1)
   }
   else {
     temp_v3[0] = 0x80010004;
-    puVar2 = (unsigned char *)FUN_002e7908(temp_v2,temp_v3);
+    puVar2 = (unsigned char *)_ZN12OnlineResultC1ERKj(temp_v2,temp_v3);
   }
   FUN_00302f30(param_1,puVar2);
   return;

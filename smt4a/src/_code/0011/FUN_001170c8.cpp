@@ -46,7 +46,7 @@ typedef struct {
 extern int *FUN_001214c4(int, unsigned char *, unsigned int);
 extern int FUN_001242f8(int *);
 extern unsigned long long FUN_00124458(unsigned char *, unsigned char *);
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: strInit. */
 /* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ec934. */
@@ -122,7 +122,7 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
     streamWriteWordCopy(temp_v24,puVar3);
   }
   else {
-    temp_v0 = operatorNew(0x58);
+    temp_v0 = _Znwj(0x58);
     if (temp_v0 != 0) {
       piVar2 = (int *)FUN_001214c4(temp_v0,temp_v18,*(unsigned int *)(param_3 + 0x1c));
     }

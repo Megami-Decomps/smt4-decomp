@@ -8,7 +8,7 @@ int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefRelease(int *);
 int onlineCallStateIsDone(int);
-int vectorCopyHeader(...);
+int _ZN18OnlineResultRecordaSERKS_(...);
 int _ZN9Obj55859c12freeResourceEv(int *);
 
 typedef int romwright_code(...);
@@ -26,9 +26,9 @@ extern int onlineContextGetInstance(void);
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 /* Supplied declaration required: onlineCallStateIsDone. */
-/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: _ZN9Obj55859c12freeResourceEv. */
 extern int wordRefsDiffer_002e9b20(int **, int *);
 
@@ -63,8 +63,8 @@ void FUN_002e9b30(int *param_1,int param_2,unsigned int *param_3,int param_4)
   temp_v2 = param_1 + 0xe;
   if ((param_2 != 1) && (param_2 == 0)) {
     temp_v8 = 0x80010001;
-    temp_v1 = FUN_002e7908(temp_v7,(unsigned int *)&temp_v8);
-    vectorCopyHeader(temp_v2,temp_v1);
+    temp_v1 = _ZN12OnlineResultC1ERKj(temp_v7,(unsigned int *)&temp_v8);
+    _ZN18OnlineResultRecordaSERKS_(temp_v2,temp_v1);
   }
   if (((char)param_1[4] == '\x01') && (param_1[0x11] != 0)) {
     _ZN9Obj55859c12freeResourceEv(param_1);
@@ -75,7 +75,7 @@ void FUN_002e9b30(int *param_1,int param_2,unsigned int *param_3,int param_4)
   (**(romwright_code **)(*param_1 + 0xc))(param_1,param_2,&temp_v3,param_4);
   *(char *)(param_1 + 4) = (char)param_2;
   if (param_4 != 0) {
-    vectorCopyHeader(temp_v2,temp_v9);
+    _ZN18OnlineResultRecordaSERKS_(temp_v2,temp_v9);
   }
   _ZN9Obj55b28cD1Ev(temp_v6);
   temp_v0 = onlineCallStateIsDone(param_2);

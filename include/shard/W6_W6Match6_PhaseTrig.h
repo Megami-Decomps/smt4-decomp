@@ -32,4 +32,17 @@ static __inline PhaseSinCos samplePhase(const PhaseTrigEntry *table, f32 angle)
         result.sine = -result.sine;
     return result;
 }
+
+/* Wraps a non-negative phase into [0, 65536). */
+static __inline f32 wrapPhase(f32 magnitude)
+{
+    union { f32 value; s32 bits; } representation;
+    representation.value = magnitude;
+    while (representation.bits >= 0x47800000) {
+        magnitude -= 65536.0f;
+        representation.value = magnitude;
+    }
+    return magnitude;
+}
+
 #endif

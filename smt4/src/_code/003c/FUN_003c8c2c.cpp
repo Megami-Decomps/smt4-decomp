@@ -5,7 +5,7 @@
 
 extern "C" {
 u32 dataTable05Sub4GetCount(void);
-FusionRecipe *FUN_0029f7d4(u16 index);
+FusionRecipe *dataTable54FindById(u16 index);
 void *dataTable05FindByPriorityAndKey(u8 firstRace, u8 secondRace);
 FusionRaceRule *dataTable5Sub3Lookup(u8 race, u16 id);
 void *dataFindSymmetricPair(u8 firstRace, u8 secondRace);
@@ -18,7 +18,7 @@ u8 FUN_003c8c2c(void *owner, u16 firstId, u16 secondId)
     if (first->id == second->id)
         return 0;
     for (u16 index = 0; index < dataTable05Sub4GetCount(); ++index) {
-        const FusionRecipe *recipe = FUN_0029f7d4(index);
+        const FusionRecipe *recipe = dataTable54FindById(index);
         if (recipe) {
             s32 ingredients = 0;
             for (s32 slot = 0; slot < 12; ++slot) {

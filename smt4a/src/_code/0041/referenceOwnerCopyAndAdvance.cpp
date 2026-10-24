@@ -17,19 +17,19 @@ struct ReferenceStateOwner {
 };
 
 extern "C" {
-void vectorCopyHeader(ReferenceTriple *destination, const ReferenceTriple *source);
-s32 refIsNonNegative(s32 *value);
-void FUN_004130c0(ReferenceStateOwner *owner, s32 state);
+void _ZN18OnlineResultRecordaSERKS_(ReferenceTriple *destination, const ReferenceTriple *source);
+s32 _ZNK18OnlineResultRecord7isValidEv(s32 *value);
+void _ZN9Obj557c908setStateEj(ReferenceStateOwner *owner, s32 state);
 
 // Copy the supplied reference and mark invalid handles or advance to state three.
 void referenceOwnerCopyAndAdvance(ReferenceStateOwner *owner, const ReferenceSource *source)
 {
     ReferenceTriple reference = source->reference;
-    vectorCopyHeader(&owner->reference, &reference);
-    if (refIsNonNegative(&owner->reference.index) == 0) {
+    _ZN18OnlineResultRecordaSERKS_(&owner->reference, &reference);
+    if (_ZNK18OnlineResultRecord7isValidEv(&owner->reference.index) == 0) {
         owner->invalid = 1;
     } else {
-        FUN_004130c0(owner, 3);
+        _ZN9Obj557c908setStateEj(owner, 3);
     }
 }
 }

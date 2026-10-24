@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match3_ThreadHandleState.h"
 
 extern "C" {
-s32 FUN_002e3138(u32 handle, s64 timeout);
+s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 s32 svcCloseHandle(u32 handle);
 void FUN_002e3140(s32 result);
 s32 FUN_00426204(void);
@@ -18,7 +18,7 @@ u32 asyncOperationStartOrPoll(ThreadHandleState *operation, s32 *result, u32 *de
     *result = 0;
     *detail = 0;
     if (operation->unk04) {
-        s32 waitResult = FUN_002e3138(operation->handle, 30000000);
+        s32 waitResult = svcWaitSynchronization1(operation->handle, 30000000);
         if (waitResult < 0) {
             FUN_002e3140(waitResult);
         }

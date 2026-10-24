@@ -1,46 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00197eb0` (_code @ 0x197eb0, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: std::remove inlines std::remove_copy here; retail calls the out-of-line remove_copy instantiation (_ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_) */
+#include <algorithm>
+#include <vector>
+#include "common.h"
 
-extern "C" {
+struct TreeNode {
+    u8 unk00[0xC];   // 0x00
+    u32 link;        // 0x0C
+};
 
-int FUN_00198bc8(int *, int *, int *, int *, int);
+struct NodeList {
+    u8 unk00[8];                    // 0x00
+    std::vector<TreeNode *> nodes;  // 0x08
+};
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00198bc8. */
-
-
-unsigned char FUN_00197eb0(int param_1,int param_2)
-
+/* Removes the node from the list; a removed node is unlinked. Returns whether anything was removed. */
+extern "C" bool FUN_00197eb0(NodeList *list, TreeNode *node)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  int *piVar2;
-  int *piVar3;
-  unsigned char temp_v0;
-  int temp_v1;
-  
-  piVar3 = *(int **)(param_1 + 0xc);
-  for (piVar1 = *(int **)(param_1 + 8); (piVar1 != piVar3 && (*piVar1 != param_2));
-      piVar1 = piVar1 + 1) {
-  }
-  piVar2 = piVar1;
-  temp_v1 = param_2;
-  if (piVar1 != piVar3) {
-    piVar2 = piVar1 + 1;
-    FUN_00198bc8(piVar2,piVar3,piVar1,&temp_v1,param_1);
-  }
-  piVar1 = *(int **)(param_1 + 0xc);
-  *(int **)(param_1 + 0xc) = piVar2;
-  temp_v0 = piVar1 != piVar2;
-  if (temp_v0) {
-    *(unsigned int *)(temp_v1 + 0xc) = 0;
-  }
-  return temp_v0;
-}
+    std::vector<TreeNode *>::iterator newEnd = std::remove(list->nodes.begin(), list->nodes.end(), node);
+    std::vector<TreeNode *>::iterator oldEnd = list->nodes.end();
 
-} /* extern "C" */
+    list->nodes.erase(newEnd, oldEnd);
+    bool removed = oldEnd != newEnd;
+    if (removed) {
+        node->link = 0;
+    }
+    return removed;
+}

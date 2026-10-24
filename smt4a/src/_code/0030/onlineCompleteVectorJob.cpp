@@ -28,8 +28,8 @@ struct OnlineVectorCompletionJob {
 extern "C" {
 OnlineInstanceTable *onlineInstanceTableGetCurrent(void);
 OnlineInstance *onlineInstanceTableFind(OnlineInstanceTable *table, u32 id);
-s32 refIsNonNegative(s32 *status);
-OnlineValueVector *FUN_001343c8(OnlineValueVector *destination, const OnlineValueVector *source);
+s32 _ZNK18OnlineResultRecord7isValidEv(s32 *status);
+OnlineValueVector *_ZNSt6vectorI6Elem1212AsdAllocatorIS0_EEaSERKS3_(OnlineValueVector *destination, const OnlineValueVector *source);
 void FUN_002f3dc4(OnlineInstance *instance, const OnlineCallbackResult *result);
 void FUN_002f3dde(OnlineInstance *instance, const OnlineCallbackResult *result);
 u32 FUN_002e9f00(OnlineRequestPrefix *request, u32 error);
@@ -41,9 +41,9 @@ void onlineCompleteVectorJob(OnlineVectorCompletionJob *job, OnlineCallbackResul
     OnlineInstance *instance = onlineInstanceTableFind(
         onlineInstanceTableGetCurrent(), job->instanceId);
     if (instance != NULL) {
-        if (refIsNonNegative(&result->status)) {
+        if (_ZNK18OnlineResultRecord7isValidEv(&result->status)) {
             if (job->output != NULL)
-                FUN_001343c8(job->output, &job->values);
+                _ZNSt6vectorI6Elem1212AsdAllocatorIS0_EEaSERKS3_(job->output, &job->values);
             OnlineCallbackResult copy = *result;
             FUN_002f3dc4(instance, &copy);
         } else {

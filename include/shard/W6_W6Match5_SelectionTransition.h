@@ -20,13 +20,10 @@ struct SelectionTransition {
         /* 0x00C */ s32 timer;
     };
     TransitionResource *resource; // 0x208
-    union {
-        u8 unk20c[0x18];
-        struct {
-            u8 unk20C[4];
-            RequestParameters result; // 0x210
-        } query;
-    };
+    struct {
+        u8 unk20C[4];
+        RequestParameters result; // 0x210
+    } query;
     RequestParameters parameters; // 0x224
 };
 typedef char SelectionTransitionResultOffsetCheck[

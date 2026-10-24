@@ -145,7 +145,13 @@ typedef struct GameState {
     /* 0x145 */ u8 scriptPending;
     /* 0x146 */ u8 unk146[2];
     /* 0x148 */ u32 scriptId;
-    /* 0x14C */ char scriptName[0x48];
+    /* 0x14C */ char scriptName[0x30];
+    /* 0x17C */ u8 encounterSourceActive;
+    /* 0x17D */ u8 unk17D[3];
+    /* 0x180 */ MapVector encounterSourcePosition;
+    /* 0x18C */ f32 encounterSourceHeading;
+    /* 0x190 */ u8 unk190[2];
+    /* 0x192 */ u16 encounterSourceKind;
     /* 0x194 */ s16 encounterDelay;
     /* 0x196 */ s16 encounterEnemyIndex;
     /* 0x198 */ u8 encounterForced;
@@ -154,7 +160,9 @@ typedef struct GameState {
     /* 0x19B */ u8 encounterHasMarker;
     /* 0x19C */ s16 encounterMarkerX;
     /* 0x19E */ s16 encounterMarkerY;
-    /* 0x1A0 */ u8 unk1A0[0x18];
+    /* 0x1A0 */ u8 unk1A0[8];
+    /* 0x1A8 */ MapVector encounterMarkerPosition;
+    /* 0x1B4 */ f32 encounterMarkerHeading;
     /* 0x1B8 */ s32 encounterCount;
     /* 0x1BC */ u32 encounterValue;
     union {
@@ -217,6 +225,9 @@ typedef struct GameState {
 } GameState;
 typedef char GameStateCampCleanupOffsetCheck[
     offsetof(GameState, campCleanup.retainCampResources) == 0x34 &&
+    offsetof(GameState, encounterSourcePosition) == 0x180 &&
+    offsetof(GameState, encounterMarkerPosition) == 0x1A8 &&
+    offsetof(GameState, encounterCount) == 0x1B8 &&
     sizeof(GameState) == 0x678 ? 1 : -1];
 
 /* The global game state block (Apocalypse). Only the fields read so far are named. */
@@ -289,6 +300,34 @@ struct GameStateA {
             /* 0x290 */ u8 requestOption;
         } request;
         struct {
+            /* 0x034 */ u8 unk034BeforeStage[0x1E4];
+            /* 0x218 */ s32 stage;          /* scene model set currently shown */
+            /* 0x21C */ s32 stageGroup;
+            /* 0x220 */ u8 unk220[0x78];
+            struct {
+                /* 0x298 */ void *source;
+                /* 0x29C */ u32 argument;
+            } stageModels[4];               /* model sources, one per stage */
+            /* 0x2B8 */ u8 unk2B8[0x134];
+            /* 0x3EC */ s32 stageOverride;  /* -1: derive the stage from the data table */
+            /* 0x3F0 */ s32 groupOverride;  /* -1: derive the group from the data table */
+        } sceneModels;
+        struct {
+            /* 0x034 */ u8 unk034[0xC];
+            /* 0x040 */ s32 groupA;
+            /* 0x044 */ s32 groupB;
+        } mapGroups;
+        struct {
+            /* 0x034 */ u8 unk034[0x22D];
+            /* 0x261 */ u8 flag261;
+            /* 0x262 */ u8 flag262;
+            /* 0x263 */ u8 flag263;
+            /* 0x264 */ u32 value264;
+            /* 0x268 */ u32 value268;
+            /* 0x26C */ u8 unk26C[0x14];
+            /* 0x280 */ u8 flag280;
+        } clearFlags;
+        struct {
             /* 0x034 */ u8 unk034BeforeClear[0x28];
             /* 0x05C */ u32 unk5C;
         } clear;
@@ -333,6 +372,8 @@ struct GameStateA {
             /* 0x460 */ u8 alternateNaviMap;
             /* 0x461 */ u8 unk461;
             /* 0x462 */ u8 naviMapPending;
+            /* 0x463 */ u8 unk463;
+            /* 0x464 */ u8 naviRefresh;
         } navigation;
         struct {
             /* 0x034 */ u8 unk034BeforePositionRequest[0x431];

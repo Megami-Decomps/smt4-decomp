@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0018aeb8(...);
+int _ZN2nw4math5MTX448IdentityEv(...);
 int mtx44Copy(...);
 int FUN_0019a0fc(...);
 int FUN_001a1c28(...);
@@ -63,7 +63,7 @@ extern int DAT_005702f0; /* 0x5702f0 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 extern int FUN_00184964(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018aeb8. */
+/* Supplied declaration required: _ZN2nw4math5MTX448IdentityEv. */
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
 /* Supplied declaration required: FUN_001a1c28. */
@@ -244,7 +244,7 @@ void FUN_00260158(float *param_1)
         temp_v4 = temp_v4 + 0x168;
       }
       unaff_r6 = 0x168 - temp_v4;
-      temp_v5 = FUN_0018aeb8();
+      temp_v5 = _ZN2nw4math5MTX448IdentityEv();
       mtx44Copy(&uStack_e8,temp_v5);
       temp_v16 = (float *)romwright_f2u((float)((*(float *)((int)temp_v3 + 0x36c) + temp_v11)));
       VectorSignedToFloat(unaff_r6,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -289,7 +289,7 @@ void FUN_00260158(float *param_1)
           }
           temp_v4 = temp_v4 + 0x168;
         }
-        temp_v5 = FUN_0018aeb8(temp_v4);
+        temp_v5 = _ZN2nw4math5MTX448IdentityEv(temp_v4);
         mtx44Copy(temp_v27,temp_v5);
         VectorSignedToFloat(0x168 - temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v23 = temp_v20;
@@ -347,7 +347,7 @@ void FUN_00260158(float *param_1)
           }
           temp_v4 = temp_v4 + 0x168;
         }
-        temp_v5 = FUN_0018aeb8(temp_v4);
+        temp_v5 = _ZN2nw4math5MTX448IdentityEv(temp_v4);
         mtx44Copy(&temp_v25,temp_v5);
         temp_v21 = *(float *)((int)temp_v9 + 0x36c) + temp_v3;
         VectorSignedToFloat(0x168 - temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);

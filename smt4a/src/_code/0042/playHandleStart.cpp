@@ -10,12 +10,12 @@ typedef struct PlayHandle {
     /* 0x25 */ u8 unk25;
 } PlayHandle;
 
-extern void FUN_0016cbf8(u32 handle);
+extern void sndVoiceStart(u32 handle);
 
 void playHandleStart(PlayHandle *obj)
 {
     if (obj->handle != -1 && obj->started == 0) {
-        FUN_0016cbf8(obj->handle);
+        sndVoiceStart(obj->handle);
         obj->started = 1;
         obj->unk25 = 0;
     }

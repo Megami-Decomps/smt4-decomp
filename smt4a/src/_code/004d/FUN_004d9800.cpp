@@ -8,7 +8,7 @@ int FUN_00103f54(unsigned int, unsigned int *, int, int);
 int holderSetFlagBits(unsigned int, int);
 int FUN_001229f4(unsigned char [12], unsigned int, unsigned int, unsigned int);
 int wordRefEqual(unsigned char [12], int *);
-int operatorNew(int);
+int _Znwj(int);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -28,7 +28,7 @@ extern unsigned char DAT_0055cae4; /* 0x55cae4 */
 /* Supplied declaration required: holderSetFlagBits. */
 /* Supplied declaration required: FUN_001229f4. */
 /* Supplied declaration required: wordRefEqual. */
-/* Supplied declaration required: operatorNew. */
+/* Supplied declaration required: _Znwj. */
 extern unsigned int FUN_002fafd8(int, unsigned int);
 
 
@@ -48,7 +48,7 @@ void FUN_004d9800(int param_1)
   int temp_v8;
   int temp_v9;
   
-  temp_v0 = operatorNew(0x78);
+  temp_v0 = _Znwj(0x78);
   if (temp_v0 == 0) {
     temp_v1 = 0;
   }
@@ -56,7 +56,7 @@ void FUN_004d9800(int param_1)
     temp_v1 = FUN_002fafd8(temp_v0,0);
   }
   *(unsigned int *)(param_1 + 0x28) = temp_v1;
-  puVar2 = (unsigned int *)operatorNew(0x14);
+  puVar2 = (unsigned int *)_Znwj(0x14);
   if (puVar2 != (unsigned int *)0x0) {
     puVar2[1] = param_1;
     puVar2[2] = (unsigned int)FUN_004d9720;

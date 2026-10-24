@@ -21,8 +21,8 @@ extern unsigned char DAT_0055b884; /* 0x55b884 */
 extern unsigned char DAT_0055b98c; /* 0x55b98c */
 extern unsigned char DAT_0055c4f0; /* 0x55c4f0 */
 extern unsigned char DAT_0055c524; /* 0x55c524 */
-extern unsigned int DAT_005c4c2c; /* 0x5c4c2c */
-extern unsigned int DAT_0064c054; /* 0x64c054 */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x5c4c2c */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x64c054 */
 extern unsigned int DAT_0064c058; /* 0x64c058 */
 extern unsigned int DAT_0064c05c; /* 0x64c05c */
 extern unsigned int DAT_0064c060; /* 0x64c060 */
@@ -302,21 +302,21 @@ unsigned int * FUN_001b8108(int *param_1,int *param_2)
     for (temp_v1 = (int)(puVar1[0x1a] - puVar1[0x19]) >> 6; temp_v1 < (int)temp_v8; temp_v1 = temp_v1 + 1) {
       temp_v0 = puVar1[0x19] + temp_v1 * 0x40;
       if (temp_v0 != 0) {
-        if (((DAT_005c4c2c & 1) == 0) && (temp_v5 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v5 != 0)) {
-          DAT_0064c054 = (unsigned int)((unsigned long long)temp_v10 >> 0x20);
+        if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v5 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v5 != 0)) {
+          _ZZN2nw4math5MTX348IdentityEvE8identity = (unsigned int)((unsigned long long)temp_v10 >> 0x20);
           DAT_0064c058 = (unsigned int)temp_v10;
           DAT_0064c05c = DAT_0064c058;
           DAT_0064c060 = DAT_0064c058;
           DAT_0064c064 = DAT_0064c058;
-          DAT_0064c068 = DAT_0064c054;
+          DAT_0064c068 = _ZZN2nw4math5MTX348IdentityEvE8identity;
           DAT_0064c06c = DAT_0064c058;
           DAT_0064c070 = DAT_0064c058;
           DAT_0064c074 = DAT_0064c058;
           DAT_0064c078 = DAT_0064c058;
-          DAT_0064c07c = DAT_0064c054;
+          DAT_0064c07c = _ZZN2nw4math5MTX348IdentityEvE8identity;
           DAT_0064c080 = DAT_0064c058;
         }
-        nn_math_ARMv6_MTX34CopyAsm(temp_v0,&DAT_0064c054);
+        nn_math_ARMv6_MTX34CopyAsm(temp_v0,&_ZZN2nw4math5MTX348IdentityEvE8identity);
         temp_v4 = (unsigned int)((unsigned long long)temp_v10 >> 0x20);
         *(unsigned int *)(temp_v0 + 0x30) = temp_v4;
         *(unsigned int *)(temp_v0 + 0x34) = temp_v4;

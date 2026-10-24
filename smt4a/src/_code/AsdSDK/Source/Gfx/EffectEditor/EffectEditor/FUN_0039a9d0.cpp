@@ -12,7 +12,7 @@ int FUN_001b4ddc(...);
 int FUN_00200bcc(unsigned int *);
 int FUN_00202178(int);
 int effEditorNodeChainApply(unsigned int *);
-int FUN_0020ea14(void);
+int effBlockCreate(void);
 int effBlockLoadClone(...);
 int FUN_00243c24(void);
 int effBlockCopyDataB(unsigned int, unsigned int [2], int);
@@ -76,7 +76,7 @@ extern unsigned int uRam00634d68; /* 0x634d68 */
 /* Supplied declaration required: FUN_00200bcc. */
 /* Supplied declaration required: FUN_00202178. */
 /* Supplied declaration required: effEditorNodeChainApply. */
-/* Supplied declaration required: FUN_0020ea14. */
+/* Supplied declaration required: effBlockCreate. */
 /* Supplied declaration required: effBlockLoadClone. */
 /* Supplied declaration required: FUN_00243c24. */
 /* Supplied declaration required: effBlockCopyDataB. */
@@ -189,7 +189,7 @@ LAB_0039ab4c:
     }
     else {
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v6 + 4);
-      FUN_0020ea14();
+      effBlockCreate();
       if (*(int *)(temp_v6 + 0xc) != 0) {
         effPartSetData();
       }

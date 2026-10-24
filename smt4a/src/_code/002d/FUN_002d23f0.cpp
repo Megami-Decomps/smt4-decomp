@@ -1,120 +1,104 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d23f0` (_code @ 0x2d23f0, 0x24c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the constant 1: retail materialises it in r2 in every switch case (`mov r2, #1; ldr r0, =flag; mov r1, r2`) and again for the bit shift, ours uses `mov r1, #1` and keeps the shift constant in r1; the jump table, shared call and flag words agree */
+#include "common.h"
 
 extern "C" {
 
-int gameFlagSetValue(...);
+typedef struct FlagBlock {
+    /* 0x000 */ u8 unk000[0x808];
+    /* 0x808 */ u32 words[1]; /* one bit per flag */
+} FlagBlock;
 
-extern int gameFlagsGetBlock(void);
-extern int dataTable23Sub0GetEntry(int);
-/* Supplied declaration required: gameFlagSetValue. */
+typedef struct Table23Entry {
+    /* 0x00 */ u8 unk00[0x1F];
+    /* 0x1F */ s8 category; /* 100 and up: entries that also raise a game flag */
+} Table23Entry;
 
+FlagBlock *gameFlagsGetBlock(void);
+Table23Entry *dataTable23Sub0GetEntry(s32 index);
+void gameFlagSetValue(s32 flag, s32 value);
 
-void FUN_002d23f0(int param_1)
-
+/* Marks data table 0x23 entry `index` as seen and raises the game flag its category stands for. */
+void FUN_002d23f0(s32 index)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = gameFlagsGetBlock();
-  temp_v1 = dataTable23Sub0GetEntry(param_1);
-  if ((temp_v1 == 0) || (*(char *)(temp_v1 + 0x1f) < 100)) {
-    if (-1 < param_1) {
-      temp_v0 = temp_v0 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4;
-      *(unsigned int *)(temp_v0 + 0x808) = (1 << ((param_1 % 0x20) & 0xffU)) | *(unsigned int *)(temp_v0 + 0x808);
+    FlagBlock *block = gameFlagsGetBlock();
+    Table23Entry *entry = dataTable23Sub0GetEntry(index);
+
+    if (entry != NULL && entry->category >= 100) {
+        switch (entry->category) {
+        case 0x65:
+            gameFlagSetValue(0x493, 1);
+            break;
+        case 0x66:
+            gameFlagSetValue(0x494, 1);
+            break;
+        case 0x67:
+            gameFlagSetValue(0x495, 1);
+            break;
+        case 0x68:
+            gameFlagSetValue(0x496, 1);
+            break;
+        case 0x69:
+            gameFlagSetValue(0x497, 1);
+            break;
+        case 0x6a:
+            gameFlagSetValue(0x498, 1);
+            break;
+        case 0x6b:
+            gameFlagSetValue(0x499, 1);
+            break;
+        case 0x6c:
+            gameFlagSetValue(0x4cd, 1);
+            break;
+        case 0x6d:
+            gameFlagSetValue(0x4ce, 1);
+            break;
+        case 0x6e:
+            gameFlagSetValue(0x4cf, 1);
+            break;
+        case 0x6f:
+            gameFlagSetValue(0x4dc, 1);
+            break;
+        case 0x70:
+            gameFlagSetValue(0x4dd, 1);
+            break;
+        case 0x71:
+            gameFlagSetValue(0x4de, 1);
+            break;
+        case 0x72:
+            gameFlagSetValue(0x4df, 1);
+            break;
+        case 0x73:
+            gameFlagSetValue(0x4e0, 1);
+            break;
+        case 0x74:
+            gameFlagSetValue(0x4e1, 1);
+            break;
+        case 0x75:
+            gameFlagSetValue(0x4e2, 1);
+            break;
+        case 0x76:
+            gameFlagSetValue(0x4e3, 1);
+            break;
+        case 0x77:
+            gameFlagSetValue(0x4e4, 1);
+            break;
+        case 0x78:
+            gameFlagSetValue(0x4e5, 1);
+            break;
+        case 0x79:
+            gameFlagSetValue(0x4e6, 1);
+            break;
+        case 0x7a:
+            gameFlagSetValue(0x4e7, 1);
+            break;
+        case 0x7b:
+            gameFlagSetValue(0x4e8, 1);
+            break;
+        }
     }
-    return;
-  }
-  switch((int)*(char *)(temp_v1 + 0x1f)) {
-  case 0x65:
-    gameFlagSetValue(0x493,1);
-    if (-1 < param_1) {
-      temp_v0 = temp_v0 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4;
-      *(unsigned int *)(temp_v0 + 0x808) = (1 << ((param_1 % 0x20) & 0xffU)) | *(unsigned int *)(temp_v0 + 0x808);
+    if (index >= 0) {
+        block->words[index / 32] |= 1 << (index % 32);
     }
-    return;
-  case 0x66:
-    temp_v2 = 0x494;
-    break;
-  case 0x67:
-    temp_v2 = 0x495;
-    break;
-  case 0x68:
-    temp_v2 = 0x496;
-    break;
-  case 0x69:
-    temp_v2 = 0x497;
-    break;
-  case 0x6a:
-    temp_v2 = 0x498;
-    break;
-  case 0x6b:
-    temp_v2 = 0x499;
-    break;
-  case 0x6c:
-    temp_v2 = 0x4cd;
-    break;
-  case 0x6d:
-    temp_v2 = 0x4ce;
-    break;
-  case 0x6e:
-    temp_v2 = 0x4cf;
-    break;
-  case 0x6f:
-    temp_v2 = 0x4dc;
-    break;
-  case 0x70:
-    temp_v2 = 0x4dd;
-    break;
-  case 0x71:
-    temp_v2 = 0x4de;
-    break;
-  case 0x72:
-    temp_v2 = 0x4df;
-    break;
-  case 0x73:
-    temp_v2 = 0x4e0;
-    break;
-  case 0x74:
-    temp_v2 = 0x4e1;
-    break;
-  case 0x75:
-    temp_v2 = 0x4e2;
-    break;
-  case 0x76:
-    temp_v2 = 0x4e3;
-    break;
-  case 0x77:
-    temp_v2 = 0x4e4;
-    break;
-  case 0x78:
-    temp_v2 = 0x4e5;
-    break;
-  case 0x79:
-    temp_v2 = 0x4e6;
-    break;
-  case 0x7a:
-    temp_v2 = 0x4e7;
-    break;
-  case 0x7b:
-    temp_v2 = 0x4e8;
-    break;
-  default:
-    if (-1 < param_1) {
-      temp_v0 = temp_v0 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4;
-      *(unsigned int *)(temp_v0 + 0x808) = (1 << ((param_1 % 0x20) & 0xffU)) | *(unsigned int *)(temp_v0 + 0x808);
-    }
-    return;
-  }
-  gameFlagSetValue(temp_v2,1);
-  if (-1 < param_1) {
-    temp_v0 = temp_v0 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4;
-    *(unsigned int *)(temp_v0 + 0x808) = (1 << ((param_1 % 0x20) & 0xffU)) | *(unsigned int *)(temp_v0 + 0x808);
-  }
-  return;
 }
 
-} /* extern "C" */
+}

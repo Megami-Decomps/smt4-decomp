@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_00135648(void);
+void _ZNSt6vectorIPv12AsdAllocatorIS0_EE14_C_insert_aux2IPKS0_EEvPS0_T_S8_(void);
 
-/* Forwards to FUN_00135648. */
+/* Forwards to _ZNSt6vectorIPv12AsdAllocatorIS0_EE14_C_insert_aux2IPKS0_EEvPS0_T_S8_. */
 void FUN_002ff3b0(void)
 {
-    FUN_00135648();
+    _ZNSt6vectorIPv12AsdAllocatorIS0_EE14_C_insert_aux2IPKS0_EEvPS0_T_S8_();
 }
 
 } /* extern "C" */

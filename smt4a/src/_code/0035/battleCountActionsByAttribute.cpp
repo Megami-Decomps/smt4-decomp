@@ -83,7 +83,7 @@ s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attri
             }
             if (actions->candidates[index].kind == 1 && actions->candidates[index].id == 2 &&
                 actions->equipment != NULL) {
-                const EntrySortData *entry = FUN_00192608(actions->equipment->id);
+                const EntrySortData *entry = dataTable08Sub2GetRecord(actions->equipment->id);
                 if (entry != NULL && attribute ==
                     reinterpret_cast<const EquipmentAttributeView *>(entry)->attribute) {
                     ++count;

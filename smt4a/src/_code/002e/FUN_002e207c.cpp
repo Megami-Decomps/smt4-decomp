@@ -1,54 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e207c` (_code @ 0x2e207c, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0034a3b4(void);
-int linkHolderApplyFirst(unsigned int, int);
+/* An effect controller: a scale vector, a clip range and a link holder handle. */
+struct LinkController {
+    /* 0x00 */ f32 scale[3];
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ f32 range;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ f32 step;
+    /* 0x1C */ u32 holder;
+    /* 0x20 */ u32 unk20;
+    /* 0x24 */ u32 pending;
+    /* 0x28 */ u32 unk28;
+};
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+s32 linkHolderCallFirst(u32 holder);
+void linkHolderApplyFirst(u32 holder, s32 arg, f32 x, f32 y);
+void FUN_0034a3b4(void);
 
-/* Supplied declaration required: FUN_0034a3b4. */
-extern int linkHolderCallFirst(unsigned int);
-/* Supplied declaration required: linkHolderApplyFirst. */
-
-
-void FUN_002e207c(unsigned int *param_1)
-
+/* Resets the controller's scale for the holder's kind, cancels a pending link and finishes. */
+void FUN_002e207c(LinkController *controller)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  param_1[6] = 0x3c449ba6;
-  param_1[4] = 0x43af0000;
-  temp_v0 = linkHolderCallFirst(param_1[7]);
-  if (temp_v0 == 0x23) {
-    temp_v1 = 0x3f800000;
-    temp_v2 = 0x40accccd;
-    temp_v3 = 0x3fc00000;
-  }
-  else {
-    temp_v1 = 0x3f99999a;
-    temp_v2 = 0x40a9999a;
-    temp_v3 = 0x3f000000;
-  }
-  *param_1 = temp_v1;
-  param_1[1] = temp_v2;
-  param_1[2] = temp_v3;
-  param_1[10] = 0;
-  if (param_1[9] != 0) {
-    param_1[9] = 0;
-    linkHolderApplyFirst(param_1[7],0);
-  }
-  FUN_0034a3b4();
-  return;
+    controller->step = 0.012f;
+    controller->range = 350.0f;
+    if (linkHolderCallFirst(controller->holder) == 0x23) {
+        controller->scale[0] = 1.0f;
+        controller->scale[1] = 5.4f;
+        controller->scale[2] = 1.5f;
+    } else {
+        controller->scale[0] = 1.2f;
+        controller->scale[1] = 5.3f;
+        controller->scale[2] = 0.5f;
+    }
+    controller->unk28 = 0;
+    if (controller->pending != 0) {
+        controller->pending = 0;
+        linkHolderApplyFirst(controller->holder, 0, 0.0f, 0.0f);
+    }
+    FUN_0034a3b4();
 }
 
 } /* extern "C" */

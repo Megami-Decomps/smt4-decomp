@@ -19,7 +19,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: strAssign. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: FUN_002e7614. */
 /* Supplied declaration required: sharedRefHolderDestroy. */
 extern unsigned int onlineBufferGetData(void);
@@ -52,7 +52,7 @@ unsigned int FUN_001067ae(unsigned int param_1,int param_2)
   temp_v6 = param_2;
   if ((temp_v0 != 0) && (*(int *)(temp_v0 + 0x10) != 0)) {
     if (*(int *)(temp_v0 + 0x18) != 0xc) {
-      temp_v1 = operatorNew(0x20);
+      temp_v1 = _Znwj(0x20);
       temp_v0 = 0;
       if (temp_v1 != 0) {
         temp_v0 = FUN_002e7614(temp_v1,*(int *)(*(int *)(param_2 + 0xd8) + 0x10) + 0xc);
@@ -68,7 +68,7 @@ unsigned int FUN_001067ae(unsigned int param_1,int param_2)
     }
   }
   else {
-    temp_v1 = operatorNew(0x20);
+    temp_v1 = _Znwj(0x20);
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v0 = FUN_002e7614(temp_v1,0xc);

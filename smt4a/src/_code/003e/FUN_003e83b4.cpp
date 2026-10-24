@@ -1,33 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e83b4` (_code @ 0x3e83b4, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the index range check as two signed compares and loads the u64 mask with different ldr/ldm forms per branch */
+#include "shard/BattleFlagMasks.h"
+
+struct BattleEntryState {
+    u8 unk0000[0x1FFC];   // 0x0000
+    u8 *entries;          // 0x1FFC
+};
+
+struct BattleEntry {
+    u64 flags;            // 0x00
+    u8 unk08[0x400];      // 0x08
+};
 
 extern "C" {
 
-extern unsigned int DAT_00573978; /* 0x573978 */
-extern unsigned int DAT_0057397c; /* 0x57397c */
-
-
-unsigned int * FUN_003e83b4(int param_1,int param_2,int param_3)
-
+/* Returns entry `index` when its flags intersect the entry mask (matches != 0) or do not (matches == 0); NULL otherwise or out of range. */
+BattleEntry *FUN_003e83b4(BattleEntryState *state, s32 index, s32 matches)
 {
-  unsigned int *puVar1;
-  
-  if ((-1 < param_2) && (param_2 < 0x6d)) {
-    if (param_3 != 0) {
-      puVar1 = (unsigned int *)(*(int *)(param_1 + 0x1ffc) + param_2 * 0x408);
-      if ((DAT_0057397c & puVar1[1]) != 0 || (DAT_00573978 & *puVar1) != 0) {
-        return puVar1;
-      }
+    if (index >= 0 && index < 109) {
+        BattleEntry *entry = (BattleEntry *)state->entries + index;
+
+        if (matches != 0) {
+            if ((g_btlMain.entryMask & entry->flags) != 0) {
+                return entry;
+            }
+        } else if ((entry->flags & g_btlMain.entryMask) == 0) {
+            return entry;
+        }
     }
-    else {
-      puVar1 = (unsigned int *)(*(int *)(param_1 + 0x1ffc) + param_2 * 0x408);
-      if ((puVar1[1] & DAT_0057397c) == 0 && (DAT_00573978 & *puVar1) == 0) {
-        return puVar1;
-      }
-    }
-  }
-  return (unsigned int *)0x0;
+    return NULL;
 }
 
 } /* extern "C" */

@@ -1,46 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00426e18` (_code @ 0x426e18, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail saves the four arguments in r5-r8 in order and tests the sign with 'lsrs r1, r0, #31' keeping the status in r0; the build copies the status to r1 first and numbers the saved registers differently. */
+#include "classes/WindowStatus.h"
+#include "nn/Result.h"
+
+extern "C" {
+s32 FUN_004283cc(u32 handle);
+u32 FUN_00426acc(u32 handle, u32 second, u32 third, u32 fourth);
+void recordValidatePair(u32 handle, u32 code, u32 description);
+}
 
 extern "C" {
 
-int _ZN18WindowStatusResultC1Ej(...);
-int FUN_00426acc(unsigned int, unsigned int, unsigned int, unsigned int);
-int recordValidatePair(unsigned int, int, unsigned int);
-
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_5_stack;
-
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-/* Supplied declaration required: FUN_00426acc. */
-extern int FUN_004283cc(unsigned int);
-/* Supplied declaration required: recordValidatePair. */
-
-
-void FUN_00426e18(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5)
-
+/* Runs the operation on `handle`; returns the failing status of the pre-check, or the operation's validated result. */
+WindowStatusResult FUN_00426e18(u32 handle, u32 second, u32 third, u32 fourth)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int uStack_1c;
-  
-  temp_v0 = FUN_004283cc(param_2);
-  if (temp_v0 < 0) {
-    _ZN18WindowStatusResultC1Ej(param_1,temp_v0);
-    return;
-  }
-  temp_v1 = param_2;
-  FUN_00426acc(param_2,param_3,param_4,param_5);
-  _ZN18WindowStatusResultC1Ej(&temp_v2,temp_v1);
-  recordValidatePair(param_2,temp_v2,uStack_1c);
-  *param_1 = temp_v2;
-  param_1[1] = uStack_1c;
-  return;
+    s32 status = FUN_004283cc(handle);
+
+    bool failed = nnResultIsFailure(status);
+
+    if (failed) {
+        return WindowStatusResult(status);
+    }
+    WindowStatusResult result(FUN_00426acc(handle, second, third, fourth));
+    recordValidatePair(handle, result.code, result.description);
+    return result;
 }
 
 } /* extern "C" */

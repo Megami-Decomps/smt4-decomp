@@ -1,51 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fbfd0` (_code @ 0x3fbfd0, 0x100 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail is the inlined STL form (copy via uninitialized_copy plus the leftover element-destroy loop over the old storage); this explicit copy compiles differently */
+#include "mobiclip/MoLiveContainers.h"
+
+/* MoLive's growable byte buffer: memory comes from a MoLive::Allocator. */
+struct MoLiveByteBuffer {
+    /* 0x00 */ MoLive::Allocator *allocator;
+    /* 0x04 */ u8 *data;
+    /* 0x08 */ u32 capacity;
+    /* 0x0C */ s32 size;
+};
 
 extern "C" {
-
-typedef int romwright_code(...);
-
-unsigned int FUN_003fbfd0(unsigned int *param_1,unsigned int param_2)
-
+/* Grows the buffer to hold at least `newCapacity` bytes, keeping its contents; returns 0 when memory runs out. */
+u32 FUN_003fbfd0(MoLiveByteBuffer *buffer, u32 newCapacity)
 {
-  unsigned char *puVar1;
-  unsigned char *puVar2;
-  int temp_v0;
-  int *piVar4;
-  unsigned char *puVar5;
-  unsigned int temp_v1;
-  
-  if ((unsigned int)param_1[2] < param_2) {
-    piVar4 = (int *)*param_1;
-    puVar5 = (unsigned char *)0x0;
-    temp_v1 = 0;
-    if ((param_2 != 0) &&
-       (puVar5 = (unsigned char *)(**(romwright_code **)*piVar4)(piVar4), temp_v1 = param_2,
-       puVar5 == (unsigned char *)0x0)) {
-      (**(romwright_code **)(*piVar4 + 8))
-                (piVar4,"MoLive::Allocator: not enough memory to allocate %d bytes !!!\n",param_2);
-      (**(romwright_code **)(*piVar4 + 4))(piVar4,0);
-      return 0;
+    if (buffer->capacity < newCapacity) {
+        MoLive::Allocator *allocator = buffer->allocator;
+        u8 *memory = NULL;
+        u32 capacity = 0;
+        if (newCapacity != 0) {
+            memory = static_cast<u8 *>(allocator->allocate(newCapacity));
+            capacity = newCapacity;
+            if (memory == NULL) {
+                allocator->report(MoLive::g_moLiveOutOfMemoryMessage, newCapacity);
+                allocator->release(NULL);
+                return 0;
+            }
+        }
+        u8 *source = buffer->data;
+        u8 *destination = memory;
+        for (s32 i = buffer->size; i != 0; --i) {
+            if (destination != NULL) {
+                *destination = *source;
+            }
+            ++destination;
+            ++source;
+        }
+        u8 *oldData = buffer->data;
+        buffer->data = memory;
+        buffer->capacity = capacity;
+        allocator->release(oldData);
     }
-    puVar2 = (unsigned char *)param_1[1];
-    puVar1 = puVar5;
-    for (temp_v0 = param_1[3]; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
-      if (puVar1 != (unsigned char *)0x0) {
-        *puVar1 = *puVar2;
-      }
-      puVar1 = puVar1 + 1;
-      puVar2 = puVar2 + 1;
-    }
-    param_1[1] = (unsigned int)puVar5;
-    param_1[2] = temp_v1;
-    if (0 < (int)param_1[3]) {
-      for (temp_v0 = (int)param_1[3] >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
-      }
-    }
-    (**(romwright_code **)(*piVar4 + 4))(piVar4);
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

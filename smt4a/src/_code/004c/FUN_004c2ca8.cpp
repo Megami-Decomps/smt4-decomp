@@ -8,7 +8,7 @@ int btlGetMainState(...);
 int FUN_001568f8(...);
 int recordGetScaledMaximum(void);
 int dataTable8FindRecord(void);
-int FUN_00192608(void);
+int dataTable08Sub2GetRecord(void);
 int gameGetSlotRecord(...);
 int dataTable04FindById(void);
 int FUN_003e8bb0(...);
@@ -59,7 +59,7 @@ extern unsigned int DAT_005714fc; /* 0x5714fc */
 extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: recordGetScaledMaximum. */
 /* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: FUN_00192608. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_003e8bb0. */
@@ -322,7 +322,7 @@ LAB_004c3334:
     temp_v4 = (int)temp_v16;
     if (!((DAT_005713fc & puVar5[1]) == 0 && (DAT_005713f8 & *puVar5) == 0)) {
       temp_v3 = temp_v27;
-      FUN_00192608();
+      dataTable08Sub2GetRecord();
       temp_v4 = (int)temp_v16;
       if (*(char *)(temp_v3 + 0x22) == '\x02') {
         temp_v5 = 1;

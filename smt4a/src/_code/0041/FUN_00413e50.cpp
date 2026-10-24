@@ -12,10 +12,10 @@ int _ZN9Obj5596acaSERKS_(unsigned char [52], unsigned int);
 int FUN_0011b648(...);
 int FUN_0012055e(unsigned char [24], unsigned char **);
 int asdOperatorDeleteArray(...);
-int operatorNew(...);
+int _Znwj(...);
 int _ZN9Obj55aff4D1Ev(...);
 int _ZN9Obj55aff4aSERKS_(unsigned char [8], unsigned int);
-int FUN_002ea100(...);
+int _ZN9Obj55aff4C1EPKc(...);
 int _ZN9Obj55b1045resetEv(unsigned char [32]);
 int FUN_002f4cd6(unsigned char [32], unsigned char [104], int);
 int _ZN9Obj5596acC1EhRK10WordVector(...);
@@ -80,11 +80,11 @@ extern int campCecHasObject(void);
 extern unsigned int FUN_002bf520(void);
 extern int rt_malloc(unsigned int);
 /* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: operatorNew. */
+/* Supplied declaration required: _Znwj. */
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern int _ZN9Obj55aff4C1Ev(unsigned char *);
-/* Supplied declaration required: FUN_002ea100. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
 /* Supplied declaration required: _ZN9Obj55b1045resetEv. */
 /* Supplied declaration required: FUN_002f4cd6. */
 extern unsigned int FUN_002fafd8(int, unsigned int);
@@ -184,7 +184,7 @@ void FUN_00413e50(int param_1)
   *(unsigned char **)(temp_v0 - 0x90) = &DAT_0055a500;
   FUN_00432dd8();
   temp_v10 = 0;
-  temp_v1 = FUN_002ea100(temp_v32,&LAB_004141dc);
+  temp_v1 = _ZN9Obj55aff4C1EPKc(temp_v32,&LAB_004141dc);
   _ZN9Obj55aff4aSERKS_(temp_v11,temp_v1);
   _ZN9Obj55aff4D1Ev(temp_v32);
   temp_v12 = 999;
@@ -225,18 +225,18 @@ void FUN_00413e50(int param_1)
   else {
     textFormatBuffer(&temp_v17,&LAB_004141f4,temp_v1,temp_v3);
   }
-  temp_v1 = FUN_002ea100(temp_v33,&temp_v17);
+  temp_v1 = _ZN9Obj55aff4C1EPKc(temp_v33,&temp_v17);
   FUN_00522a48(&temp_v24,temp_v1);
   _ZN9Obj55aff4D1Ev(temp_v33);
   _ZN15Obj55aff4VectoraSERKS_(temp_v15,&temp_v24);
-  temp_v0 = operatorNew(0x78);
+  temp_v0 = _Znwj(0x78);
   if (temp_v0 == 0) {
     temp_v1 = 0;
   }
   else {
     temp_v1 = FUN_002fafd8(temp_v0,0);
   }
-  puVar5 = (unsigned int *)operatorNew(0x14);
+  puVar5 = (unsigned int *)_Znwj(0x14);
   if (puVar5 != (unsigned int *)0x0) {
     puVar5[1] = param_1;
     puVar5[2] = (unsigned int)FUN_0041488c;

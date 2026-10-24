@@ -8,7 +8,7 @@ int FUN_0010ef4c(int *, unsigned int, unsigned int);
 int FUN_002f1798(int, unsigned int);
 
 /* Supplied declaration required: FUN_0010ef4c. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: FUN_002f1798. */
 extern int FUN_002f5928(int, unsigned int, unsigned int, unsigned int, unsigned int);
 
@@ -24,7 +24,7 @@ int * FUN_0010efb6(int param_1,unsigned int param_2,unsigned int param_3,unsigne
   temp_v0 = FUN_002f5928(param_1 + 4,0x200000,param_3,param_4,param_4);
   piVar3 = (int *)(temp_v0 - 4);
   *(unsigned int *)(temp_v0 + 0x30) = 0;
-  temp_v1 = operatorNew(0x20);
+  temp_v1 = _Znwj(0x20);
   temp_v0 = 0;
   if (temp_v1 != 0) {
     temp_v1 = temp_v1 + 4;

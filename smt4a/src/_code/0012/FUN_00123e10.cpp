@@ -6,7 +6,7 @@ extern "C" {
 
 int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
-int FUN_002e7908(int *, unsigned int *);
+int _ZN12OnlineResultC1ERKj(int *, unsigned int *);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 
 
 void FUN_00123e10(int *param_1,int param_2)
@@ -47,7 +47,7 @@ void FUN_00123e10(int *param_1,int param_2)
       puVar2 = (unsigned int *)&temp_v4;
       temp_v4 = 0x80010001;
     }
-    FUN_002e7908(param_1,puVar2);
+    _ZN12OnlineResultC1ERKj(param_1,puVar2);
   }
   _ZN9Obj55b28cD1Ev(temp_v2);
   return;

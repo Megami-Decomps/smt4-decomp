@@ -7,7 +7,12 @@
  * own to destroy. FUN_003aff9c makes it. */
 class Obj4224d4 : public Obj422540 {
 public:
+    Obj4224d4(OwnerAllocator *allocator, void *storage) : Obj422540(allocator, storage, 0xc)
+    {
+        kind = 1;
+    }
     virtual ~Obj4224d4();
+    /* 0x18 */ u8 unk18[0x1c];
 };
 
 #endif

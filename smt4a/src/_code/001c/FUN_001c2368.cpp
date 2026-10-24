@@ -3,7 +3,7 @@
 extern "C" {
 
 void FUN_001b6694(u32 queue, u8 *member);
-u32 FUN_001b1f04(void);
+u32 _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 
 typedef struct Source3 {
     /* 0x00 */ u32 first;
@@ -41,7 +41,7 @@ void FUN_001c2368(Voice *voice, Source3 *a, Params6 *b)
     voice->third = a->third;
     voice->params = *b;
     voice->configured = 1;
-    queue = FUN_001b1f04();
+    queue = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
     FUN_001b6694(queue, voice->member50);
     voice->queued = 1;
 }

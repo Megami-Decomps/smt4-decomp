@@ -1,36 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004368c4` (_code @ 0x4368c4, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0043596c(int *, unsigned int, int *);
+typedef struct Record {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ struct Record *next;
+    /* 0x8 */ u8 type;
+} Record;
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_3_stack;
+typedef struct Cursor {
+    /* 0x00 */ Record *record;
+    /* 0x04 */ u8 unk04[0x14];
+    /* 0x18 */ s32 depth;
+} Cursor;
 
-/* Supplied declaration required: FUN_0043596c. */
+s32 FUN_0043596c(Cursor *cursor, u32 id, u32 *value);
 
-
-void FUN_004368c4(int *param_1,unsigned int param_2,unsigned int *param_3)
-
+static __inline s32 cursorLookup(Cursor *cursor, u32 id, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  
-  *param_1 = *(int *)(*param_1 + 4);
-  param_1[6] = param_1[6] + 1;
-  temp_v0 = *param_3;
-  piVar1 = param_1;
-  FUN_0043596c(param_1,param_2,&temp_v0);
-  if ((piVar1 == (int *)0x0) && (*(char *)(*param_1 + 8) == '\n')) {
-    param_1[6] = param_1[6] - 1;
-    *param_1 = *(int *)(*param_1 + 4);
-  }
-  return;
+    return FUN_0043596c(cursor, id, &value);
+}
+
+/* Advances the cursor, retries the lookup with a copy of the value and steps back over a newline record when it succeeded. */
+s32 FUN_004368c4(Cursor *cursor, u32 id, u32 *value)
+{
+    s32 result;
+
+    cursor->record = cursor->record->next;
+    cursor->depth++;
+    result = cursorLookup(cursor, id, *value);
+    if (result != 0) {
+        return result;
+    }
+    if (cursor->record->type != 10) {
+        return 3;
+    }
+    cursor->depth--;
+    cursor->record = cursor->record->next;
+    return 0;
 }
 
 } /* extern "C" */

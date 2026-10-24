@@ -1,31 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001bc5ac` (_code @ 0x1bc5ac, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: C library code (position independent: --cpu=5TE --apcs=/interwork/ropi); the two strings at 0x567054 / 0x56705c were not read from the image, so the "C" literals are an inference, and armcc here folds the guards into conditional instructions where retail branches */
+/* setlocale: only the "C" locale exists. Returns its name for a query, an empty name or "C"; NULL for any other locale. */
+#include "common.h"
 
 extern "C" {
+int libc_strcmp(const char *a, const char *b);
 
-int libc_strcmp(void);
-
-extern unsigned char DAT_00567054; /* 0x567054 */
-extern unsigned char DAT_0056705c; /* 0x56705c */
-
-/* Supplied declaration required: libc_strcmp. */
-
-
-unsigned char * FUN_001bc5ac(unsigned int param_1,char *param_2)
-
+const char *FUN_001bc5ac(s32 category, const char *locale)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char *puVar1;
-  
-  if ((param_2 != (char *)0x0) && (*param_2 != '\0')) {
-    puVar1 = &DAT_00567054;
-    libc_strcmp();
-    if (puVar1 != (unsigned char *)0x0) {
-      return (unsigned char *)0x0;
+    if (locale != NULL && *locale != '\0' && libc_strcmp("C", locale) != 0) {
+        return NULL;
     }
-  }
-  return &DAT_0056705c;
+    return "C";
 }
-
-} /* extern "C" */
+}

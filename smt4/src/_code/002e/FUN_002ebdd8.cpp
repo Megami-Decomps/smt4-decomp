@@ -1,34 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ebdd8` (_code @ 0x2ebdd8, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same logic; retail reaches the `enabled` byte as ((base + 0x1000 + 0x184) + 0x48) and schedules `mov r1, r6` before the handle test; built folds the flag into a pool offset and reorders the moves */
+#include "sound/SpatialSoundPlayback.h"
 
 extern "C" {
+extern u8 g_asdSound[];
+s32 asd3dSoundActorIsPlaying(u32 actorIndex);
+void FUN_002bda30(u32 handle, u32 arg);
 
-int asd3dSoundActorIsPlaying(void);
-int FUN_002bda30(int, unsigned int);
-
-extern unsigned char DAT_004e2f68; /* 0x4e2f68 */
-extern unsigned int DAT_004e312c; /* 0x4e312c */
-extern signed char DAT_004e3134; /* 0x4e3134 */
-
-/* Supplied declaration required: asd3dSoundActorIsPlaying. */
-/* Supplied declaration required: FUN_002bda30. */
-
-
-void FUN_002ebdd8(unsigned int param_1,unsigned int param_2)
-
+/* Stops spatial actor `actorIndex` (when playing) and clears its bit in the active mask. */
+void FUN_002ebdd8(u32 actorIndex, u32 arg)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  if (((DAT_004e3134 != '\0') && (param_1 < 0x10)) && (temp_v0 = param_1, asd3dSoundActorIsPlaying(), temp_v0 != 0))
-  {
-    if (*(int *)(&DAT_004e2f68 + param_1 * 4) != 0) {
-      FUN_002bda30(*(int *)(&DAT_004e2f68 + param_1 * 4),param_2);
+    AsdSoundSystem *system = (AsdSoundSystem *)g_asdSound;
+    SpatialSoundPlayback *playback = reinterpret_cast<SpatialSoundPlayback *>(system->unk784);
+
+    if (playback->enabled && actorIndex < 16 && asd3dSoundActorIsPlaying(actorIndex)) {
+        if (playback->handles[actorIndex] != 0) {
+            FUN_002bda30(playback->handles[actorIndex], arg);
+        }
+        playback->activeMask &= ~(1u << actorIndex);
     }
-    DAT_004e312c = DAT_004e312c & ~(1 << (param_1 & 0xff));
-  }
-  return;
 }
 
 } /* extern "C" */

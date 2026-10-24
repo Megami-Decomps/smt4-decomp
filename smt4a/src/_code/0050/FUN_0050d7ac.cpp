@@ -1,51 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0050d7ac` (_code @ 0x50d7ac, 0x104 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: retail keeps the 0.0f of the domain-error path live in s18 (vdiv s18,s18, vpush d8-d10, bls/pred layout); armcc folds 0.0f/0.0f to a NaN literal. */
 #include "romwright_types.h"
+#include <math.h>
 
 extern "C" {
 
+__softfp int ARM_fpclassifyf(float x);
+void FUN_001c4360(void);
 int __set_errno(int);
-int FUN_001c4360(void);
-int FUN_001c459c(double);
+__softfp float FUN_001c459c(float);
 
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+union FloatBits {
+    float f;
+    unsigned int u;
+};
+
+/* Hard-float asinf: polynomial on [-0.5, 0.5], square-root identity outside it. */
+float FUN_0050d7ac(float x)
 {
-    return value < (float)0 ? -value : value;
-}
-#endif
-extern int ARM_fpclassifyf(void);
-/* Supplied declaration required: __set_errno. */
-/* Supplied declaration required: FUN_001c4360. */
-/* Supplied declaration required: FUN_001c459c. */
+    FloatBits in;
+    float y, t;
+    float hi = 0.0f;
+    float lo;
 
+    in.f = x;
 
-void FUN_0050d7ac(void)
-
-{
-/* irregular: irregular input(s): in_s0; 4 native warning(s); review required */
-  int temp_v0;
-  float in_s0;
-  
-  if ((int)in_s0 * 2 + 0x8e000000U < 0xd000001) {
-    if ((unsigned int)((int)in_s0 << 1) >= 0x7e000001) {
-      FUN_001c459c((1.0f - romwright_fabs_4(in_s0)) * 0.5f);
+    if ((in.u << 1) + 0x8e000000u > 0x0d000000u) {
+        if ((in.u << 1) < 0x72000000u) {
+            if (ARM_fpclassifyf(x) == 4) {
+                FUN_001c4360();
+            }
+            return x;
+        }
+        if ((in.u << 1) > 0xff000000u) {
+            return x + x;
+        }
+        __set_errno(1);
+        return 0.0f / 0.0f;
     }
-    return;
-  }
-  if ((unsigned int)((int)in_s0 * 2) < 0x72000000) {
-    temp_v0 = ARM_fpclassifyf();
-    if (temp_v0 == 4) {
-      FUN_001c4360();
+
+    lo = hi;
+    if ((in.u << 1) > 0x7e000000u) {
+        t = (1.0f - fabsf(x)) * 0.5f;
+        y = FUN_001c459c(t);
+        if (in.u & 0x80000000u) {
+            y = -y;
+            hi = -1.5703125f;
+            lo = -0.0004838268f;
+        } else {
+            hi = 1.5703125f;
+            lo = 0.0004838268f;
+        }
+        y = y * -2.0f;
+    } else {
+        t = x * x;
+        y = x;
     }
-    return;
-  }
-  if (0xff000000 < (unsigned int)((int)in_s0 << 1)) {
-    return;
-  }
-  __set_errno(1);
-  return;
+    return (lo + y) + (y * t) * (0.16666673f + t * (0.07498761f + t * (0.045020215f + t * (0.026433362f + t * 0.038328305f)))) + hi;
 }
 
 } /* extern "C" */

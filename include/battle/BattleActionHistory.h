@@ -14,7 +14,8 @@ struct BattleActionHistoryEntry {
     /* 0x10 */ u8 unk10[8];
 };
 struct BattleActionHistoryCombatant {
-    /* 0x000 */ u8 unk000[8];
+    /* 0x000 */ u32 flags; /* 0x10 = live; 0x40 = excluded */
+    /* 0x004 */ u8 unk004[4];
     /* 0x008 */ s16 members[50];
     /* 0x06C */ u8 unk06C[2];
     /* 0x06E */ s16 index;

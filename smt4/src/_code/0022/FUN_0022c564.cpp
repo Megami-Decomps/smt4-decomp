@@ -1,4 +1,3 @@
-/* NON_MATCHING: Retail add r5, r5, #16 differs from recovered ldr r0, [r5, #8]!. */
 #include "common.h"
 
 struct RangeObjectView;

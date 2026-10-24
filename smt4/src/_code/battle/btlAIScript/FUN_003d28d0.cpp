@@ -9,7 +9,7 @@ int FUN_00229754(...);
 int battleSetActionKind(int *);
 int FUN_00229b10(int *, unsigned int *);
 int btlUnitSetParam(int *, int, int);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int memClear(int, int);
 int btlUiClearRowStatuses(unsigned int);
 int FUN_003cae6c(int *, unsigned int *);
@@ -44,7 +44,7 @@ extern int btlNodeListAnyReady(void);
 extern int btlSceneIsReady(unsigned int);
 extern int FUN_0027e3b8(unsigned int);
 extern int nodeListCountActiveById(unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: memClear. */
 extern int btlAiScriptIsFinished(unsigned int);
@@ -209,7 +209,7 @@ int * FUN_003d28d0(int *param_1,unsigned int param_2)
     }
     if (*(short *)(*(int *)(temp_v2 + 0x2c) + 0x14c) == 3) {
       temp_v2 = (int)*(short *)(*(int *)(temp_v2 + 0x2c) + 0x14e);
-      FUN_002ae164();
+      dataTable40FindById();
       temp_v0 = '\0';
       if (temp_v2 != 0) {
         temp_v0 = *(char *)(temp_v2 + 0x4b);

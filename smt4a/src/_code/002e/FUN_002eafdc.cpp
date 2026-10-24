@@ -17,7 +17,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00107298. */
-extern unsigned int FUN_002e7908(unsigned int **, unsigned int **);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int **, unsigned int **);
 extern int wordRefsDiffer_002eb358(unsigned int **, unsigned int *);
 /* Supplied declaration required: FUN_002eb368. */
 
@@ -53,7 +53,7 @@ void FUN_002eafdc(int param_1,int param_2)
       temp_v3 = temp_v5[0];
     }
     temp_v2 = (unsigned int *)0x80050007;
-    temp_v0 = FUN_002e7908(temp_v5,&temp_v2);
+    temp_v0 = _ZN12OnlineResultC1ERKj(temp_v5,&temp_v2);
     FUN_00107298(piVar3,temp_v0);
   } while( 1 );
 }

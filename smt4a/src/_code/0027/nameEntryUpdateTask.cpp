@@ -1,10 +1,4 @@
-#include "name/nameMain.h"
-#include "shard/W6_W6Match3_NameFormStateA.h"
-
-struct NameEntryWorkA {
-    /* 0x00 */ NameWork state;
-    /* 0x10 */ NameFormStateA form;
-};
+#include "name/NameEntryWorkA.h"
 
 extern "C" {
 void sequenceRequestFlushDeferred();

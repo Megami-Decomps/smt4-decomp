@@ -1,29 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00247f0c` (_code @ 0x247f0c, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: identical instructions apart from VFP register numbering (retail keeps the 0.0f constant in s1 and the scaled time in s0; built uses s4 and s1) */
+#include "common.h"
 
 extern "C" {
 
-int mathInterpolatePackedTable(unsigned int);
-int VectorFloatToUnsigned(double, int);
+f32 mathInterpolatePackedTable(u16 position);
 
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: mathInterpolatePackedTable. */
-
-
-void FUN_00247f0c(void)
-
+/* Interpolates from `from` to `to` over `duration` by the table-shaped curve at `elapsed` (clamped to the ends). */
+f32 FUN_00247f0c(f32 from, f32 to, f32 duration, f32 elapsed)
 {
-/* irregular: irregular input(s): in_s2, in_s3; 4 native warning(s); review required */
-  unsigned int temp_v0;
-  float in_s2;
-  float in_s3;
-  
-  if (((in_s2 != 0.0f) && (0.0f < in_s3)) && (in_s3 < in_s2)) {
-    temp_v0 = VectorFloatToUnsigned((in_s3 * 16384.0f) / in_s2,3);
-    mathInterpolatePackedTable(temp_v0 & 0xffff);
-  }
-  return;
+    f32 result = to;
+
+    if (duration == 0.0f) {
+        return result;
+    }
+    if (elapsed <= 0.0f) {
+        return from;
+    }
+    if (elapsed >= duration) {
+        return result;
+    }
+    f32 delta = result - from;
+    u16 position = (u32)((elapsed * 16384.0f) / duration);
+    f32 scaled = mathInterpolatePackedTable(position) * delta;
+    return scaled + from;
 }
 
 } /* extern "C" */

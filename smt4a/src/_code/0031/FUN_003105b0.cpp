@@ -18,7 +18,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int *wordRefMax(int **, unsigned int *);
+extern int *_ZSt3maxIjERKT_S2_S2_(int **, unsigned int *);
 extern int rt_malloc(int);
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_003075f2. */
@@ -51,7 +51,7 @@ unsigned long long FUN_003105b0(int *param_1,int *param_2,unsigned int param_3,u
     if ((unsigned int)(param_1[2] - temp_v3) < temp_v1) {
       temp_v7 = bufGrowCapacity(param_1[1] - temp_v3,param_1);
       temp_v6 = (int *)(param_2[1] - *param_2);
-      piVar2 = (int *)wordRefMax(&temp_v6,(unsigned int *)&temp_v7);
+      piVar2 = (int *)_ZSt3maxIjERKT_S2_S2_(&temp_v6,(unsigned int *)&temp_v7);
       temp_v5 = *piVar2;
       temp_v0 = rt_malloc(temp_v5);
       FUN_0031066a(*param_2,param_2[1],temp_v0,param_1);

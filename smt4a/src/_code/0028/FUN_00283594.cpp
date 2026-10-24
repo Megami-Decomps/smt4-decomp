@@ -3,7 +3,7 @@
 extern "C" {
 
 u32 scrGetArg(...); /* takes an optional index: the first call passes none */
-u32 FUN_003a6dec(u32 first, u32 second);
+u32 event3dEventModelMapCreate(u32 first, u32 second);
 void eventTexSetJobParam(void);
 void scrSetResult(u32 result);
 
@@ -12,7 +12,7 @@ u32 FUN_00283594(void)
 {
     u32 first = scrGetArg();
     u32 second = scrGetArg(1);
-    u32 result = FUN_003a6dec(first, second);
+    u32 result = event3dEventModelMapCreate(first, second);
 
     eventTexSetJobParam();
     scrSetResult(result);

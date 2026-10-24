@@ -24,7 +24,7 @@ extern unsigned char LAB_0011da18; /* 0x11da18 */
 extern unsigned char LAB_0011da28; /* 0x11da28 */
 extern unsigned char LAB_0011da38; /* 0x11da38 */
 
-extern unsigned char *FUN_002e7908(unsigned char *, unsigned int *);
+extern unsigned char *_ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern int onlineInstanceTableGetCurrent(void);
@@ -90,7 +90,7 @@ void FUN_0011d93c(int param_1)
     temp_v7 = 0x80010004;
     puVar3 = temp_v6;
   }
-  puVar3 = (unsigned char *)FUN_002e7908(puVar3,puVar4);
+  puVar3 = (unsigned char *)_ZN12OnlineResultC1ERKj(puVar3,puVar4);
   FUN_00310ec8(param_1,puVar3);
   return;
 }

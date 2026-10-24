@@ -24,7 +24,7 @@ struct fn_004ccb0c_arg1 {
     byte field_0x2c; /* +0x2c */
 };
 
-extern int FUN_003e4de4(fn_004ccb0c_arg1 *);
+extern int saveSlotIsActiveWithId(fn_004ccb0c_arg1 *);
 
 
 void FUN_004ccb0c(unsigned int *param_1, fn_004ccb0c_arg1 *param_2)
@@ -43,7 +43,7 @@ void FUN_004ccb0c(unsigned int *param_1, fn_004ccb0c_arg1 *param_2)
     parameters.mpGrowth = record->field_0x1d;
     parameters.hp = (u16)unitComputeMaximumHpAtLevel(record->field_0x6, &parameters);
     parameters.mp = (u16)FUN_003daaf8(record->field_0x6, &parameters);
-    parameters.kind = FUN_003e4de4(param_2) == 0 ? 2 : 3;
+    parameters.kind = saveSlotIsActiveWithId(param_2) == 0 ? 2 : 3;
     *(StatGrowthParameters *)param_1 = parameters;
 }
 

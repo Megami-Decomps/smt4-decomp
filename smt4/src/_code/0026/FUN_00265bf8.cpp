@@ -9,7 +9,7 @@ int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int);
 int FUN_0029bb14(unsigned int);
 int modelSelectPrimaryMotion(...);
-void FUN_002d582c(unsigned int, float);
+void animOwnerSetScale(unsigned int, float);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -25,7 +25,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 /* Supplied declaration required: FUN_0029bb14. */
 /* Supplied declaration required: modelSelectPrimaryMotion. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_002d582c. */
+/* Supplied declaration required: animOwnerSetScale. */
 
 
 void FUN_00265bf8(int param_1)
@@ -42,7 +42,7 @@ void FUN_00265bf8(int param_1)
     if ((*puVar1 & 2) == 0) {
       *puVar1 = *puVar1 | 2;
       *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-      FUN_002d582c(*(unsigned int *)(param_1 + 0xbc), 0.0f);
+      animOwnerSetScale(*(unsigned int *)(param_1 + 0xbc), 0.0f);
     }
     puVar1 = *(unsigned int **)(param_1 + 0xd8);
     if ((*puVar1 & 2) != 0) {
@@ -50,7 +50,7 @@ void FUN_00265bf8(int param_1)
     }
     *puVar1 = *puVar1 | 2;
     *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-    FUN_002d582c(*(unsigned int *)(param_1 + 0xd8), 0.0f);
+    animOwnerSetScale(*(unsigned int *)(param_1 + 0xd8), 0.0f);
     return;
   }
   if (*(int *)(param_1 + 200) >= 0x3dccccce) {
@@ -58,28 +58,28 @@ void FUN_00265bf8(int param_1)
     if ((*puVar1 & 2) != 0) {
       *puVar1 = *puVar1 & 0xfffffffd;
       *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 1;
-      FUN_002d582c(*(unsigned int *)(param_1 + 0xbc), 1.0f);
+      animOwnerSetScale(*(unsigned int *)(param_1 + 0xbc), 1.0f);
     }
   }
   puVar1 = *(unsigned int **)(param_1 + 0xd8);
   if ((*puVar1 & 2) != 0) {
     *puVar1 = *puVar1 & 0xfffffffd;
     *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 1;
-    FUN_002d582c(*(unsigned int *)(param_1 + 0xd8), 1.0f);
+    animOwnerSetScale(*(unsigned int *)(param_1 + 0xd8), 1.0f);
   }
   if (*(char *)(param_1 + 0xb) != '\0') {
     puVar1 = *(unsigned int **)(param_1 + 0xbc);
     if ((*puVar1 & 2) == 0) {
       *puVar1 = *puVar1 | 2;
       *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-      FUN_002d582c(*(unsigned int *)(param_1 + 0xbc), 0.0f);
+      animOwnerSetScale(*(unsigned int *)(param_1 + 0xbc), 0.0f);
     }
     puVar1 = *(unsigned int **)(param_1 + 0xd8);
     if ((*puVar1 & 2) != 0) {
       *puVar1 = *puVar1 & 0xfffffffd;
       *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 1;
       temp_v0 = *(unsigned int *)(param_1 + 0xd8);
-      FUN_002d582c(temp_v0, 1.0f);
+      animOwnerSetScale(temp_v0, 1.0f);
     }
   }
   else {
@@ -90,21 +90,21 @@ void FUN_00265bf8(int param_1)
         *puVar1 = temp_v2 & 0xfffffffd;
         *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 1;
         temp_v0 = *(unsigned int *)(param_1 + 0xbc);
-        FUN_002d582c(temp_v0, 1.0f);
+        animOwnerSetScale(temp_v0, 1.0f);
       }
     }
     else if ((temp_v2 & 2) == 0) {
       *puVar1 = temp_v2 | 2;
       *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
       temp_v0 = *(unsigned int *)(param_1 + 0xbc);
-      FUN_002d582c(temp_v0, 0.0f);
+      animOwnerSetScale(temp_v0, 0.0f);
     }
     puVar1 = *(unsigned int **)(param_1 + 0xd8);
     if ((*puVar1 & 2) == 0) {
       *puVar1 = *puVar1 | 2;
       *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
       temp_v0 = *(unsigned int *)(param_1 + 0xd8);
-      FUN_002d582c(temp_v0, 0.0f);
+      animOwnerSetScale(temp_v0, 0.0f);
     }
   }
   nodeSetTranslation(*(unsigned int *)(*(int *)(param_1 + 0xbc) + 8),0,g_lmapScene + 0x1c);

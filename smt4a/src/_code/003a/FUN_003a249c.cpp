@@ -1,124 +1,79 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a249c` (_code @ 0x3a249c, 0x25c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the constant 1 into sl before the entry loop (extra push of sl, loop counter in r4/entry in r5) and converts the two float arguments into s1/s0 rather than s0/s2 */
+#include "gamedata/Table49NaviEntry.h"
+#include "gamedata/Table49Trigger.h"
+#include "map/mapDepart.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
 
 extern "C" {
 
-int dataTableGetEntry49(int);
-int gameFlagIsSet(...);
-int naviMainSetFlagsAndActivate(int, int, int, int, int, int);
-int navigationSetOrQueueRequest(int, int, int, int);
-int FUN_003bf87c(void);
-int dataTable49Type1Count(void);
-int gameFlagSetValue(unsigned int, int);
-int VectorSignedToFloat(int, int);
+s32 FUN_003bf87c(void);
+s32 dataTable49Type1Count(void);
+const Table49Trigger *dataTable49GetEntry(s32 index);
+Table49NaviEntry *dataTableGetEntry49(s32 index);
+s32 gameFlagIsSet(s32 flag);
+void gameFlagSetValue(u32 flag, s32 value, s32 notify);
+void naviMainSetFlagsAndActivate(u8 first, u8 second, s32 third, s32 fourth, s32 fifth, s32 sixth);
+void navigationSetOrQueueRequest(s32 mapId, s32 areaId, s32 x, f32 y, f32 z);
+extern GameStateA g_gameState;
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned char g_gameState; /* 0x5f15fc */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: dataTableGetEntry49. */
-/* Supplied declaration required: gameFlagIsSet. */
-/* Supplied declaration required: naviMainSetFlagsAndActivate. */
-/* Supplied declaration required: navigationSetOrQueueRequest. */
-extern int dataTable49GetEntry(int);
-/* Supplied declaration required: FUN_003bf87c. */
-/* Supplied declaration required: dataTable49Type1Count. */
-/* Supplied declaration required: gameFlagSetValue. */
-
-
-void FUN_003a249c(int param_1)
-
+/* Rebuilds the list of active navigation guide entries from the table-0x49 flags and queues the first one's destination. */
+void FUN_003a249c(void)
 {
-/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  short *psVar5;
-  int temp_v4;
-  int *piVar7;
-  int temp_v5;
-  int temp_v6;
-  unsigned int in_fpscr;
-  
-  FUN_003bf87c();
-  temp_v6 = 0;
-  temp_v0 = gameFlagsGetBlock();
-  temp_v3 = temp_v0;
-  dataTable49Type1Count();
-  temp_v5 = 0;
-  if (temp_v5 < temp_v3) {
-    do {
-      temp_v1 = dataTable49GetEntry(temp_v5);
-      temp_v2 = gameFlagIsSet(*(unsigned int *)(temp_v1 + 8));
-      if ((temp_v2 != 0) && (temp_v2 = gameFlagIsSet(*(unsigned int *)(temp_v1 + 0xc)), temp_v2 == 0)) {
-        gameFlagSetValue(*(unsigned int *)(temp_v1 + 0xc),1);
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < temp_v3);
-  }
-  temp_v3 = gameFlagsGetBlock();
-  temp_v1 = 0;
-  temp_v5 = 0;
-  temp_v2 = 0;
-  do {
-    temp_v4 = temp_v1 + 1;
-    temp_v5 = temp_v5 + 2;
-    *(unsigned char *)(temp_v3 + temp_v1 * 4 + 0x1590) = 0;
-    temp_v1 = temp_v1 + 2;
-    *(unsigned char *)(temp_v3 + temp_v4 * 4 + 0x1590) = 0;
-  } while (temp_v5 < 8);
-  temp_v5 = 0;
-  *(unsigned int *)(temp_v3 + 0x15b0) = 0;
-  if (0 < param_1) {
-    do {
-      psVar5 = (short *)dataTableGetEntry49(temp_v5);
-      if (((*psVar5 != 0) && ((psVar5[1] == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)))) &&
-         ((psVar5[2] == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 == 0)))) {
-        if (temp_v6 == 0) {
-          temp_v6 = (int)*psVar5;
+    s32 entryCount = FUN_003bf87c();
+    s32 firstId = 0;
+    FlagWorkBanks *flags = gameFlagsGetBlock();
+    s32 triggerCount = dataTable49Type1Count();
+    s32 i;
+
+    for (i = 0; i < triggerCount; i++) {
+        const Table49Trigger *trigger = dataTable49GetEntry(i);
+        if (gameFlagIsSet(trigger->excludedFlag) && !gameFlagIsSet(trigger->triggeredFlag)) {
+            gameFlagSetValue(trigger->triggeredFlag, 1, 1);
         }
-        temp_v3 = gameFlagsGetBlock();
-        if (temp_v3 != 0) {
-          piVar7 = (int *)(temp_v3 + 0x15b0);
-          if (*piVar7 < 8) {
-            *(char *)(temp_v3 + *piVar7 * 4 + 0x1590) = (char)temp_v5;
-            *piVar7 = *piVar7 + 1;
-          }
+    }
+
+    FlagWorkBanks *banks = gameFlagsGetBlock();
+    for (i = 0; i < 8; i++) {
+        banks->navi.slots[i].id = 0;
+    }
+    banks->navi.slotCount = 0;
+
+    for (i = 0; i < entryCount; i++) {
+        Table49NaviEntry *entry = dataTableGetEntry49(i);
+        if (entry->id != 0 && (entry->requiredFlag == 0 || gameFlagIsSet(entry->requiredFlag)) &&
+            (entry->excludedFlag == 0 || !gameFlagIsSet(entry->excludedFlag))) {
+            if (firstId == 0) {
+                firstId = entry->id;
+            }
+            FlagWorkBanks *active = gameFlagsGetBlock();
+            if (active != NULL && active->navi.slotCount < 8) {
+                active->navi.slots[active->navi.slotCount].id = i;
+                active->navi.slotCount++;
+            }
+            entry = dataTableGetEntry49(i);
+            naviMainSetFlagsAndActivate(entry->naviFlags[0], entry->naviFlags[1], entry->naviFlags[2],
+                                        entry->naviFlags[3], entry->naviFlags[4], entry->naviFlags[5]);
+            naviMainSetFlagsAndActivate(entry->extraFlags[0], entry->extraFlags[1], 0, 0, 0, 0);
+            navigationSetOrQueueRequest(entry->mapId, entry->areaId, entry->x, entry->y, entry->z);
         }
-        temp_v3 = dataTableGetEntry49(temp_v5);
-        naviMainSetFlagsAndActivate(*(unsigned char *)(temp_v3 + 0x44),*(unsigned char *)(temp_v3 + 0x45),
-                     *(unsigned char *)(temp_v3 + 0x46),*(unsigned char *)(temp_v3 + 0x47),
-                     *(unsigned char *)(temp_v3 + 0x48),*(unsigned char *)(temp_v3 + 0x49));
-        naviMainSetFlagsAndActivate(*(unsigned char *)(temp_v3 + 0x4a),*(unsigned char *)(temp_v3 + 0x4b),0,0,0,0);
-        VectorSignedToFloat((int)*(short *)(temp_v3 + 0x36),(unsigned char)(in_fpscr >> 0x16) & 3);
-        VectorSignedToFloat((int)*(short *)(temp_v3 + 0x34),(unsigned char)(in_fpscr >> 0x16) & 3);
-        navigationSetOrQueueRequest((int)*(short *)(temp_v3 + 0x2e),(int)*(short *)(temp_v3 + 0x30),
-                     (int)*(short *)(temp_v3 + 0x32),(int)*(short *)(temp_v3 + 0x36));
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < param_1);
-  }
-  temp_v3 = gameFlagsGetBlock();
-  if (temp_v3 != 0) {
-    temp_v2 = *(int *)(temp_v3 + 0x158c);
-  }
-  if (temp_v2 != temp_v6) {
-    *(unsigned int *)(temp_v0 + 0x15b8) = 1;
-    (*(unsigned char *)((unsigned char *)&g_gameState + 0x464)) = 1;
-    *(unsigned int *)(temp_v0 + 0x15bc) = 1;
-  }
-  if ((temp_v6 != 0) && (temp_v3 = gameFlagsGetBlock(), temp_v3 != 0)) {
-    *(int *)(temp_v3 + 0x158c) = temp_v6;
-  }
-  return;
+    }
+
+    FlagWorkBanks *current = gameFlagsGetBlock();
+    s32 currentId = 0;
+    if (current != NULL) {
+        currentId = current->navi.currentId;
+    }
+    if (currentId != firstId) {
+        flags->navi.refresh = 1;
+        g_gameState.navigation.naviRefresh = 1;
+        flags->navi.refreshSecond = 1;
+    }
+    if (firstId != 0) {
+        FlagWorkBanks *target = gameFlagsGetBlock();
+        if (target != NULL) {
+            target->navi.currentId = firstId;
+        }
+    }
 }
 
 } /* extern "C" */

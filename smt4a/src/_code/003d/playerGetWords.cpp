@@ -16,7 +16,7 @@ typedef struct UnitHalf3A {
 } UnitHalf3A;
 
 extern PlayerData *gameGetPlayerData(void);
-extern UnitHalf3A *FUN_00192608(u32 id);
+extern UnitHalf3A *dataTable08Sub2GetRecord(u32 id);
 
 /* Copies the player's four words at +0x34 into `out`; with `withUnit` also the unit's halfword at +0x3A. */
 void playerGetWords(PlayerWords *out, s32 withUnit)
@@ -29,7 +29,7 @@ void playerGetWords(PlayerWords *out, s32 withUnit)
     out->c = player->unk3C;
     out->d = player->unk40;
     if (withUnit != 0) {
-        unit = FUN_00192608(player->unk0C);
+        unit = dataTable08Sub2GetRecord(player->unk0C);
         if (unit != NULL) {
             out->e = unit->unk3A;
         }

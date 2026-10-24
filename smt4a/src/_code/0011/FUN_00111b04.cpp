@@ -17,7 +17,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern unsigned int FUN_002e7908(int *, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(int *, unsigned int *);
 /* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002fd49c. */
 /* Supplied declaration required: FUN_002fd51c. */
@@ -44,7 +44,7 @@ unsigned long long FUN_00111b04(int param_1,unsigned int param_2,unsigned int pa
   else {
     temp_v1 = 0x8068000b;
   }
-  temp_v0 = FUN_002e7908(&iStack_18,(unsigned int *)&temp_v1);
+  temp_v0 = _ZN12OnlineResultC1ERKj(&iStack_18,(unsigned int *)&temp_v1);
   FUN_002fd51c(param_1,3,temp_v0);
   onlineJobSetStateDone(param_1);
   return romwright_piece_4_4(uStack_14,iStack_18);

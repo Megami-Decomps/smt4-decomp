@@ -39,7 +39,7 @@ extern unsigned char DAT_0055a400; /* 0x55a400 */
 
 extern int FUN_0012f32c(void);
 /* Supplied declaration required: sysMemClear. */
-extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, unsigned char *);
+extern unsigned int _ZN9Obj55aff4C1EPKt(unsigned char *, unsigned char *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern unsigned int *initVtable00558fb4(fn_002ed0dc_arg0 *, unsigned int);
 extern unsigned int onlineMessageAllocateNode(unsigned int *, unsigned int);
@@ -87,7 +87,7 @@ unsigned int * FUN_002ed0dc(fn_002ed0dc_arg0 *param_1,unsigned int param_2)
   puVar1[0x1e] = 0;
   puVar1[0x1f] = 0;
   puVar1[0xb] = puVar1[0xb] | 8;
-  temp_v1 = _ZN9Obj55aff4C1EPKc(temp_v2,&LAB_002ed16c);
+  temp_v1 = _ZN9Obj55aff4C1EPKt(temp_v2,&LAB_002ed16c);
   FUN_00307134(puVar1,temp_v1);
   _ZN9Obj55aff4D1Ev(temp_v2);
   return puVar1;

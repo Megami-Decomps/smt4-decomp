@@ -1,103 +1,112 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d13b0` (_code @ 0x1d13b0, 0x248 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: logic recovered; retail re-materialises each zero store and re-reads the placement pointers with a different register scheme (22 rows more), the party panel struct is a local view. */
+#include "common.h"
 
-extern "C" {
+namespace {
+// One slot placement widget of the party panel.
+struct SlotPlacement {
+    u8 unk00[0x20];
+    u8 empty;               // 0x20
+    u8 unk21[2];
+    u8 flagA;               // 0x23
+    u8 flagB;               // 0x24
+    u8 unk25;               // 0x25
+    u8 unk26;               // 0x26
+    u8 unk27;               // 0x27
+    u8 unk28;
+    u8 flagC;               // 0x29
+    u8 unk2A[0xA];
+    s32 unitId;             // 0x34
+};
 
-int slotPlacementSetSlot(int, int);
-int FUN_0026c9c0(void);
-int slotPlacementStartTransition(unsigned int, int);
-int FUN_0029378c(...);
-int FUN_002e36f8(void);
+struct ReserveRecord {
+    s32 unitId;             // 0x00
+    s32 unk04;
+};
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
+struct PartyPanel {
+    u8 unk00[0x2C];
+    u32 transitionArg;      // 0x2C
+    u8 unk30[0x12];
+    s8 transitionMode;      // 0x42
+    u8 unk43[0x629];
+    s8 state;               // 0x66C
+    u8 unk66D[0x5B];
+    SlotPlacement *placements[28]; // 0x6C8: leader, 3 party slots, 24 reserve slots
+    ReserveRecord reserve[24];     // 0x738
+};
 
-extern int g_partyPanel; /* 0x43dcf0 */
+struct SlotTable {
+    u8 unk0000[0x9108];
+    s8 unitId[3];           // 0x9108
+};
 
-/* Supplied declaration required: slotPlacementSetSlot. */
-/* Supplied declaration required: FUN_0026c9c0. */
-/* Supplied declaration required: slotPlacementStartTransition. */
-/* Supplied declaration required: FUN_0029378c. */
-extern int FUN_00295d7c(void);
-extern int gameGetUnitRecord(unsigned int);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002e36f8. */
-
-
-void FUN_001d13b0(void)
-
-{
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v0 = g_partyPanel;
-  temp_v1 = gameGetSlotTable();
-  piVar4 = (int *)(temp_v0 + 0x6c8);
-  FUN_0029378c(*(unsigned int *)(temp_v0 + 0x6c8),0);
-  slotPlacementStartTransition(*(unsigned int *)(temp_v0 + 0x6c8),*(char *)(temp_v0 + 0x42) == '\x01');
-  *(unsigned char *)(*piVar4 + 0x25) = 0;
-  *(unsigned char *)(*piVar4 + 0x26) = 0;
-  *(unsigned char *)(*piVar4 + 0x27) = 0;
-  temp_v3 = 0;
-  do {
-    temp_v4 = temp_v0 + temp_v3 * 4;
-    piVar4 = (int *)(temp_v4 + 0x6cc);
-    FUN_0029378c(*(unsigned int *)(temp_v4 + 0x6cc),*(unsigned int *)(temp_v0 + 0x2c));
-    slotPlacementStartTransition(*(unsigned int *)(temp_v4 + 0x6cc),*(char *)(temp_v0 + 0x42) == '\x01');
-    slotPlacementSetSlot(*piVar4,temp_v3 + 1);
-    if (*(char *)(temp_v1 + temp_v3 + 0x9108) < '\0') {
-      *(unsigned char *)(*(int *)(temp_v4 + 0x6cc) + 0x20) = 1;
-    }
-    else {
-      *(unsigned char *)(*(int *)(temp_v4 + 0x6cc) + 0x20) = 0;
-      *(int *)(*piVar4 + 0x34) = (int)*(char *)(temp_v1 + temp_v3 + 0x9108);
-    }
-    *(unsigned char *)(*(int *)(temp_v4 + 0x6cc) + 0x25) = 0;
-    *(unsigned char *)(*piVar4 + 0x26) = 0;
-    *(unsigned char *)(*piVar4 + 0x27) = 0;
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 3);
-  temp_v1 = 0;
-  do {
-    temp_v3 = temp_v0 + temp_v1 * 4;
-    piVar4 = (int *)(temp_v3 + 0x6d8);
-    FUN_0029378c(*(unsigned int *)(temp_v3 + 0x6d8),*(unsigned int *)(temp_v0 + 0x2c));
-    slotPlacementStartTransition(*(unsigned int *)(temp_v3 + 0x6d8),*(char *)(temp_v0 + 0x42) == '\x01');
-    slotPlacementSetSlot(*piVar4,temp_v1 + 4);
-    *(unsigned char *)(*piVar4 + 0x25) = 0;
-    *(unsigned char *)(*piVar4 + 0x26) = 0;
-    *(unsigned char *)(*piVar4 + 0x27) = 0;
-    temp_v4 = temp_v0 + temp_v1 * 8;
-    if (*(int *)(temp_v4 + 0x738) < 0) {
-      *(unsigned char *)(*(int *)(temp_v3 + 0x6d8) + 0x20) = 1;
-    }
-    else {
-      *(unsigned char *)(*(int *)(temp_v3 + 0x6d8) + 0x20) = 0;
-      *(unsigned int *)(*piVar4 + 0x34) = *(unsigned int *)(temp_v4 + 0x738);
-      temp_v4 = gameGetUnitRecord(*(unsigned int *)(temp_v4 + 0x738));
-      temp_v2 = FUN_00295d7c();
-      *(unsigned char *)(*(int *)(temp_v3 + 0x6d8) + 0x23) = temp_v2 != 0;
-      *(unsigned char *)(*(int *)(temp_v3 + 0x6d8) + 0x24) = (*(unsigned short *)(temp_v4 + 0x44) & 0x400) != 0;
-      *(unsigned char *)(*(int *)(temp_v3 + 0x6d8) + 0x29) = (*(unsigned short *)(temp_v4 + 0x44) & 4) != 0;
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x18);
-  if (*(char *)(temp_v0 + 0x66c) == '\n') {
-    FUN_0026c9c0();
-  }
-  if (*(char *)(temp_v0 + 0x66c) != '\v') {
-    return;
-  }
-  FUN_002e36f8();
-  return;
+struct UnitRecord {
+    u8 unk00[0x44];
+    u16 flags;              // 0x44
+};
 }
 
-} /* extern "C" */
+extern "C" {
+extern PartyPanel *g_partyPanel;
+SlotTable *gameGetSlotTable(void);
+void slotPlacementSetSlot(SlotPlacement *placement, s32 slot);
+void slotPlacementStartTransition(SlotPlacement *placement, s32 immediate);
+void FUN_0029378c(SlotPlacement *placement, u32 arg);
+UnitRecord *gameGetUnitRecord(s32 id);
+s32 FUN_00295d7c(void);
+void FUN_0026c9c0(void);
+void FUN_002e36f8(void);
+
+/* Reset the party panel's placements: the leader, the three party slots and the reserve list. */
+void FUN_001d13b0(void)
+{
+    PartyPanel *panel = g_partyPanel;
+    SlotTable *slots = gameGetSlotTable();
+    FUN_0029378c(panel->placements[0], 0);
+    slotPlacementStartTransition(panel->placements[0], panel->transitionMode == 1);
+    panel->placements[0]->unk25 = 0;
+    panel->placements[0]->unk26 = 0;
+    panel->placements[0]->unk27 = 0;
+    for (s32 i = 0; i < 3; i++) {
+        SlotPlacement **placement = &panel->placements[1 + i];
+        FUN_0029378c(*placement, panel->transitionArg);
+        slotPlacementStartTransition(*placement, panel->transitionMode == 1);
+        slotPlacementSetSlot(*placement, i + 1);
+        if (slots->unitId[i] < 0) {
+            (*placement)->empty = 1;
+        } else {
+            (*placement)->empty = 0;
+            (*placement)->unitId = slots->unitId[i];
+        }
+        (*placement)->unk25 = 0;
+        (*placement)->unk26 = 0;
+        (*placement)->unk27 = 0;
+    }
+    for (s32 i = 0; i < 24; i++) {
+        SlotPlacement **placement = &panel->placements[4 + i];
+        FUN_0029378c(*placement, panel->transitionArg);
+        slotPlacementStartTransition(*placement, panel->transitionMode == 1);
+        slotPlacementSetSlot(*placement, i + 4);
+        (*placement)->unk25 = 0;
+        (*placement)->unk26 = 0;
+        (*placement)->unk27 = 0;
+        if (panel->reserve[i].unitId < 0) {
+            (*placement)->empty = 1;
+        } else {
+            (*placement)->empty = 0;
+            (*placement)->unitId = panel->reserve[i].unitId;
+            UnitRecord *unit = gameGetUnitRecord(panel->reserve[i].unitId);
+            (*placement)->flagA = FUN_00295d7c() != 0;
+            (*placement)->flagB = (unit->flags & 0x400) != 0;
+            (*placement)->flagC = (unit->flags & 4) != 0;
+        }
+    }
+    if (panel->state == 10) {
+        FUN_0026c9c0();
+    }
+    if (panel->state != 11) {
+        return;
+    }
+    FUN_002e36f8();
+}
+}

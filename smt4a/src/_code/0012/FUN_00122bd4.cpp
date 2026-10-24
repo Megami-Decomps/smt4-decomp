@@ -19,7 +19,7 @@ struct fn_00122bd4_arg1 {
 
 typedef int romwright_code(...);
 /* Supplied declaration required: sharedRefRelease. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int *FUN_002e7614(int, unsigned int);
 extern int FUN_002eb7d0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ec8a8. */
@@ -50,7 +50,7 @@ unsigned int FUN_00122bd4(int param_1,fn_00122bd4_arg1 *param_2)
     }
     return 0;
   }
-  temp_v0 = operatorNew(0x20);
+  temp_v0 = _Znwj(0x20);
   if (temp_v0 != 0) {
     piVar2 = (int *)FUN_002e7614(temp_v0,*(unsigned int *)&param_2->field_0x14);
   }

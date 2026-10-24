@@ -1,6 +1,5 @@
-/* NON_MATCHING: the thread-pointer read and the svc are inline-asm-only instructions (declared as functions in S1Ipc.h) */
 #include "nn/Result.h"
-#include "shard/S1Ipc.h"
+#include "nn/svc.h"
 
 extern "C" {
 
@@ -10,10 +9,10 @@ extern u32 DAT_005c0a80;  /* service session handle */
  * word when the transport succeeded, and passes one response word back in *out. */
 s32 FUN_001bd5bc(u32 *out)
 {
-    IpcCommandBuffer *cmd = nn_getIpcCommandBuffer();
+    nn::os::IpcCommandBuffer *cmd = nn::os::GetIpcCommandBuffer();
 
     cmd->header = 0x001D0000;
-    s32 result = nn_svc_SendSyncRequest(DAT_005c0a80);
+    s32 result = nn::svc::SendSyncRequest(DAT_005c0a80);
     if (nnResultIsSuccess(result)) {
         *out = cmd->words[1];
         result = cmd->words[0];

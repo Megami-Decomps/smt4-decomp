@@ -12,7 +12,7 @@ int FUN_00184310(void);
 int slotRecordFindById(...);
 int partyFindSlotById(int);
 int FUN_002a5e7c(...);
-int FUN_0032fea0(...);
+int arrayContainsU16(...);
 int FUN_0035ad50(unsigned int, unsigned char [98]);
 int findSkillMetadataById(void);
 int FUN_004bcd90(...);
@@ -64,7 +64,7 @@ extern int gameGetSlotRecord(void);
 extern int FUN_002a4b28(unsigned int);
 /* Supplied declaration required: FUN_002a5e7c. */
 /* Supplied declaration required: FUN_002a6894. */
-/* Supplied declaration required: FUN_0032fea0. */
+/* Supplied declaration required: arrayContainsU16. */
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: findSkillMetadataById. */
 /* Supplied declaration required: FUN_00408184. */
@@ -240,7 +240,7 @@ unsigned char FUN_001ff014(int param_1)
       temp_v2 = (unsigned int)*(unsigned short *)(temp_v8 + 0x40);
       if ((temp_v2 != 0) && (findSkillMetadataById(), (*(unsigned char *)(temp_v2 + 3) & 0x20) != 0)) {
         puVar7 = &temp_v14;
-        FUN_0032fea0(puVar7,0x20,*(unsigned short *)(temp_v8 + 0x40));
+        arrayContainsU16(puVar7,0x20,*(unsigned short *)(temp_v8 + 0x40));
         if (puVar7 == (unsigned int *)0x0) {
           *(unsigned short *)((int)&temp_v26 + temp_v7 * 2) = *(unsigned short *)(temp_v8 + 0x40);
         }
@@ -257,7 +257,7 @@ unsigned char FUN_001ff014(int param_1)
         findSkillMetadataById();
         if ((*(unsigned char *)(temp_v5 + 3) & 0x20) != 0) {
           puVar7 = &temp_v14;
-          FUN_0032fea0(&temp_v14,0x20,*(unsigned short *)(temp_v8 + 0x34));
+          arrayContainsU16(&temp_v14,0x20,*(unsigned short *)(temp_v8 + 0x34));
           if (puVar7 == (unsigned int *)0x0) {
             *(unsigned short *)((int)&temp_v26 + temp_v7 * 2) = *(unsigned short *)(temp_v8 + 0x34);
           }
@@ -306,7 +306,7 @@ unsigned char FUN_001ff014(int param_1)
         psVar13 = (short *)((int)&temp_v14 + temp_v8 * 2);
         if (*psVar13 != 0) {
           temp_v9 = temp_v4 + 0x34;
-          FUN_0032fea0(temp_v9,8);
+          arrayContainsU16(temp_v9,8);
           if (temp_v9 == 0) {
             temp_v9 = 0;
             if (temp_v9 < temp_v7) {

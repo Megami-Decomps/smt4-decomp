@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00192268(void);
+int effBlockCreate(void);
 int effBlockLoadClone(...);
 int taskRunWithObject(unsigned int, int, int);
 int effPartsSetData(void);
@@ -69,7 +69,7 @@ extern unsigned int uRam004d8ce8; /* 0x4d8ce8 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00192268. */
+/* Supplied declaration required: effBlockCreate. */
 /* Supplied declaration required: effBlockLoadClone. */
 /* Supplied declaration required: taskRunWithObject. */
 extern unsigned int effEditorNodeListCount(unsigned int);
@@ -191,7 +191,7 @@ LAB_002424b8:
     }
     else {
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v6 + 4);
-      FUN_00192268();
+      effBlockCreate();
       if (*(int *)(temp_v6 + 0xc) != 0) {
         effPartsSetData();
       }

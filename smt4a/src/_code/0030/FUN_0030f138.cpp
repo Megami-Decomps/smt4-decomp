@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int _ZN9Obj55aff4C1EPKc(...);
+int _ZN9Obj55aff4C1EPKt(...);
 int _ZN9Obj55aff4D1Ev(...);
 int FUN_002e934e(unsigned int, int, int);
 int onlineUrlEnsureParsed(void);
@@ -24,7 +24,7 @@ typedef struct {
 } param_3_stack;
 
 extern int wordRefsDiffer_00132132(int *, int *);
-/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKt. */
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: FUN_002e934e. */
 /* Supplied declaration required: onlineUrlEnsureParsed. */
@@ -56,7 +56,7 @@ unsigned int FUN_0030f138(int param_1,unsigned int param_2,unsigned int param_3)
   temp_v10 = param_2;
   uStack_18 = param_3;
   onlineUrlEnsureParsed();
-  temp_v3 = _ZN9Obj55aff4C1EPKc(temp_v6,temp_v10);
+  temp_v3 = _ZN9Obj55aff4C1EPKt(temp_v6,temp_v10);
   temp_v4 = param_1 + 0x25;
   temp_v0 = *(int *)(*(int *)(param_1 + 0x1c) + 4);
   temp_v5[0] = *(int *)(param_1 + 0x1c);
@@ -82,7 +82,7 @@ unsigned int FUN_0030f138(int param_1,unsigned int param_2,unsigned int param_3)
     param_3 = *(unsigned int *)(temp_v0 + 0x18);
   }
   else {
-    temp_v2 = _ZN9Obj55aff4C1EPKc(temp_v5,temp_v10);
+    temp_v2 = _ZN9Obj55aff4C1EPKt(temp_v5,temp_v10);
     FUN_0030f0cc(&temp_v7,param_1 + 0x28,temp_v2);
     _ZN9Obj55aff4D1Ev(temp_v5);
     temp_v8 = *(int *)(param_1 + 0x38);

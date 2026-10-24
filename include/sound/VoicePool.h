@@ -21,7 +21,7 @@ struct SoundVoicePoolEntry {
     /* 0x44 */ u32 counters[4];
     /* 0x54 */ u32 unk54;
     /* 0x58 */ u32 timing[4];
-    /* 0x68 */ u8 unk68[8];
+    /* 0x68 */ s64 startTick;   /* system tick when the voice was started */
 };
 struct SoundVoicePool {
     /* 0x00 */ u32 unk00;

@@ -29,7 +29,7 @@ typedef struct {
 /* Supplied declaration required: onlineContextGetInstance. */
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
 /* Supplied declaration required: FUN_00303aac. */
@@ -57,7 +57,7 @@ FUN_00117dec(int param_1,int param_2,unsigned int param_3,unsigned int param_4,u
   _ZN9Obj55b28cC1EPv(temp_v2,temp_v0 + 0x58);
   temp_v0 = FUN_002e789a(param_2);
   if (temp_v0 != 0) {
-    temp_v0 = operatorNew(0x1b0);
+    temp_v0 = _Znwj(0x1b0);
     if (temp_v0 != 0) {
       FUN_00303aac(temp_v0,*(unsigned int *)(param_2 + 0x44),param_1 + 0x10,temp_v3,temp_v4,param_5,
                    param_6,0,5,0,0,param_7,param_8,0);

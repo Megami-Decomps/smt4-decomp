@@ -1,55 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00471f64` (_code @ 0x471f64, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: bsearch argument loads are scheduled differently (retail loads the comparator and g_aocSystem first) and the return paths are laid out differently (retail has a separate early-return epilogue for 0). */
+#include "addon/aocMain.h"
+#include "addon/AocLookup.h"
 
 extern "C" {
+void *libc_bsearch(const void *, const void *, u32, u32, s32 (*)(const void *, const void *));
+s32 FUN_00476dfc(const void *, const void *);
+s32 asdFsIsSdCardDetected(void);
+u32 objGetFlagBit16(void *);
+extern AocMain *g_aocMain;
+extern AocSystemA *g_aocSystem;
 
-int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
-int asdFsIsSdCardDetected(void);
-
-/* stack frame of param_2: 3 slot(s), 10 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned short sp13C; /* 0x13c: local_13c */
-    unsigned int sp140; /* 0x140: local_140 */
-} param_2_stack;
-
-extern unsigned char LAB_00476dfc; /* 0x476dfc */
-extern int g_aocMain; /* 0x570260 */
-extern int g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: libc_bsearch. */
-extern int objGetFlagBit16(void);
-/* Supplied declaration required: asdFsIsSdCardDetected. */
-
-
-unsigned int FUN_00471f64(int param_1,unsigned short param_2)
-
+/* Returns 0 when the add-on table of `system` has the record `id` and the SD card holds the add-on content; clears the availability flag when no card is detected. */
+u32 FUN_00471f64(AocSystemA *system, u16 id)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned short *puVar1;
-  int temp_v0;
-  unsigned short temp_v1 [158];
-  
-  puVar1 = temp_v1;
-  temp_v1[0] = param_2;
-  libc_bsearch(puVar1,*(unsigned int *)(param_1 + 0x388),*(unsigned int *)(g_aocSystem + 900),0x134,
-               &LAB_00476dfc);
-  if (puVar1 != (unsigned short *)0x0) {
-    asdFsIsSdCardDetected();
-    if (puVar1 != (unsigned short *)0x0) {
-      temp_v0 = objGetFlagBit16();
-      if (temp_v0 != 0) {
-                    /* WARNING: Treating indirect jump as return */
-        return 0;
-      }
+    AocTableSearchRecordA key;
+    key.id = id;
+    void *record = libc_bsearch(&key, system->table.records, g_aocSystem->table.count,
+                                sizeof(AocTableSearchRecordA), FUN_00476dfc);
+    if (record != NULL) {
+        if (asdFsIsSdCardDetected() != 0) {
+            if (objGetFlagBit16(g_aocMain) != 0) {
+                return 0;
+            }
+        } else {
+            g_aocMain->flags &= ~0x10000;
+        }
     }
-    else {
-      *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
-    }
-  }
-                    /* WARNING: Treating indirect jump as return */
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

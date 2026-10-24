@@ -72,6 +72,14 @@ struct UniteWork {
             /* 0x8E88 */ s16 selectedIndex;
         } selectionA;
         struct {
+            /* 0x0438 */ u8 unk0438BeforePairs[0xf80];
+            /* 0x13B8 */ UnitePairEntryIV pairs[1];
+            /* 0x13C0 */ u8 unk13c0[0x5472];
+            /* 0x6832 */ u16 sortedPairs[1501]; /* pair indices being sorted */
+            /* 0x73EC */ u32 sortedCount;
+            /* 0x73F0 */ u32 pairScores[1];     /* indexed by pair index */
+        } pairSort;
+        struct {
             /* 0x438 */ u8 unk0438[0x40];
             /* 0x478 */ s32 pendingRequest;
         } scriptIV;
@@ -134,6 +142,14 @@ struct UniteWork {
             /* 0x0438 */ u8 unk0438BeforeScores[0x7468];
             /* 0x78A0 */ s32 scores[1];
         } pairScoresIV;
+        struct {
+            /* 0x0438 */ u8 unk0438BeforePairs[0xF58];
+            /* 0x1390 */ UnitePairEntryIV pairs[1];
+            /* 0x1398 */ u8 unk1398[0x594A];
+            /* 0x6CE2 */ u16 sortedPairs[1501]; /* pair indices being sorted */
+            /* 0x789C */ u32 sortedCount;
+            /* 0x78A0 */ u32 pairScores[1];     /* indexed by pair index */
+        } pairSortIV;
         struct {
             /* 0x0438 */ u8 unk0438[0x6844];
             /* 0x6C7C */ u8 cursor[0x64];
@@ -232,7 +248,9 @@ struct UniteDescriptionEntry {
     /* 0x55 */ char text[1];
 };
 typedef char UniteWorkSizeCheck[sizeof(UniteWork) == 0x9454 ? 1 : -1];
+typedef char UniteWorkPairSortOffsetCheck[offsetof(UniteWork, pairSort.pairs) == 0x13B8 && offsetof(UniteWork, pairSort.sortedPairs) == 0x6832 && offsetof(UniteWork, pairSort.sortedCount) == 0x73EC && offsetof(UniteWork, pairSort.pairScores) == 0x73F0 ? 1 : -1];
 typedef char UniteWorkIVPairsOffsetCheck[offsetof(UniteWork, pairListIV.pairs) == 0x1390 ? 1 : -1];
+typedef char UniteWorkPairSortIVOffsetCheck[offsetof(UniteWork, pairSortIV.pairs) == 0x1390 && offsetof(UniteWork, pairSortIV.sortedPairs) == 0x6CE2 && offsetof(UniteWork, pairSortIV.sortedCount) == 0x789C && offsetof(UniteWork, pairSortIV.pairScores) == 0x78A0 ? 1 : -1];
 typedef char UniteWorkIVScoresOffsetCheck[offsetof(UniteWork, pairScoresIV.scores) == 0x78a0 ? 1 : -1];
 typedef char UniteWorkIVFirstCursorOffsetCheck[offsetof(UniteWork, firstListIV.cursor) == 0x6C7C ? 1 : -1];
 typedef char UniteWorkIVSecondCursorOffsetCheck[offsetof(UniteWork, secondListIV.cursor) == 0x9204 ? 1 : -1];

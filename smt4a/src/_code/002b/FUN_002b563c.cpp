@@ -16,7 +16,7 @@ bool mapResolveCircleOverlapXZ(CollisionVector *result, CollisionVector first,
 bool FUN_002b563c(CollisionVector *result, CollisionVector point)
 {
     if (!gameFlagIsSet(0x4d0) || g_battleViewState.attachments.state != 1 ||
-        g_battleViewState.unk7d[0] != 0) {
+        g_battleViewState.positionsSet != 0) {
         return false;
     }
     CollisionVector resolved;

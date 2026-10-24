@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0011164c(unsigned int, int);
 int sharedRefAddRef(int);
-int vectorCopyHeader(int, unsigned char [16]);
+int _ZN18OnlineResultRecordaSERKS_(int, unsigned char [16]);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002f674e(unsigned int);
 int onlineJobSetStateWaiting(int);
@@ -28,7 +28,7 @@ extern unsigned char LAB_00111a00; /* 0x111a00 */
 extern int FUN_00111594(unsigned int, int);
 /* Supplied declaration required: FUN_0011164c. */
 /* Supplied declaration required: sharedRefAddRef. */
-/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 extern unsigned int FUN_002ea3c0(unsigned char **, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 extern int FUN_002ea6fc(int, unsigned char *);
@@ -66,7 +66,7 @@ void FUN_00111940(int param_1)
               (temp_v7,*(int **)(param_1 + 0x78),*(unsigned int *)(param_1 + 0x17c),
                *(unsigned int *)(param_1 + 0x180));
     temp_v0 = param_1 + 0x7c;
-    vectorCopyHeader(temp_v0,temp_v7);
+    _ZN18OnlineResultRecordaSERKS_(temp_v0,temp_v7);
     temp_v5[0] = 0;
     temp_v0 = FUN_002ea6fc(temp_v0,temp_v5);
     if (temp_v0 == 0) {

@@ -9,7 +9,7 @@ int FUN_0027da30(...);
 int btlMainFindEntryByListedId(...);
 int FUN_00283ebc(unsigned int, unsigned int, int);
 int gameGetUnitRecord(...);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int dataTable08Sub2GetRecord(void);
 int dataTable08Sub1GetRecord(void);
 int battleGetPassiveAffinityMultiplier(...);
@@ -51,7 +51,7 @@ extern unsigned int *btlGetMainState(void);
 extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern unsigned int playerGetSkillRank(unsigned int);
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: battleGetPassiveAffinityMultiplier. */
@@ -102,7 +102,7 @@ unsigned int FUN_003bdab0(int param_1,unsigned int param_2,int param_3,int param
   iStack_28 = param_4;
   puVar3 = (unsigned int *)btlGetMainState();
   temp_v2 = temp_v22;
-  FUN_002ae164();
+  dataTable40FindById();
   dataTable08Sub1GetRecord();
   puVar6 = puVar3;
   btlMainFindEntryByListedId(puVar3,param_5);
@@ -301,7 +301,7 @@ LAB_003be190:
         temp_v13 = romwright_piece_4_4(0x3f800000,temp_v3);
         puVar6 = (unsigned int *)btlGetMainState();
         btlMainFindEntryByListedId(puVar6,param_5);
-        if (((*puVar6 & 2) != 0) && (temp_v7 = temp_v1, FUN_002ae164(), temp_v7 != 0)) {
+        if (((*puVar6 & 2) != 0) && (temp_v7 = temp_v1, dataTable40FindById(), temp_v7 != 0)) {
           temp_v3 = playerGetSkillRank(temp_v1);
           FUN_00283ebc(temp_v7,temp_v3,2);
         }

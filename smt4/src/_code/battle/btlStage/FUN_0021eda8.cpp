@@ -1,96 +1,100 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021eda8` (_code @ 0x21eda8, 0x124 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: svc 0x23 now matches through the svcCloseHandle wrapper call (armlink inlines it); retail keeps the thread address in r5 after nn_os_Thread_FinalizeImpl (str r7,[r5]) and orders the joined store / the -1 store before the context load differently. */
+#include "shard/W6_W6Match1_BattleStageModel.h"
+#include "battle/btlStage.h"
+#include "nn/Result.h"
+#include "nn/svc.h"
+
+/* The work area of the job that owns the stage. */
+struct StageJobWork {
+    u8 unk00[0x30];
+    u32 job; /* the stage job, stopped when the stage is destroyed */
+};
+
+/* The stage thread's stack mapping: its destructor unmaps the region and the memory goes back
+ * to the engine heap. */
+struct StackRegion : AddressSpaceRegion {
+    ~StackRegion();
+    static void operator delete(void *block);
+};
 
 extern "C" {
+extern BtlStageGlobals g_btlStage;
 
-int mdlHandleArrayDestroy(int);
-int FUN_002759bc(void);
-int asdMemFreeNonNull(int);
-int FUN_002c3f5c(void);
-int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
-int asdMemFree(...);
-int jobStop(unsigned int, int);
-int FUN_002c526c(void);
-int software_interrupt(int);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern unsigned char g_btlStage; /* 0x4398d0 */
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: mdlHandleArrayDestroy. */
-/* Supplied declaration required: FUN_002759bc. */
-/* Supplied declaration required: asdMemFreeNonNull. */
-extern int jobIsValid(unsigned int);
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_002c3f5c. */
-/* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_002c526c. */
-extern void nn_os_Thread_FinalizeImpl(unsigned int);
-
-
-void FUN_0021eda8(void)
-
-{
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  int temp_v1;
-  int temp_v2;
-  int uStack_20;
-  unsigned char temp_v3 [4];
-  
-  temp_v0 = jobGetWork();
-  temp_v2 = (*(int *)((unsigned char *)&g_btlStage + 0x4));
-  if ((*(int *)((unsigned char *)&g_btlStage + 0x4)) != 0) {
-    uStack_20 = *(unsigned int *)((*(int *)((unsigned char *)&g_btlStage + 0x4)) + 0xa4);
-    puVar2 = temp_v3;
-    FUN_002c40f8(puVar2,&uStack_20,1,0,0xffffffff,0xffffffff);
-    if ((int)puVar2 < 0) {
-      FUN_002c526c();
-    }
-    *(unsigned char *)(temp_v2 + 0xa8) = 1;
-    nn_os_Thread_FinalizeImpl(temp_v2 + 0xa4);
-    if (*(int *)(temp_v2 + 0xa4) != 0) {
-      software_interrupt(0x23);
-      *(unsigned int *)(temp_v2 + 0xa4) = 0;
-    }
-    if (*(int *)(temp_v2 + 0xb0) != 0) {
-      FUN_002c3f5c();
-      temp_v1 = *(int *)(temp_v2 + 0xb0);
-      if (temp_v1 != 0) {
-        FUN_002c3f5c();
-        asdMemFreeNonNull(temp_v1);
-      }
-      *(unsigned int *)(temp_v2 + 0xb0) = 0;
-    }
-    if (*(int *)(temp_v2 + 0xac) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v2 + 0xac) = 0;
-    }
-    *(unsigned int *)(temp_v2 + 0xc0) = 0xffffffff;
-    if (*(int *)(temp_v2 + 0xa0) != 0) {
-      *(unsigned int *)(temp_v2 + 0xa0) = 0;
-    }
-    FUN_002759bc();
-    mdlHandleArrayDestroy(temp_v2);
-    *(unsigned int *)(temp_v2 + 0x80) = 0;
-    asdMemFree((*(int *)((unsigned char *)&g_btlStage + 0x4)));
-    (*(int *)((unsigned char *)&g_btlStage + 0x4)) = 0;
-  }
-  temp_v2 = jobIsValid(*(unsigned int *)(temp_v0 + 0x30));
-  if (temp_v2 != 0) {
-    jobStop(*(unsigned int *)(temp_v0 + 0x30),0);
-    return;
-  }
-  return;
+StageJobWork *jobGetWork(void);
+s32 jobIsValid(u32 job);
+void jobStop(u32 job, s32 arg);
+void FUN_002c3f5c(AddressSpaceRegion *region);
+s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
+void FUN_002c526c(s32 result);
+void nn_os_Thread_FinalizeImpl(u32 *thread);
+void FUN_002759bc(void);
+void mdlHandleArrayDestroy(BattleStageModel *stage);
+void asdMemFreeNonNull(void *block);
+void asdMemFree(void *block);
 }
 
-} /* extern "C" */
+inline StackRegion::~StackRegion()
+{
+    FUN_002c3f5c(this);
+}
+
+inline void StackRegion::operator delete(void *block)
+{
+    asdMemFreeNonNull(block);
+}
+
+/* Waits for the thread to end. */
+static void threadJoin(StageLoaderThread *thread)
+{
+    s32 index;
+    u32 handle = thread->handle;
+    s32 result = FUN_002c40f8(&index, &handle, 1, 0, -1);
+    if (nnResultIsFailure(result)) {
+        FUN_002c526c(result);
+    }
+    thread->joined = 1;
+}
+
+/* Closes a kernel handle and clears it. */
+static void closeHandle(u32 *handle)
+{
+    if (*handle != 0) {
+        svcCloseHandle(*handle);
+        *handle = 0;
+    }
+}
+
+/* Destroy callback of the stage job: joins the loader thread, releases its stack, tears the
+ * stage model down, frees it and stops the owner job. */
+extern "C" void FUN_0021eda8(void)
+{
+    StageJobWork *owner = jobGetWork();
+    BattleStageModel *stage = (BattleStageModel *)g_btlStage.stage;
+
+    if (stage != NULL) {
+        threadJoin(&stage->thread);
+        nn_os_Thread_FinalizeImpl(&stage->thread.handle);
+        closeHandle(&stage->thread.handle);
+        if (stage->stackRegion != NULL) {
+            FUN_002c3f5c(stage->stackRegion);
+            delete static_cast<StackRegion *>(stage->stackRegion);
+            stage->stackRegion = NULL;
+        }
+        if (stage->threadStack != NULL) {
+            asdMemFree(stage->threadStack);
+            stage->threadStack = NULL;
+        }
+        stage->unkc0 = -1;
+        if (stage->context != NULL) {
+            stage->context = NULL;
+        }
+        FUN_002759bc();
+        mdlHandleArrayDestroy(stage);
+        stage->state = 0;
+        asdMemFree(g_btlStage.stage);
+        g_btlStage.stage = NULL;
+    }
+    if (jobIsValid(owner->job) != 0) {
+        jobStop(owner->job, 0);
+    }
+}

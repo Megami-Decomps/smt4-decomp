@@ -1,46 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b6e70` (_code @ 0x3b6e70, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+/* The part of g_gameState holding the pending cutscene request. */
+struct GameStateRequestView {
+    u8 unk000[0x12f];
+    u8 requestPending;   // 0x12f
+    s16 requestId;       // 0x130
+    u8 unk132[2];
+    char requestName[32]; // 0x134
+};
 
 extern "C" {
 
-int libc_strcpy(unsigned char *, unsigned int);
-int libc_strcmp(unsigned char *, unsigned char *);
-int gameFlagSetValue(int, int);
+extern GameStateRequestView g_gameState;
+s16 scrGetArg(u32 index);
+const char *scrGetArgString(u32 index);
+char *libc_strcpy(char *destination, const char *source);
+s32 libc_strcmp(const char *a, const char *b);
+void gameFlagSetValue(u32 flag, u32 value, u32 notify);
 
-extern unsigned char LAB_003b6ee4; /* 0x3b6ee4 */
-extern unsigned char DAT_005f172b; /* 0x5f172b */
-extern short DAT_005f172c; /* 0x5f172c */
-extern unsigned char DAT_005f1730; /* 0x5f1730 */
-
-extern short scrGetArg(unsigned int);
-extern unsigned int scrGetArgString(unsigned int);
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: libc_strcmp. */
-/* Supplied declaration required: gameFlagSetValue. */
-
-
-unsigned int FUN_003b6e70(void)
-
+// Script command: record the requested cutscene id and name; one specific request also sets a story flag.
+u32 FUN_003b6e70(void)
 {
-/* irregular: 3 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  unsigned char *puVar3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArgString(1);
-  DAT_005f172b = 1;
-  DAT_005f172c = temp_v0;
-  libc_strcpy(&DAT_005f1730,temp_v1);
-  if (DAT_005f172c == 0x288) {
-    puVar3 = &DAT_005f1730;
-    libc_strcmp(&DAT_005f1730,&LAB_003b6ee4);
-    if (puVar3 == (unsigned char *)0x0) {
-      gameFlagSetValue(0x593,1);
+    s16 id = scrGetArg(0);
+    const char *name = scrGetArgString(1);
+    g_gameState.requestPending = 1;
+    g_gameState.requestId = id;
+    libc_strcpy(g_gameState.requestName, name);
+    if (g_gameState.requestId == 0x288 && libc_strcmp(g_gameState.requestName, "e648_07") == 0) {
+        gameFlagSetValue(0x593, 1, 1);
     }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

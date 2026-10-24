@@ -18,10 +18,10 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } param_3_stack;
 
-extern unsigned int FUN_002e7908(unsigned int *, int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, int *);
 extern unsigned int streamWriterFinish(unsigned int);
 /* Supplied declaration required: FUN_002f3dde. */
-extern int refIsNonNegative(unsigned int *);
+extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
 /* Supplied declaration required: FUN_002f4e90. */
 /* Supplied declaration required: FUN_002f4ecc. */
 /* Supplied declaration required: FUN_002f4f00. */
@@ -55,7 +55,7 @@ unsigned int FUN_0010b744(int param_1,int param_2,unsigned int param_3)
     temp_v2[0] = temp_v0;
     (**(romwright_code **)(**(int **)(temp_v0 + 0x28) + 0x30))
               (&temp_v4,*(int **)(temp_v0 + 0x28),temp_v3,param_1);
-    temp_v0 = refIsNonNegative((unsigned int *)&temp_v4);
+    temp_v0 = _ZNK18OnlineResultRecord7isValidEv((unsigned int *)&temp_v4);
     if (temp_v0 != 0) {
       FUN_002f4f00(temp_v3);
       return 1;
@@ -70,7 +70,7 @@ unsigned int FUN_0010b744(int param_1,int param_2,unsigned int param_3)
   }
   else {
     temp_v2[0] = -0x7ffefffe;
-    temp_v1 = FUN_002e7908((unsigned int *)&temp_v7,temp_v2);
+    temp_v1 = _ZN12OnlineResultC1ERKj((unsigned int *)&temp_v7,temp_v2);
     FUN_002f3dde(param_2,temp_v1);
   }
   return 0;

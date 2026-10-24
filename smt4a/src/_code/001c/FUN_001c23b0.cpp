@@ -8,7 +8,7 @@ int FUN_001b6694(unsigned int, int);
 int FUN_001cc6c0(unsigned int, int);
 int FUN_001d0b28(unsigned int, int);
 
-extern unsigned int FUN_001b1f04(void);
+extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 /* Supplied declaration required: FUN_001b6694. */
 extern unsigned int FUN_001c35d8(void);
 /* Supplied declaration required: FUN_001cc6c0. */
@@ -24,7 +24,7 @@ void FUN_001c23b0(int param_1,unsigned int *param_2,unsigned int *param_3)
   if (*(char *)(param_1 + 0xc) != '\0') {
     *(unsigned char *)(param_1 + 0xf) = 1;
     if (*(char *)(param_1 + 0xa2) != '\0') {
-      temp_v0 = FUN_001b1f04();
+      temp_v0 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
       FUN_001d0b28(temp_v0,param_1 + 0x50);
       *(unsigned char *)(param_1 + 0xa2) = 0;
     }
@@ -42,7 +42,7 @@ void FUN_001c23b0(int param_1,unsigned int *param_2,unsigned int *param_3)
   *(unsigned char *)(param_1 + 0xc) = 1;
   temp_v0 = FUN_001c35d8();
   FUN_001cc6c0(temp_v0,param_1 + 0x44);
-  temp_v0 = FUN_001b1f04();
+  temp_v0 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
   FUN_001b6694(temp_v0,param_1 + 0x50);
   *(unsigned char *)(param_1 + 0xa2) = 1;
   return;

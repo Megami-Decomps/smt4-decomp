@@ -14,7 +14,7 @@ int asdOperatorNew(void);
 int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, unsigned char *, int *);
-int FUN_003aaeb0(...);
+int _ZN9Obj4224489buildListEv(...);
 int spriteTable22Acquire(void);
 int FUN_003ad0e0(void);
 
@@ -48,7 +48,7 @@ extern unsigned int *_ZN9Obj422594C1Ev(void);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_003aaeb0. */
+/* Supplied declaration required: _ZN9Obj4224489buildListEv. */
 /* Supplied declaration required: spriteTable22Acquire. */
 /* Supplied declaration required: FUN_003ad0e0. */
 
@@ -96,7 +96,7 @@ void FUN_003ab550(int *param_1)
   }
   param_1[0x164] = (int)puVar5;
   puVar5[0x19] = (unsigned int)(param_1 + 0x32);
-  FUN_003aaeb0(param_1);
+  _ZN9Obj4224489buildListEv(param_1);
   FUN_00233670(param_1 + 0x157,0x1d,0x40e,10);
   *(unsigned char *)(param_1 + 0x15b) = 1;
   FUN_0029ee6c(0,0x323232ff);

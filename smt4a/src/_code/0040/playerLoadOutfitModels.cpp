@@ -13,7 +13,7 @@ struct OutfitModelRecord {
     /* 0x42 */ u16 model;
 };
 extern "C" {
-OutfitModelRecord *FUN_00192608(u32 id);
+OutfitModelRecord *dataTable08Sub2GetRecord(u32 id);
 u32 FUN_0040b11c(void *owner, u32 part, u32 group, u32 model, u32 flags);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_003e573c(void *owner, u32 part, const char *path, u32 flags);
@@ -25,17 +25,17 @@ extern "C" void playerLoadOutfitModels(void *owner, const OutfitEquipment *equip
         return;
 
     char path[64];
-    OutfitModelRecord *record = FUN_00192608(equipment->head);
+    OutfitModelRecord *record = dataTable08Sub2GetRecord(equipment->head);
     u32 variant = FUN_0040b11c(owner, 0, record->group, record->model, 0);
     textFormatBuffer(path, "player/pl%02d_%03dhd%d.bam", record->group, record->model, variant);
     FUN_003e573c(owner, 0, path, flags);
 
-    record = FUN_00192608(equipment->body);
+    record = dataTable08Sub2GetRecord(equipment->body);
     variant = FUN_0040b11c(owner, 1, record->group, record->model, 0);
     textFormatBuffer(path, "player/pl%02d_%03dbd%d.bam", record->group, record->model, variant);
     FUN_003e573c(owner, 1, path, flags);
 
-    record = FUN_00192608(equipment->legs);
+    record = dataTable08Sub2GetRecord(equipment->legs);
     variant = FUN_0040b11c(owner, 2, record->group, record->model, 0);
     textFormatBuffer(path, "player/pl%02d_%03dlg%d.bam", record->group, record->model, variant);
     FUN_003e573c(owner, 2, path, flags);

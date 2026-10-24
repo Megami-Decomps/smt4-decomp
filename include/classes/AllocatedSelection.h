@@ -72,6 +72,36 @@ public:
     /* 0x18 */ u8 unk18[4];
 };
 
+class Obj55c9c0 : public AllocatedSelectionState {
+public:
+    Obj55c9c0(SelectionObjectAllocator *allocator, u32 value)
+    {
+        owner = allocator;
+        parameter = value;
+        active = 3;
+        unk24 = 6;
+        unk25 = 0;
+        unk26 = 0;
+        unk28 = 0;
+        unk2a = 0;
+        unk2c = 0;
+        kind = 13;
+    }
+    virtual ~Obj55c9c0();
+    virtual void unk08();
+    virtual void unk0c();
+    virtual void unk10();
+    virtual void unk14();
+    virtual void vfunc18();
+    /* 0x18 */ u8 unk18[0xc];
+    /* 0x24 */ u8 unk24;
+    /* 0x25 */ u8 unk25;
+    /* 0x26 */ u16 unk26;
+    /* 0x28 */ u16 unk28;
+    /* 0x2A */ u16 unk2a;
+    /* 0x2C */ u16 unk2c;
+};
+
 inline void *operator new(u32, void *storage) { return storage; }
 
 #endif

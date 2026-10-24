@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00296ee0(void *obj, int state);
+int messageOwnerSetState(void *obj, int state);
 int buttonHelpSetPreset(int id);
 extern int scrRunOpcodesStub(u32 value);
 
@@ -20,7 +20,7 @@ void FUN_00397514(Obj *obj)
     if (scrRunOpcodesStub(obj->unk654) != 2) {
         return;
     }
-    FUN_00296ee0(obj, 2);
+    messageOwnerSetState(obj, 2);
     if (obj->unk029 != 0) {
         buttonHelpSetPreset(0x97);
         return;

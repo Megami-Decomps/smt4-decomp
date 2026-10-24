@@ -14,7 +14,7 @@ extern AocSystem *g_aocSystem;
 extern const char DAT_0040357c[];
 extern const s8 DAT_00403570[];
 s32 gameFlagIsSet(u32 flag);
-NpcTextureSource *FUN_002459d8(u32 npc);
+NpcTextureSource *dataTable25FindById(u32 npc);
 const NpcPortraitVariantRecord *FUN_002aecd8(const NpcTextureSource *source, u32 variant);
 void *asdMemAlloc(s32 heap, s32 category, s32 flags, u32 bytes, s32 count);
 void memClear(void *memory, u32 bytes);
@@ -30,7 +30,7 @@ u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 firstDelay, u16 lastDe
 void FUN_0031bc80(u32 npc, s32 position, u32 variant)
 {
     if (gameFlagIsSet(0x522)) {
-        if (FUN_002aecd8(FUN_002459d8(npc), variant) == NULL)
+        if (FUN_002aecd8(dataTable25FindById(npc), variant) == NULL)
             return;
     }
     asdDebugTrace(DAT_0040357c, 788);
@@ -44,7 +44,7 @@ void FUN_0031bc80(u32 npc, s32 position, u32 variant)
     work->state = 65;
     work->npcVariant.index = variant;
     work->textureTable = 3;
-    work->npc.source = FUN_002459d8(npc);
+    work->npc.source = dataTable25FindById(npc);
     work->textureNode = FUN_002aecd8(work->npc.source, work->npcVariant.index)->texture;
     switch (position) {
     case 0:

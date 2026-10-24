@@ -4,7 +4,7 @@
 
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;
-void FUN_002bee58(ButtonHelpDisplayUnit *unit, s32 value);
+void spriteStartAnimationByIndex(ButtonHelpDisplayUnit *unit, s32 value);
 u16 FUN_002aa024(s32 resource, s32 glyph);
 void FUN_002a9fdc(ButtonHelpDisplayUnit *unit, s32 value);
 void timerStart(ButtonHelpDisplayUnit *unit, s32 mode, s32 value);
@@ -34,7 +34,7 @@ void FUN_002ae5e0(void)
         offsetof(InitializationView, animation) == 0x4BE && offsetof(InitializationView, mode) == 0x4C8 ? 1 : -1];
     InitializationView *work = (InitializationView *)g_buttonHelp.work;
     for (s32 index = 0; index < 6; ++index) {
-        FUN_002bee58(&work->choices[index], 0);
+        spriteStartAnimationByIndex(&work->choices[index], 0);
         u8 kind = work->kinds[index].kind;
         if (kind == 0) {
             continue;

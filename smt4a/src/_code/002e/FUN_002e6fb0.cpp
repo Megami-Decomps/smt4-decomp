@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00122ddc(...);
-int FUN_002e7908(...);
+int _ZN12OnlineResultC1ERKj(...);
 int FUN_002e9d28(...);
 int FUN_002e9de4(...);
 int FUN_002e9ff4(...);
@@ -23,7 +23,7 @@ extern unsigned char LAB_001035b9; /* 0x1035b9 */
 extern unsigned char LAB_002e7040; /* 0x2e7040 */
 
 /* Supplied declaration required: FUN_00122ddc. */
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 /* Supplied declaration required: FUN_002e9d28. */
 /* Supplied declaration required: FUN_002e9de4. */
 /* Supplied declaration required: FUN_002e9ff4. */
@@ -72,7 +72,7 @@ void FUN_002e6fb0(unsigned int *param_1,int *param_2,int param_3)
     else {
       temp_v2 = (unsigned int *)0x8001000b;
     }
-    FUN_002e7908(param_1,&temp_v2);
+    _ZN12OnlineResultC1ERKj(param_1,&temp_v2);
   }
   return;
 }

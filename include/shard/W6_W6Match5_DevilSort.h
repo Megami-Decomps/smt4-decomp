@@ -18,7 +18,9 @@ extern "C" DevilSortRecord *devilGetRecord(u16);
 
 /* Persistent unit entries retain their demon id and primary sort rank. */
 struct GameUnitSortRecord {
-    /* 0x00 */ u8 unk00[0x44];
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s16 sortKey;
+    /* 0x12 */ u8 unk12[0x44 - 0x12];
     /* 0x44 */ u16 flags;
     /* 0x46 */ u16 id;
     /* 0x48 */ u8 rank;

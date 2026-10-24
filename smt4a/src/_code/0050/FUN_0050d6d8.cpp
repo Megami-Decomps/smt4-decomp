@@ -1,14 +1,6 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0050d6d8` (_code @ 0x50d6d8, 0xc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-
-long long FUN_0050d6d8(int param_1,int param_2)
-
+/* NON_MATCHING: retail copies b to r2 first (mov r2, r1; smull r0, r1, r2, r0) to keep RdHi distinct from Rm; armcc builds smull r0, r1, r1, r0 (pre-v6 cpus give a different register shuffle) */
+/* Signed 32x32 -> 64-bit multiply. */
+extern "C" long long FUN_0050d6d8(int a, int b)
 {
-  return (long long)param_2 * (long long)param_1;
+    return (long long)b * (long long)a;
 }
-
-} /* extern "C" */

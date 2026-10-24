@@ -1,51 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035a7c4` (_code @ 0x35a7c4, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrScriptProcessStartEntry(undefined4, int);
+/* A scene work block with a two-step script start; only the fields this state function uses are named. */
+typedef struct ScriptStartWork {
+    /* 0x000 */ u8 unk000[0x360];
+    /* 0x360 */ u32 script;
+    /* 0x364 */ u8 unk364[0x4C];
+    /* 0x3B0 */ u32 result;
+    /* 0x3B4 */ u8 unk3B4[8];
+    /* 0x3BC */ s32 step;
+    /* 0x3C0 */ u8 unk3C0[0x1C];
+    /* 0x3DC */ u32 flags;
+} ScriptStartWork;
 
-typedef struct fn_0035a7c4_arg0 fn_0035a7c4_arg0;
-struct fn_0035a7c4_arg0 {
-    unsigned char pad_0x0[0x360];
-    undefined4 field_0x360; /* +0x360 */
-    unsigned char pad_0x364[0x4c];
-    undefined4 field_0x3b0; /* +0x3b0 */
-    unsigned char pad_0x3b4[0x8];
-    int field_0x3bc; /* +0x3bc */
-    unsigned char pad_0x3c0[0x1c];
-    uint field_0x3dc; /* +0x3dc */
-};
+void scrScriptProcessStartEntry(u32 script, s32 entry);
+s32 scrRunOpcodesStub(u32 script);
+u32 maskToCode(void);
 
-extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-extern unsigned int maskToCode(void);
-
-
-unsigned int FUN_0035a7c4(fn_0035a7c4_arg0 *param_1)
-
+/* State function: starts script entry 0x22, then waits for it to finish (result 3 once done). */
+u32 FUN_0035a7c4(ScriptStartWork *work)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v2 = 0;
-  if (param_1->field_0x3bc != 0) {
-    if ((param_1->field_0x3bc == 1) && (temp_v0 = scrRunOpcodesStub(param_1->field_0x360), temp_v0 == 2)) {
-      param_1->field_0x3dc = param_1->field_0x3dc & 0xffffffef;
-      param_1->field_0x3bc = 0;
-      temp_v1 = maskToCode();
-      temp_v2 = 3;
-      param_1->field_0x3b0 = temp_v1;
+    u32 status = 0;
+
+    switch (work->step) {
+    case 0:
+        scrScriptProcessStartEntry(work->script, 0x22);
+        work->step++;
+        break;
+    case 1:
+        if (scrRunOpcodesStub(work->script) == 2) {
+            work->flags &= ~0x10u;
+            work->step = 0;
+            work->result = maskToCode();
+            status = 3;
+        }
+        break;
     }
-  }
-  else {
-    scrScriptProcessStartEntry(param_1->field_0x360,0x22);
-    param_1->field_0x3bc = param_1->field_0x3bc + 1;
-  }
-  return temp_v2;
+    return status;
 }
 
 } /* extern "C" */

@@ -1,47 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e3378` (_code @ 0x2e3378, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only register allocation of the bit temporaries differs */
+#include "common.h"
+
+struct IdRecord {
+    u16 id;  // 0x00
+};
+
+struct BitFlags {
+    u8 unk00[0x35];  // 0x00
+    u8 bits[1];      // 0x35
+};
 
 extern "C" {
 
-int dataTable05Sub9GetCount(void);
+u32 dataTable05Sub9GetCount(void);
+IdRecord *FUN_00248620(u16 index);
+BitFlags *FUN_002a0d0c(void);
 
-extern unsigned short *FUN_00248620(unsigned int);
-extern int FUN_002a0d0c(void);
-/* Supplied declaration required: dataTable05Sub9GetCount. */
-
-
-void FUN_002e3378(unsigned int param_1)
-
+/* Sets the flag bit of the entry whose record id is `id`. */
+void FUN_002e3378(u16 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  unsigned short *puVar3;
-  int temp_v2;
-  unsigned char *pbVar5;
-  unsigned int temp_v3;
-  
-  temp_v1 = param_1;
-  dataTable05Sub9GetCount();
-  temp_v3 = 0;
-  if (temp_v1 != 0) {
-    while ((puVar3 = (unsigned short *)FUN_00248620(temp_v3 & 0xffff), puVar3 == (unsigned short *)0x0 ||
-           (*puVar3 != param_1))) {
-      temp_v3 = temp_v3 + 1;
-      if (temp_v1 <= temp_v3) {
-        return;
-      }
+    u32 count = dataTable05Sub9GetCount();
+
+    for (s32 i = 0; i < count; i++) {
+        IdRecord *record = FUN_00248620(i);
+
+        if (record != NULL && record->id == id) {
+            u8 *byte = &FUN_002a0d0c()->bits[i / 8];
+            s32 current = *byte;
+            s32 mask = 1 << (i % 8);
+
+            if ((current & mask) == 0) {
+                *byte = current | mask;
+            }
+            return;
+        }
     }
-    temp_v2 = FUN_002a0d0c();
-    pbVar5 = (unsigned char *)(temp_v2 + ((int)(temp_v3 + ((unsigned int)((int)temp_v3 >> 0x1f) >> 0x1d)) >> 3) + 0x35);
-    temp_v0 = *pbVar5;
-    temp_v1 = 1 << (((int)temp_v3 % 8) & 0xffU);
-    if ((temp_v0 & temp_v1) == 0) {
-      *pbVar5 = temp_v0 | (unsigned char)temp_v1;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

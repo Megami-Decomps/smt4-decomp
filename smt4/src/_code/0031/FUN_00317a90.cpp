@@ -2,7 +2,7 @@
 #include "battle/EffectTextures.h"
 
 extern "C" {
-extern BattleEffectTextureSlot DAT_004332a0[26];
+extern BattleEffectTextureSlot g_pendingTextures[26];
 AsdTexture* asdTextureCreate(u32 flags);
 s32 FUN_002522f8(char* buffer, u32 size, const char* format, ...);
 void* fileLoadSync(const char* path, u32* size, u32 flags);
@@ -16,7 +16,7 @@ void FUN_00317a90(void)
     u32 size;
     u32 i = 0;
     do {
-        BattleEffectTextureSlot* slot = &DAT_004332a0[i];
+        BattleEffectTextureSlot* slot = &g_pendingTextures[i];
         if (slot->state != 1 && slot->texture == NULL) {
             slot->texture = asdTextureCreate(0);
             FUN_002522f8(path, sizeof(path), "%s%s.tga", "battle/effect/tex/", slot->name);

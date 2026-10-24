@@ -10,7 +10,7 @@ int FUN_00162790(int, unsigned int, unsigned char [144]);
 int FUN_0016c4b8(int, int);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_002371b0(void);
-int FUN_00379664(int, int);
+int findKeyedRecord(int, int);
 int FUN_003849cc(int, int, int, unsigned char [144], unsigned int);
 int dataTable2ECount(...);
 int VectorSignedToFloat(int, int);
@@ -34,7 +34,7 @@ extern unsigned long long FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_002371b0. */
 extern int dataTable2EGetEntry(int);
-/* Supplied declaration required: FUN_00379664. */
+/* Supplied declaration required: findKeyedRecord. */
 /* Supplied declaration required: FUN_003849cc. */
 /* Supplied declaration required: dataTable2ECount. */
 
@@ -159,7 +159,7 @@ unsigned int FUN_00315d34(void)
     } while (temp_v4 < temp_v2);
   }
   temp_v2 = (int)*(short *)(temp_v1 + 0xccec);
-  if ((temp_v2 == 0x18) || (FUN_00379664(temp_v2,(int)*(short *)(temp_v1 + 0xccee)), temp_v2 != 0)) {
+  if ((temp_v2 == 0x18) || (findKeyedRecord(temp_v2,(int)*(short *)(temp_v1 + 0xccee)), temp_v2 != 0)) {
     temp_v2 = g_renderCtx;
     temp_v3 = FUN_001692ac(1,0);
     piVar7 = (int *)(temp_v2 + 0x1258);

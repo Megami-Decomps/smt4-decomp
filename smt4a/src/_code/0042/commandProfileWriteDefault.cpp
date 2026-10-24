@@ -2,14 +2,14 @@
 #include "shard/W6_W6Match2_CommandProfile.h"
 
 extern "C" {
-void FUN_0016d1f4(CommandProfile* profile);
+void _ZN9SlotStateC1Ev(CommandProfile* profile);
 u32* gxDrawSettingsMakeCommand(CommandProfile* profile, u32* output, s32 mode);
 
 // Write the initialized primary/supplementary command profile into the output buffer.
 u32* commandProfileWriteDefault(u32* output)
 {
     CommandProfile profile;
-    FUN_0016d1f4(&profile);
+    _ZN9SlotStateC1Ev(&profile);
     profile.secondary.enabled = 1;
     profile.secondary.mode = 0;
     profile.primary.enabled = 1;

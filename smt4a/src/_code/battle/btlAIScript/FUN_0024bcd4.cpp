@@ -156,9 +156,9 @@ extern unsigned int DAT_00573b7c; /* 0x573b7c */
 extern unsigned int g_btlPartnerAttack; /* 0x573c50 */
 extern int g_btlStageModel; /* 0x57a4f8 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
-extern unsigned int DAT_005c4c2c; /* 0x5c4c2c */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x5c4c2c */
 extern int DAT_005f1b74; /* 0x5f1b74 */
-extern unsigned int DAT_0064c054; /* 0x64c054 */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x64c054 */
 extern unsigned int DAT_0064c058; /* 0x64c058 */
 extern unsigned int DAT_0064c05c; /* 0x64c05c */
 extern unsigned int DAT_0064c060; /* 0x64c060 */
@@ -1151,8 +1151,8 @@ LAB_0024d75c:
             *(unsigned int *)(temp_v2 + 0x229c) = temp_v17;
             *(unsigned int *)(temp_v2 + 0x22a0) = temp_v18;
             *(unsigned int *)(temp_v2 + 0x22a4) = temp_v19;
-            if (((DAT_005c4c2c & 1) == 0) && (temp_v10 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v10 != 0)) {
-              DAT_0064c054 = 0x3f800000;
+            if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v10 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v10 != 0)) {
+              _ZZN2nw4math5MTX348IdentityEvE8identity = 0x3f800000;
               DAT_0064c058 = 0;
               DAT_0064c05c = 0;
               DAT_0064c060 = 0;
@@ -1165,7 +1165,7 @@ LAB_0024d75c:
               DAT_0064c07c = 0x3f800000;
               DAT_0064c080 = 0;
             }
-            nn_math_ARMv6_MTX34CopyAsm(&temp_v21,&DAT_0064c054);
+            nn_math_ARMv6_MTX34CopyAsm(&temp_v21,&_ZZN2nw4math5MTX348IdentityEvE8identity);
             FUN_003fda64(*(unsigned int *)(**(int **)(temp_v3 + 0x1bc) + 4),&LAB_0024d9a4,&temp_v21);
             FUN_0050d8e4();
             temp_v15 = 57.295776f;

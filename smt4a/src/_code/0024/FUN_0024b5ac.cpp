@@ -1,118 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024b5ac` (_code @ 0x24b5b0, 0x160 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: AocMenu state machine matches instruction for instruction (inline operator new, out-of-line ctor/dtor, delete); armcc loads screen->menu before the state-3 store where retail loads it after. */
+#include "classes/AocMenu.h"
 
-struct MessageCloseWork;
+/* The add-on content screen's work: a small state machine around the AocMenu it owns. */
+struct AocMenuScreen {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u8 closing;
+    /* 0x19 */ u8 skipSequence;
+    /* 0x1A */ u8 state;
+    /* 0x1B */ u8 unk1B;
+    /* 0x1C */ AocMenu *menu;
+};
 
 extern "C" {
+extern AocMenuScreen *g_sceneResourceWork;
+void campCommonBgAcquire(void);
+void campButtonHelpLoad(void);
+void campButtonHelpAcquire(void);
+void FUN_003a7644(AocMenu *menu);
+void FUN_0047c36c(AocMenu *menu);
+void FUN_003d54f8(s32 channel, s32 value);
+void soundChannelStopAll(s32 mask);
+void asdSequenceRequest(s32 id, u8 *request, s32 flag);
+void aocMainShutdown(void);
+void campButtonHelpRelease(void);
+void helpTexturesRelease(void);
+void campCommonBgRelease(void);
 
-int asdSequenceRequest(int, int *);
-int asdOperatorNew(void);
-int FUN_002bf464(void);
-int asdOperatorDelete(void);
-int helpTexturesRelease(void);
-int campCommonBgAcquire(void);
-int campButtonHelpAcquire(void);
-int campCommonBgRelease(void);
-int campButtonHelpRelease(void);
-void FUN_003a7644(MessageCloseWork *);
-int soundChannelStopAll(int);
-int FUN_003d54f8(...);
-int FUN_0047c36c(unsigned int);
-int aocMainShutdown(void);
-int FUN_0047c950(void);
-
-/* stack frame of param_4: 1 slot(s), 1 byte(s) */
-typedef struct {
-    unsigned char sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-#ifndef ROMWRIGHT_PIECE_3_1_DEFINED
-#define ROMWRIGHT_PIECE_3_1_DEFINED
-#define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
-#endif
-/* Supplied declaration required: asdSequenceRequest. */
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_002bf464. */
-/* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: helpTexturesRelease. */
-/* Supplied declaration required: campCommonBgAcquire. */
-/* Supplied declaration required: campButtonHelpAcquire. */
-/* Supplied declaration required: campCommonBgRelease. */
-/* Supplied declaration required: campButtonHelpRelease. */
-/* Supplied declaration required: FUN_003a7644. */
-/* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_003d54f8. */
-/* Supplied declaration required: FUN_0047c36c. */
-/* Supplied declaration required: aocMainShutdown. */
-extern unsigned int FUN_0047c8b8(void);
-/* Supplied declaration required: FUN_0047c950. */
-
-
-unsigned int FUN_0024b5ac(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Opens the menu (state 0), waits until it is up (1), then closes it (2); returns -1 once done (3). */
+u32 FUN_0024b5ac(void)
 {
-/* irregular: 15 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v3 = *param_1;
-  temp_v0 = *(char *)(temp_v3 + 0x1a);
-  temp_v4 = param_4;
-  if (temp_v0 != '\0') {
-    if (temp_v0 != '\x01') {
-      if (temp_v0 != '\x02') {
-        if (temp_v0 == '\x03') {
-          return 0xffffffff;
+    AocMenuScreen *screen = g_sceneResourceWork;
+
+    switch (screen->state) {
+    case 0:
+        campCommonBgAcquire();
+        campButtonHelpLoad();
+        campButtonHelpAcquire();
+        screen->menu = new AocMenu;
+        FUN_003a7644(screen->menu);
+        screen->state = 1;
+        break;
+    case 1:
+        FUN_0047c36c(screen->menu);
+        if ((screen->menu->flags & 1) != 0) {
+            screen->state = 2;
         }
-      }
-      else {
-        if (*(char *)(temp_v3 + 0x19) != '\0') {
-          FUN_003d54f8(0,1);
-          FUN_003d54f8(1);
-          soundChannelStopAll(0xf);
+        break;
+    case 2:
+        if (screen->skipSequence != 0) {
+            FUN_003d54f8(0, 1);
+            FUN_003d54f8(1, 1);
+            soundChannelStopAll(0xF);
+        } else {
+            u8 request = 1;
+            asdSequenceRequest(1, &request, 1);
         }
-        else {
-          temp_v4 = romwright_piece_3_1((int)((unsigned int)param_4 >> 8),1);
-          asdSequenceRequest(1,&temp_v4);
-        }
-        *(unsigned char *)(temp_v3 + 0x1a) = 3;
-        *(unsigned char *)(temp_v3 + 0x18) = 1;
-        if ((*(int *)(temp_v3 + 0x1c) != 0) && (aocMainShutdown(), *(int *)(temp_v3 + 0x1c) != 0)) {
-          FUN_0047c950();
-          asdOperatorDelete();
-          *(unsigned int *)(temp_v3 + 0x1c) = 0;
+        screen->state = 3;
+        screen->closing = 1;
+        if (screen->menu != NULL) {
+            aocMainShutdown();
+            if (screen->menu != NULL) {
+                delete screen->menu;
+                screen->menu = NULL;
+            }
         }
         campButtonHelpRelease();
         helpTexturesRelease();
         campCommonBgRelease();
-      }
+        break;
+    case 3:
+        return 0xFFFFFFFF;
     }
-    else {
-      FUN_0047c36c(*(unsigned int *)(temp_v3 + 0x1c));
-      if ((**(unsigned int **)(temp_v3 + 0x1c) & 1) != 0) {
-        *(unsigned char *)(temp_v3 + 0x1a) = 2;
-      }
-    }
-  }
-  else {
-    campCommonBgAcquire();
-    FUN_002bf464();
-    campButtonHelpAcquire();
-    temp_v1 = 0x26f0;
-    asdOperatorNew();
-    temp_v2 = 0;
-    if (temp_v1 != 0) {
-      temp_v2 = FUN_0047c8b8();
-    }
-    *(unsigned int *)(temp_v3 + 0x1c) = temp_v2;
-    FUN_003a7644((MessageCloseWork *)temp_v2);
-    *(unsigned char *)(temp_v3 + 0x1a) = 1;
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

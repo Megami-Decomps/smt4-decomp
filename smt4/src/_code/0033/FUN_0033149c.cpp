@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00241f2c(...);
+int dataTable0BGetValueById(...);
 int dataTable0BFindById(...);
 int appCheckPurchaseRequirements(void);
 int FUN_00290994(...);
@@ -40,7 +40,7 @@ extern unsigned char LAB_0033197c; /* 0x33197c */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00241f2c. */
+/* Supplied declaration required: dataTable0BGetValueById. */
 /* Supplied declaration required: dataTable0BFindById. */
 /* Supplied declaration required: appCheckPurchaseRequirements. */
 /* Supplied declaration required: FUN_00290994. */
@@ -141,7 +141,7 @@ void FUN_0033149c(int param_1)
               temp_v11 = 0x5a5a5aff;
               temp_v12 = 0xdc0f14ff;
               temp_v5 = temp_v10;
-              FUN_00241f2c(temp_v10);
+              dataTable0BGetValueById(temp_v10);
               textFormatBuffer(temp_v13,&LAB_0033196c,temp_v5);
             }
           }
@@ -149,7 +149,7 @@ void FUN_0033149c(int param_1)
             temp_v12 = 0xffffffff;
             temp_v11 = 0xff;
             temp_v5 = temp_v10;
-            FUN_00241f2c(temp_v10);
+            dataTable0BGetValueById(temp_v10);
             textFormatBuffer(temp_v13,&LAB_0033196c,temp_v5);
           }
           temp_v4 = FUN_002bf4f8(0x1d,0x594);
@@ -241,7 +241,7 @@ void FUN_0033149c(int param_1)
           temp_v11 = 0x787878ff;
           temp_v12 = 0xdc0f14ff;
           temp_v5 = temp_v10;
-          FUN_00241f2c(temp_v10);
+          dataTable0BGetValueById(temp_v10);
           textFormatBuffer(temp_v13,&LAB_0033196c,temp_v5);
         }
       }
@@ -249,7 +249,7 @@ void FUN_0033149c(int param_1)
         temp_v11 = 0xffffffff;
         temp_v12 = 0xffffffff;
         temp_v5 = temp_v10;
-        FUN_00241f2c(temp_v10);
+        dataTable0BGetValueById(temp_v10);
         textFormatBuffer(temp_v13,&LAB_0033196c,temp_v5);
       }
       temp_v9 = FUN_002bf4f8(0x1d,0x59d);

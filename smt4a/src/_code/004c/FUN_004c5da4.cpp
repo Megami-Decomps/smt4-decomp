@@ -4,7 +4,7 @@
 
 struct Source4C;
 extern "C" {
-Table04ExtraRecord *FUN_0034a290(u32 skill);
+Table04ExtraRecord *dataTable41FindById(u32 skill);
 Source4C *FUN_003f0e20(BattleMaskState *battle, u32 unit);
 void source4CCopyHalves(Source4C *source, u16 *skills);
 s32 lcgRandomRange(u32 maximum);
@@ -34,7 +34,7 @@ s32 FUN_004c5da4(u32 unit, s32 rollChance)
     source4CCopyHalves(source, skills);
     for (s32 index = 0; index < 9; ++index) {
         if (skills[index] != 0) {
-            Table04ExtraRecord *skill = FUN_0034a290(skills[index]);
+            Table04ExtraRecord *skill = dataTable41FindById(skills[index]);
             if (skill != NULL && skill->trigger.triggeredSkill != 0) {
                 s32 chance = skill->trigger.triggerChance;
                 if (chance != 0 && (!rollChance || lcgRandomRange(99) < chance))

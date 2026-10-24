@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7908(unsigned int, unsigned char **);
+int _ZN12OnlineResultC1ERKj(unsigned int, unsigned char **);
 int FUN_002e9d28(...);
 int FUN_002e9de4(...);
 int onlineInstantiationContextGetCurrent(void);
@@ -34,7 +34,7 @@ extern unsigned char LAB_001091fc; /* 0x1091fc */
 extern unsigned char DAT_0055b2a4; /* 0x55b2a4 */
 extern unsigned int DAT_00594a30; /* 0x594a30 */
 
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 /* Supplied declaration required: FUN_002e9d28. */
 /* Supplied declaration required: FUN_002e9de4. */
 /* Supplied declaration required: onlineInstantiationContextGetCurrent. */
@@ -145,14 +145,14 @@ void FUN_00109050(unsigned int param_1,int *param_2,unsigned int param_3,unsigne
       if (temp_v1 == 0) {
         (**(romwright_code **)(*param_2 + 0x58))(param_2,0);
         temp_v4 = (unsigned char *)0x80050008;
-        FUN_002e7908(temp_v10,ppuVar6);
+        _ZN12OnlineResultC1ERKj(temp_v10,ppuVar6);
         return;
       }
     }
     temp_v9[0] = 0x10001;
     ppuVar6 = (unsigned char **)temp_v9;
   }
-  FUN_002e7908(temp_v10,ppuVar6);
+  _ZN12OnlineResultC1ERKj(temp_v10,ppuVar6);
   return;
 }
 

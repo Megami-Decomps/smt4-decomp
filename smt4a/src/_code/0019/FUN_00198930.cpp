@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int asdDeallocateArrayStorage(int, int, int);
+int _ZN4__rw15__rw_deallocateEPvji(int, int, int);
 
-extern unsigned int *FUN_001006c2(int, unsigned int);
-/* Supplied declaration required: asdDeallocateArrayStorage. */
+extern unsigned int *_ZN4__rw13__rw_allocateEji(int, unsigned int);
+/* Supplied declaration required: _ZN4__rw15__rw_deallocateEPvji. */
 
 
 void FUN_00198930(int *param_1,unsigned int *param_2,unsigned int *param_3)
@@ -37,7 +37,7 @@ void FUN_00198930(int *param_1,unsigned int *param_2,unsigned int *param_3)
     if (temp_v2 < temp_v0 + 0x20) {
       temp_v2 = temp_v0 + 0x20;
     }
-    puVar2 = (unsigned int *)FUN_001006c2(temp_v2 * 0x30,0);
+    puVar2 = (unsigned int *)_ZN4__rw13__rw_allocateEji(temp_v2 * 0x30,0);
     puVar5 = puVar2;
     for (puVar4 = (unsigned int *)*param_1; puVar4 != param_2; puVar4 = puVar4 + 0xc) {
       if (puVar5 != (unsigned int *)0x0) {
@@ -123,7 +123,7 @@ void FUN_00198930(int *param_1,unsigned int *param_2,unsigned int *param_3)
     }
     temp_v3 = *param_1;
     temp_v1 = param_1[1];
-    asdDeallocateArrayStorage(temp_v3,(param_1[2] - temp_v3) / 0x30,0);
+    _ZN4__rw15__rw_deallocateEPvji(temp_v3,(param_1[2] - temp_v3) / 0x30,0);
     *param_1 = (int)puVar2;
     param_1[1] = (int)(puVar2 + ((temp_v1 - temp_v3) / 0x30) * 0xc + 0xc);
     param_1[2] = (int)(puVar2 + temp_v2 * 0xc);

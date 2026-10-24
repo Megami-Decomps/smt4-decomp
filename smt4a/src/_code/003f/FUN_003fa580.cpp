@@ -1,67 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fa580` (_code @ 0x3fa580, 0x124 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail does not hoist the constant 8 (loads it at each use, frame 12 with push {r4,r5,lr}) and keeps the three finishing sequences separate with the result store first; this build hoists 8 into r6 (frame 16) and merges/reorders them. Same as FUN_003fa1c8. */
+#include "network/DataStore/DataStoreMain.h"
+#include "classes/OnlineResult.h"
 
 extern "C" {
 
-int FUN_00123bd8(unsigned char [12], unsigned int);
-int vectorCopyHeader(...);
+s32 FUN_00432acc(void);
+OnlineResult FUN_00123bd8(DataStoreLink *link);
+void _ZN18OnlineResultRecordaSERKS_(DataStoreWordTriple *dest, const OnlineResult &source);
+s32 _ZNK18OnlineResultRecord7isValidEv(const DataStoreWordTriple *header);
+void *FUN_00111800(DataStoreWordTriple *header);
 
-typedef int romwright_code(...);
-extern unsigned int FUN_00111800(int);
-/* Supplied declaration required: FUN_00123bd8. */
-/* Supplied declaration required: vectorCopyHeader. */
-extern int refIsNonNegative(int);
-extern int FUN_00432acc(void);
-
-
-unsigned int FUN_003fa580(int param_1)
-
+/* Waits for the server's reply (or, without one, builds the header from the link): a non-negative header moves on to
+ * step 8, a negative one ends the step in failure. Returns 1 once the reply was handled. */
+s32 FUN_003fa580(DataStoreWork *work)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2 [12];
-  
-  temp_v0 = FUN_00432acc();
-  if (temp_v0 == 0) {
-    *(unsigned int *)(param_1 + 0x28) = 0;
-    *(unsigned char *)(param_1 + 0xc) = 1;
-    *(unsigned char *)(param_1 + 0xd) = 1;
-    *(unsigned char *)(param_1 + 0xe) = 1;
-    *(unsigned int *)(param_1 + 0x10) = 8;
-    return 1;
-  }
-  if ((*(int **)(param_1 + 0x44) != (int *)0x0) &&
-     (temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 0x44) + 4))(), temp_v0 != 0)) {
-    temp_v1 = (**(romwright_code **)**(unsigned int **)(param_1 + 0x44))();
-    vectorCopyHeader(param_1 + 0x1c,temp_v1);
-    temp_v0 = refIsNonNegative(param_1 + 0x1c);
-    if (temp_v0 != 0) {
-      *(unsigned int *)(param_1 + 4) = 8;
+    if (FUN_00432acc() != 0) {
+        if (work->transfer.reply != NULL && work->transfer.reply->isDone()) {
+            _ZN18OnlineResultRecordaSERKS_(&work->header, *(const OnlineResult *)work->transfer.reply->getHeader());
+            if (_ZNK18OnlineResultRecord7isValidEv(&work->header)) {
+                work->initialState[0] = 8;
+            } else {
+                work->finishAtStep8(FUN_00111800(&work->header));
+            }
+            return 1;
+        }
+        _ZN18OnlineResultRecordaSERKS_(&work->header, FUN_00123bd8(work->transfer.link));
+        if (!_ZNK18OnlineResultRecord7isValidEv(&work->header)) {
+            work->finishAtStep8(FUN_00111800(&work->header));
+        }
+        return 0;
     }
-    else {
-      temp_v1 = FUN_00111800(param_1 + 0x1c);
-      *(unsigned int *)(param_1 + 0x28) = temp_v1;
-      *(unsigned char *)(param_1 + 0xc) = 1;
-      *(unsigned char *)(param_1 + 0xd) = 1;
-      *(unsigned char *)(param_1 + 0xe) = 1;
-      *(unsigned int *)(param_1 + 0x10) = 8;
-    }
+    work->finishAtStep8(NULL);
     return 1;
-  }
-  FUN_00123bd8(temp_v2,*(unsigned int *)(param_1 + 0x34));
-  vectorCopyHeader(param_1 + 0x1c,temp_v2);
-  temp_v0 = refIsNonNegative(param_1 + 0x1c);
-  if (temp_v0 == 0) {
-    temp_v1 = FUN_00111800(param_1 + 0x1c);
-    *(unsigned int *)(param_1 + 0x28) = temp_v1;
-    *(unsigned char *)(param_1 + 0xc) = 1;
-    *(unsigned char *)(param_1 + 0xd) = 1;
-    *(unsigned char *)(param_1 + 0xe) = 1;
-    *(unsigned int *)(param_1 + 0x10) = 8;
-  }
-  return 0;
 }
 
 } /* extern "C" */

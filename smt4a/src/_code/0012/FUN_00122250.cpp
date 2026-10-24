@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ea20c(...);
+int _ZN15OnlineTimestampC1Ev(...);
 int FUN_002ea3d0(...);
 
 typedef struct fn_00122250_arg0 fn_00122250_arg0;
@@ -30,7 +30,7 @@ typedef struct {
 
 extern unsigned char LAB_00122294; /* 0x122294 */
 
-/* Supplied declaration required: FUN_002ea20c. */
+/* Supplied declaration required: _ZN15OnlineTimestampC1Ev. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 
@@ -51,7 +51,7 @@ void FUN_00122250(fn_00122250_arg0 *param_1,unsigned int param_2,unsigned int pa
   param_1->field_0xe4 = param_3;
   param_1->field_0xe0 = param_2;
   param_1->field_0xf0 = param_5;
-  FUN_002ea20c(&temp_v1);
+  _ZN15OnlineTimestampC1Ev(&temp_v1);
   param_1->field_0x100 = temp_v1;
   param_1->field_0x104 = temp_v2;
   temp_v0 = FUN_002ea3c0(temp_v3,0x34,1,&LAB_00122294);

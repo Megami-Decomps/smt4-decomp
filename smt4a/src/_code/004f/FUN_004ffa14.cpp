@@ -1,33 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ffa14` (_code @ 0x4ffa14, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads the target through the unrebased slot pointer (ldr [r0,#48]) and keeps a separate r0+36 base for mode/value, and compares with movhi/bls; built uses one base and movgt/ble. */
+#include "common.h"
+
+struct Threshold {
+    u8 unk00[4];
+    u8 flags;  // 0x04
+    u8 unk05[3];
+    f32 limit; // 0x08
+};
+
+struct Slot {
+    u8 unk00[4];
+    f32 value;         // 0x04
+    u8 unk08[4];
+    Threshold *target; // 0x0c
+    u8 unk10[0x10];
+    u8 mode;           // 0x20
+    u8 unk21[0xf];
+};
+
+struct SlotOwner {
+    u8 unk00[4];
+    u32 flags;   // 0x04
+    u8 unk08[0x14];
+    s32 current; // 0x1c
+    u8 unk20[4];
+    Slot slots[1]; // 0x24
+};
 
 extern "C" {
 
-
-unsigned int FUN_004ffa14(int param_1)
-
+// True when the current slot has no pending threshold, or its mode/flags already satisfy it.
+u32 FUN_004ffa14(SlotOwner *owner)
 {
-  int temp_v0;
-  
-  if ((*(unsigned int *)(param_1 + 4) & 2) == 0) {
-    param_1 = param_1 + *(int *)(param_1 + 0x1c) * 0x30;
-    temp_v0 = *(int *)(param_1 + 0x30);
-    if (temp_v0 != 0) {
-      if (*(char *)(param_1 + 0x44) != '\x02') {
-        if (*(char *)(param_1 + 0x44) == '\x01') {
-          return 1;
+    if ((owner->flags & 2) == 0) {
+        Slot *slot = &owner->slots[owner->current];
+        Threshold *target = slot->target;
+        if (target != NULL) {
+            if (slot->mode == 2) {
+                if ((target->flags & 1) != 0) {
+                    return 1;
+                }
+            } else if (slot->mode == 1) {
+                return 1;
+            }
+            if (slot->value < target->limit) {
+                return 0;
+            }
         }
-      }
-      else if ((*(unsigned char *)(temp_v0 + 4) & 1) != 0) {
-        return 1;
-      }
-      if (*(float *)(param_1 + 0x28) < *(float *)(temp_v0 + 8)) {
-        return 0;
-      }
     }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

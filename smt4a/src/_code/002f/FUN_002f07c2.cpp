@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f07c2` (_code @ 0x2f07c2, 0x15a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: BLOCKED: Thumb online job step over map iterators (FUN_002eee88, FUN_002efd12/2efd36/2efd4a, FUN_002eb5e8) and RAII ownership helpers; none of those helper classes (iterator, handle, lock) is recovered yet. */
 #include "romwright_types.h"
 
 extern "C" {

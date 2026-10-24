@@ -90,17 +90,17 @@ extern "C" u32 FUN_002d2b40()
         if (!enemy->active || !enemy->registered || enemy->state == 19 ||
             (enemy->state == 3 && enemy->elapsed < 20) || enemy->behavior == 6)
             continue;
-        f32 x = enemy->x;
-        f32 y = enemy->y;
-        f32 z = enemy->z;
+        f32 x = enemy->position.x;
+        f32 y = enemy->position.y;
+        f32 z = enemy->position.z;
         MapVector player = {g_lmapScene->transform.position[0], g_lmapScene->transform.position[1], g_lmapScene->transform.position[2]};
         if (mathDistanceBetweenPoints(player.x, player.y, player.z, x, y, z) >= 60.0f) {
             if ((enemy->kind != 6 && enemy->kind != 16) || enemy->behavior != 4)
                 continue;
             MapVector ahead;
-            ahead.x = enemy->x;
-            ahead.y = enemy->y;
-            ahead.z = enemy->z;
+            ahead.x = enemy->position.x;
+            ahead.y = enemy->position.y;
+            ahead.z = enemy->position.z;
             ahead.x += FUN_0028250c(enemy->heading * 0.017453292f) * 100.0f;
             ahead.z += FUN_00282390(enemy->heading * 0.017453292f) * 100.0f;
             player.x = g_lmapScene->transform.position[0];

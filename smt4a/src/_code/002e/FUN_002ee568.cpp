@@ -8,7 +8,7 @@ int onlineUrlSetText(int, unsigned int);
 
 extern unsigned char DAT_0055852c; /* 0x55852c */
 
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: onlineUrlSetText. */
 extern int FUN_002e9906(unsigned int *);
 extern int FUN_002e9930(int);
@@ -31,7 +31,7 @@ int FUN_002ee568(unsigned int *param_1,unsigned int param_2)
   *(unsigned char *)(temp_v0 + 0x20) = 0;
   *(unsigned char *)(temp_v0 + 0x21) = 1;
   *(unsigned char *)(temp_v0 + 0x22) = 0;
-  temp_v1 = operatorNew(0x20);
+  temp_v1 = _Znwj(0x20);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = onlineSockAddrConstruct();

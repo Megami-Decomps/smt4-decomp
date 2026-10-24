@@ -34,7 +34,7 @@ typedef struct ButtonHelpGlobals {
 
 extern ButtonHelpGlobals g_buttonHelp;
 
-void FUN_002bee58(ButtonHelpSprite *sprite, s32 mode);
+void spriteStartAnimationByIndex(ButtonHelpSprite *sprite, s32 mode);
 u16 FUN_002aa024(s32 table, s32 id);
 void FUN_002ae028(void *value);
 
@@ -44,7 +44,7 @@ void FUN_001385f8(void)
     ButtonHelpWork *work = g_buttonHelp.work;
 
     for (s32 i = 0; i < 6; i++) {
-        FUN_002bee58(&work->sprites[i], 0);
+        spriteStartAnimationByIndex(&work->sprites[i], 0);
         switch (work->slots[i].kind) {
         case 0:
             break;

@@ -1,57 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ebe68` (_code @ 0x2ebe68, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same instruction sequence and calls; only register allocation of the zero/constants differs (retail keeps the zero in r3 and loads the two callbacks into r1/r2; the build uses r1 for the zero and r3/r2 for the callbacks). */
+#include "AsdSDK/AsdDebug.h"
+
+/* The bust-up shake job's work (0x24 bytes). */
+struct BustupShakeWork {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ f32 center;
+    /* 0x08 */ f32 low;
+    /* 0x0C */ f32 amplitudeX;
+    /* 0x10 */ f32 amplitudeY;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u32 first;
+    /* 0x20 */ u32 second;
+};
 
 extern "C" {
 
-int asdMemAlloc(...);
-int asdProcessCreateSimple(...);
+s32 FUN_002c1d5c(void);
+void *asdMemAlloc(u32 size, u32 alignment, u32 heap, u32 tag, u32 flags);
+void randomOffsetJobUpdate(void *work);
+void jobWorkFreeWork(void *work);
+u32 asdProcessCreateSimple(const char *name, s32 priority, u16 arg2, u16 arg3,
+                           void (*update)(void *), void (*destroy)(void *), void *work);
 
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern int randomOffsetJobUpdate(...); /* 0x1f3740 */
-extern unsigned char LAB_002d65b4; /* 0x2d65b4 */
-extern unsigned char LAB_002ebf70; /* 0x2ebf70 */
-
-extern int FUN_002c1d5c(void);
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-
-
-void FUN_002ebe68(unsigned int param_1,unsigned int param_2)
-
+// Starts the shaking job for the bust-up display unless the effect is disabled; returns the job.
+u32 FUN_002ebe68(f32 amplitude, f32 center, u32 first, u32 second)
 {
-/* irregular: irregular input(s): in_s0, in_s1; 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int in_s0;
-  float in_s1;
-  
-  temp_v0 = FUN_002c1d5c();
-  if (temp_v0 == 0) {
-    puVar2 = (unsigned int *)0x100;
-    asdMemAlloc(0x100,0x100,0,0x24,1);
-    *puVar2 = 0;
-    puVar2[1] = 0;
-    puVar2[2] = 0;
-    puVar2[3] = 0;
-    puVar2[4] = 0;
-    puVar2[5] = 0;
-    puVar2[6] = 0;
-    puVar2[2] = in_s1 - 10.0f;
-    puVar2[7] = param_1;
-    puVar2[8] = param_2;
-    *(float *)&puVar2[1] = in_s1;
-    puVar2[3] = in_s0;
-    puVar2[4] = in_s0;
-    asdProcessCreateSimple(&LAB_002ebf70,2,0,0,randomOffsetJobUpdate,&LAB_002d65b4,puVar2);
-  }
-  return;
+    if (FUN_002c1d5c() == 0) {
+        asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\event\\bustupEvent\\BustupEffect.cpp", 137);
+        BustupShakeWork *work = (BustupShakeWork *)asdMemAlloc(0x100, 0x100, 0, 0x24, 1);
+        *work = BustupShakeWork();
+        work->low = center - 10.0f;
+        work->first = first;
+        work->second = second;
+        work->center = center;
+        work->amplitudeX = amplitude;
+        work->amplitudeY = amplitude;
+        return asdProcessCreateSimple("EVE_BustupShake", 2, 0, 0, randomOffsetJobUpdate, jobWorkFreeWork, work);
+    }
+    return 0;
 }
 
-} /* extern "C" */
+}

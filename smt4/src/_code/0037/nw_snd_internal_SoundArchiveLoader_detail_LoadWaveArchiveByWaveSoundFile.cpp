@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002ac444(unsigned char [8]);
+int _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(unsigned char [8]);
 int nw_snd_internal_SoundArchiveLoader_LoadWaveArchiveImpl(unsigned int, unsigned int, unsigned int, unsigned int);
 
-/* Supplied declaration required: FUN_002ac444. */
+/* Supplied declaration required: _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv. */
 /* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadWaveArchiveImpl. */
 extern int nw_snd_internal_WaveSoundFileReader_ReadNoteInfo(unsigned char *, unsigned int *, unsigned int, unsigned int);
 
@@ -32,7 +32,7 @@ void nw_snd_internal_SoundArchiveLoader_detail_LoadWaveArchiveByWaveSoundFile
   if (param_2 == 0) {
     return;
   }
-  FUN_002ac444(temp_v3);
+  _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(temp_v3);
   uStack_28 = 0;
   uStack_27 = 0;
   uStack_26 = 0;

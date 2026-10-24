@@ -1,43 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00416c90` (_code @ 0x416c90, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only scheduling differs (retail loads the buffer pointer after the float stores; built hoists the load above them). */
+#include "common.h"
+
+struct SlotEntry {
+    s32 unk00;          // 0x00
+    s32 unk04;          // 0x04
+    f32 values[3];      // 0x08
+    u8 unk14[0x8c];
+    u8 enabled;         // 0xa0
+    u8 unka1[3];
+    s32 unka4;          // 0xa4
+    void *buffer;       // 0xa8
+    s32 unkac;          // 0xac
+};
 
 extern "C" {
 
-int asdMemFreeSlot(void);
+void asdMemFreeSlot(void *buffer);
 
-/* Supplied declaration required: asdMemFreeSlot. */
-
-
-int FUN_00416c90(int param_1)
-
+// Reset all twelve slot entries, releasing their buffers.
+SlotEntry *FUN_00416c90(SlotEntry *entries)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned long long temp_v2;
-  
-  temp_v0 = 0;
-  temp_v2 = 0;
-  do {
-    puVar1 = (unsigned int *)(param_1 + temp_v0 * 0xb0);
-    *puVar1 = 0;
-    puVar1[1] = 0;
-    *(unsigned char *)(puVar1 + 0x28) = 0;
-    puVar1[0x29] = 0;
-    temp_v1 = (unsigned int)temp_v2;
-    puVar1[4] = temp_v1;
-    puVar1[3] = temp_v1;
-    puVar1[2] = temp_v1;
-    if (puVar1[0x2a] != 0) {
-      asdMemFreeSlot();
-      puVar1[0x2a] = 0;
+    for (s32 i = 0; i < 12; i++) {
+        SlotEntry *entry = &entries[i];
+        entry->unk00 = 0;
+        entry->unk04 = 0;
+        entry->enabled = 0;
+        entry->unka4 = 0;
+        entry->values[2] = 0.0f;
+        entry->values[1] = 0.0f;
+        entry->values[0] = 0.0f;
+        if (entry->buffer != NULL) {
+            asdMemFreeSlot(entry->buffer);
+            entry->buffer = NULL;
+        }
+        entry->unkac = 0;
     }
-    temp_v0 = temp_v0 + 1;
-    puVar1[0x2b] = 0;
-  } while (temp_v0 < 0xc);
-  return param_1;
+    return entries;
 }
 
 } /* extern "C" */

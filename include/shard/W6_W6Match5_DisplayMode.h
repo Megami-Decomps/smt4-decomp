@@ -23,7 +23,8 @@ struct GraphicsQueue {
         } accounting;
     };
     GraphicsQueueEntry *entries; // 0x18
-    u8 unk1c[8];
+    u8 unk1c[4];
+    u32 pendingCount; // 0x20
     u32 activeCount; // 0x24
     u32 currentEntry; // 0x28
 };
@@ -51,7 +52,8 @@ struct DisplayModeContext {
             u8 pending; // 0x012
             u8 unk013[5];
             u8 ready; // 0x018
-            u8 unk019[0x87];
+            u8 unk019[0x83];
+            GraphicsQueue *writeQueue; // 0x09c
             GraphicsQueue *queue; // 0x0a0
         } submission;
         struct {

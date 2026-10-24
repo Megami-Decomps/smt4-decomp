@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_00192608(void);
+int dataTable08Sub2GetRecord(void);
 int dataTable00FindById(void);
 int dataTable04FindById(void);
 
@@ -21,7 +21,7 @@ struct fn_00221754_arg0 {
 };
 
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00192608. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: dataTable04FindById. */
 
@@ -39,7 +39,7 @@ unsigned int FUN_00221754(fn_00221754_arg0 *param_1,unsigned int param_2,int par
     if (param_1->field_0x3f8 != (unsigned short *)0x0) {
       if (param_3 == 0) {
         temp_v1 = (unsigned int)*(unsigned short *)param_1->field_0x3f8;
-        FUN_00192608();
+        dataTable08Sub2GetRecord();
         if (temp_v1 != 0) {
           if (*(unsigned char *)(temp_v1 + 0x2b) == param_2) {
             return 1;
@@ -49,7 +49,7 @@ unsigned int FUN_00221754(fn_00221754_arg0 *param_1,unsigned int param_2,int par
           }
         }
         temp_v1 = (unsigned int)*(unsigned short *)((int)param_1->field_0x3f8 + 4);
-        FUN_00192608();
+        dataTable08Sub2GetRecord();
         if (temp_v1 != 0) {
           if (*(unsigned char *)(temp_v1 + 0x2b) == param_2) {
             return 1;

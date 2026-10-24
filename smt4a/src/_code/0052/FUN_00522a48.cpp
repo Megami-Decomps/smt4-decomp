@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00522a48` (_code @ 0x522a48, 0x1ac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: BLOCKED: this is std::vector<Obj55aff4, AsdAllocator<Obj55aff4> >::push_back(const Obj55aff4 &) (fast path plus inlined _C_insert_aux) emitted out of line; armcc emits no body for an explicit instantiation of an inline member, so the unit cannot be produced from the instantiation alone, and its calls go to the ARM entry stubs FUN_002e9518/FUN_002e9590 (retail names) rather than the Thumb C1ERKS_/aSERKS_ symbols. */
 #include "romwright_types.h"
 
 extern "C" {

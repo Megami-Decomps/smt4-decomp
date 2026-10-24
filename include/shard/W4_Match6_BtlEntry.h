@@ -61,7 +61,8 @@ typedef struct BtlEntry {
             s16 unk098;          /* 0x098: positive while the entry can still act */
         } turn;
         struct {
-            u8 unk08a[4];
+            s16 unk08a;            /* 0x08A */
+            s16 unk08c;            /* 0x08C */
             s16 primary;           /* 0x08E */
             s16 primaryAlternate;  /* 0x090 */
             s16 secondary;         /* 0x092 */

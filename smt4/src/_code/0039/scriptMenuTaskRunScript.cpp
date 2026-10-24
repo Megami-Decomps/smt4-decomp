@@ -22,7 +22,7 @@ s32 buttonHelpGetState(void);
 void FUN_002636d0(s32);
 s32 scrRunOpcodesStub(u32 entry);
 s32 messageMainGetChoiceResult(void);
-void FUN_00296ee0(ScriptMenuTask *task, s32 state);
+void messageOwnerSetState(ScriptMenuTask *task, s32 state);
 s32 sys43e188GetState(void);
 void scrScriptProcessStartEntry(u32 entry, s32 mode);
 
@@ -37,7 +37,7 @@ void scriptMenuTaskRunScript(ScriptMenuTask *task)
             if (messageMainGetChoiceResult() != 0) {
                 task->current = task->pending;
             }
-            FUN_00296ee0(task, 2);
+            messageOwnerSetState(task, 2);
         }
     } else if (sys43e188GetState() != 0) {
         scrScriptProcessStartEntry(task->scriptEntry, 3);

@@ -7,7 +7,7 @@ extern "C" {
 s32 FUN_002adee0(BattleStageNode *node);
 void FUN_002a0428(BattleStageNode *node, s32 enable);
 void FUN_002e1230(BattleStageNode *node, s32 enable);
-void FUN_002d582c(BattleStageNode *node, f32 scale);
+void animOwnerSetScale(BattleStageNode *node, f32 scale);
 void FUN_002a04f0(s32 value);
 
 /* Once all three stage nodes have loaded, shows them at full scale and places them at the origin; returns whether they were ready. */
@@ -24,7 +24,7 @@ u32 FUN_00340558(BattleStageModel *stage)
         if (stage->scene.nodes[index] != NULL) {
             FUN_002a0428(stage->scene.nodes[index], 1);
             FUN_002e1230(stage->scene.nodes[index], 1);
-            FUN_002d582c(stage->scene.nodes[index], 1.0f);
+            animOwnerSetScale(stage->scene.nodes[index], 1.0f);
         }
     }
     NodeVec3 origin = { 0.0f, 0.0f, 0.0f };

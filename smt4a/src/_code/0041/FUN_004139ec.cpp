@@ -1,87 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004139ec` (_code @ 0x4139ec, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "shard/W6_W6Match1_Obj55a5a8.h"
+/* NON_MATCHING: retail copies the callback's member-function pointer with ldm/stm before storing the vtable and schedules the settings stores differently; armcc uses ldrd/strd and a different order */
+#include "classes/Obj5597fc.h"
+#include <stddef.h>
+
+class DialogOwner {
+public:
+    void removeMatchingEntry();
+    u8 unk00[4];
+    u8 slot[0xd8]; // 0x04
+    u8 context[0x1c]; // 0xdc
+};
+
+struct DialogSettings;
+extern "C" void _ZN9Obj5597fcC1Ev(DialogSettings *settings);
+
+// Layout view of the settings value; its vector-owning base performs cleanup.
+// Obj5597fc's shared declaration is abstract, so invoke its retail constructor explicitly.
+struct DialogSettings {
+    DialogSettings() { _ZN9Obj5597fcC1Ev(this); }
+    ~DialogSettings() { reinterpret_cast<Obj55a5a8 *>(this)->Obj55a5a8::~Obj55a5a8(); }
+    u32 vtable;
+    u8 state;
+    u8 enabled; // 0x05
+    u8 unk06[0x1e];
+    u16 kind; // 0x24
+    u8 unk26[0x26];
+    u32 elements[3]; // 0x4c
+    u8 unk58[4];
+    u8 text[0x10]; // 0x5c: SmallTextString
+    u8 ready; // 0x6c
+    u8 unk6d[0xb];
+};
+typedef void (DialogOwner::*DialogCallbackMethod)();
+struct DialogCallback {
+    const void *vtable;
+    DialogOwner *owner;
+    DialogCallbackMethod method;
+    void *dialog;
+};
+typedef char CheckSettingsSize[sizeof(DialogSettings) == 0x78 ? 1 : -1];
+typedef char CheckCallbackSize[sizeof(DialogCallback) == 0x14 ? 1 : -1];
 
 extern "C" {
+extern const DialogCallbackMethod DAT_00532fc4;
+extern const u8 DAT_0055cacc[];
+void FUN_00110b28(u8 *text, const SmallTextString *source);
+void *_Znwj(u32 size);
+void *FUN_002fafd8(void *allocation, s32 mode);
+void holderSetFlagBits(void *holder, u32 flags);
+void FUN_00103f54(void *holder, DialogCallback *callback, s32 index, s32 enabled);
+void FUN_0011b63e(void *slot, void *dialog, DialogSettings *settings, void *context);
 
-int FUN_00103f54(unsigned int, unsigned int *, int, int);
-int holderSetFlagBits(unsigned int, int);
-int FUN_00110b28(unsigned char [16], unsigned char **);
-int FUN_0011b63e(int, unsigned int, unsigned char [5], int);
-int operatorNew(int);
-int _ZN9Obj5597fcC1Ev(unsigned char [5]);
-
-/* stack frame of param_1: 7 slot(s), 17 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned char sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned char sp2C; /* 0x2c: local_2c */
-    unsigned short sp74; /* 0x74: local_74 */
-    unsigned char sp93; /* 0x93: local_93 */
-} param_1_stack;
-
-extern int onlineStatusRemoveMatchingEntry(...); /* 0x41460c */
-extern unsigned char g_smallTextEmptySentinel; /* 0x558760 */
-extern unsigned char DAT_0055cacc; /* 0x55cacc */
-
-/* Supplied declaration required: FUN_00103f54. */
-/* Supplied declaration required: holderSetFlagBits. */
-/* Supplied declaration required: FUN_00110b28. */
-/* Supplied declaration required: FUN_0011b63e. */
-/* Supplied declaration required: operatorNew. */
-extern unsigned int FUN_002fafd8(int, unsigned int);
-/* Supplied declaration required: _ZN9Obj5597fcC1Ev. */
-
-
-void FUN_004139ec(int param_1)
-
+/* Opens the dialog with default settings: an empty text, a 999 kind and a callback back into the owner. */
+void FUN_004139ec(DialogOwner *owner)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  unsigned char temp_v2 [5];
-  unsigned char temp_v3;
-  unsigned short temp_v4;
-  unsigned char temp_v5 [16];
-  unsigned char temp_v6;
-  unsigned char *temp_v7;
-  unsigned char temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  
-  _ZN9Obj5597fcC1Ev(temp_v2);
-  temp_v3 = 1;
-  temp_v4 = 999;
-  temp_v8 = 0;
-  temp_v10 = 0x14;
-  temp_v6 = 5;
-  temp_v9 = 0xffffffff;
-  temp_v7 = &g_smallTextEmptySentinel;
-  FUN_00110b28(temp_v5,&temp_v7);
-  temp_v0 = operatorNew(0x78);
-  if (temp_v0 == 0) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = FUN_002fafd8(temp_v0,0);
-  }
-  puVar2 = (unsigned int *)operatorNew(0x14);
-  if (puVar2 != (unsigned int *)0x0) {
-    puVar2[1] = param_1;
-    puVar2[2] = (unsigned int)onlineStatusRemoveMatchingEntry;
-    puVar2[3] = 0;
-    *puVar2 = (unsigned int)&DAT_0055cacc;
-    puVar2[4] = temp_v1;
-    holderSetFlagBits(temp_v1,2);
-    FUN_00103f54(temp_v1,puVar2,0,1);
-  }
-  FUN_0011b63e(param_1 + 4,temp_v1,temp_v2,param_1 + 0xdc);
-  reinterpret_cast<Obj55a5a8*>(temp_v2)->Obj55a5a8::~Obj55a5a8();
-  return;
-}
+    DialogSettings settings;
+    settings.enabled = 1;
+    settings.kind = 999;
+    settings.ready = 5;
+    SmallTextString source;
+    source.size = (u32)-1;
+    FUN_00110b28(settings.text, &source);
 
-} /* extern "C" */
+    void *dialog = _Znwj(0x78);
+    dialog = dialog != NULL ? FUN_002fafd8(dialog, 0) : NULL;
+    DialogCallback *callback = static_cast<DialogCallback *>(_Znwj(sizeof(DialogCallback)));
+    if (callback) {
+        callback->owner = owner;
+        callback->method = DAT_00532fc4;
+        callback->vtable = DAT_0055cacc;
+        callback->dialog = dialog;
+        holderSetFlagBits(dialog, 2);
+        FUN_00103f54(dialog, callback, 0, 1);
+    }
+    FUN_0011b63e(owner->slot, dialog, &settings, owner->context);
+}
+}

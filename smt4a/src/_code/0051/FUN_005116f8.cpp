@@ -1,50 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_005116f8` (_code @ 0x5116f8, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stores and calls match; armcc hoists the vtable-pointer load to the first instruction in retail but schedules it just before its store here */
+#include "common.h"
+
+/* An object with a vtable at the start and six zeroed link/count words. */
+struct HeapOwner {
+    /* 0x00 */ const void *vtable;
+    /* 0x04 */ u32 words[6];
+    /* 0x1c */ u8 unk1c[0x54 - 0x1c];
+    /* 0x54 */ u32 tail;
+};
+
+/* The module's heap bookkeeping record. */
+struct HeapRecord {
+    /* 0x00 */ u32 head;
+    /* 0x04 */ u32 count;
+    /* 0x08 */ u32 total;
+    /* 0x0c */ u32 reserved;
+    /* 0x10 */ u8 flagA;
+    /* 0x14 */ u32 next;
+    /* 0x18 */ u8 flagB;
+};
 
 extern "C" {
+extern const u8 DAT_005583d8;
+extern HeapRecord DAT_006475e4;
+extern u8 entry;
 
-int emptyStub_002f4370(...);
+void expHeapBaseDestroyA(HeapOwner *owner);
+void FUN_0042ce40(HeapRecord *record);
+__weak int __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
+void emptyStub_002f4370(void *object, void (*destroy)(void *), void *module);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern int FUN_0042ce40(...); /* 0x42ce40 */
-extern unsigned char DAT_005583d8; /* 0x5583d8 */
-extern unsigned int DAT_006475e4; /* 0x6475e4 */
-extern unsigned int DAT_006475e8; /* 0x6475e8 */
-extern unsigned int DAT_006475ec; /* 0x6475ec */
-extern unsigned int DAT_006475f0; /* 0x6475f0 */
-extern unsigned char DAT_006475f4; /* 0x6475f4 */
-extern unsigned int DAT_006475f8; /* 0x6475f8 */
-extern unsigned char DAT_006475fc; /* 0x6475fc */
-
-/* Supplied declaration required: emptyStub_002f4370. */
-
-
-void FUN_005116f8(unsigned int *param_1)
-
+/* Resets a heap owner and the shared heap record, registering each one's destructor. */
+void FUN_005116f8(HeapOwner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  *param_1 = (unsigned int)&DAT_005583d8;
-  param_1[0x15] = 0;
-  DAT_006475e4 = 0;
-  DAT_006475e8 = 0;
-  DAT_006475ec = 0;
-  DAT_006475f0 = 0;
-  DAT_006475f4 = 0;
-  DAT_006475f8 = 0;
-  DAT_006475fc = 0;
-  emptyStub_002f4370(&DAT_006475e4,FUN_0042ce40,0x100000);
-  return;
+    owner->words[0] = 0;
+    owner->words[1] = 0;
+    owner->words[2] = 0;
+    owner->words[3] = 0;
+    owner->words[4] = 0;
+    owner->words[5] = 0;
+    owner->vtable = &DAT_005583d8;
+    owner->tail = 0;
+    __aeabi_atexit(owner, (void (*)(void *))expHeapBaseDestroyA, &entry);
+
+    DAT_006475e4.head = 0;
+    DAT_006475e4.count = 0;
+    DAT_006475e4.total = 0;
+    DAT_006475e4.reserved = 0;
+    DAT_006475e4.flagA = 0;
+    DAT_006475e4.next = 0;
+    DAT_006475e4.flagB = 0;
+    emptyStub_002f4370(&DAT_006475e4, (void (*)(void *))FUN_0042ce40, &entry);
 }
 
 } /* extern "C" */

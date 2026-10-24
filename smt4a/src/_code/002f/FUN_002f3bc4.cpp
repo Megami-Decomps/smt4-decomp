@@ -22,7 +22,7 @@ void rt_memcpy_w(void *out, const void *source, u32 size);
 void FUN_004da6e0(void *context, UnitRecord *first, UnitRecord *second,
                   s32 option, UnitRecord *out);
 void FUN_0028a538(u32 resultId, UnitRecord *first, UnitRecord *second);
-s32 FUN_0032fea0(const u16 *skills, s32 count, u16 skill);
+s32 arrayContainsU16(const u16 *skills, s32 count, u16 skill);
 s32 getUnlockedSlotCount(UnitRecord *unit);
 void FUN_004bcd90(UnitRecord *unit);
 
@@ -42,7 +42,7 @@ u32 FUN_002f3bc4(UnitRecord *out, s32 index, s32 mode, u32)
         FUN_0028a538(pair->resultId, first, second);
         for (s32 i = 0; i < 24; ++i) {
             if (work->inheritanceA.skills[i] != 0 &&
-                !FUN_0032fea0(out->skillList.skills, 8, work->inheritanceA.skills[i])) {
+                !arrayContainsU16(out->skillList.skills, 8, work->inheritanceA.skills[i])) {
                 s32 count = getUnlockedSlotCount(out);
                 for (s32 slot = 0; slot < count; ++slot) {
                     if (out->skillList.skills[slot] == 0) {

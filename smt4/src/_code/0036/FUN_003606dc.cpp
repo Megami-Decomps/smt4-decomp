@@ -1,46 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003606dc` (_code @ 0x3606dc, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail spills r0-r3 (push {r0-r3, r4, lr}) and reads the two halfword parameters from the frame with ldrh ([sp, #12] and [sp, #24]); armcc keeps them in r3/ip */
+/* Sends service command 0x10 (header 0x100102) with two words, two halfwords and a value; returns the reply word on success. */
+#include "nn/Result.h"
+#include "nn/svc.h"
 
 extern "C" {
+extern u32 DAT_00471bac;
 
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
-
-/* stack frame of param_5: 1 slot(s), 2 byte(s) */
-typedef struct {
-    unsigned short spC; /* 0xc: local_c */
-} param_5_stack;
-
-extern unsigned char LAB_00100102; /* 0x100102 */
-extern unsigned int DAT_00471bac; /* 0x471bac */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-unsigned int FUN_003606dc(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned short param_4,
-                 unsigned short param_5)
-
+s32 FUN_003606dc(u32 value, u32 first, u32 second, u16 third, u16 fourth)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned char **)(temp_v1 + 0x80) = &LAB_00100102;
-  *(unsigned int *)(temp_v1 + 0x84) = param_2;
-  *(unsigned int *)(temp_v1 + 0x88) = param_3;
-  *(unsigned short *)(temp_v1 + 0x8c) = param_4;
-  *(unsigned short *)(temp_v1 + 0x90) = param_5;
-  *(unsigned int *)(temp_v1 + 0x98) = param_1;
-  *(unsigned int *)(temp_v1 + 0x94) = 0;
-  software_interrupt(0x32);
-  temp_v0 = DAT_00471bac;
-  if ((DAT_00471bac & 0x80000000) == 0) {
-    temp_v0 = *(unsigned int *)(temp_v1 + 0x84);
-  }
-  return temp_v0;
+    nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
+    command->header = 0x100102;
+    command->words[0] = first;
+    command->words[1] = second;
+    *(u16 *)&command->words[2] = third;
+    *(u16 *)&command->words[3] = fourth;
+    command->words[4] = 0;
+    command->words[5] = value;
+    s32 result = nn::svc::SendSyncRequest(DAT_00471bac);
+    if (nnResultIsSuccess(result)) {
+        result = command->words[0];
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

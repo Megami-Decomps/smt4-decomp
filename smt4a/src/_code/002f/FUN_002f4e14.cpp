@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e7908(unsigned char [12], int *);
+int _ZN12OnlineResultC1ERKj(unsigned char [12], int *);
 int streamReaderExtractU8(unsigned int, char [4]);
-int vectorCopyHeader(unsigned int, unsigned char *);
+int _ZN18OnlineResultRecordaSERKS_(unsigned int, unsigned char *);
 int FUN_002f4d2c(unsigned int, int *);
 
 /* stack frame of param_2: 2 slot(s), 5 byte(s) */
@@ -15,9 +15,9 @@ typedef struct {
     unsigned char sp14; /* 0x14: local_14 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 /* Supplied declaration required: streamReaderExtractU8. */
-/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: FUN_002f4d2c. */
 
 
@@ -40,13 +40,13 @@ void FUN_002f4e14(unsigned int param_1,unsigned int param_2)
     else {
       temp_v2 = 0x80010001;
     }
-    puVar1 = (unsigned char *)FUN_002e7908(temp_v0,&temp_v2);
+    puVar1 = (unsigned char *)_ZN12OnlineResultC1ERKj(temp_v0,&temp_v2);
   }
   else {
     FUN_002f4d2c(param_1,&temp_v2);
-    FUN_002e7908(temp_v0,&temp_v2);
+    _ZN12OnlineResultC1ERKj(temp_v0,&temp_v2);
   }
-  vectorCopyHeader(param_2,puVar1);
+  _ZN18OnlineResultRecordaSERKS_(param_2,puVar1);
   return;
 }
 

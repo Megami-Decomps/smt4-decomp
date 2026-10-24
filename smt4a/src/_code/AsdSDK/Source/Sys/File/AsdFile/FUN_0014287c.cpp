@@ -1,80 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014287c` (_code @ 0x14287c, 0xf4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the thread-start stack-argument setup differs (retail stores the uninitialised argument slot first and orders the descriptor/argument stores and literal pool differently) */
+#include "AsdSDK/AsdDebug.h"
+#include "nn/os/ThreadLaunch.h"
+#include "nn/Result.h"
+
+/* The loader's globals in Apocalypse: the worker's stack memory and mapping follow the stop flag. */
+struct AsdFileWorker {
+    /* 0x00 */ u8 stopRequested;
+    /* 0x01 */ u8 unk01[0xF];
+    /* 0x10 */ void *stackMemory;
+    /* 0x14 */ ThreadStackStorage *threadStack;
+};
 
 extern "C" {
+extern AsdFileWorker g_asdFile;
+extern const char DAT_0053d448[]; /* the AsdFile.cpp path */
+extern u8 DAT_005b3fcc[]; /* the worker thread's handle and joined flag */
 
-int memAlloc(...);
-int resultReportIfFailed(...);
-int FUN_00178b04(...);
-int FUN_002e3140(...);
-int FUN_002fb0d4(...);
+void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, u32 category);
+void *FUN_00178b04(u32 size, const char *file, u32 line);
+void resultReportIfFailed(ThreadStackStorage *stack, void *memory, u32 size);
+s32 FUN_002fb0d4(void *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(void *), void *argument,
+                 u32 stackTop, s32 priority, s32 processor, u32 flags);
+void FUN_002e3140(s32 result);
+void FUN_0014b66c(void *argument);
+void copyValueIfDestination(void);
+void FUN_00100326(void);
+void emptyStub_0010032c(void);
 
-/* stack frame of void: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-extern unsigned char LAB_0010031d; /* 0x10031d */
-extern unsigned char LAB_00100327; /* 0x100327 */
-extern unsigned char LAB_0010032d; /* 0x10032d */
-extern int FUN_0014b66c(...); /* 0x14b66c */
-extern unsigned char g_asdFile; /* 0x5b3fb4 */
-extern unsigned int DAT_005b3fc4; /* 0x5b3fc4 */
-extern unsigned int *DAT_005b3fc8; /* 0x5b3fc8 */
-extern unsigned int DAT_005b3fcc; /* 0x5b3fcc */
-
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: resultReportIfFailed. */
-/* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002fb0d4. */
-
-
+/* Starts the file worker thread on a 4 KB stack. */
 void FUN_0014287c(void)
-
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  unsigned char *temp_v2;
-  unsigned char *temp_v3;
-  unsigned char *temp_v4;
-  unsigned char temp_v5 [4];
-  
-  g_asdFile = 0;
-  temp_v0 = 0x100;
-  memAlloc(0x100,0x100,0,0x1000,0x1000,1);
-  puVar2 = (unsigned int *)0x18;
-  DAT_005b3fc4 = temp_v0;
-  FUN_00178b04(0x18,"c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Sys\\File\\AsdFile.cpp",0x3bd);
-  if (puVar2 != (unsigned int *)0x0) {
-    *puVar2 = 0;
-    puVar2[1] = 0;
-    puVar2[2] = 0;
-    puVar2[3] = 0;
-    *(unsigned char *)(puVar2 + 4) = 0;
-  }
-  DAT_005b3fc8 = puVar2;
-  resultReportIfFailed();
-  temp_v1 = 4;
-  temp_v2 = &LAB_0010031d;
-  puVar2 = &DAT_005b3fcc;
-  temp_v3 = &LAB_0010032d;
-  temp_v4 = &LAB_00100327;
-  FUN_002fb0d4(&DAT_005b3fcc,&temp_v1,FUN_0014b66c,temp_v5,DAT_005b3fc8[3] + DAT_005b3fc8[2],0x12,
-               0xfffffffe,0);
-  if (((unsigned int)puVar2 & 0x7e00000) != 0x600000 && (int)puVar2 < 0) {
-    FUN_002e3140();
-  }
-  return;
+    f32 unset;
+    g_asdFile.stopRequested = 0;
+    asdDebugTrace(DAT_0053d448, 956);
+    g_asdFile.stackMemory = memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
+    ThreadStackStorage *stack = (ThreadStackStorage *)FUN_00178b04(sizeof(ThreadStackStorage), DAT_0053d448, 957);
+    if (stack != NULL) {
+        stack->info.unk00 = 0;
+        stack->info.unk04 = 0;
+        stack->info.address = 0;
+        stack->info.size = 0;
+        stack->owned = 0;
+    }
+    g_asdFile.threadStack = stack;
+    resultReportIfFailed(stack, g_asdFile.stackMemory, 0x1000);
+    f32 argument = unset;
+    ThreadArgumentDescriptor descriptor;
+    descriptor.argumentSize = 4;
+    descriptor.callbacks[0] = copyValueIfDestination;
+    descriptor.callbacks[1] = emptyStub_0010032c;
+    descriptor.callbacks[2] = FUN_00100326;
+    ThreadStackInfo *info = &g_asdFile.threadStack->info;
+    s32 result = FUN_002fb0d4(DAT_005b3fcc, &descriptor, FUN_0014b66c, &argument, info->address + info->size, 18, -2, 0);
+    if (nnResultIsFailureExceptSummary(result, 3)) {
+        FUN_002e3140(result);
+    }
 }
-
-} /* extern "C" */
+}

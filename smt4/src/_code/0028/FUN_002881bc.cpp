@@ -2,7 +2,7 @@
 #include "common.h"
 
 extern "C" {
-f32 FUN_003eb2c8(s32* quadrant, f32 value);
+f32 FUN_003eb2c8(s32* quadrant, u32 bits, f32 value);
 s32 __softfp ARM_fpclassifyf(f32 value);
 void FUN_002a438c(void);
 void __set_errno(s32 error);
@@ -27,7 +27,7 @@ f32 FUN_002881bc(f32 value)
         value -= multiple * 7.549533620476723e-8f;
         value -= multiple * 2.5633440682570896e-12f;
     } else {
-        value = FUN_003eb2c8(&quadrant, value);
+        value = FUN_003eb2c8(&quadrant, representation.bits, value);
     }
     if (quadrant < 0) {
         representation.value = value;

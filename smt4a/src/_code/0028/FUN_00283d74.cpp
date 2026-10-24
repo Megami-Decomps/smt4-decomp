@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int FUN_0022838c(...);
 int FUN_00284fdc(...);
-int FUN_002a4aa4(...);
+int saveNameBlockReset(...);
 int sysMemClear(...);
 int gameDataBlocksClearSlots(...);
 int FUN_00353b00(...);
@@ -38,7 +38,7 @@ extern unsigned int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0022838c. */
 extern unsigned int gameDataGetPlayerName(void);
 /* Supplied declaration required: FUN_00284fdc. */
-/* Supplied declaration required: FUN_002a4aa4. */
+/* Supplied declaration required: saveNameBlockReset. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: gameDataBlocksClearSlots. */
 /* Supplied declaration required: FUN_00353b00. */
@@ -106,7 +106,7 @@ void FUN_00283d74(int param_1)
     flagValueAdd(0x33f,1);
     FUN_00417b70(1);
     FUN_00417e08(1);
-    FUN_002a4aa4();
+    saveNameBlockReset();
     gameFlagSetValue(0x52b,1);
     gameFlagSetValue(0x418,0,1);
     gameFlagSetValue(0x416,1);

@@ -15,9 +15,9 @@ extern unsigned char DAT_00559854; /* 0x559854 */
 extern unsigned int FUN_001068b4(void);
 extern unsigned int FUN_0010c0d0(void);
 extern unsigned int FUN_0010c79c(void);
-extern int *wordRefMax(int *, int *);
+extern int *_ZSt3maxIjERKT_S2_S2_(int *, int *);
 extern unsigned int *rt_malloc(void);
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -41,7 +41,7 @@ unsigned int * FUN_001158c4(unsigned int *param_1)
   param_1[3] = 0;
   temp_v3[1] = 0x20;
   temp_v3[0] = 2;
-  piVar1 = (int *)wordRefMax(temp_v3,temp_v3 + 1);
+  piVar1 = (int *)_ZSt3maxIjERKT_S2_S2_(temp_v3,temp_v3 + 1);
   temp_v0 = *piVar1;
   puVar3 = (unsigned int *)rt_malloc();
   *piVar6 = (int)puVar3;
@@ -53,19 +53,19 @@ unsigned int * FUN_001158c4(unsigned int *param_1)
   }
   param_1[2] = *piVar6 + temp_v3[0] * 4;
   param_1[3] = *piVar6 + temp_v0 * 4;
-  temp_v1 = operatorNew(4);
+  temp_v1 = _Znwj(4);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = FUN_0010c0d0();
   }
   *(unsigned int *)*piVar6 = temp_v2;
-  temp_v1 = operatorNew(0xa00);
+  temp_v1 = _Znwj(0xa00);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = FUN_0010c79c();
   }
   *(unsigned int *)(*piVar6 + 4) = temp_v2;
-  temp_v1 = operatorNew(0x38);
+  temp_v1 = _Znwj(0x38);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = FUN_001068b4();

@@ -1,44 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e4978` (_code @ 0x3e4978, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct DemonStockRecord {
+    u8 unk000[0x130];
+    u32 flags; // 0x130, bit 0 = registered
+};
+
+struct DemonStockTable {
+    u8 unk0000[0x1ddc];
+    DemonStockRecord records[12]; // 0x1ddc
+};
 
 extern "C" {
 
-extern int gameFlagIsSet(unsigned int);
-extern int gameGetSlotTable(void);
+s32 gameFlagIsSet(u32 flag);
+DemonStockTable *gameGetSlotTable(void);
 
-
-unsigned int FUN_003e4978(void)
-
+static __inline DemonStockRecord *demonStockRecord(u32 index)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = gameFlagIsSet(0x533);
-  temp_v1 = 0;
-  if (temp_v0 != 0) {
-    temp_v2 = 0;
-    temp_v3 = temp_v2;
-    do {
-      if ((temp_v2 & 0xffff) < 0xc) {
-        temp_v0 = gameGetSlotTable();
-        temp_v0 = temp_v0 + (temp_v2 & 0xffff) * 0x134;
-        if ((temp_v0 != -0x1ddc) && ((*(unsigned int *)(temp_v0 + 0x1f0c) & 1) != 0)) {
-          temp_v3 = temp_v3 + 1;
+    if (index < 12) {
+        return &gameGetSlotTable()->records[index];
+    }
+    return NULL;
+}
+
+// True when the story flag is set and at least two of the twelve stock records are registered.
+u32 FUN_003e4978(void)
+{
+    if (!gameFlagIsSet(0x533)) {
+        return 0;
+    }
+    s32 count = 0;
+    for (s32 i = 0; i < 12; i++) {
+        DemonStockRecord *record = demonStockRecord((u16)i);
+        if (record != NULL && (record->flags & 1) != 0) {
+            count++;
         }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while ((int)temp_v2 < 0xc);
-    if ((int)temp_v3 < 2) {
-      temp_v1 = 0;
     }
-    else {
-      temp_v1 = 1;
-    }
-  }
-  return temp_v1;
+    return count > 1;
 }
 
 } /* extern "C" */

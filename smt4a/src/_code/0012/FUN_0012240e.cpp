@@ -18,7 +18,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001219f8. */
 /* Supplied declaration required: FUN_001223d6. */
-extern int refIsNonNegative(unsigned int *);
+extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
 /* Supplied declaration required: FUN_0030fbc0. */
 
 
@@ -43,7 +43,7 @@ void FUN_0012240e(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   uStack_14 = temp_v3;
   FUN_001223d6(param_1,&temp_v4,temp_v3,&uStack_10);
   FUN_0030fbc0(param_1,param_3);
-  temp_v0 = refIsNonNegative((unsigned int *)&temp_v1);
+  temp_v0 = _ZNK18OnlineResultRecord7isValidEv((unsigned int *)&temp_v1);
   if (temp_v0 != 0) {
     FUN_001219f8(param_1,param_4);
   }

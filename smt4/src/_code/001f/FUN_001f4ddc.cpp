@@ -1,43 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f4ddc` (_code @ 0x1f4ddc, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads labelShown through a literal register offset (ldr r5,=0x5925; ldrb [r5,ip]) instead of sharing the add-chain address with the store; everything else matches. */
+#include "common.h"
+
+namespace {
+struct PartyStatusView {
+    /* 0x0000 */ u8 unk0000[0x38F4];
+    /* 0x38F4 */ s16 unitIndex[5];
+    /* 0x38FE */ u8 unk38FE[0x5925 - 0x38FE - 0x0];
+    /* 0x5925 */ u8 labelShown[5];
+    /* 0x592A */ u8 unk592A[2];
+    /* 0x592C */ u32 labelColor[5];
+    /* 0x5940 */ u16 labelId[5];
+    /* 0x594A */ u8 labelKind[5];
+};
+}
 
 extern "C" {
+void partyStatusRefreshSlot(void *work, s32 slot, s32 refreshIndex);
 
-void partyStatusRefreshSlot(void*, int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-/* Supplied declaration required: partyStatusRefreshSlot. */
-
-
-void FUN_001f4ddc(int param_1,int param_2,unsigned short param_3,unsigned char param_4)
-
+// Set the status label of a slot (id and kind), initialising its color from the unit index the first time.
+void FUN_001f4ddc(PartyStatusView *view, s32 slot, u16 id, u8 kind)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = param_1 + param_2;
-  temp_v0 = param_1 + param_2 * 2;
-  if (*(char *)(temp_v2 + 0x5925) == '\0') {
-    if (*(short *)(temp_v0 + 0x38f4) < 0) {
-      temp_v1 = 7;
+    if (view->labelShown[slot] == 0) {
+        u32 color;
+        if (view->unitIndex[slot] < 0) {
+            color = 7;
+        } else {
+            color = 0;
+        }
+        view->labelColor[slot] = color;
     }
-    else {
-      temp_v1 = 0;
-    }
-    *(unsigned int *)(param_1 + param_2 * 4 + 0x592c) = temp_v1;
-  }
-  *(unsigned char *)(temp_v2 + 0x5925) = 1;
-  *(unsigned short *)(temp_v0 + 0x5940) = param_3;
-  *(unsigned char *)(temp_v2 + 0x594a) = param_4;
-  partyStatusRefreshSlot(reinterpret_cast<void*>(param_1),param_2,1);
-  return;
+    view->labelShown[slot] = 1;
+    view->labelId[slot] = id;
+    view->labelKind[slot] = kind;
+    partyStatusRefreshSlot(view, slot, 1);
 }
 
 } /* extern "C" */

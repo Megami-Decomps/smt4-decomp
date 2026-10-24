@@ -7,13 +7,13 @@ typedef struct WordList {
 } WordList;
 
 extern u32 vectorCount4_0030c8ce(WordList *list);
-extern void FUN_002e32a4(int kind, ...);
+extern void _ZN4__rw10__rw_throwEiz(int kind, ...);
 
-/* Returns word `index` of the list; an index past the count is reported through FUN_002e32a4 first. */
+/* Returns word `index` of the list; an index past the count is reported through _ZN4__rw10__rw_throwEiz first. */
 u32 *wordListAt(WordList *list, u32 index)
 {
     if (vectorCount4_0030c8ce(list) <= index) {
-        FUN_002e32a4(9, "", "", index, vectorCount4_0030c8ce(list));
+        _ZN4__rw10__rw_throwEiz(9, "", "", index, vectorCount4_0030c8ce(list));
     }
     return &list->items[index];
 }

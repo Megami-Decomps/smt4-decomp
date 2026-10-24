@@ -1,89 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a586c` (_code @ 0x1a586c, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only register numbering of the two live arguments differs (retail: owner in r5, source in r4, source offset added after owner's) */
+/* Runs FUN_001b6668 on the two sub-objects at +0xC / +0x108, then FUN_001a5894 (placed right after, so the last call is a linker NOP). */
+#include "common.h"
+
+struct ListOwner {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u8 list[4];
+};
+
+struct ListSource {
+    /* 0x000 */ u8 unk000[0x108];
+    /* 0x108 */ u8 list[4];
+};
 
 extern "C" {
+void FUN_001b6668(u8 *destination, u8 *source);
+void FUN_001a5894(ListOwner *owner, ListSource *source);
 
-int FUN_001b6668(int, int);
-int SBORROW4(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_001b6668. */
-
-
-unsigned int * FUN_001a586c(int param_1,int param_2)
-
+void FUN_001a586c(ListOwner *owner, ListSource *source)
 {
-/* irregular: 2 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  unsigned int *puVar3;
-  int temp_v1;
-  unsigned int *puVar5;
-  int temp_v2;
-  int temp_v3;
-  
-  FUN_001b6668(param_1 + 0xc,param_2 + 0x108);
-  piVar1 = *(int **)(param_1 + 0x10);
-  if (piVar1 != (int *)(param_1 + 0x10)) {
-    temp_v0 = (unsigned int)*(unsigned char *)(param_2 + 0x9d) + *(int *)(param_2 + 0x50);
-    do {
-      if (*(char *)(param_1 + 0x58) != '\0') {
-        temp_v2 = 0x7f;
-        temp_v1 = temp_v0 - 0x7f;
-        if (0x7f >= temp_v0) {
-          temp_v2 = temp_v0;
-          temp_v1 = temp_v0;
-        }
-        temp_v3 = 0;
-        if (temp_v1 < 0 == (temp_v0 >= 0x80 && SBORROW4(temp_v0,0x7f))) {
-          temp_v3 = temp_v2;
-        }
-        temp_v1 = piVar1[-0x2e] + (unsigned int)*(unsigned char *)((int)piVar1 - 0x6b);
-        if (temp_v1 >= 0x80) {
-          temp_v1 = 0x7f;
-        }
-        else if (temp_v1 < 0) {
-          temp_v1 = 0;
-        }
-        if (temp_v3 <= temp_v1) break;
-      }
-      else {
-        temp_v2 = 0x7f;
-        temp_v1 = temp_v0 - 0x7f;
-        if (0x7f >= temp_v0) {
-          temp_v2 = temp_v0;
-          temp_v1 = temp_v0;
-        }
-        temp_v3 = 0;
-        if (temp_v1 < 0 == (temp_v0 >= 0x80 && SBORROW4(temp_v0,0x7f))) {
-          temp_v3 = temp_v2;
-        }
-        temp_v1 = piVar1[-0x2e] + (unsigned int)*(unsigned char *)((int)piVar1 - 0x6b);
-        if (temp_v1 >= 0x80) {
-          temp_v1 = 0x7f;
-        }
-        else if (temp_v1 < 0) {
-          temp_v1 = 0;
-        }
-        if (temp_v3 < temp_v1) break;
-      }
-      piVar1 = (int *)*piVar1;
-    } while (piVar1 != (int *)(param_1 + 0x10));
-  }
-  puVar3 = (unsigned int *)(param_2 + 0x108);
-  puVar5 = (unsigned int *)piVar1[1];
-  *puVar3 = (unsigned int)piVar1;
-  *(unsigned int **)(param_2 + 0x10c) = puVar5;
-  piVar1[1] = (int)puVar3;
-  *puVar5 = (unsigned int)puVar3;
-  *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + 1;
-  return puVar3;
+    FUN_001b6668(owner->list, source->list);
+    FUN_001a5894(owner, source);
 }
-
-} /* extern "C" */
+}

@@ -1,39 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cf1a8` (_code @ 0x3cf1a8, 0x80 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the random pick in r3 across the btlUnitGet call (armcc knew its register use) and the index array base in r5; the build saves them in r5/r6 (frame 440 vs 436). */
+#include "battle/ListedEntry.h"
+
+/* A battle entry seen through its flags (bit 10 marks it) and its index at +0x6e. */
+struct MarkedEntry {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x6A];
+    /* 0x06E */ s16 index;
+    /* 0x070 */ u8 unk070[0x218];
+};
+
+struct MarkedState {
+    /* 0x0000 */ u8 unk0000[0x1fc0];
+    /* 0x1FC0 */ MarkedEntry *entries;
+};
 
 extern "C" {
 
-extern int randRange(unsigned int);
-extern int btlUnitGet(int *);
+s32 randRange(u32 count);
+u8 *btlUnitGet(MarkedState **owner);
 
-
-void FUN_003cf1a8(int *param_1)
-
+/* Picks a random marked battle entry (flag 0x400) and sets byte 0x38 of its unit. */
+void FUN_003cf1a8(MarkedState **owner)
 {
-  unsigned int *puVar1;
-  int temp_v0;
-  short *psVar3;
-  int temp_v1;
-  int aiStack_1c0 [109];
-  
-  temp_v0 = 0;
-  temp_v1 = 0x6d;
-  puVar1 = *(unsigned int **)(*param_1 + 0x1fc0);
-  psVar3 = (short *)((int)puVar1 + 0x6e);
-  do {
-    if ((*puVar1 & 0x400) != 0) {
-      aiStack_1c0[temp_v0] = (int)*psVar3;
-      temp_v0 = temp_v0 + 1;
+    s32 indices[109];
+    s32 count = 0;
+    MarkedEntry *entry = (*owner)->entries;
+
+    for (s32 i = 0; i < 109; i++, entry++) {
+        if ((entry->flags & 0x400) != 0) {
+            indices[count++] = entry->index;
+        }
     }
-    temp_v1 = temp_v1 - 1;
-    puVar1 = puVar1 + 0xa2;
-    psVar3 = psVar3 + 0x144;
-  } while (temp_v1 != 0);
-  temp_v0 = randRange((temp_v0 - 1U) & 0xffff);
-  temp_v1 = btlUnitGet(param_1);
-  *(unsigned char *)(aiStack_1c0[temp_v0] + temp_v1 + 0x38) = 1;
-  return;
+    s32 pick = randRange((u16)(count - 1));
+    btlUnitGet(owner)[indices[pick] + 0x38] = 1;
 }
 
 } /* extern "C" */

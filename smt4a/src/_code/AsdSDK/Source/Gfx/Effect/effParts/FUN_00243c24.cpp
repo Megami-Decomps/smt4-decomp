@@ -1,51 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00243c24` (_code @ 0x243c24, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: close: retail clears the whole record (word stores, including the type word and the two flag words) and then stores the 16-bit type and flag halves; the build merges the type into a halfword/word combine and orders the clears differently. */
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int memAlloc(int, int, int, int, int, int);
+/* One effect-parts handler (0x44 bytes); the first slot copies a resource's data. */
+typedef struct Handler {
+    /* 0x00 */ void *(*clone)(const void *resource);
+    /* 0x04 */ u8 unk04[0x40];
+} Handler;
+extern Handler g_handlerTable[];
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+extern const char g_effPartsSourcePath[];
 
-extern char s______________________005b3274[113]; /* 0x5b3274 */
+/* An effect-parts resource (0x2c bytes). */
+struct Resource {
+    Resource() : id(0xdc), data(NULL), unk0c(0), sizeA(0), countA(0), bufferA(NULL), unk1c(0), sizeB(0), countB(0), bufferB(NULL) {}
 
-/* Supplied declaration required: memAlloc. */
+    /* 0x00 */ u32 id;
+    /* 0x04 */ u16 type;          /* index into g_handlerTable */
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ void *data;
+    /* 0x0C */ u32 unk0c;
+    /* 0x10 */ u32 sizeA;
+    /* 0x14 */ u32 countA;
+    /* 0x18 */ void *bufferA;
+    /* 0x1C */ u32 unk1c;
+    /* 0x20 */ u32 sizeB;
+    /* 0x24 */ u32 countB;
+    /* 0x28 */ void *bufferB;
+};
 
+void *memAlloc(u32 heap, u32 alignClass, u32 unk08, u32 size, u32 alignment, u32 extra);
 
-unsigned int * FUN_00243c24(unsigned int *param_1)
-
+// Duplicates a resource: allocates a new one with the same id, flags and type and clones its data
+// through the type's handler.
+Resource *FUN_00243c24(const Resource *source)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(unsigned short *)(param_1 + 1);
-  puVar2 = (unsigned int *)0x10000;
-  memAlloc(0x10000,0x100,0,0x2c,0x10,1);
-  puVar2[1] = 0;
-  puVar2[2] = 0;
-  puVar2[3] = 0;
-  puVar2[4] = 0;
-  puVar2[5] = 0;
-  puVar2[6] = 0;
-  puVar2[7] = 0;
-  puVar2[8] = 0;
-  puVar2[9] = 0;
-  puVar2[10] = 0;
-  *puVar2 = 0xdc;
-  *(unsigned short *)(puVar2 + 1) = temp_v0;
-  *puVar2 = *param_1;
-  *(unsigned short *)(puVar2 + 3) = *(unsigned short *)(param_1 + 3);
-  *(unsigned short *)(puVar2 + 7) = *(unsigned short *)(param_1 + 7);
-  temp_v1 = (**(romwright_code **)(s______________________005b3274 + (unsigned int)temp_v0 * 0x44))(param_1);
-  puVar2[2] = temp_v1;
-  return puVar2;
+    u16 type = source->type;
+    asdDebugTrace(g_effPartsSourcePath, 46);
+    Resource *copy = (Resource *)memAlloc(0x10000, 0x100, 0, 0x2c, 0x10, 1);
+    *copy = Resource();
+    copy->type = type;
+    copy->id = source->id;
+    *(u16 *)&copy->unk0c = *(const u16 *)&source->unk0c;
+    *(u16 *)&copy->unk1c = *(const u16 *)&source->unk1c;
+    copy->data = g_handlerTable[type].clone(source);
+    return copy;
 }
 
-} /* extern "C" */
+}

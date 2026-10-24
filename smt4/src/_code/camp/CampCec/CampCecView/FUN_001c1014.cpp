@@ -22,7 +22,7 @@ int statusCameraHandleControls(...);
 int FUN_0029ede8(int, unsigned int, unsigned int);
 int FUN_002bf4f8(...);
 int FUN_002bf810(...);
-int FUN_002bff6c(...);
+int uiPointerHitsRect(...);
 int FUN_002bffe0(...);
 int VectorSignedToFloat(...);
 
@@ -54,7 +54,7 @@ extern int FUN_0028d594(void);
 extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf810. */
-/* Supplied declaration required: FUN_002bff6c. */
+/* Supplied declaration required: uiPointerHitsRect. */
 /* Supplied declaration required: FUN_002bffe0. */
 extern int FUN_002c15fc(unsigned int);
 /* Supplied declaration required: FUN_002ebfbc. */
@@ -357,7 +357,7 @@ LAB_001c1220:
     temp_v7 = FUN_002bf4f8(0x39,0x42);
     temp_v17[0] = 0;
     temp_v3 = (int)*(short *)(temp_v7 + 8);
-    FUN_002bff6c(temp_v3,(int)*(short *)(temp_v7 + 10),(int)**(short **)(temp_v7 + 0xc),
+    uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v7 + 10),(int)**(short **)(temp_v7 + 0xc),
                  (int)(*(short **)(temp_v7 + 0xc))[1]);
     if (temp_v3 != 0) {
       temp_v4 = *(unsigned int *)(temp_v0 + 0x154) | 1;
@@ -369,7 +369,7 @@ LAB_001c1220:
     temp_v7 = FUN_002bf4f8(0x39,0x43);
     temp_v17[0] = 0;
     temp_v3 = (int)*(short *)(temp_v7 + 8);
-    FUN_002bff6c(temp_v3,(int)*(short *)(temp_v7 + 10),(int)**(short **)(temp_v7 + 0xc),
+    uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v7 + 10),(int)**(short **)(temp_v7 + 0xc),
                  (int)(*(short **)(temp_v7 + 0xc))[1]);
     if (temp_v3 != 0) {
       *(unsigned int *)(temp_v0 + 0x154) = *(unsigned int *)(temp_v0 + 0x154) | 2;
@@ -380,7 +380,7 @@ LAB_001c1220:
     temp_v7 = FUN_002bf4f8(0x39,0x41);
     temp_v17[0] = 0;
     temp_v3 = (int)*(short *)(temp_v7 + 8);
-    FUN_002bff6c(temp_v3,(int)*(short *)(temp_v7 + 10),(int)**(short **)(temp_v7 + 0xc),
+    uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v7 + 10),(int)**(short **)(temp_v7 + 0xc),
                  (int)(*(short **)(temp_v7 + 0xc))[1]);
     temp_v7 = 0;
     if (temp_v3 != 0) {
@@ -394,7 +394,7 @@ LAB_001c1220:
         temp_v3 = FUN_002bf4f8(0x39,temp_v7 + 0x96);
         temp_v17[0] = 0;
         temp_v5 = (int)*(short *)(temp_v3 + 8);
-        FUN_002bff6c(temp_v5,(int)*(short *)(temp_v3 + 10),(int)**(short **)(temp_v3 + 0xc),
+        uiPointerHitsRect(temp_v5,(int)*(short *)(temp_v3 + 10),(int)**(short **)(temp_v3 + 0xc),
                      (int)(*(short **)(temp_v3 + 0xc))[1]);
         if (temp_v5 != 0) {
           temp_v1 = temp_v7;

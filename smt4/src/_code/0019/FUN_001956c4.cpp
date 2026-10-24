@@ -17,7 +17,7 @@ int FUN_0029efa8(...);
 int FUN_0029efc0(...);
 int dataTable1bOr1cGetRecord(void);
 int eventQueueAddUniqueIfValid(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int FUN_002bf810(...);
 int FUN_002c1658(...);
 int uiQuestSortListByEntryKind(...);
@@ -79,7 +79,7 @@ extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_002b8ee0. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002bf818. */
@@ -751,7 +751,7 @@ joined_r0x0019627c:
       return 0;
     }
     timerStart(temp_v1 + 0x34,2,0);
-    FUN_002bee58(temp_v1 + 0x2f0,4);
+    spriteStartAnimationByIndex(temp_v1 + 0x2f0,4);
     temp_v7 = 0x13;
     break;
   case 0x13:
@@ -932,7 +932,7 @@ joined_r0x0019627c:
     }
     FUN_0028fe0c(*(unsigned short *)(temp_v1 + 0x97e),1);
     timerStart(temp_v1 + 0x494,0);
-    FUN_002bee58(temp_v1 + 0x520,5);
+    spriteStartAnimationByIndex(temp_v1 + 0x520,5);
     temp_v7 = 0x18;
     break;
   case 0x18:

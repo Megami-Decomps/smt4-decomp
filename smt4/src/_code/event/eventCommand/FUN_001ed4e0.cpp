@@ -1,48 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ed4e0` (_code @ 0x1ed4e0, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the flag-id computation differs (retail: mov r0, r5 / add r0, r0, #2048 / mov r4, r0 with the scene id in r5; ours adds directly into r5 with the id in r4). */
+#include "common.h"
 
 extern "C" {
 
-int gameFlagSetValue(int, int);
-int commonBgStopAndResetFade(void);
-int FUN_002d6658(int);
-int FUN_002ef6b8(int, unsigned int);
+/* The running event command: the job handle it started at 8. */
+struct EventCommand {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 job;
+};
 
-extern unsigned char g_eventCommand; /* 0x43e088 */
+extern EventCommand g_eventCommand;
+s32 scrGetArg(u32 index);
+s32 jobIsValid(s32 job);
+u32 gameFlagIsSet(s32 flag);
+void gameFlagSetValue(s32 flag, s32 value, s32 notify);
+void commonBgStopAndResetFade(void);
+void FUN_002d6658(s32 arg);
+s32 FUN_002ef6b8(s32 id, u32 flagWasSet);
 
-/* Supplied declaration required: gameFlagSetValue. */
-extern int scrGetArg(unsigned int);
-extern int jobIsValid(int);
-extern unsigned int gameFlagIsSet(void);
-/* Supplied declaration required: commonBgStopAndResetFade. */
-/* Supplied declaration required: FUN_002d6658. */
-/* Supplied declaration required: FUN_002ef6b8. */
-
-
-unsigned char FUN_001ed4e0(void)
-
+/* The game flag that marks scene `id` as seen. */
+static __inline s32 eventFlagForScene(s32 id)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  if ((*(int *)((unsigned char *)&g_eventCommand + 0x8)) == 0) {
-    FUN_002d6658(0);
-    commonBgStopAndResetFade();
-    temp_v1 = temp_v0 + 0x800;
-    temp_v2 = gameFlagIsSet();
-    FUN_002ef6b8(temp_v0,temp_v2);
-    (*(int *)((unsigned char *)&g_eventCommand + 0x8)) = temp_v0;
-    gameFlagSetValue(temp_v1,1);
-  }
-  temp_v0 = jobIsValid((*(int *)((unsigned char *)&g_eventCommand + 0x8)));
-  if (temp_v0 == 0) {
-    (*(int *)((unsigned char *)&g_eventCommand + 0x8)) = 0;
-  }
-  return temp_v0 == 0;
+    return id + 0x800;
+}
+
+/* Script command: starts the event job for arg0 (once, marking flag 0x800 + arg0) and waits until it ends. */
+u8 FUN_001ed4e0(void)
+{
+    s32 id = scrGetArg(0);
+    s32 valid;
+
+    if (g_eventCommand.job == 0) {
+        FUN_002d6658(0);
+        commonBgStopAndResetFade();
+        s32 flag = eventFlagForScene(id);
+        g_eventCommand.job = FUN_002ef6b8(id, gameFlagIsSet(flag));
+        gameFlagSetValue(flag, 1, 1);
+    }
+    valid = jobIsValid(g_eventCommand.job);
+    if (valid == 0) {
+        g_eventCommand.job = 0;
+    }
+    return valid == 0;
 }
 
 } /* extern "C" */

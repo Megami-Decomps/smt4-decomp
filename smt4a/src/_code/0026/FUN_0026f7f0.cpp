@@ -1,132 +1,74 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026f7f0` (_code @ 0x26f7f0, 0x238 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction-for-instruction the same unrolled loops; only register allocation differs (retail keeps the -1 owner constant in ip and the entry address temporaries in r6/r7). */
+#include "common.h"
 
-extern "C" {
+namespace {
+// A selectable entry in the camp's list: a skill id and the party slot that owns it (-1: the player).
+struct CampListEntry {
+    u32 id;
+    s32 owner;
+};
 
-int FUN_00203b40(int, unsigned int, int, int, int, int);
-int sysMemClear(unsigned int *, int);
-int FUN_003d0bc0(int);
-int playerGetWords(unsigned short *, int);
+struct CampWork {
+    u8 unk0000[0x1EC];
+    u8 listView[0x1B70 - 0x1EC];    // 0x1EC: the list widget
+    CampListEntry entries[200];     // 0x1B70
+};
 
-/* stack frame of void: 5 slot(s), 14 byte(s) */
-typedef struct {
-    unsigned short sp22; /* 0x22: local_22 */
-    unsigned short sp2E; /* 0x2e: local_2e */
-    unsigned short sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
+// A party slot's record: eight skill ids.
+struct SlotRecord {
+    u8 unk00[0x34];
+    u16 skills[8];                  // 0x34
+};
 
-extern int g_camp; /* 0x57f108 */
-
-extern int gameGetSlotRecord(void);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003d0bc0. */
-/* Supplied declaration required: playerGetWords. */
-
-
-void FUN_0026f7f0(void)
-
-{
-/* irregular: 4 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned short *puVar6;
-  unsigned int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned short temp_v10;
-  unsigned short temp_v11;
-  unsigned short temp_v12 [5];
-  unsigned short temp_v13;
-  
-  temp_v1 = g_camp;
-  temp_v2 = gameGetSlotTable();
-  sysMemClear((unsigned int *)(temp_v1 + 0x1b70),0x640);
-  playerGetWords(&temp_v10,0);
-  temp_v3 = (unsigned int)temp_v10;
-  if (temp_v3 != 0) {
-    *(unsigned int *)(temp_v1 + 0x1b70) = temp_v3;
-    *(unsigned int *)(temp_v1 + 0x1b74) = 0xffffffff;
-  }
-  temp_v3 = (unsigned int)(temp_v3 != 0);
-  temp_v8 = 3;
-  puVar6 = &temp_v10;
-  do {
-    temp_v5 = (unsigned int)puVar6[2];
-    if (temp_v11 != 0) {
-      temp_v9 = temp_v1 + temp_v3 * 8;
-      *(unsigned int *)(temp_v9 + 0x1b70) = (unsigned int)temp_v11;
-      temp_v3 = temp_v3 + 1;
-      *(unsigned int *)(temp_v9 + 0x1b74) = 0xffffffff;
-    }
-    temp_v11 = puVar6[3];
-    if (temp_v5 != 0) {
-      temp_v9 = temp_v1 + temp_v3 * 8;
-      *(unsigned int *)(temp_v9 + 0x1b70) = temp_v5;
-      temp_v3 = temp_v3 + 1;
-      *(unsigned int *)(temp_v9 + 0x1b74) = 0xffffffff;
-    }
-    temp_v8 = temp_v8 - 1;
-    puVar6 = puVar6 + 2;
-  } while (temp_v8 != 0);
-  if (temp_v13 != 0) {
-    temp_v8 = temp_v1 + temp_v3 * 8;
-    *(unsigned int *)(temp_v8 + 0x1b70) = (unsigned int)temp_v13;
-    temp_v3 = temp_v3 + 1;
-    *(unsigned int *)(temp_v8 + 0x1b74) = 0xffffffff;
-  }
-  temp_v8 = 0;
-  do {
-    temp_v9 = temp_v2 + temp_v8;
-    if ((-1 < *(char *)(temp_v9 + 0x1c88)) && (temp_v4 = gameGetSlotRecord(), temp_v4 != 0)) {
-      if (*(unsigned short *)(temp_v4 + 0x34) != 0) {
-        temp_v6 = temp_v1 + temp_v3 * 8;
-        *(unsigned int *)(temp_v6 + 0x1b70) = (unsigned int)*(unsigned short *)(temp_v4 + 0x34);
-        temp_v3 = temp_v3 + 1;
-        *(int *)(temp_v6 + 0x1b74) = (int)*(char *)(temp_v9 + 0x1c88);
-      }
-      temp_v6 = 3;
-      temp_v0 = *(unsigned short *)(temp_v4 + 0x36);
-      puVar6 = (unsigned short *)(temp_v4 + 0x34);
-      do {
-        temp_v5 = (unsigned int)puVar6[2];
-        if (temp_v0 != 0) {
-          temp_v7 = temp_v1 + temp_v3 * 8;
-          *(unsigned int *)(temp_v7 + 0x1b70) = (unsigned int)temp_v0;
-          temp_v3 = temp_v3 + 1;
-          *(int *)(temp_v7 + 0x1b74) = (int)*(char *)(temp_v9 + 0x1c88);
-        }
-        temp_v0 = puVar6[3];
-        if (temp_v5 != 0) {
-          temp_v7 = temp_v1 + temp_v3 * 8;
-          *(unsigned int *)(temp_v7 + 0x1b70) = temp_v5;
-          temp_v3 = temp_v3 + 1;
-          *(int *)(temp_v7 + 0x1b74) = (int)*(char *)(temp_v9 + 0x1c88);
-        }
-        temp_v6 = temp_v6 - 1;
-        puVar6 = puVar6 + 2;
-      } while (temp_v6 != 0);
-      if (*(unsigned short *)(temp_v4 + 0x42) != 0) {
-        temp_v6 = temp_v1 + temp_v3 * 8;
-        *(unsigned int *)(temp_v6 + 0x1b70) = (unsigned int)*(unsigned short *)(temp_v4 + 0x42);
-        temp_v3 = temp_v3 + 1;
-        *(int *)(temp_v6 + 0x1b74) = (int)*(char *)(temp_v9 + 0x1c88);
-      }
-    }
-    temp_v8 = temp_v8 + 1;
-  } while (temp_v8 < 0x18);
-  FUN_00203b40(temp_v1 + 0x1ec,temp_v3,0xb,1,1,1);
-  FUN_003d0bc0(9);
-  return;
+// The party slot table: one owner byte per slot.
+struct SlotTable {
+    u8 unk0000[0x1C88];
+    s8 owner[24];                   // 0x1C88
+};
 }
 
-} /* extern "C" */
+extern "C" {
+extern CampWork *g_camp;
+SlotTable *gameGetSlotTable(void);
+SlotRecord *gameGetSlotRecord(s32 owner);
+void sysMemClear(void *memory, u32 size);
+void playerGetWords(u16 *words, s32 kind);
+void FUN_00203b40(void *view, u32 count, u32 a, u32 b, u32 c, u32 d);
+void FUN_003d0bc0(s32 mode);
+
+/* Rebuild the camp list of every skill id the player and the party slots hold. */
+void FUN_0026f7f0(void)
+{
+    CampWork *camp = g_camp;
+    SlotTable *slots = gameGetSlotTable();
+    u32 count = 0;
+    sysMemClear(camp->entries, sizeof(camp->entries[0]) * 200);
+    u16 words[8];
+    playerGetWords(words, 0);
+    for (s32 i = 0; i < 8; i++) {
+        if (words[i] != 0) {
+            camp->entries[count].id = words[i];
+            camp->entries[count].owner = -1;
+            count++;
+        }
+    }
+    for (s32 slot = 0; slot < 24; slot++) {
+        if (slots->owner[slot] < 0) {
+            continue;
+        }
+        SlotRecord *record = gameGetSlotRecord(slots->owner[slot]);
+        if (record == NULL) {
+            continue;
+        }
+        for (s32 i = 0; i < 8; i++) {
+            if (record->skills[i] != 0) {
+                camp->entries[count].id = record->skills[i];
+                camp->entries[count].owner = slots->owner[slot];
+                count++;
+            }
+        }
+    }
+    FUN_00203b40(camp->listView, count, 11, 1, 1, 1);
+    FUN_003d0bc0(9);
+}
+}

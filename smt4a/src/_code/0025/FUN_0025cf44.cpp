@@ -21,8 +21,8 @@ u32 FUN_0025cf44(void)
     if (work != NULL && textureGetIndexedResource(46) != 0 &&
         asdTMTexTableNodeIsLoaded(46, 0) != 0) {
         const TextureSummaryDimensions *dimensions = FUN_001834a4(46, 151);
-        FUN_0034248c(work->unk174, g_campCec.instance->block40, work->unk178, 0, 0);
-        saveSlotDrawSummary(work->unk174, g_campCec.instance->block40, work->unk178 + 0x14,
+        FUN_0034248c(work->unk174, g_campCec.instance->block40, work->slides, 0, 0);
+        saveSlotDrawSummary(work->unk174, g_campCec.instance->block40, work->slides + 1,
                             dimensions->width, dimensions->height, 0);
     }
     return 0;

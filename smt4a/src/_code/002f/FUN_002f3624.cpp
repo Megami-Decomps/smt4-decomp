@@ -5,7 +5,7 @@
 extern "C" {
 
 int sharedRefRelease(int *);
-int operatorNew(int);
+int _Znwj(int);
 int sharedRefHolderDestroy(unsigned char [8]);
 int strHolderAssignBuffer(unsigned char [8], int);
 int FUN_002eb108(int *, int, unsigned int, int, unsigned int, int);
@@ -26,7 +26,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: sharedRefRelease. */
-/* Supplied declaration required: operatorNew. */
+/* Supplied declaration required: _Znwj. */
 extern int *strInit(void);
 /* Supplied declaration required: sharedRefHolderDestroy. */
 /* Supplied declaration required: strHolderAssignBuffer. */
@@ -69,7 +69,7 @@ int * FUN_002f3624(int param_1,unsigned int param_2,int param_3)
     }
   }
   else {
-    temp_v0 = operatorNew(0x20);
+    temp_v0 = _Znwj(0x20);
     if (temp_v0 != 0) {
       piVar2 = (int *)strInit();
     }
@@ -101,7 +101,7 @@ int * FUN_002f3624(int param_1,unsigned int param_2,int param_3)
     sharedRefHolderDestroy(temp_v2);
     return (int *)0x0;
   }
-  piVar2 = (int *)operatorNew(0x150);
+  piVar2 = (int *)_Znwj(0x150);
   if (piVar2 != (int *)0x0) {
     FUN_002eb108(piVar2,0,param_2,0,temp_v3,0);
   }

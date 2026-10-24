@@ -1,99 +1,121 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00263988` (_code @ 0x263988, 0x278 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only register naming differs: retail keeps &current in r6 and the motion in r7, and 0.0f/1.0f in s16/s17 (here swapped). */
+#include "common.h"
 
 extern "C" {
-
-int asdModelSlotSetColor(int);
-int asdModelSlotSetTint(int);
-void FUN_0029c2cc(unsigned int, int);
-int modelSlotAttachChild(unsigned int, int);
-int asdModelResetAndSelectSecondaryMotion(unsigned int, int);
-void FUN_002d582c(unsigned int, float);
-int FUN_002e1230(unsigned int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern int nw_anim_PlayPolicy_Loop(...); /* 0x151500 */
-extern unsigned char LAB_00155650; /* 0x155650 */
-
-/* Supplied declaration required: asdModelSlotSetColor. */
-/* Supplied declaration required: asdModelSlotSetTint. */
-/* Supplied declaration required: FUN_0029c2cc. */
-/* Supplied declaration required: modelSlotAttachChild. */
-/* Supplied declaration required: asdModelResetAndSelectSecondaryMotion. */
-/* Supplied declaration required: FUN_002d582c. */
-/* Supplied declaration required: FUN_002e1230. */
-
-
-void FUN_00263988(int param_1,int param_2)
-
-{
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int *piVar3;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  piVar3 = (int *)(param_1 + 0x550);
-  temp_v0 = *(int *)(param_1 + 0x550);
-  if (temp_v0 != param_2) {
-    temp_v2 = 0;
-    if (temp_v0 != -1) {
-      FUN_0029c2cc(*(unsigned int *)(param_1 + temp_v0 * 4 + 0x3c),0);
-      FUN_002d582c(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x560) * 4 + 0x34), 0.0f);
-      piVar2 = *(int **)(*(int *)(param_1 + *piVar3 * 4 + 0x3c) + 4);
-      piVar2[0x10] = temp_v2;
-      *(unsigned char *)(piVar2 + 0x16) = 1;
-      (**(romwright_code **)(*piVar2 + 0x20))();
-    }
-    *(int *)(param_1 + 0x550) = param_2;
-    modelSlotAttachChild(*(unsigned int *)(param_1 + param_2 * 4 + 0x3c),0);
-    asdModelResetAndSelectSecondaryMotion(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x560) * 4 + 0x34),param_2);
-    temp_v3 = 0x3f800000;
-    FUN_002d582c(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x560) * 4 + 0x34), 1.0f);
-    temp_v0 = *(int *)(*(int *)(param_1 + *piVar3 * 4 + 0x3c) + 4);
-    temp_v1 = *(unsigned int *)(temp_v0 + 0x44);
-    (**(romwright_code **)(temp_v0 + 0x4c))(*(unsigned int *)(temp_v0 + 0x50));
-    *(unsigned int *)(temp_v0 + 0x3c) = *(unsigned int *)(temp_v0 + 0x38);
-    *(unsigned int *)(temp_v0 + 0x38) = temp_v1;
-    *(unsigned char *)(temp_v0 + 0x58) = 1;
-    *(unsigned int *)(*(int *)(*(int *)(param_1 + *piVar3 * 4 + 0x3c) + 4) + 0x40) = temp_v3;
-    if (param_2 == 0) {
-      FUN_002e1230(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x560) * 4 + 0x34),0);
-      temp_v0 = *(int *)(*(int *)(param_1 + *(int *)(param_1 + 0x550) * 4 + 0x3c) + 4);
-      *(unsigned char **)(temp_v0 + 0x4c) = &LAB_00155650;
-      *(unsigned char *)(temp_v0 + 0x58) = 1;
-      asdModelSlotSetTint(0);
-      asdModelSlotSetColor(0);
-      return;
-    }
-    if (param_2 == 1) {
-      FUN_002e1230(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x560) * 4 + 0x34),0);
-      temp_v0 = *(int *)(*(int *)(param_1 + *(int *)(param_1 + 0x550) * 4 + 0x3c) + 4);
-      *(unsigned char **)(temp_v0 + 0x4c) = &LAB_00155650;
-      *(unsigned char *)(temp_v0 + 0x58) = 1;
-      asdModelSlotSetTint(0);
-      asdModelSlotSetColor(0);
-      return;
-    }
-    if (param_2 == 2) {
-      FUN_002e1230(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x560) * 4 + 0x34),1);
-      temp_v0 = *(int *)(*(int *)(param_1 + *(int *)(param_1 + 0x550) * 4 + 0x3c) + 4);
-      *(romwright_code **)(temp_v0 + 0x4c) = nw_anim_PlayPolicy_Loop;
-      *(unsigned char *)(temp_v0 + 0x58) = 1;
-      asdModelSlotSetTint(0);
-      asdModelSlotSetColor(0);
-      return;
-    }
-  }
-  return;
+typedef f32 (*AnimationPolicy)(void *context, f32 start, f32 end, f32 frame);
+f32 FUN_00155650(void *context, f32 start, f32 end, f32 frame);
+f32 nw_anim_PlayPolicy_Loop(void *context, f32 start, f32 end, f32 frame);
 }
 
-} /* extern "C" */
+/* A playing animation: its vtable's slot 8 refreshes it after the state changes. */
+struct AnimationPlayer {
+    virtual void vfn00();
+    virtual void vfn04();
+    virtual void vfn08();
+    virtual void vfn0C();
+    virtual void vfn10();
+    virtual void vfn14();
+    virtual void vfn18();
+    virtual void vfn1C();
+    virtual void refresh();
+    /* 0x04 */ u8 unk04[0x34];
+    /* 0x38 */ f32 frame;
+    /* 0x3C */ f32 previous;
+    /* 0x40 */ f32 speed;
+    /* 0x44 */ f32 start;
+    /* 0x48 */ f32 end;
+    /* 0x4C */ AnimationPolicy policy;
+    /* 0x50 */ void *context;
+    /* 0x54 */ u8 unk54[4];
+    /* 0x58 */ u8 dirty;
+};
+
+struct ModelSlotObject {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ AnimationPlayer *player;
+};
+
+struct ModelSwitcher {
+    /* 0x000 */ u8 unk000[0x34];
+    /* 0x034 */ void *models[2];
+    /* 0x03C */ ModelSlotObject *slots[8];
+    /* 0x05C */ u8 unk05C[0x4F4];
+    /* 0x550 */ s32 current;
+    /* 0x554 */ u8 unk554[0xC];
+    /* 0x560 */ s32 modelIndex;
+};
+
+struct TintColor {
+    f32 red, green, blue, alpha;
+    TintColor(f32 r, f32 g, f32 b, f32 a) : red(r), green(g), blue(b), alpha(a) {}
+};
+
+extern "C" {
+void asdModelSlotSetColor(s32 slot, u32 index, f32 r, f32 g, f32 b);
+void asdModelSlotSetTint(s32 slot, u32 bank, TintColor color);
+void FUN_0029c2cc(void *slot, s32 index);
+void modelSlotAttachChild(void *slot, s32 index);
+void asdModelResetAndSelectSecondaryMotion(void *model, s32 motion, f32 blend, f32 speed);
+void animOwnerSetScale(void *model, f32 speed);
+void FUN_002e1230(void *model, s32 loop);
+
+static __inline void resetAnimation(AnimationPlayer *player)
+{
+    f32 frame = player->policy(player->context, player->start, player->end, 0.0f);
+    player->previous = player->frame;
+    player->frame = frame;
+    player->dirty = 1;
+}
+
+/* Switches the active motion slot: stops the old one, starts the new one and sets its loop policy and tint. */
+void FUN_00263988(ModelSwitcher *switcher, s32 motion)
+{
+    if (switcher->current == motion) {
+        return;
+    }
+    if (switcher->current != -1) {
+        FUN_0029c2cc(switcher->slots[switcher->current], 0);
+        animOwnerSetScale(switcher->models[switcher->modelIndex], 0.0f);
+        AnimationPlayer *old = switcher->slots[switcher->current]->player;
+        old->speed = 0.0f;
+        old->dirty = 1;
+        old->refresh();
+    }
+    switcher->current = motion;
+    modelSlotAttachChild(switcher->slots[motion], 0);
+    asdModelResetAndSelectSecondaryMotion(switcher->models[switcher->modelIndex], motion, 0.0f, 0.0f);
+    animOwnerSetScale(switcher->models[switcher->modelIndex], 1.0f);
+    resetAnimation(switcher->slots[switcher->current]->player);
+    switcher->slots[switcher->current]->player->speed = 1.0f;
+    switch (motion) {
+    case 0: {
+        FUN_002e1230(switcher->models[switcher->modelIndex], 0);
+        AnimationPlayer *player = switcher->slots[switcher->current]->player;
+        player->policy = FUN_00155650;
+        player->dirty = 1;
+        asdModelSlotSetTint(0, 0, TintColor(1.0f, 1.0f, 1.0f, 1.0f));
+        asdModelSlotSetColor(0, 0, 0.3f, 0.3f, 0.3f);
+        break;
+    }
+    case 1: {
+        FUN_002e1230(switcher->models[switcher->modelIndex], 0);
+        AnimationPlayer *player = switcher->slots[switcher->current]->player;
+        player->policy = FUN_00155650;
+        player->dirty = 1;
+        asdModelSlotSetTint(0, 0, TintColor(0.6f, 0.6f, 0.6f, 1.0f));
+        asdModelSlotSetColor(0, 0, 0.1f, 0.1f, 0.1f);
+        break;
+    }
+    case 2: {
+        FUN_002e1230(switcher->models[switcher->modelIndex], 1);
+        AnimationPlayer *player = switcher->slots[switcher->current]->player;
+        player->policy = nw_anim_PlayPolicy_Loop;
+        player->dirty = 1;
+        asdModelSlotSetTint(0, 0, TintColor(1.0f, 1.0f, 1.0f, 1.0f));
+        asdModelSlotSetColor(0, 0, 0.3f, 0.3f, 0.3f);
+        break;
+    }
+    }
+}
+
+}

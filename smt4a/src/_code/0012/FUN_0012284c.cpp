@@ -10,10 +10,10 @@ int FUN_0010d0cc(void);
 int FUN_00122250(unsigned int, unsigned int, char *, int);
 int sharedRefRelease(void);
 int FUN_002e78d0(unsigned int, unsigned int, int);
-int FUN_002e7908(...);
-int _ZN9Obj55aff4C1EPKc(unsigned char [8], int);
+int _ZN12OnlineResultC1ERKj(...);
+int _ZN9Obj55aff4C1EPKt(unsigned char [8], int);
 int _ZN9Obj55aff4D1Ev(unsigned char [8]);
-int vectorCopyHeader(int, unsigned int);
+int _ZN18OnlineResultRecordaSERKS_(int, unsigned int);
 int FUN_002ea12c(void);
 int FUN_002ea704(void);
 int FUN_002f3378(unsigned char [36]);
@@ -38,13 +38,13 @@ extern unsigned int FUN_00104694(void);
 /* Supplied declaration required: FUN_00122250. */
 extern unsigned int onlineContextGetInstance(void);
 /* Supplied declaration required: sharedRefRelease. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
-/* Supplied declaration required: FUN_002e7908. */
-/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKt. */
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
-/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: FUN_002ea12c. */
 /* Supplied declaration required: FUN_002ea704. */
 /* Supplied declaration required: FUN_002f3378. */
@@ -90,8 +90,8 @@ void FUN_0012284c(unsigned int param_1,int param_2,int param_3,char *param_4,int
   iStack_20 = param_2;
   iStack_1c = param_3;
   temp_v9 = param_4;
-  temp_v0 = FUN_002e7908(temp_v7,&temp_v5);
-  vectorCopyHeader(param_2 + 0x130,temp_v0);
+  temp_v0 = _ZN12OnlineResultC1ERKj(temp_v7,&temp_v5);
+  _ZN18OnlineResultRecordaSERKS_(param_2 + 0x130,temp_v0);
   if (((param_3 != 0) && (param_5 != 0)) && ((param_6 == 0 || (param_7 != 0)))) {
     pcVar4 = temp_v9;
     pcVar6 = DAT_0059494c;
@@ -114,7 +114,7 @@ void FUN_0012284c(unsigned int param_1,int param_2,int param_3,char *param_4,int
             if (*(int *)(param_2 + 0x11c) != 0) {
               if (*(char *)(*(int *)(param_2 + 0x11c) + 0x22) != '\x05') {
                 temp_v3 = -0x7ffefffc;
-                FUN_002e7908(temp_v8,&temp_v3);
+                _ZN12OnlineResultC1ERKj(temp_v8,&temp_v3);
                 return;
               }
               sharedRefRelease();
@@ -131,12 +131,12 @@ void FUN_0012284c(unsigned int param_1,int param_2,int param_3,char *param_4,int
               FUN_002f3378(temp_v4);
               temp_v0 = FUN_002ea704();
               FUN_002fd784(temp_v0,temp_v4);
-              _ZN9Obj55aff4C1EPKc(temp_v6,param_5);
+              _ZN9Obj55aff4C1EPKt(temp_v6,param_5);
               FUN_0010d0cc();
               _ZN9Obj55aff4D1Ev(temp_v6);
               temp_v1 = FUN_002e789a(param_3);
               if (temp_v1 != 0) {
-                temp_v1 = operatorNew(0x2b8);
+                temp_v1 = _Znwj(0x2b8);
                 temp_v0 = 0;
                 if (temp_v1 != 0) {
                   temp_v0 = FUN_00104694();
@@ -155,7 +155,7 @@ void FUN_0012284c(unsigned int param_1,int param_2,int param_3,char *param_4,int
               else {
                 temp_v3 = -0x7ffefff3;
               }
-              FUN_002e7908(temp_v8,piVar5);
+              _ZN12OnlineResultC1ERKj(temp_v8,piVar5);
               (((Obj558b24 *)(temp_v4))->Obj558b24::~Obj558b24(), (int)(temp_v4));
               return;
             }
@@ -174,7 +174,7 @@ void FUN_0012284c(unsigned int param_1,int param_2,int param_3,char *param_4,int
   else {
     temp_v3 = -0x7ffefff6;
   }
-  FUN_002e7908(temp_v8,&temp_v3);
+  _ZN12OnlineResultC1ERKj(temp_v8,&temp_v3);
   return;
 }
 

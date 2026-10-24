@@ -63,7 +63,9 @@ typedef struct ButtonHelpWork {
 } ButtonHelpWork;
 
 typedef struct ButtonHelpUnit {
-    /* 0x00 */ u8 unk00[0x8C];
+    /* 0x00 */ u8 unk00[0x8A];
+    /* 0x8A */ s8 flags;
+    /* 0x8B */ u8 unk8B;
 } ButtonHelpUnit;
 typedef struct ButtonHelpKind {
     /* 0x00 */ u8 kind;
@@ -82,11 +84,20 @@ typedef struct ButtonHelpWorkA {
     /* 0x010 */ s32 state;
     /* 0x014 */ u8 unk014[0x20];
     /* 0x034 */ ButtonHelpUnit units[6];
-    /* 0x37C */ u8 unk37C[0x230];
+    union {
+        /* 0x37C */ u8 unk37C[0x230];
+        /* 0x37C */ ButtonHelpUnit selected[4];
+    };
     /* 0x5AC */ ButtonHelpKind kinds[6];
     /* 0x5C4 */ u8 unk5C4[0xC];
     /* 0x5D0 */ s32 count;
-    /* 0x5D4 */ u8 unk5D4[0xC];
+    union {
+        /* 0x5D4 */ u8 unk5D4[0xC];
+        struct {
+            /* 0x5D4 */ u8 active[6];
+            /* 0x5DA */ u8 unk5DA[6];
+        } clear;
+    };
     /* 0x5E0 */ u8 unk5E0;
     /* 0x5E1 */ s8 panelState;
     /* 0x5E2 */ u8 unk5E2[2];
@@ -124,6 +135,13 @@ typedef struct ButtonHelpGlobalsA {
     /* 0x04 */ ButtonHelpWorkA *work;
 } ButtonHelpGlobalsA;
 
+/* Apocalypse's g_buttonHelp followed by the preset waiting for the active animations to finish (-1: none). */
+struct ButtonHelpPresetGlobalsA {
+    ButtonHelpGlobalsA prefix;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ s32 pending;
+};
+
 typedef struct ButtonHelpCompatibilityKind {
     /* 0x00 */ u8 kind;
     /* 0x01 */ u8 unk01[3];
@@ -143,6 +161,12 @@ struct ButtonHelpSelectionViewIV {
     /* 0x494 */ ButtonHelpKind kinds[6];
     /* 0x4AC */ u8 unk4AC[0xC];
     /* 0x4B8 */ u8 active[6];
+    /* 0x4BE */ u8 unk4BE[6];
+};
+/* g_buttonHelp followed by the preset waiting for the active animations to finish (-1: none). */
+struct ButtonHelpPresetGlobals {
+    ButtonHelpGlobals prefix;
+    /* 0x10 */ s32 pending;
 };
 struct ButtonHelpQueuedSelections {
     s32 kinds[6];

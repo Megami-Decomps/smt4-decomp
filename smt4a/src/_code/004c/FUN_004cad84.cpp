@@ -1,65 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004cad84` (_code @ 0x4cad84, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: branch layout and constants match; only instruction scheduling differs (retail stores mode first and reloads speed after the direction store). */
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_004cad84_arg0 fn_004cad84_arg0;
-struct fn_004cad84_arg0 {
-    unsigned char pad_0x0[0x48];
-    undefined4 field_0x48; /* +0x48 */
-    undefined4 field_0x4c; /* +0x4c */
-    unsigned char pad_0x50[0x5c];
-    undefined4 field_0xac; /* +0xac */
-    undefined4 field_0xb0; /* +0xb0 */
-    unsigned char pad_0xb4[0x8];
-    undefined4 field_0xbc; /* +0xbc */
-    unsigned char pad_0xc0[0x4];
-    undefined4 field_0xc4; /* +0xc4 */
-    unsigned char pad_0xc8[0x20];
-    undefined4 field_0xe8; /* +0xe8 */
+/* A drifting effect object. */
+struct DriftObject {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ u32 active;
+    /* 0x4C */ u32 unk4C;
+    /* 0x50 */ u8 unk50[0x5C];
+    /* 0xAC */ u32 mode;
+    /* 0xB0 */ f32 speed;
+    /* 0xB4 */ u8 unkB4[8];
+    /* 0xBC */ u32 offset;
+    /* 0xC0 */ u8 unkC0[4];
+    /* 0xC4 */ f32 direction;
+    /* 0xC8 */ u8 unkC8[0x20];
+    /* 0xE8 */ f32 baseSpeed;
 };
 
-extern int randRange(unsigned int);
+s32 randRange(u32 max);
 
-
-void FUN_004cad84(fn_004cad84_arg0 *param_1,int param_2)
-
+/* Starts the drift with a speed chosen by type and a random direction. */
+void FUN_004cad84(DriftObject *object, s32 type)
 {
-/* irregular: irregular input(s): in_s0 */
-  int temp_v0;
-  unsigned int in_s0;
-  unsigned int temp_v1;
-  
-  param_1->field_0xac = 5;
-  if (param_2 == 1 || param_2 == 2) {
-    in_s0 = 0x3fd9999a;
-  }
-  param_1->field_0x48 = 1;
-  param_1->field_0x4c = 0;
-  if (param_2 != 1 && param_2 != 2) {
-    if (param_2 != 3) {
-      param_1->field_0xb0 = 0x3fb33333;
+    object->mode = 5;
+    object->active = 1;
+    object->unk4C = 0;
+    switch (type) {
+    case 1:
+    case 2:
+        object->speed = 1.7f;
+        break;
+    case 3:
+        object->speed = 0.5f;
+        break;
+    default:
+        object->speed = 1.4f;
+        break;
     }
-    else {
-      in_s0 = 0x3f000000;
-      param_1->field_0xb0 = in_s0;
-    }
-  }
-  else {
-    param_1->field_0xb0 = in_s0;
-  }
-  temp_v0 = randRange(1);
-  if (temp_v0 == 0) {
-    temp_v1 = 0x3f800000;
-  }
-  else {
-    temp_v1 = 0xbf800000;
-  }
-  param_1->field_0xc4 = temp_v1;
-  param_1->field_0xbc = 0;
-  param_1->field_0xe8 = param_1->field_0xb0;
-  return;
+    object->direction = randRange(1) == 0 ? 1.0f : -1.0f;
+    object->offset = 0;
+    object->baseSpeed = object->speed;
 }
 
 } /* extern "C" */

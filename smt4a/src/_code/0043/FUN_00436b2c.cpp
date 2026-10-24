@@ -1,63 +1,76 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00436b2c` (_code @ 0x436b2c, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling/register allocation only (retail keeps the list in r4 and the head in r5 and hoists the zero above the child-list null check); instructions and stores otherwise match. */
+#include "common.h"
+#include <new>
+
+/* A circular doubly linked list link: `next` first, then `prev`. */
+struct ListLink {
+    /* 0x00 */ ListLink *next;
+    /* 0x04 */ ListLink *prev;
+};
+
+/* The empty child list every entry starts with: both links point at itself. */
+struct ChildList {
+    ChildList() : next(this), prev(this), value(0), ordinal(0) {}
+
+    /* 0x00 */ ChildList *next;
+    /* 0x04 */ ChildList *prev;
+    /* 0x08 */ u32 value;
+    /* 0x0C */ u32 ordinal;
+};
+
+/* An entry: the list link and its child list. */
+struct ListEntry {
+    /* 0x00 */ ListLink link;
+    /* 0x08 */ ChildList child;
+};
+
+/* The container: the owning key, the list head and the allocation context it was built for. */
+struct EntryList {
+    /* 0x00 */ u32 key;
+    /* 0x04 */ ListLink head;
+    /* 0x0C */ void *context;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 nextOrdinal;
+};
+
+struct EntryListSource {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 key;
+};
 
 extern "C" {
 
-int FUN_0043596c(unsigned int *, unsigned int *, int **);
-int FUN_004387f0(int *, int);
+ListEntry *FUN_004387f0(void *context, s32 kind);
+s32 FUN_0043596c(EntryList *list, u32 *position, ListEntry **entry);
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_0043596c. */
-/* Supplied declaration required: FUN_004387f0. */
-
-
-void FUN_00436b2c(unsigned int *param_1,int *param_2,int param_3,int *param_4)
-
+// Adds a new entry to the front of the list, registers it and numbers the entries; returns 0 or
+// an error code (2 when no entry could be allocated).
+s32 FUN_00436b2c(EntryList *list, void *context, EntryListSource *source)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int *piVar2;
-  int temp_v0;
-  int *piVar4;
-  int *temp_v1;
-  
-  piVar4 = (int *)(param_1 + 1);
-  *param_1 = *(unsigned int *)(param_3 + 4);
-  param_1[3] = (unsigned int)param_2;
-  param_1[5] = (unsigned int)param_2;
-  temp_v1 = param_4;
-  FUN_004387f0(param_2,2);
-  if (param_2 != (int *)0x0) {
-    piVar2 = param_2 + 2;
-    if (piVar2 != (int *)0x0) {
-      param_2[4] = 0;
-      *piVar2 = (int)piVar2;
-      param_2[5] = 0;
-      param_2[3] = (int)piVar2;
+    ListLink *head = &list->head;
+    list->key = source->key;
+    list->context = context;
+    list->nextOrdinal = (u32)context;
+    ListEntry *entry = FUN_004387f0(context, 2);
+    if (entry == NULL) {
+        return 2;
     }
-    *param_2 = *piVar4;
-    param_2[1] = (int)piVar4;
-    *piVar4 = (int)param_2;
-    *(int **)(*param_2 + 4) = param_2;
-    param_2[4] = param_1[5];
-    puVar1 = param_1;
-    temp_v1 = param_2;
-    FUN_0043596c(param_1,param_1 + 4,&temp_v1);
-    if (puVar1 == (unsigned int *)0x0) {
-      temp_v0 = 0;
-      for (puVar1 = (unsigned int *)param_1[2]; puVar1 != param_1 + 1;
-          puVar1 = (unsigned int *)puVar1[1]) {
-        puVar1[5] = temp_v0;
-        temp_v0 = temp_v0 + 1;
-      }
+    new (&entry->child) ChildList();
+    entry->link.next = head->next;
+    entry->link.prev = head;
+    head->next = &entry->link;
+    entry->link.next->prev = &entry->link;
+    entry->child.value = list->nextOrdinal;
+    ListEntry *registered = entry;
+    s32 result = FUN_0043596c(list, &list->unk10, &registered);
+    if (result != 0) {
+        return result;
     }
-  }
-  return;
+    u32 ordinal = 0;
+    for (ListLink *link = list->head.prev; link != head; link = link->prev) {
+        ((ListEntry *)link)->child.ordinal = ordinal++;
+    }
+    return 0;
 }
 
-} /* extern "C" */
+}

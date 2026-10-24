@@ -12,7 +12,7 @@ extern int FUN_003a0c5c(...); /* 0x3a0c5c */
 extern int FUN_003a0d64(...); /* 0x3a0d64 */
 extern int FUN_003a186c(...); /* 0x3a186c */
 extern int FUN_003a18a0(...); /* 0x3a18a0 */
-extern int FUN_003a284c(...); /* 0x3a284c */
+extern int shopMenuUpdateInput(...); /* 0x3a284c */
 extern int FUN_003a2c48(...); /* 0x3a2c48 */
 extern int FUN_003a3354(...); /* 0x3a3354 */
 extern int FUN_003a3a9c(...); /* 0x3a3a9c */
@@ -74,7 +74,7 @@ void FUN_003a4518(int param_1)
   *(unsigned int *)(param_1 + 0x94) = 0;
   *(romwright_code **)(param_1 + 0x98) = FUN_003a18a0;
   *(unsigned int *)(param_1 + 0x9c) = 0;
-  *(romwright_code **)(param_1 + 0xa0) = FUN_003a284c;
+  *(romwright_code **)(param_1 + 0xa0) = shopMenuUpdateInput;
   *(unsigned int *)(param_1 + 0xa4) = 0;
   *(romwright_code **)(param_1 + 0xa8) = FUN_003a0c5c;
   *(unsigned int *)(param_1 + 0xac) = 0;

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00181ad0(void);
 int FUN_00183468(void);
 int FUN_00197f58(unsigned int, unsigned int, int, int, int);
-int FUN_00198fe8(...);
+int _ZSt16__insertion_sortIP11KeyedRecord15KeyedRecordLessEvT_S3_T0_(...);
 int FUN_00199878(unsigned int *, unsigned int *, int);
 int FUN_001a9464(void);
 int VectorFloatToUnsigned(double, int);
@@ -55,7 +55,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_00183468. */
 extern int asdGxIsReady(void);
 /* Supplied declaration required: FUN_00197f58. */
-/* Supplied declaration required: FUN_00198fe8. */
+/* Supplied declaration required: _ZSt16__insertion_sortIP11KeyedRecord15KeyedRecordLessEvT_S3_T0_. */
 /* Supplied declaration required: FUN_00199878. */
 /* Supplied declaration required: FUN_001a9464. */
 /* Supplied declaration required: nw_gfx_Fog_Update. */
@@ -355,7 +355,7 @@ void FUN_00176800(int param_1,int param_2,int param_3)
     temp_v1 = ((int)puVar15 - (int)puVar16) >> 4;
     FUN_00199878(puVar16,puVar15,temp_v1);
     if (temp_v1 >= 0x11) {
-      FUN_00198fe8(puVar16,puVar16 + 0x40);
+      _ZSt16__insertion_sortIP11KeyedRecord15KeyedRecordLessEvT_S3_T0_(puVar16,puVar16 + 0x40);
       for (puVar16 = puVar16 + 0x40; puVar16 != puVar15; puVar16 = puVar16 + 4) {
         temp_v6 = *puVar16;
         temp_v8 = puVar16[1];
@@ -386,7 +386,7 @@ void FUN_00176800(int param_1,int param_2,int param_3)
       }
     }
     else {
-      FUN_00198fe8(puVar16,puVar15);
+      _ZSt16__insertion_sortIP11KeyedRecord15KeyedRecordLessEvT_S3_T0_(puVar16,puVar15);
     }
   }
   return;

@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_1_stack;
 
-extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: onlineJobSetStateTimed. */
@@ -60,7 +60,7 @@ void FUN_0012a59c(int param_1)
   if (temp_v0 == 0) {
     temp_v6 = 0x80010004;
     puVar5 = (unsigned int *)&temp_v6;
-    temp_v2 = FUN_002e7908(puVar4,puVar5);
+    temp_v2 = _ZN12OnlineResultC1ERKj(puVar4,puVar5);
     onlineJobCompleteWithResult(param_1,temp_v2);
     return;
   }
@@ -88,7 +88,7 @@ LAB_0012a64c:
         puVar5 = (unsigned int *)&temp_v11;
         temp_v11 = 0x10001;
         puVar4 = (unsigned int *)temp_v10;
-        temp_v2 = FUN_002e7908(puVar4,puVar5);
+        temp_v2 = _ZN12OnlineResultC1ERKj(puVar4,puVar5);
         onlineJobCompleteWithResult(param_1,temp_v2);
         return;
       }
@@ -130,7 +130,7 @@ LAB_0012a64c:
         puVar5 = (unsigned int *)&temp_v6;
         temp_v6 = 0x10001;
         puVar4 = (unsigned int *)temp_v9;
-        temp_v2 = FUN_002e7908(puVar4,puVar5);
+        temp_v2 = _ZN12OnlineResultC1ERKj(puVar4,puVar5);
         onlineJobCompleteWithResult(param_1,temp_v2);
         return;
       }
@@ -138,7 +138,7 @@ LAB_0012a64c:
     }
   }
   puVar5 = (unsigned int *)&temp_v6;
-  temp_v2 = FUN_002e7908(puVar4,puVar5);
+  temp_v2 = _ZN12OnlineResultC1ERKj(puVar4,puVar5);
   onlineJobCompleteWithResult(param_1,temp_v2);
   return;
 }

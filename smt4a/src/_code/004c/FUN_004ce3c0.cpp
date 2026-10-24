@@ -1,36 +1,5 @@
 /* NON_MATCHING: Spring of Healing setup/teardown and hard-float arguments are recovered; root/model register allocation and shared epilogues differ. */
-#include "common.h"
-
-struct HealingModel {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ void *object;
-};
-
-struct HealingScript {
-    /* 0x000 */ u8 unk000[0x108];
-    /* 0x108 */ u32 state;
-};
-
-struct HealingSceneWork {
-    /* 0x000 */ u8 unk000[8];
-    /* 0x008 */ u8 returnToField;
-    /* 0x009 */ u8 unk009[3];
-    /* 0x00C */ u32 state;
-    /* 0x010 */ void *heapA;
-    /* 0x014 */ void *heapB;
-    /* 0x018 */ HealingScript *script;
-    /* 0x01C */ u32 unk01c;
-    /* 0x020 */ HealingModel *primary;
-    /* 0x024 */ HealingModel *secondary;
-    /* 0x028 */ HealingModel *models[3];
-    /* 0x034 */ u32 unk034;
-    /* 0x038 */ f32 cameraTarget[4];
-    /* 0x048 */ u8 unk048[0x544];
-    /* 0x58C */ void *tableFile;
-    /* 0x590 */ void *entries;
-    /* 0x594 */ u32 count;
-    /* 0x598 */ u32 timer;
-};
+#include "shard/HealingSceneWork.h"
 
 struct HealingFreeCamera {
     /* 0x00 */ u8 unk00[8];
@@ -67,7 +36,7 @@ s32 FUN_0040ab8c(HealingModel *model);
 void FUN_0040aad4(HealingModel *model, u32 value);
 void FUN_003fe86c(void *object, u32 animation, u32 mode, f32 speed, f32 blend);
 void handleRegistryRegisterObject(void *registry, void *object);
-HealingScript *FUN_00275bc8(void *heapA, void *heapB);
+ScriptProcess *FUN_00275bc8(void *heapA, void *heapB);
 void *dataTableFileGetTable(void *file, u32 index);
 void *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
@@ -79,7 +48,7 @@ void priceMenuUpdateScripts(HealingSceneWork *work);
 void slotSetRequest(u32 index, u32 value, u32 extra);
 void jobRefStopAndFree();
 s32 screenFadeIsBusy();
-void FUN_004cdca0(HealingSceneWork *work);
+void sceneHealingRelease(HealingSceneWork *work);
 void FUN_002c2610();
 void soundChannelStopAll(u32 channel);
 s32 jobIsValid(u32 job);
@@ -163,7 +132,7 @@ extern "C" s32 FUN_004ce3c0(HealingSceneWork *work)
         break;
     case 5:
         if (!screenFadeIsBusy()) {
-            FUN_004cdca0(work);
+            sceneHealingRelease(work);
             FUN_002c2610();
             messageSetMode(1);
             FUN_0035d03c(0);

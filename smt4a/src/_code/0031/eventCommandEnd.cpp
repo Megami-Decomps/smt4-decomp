@@ -4,7 +4,7 @@ extern "C" {
 
 s32 eventCommandGetPendingCleanup(void);
 s32 jobIsValid(u32 job);
-void FUN_0035bbc4(void);
+void keyedRecordsFreeAll(void);
 void eventCommandSetPendingCleanup(s32 arg);
 void uiFreeCallback(void);
 void textureCacheReleaseAll(void);
@@ -22,7 +22,7 @@ s32 eventCommandEnd(void)
     }
     if (jobIsValid(g_eventCommand.job) != 0) {
         textureCacheReleaseAll();
-        FUN_0035bbc4();
+        keyedRecordsFreeAll();
         jobStop(g_eventCommand.job, 0);
     }
     return 1;

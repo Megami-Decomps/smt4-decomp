@@ -9,7 +9,7 @@ struct ByteBuffer {
 
 extern "C" {
 u32 bufGrowCapacity(u32 capacity, ByteBuffer* buffer);
-const u32* wordRefMax(const u32* first, const u32* second);
+const u32* _ZSt3maxIjERKT_S2_S2_(const u32* first, const u32* second);
 void* rt_malloc(u32 size);
 void FUN_0030c588(u8* data, u32 count, const u8* value, ByteBuffer* buffer);
 
@@ -21,7 +21,7 @@ ByteBuffer* FUN_002f17e4(ByteBuffer* buffer, u32 count)
     buffer->end = NULL;
     buffer->capacity = NULL;
     u32 grown = bufGrowCapacity(0, buffer);
-    u32 capacity = *wordRefMax(&count, &grown);
+    u32 capacity = *_ZSt3maxIjERKT_S2_S2_(&count, &grown);
     buffer->begin = static_cast<u8*>(rt_malloc(capacity));
     FUN_0030c588(buffer->begin, count, &value, buffer);
     buffer->capacity = buffer->begin + capacity;

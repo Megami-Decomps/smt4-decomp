@@ -1,74 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00304d92` (_code @ 0x304d92, 0x6a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: this is std::vector<12-byte element>::clear/reserve/push_back around a stream read (FUN_0030d36a/00134338/0030d358/0013425c are its STL instantiations); written with the callees as plain functions, built has a 24-byte frame and a rotated loop where retail has a 16-byte frame, re-reads the count each iteration and tests the stream flag in the loop condition */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0013425c(int, int, int *);
-int FUN_00134338(int, unsigned int);
-int FUN_002e9ff4(int *);
-int FUN_0030d358(int, int);
-int FUN_0030d36a(...);
-int FUN_00310ff2(int, int *);
+struct Stream {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 failed;
+};
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-} param_4_stack;
+struct Element {
+    /* 0x00 */ u32 words[3];
+};
 
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Supplied declaration required: FUN_0013425c. */
-/* Supplied declaration required: FUN_00134338. */
-/* Supplied declaration required: FUN_002e9ff4. */
-extern int streamReadU32(int, unsigned int *);
-/* Supplied declaration required: FUN_0030d358. */
-/* Supplied declaration required: FUN_0030d36a. */
-/* Supplied declaration required: FUN_00310ff2. */
+struct ElementVector {
+    /* 0x00 */ Element *begin;
+    /* 0x04 */ Element *end;
+    /* 0x08 */ Element *capacity;
+};
 
+void FUN_0030d36a(ElementVector *vector);
+s32 streamReadU32(Stream *stream, u32 *value);
+void FUN_00134338(ElementVector *vector, u32 count);
+void FUN_002e9ff4(Element *element);
+void FUN_00310ff2(Stream *stream, Element *element);
+void FUN_0030d358(ElementVector *vector, Element *position, const Element *value);
+void FUN_0013425c(ElementVector *vector, Element *position, const Element *value);
 
-unsigned long long FUN_00304d92(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Reads a counted array of elements from the stream into the vector, stopping at the first stream failure. */
+void FUN_00304d92(Stream *stream, ElementVector *vector)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int iStack_20;
-  int iStack_1c;
-  unsigned int uStack_18;
-  unsigned int temp_v2;
-  
-  iStack_20 = param_1;
-  iStack_1c = param_2;
-  uStack_18 = param_3;
-  temp_v2 = param_4;
-  FUN_0030d36a(param_2);
-  temp_v0 = streamReadU32(param_1,&temp_v2);
-  if (temp_v0 != 0) {
-    FUN_00134338(param_2,temp_v2);
-    for (temp_v1 = 0; temp_v1 < temp_v2; temp_v1 = temp_v1 + 1) {
-      if (*(char *)(param_1 + 4) != '\0') {
-        return romwright_piece_4_4(iStack_1c,iStack_20);
-      }
-      FUN_002e9ff4(&iStack_20);
-      FUN_00310ff2(param_1,&iStack_20);
-      if (*(char *)(param_1 + 4) != '\0') {
-        FUN_0030d36a();
-        break;
-      }
-      temp_v0 = *(int *)(param_2 + 4);
-      if (temp_v0 != *(int *)(param_2 + 8)) {
-        *(int *)(param_2 + 4) = temp_v0 + 0xc;
-        FUN_0030d358(param_2,temp_v0);
-      }
-      else {
-        FUN_0013425c(param_2,temp_v0,&iStack_20);
-      }
+    Element element;
+    u32 count;
+    u32 i;
+
+    FUN_0030d36a(vector);
+    if (streamReadU32(stream, &count) == 0) {
+        return;
     }
-  }
-  return romwright_piece_4_4(iStack_1c,iStack_20);
+    FUN_00134338(vector, count);
+    for (i = 0; i < count; i++) {
+        if (stream->failed) {
+            return;
+        }
+        FUN_002e9ff4(&element);
+        FUN_00310ff2(stream, &element);
+        if (stream->failed) {
+            FUN_0030d36a(vector);
+            return;
+        }
+        if (vector->end != vector->capacity) {
+            Element *position = vector->end;
+            vector->end = position + 1;
+            FUN_0030d358(vector, position, &element);
+        } else {
+            FUN_0013425c(vector, vector->end, &element);
+        }
+    }
 }
 
 } /* extern "C" */

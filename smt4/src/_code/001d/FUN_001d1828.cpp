@@ -8,7 +8,7 @@ int FUN_00269bc4(unsigned int);
 int FUN_0029b130(short [20], unsigned int, int);
 int uniteMergeInheritedSkillsAndStats(unsigned int, int, int, int, int);
 int unitRecalculateEffectiveStats(int);
-int FUN_0029cde0(int, int);
+int arrayContainsU16(int, int);
 int FUN_0029dc74(unsigned int, int);
 int gameGetSlotTable(void);
 
@@ -35,7 +35,7 @@ extern int FUN_002624b8(unsigned int, int, int);
 /* Supplied declaration required: uniteMergeInheritedSkillsAndStats. */
 /* Supplied declaration required: unitRecalculateEffectiveStats. */
 extern int flagCountUnlockedSlots(int);
-/* Supplied declaration required: FUN_0029cde0. */
+/* Supplied declaration required: arrayContainsU16. */
 /* Supplied declaration required: FUN_0029dc74. */
 extern int gameGetUnitRecord(int);
 /* Supplied declaration required: gameGetSlotTable. */
@@ -187,7 +187,7 @@ LAB_001d1a4c:
       temp_v2 = 0;
       do {
         if (((temp_v8[temp_v2] != 0) &&
-            (temp_v5 = temp_v1 + 0xb84, FUN_0029cde0(temp_v1 + 0xb84,temp_v7), temp_v5 == 0)) &&
+            (temp_v5 = temp_v1 + 0xb84, arrayContainsU16(temp_v1 + 0xb84,temp_v7), temp_v5 == 0)) &&
            (temp_v5 = 0, 0 < temp_v7)) {
           do {
             if (*(short *)(temp_v1 + temp_v5 * 2 + 0xb84) == 0) {

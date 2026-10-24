@@ -16,7 +16,7 @@ typedef struct {
     unsigned char sp90; /* 0x90: local_90 */
 } param_1_stack;
 
-extern unsigned int FUN_001b1f04(void);
+extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 /* Supplied declaration required: FUN_001b6694. */
 /* Supplied declaration required: FUN_00461a54. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_Pause. */
@@ -82,7 +82,7 @@ void FUN_00465210(int param_1)
       }
       *(char *)(param_1 + 0x54) = (char)temp_v5;
     }
-    temp_v1 = FUN_001b1f04();
+    temp_v1 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
     FUN_001b6694(temp_v1,param_1 + 0x44);
     *(unsigned char *)(param_1 + 0xd) = 1;
   }

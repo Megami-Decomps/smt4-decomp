@@ -16,8 +16,8 @@ f32 workScalarGet(const WorkScalar *);
 void nn_math_ARMv6_MTX34CopyAsm(void *, const void *);
 int __cxa_guard_acquire(u32 *);
 extern u8 DAT_005c0f14[];
-extern u32 DAT_005c4c2c;
-extern Mtx34 DAT_0064c054;
+extern u32 _ZGVZN2nw4math5MTX348IdentityEvE8identity;
+extern Mtx34 _ZZN2nw4math5MTX348IdentityEvE8identity;
 extern MovedPart *g_asdModelSlotArray0[];
 }
 
@@ -98,10 +98,10 @@ extern "C" void FUN_00191bec(MovedPart *model, s32 cameraIndex)
     resource->target = description->pose.target;
     resource->up = description->pose.up;
 
-    if ((DAT_005c4c2c & 1) == 0 && __cxa_guard_acquire(&DAT_005c4c2c))
-        new (&DAT_0064c054) Mtx34;
+    if ((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0 && __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity))
+        new (&_ZZN2nw4math5MTX348IdentityEvE8identity) Mtx34;
     f32 transform[3][4];
-    nn_math_ARMv6_MTX34CopyAsm(transform, DAT_0064c054.m);
+    nn_math_ARMv6_MTX34CopyAsm(transform, _ZZN2nw4math5MTX348IdentityEvE8identity.m);
     if (description->mirrored)
         transform[2][2] = -1.0f;
     MovedPart *slot = g_asdModelSlotArray0[cameraIndex];

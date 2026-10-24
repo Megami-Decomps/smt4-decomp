@@ -62,6 +62,12 @@ struct BattleMaskState {
             /* 0x4ccc */ s32 index;    /* 0xff when none */
         } selectedEntry;
         struct {
+            /* 0x45a8 */ u8 unk45a8BeforeCapacity[0x6C8];
+            /* 0x4c70 */ s16 capacity[2];
+            /* 0x4c74 */ u8 unk4c74[4];
+            /* 0x4c78 */ s16 requested[2];
+        } capacityView;
+        struct {
             u8 unk45a8BeforeHistory[0x18];
             u8 records[0x600]; /* 0x45c0, 128 records of 0xc bytes */
         } history;
@@ -76,6 +82,14 @@ struct BattleMaskPresets {
             /* 0x28 */ u64 entryFlags;
         } presets;
         struct {
+            u8 unk00BeforeBlocked[0x30];
+            /* 0x30 */ u64 blockedMask; /* bits that stop a scripted effect */
+        } blockedView;
+        struct {
+            u8 unk00BeforeClear[0x38];
+            /* 0x38 */ u64 clearMask; /* bits cleared from BattleMaskState::mask */
+        } clearView;
+        struct {
             u64 active;
             u64 required;
             u64 unk10;
@@ -84,7 +98,8 @@ struct BattleMaskPresets {
         } eligibility;
     };
     /* 0x40 */ u64 first;
-    /* 0x48 */ u8 unk48[0x20];
+    /* 0x48 */ u64 scriptMask; /* bits scripted battle commands set or clear in BattleMaskState::mask */
+    /* 0x50 */ u8 unk50[0x18];
     /* 0x68 */ u64 second;
 };
 typedef char BattleMaskPresetsDownedOffsetCheck[

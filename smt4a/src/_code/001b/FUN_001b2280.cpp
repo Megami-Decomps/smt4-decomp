@@ -11,7 +11,7 @@ extern unsigned char DAT_0055c21c; /* 0x55c21c */
 extern unsigned char DAT_0055c230; /* 0x55c230 */
 
 /* Supplied declaration required: gameEnableFloatSettings. */
-extern unsigned int *FUN_001b9b28(void);
+extern unsigned int *_ZN9Obj55c244C1Ev(void);
 
 
 unsigned int * FUN_001b2280(void)
@@ -20,7 +20,7 @@ unsigned int * FUN_001b2280(void)
 /* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
   
-  puVar1 = (unsigned int *)FUN_001b9b28();
+  puVar1 = (unsigned int *)_ZN9Obj55c244C1Ev();
   puVar1[0x12] = 0;
   puVar1[0x13] = 0;
   puVar1[0x15] = 0;

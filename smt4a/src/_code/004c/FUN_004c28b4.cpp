@@ -1,84 +1,110 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c28b4` (_code @ 0x4c28b4, 0x220 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: matches retail except the order the 0.2/0.4 constants are hoisted (s18/s19) and the load order of the two 64-bit mask words in the final doubling check. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+
+/* A skill record: its rate at +0x40 and packed class/grade bits at +0x44. */
+struct SkillRateRecord {
+    /* 0x00 */ u8 unk00[0x40];
+    /* 0x40 */ f32 rate;
+    /* 0x44 */ u32 bits; /* bits 11-15: category, bits 16-19: grade */
+};
+
+/* The combatant's skill info block filled in by FUN_003e8bb0 (0x34 bytes). */
+struct SkillInfo {
+    /* 0x00 */ u8 unk00[0x16];
+    /* 0x16 */ s16 skillId;
+    /* 0x18 */ u8 unk18[0x14];
+    /* 0x2C */ u8 valid;
+    /* 0x2D */ u8 unk2D[7];
+};
 
 extern "C" {
+extern u64 DAT_00571408;
+BtlMainStateA *btlGetMainState(void);
+BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 group);
+void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skills);
+SkillRateRecord *dataTable41FindById(u32 skillId);
+void FUN_003e8bb0(SkillInfo *info, BtlMainStateA *battle, BtlCombatantEntryA *entry);
+s32 FUN_004bd098(u32 owner, s32 skillId);
 
-int btlGetMainState(void);
-int FUN_0034a290(void);
-int FUN_003e8bb0(unsigned char [22], unsigned int, unsigned int *);
-int FUN_003f0e20(unsigned int *, unsigned int);
-int FUN_004bd098(unsigned int, int);
-int source4CCopyHalves(void);
-
-/* stack frame of param_1: 7 slot(s), 23 byte(s) */
-typedef struct {
-    unsigned char sp38; /* 0x38: local_38 */
-    unsigned short sp4E; /* 0x4e: local_4e */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-} param_1_stack;
-
-extern unsigned int DAT_00571408; /* 0x571408 */
-extern unsigned int DAT_0057140c; /* 0x57140c */
-
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_0034a290. */
-/* Supplied declaration required: FUN_003e8bb0. */
-/* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_004bd098. */
-/* Supplied declaration required: source4CCopyHalves. */
-
-
-void FUN_004c28b4(unsigned int param_1)
-
+/* Rate multiplier for the combatant's skills of the given kind: boosts from graded skills and from rate skills. */
+f32 FUN_004c28b4(s32 group, s32 kind)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned short temp_v2 [10];
-  unsigned char temp_v3 [22];
-  short temp_v4;
-  char temp_v5;
-  
-  puVar1 = (unsigned int *)btlGetMainState();
-  FUN_003f0e20(puVar1,param_1);
-  temp_v2[0] = 0;
-  temp_v2[1] = 0;
-  temp_v2[2] = 0;
-  temp_v2[3] = 0;
-  temp_v2[4] = 0;
-  temp_v2[5] = 0;
-  temp_v2[6] = 0;
-  temp_v2[7] = 0;
-  temp_v2[8] = 0;
-  temp_v2[9] = 0;
-  source4CCopyHalves();
-  temp_v1 = 0;
-  do {
-    if (temp_v2[temp_v1] != 0) {
-      FUN_0034a290();
+    f32 rate = 1.0f;
+    BtlCombatantEntryA *entry = FUN_003f0e20(btlGetMainState(), group);
+    u16 skills[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    source4CCopyHalves(entry, skills);
+    for (s32 i = 0; i < 9; i++) {
+        if (skills[i] != 0) {
+            SkillRateRecord *record = dataTable41FindById(skills[i]);
+            if (record != NULL) {
+                u32 bits = record->bits;
+                bool applies;
+                if (((bits << 16) >> 27) == 26) {
+                    applies = true;
+                } else if (((bits << 16) >> 27) == 27) {
+                    switch (kind) {
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 20:
+                        applies = true;
+                        break;
+                    default:
+                        applies = false;
+                        break;
+                    }
+                } else {
+                    applies = kind == (s32)((bits << 16) >> 27);
+                }
+                if (applies) {
+                    u32 grade = (bits << 12) >> 28;
+                    if (grade == 5)
+                        rate += 0.2f;
+                    else if (grade == 6)
+                        rate += 0.4f;
+                }
+            }
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 9);
-  temp_v1 = 0;
-  do {
-    if (temp_v2[temp_v1] != 0) {
-      FUN_0034a290();
+    for (s32 i = 0; i < 9; i++) {
+        if (skills[i] != 0) {
+            SkillRateRecord *record = dataTable41FindById(skills[i]);
+            f32 value = 0.0f;
+            if (record != NULL)
+                value = record->rate;
+            if (record != NULL && value > 0.00001f) {
+                if (((record->bits << 16) >> 27) == 26) {
+                    rate += value - 1.0f;
+                } else if (((record->bits << 16) >> 27) == 27) {
+                    switch (kind) {
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 20:
+                        rate += value - 1.0f;
+                        break;
+                    }
+                } else if (kind == (s32)((record->bits << 16) >> 27)) {
+                    rate += value - 1.0f;
+                }
+            }
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 9);
-  temp_v0 = btlGetMainState();
-  FUN_003e8bb0(temp_v3,temp_v0,puVar1);
-  if (((temp_v5 != '\0') && ((puVar1[0x9d] & 0x10) != 0)) &&
-     ((puVar1[1] & DAT_0057140c) != 0 || (DAT_00571408 & *puVar1) != 0)) {
-    FUN_004bd098(puVar1[0xff],(int)temp_v4);
-  }
-  return;
+    SkillInfo info;
+    FUN_003e8bb0(&info, btlGetMainState(), entry);
+    if (info.valid != 0 && (entry->statusFlags & 0x10) != 0) {
+        u64 flags = entry->flags;
+        u64 mask = DAT_00571408;
+        if ((mask & flags) == 0 || FUN_004bd098(entry->sourceId, info.skillId) >= 0)
+            rate *= 2.0f;
+    }
+    return rate;
 }
-
-} /* extern "C" */
+}

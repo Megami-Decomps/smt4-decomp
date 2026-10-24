@@ -22,7 +22,7 @@ int soundChannelStopAll(...);
 int slotSetRequest(...);
 int scrScriptProcessDestroy(...);
 int FUN_002bd06c(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int libc_strcpy(...);
 int asdMemFree(...);
 
@@ -112,7 +112,7 @@ extern int FUN_002b89a4(unsigned int);
 /* Supplied declaration required: FUN_002b8ee0. */
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bf810. */
@@ -373,7 +373,7 @@ LAB_0032a1a4:
         temp_v3 = 6;
         *(int *)(temp_v2 + 8) = temp_v10;
         do {
-          FUN_002bee58(temp_v2 + temp_v3 * 0x8c + 0x2c8,1);
+          spriteStartAnimationByIndex(temp_v2 + temp_v3 * 0x8c + 0x2c8,1);
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < 10);
       }
@@ -387,7 +387,7 @@ LAB_0032a1a4:
       temp_v3 = 0;
       do {
         if (*(int *)(temp_v2 + 8) == temp_v10 + temp_v3 * 4) {
-          FUN_002bee58(temp_v2 + temp_v3 * 0x8c + 0x610,0);
+          spriteStartAnimationByIndex(temp_v2 + temp_v3 * 0x8c + 0x610,0);
         }
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < 4);

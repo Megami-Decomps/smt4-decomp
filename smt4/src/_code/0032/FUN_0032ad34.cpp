@@ -3,7 +3,7 @@
 
 struct TransformPoint4 { f32 x, y, z, w; };
 extern "C" {
-const TransformMtx44 *FUN_002a7bc0();
+const TransformMtx44 *_ZN2nw4math5MTX448IdentityEv();
 void mtx44Copy(TransformMtx44 *destination, const TransformMtx44 *source);
 void FUN_002b2144(TransformMtx44 *matrix, f32 x, f32 y, f32 z);
 void nn_math_ARMv6_MTX44MultAsm(TransformMtx44 *output, const TransformMtx44 *left, const TransformMtx44 *right);
@@ -13,7 +13,7 @@ void FUN_0026e768(TransformPoint4 *output, const TransformMtx44 *matrix, const T
 void FUN_0032ad34(TransformVec3 *output, const TransformVec3 *input, s32 x, s32 y, s32 z)
 {
     TransformMtx44 matrix, xRotation, yRotation, zRotation;
-    mtx44Copy(&matrix, FUN_002a7bc0());
+    mtx44Copy(&matrix, _ZN2nw4math5MTX448IdentityEv());
     TransformPoint4 point;
     point.x = input->x;
     point.y = input->y;

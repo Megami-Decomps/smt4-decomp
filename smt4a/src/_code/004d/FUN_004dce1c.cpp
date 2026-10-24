@@ -8,7 +8,7 @@ int FUN_00408184(int, int);
 int FUN_004c67d0(void);
 int FUN_004d7a70(int, int, unsigned int, int);
 int FUN_004d7fe4(int);
-int FUN_004f9450(void);
+int nameEntriesRegisterVerNames(void);
 int FUN_004fb670(int, int);
 int FUN_004fbeac(...);
 int FUN_004fd508(int, unsigned int *, int, unsigned int);
@@ -37,7 +37,7 @@ extern int gameProgressIsAdvanced(void);
 /* Supplied declaration required: FUN_004d7fe4. */
 extern int isEntryUsable(int);
 extern int FUN_004f2708(int, int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_004f9450. */
+/* Supplied declaration required: nameEntriesRegisterVerNames. */
 /* Supplied declaration required: FUN_004fb670. */
 /* Supplied declaration required: FUN_004fbeac. */
 /* Supplied declaration required: FUN_004fd508. */
@@ -85,7 +85,7 @@ void FUN_004dce1c(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   }
   *(char *)(*param_1 + 0x45ba) = temp_v0;
   if ((*(unsigned int *)(g_btlAux + 0x339c) & 0x400) != 0) {
-    FUN_004f9450();
+    nameEntriesRegisterVerNames();
   }
   temp_v2 = *(int *)(*param_1 + 0x2358);
   temp_v3 = gameProgressIsAdvanced();

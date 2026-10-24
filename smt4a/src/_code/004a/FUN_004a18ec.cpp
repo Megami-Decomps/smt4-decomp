@@ -1,39 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a18ec` (_code @ 0x4a18ec, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail re-extends the entry id (ldrh; uxth) and orders the flag bool moves moveq/movne; built does neither. */
+#include "common.h"
+
+struct MenuEntry {
+    u8 unk00[4];
+    u16 id; // 0x04
+    u8 unk06[0x1a];
+};
+
+struct MenuTask {
+    u8 unk00[0x14];
+    s32 state;            // 0x14
+    s32 stateTimer;       // 0x18
+    u8 unk1c[4];
+    u8 holder[0x841];     // 0x20
+    u8 flag;              // 0x861
+    u8 unk862[2];
+    MenuEntry entries[1]; // 0x864, 0x20 bytes each
+};
 
 extern "C" {
 
-int FUN_003343f0(int);
-int dispatchIfFound(int, int);
+s32 FUN_0035dbb0(void);
+s32 flaggedValueHolderGetTotal(void *holder);
+s32 FUN_004d0cd4(void);
+void dispatchIfFound(s32 index, u32 id, bool flag);
+void FUN_003343f0(s32 value);
 
-/* Supplied declaration required: FUN_003343f0. */
-extern int FUN_0035dbb0(void);
-/* Supplied declaration required: dispatchIfFound. */
-extern int flaggedValueHolderGetTotal(int);
-extern int FUN_004d0cd4(void);
-
-
-void FUN_004a18ec(int param_1)
-
+static __inline u16 menuEntryId(MenuEntry *entries, s32 index)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  
-  temp_v1 = FUN_0035dbb0();
-  if (temp_v1 != 0) {
-    temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
-    temp_v0 = *(unsigned short *)(param_1 + temp_v1 * 0x20 + 0x868);
-    temp_v1 = FUN_004d0cd4();
-    if (temp_v1 != -1) {
-      dispatchIfFound(temp_v1,temp_v0);
+    return entries[index].id;
+}
+
+void FUN_004a18ec(MenuTask *task)
+{
+    if (FUN_0035dbb0() != 0) {
+        u16 id = menuEntryId(task->entries, flaggedValueHolderGetTotal(task->holder));
+        s32 index = FUN_004d0cd4();
+        if (index != -1) {
+            dispatchIfFound(index, id, task->flag != 0);
+        }
+        FUN_003343f0(0);
+        task->state = 2;
+        task->stateTimer = 0;
     }
-    FUN_003343f0(0);
-    *(unsigned int *)(param_1 + 0x14) = 2;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

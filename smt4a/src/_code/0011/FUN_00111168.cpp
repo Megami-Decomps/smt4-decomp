@@ -6,7 +6,7 @@ extern "C" {
 
 int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12], int *);
-int FUN_002e7908(int *, unsigned int *);
+int _ZN12OnlineResultC1ERKj(int *, unsigned int *);
 int FUN_002fc056(unsigned int, unsigned int);
 int ringBufferConsume(unsigned int, int);
 
@@ -21,7 +21,7 @@ typedef struct {
 
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 extern int *wordRefMin(unsigned int *, unsigned char *);
 /* Supplied declaration required: FUN_002fc056. */
 /* Supplied declaration required: ringBufferConsume. */
@@ -82,7 +82,7 @@ void FUN_00111168(int *param_1,int param_2,unsigned int param_3,int *param_4)
     puVar2 = (unsigned int *)&temp_v4;
     temp_v4 = 0x10001;
   }
-  FUN_002e7908(temp_v7,puVar2);
+  _ZN12OnlineResultC1ERKj(temp_v7,puVar2);
   piVar1 = temp_v0;
   _ZN9Obj55b28cD1Ev(temp_v3,piVar1);
   return;

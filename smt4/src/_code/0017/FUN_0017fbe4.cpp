@@ -1,45 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017fbe4` (_code @ 0x17fbe4, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail schedules the far/near vldr after `mov r1, #1`; ours emits them before it. */
+#include "common.h"
+#include "map/mapDepart.h"
+
+struct CameraMatrixCache;
 
 extern "C" {
 
-int taskUpdateOrderedPasses(int);
-int FUN_002c1e30(int, int);
-int FUN_002c1edc(int, int, int, int *);
-int effectTextureRequestsPump(void);
+/* A perspective projection: vertical field of view in degrees, clip planes and aspect ratio. */
+typedef struct CameraPerspective {
+    f32 fovy;
+    f32 nearZ;
+    f32 farZ;
+    f32 aspect;
+} CameraPerspective;
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+/* The job work area's camera block (offsets within the work area). */
+typedef struct JobCameraWork {
+    /* 0x000 */ u8 unk000[0x508];
+    /* 0x508 */ MapVector eye;
+    /* 0x514 */ MapVector target;
+    /* 0x520 */ f32 fovy;
+} JobCameraWork;
 
-/* Supplied declaration required: taskUpdateOrderedPasses. */
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_002c1e30. */
-/* Supplied declaration required: FUN_002c1edc. */
-/* Supplied declaration required: effectTextureRequestsPump. */
+JobCameraWork *jobGetWork(void);
+void effectTextureRequestsPump(void);
+void FUN_002c1edc(JobCameraWork *camera, const MapVector *eye, const MapVector *target, const MapVector *up);
+void FUN_002c1e30(JobCameraWork *camera, u32 pivot, CameraPerspective perspective);
+void taskUpdateOrderedPasses(u32 pass);
 
-
-unsigned int FUN_0017fbe4(void)
-
+/* Sets the work area camera to look from its eye at its target with a fixed perspective. */
+u32 FUN_0017fbe4(void)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int uStack_14;
-  unsigned int temp_v2;
-  
-  temp_v0 = jobGetWork();
-  effectTextureRequestsPump();
-  temp_v1 = 0;
-  uStack_14 = 0x3f800000;
-  temp_v2 = 0;
-  FUN_002c1edc(temp_v0,temp_v0 + 0x508,temp_v0 + 0x514,&temp_v1);
-  FUN_002c1e30(temp_v0,1);
-  taskUpdateOrderedPasses(0);
-  return 0;
+    JobCameraWork *work = jobGetWork();
+
+    effectTextureRequestsPump();
+    MapVector up;
+    up.x = 0.0f;
+    up.y = 1.0f;
+    up.z = 0.0f;
+    FUN_002c1edc(work, &work->eye, &work->target, &up);
+    CameraPerspective perspective;
+    perspective.aspect = 5.0f / 3.0f;
+    perspective.fovy = work->fovy;
+    perspective.farZ = 25600.0f;
+    perspective.nearZ = 0.1f;
+    FUN_002c1e30(work, 1, perspective);
+    taskUpdateOrderedPasses(0);
+    return 0;
 }
 
 } /* extern "C" */

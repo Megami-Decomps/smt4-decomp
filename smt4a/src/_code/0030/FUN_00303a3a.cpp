@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_00133cbc(void);
+void _ZNSt6vectorI6Elem4012AsdAllocatorIS0_EEaSERKS3_(void);
 
-/* Runs FUN_00133cbc and returns `object`. */
+/* Runs _ZNSt6vectorI6Elem4012AsdAllocatorIS0_EEaSERKS3_ and returns `object`. */
 void *FUN_00303a3a(void *object)
 {
-    FUN_00133cbc();
+    _ZNSt6vectorI6Elem4012AsdAllocatorIS0_EEaSERKS3_();
     return object;
 }
 

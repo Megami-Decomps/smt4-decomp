@@ -5,7 +5,7 @@
 extern "C" {
 
 int affinityShouldReplaceState(int, int);
-int FUN_0034a290(void);
+int dataTable41FindById(void);
 int FUN_0047ffd4(unsigned int, int);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
@@ -19,7 +19,7 @@ typedef struct {
 
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: affinityShouldReplaceState. */
-/* Supplied declaration required: FUN_0034a290. */
+/* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: FUN_0047ffd4. */
 
 
@@ -69,7 +69,7 @@ void FUN_003dfad4(int param_1,unsigned int param_2)
     temp_v2 = 0;
     do {
       temp_v3 = (unsigned int)*(unsigned short *)((int)&temp_v9 + temp_v2 * 2);
-      if (((temp_v3 != 0) && (FUN_0034a290(), temp_v3 != 0)) &&
+      if (((temp_v3 != 0) && (dataTable41FindById(), temp_v3 != 0)) &&
          (temp_v3 = *(unsigned int *)(temp_v3 + 0x44), (temp_v3 & 0x7ff) >> 6 == 5)) {
         if ((temp_v3 & 0xf0000) != 0) {
           if ((temp_v7 & 0xff) == (temp_v3 & 0xffff) >> 0xb) {

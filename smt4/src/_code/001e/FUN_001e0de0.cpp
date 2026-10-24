@@ -5,11 +5,11 @@
 extern "C" {
 
 int pairSetFirstResetSecond(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int FUN_002bf810(int);
 
 /* Supplied declaration required: pairSetFirstResetSecond. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: FUN_002bf810. */
 
 
@@ -53,7 +53,7 @@ void FUN_001e0de0(int param_1,int param_2,int param_3)
         pairSetFirstResetSecond(param_1 + (((temp_v2 - *(short *)(param_1 + 0x218e)) - (int)puVar3) + 0x13) *
                                0x8c + 0x20,temp_v1);
         temp_v3 = param_1 + (((temp_v2 - *(short *)(param_1 + 0x218e)) - (int)puVar3) + 0x31) * 0x8c;
-        FUN_002bee58(temp_v3 + 0x20,10);
+        spriteStartAnimationByIndex(temp_v3 + 0x20,10);
         temp_v1 = 0xfa6;
         if (*(int *)(param_1 + 0x2184) != 0) {
           temp_v1 = 0xfa7;
@@ -72,8 +72,8 @@ void FUN_001e0de0(int param_1,int param_2,int param_3)
   }
   if (temp_v0 >= 1) {
     do {
-      FUN_002bee58(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0x20,2);
-      FUN_002bee58(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0x598,2);
+      spriteStartAnimationByIndex(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0x20,2);
+      spriteStartAnimationByIndex(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0x598,2);
       temp_v3 = param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0x20;
       if (*(int *)(param_1 + 0x2184) != 0) {
         pairSetFirstResetSecond(temp_v3,1);
@@ -95,10 +95,10 @@ void FUN_001e0de0(int param_1,int param_2,int param_3)
   }
   else if (temp_v0 < 0) {
     do {
-      FUN_002bee58((param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c) - 0x6c,8);
-      FUN_002bee58(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0x50c,8);
-      FUN_002bee58(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0xa84,9);
-      FUN_002bee58(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0xffc,8);
+      spriteStartAnimationByIndex((param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c) - 0x6c,8);
+      spriteStartAnimationByIndex(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0x50c,8);
+      spriteStartAnimationByIndex(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0xa84,9);
+      spriteStartAnimationByIndex(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0xffc,8);
       puVar3 = (unsigned int *)((int)puVar3 - 1);
     } while ((int)*(short *)(param_1 + 0x2190) < (int)puVar3);
     return;

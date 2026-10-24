@@ -9,7 +9,7 @@ int nn_os_LightEvent_Initialize(unsigned int *, int);
 extern unsigned char DAT_0055b2f0; /* 0x55b2f0 */
 
 /* Supplied declaration required: nn_os_LightEvent_Initialize. */
-extern unsigned int *operatorNew(unsigned int);
+extern unsigned int *_Znwj(unsigned int);
 extern int FUN_002f5928(unsigned int *);
 
 
@@ -23,7 +23,7 @@ int FUN_0012272c(unsigned int *param_1,unsigned int param_2,unsigned char param_
   *param_1 = (unsigned int)&DAT_0055b2f0;
   temp_v0 = FUN_002f5928(param_1 + 2);
   *(unsigned char *)(temp_v0 + 0x34) = param_3;
-  puVar2 = (unsigned int *)operatorNew(8);
+  puVar2 = (unsigned int *)_Znwj(8);
   if (puVar2 != (unsigned int *)0x0) {
     *puVar2 = 0;
     puVar2[1] = 0;

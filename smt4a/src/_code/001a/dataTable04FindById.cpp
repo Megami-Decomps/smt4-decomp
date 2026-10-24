@@ -1,48 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `dataTable04FindById` (_code @ 0x1aba54, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int libc_bsearch(unsigned char [32], unsigned int, unsigned int, int, unsigned char *);
-int FUN_001b2e34(int, unsigned int);
+struct AocSystem;
 
-/* stack frame of param_1: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short sp78; /* 0x78: local_78 */
-    unsigned int spA0; /* 0xa0: local_a0 */
-} param_1_stack;
+/* A record of data table 4 (0x88 bytes); `id` is the search key. */
+struct DataTable04Record {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u16 id;
+    /* 0x22 */ u8 unk22[0x86 - 0x22];
+    /* 0x86 */ u16 unk86;
+};
 
-extern unsigned char LAB_001ac63c; /* 0x1ac63c */
-extern int g_aocSystem; /* 0x570280 */
+extern AocSystem *g_aocSystem;
 
-/* Supplied declaration required: libc_bsearch. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_001b2e34. */
+void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+s32 dataTableCompareEntryIds(const void *a, const void *b);
+DataTable04Record *FUN_001b2e34(AocSystem *system, u32 id);
+u32 dataTableGet(u32 table, u32 index);
+u32 dataTableGetCount(u32 table);
+void *dataTableGetEntries(u32 table);
 
-
-void dataTable04FindById(unsigned int param_1)
-
+/* Finds the record with `id`: the add-on content's override first, else a search of data table 4. */
+DataTable04Record *dataTable04FindById(u32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3 [32];
-  unsigned short temp_v4;
-  
-  temp_v0 = g_aocSystem;
-  FUN_001b2e34(g_aocSystem,param_1);
-  if (temp_v0 == 0) {
-    temp_v1 = dataTableGet(4,0);
-    temp_v2 = dataTableGetEntries();
-    temp_v1 = dataTableGetCount(temp_v1);
-    temp_v4 = (unsigned short)param_1;
-    libc_bsearch(temp_v3,temp_v2,temp_v1,0x88,&LAB_001ac63c);
-  }
-  return;
+    DataTable04Record *record = FUN_001b2e34(g_aocSystem, id);
+
+    if (record != NULL) {
+        return record;
+    }
+    u32 table = dataTableGet(4, 0);
+    void *entries = dataTableGetEntries(table);
+    u32 count = dataTableGetCount(table);
+    DataTable04Record key;
+    key.id = id;
+    return (DataTable04Record *)libc_bsearch(&key, entries, count, sizeof(DataTable04Record), dataTableCompareEntryIds);
 }
 
 } /* extern "C" */

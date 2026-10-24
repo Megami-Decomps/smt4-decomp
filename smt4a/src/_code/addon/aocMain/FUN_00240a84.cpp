@@ -1,4 +1,3 @@
-/* NON_MATCHING: global-work address and zero constant occupy r6/r7 swapped from retail; all instruction counts and task setup agree. */
 #include "addon/SceneResource.h"
 #include "AsdSDK/AsdDebug.h"
 #include "sys/Task.h"

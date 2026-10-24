@@ -128,7 +128,7 @@ extern int FUN_002b8694(void);
 /* Supplied declaration required: libc_strcpy. */
 extern int gameDataBlocksGetSaveData(void);
 extern int gameFlagIsSet(void);
-extern int FUN_002c2218(int);
+extern int _ZN10FloatStateC1Ev(int);
 /* Supplied declaration required: asdOperatorNew. */
 extern int gameGetMapBlock(void);
 extern unsigned int fileLoadSync(unsigned char *, int, unsigned int);
@@ -317,7 +317,7 @@ void FUN_003ba998(int param_1)
       asdOperatorNew();
       temp_v6 = 0;
       if (temp_v4 != 0) {
-        temp_v6 = FUN_002c2218(temp_v4 + 0x4cc);
+        temp_v6 = _ZN10FloatStateC1Ev(temp_v4 + 0x4cc);
         temp_v6 = temp_v6 - 0x4cc;
       }
       *(int *)(param_1 + 0xe5c) = temp_v6;

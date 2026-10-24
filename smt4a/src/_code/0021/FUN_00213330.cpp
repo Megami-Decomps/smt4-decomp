@@ -60,8 +60,8 @@ extern unsigned int DAT_00536d14; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern unsigned int DAT_005c4c2c; /* 0x5c4c2c */
-extern unsigned int DAT_0064c054; /* 0x64c054 */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x5c4c2c */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x64c054 */
 extern float DAT_0064c058; /* 0x64c058 */
 extern float DAT_0064c05c; /* 0x64c05c */
 extern float DAT_0064c060; /* 0x64c060 */
@@ -246,21 +246,21 @@ void FUN_00213330(float *param_1)
         temp_v30 = (float)((unsigned long long)temp_v27 >> 0x20);
         temp_v29 = temp_v22;
         temp_v31 = temp_v22;
-        if (((DAT_005c4c2c & 1) == 0) && (temp_v5 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v5 != 0)) {
-          DAT_0064c054 = (unsigned int)((unsigned long long)temp_v27 >> 0x20);
+        if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v5 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v5 != 0)) {
+          _ZZN2nw4math5MTX348IdentityEvE8identity = (unsigned int)((unsigned long long)temp_v27 >> 0x20);
           DAT_0064c058 = temp_v22;
           DAT_0064c05c = temp_v22;
           DAT_0064c060 = temp_v22;
           DAT_0064c064 = temp_v22;
-          DAT_0064c068 = DAT_0064c054;
+          DAT_0064c068 = _ZZN2nw4math5MTX348IdentityEvE8identity;
           DAT_0064c06c = temp_v22;
           DAT_0064c070 = temp_v22;
           DAT_0064c074 = temp_v22;
           DAT_0064c078 = temp_v22;
-          DAT_0064c07c = DAT_0064c054;
+          DAT_0064c07c = _ZZN2nw4math5MTX348IdentityEvE8identity;
           DAT_0064c080 = temp_v22;
         }
-        nn_math_ARMv6_MTX34CopyAsm(&temp_v32,&DAT_0064c054);
+        nn_math_ARMv6_MTX34CopyAsm(&temp_v32,&_ZZN2nw4math5MTX348IdentityEvE8identity);
         temp_v11 = (float)((unsigned long long)temp_v24 >> 0x20) * (float)temp_v28;
         temp_v12 = (float)temp_v26 * (float)temp_v28;
         in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v22 <= temp_v12) << 0x1d);

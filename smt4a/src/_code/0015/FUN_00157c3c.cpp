@@ -7,8 +7,8 @@ u32 *asdGxGetCommandCursor(void);
 void FUN_0016d338(ModelCommandWriter *writer, u32 *begin);
 void FUN_0019a2ac(u32 *commands, const f32 *matrix, u32 header);
 void FUN_0019a270(u32 *commands, const f32 *matrix, u32 header);
-u32 *FUN_001a0778(u32 *commands, u32 bytes);
-u32 *FUN_001a07c4(u32 *commands, u32 **sizePatch, const u32 *source, u32 bytes);
+u32 *gpuCmdPadToAlign16(u32 *commands, u32 bytes);
+u32 *gpuCmdWriteCopy(u32 *commands, u32 **sizePatch, const u32 *source, u32 bytes);
 
 // Upload projection/model matrices and append a linked segment of model commands.
 void FUN_00157c3c(ModelMatrixUploadOwner *owner, ModelMatrixUploadSource *source,
@@ -33,11 +33,11 @@ void FUN_00157c3c(ModelMatrixUploadOwner *owner, ModelMatrixUploadSource *source
     const u32 *modelCommands = source->commands;
     u32 bytes = source->wordCount << 2;
     if (commands != NULL && modelCommands != NULL) {
-        commands = FUN_001a0778(commands,
+        commands = gpuCmdPadToAlign16(commands,
             ((reinterpret_cast<u32>(commands) - reinterpret_cast<u32>(writer->segmentBegin)) & ~3u) + 24);
         writer->cursor = commands;
         u32 *sizePatch;
-        commands = FUN_001a07c4(commands, &sizePatch, modelCommands, bytes);
+        commands = gpuCmdWriteCopy(commands, &sizePatch, modelCommands, bytes);
         writer->cursor = commands;
         if (writer->segmentSize != NULL) {
             *writer->segmentSize = (reinterpret_cast<u32>(commands) -

@@ -24,8 +24,8 @@ typedef struct {
 extern unsigned char LAB_0012cce0; /* 0x12cce0 */
 extern unsigned char LAB_0012cced; /* 0x12cced */
 
-extern int operatorNew(unsigned int);
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
+extern int _Znwj(unsigned int);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 /* Supplied declaration required: onlineInstanceTableGetCurrent. */
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned char *);
@@ -66,7 +66,7 @@ void FUN_0012cc30(int param_1)
       temp_v1 = onlineInstanceTableGetCurrent();
       FUN_002f7c94(temp_v1,*(unsigned int *)(param_1 + 0x68),temp_v2);
       onlineJobSetStateWaiting(param_1);
-      temp_v0 = operatorNew(0x10);
+      temp_v0 = _Znwj(0x10);
       temp_v1 = 0;
       if (temp_v0 != 0) {
         temp_v1 = FUN_002ea3c0(temp_v0,&LAB_0012cced,0,&LAB_0012cce0);
@@ -79,7 +79,7 @@ void FUN_0012cc30(int param_1)
   else {
     temp_v3[0] = 0x80010004;
   }
-  temp_v1 = FUN_002e7908(temp_v8,temp_v3);
+  temp_v1 = _ZN12OnlineResultC1ERKj(temp_v8,temp_v3);
   FUN_0030c720(param_1,temp_v1);
   return;
 }

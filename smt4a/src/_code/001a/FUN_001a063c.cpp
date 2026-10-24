@@ -11,18 +11,18 @@ struct WriteStateView {
 };
 
 extern "C" {
-u8* FUN_001a0778(u8* cursor, u32 size);
-u8* FUN_001a07c4(u8* cursor, u32** output, s32 value, u32 options);
+u8* gpuCmdPadToAlign16(u8* cursor, u32 size);
+u8* gpuCmdWriteCopy(u8* cursor, u32** output, s32 value, u32 options);
 
 // Advance the writer, finalize the previous count, and remember the new output slot.
 void FUN_001a063c(WriteStateView* state, s32 value, u32 options)
 {
     if (state->cursor != 0 && value != 0) {
         u32* output;
-        state->cursor = FUN_001a0778(
+        state->cursor = gpuCmdPadToAlign16(
             state->cursor,
             (((u32)state->cursor - (u32)state->unk08) & ~3u) + 0x18);
-        state->cursor = FUN_001a07c4(state->cursor, &output, value, options);
+        state->cursor = gpuCmdWriteCopy(state->cursor, &output, value, options);
 
         if (state->unk0C != 0) {
             *state->unk0C = ((u32)state->cursor - (u32)state->unk08) >> 3;

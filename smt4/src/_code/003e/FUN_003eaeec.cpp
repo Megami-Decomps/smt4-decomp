@@ -14,7 +14,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: linkListEraseManagerNode. */
-extern unsigned int nw_snd_internal_driver_SoundThread_GetInstance(void);
+extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 /* Supplied declaration required: FUN_0037e278. */
 /* Supplied declaration required: FUN_0037e3d0. */
 
@@ -59,7 +59,7 @@ void FUN_003eaeec(int param_1)
         return;
       }
     }
-    temp_v1 = nw_snd_internal_driver_SoundThread_GetInstance();
+    temp_v1 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
     linkListEraseManagerNode(temp_v1,param_1);
     *(unsigned char *)(param_1 - 0x43) = 0;
   }

@@ -15,7 +15,7 @@ struct CategoryOperand {
 };
 extern "C" {
 CategorySourceRecord *FUN_002498ec(u32 id);
-CategoryEntryRecord *FUN_002ae164(u32 id);
+CategoryEntryRecord *dataTable40FindById(u32 id);
 s32 idIsAbove400(u32 id);
 s32 FUN_0024c52c(u32 id);
 void FUN_002497f8(CategoryOperand *first, CategoryOperand *second);
@@ -33,7 +33,7 @@ void FUN_00313184(const u16 *first, const u16 *second)
         firstSubtype = 0;
     } else {
         firstCategory = FUN_0024c52c(operands[0].id);
-        firstSubtype = FUN_002ae164(operands[0].id)->subtype;
+        firstSubtype = dataTable40FindById(operands[0].id)->subtype;
     }
     s32 secondCategory;
     u16 secondSubtype;
@@ -42,7 +42,7 @@ void FUN_00313184(const u16 *first, const u16 *second)
         secondSubtype = 0;
     } else {
         secondCategory = FUN_0024c52c(operands[1].id);
-        secondSubtype = FUN_002ae164(operands[1].id)->subtype;
+        secondSubtype = dataTable40FindById(operands[1].id)->subtype;
     }
     if (firstCategory == secondCategory && firstSubtype == secondSubtype)
         FUN_002497f8(&operands[0], &operands[1]);

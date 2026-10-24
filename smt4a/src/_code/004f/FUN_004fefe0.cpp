@@ -1,37 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fefe0` (_code @ 0x4fefe0, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation and loop layout differ (retail keeps the ranges pointer in ip and the group index 0 in r5, tests the key with blt to an increment block) */
+#include "common.h"
+
+struct KeyRange {
+    u16 first;  // 0x00
+    u16 count;  // 0x02
+};
+
+struct KeyEntry {
+    s32 key;        // 0x00
+    u8 unk04[8];    // 0x04
+};
+
+struct KeyTable {
+    u8 unk00[0x24];      // 0x00
+    KeyRange *ranges;    // 0x24
+    u8 unk28[8];         // 0x28
+    KeyEntry *entries;   // 0x30
+};
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-
-unsigned int FUN_004fefe0(int param_1,int param_2)
-
+/* Finds the entry in the first range whose key is at least `key`, stepping back one entry when the key is not matched exactly. */
+s32 FUN_004fefe0(KeyTable *table, s32 key)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned short *puVar3;
-  
-  puVar3 = *(unsigned short **)(param_1 + 0x24);
-  temp_v0 = (unsigned int)*puVar3;
-  temp_v1 = (temp_v0 - 1) + (unsigned int)puVar3[1];
-  if ((int)temp_v0 <= temp_v1) {
-    while (*(int *)(*(int *)(param_1 + 0x30) + temp_v0 * 0xc) < param_2) {
-      temp_v0 = temp_v0 + 1;
-      if (temp_v1 < (int)temp_v0) {
-        return temp_v0;
-      }
+    s32 group = 0;
+    KeyRange *range = &table->ranges[group];
+    s32 index = range->first;
+    s32 last = range->first - 1 + range->count;
+
+    if (index <= last) {
+        while (table->entries[index].key < key) {
+            index++;
+            if (index > last) {
+                return index;
+            }
+        }
+        if (table->entries[index].key != key && table->ranges[group].first != index) {
+            index--;
+        }
     }
-    if ((*(int *)(*(int *)(param_1 + 0x30) + temp_v0 * 0xc) != param_2) && (*puVar3 != temp_v0)) {
-      temp_v0 = temp_v0 - 1;
-    }
-  }
-  return temp_v0;
+    return index;
 }
 
 } /* extern "C" */

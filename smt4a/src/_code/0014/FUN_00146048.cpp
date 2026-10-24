@@ -11,11 +11,11 @@ int FUN_00156bfc(unsigned int, int);
 int objectListsClearActive(unsigned int);
 int FUN_00157050(int, int);
 int FUN_00157268(unsigned char [184]);
-int FUN_001573a4(...);
+int _ZN14MatrixSlotListC1EjP9SlotOwnerj(...);
 int FUN_00157520(unsigned char [184]);
 int FUN_00157558(int);
 int FUN_001575cc(int);
-int FUN_00157b7c(unsigned int);
+int gfxCommandSetFlushCursor(unsigned int);
 int FUN_00157be4(unsigned int);
 int FUN_00157c3c(unsigned int, unsigned int);
 int FUN_00158124(void);
@@ -39,11 +39,11 @@ extern int FUN_00156bec(unsigned int);
 /* Supplied declaration required: objectListsClearActive. */
 /* Supplied declaration required: FUN_00157050. */
 /* Supplied declaration required: FUN_00157268. */
-/* Supplied declaration required: FUN_001573a4. */
+/* Supplied declaration required: _ZN14MatrixSlotListC1EjP9SlotOwnerj. */
 /* Supplied declaration required: FUN_00157520. */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_001575cc. */
-/* Supplied declaration required: FUN_00157b7c. */
+/* Supplied declaration required: gfxCommandSetFlushCursor. */
 /* Supplied declaration required: FUN_00157be4. */
 /* Supplied declaration required: FUN_00157c3c. */
 extern int FUN_00157e98(unsigned int, int);
@@ -99,7 +99,7 @@ unsigned int FUN_00146048(void)
       else {
         temp_v0 = *(int *)(temp_v1 + 0xc);
       }
-      FUN_001573a4(temp_v4,temp_v2,*(unsigned int *)(temp_v1 + 4),temp_v0 + 0x38);
+      _ZN14MatrixSlotListC1EjP9SlotOwnerj(temp_v4,temp_v2,*(unsigned int *)(temp_v1 + 4),temp_v0 + 0x38);
       FUN_0016bad8(temp_v4);
       FUN_00157520(temp_v4);
     }
@@ -117,7 +117,7 @@ unsigned int FUN_00146048(void)
     else {
       temp_v1 = *(int *)(g_handleRegistry + 0xc);
     }
-    FUN_001573a4(temp_v4,*(unsigned int *)(*(int *)(g_handleRegistry + 0x10) + 0xa8),
+    _ZN14MatrixSlotListC1EjP9SlotOwnerj(temp_v4,*(unsigned int *)(*(int *)(g_handleRegistry + 0x10) + 0xa8),
                  *(unsigned int *)(g_handleRegistry + 4),temp_v1 + 0x38);
     FUN_00157268(temp_v4);
     FUN_00157520(temp_v4);
@@ -126,7 +126,7 @@ unsigned int FUN_00146048(void)
       FUN_001582a8(*(unsigned int *)(temp_v1 + 0x3c),**(unsigned int **)(DAT_0056fcbc + 0xa8));
     }
     temp_v1 = g_handleRegistry;
-    FUN_00157b7c(*(unsigned int *)(g_handleRegistry + 0x10));
+    gfxCommandSetFlushCursor(*(unsigned int *)(g_handleRegistry + 0x10));
     objectListsClearActive(*(unsigned int *)(temp_v1 + 4));
   }
   FUN_00144ab4(0);

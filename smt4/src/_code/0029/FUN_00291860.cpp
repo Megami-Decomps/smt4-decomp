@@ -1,112 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00291860` (_code @ 0x291860, 0xe4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+/* A screen object that owns a script process, two heap blocks and a few resource flags. */
+struct ScreenResources {
+    /* 0x000 */ u8 unk000[0x1C];
+    /* 0x01C */ u8 buttonHelpLoaded;
+    /* 0x01D */ u8 flag1D;
+    /* 0x01E */ u8 texturesLoaded;
+    /* 0x01F */ u8 unk01F[0x579];
+    /* 0x598 */ void *blockA;
+    /* 0x59C */ void *blockB;
+    /* 0x5A0 */ void *process;
+};
 
 extern "C" {
 
-int buttonHelpTexturesUnref(void);
-int buttonHelpRelease(void);
-int gameReleaseDataReference(void);
-int gameGlobalsSetSelected(int);
-int FUN_002a0cc8(int);
-int scrScriptProcessDestroy(void);
-int asdTMTexTableFreeEntry(int);
-int asdTMTexTableReleaseNode(int, int);
-int asdMemFree(...);
-int jobStop(unsigned int, int);
+void scrScriptProcessDestroy(void *process);
+void asdMemFree(void *block);
+void gameGlobalsSetSelected(s32 selected);
+void FUN_002a0cc8(s32 value);
+void gameReleaseDataReference(void);
+void asdTMTexTableReleaseNode(s32 table, s32 node);
+void asdTMTexTableFreeEntry(s32 table);
+void buttonHelpRelease(void);
+void buttonHelpTexturesUnref(void);
+void uiFadeRelease(void);
 
-typedef struct fn_00291860_arg0 fn_00291860_arg0;
-struct fn_00291860_arg0 {
-    unsigned char pad_0x0[0x1c];
-    byte field_0x1c; /* +0x1c */
-    byte field_0x1d; /* +0x1d */
-    byte field_0x1e; /* +0x1e */
-    unsigned char pad_0x1f[0x579];
-    int field_0x598; /* +0x598 */
-    int field_0x59c; /* +0x59c */
-    int field_0x5a0; /* +0x5a0 */
-};
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-extern signed char g_commonBg; /* 0x43dc20 */
-extern unsigned int *DAT_0043dc24; /* 0x43dc24 */
-extern signed char g_uiFade; /* 0x43dd38 */
-extern unsigned int *DAT_0043dd3c; /* 0x43dd3c */
-
-/* Supplied declaration required: buttonHelpTexturesUnref. */
-/* Supplied declaration required: buttonHelpRelease. */
-/* Supplied declaration required: gameReleaseDataReference. */
-/* Supplied declaration required: gameGlobalsSetSelected. */
-/* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: jobStop. */
-
-
-void FUN_00291860(fn_00291860_arg0 *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4
-                 )
-
+/* Releases everything the screen holds (process, blocks, texture table entry, button help), then the shared fade. */
+void FUN_00291860(ScreenResources *screen)
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  if (param_1->field_0x5a0 != 0) {
-    scrScriptProcessDestroy();
-    param_1->field_0x5a0 = 0;
-  }
-  if (param_1->field_0x598 != 0) {
-    asdMemFree();
-    param_1->field_0x598 = 0;
-  }
-  if (param_1->field_0x59c != 0) {
-    asdMemFree();
-    param_1->field_0x59c = 0;
-  }
-  gameGlobalsSetSelected(0);
-  FUN_002a0cc8(0);
-  gameReleaseDataReference();
-  if (param_1->field_0x1e != 0) {
-    temp_v0 = 0;
-    do {
-      asdTMTexTableReleaseNode(0x1d,temp_v0);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 3);
-    asdTMTexTableFreeEntry(0x1d);
-    param_1->field_0x1e = 0;
-  }
-  if (param_1->field_0x1d != 0) {
-    param_1->field_0x1d = 0;
-  }
-  if (param_1->field_0x1c != 0) {
-    buttonHelpRelease();
-    buttonHelpTexturesUnref();
-    param_1->field_0x1c = 0;
-  }
-  puVar1 = DAT_0043dc24;
-  g_commonBg = g_commonBg - '\x01';
-  if ('\0' < g_commonBg) {
-    return;
-  }
-  jobStop(*DAT_0043dc24,0);
-  asdMemFree(puVar1);
-  puVar1 = DAT_0043dd3c;
-  DAT_0043dc24 = (unsigned int *)0x0;
-  g_commonBg = 0;
-  g_uiFade = g_uiFade - '\x01';
-  if (g_uiFade < '\x01') {
-    jobStop(*DAT_0043dd3c,0);
-    asdMemFree(puVar1);
-    DAT_0043dd3c = (unsigned int *)0x0;
-    g_uiFade = '\0';
-  }
-  return;
+    if (screen->process != NULL) {
+        scrScriptProcessDestroy(screen->process);
+        screen->process = NULL;
+    }
+    if (screen->blockA != NULL) {
+        asdMemFree(screen->blockA);
+        screen->blockA = NULL;
+    }
+    if (screen->blockB != NULL) {
+        asdMemFree(screen->blockB);
+        screen->blockB = NULL;
+    }
+    gameGlobalsSetSelected(0);
+    FUN_002a0cc8(0);
+    gameReleaseDataReference();
+    if (screen->texturesLoaded != 0) {
+        for (s32 node = 0; node < 3; ++node) {
+            asdTMTexTableReleaseNode(0x1d, node);
+        }
+        asdTMTexTableFreeEntry(0x1d);
+        screen->texturesLoaded = 0;
+    }
+    if (screen->flag1D != 0) {
+        screen->flag1D = 0;
+    }
+    if (screen->buttonHelpLoaded != 0) {
+        buttonHelpRelease();
+        buttonHelpTexturesUnref();
+        screen->buttonHelpLoaded = 0;
+    }
+    uiFadeRelease();
 }
 
 } /* extern "C" */

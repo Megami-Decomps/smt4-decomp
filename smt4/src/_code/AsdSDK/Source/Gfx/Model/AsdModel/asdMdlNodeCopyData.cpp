@@ -1,110 +1,71 @@
-/* NON_MATCHING: BLOCKED: native model construction-description class and its packed/default constructor are required. */
-#include "romwright_types.h"
+/* NON_MATCHING: only register assignment differs: retail builds the description through r1 and puts the constant 0 argument in r1 just before FUN_002b3acc, armcc here uses r0 and sets r1 early (and loads r8 later). */
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "AsdSDK/AsdDebug.h"
+
+/* How a model is built: the default is a two-flag description with four- and eight-byte units. */
+struct AsdMdlBuildDesc {
+    /* 0x00 */ u8 unk00;
+    /* 0x01 */ u8 unk01;
+    /* 0x04 */ u32 unit0;
+    /* 0x08 */ u32 unit1;
+    /* 0x0C */ u32 unk0c;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ void *unk14;
+    /* 0x18 */ void *unk18;
+    /* 0x1C */ void *unk1c;
+
+    AsdMdlBuildDesc() : unk00(1), unk01(1), unit0(4), unit1(8), unk0c(1), unk10(0), unk14(0), unk18(0), unk1c(0) {}
+};
 
 extern "C" {
+struct AsdGfxSettings {
+    /* 0x00 */ u8 unk00[0x40];
+    /* 0x40 */ s32 sharedModels;
+};
+extern AsdGfxSettings g_gfxSettings;
 
-int FUN_001457ec(unsigned int *, unsigned int);
-int FUN_002a9244(void);
-int FUN_002b3acc(int *, int, unsigned int, unsigned int);
-int asdMemoryAlloc(int, int, int, unsigned int);
-int FUN_002fb604(unsigned int);
+void *asdMemoryGetAllocatorA(void);
+void *FUN_002b3acc(AsdMdlBuildDesc *desc, s32 mode, u32 value, void *allocator);
+void FUN_002fb604(void *model);
+void FUN_002a9244(AsdMdlNode *node);
+void FUN_001457ec(AsdMdlNode *node, s32 value);
+void *asdMemoryAlloc(u32 size, u32 alignment, u32 flags, u32 bytes, u32 enabled);
 
-/* stack frame of param_3: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_3_stack;
-
-extern unsigned char g_gfxSettings; /* 0x464af0 */
-
-#ifndef ROMWRIGHT_PIECE_2_2_DEFINED
-#define ROMWRIGHT_PIECE_2_2_DEFINED
-#define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
-#endif
-/* Supplied declaration required: FUN_001457ec. */
-/* Supplied declaration required: FUN_002a9244. */
-/* Supplied declaration required: FUN_002b3acc. */
-extern unsigned int asdMemoryGetAllocatorA(void);
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: FUN_002fb604. */
-
-
-void asdMdlNodeCopyData(unsigned int *param_1,unsigned int *param_2,int param_3)
-
+// Copy a model node: build the model for the copy (a shared or a fresh one), take a reference on
+// the model data and give the copy its one-entry table.
+void asdMdlNodeCopyData(AsdMdlNode *dest, AsdMdlNode *source, s32 mode)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  unsigned int *puVar4;
-  int *piVar5;
-  unsigned int *puVar6;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int uStack_38;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  
-  puVar2 = (unsigned int *)&temp_v2;
-  puVar4 = (unsigned int *)&temp_v2;
-  if (param_3 != 1) {
-    if (param_3 == 0) {
-      temp_v1 = asdMemoryGetAllocatorA();
-      temp_v2 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v2 + 2)),0x101);
-      temp_v5 = 0x834;
-      temp_v4 = 1;
-      temp_v6 = 0;
-      temp_v7 = 0;
-      temp_v8 = 0;
-      temp_v3 = 4;
-      uStack_38 = 8;
-      FUN_002b3acc(&temp_v2,0,*(unsigned int *)(param_2[0xb] + 8),temp_v1);
-      param_1[0xb] = (unsigned int)puVar4;
+    if (mode == 1) {
+        AsdMdlResource *resource = source->resource;
+        resource->state->flags->flags |= 1;
+        void *allocator = asdMemoryGetAllocatorA();
+        u32 handle = source->resource->unk008;
+        AsdMdlBuildDesc desc;
+        desc.unk1c = source->resource->state;
+        desc.unk14 = source->resource;
+        desc.unk18 = source->resource;
+        dest->resource = (AsdMdlResource *)FUN_002b3acc(&desc, 0, handle, allocator);
+    } else if (mode == 0) {
+        void *allocator = asdMemoryGetAllocatorA();
+        u32 handle = source->resource->unk008;
+        AsdMdlBuildDesc desc;
+        desc.unk10 = 0x834;
+        dest->resource = (AsdMdlResource *)FUN_002b3acc(&desc, 0, handle, allocator);
     }
-  }
-  else {
-    temp_v0 = *(int *)(*(int *)(param_2[0xb] + 0x220) + 8);
-    *(unsigned int *)(temp_v0 + 0x28) = *(unsigned int *)(temp_v0 + 0x28) | 1;
-    temp_v1 = asdMemoryGetAllocatorA();
-    temp_v2 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v2 + 2)),0x101);
-    temp_v4 = 1;
-    temp_v5 = 0;
-    temp_v3 = 4;
-    uStack_38 = 8;
-    temp_v8 = *(unsigned int *)(param_2[0xb] + 0x220);
-    temp_v6 = param_2[0xb];
-    temp_v7 = param_2[0xb];
-    FUN_002b3acc(&temp_v2,0,*(unsigned int *)(param_2[0xb] + 8),temp_v1);
-    param_1[0xb] = (unsigned int)puVar2;
-  }
-  if ((*param_2 & 2) != 0) {
-    FUN_002fb604(param_1[0xb]);
-    *param_1 = *param_1 | 2;
-    (*(int *)((unsigned char *)&g_gfxSettings + 0x40)) = (*(int *)((unsigned char *)&g_gfxSettings + 0x40)) + 1;
-  }
-  piVar5 = (int *)param_2[1];
-  param_1[1] = (unsigned int)piVar5;
-  *piVar5 = *piVar5 + 1;
-  param_1[10] = 1;
-  temp_v2 = 1;
-  puVar6 = (unsigned int *)0x100;
-  asdMemoryAlloc(0x100,0x100,0,param_1[10] << 2);
-  param_1[9] = (unsigned int)puVar6;
-  *puVar6 = param_1[0xb];
-  if (param_3 == 0) {
-    FUN_002a9244();
-  }
-  FUN_001457ec(param_1,*(unsigned int *)(param_1[1] + 0xc));
-  return;
+    if (source->unk00 & 2) {
+        FUN_002fb604(dest->resource);
+        dest->unk00 |= 2;
+        g_gfxSettings.sharedModels++;
+    }
+    dest->data = source->data;
+    (*(s32 *)source->data)++;
+    dest->count = 1;
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Model\\AsdModel.cpp", 0x1244);
+    dest->table = (void **)asdMemoryAlloc(0x100, 0x100, 0, dest->count << 2, 1);
+    dest->table[0] = dest->resource;
+    if (mode == 0) {
+        FUN_002a9244(dest);
+    }
+    FUN_001457ec(dest, ((s32 *)dest->data)[3]);
 }
-
-} /* extern "C" */
+}

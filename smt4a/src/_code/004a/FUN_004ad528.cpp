@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002a5d84(...);
-int FUN_004adbb4(void);
-int FUN_004adcec(unsigned int *);
+int _ZN12MoLivePlayer12flushPendingEv(void);
+int _ZN12MoLivePlayer18releaseIdleStreamsEv(unsigned int *);
 int moviePacketReadHeader(unsigned int *, int, unsigned int [3], unsigned int);
 int FUN_004adf7c(unsigned int *, int, unsigned int [3], unsigned int);
 int FUN_004af3b4(unsigned int *, int, unsigned int [3], unsigned int);
@@ -29,8 +29,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002a5d84. */
 extern int FUN_004adb08(unsigned int *);
-/* Supplied declaration required: FUN_004adbb4. */
-/* Supplied declaration required: FUN_004adcec. */
+/* Supplied declaration required: _ZN12MoLivePlayer12flushPendingEv. */
+/* Supplied declaration required: _ZN12MoLivePlayer18releaseIdleStreamsEv. */
 /* Supplied declaration required: moviePacketReadHeader. */
 /* Supplied declaration required: FUN_004adf7c. */
 extern int FUN_004af1c0(unsigned int *);
@@ -74,7 +74,7 @@ unsigned int * FUN_004ad528(unsigned int *param_1)
     if (temp_v0 == 0) {
       return (unsigned int *)0x1;
     }
-    FUN_004adbb4();
+    _ZN12MoLivePlayer12flushPendingEv();
     if (param_1 == (unsigned int *)0x0) {
       return (unsigned int *)0x44;
     }
@@ -146,11 +146,11 @@ LAB_004ad898:
           *param_1 = temp_v9;
           param_1[1] = uStack_54;
           puVar7 = param_1;
-          FUN_004adbb4();
+          _ZN12MoLivePlayer12flushPendingEv();
           if (puVar7 == (unsigned int *)0x0) {
             return (unsigned int *)0x44;
           }
-          FUN_004adcec(param_1);
+          _ZN12MoLivePlayer18releaseIdleStreamsEv(param_1);
           puVar7 = param_1 + 0x50f;
           FUN_00521c8c(puVar7,0,param_1[0x512]);
           param_1[0x512] = 0;

@@ -83,7 +83,7 @@ void equipmentGetCappedUpgradeBonuses(u32 id, EntrySortBonus *bonus)
         values[5] = storage->records[2][index].bonus;
         break;
     }
-    const EquipmentBonusCaps *base = (const EquipmentBonusCaps *)FUN_00192608(id);
+    const EquipmentBonusCaps *base = (const EquipmentBonusCaps *)dataTable08Sub2GetRecord(id);
     if (base != NULL) {
         values[0] = capUpgradeBonus(values[0], 999 - base->rating);
         values[4] = capUpgradeBonus(values[4], 99 - base->stats[0]);

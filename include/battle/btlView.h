@@ -11,8 +11,11 @@ struct BattleViewObject {
     /* 0x04 */ u32 flags;
 };
 
-struct BattleViewOwner {
-    /* 0x00 */ u32 unk00;
+/* A model list the battle view owns; it is deleted through its virtual destructor. */
+class BattleViewOwner {
+public:
+    /* 0x00: vtable pointer */
+    virtual ~BattleViewOwner();
     /* 0x04 */ BattleViewObject *object;
 };
 
@@ -48,7 +51,11 @@ struct BattleViewState {
     /* 0x77 */ u8 unk77;
     /* 0x78 */ s32 unk78;
     /* 0x7c */ u8 disabled;
-    /* 0x7d */ u8 unk7d[0x23];
+    /* 0x7d */ u8 positionsSet;
+    /* 0x7e */ u8 unk7e[2];
+    /* 0x80 */ BattleViewVec3 unk80;
+    /* 0x8c */ BattleViewVec3 unk8c;
+    /* 0x98 */ u8 unk98[8];
     /* 0xa0 */ u8 unkA0;
     /* 0xa1 */ u8 unkA1[0x0b];
     /* 0xac */ u32 unkAC;

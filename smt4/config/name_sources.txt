@@ -3546,3 +3546,125 @@
 00294e18 statusCameraSelectPreset inferred [high] Selects close-up, full-body or origin camera vectors and lens parameters for status models
 002427f8 effResourcePromoteReferences inferred [high] Promotes the first dependent resource and redirects remaining resource references
 0028f1bc questPassesAvailabilityConditions inferred [high] Checks quest requirements, excluded quests, alignment route and hide-window flags
+00476634 _ZGVZN2nw4math5MTX348IdentityEvE8identity inferred [med] guard of the shared MTX34 identity local static (inline constructor expanded in ~35 functions)
+004efd6c _ZZN2nw4math5MTX348IdentityEvE8identity inferred [med] shared 3x4 identity matrix (function-local static, 0x30 bytes)
+00476638 _ZGVZN2nw4math5MTX448IdentityEvE8identity inferred [med] guard of the shared MTX44 identity local static
+004efd9c _ZZN2nw4math5MTX448IdentityEvE8identity inferred [med] shared 4x4 identity matrix (function-local static, 0x40 bytes)
+0034afd4 _ZN9Obj4208f8C1EP12AsdMdlObject inferred [high] constructor: vtable 0x4208f8 address point 0x420900, owner model at +4
+004208f8 _ZTV9Obj4208f8 inferred size:0x10 vtable of the per-model effect state built by FUN_0034afd4
+002ba968 _ZN7AocMain12queueRequestE17RequestParametersji inferred [high] AocMain method: queues a RequestParameters (passed by hidden reference) unless one is already active
+0015dd58 _ZN7AocMain19submitTokenRequestE17RequestParameters19QueuedRequestHandle inferred [med] twin of smt4a FUN_001d1038
+002a126c _ZN9AocSystem17getPendingRequestEv inferred [med] AocSystem method returning the pending RequestParameters through hidden result storage
+002aba10 _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_ inferred [high] std::for_each over the draw callback record list (callbacks and listeners)
+003fc978 _ZSt16__insertion_sortIP21RenderBatchSortRecord27RenderBatchSecondaryKeyLessEvT_S3_T0_ inferred [high] std::__insertion_sort of render batch records by secondary key
+0014493c _ZSt16__insertion_sortIP11KeyedRecord15KeyedRecordLessEvT_S3_T0_ inferred [high] std::__insertion_sort of 16-byte records by 64-bit key
+00254dfc _ZN10UShortVec3C1Ev inferred [high] constructor: zeroes three 16-bit components
+002693e4 _ZN13EffGeomRecordC1Ev inferred [med] constructor of the 0x7E8-byte effect geometry record (vertex-array state)
+0034c338 _ZN9Obj4209908initializeEP15Obj420990Rectsj inferred [high] Obj420990 method: allocates the vertex/handle blocks, loads both quads' textures per flags and resets the matrices
+00404d94 g_mikadoTalkBfPath inferred size:0xf "mikado/talk.bf"
+00404d84 g_mikadoTalkMbmPath inferred size:0x10 "mikado/talk.mbm"
+00404d74 g_mikadoCheckBfPath inferred size:0x10 "mikado/check.bf"
+00404d60 g_mikadoCheckMbmPath inferred size:0x11 "mikado/check.mbm"
+003b8158 _ZN12MikadoCamera10initializeEv inferred [high] MikadoCamera method: loads the talk/check windows, button help and sprite tables and clears the camera state
+002c2218 _ZN10FloatStateC1Ev inferred [high] constructor: clears the two floating-point state values
+003fa9a0 _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE11_C_get_linkEv inferred [med] __rb_tree::_C_get_link of the MoLive object handle map (u32 -> shared handle)
+003fc840 _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE6insertERKS5_ inferred [med] __rb_tree::insert(const value_type&) of the MoLive object handle map (u32 -> shared handle)
+003fb360 _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE9_C_insertEPNS_17__rw_rb_tree_nodeISB_S5_jS7_EESF_RKS5_ inferred [med] __rb_tree::_C_insert of the MoLive object handle map (u32 -> shared handle)
+003fb11c _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE5eraseENS_14__rw_tree_iterIS5_iPS5_RS5_NS_17__rw_rb_tree_nodeISB_S5_jS7_EEEESI_ inferred [med] __rb_tree::erase(iterator, iterator) of the MoLive object handle map (u32 -> shared handle)
+003fb2c0 _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE8_C_eraseEPNS_17__rw_rb_tree_nodeISB_S5_jS7_EE inferred [med] __rb_tree::_C_erase(node) of the MoLive object handle map (u32 -> shared handle)
+003faab4 _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE5eraseENS_14__rw_tree_iterIS5_iPS5_RS5_NS_17__rw_rb_tree_nodeISB_S5_jS7_EEEE inferred [med] __rb_tree::erase(iterator) of the MoLive object handle map (u32 -> shared handle)
+0040ffdc g_moLiveOutOfMemoryMessage inferred [high] format string MoLive allocators report when an allocation fails
+0036d764 weightedEntryListAdd inferred [med] appends an entry keyed by the item weight to an allocator-backed array (doubles storage when full)
+004223f8 _ZTV9Obj4223f8 inferred size:0x50 compendium view vtable (default / value constructors)
+00422448 _ZTV9Obj422448 inferred size:0x34 compendium view vtable (callback-table constructor)
+003aa820 _ZN9Obj4223f8C1Ev inferred [high] constructor (defaults)
+003aa7d4 _ZN9Obj4223f8C1Ej inferred [high] constructor with the stored value
+003ac264 _ZN9Obj422448C1Ev inferred [high] constructor: installs the state-handler tables
+00420708 _ZTV9Obj420708 inferred size:0x20 filter child vtable (scalar parameter, starts at 0)
+00420880 _ZTV9Obj420880 inferred size:0x20 filter child vtable (scalar parameter, starts at 1)
+00420c28 _ZTT9Obj420c60 inferred size:0x10 construction table (VTT) of the read-only file stream class Obj420c60 (primary vtable 0x420c60, virtual base interface vtable 0x3ff290)
+003a88f4 _ZN9Obj4223f816confirmSelectionEv inferred [med] Obj4223f8 state handler: highlighted entry changed; refreshes cursor, help line and detail text
+003aaeb0 _ZN9Obj4224489buildListEv inferred [high] Obj422448 method: collects the unlocked entries, picks the help line, opens the panel
+003af8d0 moLiveNodeSourceAcquireHeader inferred [med] makes sure a tree header node is on hand, popping a spare shared node or allocating a new one
+0015dd58 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle inferred [high] twin of the smt4a mangled length fix (submitTokenRequest is 18 characters)
+00342fbc _ZN9Obj420780C1Ev inferred [high] constructor of the battle target selection info panel (vtable 0x420780); called by btlTargetSelectCreate
+00349210 _ZN17TargetMarkerEntryC1Ev inferred [high] empty constructor of one target cursor marker (16-byte element of the marker group)
+00420780 _ZTV9Obj420780 inferred size:0x10 battle target selection info panel table; address point 0x420788, deleting callback at 0x343294.
+004208b4 _ZTV9Obj4208b4 inferred size:0x10 battle target selection marker group table; address point 0x4208bc, deleting callback at 0x3494e8.
+00379274 _ZN9Obj421a78C1Ev inferred [high] constructor of the reverb sound effect (vtable 0x421a78, stored by it)
+00421a78 _ZTV9Obj421a78 inferred size:0x2c reverb sound effect table (slot 2 = nw_snd_FxReverb_Initialize); address point 0x421a80.
+001241a0 svcGetSystemTick inferred [high] GetSystemTick svc wrapper (svc 0x28), twin of smt4a svcGetSystemTick
+0010b5fc accelerometerUpdate inferred [high] twin of smt4a accelerometerUpdate
+00140fa0 _ZN2nw3snd8internal6driver11SoundThreadC1Ev evidence [med] nw::snd::internal::driver::SoundThread constructor (twin of smt4a)
+002bd440 _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv evidence [high] twin of smt4a
+00141040 _ZN2nw3snd8internal6driver11SoundThreadD1Ev evidence [med] SoundThread destructor registered with atexit by GetInstance's static
+00472364 _ZGVZN2nw3snd8internal6driver11SoundThread11GetInstanceEvE8instance evidence [high] guard of GetInstance's function-local static
+004ea4c8 _ZZN2nw3snd8internal6driver11SoundThread11GetInstanceEvE8instance evidence [high] GetInstance's function-local static SoundThread
+002a7bc0 _ZN2nw4math5MTX448IdentityEv evidence high nw::math::MTX44::Identity() (guard _ZGVZN2nw4math5MTX448IdentityEvE8identity + static identity)
+002ac444 _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv inferred [med] NintendoWare WaveSoundFileReader ctor: header pointer + info block body, magic CWSD
+002ac5f4 _ZN2nw3snd8internal14BankFileReaderC1EPKv inferred [med] NintendoWare BankFileReader ctor: header, info block body, initialized flag, magic CBNK
+00378d80 _ZN9Obj421a58C1Ev evidence high Obj421a58 constructor (stores _ZTV9Obj421a58+8)
+00421a58 _ZTV9Obj421a58 evidence high size:0x20 vtable; address point 0x421a60 stored by FUN_00378d80
+002b74cc _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_ evidence high std::remove_copy<int*,int*,int> instantiation
+004208d4 _ZTV9Obj4208d4 evidence high size:0x24 vtable stored by FUN_0034a1ec (+8 address point DAT_004208dc)
+0034a1ec _ZN9Obj4208d4C1Ev evidence high Obj4208d4 constructor
+004332a0 g_pendingTextures inferred [med] 26-entry (0x4c) table of textures awaiting image reload
+0034c338 _ZN9Obj42099010initializeEP14Obj420990Rectsj inferred [high] malformed mangling: initialize has 10 chars and Obj420990Rects 14
+00465020 g_asdFileThread inferred [med] the file worker thread (handle + joined flag) started by FUN_0010d0f8
+00395558 _ZN9Obj4222acC1Ev inferred [med] constructor of Obj4222ac (0x80 bytes; vtable 0x4222ac): Obj422318 base ctor, vtable store, selection=-1; called by FUN_00232a6c via new
+003572dc _ZN17EffGeomVertexSlotC1Ev inferred [med] constructor of the 0x70-byte EffGeomRecord vertex slot
+003572d0 _ZN16EffGeomColorSlotC1Ev inferred [med] constructor of the 0x14-byte EffGeomRecord color slot
+002b3988 _ZNK14SortObjectLessclEP10SortObjectS1_ inferred std::sort comparator: orders objects by their class info order (FUN_00131a2c)
+00123d00 _ZSt16__introsort_loopIPP10SortObjecti14SortObjectLessEvT_S4_T0_T1_ inferred std::__introsort_loop instantiation for SortObject* with SortObjectLess
+0011cd14 sndMasterManagerApply inferred [med] forwards value to FUN_00128f20 with g_nnSndMasterManager
+002d7330 campCecModelSceneInit inferred [med] creates the camp StreetPass backdrop player model, sets light colours and loads status.bcenv when no map runs
+003a284c shopMenuUpdateInput inferred [med] shop menu state: repeat right/left move the selection through the link table, confirm opens the message window, cancel leaves
+001f6998 effGeomBufferCreate inferred [high] allocates a vertex buffer whose layout follows the attribute flags and sets its identity transform
+00244ee0 devilGetCategoryTableId inferred [high] mapCategoryToTableId(devilGetRecord(id)->category)
+002a2dc8 asdLightActivate inferred [med] sets light slot active=1 dirty=0
+002d582c animOwnerSetScale inferred [med] applies scale to owner's model
+0010ff4c sndSystemShutdown inferred [high] shuts down sound callbacks, master/voice managers and dsp when running
+003808d8 sndHeapAlloc inferred [med] locks the sound heap and allocates from its frame heap
+003f575c moCreateValueRecord inferred [med] allocates a zeroed 0x1c record holding two values
+00106d40 sysInitializeServices inferred [med] one-time start-up of cfg/am services and system initialisers, fatal on failure
+0021dea8 entrySetParams inferred [low] finds entry by id and sets two halfword fields
+00241f2c dataTable0BGetValueById inferred [med] returns the halfword at +0x26 of section 11's record for an id
+002f472c findKeyedRecord inferred [low] finds the record matching two keys in a terminated table
+002148e4 asdMdlBanksDestroyAll inferred [med] destroys all model managers of the six model banks
+001a75d0 uiSlotEntryDraw inferred med draws one slot entry: frame sprites, highlight, name and detail text
+003c4748 btlDebugCreateStageMenu inferred [med] builds the "btl Stage Menu" debug list box (position and settings)
+00102b10 textSystemInitialize inferred [med] loads the six bcfnt fonts and installs the text system defaults and callbacks
+00247c74 campMenuEntryDraw inferred [med] draws a menu entry frame with a fading glow
+002eac34 gameStateGetMenuType inferred [med] maps a category id (0..0x3c) to a menu type, some depending on game state
+001413d0 effectSubmitPackageRequest inferred [med] builds effect request for named package entry and submits it
+001e1808 unitCompareByPriorityValue inferred [med] compares two ids by FUN_0029a924 value, zero if missing
+00230cc0 uiRectDrawAtBottomRight inferred [med] draw call at rect bottom-right plus offset
+002459d8 dataTable25FindById inferred [med] aoc override else bsearch of table 25
+00246730 nameEntriesRegisterVerNamesThenContinue inferred [med] registers VER names, then tail-continues FUN_0024679c
+00254230 namedEntryTableSetById inferred [med] sets value and name of entry with id
+00291998 soundRequestEnd inferred [med] ends nested request, releases sound for ids 0x65-0x67
+00296ee0 messageOwnerSetState inferred [med] state switch: 2 starts script entry + help, 4/5 finish window
+0029f7d4 dataTable54FindById inferred [med] bsearch of table 5/4 with removed aoc override stub
+002ae164 dataTable40FindById inferred [med] aoc override else bsearch of table 4/0
+002bff6c uiPointerHitsRect inferred [med] pointer position inside rect
+002febf0 scrCommGetItemPrice inferred [med] script command: price of item (weighted entries resolved)
+0031cbf8 scrCommGetBattleEntryValue inferred [med] script command: value of active battle entry matching key
+0033b8f4 devilRollDropItem inferred [med] random drop item of devil's drop group, rare slot on low roll
+003a8884 titleMenuDraw inferred [med] draws title menu entries in compact or scrolling form
+003db5e8 effectSlotStart inferred [med] starts effect id in first free slot
+00192268 effBlockCreate inferred high allocates an empty effParts block of a kind (twin of effBlockClone)
+002bee58 spriteStartAnimationByIndex inferred high finds the index-th command group and calls spriteStartAnimation
+002702dc mapCollisionRelease inferred med frees the four collision buffers and clears the collision state
+002e1e58 effectEditorPreviewRebuildTexture inferred med rebuilds the effect-editor preview texture from its resource
+001a8c6c mapGimicClearAll inferred [med] clears gimmick table header and 24 slots
+001b46e0 mapObjReleaseAllSlots inferred [med] destroys slot models, clears active flags
+00219720 devilCompareBySetCategoryGrade inferred [med] qsort comparator over demon ids
+0024dc64 keyedRecordsFreeAll inferred [med] frees all keyed record buffers
+00276078 mapFlagSlotsRetireByKey inferred [med] retires pending flag slots matching key and sets their flags
+0029cde0 arrayContainsU16 inferred [high] linear search of a u16 array
+002a9170 gpuSubmitVectorCommand inferred [low] builds a GPU command block from three vectors and submits it
+00339860 modelOwnerResetPlayerIfReady inferred [low] resets model scale/loop policy when ready
+001f8158 btlEffectCreate inferred [high] starts the effects job: Calc task, effect process, Filter DrawUp task and the 0x32a4-byte effect data
+0020f5e8 btlUnitDestroyDrawJobs inferred [high] end callback of btlUnit Calc job: stops job, removes/destroys the two draw objects and shuts down the owner
+0023b5e0 titleSceneMultiplyByCameraView inferred [med] multiplies a matrix by the title scene camera's view (identity fallback) into a destination
+002ee42c effEditorCreateJobs inferred [high] creates the effEditor Calc process and its four draw processes (strings effEditor*)

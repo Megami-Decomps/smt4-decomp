@@ -1,71 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00429c08` (_code @ 0x429c08, 0xf4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the copy limit (31) in r8 and tests the name before the index with the loop entered by a branch, copies the key pair with ldm/stm, and holds the hidden result pointer in r9; armcc differs in all three */
+#include "classes/WindowStatus.h"
+#include "nn/Result.h"
+
+struct KeyPair {
+    u32 first;
+    u32 second;
+};
+
+/* A status record: its id string pair and the values the lookup passes on. */
+struct StatusRecord {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 keyBase;
+    /* 0x08 */ KeyPair key;
+};
 
 extern "C" {
+extern const char DAT_005892a4[]; /* the record's path prefix */
 
-int _ZN18WindowStatusResultC1Ej(...);
-int recordValidatePair(int, int, unsigned int);
-int FUN_004395fc(unsigned char *, char [16], int, int, unsigned int, unsigned int);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_3_stack;
-
-extern char s_sys_ECardStatus_005892a4[16]; /* 0x5892a4 */
-
-extern unsigned char libc_toupper(void);
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-extern int legacyResourceIdRemap(unsigned int *);
-extern int FUN_004283cc(int);
-/* Supplied declaration required: recordValidatePair. */
-extern int FUN_00429a1c(int);
-/* Supplied declaration required: FUN_004395fc. */
-
-
-void FUN_00429c08(unsigned int *param_1,int param_2,int param_3)
-
-{
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned char *puVar3;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int uStack_44;
-  unsigned char temp_v4 [36];
-  
-  temp_v1 = FUN_004283cc(param_2);
-  if (-1 < temp_v1) {
-    temp_v2 = 0;
-    do {
-      if (*(char *)(param_3 + temp_v2) == '\0') break;
-      temp_v0 = libc_toupper();
-      temp_v4[temp_v2] = temp_v0;
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x1f);
-    temp_v4[temp_v2] = 0;
-    puVar3 = temp_v4;
-    FUN_004395fc(puVar3,s_sys_ECardStatus_005892a4,3,param_2 + 4,*(unsigned int *)(param_2 + 8),
-                 *(unsigned int *)(param_2 + 0xc));
-    _ZN18WindowStatusResultC1Ej(&temp_v3,puVar3);
-    recordValidatePair(param_2,temp_v3,uStack_44);
-    temp_v1 = legacyResourceIdRemap((unsigned int *)&temp_v3);
-    if (temp_v1 < 0) {
-      *param_1 = temp_v3;
-      param_1[1] = uStack_44;
-      return;
-    }
-    temp_v1 = FUN_00429a1c(param_2);
-    if (-1 < temp_v1) {
-      _ZN18WindowStatusResultC1Ej(param_1,0);
-      return;
-    }
-  }
-  _ZN18WindowStatusResultC1Ej(param_1,temp_v1);
-  return;
+s32 libc_toupper(s32 character);
+s32 FUN_004283cc(StatusRecord *record);
+u32 FUN_004395fc(const s8 *name, const char *prefix, s32 mode, u32 *base, KeyPair key);
+void recordValidatePair(StatusRecord *record, WindowStatusResult result);
+s32 legacyResourceIdRemap(WindowStatusResult *result);
+s32 FUN_00429a1c(StatusRecord *record);
 }
 
-} /* extern "C" */
+/* Looks the upper-cased name up in the record and returns its status; a failure code comes back as the result. */
+extern "C" WindowStatusResult FUN_00429c08(StatusRecord *record, const s8 *name)
+{
+    s32 error = FUN_004283cc(record);
+    if (!nnResultIsFailure(error)) {
+        s8 upper[32];
+        u32 i;
+        for (i = 0; name[i] != '\0' && i < 31; i++) {
+            upper[i] = libc_toupper(name[i]);
+        }
+        upper[i] = '\0';
+        WindowStatusResult result(FUN_004395fc(upper, DAT_005892a4, 3, &record->keyBase, record->key));
+        recordValidatePair(record, result);
+        if (nnResultIsFailure(legacyResourceIdRemap(&result))) {
+            return result;
+        }
+        error = FUN_00429a1c(record);
+        if (!nnResultIsFailure(error)) {
+            return WindowStatusResult(0);
+        }
+    }
+    return WindowStatusResult(error);
+}

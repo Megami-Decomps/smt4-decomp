@@ -10,7 +10,7 @@ int FUN_00295eb0(...);
 int FUN_002963ec(...);
 int uiSpriteSetImageKeyframe(int, int, int);
 int pairSetFirstResetSecond(int, unsigned int);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int FUN_002bf818(int);
 int FUN_003adca8(int, int, unsigned int);
 
@@ -30,7 +30,7 @@ extern int FUN_00293230(void);
 /* Supplied declaration required: FUN_002963ec. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: FUN_002bf818. */
 extern unsigned int FUN_002c501c(void);
 /* Supplied declaration required: FUN_003adca8. */
@@ -226,7 +226,7 @@ LAB_00206088:
         FUN_00295eb0(temp_v4,0x15,0x416);
         FUN_002963ec(temp_v4,(int)(short)(int)*(float *)(temp_v3 + 0xbfd8),
                      (int)(short)(int)*(float *)(temp_v3 + 0xbfdc));
-        FUN_002bee58(temp_v4,10);
+        spriteStartAnimationByIndex(temp_v4,10);
         *(unsigned char *)(temp_v7 + 0xd618) = 0;
         *(char *)(temp_v6 + 0xe00c) = *(char *)(temp_v6 + 0xe00c) + '\x01';
       }

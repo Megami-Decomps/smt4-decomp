@@ -31,7 +31,7 @@ int FUN_002fb0d4(...);
 int FUN_0031416c(...);
 int mapSettings5BSetValueIfActive(...);
 int loadSlotEnsureLoaded(...);
-int FUN_003f9e80(...);
+int _ZN9Obj557af8C1EPK21AsdAnimCameraResource(...);
 int gameFlagSetValue(...);
 int fusionListAvailableSpecialRecipes(...);
 int fusionRaceSelectionInitialize(...);
@@ -104,7 +104,7 @@ extern int FUN_002e50d4(void);
 extern int lmapSceneGetScript(void);
 /* Supplied declaration required: mapSettings5BSetValueIfActive. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
-/* Supplied declaration required: FUN_003f9e80. */
+/* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
 /* Supplied declaration required: gameFlagSetValue. */
 extern int modelListInit(void);
 extern int bitsAt60Test(int, unsigned int);
@@ -269,7 +269,7 @@ void FUN_002ab804(void)
   temp_v1 = 0x48;
   FUN_00178b04(0x48,&LAB_002abbd8,0x1d13);
   if (temp_v1 != 0) {
-    FUN_003f9e80();
+    _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
   }
   piVar2[0x2484] = temp_v1;
   temp_v2 = 0x20;

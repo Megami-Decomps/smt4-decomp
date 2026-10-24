@@ -1,40 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011bf24` (_code @ 0x11bf24, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation/scheduling only (retail keeps 255 in r4 for the fifth argument and loads the image/size constants first) */
+/* Loads the DSP sound component from the embedded binary into the shared DSP state. Fails with 0xC8A0A7FC when the DSP
+ * session is not open or the component is already loaded. */
+#include "common.h"
 
 extern "C" {
+struct DspComponentState {
+    /* 0x00 */ u8 unk00;
+    /* 0x01 */ s8 loaded;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ u16 programMask;
+    /* 0x06 */ u16 dataMask;
+    /* 0x08 */ s32 session;
+    /* 0x0C */ u8 unk0c[0xC];
+    /* 0x18 */ const u8 *image;
+    /* 0x1C */ u32 imageSize;
+};
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+extern DspComponentState g_callbackState;
+extern u8 DAT_004657b8[];
+u32 nn_dsp_CTR_DSP_LoadComponent(s32 session, const u8 *image, u32 size, u16 programMask, u16 dataMask, s8 *loaded);
 
-extern signed char DAT_0044e459; /* 0x44e459 */
-extern unsigned short DAT_0044e45c; /* 0x44e45c */
-extern unsigned short DAT_0044e45e; /* 0x44e45e */
-extern int DAT_0044e460; /* 0x44e460 */
-extern unsigned char *DAT_0044e470; /* 0x44e470 */
-extern unsigned int DAT_0044e474; /* 0x44e474 */
-extern unsigned char DAT_004657b8; /* 0x4657b8 */
-
-extern unsigned int nn_dsp_CTR_DSP_LoadComponent(unsigned int, unsigned char *, unsigned int, unsigned short, unsigned short, unsigned char *);
-
-
-unsigned int FUN_0011bf24(void)
-
+u32 FUN_0011bf24(void)
 {
-  unsigned int temp_v0;
-  
-  DAT_0044e470 = &DAT_004657b8;
-  DAT_0044e474 = 0xc20a;
-  DAT_0044e45c = 0xff;
-  DAT_0044e45e = 0xff;
-  if ((DAT_0044e460 != 0) && (DAT_0044e459 == '\0')) {
-    temp_v0 = nn_dsp_CTR_DSP_LoadComponent
-                      (DAT_0044e460,&DAT_004657b8,0xc20a,0xff,0xff,(unsigned char *)&DAT_0044e459);
-    return temp_v0;
-  }
-  return 0xc8a0a7fc;
+    g_callbackState.image = DAT_004657b8;
+    g_callbackState.imageSize = 0xC20A;
+    g_callbackState.programMask = 0xFF;
+    g_callbackState.dataMask = 0xFF;
+    if (g_callbackState.session != 0 && g_callbackState.loaded == 0) {
+        return nn_dsp_CTR_DSP_LoadComponent(g_callbackState.session, DAT_004657b8, 0xC20A, 0xFF, 0xFF,
+                                            &g_callbackState.loaded);
+    }
+    return 0xC8A0A7FC;
 }
-
-} /* extern "C" */
+}

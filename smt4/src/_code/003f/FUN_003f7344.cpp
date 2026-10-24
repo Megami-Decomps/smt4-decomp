@@ -7,8 +7,8 @@ extern "C" {
 int nn_math_ARMv6_MTX34CopyAsm(...);
 
 typedef int romwright_code(...);
-extern unsigned int DAT_00476634; /* 0x476634 */
-extern unsigned int DAT_004efd6c; /* 0x4efd6c */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x476634 */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x4efd6c */
 extern unsigned int DAT_004efd70; /* 0x4efd70 */
 extern unsigned int DAT_004efd74; /* 0x4efd74 */
 extern unsigned int DAT_004efd78; /* 0x4efd78 */
@@ -103,8 +103,8 @@ unsigned char FUN_003f7344(int *param_1,unsigned int param_2)
       do {
         temp_v1 = param_1[1] + temp_v2 * 0x40;
         if (temp_v1 != 0) {
-          if (((DAT_00476634 & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_00476634), temp_v3 != 0)) {
-            DAT_004efd6c = temp_v8;
+          if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v3 != 0)) {
+            _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v8;
             DAT_004efd70 = temp_v7;
             DAT_004efd74 = temp_v7;
             DAT_004efd78 = temp_v7;
@@ -117,7 +117,7 @@ unsigned char FUN_003f7344(int *param_1,unsigned int param_2)
             DAT_004efd94 = temp_v8;
             DAT_004efd98 = temp_v7;
           }
-          nn_math_ARMv6_MTX34CopyAsm(temp_v1,&DAT_004efd6c);
+          nn_math_ARMv6_MTX34CopyAsm(temp_v1,&_ZZN2nw4math5MTX348IdentityEvE8identity);
           *(unsigned int *)(temp_v1 + 0x30) = temp_v8;
           *(unsigned int *)(temp_v1 + 0x34) = temp_v8;
           *(unsigned int *)(temp_v1 + 0x38) = temp_v8;

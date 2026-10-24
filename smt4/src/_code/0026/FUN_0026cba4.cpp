@@ -1,120 +1,122 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026cba4` (_code @ 0x26cba4, 0x268 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: close: all five stat arms and calls match; built hoists the isUnit|variant OR above the early checks (retail tests isUnit and variant separately, then ORs in place after the record check) */
+#include "gamedata/PlayerInitialization.h"
+#include <stddef.h>
+
+/* A copy of a battle-unit record kept by the panel (0x604 bytes); only the two stat arrays are named. */
+struct UnitPreview {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u16 stats[5];
+    /* 0x00E */ u8 unk00E[4];
+    /* 0x012 */ u16 baseStats[5];
+    /* 0x01C */ u8 unk01C[0x5E8];
+};
+
+/* The party panel as this function sees it: the selected item and the preview copies. */
+struct PreviewPanel {
+    /* 0x0000 */ u8 unk0000[0x36];
+    /* 0x0036 */ u16 item;
+    /* 0x0038 */ u8 unk0038[0x1128];
+    /* 0x1160 */ PlayerInitialRecordIV player;
+    /* 0x11EC */ UnitPreview unit;
+};
+typedef char PreviewPanelLayout[offsetof(PreviewPanel, player) == 0x1160 && offsetof(PreviewPanel, unit) == 0x11EC &&
+    sizeof(UnitPreview) == 0x604 ? 1 : -1];
+
+/* An item record of data table 8, section 1. */
+struct ItemRecord {
+    /* 0x00 */ u8 unk00[0x60];
+    /* 0x60 */ u16 kind;
+    /* 0x62 */ u8 unk62[0xC];
+    /* 0x6E */ u8 flags;
+};
 
 extern "C" {
 
-int FUN_0029a0cc(int);
-int FUN_0029c4c8(int);
-int FUN_0029c4e4(int, int);
-int dataTable08Sub1GetRecord(void);
-int rt_memcpy_w(int, unsigned int, unsigned int);
+extern PreviewPanel *g_partyPanel;
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
+ItemRecord *dataTable08Sub1GetRecord(u32 id);
+void *gameGetUnitRecord(s32 id);
+void *gameGetPlayerData(void);
+void rt_memcpy_w(void *dest, const void *src, u32 size);
+void FUN_0029c4c8(s32 value);
+void FUN_0029c4e4(UnitPreview *unit, s32 arg);
+void FUN_0029a0cc(PlayerInitialRecordIV *player);
 
-extern int g_partyPanel; /* 0x43dcf0 */
-
-/* Supplied declaration required: FUN_0029a0cc. */
-/* Supplied declaration required: FUN_0029c4c8. */
-/* Supplied declaration required: FUN_0029c4e4. */
-extern unsigned int gameGetUnitRecord(int);
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
-extern unsigned int gameGetPlayerData(void);
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_0026cba4(int param_1,int param_2,int param_3)
-
+/* Shows an item's stat boost preview: copies the player's (or a unit's) record into the panel, adds 3 to the stat
+ * the item raises (in both its base and its current value) and refreshes the panel. */
+void FUN_0026cba4(s32 id, s32 isUnit, s32 variant)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = g_partyPanel;
-  temp_v1 = (unsigned int)*(unsigned short *)(g_partyPanel + 0x36);
-  if ((temp_v1 == 0) || ((param_1 < 0 && (param_2 != 0 || param_3 != 0)))) {
-    return;
-  }
-  dataTable08Sub1GetRecord();
-  if ((*(unsigned char *)(temp_v1 + 0x6e) & 2) == 0) {
-    FUN_0029c4c8(0);
-    return;
-  }
-  if (!(param_2 == 0 && param_3 == 0)) {
-    temp_v2 = gameGetUnitRecord(param_1);
-    temp_v4 = 0x604;
-    temp_v3 = temp_v0 + 0x11ec;
-  }
-  else {
-    temp_v2 = gameGetPlayerData();
-    temp_v4 = 0x8c;
-    temp_v3 = temp_v0 + 0x1160;
-  }
-  rt_memcpy_w(temp_v3,temp_v2,temp_v4);
-  switch(*(unsigned short *)(temp_v1 + 0x60)) {
-  case 0x1f:
-    if (!(param_2 == 0 && param_3 == 0)) {
-      *(short *)(temp_v0 + 0x11f0) = *(short *)(temp_v0 + 0x11f0) + 3;
-      *(short *)(temp_v0 + 0x11fe) = *(short *)(temp_v0 + 0x11fe) + 3;
+    PreviewPanel *panel = g_partyPanel;
+    u32 item = panel->item;
+    ItemRecord *record;
+
+    if (item == 0 || (id < 0 && !(isUnit == 0 && variant == 0))) {
+        return;
     }
-    else {
-      *(short *)(temp_v0 + 0x1172) = *(short *)(temp_v0 + 0x1172) + 3;
-      *(short *)(temp_v0 + 0x1180) = *(short *)(temp_v0 + 0x1180) + 3;
+    record = dataTable08Sub1GetRecord(item);
+    if ((record->flags & 2) == 0) {
+        FUN_0029c4c8(0);
+        return;
     }
-    break;
-  case 0x20:
-    if (!(param_2 == 0 && param_3 == 0)) {
-      *(short *)(temp_v0 + 0x11f4) = *(short *)(temp_v0 + 0x11f4) + 3;
-      *(short *)(temp_v0 + 0x1202) = *(short *)(temp_v0 + 0x1202) + 3;
+    isUnit |= variant;
+    if (isUnit != 0) {
+        rt_memcpy_w(&panel->unit, gameGetUnitRecord(id), 0x604);
+    } else {
+        rt_memcpy_w(&panel->player, gameGetPlayerData(), 0x8C);
     }
-    else {
-      *(short *)(temp_v0 + 0x1176) = *(short *)(temp_v0 + 0x1176) + 3;
-      *(short *)(temp_v0 + 0x1184) = *(short *)(temp_v0 + 0x1184) + 3;
+    switch (record->kind) {
+    case 0x1F:
+        if (isUnit != 0) {
+            panel->unit.stats[0] += 3;
+            panel->unit.baseStats[0] += 3;
+        } else {
+            panel->player.baseStats.stats[0] += 3;
+            panel->player.stats[0] += 3;
+        }
+        break;
+    case 0x20:
+        if (isUnit != 0) {
+            panel->unit.stats[2] += 3;
+            panel->unit.baseStats[2] += 3;
+        } else {
+            panel->player.baseStats.stats[2] += 3;
+            panel->player.stats[2] += 3;
+        }
+        break;
+    case 0x21:
+        if (isUnit != 0) {
+            panel->unit.stats[1] += 3;
+            panel->unit.baseStats[1] += 3;
+        } else {
+            panel->player.baseStats.stats[1] += 3;
+            panel->player.stats[1] += 3;
+        }
+        break;
+    case 0x22:
+        if (isUnit != 0) {
+            panel->unit.stats[3] += 3;
+            panel->unit.baseStats[3] += 3;
+        } else {
+            panel->player.baseStats.stats[3] += 3;
+            panel->player.stats[3] += 3;
+        }
+        break;
+    case 0x23:
+        if (isUnit != 0) {
+            panel->unit.stats[4] += 3;
+            panel->unit.baseStats[4] += 3;
+        } else {
+            panel->player.baseStats.stats[4] += 3;
+            panel->player.stats[4] += 3;
+        }
+        break;
     }
-    break;
-  case 0x21:
-    if (!(param_2 == 0 && param_3 == 0)) {
-      *(short *)(temp_v0 + 0x11f2) = *(short *)(temp_v0 + 0x11f2) + 3;
-      *(short *)(temp_v0 + 0x1200) = *(short *)(temp_v0 + 0x1200) + 3;
+    FUN_0029c4c8(1);
+    if (isUnit != 0) {
+        FUN_0029c4e4(&panel->unit, 0);
+    } else {
+        FUN_0029a0cc(&panel->player);
     }
-    else {
-      *(short *)(temp_v0 + 0x1174) = *(short *)(temp_v0 + 0x1174) + 3;
-      *(short *)(temp_v0 + 0x1182) = *(short *)(temp_v0 + 0x1182) + 3;
-    }
-    break;
-  case 0x22:
-    if (!(param_2 == 0 && param_3 == 0)) {
-      *(short *)(temp_v0 + 0x11f6) = *(short *)(temp_v0 + 0x11f6) + 3;
-      *(short *)(temp_v0 + 0x1204) = *(short *)(temp_v0 + 0x1204) + 3;
-    }
-    else {
-      *(short *)(temp_v0 + 0x1178) = *(short *)(temp_v0 + 0x1178) + 3;
-      *(short *)(temp_v0 + 0x1186) = *(short *)(temp_v0 + 0x1186) + 3;
-    }
-    break;
-  case 0x23:
-    if (!(param_2 == 0 && param_3 == 0)) {
-      *(short *)(temp_v0 + 0x11f8) = *(short *)(temp_v0 + 0x11f8) + 3;
-      *(short *)(temp_v0 + 0x1206) = *(short *)(temp_v0 + 0x1206) + 3;
-    }
-    else {
-      *(short *)(temp_v0 + 0x117a) = *(short *)(temp_v0 + 0x117a) + 3;
-      *(short *)(temp_v0 + 0x1188) = *(short *)(temp_v0 + 0x1188) + 3;
-    }
-  }
-  FUN_0029c4c8(1);
-  if (param_2 == 0 && param_3 == 0) {
-    FUN_0029a0cc(temp_v0 + 0x1160);
-    return;
-  }
-  FUN_0029c4e4(temp_v0 + 0x11ec,0);
-  return;
 }
 
 } /* extern "C" */

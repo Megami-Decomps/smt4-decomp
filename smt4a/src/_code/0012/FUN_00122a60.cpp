@@ -21,7 +21,7 @@ int FUN_00122a60(void)
   puVar1[0x4a] = 0;
   puVar1[0x4b] = 200;
   auStack_18[0] = 0x10001;
-  iVar2 = FUN_002e7908(puVar1 + 0x4c,auStack_18);
+  iVar2 = _ZN12OnlineResultC1ERKj(puVar1 + 0x4c,auStack_18);
   *(unsigned int *)(iVar2 + 0xc) = 0;
   *(unsigned char *)(iVar2 + 0x10) = 0;
   *(unsigned char *)(iVar2 + 0x11) = 0;

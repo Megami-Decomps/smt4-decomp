@@ -5,7 +5,7 @@
 extern "C" {
 extern u32 DAT_004e31a0[256];
 extern u32 DAT_004e35a0[256];
-void FUN_002a9170(const u32 *position, const u32 *color, const u32 *coordinates);
+void gpuSubmitVectorCommand(const u32 *position, const u32 *color, const u32 *coordinates);
 }
 
 static __forceinline u32 encodeGpuFloat24(f32 value)
@@ -39,5 +39,5 @@ extern "C" void FUN_002aff74(RgbaWord color, f32 x, f32 y, f32 z, f32 u, f32 v)
     packed.second[1] = (color1 >> 8) | (color2 << 16);
     u32 color3 = DAT_004e35a0[color.rgba.r];
     packed.second[2] = (color2 >> 16) | (color3 << 8);
-    FUN_002a9170(packed.first, packed.second, packed.coordinates);
+    gpuSubmitVectorCommand(packed.first, packed.second, packed.coordinates);
 }

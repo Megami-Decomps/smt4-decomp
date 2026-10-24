@@ -13,7 +13,7 @@ int uiSpriteSetImageKeyframe(...);
 void uiLayoutSelectionSpritePair(void* context);
 int pairSetFirstResetSecond(...);
 int FUN_002bd954(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int randNextInRange(...);
 int VectorSignedToFloat(...);
 
@@ -40,7 +40,7 @@ extern int FUN_002ae424(unsigned int);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: randNextInRange. */
 
 
@@ -75,10 +75,10 @@ void FUN_0028dcf4(int param_1,int param_2)
   switch(param_2) {
   case 1:
     pairSetFirstResetSecond(param_1 + 0xc4,2000);
-    FUN_002bee58(param_1 + 0xc4,0);
+    spriteStartAnimationByIndex(param_1 + 0xc4,0);
     FUN_00295eb0(param_1 + 0xc4,0xe,0x7d4);
     pairSetFirstResetSecond(param_1 + 0x2f4,7);
-    FUN_002bee58(param_1 + 0x2f4,4);
+    spriteStartAnimationByIndex(param_1 + 0x2f4,4);
     FUN_00295eb0(param_1 + 0x2f4,0xe,0x47);
     return;
   case 2:
@@ -89,12 +89,12 @@ void FUN_0028dcf4(int param_1,int param_2)
   case 0x11:
   case 0x12:
     pairSetFirstResetSecond(param_1 + 0xc4,2000);
-    FUN_002bee58(param_1 + 0xc4,0);
+    spriteStartAnimationByIndex(param_1 + 0xc4,0);
     FUN_00295eb0(param_1 + 0xc4,0xe,0x7d4);
     pairSetFirstResetSecond(param_1 + 0x1dc,4);
-    FUN_002bee58(param_1 + 0x1dc,1);
+    spriteStartAnimationByIndex(param_1 + 0x1dc,1);
     pairSetFirstResetSecond(param_1 + 0x2f4,7);
-    FUN_002bee58(param_1 + 0x2f4,4);
+    spriteStartAnimationByIndex(param_1 + 0x2f4,4);
     FUN_00295eb0(param_1 + 0x2f4,0xe,0x47);
     if (param_2 != 3) {
       if (param_2 != 0x10) {
@@ -141,54 +141,54 @@ void FUN_0028dcf4(int param_1,int param_2)
     return;
   case 6:
     pairSetSecondResetFirst(param_1 + 0xc4,0x10);
-    FUN_002bee58(param_1 + 0xc4,0);
+    spriteStartAnimationByIndex(param_1 + 0xc4,0);
     FUN_00295eb0(param_1 + 0xc4,0xe,0x111);
     *(unsigned char *)(param_1 + 0x100) = 1;
     *(unsigned short *)(param_1 + 0xfe) = 2;
     pairSetFirstResetSecond(param_1 + 0x2f4,7);
-    FUN_002bee58(param_1 + 0x2f4,4);
+    spriteStartAnimationByIndex(param_1 + 0x2f4,4);
     FUN_00295eb0(param_1 + 0x2f4,0xe,0x47);
     return;
   case 7:
   case 8:
     pairSetSecondResetFirst(param_1 + 0xc4,6);
-    FUN_002bee58(param_1 + 0xc4,3);
+    spriteStartAnimationByIndex(param_1 + 0xc4,3);
     FUN_00295eb0(param_1 + 0xc4,0xe,0x36);
     *(unsigned char *)(param_1 + 0x100) = 1;
     pairSetSecondResetFirst(temp_v4,7);
-    FUN_002bee58(temp_v4,3);
+    spriteStartAnimationByIndex(temp_v4,3);
     FUN_00295eb0(temp_v4,0xe,0x36);
     *(unsigned char *)(param_1 + 0x448) = 1;
     pairSetFirstResetSecond(param_1 + 0x2f4,7);
-    FUN_002bee58(param_1 + 0x2f4,4);
+    spriteStartAnimationByIndex(param_1 + 0x2f4,4);
     FUN_00295eb0(param_1 + 0x2f4,0xe,0x47);
     return;
   case 9:
     pairSetSecondResetFirst(param_1 + 0xc4,4);
-    FUN_002bee58(param_1 + 0xc4,3);
+    spriteStartAnimationByIndex(param_1 + 0xc4,3);
     FUN_00295eb0(param_1 + 0xc4,0xe,0x22);
     *(unsigned char *)(param_1 + 0x100) = 1;
     pairSetSecondResetFirst(temp_v4,5);
-    FUN_002bee58(temp_v4,3);
+    spriteStartAnimationByIndex(temp_v4,3);
     FUN_00295eb0(temp_v4,0xe,0x36);
     *(unsigned char *)(param_1 + 0x448) = 1;
     pairSetFirstResetSecond(param_1 + 0x2f4,7);
-    FUN_002bee58(param_1 + 0x2f4,4);
+    spriteStartAnimationByIndex(param_1 + 0x2f4,4);
     FUN_00295eb0(param_1 + 0x2f4,0xe,0x47);
     return;
   case 10:
     pairSetSecondResetFirst(param_1 + 0xc4,2);
-    FUN_002bee58(param_1 + 0xc4,5);
+    spriteStartAnimationByIndex(param_1 + 0xc4,5);
     FUN_00295eb0(param_1 + 0xc4,0xe,0x15);
     *(unsigned char *)(param_1 + 0x100) = 1;
     return;
   case 0xb:
     pairSetSecondResetFirst(param_1 + 0xc4,0xb);
-    FUN_002bee58(param_1 + 0xc4,6);
+    spriteStartAnimationByIndex(param_1 + 0xc4,6);
     pairSetSecondResetFirst(param_1 + 0x268,0xf);
-    FUN_002bee58(param_1 + 0x268,6);
+    spriteStartAnimationByIndex(param_1 + 0x268,6);
     pairSetFirstResetSecond(param_1 + 0x380,0xc);
-    FUN_002bee58(param_1 + 0x380,9);
+    spriteStartAnimationByIndex(param_1 + 0x380,9);
     uiLayoutSelectionSpritePair(reinterpret_cast<void*>(param_1));
     return;
   case 0xc:
@@ -312,7 +312,7 @@ LAB_0028e528:
   case 0x13:
     FUN_002bd954(param_1 + 0xc4,0x3a,0xffffffff,param_1 + 0xa4,0xb);
     pairSetSecondResetFirst(param_1 + 0xc4,0x10);
-    FUN_002bee58(param_1 + 0xc4,6);
+    spriteStartAnimationByIndex(param_1 + 0xc4,6);
     return;
   }
   return;

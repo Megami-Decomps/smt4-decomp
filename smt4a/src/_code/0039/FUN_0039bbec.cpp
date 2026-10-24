@@ -1,30 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039bbec` (_code @ 0x39bbec, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+
+struct Vec3 {
+    float x, y, z;
+    Vec3(const float &ax, const float &ay, const float &az) : x(ax), y(ay), z(az) {}
+};
 
 extern "C" {
 
-int scriptReadStackValueAsFloat(int);
-int FUN_00377f54(unsigned int);
+float scriptReadStackValueAsFloat(int);
+int FUN_00377f54(unsigned int, Vec3, float);
 
 extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: scriptReadStackValueAsFloat. */
-/* Supplied declaration required: FUN_00377f54. */
-
 
 unsigned int FUN_0039bbec(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = scrGetArg(0);
-  scriptReadStackValueAsFloat(1);
-  scriptReadStackValueAsFloat(2);
-  scriptReadStackValueAsFloat(3);
-  scriptReadStackValueAsFloat(4);
-  FUN_00377f54(temp_v0);
-  return 1;
+    unsigned int id = scrGetArg(0);
+    float a = scriptReadStackValueAsFloat(1);
+    float b = scriptReadStackValueAsFloat(2);
+    float c = scriptReadStackValueAsFloat(3);
+    float d = scriptReadStackValueAsFloat(4);
+    FUN_00377f54(id, Vec3(a, b, c), d);
+    return 1;
 }
 
 } /* extern "C" */

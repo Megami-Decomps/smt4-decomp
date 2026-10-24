@@ -1,31 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ad6e0` (_code @ 0x3ad6e0, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int gameGetSlotTable(void);
+/* A party unit record (0x604 bytes); the id sits at 0x46. */
+struct PartyUnit {
+    /* 0x00 */ u8 unk00[0x46];
+    /* 0x46 */ u16 id;
+    /* 0x48 */ u8 unk48[0x5BC];
+};
 
+/* The party manager: unit table at 0x90, an order list at 0x90F0 and its length at 0x910B. */
+struct PartyManager {
+    /* 0x0000 */ u8 unk0000[0x90];
+    /* 0x0090 */ PartyUnit units[0x90F0 / sizeof(PartyUnit)];
+};
 
-int FUN_003ad6e0(unsigned int param_1)
+struct PartyTable {
+    /* 0x0000 */ u8 unk0000[0x90F0];
+    /* 0x90F0 */ s8 order[0x1B];
+    /* 0x910B */ u8 count;
+};
 
+PartyTable *gameGetSlotTable(void);
+
+/* Finds the unit with the given id among the ordered party slots. */
+void *FUN_003ad6e0(u32 id)
 {
-  int temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  
-  temp_v0 = gameGetSlotTable();
-  temp_v1 = 0;
-  if (temp_v1 < *(unsigned char *)(temp_v0 + 0x910b)) {
-    do {
-      temp_v2 = (int)*(char *)(temp_v0 + temp_v1 + 0x90f0);
-      if ((-1 < temp_v2) && (temp_v2 = temp_v0 + temp_v2 * 0x604, *(unsigned short *)(temp_v2 + 0xd6) == param_1)) {
-        return temp_v2 + 0x90;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *(unsigned char *)(temp_v0 + 0x910b));
-  }
-  return 0;
+    PartyTable *table = gameGetSlotTable();
+    u16 i;
+
+    for (i = 0; i < table->count; i++) {
+        s32 slot = table->order[i];
+        if (slot >= 0) {
+            PartyUnit *unit = &((PartyManager *)table)->units[slot];
+            if (unit->id == id) {
+                return unit;
+            }
+        }
+    }
+    return NULL;
 }
 
 } /* extern "C" */

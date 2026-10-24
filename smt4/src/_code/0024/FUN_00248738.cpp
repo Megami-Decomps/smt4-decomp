@@ -11,7 +11,7 @@ int FUN_0029f848(int, unsigned int, int, int, int, int);
 int FUN_002ae584(void);
 int ifTouchRegionRemove(void);
 int timerStart(...);
-int FUN_002bee58(int, int);
+int spriteStartAnimationByIndex(int, int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_002ae584. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 
 
 unsigned int FUN_00248738(int param_1,unsigned int param_2)
@@ -134,7 +134,7 @@ unsigned int FUN_00248738(int param_1,unsigned int param_2)
     }
     break;
   case 5:
-    FUN_002bee58(param_1 + 0x47c,1);
+    spriteStartAnimationByIndex(param_1 + 0x47c,1);
     temp_v3 = FUN_0029efa8(param_1 + 0x10);
     FUN_00295eb0(param_1 + 0x47c,0x1d,temp_v3 + 0x40e);
     *(unsigned short *)(param_1 + 0x494) = 0xa0;

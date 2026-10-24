@@ -19,7 +19,7 @@ extern void aocQuestReturnToScript(Obj526238 *);
 extern void aocQuestSceneReleaseStepResources(Obj526238 *);
 extern int FUN_00478dc4(...); /* 0x478dc4 */
 extern int FUN_00478edc(...); /* 0x478edc */
-extern int FUN_004791d4(...); /* 0x4791d4 */
+extern int _ZN7AocMenu16openPurchaseListEv(...); /* 0x4791d4 */
 extern int FUN_00479358(...); /* 0x479358 */
 extern int FUN_0047b224(...); /* 0x47b224 */
 extern int FUN_0047b4b4(...); /* 0x47b4b4 */
@@ -49,7 +49,7 @@ void FUN_0047c65c(int param_1)
     *(unsigned int *)(temp_v2 + 0x160) = 0;
     *(unsigned int *)(temp_v2 + 0x164) = 0;
   } while (temp_v1 != 0);
-  *(romwright_code **)(param_1 + 0x10) = FUN_004791d4;
+  *(romwright_code **)(param_1 + 0x10) = _ZN7AocMenu16openPurchaseListEv;
   *(unsigned int *)(param_1 + 0x14) = 0;
   *(romwright_code **)(param_1 + 0x18) = restartObjRun;
   *(unsigned int *)(param_1 + 0x1c) = 0;

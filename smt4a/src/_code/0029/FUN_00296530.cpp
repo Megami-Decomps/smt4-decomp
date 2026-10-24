@@ -29,7 +29,7 @@ int animationSelectClip(...);
 int controllerSetRotationEulerDegrees(...);
 int FUN_003fe86c(...);
 int FUN_0040b730(int, int, int);
-int FUN_0040b9ac(int, unsigned int, int, int);
+int playerModelLoadByIndex(int, unsigned int, int, int);
 
 #ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
 #define ROMWRIGHT_FLOAT_BITS_DEFINED
@@ -101,7 +101,7 @@ extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_0040b730. */
-/* Supplied declaration required: FUN_0040b9ac. */
+/* Supplied declaration required: playerModelLoadByIndex. */
 extern int FUN_004ffba8(int);
 
 
@@ -152,7 +152,7 @@ void FUN_00296530(void)
         if (temp_v4 < 3) {
           temp_v3 = 7;
         }
-        FUN_0040b9ac(piVar13[0x6a],temp_v4 & 0xff,temp_v2,temp_v3);
+        playerModelLoadByIndex(piVar13[0x6a],temp_v4 & 0xff,temp_v2,temp_v3);
       }
       temp_v4 = temp_v4 + 1;
     } while ((int)temp_v4 < 3);

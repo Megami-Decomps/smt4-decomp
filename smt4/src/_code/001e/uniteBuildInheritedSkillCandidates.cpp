@@ -33,7 +33,7 @@ extern "C" {
 extern UniteWork *g_unite;
 const FusionSkillDefinition *devilGetRecord(u32);
 const FusionSkillRecord *dataTable06Sub1GetRecord(u32);
-s32 FUN_0029cde0(const u16 *, s32, u16);
+s32 arrayContainsU16(const u16 *, s32, u16);
 void FUN_0029f848(void *, s32, s32, s32, s32, s32);
 void FUN_0029b130(u16 *, s32, const FusionSkillSortKey *, u32);
 }
@@ -43,8 +43,8 @@ static inline s32 appendInheritedSkills(FusionSkillWork *work, const FusionSkill
 {
     for (s32 i = 0; i < 8; ++i) {
         if (parent->skills[i] && (dataTable06Sub1GetRecord(parent->skills[i])->flags & 0x20) &&
-            !FUN_0029cde0(work->inherited, 24, parent->skills[i]) &&
-            !FUN_0029cde0(result->skills, 8, parent->skills[i]))
+            !arrayContainsU16(work->inherited, 24, parent->skills[i]) &&
+            !arrayContainsU16(result->skills, 8, parent->skills[i]))
             work->inherited[count++] = parent->skills[i];
     }
     return count;

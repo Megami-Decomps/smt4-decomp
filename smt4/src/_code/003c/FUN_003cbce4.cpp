@@ -1,97 +1,98 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cbce4` (_code @ 0x3cbce4, 0x244 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only register allocation of the action-slot address computation differs (retail loads the unit, the slot stride, then the table pointer into r0/r2/r3). */
+#include "battle/btlAction.h"
+
+/* The combatant being driven; only the fields this state machine reads. */
+struct ReflectUnit {
+    u8 unk00[0x84];
+    s32 slotIndex;          // 0x084: index into the action table
+    s32 state;              // 0x088 (4: finishing)
+    u8 unk8C[0x54];
+    u32 flags;              // 0x0E0 (bit 18)
+    u8 unkE4[0x1DB4];
+    u32 reflectContext;     // 0x1E98
+    u8 unk1E9C[0x2604];
+    u32 busyFlags;          // 0x44A0 (bit 18)
+};
+
+/* The actor whose reflect action runs. */
+struct ReflectActor {
+    ReflectUnit *unit;
+};
+
+struct ReflectTarget {
+    u8 unk00[0x24];
+    struct { u8 unk00[0x62]; s16 id; } *source; // 0x24
+    u8 unk28[0x544];
+    s32 step;               // 0x56C
+    u8 unk570[0x994];
+    u32 delay;              // 0xF04
+};
+
+/* Each combatant's action slot is 0xF1C bytes; its kind byte is at +9. */
+enum { ACTION_SLOT_WORDS = 0x3C7, ACTION_SLOT_KIND = 9 };
 
 extern "C" {
+extern BtlActionGlobals g_btlAction;
+extern u32 g_btlActionReflect;
+extern void *DAT_00435d18;
+extern void *g_btlEvent;
+s32 nodeListCountActiveById(u32 list, ReflectTarget *target);
+s32 FUN_0027e3b8(void *event);
+void battleResetCounterAndFlag(void *owner);
+void btlReflectInitKind9(s32 layer, ReflectTarget *target, u32 context, u32 kind, u32 mode);
+void *FUN_003cfc84(ReflectActor *actor, ReflectTarget *target, s32 alternate);
+void FUN_003d0220(ReflectActor *actor, ReflectTarget *target, s32 alternate);
+void FUN_00229a3c(s32 a, ReflectTarget *target, s32 b, s32 c, s32 d);
+void FUN_002296f4(ReflectActor *actor, ReflectTarget *target, s32 id, s32 a, s32 b, s32 c);
 
-int FUN_002296f4(int *, int, int, int, int, int);
-int FUN_00229a3c(int, int, int, int, int);
-int battleResetCounterAndFlag(unsigned int);
-int btlReflectInitKind9(int, int, unsigned int, int, int);
-int *FUN_003cfc84(int *, int, int);
-int FUN_003d0220(int *, int, int);
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-extern unsigned char g_btlAction; /* 0x434278 */
-extern unsigned int g_btlActionReflect; /* 0x434290 */
-extern unsigned int DAT_00435d18; /* 0x435d18 */
-extern unsigned int g_btlEvent; /* 0x435d48 */
-
-/* Supplied declaration required: FUN_002296f4. */
-/* Supplied declaration required: FUN_00229a3c. */
-/* Supplied declaration required: battleResetCounterAndFlag. */
-/* Supplied declaration required: btlReflectInitKind9. */
-extern int FUN_0027e3b8(unsigned int);
-extern int nodeListCountActiveById(unsigned int, int);
-/* Supplied declaration required: FUN_003cfc84. */
-/* Supplied declaration required: FUN_003d0220. */
-
-
-typedef struct { unsigned char pad[9]; unsigned char f9; unsigned char pad2[0xf1c - 10]; } E;
-
-unsigned int FUN_003cbce4(int *param_1,int param_2)
-
+/* Drive one tick of the reflect action; true once it has switched the combatant's action kind. */
+u32 FUN_003cbce4(ReflectActor *actor, ReflectTarget *target)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int *q;
-  
-  temp_v0 = *param_1;
-  if (((*(unsigned int *)(temp_v0 + 0x44a0) & 0x40000) == 0) && ((*(unsigned int *)(temp_v0 + 0xe0) & 0x40000) != 0)) {
-    temp_v0 = nodeListCountActiveById(g_btlActionReflect,param_2);
-    if (temp_v0 == 0) {
-      q = (int *)(*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0x3c7;
-      *((char *)q + 9) = 1;
-      battleResetCounterAndFlag(DAT_00435d18);
-      return 1;
+    ReflectUnit *unit = actor->unit;
+    if ((unit->busyFlags & 0x40000) == 0 && (unit->flags & 0x40000) != 0) {
+        if (nodeListCountActiveById(g_btlActionReflect, target) != 0) {
+            return 0;
+        }
+        u32 *slot = &((u32 *)g_btlAction.data)[actor->unit->slotIndex * ACTION_SLOT_WORDS];
+        ((u8 *)slot)[ACTION_SLOT_KIND] = 1;
+        battleResetCounterAndFlag(DAT_00435d18);
+        return 1;
+    }
+    if (unit->state != 4) {
+        FUN_003d0220(actor, target, 0);
+        void *ready = FUN_003cfc84(actor, target, 0);
+        if (target->step == 0x20) {
+            btlReflectInitKind9(0, target, actor->unit->reflectContext, 9, 11);
+        }
+        if (target->step == 0x25) {
+            FUN_00229a3c(0, target, 0, 2, 0);
+        }
+        target->step = target->step + 1;
+        if (nodeListCountActiveById(g_btlActionReflect, target) > 0) {
+            return 0;
+        }
+        if (ready != NULL) {
+            target->delay = 0;
+            u32 *slot = &((u32 *)g_btlAction.data)[actor->unit->slotIndex * ACTION_SLOT_WORDS];
+            ((u8 *)slot)[ACTION_SLOT_KIND] = 0x1b;
+            return 1;
+        }
+        if (actor->unit->state != 4) {
+            return 0;
+        }
+    }
+    if (FUN_0027e3b8(g_btlEvent) == 0) {
+        FUN_003d0220(actor, target, 1);
+        void *ready = FUN_003cfc84(actor, target, 1);
+        target->step = target->step + 1;
+        if (nodeListCountActiveById(g_btlActionReflect, target) <= 0 && ready != NULL) {
+            target->delay = 0x1e;
+            FUN_002296f4(actor, target, target->source->id, 0, 0x11, 0x11);
+            u32 *slot = &((u32 *)g_btlAction.data)[actor->unit->slotIndex * ACTION_SLOT_WORDS];
+            ((u8 *)slot)[ACTION_SLOT_KIND] = 0x1b;
+            return 1;
+        }
     }
     return 0;
-  }
-  if (*(int *)(temp_v0 + 0x88) != 4) {
-    FUN_003d0220(param_1,param_2,0);
-    piVar2 = FUN_003cfc84(param_1,param_2,0);
-    if (*(int *)(param_2 + 0x56c) == 0x20) {
-      btlReflectInitKind9(0,param_2,*(unsigned int *)(*param_1 + 0x1e98),9,0xb);
-    }
-    if (*(int *)(param_2 + 0x56c) == 0x25) {
-      FUN_00229a3c(0,param_2,0,2,0);
-    }
-    *(int *)(param_2 + 0x56c) = *(int *)(param_2 + 0x56c) + 1;
-    temp_v0 = nodeListCountActiveById(g_btlActionReflect,param_2);
-    if (temp_v0 > 0) {
-      return 0;
-    }
-    if (piVar2 != (int *)0x0) {
-      *(unsigned int *)(param_2 + 0xf04) = 0;
-      q = (int *)(*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0x3c7;
-      *((char *)q + 9) = 0x1b;
-      return 1;
-    }
-    if (*(int *)(*param_1 + 0x88) != 4) {
-      return 0;
-    }
-  }
-  temp_v0 = FUN_0027e3b8(g_btlEvent);
-  if (temp_v0 == 0) {
-    FUN_003d0220(param_1,param_2,1);
-    piVar2 = FUN_003cfc84(param_1,param_2,1);
-    *(int *)(param_2 + 0x56c) = *(int *)(param_2 + 0x56c) + 1;
-    temp_v0 = nodeListCountActiveById(g_btlActionReflect,param_2);
-    if ((temp_v0 <= 0) && (piVar2 != (int *)0x0)) {
-      *(unsigned int *)(param_2 + 0xf04) = 0x1e;
-      FUN_002296f4(param_1,param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x62),0,0x11,0x11);
-      q = (int *)(*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0x3c7;
-      *((char *)q + 9) = 0x1b;
-      return 1;
-    }
-  }
-  return 0;
 }
-
-} /* extern "C" */
+}

@@ -9,10 +9,10 @@ struct Vector12View {
 };
 
 extern "C" {
-void FUN_002e32a4(s32 kind, ...);
+void _ZN4__rw10__rw_throwEiz(s32 kind, ...);
 u32 FUN_00301bd4(Vector12View* container);
 u32 vectorGrowCapacity_003078de(u32 size, Vector12View* container);
-const u32* wordRefMax(const u32* first, const u32* second);
+const u32* _ZSt3maxIjERKT_S2_S2_(const u32* first, const u32* second);
 void* rt_malloc(u32 bytes);
 void FUN_003078bc(u8* first, u8* last, u8* destination,
                   Vector12View* container);
@@ -24,7 +24,7 @@ void asdOperatorDeleteArray(void* allocation);
 extern "C" void FUN_001345a0(Vector12View* container, u32 requestedCount)
 {
     if (requestedCount > 0x15555555u) {
-        FUN_002e32a4(8, "", "",
+        _ZN4__rw10__rw_throwEiz(8, "", "",
                      requestedCount, 0x15555555u);
     }
 
@@ -33,7 +33,7 @@ extern "C" void FUN_001345a0(Vector12View* container, u32 requestedCount)
     if (capacity < requestedCount) {
         u32 growthCount = vectorGrowCapacity_003078de(
             FUN_00301bd4(container), container);
-        u32 allocationBytes = *wordRefMax(&requestedCount, &growthCount) * 12;
+        u32 allocationBytes = *_ZSt3maxIjERKT_S2_S2_(&requestedCount, &growthCount) * 12;
         u8* newStorage = static_cast<u8*>(rt_malloc(allocationBytes));
 
         FUN_003078bc(container->begin, container->end, newStorage, container);

@@ -1,40 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00398964` (_code @ 0x398964, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail computes the two part pointers in r5/r6 (first part r5, second r6) via add-chains + mov; built swaps the two registers. */
+#include "common.h"
+
+struct Part {
+    u8 unk00[0x8c];
+};
+
+struct PartOwner {
+    u8 unk000[0xa4];
+    s32 xA4;       // 0x0a4
+    u8 unkA8[4];
+    s32 xAC;       // 0x0ac
+    u8 unkB0[0x658];
+    Part parts[2]; // 0x708
+};
 
 extern "C" {
 
-int FUN_00296ee0(int, int);
-int FUN_002b8ee0(int, int);
-int FUN_002bf818(void);
+void FUN_002b8ee0(Part *part, s32 value);
+void FUN_002bf818(void);
+s32 vec2GetXInt(Part *part);
+s8 recordGetSignedFlags(const Part *part);
+void messageOwnerSetState(PartOwner *owner, s32 mode);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_00296ee0. */
-/* Supplied declaration required: FUN_002b8ee0. */
-extern unsigned int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf818. */
-
-
-void FUN_00398964(int param_1)
-
+// Reset the first part, copy its x position into the owner and start mode 2 when both parts are flagged.
+void FUN_00398964(PartOwner *owner)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  FUN_002b8ee0(param_1 + 0x708,0);
-  FUN_002bf818();
-  temp_v0 = vec2GetXInt(param_1 + 0x708);
-  *(unsigned int *)(param_1 + 0xa4) = temp_v0;
-  *(unsigned int *)(param_1 + 0xac) = temp_v0;
-  if ((*(char *)(param_1 + 0x792) != '\0') && (*(char *)(param_1 + 0x81e) != '\0')) {
-    FUN_00296ee0(param_1,2);
-    return;
-  }
-  return;
+    Part *first = &owner->parts[0];
+    FUN_002b8ee0(first, 0);
+    Part *second = &owner->parts[1];
+    FUN_002bf818();
+    s32 x = vec2GetXInt(first);
+    owner->xA4 = x;
+    owner->xAC = x;
+    if (recordGetSignedFlags(first) != 0 && recordGetSignedFlags(second) != 0) {
+        messageOwnerSetState(owner, 2);
+    }
 }
 
 } /* extern "C" */

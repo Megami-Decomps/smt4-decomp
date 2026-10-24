@@ -5,7 +5,7 @@
 extern "C" {
 
 int collisionTestProjectedSpherePlanes(...);
-int FUN_00276078(int);
+int mapFlagSlotsRetireByKey(int);
 int FUN_002878fc(...);
 int mapBlockBitSet(...);
 
@@ -31,7 +31,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Supplied declaration required: collisionTestProjectedSpherePlanes. */
-/* Supplied declaration required: FUN_00276078. */
+/* Supplied declaration required: mapFlagSlotsRetireByKey. */
 /* Supplied declaration required: FUN_002878fc. */
 /* Supplied declaration required: mapBlockBitSet. */
 
@@ -92,7 +92,7 @@ unsigned int FUN_002804ec(float *param_1)
                             (collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v4 + 4),
                                           (int)*(char *)(temp_v4 + 5),temp_v4),
                             (float)in_d10 <= temp_v11[0])))) {
-                          FUN_00276078((int)*(short *)(temp_v4 + 6));
+                          mapFlagSlotsRetireByKey((int)*(short *)(temp_v4 + 6));
                           FUN_002878fc((int)*(short *)(temp_v4 + 6));
                           DAT_0049fb62 = *(unsigned short *)(temp_v4 + 10);
                           temp_v6 = temp_v6 | 0x2000;
@@ -102,7 +102,7 @@ unsigned int FUN_002804ec(float *param_1)
                               (collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v4 + 4),
                                             (int)*(char *)(temp_v4 + 5),temp_v4),
                               (float)in_d10 <= temp_v11[0])) {
-                        FUN_00276078((int)*(short *)(temp_v4 + 6));
+                        mapFlagSlotsRetireByKey((int)*(short *)(temp_v4 + 6));
                         FUN_002878fc((int)*(short *)(temp_v4 + 6));
                         DAT_0049fb60 = *(unsigned short *)(temp_v4 + 10);
                         temp_v6 = temp_v6 | 0x800;

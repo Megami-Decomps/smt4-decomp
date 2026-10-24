@@ -1,48 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038b57c` (_code @ 0x38b57c, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the data block pointer twice and reads the case 2 handle through a register offset (0x2034) instead of the folded base + 0x2000 form */
+#include "common.h"
+
+struct GameDataA {
+    u8 unk0000[0x2034];  // 0x0000
+    u32 handle;          // 0x2034
+};
+
+struct GameGlobalsA {
+    u8 unk00[4];     // 0x00
+    GameDataA *data; // 0x04
+};
 
 extern "C" {
 
-int gameStateChange(int);
-int FUN_0040b730(...);
+extern GameGlobalsA g_gameGlobals; /* 0x588fd0 */
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+void FUN_0040b730(u32 handle, s32 mode, s32 arg);
+void gameStateChange(s32 state);
 
-extern unsigned char g_gameGlobals; /* 0x588fd0 */
-
-/* Supplied declaration required: gameStateChange. */
-/* Supplied declaration required: FUN_0040b730. */
-
-
-void FUN_0038b57c(int param_1)
-
+/* Calls FUN_0040b730 on the data block's handle with mode 0, 1 or 2, then switches to state 7. */
+void FUN_0038b57c(s32 mode)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  if (param_1 != 0) {
-    if (param_1 != 1) {
-      if (param_1 == 2) {
-        FUN_0040b730(*(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2034),2,7);
-      }
-      gameStateChange(7);
-      return;
+    switch (mode) {
+    case 0:
+        FUN_0040b730(g_gameGlobals.data->handle, 0, 7);
+        break;
+    case 1:
+        FUN_0040b730(g_gameGlobals.data->handle, 1, 7);
+        break;
+    case 2:
+        FUN_0040b730(g_gameGlobals.data->handle, 2, 7);
+        break;
     }
-    temp_v0 = *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2034);
-    temp_v1 = 1;
-  }
-  else {
-    temp_v0 = *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2034);
-    temp_v1 = 0;
-  }
-  FUN_0040b730(temp_v0,temp_v1,7);
-  gameStateChange(7);
-  return;
+    gameStateChange(7);
 }
 
 } /* extern "C" */

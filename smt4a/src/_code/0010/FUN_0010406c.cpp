@@ -8,10 +8,10 @@ int sysMemClear(unsigned char [32], int);
 int _ZN9Obj55aff4D1Ev(unsigned char [4]);
 int FUN_002e9c0c(void);
 int onlineStringSetFromRaw(int, unsigned char [256]);
-int FUN_002ea100(unsigned char [4], unsigned char [32]);
+int _ZN9Obj55aff4C1EPKc(unsigned char [4], unsigned char [32]);
 int FUN_002ea12c(void);
 int FUN_002ea198(int *);
-int FUN_002ea20c(int *);
+int _ZN15OnlineTimestampC1Ev(int *);
 int FUN_002ea214(int, unsigned int);
 int FUN_002ea2b4(int, unsigned int);
 int ptrHolderDestroy(unsigned char [8]);
@@ -43,15 +43,15 @@ typedef struct {
 extern unsigned char LAB_001041fc; /* 0x1041fc */
 
 /* Supplied declaration required: sysMemClear. */
-extern int operatorNew(unsigned int);
-extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
+extern int _Znwj(unsigned int);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: FUN_002e9c0c. */
 /* Supplied declaration required: onlineStringSetFromRaw. */
-/* Supplied declaration required: FUN_002ea100. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
 /* Supplied declaration required: FUN_002ea12c. */
 /* Supplied declaration required: FUN_002ea198. */
-/* Supplied declaration required: FUN_002ea20c. */
+/* Supplied declaration required: _ZN15OnlineTimestampC1Ev. */
 /* Supplied declaration required: FUN_002ea214. */
 extern unsigned int FUN_002ea268(void);
 extern unsigned int FUN_002ea2a8(unsigned char *, unsigned int);
@@ -118,7 +118,7 @@ LAB_00104110:
         temp_v19 = *(int *)(param_1 + 0xe8);
         temp_v20 = param_1 + 0x68;
         FUN_002e9c0c();
-        temp_v2 = operatorNew(0x1c);
+        temp_v2 = _Znwj(0x1c);
         temp_v1 = 0;
         if (temp_v2 != 0) {
           temp_v1 = FUN_002ea268();
@@ -127,7 +127,7 @@ LAB_00104110:
         FUN_002ea2b4(param_1 + 0x108,temp_v1);
         ptrHolderDestroy(temp_v23);
         FUN_002ea2e8(temp_v8);
-        FUN_002ea100(temp_v17,temp_v12);
+        _ZN9Obj55aff4C1EPKc(temp_v17,temp_v12);
         onlineStringSetFromRaw(*(int *)(param_1 + 0x10c) + 8,temp_v14);
         FUN_002ea314(temp_v8,temp_v0);
         if (*(char *)(*(int *)(param_1 + 0xe8) + 0x140) != '\0') {
@@ -148,13 +148,13 @@ LAB_00104110:
           return;
         }
         temp_v3 = 0x8001000d;
-        temp_v1 = FUN_002e7908(&temp_v4,(unsigned int *)&temp_v3);
+        temp_v1 = _ZN12OnlineResultC1ERKj(&temp_v4,(unsigned int *)&temp_v3);
         FUN_002ea214(param_1,temp_v1);
         _ZN9Obj55aff4D1Ev(temp_v17);
         FUN_002ea3a8(temp_v8);
         return;
       }
-      FUN_002ea20c(&temp_v5);
+      _ZN15OnlineTimestampC1Ev(&temp_v5);
       temp_v5 = temp_v5 - *(int *)(param_1 + 0x100);
       if (temp_v5 < *(int *)(param_1 + 0xf8)) {
         *(int *)(*(int *)(param_1 + 0xe8) + 0x74) = *(int *)(param_1 + 0xf8) - temp_v5;
@@ -162,14 +162,14 @@ LAB_00104110:
       }
       temp_v3 = 0x8001000b;
       puVar4 = &temp_v7;
-      temp_v1 = FUN_002e7908(puVar4,(unsigned int *)&temp_v3);
+      temp_v1 = _ZN12OnlineResultC1ERKj(puVar4,(unsigned int *)&temp_v3);
       FUN_002ea214(param_1,temp_v1);
       return;
     }
     temp_v3 = 0x80030065;
   }
   puVar4 = &temp_v4;
-  temp_v1 = FUN_002e7908(puVar4,(unsigned int *)&temp_v3);
+  temp_v1 = _ZN12OnlineResultC1ERKj(puVar4,(unsigned int *)&temp_v3);
   FUN_002ea214(param_1,temp_v1);
   return;
 }

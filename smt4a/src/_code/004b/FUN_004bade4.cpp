@@ -1,112 +1,84 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bade4` (_code @ 0x4bade4, 0x234 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the 0x900 and 0xf88 sub-struct bases into registers (r9/sl, 8-byte frame); member layout of the menu object is not recovered. */
+#include "common.h"
+#include "shard/W5_W5Match2_ScalarGetters.h"
 
-extern "C" {
-
-int FUN_00164b5c(int, int, unsigned int, int, int, int);
-int vec2GetXInt(int);
-int vec2GetYInt(int);
-int efctSetSpeed(void);
-int FUN_001835b4(int, int, int, unsigned int, unsigned int, int);
-int jobGetScalarValue(void);
-int FUN_0019de98(...);
-int FUN_0031d174(...);
-int FUN_004ba354(...);
-int flaggedValueHolderGetTotal(...);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: vec2GetYInt. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: jobGetScalarValue. */
-/* Supplied declaration required: FUN_0019de98. */
-extern int FUN_002a482c(int);
-/* Supplied declaration required: FUN_0031d174. */
-/* Supplied declaration required: FUN_004ba354. */
-/* Supplied declaration required: flaggedValueHolderGetTotal. */
-extern int rangeGetMinimumLimit(int);
-
-
-void FUN_004bade4(int param_1)
-
-{
-/* irregular: 10 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  
-  if ((*(int *)(param_1 + 8) != 0) && (*(char *)(param_1 + 0x9ec) == '\0')) {
-    jobGetScalarValue();
-    temp_v8 = param_1 + 200;
-    temp_v2 = vec2GetXInt(temp_v8);
-    temp_v3 = vec2GetYInt(temp_v8);
-    FUN_001835b4(2,0x1f,0x1f,temp_v2,temp_v3,0x1f);
-    FUN_001835b4(2,0x1f,0x20,temp_v2,temp_v3,0x1f);
-    temp_v4 = FUN_001834a4(0x1f,0x21);
-    temp_v0 = *(short *)(temp_v4 + 8);
-    temp_v1 = *(short *)(temp_v4 + 10);
-    temp_v4 = vec2GetXInt(temp_v8);
-    temp_v4 = temp_v4 + temp_v0;
-    temp_v8 = vec2GetYInt(temp_v8);
-    temp_v8 = temp_v1 + temp_v8;
-    efctSetSpeed();
-    FUN_00164b5c(2,0x1f,*(unsigned int *)(param_1 + 0x101c),temp_v4,temp_v8,0x1f);
-    if (*(int *)(param_1 + 0x1024) != -1) {
-      efctSetSpeed();
-      FUN_00164b5c(2,0x1f,*(unsigned int *)(param_1 + 0x1024),temp_v4,temp_v8,0x20);
-    }
-    temp_v4 = FUN_002a482c(param_1);
-    temp_v8 = rangeGetMinimumLimit(param_1);
-    temp_v7 = 0;
-    if (temp_v7 < temp_v8) {
-      do {
-        temp_v5 = FUN_0031d174(param_1);
-        if (temp_v5 != temp_v7) {
-          FUN_004ba354(param_1,temp_v7,temp_v4 + temp_v7,0,0x24);
-        }
-        temp_v7 = temp_v7 + 1;
-      } while (temp_v7 < temp_v8);
-    }
-    if (*(char *)(param_1 + 0x9ed) != '\0') {
-      if (*(char *)(param_1 + 0x9ee) == '\0') {
-        temp_v2 = 1;
-      }
-      else {
-        temp_v2 = 2;
-      }
-      temp_v3 = flaggedValueHolderGetTotal(param_1);
-      temp_v6 = FUN_0031d174(param_1);
-      FUN_004ba354(param_1,temp_v6,temp_v3,temp_v2,0x25);
-      temp_v4 = flaggedValueHolderGetTotal(param_1);
-      temp_v4 = *(int *)(param_1 + temp_v4 * 4 + 0x7ec) + 0x80;
-    }
-    else {
-      temp_v2 = flaggedValueHolderGetTotal(param_1);
-      temp_v3 = FUN_0031d174(param_1);
-      FUN_004ba354(param_1,temp_v3,temp_v2,0,0x24);
-      temp_v4 = 0;
-    }
-    FUN_0019de98(temp_v4,0xf4f4f4ff);
-    efctSetSpeed();
-    return;
-  }
-  return;
+namespace {
+struct SpriteInfo { u8 unk00[8]; s16 x; s16 y; };
+struct SlotMenu {
+    u8 unk00[8];
+    s32 active;          // 0x008
+    u8 unk0C[0xBC];
+    u8 position[0x8];    // 0x0C8 (vec2)
+    u8 unkD0[0x71C];
+    s32 slotValue[0x80]; // 0x7EC
+    u8 unk9EC;           // 0x9EC hidden
+    u8 hasSelection;     // 0x9ED
+    u8 selectionMode;    // 0x9EE
+    u8 unk9EF[0x599];
+    struct { u8 unk00[0x20]; f32 speed; } accent; // 0xF88
+    u8 unkFAC[0x70];
+    s32 spriteBase;      // 0x101C
+    u8 unk1020[4];
+    s32 spriteAccent;    // 0x1024
+};
 }
 
-} /* extern "C" */
+extern "C" {
+extern int vec2GetXInt(void *);
+extern int vec2GetYInt(void *);
+extern void efctSetSpeed(f32);
+extern f32 jobGetScalarValue(void);
+extern SpriteInfo *FUN_001834a4(u32, u32);
+extern void FUN_001835b4(s32, s32, u32, s32, s32, s32);
+extern void FUN_00164b5c(s32, s32, u32, s32, s32, s32);
+extern void FUN_0019de98(s32, u32);
+extern s32 FUN_002a482c(SlotMenu *);
+extern s32 rangeGetMinimumLimit(SlotMenu *);
+extern s32 FUN_0031d174(SlotMenu *);
+extern void FUN_004ba354(SlotMenu *, s32, s32, s32, s32);
+extern s32 flaggedValueHolderGetTotal(SlotMenu *);
+
+/* Draw the slot menu: frame sprites, per-slot cells and the cursor. */
+void FUN_004bade4(SlotMenu *menu)
+{
+    if (menu->active != 0 && menu->unk9EC == 0) {
+        f32 savedSpeed = jobGetScalarValue();
+        void *pos = menu->position;
+        s32 x = vec2GetXInt(pos);
+        s32 y = vec2GetYInt(pos);
+        FUN_001835b4(2, 0x1f, 0x1f, x, y, 0x1f);
+        FUN_001835b4(2, 0x1f, 0x20, x, y, 0x1f);
+        SpriteInfo *info = FUN_001834a4(0x1f, 0x21);
+        s32 dx = info->x;
+        s32 dy = info->y;
+        s32 sx = vec2GetXInt(pos) + dx;
+        s32 sy = dy + vec2GetYInt(pos);
+        efctSetSpeed(1.0f);
+        FUN_00164b5c(2, 0x1f, menu->spriteBase, sx, sy, 0x1f);
+        if (menu->spriteAccent != -1) {
+            efctSetSpeed(menu->accent.speed);
+            FUN_00164b5c(2, 0x1f, menu->spriteAccent, sx, sy, 0x20);
+        }
+        s32 first = FUN_002a482c(menu);
+        s32 count = rangeGetMinimumLimit(menu);
+        for (s32 i = 0; i < count; i++) {
+            if (FUN_0031d174(menu) != i) {
+                FUN_004ba354(menu, i, first + i, 0, 0x24);
+            }
+        }
+        s32 color;
+        if (menu->hasSelection != 0) {
+            s32 mode = (menu->selectionMode == 0) ? 1 : 2;
+            s32 total = flaggedValueHolderGetTotal(menu);
+            FUN_004ba354(menu, FUN_0031d174(menu), total, mode, 0x25);
+            color = menu->slotValue[flaggedValueHolderGetTotal(menu)] + 0x80;
+        } else {
+            s32 total = flaggedValueHolderGetTotal(menu);
+            FUN_004ba354(menu, FUN_0031d174(menu), total, 0, 0x24);
+            color = 0;
+        }
+        FUN_0019de98(color, 0xf4f4f4ff);
+        efctSetSpeed(savedSpeed);
+    }
+}
+}

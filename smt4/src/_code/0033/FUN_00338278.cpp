@@ -1,40 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00338278` (_code @ 0x338278, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct IdRecord {
+    u16 id;       // 0x00
+    u8 unk02[10];
+};
+
+struct RecordOwner {
+    u8 unk0000[0x224c];
+    u32 file;     // 0x224c
+};
 
 extern "C" {
 
-extern unsigned int dataTableFileGetTable(int, unsigned int);
-extern int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
+u32 dataTableFileGetTable(u32 file, u32 index);
+IdRecord *dataTableGetEntries(void);
+s32 dataTableGetCount(u32 table);
 
-
-unsigned short * FUN_00338278(int param_1,unsigned int param_2)
-
+// Find the record with the given id in the owner's first data table (NULL when absent).
+IdRecord *FUN_00338278(RecordOwner *owner, u32 id)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned short *puVar5;
-  
-  if (*(int *)(param_1 + 0x224c) == 0) {
-    return (unsigned short *)0x0;
-  }
-  temp_v0 = dataTableFileGetTable(*(int *)(param_1 + 0x224c),0);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  temp_v3 = 0;
-  if (temp_v3 < temp_v2) {
-    do {
-      puVar5 = (unsigned short *)(temp_v1 + temp_v3 * 0xc);
-      if (*puVar5 == param_2) {
-        return puVar5;
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < temp_v2);
-  }
-  return (unsigned short *)0x0;
+    if (owner->file == 0) {
+        return NULL;
+    }
+    u32 table = dataTableFileGetTable(owner->file, 0);
+    IdRecord *entries = dataTableGetEntries();
+    s32 count = dataTableGetCount(table);
+    s32 i = 0;
+    while (i < count) {
+        IdRecord *record = &entries[i];
+        if (record->id == id) {
+            return record;
+        }
+        i++;
+    }
+    return NULL;
 }
 
 } /* extern "C" */

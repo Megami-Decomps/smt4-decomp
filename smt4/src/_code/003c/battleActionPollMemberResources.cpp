@@ -25,7 +25,7 @@ void aocHandleButtons(u32 handle, u32 mode);
 s32 FUN_00294fe0(u32 handle);
 void modelAnimationEnsureData(u32 handle);
 void btlUiAddListedId(void *ui, u32 id);
-void FUN_003db5e8(BattleVersionResources *resources, BtlActionRecord *action, u32 id);
+void effectSlotStart(BattleVersionResources *resources, BtlActionRecord *action, u32 id);
 u32 FUN_003db0c0(BattleVersionResources *resources, BtlActionRecord *action);
 void FUN_003c0ae0(BtlMainState *state, BtlActionRecord *action);
 
@@ -81,7 +81,7 @@ void battleActionPollMemberResources(BtlMainState *state, BtlActionRecord *actio
         }
         if (ready) {
             btlUiAddListedId(g_btlUiBlock, resources->id);
-            FUN_003db5e8(DAT_00435d18, action, resources->identifiers[index]);
+            effectSlotStart(DAT_00435d18, action, resources->identifiers[index]);
             FUN_003db0c0(DAT_00435d18, action);
             FUN_003c0ae0(state, action);
         }

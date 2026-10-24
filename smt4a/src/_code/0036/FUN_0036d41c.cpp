@@ -3,9 +3,9 @@
 
 extern "C" {
 extern AsdCecProcessWork *g_cecProcess;
-u32 FUN_002e3138(u32 handle, s64 timeout);
+u32 svcWaitSynchronization1(u32 handle, s64 timeout);
 void FUN_002e3140(u32 result);
-void FUN_001a0d08(ThreadHandleState *thread);
+void nn_os_Thread_FinalizeImpl(ThreadHandleState *thread);
 u32 svcCloseHandle(u32 handle);
 void FUN_001469a8(void *thread);
 void asdMemFree(void *memory);
@@ -16,12 +16,12 @@ void FUN_0036d41c()
     if (work == 0) {
         return;
     }
-    u32 result = FUN_002e3138(work->syncHandle, -1);
+    u32 result = svcWaitSynchronization1(work->syncHandle, -1);
     if (result >> 31) {
         FUN_002e3140(result);
     }
     work->stopRequested = 1;
-    FUN_001a0d08(&work->thread);
+    nn_os_Thread_FinalizeImpl(&work->thread);
     if (work->thread.handle != 0) {
         svcCloseHandle(work->thread.handle);
         work->thread.handle = 0;

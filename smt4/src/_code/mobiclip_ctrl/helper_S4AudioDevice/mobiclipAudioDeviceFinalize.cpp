@@ -31,7 +31,7 @@ void FUN_002c3f5c(void *);
 void asdMemFreeNonNull(void *);
 void asdMemFree(void *);
 void sndVoiceFree(u32);
-void FUN_0010ff4c();
+void sndSystemShutdown();
 void dspComponentUnload();
 void FUN_0010fc90();
 
@@ -83,7 +83,7 @@ void mobiclipAudioDeviceFinalize()
     DAT_004c40f8.owner = -1;
     state->allocator->vtable->release(state->allocator, state->voices);
     state->allocator = NULL;
-    FUN_0010ff4c();
+    sndSystemShutdown();
     dspComponentUnload();
     FUN_0010fc90();
 }

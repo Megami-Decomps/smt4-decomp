@@ -33,7 +33,7 @@ struct ComparisonMenuScene {
 extern "C" {
 void pairCopy(const ComparisonMenuAnchor *, ComparisonMenuPoint *);
 void uiMenuAnchorGetOffset(const ComparisonMenuAnchor *, ComparisonMenuPoint *);
-void FUN_00230cc0(const ComparisonMenuAnchor *, u32, s32, s32, u32);
+void uiRectDrawAtBottomRight(const ComparisonMenuAnchor *, u32, s32, s32, u32);
 void FUN_00231bcc(const ComparisonMenuAnchor *, u32, s32, s32, u32, u32);
 s32 FUN_0029e924(ComparisonMenuSelection *);
 s32 rangeLimitMin(ComparisonMenuSelection *);
@@ -53,7 +53,7 @@ void scrollMenuDrawVisibleEntries(ComparisonMenuScene *scene)
         return;
 
     u32 layer = scene->layer;
-    FUN_00230cc0(&scene->anchor, 1, 0, 0, layer);
+    uiRectDrawAtBottomRight(&scene->anchor, 1, 0, 0, layer);
     FUN_00231bcc(&scene->anchor, 0x47c, 0, 0, layer, 1);
     FUN_00231bcc(&scene->anchor, 0x47d, 0, 0, layer, 1);
     FUN_00231bcc(&scene->anchor, 0x47e, 0, 0, layer, 1);

@@ -1,55 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e5478` (_code @ 0x2e5478, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the VFP register of the 1.0f/steps quotient differs (retail s1, built s0). */
+#include "common.h"
+
+struct FadeRates {
+    f32 in;  // 0x00
+    f32 out; // 0x04
+
+    FadeRates() {}
+    FadeRates(f32 a, f32 b) : in(a), out(b) {}
+};
+
+struct FadeJob {
+    u8 unk00[0xc];
+    FadeRates rates; // 0x0c
+};
 
 extern "C" {
 
-int scrGetArg(int);
-int SBORROW4(int, int);
-int VectorSignedToFloat(int, int);
+s32 scrGetArg(u32 index);
+FadeJob *jobGetWork(u32 job);
+s32 FUN_00203d74(void);
 
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int jobGetWork(unsigned int);
-extern int FUN_00203d74(void);
-/* Supplied declaration required: scrGetArg. */
-
-
-unsigned int FUN_002e5478(void)
-
+// Script command: set a job's fade rates from a step count (clamped to 4 while FUN_00203d74 reports true).
+u32 FUN_002e5478(void)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = FUN_00203d74();
-  temp_v3 = temp_v2 != 0;
-  temp_v2 = 0;
-  if (temp_v3) {
-    temp_v2 = temp_v1 - 4;
-  }
-  if ((temp_v3 && temp_v1 != 4) && temp_v2 < 0 == (temp_v3 && SBORROW4(temp_v1,4))) {
-    temp_v1 = 4;
-  }
-  temp_v2 = jobGetWork(temp_v0);
-  if (temp_v2 != 0) {
-    if (temp_v1 == 0) {
-      *(unsigned int *)(temp_v2 + 0xc) = 0x3f800000;
-      *(unsigned int *)(temp_v2 + 0x10) = 0;
+    u32 job = scrGetArg(0);
+    s32 steps = scrGetArg(1);
+    if (FUN_00203d74() != 0 && steps > 4) {
+        steps = 4;
     }
-    else {
-      *(unsigned int *)(temp_v2 + 0xc) = 0;
-      temp_v4 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      *(float *)(temp_v2 + 0x10) = 1.0f / temp_v4;
+    FadeJob *work = jobGetWork(job);
+    if (work != NULL) {
+        if (steps == 0) {
+            work->rates.in = 1.0f;
+            work->rates.out = 0.0f;
+        } else {
+            work->rates.in = 0.0f;
+            work->rates.out = 1.0f / steps;
+        }
     }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

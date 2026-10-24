@@ -1,4 +1,3 @@
-/* NON_MATCHING: text/task call argument scheduling adds handle moves and shifts the literal pool. */
 #include "shard/W6_W6Match5_CommonBackground.h"
 #include "sys/Task.h"
 #include "AsdSDK/AsdDebug.h"

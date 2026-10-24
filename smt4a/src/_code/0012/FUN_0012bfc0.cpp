@@ -24,7 +24,7 @@ typedef struct {
 extern unsigned char LAB_0012bce9; /* 0x12bce9 */
 extern unsigned char LAB_0012c0a4; /* 0x12c0a4 */
 
-extern unsigned int *FUN_002e7908(unsigned int *, unsigned int *);
+extern unsigned int *_ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
@@ -101,7 +101,7 @@ LAB_0012c018:
     }
   }
   temp_v7[0] = 0x80010004;
-  puVar3 = (unsigned int *)FUN_002e7908((unsigned int *)&temp_v4,temp_v7);
+  puVar3 = (unsigned int *)_ZN12OnlineResultC1ERKj((unsigned int *)&temp_v4,temp_v7);
   FUN_0030c800(param_1,puVar3);
   return;
 }

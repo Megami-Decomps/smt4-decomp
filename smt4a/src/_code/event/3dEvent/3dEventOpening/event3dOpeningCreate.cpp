@@ -45,7 +45,7 @@ extern const char DAT_0052f650[]; // event/oc/oc_start.bccam
 extern const char DAT_0052f638[]; // event/oc/oc_loop.bam
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void sysMemClear(void *data, u32 size);
-void FUN_0013c884(CameraMatrixCache *camera, s32 mode);
+void asdCameraInitializeDefaults(CameraMatrixCache *camera, s32 mode);
 void uiSetFloatPair(CameraMatrixCache *camera, f32 first, f32 second);
 void FUN_0014f0dc(CameraMatrixCache *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
 void FUN_001523b8(CameraMatrixCache *camera, s32 mode, f32 fieldOfView, f32 nearClip, f32 farClip, f32 aspect);
@@ -67,7 +67,7 @@ u32 event3dOpeningCreate(void)
             ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(OpeningEventWork), 1));
         OpeningEventWork *work = g_event3dOpening;
         sysMemClear(work, sizeof(OpeningEventWork));
-        FUN_0013c884(&work->camera.cache, 1);
+        asdCameraInitializeDefaults(&work->camera.cache, 1);
         work->eye.x = 0.0f;
         work->eye.y = 0.0f;
         work->eye.z = 0.0f;

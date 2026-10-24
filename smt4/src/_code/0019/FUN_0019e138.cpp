@@ -63,7 +63,7 @@ int FUN_0028c028(...);
 int FUN_0028c040(void);
 int btlGetMainState(void);
 int gameGlobalsSetSelected(int);
-int FUN_002bee58(int, int);
+int spriteStartAnimationByIndex(int, int);
 int FUN_002bf818(...);
 int FUN_002dc55c(void);
 int targetStateClear(unsigned int);
@@ -150,7 +150,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b70cc. */
 extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf818. */
 extern int jobGetWork(void);
@@ -273,7 +273,7 @@ unsigned int FUN_0019e138(void)
             if (temp_v1 >= 2) {
               *(unsigned short *)(temp_v11 + 0xe1c6) = 0;
               *(unsigned short *)(temp_v11 + 0xe1c4) = 4;
-              FUN_002bee58(temp_v11 + 0xe0ac,0xd);
+              spriteStartAnimationByIndex(temp_v11 + 0xe0ac,0xd);
             }
           }
           else {

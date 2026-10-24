@@ -1,46 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ce3ec` (_code @ 0x2ce3ec, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the stack placement of the two bonus records differs (retail: sp+4 and sp+20; ours sp+8 and sp+24 in a 44-byte frame instead of 36). */
+#include "shard/W5_W5Match7_EntrySort.h"
 
 extern "C" {
 
-int FUN_00192608(void);
-int equipmentGetCappedUpgradeBonuses(int, unsigned char [8]);
-
-/* stack frame of param_2: 2 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned short sp1C; /* 0x1c: local_1c */
-    unsigned short sp2C; /* 0x2c: local_2c */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00192608. */
-/* Supplied declaration required: equipmentGetCappedUpgradeBonuses. */
-
-
-int FUN_002ce3ec(unsigned short *param_1,unsigned short *param_2)
-
+/* Orders two equipment entries by descending (bonus + capped upgrade value) of one upgrade kind, then by ascending key. */
+s32 FUN_002ce3ec(const SortItem *left, const SortItem *right)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [8];
-  short temp_v4;
-  unsigned char temp_v5 [8];
-  short temp_v6;
-  
-  temp_v0 = (unsigned int)*param_1;
-  FUN_00192608();
-  temp_v1 = (unsigned int)*param_2;
-  FUN_00192608();
-  equipmentGetCappedUpgradeBonuses(*param_1,temp_v3);
-  equipmentGetCappedUpgradeBonuses(*param_2,temp_v5);
-  temp_v2 = ((int)temp_v6 + (int)*(char *)(temp_v1 + 0x33)) -
-          ((int)temp_v4 + (int)*(char *)(temp_v0 + 0x33));
-  if (temp_v2 == 0) {
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x20) - (unsigned int)*(unsigned short *)(temp_v1 + 0x20);
-  }
-  return temp_v2;
+    EntrySortData *leftData = dataTable08Sub2GetRecord(left->id);
+    EntrySortData *rightData = dataTable08Sub2GetRecord(right->id);
+    EntrySortBonus leftBonus;
+    EntrySortBonus rightBonus;
+    equipmentGetCappedUpgradeBonuses(left->id, &leftBonus);
+    equipmentGetCappedUpgradeBonuses(right->id, &rightBonus);
+    s32 order = rightBonus.valuesFrom1[1] + rightData->bonusesFrom1[1] - (leftBonus.valuesFrom1[1] + leftData->bonusesFrom1[1]);
+    if (order == 0) {
+        order = leftData->key - rightData->key;
+    }
+    return order;
 }
 
 } /* extern "C" */

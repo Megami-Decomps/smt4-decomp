@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ac444(unsigned char [12], int);
+int _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(unsigned char [12], int);
 int FUN_002ac780(...);
 int nw_snd_internal_SoundArchiveLoader_LoadImpl(int *, unsigned int, unsigned int, unsigned int);
 int nw_snd_internal_SoundArchiveLoader_LoadWaveArchiveImpl(int *, unsigned int, unsigned int, unsigned int);
@@ -23,7 +23,7 @@ typedef struct {
 
 extern int FUN_0014d478(int, int, unsigned int *);
 extern unsigned int *FUN_001523d8(int, int);
-/* Supplied declaration required: FUN_002ac444. */
+/* Supplied declaration required: _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv. */
 /* Supplied declaration required: FUN_002ac780. */
 /* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadImpl. */
 /* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadWaveArchiveImpl. */
@@ -69,7 +69,7 @@ void nw_snd_internal_SoundArchiveLoader_LoadWaveSound
       temp_v2 = FUN_0014d478(param_1[1],param_2,&temp_v4);
       temp_v3 = temp_v4;
       if (temp_v2 != 0) {
-        FUN_002ac444(temp_v11,temp_v1);
+        _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(temp_v11,temp_v1);
         temp_v6 = 0;
         temp_v7 = 0;
         temp_v8 = 0;

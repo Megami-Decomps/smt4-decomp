@@ -27,7 +27,7 @@ typedef struct {
 
 extern unsigned char DAT_00538904; /* 0x538904 */
 
-extern int *wordRefMax(unsigned int *, unsigned char *);
+extern int *_ZSt3maxIjERKT_S2_S2_(unsigned int *, unsigned char *);
 /* Supplied declaration required: FUN_002ea704. */
 
 
@@ -49,7 +49,7 @@ int FUN_00107724(fn_00107724_arg0 *param_1,unsigned int param_2,unsigned int par
   temp_v0 = (**(romwright_code **)(*piVar2 + 0x2c))();
   if (*(char *)(temp_v0 + 8) != '\0') {
     temp_v3 = 0x24;
-    piVar2 = (int *)wordRefMax((unsigned int *)&temp_v3,&DAT_00538904);
+    piVar2 = (int *)_ZSt3maxIjERKT_S2_S2_((unsigned int *)&temp_v3,&DAT_00538904);
     temp_v2 = temp_v2 - *piVar2;
   }
   else {

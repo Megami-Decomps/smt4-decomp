@@ -1,127 +1,85 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023c168` (_code @ 0x23c168, 0x218 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail derives the three table pointers as a running chain (+0x2100 each) from the first table; armcc computes the third from the base (+0x4200) and orders the stride stores differently. */
+#include "common.h"
+
+/* The codec's decoder state (allocated as 0x670 bytes); only the fields set up here are named. */
+struct MobiclipDecoderState {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 width;
+    /* 0x08 */ u32 height;
+    /* 0x0C */ u8 unk0C[0x30];
+    /* 0x3C */ u8 *tableA;
+    /* 0x40 */ u8 *tableB;
+    /* 0x44 */ u8 *tableC;
+    /* 0x48 */ u32 unk48;
+};
+
+/* A set of luma/chroma frame buffers: luma cleared to 0, chroma filled with 0x80. */
+struct MobiclipFrameSet {
+    /* 0x00 */ MobiclipDecoderState *decoder;
+    /* 0x04 */ u8 **frames;
+    /* 0x08 */ u32 frameCount;
+    /* 0x0C */ u32 lastFrame;
+    /* 0x10 */ u8 unk10[4];
+    /* 0x14 */ s32 flags;
+    /* 0x18 */ u32 stride;
+    /* 0x1C */ u32 unk1C;
+};
+
+/* The decoder's three lookup tables, stored back to back (the last is only partly used). */
+struct MobiclipTables {
+    u8 tables[3][0x2100];
+};
 
 extern "C" {
+extern MobiclipTables DAT_0053faa0;
 
-int callGlobalHook(...);
-int rt_memclr(int *, int, unsigned int, unsigned int, unsigned int);
+void *callGlobalHook(u32 size);
+void rt_memclr(void *destination, u32 size);
 
-/* stack frame of param_6: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_6_stack;
-
-extern unsigned char DAT_0053faa0; /* 0x53faa0 */
-extern unsigned char DAT_00541ba0; /* 0x541ba0 */
-extern unsigned char DAT_00543ca0; /* 0x543ca0 */
-
-/* Supplied declaration required: callGlobalHook. */
-/* Supplied declaration required: rt_memclr. */
-
-
-unsigned int FUN_0023c168(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,int param_5,int param_6)
-
+/* Creates the decoder state and frame buffers for the given size; returns 1 on success. */
+u32 FUN_0023c168(MobiclipFrameSet *set, u32 width, u32 height, u32 frameCount, s32 flags, s32 mode)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char *puVar3;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  unsigned char temp_v9;
-  
-  if ((param_6 != 0) && (param_6 == 1)) {
-    temp_v9 = param_2 == 0x400;
-    if (param_2 < 0x401) {
-      temp_v9 = param_5 == 0;
+    if (mode == 0 || mode != 1)
+        return 0;
+    if (!(width <= 0x400 && flags == 0))
+        return 0;
+    rt_memclr(set, 0x20);
+    MobiclipDecoderState *decoder = (MobiclipDecoderState *)callGlobalHook(0x670);
+    set->decoder = decoder;
+    if (decoder == NULL)
+        return 0;
+    u8 *table = DAT_0053faa0.tables[0];
+    decoder->tableA = table;
+    table += 0x2100;
+    decoder->tableB = table;
+    table += 0x2100;
+    decoder->tableC = table;
+    decoder->unk48 = 0;
+    decoder->width = width;
+    decoder->height = height;
+    set->stride = 0x400;
+    if (width <= 0x200)
+        set->stride = 0x200;
+    if (width <= 0x100)
+        set->stride = 0x100;
+    set->frameCount = frameCount;
+    set->unk1C = mode;
+    set->flags = flags;
+    set->frames = (u8 **)callGlobalHook(frameCount << 2);
+    if (set->frames == NULL)
+        return 0;
+    u32 total = set->stride * (height + (height >> 1) + 1);
+    for (u32 i = 0; i < frameCount; i++) {
+        u8 *frame = (u8 *)callGlobalHook(total);
+        set->frames[i] = frame;
+        if (frame == NULL)
+            return 0;
+        for (u32 j = 0; j < set->stride * height; j++)
+            set->frames[i][j] = 0;
+        for (s32 j = set->stride * height; j < (s32)total; j++)
+            set->frames[i][j] = 0x80;
     }
-    if (temp_v9) {
-      rt_memclr(param_1,0x20,param_3,param_4,param_4);
-      temp_v0 = callGlobalHook(0x670);
-      *param_1 = temp_v0;
-      if (temp_v0 != 0) {
-        *(unsigned char **)(temp_v0 + 0x3c) = &DAT_0053faa0;
-        *(unsigned char **)(temp_v0 + 0x40) = &DAT_00541ba0;
-        *(unsigned char **)(temp_v0 + 0x44) = &DAT_00543ca0;
-        *(unsigned int *)(temp_v0 + 0x48) = 0;
-        *(unsigned int *)(temp_v0 + 4) = param_2;
-        *(unsigned int *)(temp_v0 + 8) = param_3;
-        param_1[6] = 0x400;
-        if (param_2 < 0x201) {
-          param_1[6] = 0x200;
-        }
-        if (param_2 < 0x101) {
-          param_1[6] = 0x100;
-        }
-        param_1[2] = param_4;
-        param_1[7] = 1;
-        param_1[5] = param_5;
-        temp_v0 = callGlobalHook(param_4 << 2);
-        param_1[1] = temp_v0;
-        if (temp_v0 != 0) {
-          temp_v0 = param_1[6] * (param_3 + (param_3 >> 1) + 1);
-          temp_v7 = 0;
-          if (param_4 != 0) {
-            temp_v1 = param_3 & 1;
-            do {
-              puVar3 = (unsigned char *)callGlobalHook(temp_v0);
-              *(unsigned char **)(param_1[1] + temp_v7 * 4) = puVar3;
-              if (puVar3 == (unsigned char *)0x0) {
-                return 0;
-              }
-              if (param_1[6] * param_3 != 0) {
-                temp_v2 = param_1[6] & temp_v1;
-                if (temp_v2 == 1) {
-                  *puVar3 = 0;
-                }
-                temp_v3 = (unsigned int)(temp_v2 == 1);
-                if (temp_v2 <= param_1[6] * param_3 && param_1[6] * param_3 - temp_v2 != 0) {
-                  do {
-                    temp_v2 = temp_v2 + 2;
-                    *(unsigned char *)(*(int *)(param_1[1] + temp_v7 * 4) + temp_v3) = 0;
-                    *(unsigned char *)(*(int *)(param_1[1] + temp_v7 * 4) + temp_v3 + 1) = 0;
-                    temp_v3 = temp_v3 + 2;
-                  } while (temp_v2 <= param_1[6] * param_3 && param_1[6] * param_3 - temp_v2 != 0);
-                }
-              }
-              temp_v4 = param_1[6] * param_3;
-              temp_v2 = temp_v0 - temp_v4;
-              if (0 < (int)temp_v2) {
-                temp_v5 = 0;
-                if (temp_v0 - temp_v4 == 0 || temp_v0 < temp_v4) {
-                  temp_v3 = 0;
-                }
-                else {
-                  temp_v3 = temp_v2 & 1;
-                  if (temp_v3 == 1) {
-                    temp_v5 = 1;
-                    *(unsigned char *)(*(int *)(param_1[1] + temp_v7 * 4) + temp_v4) = 0x80;
-                  }
-                }
-                for (; (int)temp_v3 < (int)temp_v2; temp_v3 = temp_v3 + 2) {
-                  temp_v8 = temp_v4 + temp_v5;
-                  temp_v6 = temp_v5 + 1;
-                  temp_v5 = temp_v5 + 2;
-                  *(unsigned char *)(*(int *)(param_1[1] + temp_v7 * 4) + temp_v8) = 0x80;
-                  *(unsigned char *)(*(int *)(param_1[1] + temp_v7 * 4) + temp_v4 + temp_v6) = 0x80;
-                }
-              }
-              temp_v7 = temp_v7 + 1;
-            } while (temp_v7 < param_4);
-          }
-          param_1[3] = param_4 - 1;
-          return 1;
-        }
-      }
-    }
-  }
-  return 0;
+    set->lastFrame = frameCount - 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

@@ -1,41 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ccbf0` (_code @ 0x4ccbf0, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the polynomial and the clamp match; remaining differences are the table-lookup block (retail places it after the epilogue instead of predicating it) and the literal-pool load order. */
+#include "common.h"
 
 extern "C" {
 
-int dataTableGet(int, int);
+void *dataTableGet(u32 id, u32 type);
+s32 *dataTableGetEntries(void);
+s32 gameGetUnlockedCountLimit(void);
 
-/* Supplied declaration required: dataTableGet. */
-extern int dataTableGetEntries(void);
-extern int gameGetUnlockedCountLimit(void);
-
-
-unsigned int FUN_004ccbf0(int param_1)
-
+/* Experience needed for `level`: from table 9 below level 99, a polynomial above (capped at 999999), 0 at or past the unlocked limit. */
+u32 FUN_004ccbf0(s32 level)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  dataTableGet(9,1);
-  temp_v0 = dataTableGetEntries();
-  temp_v1 = gameGetUnlockedCountLimit();
-  if (param_1 >= temp_v1) {
-    temp_v2 = 0;
-  }
-  else {
-    if (param_1 < 99) {
-      return *(unsigned int *)((temp_v0 + param_1 * 4) - 4);
+    dataTableGet(9, 1);
+    s32 *table = dataTableGetEntries();
+    s32 limit = gameGetUnlockedCountLimit();
+
+    u32 value;
+
+    if (level >= limit) {
+        return 0;
     }
-    temp_v2 = param_1 * param_1 * 3 + (unsigned int)(param_1 * param_1 * param_1) / 100 + param_1 * 0xdb8 +
-            0x184c6;
-    if (temp_v2 >= 1000000) {
-      temp_v2 = 999999;
+    if (level >= 99) {
+        value = level * level * 3 + (u32)(level * level * level) / 100 + level * 1755 * 2 + level * 2 + 99526;
+        if (value > 999999) {
+            value = 999999;
+        }
+        return value;
     }
-  }
-  return temp_v2;
+    return table[level - 1];
 }
 
 } /* extern "C" */

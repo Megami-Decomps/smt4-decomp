@@ -20,7 +20,7 @@ const FusionCatalogState *FUN_002a0d0c(void);
 s32 devilIsAvailable(void *, u16);
 s32 FUN_0029ea68(u16);
 s32 FUN_0029e9cc(u16);
-s32 FUN_0029cde0(const u16 *, s32, u16);
+s32 arrayContainsU16(const u16 *, s32, u16);
 void memClear(void *, u32);
 void rt_memclr(void *, u32);
 s32 FUN_001f6524(const void *, const void *);
@@ -44,7 +44,7 @@ void uniteRebuildFusionCatalog(void)
             if (FUN_0029ea68(record->id) || FUN_0029e9cc(record->id)) {
                 if (!options->race || options->race == record->race)
                     work->catalogIV.demons[demonCount++] = record->id;
-                if (!FUN_0029cde0(work->catalogIV.races, raceCount, record->race))
+                if (!arrayContainsU16(work->catalogIV.races, raceCount, record->race))
                     work->catalogIV.races[raceCount++] = record->race;
             }
         }

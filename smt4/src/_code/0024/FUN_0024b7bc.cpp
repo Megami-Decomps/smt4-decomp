@@ -1,49 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024b7bc` (_code @ 0x24b7bc, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads width/height with one ldrd and holds the constants in a different register set (push {r4}); loop and arithmetic match. */
+#include "common.h"
+
+struct GridRecord {
+    u8 unk00[0x10];
+    s32 value; // 0x10
+    u8 unk14[0x14];
+};
+
+struct GridShape {
+    u8 unk00[0xc0];
+    s32 width;  // 0xc0
+    s32 height; // 0xc4
+};
+
+struct GridOwner {
+    u8 unk00[4];
+    s32 first;           // 0x04
+    u8 unk08[0x10];
+    GridRecord *records; // 0x18
+    u8 unk1c[4];
+    GridShape *shape;    // 0x20
+};
 
 extern "C" {
 
-typedef struct fn_0024b7bc_arg0 fn_0024b7bc_arg0;
-struct fn_0024b7bc_arg0 {
-    unsigned char pad_0x0[0x4];
-    int field_0x4; /* +0x4 */
-    unsigned char pad_0x8[0x10];
-    int field_0x18; /* +0x18 */
-    unsigned char pad_0x1c[0x4];
-    void *field_0x20; /* +0x20 */
-};
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_2_stack;
-
-
-void FUN_0024b7bc(fn_0024b7bc_arg0 *param_1,int param_2)
-
+// Clear the value of every record in the block that `record` heads (width * height records per block).
+void FUN_0024b7bc(GridOwner *owner, GridRecord *record)
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  
-  temp_v1 = *(int *)((int)param_1->field_0x20 + 0xc0) * *(int *)((int)param_1->field_0x20 + 0xc4);
-  if ((temp_v1 != 0) &&
-     (temp_v0 = param_1->field_0x18 +
-              (((unsigned int)(param_2 - param_1->field_0x18) / 0x28) * temp_v1 + param_1->field_0x4) * 0x28,
-     0 < (int)temp_v1)) {
-    puVar2 = (unsigned int *)(temp_v0 - 0x18);
-    if ((temp_v1 & 1) != 0) {
-      puVar2 = (unsigned int *)(temp_v0 + 0x10);
-      *puVar2 = 0xffffffff;
+    u32 count = owner->shape->width * owner->shape->height;
+    if (count != 0) {
+        GridRecord *block = &owner->records[(u32)((u8 *)record - (u8 *)owner->records) / sizeof(GridRecord) * count + owner->first];
+        for (s32 i = 0; i < (s32)count; i++) {
+            block[i].value = -1;
+        }
     }
-    for (temp_v0 = (int)temp_v1 >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
-      puVar2[10] = 0xffffffff;
-      puVar2 = puVar2 + 0x14;
-      *puVar2 = 0xffffffff;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

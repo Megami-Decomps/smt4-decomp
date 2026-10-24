@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001244a8(void);
-int vectorCopyHeader(int, int *);
+int _ZN18OnlineResultRecordaSERKS_(int, int *);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,8 +14,8 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_001244a8. */
-/* Supplied declaration required: vectorCopyHeader. */
-extern int refIsNonNegative(int);
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
+extern int _ZNK18OnlineResultRecord7isValidEv(int);
 
 
 void FUN_004d9720(int param_1,int param_2)
@@ -31,8 +31,8 @@ void FUN_004d9720(int param_1,int param_2)
   temp_v3 = *(unsigned int *)(param_2 + 0x40);
   temp_v2 = *(unsigned int *)(param_2 + 0x38);
   uStack_14 = *(unsigned int *)(param_2 + 0x3c);
-  vectorCopyHeader(param_1 + 0x30,&temp_v2);
-  temp_v0 = refIsNonNegative(param_1 + 0x30);
+  _ZN18OnlineResultRecordaSERKS_(param_1 + 0x30,&temp_v2);
+  temp_v0 = _ZNK18OnlineResultRecord7isValidEv(param_1 + 0x30);
   if (temp_v0 != 0) {
     *(unsigned int *)(param_1 + 0x28) = 0;
   }

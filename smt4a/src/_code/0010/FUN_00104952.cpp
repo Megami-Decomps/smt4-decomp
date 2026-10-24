@@ -28,7 +28,7 @@ extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002ea734. */
 extern int wordRefsDiffer_002ea764(int *, int *);
 /* Supplied declaration required: FUN_002eab08. */
-extern unsigned long long FUN_002eab1c(unsigned char *, int *);
+extern unsigned long long _ZmiRK15OnlineTimestampS1_(unsigned char *, int *);
 /* Supplied declaration required: FUN_002eab2a. */
 
 
@@ -58,7 +58,7 @@ int FUN_00104952(int *param_1)
   }
   else {
     FUN_002eab08(temp_v10);
-    temp_v4 = FUN_002eab1c(temp_v10,piVar5);
+    temp_v4 = _ZmiRK15OnlineTimestampS1_(temp_v10,piVar5);
     temp_v3 = (int)((unsigned long long)temp_v4 >> 0x20);
     temp_v0 = (unsigned int)temp_v4;
     temp_v1 = 0x19 - temp_v0;

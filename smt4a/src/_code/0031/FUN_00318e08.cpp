@@ -1,34 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00318e08` (_code @ 0x318e08, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only r5/r6 are swapped (retail keeps the output pointer in r6 and the last-frame flag in r5). */
+#include "common.h"
 
 extern "C" {
 
-extern int lerpIntSplitClamped(int, int, int, int);
+s32 lerpIntSplitClamped(s32 from, s32 to, s32 frame, s32 frames);
 
-
-unsigned int FUN_00318e08(int *param_1,int param_2,int param_3,int param_4,int param_5)
-
+/* Interpolates `from` towards `to` for the current frame; returns 1 (and snaps to `to`) once it is reached. */
+u32 FUN_00318e08(s32 *value, s32 frames, s32 from, s32 to, s32 frame)
 {
-  int temp_v0;
-  
-  temp_v0 = lerpIntSplitClamped(param_3,param_4,param_2,param_5);
-  *param_1 = temp_v0;
-  if (param_4 - param_3 >= 1) {
-    if (param_4 <= temp_v0) {
-      *param_1 = param_4;
-      return 1;
+    bool lastFrame = false;
+    *value = lerpIntSplitClamped(from, to, frames, frame);
+    if (frame == frames) {
+        lastFrame = true;
     }
-  }
-  else if (temp_v0 <= param_4) {
-    *param_1 = param_4;
+    if (to - from > 0) {
+        if (*value >= to) {
+            *value = to;
+            return 1;
+        }
+    } else if (*value <= to) {
+        *value = to;
+        return 1;
+    }
+    if (!lastFrame) {
+        return 0;
+    }
+    *value = to;
     return 1;
-  }
-  if (param_5 != param_2) {
-    return 0;
-  }
-  *param_1 = param_4;
-  return 1;
 }
 
 } /* extern "C" */

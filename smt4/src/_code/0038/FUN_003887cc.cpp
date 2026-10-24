@@ -6,14 +6,14 @@
 
 extern "C" {
 
-u32 FUN_0015dd58(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
+u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
 int FUN_002348a8(...);
 int asdFsIsSdCardDetected(...);
 int legacyResourceIdRemap(...);
 int byteIsAtLeast100(...);
 int FUN_002b486c(...);
 int FUN_002b4b88(...);
-int FUN_002ba968(...);
+int _ZN7AocMain12queueRequestE17RequestParametersji(...);
 int _ZN18WindowStatusResultC1Ej(...);
 int FUN_002bcc60(...);
 int FUN_002c526c(...);
@@ -46,7 +46,7 @@ extern unsigned char LAB_003f6fa4; /* 0x3f6fa4 */
 extern unsigned char LAB_003f7000; /* 0x3f7000 */
 extern int g_aocMain; /* 0x432fc8 */
 
-/* Supplied declaration required: FUN_0015dd58. */
+/* Supplied declaration required: _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle. */
 extern int recordIsEnabledAndPresent(int);
 /* Supplied declaration required: FUN_002348a8. */
 /* Supplied declaration required: asdFsIsSdCardDetected. */
@@ -56,7 +56,7 @@ extern int objGetFlagBit0(int);
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002b486c. */
 /* Supplied declaration required: FUN_002b4b88. */
-/* Supplied declaration required: FUN_002ba968. */
+/* Supplied declaration required: _ZN7AocMain12queueRequestE17RequestParametersji. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: FUN_002bcc60. */
@@ -322,13 +322,13 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
       }
       else if ((char)*piVar11 != -0x38) {
         {
-          RequestParameters parameters = {{
+          RequestParameters parameters(
             static_cast<u32>(*piVar11), static_cast<u32>(*piVar1),
             static_cast<u32>(piVar1[1]), static_cast<u32>(piVar1[2]),
             static_cast<u32>(piVar1[3])
-          }};
-          QueuedRequestHandle handle = {parameters.words[1], parameters.words[2]};
-          temp_v3 = FUN_0015dd58(reinterpret_cast<QueuedRequestTokenState*>(g_aocMain),
+          );
+          QueuedRequestHandle handle = {parameters.word(1), parameters.word(2)};
+          temp_v3 = _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(reinterpret_cast<QueuedRequestTokenState*>(g_aocMain),
                                 &parameters, handle);
         }
         if (temp_v3 != 0) {
@@ -379,7 +379,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
             iStack_64 = piVar1[2];
             iStack_60 = piVar1[3];
           }
-          FUN_002ba968(g_aocMain,ppuVar9);
+          _ZN7AocMain12queueRequestE17RequestParametersji(g_aocMain,ppuVar9);
           return;
         }
         temp_v8 = (unsigned char *)*piVar11;
@@ -395,7 +395,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
       temp_v14 = (unsigned char *)piVar1[1];
       temp_v15 = (unsigned char *)piVar1[2];
       iStack_38 = piVar1[3];
-      FUN_002ba968(g_aocMain,&temp_v12);
+      _ZN7AocMain12queueRequestE17RequestParametersji(g_aocMain,&temp_v12);
       return;
     }
   }

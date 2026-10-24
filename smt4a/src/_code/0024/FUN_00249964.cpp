@@ -5,7 +5,7 @@ extern "C" {
 extern LmapSceneA *g_lmapScene;
 void FUN_0040ba38(LmapScript *owner, u32 selector);
 void FUN_0040b730(LmapScript *owner, u8 channel, u32 selector);
-void FUN_0040b9ac(LmapScript *owner, u8 channel, u32 value, u32 selector);
+void playerModelLoadByIndex(LmapScript *owner, u8 channel, u32 value, u32 selector);
 
 /* Initializes the three model channels, restoring their saved values when requested. */
 void FUN_00249964(void)
@@ -17,7 +17,7 @@ void FUN_00249964(void)
         }
     } else {
         for (s32 i = 0; i < 3; ++i) {
-            FUN_0040b9ac(g_lmapScene->script, static_cast<u8>(i), g_lmapScene->channelValues[i], 7);
+            playerModelLoadByIndex(g_lmapScene->script, static_cast<u8>(i), g_lmapScene->channelValues[i], 7);
         }
     }
 }

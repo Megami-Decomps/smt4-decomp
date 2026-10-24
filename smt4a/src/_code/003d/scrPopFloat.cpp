@@ -1,41 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrPopFloat` (_code @ 0x3d3508, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the four-way switch on the value type is compiled as a compare chain; retail uses a jump table (and shares the int-to-float conversion of cases 0 and 2, loading 0.0f first). */
+#include "shard/W4_W4Match2_ScrStack.h"
 
 extern "C" {
 
-int VectorSignedToFloat(int, int);
+extern s32 DAT_0061889c[0x180]; /* script integer variables (g_scrIntVars) */
+extern f32 DAT_00618e9c[0x180]; /* script float variables (g_scrFloatVars) */
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-
-
-int scrPopFloat(int param_1)
-
+/* Pops the top value of the script stack and returns it as a float, converting int values and
+ * resolving variable references. */
+f32 scrPopFloat(ScriptStack *stack)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int in_fpscr;
-  
-  temp_v0 = *(int *)(param_1 + 0x1c) - 1;
-  *(int *)(param_1 + 0x1c) = temp_v0;
-  switch(*(unsigned char *)(temp_v0 + param_1 + 0x20)) {
-  case 0:
-    param_1 = param_1 + temp_v0 * 4;
-    temp_v0 = *(int *)(param_1 + 0x3c);
-    break;
-  case 1:
-    return param_1 + temp_v0 * 4;
-  case 2:
-    param_1 = *(int *)(*(int *)(param_1 + temp_v0 * 4 + 0x3c) * 4 + 0x61889c);
-    temp_v0 = param_1;
-    break;
-  case 3:
-    return *(int *)(param_1 + temp_v0 * 4 + 0x3c) * 4 + 0x618e9c;
-  default:
-    return param_1;
-  }
-  VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  return param_1;
+    u8 *types = stack->types;
+    s32 slot = --stack->count;
+
+    switch (types[slot]) {
+    case SCR_VALUE_INT:
+        return (f32)stack->values[slot].i;
+    case SCR_VALUE_FLOAT:
+        return stack->values[slot].f;
+    case SCR_VALUE_INT_VAR:
+        return (f32)DAT_0061889c[stack->values[slot].i];
+    case SCR_VALUE_FLOAT_VAR:
+        return DAT_00618e9c[stack->values[slot].i];
+    default:
+        return 0.0f;
+    }
 }
 
 } /* extern "C" */

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00244ee0(...);
+int devilGetCategoryTableId(...);
 int mapGetSelectedRecordCategoryTable(void);
 int playerGetMappedCategory(void);
 int FUN_002b6db0(...);
@@ -48,7 +48,7 @@ extern unsigned char LAB_002f25c0; /* 0x2f25c0 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00244ee0. */
+/* Supplied declaration required: devilGetCategoryTableId. */
 extern unsigned int dataTable16Sub2GetRecordS64(unsigned int);
 /* Supplied declaration required: mapGetSelectedRecordCategoryTable. */
 extern int FUN_0025cc54(void);
@@ -420,7 +420,7 @@ void FUN_002f1558(int param_1)
       temp_v9 = 0;
       if (temp_v3 != 0) {
         temp_v1 = *(short *)(temp_v3 + 0x46);
-        FUN_00244ee0(temp_v1);
+        devilGetCategoryTableId(temp_v1);
         temp_v6 = (int)temp_v1;
         temp_v16 = 0;
       }

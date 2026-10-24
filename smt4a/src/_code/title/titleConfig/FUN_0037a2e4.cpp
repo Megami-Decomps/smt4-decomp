@@ -1,127 +1,88 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037a2e4` (_code @ 0x37a2e4, 0x248 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the save-block byte reads (0x27E90..0x27E94) and the settings global take different registers/address forms (retail loads each offset from a literal, ours shares one base), and the frame needs r7 */
+#include "title/titleConfig.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int FUN_0014e188(...);
-int asdProcessCreateSimple(...);
-int paramsInit(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int sysPlaySe(...);
-int uiSpriteSetKeyframe(...);
-int uiSpriteSetImageKeyframe(...);
-int FUN_0019de98(...);
-int wordPairCopy(...);
-int FUN_00203b40(...);
-int asdLoadFileAsyncSimple(...);
-int fillTwoWordsWithByte(...);
-int paramsClearPacket(...);
+extern TitleConfigA *g_titleConfig;
+extern u8 DAT_00536bec[0x60]; /* two 0x30-byte tables */
 
-/* stack frame of void: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
+struct TitleConfigSettings {
+    /* 0x0 */ u8 music;
+    /* 0x1 */ u8 sound;
+    /* 0x2 */ u8 voice;
+    /* 0x3 */ u8 auxiliary;
+    /* 0x4 */ u8 changed;
+    /* 0x5 */ u8 unk5[3];
+};
+extern TitleConfigSettings DAT_00588fc0;
 
-extern unsigned char LAB_002a0b58; /* 0x2a0b58 */
-extern int titleConfigDestroy(...); /* 0x32b9ac */
-extern int FUN_0032ba8c(...); /* 0x32ba8c */
-extern unsigned char LAB_0037a570; /* 0x37a570 */
-extern unsigned char LAB_0037a588; /* 0x37a588 */
-extern unsigned char LAB_0037a5a0; /* 0x37a5a0 */
-extern unsigned char LAB_0037a5b0; /* 0x37a5b0 */
-extern unsigned char DAT_00536bec; /* 0x536bec */
-extern unsigned char DAT_00536c1c; /* 0x536c1c */
-extern unsigned char DAT_00588fc0; /* 0x588fc0 */
-extern unsigned char DAT_00588fc1; /* 0x588fc1 */
-extern unsigned char DAT_00588fc2; /* 0x588fc2 */
-extern unsigned char DAT_00588fc4; /* 0x588fc4 */
-extern unsigned int *g_titleConfig; /* 0x589164 */
+void FUN_002a0b58(void);
+void titleConfigDestroy(void);
+void FUN_0032ba8c(void);
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
+u32 asdProcessCreateSimple(const char *name, s32 priority, u32 a, u32 b, void (*main)(void),
+                           void (*destroy)(void), void *owner);
+u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*draw)(void), void (*destroy)(void),
+                   void *owner, u32 job);
+void paramsClearPacket(Params002c312c *params);
+void paramsInit(Params002c312c *params, const u8 *a, s32 aSize, const u8 *b, s32 bSize, s32, s32, s32, s32,
+                s32, s32);
+void FUN_0014e188(void *sprite, s32 anim, s32 frame, void *source, f32 scale, s32 layer);
+void uiSpriteSetKeyframe(void *sprite, s32 key, s32 restart);
+void uiSpriteSetImageKeyframe(void *sprite, s32 image, s32 restart);
+void FUN_00203b40(void *cursor, s32 a, s32 b, s32 c, s32 d, s32 e);
+void fillTwoWordsWithByte(void *destination, u32 value);
+void asdLoadFileAsyncSimple(const char *path, void **resource, s32 mode);
+void sysPlaySe(s32 sound);
+void FUN_0019de98(s32 channel, u32 color);
+s32 campIsState85(void);
+u8 *gameDataBlocksGetSaveData(void);
+u32 categoryGetThresholdIndex(u8 value);
+u32 findByteThresholdTier(u8 value);
+u32 thresholdIndexFind(u8 value);
+void wordPairCopy(void *destination, const void *source);
 
-extern int gameDataBlocksGetSaveData(void);
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: taskCreateDraw. */
-extern int campIsState85(void);
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: wordPairCopy. */
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-extern unsigned int findByteThresholdTier(unsigned char);
-extern unsigned int categoryGetThresholdIndex(unsigned char);
-extern unsigned int thresholdIndexFind(unsigned char);
-/* Supplied declaration required: fillTwoWordsWithByte. */
-/* Supplied declaration required: paramsClearPacket. */
-
-
+/* Creates the config menu: its block, process and draw task, window sprite and cursor, then loads
+ * the saved settings (or the defaults) into the menu. */
 void FUN_0037a2e4(void)
-
 {
-/* irregular: 16 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x160,1);
-  puVar2 = &LAB_0037a570;
-  g_titleConfig = puVar1;
-  asdProcessCreateSimple(&LAB_0037a570,4,0,0,&LAB_002a0b58,titleConfigDestroy,puVar1);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_0037a588,0xea,0,0,FUN_0032ba8c,0,0,puVar2);
-  paramsClearPacket(puVar1 + 0xf);
-  paramsInit(puVar1 + 0xf,&DAT_00536bec,0x30,&DAT_00536c1c,0x30,0,0,0,0,0,0);
-  temp_v1 = 0x3f800000;
-  FUN_0014e188(puVar1 + 0x17,0x24,0,puVar1 + 0xf,0xc9);
-  uiSpriteSetKeyframe(puVar1 + 0x17,2,0);
-  uiSpriteSetImageKeyframe(puVar1 + 0x17,0);
-  puVar1[0x3a] = temp_v1;
-  puVar1[0x3b] = 0x1e;
-  FUN_00203b40(puVar1 + 0x3c,3,3,1,0,1);
-  puVar1[2] = 0;
-  *(unsigned short *)((int)puVar1 + 0x1a) = 0;
-  fillTwoWordsWithByte(puVar1 + 7,0xffffffff);
-  *(unsigned short *)(puVar1 + 9) = 0;
-  asdLoadFileAsyncSimple(&LAB_0037a5a0,puVar1 + 0x55,0);
-  asdLoadFileAsyncSimple(&LAB_0037a5b0,puVar1 + 0x56,0);
-  sysPlaySe(0x9b);
-  FUN_0019de98(0,0xf4f4f4ff);
-  temp_v0 = campIsState85();
-  if ((temp_v0 != 0) && (temp_v0 = gameDataBlocksGetSaveData(), *(char *)(temp_v0 + 0x27e94) != '\0')) {
-    temp_v1 = categoryGetThresholdIndex(*(unsigned char *)(temp_v0 + 0x27e90));
-    puVar1[10] = temp_v1;
-    temp_v1 = findByteThresholdTier(*(unsigned char *)(temp_v0 + 0x27e91));
-    puVar1[0xb] = temp_v1;
-    temp_v1 = thresholdIndexFind(*(unsigned char *)(temp_v0 + 0x27e92));
-    puVar1[0xc] = temp_v1;
-    temp_v1 = *(unsigned int *)(temp_v0 + 0x27e94);
-    puVar1[0xd] = *(unsigned int *)(temp_v0 + 0x27e90);
-    puVar1[0xe] = temp_v1;
-    *(unsigned char *)(puVar1 + 0xe) = DAT_00588fc4;
-    return;
-  }
-  temp_v1 = categoryGetThresholdIndex(DAT_00588fc0);
-  puVar1[10] = temp_v1;
-  temp_v1 = findByteThresholdTier(DAT_00588fc1);
-  puVar1[0xb] = temp_v1;
-  temp_v1 = thresholdIndexFind(DAT_00588fc2);
-  puVar1[0xc] = temp_v1;
-  wordPairCopy(puVar1 + 0xd,&DAT_00588fc0);
-  return;
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\title\\titleConfig.cpp", 1071);
+    TitleConfigA *config = static_cast<TitleConfigA *>(asdMemoryAllocTracked(0x100, 0x100, 0, 0x160, 1));
+    g_titleConfig = config;
+    config->job = asdProcessCreateSimple("TITLE_CONFIG_MAIN", 4, 0, 0, FUN_002a0b58, titleConfigDestroy, config);
+    taskCreateDraw("TITLE_CONFIG D", 0xea, 0, 0, FUN_0032ba8c, NULL, NULL, config->job);
+    paramsClearPacket(&config->params);
+    paramsInit(&config->params, DAT_00536bec, 0x30, DAT_00536bec + 0x30, 0x30, 0, 0, 0, 0, 0, 0);
+    FUN_0014e188(config->window, 36, 0, &config->params, 1.0f, 201);
+    uiSpriteSetKeyframe(config->window, 2, 0);
+    uiSpriteSetImageKeyframe(config->window, 0, 0);
+    config->cursorScale = 1.0f;
+    config->cursorFrames = 30;
+    FUN_00203b40(config->cursor, 3, 3, 1, 0, 1);
+    config->state = 0;
+    config->countA = 0;
+    fillTwoWordsWithByte(config->touchRegions, 0xffffffff);
+    config->countB = 0;
+    asdLoadFileAsyncSimple("camp/config.bf", &config->dataA, 0);
+    asdLoadFileAsyncSimple("camp/config.mbm", &config->dataB, 0);
+    sysPlaySe(0x9b);
+    FUN_0019de98(0, 0xf4f4f4ff);
+    if (campIsState85() != 0) {
+        u8 *save = gameDataBlocksGetSaveData();
+        if (save[0x27E94] != 0) {
+            config->settingIndex[0] = categoryGetThresholdIndex(save[0x27E90]);
+            config->settingIndex[1] = findByteThresholdTier(save[0x27E91]);
+            config->settingIndex[2] = thresholdIndexFind(save[0x27E92]);
+            *reinterpret_cast<u64 *>(config->saved) = *reinterpret_cast<u64 *>(&save[0x27E90]);
+            config->saved[4] = DAT_00588fc0.changed;
+            return;
+        }
+    }
+    config->settingIndex[0] = categoryGetThresholdIndex(DAT_00588fc0.music);
+    config->settingIndex[1] = findByteThresholdTier(DAT_00588fc0.sound);
+    config->settingIndex[2] = thresholdIndexFind(DAT_00588fc0.voice);
+    wordPairCopy(config->saved, &DAT_00588fc0);
 }
 
 } /* extern "C" */

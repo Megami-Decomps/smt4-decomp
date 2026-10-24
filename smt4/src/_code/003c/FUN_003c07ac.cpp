@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the loading flag and state together before the first test and sets loading before the state constant; scheduling only. */
 #include "common.h"
 
 extern "C" {

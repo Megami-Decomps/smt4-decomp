@@ -26,7 +26,7 @@ typedef struct SkillData {
 
 EquipmentData *FUN_00184310(u16 id);
 EntryData *dataTable8FindRecord(s32 id);
-SkillData *FUN_0034a290(u16 id);
+SkillData *dataTable41FindById(u16 id);
 
 /* For ids 1-60 and 0x79f-0x7de: true when the unit's equipment has flag 4 or one of its skills
  * has the entry's category. */
@@ -41,7 +41,7 @@ s32 FUN_0047fd9c(s32 id, UnitRecord *unit)
         if (entry->attributes & 0xf0) {
             for (s32 i = 0; i < 8; i++) {
                 if (unit->skills[i] != 0) {
-                    SkillData *skill = FUN_0034a290(unit->skills[i]);
+                    SkillData *skill = dataTable41FindById(unit->skills[i]);
                     if (skill != NULL && skill->category == entry->attributes >> 4) {
                         return 1;
                     }

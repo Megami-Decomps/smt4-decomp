@@ -7,7 +7,7 @@ extern "C" {
 
 int asdListBoxSetFloatItem(...);
 int FUN_004d2628(...);
-int FUN_004d352c(...);
+int btlReserveEditorOpenList(...);
 int FUN_004d3c94(...);
 
 int asdListBoxCreateDefaultFlags(...);
@@ -137,7 +137,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_004d2628. */
 /* Supplied declaration required: FUN_004d290c. */
 /* Supplied declaration required: FUN_004d3360. */
-/* Supplied declaration required: FUN_004d352c. */
+/* Supplied declaration required: btlReserveEditorOpenList. */
 /* Supplied declaration required: btlDebugCreatePanelMenu. */
 /* Supplied declaration required: FUN_004d3950. */
 /* Supplied declaration required: FUN_004d3c94. */
@@ -1056,7 +1056,7 @@ LAB_004d729c:
     temp_v6 = 0x20;
     break;
   case 0x1b:
-    FUN_004d352c(param_1);
+    btlReserveEditorOpenList(param_1);
     temp_v6 = 0x1c;
     break;
   case 0x1c:

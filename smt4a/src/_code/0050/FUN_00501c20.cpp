@@ -1,63 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00501c20` (_code @ 0x501c20, 0xc4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: identical except the r5/r6 swap: retail keeps the 0xe0a1086c failure constant in r5 and the unaligned halfword limit (two ldrb + orr) in r6; this build reverses them. */
+#include "nn/Result.h"
 
 extern "C" {
 
-int FUN_0042a44c(void);
-int FUN_00430e58(...);
+struct StreamReader;
+typedef struct StreamReaderVtbl {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ s32 (*read)(struct StreamReader *reader, void *buffer, u32 size, u32 count, u32 a, u32 b);
+} StreamReaderVtbl;
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 3 slot(s), 10 byte(s) */
-typedef struct {
-    unsigned short sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+typedef struct StreamReader {
+    /* 0x00 */ StreamReaderVtbl *vtbl;
+} StreamReader;
 
-extern int FUN_00429d80(int);
-/* Supplied declaration required: FUN_0042a44c. */
-/* Supplied declaration required: FUN_00430e58. */
-extern int handlerRefForward(unsigned int, unsigned int);
+typedef struct CheckBuffer {
+    /* 0x0000 */ u8 unk0000[0x202C];
+    /* 0x202C */ u8 limitLow;
+    /* 0x202D */ u8 limitHigh;
+    /* 0x202E */ u8 unk202E[0x36C0 - 0x202E];
+} CheckBuffer;
 
+void *handlerRefForward(u32 size, u32 align);
+s32 FUN_0042a44c(CheckBuffer *buffer);
+u8 FUN_00429d80(void);
+void FUN_00430e58(void *buffer);
 
-int FUN_00501c20(int *param_1)
-
+/* Sign-bit test of an SDK result, written as the compare retail uses (ands/bmi). */
+static __inline bool isNeg(s32 result)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned short temp_v4 [4];
-  
-  temp_v1 = (**(romwright_code **)(*param_1 + 0x2c))(param_1,temp_v4,2,1,0,0);
-  if (-1 < temp_v1) {
-    temp_v2 = handlerRefForward(0x36c0,4);
-    if (temp_v2 == 0) {
-      temp_v1 = -0x379ef40d;
+    return (s32)(result & 0x80000000) < 0;
+}
+
+/* Reads a halfword from the stream and succeeds when it is not below the limit stored in a freshly built buffer. */
+s32 FUN_00501c20(StreamReader *reader)
+{
+    u16 count;
+    s32 result = reader->vtbl->read(reader, &count, 2, 1, 0, 0);
+    if (isNeg(result)) {
+        return result;
     }
-    else {
-      temp_v1 = FUN_00429d80(temp_v2);
-      if (temp_v1 == 0) {
-        FUN_00430e58();
-        return -0x1f7ef408;
-      }
-      temp_v3 = temp_v2;
-      FUN_0042a44c();
-      temp_v1 = -0x1f5ef794;
-      if (-1 < temp_v3) {
-        temp_v0 = *(unsigned short *)(temp_v2 + 0x202c);
-        FUN_00430e58(temp_v2);
-        if (temp_v0 <= temp_v4[0]) {
-          temp_v1 = 0;
-        }
-        return temp_v1;
-      }
-      FUN_00430e58(temp_v2);
+    CheckBuffer *buffer = (CheckBuffer *)handlerRefForward(sizeof(CheckBuffer), 4);
+    if (buffer == NULL) {
+        return 0xc8610bf3;
     }
-  }
-  return temp_v1;
+    if (!FUN_00429d80()) {
+        FUN_00430e58(buffer);
+        return 0xe0810bf8;
+    }
+    result = FUN_0042a44c(buffer);
+    if (isNeg(result)) {
+        FUN_00430e58(buffer);
+        return 0xe0a1086c;
+    }
+    u32 lo = buffer->limitLow;
+    u32 hi = buffer->limitHigh;
+    u32 limit = lo | (hi << 8);
+    FUN_00430e58(buffer);
+    if (count >= limit) {
+        return 0;
+    }
+    return 0xe0a1086c;
 }
 
 } /* extern "C" */

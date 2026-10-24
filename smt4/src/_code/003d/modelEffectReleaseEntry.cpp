@@ -1,12 +1,6 @@
 /* NON_MATCHING: native virtual delete matches, but compiler keeps the entry-base pointer early instead of retail's separate owner/index and model-slot bases; -O2 also omits the retail alignment NOP. */
-#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "classes/Obj4208f8.h"
 
-// FUN_0034afd4 initializes this0xb4-byte class with vtable address point0x420900.
-class Obj4208f8 {
-public:
-    virtual ~Obj4208f8();
-    u8 unk04[0xb0];
-};
 struct ModelEffectEntry {
     AsdMdlObject *model;
     u32 id;

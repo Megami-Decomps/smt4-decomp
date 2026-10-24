@@ -16,7 +16,7 @@ int FUN_002a0428(...);
 int textFormatBuffer(...);
 int libc_strcpy(...);
 int memClear(...);
-void FUN_002d582c(unsigned int, float);
+void animOwnerSetScale(unsigned int, float);
 int FUN_003da0ec(...);
 int modelAttachmentsUpdateFromParents(...);
 int battleCreateSecondaryModels(...);
@@ -49,7 +49,7 @@ extern int FUN_002adee0(unsigned int);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_002d582c. */
+/* Supplied declaration required: animOwnerSetScale. */
 extern int gameObjectFlagIsSet(void);
 /* Supplied declaration required: FUN_003da0ec. */
 /* Supplied declaration required: modelAttachmentsUpdateFromParents. */
@@ -173,7 +173,7 @@ unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,
         }
         FUN_0028c618(*(unsigned int *)(*puVar8 + 8),0);
         modelSetAnimationChannels(*puVar8,0);
-        FUN_002d582c(*puVar8, 0.0f);
+        animOwnerSetScale(*puVar8, 0.0f);
         animPlayerSetLoopPolicy(*(unsigned int *)(*puVar8 + 8),1);
         puVar8 = (unsigned int *)*puVar8;
         *puVar8 = *puVar8 | 2;

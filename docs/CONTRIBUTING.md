@@ -26,7 +26,10 @@ Every match must be one a programmer could have written for a reason.
 - **Not allowed:** register pinning (`register ... __asm("rN")`), `__asm`, `__svc`/`__swi`,
   `volatile` added to steer code, `#pragma`, `__align`/`aligned(...)` without a real alignment,
   dead or no-op code (`if (0)`, empty `do {} while (0)`, self-assignments), and temporaries,
-  gotos or declaration tricks whose only purpose is steering register allocation.
+  gotos or declaration tricks whose only purpose is steering register allocation. The one
+  exception is `include/nn/svc.h`, which declares the CTR-SDK's system calls, thread-local storage
+  and barriers with armcc's `__svc` and cp15 intrinsics as the SDK did; game code calls them
+  through that header and nowhere else.
 - **Allowed, because the original did it:** real prototypes for callees (a value retail keeps live
   in `r1`/`r2` is usually an argument the decompiler dropped), signed/unsigned and width choices,
   `for`/`while`/`switch` shapes, early returns, pointer variables that a programmer would use to
@@ -55,8 +58,17 @@ Every match must be one a programmer could have written for a reason.
     addresses it pc-relatively (armcc put the literal after the pool; `fdiff` and `relink.py` compare
     those bytes with the image). A weak function declared `__declspec(noreturn)` is reached with
     a plain `b`, so its NOP has no `pop` around it;
+  - **`__cxa_guard_release` and `__aeabi_atexit` after a function-local static's initialisation**:
+    the retail program links neither, so those calls are NOPs there (`ldr r0, [guard]; nop`).
+    armcc 4.1 b713 references them strongly; `build.py` treats them as the weak calls they were and
+    names atexit's `__dso_handle` argument `entry` (the image base). Write the `static` normally;
   - **a branch to the very next instruction** (armlink's `--branchnop`): a tail call into the
     function placed right after. Write the call as the last statement.
+- **Linker-inlined calls.** armlink (`--inline`) replaced every ARM `bl` to a function whose body is
+  one instruction and `bx lr` with that instruction: a getter's `ldr r0, [r0, #N]`, a setter's
+  `vstr s0, [r0, #N]`, a `mov r0, #0` stub, an SDK svc wrapper's `svc N`. A lone instruction like
+  that in the middle of retail code is such a call: write the call. `build.py` and `fdiff` do the
+  same replacement (the bodies come from the target objects; a NOP body is called, not inlined).
 - **`nop {0}` (`e320f000`) is the compiler's**, not the linker's: armcc places these hints itself
   in some branch and `switch` layouts. Plain C reproduces them; never infer a missing call from them.
 - **A function that starts with a NOP before its `push`** is two functions the analysis merged: a
@@ -67,9 +79,11 @@ Every match must be one a programmer could have written for a reason.
   `push`). **A unit that starts mid-flow** (it uses registers or a frame it never set up, or the unit
   before it runs straight into it) is a piece of a function the analysis cut up, often at the `push`
   after an early-exit guard (`cmp r0, #0; bxeq lr`). `python -B tools/units.py missing > rows.tsv`
-  lists both kinds; check the rows, then `python -B tools/units.py add rows.tsv` adds, extends, moves
-  and joins the units. A moved start (armcc loaded a global or constant before the `push`) leaves
-  the old source taking an invented parameter for that register: rewrite it to load the value itself.
+  lists both kinds, including code reached only through a word in `.data`/`.rodata` (callback
+  tables, vtables nothing names yet); check the rows, then `python -B tools/units.py add rows.tsv`
+  adds, extends, moves and joins the units. A moved start (armcc loaded a global or constant before
+  the `push`) leaves the old source taking an invented parameter for that register: rewrite it to
+  load the value itself.
   Never call a `func_0x<address>` placeholder: the target has a symbol once its unit exists.
 
 ## Readability standard

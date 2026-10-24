@@ -1,101 +1,74 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022e818` (_code @ 0x22e818, 0x210 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: identical code except armcc keeps the zero in r4 and the tab-list base in ip (retail swaps them) */
+#include "common.h"
+
+/* One item category of the menu: its entry count leads a 0x74-byte record. */
+struct MenuCategory {
+    /* 0x00 */ s32 count;
+    /* 0x04 */ u8 unk04[0x70];
+};
+
+/* The menu work area, reduced to the category records and the tab list. */
+struct CategoryMenu {
+    /* 0x00000 */ u8 unk00000[0x888];
+    /* 0x00888 */ MenuCategory categories[8];
+    /* 0x00C28 */ u8 unk00C28[0x15d2c - 0xC28];
+    /* 0x15D2C */ u32 tabs[4];
+    /* 0x15D3C */ s32 tabCount;
+};
+
+typedef char CategoryMenuOffsets[sizeof(MenuCategory) == 0x74 ? 1 : -1];
 
 extern "C" {
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_2_stack;
-
-
-void FUN_0022e818(int param_1,int param_2)
-
+/* Lists the tabs to show: mode 0 builds the three summary tabs, modes 1 and 2 list the categories of one page. */
+void FUN_0022e818(CategoryMenu *menu, s32 mode)
 {
-  int temp_v0;
-  int *piVar2;
-  unsigned int *puVar3;
-  
-  piVar2 = (int *)(param_1 + 0x15d3c);
-  puVar3 = (unsigned int *)(param_1 + 0x15d2c);
-  *piVar2 = 0;
-  if (param_2 != 0) {
-    if (param_2 != 1) {
-      if (param_2 == 2) {
-        if (0 < *(int *)(param_1 + 0x9e4)) {
-          *puVar3 = 3;
-          *piVar2 = 1;
+    menu->tabCount = 0;
+    if (mode == 0) {
+        if (menu->categories[0].count > 0 || menu->categories[1].count > 0 || menu->categories[2].count > 0) {
+            menu->tabs[0] = 0;
+            menu->tabCount = 1;
         }
-        if (0 < *(int *)(param_1 + 0xa58)) {
-          *(unsigned int *)(param_1 + *piVar2 * 4 + 0x15d2c) = 4;
-          *piVar2 = *piVar2 + 1;
+        if (menu->categories[3].count > 0 || menu->categories[4].count > 0 || menu->categories[5].count > 0 ||
+            menu->categories[6].count > 0) {
+            menu->tabs[menu->tabCount] = 1;
+            menu->tabCount++;
         }
-        if (0 < *(int *)(param_1 + 0xacc)) {
-          *(unsigned int *)(param_1 + *piVar2 * 4 + 0x15d2c) = 5;
-          *piVar2 = *piVar2 + 1;
+        if (menu->categories[7].count > 0) {
+            menu->tabs[menu->tabCount] = 2;
+            menu->tabCount++;
         }
-        if (0 < *(int *)(param_1 + 0xb40)) {
-          *(unsigned int *)(param_1 + *piVar2 * 4 + 0x15d2c) = 6;
-          *piVar2 = *piVar2 + 1;
+        menu->tabs[menu->tabCount] = 3;
+        menu->tabCount++;
+    } else if (mode == 1) {
+        if (menu->categories[0].count > 0) {
+            menu->tabs[0] = 0;
+            menu->tabCount = 1;
         }
-      }
+        if (menu->categories[1].count > 0) {
+            menu->tabs[menu->tabCount] = 1;
+            menu->tabCount++;
+        }
+        if (menu->categories[2].count > 0) {
+            menu->tabs[menu->tabCount] = 2;
+            menu->tabCount++;
+        }
+    } else if (mode == 2) {
+        if (menu->categories[3].count > 0) {
+            menu->tabs[0] = 3;
+            menu->tabCount = 1;
+        }
+        if (menu->categories[4].count > 0) {
+            menu->tabs[menu->tabCount] = 4;
+            menu->tabCount++;
+        }
+        if (menu->categories[5].count > 0) {
+            menu->tabs[menu->tabCount] = 5;
+            menu->tabCount++;
+        }
+        if (menu->categories[6].count > 0) {
+            menu->tabs[menu->tabCount] = 6;
+            menu->tabCount++;
+        }
     }
-    else {
-      if (0 < *(int *)(param_1 + 0x888)) {
-        *puVar3 = 0;
-        *piVar2 = 1;
-      }
-      if (0 < *(int *)(param_1 + 0x8fc)) {
-        *(unsigned int *)(param_1 + *piVar2 * 4 + 0x15d2c) = 1;
-        *piVar2 = *piVar2 + 1;
-      }
-      if (0 < *(int *)(param_1 + 0x970)) {
-        *(unsigned int *)(param_1 + *piVar2 * 4 + 0x15d2c) = 2;
-        *piVar2 = *piVar2 + 1;
-        return;
-      }
-    }
-    return;
-  }
-  temp_v0 = *(int *)(param_1 + 0x888);
-  if (temp_v0 < 1) {
-    temp_v0 = *(int *)(param_1 + 0x8fc);
-  }
-  if (temp_v0 < 1) {
-    temp_v0 = *(int *)(param_1 + 0x970);
-  }
-  if (0 < temp_v0) {
-    *puVar3 = 0;
-    *piVar2 = 1;
-  }
-  temp_v0 = *(int *)(param_1 + 0x9e4);
-  if (temp_v0 < 1) {
-    temp_v0 = *(int *)(param_1 + 0xa58);
-  }
-  if (temp_v0 < 1) {
-    temp_v0 = *(int *)(param_1 + 0xacc);
-    if (temp_v0 < 1) {
-      temp_v0 = *(int *)(param_1 + 0xb40);
-    }
-    if (temp_v0 >= 1) {
-      *(unsigned int *)(param_1 + *piVar2 * 4 + 0x15d2c) = 1;
-      *piVar2 = *piVar2 + 1;
-    }
-  }
-  else {
-    *(unsigned int *)(param_1 + *piVar2 * 4 + 0x15d2c) = 1;
-    *piVar2 = *piVar2 + 1;
-  }
-  temp_v0 = *piVar2;
-  if (0 < *(int *)(param_1 + 0xbb4)) {
-    *(unsigned int *)(param_1 + temp_v0 * 4 + 0x15d2c) = 2;
-    temp_v0 = *piVar2 + 1;
-    *piVar2 = temp_v0;
-  }
-  *(unsigned int *)(param_1 + temp_v0 * 4 + 0x15d2c) = 3;
-  *piVar2 = *piVar2 + 1;
-  return;
 }
-
-} /* extern "C" */
+}

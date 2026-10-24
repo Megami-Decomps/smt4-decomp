@@ -13,7 +13,7 @@ extern unsigned int FUN_001056ae(int, unsigned int);
 extern int FUN_0010575c(unsigned int *, unsigned int, unsigned int *, unsigned int, unsigned int);
 extern unsigned int *FUN_0010b564(void);
 extern int FUN_002e7168(int, unsigned int);
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern unsigned int FUN_002eb56c(void);
 extern int FUN_002f1858(int, unsigned char *, unsigned int, unsigned char *);
 extern int FUN_0030f364(void);
@@ -73,7 +73,7 @@ int FUN_00123100(unsigned int *param_1,unsigned int param_2,unsigned int *param_
     *(unsigned int **)(temp_v0 - 0x1c0) = param_3;
   }
   else {
-    temp_v1 = operatorNew(0x48);
+    temp_v1 = _Znwj(0x48);
     param_3 = (unsigned int *)0x0;
     if (temp_v1 != 0) {
       param_3 = (unsigned int *)FUN_0010b564();

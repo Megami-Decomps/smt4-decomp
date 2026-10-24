@@ -9,7 +9,7 @@ int FUN_003ed238(int, int);
 int FUN_003f24e0(int, int);
 int btlPopulateSelectedSlot(int, int, int, int);
 int FUN_004cae0c(int, int, int);
-int FUN_004f9450(void);
+int nameEntriesRegisterVerNames(void);
 int FUN_004fd204(int, unsigned int, int, int, int, int);
 int FUN_004fe764(int, unsigned int, int, unsigned int, int);
 
@@ -51,7 +51,7 @@ extern int FUN_004aa750(unsigned int);
 extern int FUN_004c9b38(int);
 /* Supplied declaration required: btlPopulateSelectedSlot. */
 /* Supplied declaration required: FUN_004cae0c. */
-/* Supplied declaration required: FUN_004f9450. */
+/* Supplied declaration required: nameEntriesRegisterVerNames. */
 /* Supplied declaration required: FUN_004fd204. */
 /* Supplied declaration required: FUN_004fe764. */
 
@@ -78,7 +78,7 @@ void FUN_0040c64c(unsigned int param_1,fn_0040c64c_arg1 *param_2)
         if (!((*(unsigned int *)(temp_v3 + 0x45a4) & DAT_00571354) == 0 &&
              (DAT_00571350 & *(unsigned int *)(temp_v3 + 0x45a0)) == 0)) {
           if ((*(unsigned int *)(g_btlAux + 0x339c) & 0x400) != 0) {
-            FUN_004f9450();
+            nameEntriesRegisterVerNames();
           }
           param_2->field_0x20 = 1;
           goto LAB_0040c6fc;

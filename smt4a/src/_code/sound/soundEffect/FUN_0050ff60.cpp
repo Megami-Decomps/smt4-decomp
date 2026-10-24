@@ -1,66 +1,71 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0050ff60` (_code @ 0x50ff60, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: identical except register allocation of the constants stored at the end (retail uses r1-r3 and pushes only r4; the build holds 60/4000/100 in r5/r6/ip and pushes r4-r6). The atexit registrations are the linker-removed __aeabi_atexit calls. */
+#include "classes/Obj421a58.h"
+#include "classes/Obj55be80.h"
+#include <new>
+
+/* The smoothing parameters that follow the first effect object. */
+struct SoundEffectSmoothing {
+    /* 0x00 */ u32 interval;
+    /* 0x04 */ f32 rise;
+    /* 0x08 */ f32 fall;
+    /* 0x0C */ u8 enabled;
+    /* 0x0D */ u8 unk0d[3];
+};
+
+/* The reverb parameters that follow the second effect object. */
+struct SoundEffectReverb {
+    /* 0x00 */ u32 time;
+    /* 0x04 */ u32 delay;
+    /* 0x08 */ u32 volume;
+    /* 0x0C */ f32 fall;
+    /* 0x10 */ f32 rise;
+    /* 0x14 */ const u32 *source;
+    /* 0x18 */ f32 ratio;
+    /* 0x1C */ f32 gain;
+    /* 0x20 */ u8 enabled;
+    /* 0x21 */ u8 unk21;
+    /* 0x24 */ u32 sizeA;
+    /* 0x28 */ u32 sizeB;
+    /* 0x2C */ u32 sizeC;
+};
 
 extern "C" {
 
-int FUN_0045eb98(unsigned char *);
-int FUN_0045f08c(unsigned char *, unsigned int *, int);
+extern u8 entry;
+extern Obj421a58 DAT_006195dc;
+extern SoundEffectSmoothing DAT_0061963c;
+extern SoundEffectReverb DAT_0061975c;
+extern const u32 DAT_006306ec[];
 
-extern unsigned char DAT_006195dc; /* 0x6195dc */
-extern unsigned int DAT_0061963c; /* 0x61963c */
-extern unsigned int DAT_00619640; /* 0x619640 */
-extern unsigned int DAT_00619644; /* 0x619644 */
-extern unsigned char DAT_00619648; /* 0x619648 */
-extern unsigned char DAT_0061964c; /* 0x61964c */
-extern unsigned int DAT_0061975c; /* 0x61975c */
-extern unsigned int DAT_00619760; /* 0x619760 */
-extern unsigned int DAT_00619764; /* 0x619764 */
-extern unsigned int DAT_00619768; /* 0x619768 */
-extern unsigned int DAT_0061976c; /* 0x61976c */
-extern unsigned int *DAT_00619770; /* 0x619770 */
-extern unsigned int DAT_00619774; /* 0x619774 */
-extern unsigned int DAT_00619778; /* 0x619778 */
-extern unsigned char DAT_0061977c; /* 0x61977c */
-extern unsigned char DAT_0061977d; /* 0x61977d */
-extern unsigned int DAT_00619780; /* 0x619780 */
-extern unsigned int DAT_00619784; /* 0x619784 */
-extern unsigned int DAT_00619788; /* 0x619788 */
-extern unsigned int DAT_006306ec; /* 0x6306ec */
+__weak int __aeabi_atexit(void *object, void (*destructor)(void *), void *moduleHandle);
+void FUN_0045ec40(void *object);
+void FUN_0045f1f0(void *object);
 
-/* Supplied declaration required: FUN_0045eb98. */
-/* Supplied declaration required: FUN_0045f08c. */
-
-
+// Constructs the global sound effects (smoothing and reverb), registers their destructors and
+// sets the default parameters.
 void FUN_0050ff60(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  FUN_0045eb98(&DAT_006195dc);
-  temp_v0 = 0x3ecccccd;
-  temp_v1 = 0x3f000000;
-  DAT_0061963c = 0xfa;
-  DAT_00619640 = 0x3ecccccd;
-  DAT_00619644 = 0x3f000000;
-  DAT_00619648 = 0;
-  FUN_0045f08c(&DAT_0061964c,&DAT_00619640,0x100000);
-  DAT_0061975c = 0x3c;
-  DAT_00619760 = 4000;
-  DAT_00619764 = 100;
-  DAT_00619768 = temp_v1;
-  DAT_0061976c = temp_v0;
-  DAT_00619770 = &DAT_006306ec;
-  DAT_00619774 = 0x3f19999a;
-  DAT_00619778 = temp_v0;
-  DAT_0061977c = 0;
-  DAT_0061977d = 0;
-  DAT_00619780 = 0xbe0;
-  DAT_00619784 = 0xe60;
-  DAT_00619788 = 0x820;
-  return;
+    Obj421a58 *smoothing = new (&DAT_006195dc) Obj421a58();
+    __aeabi_atexit(smoothing, FUN_0045ec40, &entry);
+    DAT_0061963c.interval = 250;
+    DAT_0061963c.rise = 0.4f;
+    DAT_0061963c.fall = 0.5f;
+    DAT_0061963c.enabled = 0;
+    Obj55be80 *reverb = new (&DAT_0061963c + 1) Obj55be80();
+    __aeabi_atexit(reverb, FUN_0045f1f0, &entry);
+    DAT_0061975c.time = 60;
+    DAT_0061975c.delay = 4000;
+    DAT_0061975c.volume = 100;
+    DAT_0061975c.fall = 0.5f;
+    DAT_0061975c.rise = 0.4f;
+    DAT_0061975c.source = DAT_006306ec;
+    DAT_0061975c.ratio = 0.6f;
+    DAT_0061975c.gain = 0.4f;
+    DAT_0061975c.enabled = 0;
+    DAT_0061975c.unk21 = 0;
+    DAT_0061975c.sizeA = 0xbe0;
+    DAT_0061975c.sizeB = 0xe60;
+    DAT_0061975c.sizeC = 0x820;
 }
 
-} /* extern "C" */
+}

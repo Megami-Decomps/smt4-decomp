@@ -1,117 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00120584` (_code @ 0x120584, 0x1a8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: calls, relative-pointer stores and the byte-fill loop match retail; armcc allocates desc/header/image to r6/r5/r4 (retail r5/r4/r6), loads width and height with one vldmia and multiplies as w*4.0 (retail s2*w), and orders the final conditional stores differently. */
+#include "AsdSDK/Source/Gfx/Tex/TextureBuild.h"
 
-extern "C" {
-
-int memClear(unsigned int *, int);
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(unsigned int, int);
-
-typedef int romwright_code(...);
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: memClear. */
-
-
-unsigned int * FUN_00120584(unsigned int *param_1,int *param_2)
-
+// memset: fill `count` bytes with the low byte of `value`.
+static inline void *fillBytes(void *destination, s32 value, u32 count)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  unsigned char *puVar1;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  int *piVar4;
-  unsigned char *puVar5;
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  unsigned int in_fpscr;
-  float temp_v3;
-  int temp_v4;
-  float temp_v5;
-  
-  puVar2 = (unsigned int *)(**(romwright_code **)(*param_2 + 8))(param_2,0x48,4);
-  if (puVar2 != (unsigned int *)0x0) {
-    memClear(puVar2,0x48);
-  }
-  *puVar2 = 0x20000021;
-  puVar2[1] = 0x48535854;
-  puVar2[2] = 0x5000000;
-  puVar2[3] = 0;
-  puVar2[4] = 0;
-  puVar2[5] = 0;
-  puVar2[6] = *param_1;
-  temp_v1 = param_1[1];
-  puVar2[8] = 0x6040;
-  puVar2[7] = temp_v1;
-  puVar2[9] = 0x1405;
-  puVar2[10] = 0;
-  puVar2[0xb] = 0;
-  puVar2[0xc] = param_1[2];
-  puVar2[0xd] = 0;
-  puVar3 = (unsigned int *)(**(romwright_code **)(*param_2 + 8))(param_2,0x20,4);
-  if (puVar3 != (unsigned int *)0x0) {
-    *puVar3 = 0;
-    puVar3[1] = 0;
-    puVar3[2] = 0;
-    puVar3[3] = 0;
-    puVar3[4] = 0;
-    puVar3[5] = 0;
-    puVar3[6] = 0;
-    puVar3[7] = 0;
-  }
-  puVar3[4] = (unsigned int)param_2;
-  *puVar3 = *param_1;
-  puVar3[1] = param_1[1];
-  temp_v1 = param_1[3];
-  puVar3[5] = 0x20;
-  puVar3[6] = temp_v1;
-  piVar4 = (int *)(unsigned int)*(unsigned char *)(param_1 + 6);
-  temp_v5 = (float)VectorSignedToFloat(*param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v3 = (float)VectorSignedToFloat(param_1[1],(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v2 = piVar4 == (int *)0x0;
-  if (temp_v2) {
-    piVar4 = (int *)(puVar3 + 3);
-    puVar3[2] = 0;
-  }
-  temp_v4 = VectorFloatToUnsigned(temp_v5 * 4.0f * temp_v3,3);
-  if (!temp_v2) {
-    puVar5 = (unsigned char *)(**(romwright_code **)(*param_2 + 8))(param_2,temp_v4,0x80);
-    temp_v0 = temp_v4;
-    puVar1 = puVar5;
-    if (*(char *)(param_1 + 4) != '\0') {
-      for (; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
-        *puVar1 = 0;
-        puVar1 = puVar1 + 1;
-      }
+    u8 *bytes = (u8 *)destination;
+    for (u32 left = count; left != 0; left--) {
+        *bytes++ = (u8)value;
     }
-    temp_v0 = 0;
-    piVar4 = (int *)(puVar3 + 3);
-    if (puVar5 != (unsigned char *)0x0) {
-      temp_v0 = (int)puVar5 - (int)piVar4;
-    }
-    puVar3[2] = temp_v4;
-    if (puVar5 != (unsigned char *)0x0) {
-      *piVar4 = temp_v0;
-    }
-    else {
-      *piVar4 = 0;
-    }
-  }
-  else {
-    *piVar4 = 0;
-  }
-  piVar4 = (int *)(puVar2 + 0xe);
-  if (puVar3 != (unsigned int *)0x0) {
-    *piVar4 = (int)puVar3 - (int)piVar4;
-  }
-  else {
-    *piVar4 = 0;
-  }
-  *(unsigned char *)(puVar2 + 0xf) = *(unsigned char *)((int)param_1 + 0x11);
-  puVar2[0x10] = param_1[5];
-  return puVar2;
+    return destination;
 }
 
-} /* extern "C" */
+extern "C" {
+void *memClear(void *memory, u32 bytes);
+
+// Build a texture header and its image record from a description.
+TextureHeader *FUN_00120584(const TextureDesc *desc, TextureAllocator *allocator)
+{
+    TextureHeader *header = (TextureHeader *)allocator->allocate(sizeof(TextureHeader), 4);
+    if (header != NULL) {
+        memClear(header, sizeof(TextureHeader));
+    }
+    header->unk00 = 0x20000021;
+    header->magic = 0x48535854;
+    header->unk08 = 0x5000000;
+    header->unk0c = 0;
+    header->unk10 = 0;
+    header->unk14 = 0;
+    header->width = desc->width;
+    header->height = desc->height;
+    header->unk20 = 0x6040;
+    header->unk24 = 0x1405;
+    header->unk28 = 0;
+    header->unk2c = 0;
+    header->unk30 = desc->unk08;
+    header->unk34 = 0;
+
+    TextureImage *image = (TextureImage *)allocator->allocate(sizeof(TextureImage), 4);
+    if (image != NULL) {
+        image->width = 0;
+        image->height = 0;
+        image->bytes = 0;
+        image->pixelsOffset = 0;
+        image->allocator = NULL;
+        image->unk14 = 0;
+        image->unk18 = 0;
+        image->unk1c = 0;
+    }
+    image->allocator = allocator;
+    image->width = desc->width;
+    image->height = desc->height;
+    image->unk14 = 0x20;
+    image->unk18 = desc->unk0c;
+    u32 bytes = (u32)(4.0f * (f32)desc->width * (f32)desc->height);
+    if (desc->allocatePixels == 0) {
+        image->bytes = 0;
+        image->pixelsOffset = 0;
+    } else {
+        u8 *pixels = (u8 *)allocator->allocate(bytes, 0x80);
+        if (desc->clear != 0) {
+            fillBytes(pixels, 0, bytes);
+        }
+        image->bytes = bytes;
+        textureSetRelative(&image->pixelsOffset, pixels);
+    }
+    textureSetRelative(&header->imageOffset, image);
+    header->unk3c = desc->unk11;
+    header->unk40 = desc->unk14;
+    return header;
+}
+}

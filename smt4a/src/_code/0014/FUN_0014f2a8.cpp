@@ -1,32 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014f2a8` (_code @ 0x14f2a8, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc peels the first iteration of the length loop and counts in r4; retail tests at the bottom of a single loop counting in r5 */
+/* Appends the wide string `text` to `buffer` at *position (unless `measureOnly`), advances *position and returns the
+ * string's length in characters (0 when there is no position or text). */
+#include "common.h"
 
 extern "C" {
+void FUN_002e59f8(const void *source, void *destination, u32 bytes);
 
-int FUN_002e59f8(int, int, int);
-
-/* Supplied declaration required: FUN_002e59f8. */
-
-
-int FUN_0014f2a8(int param_1,int *param_2,int param_3,int param_4)
-
+s32 FUN_0014f2a8(u16 *buffer, s32 *position, const u16 *text, s32 measureOnly)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if (param_2 == (int *)0x0 || param_3 == 0) {
-    temp_v0 = 0;
-  }
-  else {
-    for (temp_v0 = 0; *(short *)(param_3 + temp_v0 * 2) != 0; temp_v0 = temp_v0 + 1) {
+    if (position == NULL || text == NULL) {
+        return 0;
     }
-    if (param_4 == 0) {
-      FUN_002e59f8(param_3,param_1 + *param_2 * 2,temp_v0 << 1);
-    }
-    *param_2 = *param_2 + temp_v0;
-  }
-  return temp_v0;
-}
+    s32 length = 0;
 
-} /* extern "C" */
+    while (text[length] != 0) {
+        length++;
+    }
+    if (measureOnly == 0) {
+        FUN_002e59f8(text, buffer + *position, length * 2);
+    }
+    *position += length;
+    return length;
+}
+}

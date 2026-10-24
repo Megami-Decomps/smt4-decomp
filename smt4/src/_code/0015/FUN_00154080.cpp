@@ -21,8 +21,8 @@ extern unsigned char DAT_00421468; /* 0x421468 */
 extern unsigned char DAT_00421570; /* 0x421570 */
 extern unsigned char DAT_00422058; /* 0x422058 */
 extern unsigned char DAT_0042208c; /* 0x42208c */
-extern unsigned int DAT_00476634; /* 0x476634 */
-extern unsigned int DAT_004efd6c; /* 0x4efd6c */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x476634 */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x4efd6c */
 extern unsigned int DAT_004efd70; /* 0x4efd70 */
 extern unsigned int DAT_004efd74; /* 0x4efd74 */
 extern unsigned int DAT_004efd78; /* 0x4efd78 */
@@ -272,21 +272,21 @@ unsigned int * FUN_00154080(int *param_1,int *param_2)
       {
         temp_v0 = puVar1[0x19] + temp_v1 * 0x40;
         if (temp_v0 != 0) {
-          if (((DAT_00476634 & 1) == 0) && (temp_v4 = __cxa_guard_acquire(&DAT_00476634), temp_v4 != 0)) {
-            DAT_004efd6c = (unsigned int)((unsigned long long)temp_v9 >> 0x20);
+          if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v4 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v4 != 0)) {
+            _ZZN2nw4math5MTX348IdentityEvE8identity = (unsigned int)((unsigned long long)temp_v9 >> 0x20);
             DAT_004efd70 = (unsigned int)temp_v9;
             DAT_004efd74 = DAT_004efd70;
             DAT_004efd78 = DAT_004efd70;
             DAT_004efd7c = DAT_004efd70;
-            DAT_004efd80 = DAT_004efd6c;
+            DAT_004efd80 = _ZZN2nw4math5MTX348IdentityEvE8identity;
             DAT_004efd84 = DAT_004efd70;
             DAT_004efd88 = DAT_004efd70;
             DAT_004efd8c = DAT_004efd70;
             DAT_004efd90 = DAT_004efd70;
-            DAT_004efd94 = DAT_004efd6c;
+            DAT_004efd94 = _ZZN2nw4math5MTX348IdentityEvE8identity;
             DAT_004efd98 = DAT_004efd70;
           }
-          nn_math_ARMv6_MTX34CopyAsm(temp_v0,&DAT_004efd6c);
+          nn_math_ARMv6_MTX34CopyAsm(temp_v0,&_ZZN2nw4math5MTX348IdentityEvE8identity);
           temp_v2 = (unsigned int)((unsigned long long)temp_v9 >> 0x20);
           *(unsigned int *)(temp_v0 + 0x30) = temp_v2;
           *(unsigned int *)(temp_v0 + 0x34) = temp_v2;

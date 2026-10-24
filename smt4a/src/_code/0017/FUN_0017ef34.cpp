@@ -1,38 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017ef34` (_code @ 0x17ef34, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the element-destroy loop (a distance-counted loop unrolled by two, empty); armcc deletes it here. Symbol name pending: AllocatedArray<T>::~AllocatedArray (16-byte element). */
+#include "common.h"
+#include "classes/AllocatedArray.h"
 
-extern "C" {
+struct ArrayEntry {
+    f32 unk00;
+    f32 unk04;
+    f32 unk08;
+    void *unk0c;
 
-typedef int romwright_code(...);
+    ~ArrayEntry() {}
+};
 
-int * FUN_0017ef34(int *param_1)
-
-{
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = param_1[2];
-  temp_v3 = param_1[1];
-  temp_v1 = temp_v0;
-  if (temp_v3 < temp_v0) {
-    temp_v1 = (param_1[2] - temp_v3) * 0x8000000;
-  }
-  if (temp_v3 < temp_v0) {
-    temp_v1 = temp_v1 >> 0x1f;
-  }
-  else {
-    temp_v1 = 0;
-  }
-  for (temp_v2 = temp_v1 + 1; temp_v2 < ((int)(param_1[2] - temp_v3) >> 4) + 1; temp_v2 = temp_v2 + 2) {
-  }
-  param_1[2] = temp_v3;
-  if ((int *)*param_1 != (int *)0x0 && temp_v3 != 0) {
-    (**(romwright_code **)(*(int *)*param_1 + 0xc))();
-  }
-  return param_1;
-}
-
-} /* extern "C" */
+template class AllocatedArray<ArrayEntry>;

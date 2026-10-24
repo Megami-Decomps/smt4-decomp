@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001339e0(int, int, unsigned short [2]);
 int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
-int _ZN9Obj55aff4C1EPKc(unsigned char [8], unsigned char *);
+int _ZN9Obj55aff4C1EPKt(unsigned char [8], unsigned char *);
 int _ZN9Obj55aff4D1Ev(unsigned char [8]);
 int onlineMutexLockIfNeeded(...);
 int onlineMutexUnlockIfNeeded(...);
@@ -37,8 +37,8 @@ extern int DAT_00594a5c; /* 0x594a5c */
 /* Supplied declaration required: FUN_001339e0. */
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-extern int operatorNew(unsigned int);
-/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
+extern int _Znwj(unsigned int);
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKt. */
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: onlineMutexLockIfNeeded. */
 /* Supplied declaration required: onlineMutexUnlockIfNeeded. */
@@ -89,11 +89,11 @@ unsigned int FUN_0011b970(int param_1,unsigned int param_2,unsigned int param_3)
     temp_v12 = temp_v1;
     if (*(int *)(temp_v1 + 0xa0) == 0) {
       temp_v5 = 0;
-      temp_v2 = operatorNew(0x34);
+      temp_v2 = _Znwj(0x34);
       temp_v3 = 0;
       if (temp_v2 != 0) {
         temp_v14 = DAT_00594a4c;
-        _ZN9Obj55aff4C1EPKc(temp_v13,&LAB_0011bab0);
+        _ZN9Obj55aff4C1EPKt(temp_v13,&LAB_0011bab0);
         temp_v5 = 1;
         temp_v3 = FUN_00311700(temp_v2,temp_v13,temp_v14);
       }

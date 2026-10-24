@@ -5,13 +5,13 @@
 extern "C" {
 
 int gameGetPlayerData(void);
-int FUN_00192608(void);
+int dataTable08Sub2GetRecord(void);
 int FUN_0020b490(int, int);
 int FUN_00249a08(void);
 int bgmReleaseStopped(void);
 int FUN_002c8778(int);
 int FUN_002f0c18(void);
-int FUN_0034a290(void);
+int dataTable41FindById(void);
 int soundChannelRequestIfEnabled(int, int, int);
 int soundChannelStopAll(int);
 void bgmRequestSelectedChannelFade(unsigned int frames);
@@ -33,7 +33,7 @@ extern int DAT_00588c44; /* 0x588c44 */
 extern int lmapMainIsRunning(void);
 /* Supplied declaration required: gameGetPlayerData. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_00192608. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 extern int FUN_001bd100(unsigned short);
@@ -42,7 +42,7 @@ extern int FUN_001bd100(unsigned short);
 /* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_002c8778. */
 /* Supplied declaration required: FUN_002f0c18. */
-/* Supplied declaration required: FUN_0034a290. */
+/* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
 extern int FUN_003ddfd8(void);
@@ -180,13 +180,13 @@ void FUN_00331714(int param_1)
           case 6:
             temp_v7 = (unsigned int)puVar9[6];
           }
-          FUN_00192608();
+          dataTable08Sub2GetRecord();
           temp_v8 = 0;
           if (temp_v7 != 0) {
             temp_v8 = (unsigned int)*(unsigned short *)(temp_v7 + 0x3a);
           }
           if (temp_v7 != 0 && temp_v8 != 0) {
-            FUN_0034a290();
+            dataTable41FindById();
             temp_v7 = 0;
             if (temp_v8 != 0) {
               temp_v7 = (unsigned int)*(unsigned char *)(temp_v8 + 0x2f);
@@ -226,7 +226,7 @@ void FUN_00331714(int param_1)
             do {
               temp_v7 = (unsigned int)*(unsigned short *)(temp_v15 + 0x34 + temp_v13 * 2);
               if (temp_v7 != 0) {
-                FUN_0034a290();
+                dataTable41FindById();
                 temp_v8 = 0;
                 if (temp_v7 != 0) {
                   temp_v8 = (unsigned int)*(unsigned char *)(temp_v7 + 0x2f);

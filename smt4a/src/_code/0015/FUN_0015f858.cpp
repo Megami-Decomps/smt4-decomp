@@ -8,7 +8,7 @@ int libc_bsearch(unsigned char *, unsigned int, unsigned int, int, unsigned char
 int FUN_001762d4(unsigned char *, unsigned char *);
 int FUN_001763a4(unsigned char *, unsigned char *);
 int dataTable8FindRecord(void);
-int FUN_00192608(void);
+int dataTable08Sub2GetRecord(void);
 int FUN_001a6858(unsigned char *, unsigned char *);
 
 /* stack frame of param_1: 3 slot(s), 8 byte(s) */
@@ -32,7 +32,7 @@ extern unsigned char *g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: FUN_001763a4. */
 extern int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: FUN_00192608. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern unsigned int dataTableGetCount(int);
 extern unsigned int dataTableGetEntries(void);
 extern int FUN_0019c06c(void);
@@ -90,7 +90,7 @@ void FUN_0015f858(unsigned char *param_1)
     case 6:
     case 7:
     case 8:
-      FUN_00192608();
+      dataTable08Sub2GetRecord();
       puVar3 = param_1;
       break;
     case 9:

@@ -28,7 +28,7 @@ typedef struct {
 
 extern unsigned char DAT_0055b33c; /* 0x55b33c */
 
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern unsigned int *FUN_003022b4(void);
 extern unsigned int FUN_00302374(void);
 /* Supplied declaration required: FUN_0030239c. */
@@ -53,7 +53,7 @@ FUN_002eb108(fn_002eb108_arg0 *param_1,unsigned int param_2,unsigned int param_3
   puVar1[0x50] = 0;
   puVar1[0x51] = 0;
   if (param_4 << 0x19 < 0) {
-    temp_v0 = operatorNew(0x28);
+    temp_v0 = _Znwj(0x28);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_00302374();

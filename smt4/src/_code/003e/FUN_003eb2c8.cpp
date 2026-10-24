@@ -1,91 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003eb2c8` (_code @ 0x3eb2c8, 0x12c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail was built --apcs=/interwork/ropi (table reached by `ldr r4, [pc, #n]; add r4, pc, r4`, a REL32 literal the target object holds without a symbol) and sums the three 32x32 products with umull + adds/adcs/adc; this build has no ropi flag and fuses the sums into umlal. */
+#include "common.h"
 
 extern "C" {
 
-int VectorSignedToFloat(unsigned int, int);
-int VectorUnsignedToFloat(...);
+/* 2/pi as a bit string, one word of zero padding in front. */
+extern const u32 g_twoOverPiBits[8];
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-#ifndef ROMWRIGHT_CARRY_4_DEFINED
-#define ROMWRIGHT_CARRY_4_DEFINED
-#define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
-#endif
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-
-
-/* WARNING: Restarted to delay deadcode elimination for space: stack */
-
-void FUN_003eb2c8(unsigned int *param_1,unsigned int param_2)
-
+/* Reduces the large single-precision `value` (raw bits `bits`, also passed as `value`) modulo pi/2 with
+ * the 2/pi bit string (Payne-Hanek): returns the remainder and stores the quadrant in *quadrant
+ * (-1 for infinity and NaN, which return `value` unchanged). The fraction of value * 2/pi is carried in
+ * three floats and multiplied by pi/2 split into two parts. */
+f32 FUN_003eb2c8(s32 *quadrant, u32 bits, f32 value)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  int temp_v0;
-  long long temp_v1;
-  long long temp_v2;
-  long long temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int unaff_r4;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned char temp_v10;
-  unsigned int in_fpscr;
-  
-  if (0xfeffffff < param_2 * 2) {
-    *param_1 = 0xffffffff;
-    return;
-  }
-  temp_v5 = (param_2 << 8) | 0x80000000;
-  temp_v8 = ((param_2 & 0x7fffffff) >> 0x17) - 0x78;
-  temp_v7 = temp_v8 & 0x1f;
-  temp_v0 = (int)temp_v8 >> 5;
-  temp_v9 = 0x20 - temp_v7;
-  temp_v4 = temp_v0 * 4;
-  temp_v1 = (unsigned long long)temp_v5 *
-          (unsigned long long)
-          ((*(int *)(temp_v0 * 4 + 0x420634) << temp_v7) |
-          (*(unsigned int *)(temp_v4 + 0x420638) >> (temp_v9 & 0xff)));
-  temp_v6 = (unsigned int)temp_v1;
-  temp_v2 = (unsigned long long)temp_v5 *
-          (unsigned long long)
-          ((*(unsigned int *)(temp_v4 + 0x420638) << temp_v7) | (*(unsigned int *)(temp_v4 + 0x42063c) >> (temp_v9 & 0xff))
-          );
-  temp_v8 = (unsigned int)((unsigned long long)temp_v2 >> 0x20);
-  temp_v5 = (unsigned int)((unsigned long long)temp_v5 *
-                 (unsigned long long)
-                 ((*(unsigned int *)(temp_v4 + 0x42063c) << temp_v7) |
-                 (*(unsigned int *)(temp_v4 + 0x420640) >> (temp_v9 & 0xff))) >> 0x20);
-  temp_v3 = temp_v2 + romwright_piece_4_4(temp_v6,temp_v5);
-  temp_v7 = (unsigned int)((unsigned long long)temp_v3 >> 0x20);
-  temp_v4 = (int)((unsigned long long)temp_v1 >> 0x20) +
-          (unsigned int)(romwright_carry_4(temp_v8,temp_v6) || romwright_carry_4(temp_v8 + temp_v6,(unsigned int)romwright_carry_4(temp_v5,(unsigned int)temp_v2)));
-  VectorUnsignedToFloat((int)temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v5 = (temp_v4 + 0x20U) >> 6;
-  temp_v10 = (param_2 & 0x80000000) == 0;
-  *param_1 = temp_v5;
-  VectorSignedToFloat((temp_v4 * 0x4000000) | ((temp_v7 >> 0x13) << 0xd),(unsigned char)(in_fpscr >> 0x16) & 3);
-  if (temp_v10) {
-    temp_v5 = unaff_r4;
-  }
-  VectorUnsignedToFloat(temp_v7 * 0x2000,(unsigned char)(in_fpscr >> 0x16) & 3);
-  if (!temp_v10) {
-    *param_1 = 0x10000000 - temp_v5;
-    return;
-  }
-  return;
+    if ((bits << 1) >= 0xFF000000) {
+        *quadrant = -1;
+        return value;
+    }
+    u32 mantissa = 0x80000000 | (bits << 8);
+    s32 position = static_cast<s32>((bits << 1) >> 24) - 120;
+    u32 shift = position & 31;
+    const u32 *window = &g_twoOverPiBits[position >> 5];
+    u32 w0 = (window[0] << shift) | (window[1] >> (32 - shift));
+    u32 w1 = (window[1] << shift) | (window[2] >> (32 - shift));
+    u32 w2 = (window[2] << shift) | (window[3] >> (32 - shift));
+    u64 p0 = static_cast<u64>(w0) * mantissa;
+    u64 p1 = static_cast<u64>(w1) * mantissa;
+    u64 p2 = static_cast<u64>(w2) * mantissa;
+    // 96-bit product (hi:mid:lo) of the mantissa and the bits of 2/pi that matter.
+    u64 sum = p1 + (p2 >> 32);
+    u64 top = p0 + (sum >> 32);
+    u32 lo = static_cast<u32>(sum);
+    u32 mid = static_cast<u32>(top);
+    u32 hi = static_cast<u32>(top >> 32);
+    f32 loPart = static_cast<f32>(lo);
+    f32 topPart = static_cast<f32>(static_cast<s32>((hi << 26) | ((mid >> 19) << 13)));
+    f32 midPart = static_cast<f32>(mid << 13);
+    *quadrant = (hi + 32) >> 6;
+    midPart *= 1.9073486328125e-06f;
+    loPart *= 3.637978807091713e-12f;
+    f32 fraction = topPart + midPart + loPart;
+    union {
+        f32 value;
+        u32 bits;
+    } split;
+    split.value = fraction;
+    split.bits = (split.bits + 0x800) & 0xFFFFF000;
+    f32 fractionHigh = split.value;
+    f32 fractionLow = loPart - (fractionHigh - topPart - midPart);
+    f32 result = fractionHigh * 1.12649703e-13f + fractionLow * 3.6572953e-10f + fractionHigh * 3.6561687e-10f;
+    if (bits & 0x80000000) {
+        *quadrant = 0x10000000 - *quadrant;
+        return -result;
+    }
+    return result;
 }
 
 } /* extern "C" */

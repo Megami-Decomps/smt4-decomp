@@ -14,7 +14,7 @@ extern BattleDebugAux *g_btlAux;
 extern BattleDebugLayout DAT_0057a634;
 s32 FUN_00221b34(const void *first, const void *second);
 void qsort(void *array, u32 count, u32 stride, s32 (*compare)(const void *, const void *));
-void FUN_004f9450(BattleDebugAux *auxiliary);
+void nameEntriesRegisterVerNames(BattleDebugAux *auxiliary);
 void FUN_004cae0c(BtlMainStateA *battle, BattleRosterRecordA *record, s32 first, s32 second, s32 height);
 void FUN_004fd204(s32 x, s32 y, BattleRosterRecordA *record, u32 alpha, s32 height, s32 mode);
 void FUN_004fe764(s32 x, s32 y, BattleRosterRecordA *record, u32 icon, s32 layer);
@@ -24,7 +24,7 @@ void FUN_004f1c5c(BtlCameraA *camera, s32 frames);
 void FUN_003e89bc(BtlMainStateA *battle)
 {
     g_btlCamera->flags |= 0x4000;
-    FUN_004f9450(g_btlAux);
+    nameEntriesRegisterVerNames(g_btlAux);
     BattleRosterRecordA *records[50];
     s32 count = 0;
     for (s32 index = 4; index < 54; ++index) {

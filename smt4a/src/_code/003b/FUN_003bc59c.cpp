@@ -6,7 +6,7 @@
 extern "C" {
 
 int dataTable8FindRecord(void);
-int FUN_00192608(void);
+int dataTable08Sub2GetRecord(void);
 int dataTable04FindById(void);
 int scrGetArg(int);
 int FUN_00301a08(unsigned int, int [8], int [3]);
@@ -30,7 +30,7 @@ extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: FUN_00192608. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 extern unsigned int btlResolveEntryChoice(void);
 /* Supplied declaration required: scrGetArg. */
@@ -102,7 +102,7 @@ unsigned int FUN_003bc59c(void)
             }
             if ((temp_v10 && temp_v0 == 2) && (puVar9[0xfe] != 0)) {
               temp_v4 = (unsigned int)*(unsigned short *)(puVar9[0xfe] + 4);
-              FUN_00192608();
+              dataTable08Sub2GetRecord();
               if ((temp_v4 != 0) && (temp_v1 == *(unsigned int *)(temp_v4 + 0x24) >> 0x14)) {
                 temp_v3 = temp_v3 + 1;
               }

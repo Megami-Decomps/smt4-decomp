@@ -238,6 +238,27 @@ def missing(game):
                 if any(start <= value & ~1 < end for start, end in text):
                     reached.append((value & ~1, bool(value & 1), f"its address is in {objects.get(address, hex(address))}"))
                     called.add(value & ~1)
+    # Every other word of the data sections that holds an address inside .text: callback tables,
+    # vtables nothing names yet, handler arrays. Noisier than a slot of a named object (any number
+    # can look like an address), so these seed only clean starts and count as calls only into a
+    # known function's entry.
+    covered = sorted((address, address + size) for address, size in split.read_object_sizes(root / "config" / "symbols.txt").items())
+
+    def in_named(at):
+        i = bisect.bisect_right(covered, (at, float("inf"))) - 1
+        return i >= 0 and at < covered[i][1]
+
+    for section in sections:
+        if "x" in section["permissions"]:
+            continue
+        first = max(int(section["start"], 16), base)
+        last = min(int(section["start"], 16) + int(section["size"], 16), base + len(code))
+        for at in range(first + -first % 4, last - 3, 4):
+            value = struct.unpack_from("<I", code, at - base)[0]
+            if any(start <= value & ~1 < end for start, end in text) and not in_named(at):
+                reached.append((value & ~1, bool(value & 1), f"its address is in data at {at:#x}"))
+                if value & ~1 in functions:
+                    called.add(value & ~1)
     referenced = {to for to, _thumb, _note in reached}
 
     def candidate(address, thumb):

@@ -9,6 +9,10 @@ int asdMemFree(void *block);
 int asdMemFreeNonNull(void *block);
 }
 
+struct ModelResourceItem;
+struct ModelResourceItems;
+class ModelResourceList;
+
 /* The allocator a part came from. Only release (slot 3) is known. */
 class Obj4209ccAllocator {
 public:
@@ -33,6 +37,13 @@ public:
     Obj4209cc();
     virtual ~Obj4209cc();
     static void operator delete(void *block) { asdMemFreeNonNull(block); }
+
+    /* Destroys and releases the two rows of parts, releases each model of the model list and
+     * deletes the list (Apocalypse; see models()). */
+    void destroyResources();
+
+    /* In Apocalypse the handle field at 0x08 holds the model list instead of a model-manager handle. */
+    ModelResourceList *models() const { return reinterpret_cast<ModelResourceList *>(handle); }
 
 /* public: the deleting destructor is still C-form (_ZN9Obj4209ccD0Ev) and reaches the fields. */
     /* 0x00: vtable pointer */
@@ -62,8 +73,11 @@ struct ModelResourceItems {
     /* 0x00 */ u8 unk00[0x10];
     /* 0x10 */ s32 count;
 };
-struct ModelResourceList {
-    /* 0x00 */ void *vtable;
+class ModelResourceList {
+public:
+    virtual ~ModelResourceList();
+
+    /* 0x00: vtable pointer */
     /* 0x04 */ u32 unk04;
     /* 0x08 */ ModelResourceItems *items;
 };

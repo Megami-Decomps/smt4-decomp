@@ -1,32 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027e6f4` (_code @ 0x27e6f4, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: identical instructions; register assignment differs (retail keeps the match count in ip and the entry flags in r3, built swaps them) */
+#include "battle/BattleEntries.h"
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_2_stack;
-
-
-int FUN_0027e6f4(int param_1,int param_2)
-
+/* Returns the id of the `n`-th (1-based) entry flagged both 0x1 and 0x100, or -1 when there are fewer. */
+s32 FUN_0027e6f4(BattleEntryOwner *owner, s32 n)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  temp_v0 = 0;
-  while ((temp_v1 = *(unsigned int *)(*(int *)(param_1 + 0x1fc0) + temp_v0 * 0x288),
-         (temp_v1 & 1) == 0 || (temp_v1 & 0x100) == 0 || (temp_v2 = temp_v2 + 1, temp_v2 != param_2))) {
-    temp_v0 = temp_v0 + 1;
-    if (temp_v0 >= 0x6d) {
-      return -1;
+    s32 matched = 0;
+    s32 i;
+
+    for (i = 0; i < 109; i++) {
+        if ((owner->entries[i].flags & 1) && (owner->entries[i].flags & 0x100)) {
+            matched++;
+            if (matched == n) {
+                return owner->entries[i].id;
+            }
+        }
     }
-  }
-  return (int)*(short *)(*(int *)(param_1 + 0x1fc0) + temp_v0 * 0x288 + 0x6e);
+    return -1;
 }
 
 } /* extern "C" */

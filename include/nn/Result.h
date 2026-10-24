@@ -27,4 +27,28 @@ static __inline int nnResultDescription(u32 result)
     return result & 0x3ff;
 }
 
+/* True when the result's description is something other than `description` (e.g. not a timeout). */
+static __inline bool nnResultDescriptionIsNot(u32 result, u32 description)
+{
+    bool differs = (result & 0x3ff) != description;
+
+    return differs;
+}
+
+/* True for a failure whose summary field (bits 21-26) is not `summary`. */
+static __inline bool nnResultIsFailureExceptSummary(u32 result, u32 summary)
+{
+    return (result & 0x7e00000) != (summary << 21) && nnResultIsFailure(result);
+}
+
+/* A result code seen through its fields, for tests the SDK compiled as bitfield compares. */
+union nnResultFields {
+    s32 value;
+    struct {
+        u32 description : 10;
+        u32 module : 8;
+        u32 rest : 14;
+    } fields;
+};
+
 #endif

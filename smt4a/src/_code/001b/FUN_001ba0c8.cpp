@@ -1,65 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ba0c8` (_code @ 0x1ba0c8, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: ring-index updates are scheduled differently (retail pairs the two index stores into one strd and keeps the record argument in r5) */
+#include "common.h"
+#include "nn/Result.h"
+
+/* A 0xb8-byte queued record; the word at 0xb0 chains it to the one pushed after it. */
+struct QueuedRecord {
+    /* 0x00 */ u8 data[0xb0];
+    /* 0xB0 */ QueuedRecord *next;
+    /* 0xB4 */ u8 unkB4[4];
+};
+
+/* A ring of 96 records guarded by a semaphore. */
+struct RecordRing {
+    /* 0x0000 */ s32 readIndex;
+    /* 0x0004 */ s32 writeIndex;
+    /* 0x0008 */ s32 lastIndex; /* the record pushed most recently */
+    /* 0x000C */ QueuedRecord records[96];
+    /* 0x450C */ u8 unk450C[0x14];
+    /* 0x4520 */ u32 semaphore;
+};
 
 extern "C" {
+s32 svcWaitSynchronization1(u32 handle, s64 timeout);
+s32 FUN_0019a364(s32 *count, u32 semaphore, s32 releaseCount);
+void FUN_002e3140(s32 result);
+void nnnstdMemCpy(void *destination, const void *source, u32 bytes);
 
-int FUN_0019a364(unsigned int *, int, int);
-int FUN_002e3140(void);
-int nnnstdMemCpy(int *, unsigned int, int);
-int software_interrupt(int);
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0019a364. */
-/* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: nnnstdMemCpy. */
-
-
-int * FUN_001ba0c8(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Appends a copy of `record` to the ring (under its semaphore) and returns the stored copy. */
+QueuedRecord *FUN_001ba0c8(RecordRing *ring, const QueuedRecord *record)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  int *piVar4;
-  int uStack_20;
-  
-  puVar3 = (unsigned int *)&uStack_20;
-  software_interrupt(0x24);
-  uStack_20 = param_4;
-  if (param_1[0x1148] < 0) {
-    FUN_002e3140();
-  }
-  temp_v0 = param_1[1];
-  if (*param_1 == temp_v0) {
-    piVar4 = param_1 + temp_v0 * 0x2e + 3;
-    nnnstdMemCpy(piVar4,param_2,0xb8);
-    temp_v0 = param_1[1];
-    temp_v1 = temp_v0 + 1;
-    param_1[1] = temp_v1;
-    param_1[2] = temp_v0;
-    if (temp_v1 >= 0x60) {
-      param_1[1] = 0;
+    s32 result = svcWaitSynchronization1(ring->semaphore, -1);
+    if (nnResultIsFailure(result)) {
+        FUN_002e3140(result);
     }
-  }
-  else {
-    temp_v1 = param_1[2];
-    piVar4 = param_1 + temp_v0 * 0x2e + 3;
-    nnnstdMemCpy(piVar4,param_2,0xb8);
-    param_1[2] = param_1[1];
-    temp_v0 = param_1[1] + 1;
-    param_1[1] = temp_v0;
-    if (temp_v0 >= 0x60) {
-      param_1[1] = 0;
+    QueuedRecord *stored;
+    if (ring->readIndex == ring->writeIndex) {
+        stored = &ring->records[ring->writeIndex];
+        nnnstdMemCpy(stored, record, sizeof(QueuedRecord));
+        s32 pushed = ring->writeIndex;
+        ring->writeIndex = pushed + 1;
+        ring->lastIndex = pushed;
+        if (ring->writeIndex >= 96) {
+            ring->writeIndex = 0;
+        }
+    } else {
+        QueuedRecord *previous = &ring->records[ring->lastIndex];
+        stored = &ring->records[ring->writeIndex];
+        nnnstdMemCpy(stored, record, sizeof(QueuedRecord));
+        ring->lastIndex = ring->writeIndex;
+        ring->writeIndex++;
+        if (ring->writeIndex >= 96) {
+            ring->writeIndex = 0;
+        }
+        previous->next = stored;
     }
-    param_1[temp_v1 * 0x2e + 0x2f] = (int)piVar4;
-  }
-  FUN_0019a364(puVar3,param_1[0x1148],1);
-  if ((int)puVar3 < 0) {
-    FUN_002e3140();
-  }
-  return piVar4;
+    s32 released;
+    result = FUN_0019a364(&released, ring->semaphore, 1);
+    if (nnResultIsFailure(result)) {
+        FUN_002e3140(result);
+    }
+    return stored;
 }
-
-} /* extern "C" */
+}

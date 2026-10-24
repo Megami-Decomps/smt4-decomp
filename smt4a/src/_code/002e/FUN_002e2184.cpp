@@ -1,56 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e2184` (_code @ 0x2e2184, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only instruction scheduling differs (mov r1,r5 before vstmia, mov r2,#7 after) */
+#include "common.h"
+
+struct ModelScale {
+    f32 x, y, z;
+};
+
+struct OutfitModel {
+    ModelScale scale;  // 0x00
+    u8 unk0c[4];       // 0x0C
+    f32 unk10;         // 0x10
+    u8 unk14[4];       // 0x14
+    f32 unk18;         // 0x18
+    void *player;      // 0x1C
+    u32 outfit;        // 0x20
+};
 
 extern "C" {
 
-int linkHolderSetFlag(void);
-int playerLoadOutfitModels(unsigned int, unsigned int, int);
+s32 linkHolderCallFirst(void);
+void linkHolderSetFlag(void);
+void playerLoadOutfitModels(void *player, u32 outfit, s32 mode);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern int linkHolderCallFirst(void);
-/* Supplied declaration required: linkHolderSetFlag. */
-/* Supplied declaration required: playerLoadOutfitModels. */
-
-
-void FUN_002e2184(unsigned int *param_1,unsigned int param_2)
-
+/* Sets up the outfit model's scale for the player and loads the outfit models. */
+void FUN_002e2184(OutfitModel *model, u32 outfit)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  if (param_1[7] != 0) {
-    param_1[6] = 0x3c449ba6;
-    param_1[4] = 0x43af0000;
-    temp_v0 = linkHolderCallFirst();
-    if (temp_v0 == 0x23) {
-      temp_v1 = 0x3f800000;
-      temp_v2 = 0x40accccd;
-      temp_v3 = 0x3fc00000;
+    if (model->player != NULL) {
+        model->unk18 = 0.012f;
+        model->unk10 = 350.0f;
+        ModelScale scale;
+
+        if (linkHolderCallFirst() == 0x23) {
+            scale.x = 1.0f;
+            scale.y = 5.4f;
+            scale.z = 1.5f;
+        } else {
+            scale.x = 1.2f;
+            scale.y = 5.3f;
+            scale.z = 0.5f;
+        }
+        model->scale = scale;
+        model->outfit = outfit;
+        playerLoadOutfitModels(model->player, outfit, 7);
+        if (model->player != NULL) {
+            linkHolderSetFlag();
+        }
     }
-    else {
-      temp_v1 = 0x3f99999a;
-      temp_v2 = 0x40a9999a;
-      temp_v3 = 0x3f000000;
-    }
-    *param_1 = temp_v1;
-    param_1[1] = temp_v2;
-    param_1[2] = temp_v3;
-    param_1[8] = param_2;
-    playerLoadOutfitModels(param_1[7],param_2,7);
-    if (param_1[7] != 0) {
-      linkHolderSetFlag();
-      return;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

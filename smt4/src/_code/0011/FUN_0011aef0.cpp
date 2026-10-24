@@ -1,113 +1,76 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011aef0` (_code @ 0x11aef0, 0x274 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: render-stack push uses ip for the new-slot address (retail reuses r3 after the load), and retail returns the zero already in r0 on the not-shown path (epilogue order differs). */
+#include "camp/RenderCtx.h"
+#include "ui/PartyPanelState.h"
+
+/* The information window's draw view. */
+struct InfoWindowDrawState {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 state;
+    /* 0x0C */ u8 unk0C[0xC];
+    /* 0x18 */ s32 firstX;
+    /* 0x1C */ s32 secondX;
+    /* 0x20 */ u8 open;
+    /* 0x21 */ u8 framed;
+    /* 0x22 */ u8 scrollEnabled;
+    /* 0x23 */ u8 timed;
+    /* 0x24 */ u8 unk24[0x20];
+    /* 0x44 */ TimerSlot transition;
+    /* 0xD0 */ u8 unkD0[0xE8];
+    /* 0x1B8 */ u32 text;
+};
 
 extern "C" {
+extern InfoWindowDrawState *g_infoWin;
+extern RenderCtx *g_titleScene;
 
-int FUN_002b64b8(void);
-int FUN_002b659c(int, int, int, int);
-int FUN_002b75ec(...);
-int renderCtxCalculateStereoParallax(int);
-int FUN_002bf288(...);
-int FUN_002c39a4(int);
+void FUN_002c39a4(RenderCtx *context);
+s32 FUN_002c5d80(u32 preset, u32 index);
+s32 vec2GetXInt(const void *position);
+s32 vec2GetYInt(const void *position);
+f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
+void FUN_002bf288(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority);
+void *FUN_002bf4f8(u32 group, u32 image);
+void FUN_002b659c(s32 x, s32 y, s32 width, s32 height);
+void FUN_002b75ec(u32 text, s32 x, s32 y, s32 layer, f32 scale, s32 mode, s32 index);
+void FUN_002b64b8(void);
 
-typedef int romwright_code(...);
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
+struct InfoWindowSprite {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+    /* 0x0C */ s16 *size;
+};
 
-extern int g_infoWin; /* 0x43e128 */
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_002b64b8. */
-/* Supplied declaration required: FUN_002b659c. */
-/* Supplied declaration required: FUN_002b75ec. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-extern int vec2GetYInt(int);
-extern int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf288. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c39a4. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-
-
-char FUN_0011aef0(void)
-
+/* Draw the information window: frame, clipped scrolling text and decorations. */
+s32 FUN_0011aef0(void)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar7;
-  unsigned char temp_v6;
-  float temp_v7;
-  
-  temp_v0 = g_infoWin;
-  temp_v6 = *(int *)(g_infoWin + 8) != 0;
-  temp_v1 = '\0';
-  if (temp_v6) {
-    temp_v1 = *(char *)(g_infoWin + 0x20);
-  }
-  if (temp_v6 && temp_v1 != '\0') {
-    FUN_002c39a4(g_titleScene);
-    temp_v3 = g_titleScene;
-    temp_v2 = FUN_002c5d80(1,0);
-    piVar7 = (int *)(temp_v3 + 0x124c);
-    temp_v4 = *piVar7;
-    temp_v5 = piVar7[temp_v4 + 2];
-    *piVar7 = temp_v4 + 1;
-    piVar7[temp_v4 + 3] = temp_v2;
-    if (*(char *)(temp_v3 + 0x1264) != '\0' || temp_v5 != temp_v2) {
-      (**(romwright_code **)(temp_v3 + 0x1268))();
-      *(unsigned char *)(temp_v3 + 0x1264) = 0;
-    }
-    temp_v3 = vec2GetXInt(temp_v0 + 0x44);
-    temp_v7 = 0.27f;
-    renderCtxCalculateStereoParallax(g_titleScene);
-    temp_v3 = temp_v3 + (int)temp_v7;
-    temp_v2 = vec2GetYInt(temp_v0 + 0x44);
-    FUN_002bf288(2,0xe,0x87,temp_v3,temp_v2,0x15);
-    FUN_002bf288(2,0xe,0x88,temp_v3,temp_v2,0x15);
-    if (*(char *)(temp_v0 + 0x21) != '\0') {
-      temp_v4 = FUN_002bf4f8(0xe,0x87);
-      FUN_002b659c(*(short *)(temp_v4 + 8) + temp_v3,*(short *)(temp_v4 + 10) + temp_v2,
-                   (int)**(short **)(temp_v4 + 0xc),(int)(*(short **)(temp_v4 + 0xc))[1]);
-      temp_v4 = FUN_002bf4f8(0xe,0x89);
-      if (*(char *)(temp_v0 + 0x23) != '\0') {
-        FUN_002b75ec(*(unsigned int *)(temp_v0 + 0x1b8),*(short *)(temp_v4 + 8) + temp_v3,
-                     *(short *)(temp_v4 + 10) + temp_v2,0xc9,6,0);
-      }
-      else {
-        FUN_002b75ec(*(unsigned int *)(temp_v0 + 0x1b8),
-                     (int)*(short *)(temp_v4 + 8) + *(int *)(temp_v0 + 0x18) + temp_v3,
-                     *(short *)(temp_v4 + 10) + temp_v2,0xc9,6,0);
-        if (*(char *)(temp_v0 + 0x22) != '\0') {
-          FUN_002b75ec(*(unsigned int *)(temp_v0 + 0x1b8),
-                       (int)*(short *)(temp_v4 + 8) + *(int *)(temp_v0 + 0x1c) + temp_v3,
-                       *(short *)(temp_v4 + 10) + temp_v2,0xc9,6,0);
+    InfoWindowDrawState *window = g_infoWin;
+    if (window->state != 0 && window->open != 0) {
+        FUN_002c39a4(g_titleScene);
+        renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+        s32 x = vec2GetXInt(&window->transition) + (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
+        s32 y = vec2GetYInt(&window->transition);
+        FUN_002bf288(2, 14, 135, x, y, 21);
+        FUN_002bf288(2, 14, 136, x, y, 21);
+        if (window->framed != 0) {
+            InfoWindowSprite *frame = (InfoWindowSprite *)FUN_002bf4f8(14, 135);
+            FUN_002b659c(frame->x + x, frame->y + y, frame->size[0], frame->size[1]);
+            InfoWindowSprite *textBox = (InfoWindowSprite *)FUN_002bf4f8(14, 137);
+            if (window->timed != 0) {
+                FUN_002b75ec(window->text, textBox->x + x, textBox->y + y, 201, 1.0f, 6, 0);
+            } else {
+                FUN_002b75ec(window->text, textBox->x + window->firstX + x, textBox->y + y, 201, 1.0f, 6, 0);
+                if (window->scrollEnabled != 0) {
+                    FUN_002b75ec(window->text, textBox->x + window->secondX + x, textBox->y + y, 201, 1.0f, 6, 0);
+                }
+            }
+            FUN_002b64b8();
         }
-      }
-      FUN_002b64b8();
+        FUN_002bf288(2, 14, 134, x, y, 31);
+        FUN_002bf288(2, 14, 258, x, y, 31);
+        renderStackPop(&g_titleScene->stackA);
     }
-    FUN_002bf288(2,0xe,0x86,temp_v3,temp_v2,0x1f);
-    FUN_002bf288(2,0xe,0x102,temp_v3,temp_v2,0x1f);
-    temp_v0 = g_titleScene;
-    piVar7 = (int *)(g_titleScene + 0x124c);
-    temp_v3 = *piVar7;
-    temp_v2 = piVar7[temp_v3 + 2];
-    *piVar7 = temp_v3 - 1;
-    if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v2 != piVar7[temp_v3 + 1]) {
-      (**(romwright_code **)(temp_v0 + 0x1268))();
-      *(unsigned char *)(temp_v0 + 0x1264) = 0;
-    }
-    temp_v1 = '\0';
-  }
-  return temp_v1;
+    return 0;
 }
 
-} /* extern "C" */
+}

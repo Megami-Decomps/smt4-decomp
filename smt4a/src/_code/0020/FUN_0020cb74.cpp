@@ -43,8 +43,8 @@ typedef struct {
     unsigned int sp120; /* 0x120: local_120 */
 } param_8_stack;
 
-extern unsigned int DAT_005c4c2c; /* 0x5c4c2c */
-extern unsigned int DAT_0064c054; /* 0x64c054 */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x5c4c2c */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x64c054 */
 extern float DAT_0064c058; /* 0x64c058 */
 extern float DAT_0064c05c; /* 0x64c05c */
 extern float DAT_0064c060; /* 0x64c060 */
@@ -104,8 +104,8 @@ void FUN_0020cb74(int param_1,float *param_2,float *param_3,unsigned int param_4
   if (param_1 != 0) {
     temp_v7 = 0x3f800000;
     temp_v8 = 0.0f;
-    if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v0 != 0)) {
-      DAT_0064c054 = temp_v7;
+    if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v0 != 0)) {
+      _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v7;
       DAT_0064c058 = temp_v8;
       DAT_0064c05c = temp_v8;
       DAT_0064c060 = temp_v8;
@@ -118,7 +118,7 @@ void FUN_0020cb74(int param_1,float *param_2,float *param_3,unsigned int param_4
       DAT_0064c07c = temp_v7;
       DAT_0064c080 = temp_v8;
     }
-    nn_math_ARMv6_MTX34CopyAsm(temp_v19,&DAT_0064c054);
+    nn_math_ARMv6_MTX34CopyAsm(temp_v19,&_ZZN2nw4math5MTX348IdentityEvE8identity);
     temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(in_s0 == temp_v8) << 0x1e);
     temp_v2 = 0;
     if (romwright_subpiece_4_1_0(temp_v4 >> 0x1e,0)) {

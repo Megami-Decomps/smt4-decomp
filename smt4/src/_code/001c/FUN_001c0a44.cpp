@@ -8,7 +8,7 @@ extern LightRegistry *sceneGroup2Root[2];
 extern void *g_asdModelTransformBuilder[2];
 extern void *DAT_00464b7c[2];
 extern LightCount g_asdLightCount[2];
-void FUN_002a2dc8(s32 index);
+void asdLightActivate(s32 index);
 void FUN_002abbe8(void *list, LightRegistration *light);
 void nw_gfx_SceneNode_AttachChild(void *parent, LightRegistry *child);
 void sceneTraverserVisit(void *traverser, void *root);
@@ -19,9 +19,9 @@ void FUN_001c0a44(LightRegistration *light, s32 group)
     LightRegistry *selected;
     switch (group) {
     case 1: selected = sceneGroup1Root[0]; break;
-    case 2: selected = sceneGroup2Root[0]; FUN_002a2dc8(0); break;
+    case 2: selected = sceneGroup2Root[0]; asdLightActivate(0); break;
     case 4: selected = sceneGroup1Root[1]; break;
-    case 5: selected = sceneGroup2Root[1]; FUN_002a2dc8(1); break;
+    case 5: selected = sceneGroup2Root[1]; asdLightActivate(1); break;
     default: return;
     }
     if (selected == NULL)

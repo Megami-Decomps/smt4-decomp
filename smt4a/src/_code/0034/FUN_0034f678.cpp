@@ -13,15 +13,15 @@ struct EquipmentUpgradeBonusesView {
     u8 unk02[14];  // 0x02
 };
 
-extern "C" EquipmentCompareRecordView* FUN_00192608(u16 equipmentId);
+extern "C" EquipmentCompareRecordView* dataTable08Sub2GetRecord(u16 equipmentId);
 extern "C" void equipmentGetCappedUpgradeBonuses(
     u16 equipmentId, EquipmentUpgradeBonusesView* bonuses);
 
 // Compare equipment by unk36, breaking ties by descending unk70.
 extern "C" s32 FUN_0034f678(u16* firstId, u16* secondId)
 {
-    EquipmentCompareRecordView* first = FUN_00192608(*firstId);
-    EquipmentCompareRecordView* second = FUN_00192608(*secondId);
+    EquipmentCompareRecordView* first = dataTable08Sub2GetRecord(*firstId);
+    EquipmentCompareRecordView* second = dataTable08Sub2GetRecord(*secondId);
     EquipmentUpgradeBonusesView firstBonuses;
     EquipmentUpgradeBonusesView secondBonuses;
 
@@ -31,8 +31,8 @@ extern "C" s32 FUN_0034f678(u16* firstId, u16* secondId)
     s32 difference = (first->unk36 + firstBonuses.unk00)
                    - (second->unk36 + firstBonuses.unk00);
     if (difference == 0) {
-        first = FUN_00192608(*firstId);
-        second = FUN_00192608(*secondId);
+        first = dataTable08Sub2GetRecord(*firstId);
+        second = dataTable08Sub2GetRecord(*secondId);
         difference = second->unk70 - first->unk70;
     }
     return difference;

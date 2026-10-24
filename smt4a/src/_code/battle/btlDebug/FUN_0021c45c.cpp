@@ -21,7 +21,7 @@ int FUN_0023f328(...);
 int FUN_0023f788(...);
 int asdLoadFileAsyncSimple(...);
 int dataSet16LoadAndSort(void);
-int FUN_002bf464(void);
+int campButtonHelpLoad(void);
 int campButtonHelpAcquire(void);
 int FUN_00371c3c(...);
 int FUN_00387240(...);
@@ -68,7 +68,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0023f788. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: dataSet16LoadAndSort. */
-/* Supplied declaration required: FUN_002bf464. */
+/* Supplied declaration required: campButtonHelpLoad. */
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_00371c3c. */
 /* Supplied declaration required: FUN_00387240. */
@@ -368,7 +368,7 @@ void FUN_0021c45c(int param_1,int param_2)
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 3);
   FUN_00203b40(param_1 + 0x3b78,temp_v5,6,1,0,1);
-  FUN_002bf464();
+  campButtonHelpLoad();
   campButtonHelpAcquire();
   asdLoadFileAsyncSimple(&LAB_0021d124,param_1 + 0x4b98,0);
   wordTripleClear(&DAT_005e1560);

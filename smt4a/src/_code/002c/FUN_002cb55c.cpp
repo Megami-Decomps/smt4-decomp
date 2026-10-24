@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00192608(void);
+int dataTable08Sub2GetRecord(void);
 int FUN_002b4e7c(void);
 int libc_strcpy(unsigned short *, unsigned int);
 int sysMemClear(unsigned short *, int);
@@ -26,7 +26,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: FUN_00192608. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: FUN_002b4e7c. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
@@ -118,19 +118,19 @@ void FUN_002cb55c(unsigned short *param_1,unsigned short *param_2,unsigned int *
     param_1[0x15] = 999;
   }
   temp_v6 = (unsigned int)*param_2;
-  FUN_00192608();
+  dataTable08Sub2GetRecord();
   if (temp_v6 != 0) {
     temp_v2 = FUN_00480a00();
     param_1[0xc] = temp_v2;
   }
   temp_v6 = (unsigned int)param_2[1];
-  FUN_00192608();
+  dataTable08Sub2GetRecord();
   if (temp_v6 != 0) {
     temp_v2 = FUN_00480a00();
     param_1[0xd] = temp_v2;
   }
   temp_v6 = (unsigned int)param_2[2];
-  FUN_00192608();
+  dataTable08Sub2GetRecord();
   if (temp_v6 != 0) {
     temp_v3 = FUN_00480a00();
     param_1[0xd] = temp_v3 + param_1[0xd];

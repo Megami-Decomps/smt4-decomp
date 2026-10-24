@@ -40,7 +40,7 @@ typedef struct ModelLoader {
     /* 0x1414 */ ModelMap models;
 } ModelLoader;
 
-s32 FUN_003af8d0(ModelEntry *entry);
+s32 moLiveNodeSourceAcquireHeader(ModelEntry *entry);
 
 /* Checks every model in the loader's map, marking the loaded ones ready; returns whether all have loaded. */
 u32 FUN_003b0964(ModelLoader *loader)
@@ -50,7 +50,7 @@ u32 FUN_003b0964(ModelLoader *loader)
 
     for (ModelMapNode *node = models->header->left; models->header != node;) {
         ModelEntry *entry = node->slot->entry;
-        if (FUN_003af8d0(entry) == 0) {
+        if (moLiveNodeSourceAcquireHeader(entry) == 0) {
             allLoaded = 0;
         } else {
             entry->resource->ready = 1;

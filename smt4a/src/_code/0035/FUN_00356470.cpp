@@ -1,51 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00356470` (_code @ 0x356470, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0046c35c(int, int, int);
-int contentEntryGetFromFiles5(int, unsigned int);
+typedef struct AocEntry34 {
+    /* 0x00 */ u8 unk00[0x34];
+} AocEntry34; /* 0x34 bytes */
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+extern void *g_aocSystem;
+extern u32 dataTableGetCount(u32 table);
+extern AocEntry34 *dataTableGetEntries(void);
+extern u32 dataTableGet(u32 id, u32 kind);
+extern s32 FUN_0046c35c(void *system, s32 id, s32 kind);
+extern AocEntry34 *contentEntryGetFromFiles5(void *system, u32 index);
 
-extern int g_aocSystem; /* 0x570280 */
-
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0046c35c. */
-/* Supplied declaration required: contentEntryGetFromFiles5. */
-
-
-int FUN_00356470(unsigned int param_1)
-
+/* Returns entry `index` of data table 0x2d kind 1: the base entries first, then the add-on ones; NULL when out of range. */
+AocEntry34 *FUN_00356470(u32 index)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = dataTableGet(0x2d,1);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  if (param_1 < temp_v2) {
-    temp_v1 = temp_v1 + param_1 * 0x34;
-  }
-  else {
-    temp_v1 = g_aocSystem;
-    FUN_0046c35c(g_aocSystem,0x25,1);
-    if (param_1 < temp_v1 + temp_v2) {
-      temp_v1 = g_aocSystem;
-      contentEntryGetFromFiles5(g_aocSystem,param_1 - temp_v2);
-      return temp_v1;
+    u32 table = dataTableGet(0x2d, 1);
+    AocEntry34 *entries = dataTableGetEntries();
+    u32 count = dataTableGetCount(table);
+
+    if (index < count) {
+        return &entries[index];
     }
-    temp_v1 = 0;
-  }
-  return temp_v1;
+    if (index < FUN_0046c35c(g_aocSystem, 0x25, 1) + count) {
+        return contentEntryGetFromFiles5(g_aocSystem, index - count);
+    }
+    return NULL;
 }
 
 } /* extern "C" */

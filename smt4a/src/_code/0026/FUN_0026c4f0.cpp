@@ -1,44 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026c4f0` (_code @ 0x26c4f0, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_004a8750(unsigned int, int, int, int, int);
+/* The unite work area: only the selected-entry count is named. */
+struct UniteSelectionView {
+    /* 0x0000 */ u8 unk0000[0x8F7A];
+    /* 0x8F7A */ u16 selectedCount;
+};
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+/* A list of entries with ids (u16 at +2) and kinds (u8 at +0x1A). */
+struct UniteEntryList {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u16 ids[12];
+    /* 0x1A */ u8 kinds[12];
+};
 
-extern int g_unite; /* 0x57f290 */
+extern UniteSelectionView *g_unite;
+s32 FUN_004a8750(u32 id, s32 a, s32 b, s32 c, s32 d);
 
-/* Supplied declaration required: FUN_004a8750. */
-
-
-int FUN_0026c4f0(int param_1)
-
+/* Sums the results of requesting every entry of kind 3 from the unite list. */
+s32 FUN_0026c4f0(UniteEntryList *list)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = g_unite;
-  temp_v3 = 0;
-  temp_v2 = 0;
-  if (*(short *)(g_unite + 0x8f7a) != 0) {
-    do {
-      if (*(char *)(param_1 + temp_v2 + 0x1a) == '\x03') {
-        temp_v1 = (unsigned int)*(unsigned short *)(param_1 + temp_v2 * 2 + 2);
-        FUN_004a8750(temp_v1,1,0,0,0);
-        temp_v3 = temp_v3 + temp_v1;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x8f7a));
-  }
-  return temp_v3;
+    UniteSelectionView *unite = g_unite;
+    s32 total = 0;
+    s32 i;
+
+    for (i = 0; i < unite->selectedCount; i++) {
+        if (list->kinds[i] == 3) {
+            total += FUN_004a8750(list->ids[i], 1, 0, 0, 0);
+        }
+    }
+    return total;
 }
 
 } /* extern "C" */

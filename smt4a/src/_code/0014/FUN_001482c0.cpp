@@ -27,7 +27,7 @@ extern int FUN_0015f2ec(...); /* 0x15f2ec */
 
 /* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_001585bc(int);
-extern int FUN_001585d4(int);
+extern int clearU64(int);
 /* Supplied declaration required: FUN_0015f258. */
 /* Supplied declaration required: aocThreadAllocateStorage. */
 extern int FUN_0015f434(int);
@@ -59,7 +59,7 @@ unsigned int * FUN_001482c0(int param_1)
   unsigned int *temp_v4;
   
   ppcVar3 = &temp_v3;
-  temp_v0 = FUN_001585d4(param_1 + 0x20);
+  temp_v0 = clearU64(param_1 + 0x20);
   temp_v0 = FUN_001585bc(temp_v0 + 8);
   temp_v0 = FUN_0016cd08(temp_v0 + 0x54);
   temp_v0 = FUN_0016cd0c(temp_v0 + 4);

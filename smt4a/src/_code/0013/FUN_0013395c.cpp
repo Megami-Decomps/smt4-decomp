@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_002e32a4(int kind, ...);
+void _ZN4__rw10__rw_throwEiz(int kind, ...);
 int asdOperatorDeleteArray(int);
 int FUN_00307b08(int, int, int, int *);
 int vectorCount32_00307b3c(int *);
@@ -22,8 +22,8 @@ extern unsigned char LAB_001339dc; /* 0x1339dc */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e32a4. */
-extern int *wordRefMax(unsigned int *, unsigned int *);
+/* Supplied declaration required: _ZN4__rw10__rw_throwEiz. */
+extern int *_ZSt3maxIjERKT_S2_S2_(unsigned int *, unsigned int *);
 extern int rt_malloc(void);
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_00307b08. */
@@ -50,12 +50,12 @@ unsigned long long FUN_0013395c(int *param_1,unsigned int param_2)
   temp_v5 = param_2;
   if (param_2 >= 0x8000000) {
     temp_v4 = 0x7ffffff;
-    FUN_002e32a4(8,&LAB_001339dc,&LAB_001339dc);
+    _ZN4__rw10__rw_throwEiz(8,&LAB_001339dc,&LAB_001339dc);
   }
   if ((unsigned int)((param_1[2] - *param_1) >> 5) < temp_v5) {
     temp_v0 = vectorCount32_00307b3c(param_1);
     temp_v4 = vectorGrowCapacity_00307b2a(temp_v0,param_1);
-    piVar2 = (int *)wordRefMax(&temp_v5,(unsigned int *)&temp_v4);
+    piVar2 = (int *)_ZSt3maxIjERKT_S2_S2_(&temp_v5,(unsigned int *)&temp_v4);
     temp_v1 = *piVar2;
     temp_v2 = rt_malloc();
     FUN_00307b08(*param_1,param_1[1],temp_v2,param_1);

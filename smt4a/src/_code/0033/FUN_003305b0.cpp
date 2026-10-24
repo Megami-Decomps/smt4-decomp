@@ -1,49 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003305b0` (_code @ 0x3305b0, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register assignment (frame/result in r6/r7 swapped) and retail evaluates the register arguments before the two stack zeros */
+#include "common.h"
+
+struct BtlStateA {
+    u8 unk0000[0x4D64];  // 0x0000
+    s32 unk4D64;         // 0x4D64
+};
 
 extern "C" {
 
-int FUN_0021bdac(int, int, unsigned int, int, int, int);
+extern s16 g_battleSlotCount; /* 0x5e2058 */
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
+u32 scrGetCommandFrame(void);
+BtlStateA *btlGetMainState(void);
+u32 FUN_0021bdac(s32 state, s32 index, u32 frame, s32 mode, s32 first, u32 second);
 
-extern short DAT_005e2058; /* 0x5e2058 */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_0021bdac. */
-extern unsigned int scrGetCommandFrame(void);
-
-
-int FUN_003305b0(void)
-
+/* Script command: runs the step for every battle unit slot and returns the last result other than 1 (1 when all returned 1). */
+s32 FUN_003305b0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v0 = scrGetCommandFrame();
-  temp_v1 = btlGetMainState();
-  temp_v4 = 1;
-  temp_v3 = 0;
-  if (temp_v3 < DAT_005e2058) {
-    do {
-      temp_v2 = *(int *)(temp_v1 + 0x4d64);
-      FUN_0021bdac(temp_v2,temp_v3,temp_v0,0xd,0,0);
-      if (temp_v2 != 1) {
-        temp_v4 = temp_v2;
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < DAT_005e2058);
-  }
-  return temp_v4;
+    u32 frame = scrGetCommandFrame();
+    BtlStateA *state = btlGetMainState();
+    s32 result = 1;
+
+    for (s32 i = 0; g_battleSlotCount > i; i++) {
+        u32 value = FUN_0021bdac(state->unk4D64, i, frame, 13, 0, 0);
+
+        if (value != 1) {
+            result = value;
+        }
+    }
+    return result;
 }
 
 } /* extern "C" */

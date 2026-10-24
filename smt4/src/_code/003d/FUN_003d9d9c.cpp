@@ -7,7 +7,7 @@ void modelSetAnimationChannels(void *model, s32 channels, f32 blend);
 void animPlayerSetLoopPolicy(void *player, s32 policy);
 void FUN_0028c618(void *player, f32 x, f32 y, f32 z);
 void FUN_002a0428(void *model, s32 enabled);
-void FUN_002d582c(void *model, f32 frame);
+void animOwnerSetScale(void *model, f32 frame);
 
 void FUN_003d9d9c(void *object)
 {
@@ -49,7 +49,7 @@ void FUN_003d9d9c(void *object)
             }
             FUN_0028c618(slot->model->player, 0.0f, 0.0f, 0.0f);
             modelSetAnimationChannels(slot->model, 0, 0.0f);
-            FUN_002d582c(slot->model, 0.0f);
+            animOwnerSetScale(slot->model, 0.0f);
             animPlayerSetLoopPolicy(slot->model->player, 1);
             ModelView *model = slot->model;
             model->flags |= 2;

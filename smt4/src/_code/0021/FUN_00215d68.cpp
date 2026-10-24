@@ -8,7 +8,7 @@ int FUN_001ce224(...);
 int FUN_002580d4(...);
 int gameRecordCopy(...);
 int FUN_0029a17c(...);
-int FUN_0029f7d4(...);
+int dataTable54FindById(...);
 int partyMemberFindById(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6dd8(...);
@@ -70,7 +70,7 @@ extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029dde0(void);
 extern int FUN_0029efa8(unsigned int *);
 extern int FUN_0029efc0(unsigned int *);
-/* Supplied declaration required: FUN_0029f7d4. */
+/* Supplied declaration required: dataTable54FindById. */
 extern int *gameGetSlotTable(void);
 /* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: FUN_002b6dd8. */
@@ -135,7 +135,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
     if (*(short *)(puVar2 + 0x24ce) != 0) {
       do {
         temp_v1 = (unsigned int)*(unsigned short *)((int)puVar2 + temp_v8 * 2 + 0x933c);
-        FUN_0029f7d4();
+        dataTable54FindById();
         temp_v2 = FUN_0029efc0(puVar8);
         temp_v3 = FUN_0029efa8(puVar8);
         if (*(short *)((int)puVar2 + (temp_v2 + temp_v3) * 2 + 0x6278) == *(short *)(temp_v1 + 0x1a)) {

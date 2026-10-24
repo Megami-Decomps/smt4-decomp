@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002358b4(int, int);
 int FUN_002a1f84(unsigned int, int);
-int FUN_002ac444(unsigned char [8], unsigned int);
+int _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(unsigned char [8], unsigned int);
 int FUN_00379c18(int, int);
 int FUN_00379c90(int, int);
 int FUN_0037b174(unsigned char [8], unsigned int);
@@ -25,7 +25,7 @@ extern unsigned char LAB_0037e5a0; /* 0x37e5a0 */
 
 /* Supplied declaration required: FUN_002358b4. */
 /* Supplied declaration required: FUN_002a1f84. */
-/* Supplied declaration required: FUN_002ac444. */
+/* Supplied declaration required: _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv. */
 /* Supplied declaration required: FUN_00379c18. */
 /* Supplied declaration required: FUN_00379c90. */
 /* Supplied declaration required: FUN_0037b174. */
@@ -73,7 +73,7 @@ unsigned int FUN_0037e278(int param_1)
     }
     FUN_0037fad8(temp_v2,temp_v0 + 0x40,&LAB_0037e5a0,param_1);
     if (temp_v2 != 0) {
-      FUN_002ac444(temp_v9,*(unsigned int *)(param_1 + 100));
+      _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(temp_v9,*(unsigned int *)(param_1 + 100));
       temp_v3 = nw_snd_internal_WaveSoundFileReader_ReadWaveSoundInfo
                         (temp_v9,param_1 + 0x88,*(unsigned int *)(param_1 + 0x6c));
       if (temp_v3 == 0) {

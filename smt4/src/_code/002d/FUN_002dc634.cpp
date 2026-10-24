@@ -1,94 +1,76 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002dc634` (_code @ 0x2dc634, 0xf8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: structure and calls match; armcc schedules the sort-key stores differently (retail stores each key's id and 0 separately and interleaves them with the second record load) and allocates r4/r6 differently */
+#include "common.h"
+
+struct SkillOwnerRecord {
+    /* 0x00 */ u8 unk00[0x26];
+    /* 0x26 */ u16 skillId;
+};
+
+struct PassiveSkillRecord {
+    /* 0x00 */ u8 unk00[0x22];
+    /* 0x22 */ u16 sortKey;
+};
+
+struct SkillRecord {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ u16 sortKey;
+};
+
+struct UnitRecord {
+    /* 0x00 */ u8 unk00[0x46];
+    /* 0x46 */ u16 sortKey;
+};
+
+/* A skill and the unit slot it belongs to (negative: none). */
+struct SkillSortKey {
+    u32 skillId;
+    s32 unit;
+};
 
 extern "C" {
+SkillOwnerRecord *FUN_002498ec(u32 id);
+s32 idIsAbove400(u32 id);
+PassiveSkillRecord *passiveSkillLookupRecord(u32 id);
+SkillRecord *dataTable40FindById(u32 id);
+UnitRecord *gameGetUnitRecord(s32 unit);
+s32 FUN_00257568(SkillSortKey *first, SkillSortKey *second);
 
-int FUN_002498ec(void);
-int FUN_00257568(unsigned int *, unsigned int *);
-int passiveSkillLookupRecord(void);
-int FUN_002ae164(void);
-
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_002498ec. */
-/* Supplied declaration required: FUN_00257568. */
-/* Supplied declaration required: passiveSkillLookupRecord. */
-extern int gameGetUnitRecord(void);
-/* Supplied declaration required: FUN_002ae164. */
-extern int idIsAbove400(unsigned int);
-
-
-void FUN_002dc634(unsigned short *param_1,unsigned short *param_2)
-
+/* The skill's own sort key. */
+static inline s32 skillSortValue(SkillSortKey *key)
 {
-/* irregular: 4 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  short temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  
-  temp_v1 = (unsigned int)*param_1;
-  FUN_002498ec();
-  temp_v2 = (unsigned int)*param_2;
-  FUN_002498ec();
-  temp_v5 = (unsigned int)*(unsigned short *)(temp_v1 + 0x26);
-  temp_v6 = 0;
-  temp_v7 = (unsigned int)*(unsigned short *)(temp_v2 + 0x26);
-  temp_v8 = 0;
-  temp_v3 = idIsAbove400(temp_v5);
-  if (temp_v3 != 0) {
-    temp_v1 = temp_v5;
-    passiveSkillLookupRecord();
-    temp_v4 = *(short *)(temp_v1 + 0x22);
-  }
-  else {
-    temp_v1 = temp_v5;
-    FUN_002ae164();
-    temp_v4 = *(short *)(temp_v1 + 0x24);
-  }
-  temp_v3 = idIsAbove400(temp_v7);
-  if (temp_v3 != 0) {
-    temp_v1 = temp_v7;
-    passiveSkillLookupRecord();
-    temp_v0 = *(short *)(temp_v1 + 0x22);
-  }
-  else {
-    temp_v1 = temp_v7;
-    FUN_002ae164();
-    temp_v0 = *(short *)(temp_v1 + 0x24);
-  }
-  if (temp_v4 == temp_v0) {
-    if (temp_v6 < 0) {
-      temp_v4 = 0;
+    if (idIsAbove400(key->skillId) != 0) {
+        return passiveSkillLookupRecord(key->skillId)->sortKey;
     }
-    else {
-      temp_v3 = gameGetUnitRecord();
-      temp_v4 = *(short *)(temp_v3 + 0x46);
-    }
-    if (temp_v8 < 0) {
-      temp_v0 = 0;
-    }
-    else {
-      temp_v3 = gameGetUnitRecord();
-      temp_v0 = *(short *)(temp_v3 + 0x46);
-    }
-    if (temp_v4 == temp_v0) {
-      FUN_00257568(&temp_v5,&temp_v7);
-    }
-  }
-  return;
+    return dataTable40FindById(key->skillId)->sortKey;
 }
 
-} /* extern "C" */
+/* The sort key of the unit the skill belongs to; 0 without one. */
+static inline s32 unitSortValue(SkillSortKey *key)
+{
+    return key->unit < 0 ? 0 : gameGetUnitRecord(key->unit)->sortKey;
+}
+
+/* Compares two skills for sorting: by their sort keys, then by their unit's key, then by the final tie-break. */
+s32 FUN_002dc634(const u16 *first, const u16 *second)
+{
+    SkillOwnerRecord *firstOwner = FUN_002498ec(*first);
+    SkillOwnerRecord *secondOwner = FUN_002498ec(*second);
+    SkillSortKey firstKey;
+    SkillSortKey secondKey;
+    SkillSortKey *a = &firstKey;
+    SkillSortKey *b = &secondKey;
+    a->skillId = firstOwner->skillId;
+    a->unit = 0;
+    b->skillId = secondOwner->skillId;
+    b->unit = 0;
+
+    s32 difference = skillSortValue(a) - skillSortValue(b);
+    if (difference == 0) {
+        difference = unitSortValue(a) - unitSortValue(b);
+        if (difference == 0) {
+            difference = FUN_00257568(a, b);
+        }
+    }
+    return difference;
+}
+}

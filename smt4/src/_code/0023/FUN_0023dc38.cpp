@@ -1,39 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023dc38` (_code @ 0x23dc38, 0x80 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: switch block layout only: retail places the shared 'strh; bx lr' right after case 0xe and the cases 0x11, 0x12, 0x15 and default after it; the build puts the store last. */
+#include "common.h"
 
 extern "C" {
 
-
-void FUN_0023dc38(unsigned short *param_1,unsigned int param_2)
-
+/* Adds the bits a mask event sets to the halfword `*mask`: events 0xc, 0xe, 0x11, 0x12 and 0x15 add several bits, any other event its own bit. */
+void FUN_0023dc38(u16 *mask, u32 event)
 {
-  unsigned short temp_v0;
-  
-  temp_v0 = *param_1;
-  switch(param_2) {
-  case 0xc:
-    temp_v0 = temp_v0 | 0x3e0;
-    break;
-  default:
-    temp_v0 = temp_v0 | (unsigned short)(1 << (param_2 & 0xff));
-    break;
-  case 0xe:
-    temp_v0 = temp_v0 | 0x7e2;
-    break;
-  case 0x11:
-    temp_v0 = temp_v0 | 0x1e2;
-    temp_v0 = temp_v0 | 0x200;
-    break;
-  case 0x12:
-    temp_v0 = temp_v0 | 0x1c0;
-    break;
-  case 0x15:
-    temp_v0 = temp_v0 | 0x20;
-    temp_v0 = temp_v0 | 0x200;
-  }
-  *param_1 = temp_v0;
-  return;
+    u32 bits = *mask;
+
+    switch (event) {
+    case 0xc:
+        bits |= 0x3e0;
+        break;
+    case 0xe:
+        bits |= 0x7e2;
+        break;
+    case 0x11:
+        bits |= 0x1e2;
+        bits |= 0x200;
+        break;
+    case 0x12:
+        bits |= 0x1c0;
+        break;
+    case 0x15:
+        bits |= 0x20;
+        bits |= 0x200;
+        break;
+    default:
+        bits |= 1 << event;
+        break;
+    }
+    *mask = bits;
 }
 
 } /* extern "C" */

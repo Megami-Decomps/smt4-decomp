@@ -1,55 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004039b4` (_code @ 0x4039b4, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0039b984(void);
+/* A record found by ID; only the two sort keys are named. */
+typedef struct SortRecord {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u16 unk02;
+    /* 0x04 */ u16 order;
+} SortRecord;
 
-/* Supplied declaration required: FUN_0039b984. */
+SortRecord *FUN_0039b984(u32 id);
 
-
-int FUN_004039b4(unsigned short *param_1,unsigned short *param_2)
-
+/* Comparator over pointers to record IDs: sorts by order, then by id; unknown records sort as 999. */
+int FUN_004039b4(const u16 *left, const u16 *right)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned short *puVar4;
-  unsigned short *puVar5;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = (unsigned int)*param_1;
-  FUN_0039b984();
-  temp_v1 = (unsigned int)*param_2;
-  FUN_0039b984();
-  temp_v4 = 999;
-  temp_v3 = temp_v4;
-  if (temp_v0 != 0) {
-    temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 4);
-  }
-  temp_v0 = temp_v4;
-  if (temp_v1 != 0) {
-    temp_v0 = (unsigned int)*(unsigned short *)(temp_v1 + 4);
-  }
-  temp_v2 = temp_v3 - temp_v0;
-  if (temp_v2 == 0) {
-    puVar4 = (unsigned short *)(unsigned int)*param_1;
-    FUN_0039b984();
-    puVar5 = (unsigned short *)(unsigned int)*param_2;
-    FUN_0039b984();
-    temp_v3 = temp_v4;
-    if (puVar4 != (unsigned short *)0x0) {
-      temp_v3 = (unsigned int)*puVar4;
+    SortRecord *a = FUN_0039b984(*left);
+    SortRecord *b = FUN_0039b984(*right);
+    int orderA = a != NULL ? a->order : 999;
+    int orderB = b != NULL ? b->order : 999;
+    int result = orderA - orderB;
+
+    if (result == 0) {
+        a = FUN_0039b984(*left);
+        b = FUN_0039b984(*right);
+        int idA = a != NULL ? a->id : 999;
+        int idB = b != NULL ? b->id : 999;
+        result = idA - idB;
     }
-    if (puVar5 != (unsigned short *)0x0) {
-      temp_v4 = (unsigned int)*puVar5;
-    }
-    temp_v2 = temp_v3 - temp_v4;
-  }
-  return temp_v2;
+    return result;
 }
 
 } /* extern "C" */

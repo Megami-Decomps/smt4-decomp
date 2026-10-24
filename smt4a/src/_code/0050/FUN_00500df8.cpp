@@ -1,45 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00500df8` (_code @ 0x500df8, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct GpuStateOwner {
+    u8 unk00[0x7C];   // 0x00
+    u32 colorState;   // 0x7C
+};
+
+struct GpuFaceState {
+    u8 enabled;          // 0x00
+    u8 first;            // 0x01
+    u8 second;           // 0x02
+    u8 unk03;            // 0x03
+    GpuStateOwner *owner; // 0x04
+};
+
+struct CommandPair {
+    u32 header;
+    u32 data;
+};
 
 extern "C" {
 
-int gxEmitFramebufferAccessMasks(int, unsigned int *, int);
+u32 *gxEmitFramebufferAccessMasks(u32 *state, u32 *commands, s32 flush);
 
-/* Supplied declaration required: gxEmitFramebufferAccessMasks. */
-
-
-void FUN_00500df8(char *param_1,unsigned int *param_2,int param_3)
-
+/* Emits the two-word mode command (0 off, 1 on, 2 for the matching first/second pairs) and optionally the owner's color-state commands. */
+u32 *FUN_00500df8(const GpuFaceState *state, u32 *commands, s32 emitColor)
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (*param_1 != '\0') {
-    if (param_1[1] != '\0') {
-      if ((param_1[1] == '\x01') && (param_1[2] == '\x01')) {
-LAB_00500e64:
-        temp_v0 = 2;
-        *param_2 = temp_v0;
-        param_2[1] = 0xf0040;
-        if (param_3 == 0) {
-          return;
+    u32 mode = 0;
+
+    if (state->enabled != 0) {
+        if (state->first == 0) {
+            mode = state->second == 0 ? 2 : 1;
+        } else if (state->first == 1) {
+            mode = state->second == 1 ? 2 : 1;
+        } else {
+            mode = 1;
         }
-        gxEmitFramebufferAccessMasks(*(int *)(param_1 + 4) + 0x7c,param_2 + 2,1);
-        return;
-      }
     }
-    else if (param_1[2] == '\0') goto LAB_00500e64;
-    temp_v0 = 1;
-  }
-  *param_2 = temp_v0;
-  param_2[1] = 0xf0040;
-  if (param_3 == 0) {
-    return;
-  }
-  gxEmitFramebufferAccessMasks(*(int *)(param_1 + 4) + 0x7c,param_2 + 2,1);
-  return;
+    CommandPair *pair = (CommandPair *)commands;
+
+    pair->header = mode;
+    pair->data = 0xF0040;
+    commands = (u32 *)(pair + 1);
+    if (emitColor) {
+        return gxEmitFramebufferAccessMasks(&state->owner->colorState, commands, 1);
+    }
+    return commands;
 }
 
 } /* extern "C" */

@@ -17,7 +17,7 @@ int FUN_00185dd4(...);
 int FUN_001f3eec(...);
 int FUN_001f3f34(void);
 int effectSpawnDefaultArguments(...);
-int FUN_003dac74(...);
+int campMenuEntryDraw(...);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
 
@@ -50,7 +50,7 @@ extern unsigned int FUN_001f3e80(unsigned int, unsigned int, unsigned int, unsig
 /* Supplied declaration required: FUN_001f3eec. */
 /* Supplied declaration required: FUN_001f3f34. */
 /* Supplied declaration required: effectSpawnDefaultArguments. */
-/* Supplied declaration required: FUN_003dac74. */
+/* Supplied declaration required: campMenuEntryDraw. */
 
 
 unsigned int FUN_0036dff4(void)
@@ -252,7 +252,7 @@ unsigned int FUN_0036dff4(void)
     }
     break;
   case 1:
-    FUN_003dac74(temp_v0,0xb);
+    campMenuEntryDraw(temp_v0,0xb);
     FUN_00164b5c(2,0x22,3,0,0,0xc);
     effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0x10));
     temp_v3 = FUN_001834a4(0x22,0x19);
@@ -261,7 +261,7 @@ unsigned int FUN_0036dff4(void)
     FUN_0018098c(*(unsigned int *)(temp_v0 + 0x10),(int)*(short *)(temp_v3 + 10));
     break;
   case 2:
-    FUN_003dac74(temp_v0,0xb);
+    campMenuEntryDraw(temp_v0,0xb);
     FUN_00164b5c(2,0x22,3,0,0,0xc);
     effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0x10));
     temp_v3 = FUN_001834a4(0x22,0x19);
@@ -273,7 +273,7 @@ unsigned int FUN_0036dff4(void)
     FUN_00164b5c(2,0x22,4,(int)temp_v9,0,0xe);
     break;
   case 3:
-    FUN_003dac74(temp_v0,0xb);
+    campMenuEntryDraw(temp_v0,0xb);
     FUN_00164b5c(2,0x22,4,0,0,0xc);
     temp_v3 = 0;
     do {
@@ -294,7 +294,7 @@ unsigned int FUN_0036dff4(void)
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_001f3eec();
     efctSetSpeed();
-    FUN_003dac74(temp_v0,0xb);
+    campMenuEntryDraw(temp_v0,0xb);
     FUN_00164b5c(2,0x22,4,0,0,0xc);
     temp_v3 = 0;
     do {

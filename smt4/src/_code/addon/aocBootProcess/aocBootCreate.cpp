@@ -1,5 +1,3 @@
-/* NON_MATCHING: armcc loads g_aocMain's address before storing the new job (retail loads it after,
- * into r0); everything else matches */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "addon/aocBootProcess.h"

@@ -1,52 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048d1c8` (_code @ 0x48d1c8, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: flag clear loads into r1 and hoists mov r0,#0; retail loads into r0 and sets the next state after the store. */
+#include "common.h"
+
+struct ButtonHelpTask {
+    u8 unk00[4];
+    s32 subState; // 0x04
+    s32 state;    // 0x08
+    u8 unk0c[4];
+    u32 flags;    // 0x10
+};
 
 extern "C" {
 
-int FUN_0048a378(...);
+void FUN_0048a378(ButtonHelpTask *task);
+s32 buttonHelpIsNotActive(void);
 
-typedef struct fn_0048d1c8_arg0 fn_0048d1c8_arg0;
-struct fn_0048d1c8_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    int field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x4];
-    uint field_0x10; /* +0x10 */
-};
-
-extern int buttonHelpIsNotActive(void);
-/* Supplied declaration required: FUN_0048a378. */
-
-
-void FUN_0048d1c8(fn_0048d1c8_arg0 *param_1)
-
+// Task state machine: open the help (0), wait until it has closed (1), then clear the display flag and finish (2).
+void FUN_0048d1c8(ButtonHelpTask *task)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = param_1->field_0x8;
-  if (temp_v0 != 0) {
-    if (temp_v0 == 1) {
-      temp_v0 = buttonHelpIsNotActive();
-      if (temp_v0 != 0) {
-        param_1->field_0x8 = 2;
-      }
-      return;
+    s32 state = task->state;
+
+    if (state == 0) {
+        FUN_0048a378(task);
+        state = 1;
+    } else if (state == 1) {
+        if (buttonHelpIsNotActive() != 0) {
+            task->state = 2;
+        }
+        return;
+    } else if (state == 2) {
+        task->flags &= ~0x1000000;
+        task->subState = 2;
+        state = 0;
+    } else {
+        return;
     }
-    if (temp_v0 != 2) {
-      return;
-    }
-    param_1->field_0x10 = param_1->field_0x10 & 0xfeffffff;
-    temp_v0 = 0;
-    param_1->field_0x4 = 2;
-  }
-  else {
-    FUN_0048a378(param_1);
-    temp_v0 = 1;
-  }
-  param_1->field_0x8 = temp_v0;
-  return;
+    task->state = state;
 }
 
 } /* extern "C" */

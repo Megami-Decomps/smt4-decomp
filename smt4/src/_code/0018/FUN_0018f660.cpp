@@ -12,7 +12,7 @@ int eventQueueAddUnique(...);
 int FUN_002b8ee0(...);
 int eventQueueAddUniqueIfValid(...);
 int timerStart(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int FUN_002c1658(...);
 int __aeabi_uidivmod(...);
 
@@ -123,7 +123,7 @@ extern int lmapMainIsRunning(void);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 extern unsigned int vec2GetXInt(char *);
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: FUN_002bf818. */
 extern int padIsButtonPressed(unsigned int);
 extern int FUN_002c15fc(unsigned int);
@@ -474,7 +474,7 @@ LAB_0018fd84:
               pcVar4[0x7e5] = '\0';
               timerStart(pcVar4 + 0x648,8,0);
               timerStart(pcVar4 + 0x6d4,9,0);
-              FUN_002bee58(pcVar4 + 0x760,5);
+              spriteStartAnimationByIndex(pcVar4 + 0x760,5);
               pcVar5 = DAT_0044e144;
               pcVar5[0x10] = '\0';
               pcVar5[0x11] = '\0';

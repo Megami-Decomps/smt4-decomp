@@ -13,7 +13,7 @@ union PassiveAffinityProperties {
 };
 
 extern "C" {
-const Table04ExtraRecord *FUN_0034a290(u32 skillId);
+const Table04ExtraRecord *dataTable41FindById(u32 skillId);
 s32 affinityShouldReplaceState(u32 current, u32 candidate);
 
 // Resolve resistance passives for an element or ailment across the eight equipped skills.
@@ -23,7 +23,7 @@ u32 FUN_002ada48(const u16 *skills, u32 affinity)
     for (s32 index = 0; index < 8; ++index) {
         if (skills[index] == 0)
             continue;
-        const Table04ExtraRecord *skill = FUN_0034a290(skills[index]);
+        const Table04ExtraRecord *skill = dataTable41FindById(skills[index]);
         if (skill == NULL)
             continue;
         const PassiveAffinityProperties &properties =

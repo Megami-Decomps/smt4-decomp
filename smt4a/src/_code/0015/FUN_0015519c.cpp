@@ -64,7 +64,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: camSetMatrixA. */
-extern unsigned int FUN_0018aeb8(void);
+extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
 
@@ -121,9 +121,9 @@ unsigned int FUN_0015519c(void)
     renderCtxCalculateStereoParallax(g_renderCtx);
     efctSetSpeed();
     temp_v8 = *(unsigned int *)(temp_v0 + 0x60);
-    temp_v2 = FUN_0018aeb8();
+    temp_v2 = _ZN2nw4math5MTX448IdentityEv();
     mtx44Copy(temp_v24,temp_v2);
-    temp_v2 = FUN_0018aeb8();
+    temp_v2 = _ZN2nw4math5MTX448IdentityEv();
     mtx44Copy(&temp_v9,temp_v2);
     temp_v6 = 0;
     if (*(int *)(temp_v0 + 0x14) == 5) {

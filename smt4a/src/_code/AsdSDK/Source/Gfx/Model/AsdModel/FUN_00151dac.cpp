@@ -1,37 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00151dac` (_code @ 0x151dac, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads slotFlags through an add-based pointer and keeps a zero in r5 for the final clear; built uses a plain offset load and a fresh zero. */
+/* NON_MATCHING: retail reads slotFlags through an add-based pointer and keeps a zero in r5 for the final clear; built uses a plain offset load and a fresh zero. */
+#include "shard/Sys464af0.h"
 
 extern "C" {
 
-int FUN_001575cc(unsigned int);
-int FUN_00177474(unsigned int, unsigned int);
+extern s32 g_asdLightCount; /* 0x636e00 */
+extern u32 g_asdModelSlotArray3; /* 0x5b3cb8 */
+extern u32 g_renderCtx; /* 0x59dbb4 */
+s32 FUN_0032fab0(void);
+void FUN_00177474(u32 a, u32 b);
+void FUN_001575cc(u32 scene);
+void registerBlockRequestGroups(u32 groups);
 
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-extern signed char g_gfxSettings; /* 0x5b3bf4 */
-extern unsigned int DAT_005b3c08; /* 0x5b3c08 */
-extern unsigned int DAT_005b3c1c; /* 0x5b3c1c */
-extern unsigned int g_asdModelSlotFlags; /* 0x5b3c78 */
-extern unsigned int g_asdModelSlotArray3; /* 0x5b3cb8 */
-extern int g_asdLightCount; /* 0x636e00 */
-
-/* Supplied declaration required: FUN_001575cc. */
-/* Supplied declaration required: FUN_00177474. */
-
-
-/* WARNING: Removing unreachable block (ram,0x00151e04) */
-/* WARNING: Removing unreachable block (ram,0x00151e08) */
-
+// Refresh the render context when the graphics settings are enabled and lights or the first model slot are active.
 void FUN_00151dac(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  if ((g_gfxSettings != '\0') && ((0 < g_asdLightCount || ((g_asdModelSlotFlags & 1) != 0)))) {
-    FUN_00177474(g_asdModelSlotArray3,DAT_005b3c1c);
-    FUN_001575cc(g_renderCtx);
-    DAT_005b3c08 = 0;
-  }
-  return;
+    if (g_gfxSettings.unk00[0] != 0 && (g_asdLightCount > 0 || (g_gfxSettings.slotFlags & 1) != 0)) {
+        FUN_00177474(g_asdModelSlotArray3, g_gfxSettings.unk28);
+        if (FUN_0032fab0() != 0) {
+            registerBlockRequestGroups(0x3fff);
+        }
+        FUN_001575cc(g_renderCtx);
+        g_gfxSettings.unk14 = 0;
+    }
 }
 
 } /* extern "C" */

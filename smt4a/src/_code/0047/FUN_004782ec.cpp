@@ -1,175 +1,111 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004782ec` (_code @ 0x4782ec, 0x2bc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only register allocation differs (this build hoists the constant 3 into r8, so the step/substep pair is stored with separate STRs instead of retail's STM, and registers r5-r7 are assigned differently). */
+#include "classes/AocMenu.h"
 #include "addon/aocMain.h"
+#include "shard/W5_W5Match2_TimedState.h"
 
 extern "C" {
-
-int FUN_00169548(int);
-int FUN_0016ccb4(int);
-int aocReleasePackageOwner(unsigned int);
-int FUN_001d0fcc(int *, unsigned int);
-int aocClearDisplayFlag(unsigned int);
-void aocResetOperationState(AocSystemA*);
-int FUN_0046f3ac(int *, unsigned int);
-int jobOwnerFreeSlotAndStop(unsigned int *);
-int FUN_00477d10(unsigned int *, unsigned int, int);
-int jobFlagsWorkStop(unsigned int *);
-int FUN_0047bcdc(unsigned int *, int);
-int timeInitializeActiveState(int *);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_1_stack;
-
-extern int g_aocMain; /* 0x570260 */
-extern unsigned int g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: FUN_00169548. */
-/* Supplied declaration required: FUN_0016ccb4. */
-/* Supplied declaration required: aocReleasePackageOwner. */
-extern int sysLightEventTryWait(int);
-/* Supplied declaration required: FUN_001d0fcc. */
-extern int byteIsAtLeast100(unsigned int *);
-extern int FUN_002e19f8(void);
-/* Supplied declaration required: aocClearDisplayFlag. */
-/* Supplied declaration required: FUN_0046f3ac. */
-/* Supplied declaration required: jobOwnerFreeSlotAndStop. */
-/* Supplied declaration required: FUN_00477d10. */
-/* Supplied declaration required: jobFlagsWorkStop. */
-/* Supplied declaration required: FUN_0047bcdc. */
-extern int isEmptyString(unsigned int *);
-/* Supplied declaration required: timeInitializeActiveState. */
-
-
-void FUN_004782ec(unsigned int *param_1)
-
-{
-/* irregular: 12 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int uStack_3c;
-  unsigned int uStack_38;
-  unsigned int uStack_34;
-  unsigned int uStack_30;
-  int temp_v4;
-  unsigned int uStack_28;
-  unsigned int uStack_24;
-  unsigned int uStack_20;
-  unsigned int uStack_1c;
-  
-  timeInitializeActiveState(&temp_v3);
-  temp_v0 = *(unsigned int *)(g_aocMain + 0x754);
-  *(unsigned int *)(g_aocMain + 0x754) = temp_v0 & 0xffffff8f;
-  if ((temp_v0 & 0x10) != 0) {
-    FUN_00477d10(param_1,0xffffffff,0);
-    jobOwnerFreeSlotAndStop(param_1 + 0x46c);
-    jobFlagsWorkStop(param_1);
-    param_1[1] = 0x12;
-    param_1[2] = 0;
-    if ((int *)param_1[0x82] != (int *)0x0) {
-      (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
-      param_1[0x82] = 0;
-    }
-    FUN_0016ccb4(g_aocMain + 0x80);
-    aocClearDisplayFlag(g_aocSystem);
-    aocReleasePackageOwner(g_aocSystem);
-    temp_v1 = sysLightEventTryWait(g_aocMain + 0x98);
-    if (temp_v1 != 0) {
-      *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
-    }
-  }
-  else {
-    temp_v2 = param_1[2];
-    if (temp_v2 != 2) {
-      if ((int)temp_v2 < 2) {
-        if (temp_v2 != 0) {
-          if (temp_v2 != 1) {
-            return;
-          }
-          temp_v1 = FUN_002e19f8();
-          if (temp_v1 == 0) {
-            return;
-          }
-          FUN_0047bcdc(param_1,1);
-          aocResetOperationState((AocSystemA*)g_aocSystem);
-          temp_v0 = 2;
-        }
-        else {
-          FUN_00169548(0);
-          FUN_00477d10(param_1,0xffffffff,0);
-          temp_v0 = 1;
-        }
-        param_1[2] = temp_v0;
-        return;
-      }
-      if (temp_v2 != 3) {
-        if ((temp_v2 == 9999 && (temp_v0 & 4) == 0) && ((temp_v0 & 8) == 0)) {
-          aocClearDisplayFlag(g_aocSystem);
-          aocReleasePackageOwner(g_aocSystem);
-          temp_v1 = sysLightEventTryWait(g_aocMain + 0x98);
-          if (temp_v1 != 0) {
-            *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
-          }
-          piVar3 = (int *)param_1[0x82];
-          param_1[1] = 3;
-          param_1[2] = 0;
-          if (piVar3 != (int *)0x0) {
-            (**(romwright_code **)(*piVar3 + 4))();
-            param_1[0x82] = 0;
-            return;
-          }
-        }
-      }
-      else {
-        temp_v1 = FUN_002e19f8();
-        if (temp_v1 != 0) {
-          aocClearDisplayFlag(g_aocSystem);
-          FUN_001d0fcc(&temp_v4,g_aocSystem);
-          param_1[1] = 5;
-          param_1[2] = 0;
-          piVar3 = (int *)param_1[0x82];
-          if (piVar3 == (int *)0x0) {
-            return;
-          }
-          (**(romwright_code **)(*piVar3 + 4))();
-          param_1[0x82] = 0;
-          return;
-        }
-      }
-    }
-    else if ((*param_1 & 0x200) != 0) {
-      FUN_0046f3ac(&temp_v4,g_aocSystem);
-      temp_v3 = temp_v4;
-      uStack_3c = uStack_28;
-      uStack_38 = uStack_24;
-      uStack_34 = uStack_20;
-      uStack_30 = uStack_1c;
-      temp_v1 = isEmptyString((unsigned int *)&temp_v3);
-      if (temp_v1 != 0) {
-        param_1[2] = 3;
-      }
-      else {
-        temp_v1 = byteIsAtLeast100((unsigned int *)&temp_v3);
-        if (temp_v1 != 0) {
-          param_1[2] = 9999;
-          temp_v1 = sysLightEventTryWait(g_aocMain + 0x98);
-          if (temp_v1 != 0) {
-            *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
-          }
-          jobFlagsWorkStop(param_1);
-          return;
-        }
-      }
-    }
-  }
-  return;
+extern QueuedRequestState *g_aocMain;
+extern AocSystemA *g_aocSystem;
+TimedState FUN_0046f3ac(AocSystemA *system);
+TimedState *timeInitializeActiveState(TimedState *state);
+void FUN_00477d10(AocMenu *menu, s32 request, s32 mode);
+void FUN_0047bcdc(AocMenu *menu, u32 request);
+void FUN_0016ccb4(void *query);
+void FUN_00169548(s32 mode);
+void jobOwnerFreeSlotAndStop(void *owner);
+void jobFlagsWorkStop(AocMenu *menu);
+void aocClearDisplayFlag(AocSystemA *system);
+void aocReleasePackageOwner(AocSystemA *system);
+void aocResetOperationState(AocSystemA *system);
+s32 sysLightEventTryWait(void *event);
+u8 FUN_002e19f8(void);
+u8 isEmptyString(const void *value);
+u8 byteIsAtLeast100(const void *value);
 }
 
-} /* extern "C" */
+/* Bit `bit` of a flag word, as 0 or 1. */
+static __inline u32 flagBit(u32 flags, u32 bit)
+{
+    return (flags & (1u << bit)) >> bit;
+}
+
+/* Steps the add-on menu: closes it when the display flag says so, otherwise advances the request handshake. */
+extern "C" void FUN_004782ec(AocMenu *menu)
+{
+    TimedState request;
+    timeInitializeActiveState(&request);
+    u32 flags = g_aocMain->flags;
+    u32 closing = flagBit(flags, 4);
+    flags &= ~0x70u;
+    g_aocMain->flags = flags;
+    if (closing) {
+        FUN_00477d10(menu, -1, 0);
+        jobOwnerFreeSlotAndStop(menu->jobOwner);
+        jobFlagsWorkStop(menu);
+        menu->step = 0x12;
+        menu->substep = 0;
+        if (menu->window != NULL) {
+            delete menu->window;
+            menu->window = NULL;
+        }
+        FUN_0016ccb4(reinterpret_cast<u8 *>(g_aocMain) + 0x80);
+        aocClearDisplayFlag(g_aocSystem);
+        aocReleasePackageOwner(g_aocSystem);
+        if (sysLightEventTryWait(reinterpret_cast<u8 *>(g_aocMain) + 0x98) != 0)
+            g_aocMain->flags &= ~0x10000u;
+        return;
+    }
+    switch (menu->substep) {
+    case 0:
+        FUN_00169548(0);
+        FUN_00477d10(menu, -1, 0);
+        menu->substep = 1;
+        break;
+    case 1:
+        if (FUN_002e19f8() != 0) {
+            FUN_0047bcdc(menu, 1);
+            aocResetOperationState(g_aocSystem);
+            menu->substep = 2;
+        }
+        break;
+    case 2:
+        if (menu->flags & 0x200) {
+            request = FUN_0046f3ac(g_aocSystem);
+            if (isEmptyString(&request) != 0) {
+                menu->substep = 3;
+            } else if (byteIsAtLeast100(&request) != 0) {
+                menu->substep = 9999;
+                if (sysLightEventTryWait(reinterpret_cast<u8 *>(g_aocMain) + 0x98) != 0)
+                    g_aocMain->flags &= ~0x10000u;
+                jobFlagsWorkStop(menu);
+            }
+        }
+        break;
+    case 3:
+        if (FUN_002e19f8() != 0) {
+            aocClearDisplayFlag(g_aocSystem);
+            g_aocSystem->getPendingRequest();
+            menu->step = 5;
+            menu->substep = 0;
+            if (menu->window != NULL) {
+                delete menu->window;
+                menu->window = NULL;
+            }
+        }
+        break;
+    case 9999:
+        if (!flagBit(flags, 2) && !flagBit(flags, 3)) {
+            aocClearDisplayFlag(g_aocSystem);
+            aocReleasePackageOwner(g_aocSystem);
+            if (sysLightEventTryWait(reinterpret_cast<u8 *>(g_aocMain) + 0x98) != 0)
+                g_aocMain->flags &= ~0x10000u;
+            menu->step = 3;
+            menu->substep = 0;
+            if (menu->window != NULL) {
+                delete menu->window;
+                menu->window = NULL;
+            }
+        }
+        break;
+    }
+}

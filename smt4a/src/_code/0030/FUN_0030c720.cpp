@@ -12,7 +12,7 @@ struct OnlineInstanceTable;
 extern "C" {
 OnlineInstanceTable *onlineInstanceTableGetCurrent(void);
 OnlineInstance *onlineInstanceTableFind(OnlineInstanceTable *, u32);
-s32 refIsNonNegative(const s32 *);
+s32 _ZNK18OnlineResultRecord7isValidEv(const s32 *);
 void FUN_002f3dc4(OnlineInstance *, const OnlineCallbackResult *);
 void FUN_002f3dde(OnlineInstance *, const OnlineCallbackResult *);
 void FUN_002e9f00(s32 *, s32);
@@ -24,7 +24,7 @@ void FUN_0030c720(OnlineJob *job, const OnlineCallbackResult *result)
     OnlineInstance *instance = onlineInstanceTableFind(onlineInstanceTableGetCurrent(),
                                                        job->instanceId);
     if (instance != NULL) {
-        if (refIsNonNegative(&result->status)) {
+        if (_ZNK18OnlineResultRecord7isValidEv(&result->status)) {
             OnlineCallbackResult copy = *result;
             FUN_002f3dc4(instance, &copy);
         } else {

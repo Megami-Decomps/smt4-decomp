@@ -8,7 +8,7 @@ s32 devilCompareRaceLevelDescending(const u16 *, const u16 *);
 s32 devilCompareByRankGradeId(const u16 *, const u16 *);
 s32 FUN_001d1d78(const u16 *, const u16 *);
 s32 FUN_002c6e90(const u16 *, const u16 *);
-s32 FUN_00219720(const u16 *, const u16 *);
+s32 devilCompareBySetCategoryGrade(const u16 *, const u16 *);
 s32 devilCompare(const u16 *, const u16 *);
 s32 FUN_001f6524(const u16 *, const u16 *);
 s32 devilCompareByEntryValue(const u16 *, const u16 *);
@@ -39,7 +39,7 @@ void FUN_00191df4(void)
     }
     if ((*preference & 0x7f) == 0x31) {
         if (ascending)
-            FUN_002b7bca(work->base.portraitSelectionIV.desired, work->list.count, 2, FUN_00219720);
+            FUN_002b7bca(work->base.portraitSelectionIV.desired, work->list.count, 2, devilCompareBySetCategoryGrade);
         else
             FUN_002b7bca(work->base.portraitSelectionIV.desired, work->list.count, 2, devilCompare);
     }

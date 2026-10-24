@@ -8,7 +8,7 @@ int asdTMTexTableLoadTmx(int, int);
 int asdOperatorNew(void);
 int FUN_0022677c(int, int);
 int asdLoadFileAsyncSimple(...);
-int FUN_002bf464(void);
+int campButtonHelpLoad(void);
 int campCommonBgAcquire(void);
 int FUN_0031e198(void);
 int campButtonHelpAcquire(void);
@@ -26,11 +26,11 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
-extern int floatPairClear(int);
+extern int _ZN10FloatStateC1Ev(int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: FUN_002bf464. */
+/* Supplied declaration required: campButtonHelpLoad. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_0031e198. */
 /* Supplied declaration required: campButtonHelpAcquire. */
@@ -57,7 +57,7 @@ void FUN_004b6fc4(int param_1)
   asdTMTexTableLoadTmx(0x18,0);
   campCommonBgAcquire();
   FUN_003b61ec();
-  FUN_002bf464();
+  campButtonHelpLoad();
   campButtonHelpAcquire();
   FUN_004930e4(0);
   dataTable33Load(param_1 + 0x1114);
@@ -90,7 +90,7 @@ void FUN_004b6fc4(int param_1)
   asdOperatorNew();
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = floatPairClear(temp_v0 + 0x4f0);
+    temp_v1 = _ZN10FloatStateC1Ev(temp_v0 + 0x4f0);
     temp_v1 = temp_v1 - 0x4f0;
   }
   *(int *)(param_1 + 0x1218) = temp_v1;

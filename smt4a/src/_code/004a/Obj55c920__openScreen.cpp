@@ -17,7 +17,7 @@ typedef struct {
 
 void campCommonBgAcquire(void);
 s32 campButtonHelpIsActive(void);
-void FUN_002bf464(void);
+void campButtonHelpLoad(void);
 void campButtonHelpAcquire(void);
 void **asdTMTexTableGetEntry(s32 table);
 void asdTMTexTableLoadSprites(s32 table);
@@ -42,7 +42,7 @@ void Obj55c920::openScreen()
     campCommonBgAcquire();
     if (campButtonHelpIsActive() == 0) {
         screen->ownsButtonHelp = 1;
-        FUN_002bf464();
+        campButtonHelpLoad();
         campButtonHelpAcquire();
     }
     if (*asdTMTexTableGetEntry(7) == NULL) {

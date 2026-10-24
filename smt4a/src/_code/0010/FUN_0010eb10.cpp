@@ -35,7 +35,7 @@ extern int FUN_001156fc(int);
 extern int FUN_001210b0(int);
 /* Supplied declaration required: FUN_001212a0. */
 extern int FUN_00121328(int);
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern unsigned int onlineGetActiveLock(void);
 extern unsigned int FUN_002eb56c(void);
 /* Supplied declaration required: FUN_002ecef0. */
@@ -79,7 +79,7 @@ int FUN_0010eb10(unsigned int *param_1)
   *(unsigned char *)(temp_v0 + 0x54) = 0;
   FUN_002ecef0();
   if (DAT_0059496c != '\0') {
-    temp_v1 = operatorNew(0x24);
+    temp_v1 = _Znwj(0x24);
     puVar4 = (unsigned int *)0x0;
     if (temp_v1 != 0) {
       temp_v2 = onlineGetActiveLock();
@@ -89,7 +89,7 @@ int FUN_0010eb10(unsigned int *param_1)
     }
   }
   else {
-    temp_v1 = operatorNew(0x20);
+    temp_v1 = _Znwj(0x20);
     puVar4 = (unsigned int *)0x0;
     if (temp_v1 != 0) {
       puVar4 = (unsigned int *)_ZN9Obj5586e0C1Ev(temp_v1,&LAB_0010eca0);

@@ -43,7 +43,7 @@ s32 FUN_0011bf24();
 s32 FUN_0011cc1c();
 void nw_snd_SoundSystem_SetMasterVolume(f32 volume);
 u32 FUN_0012a740(u32 value);
-void FUN_0011cd14(u32 mode);
+void sndMasterManagerApply(u32 mode);
 void asdFatalError();
 void* asdMemoryAlloc(s32 heap, s32 alignment, s32 option, u32 size, s32 fromFront);
 
@@ -63,7 +63,7 @@ void asdSoundInitialize(s32 auxiliaryMode)
     AsdSoundSystem* sound = &g_asdSound;
     if (auxiliaryMode > 0) {
         FUN_0012a740(30);
-        FUN_0011cd14(3);
+        sndMasterManagerApply(3);
     }
 
     SoundSystemInitParameters parameters;

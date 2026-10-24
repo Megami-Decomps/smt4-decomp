@@ -5,7 +5,7 @@
 extern "C" {
 
 int strInit(unsigned char [32]);
-int vectorCopyHeader(unsigned int, unsigned int);
+int _ZN18OnlineResultRecordaSERKS_(unsigned int, unsigned int);
 int FUN_002ea41e(unsigned char [32], int);
 int strDestroy(unsigned char [32]);
 int FUN_00301e66(unsigned int, int);
@@ -20,8 +20,8 @@ typedef struct {
 extern signed char DAT_00594967; /* 0x594967 */
 
 /* Supplied declaration required: strInit. */
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: vectorCopyHeader. */
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: FUN_002ea41e. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_00301e66. */
@@ -49,15 +49,15 @@ void FUN_0011de3c(int param_1)
                          param_1 + 0x178,temp_v3);
     if (temp_v0 != 0) {
       temp_v7[0] = 0x10001;
-      temp_v1 = FUN_002e7908(temp_v6,temp_v7);
+      temp_v1 = _ZN12OnlineResultC1ERKj(temp_v6,temp_v7);
       temp_v2 = *(unsigned char *)(param_1 + 0x110);
     }
     else {
       temp_v5 = 0x80030065;
-      temp_v1 = FUN_002e7908(temp_v4,(unsigned int *)&temp_v5);
-      vectorCopyHeader(*(unsigned int *)(param_1 + 0x198),temp_v1);
+      temp_v1 = _ZN12OnlineResultC1ERKj(temp_v4,(unsigned int *)&temp_v5);
+      _ZN18OnlineResultRecordaSERKS_(*(unsigned int *)(param_1 + 0x198),temp_v1);
       temp_v5 = 0x8003006a;
-      temp_v1 = FUN_002e7908(temp_v4,(unsigned int *)&temp_v5);
+      temp_v1 = _ZN12OnlineResultC1ERKj(temp_v4,(unsigned int *)&temp_v5);
       temp_v2 = 2;
     }
     FUN_00310d9c(param_1,temp_v2,temp_v1);

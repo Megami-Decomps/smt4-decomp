@@ -9,7 +9,7 @@ int FUN_00397200(void);
 extern unsigned char DAT_00422364; /* 0x422364 */
 
 /* Supplied declaration required: FUN_00397200. */
-extern int FUN_003fa9a0(unsigned int *);
+extern int _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE11_C_get_linkEv(unsigned int *);
 
 
 void FUN_003b3030(unsigned int *param_1,unsigned int param_2,unsigned int param_3)
@@ -32,7 +32,7 @@ void FUN_003b3030(unsigned int *param_1,unsigned int param_2,unsigned int param_
   param_1[0x509] = 0;
   param_1[0x508] = 0;
   param_1[0x507] = 0;
-  temp_v0 = FUN_003fa9a0(param_1 + 0x505);
+  temp_v0 = _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE11_C_get_linkEv(param_1 + 0x505);
   param_1[0x50a] = temp_v0;
   *(unsigned int *)(temp_v0 + 4) = 0;
   *(unsigned int *)(param_1[0x50a] + 8) = param_1[0x50a];

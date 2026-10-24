@@ -1,66 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b8228` (_code @ 0x4b8228, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct StepText {
+    u8 unk00[2];     // 0x00
+    u8 text[0x3D];   // 0x02
+    u8 infoId;       // 0x3F
+};
+
+struct TextStep {
+    u8 unk00[0x28];          // 0x00
+    s32 state;               // 0x28
+    s32 substate;            // 0x2C
+    u8 unk30[0xA58];         // 0x30
+    u8 unkA88;               // 0xA88
+    u8 unkA89[0x68F];        // 0xA89
+    StepText *textEntry;     // 0x1118
+    u8 unk111C[0x20];        // 0x111C
+    u32 infoWindow;          // 0x113C
+    u8 unk1140[0x18];        // 0x1140
+    u32 script;              // 0x1158
+};
 
 extern "C" {
 
-int dialogOpen(...);
-int placeWinStartText(...);
-int FUN_00215978(...);
-int placeWinSetValue(...);
-int infoWinSetText(...);
-int FUN_004b7d88(...);
+s32 scrRunOpcodesStub(u32 script);
+void FUN_004b7d88(TextStep *step);
+void FUN_00215978(s32 arg);
+void dialogOpen(u8 mode, u8 arg);
+void infoWinSetText(u32 window, s32 id);
+void placeWinStartText(const void *text);
+void placeWinSetValue(s32 value);
 
-typedef struct fn_004b8228_arg0 fn_004b8228_arg0;
-struct fn_004b8228_arg0 {
-    unsigned char pad_0x0[0x28];
-    undefined4 field_0x28; /* +0x28 */
-    undefined4 field_0x2c; /* +0x2c */
-    unsigned char pad_0x30[0xa58];
-    undefined1 field_0xa88; /* +0xa88 */
-    unsigned char pad_0xa89[0x68f];
-    void *field_0x1118; /* +0x1118 */
-    unsigned char pad_0x111c[0x20];
-    unsigned char field_0x113c; /* +0x113c */
-    unsigned char pad_0x113d[0x1b];
-    undefined4 field_0x1158; /* +0x1158 */
-};
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: dialogOpen. */
-/* Supplied declaration required: placeWinStartText. */
-/* Supplied declaration required: FUN_00215978. */
-extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: placeWinSetValue. */
-/* Supplied declaration required: infoWinSetText. */
-/* Supplied declaration required: FUN_004b7d88. */
-
-
-void FUN_004b8228(fn_004b8228_arg0 *param_1)
-
+/* When the step's script finishes, opens the text of its entry and moves the step to state 5. */
+void FUN_004b8228(TextStep *step)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = scrRunOpcodesStub(param_1->field_0x1158);
-  if (temp_v0 == 2) {
-    FUN_004b7d88(param_1);
-    FUN_00215978(0);
-    dialogOpen(0);
-    infoWinSetText(*(unsigned int *)&param_1->field_0x113c,
-                 *(unsigned char *)((int)param_1->field_0x1118 + 0x3f));
-    param_1->field_0x2c = 0;
-    param_1->field_0x28 = 5;
-    param_1->field_0xa88 = 0;
-    placeWinStartText((int)param_1->field_0x1118 + 2);
-    placeWinSetValue(1);
-    return;
-  }
-  return;
+    if (scrRunOpcodesStub(step->script) == 2) {
+        FUN_004b7d88(step);
+        FUN_00215978(0);
+        dialogOpen(0, 0);
+        infoWinSetText(step->infoWindow, step->textEntry->infoId);
+        step->substate = 0;
+        step->state = 5;
+        step->unkA88 = 0;
+        placeWinStartText(step->textEntry->text);
+        placeWinSetValue(1);
+    }
 }
 
 } /* extern "C" */

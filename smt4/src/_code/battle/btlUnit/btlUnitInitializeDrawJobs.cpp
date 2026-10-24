@@ -40,7 +40,7 @@ extern const u8 _ZTV9Obj4209cc[];
 extern const u8 DAT_00420774, DAT_004208ec;
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, BattleUnitDrawWork *, u32);
 s32 FUN_001b7a0c(u32);
-void FUN_0020f5e8(u32);
+void btlUnitDestroyDrawJobs(u32);
 s32 jobFrameCounterAdvance(u32);
 void *asdOperatorNew(u32);
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
@@ -50,7 +50,7 @@ void FUN_001c0998(BattleUnitDrawObject *, u32);
 
 void btlUnitInitializeDrawJobs(BattleUnitDrawWork *work)
 {
-    work->calculationJob = taskCreateDraw("btlUnit Calc", 2, 0, 0, FUN_001b7a0c, FUN_0020f5e8, work, work->owner);
+    work->calculationJob = taskCreateDraw("btlUnit Calc", 2, 0, 0, FUN_001b7a0c, btlUnitDestroyDrawJobs, work, work->owner);
     taskCreateDraw("btlUnit Draw", 111, 0, 0, jobFrameCounterAdvance, NULL, work, work->calculationJob);
     BattleUnitDrawOwner *owner = (BattleUnitDrawOwner *)asdOperatorNew(sizeof(BattleUnitDrawOwner));
     if (owner) {

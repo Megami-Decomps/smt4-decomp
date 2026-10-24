@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-extern "C" void asdDeallocateArrayStorage(void *block, s32 count, s32 flags);
+extern "C" void _ZN4__rw15__rw_deallocateEPvji(void *block, s32 count, s32 flags);
 
 /* An object the owner deletes through its virtual destructor. */
 class Obj557b58Item {
@@ -24,7 +24,7 @@ struct Obj557b58Vec {
         if (first != end) {
             end = end - (end - first);
         }
-        asdDeallocateArrayStorage(first, capacity - first, 0);
+        _ZN4__rw15__rw_deallocateEPvji(first, capacity - first, 0);
     }
 };
 

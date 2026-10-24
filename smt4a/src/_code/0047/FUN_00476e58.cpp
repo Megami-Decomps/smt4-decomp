@@ -24,23 +24,23 @@ void FUN_00476e58(SelectionTransition *transition, u32 unused, s32 nextState)
 {
     AocMainA *main = g_aocMain;
     FUN_001b3428(main->query.operation);
-    if (legacyResourceIdRemap(&transition->query.result.words[1]) == 0xc9413891u)
+    if (legacyResourceIdRemap(&transition->query.result.result.code) == 0xc9413891u)
         return;
-    FUN_00473d74(g_aocMain, transition->query.result.words[1], transition->query.result.words[2]);
+    FUN_00473d74(g_aocMain, transition->query.result.result.code, transition->query.result.result.description);
     TransitionResource *resource;
-    if (FUN_001d10c0(&transition->query.result.words[1])) {
+    if (FUN_001d10c0(&transition->query.result.result.code)) {
         resource = transition->resource;
         transition->state = 3;
         transition->progress = 0;
-    } else if (FUN_001d1108(&transition->query.result.words[1]) ||
+    } else if (FUN_001d1108(&transition->query.result.result.code) ||
                nnResultIsFailure(queryResultFailureOnly(&main->query.result))) {
         resource = transition->resource;
         transition->state = 3;
         transition->progress = 0;
     } else {
-        if (resultLevel(legacyResourceIdRemap(&transition->query.result.words[1])) == -4 ||
-            resultLevel(legacyResourceIdRemap(&transition->query.result.words[1])) == -5 ||
-            legacyResourceIdRemap(&transition->query.result.words[1]) == 0xc8813890u) {
+        if (resultLevel(legacyResourceIdRemap(&transition->query.result.result.code)) == -4 ||
+            resultLevel(legacyResourceIdRemap(&transition->query.result.result.code)) == -5 ||
+            legacyResourceIdRemap(&transition->query.result.result.code) == 0xc8813890u) {
             RequestParameters parameters = transition->query.result;
             FUN_0047bc90(transition, &parameters);
             return;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014c250(int, unsigned int, unsigned int, unsigned int, int);
-int FUN_002ac5f4(unsigned char [12]);
+int _ZN2nw3snd8internal14BankFileReaderC1EPKv(unsigned char [12]);
 int nw_snd_internal_SoundArchiveLoader_LoadImpl(int, unsigned int, unsigned int, int, int);
 
 /* stack frame of param_3: 3 slot(s), 9 byte(s) */
@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0014c250. */
 extern int soundArchiveReadWaveArchiveInfo(unsigned int, unsigned int, unsigned int *);
 extern unsigned int *FUN_002ac5d8(unsigned char *);
-/* Supplied declaration required: FUN_002ac5f4. */
+/* Supplied declaration required: _ZN2nw3snd8internal14BankFileReaderC1EPKv. */
 extern unsigned int FUN_002ac780(unsigned int, unsigned int);
 /* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadImpl. */
 
@@ -38,7 +38,7 @@ unsigned int FUN_0037b61c(int param_1,int param_2,unsigned int param_3)
   unsigned char temp_v7 [12];
   
   if (param_2 != 0) {
-    FUN_002ac5f4(temp_v7);
+    _ZN2nw3snd8internal14BankFileReaderC1EPKv(temp_v7);
     puVar1 = (unsigned int *)FUN_002ac5d8(temp_v7);
     if (puVar1 != (unsigned int *)0x0) {
       temp_v2 = 0;

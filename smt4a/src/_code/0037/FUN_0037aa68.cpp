@@ -1,47 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037aa68` (_code @ 0x37aa68, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the 1.0f literal load before the null test and keeps the target in r5 and the color in r4 (swapped here); the white-color arm's moves are scheduled differently. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00154180(int, int, int, int);
-int FUN_00154d68(unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_0037a99c(int, int);
+struct Color4 {
+    f32 r, g, b, a;
+};
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+/* A render target: color/depth buffer descriptors plus the size block at 0xC (width at 0x14, height at 0x18). */
+struct RenderSize {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u32 width;
+    /* 0x18 */ u32 height;
+};
 
-/* Supplied declaration required: FUN_00154180. */
-/* Supplied declaration required: FUN_00154d68. */
-/* Supplied declaration required: FUN_0037a99c. */
+struct RenderTargetPair {
+    /* 0x00 */ u32 color;
+    /* 0x04 */ u32 depth;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ RenderSize *size;
+};
 
+void FUN_00154d68(u32 color, u32 depth, u32 width, u32 height);
+void FUN_00154180(s32 x, s32 y, s32 width, s32 height);
+void FUN_0037a99c(s32 a, s32 b, Color4 color);
 
-void FUN_0037aa68(unsigned int *param_1,int param_2)
-
+/* Binds the render target, sets its viewport (clamped to 1023x1016) and clears it with `color` (white if NULL). */
+void FUN_0037aa68(RenderTargetPair *target, const Color4 *color)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  FUN_00154d68(*param_1,param_1[1],*(unsigned int *)(param_1[3] + 0x14),
-               *(unsigned int *)(param_1[3] + 0x18));
-  temp_v0 = *(int *)(param_1[3] + 0x14);
-  temp_v1 = *(int *)(param_1[3] + 0x18);
-  if (temp_v0 >= 0x400) {
-    temp_v0 = 0x3ff;
-  }
-  if (temp_v1 >= 0x3f9) {
-    temp_v1 = 0x3f8;
-  }
-  FUN_00154180(0,0,temp_v0,temp_v1);
-  if (param_2 != 0) {
-    FUN_0037a99c(0,7);
-    return;
-  }
-  FUN_0037a99c(0,7);
-  return;
+    s32 width;
+    s32 height;
+
+    FUN_00154d68(target->color, target->depth, target->size->width, target->size->height);
+    width = target->size->width;
+    height = target->size->height;
+    if (width >= 0x400) {
+        width = 0x3FF;
+    }
+    if (height > 0x3F8) {
+        height = 0x3F8;
+    }
+    FUN_00154180(0, 0, width, height);
+    if (color != NULL) {
+        FUN_0037a99c(0, 7, *color);
+        return;
+    }
+    Color4 white;
+    white.r = 1.0f;
+    white.g = 1.0f;
+    white.b = 1.0f;
+    white.a = 1.0f;
+    FUN_0037a99c(0, 7, white);
 }
 
 } /* extern "C" */

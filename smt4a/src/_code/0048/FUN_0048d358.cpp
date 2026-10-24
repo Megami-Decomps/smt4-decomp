@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail keeps the source order of the state and flags stores in both cases; armcc swaps them (str r1, [r4, #8]! before the flags store). */
 #include "shard/W5_W5Match7_SceneState.h"
 
 extern "C" {

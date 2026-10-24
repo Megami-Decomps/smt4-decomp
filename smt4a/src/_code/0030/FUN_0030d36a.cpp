@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int vectorCopyHeader(int, int);
+int _ZN18OnlineResultRecordaSERKS_(int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 extern int __aeabi_idivmod(int, unsigned int);
 
 
@@ -31,7 +31,7 @@ void FUN_0030d36a(int *param_1)
   temp_v3 = temp_v2;
   if (temp_v0 != temp_v2) {
     for (; temp_v3 != temp_v2; temp_v3 = temp_v3 + 0xc) {
-      vectorCopyHeader(temp_v1,temp_v3);
+      _ZN18OnlineResultRecordaSERKS_(temp_v1,temp_v3);
       temp_v1 = temp_v1 + 0xc;
     }
     temp_v3 = param_1[1];

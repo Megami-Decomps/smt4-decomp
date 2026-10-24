@@ -1,33 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00342078` (_code @ 0x342088, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail adds the group offset (+0x800) separately and uses a register-offset ldrb with writeback; built folds the constant into the load and orders the mask setup differently */
+#include "common.h"
+
+struct FlagBlock {
+    u8 unk0000[0x800];     // 0x0000
+    u8 groups[100][4];     // 0x0800 (per group: 32 flag bits)
+    u8 unk0990[0x1960];    // 0x0990
+    u8 touched[16];        // 0x22F0
+};
 
 extern "C" {
 
-extern int FUN_0023d2ec(void);
+FlagBlock *FUN_0023d2ec(void);
 
-
-void FUN_00342078(unsigned int param_1,unsigned int param_2,int param_3)
-
+/* Sets or clears flag `bit` of group `group` (< 100); setting also marks the group in the touched bitmap. */
+void FUN_00342078(u32 group, u32 bit, s32 set)
 {
-  int temp_v0;
-  unsigned char *pbVar2;
-  unsigned char temp_v1;
-  
-  temp_v0 = FUN_0023d2ec();
-  pbVar2 = (unsigned char *)(temp_v0 + param_1 * 4 + 0x800 + (param_2 >> 3));
-  temp_v1 = (unsigned char)(1 << (param_2 & 7));
-  if (param_3 != 0) {
-    *pbVar2 = temp_v1 | *pbVar2;
-    temp_v0 = FUN_0023d2ec();
-    pbVar2 = (unsigned char *)(temp_v0 + 0x22f0 + (param_1 >> 3));
-    temp_v1 = (unsigned char)(1 << (param_1 & 7)) | *pbVar2;
-  }
-  else {
-    temp_v1 = *pbVar2 & ~temp_v1;
-  }
-  *pbVar2 = temp_v1;
-  return;
+    if (group >= 110) {
+        return;
+    }
+    if ((s32)group >= 100) {
+        return;
+    }
+    u8 *byte = &FUN_0023d2ec()->groups[group][0] + (bit >> 3);
+    u32 mask = (u8)(1 << (bit & 7));
+    u32 value;
+
+    if (set != 0) {
+        *byte = mask | *byte;
+        byte = &FUN_0023d2ec()->touched[0] + (group >> 3);
+        value = (u8)(1 << (group & 7)) | *byte;
+    } else {
+        value = *byte & ~mask;
+    }
+    *byte = value;
 }
 
 } /* extern "C" */

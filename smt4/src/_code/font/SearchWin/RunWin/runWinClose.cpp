@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bee58(void *ui, int arg);
+int spriteStartAnimationByIndex(void *ui, int arg);
 int FUN_002bf810(int id);
 
 extern RunWinWork *g_runWin;
@@ -18,7 +18,7 @@ void runWinClose(void)
     } else {
         run->nextState = 3;
     }
-    FUN_002bee58(run->ui, 1);
+    spriteStartAnimationByIndex(run->ui, 1);
     FUN_002bf810(0x10001fe);
 }
 

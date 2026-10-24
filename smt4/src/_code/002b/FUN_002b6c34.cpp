@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001386f8(void);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int FUN_002ae9ec(int, int, unsigned int, int, int, int);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(void);
@@ -23,7 +23,7 @@ extern unsigned char LAB_002b6dac; /* 0x2b6dac */
 
 /* Supplied declaration required: FUN_001386f8. */
 extern int playerGetSkillRank(unsigned int);
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 extern int idIsAbove400(void);
 extern unsigned int categoryIdFromIndex(unsigned int);
 /* Supplied declaration required: FUN_002ae9ec. */
@@ -57,7 +57,7 @@ void FUN_002b6c34(unsigned int param_1,int param_2,int param_3,int param_4,int p
     }
     else {
       temp_v2 = param_1;
-      FUN_002ae164();
+      dataTable40FindById();
       if (temp_v2 == 0) {
         temp_v0 = 1000;
       }

@@ -1,46 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030aa50` (_code @ 0x30aa50, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/Sys44de28.h"
 
 extern "C" {
 
-int FUN_00202ab4(int);
-int VectorSignedToFloat(int, int);
+struct SlotRecord {
+    u8 unk00[8];
+    s16 x;
+    s16 y;
+};
 
-extern unsigned char g_saveLoadUIFlags; /* 0x44de28 */
-extern unsigned char DAT_0044de29; /* 0x44de29 */
-extern int g_saveLoadUI; /* 0x44de2c */
+void FUN_00202ab4(s32 a, s32 b);
+SlotRecord *FUN_002bf4f8(s32 group, s32 index);
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00202ab4. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
-
-
-void FUN_0030aa50(unsigned char param_1)
-
+/* Resets the save/load worker for a load (isLoad = 1) and enters state 8 at the position of record 0x36/2. */
+void FUN_0030aa50(u8 arg)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int in_fpscr;
-  unsigned int temp_v2;
-  
-  FUN_00202ab4(0);
-  temp_v0 = g_saveLoadUI;
-  *(unsigned int *)(g_saveLoadUI + 0x14) = 0;
-  g_saveLoadUIFlags = 0;
-  DAT_0044de29 = 0;
-  *(unsigned char *)(temp_v0 + 0x49) = 1;
-  *(unsigned char *)(temp_v0 + 0x379) = param_1;
-  temp_v1 = FUN_002bf4f8(0x36,2);
-  temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v0 + 0x38) = temp_v2;
-  temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v0 + 0x3c) = temp_v2;
-  *(unsigned char *)(temp_v0 + 0x49) = 1;
-  *(unsigned int *)(temp_v0 + 0x34) = 0;
-  *(unsigned int *)(temp_v0 + 0x50) = 8;
-  return;
+    FUN_00202ab4(0, 0);
+    Worker *worker = g_saveLoadUIFlags.worker;
+    worker->unk014 = 0;
+    g_saveLoadUIFlags.unk00 = 0;
+    g_saveLoadUIFlags.unk01 = 0;
+    worker->isLoad = 1;
+    worker->unk379 = arg;
+    SlotRecord *record = FUN_002bf4f8(0x36, 2);
+    worker->slotX = record->x;
+    worker->slotY = record->y;
+    worker->isLoad = 1;
+    worker->slotIndex = 0;
+    worker->state = 8;
 }
 
 } /* extern "C" */

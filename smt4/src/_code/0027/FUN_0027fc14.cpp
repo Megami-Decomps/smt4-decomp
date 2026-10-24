@@ -1,51 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027fc14` (_code @ 0x27fc14, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only register choice for the {0.0f, 1.0f} pair store (retail r3, built r2) and the literal-pool layout differ */
+#include "common.h"
+
+struct Vec3f {
+    f32 x, y, z;
+};
+
+struct ViewState {
+    s32 mode;           // 0x000
+    u32 unk004;         // 0x004
+    u32 unk008;         // 0x008
+    u8 unk00C[0x10];    // 0x00C
+    Vec3f target;       // 0x01C
+    Vec3f current;      // 0x028
+    u8 unk034[0x7C];    // 0x034
+    u8 flagB0;          // 0x0B0
+    u8 flagB1;          // 0x0B1
+    u16 countB2;        // 0x0B2
+    u16 countB4;        // 0x0B4
+    u8 unkB6[2];        // 0x0B6
+    f32 scaleB8;        // 0x0B8
+    f32 scaleBC;        // 0x0BC
+    f32 scaleC0;        // 0x0C0
+    u8 unkC4[0x148];    // 0x0C4
+    f32 unk20C;         // 0x20C
+    f32 unk210;         // 0x210
+    u8 unk214[8];       // 0x214
+    u8 unk21C;          // 0x21C
+    u8 unk21D[0x73];    // 0x21D
+    f32 heading;        // 0x290
+};
+
+struct ViewGlobals {
+    u8 unk00[4];        // 0x00
+    ViewState *state;   // 0x04
+};
 
 extern "C" {
 
-int FUN_003079b4(void);
+extern ViewGlobals DAT_004474f0;
 
-extern unsigned char DAT_004474f0; /* 0x4474f0 */
+void FUN_003079b4(void);
 
-/* Supplied declaration required: FUN_003079b4. */
-
-
-void FUN_0027fc14(int param_1)
-
+/* Resets the view state for the given mode (modes 8 and 9 start at heading 180). */
+void FUN_0027fc14(s32 mode)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  int *piVar2;
-  int temp_v0;
-  
-  piVar1 = (*(int * *)((unsigned char *)&DAT_004474f0 + 0x4));
-  piVar2 = (*(int * *)((unsigned char *)&DAT_004474f0 + 0x4)) + 7;
-  *(unsigned char *)((*(int * *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x87) = 0;
-  *piVar1 = param_1;
-  piVar1[1] = 0;
-  piVar1[2] = 0;
-  temp_v0 = *piVar2;
-  piVar1[0xa4] = 0;
-  piVar1[10] = temp_v0;
-  piVar1[0xb] = piVar1[8];
-  piVar1[0xc] = piVar1[9];
-  if (param_1 != 0) {
-    piVar1[0x83] = 0;
-    piVar1[0x84] = 0;
-    *(unsigned char *)(piVar1 + 0x2c) = 0;
-    *(unsigned char *)((int)piVar1 + 0xb1) = 0;
-    *(unsigned short *)((int)piVar1 + 0xb2) = 10;
-    *(unsigned short *)(piVar1 + 0x2d) = 0;
-    piVar1[0x2e] = 0;
-    piVar1[0x2f] = 0;
-    piVar1[0x30] = 0x3f800000;
-    if (param_1 == 8 || param_1 == 9) {
-      piVar1[0xa4] = 0x43340000;
+    ViewState *state = DAT_004474f0.state;
+
+    state->unk21C = 0;
+    state->mode = mode;
+    state->unk004 = 0;
+    state->unk008 = 0;
+    state->current = state->target;
+    state->heading = 0.0f;
+    if (mode != 0) {
+        state->unk20C = 0.0f;
+        state->unk210 = 0.0f;
+        state->flagB0 = 0;
+        state->flagB1 = 0;
+        state->countB2 = 10;
+        state->countB4 = 0;
+        state->scaleB8 = 0.0f;
+        state->scaleBC = 0.0f;
+        state->scaleC0 = 1.0f;
+        if (mode == 8 || mode == 9) {
+            state->heading = 180.0f;
+        }
     }
-  }
-  FUN_003079b4();
-  return;
+    FUN_003079b4();
 }
 
 } /* extern "C" */

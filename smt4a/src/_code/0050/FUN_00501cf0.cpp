@@ -1,47 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00501cf0` (_code @ 0x501cf0, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the result in a stack slot (str r0,[sp]; push {r3,...}) and copies the arguments to sl/r8/r9/fp; built keeps it in a register and spills r0-r3 */
+#include "common.h"
+
+struct CecModuleFlags {
+    u8 unk00;   // 0x00
+    u8 retried; // 0x01
+};
 
 extern "C" {
 
-int FUN_0042d3d8(int, int);
+extern CecModuleFlags g_asdCecModuleFlags; /* 0x5b448b */
 
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_5_stack;
+u32 FUN_00430358(u32 a, u32 b, u32 c, u32 d);
+void FUN_0042d3d8(s32 a, s32 b);
 
-extern unsigned char g_asdCecModuleFlags; /* 0x5b448b */
-
-/* Supplied declaration required: FUN_0042d3d8. */
-extern unsigned int FUN_00430358(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-
-
-unsigned int FUN_00501cf0(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5)
-
+/* Calls FUN_00430358, retrying up to twice (and flagging the module) while it fails with 0xC8A10BF0. */
+u32 FUN_00501cf0(u32 unused, u32 a, u32 b, u32 c, u32 d)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  temp_v0 = param_4;
-  while( 1 ) {
-    temp_v0 = FUN_00430358(param_2,param_3,param_4,param_5,temp_v0);
-    if ((temp_v0 & 0x80000000) == 0 || temp_v1 >= 2) {
-      return temp_v0;
+    u32 result;
+    s32 tries = 0;
+
+    while (true) {
+        result = FUN_00430358(a, b, c, d);
+        if ((s32)(result & 0x80000000) >= 0 || tries >= 2) {
+            return result;
+        }
+        if (result != 0xC8A10BF0) {
+            break;
+        }
+        FUN_0042d3d8(1, 0);
+        tries++;
+        g_asdCecModuleFlags.retried = 1;
+        if (tries >= 3) {
+            return result;
+        }
     }
-    if (temp_v0 != 0xc8a10bf0) break;
-    FUN_0042d3d8(1,0);
-    temp_v1 = temp_v1 + 1;
-    (*(unsigned char *)((unsigned char *)&g_asdCecModuleFlags + 0x1)) = 1;
-    if (temp_v1 >= 3) {
-      (*(unsigned char *)((unsigned char *)&g_asdCecModuleFlags + 0x1)) = 1;
-      return temp_v0;
-    }
-  }
-  return temp_v0;
+    return result;
 }
 
 } /* extern "C" */

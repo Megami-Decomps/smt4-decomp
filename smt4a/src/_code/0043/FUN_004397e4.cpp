@@ -1,46 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004397e4` (_code @ 0x4397e4, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc forwards the two stack-passed words through VFP registers (vldm/vstr); retail keeps all four stack arguments in general registers (ldm) and stores them with stm. */
+#include "nn/Result.h"
+#include "nn/svc.h"
 
 extern "C" {
 
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
+extern u32 DAT_005c0a80; /* service session handle */
 
-extern unsigned char LAB_00120106; /* 0x120106 */
-extern int DAT_005c0a80; /* 0x5c0a80 */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-int FUN_004397e4(unsigned int param_1,int param_2,unsigned int param_3,int param_4,unsigned int *param_5,
-                unsigned int param_6,unsigned int param_7,int param_8)
-
+/* IPC request 0x12: two sized input buffers (first, second), four word parameters and a third
+ * buffer, each buffer passed as a size/pointer translate pair; returns the transport result, or the
+ * service's result word when the transport succeeded, and passes one response word back in *out. */
+s32 FUN_004397e4(u32 first, u32 firstSize, u32 second, u32 secondSize, u32 *out, u32 arg5, u32 third, u32 thirdSize)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned char **)(temp_v1 + 0x80) = &LAB_00120106;
-  *(int *)(temp_v1 + 0x84) = param_2;
-  *(int *)(temp_v1 + 0x88) = param_4;
-  *(unsigned int *)(temp_v1 + 0x8c) = param_6;
-  *(int *)(temp_v1 + 0x90) = param_8;
-  *(unsigned int *)(temp_v1 + 0x94) = (param_2 << 0xe) | 0xc02;
-  *(unsigned int *)(temp_v1 + 0x98) = param_1;
-  *(unsigned int *)(temp_v1 + 0x9c) = (param_4 << 0x14) | 0x402;
-  *(unsigned int *)(temp_v1 + 0xa0) = param_3;
-  *(unsigned int *)(temp_v1 + 0xa4) = (param_8 << 4) | 0xc;
-  *(unsigned int *)(temp_v1 + 0xa8) = param_7;
-  software_interrupt(0x32);
-  temp_v0 = DAT_005c0a80;
-  if (-1 < DAT_005c0a80) {
-    *param_5 = *(unsigned int *)(temp_v1 + 0x88);
-    temp_v0 = *(int *)(temp_v1 + 0x84);
-  }
-  return temp_v0;
+    nn::os::IpcCommandBuffer *cmd = nn::os::GetIpcCommandBuffer();
+
+    cmd->header = 0x120106;
+    cmd->words[0] = firstSize;
+    cmd->words[1] = secondSize;
+    cmd->words[2] = arg5;
+    cmd->words[3] = thirdSize;
+    cmd->words[4] = (firstSize << 14) | 0xC02;
+    cmd->words[5] = first;
+    cmd->words[6] = (secondSize << 20) | 0x402;
+    cmd->words[7] = second;
+    cmd->words[8] = (thirdSize << 4) | 0xC;
+    cmd->words[9] = third;
+    s32 result = nn::svc::SendSyncRequest(DAT_005c0a80);
+    if (nnResultIsSuccess(result)) {
+        *out = cmd->words[1];
+        result = cmd->words[0];
+    }
+    return result;
 }
 
 } /* extern "C" */

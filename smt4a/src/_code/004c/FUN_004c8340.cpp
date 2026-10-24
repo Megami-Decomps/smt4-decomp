@@ -5,7 +5,7 @@
 extern "C" {
 
 int btlGetMainState(void);
-int FUN_0034a290(void);
+int dataTable41FindById(void);
 int FUN_003e8bb0(unsigned int [9], int, int);
 int FUN_003f0e20(...);
 int source4CCopyHalves(void);
@@ -25,7 +25,7 @@ typedef struct {
 } param_5_stack;
 
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_0034a290. */
+/* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: source4CCopyHalves. */
@@ -154,7 +154,7 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
     temp_v3 = 0;
     do {
       temp_v5 = (unsigned int)temp_v10[temp_v3];
-      if (((temp_v5 != 0) && (FUN_0034a290(), temp_v5 != 0)) &&
+      if (((temp_v5 != 0) && (dataTable41FindById(), temp_v5 != 0)) &&
          (temp_v13[0] == (*(unsigned int *)(temp_v5 + 0x44) & 0xffff) >> 0xb)) {
         temp_v5 = (*(unsigned int *)(temp_v5 + 0x44) & 0xfffff) >> 0x10;
         if (temp_v5 == 1) {

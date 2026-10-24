@@ -17,8 +17,9 @@ int FUN_002c58c8(int id, int arg);
 u32 dataTableGetCount(u32 value);
 u32 dataTableGetEntries(void);
 u32 dataTableGet(u32 first, u32 second);
+int recordCompareSignedValue(const void *a, const void *b);
 
-/* On the first use (count <= 0) sets up entry 0x1e/0x38 and submits the 0x72-byte table at 0x1f62dc; always bumps the count. */
+/* On the first use (count <= 0) sets up entry 0x1e/0x38 and sorts the 0x72-byte table entries with recordCompareSignedValue; always bumps the count. */
 void FUN_001ddb40(void)
 {
     if (g_useCounter.count <= 0) {
@@ -31,7 +32,7 @@ void FUN_001ddb40(void)
         first = dataTableGet(0x38, 0);
         second = dataTableGetEntries();
         first = dataTableGetCount(first);
-        FUN_002b7bca(second, first, 0x72, (u8 *)0x1f62dc);
+        FUN_002b7bca(second, first, 0x72, (u8 *)recordCompareSignedValue);
     }
     g_useCounter.count = g_useCounter.count + 1;
 }

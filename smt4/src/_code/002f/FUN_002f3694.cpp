@@ -1,136 +1,142 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f3694` (_code @ 0x2f3694, 0x268 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: close: retail multiplies with smulbb (both operands halfwords), evaluates the mark's bit index before calling gameGetMapBlock and keeps the kind test as two branches where built predicates the increment */
+#include "map/mapDepart.h"
+
+/* A record of data table 0x2E (section 2): a timed area event. */
+struct AreaEventRecord {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ s16 areaId;          /* -1 ends the table */
+    /* 0x22 */ u8 unk22[4];
+    /* 0x26 */ s16 cooldown;        /* in 0x708-frame units */
+    /* 0x28 */ s16 timerSlot;
+};
+
+/* A record of data table 0x30 (0x48 entries): marks a bit of the map's first flag set for an area. */
+struct AreaMarkRecord {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ s32 active;          /* -1 = unused */
+    /* 0x24 */ s16 bit;
+    /* 0x26 */ s8 areaId;
+};
+
+/* A record of data table 0x31: a candidate slot of an area, grouped by `group`. */
+struct AreaSlotRecord {
+    /* 0x00 */ s8 areaId;           /* -1 = unused */
+    /* 0x01 */ s8 group;
+    /* 0x02 */ u8 unk02[9];
+    /* 0x0B */ s8 kind;             /* 0 and 6 can be picked */
+};
+
+/* The map block as this function sees it: two flag bit sets and the cooldown timers. */
+struct EventMapBlock {
+    /* 0x000 */ u8 unk000[0x794];
+    /* 0x794 */ u32 slotBits[1];
+    /* 0x798 */ u8 unk798[0x4FC];
+    /* 0xC94 */ u8 unkC94[4];
+    /* 0xC98 */ u32 markBits[1];
+    /* 0xC9C */ u8 unkC9C[0x1C4];
+    /* 0xE60 */ s32 timers[48];
+};
+typedef char EventMapBlockLayout[offsetof(EventMapBlock, markBits) == 0xC98 && offsetof(EventMapBlock, timers) == 0xE60 &&
+    offsetof(EventMapBlock, slotBits) == 0x794 ? 1 : -1];
 
 extern "C" {
 
-int dataTable2eSub2GetCount(void);
-int FUN_0025b670(void);
-int FUN_0027ee24(void);
+extern GameState g_gameState;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
+EventMapBlock *gameGetMapBlock(void);
+s32 dataTable2eSub2GetCount(void);
+AreaEventRecord *dataTable2eSub2GetRecord(s32 index);
+s32 dataTableGetRecordFortyEight(void);
+AreaMarkRecord *FUN_0025b670(s32 index);
+s32 dataTableGetRecordFortyNine(void);
+AreaSlotRecord *FUN_0027ee24(s32 index);
+s32 randNextInRange(u32 maximum);
+void FUN_001fc314(s32 areaId);
 
-extern int g_gameState; /* 0x49f91c */
-
-extern int FUN_001fc314(int);
-extern int dataTableGetRecordFortyEight(void);
-extern int dataTableGetRecordFortyNine(void);
-extern int dataTable2eSub2GetRecord(int);
-/* Supplied declaration required: dataTable2eSub2GetCount. */
-/* Supplied declaration required: FUN_0025b670. */
-/* Supplied declaration required: FUN_0027ee24. */
-extern int randNextInRange(unsigned int);
-extern int gameGetMapBlock(void);
-
-
-void FUN_002f3694(void)
-
+static __inline void markBitSet(EventMapBlock *block, s32 index)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  char *pcVar3;
-  int temp_v2;
-  int temp_v3;
-  char *pcVar6;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  
-  temp_v0 = gameGetMapBlock();
-  temp_v7 = 0;
-  temp_v1 = temp_v0;
-  dataTable2eSub2GetCount();
-  if (0 < temp_v1) {
-    do {
-      temp_v1 = dataTable2eSub2GetRecord(temp_v7);
-      temp_v4 = (int)*(short *)(temp_v1 + 0x20);
-      if (temp_v4 == -1) {
-        return;
-      }
-      if ((g_gameState == temp_v4) &&
-         (temp_v2 = temp_v0 + *(short *)(temp_v1 + 0x28) * 4, *(int *)(temp_v2 + 0xe60) == 0)) {
-        temp_v3 = 0;
-        *(int *)(temp_v2 + 0xe60) = *(short *)(temp_v1 + 0x26) * 0x708;
-        temp_v1 = dataTableGetRecordFortyEight();
-        if (0 < temp_v1) {
-          do {
-            temp_v1 = temp_v3;
-            FUN_0025b670();
-            if ((*(int *)(temp_v1 + 0x20) != -1) && (*(char *)(temp_v1 + 0x26) == temp_v4)) {
-              temp_v2 = (int)*(short *)(temp_v1 + 0x24);
-              temp_v1 = gameGetMapBlock();
-              temp_v1 = temp_v1 + ((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1b)) >> 5) * 4;
-              *(unsigned int *)(temp_v1 + 0xc98) = *(unsigned int *)(temp_v1 + 0xc98) | (1 << ((temp_v2 % 0x20) & 0xffU));
-            }
-            temp_v3 = temp_v3 + 1;
-            temp_v1 = dataTableGetRecordFortyEight();
-          } while (temp_v3 < temp_v1);
-        }
-        temp_v1 = 0;
+    block->markBits[index / 32] |= 1 << (index % 32);
+}
+
+static __inline void slotBitSet(EventMapBlock *block, s32 index)
+{
+    block->slotBits[index / 32] |= 1 << (index % 32);
+}
+
+static __inline void slotBitClear(EventMapBlock *block, s32 index)
+{
+    block->slotBits[index / 32] &= ~(1 << (index % 32));
+}
+
+/* Starts the area events whose area is the current one and whose timer has run out: marks the area's flag bits and
+ * picks one random candidate slot per group (0..15). */
+void FUN_002f3694(void)
+{
+    EventMapBlock *block = gameGetMapBlock();
+    s32 i;
+
+    i = 0;
+    if (dataTable2eSub2GetCount() > 0) {
         do {
-          temp_v2 = gameGetMapBlock();
-          temp_v5 = 0;
-          pcVar6 = (char *)0x0;
-          temp_v3 = dataTableGetRecordFortyNine();
-          if (0 < temp_v3) {
-            do {
-              pcVar3 = pcVar6;
-              FUN_0027ee24();
-              if (((*pcVar3 != -1) && (*pcVar3 == temp_v4)) && (pcVar3[1] == temp_v1)) {
-                temp_v3 = temp_v2 + ((int)(pcVar6 + ((unsigned int)((int)pcVar6 >> 0x1f) >> 0x1b)) >> 5) * 4;
-                *(unsigned int *)(temp_v3 + 0x794) =
-                     *(unsigned int *)(temp_v3 + 0x794) & ~(1 << (((int)pcVar6 % 0x20) & 0xffU));
-                if ((pcVar3[0xb] == '\0') || (pcVar3[0xb] == '\x06')) {
-                  temp_v5 = temp_v5 + 1;
-                }
-              }
-              pcVar6 = pcVar6 + 1;
-              temp_v3 = dataTableGetRecordFortyNine();
-            } while ((int)pcVar6 < temp_v3);
-            if (temp_v5 != 0) {
-              if (temp_v5 == 1) {
-                temp_v3 = 0;
-              }
-              else {
-                temp_v3 = randNextInRange((temp_v5 - 1U) & 0xffff);
-              }
-              temp_v6 = 0;
-              pcVar6 = (char *)0x0;
-              temp_v5 = dataTableGetRecordFortyNine();
-              if (0 < temp_v5) {
-                do {
-                  pcVar3 = pcVar6;
-                  FUN_0027ee24();
-                  if (((*pcVar3 != -1) && (*pcVar3 == temp_v4)) &&
-                     ((pcVar3[1] == temp_v1 && ((pcVar3[0xb] == '\0' || (pcVar3[0xb] == '\x06')))))) {
-                    if (temp_v6 == temp_v3) {
-                      temp_v5 = temp_v2 + ((int)(pcVar6 + ((unsigned int)((int)pcVar6 >> 0x1f) >> 0x1b)) >> 5) *
-                                      4;
-                      *(unsigned int *)(temp_v5 + 0x794) =
-                           *(unsigned int *)(temp_v5 + 0x794) | (1 << (((int)pcVar6 % 0x20) & 0xffU));
-                    }
-                    temp_v6 = temp_v6 + 1;
-                  }
-                  pcVar6 = pcVar6 + 1;
-                  temp_v5 = dataTableGetRecordFortyNine();
-                } while ((int)pcVar6 < temp_v5);
-              }
+            AreaEventRecord *event = dataTable2eSub2GetRecord(i);
+            s32 areaId = event->areaId;
+
+            if (areaId == -1) {
+                return;
             }
-          }
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < 0x10);
-        temp_v1 = FUN_001fc314(temp_v4);
-      }
-      temp_v7 = temp_v7 + 1;
-      dataTable2eSub2GetCount();
-    } while (temp_v7 < temp_v1);
-  }
-  return;
+            if (g_gameState.unk000 == areaId && block->timers[event->timerSlot] == 0) {
+                s32 j;
+                s32 group;
+
+                block->timers[event->timerSlot] = event->cooldown * 0x708;
+                for (j = 0; j < dataTableGetRecordFortyEight(); j++) {
+                    AreaMarkRecord *mark = FUN_0025b670(j);
+
+                    if (mark->active != -1 && mark->areaId == areaId) {
+                        markBitSet(gameGetMapBlock(), mark->bit);
+                    }
+                }
+                for (group = 0; group < 16; group++) {
+                    EventMapBlock *current = gameGetMapBlock();
+                    s32 candidates = 0;
+
+                    for (j = 0; j < dataTableGetRecordFortyNine(); j++) {
+                        AreaSlotRecord *slot = FUN_0027ee24(j);
+
+                        if (slot->areaId != -1 && slot->areaId == areaId && slot->group == group) {
+                            slotBitClear(current, j);
+                            if (slot->kind == 0 || slot->kind == 6) {
+                                candidates++;
+                            }
+                        }
+                    }
+                    if (candidates != 0) {
+                        s32 pick;
+                        s32 count = 0;
+
+                        if (candidates == 1) {
+                            pick = 0;
+                        } else {
+                            pick = randNextInRange((u16)(candidates - 1));
+                        }
+                        for (j = 0; j < dataTableGetRecordFortyNine(); j++) {
+                            AreaSlotRecord *slot = FUN_0027ee24(j);
+
+                            if (slot->areaId != -1 && slot->areaId == areaId && slot->group == group &&
+                                (slot->kind == 0 || slot->kind == 6)) {
+                                if (count == pick) {
+                                    slotBitSet(current, j);
+                                }
+                                count++;
+                            }
+                        }
+                    }
+                }
+                FUN_001fc314(areaId);
+            }
+            i++;
+        } while (i < dataTable2eSub2GetCount());
+    }
 }
 
 } /* extern "C" */

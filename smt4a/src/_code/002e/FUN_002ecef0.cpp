@@ -16,7 +16,7 @@ extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 /* Supplied declaration required: FUN_0010d300. */
 /* Supplied declaration required: FUN_00120d60. */
 /* Supplied declaration required: sharedRefAddRef. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: onlineInstantiationContextGetCurrent. */
 /* Supplied declaration required: lockedLeave. */
 /* Supplied declaration required: lockedEnter. */
@@ -36,7 +36,7 @@ void FUN_002ecef0(void)
     sharedRefAddRef();
   }
   else {
-    temp_v0 = operatorNew(0x80);
+    temp_v0 = _Znwj(0x80);
     if (temp_v0 != 0) {
       FUN_00120d60();
     }

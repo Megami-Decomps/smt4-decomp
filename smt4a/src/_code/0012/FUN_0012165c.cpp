@@ -40,7 +40,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00121808. */
-extern int *FUN_002e7908(unsigned int **, unsigned int *);
+extern int *_ZN12OnlineResultC1ERKj(unsigned int **, unsigned int *);
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: onlineJobSetStateTimed. */
@@ -100,7 +100,7 @@ void FUN_0012165c(fn_0012165c_arg0 *param_1)
                                        temp_v11 - temp_v10);
       if (temp_v7 < temp_v4[0]) {
         temp_v5 = 0x80010004;
-        piVar7 = (int *)FUN_002e7908(temp_v4,(unsigned int *)&temp_v5);
+        piVar7 = (int *)_ZN12OnlineResultC1ERKj(temp_v4,(unsigned int *)&temp_v5);
         FUN_0030ff06(param_1,piVar7);
         vectorDestroyBytes(&temp_v10);
         return;
@@ -109,7 +109,7 @@ void FUN_0012165c(fn_0012165c_arg0 *param_1)
       onlineInstanceTableFind(temp_v2,*(unsigned int *)&param_1->field_0x68);
       if (temp_v2 == 0) {
         temp_v5 = 0x80010004;
-        piVar7 = (int *)FUN_002e7908(temp_v4,(unsigned int *)&temp_v5);
+        piVar7 = (int *)_ZN12OnlineResultC1ERKj(temp_v4,(unsigned int *)&temp_v5);
         FUN_0030ff06(param_1,piVar7);
         vectorDestroyBytes(&temp_v10);
         return;
@@ -153,7 +153,7 @@ LAB_001217d0:
       if ((-temp_v2 & temp_v8) == 0) {
         temp_v1 = 0x8005000b;
         temp_v5 = temp_v1;
-        piVar7 = (int *)FUN_002e7908(temp_v4,(unsigned int *)&temp_v5);
+        piVar7 = (int *)_ZN12OnlineResultC1ERKj(temp_v4,(unsigned int *)&temp_v5);
         FUN_0030ff06(param_1,piVar7);
         return;
       }
@@ -180,7 +180,7 @@ LAB_001217f2:
     temp_v1 = temp_v5;
   }
   temp_v5 = temp_v1;
-  piVar7 = (int *)FUN_002e7908(temp_v4,(unsigned int *)&temp_v5);
+  piVar7 = (int *)_ZN12OnlineResultC1ERKj(temp_v4,(unsigned int *)&temp_v5);
   FUN_0030ff06(param_1,piVar7);
   return;
 }

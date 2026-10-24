@@ -1,65 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025009c` (_code @ 0x25009c, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies the second and third matrix rows as a 2-word ldm/stm plus a separate third word (reading the last word first); armcc here copies each row with one 3-word ldm/stm. */
+#include "common.h"
+#include "shard/W5_W5Match1_RecordKeys.h"
+
+struct Vec3 {
+    f32 x, y, z;
+};
+
+/* The camera scratch block, extended to the workspace rotation at 0x100 and its matrix at 0x140. */
+struct CameraScratchRotation {
+    /* 0x000 */ u8 unk000[0x100];
+    /* 0x100 */ Vector4 rotation;
+    /* 0x110 */ u8 unk110[0x30];
+    /* 0x140 */ Vec3 row0;
+    /* 0x14C */ f32 pad0;
+    /* 0x150 */ Vec3 row1;
+    /* 0x15C */ f32 pad1;
+    /* 0x160 */ Vec3 row2;
+};
+
+/* A 3x4 matrix: three rows and a translation. */
+struct Matrix34 {
+    /* 0x00 */ Vec3 row0;
+    /* 0x0C */ f32 pad0;
+    /* 0x10 */ Vec3 row1;
+    /* 0x1C */ f32 pad1;
+    /* 0x20 */ Vec3 row2;
+    /* 0x2C */ f32 pad2;
+    /* 0x30 */ Vec3 translation;
+};
 
 extern "C" {
 
-int matrix44SetIdentity(void);
-int gfxQuaternionWorkspaceBuildMatrix(void);
-int FUN_003f6c7c(void);
+extern CameraScratchRotation DAT_004ea81c;
+void matrix44SetIdentity(void);
+void FUN_003f6c7c(void);
+void gfxQuaternionWorkspaceBuildMatrix(void);
 
-extern unsigned int DAT_004ea91c; /* 0x4ea91c */
-extern unsigned int DAT_004ea920; /* 0x4ea920 */
-extern unsigned int DAT_004ea924; /* 0x4ea924 */
-extern unsigned int DAT_004ea928; /* 0x4ea928 */
-extern unsigned int DAT_004ea95c; /* 0x4ea95c */
-extern unsigned int DAT_004ea960; /* 0x4ea960 */
-extern unsigned int DAT_004ea964; /* 0x4ea964 */
-extern unsigned int DAT_004ea96c; /* 0x4ea96c */
-extern unsigned int DAT_004ea970; /* 0x4ea970 */
-extern unsigned int DAT_004ea974; /* 0x4ea974 */
-extern unsigned int DAT_004ea97c; /* 0x4ea97c */
-extern unsigned int DAT_004ea980; /* 0x4ea980 */
-extern unsigned int DAT_004ea984; /* 0x4ea984 */
-
-/* Supplied declaration required: matrix44SetIdentity. */
-/* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
-/* Supplied declaration required: FUN_003f6c7c. */
-
-
-void FUN_0025009c(unsigned int *param_1,unsigned int *param_2)
-
+/* Builds the 3x4 rotation matrix of a quaternion (translation zero) through the camera workspace. */
+void FUN_0025009c(Matrix34 *output, const Vector4 *quaternion)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  matrix44SetIdentity();
-  DAT_004ea91c = *param_2;
-  DAT_004ea920 = param_2[1];
-  DAT_004ea924 = param_2[2];
-  DAT_004ea928 = param_2[3];
-  FUN_003f6c7c();
-  gfxQuaternionWorkspaceBuildMatrix();
-  temp_v1 = DAT_004ea964;
-  temp_v0 = DAT_004ea960;
-  *param_1 = DAT_004ea95c;
-  param_1[1] = temp_v0;
-  param_1[2] = temp_v1;
-  temp_v1 = DAT_004ea970;
-  temp_v0 = DAT_004ea96c;
-  param_1[6] = DAT_004ea974;
-  param_1[4] = temp_v0;
-  param_1[5] = temp_v1;
-  temp_v1 = DAT_004ea980;
-  temp_v0 = DAT_004ea97c;
-  param_1[10] = DAT_004ea984;
-  param_1[8] = temp_v0;
-  param_1[9] = temp_v1;
-  param_1[0xc] = 0;
-  param_1[0xd] = 0;
-  param_1[0xe] = 0;
-  return;
+    matrix44SetIdentity();
+    DAT_004ea81c.rotation = *quaternion;
+    FUN_003f6c7c();
+    gfxQuaternionWorkspaceBuildMatrix();
+    output->row0 = DAT_004ea81c.row0;
+    output->row1 = DAT_004ea81c.row1;
+    output->row2 = DAT_004ea81c.row2;
+    output->translation.x = 0.0f;
+    output->translation.y = 0.0f;
+    output->translation.z = 0.0f;
 }
 
 } /* extern "C" */

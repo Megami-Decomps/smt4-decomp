@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001085bc(unsigned int, int);
 int FUN_0010ae5a(int, int, int, unsigned int);
-int FUN_002e7908(...);
+int _ZN12OnlineResultC1ERKj(...);
 int onlineSockAddrCopy(int *, int);
 int onlineSockAddrConstruct(int *);
 int onlineUrlGetAddress(int);
@@ -33,7 +33,7 @@ extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
 /* Supplied declaration required: FUN_001085bc. */
 /* Supplied declaration required: FUN_0010ae5a. */
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 /* Supplied declaration required: onlineSockAddrCopy. */
 /* Supplied declaration required: onlineSockAddrConstruct. */
 /* Supplied declaration required: onlineUrlGetAddress. */
@@ -154,7 +154,7 @@ void FUN_002ef34c(unsigned int param_1,int param_2,int param_3)
     FUN_002eb188(*(unsigned int *)(param_2 + 4),*(unsigned short *)(param_2 + 0x8e),temp_v1,param_3);
   }
   temp_v7 = 0x10001;
-  FUN_002e7908(temp_v9,&temp_v7);
+  _ZN12OnlineResultC1ERKj(temp_v9,&temp_v7);
   return;
 }
 

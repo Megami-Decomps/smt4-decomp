@@ -1,132 +1,113 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00424c4c` (_code @ 0x424c4c, 0x220 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the order of `mov r1, i` / `add r2, &record` before the FUN_0051415c call differs. */
+#include "common.h"
+#include <stddef.h>
+
+/* Records read from the file, by kind (kind 0 is the largest). */
+struct RecordKind0 {
+    u32 kind;
+    u32 words[9];
+};
+struct RecordKind1 {
+    u32 kind;
+    u32 words[3];
+};
+struct RecordKind2 {
+    u32 kind;
+    u32 word;
+};
+union RecordBuffer {
+    u32 kind;
+    RecordKind0 kind0;
+    RecordKind1 kind1;
+    RecordKind2 kind2;
+};
+
+#define RECORD_CAPACITY 8
+
+/* The record table loader: parsed records of three kinds, each with the file index they came from. */
+struct RecordTable {
+    /* 0x000 */ u8 unk000[0xC];
+    /* 0x00C */ u32 state;
+    /* 0x010 */ u8 unk010;
+    /* 0x011 */ u8 loaded;
+    /* 0x012 */ u8 unk012[6];
+    /* 0x018 */ u32 *file;
+    /* 0x01C */ u8 unk01C[0x1A8];
+    /* 0x1C4 */ s32 kind2Count;
+    /* 0x1C8 */ u8 unk1C8[0xC0];
+    /* 0x288 */ RecordKind2 kind2[RECORD_CAPACITY];
+    /* 0x2C8 */ u32 kind2Source[RECORD_CAPACITY];
+    /* 0x2E8 */ s32 kind0Count;
+    /* 0x2EC */ u32 kind0Reserved[RECORD_CAPACITY];
+    /* 0x30C */ RecordKind0 kind0[RECORD_CAPACITY];
+    /* 0x44C */ u32 kind0Source[RECORD_CAPACITY];
+    /* 0x46C */ u8 unk46C[0x18];
+    /* 0x484 */ s32 kind1Count;
+    /* 0x488 */ u32 kind1Reserved[RECORD_CAPACITY];
+    /* 0x4A8 */ RecordKind1 kind1[RECORD_CAPACITY];
+    /* 0x528 */ u32 kind1Source[RECORD_CAPACITY];
+    /* 0x548 */ u8 unk548[8];
+    /* 0x550 */ u32 errors;
+};
+typedef char RecordTableOffsetCheck[
+    offsetof(RecordTable, kind2) == 0x288 && offsetof(RecordTable, kind0) == 0x30C &&
+    offsetof(RecordTable, kind1) == 0x4A8 && offsetof(RecordTable, errors) == 0x550 &&
+    offsetof(RecordTable, kind1Count) == 0x484 ? 1 : -1];
 
 extern "C" {
+s32 readInnerWord6(u32 file, u32 *value);
+s32 FUN_0051415c(u32 file, u32 index, u32 *record);
 
-int readInnerWord6(unsigned int, unsigned int *);
-int FUN_0051415c(unsigned int, unsigned int, int *);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-} param_1_stack;
-
-/* Supplied declaration required: readInnerWord6. */
-/* Supplied declaration required: FUN_0051415c. */
-
-
-void FUN_00424c4c(int param_1)
-
+/* Reads every record from the file into the table's per-kind arrays, flagging overflows and missing kinds. */
+void FUN_00424c4c(RecordTable *table)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  int *piVar4;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int uStack_4c;
-  unsigned int uStack_48;
-  unsigned int uStack_44;
-  unsigned int uStack_40;
-  unsigned int uStack_3c;
-  unsigned int uStack_38;
-  unsigned int uStack_34;
-  unsigned int temp_v4;
-  unsigned int uStack_2c;
-  
-  readInnerWord6(**(unsigned int **)(param_1 + 0x18),&temp_v2);
-  piVar4 = (int *)(param_1 + 0x484);
-  puVar3 = (unsigned int *)(param_1 + 0x550);
-  if (temp_v2 != 0) {
-    temp_v1 = 0;
-    do {
-      FUN_0051415c(**(unsigned int **)(param_1 + 0x18),temp_v1,&temp_v3);
-      if (temp_v3 != 0) {
-        if (temp_v3 != 1) {
-          if (temp_v3 != 2) {
-            *(unsigned int *)(param_1 + 0xc) = 7;
-            *puVar3 = *(unsigned int *)(param_1 + 0x550) | 0x40;
-          }
-          else {
-            temp_v0 = *(int *)(param_1 + 0x1c4);
-            if (temp_v0 != 8) {
-              if (temp_v0 < 8) {
-                temp_v0 = param_1 + temp_v0 * 8;
-                *(unsigned int *)(temp_v0 + 0x288) = 2;
-                *(unsigned int *)(temp_v0 + 0x28c) = uStack_4c;
-                *(unsigned int *)(param_1 + *(int *)(param_1 + 0x1c4) * 4 + 0x2c8) = temp_v1;
-              }
+    u32 count;
+    readInnerWord6(*table->file, &count);
+    if (count != 0) {
+        for (u32 i = 0; i < count; i++) {
+            RecordBuffer record;
+            FUN_0051415c(*table->file, i, &record.kind);
+            if (record.kind == 0) {
+                if (table->kind0Count == RECORD_CAPACITY) {
+                    table->state = 7;
+                    table->errors |= 2;
+                } else if (table->kind0Count < RECORD_CAPACITY) {
+                    table->kind0Reserved[table->kind0Count] = 0;
+                    table->kind0[table->kind0Count] = record.kind0;
+                    table->kind0Source[table->kind0Count] = i;
+                }
+                table->kind0Count++;
+            } else if (record.kind == 1) {
+                if (table->kind1Count == RECORD_CAPACITY) {
+                    table->state = 7;
+                    table->errors |= 8;
+                } else if (table->kind1Count < RECORD_CAPACITY) {
+                    table->kind1Reserved[table->kind1Count] = 0;
+                    table->kind1[table->kind1Count] = record.kind1;
+                    table->kind1Source[table->kind1Count] = i;
+                }
+                table->kind1Count++;
+            } else if (record.kind == 2) {
+                if (table->kind2Count == RECORD_CAPACITY) {
+                    table->state = 7;
+                    table->errors |= 0x20;
+                } else if (table->kind2Count < RECORD_CAPACITY) {
+                    table->kind2[table->kind2Count] = record.kind2;
+                    table->kind2Source[table->kind2Count] = i;
+                }
+                table->kind2Count++;
+            } else {
+                table->state = 7;
+                table->errors |= 0x40;
             }
-            else {
-              *(unsigned int *)(param_1 + 0xc) = 7;
-              *puVar3 = *(unsigned int *)(param_1 + 0x550) | 0x20;
-            }
-            *(int *)(param_1 + 0x1c4) = *(int *)(param_1 + 0x1c4) + 1;
-          }
         }
-        else {
-          temp_v0 = *(int *)(param_1 + 0x484);
-          if (temp_v0 != 8) {
-            if (temp_v0 < 8) {
-              *(unsigned int *)(param_1 + temp_v0 * 4 + 0x488) = 0;
-              temp_v0 = param_1 + *piVar4 * 0x10;
-              *(unsigned int *)(temp_v0 + 0x4a8) = 1;
-              *(unsigned int *)(temp_v0 + 0x4ac) = uStack_4c;
-              *(unsigned int *)(temp_v0 + 0x4b0) = uStack_48;
-              *(unsigned int *)(temp_v0 + 0x4b4) = uStack_44;
-              *(unsigned int *)(param_1 + *piVar4 * 4 + 0x528) = temp_v1;
-            }
-          }
-          else {
-            *(unsigned int *)(param_1 + 0xc) = 7;
-            *puVar3 = *(unsigned int *)(param_1 + 0x550) | 8;
-          }
-          *piVar4 = *(int *)(param_1 + 0x484) + 1;
-        }
-      }
-      else {
-        temp_v0 = *(int *)(param_1 + 0x2e8);
-        if (temp_v0 != 8) {
-          if (temp_v0 < 8) {
-            *(unsigned int *)(param_1 + temp_v0 * 4 + 0x2ec) = 0;
-            temp_v0 = param_1 + *(int *)(param_1 + 0x2e8) * 0x28;
-            *(unsigned int *)(temp_v0 + 0x30c) = 0;
-            *(unsigned int *)(temp_v0 + 0x310) = uStack_4c;
-            *(unsigned int *)(temp_v0 + 0x314) = uStack_48;
-            *(unsigned int *)(temp_v0 + 0x318) = uStack_44;
-            *(unsigned int *)(temp_v0 + 0x31c) = uStack_40;
-            *(unsigned int *)(temp_v0 + 800) = uStack_3c;
-            *(unsigned int *)(temp_v0 + 0x324) = uStack_38;
-            *(unsigned int *)(temp_v0 + 0x328) = uStack_34;
-            *(unsigned int *)(temp_v0 + 0x32c) = temp_v4;
-            *(unsigned int *)(temp_v0 + 0x330) = uStack_2c;
-            *(unsigned int *)(param_1 + *(int *)(param_1 + 0x2e8) * 4 + 0x44c) = temp_v1;
-          }
-        }
-        else {
-          *(unsigned int *)(param_1 + 0xc) = 7;
-          *puVar3 = *(unsigned int *)(param_1 + 0x550) | 2;
-        }
-        *(int *)(param_1 + 0x2e8) = *(int *)(param_1 + 0x2e8) + 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < temp_v2);
-    if (*(int *)(param_1 + 0x2e8) == 0) {
-      *puVar3 = *(unsigned int *)(param_1 + 0x550) | 1;
+        if (table->kind0Count == 0)
+            table->errors |= 1;
+        if (table->kind1Count == 0)
+            table->errors |= 4;
+        if (table->kind2Count == 0)
+            table->errors |= 0x10;
+        table->loaded = 1;
     }
-    if (*(int *)(param_1 + 0x484) == 0) {
-      *puVar3 = *(unsigned int *)(param_1 + 0x550) | 4;
-    }
-    if (*(int *)(param_1 + 0x1c4) == 0) {
-      *puVar3 = *(unsigned int *)(param_1 + 0x550) | 0x10;
-    }
-    *(unsigned char *)(param_1 + 0x11) = 1;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

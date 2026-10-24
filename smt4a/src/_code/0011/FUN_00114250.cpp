@@ -6,7 +6,7 @@ extern "C" {
 
 int sharedRefAddRef(...);
 int FUN_002e78d0(...);
-int _ZN9Obj55aff4C1EPKc(...);
+int _ZN9Obj55aff4C1EPKt(...);
 int _ZN9Obj55aff4D1Ev(...);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -22,9 +22,9 @@ extern unsigned int DAT_0063030c; /* 0x63030c */
 extern unsigned int *FUN_0010531c(int, unsigned int, unsigned char *);
 extern unsigned int onlineContextGetInstance(void);
 /* Supplied declaration required: sharedRefAddRef. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: FUN_002e78d0. */
-/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKt. */
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 
 
@@ -39,9 +39,9 @@ void FUN_00114250(int param_1)
   unsigned int temp_v3;
   unsigned char temp_v4 [4];
   
-  temp_v0 = operatorNew(0x50);
+  temp_v0 = _Znwj(0x50);
   if (temp_v0 != 0) {
-    _ZN9Obj55aff4C1EPKc(temp_v2,"CallContextRegister::CheckExpiredCalls");
+    _ZN9Obj55aff4C1EPKt(temp_v2,"CallContextRegister::CheckExpiredCalls");
     temp_v3 = 0;
     puVar2 = (unsigned int *)FUN_0010531c(temp_v0,0,temp_v4);
     puVar2[0x10] = (unsigned int)&LAB_00114139;

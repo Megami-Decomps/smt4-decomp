@@ -1,80 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00133222` (_code @ 0x133222, 0xe2 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "stl/AsdAllocator.h"
+#include <vector>
+#include "stl/MacroMax.h"
 
-extern "C" {
+/* A 24-byte element of one of the engine's vectors. */
+struct Elem24 {
+    u32 words[6];
+};
 
-int asdOperatorDeleteArray(int);
-int FUN_00307c74(int, int, int, int *);
-int FUN_00307c96(...);
-int vecCount24(int *);
-int FUN_00307cb0(...);
-int FUN_0030c5d8(...);
-int FUN_0030fdf0(int *, int, int);
+typedef std::vector<Elem24, AsdAllocator<Elem24> > Elem24Vector;
 
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
-
-/* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: FUN_00307c74. */
-/* Supplied declaration required: FUN_00307c96. */
-/* Supplied declaration required: vecCount24. */
-/* Supplied declaration required: FUN_00307cb0. */
-/* Supplied declaration required: FUN_0030c5d8. */
-extern int allocArrayElem24(int *, int, int);
-extern int vectorGrowCapacity_0030c61a(unsigned int, int *);
-/* Supplied declaration required: FUN_0030fdf0. */
-extern int __aeabi_idivmod(int, unsigned int);
-
-
-void FUN_00133222(int *param_1,int param_2,unsigned int param_3)
-
-{
-/* irregular: 7 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  
-  temp_v0 = FUN_00307cb0();
-  temp_v1 = vecCount24(param_1);
-  if (temp_v1 < temp_v0) {
-    temp_v5 = param_1[1];
-    temp_v4 = temp_v5 - 0x18;
-    param_1[1] = temp_v5 + 0x18;
-    FUN_0030c5d8(param_1,temp_v5);
-    while (param_2 != temp_v4) {
-      temp_v4 = temp_v4 - 0x18;
-      temp_v5 = temp_v5 - 0x18;
-      FUN_00307c96(temp_v5,temp_v4);
-    }
-    FUN_00307c96(param_2,param_3);
-  }
-  else {
-    temp_v2 = vecCount24(param_1);
-    temp_v4 = vectorGrowCapacity_0030c61a(temp_v2,param_1);
-    temp_v5 = allocArrayElem24(param_1,temp_v4,*param_1);
-    FUN_00307c74(*param_1,param_2,temp_v5,param_1);
-    temp_v3 = __aeabi_idivmod(param_2 - *param_1,0x18);
-    FUN_0030c5d8(param_1,temp_v3 * 0x18 + temp_v5,param_3);
-    temp_v3 = __aeabi_idivmod(param_2 - *param_1,0x18);
-    FUN_00307c74(param_2,param_1[1],temp_v3 * 0x18 + temp_v5 + 0x18,param_1);
-    temp_v3 = vecCount24(param_1);
-    FUN_0030fdf0(param_1,*param_1,param_1[1]);
-    temp_v6 = *param_1;
-    FUN_00307cb0(param_1);
-    asdOperatorDeleteArray(temp_v6);
-    *param_1 = temp_v5;
-    param_1[2] = temp_v4 * 0x18 + temp_v5;
-    param_1[1] = temp_v3 * 0x18 + temp_v5 + 0x18;
-  }
-  return;
-}
-
-} /* extern "C" */
+/* std::vector<Elem24>::_C_insert_aux(position, value): inserts one element, growing the storage when it is full. */
+template void Elem24Vector::_C_insert_aux(Elem24Vector::iterator, const Elem24 &);

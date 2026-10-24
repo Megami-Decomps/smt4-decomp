@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002aa984(int *, int, unsigned int);
-int FUN_002ac444(unsigned char [12], int);
+int _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(unsigned char [12], int);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 7 slot(s), 13 byte(s) */
@@ -21,7 +21,7 @@ typedef struct {
 
 extern int FUN_0014d478(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002aa984. */
-/* Supplied declaration required: FUN_002ac444. */
+/* Supplied declaration required: _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv. */
 extern unsigned int FUN_002ac780(int);
 extern int nw_snd_internal_WaveSoundFileReader_ReadNoteInfo(unsigned char *, unsigned int *, unsigned int, unsigned int);
 
@@ -52,7 +52,7 @@ void nw_snd_internal_SoundArchiveLoader_IsWaveSoundDataLoaded
     temp_v2 = FUN_0014d478(param_1[1],param_2,(unsigned int *)&temp_v3);
     temp_v0 = temp_v3;
     if (temp_v2 != 0) {
-      FUN_002ac444(temp_v10,temp_v1);
+      _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(temp_v10,temp_v1);
       temp_v5 = 0;
       temp_v6 = 0;
       temp_v7 = 0;

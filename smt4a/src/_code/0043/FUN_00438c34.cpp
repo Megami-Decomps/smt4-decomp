@@ -1,125 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00438c34` (_code @ 0x438c34, 0x1d0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail spills r0-r3 (`push {r0-r3,...}`) and re-reads `words` from its spill slot, so the parameter is address-taken/aliased in the original; the rest is the twin of smt4 FUN_0035edac. Needs _ZTT9Obj55813c rename applied. */
+#include "classes/Obj55813c.h"
+#include "nn/Result.h"
+
+struct NgWordLoader {
+    /* 0x00 */ u8 unk00[0x1B];
+    /* 0x1B */ u8 language;
+};
 
 extern "C" {
+s32 validateSetupArgs(NgWordLoader *loader, u32 *results, u32 *words, u32 wordCount);
+void FUN_00439394(NgWordLoader *loader, u8 *languages, s32 *languageCount, s32 mode);
+s32 FUN_002e9768(wchar_t *buffer, u32 count, const wchar_t *format, ...);
+s32 textChannelParseUtf16Stream(NgWordLoader *loader, u32 *results, Obj55813c *stream, u32 *words, u32 wordCount);
 
-int FUN_001883b0(unsigned int *, unsigned char [132], int);
-int vcallSlot12IfValid(unsigned int);
-int sysFatalBreak(void);
-int FUN_002e9768(unsigned char [132], int, unsigned char *, int);
-int textChannelParseUtf16Stream(unsigned int *, unsigned int *, char [4], unsigned int, unsigned int);
-int FUN_00439394(unsigned int *, unsigned char [8], int *, unsigned int);
-
-/* stack frame of param_5: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int spC4; /* 0xc4: local_c4 */
-    unsigned int spC8; /* 0xc8: local_c8 */
-    unsigned int spCC; /* 0xcc: local_cc */
-    unsigned int spD0; /* 0xd0: local_d0 */
-    unsigned int spD4; /* 0xd4: local_d4 */
-    unsigned int spD8; /* 0xd8: local_d8 */
-    unsigned int spDC; /* 0xdc: local_dc */
-    unsigned int spE0; /* 0xe0: local_e0 */
-} param_5_stack;
-
-extern unsigned char LAB_00438e04; /* 0x438e04 */
-
-/* Supplied declaration required: FUN_001883b0. */
-/* Supplied declaration required: vcallSlot12IfValid. */
-/* Supplied declaration required: sysFatalBreak. */
-/* Supplied declaration required: FUN_002e9768. */
-/* Supplied declaration required: textChannelParseUtf16Stream. */
-/* Supplied declaration required: FUN_00439394. */
-extern unsigned int *validateSetupArgs(unsigned int *, unsigned int *, unsigned int, unsigned int);
-
-
-unsigned int * FUN_00438c34(unsigned int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4,
-                   unsigned int param_5)
-
+/* Loads the NG-word list of every language the mode selects into the results. */
+s32 FUN_00438c34(NgWordLoader *loader, u32 *results, s32 mode, u32 *words, u32 wordCount)
 {
-/* irregular: 1 goto(s); 6 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  char temp_v3 [4];
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned char temp_v9 [132];
-  unsigned char temp_v10 [8];
-  unsigned int *puStack_34;
-  unsigned int *puStack_30;
-  unsigned int uStack_2c;
-  unsigned int temp_v11;
-  
-  puStack_34 = param_1;
-  puStack_30 = param_2;
-  uStack_2c = param_3;
-  temp_v11 = param_4;
-  puVar1 = (unsigned int *)validateSetupArgs(param_1,param_2,param_4,param_5);
-  if ((int)puVar1 < 0) {
-    return puVar1;
-  }
-  if (param_5 != 0) {
-    puVar2 = param_2 + -1;
-    if ((param_5 & 1) != 0) {
-      *param_2 = 0;
-      puVar2 = param_2;
+    s32 result = validateSetupArgs(loader, results, words, wordCount);
+    if (!nnResultIsSuccess(result)) {
+        return result;
     }
-    for (temp_v0 = param_5 >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
-      puVar2[1] = 0;
-      puVar2 = puVar2 + 2;
-      *puVar2 = 0;
+    for (u32 i = 0; i < wordCount; i++) {
+        results[i] = 0;
     }
-  }
-  FUN_00439394(param_1,temp_v10,&temp_v2,param_3);
-  temp_v1 = 0;
-  if (temp_v1 < temp_v2) {
-    do {
-      FUN_002e9768(temp_v9,0x40,&LAB_00438e04,temp_v10[temp_v1]);
-      temp_v4 = 0;
-      puVar1 = &temp_v4;
-      temp_v3[0] = 'D';
-      temp_v3[1] = -0x7f;
-      temp_v3[2] = 'U';
-      temp_v3[3] = '\0';
-      temp_v7 = 0;
-      temp_v8 = 0;
-      temp_v5 = 0;
-      temp_v6 = 0;
-      FUN_001883b0(puVar1,temp_v9,1);
-      if ((int)puVar1 < 0) {
-joined_r0x00438d38:
-        if ((temp_v4 & 0xfffffffe) == 0) {
-          return puVar1;
+    u8 languages[8];
+    s32 languageCount;
+    FUN_00439394(loader, languages, &languageCount, mode);
+    for (s32 i = 0; i < languageCount; i++) {
+        wchar_t path[66];
+        FUN_002e9768(path, 0x40, L"ngword:/%d.txt", languages[i]);
+        Obj55813c stream;
+        result = stream.TryInitialize(path, 1);
+        if (nnResultIsFailure(result)) {
+            return result;
         }
-        if ((temp_v4 & 1) != 0) {
-          sysFatalBreak();
+        loader->language = languages[i];
+        result = textChannelParseUtf16Stream(loader, results, &stream, words, wordCount);
+        if (nnResultIsFailure(result)) {
+            return result;
         }
-        vcallSlot12IfValid(temp_v4 & 0xfffffffe);
-        return puVar1;
-      }
-      *(unsigned char *)((int)param_1 + 0x1b) = temp_v10[temp_v1];
-      puVar1 = param_1;
-      textChannelParseUtf16Stream(param_1,param_2,temp_v3,temp_v11,param_5);
-      if ((int)puVar1 < 0) goto joined_r0x00438d38;
-      if ((temp_v4 & 0xfffffffe) != 0) {
-        if ((temp_v4 & 1) != 0) {
-          sysFatalBreak();
-        }
-        vcallSlot12IfValid(temp_v4 & 0xfffffffe);
-        temp_v4 = 0;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < temp_v2);
-  }
-  return (unsigned int *)0x0;
+    }
+    return 0;
 }
 
-} /* extern "C" */
+}

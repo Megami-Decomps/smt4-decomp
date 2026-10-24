@@ -5,7 +5,7 @@
 extern "C" {
 
 int sharedRefRelease(int);
-int FUN_002e7908(...);
+int _ZN12OnlineResultC1ERKj(...);
 int FUN_002e9d28(...);
 int FUN_002e9de4(...);
 int onlineInstantiationContextGetCurrent(void);
@@ -40,8 +40,8 @@ extern unsigned char DAT_0055b2a4; /* 0x55b2a4 */
 extern unsigned char *DAT_00594a30; /* 0x594a30 */
 
 /* Supplied declaration required: sharedRefRelease. */
-extern int operatorNew(unsigned int);
-/* Supplied declaration required: FUN_002e7908. */
+extern int _Znwj(unsigned int);
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 /* Supplied declaration required: FUN_002e9d28. */
 /* Supplied declaration required: FUN_002e9de4. */
 /* Supplied declaration required: onlineInstantiationContextGetCurrent. */
@@ -97,7 +97,7 @@ void FUN_00107408(unsigned int *param_1,int *param_2,int param_3,unsigned int pa
     temp_v12 = param_2 + 0x7a;
     temp_v4 = param_4;
     refSlotInit(temp_v12,0,0,temp_v14);
-    temp_v0 = operatorNew(0x150);
+    temp_v0 = _Znwj(0x150);
     if (temp_v0 != 0) {
       temp_v4 = 0;
       temp_v5 = 0;
@@ -165,7 +165,7 @@ void FUN_00107408(unsigned int *param_1,int *param_2,int param_3,unsigned int pa
         (**(romwright_code **)(*param_2 + 0x58))(param_2,0);
         temp_v4 = 0x80050008;
         puVar5 = (unsigned int *)&temp_v4;
-        FUN_002e7908(param_1,puVar5);
+        _ZN12OnlineResultC1ERKj(param_1,puVar5);
         return;
       }
     }
@@ -175,7 +175,7 @@ void FUN_00107408(unsigned int *param_1,int *param_2,int param_3,unsigned int pa
   else {
     temp_v4 = 0x80050002;
   }
-  FUN_002e7908(param_1,puVar5);
+  _ZN12OnlineResultC1ERKj(param_1,puVar5);
   return;
 }
 

@@ -1,48 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023a55c` (_code @ 0x23a55c, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail branches around an unpredicated tail call to asdTMTexTableReleaseNode (separate epilogue); built predicates it (movge/blge) */
+#include "gamedata/DataTable.h"
+
+struct TexTableKey {
+    u16 id;     // 0x00
+    s16 node;   // 0x02
+};
 
 extern "C" {
+void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+s32 FUN_002321f8(const void *a, const void *b);
+void asdTMTexTableReleaseNode(s32 node);
 
-int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
-int asdTMTexTableReleaseNode(int);
-
-/* stack frame of param_1: 3 slot(s), 10 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned short sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern unsigned char LAB_002321f8; /* 0x2321f8 */
-
-/* Supplied declaration required: libc_bsearch. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-
-
-void FUN_0023a55c(unsigned short param_1)
-
+/* Releases texture table node 0x34 when the id has a non-negative entry in data table 0x47. */
+void FUN_0023a55c(u16 id)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned short *puVar3;
-  unsigned short temp_v2 [2];
-  
-  temp_v0 = dataTableGet(0x47,0);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  puVar3 = temp_v2;
-  temp_v2[0] = param_1;
-  libc_bsearch(puVar3,temp_v1,temp_v0,4,&LAB_002321f8);
-  if ((puVar3 != (unsigned short *)0x0) && (-1 < (short)puVar3[1])) {
-    asdTMTexTableReleaseNode(0x34);
-    return;
-  }
-  return;
+    void *section = dataTableGet(0x47, 0);
+    const void *entries = dataTableGetEntries(section);
+    u32 count = dataTableGetCount(section);
+    TexTableKey key;
+
+    key.id = id;
+    TexTableKey *found = (TexTableKey *)libc_bsearch(&key, entries, count, 4, FUN_002321f8);
+    if (found != NULL && found->node >= 0) {
+        asdTMTexTableReleaseNode(0x34);
+    }
 }
 
 } /* extern "C" */

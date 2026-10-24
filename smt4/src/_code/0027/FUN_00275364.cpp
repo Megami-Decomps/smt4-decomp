@@ -1,106 +1,98 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00275364` (_code @ 0x275364, 0x238 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads the node motion via a linker-inlined getter after a nop-bodied call (nop, ldr r0,[r0,#56]) and loads the first loop model flags separately per branch; the callee pair is unidentified. */
+#include "map/MapStateSlots.h"
+#include "map/mapDepart.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
-extern "C" {
+namespace {
+// The node's motion id lives past the fields the shared header names.
+struct MotionNode {
+    AsdMdlNode node;
+    u8 unk30[8];
+    u32 motion;             // 0x38
+};
 
-int modelSelectSecondaryMotion(unsigned int, unsigned int);
-int FUN_0028c618(unsigned int, int);
-int nodeSetTranslation(unsigned int, int, int);
-int modelSelectPrimaryMotion(unsigned int);
-
-extern int g_mapStateSlots; /* 0x44cd88 */
-extern unsigned char g_gameState; /* 0x49f91c */
-
-/* Supplied declaration required: modelSelectSecondaryMotion. */
-/* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: modelSelectPrimaryMotion. */
-
-
-void FUN_00275364(void)
-
-{
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int *puVar5;
-  unsigned char temp_v4;
-  
-  if (*(short *)(g_mapStateSlots + 4) == 0x65) {
-    temp_v1 = 0;
-    do {
-      temp_v2 = g_mapStateSlots + temp_v1 * 0x4c;
-      if (*(char *)(temp_v2 + 0x9d8) != '\0') {
-        puVar5 = *(unsigned int **)(temp_v2 + 0xa08);
-        if ((*(signed char *)((unsigned char *)&g_gameState + 0x22)) != '\0') {
-          if ((*puVar5 & 2) == 0) {
-            *puVar5 = *puVar5 | 2;
-            *(unsigned char *)(*(int *)(puVar5[2] + 0x2c) + 0x1f6) = 0;
-          }
-        }
-        else {
-          if ((*puVar5 & 2) != 0) {
-            *puVar5 = *puVar5 & 0xfffffffd;
-            *(unsigned char *)(*(int *)(puVar5[2] + 0x2c) + 0x1f6) = 1;
-          }
-          if (*(char *)(temp_v2 + 0x9f8) != '\0') {
-            nodeSetTranslation(puVar5[2],0,temp_v2 + 0x9e4);
-            FUN_0028c618(puVar5[2],0);
-            if (*(int *)(puVar5[2] + 0x38) != *(int *)(temp_v2 + 0x9f4)) {
-              modelSelectPrimaryMotion(puVar5[2]);
-              modelSelectSecondaryMotion(puVar5[2],*(unsigned int *)(temp_v2 + 0x9f4));
-            }
-            *(unsigned char *)(temp_v2 + 0x9f8) = 0;
-          }
-        }
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 3);
-  }
-  temp_v1 = 0;
-  do {
-    temp_v3 = g_mapStateSlots + temp_v1 * 0x4c;
-    temp_v4 = *(char *)(temp_v3 + 0x58) != '\0';
-    temp_v2 = 0;
-    if (temp_v4) {
-      temp_v2 = *(int *)(temp_v3 + 0x5c);
-    }
-    if ((temp_v4 && temp_v2 != 3) && (*(char *)(temp_v3 + 0x94) == '\0')) {
-      if (*(char *)(temp_v3 + 0x84) != '\0') {
-        puVar5 = *(unsigned int **)(temp_v3 + 0x88);
-      }
-      else {
-        puVar5 = *(unsigned int **)(g_mapStateSlots + *(int *)(temp_v3 + 0x90) * 8 + 0x1c);
-      }
-      temp_v0 = *puVar5;
-      if ((*(signed char *)((unsigned char *)&g_gameState + 0x22)) != '\0') {
-        if ((temp_v0 & 2) == 0) {
-          *puVar5 = temp_v0 | 2;
-          *(unsigned char *)(*(int *)(puVar5[2] + 0x2c) + 0x1f6) = 0;
-        }
-      }
-      else {
-        if ((temp_v0 & 2) != 0) {
-          *puVar5 = temp_v0 & 0xfffffffd;
-          *(unsigned char *)(*(int *)(puVar5[2] + 0x2c) + 0x1f6) = 1;
-        }
-        if (*(char *)(temp_v3 + 0x78) != '\0') {
-          nodeSetTranslation(puVar5[2],0,temp_v3 + 100);
-          FUN_0028c618(puVar5[2],0);
-          if (*(int *)(puVar5[2] + 0x38) != *(int *)(temp_v3 + 0x74)) {
-            modelSelectPrimaryMotion(puVar5[2]);
-            modelSelectSecondaryMotion(puVar5[2],*(unsigned int *)(temp_v3 + 0x74));
-          }
-          *(unsigned char *)(temp_v3 + 0x78) = 0;
-        }
-      }
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x20);
-  return;
+// Three extra slots follow the shared state, as in the cleanup code.
+struct StateWithExtraSlots {
+    MapStateSlots common;
+    MapStateSlot extraSlots[3];
+};
 }
 
-} /* extern "C" */
+extern "C" {
+extern MapStateSlots *g_mapStateSlots;
+extern GameState g_gameState;
+void nodeSetTranslation(AsdMdlNode *node, u32 mode, const f32 *position);
+void FUN_0028c618(AsdMdlNode *node, u32 mode, f32 x, f32 y, f32 z);
+void modelSelectPrimaryMotion(AsdMdlNode *node, f32 blend);
+void modelSelectSecondaryMotion(AsdMdlNode *node, u32 motion, f32 blend);
+
+/* Per-frame update of every active map-state slot's model: show or hide it with the map range and push its pending transform and motion. */
+void FUN_00275364(void)
+{
+    if (g_mapStateSlots->unk04 == 0x65) {
+        for (s32 index = 0; index < 3; ++index) {
+            MapStateSlot *slot = &((StateWithExtraSlots *)g_mapStateSlots)->extraSlots[index];
+            if (slot->active != 0) {
+                AsdMdlObject *model = (AsdMdlObject *)slot->resources.model;
+                if (g_gameState.controllerFlags.mapRangeModelsHidden != 0) {
+                    if ((model->flags & 2) == 0) {
+                        model->flags |= 2;
+                        model->node->resource->positionFollowed = 0;
+                    }
+                } else {
+                    if ((model->flags & 2) != 0) {
+                        model->flags &= ~2;
+                        model->node->resource->positionFollowed = 1;
+                    }
+                    if (slot->motion.mode != 0) {
+                        nodeSetTranslation(model->node, 0, slot->motion.position);
+                        FUN_0028c618(model->node, 0, 0.0f, slot->motion.heading, 0.0f);
+                        if (((MotionNode *)model->node)->motion != slot->motion.elapsed) {
+                            modelSelectPrimaryMotion(model->node, 0.0f);
+                            modelSelectSecondaryMotion(model->node, slot->motion.elapsed, 0.0f);
+                        }
+                        slot->motion.mode = 0;
+                    }
+                }
+            }
+        }
+    }
+    for (s32 index = 0; index < 32; ++index) {
+        MapStateSlot *slot = &g_mapStateSlots->slots[index];
+        s32 state = 0;
+        bool active = slot->active != 0;
+        if (active) {
+            state = slot->state;
+        }
+        if (active && state != 3 && slot->ranking.eligible == 0) {
+            AsdMdlObject *model;
+            if (slot->motion.ready != 0) {
+                model = (AsdMdlObject *)slot->motion.model;
+            } else {
+                model = (AsdMdlObject *)g_mapStateSlots->references.models[slot->motion.sourceIndex].model;
+            }
+            u32 flags = model->flags;
+            if (g_gameState.controllerFlags.mapRangeModelsHidden != 0) {
+                if ((flags & 2) == 0) {
+                    model->flags = flags | 2;
+                    model->node->resource->positionFollowed = 0;
+                }
+            } else {
+                if ((flags & 2) != 0) {
+                    model->flags = flags & ~2;
+                    model->node->resource->positionFollowed = 1;
+                }
+                if (slot->motion.mode != 0) {
+                    nodeSetTranslation(model->node, 0, slot->motion.position);
+                    FUN_0028c618(model->node, 0, 0.0f, slot->motion.heading, 0.0f);
+                    if (((MotionNode *)model->node)->motion != slot->motion.elapsed) {
+                        modelSelectPrimaryMotion(model->node, 0.0f);
+                        modelSelectSecondaryMotion(model->node, slot->motion.elapsed, 0.0f);
+                    }
+                    slot->motion.mode = 0;
+                }
+            }
+        }
+    }
+}
+}

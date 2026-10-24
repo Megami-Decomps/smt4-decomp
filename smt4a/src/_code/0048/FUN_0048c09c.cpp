@@ -3,7 +3,7 @@
 #include "gamedata/MapNaviCategories.h"
 
 extern "C" {
-MapNaviMarkerIcon *FUN_0048b140(NaviCategorySelectionWork *, s32, u32);
+MapNaviMarkerIcon *dataTable2BFindType1Entry(NaviCategorySelectionWork *, s32, u32);
 s32 naviGetActiveStateValue(void);
 s32 naviMainSelectPair(void *);
 s32 MapNaviTable_GetCategoryCount(MapNaviTableContext *);
@@ -14,7 +14,7 @@ void FUN_0048c09c(NaviCategorySelectionWork *work, u32 category)
 {
     s32 map = naviGetActiveStateValue();
     s32 section = naviMainSelectPair(work->scene);
-    MapNaviMarkerIcon *marker = FUN_0048b140(work, map, category);
+    MapNaviMarkerIcon *marker = dataTable2BFindType1Entry(work, map, category);
     if (marker) {
         s8 icon = (s8)marker->icon;
         work->selection = icon;
@@ -33,7 +33,7 @@ void FUN_0048c09c(NaviCategorySelectionWork *work, u32 category)
                 const MapNaviCategoryRecord *record = &records[index];
                 if (!record)
                     return;
-                marker = FUN_0048b140(work, map, record->category);
+                marker = dataTable2BFindType1Entry(work, map, record->category);
                 if (!marker)
                     return;
                 s8 icon = (s8)marker->icon;

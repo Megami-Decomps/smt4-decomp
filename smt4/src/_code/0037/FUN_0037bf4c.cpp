@@ -8,7 +8,7 @@ extern "C" {
 int soundArchiveReadWaveArchiveInfo(unsigned int, int, unsigned int [2]);
 int FUN_00235c70(int, int);
 int FUN_002a7ac4(unsigned char [16], int, int);
-int FUN_002ac444(unsigned char [8], unsigned int);
+int _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(unsigned char [8], unsigned int);
 int nw_snd_internal_WaveSoundFileReader_ReadNoteInfo(unsigned char [8], int *, unsigned int, int);
 
 /* stack frame of param_4: 9 slot(s), 18 byte(s) */
@@ -28,7 +28,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00235c70. */
 /* Supplied declaration required: FUN_002a7a3c. */
 /* Supplied declaration required: FUN_002a7ac4. */
-/* Supplied declaration required: FUN_002ac444. */
+/* Supplied declaration required: _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv. */
 /* Supplied declaration required: nw_snd_internal_WaveSoundFileReader_ReadNoteInfo. */
 
 
@@ -48,7 +48,7 @@ void FUN_0037bf4c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   unsigned char temp_v9 [16];
   unsigned char temp_v10 [8];
   
-  FUN_002ac444(temp_v10,param_1);
+  _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(temp_v10,param_1);
   temp_v2 = 0;
   temp_v3 = 0;
   temp_v4 = 0;

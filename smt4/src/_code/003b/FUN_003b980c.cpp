@@ -21,7 +21,7 @@ void scrScriptProcessDestroy(ScriptRunState *);
 void asdMemFree(void *);
 void spriteTable2aFree(void *);
 void FUN_003bbafc(void *);
-void FUN_00291998();
+void soundRequestEnd();
 s32 dialogIsActive();
 void infoWinStartTimer(s32);
 void FUN_002b827c(s32);
@@ -57,7 +57,7 @@ extern "C" void FUN_003b980c(ScriptScreenCleanupView *work)
     releaseBuffer(work->primary.messages);
     spriteTable2aFree(work->sprites);
     FUN_003bbafc(work->fileSlot);
-    FUN_00291998();
+    soundRequestEnd();
     if (dialogIsActive())
         infoWinStartTimer(0);
     FUN_002b827c(3);

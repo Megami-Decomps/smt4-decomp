@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern unsigned int DAT_00476634; /* 0x476634 */
-extern unsigned int DAT_004efd6c; /* 0x4efd6c */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x476634 */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x4efd6c */
 extern unsigned int DAT_004efd70; /* 0x4efd70 */
 extern unsigned int DAT_004efd74; /* 0x4efd74 */
 extern unsigned int DAT_004efd78; /* 0x4efd78 */
@@ -33,8 +33,8 @@ void FUN_001287e4(int param_1)
   unsigned int temp_v6;
   int temp_v7;
   
-  if (((DAT_00476634 & 1) == 0) && (temp_v7 = __cxa_guard_acquire(&DAT_00476634), temp_v7 != 0)) {
-    DAT_004efd6c = 0x3f800000;
+  if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v7 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v7 != 0)) {
+    _ZZN2nw4math5MTX348IdentityEvE8identity = 0x3f800000;
     DAT_004efd70 = 0;
     DAT_004efd74 = 0;
     DAT_004efd78 = 0;
@@ -54,7 +54,7 @@ void FUN_001287e4(int param_1)
   temp_v2 = DAT_004efd78;
   temp_v1 = DAT_004efd74;
   temp_v0 = DAT_004efd70;
-  *(unsigned int *)(param_1 + 0x18) = DAT_004efd6c;
+  *(unsigned int *)(param_1 + 0x18) = _ZZN2nw4math5MTX348IdentityEvE8identity;
   *(unsigned int *)(param_1 + 0x1c) = temp_v0;
   *(unsigned int *)(param_1 + 0x20) = temp_v1;
   *(unsigned int *)(param_1 + 0x24) = temp_v2;

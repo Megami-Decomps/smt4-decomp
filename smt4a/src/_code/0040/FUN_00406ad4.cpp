@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001006c2(...);
-int asdDeallocateArrayStorage(int, int, int);
-void FUN_002e32a4(int kind, ...);
+int _ZN4__rw13__rw_allocateEji(...);
+int _ZN4__rw15__rw_deallocateEPvji(int, int, int);
+void _ZN4__rw10__rw_throwEiz(int kind, ...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,9 +15,9 @@ typedef struct {
 
 extern unsigned char LAB_00406e64; /* 0x406e64 */
 
-/* Supplied declaration required: FUN_001006c2. */
-/* Supplied declaration required: asdDeallocateArrayStorage. */
-/* Supplied declaration required: FUN_002e32a4. */
+/* Supplied declaration required: _ZN4__rw13__rw_allocateEji. */
+/* Supplied declaration required: _ZN4__rw15__rw_deallocateEPvji. */
+/* Supplied declaration required: _ZN4__rw10__rw_throwEiz. */
 
 
 void FUN_00406ad4(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -43,7 +43,7 @@ void FUN_00406ad4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v4 = *(unsigned int *)(param_1 + 0x104);
   if (temp_v4 >= 0x20000000) {
     param_4 = 0x1fffffff;
-    FUN_002e32a4(8,&LAB_00406e64,&LAB_00406e64,temp_v4,0x1fffffff);
+    _ZN4__rw10__rw_throwEiz(8,&LAB_00406e64,&LAB_00406e64,temp_v4,0x1fffffff);
   }
   if ((unsigned int)((*(int *)(param_1 + 0x110) - *(int *)(param_1 + 0x108)) >> 3) < temp_v4) {
     temp_v6 = (*(int *)(param_1 + 0x10c) - *(int *)(param_1 + 0x108)) >> 3;
@@ -54,7 +54,7 @@ void FUN_00406ad4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     if (temp_v5 <= temp_v4) {
       temp_v5 = temp_v4;
     }
-    puVar1 = (unsigned int *)FUN_001006c2(temp_v5 << 3,0);
+    puVar1 = (unsigned int *)_ZN4__rw13__rw_allocateEji(temp_v5 << 3,0);
     puVar9 = *(unsigned int **)(param_1 + 0x10c);
     puVar8 = puVar1;
     for (puVar6 = *(unsigned int **)(param_1 + 0x108); puVar6 != puVar9; puVar6 = puVar6 + 2) {
@@ -65,7 +65,7 @@ void FUN_00406ad4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
       }
       puVar8 = puVar8 + 2;
     }
-    asdDeallocateArrayStorage(*(int *)(param_1 + 0x108),
+    _ZN4__rw15__rw_deallocateEPvji(*(int *)(param_1 + 0x108),
                  (*(int *)(param_1 + 0x110) - *(int *)(param_1 + 0x108)) >> 3,0);
     temp_v3 = *(int *)(param_1 + 0x108);
     *(unsigned int **)(param_1 + 0x108) = puVar1;
@@ -124,7 +124,7 @@ void FUN_00406ad4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
           if (temp_v7 < temp_v5 + 0x20) {
             temp_v7 = temp_v5 + 0x20;
           }
-          puVar9 = (unsigned int *)FUN_001006c2(temp_v7 << 3,0,temp_v6,temp_v4,param_4);
+          puVar9 = (unsigned int *)_ZN4__rw13__rw_allocateEji(temp_v7 << 3,0,temp_v6,temp_v4,param_4);
           puVar1 = puVar9;
           for (puVar8 = (unsigned int *)*piVar11; puVar8 != puVar6; puVar8 = puVar8 + 2) {
             if (puVar1 != (unsigned int *)0x0) {
@@ -152,7 +152,7 @@ void FUN_00406ad4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
           }
           temp_v0 = *piVar11;
           temp_v2 = *(int *)(param_1 + 0x10c);
-          asdDeallocateArrayStorage(temp_v0,(*(int *)(param_1 + 0x110) - temp_v0) >> 3,0);
+          _ZN4__rw15__rw_deallocateEPvji(temp_v0,(*(int *)(param_1 + 0x110) - temp_v0) >> 3,0);
           *(unsigned int **)(param_1 + 0x110) = puVar9 + temp_v7 * 2;
           *(unsigned int **)(param_1 + 0x10c) = puVar9 + ((temp_v2 - temp_v0) >> 3) * 2 + 2;
           *piVar11 = (int)puVar9;
@@ -170,7 +170,7 @@ void FUN_00406ad4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
         if (temp_v6 < 9) {
           temp_v6 = 8;
         }
-        puVar1 = (unsigned int *)FUN_001006c2(temp_v6 << 2,0);
+        puVar1 = (unsigned int *)_ZN4__rw13__rw_allocateEji(temp_v6 << 2,0);
         puVar9 = *(unsigned int **)(temp_v0 + 0x118);
         puVar8 = puVar1;
         for (puVar6 = (unsigned int *)*piVar11; puVar6 != puVar9; puVar6 = puVar6 + 1) {
@@ -182,7 +182,7 @@ void FUN_00406ad4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
         temp_v1 = *piVar11;
         for (temp_v2 = temp_v1; temp_v2 != *(int *)(temp_v0 + 0x118); temp_v2 = temp_v2 + 4) {
         }
-        asdDeallocateArrayStorage(temp_v1,(*(int *)(temp_v0 + 0x11c) - temp_v1) >> 2,0);
+        _ZN4__rw15__rw_deallocateEPvji(temp_v1,(*(int *)(temp_v0 + 0x11c) - temp_v1) >> 2,0);
         temp_v2 = *piVar11;
         *piVar11 = (int)puVar1;
         *(unsigned int *)(temp_v0 + 0x118) = ((*(int *)(temp_v0 + 0x118) - temp_v2) & 0xfffffffcU) + (int)puVar1;

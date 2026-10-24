@@ -20,9 +20,9 @@ typedef struct Context {
 extern Globals g_messageMain;
 
 Context *gameDataBlocksGetSaveData(void);
-int FUN_002bee58(void *target, int arg);
+int spriteStartAnimationByIndex(void *target, int arg);
 
-/* Script command: if the context is active, runs FUN_002bee58 on the effect of the global block. */
+/* Script command: if the context is active, runs spriteStartAnimationByIndex on the effect of the global block. */
 u32 scrEffectRunIfActive(void)
 {
     Block *block = g_messageMain.block;
@@ -30,7 +30,7 @@ u32 scrEffectRunIfActive(void)
     if (gameDataBlocksGetSaveData()->active == 0) {
         return 1;
     }
-    FUN_002bee58(block->effect, 7);
+    spriteStartAnimationByIndex(block->effect, 7);
     return 1;
 }
 

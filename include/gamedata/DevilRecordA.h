@@ -21,6 +21,12 @@ struct DevilTableRecordA {
     };
 };
 
+/* A demon stock entry: demon ID and the number held. */
+struct DevilStock {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u16 count;
+};
+
 typedef char DevilTableRecordASizeCheck[sizeof(DevilTableRecordA) == 0xB4 ? 1 : -1];
 typedef char DevilTableRecordAFieldOffsetCheck[
     offsetof(DevilTableRecordA, unk9C) == 0x9C ? 1 : -1];

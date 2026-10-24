@@ -1,40 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cf854` (_code @ 0x2cf854, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "map/lmapMain.h"
 
 extern "C" {
 
-extern signed char DAT_005f1b70; /* 0x5f1b70 */
-extern int DAT_005f1b74; /* 0x5f1b74 */
-extern int DAT_005f1b94; /* 0x5f1b94 */
+extern LmapMain g_lmapMain;   /* 0x5f1b70 */
+extern GameStateA g_gameState;
+u32 gameDataTableGetFlag(void);
 
-extern unsigned int gameDataTableGetFlag(void);
-
-
-unsigned int FUN_002cf854(void)
-
+/* 1 when the map main loop is active and the source/destination map value for the current flag is at least 100. */
+u32 FUN_002cf854(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = gameDataTableGetFlag();
-  switch(temp_v1) {
-  case 0:
-  case 3:
-    temp_v0 = DAT_005f1b74;
-    break;
-  case 1:
-  case 2:
-  case 4:
-    temp_v0 = DAT_005f1b94;
-    break;
-  default:
+    switch (gameDataTableGetFlag()) {
+    case 0:
+    case 3:
+        if (g_lmapMain.unk74 != 0 && (s32)g_gameState.sourceMap >= 100) {
+            return 1;
+        }
+        break;
+    case 1:
+    case 2:
+    case 4:
+        if (g_lmapMain.unk74 != 0 && (s32)g_gameState.destinationMap >= 100) {
+            return 1;
+        }
+        break;
+    }
     return 0;
-  }
-  if ((DAT_005f1b70 != '\0') && (temp_v0 >= 100)) {
-    return 1;
-  }
-  return 0;
 }
 
 } /* extern "C" */

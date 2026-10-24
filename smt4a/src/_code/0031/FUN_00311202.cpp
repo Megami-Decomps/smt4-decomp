@@ -19,7 +19,7 @@ struct fn_00311202_arg0 {
 
 extern int FUN_0010ef7a(int, unsigned int);
 /* Supplied declaration required: FUN_00113ed0. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int FUN_002e7614(int, unsigned int);
 
 
@@ -34,7 +34,7 @@ unsigned char * FUN_00311202(fn_00311202_arg0 *param_1)
       temp_v0 = FUN_0010ef7a(*(int *)(param_1 + 1),*(unsigned int *)&param_1->field_0x48);
     }
     else {
-      temp_v0 = operatorNew(0x20);
+      temp_v0 = _Znwj(0x20);
       if (temp_v0 == 0) {
         return (unsigned char *)0x0;
       }

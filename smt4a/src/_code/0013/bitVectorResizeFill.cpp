@@ -12,22 +12,22 @@ struct BitVectorRange {
 };
 
 extern "C" {
-u32 FUN_00307704(const BitVectorRange*);
-void FUN_00134ffe(BitVectorRange*, BitIterator, u32, const bool*);
-void FUN_002f1840(BitIterator*, const BitIterator*, u32);
-void FUN_00307632(BitIterator*, BitVectorRange*, BitIterator, BitIterator, BitIterator);
+u32 _ZNKSt6vectorIb12AsdAllocatorIbEE4sizeEv(const BitVectorRange*);
+void _ZNSt6vectorIb12AsdAllocatorIbEE6insertENS2_8iteratorEjRKb(BitVectorRange*, BitIterator, u32, const bool*);
+void _ZNKSt6vectorIb12AsdAllocatorIbEE8iteratorplEi(BitIterator*, const BitIterator*, u32);
+void _ZNSt6vectorIb12AsdAllocatorIbEE7_C_copyINS2_8iteratorEEES4_T_S5_S4_(BitIterator*, BitVectorRange*, BitIterator, BitIterator, BitIterator);
 
 // Grow with the requested bit value or move the logical end backward.
 void bitVectorResizeFill(BitVectorRange* vector, u32 count, bool value)
 {
-    if (FUN_00307704(vector) < count) {
-        FUN_00134ffe(vector, vector->end, count - FUN_00307704(vector), &value);
-    } else if (count < FUN_00307704(vector)) {
+    if (_ZNKSt6vectorIb12AsdAllocatorIbEE4sizeEv(vector) < count) {
+        _ZNSt6vectorIb12AsdAllocatorIbEE6insertENS2_8iteratorEjRKb(vector, vector->end, count - _ZNKSt6vectorIb12AsdAllocatorIbEE4sizeEv(vector), &value);
+    } else if (count < _ZNKSt6vectorIb12AsdAllocatorIbEE4sizeEv(vector)) {
         BitIterator begin = vector->begin;
         BitIterator cut;
-        FUN_002f1840(&cut, &begin, count);
+        _ZNKSt6vectorIb12AsdAllocatorIbEE8iteratorplEi(&cut, &begin, count);
         BitIterator end;
-        FUN_00307632(&end, vector, vector->end, vector->end, cut);
+        _ZNSt6vectorIb12AsdAllocatorIbEE7_C_copyINS2_8iteratorEEES4_T_S5_S4_(&end, vector, vector->end, vector->end, cut);
         vector->end = end;
     }
 }

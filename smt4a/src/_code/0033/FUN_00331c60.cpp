@@ -6,7 +6,7 @@ extern "C" {
 
 int gameGetPlayerData(void);
 int gameGetSlotRecord(...);
-int FUN_0034a290(void);
+int dataTable41FindById(void);
 int FUN_003e503c(void);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -25,7 +25,7 @@ extern unsigned char g_engineCleanupOwner; /* 0x588c40 */
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
 extern int FUN_0022fd80(int, int);
-/* Supplied declaration required: FUN_0034a290. */
+/* Supplied declaration required: dataTable41FindById. */
 extern int playerHasFlagBit(unsigned int);
 extern int actorIsActive(void);
 extern int partySlotMatchesSelected(unsigned int);
@@ -80,7 +80,7 @@ void FUN_00331c60(int *param_1)
         do {
           temp_v5 = (unsigned int)*(unsigned short *)(temp_v4 + 0x34 + temp_v7 * 2);
           if (temp_v5 != 0) {
-            FUN_0034a290();
+            dataTable41FindById();
             temp_v6 = 0;
             if (temp_v5 != 0) {
               temp_v6 = (unsigned int)*(unsigned char *)(temp_v5 + 0x2f);

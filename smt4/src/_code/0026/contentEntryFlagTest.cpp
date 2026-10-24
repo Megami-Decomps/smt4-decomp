@@ -20,7 +20,7 @@ typedef s32 Compare0026a794(const Entry0026a794 *a, const Entry0026a794 *b);
 typedef struct AocSystem0026a794 AocSystem0026a794;
 
 Entry0026a794 *recordTableFindById(AocSystem0026a794 *aoc, u32 id);
-Record0026a794 *FUN_002ae164(u32 id);
+Record0026a794 *dataTable40FindById(u32 id);
 void *dataTableGet(s32 table, s32 slot);
 Entry0026a794 *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
@@ -31,7 +31,7 @@ Entry0026a794 *libc_bsearch(const Entry0026a794 *key, const Entry0026a794 *base,
 
 extern AocSystem0026a794 *g_aocSystem; /* 0x433158 */
 
-/* Flag test on entry `id`: ids above 400 come from the add-on content or data table 4 section 1 (bit 30 clear), the rest from FUN_002ae164 (sign bit clear gives 1). */
+/* Flag test on entry `id`: ids above 400 come from the add-on content or data table 4 section 1 (bit 30 clear), the rest from dataTable40FindById (sign bit clear gives 1). */
 u32 contentEntryFlagTest(u32 id)
 {
     Entry0026a794 *entry;
@@ -52,7 +52,7 @@ u32 contentEntryFlagTest(u32 id)
             return ~(entry->flags >> 30) & 1;
         }
     } else {
-        record = FUN_002ae164(id);
+        record = dataTable40FindById(id);
         if (record != NULL) {
             return (record->flags >> 31) + 1;
         }

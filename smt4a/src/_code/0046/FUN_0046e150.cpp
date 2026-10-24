@@ -1,38 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0046e150` (_code @ 0x46e150, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail has a 4-byte slot before the 132-byte path buffer (buffer at sp+16) and keeps the kind constant 12 in r7; built places the buffer at sp+12. */
+#include "common.h"
+
+struct AocDisplay;
 
 extern "C" {
 
-int FUN_001b2ebc(unsigned int, unsigned char [132], unsigned int, int, int, int, int);
-int sysMemClear(unsigned char [132], int);
+void sysMemClear(void *buffer, s32 size);
+u8 *FUN_001b2bd8(u32 id, u32 kind, u32 variant, char *path);
+void FUN_001b2ebc(AocDisplay *display, const char *path, u32 completion, u8 *data, s32 mode, s32 size, u8 *context);
+extern AocDisplay *g_aocDisplay; /* 0x57027c */
 
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int spA0; /* 0xa0: local_a0 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-} param_3_stack;
-
-extern unsigned int g_aocDisplay; /* 0x57027c */
-
-extern int FUN_001b2bd8(unsigned int, unsigned int, unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_001b2ebc. */
-/* Supplied declaration required: sysMemClear. */
-
-
-void FUN_0046e150(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+// Resolve the file entry for the request and queue its 0x80-byte load on the add-on display.
+void FUN_0046e150(u32 id, u32 variant, u32 completion)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [132];
-  
-  sysMemClear(temp_v1,0x80);
-  temp_v0 = FUN_001b2bd8(param_1,0xc,param_2,temp_v1);
-  if (temp_v0 != 0) {
-    FUN_001b2ebc(g_aocDisplay,temp_v1,param_3,temp_v0 + 8,1,0x80,temp_v0);
-  }
-  return;
+    char path[132];
+    sysMemClear(path, 0x80);
+    u8 *entry = FUN_001b2bd8(id, 0xc, variant, path);
+    if (entry != NULL) {
+        FUN_001b2ebc(g_aocDisplay, path, completion, entry + 8, 1, 0x80, entry);
+    }
 }
 
 } /* extern "C" */

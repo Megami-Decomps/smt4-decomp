@@ -1,59 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cf548` (_code @ 0x2cf548, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same dataflow, but retail copies the 4-float vectors with vldmia/vstmia (and a vstmia+str pair for the 3-float copy) where built uses ldm/stm and per-word copies; the vector class that causes this is not recovered */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002a1850(int *, int, unsigned int, int *);
+struct Vec3 {
+    f32 x, y, z;
+};
 
-/* stack frame of void: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
+struct Vec4 {
+    f32 x, y, z, w;
+};
 
-extern unsigned int DAT_005c1120; /* 0x5c1120 */
-extern unsigned int DAT_005c1124; /* 0x5c1124 */
-extern unsigned int DAT_005c1128; /* 0x5c1128 */
-extern unsigned int DAT_005c112c; /* 0x5c112c */
-extern unsigned int DAT_006472dc; /* 0x6472dc */
-extern unsigned int DAT_006472e0; /* 0x6472e0 */
-extern unsigned int DAT_006472e4; /* 0x6472e4 */
-extern unsigned int DAT_006472e8; /* 0x6472e8 */
+struct CameraState {
+    /* 0x000 */ u8 unk000[0x100];
+    /* 0x100 */ Vec4 target;
+};
 
-extern unsigned int FUN_00152f54(void);
-/* Supplied declaration required: FUN_002a1850. */
+extern CameraState DAT_006471dc;
+extern Vec4 DAT_005c1120;
 
+f32 FUN_00152f54(void);
+void FUN_002a1850(Vec4 *out, s32 mode, f32 amount, const Vec3 *in);
 
-void FUN_002cf548(void)
-
+/* Saves the camera target, advances it by the current step and returns the resulting z. */
+f32 FUN_002cf548(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int uStack_24;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int uStack_14;
-  unsigned int temp_v4;
-  
-  temp_v0 = FUN_00152f54();
-  temp_v3 = DAT_006472dc;
-  uStack_14 = DAT_006472e0;
-  temp_v4 = DAT_006472e4;
-  DAT_005c1120 = DAT_006472dc;
-  DAT_005c1124 = DAT_006472e0;
-  DAT_005c1128 = DAT_006472e4;
-  DAT_005c112c = DAT_006472e8;
-  FUN_002a1850(&temp_v1,0,temp_v0,&temp_v3);
-  DAT_006472dc = temp_v1;
-  DAT_006472e0 = uStack_24;
-  DAT_006472e4 = temp_v2;
-  DAT_006472e8 = 0;
-  return;
+    Vec4 result;
+    Vec3 current;
+    f32 amount = FUN_00152f54();
+
+    DAT_005c1120 = DAT_006471dc.target;
+    current.x = DAT_006471dc.target.x;
+    current.y = DAT_006471dc.target.y;
+    current.z = DAT_006471dc.target.z;
+    FUN_002a1850(&result, 0, amount, &current);
+    result.w = 0.0f;
+    DAT_006471dc.target = result;
+    return result.z;
 }
 
 } /* extern "C" */

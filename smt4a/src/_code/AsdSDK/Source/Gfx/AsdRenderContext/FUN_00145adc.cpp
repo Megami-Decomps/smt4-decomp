@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0013c884(...);
+int asdCameraInitializeDefaults(...);
 int FUN_0014f0dc(...);
 int FUN_001523b8(...);
 int FUN_00156fd8(...);
@@ -29,7 +29,7 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0013c884. */
+/* Supplied declaration required: asdCameraInitializeDefaults. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
 extern unsigned int FUN_00154c94(unsigned int);
@@ -119,11 +119,11 @@ void FUN_00145adc(int param_1)
   temp_v11 = temp_v5;
   temp_v12 = temp_v5;
   temp_v13 = temp_v5;
-  FUN_0013c884(temp_v1,1);
+  asdCameraInitializeDefaults(temp_v1,1);
   FUN_0014f0dc(temp_v1,&temp_v6,&temp_v11,&temp_v8);
   FUN_001523b8(temp_v1,1);
   temp_v1 = param_1 + 0xc0c;
-  FUN_0013c884(temp_v1,1);
+  asdCameraInitializeDefaults(temp_v1,1);
   FUN_0014f0dc(temp_v1,&temp_v6,&temp_v11,&temp_v8);
   FUN_001523b8(temp_v1,1);
   mathCopyIdentityMatrix(param_1 + 0x5b8);

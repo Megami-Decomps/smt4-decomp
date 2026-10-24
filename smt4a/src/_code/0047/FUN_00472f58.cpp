@@ -1,4 +1,3 @@
-/* NON_MATCHING: the process callback address is loaded into r1 rather than r0. */
 #include "shard/W4_Match3_AocMainA.h"
 
 struct AocBoardWork {

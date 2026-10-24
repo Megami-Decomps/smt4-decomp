@@ -1,135 +1,105 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032d0c8` (_code @ 0x32d0c8, 0x228 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the prologue schedule differs: retail loads the g_buttonHelp address before moving the arguments and reads the work pointer right after the frame setup; the build loads the address after them. */
+#include "common.h"
+#include "ui/ButtonHelp.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "shard/W6_W6Match4_RelativeDirectory.h"
 
-extern "C" {
-
-int textFormatBuffer(...);
-int FUN_00184310(...);
-int battleAttributeFormatName(...);
-int skillFormatTargetLabel(...);
-int asdTextDrawDirectoryEntry(...);
-int FUN_002ad414(...);
-int FUN_002c0940(...);
-int FUN_003180c4(...);
-int FUN_00359974(...);
-
-typedef struct fn_0032d0c8_arg2 fn_0032d0c8_arg2;
-struct fn_0032d0c8_arg2 {
-    unsigned char pad_0x0[0xa];
-    ushort field_0xa; /* +0xa */
-    byte field_0xc; /* +0xc */
-    unsigned char pad_0xd[0x1];
-    byte field_0xe; /* +0xe */
+/* The part of a skill record this help text reads. */
+struct SkillHelpRecord {
+    /* 0x00 */ u8 unk00[0x0A];
+    /* 0x0A */ u16 unused : 1;
+    u16 target : 4;
+    u16 power : 3;
+    u16 maxPower : 3;
+    u16 unkBits : 5;
+    /* 0x0C */ u8 attribute;
+    /* 0x0D */ u8 unk0D;
+    /* 0x0E */ u8 ailment;
 };
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spB0; /* 0xb0: local_b0 */
-} param_4_stack;
+/* g_buttonHelp followed by the default help text directory. */
+struct ButtonHelpTextGlobals {
+    ButtonHelpGlobalsA prefix;
+    /* 0x08 */ RelativeDirectory *defaultDirectory;
+};
 
-extern unsigned char LAB_0032d2f4; /* 0x32d2f4 */
-extern unsigned char LAB_0032d2fc; /* 0x32d2fc */
-extern unsigned char LAB_0032d308; /* 0x32d308 */
-extern unsigned char LAB_0032d324; /* 0x32d324 */
-extern unsigned char LAB_0032d334; /* 0x32d334 */
-extern unsigned char LAB_0032d340; /* 0x32d340 */
-extern unsigned char LAB_0032d34c; /* 0x32d34c */
-extern unsigned char LAB_0032d358; /* 0x32d358 */
-extern unsigned char LAB_0032d364; /* 0x32d364 */
-extern unsigned char LAB_0032d370; /* 0x32d370 */
-extern unsigned char LAB_0032d37c; /* 0x32d37c */
-extern int DAT_0057f0c8; /* 0x57f0c8 */
-extern int DAT_0057f0cc; /* 0x57f0cc */
+extern "C" {
+extern ButtonHelpTextGlobals g_buttonHelp;
+SkillHelpRecord *FUN_00184310(u16 id);
+void FUN_00359974(s32 index, u32 a, u32 b, u32 c);
+void FUN_002c0940(char *output, s32 value);
+s32 textFormatBuffer(char *destination, const char *format, ...);
+void FUN_003180c4(u32 index, const char *value);
+void battleAttributeFormatName(char *out, s32 kind);
+void skillFormatTargetLabel(char *text, s32 target);
+void FUN_002ad414(u32 a, u32 b, u32 id, char *text);
+void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y, RelativeDirectory *directory, u32 index);
 
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: battleAttributeFormatName. */
-/* Supplied declaration required: skillFormatTargetLabel. */
-/* Supplied declaration required: asdTextDrawDirectoryEntry. */
-/* Supplied declaration required: FUN_002ad414. */
-/* Supplied declaration required: FUN_002c0940. */
-/* Supplied declaration required: FUN_003180c4. */
-/* Supplied declaration required: FUN_00359974. */
-
-
-void FUN_0032d0c8(int param_1,unsigned int param_2,fn_0032d0c8_arg2 *param_3,unsigned int param_4)
-
+// Fill the help text variables for a skill (power range, attribute, target, ailment) and draw its help entry.
+void FUN_0032d0c8(RelativeDirectory *directory, u32 index, u16 skillId, u32 extra)
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  fn_0032d0c8_arg2 *pfVar3;
-  int temp_v2;
-  int iStack_ac;
-  unsigned int temp_v3 [2];
-  unsigned char temp_v4 [128];
-  
-  temp_v1 = DAT_0057f0c8;
-  pfVar3 = param_3;
-  FUN_00184310();
-  if (pfVar3 == (fn_0032d0c8_arg2 *)0x0) {
-    *(unsigned char *)(temp_v1 + 0x5ea) = 0;
-  }
-  else {
-    *(unsigned char *)(temp_v1 + 0x67c) = 1;
-    *(unsigned char *)(temp_v1 + 0x5ea) = 1;
-    temp_v0 = (pfVar3->field_0xa & 0xff) >> 5;
-    if (temp_v0 == (pfVar3->field_0xa & 0x7ff) >> 8) {
-      FUN_00359974(0x25,temp_v0,0xffffffff,0);
+    ButtonHelpWorkA *work = g_buttonHelp.prefix.work;
+    SkillHelpRecord *skill = FUN_00184310(skillId);
+
+    char text[128];
+
+    if (skill == NULL) {
+        work->mode = 0;
+        return;
     }
-    else {
-      FUN_002c0940(&temp_v2);
-      FUN_002c0940(temp_v3,(pfVar3->field_0xa & 0x7ff) >> 8);
-      textFormatBuffer(temp_v4,&LAB_0032d2f4,&temp_v2,temp_v3);
-      FUN_003180c4(0x25,temp_v4);
+    work->helpState = 1;
+    work->mode = 1;
+    if (skill->power == skill->maxPower) {
+        FUN_00359974(37, skill->power, 0xFFFFFFFF, 0);
+    } else {
+        char low[8];
+        char high[8];
+        FUN_002c0940(low, skill->power);
+        FUN_002c0940(high, skill->maxPower);
+        textFormatBuffer(text, "%s\x81\x60%s", low, high);
+        FUN_003180c4(37, text);
     }
-    battleAttributeFormatName(temp_v4,pfVar3->field_0xc);
-    FUN_003180c4(0x26,temp_v4);
-    skillFormatTargetLabel(temp_v4,(pfVar3->field_0xa & 0x1f) >> 1);
-    FUN_003180c4(0x27,temp_v4);
-    if (pfVar3->field_0xe == 0) {
-      textFormatBuffer(temp_v4,&LAB_0032d2fc);
+    battleAttributeFormatName(text, skill->attribute);
+    FUN_003180c4(38, text);
+    skillFormatTargetLabel(text, skill->target);
+    FUN_003180c4(39, text);
+    if (skill->ailment == 0) {
+        textFormatBuffer(text, "\x82\x6d\x82\x8f\x82\x8e\x82\x85");
     }
-    if (pfVar3->field_0xe == 1) {
-      textFormatBuffer(temp_v4,&LAB_0032d308);
+    if (skill->ailment == 1) {
+        textFormatBuffer(text, "\x82\x68\x82\x8e\x82\x93\x82\x94\x82\x81\x82\x8e\x82\x94\x81\x40\x82\x6a\x82\x89\x82\x8c\x82\x8c");
     }
-    if (pfVar3->field_0xe == 5) {
-      textFormatBuffer(temp_v4,&LAB_0032d324);
+    if (skill->ailment == 5) {
+        textFormatBuffer(text, "\x82\x6f\x82\x8f\x82\x89\x82\x93\x82\x8f\x82\x8e");
     }
-    if (pfVar3->field_0xe == 6) {
-      textFormatBuffer(temp_v4,&LAB_0032d334);
+    if (skill->ailment == 6) {
+        textFormatBuffer(text, "\x82\x6f\x82\x81\x82\x8e\x82\x89\x82\x83");
     }
-    if (pfVar3->field_0xe == 7) {
-      textFormatBuffer(temp_v4,&LAB_0032d340);
+    if (skill->ailment == 7) {
+        textFormatBuffer(text, "\x82\x72\x82\x8c\x82\x85\x82\x85\x82\x90");
     }
-    if (pfVar3->field_0xe == 8) {
-      textFormatBuffer(temp_v4,&LAB_0032d34c);
+    if (skill->ailment == 8) {
+        textFormatBuffer(text, "\x82\x61\x82\x89\x82\x8e\x82\x84");
     }
-    if (pfVar3->field_0xe == 9) {
-      textFormatBuffer(temp_v4,&LAB_0032d358);
+    if (skill->ailment == 9) {
+        textFormatBuffer(text, "\x82\x72\x82\x89\x82\x83\x82\x8b");
     }
-    if (pfVar3->field_0xe == 0xb) {
-      textFormatBuffer(temp_v4,&LAB_0032d364);
+    if (skill->ailment == 11) {
+        textFormatBuffer(text, "\x82\x62\x82\x88\x82\x81\x82\x92\x82\x8d");
     }
-    if (pfVar3->field_0xe == 0xc) {
-      textFormatBuffer(temp_v4,&LAB_0032d370);
+    if (skill->ailment == 12) {
+        textFormatBuffer(text, "\x82\x63\x82\x81\x82\x9a\x82\x85");
     }
-    if (pfVar3->field_0xe == 0xd) {
-      textFormatBuffer(temp_v4,&LAB_0032d37c);
+    if (skill->ailment == 13) {
+        textFormatBuffer(text, "\x82\x6c\x82\x95\x82\x94\x82\x85");
     }
-    FUN_003180c4(0x28,temp_v4);
-    FUN_002ad414(0,param_4,param_3,temp_v4);
-    FUN_003180c4(0x29,temp_v4);
-    if (param_1 == 0) {
-      param_1 = DAT_0057f0cc;
+    FUN_003180c4(40, text);
+    FUN_002ad414(0, extra, skillId, text);
+    FUN_003180c4(41, text);
+    if (directory == NULL) {
+        directory = g_buttonHelp.defaultDirectory;
     }
-    temp_v2 = 3;
-    iStack_ac = param_1;
-    temp_v3[0] = param_2;
-    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v1 + 0x678),2,0xffffffff,0);
-  }
-  return;
+    asdTextDrawDirectoryEntry((AsdText *)work->unk678, 2, -1, 0, 3, directory, index);
 }
 
-} /* extern "C" */
+}

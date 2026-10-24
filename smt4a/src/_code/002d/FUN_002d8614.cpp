@@ -1,37 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d8614` (_code @ 0x2d8614, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stores match; retail schedules `mov r0, #0` (the state clear) before the vstmia and uses r1 for the vstmia address, built emits them in the other order */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003d4ed8(int);
+struct Vec2 {
+    Vec2(f32 px, f32 py) : x(px), y(py) {}
+    f32 x, y;
+};
 
-extern int g_mapIf; /* 0x58103c */
+struct MapIfPanel {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ f32 offset;
+    /* 0x34 */ u8 unk34[0x5c - 0x34];
+    /* 0x5c */ Vec2 size;
+    /* 0x64 */ f32 depth;
+    /* 0x68 */ f32 sizeX;
+    /* 0x6c */ f32 sizeY;
+    /* 0x70 */ f32 unk70;
+    /* 0x74 */ f32 unk74;
+};
 
-/* Supplied declaration required: FUN_003d4ed8. */
+struct MapIf {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ s8 enabled;
+    /* 0x35 */ u8 unk35[3];
+    /* 0x38 */ u32 state;
+    /* 0x3c */ u8 unk3c[0x0c];
+    /* 0x48 */ MapIfPanel panel;
+};
 
+extern MapIf *g_mapIf;
 
-void FUN_002d8614(int param_1)
+void FUN_003d4ed8(u32 soundId);
 
+/* Switches the map interface on or off; switching on plays the sound and resets the panel geometry. */
+void FUN_002d8614(s8 enable)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_mapIf;
-  if ((*(char *)(g_mapIf + 0x34) != param_1) &&
-     (*(char *)(g_mapIf + 0x34) = (char)param_1, param_1 != 0)) {
+    MapIf *mapIf = g_mapIf;
+    MapIfPanel *panel = &mapIf->panel;
+
+    if (mapIf->enabled == enable) {
+        return;
+    }
+    mapIf->enabled = enable;
+    if (enable == 0) {
+        return;
+    }
     FUN_003d4ed8(0x10002ab);
-    *(unsigned int *)(temp_v0 + 0x78) = 0;
-    *(unsigned int *)(temp_v0 + 0xa4) = 0;
-    *(unsigned int *)(temp_v0 + 0xa8) = 0x41a00000;
-    *(unsigned int *)(temp_v0 + 0xac) = 0;
-    *(unsigned int *)(temp_v0 + 0xb0) = *(unsigned int *)(temp_v0 + 0xa4);
-    *(unsigned int *)(temp_v0 + 0xb4) = 0x41a00000;
-    *(unsigned int *)(temp_v0 + 0xb8) = 0;
-    *(unsigned int *)(temp_v0 + 0xbc) = 0;
-    *(unsigned int *)(temp_v0 + 0x38) = 0;
-  }
-  return;
+    panel->offset = 0.0f;
+    panel->size = Vec2(0.0f, 20.0f);
+    panel->depth = 0.0f;
+    panel->sizeX = panel->size.x;
+    panel->sizeY = 20.0f;
+    panel->unk70 = 0.0f;
+    panel->unk74 = 0.0f;
+    mapIf->state = 0;
 }
 
 } /* extern "C" */

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7908(...);
+int _ZN12OnlineResultC1ERKj(...);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(int *);
@@ -23,7 +23,7 @@ typedef struct {
 extern unsigned char LAB_0012c74d; /* 0x12c74d */
 extern unsigned char LAB_0012cdac; /* 0x12cdac */
 
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
@@ -66,7 +66,7 @@ void FUN_0012ccec(int param_1)
         (**(romwright_code **)(**(int **)(param_1 + 0x3ec) + 0xc))
                   (*(int **)(param_1 + 0x3ec),param_1 + 0x280,0);
         temp_v8 = 0x10001;
-        temp_v1 = FUN_002e7908(temp_v7,&temp_v8);
+        temp_v1 = _ZN12OnlineResultC1ERKj(temp_v7,&temp_v8);
         FUN_0030c720(param_1,temp_v1);
       }
       temp_v1 = FUN_002ea3c0(temp_v6,&LAB_0012c74d,0,&LAB_0012cdac);
@@ -77,7 +77,7 @@ void FUN_0012ccec(int param_1)
   }
   else {
     temp_v5 = 0x80010004;
-    puVar2 = (unsigned int *)FUN_002e7908(&temp_v3,&temp_v5);
+    puVar2 = (unsigned int *)_ZN12OnlineResultC1ERKj(&temp_v3,&temp_v5);
   }
   FUN_0030c720(param_1,puVar2);
   return;

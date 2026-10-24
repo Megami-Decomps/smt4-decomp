@@ -1,48 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e3140` (_code @ 0x2e3140, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail has a real frame (push {r4, lr}) and passes the caller address read back from the saved lr slot ([sp, #4]); the signed level test, the development-unit byte at 0x1FF80014 and the call structure are as written, but armcc folds the level compares and tail-calls with lr directly */
+/* Reports a failed result: in a development environment (or with the debug flag set) results at level -7 and 1 are
+ * ignored and any other is reported with the caller's address; otherwise only level -1 is reported before the fatal
+ * error handler runs. */
+#include "common.h"
 
 extern "C" {
+/* A result code split into its fields (level is signed). */
+union ResultFields {
+    u32 value;
+    struct {
+        u32 description : 10;
+        u32 module : 8;
+        u32 reserved : 3;
+        u32 summary : 6;
+        s32 level : 5;
+    } fields;
+};
 
-int sysFatalBreak(void);
-int FUN_001a1204(unsigned int, int, unsigned int);
+extern s8 DAT_005894cc;
+void FUN_001a1204(u32 result, u32 flag, u32 callerAddress);
+void sysFatalBreak(void);
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern signed char DAT_005894cc; /* 0x5894cc */
-extern unsigned char bRam1ff80014; /* 0x1ff80014 */
-
-/* Supplied declaration required: sysFatalBreak. */
-/* Supplied declaration required: FUN_001a1204. */
-
-
-void FUN_002e3140(unsigned int param_1)
-
+void FUN_002e3140(u32 result)
 {
-/* irregular: irregular input(s): in_lr; 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int in_lr;
-  
-  temp_v0 = param_1 >> 0x1b;
-  if ((param_1 & 0x80000000) != 0) {
-    temp_v0 = temp_v0 - 0x20;
-  }
-  if ((bRam1ff80014 & 1) == 0 && DAT_005894cc == '\0') {
-    if (temp_v0 == 0xffffffff) {
-      FUN_001a1204(param_1,0,in_lr);
-    }
-    sysFatalBreak();
-    return;
-  }
-  if (temp_v0 != 0xfffffff9 && temp_v0 != 1) {
-    FUN_001a1204(param_1,0,in_lr);
-    return;
-  }
-  return;
-}
+    ResultFields code;
+    code.value = result;
+    u8 developmentUnit = *(volatile u8 *)0x1FF80014 & 1;
 
-} /* extern "C" */
+    if ((developmentUnit | DAT_005894cc) == 0) {
+        if (code.fields.level == -1) {
+            FUN_001a1204(result, 0, (u32)__return_address());
+        }
+        sysFatalBreak();
+        return;
+    }
+    if (code.fields.level != -7 && code.fields.level != 1) {
+        FUN_001a1204(result, 0, (u32)__return_address());
+    }
+}
+}

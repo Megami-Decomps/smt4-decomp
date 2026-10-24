@@ -1,35 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `effBehaviorRun` (_code @ 0x26933c, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Effect/EffectBehaviorBlock.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+/* One behavior type's table entry: the per-frame update callback comes first. */
+struct EffectBehaviorRunEntry {
+    void (*run)(EffectBehaviorBlock *block);
+    u8 unk04[0x10];
+};
 
-void effBehaviorRun(unsigned short *param_1)
+/* One behavior element (0x28 bytes); only its marker is touched here. */
+struct EffectBehaviorElement {
+    u8 unk00[0x10];
+    s32 marker;
+    u8 unk14[0x14];
+};
 
+extern EffectBehaviorRunEntry DAT_00473590[];
+
+/* Runs one frame of a behavior block; on its first frame every element's marker is reset. */
+void effBehaviorRun(EffectBehaviorBlock *block)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  if (*(int *)(param_1 + 8) == 0) {
-    temp_v0 = *(unsigned int *)(param_1 + 4);
-    if (temp_v0 != 0) {
-      puVar1 = (unsigned int *)(*(int *)(param_1 + 0xc) - 0x18);
-      if ((temp_v0 & 1) != 0) {
-        puVar1 = (unsigned int *)(*(int *)(param_1 + 0xc) + 0x10);
-        *puVar1 = 0xffffffff;
-      }
-      for (temp_v0 = temp_v0 >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
-        puVar1[10] = 0xffffffff;
-        puVar1 = puVar1 + 0x14;
-        *puVar1 = 0xffffffff;
-      }
+    if (block->state == 0) {
+        u32 count = block->elementCount;
+        EffectBehaviorElement *elements = static_cast<EffectBehaviorElement *>(block->elements);
+        for (u32 i = 0; i < count; i++) {
+            elements[i].marker = -1;
+        }
     }
-  }
-  (**(romwright_code **)((unsigned int)*param_1 * 0x14 + 0x473590))(param_1);
-  *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
-  return;
+    DAT_00473590[block->type].run(block);
+    block->state++;
 }
 
-} /* extern "C" */
+}

@@ -1,60 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002efc44` (_code @ 0x2efc44, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail merges the limit clamp with the loop-entry test (cmple) and keeps the element pointer in r4, the kind in ip; ours uses ip for the pointer. */
+#include "common.h"
 
 extern "C" {
 
-int SBORROW4(int, int);
+/* A pair of (kind, amount) signed bytes. */
+struct KindAmount {
+    /* 0x0 */ s8 kind;
+    /* 0x1 */ s8 amount;
+};
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
+/* A record with a locked flag (bit 29 of 0x3C) and nine (kind, amount) pairs at 0x62. */
+struct AmountRecord {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ u32 flags;
+    /* 0x40 */ u8 unk40[0x22];
+    /* 0x62 */ KindAmount entries[9];
+};
 
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-
-
-int FUN_002efc44(int param_1,int param_2,int param_3)
-
+/* Sums the amounts of the leading entries of one kind; a zero kind ends the list. */
+s32 FUN_002efc44(AmountRecord *record, s32 slotCount, s32 kind)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  if ((param_1 != 0) && ((*(unsigned int *)(param_1 + 0x3c) & 0x20000000) == 0)) {
-    temp_v1 = param_2 - 1;
-    temp_v5 = temp_v1 == 9;
-    temp_v2 = temp_v1;
-    if (temp_v1 >= 10) {
-      temp_v2 = 9;
-    }
-    temp_v4 = param_2 - 10;
-    if (9 >= temp_v1) {
-      temp_v5 = temp_v2 == 0;
-      temp_v4 = temp_v2;
-    }
-    temp_v3 = 0;
-    temp_v0 = 0;
-    if (!temp_v5 && temp_v4 < 0 == (temp_v1 >= 10 && SBORROW4(temp_v1,9))) {
-      do {
-        temp_v1 = param_1 + temp_v0 * 2;
-        temp_v4 = (int)*(char *)(temp_v1 + 0x62);
-        if (temp_v4 == 0) {
-          return temp_v3;
+    if (record != NULL && (record->flags & 0x20000000) == 0) {
+        s32 limit = slotCount - 1;
+        if (limit > 9) {
+            limit = 9;
         }
-        if (temp_v4 == param_3) {
-          temp_v3 = temp_v3 + *(char *)(temp_v1 + 99);
+        s32 total = 0;
+        for (s32 i = 0; i < limit; i++) {
+            if (record->entries[i].kind == 0) {
+                break;
+            }
+            if (record->entries[i].kind == kind) {
+                total += record->entries[i].amount;
+            }
         }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < temp_v2);
+        return total;
     }
-    return temp_v3;
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

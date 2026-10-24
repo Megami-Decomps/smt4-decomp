@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002541b8(...);
-int FUN_00254230(...);
+int namedEntryTableSetById(...);
 int FUN_00263cb8(...);
 int FUN_002671f4(...);
 int VectorSignedToFloat(...);
@@ -37,7 +37,7 @@ extern unsigned char LAB_00285224; /* 0x285224 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002541b8. */
-/* Supplied declaration required: FUN_00254230. */
+/* Supplied declaration required: namedEntryTableSetById. */
 /* Supplied declaration required: FUN_00263cb8. */
 /* Supplied declaration required: FUN_002671f4. */
 extern int FUN_00285574(void);
@@ -107,7 +107,7 @@ void FUN_002849a4(int param_1)
           FUN_00263cb8(0x2400001,0,&LAB_0028509c,0x1b,8,0xffffffff,0,
                        *(unsigned char *)(temp_v4 + 0x447f58),*(unsigned char *)(temp_v4 + 0x447f59),0,0,0,0,
                        0xd,1,0,0,0,0);
-          FUN_00254230(0x2400001,(int)*(short *)(temp_v4 + 0x447f5a),temp_v4 + 0x447f5c);
+          namedEntryTableSetById(0x2400001,(int)*(short *)(temp_v4 + 0x447f5a),temp_v4 + 0x447f5c);
           FUN_002541b8(0x2400001,0);
         }
       }
@@ -170,14 +170,14 @@ void FUN_002849a4(int param_1)
         else {
           FUN_00263cb8(0x2400002,0,&LAB_00285224,0x3b,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x447f70)
                        ,*(unsigned char *)(temp_v2 + 0x447f71),0,0,0,0,0,0xd,1,0,0,0,0);
-          FUN_00254230(0x2400002,(int)*(short *)(temp_v2 + 0x447f72),temp_v2 + 0x447f74);
+          namedEntryTableSetById(0x2400002,(int)*(short *)(temp_v2 + 0x447f72),temp_v2 + 0x447f74);
           FUN_002541b8(0x2400002,0);
         }
       }
       else {
         FUN_00263cb8(0x2400002,0,&LAB_00285224,0xc,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x447f70),
                      *(unsigned char *)(temp_v2 + 0x447f71),0,0,0,0,0,0xd,1,0,0,0,0);
-        FUN_00254230(0x2400002,(int)*(short *)(temp_v2 + 0x447f72),temp_v2 + 0x447f74);
+        namedEntryTableSetById(0x2400002,(int)*(short *)(temp_v2 + 0x447f72),temp_v2 + 0x447f74);
         FUN_002541b8(0x2400002,0);
       }
     }

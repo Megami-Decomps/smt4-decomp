@@ -16,7 +16,7 @@ extern signed char g_systemTable; /* 0x59935c */
 
 extern int FUN_00110594(int);
 extern int FUN_0011400c(unsigned int *, unsigned int);
-extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned int *, unsigned char *);
+extern unsigned int _ZN9Obj55aff4C1EPKt(unsigned int *, unsigned char *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 
 
@@ -32,7 +32,7 @@ int FUN_0011e894(unsigned int *param_1,unsigned int param_2,unsigned int param_3
   *param_1 = (unsigned int)&DAT_0055ab98;
   uStack_10 = param_3;
   uStack_c = param_4;
-  temp_v0 = _ZN9Obj55aff4C1EPKc((unsigned int *)&uStack_10,&LAB_0011e8dc);
+  temp_v0 = _ZN9Obj55aff4C1EPKt((unsigned int *)&uStack_10,&LAB_0011e8dc);
   temp_v1 = FUN_0011400c(param_1 + 1,temp_v0);
   _ZN9Obj55aff4D1Ev(&uStack_10);
   temp_v1 = FUN_00110594(temp_v1 + 0x28);

@@ -1,7 +1,7 @@
 /* NON_MATCHING: native graphics-state stack layout and hoisted blend constants differ. */
 #include "gfx/RenderPassQueue.h"
 extern "C" {
-void FUN_0016d1f4(RenderPassViewportState *state);
+void _ZN9SlotStateC1Ev(RenderPassViewportState *state);
 u32 *gpuEmitDepthBufferCommands(RenderPassDepthState *state, u32 *commands, s32 first, s32 second);
 u32 *FUN_00177abc(RenderPassColorState *state, u32 *commands);
 void FUN_0016bb74(RenderPassQueue *queue, s32 pass);
@@ -15,7 +15,7 @@ void FUN_00157268(RenderPassQueue *queue)
     queue->active = 0;
     u32 **commands = queue->commands;
     RenderPassViewportState viewport;
-    FUN_0016d1f4(&viewport);
+    _ZN9SlotStateC1Ev(&viewport);
     RenderPassDepthState depth;
     depth.enabled = 0;
     RenderPassColorState color;

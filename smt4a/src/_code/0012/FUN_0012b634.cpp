@@ -14,11 +14,11 @@ typedef struct {
     unsigned int sp24; /* 0x24: local_24 */
 } param_1_stack;
 
-extern unsigned char *FUN_002e7908(unsigned char *, unsigned int *);
+extern unsigned char *_ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea41e. */
-extern int refIsNonNegative(void);
+extern int _ZNK18OnlineResultRecord7isValidEv(void);
 
 
 void FUN_0012b634(int param_1)
@@ -39,7 +39,7 @@ void FUN_0012b634(int param_1)
   onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
     puVar2 = (unsigned char *)(param_1 + 0x1d0);
-    temp_v0 = refIsNonNegative();
+    temp_v0 = _ZNK18OnlineResultRecord7isValidEv();
     if (temp_v0 == 0) {
       onlineJobFinishValueRequest((OnlineValueJob *)param_1, (const OnlineCallbackResult *)puVar2);
       return;
@@ -58,7 +58,7 @@ void FUN_0012b634(int param_1)
     temp_v4[0] = 0x80010004;
     puVar3 = temp_v3;
   }
-  puVar2 = (unsigned char *)FUN_002e7908(puVar3,puVar4);
+  puVar2 = (unsigned char *)_ZN12OnlineResultC1ERKj(puVar3,puVar4);
   onlineJobFinishValueRequest((OnlineValueJob *)param_1, (const OnlineCallbackResult *)puVar2);
   return;
 }

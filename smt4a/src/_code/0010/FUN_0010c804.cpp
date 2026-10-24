@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int vectorCopyHeader(unsigned int, unsigned char [12]);
+int _ZN18OnlineResultRecordaSERKS_(unsigned int, unsigned char [12]);
 int FUN_002ee4d2(int);
 int FUN_002f6740(...);
 
@@ -18,8 +18,8 @@ typedef struct {
 
 extern unsigned char LAB_0010c8c1; /* 0x10c8c1 */
 
-extern unsigned int FUN_002e7908(unsigned int, unsigned int *);
-/* Supplied declaration required: vectorCopyHeader. */
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int, unsigned int *);
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: FUN_002ee4d2. */
 /* Supplied declaration required: FUN_002f6740. */
 
@@ -42,17 +42,17 @@ void FUN_0010c804(unsigned int param_1,int param_2,int param_3,unsigned int *par
   iStack_20 = param_2;
   iStack_1c = param_3;
   temp_v4 = param_4;
-  temp_v0 = FUN_002e7908(param_1,(unsigned int *)&temp_v2);
+  temp_v0 = _ZN12OnlineResultC1ERKj(param_1,(unsigned int *)&temp_v2);
   if (param_3 != 0) {
     *(int *)(param_2 + 0x94) = param_3;
     *(unsigned int *)(param_2 + 0x98) = *temp_v4;
     temp_v1[0] = param_2;
     FUN_002f6740(temp_v3,*(unsigned int *)(param_2 + 0x90),&LAB_0010c8c1,temp_v1,param_5);
-    vectorCopyHeader(temp_v0,temp_v3);
+    _ZN18OnlineResultRecordaSERKS_(temp_v0,temp_v3);
   }
   else {
     FUN_002f6740(temp_v3,*(unsigned int *)(param_2 + 0x90),0,temp_v4,param_5);
-    vectorCopyHeader(temp_v0,temp_v3);
+    _ZN18OnlineResultRecordaSERKS_(temp_v0,temp_v3);
     FUN_002ee4d2(param_2);
   }
   return;

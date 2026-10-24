@@ -1,4 +1,3 @@
-/* NON_MATCHING: prologue scheduling only: retail stores the vtable pointer before loading unk44; armcc here hoists the load above the store. */
 #include "classes/Obj557d00.h"
 
 /* The object unk88 points at: deleted through its virtual destructor. */

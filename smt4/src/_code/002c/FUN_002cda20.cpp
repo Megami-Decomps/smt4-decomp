@@ -1,33 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cda20` (_code @ 0x2cda20, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses both records of a pair from the group base plus the pair offset (base + i*0x18 + 0x2C/0x44); built forms a record pointer first */
+#include "common.h"
+
+struct KeyedRecord {
+    u32 unk00;       // 0x00
+    s32 key;         // 0x04
+    u8 unk08[0x10];  // 0x08
+};
+
+struct KeyedGroup {
+    u8 unk00[0x2C];          // 0x00
+    KeyedRecord records[6];  // 0x2C
+    u8 unkBC[0x8C];          // 0xBC
+};
 
 extern "C" {
 
-extern int g_keyedRecordCount; /* 0x433278 */
-extern unsigned char g_keyedRecords; /* 0x478000 */
+extern s32 g_keyedRecordCount; /* 0x433278 */
+extern KeyedGroup g_keyedRecords[]; /* 0x478000 */
 
-
-unsigned char * FUN_002cda20(int param_1,int param_2)
-
+/* Finds the record of group `group` whose key is `key` (records are searched in pairs); NULL when absent. */
+KeyedRecord *FUN_002cda20(s32 group, s32 key)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  if (-1 < (g_keyedRecordCount - param_1) - 1) {
-    temp_v1 = 0;
-    do {
-      temp_v0 = temp_v1 * 0x18 + param_1 * 0x148;
-      if (*(int *)(&g_keyedRecords + temp_v0 + 0x30) == param_2) {
-        return &g_keyedRecords + temp_v1 * 0x18 + param_1 * 0x148 + 0x2c;
-      }
-      if (*(int *)(&g_keyedRecords + temp_v0 + 0x48) == param_2) {
-        return &g_keyedRecords + temp_v1 * 0x18 + param_1 * 0x148 + 0x44;
-      }
-      temp_v1 = temp_v1 + 2;
-    } while (temp_v1 < 6);
-  }
-  return (unsigned char *)0x0;
+    if (g_keyedRecordCount - group - 1 >= 0) {
+        s32 i = 0;
+
+        do {
+            KeyedRecord *record = &g_keyedRecords[group].records[i];
+
+            if (record[0].key == key) {
+                return &record[0];
+            }
+            if (record[1].key == key) {
+                return &record[1];
+            }
+            i += 2;
+        } while (i < 6);
+    }
+    return NULL;
 }
 
 } /* extern "C" */

@@ -15,7 +15,7 @@ struct BattleItemResourceView { u8 unk00[0x62]; u16 resourceId; };
 extern "C" {
 extern BattleResourceOwner *DAT_00435d18;
 BattleActionDescription FUN_00247478(BtlMainState *, BtlUnitEntry *);
-BattleResourceLookupView *FUN_002ae164(u32);
+BattleResourceLookupView *dataTable40FindById(u32);
 BattleItemResourceView *dataTable08Sub1GetRecord(u32);
 void aocEntryBlockStore(BattleResourceOwner *, u32, u32, s32, u32);
 void objectSetResultFromLookup(BattleResourceOwner *, u32, u32, u32);
@@ -47,7 +47,7 @@ void FUN_003cee94(BtlMainState **battle, ActionKindSelection *selection)
         }
         resourceId = itemResource;
     }
-    u32 category = (FUN_002ae164(resourceId)->attributes >> 5) & 0xF;
+    u32 category = (dataTable40FindById(resourceId)->attributes >> 5) & 0xF;
     bool normal = true;
     if (category == 2 || category == 3 || category == 4)
         normal = false;

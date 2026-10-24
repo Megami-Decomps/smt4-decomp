@@ -1,41 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003eaf20` (_code @ 0x3eaf20, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: loop-invariant hoisting only: retail hoists just the 0x78 mask words (the 0x58 mask is reloaded with ldm inside the loop, 4 saved registers); the build hoists both. */
+#include "battle/btlMain.h"
+#include "shard/W5_W5Match7_BattleMask.h"
 
 extern "C" {
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+extern BtlMainGlobalsA g_btlMain; /* 0x573920 */
 
-extern unsigned int DAT_00573978; /* 0x573978 */
-extern unsigned int DAT_0057397c; /* 0x57397c */
-extern unsigned int DAT_00573998; /* 0x573998 */
-extern unsigned int DAT_0057399c; /* 0x57399c */
-
-
-int FUN_003eaf20(int param_1)
-
+/* Finds the first battle entry whose mask matches both the actor category mask and the required mask; NULL if none. */
+BattleMaskEntry *FUN_003eaf20(BattleMaskState *battle)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  
-  temp_v1 = 0;
-  while( 1 ) {
-    puVar3 = (unsigned int *)(*(int *)(param_1 + 0x1ffc) + temp_v1 * 0x408);
-    temp_v0 = *puVar3;
-    temp_v2 = puVar3[1];
-    if (((temp_v2 & DAT_0057399c) != 0 || (temp_v0 & DAT_00573998) != 0) &&
-       ((temp_v0 & DAT_00573978) != 0 || (temp_v2 & DAT_0057397c) != 0)) break;
-    temp_v1 = temp_v1 + 1;
-    if (temp_v1 >= 0x6d) {
-      return 0;
+    for (s32 i = 0; i < 109; i++) {
+        BattleMaskEntry *entry = &battle->entryView.entries[i];
+        if ((entry->mask & g_btlMain.actorCategories[3]) != 0) {
+            if ((entry->mask & g_btlMain.combatantMasks.required) != 0) {
+                return entry;
+            }
+        }
     }
-  }
-  return *(int *)(param_1 + 0x1ffc) + temp_v1 * 0x408;
+    return NULL;
 }
 
 } /* extern "C" */

@@ -1,33 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00339fa8` (_code @ 0x339fa8, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the registers of the zero constant and the frame-delta base differ (ip and r4 swapped). */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+/* One 0x114-byte slot state record. */
+struct SlotState {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ f32 timer;
+    /* 0x10 */ u8 unk10[0x40];
+    /* 0x50 */ u32 flags;
+    /* 0x54 */ u32 stateFlags;
+    /* 0x58 */ u8 unk58[2];
+    /* 0x5A */ u16 counter;
+    /* 0x5C */ u8 unk5C[0xB8];
+};
 
+/* The slot manager: state table at 0x1E98 and the frame delta at 0x439C. */
+struct SlotManager {
+    /* 0x0000 */ u8 unk0000[0x1E98];
+    /* 0x1E98 */ SlotState *states;
+    /* 0x1E9C */ u8 unk1E9C[0x2500];
+    /* 0x439C */ f32 frameDelta;
+};
 
-void FUN_00339fa8(int param_1)
-
+/* For active slots 67..108 that finished a pending step: rewinds their timer by one frame and clears the step. */
+void FUN_00339fa8(SlotManager *manager)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 0x43;
-  do {
-    temp_v0 = *(int *)(param_1 + 0x1e98) + temp_v1 * 0x114;
-    if (((*(unsigned int *)(temp_v0 + 0x50) & 1) != 0 && (*(unsigned int *)(temp_v0 + 0x50) & 0x8000) != 0) &&
-       ((*(unsigned int *)(temp_v0 + 0x54) & 8) != 0)) {
-      *(unsigned int *)(temp_v0 + 0x54) = *(unsigned int *)(temp_v0 + 0x54) & 0xfffffff7;
-      *(float *)(temp_v0 + 0xc) = *(float *)(temp_v0 + 0xc) - *(float *)(param_1 + 0x439c);
-      *(unsigned short *)(temp_v0 + 0x5a) = 0;
+    for (s32 i = 0x43; i < 0x6D; i++) {
+        SlotState *state = &manager->states[i];
+        if ((state->flags & 1) != 0 && (state->flags & 0x8000) != 0 && (state->stateFlags & 8) != 0) {
+            state->stateFlags &= ~8;
+            state->timer -= manager->frameDelta;
+            state->counter = 0;
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x6d);
-  return;
 }
 
 } /* extern "C" */

@@ -1,48 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bcf4c` (_code @ 0x2bcf4c, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gamedata/DataTable25.h"
 
 extern "C" {
 
-int FUN_00131530(int, unsigned int);
-int libc_bsearch(unsigned char [32], unsigned int, unsigned int, int, unsigned char *);
+extern AocSystem *g_aocSystem;
 
-/* stack frame of param_1: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short sp1C; /* 0x1c: local_1c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_1_stack;
+void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+s32 signedKeyRecordCompare(const void *a, const void *b);
+DataTable25Record *FUN_00131530(AocSystem *system, u32 id);
+u32 dataTableGet(u32 table, u32 index);
+u32 dataTableGetCount(u32 table);
+void *dataTableGetEntries(u32 table);
 
-extern unsigned char LAB_001247e0; /* 0x1247e0 */
-extern int g_aocSystem; /* 0x433158 */
-
-/* Supplied declaration required: FUN_00131530. */
-/* Supplied declaration required: libc_bsearch. */
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-
-
-void FUN_002bcf4c(unsigned int param_1)
-
+/* Finds the record with `id`: the add-on content's override first, else a search of data table 25. */
+DataTable25Record *FUN_002bcf4c(u32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3 [32];
-  unsigned short temp_v4;
-  
-  temp_v0 = g_aocSystem;
-  FUN_00131530(g_aocSystem,param_1);
-  if (temp_v0 == 0) {
-    temp_v1 = dataTableGet(0x19,0);
-    temp_v2 = dataTableGetEntries();
-    temp_v1 = dataTableGetCount(temp_v1);
-    temp_v4 = (unsigned short)param_1;
-    libc_bsearch(temp_v3,temp_v2,temp_v1,0x2c,&LAB_001247e0);
-  }
-  return;
+    DataTable25Record *record = FUN_00131530(g_aocSystem, id);
+
+    if (record != NULL) {
+        return record;
+    }
+    u32 table = dataTableGet(25, 0);
+    void *entries = dataTableGetEntries(table);
+    u32 count = dataTableGetCount(table);
+    DataTable25Record key;
+    key.id = id;
+    return (DataTable25Record *)libc_bsearch(&key, entries, count, sizeof(DataTable25Record), signedKeyRecordCompare);
 }
 
 } /* extern "C" */

@@ -1,50 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034724c` (_code @ 0x34724c, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct CommandRange {
+    u32 physicalAddress;  // 0x00
+    u32 size;             // 0x04
+    u8 valid;             // 0x08
+};
+
+struct ModelBuffers {
+    u8 unk00[4];            // 0x00
+    u32 flags;              // 0x04
+    u8 unk08[0x10];         // 0x08
+    u32 indexCount;         // 0x18
+    u8 unk1C[0x2C];         // 0x1C
+    void *indices;          // 0x48
+    u8 unk4C[0x790];        // 0x4C
+    CommandRange range;     // 0x7DC
+};
 
 extern "C" {
 
-int asdPrimAlloc(int);
-int modelShaderSubmitCommands(int, int, unsigned int *);
-int FUN_00346f2c(int);
-int rt_memcpy(void);
+void FUN_00346f2c(ModelBuffers *model);
+void *asdPrimAlloc(u32 size);
+void rt_memcpy(void *destination, const void *source, u32 size);
+u32 osVirtToPhysAddress(void *address);
+void modelShaderSubmitCommands(ModelBuffers *model, void *commands, CommandRange *range);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-/* Supplied declaration required: asdPrimAlloc. */
-/* Supplied declaration required: modelShaderSubmitCommands. */
-extern unsigned int osVirtToPhysAddress(int);
-/* Supplied declaration required: FUN_00346f2c. */
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_0034724c(int param_1)
-
+/* Copies the 16-bit indices into primitive memory once (unless already prepared) and submits the model's commands. */
+void FUN_0034724c(ModelBuffers *model)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  if (*(int *)(param_1 + 0x18) != 0) {
-    if ((*(unsigned int *)(param_1 + 4) & 0x100) == 0) {
-      FUN_00346f2c(param_1);
-      temp_v2 = *(int *)(param_1 + 0x18);
-      temp_v0 = temp_v2 << 1;
-      asdPrimAlloc(temp_v0);
-      rt_memcpy();
-      temp_v1 = osVirtToPhysAddress(temp_v0);
-      *(unsigned int *)(param_1 + 0x7dc) = temp_v1;
-      *(int *)(param_1 + 0x7e0) = temp_v2;
-      *(unsigned char *)(param_1 + 0x7e4) = 0;
+    if (model->indexCount != 0) {
+        CommandRange *range = &model->range;
+
+        if ((model->flags & 0x100) == 0) {
+            FUN_00346f2c(model);
+            u32 count = model->indexCount;
+            u32 bytes = count << 1;
+            void *copy = asdPrimAlloc(bytes);
+
+            rt_memcpy(copy, model->indices, bytes);
+            range->physicalAddress = osVirtToPhysAddress(copy);
+            range->size = count;
+            range->valid = 0;
+        }
+        modelShaderSubmitCommands(model, (u8 *)model + 0x4C, range);
     }
-    modelShaderSubmitCommands(param_1,param_1 + 0x4c,(unsigned int *)(param_1 + 0x7dc));
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

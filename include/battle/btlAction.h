@@ -103,13 +103,15 @@ typedef struct BtlActionGlobals {
         } clearedFlags;
     };
     /* 0x78 */ u64 untargetableMask; /* entry flags that rule a combatant out */
+    u8 unk80[0xA8];
+    /* 0x128 */ u64 interruptMask; /* actor flag bits that block the skill start */
 } BtlActionGlobals;
 
 typedef char BtlActionGlobalsLayoutCheck[offsetof(BtlActionGlobals, targetableMask) == 0x10 &&
     offsetof(BtlActionGlobals, untargetableMask) == 0x78 ? 1 : -1];
 typedef char BtlActionClearedFlagsOffsetCheck[
     offsetof(BtlActionGlobals, clearedFlags.mask) == 0x58 &&
-    sizeof(BtlActionGlobals) == 0x80 ? 1 : -1];
+    sizeof(BtlActionGlobals) == 0x130 && offsetof(BtlActionGlobals, interruptMask) == 0x128 ? 1 : -1];
 typedef char BtlActionInteractionMasksOffsetCheck[
     offsetof(BtlActionGlobals, interaction.requiredMask) == 0x30 &&
     offsetof(BtlActionGlobals, interaction.excludedMask) == 0x40 ? 1 : -1];

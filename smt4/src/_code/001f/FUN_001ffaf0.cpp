@@ -1,37 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ffaf0` (_code @ 0x1ffaf0, 0x80 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail repeats the four clearing stores in each branch of the kind test (the compare comes first, then separate store/call sequences); the build clears once before the compare. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00254884(unsigned int, unsigned char [500], int);
-int FUN_002bb5a4(int, unsigned char [500], int);
+/* A request record at +8 of its owner; only the cleared words are named. */
+typedef struct RequestOwner {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u32 unk18;
+} RequestOwner;
 
-/* Supplied declaration required: FUN_00254884. */
-/* Supplied declaration required: FUN_002bb5a4. */
+void FUN_00254884(u32 id, u8 buffer[500], s32 kind);
+void FUN_002bb5a4(u32 *request, u8 buffer[500], s32 mode);
 
-
-void FUN_001ffaf0(int param_1,unsigned int param_2,int param_3)
-
+/* Loads the id's record into a scratch buffer, clears the owner's request words and submits the record: mode 2 when `kind` is 1, else mode 1. */
+void FUN_001ffaf0(RequestOwner *owner, u32 id, s32 kind)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned char temp_v0 [500];
-  
-  FUN_00254884(param_2,temp_v0,3);
-  if (param_3 != 1) {
-    *(unsigned int *)(param_1 + 0x14) = 0;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-    *(unsigned int *)(param_1 + 0xc) = 0;
-    *(unsigned int *)(param_1 + 0x10) = 0;
-    FUN_002bb5a4(param_1 + 8,temp_v0,1);
-    return;
-  }
-  *(unsigned int *)(param_1 + 0x14) = 0;
-  *(unsigned int *)(param_1 + 0x18) = 0;
-  *(unsigned int *)(param_1 + 0xc) = 0;
-  *(unsigned int *)(param_1 + 0x10) = 0;
-  FUN_002bb5a4(param_1 + 8,temp_v0,2);
-  return;
+    u8 buffer[500];
+
+    FUN_00254884(id, buffer, 3);
+    owner->unk14 = 0;
+    owner->unk18 = 0;
+    owner->unk0C = 0;
+    owner->unk10 = 0;
+    FUN_002bb5a4(&owner->unk08, buffer, kind == 1 ? 2 : 1);
 }
 
 } /* extern "C" */

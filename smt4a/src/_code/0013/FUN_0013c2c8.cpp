@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00152cf8(int, int, int, int, int);
+int uiPointerHitsRect(int, int, int, int, int);
 int FUN_00167c14(...);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(int, int);
@@ -24,7 +24,7 @@ static double romwright_sqrt_8(double value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00152cf8. */
+/* Supplied declaration required: uiPointerHitsRect. */
 /* Supplied declaration required: FUN_00167c14. */
 
 
@@ -54,7 +54,7 @@ unsigned int FUN_0013c2c8(int param_1,unsigned int param_2,unsigned int param_3,
         do {
           temp_v2 = temp_v4 + temp_v1 * 8;
           temp_v3 = (int)*(short *)(temp_v2 + 10);
-          FUN_00152cf8(temp_v3,(int)*(short *)(temp_v2 + 0xc),(int)*(short *)(temp_v2 + 0xe),
+          uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v2 + 0xc),(int)*(short *)(temp_v2 + 0xe),
                        (int)*(short *)(temp_v2 + 0x10),0);
           if (temp_v3 != 0) {
             *(unsigned char *)(temp_v4 + 8) = 1;
@@ -117,7 +117,7 @@ LAB_0013c3b4:
         do {
           temp_v2 = temp_v4 + temp_v1 * 8;
           temp_v3 = (int)*(short *)(temp_v2 + 10);
-          FUN_00152cf8(temp_v3,(int)*(short *)(temp_v2 + 0xc),(int)*(short *)(temp_v2 + 0xe),
+          uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v2 + 0xc),(int)*(short *)(temp_v2 + 0xe),
                        (int)*(short *)(temp_v2 + 0x10),0);
           if (temp_v3 != 0) {
             *(unsigned char *)(temp_v4 + 8) = 2;

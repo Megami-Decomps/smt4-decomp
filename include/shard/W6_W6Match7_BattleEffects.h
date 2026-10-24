@@ -27,7 +27,8 @@ struct BattleEffectSetup {
 
 struct BattleEffectGlobals {
     /* 0x00 */ u8 red, green, blue, alpha;
-    /* 0x04 */ u8 unk04[8];
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ class Obj4209d8 *queryObject;   /* the model/grid query interface */
     /* 0x0c */ s32 variant;
     /* 0x10 */ u8 unk10[4];
     /* 0x14 */ s32 pulsePeriod;

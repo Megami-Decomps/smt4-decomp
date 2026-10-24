@@ -6,7 +6,7 @@
 extern "C" {
 
 int drawTextAtRelativePosition(...);
-int FUN_00230cc0(...);
+int uiRectDrawAtBottomRight(...);
 void FUN_00230d2c(const OffsetPosition2D*, u32, s32, s32, s32, s32);
 int FUN_00230d84(int, int, int, int, int);
 int contentGetKindValue(...);
@@ -43,7 +43,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: drawTextAtRelativePosition. */
 extern int btlRollClamped(unsigned short, unsigned int);
 extern unsigned int itemGetNameOrFallback(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00230cc0. */
+/* Supplied declaration required: uiRectDrawAtBottomRight. */
 /* Supplied declaration required: FUN_00230d2c. */
 /* Supplied declaration required: FUN_00230d84. */
 extern unsigned int FUN_00230e04(unsigned short *);
@@ -156,7 +156,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
       else {
         temp_v5 = FUN_002bf4f0(param_1 + 0x380,0x98);
       }
-      FUN_00230cc0(param_1 + 0x380,5,*(short *)(temp_v5 + 8) + temp_v13,*(short *)(temp_v5 + 10) + temp_v4,
+      uiRectDrawAtBottomRight(param_1 + 0x380,5,*(short *)(temp_v5 + 8) + temp_v13,*(short *)(temp_v5 + 10) + temp_v4,
                    temp_v12);
     }
     if ((param_4[1] & 2) != 0) {
@@ -166,7 +166,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
       else {
         temp_v5 = FUN_002bf4f0(param_1 + 0x380,0x9f);
       }
-      FUN_00230cc0(param_1 + 0x380,6,*(short *)(temp_v5 + 8) + temp_v13,*(short *)(temp_v5 + 10) + temp_v4,
+      uiRectDrawAtBottomRight(param_1 + 0x380,6,*(short *)(temp_v5 + 8) + temp_v13,*(short *)(temp_v5 + 10) + temp_v4,
                    temp_v12);
     }
   }

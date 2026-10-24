@@ -1,30 +1,18 @@
-/* NON_MATCHING: retail inlines SVC 0x23 and an ARM hint NOP; uses the real CloseHandle wrapper here because syscall intrinsics/asm/no-ops are forbidden. C++ destructor identity also remains unmigrated. */
-#include "shard/W6_W6Match1_TextScannerState.h"
+/* NON_MATCHING: the thread and scanner member destructors and the svc 0x23 close match; retail recovers the owner from the thread destructor's returned pointer (sub r5, r4, #60), which needs this unit named as the real complete destructor (_ZN19ThreadedTextScannerD1Ev), not an extern "C" wrapper that copies the owner into r5. */
+#include "classes/Obj420fa4.h"
+#include "nn/os/Thread.h"
 
+/* A text scanner that runs on its own thread. */
 struct ThreadedTextScanner {
     u32 unk00[2];          // 0x00
-    TextScannerState state; // 0x08
-    u32 threadHandle;      // 0x3c
+    Obj420fa4 scanner;     // 0x08
+    NnOsThread thread;     // 0x3c
+    ~ThreadedTextScanner() {}
 };
 
-extern "C" {
-extern const u32 DAT_00420fac[];
-void nn_os_Thread_FinalizeImpl(u32* thread);
-s32 svcCloseHandle(u32 handle);
-void ngwordStateReset(TextScannerState* state);
-void registerObj8Holder(u32* holder);
-
-// Finalizes the scanner thread and releases its embedded filter/holder state.
-ThreadedTextScanner* FUN_0033b618(ThreadedTextScanner* scanner)
+/* The destructor of ThreadedTextScanner: finalizes the thread, then the scanner state. */
+extern "C" ThreadedTextScanner *FUN_0033b618(ThreadedTextScanner *scanner)
 {
-    nn_os_Thread_FinalizeImpl(&scanner->threadHandle);
-    if (scanner->threadHandle != 0) {
-        svcCloseHandle(scanner->threadHandle);
-        scanner->threadHandle = 0;
-    }
-    scanner->state.vtable = DAT_00420fac;
-    ngwordStateReset(&scanner->state);
-    registerObj8Holder(&scanner->state.unk04);
+    scanner->~ThreadedTextScanner();
     return scanner;
-}
 }

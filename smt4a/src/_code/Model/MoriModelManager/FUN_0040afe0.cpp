@@ -1,100 +1,81 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040afe0` (_code @ 0x40afe0, 0xdc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reserves 8 more bytes of frame (48 vs 40) and schedules the pass/fog constant stores differently; the structure, calls and constants otherwise agree. */
+#include "AsdSDK/AsdDebug.h"
+
+/* Fog parameters handed to moriSceneSetFogDefaults. */
+struct MoriFogConfig {
+    /* 0x00 */ s32 range;
+    /* 0x04 */ u16 mode;
+    /* 0x06 */ u16 layer;
+    /* 0x08 */ u16 enabled;
+    /* 0x0A */ u8 unk0A;
+    /* 0x0B */ u8 unk0B;
+    /* 0x0C */ u8 unk0C;
+    /* 0x0D */ u8 unk0D;
+};
+
+/* Parameters of the scene's first draw pass. */
+struct MoriPassConfig {
+    /* 0x00 */ u32 target;
+    /* 0x04 */ u8 enabled;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u32 width;
+    /* 0x0C */ u32 height;
+    /* 0x10 */ u32 depth;
+    /* 0x14 */ u8 unk14;
+};
+
+struct MoriScene;
+
+struct MoriModelManager {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ MoriScene *scene;
+    /* 0x08 */ u8 unk08[0x0C];
+    /* 0x14 */ u32 sceneRoot;
+    /* 0x18 */ u8 unk18[0x20];
+    /* 0x38 */ u32 renderTarget;
+};
 
 extern "C" {
 
-int FUN_00178b04(int, unsigned char *, int);
-int FUN_003fed38(unsigned int, int);
-int FUN_00406834(unsigned int, unsigned int);
-int moriSceneSetFogDefaults(unsigned int, int *);
+void *FUN_00178b04(u32 size, const char *file, u32 line);
+MoriScene *_ZN9Obj557b68C1Ev(void *memory);
+void moriSceneSetFogDefaults(MoriScene *scene, MoriFogConfig *config);
+u32 FUN_001581dc(MoriPassConfig *config);
+void FUN_00406834(MoriScene *scene, u32 pass);
+void FUN_003fed38(u32 root, void *object);
 
-/* stack frame of param_3: 14 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned char sp23; /* 0x23: local_23 */
-    unsigned char sp24; /* 0x24: local_24 */
-    unsigned char sp25; /* 0x25: local_25 */
-    unsigned char sp26; /* 0x26: local_26 */
-    unsigned short sp28; /* 0x28: local_28 */
-    unsigned short sp2A; /* 0x2a: local_2a */
-    unsigned short sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned char sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned char sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_3_stack;
-
-extern unsigned char LAB_0040b0c0; /* 0x40b0c0 */
-
-extern unsigned int FUN_001581dc(unsigned int *);
-/* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_003fed38. */
-/* Supplied declaration required: FUN_00406834. */
-/* Supplied declaration required: moriSceneSetFogDefaults. */
-extern unsigned int FUN_00406e6c(void);
-
-
-void FUN_0040afe0(int param_1,unsigned short param_2,int param_3)
-
+void FUN_0040afe0(MoriModelManager *manager, u16 layer, s32 attach)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned char temp_v9;
-  int temp_v10;
-  unsigned short temp_v11;
-  unsigned short temp_v12;
-  unsigned short temp_v13;
-  unsigned char temp_v14;
-  unsigned char temp_v15;
-  unsigned char temp_v16;
-  unsigned char temp_v17;
-  
-  if (*(int *)(param_1 + 4) == 0) {
-    temp_v0 = 0x194;
-    FUN_00178b04(0x194,&LAB_0040b0c0,0x196);
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      temp_v1 = FUN_00406e6c();
+    if (manager->scene == NULL) {
+        MoriScene *scene = static_cast<MoriScene *>(FUN_00178b04(0x194, "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelManager.cpp", 0x196));
+        if (scene != NULL) {
+            scene = _ZN9Obj557b68C1Ev(scene);
+        }
+        manager->scene = scene;
+        MoriPassConfig pass;
+        MoriFogConfig fog;
+        fog.unk0A = 0;
+        fog.unk0B = 0;
+        fog.unk0D = 0;
+        fog.mode = 2;
+        fog.range = 0xffff;
+        fog.layer = layer;
+        fog.enabled = 1;
+        fog.unk0C = 1;
+        moriSceneSetFogDefaults(manager->scene, &fog);
+        MoriScene *current = manager->scene;
+        pass.enabled = 0;
+        pass.width = 0x30000;
+        pass.height = 0x10000;
+        pass.depth = 0x10000;
+        pass.unk14 = 0;
+        pass.target = manager->renderTarget;
+        pass.enabled = 1;
+        FUN_00406834(current, FUN_001581dc(&pass));
+        if (attach != 0 && manager->scene != NULL) {
+            FUN_003fed38(manager->sceneRoot, reinterpret_cast<u8 *>(manager->scene) + 0x10);
+        }
     }
-    *(unsigned int *)(param_1 + 4) = temp_v1;
-    temp_v14 = 0;
-    temp_v15 = 0;
-    temp_v17 = 0;
-    temp_v11 = 2;
-    temp_v10 = 0xffff;
-    temp_v13 = 1;
-    temp_v16 = 1;
-    temp_v12 = param_2;
-    moriSceneSetFogDefaults(*(unsigned int *)(param_1 + 4),&temp_v10);
-    temp_v3 = *(unsigned int *)(param_1 + 4);
-    temp_v7 = 0x10000;
-    temp_v6 = 0x30000;
-    temp_v8 = 0x10000;
-    temp_v9 = 0;
-    temp_v4 = *(unsigned int *)(param_1 + 0x38);
-    temp_v5 = 1;
-    temp_v1 = FUN_001581dc((unsigned int *)&temp_v4);
-    FUN_00406834(temp_v3,temp_v1);
-    temp_v0 = temp_v2;
-    if (param_3 != 0) {
-      temp_v0 = *(int *)(param_1 + 4);
-    }
-    if (param_3 != 0 && temp_v0 != 0) {
-      FUN_003fed38(*(unsigned int *)(param_1 + 0x14),temp_v0 + 0x10);
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

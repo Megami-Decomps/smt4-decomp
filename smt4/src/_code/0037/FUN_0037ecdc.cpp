@@ -6,7 +6,7 @@ int linkListEraseManagerNode(u32 a, int b);
 int nw_snd_internal_TaskManager_CancelTasksByKey(u32 a, u32 b);
 int nw_snd_internal_driver_Voice_Stop(void);
 extern u32 FUN_002bb020(void);
-extern u32 nw_snd_internal_driver_SoundThread_GetInstance(void);
+extern u32 _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 
 typedef struct Voice {
     /* 0x000 */ u8 unk000[0xC];
@@ -36,7 +36,7 @@ void FUN_0037ecdc(Voice *voice)
         }
     }
     if (voice->active != 0) {
-        a = nw_snd_internal_driver_SoundThread_GetInstance();
+        a = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
         linkListEraseManagerNode(a, (int)voice + 0x44);
         voice->active = 0;
     }

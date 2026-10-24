@@ -1,38 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001568f8` (_code @ 0x1568f8, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the unit base pointer and the id-list base offset (8) into registers and indexes with a register offset; built recomputes addresses per access */
+#include "common.h"
+
+struct UnitMember {
+    u8 unk00[8];        // 0x00
+    s16 ids[50];        // 0x08
+    u8 unk6C[0xF8];     // 0x6C
+    u8 data[0x2A4];     // 0x164
+};
+
+struct UnitListState {
+    u8 unk0000[0x1FFC];   // 0x0000
+    UnitMember *units;    // 0x1FFC
+};
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_2_stack;
-
-
-int FUN_001568f8(int param_1,int param_2)
-
+/* Finds the unit (of 109) whose id list contains `id` and returns its data block (offset 0x164); NULL when none does. */
+u8 *FUN_001568f8(UnitListState *state, s32 id)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  do {
-    temp_v0 = 0;
-    do {
-      temp_v1 = (int)*(short *)(*(int *)(param_1 + 0x1ffc) + temp_v2 * 0x408 + temp_v0 * 2 + 8);
-      if (temp_v1 < 0) break;
-      if (temp_v1 == param_2) {
-        return temp_v2 * 0x408 + 0x164 + *(int *)(param_1 + 0x1ffc);
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x32);
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 >= 0x6d) {
-      return 0;
+    for (s32 unit = 0; unit < 109; unit++) {
+        for (s32 i = 0; i < 50; i++) {
+            s32 entry = state->units[unit].ids[i];
+
+            if (entry < 0) {
+                break;
+            }
+            if (entry == id) {
+                return state->units[unit].data;
+            }
+        }
     }
-  } while( 1 );
+    return NULL;
 }
 
 } /* extern "C" */

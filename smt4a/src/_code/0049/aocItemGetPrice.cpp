@@ -27,7 +27,7 @@ extern "C" {
 
 s32 aocEntryGetKind(u32 id);
 AocRecordA *dataTable8FindRecord(u32 id);
-AocRecordB *FUN_00192608(u32 id);
+AocRecordB *dataTable08Sub2GetRecord(u32 id);
 AocRecordC *aocRecordLookup84(u32 id);
 
 /* Returns the item's price from the record its kind keeps (99999999 when the record is missing),
@@ -51,7 +51,7 @@ s32 aocItemGetPrice(AocPricedItem *item)
     case 6:
     case 7:
     case 8: {
-        AocRecordB *record = FUN_00192608(id);
+        AocRecordB *record = dataTable08Sub2GetRecord(id);
         price = record == NULL ? AOC_PRICE_UNKNOWN : record->price;
         break;
     }

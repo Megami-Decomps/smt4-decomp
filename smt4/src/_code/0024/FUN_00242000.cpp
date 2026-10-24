@@ -1,50 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00242000` (_code @ 0x242000, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct MenuEntry {
+    u16 id;          // 0x00
+    char text[0x5E]; // 0x02
+};
+
+struct SelectorState {
+    u8 unk00[8];
+};
+
+struct MenuScreen {
+    u8 unk00[0x10];            // 0x00
+    SelectorState selector;    // 0x10
+    u8 unk18[0x5C];            // 0x18
+    u32 ids[0x80];             // 0x74
+    u8 unk274[0x38];           // 0x274
+    MenuEntry *entries;        // 0x2AC
+    u32 entryCount;            // 0x2B0
+};
 
 extern "C" {
 
-int FUN_0029ee6c(unsigned int, int);
+s32 FUN_0029efc0(SelectorState *selector);
+s32 FUN_0029efa8(SelectorState *selector);
+void FUN_0029ee6c(const char *text, u32 color);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_0029ee6c. */
-extern unsigned long long FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
-
-
-void FUN_00242000(int param_1)
-
+/* Highlights the text of the entry whose id matches the currently selected id. */
+void FUN_00242000(MenuScreen *menu)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned long long temp_v4;
-  
-  temp_v0 = FUN_0029efc0(param_1 + 0x10);
-  temp_v4 = FUN_0029efa8(param_1 + 0x10);
-  temp_v2 = (int)((unsigned long long)temp_v4 >> 0x20);
-  temp_v3 = *(unsigned int *)(param_1 + 0x2b0);
-  if (temp_v3 != 0) {
-    temp_v2 = *(int *)(param_1 + 0x2ac);
-  }
-  temp_v1 = 0;
-  if (temp_v1 < temp_v3) {
-    do {
-      if ((unsigned int)*(unsigned short *)(temp_v2 + temp_v1 * 0x60) ==
-          *(unsigned int *)(param_1 + ((int)temp_v4 + temp_v0) * 4 + 0x74)) {
-        FUN_0029ee6c(temp_v1 * 0x60 + 2 + temp_v2,0x323232ff);
-        return;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < temp_v3);
-  }
-  return;
+    s32 base = FUN_0029efc0(&menu->selector);
+    s32 offset = FUN_0029efa8(&menu->selector);
+    u32 id = menu->ids[offset + base];
+
+    for (u32 i = 0; i < menu->entryCount; i++) {
+        if (menu->entries[i].id == id) {
+            FUN_0029ee6c(menu->entries[i].text, 0x323232FF);
+            return;
+        }
+    }
 }
 
 } /* extern "C" */

@@ -1,36 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b8520` (_code @ 0x3b8520, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match7_BattleMask.h"
 
 extern "C" {
 
-extern unsigned int DAT_00570dc0; /* 0x570dc0 */
-extern unsigned int DAT_00570dc4; /* 0x570dc4 */
+s32 scrGetArg(void);
 
-extern int btlGetMainState(void);
-extern int scrGetArg(void);
-
-
-unsigned int FUN_003b8520(void)
-
+// Script command: set (argument > 0) or clear the scripted battle mask bits of the main battle state.
+u32 FUN_003b8520(void)
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = btlGetMainState();
-  if (temp_v0 >= 1) {
-    temp_v2 = DAT_00570dc0 | *(unsigned int *)(temp_v1 + 0x45a0);
-    *(unsigned int *)(temp_v1 + 0x45a4) = DAT_00570dc4 | *(unsigned int *)(temp_v1 + 0x45a4);
-    *(unsigned int *)(temp_v1 + 0x45a0) = temp_v2;
-  }
-  else {
-    temp_v2 = ~DAT_00570dc4;
-    *(unsigned int *)(temp_v1 + 0x45a0) = *(unsigned int *)(temp_v1 + 0x45a0) & ~DAT_00570dc0;
-    *(unsigned int *)(temp_v1 + 0x45a4) = *(unsigned int *)(temp_v1 + 0x45a4) & temp_v2;
-  }
-  return 1;
+    s32 enable = scrGetArg();
+    BattleMaskState *state = btlGetMainState();
+    if (enable > 0) {
+        state->mask |= g_battleMaskPresets.scriptMask;
+    } else {
+        state->mask &= ~g_battleMaskPresets.scriptMask;
+    }
+    return 1;
 }
 
 } /* extern "C" */

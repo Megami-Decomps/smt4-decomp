@@ -31,7 +31,7 @@ extern unsigned char DAT_00594a58; /* 0x594a58 */
 /* Supplied declaration required: FUN_001322b6. */
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-extern unsigned long long FUN_002eab1c(unsigned char *, int);
+extern unsigned long long _ZmiRK15OnlineTimestampS1_(unsigned char *, int);
 /* Supplied declaration required: onlineTimeGetNow. */
 extern int wordRefsDiffer_002f3594(int *, unsigned int *);
 extern int wordRefsDiffer_002f35fc(int *, unsigned int *);
@@ -69,7 +69,7 @@ void FUN_0010a8a4(int param_1)
     temp_v1 = wordRefsDiffer_002f35fc(&temp_v5,(unsigned int *)&temp_v7);
     temp_v0 = (*(unsigned int *)((unsigned char *)&DAT_00594a58 + 0x14));
     if (temp_v1 == 0) break;
-    temp_v3 = FUN_002eab1c(temp_v8,temp_v5 + 0x50);
+    temp_v3 = _ZmiRK15OnlineTimestampS1_(temp_v8,temp_v5 + 0x50);
     temp_v1 = (int)((unsigned long long)temp_v3 >> 0x20);
     temp_v2 = temp_v0 < (unsigned int)temp_v3;
     if ((int)(-(unsigned int)temp_v2 - temp_v1) < 0 != (SBORROW4(0,temp_v1) != SBORROW4(-temp_v1,(unsigned int)temp_v2))) {
@@ -86,7 +86,7 @@ void FUN_0010a8a4(int param_1)
     temp_v1 = wordRefsDiffer_002f3594(&temp_v6,(unsigned int *)&temp_v10);
     temp_v0 = (*(unsigned int *)((unsigned char *)&DAT_00594a58 + 0x14));
     if (temp_v1 == 0) break;
-    temp_v3 = FUN_002eab1c(temp_v8,temp_v6 + 0x30);
+    temp_v3 = _ZmiRK15OnlineTimestampS1_(temp_v8,temp_v6 + 0x30);
     temp_v1 = (int)((unsigned long long)temp_v3 >> 0x20);
     temp_v2 = temp_v0 < (unsigned int)temp_v3;
     if ((int)(-(unsigned int)temp_v2 - temp_v1) < 0 != (SBORROW4(0,temp_v1) != SBORROW4(-temp_v1,(unsigned int)temp_v2))) {

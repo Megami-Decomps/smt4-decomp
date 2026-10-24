@@ -1,82 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00247334` (_code @ 0x247334, 0x138 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: logic, record class (EffGeomRecord with operator new(bytes, arg)) and calls match; armcc allocates the parameters/products to different callee-saved registers (stride r5 vs r4, tag loaded late) and schedules the index loop's setup differently. */
+#include "classes/EffGeomRecord.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char DAT_00414954[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effGeometry.cpp": __FILE__ */
 
-int recordPrepareActive(int, int, int, int);
-int asdOperatorNew(int, int);
-int memAlloc(int, int, int, int, int, int);
+void *memAlloc(int, int, int, s32 size, int align, int);
+void recordPrepareActive(EffGeomRecord *record, u32 first, u32 second, u32 third);
 
-/* stack frame of param_5: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_5_stack;
-
-/* Supplied declaration required: recordPrepareActive. */
-extern int FUN_002693e4(void);
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: memAlloc. */
-
-
-unsigned short * FUN_00247334(int param_1,int param_2,int param_3,short *param_4,unsigned short param_5)
-
+/* Builds a rows x columns grid of vertex indices: each row repeats `indices` offset by `stride` per row. */
+EffGeomHandle *FUN_00247334(s32 rows, s32 columns, s32 stride, const s16 *indices, u16 tag)
 {
-/* irregular: 3 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  unsigned int temp_v2;
-  unsigned short *puVar4;
-  int temp_v3;
-  short *psVar6;
-  short *psVar7;
-  short *psVar8;
-  int temp_v4;
-  int temp_v5;
-  
-  puVar4 = (unsigned short *)0x10000;
-  memAlloc(0x10000,0x100,0,0x58,0x10,1);
-  temp_v3 = 0x7e8;
-  asdOperatorNew(0x7e8,param_3);
-  if (temp_v3 == 0) {
-    temp_v3 = 0;
-  }
-  else {
-    temp_v3 = FUN_002693e4();
-  }
-  recordPrepareActive(temp_v3,0x25,param_1 * param_2 * 3,param_1 * param_3);
-  *puVar4 = param_5;
-  *(int *)(puVar4 + 4) = temp_v3;
-  puVar4[1] = (short)(param_1 * param_3);
-  *(unsigned int *)(puVar4 + 0x2a) = 0xa5;
-  temp_v5 = *(int *)(temp_v3 + 0x48);
-  temp_v3 = 0;
-  if (0 < param_1) {
-    temp_v2 = (param_2 * 3 + 2) / 3;
-    do {
-      if (0 < (int)(temp_v2 * 3)) {
-        psVar7 = (short *)(temp_v5 + temp_v2 * temp_v3 * 6);
-        temp_v0 = (short)param_3;
-        temp_v1 = (short)temp_v3;
-        psVar6 = param_4 + -1;
-        psVar8 = psVar7 + -1;
-        if ((temp_v2 & 1) != 0) {
-          *psVar7 = temp_v0 * temp_v1 + *param_4;
-          psVar6 = param_4;
-          psVar8 = psVar7;
+    s32 vertexCount = rows * stride;
+    s32 cellCount = rows * columns;
+    s32 rowIndices = columns * 3;
+
+    asdDebugTrace(DAT_00414954, 112);
+    EffGeomHandle *handle = (EffGeomHandle *)memAlloc(0x10000, 0x100, 0, 0x58, 0x10, 1);
+    EffGeomRecord *record = new (stride) EffGeomRecord;
+
+    recordPrepareActive(record, 0x25, cellCount * 3, vertexCount);
+    handle->tag = tag;
+    handle->record = record;
+    handle->vertexCount = vertexCount;
+    handle->unk54 = 0xA5;
+    s16 *vertices = record->vertices;
+    for (s32 row = 0; row < rows; row++) {
+        s32 triangles = (rowIndices + 2) / 3;
+        s32 count = triangles * 3;
+        if (count > 0) {
+            s16 *dest = vertices + triangles * row * 3;
+            for (s32 i = 0; i < count; i++) {
+                dest[i] = indices[i] + stride * row;
+            }
         }
-        for (temp_v4 = (int)(temp_v2 * 3) >> 1; temp_v4 != 0; temp_v4 = temp_v4 - 1) {
-          psVar8[1] = temp_v0 * temp_v1 + psVar6[1];
-          psVar6 = psVar6 + 2;
-          psVar8 = psVar8 + 2;
-          *psVar8 = temp_v0 * temp_v1 + *psVar6;
-        }
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < param_1);
-  }
-  return puVar4;
+    }
+    return handle;
 }
 
 } /* extern "C" */

@@ -1,45 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e06ec` (_code @ 0x3e06ec, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies the two stack arguments with ldrd/strd and keeps the first pair in its spilled slots (ldm); built copies via VFP (vldmia/vstmia) and keeps them in registers. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00238d3c(int, int);
-int FUN_00358eb4(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+extern u8 g_asdCecModuleFlags[]; /* 0x4656d0 */
+s32 FUN_00358eb4(u32 handle, u32 a, u32 b, u32 c, u32 d, u32 e);
+void FUN_00238d3c(s32 a, s32 b);
 
-/* stack frame of param_7: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_7_stack;
-
-extern unsigned char g_asdCecModuleFlags; /* 0x4656d0 */
-
-/* Supplied declaration required: FUN_00238d3c. */
-/* Supplied declaration required: FUN_00358eb4. */
-
-
-int FUN_003e06ec(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4,
-                unsigned int param_5,unsigned int param_6,unsigned int param_7)
-
+// Run the CEC request up to three times, retrying (and flagging the module) while it reports result 0xc8a10bf0.
+s32 FUN_003e06ec(u32 unused, u32 handle, u32 a, u32 b, u32 c, u32 d, u32 e)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  do {
-    temp_v0 = param_2;
-    FUN_00358eb4(param_2,param_3,param_4,param_5,param_6,param_7);
-    if (temp_v0 != -0x375ef410) {
-      return temp_v0;
-    }
-    FUN_00238d3c(1,0);
-    temp_v1 = temp_v1 + 1;
-    (*(unsigned char *)((unsigned char *)&g_asdCecModuleFlags + 0x1)) = 1;
-  } while (temp_v1 < 3);
-  (*(unsigned char *)((unsigned char *)&g_asdCecModuleFlags + 0x1)) = 1;
-  return temp_v0;
+    s32 result;
+    s32 tries = 0;
+    do {
+        result = FUN_00358eb4(handle, a, b, c, d, e);
+        if (result != (s32)0xc8a10bf0) {
+            break;
+        }
+        FUN_00238d3c(1, 0);
+        tries++;
+        g_asdCecModuleFlags[1] = 1;
+    } while (tries < 3);
+    return result;
 }
 
 } /* extern "C" */

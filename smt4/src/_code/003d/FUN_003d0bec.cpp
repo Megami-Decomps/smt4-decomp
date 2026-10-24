@@ -3,12 +3,12 @@
 #include "gamedata/EquipmentTable.h"
 
 extern "C" {
-EquipmentTableRecord *FUN_002ae164(u32 id);
+EquipmentTableRecord *dataTable40FindById(u32 id);
 
 // Decode the equipment target mode into target side and target scope.
 void FUN_003d0bec(u32 unused, const BtlEntry *entry, u32 itemId, u32 *side, u32 *scope)
 {
-    EquipmentTableRecord *item = FUN_002ae164(itemId);
+    EquipmentTableRecord *item = dataTable40FindById(itemId);
     if (item == NULL)
         return;
     // A word overlay on EquipmentTableRecord's unaligned padding would shift its layout.

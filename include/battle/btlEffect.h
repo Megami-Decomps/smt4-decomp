@@ -40,7 +40,10 @@ typedef struct BtlEffectOwner {
 /* The module global (Shin Megami Tensei IV). */
 typedef struct BtlEffectGlobals {
     /* 0x00 */ union { u32 unk00; const char *prefix; };
-    /* 0x04 */ u8 unk04[8];
+    union {
+        /* 0x04 */ u8 unk04[8];
+        struct { const char *skipFirst, *skipSecond; } skipped; /* names that are not loaded */
+    };
     /* 0x0C */ union { u32 unk0C; const char *otherPrefix; };
     union {
         /* 0x10 */ u8 unk10[8];
@@ -51,7 +54,13 @@ typedef struct BtlEffectGlobals {
 
 /* Work area of the job that owns the effects (Shin Megami Tensei IV). */
 typedef struct BtlEffectJob {
-    /* 0x00 */ u8 unk00[0x38];
+    union {
+        /* 0x00 */ u8 unk00[0x38];
+        struct {
+            /* 0x00 */ u32 parentJob;
+            /* 0x04 */ u8 unk04[0x34];
+        } owner;
+    };
     /* 0x38 */ u32 jobA;
     /* 0x3C */ u32 jobB;
     /* 0x40 */ u32 jobC;

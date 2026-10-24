@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00192608(void);
+int dataTable08Sub2GetRecord(void);
 int FUN_003e573c(...);
 int FUN_0040b11c(...);
 
@@ -29,7 +29,7 @@ extern unsigned char LAB_0040b6c8; /* 0x40b6c8 */
 
 /* Supplied declaration required: textFormatBuffer. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00192608. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: FUN_003e573c. */
 /* Supplied declaration required: FUN_0040b11c. */
 
@@ -52,7 +52,7 @@ void FUN_0040b27c(unsigned int param_1,int param_2,fn_0040b27c_arg2 *param_3,uns
   unsigned char temp_v3 [64];
   
   pfVar1 = param_3;
-  FUN_00192608();
+  dataTable08Sub2GetRecord();
   if (param_2 != 0) {
     if (param_2 != 1) {
       if (param_2 == 2) {
@@ -83,14 +83,14 @@ void FUN_0040b27c(unsigned int param_1,int param_2,fn_0040b27c_arg2 *param_3,uns
     if (param_2 == 1) {
       temp_v1 = gameGetPlayerData();
       temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 6);
-      FUN_00192608();
+      dataTable08Sub2GetRecord();
       temp_v0 = FUN_0040b11c(param_1,0,*(unsigned short *)(temp_v2 + 0x40),*(unsigned short *)(temp_v2 + 0x42),
                            param_3);
       textFormatBuffer(temp_v3,&LAB_0040b674,*(unsigned short *)(temp_v2 + 0x40),
                    *(unsigned short *)(temp_v2 + 0x42),temp_v0);
       FUN_003e573c(param_1,0,temp_v3,param_4);
       temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 10);
-      FUN_00192608();
+      dataTable08Sub2GetRecord();
       temp_v0 = FUN_0040b11c(param_1,2,*(unsigned short *)(temp_v2 + 0x40),*(unsigned short *)(temp_v2 + 0x42),
                            param_3);
       textFormatBuffer(temp_v3,&LAB_0040b6c8,*(unsigned short *)(temp_v2 + 0x40),
@@ -102,7 +102,7 @@ void FUN_0040b27c(unsigned int param_1,int param_2,fn_0040b27c_arg2 *param_3,uns
   else {
     temp_v1 = gameGetPlayerData();
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 8);
-    FUN_00192608();
+    dataTable08Sub2GetRecord();
     temp_v0 = FUN_0040b11c(param_1,1,*(unsigned short *)(temp_v2 + 0x40),*(unsigned short *)(temp_v2 + 0x42),
                          param_3);
     textFormatBuffer(temp_v3,&LAB_0040b690,*(unsigned short *)(temp_v2 + 0x40),

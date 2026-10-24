@@ -1,129 +1,103 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00419e38` (_code @ 0x419e38, 0x244 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the first of the three inlined record resets differs (retail computes block = record+16 separately instead of using the writeback form); the others match. */
+#include "common.h"
 
-extern "C" {
+namespace {
+// One of the twelve per-slot trackers of an effect record.
+struct SlotTracker {
+    u8 enabled;             // 0x00
+    u8 unk01[3];
+    f32 values[4];          // 0x04
+};
 
-int asdMemFree(...);
-int sysMemClear(int, int);
-int FUN_0042cb74(...);
+// The resettable part of a record: a state word, a cleared block and twelve parts and trackers.
+struct EffectBlock {
+    u32 state;              // 0x00
+    u8 cleared[0x150];      // 0x04
+    u8 partFlags[12];       // 0x154
+    u8 parts[12][0x70];     // 0x160
+    SlotTracker trackers[12]; // 0x6A0
+};
 
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0042cb74. */
+// A heap record: two buffers and the resettable block.
+struct EffectRecord {
+    u8 unk00[8];
+    void *bufferA;          // 0x08
+    void *bufferB;          // 0x0C
+    EffectBlock block;      // 0x10
+};
 
-
-void FUN_00419e38(int param_1)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int *puVar5;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned long long temp_v7;
-  
-  temp_v4 = 0;
-  if (0 < *(int *)(param_1 + 0x10)) {
-    temp_v7 = 0;
-    do {
-      temp_v5 = *(int *)(*(int *)(param_1 + 8) + temp_v4 * 4);
-      if (temp_v5 != 0) {
-        temp_v3 = temp_v5 + 0x10;
-        *(unsigned int *)(temp_v5 + 0x10) = 0;
-        sysMemClear(temp_v5 + 0x14,0x150);
-        temp_v2 = 0;
-        do {
-          *(unsigned char *)(temp_v3 + temp_v2 + 0x154) = 0;
-          FUN_0042cb74(temp_v3 + temp_v2 * 0x70 + 0x160);
-          temp_v1 = temp_v2 + 1;
-          temp_v0 = temp_v3 + temp_v2 * 0x14;
-          *(unsigned char *)(temp_v0 + 0x6a0) = 0;
-          temp_v6 = (unsigned int)temp_v7;
-          *(unsigned int *)(temp_v0 + 0x6a4) = temp_v6;
-          *(unsigned int *)(temp_v0 + 0x6a8) = temp_v6;
-          *(unsigned int *)(temp_v0 + 0x6ac) = temp_v6;
-          *(unsigned int *)(temp_v0 + 0x6b0) = temp_v6;
-          temp_v2 = temp_v1;
-        } while (temp_v1 < 0xc);
-        asdMemFree(*(unsigned int *)(temp_v5 + 8));
-        asdMemFree(*(unsigned int *)(temp_v5 + 0xc));
-      }
-      temp_v5 = *(int *)(*(int *)(param_1 + 4) + temp_v4 * 4);
-      if (temp_v5 != 0) {
-        puVar5 = (unsigned int *)(temp_v5 + 0x10);
-        *puVar5 = 0;
-        sysMemClear(temp_v5 + 0x14,0x150);
-        temp_v2 = 0;
-        do {
-          *(unsigned char *)((int)puVar5 + temp_v2 + 0x154) = 0;
-          FUN_0042cb74(puVar5 + temp_v2 * 0x1c + 0x58);
-          temp_v1 = temp_v2 + 1;
-          *(unsigned char *)(puVar5 + temp_v2 * 5 + 0x1a8) = 0;
-          temp_v6 = (unsigned int)temp_v7;
-          puVar5[temp_v2 * 5 + 0x1a9] = temp_v6;
-          puVar5[temp_v2 * 5 + 0x1aa] = temp_v6;
-          puVar5[temp_v2 * 5 + 0x1ab] = temp_v6;
-          puVar5[temp_v2 * 5 + 0x1ac] = temp_v6;
-          temp_v2 = temp_v1;
-        } while (temp_v1 < 0xc);
-        asdMemFree(*(unsigned int *)(temp_v5 + 8));
-        asdMemFree(*(unsigned int *)(temp_v5 + 0xc));
-      }
-      temp_v5 = *(int *)(*(int *)(param_1 + 0xc) + temp_v4 * 4);
-      if (temp_v5 != 0) {
-        puVar5 = (unsigned int *)(temp_v5 + 0x10);
-        *puVar5 = 0;
-        sysMemClear(temp_v5 + 0x14,0x150);
-        temp_v2 = 0;
-        do {
-          *(unsigned char *)((int)puVar5 + temp_v2 + 0x154) = 0;
-          FUN_0042cb74(puVar5 + temp_v2 * 0x1c + 0x58);
-          temp_v1 = temp_v2 + 1;
-          *(unsigned char *)(puVar5 + temp_v2 * 5 + 0x1a8) = 0;
-          temp_v6 = (unsigned int)temp_v7;
-          puVar5[temp_v2 * 5 + 0x1a9] = temp_v6;
-          puVar5[temp_v2 * 5 + 0x1aa] = temp_v6;
-          puVar5[temp_v2 * 5 + 0x1ab] = temp_v6;
-          puVar5[temp_v2 * 5 + 0x1ac] = temp_v6;
-          temp_v2 = temp_v1;
-        } while (temp_v1 < 0xc);
-        asdMemFree(*(unsigned int *)(temp_v5 + 8));
-        asdMemFree(*(unsigned int *)(temp_v5 + 0xc));
-      }
-      if (*(int *)(*(int *)(param_1 + 8) + temp_v4 * 4) != 0) {
-        asdMemFree();
-        *(unsigned int *)(*(int *)(param_1 + 8) + temp_v4 * 4) = 0;
-      }
-      if (*(int *)(*(int *)(param_1 + 4) + temp_v4 * 4) != 0) {
-        asdMemFree();
-        *(unsigned int *)(*(int *)(param_1 + 4) + temp_v4 * 4) = 0;
-      }
-      if (*(int *)(*(int *)(param_1 + 0xc) + temp_v4 * 4) != 0) {
-        asdMemFree();
-        *(unsigned int *)(*(int *)(param_1 + 0xc) + temp_v4 * 4) = 0;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < *(int *)(param_1 + 0x10));
-  }
-  *(unsigned int *)(param_1 + 0x10) = 0;
-  if (*(int *)(param_1 + 8) != 0) {
-    asdMemFree();
-    *(unsigned int *)(param_1 + 8) = 0;
-  }
-  if (*(int *)(param_1 + 4) != 0) {
-    asdMemFree();
-    *(unsigned int *)(param_1 + 4) = 0;
-  }
-  if (*(int *)(param_1 + 0xc) != 0) {
-    asdMemFree();
-    *(unsigned int *)(param_1 + 0xc) = 0;
-  }
-  return;
+// Three parallel record lists.
+struct EffectRecordSets {
+    u8 unk00[4];
+    EffectRecord **listB;   // 0x04
+    EffectRecord **listA;   // 0x08
+    EffectRecord **listC;   // 0x0C
+    s32 count;              // 0x10
+};
 }
 
-} /* extern "C" */
+extern "C" {
+void asdMemFree(void *block);
+void sysMemClear(void *memory, u32 size);
+void FUN_0042cb74(void *part);
+
+static void effectRecordReset(EffectRecord *record)
+{
+    EffectBlock *block = &record->block;
+    block->state = 0;
+    sysMemClear(block->cleared, sizeof(block->cleared));
+    for (u32 i = 0; i < 12; i++) {
+        block->partFlags[i] = 0;
+        FUN_0042cb74(block->parts[i]);
+        SlotTracker *tracker = &block->trackers[i];
+        tracker->enabled = 0;
+        tracker->values[0] = 0.0f;
+        tracker->values[1] = 0.0f;
+        tracker->values[2] = 0.0f;
+        tracker->values[3] = 0.0f;
+    }
+    asdMemFree(record->bufferA);
+    asdMemFree(record->bufferB);
+}
+
+/* Reset and free every record of the three lists, then the lists themselves. */
+void FUN_00419e38(EffectRecordSets *sets)
+{
+    for (s32 i = 0; i < sets->count; i++) {
+        if (sets->listA[i] != NULL) {
+            effectRecordReset(sets->listA[i]);
+        }
+        if (sets->listB[i] != NULL) {
+            effectRecordReset(sets->listB[i]);
+        }
+        if (sets->listC[i] != NULL) {
+            effectRecordReset(sets->listC[i]);
+        }
+        if (sets->listA[i] != NULL) {
+            asdMemFree(sets->listA[i]);
+            sets->listA[i] = NULL;
+        }
+        if (sets->listB[i] != NULL) {
+            asdMemFree(sets->listB[i]);
+            sets->listB[i] = NULL;
+        }
+        if (sets->listC[i] != NULL) {
+            asdMemFree(sets->listC[i]);
+            sets->listC[i] = NULL;
+        }
+    }
+    sets->count = 0;
+    if (sets->listA != NULL) {
+        asdMemFree(sets->listA);
+        sets->listA = NULL;
+    }
+    if (sets->listB != NULL) {
+        asdMemFree(sets->listB);
+        sets->listB = NULL;
+    }
+    if (sets->listC != NULL) {
+        asdMemFree(sets->listC);
+        sets->listC = NULL;
+    }
+}
+}

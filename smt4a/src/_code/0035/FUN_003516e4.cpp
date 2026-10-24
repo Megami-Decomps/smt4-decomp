@@ -91,7 +91,7 @@ typedef struct {
     unsigned int sp208; /* 0x208: local_208 */
 } param_1_stack;
 
-extern unsigned int DAT_005c4c30; /* 0x5c4c30 */
+extern unsigned int _ZGVZN2nw4math5MTX448IdentityEvE8identity; /* 0x5c4c30 */
 extern float DAT_006472dc; /* 0x6472dc */
 extern float DAT_006472e0; /* 0x6472e0 */
 extern float DAT_006472e4; /* 0x6472e4 */
@@ -100,7 +100,7 @@ extern float DAT_006472ec; /* 0x6472ec */
 extern float DAT_006472f0; /* 0x6472f0 */
 extern float DAT_006472f4; /* 0x6472f4 */
 extern float DAT_006472f8; /* 0x6472f8 */
-extern unsigned int DAT_0064c084; /* 0x64c084 */
+extern unsigned int _ZZN2nw4math5MTX448IdentityEvE8identity; /* 0x64c084 */
 extern unsigned int DAT_0064c088; /* 0x64c088 */
 extern unsigned int DAT_0064c08c; /* 0x64c08c */
 extern unsigned int DAT_0064c090; /* 0x64c090 */
@@ -406,9 +406,9 @@ void FUN_003516e4(int param_1)
   temp_v65 = fStack_164;
   temp_v66 = temp_v11;
   temp_v67 = temp_v64;
-  if (((DAT_005c4c30 & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_005c4c30), temp_v1 != 0)) {
+  if (((_ZGVZN2nw4math5MTX448IdentityEvE8identity & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX448IdentityEvE8identity), temp_v1 != 0)) {
     DAT_0064c088 = (unsigned int)temp_v26;
-    DAT_0064c084 = 0x3f800000;
+    _ZZN2nw4math5MTX448IdentityEvE8identity = 0x3f800000;
     DAT_0064c098 = 0x3f800000;
     DAT_0064c0ac = 0x3f800000;
     DAT_0064c0c0 = 0x3f800000;
@@ -424,7 +424,7 @@ void FUN_003516e4(int param_1)
     DAT_0064c0b8 = DAT_0064c088;
     DAT_0064c0bc = DAT_0064c088;
   }
-  mtx44Copy(temp_v27,&DAT_0064c084);
+  mtx44Copy(temp_v27,&_ZZN2nw4math5MTX448IdentityEvE8identity);
   temp_v86 = temp_v10 * (float)temp_v23;
   temp_v88 = temp_v10 * (float)((unsigned long long)temp_v23 >> 0x20);
   temp_v87 = temp_v10;

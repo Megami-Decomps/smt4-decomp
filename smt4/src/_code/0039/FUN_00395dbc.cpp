@@ -1,28 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00395dbc` (_code @ 0x395dbc, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same update; retail forms the owner's transform pointer (owner + 0x24) once up front and addresses x/y/z from it, built addresses them from the owner (+0x28..0x30) */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00395830(int);
+struct ParticleTransform {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ f32 x;
+    /* 0x08 */ f32 y;
+    /* 0x0c */ f32 z;
+};
 
-/* Supplied declaration required: FUN_00395830. */
+struct ParticleOwner {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ ParticleTransform transform;
+    /* 0x34 */ u8 unk34[0x58 - 0x34];
+    /* 0x58 */ s32 frame;
+};
 
+struct Particle {
+    /* 0x00 */ u8 unk00[0x0c];
+    /* 0x0c */ ParticleOwner *owner;
+    /* 0x10 */ f32 velocityX;
+    /* 0x14 */ f32 velocityY;
+    /* 0x18 */ f32 velocityZ;
+};
 
-void FUN_00395dbc(int param_1)
+void FUN_00395830(Particle *particle);
 
+/* Per-frame update: every tenth frame of the owner runs FUN_00395830, then the owner's position advances by the particle's velocity. */
+void FUN_00395dbc(Particle *particle)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 0xc);
-  if (*(int *)(temp_v0 + 0x58) % 10 == 0) {
-    FUN_00395830(param_1);
-  }
-  *(float *)(temp_v0 + 0x28) = *(float *)(temp_v0 + 0x28) + *(float *)(param_1 + 0x10);
-  *(float *)(temp_v0 + 0x2c) = *(float *)(temp_v0 + 0x2c) + *(float *)(param_1 + 0x14);
-  *(float *)(temp_v0 + 0x30) = *(float *)(temp_v0 + 0x30) + *(float *)(param_1 + 0x18);
-  return;
+    ParticleOwner *owner = particle->owner;
+
+    if (owner->frame % 10 == 0) {
+        FUN_00395830(particle);
+    }
+    owner->transform.x += particle->velocityX;
+    owner->transform.y += particle->velocityY;
+    owner->transform.z += particle->velocityZ;
 }
 
 } /* extern "C" */

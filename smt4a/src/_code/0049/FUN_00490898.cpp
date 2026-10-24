@@ -1,79 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00490898` (_code @ 0x490898, 0x164 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail computes the scene address before the position call and keeps it in r4, copies the position pair with two ldr/str pairs (the copy is overwritten right after), loads 1.0f separately from the sprite fade value and loads g_gameState once up front; this build copies with ldrd/strd, shares the 1.0f in s16 and reloads g_gameState. */
+#include "map/NavigationFadeWork.h"
+
+struct GameStateFade {
+    /* 0x000 */ u8 unk000[0x21];
+    /* 0x021 */ u8 fadeInDialog;
+    /* 0x022 */ u8 unk022[0x43E];
+    /* 0x460 */ u8 sceneStateEnabled;
+};
 
 extern "C" {
+extern GameStateFade g_gameState;
+void uiPlayGatedActionFeedback(void);
+s32 objectGetSignedFlag(const UiAnimatedSprite *sprite);
+void FUN_00163aa4(UiAnimatedSprite *sprite, f32 value);
+NavigationPoint *sub68OwnerGetBlock60(void);
+void naviMainSetValuePair(void *scene, const NavigationPoint *position);
+void FUN_002d22c0(s32 value);
+void lmapEnableSceneState(void);
+void dialogClose(s32 value);
 
-int FUN_00163aa4(int);
-int dialogClose(int);
-int FUN_002d22c0(int);
-int lmapEnableSceneState(void);
-int uiPlayGatedActionFeedback(void);
-int sub68OwnerGetBlock60(void);
-int naviMainSetValuePair(int, int *);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern signed char DAT_005f161d; /* 0x5f161d */
-extern signed char DAT_005f1a5c; /* 0x5f1a5c */
-
-/* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: dialogClose. */
-/* Supplied declaration required: FUN_002d22c0. */
-/* Supplied declaration required: lmapEnableSceneState. */
-/* Supplied declaration required: uiPlayGatedActionFeedback. */
-/* Supplied declaration required: sub68OwnerGetBlock60. */
-/* Supplied declaration required: naviMainSetValuePair. */
-
-
-void FUN_00490898(int param_1)
-
+// Navigation fade step: the first call plays the feedback sound; the second fades the sprites in
+// and, when the last one finished, resets the cursor and moves on.
+void FUN_00490898(NavigationFadeWork *work)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  if (*(int *)(param_1 + 8) == 0) {
-    uiPlayGatedActionFeedback();
-    *(unsigned int *)(param_1 + 8) = 1;
-    return;
-  }
-  if (*(int *)(param_1 + 8) == 1) {
-    temp_v0 = 0;
-    do {
-      FUN_00163aa4(param_1 + temp_v0 * 0x8c + 0xc40);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 6);
-    FUN_00163aa4(param_1 + 0x112c);
-    FUN_00163aa4(param_1 + 0x10a0);
-    if (*(char *)(param_1 + 0xf86) != '\0') {
-      if (DAT_005f161d != '\0') {
-        sub68OwnerGetBlock60();
-        temp_v1 = 0;
-        temp_v2 = 0;
-        naviMainSetValuePair(param_1 + 0x4cc,&temp_v1);
-        *(char *)(param_1 + 100) = (char)*(unsigned int *)(param_1 + 0x20510);
-        *(unsigned char *)(param_1 + 0x7b90) = 1;
-        *(unsigned char *)(param_1 + 0x7b91) = 1;
-        if (DAT_005f1a5c != '\0') {
-          FUN_002d22c0(0);
-          lmapEnableSceneState();
-          return;
+    switch (work->interpolation.progress.substep) {
+    case 0:
+        uiPlayGatedActionFeedback();
+        work->interpolation.progress.substep = 1;
+        return;
+    case 1:
+        for (s32 i = 0; i < 6; ++i) {
+            FUN_00163aa4(&work->sprites[i], 1.0f);
         }
-        FUN_002d22c0(0);
-        dialogClose(1);
-      }
-      *(unsigned int *)(param_1 + 4) = 2;
-      *(unsigned int *)(param_1 + 8) = 0;
-      return;
+        FUN_00163aa4(&work->footerSprite, 1.0f);
+        FUN_00163aa4(&work->headerSprite, 1.0f);
+        if (objectGetSignedFlag(&work->sprites[5]) != 0) {
+            if (g_gameState.fadeInDialog) {
+                NavigationPoint point = *sub68OwnerGetBlock60();
+                point.x = 1.0f;
+                point.y = 1.0f;
+                naviMainSetValuePair(work->scene, &point);
+                *(u8 *)&work->interpolation.unk02C[0x38] = (u8)work->cursorMode;
+                work->flag7B90 = 1;
+                work->flag7B91 = 1;
+                if (g_gameState.sceneStateEnabled) {
+                    FUN_002d22c0(0);
+                    lmapEnableSceneState();
+                    return;
+                }
+                FUN_002d22c0(0);
+                dialogClose(1);
+            }
+            work->interpolation.progress.step = 2;
+            work->interpolation.progress.substep = 0;
+        }
+        return;
     }
-  }
-  return;
 }
 
 } /* extern "C" */

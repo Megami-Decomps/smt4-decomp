@@ -1,43 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cc1c0` (_code @ 0x2cc1c0, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses the actor/position arrays through separately added section offsets (+0x784 and +0x1184) and copies the position with two VFP loads and an integer move; armcc folds the constants and uses vldm */
+/* Moves 3D sound actor `index` to `position` (ignored when 3D sound is off or the index is out of range). */
+#include "common.h"
 
 extern "C" {
-
-int nw_snd_Sound3DActor_SetPosition(int, int);
-
-typedef struct fn_002cc1c0_arg0 fn_002cc1c0_arg0;
-struct fn_002cc1c0_arg0 {
-    unsigned char pad_0x0[0x68];
-    float field_0x68; /* +0x68 */
-    float field_0x6c; /* +0x6c */
-    float field_0x70; /* +0x70 */
-    undefined4 field_0x74; /* +0x74 */
-    undefined4 field_0x78; /* +0x78 */
-    undefined4 field_0x7c; /* +0x7c */
-    byte field_0x80; /* +0x80 */
+struct SoundVec3 {
+    /* 0x0 */ f32 x;
+    /* 0x4 */ f32 y;
+    /* 0x8 */ f32 z;
 };
 
-extern signed char DAT_004e3134; /* 0x4e3134 */
+/* A 3D sound actor (0x84 bytes). */
+struct Sound3DActor {
+    /* 0x00 */ u8 unk00[0x84];
+};
 
-/* Supplied declaration required: nw_snd_Sound3DActor_SetPosition. */
+struct AsdSoundState {
+    /* 0x0000 */ u8 unk0000[0x7C0];
+    /* 0x07C0 */ Sound3DActor actors[16];
+    /* 0x1000 */ u8 unk1000[0x40];
+    /* 0x1040 */ SoundVec3 positions[16];
+    /* 0x1100 */ u8 unk1100[0xCC];
+    /* 0x11CC */ u8 enabled3d;
+};
 
+extern AsdSoundState g_asdSound;
+void nw_snd_Sound3DActor_SetPosition(Sound3DActor *actor, const SoundVec3 *position);
 
-void FUN_002cc1c0(fn_002cc1c0_arg0 *param_1,unsigned int *param_2)
-
+void FUN_002cc1c0(u32 index, const SoundVec3 *position)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if ((DAT_004e3134 != '\0') && (param_1 < (fn_002cc1c0_arg0 *)0x10)) {
-    temp_v0 = (int)param_1 * 0xc;
-    *(unsigned int *)(temp_v0 + 0x4e2fa8) = *param_2;
-    *(unsigned int *)(temp_v0 + 0x4e2fac) = param_2[1];
-    *(unsigned int *)(temp_v0 + 0x4e2fb0) = param_2[2];
-    nw_snd_Sound3DActor_SetPosition((int)param_1 * 0x84 + 0x4e2728,temp_v0 + 0x4e2fa8);
-    return;
-  }
-  return;
+    if (g_asdSound.enabled3d != 0 && index < 16) {
+        g_asdSound.positions[index] = *position;
+        nw_snd_Sound3DActor_SetPosition(&g_asdSound.actors[index], &g_asdSound.positions[index]);
+    }
 }
-
-} /* extern "C" */
+}

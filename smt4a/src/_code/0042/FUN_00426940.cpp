@@ -1,47 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00426940` (_code @ 0x426940, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail spills r0-r3 (push {r0-r3,r4-r6,lr}), reloads the mode byte from the spill and builds the command with strd/stm of the stack arguments; built keeps the arguments in registers (same IPC family as FUN_004268f0) */
+#include "nn/svc.h"
+#include "nn/Result.h"
 
 extern "C" {
+extern u32 DAT_005c149c;
 
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
-
-/* stack frame of param_7: 1 slot(s), 1 byte(s) */
-typedef struct {
-    unsigned char sp14; /* 0x14: local_14 */
-} param_7_stack;
-
-extern int DAT_005c149c; /* 0x5c149c */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-int FUN_00426940(unsigned int *param_1,unsigned int param_2,int param_3,unsigned char param_4,
-                unsigned int param_5,unsigned int param_6,unsigned int param_7)
-
+/* Sends IPC command 0x301 describing `count` elements at `a`/`b`/`c`; stores the reply's second word in *out and returns the reply word or the error. */
+s32 FUN_00426940(u32 *out, u32 handle, s32 count, u8 mode, u32 a, u32 b, u32 c)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned int *)(temp_v1 + 0x80) = 0x10030142;
-  *(int *)(temp_v1 + 0x84) = param_3;
-  *(unsigned char *)(temp_v1 + 0x88) = param_4;
-  *(unsigned int *)(temp_v1 + 0x8c) = param_5;
-  *(unsigned int *)(temp_v1 + 0x90) = param_6;
-  *(unsigned int *)(temp_v1 + 0x94) = param_7;
-  *(unsigned int *)(temp_v1 + 0x98) = (param_3 * 0x180) | 0xc;
-  *(unsigned int *)(temp_v1 + 0x9c) = param_2;
-  software_interrupt(0x32);
-  temp_v0 = DAT_005c149c;
-  if (-1 < DAT_005c149c) {
-    *param_1 = *(unsigned int *)(temp_v1 + 0x88);
-    temp_v0 = *(int *)(temp_v1 + 0x84);
-  }
-  return temp_v0;
-}
+    nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
 
-} /* extern "C" */
+    command->header = 0x10030142;
+    command->words[0] = count;
+    *reinterpret_cast<u8 *>(&command->words[1]) = mode;
+    command->words[2] = a;
+    command->words[3] = b;
+    command->words[4] = c;
+    command->words[5] = (count * 0x180) | 0xc;
+    command->words[6] = handle;
+    s32 result = nn::svc::SendSyncRequest(DAT_005c149c);
+    if (nnResultIsSuccess(result)) {
+        *out = command->words[1];
+        return command->words[0];
+    }
+    return result;
+}
+}

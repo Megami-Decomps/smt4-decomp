@@ -77,7 +77,7 @@ typedef struct {
 
 extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int DAT_00476630; /* 0x476630 */
-extern unsigned int DAT_00476634; /* 0x476634 */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x476634 */
 extern float DAT_004efd48; /* 0x4efd48 */
 extern float DAT_004efd4c; /* 0x4efd4c */
 extern float DAT_004efd50; /* 0x4efd50 */
@@ -87,7 +87,7 @@ extern float DAT_004efd5c; /* 0x4efd5c */
 extern float DAT_004efd60; /* 0x4efd60 */
 extern float DAT_004efd64; /* 0x4efd64 */
 extern float DAT_004efd68; /* 0x4efd68 */
-extern float DAT_004efd6c; /* 0x4efd6c */
+extern float _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x4efd6c */
 extern float DAT_004efd70; /* 0x4efd70 */
 extern float DAT_004efd74; /* 0x4efd74 */
 extern float DAT_004efd78; /* 0x4efd78 */
@@ -104,7 +104,7 @@ extern float DAT_004efd98; /* 0x4efd98 */
 /* Supplied declaration required: facingUpdateAngles. */
 /* Supplied declaration required: FUN_00286198. */
 /* Supplied declaration required: mtxMakeTranslation. */
-extern unsigned int FUN_002a7bc0(void);
+extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 extern int FUN_002a81a8(unsigned char *, int);
 /* Supplied declaration required: FUN_002b2144. */
 /* Supplied declaration required: FUN_002ba1e0. */
@@ -210,7 +210,7 @@ void FUN_001aad64(int param_1)
   if (*(char *)(param_1 + 1000) == '\0') {
     return;
   }
-  temp_v0 = FUN_002a7bc0();
+  temp_v0 = _ZN2nw4math5MTX448IdentityEv();
   mtx44Copy(&temp_v25,temp_v0);
   temp_v2 = g_titleScene;
   temp_v11 = (*(unsigned char *)(param_1 + 0x130) & 7) >> 1;
@@ -278,8 +278,8 @@ void FUN_001aad64(int param_1)
   if ((*(unsigned char *)(param_1 + 0x130) & 0x20) != 0) {
     temp_v2 = FUN_002a81a8(temp_v66,*(int *)(g_titleScene + 0x6f8) + 0x38);
     if (temp_v2 == 0) {
-      if (((DAT_00476634 & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&DAT_00476634), temp_v2 != 0)) {
-        DAT_004efd6c = temp_v15;
+      if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v2 != 0)) {
+        _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v15;
         DAT_004efd70 = temp_v16;
         DAT_004efd74 = temp_v16;
         DAT_004efd78 = temp_v16;
@@ -292,7 +292,7 @@ void FUN_001aad64(int param_1)
         DAT_004efd94 = temp_v15;
         DAT_004efd98 = temp_v16;
       }
-      nn_math_ARMv6_MTX34CopyAsm(temp_v66,&DAT_004efd6c);
+      nn_math_ARMv6_MTX34CopyAsm(temp_v66,&_ZZN2nw4math5MTX348IdentityEvE8identity);
     }
     nn_math_ARMv6_MTX34CopyAsm(&temp_v59,temp_v66);
     temp_v61 = temp_v16;

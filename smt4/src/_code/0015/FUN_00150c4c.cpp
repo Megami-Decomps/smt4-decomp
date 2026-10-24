@@ -1,55 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00150c4c` (_code @ 0x150c4c, 0xcc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies the 12-byte stack argument with one vldmia/vstmia {s16-s18} block and keeps it in VFP registers; this build copies the three words one by one. */
+#include "common.h"
+
+/* Three words handed through to the playback call. */
+struct PlayParameters {
+    u32 first;
+    u32 second;
+    u32 third;
+};
+
+/* Where a sound item lives: offsets into the archive, or the file it points at. */
+struct SoundFileInfo {
+    /* 0x00 */ s32 position;
+    /* 0x04 */ s32 size;
+    /* 0x08 */ void *file;
+};
+
+struct SoundPlayer;
+struct SoundPlayerVtbl {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ void (*playRegion)(SoundPlayer *player, u32 a, u32 b, s32 offset, s32 position);
+};
+struct SoundPlayer {
+    /* 0x000 */ SoundPlayerVtbl *vtbl;
+    /* 0x004 */ void *reader;
+    /* 0x008 */ u8 unk008[0x100];
+    /* 0x108 */ s32 dataOffset;
+};
 
 extern "C" {
 
-int FUN_001556d8(int *, unsigned int, unsigned int, int, int, int, unsigned int);
+s32 nw_snd_internal_SoundArchiveFileReader_ReadFileInfo(void *reader, u32 id, SoundFileInfo *info, u32 flags);
+void FUN_001556d8(SoundPlayer *player, u32 a, u32 b, void *file, PlayParameters parameters);
 
-typedef int romwright_code(...);
-/* stack frame of param_6: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_6_stack;
-
-/* Supplied declaration required: FUN_001556d8. */
-extern int nw_snd_internal_SoundArchiveFileReader_ReadFileInfo(int, unsigned int, int *, unsigned int);
-
-
-void FUN_00150c4c(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned long long param_5,unsigned int param_6)
-
+/* Starts playing sound item `id`: from its own file when it has one, else from its region of the archive data. */
+void FUN_00150c4c(SoundPlayer *player, u32 id, u32 a, u32 b, PlayParameters parameters)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v1 = -1;
-  temp_v2 = -1;
-  temp_v3 = 0;
-  temp_v0 = nw_snd_internal_SoundArchiveFileReader_ReadFileInfo(param_1[1],param_2,&temp_v1,0);
-  if (temp_v0 != 0) {
-    if (temp_v3 != 0) {
-      FUN_001556d8(param_1,param_3,param_4,temp_v3,(int)param_5,(int)((unsigned long long)param_5 >> 0x20),
-                   param_6);
+    SoundFileInfo info;
+    info.position = -1;
+    info.size = -1;
+    info.file = NULL;
+    if (nw_snd_internal_SoundArchiveFileReader_ReadFileInfo(player->reader, id, &info, 0) != 0) {
+        if (info.file != NULL) {
+            FUN_001556d8(player, a, b, info.file, parameters);
+        } else if (info.position != -1 && info.size != -1) {
+            player->vtbl->playRegion(player, a, b, info.size + player->dataOffset, info.position);
+        }
     }
-    else {
-      temp_v0 = temp_v1;
-      if (temp_v1 != -1) {
-        temp_v0 = temp_v2;
-      }
-      if (temp_v1 != -1 && temp_v0 != -1) {
-        (**(romwright_code **)(*param_1 + 0x10))(param_1,param_3,param_4,temp_v2 + param_1[0x42],temp_v1);
-        return;
-      }
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -31,7 +31,7 @@ s32 btlAnyEventFilterMatches(BtlMainStateA *, ActionTierUnit *, u32);
 s32 lcgRandomRange(u32);
 s32 gameFlagIsSet(u32);
 void source4CCopyHalves(ActionTierUnit *, u16 *);
-const ActionTierSkill *FUN_0034a290(u32);
+const ActionTierSkill *dataTable41FindById(u32);
 
 u32 btlSelectActionTier(u32 unitId)
 {
@@ -52,7 +52,7 @@ u32 btlSelectActionTier(u32 unitId)
         for (s32 i = 0; i < 9; ++i) {
             if (!skills[i])
                 continue;
-            const ActionTierSkill *skill = FUN_0034a290(skills[i]);
+            const ActionTierSkill *skill = dataTable41FindById(skills[i]);
             if (skill && tier < skill->tier) {
                 if (!btlAnyEventFilterMatches(btlGetMainState(), unit, skill->tier))
                     tier = skill->tier;

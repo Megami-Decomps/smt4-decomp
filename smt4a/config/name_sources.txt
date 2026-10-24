@@ -2649,7 +2649,8 @@
 0055ca14 _ZTV9Obj422594 evidence size:0x1c vtable of Obj422594 (stored by FUN_004d0b3c, FUN_004d0b58, FUN_004d0ba4)
 0057fff8 _ZTV9Obj57fff8 evidence size:0xc vtable of Obj57fff8 (stored by FUN_0013963c)
 005b3d14 _ZTV9Obj464cb0 evidence size:0x40 vtable of Obj464cb0 (stored by FUN_00156fd8)
-005c14bc _ZTV9Obj5c14bc evidence size:0x10 vtable of Obj5c14bc (stored by FUN_004351b8, FUN_0043596c)
+005c14bc g_ipcServiceInitResult inferred result of the IPC service session setup, tested before each command (not a vtable: word 1 is the session handle, a PTMF handler table follows at 0x5c14c4)
+005c14c0 g_ipcServiceSessionHandle inferred session handle the IPC service commands send with SendSyncRequest
 00558a3c _ZTV9Obj558a3c evidence size:0x14 vtable of the chain root of Obj559720 (stored by FUN_00106e4c)
 0055b314 _ZTV9Obj55b314 evidence size:0x20 vtable of the middle of the Obj559720 chain (stored by FUN_00300844 and the inline destructor)
 00559010 _ZTV9Obj559010 evidence size:0x10 vtable of the object Obj559020 embeds (stored by FUN_0010cc7c, FUN_0010cc4c, FUN_0010ccb0)
@@ -3843,7 +3844,7 @@
 004fa228 btlUpdateAttackAnimation inferred Tracks animation frame wraps, emits timed target effects from signed resource coordinates, advances phase12 on completion and queues event1000132/134
 003220dc radialScreenEffectUpdate inferred Twin of IV2c711c with integer lifetime counters, float radius projection and packed color modulation
 00167f94 asdLoadFileExists inferred Normalizes a loader path, checks the hash pack, converts to UTF16 and probes filesystem open with scoped handle cleanup
-00558104 g_fileStreamConstructionTables inferred Native VTT-like four-pointer table used for stack stream construction;558144/526568/526568/558144 and virtual-base offset0
+00558104 _ZTT9Obj55813c inferred construction table (VTT) of the file stream class Obj55813c (primary vtable 0x55813c, virtual base interface vtable 0x526560)
 0033f224 lmapSceneStartMovement inferred Quantizes stored movement distance by step size, resets movement state/counters and selects protagonist motion/start frame based on map and flag4c9 state
 004741f0 aocRequestDataEntryFiles inferred Reads metadata rows for one content entry, queues supported directory/name resources and sets each file reference's requested byte
 003b1b00 btlTalkChooseRandomPartyTarget inferred Excludes a requested unit ID and bad statuses, randomly picks a reserve-slot target+109 or matching active combatant index, and sets script result
@@ -5457,3 +5458,252 @@
 002a6fb8 statusCameraSelectPreset inferred [high] Twin status-model camera preset selector
 0026c3c4 statusCommitSelectedSkills inferred [high] Copies the selected skill list and refreshes its comparison against the active unit
 002859d8 uniteCameraInitialize inferred [high] Initializes fusion camera look direction, projection, stereo settings and active-camera registration
+004325f4 _ZN9Obj559020C1ERKS_ inferred [high] copy constructor of the 0xd8-byte Obj559020 configuration block: copies every field and copy-constructs the Obj559010 and Obj5584c8 members
+0010cc4c _ZN9Obj559010C1ERKS_ inferred [high] copy constructor of Obj559010 (vtable 0x559010): copies scalars then copy-constructs the Obj5590d0 member at 0x1c
+00103890 _ZN9Obj5584c8C1ERKS_ inferred [high] copy constructor of the 0x28-byte Obj5584c8 payload record (vtable 0x5584c8): copies id and 0x20 payload bytes
+00416b70 _ZN20PartnerAttackEntriesC1Ev inferred [high] constructor of the 12-entry partner attack table (BtlPartnerAttackA::entries)
+004125bc _ZN18PartnerAttackEntryC1Ev inferred [med] empty entry constructor passed to __aeabi_vec_ctor_nocookie_nodtor; referenced only by the table constructor
+003f9e80 _ZN9Obj557af8C1EPK21AsdAnimCameraResource inferred [high] constructor of the camera object whose vtable is at 0x557af8 (animated camera built from a resource)
+001b15cc _ZN18AsdAnimCameraState10InitializeEPK21AsdAnimCameraResourceP18AsdAnimCameraSetup inferred [med] initializer of the embedded animation state (forwards to FUN_001b15d0); also called by FUN_00187e08
+005c4c2c _ZGVZN2nw4math5MTX348IdentityEvE8identity inferred [med] guard of the shared MTX34 identity local static
+0064c054 _ZZN2nw4math5MTX348IdentityEvE8identity inferred [med] shared 3x4 identity matrix (function-local static, 0x30 bytes)
+005c4c30 _ZGVZN2nw4math5MTX448IdentityEvE8identity inferred [med] guard of the shared MTX44 identity local static
+0064c084 _ZZN2nw4math5MTX448IdentityEvE8identity inferred [med] shared 4x4 identity matrix (function-local static, 0x40 bytes)
+00115544 _ZN9Obj55980cC1Ev inferred [high] constructor of the 0x55980c shared-reference class (Obj5593b8 base plus its own vtable)
+0010b0f4 _ZN9Obj558cbc13applySlotNameEv inferred [med] names the slot's connection settings from the system table string (reads the slot byte at 0x24)
+00104fe0 _ZN9Obj558650C1EhP17Obj558cbcListener inferred [med] constructor of the 0x128-byte session object (vtable 0x558650) taking slot index and listener; unit is only the linker veneer, body is at 0x104fe8
+0010ccf0 _ZN9Obj55902010setValue74Ei inferred [high] stores the argument at 0x74 of the Obj559020 settings block and returns a result
+0010cd04 _ZN9Obj55902010setValue6cEi inferred [high] stores the argument at 0x6c of the Obj559020 settings block and returns a result
+0011169c _ZN9Obj5594d4C1EP9Obj558cbchhh inferred [med] constructor of the 0x78-byte object (vtable 0x5594d4) built for an Obj558cbc owner and three byte arguments
+00111560 _ZN9Obj5594d415registerSessionEP9Obj558650i inferred [med] registers a session with the 0x5594d4 object: queries the session and appends it to the list at 0x5c
+004324d4 _ZN9Obj558cbcC1EhP17Obj558cbcListener inferred [high] constructor of Obj558cbc taking slot and listener
+002e760a _Znwj inferred [high] the global operator new(unsigned int): null-returning allocator that every new expression calls
+001ba1c0 _ZN7AocMain12queueRequestE17RequestParametersji inferred [high] twin: queues a RequestParameters unless one is already active
+001d1038 _ZN7AocMain19submitTokenRequestE17RequestParameters19QueuedRequestHandle inferred [med] AocMain method: submits a RequestParameters (by hidden reference) for a token handle unless one is pending
+001d0fcc _ZN10AocSystemA17getPendingRequestEv inferred [med] AocSystemA method returning the pending RequestParameters through hidden result storage
+00557c58 _ZTV9Obj557c58 inferred size:0x10 status-screen model holder table (Obj557ae8 derived); address point 0x557c60, deleting callback at 0x40bcf4.
+004cee68 _ZN9Obj557ed0C1Ev inferred [high] constructor of the fountain screen state (vtable 0x557ed0, stored by it); called by FUN_00301848
+00557ed0 _ZTV9Obj557ed0 inferred size:0x10 fountain screen state table; address point 0x557ed8, deleting callback at 0x4cef00.
+004322f4 _ZN9Obj558bd012printProfileEv inferred [high] prints the profile counter: total time and share, call rate, min/max/avg/last times
+002ea20c _ZN15OnlineTimestampC1Ev inferred [high] default constructor of the 8-byte online timestamp: reads the online clock
+002eab1c _ZmiRK15OnlineTimestampS1_ inferred [high] 64-bit difference of two online timestamps
+002ffa9c __aeabi_uldivmod inferred [med] 64-bit unsigned divide called for total/1000 (runtime helper; unit is 0x2b0 bytes with LZCOUNT)
+001340c6 _ZNSt6vectorI9Obj55aff412AsdAllocatorIS0_EE13_C_insert_auxEPS0_jRKS0_ inferred [high] std::vector<Obj55aff4>::_C_insert_aux(iterator, size_type, const_reference)
+0030fcf6 _ZNKSt6vectorI9Obj55aff412AsdAllocatorIS0_EE4sizeEv inferred [high] std::vector<Obj55aff4>::size()
+001321fc _ZNKSt6vectorI9Obj55aff412AsdAllocatorIS0_EE8capacityEv inferred [high] std::vector<Obj55aff4>::capacity()
+003079c6 _ZSt18uninitialized_copyIP9Obj55aff4S1_12AsdAllocatorIS0_EET0_T_S5_S4_RT1_ inferred [high] std::uninitialized_copy for Obj55aff4 with allocator
+00135ae4 _ZSt13copy_backwardIP9Obj55aff4S1_ET0_T_S3_S2_ inferred [high] std::copy_backward for Obj55aff4
+0030798e _ZSt20uninitialized_fill_nIP9Obj55aff4jS0_12AsdAllocatorIS0_EEvT_T0_RKT1_RT2_ inferred [high] std::uninitialized_fill_n for Obj55aff4 with allocator
+00135b4a _ZSt4fillIP9Obj55aff4S0_EvT_S2_RKT0_ inferred [high] std::fill for Obj55aff4
+0030fcfe _ZN4__rw17__rw_new_capacityISt6vectorI9Obj55aff412AsdAllocatorIS2_EEEEjjPKT_ inferred [high] __rw_new_capacity for vector<Obj55aff4>
+002e4e86 _ZSt3maxIjERKT_S2_S2_ inferred [high] std::max<unsigned int>
+00307984 _ZN12AsdAllocatorI9Obj55aff4E8allocateEjPKv inferred [high] AsdAllocator<Obj55aff4>::allocate
+003079ae _ZNSt6vectorI9Obj55aff412AsdAllocatorIS0_EE10_C_destroyEPS0_S4_ inferred [high] std::vector<Obj55aff4>::_C_destroy
+001346ee _ZNSt6vectorIj12AsdAllocatorIjEE13_C_insert_auxEPjjRKj inferred [med] std::vector<u32>::_C_insert_aux(iterator, size_type, const_reference); element type u32 assumed
+002f33ac _ZNKSt6vectorIj12AsdAllocatorIjEE4sizeEv inferred [med] size() of the 4-byte vector
+00307888 _ZSt18uninitialized_copyIPjS0_12AsdAllocatorIjEET0_T_S4_S3_RT1_ inferred [med] uninitialized_copy of 4-byte values
+00307872 _ZSt20uninitialized_fill_nIPjjj12AsdAllocatorIjEEvT_T0_RKT1_RT2_ inferred [med] uninitialized_fill_n of 4-byte values
+00307860 _ZN4__rw17__rw_new_capacityISt6vectorIj12AsdAllocatorIjEEEEjjPKT_ inferred [med] __rw_new_capacity of the 4-byte vector
+00134b44 _ZNSt6vectorIi12AsdAllocatorIiEE13_C_insert_auxEPijRKi inferred [med] std::vector<s32>::_C_insert_aux(iterator, size_type, const_reference); element type s32 assumed
+002f1370 _ZNKSt6vectorIi12AsdAllocatorIiEE4sizeEv inferred [med] size() of the second 4-byte vector
+003077e8 _ZSt18uninitialized_copyIPiS0_12AsdAllocatorIiEET0_T_S4_S3_RT1_ inferred [med] uninitialized_copy of the second 4-byte vector
+0030c59e _ZSt20uninitialized_fill_nIPiji12AsdAllocatorIiEEvT_T0_RKT1_RT2_ inferred [med] uninitialized_fill_n of the second 4-byte vector
+0030c5b4 _ZN4__rw17__rw_new_capacityISt6vectorIi12AsdAllocatorIiEEEEjjPKT_ inferred [med] __rw_new_capacity of the second 4-byte vector
+00199d58 _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_ inferred [high] std::for_each over the draw callback record list (callbacks and listeners)
+00523060 _ZSt16__insertion_sortIP21RenderBatchSortRecord27RenderBatchSecondaryKeyLessEvT_S3_T0_ inferred [high] std::__insertion_sort of render batch records by secondary key
+00198fe8 _ZSt16__insertion_sortIP11KeyedRecord15KeyedRecordLessEvT_S3_T0_ inferred [high] std::__insertion_sort of 16-byte records by 64-bit key
+00135648 _ZNSt6vectorIPv12AsdAllocatorIS0_EE14_C_insert_aux2IPKS0_EEvPS0_T_S8_ inferred [med] std::vector<void*>::_C_insert_aux2(iterator, const_iterator, const_iterator); element type assumed
+002ff8c6 _ZNKSt6vectorIPv12AsdAllocatorIS0_EE4sizeEv inferred [med] size() of the pointer vector
+003075ca _ZNKSt6vectorIPv12AsdAllocatorIS0_EE8capacityEv inferred [med] capacity() of the pointer vector
+0030759c _ZSt18uninitialized_copyIPPvS1_12AsdAllocatorIS0_EET0_T_S5_S4_RT1_ inferred [med] uninitialized_copy of pointer values
+003075b6 _ZSt13copy_backwardIPPvS1_ET0_T_S3_S2_ inferred [med] copy_backward of pointer values
+002eb414 _ZSt4copyIPKPvPS0_ET0_T_S5_S4_ inferred [med] std::copy of pointer values
+002ff8b4 _ZN4__rw17__rw_new_capacityISt6vectorIPv12AsdAllocatorIS2_EEEEjjPKT_ inferred [med] __rw_new_capacity of the pointer vector
+0030771a _ZN12AsdAllocatorIPvE8allocateEjPKv inferred [med] AsdAllocator<void*>::allocate
+00134ffe _ZNSt6vectorIb12AsdAllocatorIbEE6insertENS2_8iteratorEjRKb inferred [high] std::vector<bool>::insert(iterator, size_type, const bool&)
+00307ea0 _ZNKSt6vectorIb12AsdAllocatorIbEE14const_iteratormiES3_ inferred [high] bit vector const_iterator::operator-
+00307704 _ZNKSt6vectorIb12AsdAllocatorIbEE4sizeEv inferred [high] std::vector<bool>::size()
+002f1840 _ZNKSt6vectorIb12AsdAllocatorIbEE8iteratorplEi inferred [high] bit vector iterator::operator+(int)
+003076f0 _ZNSt6vectorIb12AsdAllocatorIbEE8iteratormmEv inferred [high] bit vector iterator::operator--()
+003076e6 _ZNKSt6vectorIb12AsdAllocatorIbEE8iteratordeEv inferred [high] bit vector iterator::operator*
+003076d2 _ZNSt6vectorIb12AsdAllocatorIbEE9referenceaSERKS3_ inferred [high] bit vector reference::operator=(const reference&)
+003076b6 _ZNKSt6vectorIb12AsdAllocatorIbEE7_C_iterneERKS3_ inferred [high] bit vector iterator::_C_iter !=
+0030769c _ZNSt6vectorIb12AsdAllocatorIbEE8iteratorppEi inferred [high] bit vector iterator::operator++(int)
+002efb6c _ZNSt6vectorIb12AsdAllocatorIbEE9referenceaSEb inferred [high] bit vector reference::operator=(bool)
+00307e74 _ZNSt6vectorIb12AsdAllocatorIbEE8iteratorpLEi inferred [high] bit vector iterator::operator+=(int)
+00307632 _ZNSt6vectorIb12AsdAllocatorIbEE7_C_copyINS2_8iteratorEEES4_T_S5_S4_ inferred [high] bit vector _C_copy
+00468224 _ZN9Obj5333c011healingStepEv inferred [high] state-1 step of the quest-center healing counter (qc_Healing* talk, fee, flags)
+00469d1c _ZN9Obj5333c011finishSceneEv inferred [med] last table step: sets flag bit 0, state 19
+00421130 _ZN9Obj4209cc16destroyResourcesEv inferred [high] destroys and releases the two rows of parts, releases each model of the model list and deletes the list
+003feb80 _ZN9Obj557b18C1Ev inferred [high] constructor of the camera controller whose vtable is at 0x557b18 (two-element table, world matrix, state block)
+003fe99c _ZN16Obj557b18ElementC1Ev inferred [high] constructor of the 0x30-byte table element: clears its four values
+005203c0 _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE11_C_get_linkEv inferred [med] __rb_tree::_C_get_link of the MoLive object handle map (u32 -> shared handle)
+00522e18 _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE6insertERKS5_ inferred [med] __rb_tree::insert(const value_type&) of the MoLive object handle map (u32 -> shared handle)
+00520d80 _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE9_C_insertEPNS_17__rw_rb_tree_nodeISB_S5_jS7_EESF_RKS5_ inferred [med] __rb_tree::_C_insert of the MoLive object handle map (u32 -> shared handle)
+00520b3c _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE5eraseENS_14__rw_tree_iterIS5_iPS5_RS5_NS_17__rw_rb_tree_nodeISB_S5_jS7_EEEESI_ inferred [med] __rb_tree::erase(iterator, iterator) of the MoLive object handle map (u32 -> shared handle)
+00520ce0 _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE8_C_eraseEPNS_17__rw_rb_tree_nodeISB_S5_jS7_EE inferred [med] __rb_tree::_C_erase(node) of the MoLive object handle map (u32 -> shared handle)
+005204d4 _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE5eraseENS_14__rw_tree_iterIS5_iPS5_RS5_NS_17__rw_rb_tree_nodeISB_S5_jS7_EEEE inferred [med] __rb_tree::erase(iterator) of the MoLive object handle map (u32 -> shared handle)
+001464b4 _ZN9Obj557c48C1Ev inferred [high] constructor of the table owner with two reserved vectors (vtable 0x557c48)
+001006c2 _ZN4__rw13__rw_allocateEji inferred [high] std::allocator storage allocation (__rw_allocate(size, hint))
+001006ec _ZN4__rw15__rw_deallocateEPvji inferred [high] std::allocator storage release (__rw_deallocate(p, n, hint))
+00557c48 _ZTV9Obj557c48 inferred [high] size:0x10 vtable of the table owner (address point 0x557c50)
+0046adec _ZN9Obj5333c06updateEv inferred [high] scene update: runs the current state step (member-function pointer), follows the camera transform and places the quest NPC controllers at their dummy markers once
+00543e20 g_moLiveOutOfMemoryMessage inferred [high] format string MoLive allocators report when an allocation fails
+002e9300 _ZN9Obj55aff4C1EPKt inferred [high] Obj55aff4 constructor from a UTF-16 string (wstrlenU16 + wstrcpyU16 at 0x30ff80); callers pass unsigned short*  (apply after the FUN_002ea100 row)
+002ea100 _ZN9Obj55aff4C1EPKc inferred [high] Obj55aff4 constructor from a narrow char string (strlen + byte copy via 0x30ffac); the old _ZN9Obj55aff4C1EPKc at 0x2e9300 takes u16 text
+001573a4 _ZN14MatrixSlotListC1EjP9SlotOwnerj inferred [med] constructor of the matrix slot list: vector<Matrix34> reserved to 1024, eight owner slot bytes, embedded SlotState
+0016d1f4 _ZN9SlotStateC1Ev inferred [med] constructor of the 0x80-byte SlotState embedded at +0x20 of the matrix slot list (returns this)
+002e9afe _ZN18OnlineResultRecordaSERKS_ inferred [med] 12-byte online result record assignment operator (3-word copy)
+002f4e86 _ZNK18OnlineResultRecord7isValidEv inferred [med] OnlineResultRecord::isValid: first word is not negative
+002e32a4 _ZN4__rw10__rw_throwEiz inferred [high] armcc rw library __rw_throw(int kind, ...): called by vector::at() range checks with kind 9, two empty strings, index and size
+004130c0 _ZN9Obj557c908setStateEj inferred [med] Obj557c90 (online job) state switch
+004148fc _ZN9Obj557c9011applyResultERK18OnlineResultSource inferred [med] takes the result record from a message and sets the job state
+00414484 _ZN9Obj557c9018applyResultCheckedERK18OnlineResultSource inferred [med] like applyResult but checks the stored results and goes to state 6
+0047c8b8 _ZN7AocMenuC1Ev inferred [high] AocMenu constructor (0x26F0-byte add-on content menu)
+0047c950 _ZN7AocMenuD1Ev inferred [high] AocMenu destructor: destroys the embedded selection/window objects, returns the allocation
+004a2238 _ZN13BibleItemMenu7confirmEv inferred [med] item-menu confirm handler (plays the sound, opens the detail, resets sprites)
+004791d4 _ZN7AocMenu16openPurchaseListEv inferred [med] AocMenu step: loads the menu sprites/content table, creates the script process, drops the old window and writes the purchase prompt
+004adbb4 _ZN12MoLivePlayer12flushPendingEv inferred [med] MoLive player: queue the handle every stream is working on and hand out a fresh one
+005211a4 _ZN6MoLive10RingBufferINS_12ObjectHandleEE6insertERKPKS1_S6_ inferred [med] MoLive::RingBuffer<ObjectHandle>::insert(first, last): append a range, growing the ring
+005c0e00 g_animBlenderTypeInfo inferred [med] runtime type record of the nw::gfx AnimBlender (group node with a member vector); parent link filled at start-up
+005c0e04 g_animEvaluatorTypeInfo inferred [med] runtime type record of the nw::gfx AnimEvaluator (leaf node with a binding)
+00532fdc g_textNotCheck inferred [high] "not check" string used by the online job result handlers
+004093f4 _ZN9Obj557bd8C1Ev inferred [high] constructor of the battle target selection info panel (vtable 0x557bd8); called by FUN_00363990
+0041895c _ZN17TargetMarkerEntryC1Ev inferred [high] empty constructor of one target cursor marker (16-byte element of the marker group, array-constructed with __aeabi_vec_ctor_nocookie_nodtor)
+00557bd8 _ZTV9Obj557bd8 inferred size:0x10 battle target selection info panel table; address point 0x557be0, deleting callback at 0x409678.
+00557d48 _ZTV9Obj557d48 inferred size:0x10 battle target selection marker group table; address point 0x557d50, deleting callback at 0x418c34.
+0041a3ac _ZN14ModelUnitExtraC1EP13UnitExtraDataP16ModelUnitBuffers inferred [med] constructor of the 0x24-byte object a model unit builds when its content has extra data (takes the data and the owning unit)
+004afbe4 _ZN12MoLivePlayerC1EPN6MoLive9AllocatorEj inferred [med] MoLivePlayer constructor: stream map, queues, message handler table
+004d92b8 _ZN6MoLive8TreeBaseC1EPFvvE inferred [med] MoLive::TreeBase constructor: empty AA tree (nil sentinel linked to itself) storing the node-release hook
+003fe544 _ZN9Obj557b1813attachContentEP16UnitModelContentj inferred [high] attaches model content to the unit: sets up a part, allocates channels, builds the extra object and resets the matrix
+003fe9cc _ZN9Obj557b18C1EP16UnitModelContentjj inferred [high] constructor taking content, part index and id: default state then attachContent
+001d1038 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle inferred [high] mangled length fix: "submitTokenRequest" has 18 characters, so the compiler emits 18 (the symbol said 19; the retail callers FUN_0047219c/FUN_00472350 cannot match otherwise)
+0045f08c _ZN9Obj55be80C1Ev inferred [high] constructor of the reverb sound effect (vtable 0x55be80, stored by it)
+0055be80 _ZTV9Obj55be80 inferred size:0x2c reverb sound effect table (slot 2 = nw_snd_FxReverb_Initialize); address point 0x55be88.
+00104fe0 obj558650ConstructArmEntry inferred [high] linker ARM-to-Thumb entry stub (add ip, pc, #1; bx ip) in front of the Obj558650 constructor
+00104fe8 _ZN9Obj558650C1EhP17Obj558cbcListener inferred [high] Obj558650 constructor (Thumb body behind the ARM entry stub)
+002e7908 _ZN12OnlineResultC1ERKj evidence [high] OnlineResult(const u32 &code): stores code, Result.cpp path and line 0x6f
+0030d3ba _ZN12AsdAllocatorI9Obj55aff4E9constructEPS0_RKS0_ evidence [high] AsdAllocator<Obj55aff4>::construct(pointer, const_reference): the callee the vector instantiation's uninitialized_copy/fill_n call
+002e3138 svcWaitSynchronization1 inferred [high] svc 0x24; bx lr wrapper
+001a0d08 nn_os_Thread_FinalizeImpl inferred [high] same as smt4 nn_os_Thread_FinalizeImpl: joins the thread once (flag byte at +4) given &handle
+00100d78 libcFormatAppendByteBounded inferred [high] bounded byte-append callback of the snprintf-like formatter: stores the byte and advances the cursor while below the limit
+00175994 _ZN2nw3snd8internal6driver11SoundThreadC1Ev evidence [med] nw::snd::internal::driver::SoundThread constructor; called by the function-local static in FUN_001b1f04
+00175a34 _ZN2nw3snd8internal6driver11SoundThreadD1Ev evidence [med] nw::snd::internal::driver::SoundThread destructor registered with atexit by the function-local static
+001b1f04 nw_snd_internal_driver_SoundThread_GetInstance inferred [high] returns the function-local static SoundThread instance (twin of smt4)
+001b1f04 _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv evidence [high] static SoundThread::GetInstance() with a function-local static instance
+005c0f88 _ZGVZN2nw3snd8internal6driver11SoundThread11GetInstanceEvE8instance evidence [high] guard of GetInstance's function-local static
+00646e88 _ZZN2nw3snd8internal6driver11SoundThread11GetInstanceEvE8instance evidence [high] GetInstance's function-local static SoundThread
+001348c8 _ZNSt6vectorIj12AsdAllocatorIjEE7reserveEj inferred med out-of-line std::vector<u32,AsdAllocator>::reserve (next to its _C_insert_aux)
+00134abc _ZNSt6vectorIi12AsdAllocatorIiEE7reserveEj inferred med out-of-line std::vector<int,AsdAllocator>::reserve (next to its _C_insert_aux)
+0018aeb8 _ZN2nw4math5MTX448IdentityEv evidence high twin
+001b9b28 _ZN9Obj55c244C1Ev evidence high Obj55c244 constructor (stores _ZTV9Obj55c244+8; vtable at 0x55c244)
+0055c244 _ZTV9Obj55c244 evidence high size:0x24 vtable; address point 0x55c24c stored by FUN_001b9b28
+0045eb98 _ZN9Obj421a58C1Ev evidence high Obj421a58 constructor (stores _ZTV9Obj421a58+8)
+0055be60 _ZTV9Obj421a58 evidence high size:0x20 vtable; address point 0x55be68 stored by FUN_0045eb98
+00420d08 _ZN9Obj557e3cC1Ev evidence high Obj557e3c constructor (stores _ZTV9Obj557e3c+8)
+00557e3c _ZTV9Obj557e3c evidence high size:0x24 vtable; address point 0x557e44 stored by FUN_00420d08
+00557f74 _ZTV9Obj557f74 evidence high size:0x34 vtable; address point 0x557f7c stored by inlined ctor in FUN_00423efc
+00156f34 _ZN9Obj557b28C1Ev evidence high Obj557b28 constructor (stores _ZTV9Obj557b28+8)
+00557b28 _ZTV9Obj557b28 evidence high size:0x30 vtable; address point 0x557b30 stored by FUN_00156f34
+0054eb34 g_stockLimitTable inferred med table of 132 {key,limit} entries searched by FUN_0043872c
+00482758 _ZN9Obj55c81cC1Ej evidence high Obj55c81c constructor (stores _ZTV9Obj55c81c+8)
+0055c9c0 _ZTV9Obj55c9c0 evidence high size:0x24 vtable stored by FUN_004ad310 (+8 address point; DAT_0055c9c8)
+00198bc8 _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_ evidence high std::remove_copy<int*,int*,int> instantiation
+00557d80 _ZTV9Obj4208d4 evidence high size:0x30 vtable stored by FUN_0041aed4 (+8 address point DAT_00557d88)
+0041aed4 _ZN9Obj4208d4C1Ev evidence high Obj4208d4 constructor
+0057f538 g_bustupCutAnimSlotTable inferred [med] table of per-slot values passed to the bust-up placement call
+005e2058 g_battleSlotCount inferred [med] s16 count the battle script commands loop over
+00570dd0 g_btlStartFlags inferred [med] u64 flag mask or-ed into the battle state's flags by the start script command
+005702fc g_pendingTextures inferred [med] twin of smt4 table
+0015a21c _ZN10FloatStateC1Ev inferred [high] FloatState constructor (clears the two floats), called as a member constructor by the AsdRenderContext ctor
+0030cbf0 _ZN9Obj559020C1Ev evidence high Obj559020 default constructor (stores _ZTV9Obj559020+8)
+0010cc7c _ZN9Obj559010C1Ev evidence high Obj559010 default constructor (embedded at Obj559020+0x18)
+00128cd0 _ZN9Obj5584c8C1Ev evidence high Obj5584c8 default constructor (embedded at Obj559020+0xac)
+004adcec _ZN12MoLivePlayer18releaseIdleStreamsEv evidence high MoLivePlayer method at +0x141c stream map (checked with in-memory rename)
+004af308 _ZN12MoLivePlayer5resetEv evidence high MoLivePlayer::reset (destroys worker, clears streams, restores defaults)
+0040633c _ZN16MoriSceneElementC1Ev inferred [med] constructor of MoriSceneElement (0x704 bytes; 8 sub-elements via FUN_0045b580, then two default quaternions), used by new MoriSceneElement[n] in FUN_004063b0
+0053603c g_equipMenuStateHandlerInit inferred [med] initial handler table (22 state handlers as {func,0} pairs, two empty entries first) copied by FUN_0049a8b8
+00135804 _ZNSt6vectorIPv12AsdAllocatorIS0_EEaSERKS3_ inferred [med] std::vector<void*, AsdAllocator>::operator= (explicit instantiation unit; callers WordVector::operator=, Obj5597fc ctor)
+001f3e14 _ZN19Obj557b68WordVectorC1Ev inferred [high] zeroing constructor of the word-pointer vector element
+00406e6c _ZN9Obj557b68C1Ev inferred [high] constructor of Obj557b68 (vtable 0x557b68)
+00557b08 _ZTV9Obj557b08 evidence size:0x10 vtable (two zero words, slot0 null, slot1 0x3fd454 which lies in no unit); stored by FUN_00409fe8 (inlined constructor)
+001352ae _ZNSt6vectorIh12AsdAllocatorIhEE13_C_insert_auxEPhjRKh inferred [high] std::vector<u8, AsdAllocator>::_C_insert_aux(pos, n, value); unit needs -Ospace
+001353a2 _ZNSt6vectorIa12AsdAllocatorIaEE14_C_insert_aux2IPKaEEvPaT_S7_ inferred [med] std::vector<s8, AsdAllocator>::_C_insert_aux2(pos, first, last); element type s8 vs u8 unverified; needs -Ospace
+00135494 _ZNSt6vectorIh12AsdAllocatorIhEE14_C_insert_aux2IPKhEEvPhT_S7_ inferred [med] std::vector<u8, AsdAllocator>::_C_insert_aux2(pos, first, last); needs -Ospace
+00133cbc _ZNSt6vectorI6Elem4012AsdAllocatorIS0_EEaSERKS3_ inferred [med] std::vector<Elem40, AsdAllocator>::operator= (40-byte element)
+001343c8 _ZNSt6vectorI6Elem1212AsdAllocatorIS0_EEaSERKS3_ inferred [med] std::vector<Elem12, AsdAllocator>::operator= (12-byte element)
+00481b3c _ZN19ControllerFirstKindC1Ev inferred [med] constructor of the 0xa4-byte controller created by FUN_00482b08
+00482a5c _ZN20ControllerSecondKindC1Ev inferred [med] constructor of the 0xbc-byte controller created by FUN_00482b08
+00172354 _ZNK14SortObjectLessclEP10SortObjectS1_ inferred twin comparator
+00161dbc _ZSt16__introsort_loopIPP10SortObjecti14SortObjectLessEvT_S4_T0_T1_ inferred twin introsort loop
+004d352c btlReserveEditorOpenList inferred [high] opens the reserve-unit debug list box (position/scale/yaw controls)
+002b3324 effGeomBufferCreate inferred [high] twin of smt4 FUN_001f6998
+0013c884 asdCameraInitializeDefaults inferred [med] clears the screen camera, sets identity transforms and stereo defaults
+0041fae8 saveLoadUIStart inferred [med] resets screen globals, creates the save/load model list on first use and queues the save/load process
+00157d5c moriModelCommandInitBuffers inferred med allocates 2 command buffers (data+records) and two lists
+00243edc btlViewReleaseModelLists inferred med deletes the six battle-view model lists when entering map state
+00343d04 campStatusSceneCreateModel inferred med creates status model + loads status.bch resource
+00301848 fountainStart inferred high starts fountain screen processes/draw tasks (FOUNTAIN PROC/UD/DD strings)
+00379108 lmapEffectModelUpdate inferred med bobbing effect model: 0 animate, 1 unregister, 2 delete
+004cdca0 sceneHealingRelease inferred [med] releases the Spring of Healing scene: models, backdrop, script, heaps
+0017cfe8 asdGxBindCmdlistAt inferred [high] binds lists[index] via nngxBindCmdlist
+001585d4 clearU64 inferred [high] stores 0 to a 64-bit value
+00147120 sndSystemShutdown inferred [high] same
+00512dd0 moCreateValueRecord inferred [med] same
+0013b6e0 sysInitializeServices inferred [med] same
+00379664 findKeyedRecord inferred [low] same
+001a0778 gpuCmdPadToAlign16 inferred [med] pads the command stream with zero words to a 16-byte boundary
+001a07c4 gpuCmdWriteCopy inferred [med] writes a GPU memory copy command and returns the cursor
+001fc4f0 configDrawRowFrame inferred [med] Config screen: draws a row's frame sprites (selected pair, plain pair or four-segment bar) with speed scaling
+004cf140 fountainCrazingSumahoUpdate inferred [med] fountain crazing-sumaho screen per-frame update: fade in, tap/timeout, slot teardown
+003b70e0 statusDownGetHelpMessage inferred [med] status-down screen: help message id for a row kind refined by game state
+0022f770 uiDrawDataEntryRow inferred [med] draws one data-table entry row (frame, icons, name and detail text)
+0037dbc8 scrCommTalkBustUpShow inferred [med] script command that shows the talk bust-up for a talk record (flags on first frame, two phases after)
+003dac74 campMenuEntryDraw inferred [med] twin of smt4 FUN_00247c74
+00157b7c gfxCommandSetFlushCursor inferred [med] flushes advanced command stream bytes of the active range and submits
+002756dc resourceSetRelease inferred [med] releases and clears three owned resources
+00297e90 handleSetUnregister inferred [med] unregister three handle owners' list items from registry
+00312714 entryTableSetHalfwordsById inferred [med] sets two halfword fields of entry matching id
+0038db30 scrCommBattleAddPartyStat inferred [med] adds script arg to stat index of battle party member
+00398078 entryTableFlagTargetsOfId203 inferred [med] flags unflagged entries of id 0x203 with matching target
+003e4de4 saveSlotIsActiveWithId inferred [med] active (flag bit0) slot with id exists
+003ea20c battleFlagsQueryBlockedOrForced inferred [med] 0 if blocked, 1 if forced, else data flag 0x10
+004f9450 nameEntriesRegisterVerNames inferred [med] registers entries whose name begins VER
+00152cf8 uiPointerHitsRect inferred [med] twin
+0038b388 scrCommGetItemPrice inferred [med] twin
+00146e30 dspCallbackShutdown inferred [med] asserts no pending callbacks, closes handle, resets state
+0016432c dataTable25FindById inferred [med] smt4a: aoc override else bsearch of table 25
+002bf464 campButtonHelpLoad inferred [med] loads camp button help sprite/layout files on first user
+002c2000 scrCommIsPlayerPartyId inferred [med] script command: arg is one of player's seven ids
+0034a290 dataTable41FindById inferred [med] aoc override else bsearch of table 4/1
+003df43c partyEntryTriggerIfLevelAndFlag3 inferred [med] calls FUN_0041847c for party entry with level and flag bit 3
+003df478 unitTransformReset inferred [med] resets {1,0,0,1,1}
+0020ea14 effBlockCreate inferred high twin
+0035b9c0 effectEditorPreviewRebuildTexture inferred med twin
+0040b9ac playerModelLoadByIndex inferred med builds player/pl08_000<name>.bam and loads it
+00348b68 scrPlayVoiceScaled inferred [med] script cmd: plays voice with volume scaled by percent arg
+0035a204 campCecResetCameraHolder inferred [med] resets cec camera holder preset
+00377468 mapClearPendingGroups inferred [med] clears map interface records of pending groups
+0047f314 btlPlayEntrySound inferred [med] looks up battle entry by id; plays sound 4 for its unit when masked
+0048b140 dataTable2BFindType1Entry inferred [med] finds table 2B type 1 entry by key pair
+004c5f90 btlFindEntryNonzeroRecordValue inferred [med] scans entry id halves for first record with nonzero value
+002e5ae8 readerSeek inferred [med] twin
+0035bbc4 keyedRecordsFreeAll inferred [med] twin
+0032fea0 arrayContainsU16 inferred [high] twin
+00192608 dataTable08Sub2GetRecord inferred [med] add-on/table lookup of table 8 type 2 record
+0020e71c slotCountdownTick inferred [low] counts down; reloads with number of filled slots
+00375b80 devilCompareBySetRaceLevel inferred [med] qsort comparator over demon ids
+002a4aa4 saveNameBlockReset inferred [low] resets save name block and copies player names
+003a9ef8 listClearActiveFlags inferred [med] clears active flag of every list entry
+003b8714 scrBtlSetEntryScriptFlag inferred [med] script cmd: sets/clears script flag on a battle entry
+0016cbf8 sndVoiceStart inferred med starts pool voice: tick stamp, state 0 under sound lock
+00245e38 mapIfSpawnCaveAction inferred high spawns map/all/action_cave.bam model block
+002b7f58 mapIfSpawnManholeAction inferred high spawns map/all/action_manhole.bam model block
+0048389c lmapEnemyCtrlLoadModels inferred high loads map/all/lmap_ene.bam and lmap_boss.bam content models
+00291bd4 btlEventTaskCreate inferred high creates btlEvent Calc draw task and 0x30-byte event state
+004bc778 drawObjectInitialize inferred [med] clears a 0x84-byte draw object and fills it from a description record with size/resource defaults
+003a6dec event3dEventModelMapCreate inferred [high] twin of smt4 event3dEventModelMapCreate: creates the battle-map model state and its Event3dModelMap_Calc process
+0037398c scrBattleRemoveMembersByKind inferred [med] script command: removes battle members (vector<u16> at main-state+0x4e58) whose second-table kind or record flag fits mode arg
+0038010c scrBattleRemoveMembersByRecordValue inferred [med] script command: removes battle members whose data-table record word at +0x3c equals the argument
+0038d28c scrBattleRemoveMembersAtOrBelowValue inferred [med] script command: removes battle members whose value (FUN_001ba3d4) is not above the argument
+0039d784 scrBattleFindHighestValueMember inferred [med] script command: returns the id of the battle member with the highest value (FUN_001ba3d4), 0 if none

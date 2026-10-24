@@ -11,7 +11,7 @@ int FUN_0030f000(...);
 typedef int romwright_code(...);
 extern unsigned char LAB_00123ad0; /* 0x123ad0 */
 
-extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned int *, unsigned char *);
+extern unsigned int _ZN9Obj55aff4C1EPKt(unsigned int *, unsigned char *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 /* Supplied declaration required: FUN_0030f000. */
@@ -34,7 +34,7 @@ int FUN_00123a7c(unsigned int param_1,unsigned int param_2,unsigned int param_3,
     temp_v0 = (**(romwright_code **)(*piVar1 + 8))();
     return temp_v0;
   }
-  temp_v1 = _ZN9Obj55aff4C1EPKc((unsigned int *)&uStack_18,&LAB_00123ad0);
+  temp_v1 = _ZN9Obj55aff4C1EPKt((unsigned int *)&uStack_18,&LAB_00123ad0);
   piVar1 = (int *)FUN_0030f000(param_1,temp_v1);
   _ZN9Obj55aff4D1Ev(&uStack_18);
   if (piVar1 != (int *)0x0) {

@@ -1,112 +1,98 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ddea0` (_code @ 0x2ddea0, 0x260 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the loop index in r5 and the record in r4, and loads the y/z operands of naviConfigureEntry as a vldmia pair (built evaluates z first) */
+#include "common.h"
+
+/* The engine record list as this function reads it: its 0x58-byte effect records with their kind word and
+ * the navigation slot assigned to them. */
+struct Vec4F {
+    f32 x, y, z, w;
+};
+
+struct NaviRecord {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ s32 state;
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0C */ Vec4F position;
+    /* 0x1C */ u8 unk1C[6];
+    /* 0x22 */ s16 frame;
+    /* 0x24 */ s16 kind;
+    /* 0x26 */ u8 unk26[2];
+    /* 0x28 */ s32 flagId;
+    /* 0x2C */ u8 unk2C[0x20];
+    /* 0x4C */ s32 follow;
+    /* 0x50 */ u8 unk50[4];
+    /* 0x54 */ s32 naviSlot;
+};
+
+struct NaviRecordList {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ s16 mapId;
+    /* 0x006 */ s16 areaId;
+    /* 0x008 */ u8 unk008[0x9C];
+    /* 0x0A4 */ NaviRecord records[32];
+    /* 0xBA4 */ u8 unkBA4[0x13C];
+    /* 0xCE0 */ s32 naviCount;
+};
 
 extern "C" {
 
-int FUN_00244c70(...);
-int sub68OwnerCall5(void);
-int naviConfigureEntry(int, int, int, int, int, int, int);
+extern NaviRecordList *g_engineRecordList;
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
+void sub68OwnerCall5(void);
+s32 gameFlagsTestSecondBank(s32 flag);
+s32 FUN_0033aa6c(s32 flag);
+void FUN_00244c70(u32 a, u32 id, s32 b, s32 frame, Vec4F position);
+void naviConfigureEntry(s32 index, s32 mapId, s32 areaId, s32 x, s32 y, s32 z, s32 flag);
 
-#ifndef ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
-#define ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
-/* Storage views; not a recovered source structure. */
-union romwright_storage_s__a_a_00587f08_9_1 {
-    char whole[9];
-    unsigned char u1[9];
-    signed char s1[9];
-};
-typedef char romwright_storage_s__a_a_00587f08_9_1_size_check[(sizeof(union romwright_storage_s__a_a_00587f08_9_1) == 9) ? 1 : -1];
-typedef char romwright_storage_s__a_a_00587f08_9_1_u1_width_check[(sizeof(((union romwright_storage_s__a_a_00587f08_9_1 *)0)->u1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_s__a_a_00587f08_9_1_s1_width_check[(sizeof(((union romwright_storage_s__a_a_00587f08_9_1 *)0)->s1[0]) == 1) ? 1 : -1];
-#endif
-extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 */
-
-/* Supplied declaration required: FUN_00244c70. */
-extern int FUN_0033aa6c(int);
-/* Supplied declaration required: sub68OwnerCall5. */
-/* Supplied declaration required: naviConfigureEntry. */
-extern int gameFlagsTestSecondBank(int);
-
-
+/* Reports each active record's pending talk/navigation event and registers the ones that need a navigation marker. */
 void FUN_002ddea0(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  sub68OwnerCall5();
-  temp_v4 = 0;
-  do {
-    temp_v3 = (*(unsigned int *)&s__a_a_00587f08.u1[0]) + temp_v4 * 0x58;
-    if (*(char *)(temp_v3 + 0xa4) != '\0') {
-      temp_v0 = *(short *)(temp_v3 + 200);
-      if ((((!(temp_v0 == 3 || temp_v0 == 4)) && (!(temp_v0 == 5 || temp_v0 == 7))) &&
-          (!(temp_v0 == 0xd || temp_v0 == 0xf))) &&
-         ((!(temp_v0 == 8 || temp_v0 == 9) && (!(temp_v0 == 10 || temp_v0 == 0x10))))) {
-        if (*(int *)(temp_v3 + 0xa8) == 1) {
-          if (*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 4) < 100) {
-            if (!((temp_v0 == 1 || temp_v0 == 0xb) || temp_v0 == 0xc)) {
-              if (*(int *)(temp_v3 + 0xf0) == 0) {
-                FUN_00244c70(0,0x1d,0xffffffff,(int)*(short *)(temp_v3 + 0xc6));
-              }
-            }
-            else {
-              temp_v2 = FUN_0033aa6c((int)(short)*(unsigned int *)(temp_v3 + 0xcc));
-              if (temp_v2 != 0) {
-                FUN_00244c70(0,0x23,0xffffffff,(int)*(short *)(temp_v3 + 0xc6));
-                if (*(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xce0) < 0x10) {
-                  naviConfigureEntry(*(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xce0),
-                               (int)*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 4),
-                               (int)*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 6),
-                               (int)*(float *)(temp_v3 + 0xb0),(int)*(float *)(temp_v3 + 0xb4),
-                               (int)*(float *)(temp_v3 + 0xb8),1);
-                  temp_v1 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);
-                  *(unsigned int *)(temp_v3 + 0xf8) = *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xce0);
-                  *(int *)(temp_v1 + 0xce0) = *(int *)(temp_v1 + 0xce0) + 1;
+    s32 i;
+
+    sub68OwnerCall5();
+    for (i = 0; i < 32; i++) {
+        NaviRecord *record = &g_engineRecordList->records[i];
+
+        if (record->active == 0) {
+            continue;
+        }
+        if (record->kind == 3 || record->kind == 4 || record->kind == 5 || record->kind == 7 ||
+            record->kind == 13 || record->kind == 15 || record->kind == 8 || record->kind == 9 ||
+            record->kind == 10 || record->kind == 16) {
+            if (gameFlagsTestSecondBank((s16)record->flagId) == 0) {
+                if (g_engineRecordList->mapId < 100) {
+                    if (record->kind == 7 || record->kind == 15 || record->kind == 16) {
+                        FUN_00244c70(0, 31, -1, record->frame, record->position);
+                    } else {
+                        FUN_00244c70(0, 30, -1, record->frame, record->position);
+                    }
+                } else {
+                    FUN_00244c70(0, 48, -1, record->frame, record->position);
                 }
-              }
-              else {
-                FUN_00244c70(0,0x22,0xffffffff,(int)*(short *)(temp_v3 + 0xc6));
-              }
             }
-          }
-          else {
-            FUN_00244c70(0,0x31,0xffffffff,(int)*(short *)(temp_v3 + 0xc6));
-          }
+        } else if (record->state == 1) {
+            if (g_engineRecordList->mapId < 100) {
+                if (record->kind == 1 || record->kind == 11 || record->kind == 12) {
+                    if (FUN_0033aa6c((s16)record->flagId) != 0) {
+                        FUN_00244c70(0, 35, -1, record->frame, record->position);
+                        if (g_engineRecordList->naviCount < 16) {
+                            naviConfigureEntry(g_engineRecordList->naviCount, g_engineRecordList->mapId,
+                                               g_engineRecordList->areaId, (s32)record->position.x,
+                                               (s32)record->position.y, (s32)record->position.z, 1);
+                            record->naviSlot = g_engineRecordList->naviCount;
+                            g_engineRecordList->naviCount++;
+                        }
+                    } else {
+                        FUN_00244c70(0, 34, -1, record->frame, record->position);
+                    }
+                } else if (record->follow == 0) {
+                    FUN_00244c70(0, 29, -1, record->frame, record->position);
+                }
+            } else {
+                FUN_00244c70(0, 49, -1, record->frame, record->position);
+            }
         }
-      }
-      else {
-        temp_v2 = gameFlagsTestSecondBank((int)(short)*(unsigned int *)(temp_v3 + 0xcc));
-        if (temp_v2 == 0) {
-          if (*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 4) < 100) {
-            temp_v0 = *(short *)(temp_v3 + 200);
-            if (!((temp_v0 == 7 || temp_v0 == 0xf) || temp_v0 == 0x10)) {
-              FUN_00244c70(0,0x1e,0xffffffff,(int)*(short *)(temp_v3 + 0xc6));
-            }
-            else {
-              FUN_00244c70(0,0x1f,0xffffffff,(int)*(short *)(temp_v3 + 0xc6));
-            }
-          }
-          else {
-            FUN_00244c70(0,0x30,0xffffffff,(int)*(short *)(temp_v3 + 0xc6));
-          }
-        }
-      }
     }
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 0x20);
-  return;
 }
 
 } /* extern "C" */

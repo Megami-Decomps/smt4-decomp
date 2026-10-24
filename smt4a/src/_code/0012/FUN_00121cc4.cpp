@@ -39,9 +39,9 @@ extern int FUN_0011456c(int);
 /* Supplied declaration required: FUN_00121b6c. */
 /* Supplied declaration required: FUN_00121c24. */
 /* Supplied declaration required: netSetPayload. */
-extern int FUN_00128cd0(int);
+extern int _ZN9Obj5584c8C1Ev(int);
 /* Supplied declaration required: FUN_002e7168. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int vectorInitEmpty(int);
 extern unsigned int *_ZN9Obj5593b8C1Ev(void);
 extern unsigned int FUN_002eac34(unsigned int);
@@ -78,7 +78,7 @@ int FUN_00121cc4(void)
   temp_v0 = temp_v0 + 0x30;
   FUN_001158c4(temp_v0);
   temp_v0 = FUN_002ecd54(temp_v0 + 0x14);
-  temp_v0 = FUN_00128cd0(temp_v0 + 0x23c);
+  temp_v0 = _ZN9Obj5584c8C1Ev(temp_v0 + 0x23c);
   temp_v0 = vectorInitEmpty(temp_v0 + 0x28);
   temp_v0 = FUN_002e7168(temp_v0 + 0xc,0x20000000);
   *(unsigned int *)(temp_v0 + 0x30) = 0;
@@ -97,14 +97,14 @@ int FUN_00121cc4(void)
     temp_v1 = 0x62daf0;
   }
   FUN_00121c24(temp_v1);
-  temp_v2 = operatorNew(0x2f0);
+  temp_v2 = _Znwj(0x2f0);
   piVar5 = (int *)0x0;
   if (temp_v2 != 0) {
     piVar5 = (int *)FUN_00106fa8();
   }
   *(int **)(temp_v0 - 0x2f4) = piVar5;
   (**(romwright_code **)(*piVar5 + 8))(temp_v6,piVar5);
-  temp_v2 = operatorNew(0x120);
+  temp_v2 = _Znwj(0x120);
   temp_v1 = 0;
   if (temp_v2 != 0) {
     temp_v1 = FUN_00113bc0();
@@ -115,7 +115,7 @@ int FUN_00121cc4(void)
   if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x18)) != '\0') {
     FUN_00121b54(temp_v3);
   }
-  temp_v2 = operatorNew(0xb0);
+  temp_v2 = _Znwj(0xb0);
   temp_v1 = 0;
   if (temp_v2 != 0) {
     temp_v1 = FUN_002f7a28();
@@ -124,7 +124,7 @@ int FUN_00121cc4(void)
   temp_v4 = 0x4030201;
   temp_v5 = 0x8070605;
   netSetPayload(&temp_v4,8);
-  temp_v2 = operatorNew(0x2c);
+  temp_v2 = _Znwj(0x2c);
   temp_v1 = 0;
   if (temp_v2 != 0) {
     temp_v1 = FUN_00113764();

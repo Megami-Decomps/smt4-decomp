@@ -6,7 +6,7 @@ extern "C" {
 
 int contentEntryFlagTest(void);
 int FUN_0029a17c(...);
-int FUN_0029cde0(...);
+int arrayContainsU16(...);
 int FUN_0029efa8(...);
 int FUN_002b6c34(...);
 int FUN_002bdf94(...);
@@ -59,7 +59,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int FUN_0029a924(unsigned short);
 extern int FUN_0029aafc(void);
 extern int flagCountUnlockedSlots(int);
-/* Supplied declaration required: FUN_0029cde0. */
+/* Supplied declaration required: arrayContainsU16. */
 extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_0029efa8. */
 extern int gameGetUnitRecord(int);
@@ -214,7 +214,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
           temp_v2 = 0xff;
           temp_v17 = *(unsigned short *)(temp_v27 + 0x24);
           temp_v5 = temp_v13;
-          FUN_0029cde0(temp_v13,*(unsigned int *)(temp_v23 + 0x2c4),*(unsigned short *)(temp_v27 + 0x14));
+          arrayContainsU16(temp_v13,*(unsigned int *)(temp_v23 + 0x2c4),*(unsigned short *)(temp_v27 + 0x14));
           if (temp_v5 != 0) {
             temp_v2 = 0x8400ff;
           }
@@ -330,7 +330,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
       temp_v2 = 0xffffffff;
       temp_v8 = *(unsigned short *)(temp_v3 + 0xd124) & 0xff;
       temp_v5 = temp_v13;
-      FUN_0029cde0(temp_v13,*(unsigned int *)(temp_v23 + 0x2c4),*(unsigned short *)(temp_v3 + 0xd114));
+      arrayContainsU16(temp_v13,*(unsigned int *)(temp_v23 + 0x2c4),*(unsigned short *)(temp_v3 + 0xd114));
       if (temp_v5 != 0) {
         temp_v2 = 0x8400ff;
       }
@@ -402,7 +402,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
             temp_v2 = 0x5a5a5aff;
           }
           temp_v5 = temp_v13;
-          FUN_0029cde0(temp_v13,*(unsigned int *)(temp_v23 + 0x2c4),*(unsigned short *)(temp_v22 + 0x34));
+          arrayContainsU16(temp_v13,*(unsigned int *)(temp_v23 + 0x2c4),*(unsigned short *)(temp_v22 + 0x34));
           if (temp_v5 != 0) {
             temp_v2 = 0x5a5a5aff;
           }
@@ -517,7 +517,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
       temp_v2 = 0x5a5a5aff;
     }
     temp_v5 = temp_v13;
-    FUN_0029cde0(temp_v13,*(unsigned int *)(temp_v23 + 0x2c4),*(unsigned short *)(temp_v1 + 0x34));
+    arrayContainsU16(temp_v13,*(unsigned int *)(temp_v23 + 0x2c4),*(unsigned short *)(temp_v1 + 0x34));
     if (temp_v5 != 0) {
       temp_v2 = 0x5a5a5aff;
     }

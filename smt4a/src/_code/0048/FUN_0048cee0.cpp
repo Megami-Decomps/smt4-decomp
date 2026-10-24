@@ -1,101 +1,86 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048cee0` (_code @ 0x48cee8, 0x230 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the schedule of the category extent loads in the centers computation and two load registers of the origin sum differ; everything else is identical. */
+#include "gamedata/MapNaviCategories.h"
+
+/* One 8-byte position pair of the navigation display. */
+struct NaviPoint {
+    s32 x;
+    s32 y;
+};
+
+/* The navigation work: a background texture and per-slot layout tables. */
+struct NaviLayoutWork {
+    u8 unk0000[0x1480];
+    s32 textureIndex;           // 0x1480
+    u8 unk1484[8];
+    NaviPoint origins[32];      // 0x148C
+    NaviPoint centers[32];      // 0x158C
+    NaviPoint extents[32];      // 0x168C
+    u8 unk178C[0x7B91 - 0x178C - 0];
+    u8 layoutReady;             // 0x7B91
+};
+
+/* A data table 0x2E entry; only its map id and texture offset are used here. */
+struct NaviMapEntry {
+    u8 unk00[0x20];
+    s16 mapId;                  // 0x20
+    u8 unk22[8];
+    s16 textureOffset;          // 0x2A
+};
 
 extern "C" {
+s32 dataTable2ECount(void);
+NaviMapEntry *dataTable2EGetEntry(s32 index);
+s32 asdTMTexTableReleaseNode(s32 table, s32 node);
+void FUN_0014afd0(s32 table, s32 index);
+u8 *asdTMTexTableGetHeaderValue(s32 table, s32 index);
+s32 MapNaviTable_GetCategoryCount(MapNaviTableContext *table);
+MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext *table, s32 index);
+void FUN_0048e46c(NaviLayoutWork *work, s32 map);
 
-int FUN_0014afd0(int, int);
-int dataTable2ECount(void);
-int FUN_0048e46c(int, int);
-int MapNaviTable_GetCategoryCount(void);
-
-/* Supplied declaration required: FUN_0014afd0. */
-extern int asdTMTexTableGetHeaderValue(unsigned int, int);
-extern int asdTMTexTableReleaseNode(unsigned int);
-extern int dataTable2EGetEntry(int);
-/* Supplied declaration required: dataTable2ECount. */
-/* Supplied declaration required: FUN_0048e46c. */
-/* Supplied declaration required: MapNaviTable_GetCategoryCount. */
-extern short *MapNaviTable_GetCategoryRecord(unsigned int *, int);
-
-
-void FUN_0048cee0(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Load the navigation background of a map and build each category slot's layout from the category table. */
+void FUN_0048cee0(NaviLayoutWork *work, s32 map)
 {
-/* irregular: 4 native warning(s); review required */
-  char temp_v0;
-  char temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  short *psVar5;
-  int temp_v3;
-  int temp_v4;
-  int *piVar8;
-  int uStack_20;
-  
-  piVar8 = (int *)(param_1 + 0x1480);
-  temp_v2 = param_1;
-  uStack_20 = param_4;
-  if (*piVar8 != 0) {
-    temp_v2 = asdTMTexTableReleaseNode(0x28);
-    *piVar8 = 0;
-  }
-  temp_v3 = 0;
-  dataTable2ECount();
-  if (0 < temp_v2) {
-    do {
-      temp_v2 = dataTable2EGetEntry(temp_v3);
-      if (*(short *)(temp_v2 + 0x20) == -1) break;
-      if (*(short *)(temp_v2 + 0x20) == param_2) {
-        *piVar8 = *(short *)(temp_v2 + 0x2a) + 1;
-        break;
-      }
-      temp_v3 = temp_v3 + 1;
-      dataTable2ECount();
-    } while (temp_v3 < temp_v2);
-  }
-  FUN_0014afd0(0x28,*piVar8);
-  temp_v2 = asdTMTexTableGetHeaderValue(0x28,*piVar8);
-  temp_v3 = 0;
-  temp_v4 = 0x20;
-  *(unsigned int *)(temp_v2 + 0x3c) = 1;
-  do {
-    temp_v2 = param_1 + temp_v3 * 8;
-    *(unsigned int *)(temp_v2 + 0x148c) = 0;
-    *(unsigned int *)(temp_v2 + 0x1490) = 0;
-    *(unsigned int *)(temp_v2 + 0x158c) = 0;
-    *(unsigned int *)(temp_v2 + 0x1590) = 0;
-    *(unsigned int *)(temp_v2 + 0x168c) = 0;
-    temp_v4 = temp_v4 - 1;
-    temp_v3 = temp_v3 + 1;
-    *(unsigned int *)(temp_v2 + 0x1690) = 0;
-  } while (temp_v4 != 0);
-  puVar4 = (unsigned int *)&uStack_20;
-  MapNaviTable_GetCategoryCount();
-  temp_v2 = 0;
-  if (temp_v2 < (int)puVar4) {
-    do {
-      psVar5 = (short *)MapNaviTable_GetCategoryRecord((unsigned int *)&uStack_20,temp_v2);
-      if (*psVar5 == param_2) {
-        *(int *)(param_1 + psVar5[1] * 8 + 0x148c) = (int)psVar5[8] + (int)psVar5[6];
-        *(int *)(param_1 + psVar5[1] * 8 + 0x1490) = (int)psVar5[7] + (int)psVar5[9];
-        temp_v0 = *(char *)((int)psVar5 + 9);
-        temp_v1 = *(char *)((int)psVar5 + 7);
-        *(int *)(param_1 + psVar5[1] * 8 + 0x158c) =
-             (int)psVar5[6] + (((int)(char)psVar5[4] - (int)(char)psVar5[3]) * 0xc) / 2;
-        *(int *)(param_1 + psVar5[1] * 8 + 0x1590) =
-             (int)psVar5[7] + (((int)temp_v0 - (int)temp_v1) * 0xc) / 2;
-        *(int *)(param_1 + psVar5[1] * 8 + 0x168c) = (int)(char)psVar5[3];
-        *(int *)(param_1 + psVar5[1] * 8 + 0x1690) = (int)*(char *)((int)psVar5 + 7);
-      }
-      temp_v2 = temp_v2 + 1;
-      puVar4 = (unsigned int *)&uStack_20;
-      MapNaviTable_GetCategoryCount();
-    } while (temp_v2 < (int)puVar4);
-  }
-  FUN_0048e46c(param_1,param_2);
-  *(unsigned char *)(param_1 + 0x7b91) = 1;
-  return;
+    s32 i;
+    if (map == -1) {
+        return;
+    }
+    if (work->textureIndex != 0) {
+        asdTMTexTableReleaseNode(0x28, work->textureIndex);
+        work->textureIndex = 0;
+    }
+    for (i = 0; i < dataTable2ECount(); i++) {
+        NaviMapEntry *entry = dataTable2EGetEntry(i);
+        if (entry->mapId == -1) {
+            break;
+        }
+        if (entry->mapId == map) {
+            work->textureIndex = entry->textureOffset + 1;
+            break;
+        }
+    }
+    FUN_0014afd0(0x28, work->textureIndex);
+    *(u32 *)(asdTMTexTableGetHeaderValue(0x28, work->textureIndex) + 0x3c) = 1;
+    for (i = 0; i < 32; i++) {
+        work->origins[i].x = 0;
+        work->origins[i].y = 0;
+        work->centers[i].x = 0;
+        work->centers[i].y = 0;
+        work->extents[i].x = 0;
+        work->extents[i].y = 0;
+    }
+    MapNaviTableContext table;
+    for (i = 0; i < MapNaviTable_GetCategoryCount(&table); i++) {
+        MapNaviCategoryRecord *record = MapNaviTable_GetCategoryRecord(&table, i);
+        if (record->id == map) {
+            work->origins[record->slot].x = record->placement.originX + record->placement.offsetX;
+            work->origins[record->slot].y = record->placement.originY + record->placement.offsetY;
+            work->centers[record->slot].x = record->placement.originX + (record->endX - record->startX) * 12 / 2;
+            work->centers[record->slot].y = record->placement.originY + (record->endY - record->startY) * 12 / 2;
+            work->extents[record->slot].x = record->startX;
+            work->extents[record->slot].y = record->startY;
+        }
+    }
+    FUN_0048e46c(work, map);
+    work->layoutReady = 1;
 }
-
-} /* extern "C" */
+}

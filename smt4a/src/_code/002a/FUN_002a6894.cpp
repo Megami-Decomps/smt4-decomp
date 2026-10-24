@@ -1,42 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a6894` (_code @ 0x2a6894, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only register assignment differs (retail keeps the save block in ip and the raw id in r3; ours swaps them). */
+#include "shard/W4_W4Match6b_GameDataBlock.h"
 
 extern "C" {
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_1_stack;
+/* Part of the save block's allocation beyond GameSaveData: a bit set of seen ids. */
+struct SaveBody {
+    /* 0x00000 */ u8 unk00000[0x27E50];
+    /* 0x27E50 */ u8 seenBits[63];
+};
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+/* The raw save block: a 0x88-byte header, then the body. */
+struct SaveBlockView {
+    /* 0x00 */ u8 header[0x88];
+    /* 0x88 */ SaveBody body;
+};
 
+/* A record whose eight ids start at 0x34. */
+struct IdList {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ u16 ids[8];
+};
 
-void FUN_002a6894(int param_1)
-
+/* Marks an id (1 to 500) as seen in the save block. */
+static __inline void saveMarkIdSeen(SaveBlockView *save, s16 id)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char *pbVar4;
-  unsigned char temp_v3;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4));
-  temp_v2 = 0;
-  do {
-    temp_v1 = param_1 + temp_v2 * 2;
-    temp_v3 = *(short *)(temp_v1 + 0x34) != 0;
-    if (temp_v3) {
-      temp_v1 = (unsigned int)*(short *)(temp_v1 + 0x34);
+    if (id != 0 && (u32)id <= 500) {
+        SaveBody *body = &save->body;
+        u8 *byte = &body->seenBits[id / 8];
+        *byte |= 1 << (id % 8);
     }
-    if ((temp_v3 && temp_v1 != 0) && (temp_v1 < 0x1f5)) {
-      pbVar4 = (unsigned char *)(temp_v0 + ((int)(temp_v1 + ((unsigned int)((int)temp_v1 >> 0x1f) >> 0x1d)) >> 3) + 0x27ed8
-                       );
-      *pbVar4 = *pbVar4 | (unsigned char)(1 << (((int)temp_v1 % 8) & 0xffU));
+}
+
+/* Marks every id of the list as seen. */
+void FUN_002a6894(IdList *list)
+{
+    SaveBlockView *save = (SaveBlockView *)g_gameDataBlocks.saveBlock;
+
+    for (s32 i = 0; i < 8; i++) {
+        if (list->ids[i] != 0) {
+            saveMarkIdSeen(save, list->ids[i]);
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 8);
-  return;
 }
 
 } /* extern "C" */

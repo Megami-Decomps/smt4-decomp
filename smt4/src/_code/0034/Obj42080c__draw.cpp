@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023b4f4(int *, unsigned char [64], int *, int);
-int FUN_0023b5e0(int, unsigned char [64], int);
+int titleSceneMultiplyByCameraView(int, unsigned char [64], int);
 int gpuSubmitFloatVectorsOrDefault(int *);
 int forwardRecoveredCallback(void);
 int FUN_002b011c(void);
@@ -32,7 +32,7 @@ typedef struct {
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_0023b4f4. */
-/* Supplied declaration required: FUN_0023b5e0. */
+/* Supplied declaration required: titleSceneMultiplyByCameraView. */
 /* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: FUN_002b011c. */
@@ -74,7 +74,7 @@ void Obj42080c::draw()
   
   temp_v4 = -11.0f;
   FUN_002c1b64(g_titleScene,*(unsigned int *)(*(int *)(param_1 + 8) + 8));
-  FUN_0023b5e0(param_1,temp_v14,param_1 + 0x18);
+  titleSceneMultiplyByCameraView(param_1,temp_v14,param_1 + 0x18);
   temp_v1 = g_titleScene;
   piVar6 = (int *)(g_titleScene + 0x12ac);
   temp_v0 = *(int *)(*(int *)(param_1 + 0x60) + 0x18);

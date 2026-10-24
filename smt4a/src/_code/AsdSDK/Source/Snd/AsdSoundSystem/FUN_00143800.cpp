@@ -7,7 +7,7 @@ void FUN_00143800(void)
   int iVar1;
   
   FUN_00188b60(&DAT_0063f4f0);
-  iVar1 = FUN_001b1f04();
+  iVar1 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
   *(unsigned int *)(iVar1 + 0x1ec) = 0;
   coproc_moveto_Data_Memory_Barrier(0);
   *(code **)(iVar1 + 0x1e8) = FUN_00154320;

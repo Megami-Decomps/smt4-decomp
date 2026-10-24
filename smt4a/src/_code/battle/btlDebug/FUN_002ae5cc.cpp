@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016432c(...);
+int dataTable25FindById(...);
 int FUN_00164b5c(...);
 int FUN_0018152c(...);
 int FUN_00184310(void);
@@ -108,7 +108,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int gameGetPlayerName(void);
 extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_0016432c. */
+/* Supplied declaration required: dataTable25FindById. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: vec2GetXInt. */
 extern int vec2GetYInt(int);
@@ -1124,7 +1124,7 @@ LAB_002afb00:
                    (*(short *)(temp_v4 + 10) + temp_v16) - temp_v28,0x42,0);
       FUN_00183bb0();
       temp_v11 = (unsigned int)*(unsigned short *)(temp_v3 + 300);
-      FUN_0016432c(temp_v11);
+      dataTable25FindById(temp_v11);
       textFormatBuffer(temp_v32,temp_v11);
       temp_v4 = FUN_001834a4(0xd,0x6e);
       temp_v20 = 0.0f;

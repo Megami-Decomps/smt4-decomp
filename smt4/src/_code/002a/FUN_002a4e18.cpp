@@ -1,40 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a4e18` (_code @ 0x2a4e18, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002adde8(unsigned int, unsigned int, int);
+struct BustupAnim {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 handle;
+};
 
-extern int g_bustupCutAnim; /* 0x43dfc0 */
+/* The bust-up cut animation state: its animation at 0x5E4 and a vertical offset at 0x640. */
+struct BustupCutAnim {
+    /* 0x000 */ u8 unk000[0x5E4];
+    /* 0x5E4 */ BustupAnim *anim;
+    /* 0x5E8 */ u8 unk5E8[0x58];
+    /* 0x640 */ f32 offset;
+};
 
-/* Supplied declaration required: FUN_002adde8. */
-extern int FUN_002adee0(void);
+/* A position record with a height at 8. */
+struct Placement {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ f32 y;
+};
 
+extern BustupCutAnim *g_bustupCutAnim;
+extern u32 DAT_0043e048[];
+s32 FUN_002adee0(void);
+u32 FUN_002adde8(u32 handle, u32 mode, Placement *placement);
 
-unsigned int FUN_002a4e18(int param_1,int param_2)
-
+/* Applies the bust-up animation `mode` to a placement (adding the cut offset in mode 0); 1 if unavailable. */
+u32 FUN_002a4e18(Placement *placement, s32 mode)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = g_bustupCutAnim;
-  if (g_bustupCutAnim == 0) {
-    temp_v1 = 0;
-  }
-  else {
-    if ((*(int *)(g_bustupCutAnim + 0x5e4) == 0) || (temp_v2 = FUN_002adee0(), temp_v2 == 0)) {
-      return 1;
+    BustupCutAnim *cut = g_bustupCutAnim;
+    u32 result;
+
+    if (cut == NULL) {
+        return 0;
     }
-    temp_v1 = *(unsigned int *)(*(int *)(temp_v0 + 0x5e4) + 8);
-    FUN_002adde8(temp_v1,*(unsigned int *)(param_2 * 4 + 0x43e048),param_1);
-    if (param_2 == 0) {
-      *(float *)(param_1 + 8) = *(float *)(param_1 + 8) + *(float *)(temp_v0 + 0x640);
+    if (cut->anim == NULL || FUN_002adee0() == 0) {
+        return 1;
     }
-  }
-  return temp_v1;
+    result = FUN_002adde8(cut->anim->handle, DAT_0043e048[mode], placement);
+    if (mode == 0) {
+        placement->y += cut->offset;
+    }
+    return result;
 }
 
 } /* extern "C" */

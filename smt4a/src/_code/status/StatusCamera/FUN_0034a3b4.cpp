@@ -7,7 +7,7 @@ extern StatusCameraWorkA *g_statusCamera;
 extern void *g_handleRegistry;
 void sysMemClear(void *memory, u32 size);
 void FUN_00154180(s32 x, s32 y, s32 width, s32 height);
-void FUN_0013c884(StatusCameraWorkA *camera, s32 mode);
+void asdCameraInitializeDefaults(StatusCameraWorkA *camera, s32 mode);
 void FUN_0014f0dc(StatusCameraWorkA *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
 void FUN_001523b8(StatusCameraWorkA *camera, s32 mode, f32 fov, f32 nearClip, f32 farClip, f32 aspect);
 void FUN_0036b824(StatusCameraWorkA *camera);
@@ -38,7 +38,7 @@ void FUN_0034a3b4(void)
         target.y += camera->dir.y * camera->dist;
         target.z += camera->dir.z * camera->dist;
         FUN_00154180(200, 0, 200, 240);
-        FUN_0013c884(camera, 1);
+        asdCameraInitializeDefaults(camera, 1);
         FUN_0014f0dc(camera, &camera->eye, &target, &up);
         FUN_001523b8(camera, 1, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip, 1.6666666f);
         FUN_0036b824(camera);

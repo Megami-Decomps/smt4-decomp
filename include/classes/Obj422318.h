@@ -7,6 +7,7 @@ extern "C" {
 int asdMemFreeNonNull(void *block);
 int asdMdlManagerMarkDestroy(u32 handle);
 int asdMdlManagerDestroy(u32 handle);
+void *asdOperatorNew(u32 bytes);
 }
 
 /* The child an Obj422318 deletes on destruction. */
@@ -24,6 +25,7 @@ class Obj422318 {
 public:
     Obj422318(s32 mode);
     static void *operator new(u32, void *storage) throw() { return storage; }
+    static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
     /* Deletes the child, then marks the handle for destruction and destroys it. */
     virtual ~Obj422318()
     {

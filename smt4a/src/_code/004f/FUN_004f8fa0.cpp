@@ -1,42 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f8fa0` (_code @ 0x4f8fa0, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation/addressing only: retail forms the slot address as owner + i*16 and uses the +0x960.. displacements in each access (saving r9/sl); the build folds +0x960 into a slot pointer. */
+#include "common.h"
+
+/* An object released through slot 1 of its vtable. */
+class ReleasableObject {
+public:
+    virtual void slot0();
+    virtual void release();
+    /* 0x04 */ u32 handle;
+};
+
+/* One 0x10-byte slot: a registered object (removed from the handle registry before release), a second object and a counter. */
+struct ObjectSlot {
+    /* 0x0 */ ReleasableObject *registered;
+    /* 0x4 */ u32 unk4;
+    /* 0x8 */ ReleasableObject *owned;
+    /* 0xC */ u32 unkC;
+};
+
+/* An owner with 109 slots from +0x960. */
+struct SlotOwner {
+    /* 0x000 */ u8 unk000[0x960];
+    /* 0x960 */ ObjectSlot slots[109];
+};
 
 extern "C" {
 
-int ptrListRemoveClearOwner(unsigned int, unsigned int);
+extern u32 g_handleRegistry; /* 0x56fcc0 */
+void ptrListRemoveClearOwner(u32 registry, u32 handle);
 
-typedef int romwright_code(...);
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-
-/* Supplied declaration required: ptrListRemoveClearOwner. */
-
-
-void FUN_004f8fa0(int param_1)
-
+/* Releases the objects of all 109 slots and clears them. */
+void FUN_004f8fa0(SlotOwner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = 0;
-  do {
-    temp_v1 = param_1 + temp_v0 * 0x10;
-    if (*(int **)(temp_v1 + 0x968) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(temp_v1 + 0x968) + 4))();
-      *(unsigned int *)(temp_v1 + 0x968) = 0;
+    for (u32 i = 0; i < 109; i++) {
+        ObjectSlot *slot = &owner->slots[i];
+
+        if (slot->owned != NULL) {
+            slot->owned->release();
+            slot->owned = NULL;
+        }
+        if (slot->registered != NULL) {
+            ptrListRemoveClearOwner(g_handleRegistry, slot->registered->handle);
+            if (slot->registered != NULL) {
+                slot->registered->release();
+                slot->registered = NULL;
+            }
+        }
+        slot->unkC = 0;
     }
-    if (*(int *)(temp_v1 + 0x960) != 0) {
-      ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v1 + 0x960) + 4));
-      if (*(int **)(temp_v1 + 0x960) != (int *)0x0) {
-        (**(romwright_code **)(**(int **)(temp_v1 + 0x960) + 4))();
-        *(unsigned int *)(temp_v1 + 0x960) = 0;
-      }
-    }
-    temp_v0 = temp_v0 + 1;
-    *(unsigned int *)(temp_v1 + 0x96c) = 0;
-  } while (temp_v0 < 0x6d);
-  return;
 }
 
 } /* extern "C" */

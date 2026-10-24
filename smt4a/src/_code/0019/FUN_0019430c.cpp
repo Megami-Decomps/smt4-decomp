@@ -67,8 +67,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0019a270. */
 /* Supplied declaration required: FUN_001a063c. */
-extern int FUN_001a0778(int, int);
-extern int FUN_001a07c4(int, int *, int);
+extern int gpuCmdPadToAlign16(int, int);
+extern int gpuCmdWriteCopy(int, int *, int);
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
 
 
@@ -245,9 +245,9 @@ void FUN_0019430c(fn_0019430c_arg0 *param_1,int *param_2,int param_3,int param_4
       temp_v2 = *param_2;
       temp_v3 = pfVar10->field_0x2c;
       if (temp_v2 != 0 && temp_v3 != 0) {
-        temp_v2 = FUN_001a0778(temp_v2,((temp_v2 - param_2[2]) & 0xfffffffcU) + 0x18);
+        temp_v2 = gpuCmdPadToAlign16(temp_v2,((temp_v2 - param_2[2]) & 0xfffffffcU) + 0x18);
         *param_2 = temp_v2;
-        temp_v2 = FUN_001a07c4(temp_v2,temp_v17,temp_v3);
+        temp_v2 = gpuCmdWriteCopy(temp_v2,temp_v17,temp_v3);
         *param_2 = temp_v2;
         if ((unsigned int *)param_2[3] != (unsigned int *)0x0) {
           *(unsigned int *)param_2[3] = (unsigned int)(temp_v2 - param_2[2]) >> 3;

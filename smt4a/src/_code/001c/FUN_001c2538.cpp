@@ -9,7 +9,7 @@ int FUN_001cbd44(...);
 int FUN_001cbf64(...);
 int FUN_001cc084(...);
 int FUN_001d0984(...);
-int FUN_002ffa9c(...);
+int __aeabi_uldivmod(...);
 int nw_snd_internal_driver_StreamBufferPool_Alloc(...);
 int nw_snd_internal_driver_StreamBufferPool_Free(...);
 int nw_snd_internal_driver_Voice_Free(...);
@@ -30,7 +30,7 @@ extern int nw_snd_internal_driver_VoiceManager_GetInstance(void);
 /* Supplied declaration required: FUN_001cc084. */
 extern int FUN_001cc570(int *, int *);
 /* Supplied declaration required: FUN_001d0984. */
-/* Supplied declaration required: FUN_002ffa9c. */
+/* Supplied declaration required: __aeabi_uldivmod. */
 extern unsigned int __aeabi_uidivmod(unsigned int);
 /* Supplied declaration required: nw_snd_internal_driver_StreamBufferPool_Alloc. */
 /* Supplied declaration required: nw_snd_internal_driver_StreamBufferPool_Free. */
@@ -188,14 +188,14 @@ LAB_001c28e0:
                   else if ((char)param_1[0x1f] == '\x01') {
                     temp_v7 = param_1[0x20];
                     temp_v5 = param_1[0x23];
-                    FUN_002ffa9c((int)((unsigned long long)temp_v5 * (unsigned long long)temp_v7),
+                    __aeabi_uldivmod((int)((unsigned long long)temp_v5 * (unsigned long long)temp_v7),
                                  ((int)temp_v7 >> 0x1f) * temp_v5 +
                                  (int)((unsigned long long)temp_v5 * (unsigned long long)temp_v7 >> 0x20),1000,0);
                     if (temp_v4 != 0) {
                       temp_v2 = -1;
                     }
                     else {
-                      temp_v2 = FUN_002ffa9c((int)((unsigned long long)temp_v5 * (unsigned long long)temp_v7),
+                      temp_v2 = __aeabi_uldivmod((int)((unsigned long long)temp_v5 * (unsigned long long)temp_v7),
                                            ((int)temp_v7 >> 0x1f) * temp_v5 +
                                            (int)((unsigned long long)temp_v5 * (unsigned long long)temp_v7 >> 0x20),1000,0
                                           );

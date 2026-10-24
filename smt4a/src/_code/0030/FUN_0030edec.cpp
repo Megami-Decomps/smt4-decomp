@@ -5,7 +5,7 @@
 extern "C" {
 
 int _ZN9Obj55aff4aSERKS_(int, int);
-int FUN_003079ae(int *, int, int);
+int _ZNSt6vectorI9Obj55aff412AsdAllocatorIS0_EE10_C_destroyEPS0_S4_(int *, int, int);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
-/* Supplied declaration required: FUN_003079ae. */
+/* Supplied declaration required: _ZNSt6vectorI9Obj55aff412AsdAllocatorIS0_EE10_C_destroyEPS0_S4_. */
 
 
 unsigned long long FUN_0030edec(int *param_1,int param_2,int param_3)
@@ -37,7 +37,7 @@ unsigned long long FUN_0030edec(int *param_1,int param_2,int param_3)
       _ZN9Obj55aff4aSERKS_(temp_v0,temp_v1);
       temp_v0 = temp_v0 + 8;
     }
-    FUN_003079ae(param_1,temp_v0,param_1[1]);
+    _ZNSt6vectorI9Obj55aff412AsdAllocatorIS0_EE10_C_destroyEPS0_S4_(param_1,temp_v0,param_1[1]);
     param_1[1] = param_1[1] - ((param_3 - param_2) & 0xfffffff8U);
   }
   return romwright_piece_4_4(param_1,param_2);

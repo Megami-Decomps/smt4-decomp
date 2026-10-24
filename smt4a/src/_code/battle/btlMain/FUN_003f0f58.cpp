@@ -1,99 +1,100 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f0f58` (_code @ 0x3f0f58, 0x154 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: svc 0x24 (through the wrapper) and the (result, failed) fatal-error calls match; retail materializes the timeout test as a bool (movne/moveq/teq) before branching, predicates the wait arguments ahead of the branch, and keeps the thread argument at sp+32 after the descriptor. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+#include "nn/os/ThreadLaunch.h"
+#include "nn/Result.h"
+#include "nn/svc.h"
+
+extern "C" void *asdOperatorNew(u32 bytes);
+
+/* The storage that owns the worker thread's stack (nn::os::ThreadStackStorage). */
+struct WorkerStack {
+    u32 unk00;
+    u32 unk04;
+    u32 address;  // 0x08
+    u32 size;     // 0x0c
+    u8 owned;     // 0x10
+    u8 unk11[7];
+
+    WorkerStack() : unk00(0), unk04(0), address(0), size(0), owned(0) {}
+    static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
+};
+
+/* The kernel handle of the worker thread. */
+struct WorkerThread {
+    u32 handle;  // 0x00
+    u8 joined;   // 0x04
+    u8 unk05[3];
+};
+
+/* The battle state's worker: its thread, the stack memory and the stack storage. */
+struct BattleWorkerState {
+    /* 0x0000 */ u8 unk0000[0x4cf8];
+    /* 0x4cf8 */ WorkerThread thread;
+    /* 0x4d00 */ void *stackMemory;
+    /* 0x4d04 */ WorkerStack *stack;
+    /* 0x4d08 */ u8 unk4d08[4];
+    /* 0x4d0c */ u8 lock[0x14];
+};
+
+/* What the thread entry receives: its argument descriptor and the pointer it copies. */
+struct WorkerStartContext {
+    ThreadArgumentDescriptor descriptor;
+    BattleWorkerState *state;
+};
 
 extern "C" {
+extern const char DAT_00528898[]; /* the source file name for the allocation trace */
 
-int asdOperatorNew(...);
-int memAlloc(...);
-int resultReportIfFailed(...);
-int nn_os_CriticalSection_Initialize(...);
-int FUN_002e3140(...);
-int FUN_002fb0d4(...);
-int software_interrupt(...);
+void nn_os_CriticalSection_Initialize(void *section);
+void *memAlloc(s32 heap, s32 alignment, s32 flags, s32 size, s32 stackAlignment, s32 clear);
+s32 resultReportIfFailed(WorkerStack *stack, void *memory, u32 size);
+s32 svcWaitSynchronization1(u32 handle, s64 timeout);
+s32 FUN_002fb0d4(WorkerThread *thread, const ThreadArgumentDescriptor *descriptor,
+                 void (*entry)(void *), const void *argument, u32 stackTop, s32 priority,
+                 s32 processor, u32 options);
+void FUN_003f0794(void *argument);
+void FUN_00514a24(void);
+void FUN_00514b74(void);
+void FUN_00514ae4(void);
+void FUN_002e3140(s32 result, bool failed);
 
-/* stack frame of param_1: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_1_stack;
-
-extern int FUN_003f0794(...); /* 0x3f0794 */
-extern unsigned char LAB_00514a24; /* 0x514a24 */
-extern unsigned char LAB_00514ae4; /* 0x514ae4 */
-extern unsigned char LAB_00514b74; /* 0x514b74 */
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: resultReportIfFailed. */
-/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-/* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002fb0d4. */
-
-
-void FUN_003f0f58(int param_1)
-
+/* Starts the battle state's worker thread on its own 4 KiB stack, unless it is still running. */
+void FUN_003f0f58(BattleWorkerState *state)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  int *piVar4;
-  unsigned int *puVar5;
-  int temp_v2;
-  unsigned char *temp_v3;
-  unsigned char *temp_v4;
-  unsigned char *temp_v5;
-  int temp_v6 [2];
-  
-  nn_os_CriticalSection_Initialize(param_1 + 0x4d0c);
-  if (*(int *)(param_1 + 0x4d00) == 0) {
-    temp_v0 = 0x100;
-    memAlloc(0x100,0x100,0,0x1000,0x1000,1);
-    *(int *)(param_1 + 0x4d00) = temp_v0;
-  }
-  piVar4 = (int *)(param_1 + 0x4d04);
-  if (*piVar4 == 0) {
-    puVar2 = (unsigned int *)0x18;
-    asdOperatorNew();
-    if (puVar2 != (unsigned int *)0x0) {
-      *puVar2 = 0;
-      puVar2[1] = 0;
-      puVar2[2] = 0;
-      puVar2[3] = 0;
-      *(unsigned char *)(puVar2 + 4) = 0;
+    nn_os_CriticalSection_Initialize(state->lock);
+    if (state->stackMemory == NULL) {
+        asdDebugTrace(DAT_00528898, 0x148f);
+        state->stackMemory = memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
     }
-    *piVar4 = (int)puVar2;
-    resultReportIfFailed();
-  }
-  puVar5 = (unsigned int *)(param_1 + 0x4cf8);
-  temp_v1 = *puVar5;
-  if (temp_v1 != 0) {
-    software_interrupt(0x24);
-    if ((int)temp_v1 < 0) {
-      FUN_002e3140();
+    if (state->stack == NULL) {
+        state->stack = new WorkerStack();
+        resultReportIfFailed(state->stack, state->stackMemory, 0x1000);
     }
-    if ((temp_v1 & 0x3ff) == 0x3fe) {
-      return;
+    if (state->thread.handle != 0) {
+        s32 result = svcWaitSynchronization1(state->thread.handle, 0);
+        bool failed = nnResultIsFailure(result);
+        if (failed) {
+            FUN_002e3140(result, failed);
+        }
+        nnResultFields code;
+        code.value = result;
+        if (code.fields.description == 0x3fe) {
+            return;
+        }
     }
-  }
-  temp_v2 = 4;
-  temp_v3 = &LAB_00514a24;
-  temp_v4 = &LAB_00514b74;
-  temp_v5 = &LAB_00514ae4;
-  temp_v6[0] = param_1;
-  FUN_002fb0d4(puVar5,&temp_v2,FUN_003f0794,temp_v6,
-               *(int *)(*piVar4 + 0xc) + *(int *)(*piVar4 + 8),0x11,0,0);
-  if ((int)puVar5 < 0) {
-    FUN_002e3140();
-  }
-  return;
+    WorkerStartContext context;
+    context.descriptor.argumentSize = sizeof(state);
+    context.descriptor.callbacks[0] = FUN_00514a24;
+    context.descriptor.callbacks[1] = FUN_00514b74;
+    context.descriptor.callbacks[2] = FUN_00514ae4;
+    context.state = state;
+    s32 result = FUN_002fb0d4(&state->thread, &context.descriptor, FUN_003f0794, &context.state,
+                              state->stack->address + state->stack->size, 0x11, 0, 0);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002e3140(result, failed);
+    }
 }
 
 } /* extern "C" */

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e7908(int *, unsigned int *);
-int vectorCopyHeader(int *, unsigned char [12]);
+int _ZN12OnlineResultC1ERKj(int *, unsigned int *);
+int _ZN18OnlineResultRecordaSERKS_(int *, unsigned char [12]);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002f6be2(int, int *);
 int operatorDeleteArrayNullable(int);
@@ -22,9 +22,9 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int FUN_0010b7f8(void);
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 extern int onlineInstanceTableGetCurrent(void);
-/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002f6be2. */
 /* Supplied declaration required: operatorDeleteArrayNullable. */
@@ -58,7 +58,7 @@ void FUN_001215cc(int *param_1,int param_2)
     onlineInstanceTableFind(temp_v1,*(unsigned int *)(param_2 + 0x68));
     if (temp_v1 != 0) {
       (**(romwright_code **)(**(int **)(param_2 + 0x6c) + 0x24))(temp_v7);
-      vectorCopyHeader(&temp_v4,temp_v7);
+      _ZN18OnlineResultRecordaSERKS_(&temp_v4,temp_v7);
       if (temp_v4 < 0) {
         *param_1 = temp_v4;
         param_1[1] = temp_v5;
@@ -72,7 +72,7 @@ void FUN_001215cc(int *param_1,int param_2)
       puVar3 = (unsigned int *)&temp_v3;
       temp_v3 = 0x80010004;
     }
-    FUN_002e7908(param_1,puVar3);
+    _ZN12OnlineResultC1ERKj(param_1,puVar3);
   }
   else {
     *param_1 = temp_v4;

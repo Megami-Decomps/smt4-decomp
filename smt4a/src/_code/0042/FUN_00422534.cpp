@@ -1,78 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00422534` (_code @ 0x422534, 0x114 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: ring-buffer logic and 64-bit position arithmetic match; armcc hoists the -1 timeout out of the loop (retail rebuilds it with mov r3/stm each pass), tests the wait result with cmp instead of lsrs #31, and uses ldrd [r4,#8] where retail uses add+ldrd (and the reverse for the produced reload). */
+#include "mobiclip_ctrl/S4FsReader.h"
+#include "shard/W6_W6Match2_LongDivision.h"
 
 extern "C" {
+u32 FUN_0042cd0c(s32 *signalled, const u32 *handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh);
+void FUN_002e3140(u32 result);
+__value_in_regs LongDivisionResult ll_sdiv(s64 dividend, s64 divisor);
+void sysFatalBreak(void);
+void nn_os_CriticalSection_Enter(void *lock);
+void nn_os_CriticalSection_Leave(void *lock);
 
-int sysFatalBreak(void);
-int FUN_002e3140(void);
-int FUN_0042cd0c(int *, int *, int, int, unsigned int, unsigned int);
-int ll_sdiv(int, int, int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-#ifndef ROMWRIGHT_CARRY_4_DEFINED
-#define ROMWRIGHT_CARRY_4_DEFINED
-#define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
-#endif
-/* Supplied declaration required: sysFatalBreak. */
-/* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_0042cd0c. */
-/* Supplied declaration required: ll_sdiv. */
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-void FUN_00422534(int *param_1)
-
+/* The reader thread: refills the ring buffer from the source whenever the player has drained at
+ * least one chunk, until a handle signals the stop. */
+void FUN_00422534(S4FsReader *reader)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int *piVar4;
-  int temp_v3 [2];
-  
-  while( 1 ) {
-    piVar4 = temp_v3;
-    FUN_0042cd0c(piVar4,param_1 + 0x15,2,0,0xffffffff,0xffffffff);
-    if ((int)piVar4 < 0) {
-      FUN_002e3140();
+    for (;;) {
+        s32 signalled;
+        u32 result = FUN_0042cd0c(&signalled, reader->wakeup, 2, 0, 0xffffffff, 0xffffffff);
+        if (result >> 31) {
+            FUN_002e3140(result);
+        }
+        if (signalled != 0) {
+            break;
+        }
+        nn_os_CriticalSection_Enter(reader->lock);
+        u32 used = (u32)(reader->produced - reader->consumed);
+        if (S4_FS_READER_RING_SIZE - used < S4_FS_READER_CHUNK_SIZE) {
+            nn_os_CriticalSection_Leave(reader->lock);
+            continue;
+        }
+        u32 size = (u32)(reader->limit - reader->produced);
+        if (size > S4_FS_READER_CHUNK_SIZE) {
+            size = S4_FS_READER_CHUNK_SIZE;
+        }
+        u32 room = (u32)(S4_FS_READER_RING_SIZE - ll_sdiv(reader->produced, S4_FS_READER_RING_SIZE).remainder);
+        if (size > room) {
+            size = room;
+        }
+        u32 got = reader->source->read(reader->ring + (u32)ll_sdiv(reader->produced, S4_FS_READER_RING_SIZE).remainder, size);
+        if (got != size) {
+            sysFatalBreak();
+        }
+        reader->produced += got;
+        nn_os_CriticalSection_Leave(reader->lock);
     }
-    if (temp_v3[0] != 0) break;
-    nn_os_CriticalSection_Enter((unsigned int)(param_1 + 0x10));
-    if (0x40000U - (param_1[2] - *param_1) < 0x10000) {
-      nn_os_CriticalSection_Leave((unsigned int)(param_1 + 0x10));
-    }
-    else {
-      temp_v2 = param_1[4] - param_1[2];
-      if (temp_v2 >= 0x10001) {
-        temp_v2 = 0x10000;
-      }
-      temp_v1 = 0x40000;
-      ll_sdiv(param_1[2],param_1[3],0x40000,0);
-      piVar4 = (int *)param_1[0xe];
-      if (0x40000U - temp_v1 < temp_v2) {
-        temp_v2 = 0x40000U - temp_v1;
-      }
-      temp_v1 = 0x40000;
-      ll_sdiv(param_1[2],param_1[3],0x40000,0);
-      temp_v0 = (**(romwright_code **)(*piVar4 + 0x2c))(piVar4,temp_v1 + param_1[8],temp_v2);
-      if (temp_v0 != temp_v2) {
-        sysFatalBreak();
-      }
-      temp_v2 = param_1[2];
-      param_1[2] = temp_v2 + temp_v0;
-      param_1[3] = param_1[3] + (unsigned int)romwright_carry_4(temp_v2,temp_v0);
-      nn_os_CriticalSection_Leave((unsigned int)(param_1 + 0x10));
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

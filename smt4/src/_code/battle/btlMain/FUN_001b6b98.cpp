@@ -8,7 +8,7 @@ int btlActionAllocData(void);
 int FUN_0027db24(int);
 int scrScriptProcessDestroy(void);
 int wordTripleClear(unsigned int *);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int jobIsValid(unsigned int);
 int asdMemFree(void);
 int __aeabi_memset4(unsigned int *, int, unsigned int);
@@ -26,7 +26,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0027db24. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: wordTripleClear. */
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: jobIsValid. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: __aeabi_memset4. */
@@ -279,7 +279,7 @@ LAB_001b6eb0:
           *(unsigned short *)(param_1 + 0x2d) = 0;
           do {
             temp_v2 = temp_v6;
-            FUN_002ae164();
+            dataTable40FindById();
             temp_v4 = temp_v3;
             if (temp_v2 != 0) {
               temp_v4 = (unsigned int)*(unsigned char *)(temp_v2 + 0x4b);

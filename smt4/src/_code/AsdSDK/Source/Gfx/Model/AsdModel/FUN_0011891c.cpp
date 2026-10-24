@@ -1,37 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011891c` (_code @ 0x11891c, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads slotFlags through an add-based pointer and keeps a zero in r5 for the final clear; built uses a plain offset load and a fresh zero. */
+#include "shard/Sys464af0.h"
 
 extern "C" {
 
-int FUN_0013290c(unsigned int, unsigned int);
-int FUN_002c3a14(unsigned int);
+extern s32 g_asdLightCount; /* 0x4dad80 */
+extern u32 g_asdModelSlotArray3; /* 0x464bb4 */
+extern u32 g_titleScene; /* 0x44ea00 */
+s32 sceneQueryFalse(void);
+void FUN_0013290c(u32 a, u32 b);
+void FUN_002c3a14(u32 scene);
+void registerBlockRequestGroups(u32 groups);
 
-extern unsigned int g_titleScene; /* 0x44ea00 */
-extern signed char g_gfxSettings; /* 0x464af0 */
-extern unsigned int DAT_00464b04; /* 0x464b04 */
-extern unsigned int DAT_00464b18; /* 0x464b18 */
-extern unsigned int g_asdModelSlotFlags; /* 0x464b74 */
-extern unsigned int g_asdModelSlotArray3; /* 0x464bb4 */
-extern int g_asdLightCount; /* 0x4dad80 */
-
-/* Supplied declaration required: FUN_0013290c. */
-/* Supplied declaration required: FUN_002c3a14. */
-
-
-/* WARNING: Removing unreachable block (ram,0x00118974) */
-/* WARNING: Removing unreachable block (ram,0x00118978) */
-
+// Refresh the title scene when the graphics settings are enabled and lights or the first model slot are active.
 void FUN_0011891c(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  if ((g_gfxSettings != '\0') && ((0 < g_asdLightCount || ((g_asdModelSlotFlags & 1) != 0)))) {
-    FUN_0013290c(g_asdModelSlotArray3,DAT_00464b18);
-    FUN_002c3a14(g_titleScene);
-    DAT_00464b04 = 0;
-  }
-  return;
+    if (g_gfxSettings.unk00[0] != 0 && (g_asdLightCount > 0 || (g_gfxSettings.slotFlags & 1) != 0)) {
+        FUN_0013290c(g_asdModelSlotArray3, g_gfxSettings.unk28);
+        if (sceneQueryFalse() != 0) {
+            registerBlockRequestGroups(0x3fff);
+        }
+        FUN_002c3a14(g_titleScene);
+        g_gfxSettings.unk14 = 0;
+    }
 }
 
 } /* extern "C" */

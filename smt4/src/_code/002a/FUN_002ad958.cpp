@@ -1,54 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ad958` (_code @ 0x2ad958, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same instructions as retail except register allocation (retail keeps the countdown pointer in r5, the divisor base in r6, the reduction in r4), an `adds` where retail has `add`, and the 64-bit multiply temporaries (r3/ip swapped). */
+#include "nn/svc.h"
+
+struct CountdownState {
+    bool active;    // 0x00
+    bool debug;     // 0x01
+    u8 unk02[0x16]; // 0x02
+    s64 remaining;  // 0x18
+};
 
 extern "C" {
+extern CountdownState g_titleContentFileSystem;
+void threadSleepDuration(s64 nanoseconds);
 
-int threadSleepDuration(int, int);
-int software_interrupt(int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern signed char g_titleContentFileSystem; /* 0x44e650 */
-extern unsigned char DAT_0044e651; /* 0x44e651 */
-extern int DAT_0044e668; /* 0x44e668 */
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: threadSleepDuration. */
-extern int __aeabi_uidivmod(unsigned int, char);
-
-
-void FUN_002ad958(int param_1)
-
+static __inline s64 millisecondsToNanoseconds(s64 ms)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  long long temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  if (param_1 == 0) {
-    temp_v3 = 0x17c;
-  }
-  else {
-    temp_v3 = 100;
-  }
-  temp_v2 = 0;
-  if (g_titleContentFileSystem != '\0') {
-    if ((DAT_0044e651 != 0) && (software_interrupt(0x28), (DAT_0044e651 & 0x10) != 0)) {
-      temp_v2 = __aeabi_uidivmod(temp_v3,(DAT_0044e651 & 0xf) + 1);
-    }
-    temp_v0 = DAT_0044e668 + temp_v2;
-    if (temp_v0 != 0) {
-      temp_v1 = (unsigned long long)temp_v0 * 1000000;
-      threadSleepDuration((int)temp_v1,(int)((unsigned long long)temp_v1 >> 0x20));
-      return;
-    }
-  }
-  return;
+    return ms * 1000000;
 }
 
-} /* extern "C" */
+// Sleeps for the countdown's remaining time in microseconds; in debug mode the delay is
+// divided by a clock-derived factor.
+void FUN_002ad958(s32 shortDelay)
+{
+    u32 reduction = 0;
+    CountdownState *state = &g_titleContentFileSystem;
+    u32 delay = shortDelay == 0 ? 380 : 100;
+    if (state->active) {
+        if (state->debug) {
+            s32 tick = (s32)svcGetSystemTick();
+            if ((tick & 0x10) != 0) {
+                reduction = delay / ((tick & 0xF) + 1);
+            }
+        }
+        u16 micros = state->remaining + reduction;
+        if (micros != 0) {
+            threadSleepDuration(millisecondsToNanoseconds(micros));
+        }
+    }
+}
+}

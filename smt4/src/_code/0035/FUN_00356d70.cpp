@@ -1,29 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00356d70` (_code @ 0x356d70, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps &record->resource in r4 and the record in r5 (frame push {r4-r6, lr}); armcc folds the slot into [r4, #4] */
+/* Frees a record: releases the resource it owns, clears the pointer, then frees the record itself. */
+#include "common.h"
 
 extern "C" {
-
-int FUN_002628fc(unsigned int);
-int asdMemFreeNonNull(int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_002628fc. */
-/* Supplied declaration required: asdMemFreeNonNull. */
-
-
-void FUN_00356d70(int param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  FUN_002628fc(*(unsigned int *)(param_1 + 4));
-  *(unsigned int *)(param_1 + 4) = 0;
-  asdMemFreeNonNull(param_1);
-  return;
+void FUN_002628fc(void *resource);
+void asdMemFreeNonNull(void *memory);
 }
 
-} /* extern "C" */
+struct OwnedRecord {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ void *resource;
+};
+
+/* Releases the resource behind `slot` and clears it. */
+static inline void releaseResource(void *&slot)
+{
+    FUN_002628fc(slot);
+    slot = NULL;
+}
+
+extern "C" void FUN_00356d70(OwnedRecord *record)
+{
+    releaseResource(record->resource);
+    asdMemFreeNonNull(record);
+}

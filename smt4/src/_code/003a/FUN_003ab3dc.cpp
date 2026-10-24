@@ -26,7 +26,7 @@ typedef char SkillListRenderOffsets[offsetof(SkillListRenderView, cursor) == 0x2
     offsetof(SkillListRenderView, rows) == 0x5A8 && sizeof(SkillListRow) == 0x20 ? 1 : -1];
 }
 extern "C" {
-void FUN_00230cc0(void *render, s32 kind, s32 x, s32 y, s32 depth);
+void uiRectDrawAtBottomRight(void *render, s32 kind, s32 x, s32 y, s32 depth);
 void FUN_00231bcc(void *render, s32 sprite, s32 x, s32 y, s32 depth, s32 flags);
 s32 FUN_0029e924(void *cursor);
 s32 rangeLimitMin(void *cursor);
@@ -40,7 +40,7 @@ void FUN_0022d7b0(SkillListRenderView *view, s32 depth);
 // Draw the skill list, lifting its selected row and updating the skill-details help.
 void FUN_003ab3dc(SkillListRenderView *view)
 {
-    FUN_00230cc0(view->render, 3, 0, 0, 0x1F);
+    uiRectDrawAtBottomRight(view->render, 3, 0, 0, 0x1F);
     FUN_00231bcc(view->render, 0x4C7, 0, 0, 0x1F, 1);
     FUN_00231bcc(view->render, 0x4C8, 0, 0, 0x1F, 1);
     FUN_00231bcc(view->render, 0x4CA, 0, 0, 0x1F, 1);

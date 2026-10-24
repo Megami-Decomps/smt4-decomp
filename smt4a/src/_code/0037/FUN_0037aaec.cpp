@@ -1,40 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037aaec` (_code @ 0x37aaec, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the final sign-bit test differs (retail: and #0x80000000 / cmp / movlt / movge; armcc here emits asr #31 / add #1). */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_005b40b4; /* 0x5b40b4 */
+/* A result slot: the last failure code is kept at 0x10. */
+struct ResultSlots {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 lastResult;
+};
 
-extern unsigned int FUN_00317e50(int);
-extern unsigned int FUN_0032c9fc(int);
-extern unsigned int FUN_003596e0(void);
+extern ResultSlots DAT_005b40b4;
+u32 FUN_0032c9fc(s32 arg);
+u32 FUN_00317e50(s32 arg);
+u32 FUN_003596e0(s32 arg);
 
-
-unsigned char FUN_0037aaec(int param_1,int param_2)
-
+/* Runs the check for `kind` (0-2) on `arg`; true when it succeeded. A NULL arg records a failure code. */
+u8 FUN_0037aaec(s32 kind, s32 arg)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0xe7e3ffff;
-  if (param_2 == 0) {
-    (*(unsigned int *)((unsigned char *)&DAT_005b40b4 + 0x10)) = 0xc8804464;
-    return 0;
-  }
-  if (param_1 != 0) {
-    if (param_1 != 1) {
-      if (param_1 == 2) {
-        temp_v0 = FUN_003596e0();
-      }
+    u32 result = 0xE7E3FFFF;
+
+    if (arg == 0) {
+        DAT_005b40b4.lastResult = 0xC8804464;
+        return 0;
     }
-    else {
-      temp_v0 = FUN_00317e50(param_2);
+    if (kind == 0) {
+        result = FUN_0032c9fc(arg);
+    } else if (kind == 1) {
+        result = FUN_00317e50(arg);
+    } else if (kind == 2) {
+        result = FUN_003596e0(arg);
     }
-  }
-  else {
-    temp_v0 = FUN_0032c9fc(param_2);
-  }
-  return (temp_v0 & 0x80000000) == 0;
+    return (result & 0x80000000) == 0;
 }
 
 } /* extern "C" */

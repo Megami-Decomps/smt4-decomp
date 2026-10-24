@@ -1,111 +1,88 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00394230` (_code @ 0x394230, 0x180 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: svc 0x23 matches through svcCloseHandle and the call structure is recovered; retail shares the wait temporaries with the 500-byte buffer at sp+0 (handle at sp+512), tests results with ands/bpl and lsrs where armcc emits and/cmp, and loads r0=0 before the stack adjustment. */
+#include "common.h"
+#include "nn/Result.h"
+#include "nn/svc.h"
+
+/* An asynchronous request: the event the service signals when it is done, and whether it has been sent. */
+struct AsyncRequest {
+    u32 handle;  // 0x00
+    u8 started;  // 0x04
+    u8 unk05[3];
+};
 
 extern "C" {
+s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
+void FUN_002c526c(s32 result, bool failed);
+s32 FUN_002b5820(u32 *handle, u32 resetType);
+s32 FUN_0023793c(void);
+s32 FUN_00351c58(void);
+s32 FUN_00351c08(void *buffer, AsyncRequest *request);
+void FUN_00351c88(u32 *error);
+s32 FUN_00351cd0(void *buffer);
 
-int FUN_0023793c(void);
-int FUN_002b5820(int *, int);
-int FUN_002c40f8(unsigned char *, int *, int, int);
-int FUN_002c526c(void);
-int FUN_00351c58(void);
-int FUN_00351c88(unsigned int *);
-int software_interrupt(int);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp220; /* 0x220: local_220 */
-} param_3_stack;
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0023793c. */
-/* Supplied declaration required: FUN_002b5820. */
-/* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c526c. */
-extern int FUN_00351c08(unsigned int *, int *);
-/* Supplied declaration required: FUN_00351c58. */
-/* Supplied declaration required: FUN_00351c88. */
-extern int FUN_00351cd0(unsigned int *);
-
-
-unsigned int FUN_00394230(int *param_1,int *param_2,unsigned int *param_3)
-
+/* Polls the request: while its event is unsignaled it returns 0; once signaled it collects the
+ * result. Without a request in flight it creates the event and sends one. Returns 1 when
+ * nothing is left to wait for (done, or the service is not available); *result and *error carry
+ * the outcome. */
+u32 FUN_00394230(AsyncRequest *request, s32 *result, u32 *error)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char *puVar2;
-  int temp_v1;
-  int *piVar4;
-  int temp_v2;
-  unsigned int uStack_21c;
-  int iStack_218;
-  unsigned char temp_v3 [500];
-  int temp_v4 [2];
-  
-  *param_2 = 0;
-  *param_3 = 0;
-  temp_v0 = (unsigned int)*(unsigned char *)(param_1 + 1);
-  if (temp_v0 != 0) {
-    iStack_218 = *param_1;
-    temp_v2 = 0;
-    uStack_21c = 0;
-    puVar2 = temp_v3;
-    FUN_002c40f8(puVar2,&iStack_218,1,0);
-    if ((int)puVar2 < 0) {
-      FUN_002c526c();
+    u8 buffer[500];
+
+    *result = 0;
+    *error = 0;
+    if (request->started != 0) {
+        s32 index;
+        u32 handle = request->handle;
+        s32 waited = FUN_002c40f8(&index, &handle, 1, 0, 0);
+        bool failed = nnResultIsFailure(waited);
+        if (failed) {
+            FUN_002c526c(waited, failed);
+        }
+        nnResultFields code;
+        code.value = waited;
+        if (code.fields.description == 0x3fe) {
+            return 0;
+        }
+        request->started = 0;
+        s32 finished = FUN_00351c58();
+        *result = finished;
+        if (nnResultIsSuccess(finished)) {
+            return 1;
+        }
+        FUN_00351c88(error);
+    } else {
+        if (FUN_0023793c() != 0) {
+            return 1;
+        }
+        u32 handle = 0;
+        s32 created = FUN_002b5820(&handle, 0);
+        if (nnResultIsSuccess(created)) {
+            request->handle = handle;
+            created = 0;
+        }
+        bool failed = nnResultIsFailure(created);
+        if (failed) {
+            FUN_002c526c(created, failed);
+        }
+        s32 prepared = FUN_00351cd0(buffer);
+        *result = prepared;
+        if (nnResultIsSuccess(prepared)) {
+            s32 sent = FUN_00351c08(buffer, request);
+            *result = sent;
+            if (nnResultIsSuccess(sent)) {
+                request->started = 1;
+                return 0;
+            }
+            if (*result == (s32)0xc9209f84) {
+                *error = 0x76bf;
+            }
+        }
     }
-    temp_v1 = -0x800000;
-    if (((unsigned int)puVar2 & 0x3ff) == 0x3fe) {
-      return 0;
+    if (request->handle != 0) {
+        svcCloseHandle(request->handle);
+        request->handle = 0;
     }
-    *(unsigned char *)(param_1 + 1) = 0;
-    FUN_00351c58();
-    *param_2 = temp_v1;
-    if (-1 < temp_v1) {
-      return 1;
-    }
-    FUN_00351c88(param_3);
-    temp_v1 = *param_1;
-  }
-  else {
-    FUN_0023793c();
-    if (temp_v0 != 0) {
-      return 1;
-    }
-    piVar4 = temp_v4;
-    temp_v4[0] = 0;
-    FUN_002b5820(piVar4,0);
-    if (-1 < (int)piVar4) {
-      piVar4 = (int *)0x0;
-      *param_1 = temp_v4[0];
-    }
-    if ((int)piVar4 < 0) {
-      FUN_002c526c();
-    }
-    temp_v1 = FUN_00351cd0((unsigned int *)&temp_v2);
-    *param_2 = temp_v1;
-    if (temp_v1 < 0) {
-      temp_v1 = *param_1;
-    }
-    else {
-      temp_v1 = FUN_00351c08((unsigned int *)&temp_v2,param_1);
-      *param_2 = temp_v1;
-      if (-1 < temp_v1) {
-        *(unsigned char *)(param_1 + 1) = 1;
-        return 0;
-      }
-      if (*param_2 == -0x36df607c) {
-        *param_3 = 0x76bf;
-      }
-      temp_v1 = *param_1;
-    }
-  }
-  if (temp_v1 != 0) {
-    software_interrupt(0x23);
-    *param_1 = 0;
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

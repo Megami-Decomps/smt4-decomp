@@ -1,30 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00225168` (_code @ 0x225168, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same stores and call; retail addresses the request words as (scene + 0x3400) + 0x70..0x7c with a shared base register, built materialises each 0x347x offset from a pool constant */
+#include "common.h"
 
 extern "C" {
 
-int playSceneSetState(int, int, int);
+struct PlayScene {
+    /* 0x0000 */ u8 unk0000[0x3048];
+    /* 0x3048 */ s32 state;
+    /* 0x304c */ u8 unk304c[0x305c - 0x304c];
+    /* 0x305c */ s32 slot;
+    /* 0x3060 */ u8 unk3060[0x3460 - 0x3060];
+    /* 0x3460 */ u32 requestsA[4];
+    /* 0x3470 */ u32 requestsB[4];
+    /* 0x3480 */ u8 unk3480[0x3504 - 0x3480];
+    /* 0x3504 */ u32 pending;
+};
 
-/* Supplied declaration required: playSceneSetState. */
+void playSceneSetState(PlayScene *scene, s32 state, s32 arg);
 
-
-void FUN_00225168(int param_1)
-
+/* In state 0x28 clears the current slot's requests and the pending flag; otherwise clears all requests and switches to state 0x1c. */
+void FUN_00225168(PlayScene *scene)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 0x3048) != 0x28) {
-    *(unsigned int *)(param_1 + 0x3470) = 0;
-    *(unsigned int *)(param_1 + 0x3474) = 0;
-    *(unsigned int *)(param_1 + 0x3478) = 0;
-    *(unsigned int *)(param_1 + 0x347c) = 0;
-    playSceneSetState(param_1,0x1c,0);
-    return;
-  }
-  *(unsigned int *)(param_1 + *(int *)(param_1 + 0x305c) * 4 + 0x3470) = 0;
-  *(unsigned int *)(param_1 + *(int *)(param_1 + 0x305c) * 4 + 0x3460) = 0;
-  *(unsigned int *)(param_1 + 0x3504) = 0;
-  return;
+    if (scene->state != 0x28) {
+        scene->requestsB[0] = 0;
+        scene->requestsB[1] = 0;
+        scene->requestsB[2] = 0;
+        scene->requestsB[3] = 0;
+        playSceneSetState(scene, 0x1c, 0);
+        return;
+    }
+    scene->requestsB[scene->slot] = 0;
+    scene->requestsA[scene->slot] = 0;
+    scene->pending = 0;
 }
 
 } /* extern "C" */

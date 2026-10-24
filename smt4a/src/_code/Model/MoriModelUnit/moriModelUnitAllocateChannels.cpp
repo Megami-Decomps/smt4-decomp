@@ -1,58 +1,6 @@
 /* NON_MATCHING: maximum-mesh loop unrolling, allocation-size hoisting, and buffer-pointer registers differ from retail; O2 also differs. */
-#include "common.h"
+#include "Model/ModelUnitBuffers.h"
 #include "AsdSDK/AsdDebug.h"
-
-struct UnitMeshDescriptor {
-    u8 unk00[0x10];
-    s32 elementCount;
-};
-struct UnitMeshTable {
-    u8 unk00[0x60];
-    UnitMeshDescriptor **meshes; /* 0x60 */
-    u16 count;                  /* 0x64 */
-};
-struct UnitModelView {
-    u8 unk00[0x30];
-    UnitMeshTable *table;
-};
-struct UnitModelContent {
-    u8 unk00[0xc];
-    UnitModelView view;
-};
-struct UnitChannel {
-    u32 unk00;
-    f32 unk04;
-    f32 unk08;
-    u32 unk0c;
-    u16 *data;       /* 0x10 */
-    u8 array[8];     /* 0x14 */
-    s32 capacity;    /* 0x1c */
-    u8 enabled;      /* 0x20 */
-    u8 unk21[0xb];
-    u32 unk2c;
-};
-struct UnitFloatChannel {
-    u8 unk00[8];
-    f32 *data;       /* 0x08 */
-    f32 unk0c;
-    f32 unk10;
-    u8 unk14[4];
-    u8 enabled;      /* 0x18 */
-    u8 unk19[3];
-};
-struct UnitNodeTable {
-    u8 unk00[8];
-    s32 count;
-};
-struct ModelUnitBuffers {
-    u8 unk00[8];
-    UnitFloatChannel positions; /* 0x008 */
-    UnitChannel channels[2];    /* 0x024 */
-    u8 unk084[0x84];
-    UnitNodeTable *nodes;       /* 0x108 */
-    u8 unk10c[0x100];
-    UnitModelContent *content;  /* 0x20c */
-};
 
 extern "C" {
 extern const char DAT_00526108[];

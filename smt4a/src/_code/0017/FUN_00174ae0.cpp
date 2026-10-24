@@ -1,36 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00174ae0` (_code @ 0x174ae0, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same stores and calls; retail keeps zero in r2 and -1 in r3 so the pair store is one `strd r2, [r1, #4]` from the node base, built allocates zero in r1 and uses stm */
+#include "common.h"
+#include <new>
 
 extern "C" {
 
-extern unsigned int DAT_005c0f94; /* 0x5c0f94 */
-extern unsigned int DAT_0064717c; /* 0x64717c */
-extern unsigned char DAT_00647180; /* 0x647180 */
-extern unsigned int DAT_00647184; /* 0x647184 */
-extern unsigned int DAT_00647188; /* 0x647188 */
-extern unsigned int DAT_0064718c; /* 0x64718c */
-extern unsigned char DAT_00647190; /* 0x647190 */
-extern unsigned char DAT_00647191; /* 0x647191 */
+struct LinkPair {
+    LinkPair() : next(0), index(-1) {}
+    /* 0x00 */ u32 next;
+    /* 0x04 */ s32 index;
+};
 
-extern int __cxa_guard_acquire(unsigned int *);
+struct LinkNode {
+    LinkNode() : head(0) {}
+    /* 0x00 */ u32 head;
+    /* 0x04 */ LinkPair link;
+};
 
+struct SharedState {
+    SharedState() : first(0), enabled(1), flagA(0), flagB(0) {}
+    /* 0x00 */ u32 first;
+    /* 0x04 */ u8 enabled;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ LinkNode node;
+    /* 0x14 */ u8 flagA;
+    /* 0x15 */ u8 flagB;
+};
 
-unsigned int * FUN_00174ae0(void)
+extern u32 DAT_005c0f94;
+extern SharedState DAT_0064717c;
+extern u8 entry;
 
+s32 __cxa_guard_acquire(u32 *guard);
+__weak void __cxa_guard_release(u32 *guard);
+__weak s32 __aeabi_atexit(void *object, void (*destructor)(void *), void *module);
+void FUN_001906cc(void *object);
+
+/* Returns the shared state, constructing it (and registering its destructor) on first use. */
+SharedState *FUN_00174ae0(void)
 {
-  int temp_v0;
-  
-  if (((DAT_005c0f94 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c0f94), temp_v0 != 0)) {
-    DAT_0064717c = 0;
-    DAT_00647180 = 1;
-    DAT_00647184 = 0;
-    DAT_00647188 = 0;
-    DAT_0064718c = 0xffffffff;
-    DAT_00647190 = 0;
-    DAT_00647191 = 0;
-  }
-  return &DAT_0064717c;
+    if ((DAT_005c0f94 & 1) == 0 && __cxa_guard_acquire(&DAT_005c0f94) != 0) {
+        new (&DAT_0064717c) SharedState;
+        __aeabi_atexit(&DAT_0064717c, FUN_001906cc, &entry);
+        __cxa_guard_release(&DAT_005c0f94);
+    }
+    return &DAT_0064717c;
 }
 
 } /* extern "C" */

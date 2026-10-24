@@ -11,7 +11,7 @@ int asdMemFree(unsigned short *);
 int dataTable04FindById(void);
 int sysMemClear(unsigned char [88], int);
 int rt_aeabi_memclr(...);
-int FUN_0034a290(void);
+int dataTable41FindById(void);
 int findSkillMetadataById(void);
 int FUN_003cd9e8(...);
 
@@ -46,7 +46,7 @@ extern unsigned char LAB_0038e764; /* 0x38e764 */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_aeabi_memclr. */
-/* Supplied declaration required: FUN_0034a290. */
+/* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: findSkillMetadataById. */
 /* Supplied declaration required: FUN_003cd9e8. */
 
@@ -142,7 +142,7 @@ void FUN_0034c340(unsigned short *param_1,unsigned int param_2,int param_3,unsig
         }
         temp_v8 = (unsigned int)*puVar17;
         temp_v14 = temp_v6;
-        FUN_0034a290();
+        dataTable41FindById();
         temp_v6 = 0;
         if (temp_v8 != 0) {
           temp_v6 = (*(unsigned int *)(temp_v8 + 0x44) & 0xffff) >> 0xb;

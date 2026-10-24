@@ -1,45 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00245ed0` (_code @ 0x245ed0, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the matrix rows as 4-float vldmia groups and the vector components singly, then multiplies in a different register order; ours loads the elements separately. */
+#include "gfx/CameraVectorScratch.h"
+#include "shard/W5_W5Match2_PlainData.h"
 
 extern "C" {
 
-extern float DAT_004ea91c; /* 0x4ea91c */
-extern float DAT_004ea920; /* 0x4ea920 */
-extern float DAT_004ea924; /* 0x4ea924 */
-extern float DAT_004ea928; /* 0x4ea928 */
-extern float DAT_004ea95c; /* 0x4ea95c */
-extern float DAT_004ea960; /* 0x4ea960 */
-extern float DAT_004ea964; /* 0x4ea964 */
-extern float DAT_004ea968; /* 0x4ea968 */
-extern float DAT_004ea96c; /* 0x4ea96c */
-extern float DAT_004ea970; /* 0x4ea970 */
-extern float DAT_004ea974; /* 0x4ea974 */
-extern float DAT_004ea978; /* 0x4ea978 */
-extern float DAT_004ea97c; /* 0x4ea97c */
-extern float DAT_004ea980; /* 0x4ea980 */
-extern float DAT_004ea984; /* 0x4ea984 */
-extern float DAT_004ea988; /* 0x4ea988 */
+/* The camera scratch block, extended to the transform matrix at 0x140. */
+struct CameraScratchTransform {
+    /* 0x000 */ u8 unk000[0x100];
+    /* 0x100 */ Vector4 direction;
+    /* 0x110 */ u8 unk110[0x30];
+    /* 0x140 */ Matrix44 transform;
+};
 
+extern CameraScratchTransform DAT_004ea81c;
 
+// Transforms the scratch direction by the scratch matrix (row vector times matrix, w ignored).
 void FUN_00245ed0(void)
-
 {
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  
-  temp_v3 = DAT_004ea91c * DAT_004ea960;
-  temp_v0 = DAT_004ea924 * DAT_004ea97c;
-  temp_v1 = DAT_004ea924 * DAT_004ea980;
-  temp_v2 = DAT_004ea924 * DAT_004ea988;
-  DAT_004ea924 = DAT_004ea91c * DAT_004ea964 + DAT_004ea920 * DAT_004ea974 +
-                 DAT_004ea924 * DAT_004ea984;
-  DAT_004ea928 = DAT_004ea91c * DAT_004ea968 + DAT_004ea920 * DAT_004ea978 + temp_v2;
-  DAT_004ea91c = DAT_004ea91c * DAT_004ea95c + DAT_004ea920 * DAT_004ea96c + temp_v0;
-  DAT_004ea920 = temp_v3 + DAT_004ea920 * DAT_004ea970 + temp_v1;
-  return;
+    const f32 (*m)[4] = (const f32 (*)[4])DAT_004ea81c.transform.values;
+    Vector4 *v = &DAT_004ea81c.direction;
+    f32 x = v->x;
+    f32 y = v->y;
+    f32 z = v->z;
+
+    Vector4 result;
+
+    result.x = x * m[0][0] + y * m[1][0] + z * m[2][0];
+    result.y = x * m[0][1] + y * m[1][1] + z * m[2][1];
+    result.z = x * m[0][2] + y * m[1][2] + z * m[2][2];
+    result.w = x * m[0][3] + y * m[1][3] + z * m[2][3];
+    *v = result;
 }
 
-} /* extern "C" */
+}

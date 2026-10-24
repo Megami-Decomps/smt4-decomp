@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a9170(unsigned int *, unsigned int *, unsigned int *);
+int gpuSubmitVectorCommand(unsigned int *, unsigned int *, unsigned int *);
 
 /* stack frame of param_4: 29 slot(s), 68 byte(s) */
 typedef struct {
@@ -48,7 +48,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_002a9170. */
+/* Supplied declaration required: gpuSubmitVectorCommand. */
 
 
 void FUN_002b7dc4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -180,7 +180,7 @@ void FUN_002b7dc4(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v26 = param_2;
   temp_v27 = param_3;
   temp_v28 = param_4;
-  FUN_002a9170(&temp_v12,&temp_v21,&temp_v17);
+  gpuSubmitVectorCommand(&temp_v12,&temp_v21,&temp_v17);
   temp_v12 = unaff_r8 | (temp_v3 << 0x18);
   temp_v17 = temp_v7 | (temp_v5 << 0x18);
   temp_v1 = temp_v15 | (temp_v3 >> 8);
@@ -192,7 +192,7 @@ void FUN_002b7dc4(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v23 = (*(int *)((temp_v26 & 0xff) * 4 + 0x4e35a0) << 8) | (temp_v0 >> 0x10);
   temp_v13 = temp_v1;
   temp_v18 = temp_v5 >> 8;
-  FUN_002a9170(&temp_v12,&temp_v21,&temp_v17);
+  gpuSubmitVectorCommand(&temp_v12,&temp_v21,&temp_v17);
   temp_v12 = temp_v6 | (temp_v2 << 0x18);
   temp_v17 = temp_v19 | (temp_v4 << 0x18);
   temp_v13 = temp_v16;
@@ -203,7 +203,7 @@ void FUN_002b7dc4(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v7 = *(unsigned int *)(((temp_v27 >> 8) & 0xff) * 4 + 0x4e35a0);
   temp_v22 = (temp_v7 << 0x10) | (temp_v2 >> 8);
   temp_v23 = (*(int *)((temp_v27 & 0xff) * 4 + 0x4e35a0) << 8) | (temp_v7 >> 0x10);
-  FUN_002a9170(&temp_v12,&temp_v21,&temp_v17);
+  gpuSubmitVectorCommand(&temp_v12,&temp_v21,&temp_v17);
   temp_v12 = temp_v6 | (temp_v3 << 0x18);
   temp_v17 = temp_v19 | (temp_v5 << 0x18);
   temp_v14 = temp_v24;
@@ -214,7 +214,7 @@ void FUN_002b7dc4(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v23 = (*(int *)((temp_v28 & 0xff) * 4 + 0x4e35a0) << 8) | (temp_v6 >> 0x10);
   temp_v13 = temp_v1;
   temp_v18 = temp_v5 >> 8;
-  FUN_002a9170(&temp_v12,&temp_v21,&temp_v17);
+  gpuSubmitVectorCommand(&temp_v12,&temp_v21,&temp_v17);
   return;
 }
 

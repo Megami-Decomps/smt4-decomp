@@ -1,44 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f3104` (_code @ 0x3f3104, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+namespace {
+struct DevilRecord {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ u32 unk34Low : 14;
+    /* 0x34 */ u32 characterId : 7;
+    /* 0x34 */ u32 unk34High : 11;
+};
+
+struct CharacterUnit {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 devilId;
+};
+
+struct CharacterRow {
+    /* 0x00 */ u16 unk00;
+    /* 0x02 */ u16 values[24];
+};
+}
 
 extern "C" {
+DevilRecord *FUN_00184310(u16 id);
+CharacterRow *dataTableLookupCharacter(u16 character);
+s32 randRange(u32 limit);
+s32 gameDataFlagTestBit(u32 bit);
 
-int FUN_00184310(void);
-int dataTableLookupCharacter(void);
-
-extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_00184310. */
-extern int gameDataFlagTestBit(unsigned int);
-/* Supplied declaration required: dataTableLookupCharacter. */
-
-
-unsigned short FUN_003f3104(int param_1)
-
+// Pick a random entry of the demon's character row: the first 12 are chosen on a roll, the rest otherwise.
+u16 FUN_003f3104(CharacterUnit *unit)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = (unsigned int)*(unsigned short *)(param_1 + 0x62);
-  FUN_00184310();
-  temp_v0 = (*(unsigned int *)(temp_v0 + 0x34) & 0x1fffff) >> 0xe;
-  dataTableLookupCharacter();
-  temp_v1 = randRange(0xb);
-  temp_v2 = randRange(0xd);
-  temp_v3 = gameDataFlagTestBit(6);
-  if (temp_v3 != 0) {
-    if (temp_v2 >= 2) {
-      return *(unsigned short *)(temp_v0 + temp_v1 * 2 + 2);
+    DevilRecord *devil = FUN_00184310(unit->devilId);
+    CharacterRow *row = dataTableLookupCharacter(devil->characterId);
+    s32 index = randRange(11);
+    s32 roll = randRange(13);
+    if (gameDataFlagTestBit(6)) {
+        if (roll < 2) {
+            index += 12;
+        }
+    } else if (roll < 1) {
+        index += 12;
     }
-  }
-  else if (0 < temp_v2) {
-    return *(unsigned short *)(temp_v0 + temp_v1 * 2 + 2);
-  }
-  temp_v1 = temp_v1 + 0xc;
-  return *(unsigned short *)(temp_v0 + temp_v1 * 2 + 2);
+    return row->values[index];
 }
 
 } /* extern "C" */

@@ -1,51 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00339f38` (_code @ 0x339f38, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: identical apart from the register of the null store after the release (retail r1, built r0); `owner` is an uninitialised local in the original (retail passes the unset r5) */
+#include "classes/Obj4207d0.h"
 
 extern "C" {
 
-int mdlPartsRelease(void);
-int playerModelListCreate(void);
-int asdOperatorNew(void);
+struct StatusModelScene {
+    /* 0x0000 */ u8 unk0000[0x4394];
+    /* 0x4394 */ Obj4207d0 *playerModel;
+};
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+void mdlPartsRelease(void);
+void playerModelListCreate(Obj4206e8 *model, s32 kind);
 
-extern unsigned char DAT_004207d8; /* 0x4207d8 */
-
-/* Supplied declaration required: mdlPartsRelease. */
-/* Supplied declaration required: playerModelListCreate. */
-extern unsigned int *_ZN9Obj4206e8C1Ev(void);
-/* Supplied declaration required: asdOperatorNew. */
-
-
-void FUN_00339f38(int param_1)
-
+/* Releases the scene's player model (if any) and builds a fresh one. */
+void FUN_00339f38(StatusModelScene *scene)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  if (*(int *)(param_1 + 0x4394) != 0) {
-    mdlPartsRelease();
-    if (*(int **)(param_1 + 0x4394) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(param_1 + 0x4394) + 4))();
+    void *owner;
+
+    if (scene->playerModel != NULL) {
+        mdlPartsRelease();
+        delete scene->playerModel;
+        scene->playerModel = NULL;
     }
-    *(unsigned int *)(param_1 + 0x4394) = 0;
-  }
-  temp_v0 = 0x100;
-  asdOperatorNew();
-  puVar2 = (unsigned int *)0x0;
-  if (temp_v0 != 0) {
-    puVar2 = (unsigned int *)_ZN9Obj4206e8C1Ev();
-    *puVar2 = (unsigned int)&DAT_004207d8;
-  }
-  *(unsigned int **)(param_1 + 0x4394) = puVar2;
-  playerModelListCreate();
-  return;
+    scene->playerModel = new (owner) Obj4207d0;
+    playerModelListCreate(scene->playerModel, 7);
 }
 
 } /* extern "C" */

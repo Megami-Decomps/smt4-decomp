@@ -9,7 +9,7 @@ int _ZN9Obj55aff4D1Ev(int *);
 extern unsigned char LAB_002e98a0; /* 0x2e98a0 */
 
 extern unsigned int wstrcmpU16(void);
-extern int _ZN9Obj55aff4C1EPKc(unsigned int *, unsigned char *);
+extern int _ZN9Obj55aff4C1EPKt(unsigned int *, unsigned char *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 
 
@@ -31,10 +31,10 @@ unsigned int onlineStringLess(int param_1,int param_2,unsigned int param_3,unsig
       temp_v0 = wstrcmpU16();
       return temp_v0 >> 0x1f;
     }
-    param_2 = _ZN9Obj55aff4C1EPKc((unsigned int *)&uStack_18,&LAB_002e98a0);
+    param_2 = _ZN9Obj55aff4C1EPKt((unsigned int *)&uStack_18,&LAB_002e98a0);
   }
   else {
-    param_1 = _ZN9Obj55aff4C1EPKc((unsigned int *)&uStack_18,&LAB_002e98a0);
+    param_1 = _ZN9Obj55aff4C1EPKt((unsigned int *)&uStack_18,&LAB_002e98a0);
   }
   temp_v0 = onlineStringLess(param_1,param_2, /* unrecovered */ 0, /* unrecovered */ 0);
   _ZN9Obj55aff4D1Ev(&uStack_18);

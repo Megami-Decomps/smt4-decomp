@@ -5,8 +5,11 @@
 
 /* The four-polygon screen filter (Filter4Poly; vtable at 0x42094c, named after it until its real
  * name is settled): the filter base plus a second heap block. */
+struct Filter4PolyConfig;
+
 class Obj42094c : public Obj420794 {
 public:
+    Obj42094c(Obj420794Child *owned) : Obj420794(owned), config(NULL) {}
     virtual ~Obj42094c();
     virtual void prepareGeometry(); /* +0x08 */
     virtual void draw(); /* +0x0C */
@@ -14,6 +17,13 @@ public:
 
 protected:
     /* 0x18 */ void *dataB;     /* heap block */
+    /* 0x1C */ Filter4PolyConfig *config;
+
+public:
+    void setConfig(Filter4PolyConfig *source) { config = source; }
+    Filter4PolyConfig *getConfig() { return config; }
+    void setMotions(void *block) { dataB = block; }
+    void *getMotions() { return dataB; }
 };
 
 struct Filter4PolyVertex {
@@ -41,6 +51,9 @@ struct Filter4PolyConfig {
     /* 0x28 */ f32 maximumSpeed;
     /* 0x2C */ s32 count;
     /* 0x30 */ s32 frameStep;
+    /* 0x34 */ u32 colorA;
+    /* 0x38 */ u32 colorB;
+    /* 0x3C */ u32 colorC;
 };
 struct Filter4PolyView {
     /* 0x00 */ const void *vtable;

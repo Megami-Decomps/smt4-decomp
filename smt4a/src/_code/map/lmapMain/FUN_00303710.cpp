@@ -10,7 +10,7 @@ extern "C" {
 extern LmapExtraGlobalsA DAT_005806a0;
 extern LocalCamera g_localCamera;
 
-void FUN_0013c884(LocalCamera *, s32);
+void asdCameraInitializeDefaults(LocalCamera *, s32);
 void FUN_0014f0dc(LocalCamera *, const MapVector *, const MapVector *,
                   const MapVector *);
 void FUN_001523b8(LocalCamera *, s32, f32, f32, f32, f32);
@@ -50,7 +50,7 @@ void FUN_00303710(void)
     DAT_005806a0.extra->camera.savedTarget = DAT_005806a0.extra->camera.target;
     DAT_005806a0.extra->camera.savedEye = DAT_005806a0.extra->camera.eye;
 
-    FUN_0013c884(&g_localCamera, 1);
+    asdCameraInitializeDefaults(&g_localCamera, 1);
     FUN_0014f0dc(&g_localCamera,
                  &DAT_005806a0.extra->camera.eye,
                  &DAT_005806a0.extra->camera.target,

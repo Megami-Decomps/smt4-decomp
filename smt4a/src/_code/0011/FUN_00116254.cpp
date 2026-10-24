@@ -29,8 +29,8 @@ extern unsigned char LAB_0011633c; /* 0x11633c */
 
 /* Supplied declaration required: FUN_0011ce04. */
 /* Supplied declaration required: FUN_0011d444. */
-extern int operatorNew(unsigned int);
-extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
+extern int _Znwj(unsigned int);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_002ea3c0. */
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002f451c. */
@@ -81,7 +81,7 @@ void FUN_00116254(int param_1)
     }
     else {
       onlineJobSetStateWaiting(param_1);
-      temp_v1 = operatorNew(0x10);
+      temp_v1 = _Znwj(0x10);
       temp_v0 = 0;
       if (temp_v1 != 0) {
         temp_v0 = FUN_002ea3c0(temp_v1,0x116345,0,&LAB_0011633c);
@@ -91,7 +91,7 @@ void FUN_00116254(int param_1)
   }
   else {
     temp_v5 = 0x8001000d;
-    temp_v0 = FUN_002e7908((unsigned int *)&temp_v2,(unsigned int *)&temp_v5);
+    temp_v0 = _ZN12OnlineResultC1ERKj((unsigned int *)&temp_v2,(unsigned int *)&temp_v5);
     onlineJobApplyStateTriple(param_1,3,temp_v0);
   }
   return;

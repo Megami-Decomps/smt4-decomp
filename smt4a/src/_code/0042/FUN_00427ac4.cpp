@@ -1,95 +1,80 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00427ac4` (_code @ 0x427ac4, 0x124 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the title-id composition, media rewrite and every instruction match; retail places the query byte at sp+0 and the status buffer at sp+8 (this build has them the other way round) and allocates refs/count/index/category to r7/r6/r5/r4 with the not-found code and the constant 16 hoisted into r8/r9 and the id/variation in sl/fp, while this build assigns r9/r8/r4/r5 and fp/sl/r6/r7. */
+#include "nn/Result.h"
 
 extern "C" {
 
-int sysFatalBreak(void);
-int FUN_004268ec(char [8], int, unsigned int);
+void sysFatalBreak(void);
+s32 FUN_00426a80(s8 *status);
+s32 FUN_004268ec(u8 *value, u8 mode, u64 handle);
 
-/* stack frame of param_2: 2 slot(s), 2 byte(s) */
-typedef struct {
-    unsigned char sp30; /* 0x30: local_30 */
-    unsigned char sp38; /* 0x38: local_38 */
-} param_2_stack;
+// One entry of the caller's table of title references (8 bytes each).
+struct ArchiveRef {
+    u32 id;        // 0x00: low 20 bits used
+    u8 kind;       // 0x04: 0..4, selects the title category
+    u8 variation;  // 0x05
+    u8 media;      // 0x06: 0 or 1
+    u8 unk07;
+};
 
-extern int FUN_00427bec(...); /* 0x427bec */
-
-/* Supplied declaration required: sysFatalBreak. */
-/* Supplied declaration required: FUN_004268ec. */
-extern int FUN_00426a80(char *);
-
-
-void FUN_00427ac4(int param_1,unsigned int param_2)
-
+// Checks each referenced title (64-bit title ID: platform 4, category from `kind`) of category 0x8c
+// with the service query; returns the first failure code (or "already present"), else 0.
+s32 FUN_00427ac4(const ArchiveRef *refs, u32 count)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  char *pcVar4;
-  unsigned int *puVar5;
-  unsigned int temp_v3;
-  unsigned char *unaff_r8;
-  unsigned int temp_v4;
-  char temp_v5 [8];
-  char temp_v6 [12];
-  
-  temp_v1 = FUN_00426a80(temp_v6);
-  if (temp_v6[0] == '\x01' && -1 < temp_v1) {
-    if (param_2 != 0) {
-      unaff_r8 = (unsigned char *)0xd8a083fa;
+    s8 status[12];
+    s32 result = FUN_00426a80(status);
+    if ((status[0] - 1) | nnResultIsFailure(result)) {
+        return 0;
     }
-    temp_v3 = 0;
-    if (temp_v3 < param_2) {
-      do {
-        puVar5 = (unsigned int *)(param_1 + temp_v3 * 8);
-        switch((char)puVar5[1]) {
+    for (u32 i = 0; i < count; i++) {
+        const ArchiveRef *ref = &refs[i];
+        u32 category;
+        switch (ref->kind) {
         case 0:
-          temp_v1 = 0x8c;
-          break;
+            category = 0x8c;
+            break;
         case 1:
-          temp_v1 = 0xd;
-          break;
-        default:
-          temp_v1 = 0;
-          break;
+            category = 0xd;
+            break;
         case 3:
-          temp_v1 = 0x10;
-          break;
+            category = 0x10;
+            break;
         case 4:
-          temp_v1 = 0x30;
+            category = 0x30;
+            break;
+        case 2:
+            category = 0;
+            break;
+        default:
+            category = 0;
+            break;
         }
-        temp_v4 = *puVar5;
-        temp_v0 = *(unsigned char *)((int)puVar5 + 5);
-        temp_v2 = 0;
-        if (*(char *)((int)puVar5 + 6) != '\0') {
-          if (*(char *)((int)puVar5 + 6) == '\x01') {
-            temp_v2 = 2;
-          }
-          else {
-            sysFatalBreak();
-            temp_v2 = 0;
-          }
+        u32 id = ref->id;
+        u8 variation = ref->variation;
+        s32 media = ref->media;
+        if (media != 0) {
+            if (media == 1) {
+                media = 2;
+            } else {
+                sysFatalBreak();
+                media = 0;
+            }
         }
-        if (temp_v1 == 0x8c) {
-          pcVar4 = temp_v5;
-          FUN_004268ec(temp_v5,1,(unsigned int)temp_v0 | ((temp_v4 & 0xfffff) << 8) | (temp_v2 << 0x1c));
-          if (pcVar4 == (char *)unaff_r8) {
-            pcVar4 = (char *)0x0;
-          }
-          else if ((-1 < (int)pcVar4) && (pcVar4 = (char *)0x0, temp_v5[0] != '\0')) {
-            pcVar4 = (char *)FUN_00427bec;
-          }
-          if ((int)pcVar4 < 0) {
-            return;
-          }
+        u32 low = ((id << 8) | variation) & 0x0fffffff;
+        u64 handle = ((u64)(0x40000 | category) << 32) | low | (media << 28);
+        if ((handle >> 46) == 0x10 && (u16)(handle >> 32) == 0x8c) {
+            u8 value;
+            result = FUN_004268ec(&value, 1, handle);
+            if (result == (s32)0xD8A083FA) {
+                result = 0;
+            } else if (!nnResultIsFailure(result)) {
+                result = value != 0 ? (s32)0xE0A13899 : 0;
+            }
+            if (nnResultIsFailure(result)) {
+                return result;
+            }
         }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < param_2);
     }
-  }
-  return;
+    return 0;
 }
 
 } /* extern "C" */

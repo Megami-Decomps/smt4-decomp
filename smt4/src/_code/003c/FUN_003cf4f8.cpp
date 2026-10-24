@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00247478(short [11], unsigned int, unsigned int);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 
 /* stack frame of param_3: 7 slot(s), 18 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern int FUN_00229914(int *, int, int);
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00247478. */
 extern unsigned int btlGetMainState(void);
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 
 
 void FUN_003cf4f8(int *param_1,int param_2,short *param_3)
@@ -72,7 +72,7 @@ void FUN_003cf4f8(int *param_1,int param_2,short *param_3)
   temp_v13 = 0;
   temp_v14 = 0;
   temp_v15 = 0;
-  if ((temp_v4 != 0) && (FUN_002ae164(), temp_v4 != 0)) {
+  if ((temp_v4 != 0) && (dataTable40FindById(), temp_v4 != 0)) {
     if ((*(char *)(temp_v4 + 0x23) != '\x04') && (*(char *)(temp_v4 + 0x32) == '\0')) {
       temp_v0 = *(char *)(temp_v4 + 0x33);
       temp_v8 = temp_v0 == '\0';

@@ -27,7 +27,7 @@ extern BtlMainState *btlGetMainState(void);
 extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 extern u32 btlScriptResolveGroupArg(void);
 extern int FUN_002499fc(u32 handle, s32 *first, s32 *count);
-extern ItemRecord *FUN_002ae164(u16 id);
+extern ItemRecord *dataTable40FindById(u16 id);
 extern DevilRecord *devilGetRecord(u16 id);
 extern int FUN_001d2ac8(void);
 extern u32 scrGetArg(u32 index);
@@ -52,7 +52,7 @@ u32 FUN_002ff77c(void)
             (entry->flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && entry->id == id) {
             if (entry->equipA != NULL) {
                 for (j = 0; j < 8; j++) {
-                    item = FUN_002ae164(entry->equipA->items[j]);
+                    item = dataTable40FindById(entry->equipA->items[j]);
                     if (item != NULL && item->kind == ITEM_KIND_3) {
                         scrSetResult(1);
                         return 1;
@@ -61,7 +61,7 @@ u32 FUN_002ff77c(void)
             }
             if (entry->equipB != NULL) {
                 for (j = 0; j < 8; j++) {
-                    item = FUN_002ae164(entry->equipB->items[j]);
+                    item = dataTable40FindById(entry->equipB->items[j]);
                     if (item != NULL && item->kind == ITEM_KIND_3) {
                         scrSetResult(1);
                         return 1;
@@ -72,7 +72,7 @@ u32 FUN_002ff77c(void)
                 DevilRecord *devil = devilGetRecord(entry->id);
 
                 for (j = 0; j < 8; j++) {
-                    item = FUN_002ae164(devil->items[j]);
+                    item = dataTable40FindById(devil->items[j]);
                     if (item != NULL && item->kind == ITEM_KIND_3) {
                         scrSetResult(1);
                         return 1;

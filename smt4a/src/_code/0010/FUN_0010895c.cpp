@@ -8,8 +8,8 @@ int _ZN9Obj55b28cC1EPv(unsigned char [12], unsigned int);
 int _ZN9Obj55b28cD1Ev(...);
 int sharedRefRelease(...);
 int strAssign(int *, unsigned int, unsigned int, unsigned int);
-int operatorNew(int);
-int FUN_002e7908(...);
+int _Znwj(int);
+int _ZN12OnlineResultC1ERKj(...);
 int FUN_002eb108(int *, int, unsigned int, int);
 int FUN_002eb7d0(int, int);
 int FUN_002eb7e0(int *, int, unsigned int, int);
@@ -49,9 +49,9 @@ typedef struct {
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: strAssign. */
-/* Supplied declaration required: operatorNew. */
+/* Supplied declaration required: _Znwj. */
 extern int *FUN_002e7614(int, unsigned int);
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 extern int FUN_002ea6fc(int *, int **);
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002eb108. */
@@ -125,7 +125,7 @@ void FUN_0010895c(int *param_1,int param_2,fn_0010895c_arg2 *param_3,unsigned in
       }
       break;
     }
-    temp_v1 = operatorNew(0x20);
+    temp_v1 = _Znwj(0x20);
     if (temp_v1 != 0) {
       piVar6 = (int *)FUN_002e7614(temp_v1,temp_v17);
     }
@@ -160,7 +160,7 @@ LAB_001089c6:
       }
     }
     else {
-      piVar3 = (int *)operatorNew(0x150);
+      piVar3 = (int *)_Znwj(0x150);
       if (piVar3 != (int *)0x0) {
         temp_v7 = param_9;
         temp_v6 = piVar6;
@@ -215,7 +215,7 @@ LAB_00108b04:
     *piVar3 = temp_v4;
   }
   temp_v12 = 0x10001;
-  FUN_002e7908(temp_v15,&temp_v12);
+  _ZN12OnlineResultC1ERKj(temp_v15,&temp_v12);
   FUN_002f1486(&temp_v9);
   _ZN9Obj55b28cD1Ev(temp_v11);
   return;

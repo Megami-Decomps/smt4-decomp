@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00229a24(unsigned int);
 int FUN_00229b10(int *, unsigned int *);
 int FUN_00247478(unsigned char [4], int, unsigned int);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int dataTable08Sub1GetRecord(void);
 int FUN_0033a2c4(int, unsigned int);
 int btlUiCopyStatePairs(unsigned int, char [4], unsigned int *, int *);
@@ -30,7 +30,7 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_00229b10. */
 /* Supplied declaration required: FUN_00247478. */
 extern int playerPadTestBit(unsigned int);
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: FUN_0033a2c4. */
 /* Supplied declaration required: btlUiCopyStatePairs. */
@@ -104,7 +104,7 @@ unsigned int FUN_003cae6c(int *param_1,unsigned int *param_2)
         temp_v4 = (int)*(short *)(temp_v5 + 0x14e);
         dataTable08Sub1GetRecord();
         temp_v5 = (unsigned int)*(unsigned short *)(temp_v4 + 0x62);
-        if ((temp_v5 != 0) && (FUN_002ae164(), temp_v5 != 0)) {
+        if ((temp_v5 != 0) && (dataTable40FindById(), temp_v5 != 0)) {
           temp_v1 = *(char *)(temp_v5 + 0x23);
           temp_v2 = *(unsigned char *)(temp_v5 + 0x35);
           goto LAB_003cb0a0;
@@ -151,7 +151,7 @@ LAB_003cb174:
       return 1;
     }
     temp_v4 = (int)*(short *)(temp_v5 + 0x14e);
-    FUN_002ae164();
+    dataTable40FindById();
     if (temp_v4 == 0) goto LAB_003cb170;
     temp_v1 = *(char *)(temp_v4 + 0x23);
     temp_v2 = *(unsigned char *)(temp_v4 + 0x35);

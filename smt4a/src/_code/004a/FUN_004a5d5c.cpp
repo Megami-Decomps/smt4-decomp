@@ -11,7 +11,7 @@ void statusPanelSetOpen(s32 open);
 s32 statusDownGetFlag();
 void FUN_0031f718(s16 id, s32 enabled, s32 initial);
 void FUN_00372048(s32 mode);
-u32 FUN_003b70e0(s32 mode);
+u32 statusDownGetHelpMessage(s32 mode);
 s32 flaggedValueHolderGetTotal(void *cursor);
 
 // Refresh the selected demon's status preview and play the appropriate selection sound.
@@ -66,7 +66,7 @@ void FUN_004a5d5c(ItemListSelectionOwner *owner)
                 mode = panel;
             }
             FUN_00372048(panel);
-            u32 sound = FUN_003b70e0(mode);
+            u32 sound = statusDownGetHelpMessage(mode);
             if (sound != 0) {
                 sysPlaySe(sound);
                 return;

@@ -10,7 +10,7 @@ struct SkillSortUnitRecord {
 extern "C" {
 
 bool idIsAbove400(u32 id);
-const ActiveSkillRecord *FUN_002ae164(u32 id);
+const ActiveSkillRecord *dataTable40FindById(u32 id);
 const SkillSortUnitRecord *gameGetUnitRecord(s32 unit);
 s32 FUN_00257568(const SkillListEntry *a, const SkillListEntry *b);
 
@@ -20,7 +20,7 @@ static u16 skillSortKey(const SkillListEntry *entry)
     if (idIsAbove400(entry->skillId)) {
         return passiveSkillLookupRecord(entry->skillId)->sortKey;
     }
-    return FUN_002ae164(entry->skillId)->sortKey;
+    return dataTable40FindById(entry->skillId)->sortKey;
 }
 
 /* The holding unit's sort key, 0 without a unit. */

@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-extern int *FUN_002e7908(int *, int *);
+extern int *_ZN12OnlineResultC1ERKj(int *, int *);
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: vectorResizeBytes. */
@@ -63,7 +63,7 @@ int * FUN_00121808(int *param_1,int param_2)
     onlineInstanceTableFind(temp_v1,*(unsigned int *)(param_2 + 0x68));
     if (temp_v1 == 0) {
       temp_v2 = -0x7ffefffc;
-      piVar3 = (int *)FUN_002e7908(temp_v10,piVar3);
+      piVar3 = (int *)_ZN12OnlineResultC1ERKj(temp_v10,piVar3);
       return piVar3;
     }
     if (temp_v0 == 0) break;
@@ -92,13 +92,13 @@ LAB_0012184e:
         temp_v9[0] = 0x80050016;
         piVar3 = (int *)temp_v9;
       }
-      piVar3 = (int *)FUN_002e7908(temp_v10,piVar3);
+      piVar3 = (int *)_ZN12OnlineResultC1ERKj(temp_v10,piVar3);
       return piVar3;
     }
   }
   temp_v2 = -0x7ffaffea;
   piVar3 = &temp_v2;
-  piVar3 = (int *)FUN_002e7908(temp_v10,piVar3);
+  piVar3 = (int *)_ZN12OnlineResultC1ERKj(temp_v10,piVar3);
   return piVar3;
 }
 

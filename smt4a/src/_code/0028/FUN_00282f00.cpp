@@ -1,129 +1,116 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00282f00` (_code @ 0x282f00, 0x1b4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "AsdSDK/AsdDebugHooks.h"
+
+// The effect editor's state (Apocalypse layout, same offsets as IV); only the fields this update touches.
+struct EffectEditorIV {
+    /* 0x00 */ s8 toggle;
+    /* 0x01 */ u8 unk01[5];
+    /* 0x06 */ u8 unk06;
+    /* 0x07 */ u8 unk07;
+    /* 0x08 */ u8 active;
+    /* 0x09 */ u8 unk09[3];
+    /* 0x0c */ u32 unk0c;
+    /* 0x10 */ void *unk10;
+    /* 0x14 */ void *unk14;
+    /* 0x18 */ u8 unk18[8];
+    /* 0x20 */ void *unk20;
+    /* 0x24 */ u8 unk24[4];
+    /* 0x28 */ s32 pending;
+    /* 0x2c */ u32 unk2c;
+    /* 0x30 */ void *texture;
+    /* 0x34 */ u8 unk34[0x18];
+    /* 0x4c */ u32 unk4c;
+    /* 0x50 */ u32 unk50;
+    /* 0x54 */ u32 unk54;
+    /* 0x58 */ u32 unk58;
+    /* 0x5c */ u32 unk5c;
+    /* 0x60 */ u32 unk60;
+    /* 0x64 */ u32 unk64;
+    /* 0x68 */ u32 unk68;
+};
+
+// A shared block whose word at 0xc is cleared with the editor.
+struct EditorSharedIV {
+    /* 0x00 */ u8 unk00[0xc];
+    /* 0x0c */ u32 unk0c;
+};
 
 extern "C" {
+extern EffectEditorIV g_effectEditor;
+extern EditorSharedIV DAT_0059e9a8;
 
-int FUN_00163fd4(int);
-int asdTextureRelease(void);
-int FUN_002fe590(void);
-int FUN_00388aac(int);
-int effMenuListsClear(void);
-int objectRegistryInsert(int, int);
-int floatPairAddA(int, float *);
-int floatPairAddB(void);
-int asdEffectQueueRelease(int, int);
+s32 FUN_00163fd4(s32 id);
+// Platform stub (`mov r0, #0; bx lr`) that armlink inlines at the call: the analog read never writes x/y.
+s32 FUN_00284dbc(f32 *x, f32 *y, s32 first, s32 second, s32 third);
+s32 padButtonIsPressed(s32 id);
+void asdEffectQueueRelease(void *entry, s32 mode);
+void objectRegistryInsert(void *resource, s32 mode);
+void asdTextureRelease(void *texture);
+void floatPairAddA(f32 delta);
+void floatPairAddB(f32 delta);
+void FUN_002fe590(void);
+void effMenuListsClear(void);
+void FUN_00388aac(s32 value);
 
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern signed char g_effectEditor; /* 0x59dbe0 */
-extern unsigned char DAT_0059dbe6; /* 0x59dbe6 */
-extern signed char DAT_0059dbe8; /* 0x59dbe8 */
-extern unsigned int DAT_0059dbec; /* 0x59dbec */
-extern int DAT_0059dbf0; /* 0x59dbf0 */
-extern int DAT_0059dbf4; /* 0x59dbf4 */
-extern int DAT_0059dc00; /* 0x59dc00 */
-extern int DAT_0059dc08; /* 0x59dc08 */
-extern unsigned int DAT_0059dc0c; /* 0x59dc0c */
-extern int DAT_0059dc10; /* 0x59dc10 */
-extern unsigned int DAT_0059dc2c; /* 0x59dc2c */
-extern unsigned int DAT_0059dc30; /* 0x59dc30 */
-extern unsigned int DAT_0059dc34; /* 0x59dc34 */
-extern unsigned int DAT_0059dc38; /* 0x59dc38 */
-extern unsigned int DAT_0059dc40; /* 0x59dc40 */
-extern unsigned int DAT_0059dc44; /* 0x59dc44 */
-extern unsigned int DAT_0059dc48; /* 0x59dc48 */
-extern unsigned int DAT_0059e9b4; /* 0x59e9b4 */
-
-/* Supplied declaration required: FUN_00163fd4. */
-extern int padButtonIsPressed(unsigned int);
-/* Supplied declaration required: asdTextureRelease. */
-/* Supplied declaration required: FUN_002fe590. */
-/* Supplied declaration required: FUN_00388aac. */
-/* Supplied declaration required: effMenuListsClear. */
-/* Supplied declaration required: objectRegistryInsert. */
-/* Supplied declaration required: floatPairAddA. */
-/* Supplied declaration required: floatPairAddB. */
-/* Supplied declaration required: asdEffectQueueRelease. */
-
-
-unsigned int FUN_00282f00(void)
-
+// Per-frame update of the effect editor: closes it down while a request is pending without an
+// active editor, otherwise feeds the analog stick to the menu and handles the toggle button.
+u32 FUN_00282f00(void)
 {
-/* irregular: 9 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  float *pfVar3;
-  unsigned long long temp_v2;
-  float temp_v3;
-  float temp_v4;
-  
-  temp_v0 = '\0';
-  if (DAT_0059dc08 != 0) {
-    temp_v0 = DAT_0059dbe8;
-  }
-  if (DAT_0059dc08 == 0 || temp_v0 == '\0') {
-    temp_v2 = FUN_00163fd4(0x1c);
-    pfVar3 = (float *)((unsigned long long)temp_v2 >> 0x20);
-    if ((int)temp_v2 != 0) {
-      pfVar3 = &temp_v3;
+    if (g_effectEditor.pending != 0 && g_effectEditor.active != 0) {
+        g_effectEditor.unk06 = 0;
+        g_effectEditor.unk0c = 0;
+        DAT_0059e9a8.unk0c = 0;
+        if (g_effectEditor.unk14 != NULL) {
+            asdEffectQueueRelease(g_effectEditor.unk14, 3);
+            g_effectEditor.unk14 = NULL;
+        }
+        if (g_effectEditor.unk10 != NULL) {
+            asdEffectQueueRelease(g_effectEditor.unk10, 3);
+            g_effectEditor.unk10 = NULL;
+        }
+        if (g_effectEditor.unk20 != NULL) {
+            objectRegistryInsert(g_effectEditor.unk20, 3);
+            g_effectEditor.unk20 = NULL;
+        }
+        g_effectEditor.unk4c = 0;
+        g_effectEditor.unk50 = 0;
+        g_effectEditor.unk54 = 1;
+        g_effectEditor.unk58 = 0;
+        g_effectEditor.unk60 = 0;
+        g_effectEditor.unk64 = 0;
+        g_effectEditor.unk68 = 0;
+        g_effectEditor.active = 0;
+        if (g_effectEditor.texture != NULL) {
+            asdTextureRelease(g_effectEditor.texture);
+            g_effectEditor.texture = NULL;
+        }
+        return 0;
     }
-    else {
-      temp_v4 = 0.0f;
-      temp_v3 = 0.0f;
+    f32 x;
+    f32 y;
+    if (FUN_00163fd4(28)) {
+        FUN_00284dbc(&x, &y, 0, 0, 0);
+    } else {
+        x = 0.0f;
+        y = 0.0f;
     }
-    temp_v4 = temp_v4 * 128.0f;
-    temp_v3 = temp_v3 * 128.0f;
-    floatPairAddA(0,pfVar3);
-    floatPairAddB();
+    x *= 128.0f;
+    y *= 128.0f;
+    floatPairAddA(x * 0.1f);
+    floatPairAddB(y * -0.1f);
     FUN_002fe590();
-    DAT_0059dc0c = 0;
+    g_effectEditor.unk2c = 0;
     effMenuListsClear();
     FUN_00388aac(0);
-    temp_v1 = FUN_00163fd4(0x1c);
-    if ((temp_v1 != 0) && (temp_v1 = padButtonIsPressed(0x1b), temp_v1 != 0)) {
-      if (g_effectEditor == '\0') {
-        g_effectEditor = '\x01';
-      }
-      else {
-        g_effectEditor = '\0';
-      }
+    asdDebugHookVoid();
+    if (FUN_00163fd4(28) && padButtonIsPressed(27)) {
+        if (g_effectEditor.toggle == 0) {
+            g_effectEditor.toggle = 1;
+        } else {
+            g_effectEditor.toggle = 0;
+        }
     }
     return 1;
-  }
-  DAT_0059dbe6 = 0;
-  DAT_0059dbec = 0;
-  DAT_0059e9b4 = 0;
-  if (DAT_0059dbf4 != 0) {
-    asdEffectQueueRelease(DAT_0059dbf4,3);
-    DAT_0059dbf4 = 0;
-  }
-  if (DAT_0059dbf0 != 0) {
-    asdEffectQueueRelease(DAT_0059dbf0,3);
-    DAT_0059dbf0 = 0;
-  }
-  if (DAT_0059dc00 != 0) {
-    objectRegistryInsert(DAT_0059dc00,3);
-    DAT_0059dc00 = 0;
-  }
-  DAT_0059dc2c = 0;
-  DAT_0059dc30 = 0;
-  DAT_0059dc34 = 1;
-  DAT_0059dc38 = 0;
-  DAT_0059dc40 = 0;
-  DAT_0059dc44 = 0;
-  DAT_0059dc48 = 0;
-  DAT_0059dbe8 = 0;
-  if (DAT_0059dc10 != 0) {
-    asdTextureRelease();
-    DAT_0059dc10 = 0;
-  }
-  return 0;
 }
 
 } /* extern "C" */

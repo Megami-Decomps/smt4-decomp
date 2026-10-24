@@ -1,124 +1,117 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00422940` (_code @ 0x422940, 0x18c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: setup, ring allocation, mix-thread allocation and the NN thread start call match; retail's stack frame has 16 more bytes around the start argument/functor table (0x34 vs 0x24) and keeps the shared zero in r4 for the new-owner argument. */
+#include "AsdSDK/AsdDebug.h"
+#include "common.h"
+#include "nn/Result.h"
+
+/* The audio device's allocator interface: slot 0 allocates. */
+class AudioAllocator {
+public:
+    virtual void *allocate(u32 bytes, u32 alignment) = 0;
+};
+
+/* The mix thread's wrapper object: its stack block and four cleared words. */
+struct AudioThreadWork {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 stackBase;
+    /* 0x0C */ u32 stackSize;
+    /* 0x10 */ u8 unk10;
+    /* 0x11 */ u8 unk11[7];
+};
+
+/* Describes how the thread's start argument is copied onto its stack. */
+struct ThreadFunctorTable {
+    /* 0x00 */ u32 argumentSize;
+    /* 0x04 */ void (*copyArgument)();
+    /* 0x08 */ void (*destroyArgument)();
+    /* 0x0C */ void (*invoke)();
+};
+
+struct AudioDeviceState {
+    /* 0x00 */ u8 unk00;
+    /* 0x01 */ u8 loop;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ AudioAllocator *allocator;
+    /* 0x08 */ void *ring;
+    /* 0x0C */ void *threadStack;
+    /* 0x10 */ AudioThreadWork *thread;
+    /* 0x14 */ s32 ringCount;
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u32 unk1C;
+};
 
 extern "C" {
+extern AudioDeviceState DAT_005880d0;
+extern u8 DAT_005880f0[];
+extern u8 DAT_00618518[];
+extern const char DAT_00532a54[];
 
-int FUN_00158f64(...);
-int FUN_00159030(...);
-int FUN_00159d60(...);
-int asdOperatorNew(...);
-int memAlloc(...);
-int resultReportIfFailed(...);
-int FUN_0016f368(...);
-int nn_os_CriticalSection_Initialize(...);
-int FUN_002e3140(...);
-int sysMemClear(...);
-int FUN_002fb0d4(...);
+void FUN_00158f64();
+void FUN_00159030();
+void FUN_00159d60();
+void FUN_0016f368(f32 value);
+void *sysMemClear(void *destination, u32 size);
+void nn_os_CriticalSection_Initialize(void *section);
+void *memAlloc(u32 heap, u32 type, u32 flags, u32 bytes, u32 alignment, u32 clear);
+void *asdOperatorNew(u32 bytes, void *owner);
+void resultReportIfFailed(AudioThreadWork *thread, void *stack, u32 size);
+s32 FUN_002fb0d4(void *thread, ThreadFunctorTable *table, void (*entry)(), void *argument, u32 stackTop, s32 priority,
+                 s32 core, s32 flag);
+void FUN_002e3140(s32 result);
+void FUN_00422bf0();
+void copyValueIfDestination();
+void emptyStub_0010032c();
+void FUN_00100326();
 
-typedef int romwright_code(...);
-/* stack frame of param_3: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_3_stack;
-
-extern unsigned char LAB_0010031d; /* 0x10031d */
-extern unsigned char LAB_00100327; /* 0x100327 */
-extern unsigned char LAB_0010032d; /* 0x10032d */
-extern int FUN_00422bf0(...); /* 0x422bf0 */
-extern signed char DAT_005880d1; /* 0x5880d1 */
-extern unsigned int *DAT_005880d4; /* 0x5880d4 */
-extern int DAT_005880d8; /* 0x5880d8 */
-extern unsigned int DAT_005880dc; /* 0x5880dc */
-extern unsigned int *DAT_005880e0; /* 0x5880e0 */
-extern int DAT_005880e4; /* 0x5880e4 */
-extern unsigned int DAT_005880e8; /* 0x5880e8 */
-extern unsigned int DAT_005880ec; /* 0x5880ec */
-extern unsigned int DAT_005880f0; /* 0x5880f0 */
-extern unsigned int DAT_00618518; /* 0x618518 */
-
-/* Supplied declaration required: FUN_00158f64. */
-/* Supplied declaration required: FUN_00159030. */
-/* Supplied declaration required: FUN_00159d60. */
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: resultReportIfFailed. */
-/* Supplied declaration required: FUN_0016f368. */
-/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-/* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002fb0d4. */
-
-
-unsigned int FUN_00422940(unsigned int *param_1,int param_2,char param_3)
-
+// Starts the audio device: allocates the ring, then (when asked) the mix thread.
+u32 FUN_00422940(AudioAllocator *allocator, s32 ringCount, u8 loop)
 {
-/* irregular: 12 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1 [2];
-  int temp_v2;
-  unsigned char *temp_v3;
-  unsigned char *temp_v4;
-  unsigned char *temp_v5;
-  
-  FUN_00158f64();
-  FUN_00159030();
-  FUN_00159d60();
-  FUN_0016f368();
-  DAT_005880d1 = param_3;
-  if (DAT_005880d4 != (unsigned int *)0x0) {
-    temp_v0 = 0;
-  }
-  else {
-    DAT_005880d4 = param_1;
-    DAT_005880e4 = param_2;
-    DAT_005880d8 = (**(romwright_code **)*param_1)(param_1,param_2 * 0x70,4);
-    if (DAT_005880d8 == 0) {
-      DAT_005880d4 = (unsigned int *)0x0;
-      DAT_005880e4 = 0;
-      return 0;
+    FUN_00158f64();
+    FUN_00159030();
+    FUN_00159d60();
+    FUN_0016f368(1.0f);
+    DAT_005880d0.loop = loop;
+    if (DAT_005880d0.allocator != NULL) {
+        return 0;
     }
-    sysMemClear(DAT_005880d8,DAT_005880e4 * 0x70);
-    DAT_005880e8 = 0;
-    DAT_005880ec = 0;
-    nn_os_CriticalSection_Initialize(&DAT_00618518);
-    if (DAT_005880d1 != '\0') {
-      temp_v0 = 0x100;
-      memAlloc(0x100,0x100,0,0x1000,0x1000,1);
-      puVar2 = (unsigned int *)0x18;
-      DAT_005880dc = temp_v0;
-      asdOperatorNew(0x18,0);
-      if (puVar2 != (unsigned int *)0x0) {
-        *puVar2 = 0;
-        puVar2[1] = 0;
-        puVar2[2] = 0;
-        puVar2[3] = 0;
-        *(unsigned char *)(puVar2 + 4) = 0;
-      }
-      DAT_005880e0 = puVar2;
-      resultReportIfFailed();
-      temp_v1[0] = 0;
-      temp_v2 = 4;
-      temp_v3 = &LAB_0010031d;
-      puVar2 = &DAT_005880f0;
-      temp_v4 = &LAB_0010032d;
-      temp_v5 = &LAB_00100327;
-      FUN_002fb0d4(&DAT_005880f0,&temp_v2,FUN_00422bf0,temp_v1,DAT_005880e0[3] + DAT_005880e0[2],2
-                   ,0xfffffffe,0);
-      if ((int)puVar2 < 0) {
-        FUN_002e3140();
-      }
+    DAT_005880d0.ringCount = ringCount;
+    DAT_005880d0.allocator = allocator;
+    DAT_005880d0.ring = allocator->allocate(ringCount * 0x70, 4);
+    if (DAT_005880d0.ring == NULL) {
+        DAT_005880d0.allocator = NULL;
+        DAT_005880d0.ringCount = 0;
+        return 0;
     }
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    sysMemClear(DAT_005880d0.ring, DAT_005880d0.ringCount * 0x70);
+    DAT_005880d0.unk18 = 0;
+    DAT_005880d0.unk1C = 0;
+    nn_os_CriticalSection_Initialize(DAT_00618518);
+    if (DAT_005880d0.loop != 0) {
+        asdDebugTrace(DAT_00532a54, 249);
+        DAT_005880d0.threadStack = memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
+        AudioThreadWork *thread = static_cast<AudioThreadWork *>(asdOperatorNew(sizeof(AudioThreadWork), NULL));
+        if (thread != NULL) {
+            thread->unk00 = 0;
+            thread->unk04 = 0;
+            thread->stackBase = 0;
+            thread->stackSize = 0;
+            thread->unk10 = 0;
+        }
+        DAT_005880d0.thread = thread;
+        resultReportIfFailed(thread, DAT_005880d0.threadStack, 0x1000);
+        u32 argument = 0;
+        ThreadFunctorTable table;
+        table.argumentSize = 4;
+        table.copyArgument = copyValueIfDestination;
+        table.destroyArgument = emptyStub_0010032c;
+        table.invoke = FUN_00100326;
+        s32 result = FUN_002fb0d4(DAT_005880f0, &table, FUN_00422bf0, &argument,
+                                  DAT_005880d0.thread->stackBase + DAT_005880d0.thread->stackSize, 2, -2, 0);
+        if (nnResultIsFailure(result)) {
+            FUN_002e3140(result);
+        }
+    }
+    return 1;
 }
 
-} /* extern "C" */
+}

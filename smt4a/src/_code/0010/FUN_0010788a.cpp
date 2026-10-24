@@ -10,7 +10,7 @@ int sharedRefRelease(int *);
 int bufferAssignByte(int *, unsigned char [4]);
 int strHolderAssignOneWide(...);
 int FUN_002efa58(int *, int, int);
-int bitFieldSet(int *, int);
+int _ZNSt6vectorIb12AsdAllocatorIbEE9referenceaSEb(int *, int);
 int FUN_002effdc(int *);
 int vectorCount2_002f00e8(unsigned short **);
 int FUN_002f012e(...);
@@ -42,7 +42,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001221a2. */
 /* Supplied declaration required: FUN_001358f2. */
 /* Supplied declaration required: sharedRefRelease. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: bufferAssignByte. */
 extern int FUN_002eb7d0(unsigned int, unsigned int);
 extern int *FUN_002ed258(int, int *);
@@ -50,7 +50,7 @@ extern int *FUN_002ed258(int, int *);
 extern int *arrayElementAddress_002efa50(int, int);
 /* Supplied declaration required: FUN_002efa58. */
 extern int bitFieldTest(unsigned int *);
-/* Supplied declaration required: bitFieldSet. */
+/* Supplied declaration required: _ZNSt6vectorIb12AsdAllocatorIbEE9referenceaSEb. */
 extern int *FUN_002eff58(int, unsigned int);
 extern int FUN_002eff84(void);
 extern int *FUN_002eff90(int, unsigned int);
@@ -107,7 +107,7 @@ void FUN_0010788a(int param_1)
       (**(romwright_code **)(*piVar3 + 4))(piVar3);
       return;
     }
-    temp_v1 = operatorNew(0x10);
+    temp_v1 = _Znwj(0x10);
     if (temp_v1 != 0) {
       piVar4 = (int *)FUN_002ed258(temp_v1,piVar3);
     }
@@ -118,7 +118,7 @@ void FUN_0010788a(int param_1)
   }
   else {
     temp_v16 = 0;
-    temp_v1 = operatorNew(0x10);
+    temp_v1 = _Znwj(0x10);
     if (temp_v1 != 0) {
       piVar4 = (int *)FUN_002eff90(temp_v1,0x80);
     }
@@ -146,7 +146,7 @@ void FUN_0010788a(int param_1)
     FUN_002efa58(&temp_v5,temp_v12,temp_v1);
     temp_v15 = temp_v6;
     temp_v14 = temp_v5;
-    bitFieldSet(&temp_v14,0);
+    _ZNSt6vectorIb12AsdAllocatorIbEE9referenceaSEb(&temp_v14,0);
     piVar3 = (int *)arrayElementAddress_002efa50(temp_v11,temp_v1);
     temp_v2 = *piVar3;
     temp_v6 = temp_v2 + 4;
@@ -211,7 +211,7 @@ void FUN_0010788a(int param_1)
           FUN_001221a2(&temp_v8);
           return;
         }
-        temp_v2 = operatorNew(0x10);
+        temp_v2 = _Znwj(0x10);
         piVar3 = (int *)0x0;
         if (temp_v2 != 0) {
           piVar3 = (int *)FUN_002ed258(temp_v2,piVar4);
@@ -219,7 +219,7 @@ void FUN_0010788a(int param_1)
         sharedRefRelease(piVar4);
       }
       else {
-        temp_v2 = operatorNew(0x10);
+        temp_v2 = _Znwj(0x10);
         piVar3 = (int *)0x0;
         if (temp_v2 != 0) {
           piVar3 = (int *)FUN_002eff90(temp_v2,0x80);

@@ -4,9 +4,12 @@
 #include <stddef.h>
 struct EffectBehaviorArgument { u16 index; };
 typedef s32 (*EffectBehaviorQuery)(const EffectBehaviorArgument *argument);
+struct EffectBehavior;
+typedef void (*EffectBehaviorRun)(EffectBehavior *behavior);
 struct EffectBehaviorEntry {
     union {
         u8 unk00[0x10];
+        EffectBehaviorRun run;
         struct {
             u8 unk00[8];
             s32 elementSize;

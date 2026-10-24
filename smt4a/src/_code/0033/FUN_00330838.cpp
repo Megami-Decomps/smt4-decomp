@@ -1,48 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00330838` (_code @ 0x330838, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "event/eventCommand.h"
 
 extern "C" {
 
-int scrGetArg(int);
-int eventSetUnderMessageFade(unsigned int, int, int);
-int SBORROW4(int, int);
+void eventSetUnderMessageFade(u32 color, s32 duration, s32 fadeIn, f32 alpha);
+extern EventCommandGlobals g_eventCommand;
+s32 scrGetArg(u32 index);
+u32 scrGetCommandFrame(void);
+s32 FUN_00203d74(void);
 
-extern int g_eventCommand; /* 0x57f554 */
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_00203d74(void);
-/* Supplied declaration required: scrGetArg. */
-extern int scrGetCommandFrame(void);
-/* Supplied declaration required: eventSetUnderMessageFade. */
-
-
-unsigned char FUN_00330838(void)
-
+/* Script command: fades the message underlay in with the given color and duration (at most 4 when the check passes). */
+u8 FUN_00330838(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v0 = scrGetCommandFrame();
-  if (temp_v0 == 0) {
-    temp_v1 = scrGetArg(0);
-    temp_v2 = scrGetArg(1);
-    temp_v0 = FUN_00203d74();
-    temp_v3 = temp_v0 != 0;
-    temp_v0 = 0;
-    if (temp_v3) {
-      temp_v0 = temp_v2 - 4;
+    if (scrGetCommandFrame() == 0) {
+        u32 color = scrGetArg(0);
+        s32 duration = scrGetArg(1);
+
+        if (FUN_00203d74() != 0 && duration > 4) {
+            duration = 4;
+        }
+        eventSetUnderMessageFade(color, duration, 1, 1.0f);
+        return 0;
     }
-    if ((temp_v3 && temp_v2 != 4) && temp_v0 < 0 == (temp_v3 && SBORROW4(temp_v2,4))) {
-      temp_v2 = 4;
-    }
-    eventSetUnderMessageFade(temp_v1,temp_v2,1);
-    return 0;
-  }
-  return *(int *)(g_eventCommand + 0x10) == *(int *)(g_eventCommand + 0x14);
+    return g_eventCommand.command->elapsed == g_eventCommand.command->duration;
 }
 
 } /* extern "C" */

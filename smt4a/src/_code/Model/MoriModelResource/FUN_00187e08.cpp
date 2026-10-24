@@ -7,7 +7,7 @@ extern "C" {
 int asdMemoryAlloc(...);
 int FUN_0017cf74(...);
 int asdMemoryAllocAligned(...);
-int FUN_001b15cc(...);
+int _ZN18AsdAnimCameraState10InitializeEPK21AsdAnimCameraResourceP18AsdAnimCameraSetup(...);
 
 /* stack frame of param_5: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_0017cf74. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
-/* Supplied declaration required: FUN_001b15cc. */
+/* Supplied declaration required: _ZN18AsdAnimCameraState10InitializeEPK21AsdAnimCameraResourceP18AsdAnimCameraSetup. */
 
 
 void FUN_00187e08(int param_1,int param_2,int param_3,int param_4,int param_5)
@@ -155,7 +155,7 @@ LAB_00187f84:
   }
 LAB_00187f88:
   temp_v5 = param_1 + 0x5c;
-  FUN_001b15cc(param_1 + 0xc,param_2);
+  _ZN18AsdAnimCameraState10InitializeEPK21AsdAnimCameraResourceP18AsdAnimCameraSetup(param_1 + 0xc,param_2);
   if (param_4 != 0x10000) {
     temp_v5 = *(int *)(param_2 + 0x2c);
   }

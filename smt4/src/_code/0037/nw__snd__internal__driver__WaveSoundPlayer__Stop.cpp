@@ -1,7 +1,7 @@
 #include "nw/snd/WaveSoundPlayer.h"
 
 extern "C" {
-void *nw_snd_internal_driver_SoundThread_GetInstance(void);
+void *_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 void linkListEraseManagerNode(void *thread, void *node);
 }
 
@@ -14,7 +14,7 @@ namespace driver {
 void WaveSoundPlayer::Stop()
 {
     if (started != 0) {
-        linkListEraseManagerNode(nw_snd_internal_driver_SoundThread_GetInstance(), node);
+        linkListEraseManagerNode(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(), node);
         started = 0;
     }
 }

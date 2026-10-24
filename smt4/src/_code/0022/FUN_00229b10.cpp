@@ -9,7 +9,7 @@ extern BattleEvent *g_btlEvent;
 extern BtlActionGlobals g_btlAction;
 s32 FUN_0027e3b8(BattleEvent *);
 s32 btlEventSelectTrigger(BattleEvent *, s32, s32, s32);
-const void *FUN_002ae164(s32);
+const void *dataTable40FindById(s32);
 void battleSetActionKind(BtlMainState **);
 
 /* Prefer a battle event, then command-specific action kinds, before normal selection. */
@@ -46,7 +46,7 @@ void FUN_00229b10(BtlMainState **state, const ActionKindSelection *selection)
     }
     s16 kind = selection->command->kind;
     if (kind == 3) {
-        const SkillActionView *skill = (const SkillActionView *)FUN_002ae164(selection->command->skill);
+        const SkillActionView *skill = (const SkillActionView *)dataTable40FindById(selection->command->skill);
         bool special = skill != NULL && skill->special != 0;
         const ActionStateView *view = (const ActionStateView *)*state;
         if (!(view->flags & 0x800) && special) {

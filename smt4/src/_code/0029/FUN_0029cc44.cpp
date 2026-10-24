@@ -3,7 +3,7 @@
 
 extern "C" {
 extern MessageGlobals g_messageMain;
-void FUN_002bee58(void *widget, u32 animation);
+void spriteStartAnimationByIndex(void *widget, u32 animation);
 void titleOverlaySetModeAnimation(void *overlay, u32 mode);
 }
 namespace {
@@ -44,7 +44,7 @@ u32 FUN_0029cc44(s32 closeMessage)
     if (closeMessage && panel->mode == 11 && panel->state) {
         if (panel->unk7C == 0 || panel->unk7C == 2) {
             panel->unk7C = 4;
-            FUN_002bee58(widget, panel->unk7F ? 2 : 7);
+            spriteStartAnimationByIndex(widget, panel->unk7F ? 2 : 7);
             closeOverlay(g_messageMain.state);
             closeOverlay(panel);
         }
@@ -52,7 +52,7 @@ u32 FUN_0029cc44(s32 closeMessage)
     }
     if (panel->unk7C == 0 || panel->unk7C == 2 || panel->unk7C == 1) {
         panel->unk7C = 4;
-        FUN_002bee58(widget, panel->unk7F ? 2 : 7);
+        spriteStartAnimationByIndex(widget, panel->unk7F ? 2 : 7);
     }
     return 1;
 }

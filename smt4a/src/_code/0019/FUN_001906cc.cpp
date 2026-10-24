@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_0019065c(int *);
-int FUN_001a0d08(int *);
+int nn_os_Thread_FinalizeImpl(int *);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0019065c. */
-/* Supplied declaration required: FUN_001a0d08. */
+/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
 
 
 int * FUN_001906cc(int *param_1)
@@ -20,7 +20,7 @@ int * FUN_001906cc(int *param_1)
   if (*(char *)((int)param_1 + 0x15) != '\0') {
     FUN_0019065c(param_1);
   }
-  FUN_001a0d08(param_1);
+  nn_os_Thread_FinalizeImpl(param_1);
   if (*param_1 != 0) {
     software_interrupt(0x23);
     *param_1 = 0;

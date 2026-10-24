@@ -15,8 +15,14 @@ struct SoundActorQueueEntry {
     /* 0x01 */ u8 unk01[3];
     /* 0x04 */ u32 soundId;
     /* 0x08 */ u32 handle;
-    /* 0x0c */ u32 unk0c;
-    /* 0x10 */ u16 unk10;
+    union {
+        /* 0x0c */ u32 unk0c;
+        /* 0x0c */ u32 started; /* 1 while the distance-managed actor sound runs */
+    };
+    union {
+        /* 0x10 */ u16 unk10;
+        /* 0x10 */ u16 positional; /* 1: sound started and stopped by distance to the listener */
+    };
     union {
         /* 0x12 */ u8 unk12[2];
         /* 0x12 */ s16 inactiveFrames;

@@ -14,14 +14,14 @@ typedef struct Object {
     /* 0xA2 */ u8 hasRequest;
 } Object;
 
-extern u32 FUN_001b1f04(void);
+extern u32 _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 extern void FUN_001d0b28(u32 owner, void *request);
 
 void FUN_00462dc4(Object *obj)
 {
     obj->dirty = 1;
     if (obj->hasRequest != 0) {
-        FUN_001d0b28(FUN_001b1f04(), obj->request);
+        FUN_001d0b28(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(), obj->request);
         obj->hasRequest = 0;
     }
     if (obj->busy != 0) {

@@ -1,37 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `handleBlockRefCreate` (_code @ 0x256fec, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only r4/r5 swapped (retail keeps the resource in r4 and the size in r5) */
+#include "shard/W6_W6Match8_SpriteTextureResource.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/AsdDebug.h"
+
+struct SpriteResourceHandle {
+    SpriteTextureResource *resource;
+};
 
 extern "C" {
+void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, s32 kind);
+void spriteGroupPlayerSelect(SpriteGroupPlayer *player, s32 group);
 
-int spriteGroupPlayerSelect(void);
-int memAlloc(int, int, int, int, int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-/* Supplied declaration required: spriteGroupPlayerSelect. */
-/* Supplied declaration required: memAlloc. */
-
-
-int * handleBlockRefCreate(int *param_1)
-
+// Create a player for a sprite resource: one state per group slot the resource reserved, playing group zero.
+SpriteGroupPlayer *handleBlockRefCreate(SpriteResourceHandle *handle)
 {
-/* irregular: 2 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  
-  temp_v0 = *param_1;
-  *(int *)(temp_v0 + 0x10) = *(int *)(temp_v0 + 0x10) + 1;
-  piVar1 = (int *)0x10000;
-  memAlloc(0x10000,0x100,0,*(int *)(temp_v0 + 8) * 0x14 + 0x18,0x10,1);
-  piVar1[4] = (int)(piVar1 + 6);
-  *piVar1 = temp_v0;
-  spriteGroupPlayerSelect();
-  *(unsigned short *)(piVar1 + 5) = 1;
-  return piVar1;
-}
+    SpriteTextureResource *resource = handle->resource;
 
-} /* extern "C" */
+    resource->references++;
+    u32 size = sizeof(SpriteGroupPlayer) + resource->stateCapacity * sizeof(SpriteGroupState);
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effP2A.cpp", 150);
+    SpriteGroupPlayer *player = static_cast<SpriteGroupPlayer *>(
+        memAlloc(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, size, 16, 1));
+    player->states = reinterpret_cast<SpriteGroupState *>(player + 1);
+    player->resource = &resource->group;
+    spriteGroupPlayerSelect(player, 0);
+    player->active = 1;
+    return player;
+}
+}

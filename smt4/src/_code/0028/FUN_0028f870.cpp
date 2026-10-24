@@ -1,134 +1,126 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028f870` (_code @ 0x28f870, 0x2a8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc builds the "held" sprite ids with ldrne instead of retail orrne x,x,x asr 9, and hoists the render-state constants (3/0) differently; rest identical */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0029a17c(...);
-int FUN_0029ee54(unsigned int);
-int FUN_002bf288(...);
+/* The three scroll-arrow touch regions of the camp screen. */
+struct CampTouchRegions {
+    /* 0x000 */ u8 unk000[0xE02];
+    /* 0xE02 */ s16 thumbRegion;
+    /* 0xE04 */ s16 previousRegion;
+    /* 0xE06 */ s16 nextRegion;
+};
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_4_stack;
+/* The title scene's render-state stack: the top entry is set, and the flush callback runs when it changed. */
+struct RenderStateStack {
+    /* 0x00 */ s32 top;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ s32 states[4];
+    /* 0x18 */ u8 dirty;
+    /* 0x19 */ u8 unk19[3];
+    /* 0x1C */ void (*flush)(void);
+};
+struct TitleSceneWork {
+    /* 0x0000 */ u8 unk0000[0x130C];
+    /* 0x130C */ RenderStateStack renderStates;
+};
 
-extern int g_camp; /* 0x43da90 */
-extern int g_titleScene; /* 0x44ea00 */
+/* A sprite entry of an image bank: where it sits and the pair of values in its cell. */
+struct BankSprite {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+    /* 0x0C */ s16 *cell;
+};
 
-/* Supplied declaration required: FUN_0029a17c. */
-extern int FUN_0029d644(unsigned int);
-extern int ifTouchGetSelectionModeForRegion(int);
-/* Supplied declaration required: FUN_0029ee54. */
-extern int FUN_0029efc0(unsigned int);
-/* Supplied declaration required: FUN_002bf288. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
-extern int __aeabi_idivmod(int, unsigned int);
+extern CampTouchRegions *g_camp;      /* 0x43da90 */
+extern TitleSceneWork *g_titleScene;  /* 0x44ea00 */
 
+s32 ifTouchGetSelectionModeForRegion(s32 region);
+s32 FUN_0029ee54(u32 list);
+s32 FUN_0029d644(u32 list);
+s32 FUN_0029efc0(u32 list);
+void FUN_002bf288(s32 a, s32 bank, s32 sprite, s32 x, s32 y, s32 b);
+BankSprite *FUN_002bf4f8(s32 bank, s32 sprite);
+void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, s32 flag);
+s32 __aeabi_idivmod(s32 numerator, s32 denominator);
 
-void FUN_0028f870(unsigned int param_1,int param_2,int param_3,int param_4)
-
+static inline void setRenderState(TitleSceneWork *scene, s32 state)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  int *piVar10;
-  
-  temp_v2 = g_camp;
-  temp_v0 = ifTouchGetSelectionModeForRegion((int)*(short *)(g_camp + 0xe04));
-  temp_v1 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + 0xe06));
-  temp_v2 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + 0xe02));
-  if (param_4 != 0) {
-    temp_v3 = FUN_0029ee54(param_1);
-    if (temp_v3 < 0xc) {
-      return;
+    RenderStateStack *stack = &scene->renderStates;
+    s32 previous = stack->states[stack->top];
+    stack->states[stack->top] = state;
+    if (stack->dirty != 0 || previous != state) {
+        stack->flush();
+        stack->dirty = 0;
     }
-    FUN_002bf288(2,0x1d,0x41c,param_2,param_3,0x6f);
-    temp_v7 = 0x418;
-    temp_v8 = 0x419;
-    if (temp_v0 != 0) {
-      temp_v7 = 0x41a;
+}
+
+/* Draws the scroll bar of a camp list: arrows, track and the thumb scaled to the visible share. */
+void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide)
+{
+    CampTouchRegions *camp = g_camp;
+    s32 previousHeld = ifTouchGetSelectionModeForRegion(camp->previousRegion);
+    s32 nextHeld = ifTouchGetSelectionModeForRegion(camp->nextRegion);
+    s32 thumbHeld = ifTouchGetSelectionModeForRegion(camp->thumbRegion);
+    u32 previousSprite;
+    u32 nextSprite;
+    if (wide != 0) {
+        if (FUN_0029ee54(list) <= 11) {
+            return;
+        }
+        FUN_002bf288(2, 0x1d, 0x41c, x, y, 0x6f);
+        nextSprite = 0x419;
+        previousSprite = 0x418;
+        if (previousHeld != 0) {
+            previousSprite = 0x41a;
+        }
+        if (nextHeld != 0) {
+            nextSprite = 0x41b;
+        }
+    } else {
+        if (FUN_0029ee54(list) <= 9) {
+            return;
+        }
+        FUN_002bf288(2, 0x1d, 0x423, x, y, 0x6f);
+        previousSprite = 0x41f;
+        nextSprite = 0x420;
+        if (previousHeld != 0) {
+            previousSprite = 0x421;
+        }
+        if (nextHeld != 0) {
+            nextSprite = 0x422;
+        }
     }
-    if (temp_v1 != 0) {
-      temp_v8 = 0x41b;
+    FUN_002bf288(2, 0x1d, previousSprite, x, y, 0x6f);
+    FUN_002bf288(2, 0x1d, nextSprite, x, y, 0x6f);
+    BankSprite *track;
+    if (wide != 0) {
+        track = FUN_002bf4f8(0x1d, 0x41d);
+    } else {
+        track = FUN_002bf4f8(0x1d, 0x424);
     }
-  }
-  else {
-    temp_v3 = FUN_0029ee54(param_1);
-    if (temp_v3 < 10) {
-      return;
+    s32 thumbHeight = __aeabi_idivmod(track->cell[1] << 12, FUN_0029ee54(list)) * FUN_0029d644(list) >> 12;
+    if (thumbHeight < 1) {
+        thumbHeight = 1;
     }
-    FUN_002bf288(2,0x1d,0x423,param_2,param_3,0x6f);
-    temp_v7 = 0x41f;
-    temp_v8 = 0x420;
-    if (temp_v0 != 0) {
-      temp_v7 = 0x421;
+    s32 thumbOffset = __aeabi_idivmod(track->cell[1] << 12, FUN_0029ee54(list)) * FUN_0029efc0(list) >> 12;
+    setRenderState(g_titleScene, 3);
+    FUN_0029a17c(x + track->x, track->y + y + thumbOffset, track->cell[0], thumbHeight, 1);
+    u32 thumbSprite;
+    if (wide != 0) {
+        thumbSprite = 0x41d;
+        if (thumbHeld != 0) {
+            thumbSprite = 0x41e;
+        }
+    } else {
+        thumbSprite = 0x424;
+        if (thumbHeld != 0) {
+            thumbSprite = 0x425;
+        }
     }
-    if (temp_v1 != 0) {
-      temp_v8 = 0x422;
-    }
-  }
-  FUN_002bf288(2,0x1d,temp_v7,param_2,param_3,0x6f);
-  FUN_002bf288(2,0x1d,temp_v8,param_2,param_3,0x6f);
-  if (param_4 != 0) {
-    temp_v0 = FUN_002bf4f8(0x1d,0x41d);
-  }
-  else {
-    temp_v0 = FUN_002bf4f8(0x1d,0x424);
-  }
-  temp_v7 = FUN_0029ee54(param_1);
-  temp_v1 = __aeabi_idivmod((int)*(short *)(*(int *)(temp_v0 + 0xc) + 2) << 0xc,temp_v7);
-  temp_v3 = FUN_0029d644(param_1);
-  temp_v1 = temp_v1 * temp_v3 >> 0xc;
-  if (temp_v1 < 1) {
-    temp_v1 = 1;
-  }
-  temp_v7 = FUN_0029ee54(param_1);
-  temp_v4 = __aeabi_idivmod((int)*(short *)(*(int *)(temp_v0 + 0xc) + 2) << 0xc,temp_v7);
-  temp_v5 = FUN_0029efc0(param_1);
-  temp_v3 = g_titleScene;
-  piVar10 = (int *)(g_titleScene + 0x130c);
-  temp_v6 = piVar10[*piVar10 + 2];
-  piVar10[*piVar10 + 2] = 3;
-  if (*(char *)(temp_v3 + 0x1324) != '\0' || temp_v6 != 3) {
-    (**(romwright_code **)(temp_v3 + 0x1328))();
-    *(unsigned char *)(temp_v3 + 0x1324) = 0;
-  }
-  FUN_0029a17c(param_2 + *(short *)(temp_v0 + 8),
-               (int)*(short *)(temp_v0 + 10) + param_3 + (temp_v4 * temp_v5 >> 0xc),
-               (int)**(short **)(temp_v0 + 0xc),temp_v1,1);
-  if (param_4 != 0) {
-    temp_v7 = 0x41d;
-    if (temp_v2 != 0) {
-      temp_v7 = 0x41e;
-    }
-  }
-  else {
-    temp_v7 = 0x424;
-    if (temp_v2 != 0) {
-      temp_v7 = 0x425;
-    }
-  }
-  FUN_002bf288(2,0x1d,temp_v7,param_2,param_3,0x74);
-  temp_v2 = g_titleScene;
-  piVar10 = (int *)(g_titleScene + 0x130c);
-  temp_v0 = piVar10[*piVar10 + 2];
-  piVar10[*piVar10 + 2] = 0;
-  if (*(char *)(temp_v2 + 0x1324) != '\0' || temp_v0 != 0) {
-    (**(romwright_code **)(temp_v2 + 0x1328))();
-    *(unsigned char *)(temp_v2 + 0x1324) = 0;
-  }
-  return;
+    FUN_002bf288(2, 0x1d, thumbSprite, x, y, 0x74);
+    setRenderState(g_titleScene, 0);
 }
 
 } /* extern "C" */

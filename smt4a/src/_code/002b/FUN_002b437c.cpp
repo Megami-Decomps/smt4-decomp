@@ -91,7 +91,7 @@ typedef struct {
     unsigned int sp1F0; /* 0x1f0: local_1f0 */
 } param_1_stack;
 
-extern unsigned int DAT_005c4c30; /* 0x5c4c30 */
+extern unsigned int _ZGVZN2nw4math5MTX448IdentityEvE8identity; /* 0x5c4c30 */
 extern float DAT_006472dc; /* 0x6472dc */
 extern float DAT_006472e0; /* 0x6472e0 */
 extern float DAT_006472e4; /* 0x6472e4 */
@@ -100,7 +100,7 @@ extern float DAT_006472ec; /* 0x6472ec */
 extern float DAT_006472f0; /* 0x6472f0 */
 extern float DAT_006472f4; /* 0x6472f4 */
 extern float DAT_006472f8; /* 0x6472f8 */
-extern unsigned int DAT_0064c084; /* 0x64c084 */
+extern unsigned int _ZZN2nw4math5MTX448IdentityEvE8identity; /* 0x64c084 */
 extern float DAT_0064c088; /* 0x64c088 */
 extern float DAT_0064c08c; /* 0x64c08c */
 extern float DAT_0064c090; /* 0x64c090 */
@@ -366,26 +366,26 @@ void FUN_002b437c(int param_1)
   temp_v50 = temp_v45;
   temp_v51 = temp_v7;
   temp_v52 = temp_v49;
-  if (((DAT_005c4c30 & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_005c4c30), temp_v1 != 0)) {
-    DAT_0064c084 = (unsigned int)temp_v19;
+  if (((_ZGVZN2nw4math5MTX448IdentityEvE8identity & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX448IdentityEvE8identity), temp_v1 != 0)) {
+    _ZZN2nw4math5MTX448IdentityEvE8identity = (unsigned int)temp_v19;
     DAT_0064c088 = temp_v7;
     DAT_0064c08c = temp_v7;
     DAT_0064c090 = temp_v7;
     DAT_0064c094 = temp_v7;
-    DAT_0064c098 = DAT_0064c084;
+    DAT_0064c098 = _ZZN2nw4math5MTX448IdentityEvE8identity;
     DAT_0064c09c = temp_v7;
     DAT_0064c0a0 = temp_v7;
     DAT_0064c0a4 = temp_v7;
     DAT_0064c0a8 = temp_v7;
-    DAT_0064c0ac = DAT_0064c084;
+    DAT_0064c0ac = _ZZN2nw4math5MTX448IdentityEvE8identity;
     DAT_0064c0b0 = temp_v7;
     DAT_0064c0b4 = temp_v7;
     DAT_0064c0b8 = temp_v7;
     DAT_0064c0bc = temp_v7;
-    DAT_0064c0c0 = DAT_0064c084;
+    DAT_0064c0c0 = _ZZN2nw4math5MTX448IdentityEvE8identity;
   }
   temp_v18 = (unsigned int)((unsigned long long)temp_v17 >> 0x20);
-  mtx44Copy(temp_v34,&DAT_0064c084);
+  mtx44Copy(temp_v34,&_ZZN2nw4math5MTX448IdentityEvE8identity);
   temp_v80 = temp_v18;
   temp_v81 = temp_v18;
   temp_v82 = temp_v18;

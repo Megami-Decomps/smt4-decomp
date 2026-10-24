@@ -9,7 +9,7 @@ int FUN_002a7838(void);
 int asdMemFreeNonNull(int object);
 int jobFind(u32 task);                /* nonzero while the task exists */
 int asdMemFree(void *ptr);               /* heap free */
-extern int _ZN9Obj55ca08D1Ev(u8 *sub);
+extern int _ZN9Obj55ca08D1Ev(Obj55ca08 *sub);
 
 extern MikadoGlobals g_mikado;
 

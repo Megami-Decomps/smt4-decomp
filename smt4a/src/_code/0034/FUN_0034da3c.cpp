@@ -1,46 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034da3c` (_code @ 0x34da3c, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail predicates the last release call (movne/movne/blne); armcc here branches around an unpredicated call. Everything else, including the compiler's two trailing nops, matches. */
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(int);
-int asdTMTexTableReleaseNode(...);
-int FUN_0040a244(void);
+/* A texture-table owner: either an external resource or two table nodes. */
+struct TextureOwnerWork {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ s32 mode;
+    /* 0x10 */ u8 unk10[0x30];
+    /* 0x40 */ s32 table;
+    /* 0x44 */ s32 node;
+    /* 0x48 */ s32 extraNode;
+    /* 0x4C */ void *resource;
+    /* 0x50 */ u8 unk50[0x38];
+    /* 0x88 */ u8 hasDefault;
+};
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+TextureOwnerWork *jobGetWork(void);
+void FUN_0040a244(void *resource);
+void asdTMTexTableReleaseNode(s32 table, s32 node);
+void asdMemFree(void *block);
 
-extern int jobGetWork(void);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: FUN_0040a244. */
-
-
+/* Releases the work area's textures and frees it. */
 void FUN_0034da3c(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = jobGetWork();
-  if (*(int *)(temp_v0 + 0x4c) != 0) {
-    FUN_0040a244();
-    *(unsigned int *)(temp_v0 + 0x4c) = 0;
-  }
-  else if (*(int *)(temp_v0 + 0xc) != 1) {
-    asdTMTexTableReleaseNode(*(unsigned int *)(temp_v0 + 0x40),*(unsigned int *)(temp_v0 + 0x44));
-    if (-1 < *(int *)(temp_v0 + 0x48)) {
-      asdTMTexTableReleaseNode(*(unsigned int *)(temp_v0 + 0x40));
+    TextureOwnerWork *work = jobGetWork();
+
+    if (work->resource == NULL) {
+        if (work->mode != 1) {
+            asdTMTexTableReleaseNode(work->table, work->node);
+            if (work->extraNode >= 0) {
+                asdTMTexTableReleaseNode(work->table, work->extraNode);
+            }
+            if (work->hasDefault != 0) {
+                asdTMTexTableReleaseNode(0x27, 0);
+            }
+        }
+    } else {
+        FUN_0040a244(work->resource);
+        work->resource = NULL;
     }
-    if (*(char *)(temp_v0 + 0x88) != '\0') {
-      asdTMTexTableReleaseNode(0x27,0);
-    }
-  }
-  asdMemFree(temp_v0);
-  return;
+    asdMemFree(work);
 }
 
 } /* extern "C" */

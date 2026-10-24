@@ -1,4 +1,3 @@
-/* NON_MATCHING: target object truncates the UTF-16 hint after two characters; cancellation-state constant loads also swap order. */
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_SelectionTransition.h"
 
@@ -28,8 +27,8 @@ void FUN_0038efb8(SelectionTransition *transition)
         if (!systemKeyboardReadUtf8(g_aocMain, input->multibyte.text,
                 reinterpret_cast<const u16 *>(L"16\u30b1\u30bf\u306e\u756a\u53f7\u5165\u529b\u30c6\u30b9\u30c8"),
                 16, 0, 1, input->wide)) {
-            transition->progress = 2;
             transition->timer = 3;
+            transition->progress = 2;
             return;
         }
         input = reinterpret_cast<InputBuffers *>(g_aocMain);

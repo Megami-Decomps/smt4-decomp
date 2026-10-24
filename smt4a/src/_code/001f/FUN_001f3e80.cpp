@@ -1,42 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f3e80` (_code @ 0x1f3e80, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: twin of smt4 FUN_0026e6a0 */
+#include "common.h"
 
 extern "C" {
 
-int __aeabi_idivmod(int, int);
-
-/* Supplied declaration required: __aeabi_idivmod. */
-
-
-int FUN_001f3e80(int param_1,int param_2,int param_3,int param_4,int param_5)
-
+/* Triangle-wave blend between two values: with period `period`, `time` sweeps from the larger value down to the smaller and back
+ * (or from the smaller up when `invert` is set). */
+s32 FUN_001f3e80(s32 a, s32 b, s32 period, s32 time, s32 invert)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = param_2;
-  if (param_1 < param_2) {
-    temp_v1 = param_1;
-    param_1 = param_2;
-  }
-  if (param_3 != 0) {
-    if (param_4 < 0) {
-      param_4 = -param_4;
+    s32 high = a;
+    s32 low = b;
+    s32 half;
+    s32 range;
+    s32 offset;
+
+    if (a < b) {
+        high = b;
+        low = a;
     }
-    __aeabi_idivmod(param_4,param_3);
-    temp_v0 = __aeabi_idivmod((temp_v2 - param_3 / 2) * (param_1 - temp_v1),param_3 / 2);
-    if (temp_v0 < 0) {
-      temp_v0 = -temp_v0;
+    if (period == 0) {
+        return high;
     }
-    if (param_5 != 0) {
-      temp_v0 = (param_1 - temp_v1) - temp_v0;
+    range = high - low;
+    half = period / 2;
+    if (time < 0) {
+        time = -time;
     }
-    param_1 = param_1 - temp_v0;
-  }
-  return param_1;
+    offset = (time % period - half) * range / half;
+    if (offset < 0) {
+        offset = -offset;
+    }
+    if (invert != 0) {
+        offset = range - offset;
+    }
+    return high - offset;
 }
 
 } /* extern "C" */

@@ -12,12 +12,12 @@ struct OwnerState {
 
 extern "C" {
 
-void floatPairClear(MemberState *member);
+void _ZN10FloatStateC1Ev(MemberState *member);
 
 /* Resets the owner's embedded state. */
 OwnerState *FUN_003f2be4(OwnerState *owner)
 {
-    floatPairClear(&owner->member);
+    _ZN10FloatStateC1Ev(&owner->member);
     return owner;
 }
 

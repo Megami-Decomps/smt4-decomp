@@ -44,7 +44,7 @@ extern unsigned short DAT_00594988; /* 0x594988 */
 
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: sharedRefAddRef. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int FUN_002eb5f4(void);
 /* Supplied declaration required: streamReset. */
 extern int FUN_002efd4a(unsigned int *, unsigned int);
@@ -152,7 +152,7 @@ LAB_00120aa8:
         FUN_00310578(&temp_v5);
         return 0;
       }
-      temp_v3 = operatorNew(0x10);
+      temp_v3 = _Znwj(0x10);
       if (temp_v3 != 0) {
         piVar5 = (int *)FUN_002f2afc();
       }

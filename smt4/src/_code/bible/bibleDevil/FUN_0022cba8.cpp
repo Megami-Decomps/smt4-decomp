@@ -11,7 +11,7 @@ int FUN_0022d9c8(...);
 int FUN_0022daac(...);
 int FUN_0022db94(...);
 int FUN_0022dcac(...);
-int FUN_00230cc0(int, int, int);
+int uiRectDrawAtBottomRight(int, int, int);
 int pairCopy(int, float *);
 int FUN_00231bcc(int, int, int);
 int FUN_00240d5c(...);
@@ -36,7 +36,7 @@ extern unsigned int DAT_0049375c; /* 0x49375c */
 /* Supplied declaration required: FUN_0022daac. */
 /* Supplied declaration required: FUN_0022db94. */
 /* Supplied declaration required: FUN_0022dcac. */
-/* Supplied declaration required: FUN_00230cc0. */
+/* Supplied declaration required: uiRectDrawAtBottomRight. */
 /* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern int flaggedValueHolderGetTotal(int);
@@ -80,7 +80,7 @@ void FUN_0022cba8(int param_1)
   {
     temp_v16 = *(float *)(param_1 + 0x594);
     temp_v18[0] = temp_v16;
-    FUN_00230cc0(param_1 + 200,2,0);
+    uiRectDrawAtBottomRight(param_1 + 200,2,0);
     temp_v16 = temp_v18[0];
     temp_v17 = 1.4013e-45f;
     FUN_00231bcc(param_1 + 200,0x4a4,0);

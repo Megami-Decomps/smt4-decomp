@@ -38,7 +38,7 @@ int FUN_004fbeac(...);
 int FUN_004fed5c(...);
 
 int FUN_00270c18(void);
-int FUN_00291bd4(...);
+int btlEventTaskCreate(...);
 int FUN_002b4f28(...);
 int FUN_002cf698(...);
 int FUN_00363990(...);
@@ -197,7 +197,7 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_002854d8. */
 /* Supplied declaration required: FUN_002919b4. */
-/* Supplied declaration required: FUN_00291bd4. */
+/* Supplied declaration required: btlEventTaskCreate. */
 /* Supplied declaration required: FUN_00291ce8. */
 /* Supplied declaration required: FUN_002b4f28. */
 /* Supplied declaration required: btlCameraCreate. */
@@ -488,7 +488,7 @@ void FUN_002ba998(unsigned int param_1)
     FUN_003e854c(temp_v7);
     temp_v6 = jobIsValid(*(unsigned int *)(temp_v7 + 0x74));
     if (temp_v6 == 0) {
-      FUN_00291bd4(temp_v7);
+      btlEventTaskCreate(temp_v7);
     }
     FUN_002cf698(temp_v7);
     if ((*(unsigned int *)(temp_v7 + 0x45a8) & DAT_00573b58) != 0 ||

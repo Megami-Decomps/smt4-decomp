@@ -8,13 +8,13 @@ typedef struct FlagsAt30 {
 } FlagsAt30;
 
 extern s32 playerAlignmentClass(void);
-extern FlagsAt30 *FUN_00192608(s32 id);
+extern FlagsAt30 *dataTable08Sub2GetRecord(s32 id);
 
 /* True when the unit's alignment flags match the player's current alignment class. */
 u32 unitMatchesAlignment(s32 unitId)
 {
     s32 alignment = playerAlignmentClass();
-    FlagsAt30 *unit = FUN_00192608(unitId);
+    FlagsAt30 *unit = dataTable08Sub2GetRecord(unitId);
     u8 flags;
 
     if (unit == NULL) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int _ZN9Obj55aff4C1EPKc(int *, unsigned char *);
+int _ZN9Obj55aff4C1EPKt(int *, unsigned char *);
 int _ZN9Obj55aff4D1Ev(int *);
 int FUN_002fb58c(...);
 int FUN_002fba58(unsigned int *, unsigned int);
@@ -23,8 +23,8 @@ extern unsigned char LAB_00110878; /* 0x110878 */
 extern unsigned char LAB_001108a0; /* 0x1108a0 */
 extern unsigned char DAT_005593d0; /* 0x5593d0 */
 
-extern int operatorNew(unsigned int);
-/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
+extern int _Znwj(unsigned int);
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKt. */
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: FUN_002fb58c. */
 /* Supplied declaration required: FUN_002fba58. */
@@ -43,16 +43,16 @@ FUN_0011081c(fn_0011081c_arg0 *param_1,unsigned int param_2,unsigned int param_3
   
   uStack_18 = param_3;
   uStack_14 = param_4;
-  temp_v0 = _ZN9Obj55aff4C1EPKc(&uStack_18,&LAB_00110878);
+  temp_v0 = _ZN9Obj55aff4C1EPKt(&uStack_18,&LAB_00110878);
   puVar2 = (unsigned int *)FUN_002fb58c(param_1,temp_v0);
   _ZN9Obj55aff4D1Ev(&uStack_18);
   puVar2[0xe] = 0;
   puVar2[0xf] = 0;
   puVar2[0x10] = 0;
   *puVar2 = (unsigned int)&DAT_005593d0;
-  temp_v1 = operatorNew(0x38);
+  temp_v1 = _Znwj(0x38);
   if (temp_v1 != 0) {
-    _ZN9Obj55aff4C1EPKc(&uStack_18,&LAB_001108a0);
+    _ZN9Obj55aff4C1EPKt(&uStack_18,&LAB_001108a0);
     temp_v0 = FUN_002fb58c(temp_v1,&uStack_18);
     puVar2[0x11] = temp_v0;
     _ZN9Obj55aff4D1Ev(&uStack_18);

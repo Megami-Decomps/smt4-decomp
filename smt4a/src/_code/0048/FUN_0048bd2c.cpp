@@ -1,4 +1,3 @@
-/* NON_MATCHING: the state and flag stores are scheduled in the opposite order (retail stores state before loading flags in case 1, flags before state in case 0). */
 #include "map/mapDepart.h"
 
 struct EnemyPopup {

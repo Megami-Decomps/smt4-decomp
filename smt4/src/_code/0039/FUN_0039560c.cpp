@@ -1,52 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039560c` (_code @ 0x39560c, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: FP scheduling: retail loads the target with one vldmia, scene components with vldr and the 1.0f constant late */
+#include "map/lmapMain.h"
+#include <math.h>
 
-extern "C" {
-
-typedef struct fn_0039560c_arg0 fn_0039560c_arg0;
-struct fn_0039560c_arg0 {
-    unsigned char pad_0x0[0xc];
-    float *field_0xc; /* +0xc */
-    float field_0x10; /* +0x10 */
-    float field_0x14; /* +0x14 */
-    float field_0x18; /* +0x18 */
-    unsigned char pad_0x1c[0x4];
-    float field_0x20; /* +0x20 */
+struct ChaseTarget {
+    u8 unk00[0x28];  // 0x00
+    f32 position[3]; // 0x28
 };
 
-extern int g_lmapScene; /* 0x447e88 */
+struct ChaseMotion {
+    u8 unk00[0x0C];       // 0x00
+    ChaseTarget *target;  // 0x0C
+    f32 velocity[3];      // 0x10
+    u8 unk1c[4];          // 0x1C
+    f32 speed;            // 0x20
+};
 
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+extern "C" {
+extern LmapScene *g_lmapScene; /* 0x447e88 */
+
+/* Points the velocity from the target toward the map scene position, scaled to the speed. */
+void FUN_0039560c(ChaseMotion *motion)
 {
-    return (float)sqrt((double)value);
-}
-#endif
+    const f32 *target = motion->target->position;
+    f32 speed = motion->speed;
+    f32 tx = target[0];
+    f32 ty = target[1];
+    f32 tz = target[2];
+    f32 dx = g_lmapScene->transform.position[0] - tx;
+    f32 dy = g_lmapScene->transform.position[1] - ty;
+    f32 dz = g_lmapScene->transform.position[2] - tz;
+    f32 scale = 1.0f / __sqrtf(dx * dx + dy * dy + dz * dz);
 
-
-void FUN_0039560c(fn_0039560c_arg0 *param_1)
-
-{
-  float *pfVar1;
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  
-  pfVar1 = param_1->field_0xc;
-  temp_v0 = param_1->field_0x20;
-  temp_v3 = *(float *)(g_lmapScene + 0x1c) - pfVar1[10];
-  temp_v2 = *(float *)(g_lmapScene + 0x20) - pfVar1[0xb];
-  temp_v1 = *(float *)(g_lmapScene + 0x24) - pfVar1[0xc];
-  temp_v4 = 1.0f / romwright_sqrt_4(temp_v3 * temp_v3 + temp_v2 * temp_v2 + temp_v1 * temp_v1);
-  param_1->field_0x10 = temp_v3 * temp_v4 * temp_v0;
-  param_1->field_0x14 = temp_v2 * temp_v4 * temp_v0;
-  param_1->field_0x18 = temp_v1 * temp_v4 * temp_v0;
-  return;
+    motion->velocity[0] = dx * scale * speed;
+    motion->velocity[1] = dy * scale * speed;
+    motion->velocity[2] = dz * scale * speed;
 }
 
 } /* extern "C" */

@@ -1,45 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f4c80` (_code @ 0x1f4c80, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail schedules the far/near vldr after `mov r1, #1`; ours emits them before it. */
+#include "common.h"
+#include "map/mapDepart.h"
+
+struct CameraMatrixCache;
 
 extern "C" {
 
-int FUN_0014f0dc(int, int, int, int *);
-int FUN_001523b8(int, int);
-int FUN_0036f0a0(void);
-int taskUpdateOrderedPasses(int);
+/* A perspective projection: vertical field of view in degrees, clip planes and aspect ratio. */
+typedef struct CameraPerspective {
+    f32 fovy;
+    f32 nearZ;
+    f32 farZ;
+    f32 aspect;
+} CameraPerspective;
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+/* The job work area's camera block (offsets within the work area). */
+typedef struct JobCameraWork {
+    /* 0x000 */ u8 unk000[0x50C];
+    /* 0x50C */ MapVector eye;
+    /* 0x518 */ MapVector target;
+    /* 0x524 */ f32 fovy;
+} JobCameraWork;
 
-/* Supplied declaration required: FUN_0014f0dc. */
-/* Supplied declaration required: FUN_001523b8. */
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_0036f0a0. */
-/* Supplied declaration required: taskUpdateOrderedPasses. */
+JobCameraWork *jobGetWork(void);
+void FUN_0036f0a0(void);
+void FUN_0014f0dc(JobCameraWork *camera, const MapVector *eye, const MapVector *target, const MapVector *up);
+void FUN_001523b8(JobCameraWork *camera, u32 pivot, CameraPerspective perspective);
+void taskUpdateOrderedPasses(u32 pass);
 
-
-unsigned int FUN_001f4c80(void)
-
+/* Sets the work area camera to look from its eye at its target with a fixed perspective. */
+u32 FUN_001f4c80(void)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int uStack_14;
-  unsigned int temp_v2;
-  
-  temp_v0 = jobGetWork();
-  FUN_0036f0a0();
-  temp_v1 = 0;
-  uStack_14 = 0x3f800000;
-  temp_v2 = 0;
-  FUN_0014f0dc(temp_v0,temp_v0 + 0x50c,temp_v0 + 0x518,&temp_v1);
-  FUN_001523b8(temp_v0,1);
-  taskUpdateOrderedPasses(0);
-  return 0;
+    JobCameraWork *work = jobGetWork();
+
+    FUN_0036f0a0();
+    MapVector up;
+    up.x = 0.0f;
+    up.y = 1.0f;
+    up.z = 0.0f;
+    FUN_0014f0dc(work, &work->eye, &work->target, &up);
+    CameraPerspective perspective;
+    perspective.aspect = 5.0f / 3.0f;
+    perspective.fovy = work->fovy;
+    perspective.farZ = 25000.0f;
+    perspective.nearZ = 0.1f;
+    FUN_001523b8(work, 1, perspective);
+    taskUpdateOrderedPasses(0);
+    return 0;
 }
 
 } /* extern "C" */

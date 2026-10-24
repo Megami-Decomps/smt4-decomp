@@ -7,7 +7,7 @@ extern "C" {
 extern unsigned char DAT_0055937c; /* 0x55937c */
 extern unsigned char g_flagBlock; /* 0x594958 */
 
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int _ZN9Obj55aff4C1ERKS_(unsigned int *);
 extern unsigned int FUN_002fb252(void);
 
@@ -26,7 +26,7 @@ int FUN_001104e8(unsigned int *param_1)
   *(unsigned char *)(temp_v0 + 0x18) = 0;
   *(unsigned char *)(temp_v0 + 0x1a) = 0;
   *(unsigned int *)(temp_v0 + 0x1c) = 0x80000000;
-  temp_v1 = operatorNew(0x10);
+  temp_v1 = _Znwj(0x10);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = FUN_002fb252();

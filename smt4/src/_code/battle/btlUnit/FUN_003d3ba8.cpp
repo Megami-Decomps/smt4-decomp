@@ -42,7 +42,7 @@ int FUN_002568c4(...);
 int FUN_00282820(...);
 int btlMainFindEntryByListedId(...);
 int FUN_0029cc44(int);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int jyoucyuRowApply(...);
 int FUN_00394a80(...);
 int FUN_003ccaac(unsigned int *, unsigned int *, unsigned int, unsigned int, int, unsigned int, int, int, int, unsigned int, int, int *);
@@ -153,7 +153,7 @@ extern int FUN_0028299c(int);
 extern unsigned int FUN_0029a924(unsigned int);
 extern unsigned int FUN_0029a9d4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0029cc44. */
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: FUN_0033b33c. */
 /* Supplied declaration required: jyoucyuRowApply. */
@@ -226,7 +226,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
   
   if (*(short *)(param_2[10] + 0x14c) == 2) {
     temp_v2 = (int)*(short *)(param_2[10] + 0x14e);
-    FUN_002ae164();
+    dataTable40FindById();
     if ((temp_v2 != 0) && (*(char *)(temp_v2 + 0x45) != '\0')) {
       if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x40) != 0) {
         temp_v3 = *param_2 | 0x80;
@@ -371,7 +371,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       break;
     case 0xc:
       temp_v3 = temp_v27;
-      FUN_002ae164();
+      dataTable40FindById();
       if (temp_v3 != 0) {
         temp_v10 = *(char *)(temp_v3 + 0x56);
         if (temp_v10 == '\x02') {
@@ -444,7 +444,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       temp_v12 = temp_v27;
       temp_v15 = *param_1;
       btlMainFindEntryByListedId(temp_v15,(int)temp_v9);
-      FUN_002ae164();
+      dataTable40FindById();
       temp_v10 = '\0';
       if ((temp_v12 != 0) && (temp_v0 = *(char *)(temp_v12 + 0x45), temp_v0 == '\x01' || temp_v0 == '\x02')) {
         temp_v10 = temp_v0;
@@ -534,7 +534,7 @@ LAB_003d444c:
     temp_v33 = temp_v33 + 1;
   } while (temp_v33 < 0x85);
   temp_v3 = temp_v27;
-  FUN_002ae164();
+  dataTable40FindById();
   if ((*param_2 & 0x200) == 0) {
     if (*(short *)(param_2[10] + 0x14c) != 1) {
       if (temp_v3 != 0) {

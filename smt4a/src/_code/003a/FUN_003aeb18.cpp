@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00192608(void);
+int dataTable08Sub2GetRecord(void);
 int battleAttributeFormatName(unsigned char [128], unsigned int);
 int skillFormatTargetLabel(unsigned char [128], int);
 int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
@@ -35,7 +35,7 @@ extern int DAT_0057f0cc; /* 0x57f0cc */
 
 /* Supplied declaration required: textFormatBuffer. */
 extern unsigned short *gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00192608. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: battleAttributeFormatName. */
 /* Supplied declaration required: skillFormatTargetLabel. */
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
@@ -61,7 +61,7 @@ void FUN_003aeb18(int param_1,unsigned int param_2)
   temp_v1 = DAT_0057f0c8;
   puVar3 = (unsigned short *)gameGetPlayerData();
   temp_v2 = (unsigned int)*puVar3;
-  FUN_00192608();
+  dataTable08Sub2GetRecord();
   if (temp_v2 == 0) {
     *(unsigned char *)(temp_v1 + 0x5ea) = 0;
   }

@@ -3,7 +3,7 @@
 #include "shard/S1ListPanel.h"
 extern "C" {
 const SpriteInfo *FUN_002bf4f8(u32 group, u32 sprite);
-s32 FUN_002bff6c(s32 x, s32 y, s32 width, s32 height, s32 mode);
+s32 uiPointerHitsRect(s32 x, s32 y, s32 width, s32 height, s32 mode);
 s32 padIsButtonPressed(u32 button);
 s32 padIsButtonRepeat(u32 button);
 s32 buttonHelpHasEnabledEntryForId(u32 id);
@@ -33,10 +33,10 @@ u32 FUN_00220d58(void *base)
     u32 result = 0;
     bool shortTap = false;
     const SpriteInfo *button = FUN_002bf4f8(0x39, 0x97);
-    if (FUN_002bff6c(button->x, button->y, button->size[0], button->size[1], 0)) {
+    if (uiPointerHitsRect(button->x, button->y, button->size[0], button->size[1], 0)) {
         ++work->heldFrames;
     } else {
-        if (FUN_002bff6c(button->x, button->y, button->size[0], button->size[1], 3) &&
+        if (uiPointerHitsRect(button->x, button->y, button->size[0], button->size[1], 3) &&
             work->heldFrames - 1u < 15)
             shortTap = true;
         work->heldFrames = 0;

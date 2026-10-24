@@ -12,7 +12,7 @@ extern "C" {
 extern Obj42094cDrawContext *g_titleScene;
 void FUN_002c1b64(void *context, u32 texture);
 u32 FUN_002c5d80(u32 mode, u32 value);
-void FUN_0023b5e0(void *filter, f32 *matrix, const void *motion);
+void titleSceneMultiplyByCameraView(void *filter, f32 *matrix, const void *motion);
 void FUN_002b011c();
 void gpuSubmitFloatVectorsOrDefault(const f32 *color, f32 x, f32 y, f32 z, f32 u, f32 v);
 void forwardRecoveredCallback();
@@ -33,7 +33,7 @@ void Obj42094c::draw()
     }
     for (s32 particle = 0; particle < filter->config->count; ++particle) {
         f32 matrix[16];
-        FUN_0023b5e0(this, matrix, &filter->motions[particle]);
+        titleSceneMultiplyByCameraView(this, matrix, &filter->motions[particle]);
         f32 projected[4][3];
         for (u32 vertex = 0; vertex < 4; ++vertex) {
             f32 x = vertices[vertex][0];

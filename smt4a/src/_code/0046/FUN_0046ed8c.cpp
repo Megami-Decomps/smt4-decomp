@@ -50,8 +50,8 @@ void FUN_0046ed8c(unsigned int param_1,unsigned int param_2,unsigned int param_3
         fVar12 = 0.0f;
         fVar9 = 1.0f;
         bVar6 = 0;
-        if (((DAT_005c4c30 & 1) == 0) && (iVar1 = FUN_002eba64(&DAT_005c4c30), iVar1 != 0)) {
-          DAT_0064c084 = fVar9;
+        if (((_ZGVZN2nw4math5MTX448IdentityEvE8identity & 1) == 0) && (iVar1 = FUN_002eba64(&_ZGVZN2nw4math5MTX448IdentityEvE8identity), iVar1 != 0)) {
+          _ZZN2nw4math5MTX448IdentityEvE8identity = fVar9;
           DAT_0064c088 = fVar12;
           DAT_0064c08c = fVar12;
           DAT_0064c090 = fVar12;
@@ -68,9 +68,9 @@ void FUN_0046ed8c(unsigned int param_1,unsigned int param_2,unsigned int param_3
           DAT_0064c0bc = fVar12;
           DAT_0064c0c0 = fVar9;
         }
-        FUN_0019a0e8(auStack_f8,&DAT_0064c084);
-        if (((DAT_005c4c30 & 1) == 0) && (iVar1 = FUN_002eba64(&DAT_005c4c30), iVar1 != 0)) {
-          DAT_0064c084 = fVar9;
+        FUN_0019a0e8(auStack_f8,&_ZZN2nw4math5MTX448IdentityEvE8identity);
+        if (((_ZGVZN2nw4math5MTX448IdentityEvE8identity & 1) == 0) && (iVar1 = FUN_002eba64(&_ZGVZN2nw4math5MTX448IdentityEvE8identity), iVar1 != 0)) {
+          _ZZN2nw4math5MTX448IdentityEvE8identity = fVar9;
           DAT_0064c088 = fVar12;
           DAT_0064c08c = fVar12;
           DAT_0064c090 = fVar12;
@@ -87,7 +87,7 @@ void FUN_0046ed8c(unsigned int param_1,unsigned int param_2,unsigned int param_3
           DAT_0064c0bc = fVar12;
           DAT_0064c0c0 = fVar9;
         }
-        FUN_0019a0e8(afStack_138,&DAT_0064c084);
+        FUN_0019a0e8(afStack_138,&_ZZN2nw4math5MTX448IdentityEvE8identity);
         uVar11 = CONCAT44(fVar9,fVar9);
         FUN_001677c0();
         uVar7 = (in_fpscr & 0xfffffff) | ((unsigned int)((float)param_4[0xc] == fVar12) << 0x1e);

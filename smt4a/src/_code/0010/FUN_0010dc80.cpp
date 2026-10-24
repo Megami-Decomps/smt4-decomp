@@ -33,7 +33,7 @@ extern unsigned int FUN_002ea3c0(unsigned int *, unsigned int, unsigned int, uns
 /* Supplied declaration required: FUN_002ec738. */
 /* Supplied declaration required: _ZN9Obj55afc44stopEv. */
 /* Supplied declaration required: FUN_002f3dde. */
-extern int refIsNonNegative(unsigned int *);
+extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
 
 
 void FUN_0010dc80(int *param_1)
@@ -61,7 +61,7 @@ void FUN_0010dc80(int *param_1)
         FUN_002e9f00(piVar4,4);
       }
       (**(romwright_code **)(*param_1 + 0x3c))(&temp_v3,param_1);
-      temp_v1 = refIsNonNegative((unsigned int *)&temp_v3);
+      temp_v1 = _ZNK18OnlineResultRecord7isValidEv((unsigned int *)&temp_v3);
       if (temp_v1 != 0) {
         FUN_002ec738(temp_v0);
         onlineJobSetStateDone(param_1);

@@ -865,7 +865,7 @@ LAB_004f054c:
     switch(iStack_68) {
     case 1:
       iVar29 = *(int *)(param_2[8] + 0x150);
-      FUN_0034a290();
+      dataTable41FindById();
       if (iVar29 != 0) {
         FUN_004aa3d4(DAT_0057a9c8,2,*(unsigned int *)(param_2[8] + 0x150) & 0xffff,
                      *(unsigned int *)(param_2[8] + 0x3f8),0,0);

@@ -1,39 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035105c` (_code @ 0x35105c, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail dispatches on the kind through a 10-entry jump table; the compiler emits a compare chain for the same cases */
+#include "common.h"
+
+struct GeometryOwner {
+    u8 unk00[0x50];  // 0x00
+    u32 geometry;    // 0x50
+};
 
 extern "C" {
 
-int geometryDestroy(void);
-int FUN_00350cf4(unsigned int, int);
+void geometryDestroy(u32 geometry);
+u32 FUN_00350cf4(u32 id, u32 flags);
 
-/* Supplied declaration required: geometryDestroy. */
-/* Supplied declaration required: FUN_00350cf4. */
-
-
-void FUN_0035105c(int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Replaces the owner's geometry with the one for `id`; the flags depend on the kind (2 differs from 1/4/9). */
+void FUN_0035105c(GeometryOwner *owner, u32 id, u32 kind)
 {
-/* irregular: 2 native warning(s); review required */
-  if (*(int *)(param_1 + 0x50) != 0) {
-    geometryDestroy();
-  }
-  switch(param_3) {
-  default:
-    return;
-  case 1:
-  case 4:
-  case 9:
-    param_2 = param_2 & 0xffff;
-    FUN_00350cf4(param_2,0x20080027);
-    *(unsigned int *)(param_1 + 0x50) = param_2;
-    return;
-  case 2:
-    param_2 = param_2 & 0xffff;
-    FUN_00350cf4(param_2,0x200000a7);
-    *(unsigned int *)(param_1 + 0x50) = param_2;
-    return;
-  }
+    if (owner->geometry != 0) {
+        geometryDestroy(owner->geometry);
+    }
+    switch (kind) {
+    case 1:
+    case 4:
+    case 9:
+        owner->geometry = FUN_00350cf4((u16)id, 0x20080027);
+        break;
+    case 2:
+        owner->geometry = FUN_00350cf4((u16)id, 0x200000A7);
+        break;
+    }
 }
 
 } /* extern "C" */

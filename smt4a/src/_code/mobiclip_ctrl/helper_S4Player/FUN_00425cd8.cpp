@@ -1,106 +1,144 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00425cd8` (_code @ 0x425cd8, 0x198 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: svc 0x24 (wrapper), the thread destructor (nn/os/Thread.h) and the whole teardown match instruction for instruction except scheduling: retail stores the stop flag before computing the wake-event address, recomputes the thread address after the finalize call instead of keeping it in r5, keeps zero in r7 from the wait, and loads the stack region straight into r5 for the delete. */
+#include "common.h"
+#include "nn/os/AddressSpaceManager.h"
+#include "nn/Result.h"
+#include "nn/os/Thread.h"
+#include <stddef.h>
+
+/* The file backend the player streams from: slot 1 closes a stream. */
+class MovieFileBackend {
+public:
+    virtual void unk00() = 0;
+    virtual void closeStream(void *stream) = 0;
+};
+
+/* The player's heap: slot 1 frees a decoder block, slot 3 an output block. */
+class MovieHeap {
+public:
+    virtual void unk00() = 0;
+    virtual void freeDecoder(void *owner, void *block) = 0;
+    virtual void unk08() = 0;
+    virtual void freeOutput(void *owner, void *block) = 0;
+};
+
+/* The memory mapped for the player thread's stack: its destructor unmaps it, and the block goes
+ * back through the engine's operator delete. */
+struct StackRegion : AddressSpaceRegion {
+    ~StackRegion();
+    static void operator delete(void *block);
+};
+
+/* A stream the player has open (24 bytes). */
+struct MovieStream {
+    void *handle;  // 0x00
+    u8 unk04[0x14];
+};
+
+/* The movie player (the part its teardown touches). */
+struct MoviePlayer {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ u32 position;
+    /* 0x00c */ u8 unk00c[4];
+    /* 0x010 */ u8 stopping;
+    /* 0x011 */ u8 unk011[3];
+    /* 0x014 */ MovieFileBackend *fileBackend;
+    /* 0x018 */ void *reader;
+    /* 0x01c */ u8 unk01c[4];
+    /* 0x020 */ u8 wakeEvent[8];
+    /* 0x028 */ NnOsThread thread;
+    /* 0x02d */ u8 unk02d[0x12b];
+    /* 0x158 */ u8 deblocker[0x60];
+    /* 0x1b8 */ MovieHeap *heap;
+    /* 0x1bc */ u32 unk1bc;
+    /* 0x1c0 */ u32 unk1c0;
+    /* 0x1c4 */ s32 streamCount;
+    /* 0x1c8 */ u8 unk1c8[0x10];
+    /* 0x1d8 */ MovieStream streams[1];
+};
+
+/* The decoder-block, output-block and stream tables sit in the player's tail; shown as views. */
+struct MoviePlayerTables {
+    /* 0x000 */ u8 unk000[0x2e8];
+    /* 0x2e8 */ s32 decoderCount;
+    /* 0x2ec */ void *decoderBlocks[1];
+};
+struct MoviePlayerOutputs {
+    /* 0x000 */ u8 unk000[0x484];
+    /* 0x484 */ s32 outputCount;
+    /* 0x488 */ void *outputBlocks[1];
+};
+
+/* What the player thread runs on: the heap block of its stack and the mapping of that block. */
+struct MovieThreadStack {
+    void *memory;         // 0x0
+    StackRegion *region;  // 0x4
+};
 
 extern "C" {
+extern MovieThreadStack DAT_00588100;
 
-int FUN_001469a8(int);
-int asdMemFree(unsigned int);
-int nn_os_LightEvent_Signal(int);
-int FUN_001a0d08(int);
-int FUN_002e3140(void);
-int asdOperatorDelete(int);
-int deblockerHandleRelease(int);
-int FUN_00424b54(int);
-int software_interrupt(int);
-
-typedef int romwright_code(...);
-extern unsigned int DAT_00588100; /* 0x588100 */
-extern int DAT_00588104; /* 0x588104 */
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_001469a8. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: nn_os_LightEvent_Signal. */
-/* Supplied declaration required: FUN_001a0d08. */
-/* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: deblockerHandleRelease. */
-/* Supplied declaration required: FUN_00424b54. */
-
-
-void FUN_00425cd8(int param_1)
-
-{
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  if (*(int *)(param_1 + 0x14) != 0) {
-    *(unsigned char *)(param_1 + 0x10) = 1;
-    nn_os_LightEvent_Signal(param_1 + 0x20);
-    software_interrupt(0x24);
-    if (*(int *)(param_1 + 0x28) < 0) {
-      FUN_002e3140();
-    }
-    *(unsigned char *)(param_1 + 0x2c) = 1;
-    FUN_001a0d08(param_1 + 0x28);
-    if (*(int *)(param_1 + 0x28) != 0) {
-      software_interrupt(0x23);
-      *(unsigned int *)(param_1 + 0x28) = 0;
-    }
-    FUN_001469a8(DAT_00588104);
-    temp_v0 = DAT_00588104;
-    if (DAT_00588104 != 0) {
-      FUN_001469a8(DAT_00588104);
-      asdOperatorDelete(temp_v0);
-    }
-    DAT_00588104 = 0;
-    asdMemFree(DAT_00588100);
-    DAT_00588100 = 0;
-    *(unsigned int *)(param_1 + 8) = 0xffffffff;
-    FUN_00424b54(param_1);
-    temp_v0 = 0;
-    if (temp_v0 < *(int *)(param_1 + 0x2e8)) {
-      do {
-        temp_v1 = param_1 + temp_v0 * 4;
-        (**(romwright_code **)(**(int **)(param_1 + 0x1b8) + 4))
-                  (*(int **)(param_1 + 0x1b8),*(unsigned int *)(param_1 + 0x14),
-                   *(unsigned int *)(temp_v1 + 0x2ec));
-        *(unsigned int *)(temp_v1 + 0x2ec) = 0;
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < *(int *)(param_1 + 0x2e8));
-    }
-    temp_v0 = 0;
-    if (temp_v0 < *(int *)(param_1 + 0x484)) {
-      do {
-        temp_v1 = param_1 + temp_v0 * 4;
-        (**(romwright_code **)(**(int **)(param_1 + 0x1b8) + 0xc))
-                  (*(int **)(param_1 + 0x1b8),*(unsigned int *)(param_1 + 0x14),
-                   *(unsigned int *)(temp_v1 + 0x488));
-        *(unsigned int *)(temp_v1 + 0x488) = 0;
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < *(int *)(param_1 + 0x484));
-    }
-    temp_v0 = 0;
-    if (temp_v0 < *(int *)(param_1 + 0x1c4)) {
-      do {
-        temp_v1 = param_1 + temp_v0 * 0x18;
-        if (*(int *)(temp_v1 + 0x1d8) != 0) {
-          (**(romwright_code **)(**(int **)(param_1 + 0x14) + 4))();
-          *(unsigned int *)(temp_v1 + 0x1d8) = 0;
-        }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < *(int *)(param_1 + 0x1c4));
-    }
-    deblockerHandleRelease(param_1 + 0x158);
-    *(unsigned int *)(param_1 + 0x14) = 0;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-    *(unsigned int *)(param_1 + 0x1b8) = 0;
-    *(unsigned int *)(param_1 + 0x1bc) = 0;
-    *(unsigned int *)(param_1 + 0x1c0) = 0;
-  }
-  return;
+void nn_os_LightEvent_Signal(void *event);
+s32 svcWaitSynchronization1(u32 handle, s64 timeout);
+void FUN_002e3140(s32 result, bool failed);
+void FUN_001469a8(AddressSpaceRegion *region);
+void asdOperatorDelete(void *block);
+void asdMemFree(void *block);
+void FUN_00424b54(MoviePlayer *player);
+void deblockerHandleRelease(void *deblocker);
 }
 
-} /* extern "C" */
+inline StackRegion::~StackRegion()
+{
+    FUN_001469a8(this);
+}
+
+inline void StackRegion::operator delete(void *block)
+{
+    asdOperatorDelete(block);
+}
+
+/* Stops the player thread, frees its stack and every block and stream the player holds. */
+extern "C" void FUN_00425cd8(MoviePlayer *player)
+{
+    if (player->fileBackend != NULL) {
+        player->stopping = 1;
+        nn_os_LightEvent_Signal(player->wakeEvent);
+        s32 result = svcWaitSynchronization1(player->thread.handle, -1);
+        bool failed = nnResultIsFailure(result);
+        if (failed) {
+            FUN_002e3140(result, failed);
+        }
+        player->thread.joined = 1;
+        player->thread.~NnOsThread();
+        FUN_001469a8(DAT_00588100.region);
+        StackRegion *region = DAT_00588100.region;
+        delete region;
+        DAT_00588100.region = NULL;
+        asdMemFree(DAT_00588100.memory);
+        DAT_00588100.memory = NULL;
+        player->position = -1;
+        FUN_00424b54(player);
+        MoviePlayerTables *tables = (MoviePlayerTables *)player;
+        for (s32 i = 0; i < tables->decoderCount; ++i) {
+            player->heap->freeDecoder(player->fileBackend, tables->decoderBlocks[i]);
+            tables->decoderBlocks[i] = NULL;
+        }
+        MoviePlayerOutputs *outputs = (MoviePlayerOutputs *)player;
+        for (s32 i = 0; i < outputs->outputCount; ++i) {
+            player->heap->freeOutput(player->fileBackend, outputs->outputBlocks[i]);
+            outputs->outputBlocks[i] = NULL;
+        }
+        for (s32 i = 0; i < player->streamCount; ++i) {
+            if (player->streams[i].handle != NULL) {
+                player->fileBackend->closeStream(player->streams[i].handle);
+                player->streams[i].handle = NULL;
+            }
+        }
+        deblockerHandleRelease(player->deblocker);
+        player->fileBackend = NULL;
+        player->reader = NULL;
+        player->heap = NULL;
+        player->unk1bc = 0;
+        player->unk1c0 = 0;
+    }
+}

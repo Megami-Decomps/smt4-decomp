@@ -1,42 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022212c` (_code @ 0x22212c, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: block layout and VFP register choice only (retail emits the zero case out of line after the return and divides into s1) */
+/* Script command: sets up a countdown fade on a job — full strength and a per-frame decrement of 1 / frames, or both
+ * zero when the frame count is 0. Arguments: job id, frame count. Always returns 1. */
+#include "common.h"
 
 extern "C" {
+/* The part of a job's work area the fade uses. */
+struct FadeWork {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ f32 strength;
+    /* 0x10 */ f32 step;
+};
 
-int scrGetArg(int);
-int VectorSignedToFloat(int, int);
+s32 scrGetArg(u32 index);
+FadeWork *jobGetWork(s32 jobId);
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: scrGetArg. */
-extern int jobGetWork(unsigned int);
-
-
-unsigned int FUN_0022212c(void)
-
+s32 FUN_0022212c(void)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int in_fpscr;
-  float temp_v3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = jobGetWork(temp_v0);
-  if (temp_v2 != 0) {
-    if (temp_v1 != 0) {
-      *(unsigned int *)(temp_v2 + 0xc) = 0x3f800000;
-      temp_v3 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      *(float *)(temp_v2 + 0x10) = -1.0f / temp_v3;
-    }
-    else {
-      *(unsigned int *)(temp_v2 + 0xc) = 0;
-      *(unsigned int *)(temp_v2 + 0x10) = 0;
-    }
-  }
-  return 1;
-}
+    s32 jobId = scrGetArg(0);
+    s32 frames = scrGetArg(1);
+    FadeWork *work = jobGetWork(jobId);
 
-} /* extern "C" */
+    if (work != NULL) {
+        if (frames != 0) {
+            work->strength = 1.0f;
+            work->step = -1.0f / (f32)frames;
+        } else {
+            work->strength = 0.0f;
+            work->step = 0.0f;
+        }
+    }
+    return 1;
+}
+}

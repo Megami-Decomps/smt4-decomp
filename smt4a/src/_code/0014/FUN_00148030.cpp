@@ -7,7 +7,7 @@ extern "C" {
 int _ZN18WindowStatusResultC1Ej(unsigned int [3], int);
 int _ZN18WindowStatusResultC1Ev(...);
 
-extern int FUN_001585d4(int);
+extern int clearU64(int);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ev. */
 
@@ -24,7 +24,7 @@ void FUN_00148030(int param_1)
   unsigned int temp_v3 [3];
   
   puVar3 = temp_v3;
-  temp_v0 = FUN_001585d4(param_1 + 8);
+  temp_v0 = clearU64(param_1 + 8);
   *(unsigned char *)(temp_v0 + 0x314) = 1;
   puVar2 = (unsigned int *)_ZN18WindowStatusResultC1Ev(temp_v0 + 0x318);
   puVar2[2] = 0;

@@ -5,7 +5,7 @@ extern "C" {
 extern LmapMainState *g_lmapMainState;
 extern LmapScene *g_lmapScene;
 extern GameState g_gameState;
-void FUN_002702dc();
+void mapCollisionRelease();
 void FUN_0027b2b4(s32 map, u32 entry, s32 secondaryMap, s32 mode);
 void FUN_002d508c(LmapMainState *state);
 void FUN_00266a2c();
@@ -51,7 +51,7 @@ u32 FUN_002fb7dc()
         transition->dirty = 1;
         transition->entry = 99;
         g_gameState.unk004Value = 99;
-        FUN_002702dc();
+        mapCollisionRelease();
         FUN_0027b2b4(transition->map, transition->entry,
             transition->map == 101 ? 101 : 0, transition->map == 101 ? 10 : 0);
         transition->phase = 1;

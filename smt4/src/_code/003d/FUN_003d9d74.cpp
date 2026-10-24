@@ -6,11 +6,11 @@ struct OwnerState {
 };
 extern "C" {
 void *asdOperatorNew(u32 size);
-void *FUN_0034a1ec(void *object);
+void *_ZN9Obj4208d4C1Ev(void *object);
 /* Allocates the owner's optional object. */
 void FUN_003d9d74(OwnerState *owner)
 {
     void *object = asdOperatorNew(0x44);
-    owner->object = object ? FUN_0034a1ec(object) : NULL;
+    owner->object = object ? _ZN9Obj4208d4C1Ev(object) : NULL;
 }
 }

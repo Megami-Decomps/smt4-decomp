@@ -1,89 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ac83c` (_code @ 0x4ac83c, 0x194 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same calls and flow (101 vs 100 rows); registers now agree for `holder` (r4) but retail keeps the vector math in r1/r2/r3 differently (it also keeps -16 in r2 across the assignment), computes (position + 1) - begin without folding it into (position - begin) + 16 and updates the vector size from a register. */
+#include "classes/MarkerRef.h"
+
+struct MarkerRefVector;
+
+extern "C" {
+void FUN_00521d90(MarkerRef *to, MarkerRef *from, s32 count);
+void FUN_00521d14(MarkerRefVector *vector, s32 first, s32 last);
+}
+
+/* The vector of spare marker handles (observed prefix of the container object). */
+struct MarkerRefVector {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ MarkerRef *begin;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ s32 size;
+};
+
+/* An object that keeps a marker handle, with a pool of spare ones. */
+struct MarkerHolder {
+    /* 0x00 */ RefAllocator *allocator;
+    /* 0x04 */ u8 unk04[0x18];
+    /* 0x1C */ MarkerRefVector spare;
+    /* 0x2C */ u8 unk2c[0x18];
+    /* 0x44 */ MarkerRef marker;
+};
 
 extern "C" {
 
-int FUN_00521d14(unsigned int *, int, unsigned int);
-int FUN_00521d90(int, int, int);
-
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_00521d14. */
-/* Supplied declaration required: FUN_00521d90. */
-
-
-unsigned int FUN_004ac83c(unsigned int *param_1)
-
+/* Makes sure the holder has a marker: takes the last spare handle (removing it from the pool) or
+ * allocates a new marker, and clears it. Returns whether it has one. */
+s32 FUN_004ac83c(MarkerHolder *holder)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int *puVar3;
-  int temp_v1;
-  unsigned int *puVar5;
-  int temp_v2;
-  int temp_v3;
-  
-  if (param_1[0x12] == 0) {
-    if (param_1[10] != 0) {
-      puVar1 = param_1 + 0x11;
-      puVar3 = (unsigned int *)((param_1[10] * 0x10 - 0x10) + param_1[8]);
-      if (puVar1 != puVar3) {
-        puVar5 = (unsigned int *)param_1[0x13];
-        if (puVar5 != (unsigned int *)0x0 && puVar5 != puVar1) {
-          puVar5[3] = param_1[0x14];
-          *(unsigned int *)(param_1[0x14] + 8) = param_1[0x13];
-          param_1[0x13] = 0;
-          param_1[0x14] = 0;
+    if (holder->marker.object == NULL) {
+        if (holder->spare.size != 0) {
+            holder->marker = holder->spare.begin[holder->spare.size - 1];
+            {
+                /* Erase the last spare: shift the ones after it down (none), destroy the last one. */
+                MarkerRef *position = &holder->spare.begin[holder->spare.size - 1];
+                MarkerRef *after = position + 1;
+                s32 first = position - holder->spare.begin;
+                s32 next = after - holder->spare.begin;
+                FUN_00521d90(&holder->spare.begin[first], &holder->spare.begin[next], holder->spare.size - next);
+                FUN_00521d14(&holder->spare, holder->spare.size - 1, holder->spare.size);
+                holder->spare.size = holder->spare.size - 1;
+            }
+            holder->marker.object->unk08 = 0;
+            holder->marker.object->unk0c = 0;
+            holder->marker.object->ready = 0;
+        } else {
+            Marker *marker = static_cast<Marker *>(holder->allocator->allocate(0x18));
+            if (marker != NULL) {
+                marker->unk08 = 0;
+                marker->unk0c = 0;
+                marker->ready = 0;
+            }
+            holder->marker.reset(marker);
         }
-        param_1[0x12] = 0;
-        param_1[0x12] = puVar3[1];
-        temp_v2 = puVar3[3];
-        param_1[0x14] = temp_v2;
-        *(unsigned int **)(temp_v2 + 8) = puVar1;
-        param_1[0x13] = (unsigned int)puVar3;
-        puVar3[3] = (unsigned int)puVar1;
-      }
-      temp_v3 = param_1[10];
-      temp_v0 = param_1[8];
-      temp_v1 = (temp_v3 * 0x10 - 0x10) + temp_v0;
-      temp_v2 = ((temp_v1 + 0x10) - temp_v0) >> 4;
-      FUN_00521d90(temp_v0 + ((temp_v1 - temp_v0) >> 4) * 0x10,temp_v0 + temp_v2 * 0x10,temp_v3 - temp_v2);
-      FUN_00521d14(param_1 + 7,temp_v3 - 1,param_1[10]);
-      param_1[10] = temp_v3 - 1;
-      *(unsigned int *)(param_1[0x12] + 8) = 0;
-      *(unsigned int *)(param_1[0x12] + 0xc) = 0;
-      *(unsigned char *)(param_1[0x12] + 0x11) = 0;
-    }
-    else {
-      puVar1 = param_1 + 0x11;
-      temp_v2 = (*(romwright_code *)**(unsigned int **)*param_1)((unsigned int *)*param_1,0x18);
-      if (temp_v2 != 0) {
-        *(unsigned int *)(temp_v2 + 8) = 0;
-        *(unsigned int *)(temp_v2 + 0xc) = 0;
-        *(unsigned char *)(temp_v2 + 0x11) = 0;
-      }
-      puVar3 = (unsigned int *)param_1[0x13];
-      if (puVar3 == (unsigned int *)0x0 || puVar3 == puVar1) {
-        if (param_1[0x12] != 0) {
-          (**(romwright_code **)(*(int *)*puVar1 + 4))();
+        if (holder->marker.object == NULL) {
+            return 0;
         }
-      }
-      else {
-        puVar3[3] = param_1[0x14];
-        *(unsigned int *)(param_1[0x14] + 8) = param_1[0x13];
-        param_1[0x13] = 0;
-        param_1[0x14] = 0;
-      }
-      param_1[0x12] = temp_v2;
-      param_1[0x14] = (unsigned int)puVar1;
-      param_1[0x13] = (unsigned int)puVar1;
     }
-    if (param_1[0x12] == 0) {
-      return 0;
-    }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

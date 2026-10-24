@@ -190,7 +190,9 @@ typedef struct AsdSndStatus {
 typedef struct AsdSndStatusApoc {
     /* 0x00 */ struct AsdSndObject *objects; /* head of the list of live sound objects */
     /* 0x04 */ s32 objectCount;
-    /* 0x08 */ u8 unk08[0x11];
+    /* 0x08 */ u8 unk08[0xc];
+    /* 0x14 */ s32 unk14;        /* reset to -1 when the sound layer is shut down */
+    /* 0x18 */ u8 unk18;
     /* 0x19 */ s8 ready;         /* the sound layer is up */
     /* 0x1a */ u8 unk1a;
     /* 0x1b */ u8 hasStream;     /* a sound stream is loaded */

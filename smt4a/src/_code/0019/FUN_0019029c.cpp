@@ -22,7 +22,7 @@ extern unsigned char DAT_0055c2f8; /* 0x55c2f8 */
 
 extern int constructObj0055bfc4(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_001a6350. */
-extern unsigned int FUN_001b1f04(void);
+extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 extern unsigned int *FUN_001b95dc(unsigned int, int);
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
@@ -120,7 +120,7 @@ unsigned int FUN_0019029c(int param_1,int param_2,unsigned int *param_3,int para
             piVar3 = (int *)*piVar3;
           } while (piVar3 != (int *)(param_1 + 0x38));
         }
-        temp_v0 = FUN_001b1f04();
+        temp_v0 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
         FUN_001a6350(temp_v0,param_1 + 0x40);
         return 1;
       }

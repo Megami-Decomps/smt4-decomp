@@ -870,13 +870,13 @@ LAB_003333b4:
         }
       }
       FUN_002bd8e8(iVar12 + 0x38c,5,0);
-      FUN_002bee58(iVar12 + 0x418,3);
-      FUN_002bee58(iVar12 + 0x4a4,3);
-      FUN_002bee58(iVar12 + 0x530,3);
+      spriteStartAnimationByIndex(iVar12 + 0x418,3);
+      spriteStartAnimationByIndex(iVar12 + 0x4a4,3);
+      spriteStartAnimationByIndex(iVar12 + 0x530,3);
       FUN_002bd8e8(iVar12 + 0x5bc,5,0);
       FUN_002bd8e8(iVar12 + 0x648,5,0);
       FUN_002bd8e8(iVar12 + 0x6d4,5,0);
-      FUN_002bee58(iVar12 + 0x760,3);
+      spriteStartAnimationByIndex(iVar12 + 0x760,3);
       iVar7 = 0;
       do {
         iVar8 = iVar12 + iVar7 * 0x8c;

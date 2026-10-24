@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_00230cc0(void *cursor, s32 a, s32 b, s32 c, u32 listId);
+void uiRectDrawAtBottomRight(void *cursor, s32 a, s32 b, s32 c, u32 listId);
 s32 FUN_0029e924(MenuList *list);
 s32 rangeLimitMin(MenuList *list);
 s32 FUN_00240d5c(MenuList *list);
@@ -21,7 +21,7 @@ void selectMenuHandlePendingRequest(SelectMenu *menu)
     if (menu->flags & MENU_REFRESH) {
         u32 listId = menu->listId;
 
-        FUN_00230cc0(menu->cursor, 10, 0, 0, listId);
+        uiRectDrawAtBottomRight(menu->cursor, 10, 0, 0, listId);
 
         bool pickMode = false;
         if (menu->mode == 4) {

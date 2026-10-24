@@ -18,7 +18,7 @@ int FUN_0014a82c(...);
 int asdGfxSetTargetParameter(...);
 int asdGfxSetMode(...);
 int FUN_00161074(unsigned int);
-int FUN_0017cfe8(...);
+int asdGxBindCmdlistAt(...);
 
 /* stack frame of param_1: 9 slot(s), 36 byte(s) */
 typedef struct {
@@ -100,7 +100,7 @@ extern unsigned char DAT_0063ff89; /* 0x63ff89 */
 /* Supplied declaration required: asdGfxSetTargetParameter. */
 /* Supplied declaration required: asdGfxSetMode. */
 /* Supplied declaration required: FUN_00161074. */
-/* Supplied declaration required: FUN_0017cfe8. */
+/* Supplied declaration required: asdGxBindCmdlistAt. */
 
 
 void FUN_00139c90(unsigned int *param_1)
@@ -218,7 +218,7 @@ void FUN_00139c90(unsigned int *param_1)
   asdGxCommandListSetLists(&DAT_0063fedc);
   gxCmdListSetCreate(&temp_v3,1,param_1[2],param_1[3]);
   asdGxCommandListSetNewListId(temp_v3);
-  FUN_0017cfe8(&DAT_0063fec4,0);
+  asdGxBindCmdlistAt(&DAT_0063fec4,0);
   DAT_0063fefc = 0x3e800000;
   DAT_0063ff00 = 0x3e800000;
   DAT_0063ff04 = 0x3e800000;

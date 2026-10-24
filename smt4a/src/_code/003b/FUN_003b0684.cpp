@@ -1,55 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b0684` (_code @ 0x3b0684, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: one register: retail materialises the request's enable flag 1 in r1 before the store, the build uses r0. */
+#include "common.h"
 
 extern "C" {
 
-int jyoucyuGetTableEntry(int);
-int questCenterInitialize(int *, int);
+/* Request handed to the quest center: two script arguments and an enable flag. */
+typedef struct QuestCenterRequest {
+    /* 0x0 */ u32 first;
+    /* 0x4 */ u32 second;
+    /* 0x8 */ u32 enabled;
+} QuestCenterRequest;
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+u32 scrGetArg(u32 index);
+s32 scrGetCommandFrame(void);
+void jyoucyuGetTableEntry(s32 index);
+void questCenterInitialize(void *request, u32 size);
+s32 stateAt4IsAbove2(void);
+void *QuestCenter_GetActiveEntry(void);
 
-/* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: questCenterInitialize. */
-extern unsigned int scrGetArg(unsigned int);
-extern int scrGetCommandFrame(void);
-extern int stateAt4IsAbove2(void);
-extern int QuestCenter_GetActiveEntry(void);
-
-
-unsigned int FUN_003b0684(void)
-
+/* Script command: opens the quest center with its two arguments on the first frame; returns whether an entry is active and past state 2. */
+u32 FUN_003b0684(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int uStack_14;
-  unsigned int temp_v4;
-  
-  temp_v0 = scrGetCommandFrame();
-  if (temp_v0 == 0) {
-    temp_v1 = scrGetArg(0);
-    temp_v2 = scrGetArg(1);
-    jyoucyuGetTableEntry(0);
-    temp_v4 = 1;
-    temp_v3 = temp_v1;
-    uStack_14 = temp_v2;
-    questCenterInitialize(&temp_v3,0xc);
-  }
-  temp_v0 = QuestCenter_GetActiveEntry();
-  if ((temp_v0 == 0) || (temp_v0 = stateAt4IsAbove2(), temp_v0 == 0)) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    if (scrGetCommandFrame() == 0) {
+        u32 first = scrGetArg(0);
+        u32 second = scrGetArg(1);
+
+        jyoucyuGetTableEntry(0);
+        QuestCenterRequest request;
+        request.enabled = 1;
+        request.first = first;
+        request.second = second;
+        questCenterInitialize(&request, sizeof(request));
+    }
+    if (QuestCenter_GetActiveEntry() != NULL && stateAt4IsAbove2() != 0) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

@@ -8,7 +8,7 @@ struct LightRegistration {
     u8 unk00[0x0C]; // 0x00
     LightRegistry* registry; // 0x0C
 };
-extern "C" LightRegistration** FUN_002b74cc(
+extern "C" LightRegistration** _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(
     LightRegistration**, LightRegistration**, LightRegistration**, LightRegistration* const*);
 struct LightRegistry {
     union {
@@ -28,7 +28,7 @@ struct LightRegistry {
             ++newEnd;
         }
         if (newEnd != end) {
-            newEnd = FUN_002b74cc(newEnd + 1, end, newEnd, &light);
+            newEnd = _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(newEnd + 1, end, newEnd, &light);
         }
         bool removed = end != newEnd;
         end = newEnd;

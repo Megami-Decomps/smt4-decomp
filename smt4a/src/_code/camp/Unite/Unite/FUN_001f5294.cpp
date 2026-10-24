@@ -14,7 +14,7 @@ int statusDownRestartTransition(void);
 int FUN_002a74ac(void);
 int sysMemClear(...);
 int FUN_0031db84(...);
-int FUN_0032fea0(...);
+int arrayContainsU16(...);
 int uniteReleaseExit(void);
 int FUN_0034c340(...);
 int FUN_003857b4(...);
@@ -313,7 +313,7 @@ extern int flaggedEntryGetValueA(int *);
 /* Supplied declaration required: pairLogAppend. */
 /* Supplied declaration required: selectionGetValidatedField. */
 /* Supplied declaration required: FUN_0032d0c8. */
-/* Supplied declaration required: FUN_0032fea0. */
+/* Supplied declaration required: arrayContainsU16. */
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: uniteReleaseExit. */
 /* Supplied declaration required: FUN_00333dc8. */
@@ -3806,10 +3806,10 @@ LAB_001fac1c:
                           findSkillMetadataById();
                           if ((*(unsigned char *)(temp_v7 + 3) & 0x20) != 0) {
                             piVar17 = temp_v31;
-                            FUN_0032fea0(temp_v31,0x60,temp_v44[temp_v5]);
+                            arrayContainsU16(temp_v31,0x60,temp_v44[temp_v5]);
                             if (piVar17 == (int *)0x0) {
                               temp_v6 = temp_v34 + 0x40;
-                              FUN_0032fea0(temp_v6,8,temp_v44[temp_v5]);
+                              arrayContainsU16(temp_v6,8,temp_v44[temp_v5]);
                               if (temp_v6 == 0) {
                                 temp_v6 = (int)temp_v28 * 2;
                                 temp_v28 = (int *)((int)temp_v28 + 1);
@@ -3819,10 +3819,10 @@ LAB_001fac1c:
                             if ((*(unsigned char *)(temp_v7 + 3) & 0x20) != 0) goto LAB_001fb9c4;
                           }
                           piVar17 = temp_v30;
-                          FUN_0032fea0(temp_v30,0x18,temp_v44[temp_v5]);
+                          arrayContainsU16(temp_v30,0x18,temp_v44[temp_v5]);
                           if (piVar17 == (int *)0x0) {
                             temp_v6 = temp_v34 + 0x40;
-                            FUN_0032fea0(temp_v6,8,temp_v44[temp_v5]);
+                            arrayContainsU16(temp_v6,8,temp_v44[temp_v5]);
                             if (temp_v6 == 0) {
                               temp_v6 = (int)temp_v29 * 2;
                               temp_v29 = (int *)((int)temp_v29 + 1);

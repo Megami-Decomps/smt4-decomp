@@ -18,21 +18,74 @@ typedef struct LmapObj {
     /* 0x00 */ u8 unk00[1];
 } LmapObj;
 
+/* One 0x88-byte slot of the state block's sprite table; only its two state bytes are named. */
+typedef struct LmapMainSlot {
+    /* 0x00 */ u8 unk00[0x85];
+    /* 0x85 */ u8 stateA;
+    /* 0x86 */ u8 stateB;
+    /* 0x87 */ u8 unk87;
+} LmapMainSlot;
+
 /* The field map's state block (Shin Megami Tensei IV layout), kept by a module global. */
 typedef struct LmapMainState {
     /* 0x00 */ u32 job;           /* job that runs the map */
-    /* 0x04 */ u8 unk04[4];
+    /* 0x04 */ u32 drawTask;      /* task that draws the map */
     /* 0x08 */ u8 freeOnEnd;      /* 0 = keep the block after the job ends */
-    /* 0x09 */ u8 unk09[0x37];
+    /* 0x09 */ u8 unk09;
+    /* 0x0A */ u8 unk0A;
+    /* 0x0B */ u8 unk0B;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u8 unk14[0x2C];
     /* 0x40 */ s32 unk40;
     /* 0x44 */ u8 unk44[4];
     /* 0x48 */ u32 unk48;
-    /* 0x4C */ u8 unk4C[0x7C];
-    /* 0xC8 */ s32 unkC8;         /* float bits */
+    /* 0x4C */ u16 unk4C;
+    /* 0x4E */ u16 unk4E;
+    /* 0x50 */ u8 unk50[0x74];
+    /* 0xC4 */ f32 unkC4;
+    union {
+        /* 0xC8 */ s32 unkC8;     /* float bits */
+        /* 0xC8 */ f32 unkC8Float;
+    };
     /* 0xCC */ u32 unkCC;
-    /* 0xD0 */ u8 unkD0[0x1C];
+    /* 0xD0 */ u32 unkD0;
+    /* 0xD4 */ u32 unkD4;
+    /* 0xD8 */ u8 unkD8[4];
+    /* 0xDC */ f32 unkDC;
+    /* 0xE0 */ u8 unkE0;
+    /* 0xE1 */ u8 unkE1;
+    /* 0xE2 */ u8 unkE2[2];
+    /* 0xE4 */ s32 unkE4;
+    /* 0xE8 */ f32 unkE8;
     /* 0xEC */ LmapObj obj;
+    /* 0xED */ u8 unkED[0x8A3];
+    /* 0x990 */ u8 unk990;
+    /* 0x991 */ u8 unk991[3];
+    /* 0x994 */ u32 unk994;
+    /* 0x998 */ u8 unk998[8];
+    /* 0x9A0 */ u8 unk9A0;
+    /* 0x9A1 */ u8 unk9A1[3];
+    /* 0x9A4 */ u32 unk9A4[6];
+    /* 0x9BC */ u8 unk9BC[0x28];
+    /* 0x9E4 */ u32 unk9E4[4];
+    /* 0x9F4 */ u8 unk9F4[0xC];
+    /* 0xA00 */ f32 unkA00[3];
+    /* 0xA0C */ u32 unkA0C;
+    /* 0xA10 */ u32 words[32];
+    /* 0xA90 */ u8 unkA90;
+    /* 0xA91 */ u8 unkA91[3];
+    /* 0xA94 */ u32 unkA94[3];
+    /* 0xAA0 */ u8 unkAA0[0xC];
+    /* 0xAAC */ LmapMainSlot slots[128];
+    /* 0x4EAC */ u32 unk4EAC;
+    /* 0x4EB0 */ f32 unk4EB0[3];
+    /* 0x4EBC */ u8 unk4EBC[0x44];
+    /* 0x4F00 */ u32 unk4F00;
 } LmapMainState;
+typedef char LmapMainStateLayoutCheck[sizeof(LmapMainState) == 0x4F04 && offsetof(LmapMainState, obj) == 0xEC &&
+    offsetof(LmapMainState, slots) == 0xAAC && offsetof(LmapMainState, unk4EAC) == 0x4EAC &&
+    offsetof(LmapMainState, unkC8) == 0xC8 && offsetof(LmapMainState, words) == 0xA10 ? 1 : -1];
 
 /* A polymorphic object: slot 1 of its vtable destroys it. */
 typedef struct LmapScript {
@@ -59,7 +112,9 @@ typedef struct LmapScene {
     };
     /* 0x054 */ u8 unk054[0xE0];
     /* 0x134 */ u8 unk134;
-    /* 0x135 */ u8 unk135[0x2F];
+    /* 0x135 */ u8 unk135[0x27];
+    /* 0x15C */ f32 unk15C;
+    /* 0x160 */ f32 unk160;
     /* 0x164 */ u32 handleA;
     /* 0x168 */ u8 unk168[0x0C];
     /* 0x174 */ u32 handleB;
@@ -96,9 +151,12 @@ typedef struct LmapExtraA {
     union {
         /* 0x000 */ u8 unk000[0xB0];
         struct {
-            /* 0x000 */ u8 unk000BeforeUp[0x20];
+            /* 0x000 */ s32 mode;
+            /* 0x004 */ s32 unk004;
+            /* 0x008 */ s32 unk008;
+            /* 0x00C */ u8 unk00C[0x14];
             /* 0x020 */ MapVector up;
-            /* 0x02C */ u8 unk02C[0xC];
+            /* 0x02C */ MapVector upCopy;
             /* 0x038 */ MapVector eye;
             /* 0x044 */ MapVector target;
             /* 0x050 */ MapVector savedEye;
@@ -117,7 +175,12 @@ typedef struct LmapExtraA {
         } followPose;
     };
     /* 0x0B0 */ s32 unkB0;
-    /* 0x0B4 */ u8 unk0B4[0x14];
+    /* 0x0B4 */ u8 flagB4;
+    /* 0x0B5 */ u8 flagB5;
+    /* 0x0B6 */ u16 timer;
+    /* 0x0B8 */ u16 step;
+    /* 0x0BA */ u8 unk0BA[2];
+    /* 0x0BC */ MapVector axis;
     /* 0x0C8 */ s32 unkC8;
     union {
         /* 0x0CC */ u8 unk0CC[0x140];
@@ -132,8 +195,13 @@ typedef struct LmapExtraA {
     union {
         /* 0x210 */ u8 unk210[0x98];
         struct {
-            u8 unk210[0x14];
+            /* 0x210 */ f32 unk210F;
+            /* 0x214 */ f32 unk214F;
+            /* 0x218 */ u8 unk218[8];
+            /* 0x220 */ u8 flag220;
+            /* 0x221 */ u8 unk221[3];
             /* 0x224 */ VectorPairTransitionA parameters;
+            /* 0x298 */ f32 unk298;
         } cameraTransition;
     };
     /* 0x2A8 */ u32 unk2A8;
@@ -189,7 +257,10 @@ typedef struct LmapSceneA {
     /* 0x058 */ f32 time;
     /* 0x05C */ u8 unk05C[0xD8];
     /* 0x134 */ u8 unk134;
-    /* 0x135 */ u8 unk135[0x5B];
+    /* 0x135 */ u8 unk135[0x4B];
+    /* 0x180 */ LmapActorA *actor180;
+    /* 0x184 */ u8 unk184[8];
+    /* 0x18C */ LmapActorA *actor18C;
     /* 0x190 */ LmapActorA *actor;
     /* 0x194 */ u8 unk194[0x8];
     /* 0x19C */ u16 unk19C;
@@ -207,7 +278,11 @@ typedef struct LmapSceneA {
     /* 0x22D */ u8 unk22D[0x0B];
     /* 0x238 */ u32 unk238;
     /* 0x23C */ u8 unk23C;
-    /* 0x240 */ u8 unk240[0xC];
+    /* 0x23D */ u8 flag23D;
+    /* 0x23E */ u8 unk23E[2];
+    /* 0x240 */ f32 unk240;
+    /* 0x244 */ u8 unk244[4];
+    /* 0x248 */ u32 unk248;
     /* 0x24C */ u32 unk24C;
     /* 0x250 */ u32 unk250;
     /* 0x254 */ f32 actorDestination[3];

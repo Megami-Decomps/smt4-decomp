@@ -1,38 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013e7c4` (_code @ 0x13e7c4, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: address formation only: retail forms work+0x1400 once (add r0, r0, #5120) and uses +78/+80/+79 from it, with a separate base for the pending store; the build adds each displacement separately and keeps extra saved registers. */
+#include "common.h"
+
+/* A render target size record. */
+struct RenderTargetSize {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u32 width;
+    /* 0x18 */ u32 height;
+};
+
+/* The flag bytes at +0x1400 of a render job's work block. */
+struct RenderJobFlags {
+    /* 0x00 */ u8 unk00[0x4E];
+    /* 0x4E */ u8 pending;
+    /* 0x4F */ u8 result;
+    /* 0x50 */ u8 done;
+};
+
+/* A render job's work block; only the fields this step uses are named. */
+struct RenderJobWork {
+    /* 0x0000 */ u32 unk0000;
+    /* 0x0004 */ RenderTargetSize *target;
+    /* 0x0008 */ u8 unk0008[0x13F8];
+    /* 0x1400 */ RenderJobFlags flags;
+};
 
 extern "C" {
 
-int FUN_00154edc(int, unsigned int);
-int FUN_00157558(unsigned int);
+extern u32 g_renderCtx; /* 0x59dbb4 */
+RenderJobWork *jobGetWork(void);
+void FUN_00157558(u32 context);
+u8 FUN_00154edc(s32 mode, RenderTargetSize *target);
 
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00154edc. */
-/* Supplied declaration required: FUN_00157558. */
-extern int jobGetWork(void);
-
-
-unsigned int FUN_0013e7c4(void)
-
+/* Job step: when a render is pending and not done, sizes the target 512x512, renders it and marks the job done. */
+u32 FUN_0013e7c4(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  
-  temp_v1 = jobGetWork();
-  if ((*(char *)(temp_v1 + 0x144e) != '\0') && (*(char *)(temp_v1 + 0x1450) == '\0')) {
-    FUN_00157558(g_renderCtx);
-    *(unsigned int *)(*(int *)(temp_v1 + 4) + 0x14) = 0x200;
-    *(unsigned int *)(*(int *)(temp_v1 + 4) + 0x18) = 0x200;
-    temp_v0 = 0;
-    FUN_00154edc(0,*(unsigned int *)(temp_v1 + 4));
-    *(unsigned char *)(temp_v1 + 0x144f) = temp_v0;
-    *(unsigned char *)(temp_v1 + 0x1450) = 1;
+    RenderJobWork *work = jobGetWork();
+
+    if (work->flags.pending != 0 && work->flags.done == 0) {
+        FUN_00157558(g_renderCtx);
+        work->target->width = 0x200;
+        work->target->height = 0x200;
+        work->flags.result = FUN_00154edc(0, work->target);
+        work->flags.done = 1;
+        return 0;
+    }
     return 0;
-  }
-  return 0;
 }
 
 } /* extern "C" */

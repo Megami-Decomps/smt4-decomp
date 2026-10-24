@@ -22,7 +22,7 @@ extern ChanceSkillMasks DAT_005713f0;
 BtlMainStateA *btlGetMainState(void);
 ChanceSkillUnit *FUN_003f0e20(BtlMainStateA *state, u32 unitId);
 void source4CCopyHalves(ChanceSkillUnit *unit, u16 *skills);
-const ChanceSkill *FUN_0034a290(u32 skillId);
+const ChanceSkill *dataTable41FindById(u32 skillId);
 s32 lcgRandomRange(u32 range);
 
 /* Rolls each of the unit's chance skills in order and returns the first that procs, or 0. */
@@ -37,7 +37,7 @@ u16 FUN_004c5ec0(u32 unitId)
     source4CCopyHalves(unit, skills);
     for (i = 0; i < 9; i++) {
         if (skills[i] != 0) {
-            const ChanceSkill *skill = FUN_0034a290(skills[i]);
+            const ChanceSkill *skill = dataTable41FindById(skills[i]);
             u32 chance = skill != NULL ? skill->chance : 0;
 
             if (chance != 0) {

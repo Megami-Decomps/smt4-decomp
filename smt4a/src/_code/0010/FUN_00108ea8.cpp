@@ -5,7 +5,7 @@
 extern "C" {
 
 int sharedRefRelease(...);
-int operatorNew(...);
+int _Znwj(...);
 int FUN_002eb108(...);
 int FUN_002eb164(...);
 int FUN_002eb7e0(int *, int, int, int, int, int);
@@ -27,7 +27,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: sharedRefRelease. */
-/* Supplied declaration required: operatorNew. */
+/* Supplied declaration required: _Znwj. */
 /* Supplied declaration required: FUN_002eb108. */
 /* Supplied declaration required: FUN_002eb164. */
 extern int *FUN_002eb7d0(unsigned int, unsigned int);
@@ -81,7 +81,7 @@ void FUN_00108ea8(int param_1,int param_2)
       }
     }
     else {
-      piVar3 = (int *)operatorNew(0x150);
+      piVar3 = (int *)_Znwj(0x150);
       if (piVar3 != (int *)0x0) {
         FUN_002eb108(piVar3,temp_v11,*(unsigned short *)(param_2 + 0x3c) & 0xf,0x10,0,0);
       }
@@ -92,7 +92,7 @@ void FUN_00108ea8(int param_1,int param_2)
     *(unsigned char *)(piVar3 + 9) = *(unsigned char *)(param_1 + 0x14c);
   }
   else {
-    piVar3 = (int *)operatorNew(0x150);
+    piVar3 = (int *)_Znwj(0x150);
     if (piVar3 != (int *)0x0) {
       FUN_002eb108(piVar3,temp_v11,*(unsigned short *)(param_2 + 0x3c) & 0xf,0x10,
                    *(unsigned int *)(param_2 + 0xd8),0);
@@ -118,7 +118,7 @@ void FUN_00108ea8(int param_1,int param_2)
   if ((*(unsigned short *)(piVar3 + 0xf) & 0xf) == 3) {
     temp_v9 = 0;
     do {
-      temp_v2 = operatorNew(0x150);
+      temp_v2 = _Znwj(0x150);
       if (temp_v2 != 0) {
         FUN_002eb108(temp_v2,temp_v11,3,0x10,0,0);
       }

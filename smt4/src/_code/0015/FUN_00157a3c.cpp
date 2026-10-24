@@ -18,7 +18,7 @@ typedef struct Playback {
     f32 scale;          /* 0x74 */
 } Playback;
 
-extern void *nw_snd_internal_driver_SoundThread_GetInstance(void);
+extern void *_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 extern void linkListEraseManagerNode(void *manager, void *timer);
 extern void *FUN_002a2174(void);
 extern void FUN_002a2164(void *manager, void *timer);
@@ -27,7 +27,7 @@ extern void FUN_002a2164(void *manager, void *timer);
 void FUN_00157a3c(Playback *playback, u32 valueA, u32 valueB, u32 valueC, u8 flag, f32 scale)
 {
     if (playback->active && playback->pending) {
-        linkListEraseManagerNode(nw_snd_internal_driver_SoundThread_GetInstance(), playback->endTimer);
+        linkListEraseManagerNode(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(), playback->endTimer);
         playback->pending = 0;
     }
     playback->valueA = valueA;

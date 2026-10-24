@@ -1,56 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026ff54` (_code @ 0x26ff54, 0x80 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: one scheduling difference: retail loads the 0x24d28 size literal into r2 before the backup pointer in r1 for the save data copy. */
+#include "shard/Sys44de28.h"
 
 extern "C" {
 
-int FUN_0026e324(unsigned int);
-int FUN_002ad8b4(unsigned int, unsigned int);
-int asdMemFree(...);
-int titleConfigApplyAudio(void);
-int titleSynchronizeSavedConfig(void);
-int rt_memcpy_w(...);
+void FUN_0026e324(u32 system);
+void FUN_002ad8b4(u32 settings, void *backup);
+void asdMemFree(void *block);
+void titleConfigApplyAudio(void);
+void titleSynchronizeSavedConfig(void);
+void rt_memcpy_w(u32 destination, void *source, u32 size);
+u32 configGetSettings(void);
+u32 gameDataBlocksGetTable(void);
+u32 gameDataBlocksGetSaveData(void);
 
-extern unsigned int g_aocSystem; /* 0x433158 */
-extern int DAT_0044de38; /* 0x44de38 */
-extern unsigned int DAT_0044de3c; /* 0x44de3c */
-extern unsigned int DAT_0044de40; /* 0x44de40 */
+extern u32 g_aocSystem; /* 0x433158 */
 
-extern unsigned int configGetSettings(void);
-extern unsigned int gameDataBlocksGetTable(void);
-/* Supplied declaration required: FUN_0026e324. */
-/* Supplied declaration required: FUN_002ad8b4. */
-extern unsigned int gameDataBlocksGetSaveData(void);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: titleConfigApplyAudio. */
-/* Supplied declaration required: titleSynchronizeSavedConfig. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
+/* Restores the game data, settings and save data from the backups taken before a load, then frees them. */
 void FUN_0026ff54(void)
-
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  if (DAT_0044de38 != 0) {
-    temp_v0 = gameDataBlocksGetTable();
-    rt_memcpy_w(temp_v0,DAT_0044de38,0x80);
-    temp_v0 = configGetSettings();
-    FUN_002ad8b4(temp_v0,DAT_0044de3c);
-    temp_v0 = gameDataBlocksGetSaveData();
-    rt_memcpy_w(temp_v0,DAT_0044de40,0x24d28);
-    titleSynchronizeSavedConfig();
-    titleConfigApplyAudio();
-    FUN_0026e324(g_aocSystem);
-    asdMemFree(DAT_0044de38);
-    asdMemFree(DAT_0044de3c);
-    asdMemFree(DAT_0044de40);
-    DAT_0044de38 = 0;
-    DAT_0044de3c = 0;
-    DAT_0044de40 = 0;
-  }
-  return;
+    if (g_saveLoadUIFlags.backupTable != NULL) {
+        rt_memcpy_w(gameDataBlocksGetTable(), g_saveLoadUIFlags.backupTable, 0x80);
+        FUN_002ad8b4(configGetSettings(), g_saveLoadUIFlags.backupConfig);
+        rt_memcpy_w(gameDataBlocksGetSaveData(), g_saveLoadUIFlags.backupSave, 0x24d28);
+        titleSynchronizeSavedConfig();
+        titleConfigApplyAudio();
+        FUN_0026e324(g_aocSystem);
+        asdMemFree(g_saveLoadUIFlags.backupTable);
+        asdMemFree(g_saveLoadUIFlags.backupConfig);
+        asdMemFree(g_saveLoadUIFlags.backupSave);
+        g_saveLoadUIFlags.backupTable = NULL;
+        g_saveLoadUIFlags.backupConfig = NULL;
+        g_saveLoadUIFlags.backupSave = NULL;
+    }
 }
 
 } /* extern "C" */

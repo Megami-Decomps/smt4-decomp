@@ -18,7 +18,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern long long FUN_002ffa9c(unsigned int, unsigned int, unsigned int, unsigned int);
+extern long long __aeabi_uldivmod(unsigned int, unsigned int, unsigned int, unsigned int);
 
 
 int FUN_0051f7d8(unsigned short *param_1,unsigned int param_2,unsigned short *param_3,unsigned int *param_4)
@@ -437,7 +437,7 @@ LAB_0051fc38:
                 temp_v0 = romwright_piece_4_4(temp_v4,temp_v11);
                 if (temp_v11 != 0 || temp_v4 != 0) {
                   do {
-                    temp_v13 = FUN_002ffa9c((int)temp_v0,(int)((unsigned long long)temp_v0 >> 0x20),10,0);
+                    temp_v13 = __aeabi_uldivmod((int)temp_v0,(int)((unsigned long long)temp_v0 >> 0x20),10,0);
                     puVar10 = temp_v16 + temp_v7;
                     temp_v7 = temp_v7 + 1;
                     *puVar10 = (short)temp_v0 + (short)temp_v13 * -10 + 0x30;

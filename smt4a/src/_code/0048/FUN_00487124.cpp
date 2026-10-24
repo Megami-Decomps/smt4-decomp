@@ -1,126 +1,110 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00487124` (_code @ 0x487124, 0x260 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses g_gameState through the symbol DAT_005f19fc (anchor = g_gameState + 0x400, with sub r9, r6, #1024 for the other fields) which armcc only produces for one object */
+#include "map/mapDepart.h"
+#include "ui/UiSpriteState.h"
+
+/* A field-map panel with two animated sprites and two pulse timers. */
+struct PulsePanel {
+    /* 0x000 */ u8 unk000[0xC];
+    /* 0x00C */ s8 mode;            /* -1 = inactive */
+    /* 0x00D */ u8 unk00D[3];
+    /* 0x010 */ u32 flags;          /* bit 0: shown, bit 12: frozen */
+    /* 0x014 */ u8 unk014[0x4A8];
+    /* 0x4BC */ s32 pulseTimer;     /* counts up to 10 in both states */
+    /* 0x4C0 */ s32 pulseState;
+    /* 0x4C4 */ s32 stepTimer;
+    /* 0x4C8 */ s32 stepState;
+    /* 0x4CC */ u8 unk4CC[0xCEC];
+    /* 0x11B8 */ UiSpriteState first;
+    /* 0x1244 */ UiSpriteState second;
+};
+typedef char PulsePanelLayout[offsetof(PulsePanel, first) == 0x11B8 && offsetof(PulsePanel, second) == 0x1244 &&
+    offsetof(PulsePanel, stepState) == 0x4C8 ? 1 : -1];
 
 extern "C" {
 
-int FUN_00163aa4(void);
-int uiSpriteSetImageKeyframe(int, int, int);
-int FUN_00485d1c(void);
-int FUN_0048c394(int);
+extern GameStateA g_gameState;
 
-extern unsigned char DAT_005f1614; /* 0x5f1614 */
-extern signed char DAT_005f161d; /* 0x5f161d */
-extern signed char DAT_005f1a5c; /* 0x5f1a5c */
+s32 FUN_0048e40c(PulsePanel *panel);
+void FUN_0048c394(PulsePanel *panel);
+s32 FUN_00485d1c(PulsePanel *panel);
+s32 FUN_00163aa4(UiSpriteState *sprite, f32 speed);
+s32 uiSpriteGetMode(const UiSpriteState *sprite);
+s32 objectGetSignedFlag(const UiSpriteState *sprite);
+void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 keyframe, s32 frame);
 
-/* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_00485d1c. */
-/* Supplied declaration required: FUN_0048c394. */
-extern int FUN_0048e40c(int);
-
-
-void FUN_00487124(int param_1)
-
+/* Per-frame update of the panel: advances its two sprite animations and the pulse timers. */
+void FUN_00487124(PulsePanel *panel)
 {
-/* irregular: 1 goto(s); 4 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  
-  if (*(unsigned char *)(param_1 + 0xc) == 0xff) {
-    return;
-  }
-  if (DAT_005f1a5c != '\0') {
-    DAT_005f1614 = 0;
-  }
-  temp_v1 = *(unsigned int *)(param_1 + 0x10);
-  temp_v2 = FUN_0048e40c(param_1);
-  temp_v0 = '\0';
-  if (temp_v2 != 0) {
-    temp_v0 = *(char *)(param_1 + 0xc);
-  }
-  if (!(temp_v2 == 0 || temp_v0 == '\0')) {
-    if (DAT_005f161d != '\0') {
-      FUN_0048c394(param_1);
-      goto LAB_0048718c;
+    u32 frozen;
+
+    if (panel->mode == -1) {
+        return;
     }
-  }
-  else {
-LAB_0048718c:
-    if (DAT_005f161d != '\0') {
-      FUN_00163aa4();
-      if (*(char *)(param_1 + 0x1242) != '\0') {
-        if (*(short *)(param_1 + 0x1214) != 3) {
-          uiSpriteSetImageKeyframe(param_1 + 0x11b8,3,0);
+    if (g_gameState.navigation.alternateNaviMap != 0) {
+        g_gameState.inputBlocked = 0;
+    }
+    frozen = (panel->flags & 0x1000) >> 12;
+    if (g_gameState.controllerFlags.primary != 0) {
+        if (FUN_0048e40c(panel) != 0 && panel->mode != 0) {
+            FUN_0048c394(panel);
         }
-        else {
-          uiSpriteSetImageKeyframe(param_1 + 0x11b8,4,0);
+        FUN_00163aa4(&panel->first, 1.0f);
+        if (objectGetSignedFlag(&panel->first) != 0) {
+            if (uiSpriteGetMode(&panel->first) != 3) {
+                uiSpriteSetImageKeyframe(&panel->first, 3, 0);
+            } else {
+                uiSpriteSetImageKeyframe(&panel->first, 4, 0);
+            }
         }
-      }
-      FUN_00163aa4();
-      if (*(char *)(param_1 + 0x12ce) != '\0') {
-        if (*(short *)(param_1 + 0x12a0) != 5) {
-          uiSpriteSetImageKeyframe(param_1 + 0x1244,5,0);
+        FUN_00163aa4(&panel->second, 1.0f);
+        if (objectGetSignedFlag(&panel->second) != 0) {
+            if (uiSpriteGetMode(&panel->second) != 5) {
+                uiSpriteSetImageKeyframe(&panel->second, 5, 0);
+            } else {
+                uiSpriteSetImageKeyframe(&panel->second, 6, 0);
+            }
         }
-        else {
-          uiSpriteSetImageKeyframe(param_1 + 0x1244,6,0);
+    }
+    if (panel->pulseState == 0) {
+        panel->pulseTimer++;
+        if (panel->pulseTimer > 10) {
+            panel->pulseState = 1;
+            panel->pulseTimer = 0;
         }
-      }
+    } else if (panel->pulseState == 1) {
+        panel->pulseTimer++;
+        if (panel->pulseTimer > 10) {
+            panel->pulseTimer = 0;
+            panel->pulseState = 0;
+        }
     }
-  }
-  if (*(int *)(param_1 + 0x4c0) != 0) {
-    if ((*(int *)(param_1 + 0x4c0) == 1) &&
-       (temp_v2 = *(int *)(param_1 + 0x4bc) + 1, *(int *)(param_1 + 0x4bc) = temp_v2, temp_v2 >= 11)) {
-      *(unsigned int *)(param_1 + 0x4bc) = 0;
-      *(unsigned int *)(param_1 + 0x4c0) = 0;
+    if (panel->stepState == 0) {
+        panel->stepTimer++;
+        if (panel->pulseTimer > 9) {
+            panel->stepState = 1;
+            panel->stepTimer = 0;
+        }
+    } else if (panel->stepState == 1) {
+        panel->stepTimer++;
+        if (panel->pulseTimer > 9) {
+            panel->stepState = 2;
+            panel->stepTimer = 0;
+        }
+    } else if (panel->stepState == 2) {
+        panel->stepTimer++;
+        if (panel->pulseTimer > 9) {
+            panel->stepState = 0;
+            panel->stepTimer = 0;
+        }
     }
-  }
-  else {
-    temp_v2 = *(int *)(param_1 + 0x4bc) + 1;
-    *(int *)(param_1 + 0x4bc) = temp_v2;
-    if (temp_v2 >= 11) {
-      *(unsigned int *)(param_1 + 0x4c0) = 1;
-      *(unsigned int *)(param_1 + 0x4bc) = 0;
+    if (frozen == 0) {
+        if (FUN_00485d1c(panel) != 0) {
+            panel->flags |= 1;
+        }
+        if (g_gameState.navigation.alternateNaviMap != 0) {
+            g_gameState.inputBlocked = 1;
+        }
     }
-  }
-  temp_v2 = *(int *)(param_1 + 0x4c8);
-  piVar4 = (int *)(param_1 + 0x4c4);
-  if (temp_v2 != 0) {
-    if (temp_v2 != 1) {
-      if ((temp_v2 == 2) && (*piVar4 = *(int *)(param_1 + 0x4c4) + 1, *(int *)(param_1 + 0x4bc) >= 10)
-         ) {
-        *(unsigned int *)(param_1 + 0x4c8) = 0;
-        *(unsigned int *)(param_1 + 0x4c4) = 0;
-      }
-    }
-    else {
-      *piVar4 = *(int *)(param_1 + 0x4c4) + 1;
-      if (*(int *)(param_1 + 0x4bc) >= 10) {
-        *(unsigned int *)(param_1 + 0x4c8) = 2;
-        *(unsigned int *)(param_1 + 0x4c4) = 0;
-      }
-    }
-  }
-  else {
-    *piVar4 = *(int *)(param_1 + 0x4c4) + 1;
-    if (*(int *)(param_1 + 0x4bc) >= 10) {
-      *(unsigned int *)(param_1 + 0x4c8) = 1;
-      *(unsigned int *)(param_1 + 0x4c4) = 0;
-    }
-  }
-  if ((temp_v1 & 0x1000) == 0) {
-    temp_v2 = param_1;
-    FUN_00485d1c();
-    if (temp_v2 != 0) {
-      *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 1;
-    }
-    if (DAT_005f1a5c != '\0') {
-      DAT_005f1614 = 1;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

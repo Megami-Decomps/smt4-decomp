@@ -4,13 +4,13 @@
 struct OnlineKey { u32 words[3]; };
 struct OnlineStatusString;
 extern "C" {
-OnlineStatusString *FUN_002ea100(OnlineStatusString *, const char *);
+OnlineStatusString *_ZN9Obj55aff4C1EPKc(OnlineStatusString *, const char *);
 void FUN_002e9590(OnlineStatusString *, const Obj55aff4 *);
 }
 struct OnlineStatusString {
     const void *vtable;
     char *data;
-    OnlineStatusString(const char *text) { FUN_002ea100(this, text); }
+    OnlineStatusString(const char *text) { _ZN9Obj55aff4C1EPKc(this, text); }
     ~OnlineStatusString() { reinterpret_cast<Obj55aff4 *>(this)->Obj55aff4::~Obj55aff4(); }
 };
 struct OnlineStatusEntry;
@@ -36,19 +36,19 @@ struct OnlineStatusRequest {
     OnlineKey key;
 };
 extern "C" {
-void vectorCopyHeader(OnlineKey *, const OnlineKey *);
-s32 refIsNonNegative(const OnlineKey *);
+void _ZN18OnlineResultRecordaSERKS_(OnlineKey *, const OnlineKey *);
+s32 _ZNK18OnlineResultRecord7isValidEv(const OnlineKey *);
 u64 FUN_004311c0(u32);
 s32 textFormatBuffer(char *, const char *, ...);
 s32 strEqualsNullSafe(const char *, const char *);
 void FUN_00117bc8(OnlineStatusEntry *, const OnlineStatusEntry *);
-void FUN_004130c0(OnlineStatusOwner *, s32);
+void _ZN9Obj557c908setStateEj(OnlineStatusOwner *, s32);
 
 void onlineStatusRemoveMatchingEntry(OnlineStatusOwner *owner, const OnlineStatusRequest *request)
 {
     OnlineKey key = request->key;
-    vectorCopyHeader(&owner->key, &key);
-    if (!refIsNonNegative(&owner->key)) {
+    _ZN18OnlineResultRecordaSERKS_(&owner->key, &key);
+    if (!_ZNK18OnlineResultRecord7isValidEv(&owner->key)) {
         owner->invalid = 1;
         return;
     }
@@ -81,6 +81,6 @@ void onlineStatusRemoveMatchingEntry(OnlineStatusOwner *owner, const OnlineStatu
                 FUN_002e9590(&status, entry->stringsBegin);
         }
     }
-    FUN_004130c0(owner, 6);
+    _ZN9Obj557c908setStateEj(owner, 6);
 }
 }

@@ -13,8 +13,8 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern unsigned int DAT_00476638; /* 0x476638 */
-extern float DAT_004efd9c; /* 0x4efd9c */
+extern unsigned int _ZGVZN2nw4math5MTX448IdentityEvE8identity; /* 0x476638 */
+extern float _ZZN2nw4math5MTX448IdentityEvE8identity; /* 0x4efd9c */
 extern float DAT_004efda0; /* 0x4efda0 */
 extern float DAT_004efda4; /* 0x4efda4 */
 extern float DAT_004efda8; /* 0x4efda8 */
@@ -57,8 +57,8 @@ float * textureCalcSrtMatrix(float *param_1,int param_2)
   if (param_2 != 0) {
     if (param_2 != 1) {
       if (param_2 != 2) {
-        if (((DAT_00476638 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476638), temp_v0 != 0)) {
-          DAT_004efd9c = temp_v2;
+        if (((_ZGVZN2nw4math5MTX448IdentityEvE8identity & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX448IdentityEvE8identity), temp_v0 != 0)) {
+          _ZZN2nw4math5MTX448IdentityEvE8identity = temp_v2;
           DAT_004efda0 = temp_v1;
           DAT_004efda4 = temp_v1;
           DAT_004efda8 = temp_v1;
@@ -75,7 +75,7 @@ float * textureCalcSrtMatrix(float *param_1,int param_2)
           DAT_004efdd4 = temp_v1;
           DAT_004efdd8 = temp_v2;
         }
-        mtx44Copy(param_1,&DAT_004efd9c);
+        mtx44Copy(param_1,&_ZZN2nw4math5MTX448IdentityEvE8identity);
       }
       else {
         FUN_002ad314(&temp_v4,temp_v5);

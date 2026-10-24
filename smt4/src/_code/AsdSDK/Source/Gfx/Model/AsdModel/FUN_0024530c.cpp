@@ -1,61 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024530c` (_code @ 0x24530c, 0x10c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: one instruction: retail materializes the NULL of the second cast in r8 right after the first type-walk call (`mov r8, #0`, used by `mov r5, r8`), armcc writes `mov r5, #0` at the use; everything else matches. */
+#include "common.h"
+#include "nw/gfx/AnimNode.h"
+
+using namespace nw::gfx;
 
 extern "C" {
 
-typedef int romwright_code(...);
-
-unsigned int FUN_0024530c(int param_1,int *param_2)
-
+/* Whether the animation node (a blender's members, recursively, or an evaluator) was built
+ * for a model offering the same bone and material counts. */
+int FUN_0024530c(AnimTargetModel *model, AnimNode *node)
 {
-/* irregular: 1 goto(s) */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if (param_2 != (int *)0x0) {
-    piVar1 = (int *)(**(romwright_code **)(*param_2 + 8))(param_2);
-    do {
-      if (piVar1 == (int *)0x471f30) {
-        if (param_2 != (int *)0x0) {
-          temp_v2 = 0;
-          temp_v1 = (param_2[6] - param_2[5]) >> 2;
-          if (temp_v1 < 1) {
-            return 1;
-          }
-          do {
-            temp_v0 = FUN_0024530c(param_1,(int *)*(unsigned int *)(param_2[5] + temp_v2 * 4));
-            if (temp_v0 == 0) {
-              return 0;
+    if (node == NULL) {
+        return 1;
+    }
+    if (AnimBlender *blender = nw::ut::DynamicCast<AnimBlender>(node, AnimBlender::getTypeInfoStatic())) {
+        s32 count = blender->membersEnd - blender->membersBegin;
+        for (s32 i = 0; i < count; i++) {
+            if (!FUN_0024530c(model, blender->membersBegin[i])) {
+                return 0;
             }
-            temp_v2 = temp_v2 + 1;
-          } while (temp_v2 < temp_v1);
-          return 1;
         }
-        break;
-      }
-      piVar1 = (int *)*piVar1;
-    } while (piVar1 != (int *)0x0);
-    if (param_2 != (int *)0x0) {
-      piVar1 = (int *)(**(romwright_code **)(*param_2 + 8))(param_2);
-      do {
-        if (piVar1 == (int *)0x44e7f0) goto LAB_002453cc;
-        piVar1 = (int *)*piVar1;
-      } while (piVar1 != (int *)0x0);
+        return 1;
     }
-    param_2 = (int *)0x0;
-LAB_002453cc:
-    temp_v2 = param_2[0x15];
-    temp_v1 = (**(romwright_code **)(**(int **)(param_1 + 0x260) + 0x18))();
-    if ((temp_v1 != *(int *)(temp_v2 + 0x28)) ||
-       (temp_v1 = (**(romwright_code **)(**(int **)(param_1 + 600) + 0x18))(), temp_v1 != *(int *)(temp_v2 + 0x2c)))
-    {
-      return 0;
+    AnimEvaluator *evaluator = nw::ut::CheckedCast<AnimEvaluator>(node, AnimEvaluator::getTypeInfoStatic());
+    AnimBinding *binding = evaluator->binding;
+    if (model->boneSource->GetCount() == binding->boneCount &&
+        model->materialSource->GetCount() == binding->materialCount) {
+        return 1;
     }
-  }
-  return 1;
+    return 0;
 }
 
-} /* extern "C" */
+}

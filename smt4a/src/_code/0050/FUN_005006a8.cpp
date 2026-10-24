@@ -1,48 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_005006a8` (_code @ 0x5006a8, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compare operand order and predication only: retail compares (start, length) and (remaining, count) as written with conditional moves/stores; the build swaps both compares and branches around the zeroing. */
+#include "classes/WindowStatus.h"
+#include "nn/Result.h"
+
+/* A readable halfword source: two words of source identity and a halfword buffer. */
+struct HalfwordSource {
+    /* 0x00 */ u32 first;
+    /* 0x04 */ u32 second;
+    /* 0x08 */ u8 unk08[0x1C];
+    /* 0x24 */ u16 *data;
+    /* 0x28 */ u32 length;
+};
 
 extern "C" {
 
-int _ZN18WindowStatusResultC1Ej(unsigned int, int);
-int FUN_004267bc(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
+s32 FUN_004267bc(u32 handle, s32 mode, u32 first, u32 second, u16 *data, u32 count);
 
-/* stack frame of param_6: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_6_stack;
-
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-/* Supplied declaration required: FUN_004267bc. */
-
-
-void FUN_005006a8(unsigned int param_1,int *param_2,unsigned int *param_3,int param_4,unsigned int param_5,
-                 unsigned int param_6)
-
+/* Reads up to `count` halfwords of the source starting at `start` through `handle`; stores the number read in `*readCount`. */
+WindowStatusResult FUN_005006a8(HalfwordSource **source, u32 *readCount, u32 handle, u32 count, u32 start)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  puVar1 = (unsigned int *)*param_2;
-  if (param_6 >= (unsigned int)puVar1[10]) {
-    param_4 = 0;
-    *param_3 = 0;
-  }
-  else {
-    temp_v0 = puVar1[10] - param_6;
-    if (temp_v0 < param_5) {
-      param_5 = temp_v0;
+    HalfwordSource *input = *source;
+    s32 status;
+
+    if (start >= input->length) {
+        status = 0;
+        *readCount = 0;
+    } else {
+        u32 remaining = input->length - start;
+        if (remaining < count) {
+            count = remaining;
+        }
+        status = FUN_004267bc(handle, 1, input->first, input->second, input->data + start, count);
+        if (!nnResultIsFailure(status)) {
+            status = 0;
+            *readCount = count;
+        }
     }
-    FUN_004267bc(param_4,1,*puVar1,puVar1[1],puVar1[9] + param_6 * 2,param_5);
-    if (-1 < param_4) {
-      param_4 = 0;
-      *param_3 = param_5;
-    }
-  }
-  _ZN18WindowStatusResultC1Ej(param_1,param_4);
-  return;
+    return WindowStatusResult(status);
 }
 
 } /* extern "C" */

@@ -1,79 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `event3dEventModelMapCreate` (_code @ 0x310b0c, 0xf0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+
+/* The battle-map model state of a 3D event: the map's environment and model list, driven by a calc process. */
+struct Event3dModelMap {
+    /* 0x000 */ u32 process;
+    /* 0x004 */ u32 unk004;
+    /* 0x008 */ s32 loaded;
+    /* 0x00C */ u32 unk00C;
+    /* 0x010 */ u32 mapId;
+    /* 0x014 */ u32 variant;
+    /* 0x018 */ u32 modelList;
+    /* 0x01C */ u8 environmentRequested;
+    /* 0x01D */ u8 unk01D[3];
+    /* 0x020 */ u8 unk020[0x530];
+};
+
+typedef char Event3dModelMapSize[sizeof(Event3dModelMap) == 0x550 ? 1 : -1];
 
 extern "C" {
+extern const char DAT_00403658[]; /* the source path of Event3dModelMap.cpp */
+extern const char DAT_00403634[]; /* "battle/battle_map/e%03d_%02d.bcenv" */
+extern const char DAT_00403610[]; /* "battle/battle_map/b%03d_%02d.bam" */
+extern const char DAT_00403698[]; /* "Event3dModelMap_Calc" */
 
-int FUN_0018a104(...);
-int FUN_002a09b4(...);
-int textFormatBuffer(...);
-int FUN_002c2044(...);
-int memClear(...);
-int asdMemAlloc(...);
-int asdProcessCreateSimple(...);
+void *asdMemAlloc(s32 heap, s32 align, s32 flags, s32 size, s32 clear);
+void memClear(void *block, u32 size);
+void FUN_002c2044(void *object, s32 mode);
+void FUN_0018a104(Event3dModelMap *map);
+s32 FUN_002c1d5c(void);
+void textFormatBuffer(char *buffer, const char *format, ...);
+void FUN_002a09b4(char *path, s32 mode);
+u32 asdMdlManagerCreateSecondList(char *path, u32 count);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+                           AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
+s32 FUN_00221e1c(u32 handle);
+void FUN_002fe144(u32 handle);
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_2_stack;
-
-extern int FUN_00221e1c(...); /* 0x221e1c */
-extern int FUN_002fe144(...); /* 0x2fe144 */
-
-/* Supplied declaration required: FUN_0018a104. */
-extern unsigned int asdMdlManagerCreateSecondList(romwright_code **, unsigned int);
-/* Supplied declaration required: FUN_002a09b4. */
-/* Supplied declaration required: textFormatBuffer. */
-extern int FUN_002c1d5c(void);
-/* Supplied declaration required: FUN_002c2044. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-
-
-void event3dEventModelMapCreate(unsigned int param_1,unsigned int param_2)
-
+/* Creates the model-map state for battle map (mapId, variant), loads its environment and model list, and starts its calc process. */
+void event3dEventModelMapCreate(u32 mapId, u32 variant)
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  char *pcVar4;
-  romwright_code *temp_v2;
-  romwright_code *temp_v3;
-  unsigned int *puStack_50;
-  
-  puVar1 = (unsigned int *)0x100;
-  temp_v2 = (romwright_code *)0x1;
-  asdMemAlloc(0x100,0x100,0,0x550);
-  memClear();
-  puVar1[4] = param_1;
-  puVar1[5] = param_2;
-  FUN_002c2044(puVar1 + 8,1);
-  FUN_0018a104(puVar1);
-  temp_v0 = FUN_002c1d5c();
-  if (temp_v0 != 0) {
-    puVar1[2] = 0;
-  }
-  else {
-    textFormatBuffer(&temp_v2,"battle/battle_map/e%03d_%02d.bcenv",puVar1[4],puVar1[5]);
-    FUN_002a09b4(&temp_v2,0);
-    *(unsigned char *)(puVar1 + 7) = 1;
-    textFormatBuffer(&temp_v2,"battle/battle_map/b%03d_%02d.bam",puVar1[4],puVar1[5]);
-    temp_v1 = asdMdlManagerCreateSecondList(&temp_v2,0x38);
-    puVar1[6] = temp_v1;
-    puVar1[3] = 0;
-    puVar1[2] = 1;
-  }
-  temp_v2 = FUN_00221e1c;
-  temp_v3 = FUN_002fe144;
-  pcVar4 = "Event3dModelMap_Calc";
-  puStack_50 = puVar1;
-  asdProcessCreateSimple("Event3dModelMap_Calc",2,0);
-  *puVar1 = (unsigned int)pcVar4;
-  return;
+    asdDebugTrace(DAT_00403658, 211);
+    Event3dModelMap *map = (Event3dModelMap *)asdMemAlloc(0x100, 0x100, 0, sizeof(Event3dModelMap), 1);
+    memClear(map, sizeof(Event3dModelMap));
+    map->mapId = mapId;
+    map->variant = variant;
+    FUN_002c2044(map->unk020, 1);
+    FUN_0018a104(map);
+    if (FUN_002c1d5c() != 0) {
+        map->loaded = 0;
+    } else {
+        char path[64];
+        textFormatBuffer(path, DAT_00403634, map->mapId, map->variant);
+        FUN_002a09b4(path, 0);
+        map->environmentRequested = 1;
+        textFormatBuffer(path, DAT_00403610, map->mapId, map->variant);
+        map->modelList = asdMdlManagerCreateSecondList(path, 0x38);
+        map->unk00C = 0;
+        map->loaded = 1;
+    }
+    map->process = asdProcessCreateSimple((const s8 *)DAT_00403698, 2, 0, 0, FUN_00221e1c, FUN_002fe144, (u32)map);
 }
-
-} /* extern "C" */
+}

@@ -14,14 +14,14 @@ typedef struct BtlStageWork {
 } BtlStageWork;
 
 extern BtlCamera *g_btlCamera;
-extern void FUN_0035bbc4(void);
+extern void keyedRecordsFreeAll(void);
 extern void textureCacheReleaseAll(void);
 
 /* Clears the stage's pending word, runs the two camera resets and drops camera flag 0x08000000. */
 void FUN_004f8f08(BtlStageWork *work)
 {
     work->pending = 0;
-    FUN_0035bbc4();
+    keyedRecordsFreeAll();
     textureCacheReleaseAll();
     if (g_btlCamera != NULL) {
         g_btlCamera->flags &= ~0x08000000;

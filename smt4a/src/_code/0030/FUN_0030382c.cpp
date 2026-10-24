@@ -19,10 +19,10 @@ extern unsigned char DAT_0055a4c0; /* 0x55a4c0 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int *wordRefMax(int *, unsigned int *);
+extern int *_ZSt3maxIjERKT_S2_S2_(int *, unsigned int *);
 extern int rt_malloc(void);
-extern unsigned int vectorGrowCapacity_002ff8b4(unsigned int, int *);
-extern int vectorCount4_002ff8c6(unsigned int *);
+extern unsigned int _ZN4__rw17__rw_new_capacityISt6vectorIPv12AsdAllocatorIS2_EEEEjjPKT_(unsigned int, int *);
+extern int _ZNKSt6vectorIPv12AsdAllocatorIS0_EE4sizeEv(unsigned int *);
 /* Supplied declaration required: FUN_002ff8ce. */
 
 
@@ -50,14 +50,14 @@ unsigned long long FUN_0030382c(unsigned int *param_1,int param_2,unsigned int p
   temp_v2 = param_2;
   temp_v3 = param_3;
   uStack_18 = param_4;
-  temp_v3 = vectorGrowCapacity_002ff8b4(0,piVar1);
-  temp_v2 = vectorCount4_002ff8c6(puVar5);
-  piVar2 = (int *)wordRefMax(&temp_v2,(unsigned int *)&temp_v3);
+  temp_v3 = _ZN4__rw17__rw_new_capacityISt6vectorIPv12AsdAllocatorIS2_EEEEjjPKT_(0,piVar1);
+  temp_v2 = _ZNKSt6vectorIPv12AsdAllocatorIS0_EE4sizeEv(puVar5);
+  piVar2 = (int *)_ZSt3maxIjERKT_S2_S2_(&temp_v2,(unsigned int *)&temp_v3);
   temp_v0 = *piVar2;
   temp_v1 = rt_malloc();
   *piVar1 = temp_v1;
   FUN_002ff8ce(*puVar5,*(unsigned int *)(param_2 + 0xc),temp_v1,piVar1);
-  temp_v1 = vectorCount4_002ff8c6(puVar5);
+  temp_v1 = _ZNKSt6vectorIPv12AsdAllocatorIS0_EE4sizeEv(puVar5);
   param_1[3] = temp_v1 * 4 + *piVar1;
   param_1[4] = *piVar1 + temp_v0 * 4;
   *param_1 = (unsigned int)&DAT_005596b4;

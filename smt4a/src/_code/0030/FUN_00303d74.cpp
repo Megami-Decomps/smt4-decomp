@@ -25,7 +25,7 @@ typedef struct {
 extern int onlineContextGetInstance(void);
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_002e9b30. */
 extern int FUN_002ea6fc(unsigned int *, unsigned char *);
 extern unsigned int streamWriterFinish(unsigned int);
@@ -67,7 +67,7 @@ void FUN_00303d74(int param_1,int param_2,unsigned int param_3)
       temp_v0 = *(int *)(param_1 + 0x40);
       if (temp_v0 != 0) goto LAB_00303db6;
       temp_v6 = 0x80010001;
-      temp_v1 = FUN_002e7908((unsigned int *)&temp_v3,(unsigned int *)&temp_v6);
+      temp_v1 = _ZN12OnlineResultC1ERKj((unsigned int *)&temp_v3,(unsigned int *)&temp_v6);
       FUN_002e9b30(param_2,3,temp_v1,0);
       _ZN9Obj55b28cD1Ev(temp_v9);
       return;
@@ -78,7 +78,7 @@ LAB_00303db6:
     temp_v0 = FUN_002f4d9c(temp_v0,*(unsigned short *)(param_1 + 0x20));
     if (temp_v0 == 0) {
       temp_v6 = 0x80010001;
-      temp_v1 = FUN_002e7908((unsigned int *)&temp_v3,(unsigned int *)&temp_v6);
+      temp_v1 = _ZN12OnlineResultC1ERKj((unsigned int *)&temp_v3,(unsigned int *)&temp_v6);
       FUN_002e9b30(param_2,3,temp_v1,0);
       _ZN9Obj55b28cD1Ev(temp_v9);
       return;

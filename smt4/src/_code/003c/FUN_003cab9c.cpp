@@ -6,7 +6,7 @@ extern "C" {
 
 int btlTargetSetFlag10(int, int, int);
 int slotResetIdle(int, int, int);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int FUN_003da010(int);
 int FUN_003dc504(void);
 int FUN_003dcaac(int, unsigned int);
@@ -16,7 +16,7 @@ extern int DAT_00435d18; /* 0x435d18 */
 
 /* Supplied declaration required: btlTargetSetFlag10. */
 /* Supplied declaration required: slotResetIdle. */
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 extern int objSlotStateIsActiveRange(int, unsigned int);
 /* Supplied declaration required: FUN_003da010. */
 extern unsigned long long FUN_003db7b4(int);
@@ -97,7 +97,7 @@ LAB_003cac08:
   case 0xc:
     if (*(short *)(param_2[10] + 0x14c) == 2) {
       temp_v1 = (int)*(short *)(param_2[10] + 0x14e);
-      FUN_002ae164();
+      dataTable40FindById();
       if ((temp_v1 != 0) && (*(char *)(temp_v1 + 0x45) != '\0')) {
         if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x40) != 0) {
           temp_v0 = *param_2 | 0x80;

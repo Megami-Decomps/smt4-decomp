@@ -8,7 +8,7 @@ int asdSequenceRequest(...);
 void* asdOperatorNew(unsigned int size);
 int FUN_001919a4(void);
 int FUN_0021c118(int, int);
-int FUN_002bf464(void);
+int campButtonHelpLoad(void);
 int asdOperatorDelete(unsigned int);
 int helpTexturesRelease(void);
 int campCommonBgAcquire(void);
@@ -22,7 +22,7 @@ int bgmStopWithoutEntry(void);
 int FUN_003d54f8(...);
 void questCenterInitEntry(void* context);
 int FUN_0046a34c(unsigned int, int, unsigned int, int);
-int FUN_0046adec(unsigned int);
+int _ZN9Obj5333c06updateEv(unsigned int);
 int entryRequestSequence(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -49,7 +49,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001919a4. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_0021c118. */
-/* Supplied declaration required: FUN_002bf464. */
+/* Supplied declaration required: campButtonHelpLoad. */
 extern int lmapMainGetUnk74(void);
 /* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: helpTexturesRelease. */
@@ -64,7 +64,7 @@ extern int gameStateIsFlagSetAndLarge(void);
 /* Supplied declaration required: bgmStopWithoutEntry. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_0046a34c. */
-/* Supplied declaration required: FUN_0046adec. */
+/* Supplied declaration required: _ZN9Obj5333c06updateEv. */
 /* Supplied declaration required: entryRequestSequence. */
 extern int _ZN14SelectionFlagsC1Ev(unsigned int *);
 
@@ -117,7 +117,7 @@ unsigned int FUN_00236110(void)
         }
       }
       campCommonBgAcquire();
-      FUN_002bf464();
+      campButtonHelpLoad();
       campButtonHelpAcquire();
       FUN_003b61ec();
     }
@@ -134,7 +134,7 @@ unsigned int FUN_00236110(void)
     *(unsigned char *)(temp_v0 + 0x19) = 1;
     break;
   case 1:
-    FUN_0046adec(*(unsigned int *)(DAT_00588c30 + 0x1c));
+    _ZN9Obj5333c06updateEv(*(unsigned int *)(DAT_00588c30 + 0x1c));
     if ((**(unsigned int **)(temp_v0 + 0x1c) & 1) != 0) {
       *(unsigned char *)(temp_v0 + 0x19) = 3;
     }

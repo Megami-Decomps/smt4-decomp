@@ -21,7 +21,13 @@ struct CommonBackgroundState {
 };
 struct CommonBackgroundChild {
     u32 job;
-    u8 unk04[0x18];
+    s8 shown;      // 0x04: the overlay is wanted
+    u8 fadeMode;   // 0x05: 0 idle, 1 fading out, 2 fading in, 3 hidden
+    u8 unk06[2];
+    u32 unk08;
+    u8 unk0c[8];
+    f32 fade;      // 0x14
+    f32 fadeMax;   // 0x18
     u8 keepAlive; // 0x1c
 };
 struct CommonBackgroundGlobals {

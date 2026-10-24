@@ -16,7 +16,9 @@ typedef struct BtlHelpA {
 typedef struct BtlHelpEntryA {
     /* 0x000 */ u16 unk00;
     /* 0x002 */ s16 kind;
-    /* 0x004 */ u8 unk04[0x86e];
+    /* 0x004 */ u8 unk04[2];
+    /* 0x006 */ u16 flags;
+    /* 0x008 */ u8 unk08[0x86a];
     /* 0x872 */ s16 dialogIndex;
     /* 0x874 */ struct BtlHelpEntryA *next;
     /* 0x878 */ struct BtlHelpEntryA *prev;

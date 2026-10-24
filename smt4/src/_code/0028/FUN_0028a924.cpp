@@ -24,7 +24,7 @@ int FUN_00292be4(unsigned int, int);
 int partyPanelSetState(...);
 int FUN_0029e874(int);
 int gameGetUnitRecord(...);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int dataTable08Sub1GetRecord(void);
 int buttonHelpSetPreset(...);
 int __aeabi_memset4(int, int, int);
@@ -60,7 +60,7 @@ extern unsigned int objectPartRunUnlessLocked(void);
 extern unsigned int FUN_0029efa8(int);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: timerStart. */
@@ -344,7 +344,7 @@ LAB_0028ad80:
       }
     }
     temp_v6 = temp_v5;
-    FUN_002ae164();
+    dataTable40FindById();
     if ((*(unsigned char *)(temp_v6 + 0x35) & 8) != 0) {
       *(unsigned char *)(temp_v0 + 0x35) = 1;
       *(unsigned int *)(temp_v0 + 0x20) = 10;

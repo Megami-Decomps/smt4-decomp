@@ -19,7 +19,7 @@ int bgmRestart(int);
 int asdLoadFileAsyncSimple(...);
 int FUN_002a4664(...);
 int gameDataGetRecordValue(void);
-int FUN_002a4aa4(void);
+int saveNameBlockReset(void);
 int FUN_002c0b10(...);
 int cecProcessForward(...);
 int sysMemClear(void);
@@ -29,7 +29,7 @@ int gameDataBlocksSetFlagBits(...);
 int FUN_0032e25c(...);
 int FUN_00331380(int);
 int ownerSetName(...);
-int FUN_00343d04(unsigned int *);
+int campStatusSceneCreateModel(unsigned int *);
 int engineForwardVariadicCommand(...);
 int saveBuildSummary(...);
 int campCecDrawSetCreate(void);
@@ -95,7 +95,7 @@ extern unsigned char cecQueryOptionalProcess(void);
 /* Supplied declaration required: gameDataGetRecordValue. */
 extern unsigned char FUN_002a46b8(void);
 extern unsigned char saveFlagGet27e1f(void);
-/* Supplied declaration required: FUN_002a4aa4. */
+/* Supplied declaration required: saveNameBlockReset. */
 /* Supplied declaration required: FUN_002a6480. */
 /* Supplied declaration required: FUN_002c0b10. */
 /* Supplied declaration required: cecProcessForward. */
@@ -110,7 +110,7 @@ extern unsigned char FUN_0031cee0(void);
 extern unsigned int gameDataBlocksGetWord27E8C(void);
 /* Supplied declaration required: FUN_00331380. */
 /* Supplied declaration required: ownerSetName. */
-/* Supplied declaration required: FUN_00343d04. */
+/* Supplied declaration required: campStatusSceneCreateModel. */
 extern int gameDataTestFlags(unsigned int);
 /* Supplied declaration required: engineForwardVariadicCommand. */
 /* Supplied declaration required: uiDrawExtendedRecordLabel. */
@@ -227,7 +227,7 @@ void FUN_002bf534(int param_1)
   *(unsigned char *)((int)puVar4 + 0x16e) = 1;
   *(unsigned char *)((int)puVar4 + 0x16f) = 0;
   FUN_00331380(0);
-  FUN_00343d04(DAT_0057f114 + 0x2c);
+  campStatusSceneCreateModel(DAT_0057f114 + 0x2c);
   if (param_1 == 0) {
     bgmRestart(0);
     soundChannelRequestIfEnabled(0x1000049,0,0x3c);
@@ -290,7 +290,7 @@ void FUN_002bf534(int param_1)
       }
     }
   }
-  FUN_002a4aa4();
+  saveNameBlockReset();
   temp_v1 = FUN_0031cee0();
   *(unsigned char *)((int)DAT_0057f114 + 0x61) = temp_v1;
   temp_v1 = FUN_002391e0();

@@ -29,7 +29,7 @@ extern int FUN_00105c54(int, unsigned int, int);
 /* Supplied declaration required: onlineContextGetInstance. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int FUN_002e789a(unsigned char *);
 /* Supplied declaration required: FUN_002e78d0. */
 /* Supplied declaration required: FUN_002f4f20. */
@@ -65,7 +65,7 @@ void FUN_001227a8(int param_1,unsigned char *param_2,unsigned int param_3,unsign
       sharedRefRelease();
       *(unsigned int *)(param_1 + 0x120) = 0;
     }
-    temp_v1 = operatorNew(0xd0);
+    temp_v1 = _Znwj(0xd0);
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v0 = FUN_00105c54(temp_v1,*(unsigned int *)(param_2 + 0x44),param_1);

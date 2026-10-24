@@ -5,7 +5,7 @@
 
 extern "C" {
 s32 FUN_00258de0(s32 user, s32 target, Table04Record *skill, s32 preview, s32 mode);
-Table04Record *FUN_002ae164(u32 skill);
+Table04Record *dataTable40FindById(u32 skill);
 s16 FUN_0029a924(u16 skill);
 s16 FUN_0029a9d4(u16 skill, u32 mode);
 BtlEquip *gameGetUnitRecord(s32 index);
@@ -16,7 +16,7 @@ BtlEquip *gameGetPlayerData(void);
 s32 FUN_0026c464(s32 user, u32 skillId, s32 preview)
 {
     bool applied = false;
-    Table04Record *skill = FUN_002ae164(skillId);
+    Table04Record *skill = dataTable40FindById(skillId);
     if (skill != NULL) {
         if (FUN_00258de0(user, -1, skill, preview, 0) == 0) {
             applied = true;

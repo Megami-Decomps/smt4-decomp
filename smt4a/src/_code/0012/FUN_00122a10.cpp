@@ -15,7 +15,7 @@ struct OnlineRequestOwner {
 
 extern "C" {
 s32 FUN_001038f2(OnlineRequestOwner* owner, u32 request, u32 context);
-void FUN_002e7908(void* result, const u32* code);
+void _ZN12OnlineResultC1ERKj(void* result, const u32* code);
 
 // Report invalid requests and connection state before submitting an online request.
 void FUN_00122a10(void* output, OnlineRequestOwner* owner, u32 request, u32)
@@ -30,6 +30,6 @@ void FUN_00122a10(void* output, OnlineRequestOwner* owner, u32 request, u32)
     } else {
         code = 0x8001000d;
     }
-    FUN_002e7908(output, &code);
+    _ZN12OnlineResultC1ERKj(output, &code);
 }
 }

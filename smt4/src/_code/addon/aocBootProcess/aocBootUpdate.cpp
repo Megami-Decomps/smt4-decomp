@@ -9,7 +9,7 @@ int FUN_0027e9c0(int);
 int FUN_0027ea28(int, int, int, int);
 int asdFsIsSdCardDetected(void);
 int jobOwnerFreeSlotAndStop(int);
-int FUN_002a126c(int *, int);
+int _ZN9AocSystem17getPendingRequestEv(int *, int);
 int aocReleasePackageOwner(int);
 int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
 int jyoucyuGetTableEntry(int);
@@ -37,7 +37,7 @@ extern int strIsEmpty(unsigned int *);
 /* Supplied declaration required: FUN_0027ea28. */
 /* Supplied declaration required: asdFsIsSdCardDetected. */
 /* Supplied declaration required: jobOwnerFreeSlotAndStop. */
-/* Supplied declaration required: FUN_002a126c. */
+/* Supplied declaration required: _ZN9AocSystem17getPendingRequestEv. */
 extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: aocReleasePackageOwner. */
@@ -177,7 +177,7 @@ unsigned int aocBootUpdate(void)
         jobOwnerFreeSlotAndStop(temp_v0 + 0xc);
       }
       aocClearDisplayFlag(g_aocSystem);
-      FUN_002a126c(&temp_v7,g_aocSystem);
+      _ZN9AocSystem17getPendingRequestEv(&temp_v7,g_aocSystem);
       g_aocBootFinished = 1;
       *(unsigned char *)(temp_v0 + 8) = 5;
       return 0xffffffff;

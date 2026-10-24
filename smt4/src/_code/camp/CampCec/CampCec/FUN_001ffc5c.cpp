@@ -21,7 +21,7 @@ int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
 int FUN_002c526c(void);
 int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
-int FUN_002d7330(...);
+int campCecModelSceneInit(...);
 int runWinOpenState(void);
 int FUN_00359f90(void);
 int nn_cfg_CTR_IsRestrictP2pCec(void);
@@ -81,7 +81,7 @@ extern unsigned int *g_campCec; /* 0x43daa8 */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_002d7330. */
+/* Supplied declaration required: campCecModelSceneInit. */
 /* Supplied declaration required: runWinOpenState. */
 /* Supplied declaration required: FUN_00359f90. */
 /* Supplied declaration required: nn_cfg_CTR_IsRestrictP2pCec. */
@@ -158,7 +158,7 @@ void FUN_001ffc5c(void)
     *(unsigned char *)((int)puVar1 + 0xd63) = 0;
     buttonHelpSetPreset(0xb9);
     FUN_002579bc(0);
-    FUN_002d7330(g_campCec + 0x28);
+    campCecModelSceneInit(g_campCec + 0x28);
     bgmRestart(0);
     soundChannelRequestIfEnabled(0x1000062,0,0x3c);
     runWinOpen();

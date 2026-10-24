@@ -1,4 +1,3 @@
-/* NON_MATCHING: initial global/callback load scheduling and selection sentinel register differ. */
 #include "camp/CampTalkWork.h"
 
 extern "C" {

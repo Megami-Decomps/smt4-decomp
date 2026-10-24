@@ -7,9 +7,7 @@
 
 extern "C" {
 extern AocMain *g_aocMain;
-RequestParameters *timeInitializeActiveState(RequestParameters *parameters);
-TimeWords *_ZN18WindowStatusResultC1Ej(TimeWords *result, u32 code);
-void FUN_002ba968(QueuedRequestState *state, const RequestParameters *parameters, u32 argument, s32 mode);
+void _ZN7AocMain12queueRequestE17RequestParametersji(QueuedRequestState *state, const RequestParameters *parameters, u32 argument, s32 mode);
 void scrScriptProcessDestroy(ScriptState *process);
 ScriptState *FUN_00297060(void *script, void *messages);
 void msgWindowReset();
@@ -41,22 +39,17 @@ void aocQuestReturnToScript(Obj526238 *object)
         g_aocMain->flags = flags & ~0x70;
         if ((flags & 0x10) == 0) {
             RequestParameters parameters;
-            timeInitializeActiveState(&parameters);
-            u8 &requestKind = *(u8 *)parameters.words;
-            requestKind = 1;
-            parameters.words[3] = 0;
-            TimeWords result;
-            const TimeWords *converted = _ZN18WindowStatusResultC1Ej(&result, 0);
-            parameters.words[1] = converted->low;
-            parameters.words[2] = converted->high;
-            requestKind = 200;
+            parameters.kind = 1;
+            parameters.word3 = 0;
+            parameters.result = WindowStatusResult(0);
+            parameters.kind = 200;
             u32 argument;
             if (work->contentCode == 0x6a) {
                 argument = work->argument;
             } else {
                 argument = (g_aocMain->flags & 0x100) != 0 ? 2 : 1;
             }
-            FUN_002ba968((QueuedRequestState *)g_aocMain, &parameters, argument, 0);
+            _ZN7AocMain12queueRequestE17RequestParametersji((QueuedRequestState *)g_aocMain, &parameters, argument, 0);
             work->substate = 1;
             return;
         }

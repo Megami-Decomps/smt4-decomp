@@ -18,7 +18,7 @@ int FUN_00234528(...);
 int popupStateClose(void);
 int gameDataAddCappedPoints(...);
 int FUN_002e5c2c(...);
-int FUN_00312714(...);
+int entryTableSetHalfwordsById(...);
 int mapJobIsDone(void);
 int mapMainStartEntry(...);
 int messageBannerRestartOrClear(void);
@@ -145,9 +145,9 @@ extern int popupIsActive(void);
 /* Supplied declaration required: gameDataAddCappedPoints. */
 /* Supplied declaration required: FUN_002e5c2c. */
 extern int FUN_002e5db4(void);
-extern int FUN_002ffa9c(int, unsigned int, unsigned int, unsigned int);
+extern int __aeabi_uldivmod(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: blockResetAxis. */
-/* Supplied declaration required: FUN_00312714. */
+/* Supplied declaration required: entryTableSetHalfwordsById. */
 /* Supplied declaration required: mapJobIsDone. */
 /* Supplied declaration required: mapMainStartEntry. */
 /* Supplied declaration required: mapSetSceneState. */
@@ -717,7 +717,7 @@ LAB_0029a094:
         *(unsigned int *)(temp_v4 + 0x58) = 0;
         if (*(int *)(temp_v4 + 0xc) == 0) {
           mapIfRequestById(*(unsigned int *)(temp_v4 + 0x10));
-          FUN_00312714(*(unsigned int *)(temp_v4 + 0x10),5,0);
+          entryTableSetHalfwordsById(*(unsigned int *)(temp_v4 + 0x10),5,0);
           FUN_00408184(0x13,1);
         }
         if (*(int *)(temp_v4 + 0xc) == 3) {
@@ -863,7 +863,7 @@ LAB_0029a094:
       case 2:
         temp_v6 = FUN_002e5c2c();
         temp_v7 = *(unsigned int *)(temp_v4 + 0x498);
-        temp_v11 = FUN_002ffa9c((temp_v6 - temp_v7) * 0x1000,
+        temp_v11 = __aeabi_uldivmod((temp_v6 - temp_v7) * 0x1000,
                               ((temp_v6 - temp_v7) >> 0x14) |
                               ((((int)temp_v7 >> 0x1f) + (unsigned int)(temp_v6 < temp_v7)) * -0x1000),0x14,0);
         *(int *)(temp_v4 + 0x494) = temp_v11 + *(int *)(temp_v4 + 0x494);

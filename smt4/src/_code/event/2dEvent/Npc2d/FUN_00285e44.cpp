@@ -13,7 +13,7 @@ extern const char DAT_0040357c[];
 extern const char DAT_00403570[];
 void *asdMemAlloc(u32, u32, u32, u32, u32);
 void memClear(void *, u32);
-NpcPortraitSourceView *FUN_002459d8(s32);
+NpcPortraitSourceView *dataTable25FindById(s32);
 s32 FUN_002c1d5c();
 u32 FUN_00294090(s32 portraitId, u32 enabled);
 s32 FUN_001dfc64(u32);
@@ -33,7 +33,7 @@ void FUN_00285e44(s32 npcId, u32 style, s32 x)
     work->state = 0x1f;
     work->unk08 = style;
     work->display.stopWhenHidden = 0;
-    work->portrait.portraitId = -static_cast<s32>(FUN_002459d8(npcId)->portraitId);
+    work->portrait.portraitId = -static_cast<s32>(dataTable25FindById(npcId)->portraitId);
     if (FUN_002c1d5c()) {
         work->deferred = 1;
     } else {

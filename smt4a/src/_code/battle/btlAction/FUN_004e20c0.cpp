@@ -58,7 +58,7 @@ int VectorSignedToFloat(...);
 
 int CONCAT44(unsigned int, double);
 int dataTable04FindById(void);
-int FUN_0034a290(void);
+int dataTable41FindById(void);
 int btlScriptUnitHasFlags(...);
 int FUN_003f0e20(...);
 int FUN_003f2aac(...);
@@ -236,7 +236,7 @@ extern char randRange(unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTable04FindById. */
 extern int FUN_002c7bf4(unsigned int *);
-/* Supplied declaration required: FUN_0034a290. */
+/* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: FUN_003e77cc. */
 /* Supplied declaration required: btlScriptUnitHasFlags. */
 /* Supplied declaration required: FUN_003e8bb0. */
@@ -494,7 +494,7 @@ void FUN_004e20c0(unsigned int *param_1,unsigned int *param_2,int param_3,unsign
   }
   if (param_2[0xc] == 4) {
     temp_v7 = param_2[0x160];
-    FUN_0034a290();
+    dataTable41FindById();
     temp_v13 = 0;
     if (temp_v7 != 0) {
       temp_v13 = (unsigned int)*(unsigned char *)(temp_v7 + 0x2d);

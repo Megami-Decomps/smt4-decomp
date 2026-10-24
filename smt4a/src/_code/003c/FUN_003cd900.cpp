@@ -1,28 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cd900` (_code @ 0x3cd900, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the VFP registers holding the first and fifth argument differ (retail keeps the first in s20, the fifth in s19). */
+#include "common.h"
 
 extern "C" {
 
-int scriptReadStackValueAsFloat(int);
-int lmapSetFirstTransform(void);
+f32 scriptReadStackValueAsFloat(s32 index);
+void lmapSetFirstTransform(f32 a, f32 b, f32 c, f32 d, f32 e, f32 f);
 
-/* Supplied declaration required: scriptReadStackValueAsFloat. */
-/* Supplied declaration required: lmapSetFirstTransform. */
-
-
-unsigned int FUN_003cd900(void)
-
+/* Script command: sets the first map transform from six float arguments. */
+u32 FUN_003cd900(void)
 {
-/* irregular: 2 native warning(s); review required */
-  scriptReadStackValueAsFloat(0);
-  scriptReadStackValueAsFloat(1);
-  scriptReadStackValueAsFloat(2);
-  scriptReadStackValueAsFloat(3);
-  scriptReadStackValueAsFloat(4);
-  scriptReadStackValueAsFloat(5);
-  lmapSetFirstTransform();
-  return 1;
+    f32 a = scriptReadStackValueAsFloat(0);
+    f32 b = scriptReadStackValueAsFloat(1);
+    f32 c = scriptReadStackValueAsFloat(2);
+    f32 d = scriptReadStackValueAsFloat(3);
+    f32 e = scriptReadStackValueAsFloat(4);
+    f32 f = scriptReadStackValueAsFloat(5);
+    lmapSetFirstTransform(a, b, c, d, e, f);
+    return 1;
 }
 
 } /* extern "C" */

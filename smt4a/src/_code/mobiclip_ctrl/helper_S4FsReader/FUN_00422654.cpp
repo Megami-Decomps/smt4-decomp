@@ -5,7 +5,7 @@ extern "C" {
 
 int FUN_001469a8(...);
 int asdMemFree(unsigned int);
-int FUN_001a0d08(unsigned int *);
+int nn_os_Thread_FinalizeImpl(unsigned int *);
 int FUN_002e3140(void);
 int asdOperatorDelete(int);
 int software_interrupt(int);
@@ -17,7 +17,7 @@ extern int DAT_005880fc; /* 0x5880fc */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_001469a8. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001a0d08. */
+/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: asdOperatorDelete. */
 
@@ -38,7 +38,7 @@ void FUN_00422654(unsigned int *param_1)
       FUN_002e3140();
     }
     *(unsigned char *)(param_1 + 0xd) = 1;
-    FUN_001a0d08(param_1 + 0xc);
+    nn_os_Thread_FinalizeImpl(param_1 + 0xc);
     if (param_1[0xc] != 0) {
       software_interrupt(0x23);
       param_1[0xc] = 0;

@@ -10,7 +10,7 @@ int FUN_00303208(...);
 
 extern unsigned char DAT_00559e70; /* 0x559e70 */
 
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int FUN_002ecf28(void);
 /* Supplied declaration required: FUN_002f3b58. */
 extern unsigned int *FUN_00300ae8(unsigned int, unsigned int);
@@ -32,7 +32,7 @@ int FUN_001174ec(unsigned int param_1)
   temp_v0 = FUN_00303208(puVar1 + 4,0);
   systemAcquireHandleList();
   *(unsigned short *)(temp_v0 + 0x20) = 0xb;
-  temp_v1 = operatorNew(0x44);
+  temp_v1 = _Znwj(0x44);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = FUN_00303208(temp_v1,0);

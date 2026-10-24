@@ -13,7 +13,7 @@ int FUN_002d1f40(int, int, int);
 int FUN_002d8a48(void);
 int FUN_00303460(...);
 int FUN_00319f64(int);
-int FUN_00398078(unsigned int);
+int entryTableFlagTargetsOfId203(unsigned int);
 int VectorSignedToFloat(unsigned int, int);
 
 int gameFlagsGetBlock(void);
@@ -96,7 +96,7 @@ extern int FUN_00367f98(void);
 extern int gameFlagsBitTest(int);
 /* Supplied declaration required: gameFlagWordSetBit. */
 /* Supplied declaration required: FUN_00384830. */
-/* Supplied declaration required: FUN_00398078. */
+/* Supplied declaration required: entryTableFlagTargetsOfId203. */
 /* Supplied declaration required: naviMainFinishRequest. */
 /* Supplied declaration required: FUN_003d4ed8. */
 /* Supplied declaration required: gameFlagSetValue. */
@@ -307,7 +307,7 @@ unsigned int FUN_002332f4(void)
               *(unsigned char *)(temp_v5 + 0x7c) = 1;
               *(unsigned int *)(temp_v5 + 0x60) = 2;
               *(unsigned int *)(temp_v5 + 100) = 0;
-              FUN_00398078(*(unsigned int *)(temp_v5 + 0x80));
+              entryTableFlagTargetsOfId203(*(unsigned int *)(temp_v5 + 0x80));
               mapIfClearMatchingRecord(*(unsigned int *)(temp_v5 + 0x80));
               if (*(int *)(temp_v5 + 0xa8) != 0) {
                 *(short *)(temp_v24 + 0x22) = (short)*(int *)(temp_v5 + 0xa8);

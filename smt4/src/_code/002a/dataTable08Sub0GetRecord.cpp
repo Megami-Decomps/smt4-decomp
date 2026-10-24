@@ -1,47 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `dataTable08Sub0GetRecord` (_code @ 0x2ae238, 0x80 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0014162c(int, unsigned int);
-int libc_bsearch(unsigned char [80], unsigned int, unsigned int, int, unsigned char *);
+/* The content system; only the add-on lookup flag is named. */
+typedef struct AocSystemView {
+    /* 0x000 */ u8 unk000[0x3A0];
+    /* 0x3A0 */ s32 lookupEnabled;
+} AocSystemView;
 
-/* stack frame of param_1: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short sp18; /* 0x18: local_18 */
-    unsigned int sp70; /* 0x70: local_70 */
-} param_1_stack;
+/* A 0x58-byte record of data table 8 sub-table 0, searched by its ID at +0x50. */
+typedef struct Table08Sub0Record {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u16 id;
+    /* 0x52 */ u8 unk52[6];
+} Table08Sub0Record;
 
-extern unsigned char LAB_00138944; /* 0x138944 */
-extern int g_aocSystem; /* 0x433158 */
+Table08Sub0Record *FUN_0014162c(AocSystemView *system, u32 id);
+void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+s32 dataTable08Sub0CompareKeys(const void *left, const void *right);
+u32 dataTableGetCount(void *table);
+void *dataTableGetEntries(void);
+void *dataTableGet(u32 id, u32 type);
 
-/* Supplied declaration required: FUN_0014162c. */
-/* Supplied declaration required: libc_bsearch. */
-extern unsigned int dataTableGetCount(int);
-extern unsigned int dataTableGetEntries(void);
-extern int dataTableGet(unsigned int, unsigned int);
+extern AocSystemView *g_aocSystem; /* 0x433158 */
 
-
-void dataTable08Sub0GetRecord(unsigned int param_1)
-
+/* Returns the record of data table 8 sub-table 0 for `id`: the add-on's when it has one, else the one found in the table. */
+Table08Sub0Record *dataTable08Sub0GetRecord(u32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3 [80];
-  unsigned short temp_v4;
-  
-  temp_v4 = (unsigned short)param_1;
-  if (((*(int *)(g_aocSystem + 0x3a0) == 0) ||
-      (temp_v0 = g_aocSystem, FUN_0014162c(g_aocSystem,param_1), temp_v0 == 0)) &&
-     (temp_v0 = dataTableGet(8,0), temp_v0 != 0)) {
-    temp_v1 = dataTableGetEntries();
-    temp_v2 = dataTableGetCount(temp_v0);
-    libc_bsearch(temp_v3,temp_v1,temp_v2,0x58,&LAB_00138944);
-  }
-  return;
+    Table08Sub0Record key;
+    Table08Sub0Record *record;
+    key.id = id;
+    if (g_aocSystem->lookupEnabled == 0 || (record = FUN_0014162c(g_aocSystem, id)) == NULL) {
+        void *table = dataTableGet(8, 0);
+        record = (Table08Sub0Record *)table;
+        if (table != NULL) {
+            void *entries = dataTableGetEntries();
+            u32 count = dataTableGetCount(table);
+            record = (Table08Sub0Record *)libc_bsearch(&key, entries, count, sizeof(Table08Sub0Record), dataTable08Sub0CompareKeys);
+        }
+    }
+    return record;
 }
 
 } /* extern "C" */

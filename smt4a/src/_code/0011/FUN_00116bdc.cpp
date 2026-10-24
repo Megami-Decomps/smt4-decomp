@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp1C; /* 0x1c: local_1c */
 } param_2_stack;
 
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_00302f88. */
@@ -40,7 +40,7 @@ void FUN_00116bdc(int param_1,int *param_2)
       temp_v0 = (**(romwright_code **)(*param_2 + 0x50))(param_2,*piVar4,*(int *)(temp_v0 + 0x10c) - *piVar4);
       if (temp_v0 == 0) {
         temp_v4[0] = 0x80010001;
-        temp_v1 = FUN_002e7908(temp_v3,temp_v4);
+        temp_v1 = _ZN12OnlineResultC1ERKj(temp_v3,temp_v4);
         FUN_00302f88(param_1,temp_v1);
         return;
       }
@@ -52,7 +52,7 @@ void FUN_00116bdc(int param_1,int *param_2)
   }
   else {
     temp_v4[0] = 0x80010004;
-    temp_v1 = FUN_002e7908(temp_v3,temp_v4);
+    temp_v1 = _ZN12OnlineResultC1ERKj(temp_v3,temp_v4);
     FUN_00302f88(param_1,temp_v1);
   }
   return;

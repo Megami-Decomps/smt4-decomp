@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00192608(void);
+int dataTable08Sub2GetRecord(void);
 int FUN_003e8bb0(unsigned short [26], int, unsigned int);
 int FUN_004bfcfc(int, int, int, unsigned int *, int, int, int);
 int FUN_004c4604(int, int, int, unsigned int *, int, int, int, unsigned char [8]);
@@ -32,7 +32,7 @@ extern unsigned int *DAT_00571190; /* 0x571190 */
 extern unsigned int DAT_00571194; /* 0x571194 */
 
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00192608. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern int FUN_0026264c(unsigned short);
 extern int gameProgressIsAdvanced(void);
 /* Supplied declaration required: FUN_003e8bb0. */
@@ -68,7 +68,7 @@ unsigned int FUN_004ea200(int *param_1,int param_2,int param_3,unsigned int para
     temp_v8[0] = 1;
     temp_v0 = gameGetPlayerData();
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 2);
-    FUN_00192608();
+    dataTable08Sub2GetRecord();
     if (temp_v1 != 0) {
       temp_v6 = 2;
       temp_v8[1] = 2;

@@ -45,9 +45,9 @@ extern const DialogCallbackMethod DAT_00532fcc;
 extern const u8 DAT_0055cacc[];
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 u64 FUN_004311c0(u32 id);
-Obj55aff4 FUN_002ea100(const char *text);
+Obj55aff4 _ZN9Obj55aff4C1EPKc(const char *text);
 void FUN_00522a48(Obj55aff4Vector *vector, const Obj55aff4 &text);
-void *operatorNew(u32 size);
+void *_Znwj(u32 size);
 void *FUN_002fafd8(void *allocation, s32 mode);
 void holderSetFlagBits(void *holder, u32 flags);
 void FUN_00103f54(void *holder, DialogCallback *callback, s32 index, s32 enabled);
@@ -67,13 +67,13 @@ extern "C" void uiOpenSelectedValueDialog(DialogOwner *owner)
     Obj55aff4Vector lines;
     char text[24] = {0};
     textFormatBuffer(text, "%llu", FUN_004311c0(0x19a2));
-    FUN_00522a48(&lines, FUN_002ea100(text));
+    FUN_00522a48(&lines, _ZN9Obj55aff4C1EPKc(text));
     reinterpret_cast<Obj55aff4Vector &>(settings.elements) = lines;
 
-    void *dialog = operatorNew(0x78);
+    void *dialog = _Znwj(0x78);
     if (dialog)
         dialog = FUN_002fafd8(dialog, 0);
-    DialogCallback *callback = static_cast<DialogCallback *>(operatorNew(sizeof(DialogCallback)));
+    DialogCallback *callback = static_cast<DialogCallback *>(_Znwj(sizeof(DialogCallback)));
     if (callback) {
         callback->owner = owner;
         callback->method = DAT_00532fcc;

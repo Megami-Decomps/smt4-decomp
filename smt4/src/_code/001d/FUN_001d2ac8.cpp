@@ -4,12 +4,12 @@
 #include "gamedata/DevilRecord.h"
 
 extern "C" {
-Table04Record *FUN_002ae164(u32);
+Table04Record *dataTable40FindById(u32);
 }
 
 static inline bool isCategoryThreeSkill(u16 id)
 {
-    const Table04Record *skill = FUN_002ae164(id);
+    const Table04Record *skill = dataTable40FindById(id);
     return skill != NULL && skill->sort.category == 3;
 }
 

@@ -8,7 +8,7 @@ extern "C" {
 int soundArchiveReadWaveArchiveInfo(unsigned int, unsigned int, unsigned int [2]);
 int FUN_00235c70(unsigned int, unsigned int);
 int FUN_002a7ac4(unsigned char [12], unsigned int, int);
-int FUN_002ac5f4(unsigned char [12], unsigned int);
+int _ZN2nw3snd8internal14BankFileReaderC1EPKv(unsigned char [12], unsigned int);
 
 /* stack frame of param_5: 3 slot(s), 6 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00235c70. */
 /* Supplied declaration required: FUN_002a7ac4. */
 extern unsigned int *FUN_002ac5d8(unsigned char *);
-/* Supplied declaration required: FUN_002ac5f4. */
+/* Supplied declaration required: _ZN2nw3snd8internal14BankFileReaderC1EPKv. */
 
 
 unsigned int
@@ -43,7 +43,7 @@ FUN_0037be24(unsigned int *param_1,char *param_2,unsigned int param_3,unsigned i
   param_1[1] = 0;
   *param_1 = 0xffffffff;
   *param_2 = '\0';
-  FUN_002ac5f4(temp_v7,param_3);
+  _ZN2nw3snd8internal14BankFileReaderC1EPKv(temp_v7,param_3);
   puVar1 = (unsigned int *)FUN_002ac5d8(temp_v7);
   if (puVar1 == (unsigned int *)0x0) {
     return 0xfffffffe;

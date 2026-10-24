@@ -1,57 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015d8e0` (_code @ 0x15d8e0, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps one indirect call per message type (branch tree, `ldr r1, [r0, #off]; blx r1` in each arm and the zero result in r4); the build merges the arms into a conditional load of the handler and a single call. */
+#include "common.h"
+
+/* A message handed to the handler table: the first word is its type. */
+struct HandlerMessage {
+    /* 0x00 */ s32 type;
+};
+
+typedef void (*MessageHandler)(HandlerMessage *message);
 
 extern "C" {
 
-typedef int romwright_code(...);
-#ifndef ROMWRIGHT_STORAGE_s__E_E_E_E_E_E_E_E_E_E_0059dab4_161_1_DEFINED
-#define ROMWRIGHT_STORAGE_s__E_E_E_E_E_E_E_E_E_E_0059dab4_161_1_DEFINED
-/* Storage views; not a recovered source structure. */
-union romwright_storage_s__E_E_E_E_E_E_E_E_E_E_0059dab4_161_1 {
-    char whole[161];
-    unsigned char u1[161];
-    signed char s1[161];
+/* The registered handlers, one per message type. */
+struct MessageHandlers {
+    /* 0x00 */ MessageHandler onType11;
+    /* 0x04 */ MessageHandler onType09;
+    /* 0x08 */ MessageHandler onType04;
+    /* 0x0c */ MessageHandler onType02;
+    /* 0x10 */ MessageHandler onType21;
 };
-typedef char romwright_storage_s__E_E_E_E_E_E_E_E_E_E_0059dab4_161_1_size_check[(sizeof(union romwright_storage_s__E_E_E_E_E_E_E_E_E_E_0059dab4_161_1) == 161) ? 1 : -1];
-typedef char romwright_storage_s__E_E_E_E_E_E_E_E_E_E_0059dab4_161_1_u1_width_check[(sizeof(((union romwright_storage_s__E_E_E_E_E_E_E_E_E_E_0059dab4_161_1 *)0)->u1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_s__E_E_E_E_E_E_E_E_E_E_0059dab4_161_1_s1_width_check[(sizeof(((union romwright_storage_s__E_E_E_E_E_E_E_E_E_E_0059dab4_161_1 *)0)->s1[0]) == 1) ? 1 : -1];
-#endif
-extern union romwright_storage_s__E_E_E_E_E_E_E_E_E_E_0059dab4_161_1 s__E_E_E_E_E_E_E_E_E_E_0059dab4; /* 0x59dab4 */
 
+extern MessageHandlers s__E_E_E_E_E_E_E_E_E_E_0059dab4;
 
-unsigned int FUN_0015d8e0(unsigned int *param_1)
-
+// Dispatches the message in the request to the handler registered for its type.
+u32 FUN_0015d8e0(HandlerMessage **request)
 {
-  int temp_v0;
-  int *piVar2;
-  
-  piVar2 = (int *)*param_1;
-  temp_v0 = *piVar2;
-  if (temp_v0 != 0x20000009) {
-    if (temp_v0 < 0x2000000a) {
-      if (temp_v0 != 0x20000002) {
-        if (temp_v0 == 0x20000004) {
-          (*(romwright_code *)(*(unsigned int *)&s__E_E_E_E_E_E_E_E_E_E_0059dab4.u1[8]))(piVar2);
-        }
-      }
-      else {
-        (*(romwright_code *)(*(unsigned int *)&s__E_E_E_E_E_E_E_E_E_E_0059dab4.u1[12]))(piVar2);
-      }
+    HandlerMessage *message = *request;
+    switch (message->type) {
+    case 0x20000002:
+        s__E_E_E_E_E_E_E_E_E_E_0059dab4.onType02(message);
+        break;
+    case 0x20000004:
+        s__E_E_E_E_E_E_E_E_E_E_0059dab4.onType04(message);
+        break;
+    case 0x20000009:
+        s__E_E_E_E_E_E_E_E_E_E_0059dab4.onType09(message);
+        break;
+    case 0x20000011:
+        s__E_E_E_E_E_E_E_E_E_E_0059dab4.onType11(message);
+        break;
+    case 0x20000021:
+        s__E_E_E_E_E_E_E_E_E_E_0059dab4.onType21(message);
+        break;
     }
-    else if (temp_v0 != 0x20000011) {
-      if (temp_v0 == 0x20000021) {
-        (*(romwright_code *)(*(unsigned int *)&s__E_E_E_E_E_E_E_E_E_E_0059dab4.u1[16]))(piVar2);
-      }
-    }
-    else {
-      (*(romwright_code *)(*(unsigned int *)&s__E_E_E_E_E_E_E_E_E_E_0059dab4.u1[0]))(piVar2);
-    }
-  }
-  else {
-    (*(romwright_code *)(*(unsigned int *)&s__E_E_E_E_E_E_E_E_E_E_0059dab4.u1[4]))(piVar2);
-  }
-  return 0;
+    return 0;
 }
 
-} /* extern "C" */
+}

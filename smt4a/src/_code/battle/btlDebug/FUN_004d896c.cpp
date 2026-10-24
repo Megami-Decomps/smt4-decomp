@@ -1,93 +1,106 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d896c` (_code @ 0x4d896c, 0x270 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses the 0x2C-byte record fields as base + (i*44 + offset) in registers and builds the color words from reg-offset loads (and a different callee-saved set); the struct-array form folds offsets into immediates. */
+#include "common.h"
+
+struct DrawIntegerTriple { s32 x, y, z; };
+struct DrawFloatTriple { f32 x, y, z; };
+struct DrawParameterState;
+struct FrameTransitionColors;
+struct PackedScalarControl;
+
+/* One screen effect entry: matched by id/sub, applies draw parameters, a frame transition and fixed effect colors. */
+struct ScreenEffectEntry {
+    /* 0x00 */ s16 id;
+    /* 0x02 */ s16 sub;
+    /* 0x04 */ u8 option[3];
+    /* 0x07 */ u8 positionX;
+    /* 0x08 */ s16 positionY;
+    /* 0x0A */ s16 positionZ;
+    /* 0x0C */ f32 valueX;
+    /* 0x10 */ u8 transitionRed;
+    /* 0x11 */ u8 transitionGreen;
+    /* 0x12 */ u8 transitionBlue;
+    /* 0x13 */ u8 firstAlpha;
+    /* 0x14 */ u8 secondAlpha;
+    /* 0x15 */ u8 thirdAlpha;
+    /* 0x16 */ u8 effectLevel;
+    /* 0x17 */ u8 effectTint;
+    /* 0x18 */ s32 selectCamera;
+    /* 0x1C */ f32 valueY;
+    /* 0x20 */ f32 valueZ;
+    /* 0x24 */ u8 unk24[8];
+};
+
+struct ScreenEffectOwner {
+    /* 0x00 */ u8 unk00[0xC0];
+    /* 0xC0 */ ScreenEffectEntry *entries;
+};
+
+struct CameraContext {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ f32 zoom;
+};
+
+struct HandleBlock {
+    /* 0x00 */ u8 unk00[0xCC];
+    /* 0xCC */ u32 control[4];
+};
+
+struct HandleRegistry {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ HandleBlock *block;
+};
 
 extern "C" {
+CameraContext *obj80Select(u32 index);
+void FUN_0035c708(ScreenEffectOwner *state, u32 first, u32 second, u32 thirdAlpha);
+void drawStoreAndApplyParameters(ScreenEffectOwner *state, DrawIntegerTriple options, DrawFloatTriple values,
+                                 DrawIntegerTriple position);
+void packedScalarControlInit(u32 *control, u32 category, f32 value);
 
-int obj80Select(int);
-int FUN_0035c708(int, unsigned int, int, unsigned int);
-int drawStoreAndApplyParameters(int, int, int, int, int, int, int);
-int packedScalarControlInit(int, int);
+extern HandleRegistry *g_handleRegistry;
+extern u8 g_battleEffectSettings;
+extern u8 DAT_0057aa01;
+extern u8 DAT_0057aa02;
+extern u32 DAT_0057aa1c;
 
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-extern int g_handleRegistry; /* 0x56fcc0 */
-extern unsigned char g_battleEffectSettings; /* 0x57aa00 */
-extern unsigned char DAT_0057aa01; /* 0x57aa01 */
-extern unsigned char DAT_0057aa02; /* 0x57aa02 */
-
-/* Supplied declaration required: obj80Select. */
-/* Supplied declaration required: FUN_0035c708. */
-/* Supplied declaration required: drawStoreAndApplyParameters. */
-/* Supplied declaration required: packedScalarControlInit. */
-
-
-void FUN_004d896c(int param_1,int param_2,int param_3)
-
+/* Applies the screen effect entry matching (id, sub): draw parameters, frame transition and effect tint. */
+void FUN_004d896c(ScreenEffectOwner *owner, s32 id, s32 sub)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char temp_v0;
-  long long temp_v1;
-  long long temp_v2;
-  long long temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  
-  temp_v7 = 0;
-  temp_v5 = *(int *)(param_1 + 0xc0);
-  while( 1 ) {
-    temp_v8 = (int)*(short *)(temp_v5 + temp_v7 * 0x2c);
-    if (temp_v8 == -1) {
-      return;
+    s32 i = 0;
+    for (; ; i++) {
+        ScreenEffectEntry *entry = &owner->entries[i];
+        if (entry->id == -1) {
+            return;
+        }
+        if (entry->id == id && entry->sub == sub) {
+            break;
+        }
+        if (i + 1 >= 160) {
+            return;
+        }
     }
-    if ((temp_v8 == param_2) && (*(short *)(temp_v5 + temp_v7 * 0x2c + 2) == param_3)) break;
-    temp_v7 = temp_v7 + 1;
-    if (temp_v7 >= 0xa0) {
-      return;
+
+    ScreenEffectEntry *entry = &owner->entries[i];
+    DrawIntegerTriple options = {entry->option[0], entry->option[1], entry->option[2]};
+    DrawFloatTriple values = {entry->valueX, entry->valueY, entry->valueZ};
+    DrawIntegerTriple position = {entry->positionX, entry->positionY, entry->positionZ};
+    drawStoreAndApplyParameters(owner, options, values, position);
+
+    if (owner->entries[i].selectCamera > 0) {
+        packedScalarControlInit(g_handleRegistry->block->control, 24, 1.0f / obj80Select(0)->zoom);
     }
-  }
-  drawStoreAndApplyParameters(param_1,*(unsigned char *)(temp_v5 + temp_v7 * 0x2c + 4),
-               *(unsigned char *)(temp_v5 + temp_v7 * 0x2c + 5),*(unsigned char *)(temp_v5 + temp_v7 * 0x2c + 6),
-               *(unsigned char *)(temp_v5 + temp_v7 * 0x2c + 7),(int)*(short *)(temp_v5 + temp_v7 * 0x2c + 8),
-               (int)*(short *)(temp_v5 + temp_v7 * 0x2c + 10));
-  if (0 < *(int *)(*(int *)(param_1 + 0xc0) + temp_v7 * 0x2c + 0x18)) {
-    obj80Select(0);
-    packedScalarControlInit(*(int *)(g_handleRegistry + 4) + 0xcc,0x18);
-  }
-  temp_v5 = *(int *)(param_1 + 0xc0);
-  temp_v6 = *(unsigned int *)(temp_v5 + temp_v7 * 0x2c + 0x10);
-  FUN_0035c708(param_1,(temp_v6 << 0x18) | (((temp_v6 >> 8) & 0xff) << 0x10) |
-                       (((temp_v6 >> 0x10) & 0xff) << 8) |
-                       (unsigned int)*(unsigned char *)(temp_v5 + temp_v7 * 0x2c + 0x13),
-               *(unsigned char *)(temp_v5 + temp_v7 * 0x2c + 0x14) - 0x100,
-               (temp_v6 << 0x18) | (((temp_v6 >> 8) & 0xff) << 0x10) | (((temp_v6 >> 0x10) & 0xff) << 8) |
-               (unsigned int)*(unsigned char *)(temp_v5 + temp_v7 * 0x2c + 0x15));
-  temp_v6 = (unsigned int)*(unsigned char *)(*(int *)(param_1 + 0xc0) + temp_v7 * 0x2c + 0x16) * 0xff;
-  temp_v8 = (int)(((long long)(int)temp_v6 * -0x7f7f7f7f + ((unsigned long long)temp_v6 << 0x20)) >> 0x20);
-  temp_v9 = (int)(((long long)(int)temp_v6 * -0x7f7f7f7f + ((unsigned long long)temp_v6 << 0x20)) >> 0x20);
-  temp_v5 = (int)(((long long)(int)temp_v6 * -0x7f7f7f7f + ((unsigned long long)temp_v6 << 0x20)) >> 0x20);
-  temp_v0 = *(unsigned char *)(*(int *)(param_1 + 0xc0) + temp_v7 * 0x2c + 0x17);
-  temp_v6 = (short)(unsigned short)temp_v0 * 199;
-  temp_v4 = (short)(unsigned short)temp_v0 * 0x96;
-  temp_v1 = (long long)(int)temp_v6 * -0x7f7f7f7f + ((unsigned long long)temp_v6 << 0x20);
-  temp_v2 = (long long)(int)temp_v4 * -0x7f7f7f7f + ((unsigned long long)temp_v4 << 0x20);
-  temp_v3 = (long long)(int)((unsigned int)temp_v0 * 0x24) * -0x7f7f7f7f +
-          ((unsigned long long)((unsigned int)temp_v0 * 0x24) << 0x20);
-  (*(signed char *)((unsigned char *)&(*(int *)((unsigned char *)&DAT_0057aa02 + 0x1a)) - 0x1c)) = (char)(int)(temp_v1 >> 0x27) - (char)(temp_v1 >> 0x3f);
-  (*(signed char *)((unsigned char *)&g_battleEffectSettings + 0x1)) = (char)(int)(temp_v2 >> 0x27) - (char)(temp_v2 >> 0x3f);
-  (*(signed char *)((unsigned char *)&DAT_0057aa01 + 0x1)) = (char)(int)(temp_v3 >> 0x27) - (char)(temp_v3 >> 0x3f);
-  (*(int *)((unsigned char *)&DAT_0057aa02 + 0x1a)) = ((temp_v8 >> 7) - (temp_v8 >> 0x1f)) * 0x1000000 +
-                 ((temp_v9 >> 7) - (temp_v9 >> 0x1f)) * 0x10000 +
-                 ((temp_v5 >> 7) - (temp_v5 >> 0x1f)) * 0x100 + 0xff;
-  return;
+
+    entry = &owner->entries[i];
+    u32 rgb = (entry->transitionRed << 24) | (entry->transitionGreen << 16) | (entry->transitionBlue << 8);
+    FUN_0035c708(owner, rgb | entry->firstAlpha, entry->secondAlpha - 0x100, rgb | entry->thirdAlpha);
+
+    entry = &owner->entries[i];
+    u32 level = entry->effectLevel * 255 / 255;
+    DAT_0057aa1c = (level << 24) + (level << 16) + (level << 8) + 0xff;
+    s16 tint = entry->effectTint;
+    g_battleEffectSettings = tint * 199 / 255;
+    DAT_0057aa01 = tint * 150 / 255;
+    DAT_0057aa02 = entry->effectTint * 36 / 255;
 }
 
-} /* extern "C" */
+}

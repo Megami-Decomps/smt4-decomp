@@ -1,7 +1,7 @@
 #include "nw/snd/WaveSoundPlayer.h"
 
 extern "C" {
-void *nw_snd_internal_driver_SoundThread_GetInstance(void);
+void *_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 void FUN_0037c280(void *thread, void *node);
 }
 
@@ -13,7 +13,7 @@ namespace driver {
 /* Starts the player: registers its node with the sound thread and marks it started. */
 void WaveSoundPlayer::Start()
 {
-    FUN_0037c280(nw_snd_internal_driver_SoundThread_GetInstance(), node);
+    FUN_0037c280(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(), node);
     started = 1;
 }
 

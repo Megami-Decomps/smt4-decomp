@@ -2,7 +2,7 @@
 #include "battle/BattleEffectTextureCache.h"
 
 extern "C" {
-extern BattleEffectTextureSlot DAT_004332a0[26];
+extern BattleEffectTextureSlot g_pendingTextures[26];
 AsdTexture *asdTextureCreate(u32 flags);
 void FUN_002522f8(char *output, u32 capacity, const char *format, const char *directory, const char *name);
 void *fileLoadSync(const char *path, u32 *size, u32 flags);
@@ -12,7 +12,7 @@ void asdMemFree(void *memory);
 void FUN_00324a20(void)
 {
     for (u32 index = 0; index < 26; ++index) {
-        BattleEffectTextureSlot *slot = &DAT_004332a0[index];
+        BattleEffectTextureSlot *slot = &g_pendingTextures[index];
         if (slot->requested && !slot->texture) {
             slot->texture = asdTextureCreate(0);
             char path[128];

@@ -1,51 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cc97c` (_code @ 0x3cc97c, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the sleep loop is laid out differently (retail jumps into a bottom test and reloads the 100000 constant in the loop); the svc wrapper takes the 64-bit timeout as two words so r2/r3 are loaded in the opposite order. */
+#include "nn/svc.h"
+#include "nn/Result.h"
+
+struct WaitObject {
+    u8 unk00[0x24];
+    s32 signal;      // 0x24
+    u8 unk28[0x24];
+    s32 handle;      // 0x4c
+    u8 unk50[8];
+    u32 state;       // 0x58
+    u8 done;         // 0x5c
+};
 
 extern "C" {
 
-int FUN_0019a364(unsigned int *, unsigned int, int);
-int svcSleepThread(int, int);
-int FUN_002e3140(void);
-int software_interrupt(int);
+void FUN_002e3140(s32 result);
+s32 FUN_0019a364(u32 *out, u32 handle, s32 value);
+void svcSleepThread(s64 nanoseconds);
 
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0019a364. */
-/* Supplied declaration required: svcSleepThread. */
-/* Supplied declaration required: FUN_002e3140. */
-
-
-void FUN_003cc97c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Wait for the object's handle, start its request and sleep until the request has finished.
+void FUN_003cc97c(WaitObject *object, u32 state)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  int uStack_10;
-  
-  puVar1 = (unsigned int *)&uStack_10;
-  software_interrupt(0x24);
-  uStack_10 = param_4;
-  if (*(int *)(param_1 + 0x4c) < 0) {
-    FUN_002e3140();
-  }
-  *(unsigned int *)(param_1 + 0x24) = 0xffffffff;
-  *(unsigned int *)(param_1 + 0x58) = param_2;
-  FUN_0019a364(puVar1,*(unsigned int *)(param_1 + 0x4c),1);
-  if ((int)puVar1 < 0) {
-    FUN_002e3140();
-  }
-  while( 1 ) {
-    temp_v0 = *(unsigned int *)(param_1 + 0x58);
-    temp_v1 = temp_v0 == 0xffffffff;
-    if (temp_v1) {
-      temp_v0 = (unsigned int)*(unsigned char *)(param_1 + 0x5c);
+    u32 reply;
+    s32 result = nn::svc::WaitSynchronization1(object->handle, state, 0xffffffff, 0xffffffff);
+    if (nnResultIsFailure(result)) {
+        FUN_002e3140(result);
     }
-    if (temp_v1 && temp_v0 == 0) break;
-    svcSleepThread(100000,0);
-  }
-  return;
+    object->signal = -1;
+    object->state = state;
+    s32 started = FUN_0019a364(&reply, object->handle, 1);
+    if (nnResultIsFailure(started)) {
+        FUN_002e3140(started);
+    }
+    while (object->state != 0xffffffff || object->done != 0) {
+        svcSleepThread(100000);
+    }
 }
 
 } /* extern "C" */

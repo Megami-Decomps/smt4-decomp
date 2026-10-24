@@ -75,8 +75,8 @@ extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
 extern float g_spriteDrawYOffset; /* 0x570d5c */
 extern int g_renderCtx; /* 0x59dbb4 */
-extern unsigned int DAT_005c4c30; /* 0x5c4c30 */
-extern unsigned int DAT_0064c084; /* 0x64c084 */
+extern unsigned int _ZGVZN2nw4math5MTX448IdentityEvE8identity; /* 0x5c4c30 */
+extern unsigned int _ZZN2nw4math5MTX448IdentityEvE8identity; /* 0x64c084 */
 extern unsigned int DAT_0064c088; /* 0x64c088 */
 extern unsigned int DAT_0064c08c; /* 0x64c08c */
 extern unsigned int DAT_0064c090; /* 0x64c090 */
@@ -285,25 +285,25 @@ void FUN_003fba4c(fn_003fba4c_arg0 *param_1,int param_2,int param_3,unsigned int
     temp_v44 = 0;
     temp_v45 = 0;
     temp_v17 = 0x3f800000;
-    if (((DAT_005c4c30 & 1) == 0) && (temp_v4 = __cxa_guard_acquire(&DAT_005c4c30), temp_v4 != 0)) {
-      DAT_0064c084 = (unsigned int)temp_v17;
+    if (((_ZGVZN2nw4math5MTX448IdentityEvE8identity & 1) == 0) && (temp_v4 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX448IdentityEvE8identity), temp_v4 != 0)) {
+      _ZZN2nw4math5MTX448IdentityEvE8identity = (unsigned int)temp_v17;
       DAT_0064c088 = temp_v7;
       DAT_0064c08c = temp_v7;
       DAT_0064c090 = temp_v7;
       DAT_0064c094 = temp_v7;
-      DAT_0064c098 = DAT_0064c084;
+      DAT_0064c098 = _ZZN2nw4math5MTX448IdentityEvE8identity;
       DAT_0064c09c = temp_v7;
       DAT_0064c0a0 = temp_v7;
       DAT_0064c0a4 = temp_v7;
       DAT_0064c0a8 = temp_v7;
-      DAT_0064c0ac = DAT_0064c084;
+      DAT_0064c0ac = _ZZN2nw4math5MTX448IdentityEvE8identity;
       DAT_0064c0b0 = temp_v7;
       DAT_0064c0b4 = temp_v7;
       DAT_0064c0b8 = temp_v7;
       DAT_0064c0bc = temp_v7;
-      DAT_0064c0c0 = DAT_0064c084;
+      DAT_0064c0c0 = _ZZN2nw4math5MTX448IdentityEvE8identity;
     }
-    mtx44Copy(&temp_v20,&DAT_0064c084);
+    mtx44Copy(&temp_v20,&_ZZN2nw4math5MTX448IdentityEvE8identity);
     mathMatrixTranslateLocal(&temp_v20,&temp_v20,&temp_v49);
     FUN_001d3de0(&temp_v20,&temp_v20,temp_v52);
     FUN_0019a0fc(&temp_v20,&temp_v20,&temp_v32);

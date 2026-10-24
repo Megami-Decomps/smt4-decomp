@@ -4,7 +4,7 @@
 
 extern "C" {
 
-u32* wordRefMax(u32* first, u32* second);
+u32* _ZSt3maxIjERKT_S2_S2_(u32* first, u32* second);
 void* rt_malloc(u32 size);
 
 static inline void initializeRingStorage(WordRing* ring, u32 count, const u32& value)
@@ -13,7 +13,7 @@ static inline void initializeRingStorage(WordRing* ring, u32 count, const u32& v
     ring->end = NULL;
     ring->storageEnd = NULL;
     u32 minimum = 32;
-    u32 storageCapacity = *wordRefMax(&count, &minimum);
+    u32 storageCapacity = *_ZSt3maxIjERKT_S2_S2_(&count, &minimum);
     ring->items = (u32*)rt_malloc(storageCapacity * sizeof(u32));
     std::uninitialized_fill_n(ring->items, count, value);
     ring->end = ring->items + count;

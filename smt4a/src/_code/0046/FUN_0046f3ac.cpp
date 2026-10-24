@@ -10,8 +10,8 @@ extern "C" {
 int jyoucyuGetTableEntry(...);
 int FUN_00191f68(...);
 int _ZN18WindowStatusResultC1Ej(...);
-int FUN_001ba1c0(...);
-u32 FUN_001d1038(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
+int _ZN7AocMain12queueRequestE17RequestParametersji(...);
+u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
 int byteIsAtLeast100(...);
 int legacyResourceIdRemap(...);
 int FUN_002e3140(...);
@@ -52,8 +52,8 @@ extern int objGetFlagBit0(int);
 extern int sysLightEventTryWait(int);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern int *_ZN18WindowStatusResultC1Ev(unsigned char *);
-/* Supplied declaration required: FUN_001ba1c0. */
-/* Supplied declaration required: FUN_001d1038. */
+/* Supplied declaration required: _ZN7AocMain12queueRequestE17RequestParametersji. */
+/* Supplied declaration required: _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle. */
 /* Supplied declaration required: byteIsAtLeast100. */
 /* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: FUN_002e3140. */
@@ -321,13 +321,13 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
       }
       else if ((char)*piVar11 != -0x38) {
         {
-          RequestParameters parameters = {{
+          RequestParameters parameters(
             static_cast<u32>(*piVar11), static_cast<u32>(*piVar1),
             static_cast<u32>(piVar1[1]), static_cast<u32>(piVar1[2]),
             static_cast<u32>(piVar1[3])
-          }};
-          QueuedRequestHandle handle = {parameters.words[1], parameters.words[2]};
-          temp_v3 = FUN_001d1038(reinterpret_cast<QueuedRequestTokenState*>(g_aocMain),
+          );
+          QueuedRequestHandle handle = {parameters.word(1), parameters.word(2)};
+          temp_v3 = _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(reinterpret_cast<QueuedRequestTokenState*>(g_aocMain),
                                 &parameters, handle);
         }
         if (temp_v3 != 0) {
@@ -378,7 +378,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
             iStack_64 = piVar1[2];
             iStack_60 = piVar1[3];
           }
-          FUN_001ba1c0(g_aocMain,ppuVar9);
+          _ZN7AocMain12queueRequestE17RequestParametersji(g_aocMain,ppuVar9);
           return;
         }
         temp_v8 = (unsigned char *)*piVar11;
@@ -394,7 +394,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
       temp_v14 = (unsigned char *)piVar1[1];
       temp_v15 = (unsigned char *)piVar1[2];
       iStack_38 = piVar1[3];
-      FUN_001ba1c0(g_aocMain,&temp_v12);
+      _ZN7AocMain12queueRequestE17RequestParametersji(g_aocMain,&temp_v12);
       return;
     }
   }

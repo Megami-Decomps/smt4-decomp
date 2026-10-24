@@ -43,8 +43,8 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_2_stack;
 
-extern unsigned int DAT_005c4c2c; /* 0x5c4c2c */
-extern unsigned int DAT_0064c054; /* 0x64c054 */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x5c4c2c */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x64c054 */
 extern unsigned int DAT_0064c058; /* 0x64c058 */
 extern unsigned int DAT_0064c05c; /* 0x64c05c */
 extern unsigned int DAT_0064c060; /* 0x64c060 */
@@ -180,8 +180,8 @@ void FUN_0016b078(fn_0016b078_arg0 *param_1,unsigned int *param_2)
         *piVar11 = (int)(puVar7 + 0x22);
       }
       else {
-        if (((DAT_005c4c2c & 1) == 0) && (temp_v4 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v4 != 0)) {
-          DAT_0064c054 = temp_v11;
+        if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v4 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v4 != 0)) {
+          _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v11;
           DAT_0064c058 = temp_v10;
           DAT_0064c05c = temp_v10;
           DAT_0064c060 = temp_v10;
@@ -196,7 +196,7 @@ void FUN_0016b078(fn_0016b078_arg0 *param_1,unsigned int *param_2)
         }
         *puVar16 = *(unsigned char *)(temp_v5 + 2) | 0x80000000;
         puVar7[0x13] = 0xf02c0;
-        FUN_0019a270(puVar7 + 0x14,&DAT_0064c054,0xbf02c1);
+        FUN_0019a270(puVar7 + 0x14,&_ZZN2nw4math5MTX348IdentityEvE8identity,0xbf02c1);
         *piVar11 = (int)(puVar7 + 0x22);
       }
       FUN_001a4794(temp_v6);

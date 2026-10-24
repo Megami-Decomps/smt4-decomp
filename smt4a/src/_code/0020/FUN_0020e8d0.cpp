@@ -1,72 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020e8d0` (_code @ 0x20e8d0, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184310(void);
+struct UnitSortRecord {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s16 sortKey;
+};
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+UnitSortRecord *gameGetSlotRecord(s32 index);
+s32 FUN_0020e83c(const s32 *left, const s32 *right);
 
-/* Supplied declaration required: FUN_00184310. */
-extern int gameGetSlotRecord(int);
-
-
-int FUN_0020e8d0(int *param_1,int *param_2)
-
+/* Put invalid units last; sort valid units by descending sort key, then by FUN_0020e83c. */
+s32 FUN_0020e8d0(const s32 *left, const s32 *right)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v3 = 0;
-  if (*param_1 < 0) {
-    if (-1 < *param_2) {
-      temp_v3 = 1;
-    }
-  }
-  else if (*param_2 < 0) {
-    temp_v3 = -1;
-  }
-  else {
-    temp_v3 = gameGetSlotRecord(*param_1);
-    temp_v4 = gameGetSlotRecord(*param_2);
-    temp_v3 = (int)*(short *)(temp_v4 + 0x10) - (int)*(short *)(temp_v3 + 0x10);
-    if (temp_v3 == 0) {
-      temp_v3 = 0;
-      if (*param_1 < 0) {
-        if (-1 < *param_2) {
-          temp_v3 = 1;
+    s32 difference = 0;
+
+    if (*left < 0) {
+        if (*right >= 0) {
+            difference = 1;
         }
-      }
-      else if (*param_2 < 0) {
-        temp_v3 = -1;
-      }
-      else {
-        temp_v4 = gameGetSlotRecord(*param_1);
-        temp_v0 = gameGetSlotRecord(*param_2);
-        temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 100) - (unsigned int)*(unsigned short *)(temp_v4 + 100);
-        if (temp_v3 == 0) {
-          temp_v1 = (unsigned int)*(unsigned short *)(temp_v4 + 0x62);
-          FUN_00184310();
-          temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x62);
-          FUN_00184310();
-          temp_v3 = (unsigned int)*(unsigned char *)(temp_v1 + 2) - (unsigned int)*(unsigned char *)(temp_v2 + 2);
-          if (temp_v3 == 0) {
-            return (unsigned int)*(unsigned short *)(temp_v4 + 0x62) - (unsigned int)*(unsigned short *)(temp_v0 + 0x62);
-          }
+    } else if (*right < 0) {
+        difference = -1;
+    } else {
+        UnitSortRecord *first = gameGetSlotRecord(*left);
+        UnitSortRecord *second = gameGetSlotRecord(*right);
+        difference = second->sortKey - first->sortKey;
+        if (difference == 0) {
+            return FUN_0020e83c(left, right);
         }
-      }
-      return temp_v3;
     }
-  }
-  return temp_v3;
+    return difference;
 }
 
 } /* extern "C" */

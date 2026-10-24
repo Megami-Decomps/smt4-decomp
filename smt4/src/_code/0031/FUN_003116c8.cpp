@@ -10,7 +10,7 @@ int scrWorkSetValue(...);
 int messageForwardDefaultMode(...);
 int gameFlagSetValue(...);
 int textEncodeFontSlot(...);
-int FUN_0029f7d4(void);
+int dataTable54FindById(void);
 int FUN_0029fa0c(int, int *);
 int FUN_002bd06c(...);
 int libc_strcpy(...);
@@ -33,7 +33,7 @@ extern int *g_unite; /* 0x43dd68 */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: textEncodeFontSlot. */
 extern int FUN_0029b7b8(int, unsigned short, unsigned int *);
-/* Supplied declaration required: FUN_0029f7d4. */
+/* Supplied declaration required: dataTable54FindById. */
 /* Supplied declaration required: FUN_0029fa0c. */
 extern int FUN_002a0d0c(void);
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
@@ -84,7 +84,7 @@ unsigned int FUN_003116c8(void)
     if (0 < temp_v5) {
       do {
         temp_v3 = (unsigned int)*(unsigned short *)((int)piVar3 + temp_v8 * 2 + 0x933c);
-        FUN_0029f7d4();
+        dataTable54FindById();
         temp_v5 = temp_v9;
         if (((temp_v3 != 0) &&
             (temp_v6 = gameDataBlocksGetFlagBit2(*(unsigned short *)((int)piVar3 + temp_v8 * 2 + 0x933c)), temp_v6 == 0)
@@ -111,7 +111,7 @@ unsigned int FUN_003116c8(void)
     if (temp_v9 != 0xb) {
       if (temp_v9 == 0xc) {
         temp_v3 = (int)*(char *)(g_unite[0x250b] + (int)piVar12) & 0xffff;
-        FUN_0029f7d4();
+        dataTable54FindById();
         temp_v7 = (unsigned int)*(unsigned short *)(temp_v3 + 0x1a);
         FUN_002bd06c(temp_v7);
         libc_strcpy(temp_v10,temp_v7);

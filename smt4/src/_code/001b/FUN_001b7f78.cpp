@@ -12,10 +12,10 @@ int jobStop(...);
 
 int FUN_0010421c(void);
 int mapEplFree(void);
-int FUN_001b46e0(void);
+int mapObjReleaseAllSlots(void);
 int mapGimicReleaseAll(void);
 int mapRangeDestroyModels(void);
-int FUN_002148e4(void);
+int asdMdlBanksDestroyAll(void);
 int gfxDestroyModelGroups(void);
 int FUN_0026f960(...);
 int bgmReleaseStopped(void);
@@ -52,7 +52,7 @@ int lmapSceneUpdateHandles(void);
 int mdlManagerMarkAllDestroy(void);
 int mapStatesReleaseMarks(void);
 int entryTableMarkDestroy(void);
-int FUN_002702dc(void);
+int mapCollisionRelease(void);
 int FUN_00281784(void);
 int FUN_002897f0(...);
 int aocBufferQueueDisplay(...);
@@ -149,7 +149,7 @@ int battlePrepareEncounter(void);
 int FUN_00275e4c(void);
 int FUN_00275f00(void);
 int FUN_00275f8c(void);
-int FUN_00276078(...);
+int mapFlagSlotsRetireByKey(...);
 int gameCopyPersistentSave(void);
 int navigationApplyArguments(...);
 int buttonHelpSetPreset(...);
@@ -456,7 +456,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_001abb98. */
 /* Supplied declaration required: mapDepartUpdateHandles. */
 /* Supplied declaration required: mapEplFree. */
-/* Supplied declaration required: FUN_001b46e0. */
+/* Supplied declaration required: mapObjReleaseAllSlots. */
 /* Supplied declaration required: FUN_001b491c. */
 /* Supplied declaration required: FUN_001d34a8. */
 /* Supplied declaration required: mapObjMarkHandlesDestroy. */
@@ -476,7 +476,7 @@ extern int gameMapHasActiveSlotId(int);
 /* Supplied declaration required: mapObjectVisibilityRestore. */
 /* Supplied declaration required: FUN_0020db10. */
 /* Supplied declaration required: lmapSceneUpdateHandles. */
-/* Supplied declaration required: FUN_002148e4. */
+/* Supplied declaration required: asdMdlBanksDestroyAll. */
 /* Supplied declaration required: FUN_0021baf4. */
 /* Supplied declaration required: FUN_0021bc04. */
 /* Supplied declaration required: FUN_0021be00. */
@@ -500,7 +500,7 @@ extern int FUN_0021e4bc(void);
 /* Supplied declaration required: slotPoolReleaseResources. */
 /* Supplied declaration required: mapStatesReleaseMarks. */
 /* Supplied declaration required: entryTableMarkDestroy. */
-/* Supplied declaration required: FUN_002702dc. */
+/* Supplied declaration required: mapCollisionRelease. */
 /* Supplied declaration required: FUN_00270358. */
 /* Supplied declaration required: FUN_00270384. */
 /* Supplied declaration required: mapInitializeSavedAndTargetState. */
@@ -552,7 +552,7 @@ extern char *campGetState(void);
 /* Supplied declaration required: FUN_00275f00. */
 /* Supplied declaration required: FUN_00275f8c. */
 extern int FUN_00276060(unsigned int);
-/* Supplied declaration required: FUN_00276078. */
+/* Supplied declaration required: mapFlagSlotsRetireByKey. */
 extern int dataTable2fSub0GetRecord(int);
 /* Supplied declaration required: gameCopyPersistentSave. */
 /* Supplied declaration required: navigationResetTimer. */
@@ -2274,7 +2274,7 @@ LAB_001ba78c:
                                               temp_v10 = gameMapHasActiveSlotId((int)(short)DAT_0049f994);
                                               if (temp_v10 != 0) {
                                                 FUN_001f90c4(DAT_0049f990);
-                                                FUN_00276078((int)(short)DAT_0049f994);
+                                                mapFlagSlotsRetireByKey((int)(short)DAT_0049f994);
                                               }
                                             }
                                           }
@@ -5167,7 +5167,7 @@ LAB_001bec78:
     break;
   case 0x54:
     FUN_00281784();
-    FUN_002702dc();
+    mapCollisionRelease();
     lmapSceneUpdateHandles();
     entryTableMarkDestroy();
     mapObjMarkHandlesDestroy();
@@ -5193,12 +5193,12 @@ LAB_001bec78:
     lmapSceneShutdownScript();
     mapDepartFreeWork();
     slotPoolReleaseResources();
-    FUN_001b46e0();
+    mapObjReleaseAllSlots();
     mapGimicReleaseAll();
     FUN_002700d0();
     mapRangeDestroyModels();
     objectDestroyModelManager();
-    FUN_002148e4();
+    asdMdlBanksDestroyAll();
     gfxDestroyModelGroups();
     FUN_002d3e18();
     mapEplFree();
@@ -5598,7 +5598,7 @@ joined_r0x001bfcb4:
     break;
   case 0x6f:
     FUN_00281784();
-    FUN_002702dc();
+    mapCollisionRelease();
     asdModelSlotRelease(0);
     lmapSceneUpdateHandles();
     entryTableMarkDestroy();
@@ -5668,12 +5668,12 @@ joined_r0x001bfcb4:
       lmapSceneShutdownScript();
       mapDepartFreeWork();
       slotPoolReleaseResources();
-      FUN_001b46e0();
+      mapObjReleaseAllSlots();
       mapGimicReleaseAll();
       FUN_002700d0();
       mapRangeDestroyModels();
       objectDestroyModelManager();
-      FUN_002148e4();
+      asdMdlBanksDestroyAll();
       gfxDestroyModelGroups();
       FUN_002d3e18();
       mapTableRelease();

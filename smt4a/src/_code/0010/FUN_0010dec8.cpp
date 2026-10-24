@@ -32,7 +32,7 @@ extern unsigned int DAT_00594a64; /* 0x594a64 */
 
 extern unsigned int FUN_0010dfdc(unsigned int *);
 extern unsigned int onlineContextGetInstance(void);
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
 /* Supplied declaration required: onlineInstanceTableGetCurrent. */
@@ -82,7 +82,7 @@ void FUN_0010dec8(int param_1)
       FUN_002e9c0c();
       temp_v0 = FUN_002e789a(param_1 + 0x220);
       if (temp_v0 != 0) {
-        temp_v0 = operatorNew(0xc0);
+        temp_v0 = _Znwj(0xc0);
         if (temp_v0 != 0) {
           temp_v3[0] = 0;
           FUN_002f8174(temp_v0,DAT_00594a60,DAT_00594a64,&LAB_0010a34d);
@@ -94,7 +94,7 @@ void FUN_0010dec8(int param_1)
         temp_v1 = onlineInstanceTableGetCurrent();
         FUN_002f7c94(temp_v1,*(unsigned int *)(param_1 + 0x114),temp_v2);
         onlineJobSetStateWaiting(param_1);
-        temp_v0 = operatorNew(0x10);
+        temp_v0 = _Znwj(0x10);
         temp_v1 = 0;
         if (temp_v0 != 0) {
           temp_v1 = FUN_002ea3c0(temp_v0,&LAB_0010de71,0,&LAB_0010dfd0);

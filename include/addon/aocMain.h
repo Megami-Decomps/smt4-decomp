@@ -11,8 +11,18 @@ typedef struct AocObjA { /* 0x00 */ u8 unk[0x10]; } AocObjA;
 typedef struct AocObjB { /* 0x00 */ u8 unk[0x10]; } AocObjB;
 typedef struct AocObjC { /* 0x00 */ u8 unk[1]; } AocObjC;
 
+#include "shard/W6_W6Match5_QueuedRequest.h"
+
+struct QueuedRequestHandle;
+
 /* The AOC system's main block (Shin Megami Tensei IV layout). */
 typedef struct AocMain {
+    /* Queues `request` unless one is already active (_ZN7AocMain12queueRequestE17RequestParametersji). */
+    void queueRequest(RequestParameters request, u32 argument, s32 mode);
+    /* Submits `request` for the token `handle` unless one is pending; returns whether the token is valid
+     * (_ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle). */
+    u32 submitTokenRequest(RequestParameters request, QueuedRequestHandle handle);
+
     union {
         /* 0x000 */ u8 unk000[0x88];
         struct {
@@ -23,7 +33,9 @@ typedef struct AocMain {
     /* 0x088 */ AocObjA objA;
     /* 0x098 */ AocObjB objB;
     /* 0x0A8 */ AocObjC scriptHolder;
-    /* 0x0A9 */ u8 unk0A9[0x6AB];
+    /* 0x0A9 */ u8 unk0A9[0x4FF];
+    /* 0x5A8 */ void *contentTable; /* owner of the 0x30-byte content entries */
+    /* 0x5AC */ u8 unk5AC[0x1A8];
     /* 0x754 */ u32 flags;
 } AocMain;
 
@@ -33,6 +45,16 @@ typedef struct AocDisplay {
     /* 0x450C */ u8 operationActive;
 } AocDisplay;
 
+/* The AOC job's work block: the request ids it matches, the operation flag and a wait handle. */
+typedef struct AocJobWork {
+    /* 0x0000 */ u32 requestId;
+    /* 0x0004 */ u32 completedId;
+    /* 0x0008 */ u8 unk0008[0x4504];
+    /* 0x450C */ u8 operationActive;
+    /* 0x450D */ u8 unk450D[3];
+    /* 0x4510 */ u32 waitHandle;
+} AocJobWork;
+
 /* One entry of the content table: an id and 0x50 bytes of data. */
 typedef struct AocEntry {
     /* 0x00 */ s32 id;
@@ -41,6 +63,9 @@ typedef struct AocEntry {
 
 /* The content system's block (Shin Megami Tensei IV layout). */
 typedef struct AocSystem {
+    /* The request waiting on the content system (_ZN9AocSystem17getPendingRequestEv). */
+    RequestParameters getPendingRequest();
+
     /* 0x000 */ union {
         /* 0x000 */ u8 unk000[0x38C];
         struct {
@@ -106,6 +131,9 @@ typedef struct AocEntryA {
 
 /* The content system's block (Apocalypse layout). */
 typedef struct AocSystemA {
+    /* The request waiting on the content system (_ZN10AocSystemA17getPendingRequestEv). */
+    RequestParameters getPendingRequest();
+
     union {
         struct {
             /* 0x000 */ u8 unk000[0x310];

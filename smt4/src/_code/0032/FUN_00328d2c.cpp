@@ -3,7 +3,7 @@
 
 struct AsdTexture;
 
-// Private view of one 0x4c-byte entry in DAT_004332a0.
+// Private view of one 0x4c-byte entry in g_pendingTextures.
 struct EffectTextureEntryView {
     AsdTexture* texture;    // 0x00
     char name[0x40];         // 0x04
@@ -14,7 +14,7 @@ struct EffectTextureEntryView {
 };
 
 extern "C" {
-extern EffectTextureEntryView DAT_004332a0[26];
+extern EffectTextureEntryView g_pendingTextures[26];
 
 AsdTexture* asdTextureCreate(u32 flags);
 s32 FUN_002522f8(char* destination, u32 capacity, const char* format, ...);
@@ -28,7 +28,7 @@ void FUN_00328d2c(void)
     u32 fileSize;
 
     for (u32 index = 0; index < 26; ++index) {
-        EffectTextureEntryView* entry = &DAT_004332a0[index];
+        EffectTextureEntryView* entry = &g_pendingTextures[index];
         if (entry->unk4A != 1 && entry->texture == 0) {
             entry->texture = asdTextureCreate(0);
             FUN_002522f8(path, sizeof(path), "%s%s.tga",

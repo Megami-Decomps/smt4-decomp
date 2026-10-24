@@ -31,7 +31,7 @@ typedef struct {
 } MapMarkerOwner;
 
 MarkerTarget *FUN_00491abc(MapMarkerOwner *owner, u32 id, u32 sub, f32 x, f32 y, f32 z);
-MarkerStyle *FUN_0048b140(MapMarkerOwner *owner, u32 id, u8 kind);
+MarkerStyle *dataTable2BFindType1Entry(MapMarkerOwner *owner, u32 id, u8 kind);
 
 /* Fills marker `slot` from target `id`/`sub` at (x, y, z), or clears it when `enable` is 0. */
 void FUN_00486328(MapMarkerOwner *owner, s32 slot, s32 enable, u32 id, f32 x, f32 y, f32 z, u32 sub, s32 flagged)
@@ -52,7 +52,7 @@ void FUN_00486328(MapMarkerOwner *owner, s32 slot, s32 enable, u32 id, f32 x, f3
         return;
     }
     target = FUN_00491abc(owner, id, sub, x, y, z);
-    style = FUN_0048b140(owner, id, target->kind);
+    style = dataTable2BFindType1Entry(owner, id, target->kind);
     marker->id = id;
     marker->sub = sub;
     marker->kind = target->kind;

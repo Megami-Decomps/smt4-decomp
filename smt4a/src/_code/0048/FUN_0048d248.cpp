@@ -4,7 +4,7 @@
 extern "C" {
 s32 naviMainGetRequestedMap(void);
 s32 FUN_00492c70(void *selection);
-MapNaviMarkerIcon *FUN_0048b140(Block66Owner *owner, s32 map, u32 category);
+MapNaviMarkerIcon *dataTable2BFindType1Entry(Block66Owner *owner, s32 map, u32 category);
 s32 MapNaviTable_GetCategoryCount(MapNaviTableContext *context);
 MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext *context, u32 index);
 
@@ -30,7 +30,7 @@ void FUN_0048d248(Block66Owner *owner, u32 category)
     NavigationWork *work = (NavigationWork *)owner;
     s32 map = naviMainGetRequestedMap();
     s32 section = FUN_00492c70(work->selection);
-    MapNaviMarkerIcon *marker = FUN_0048b140(owner, map, category);
+    MapNaviMarkerIcon *marker = dataTable2BFindType1Entry(owner, map, category);
     if (marker != NULL) {
         s8 state = (s8)marker->icon;
         work->categoryState = state;
@@ -47,7 +47,7 @@ void FUN_0048d248(Block66Owner *owner, u32 category)
             if (record->id == -1)
                 return;
             if (record->id == map && (s16)record->reserved == section) {
-                marker = FUN_0048b140(owner, map, record->category);
+                marker = dataTable2BFindType1Entry(owner, map, record->category);
                 if (marker == NULL)
                     return;
                 s8 state = (s8)marker->icon;

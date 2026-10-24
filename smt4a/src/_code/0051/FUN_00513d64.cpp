@@ -1,4 +1,4 @@
-/* NON_MATCHING: BLOCKED: factory needs the allocator-interface class at DAT_00557da8 and full movie class inheritance for _ZTV9Obj557b68 + 0x18; current class header is only a 0x174-byte prefix, not the allocated 0x14D0 object. */
+/* NON_MATCHING: BLOCKED: factory for the 0x14D0-byte MoLive movie object: needs the allocator-interface class at DAT_00557da8 and the full movie class (MoLivePlayer plus its secondary vtable at _ZTV9Obj557b68 + 0x18); _ZN12MoLivePlayerC1EPN6MoLive9AllocatorEj (its constructor) and FUN_004af258 are not yet C++ members. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -11,7 +11,7 @@ extern romwright_code *DAT_00589530; /* 0x589530 */
 extern romwright_code *DAT_00589534; /* 0x589534 */
 
 extern int FUN_004af258(int, int);
-extern int FUN_004afbe4(int, unsigned int, unsigned int);
+extern int _ZN12MoLivePlayerC1EPN6MoLive9AllocatorEj(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004afd38. */
 
 
@@ -45,7 +45,7 @@ unsigned int FUN_00513d64(romwright_code *param_1,unsigned int param_2,unsigned 
     temp_v0 = (*DAT_00589530)(0x14d0);
     temp_v1 = 0;
     if (temp_v0 != 0) {
-      temp_v1 = FUN_004afbe4(temp_v0,*puVar2,0);
+      temp_v1 = _ZN12MoLivePlayerC1EPN6MoLive9AllocatorEj(temp_v0,*puVar2,0);
       *(unsigned char **)(temp_v1 + 0x14c0) = &DAT_00557b80;
     }
     puVar2[1] = temp_v1;

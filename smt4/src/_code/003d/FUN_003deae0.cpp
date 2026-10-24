@@ -32,8 +32,8 @@ typedef struct {
     unsigned int sp114; /* 0x114: local_114 */
 } param_5_stack;
 
-extern unsigned int DAT_00476638; /* 0x476638 */
-extern float DAT_004efd9c; /* 0x4efd9c */
+extern unsigned int _ZGVZN2nw4math5MTX448IdentityEvE8identity; /* 0x476638 */
+extern float _ZZN2nw4math5MTX448IdentityEvE8identity; /* 0x4efd9c */
 extern unsigned int DAT_004efda0; /* 0x4efda0 */
 extern unsigned int DAT_004efda4; /* 0x4efda4 */
 extern unsigned int DAT_004efda8; /* 0x4efda8 */
@@ -152,7 +152,7 @@ void FUN_003deae0(int param_1,float *param_2,int param_3,int param_4,unsigned in
   pfStack_30 = param_2;
   iStack_2c = param_3;
   temp_v33 = param_4;
-  if (((DAT_00476638 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476638), temp_v0 != 0)) {
+  if (((_ZGVZN2nw4math5MTX448IdentityEvE8identity & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX448IdentityEvE8identity), temp_v0 != 0)) {
     DAT_004efda0 = 0;
     DAT_004efda4 = 0;
     DAT_004efda8 = 0;
@@ -165,12 +165,12 @@ void FUN_003deae0(int param_1,float *param_2,int param_3,int param_4,unsigned in
     DAT_004efdcc = 0;
     DAT_004efdd0 = 0;
     DAT_004efdd4 = 0;
-    DAT_004efd9c = temp_v12;
+    _ZZN2nw4math5MTX448IdentityEvE8identity = temp_v12;
     DAT_004efdb0 = temp_v12;
     DAT_004efdc4 = temp_v12;
     DAT_004efdd8 = temp_v12;
   }
-  mtx44Copy(&temp_v14,&DAT_004efd9c);
+  mtx44Copy(&temp_v14,&_ZZN2nw4math5MTX448IdentityEvE8identity);
   temp_v29 = param_2;
   for (; (int)temp_v27 <= temp_v28; temp_v27 = temp_v27 + 1) {
     pfVar1 = (float *)(*(int *)(temp_v32 + 0x2c) + temp_v27 * 0x58);

@@ -24,7 +24,7 @@ struct fn_002f4f3c_arg0 {
 extern unsigned char LAB_002f4f78; /* 0x2f4f78 */
 extern unsigned char DAT_0055b23c; /* 0x55b23c */
 
-extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned int *, unsigned char *);
+extern unsigned int _ZN9Obj55aff4C1EPKt(unsigned int *, unsigned char *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern unsigned int *FUN_002fd1e8(fn_002f4f3c_arg0 *, unsigned int);
 
@@ -41,7 +41,7 @@ FUN_002f4f3c(fn_002f4f3c_arg0 *param_1,unsigned int param_2,unsigned int param_3
   
   uStack_18 = param_3;
   uStack_14 = param_4;
-  temp_v0 = _ZN9Obj55aff4C1EPKc((unsigned int *)&uStack_18,&LAB_002f4f78);
+  temp_v0 = _ZN9Obj55aff4C1EPKt((unsigned int *)&uStack_18,&LAB_002f4f78);
   puVar2 = (unsigned int *)FUN_002fd1e8(param_1,temp_v0);
   _ZN9Obj55aff4D1Ev(&uStack_18);
   *puVar2 = (unsigned int)&DAT_0055b23c;

@@ -35,7 +35,7 @@ extern unsigned char DAT_0055acc0; /* 0x55acc0 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern PoolTreeNode20* FUN_0012f76e(ChunkPool*);
-extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned int *, char *);
+extern unsigned int _ZN9Obj55aff4C1EPKt(unsigned int *, char *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern unsigned int *initVtable00558fb4(fn_0011ff0c_arg0 *, unsigned int);
 /* Supplied declaration required: FUN_00307134. */
@@ -73,7 +73,7 @@ FUN_0011ff0c(fn_0011ff0c_arg0 *param_1,unsigned int param_2,unsigned int param_3
   *(unsigned int *)(puVar1[0x14] + 0xc) = puVar1[0x14];
   puVar1[0x17] = param_2;
   puVar1[0xb] = puVar1[0xb] | 8;
-  temp_v1 = _ZN9Obj55aff4C1EPKc((unsigned int *)&uStack_20,"NintendoNotificationEventManager");
+  temp_v1 = _ZN9Obj55aff4C1EPKt((unsigned int *)&uStack_20,"NintendoNotificationEventManager");
   FUN_00307134(puVar1,temp_v1);
   _ZN9Obj55aff4D1Ev(&uStack_20);
   return romwright_piece_4_4(uStack_20,puVar1);

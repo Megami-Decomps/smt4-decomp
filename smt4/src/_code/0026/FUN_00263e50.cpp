@@ -6,7 +6,7 @@ extern "C" {
 
 int sceneTraverserVisit(unsigned int, unsigned int);
 int asdMemFreeNonNull(int);
-int FUN_002b74cc(unsigned int **, unsigned int **, unsigned int **);
+int _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(unsigned int **, unsigned int **, unsigned int **);
 int asdMemFree(...);
 int nw_gfx_res_ResGraphicsFile_Cleanup(int [2]);
 
@@ -22,7 +22,7 @@ extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
 
 /* Supplied declaration required: sceneTraverserVisit. */
 /* Supplied declaration required: asdMemFreeNonNull. */
-/* Supplied declaration required: FUN_002b74cc. */
+/* Supplied declaration required: _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Cleanup. */
 
@@ -62,7 +62,7 @@ void FUN_00263e50(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
         if (ppuVar2 != ppuVar4) {
           ppuVar3 = ppuVar2 + 1;
           param_4 = temp_v2;
-          FUN_002b74cc(ppuVar3,ppuVar4,ppuVar2);
+          _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(ppuVar3,ppuVar4,ppuVar2);
         }
         ppuVar2 = pppuVar1[7];
         pppuVar1[7] = ppuVar3;

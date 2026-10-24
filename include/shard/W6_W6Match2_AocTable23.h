@@ -11,6 +11,7 @@ struct Table23Record {
             s8 category;
             s8 subtype;
             u8 variant;
+            u8 value;
         } key;
     };
 };

@@ -1,54 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003df1d4` (_code @ 0x3df1d4, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the zero-filled name buffer and the destination pointer swap registers (retail zero in r4, destination in r5) and the holder is loaded into r1 first. */
+#include "common.h"
+
+struct NameSource {
+    u8 unk00[4];
+    char name[0x1c];
+};
+
+struct NameHolder {
+    u8 unk00[0x10];
+    NameSource *source; // 0x10
+    s32 sourceCount;    // 0x14
+};
 
 extern "C" {
 
-int rt_memcpy(unsigned int, int *, int);
-int strncpy(int *, int, int);
+char *strncpy(char *destination, const char *source, u32 count);
+void *rt_memcpy(void *destination, const void *source, u32 count);
 
-/* stack frame of param_2: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_003df1d4(unsigned int param_1,int *param_2)
-
+// Copy the holder's source name (up to 31 characters, NUL padded) into the 32-byte destination.
+void FUN_003df1d4(void *destination, NameHolder **holderRef)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  
-  temp_v0 = 0;
-  temp_v1 = 0;
-  temp_v2 = 0;
-  temp_v3 = 0;
-  temp_v4 = 0;
-  temp_v5 = 0;
-  temp_v6 = 0;
-  temp_v7 = 0;
-  if (*(int *)(*param_2 + 0x14) != 0) {
-    strncpy(&temp_v0,*(int *)(*param_2 + 0x10) + 4,0x20);
-    temp_v7 = temp_v7 & 0xffffff;
-  }
-  rt_memcpy(param_1,&temp_v0,0x20);
-  return;
+    NameHolder *holder = *holderRef;
+    char name[32] = {0};
+    if (holder->sourceCount != 0) {
+        strncpy(name, holder->source->name, 32);
+        name[31] = 0;
+    }
+    rt_memcpy(destination, name, 32);
 }
 
 } /* extern "C" */

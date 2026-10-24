@@ -1,42 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d04ac` (_code @ 0x2d04ac, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTable1bOr1cGetRecord(void);
+/* A data table record: only the sort value at 4 is used here. */
+struct SortRecord {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 sortValue;
+};
 
-extern unsigned int FUN_00298e00(unsigned short);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+u32 FUN_00298e00(u16 id);
+SortRecord *dataTable1bOr1cGetRecord(u16 id);
 
-
-unsigned int FUN_002d04ac(unsigned short *param_1,unsigned short *param_2)
-
+/* Orders two ids: a flag superset sorts first, then by the records' sort value (descending). */
+s32 FUN_002d04ac(const u16 *idA, const u16 *idB)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v0 = FUN_00298e00(*param_1);
-  temp_v1 = FUN_00298e00(*param_2);
-  temp_v2 = (unsigned int)((temp_v0 & ~temp_v1) != 0);
-  temp_v3 = (temp_v1 & ~temp_v0) != 0;
-  if (temp_v3) {
-    temp_v2 = 0xffffffff;
-  }
-  if (!temp_v3 && temp_v2 == 0) {
-    temp_v0 = (unsigned int)*param_1;
-    dataTable1bOr1cGetRecord();
-    temp_v1 = (unsigned int)*param_2;
-    dataTable1bOr1cGetRecord();
-    temp_v2 = 0;
-    if (temp_v0 != 0 && temp_v1 != 0) {
-      temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 4) - (unsigned int)*(unsigned short *)(temp_v0 + 4);
+    u32 flagsA = FUN_00298e00(*idA);
+    s32 result = 0;
+    u32 flagsB = FUN_00298e00(*idB);
+
+    if ((flagsA & ~flagsB) != 0) {
+        result = 1;
     }
-  }
-  return temp_v2;
+    if ((flagsB & ~flagsA) != 0) {
+        result = -1;
+    }
+    if (result == 0) {
+        SortRecord *recordA = dataTable1bOr1cGetRecord(*idA);
+        SortRecord *recordB = dataTable1bOr1cGetRecord(*idB);
+        s32 diff = 0;
+        if (recordA != NULL && recordB != NULL) {
+            diff = recordB->sortValue - recordA->sortValue;
+        }
+        result = diff;
+    }
+    return result;
 }
 
 } /* extern "C" */

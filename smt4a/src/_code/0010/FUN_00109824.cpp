@@ -50,7 +50,7 @@ extern int *FUN_0011595c(int, int);
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: streamReaderSeek. */
 /* Supplied declaration required: strAssign. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: sharedRefHolderDestroy. */
 /* Supplied declaration required: FUN_002eb17c. */
 extern int FUN_002eb5f4(void);
@@ -93,7 +93,7 @@ int * FUN_00109824(int param_1,int param_2,unsigned int param_3,fn_00109824_arg3
     piVar2 = (int *)0x0;
   }
   else {
-    temp_v0 = operatorNew(0x118);
+    temp_v0 = _Znwj(0x118);
     if (temp_v0 != 0) {
       piVar2 = (int *)FUN_002f2a44();
     }

@@ -3,14 +3,14 @@
 
 extern "C" {
 
-void FUN_0016d1f4(GxDrawSettings *settings);
+void _ZN9SlotStateC1Ev(GxDrawSettings *settings);
 u32 *gxDrawSettingsMakeCommand(GxDrawSettings *settings, u32 *commands, s32 mode);
 
 
 u32 *asdGxEmitAlphaDepthWritePreset(u32 *commands)
 {
     GxDrawSettings settings;
-    FUN_0016d1f4(&settings);
+    _ZN9SlotStateC1Ev(&settings);
     settings.depthEnabled = 1;
     settings.depthWrite = 1;
     settings.alphaEnabled = 1;

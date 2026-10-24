@@ -8,7 +8,7 @@ int FUN_002e78d0(unsigned int, unsigned int, int);
 
 extern unsigned int FUN_0011b430(int, unsigned int, unsigned int, unsigned int);
 extern unsigned int onlineContextGetInstance(void);
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: FUN_002e78d0. */
 
 
@@ -20,7 +20,7 @@ void FUN_00114476(int param_1,unsigned int param_2,unsigned int param_3)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = operatorNew(0x88);
+  temp_v0 = _Znwj(0x88);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = FUN_0011b430(temp_v0,*(unsigned int *)(param_1 + 0x14),param_2,param_3);

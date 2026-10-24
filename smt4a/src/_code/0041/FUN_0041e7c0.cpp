@@ -1,98 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041e7c0` (_code @ 0x41e7c0, 0x214 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: matches retail apart from register assignment in the icon loop (strd pairing) and the order of the total/previousTotal stores (armcc merges them into one stm). */
+#include "ui/SdCardMenu.h"
 
 extern "C" {
+s32 FUN_002bedac(u32 id);
+s32 FUN_00228b04(MenuList *list, s32 mode);
+s32 resourceRunOperationIfUnblocked(MenuList *list);
+s32 flaggedEntryGetValueA(MenuList *list);
+s32 objectApplyIfUnblocked(MenuList *list);
+void FUN_002a48e0(MenuList *list, s32 position);
+void flaggedEntrySetValueA(MenuList *list, s32 value);
+void FUN_002f0384(s32 value);
 
-int FUN_00228b04(int, int);
-int resourceRunOperationIfUnblocked(int);
-int FUN_002a48e0(int, int);
-int FUN_002f0384(int);
-int flaggedEntrySetValueA(int, int);
-int SBORROW4(int, int);
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00228b04. */
-/* Supplied declaration required: resourceRunOperationIfUnblocked. */
-/* Supplied declaration required: FUN_002a48e0. */
-extern int FUN_002bedac(unsigned int);
-extern int objectApplyIfUnblocked(int);
-/* Supplied declaration required: FUN_002f0384. */
-extern int flaggedEntryGetValueA(int);
-/* Supplied declaration required: flaggedEntrySetValueA. */
-
-
-void FUN_0041e7c0(int param_1)
-
+/* Updates the menu list's scroll position and refreshes the entry icons. */
+void FUN_0041e7c0(SdCardMenu *menu)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  
-  temp_v0 = FUN_002bedac(5);
-  if ((((temp_v0 != 0) || (temp_v0 = FUN_002bedac(6), temp_v0 != 0)) ||
-      (temp_v0 = FUN_002bedac(4), temp_v0 != 0)) ||
-     (((temp_v0 = FUN_002bedac(3), temp_v0 != 0 || (temp_v0 = FUN_002bedac(0xc), temp_v0 != 0)) ||
-      ((temp_v0 = FUN_002bedac(0xd), temp_v0 != 0 ||
-       ((temp_v0 = FUN_002bedac(0xe), temp_v0 != 0 || (temp_v0 = FUN_002bedac(0xf), temp_v0 != 0)))))))) {
-    *(unsigned char *)(param_1 + 0x30c) = 0;
-  }
-  temp_v0 = param_1 + 0x3d8;
-  FUN_00228b04(temp_v0,1);
-  if (temp_v0 != 0) {
-    temp_v0 = resourceRunOperationIfUnblocked(param_1 + 0x3d8);
-    temp_v1 = flaggedEntryGetValueA(param_1 + 0x3d8);
-    temp_v2 = objectApplyIfUnblocked(param_1 + 0x3d8);
-    temp_v5 = *(int *)(param_1 + 0x300);
-    temp_v3 = temp_v0 + temp_v1 + temp_v5;
-    *(int *)(param_1 + 0x2f8) = temp_v3;
-    if (((temp_v1 < 1) && (temp_v5 + 1 <= temp_v3)) && (*(int *)(param_1 + 0x2fc) < temp_v3)) {
-      FUN_002a48e0(param_1 + 0x3d8,temp_v0 - 1);
-      flaggedEntrySetValueA(param_1 + 0x3d8,1);
-    }
-    else if (0 < temp_v1) {
-      temp_v5 = temp_v5 + (temp_v2 - 1);
-      temp_v1 = temp_v5 - temp_v3;
-      if (temp_v3 < temp_v5) {
-        temp_v5 = *(int *)(param_1 + 0x2fc);
-        temp_v1 = temp_v5 - temp_v3;
-      }
-      if (temp_v5 != temp_v3 && temp_v1 < 0 == SBORROW4(temp_v5,temp_v3)) {
-        FUN_002a48e0(param_1 + 0x3d8,temp_v0 + 1);
-        flaggedEntrySetValueA(param_1 + 0x3d8,0);
-      }
-    }
-    temp_v4 = resourceRunOperationIfUnblocked(param_1 + 0x3d8);
-    *(unsigned int *)(param_1 + 0x304) = temp_v4;
-    temp_v0 = flaggedEntryGetValueA(param_1 + 0x3d8);
-    *(int *)(param_1 + 0x308) = temp_v0;
-    *(unsigned int *)(param_1 + 0x2fc) = *(unsigned int *)(param_1 + 0x2f8);
-    *(int *)(param_1 + 0x2f8) = temp_v0 + *(int *)(param_1 + 0x304) + *(int *)(param_1 + 0x300);
-    *(unsigned char *)(param_1 + 0x30c) = 1;
-    FUN_002f0384(0);
-    *(unsigned char *)(param_1 + 0x68) = 0;
-    temp_v0 = 0;
-    if (temp_v0 < *(int *)(param_1 + 0x18)) {
-      do {
-        temp_v2 = *(int *)(param_1 + 0x300) + *(int *)(param_1 + 0x304) + temp_v0;
-        temp_v1 = param_1 + temp_v0 * 0x44;
-        temp_v0 = temp_v0 + 1;
-        if (temp_v2 >= 1) {
-          *(unsigned int *)(temp_v1 + 0x6a0) = 0x86;
-          *(unsigned int *)(temp_v1 + 0x6a4) = 0x98;
+    if (FUN_002bedac(5) != 0 || FUN_002bedac(6) != 0 || FUN_002bedac(4) != 0 || FUN_002bedac(3) != 0 ||
+        FUN_002bedac(0xC) != 0 || FUN_002bedac(0xD) != 0 || FUN_002bedac(0xE) != 0 || FUN_002bedac(0xF) != 0)
+        menu->valid = 0;
+    if (FUN_00228b04(&menu->list, 1) != 0) {
+        s32 position = resourceRunOperationIfUnblocked(&menu->list);
+        s32 value = flaggedEntryGetValueA(&menu->list);
+        s32 span = objectApplyIfUnblocked(&menu->list);
+        s32 offset = menu->offset;
+        s32 total = position + value + offset;
+        menu->total = total;
+        if (value <= 0 && offset + 1 <= total && menu->previousTotal < total) {
+            FUN_002a48e0(&menu->list, position - 1);
+            flaggedEntrySetValueA(&menu->list, 1);
+        } else if (value >= 1) {
+            if (offset + (span - 1) > total && menu->previousTotal > total) {
+                FUN_002a48e0(&menu->list, position + 1);
+                flaggedEntrySetValueA(&menu->list, 0);
+            }
         }
-        else {
-          *(unsigned int *)(temp_v1 + 0x6a0) = 0x85;
-          *(unsigned int *)(temp_v1 + 0x6a4) = 0x97;
+        menu->listPosition = resourceRunOperationIfUnblocked(&menu->list);
+        s32 listValue = flaggedEntryGetValueA(&menu->list);
+        menu->listValue = listValue;
+        menu->previousTotal = menu->total;
+        menu->total = listValue + menu->listPosition + menu->offset;
+        menu->valid = 1;
+        FUN_002f0384(0);
+        menu->busy = 0;
+        for (s32 i = 0; i < menu->entryCount; i++) {
+            bool scrolled = sdCardMenuEntryScrolled(menu, i);
+            MenuEntry *entry = &menu->entries[i];
+            if (scrolled) {
+                entry->iconOn = 0x86;
+                entry->iconOff = 0x98;
+            } else {
+                entry->iconOn = 0x85;
+                entry->iconOff = 0x97;
+            }
         }
-      } while (temp_v0 < *(int *)(param_1 + 0x18));
     }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

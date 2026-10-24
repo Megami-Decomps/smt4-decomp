@@ -13,7 +13,7 @@ int FUN_003e54b8(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 
-int FUN_00152cf8(...);
+int uiPointerHitsRect(...);
 int FUN_00182054(void);
 int FUN_001834a4(...);
 int linkHolderApplyFlag(...);
@@ -44,7 +44,7 @@ extern int g_campCecView; /* 0x57f130 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00152cf8. */
+/* Supplied declaration required: uiPointerHitsRect. */
 extern int FUN_00163fd4(unsigned int);
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: FUN_00167c14. */
@@ -419,7 +419,7 @@ LAB_0025dd50:
         temp_v1 = FUN_001834a4(0x2e,0x42);
         temp_v17[0] = 0;
         temp_v3 = (int)*(short *)(temp_v1 + 8);
-        FUN_00152cf8(temp_v3,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
+        uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
                      (int)(*(short **)(temp_v1 + 0xc))[1]);
         if (temp_v3 == 0) {
           temp_v6 = *(unsigned int *)(temp_v0 + 300) & 0xfffffffe;
@@ -431,7 +431,7 @@ LAB_0025dd50:
         temp_v1 = FUN_001834a4(0x2e,0x43);
         temp_v17[0] = 0;
         temp_v3 = (int)*(short *)(temp_v1 + 8);
-        FUN_00152cf8(temp_v3,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
+        uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
                      (int)(*(short **)(temp_v1 + 0xc))[1]);
         if (temp_v3 != 0) {
           temp_v6 = *(unsigned int *)(temp_v0 + 300) | 2;
@@ -443,7 +443,7 @@ LAB_0025dd50:
         temp_v1 = FUN_001834a4(0x2e,0x41);
         temp_v17[0] = 0;
         temp_v3 = (int)*(short *)(temp_v1 + 8);
-        FUN_00152cf8(temp_v3,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
+        uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
                      (int)(*(short **)(temp_v1 + 0xc))[1]);
         temp_v1 = 0;
         if (temp_v3 != 0) {
@@ -458,7 +458,7 @@ LAB_0025dd50:
             temp_v3 = FUN_001834a4(0x2e,temp_v1 + 0x96);
             temp_v17[0] = 0;
             temp_v4 = (int)*(short *)(temp_v3 + 8);
-            FUN_00152cf8(temp_v4,(int)*(short *)(temp_v3 + 10),(int)**(short **)(temp_v3 + 0xc),
+            uiPointerHitsRect(temp_v4,(int)*(short *)(temp_v3 + 10),(int)**(short **)(temp_v3 + 0xc),
                          (int)(*(short **)(temp_v3 + 0xc))[1]);
             if (temp_v4 != 0) {
               temp_v9 = temp_v1;

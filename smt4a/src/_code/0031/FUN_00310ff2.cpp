@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int vectorCopyHeader(unsigned int, unsigned int);
+int _ZN18OnlineResultRecordaSERKS_(unsigned int, unsigned int);
 int FUN_002f4d2c(unsigned int, int *);
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
-/* Supplied declaration required: vectorCopyHeader. */
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: FUN_002f4d2c. */
 
 
@@ -31,8 +31,8 @@ unsigned long long FUN_00310ff2(unsigned int param_1,unsigned int param_2,unsign
   uStack_10 = param_3;
   uStack_c = param_4;
   FUN_002f4d2c(param_1,&uStack_c);
-  temp_v0 = FUN_002e7908((unsigned int *)&uStack_18,(unsigned int *)&uStack_c);
-  vectorCopyHeader(param_2,temp_v0);
+  temp_v0 = _ZN12OnlineResultC1ERKj((unsigned int *)&uStack_18,(unsigned int *)&uStack_c);
+  _ZN18OnlineResultRecordaSERKS_(param_2,temp_v0);
   return romwright_piece_4_4(uStack_14,uStack_18);
 }
 

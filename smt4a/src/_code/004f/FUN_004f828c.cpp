@@ -1,110 +1,80 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f828c` (_code @ 0x4f828c, 0x24c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the null checks on the name come out as `cmp; beq` with the argument moved afterwards, where retail tests the argument register itself (`movs r0, r6`) and loads the table field after the test; the frame setup and the hoisted slot base register differ accordingly */
+#include "battle/BtlEffectLoad.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
-int asdLoadFileAsyncSimple(unsigned char [128], int, int);
-int wstrlen(...);
-int libc_strcpy(...);
-int sysMemClear(...);
-int libc_strcmp(...);
-int btlCameraFinishTransition(int);
+extern BtlEffectNames g_btlEffect;
+extern const char DAT_0052853c[];
+extern const char DAT_00528534[];
+extern const char DAT_005284c0[];
 
-extern unsigned char LAB_004f84dc; /* 0x4f84dc */
-extern unsigned int g_btlEffect; /* 0x5737f0 */
-extern unsigned int DAT_00573800; /* 0x573800 */
-extern unsigned int DAT_00573804; /* 0x573804 */
+u32 wstrlen(const char *text);
+s32 libc_strcmp(const char *a, const char *b);
+s32 libc_strncmp(const char *a, const char *b, u32 count);
+char *libc_strcpy(char *destination, const char *source);
+void sysMemClear(void *buffer, s32 size);
+void textFormatBuffer(char *buffer, const char *format, ...);
+char *FUN_00100d60(char *text, s32 character);
+s32 findRecordByKey(const char *key);
+void btlCameraFinishTransition(BtlEffectWorkA *work);
+u32 FUN_002282c8(u32 first, u32 second, u32 third);
+void asdLoadFileAsyncSimple(const char *path, void **resource, s32 mode);
 
-/* Supplied declaration required: textFormatBuffer. */
-extern int FUN_00100d60(unsigned char *, unsigned int);
-extern int libc_strncmp(int, unsigned int, unsigned int);
-extern unsigned int FUN_002282c8(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: wstrlen. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: libc_strcmp. */
-extern int findRecordByKey(int);
-/* Supplied declaration required: btlCameraFinishTransition. */
-
-
-unsigned int FUN_004f828c(int param_1)
-
+/* Resolves the effects a battle unit asks for: names the battle ignores are skipped, numbered ones
+ * select the numbered effect, any other name has its effect file loaded into the unit's slot. */
+u32 FUN_004f828c(BtlEffectWorkA *work)
 {
-/* irregular: 2 goto(s); 7 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  unsigned int temp_v1;
-  unsigned char *puVar4;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5 [128];
-  unsigned char temp_v6 [132];
-  
-  temp_v1 = 0;
-  if (*(int *)(param_1 + 0x1f54) != 0) {
-    temp_v3 = 0;
-    do {
-      temp_v4 = *(int *)(param_1 + 0x1f54) + temp_v3 * 0x16 + 0xb0;
-      temp_v0 = wstrlen(temp_v4);
-      if ((temp_v0 != 0) && (temp_v0 = temp_v4, libc_strcmp(temp_v4,&LAB_004f84dc), temp_v0 != 0)) {
-        pcVar2 = "NOT_EFT";
-        libc_strcmp("NOT_EFT",temp_v4);
-        if ((pcVar2 != (char *)0x0) &&
-           ((temp_v4 == 0 || (temp_v0 = temp_v4, libc_strcmp(temp_v4,DAT_00573800), temp_v0 != 0)))) {
-          if (temp_v4 != 0) {
-            temp_v1 = wstrlen((*(unsigned int *)((unsigned char *)&g_btlEffect + 0xc)));
-            temp_v0 = libc_strncmp(temp_v4,(*(unsigned int *)((unsigned char *)&g_btlEffect + 0xc)),temp_v1);
-            if (temp_v0 == 0) goto LAB_004f84c0;
-          }
-          if (temp_v4 != 0) {
-            temp_v1 = wstrlen(g_btlEffect);
-            temp_v0 = libc_strncmp(temp_v4,g_btlEffect,temp_v1);
-            if (temp_v0 == 0) {
-              temp_v2 = 0;
-              do {
-                textFormatBuffer(temp_v6,"%s%02d",g_btlEffect,temp_v2);
-                puVar4 = temp_v6;
-                libc_strcmp(puVar4,temp_v4);
-                if (puVar4 == (unsigned char *)0x0) {
-                  btlCameraFinishTransition(param_1);
-                  temp_v1 = FUN_002282c8(temp_v2 & 0xff,7,0);
-                  *(unsigned int *)(param_1 + 0x33a8) = temp_v1;
-                  *(char *)(param_1 + 0x33ac) = (char)temp_v2;
-                  goto LAB_004f84c0;
+    if (work->request == NULL) {
+        return 0;
+    }
+    for (s32 i = 0; i < 4; i++) {
+        char *name = work->request->names[4 + i];
+        char path[128];
+        char file[128];
+
+        if (wstrlen(name) != 0 && libc_strcmp(name, "0") != 0) {
+            if (libc_strcmp(DAT_0052853c, name) != 0 && (name == NULL || libc_strcmp(name, g_btlEffect.ignoredName) != 0)) {
+                if (name != NULL) {
+                    if (libc_strncmp(name, g_btlEffect.ignoredPrefix, wstrlen(g_btlEffect.ignoredPrefix)) == 0) {
+                        continue;
+                    }
                 }
-                temp_v2 = temp_v2 + 1;
-              } while ((int)temp_v2 < 0xb);
+                if (name != NULL) {
+                    if (libc_strncmp(name, g_btlEffect.numberedPrefix, wstrlen(g_btlEffect.numberedPrefix)) == 0) {
+                        bool found = false;
+                        for (s32 n = 0; n < 11; n++) {
+                            textFormatBuffer(file, DAT_00528534, g_btlEffect.numberedPrefix, n);
+                            if (libc_strcmp(file, name) == 0) {
+                                btlCameraFinishTransition(work);
+                                work->numberedEffect = FUN_002282c8(n & 0xff, 7, 0);
+                                work->numberedIndex = n;
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (found) {
+                            continue;
+                        }
+                    }
+                }
+                if (name == NULL || libc_strcmp(name, g_btlEffect.ignoredNameB) != 0) {
+                    sysMemClear(path, 0x80);
+                    sysMemClear(file, 0x80);
+                    textFormatBuffer(file, DAT_005284c0, name);
+                    libc_strcpy(path, file);
+                    if (wstrlen(path) != 0) {
+                        BtlEffectSlot *slot = &work->slots[4 + i];
+                        libc_strcpy(slot->name, FUN_00100d60(path, '/') + 1);
+                        if (findRecordByKey(slot->name) == 0xff) {
+                            asdLoadFileAsyncSimple(path, &slot->file, 1);
+                            slot->flags |= 1;
+                        }
+                    }
+                }
             }
-          }
-          if ((temp_v4 == 0) || (temp_v0 = temp_v4, libc_strcmp(temp_v4,DAT_00573804), temp_v0 != 0)) {
-            sysMemClear(temp_v5,0x80);
-            sysMemClear(temp_v6,0x80);
-            textFormatBuffer(temp_v6,"battle/effect/%s.eft",temp_v4);
-            libc_strcpy(temp_v5,temp_v6);
-            temp_v0 = wstrlen(temp_v5);
-            if (temp_v0 != 0) {
-              temp_v0 = param_1 + temp_v3 * 0x8c;
-              temp_v4 = FUN_00100d60(temp_v5,0x2f);
-              libc_strcpy(temp_v0 + 0x23c4,temp_v4 + 1);
-              temp_v4 = findRecordByKey(temp_v0 + 0x23c4);
-              if (temp_v4 == 0xff) {
-                asdLoadFileAsyncSimple(temp_v5,temp_v0 + 0x23c0,1);
-                *(unsigned char *)(temp_v0 + 0x2444) = *(unsigned char *)(temp_v0 + 0x2444) | 1;
-              }
-            }
-          }
         }
-      }
-LAB_004f84c0:
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 4);
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    }
+    return 1;
 }
 
-} /* extern "C" */
+}

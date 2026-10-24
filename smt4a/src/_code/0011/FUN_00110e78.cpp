@@ -6,7 +6,7 @@ extern "C" {
 
 int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
-int FUN_002e7908(int *, unsigned int *);
+int _ZN12OnlineResultC1ERKj(int *, unsigned int *);
 int byteRingWrite(int, unsigned int, unsigned int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 /* Supplied declaration required: byteRingWrite. */
 
 
@@ -50,14 +50,14 @@ void FUN_00110e78(int *param_1,int param_2,unsigned int param_3,unsigned int par
       if ((unsigned int)(*(int *)(temp_v0 + 0x1c) - *(int *)(temp_v0 + 0x18)) < param_4) {
         temp_v3 = 0x80050001;
         puVar2 = (unsigned int *)&temp_v3;
-        FUN_002e7908(param_1,puVar2);
+        _ZN12OnlineResultC1ERKj(param_1,puVar2);
         _ZN9Obj55b28cD1Ev(temp_v2);
         return;
       }
       if (param_4 == 0) {
         temp_v3 = 0x10001;
         puVar2 = (unsigned int *)&temp_v3;
-        FUN_002e7908(param_1,puVar2);
+        _ZN12OnlineResultC1ERKj(param_1,puVar2);
         _ZN9Obj55b28cD1Ev(temp_v2);
         return;
       }
@@ -65,7 +65,7 @@ void FUN_00110e78(int *param_1,int param_2,unsigned int param_3,unsigned int par
       puVar2 = (unsigned int *)&temp_v4;
       temp_v4 = 0x10001;
     }
-    FUN_002e7908(param_1,puVar2);
+    _ZN12OnlineResultC1ERKj(param_1,puVar2);
   }
   _ZN9Obj55b28cD1Ev(temp_v2);
   return;

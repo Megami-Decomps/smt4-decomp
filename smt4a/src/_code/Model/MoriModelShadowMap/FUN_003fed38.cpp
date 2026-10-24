@@ -7,7 +7,7 @@ extern "C" {
 int gfxCombinerStateInitialize(unsigned char *);
 int FUN_0015fcec(unsigned char *, unsigned int);
 int asdMemoryAlloc(int, int, int, int);
-int FUN_0016d1f4(unsigned char [24]);
+int _ZN9SlotStateC1Ev(unsigned char [24]);
 int FUN_00177abc(float *, unsigned char *);
 int gpuEmitDepthBufferCommands(unsigned char *, unsigned char *, int);
 int FUN_0018a924(float *, unsigned int **);
@@ -99,7 +99,7 @@ extern unsigned int DAT_0056fcc4; /* 0x56fcc4 */
 /* Supplied declaration required: gfxCombinerStateInitialize. */
 /* Supplied declaration required: FUN_0015fcec. */
 /* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: FUN_0016d1f4. */
+/* Supplied declaration required: _ZN9SlotStateC1Ev. */
 /* Supplied declaration required: FUN_00177abc. */
 /* Supplied declaration required: gpuEmitDepthBufferCommands. */
 /* Supplied declaration required: FUN_0018a924. */
@@ -242,7 +242,7 @@ void FUN_003fed38(int param_1,fn_003fed38_arg1 *param_2)
   temp_v29 = 0x100;
   temp_v30 = 0x140;
   gfxCombinerStateInitialize(&temp_v12);
-  FUN_0016d1f4(temp_v42);
+  _ZN9SlotStateC1Ev(temp_v42);
   temp_v20 = 0;
   temp_v21 = 0;
   temp_v22 = (unsigned int)temp_v7;

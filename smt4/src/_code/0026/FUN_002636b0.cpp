@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002bee58(void *block, int arg);
+int spriteStartAnimationByIndex(void *block, int arg);
 
 typedef struct Obj {
     /* 0x00 */ u8 unk00[8];
@@ -21,7 +21,7 @@ void FUN_002636b0(void)
     Obj *obj = g_placeWin;
 
     g_placeWin->unk08 = 3;
-    FUN_002bee58(obj->block, 1);
+    spriteStartAnimationByIndex(obj->block, 1);
 }
 
 } /* extern "C" */

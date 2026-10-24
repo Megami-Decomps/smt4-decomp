@@ -8,7 +8,7 @@ int FUN_0010d29c(void);
 int FUN_0010d2a6(void);
 int _ZN9Obj559f087vfunc00Ev(int, unsigned int);
 int asdOperatorNew(void);
-int FUN_004130c0(void);
+int _ZN9Obj557c908setStateEj(void);
 int FUN_00514d48(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -27,7 +27,7 @@ extern int FUN_0012bc90(unsigned int *);
 /* Supplied declaration required: asdOperatorNew. */
 extern int onlineContextGetInstance(void);
 extern int FUN_002e9ff4(int);
-/* Supplied declaration required: FUN_004130c0. */
+/* Supplied declaration required: _ZN9Obj557c908setStateEj. */
 extern int FUN_00432acc(void);
 /* Supplied declaration required: FUN_00514d48. */
 
@@ -97,7 +97,7 @@ void FUN_003fa6a4(int param_1)
     }
   }
   *(int *)(param_1 + 0x44) = temp_v0;
-  FUN_004130c0();
+  _ZN9Obj557c908setStateEj();
   return;
 }
 

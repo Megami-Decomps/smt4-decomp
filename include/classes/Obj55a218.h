@@ -18,6 +18,9 @@ protected:
 struct Obj55a218SystemTable {
     /* 0x00 */ u8 unk00;
     /* 0x01 */ s8 handlesShared;   /* nonzero: the handle belongs to someone else */
+    /* 0x02 */ u8 unk02[0xE];
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ f32 unk14;
 };
 
 extern "C" Obj55a218SystemTable g_systemTable;

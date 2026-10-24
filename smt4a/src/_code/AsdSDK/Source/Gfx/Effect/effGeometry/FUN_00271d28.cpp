@@ -7,7 +7,7 @@ extern const char DAT_0054baf8[];
 extern const u32 DAT_005c1fb4[4];
 void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 dataAlignment, u32 clear);
 void *FUN_00178b04(u32 size, const char *file, s32 line);
-void *FUN_002b3324(u32 count, u32 flags, s32 mode);
+void *effGeomBufferCreate(u32 count, u32 flags, s32 mode);
 void refCountIncrement(void *resource);
 OwnedBufferPair *slotReset(OwnedBufferPair *buffers);
 void slotInit(OwnedBufferPair *buffers, u32 kind, u32 count, u32 format);
@@ -41,7 +41,7 @@ GeometryResources *FUN_00271d28(const GeometryResources *source)
         copy = static_cast<GeometryView *>(memAlloc(0x10000, 0x100, 0, sizeof(GeometryView), 0x10, 1));
         copy->base.flags = 0x300;
         copy->base.vertexCount = 0;
-        EngineView *engine = static_cast<EngineView *>(FUN_002b3324(count, engineFlags, 0));
+        EngineView *engine = static_cast<EngineView *>(effGeomBufferCreate(count, engineFlags, 0));
         copy->base.special = engine;
         if (engineFlags & 0x80000)
             memcpy(engine->color, DAT_005c1fb4, sizeof(engine->color));

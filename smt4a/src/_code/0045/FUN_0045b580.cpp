@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0040633c's literal pool; not written yet. */
+/* NON_MATCHING: found outside every function: its address is in _ZN16MoriSceneElementC1Ev's literal pool; not written yet. */
 /* romwright 0.5.0 decompilation of FUN_0045b580 for reference (not compiled; its own view of the boundaries):
 
 void FUN_0045b580(int param_1)

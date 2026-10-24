@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00115998. */
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 /* Supplied declaration required: onlineJobSetStateTimed. */
 /* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002eba9c(unsigned char *, int);
@@ -58,7 +58,7 @@ void FUN_001159d0(int param_1)
     temp_v5[0] = 0x8001000b;
     puVar3 = temp_v3;
   }
-  temp_v1 = FUN_002e7908(puVar3,puVar4);
+  temp_v1 = _ZN12OnlineResultC1ERKj(puVar3,puVar4);
   FUN_00115998(param_1,temp_v1);
   return;
 }

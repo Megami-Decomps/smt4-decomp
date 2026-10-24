@@ -1,41 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022a030` (_code @ 0x22a030, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct UnitRecord {
+    u8 unk00[0x2c];
+    s16 mp; // 0x2c
+};
 
 extern "C" {
 
-int dataTable04FindById(unsigned int);
+void dataTable04FindById(u32 id);
+UnitRecord *gameGetPlayerData(void);
+UnitRecord *gameGetSlotRecord(s32 slot);
+s32 FUN_003df57c(u32 id, u32 kind);
+s32 FUN_004bcbb4(UnitRecord *record, u32 id);
 
-extern int gameGetPlayerData(void);
-extern int gameGetSlotRecord(int);
-/* Supplied declaration required: dataTable04FindById. */
-extern int FUN_003df57c(unsigned int, unsigned int);
-extern int FUN_004bcbb4(int, unsigned int);
-
-
-unsigned int FUN_0022a030(int param_1,unsigned int param_2)
-
+// True when the unit (the player for a negative slot) has enough MP for the skill.
+u32 FUN_0022a030(s32 slot, u32 skill)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  dataTable04FindById(param_2);
-  if (param_1 < 0) {
-    temp_v0 = gameGetPlayerData();
-    temp_v1 = FUN_003df57c(param_2,1);
-    if (*(short *)(temp_v0 + 0x2c) < temp_v1) {
-      return 0;
+    u32 usable = 0;
+    dataTable04FindById(skill);
+    if (slot < 0) {
+        UnitRecord *player = gameGetPlayerData();
+        if (FUN_003df57c(skill, 1) <= player->mp) {
+            usable = 1;
+        }
+    } else {
+        UnitRecord *unit = gameGetSlotRecord(slot);
+        if (unit->mp >= FUN_004bcbb4(unit, skill)) {
+            usable = 1;
+        }
     }
-  }
-  else {
-    temp_v0 = gameGetSlotRecord(param_1);
-    temp_v1 = FUN_004bcbb4(temp_v0,param_2);
-    if (*(short *)(temp_v0 + 0x2c) < temp_v1) {
-      return 0;
-    }
-  }
-  return 1;
+    return usable;
 }
 
 } /* extern "C" */

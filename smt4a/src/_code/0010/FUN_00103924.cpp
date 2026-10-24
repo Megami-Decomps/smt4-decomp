@@ -21,7 +21,7 @@ extern unsigned char LAB_001039cc; /* 0x1039cc */
 /* Supplied declaration required: FUN_00103afc. */
 /* Supplied declaration required: wstrstrU16. */
 extern int wstrcmpU16(unsigned short *, char *);
-extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, unsigned short *);
+extern unsigned int _ZN9Obj55aff4C1EPKt(unsigned char *, unsigned short *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern unsigned int onlineUrlSetHost(unsigned int, unsigned short *);
 /* Supplied declaration required: FUN_002e934e. */
@@ -70,8 +70,8 @@ unsigned int FUN_00103924(unsigned int param_1,unsigned short *param_2,int param
       return temp_v3;
     }
   }
-  temp_v1 = _ZN9Obj55aff4C1EPKc(temp_v5,puVar5);
-  temp_v2 = _ZN9Obj55aff4C1EPKc(temp_v4,param_2);
+  temp_v1 = _ZN9Obj55aff4C1EPKt(temp_v5,puVar5);
+  temp_v2 = _ZN9Obj55aff4C1EPKt(temp_v4,param_2);
   FUN_00103afc(temp_v6,temp_v2,temp_v1,temp_v7);
   _ZN9Obj55aff4D1Ev(temp_v4);
   _ZN9Obj55aff4D1Ev(temp_v5);

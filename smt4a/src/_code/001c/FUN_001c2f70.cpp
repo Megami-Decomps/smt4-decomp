@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001b6694(unsigned int, int);
 
-extern unsigned int FUN_001b1f04(void);
+extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 /* Supplied declaration required: FUN_001b6694. */
 
 
@@ -52,7 +52,7 @@ void FUN_001c2f70(int param_1,unsigned int *param_2,unsigned int *param_3)
   *(unsigned int *)(param_1 + 0x1a8) = temp_v2;
   *(unsigned int *)(param_1 + 0x1ac) = temp_v3;
   *(unsigned char *)(param_1 + 0x164) = 1;
-  temp_v0 = FUN_001b1f04();
+  temp_v0 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
   FUN_001b6694(temp_v0,param_1 + 0x50);
   *(unsigned char *)(param_1 + 0x166) = 1;
   return;

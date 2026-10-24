@@ -1,43 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00196068` (_code @ 0x196068, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the 7th argument (4th word on the stack; the 6th is unused) is passed through VFP (vldr/vstr) in the build but through r7 (ldr, stm sp, {r5, r7}) in retail; the hash chain walk and the rest match. */
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
+extern AsdGfxContext g_asdGfxContext;
+extern u8 *g_commandBufferCursor;
 
-int FUN_001a9f08(void);
+void FUN_001a9f08(AsdCmdBuffer *buffer, u32 first, AsdCmdRecord *entries, u32 second, s32 index, u32 third);
 
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_5_stack;
-
-extern int g_commandBufferCursor; /* 0x5b40e0 */
-extern unsigned int *DAT_0061a50c; /* 0x61a50c */
-
-/* Supplied declaration required: FUN_001a9f08. */
-
-
-int FUN_00196068(unsigned int param_1,unsigned int param_2,int param_3,unsigned int param_4,int param_5)
-
+/* Finds the command buffer named `handle`, records how much of it has been written when it is the active one,
+ * then passes on the command record entries[index]; returns the address of that record's copy target. */
+void *FUN_00196068(u32 handle, u32 first, AsdCmdRecord *entries, u32 second, s32 index, u32 unused, u32 third)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  puVar1 = *(unsigned int **)((param_1 & 0x1f) * 4 + 0x61a48c);
-  if (puVar1 != (unsigned int *)0x0) {
-    do {
-      temp_v0 = *puVar1;
-      if (temp_v0 != param_1) {
-        puVar1 = (unsigned int *)puVar1[0x10];
-      }
-    } while (temp_v0 != param_1 && puVar1 != (unsigned int *)0x0);
-  }
-  if (DAT_0061a50c == puVar1) {
-    puVar1[3] = g_commandBufferCursor - puVar1[1];
-  }
-  FUN_001a9f08();
-  return param_3 + param_5 * 0x1c + 0x10;
+    // The linked-list pointer follows the shared buffer prefix; do not grow that prefix.
+    struct BufferNode { AsdCmdBuffer buffer; BufferNode *next; };
+    AsdCmdRecord *record = &entries[index];
+    BufferNode *node = reinterpret_cast<BufferNode *>(g_asdGfxContext.bufferRegistry.buckets[handle & 31]);
+
+    if (node != NULL) {
+        u32 id;
+        do {
+            id = node->buffer.unk00;
+            if (id != handle) {
+                node = node->next;
+            }
+        } while (id != handle && node != NULL);
+    }
+    if (g_asdGfxContext.cmdBuffer == &node->buffer) {
+        node->buffer.writeOffset = g_commandBufferCursor - node->buffer.start;
+    }
+    FUN_001a9f08(&node->buffer, first, entries, second, index, third);
+    return &record->unk10;
 }
 
 } /* extern "C" */

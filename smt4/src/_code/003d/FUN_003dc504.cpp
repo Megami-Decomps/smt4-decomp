@@ -1,77 +1,76 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dc504` (_code @ 0x3dc504, 0x184 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: guards and calls now match retail; armcc hoists each group's base address (work + group offset) out of the slot loop (r5) where retail adds the group offset to work + i*0x8c per iteration (and uses r4/r5/r6 for index/work/table). */
+#include "common.h"
+
+/* One loading slot (0x8C bytes). */
+struct LoadingSlot {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 resource;     /* what the slot loaded; 0 while it is still pending */
+    /* 0x08 */ u8 unk08[0x80];
+    /* 0x88 */ u8 flags;         /* bit 0: the slot is in use */
+};
+
+/* Something the loader waits on. */
+class LoadingReadiness {
+public:
+    virtual void vfunc00() = 0;
+    virtual void vfunc04() = 0;
+    virtual void vfunc08() = 0;
+    virtual void vfunc0c() = 0;
+    virtual void vfunc10() = 0;
+    virtual void vfunc14() = 0;
+    virtual s32 IsReady() = 0;
+};
+
+/* The loading screen's work area (the part this reads). */
+struct LoadingWork {
+    /* 0x0000 */ u8 unk0000[0x1cfc];
+    /* 0x1CFC */ void *table;       /* the loading table; NULL until it is set up */
+    /* 0x1D00 */ LoadingSlot slotsA[4];
+    /* 0x1F30 */ LoadingSlot slotsB[4];
+    /* 0x2160 */ LoadingSlot slotsC[4];
+    /* 0x2390 */ LoadingSlot slotsD[4];
+    /* 0x25C0 */ u8 unk25c0[0xa74];
+    /* 0x3034 */ LoadingReadiness *readiness;
+};
 
 extern "C" {
+void rt_memcpy_w(void *dest, const void *source, u32 bytes);
 
-int rt_memcpy_w(unsigned char [4], int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 2 slot(s), 5 byte(s) */
-typedef struct {
-    unsigned char sp18; /* 0x18: local_18 */
-    unsigned int sp9C; /* 0x9c: local_9c */
-} param_1_stack;
-
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int FUN_003dc504(int param_1)
-
+// Whether every slot in use has loaded its resource (nothing to check without a loading table).
+static inline bool slotsLoaded(void *table, const LoadingSlot *slots)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2 [4];
-  int temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v1 = *(int *)(param_1 + 0x1cfc);
-  if (temp_v1 != 0) {
-    temp_v0 = 0;
-    do {
-      rt_memcpy_w(temp_v2,param_1 + temp_v0 * 0x8c + 0x1d00,0x8c);
-      if (((temp_v4 & 1) != 0) && (temp_v3 == 0)) {
-        return 0;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 4);
-  }
-  if (temp_v1 != 0) {
-    temp_v0 = 0;
-    do {
-      rt_memcpy_w(temp_v2,param_1 + temp_v0 * 0x8c + 0x1f30,0x8c);
-      if (((temp_v4 & 1) != 0) && (temp_v3 == 0)) {
-        return 0;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 4);
-  }
-  if (temp_v1 != 0) {
-    temp_v0 = 0;
-    do {
-      rt_memcpy_w(temp_v2,param_1 + temp_v0 * 0x8c + 0x2160,0x8c);
-      if (((temp_v4 & 1) != 0) && (temp_v3 == 0)) {
-        return 0;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 4);
-  }
-  if (temp_v1 != 0) {
-    temp_v1 = 0;
-    do {
-      rt_memcpy_w(temp_v2,param_1 + temp_v1 * 0x8c + 0x2390,0x8c);
-      if (((temp_v4 & 1) != 0) && (temp_v3 == 0)) {
-        return 0;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 4);
-  }
-  if ((*(int **)(param_1 + 0x3034) != (int *)0x0) &&
-     (temp_v1 = (**(romwright_code **)(**(int **)(param_1 + 0x3034) + 0x18))(), temp_v1 == 0)) {
-    return 0;
-  }
-  return 1;
+    if (table != NULL) {
+        for (s32 i = 0; i < 4; i++) {
+            LoadingSlot slot;
+            rt_memcpy_w(&slot, &slots[i], sizeof(LoadingSlot));
+            if ((slot.flags & 1) && slot.resource == 0) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
-} /* extern "C" */
+// Whether every slot in use has finished loading and the loader's readiness object agrees.
+s32 FUN_003dc504(LoadingWork *work)
+{
+    void *table = work->table;
+    if (!slotsLoaded(table, work->slotsA)) {
+        return 0;
+    }
+    if (!slotsLoaded(table, work->slotsB)) {
+        return 0;
+    }
+    if (!slotsLoaded(table, work->slotsC)) {
+        return 0;
+    }
+    if (!slotsLoaded(table, work->slotsD)) {
+        return 0;
+    }
+    if (work->readiness != NULL && work->readiness->IsReady() == 0) {
+        return 0;
+    }
+    return 1;
+}
+
+}

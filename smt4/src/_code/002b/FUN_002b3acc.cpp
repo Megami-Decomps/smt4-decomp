@@ -25,8 +25,8 @@ typedef struct {
 
 extern unsigned char DAT_00421204; /* 0x421204 */
 extern unsigned char DAT_004217ec; /* 0x4217ec */
-extern unsigned int DAT_00476634; /* 0x476634 */
-extern unsigned int DAT_004efd6c; /* 0x4efd6c */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x476634 */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x4efd6c */
 extern unsigned int DAT_004efd70; /* 0x4efd70 */
 extern unsigned int DAT_004efd74; /* 0x4efd74 */
 extern unsigned int DAT_004efd78; /* 0x4efd78 */
@@ -224,8 +224,8 @@ int * FUN_002b3acc(char *param_1,int param_2,int param_3,int *param_4)
     temp_v7 = 0x3f800000;
     piVar9[0x62] = *(int *)(param_1 + 0x10);
     temp_v8 = 0;
-    if (((DAT_00476634 & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_00476634), temp_v1 != 0)) {
-      DAT_004efd6c = temp_v7;
+    if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v1 != 0)) {
+      _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v7;
       DAT_004efd70 = temp_v8;
       DAT_004efd74 = temp_v8;
       DAT_004efd78 = temp_v8;
@@ -238,9 +238,9 @@ int * FUN_002b3acc(char *param_1,int param_2,int param_3,int *param_4)
       DAT_004efd94 = temp_v7;
       DAT_004efd98 = temp_v8;
     }
-    nn_math_ARMv6_MTX34CopyAsm(piVar9 + 99,&DAT_004efd6c);
-    if (((DAT_00476634 & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_00476634), temp_v1 != 0)) {
-      DAT_004efd6c = temp_v7;
+    nn_math_ARMv6_MTX34CopyAsm(piVar9 + 99,&_ZZN2nw4math5MTX348IdentityEvE8identity);
+    if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v1 != 0)) {
+      _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v7;
       DAT_004efd70 = temp_v8;
       DAT_004efd74 = temp_v8;
       DAT_004efd78 = temp_v8;
@@ -253,7 +253,7 @@ int * FUN_002b3acc(char *param_1,int param_2,int param_3,int *param_4)
       DAT_004efd94 = temp_v7;
       DAT_004efd98 = temp_v8;
     }
-    nn_math_ARMv6_MTX34CopyAsm(piVar9 + 0x6f,&DAT_004efd6c);
+    nn_math_ARMv6_MTX34CopyAsm(piVar9 + 0x6f,&_ZZN2nw4math5MTX348IdentityEvE8identity);
     piVar9[0x7b] = 0;
     *(unsigned char *)(piVar9 + 0x7c) = 1;
     *(unsigned char *)(piVar9 + 0x7d) = 0;

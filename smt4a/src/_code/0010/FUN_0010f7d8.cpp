@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00117e6a(int, int, int, unsigned int);
 int _ZN9Obj55aff4D1Ev(unsigned char [8]);
-int vectorCopyHeader(int, int *);
+int _ZN18OnlineResultRecordaSERKS_(int, int *);
 int FUN_002ea3c0(...);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(int *, int);
@@ -26,10 +26,10 @@ extern unsigned char LAB_0010f884; /* 0x10f884 */
 extern unsigned char LAB_0010f91d; /* 0x10f91d */
 
 /* Supplied declaration required: FUN_00117e6a. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
-/* Supplied declaration required: vectorCopyHeader. */
-extern unsigned int FUN_002ea100(unsigned char *, unsigned int);
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
+extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002ea3c0. */
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
@@ -54,7 +54,7 @@ void FUN_0010f7d8(int param_1)
   
   (**(romwright_code **)(**(int **)(param_1 + 0xd8) + 0xc))
             (*(int **)(param_1 + 0xd8),*(unsigned int *)(param_1 + 0x6c));
-  temp_v0 = FUN_002ea100(temp_v6,*(unsigned int *)(param_1 + 0x88));
+  temp_v0 = _ZN9Obj55aff4C1EPKc(temp_v6,*(unsigned int *)(param_1 + 0x88));
   temp_v5 = *(unsigned int *)(param_1 + 0xb8);
   uStack_34 = *(unsigned int *)(param_1 + 0xb4);
   iStack_38 = param_1 + 0xac;
@@ -66,13 +66,13 @@ void FUN_0010f7d8(int param_1)
   _ZN9Obj55aff4D1Ev(temp_v6);
   if (temp_v1 != 1) {
     FUN_002ea41e(&temp_v3,temp_v2);
-    vectorCopyHeader(param_1 + 200,&temp_v3);
+    _ZN18OnlineResultRecordaSERKS_(param_1 + 200,&temp_v3);
     temp_v0 = FUN_002ea3c0(temp_v7,&LAB_0010f57d,0,&LAB_0010f884);
     FUN_002ea3d0(param_1,temp_v0);
   }
   else {
     onlineJobSetStateWaiting(param_1);
-    temp_v1 = operatorNew(0x10);
+    temp_v1 = _Znwj(0x10);
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v0 = FUN_002ea3c0(temp_v1,&LAB_0010f91d,0,&LAB_0010f884);

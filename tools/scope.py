@@ -26,7 +26,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 GAMES = ("smt4", "smt4a")
 THIRD_PARTY = re.compile(r"^(?:nn_|nw_|nngx|nnos|nnsnd|libc_|rt_|__|svc[A-Z]|online|nex|NEX|mwmo|mobiclip|Mobiclip"
-                         r"|vldtr_|streamReader|streamWriter|sharedRef|wstr|_Z\w*(?:2nn|2nw))")
+                         r"|vldtr_|streamReader|streamWriter|sharedRef|wstr|_Z\w*(?:2nn|2nw)"
+                         r"|_ZN?K?St|_ZN?K?4__rw|_Zn[wa]j|_Zd[la]Pv)")
 FIRST_PARTY = re.compile(r"^(?:asd|Asd|_ZN\d+Asd)")
 ADDRESS_FOLDER = re.compile(r"[0-9a-f]{4}")
 

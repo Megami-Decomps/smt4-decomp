@@ -4,7 +4,7 @@
 struct GpuFloatVector4 { f32 x, y, z, w; };
 
 extern "C" u32 DAT_004e31a0[256];
-extern "C" void FUN_002a9170(const u32 *first, const u32 *second, const u32 *coordinates);
+extern "C" void gpuSubmitVectorCommand(const u32 *first, const u32 *second, const u32 *coordinates);
 
 static __forceinline u32 encodeGpuFloat24(f32 value)
 {
@@ -38,5 +38,5 @@ extern "C" void gpuSubmitFloat24Vectors(const GpuFloatVector4 *second, f32 x, f3
     vectors.second[0] = secondX | (secondY << 24);
     vectors.second[1] = (secondY >> 8) | (secondZ << 16);
     vectors.second[2] = (secondZ >> 16) | (secondW << 8);
-    FUN_002a9170(vectors.first, vectors.second, vectors.coordinates);
+    gpuSubmitVectorCommand(vectors.first, vectors.second, vectors.coordinates);
 }

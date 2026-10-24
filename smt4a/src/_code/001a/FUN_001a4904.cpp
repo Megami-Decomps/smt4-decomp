@@ -62,8 +62,8 @@ typedef struct {
     unsigned int sp138; /* 0x138: local_138 */
 } param_3_stack;
 
-extern unsigned int DAT_005c4c30; /* 0x5c4c30 */
-extern float DAT_0064c084; /* 0x64c084 */
+extern unsigned int _ZGVZN2nw4math5MTX448IdentityEvE8identity; /* 0x5c4c30 */
+extern float _ZZN2nw4math5MTX448IdentityEvE8identity; /* 0x64c084 */
 extern float DAT_0064c088; /* 0x64c088 */
 extern float DAT_0064c08c; /* 0x64c08c */
 extern float DAT_0064c090; /* 0x64c090 */
@@ -172,10 +172,10 @@ LAB_001a49b8:
       if (temp_v1 != '\0') {
         if (temp_v1 != '\x01') {
           if (temp_v1 != '\x02') {
-            if ((DAT_005c4c30 & 1) == 0) {
-              temp_v3 = __cxa_guard_acquire(&DAT_005c4c30);
+            if ((_ZGVZN2nw4math5MTX448IdentityEvE8identity & 1) == 0) {
+              temp_v3 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX448IdentityEvE8identity);
               if (temp_v3 != 0) {
-                DAT_0064c084 = temp_v13;
+                _ZZN2nw4math5MTX448IdentityEvE8identity = temp_v13;
                 DAT_0064c088 = temp_v12;
                 DAT_0064c08c = temp_v12;
                 DAT_0064c090 = temp_v12;
@@ -193,7 +193,7 @@ LAB_001a49b8:
                 DAT_0064c0c0 = temp_v13;
               }
             }
-            mtx44Copy(temp_v19,&DAT_0064c084);
+            mtx44Copy(temp_v19,&_ZZN2nw4math5MTX448IdentityEvE8identity);
           }
           else {
             temp_v11 = *(float *)(temp_v7 + 0xa4);

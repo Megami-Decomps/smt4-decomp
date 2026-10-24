@@ -21,7 +21,7 @@ typedef struct VoiceBank {
 
 extern void FUN_00463894(u32 value);
 extern void nw_snd_internal_driver_Voice_Stop(s32 voice);
-extern u32 FUN_001b1f04(void);
+extern u32 _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 extern void FUN_001d0b28(u32 owner, u8 *other);
 
 /* Stops every started voice slot (0x3C8 bytes each) and releases the driver registration. */
@@ -36,7 +36,7 @@ void voiceBankStop(VoiceBank *bank)
         }
     }
     if (bank->registered != 0) {
-        FUN_001d0b28(FUN_001b1f04(), bank->block44);
+        FUN_001d0b28(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(), bank->block44);
         bank->registered = 0;
     }
 }

@@ -44,7 +44,7 @@ int scrScriptProcessStartEntry(...);
 int FUN_002a4894(...);
 int statusDownRestartTransition(void);
 int flaggedEntrySetValueA(...);
-int FUN_0032fea0(...);
+int arrayContainsU16(...);
 int whisperEffectFinish(void);
 int FUN_003df4a4(...);
 int recordContainsPairedId(...);
@@ -116,7 +116,7 @@ extern int whisperEffectIsIdle(void);
 extern int flaggedEntryGetValueA(void);
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern int btlTalkBustUpGetValue(void);
-/* Supplied declaration required: FUN_0032fea0. */
+/* Supplied declaration required: arrayContainsU16. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 /* Supplied declaration required: FUN_003450d4. */
 extern int uiSearchPrimary(unsigned int);
@@ -397,7 +397,7 @@ void FUN_0026cbb8(int param_1)
           temp_v9 = -1;
 LAB_0026e174:
           temp_v4 = *(short *)(temp_v6 + temp_v9 * 2 + 0x34);
-          if ((temp_v4 != 0) && (temp_v20 = temp_v27, FUN_0032fea0(temp_v27,8,temp_v4), temp_v20 != 0)) {
+          if ((temp_v4 != 0) && (temp_v20 = temp_v27, arrayContainsU16(temp_v27,8,temp_v4), temp_v20 != 0)) {
             temp_v20 = 0;
             do {
               psVar15 = (short *)(temp_v27 + temp_v20 * 2);
@@ -687,9 +687,9 @@ LAB_0026e1e4:
       temp_v14 = temp_v5 + temp_v9 * 2;
       if (*(short *)(temp_v14 + 0x34) != 0) {
         temp_v20 = temp_v29;
-        FUN_0032fea0(temp_v29,8);
+        arrayContainsU16(temp_v29,8);
         if ((temp_v20 == 0) &&
-           (temp_v20 = temp_v27, FUN_0032fea0(temp_v27,8,*(unsigned short *)(temp_v14 + 0x34)), temp_v20 != 0)
+           (temp_v20 = temp_v27, arrayContainsU16(temp_v27,8,*(unsigned short *)(temp_v14 + 0x34)), temp_v20 != 0)
            ) {
           *(unsigned short *)(param_1 + *puVar27 * 2 + 0x76c4) = *(unsigned short *)(temp_v14 + 0x34);
           *puVar27 = *puVar27 + 1;
@@ -839,7 +839,7 @@ LAB_0026e66c:
                 }
               }
               temp_v14 = temp_v27;
-              FUN_0032fea0(temp_v27,temp_v7);
+              arrayContainsU16(temp_v27,temp_v7);
               if (temp_v14 == 0 && !temp_v22) {
                 gamePlayerClearPairedId(*(unsigned short *)(temp_v6 + temp_v9 * 2 + 0x34));
                 break;
@@ -965,13 +965,13 @@ LAB_0026e66c:
     temp_v7 = (unsigned int)*(unsigned short *)(temp_v9 + 0x34);
     FUN_002685cc();
     if ((temp_v7 == 0) ||
-       (temp_v14 = temp_v29, FUN_0032fea0(temp_v29,*puVar27,*(unsigned short *)(temp_v9 + 0x34)),
+       (temp_v14 = temp_v29, arrayContainsU16(temp_v29,*puVar27,*(unsigned short *)(temp_v9 + 0x34)),
        temp_v14 != 0)) {
       temp_v7 = (unsigned int)*(unsigned short *)(temp_v9 + 0x34);
       FUN_002685cc();
       if (temp_v7 != 0) {
         temp_v5 = temp_v29;
-        FUN_0032fea0(temp_v29,*puVar27,*(unsigned short *)(temp_v9 + 0x34));
+        arrayContainsU16(temp_v29,*puVar27,*(unsigned short *)(temp_v9 + 0x34));
         if (temp_v5 == 0) {
           eventQueueAddUniqueIfValid(0x100020f);
           return;
@@ -1044,7 +1044,7 @@ LAB_0026d5fc:
       }
 LAB_0026d4c4:
       temp_v5 = temp_v27;
-      FUN_0032fea0(temp_v27,8,*(unsigned short *)(temp_v9 + 0x34));
+      arrayContainsU16(temp_v27,8,*(unsigned short *)(temp_v9 + 0x34));
       if (temp_v5 != 0) {
         uiSpriteSelectAnim(param_1 + temp_v28 * 0x8c + 0xd40,6);
         temp_v5 = 0;
@@ -1120,7 +1120,7 @@ LAB_0026d4c4:
           do {
             temp_v17 = temp_v5 + temp_v20 * 2;
             temp_v15 = temp_v11;
-            FUN_0032fea0(temp_v11,*puVar24,*(unsigned short *)(temp_v17 + 0x34));
+            arrayContainsU16(temp_v11,*puVar24,*(unsigned short *)(temp_v17 + 0x34));
             if (temp_v15 == 0) {
               temp_v7 = (unsigned int)*(unsigned short *)(temp_v17 + 0x34);
               FUN_002685cc();
@@ -1141,7 +1141,7 @@ LAB_0026d4c4:
           do {
             temp_v15 = temp_v5 + temp_v20 * 2;
             temp_v14 = temp_v11;
-            FUN_0032fea0(temp_v11,*puVar24,*(unsigned short *)(temp_v15 + 0x34));
+            arrayContainsU16(temp_v11,*puVar24,*(unsigned short *)(temp_v15 + 0x34));
             if (temp_v14 == 0) {
               temp_v7 = (unsigned int)*(unsigned short *)(temp_v15 + 0x34);
               FUN_002685cc();

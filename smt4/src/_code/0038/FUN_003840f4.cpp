@@ -20,7 +20,7 @@ int FUN_002a09b4(unsigned char [144], int);
 int textFormatBuffer(...);
 int asdOperatorNew(void);
 int memClear(void);
-void FUN_002d582c(unsigned int, float);
+void animOwnerSetScale(unsigned int, float);
 int FUN_002e1230(unsigned int, int);
 int sysResetTimestampState(void);
 
@@ -51,10 +51,10 @@ extern int storyModeCanProceed(unsigned char);
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a09b4. */
 /* Supplied declaration required: textFormatBuffer. */
-extern int FUN_002c2218(int);
+extern int _ZN10FloatStateC1Ev(int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_002d582c. */
+/* Supplied declaration required: animOwnerSetScale. */
 /* Supplied declaration required: FUN_002e1230. */
 extern int timerStampIsExpired(void);
 /* Supplied declaration required: sysResetTimestampState. */
@@ -134,7 +134,7 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
     *(unsigned char **)(temp_v3 + 0xd10) = puVar2;
     FUN_002a0428();
     modelSetAnimationChannels(*puVar5,0);
-    FUN_002d582c(*puVar5, 0.0f);
+    animOwnerSetScale(*puVar5, 0.0f);
     FUN_002e1230(*puVar5,0);
     textFormatBuffer(temp_v8,&LAB_00384428,
                  *(unsigned int *)(temp_v4 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),temp_v1 + 1);
@@ -144,7 +144,7 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
     *(unsigned char **)(temp_v3 + 0xd28) = puVar2;
     FUN_002a0428();
     modelSetAnimationChannels(*piVar7,0);
-    FUN_002d582c(*piVar7, 1.0f);
+    animOwnerSetScale(*piVar7, 1.0f);
     FUN_002e1230(*puVar5,1);
     puVar3 = (unsigned int *)*piVar7;
     temp_v1 = temp_v1 + 1;
@@ -168,7 +168,7 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
   temp_v3 = 0;
   if (temp_v2 != 0) {
     memClear();
-    temp_v3 = FUN_002c2218(temp_v2 + 0x4cc);
+    temp_v3 = _ZN10FloatStateC1Ev(temp_v2 + 0x4cc);
     temp_v3 = temp_v3 - 0x4cc;
   }
   *(int *)(param_1 + 0xfac) = temp_v3;

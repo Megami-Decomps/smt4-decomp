@@ -1,54 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00227a70` (_code @ 0x227a70, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct MapCollision {
+    u8 loaded;         // 0x00
+    u8 ready;          // 0x01
+    u8 unk02[2];       // 0x02
+    u32 unk04;         // 0x04
+    u32 unk08;         // 0x08
+    u32 unk0C;         // 0x0C
+    u32 unk10;         // 0x10
+    u32 unk14;         // 0x14
+    void *bufferA;     // 0x18
+    void *bufferB;     // 0x1C
+    void *bufferC;     // 0x20
+    void *bufferD;     // 0x24
+};
 
 extern "C" {
 
-int asdMemFree(void);
+extern MapCollision g_mapCollision;
 
-extern unsigned char g_mapCollision; /* 0x580204 */
-extern unsigned char DAT_00580205; /* 0x580205 */
-extern unsigned int DAT_00580208; /* 0x580208 */
-extern unsigned int DAT_0058020c; /* 0x58020c */
-extern unsigned int DAT_00580210; /* 0x580210 */
-extern unsigned int DAT_00580214; /* 0x580214 */
-extern unsigned int DAT_00580218; /* 0x580218 */
-extern int DAT_0058021c; /* 0x58021c */
-extern int DAT_00580220; /* 0x580220 */
-extern int DAT_00580224; /* 0x580224 */
-extern int DAT_00580228; /* 0x580228 */
+void asdMemFree(void *block);
 
-/* Supplied declaration required: asdMemFree. */
-
-
+/* Frees the collision buffers and clears the collision state. */
 void FUN_00227a70(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  if (DAT_0058021c != 0) {
-    asdMemFree();
-    DAT_0058021c = 0;
-  }
-  if (DAT_00580220 != 0) {
-    asdMemFree();
-    DAT_00580220 = 0;
-  }
-  if (DAT_00580224 != 0) {
-    asdMemFree();
-    DAT_00580224 = 0;
-  }
-  if (DAT_00580228 != 0) {
-    asdMemFree();
-    DAT_00580228 = 0;
-  }
-  DAT_00580208 = 0;
-  DAT_0058020c = 0;
-  DAT_00580210 = 0;
-  DAT_00580214 = 0;
-  DAT_00580218 = 0;
-  g_mapCollision = 0;
-  DAT_00580205 = 0;
-  return;
+    if (g_mapCollision.bufferA != NULL) {
+        asdMemFree(g_mapCollision.bufferA);
+        g_mapCollision.bufferA = NULL;
+    }
+    if (g_mapCollision.bufferB != NULL) {
+        asdMemFree(g_mapCollision.bufferB);
+        g_mapCollision.bufferB = NULL;
+    }
+    if (g_mapCollision.bufferC != NULL) {
+        asdMemFree(g_mapCollision.bufferC);
+        g_mapCollision.bufferC = NULL;
+    }
+    if (g_mapCollision.bufferD != NULL) {
+        asdMemFree(g_mapCollision.bufferD);
+        g_mapCollision.bufferD = NULL;
+    }
+    g_mapCollision.unk04 = 0;
+    g_mapCollision.unk08 = 0;
+    g_mapCollision.unk0C = 0;
+    g_mapCollision.unk10 = 0;
+    g_mapCollision.unk14 = 0;
+    g_mapCollision.loaded = 0;
+    g_mapCollision.ready = 0;
 }
 
 } /* extern "C" */

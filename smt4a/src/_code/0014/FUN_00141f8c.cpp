@@ -14,7 +14,7 @@ int wstrBufferPutChar(...);
 int FUN_0014f2a8(...);
 int uiGetTableEntry(...);
 int FUN_0015f858(unsigned int, int);
-int FUN_0016432c(int);
+int dataTable25FindById(int);
 int FUN_001654f0(...);
 int FUN_001654f8(...);
 int FUN_001695a0(void);
@@ -51,7 +51,7 @@ extern unsigned int FUN_00156868(void);
 extern unsigned int gameGetPlayerName(void);
 extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_0015f858. */
-/* Supplied declaration required: FUN_0016432c. */
+/* Supplied declaration required: dataTable25FindById. */
 /* Supplied declaration required: FUN_001654f0. */
 /* Supplied declaration required: FUN_001654f8. */
 /* Supplied declaration required: messageMainSetMode. */
@@ -84,7 +84,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
   if (param_1 != 0xf875) {
     if (param_1 < 0xf875) {
       if (param_1 == 0xf870) {
-        FUN_0016432c(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
+        dataTable25FindById(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
         FUN_001654f8();
         *param_4 = *param_4 + 1;
         wstrBufferPutChar(param_3,param_5,0x12f8,param_6);

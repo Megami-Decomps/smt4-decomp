@@ -1,47 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019f764` (_code @ 0x19f764, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads the force flag through a 0x11F4 offset register and copies the texture size pair with ldm rather than ldrd; the flag store also lands earlier. */
+#include "common.h"
+#include <stddef.h>
 
 extern "C" {
 
-int dataSubmitSelectedPresetBlock(unsigned int);
-int FUN_001ac64c(unsigned int, unsigned int, unsigned int, unsigned int);
-
-typedef struct fn_0019f764_arg0 fn_0019f764_arg0;
-struct fn_0019f764_arg0 {
-    unsigned char pad_0x0[0x11f0];
-    uint field_0x11f0; /* +0x11f0 */
-    byte field_0x11f4; /* +0x11f4 */
-    byte field_0x11f5; /* +0x11f5 */
+/* A width/height pair. */
+struct TextureSize {
+    u32 width;
+    u32 height;
 };
 
-/* Supplied declaration required: dataSubmitSelectedPresetBlock. */
-/* Supplied declaration required: FUN_001ac64c. */
+/* A texture description: size at 0x14, address and format at 0x30 and 0x34. */
+struct TextureDesc {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ TextureSize size;
+    /* 0x1C */ u8 unk1C[0x14];
+    /* 0x30 */ u32 address;
+    /* 0x34 */ u32 format;
+};
 
+/* The render state: the current texture and a texture-environment mode. */
+struct TextureState {
+    /* 0x0000 */ u8 unk0000[0x11F0];
+    /* 0x11F0 */ TextureDesc *texture;
+    /* 0x11F4 */ u8 forceUpdate;
+    /* 0x11F5 */ u8 mode;
+};
 
-void FUN_0019f764(fn_0019f764_arg0 *param_1,unsigned int param_2,unsigned int param_3)
+void dataSubmitSelectedPresetBlock(u32 mode);
+void FUN_001ac64c(TextureSize size, u32 format, u32 address);
 
+/* Binds a texture (skipped if unchanged and not forced) and selects the mode. */
+void FUN_0019f764(TextureState *state, TextureDesc *texture, u32 mode)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  
-  temp_v0 = (unsigned int)param_1->field_0x11f4;
-  temp_v1 = temp_v0 == 0;
-  if (temp_v1) {
-    temp_v0 = param_1->field_0x11f0;
-  }
-  if ((!temp_v1 || temp_v0 != param_2) && (param_1->field_0x11f0 = param_2, param_2 != 0)) {
-    FUN_001ac64c(*(unsigned int *)(param_2 + 0x14),*(unsigned int *)(param_2 + 0x18),
-                 *(unsigned int *)(param_2 + 0x34),*(unsigned int *)(param_2 + 0x30));
-    param_1->field_0x11f5 = 3;
-  }
-  param_1->field_0x11f4 = 0;
-  if (param_1->field_0x11f5 != param_3) {
-    dataSubmitSelectedPresetBlock(param_3);
-    param_1->field_0x11f5 = (unsigned char)param_3;
-  }
-  return;
+    if ((state->forceUpdate != 0 || state->texture != texture) && (state->texture = texture, texture != NULL)) {
+        FUN_001ac64c(texture->size, texture->format, texture->address);
+        state->mode = 3;
+    }
+    state->forceUpdate = 0;
+    if (state->mode != mode) {
+        dataSubmitSelectedPresetBlock(mode);
+        state->mode = mode;
+    }
 }
 
 } /* extern "C" */

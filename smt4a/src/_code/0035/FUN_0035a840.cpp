@@ -1,87 +1,115 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035a840` (_code @ 0x35a840, 0x138 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: svc 0x24 (wrapper), the thread destructor (nn/os/Thread.h) and the control flow match; armcc computes the thread address (state + 0x7fc) before the wait where retail computes it after (add/add/mov r5, r0) and loads the zero into r6 right after the wait. */
+#include "common.h"
+#include "nn/os/AddressSpaceManager.h"
+#include "nn/Result.h"
+#include "nn/os/Thread.h"
+#include <stddef.h>
+
+/* The memory mapped for the loader's stack: its destructor unmaps it, and the block goes back
+ * through the engine's operator delete. */
+struct StackRegion : AddressSpaceRegion {
+    ~StackRegion();
+    static void operator delete(void *block);
+};
+
+/* The script process of the state machine, of which only the run state is known. */
+struct ScriptProcess {
+    u8 unk000[0x108];
+    u32 state;  // 0x108
+};
+
+/* The state machine that loads a script on a loader thread and starts it. */
+struct ScriptLoadState {
+    /* 0x000 */ u8 unk000[0xa0];
+    /* 0x0a0 */ u32 phase;
+    /* 0x0a4 */ u8 unk0a4[0x2ac];
+    /* 0x350 */ void *scriptData;
+    /* 0x354 */ u32 scriptSize;
+    /* 0x358 */ u8 unk358[8];
+    /* 0x360 */ ScriptProcess *process;
+    /* 0x364 */ u8 unk364[0x4c];
+    /* 0x3b0 */ u32 running;
+    /* 0x3b4 */ u8 unk3b4[0x38];
+    /* 0x3ec */ u8 results[1000];
+    /* 0x7d4 */ u8 unk7d4;
+    /* 0x7d5 */ u8 startImmediately;
+    /* 0x7d6 */ u8 unk7d6[0x1a];
+    /* 0x7f0 */ u8 stopRequested;
+    /* 0x7f1 */ u8 unk7f1[3];
+    /* 0x7f4 */ s32 loadState;           /* 2 once the thread has been told to stop */
+    /* 0x7f8 */ StackRegion *stackRegion;
+    /* 0x7fc */ NnOsThread thread;
+    /* 0x804 */ void *threadStack;
+};
+typedef char ScriptLoadStateOffsets[offsetof(ScriptLoadState, loadState) == 0x7f4 &&
+    offsetof(ScriptLoadState, thread) == 0x7fc &&
+    offsetof(ScriptLoadState, threadStack) == 0x804 ? 1 : -1];
 
 extern "C" {
-
-int gameDataFlagsClearBits(int);
-int gameDataBlocksReleaseHold(int);
-int FUN_001469a8(...);
-int asdMemFree(unsigned int);
-int FUN_001a0d08(void);
-int gameDataBlocksAddFlags(int);
-int FUN_00275bc8(int, unsigned int);
-int scrScriptProcessStartEntry(unsigned int, int);
-int gameDataAddHomeButtonHold(int);
-int FUN_002e3140(void);
-int asdOperatorDelete(int);
-int rt_aeabi_memclr(int, int);
-int software_interrupt(int);
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: gameDataFlagsClearBits. */
-/* Supplied declaration required: gameDataBlocksReleaseHold. */
-/* Supplied declaration required: FUN_001469a8. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001a0d08. */
-/* Supplied declaration required: gameDataBlocksAddFlags. */
-/* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: gameDataAddHomeButtonHold. */
-/* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: rt_aeabi_memclr. */
-
-
-unsigned int FUN_0035a840(int param_1)
-
-{
-/* irregular: 13 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = 0;
-  if (*(int *)(param_1 + 0x7f4) == 2) {
-    *(unsigned char *)(param_1 + 0x7f0) = 1;
-    software_interrupt(0x24);
-    if (*(int *)(param_1 + 0x7fc) < 0) {
-      FUN_002e3140();
-    }
-    *(unsigned char *)(param_1 + 0x800) = 1;
-    FUN_001a0d08();
-    if (*(int *)(param_1 + 0x7fc) != 0) {
-      software_interrupt(0x23);
-      *(int *)(param_1 + 0x7fc) = 0;
-    }
-    FUN_001469a8(*(unsigned int *)(param_1 + 0x7f8));
-    temp_v1 = *(int *)(param_1 + 0x7f8);
-    if (temp_v1 != 0) {
-      FUN_001469a8();
-      asdOperatorDelete(temp_v1);
-    }
-    *(unsigned int *)(param_1 + 0x7f8) = 0;
-    asdMemFree(*(unsigned int *)(param_1 + 0x804));
-    *(unsigned int *)(param_1 + 0x804) = 0;
-    gameDataBlocksReleaseHold(2);
-    gameDataFlagsClearBits(2);
-    temp_v1 = *(int *)(param_1 + 0x350);
-    FUN_00275bc8(temp_v1,*(unsigned int *)(param_1 + 0x354));
-    *(int *)(param_1 + 0x360) = temp_v1;
-    *(unsigned int *)(temp_v1 + 0x108) = 2;
-    *(unsigned int *)(param_1 + 0x3b0) = 1;
-    if (*(char *)(param_1 + 0x7d5) != '\x01') {
-      *(unsigned int *)(param_1 + 0xa0) = 8;
-    }
-    else {
-      *(unsigned int *)(param_1 + 0xa0) = 0;
-      rt_aeabi_memclr(param_1 + 0x3ec,1000);
-      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x360),0x28);
-      gameDataAddHomeButtonHold(2);
-      gameDataBlocksAddFlags(2);
-    }
-    temp_v0 = 3;
-  }
-  return temp_v0;
+s32 svcWaitSynchronization1(u32 handle, s64 timeout);
+void FUN_002e3140(s32 result);
+void nn_os_Thread_FinalizeImpl(u32 *thread);
+void FUN_001469a8(AddressSpaceRegion *region);
+void asdOperatorDelete(void *block);
+void asdMemFree(void *block);
+void gameDataBlocksReleaseHold(u32 mask);
+void gameDataFlagsClearBits(u32 mask);
+ScriptProcess *FUN_00275bc8(void *data, u32 size);
+void rt_aeabi_memclr(void *memory, u32 size);
+void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
+void gameDataAddHomeButtonHold(u32 mask);
+void gameDataBlocksAddFlags(u32 mask);
 }
 
-} /* extern "C" */
+inline StackRegion::~StackRegion()
+{
+    FUN_001469a8(this);
+}
+
+inline void StackRegion::operator delete(void *block)
+{
+    asdOperatorDelete(block);
+}
+
+/* Once the loader has been told to stop: joins its thread, frees its stack, releases the
+ * game-data holds and starts the loaded script. Returns 3 when it did, 0 while still waiting. */
+extern "C" u32 FUN_0035a840(ScriptLoadState *state)
+{
+    u32 next = 0;
+
+    if (state->loadState == 2) {
+        state->stopRequested = 1;
+        s32 result = svcWaitSynchronization1(state->thread.handle, -1);
+        if (nnResultIsFailure(result)) {
+            FUN_002e3140(result);
+        }
+        state->thread.joined = 1;
+        nn_os_Thread_FinalizeImpl(&state->thread.handle);
+        if (state->thread.handle != 0) {
+            svcCloseHandle(state->thread.handle);
+            state->thread.handle = 0;
+        }
+        FUN_001469a8(state->stackRegion);
+        delete state->stackRegion;
+        state->stackRegion = NULL;
+        asdMemFree(state->threadStack);
+        state->threadStack = NULL;
+        gameDataBlocksReleaseHold(2);
+        gameDataFlagsClearBits(2);
+        ScriptProcess *process = FUN_00275bc8(state->scriptData, state->scriptSize);
+        state->process = process;
+        process->state = 2;
+        state->running = 1;
+        if (state->startImmediately == 1) {
+            state->phase = 0;
+            rt_aeabi_memclr(state->results, 1000);
+            scrScriptProcessStartEntry(state->process, 0x28);
+            gameDataAddHomeButtonHold(2);
+            gameDataBlocksAddFlags(2);
+        } else {
+            state->phase = 8;
+        }
+        next = 3;
+    }
+    return next;
+}

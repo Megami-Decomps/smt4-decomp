@@ -5,7 +5,7 @@
 extern "C" {
 
 int pairSetFirstResetSecond(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int FUN_002bf818(...);
 int SBORROW4(unsigned int, int);
 
@@ -17,7 +17,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: pairSetFirstResetSecond. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: FUN_002bf818. */
 
 
@@ -106,7 +106,7 @@ void FUN_001f53d0(int param_1)
             FUN_002bf818();
             FUN_002bf818();
             if ((*(char *)(temp_v3 + 0x1112) != '\0') && (*(int *)(temp_v3 + 0x59c) == 6)) {
-              FUN_002bee58(temp_v3 + 0x598,0);
+              spriteStartAnimationByIndex(temp_v3 + 0x598,0);
             }
           }
         }
@@ -118,9 +118,9 @@ void FUN_001f53d0(int param_1)
     if (0 < *(short *)(param_1 + 0x218c)) {
       do {
         temp_v3 = param_1 + temp_v9 * 0x8c;
-        FUN_002bee58(temp_v3 + 0xb10,6);
-        FUN_002bee58(temp_v3 + 0x1088,4);
-        FUN_002bee58(temp_v3 + 0x598,0);
+        spriteStartAnimationByIndex(temp_v3 + 0xb10,6);
+        spriteStartAnimationByIndex(temp_v3 + 0x1088,4);
+        spriteStartAnimationByIndex(temp_v3 + 0x598,0);
         temp_v9 = temp_v9 + 1;
       } while (temp_v9 < *(short *)(param_1 + 0x218c));
     }
@@ -130,9 +130,9 @@ void FUN_001f53d0(int param_1)
         temp_v6 = (*(short *)(param_1 + 0x218c) - temp_v9) - 1;
         temp_v3 = param_1 + temp_v6 * 0x8c;
         pairSetFirstResetSecond(temp_v3 + 0x598,6);
-        FUN_002bee58(temp_v3 + 0x598,1);
-        FUN_002bee58(temp_v3 + 0xb10,6);
-        FUN_002bee58(temp_v3 + 0x1088,4);
+        spriteStartAnimationByIndex(temp_v3 + 0x598,1);
+        spriteStartAnimationByIndex(temp_v3 + 0xb10,6);
+        spriteStartAnimationByIndex(temp_v3 + 0x1088,4);
         if ((temp_v6 < 10) && (temp_v3 = param_1 + temp_v6 * 2, *(short *)(temp_v3 + 0x21e4) < 0)) {
           *(unsigned short *)(temp_v3 + 0x21e4) = 0;
         }
@@ -304,9 +304,9 @@ LAB_001f5adc:
     if (0 < temp_v2) {
       do {
         temp_v3 = param_1 + temp_v9 * 0x8c;
-        FUN_002bee58(temp_v3 + 0xb10,6);
-        FUN_002bee58(temp_v3 + 0x1088,4);
-        FUN_002bee58(temp_v3 + 0x598,0);
+        spriteStartAnimationByIndex(temp_v3 + 0xb10,6);
+        spriteStartAnimationByIndex(temp_v3 + 0x1088,4);
+        spriteStartAnimationByIndex(temp_v3 + 0x598,0);
         temp_v9 = temp_v9 + 1;
       } while (temp_v9 < *(short *)(param_1 + 0x218c));
     }
@@ -315,9 +315,9 @@ LAB_001f5adc:
       do {
         temp_v3 = param_1 + ((*(short *)(param_1 + 0x218c) - temp_v9) - 1) * 0x8c;
         pairSetFirstResetSecond(temp_v3 + 0x598,6);
-        FUN_002bee58(temp_v3 + 0x598,1);
-        FUN_002bee58(temp_v3 + 0xb10,6);
-        FUN_002bee58(temp_v3 + 0x1088,4);
+        spriteStartAnimationByIndex(temp_v3 + 0x598,1);
+        spriteStartAnimationByIndex(temp_v3 + 0xb10,6);
+        spriteStartAnimationByIndex(temp_v3 + 0x1088,4);
         temp_v9 = temp_v9 + 1;
       } while (temp_v9 < *(short *)(param_1 + 0x218e));
     }
@@ -391,7 +391,7 @@ LAB_001f5adc:
       else {
         if (temp_v2 < 0xf) {
           if (temp_v2 == 1) {
-            FUN_002bee58(param_1 + temp_v9 * 0x8c + 0x1600,0xb);
+            spriteStartAnimationByIndex(param_1 + temp_v9 * 0x8c + 0x1600,0xb);
           }
           if (*(short *)(temp_v3 + 0x21e4) == 0) {
             temp_v6 = 0xfa1;

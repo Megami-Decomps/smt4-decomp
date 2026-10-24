@@ -1,33 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002aed34` (_code @ 0x2aed34, 0x80 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP allocation: retail keeps the 1.0f constant in s16 across the strlen call and x/y in s17/s18 (saves d8-d9) and loads s7/s5/s4 from the pool; the build packs x/y into d8 and derives s7 from s2. Same pattern as debugDrawText (candidate -O2). */
+#include "shard/W6_W6Match2_TextDrawState.h"
 
 extern "C" {
 
-int FUN_002b2b88(unsigned int, unsigned int, unsigned int);
+extern TextDrawState DAT_00464a70;
+extern TextRenderer *DAT_004093bc[9]; /* the text renderers by slot */
+u32 libc_strlen(const char *text);
+void FUN_002b2b88(TextRenderer *renderer, u32 font, const char *text, u32 length,
+                  f32 x, f32 y, f32 scaleX, f32 scaleY, f32 red, f32 green, f32 blue, f32 alpha);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern unsigned int DAT_00464a7c; /* 0x464a7c */
-
-/* Supplied declaration required: FUN_002b2b88. */
-extern int libc_strlen(unsigned int);
-
-
-void FUN_002aed34(unsigned int param_1,unsigned int param_2)
-
+/* Draws `text` at (x, y) with the renderer of slot `slot` (0-8); empty text and bad slots draw nothing. */
+void FUN_002aed34(u32 slot, const char *text, f32 x, f32 y)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if ((param_1 < 9) && (temp_v0 = libc_strlen(param_2), temp_v0 != 0)) {
-    FUN_002b2b88(*(unsigned int *)(param_1 * 4 + 0x4093bc),DAT_00464a7c,param_2);
-    return;
-  }
-  return;
+    if (slot < 9) {
+        u32 length = libc_strlen(text);
+        if (length != 0) {
+            FUN_002b2b88(DAT_004093bc[slot], DAT_00464a70.unk0c, text, length,
+                         x, y, 1.0f, 1.0f, 10.0f, 13.0f, 1.0f, 1.0f);
+        }
+    }
 }
 
 } /* extern "C" */

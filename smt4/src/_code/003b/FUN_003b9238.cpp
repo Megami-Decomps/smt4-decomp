@@ -1,66 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b9238` (_code @ 0x3b9238, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct StepText {
+    u8 unk00[2];     // 0x00
+    u8 text[0x3D];   // 0x02
+    u8 infoId;       // 0x3F
+};
+
+struct TextStep {
+    u8 unk00[0x28];          // 0x00
+    s32 state;               // 0x28
+    s32 substate;            // 0x2C
+    u8 unk30[0x69C];         // 0x30
+    u8 unk6CC;               // 0x6CC
+    u8 unk6CD[0x68F];        // 0x6CD
+    StepText *textEntry;     // 0xD5C
+    u8 unkD60[0x20];         // 0xD60
+    u32 infoWindow;          // 0xD80
+    u8 unkD84[0x18];         // 0xD84
+    u32 script;              // 0xD9C
+};
 
 extern "C" {
 
-int buttonHelpSelectByProgress(...);
-int FUN_002305e8(...);
-int placeWinStartText(...);
-int FUN_0027db24(...);
-int dialogOpen(...);
-int infoWinSetMessage(...);
+s32 scrRunOpcodesStub(u32 script);
+void buttonHelpSelectByProgress(TextStep *step);
+void FUN_0027db24(s32 arg);
+void dialogOpen(u8 mode, u8 arg);
+void infoWinSetMessage(u32 window, s32 id);
+void placeWinStartText(const void *text);
+void FUN_002305e8(s32 value);
 
-typedef struct fn_003b9238_arg0 fn_003b9238_arg0;
-struct fn_003b9238_arg0 {
-    unsigned char pad_0x0[0x28];
-    undefined4 field_0x28; /* +0x28 */
-    undefined4 field_0x2c; /* +0x2c */
-    unsigned char pad_0x30[0x69c];
-    undefined1 field_0x6cc; /* +0x6cc */
-    unsigned char pad_0x6cd[0x68f];
-    void *field_0xd5c; /* +0xd5c */
-    unsigned char pad_0xd60[0x20];
-    unsigned char field_0xd80; /* +0xd80 */
-    unsigned char pad_0xd81[0x1b];
-    undefined4 field_0xd9c; /* +0xd9c */
-};
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: buttonHelpSelectByProgress. */
-/* Supplied declaration required: FUN_002305e8. */
-/* Supplied declaration required: placeWinStartText. */
-/* Supplied declaration required: FUN_0027db24. */
-/* Supplied declaration required: dialogOpen. */
-/* Supplied declaration required: infoWinSetMessage. */
-
-
-void FUN_003b9238(fn_003b9238_arg0 *param_1)
-
+/* When the step's script finishes, opens the text of its entry and moves the step to state 5. */
+void FUN_003b9238(TextStep *step)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = scrRunOpcodesStub(param_1->field_0xd9c);
-  if (temp_v0 == 2) {
-    buttonHelpSelectByProgress(param_1);
-    FUN_0027db24(0);
-    dialogOpen(0);
-    infoWinSetMessage(*(unsigned int *)&param_1->field_0xd80,
-                 *(unsigned char *)((int)param_1->field_0xd5c + 0x3f));
-    param_1->field_0x2c = 0;
-    param_1->field_0x28 = 5;
-    param_1->field_0x6cc = 0;
-    placeWinStartText((int)param_1->field_0xd5c + 2);
-    FUN_002305e8(1);
-    return;
-  }
-  return;
+    if (scrRunOpcodesStub(step->script) == 2) {
+        buttonHelpSelectByProgress(step);
+        FUN_0027db24(0);
+        dialogOpen(0, 0);
+        infoWinSetMessage(step->infoWindow, step->textEntry->infoId);
+        step->substate = 0;
+        step->state = 5;
+        step->unk6CC = 0;
+        placeWinStartText(step->textEntry->text);
+        FUN_002305e8(1);
+    }
 }
 
 } /* extern "C" */

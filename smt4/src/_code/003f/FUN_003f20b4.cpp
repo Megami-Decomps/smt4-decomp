@@ -1,43 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f20b4` (_code @ 0x3f20b4, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stores and calls match; armcc hoists the vtable-pointer load to the first instruction in retail but schedules it just before its store here */
+#include "common.h"
+
+/* An object with a vtable at the start and six zeroed link/count words. */
+struct HeapOwner {
+    /* 0x00 */ const void *vtable;
+    /* 0x04 */ u32 words[6];
+    /* 0x1c */ u8 unk1c[0x54 - 0x1c];
+    /* 0x54 */ u32 tail;
+};
+
+/* The module's heap bookkeeping record. */
+struct HeapRecord {
+    /* 0x00 */ u32 head;
+    /* 0x04 */ u32 count;
+    /* 0x08 */ u32 total;
+    /* 0x0c */ u32 reserved;
+    /* 0x10 */ u8 flagA;
+    /* 0x14 */ u32 next;
+    /* 0x18 */ u8 flagB;
+};
 
 extern "C" {
+extern const u8 DAT_00420ef4;
+extern HeapRecord DAT_004eac24;
+extern u8 entry;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+void expHeapDestroyA(HeapOwner *owner);
+void FUN_003574ac(HeapRecord *record);
+__weak int __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
+void sceneNotifyNoop(void *object, void (*destroy)(void *), void *module);
 
-extern unsigned char DAT_00420ef4; /* 0x420ef4 */
-extern unsigned int DAT_004eac24; /* 0x4eac24 */
-extern unsigned int DAT_004eac28; /* 0x4eac28 */
-extern unsigned int DAT_004eac2c; /* 0x4eac2c */
-extern unsigned int DAT_004eac30; /* 0x4eac30 */
-extern unsigned char DAT_004eac34; /* 0x4eac34 */
-extern unsigned int DAT_004eac38; /* 0x4eac38 */
-extern unsigned char DAT_004eac3c; /* 0x4eac3c */
-
-
-void FUN_003f20b4(unsigned int *param_1)
-
+/* Resets a heap owner and the shared heap record, registering each one's destructor. */
+void FUN_003f20b4(HeapOwner *owner)
 {
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  *param_1 = (unsigned int)&DAT_00420ef4;
-  param_1[0x15] = 0;
-  DAT_004eac24 = 0;
-  DAT_004eac28 = 0;
-  DAT_004eac2c = 0;
-  DAT_004eac30 = 0;
-  DAT_004eac34 = 0;
-  DAT_004eac38 = 0;
-  DAT_004eac3c = 0;
-  return;
+    owner->words[0] = 0;
+    owner->words[1] = 0;
+    owner->words[2] = 0;
+    owner->words[3] = 0;
+    owner->words[4] = 0;
+    owner->words[5] = 0;
+    owner->vtable = &DAT_00420ef4;
+    owner->tail = 0;
+    __aeabi_atexit(owner, (void (*)(void *))expHeapDestroyA, &entry);
+
+    DAT_004eac24.head = 0;
+    DAT_004eac24.count = 0;
+    DAT_004eac24.total = 0;
+    DAT_004eac24.reserved = 0;
+    DAT_004eac24.flagA = 0;
+    DAT_004eac24.next = 0;
+    DAT_004eac24.flagB = 0;
+    sceneNotifyNoop(&DAT_004eac24, (void (*)(void *))FUN_003574ac, &entry);
 }
 
 } /* extern "C" */

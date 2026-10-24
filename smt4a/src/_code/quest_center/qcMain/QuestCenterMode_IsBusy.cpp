@@ -1,4 +1,3 @@
-/* NON_MATCHING: shutdown entry load is scheduled before the done-byte store. */
 /* Polls quest-center shutdown, releasing its work once the task has finished. */
 #include "quest_center/qcMain.h"
 

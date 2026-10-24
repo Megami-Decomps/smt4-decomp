@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a75d0(...);
+int uiSlotEntryDraw(...);
 int FUN_001a7810(...);
 int FUN_001af670(...);
 int dataTable24Sub0GetRecord(...);
@@ -36,7 +36,7 @@ extern unsigned char LAB_001de0f0; /* 0x1de0f0 */
 extern unsigned char LAB_001de11c; /* 0x1de11c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001a75d0. */
+/* Supplied declaration required: uiSlotEntryDraw. */
 /* Supplied declaration required: FUN_001a7810. */
 /* Supplied declaration required: FUN_001af670. */
 /* Supplied declaration required: dataTable24Sub0GetRecord. */
@@ -179,7 +179,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
             }
           }
           else {
-            FUN_001a75d0(temp_v0,temp_v6,param_1 + temp_v11,param_2 + temp_v12,0);
+            uiSlotEntryDraw(temp_v0,temp_v6,param_1 + temp_v11,param_2 + temp_v12,0);
           }
           efctSetSpeed();
         }
@@ -216,7 +216,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
       }
     }
     else {
-      FUN_001a75d0(temp_v0,temp_v4,*(short *)(temp_v2 + 8) + param_1,*(short *)(temp_v2 + 10) + param_2,1);
+      uiSlotEntryDraw(temp_v0,temp_v4,*(short *)(temp_v2 + 8) + param_1,*(short *)(temp_v2 + 10) + param_2,1);
     }
     efctSetSpeed();
   }

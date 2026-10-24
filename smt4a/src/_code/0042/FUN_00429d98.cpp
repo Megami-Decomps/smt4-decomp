@@ -1,48 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00429d98` (_code @ 0x429d98, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail spills the fourth argument purely through `push {r3, ...}` (no separate store) and keeps the first result in r5; ours stores it with an explicit str and uses r4/r6 differently. */
+#include "common.h"
+
+/* An IPC session object; slot 12 releases it. */
+class SessionObject {
+public:
+    virtual void unk00();
+    virtual void unk04();
+    virtual void unk08();
+    virtual void unk0C();
+    virtual void unk10();
+    virtual void unk14();
+    virtual void unk18();
+    virtual void unk1C();
+    virtual void unk20();
+    virtual void unk24();
+    virtual void unk28();
+    virtual void unk2C();
+    virtual void release();
+};
+
+struct SessionRoot {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ SessionObject *session;
+};
 
 extern "C" {
 
-int FUN_0042bbf4(int **, int);
+extern SessionRoot DAT_00589398;
+s32 FUN_0042bbf4(SessionObject **object, s32 size);
+s32 FUN_001aeefc(u32 owner, SessionObject *object, u32 a, u32 b);
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-extern unsigned char DAT_00589398; /* 0x589398 */
-
-extern int **FUN_001aeefc(unsigned int, int *, unsigned int);
-/* Supplied declaration required: FUN_0042bbf4. */
-
-
-int ** FUN_00429d98(unsigned int param_1,unsigned int param_2,unsigned int param_3,int *param_4)
-
+/* Registers a session object once: fails with 0xC92044E7 if one exists, releases the object on failure. */
+s32 FUN_00429d98(u32 owner, u32 unused1, u32 unused2, SessionObject *created)
 {
-/* irregular: 1 native warning(s); review required */
-  int **ppiVar1;
-  int *temp_v0;
-  
-  ppiVar1 = &temp_v0;
-  if ((*(int * *)((unsigned char *)&DAT_00589398 + 0x8)) != (int *)0x0) {
-    ppiVar1 = (int **)0xc92044e7;
-  }
-  else {
-    temp_v0 = param_4;
-    FUN_0042bbf4(ppiVar1,4);
-    if (-1 < (int)ppiVar1) {
-      ppiVar1 = (int **)FUN_001aeefc(param_1,temp_v0,0);
-      if (((unsigned int)ppiVar1 & 0x80000000) == 0) {
-        (*(int * *)((unsigned char *)&DAT_00589398 + 0x8)) = temp_v0;
-      }
-      else {
-        (**(romwright_code **)(*temp_v0 + 0x30))();
-      }
+    SessionObject *object;
+    s32 result;
+
+    if (DAT_00589398.session != NULL) {
+        result = 0xC92044E7;
+    } else {
+        object = created;
+        result = FUN_0042bbf4(&object, 4);
+        if ((result & 0x80000000) == 0) {
+            result = FUN_001aeefc(owner, object, 0, 0);
+            if ((result & 0x80000000) == 0) {
+                DAT_00589398.session = object;
+            } else {
+                object->release();
+            }
+        }
     }
-  }
-  return ppiVar1;
+    return result;
 }
 
 } /* extern "C" */

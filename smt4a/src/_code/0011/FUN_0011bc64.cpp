@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00133ab8(int, int);
 int rt_malloc(...);
-int _ZN9Obj55aff4C1EPKc(unsigned char [12], unsigned char *);
+int _ZN9Obj55aff4C1EPKt(unsigned char [12], unsigned char *);
 int _ZN9Obj55aff4D1Ev(unsigned char [12]);
 int __aeabi_vec_ctor_nocookie_nodtor(int, unsigned char *, int, int);
 int FUN_002f5928(...);
@@ -33,10 +33,10 @@ extern int DAT_00594a5c; /* 0x594a5c */
 
 extern int FUN_0012272c(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00133ab8. */
-extern int *wordRefMax(int *, unsigned int *);
+extern int *_ZSt3maxIjERKT_S2_S2_(int *, unsigned int *);
 /* Supplied declaration required: rt_malloc. */
-extern int operatorNew(unsigned int);
-/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
+extern int _Znwj(unsigned int);
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKt. */
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_002f5928. */
@@ -82,7 +82,7 @@ int FUN_0011bc64(unsigned int *param_1)
   *(unsigned int *)(temp_v0 + 0x40) = 0;
   temp_v11 = 0;
   temp_v12[0] = bufGrowCapacity5(0,piVar6);
-  piVar2 = (int *)wordRefMax(&temp_v11,temp_v12);
+  piVar2 = (int *)_ZSt3maxIjERKT_S2_S2_(&temp_v11,temp_v12);
   temp_v4 = *piVar2;
   temp_v1 = rt_malloc(temp_v4 * 0xc);
   *piVar6 = temp_v1;
@@ -103,7 +103,7 @@ int FUN_0011bc64(unsigned int *param_1)
   *(unsigned int *)(temp_v0 + 0x18) = 0;
   temp_v10 = 0;
   temp_v12[0] = bufGrowCapacity4(0,piVar6);
-  piVar2 = (int *)wordRefMax(&temp_v10,temp_v12);
+  piVar2 = (int *)_ZSt3maxIjERKT_S2_S2_(&temp_v10,temp_v12);
   temp_v1 = *piVar2;
   temp_v4 = rt_malloc();
   *piVar6 = temp_v4;
@@ -124,7 +124,7 @@ int FUN_0011bc64(unsigned int *param_1)
   do {
     temp_v5 = temp_v2 * 4 + temp_v0;
     *(unsigned int *)(temp_v5 + 0xa0) = 0;
-    temp_v4 = operatorNew(0x30);
+    temp_v4 = _Znwj(0x30);
     if (temp_v4 != 0) {
       temp_v3 = FUN_002f5928(temp_v4,0x10000);
     }
@@ -139,10 +139,10 @@ int FUN_0011bc64(unsigned int *param_1)
     *(unsigned short *)(temp_v4 + 0x54) = 0;
     *(unsigned int *)(temp_v4 + 0x58) = 0;
   } while (temp_v2 < 2);
-  temp_v2 = operatorNew(0x34);
+  temp_v2 = _Znwj(0x34);
   temp_v3 = DAT_00594a50;
   if (temp_v2 != 0) {
-    _ZN9Obj55aff4C1EPKc(temp_v9,&LAB_0011be18);
+    _ZN9Obj55aff4C1EPKt(temp_v9,&LAB_0011be18);
     temp_v3 = FUN_00311700(temp_v2,temp_v9,temp_v3);
     *(unsigned int *)(temp_v1 + 0x30) = temp_v3;
     _ZN9Obj55aff4D1Ev(temp_v9);

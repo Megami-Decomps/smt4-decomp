@@ -31,8 +31,8 @@ extern int DAT_0043e288; /* 0x43e288 */
 extern int DAT_0043e28c; /* 0x43e28c */
 extern int DAT_0043e290; /* 0x43e290 */
 extern int g_titleScene; /* 0x44ea00 */
-extern unsigned int DAT_00476638; /* 0x476638 */
-extern unsigned int DAT_004efd9c; /* 0x4efd9c */
+extern unsigned int _ZGVZN2nw4math5MTX448IdentityEvE8identity; /* 0x476638 */
+extern unsigned int _ZZN2nw4math5MTX448IdentityEvE8identity; /* 0x4efd9c */
 extern float DAT_004efda0; /* 0x4efda0 */
 extern float DAT_004efda4; /* 0x4efda4 */
 extern float DAT_004efda8; /* 0x4efda8 */
@@ -232,8 +232,8 @@ void FUN_001137fc(int param_1)
   *(unsigned int *)(temp_v3 + 0x38) = 2;
   FUN_002c1b64(g_titleScene,temp_v3);
   FUN_002ba1e0(temp_v4);
-  if (((DAT_00476638 & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_00476638), temp_v3 != 0)) {
-    DAT_004efd9c = temp_v7;
+  if (((_ZGVZN2nw4math5MTX448IdentityEvE8identity & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX448IdentityEvE8identity), temp_v3 != 0)) {
+    _ZZN2nw4math5MTX448IdentityEvE8identity = temp_v7;
     DAT_004efda0 = temp_v6;
     DAT_004efda4 = temp_v6;
     DAT_004efda8 = temp_v6;
@@ -250,7 +250,7 @@ void FUN_001137fc(int param_1)
     DAT_004efdd4 = temp_v6;
     DAT_004efdd8 = temp_v7;
   }
-  mtx44Copy(temp_v8,&DAT_004efd9c);
+  mtx44Copy(temp_v8,&_ZZN2nw4math5MTX448IdentityEvE8identity);
   cameraSetViewMatrix(g_titleScene,temp_v8);
   temp_v3 = FUN_002c1c0c(5,3);
   *(unsigned int *)(temp_v3 + 0x38) = 2;

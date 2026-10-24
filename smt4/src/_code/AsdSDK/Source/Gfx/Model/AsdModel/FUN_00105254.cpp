@@ -1,52 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00105254` (_code @ 0x105254, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reaches both slot arrays from the single g_asdModelTransformBuilder literal (second array = base - 8); built loads a separate literal for the first array. */
+#include "shard/Sys464af0.h"
 
 extern "C" {
 
-int FUN_001079d8(void);
-int FUN_00108c5c(unsigned int, unsigned int);
-int FUN_0010bdb0(void);
-int FUN_0010e614(void);
-int FUN_00131a2c(unsigned int);
-int FUN_002c2968(unsigned int, unsigned int);
-int tripleClear(unsigned char *);
+void tripleClear(u8 *triple);
+void FUN_00108c5c(u32 a, u32 b);
+void FUN_001079d8(void);
+void FUN_0010e614(void);
+void FUN_0010bdb0(void);
+void FUN_002c2968(u32 a, u32 b);
+void FUN_00131a2c(u32 a);
+extern u8 DAT_004dae3c; /* 0x4dae3c */
+extern u8 DAT_004dae48; /* 0x4dae48 */
+extern u32 DAT_00464b7c[2]; /* 0x464b7c */
+extern u32 g_asdModelTransformBuilder[2]; /* 0x464b84 */
 
-extern unsigned int DAT_00464b0c; /* 0x464b0c */
-extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
-extern unsigned char DAT_004dae3c; /* 0x4dae3c */
-extern unsigned char DAT_004dae48; /* 0x4dae48 */
-
-/* Supplied declaration required: FUN_001079d8. */
-/* Supplied declaration required: FUN_00108c5c. */
-/* Supplied declaration required: FUN_0010bdb0. */
-/* Supplied declaration required: FUN_0010e614. */
-/* Supplied declaration required: FUN_00131a2c. */
-/* Supplied declaration required: FUN_002c2968. */
-/* Supplied declaration required: tripleClear. */
-
-
-void FUN_00105254(unsigned int param_1,unsigned int param_2)
-
+// Reset the model system's scratch state and rebuild both transform slots.
+void FUN_00105254(u32 a, u32 b)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  
-  tripleClear(&DAT_004dae3c);
-  tripleClear(&DAT_004dae48);
-  FUN_00108c5c(param_1,param_2);
-  FUN_001079d8();
-  FUN_0010e614();
-  FUN_0010bdb0();
-  temp_v0 = 0;
-  do {
-    FUN_002c2968((&DAT_00464b7c)[temp_v0],(&g_asdModelTransformBuilder)[temp_v0]);
-    FUN_00131a2c((&DAT_00464b7c)[temp_v0]);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 2);
-  DAT_00464b0c = 0;
-  return;
+    tripleClear(&DAT_004dae3c);
+    tripleClear(&DAT_004dae48);
+    FUN_00108c5c(a, b);
+    FUN_001079d8();
+    FUN_0010e614();
+    FUN_0010bdb0();
+    for (s32 i = 0; i < 2; i++) {
+        FUN_002c2968(DAT_00464b7c[i], g_asdModelTransformBuilder[i]);
+        FUN_00131a2c(DAT_00464b7c[i]);
+    }
+    g_gfxSettings.unk1C = 0;
 }
 
 } /* extern "C" */

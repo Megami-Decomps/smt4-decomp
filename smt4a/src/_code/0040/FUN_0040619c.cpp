@@ -14,13 +14,13 @@ struct IndexedValues {
     }
 };
 
-extern "C" void FUN_002e32a4(s32 kind, ...);
+extern "C" void _ZN4__rw10__rw_throwEiz(s32 kind, ...);
 
 extern "C" void *FUN_0040619c(const IndexedValues *owner, u32 index)
 {
     if ((s32)index < 0 || index >= owner->count)
         return NULL;
     if (index >= owner->size())
-        FUN_002e32a4(9, "", "", index, owner->size());
+        _ZN4__rw10__rw_throwEiz(9, "", "", index, owner->size());
     return owner->begin[index];
 }

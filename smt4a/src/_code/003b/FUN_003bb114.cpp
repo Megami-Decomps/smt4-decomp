@@ -1,42 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bb114` (_code @ 0x3bb114, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register numbering only: retail assigns r4, r7, r6, r5 to the three script arguments and the job work word; the build numbers them r7, r6, r5, r4. */
+#include "common.h"
 
 extern "C" {
 
-int bustupCutStartSlotTransition(unsigned int, unsigned int, int, int, unsigned int);
-int FUN_0038791c(unsigned int, unsigned int, int, unsigned int, int, int);
+u32 scrGetArg(u32 index);
+u32 *jobGetWork(u32 job);
+void FUN_0038791c(u32 job, u32 first, s32 mode, u32 second, s32 flagA, s32 flagB);
+void bustupCutStartSlotTransition(u32 work, u32 slot, s32 flagA, s32 flagB, u32 value);
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-/* Supplied declaration required: bustupCutStartSlotTransition. */
-extern unsigned int *jobGetWork(unsigned int);
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_0038791c. */
-
-
-unsigned int FUN_003bb114(void)
-
+/* Script command: starts the bust-up slot transition for the job given by argument 0. */
+u32 FUN_003bb114(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = scrGetArg(2);
-  puVar4 = (unsigned int *)jobGetWork(temp_v0);
-  temp_v3 = *puVar4;
-  FUN_0038791c(temp_v0,temp_v1,2,temp_v2,1,1);
-  bustupCutStartSlotTransition(temp_v3,temp_v2,1,1,0xffffffff);
-  return 1;
+    u32 job = scrGetArg(0);
+    u32 first = scrGetArg(1);
+    u32 slot = scrGetArg(2);
+    u32 work = *jobGetWork(job);
+
+    FUN_0038791c(job, first, 2, slot, 1, 1);
+    bustupCutStartSlotTransition(work, slot, 1, 1, 0xffffffff);
+    return 1;
 }
 
 } /* extern "C" */

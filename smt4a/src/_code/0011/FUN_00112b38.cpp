@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0011289c(void);
-int FUN_002ea20c(unsigned char [8]);
+int _ZN15OnlineTimestampC1Ev(unsigned char [8]);
 int FUN_002ea3d0(int, unsigned int);
 int onlineJobSetStateTimed(int, int);
 int FUN_002efd4a(...);
@@ -33,7 +33,7 @@ extern unsigned char LAB_00112d1c; /* 0x112d1c */
 extern unsigned int DAT_00594eac; /* 0x594eac */
 
 /* Supplied declaration required: FUN_0011289c. */
-/* Supplied declaration required: FUN_002ea20c. */
+/* Supplied declaration required: _ZN15OnlineTimestampC1Ev. */
 extern unsigned int FUN_002ea3c0(unsigned int *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: onlineJobSetStateTimed. */
@@ -68,7 +68,7 @@ void FUN_00112b38(int param_1)
   unsigned char temp_v14 [8];
   int temp_v15;
   
-  FUN_002ea20c(temp_v13);
+  _ZN15OnlineTimestampC1Ev(temp_v13);
   temp_v12 = param_1 + 0x2e0;
   temp_v0 = FUN_002efd4a(temp_v13);
   temp_v10 = param_1 + 0x180;
@@ -86,7 +86,7 @@ void FUN_00112b38(int param_1)
     do {
       temp_v0 = FUN_002f7f00(temp_v15,0);
       if (temp_v0 == 0) break;
-      FUN_002ea20c(temp_v14);
+      _ZN15OnlineTimestampC1Ev(temp_v14);
       temp_v0 = FUN_002efd4a(temp_v14,temp_v12);
       if ((temp_v0 == 0) || (*(char *)(*(int *)(temp_v11 + 0x1c) + 0x34) != '\x02')) break;
       if (*(int *)(*(int *)(temp_v11 + 0x1c) + 8) == 0x10) {

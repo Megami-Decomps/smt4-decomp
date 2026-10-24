@@ -35,7 +35,7 @@ extern "C" {
 BtlMainStateA *btlGetMainState(void);
 CombatantAffinityPreview FUN_003e8bb0(BtlMainStateA *battle, BtlCombatantEntryA *entry);
 Table04Record *dataTable04FindById(s32 id);
-Table04ExtraRecord *FUN_0034a290(u32 id);
+Table04ExtraRecord *dataTable41FindById(u32 id);
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skills);
 s32 FUN_004bd098(u32 source, s32 skill);
 void kindIdStore(u32 kind, u32 *value);
@@ -55,7 +55,7 @@ u32 FUN_004c0f74(BtlCombatantEntryA *entry, u32 element)
     for (s32 index = 0; index < 9; ++index) {
         u16 id = ((u16 *)skills)[index];
         if (id != 0) {
-            AffinityPassiveView *passive = (AffinityPassiveView *)FUN_0034a290(id);
+            AffinityPassiveView *passive = (AffinityPassiveView *)dataTable41FindById(id);
             if (passive != NULL && passive->element != 0) {
                 if (passive->element == 26) {
                     if (element < 8)

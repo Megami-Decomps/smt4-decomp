@@ -192,8 +192,8 @@ extern unsigned char DAT_00422058[];
 extern unsigned char DAT_0042208c[];
 f32 FUN_00155650(void *context, f32 start, f32 end, f32 frame);
 f32 nw_anim_PlayPolicy_Loop(void *context, f32 start, f32 end, f32 frame);
-extern u64 DAT_00476634;
-extern Matrix34 DAT_004efd6c;
+extern u64 _ZGVZN2nw4math5MTX348IdentityEvE8identity;
+extern Matrix34 _ZZN2nw4math5MTX348IdentityEvE8identity;
 }
 
 static __inline void *resolveRelative(s32 &field)
@@ -298,23 +298,23 @@ static __inline void resizeTransforms(Animation *animation, s32 requested)
         if (!transform)
             continue;
 
-        if (!(static_cast<u32>(DAT_00476634) & 1U)) {
-            if (__cxa_guard_acquire(&DAT_00476634)) {
-                DAT_004efd6c.elements[0] = 1.0f;
-                DAT_004efd6c.elements[1] = 0.0f;
-                DAT_004efd6c.elements[2] = 0.0f;
-                DAT_004efd6c.elements[3] = 0.0f;
-                DAT_004efd6c.elements[4] = 0.0f;
-                DAT_004efd6c.elements[5] = 1.0f;
-                DAT_004efd6c.elements[6] = 0.0f;
-                DAT_004efd6c.elements[7] = 0.0f;
-                DAT_004efd6c.elements[8] = 0.0f;
-                DAT_004efd6c.elements[9] = 0.0f;
-                DAT_004efd6c.elements[10] = 1.0f;
-                DAT_004efd6c.elements[11] = 0.0f;
+        if (!(static_cast<u32>(_ZGVZN2nw4math5MTX348IdentityEvE8identity) & 1U)) {
+            if (__cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity)) {
+                _ZZN2nw4math5MTX348IdentityEvE8identity.elements[0] = 1.0f;
+                _ZZN2nw4math5MTX348IdentityEvE8identity.elements[1] = 0.0f;
+                _ZZN2nw4math5MTX348IdentityEvE8identity.elements[2] = 0.0f;
+                _ZZN2nw4math5MTX348IdentityEvE8identity.elements[3] = 0.0f;
+                _ZZN2nw4math5MTX348IdentityEvE8identity.elements[4] = 0.0f;
+                _ZZN2nw4math5MTX348IdentityEvE8identity.elements[5] = 1.0f;
+                _ZZN2nw4math5MTX348IdentityEvE8identity.elements[6] = 0.0f;
+                _ZZN2nw4math5MTX348IdentityEvE8identity.elements[7] = 0.0f;
+                _ZZN2nw4math5MTX348IdentityEvE8identity.elements[8] = 0.0f;
+                _ZZN2nw4math5MTX348IdentityEvE8identity.elements[9] = 0.0f;
+                _ZZN2nw4math5MTX348IdentityEvE8identity.elements[10] = 1.0f;
+                _ZZN2nw4math5MTX348IdentityEvE8identity.elements[11] = 0.0f;
             }
         }
-        nn_math_ARMv6_MTX34CopyAsm(&transform->matrix, &DAT_004efd6c);
+        nn_math_ARMv6_MTX34CopyAsm(&transform->matrix, &_ZZN2nw4math5MTX348IdentityEvE8identity);
         transform->scale[0] = 1.0f;
         transform->scale[1] = 1.0f;
         transform->scale[2] = 1.0f;

@@ -1,143 +1,140 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b5498` (_code @ 0x1b5498, 0x250 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: block layout and register allocation: retail lays the unlink-and-free block of finished entries out of line after the main path and reads the list global once; the shared exit (timer reset, counters) is merged differently */
+#include "common.h"
+
+/* One queued help message (Shin Megami Tensei IV layout, observed fields). */
+struct BtlHelpEntry {
+    /* 0x000 */ s16 kind;          /* 0 plain, 1 with an info window, 2 with a text slot */
+    /* 0x002 */ s16 phase;         /* 0 waiting, 1 shown */
+    /* 0x004 */ s16 value;
+    /* 0x006 */ u8 unk006[2];
+    /* 0x008 */ u32 messageId;
+    /* 0x00C */ u32 infoWindow;
+    /* 0x010 */ u32 flagsA;        /* bit 1: use the player name */
+    /* 0x014 */ u32 flagsB;
+    /* 0x018 */ u8 unk018[0xC6];
+    /* 0x0DE */ u16 nameId;
+    /* 0x0E0 */ u8 unk0E0[0x1B8];
+    /* 0x298 */ s8 dialogIndex;
+    /* 0x299 */ u8 unk299[3];
+    /* 0x29C */ s32 textSlot;
+    /* 0x2A0 */ s16 shownCount;
+    /* 0x2A2 */ s16 timer;         /* negative: finished, the entry is removed */
+    /* 0x2A4 */ BtlHelpEntry *next;
+    /* 0x2A8 */ BtlHelpEntry *prev;
+};
+
+struct BtlHelpList {
+    /* 0x00 */ BtlHelpEntry *head;
+    /* 0x04 */ BtlHelpEntry *tail;
+    /* 0x08 */ s32 count;
+};
 
 extern "C" {
 
-int FUN_00212120(int);
-int dialogOpen(int, int);
-int infoWinSetMessage(unsigned int, unsigned int);
-int textEncodeFontSlot(unsigned int, unsigned char [100]);
-int FUN_002bd06c(unsigned int);
-int libc_strcpy(unsigned char [100], unsigned int);
-int jobGetWork(void);
-int asdMemFree(void);
-int memClear(unsigned char [100], int);
+extern BtlHelpList *DAT_00435d78;
 
-extern unsigned int *DAT_00435d78; /* 0x435d78 */
+void jobGetWork(void);
+void asdMemFree(void *block);
+void memClear(void *buffer, s32 size);
+s32 dialogIsActive(void);
+s32 FUN_002b6b04(void);
+const char *gameGetPlayerName(void);
+const char *FUN_002bd06c(u32 id);
+char *libc_strcpy(char *destination, const char *source);
+void textEncodeFontSlot(s32 slot, const char *text);
+void infoWinSetMessage(u32 window, u32 message);
+void dialogOpen(s32 index, s32 flag);
+void FUN_00212120(s16 value);
 
-/* Supplied declaration required: FUN_00212120. */
-/* Supplied declaration required: dialogOpen. */
-/* Supplied declaration required: infoWinSetMessage. */
-/* Supplied declaration required: textEncodeFontSlot. */
-extern int dialogIsActive(void);
-extern int FUN_002b6b04(void);
-/* Supplied declaration required: FUN_002bd06c. */
-extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: jobGetWork. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: memClear. */
-
-
-unsigned int FUN_001b5498(void)
-
+/* Per-frame update of the battle help queue: drops finished messages from the front, then starts
+ * the first waiting one (opening its dialog) and counts the frames the others have shown. */
+u32 FUN_001b5498(void)
 {
-/* irregular: 9 native warning(s); review required */
-  short temp_v0;
-  short *psVar2;
-  unsigned int *puVar3;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  short *psVar7;
-  unsigned char temp_v4 [100];
-  
-  jobGetWork();
-  if (DAT_00435d78 == (unsigned int *)0x0) {
+    char name[100];
+    BtlHelpEntry *entry;
+    BtlHelpEntry *next;
+
+    jobGetWork();
+    if (DAT_00435d78 == NULL) {
+        return 0;
+    }
+    entry = DAT_00435d78->head;
+    while (true) {
+        BtlHelpList *list = DAT_00435d78;
+        if (entry == NULL) {
+            return 0;
+        }
+        next = entry->next;
+        if (entry->timer >= 0) {
+            break;
+        }
+        if (entry->prev == NULL) {
+            list->head = next;
+        } else {
+            entry->prev->next = next;
+        }
+        if (entry->next == NULL) {
+            list->tail = entry->prev;
+        } else {
+            entry->next->prev = entry->prev;
+        }
+        list->count--;
+        asdMemFree(entry);
+        entry = next;
+    }
+    if (entry->phase != 0) {
+        if (entry->phase != 1 || FUN_002b6b04() == 0) {
+            entry->timer--;
+            entry->shownCount++;
+            return 0;
+        }
+    } else if (FUN_002b6b04() == 0 && dialogIsActive() == 0) {
+        memClear(name, 0x60);
+        if (entry->kind != 0) {
+            if (entry->kind == 1) {
+                if ((entry->flagsA != 0 || entry->flagsB != 0) && entry->textSlot >= 0) {
+                    if ((entry->flagsA & 2) != 0) {
+                        libc_strcpy(name, gameGetPlayerName());
+                    } else {
+                        FUN_002bd06c(entry->nameId);
+                        libc_strcpy(name, reinterpret_cast<const char *>(entry->nameId));
+                    }
+                    textEncodeFontSlot(entry->textSlot, name);
+                }
+                infoWinSetMessage(entry->infoWindow, entry->messageId & 0xffff);
+                dialogOpen(entry->dialogIndex, 1);
+                entry->timer = 1;
+                entry->phase = 1;
+                entry->timer--;
+                entry->shownCount++;
+                return 0;
+            }
+            if (entry->kind == 2) {
+                if ((entry->flagsB != 0 || entry->flagsA != 0) && entry->textSlot >= 0) {
+                    if ((entry->flagsA & 2) != 0) {
+                        libc_strcpy(name, gameGetPlayerName());
+                    } else {
+                        FUN_002bd06c(entry->nameId);
+                        libc_strcpy(name, reinterpret_cast<const char *>(entry->nameId));
+                    }
+                    textEncodeFontSlot(entry->textSlot, name);
+                }
+                FUN_00212120(entry->value);
+            }
+        } else {
+            infoWinSetMessage(entry->infoWindow, entry->messageId & 0xffff);
+            dialogOpen(entry->dialogIndex, 1);
+        }
+        entry->timer = 1;
+        entry->phase = 1;
+        entry->timer--;
+        entry->shownCount++;
+        return 0;
+    }
+    entry->timer = 1;
+    entry->timer--;
+    entry->shownCount++;
     return 0;
-  }
-  psVar2 = (short *)*DAT_00435d78;
-  while( 1 ) {
-    puVar3 = DAT_00435d78;
-    if (psVar2 == (short *)0x0) {
-      return 0;
-    }
-    psVar7 = *(short **)(psVar2 + 0x152);
-    if (-1 < psVar2[0x151]) break;
-    if (*(int *)(psVar2 + 0x154) == 0) {
-      *DAT_00435d78 = (unsigned int)psVar7;
-    }
-    else {
-      *(short **)(*(int *)(psVar2 + 0x154) + 0x2a4) = psVar7;
-    }
-    if (*(int *)(psVar2 + 0x152) == 0) {
-      puVar3[1] = *(unsigned int *)(psVar2 + 0x154);
-    }
-    else {
-      *(unsigned int *)(*(int *)(psVar2 + 0x152) + 0x2a8) = *(unsigned int *)(psVar2 + 0x154);
-    }
-    puVar3[2] = puVar3[2] - 1;
-    asdMemFree();
-    psVar2 = psVar7;
-  }
-  if (psVar2[1] != 0) {
-    if ((psVar2[1] != 1) || (temp_v3 = FUN_002b6b04(), temp_v3 == 0)) {
-      psVar2[0x151] = psVar2[0x151] - 1;
-      psVar2[0x150] = psVar2[0x150] + 1;
-      return 0;
-    }
-  }
-  else {
-    temp_v3 = FUN_002b6b04();
-    if ((temp_v3 == 0) && (temp_v3 = dialogIsActive(), temp_v3 == 0)) {
-      memClear(temp_v4,0x60);
-      temp_v0 = *psVar2;
-      if (temp_v0 != 0) {
-        if (temp_v0 == 1) {
-          if ((*(int *)(psVar2 + 8) != 0 || *(int *)(psVar2 + 10) != 0) &&
-             (-1 < *(int *)(psVar2 + 0x14e))) {
-            if ((*(unsigned int *)(psVar2 + 8) & 2) != 0) {
-              temp_v1 = gameGetPlayerName();
-              libc_strcpy(temp_v4,temp_v1);
-            }
-            else {
-              temp_v2 = (unsigned int)(unsigned short)psVar2[0x6f];
-              FUN_002bd06c(temp_v2);
-              libc_strcpy(temp_v4,temp_v2);
-            }
-            textEncodeFontSlot(*(unsigned int *)(psVar2 + 0x14e),temp_v4);
-          }
-          infoWinSetMessage(*(unsigned int *)(psVar2 + 6),*(unsigned int *)(psVar2 + 4) & 0xffff);
-          dialogOpen((int)(char)psVar2[0x14c],1);
-          psVar2[0x151] = 1;
-          psVar2[1] = 1;
-          psVar2[0x151] = psVar2[0x151] - 1;
-          psVar2[0x150] = psVar2[0x150] + 1;
-          return 0;
-        }
-        if (temp_v0 == 2) {
-          if ((*(int *)(psVar2 + 10) != 0 || *(int *)(psVar2 + 8) != 0) &&
-             (-1 < *(int *)(psVar2 + 0x14e))) {
-            if ((*(unsigned int *)(psVar2 + 8) & 2) != 0) {
-              temp_v1 = gameGetPlayerName();
-              libc_strcpy(temp_v4,temp_v1);
-            }
-            else {
-              temp_v2 = (unsigned int)(unsigned short)psVar2[0x6f];
-              FUN_002bd06c(temp_v2);
-              libc_strcpy(temp_v4,temp_v2);
-            }
-            textEncodeFontSlot(*(unsigned int *)(psVar2 + 0x14e),temp_v4);
-          }
-          FUN_00212120(psVar2[2]);
-        }
-      }
-      else {
-        infoWinSetMessage(*(unsigned int *)(psVar2 + 6),*(unsigned int *)(psVar2 + 4) & 0xffff);
-        dialogOpen((int)(char)psVar2[0x14c],1);
-      }
-      psVar2[0x151] = 1;
-      psVar2[1] = 1;
-      psVar2[0x151] = psVar2[0x151] - 1;
-      psVar2[0x150] = psVar2[0x150] + 1;
-      return 0;
-    }
-  }
-  psVar2[0x151] = 1;
-  psVar2[0x151] = psVar2[0x151] - 1;
-  psVar2[0x150] = psVar2[0x150] + 1;
-  return 0;
 }
 
-} /* extern "C" */
+}

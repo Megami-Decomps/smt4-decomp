@@ -4,6 +4,8 @@
 
 #include "common.h"
 
+struct AsdTexture;
+
 /* The table's file description. */
 typedef struct TexTableFile {
     /* 0x00 */ u8 unk00[0xC];
@@ -35,8 +37,14 @@ enum {
 typedef struct TexTableEntry {
     /* 0x00 */ TexTableFile *file;
     /* 0x04 */ TexTableNode *node;
-    /* 0x08 */ u32 state;
-    /* 0x0C */ u8 unk0C[4];
+    union {
+        /* 0x08 */ u32 state;
+        /* 0x08 */ AsdTexture *texture; /* the texture created for the file */
+    };
+    union {
+        /* 0x0C */ u8 unk0C[4];
+        /* 0x0C */ u8 *fileData; /* the loaded file */
+    };
     /* 0x10 */ u32 flags;
     /* 0x14 */ u8 unk14[0x5F0];
     /* 0x604 */ TexTableSlot slots[1];

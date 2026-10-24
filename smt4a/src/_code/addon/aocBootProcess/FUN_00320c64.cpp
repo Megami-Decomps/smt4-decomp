@@ -1,4 +1,3 @@
-/* NON_MATCHING: the addon-main global is loaded before the job assignment rather than after it. */
 #include "addon/aocBootProcess.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/AsdDebug.h"

@@ -1,126 +1,128 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00274fac` (_code @ 0x274fac, 0x268 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: close: register allocation only (float constants are hoisted to different VFP registers and the loop temporaries swap r0/r1); control flow, offsets and calls match */
+#include "map/mapDepart.h"
+#include <stddef.h>
+
+/* The model a gimic's object is bound to. */
+struct GimicNode {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ s32 motion;
+};
+
+struct GimicModelOwner {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ u8 *model;       /* byte 0x1F6 is the visible flag */
+};
+
+struct GimicObject {
+    /* 0x00 */ u32 flags;       /* bit 1: hidden */
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ GimicModelOwner *owner;
+};
+
+/* One map gimic slot (0x28 bytes). */
+struct GimicEntry {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 dirty;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ f32 position[4];
+    /* 0x14 */ s16 motion;
+    /* 0x16 */ u16 kind;
+    /* 0x18 */ GimicObject *object;
+    /* 0x1C */ s32 id;
+    /* 0x20 */ u8 unk20[8];
+};
+
+struct GimicList {
+    /* 0x00 */ s32 mode;
+    /* 0x04 */ u8 busy;
+    /* 0x05 */ u8 unk05[0x17];
+    /* 0x1C */ GimicEntry entries[24];
+};
+typedef char GimicLayout[sizeof(GimicEntry) == 0x28 && offsetof(GimicList, entries) == 0x1C ? 1 : -1];
 
 extern "C" {
 
-int asdMdlManagerMarkDestroy(void);
-int FUN_002671f4(int);
-int FUN_0028c618(unsigned int, int);
-int nodeSetTranslation(unsigned int, int, int *);
-int modelSelectPrimaryMotion(unsigned int);
-int asdMdlManagerDestroy(void);
+extern GimicList *g_mapGimic;
+extern GameState g_gameState;
 
-extern int *g_mapGimic; /* 0x447a48 */
-extern signed char DAT_0049f93e; /* 0x49f93e */
+void asdMdlManagerMarkDestroy(GimicObject *object);
+void asdMdlManagerDestroy(GimicObject *object);
+s32 FUN_0027cda0(void);
+void FUN_002671f4(s32 id, f32 x, f32 y, f32 z, f32 w, f32 a, f32 b, f32 c);
+void nodeSetTranslation(GimicObject *object, s32 index, f32 *position);
+void FUN_0028c618(GimicObject *object, s32 index, f32 a, f32 b, f32 c);
+void modelSelectPrimaryMotion(GimicObject *object, f32 speed);
 
-/* Supplied declaration required: asdMdlManagerMarkDestroy. */
-/* Supplied declaration required: FUN_002671f4. */
-extern int FUN_0027cda0(void);
-/* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: modelSelectPrimaryMotion. */
-/* Supplied declaration required: asdMdlManagerDestroy. */
-
-
+/* Per-frame update of the map gimics: keeps their models' visibility and motion in sync with the map, and runs
+ * the three-step teardown (mark, destroy, respawn effects) while a rebuild is pending. */
 void FUN_00274fac(void)
-
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  unsigned int *puVar3;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  if ((char)g_mapGimic[1] == '\0') {
-    temp_v0 = 0;
-    do {
-      piVar2 = g_mapGimic;
-      if ((char)g_mapGimic[temp_v0 * 10 + 7] != '\0') {
-        puVar3 = (unsigned int *)g_mapGimic[temp_v0 * 10 + 0xd];
-        temp_v1 = *puVar3;
-        if (DAT_0049f93e != '\0') {
-          if ((temp_v1 & 2) == 0) {
-            *puVar3 = temp_v1 | 2;
-            *(unsigned char *)(*(int *)(puVar3[2] + 0x2c) + 0x1f6) = 0;
-          }
-        }
-        else {
-          if ((temp_v1 & 2) != 0) {
-            *puVar3 = temp_v1 & 0xfffffffd;
-            *(unsigned char *)(*(int *)(puVar3[2] + 0x2c) + 0x1f6) = 1;
-          }
-          if (*(char *)((int)piVar2 + temp_v0 * 0x28 + 0x1d) != '\0') {
-            nodeSetTranslation(*(unsigned int *)(piVar2[temp_v0 * 10 + 0xd] + 8),0,piVar2 + temp_v0 * 10 + 8);
-            FUN_0028c618(*(unsigned int *)(piVar2[temp_v0 * 10 + 0xd] + 8),0);
-            if (*(int *)(*(int *)(piVar2[temp_v0 * 10 + 0xd] + 8) + 0x38) !=
-                (int)(short)piVar2[temp_v0 * 10 + 0xc]) {
-              modelSelectPrimaryMotion(*(unsigned int *)(piVar2[temp_v0 * 10 + 0xd] + 8));
+    s32 i;
+
+    if (g_mapGimic->busy != 0) {
+        if (g_mapGimic->mode == 0) {
+            for (i = 23; i >= 0; i--) {
+                if (g_mapGimic->entries[i].object != NULL) {
+                    asdMdlManagerMarkDestroy(g_mapGimic->entries[i].object);
+                }
             }
-            *(unsigned char *)((int)piVar2 + temp_v0 * 0x28 + 0x1d) = 0;
-          }
+        } else if (g_mapGimic->mode == 1) {
+            for (i = 23; i >= 0; i--) {
+                if (g_mapGimic->entries[i].object != NULL) {
+                    asdMdlManagerDestroy(g_mapGimic->entries[i].object);
+                    g_mapGimic->entries[i].object = NULL;
+                }
+            }
+            for (i = 0; i < 24; i++) {
+                g_mapGimic->entries[i].active = 0;
+            }
+        } else if (g_mapGimic->mode == 2) {
+            if (FUN_0027cda0() == 0) {
+                return;
+            }
+            for (i = 0; i < 24; i++) {
+                GimicEntry *entry = &g_mapGimic->entries[i];
+
+                if (entry->active != 0 && entry->kind == 12) {
+                    FUN_002671f4((s16)entry->id, entry->position[0], entry->position[1], entry->position[2],
+                                 entry->position[3], 600.0f, 350.0f, 160.0f);
+                }
+            }
+            g_mapGimic->busy = 0;
+            g_mapGimic->mode = 0;
+            return;
+        } else {
+            return;
         }
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x18);
-    return;
-  }
-  temp_v0 = *g_mapGimic;
-  if (temp_v0 == 0) {
-    temp_v0 = 0x17;
-    do {
-      if (g_mapGimic[temp_v0 * 10 + 0xd] != 0) {
-        asdMdlManagerMarkDestroy();
-      }
-      temp_v0 = temp_v0 - 1;
-      piVar2 = g_mapGimic;
-    } while (-1 < temp_v0);
-  }
-  else {
-    if (temp_v0 != 1) {
-      if (temp_v0 != 2) {
+        g_mapGimic->mode++;
         return;
-      }
-      temp_v0 = FUN_0027cda0();
-      if (temp_v0 == 0) {
-        return;
-      }
-      temp_v0 = 0;
-      do {
-        if (((char)g_mapGimic[temp_v0 * 10 + 7] != '\0') &&
-           (*(short *)((int)g_mapGimic + temp_v0 * 0x28 + 0x32) == 0xc)) {
-          FUN_002671f4((int)(short)g_mapGimic[temp_v0 * 10 + 0xe]);
-        }
-        piVar2 = g_mapGimic;
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < 0x18);
-      *(unsigned char *)(g_mapGimic + 1) = 0;
-      *piVar2 = 0;
-      return;
     }
-    temp_v0 = 0x17;
-    do {
-      if (g_mapGimic[temp_v0 * 10 + 0xd] != 0) {
-        asdMdlManagerDestroy();
-        g_mapGimic[temp_v0 * 10 + 0xd] = 0;
-      }
-      piVar2 = g_mapGimic;
-      temp_v0 = temp_v0 - 1;
-    } while (-1 < temp_v0);
-    temp_v2 = 0;
-    temp_v0 = 0;
-    do {
-      temp_v3 = temp_v2 + 1;
-      temp_v0 = temp_v0 + 2;
-      *(unsigned char *)(piVar2 + temp_v2 * 10 + 7) = 0;
-      temp_v2 = temp_v2 + 2;
-      *(unsigned char *)(piVar2 + temp_v3 * 10 + 7) = 0;
-    } while (temp_v0 < 0x18);
-  }
-  *piVar2 = *piVar2 + 1;
-  return;
+    for (i = 0; i < 24; i++) {
+        GimicEntry *entry = &g_mapGimic->entries[i];
+
+        if (entry->active == 0) {
+            continue;
+        }
+        if (g_gameState.controllerFlags.mapRangeModelsHidden != 0) {
+            if ((entry->object->flags & 2) == 0) {
+                entry->object->flags |= 2;
+                entry->object->owner->model[0x1F6] = 0;
+            }
+        } else {
+            if ((entry->object->flags & 2) != 0) {
+                entry->object->flags &= ~2;
+                entry->object->owner->model[0x1F6] = 1;
+            }
+            if (entry->dirty != 0) {
+                nodeSetTranslation(entry->object, 0, entry->position);
+                FUN_0028c618(entry->object, 0, 350.0f, entry->position[3], 350.0f);
+                if (((GimicNode *)entry->object)->motion != entry->motion) {
+                    modelSelectPrimaryMotion(entry->object, 350.0f);
+                }
+                entry->dirty = 0;
+            }
+        }
+    }
 }
 
 } /* extern "C" */

@@ -59,8 +59,8 @@ typedef struct {
 extern unsigned int DAT_00433d9c; /* 0x433d9c */
 extern float DAT_00433da0; /* 0x433da0 */
 extern int g_titleScene; /* 0x44ea00 */
-extern unsigned int DAT_00476634; /* 0x476634 */
-extern unsigned int DAT_004efd6c; /* 0x4efd6c */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x476634 */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x4efd6c */
 extern unsigned int DAT_004efd70; /* 0x4efd70 */
 extern unsigned int DAT_004efd74; /* 0x4efd74 */
 extern unsigned int DAT_004efd78; /* 0x4efd78 */
@@ -238,22 +238,22 @@ LAB_0033d500:
                                            (unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v18 = temp_v4;
                 if (temp_v36 != 0) {
-                  if (((DAT_00476634 & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&DAT_00476634), temp_v2 != 0)
+                  if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v2 != 0)
                      ) {
                     DAT_004efd70 = (unsigned int)temp_v15;
-                    DAT_004efd6c = (unsigned int)temp_v13;
+                    _ZZN2nw4math5MTX348IdentityEvE8identity = (unsigned int)temp_v13;
                     DAT_004efd74 = DAT_004efd70;
                     DAT_004efd78 = DAT_004efd70;
                     DAT_004efd7c = DAT_004efd70;
-                    DAT_004efd80 = DAT_004efd6c;
+                    DAT_004efd80 = _ZZN2nw4math5MTX348IdentityEvE8identity;
                     DAT_004efd84 = DAT_004efd70;
                     DAT_004efd88 = DAT_004efd70;
                     DAT_004efd8c = DAT_004efd70;
                     DAT_004efd90 = DAT_004efd70;
-                    DAT_004efd94 = DAT_004efd6c;
+                    DAT_004efd94 = _ZZN2nw4math5MTX348IdentityEvE8identity;
                     DAT_004efd98 = DAT_004efd70;
                   }
-                  nn_math_ARMv6_MTX34CopyAsm(temp_v35,&DAT_004efd6c);
+                  nn_math_ARMv6_MTX34CopyAsm(temp_v35,&_ZZN2nw4math5MTX348IdentityEvE8identity);
                   in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v9 == (float)temp_v15) << 0x1e);
                   if (((!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) || (*param_7 != 0x3f800000)) ||
                      (param_7[1] != 0x3f800000)) {

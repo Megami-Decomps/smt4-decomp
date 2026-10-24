@@ -1,143 +1,191 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004dab08` (_code @ 0x4dab08, 0x284 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail addresses every filter field after the first through one hoisted base (f + 0x100, r4) and keeps the filter pointer in r8, memberA/memberB in r6/r7; armcc here keeps the bytes on the filter pointer */
+#include "common.h"
+#include <stddef.h>
+
+/* A demon skill-like record as the fusion/search filter reads it. */
+struct FilterRecord {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 category;   /* 0x26 marks the excluded category */
+    /* 0x03 */ u8 unk03[3];
+    /* 0x06 */ u16 count;
+    /* 0x08 */ u8 unk08[2];
+    /* 0x0A */ u16 flags;     /* bit 0: the record can be matched */
+};
+
+/* The conditions a record must meet; each group is enabled by its flag byte. */
+struct RecordFilter {
+    /* 0x000 */ u8 unk000[0x148];
+    /* 0x148 */ u8 matchId;
+    /* 0x149 */ u8 unk149;
+    /* 0x14A */ u16 id;
+    /* 0x14C */ u8 matchCategory;
+    /* 0x14D */ u8 unk14D;
+    /* 0x14E */ u16 category;
+    /* 0x150 */ u8 matchBracket;
+    /* 0x151 */ u8 unk151[3];
+    /* 0x154 */ s32 bracket;    /* 0: any, 1..9: count in [10 * (n - 1), 10 * n), 10: 90 and up */
+    /* 0x158 */ u8 unk158[0x16];
+    /* 0x16E */ u8 requireMembers;
+    /* 0x16F */ u8 unk16F;
+    /* 0x170 */ s16 requiredSlotA;
+    /* 0x172 */ s16 requiredSlotB;
+    /* 0x174 */ u8 excludeMembers;
+    /* 0x175 */ u8 unk175;
+    /* 0x176 */ s16 excludedSlotA;
+    /* 0x178 */ s16 excludedSlotB;
+    /* 0x17A */ u8 allowExcludedCategory;
+    /* 0x17B */ u8 unk17B[0x39];
+    /* 0x1B4 */ u8 skipLearned;
+    /* 0x1B5 */ u8 limitCount;
+};
+
+struct SlotRecord {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 id;
+};
+
+typedef char RecordFilterOffsets[offsetof(RecordFilter, bracket) == 0x154 &&
+    offsetof(RecordFilter, requiredSlotA) == 0x170 &&
+    offsetof(RecordFilter, excludedSlotB) == 0x178 &&
+    offsetof(RecordFilter, allowExcludedCategory) == 0x17A &&
+    offsetof(RecordFilter, limitCount) == 0x1B5 ? 1 : -1];
 
 extern "C" {
 
-int FUN_00184310(void);
+FilterRecord *FUN_00184310(u32 id);
+s32 slotRecordFindById(u32 id);
+SlotRecord *gameGetSlotRecord(s32 slot);
+s32 FUN_002a4b28(u32 id);
+u32 computeCountLimit(void);
 
-typedef struct fn_004dab08_arg0 fn_004dab08_arg0;
-struct fn_004dab08_arg0 {
-    unsigned char pad_0x0[0x148];
-    byte field_0x148; /* +0x148 */
-    unsigned char pad_0x149[0x1];
-    ushort field_0x14a; /* +0x14a */
-    byte field_0x14c; /* +0x14c */
-    unsigned char pad_0x14d[0x1];
-    ushort field_0x14e; /* +0x14e */
-    byte field_0x150; /* +0x150 */
-    unsigned char pad_0x151[0x3];
-    undefined4 field_0x154; /* +0x154 */
-    unsigned char pad_0x158[0x16];
-    byte field_0x16e; /* +0x16e */
-    unsigned char pad_0x16f[0x1];
-    short field_0x170; /* +0x170 */
-    short field_0x172; /* +0x172 */
-    byte field_0x174; /* +0x174 */
-    unsigned char pad_0x175[0x1];
-    short field_0x176; /* +0x176 */
-    short field_0x178; /* +0x178 */
-    byte field_0x17a; /* +0x17a */
-    unsigned char pad_0x17b[0x39];
-    byte field_0x1b4; /* +0x1b4 */
-    byte field_0x1b5; /* +0x1b5 */
-};
-
-/* Supplied declaration required: FUN_00184310. */
-extern int slotRecordFindById(unsigned short);
-extern int gameGetSlotRecord(void);
-extern int FUN_002a4b28(unsigned short);
-extern unsigned int computeCountLimit(void);
-
-
-/* WARNING: Type propagation algorithm not settling */
-
-unsigned short FUN_004dab08(fn_004dab08_arg0 *param_1,unsigned int param_2,unsigned int param_3,short *param_4)
-
+/* Whether the record `recordId` passes the filter, with the two member ids given for the party-slot conditions. */
+s32 FUN_004dab08(RecordFilter *filter, u32 memberA, u32 memberB, u32 recordId)
 {
-/* irregular: 9 unstructured edge(s); 3 goto(s); 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  
-  FUN_00184310();
-  if ((param_4[5] & 1U) == 0) {
-    return param_4[5] & 1;
-  }
-  if (param_1->field_0x148 != 0) {
-    if (*param_4 == param_1->field_0x14a) goto LAB_004dac50;
-    return 0;
-  }
-  if ((param_1->field_0x14c != 0) && ((unsigned short)(unsigned char)param_4[1] != param_1->field_0x14e)) {
-    return 0;
-  }
-  if (param_1->field_0x150 != 0) {
-    temp_v0 = (unsigned int)(unsigned short)param_4[3];
-    switch(param_1->field_0x154) {
-    case 0:
-      goto LAB_004dac50;
-    case 1:
-      break;
-    case 2:
-      temp_v0 = temp_v0 - 10;
-      break;
-    case 3:
-      temp_v0 = temp_v0 - 0x14;
-      break;
-    case 4:
-      temp_v0 = temp_v0 - 0x1e;
-      break;
-    case 5:
-      temp_v0 = temp_v0 - 0x28;
-      break;
-    case 6:
-      temp_v0 = temp_v0 - 0x32;
-      break;
-    case 7:
-      temp_v0 = temp_v0 - 0x3c;
-      break;
-    case 8:
-      temp_v0 = temp_v0 - 0x46;
-      break;
-    case 9:
-      temp_v0 = temp_v0 - 0x50;
-      break;
-    case 10:
-      if (temp_v0 >= 0x5a) goto LAB_004dac50;
-      return 0;
-    default:
-      return 0;
-    }
-    if (temp_v0 >= 10) {
-      return 0;
-    }
-  }
-LAB_004dac50:
-  if ((((param_1->field_0x1b5 == 0) || (temp_v0 = computeCountLimit(), (unsigned short)param_4[3] <= temp_v0)) &&
-      ((param_1->field_0x1b4 == 0 || (temp_v1 = FUN_002a4b28(*param_4), temp_v1 == 0)))) &&
-     ((param_1->field_0x1b5 == 0 || (temp_v1 = slotRecordFindById(*param_4), temp_v1 == 0)))) {
-    temp_v2 = param_2;
-    FUN_00184310();
-    temp_v0 = param_3;
-    FUN_00184310();
-    if (param_1->field_0x17a == 0) {
-      temp_v3 = *(char *)(temp_v2 + 2) != '&';
-      if (temp_v3) {
-        temp_v0 = (unsigned int)*(unsigned char *)(temp_v0 + 2);
-      }
-      if (!temp_v3 || temp_v0 == 0x26) {
+    FilterRecord *record = FUN_00184310(recordId);
+    FilterRecord *first;
+    FilterRecord *second;
+    s32 count;
+
+    if (!(record->flags & 1)) {
         return 0;
-      }
     }
-    if (((param_1->field_0x16e == 0) ||
-        ((((unsigned short)param_1->field_0x170 >= 0x18 ||
-          (temp_v1 = gameGetSlotRecord(),
-          *(unsigned short *)(temp_v1 + 0x62) == param_2 || *(unsigned short *)(temp_v1 + 0x62) == param_3)) &&
-         (((unsigned short)param_1->field_0x172 >= 0x18 ||
-          (temp_v1 = gameGetSlotRecord(),
-          *(unsigned short *)(temp_v1 + 0x62) == param_2 || *(unsigned short *)(temp_v1 + 0x62) == param_3)))))) &&
-       ((param_1->field_0x174 == 0 ||
-        ((((unsigned short)param_1->field_0x176 >= 0x18 ||
-          (temp_v1 = gameGetSlotRecord(),
-          *(unsigned short *)(temp_v1 + 0x62) != param_2 && *(unsigned short *)(temp_v1 + 0x62) != param_3)) &&
-         (((unsigned short)param_1->field_0x178 >= 0x18 ||
-          (temp_v1 = gameGetSlotRecord(),
-          *(unsigned short *)(temp_v1 + 0x62) != param_2 && *(unsigned short *)(temp_v1 + 0x62) != param_3)))))))) {
-      return 1;
+    if (filter->matchId) {
+        if (record->id != filter->id) {
+            return 0;
+        }
+    } else {
+        if (filter->matchCategory && record->category != filter->category) {
+            return 0;
+        }
+        if (filter->matchBracket) {
+            count = record->count;
+            switch (filter->bracket) {
+            case 0:
+                break;
+            case 1:
+                if (count <= 9) {
+                    break;
+                }
+                return 0;
+            case 2:
+                if (count >= 10 && count <= 19) {
+                    break;
+                }
+                return 0;
+            case 3:
+                if (count >= 20 && count <= 29) {
+                    break;
+                }
+                return 0;
+            case 4:
+                if (count >= 30 && count <= 39) {
+                    break;
+                }
+                return 0;
+            case 5:
+                if (count >= 40 && count <= 49) {
+                    break;
+                }
+                return 0;
+            case 6:
+                if (count >= 50 && count <= 59) {
+                    break;
+                }
+                return 0;
+            case 7:
+                if (count >= 60 && count <= 69) {
+                    break;
+                }
+                return 0;
+            case 8:
+                if (count >= 70 && count <= 79) {
+                    break;
+                }
+                return 0;
+            case 9:
+                if (count >= 80 && count <= 89) {
+                    break;
+                }
+                return 0;
+            case 10:
+                if (count >= 90) {
+                    break;
+                }
+                return 0;
+            default:
+                return 0;
+            }
+        }
     }
-  }
-  return 0;
+    if (filter->limitCount && record->count > computeCountLimit()) {
+        return 0;
+    }
+    if (filter->skipLearned && FUN_002a4b28(record->id) != 0) {
+        return 0;
+    }
+    if (filter->limitCount && slotRecordFindById(record->id) != 0) {
+        return 0;
+    }
+    first = FUN_00184310(memberA);
+    second = FUN_00184310(memberB);
+    if (!filter->allowExcludedCategory) {
+        if (first->category == 0x26 || second->category == 0x26) {
+            return 0;
+        }
+    }
+    if (filter->requireMembers) {
+        if ((u32)filter->requiredSlotA < 24) {
+            SlotRecord *slot = gameGetSlotRecord(filter->requiredSlotA);
+
+            if (slot->id != memberA && slot->id != memberB) {
+                return 0;
+            }
+        }
+        if ((u32)filter->requiredSlotB < 24) {
+            SlotRecord *slot = gameGetSlotRecord(filter->requiredSlotB);
+
+            if (slot->id != memberA && slot->id != memberB) {
+                return 0;
+            }
+        }
+    }
+    if (filter->excludeMembers) {
+        if ((u32)filter->excludedSlotA < 24) {
+            SlotRecord *slot = gameGetSlotRecord(filter->excludedSlotA);
+
+            if (slot->id == memberA || slot->id == memberB) {
+                return 0;
+            }
+        }
+        if ((u32)filter->excludedSlotB < 24) {
+            SlotRecord *slot = gameGetSlotRecord(filter->excludedSlotB);
+
+            if (slot->id == memberA || slot->id == memberB) {
+                return 0;
+            }
+        }
+    }
+    return 1;
 }
 
 } /* extern "C" */

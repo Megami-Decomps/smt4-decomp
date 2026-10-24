@@ -10,7 +10,7 @@ extern "C" {
 BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *, u32);
 void source4CCopyHalves(const BtlCombatantEntryA *, u16 *);
-void FUN_0034a290(u32);
+void dataTable41FindById(u32);
 extern BattleValueShareMasks DAT_005713f0;
 }
 
@@ -27,7 +27,7 @@ extern "C" f32 FUN_004c3bc0(u32 sourceId, u32 targetId)
         source4CCopyHalves(source, values);
         for (s32 i = 0; i < 9; ++i) {
             if (values[i] != 0) {
-                FUN_0034a290(values[i]);
+                dataTable41FindById(values[i]);
             }
         }
     }

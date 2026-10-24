@@ -4,7 +4,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
-s32 FUN_004c5f90(s32 unitIndex);
+s32 btlFindEntryNonzeroRecordValue(s32 unitIndex);
 s32 lcgRandomRange(u32 maximum);
 
 s32 FUN_004e9ae8(BtlMainStateA **owner, s32 *indices, s32 count, s32 force)
@@ -14,7 +14,7 @@ s32 FUN_004e9ae8(BtlMainStateA **owner, s32 *indices, s32 count, s32 force)
     }
     u8 changed = 0;
     for (s32 i = 0; i < count; ++i) {
-        s32 chance = FUN_004c5f90((*owner)->entries[indices[i]].unitIndex);
+        s32 chance = btlFindEntryNonzeroRecordValue((*owner)->entries[indices[i]].unitIndex);
         if (chance != 0 && (force != 0 || lcgRandomRange(99) <= chance)) {
             indices[i] = -1;
             changed = 1;

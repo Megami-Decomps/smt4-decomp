@@ -14,7 +14,7 @@ int fileSlotLoad(...);
 int pairSetHalves(...);
 int timerStart(...);
 int FUN_002bd954(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int uiSpriteInitializeState(...);
 int paramsInit(...);
 int memClear(...);
@@ -65,7 +65,7 @@ extern int questReadRuntimeFlag(unsigned short, unsigned int);
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
@@ -140,18 +140,18 @@ void FUN_00269dc8(void)
   FUN_002bd954(puVar2 + 0xd,0x29,0,puVar2 + 5,0xc9);
   timerStart(puVar2 + 0xd,0);
   FUN_002bd954(puVar2 + 0x30,0x29,0,puVar2 + 5,0xc9);
-  FUN_002bee58(puVar2 + 0x30,0);
+  spriteStartAnimationByIndex(puVar2 + 0x30,0);
   FUN_002bd954(puVar2 + 0x53,0x29,0,puVar2 + 5,0xc9);
   timerStart(puVar2 + 0x53,4,0);
   FUN_002bd954(puVar2 + 0x76,0x29,0,puVar2 + 5,0xc9);
   FUN_002bd954(puVar2 + 0x99,0x29,0x61,puVar2 + 5,0x68);
-  FUN_002bee58(puVar2 + 0x99,2);
+  spriteStartAnimationByIndex(puVar2 + 0x99,2);
   FUN_00295eb0(puVar2 + 0x99,0x29,0x2a);
   FUN_002bd954(puVar2 + 0xbc,0x29,0x5d,puVar2 + 5,0xa1);
-  FUN_002bee58(puVar2 + 0xbc,2);
+  spriteStartAnimationByIndex(puVar2 + 0xbc,2);
   FUN_00295eb0(puVar2 + 0xbc,0x29,0x53);
   uiSpriteInitializeState(puVar2 + 0xdf,0x29,0xffffffff,0x12,puVar2 + 5,0xc9);
-  FUN_002bee58(puVar2 + 0xdf,3);
+  spriteStartAnimationByIndex(puVar2 + 0xdf,3);
   *(unsigned short *)((int)puVar2 + 0x3b6) = 2;
   pairSetHalves(puVar2 + 0xdf,0,0x78);
   puVar6 = puVar2 + 0x102;
@@ -161,7 +161,7 @@ void FUN_00269dc8(void)
   FUN_002bd954(puVar2 + 0x125,0x29,0,puVar2 + 5,0xc9);
   timerStart(puVar2 + 0x125,2,0);
   FUN_002bd954(puVar2 + 0x148,0x29,0,puVar2 + 5,0xc9);
-  FUN_002bee58(puVar2 + 0x148,5);
+  spriteStartAnimationByIndex(puVar2 + 0x148,5);
   puVar2 = g_uiQuest;
   temp_v1 = g_uiQuest[1];
   g_uiQuest[1] = 0;

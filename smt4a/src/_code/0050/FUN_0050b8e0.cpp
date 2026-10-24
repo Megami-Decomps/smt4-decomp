@@ -16,8 +16,8 @@ extern unsigned int DAT_00536d14; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern unsigned int DAT_005c4c2c; /* 0x5c4c2c */
-extern float DAT_0064c054; /* 0x64c054 */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x5c4c2c */
+extern float _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x64c054 */
 extern float DAT_0064c058; /* 0x64c058 */
 extern float DAT_0064c05c; /* 0x64c05c */
 extern float DAT_0064c060; /* 0x64c060 */
@@ -275,8 +275,8 @@ unsigned int FUN_0050b8e0(int *param_1,float *param_2,unsigned int param_3,unsig
   }
   else {
     temp_v21 = 1.0f;
-    if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v0 != 0)) {
-      DAT_0064c054 = temp_v21;
+    if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v0 != 0)) {
+      _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v21;
       DAT_0064c058 = temp_v20;
       DAT_0064c05c = temp_v20;
       DAT_0064c060 = temp_v20;
@@ -289,7 +289,7 @@ unsigned int FUN_0050b8e0(int *param_1,float *param_2,unsigned int param_3,unsig
       DAT_0064c07c = temp_v21;
       DAT_0064c080 = temp_v20;
     }
-    nn_math_ARMv6_MTX34CopyAsm(param_2,&DAT_0064c054);
+    nn_math_ARMv6_MTX34CopyAsm(param_2,&_ZZN2nw4math5MTX348IdentityEvE8identity);
     param_2[0xc] = temp_v21;
     param_2[0xd] = temp_v21;
     param_2[0xe] = temp_v21;

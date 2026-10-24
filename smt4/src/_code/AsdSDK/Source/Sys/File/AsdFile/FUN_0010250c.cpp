@@ -1,104 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010250c` (_code @ 0x10250c, 0x144 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the semaphore handle at sp+0 (shared with the call-argument area, 12-byte frame), the shared zero in r7, and ends FUN_0010d0f8/FUN_0010f764 with two stripped hook nops before the tail call; armcc allocates the handle at sp+8 and calls bl. */
+#include "AsdSDK/Source/Sys/File/AsdFile.h"
+#include "AsdSDK/AsdDebug.h"
+#include "nn/Result.h"
 
 extern "C" {
+extern AsdFileGlobals g_asdFile;
+extern u32 g_asdFileMutex;
+extern u8 g_asdFileEvent[];
 
-int FUN_0010d0f8(void);
-int FUN_0010f5dc(void);
-int FUN_0010f698(unsigned char *, int, int, unsigned int);
-int resourceCallDefaultOptions(int, int, int);
-int FUN_0010f764(void);
-int FUN_0010f7b8(int, int, int);
-int romPathForward(int, int, unsigned int, unsigned int);
-int FUN_002c5254(int *, unsigned int, int);
-int FUN_002c526c(void);
-int FUN_002c52dc(int *, int, int);
-int asdFatalError(void);
-int asdMemoryAlloc(int, int, int, unsigned int);
+void FUN_0010f5dc(void);
+u32 resourceCallDefaultOptions(u32 first, u32 second, u32 mode);
+void *asdMemoryAlloc(u32 bytes, u32 alignment, u32 flags, u32 heap, u32 clear);
+void romPathForward(u32 first, u32 second, void *buffer, u32 size, u32 mode);
+u32 FUN_0010f7b8(u32 first, u32 second, u32 mode);
+u32 FUN_0010f698(const char *device, u32 first, u32 second, void *buffer, u32 size, u32 mode);
+void asdFatalError(void);
+u32 FUN_002c52dc(u32 *handle, u32 initial, u32 maximum);
+u32 FUN_002c5254(u32 *handle, u32 object, u32 mode);
+void FUN_002c526c(void);
+void nn_os_LightEvent_Initialize(void *event, u32 mode);
+void FUN_0010d0f8(void);
+void FUN_0010f764(void);
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern unsigned char LAB_00102698; /* 0x102698 */
-extern unsigned int DAT_00465008; /* 0x465008 */
-extern unsigned int DAT_0046500c; /* 0x46500c */
-extern unsigned int DAT_00465010; /* 0x465010 */
-extern unsigned int g_asdFileMutex; /* 0x465014 */
-extern unsigned int g_asdFileEvent; /* 0x465028 */
-
-/* Supplied declaration required: FUN_0010d0f8. */
-/* Supplied declaration required: FUN_0010f5dc. */
-/* Supplied declaration required: FUN_0010f698. */
-/* Supplied declaration required: resourceCallDefaultOptions. */
-/* Supplied declaration required: FUN_0010f764. */
-/* Supplied declaration required: FUN_0010f7b8. */
-/* Supplied declaration required: romPathForward. */
-/* Supplied declaration required: FUN_002c5254. */
-/* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: FUN_002c52dc. */
-/* Supplied declaration required: asdFatalError. */
-/* Supplied declaration required: asdMemoryAlloc. */
-extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
-
-
+// Start the file service: the "rom:" and "patch:" device workspaces, the request lock and the event.
 void FUN_0010250c(void)
-
 {
-/* irregular: 12 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned char *puVar3;
-  unsigned int *puVar4;
-  unsigned int *puVar5;
-  int temp_v2;
-  unsigned int uStack_1c;
-  
-  puVar4 = (unsigned int *)&temp_v2;
-  puVar5 = (unsigned int *)&temp_v2;
-  DAT_00465010 = 0;
-  FUN_0010f5dc();
-  temp_v0 = 0x10;
-  resourceCallDefaultOptions(0x10,0x10,1);
-  temp_v1 = 0x100;
-  temp_v2 = 1;
-  asdMemoryAlloc(0x100,0x100,0,temp_v0);
-  temp_v2 = 1;
-  DAT_00465008 = temp_v1;
-  romPathForward(0x10,0x10,temp_v1,temp_v0);
-  temp_v0 = 0x10;
-  FUN_0010f7b8(0x10,0x10,1);
-  temp_v1 = 0x100;
-  temp_v2 = 1;
-  asdMemoryAlloc(0x100,0x100,0,temp_v0);
-  puVar3 = &LAB_00102698;
-  uStack_1c = 1;
-  temp_v2 = temp_v0;
-  DAT_0046500c = temp_v1;
-  FUN_0010f698(&LAB_00102698,0x10,0x10,temp_v1);
-  if ((int)puVar3 < 0) {
-    asdFatalError();
-  }
-  temp_v2 = 0;
-  FUN_002c52dc(&temp_v2,0,2);
-  if (-1 < (int)puVar4) {
-    puVar4 = (unsigned int *)0x0;
-    g_asdFileMutex = temp_v2;
-  }
-  if ((int)puVar4 < 0) {
-    FUN_002c526c();
-  }
-  FUN_002c5254(&temp_v2,g_asdFileMutex,1);
-  if ((int)puVar5 < 0) {
-    FUN_002c526c();
-  }
-  nn_os_LightEvent_Initialize((unsigned int)&g_asdFileEvent,0);
-  FUN_0010d0f8();
-  FUN_0010f764();
-  return;
+    u32 handle = 0;
+    g_asdFile.head = NULL;
+    FUN_0010f5dc();
+    u32 romSize = resourceCallDefaultOptions(16, 16, 1);
+    asdDebugTrace("c:\\SMT4\\RXD686\\sdds4\\Patch\\AsdSDK\\Source\\Sys\\File\\AsdFile.cpp", 0x11c);
+    void *romBuffer = asdMemoryAlloc(0x100, 0x100, 0, romSize, 1);
+    g_asdFile.entries = (AsdFileEntry *)romBuffer;
+    romPathForward(16, 16, romBuffer, romSize, 1);
+    u32 patchSize = FUN_0010f7b8(16, 16, 1);
+    asdDebugTrace("c:\\SMT4\\RXD686\\sdds4\\Patch\\AsdSDK\\Source\\Sys\\File\\AsdFile.cpp", 0x122);
+    g_asdFile.bufferB = asdMemoryAlloc(0x100, 0x100, 0, patchSize, 1);
+    u32 result = FUN_0010f698("patch:", 16, 16, g_asdFile.bufferB, patchSize, 1);
+    if (nnResultIsFailure(result)) {
+        asdFatalError();
+    }
+    result = FUN_002c52dc(&handle, 0, 2);
+    if (nnResultIsSuccess(result)) {
+        g_asdFileMutex = handle;
+        result = 0;
+    }
+    if (nnResultIsFailure(result)) {
+        FUN_002c526c();
+    }
+    result = FUN_002c5254(&handle, g_asdFileMutex, 1);
+    if (nnResultIsFailure(result)) {
+        FUN_002c526c();
+    }
+    nn_os_LightEvent_Initialize(g_asdFileEvent, 0);
+    FUN_0010d0f8();
+    FUN_0010f764();
 }
 
 } /* extern "C" */

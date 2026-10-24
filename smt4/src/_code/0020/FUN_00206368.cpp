@@ -3,7 +3,7 @@
 
 extern "C" {
 void pairSetFirstResetSecond(UiSpriteState *sprite, s32 animation);
-void FUN_002bee58(UiSpriteState *sprite, s32 layer);
+void spriteStartAnimationByIndex(UiSpriteState *sprite, s32 layer);
 
 void FUN_00206368(SpriteRowList *list, u32 alternate, u16 rowCount, u16 selectedRow)
 {
@@ -30,12 +30,12 @@ void FUN_00206368(SpriteRowList *list, u32 alternate, u16 rowCount, u16 selected
             pairSetFirstResetSecond(&list->sprites[row + 50], 4006);
             pairSetFirstResetSecond(&list->sprites[row + 40], 4000);
         }
-        FUN_002bee58(&list->sprites[row], 2);
-        FUN_002bee58(&list->sprites[row + 20], 5);
-        FUN_002bee58(&list->sprites[row + 30], 3);
-        FUN_002bee58(&list->sprites[row + 50], 10);
+        spriteStartAnimationByIndex(&list->sprites[row], 2);
+        spriteStartAnimationByIndex(&list->sprites[row + 20], 5);
+        spriteStartAnimationByIndex(&list->sprites[row + 30], 3);
+        spriteStartAnimationByIndex(&list->sprites[row + 50], 10);
         pairSetFirstResetSecond(&list->sprites[row + 10], 6);
-        FUN_002bee58(&list->sprites[row + 10], 1);
+        spriteStartAnimationByIndex(&list->sprites[row + 10], 1);
     }
 }
 }

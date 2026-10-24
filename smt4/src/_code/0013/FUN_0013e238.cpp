@@ -44,9 +44,9 @@ typedef struct {
 
 extern unsigned char DAT_0042142c; /* 0x42142c */
 extern unsigned char DAT_0042187c; /* 0x42187c */
-extern unsigned int DAT_00476634; /* 0x476634 */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x476634 */
 extern unsigned int DAT_00476640; /* 0x476640 */
-extern unsigned int DAT_004efd6c; /* 0x4efd6c */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x4efd6c */
 extern unsigned int DAT_004efd70; /* 0x4efd70 */
 extern unsigned int DAT_004efd74; /* 0x4efd74 */
 extern unsigned int DAT_004efd78; /* 0x4efd78 */
@@ -196,21 +196,21 @@ FUN_0013e238(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
       if (((DAT_00476640 & 1) == 0) &&
          (temp_v0 = __cxa_guard_acquire(&DAT_00476640,(int)((unsigned long long)temp_v11 >> 0x20)), temp_v0 != 0)) {
         temp_v30 = 0x7e1;
-        if (((DAT_00476634 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476634), temp_v0 != 0)) {
-          DAT_004efd6c = (unsigned int)temp_v12;
+        if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v0 != 0)) {
+          _ZZN2nw4math5MTX348IdentityEvE8identity = (unsigned int)temp_v12;
           DAT_004efd70 = (unsigned int)((unsigned long long)temp_v12 >> 0x20);
           DAT_004efd74 = DAT_004efd70;
           DAT_004efd78 = DAT_004efd70;
           DAT_004efd7c = DAT_004efd70;
-          DAT_004efd80 = DAT_004efd6c;
+          DAT_004efd80 = _ZZN2nw4math5MTX348IdentityEvE8identity;
           DAT_004efd84 = DAT_004efd70;
           DAT_004efd88 = DAT_004efd70;
           DAT_004efd8c = DAT_004efd70;
           DAT_004efd90 = DAT_004efd70;
-          DAT_004efd94 = DAT_004efd6c;
+          DAT_004efd94 = _ZZN2nw4math5MTX348IdentityEvE8identity;
           DAT_004efd98 = DAT_004efd70;
         }
-        nn_math_ARMv6_MTX34CopyAsm(&DAT_004efdf4,&DAT_004efd6c);
+        nn_math_ARMv6_MTX34CopyAsm(&DAT_004efdf4,&_ZZN2nw4math5MTX348IdentityEvE8identity);
         DAT_004efe24 = (unsigned int)temp_v12;
         DAT_004efe30 = temp_v30;
         DAT_004efe28 = DAT_004efe24;
@@ -229,21 +229,21 @@ FUN_0013e238(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         *(unsigned int *)(temp_v3 + 0x38) = uStack_c0;
         *(unsigned int *)(temp_v3 + 0x3c) = temp_v38;
       }
-      if (((DAT_00476634 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476634), temp_v0 != 0)) {
-        DAT_004efd6c = (unsigned int)temp_v12;
+      if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v0 != 0)) {
+        _ZZN2nw4math5MTX348IdentityEvE8identity = (unsigned int)temp_v12;
         DAT_004efd70 = (unsigned int)((unsigned long long)temp_v12 >> 0x20);
         DAT_004efd74 = DAT_004efd70;
         DAT_004efd78 = DAT_004efd70;
         DAT_004efd7c = DAT_004efd70;
-        DAT_004efd80 = DAT_004efd6c;
+        DAT_004efd80 = _ZZN2nw4math5MTX348IdentityEvE8identity;
         DAT_004efd84 = DAT_004efd70;
         DAT_004efd88 = DAT_004efd70;
         DAT_004efd8c = DAT_004efd70;
         DAT_004efd90 = DAT_004efd70;
-        DAT_004efd94 = DAT_004efd6c;
+        DAT_004efd94 = _ZZN2nw4math5MTX348IdentityEvE8identity;
         DAT_004efd98 = DAT_004efd70;
       }
-      nn_math_ARMv6_MTX34CopyAsm(temp_v39,&DAT_004efd6c);
+      nn_math_ARMv6_MTX34CopyAsm(temp_v39,&_ZZN2nw4math5MTX348IdentityEvE8identity);
       temp_v3 = temp_v27;
       temp_v7 = temp_v27 != 0;
       temp_v27 = temp_v27 + 0x30;
@@ -251,21 +251,21 @@ FUN_0013e238(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         nn_math_ARMv6_MTX34CopyAsm(temp_v3,temp_v39);
       }
       puVar3 = temp_v39;
-      if (((DAT_00476634 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476634), temp_v0 != 0)) {
-        DAT_004efd6c = (unsigned int)temp_v12;
+      if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v0 != 0)) {
+        _ZZN2nw4math5MTX348IdentityEvE8identity = (unsigned int)temp_v12;
         DAT_004efd70 = (unsigned int)((unsigned long long)temp_v12 >> 0x20);
         DAT_004efd74 = DAT_004efd70;
         DAT_004efd78 = DAT_004efd70;
         DAT_004efd7c = DAT_004efd70;
-        DAT_004efd80 = DAT_004efd6c;
+        DAT_004efd80 = _ZZN2nw4math5MTX348IdentityEvE8identity;
         DAT_004efd84 = DAT_004efd70;
         DAT_004efd88 = DAT_004efd70;
         DAT_004efd8c = DAT_004efd70;
         DAT_004efd90 = DAT_004efd70;
-        DAT_004efd94 = DAT_004efd6c;
+        DAT_004efd94 = _ZZN2nw4math5MTX348IdentityEvE8identity;
         DAT_004efd98 = DAT_004efd70;
       }
-      nn_math_ARMv6_MTX34CopyAsm(puVar3,&DAT_004efd6c);
+      nn_math_ARMv6_MTX34CopyAsm(puVar3,&_ZZN2nw4math5MTX348IdentityEvE8identity);
       temp_v7 = temp_v33 != 0;
       temp_v33 = temp_v33 + 0x30;
       if (temp_v7) {

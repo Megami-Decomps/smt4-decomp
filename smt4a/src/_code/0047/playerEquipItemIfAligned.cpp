@@ -20,14 +20,14 @@ typedef struct PlayerEquipment {
 } PlayerEquipment;
 
 s32 playerAlignmentClass(void);
-EquipItemData *FUN_00192608(u32 id);
+EquipItemData *dataTable08Sub2GetRecord(u32 id);
 PlayerEquipment *gameGetPlayerData(void);
 
 /* Equips the item in its slot when the player's alignment class allows it. */
 void playerEquipItemIfAligned(u32 id)
 {
     s32 alignment = playerAlignmentClass();
-    EquipItemData *item = FUN_00192608(id);
+    EquipItemData *item = dataTable08Sub2GetRecord(id);
     PlayerEquipment *equipment;
 
     if (item == NULL) {
@@ -36,7 +36,7 @@ void playerEquipItemIfAligned(u32 id)
     if (((item->alignments & 1) && alignment == 4) || ((item->alignments & 4) && alignment == 5)
         || ((item->alignments & 2) && alignment == 1)) {
         equipment = gameGetPlayerData();
-        switch (FUN_00192608(id)->slot) {
+        switch (dataTable08Sub2GetRecord(id)->slot) {
         case 2:
             equipment->slot2 = id;
             break;

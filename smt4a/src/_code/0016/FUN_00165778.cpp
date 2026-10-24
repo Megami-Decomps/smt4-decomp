@@ -54,7 +54,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: camSetMatrixA. */
-extern unsigned int FUN_0018aeb8(void);
+extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 /* Supplied declaration required: FUN_0019a0dc. */
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
@@ -144,11 +144,11 @@ void FUN_00165778(int param_1,int param_2)
     temp_v7 = (16.0f - temp_v5 * 16.0f) * temp_v8;
     temp_v8 = (temp_v6 - temp_v5 * temp_v6) * temp_v8;
   }
-  temp_v3 = FUN_0018aeb8();
+  temp_v3 = _ZN2nw4math5MTX448IdentityEv();
   mtx44Copy(&temp_v14,temp_v3);
-  temp_v3 = FUN_0018aeb8();
+  temp_v3 = _ZN2nw4math5MTX448IdentityEv();
   mtx44Copy(temp_v13,temp_v3);
-  temp_v3 = FUN_0018aeb8();
+  temp_v3 = _ZN2nw4math5MTX448IdentityEv();
   mtx44Copy(temp_v12,temp_v3);
   temp_v12[1] = 0.0f;
   temp_v12[3] = (float)VectorSignedToFloat((int)*(short *)(temp_v0 + 8) + (int)*(short *)(temp_v1 + 8),

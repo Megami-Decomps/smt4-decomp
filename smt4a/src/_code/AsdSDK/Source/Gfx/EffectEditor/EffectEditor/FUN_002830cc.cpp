@@ -33,7 +33,7 @@ extern EditorResetStateView g_effectEditor;
 extern EditorRenderResetView DAT_00634c50;
 void randomStateSeed(u32 stream, u32 seed);
 void FUN_00387454(void);
-void FUN_0013c884(EditorCamera *camera, s32 mode);
+void asdCameraInitializeDefaults(EditorCamera *camera, s32 mode);
 void FUN_0014f0dc(EditorCamera *camera, const f32 *position, const f32 *target, const f32 *up);
 void FUN_001523b8(EditorCamera *camera, s32 mode, f32 nearPlane, f32 fieldOfView, f32 farPlane, f32 aspect);
 void FUN_0036b824(EditorCamera *camera);
@@ -59,7 +59,7 @@ void FUN_002830cc(void)
     DAT_006352ac.offset[0] = 0.0f;
     DAT_006352ac.offset[1] = 0.0f;
     DAT_006352ac.offset[2] = 0.0f;
-    FUN_0013c884(&DAT_00634da0, 1);
+    asdCameraInitializeDefaults(&DAT_00634da0, 1);
     FUN_0014f0dc(&DAT_00634da0, DAT_006352ac.position, DAT_006352ac.target, DAT_006352ac.up);
     FUN_001523b8(&DAT_00634da0, 1, 30.0f, 20.0f, 25600.0f, 5.0f / 3.0f);
     FUN_0036b824(&DAT_00634da0);

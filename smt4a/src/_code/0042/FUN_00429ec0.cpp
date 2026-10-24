@@ -1,49 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00429ec0` (_code @ 0x429ec0, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: argument layout matches retail but register allocation and stack frame size differ (retail keeps param3/512 in r8/r7 and uses a 48-byte frame; ours 52). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0043c32c(void);
-int nn_fs_ipc_FileSystem_FormatSaveData(unsigned int [2], int, int, unsigned int **, int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int);
+/* The save-data format request: a pointer back to itself and a flag. */
+struct FormatRequest {
+    FormatRequest *self;
+    u32 flag;
+};
 
-/* stack frame of param_3: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_3_stack;
+struct FileSystemRoot {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 archiveId;
+};
 
-extern unsigned char DAT_00589398; /* 0x589398 */
+extern FileSystemRoot DAT_00589398;
+u32 FUN_0043c32c(u32 value);
+s32 nn_fs_ipc_FileSystem_FormatSaveData(u32 *archive, u32 archiveSize, u32 mediaType, FormatRequest *request,
+                                        u32 directories, u32 files, u32 blocksA, u32 blocksB, u32 maxDirectories,
+                                        u32 maxFiles, u32 duplicateData, u32 flag);
 
-/* Supplied declaration required: FUN_0043c32c. */
-/* Supplied declaration required: nn_fs_ipc_FileSystem_FormatSaveData. */
-
-
-void FUN_00429ec0(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Formats the save data archive with the given block counts. */
+void FUN_00429ec0(u32 blocksA, u32 blocksB, u32 duplicateData)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int **temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4 [2];
-  
-  temp_v0 = param_2;
-  FUN_0043c32c();
-  temp_v1 = param_1;
-  FUN_0043c32c();
-  temp_v2 = (unsigned int **)&temp_v2;
-  temp_v3 = 1;
-  temp_v4[0] = (*(unsigned int *)((unsigned char *)&DAT_00589398 + 0x10));
-  nn_fs_ipc_FileSystem_FormatSaveData
-            (temp_v4,4,1,temp_v2,1,0x200,param_2,param_1,temp_v0,temp_v1,param_3,1);
-  return;
+    FormatRequest request;
+    u32 archive[2];
+    u32 maxDirectories = FUN_0043c32c(blocksB);
+    u32 maxFiles = FUN_0043c32c(blocksA);
+
+    request.self = &request;
+    request.flag = 1;
+    archive[0] = DAT_00589398.archiveId;
+    nn_fs_ipc_FileSystem_FormatSaveData(archive, 4, 1, &request, 1, 0x200, blocksB, blocksA, maxDirectories,
+                                        maxFiles, duplicateData, 1);
 }
 
 } /* extern "C" */

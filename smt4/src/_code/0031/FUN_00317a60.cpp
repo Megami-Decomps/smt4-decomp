@@ -14,7 +14,7 @@ typedef struct PanelTask {
     /* 0x8 */ Panel *panel;
 } PanelTask;
 
-void FUN_002bee58(void *list, s32 mode);
+void spriteStartAnimationByIndex(void *list, s32 mode);
 
 /* Task step: sets the panel's list to mode 7 and its state to 4; always finishes. */
 extern PanelTask g_messageMain;
@@ -22,7 +22,7 @@ u32 FUN_00317a60(void)
 {
     Panel *panel = g_messageMain.panel;
 
-    FUN_002bee58(panel->list, 7);
+    spriteStartAnimationByIndex(panel->list, 7);
     panel->state = 4;
     return 1;
 }

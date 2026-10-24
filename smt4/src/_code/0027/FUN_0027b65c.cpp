@@ -81,7 +81,7 @@ extern unsigned int *dataTable2fSub1GetRecord(int);
 extern unsigned int FUN_002df80c(int);
 /* Supplied declaration required: FUN_002dfe08. */
 extern unsigned int FUN_002e0164(int);
-extern unsigned int FUN_002eac34(int);
+extern unsigned int gameStateGetMenuType(int);
 /* Supplied declaration required: cameraGetDistancePreset. */
 extern int categoryReturnsZero(void);
 extern int FUN_002f3614(int);
@@ -436,7 +436,7 @@ LAB_0027bd40:
         }
         temp_v1 = categoryReturnsZero();
         temp_v6 = FUN_002e0164((int)(short)temp_v4);
-        temp_v7 = FUN_002eac34((int)*(char *)((int)puVar2 + 10));
+        temp_v7 = gameStateGetMenuType((int)*(char *)((int)puVar2 + 10));
         VectorSignedToFloat((int)*(short *)((int)puVar2 + 0x16),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)(short)puVar2[6],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)((int)puVar2 + 0x1a),(unsigned char)(in_fpscr >> 0x16) & 3);

@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp44; /* 0x44: local_44 */
 } param_3_stack;
 
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int *FUN_002e7614(int, int);
 extern int strHolderAssignBytes(int, int);
 /* Supplied declaration required: bufferAssignBytes. */
@@ -65,7 +65,7 @@ void FUN_0010c514(unsigned int param_1,int param_2,int param_3)
         temp_v1 = FUN_002eac34(temp_v6);
         temp_v3 = *(int **)(temp_v1 + 0x10);
         if (temp_v3 != (int *)0x0) {
-          temp_v1 = operatorNew(0x20);
+          temp_v1 = _Znwj(0x20);
           piVar3 = (int *)0x0;
           if (temp_v1 != 0) {
             piVar3 = (int *)FUN_002e7614(temp_v1,*(int *)(*(int *)(param_2 + 0xd8) + 0x10) + 0x40);
@@ -77,7 +77,7 @@ void FUN_0010c514(unsigned int param_1,int param_2,int param_3)
         temp_v5 = *(int **)(temp_v1 + 0x14);
         piVar5 = piVar3;
         if (temp_v5 != (int *)0x0) {
-          temp_v1 = operatorNew(0x20);
+          temp_v1 = _Znwj(0x20);
           piVar5 = (int *)0x0;
           if (temp_v1 != 0) {
             piVar5 = (int *)FUN_002e7614(temp_v1,piVar3[4]);

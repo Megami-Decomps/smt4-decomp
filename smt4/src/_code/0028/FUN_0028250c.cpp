@@ -5,7 +5,7 @@ extern "C" {
 s32 ARM_fpclassifyf(u32 bits);
 void FUN_002a438c();
 s32 __set_errno(s32 error);
-f32 FUN_003eb2c8(s32 *quadrant, f32 value);
+f32 FUN_003eb2c8(s32 *quadrant, u32 bits, f32 value);
 
 // Evaluate sine with quadrant reduction, short polynomials, and IEEE exceptional cases.
 f32 FUN_0028250c(f32 value)
@@ -26,7 +26,7 @@ f32 FUN_0028250c(f32 value)
         value = (((value - multiple * 1.5703125f) - multiple * 0.000483751297f)
                     - multiple * 7.54953362e-08f) - multiple * 2.563344068e-12f;
     } else {
-        value = FUN_003eb2c8(&quadrant, value);
+        value = FUN_003eb2c8(&quadrant, word.bits, value);
     }
     if (quadrant < 0) {
         word.value = value;

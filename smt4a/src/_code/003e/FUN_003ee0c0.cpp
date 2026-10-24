@@ -1,32 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ee0c0` (_code @ 0x3ee0c0, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern short FUN_004c53fc(unsigned int);
+#define SLOT_COUNT 109
 
+/* A 0x408-byte slot record; only the id is set here. */
+struct SlotRecord {
+    /* 0x000 */ u8 unk000[0x78];
+    /* 0x078 */ s32 id;
+    /* 0x07C */ u8 unk07C[0x38C];
+};
 
-void FUN_003ee0c0(int param_1)
+/* A plain 3-vector. */
+struct Vec3 {
+    f32 x;
+    f32 y;
+    f32 z;
+};
 
+/* A 0x1D0-byte slot state record with a velocity vector at 0x30. */
+struct SlotState {
+    /* 0x000 */ u8 unk000[0x30];
+    /* 0x030 */ Vec3 velocity;
+    /* 0x03C */ u8 unk03C[0x194];
+};
+
+/* The slot manager: only the two record tables are named. */
+struct SlotManager {
+    /* 0x0000 */ u8 unk0000[0x1ED4];
+    /* 0x1ED4 */ SlotState *states;
+    /* 0x1ED8 */ u8 unk1ED8[0x124];
+    /* 0x1FFC */ SlotRecord *records;
+};
+
+s32 FUN_004c53fc(u32 kind);
+
+static __inline void vec3Clear(Vec3 *v)
 {
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = FUN_004c53fc(1);
-  temp_v1 = 0;
-  do {
-    *(int *)(*(int *)(param_1 + 0x1ffc) + temp_v1 * 0x408 + 0x78) = (int)temp_v0;
-    if (temp_v1 < 0x6d) {
-      temp_v2 = *(int *)(param_1 + 0x1ed4) + temp_v1 * 0x1d0;
-      *(unsigned int *)(temp_v2 + 0x38) = 0;
-      *(unsigned int *)(temp_v2 + 0x34) = 0;
-      *(unsigned int *)(temp_v2 + 0x30) = 0;
+    v->z = 0.0f;
+    v->y = 0.0f;
+    v->x = 0.0f;
+}
+
+static __inline void slotStateReset(SlotState *state)
+{
+    vec3Clear(&state->velocity);
+}
+
+/* Gives every slot the default id and clears its velocity. */
+void FUN_003ee0c0(SlotManager *manager)
+{
+    s16 id = FUN_004c53fc(1);
+
+    for (s32 i = 0; i < SLOT_COUNT; i++) {
+        SlotRecord *record = &manager->records[i];
+        record->id = id;
+        if (i < SLOT_COUNT) {
+            slotStateReset(&manager->states[i]);
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x6d);
-  return;
 }
 
 } /* extern "C" */

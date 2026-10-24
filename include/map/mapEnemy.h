@@ -3,6 +3,7 @@
 #define MAP_MAPENEMY_H
 
 #include "common.h"
+#include "map/mapDepart.h"
 #include <stddef.h>
 
 struct AsdMdlObject;
@@ -40,8 +41,10 @@ struct MapEnemyExtraModel {
 /* Encounter-trigger view of a field-enemy slot. */
 struct MapEnemyEncounterView {
     u8 active; // 0x00
-    u8 unk01[0x1f];
-    f32 x, y, z; // 0x20
+    u8 unk01[3];
+    u32 modelId; // 0x04
+    u8 unk08[0x18];
+    MapVector position; // 0x20
     f32 heading; // 0x2c
     s32 behavior; // 0x30
     u8 unk34[0x1c];
@@ -60,13 +63,19 @@ struct MapEnemyEncounterView {
     u8 unk7d[7];
     s32 state; // 0x84
     s32 elapsed; // 0x88
-    u8 unk8c[0xe8];
+    u8 unk8c[0xe4];
+    s32 level; // 0x170
     s32 kind; // 0x174
     AsdMdlObject *model; // 0x178
     u8 registered; // 0x17c
     u8 owned; // 0x17d
     u8 unk17e[2];
 };
+
+typedef char MapEnemyEncounterViewOffsetCheck[
+    offsetof(MapEnemyEncounterView, modelId) == 0x04 && offsetof(MapEnemyEncounterView, position) == 0x20 &&
+    offsetof(MapEnemyEncounterView, level) == 0x170 && offsetof(MapEnemyEncounterView, kind) == 0x174 &&
+    offsetof(MapEnemyEncounterView, model) == 0x178 ? 1 : -1];
 
 typedef struct MapEnemy {
     union {

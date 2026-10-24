@@ -1,39 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004713ec` (_code @ 0x4713ec, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int sysMemClear(unsigned char [128], int);
-int aocDisplayQueueRecord(unsigned int, unsigned char [128], unsigned int, unsigned int, int, int, int);
+typedef struct AocRequest {
+    u8 data[128]; /* 0x00 */
+} AocRequest;
 
-/* stack frame of param_4: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int spA0; /* 0xa0: local_a0 */
-    unsigned int spA4; /* 0xa4: local_a4 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-} param_4_stack;
+extern u32 g_aocDisplay;
 
-extern unsigned int g_aocDisplay; /* 0x57027c */
+extern void sysMemClear(void *block, s32 size);
+extern s32 FUN_001b2bd8(u32 context, s32 kind, u32 arg, AocRequest *request);
+extern void aocDisplayQueueRecord(u32 display, AocRequest *request, u32 arg3, u32 arg2, s32 a, s32 mode, s32 b);
 
-extern int FUN_001b2bd8(unsigned int, unsigned int, unsigned int, unsigned char *);
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: aocDisplayQueueRecord. */
-
-
-void FUN_004713ec(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Fills a request of the given kind and, when it is accepted, hands it to the display. */
+static __inline void aocQueueRequest(u32 context, s32 kind, u32 arg, u32 second, u32 third)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [128];
-  
-  sysMemClear(temp_v1,0x80);
-  temp_v0 = FUN_001b2bd8(param_1,0x10,param_2,temp_v1);
-  if (temp_v0 != 0) {
-    aocDisplayQueueRecord(g_aocDisplay,temp_v1,param_4,param_3,0,0x80,temp_v0);
-  }
-  return;
+    AocRequest request;
+    s32 result;
+
+    sysMemClear(&request, sizeof(request));
+    result = FUN_001b2bd8(context, kind, arg, &request);
+    if (result != 0) {
+        aocDisplayQueueRecord(g_aocDisplay, &request, third, second, 0, 128, result);
+    }
+}
+
+void FUN_004713ec(u32 context, u32 arg, u32 second, u32 third)
+{
+    aocQueueRequest(context, 16, arg, second, third);
 }
 
 } /* extern "C" */

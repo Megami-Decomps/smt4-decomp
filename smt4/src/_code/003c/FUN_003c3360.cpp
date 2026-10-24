@@ -1,30 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c3360` (_code @ 0x3c3360, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail applies the mask/set pairs as separate bic/orr immediates (suggests bitfield writes) with the original word kept in r2; the constant-mask form here compiles to conditional execution with pool constants */
+#include "common.h"
 
 extern "C" {
 
-
-void FUN_003c3360(unsigned int param_1,int param_2)
-
+/* Rewrites the mode bits of the register word at +0x44a8 of `ctx` according to its 0x100000 / 0x80000000 flags. */
+void FUN_003c3360(u32 unused, u8 *ctx)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  puVar1 = (unsigned int *)(param_2 + 0x44a8);
-  temp_v0 = *puVar1;
-  if ((temp_v0 & 0x100000) != 0) {
-    temp_v0 = (temp_v0 & 0xbffffdff) | 0x12004440;
-  }
-  else {
-    if ((temp_v0 & 0x80000000) == 0) {
-      *puVar1 = (temp_v0 & 0xadfffbbf) | 0x200;
-      return;
+    u32 *reg = (u32 *)(ctx + 0x44a8);
+    u32 v = *reg;
+
+    if (v & 0x100000) {
+        v = (v & 0xbffffdff) | 0x12004440;
+    } else {
+        if (!(v & 0x80000000)) {
+            *reg = (v & 0xadfffbbf) | 0x200;
+            return;
+        }
+        v = (v & 0xfffffdff) | 0x52004440;
     }
-    temp_v0 = (temp_v0 & 0xfffffdff) | 0x52004440;
-  }
-  *puVar1 = temp_v0;
-  return;
+    *reg = v;
 }
 
 } /* extern "C" */

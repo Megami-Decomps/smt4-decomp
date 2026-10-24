@@ -19,7 +19,7 @@ typedef struct {
 extern unsigned char LAB_00104288; /* 0x104288 */
 extern unsigned char LAB_0010428d; /* 0x10428d */
 
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea214. */
@@ -50,7 +50,7 @@ void FUN_00104204(int param_1)
     if (temp_v0 != 0) {
       FUN_002ea41e(temp_v2,param_1 + 0x68);
       temp_v5[0] = 0x80680006;
-      temp_v1 = FUN_002e7908(temp_v4,temp_v5);
+      temp_v1 = _ZN12OnlineResultC1ERKj(temp_v4,temp_v5);
       temp_v0 = wordRefsEqual_002ea42c(temp_v2,temp_v1);
       if (temp_v0 != 0) {
         temp_v1 = FUN_002ea3c0(temp_v3,&LAB_0010428d,0,&LAB_00104288);

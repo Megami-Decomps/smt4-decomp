@@ -1,103 +1,70 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00429048` (_code @ 0x429048, 0x124 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: result construction, staging and request calls are right (hidden-result WindowStatusResult returns); retail caches the resolved entry in r7 and shares one failure block with the token in r0, the scratch pair sits at sp+4 (armcc aligns it to sp+8), and the failure return is a bl rather than a tail call. */
+#include "classes/WindowStatus.h"
+#include "nn/Result.h"
+
+/* A registered request: a 0x44-byte payload at +0x54 and a "confirmed" flag at +0x98. */
+struct WindowRequestEntry {
+    /* 0x00 */ u8 unk00[0x54];
+    /* 0x54 */ u8 payload[0x44];
+    /* 0x98 */ u8 confirmed;
+};
+
+struct RequestScratch {
+    u32 first;
+    u32 second;
+};
+
+/* The payload, flag and name the next request is issued with. */
+struct WindowRequestBuffer {
+    /* 0x00 */ u8 payload[0x44];
+    /* 0x44 */ u8 confirmed;
+    /* 0x45 */ u8 unk45[3];
+    /* 0x48 */ char name[0xF];
+};
 
 extern "C" {
+void *rt_memcpy_w(void *dest, const void *src, u32 size);
+void sysMemClear(void *block, u32 size);
+void FUN_0019a46c(void *dest, const char *src, u32 size);
+s32 FUN_00427e68(u32 token, u32 mode);
+u32 FUN_0016ccfc(void);
+s32 tokenResolveAddress(u32 context, WindowRequestEntry **entry, u32 token);
+s32 FUN_00427e28(RequestScratch *scratch, u8 *request, u32 flags);
+s32 appletIsExitRequested(void);
+s32 FUN_0015a410(void);
+WindowStatusResult nnAsyncMapOperationResult(u8 *request);
 
-int FUN_0019a46c(unsigned int *, int, int);
-int _ZN18WindowStatusResultC1Ej(...);
-int sysMemClear(unsigned int *, int);
-int nnAsyncMapOperationResult(unsigned int, unsigned char *);
-int FUN_00427e68(int, int);
-int rt_memcpy_w(unsigned char *, int, int);
+extern u8 DAT_0061b000[];
+extern WindowRequestBuffer DAT_0061b030;
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_3_stack;
-
-extern unsigned char DAT_0061b000; /* 0x61b000 */
-extern unsigned char DAT_0061b030; /* 0x61b030 */
-#ifndef ROMWRIGHT_STORAGE_DAT_0061b074_4_4_DEFINED
-#define ROMWRIGHT_STORAGE_DAT_0061b074_4_4_DEFINED
-/* Storage views; not a recovered source structure. */
-union romwright_storage_DAT_0061b074_4_4 {
-    unsigned int whole;
-    unsigned char u1[4];
-    signed char s1[4];
-    unsigned short u2[2];
-    short s2[2];
-    unsigned int u4[1];
-    int s4[1];
-    float f4[1];
-};
-typedef char romwright_storage_DAT_0061b074_4_4_size_check[(sizeof(union romwright_storage_DAT_0061b074_4_4) == 4) ? 1 : -1];
-typedef char romwright_storage_DAT_0061b074_4_4_u1_width_check[(sizeof(((union romwright_storage_DAT_0061b074_4_4 *)0)->u1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_DAT_0061b074_4_4_s1_width_check[(sizeof(((union romwright_storage_DAT_0061b074_4_4 *)0)->s1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_DAT_0061b074_4_4_u2_width_check[(sizeof(((union romwright_storage_DAT_0061b074_4_4 *)0)->u2[0]) == 2) ? 1 : -1];
-typedef char romwright_storage_DAT_0061b074_4_4_s2_width_check[(sizeof(((union romwright_storage_DAT_0061b074_4_4 *)0)->s2[0]) == 2) ? 1 : -1];
-typedef char romwright_storage_DAT_0061b074_4_4_u4_width_check[(sizeof(((union romwright_storage_DAT_0061b074_4_4 *)0)->u4[0]) == 4) ? 1 : -1];
-typedef char romwright_storage_DAT_0061b074_4_4_s4_width_check[(sizeof(((union romwright_storage_DAT_0061b074_4_4 *)0)->s4[0]) == 4) ? 1 : -1];
-typedef char romwright_storage_DAT_0061b074_4_4_f4_width_check[(sizeof(((union romwright_storage_DAT_0061b074_4_4 *)0)->f4[0]) == 4) ? 1 : -1];
-#endif
-extern union romwright_storage_DAT_0061b074_4_4 DAT_0061b074; /* 0x61b074 */
-extern unsigned int DAT_0061b078; /* 0x61b078 */
-
-extern int FUN_0015a410(void);
-extern int appletIsExitRequested(void);
-extern unsigned int FUN_0016ccfc(void);
-/* Supplied declaration required: FUN_0019a46c. */
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: nnAsyncMapOperationResult. */
-extern int FUN_00427e28(unsigned char *, unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_00427e68. */
-extern int tokenResolveAddress(unsigned int, int *, int);
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_00429048(unsigned int param_1,int *param_2,int param_3)
-
+/* Validates the token, stages its payload and name, and issues the asynchronous request. */
+WindowStatusResult FUN_00429048(const u32 *token, const char *name)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned char temp_v4 [8];
-  
-  temp_v1 = *param_2;
-  FUN_00427e68(temp_v1,2);
-  if (-1 < temp_v1) {
-    temp_v2 = FUN_0016ccfc();
-    temp_v1 = tokenResolveAddress(temp_v2,&temp_v3,*param_2);
-    temp_v0 = temp_v3;
-    if (-1 < temp_v1) {
-      rt_memcpy_w(&DAT_0061b030,temp_v3 + 0x54,0x44);
-      DAT_0061b074.s1[0] = *(char *)(temp_v0 + 0x98);
-      if (param_3 != 0) {
-        FUN_0019a46c(&DAT_0061b078,param_3,0xf);
-      }
-      else {
-        sysMemClear(&DAT_0061b078,0xf);
-      }
-      temp_v1 = FUN_00427e28(temp_v4,&DAT_0061b000,0);
-      if (-1 < temp_v1) {
-        temp_v1 = appletIsExitRequested();
-        if ((temp_v1 == 0) && (temp_v1 = FUN_0015a410(), temp_v1 == 0)) {
-          if ((*(char *)(temp_v3 + 0x98) == '\0') && ((char)DAT_0061b074.whole != '\0')) {
-            *(unsigned char *)(temp_v3 + 0x98) = 1;
-          }
-          nnAsyncMapOperationResult(param_1,&DAT_0061b000);
-          return;
+    s32 status = FUN_00427e68(*token, 2);
+    if (!nnResultIsFailure(status)) {
+        WindowRequestEntry *entry;
+        status = tokenResolveAddress(FUN_0016ccfc(), &entry, *token);
+        if (!nnResultIsFailure(status)) {
+            rt_memcpy_w(DAT_0061b030.payload, entry->payload, 0x44);
+            DAT_0061b030.confirmed = entry->confirmed;
+            if (name != NULL) {
+                FUN_0019a46c(DAT_0061b030.name, name, 0xF);
+            } else {
+                sysMemClear(DAT_0061b030.name, 0xF);
+            }
+            RequestScratch scratch;
+            status = FUN_00427e28(&scratch, DAT_0061b000, 0);
+            if (!nnResultIsFailure(status)) {
+                if (appletIsExitRequested() != 0 || FUN_0015a410() != 0) {
+                    return WindowStatusResult(0xC9413891);
+                }
+                if (entry->confirmed == 0 && DAT_0061b030.confirmed != 0) {
+                    entry->confirmed = 1;
+                }
+                return nnAsyncMapOperationResult(DAT_0061b000);
+            }
         }
-        _ZN18WindowStatusResultC1Ej(param_1,0xc9413891);
-        return;
-      }
     }
-  }
-  _ZN18WindowStatusResultC1Ej(param_1,temp_v1);
-  return;
+    return WindowStatusResult(static_cast<u32>(status));
 }
-
-} /* extern "C" */
+}

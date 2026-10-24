@@ -1,78 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fa1c8` (_code @ 0x3fa1c8, 0x120 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail does not hoist the constant 9 (only 1, in r5), reads the sign bit with `ands #0x80000000; bpl`, and shares the B/C return; control flow, loads and the virtual calls match. */
+#include "network/DataStore/DataStoreMain.h"
+#include "nn/Result.h"
 
 extern "C" {
 
-int vectorCopyHeader(int, unsigned int);
-int FUN_00442218(void);
+s32 FUN_00432acc(void);
+void _ZN18OnlineResultRecordaSERKS_(DataStoreWordTriple *dest, const DataStoreWordTriple *source);
+s32 _ZNK18OnlineResultRecord7isValidEv(const DataStoreWordTriple *header);
+void *FUN_00111800(DataStoreWordTriple *header);
+void *FUN_00442218(s32 *result);
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-extern int *FUN_00111800(int);
-/* Supplied declaration required: vectorCopyHeader. */
-extern int refIsNonNegative(int);
-extern int FUN_00432acc(void);
-/* Supplied declaration required: FUN_00442218. */
-
-
-unsigned int FUN_003fa1c8(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
-
+/* Polls the pending request: when it is done, takes its header and result and moves on. */
+s32 FUN_003fa1c8(DataStoreWork *work)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int *piVar3;
-  int *piVar4;
-  int temp_v2;
-  
-  piVar4 = &temp_v2;
-  temp_v2 = param_4;
-  temp_v0 = FUN_00432acc();
-  if (temp_v0 == 0) {
-    *(unsigned int *)(param_1 + 0x28) = 0;
-    *(unsigned char *)(param_1 + 0xc) = 1;
-    *(unsigned char *)(param_1 + 0xd) = 1;
-    *(unsigned char *)(param_1 + 0xe) = 1;
-    *(unsigned int *)(param_1 + 0x10) = 9;
-    return 1;
-  }
-  if ((*(int **)(param_1 + 0x40) != (int *)0x0) &&
-     (temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 0x40) + 0x10))(), temp_v0 != 0)) {
-    temp_v1 = (**(romwright_code **)(**(int **)(param_1 + 0x40) + 0xc))();
-    vectorCopyHeader(param_1 + 0x1c,temp_v1);
-    temp_v0 = refIsNonNegative(param_1 + 0x1c);
-    if (temp_v0 != 0) {
-      temp_v1 = *(unsigned int *)(*(int *)(param_1 + 0x34) + 0x78);
-      *(unsigned int *)(param_1 + 4) = 7;
-      *(unsigned int *)(param_1 + 0x38) = temp_v1;
-    }
-    else {
-      piVar3 = (int *)(**(romwright_code **)(**(int **)(param_1 + 0x40) + 0x18))();
-      temp_v2 = *piVar3;
-      piVar3 = (int *)(**(romwright_code **)(**(int **)(param_1 + 0x40) + 0x1c))();
-      if (piVar3 == (int *)0x0) {
-        if (temp_v2 < 0) {
-          FUN_00442218();
-          piVar3 = piVar4;
+    if (FUN_00432acc() != 0) {
+        if (work->transfer.request != NULL && work->transfer.request->isDone()) {
+            _ZN18OnlineResultRecordaSERKS_(&work->header, work->transfer.request->getHeader());
+            if (_ZNK18OnlineResultRecord7isValidEv(&work->header)) {
+                work->advance(7, work->transfer.link->value);
+            } else {
+                s32 error = *work->transfer.request->getResult();
+                void *object = work->transfer.request->getResultObject();
+                if (object == NULL) {
+                    if (!nnResultIsSuccess(error)) {
+                        object = FUN_00442218(&error);
+                    } else {
+                        object = FUN_00111800(&work->header);
+                    }
+                }
+                work->finish(object);
+            }
+            return 1;
         }
-        else {
-          piVar3 = (int *)FUN_00111800(param_1 + 0x1c);
-        }
-      }
-      *(int **)(param_1 + 0x28) = piVar3;
-      *(unsigned char *)(param_1 + 0xc) = 1;
-      *(unsigned char *)(param_1 + 0xd) = 1;
-      *(unsigned char *)(param_1 + 0xe) = 1;
-      *(unsigned int *)(param_1 + 0x10) = 9;
+        return 0;
     }
+    work->finish(NULL);
     return 1;
-  }
-  return 0;
 }
 
 } /* extern "C" */

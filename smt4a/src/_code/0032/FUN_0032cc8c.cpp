@@ -1,43 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032cc8c` (_code @ 0x32cc8c, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps &g_asdSoundSystem in a register and derives the ready-flag and spatial-actor anchors with adds (and copies the vector as two vldr/vstr plus an ldr/str); built folds the offsets into pool constants and copies with ldm/stm */
+#include "common.h"
 
-extern "C" {
-
-int trackerMoveTo(int, int);
-
-typedef struct fn_0032cc8c_arg0 fn_0032cc8c_arg0;
-struct fn_0032cc8c_arg0 {
-    unsigned char pad_0x0[0x6c];
-    float field_0x6c; /* +0x6c */
-    float field_0x70; /* +0x70 */
-    float field_0x74; /* +0x74 */
-    undefined4 field_0x78; /* +0x78 */
-    undefined4 field_0x7c; /* +0x7c */
-    undefined4 field_0x80; /* +0x80 */
-    byte field_0x84; /* +0x84 */
+namespace {
+struct Vec3 {
+    f32 x;
+    f32 y;
+    f32 z;
 };
-
-extern signed char DAT_0063f4c4; /* 0x63f4c4 */
-
-/* Supplied declaration required: trackerMoveTo. */
-
-
-void FUN_0032cc8c(fn_0032cc8c_arg0 *param_1,unsigned int *param_2)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if ((DAT_0063f4c4 != '\0') && (param_1 < (fn_0032cc8c_arg0 *)0x10)) {
-    temp_v0 = (int)param_1 * 0xc;
-    *(unsigned int *)(temp_v0 + 0x63f338) = *param_2;
-    *(unsigned int *)(temp_v0 + 0x63f33c) = param_2[1];
-    *(unsigned int *)(temp_v0 + 0x63f340) = param_2[2];
-    trackerMoveTo((int)param_1 * 0x88 + 0x63ea78,temp_v0 + 0x63f338);
-    return;
-  }
-  return;
+/* Apocalypse's sound system extends beyond the shared IV work-area layout. */
+struct SpatialSoundActorView {
+    u8 unk00[0x3c];
+    u8 playback[0x4c]; /* 0x3c: embedded sound actor playback object */
+};
+struct SpatialSoundActorsView {
+    SpatialSoundActorView actors[16];
+    u8 unk880[0x3c];
+    u32 handles[16];    /* 0x8bc */
+    Vec3 positions[16]; /* 0x8fc */
+};
+struct ApocalypseSpatialSoundView {
+    u8 unk000[0x854];
+    SpatialSoundActorsView spatial; /* 0x854 */
+    u8 unk12d8[4];
+    u8 ready; /* 0x12dc */
+};
 }
 
-} /* extern "C" */
+extern "C" {
+extern ApocalypseSpatialSoundView g_asdSoundSystem;
+void trackerMoveTo(void *playback, const Vec3 *position);
+
+/* Stores the target position for spatial actor `actorIndex` and moves the actor there (when the system is ready). */
+void FUN_0032cc8c(u32 actorIndex, const Vec3 *position)
+{
+    SpatialSoundActorsView *spatial = &g_asdSoundSystem.spatial;
+
+    if (g_asdSoundSystem.ready != 0 && actorIndex < 16) {
+        spatial->positions[actorIndex] = *position;
+        trackerMoveTo(spatial->actors[actorIndex].playback, &spatial->positions[actorIndex]);
+    }
+}
+}

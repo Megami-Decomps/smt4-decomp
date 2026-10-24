@@ -1,43 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f6dc0` (_code @ 0x2f6dc0, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
-int devilGetRecord(void);
+/* A battle unit slot (0x288 bytes): state flags at 0 and the devil id at 0xCE. */
+struct BtlSlot {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0xCA];
+    /* 0x0CE */ u16 devilId;
+    /* 0x0D0 */ u8 unk0D0[0x1B8];
+};
 
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
-/* Supplied declaration required: devilGetRecord. */
+struct BtlMain {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ BtlSlot *slots;
+};
 
+/* A devil table record: the field at 5 selects its class. */
+struct DevilRecord {
+    /* 0x00 */ u8 unk00[5];
+    /* 0x05 */ u8 kind;
+};
 
-unsigned int FUN_002f6dc0(void)
+void scrSetResult(s32 value);
+DevilRecord *devilGetRecord(u16 id);
+BtlMain *btlGetMainState(void);
 
+/* Script command: result 1 if any live, active, non-excluded battle slot holds a devil of kind 5. */
+u32 FUN_002f6dc0(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  do {
-    temp_v0 = btlGetMainState();
-    puVar2 = (unsigned int *)(*(int *)(temp_v0 + 0x1fc0) + temp_v2 * 0x288);
-    temp_v1 = *puVar2;
-    if (((temp_v1 & 0x10) != 0 && (temp_v1 & 1) != 0) && ((temp_v1 & 0x40) == 0)) {
-      temp_v1 = (unsigned int)*(unsigned short *)((int)puVar2 + 0xce);
-      devilGetRecord();
-      if (*(char *)(temp_v1 + 5) == '\x05') {
-        scrSetResult(1);
-        return 1;
-      }
+    for (s32 i = 0; i < 109; i++) {
+        BtlSlot *slot = &btlGetMainState()->slots[i];
+        if ((slot->flags & 0x10) != 0 && (slot->flags & 1) != 0 && (slot->flags & 0x40) == 0) {
+            if (devilGetRecord(slot->devilId)->kind == 5) {
+                scrSetResult(1);
+                return 1;
+            }
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x6d);
-  scrSetResult(0);
-  return 1;
+    scrSetResult(0);
+    return 1;
 }
 
 } /* extern "C" */

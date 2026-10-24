@@ -16,7 +16,7 @@ int bgmSwitchCurrent(...);
 int FUN_00247478(unsigned char [28], int, unsigned int);
 int btlMainFindEntryByListedId(int, int);
 int gameCounterAddSaturating(...);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int FUN_002bf80c(...);
 int memClear(int *, int);
 int FUN_003af06c(unsigned int, unsigned int *, unsigned int, unsigned int);
@@ -54,7 +54,7 @@ extern int battleUiIsFadeAndFieldReady(unsigned int);
 extern int FUN_0028d1f4(int);
 /* Supplied declaration required: gameCounterAddSaturating. */
 extern int FUN_0029e02c(void);
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: FUN_002bf80c. */
 extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: memClear. */
@@ -117,7 +117,7 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
   temp_v1 = (int)*(short *)(param_2[10] + 0x14e);
   temp_v15 = (int)*(short *)(param_2[10] + 0x14c);
   temp_v16 = temp_v1;
-  FUN_002ae164();
+  dataTable40FindById();
   temp_v17 = temp_v1;
   FUN_00247478(temp_v13,*param_1,param_2[8]);
   temp_v18 = (unsigned int)temp_v14;

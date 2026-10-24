@@ -1,38 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f0e20` (_code @ 0x3f0e20, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses the id list as record + (8 + j * 2) through a register offset and keeps the loop counters in separate registers; ours uses the [reg, #8] immediate form. */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_2_stack;
+/* A 0x408-byte slot record: a list of 50 ids (negative ends the list) at 8. */
+struct SlotRecord {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ s16 ids[50];
+    /* 0x06C */ u8 unk06C[0x39C];
+};
 
+struct SlotManager {
+    /* 0x0000 */ u8 unk0000[0x1FFC];
+    /* 0x1FFC */ SlotRecord *records;
+};
 
-int FUN_003f0e20(int param_1,int param_2)
-
+/* Finds the slot whose id list contains `id`. */
+SlotRecord *FUN_003f0e20(SlotManager *manager, s32 id)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  do {
-    temp_v0 = 0;
-    do {
-      temp_v1 = (int)*(short *)(*(int *)(param_1 + 0x1ffc) + temp_v2 * 0x408 + temp_v0 * 2 + 8);
-      if (temp_v1 < 0) break;
-      if (temp_v1 == param_2) {
-        return *(int *)(param_1 + 0x1ffc) + temp_v2 * 0x408;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x32);
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 >= 0x6d) {
-      return 0;
+    SlotRecord *records = manager->records;
+
+    for (s32 i = 0; i < 109; i++) {
+        SlotRecord *record = &records[i];
+        for (s32 j = 0; j < 50; j++) {
+            s32 entry = record->ids[j];
+            if (entry < 0) {
+                break;
+            }
+            if (entry == id) {
+                return &records[i];
+            }
+        }
     }
-  } while( 1 );
+    return NULL;
 }
 
 } /* extern "C" */

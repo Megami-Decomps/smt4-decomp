@@ -1,53 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031bed8` (_code @ 0x31bed8, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the zero path as an unpredicated block with two stores and loads both constants up front; built predicates the zero store and loads the constants late. */
+#include "common.h"
+
+struct SlideJob {
+    u8 unk00[0x24];
+    f32 start;  // 0x24
+    f32 step;   // 0x28
+};
 
 extern "C" {
 
-int scrGetArg(int);
-int SBORROW4(int, int);
-int VectorSignedToFloat(int, int);
+s32 scrGetArg(u32 index);
+SlideJob *jobGetWork(u32 job);
+s32 FUN_00203d74(void);
 
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int jobGetWork(unsigned int);
-extern int FUN_00203d74(void);
-/* Supplied declaration required: scrGetArg. */
-
-
-unsigned int FUN_0031bed8(void)
-
+// Step counts are limited to 4 while FUN_00203d74 reports true.
+static __inline s32 limitSteps(s32 steps)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = FUN_00203d74();
-  temp_v3 = temp_v2 != 0;
-  temp_v2 = 0;
-  if (temp_v3) {
-    temp_v2 = temp_v1 - 4;
-  }
-  if ((temp_v3 && temp_v1 != 4) && temp_v2 < 0 == (temp_v3 && SBORROW4(temp_v1,4))) {
-    temp_v1 = 4;
-  }
-  temp_v2 = jobGetWork(temp_v0);
-  if (temp_v1 != 0) {
-    *(unsigned int *)(temp_v2 + 0x24) = 0x3f800000;
-    temp_v4 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(float *)(temp_v2 + 0x28) = -1.0f / temp_v4;
-  }
-  else {
-    *(unsigned int *)(temp_v2 + 0x24) = 0;
-    *(unsigned int *)(temp_v2 + 0x28) = 0;
-  }
-  return 1;
+    if (FUN_00203d74() != 0 && steps > 4) {
+        steps = 4;
+    }
+    return steps;
+}
+
+// Script command: set a job's slide start/step from a step count (clamped to 4 while FUN_00203d74 reports true).
+u32 FUN_0031bed8(void)
+{
+    u32 job = scrGetArg(0);
+    s32 steps = limitSteps(scrGetArg(1));
+    SlideJob *work = jobGetWork(job);
+    if (steps != 0) {
+        work->start = 1.0f;
+        work->step = -1.0f / steps;
+    } else {
+        work->start = 0.0f;
+        work->step = 0.0f;
+    }
+    return 1;
 }
 
 } /* extern "C" */

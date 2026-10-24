@@ -1,40 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00129b14` (_code @ 0x129b14, 0x60 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register numbering (retail keeps the acquire result in r5 and the suppress flag in r4) and mov r1 / add r0 order */
+/* Acquires the GPU right for the current process and, when the VRAM bank check passes, stops the PDC interrupt events.
+ * Returns the acquire result (0x202BF8 when the GPU service is not available). */
+#include "nn/Result.h"
 
 extern "C" {
+extern u32 DAT_0040b74c;
+s32 FUN_002ad254(void);
+void *FUN_002ad244(void);
+void *nn_gxlow_CTR_GetGpu(void);
+s32 nn_gxlow_CTR_Gpu_AcquireRight(void *gpu, u32 process, u32 flags);
+s32 nngxCheckVramBank(void);
+void nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents(void *queue, s32 suppress);
 
-int nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents(int, int);
-
-extern int FUN_002ad244(void);
-extern int FUN_002ad254(void);
-extern unsigned int nn_gxlow_CTR_GetGpu(void);
-extern int nngxCheckVramBank(void);
-extern unsigned int nn_gxlow_CTR_Gpu_AcquireRight(unsigned int, unsigned int, unsigned char);
-/* Supplied declaration required: nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents. */
-
-
-unsigned int FUN_00129b14(void)
-
+s32 FUN_00129b14(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = FUN_002ad254();
-  if (temp_v0 == 0) {
-    temp_v1 = 0x202bf8;
-  }
-  else {
-    temp_v2 = nn_gxlow_CTR_GetGpu();
-    temp_v1 = nn_gxlow_CTR_Gpu_AcquireRight(temp_v2,0xffff8001,0);
-    if ((-1 < (int)temp_v1) && (temp_v0 = nngxCheckVramBank(), temp_v0 != 0)) {
-      temp_v0 = FUN_002ad244();
-      nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents(temp_v0 + 0x30,0);
+    if (FUN_002ad254() == 0) {
+        return 0x202BF8;
     }
-  }
-  return temp_v1;
-}
+    u32 process = DAT_0040b74c;
+    s32 result = nn_gxlow_CTR_Gpu_AcquireRight(nn_gxlow_CTR_GetGpu(), process, 0);
+    if (nnResultIsFailure(result)) {
+        return result;
+    }
+    if (nngxCheckVramBank() != 0) {
+        s32 suppress = 0;
 
-} /* extern "C" */
+        nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents((u8 *)FUN_002ad244() + 0x30, suppress);
+    }
+    return result;
+}
+}

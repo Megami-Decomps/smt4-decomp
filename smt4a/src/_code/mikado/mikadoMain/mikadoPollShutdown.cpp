@@ -10,7 +10,7 @@ int FUN_0019e290(MikadoCamera *camera);
 void asdOperatorDelete(void *object);
 int jobFind(u32 task);                /* nonzero while the task exists */
 int asdMemFree(void *ptr);               /* heap free */
-extern u8 *_ZN9Obj55ca08D1Ev(u8 *sub);
+extern u8 *_ZN9Obj55ca08D1Ev(Obj55ca08 *sub);
 
 extern MikadoGlobals g_mikado;
 

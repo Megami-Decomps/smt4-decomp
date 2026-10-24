@@ -10,7 +10,7 @@ int FUN_001bc124(void);
 int mapIfSetMode1(void);
 int FUN_00233e10(int, unsigned int);
 int FUN_002342b8(void);
-int FUN_00245e38(void);
+int mapIfSpawnCaveAction(void);
 int mapIfReleasePanel(void);
 int mapEaseSceneHeading(void);
 int FUN_002e364c(int);
@@ -42,7 +42,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: mapIfSetMode1. */
 /* Supplied declaration required: FUN_00233e10. */
 /* Supplied declaration required: FUN_002342b8. */
-/* Supplied declaration required: FUN_00245e38. */
+/* Supplied declaration required: mapIfSpawnCaveAction. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapIfReleasePanel. */
 /* Supplied declaration required: mapEaseSceneHeading. */
@@ -155,7 +155,7 @@ void FUN_00365dcc(void)
         FUN_00233e10(1,DAT_005f16ac);
         FUN_001bc124();
         FUN_001bbf0c();
-        FUN_00245e38();
+        mapIfSpawnCaveAction();
         temp_v2 = *(int *)(g_lmapScene + 4);
         temp_v1 = g_lmapScene;
       }

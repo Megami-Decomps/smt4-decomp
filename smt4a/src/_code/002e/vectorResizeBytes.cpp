@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001352ae(int *, int, unsigned int, int *);
+int _ZNSt6vectorIh12AsdAllocatorIhEE13_C_insert_auxEPhjRKh(int *, int, unsigned int, int *);
 int byteVectorErase(int *, unsigned int, int, int, int *, unsigned int);
 
-/* Supplied declaration required: FUN_001352ae. */
+/* Supplied declaration required: _ZNSt6vectorIh12AsdAllocatorIhEE13_C_insert_auxEPhjRKh. */
 /* Supplied declaration required: byteVectorErase. */
 
 
@@ -25,7 +25,7 @@ void vectorResizeBytes(int *param_1,unsigned int param_2,unsigned int param_3)
   temp_v0 = temp_v1 - temp_v2;
   uStack_10 = param_3;
   if (temp_v0 < param_2) {
-    FUN_001352ae(param_1,temp_v1,param_2 - temp_v0,&uStack_10);
+    _ZNSt6vectorIh12AsdAllocatorIhEE13_C_insert_auxEPhjRKh(param_1,temp_v1,param_2 - temp_v0,&uStack_10);
   }
   else if (param_2 < temp_v0) {
     byteVectorErase(param_1,temp_v2 + param_2,temp_v1,temp_v2,param_1,param_2);

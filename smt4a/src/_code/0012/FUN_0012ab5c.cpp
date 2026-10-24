@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002f6be2. */
@@ -64,7 +64,7 @@ void FUN_0012ab5c(int param_1,int *param_2)
   }
   else {
     temp_v5[0] = 0x80010004;
-    temp_v1 = FUN_002e7908((unsigned int *)&temp_v2,temp_v5);
+    temp_v1 = _ZN12OnlineResultC1ERKj((unsigned int *)&temp_v2,temp_v5);
     FUN_0030ca30(param_1,temp_v1);
   }
   return;

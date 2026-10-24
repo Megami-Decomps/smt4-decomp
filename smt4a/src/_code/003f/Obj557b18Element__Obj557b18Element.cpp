@@ -1,0 +1,11 @@
+/* NON_MATCHING: zero stores use r1 instead of retail's r3. */
+#include "classes/Obj557b18.h"
+
+// Clears the four stored values.
+Obj557b18Element::Obj557b18Element()
+{
+    first = 0;
+    second = 0;
+    third = 0;
+    fourth = 0;
+}

@@ -1,5 +1,3 @@
-/* NON_MATCHING: armcc cross-jumps the state-0 flags store into the state-2 store; retail keeps
- * both paths separate. */
 #include "common.h"
 
 /* An icon that slides into place along a tween. */

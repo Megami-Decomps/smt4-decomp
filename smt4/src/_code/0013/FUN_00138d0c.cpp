@@ -29,8 +29,8 @@ typedef struct {
     unsigned int sp118; /* 0x118: local_118 */
 } param_4_stack;
 
-extern unsigned int DAT_00476634; /* 0x476634 */
-extern unsigned int DAT_004efd6c; /* 0x4efd6c */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x476634 */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x4efd6c */
 extern unsigned int DAT_004efd70; /* 0x4efd70 */
 extern unsigned int DAT_004efd74; /* 0x4efd74 */
 extern unsigned int DAT_004efd78; /* 0x4efd78 */
@@ -117,7 +117,7 @@ unsigned char FUN_00138d0c(float *param_1,int param_2,unsigned int param_3,unsig
   unsigned char temp_v24 [60];
   
   temp_v6 = 0x3f800000;
-  if (((DAT_00476634 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476634), temp_v0 != 0)) {
+  if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v0 != 0)) {
     DAT_004efd70 = 0;
     DAT_004efd74 = 0;
     DAT_004efd78 = 0;
@@ -127,11 +127,11 @@ unsigned char FUN_00138d0c(float *param_1,int param_2,unsigned int param_3,unsig
     DAT_004efd8c = 0;
     DAT_004efd90 = 0;
     DAT_004efd98 = 0;
-    DAT_004efd6c = temp_v6;
+    _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v6;
     DAT_004efd80 = temp_v6;
     DAT_004efd94 = temp_v6;
   }
-  nn_math_ARMv6_MTX34CopyAsm(&temp_v12,&DAT_004efd6c);
+  nn_math_ARMv6_MTX34CopyAsm(&temp_v12,&_ZZN2nw4math5MTX348IdentityEvE8identity);
   temp_v19 = 0x801;
   temp_v3 = 0;
   temp_v16 = temp_v6;

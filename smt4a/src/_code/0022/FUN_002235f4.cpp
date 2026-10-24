@@ -1,54 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002235f4` (_code @ 0x2235f4, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct DepartModel {
+    u8 unk00[4];
+    u32 flags;       // 0x04, bits 0-1 = hidden
+    u8 unk08[0x1f4];
+    f32 alpha;       // 0x1fc
+};
+
+struct DepartNode {
+    u8 unk00[4];
+    DepartModel *model; // 0x04
+};
+
+struct DepartVisibleWork {
+    u8 unk00[0xa];
+    u8 visible;         // 0x0a
+    u8 unk0b;
+    DepartNode *nodeA;  // 0x0c
+    DepartNode *nodeB;  // 0x10
+};
 
 extern "C" {
 
-extern int g_mapDepartWork; /* 0x58069c */
+extern DepartVisibleWork *g_mapDepartWork; /* 0x58069c */
 
-
+// Show or hide the two departure models according to the work block's visibility flag (model A also fades).
 void FUN_002235f4(void)
-
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = g_mapDepartWork;
-  temp_v1 = *(int *)(g_mapDepartWork + 0xc);
-  temp_v2 = 0;
-  if (temp_v1 != 0) {
-    temp_v2 = *(int *)(temp_v1 + 4);
-  }
-  if (temp_v1 != 0 && temp_v2 != 0) {
-    if (*(char *)(g_mapDepartWork + 10) != '\0') {
-      temp_v4 = 0x3f800000;
-      temp_v3 = *(unsigned int *)(temp_v2 + 4) & 0xfffffffc;
+    DepartVisibleWork *work = g_mapDepartWork;
+    DepartModel *model = NULL;
+    if (work->nodeA != NULL) {
+        model = work->nodeA->model;
     }
-    else {
-      temp_v4 = 0;
-      temp_v3 = *(unsigned int *)(temp_v2 + 4) | 3;
+    if (work->nodeA != NULL && model != NULL) {
+        u32 flags;
+        f32 alpha;
+        if (work->visible != 0) {
+            alpha = 1.0f;
+            flags = model->flags & ~3u;
+        } else {
+            alpha = 0.0f;
+            flags = model->flags | 3;
+        }
+        model->flags = flags;
+        model->alpha = alpha;
     }
-    *(unsigned int *)(temp_v2 + 4) = temp_v3;
-    *(unsigned int *)(temp_v2 + 0x1fc) = temp_v4;
-  }
-  temp_v1 = *(int *)(temp_v0 + 0x10);
-  temp_v2 = 0;
-  if (temp_v1 != 0) {
-    temp_v2 = *(int *)(temp_v1 + 4);
-  }
-  if (temp_v1 != 0 && temp_v2 != 0) {
-    if (*(char *)(temp_v0 + 10) != '\0') {
-      temp_v3 = *(unsigned int *)(temp_v2 + 4) & 0xfffffffc;
+    model = NULL;
+    if (work->nodeB != NULL) {
+        model = work->nodeB->model;
     }
-    else {
-      temp_v3 = *(unsigned int *)(temp_v2 + 4) | 3;
+    if (work->nodeB != NULL && model != NULL) {
+        if (work->visible != 0) {
+            model->flags &= ~3u;
+        } else {
+            model->flags |= 3;
+        }
     }
-    *(unsigned int *)(temp_v2 + 4) = temp_v3;
-  }
-  return;
 }
 
 } /* extern "C" */

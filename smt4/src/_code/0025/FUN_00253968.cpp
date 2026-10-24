@@ -1,130 +1,93 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00253968` (_code @ 0x253968, 0x214 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: control flow and instructions match retail; register assignment differs (retail keeps the 0x49FA1C block in r5, map block r6, player r7, game state r8). */
+#include "map/mapDepart.h"
+#include "map/mapEnemy.h"
 
-extern "C" {
-
-int FUN_00282390(void);
-int FUN_0028250c(void);
-int FUN_00287a78(void);
-int mathDistanceBetweenPoints(void);
-int mathPositionHeadingDegrees(void);
-int FUN_00291e40(unsigned int);
-
-typedef struct fn_00253968_arg0 fn_00253968_arg0;
-struct fn_00253968_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    unsigned char pad_0x8[0x18];
-    float field_0x20; /* +0x20 */
-    float field_0x24; /* +0x24 */
-    float field_0x28; /* +0x28 */
-    float field_0x2c; /* +0x2c */
-    int field_0x30; /* +0x30 */
-    unsigned char pad_0x34[0x1c];
-    byte field_0x50; /* +0x50 */
-    unsigned char pad_0x51[0x25];
-    byte field_0x76; /* +0x76 */
-    unsigned char pad_0x77[0xf9];
-    int field_0x170; /* +0x170 */
-    int field_0x174; /* +0x174 */
-    unsigned char pad_0x178[0xc48];
-    undefined4 field_0xdc0; /* +0xdc0 */
+/* The map block's flag at +0xDC0 gates the approach-marker check. */
+struct MapBlockView {
+    u8 unk0000[0xDC0];
+    s32 unkDC0;
 };
 
-extern signed char DAT_0049fa98; /* 0x49fa98 */
-extern int DAT_0049fa9c; /* 0x49fa9c */
-extern short DAT_0049faae; /* 0x49faae */
-extern short DAT_0049fab0; /* 0x49fab0 */
-extern unsigned short DAT_0049fab2; /* 0x49fab2 */
-extern signed char DAT_0049fab5; /* 0x49fab5 */
-extern float DAT_0049fac4; /* 0x49fac4 */
-extern float DAT_0049fac8; /* 0x49fac8 */
-extern float DAT_0049facc; /* 0x49facc */
-extern float DAT_0049fad0; /* 0x49fad0 */
+/* The player record: the level at +0x76. */
+struct PlayerLevelView {
+    u8 unk00[0x76];
+    u8 level;
+};
 
-/* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
-/* Supplied declaration required: FUN_00287a78. */
-/* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: FUN_00291e40. */
-extern int gameGetPlayerData(void);
-extern int gameGetMapBlock(void);
+/* The encounter trigger state kept beside the game state block (0x49FA1C). */
+struct EncounterTriggerState {
+    u8 unk00[0x7C];
+    u8 sourceActive;
+    u8 unk7D[0x15];
+    u16 sourceKind;
+    u16 delay;
+    u16 modelId;
+    u8 unk98;
+    u8 approach;
+};
 
+/* The map scene: the player position at +0x1C. */
+struct MapSceneView {
+    u8 unk00[0x1C];
+    MapVector position;
+};
 
-unsigned int FUN_00253968(fn_00253968_arg0 *param_1)
+extern "C" {
+extern GameState g_gameState;
+extern MapSceneView *g_lmapScene;
+extern EncounterTriggerState DAT_0049fa1c;
+MapBlockView *gameGetMapBlock(void);
+PlayerLevelView *gameGetPlayerData(void);
+f32 mathDistanceBetweenPoints(MapVector from, MapVector to);
+f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
+f32 FUN_00287a78(MapVector from, f32 heading, MapVector to);
+f32 FUN_0028250c(f32 value);
+f32 FUN_00282390(f32 value);
+void FUN_00291e40(u32 sound, MapVector position);
 
+/* True when the encounter source is within range and facing `position`. */
+static __inline bool isSourceApproaching(const MapVector &position)
 {
-/* irregular: 1 goto(s); 6 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned char temp_v5;
-  float temp_v6;
-  float temp_v7;
-  
-  temp_v1 = gameGetMapBlock();
-  temp_v2 = gameGetPlayerData();
-  temp_v0 = 0;
-  if (DAT_0049fa98 != '\0') {
-    temp_v0 = DAT_0049faae;
-  }
-  if (DAT_0049fa98 != '\0' && temp_v0 != 0) {
-    temp_v3 = DAT_0049fa9c;
-    mathDistanceBetweenPoints();
-    if ((temp_v3 < 0x437a0000) && (temp_v3 = DAT_0049fa9c, FUN_00287a78(), temp_v3 < 0x428c0000)) {
-LAB_00253a80:
-      if (DAT_0049fab0 == 0) {
-        DAT_0049fab0 = 8;
-        DAT_0049fab2 = (unsigned short)param_1->field_0x4;
-        temp_v6 = param_1->field_0x20;
-        mathPositionHeadingDegrees();
-        DAT_0049fac4 = param_1->field_0x20;
-        DAT_0049fac8 = param_1->field_0x24 + 110.0f;
-        DAT_0049facc = param_1->field_0x28;
-        DAT_0049fab5 = '\0';
-        temp_v7 = param_1->field_0x20;
-        DAT_0049fad0 = temp_v6;
-        mathPositionHeadingDegrees();
-        param_1->field_0x2c = temp_v7;
-        if ((param_1->field_0x50 == 0) && (*(int *)(temp_v1 + 0xdc0) != 0)) {
-          if ((param_1->field_0x174 == 0) ||
-             ((param_1->field_0x174 >= 11 ||
-              ((int)(unsigned int)*(unsigned char *)(temp_v2 + 0x76) <= param_1->field_0x170)))) {
-            DAT_0049fab5 = '\0';
-          }
-          else {
-            DAT_0049fab5 = '\x01';
-          }
-        }
-        if (DAT_0049fab5 == '\0') {
-          temp_v4 = 0x1000185;
-        }
-        else {
-          temp_v4 = 0x1000187;
-        }
-        FUN_00291e40(temp_v4);
-      }
-      return 1;
-    }
-    temp_v3 = param_1->field_0x174;
-    temp_v5 = temp_v3 == 6 || temp_v3 == 0x10;
-    if (temp_v3 == 6 || temp_v3 == 0x10) {
-      temp_v5 = param_1->field_0x30 == 4;
-    }
-    if (temp_v5) {
-      FUN_0028250c();
-      FUN_00282390();
-      temp_v3 = DAT_0049fa9c;
-      mathDistanceBetweenPoints();
-      if ((temp_v3 < 0x437a0000) && (temp_v3 = DAT_0049fa9c, FUN_00287a78(), temp_v3 < 0x428c0000))
-      goto LAB_00253a80;
-    }
-  }
-  return 0;
+    return mathDistanceBetweenPoints(g_gameState.encounterSourcePosition, position) < 250.0f &&
+           FUN_00287a78(g_gameState.encounterSourcePosition, g_gameState.encounterSourceHeading, position) < 70.0f;
 }
 
-} /* extern "C" */
+/* Checks whether an encounter source is close enough to the enemy and starts the approach marker. */
+u32 FUN_00253968(MapEnemyEncounterView *enemy)
+{
+    MapBlockView *mapBlock = gameGetMapBlock();
+    PlayerLevelView *player = gameGetPlayerData();
+    if (DAT_0049fa1c.sourceActive != 0 && DAT_0049fa1c.sourceKind != 0) {
+        bool approaching = isSourceApproaching(enemy->position);
+        if (!approaching && (enemy->kind == 6 || enemy->kind == 16) && enemy->behavior == 4) {
+            MapVector shifted = enemy->position;
+            shifted.x += FUN_0028250c(enemy->heading * 0.0174532924f) * 100.0f;
+            shifted.z += FUN_00282390(enemy->heading * 0.0174532924f) * 100.0f;
+            approaching = isSourceApproaching(shifted);
+        }
+        if (approaching) {
+        if (DAT_0049fa1c.delay == 0) {
+            DAT_0049fa1c.delay = 8;
+            DAT_0049fa1c.modelId = enemy->modelId;
+            f32 heading = mathPositionHeadingDegrees(enemy->position, g_gameState.encounterSourcePosition);
+            g_gameState.encounterMarkerPosition.x = enemy->position.x;
+            g_gameState.encounterMarkerPosition.y = enemy->position.y + 110.0f;
+            g_gameState.encounterMarkerPosition.z = enemy->position.z;
+            g_gameState.encounterApproach = 0;
+            g_gameState.encounterMarkerHeading = heading;
+            enemy->heading = mathPositionHeadingDegrees(enemy->position, g_lmapScene->position);
+            if (enemy->eventEnabled == 0 && mapBlock->unkDC0 != 0) {
+                if (enemy->kind != 0 && enemy->kind < 11 && enemy->level < player->level)
+                    g_gameState.encounterApproach = 1;
+                else
+                    g_gameState.encounterApproach = 0;
+            }
+            MapVector soundPosition = { enemy->position.x, enemy->position.y + 110.0f, enemy->position.z };
+            FUN_00291e40(DAT_0049fa1c.approach != 0 ? 0x1000187 : 0x1000185, soundPosition);
+        }
+            return 1;
+        }
+    }
+    return 0;
+}
+}

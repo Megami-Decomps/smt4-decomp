@@ -1,71 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004063b0` (_code @ 0x4063b0, 0xec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the final store of the element array pointer (scene+0xe8) is scheduled ahead of the strd of elements/count; the element constructor _ZN16MoriSceneElementC1Ev still needs its _ZN16MoriSceneElementC1Ev name */
+// Builds a model scene: allocates its resource pool from the extra heap and constructs its element array.
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+
+/* Number of scene element slots and the memory/model limits a scene is built with. */
+struct MoriSceneConfig {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u16 unk04;
+    /* 0x06 */ u16 elementCount;
+    /* 0x08 */ u16 unk08;
+    /* 0x0A */ u8 unk0A;
+    /* 0x0B */ u8 unk0B;
+    /* 0x0C */ u8 unk0C;
+    /* 0x0D */ u8 unk0D;
+};
+
+extern "C" void *asdMemoryAllocDefault(u32 size, const char *file, u32 line);
+
+struct MoriSceneElement {
+    u8 unk00[0x704];
+
+    MoriSceneElement();
+    ~MoriSceneElement();
+    static void *operator new[](u32 bytes, const char *file, u32 line) throw() { return asdMemoryAllocDefault(bytes, file, line); }
+};
+
+struct MoriSceneElementArray {
+    /* 0x0 */ MoriSceneElement *elements;
+    /* 0x4 */ u32 count;
+};
+
+struct MoriModelScene {
+    /* 0x000 */ u8 unk000[0xc];
+    /* 0x00C */ void *heapBlock;
+    /* 0x010 */ u8 unk010[0xd8];
+    /* 0x0E8 */ MoriSceneElementArray *elementArray;
+    /* 0x0EC */ MoriSceneConfig defaultConfig;
+    /* 0x0FC */ MoriSceneElementArray elements;
+    /* 0x104 */ u32 unk104;
+};
 
 extern "C" {
+u32 FUN_0045ab0c(const MoriSceneConfig *config);
+void FUN_0045a6a4(void *pool, void *heapBlock, const MoriSceneConfig *config);
+void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
+extern const char DAT_005260d0[];
 
-int asdMemoryAlloc(...);
-int __aeabi_vec_ctor_nocookie_nodtor(...);
-int FUN_0045a6a4(...);
-int FUN_0045ab0c(...);
-int asdMemoryAllocDefault(...);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern unsigned char LAB_0040633c; /* 0x40633c */
-
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-/* Supplied declaration required: FUN_0045a6a4. */
-/* Supplied declaration required: FUN_0045ab0c. */
-/* Supplied declaration required: asdMemoryAllocDefault. */
-
-
-void FUN_004063b0(int param_1,int param_2)
-
+/* Builds a model scene: allocates its pool from the extra heap and creates the element array. */
+void FUN_004063b0(MoriModelScene *scene, const MoriSceneConfig *config)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  unsigned int *puVar4;
-  unsigned int temp_v2;
-  
-  if (param_2 == 0) {
-    *(unsigned short *)(param_1 + 0xf0) = 2;
-    *(unsigned short *)(param_1 + 0xf2) = 2;
-    *(unsigned short *)(param_1 + 0xf4) = 1;
-    *(unsigned char *)(param_1 + 0xf6) = 0;
-    *(unsigned char *)(param_1 + 0xf7) = 0;
-    *(unsigned char *)(param_1 + 0xf8) = 1;
-    *(unsigned int *)(param_1 + 0xec) = 0xffff;
-    param_2 = param_1 + 0xec;
-    *(unsigned char *)(param_1 + 0xf9) = 0;
-  }
-  *(unsigned int *)(param_1 + 0x104) = (unsigned int)*(unsigned short *)(param_2 + 6);
-  temp_v0 = param_2;
-  FUN_0045ab0c(param_2);
-  temp_v1 = 0x10000;
-  asdMemoryAlloc(0x10000,0x100,0,temp_v0,1);
-  *(unsigned int *)(param_1 + 0xc) = temp_v1;
-  FUN_0045a6a4(param_1 + 0x10,temp_v1,param_2);
-  temp_v2 = (unsigned int)*(unsigned short *)(param_1 + 0xf2);
-  puVar3 = (unsigned int *)(temp_v2 * 0x704 + 8);
-  asdMemoryAllocDefault(puVar3,"c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelScene.cpp",0x58);
-  puVar4 = (unsigned int *)0x0;
-  if (puVar3 != (unsigned int *)0x0) {
-    puVar4 = puVar3 + 2;
-    *puVar3 = 0x704;
-    puVar3[1] = temp_v2;
-    __aeabi_vec_ctor_nocookie_nodtor(puVar4,&LAB_0040633c,0x704,temp_v2);
-  }
-  *(unsigned int **)(param_1 + 0xfc) = puVar4;
-  *(unsigned int *)(param_1 + 0x100) = (unsigned int)*(unsigned short *)(param_1 + 0xf2);
-  *(int *)(param_1 + 0xe8) = param_1 + 0xfc;
-  return;
-}
+    if (config == NULL) {
+        scene->defaultConfig.unk04 = 2;
+        scene->defaultConfig.elementCount = 2;
+        scene->defaultConfig.unk08 = 1;
+        scene->defaultConfig.unk0A = 0;
+        scene->defaultConfig.unk0B = 0;
+        scene->defaultConfig.unk0C = 1;
+        scene->defaultConfig.unk00 = 0xffff;
+        config = &scene->defaultConfig;
+        scene->defaultConfig.unk0D = 0;
+    }
+    scene->unk104 = config->elementCount;
+    u32 poolSize = FUN_0045ab0c(config);
+    asdDebugTrace(DAT_005260d0, 83);
+    scene->heapBlock = asdMemoryAlloc(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, poolSize, 1);
+    FUN_0045a6a4(scene->unk010, scene->heapBlock, config);
 
-} /* extern "C" */
+    MoriSceneElement *elements = new (DAT_005260d0, 88) MoriSceneElement[scene->defaultConfig.elementCount];
+    scene->elements.count = scene->defaultConfig.elementCount;
+    scene->elements.elements = elements;
+    scene->elementArray = &scene->elements;
+}
+}

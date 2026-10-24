@@ -7,7 +7,7 @@ u32 FUN_002d8c28(void);
 const u32 *gameGetSlotTable(void);
 void FUN_002bd954(void *widget, u32 kind, s32 id, void *context, u32 style, f32 scale);
 void pairSetFirstResetSecond(void *widget, s32 value);
-void FUN_002bee58(void *widget, s32 animation);
+void spriteStartAnimationByIndex(void *widget, s32 animation);
 
 /* Initializes the banner's selected value and default widget settings. */
 u32 FUN_0029e648(u8 mode, s32 useCurrentValue)
@@ -29,7 +29,7 @@ u32 FUN_0029e648(u8 mode, s32 useCurrentValue)
     panel->unkA1 = 0;
     FUN_002bd954(panel->widget754, 14, -1, panel->textBuffer, 11, 1.0f);
     pairSetFirstResetSecond(panel->widget754, 0);
-    FUN_002bee58(panel->widget754, 6);
+    spriteStartAnimationByIndex(panel->widget754, 6);
     return 1;
 }
 }

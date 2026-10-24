@@ -9,7 +9,7 @@ struct ThreadedTextScanner {
 
 extern "C" {
 extern const u32 DAT_0055b378[];
-void FUN_001a0d08(u32* thread);
+void nn_os_Thread_FinalizeImpl(u32* thread);
 s32 svcCloseHandle(u32 handle);
 void ngwordStateReset(TextScannerState* state);
 void registerObj8Holder(u32* holder);
@@ -17,7 +17,7 @@ void registerObj8Holder(u32* holder);
 // Finalizes the scanner thread and releases its embedded filter/holder state.
 ThreadedTextScanner* FUN_003f2c5c(ThreadedTextScanner* scanner)
 {
-    FUN_001a0d08(&scanner->threadHandle);
+    nn_os_Thread_FinalizeImpl(&scanner->threadHandle);
     if (scanner->threadHandle != 0) {
         svcCloseHandle(scanner->threadHandle);
         scanner->threadHandle = 0;

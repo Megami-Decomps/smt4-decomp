@@ -38,7 +38,7 @@ extern unsigned char DAT_0055a9f8; /* 0x55a9f8 */
 extern unsigned char DAT_0055aa44; /* 0x55aa44 */
 
 extern int FUN_00120424(int);
-extern int _ZN9Obj55aff4C1EPKc(unsigned int *, unsigned char *);
+extern int _ZN9Obj55aff4C1EPKt(unsigned int *, unsigned char *);
 extern unsigned int *FUN_002eca10(fn_0011db00_arg0 *, unsigned int, unsigned int *);
 extern int vectorInitEmpty2(int);
 extern int FUN_002fafd8(int, unsigned int);
@@ -60,7 +60,7 @@ void FUN_0011db00(fn_0011db00_arg0 *param_1,unsigned int param_2,unsigned int pa
   puVar1[0x1e] = 0;
   *puVar1 = (unsigned int)&DAT_0055a9f8;
   puVar1[0x1a] = (unsigned int)&DAT_0055aa44;
-  temp_v0 = _ZN9Obj55aff4C1EPKc(puVar1 + 0x1f,&LAB_0011db78);
+  temp_v0 = _ZN9Obj55aff4C1EPKt(puVar1 + 0x1f,&LAB_0011db78);
   *(unsigned int *)(temp_v0 + 8) = 0;
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   temp_v0 = FUN_002fafd8(temp_v0 + 0x14,0);

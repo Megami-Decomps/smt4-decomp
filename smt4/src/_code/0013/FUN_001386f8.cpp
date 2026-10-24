@@ -11,7 +11,7 @@ Table4SearchRecordIV *recordTableFindById(AocSystem *system, u32 id);
 DataTable *dataTableGet(u32 category, u32 index);
 const void *dataTableGetEntries(DataTable *table);
 u32 dataTableGetCount(DataTable *table);
-RecordSlotQueryPrefixIV *FUN_002ae164(u32 id);
+RecordSlotQueryPrefixIV *dataTable40FindById(u32 id);
 s32 LAB_00145a98(const void *key, const void *entry);
 void *libc_bsearch(const void *key, const void *entries, u32 count,
                    u32 entrySize, s32 (*compare)(const void *, const void *));
@@ -36,7 +36,7 @@ extern "C" u32 FUN_001386f8(u32 id)
         return 0;
     }
 
-    RecordSlotQueryPrefixIV *record = FUN_002ae164(id);
+    RecordSlotQueryPrefixIV *record = dataTable40FindById(id);
     if (record == 0 || (record->flags & 0x80000000u) != 0)
         return 0;
 

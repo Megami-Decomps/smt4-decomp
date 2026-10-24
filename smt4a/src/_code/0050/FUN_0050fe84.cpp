@@ -1,44 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0050fe84` (_code @ 0x50fe84, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses the first link record as DAT_0062d2a4 - 24 (the three globals live in one translation-unit data block) and keeps the zero/-1 constants in r5/r4; built loads each global's address from its own pool word */
+#include "common.h"
 
 extern "C" {
 
-int nn_os_CriticalSection_Initialize(unsigned int *);
-int emptyStub_002f4370(unsigned int *, unsigned char *, int);
+struct CriticalSection {
+    u32 state;
+};
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+struct LinkRecord {
+    /* 0x00 */ u32 first;
+    /* 0x04 */ u32 second;
+    /* 0x08 */ s32 index;
+};
 
-extern unsigned char LAB_0042ce3c; /* 0x42ce3c */
-extern unsigned int DAT_0062d28c; /* 0x62d28c */
-extern unsigned int DAT_0062d290; /* 0x62d290 */
-extern unsigned int DAT_0062d294; /* 0x62d294 */
-extern unsigned int DAT_0062d298; /* 0x62d298 */
-extern unsigned int DAT_0062d29c; /* 0x62d29c */
-extern unsigned int DAT_0062d2a0; /* 0x62d2a0 */
-extern unsigned int DAT_0062d2a4; /* 0x62d2a4 */
+extern LinkRecord DAT_0062d28c;
+extern LinkRecord DAT_0062d298;
+extern CriticalSection DAT_0062d2a4;
+extern u8 entry;
 
-/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-/* Supplied declaration required: emptyStub_002f4370. */
+void nn_os_CriticalSection_Initialize(CriticalSection *section);
+void FUN_0042ce3c(void *object);
+__weak int __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
+void emptyStub_002f4370(void *object, void (*destroy)(void *), void *module);
 
-
+/* Initialises the module's critical section and two link records, registering each one's destructor. */
 void FUN_0050fe84(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  DAT_0062d2a4 = 0;
-  nn_os_CriticalSection_Initialize(&DAT_0062d2a4);
-  DAT_0062d28c = 0;
-  DAT_0062d294 = 0xffffffff;
-  DAT_0062d290 = 0;
-  DAT_0062d298 = 0;
-  DAT_0062d2a0 = 0xffffffff;
-  DAT_0062d29c = 0;
-  emptyStub_002f4370(&DAT_0062d298,&LAB_0042ce3c,0x100000);
-  return;
+    DAT_0062d2a4.state = 0;
+    nn_os_CriticalSection_Initialize(&DAT_0062d2a4);
+    __aeabi_atexit(&DAT_0062d2a4, FUN_0042ce3c, &entry);
+
+    DAT_0062d28c.first = 0;
+    DAT_0062d28c.index = -1;
+    DAT_0062d28c.second = 0;
+    __aeabi_atexit(&DAT_0062d28c, FUN_0042ce3c, &entry);
+
+    DAT_0062d298.first = 0;
+    DAT_0062d298.index = -1;
+    DAT_0062d298.second = 0;
+    emptyStub_002f4370(&DAT_0062d298, FUN_0042ce3c, &entry);
 }
 
 } /* extern "C" */

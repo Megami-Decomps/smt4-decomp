@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ef584` (_code @ 0x2ef584, 0x140 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: BLOCKED: Thumb online code over a std::map<u32, shared handle> with a lock guard (Obj55b28c) and ~20 out-of-line helper instantiations (FUN_002f6c54/6c70/6c82, FUN_0012e494/fce0, lessU32Alt, wordRefs*) that still need their member/template names and a map/handle class layout before the lookup-and-erase can be written as C++. */
 #include "romwright_types.h"
 
 extern "C" {

@@ -6,9 +6,9 @@ extern "C" {
 
 int nn_math_ARMv6_MTX34CopyAsm(unsigned char *, unsigned int *);
 
-extern unsigned int DAT_00476634; /* 0x476634 */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x476634 */
 extern unsigned int DAT_00476640; /* 0x476640 */
-extern unsigned int DAT_004efd6c; /* 0x4efd6c */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x4efd6c */
 extern unsigned int DAT_004efd70; /* 0x4efd70 */
 extern unsigned int DAT_004efd74; /* 0x4efd74 */
 extern unsigned int DAT_004efd78; /* 0x4efd78 */
@@ -39,7 +39,7 @@ unsigned char * FUN_002262ac(void)
   
   if (((DAT_00476640 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476640), temp_v0 != 0)) {
     temp_v1 = 0x3f800000;
-    if (((DAT_00476634 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476634), temp_v0 != 0)) {
+    if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v0 != 0)) {
       DAT_004efd70 = 0;
       DAT_004efd74 = 0;
       DAT_004efd78 = 0;
@@ -49,11 +49,11 @@ unsigned char * FUN_002262ac(void)
       DAT_004efd8c = 0;
       DAT_004efd90 = 0;
       DAT_004efd98 = 0;
-      DAT_004efd6c = temp_v1;
+      _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v1;
       DAT_004efd80 = temp_v1;
       DAT_004efd94 = temp_v1;
     }
-    nn_math_ARMv6_MTX34CopyAsm(&DAT_004efdf4,&DAT_004efd6c);
+    nn_math_ARMv6_MTX34CopyAsm(&DAT_004efdf4,&_ZZN2nw4math5MTX348IdentityEvE8identity);
     DAT_004efe30 = 0x7e1;
     DAT_004efe24 = temp_v1;
     DAT_004efe28 = temp_v1;

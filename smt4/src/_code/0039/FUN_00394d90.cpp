@@ -1,35 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00394d90` (_code @ 0x394d90, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/PassiveSkill.h"
+
+struct PartnerSkillSet {
+    u8 unk00[0x34];   // 0x00
+    u16 skills[8];    // 0x34
+};
+
+struct Table08Record {
+    u8 unk00[0x6e];   // 0x00
+    u8 passiveTier;   // 0x6e: high nibble = tier of passive skill that applies
+};
 
 extern "C" {
+Table08Record *dataTable08Sub1GetRecord(u32 id);
 
-int passiveSkillLookupRecord(void);
-int dataTable08Sub1GetRecord(void);
-
-/* Supplied declaration required: passiveSkillLookupRecord. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
-
-
-unsigned int FUN_00394d90(int param_1,int param_2)
-
+/* Returns 1 when id (1..60) names a table08 entry whose tier matches one of the set's passive skills. */
+u32 FUN_00394d90(u32 id, PartnerSkillSet *set)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  if ((param_1 - 1U < 0x3c) && (dataTable08Sub1GetRecord(), (*(unsigned char *)(param_1 + 0x6e) & 0xf0) != 0)) {
-    temp_v1 = 0;
-    do {
-      temp_v0 = (unsigned int)*(unsigned short *)(param_2 + temp_v1 * 2 + 0x34);
-      if (((temp_v0 != 0) && (passiveSkillLookupRecord(), temp_v0 != 0)) &&
-         (*(unsigned char *)(temp_v0 + 0x35) == *(unsigned char *)(param_1 + 0x6e) >> 4)) {
-        return 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 8);
-  }
-  return 0;
+    if (id >= 1 && id <= 60) {
+        Table08Record *record = dataTable08Sub1GetRecord(id);
+
+        if ((record->passiveTier & 0xF0) != 0) {
+            for (s32 i = 0; i < 8; i++) {
+                u32 skill = set->skills[i];
+
+                if (skill != 0) {
+                    const PassiveSkillRecord *passive = passiveSkillLookupRecord(skill);
+
+                    if (passive != NULL && passive->rank.tier == record->passiveTier >> 4) {
+                        return 1;
+                    }
+                }
+            }
+        }
+    }
+    return 0;
 }
 
 } /* extern "C" */

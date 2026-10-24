@@ -1,60 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022b83c` (_code @ 0x22b83c, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only VFP register numbering differs (retail s0/s3 for the clamped x/y and s1/s2 for the limits; ours s1/s0 and s3/s2). */
+#include "common.h"
 
 extern "C" {
 
-int VectorSignedToFloat(int, int);
+struct Vec2 {
+    f32 x, y;
+};
 
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
+/* An object with a 2D size at 0x50. */
+struct ScreenObject {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ Vec2 size;
+};
 
-
-void FUN_0022b83c(int param_1,float *param_2)
-
+/* Clamps a scroll offset into [0, size - (400, 240)], i.e. keeps the 400x240 screen inside the object. */
+void FUN_0022b83c(ScreenObject *object, f32 *offset)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  unsigned int in_fpscr;
-  float temp_v3;
-  int temp_v4;
-  int temp_v5;
-  float temp_v6;
-  float temp_v7;
-  
-  temp_v0 = in_fpscr & 0xfffffff;
-  temp_v4 = (int)(*(float *)(param_1 + 0x50) - 400.0f);
-  temp_v5 = (int)(*(float *)(param_1 + 0x54) - 240.0f);
-  temp_v7 = param_2[1];
-  temp_v3 = *param_2;
-  if (*param_2 <= 0.0f) {
-    temp_v3 = 0.0f;
-  }
-  temp_v1 = temp_v0 | ((unsigned int)(temp_v7 < 0.0f) << 0x1f) | ((unsigned int)(temp_v7 == 0.0f) << 0x1e);
-  *param_2 = temp_v3;
-  temp_v2 = (unsigned char)(temp_v1 >> 0x18);
-  temp_v6 = 0.0f;
-  if (!(unsigned char)((temp_v2 >> 6) & 1) && (unsigned char)(temp_v2 >> 7) == (temp_v7 != temp_v7)) {
-    temp_v6 = temp_v7;
-  }
-  temp_v7 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(temp_v1 >> 0x16) & 3);
-  param_2[1] = temp_v6;
-  temp_v1 = temp_v0 | ((unsigned int)(temp_v3 < temp_v7) << 0x1f) | ((unsigned int)(temp_v3 == temp_v7) << 0x1e);
-  temp_v2 = (unsigned char)(temp_v1 >> 0x18);
-  if (!(unsigned char)((temp_v2 >> 6) & 1) && (unsigned char)(temp_v2 >> 7) == ((temp_v3 != temp_v3) || (temp_v7 != temp_v7))) {
-    temp_v3 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(temp_v1 >> 0x16) & 3);
-  }
-  *param_2 = temp_v3;
-  temp_v3 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v0 = temp_v0 | ((unsigned int)(temp_v6 < temp_v3) << 0x1f) | ((unsigned int)(temp_v6 == temp_v3) << 0x1e);
-  temp_v2 = (unsigned char)(temp_v0 >> 0x18);
-  if (!(unsigned char)((temp_v2 >> 6) & 1) && (unsigned char)(temp_v2 >> 7) == ((temp_v6 != temp_v6) || (temp_v3 != temp_v3))) {
-    temp_v6 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(temp_v0 >> 0x16) & 3);
-  }
-  param_2[1] = temp_v6;
-  return;
+    s32 maxX = (s32)(object->size.x - 400.0f);
+    s32 maxY = (s32)(object->size.y - 240.0f);
+    f32 x = offset[0];
+    f32 y;
+
+    x = x > 0.0f ? x : 0.0f;
+    offset[0] = x;
+    y = offset[1];
+    y = y > 0.0f ? y : 0.0f;
+    offset[1] = y;
+    if (x > (f32)maxX) {
+        x = (f32)maxX;
+    }
+    offset[0] = x;
+    if (y > (f32)maxY) {
+        y = (f32)maxY;
+    }
+    offset[1] = y;
 }
 
 } /* extern "C" */

@@ -21,7 +21,7 @@ void renderObjAttach(void *);
 void scrScriptProcessDestroy(void *);
 void asdMemFree(void *);
 void *asdOperatorNew(u32 size, BtlPartnerAttackA **owner);
-void *FUN_00416b70(void *);
+void *_ZN20PartnerAttackEntriesC1Ev(void *);
 
 // Allocate the partner attack state and attach its update and draw jobs.
 void btlPartnerAttackInitialize(PartnerAttackOwner *owner)
@@ -57,7 +57,7 @@ void btlPartnerAttackInitialize(PartnerAttackOwner *owner)
     state->unk2c = 0;
     void *entries = asdOperatorNew(0x860, &g_btlPartnerAttack);
     if (entries != NULL) {
-        entries = FUN_00416b70(entries);
+        entries = _ZN20PartnerAttackEntriesC1Ev(entries);
     }
     state->entries = entries;
 }

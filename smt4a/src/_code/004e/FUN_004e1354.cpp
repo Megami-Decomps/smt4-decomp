@@ -1,98 +1,114 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e1354` (_code @ 0x4e1354, 0x294 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation/scheduling only: retail loads the actor's 64-bit flags with one ldm and orders the script-record address computation differently */
+#include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
 
 extern "C" {
 
-int FUN_004e753c(int *, unsigned int *, int);
-int FUN_004e81bc(int *, unsigned int *, int);
-int FUN_004f8f08(unsigned int);
-int FUN_004fbeac(int, unsigned int *, int, int, int);
-int FUN_004fe764(int, unsigned int *, unsigned int, int, int);
+struct BtlActor {
+    /* 0x0000 */ u8 unk0000[0xA4];
+    /* 0x00A4 */ s32 slot;
+    /* 0x00A8 */ s32 uiState;
+    /* 0x00AC */ u8 unk00AC[0x10C - 0xAC];
+    /* 0x010C */ u32 flags10C;
+    /* 0x0110 */ u8 unk0110[0x1ED4 - 0x110];
+    /* 0x1ED4 */ u32 unk1ED4;
+    /* 0x1ED8 */ u8 unk1ED8[0x45A0 - 0x1ED8];
+    /* 0x45A0 */ u64 flags;
+};
 
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
+struct BtlActorRef {
+    /* 0x00 */ BtlActor *actor;
+};
 
-extern int g_btlScriptUnit; /* 0x57113c */
-extern unsigned int DAT_00571260; /* 0x571260 */
-extern unsigned int DAT_00571264; /* 0x571264 */
-extern unsigned int g_btlActionReflect; /* 0x5712f0 */
-extern unsigned int g_btlAux; /* 0x573808 */
-extern unsigned int g_btlEvent; /* 0x573898 */
+struct BtlSkill {
+    /* 0x00 */ u8 unk00[0x6A];
+    /* 0x6A */ s16 animation;
+};
 
-extern int chainCountIdUnflagged(unsigned int, unsigned int *);
-extern int isEntryUsable(unsigned int);
-/* Supplied declaration required: FUN_004e753c. */
-/* Supplied declaration required: FUN_004e81bc. */
-/* Supplied declaration required: FUN_004f8f08. */
-/* Supplied declaration required: FUN_004fbeac. */
-/* Supplied declaration required: FUN_004fe764. */
+struct BtlCommand {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x20];
+    /* 0x024 */ BtlSkill *skill;
+    /* 0x028 */ u8 unk028[0x56C - 0x28];
+    /* 0x56C */ s32 frame;
+    /* 0x570 */ u8 unk570[0x1230 - 0x570];
+    /* 0x1230 */ u32 phase;
+};
 
+/* The per-actor script record stride is 0x495 words; state is its tag byte. */
+struct BtlScriptRecord {
+    /* 0x00 */ u8 unk00[9];
+    /* 0x09 */ u8 state;
+};
 
-unsigned int FUN_004e1354(int *param_1,unsigned int *param_2)
+extern BtlActionGlobals g_btlAction; /* 0x571138 */
+extern u32 g_btlAux;   /* 0x573808 */
+extern u32 g_btlEvent; /* 0x573898 */
+extern u32 g_btlActionReflect; /* 0x5712f0 */
 
+s32 chainCountIdUnflagged(u32 chain, BtlCommand *command);
+s32 isEntryUsable(u32 event);
+s32 FUN_004e753c(BtlActorRef *ref, BtlCommand *command, s32 mode);
+void FUN_004e81bc(BtlActorRef *ref, BtlCommand *command, s32 mode);
+void FUN_004f8f08(u32 block);
+void FUN_004fbeac(s32, BtlCommand *, s32, s32, s32);
+void FUN_004fe764(s32, BtlCommand *, u32, s32, s32);
+
+static __inline BtlScriptRecord *btlScriptRecordGet(BtlActorRef *ref)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  
-  temp_v0 = *param_1;
-  if ((((*(unsigned int *)(temp_v0 + 0x45a4) & DAT_00571264) == 0 &&
-        (*(unsigned int *)(temp_v0 + 0x45a0) & DAT_00571260) == 0) &&
-      ((*(unsigned int *)(temp_v0 + 0x10c) & 0x40000) != 0)) && ((*param_2 & 0x2000) == 0)) {
-    temp_v0 = chainCountIdUnflagged(g_btlActionReflect,param_2);
-    if (temp_v0 == 0) {
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
-      FUN_004f8f08(g_btlAux);
-      return 1;
+    return (BtlScriptRecord *)((u32 *)g_btlAction.data + ref->actor->slot * 0x495);
+}
+
+/* Steps the actor's skill start: runs the pre/post handlers and marks the actor's script record state. */
+u32 FUN_004e1354(BtlActorRef *ref, BtlCommand *command)
+{
+    BtlActor *actor = ref->actor;
+    s32 handled;
+
+    if (!(actor->flags & g_btlAction.interruptMask) && (actor->flags10C & 0x40000) && !(command->flags & 0x2000)) {
+        if (chainCountIdUnflagged(g_btlActionReflect, command) != 0) {
+            return 0;
+        }
+        btlScriptRecordGet(ref)->state = 1;
+        FUN_004f8f08(g_btlAux);
+        return 1;
+    }
+    if (actor->uiState != 4) {
+        FUN_004e81bc(ref, command, 0);
+        handled = FUN_004e753c(ref, command, 0);
+        if (command->frame == 0x20) {
+            FUN_004fe764(0, command, ref->actor->unk1ED4, 9, 0xb);
+        }
+        if (command->frame == 0x25) {
+            FUN_004fbeac(0, command, 0, 2, 0);
+        }
+        command->frame++;
+        if (chainCountIdUnflagged(g_btlActionReflect, command) > 0) {
+            return 0;
+        }
+        if (handled != 0) {
+            command->phase = 0;
+            btlScriptRecordGet(ref)->state = 0x1d;
+            command->flags &= ~0x2000;
+            return 1;
+        }
+        if (ref->actor->uiState != 4) {
+            return 0;
+        }
+    }
+    if (isEntryUsable(g_btlEvent) == 0) {
+        FUN_004e81bc(ref, command, 1);
+        handled = FUN_004e753c(ref, command, 1);
+        command->frame++;
+        if (chainCountIdUnflagged(g_btlActionReflect, command) <= 0 && handled != 0) {
+            command->phase = 0x1e;
+            btlCommandExtendAnimationWindow(ref, command, command->skill->animation, 0, 0x11, 0x11);
+            btlScriptRecordGet(ref)->state = 0x1d;
+            command->flags &= ~0x2000;
+            return 1;
+        }
     }
     return 0;
-  }
-  if (*(int *)(temp_v0 + 0xa8) != 4) {
-    FUN_004e81bc(param_1,param_2,0);
-    piVar2 = param_1;
-    FUN_004e753c(param_1,param_2,0);
-    if (param_2[0x15b] == 0x20) {
-      FUN_004fe764(0,param_2,*(unsigned int *)(*param_1 + 0x1ed4),9,0xb);
-    }
-    if (param_2[0x15b] == 0x25) {
-      FUN_004fbeac(0,param_2,0,2,0);
-    }
-    param_2[0x15b] = param_2[0x15b] + 1;
-    temp_v0 = chainCountIdUnflagged(g_btlActionReflect,param_2);
-    if (0 < temp_v0) {
-      return 0;
-    }
-    if (piVar2 != (int *)0x0) {
-      param_2[0x48c] = 0;
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
-      *param_2 = *param_2 & 0xffffdfff;
-      return 1;
-    }
-    if (*(int *)(*param_1 + 0xa8) != 4) {
-      return 0;
-    }
-  }
-  temp_v0 = isEntryUsable(g_btlEvent);
-  if (temp_v0 == 0) {
-    FUN_004e81bc(param_1,param_2,1);
-    piVar2 = param_1;
-    FUN_004e753c(param_1,param_2,1);
-    param_2[0x15b] = param_2[0x15b] + 1;
-    temp_v0 = chainCountIdUnflagged(g_btlActionReflect,param_2);
-    if ((temp_v0 < 1) && (piVar2 != (int *)0x0)) {
-      param_2[0x48c] = 0x1e;
-    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x11,0x11);
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
-      *param_2 = *param_2 & 0xffffdfff;
-      return 1;
-    }
-  }
-  return 0;
 }
 
 } /* extern "C" */

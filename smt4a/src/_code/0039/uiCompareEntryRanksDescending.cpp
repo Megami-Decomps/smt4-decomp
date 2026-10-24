@@ -7,8 +7,8 @@ extern "C" {
 
 s32 uiCompareEntryRanksDescending(const SortItem *left, const SortItem *right)
 {
-    EntrySortData *leftData = FUN_00192608(left->id);
-    EntrySortData *rightData = FUN_00192608(right->id);
+    EntrySortData *leftData = dataTable08Sub2GetRecord(left->id);
+    EntrySortData *rightData = dataTable08Sub2GetRecord(right->id);
     s32 leftScore = 0;
     s32 rightScore = 0;
     s32 leftRank = DAT_0052b8ac[1].left;
@@ -27,8 +27,8 @@ s32 uiCompareEntryRanksDescending(const SortItem *left, const SortItem *right)
     if (order == 0) {
         order = FUN_00345098(leftScore, rightScore);
         if (order == 0) {
-            leftData = FUN_00192608(left->id);
-            rightData = FUN_00192608(right->id);
+            leftData = dataTable08Sub2GetRecord(left->id);
+            rightData = dataTable08Sub2GetRecord(right->id);
             order = rightData->tieKey - leftData->tieKey;
         }
     }

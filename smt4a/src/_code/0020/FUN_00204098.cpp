@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_0015f490(...);
-int FUN_0016432c(...);
+int dataTable25FindById(...);
 int FUN_00168980(...);
 int FUN_0023acdc(...);
 int statusCommitSelectedSkills(...);
@@ -180,7 +180,7 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_0015f490. */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: FUN_0016432c. */
+/* Supplied declaration required: dataTable25FindById. */
 /* Supplied declaration required: FUN_00167458. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00168980. */
@@ -244,7 +244,7 @@ extern int FUN_002c8748(void);
 extern int FUN_002effbc(void);
 /* Supplied declaration required: statusReplaceSkills. */
 /* Supplied declaration required: FUN_002f5064. */
-extern long long FUN_002ffa9c(int, unsigned int, unsigned int, unsigned int);
+extern long long __aeabi_uldivmod(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: panelSetMode3. */
 extern int btlTalkBustUpGetValue(void);
@@ -732,7 +732,7 @@ LAB_00204688:
         *temp_v43 = '\x01';
       }
       else {
-        temp_v36 = FUN_002ffa9c(temp_v29 << 0xc,temp_v29 >> 0x14,0x2d,0);
+        temp_v36 = __aeabi_uldivmod(temp_v29 << 0xc,temp_v29 >> 0x14,0x2d,0);
         temp_v30 = (unsigned int)((unsigned long long)(temp_v36 + temp_v5) >> 0x20);
         if (temp_v29 >> 0x14 < temp_v30 ||
             temp_v30 - (temp_v29 >> 0x14) < (unsigned int)(temp_v29 << 0xc <= (unsigned int)(temp_v36 + temp_v5))) {
@@ -838,7 +838,7 @@ LAB_00204688:
             *(unsigned char *)(temp_v16 + 0x788f) = 1;
           }
           else {
-            temp_v36 = FUN_002ffa9c(temp_v26 << 0xc,temp_v26 >> 0x14,0x2d,0);
+            temp_v36 = __aeabi_uldivmod(temp_v26 << 0xc,temp_v26 >> 0x14,0x2d,0);
             temp_v5 = temp_v36 + temp_v5;
             temp_v13 = (unsigned int)((unsigned long long)temp_v5 >> 0x20);
             if (temp_v26 >> 0x14 < temp_v13 ||
@@ -2350,7 +2350,7 @@ joined_r0x002073c8:
       FUN_00333dc8(1);
       FUN_003343f0(1);
       temp_v26 = (unsigned int)*(unsigned short *)(temp_v13 + 300);
-      FUN_0016432c(temp_v26);
+      dataTable25FindById(temp_v26);
       libc_strcpy(&temp_v41,temp_v26);
       FUN_003180c4(8,&temp_v41);
       temp_v11 = FUN_0014bf3c(*(unsigned short *)(temp_v13 + 0x62),0);

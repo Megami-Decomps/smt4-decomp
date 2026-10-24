@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ea20c(unsigned int *);
+int _ZN15OnlineTimestampC1Ev(unsigned int *);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002f2e3c(int, int, int, int, unsigned int, int);
 
@@ -24,7 +24,7 @@ extern unsigned char LAB_00300040; /* 0x300040 */
 #define ROMWRIGHT_CARRY_4_DEFINED
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
-/* Supplied declaration required: FUN_002ea20c. */
+/* Supplied declaration required: _ZN15OnlineTimestampC1Ev. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002f2e3c. */
@@ -39,7 +39,7 @@ void FUN_002fffd0(int param_1,unsigned int param_2)
   int temp_v2;
   unsigned char temp_v3 [20];
   
-  FUN_002ea20c(&temp_v1);
+  _ZN15OnlineTimestampC1Ev(&temp_v1);
   *(unsigned int *)(param_1 + 0x158) = temp_v1 + param_2;
   *(unsigned int *)(param_1 + 0x15c) = temp_v2 + (unsigned int)romwright_carry_4(temp_v1,param_2);
   *(unsigned char *)(*(int *)(param_1 + 0x214) + 0x34) = 0;

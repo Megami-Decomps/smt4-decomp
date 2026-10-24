@@ -8,7 +8,7 @@ u32 scrGetArg(u32 index);
 u32 *gameGetSlotTable(void);
 void FUN_002bd954(void *record, u32 value0, u32 value4, const void *source, u16 value38, f32 value20);
 void pairSetFirstResetSecond(void *pair, s32 first);
-void FUN_002bee58(void *widget, s32 mode);
+void spriteStartAnimationByIndex(void *widget, s32 mode);
 
 /* Script command: open the banner message window with the text id from argument 0. */
 u32 FUN_00310730(void)
@@ -27,7 +27,7 @@ u32 FUN_00310730(void)
     panel->unkA1 = 0;
     FUN_002bd954(panel->widget754, 14, -1, panel->textBuffer, 11, 1.0f);
     pairSetFirstResetSecond(panel->widget754, 0);
-    FUN_002bee58(panel->widget754, 6);
+    spriteStartAnimationByIndex(panel->widget754, 6);
 
     panel = g_messageMain.banner;
     panel->unk81 = 0;

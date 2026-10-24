@@ -29,7 +29,7 @@ int FUN_0029f848(...);
 int gameGetSlotTable(...);
 int timerStart(...);
 int FUN_002bd954(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int paramsInit(...);
 int __aeabi_memset4(...);
 int memClear(void);
@@ -96,7 +96,7 @@ extern unsigned int FUN_0029efa8(int);
 /* Supplied declaration required: gameGetSlotTable. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
@@ -162,7 +162,7 @@ void FUN_0028a420(void)
   FUN_002bd954(puVar1 + 0x1d8,0x1d,0,puVar3,0xc9);
   timerStart(puVar1 + 0x1d8,8,0);
   FUN_002bd954(puVar1 + 0x1fb,0x1d,0,puVar3,0xc9);
-  FUN_002bee58(puVar1 + 0x1fb,2);
+  spriteStartAnimationByIndex(puVar1 + 0x1fb,2);
   FUN_002bd954(puVar1 + 0x21e,0x1d,0,puVar3,0xc9);
   timerStart(puVar1 + 0x21e,1,0);
   temp_v6 = 0;
@@ -172,7 +172,7 @@ void FUN_0028a420(void)
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 8);
   FUN_002bd954(puVar1 + 0x359,0x1d,0,puVar3,0xc9);
-  FUN_002bee58(puVar1 + 0x359,1);
+  spriteStartAnimationByIndex(puVar1 + 0x359,1);
   *(unsigned char *)(puVar1 + 0x26) = 1;
   FUN_00298ad8();
   __aeabi_memset4(puVar1 + 0x37c,0x4a,0xffffffff);

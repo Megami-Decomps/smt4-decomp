@@ -39,7 +39,7 @@ extern AocSystem *g_aocSystem;
 extern const char DAT_003ff148[];
 s32 FUN_00361960(void);
 void FUN_0036196c(void);
-WindowOperationResult FUN_002a126c(AocSystem *system);
+WindowOperationResult _ZN9AocSystem17getPendingRequestEv(AocSystem *system);
 void FUN_00126fb8(u32 *result);
 void aocMenuInitializePanelSprites(void *context);
 void asdTMTexTableLoadSprites(u32 group);
@@ -54,7 +54,7 @@ void FUN_00390038(AocPurchaseMenu *menu)
 {
     if (FUN_00361960() != 0)
         FUN_0036196c();
-    FUN_002a126c(g_aocSystem);
+    _ZN9AocSystem17getPendingRequestEv(g_aocSystem);
     FUN_00126fb8(&g_aocMain->operation.queryResult);
     WindowOperationResult operation;
     operation.result = WindowStatusResult(0);

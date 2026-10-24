@@ -7,7 +7,7 @@ extern "C" {
 int sharedRefRelease(int *);
 int FUN_002e78d0(unsigned int, int *, int);
 int FUN_002f3dde(int, unsigned int);
-int refIsNonNegative(unsigned char [12]);
+int _ZNK18OnlineResultRecord7isValidEv(unsigned char [12]);
 
 typedef int romwright_code(...);
 /* stack frame of param_12: 10 slot(s), 40 byte(s) */
@@ -27,12 +27,12 @@ typedef struct {
 extern int *FUN_0011db00(void);
 extern unsigned int onlineContextGetInstance(void);
 /* Supplied declaration required: sharedRefRelease. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
-extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_002f3dde. */
-/* Supplied declaration required: refIsNonNegative. */
+/* Supplied declaration required: _ZNK18OnlineResultRecord7isValidEv. */
 extern int FUN_0030c8d6(int, int);
 
 
@@ -73,7 +73,7 @@ FUN_0012bbdc(int param_1,int param_2,unsigned int param_3,unsigned int param_4,u
   if (temp_v0 != 0) {
     temp_v0 = FUN_0030c8d6(param_1,param_2);
     if (temp_v0 != 0) {
-      temp_v0 = operatorNew(0x170);
+      temp_v0 = _Znwj(0x170);
       if (temp_v0 != 0) {
         piVar2 = (int *)FUN_0011db00();
       }
@@ -94,7 +94,7 @@ FUN_0012bbdc(int param_1,int param_2,unsigned int param_3,unsigned int param_4,u
       uStack_58 = temp_v11;
       (**(romwright_code **)(*piVar2 + 0x34))
                 (temp_v10,piVar2,*(unsigned int *)(param_2 + 0x44),param_1 + 0x10);
-      temp_v0 = refIsNonNegative(temp_v10);
+      temp_v0 = _ZNK18OnlineResultRecord7isValidEv(temp_v10);
       if (temp_v0 != 0) {
         temp_v1 = onlineContextGetInstance();
         FUN_002e78d0(temp_v1,piVar2,0);
@@ -102,12 +102,12 @@ FUN_0012bbdc(int param_1,int param_2,unsigned int param_3,unsigned int param_4,u
       }
       else {
         sharedRefRelease(piVar2);
-        temp_v1 = refIsNonNegative(temp_v10);
+        temp_v1 = _ZNK18OnlineResultRecord7isValidEv(temp_v10);
       }
     }
     else {
       temp_v3 = 0x80010001;
-      temp_v1 = FUN_002e7908((unsigned int *)&temp_v2,(unsigned int *)&temp_v3);
+      temp_v1 = _ZN12OnlineResultC1ERKj((unsigned int *)&temp_v2,(unsigned int *)&temp_v3);
       FUN_002f3dde(param_2,temp_v1);
       temp_v1 = 0;
     }

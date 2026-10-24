@@ -1,42 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036f210` (_code @ 0x36f210, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail shares one release-call block between the two (identical) flag branches and addresses the handle through a pointer (add r5, r4, #28); armcc lays out the two paths separately here. */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern romwright_code *g_gfxReleaseCallback; /* 0x44e334 */
+/* A graphics resource: flag bits at 8, an owner handle at 0xC, a native handle at 0x1C and its context at 0x20. */
+struct GfxResource {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 flags;
+    /* 0x0C */ u32 owner;
+    /* 0x10 */ u8 unk10[0xC];
+    /* 0x1C */ u32 handle;
+    /* 0x20 */ u32 context;
+};
 
+struct GfxResourceRef {
+    /* 0x00 */ GfxResource *resource;
+};
 
-void FUN_0036f210(int *param_1)
+typedef void (*GfxReleaseCallback)(u32 context, u32 command, u32 owner, u32 handle);
+extern GfxReleaseCallback g_gfxReleaseCallback;
 
+/* Releases the native handle of a graphics resource (unless it is shared) and detaches its owner. */
+void FUN_0036f210(GfxResourceRef *ref)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = *param_1;
-  if ((*(unsigned int *)(temp_v2 + 8) & 1) == 0) {
-    temp_v1 = *(int *)(temp_v2 + 0xc);
-    if ((*(unsigned int *)(temp_v2 + 8) & 2) != 0) {
-      if (temp_v1 == 0) {
-        return;
-      }
-      temp_v0 = *(int *)(temp_v2 + 0x20);
+    GfxResource *resource = ref->resource;
+
+    if ((resource->flags & 1) == 0) {
+        if ((resource->flags & 2) != 0) {
+            if (resource->owner == 0) {
+                return;
+            }
+            if (resource->context != 0) {
+                g_gfxReleaseCallback(resource->context, 0x102, resource->owner, resource->handle);
+                resource->handle = 0;
+            }
+        } else {
+            if (resource->owner == 0) {
+                return;
+            }
+            if (resource->context != 0) {
+                g_gfxReleaseCallback(resource->context, 0x102, resource->owner, resource->handle);
+                resource->handle = 0;
+            }
+        }
+        resource->owner = 0;
     }
-    else {
-      if (temp_v1 == 0) {
-        return;
-      }
-      temp_v0 = *(int *)(temp_v2 + 0x20);
-    }
-    if (temp_v0 != 0) {
-      (*g_gfxReleaseCallback)(temp_v0,0x102,temp_v1,*(unsigned int *)(temp_v2 + 0x1c));
-      *(unsigned int *)(temp_v2 + 0x1c) = 0;
-    }
-    *(unsigned int *)(temp_v2 + 0xc) = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

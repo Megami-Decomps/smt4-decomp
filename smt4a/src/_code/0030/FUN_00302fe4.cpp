@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_001353a2(void);
+void _ZNSt6vectorIa12AsdAllocatorIaEE14_C_insert_aux2IPKaEEvPaT_S7_(void);
 
-/* Forwards to FUN_001353a2. */
+/* Forwards to _ZNSt6vectorIa12AsdAllocatorIaEE14_C_insert_aux2IPKaEEvPaT_S7_. */
 void FUN_00302fe4(void)
 {
-    FUN_001353a2();
+    _ZNSt6vectorIa12AsdAllocatorIaEE14_C_insert_aux2IPKaEEvPaT_S7_();
 }
 
 } /* extern "C" */

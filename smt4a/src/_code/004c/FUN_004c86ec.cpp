@@ -1,26 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c86ec` (_code @ 0x4c86ec, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTable04FindById(void);
+struct DataTable04Record {
+    /* 0x00 */ u8 unk00[0x32];
+    /* 0x32 */ s8 effects[4];
+};
 
-/* Supplied declaration required: dataTable04FindById. */
+DataTable04Record *dataTable04FindById(u32 id);
 
-
-unsigned int FUN_004c86ec(int param_1)
-
+/* Returns whether any of the record's four effect slots holds -5 or -7. */
+u32 FUN_004c86ec(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  if (((param_1 != 0) && (dataTable04FindById(), param_1 != 0)) &&
-     ((*(unsigned char *)(param_1 + 0x32) == 0xfb || *(unsigned char *)(param_1 + 0x32) == 0xf9 ||
-      (((*(unsigned char *)(param_1 + 0x33) == 0xfb || *(unsigned char *)(param_1 + 0x33) == 0xf9 ||
-        (*(unsigned char *)(param_1 + 0x34) == 0xfb || *(unsigned char *)(param_1 + 0x34) == 0xf9)) ||
-       (*(unsigned char *)(param_1 + 0x35) == 0xfb || *(unsigned char *)(param_1 + 0x35) == 0xf9)))))) {
-    return 1;
-  }
-  return 0;
+    DataTable04Record *record;
+    s32 i;
+
+    if (id != 0) {
+        record = dataTable04FindById(id);
+        if (record != NULL) {
+            for (i = 0; i < 4; i++) {
+                if (record->effects[i] == -5 || record->effects[i] == -7) {
+                    return 1;
+                }
+            }
+        }
+    }
+    return 0;
 }
 
 } /* extern "C" */

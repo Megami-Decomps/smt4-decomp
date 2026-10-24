@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00117c7c(int, int, int, int);
 int _ZN9Obj55aff4D1Ev(unsigned char [8]);
-int vectorCopyHeader(int, int *);
+int _ZN18OnlineResultRecordaSERKS_(int, int *);
 int FUN_002ea3c0(...);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(int *, int);
@@ -26,10 +26,10 @@ extern unsigned char LAB_0010f67c; /* 0x10f67c */
 extern unsigned char LAB_0010f91d; /* 0x10f91d */
 
 /* Supplied declaration required: FUN_00117c7c. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
-/* Supplied declaration required: vectorCopyHeader. */
-extern unsigned int FUN_002ea100(unsigned char *, unsigned int);
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
+extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002ea3c0. */
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
@@ -52,7 +52,7 @@ void FUN_0010f5d8(int param_1)
   
   (**(romwright_code **)(**(int **)(param_1 + 0xd8) + 0xc))
             (*(int **)(param_1 + 0xd8),*(unsigned int *)(param_1 + 0x6c));
-  temp_v3 = FUN_002ea100(temp_v6,*(unsigned int *)(param_1 + 0x88));
+  temp_v3 = _ZN9Obj55aff4C1EPKc(temp_v6,*(unsigned int *)(param_1 + 0x88));
   temp_v4 = *(unsigned int *)(param_1 + 0x8c);
   temp_v5 = param_1 + 0x90;
   temp_v2 = param_1 + 0x158;
@@ -61,13 +61,13 @@ void FUN_0010f5d8(int param_1)
   _ZN9Obj55aff4D1Ev(temp_v6);
   if (temp_v0 != 1) {
     FUN_002ea41e(&temp_v3,temp_v2);
-    vectorCopyHeader(param_1 + 200,&temp_v3);
+    _ZN18OnlineResultRecordaSERKS_(param_1 + 200,&temp_v3);
     temp_v1 = FUN_002ea3c0(temp_v7,&LAB_0010f57d,0,&LAB_0010f67c);
     FUN_002ea3d0(param_1,temp_v1);
   }
   else {
     onlineJobSetStateWaiting(param_1);
-    temp_v0 = operatorNew(0x10);
+    temp_v0 = _Znwj(0x10);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_002ea3c0(temp_v0,&LAB_0010f91d,0,&LAB_0010f67c);

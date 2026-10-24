@@ -6,7 +6,7 @@ extern "C" {
 
 int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
-int FUN_002e7908(unsigned char [12], int *);
+int _ZN12OnlineResultC1ERKj(unsigned char [12], int *);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int onlineJobSetStateTimed(int, int);
@@ -22,7 +22,7 @@ extern unsigned char LAB_0010bb0c; /* 0x10bb0c */
 
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
@@ -52,7 +52,7 @@ void FUN_0010ba70(int param_1)
   temp_v2 = param_1 + 0x6c;
   if (temp_v0 != 0) {
     temp_v7 = 0x80010001;
-    temp_v1 = FUN_002e7908(temp_v6,&temp_v7);
+    temp_v1 = _ZN12OnlineResultC1ERKj(temp_v6,&temp_v7);
     temp_v0 = wordRefsEqual_002ea42c(temp_v2,temp_v1);
     if (temp_v0 != 0) {
       onlineJobSetStateTimed(param_1,10);
@@ -62,7 +62,7 @@ void FUN_0010ba70(int param_1)
   }
   else {
     temp_v5 = 0x80010001;
-    temp_v1 = FUN_002e7908(temp_v4,&temp_v5);
+    temp_v1 = _ZN12OnlineResultC1ERKj(temp_v4,&temp_v5);
     temp_v0 = wordRefsEqual_002ea42c(temp_v2,temp_v1);
     if (temp_v0 != 0) {
       temp_v1 = FUN_002ea3c0(temp_v8,0x10ba19,0,&LAB_0010bb0c);
@@ -71,7 +71,7 @@ void FUN_0010ba70(int param_1)
       return;
     }
     temp_v5 = 0x80010004;
-    temp_v2 = FUN_002e7908(temp_v4,&temp_v5);
+    temp_v2 = _ZN12OnlineResultC1ERKj(temp_v4,&temp_v5);
   }
   FUN_002f5898(param_1,temp_v2);
   _ZN9Obj55b28cD1Ev(temp_v3);

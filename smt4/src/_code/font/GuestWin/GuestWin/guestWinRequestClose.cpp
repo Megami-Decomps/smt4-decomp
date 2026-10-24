@@ -5,7 +5,7 @@
 extern "C" {
 
 extern GuestWinOptions *gameGetSupportUnitData(void);
-int FUN_002bee58(u8 *ui, int arg);
+int spriteStartAnimationByIndex(u8 *ui, int arg);
 
 extern GuestWinWork *g_guestWin;
 
@@ -16,7 +16,7 @@ void guestWinRequestClose(void)
     if (gameGetSupportUnitData()->guestWinEnabled != 0) {
         guest = g_guestWin;
         guest->state = 3;
-        FUN_002bee58(guest->ui, 1);
+        spriteStartAnimationByIndex(guest->ui, 1);
     }
 }
 

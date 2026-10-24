@@ -79,7 +79,7 @@ int FUN_002c58c8(...);
 int asdTMTexTableLoadTmx(...);
 
 int FUN_0010250c(...);
-int FUN_00102b10(...);
+int textSystemInitialize(...);
 int asdProcessInit(...);
 int asdMemoryInit(...);
 int asdNgcInit(...);
@@ -101,7 +101,7 @@ int FUN_00105e28(...);
 int asdGxPresetRequest(...);
 int asdMemorySetUseAllocatorA(...);
 int FUN_00106c28(...);
-int FUN_00106d40(...);
+int sysInitializeServices(...);
 int FUN_00106e10(...);
 int randomStateSeed(...);
 int initializeAndResetSubsystems(...);
@@ -273,7 +273,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0010250c. */
 /* Supplied declaration required: messageInitializeDisplay. */
 /* Supplied declaration required: ifTouchAcquire. */
-/* Supplied declaration required: FUN_00102b10. */
+/* Supplied declaration required: textSystemInitialize. */
 /* Supplied declaration required: gameDataAllocBlocks. */
 /* Supplied declaration required: FUN_00102e34. */
 /* Supplied declaration required: asdProcessInit. */
@@ -352,7 +352,7 @@ extern unsigned int FUN_00106708(void);
 /* Supplied declaration required: FUN_00106a18. */
 /* Supplied declaration required: asdGxLoadMaterialShader. */
 /* Supplied declaration required: FUN_00106c28. */
-/* Supplied declaration required: FUN_00106d40. */
+/* Supplied declaration required: sysInitializeServices. */
 /* Supplied declaration required: FUN_00106e10. */
 /* Supplied declaration required: FUN_00106e60. */
 /* Supplied declaration required: FUN_00106f70. */
@@ -472,7 +472,7 @@ void FUN_00101308(void)
   FUN_00106e10();
   nn_pl_CTR_InitializeGameCoin();
   FUN_00106c28();
-  FUN_00106d40();
+  sysInitializeServices();
   temp_v2 = FUN_00103ec8();
   if (temp_v2 == 0) {
     appletCloseApplication();
@@ -570,7 +570,7 @@ void FUN_00101308(void)
   DAT_00446db8 = pfVar8;
   asdGxCommandListCreate();
   DAT_00446dbc = pfVar8;
-  FUN_00102b10();
+  textSystemInitialize();
   asdPrimInit(0x100000);
   asdProcessInit(0x163);
   FUN_00103fec();

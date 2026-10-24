@@ -118,6 +118,10 @@ typedef struct BtlMainStateA {
             u8 prefix[0x3C];
             /* 0x0040 */ u32 job;
         } auxiliaryTask;
+        struct {
+            u8 prefix[0x38];
+            /* 0x003C */ u32 job;    /* btlTargetSelect calculation task */
+        } targetSelect;
     };
     /* 0x004C */ u32 jobB;        /* second job */
     union {
@@ -128,6 +132,10 @@ typedef struct BtlMainStateA {
             /* 0x007C */ u32 editorJob;
             /* 0x0080 */ u32 menuJob;
         } uiJobs;
+        struct {
+            u8 prefix[0x08];
+            /* 0x0058 */ u32 effectJob; /* btlUnit calculation task */
+        } effectTasks;
     };
     /* 0x0084 */ u8 freeOnEnd;    /* 0 = keep the block after the job ends */
     /* 0x0085 */ u8 unk0085[3];

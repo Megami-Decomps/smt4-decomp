@@ -47,8 +47,10 @@ struct SpriteSequenceEntry {
 struct SpriteAnimationResource {
     /* 0x00 */ u8 unk00[6];
     /* 0x06 */ u16 sequenceBytes;
-    /* 0x08 */ u8 unk08[0x10];
+    /* 0x08 */ u16 commandBytes;
+    /* 0x0A */ u8 unk0a[0xE];
     /* 0x18 */ SpriteSequenceEntry *sequence;
+    /* 0x1C */ SpriteAnimationCommand *commands;
 };
 struct SpritePlaybackView {
     /* 0x00 */ u32 unk00;

@@ -15,7 +15,7 @@ typedef struct UnitSlotOwner {
     UnitSlotRef members[5];  /* 0x228 */
 } UnitSlotOwner;
 
-void *FUN_002ae164(s32 id);
+void *dataTable40FindById(s32 id);
 s32 FUN_001ee498(void *unit);
 
 /* Returns 1 when the owner's leader slot (flag 0x10) or any member slot holds a unit (kind 2 or 3) that passes FUN_001ee498. */
@@ -26,13 +26,13 @@ s32 btlSlotsHaveReadyUnit(UnitSlotOwner *owner)
 
     if (owner->flags & 0x10) {
         if ((owner->leader.kind == 2 || owner->leader.kind == 3) &&
-            (unit = FUN_002ae164(owner->leader.id)) != NULL && FUN_001ee498(unit)) {
+            (unit = dataTable40FindById(owner->leader.id)) != NULL && FUN_001ee498(unit)) {
             return 1;
         }
     } else {
         for (i = 0; i < 5; i++) {
             if ((owner->members[i].kind == 2 || owner->members[i].kind == 3) &&
-                (unit = FUN_002ae164(owner->members[i].id)) != NULL && FUN_001ee498(unit)) {
+                (unit = dataTable40FindById(owner->members[i].id)) != NULL && FUN_001ee498(unit)) {
                 return 1;
             }
         }

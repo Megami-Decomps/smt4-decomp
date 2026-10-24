@@ -24,7 +24,7 @@ typedef struct RecordD {
 
 extern u32 aocEntryGetKind(u32 id);
 extern RecordA *dataTable8FindRecord(u32 id);
-extern RecordB *FUN_00192608(u32 id);
+extern RecordB *dataTable08Sub2GetRecord(u32 id);
 extern RecordC *aocRecordLookup83(u32 id);
 extern RecordD *aocRecordLookup84(u32 id);
 
@@ -51,7 +51,7 @@ u16 FUN_0049c9a0(const u16 *idPtr)
     case 6:
     case 7:
     case 8: {
-        RecordB *record = FUN_00192608(id);
+        RecordB *record = dataTable08Sub2GetRecord(id);
 
         if (record != NULL) {
             value = record->value;

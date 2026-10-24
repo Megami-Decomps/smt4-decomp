@@ -1,117 +1,97 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00409fe8` (_code @ 0x409fe8, 0x248 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation and store scheduling only: retail loads the cache base first and keeps the arguments in r5/sl/r8, stores the vptr and id with one stm and tests the allocation with cmp/mov r9; ours reaches the same stores with different registers and order */
+#include "classes/Obj557b08.h"
+#include <new>
+
+/* The model cache: a word, then 16 entries. */
+struct ModelCache {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ Obj557b08 *entries[16];
+};
 
 extern "C" {
 
-int textFormatBuffer(...);
-int asdOperatorNew(int, unsigned int);
-int asdLoadFileAsyncSimple(unsigned char [64], unsigned int *, int);
-int FUN_003fc1b0(unsigned int *, int);
-int FUN_003fcd20(unsigned int *);
-int FUN_00470b60(unsigned int, int, unsigned int *, unsigned char [64]);
-int FUN_004713ec(unsigned int, int, unsigned int *, unsigned char [64]);
+extern ModelCache DAT_005cc508;
+extern u32 g_aocSystem;
+extern const char DAT_00527250[];
+extern const char DAT_0052726c[];
 
-extern unsigned char DAT_00557b10; /* 0x557b10 */
-extern unsigned int g_aocSystem; /* 0x570280 */
+void *asdOperatorNew(u32 size, u32 option);
+void textFormatBuffer(char *buffer, const char *format, ...);
+void asdLoadFileAsyncSimple(const char *path, void **resource, s32 mode);
+void FUN_003fc1b0(Obj557b08 *model, s32 id);
+void FUN_003fcd20(Obj557b08 *model);
+s32 FUN_004705ec(u32 system, s32 id, s32 flag);
+void FUN_00470b60(u32 system, s32 id, void **handle, const char *path);
+s32 FUN_00470b18(u32 system, s32 id, s32 flag);
+void FUN_004713ec(u32 system, s32 id, void **handle, const char *path);
 
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: FUN_003fc1b0. */
-/* Supplied declaration required: FUN_003fcd20. */
-extern int FUN_004705ec(unsigned int, int, unsigned int);
-extern int FUN_00470b18(unsigned int, int, unsigned int);
-/* Supplied declaration required: FUN_00470b60. */
-/* Supplied declaration required: FUN_004713ec. */
-
-
-unsigned int * FUN_00409fe8(int param_1,int param_2,int param_3,unsigned int param_4)
-
+/* Returns the cached model resource for `id` (negative ids are NPCs), creating and starting its
+ * load when it is not cached yet. */
+Obj557b08 *FUN_00409fe8(s32 id, s32 load, s32 synchronous, u32 allocOption)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  unsigned char temp_v2 [64];
-  
-  temp_v0 = 0;
-  do {
-    temp_v1 = *(int *)(temp_v0 * 4 + 0x5cc50c);
-    if ((temp_v1 != 0) && (*(int *)(temp_v1 + 4) == param_1)) {
-      *(int *)(temp_v1 + 0x40) = *(int *)(temp_v1 + 0x40) + 1;
-      return *(unsigned int **)(temp_v0 * 4 + 0x5cc50c);
+    char path[64];
+    s32 i;
+
+    for (i = 0; i < 16; i++) {
+        Obj557b08 *cached = DAT_005cc508.entries[i];
+        if (cached != NULL && cached->id == id) {
+            cached->references++;
+            return DAT_005cc508.entries[i];
+        }
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x10);
-  temp_v0 = 0;
-  do {
-    if (*(int *)(temp_v0 * 4 + 0x5cc50c) == 0) break;
-    if (*(int *)(temp_v0 * 4 + 0x5cc510) == 0) {
-      temp_v0 = temp_v0 + 1;
-      break;
+    i = 0;
+    do {
+        if (DAT_005cc508.entries[i] == NULL) {
+            break;
+        }
+        if (DAT_005cc508.entries[i + 1] == NULL) {
+            i++;
+            break;
+        }
+        i += 2;
+    } while (i < 16);
+
+    Obj557b08 *model = static_cast<Obj557b08 *>(asdOperatorNew(0x48, allocOption));
+    if (model != NULL) {
+        new (model) Obj557b08;
     }
-    temp_v0 = temp_v0 + 2;
-  } while (temp_v0 < 0x10);
-  puVar2 = (unsigned int *)0x48;
-  asdOperatorNew(0x48,param_4);
-  if (puVar2 != (unsigned int *)0x0) {
-    *puVar2 = (unsigned int)&DAT_00557b10;
-    puVar2[1] = 0;
-    puVar2[4] = 0;
-    puVar2[5] = 0;
-    puVar2[6] = 0;
-    puVar2[7] = 0;
-    puVar2[8] = 0;
-    puVar2[9] = 0;
-    puVar2[10] = 0;
-    puVar2[0xb] = 0;
-    puVar2[0xc] = 0;
-    *(unsigned char *)(puVar2 + 0xf) = 0;
-    *(unsigned char *)((int)puVar2 + 0x3d) = 0;
-    puVar2[0x11] = 0;
-  }
-  *(unsigned int **)(temp_v0 * 4 + 0x5cc50c) = puVar2;
-  temp_v0 = -param_1;
-  puVar2[0x10] = 1;
-  if (param_2 == 0) {
-    if (param_1 < 0) {
-      FUN_003fcd20(puVar2);
-      return puVar2;
+    DAT_005cc508.entries[i] = model;
+    model->references = 1;
+    if (load != 0) {
+        if (id < 0) {
+            model->id = id;
+            textFormatBuffer(path, DAT_00527250, -id);
+            model->handle = NULL;
+            model->kind = 2;
+            model->index = -id;
+            if (FUN_004705ec(g_aocSystem, -id, 1) != 0) {
+                FUN_00470b60(g_aocSystem, -id, &model->handle, path);
+                return model;
+            }
+        } else {
+            model->id = id;
+            textFormatBuffer(path, DAT_0052726c, id);
+            model->handle = NULL;
+            model->kind = 6;
+            model->index = id - 1;
+            if (FUN_00470b18(g_aocSystem, id, 1) != 0) {
+                FUN_004713ec(g_aocSystem, id, &model->handle, path);
+                return model;
+            }
+            if (synchronous == 0) {
+                asdLoadFileAsyncSimple(path, &model->handle, 1);
+                return model;
+            }
+        }
+        asdLoadFileAsyncSimple(path, &model->handle, 0);
+        return model;
     }
-    FUN_003fc1b0(puVar2,param_1);
-    return puVar2;
-  }
-  if (param_1 < 0) {
-    puVar2[1] = param_1;
-    textFormatBuffer(temp_v2,"event/npcgtix/npc%03d.bin",temp_v0);
-    puVar2[10] = 0;
-    puVar2[2] = 2;
-    puVar2[3] = temp_v0;
-    temp_v1 = FUN_004705ec(g_aocSystem,temp_v0,1);
-    if (temp_v1 != 0) {
-      FUN_00470b60(g_aocSystem,temp_v0,puVar2 + 10,temp_v2);
-      return puVar2;
+    if (id < 0) {
+        FUN_003fcd20(model);
+    } else {
+        FUN_003fc1b0(model, id);
     }
-  }
-  else {
-    puVar2[1] = param_1;
-    textFormatBuffer(temp_v2,"battle/devil/en%03d.bin",param_1);
-    puVar2[10] = 0;
-    puVar2[2] = 6;
-    puVar2[3] = param_1 - 1;
-    temp_v0 = FUN_00470b18(g_aocSystem,param_1,1);
-    if (temp_v0 != 0) {
-      FUN_004713ec(g_aocSystem,param_1,puVar2 + 10,temp_v2);
-      return puVar2;
-    }
-    if (param_3 == 0) {
-      asdLoadFileAsyncSimple(temp_v2,puVar2 + 10,1);
-      return puVar2;
-    }
-  }
-  asdLoadFileAsyncSimple(temp_v2,puVar2 + 10,0);
-  return puVar2;
+    return model;
 }
 
-} /* extern "C" */
+}

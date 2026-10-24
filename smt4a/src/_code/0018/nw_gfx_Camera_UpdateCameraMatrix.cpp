@@ -25,7 +25,7 @@ typedef struct {
     unsigned int spBC; /* 0xbc: local_bc */
 } param_1_stack;
 
-extern unsigned int *FUN_0018aeb8(void);
+extern unsigned int *_ZN2nw4math5MTX448IdentityEv(void);
 extern int FUN_00199f84(int, int);
 /* Supplied declaration required: FUN_001a1e28. */
 
@@ -155,7 +155,7 @@ void nw_gfx_Camera_UpdateCameraMatrix(int param_1)
            temp_v14 * (temp_v16 * temp_v22 * temp_v3 + temp_v29 * temp_v7 + temp_v20 * temp_v21 * temp_v2)) -
            temp_v18 * (temp_v16 * temp_v21 * temp_v5 + temp_v19 * temp_v39 * temp_v2 + temp_v17 * temp_v23 * temp_v3);
   if (temp_v32 == 0.0f) {
-    puVar3 = (unsigned int *)FUN_0018aeb8();
+    puVar3 = (unsigned int *)_ZN2nw4math5MTX448IdentityEv();
     temp_v0 = puVar3[1];
     temp_v4 = puVar3[2];
     temp_v6 = puVar3[3];

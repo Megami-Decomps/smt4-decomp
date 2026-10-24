@@ -8,7 +8,7 @@ int _ZN9Obj55b28cC1EPv(unsigned char [12], unsigned int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002eb390(int *, int, int *);
 int FUN_002eb3f2(int, int [2]);
-int FUN_002eb414(int *, int *, int *);
+int _ZSt4copyIPKPvPS0_ET0_T_S5_S4_(int *, int *, int *);
 int FUN_002eb422(int *);
 
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
@@ -25,7 +25,7 @@ extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002eb390. */
 /* Supplied declaration required: FUN_002eb3f2. */
 extern int rangeIsEmpty2(unsigned int *);
-/* Supplied declaration required: FUN_002eb414. */
+/* Supplied declaration required: _ZSt4copyIPKPvPS0_ET0_T_S5_S4_. */
 /* Supplied declaration required: FUN_002eb422. */
 extern int wordRefsDiffer_002eb452(int *, unsigned int *);
 
@@ -65,7 +65,7 @@ unsigned int FUN_00104ebc(int param_1,int param_2,int param_3)
       temp_v1 = rangeIsEmpty2((unsigned int *)(param_1 + 0xe4));
       if (temp_v1 == 0) {
         if (*(int **)(param_1 + 0xe8) != piVar3 + 1) {
-          FUN_002eb414(piVar3 + 1,*(int **)(param_1 + 0xe8),piVar3);
+          _ZSt4copyIPKPvPS0_ET0_T_S5_S4_(piVar3 + 1,*(int **)(param_1 + 0xe8),piVar3);
         }
         *(int *)(param_1 + 0xe8) = *(int *)(param_1 + 0xe8) - 4;
       }

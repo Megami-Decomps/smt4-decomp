@@ -1,37 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00421e18` (_code @ 0x421e18, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same operations; retail extracts and converts the four channels in a different order (alpha first, with the header words written between the conversions and the multiplies). */
+#include "common.h"
 
 extern "C" {
 
-int VectorUnsignedToFloat(unsigned int, int);
+extern u8 DAT_005dee46;
 
-extern unsigned char DAT_005dee46; /* 0x5dee46 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-
-
-unsigned int * FUN_00421e18(unsigned int *param_1,unsigned int param_2)
-
+/* Appends a GPU command with a packed color: header words, then B, G, R, A as 0..1 floats. Returns the new cursor. */
+u32 *FUN_00421e18(u32 *cursor, u32 color)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  unsigned int in_fpscr;
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  
-  temp_v3 = (float)VectorUnsignedToFloat(param_2 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v0 = (float)VectorUnsignedToFloat((param_2 & 0xff0000) >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = (float)VectorUnsignedToFloat((param_2 & 0xff00) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v2 = (float)VectorUnsignedToFloat(param_2 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-  *param_1 = DAT_005dee46 | 0x80000000;
-  param_1[1] = 0x804f02c0;
-  param_1[2] = (unsigned int)(temp_v2 * 0.003921569f);
-  param_1[3] = (unsigned int)(temp_v1 * 0.003921569f);
-  param_1[4] = (unsigned int)(temp_v0 * 0.003921569f);
-  param_1[5] = (unsigned int)(temp_v3 * 0.003921569f);
-  return param_1 + 6;
+    f32 alpha = color >> 24;
+    f32 red = (color & 0xFF0000) >> 16;
+    f32 green = (color & 0xFF00) >> 8;
+    f32 blue = color & 0xFF;
+    f32 *floats;
+
+    *cursor++ = DAT_005dee46 | 0x80000000;
+    *cursor++ = 0x804F02C0;
+    floats = (f32 *)cursor;
+    *floats++ = blue * (1.0f / 255.0f);
+    *floats++ = green * (1.0f / 255.0f);
+    *floats++ = red * (1.0f / 255.0f);
+    *floats++ = alpha * (1.0f / 255.0f);
+    return (u32 *)floats;
 }
 
 } /* extern "C" */

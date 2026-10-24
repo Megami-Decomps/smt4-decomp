@@ -18,7 +18,7 @@ struct OnlineInstanceTable;
 extern "C" {
 OnlineInstanceTable* onlineInstanceTableGetCurrent(void);
 OnlineInstance* onlineInstanceTableFind(OnlineInstanceTable* table, u32 id);
-s32 refIsNonNegative(const OnlineResult* result);
+s32 _ZNK18OnlineResultRecord7isValidEv(const OnlineResult* result);
 void FUN_002f3dc4(OnlineInstance* instance, OnlineResult* result);
 void FUN_002f3dde(OnlineInstance* instance, OnlineResult* result);
 void FUN_002e9f00(void* error, s32 code);
@@ -30,7 +30,7 @@ void FUN_0030c800(OnlineJob* job, const OnlineResult* status)
     OnlineInstance* instance = onlineInstanceTableFind(
         onlineInstanceTableGetCurrent(), job->instanceId);
     if (instance != NULL) {
-        s32 succeeded = refIsNonNegative(status);
+        s32 succeeded = _ZNK18OnlineResultRecord7isValidEv(status);
         OnlineResult result = *status;
         if (succeeded) {
             FUN_002f3dc4(instance, &result);

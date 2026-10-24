@@ -31,7 +31,7 @@ void FUN_002bd954(TimerSlot *timer, s32 kind, s32 count, UiResourceParameters *r
 void uiSpriteInitializeState(TimerSlot *timer, s32 kind, s32 count, s32 animation, UiResourceParameters *resources, u16 flags, f32 speed);
 void FUN_00295eb0(TimerSlot *timer, s32 kind, s32 count);
 void pairSetHalves(TimerSlot *timer, s32 x, s32 y);
-void FUN_002bee58(TimerSlot *timer, s32 animation);
+void spriteStartAnimationByIndex(TimerSlot *timer, s32 animation);
 void timerStart(TimerSlot *timer, s32 animation, s32 flags);
 }
 
@@ -56,17 +56,17 @@ extern "C" void uiInitializeFourTimerSet(UiFourTimerSet *set)
     uiTimerSetMode(&set->timers[0], 2);
     FUN_00295eb0(&set->timers[0], 0x14, 0x29);
     uiTimerSetEnabled(&set->timers[0], 1);
-    FUN_002bee58(&set->timers[0], 0);
+    spriteStartAnimationByIndex(&set->timers[0], 0);
     uiSpriteInitializeState(&set->timers[2], 0x14, -1, 2, &set->resources, 0x3d, 1.0f);
     uiTimerSetMode(&set->timers[2], 1);
     uiTimerSetEnabled(&set->timers[2], 1);
     pairSetHalves(&set->timers[2], 200, 120);
-    FUN_002bee58(&set->timers[2], 2);
+    spriteStartAnimationByIndex(&set->timers[2], 2);
     uiSpriteInitializeState(&set->timers[1], 0x14, -1, 0, &set->resources, 0x47, 1.0f);
     uiTimerSetMode(&set->timers[1], 2);
     FUN_00295eb0(&set->timers[1], 0x14, 0x2b);
     uiTimerSetEnabled(&set->timers[1], 1);
-    FUN_002bee58(&set->timers[1], 1);
+    spriteStartAnimationByIndex(&set->timers[1], 1);
     FUN_002bd954(&set->timers[3], 0x14, 9, &set->resources, 0xb, 1.0f);
     timerStart(&set->timers[3], 2, 0);
 }

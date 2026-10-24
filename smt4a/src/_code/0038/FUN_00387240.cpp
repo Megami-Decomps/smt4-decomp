@@ -1,44 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00387240` (_code @ 0x387240, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same arithmetic; retail ends each arm with its own pop (the zero-size arm placed second, loading all four fields before the stores), armcc here joins the arms with a branch. */
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_00387240_arg1 fn_00387240_arg1;
-struct fn_00387240_arg1 {
-    unsigned char pad_0x0[0x8];
-    ushort field_0x8; /* +0x8 */
-    ushort field_0xa; /* +0xa */
-    short *field_0xc; /* +0xc */
+/* A UI rectangle: width/height (top bit is a flag) at 4/6, origin at 8/10, and an optional size override pair at 0xC. */
+struct UiRect {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 width;
+    /* 0x06 */ u16 height;
+    /* 0x08 */ u16 x;
+    /* 0x0A */ u16 y;
+    /* 0x0C */ s16 *size;
 };
 
-extern int FUN_001834a4(fn_00387240_arg1 *, unsigned int);
+/* The target object: a center point at 0x18. */
+struct CenterTarget {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ s16 centerX;
+    /* 0x1A */ s16 centerY;
+};
 
+UiRect *FUN_001834a4(void *owner, u32 id);
 
-void FUN_00387240(int param_1,fn_00387240_arg1 *param_2,unsigned int param_3)
-
+/* Stores the center of the looked-up rectangle (its size override if present) in the target. */
+void FUN_00387240(CenterTarget *target, void *owner, u32 id)
 {
-  short temp_v0;
-  unsigned short temp_v1;
-  short temp_v2;
-  int temp_v3;
-  short *psVar5;
-  
-  temp_v3 = FUN_001834a4(param_2,param_3);
-  psVar5 = *(short **)(temp_v3 + 0xc);
-  if (psVar5 != (short *)0x0) {
-    temp_v0 = *(short *)(temp_v3 + 10);
-    temp_v2 = psVar5[1];
-    *(short *)(param_1 + 0x18) = *(short *)(temp_v3 + 8) + *psVar5 / 2;
-    *(short *)(param_1 + 0x1a) = temp_v0 + temp_v2 / 2;
-    return;
-  }
-  temp_v1 = *(unsigned short *)(temp_v3 + 6);
-  temp_v0 = *(short *)(temp_v3 + 10);
-  *(short *)(param_1 + 0x18) =
-       *(short *)(temp_v3 + 8) + (short)((*(unsigned short *)(temp_v3 + 4) & 0xffff7fff) >> 1);
-  *(short *)(param_1 + 0x1a) = temp_v0 + (short)((temp_v1 & 0xffff7fff) >> 1);
-  return;
+    UiRect *rect = FUN_001834a4(owner, id);
+    s16 *size = rect->size;
+
+    if (size != NULL) {
+        s32 centerX = rect->x + size[0] / 2;
+        s32 centerY = rect->y + size[1] / 2;
+        target->centerX = centerX;
+        target->centerY = centerY;
+    } else {
+        s32 centerX = rect->x + ((rect->width & 0x7FFF) >> 1);
+        s32 centerY = rect->y + ((rect->height & 0x7FFF) >> 1);
+        target->centerX = centerX;
+        target->centerY = centerY;
+    }
 }
 
 } /* extern "C" */

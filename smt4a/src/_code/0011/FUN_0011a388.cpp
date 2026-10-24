@@ -8,7 +8,7 @@ extern "C" {
 int FUN_0011a338(int, unsigned char [28]);
 int FUN_0011a6dc(int);
 int sharedRefAddRef(unsigned int);
-int vectorCopyHeader(int, unsigned int);
+int _ZN18OnlineResultRecordaSERKS_(int, unsigned int);
 int FUN_002e9c64(unsigned char *, unsigned char *, int *, int);
 int onlineJobSetStateDone(int);
 int FUN_002ec8f8(void);
@@ -40,9 +40,9 @@ extern unsigned char LAB_0011a717; /* 0x11a717 */
 /* Supplied declaration required: FUN_0011a338. */
 /* Supplied declaration required: FUN_0011a6dc. */
 /* Supplied declaration required: sharedRefAddRef. */
-extern int operatorNew(unsigned int);
-extern unsigned int FUN_002e7908(unsigned char **, unsigned int *);
-/* Supplied declaration required: vectorCopyHeader. */
+extern int _Znwj(unsigned int);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char **, unsigned int *);
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: FUN_002e9c64. */
 /* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002ec8f8. */
@@ -84,7 +84,7 @@ void FUN_0011a388(int param_1)
     if ((int *)*piVar5 != (int *)0x0) {
       (**(romwright_code **)(*(int *)*piVar5 + 4))();
     }
-    temp_v0 = operatorNew(0x18);
+    temp_v0 = _Znwj(0x18);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_002fde5c();
@@ -118,8 +118,8 @@ void FUN_0011a388(int param_1)
     }
     else {
       temp_v6 = 0x8001000d;
-      temp_v2 = FUN_002e7908(&temp_v3,(unsigned int *)&temp_v6);
-      vectorCopyHeader(param_1 + 0x228,temp_v2);
+      temp_v2 = _ZN12OnlineResultC1ERKj(&temp_v3,(unsigned int *)&temp_v6);
+      _ZN18OnlineResultRecordaSERKS_(param_1 + 0x228,temp_v2);
       *(unsigned char *)(param_1 + 0x3b) = 4;
       onlineJobSetStateRunning(param_1);
     }
@@ -127,8 +127,8 @@ void FUN_0011a388(int param_1)
   }
   else {
     temp_v6 = 0x80050003;
-    temp_v2 = FUN_002e7908(&temp_v3,(unsigned int *)&temp_v6);
-    vectorCopyHeader(param_1 + 0x228,temp_v2);
+    temp_v2 = _ZN12OnlineResultC1ERKj(&temp_v3,(unsigned int *)&temp_v6);
+    _ZN18OnlineResultRecordaSERKS_(param_1 + 0x228,temp_v2);
     *(unsigned char *)(param_1 + 0x3b) = 5;
     onlineJobSetStateDone(param_1);
   }

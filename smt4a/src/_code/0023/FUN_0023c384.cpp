@@ -38,7 +38,7 @@ extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
 extern int gameGetUnlockedCountLimit(void);
-extern long long FUN_002ffa9c(int, unsigned int, unsigned int, unsigned int);
+extern long long __aeabi_uldivmod(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00358e94. */
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: FUN_004bd0d8. */
@@ -123,7 +123,7 @@ void FUN_0023c384(int param_1)
             *puVar8 = temp_v5;
           }
           else {
-            temp_v17 = FUN_002ffa9c(temp_v15 << 0xc,temp_v15 >> 0x14,0x2d,0);
+            temp_v17 = __aeabi_uldivmod(temp_v15 << 0xc,temp_v15 >> 0x14,0x2d,0);
             temp_v9 = (unsigned int)((unsigned long long)(temp_v17 + temp_v3) >> 0x20);
             if (temp_v15 >> 0x14 < temp_v9 ||
                 temp_v9 - (temp_v15 >> 0x14) < (unsigned int)(temp_v15 << 0xc <= (unsigned int)(temp_v17 + temp_v3))) {

@@ -1,4 +1,3 @@
-/* NON_MATCHING: armcc schedules the state stores after the flags read-modify-write (and writes back state's address); retail keeps source order. */
 #include "common.h"
 
 extern "C" {

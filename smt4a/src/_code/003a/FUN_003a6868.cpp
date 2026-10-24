@@ -1,38 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a6868` (_code @ 0x3a6868, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTable04FindById(void);
+/* A looked-up record: only its kind byte is used here. */
+struct KindRecord {
+    /* 0x00 */ u8 unk00[0x23];
+    /* 0x23 */ u8 kind;
+};
 
-/* Supplied declaration required: dataTable04FindById. */
+KindRecord *dataTable04FindById(void *id);
 
-
-unsigned int FUN_003a6868(int param_1)
-
+/* Maps an entry's kind to a category index (99 when there is no entry). */
+u32 FUN_003a6868(void *id)
 {
-/* irregular: 1 native warning(s); review required */
-  if (param_1 != 0) {
-    dataTable04FindById();
-    switch(*(unsigned char *)(param_1 + 0x23)) {
-    default:
-      return 0;
+    if (id == NULL) {
+        return 99;
+    }
+    KindRecord *record = dataTable04FindById(id);
+    u32 category = 0;
+    switch (record->kind) {
+    case 0:
+    case 1:
+    case 2:
+        break;
     case 3:
-      return 1;
+        category = 1;
+        break;
     case 4:
-      return 2;
-    case 5:
-    case 6:
-    case 10:
-      return 4;
+        category = 2;
+        break;
     case 7:
     case 8:
     case 9:
-      return 3;
+        category = 3;
+        break;
+    case 5:
+    case 6:
+    case 10:
+        category = 4;
+        break;
     }
-  }
-  return 99;
+    return category;
 }
 
 } /* extern "C" */

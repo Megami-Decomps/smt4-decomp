@@ -1,42 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016f33c` (_code @ 0x16f33c, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+/* The nn::snd master manager's own state: whether it is initialized and the last value set. */
+struct MasterManagerState {
+    u8 initialized;  // 0x00
+    u8 unk01[3];
+    f32 volume;      // 0x04
+};
 
 extern "C" {
+extern u8 g_nnSndMasterManagerImpl[];
+void FUN_0018a264(void *impl, f32 volume);
 
-extern unsigned short uRam006446ee; /* 0x6446ee */
-extern unsigned char g_nnSndMasterManagerImpl; /* 0x647708 */
-extern float fRam0064770c; /* 0x64770c */
-extern float fRam00647710; /* 0x647710 */
-
-extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
-
-
-void FUN_0016f33c(char *param_1)
-
+/* Sets the master volume on the manager and its implementation once it is initialized. */
+void FUN_0016f33c(MasterManagerState *manager, f32 volume)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  float in_s0;
-  float temp_v1;
-  
-  if (*param_1 == '\0') {
-    return;
-  }
-  *(float *)(param_1 + 4) = in_s0;
-  if (g_nnSndMasterManagerImpl != '\0') {
-    temp_v1 = in_s0 * fRam00647710;
-    fRam0064770c = in_s0;
-    temp_v0 = nn_snd_CTR_Dspsnd_IsInitialized();
-    if (temp_v0 != 0) {
-      puVar2 = *(unsigned int **)((unsigned int)uRam006446ee * 4 + 0x644470);
-      puVar2[1] = (unsigned int)temp_v1;
-      *puVar2 = *puVar2 | 0x10000;
+    if (manager->initialized != 0) {
+        manager->volume = volume;
+        FUN_0018a264(g_nnSndMasterManagerImpl, volume);
     }
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern void *operatorNew(u32 size);
+extern void *_Znwj(u32 size);
 extern s32 FUN_00301490(void *object);
 
 /* Allocates a 0x40-byte object and initializes it. */
 void objectNew40(void)
 {
-    void *object = operatorNew(0x40);
+    void *object = _Znwj(0x40);
 
     if (object != NULL) {
         FUN_00301490(object);

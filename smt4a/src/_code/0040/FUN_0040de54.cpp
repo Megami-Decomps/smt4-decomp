@@ -17,7 +17,7 @@ int FUN_003f2498(...);
 int btlApplyDirectionBucket(...);
 int FUN_004112b0(...);
 int FUN_00416960(...);
-int FUN_0047f314(...);
+int btlPlayEntrySound(...);
 int partyAddMoneyClamped(...);
 int FUN_004c8c10(...);
 int asdModelStartReferencedAnimation(...);
@@ -220,7 +220,7 @@ extern int controllerGetRecordValue(void);
 /* Supplied declaration required: FUN_00416960. */
 extern unsigned int FUN_0047ecc8(void);
 /* Supplied declaration required: FUN_0047effc. */
-/* Supplied declaration required: FUN_0047f314. */
+/* Supplied declaration required: btlPlayEntrySound. */
 /* Supplied declaration required: resourcePairApply. */
 extern int FUN_0047f5b8(void);
 extern unsigned int FUN_0047fa50(unsigned int);
@@ -1381,7 +1381,7 @@ LAB_0040fb78:
           }
           else if (((DAT_00571318 & temp_v5) != 0 || (DAT_0057131c & temp_v7) != 0) ||
                   ((temp_v5 & DAT_00571310) != 0 || (temp_v7 & DAT_00571314) != 0)) {
-            FUN_0047f314((int)*(short *)(temp_v3 + 0x6a));
+            btlPlayEntrySound((int)*(short *)(temp_v3 + 0x6a));
             *(unsigned int *)(*param_1 + 0x45b0) = *(unsigned int *)(*param_1 + 0x45b0) | 1;
           }
         }

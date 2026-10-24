@@ -1,108 +1,86 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c0c38` (_code @ 0x1c0c38, 0x25c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists `work + 0x400` for the 0x4C6 flag read and lays the mode == 1 branch of the first loop out of line; ours keeps both inline (flag read directly through work) */
+#include "ui/ButtonHelp.h"
 
 extern "C" {
 
-int FUN_00220984(void);
-int FUN_002ae028(int);
-int FUN_002b8454(unsigned int, unsigned int, unsigned int, int);
-int buttonHelpSetPreset(unsigned int);
-int FUN_002b8ee0(int, int);
-int FUN_002bf818(int);
+extern ButtonHelpPresetGlobals g_buttonHelp;
+extern ButtonHelpQueuedSelections DAT_0043da50;
 
-extern unsigned char g_buttonHelp; /* 0x43da28 */
-extern unsigned char DAT_0043da50; /* 0x43da50 */
+void FUN_00220984(void);
+void FUN_002ae028(u8 *help);
+void FUN_002b8454(u8 slot, u8 kind, u16 value, s32 defer);
+void FUN_002b8ee0(ButtonHelpDisplayUnit *unit, s32 flag);
+void FUN_002bf818(ButtonHelpDisplayUnit *unit);
+void buttonHelpSetPreset(u32 preset);
+s8 recordGetSignedFlags(const ButtonHelpDisplayUnit *record);
 
-/* Supplied declaration required: FUN_00220984. */
-/* Supplied declaration required: FUN_002ae028. */
-/* Supplied declaration required: FUN_002b8454. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002b8ee0. */
-/* Supplied declaration required: FUN_002bf818. */
-
-
-unsigned int FUN_001c0c38(void)
-
+/* Per-frame update of the button help: runs the current state (1 opens, 2 idles, 3 closes), applies
+ * a preset that was waiting and the queued selections, then advances the frame counter. */
+u32 FUN_001c0c38(void)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-  temp_v5 = 0;
-  temp_v1 = *(int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x10);
-  if (temp_v1 != 0) {
-    if (temp_v1 == 1) {
-      temp_v1 = 0;
-      do {
-        if (*(char *)(temp_v0 + 0x4c8) != '\x01') {
-          FUN_002bf818(temp_v0 + temp_v1 * 0x8c + 0x37c);
+    ButtonHelpWork *work = g_buttonHelp.prefix.work;
+    ButtonHelpSelectionViewIV *selection = reinterpret_cast<ButtonHelpSelectionViewIV *>(work);
+    s32 last = 0;
+
+    if (work->state != 0) {
+        if (work->state == 1) {
+            for (s32 i = 0; i < 2; i++) {
+                if (work->mode != 1) {
+                    FUN_002bf818(&work->units[i]);
+                } else if (work->unk04C6[0] != 0) {
+                    FUN_002b8ee0(&work->units[i], 0);
+                }
+            }
+            for (s32 i = 0; i < 6; i++) {
+                if (selection->kinds[i].kind != 0) {
+                    if (i < work->transition.phase) {
+                        FUN_002bf818(&selection->units[i]);
+                    }
+                    last = i;
+                }
+            }
+            if (work->transition.phase > last && recordGetSignedFlags(&selection->units[last]) != 0) {
+                g_buttonHelp.prefix.work->state = 2;
+                g_buttonHelp.prefix.work->transition.phase = 0;
+            }
+        } else if (work->state != 2) {
+            if (work->state == 3) {
+                for (s32 i = 0; i < 2; i++) {
+                    FUN_002bf818(&work->units[i]);
+                }
+                for (s32 i = 0; i < 6; i++) {
+                    if (selection->kinds[i].kind != 0) {
+                        if (i < work->transition.phase) {
+                            FUN_002bf818(&selection->units[i]);
+                        }
+                        last = i;
+                    }
+                }
+                if (work->transition.phase > last && recordGetSignedFlags(&selection->units[last]) != 0) {
+                    for (s32 i = 0; i < 6; i++) {
+                        selection->active[i] = 0;
+                    }
+                    FUN_002ae028(selection->unk4BE);
+                    g_buttonHelp.prefix.work->state = 0;
+                    g_buttonHelp.prefix.work->transition.phase = 0;
+                }
+            }
+        } else {
+            FUN_00220984();
         }
-        else if (*(char *)(temp_v0 + 0x4c6) != '\0') {
-          FUN_002b8ee0(temp_v0 + temp_v1 * 0x8c + 0x37c,0);
-        }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 2);
-      temp_v1 = 0;
-      do {
-        if ((*(char *)(temp_v0 + temp_v1 * 4 + 0x494) != '\0') &&
-           (temp_v5 = temp_v1, temp_v1 < *(int *)(temp_v0 + 0xc))) {
-          FUN_002bf818(temp_v0 + temp_v1 * 0x8c + 0x34);
-        }
-        temp_v2 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 6);
-      if ((*(int *)(temp_v0 + 0xc) > temp_v5) && (*(char *)(temp_v0 + temp_v5 * 0x8c + 0xbe) != '\0')) {
-        *(unsigned int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x10) = 2;
-        *(unsigned int *)(temp_v2 + 0xc) = 0;
-      }
     }
-    else if (temp_v1 != 2) {
-      if (temp_v1 == 3) {
-        temp_v1 = 0;
-        do {
-          FUN_002bf818(temp_v0 + temp_v1 * 0x8c + 0x37c);
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < 2);
-        temp_v1 = 0;
-        do {
-          if ((*(char *)(temp_v0 + temp_v1 * 4 + 0x494) != '\0') &&
-             (temp_v5 = temp_v1, temp_v1 < *(int *)(temp_v0 + 0xc))) {
-            FUN_002bf818(temp_v0 + temp_v1 * 0x8c + 0x34);
-          }
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < 6);
-        if ((*(int *)(temp_v0 + 0xc) > temp_v5) && (*(char *)(temp_v0 + temp_v5 * 0x8c + 0xbe) != '\0')) {
-          *(unsigned int *)(temp_v0 + 0x4b8) = 0;
-          *(unsigned short *)(temp_v0 + 0x4bc) = 0;
-          FUN_002ae028(temp_v0 + 0x4be);
-          temp_v2 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-          *(unsigned int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x10) = 0;
-          *(unsigned int *)(temp_v2 + 0xc) = 0;
+    if (g_buttonHelp.pending >= 0) {
+        buttonHelpSetPreset(g_buttonHelp.pending & 0xff);
+        if (g_buttonHelp.pending < 0) {
+            for (s32 i = 0; i < 6; i++) {
+                if (DAT_0043da50.kinds[i] >= 0) {
+                    FUN_002b8454(i, DAT_0043da50.kinds[i], DAT_0043da50.values[i], 1);
+                }
+            }
         }
-      }
     }
-    else {
-      FUN_00220984();
-    }
-  }
-  if ((-1 < (int)(*(unsigned int *)((unsigned char *)&DAT_0043da50 - 0x18))) && (buttonHelpSetPreset((*(unsigned int *)((unsigned char *)&DAT_0043da50 - 0x18)) & 0xff), (int)(*(unsigned int *)((unsigned char *)&DAT_0043da50 - 0x18)) < 0)) {
-    temp_v4 = 0;
-    do {
-      temp_v3 = *(unsigned int *)(temp_v4 * 4 + 0x43da50);
-      if (-1 < (int)temp_v3) {
-        FUN_002b8454(temp_v4 & 0xff,temp_v3 & 0xff,*(unsigned int *)(temp_v4 * 4 + 0x43da68) & 0xffff,1);
-      }
-      temp_v4 = temp_v4 + 1;
-    } while ((int)temp_v4 < 6);
-  }
-  *(int *)(temp_v0 + 0xc) = *(int *)(temp_v0 + 0xc) + 1;
-  return 0;
+    work->transition.phase++;
+    return 0;
 }
 
-} /* extern "C" */
+}

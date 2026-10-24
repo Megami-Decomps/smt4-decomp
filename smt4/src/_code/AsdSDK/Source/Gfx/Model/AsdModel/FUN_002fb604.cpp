@@ -1,121 +1,123 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fb604` (_code @ 0x2fb604, 0x1c4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: logic recovered (runtime-type cast, "shadow" material lookup through the relative-offset dictionary, per-mesh strength call); retail keeps the dictionary-null/name tests, the relative-pointer loads and the global reloads unfused, builds the shadow record through the stack, and uses a 0x24 frame; twin of smt4a FUN_00386548. */
+#include "common.h"
+#include "nw/ut/RuntimeTypeInfo.h"
 
-extern "C" {
+/* The part of g_gfxSettings this reads: the model feature switch, the two shadow strengths and
+ * the loaded graphics file. */
+struct GfxShadowSettings {
+    /* 0x00 */ u8 unk00;
+    /* 0x01 */ u8 enabled;
+    /* 0x02 */ u8 unk02[0x5E];
+    /* 0x60 */ f32 shadowOff;
+    /* 0x64 */ f32 shadowOn;
+    /* 0x68 */ u8 unk68[0x18];
+    /* 0x80 */ void *modelData;
+};
 
-int FUN_002a3204(int, int);
+/* A scene object that reports its runtime type through vtable slot 2. */
+class GfxSceneObject {
+public:
+    virtual ~GfxSceneObject();
+    virtual const nw::ut::RuntimeTypeInfo *getRuntimeTypeInfo() const;
+};
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_1_stack;
-
-extern unsigned char LAB_002fb7d0; /* 0x2fb7d0 */
-extern signed char DAT_00464af1; /* 0x464af1 */
-extern int DAT_00464b70; /* 0x464b70 */
-
-#ifndef ROMWRIGHT_PIECE_3_1_DEFINED
-#define ROMWRIGHT_PIECE_3_1_DEFINED
-#define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
-#endif
-/* Supplied declaration required: FUN_002a3204. */
-extern unsigned int libc_strlen(unsigned char *);
-extern int nw_ut_ResDicPatricia_Get(int *, unsigned char *, unsigned int);
-
-
-unsigned int FUN_002fb604(int *param_1)
-
+/* A value stored as an offset from its own address; 0 means none. */
+template <class T>
+static inline T *relativePointer(s32 *field)
 {
-/* irregular: 2 goto(s); 1 native warning(s); review required */
-  int *piVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar4;
-  int temp_v2;
-  int temp_v3;
-  int *piVar7;
-  int temp_v4;
-  int *piVar9;
-  int temp_v5;
-  int temp_v6 [8];
-  
-  temp_v0 = 0;
-  if ((DAT_00464af1 != '\0') && (temp_v0 = 0, DAT_00464b70 != 0)) {
-    if (param_1 != (int *)0x0) {
-      piVar1 = (int *)(**(romwright_code **)(*param_1 + 8))(param_1);
-      do {
-        piVar7 = param_1;
-        if (piVar1 == (int *)0x472180) goto LAB_002fb668;
-        piVar1 = (int *)*piVar1;
-      } while (piVar1 != (int *)0x0);
-    }
-    piVar7 = (int *)0x0;
-LAB_002fb668:
-    temp_v3 = 0;
-    if (0 < (piVar7[0x5a] - piVar7[0x59]) >> 2) {
-      do {
-        temp_v4 = *(int *)(piVar7[0x59] + temp_v3 * 4);
-        piVar1 = (int *)(*(int *)(temp_v4 + 8) + 0x14);
-        temp_v6[0] = *piVar1;
-        if (temp_v6[0] != 0) {
-          temp_v6[0] = (int)piVar1 + temp_v6[0];
-        }
-        else {
-          temp_v6[0] = 0;
-        }
-        if (temp_v6[0] != 0) {
-          temp_v0 = libc_strlen(&LAB_002fb7d0);
-          temp_v1 = nw_ut_ResDicPatricia_Get(temp_v6,&LAB_002fb7d0,temp_v0);
-          if (temp_v1 != 0) {
-            temp_v2 = *(int *)(temp_v1 + 0xc);
-            if (temp_v2 == 0) {
-              puVar4 = (unsigned int *)0x0;
-            }
-            else {
-              puVar4 = (unsigned int *)(temp_v1 + 0xc + temp_v2);
-            }
-          }
-          else {
-            puVar4 = (unsigned int *)0x0;
-          }
-        }
-        else {
-          puVar4 = (unsigned int *)0x0;
-        }
-        if (puVar4 != (unsigned int *)0x0) {
-          if ((*puVar4 & 0x20000000) == 0) {
-            puVar4 = (unsigned int *)0x0;
-          }
-          if ((int)puVar4[4] >= 1) {
-            if ((puVar4[4] == 2) && (DAT_00464af1 != '\0')) {
-              FUN_002a3204(temp_v4,1);
-            }
-            if (param_1 != (int *)0x0) {
-              piVar1 = (int *)(**(romwright_code **)(*param_1 + 8))(param_1);
-              do {
-                piVar9 = param_1;
-                if (piVar1 == (int *)0x472288) goto LAB_002fb770;
-                piVar1 = (int *)*piVar1;
-              } while (piVar1 != (int *)0x0);
-            }
-            piVar9 = (int *)0x0;
-LAB_002fb770:
-            temp_v5 = romwright_piece_3_1((((unsigned int)(temp_v5) >> 8) & 0xffffffU),1);
-            piVar9[0x87] = temp_v5;
-          }
-          else if (DAT_00464af1 != '\0') {
-            FUN_002a3204(temp_v4,1);
-          }
-        }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < (piVar7[0x5a] - piVar7[0x59]) >> 2);
-    }
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    return *field != 0 ? reinterpret_cast<T *>(reinterpret_cast<u8 *>(field) + *field) : NULL;
 }
 
-} /* extern "C" */
+struct GfxDictionaryNode {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ s32 valueOffset;
+};
+
+struct GfxMaterialValue {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u8 unk04[0xC];
+    /* 0x10 */ s32 mode;
+};
+
+struct GfxMeshResource {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 dictionaryOffset;
+};
+
+struct GfxMesh {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ GfxMeshResource *resource;
+};
+
+/* The shadow switch of a model, kept as a small record. */
+struct GfxShadowState {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[3];
+};
+
+class GfxModel : public GfxSceneObject {
+public:
+    /* 0x004 */ u8 unk004[0x160];
+    /* 0x164 */ GfxMesh **meshesBegin;
+    /* 0x168 */ GfxMesh **meshesEnd;
+    /* 0x16C */ u8 unk16C[0xB0];
+    /* 0x21C */ GfxShadowState shadow;
+};
+
+extern "C" {
+extern GfxShadowSettings g_gfxSettings;
+extern nw::ut::RuntimeTypeInfo DAT_00472180;
+extern nw::ut::RuntimeTypeInfo DAT_00472288;
+
+u32 libc_strlen(const char *text);
+void *nw_ut_ResDicPatricia_Get(void *dictionary, const char *name, u32 length);
+void FUN_002a3204(GfxMesh *mesh, s32 flag, f32 strength);
+
+/* The named value of the mesh's material dictionary, if the mesh has one. */
+static inline GfxMaterialValue *findMaterialValue(GfxMesh *mesh, const char *name)
+{
+    void *dictionary = relativePointer<void>(&mesh->resource->dictionaryOffset);
+    if (dictionary == NULL || name == NULL) {
+        return NULL;
+    }
+    GfxDictionaryNode *node = static_cast<GfxDictionaryNode *>(nw_ut_ResDicPatricia_Get(&dictionary, name, libc_strlen(name)));
+    if (node == NULL) {
+        return NULL;
+    }
+    return relativePointer<GfxMaterialValue>(&node->valueOffset);
+}
+
+/* Switches every mesh of the model between its shadow strengths, per the "shadow" material value. */
+s32 FUN_002fb604(GfxSceneObject *object)
+{
+    if (!g_gfxSettings.enabled) {
+        return 0;
+    }
+    if (g_gfxSettings.modelData == NULL) {
+        return 0;
+    }
+    GfxModel *model = nw::ut::DynamicCast<GfxModel>(object, &DAT_00472180);
+    for (s32 i = 0; i < model->meshesEnd - model->meshesBegin; i++) {
+        GfxMesh *mesh = model->meshesBegin[i];
+        GfxMaterialValue *value = findMaterialValue(mesh, "shadow");
+        if (value != NULL) {
+            if (!(value->flags & 0x20000000)) {
+                value = NULL;
+            }
+            if (value->mode > 0) {
+                if (value->mode == 2 && g_gfxSettings.enabled) {
+                    FUN_002a3204(mesh, 1, g_gfxSettings.shadowOn);
+                }
+                GfxModel *shadowed = nw::ut::DynamicCast<GfxModel>(object, &DAT_00472288);
+                GfxShadowState state;
+                state.active = 1;
+                shadowed->shadow = state;
+            } else if (g_gfxSettings.enabled) {
+                FUN_002a3204(mesh, 1, g_gfxSettings.shadowOff);
+            }
+        }
+    }
+    return 1;
+}
+
+}

@@ -46,6 +46,10 @@ typedef struct RenderCtx {
             u8 unk052C[0xC8];
             /* 0x05F4 */ u8 type;
         } cameraSelection;
+        struct {
+            u8 unk052C[0xCC0];
+            /* 0x11EC */ RenderStateStack stackD;
+        } depthStacks;
     };
     /* 0x124C */ RenderStateStack stackA;
     union {
@@ -94,6 +98,10 @@ typedef struct RenderCtxA {
             /* 0x11E8 */ u8 colorScaleDirty;
             /* 0x11E9 */ u8 unk11E9[0x6F];
         } color;
+        struct {
+            u8 unk0700[0xAF8];
+            /* 0x11F8 */ RenderStateStack stackD;
+        } depthStacks;
     };
     /* 0x1258 */ RenderStateStack stackA;
     union {
@@ -133,9 +141,10 @@ typedef char RenderCtxAColorTargetOffsetCheck[offsetof(RenderCtxA, colorTarget.c
 /* Pushes `state`; the state is re-applied if it differs from the previous top. */
 static __inline void renderStackPush(RenderStateStack *st, int state)
 {
-    int prev = st->entries[st->count];
+    s32 index = st->count;
+    int prev = st->entries[index];
 
-    st->count++;
+    st->count = index + 1;
     st->entries[st->count] = state;
     if (st->dirty != 0 || prev != state) {
         st->apply(state);
@@ -179,8 +188,30 @@ static __inline void renderCtxPushA(RenderCtxA *context, int state)
     renderStackPush(&context->stackA, state);
 }
 
+/* Pushes the evaluated state on the context's fourth stack (at 0x11EC). */
+static __inline void renderCtxPushD(RenderCtx *context, int state)
+{
+    renderStackPush(&context->depthStacks.stackD, state);
+}
+
+static __inline void renderCtxPushD(RenderCtxA *context, int state)
+{
+    renderStackPush(&context->depthStacks.stackD, state);
+}
+
+/* Pushes the evaluated state on the context's third stack. */
+static __inline void renderCtxPushC(RenderCtx *context, int state)
+{
+    renderStackPush(&context->additional.stackC, state);
+}
+
 /* Pushes the evaluated state on the context's second stack. */
 static __inline void renderCtxPushB(RenderCtx *context, int state)
+{
+    renderStackPush(&context->stackB, state);
+}
+
+static __inline void renderCtxPushB(RenderCtxA *context, int state)
 {
     renderStackPush(&context->stackB, state);
 }

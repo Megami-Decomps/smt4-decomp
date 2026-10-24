@@ -1,69 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031cbdc` (_code @ 0x31cbdc, 0x124 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the limit/requested pair with four plain ldr (low, low, high, high) and compares size/buffered and scratchSize/chunk with the operands the other way round; the svc 0x18 call matches through nn::svc::SignalEvent. */
+#include "mobiclip_ctrl/S4FsReader.h"
+#include "shard/W6_W6Match2_LongDivision.h"
+#include "nn/Result.h"
+#include "nn/svc.h"
 
 extern "C" {
+__value_in_regs LongDivisionResult ll_sdiv(s64 dividend, s64 divisor);
+void rt_memcpy(void *destination, const void *source, u32 size);
+void FUN_002e3140(s32 result);
 
-int FUN_002e3140(void);
-int ll_sdiv(int, int, int, int);
-int rt_memcpy(...);
-int software_interrupt(int);
-
-typedef int romwright_code(...);
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: ll_sdiv. */
-/* Supplied declaration required: rt_memcpy. */
-
-
-unsigned int FUN_0031cbdc(int *param_1,int *param_2)
-
+/* Hands out the next block of the movie: a pointer into the ring buffer, or into a contiguous
+ * copy when the block wraps around the end of the ring. Returns 0 when the movie is used up, the
+ * block is not read yet (the reader thread is woken) or the copy cannot be allocated. */
+u32 FUN_0031cbdc(S4FsReader *reader, void **block)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  if (param_1[5] != param_1[7] || param_1[6] != param_1[4]) {
-    temp_v3 = param_1[0xb];
-    temp_v2 = param_1[4] - param_1[6];
-    if (temp_v3 < temp_v2) {
-      temp_v2 = temp_v3;
+    if (reader->limit == reader->requested) {
+        return 0;
     }
-    if (temp_v2 <= (unsigned int)(param_1[2] - *param_1)) {
-      temp_v1 = 0x40000;
-      ll_sdiv(*param_1,param_1[1],0x40000,0);
-      if (temp_v1 + temp_v2 < 0x40001) {
-        temp_v1 = param_1[8] + temp_v1;
-      }
-      else {
-        if ((unsigned int)param_1[10] < temp_v3) {
-          if (param_1[9] != 0) {
-            (**(romwright_code **)(*(int *)param_1[0xf] + 4))();
-          }
-          temp_v0 = (*(romwright_code *)**(unsigned int **)param_1[0xf])
-                            ((unsigned int *)param_1[0xf],param_1[0xb],4);
-          param_1[9] = temp_v0;
-          if (temp_v0 == 0) {
-            return 0;
-          }
-          param_1[10] = param_1[0xb];
+
+    u32 chunk = reader->chunkSize;
+    u32 size = (u32)(reader->limit - reader->requested);
+    if (size > chunk) {
+        size = chunk;
+    }
+    u32 buffered = (u32)(reader->produced - reader->consumed);
+    if (size > buffered) {
+        s32 result = nn::svc::SignalEvent(reader->dataEvent);
+        if (nnResultIsFailure(result)) {
+            FUN_002e3140(result);
         }
-        temp_v0 = 0x40000 - temp_v1;
-        rt_memcpy(param_1[9],param_1[8] + temp_v1,temp_v0);
-        rt_memcpy(param_1[9] + temp_v0,param_1[8],temp_v2 - temp_v0);
-        temp_v1 = param_1[9];
-      }
-      *param_2 = temp_v1;
-      return 1;
+        return 0;
     }
-    software_interrupt(0x18);
-    if (param_1[0x13] < 0) {
-      FUN_002e3140();
+
+    u32 offset = (u32)ll_sdiv(reader->consumed, S4_FS_READER_RING_SIZE).remainder;
+    u8 *data;
+    if (offset + size <= S4_FS_READER_RING_SIZE) {
+        data = reader->ring + offset;
+    } else {
+        if (reader->scratchSize < chunk) {
+            if (reader->scratch != NULL) {
+                reader->allocator->release(reader->scratch);
+            }
+            reader->scratch = (u8 *)reader->allocator->allocate(reader->chunkSize, 4);
+            if (reader->scratch == NULL) {
+                return 0;
+            }
+            reader->scratchSize = reader->chunkSize;
+        }
+        u32 head = S4_FS_READER_RING_SIZE - offset;
+        rt_memcpy(reader->scratch, reader->ring + offset, head);
+        rt_memcpy(reader->scratch + head, reader->ring, size - head);
+        data = reader->scratch;
     }
-  }
-  return 0;
+    *block = data;
+    return 1;
 }
 
 } /* extern "C" */

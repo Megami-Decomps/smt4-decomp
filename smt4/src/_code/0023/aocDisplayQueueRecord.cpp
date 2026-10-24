@@ -1,87 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `aocDisplayQueueRecord` (_code @ 0x234bb4, 0x124 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: frame (0x180), the s16-s18 argument loads and both paths' instruction order match retail; retail puts the one-path record at sp+0 and the two-path record at sp+0xb8 (here the reverse), keeps `orr #2; orr #1` as two steps, and has linker NOPs between the length call and the constructor. */
+#include "shard/FileQueueRequest.h"
+
+struct AocDisplay;
+
+/* The one-path record: the same layout, 0x10 bytes longer. */
+struct FileQueueSingleRequest : FileQueueRequest {
+    u32 unkB8[4];
+};
 
 extern "C" {
+void FUN_002a2e08(AocDisplay *display);
+void FUN_002a2f08(AocDisplay *display, const FileQueueRequest *request);
+void FUN_002a301c(FileQueueRequest *request);
+void FUN_002ba81c(u8 *destination, const char *path, u32 capacity);
+u32 libc_strlen(const char *path);
 
-int FUN_002a2e08(unsigned int);
-int FUN_002a2f08(unsigned int, unsigned char [4]);
-int FUN_002a301c(unsigned char [4]);
-int FUN_002ba81c(...);
-int libc_strlen(...);
-
-/* stack frame of param_6: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int spC8; /* 0xc8: local_c8 */
-    unsigned int spD8; /* 0xd8: local_d8 */
-    unsigned int spEC; /* 0xec: local_ec */
-    unsigned int spF4; /* 0xf4: local_f4 */
-    unsigned int sp180; /* 0x180: local_180 */
-    unsigned int sp190; /* 0x190: local_190 */
-    unsigned int sp1A4; /* 0x1a4: local_1a4 */
-} param_6_stack;
-
-/* Supplied declaration required: FUN_002a2e08. */
-/* Supplied declaration required: FUN_002a2f08. */
-/* Supplied declaration required: FUN_002a301c. */
-/* Supplied declaration required: FUN_002ba81c. */
-/* Supplied declaration required: libc_strlen. */
-
-
-void aocDisplayQueueRecord(unsigned int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
-                 unsigned long long param_5,unsigned int param_6)
-
+/* Queues a file load for the display: one path, or two (the second is stored after the first). */
+void aocDisplayQueueRecord(AocDisplay *display, const char *path, const char *secondPath, u32 *completion,
+                           u32 mode, u32 bytes, void *context)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned char temp_v0 [4];
-  unsigned int temp_v1;
-  unsigned int *temp_v2;
-  unsigned int temp_v3;
-  unsigned int uStack_17c;
-  unsigned char temp_v4 [132];
-  unsigned int temp_v5;
-  unsigned char temp_v6 [4];
-  unsigned int temp_v7;
-  unsigned int *temp_v8;
-  unsigned int temp_v9;
-  unsigned int uStack_c4;
-  unsigned char temp_v10 [64];
-  unsigned char temp_v11 [68];
-  unsigned int temp_v12;
-  
-  if (param_3 != 0) {
-    libc_strlen(param_2);
-    libc_strlen(param_3);
-    FUN_002a301c(temp_v6);
-    FUN_002ba81c(temp_v10,param_2,0x40);
-    FUN_002ba81c(temp_v11,param_3,0x40);
-    temp_v9 = (unsigned int)param_5;
-    uStack_c4 = (unsigned int)((unsigned long long)param_5 >> 0x20);
-    temp_v7 = temp_v7 | 3;
-    if (param_4 != (unsigned int *)0x0) {
-      *param_4 = 0;
+    if (secondPath != NULL) {
+        FileQueueRequest request;
+        libc_strlen(path);
+        libc_strlen(secondPath);
+        FUN_002a301c(&request);
+        FUN_002ba81c(request.path, path, 0x40);
+        FUN_002ba81c(request.path + 0x40, secondPath, 0x40);
+        request.mode = mode;
+        request.bytes = bytes;
+        request.completion = completion;
+        request.context = context;
+        request.flags |= 2;
+        request.flags |= 1;
+        if (completion != 0) {
+            *completion = 0;
+        }
+        FUN_002a2f08(display, &request);
+        FUN_002a2e08(display);
+        return;
     }
-    temp_v8 = param_4;
-    temp_v12 = param_6;
-    FUN_002a2f08(param_1,temp_v6);
-    FUN_002a2e08(param_1);
-    return;
-  }
-  libc_strlen(param_2);
-  FUN_002a301c(temp_v0);
-  FUN_002ba81c(temp_v4,param_2,0x40);
-  temp_v3 = (unsigned int)param_5;
-  uStack_17c = (unsigned int)((unsigned long long)param_5 >> 0x20);
-  temp_v5 = 0;
-  temp_v1 = temp_v1 | 1;
-  if (param_4 != (unsigned int *)0x0) {
-    *param_4 = 0;
-  }
-  temp_v2 = param_4;
-  FUN_002a2f08(param_1,temp_v0);
-  FUN_002a2e08(param_1);
-  return;
+    FileQueueSingleRequest request;
+    libc_strlen(path);
+    FUN_002a301c(&request);
+    FUN_002ba81c(request.path, path, 0x40);
+    request.mode = mode;
+    request.bytes = bytes;
+    request.completion = completion;
+    request.context = NULL;
+    request.flags |= 1;
+    if (completion != 0) {
+        *completion = 0;
+    }
+    FUN_002a2f08(display, &request);
+    FUN_002a2e08(display);
 }
-
-} /* extern "C" */
+}

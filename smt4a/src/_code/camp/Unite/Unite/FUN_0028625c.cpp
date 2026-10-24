@@ -67,7 +67,7 @@ extern int FUN_00337110(...); /* 0x337110 */
 extern int btlDevilCompareValueKindAndOrder(...); /* 0x34f6fc */
 extern unsigned char LAB_0034f784; /* 0x34f784 */
 extern int recordKindOrderCompare(...); /* 0x3603a0 */
-extern int FUN_00375b80(...); /* 0x375b80 */
+extern int devilCompareBySetRaceLevel(...); /* 0x375b80 */
 extern int *g_unite; /* 0x57f290 */
 
 #ifndef ROMWRIGHT_PIECE_2_2_DEFINED
@@ -722,7 +722,7 @@ LAB_0028727c:
               qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_002fe074);
             }
             else {
-              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_00375b80);
+              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,devilCompareBySetRaceLevel);
             }
           }
           if ((*pbVar19 & 0x7f) == 3) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7908(unsigned int, unsigned int *);
+int _ZN12OnlineResultC1ERKj(unsigned int, unsigned int *);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int spC; /* 0xc: local_c */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 
 
 void FUN_001221e4(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -34,7 +34,7 @@ void FUN_001221e4(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     temp_v1[0] = 0x10001;
     temp_v0 = param_3;
   }
-  FUN_002e7908(param_1,puVar1);
+  _ZN12OnlineResultC1ERKj(param_1,puVar1);
   return;
 }
 

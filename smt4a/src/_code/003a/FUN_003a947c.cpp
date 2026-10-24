@@ -1,52 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a947c` (_code @ 0x3a947c, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: callee-saved registers for the two script args are swapped (id r4, index r5 in retail) and armcc emits one extra compiler nop before scrSetResult. */
+#include "common.h"
 
 extern "C" {
 
-int scrGetArg(int);
-int scrSetResult(unsigned int);
+/* A battle record with four u16 values after its id. */
+struct BattleRecord {
+    /* 0x00 */ u16 unk00;
+    /* 0x02 */ u16 values[4];
+};
 
-extern unsigned int btlGetMainState(void);
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: scrSetResult. */
-extern int FUN_003ecd24(unsigned int, unsigned short);
+s32 scrGetArg(s32 index);
+void scrSetResult(u32 value);
+void *btlGetMainState(void);
+BattleRecord *FUN_003ecd24(void *state, u16 id);
 
-
-unsigned int FUN_003a947c(void)
-
+/* Script command: pushes value `index` (0-3) of the battle record `id`, or -1. */
+u32 FUN_003a947c(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = btlGetMainState();
-  temp_v3 = FUN_003ecd24(temp_v2,temp_v0);
-  if (temp_v3 == 0) {
-    temp_v4 = 0xffffffff;
-  }
-  else {
-    temp_v4 = 0xffffffff;
-    if (temp_v1 == 0) {
-      temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + 2);
+    s32 id = scrGetArg(0);
+    s32 index = scrGetArg(1);
+    BattleRecord *record = FUN_003ecd24(btlGetMainState(), id);
+    u32 result;
+
+    if (record == NULL) {
+        result = -1;
+    } else {
+        u32 value = -1;
+        if (index == 0) {
+            value = record->values[0];
+        } else if (index == 1) {
+            value = record->values[1];
+        } else if (index == 2) {
+            value = record->values[2];
+        } else if (index == 3) {
+            value = record->values[3];
+        }
+        result = value;
     }
-    else if (temp_v1 == 1) {
-      temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + 4);
-    }
-    else if (temp_v1 == 2) {
-      temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + 6);
-    }
-    else if (temp_v1 == 3) {
-      temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + 8);
-    }
-  }
-  scrSetResult(temp_v4);
-  return 1;
+    scrSetResult(result);
+    return 1;
 }
 
 } /* extern "C" */

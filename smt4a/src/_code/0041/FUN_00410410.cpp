@@ -1,130 +1,101 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00410410` (_code @ 0x410410, 0x214 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same control flow and operations as retail; 64-bit mask loads/ands are ordered differently and the effect counter reload sits after the compare. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+
+/* The queued capacity-change action (the common ReflectAction layout, only the fields used here). */
+struct CapacityAction {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05[0x1F];
+    /* 0x24 */ s16 first;
+    /* 0x26 */ s16 second;
+    /* 0x28 */ s32 value;
+};
+typedef char CapacityActionOffsetCheck[offsetof(CapacityAction, value) == 0x28 ? 1 : -1];
+
+/* The effect counter lies beyond the published BtlMainStateA extent. */
+struct BattleEffectStateView {
+    BtlMainStateA battle;
+    /* 0x4CF0 */ u8 unk4CF0[0x7C];
+    /* 0x4D6C */ s32 effectCounter; /* hits left for the running effect */
+};
+typedef char BattleEffectCounterOffsetCheck[offsetof(BattleEffectStateView, effectCounter) == 0x4D6C ? 1 : -1];
+
+/* The battle context handed to action handlers: the battle state pointer is its first word. */
+struct BattleActionContext {
+    BattleEffectStateView *state;
+};
+
+/* The constant status masks stored behind g_btlActionReflect's context pointer. */
+struct BtlStatusMasks {
+    /* 0x00 */ void *context;
+    /* 0x04 */ u8 unk04[0x54];
+    /* 0x58 */ u64 entryMask;
+    /* 0x60 */ u64 blockedMask;
+    /* 0x68 */ u8 unk68[0x18];
+    /* 0x80 */ u64 stoppedMask;
+    /* 0x88 */ u8 unk88[0x10];
+    /* 0x98 */ u64 expiredMask;
+    /* 0xA0 */ u64 depletedMask;
+    /* 0xA8 */ u64 stateBlockMask;
+    /* 0xB0 */ u8 unkB0[0x10];
+    /* 0xC0 */ u64 markerBlockMask;
+};
+typedef char BtlStatusMasksOffsetCheck[
+    offsetof(BtlStatusMasks, entryMask) == 0x58 && offsetof(BtlStatusMasks, markerBlockMask) == 0xC0 && offsetof(BtlStatusMasks, stateBlockMask) == 0xA8 ? 1 : -1];
 
 extern "C" {
+extern BtlStatusMasks g_btlActionReflect;
+void FUN_003ebc08(BtlMainStateA *state, s32 mode);
+void FUN_003e7ef0(BtlMainStateA *state);
 
-int FUN_003e7ef0(int);
-int FUN_003ebc08(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern unsigned int DAT_00571348; /* 0x571348 */
-extern unsigned int DAT_0057134c; /* 0x57134c */
-extern unsigned int DAT_00571350; /* 0x571350 */
-extern unsigned int DAT_00571354; /* 0x571354 */
-extern unsigned int DAT_00571370; /* 0x571370 */
-extern unsigned int DAT_00571374; /* 0x571374 */
-extern unsigned int DAT_00571388; /* 0x571388 */
-extern unsigned int DAT_0057138c; /* 0x57138c */
-extern unsigned int DAT_00571390; /* 0x571390 */
-extern unsigned int DAT_00571394; /* 0x571394 */
-extern unsigned int DAT_00571398; /* 0x571398 */
-extern unsigned int DAT_0057139c; /* 0x57139c */
-extern unsigned int DAT_005713b0; /* 0x5713b0 */
-extern unsigned int DAT_005713b4; /* 0x5713b4 */
-
-/* Supplied declaration required: FUN_003e7ef0. */
-/* Supplied declaration required: FUN_003ebc08. */
-
-
-void FUN_00410410(int *param_1,int param_2)
-
+/* Applies a capacity-change action to the battle state and, once the effect's counter runs out, marks the state flags. */
+void FUN_00410410(BattleActionContext *context, const CapacityAction *action)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  short temp_v5;
-  unsigned int temp_v6;
-  int *piVar8;
-  unsigned char temp_v7;
-  
-  temp_v1 = *param_1;
-  if ((DAT_005713b0 & *(unsigned int *)(temp_v1 + 0x45a8)) == 0 &&
-      (*(unsigned int *)(temp_v1 + 0x45ac) & DAT_005713b4) == 0) {
-    temp_v3 = (*(unsigned int *)(temp_v1 + 0x45a4) & DAT_0057139c) | (DAT_00571398 & *(unsigned int *)(temp_v1 + 0x45a0));
-    temp_v7 = temp_v3 == 0;
-    if (temp_v7) {
-      temp_v3 = (unsigned int)*(unsigned char *)(param_2 + 4);
-    }
-    if (temp_v7 && temp_v3 == 0x27) {
-      temp_v2 = (int)*(short *)(param_2 + 0x24) + (int)*(short *)(temp_v1 + 0x4c70);
-      if (temp_v2 < 0) {
-        temp_v2 = 0;
-      }
-      *(short *)(temp_v1 + 0x4c70) = (short)temp_v2;
-      temp_v1 = (int)*(short *)(param_2 + 0x26) + (int)*(short *)(*param_1 + 0x4c72);
-      if (temp_v1 < 0) {
-        temp_v1 = 0;
-      }
-      *(short *)(*param_1 + 0x4c72) = (short)temp_v1;
-      if (*(int *)(param_2 + 0x28) != 0) {
-        FUN_003ebc08(*param_1,0);
-      }
-      temp_v1 = *param_1;
-      piVar8 = (int *)(temp_v1 + 0x4d6c);
-      if (0 < *piVar8) {
-        temp_v3 = *(unsigned int *)(temp_v1 + 0x45a0);
-        temp_v4 = *(unsigned int *)(temp_v1 + 0x45a4);
-        if (((DAT_00571350 & temp_v3) == 0 && (DAT_00571354 & temp_v4) == 0) &&
-           ((DAT_00571370 & temp_v3) == 0 && (DAT_00571374 & temp_v4) == 0)) {
-          if (!((temp_v3 & DAT_00571390) == 0 && (temp_v4 & DAT_00571394) == 0)) {
-            *piVar8 = 0;
-          }
-          else {
-            temp_v6 = temp_v1 + 0x4c00;
-            temp_v7 = *(short *)(temp_v1 + 0x4c70) == 0;
-            if (temp_v7) {
-              temp_v6 = (unsigned int)*(unsigned short *)(temp_v1 + 0x4c72);
-            }
-            if (!(temp_v7 && temp_v6 == 0)) {
-              temp_v1 = (int)*(short *)(param_2 + 0x24);
-              if ((int)*(short *)(param_2 + 0x26) <= (int)*(short *)(param_2 + 0x24)) {
-                temp_v1 = (int)*(short *)(param_2 + 0x26);
-              }
-              temp_v1 = temp_v1 + *piVar8;
-              *piVar8 = temp_v1;
-              temp_v3 = DAT_00571388;
-              temp_v2 = *param_1;
-              if (0 < temp_v1) {
+    if ((g_btlActionReflect.markerBlockMask & context->state->battle.markerMasks.bits) != 0)
+        return;
+    if (!((g_btlActionReflect.stateBlockMask & context->state->battle.stateFlags64.bits) == 0 && action->kind == 0x27))
+        return;
+    s32 capacity = action->first + context->state->battle.targetCapacity.counts[0];
+    if (capacity < 0)
+        capacity = 0;
+    context->state->battle.targetCapacity.counts[0] = capacity;
+    capacity = action->second + context->state->battle.targetCapacity.counts[1];
+    if (capacity < 0)
+        capacity = 0;
+    context->state->battle.targetCapacity.counts[1] = capacity;
+    if (action->value != 0)
+        FUN_003ebc08(&context->state->battle, 0);
+    if (context->state->effectCounter <= 0)
+        return;
+    u64 flags = context->state->battle.stateFlags64.bits;
+    if ((g_btlActionReflect.blockedMask & flags) != 0 || (g_btlActionReflect.stoppedMask & flags) != 0)
+        return;
+    if ((flags & g_btlActionReflect.depletedMask) != 0) {
+        context->state->effectCounter = 0;
+    } else {
+        if (context->state->battle.targetCapacity.counts[0] != 0 || context->state->battle.targetCapacity.counts[1] != 0) {
+            s32 lowest = action->first;
+            if (action->first >= action->second)
+                lowest = action->second;
+            s32 remaining = lowest + context->state->effectCounter;
+            context->state->effectCounter = remaining;
+            if (remaining > 0)
                 return;
-              }
-              *(unsigned int *)(temp_v2 + 0x45a4) = *(unsigned int *)(temp_v2 + 0x45a4) | DAT_0057138c;
-              *(unsigned int *)(temp_v2 + 0x45a0) = temp_v3 | *(unsigned int *)(temp_v2 + 0x45a0);
-            }
-            else {
-              temp_v5 = *(short *)(param_2 + 0x24);
-              if (-4 < temp_v5) {
-                temp_v5 = *(short *)(param_2 + 0x26);
-              }
-              temp_v6 = DAT_0057138c;
-              temp_v0 = DAT_00571388;
-              if (temp_v5 < -3) {
-                temp_v6 = DAT_00571394;
-                temp_v0 = DAT_00571390;
-              }
-              *(unsigned int *)(temp_v1 + 0x45a0) = temp_v3 | temp_v0;
-              *(unsigned int *)(temp_v1 + 0x45a4) = temp_v4 | temp_v6;
-            }
-            *(unsigned int *)(*param_1 + 0x4d6c) = 0;
-          }
-          temp_v1 = *(int *)(*param_1 + 0x1ffc);
-          temp_v3 = DAT_0057134c | *(unsigned int *)(temp_v1 + 0xd9b4);
-          *(unsigned int *)(temp_v1 + 0xd9b0) = DAT_00571348 | *(unsigned int *)(temp_v1 + 0xd9b0);
-          *(unsigned int *)(temp_v1 + 0xd9b4) = temp_v3;
-          FUN_003e7ef0(*param_1);
-          return;
+            context->state->battle.stateFlags64.bits |= g_btlActionReflect.expiredMask;
+        } else {
+            s32 worst = action->first;
+            if (worst > -4)
+                worst = action->second;
+            if (worst > -4)
+                flags |= g_btlActionReflect.expiredMask;
+            else
+                flags |= g_btlActionReflect.depletedMask;
+            context->state->battle.stateFlags64.bits = flags;
         }
-      }
+        context->state->effectCounter = 0;
     }
-  }
-  return;
+    context->state->battle.entries[54].flags |= g_btlActionReflect.entryMask;
+    FUN_003e7ef0(&context->state->battle);
 }
-
-} /* extern "C" */
+}

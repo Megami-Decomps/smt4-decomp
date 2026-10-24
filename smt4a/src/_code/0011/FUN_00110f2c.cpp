@@ -6,7 +6,7 @@ extern "C" {
 
 int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(...);
-int vectorCopyHeader(...);
+int _ZN18OnlineResultRecordaSERKS_(...);
 int vectorResizeBytes(...);
 int FUN_002f7824(...);
 int FUN_002f8b88(int);
@@ -37,7 +37,7 @@ typedef struct {
 
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 extern int wordRefsEqual_002ea4ac(int *, unsigned int *);
 /* Supplied declaration required: vectorResizeBytes. */
 /* Supplied declaration required: FUN_002f7824. */
@@ -120,7 +120,7 @@ LAB_00110f60:
         continue;
       }
       FUN_002fbe90(&temp_v3);
-      vectorCopyHeader(temp_v12,&temp_v3);
+      _ZN18OnlineResultRecordaSERKS_(temp_v12,&temp_v3);
       return;
     }
   } while (*(char *)(param_1 + 0x108f) == '\0');
@@ -143,7 +143,7 @@ LAB_00111002:
     temp_v1 = FUN_00502424(temp_v4,(unsigned int *)&temp_v7);
     if (temp_v1 < 0) {
       FUN_002fbe90(&temp_v3);
-      vectorCopyHeader(temp_v12,&temp_v3);
+      _ZN18OnlineResultRecordaSERKS_(temp_v12,&temp_v3);
       return;
     }
     temp_v6 = 1;
@@ -164,7 +164,7 @@ LAB_00111096:
           FUN_005023d0(temp_v4,&temp_v5);
         }
         FUN_002fbe90(temp_v16,temp_v11);
-        vectorCopyHeader(temp_v12,temp_v16);
+        _ZN18OnlineResultRecordaSERKS_(temp_v12,temp_v16);
       }
       _ZN9Obj55b28cD1Ev(temp_v15);
       return;

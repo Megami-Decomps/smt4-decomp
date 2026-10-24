@@ -9,7 +9,7 @@ int FUN_0013231c(int, unsigned int, int);
 int FUN_001325c4(int, unsigned int, unsigned int, unsigned int);
 int FUN_001326b4(int, unsigned int, unsigned int, int);
 int sceneTraverserVisit(unsigned int, int);
-int FUN_002b74cc(int *, int *, int *, int *);
+int _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(int *, int *, int *, int *);
 int FUN_002c3a14(unsigned int);
 int nw_gfx_RenderContext_ResetState_2B7478(unsigned int);
 int nw_gfx_SceneNode_AttachChild(int, int);
@@ -42,7 +42,7 @@ extern signed char DAT_004dad94; /* 0x4dad94 */
 /* Supplied declaration required: FUN_001325c4. */
 /* Supplied declaration required: FUN_001326b4. */
 /* Supplied declaration required: sceneTraverserVisit. */
-/* Supplied declaration required: FUN_002b74cc. */
+/* Supplied declaration required: _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_. */
 /* Supplied declaration required: FUN_002c3a14. */
 extern int FUN_002c5210(void);
 /* Supplied declaration required: nw_gfx_RenderContext_ResetState_2B7478. */
@@ -76,7 +76,7 @@ void FUN_00117604(void)
       piVar2 = piVar1;
       if (piVar1 != piVar4) {
         piVar2 = piVar1 + 1;
-        FUN_002b74cc(piVar2,piVar4,piVar1,&temp_v1);
+        _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(piVar2,piVar4,piVar1,&temp_v1);
       }
       piVar1 = *(int **)(temp_v0 + 0x1c);
       *(int **)(temp_v0 + 0x1c) = piVar2;

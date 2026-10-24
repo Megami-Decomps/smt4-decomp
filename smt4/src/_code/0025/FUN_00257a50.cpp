@@ -9,7 +9,7 @@ void FUN_0029dc74(u32 id, StatBlock *result);
 void uniteMergeInheritedSkillsAndStats(void *context, const StatBlock *first,
     const StatBlock *second, const StatBlock *third, StatBlock *result);
 void uniteBuildInheritedSkillCandidates(u32 id, const StatBlock *first, const StatBlock *second);
-s32 FUN_0029cde0(const u16 *skills, s32 count, u16 skill);
+s32 arrayContainsU16(const u16 *skills, s32 count, u16 skill);
 s32 flagCountUnlockedSlots(const StatBlock *unit);
 void unitRecalculateEffectiveStats(StatBlock *unit);
 void rt_memcpy_w(void *destination, const void *source, u32 size);
@@ -45,7 +45,7 @@ u32 FUN_00257a50(StatBlock *result, s32 selection, s32 mode, u32)
         uniteBuildInheritedSkillCandidates(pair->resultId, first, second);
         for (s32 candidate = 0; candidate < 24; ++candidate) {
             u16 skill = work->secondListIV.indices[candidate];
-            if (skill != 0 && !FUN_0029cde0(result->skills.ids, 8, skill)) {
+            if (skill != 0 && !arrayContainsU16(result->skills.ids, 8, skill)) {
                 s32 count = flagCountUnlockedSlots(result);
                 for (s32 slot = 0; slot < count; ++slot) {
                     if (result->skills.ids[slot] == 0) {

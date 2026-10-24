@@ -131,14 +131,58 @@ def symbol_addresses():
     return _SYMBOL_ADDRESSES
 
 
+_INLINED = None
+
+
+def inlined_bodies():
+    """{name: instruction} of the ARM functions armlink inlines (`--inline`): one instruction that
+    doesn't address pc, then `bx lr`. The retail code never calls one: each `bl` to it is that
+    instruction (an SDK svc wrapper's `svc`, a getter's `ldr`, a setter's `vstr`, `mov r0, #0`).
+    A NOP body is called, not inlined. Their bytes come from the retail target objects, and for the
+    ones armlink then removed as unreferenced (no copy left in the image) from
+    `config/inlined.txt`: `<symbol> = 0x<instruction>; // <call sites>`."""
+    global _INLINED
+    if _INLINED is None:
+        import struct
+        _INLINED = {}
+        for unit in PROJECT["units"]:
+            target = ROOT / unit["target"]
+            if unit.get("thumb") or unit["size"] != 8 or not target.exists():
+                continue
+            data = target.read_bytes()
+            sections, _symbols = read_elf(data)
+            body = next((s for s in sections if s["name"] == ".text"), None)
+            if body is None or body["size"] < 8:
+                continue
+            word, ret = struct.unpack_from("<II", data, body["offset"])
+            svc = word >> 24 & 0xF == 0xF
+            if (ret == 0xE12FFF1E and word >> 28 == 0xE and word not in (0xE1A00000, 0xE320F000)
+                    and word >> 25 & 7 != 5 and (svc or 15 not in (word >> 16 & 0xF, word >> 12 & 0xF))):
+                _INLINED[unit["function"]] = word
+        listed = ROOT / "config" / "inlined.txt"
+        if listed.exists():
+            for line in listed.read_text(encoding="utf-8").splitlines():
+                match = re.match(r"^(\S+) = 0x([0-9a-fA-F]{8});", line)
+                if match:
+                    _INLINED[match[1]] = int(match[2], 16)
+    return _INLINED
+
+
 def link_weak_calls(obj, unit=None):
     """Do what armlink did to the retail code, which per-function objects never went through:
     - a call to a weak function nothing defines (the release build left the debug hooks out)
       becomes MOV r0, r0 in ARM code and two MOV r8, r8 in Thumb;
     - with `unit` (for its address), a branch to the very next instruction, a tail call into the
-      function placed right after this one, becomes the same NOP (armlink's --branchnop default).
+      function placed right after this one, becomes the same NOP (armlink's --branchnop default);
+    - an ARM `bl` to a function of one instruction and `bx lr` becomes that instruction
+      (armlink's --inline, see `inlined_bodies`).
     armcc itself never emits these NOPs, so every one in the retail code is such a call. The
-    relocation goes too. Returns how many."""
+    relocation goes too. Returns how many.
+
+    `__cxa_guard_release` and `__aeabi_atexit` count as weak: the retail program defines neither
+    (only `__cxa_guard_acquire`), and every call a function-local static's initialisation makes to
+    them is this NOP, so the retail objects referenced them weakly; armcc 4.1 b713 references them
+    strongly. `__dso_handle`, the atexit argument, is the image base: retail's pool holds `entry`."""
     import struct
     data = bytearray(Path(obj).read_bytes())
     shoff, = struct.unpack_from("<I", data, 0x20)
@@ -148,8 +192,9 @@ def link_weak_calls(obj, unit=None):
     text = next((i for i, h in enumerate(headers) if name(h) == b".text"), None)
     patched = 0
     for index, rel in enumerate(headers):
-        if rel[1] != 9 or rel[7] != text:  # SHT_REL for .text
+        if rel[1] != 9 or not headers[rel[7]][2] & 4:  # SHT_REL of a code section (.text, an inline function's i.)
             continue
+        code = headers[rel[7]][4]
         symtab = headers[rel[6]]
         kept = []
         for at in range(rel[4], rel[4] + rel[5], 8):
@@ -158,17 +203,27 @@ def link_weak_calls(obj, unit=None):
             kind = info & 0xFF
             name_at = headers[symtab[6]][4] + _name
             symbol = bytes(data[name_at:data.index(b"\0", name_at)]).decode()
-            weak_call = kind in (28, 29, 10, 30) and shndx == 0 and sym_info >> 4 == 2
-            next_call = (unit is not None and kind in (28, 29, 10, 30)
+            if symbol == "__dso_handle" and shndx == 0:
+                data[name_at:name_at + 6] = b"entry\0"
+                patched += 1
+            weak_call = (kind in (28, 29, 10, 30) and shndx == 0
+                         and (sym_info >> 4 == 2 or symbol in ("__cxa_guard_release", "__aeabi_atexit")))
+            next_call = (unit is not None and rel[7] == text and kind in (28, 29, 10, 30)
                          and symbol_addresses().get(symbol) == int(unit["address"], 16) + offset + 4)
-            if weak_call or next_call:  # BL/B (ARM, Thumb) to an absent weak symbol or the next instruction
+            if kind == 28 and symbol in inlined_bodies() and struct.unpack_from("<I", data, code + offset)[0] >> 24 == 0xEB:
+                struct.pack_into("<I", data, code + offset, inlined_bodies()[symbol])
+                patched += 1
+            elif weak_call or next_call:  # BL/B (ARM, Thumb) to an absent weak symbol or the next instruction
                 if kind in (28, 29):
-                    struct.pack_into("<I", data, headers[text][4] + offset, 0xE1A00000)
+                    struct.pack_into("<I", data, code + offset, 0xE1A00000)
                 else:
-                    struct.pack_into("<HH", data, headers[text][4] + offset, 0x46C0, 0x46C0)
+                    struct.pack_into("<HH", data, code + offset, 0x46C0, 0x46C0)
                 patched += 1
             else:
                 kept.append(bytes(data[at:at + 8]))
+                continue
+            if shndx == 0:  # an undefined callee whose call is gone: weak, so the linker need not find it
+                data[symtab[4] + (info >> 8) * 16 + 12] = 0x20 | sym_info & 0xF
         if len(kept) * 8 != rel[5]:
             data[rel[4]:rel[4] + len(kept) * 8] = b"".join(kept)
             struct.pack_into("<I", data, shoff + index * entsize + 0x14, len(kept) * 8)

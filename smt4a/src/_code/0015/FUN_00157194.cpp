@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int asdDeallocateArrayStorage(int, int, int);
+int _ZN4__rw15__rw_deallocateEPvji(int, int, int);
 int FUN_00157110(void);
 int vcallSlot12IfValid(unsigned int);
 int sysFatalBreak(void);
 int asdMemFree(void);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: asdDeallocateArrayStorage. */
+/* Supplied declaration required: _ZN4__rw15__rw_deallocateEPvji. */
 /* Supplied declaration required: FUN_00157110. */
 /* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: sysFatalBreak. */
@@ -55,7 +55,7 @@ int * FUN_00157194(int *param_1)
     for (temp_v0 = (param_1[7] - temp_v1) >> 3; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
     }
   }
-  asdDeallocateArrayStorage(temp_v1,(param_1[8] - temp_v1) >> 2,0);
+  _ZN4__rw15__rw_deallocateEPvji(temp_v1,(param_1[8] - temp_v1) >> 2,0);
   return param_1;
 }
 

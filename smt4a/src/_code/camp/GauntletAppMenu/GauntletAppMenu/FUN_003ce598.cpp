@@ -22,7 +22,7 @@ int FUN_003d1aa0(...);
 int gauntletAppSortMenuEntries(void);
 int gameFlagSetValue(...);
 
-int FUN_00152cf8(int, int, int, int, int);
+int uiPointerHitsRect(int, int, int, int, int);
 int FUN_00163aa4(...);
 int eventQueueAddUniqueIfValid(...);
 int FUN_001643b4(int, int);
@@ -49,7 +49,7 @@ typedef struct {
 extern int g_gauntletAppMenu; /* 0x57f238 */
 
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_00152cf8. */
+/* Supplied declaration required: uiPointerHitsRect. */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_001643b4. */
@@ -166,7 +166,7 @@ unsigned int FUN_003ce598(void)
         temp_v7 = padButtonRepeat(6);
         if ((temp_v7 == 0) && (temp_v7 = padButtonRepeat(0xf), temp_v7 == 0)) {
           temp_v7 = 0xa0;
-          FUN_00152cf8(0xa0,0x30,200,0x20,2);
+          uiPointerHitsRect(0xa0,0x30,200,0x20,2);
           if (temp_v7 != 0) {
             temp_v3 = FUN_002a4894(temp_v6 + 0x10);
             temp_v7 = temp_v3 - 1;
@@ -176,7 +176,7 @@ unsigned int FUN_003ce598(void)
           }
           else {
             temp_v7 = 0xa0;
-            FUN_00152cf8(0xa0,0xc6,200,0x20,2);
+            uiPointerHitsRect(0xa0,0xc6,200,0x20,2);
             if (temp_v7 == 0) {
               return 0;
             }

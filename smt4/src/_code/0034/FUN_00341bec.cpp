@@ -1,4 +1,4 @@
-/* NON_MATCHING: the sine/cosine lookups and the camera math compile differently (register allocation; the identity matrix is built by a local static in the original, retail names it DAT_004efd6c) */
+/* NON_MATCHING: the sine/cosine lookups and the camera math compile differently (register allocation; the identity matrix is built by a local static in the original, retail names it _ZZN2nw4math5MTX348IdentityEvE8identity) */
 #include "shard/S1Mover.h"
 
 extern "C" {

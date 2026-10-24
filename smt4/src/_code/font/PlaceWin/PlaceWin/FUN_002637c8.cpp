@@ -23,7 +23,7 @@ u32 taskCreateDraw(const char *, s32, s32, s32, TaskFunc, TaskFunc, void *, u32)
 void drawParameterBlockClear(void *);
 void paramsInit(void *, const void *, u32, const void *, u32, const void *, u32, const void *, u32, const void *, u32);
 void FUN_002bd954(void *, u32, u32, void *, u32, f32);
-void FUN_002bee58(void *, u32);
+void spriteStartAnimationByIndex(void *, u32);
 
 /* Create the place-name window's update process, stereo draw tasks and animation data. */
 void FUN_002637c8()
@@ -46,6 +46,6 @@ void FUN_002637c8()
                resources->second, sizeof(resources->second), NULL, 0, NULL, 0,
                resources->commands, sizeof(resources->commands));
     FUN_002bd954(window->animation, 0xe, 0x87, window->parameters.packet, 1, 1.0f);
-    FUN_002bee58(window->animation, 0);
+    spriteStartAnimationByIndex(window->animation, 0);
 }
 }

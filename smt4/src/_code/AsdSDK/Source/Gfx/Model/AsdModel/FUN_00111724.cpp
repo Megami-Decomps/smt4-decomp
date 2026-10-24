@@ -23,7 +23,7 @@ extern unsigned int DAT_004dae2c; /* 0x4dae2c */
 /* Supplied declaration required: FUN_0011cfb4. */
 extern int resourceCreateOwnedObject(int *);
 /* Supplied declaration required: FUN_0011f9d0. */
-extern unsigned int FUN_002c2218(void);
+extern unsigned int _ZN10FloatStateC1Ev(void);
 
 
 /* WARNING: Removing unreachable block (ram,0x00111928) */
@@ -172,7 +172,7 @@ unsigned int * FUN_00111724(int *param_1)
     temp_v0 = 0;
   }
   else {
-    temp_v0 = FUN_002c2218();
+    temp_v0 = _ZN10FloatStateC1Ev();
   }
   FUN_0011cfb4(temp_v0);
   puVar1[0x1c] = temp_v0;

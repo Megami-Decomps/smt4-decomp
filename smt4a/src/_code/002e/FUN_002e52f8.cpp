@@ -1,53 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e52f8` (_code @ 0x2e52f8, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the 1.0f/0.0f constants after jobGetWork into s0/s1; built hoists them into callee-saved s16/s17 and branches around the clamp (duplicating the jobGetWork call) */
+#include "common.h"
 
 extern "C" {
 
-int scrGetArg(int);
-int SBORROW4(int, int);
-int VectorSignedToFloat(int, int);
+struct Vec2 {
+    Vec2(f32 px, f32 py) : x(px), y(py) {}
+    f32 x, y;
+};
 
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int jobGetWork(unsigned int);
-extern int FUN_00203d74(void);
-/* Supplied declaration required: scrGetArg. */
+struct JobStepWork {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ Vec2 range;
+};
 
+s32 scrGetArg(u32 index);
+s32 FUN_00203d74(void);
+JobStepWork *jobGetWork(u32 job);
 
-unsigned int FUN_002e52f8(void)
-
+/* Script command: sets the job's start/step pair from a division count (capped at 4 when FUN_00203d74 is set). */
+u32 FUN_002e52f8(void)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = FUN_00203d74();
-  temp_v3 = temp_v2 != 0;
-  temp_v2 = 0;
-  if (temp_v3) {
-    temp_v2 = temp_v1 - 4;
-  }
-  if ((temp_v3 && temp_v1 != 4) && temp_v2 < 0 == (temp_v3 && SBORROW4(temp_v1,4))) {
-    temp_v1 = 4;
-  }
-  temp_v2 = jobGetWork(temp_v0);
-  if (temp_v1 == 0) {
-    *(unsigned int *)(temp_v2 + 0x24) = 0x3f800000;
-    *(unsigned int *)(temp_v2 + 0x28) = 0;
-  }
-  else {
-    *(unsigned int *)(temp_v2 + 0x24) = 0;
-    temp_v4 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(float *)(temp_v2 + 0x28) = 1.0f / temp_v4;
-  }
-  return 1;
+    u32 job = scrGetArg(0);
+    s32 divisions = scrGetArg(1);
+
+    if (FUN_00203d74() != 0 && divisions > 4) {
+        divisions = 4;
+    }
+    JobStepWork *work = jobGetWork(job);
+    if (divisions == 0) {
+        work->range = Vec2(1.0f, 0.0f);
+    } else {
+        work->range.x = 0.0f;
+        work->range.y = 1.0f / divisions;
+    }
+    return 1;
 }
 
 } /* extern "C" */

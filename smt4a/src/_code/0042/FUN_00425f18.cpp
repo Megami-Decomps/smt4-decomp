@@ -3,14 +3,14 @@
 
 extern "C" {
 
-int FUN_001a0d08(int *);
+int nn_os_Thread_FinalizeImpl(int *);
 int deblockerHandleRelease(unsigned int *);
 int FUN_00425cd8(void);
 int mwmofilterDeblockerRelease(unsigned int);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_001a0d08. */
+/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
 /* Supplied declaration required: deblockerHandleRelease. */
 /* Supplied declaration required: FUN_00425cd8. */
 /* Supplied declaration required: mwmofilterDeblockerRelease. */
@@ -29,7 +29,7 @@ int FUN_00425f18(int param_1)
   mwmofilterDeblockerRelease(*puVar1);
   *puVar1 = 0;
   piVar2 = (int *)(param_1 + 0x28);
-  FUN_001a0d08(piVar2);
+  nn_os_Thread_FinalizeImpl(piVar2);
   if (*piVar2 != 0) {
     software_interrupt(0x23);
     *piVar2 = 0;

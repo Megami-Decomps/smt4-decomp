@@ -1,46 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00265b78` (_code @ 0x265b78, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reloads the state global after the null check and addresses the active byte (state + index * 0x88 + 0xB31) and the linked byte (+0xB30 via a separate base) from two bases; built uses one base and keeps the state in a register */
+#include "common.h"
+
+struct MapObject {
+    u8 unk000[0x1F6];  // 0x000
+    u8 active;         // 0x1F6
+};
+
+struct MapObjectTable {
+    MapObject **objects; // 0x00
+};
+
+struct MapSlot {
+    u8 unk00[0x30];   // 0x00
+    u8 linked;        // 0x30 (state + 0xB30)
+    u8 active;        // 0x31
+    u8 unk32[0x56];   // 0x32
+};
+
+struct MapMainState {
+    u8 unk000[0xA9C];        // 0x000
+    MapObjectTable *table;   // 0xA9C
+    u8 unkAA0[0x60];         // 0xAA0
+    MapSlot slots[1];        // 0xB00
+};
 
 extern "C" {
 
-extern int g_lmapMainState; /* 0x447060 */
+extern MapMainState *g_lmapMainState; /* 0x447060 */
 
-
-void FUN_00265b78(int param_1,int param_2)
-
+/* Sets the slot's active flag and mirrors it to the slot's map object when the slot is linked. */
+void FUN_00265b78(s32 index, s32 enable)
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v0 = g_lmapMainState;
-  if (g_lmapMainState == 0) {
-    return;
-  }
-  temp_v1 = g_lmapMainState + param_1 * 0x88;
-  if (param_2 != 0) {
-    if (*(char *)(temp_v1 + 0xb31) != '\0') {
-      return;
+    if (g_lmapMainState == NULL) {
+        return;
     }
-    temp_v2 = 1;
-    *(unsigned char *)(temp_v1 + 0xb31) = 1;
-    if (*(char *)(temp_v1 + 0xb30) == '\0') {
-      return;
+    MapSlot *slot = &g_lmapMainState->slots[index];
+
+    if (enable != 0) {
+        if (slot->active != 0) {
+            return;
+        }
+        slot->active = 1;
+        if (slot->linked == 0) {
+            return;
+        }
+        g_lmapMainState->table->objects[index]->active = 1;
+    } else {
+        if (slot->active == 0) {
+            return;
+        }
+        slot->active = 0;
+        if (slot->linked == 0) {
+            return;
+        }
+        g_lmapMainState->table->objects[index]->active = 0;
     }
-  }
-  else {
-    if (*(char *)(temp_v1 + 0xb31) == '\0') {
-      return;
-    }
-    temp_v2 = 0;
-    *(unsigned char *)(temp_v1 + 0xb31) = 0;
-    if (*(char *)(temp_v1 + 0xb30) == '\0') {
-      return;
-    }
-  }
-  *(unsigned char *)(*(int *)(**(int **)(temp_v0 + 0xa9c) + param_1 * 4) + 0x1f6) = temp_v2;
-  return;
 }
 
 } /* extern "C" */

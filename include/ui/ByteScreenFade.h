@@ -7,7 +7,8 @@
 // Byte-state prefix used while advancing and drawing the full-screen fade overlay.
 struct ByteScreenFade {
     u8 flags;             // 0x00: bit zero marks an active fade
-    u8 unk01[7];
+    u8 unk01[3];
+    s32 mode;             // 0x04: 0 idle, 1 fade in, 2 fade out
     s8 palette;           // 0x08: zero is black, one is white
     u8 unk09;
     s8 duration;          // 0x0A
@@ -15,6 +16,7 @@ struct ByteScreenFade {
     u8 screen;            // 0x0C: one selects the bottom screen
 };
 typedef char ByteScreenFadeOffsets[
+    offsetof(ByteScreenFade, mode) == 4 &&
     offsetof(ByteScreenFade, palette) == 8 &&
     offsetof(ByteScreenFade, duration) == 0xA &&
     offsetof(ByteScreenFade, frame) == 0xB &&

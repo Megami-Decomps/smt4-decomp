@@ -1,105 +1,92 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c7388` (_code @ 0x2c7388, 0x230 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: logic matches the retail range chain; retail compares the 10-bit id (lsl/lsr extraction) with signed branches (blt/bgt) and recomputes it per branch, the build folds the same ranges into unsigned compares and keeps the sign-bit test as TST. */
+#include "common.h"
+
+extern "C" {
+u32 FUN_00280bc0(void);
+void FUN_0032ca54(u32 result);
+void FUN_001386b4(void);
+void FUN_00359974(s32 index, u32 a, u32 b, u32 c);
+void FUN_0037aaec(s32 kind, s32 value);
+void FUN_003cc97c(u32 owner, u32 code);
+}
+
+#define RESULT_KIND_NOTICE 17
+
+/* A packed result: bit 31 set when pending, kind in bits 10-17, id in the low ten bits. */
+union ResultWord {
+    s32 raw;
+    struct {
+        u16 id : 10;
+        u16 unused : 6;
+        u16 high;
+    } bits;
+};
 
 extern "C" {
 
-int FUN_001386b4(void);
-int FUN_0032ca54(unsigned int);
-int FUN_00359974(int, int, unsigned int);
-int FUN_0037aaec(int, int);
-int FUN_003cc97c(unsigned int, unsigned int);
-
-/* Supplied declaration required: FUN_001386b4. */
-extern unsigned int FUN_00280bc0(void);
-/* Supplied declaration required: FUN_0032ca54. */
-/* Supplied declaration required: FUN_00359974. */
-/* Supplied declaration required: FUN_0037aaec. */
-/* Supplied declaration required: FUN_003cc97c. */
-
-
-unsigned int FUN_002c7388(unsigned int param_1,int param_2,int param_3,int param_4)
-
+// Report the pending result: pick the notice code for its id range and forward it. Returns the severity (0 = none).
+u32 FUN_002c7388(u32 owner, s32 value, s32 mode, s32 extra)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v2 = FUN_00280bc0();
-  if ((temp_v2 & 0x80000000) == 0) {
-    temp_v3 = 0;
-  }
-  else {
-    FUN_0032ca54(temp_v2);
-    temp_v3 = 4;
-    temp_v0 = (temp_v2 & 0x3fc00) >> 10;
-    temp_v4 = 0x1c;
-    if (((temp_v0 == 0x11) && (temp_v1 = temp_v2 & 0x3ff, temp_v1 >= 100)) && (temp_v1 < 0xb4)) {
-      if (temp_v1 < 0x82) {
-        return 3;
-      }
-      temp_v4 = 0x1e;
+    ResultWord result;
+    u32 severity;
+
+    result.raw = FUN_00280bc0();
+    if ((result.raw & (s32)0x80000000) >= 0) {
+        severity = 0;
+    } else {
+        FUN_0032ca54(result.raw);
+        severity = 4;
+        u32 kind = (result.raw & 0x3FC00) >> 10;
+        u32 code = 28;
+        if (kind == RESULT_KIND_NOTICE && result.bits.id >= 100 && result.bits.id <= 179) {
+            if (result.bits.id < 130) {
+                return 3;
+            }
+            code = 30;
+        } else if (kind != RESULT_KIND_NOTICE || result.bits.id < 180 || result.bits.id > 199) {
+            if (kind == RESULT_KIND_NOTICE && result.bits.id >= 390 && result.bits.id <= 399) {
+                if (mode == 1) {
+                    if (value != 0) {
+                        FUN_0037aaec(1, value);
+                    }
+                    severity = 1;
+                    code = 25;
+                } else if (mode == 3) {
+                    if (value != 0) {
+                        FUN_0037aaec(1, value);
+                    }
+                    severity = 1;
+                    FUN_00359974(0, extra + 1, 0xFFFFFFFF, 0);
+                    code = 34;
+                } else if (mode == 0) {
+                    if (value != 0) {
+                        FUN_0037aaec(1, value);
+                    }
+                    severity = 1;
+                    code = 33;
+                } else if (mode == 2) {
+                    severity = 6;
+                } else {
+                    code = 32;
+                }
+            } else if (kind == RESULT_KIND_NOTICE && result.bits.id >= 220 && result.bits.id <= 229) {
+                FUN_001386b4();
+                severity = 5;
+            } else if (kind == RESULT_KIND_NOTICE && result.bits.id >= 230 && result.bits.id <= 339) {
+                if ((result.bits.id >= 260 && result.bits.id <= 279) || result.bits.id <= 279 ||
+                    result.bits.id >= 335) {
+                    code = 27;
+                }
+            } else if (kind == RESULT_KIND_NOTICE && result.bits.id >= 200 && result.bits.id <= 219 && mode == 1) {
+                if (value != 0) {
+                    FUN_0037aaec(1, value);
+                }
+                code = 29;
+            }
+        }
+        FUN_003cc97c(owner, code);
     }
-    else if (((temp_v0 != 0x11) || ((temp_v2 & 0x3ff) < 0xb4)) || ((temp_v2 & 0x3ff) >= 200)) {
-      if (((temp_v0 == 0x11) && ((temp_v2 & 0x3ff) >= 0x186)) && ((temp_v2 & 0x3ff) < 400)) {
-        if (param_3 != 1) {
-          if (param_3 != 3) {
-            if (param_3 != 0) {
-              if (param_3 == 2) {
-                temp_v3 = 6;
-              }
-              else {
-                temp_v4 = 0x20;
-              }
-            }
-            else {
-              if (param_2 != 0) {
-                FUN_0037aaec(1,param_2);
-              }
-              temp_v3 = 1;
-              temp_v4 = 0x21;
-            }
-          }
-          else {
-            if (param_2 != 0) {
-              FUN_0037aaec(1,param_2);
-            }
-            temp_v3 = 1;
-            FUN_00359974(0,param_4 + 1,0xffffffff);
-            temp_v4 = 0x22;
-          }
-        }
-        else {
-          if (param_2 != 0) {
-            FUN_0037aaec(1,param_2);
-          }
-          temp_v3 = 1;
-          temp_v4 = 0x19;
-        }
-      }
-      else if (((temp_v0 == 0x11) && ((temp_v2 & 0x3ff) >= 0xdc)) && ((temp_v2 & 0x3ff) < 0xe6)) {
-        FUN_001386b4();
-        temp_v3 = 5;
-      }
-      else if (((temp_v0 == 0x11) && (temp_v1 = temp_v2 & 0x3ff, temp_v1 >= 0xe6)) && (temp_v1 < 0x154)) {
-        if ((((temp_v1 >= 0x104) && (temp_v1 < 0x118)) || (temp_v1 < 0x118)) || (temp_v1 >= 0x14f)) {
-          temp_v4 = 0x1b;
-        }
-      }
-      else if (((temp_v0 == 0x11) && ((temp_v2 & 0x3ff) >= 200)) &&
-              (((temp_v2 & 0x3ff) < 0xdc && (param_3 == 1)))) {
-        if (param_2 != 0) {
-          FUN_0037aaec(1,param_2);
-        }
-        temp_v4 = 0x1d;
-      }
-    }
-    FUN_003cc97c(param_1,temp_v4);
-  }
-  return temp_v3;
+    return severity;
 }
 
-} /* extern "C" */
+}

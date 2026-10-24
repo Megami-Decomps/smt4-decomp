@@ -5,7 +5,7 @@ extern "C" {
 extern StateAtF4 *g_campCecEdit;
 const OutfitPreviewEquipment *gameGetPlayerData(void);
 s32 unitMatchesAlignment(u32 itemId);
-const OutfitPreviewItem *FUN_00192608(u32 itemId);
+const OutfitPreviewItem *dataTable08Sub2GetRecord(u32 itemId);
 void rt_memcpy_w(void *destination, const void *source, u32 size);
 s32 FUN_002e2114(OutfitPreview *preview);
 void FUN_002e2184(OutfitPreview *preview, const OutfitPreviewEquipment *equipment);
@@ -23,7 +23,7 @@ void campCecPreviewEquipmentChoice(u32 itemId)
     OutfitPreviewEquipment equipment;
     rt_memcpy_w(&equipment, gameGetPlayerData(), sizeof(equipment));
     if (unitMatchesAlignment(itemId)) {
-        const OutfitPreviewItem *item = FUN_00192608(itemId);
+        const OutfitPreviewItem *item = dataTable08Sub2GetRecord(itemId);
         switch (item->slotKind) {
         case 2: equipment.slots[0] = static_cast<u16>(itemId); break;
         case 3: equipment.slots[1] = static_cast<u16>(itemId); break;

@@ -1,41 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003245bc` (_code @ 0x3245bc, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail places the else computation out of line after the shared scrSetResult tail and does not fold the slot offset (0x3654) into one add */
+#include "common.h"
+
+struct ResultSlot {
+    s8 unitId;        // 0x000
+    u8 unk001[0x61F]; // 0x001
+};
+
+struct UnitRecordView {
+    u8 unk00[0x34];   // 0x00
+    u16 values[1];    // 0x34
+};
+
+struct ResultScreen {
+    u8 unk0000[0x3654];       // 0x0000
+    ResultSlot slots[25];     // 0x3654
+    u32 slotCount;            // 0xCF74
+    s32 selected;             // 0xCF78
+    u8 unkCF7C[0xBC];         // 0xCF7C
+    s32 valueIndex;           // 0xD038
+    u32 pendingValue;         // 0xD03C
+};
 
 extern "C" {
 
-int scrSetResult(...);
+extern ResultScreen *g_result;
 
-extern int g_result; /* 0x44dc20 */
+s32 scrGetArg(u32 index);
+void scrSetResult(u32 value);
+UnitRecordView *gameGetUnitRecord(s32 unitId);
 
-/* Supplied declaration required: scrSetResult. */
-extern int scrGetArg(void);
-extern int gameGetUnitRecord(int);
-
-
-unsigned int FUN_003245bc(void)
-
+/* Script command (called with r0 = 0, which reaches scrGetArg unchanged): returns the pending result value (arg != 0) or the selected unit's value at the current index; 0 without a result screen. */
+s32 FUN_003245bc(u32 argIndex)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  if (g_result != 0) {
-    if (temp_v0 != 0) {
-      temp_v1 = *(unsigned int *)(g_result + 0xd03c);
+    s32 which = scrGetArg(argIndex);
+
+    if (g_result != NULL) {
+        u32 value = which != 0 ? g_result->pendingValue
+                               : gameGetUnitRecord(g_result->slots[g_result->selected].unitId)->values[g_result->valueIndex];
+
+        scrSetResult(value);
+    } else {
+        scrSetResult(0);
     }
-    else {
-      temp_v0 = gameGetUnitRecord((int)*(char *)(g_result + *(int *)(g_result + 0xcf78) * 0x620 +
-                                         0x3654));
-      temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + *(int *)(g_result + 0xd038) * 2 + 0x34);
-    }
-    scrSetResult(temp_v1);
-  }
-  else {
-    scrSetResult(0);
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

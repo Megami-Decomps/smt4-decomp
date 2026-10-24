@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_004ac83c(int);
 int FUN_004acc1c(...);
-int FUN_005211a4(...);
+int _ZN6MoLive10RingBufferINS_12ObjectHandleEE6insertERKPKS1_S6_(...);
 int rt_memcpy(...);
 
 typedef int romwright_code(...);
@@ -40,7 +40,7 @@ extern unsigned char LAB_004af89c; /* 0x4af89c */
 /* Supplied declaration required: FUN_004ac83c. */
 /* Supplied declaration required: FUN_004acc1c. */
 extern int containerGrowCapacity(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_005211a4. */
+/* Supplied declaration required: _ZN6MoLive10RingBufferINS_12ObjectHandleEE6insertERKPKS1_S6_. */
 extern int moLiveRingBufferReallocate(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
@@ -339,7 +339,7 @@ unsigned int FUN_004af3b4(long long *param_1,int param_2,unsigned int *param_3,u
           temp_v10 = temp_v5 + 0x44;
           temp_v11[0] = (unsigned int *)(temp_v5 + 0x54);
           temp_v3 = temp_v5 + 0x2c;
-          FUN_005211a4(temp_v3,&temp_v10,temp_v11);
+          _ZN6MoLive10RingBufferINS_12ObjectHandleEE6insertERKPKS1_S6_(temp_v3,&temp_v10,temp_v11);
           if (temp_v3 == 0) {
             return 0x44;
           }

@@ -61,6 +61,11 @@ typedef char BustupCutTransitionOffsetCheck[
     offsetof(BustupCutAnim, transitionPosition.y) == 0x654 ? 1 : -1];
 
 /* The same block in Apocalypse: everything from unk5E8 on sits four bytes later. */
+struct BustupCutObject {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 job;
+};
+
 typedef struct BustupCutAnimA {
     /* 0x000 */ u32 job;
     union {
@@ -72,7 +77,10 @@ typedef struct BustupCutAnimA {
             /* 0x5E4 */ u32 mode;
         } transition;
     };
-    /* 0x5E8 */ s32 unk5E8;
+    union {
+        /* 0x5E8 */ s32 unk5E8;
+        /* 0x5E8 */ BustupCutObject *object;
+    };
     /* 0x5EC */ s32 unk5EC;
     /* 0x5F0 */ s32 unk5F0;
     /* 0x5F4 */ u8 unk5F4[2];
@@ -86,6 +94,7 @@ typedef struct BustupCutAnimA {
     /* 0x634 */ u32 slots[BUSTUP_CUT_SLOTS];
     union {
         /* 0x644 */ u8 unk644[0x18];
+        /* 0x644 */ f32 offsetX;
         struct {
             u8 unk644BeforePosition[0x10];
             /* 0x654 */ f32 x;

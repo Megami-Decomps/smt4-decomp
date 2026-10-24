@@ -1,48 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00333af8` (_code @ 0x333af8, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the argument uxth is predicated (uxthne before the beq) in retail */
+#include "common.h"
+
+struct QuestRecord {
+    u8 unk000[0x1AA];  // 0x000
+    u16 areaA;         // 0x1AA
+    u16 areaB;         // 0x1AC
+};
 
 extern "C" {
 
-int dataTable1bOr1cGetRecord(void);
+QuestRecord *dataTable1bOr1cGetRecord(u16 id);
+u8 *questGetRuntimeStatus(u16 id);
 
-extern unsigned char *questGetRuntimeStatus(unsigned int);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-
-
-void FUN_00333af8(unsigned int param_1,int param_2,int param_3)
-
+/* Collects the ids of all quests tied to `area` into `out`, optionally only those whose runtime status has bit 0 set. */
+void FUN_00333af8(u32 area, u16 *out, s32 onlyActive)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  unsigned char *pbVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v4 = 0;
-  temp_v3 = 0;
-  do {
-    temp_v1 = temp_v3;
-    dataTable1bOr1cGetRecord();
-    if (temp_v1 != 0) {
-      temp_v2 = temp_v1 + 0x100;
-      temp_v5 = *(unsigned short *)(temp_v1 + 0x1aa) != param_1;
-      if (temp_v5) {
-        temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x1ac);
-      }
-      if ((!temp_v5 || temp_v2 == param_1) &&
-         ((param_3 == 0 || (pbVar4 = (unsigned char *)questGetRuntimeStatus(temp_v3 & 0xffff), (*pbVar4 & 1) != 0)))) {
-        temp_v0 = temp_v4 * 2;
-        temp_v4 = temp_v4 + 1;
-        *(short *)(param_2 + temp_v0) = (short)temp_v3;
-      }
+    s32 count = 0;
+
+    for (s32 id = 0; id < 400; id++) {
+        QuestRecord *record = dataTable1bOr1cGetRecord(id);
+
+        if (record != NULL && (record->areaA == area || record->areaB == area)) {
+            if (onlyActive != 0) {
+                if ((*questGetRuntimeStatus(id) & 1) == 0) {
+                    continue;
+                }
+            }
+            out[count++] = id;
+        }
     }
-    temp_v3 = temp_v3 + 1;
-  } while ((int)temp_v3 < 400);
-  return;
 }
 
 } /* extern "C" */

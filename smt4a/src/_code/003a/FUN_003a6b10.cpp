@@ -1,49 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a6b10` (_code @ 0x3a6b10, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling only: same stores and calls, but retail loads g_messageMain first and interleaves the constant moves and the vstr differently. */
+#include "common.h"
+
+/* The message window object; only the fields the value popup sets are named. */
+struct MessagePopupWindow {
+    /* 0x000 */ u8 unk000[0x170];
+    /* 0x170 */ u32 unk170;
+    /* 0x174 */ u32 unk174;
+    /* 0x178 */ s32 value;
+    /* 0x17C */ u8 enabledA;
+    /* 0x17D */ u8 enabledB;
+    /* 0x17E */ u8 unk17E[2];
+    /* 0x180 */ s32 valueCopy;
+    /* 0x184 */ f32 valueFloat;
+    /* 0x188 */ u8 unk188[4];
+    /* 0x18C */ u32 unk18C;
+    /* 0x190 */ u8 unk190[4];
+    /* 0x194 */ u8 source[0x10];
+    /* 0x1A4 */ u8 unk1A4[0x95C];
+    /* 0xB00 */ u8 sprite[1];
+};
 
 extern "C" {
 
-int FUN_0014e188(int, int, unsigned int, int, int);
-int uiSpriteSelectAnim(int, int);
-int pairSetFirstResetSecond(int, int);
-int VectorSignedToFloat(unsigned int, int);
+extern MessagePopupWindow *g_messageMain[4]; /* 0x57f588 */
+void FUN_0014e188(u8 *record, u32 value0, u32 value4, const u8 *source, u16 value38, f32 value20);
+void pairSetFirstResetSecond(u8 *sprite, s32 second);
+void uiSpriteSelectAnim(u8 *sprite, s32 anim);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned char g_messageMain; /* 0x57f588 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: pairSetFirstResetSecond. */
-
-
-unsigned int FUN_003a6b10(unsigned int param_1)
-
+/* Shows the value popup on message window 2 with `value` and its float form, and starts its sprite animation. */
+u32 FUN_003a6b10(s32 value)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int in_fpscr;
-  unsigned int temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-  *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x17d) = 1;
-  *(unsigned int *)(temp_v0 + 0x170) = 0x14;
-  temp_v1 = VectorSignedToFloat(param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v0 + 0x178) = param_1;
-  *(unsigned int *)(temp_v0 + 0x174) = 0x14;
-  *(unsigned int *)(temp_v0 + 0x18c) = 0;
-  *(unsigned char *)(temp_v0 + 0x17c) = 1;
-  *(unsigned int *)(temp_v0 + 0x180) = param_1;
-  *(unsigned int *)(temp_v0 + 0x184) = temp_v1;
-  FUN_0014e188(temp_v0 + 0xb00,8,0xffffffff,temp_v0 + 0x194,0xb);
-  pairSetFirstResetSecond(temp_v0 + 0xb00,0x17);
-  uiSpriteSelectAnim(temp_v0 + 0xb00,6);
-  return 1;
+    MessagePopupWindow *window = g_messageMain[2];
+
+    window->enabledB = 1;
+    window->unk170 = 20;
+    f32 valueFloat = (f32)value;
+    window->value = value;
+    window->unk174 = 20;
+    window->unk18C = 0;
+    window->enabledA = 1;
+    window->valueCopy = value;
+    window->valueFloat = valueFloat;
+    FUN_0014e188(window->sprite, 8, 0xffffffff, window->source, 11, 1.0f);
+    pairSetFirstResetSecond(window->sprite, 0x17);
+    uiSpriteSelectAnim(window->sprite, 6);
+    return 1;
 }
 
 } /* extern "C" */

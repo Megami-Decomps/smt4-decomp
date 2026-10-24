@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013780c` (_code @ 0x13780c, 0x2a0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: control flow/switch structure matches; register allocation differs (retail preloads stack args p5,p7,p8,p9 at entry, built loads lazily) */
 #include "romwright_types.h"
 
 extern "C" {
@@ -40,74 +39,67 @@ void FUN_0013780c(int param_1,unsigned int param_2,int param_3,int param_4,int p
   unsigned int temp_v8;
   int temp_v9;
   
-  if (param_10 == 0x500) {
+  switch (param_10) {
+  case 0x500:
     temp_v9 = 0;
     temp_v0 = 1;
     temp_v3 = 1;
-  }
-  else if (param_10 == 0x501) {
+    break;
+  case 0x501:
     temp_v9 = 1;
     temp_v0 = 2;
     temp_v3 = 1;
-  }
-  else {
-    if (param_10 != 0x502) {
-      return;
-    }
+    break;
+  case 0x502:
     temp_v9 = 2;
     temp_v0 = 2;
     temp_v3 = 2;
+    break;
+  default:
+    return;
   }
-  if (param_5 == 0x8057) {
+  switch (param_5) {
+  case 0x8057:
     temp_v2 = 3;
-  }
-  else if (param_5 < 0x8057) {
-    if (param_5 == 0x8051) {
-      temp_v2 = 1;
-    }
-    else {
-      if (param_5 != 0x8056) {
-        return;
-      }
-      temp_v2 = 4;
-    }
-  }
-  else if (param_5 == 0x8058) {
+    break;
+  case 0x8051:
+    temp_v2 = 1;
+    break;
+  case 0x8056:
+    temp_v2 = 4;
+    break;
+  case 0x8058:
     temp_v2 = 0;
-  }
-  else {
-    if (param_5 != 0x8d62) {
-      return;
-    }
+    break;
+  case 0x8d62:
     temp_v2 = 2;
+    break;
+  default:
+    return;
   }
-  if (param_9 == 0x8057) {
+  switch (param_9) {
+  case 0x8057:
     temp_v6 = 3;
     temp_v1 = 2;
-  }
-  else if (param_9 < 0x8057) {
-    if (param_9 == 0x8051) {
-      temp_v6 = 1;
-      temp_v1 = 3;
-    }
-    else {
-      if (param_9 != 0x8056) {
-        return;
-      }
-      temp_v6 = 4;
-      temp_v1 = 2;
-    }
-  }
-  else if (param_9 == 0x8058) {
+    break;
+  case 0x8051:
+    temp_v6 = 1;
+    temp_v1 = 3;
+    break;
+  case 0x8056:
+    temp_v6 = 4;
+    temp_v1 = 2;
+    break;
+  case 0x8058:
     temp_v6 = 0;
     temp_v1 = 4;
-  }
-  else {
-    if (param_9 != 0x8d62) {
-      return;
-    }
+    break;
+  case 0x8d62:
     temp_v6 = 2;
-    temp_v1 = temp_v6;
+    temp_v1 = 2;
+    break;
+  default:
+    return;
   }
   if ((param_3 != 0 && param_4 != 0) && (param_7 != 0 && param_8 != 0)) {
     temp_v8 = param_7 * temp_v0;

@@ -1,43 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00507868` (_code @ 0x507868, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stack layout and store pairing: retail keeps 16 bytes of other locals between the range and the allocation (frame 36) and stores the copy's data/bit count with one strd; the build has a 24-byte frame and separate stores. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0045b4d0(unsigned int [3], int *, unsigned int, int);
-int nnnstdMemCpy(unsigned int, unsigned int, unsigned int);
+/* A window into a buffer: where the write starts and where it would end. */
+typedef struct BufferRange {
+    /* 0x0 */ u32 begin;
+    /* 0x4 */ u32 end;
+} BufferRange;
 
-/* stack frame of param_5: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_5_stack;
+/* Result of a buffer write: the new write position and zero. */
+typedef struct BufferWriteResult {
+    /* 0x0 */ u32 position;
+    /* 0x4 */ u32 unk04;
+} BufferWriteResult;
 
-/* Supplied declaration required: FUN_0045b4d0. */
-/* Supplied declaration required: nnnstdMemCpy. */
+/* A bit buffer: its words and the number of bits in it. */
+typedef struct BitSource {
+    /* 0x00 */ u8 unk00[0x7C];
+    /* 0x7C */ u32 words;
+    /* 0x80 */ u32 bitCount;
+} BitSource;
 
+/* A copied bit buffer: its allocated storage, the bit count and a flag that the storage is owned. */
+typedef struct BitCopy {
+    /* 0x0 */ u32 data;
+    /* 0x4 */ u32 bitCount;
+    /* 0x8 */ u8 owned;
+} BitCopy;
 
-void FUN_00507868(int *param_1,int param_2,unsigned int *param_3,int param_4,int param_5)
+/* The allocator the range is taken from. */
+typedef struct RangeOwner {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u32 base;
+    /* 0x10 */ u8 unk10[0x3C];
+    /* 0x4C */ u32 capacity;
+} RangeOwner;
 
+void FUN_0045b4d0(u32 allocation[3], BufferRange *range, u32 capacity, s32 alignment);
+void nnnstdMemCpy(u32 destination, u32 source, u32 size);
+
+/* Allocates room for a bit buffer inside the owner at `offset`, copies the buffer into it and returns the advanced position. */
+BufferWriteResult FUN_00507868(BitSource *source, BitCopy *copy, u32 offset, RangeOwner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3 [3];
-  
-  temp_v2 = *(int *)(param_5 + 0xc) + param_4;
-  temp_v1 = param_4;
-  FUN_0045b4d0(temp_v3,&temp_v1,*(unsigned int *)(param_5 + 0x4c),4);
-  temp_v0 = *(unsigned int *)(param_2 + 0x80);
-  *param_3 = temp_v3[0];
-  param_3[1] = temp_v0;
-  nnnstdMemCpy(temp_v3[0],*(unsigned int *)(param_2 + 0x7c),(*(int *)(param_2 + 0x80) + 7U) >> 3);
-  *(unsigned char *)(param_3 + 2) = 1;
-  *param_1 = temp_v1;
-  param_1[1] = 0;
-  return;
+    u32 allocation[3];
+    BufferRange range;
+    BufferWriteResult result;
+
+    range.begin = offset;
+    range.end = owner->base + offset;
+    FUN_0045b4d0(allocation, &range, owner->capacity, 4);
+    copy->data = allocation[0];
+    copy->bitCount = source->bitCount;
+    nnnstdMemCpy(allocation[0], source->words, (source->bitCount + 7) >> 3);
+    copy->owned = 1;
+    result.position = range.begin;
+    result.unk04 = 0;
+    return result;
 }
 
 } /* extern "C" */

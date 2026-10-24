@@ -28,7 +28,7 @@ extern unsigned char LAB_003113d8; /* 0x3113d8 */
 
 extern unsigned int FUN_00113fa0(int, unsigned char *);
 /* Supplied declaration required: FUN_00130e3c. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
 /* Supplied declaration required: onlineFormatWideString. */
@@ -86,7 +86,7 @@ unsigned int FUN_00311318(int param_1,unsigned int param_2)
   else {
     _ZN9Obj55aff4C1Ev(temp_v7);
     onlineFormatWideString(temp_v7,&LAB_003113d8,*(unsigned int *)(param_1 + 8),temp_v12);
-    temp_v0 = operatorNew(0x4c);
+    temp_v0 = _Znwj(0x4c);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_00113fa0(temp_v0,temp_v7);

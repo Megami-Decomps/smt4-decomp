@@ -15,7 +15,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_002e9b30. */
 
 
@@ -33,7 +33,7 @@ unsigned long long FUN_002ec738(unsigned int param_1,unsigned int param_2,unsign
   uStack_18 = param_1;
   uStack_14 = param_2;
   uStack_10 = param_3;
-  temp_v0 = FUN_002e7908((unsigned int *)&uStack_18,(unsigned int *)&temp_v1);
+  temp_v0 = _ZN12OnlineResultC1ERKj((unsigned int *)&uStack_18,(unsigned int *)&temp_v1);
   FUN_002e9b30(param_1,2,temp_v0,1);
   return romwright_piece_4_4(uStack_14,uStack_18);
 }

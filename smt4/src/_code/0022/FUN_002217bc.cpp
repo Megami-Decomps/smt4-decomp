@@ -2,7 +2,7 @@
 #include "gfx/NamedTextureCache.h"
 
 extern "C" {
-extern NamedTextureEntry DAT_004332a0[26];
+extern NamedTextureEntry g_pendingTextures[26];
 extern NamedTextureEntry g_textureCache[];
 extern NamedTextureCacheState DAT_0047e200;
 s32 libc_strcmp(const char *left, const char *right);
@@ -13,7 +13,7 @@ u32 asdTextureCreate(u32 flags);
 
 static __inline u32 findNamedTexture(const char *name)
 {
-    NamedTextureEntry *entry = DAT_004332a0;
+    NamedTextureEntry *entry = g_pendingTextures;
     for (s32 index = 0; index < 26; ++index, ++entry) {
         if (libc_strcmp(entry->name, name) == 0) {
             return entry->texture;

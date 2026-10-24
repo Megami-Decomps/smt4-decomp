@@ -5,7 +5,7 @@
 #include <stddef.h>
 
 extern "C" {
-void asdDeallocateArrayStorage(void *allocation, s32 count, s32 allocator);
+void _ZN4__rw15__rw_deallocateEPvji(void *allocation, s32 count, s32 allocator);
 void resourceListDestroy(void *resources);
 void asdOperatorDelete(void *allocation);
 }
@@ -40,7 +40,7 @@ struct ResourceListOwnerVector {
     ~ResourceListOwnerVector()
     {
         clear();
-        asdDeallocateArrayStorage(begin, capacityEnd - begin, 0);
+        _ZN4__rw15__rw_deallocateEPvji(begin, capacityEnd - begin, 0);
     }
 };
 

@@ -13,7 +13,7 @@ typedef struct {
 extern unsigned char DAT_0055a9c8; /* 0x55a9c8 */
 extern unsigned char DAT_0055ad6c; /* 0x55ad6c */
 
-extern int *wordRefMax(int *, unsigned int *);
+extern int *_ZSt3maxIjERKT_S2_S2_(int *, unsigned int *);
 extern unsigned int *rt_malloc(void);
 extern unsigned int bufGrowCapacity2(unsigned int, int *);
 
@@ -40,7 +40,7 @@ void FUN_0011d590(unsigned int *param_1,unsigned int param_2,unsigned int param_
   temp_v3 = param_3;
   uStack_18 = param_4;
   temp_v3 = bufGrowCapacity2(0,piVar5);
-  piVar1 = (int *)wordRefMax(&temp_v2,(unsigned int *)&temp_v3);
+  piVar1 = (int *)_ZSt3maxIjERKT_S2_S2_(&temp_v2,(unsigned int *)&temp_v3);
   temp_v0 = *piVar1;
   puVar3 = (unsigned int *)rt_malloc();
   *piVar5 = (int)puVar3;

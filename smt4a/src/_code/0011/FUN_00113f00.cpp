@@ -5,7 +5,7 @@
 extern "C" {
 
 int maxValueTrackerUpdate(unsigned int);
-void FUN_002e32a4(int kind, ...);
+void _ZN4__rw10__rw_throwEiz(int kind, ...);
 int __aeabi_uidivmod(unsigned int, unsigned int);
 
 typedef struct fn_00113f00_arg0 fn_00113f00_arg0;
@@ -33,7 +33,7 @@ typedef struct {
 extern unsigned char LAB_00113f9c; /* 0x113f9c */
 
 /* Supplied declaration required: maxValueTrackerUpdate. */
-/* Supplied declaration required: FUN_002e32a4. */
+/* Supplied declaration required: _ZN4__rw10__rw_throwEiz. */
 extern unsigned int FUN_002ea704(void);
 extern int FUN_002f14a8(int, unsigned int);
 /* Supplied declaration required: __aeabi_uidivmod. */
@@ -60,7 +60,7 @@ unsigned int FUN_00113f00(fn_00113f00_arg0 *param_1,int *param_2)
       __aeabi_uidivmod(param_1->field_0x18 + temp_v5,*(unsigned int *)&param_1->field_0x20);
       temp_v1 = (param_1->field_0xc - param_1->field_0x8) >> 2;
       if (temp_v1 <= temp_v4) {
-        FUN_002e32a4(9,&LAB_00113f9c,&LAB_00113f9c,temp_v4,temp_v1);
+        _ZN4__rw10__rw_throwEiz(9,&LAB_00113f9c,&LAB_00113f9c,temp_v4,temp_v1);
       }
       piVar6 = *(int **)(param_1->field_0x8 + temp_v4 * 4);
       temp_v2 = *piVar6;

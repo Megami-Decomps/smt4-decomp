@@ -21,7 +21,7 @@ extern unsigned char DAT_0055bb5c; /* 0x55bb5c */
 extern unsigned int DAT_00636eac; /* 0x636eac */
 
 /* Supplied declaration required: FUN_0015a0e0. */
-extern unsigned int floatPairClear(void);
+extern unsigned int _ZN10FloatStateC1Ev(void);
 extern int FUN_0015aeb0(int *);
 /* Supplied declaration required: FUN_0015cccc. */
 
@@ -172,7 +172,7 @@ unsigned int * FUN_00148880(int *param_1)
     temp_v0 = 0;
   }
   else {
-    temp_v0 = floatPairClear();
+    temp_v0 = _ZN10FloatStateC1Ev();
   }
   FUN_0015a0e0(temp_v0);
   puVar1[0x1c] = temp_v0;

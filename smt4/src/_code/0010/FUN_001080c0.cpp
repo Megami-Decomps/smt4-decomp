@@ -1,48 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001080c0` (_code @ 0x1080c0, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same tests and calls; retail reaches the fields through two derived pointers (work+0xe00 and work+0xf00, plus direct loads of +0xe8c/+0xfdc), built addresses everything from the work pointer, so the loads and the final return path (nop before FUN_00117a70) differ */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00117a70(int);
-int FUN_001192c8(void);
+struct JobPromptWork {
+    /* 0x000 */ u8 unk000[0xe8c];
+    /* 0xe8c */ u8 active;
+    /* 0xe8d */ u8 ready;
+    /* 0xe8e */ u8 unke8e[7];
+    /* 0xe95 */ u8 hasTarget;
+    /* 0xe96 */ u8 unke96[0xfd8 - 0xe96];
+    /* 0xfd8 */ u8 blocked;
+    /* 0xfd9 */ u8 unkfd9[3];
+    /* 0xfdc */ s32 target;
+    /* 0xfe0 */ u8 confirm;
+};
 
-/* Supplied declaration required: FUN_00117a70. */
-/* Supplied declaration required: FUN_001192c8. */
-extern int jobGetWork(void);
+JobPromptWork *jobGetWork(void);
+void FUN_00117a70(s32 arg);
+void FUN_001192c8(void);
 
-
-unsigned int FUN_001080c0(void)
-
+/* Job step: when the prompt is active and ready with a target and not blocked, confirms or cancels it. */
+u32 FUN_001080c0(void)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v1 = jobGetWork();
-  temp_v3 = *(char *)(temp_v1 + 0xe8c) != '\0';
-  temp_v0 = '\0';
-  if (temp_v3) {
-    temp_v0 = *(char *)(temp_v1 + 0xe8d);
-  }
-  if (temp_v3 && temp_v0 != '\0') {
-    temp_v3 = *(char *)(temp_v1 + 0xe95) != '\0';
-    temp_v2 = 0;
-    if (temp_v3) {
-      temp_v2 = *(int *)(temp_v1 + 0xfdc);
+    JobPromptWork *work = jobGetWork();
+
+    if (work->active && work->ready && work->hasTarget && work->target != 0 && !work->blocked) {
+        if (work->confirm) {
+            FUN_001192c8();
+        } else {
+            FUN_00117a70(1);
+        }
     }
-    if ((temp_v3 && temp_v2 != 0) && (*(char *)(temp_v1 + 0xfd8) == '\0')) {
-      if (*(char *)(temp_v1 + 0xfe0) != '\0') {
-        FUN_001192c8();
-      }
-      else {
-        FUN_00117a70(1);
-      }
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

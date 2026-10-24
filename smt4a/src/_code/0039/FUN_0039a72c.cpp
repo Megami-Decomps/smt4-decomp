@@ -1,34 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039a72c` (_code @ 0x39a72c, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads the busy flag through a 0x19F1 offset register (ldrb [r0, r5]); armcc here folds the offset into two adds. Otherwise identical. */
+#include "common.h"
 
 extern "C" {
 
-int uiSpriteSelectAnim(int, int);
+/* The message window's sprite state: an animation request (0x19F0/0x19F1/0x19F2 flags) at the end of the work area. */
+struct MessageWindowWork {
+    /* 0x0000 */ u8 unk0000[0x144C];
+    /* 0x144C */ u8 sprite[0x5A4];
+    /* 0x19F0 */ u8 mode;
+    /* 0x19F1 */ u8 busy;
+    /* 0x19F2 */ u8 requested;
+};
 
-extern unsigned char g_messageMain; /* 0x57f588 */
+struct MessageMainRoot {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ MessageWindowWork *window;
+};
 
-/* Supplied declaration required: uiSpriteSelectAnim. */
-extern int scrGetCommandFrame(void);
+extern MessageMainRoot g_messageMain;
+void uiSpriteSelectAnim(void *sprite, s32 anim);
+s32 scrGetCommandFrame(void);
 
-
-unsigned char FUN_0039a72c(void)
-
+/* Starts the message window's close animation on a fresh command frame; true when it is not busy. */
+u8 FUN_0039a72c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-  temp_v2 = scrGetCommandFrame();
-  temp_v1 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-  if ((temp_v2 == 0) && (*(char *)(temp_v0 + 0x19f2) != '\0')) {
-    uiSpriteSelectAnim((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x144c,0xc);
-    *(unsigned char *)(temp_v1 + 0x19f1) = 1;
-    *(unsigned char *)(temp_v1 + 0x19f0) = 4;
-  }
-  return *(char *)(temp_v0 + 0x19f1) == '\0';
+    MessageWindowWork *window = g_messageMain.window;
+
+    if (scrGetCommandFrame() == 0 && window->requested != 0) {
+        MessageWindowWork *current = g_messageMain.window;
+        uiSpriteSelectAnim(current->sprite, 12);
+        current->busy = 1;
+        current->mode = 4;
+    }
+    return window->busy == 0;
 }
 
 } /* extern "C" */

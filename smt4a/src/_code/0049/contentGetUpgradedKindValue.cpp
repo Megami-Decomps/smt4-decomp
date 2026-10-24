@@ -10,7 +10,7 @@ struct ContentUpgradeBonuses {
 };
 
 extern "C" s32 aocEntryGetKind(u32 id);
-extern "C" ContentUpgradeValueRecord *FUN_00192608(u32 id);
+extern "C" ContentUpgradeValueRecord *dataTable08Sub2GetRecord(u32 id);
 extern "C" s32 FUN_00480a00(const ContentUpgradeValueRecord *record);
 extern "C" void equipmentGetCappedUpgradeBonuses(u32 id, ContentUpgradeBonuses *bonuses);
 
@@ -24,17 +24,17 @@ extern "C" s32 contentGetUpgradedKindValue(u32 id)
     case 4:
     case 5:
     case 6: {
-        ContentUpgradeValueRecord *record = FUN_00192608(id);
+        ContentUpgradeValueRecord *record = dataTable08Sub2GetRecord(id);
         ContentUpgradeBonuses bonuses = {0};
         equipmentGetCappedUpgradeBonuses(id, &bonuses);
         value = record->primary + bonuses.values[0];
         break;
     }
     case 7:
-        value = FUN_00192608(id)->alternate;
+        value = dataTable08Sub2GetRecord(id)->alternate;
         break;
     default:
-        ContentUpgradeValueRecord *record = FUN_00192608(id);
+        ContentUpgradeValueRecord *record = dataTable08Sub2GetRecord(id);
         if (record != NULL)
             value = FUN_00480a00(record);
         break;

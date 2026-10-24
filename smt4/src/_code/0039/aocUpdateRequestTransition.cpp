@@ -1,7 +1,7 @@
 #include "addon/aocMain.h"
 #include "addon/AocRequestTransition.h"
 extern "C" AocMain *g_aocMain;
-extern "C" void FUN_002ba968(AocMain *, const RequestParameters *, s32, s32);
+extern "C" void _ZN7AocMain12queueRequestE17RequestParametersji(AocMain *, const RequestParameters *, s32, s32);
 
 /* Submit an AOC request, then release its completion callback when it finishes. */
 extern "C" void aocUpdateRequestTransition(AocRequestTransition *work)
@@ -27,6 +27,6 @@ extern "C" void aocUpdateRequestTransition(AocRequestTransition *work)
         break;
     }
     RequestParameters parameters = work->parameters;
-    FUN_002ba968(g_aocMain, &parameters, 50, 0);
+    _ZN7AocMain12queueRequestE17RequestParametersji(g_aocMain, &parameters, 50, 0);
     work->transition.phase = 1;
 }

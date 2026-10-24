@@ -1,48 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030a45c` (_code @ 0x30a45c, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Script command: starts a slot transition on a bust-up cut. Arguments: job, slot. When flag 0x522 is set the request is
+ * also recorded for the UI. Always returns 1. */
+#include "common.h"
 
 extern "C" {
+/* The last slot transition request. */
+struct SlotTransitionRequest {
+    /* 0x0 */ s32 slot;
+    /* 0x4 */ s32 pending;
+    /* 0x8 */ s32 notified;
+};
 
-int scrGetArg(int);
-int FUN_002bf6fc(unsigned int, unsigned int, int, int, unsigned int);
+/* The part of a job's work area that holds its bust-up cut. */
+struct BustupJobWork {
+    /* 0x0 */ void *cut;
+};
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+extern SlotTransitionRequest DAT_0043e068;
+s32 scrGetArg(u32 index);
+BustupJobWork *jobGetWork(s32 jobId);
+void FUN_002bf6fc(void *cut, s32 slot, s32 first, s32 second, s32 third);
+s32 gameFlagIsSet(u32 flag);
 
-extern unsigned int DAT_0043e068; /* 0x43e068 */
-extern unsigned int DAT_0043e06c; /* 0x43e06c */
-extern unsigned int DAT_0043e070; /* 0x43e070 */
-
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_002bf6fc. */
-extern unsigned int *jobGetWork(void);
-extern int gameFlagIsSet(unsigned int);
-
-
-unsigned int FUN_0030a45c(void)
-
+s32 FUN_0030a45c(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  scrGetArg(0);
-  puVar1 = (unsigned int *)jobGetWork();
-  temp_v2 = *puVar1;
-  temp_v0 = scrGetArg(1);
-  FUN_002bf6fc(temp_v2,temp_v0,1,1,0xffffffff);
-  temp_v1 = gameFlagIsSet(0x522);
-  if (temp_v1 != 0) {
-    DAT_0043e06c = 1;
-    DAT_0043e070 = 1;
-    DAT_0043e068 = temp_v0;
-  }
-  return 1;
-}
+    void *cut = jobGetWork(scrGetArg(0))->cut;
+    s32 slot = scrGetArg(1);
 
-} /* extern "C" */
+    FUN_002bf6fc(cut, slot, 1, 1, -1);
+    if (gameFlagIsSet(0x522) != 0) {
+        DAT_0043e068.pending = 1;
+        DAT_0043e068.slot = slot;
+        DAT_0043e068.notified = 1;
+    }
+    return 1;
+}
+}

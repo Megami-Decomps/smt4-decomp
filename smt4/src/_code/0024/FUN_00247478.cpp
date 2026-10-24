@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int dataTable08Sub2GetRecord(void);
 int dataTable08Sub1GetRecord(void);
 int supportUnitGetEntry(int, int);
@@ -37,7 +37,7 @@ typedef struct {
     unsigned short sp38; /* 0x38: local_38 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: supportUnitGetEntry. */
@@ -229,7 +229,7 @@ void FUN_00247478(unsigned int param_1,unsigned int param_2,unsigned int *param_
 LAB_002478f4:
     temp_v19 = (unsigned short)temp_v3;
     temp_v2 = temp_v3;
-    FUN_002ae164();
+    dataTable40FindById();
     if (temp_v2 != 0) {
       temp_v5 = (unsigned short)((unsigned int)(*(int *)(temp_v2 + 0x28) << 0x17) >> 0x1c);
       temp_v6 = (unsigned short)((unsigned int)(*(int *)(temp_v2 + 0x28) << 0xf) >> 0x1b);

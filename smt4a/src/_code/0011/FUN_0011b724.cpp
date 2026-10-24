@@ -21,7 +21,7 @@ extern unsigned char DAT_0055a5d0; /* 0x55a5d0 */
 extern unsigned char DAT_0055a6d8; /* 0x55a6d8 */
 
 extern unsigned int FUN_00123a44(int);
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: FUN_002f3b58. */
 extern unsigned int *FUN_00300ae8(fn_0011b724_arg0 *, unsigned int);
 /* Supplied declaration required: FUN_00311780. */
@@ -43,7 +43,7 @@ int FUN_0011b724(fn_0011b724_arg0 *param_1)
   *puVar1 = (unsigned int)&DAT_0055a5d0;
   temp_v0 = FUN_00311780(puVar1 + 6,0);
   *(unsigned short *)(temp_v0 + 0x20) = 0x73;
-  temp_v1 = operatorNew(0x44);
+  temp_v1 = _Znwj(0x44);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = FUN_00311780(temp_v1,0);

@@ -1,129 +1,90 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e24c8` (_code @ 0x2e24c8, 0x278 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the stack-argument constant 48 for paramsInit is in r0 instead of r2; also needs gauntletSpriteSetMode (strh r1,[r0,#58]) in config/inlined.txt and the update callback at 0x3291dc as a unit (retail pool holds it raw). */
+/* Creates the Gauntlet app menu: work area, processes, sprites and its resource files. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+#include "camp/GauntletAppMenu/GauntletAppMenu.h"
 
 extern "C" {
 
-int FUN_00248738(...);
-int FUN_00297060(...);
-int fileSlotLoad(...);
-int timerStart(...);
-int FUN_002bd954(...);
-int FUN_002bee58(...);
-int paramsInit(...);
-int memClear(...);
-int asdMemAlloc(...);
-int taskCreateDraw(...);
-int asdProcessCreateSimple(...);
-int drawParameterBlockClear(...);
+void *asdMemAlloc(s32 heap, s32 alignment, s32 option, u32 size, s32 fromFront);
+void memClear(void *memory, u32 size);
+u32 asdProcessCreateSimple(const char *name, s32 group, s32 startDelay, s32 endDelay, u32 (*update)(),
+                           void (*onEnd)(), u32 work);
+u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 argument, void (*update)(), void (*draw)(),
+                   void *work, u32 parent);
+s32 gameFlagIsSet(u32 flag);
+void FUN_00248738(GauntletAppMenuWork *menu, s32 mode);
+s32 fileSlotLoad(s32 id);
+u32 dataTableGet(u32 table, u32 index);
+const void *dataTableGetEntries(void);
+u32 dataTableGetCount(u32 table);
+void drawParameterBlockClear(u8 *block);
+s32 paramsInit(u8 *block, const u8 *a, s32 aSize, const u8 *b, s32 bSize, const u8 *c, s32 cSize, const u8 *d,
+               s32 dSize, const u8 *e, s32 eSize);
+void FUN_002bd954(GauntletSprite *sprite, s32 group, s32 id, u8 *params, f32 scale, s32 layer);
+void timerStart(GauntletSprite *sprite, s32 animation, s32 flags);
+void spriteStartAnimationByIndex(GauntletSprite *sprite, s32 mode);
+void gauntletSpriteSetMode(GauntletSprite *sprite, u16 mode);
+u32 asdLoadFileSyncDefault(const char *path);
+u32 FUN_00297060(u32 data, u32 archive);
+u32 FUN_003291dc();
+void gauntletAppMenuDestroy(void);
+void gauntletAppMenuExit(void);
 
-/* stack frame of void: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
+extern GauntletAppMenuWork *g_gauntletAppMenu;
+extern const char DAT_00402a08[];
 
-extern unsigned char LAB_002e2754; /* 0x2e2754 */
-extern unsigned char LAB_002e276c; /* 0x2e276c */
-extern unsigned char LAB_002e2798; /* 0x2e2798 */
-extern unsigned char LAB_002e27b0; /* 0x2e27b0 */
-extern unsigned char LAB_003291dc; /* 0x3291dc */
-extern int gauntletAppMenuExit(...); /* 0x32ae3c */
-extern int gauntletAppMenuDestroy(...); /* 0x32fdf0 */
-extern unsigned char DAT_004028f0; /* 0x4028f0 */
-extern unsigned char DAT_00402914; /* 0x402914 */
-extern unsigned char DAT_00402944; /* 0x402944 */
-extern unsigned int *g_gauntletAppMenu; /* 0x43dc88 */
+/* The menu's draw parameter tables, consecutive in the rodata. */
+struct GauntletParamTables {
+    u8 first[0x24];
+    u8 second[0x30];
+    u8 third[0xC4];
+};
+extern const GauntletParamTables DAT_004028f0;
 
-/* Supplied declaration required: FUN_00248738. */
-/* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: fileSlotLoad. */
-/* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
-extern int gameFlagIsSet(unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-extern unsigned int asdLoadFileSyncDefault(unsigned char *);
-/* Supplied declaration required: drawParameterBlockClear. */
-
-
-unsigned int FUN_002e24c8(void)
-
+u32 FUN_002e24c8(void)
 {
-/* irregular: 14 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  unsigned char *puVar3;
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  if (g_gauntletAppMenu == (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)0x100;
-    asdMemAlloc(0x100,0x100,0,0x534,1);
-    g_gauntletAppMenu = puVar1;
-  }
-  puVar1 = g_gauntletAppMenu;
-  memClear();
-  puVar2 = &LAB_002e2754;
-  asdProcessCreateSimple(&LAB_002e2754,1,0,0,&LAB_003291dc,gauntletAppMenuDestroy,0);
-  *puVar1 = (unsigned int)puVar2;
-  puVar3 = &LAB_002e276c;
-  taskCreateDraw(&LAB_002e276c,0xe6,0,0,gauntletAppMenuExit,0,0,puVar2);
-  puVar1[1] = (unsigned int)puVar3;
-  temp_v0 = gameFlagIsSet(0x520);
-  if (temp_v0 != 0) {
-    *(unsigned char *)(puVar1 + 0xad) = 1;
-  }
-  temp_v0 = gameFlagIsSet(0x521);
-  if (temp_v0 != 0) {
-    *(unsigned char *)((int)puVar1 + 0x2b5) = 1;
-  }
-  temp_v0 = gameFlagIsSet(0x526);
-  if (temp_v0 != 0) {
-    *(unsigned char *)((int)puVar1 + 0x2b6) = 1;
-  }
-  temp_v0 = gameFlagIsSet(0x527);
-  if (temp_v0 != 0) {
-    *(unsigned char *)((int)puVar1 + 0x2b7) = 1;
-  }
-  FUN_00248738(puVar1,0);
-  fileSlotLoad(0xd);
-  temp_v1 = dataTableGet(0xd,0);
-  temp_v2 = dataTableGetEntries();
-  puVar1[0xab] = temp_v2;
-  temp_v1 = dataTableGetCount(temp_v1);
-  puVar1[0xac] = temp_v1;
-  drawParameterBlockClear(puVar1 + 0xae);
-  paramsInit(puVar1 + 0xae,&DAT_004028f0,0x24,&DAT_00402914,0x30,0,0,0,0,&DAT_00402944,0xc4);
-  FUN_002bd954(puVar1 + 0xb6,0x1d,0,puVar1 + 0xae,0xc9);
-  timerStart(puVar1 + 0xb6,0);
-  FUN_002bd954(puVar1 + 0xd9,0x1d,0,puVar1 + 0xae,0xc9);
-  FUN_002bee58(puVar1 + 0xd9,0);
-  FUN_002bd954(puVar1 + 0xfc,0x1d,0,puVar1 + 0xae,0xc9);
-  timerStart(puVar1 + 0xfc,2,0);
-  FUN_002bd954(puVar1 + 0x11f,0x1d,0x59f,puVar1 + 0xae,0xb5);
-  *(unsigned short *)((int)puVar1 + 0x4b6) = 2;
-  FUN_002bee58(puVar1 + 0x11f,1);
-  temp_v1 = asdLoadFileSyncDefault(&LAB_002e2798);
-  puVar1[0x14a] = temp_v1;
-  temp_v1 = asdLoadFileSyncDefault(&LAB_002e27b0);
-  puVar1[0x14b] = temp_v1;
-  FUN_00297060(temp_v1,puVar1[0x14a]);
-  puVar1[0x14c] = temp_v1;
-  return *puVar1;
+    if (g_gauntletAppMenu == NULL) {
+        asdDebugTrace(DAT_00402a08, 1592);
+        g_gauntletAppMenu = (GauntletAppMenuWork *)asdMemAlloc(0x100, 0x100, 0, 0x534, 1);
+    }
+    GauntletAppMenuWork *menu = g_gauntletAppMenu;
+    memClear(menu, 0x534);
+    menu->task = asdProcessCreateSimple("GauntletApp CALC", 1, 0, 0, FUN_003291dc, gauntletAppMenuDestroy, 0);
+    menu->list.drawTask = taskCreateDraw("GauntletApp DDRAW", 230, 0, 0, gauntletAppMenuExit, NULL, NULL, menu->task);
+    if (gameFlagIsSet(0x520)) {
+        menu->list.forceFirst = 1;
+    }
+    if (gameFlagIsSet(0x521)) {
+        menu->list.forceSecond = 1;
+    }
+    if (gameFlagIsSet(0x526)) {
+        menu->list.forceMiddle = 1;
+    }
+    if (gameFlagIsSet(0x527)) {
+        menu->list.forceThird = 1;
+    }
+    FUN_00248738(menu, 0);
+    fileSlotLoad(13);
+    u32 table = dataTableGet(13, 0);
+    menu->list.table = dataTableGetEntries();
+    menu->list.tableCount = dataTableGetCount(table);
+    drawParameterBlockClear(menu->list.params);
+    paramsInit(menu->list.params, DAT_004028f0.first, 0x24, DAT_004028f0.second, 0x30, NULL, 0, NULL, 0,
+               DAT_004028f0.third, 0xC4);
+    FUN_002bd954(&menu->list.sprites[0], 29, 0, menu->list.params, 1.0f, 201);
+    timerStart(&menu->list.sprites[0], 0, 0);
+    FUN_002bd954(&menu->list.sprites[1], 29, 0, menu->list.params, 1.0f, 201);
+    spriteStartAnimationByIndex(&menu->list.sprites[1], 0);
+    FUN_002bd954(&menu->list.sprites[2], 29, 0, menu->list.params, 1.0f, 201);
+    timerStart(&menu->list.sprites[2], 2, 0);
+    FUN_002bd954(&menu->list.sprites[3], 29, 0x59F, menu->list.params, 1.0f, 181);
+    gauntletSpriteSetMode(&menu->list.sprites[3], 2);
+    spriteStartAnimationByIndex(&menu->list.sprites[3], 1);
+    menu->heapA = (void *)asdLoadFileSyncDefault("camp/gauntletApp.mbm");
+    menu->heapB = (void *)asdLoadFileSyncDefault("camp/gauntletApp.bf");
+    menu->handle = FUN_00297060((u32)menu->heapB, (u32)menu->heapA);
+    return menu->task;
 }
 
-} /* extern "C" */
+}

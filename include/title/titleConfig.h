@@ -3,6 +3,7 @@
 #define TITLE_TITLECONFIG_H
 
 #include "common.h"
+#include "shard/W6_W6Match7_DrawParameters.h"
 
 /* The menu's block, kept by a module global (Shin Megami Tensei IV layout). */
 typedef struct TitleConfig {
@@ -22,14 +23,23 @@ typedef struct TitleConfig {
 typedef struct TitleConfigA {
     /* 0x000 */ u32 job;
     /* 0x004 */ u8 closing;
-    /* 0x005 */ u8 unk05[0x15];
+    /* 0x005 */ u8 unk05[3];
+    /* 0x008 */ u32 state;
+    /* 0x00C */ u8 unk0C[0xE];
     /* 0x01A */ s16 countA;
     union {
         /* 0x01C */ u8 unk1C[8];
         /* 0x01C */ s16 touchRegions[4];
     };
     /* 0x024 */ s16 countB;
-    /* 0x026 */ u8 unk26[0x12E];
+    /* 0x026 */ u8 unk26[2];
+    /* 0x028 */ u32 settingIndex[3]; /* list positions of the music, sound and voice settings */
+    /* 0x034 */ u8 saved[8];         /* the settings the menu opened with */
+    /* 0x03C */ Params002c312c params;
+    /* 0x05C */ u8 window[0x8C];     /* sprite of the menu window */
+    /* 0x0E8 */ f32 cursorScale;
+    /* 0x0EC */ s32 cursorFrames;
+    /* 0x0F0 */ u8 cursor[0x64];
     /* 0x154 */ void *dataA;
     /* 0x158 */ void *dataB;
     /* 0x15C */ void *process;

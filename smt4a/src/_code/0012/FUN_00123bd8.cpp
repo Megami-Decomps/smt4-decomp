@@ -6,7 +6,7 @@ extern "C" {
 
 int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
-int FUN_002e7908(unsigned int, unsigned int *);
+int _ZN12OnlineResultC1ERKj(unsigned int, unsigned int *);
 
 typedef struct fn_00123bd8_arg1 fn_00123bd8_arg1;
 struct fn_00123bd8_arg1 {
@@ -28,7 +28,7 @@ typedef struct {
 extern int onlineContextGetInstance(void);
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 extern int FUN_002ea704(void);
 extern int *FUN_003055cc(fn_00123bd8_arg1 *);
 
@@ -67,7 +67,7 @@ void FUN_00123bd8(unsigned int param_1,fn_00123bd8_arg1 *param_2)
       temp_v1 = 0x10001;
     }
   }
-  FUN_002e7908(param_1,puVar3);
+  _ZN12OnlineResultC1ERKj(param_1,puVar3);
   _ZN9Obj55b28cD1Ev(temp_v2);
   return;
 }

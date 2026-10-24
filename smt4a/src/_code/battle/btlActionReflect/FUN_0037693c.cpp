@@ -1,4 +1,3 @@
-/* NON_MATCHING: Retail ldr r1, [pc, #124] differs from recovered ldr r2, [pc, #124]. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 

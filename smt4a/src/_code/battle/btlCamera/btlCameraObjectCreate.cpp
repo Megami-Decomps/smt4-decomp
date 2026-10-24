@@ -9,7 +9,7 @@ typedef struct CameraOwner {
 } CameraOwner;
 
 void *FUN_00178b04(u32 size, const char *file, s32 line);
-void *FUN_003f9e80(void *memory, void *source);
+void *_ZN9Obj557af8C1EPK21AsdAnimCameraResource(void *memory, void *source);
 
 /* Creates the owner's object from its source on first use. */
 void btlCameraObjectCreate(CameraOwner *owner)
@@ -19,7 +19,7 @@ void btlCameraObjectCreate(CameraOwner *owner)
     if (owner->source != NULL && owner->object == NULL) {
         object = FUN_00178b04(0x48, "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlCamera.cpp", 1089);
         if (object != NULL) {
-            object = FUN_003f9e80(object, owner->source);
+            object = _ZN9Obj557af8C1EPK21AsdAnimCameraResource(object, owner->source);
         }
         owner->object = object;
     }

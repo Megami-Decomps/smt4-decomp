@@ -1,62 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fe514` (_code @ 0x1fe514, 0xd8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: identical except the 0.0f offset constant, which this build keeps in s1 while retail reuses s0 after the 1.0f color stores. */
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int asdListAdd(unsigned char *, int, int);
-int memClear(void);
-int asdMemoryAlloc(int, int, int, int, int);
+/* A model instance as allocated by AsdModel.cpp (0xA8 bytes). */
+typedef struct AsdModel {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 drawMask;
+    /* 0x0C */ s32 unk0C;
+    /* 0x10 */ s32 unk10;
+    /* 0x14 */ u8 unk14[0x10];
+    /* 0x24 */ u32 unk24[6];
+    /* 0x3C */ u8 unk3C[0x18];
+    /* 0x54 */ u32 unk54[3];
+    /* 0x60 */ u8 unk60[4];
+    /* 0x64 */ u32 unk64[3];
+    /* 0x70 */ u8 unk70[4];
+    /* 0x74 */ f32 color[4];
+    /* 0x84 */ f32 offset[3];
+    /* 0x90 */ u8 unk90;
+    /* 0x91 */ u8 unk91[0x17];
+} AsdModel;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+typedef struct GfxSettings {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ s32 modelCount;
+} GfxSettings;
 
-extern unsigned char g_gfxSettings; /* 0x464af0 */
-extern unsigned char DAT_004dae48; /* 0x4dae48 */
+extern GfxSettings g_gfxSettings;
+extern u8 DAT_004dae48[]; /* model list */
 
-/* Supplied declaration required: asdListAdd. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdMemoryAlloc. */
+void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
+void memClear(void *memory, u32 size);
+void asdListAdd(void *list, void *item, s32 flags);
 
-
-int FUN_001fe514(void)
-
+/* Allocate a cleared model, set its defaults, and add it to the model list. */
+AsdModel *FUN_001fe514(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0x100;
-  asdMemoryAlloc(0x100,0x100,0,0xa8,1);
-  memClear();
-  *(unsigned int *)(temp_v0 + 0xc) = 0xffffffff;
-  *(unsigned int *)(temp_v0 + 0x10) = 0xffffffff;
-  *(unsigned int *)(temp_v0 + 4) = 0;
-  *(unsigned int *)(temp_v0 + 8) = 7;
-  *(unsigned int *)(temp_v0 + 0x24) = 0;
-  *(unsigned int *)(temp_v0 + 0x28) = 0;
-  *(unsigned int *)(temp_v0 + 0x2c) = 0;
-  *(unsigned int *)(temp_v0 + 0x30) = 0;
-  *(unsigned int *)(temp_v0 + 0x34) = 0;
-  *(unsigned int *)(temp_v0 + 0x38) = 0;
-  *(unsigned int *)(temp_v0 + 0x54) = 0;
-  *(unsigned int *)(temp_v0 + 0x58) = 0;
-  *(unsigned int *)(temp_v0 + 0x5c) = 0;
-  *(unsigned int *)(temp_v0 + 100) = 0;
-  *(unsigned int *)(temp_v0 + 0x68) = 0;
-  *(unsigned int *)(temp_v0 + 0x6c) = 0;
-  *(unsigned int *)(temp_v0 + 0x74) = 0x3f800000;
-  *(unsigned int *)(temp_v0 + 0x78) = 0x3f800000;
-  *(unsigned int *)(temp_v0 + 0x7c) = 0x3f800000;
-  *(unsigned int *)(temp_v0 + 0x80) = 0x3f800000;
-  *(unsigned char *)(temp_v0 + 0x90) = 0;
-  *(unsigned int *)(temp_v0 + 0x8c) = 0;
-  *(unsigned int *)(temp_v0 + 0x88) = 0;
-  *(unsigned int *)(temp_v0 + 0x84) = 0;
-  asdListAdd(&DAT_004dae48,temp_v0,0);
-  (*(int *)((unsigned char *)&g_gfxSettings + 0x3c)) = (*(int *)((unsigned char *)&g_gfxSettings + 0x3c)) + 1;
-  return temp_v0;
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Model\\AsdModel.cpp", 4412);
+    AsdModel *model = (AsdModel *)asdMemoryAlloc(0x100, 0x100, 0, sizeof(AsdModel), 1);
+    memClear(model, sizeof(AsdModel));
+    model->unk04 = 0;
+    model->drawMask = 7;
+    model->unk0C = -1;
+    model->unk10 = -1;
+    model->unk24[0] = 0;
+    model->unk24[1] = 0;
+    model->unk24[2] = 0;
+    model->unk24[3] = 0;
+    model->unk24[4] = 0;
+    model->unk24[5] = 0;
+    model->unk54[0] = 0;
+    model->unk54[1] = 0;
+    model->unk54[2] = 0;
+    model->unk64[0] = 0;
+    model->unk64[1] = 0;
+    model->unk64[2] = 0;
+    model->color[0] = 1.0f;
+    model->color[1] = 1.0f;
+    model->color[2] = 1.0f;
+    model->color[3] = 1.0f;
+    model->unk90 = 0;
+    model->offset[2] = 0.0f;
+    model->offset[1] = 0.0f;
+    model->offset[0] = 0.0f;
+    asdListAdd(DAT_004dae48, model, 0);
+    g_gfxSettings.modelCount++;
+    return model;
 }
 
 } /* extern "C" */

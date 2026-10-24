@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00152cf8(...);
+int uiPointerHitsRect(...);
 int FUN_00167c14(...);
 int sysPlaySe(...);
 int FUN_001834a4(...);
@@ -32,7 +32,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00152cf8. */
+/* Supplied declaration required: uiPointerHitsRect. */
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_00167c14. */
@@ -103,7 +103,7 @@ unsigned int FUN_003aef48(int param_1)
     temp_v1 = FUN_001834a4(0x2e,0x42);
     temp_v17 = 0;
     temp_v11 = (int)*(short *)(temp_v1 + 8);
-    FUN_00152cf8(temp_v11,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
+    uiPointerHitsRect(temp_v11,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
                  (int)(*(short **)(temp_v1 + 0xc))[1]);
     if (temp_v11 != 0) {
       temp_v2 = *(unsigned int *)(param_1 + 0x11c) | 1;
@@ -115,7 +115,7 @@ unsigned int FUN_003aef48(int param_1)
     temp_v1 = FUN_001834a4(0x2e,0x43);
     temp_v17 = 0;
     temp_v11 = (int)*(short *)(temp_v1 + 8);
-    FUN_00152cf8(temp_v11,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
+    uiPointerHitsRect(temp_v11,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
                  (int)(*(short **)(temp_v1 + 0xc))[1]);
     if (temp_v11 != 0) {
       temp_v2 = *(unsigned int *)(param_1 + 0x11c) | 2;
@@ -127,7 +127,7 @@ unsigned int FUN_003aef48(int param_1)
     temp_v1 = FUN_001834a4(0x2e,0x41);
     temp_v17 = 0;
     temp_v11 = (int)*(short *)(temp_v1 + 8);
-    FUN_00152cf8(temp_v11,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
+    uiPointerHitsRect(temp_v11,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
                  (int)(*(short **)(temp_v1 + 0xc))[1]);
     temp_v1 = 0;
     if (temp_v11 != 0) {
@@ -142,7 +142,7 @@ unsigned int FUN_003aef48(int param_1)
         temp_v11 = FUN_001834a4(0x2e,temp_v1 + 0xd1);
         temp_v17 = 0;
         temp_v3 = (int)*(short *)(temp_v11 + 8);
-        FUN_00152cf8(temp_v3,(int)*(short *)(temp_v11 + 10),(int)**(short **)(temp_v11 + 0xc),
+        uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v11 + 10),(int)**(short **)(temp_v11 + 0xc),
                      (int)(*(short **)(temp_v11 + 0xc))[1]);
         if (temp_v3 != 0) {
           *(unsigned char *)(param_1 + 0x138) = 1;
@@ -178,7 +178,7 @@ unsigned int FUN_003aef48(int param_1)
     temp_v1 = FUN_001834a4(0x2e,*(int *)(param_1 + 0x128) + 0xe6);
     temp_v17 = 3;
     temp_v11 = (int)*(short *)(temp_v1 + 8);
-    FUN_00152cf8(temp_v11,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
+    uiPointerHitsRect(temp_v11,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
                  (int)(*(short **)(temp_v1 + 0xc))[1]);
     if (temp_v11 != 0) {
       FUN_00167c14(&temp_v21,&temp_v18,3);

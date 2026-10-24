@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001077d6(...);
-int wordRefMax(...);
+int _ZSt3maxIjERKT_S2_S2_(...);
 int FUN_002eac34(int);
 int FUN_002eb108(int, int, int, int);
 int onlineTimeGetNow(unsigned char [12]);
@@ -13,7 +13,7 @@ int FUN_002eb5c0(int);
 int FUN_002f13c2(int, unsigned int, unsigned int);
 int FUN_002f1798(int, int);
 int FUN_002f17e4(int, int);
-int FUN_002f1840(int *, int *, int);
+int _ZNKSt6vectorIb12AsdAllocatorIbEE8iteratorplEi(int *, int *, int);
 int FUN_002f1950(unsigned char *);
 int FUN_002f27c0(unsigned char *);
 
@@ -71,9 +71,9 @@ extern int FUN_00105696(int);
 extern int FUN_00105f86(int);
 /* Supplied declaration required: FUN_001077d6. */
 extern int FUN_0012094c(unsigned int *, unsigned int);
-/* Supplied declaration required: wordRefMax. */
+/* Supplied declaration required: _ZSt3maxIjERKT_S2_S2_. */
 extern unsigned int *rt_malloc(int);
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: FUN_002eac34. */
 extern unsigned int FUN_002eac54(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002eb108. */
@@ -94,7 +94,7 @@ extern int vectorGrowCapacity_002f1786(unsigned int, int *);
 /* Supplied declaration required: FUN_002f1798. */
 /* Supplied declaration required: FUN_002f17e4. */
 extern int FUN_002f182e(int *, unsigned int);
-/* Supplied declaration required: FUN_002f1840. */
+/* Supplied declaration required: _ZNKSt6vectorIb12AsdAllocatorIbEE8iteratorplEi. */
 extern int FUN_002f1858(int, unsigned char *, unsigned int, unsigned char *);
 extern int FUN_002f18f8(int);
 /* Supplied declaration required: FUN_002f1950. */
@@ -146,7 +146,7 @@ int FUN_00109240(fn_00109240_arg0 *param_1,unsigned int param_2,unsigned int par
   puVar4[0x26] = 0;
   temp_v16[0] = 1;
   temp_v12 = vectorGrowCapacity_002f1774(0,piVar12);
-  piVar5 = (int *)wordRefMax(temp_v16,&temp_v12);
+  piVar5 = (int *)_ZSt3maxIjERKT_S2_S2_(temp_v16,&temp_v12);
   temp_v3 = *piVar5;
   puVar7 = (unsigned int *)rt_malloc(temp_v3 * 4);
   *piVar12 = (int)puVar7;
@@ -164,7 +164,7 @@ int FUN_00109240(fn_00109240_arg0 *param_1,unsigned int param_2,unsigned int par
   puVar4[0x29] = 0;
   temp_v15 = 1;
   temp_v16[0] = vectorGrowCapacity_002f1786(0,piVar12);
-  piVar5 = (int *)wordRefMax(&temp_v15,temp_v16);
+  piVar5 = (int *)_ZSt3maxIjERKT_S2_S2_(&temp_v15,temp_v16);
   temp_v3 = *piVar5;
   puVar7 = (unsigned int *)rt_malloc(temp_v3 * 4);
   *piVar12 = (int)puVar7;
@@ -202,7 +202,7 @@ int FUN_00109240(fn_00109240_arg0 *param_1,unsigned int param_2,unsigned int par
   *(unsigned int *)(temp_v4 + 0x2c) = 0;
   *(int *)(temp_v4 + 0x38) = temp_v3 + 4;
   *piVar5 = temp_v3;
-  FUN_002f1840(&temp_v10,piVar5,1);
+  _ZNKSt6vectorIb12AsdAllocatorIbEE8iteratorplEi(&temp_v10,piVar5,1);
   *(unsigned int *)(temp_v4 + 0x34) = temp_v11;
   *(unsigned int *)(temp_v4 + 0x30) = temp_v10;
   puVar4 = (unsigned int *)*piVar5;
@@ -225,7 +225,7 @@ int FUN_00109240(fn_00109240_arg0 *param_1,unsigned int param_2,unsigned int par
   *(unsigned char *)(temp_v4 - 0x284) = 0;
   *(unsigned char *)(temp_v4 - 0x283) = 0;
   *(unsigned char *)(temp_v4 - 0xd4) = 0;
-  temp_v3 = operatorNew(0x28);
+  temp_v3 = _Znwj(0x28);
   if (temp_v3 != 0) {
     temp_v5 = FUN_002f1378();
   }
@@ -234,7 +234,7 @@ int FUN_00109240(fn_00109240_arg0 *param_1,unsigned int param_2,unsigned int par
   }
   puVar4 = (unsigned int *)arrayElementAddress_002efa50(temp_v4 - 0x2b0,0);
   *puVar4 = temp_v5;
-  temp_v3 = operatorNew(0x74);
+  temp_v3 = _Znwj(0x74);
   if (temp_v3 != 0) {
     temp_v6 = FUN_002ef01c(*(unsigned int *)(temp_v4 - 0x33c));
     temp_v5 = *(unsigned int *)(temp_v6 + 0x7c);
@@ -276,7 +276,7 @@ int FUN_00109240(fn_00109240_arg0 *param_1,unsigned int param_2,unsigned int par
   temp_v3 = FUN_002eac34(*(unsigned char *)(*(int *)(temp_v4 - 0x33c) + 4));
   temp_v13 = temp_v4 - 0x240;
   *(unsigned short *)(temp_v4 - 0x23c) = (unsigned short)*(unsigned char *)(temp_v3 + 0xa0);
-  temp_v3 = operatorNew(0x150);
+  temp_v3 = _Znwj(0x150);
   if (temp_v3 != 0) {
     temp_v10 = 0;
     FUN_002eb108(temp_v3,temp_v8,0,0x40);

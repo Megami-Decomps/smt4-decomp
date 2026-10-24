@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int FUN_00157558(int);
 int FUN_00162790(...);
-int FUN_0016432c(...);
+int dataTable25FindById(...);
 int efctSetSpeed(void);
 int FUN_00169a1c(...);
 int FUN_0018152c(...);
@@ -37,7 +37,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
 extern int infoWinHasValue(void);
-/* Supplied declaration required: FUN_0016432c. */
+/* Supplied declaration required: dataTable25FindById. */
 extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
@@ -141,7 +141,7 @@ unsigned int FUN_00155840(void)
                    *(short *)(temp_v3 + 10) + temp_v4,0x24);
       temp_v1 = gameGetOptions();
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v1 + 300);
-      FUN_0016432c(temp_v6);
+      dataTable25FindById(temp_v6);
       textFormatBuffer(temp_v10,temp_v6);
     }
     else {

@@ -12,6 +12,7 @@ extern void *dataTableGet(s32 group, s32 id);
 extern u32 dataTableGetCount(void *table);
 extern void *dataTableGetEntries(void);
 extern void loadSlotEnsureLoaded(s32 id);
+extern s32 arrayCompareSignedHalfword(const void *a, const void *b);
 
 void dataTableRefAcquire(void)
 {
@@ -24,7 +25,7 @@ void dataTableRefAcquire(void)
         loadSlotEnsureLoaded(0x38);
         table = dataTableGet(0x38, 0);
         entries = dataTableGetEntries();
-        qsort(entries, dataTableGetCount(table), 0x68, (void *)0x002B2B24);
+        qsort(entries, dataTableGetCount(table), 0x68, (void *)arrayCompareSignedHalfword);
     }
     g_useCounter[1]++;
 }

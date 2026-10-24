@@ -1,64 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d2710` (_code @ 0x1d2710, 0xe0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: identical except -1 materialisation: retail builds two separate mvn constants (r0 for the selected index, r2 for the memset fill) and this build shares one register. */
+#include "battle/btlTalk.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int btlUiPlaySceneFadeOutWhenReady(...);
-int jobIsValid(...);
-int __aeabi_memset4(...);
-int asdMemAlloc(...);
-int taskCreateDraw(...);
+extern BtlTalk *g_btlTalk;
+extern u32 g_btlUiBlock;
 
-/* stack frame of param_4: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_4_stack;
+s32 jobIsValid(u32 job);
+void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+u32 taskCreateDraw(const char *name, s32 group, s32 startDelay, s32 endDelay, s32 (*update)(u32), void (*end)(u32), void *work, u32 parent);
+void *__aeabi_memset4(void *destination, u32 size, s32 value);
+void btlUiPlaySceneFadeOutWhenReady(u32 ui);
+s32 btlTalkJobUpdate(u32 job);
+void btlTalkDestroy(u32 job);
 
-extern unsigned char LAB_001b72b8; /* 0x1b72b8 */
-extern unsigned char LAB_001d2830; /* 0x1d2830 */
-extern int btlTalkDestroy(...); /* 0x20f4c0 */
-extern int *g_btlTalk; /* 0x439b58 */
-extern unsigned int g_btlUiBlock; /* 0x439ca8 */
-
-/* Supplied declaration required: btlUiPlaySceneFadeOutWhenReady. */
-/* Supplied declaration required: jobIsValid. */
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-
-
-void FUN_001d2710(unsigned int *param_1,int param_2,int param_3,int param_4)
-
+/* Creates the talk screen: its calculation task and the state block for the unit being talked to. */
+void FUN_001d2710(BtlTalkOwner *owner, BtlTalkUnit *unit, u32 argA, u32 argB)
 {
-/* irregular: 6 native warning(s); review required */
-  int *piVar1;
-  unsigned char *puVar2;
-  int *piVar3;
-  
-  jobIsValid(param_1[8]);
-  piVar1 = (int *)0x100;
-  asdMemAlloc(0x100,0x100,0,0xcc,1);
-  puVar2 = &LAB_001d2830;
-  g_btlTalk = piVar1;
-  taskCreateDraw(&LAB_001d2830,2,0,0,&LAB_001b72b8,btlTalkDestroy,param_1,*param_1);
-  param_1[8] = (unsigned int)puVar2;
-  piVar1 = g_btlTalk;
-  piVar3 = g_btlTalk + 7;
-  *g_btlTalk = (int)param_1;
-  piVar1[1] = param_2;
-  *piVar3 = param_3;
-  piVar1[8] = param_4;
-  *(unsigned char *)(piVar1 + 0x31) = 0;
-  *(unsigned char *)((int)piVar1 + 0xc5) = 0;
-  piVar1[0x32] = -1;
-  piVar1[0xc] = (int)*(short *)(*(int *)(param_2 + 0x28) + 0x14e);
-  __aeabi_memset4(piVar1 + 0xd,0x80,0xffffffff);
-  btlUiPlaySceneFadeOutWhenReady(g_btlUiBlock);
-  piVar1[6] = 0;
-  return;
+    jobIsValid(owner->job);
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlTalk.cpp", 0x29f);
+    g_btlTalk = static_cast<BtlTalk *>(asdMemAlloc(0x100, 0x100, 0, sizeof(BtlTalk), 1));
+    u32 job = taskCreateDraw("btlTalk Calc", 2, 0, 0, btlTalkJobUpdate, btlTalkDestroy, owner, owner->parentJob);
+    owner->job = job;
+    BtlTalk *talk = g_btlTalk;
+    talk->owner = owner;
+    talk->unit = unit;
+    talk->argA = argA;
+    talk->argB = argB;
+    talk->unkC4 = 0;
+    talk->unkC5 = 0;
+    talk->selected = -1;
+    talk->talkValue = unit->data->talkValue;
+    __aeabi_memset4(talk->choices, sizeof(talk->choices), -1);
+    btlUiPlaySceneFadeOutWhenReady(g_btlUiBlock);
+    talk->unk18 = 0;
 }
 
 } /* extern "C" */

@@ -1,31 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f2280` (_code @ 0x3f2280, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail derives the 0x4D38/0x4D40/0x4D48 offsets from the 0x4D30 constant register (orr with the value 4 shifted) and pushes r9; ours adds immediates. */
+#include "common.h"
+#include <stddef.h>
 
 extern "C" {
 
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_5_stack;
+/* Draw parameters of one slot: each field has a second copy for the other slot, one word on. */
+struct BtlUnitDrawSlot {
+    /* 0x0000 */ u8 unk0000[0x4D18];
+    /* 0x4D18 */ u32 baseColor;
+    /* 0x4D1C */ u32 unk4D1C;
+    /* 0x4D20 */ u32 prevColor;
+    /* 0x4D24 */ u32 unk4D24;
+    /* 0x4D28 */ u32 color;
+    /* 0x4D2C */ u32 unk4D2C;
+    /* 0x4D30 */ u32 mode;
+    /* 0x4D34 */ u32 unk4D34;
+    /* 0x4D38 */ u32 timer;
+    /* 0x4D3C */ u32 unk4D3C;
+    /* 0x4D40 */ u32 param;
+    /* 0x4D44 */ u32 unk4D44;
+    /* 0x4D48 */ u32 palette;
+};
+typedef char BtlUnitDrawSlotOffsets[offsetof(BtlUnitDrawSlot, palette) == 0x4D48 ? 1 : -1];
 
+extern u32 g_btlPaletteColors[];
 
-void FUN_003f2280(int param_1,int param_2,int param_3,unsigned int param_4,unsigned int param_5)
-
+/* Starts a colour fade on one slot: remembers the current colour and tints it from the palette. */
+void FUN_003f2280(u8 *slots, u32 slot, u32 palette, u32 param, u32 alpha)
 {
-  unsigned int temp_v0;
-  
-  param_1 = param_1 + param_2 * 4;
-  *(unsigned int *)(param_1 + 0x4d30) = 4;
-  *(unsigned int *)(param_1 + 0x4d38) = 0;
-  *(unsigned int *)(param_1 + 0x4d40) = param_4;
-  *(int *)(param_1 + 0x4d48) = param_3;
-  *(unsigned int *)(param_1 + 0x4d20) = *(unsigned int *)(param_1 + 0x4d18);
-  temp_v0 = *(unsigned int *)(param_3 * 4 + 0x57a650);
-  *(unsigned int *)(param_1 + 0x4d28) =
-       (temp_v0 << 0x18) | (((temp_v0 >> 8) & 0xff) << 0x10) | (((temp_v0 >> 0x10) & 0xff) << 8) | param_5
-  ;
-  return;
+    BtlUnitDrawSlot *s = (BtlUnitDrawSlot *)(slots + slot * 4);
+    u32 tint;
+
+    s->mode = 4;
+    s->timer = 0;
+    s->param = param;
+    s->palette = palette;
+    s->prevColor = s->baseColor;
+    tint = g_btlPaletteColors[palette];
+    s->color = ((tint << 24) | (((tint >> 8) & 0xFF) << 16) | (((tint >> 16) & 0xFF) << 8)) | alpha;
 }
 
 } /* extern "C" */

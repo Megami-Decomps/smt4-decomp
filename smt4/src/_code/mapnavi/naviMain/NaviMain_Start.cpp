@@ -1,103 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `NaviMain_Start` (_code @ 0x291a08, 0x168 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail passes navi in r4 to NaviMain_InitInstance (armcc uses r0), puts sp+4 in r8 instead of r5, and splits the zero arguments of the final requestBeginProcessing tail call between r6 and #0. */
+#include "shard/NaviMain.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern NaviMain *g_naviMain;
+extern const char DAT_00404c78[];
+extern const char DAT_00404ca8[];
+extern const char DAT_00404cb8[];
+extern const char DAT_00404cc4[];
 
-int FUN_00240cec(...);
-int FUN_00289880(...);
-int FUN_002898e4(...);
-int buttonHelpCreate(...);
-int asdMemAlloc(...);
-int taskCreateDraw(...);
-int asdProcessCreateSimple(...);
-int NaviMain_InitInstance(...);
-int NaviMain_ResetFlags(...);
+void *asdMemAlloc(u32 bytes, u32 alignment, u32 flags, u32 size, u32 clear);
+void NaviMain_InitInstance(void *instance);
+void FUN_002898e4(void);
+s32 gameFlagIsSet(u32 flag);
+void FUN_00289880(void);
+void buttonHelpCreate(void);
+void FUN_00240cec(u32 mode);
+void naviRequestClose(void *job);
+u32 NAVI_PROC(void);
+u32 NAVI_DOWN(void);
+u32 FUN_001fc4f8(void);
+u32 asdProcessCreateSimple(const char *name, s32 priority, s32 flags, s32 owner,
+    u32 (*step)(void), void (*destroy)(void *), void *work);
+u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 owner,
+    u32 (*draw)(void), void (*destroy)(void *), void *work, u32 process);
+void NaviMain_ResetFlags(void *settings, s32 value);
+void requestBeginProcessing(void *request, s32 value, s32 type);
 
-/* stack frame of param_2: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern unsigned char LAB_001a96a4; /* 0x1a96a4 */
-extern int NAVI_PROC(...); /* 0x1a96c0 */
-extern unsigned char LAB_001fc4f8; /* 0x1fc4f8 */
-extern int NAVI_DOWN(...); /* 0x1fc524 */
-extern unsigned int *g_naviMain; /* 0x44cdf0 */
-
-/* Supplied declaration required: FUN_00240cec. */
-/* Supplied declaration required: FUN_00289880. */
-/* Supplied declaration required: FUN_002898e4. */
-/* Supplied declaration required: buttonHelpCreate. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: NaviMain_InitInstance. */
-/* Supplied declaration required: NaviMain_ResetFlags. */
-
-
-void NaviMain_Start(unsigned int param_1,unsigned int param_2)
-
+/* Creates the navi screen: the state block, its process and its two draw tasks, then starts the first request. */
+void NaviMain_Start(s32 unused, u32 mode)
 {
-/* irregular: 11 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  char *pcVar3;
-  char *pcVar4;
-  unsigned char *pbVar5;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemAlloc(0x100,0x100,0,0x12344,1);
-  g_naviMain = puVar1;
-  *(unsigned char *)((int)puVar1 + 10) = 0;
-  *(unsigned char *)((int)puVar1 + 9) = 0;
-  puVar1[3] = 0;
-  puVar1[4] = 0;
-  puVar1[5] = 0;
-  puVar1[6] = 0;
-  puVar1[0xb] = 0;
-  puVar1[10] = 1;
-  puVar1[0xd] = 0x3f800000;
-  puVar1[0xe] = 0;
-  puVar1[0xf] = 0;
-  *(unsigned char *)(puVar1 + 2) = 0;
-  NaviMain_InitInstance(puVar1 + 0x10);
-  FUN_002898e4();
-  temp_v0 = gameFlagIsSet(0x16);
-  if (temp_v0 == 0) {
-    FUN_00289880();
-  }
-  buttonHelpCreate();
-  FUN_00240cec(param_2);
-  pcVar3 = "NAVI PROC";
-  asdProcessCreateSimple("NAVI PROC",2,0,0,NAVI_PROC,&LAB_001a96a4,puVar1);
-  *puVar1 = (unsigned int)pcVar3;
-  pcVar4 = "NAVI DOWN";
-  taskCreateDraw("NAVI DOWN",0xe5,1,0,NAVI_DOWN,0,puVar1,pcVar3);
-  puVar1[1] = (unsigned int)pcVar4;
-  pcVar3 = "NAVI FADE DRAW";
-  taskCreateDraw("NAVI FADE DRAW",0xe6,0,0,&LAB_001fc4f8,0,0,*puVar1);
-  puVar1[0x48cc] = (unsigned int)pcVar3;
-  NaviMain_ResetFlags(puVar1 + 0x48cd,1);
-  puVar1 = g_naviMain;
-  if (g_naviMain != (unsigned int *)0x0) {
-    pbVar5 = (unsigned char *)(g_naviMain + 0x48cd);
-    if (g_naviMain[0x48ce] != 2) {
-      *(unsigned char *)(g_naviMain + 0x48cf) = 0;
-      *(unsigned char *)((int)puVar1 + 0x1233e) = 0;
-      *(unsigned char *)((int)puVar1 + 0x1233f) = 0;
-      puVar1[0x48ce] = 2;
-      *(unsigned char *)((int)puVar1 + 0x1233d) = 0;
-      *pbVar5 = *pbVar5 | 1;
+    asdDebugTrace(DAT_00404c78, 213);
+    NaviMain *navi = (NaviMain *)asdMemAlloc(0x100, 0x100, 0, 0x12344, 1);
+    g_naviMain = navi;
+    navi->active = 0;
+    navi->unk0009[0] = 0;
+    navi->posX = 0;
+    navi->posY = 0;
+    navi->third = 0;
+    navi->argumentValue = 0.0f;
+    navi->unk2C = 0;
+    navi->currentMap = 1;
+    navi->value = 1.0f;
+    navi->unk38f = 0.0f;
+    navi->unk3Cf = 0.0f;
+    navi->closeRequested = 0;
+    NaviMain_InitInstance(navi->state);
+    FUN_002898e4();
+    if (gameFlagIsSet(0x16) == 0) {
+        FUN_00289880();
     }
-    return;
-  }
-  return;
+    buttonHelpCreate();
+    FUN_00240cec(mode);
+    navi->job = asdProcessCreateSimple(DAT_00404cc4, 2, 0, 0, NAVI_PROC, naviRequestClose, navi);
+    navi->drawTask = taskCreateDraw(DAT_00404cb8, 0xe5, 1, 0, NAVI_DOWN, NULL, navi, navi->job);
+    navi->tasks.fadeTask = taskCreateDraw(DAT_00404ca8, 0xe6, 0, 0, FUN_001fc4f8, NULL, NULL, navi->job);
+    NaviMain_ResetFlags(navi->settings, 1);
+    if (g_naviMain != NULL) {
+        requestBeginProcessing(g_naviMain->settings, 0, 0);
+    }
 }
 
 } /* extern "C" */

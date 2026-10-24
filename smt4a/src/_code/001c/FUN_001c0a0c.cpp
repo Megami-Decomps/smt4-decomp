@@ -9,8 +9,8 @@ int nw_gfx_SceneNode_IsCircularReference(void);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_0055bc08; /* 0x55bc08 */
-extern unsigned int DAT_005c4c2c; /* 0x5c4c2c */
-extern unsigned int DAT_0064c054; /* 0x64c054 */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x5c4c2c */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x64c054 */
 extern unsigned int DAT_0064c058; /* 0x64c058 */
 extern unsigned int DAT_0064c05c; /* 0x64c05c */
 extern unsigned int DAT_0064c060; /* 0x64c060 */
@@ -77,8 +77,8 @@ int * FUN_001c0a0c(int param_1,unsigned int *param_2,int param_3,int *param_4)
     piVar11[0x60] = 0;
     piVar11[0x61] = 0;
     piVar11[0x62] = *(int *)(param_3 + 0x10);
-    if (((DAT_005c4c2c & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v1 != 0)) {
-      DAT_0064c054 = temp_v6;
+    if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v1 != 0)) {
+      _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v6;
       DAT_0064c058 = temp_v5;
       DAT_0064c05c = temp_v5;
       DAT_0064c060 = temp_v5;
@@ -91,9 +91,9 @@ int * FUN_001c0a0c(int param_1,unsigned int *param_2,int param_3,int *param_4)
       DAT_0064c07c = temp_v6;
       DAT_0064c080 = temp_v5;
     }
-    nn_math_ARMv6_MTX34CopyAsm(piVar11 + 99,&DAT_0064c054);
-    if (((DAT_005c4c2c & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v1 != 0)) {
-      DAT_0064c054 = temp_v6;
+    nn_math_ARMv6_MTX34CopyAsm(piVar11 + 99,&_ZZN2nw4math5MTX348IdentityEvE8identity);
+    if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v1 != 0)) {
+      _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v6;
       DAT_0064c058 = temp_v5;
       DAT_0064c05c = temp_v5;
       DAT_0064c060 = temp_v5;
@@ -106,7 +106,7 @@ int * FUN_001c0a0c(int param_1,unsigned int *param_2,int param_3,int *param_4)
       DAT_0064c07c = temp_v6;
       DAT_0064c080 = temp_v5;
     }
-    nn_math_ARMv6_MTX34CopyAsm(piVar11 + 0x6f,&DAT_0064c054);
+    nn_math_ARMv6_MTX34CopyAsm(piVar11 + 0x6f,&_ZZN2nw4math5MTX348IdentityEvE8identity);
     piVar11[0x7b] = 0;
     *(unsigned char *)(piVar11 + 0x7c) = 1;
     *(unsigned char *)(piVar11 + 0x7d) = 0;

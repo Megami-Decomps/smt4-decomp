@@ -1,29 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ab784` (_code @ 0x4ab784, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail unrolls the 12-slot scan by two (checks slot i and i+1 per iteration) and adds the 0x11a2c member offset to a pre-scaled index; built keeps a plain one-slot loop */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_btlUi; /* 0x57a9b8 */
+struct UnitSlot {
+    /* 0x000 */ u8 unk000[0x14c];
+};
 
+struct BattleUnitTable {
+    /* 0x00000 */ u8 unk00000[0x11a2c];
+    /* 0x11a2c */ struct {
+        u16 state;
+        u8 unk02[0x14c - 2];
+    } units[12];
+};
 
-unsigned int FUN_004ab784(void)
+struct BattleUi {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ BattleUnitTable *table;
+};
 
+extern BattleUi g_btlUi;
+
+/* Returns 1 when no unit slot is in a busy state (1..4). */
+u32 FUN_004ab784(void)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  if ((*(int *)((unsigned char *)&g_btlUi + 0x10)) != 0) {
-    temp_v0 = 0;
-    do {
-      temp_v1 = (*(int *)((unsigned char *)&g_btlUi + 0x10)) + temp_v0 * 0x14c;
-      if ((*(unsigned short *)(temp_v1 + 0x11a2c) - 1 < 4) || (*(unsigned short *)(temp_v1 + 0x11b78) - 1 < 4)) {
-        return 0;
-      }
-      temp_v0 = temp_v0 + 2;
-    } while (temp_v0 < 0xc);
-  }
-  return 1;
+    s32 i;
+
+    if (g_btlUi.table != NULL) {
+        for (i = 0; i < 12; i++) {
+            u32 state = g_btlUi.table->units[i].state;
+            if (state - 1 < 4) {
+                return 0;
+            }
+        }
+    }
+    return 1;
 }
 
 } /* extern "C" */

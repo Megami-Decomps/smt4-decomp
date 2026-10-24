@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int _ZN9Obj55aff4C1EPKc(...);
+int _ZN9Obj55aff4C1EPKt(...);
 int FUN_002eca44(int);
 int __aeabi_vec_ctor_nocookie_nodtor(int, int, int, int);
 
@@ -26,7 +26,7 @@ extern unsigned char DAT_00559dd4; /* 0x559dd4 */
 extern unsigned char DAT_00559e24; /* 0x559e24 */
 
 extern int FUN_00103884(int);
-/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKt. */
 extern unsigned int *FUN_002eca10(fn_00116f6c_arg0 *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002eca44. */
 extern int vectorInitEmpty2(int);
@@ -46,7 +46,7 @@ int FUN_00116f6c(fn_00116f6c_arg0 *param_1,unsigned int param_2,unsigned int par
   puVar1[0x1b] = 0;
   *puVar1 = (unsigned int)&DAT_00559dd4;
   puVar1[0x1a] = (unsigned int)&DAT_00559e24;
-  temp_v0 = _ZN9Obj55aff4C1EPKc(puVar1 + 0x1c,&LAB_00116fe0);
+  temp_v0 = _ZN9Obj55aff4C1EPKt(puVar1 + 0x1c,&LAB_00116fe0);
   *(unsigned char *)(temp_v0 + 8) = 0;
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   temp_v0 = temp_v0 + 0x10;
@@ -56,7 +56,7 @@ int FUN_00116f6c(fn_00116f6c_arg0 *param_1,unsigned int param_2,unsigned int par
   *(unsigned int *)(temp_v0 + 8) = 0;
   temp_v0 = vectorInitEmpty2(temp_v0 + 0xc);
   *(unsigned char *)(temp_v0 + 0xc) = 0;
-  temp_v0 = _ZN9Obj55aff4C1EPKc(temp_v0 + 0x10,&LAB_00116fe0);
+  temp_v0 = _ZN9Obj55aff4C1EPKt(temp_v0 + 0x10,&LAB_00116fe0);
   *(unsigned int *)(temp_v0 + 8) = 0;
   temp_v0 = temp_v0 + 0xc;
   __aeabi_vec_ctor_nocookie_nodtor(temp_v0,0x2ed913,0xc,4);

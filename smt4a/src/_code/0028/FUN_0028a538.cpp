@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184310(void);
 int FUN_00203b40(int, int, int, int, int, int);
-int FUN_0032fea0(...);
+int arrayContainsU16(...);
 int unitRecordBuild(...);
 int FUN_0034c340(...);
 int findSkillMetadataById(void);
@@ -28,7 +28,7 @@ extern int g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_0032fea0. */
+/* Supplied declaration required: arrayContainsU16. */
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0034c340. */
 /* Supplied declaration required: findSkillMetadataById. */
@@ -97,10 +97,10 @@ void FUN_0028a538(unsigned short *param_1,int param_2,int param_3)
       findSkillMetadataById();
       if ((*(unsigned char *)(temp_v1 + 3) & 0x20) != 0) {
         temp_v2 = temp_v8;
-        FUN_0032fea0(temp_v8,0x18,*(unsigned short *)(temp_v4 + 0x34));
+        arrayContainsU16(temp_v8,0x18,*(unsigned short *)(temp_v4 + 0x34));
         if (temp_v2 == 0) {
           puVar4 = param_1 + 0x20;
-          FUN_0032fea0(puVar4,8,*(unsigned short *)(temp_v4 + 0x34));
+          arrayContainsU16(puVar4,8,*(unsigned short *)(temp_v4 + 0x34));
           if (puVar4 == (unsigned short *)0x0) {
             temp_v2 = temp_v7 * 2;
             temp_v7 = temp_v7 + 1;
@@ -110,10 +110,10 @@ void FUN_0028a538(unsigned short *param_1,int param_2,int param_3)
         if ((*(unsigned char *)(temp_v1 + 3) & 0x20) != 0) goto LAB_0028a6c4;
       }
       temp_v2 = temp_v9;
-      FUN_0032fea0(temp_v9,0x18,*(unsigned short *)(temp_v4 + 0x34));
+      arrayContainsU16(temp_v9,0x18,*(unsigned short *)(temp_v4 + 0x34));
       if (temp_v2 == 0) {
         puVar4 = param_1 + 0x20;
-        FUN_0032fea0(puVar4,8,*(unsigned short *)(temp_v4 + 0x34));
+        arrayContainsU16(puVar4,8,*(unsigned short *)(temp_v4 + 0x34));
         if (puVar4 == (unsigned short *)0x0) {
           temp_v2 = temp_v5 * 2;
           temp_v5 = temp_v5 + 1;
@@ -132,10 +132,10 @@ LAB_0028a6c4:
       findSkillMetadataById();
       if ((*(unsigned char *)(temp_v1 + 3) & 0x20) != 0) {
         temp_v2 = temp_v8;
-        FUN_0032fea0(temp_v8,0x18,*(unsigned short *)(temp_v4 + 0x34));
+        arrayContainsU16(temp_v8,0x18,*(unsigned short *)(temp_v4 + 0x34));
         if (temp_v2 == 0) {
           puVar4 = param_1 + 0x20;
-          FUN_0032fea0(puVar4,8,*(unsigned short *)(temp_v4 + 0x34));
+          arrayContainsU16(puVar4,8,*(unsigned short *)(temp_v4 + 0x34));
           if (puVar4 == (unsigned short *)0x0) {
             temp_v2 = temp_v7 * 2;
             temp_v7 = temp_v7 + 1;
@@ -145,10 +145,10 @@ LAB_0028a6c4:
         if ((*(unsigned char *)(temp_v1 + 3) & 0x20) != 0) goto LAB_0028a7a8;
       }
       temp_v2 = temp_v9;
-      FUN_0032fea0(temp_v9,0x18,*(unsigned short *)(temp_v4 + 0x34));
+      arrayContainsU16(temp_v9,0x18,*(unsigned short *)(temp_v4 + 0x34));
       if (temp_v2 == 0) {
         puVar4 = param_1 + 0x20;
-        FUN_0032fea0(puVar4,8,*(unsigned short *)(temp_v4 + 0x34));
+        arrayContainsU16(puVar4,8,*(unsigned short *)(temp_v4 + 0x34));
         if (puVar4 == (unsigned short *)0x0) {
           temp_v2 = temp_v5 * 2;
           temp_v5 = temp_v5 + 1;

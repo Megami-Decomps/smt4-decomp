@@ -1,43 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00432104` (_code @ 0x432104, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps every return value in a callee-saved register across the lock release (ldr r5, =0xC8A06BF8 before Leave, a hoisted zero in r7) and addresses the count through r5; the build returns the constants after the release. */
+#include "nn/Result.h"
+#include "nn/svc.h"
 
 extern "C" {
 
-int software_interrupt(int);
+void nn_os_CriticalSection_Enter(void *section);
+void nn_os_CriticalSection_Leave(void *section);
 
-extern int DAT_005c0ac4; /* 0x5c0ac4 */
-extern int DAT_005c14c0; /* 0x5c14c0 */
-extern unsigned int DAT_006430f4; /* 0x6430f4 */
+extern u8 DAT_006430f4[];  /* guards the session reference count */
+extern s32 DAT_005c0ac4;   /* session reference count */
+extern u32 g_ipcServiceSessionHandle;
 
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
+}
 
+/* Holds a critical section for the enclosing scope. */
+class CriticalSectionLock {
+public:
+    explicit CriticalSectionLock(void *section) : section(section) { nn_os_CriticalSection_Enter(section); }
+    ~CriticalSectionLock() { nn_os_CriticalSection_Leave(section); }
 
-int FUN_00432104(void)
+private:
+    void *section;
+};
 
+extern "C" {
+
+/* Drops one reference to the service session, closing the session handle on the last one;
+ * returns 0, the close error, or an error code when no reference is held. */
+s32 FUN_00432104(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_006430f4);
-  temp_v0 = DAT_005c14c0;
-  if (DAT_005c0ac4 == 0) {
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_006430f4);
-    return -0x375f9408;
-  }
-  if (DAT_005c0ac4 == 1) {
-    software_interrupt(0x23);
-    if (DAT_005c14c0 < 0) {
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_006430f4);
-      return temp_v0;
+    CriticalSectionLock lock(DAT_006430f4);
+    if (DAT_005c0ac4 == 0) {
+        return (s32)0xC8A06BF8;
     }
-    DAT_005c14c0 = 0;
-  }
-  DAT_005c0ac4 = DAT_005c0ac4 - 1;
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_006430f4);
-  return 0;
+    if (DAT_005c0ac4 == 1) {
+        s32 result = nn::svc::CloseHandle(g_ipcServiceSessionHandle);
+        if (nnResultIsFailure(result)) {
+            return result;
+        }
+        g_ipcServiceSessionHandle = 0;
+    }
+    DAT_005c0ac4--;
+    return 0;
 }
 
 } /* extern "C" */

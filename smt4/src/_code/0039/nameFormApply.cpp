@@ -24,7 +24,7 @@ extern NameBuffer *gameDataGetPlayerName(void);
 extern NameBuffer *gameGetPlayerName(void);
 extern int FUN_002bf818(void *a);
 extern void nameEntryCopyEditedName(NameTask *task, NameBuffer *name);
-extern int FUN_00296ee0(NameTask *task, int arg);
+extern int messageOwnerSetState(NameTask *task, int arg);
 
 /* Clears the name buffer selected by the form's name kind and applies it to the task. */
 void nameFormApply(NameTask *task)
@@ -61,7 +61,7 @@ void nameFormApply(NameTask *task)
         name->tail = 0;
         nameEntryCopyEditedName(task, name);
     }
-    FUN_00296ee0(task, 8);
+    messageOwnerSetState(task, 8);
 }
 
 } /* extern "C" */

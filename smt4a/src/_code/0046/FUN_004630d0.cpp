@@ -16,7 +16,7 @@ int nw_ut_internal_LinkListImpl_insert(int, int, int);
 
 /* Supplied declaration required: FUN_001a08d0. */
 /* Supplied declaration required: nn_os_LightEvent_TryWait. */
-extern unsigned int FUN_001b1f04(void);
+extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 /* Supplied declaration required: FUN_001b6660. */
 extern unsigned int FUN_001c35d8(void);
 /* Supplied declaration required: FUN_001d0b28. */
@@ -38,7 +38,7 @@ void FUN_004630d0(int param_1)
   
   *(unsigned char *)(param_1 + 0xf) = 1;
   if (*(char *)(param_1 + 0xa2) != '\0') {
-    temp_v0 = FUN_001b1f04();
+    temp_v0 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
     FUN_001d0b28(temp_v0,param_1 + 0x50);
     *(unsigned char *)(param_1 + 0xa2) = 0;
   }

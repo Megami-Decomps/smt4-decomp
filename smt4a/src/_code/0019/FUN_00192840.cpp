@@ -15,8 +15,8 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_8_stack;
 
-extern int FUN_001a0778(int, int);
-extern int FUN_001a07c4(int, int *, int, unsigned int);
+extern int gpuCmdPadToAlign16(int, int);
+extern int gpuCmdWriteCopy(int, int *, int, unsigned int);
 /* Supplied declaration required: FUN_001a4794. */
 /* Supplied declaration required: FUN_001a47d8. */
 
@@ -192,9 +192,9 @@ void FUN_00192840(int param_1,int *param_2,int param_3,int param_4,unsigned int 
     FUN_001a47d8(&temp_v11,param_3);
     temp_v1 = *param_2;
     if (temp_v1 != 0 && temp_v11 != 0) {
-      temp_v1 = FUN_001a0778(temp_v1,((temp_v1 - param_2[2]) & 0xfffffffcU) + 0x18);
+      temp_v1 = gpuCmdPadToAlign16(temp_v1,((temp_v1 - param_2[2]) & 0xfffffffcU) + 0x18);
       *param_2 = temp_v1;
-      temp_v1 = FUN_001a07c4(temp_v1,temp_v9,temp_v11,uStack_34);
+      temp_v1 = gpuCmdWriteCopy(temp_v1,temp_v9,temp_v11,uStack_34);
       *param_2 = temp_v1;
       if ((unsigned int *)param_2[3] != (unsigned int *)0x0) {
         *(unsigned int *)param_2[3] = (unsigned int)(temp_v1 - param_2[2]) >> 3;

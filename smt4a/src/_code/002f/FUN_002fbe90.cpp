@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7908(unsigned int, unsigned int *);
+int _ZN12OnlineResultC1ERKj(unsigned int, unsigned int *);
 
 /* stack frame of param_2: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 extern int wordRefsEqual_002ea4ac(int *, unsigned int *);
 
 
@@ -80,7 +80,7 @@ void FUN_002fbe90(unsigned int param_1,int param_2)
     puVar2 = (unsigned int *)&temp_v5;
     temp_v5 = 0x10001;
   }
-  FUN_002e7908(param_1,puVar2);
+  _ZN12OnlineResultC1ERKj(param_1,puVar2);
   return;
 }
 

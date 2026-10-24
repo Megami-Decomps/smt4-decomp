@@ -16,7 +16,7 @@ extern unsigned char DAT_0055ab2c; /* 0x55ab2c */
 /* Supplied declaration required: FUN_001060e6. */
 extern unsigned int destroyObj005593a0(void);
 /* Supplied declaration required: sysMemClear. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern unsigned int *_ZN9Obj5593b8C1Ev(void);
 /* Supplied declaration required: FUN_002ecef0. */
 extern int FUN_002ed074(unsigned int *, unsigned int);
@@ -49,13 +49,13 @@ int FUN_00106150(void)
   *(unsigned int *)(temp_v0 + 0x34) = 0;
   FUN_002ed0c0(temp_v0 - 0x18,temp_v4);
   FUN_002ecef0();
-  temp_v1 = operatorNew(0x3c);
+  temp_v1 = _Znwj(0x3c);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = destroyObj005593a0();
   }
   *(unsigned int *)(temp_v0 - 0x1c) = temp_v2;
-  temp_v1 = operatorNew(0x9c);
+  temp_v1 = _Znwj(0x9c);
   puVar1 = (unsigned int *)0x0;
   if (temp_v1 != 0) {
     sysMemClear(temp_v1,0x9c);

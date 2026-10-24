@@ -4,7 +4,7 @@
 extern "C" {
 void FUN_002621b4(s32 member, s32 slot, s32 skill, s32 *target);
 void FUN_0028cb40(PlayScene *scene, u16 kind[2], s16 skill[2]);
-const void *FUN_002ae164(s32 skill);
+const void *dataTable40FindById(s32 skill);
 s32 objectPartRunUnlessLocked(PlayScenePart *part);
 const void *gameGetSlotTable();
 
@@ -39,7 +39,7 @@ u32 FUN_0028cdec(PlayScene *scene)
         FUN_002621b4(scene->unk305C - 1, party->slots[selection], skill[0], &scene->targeting.targets[selection]);
         party = static_cast<const PartyView *>(gameGetSlotTable());
         if (party->slots[selection] < 0) {
-            const SkillView *record = static_cast<const SkillView *>(FUN_002ae164(skill[0]));
+            const SkillView *record = static_cast<const SkillView *>(dataTable40FindById(skill[0]));
             if ((record != NULL && record->properties.targeting == 2 && record->category == 3) ||
                 record->id == 0x8b || record->id == 0x136) {
                 return 0;
@@ -48,7 +48,7 @@ u32 FUN_0028cdec(PlayScene *scene)
     } else {
         FUN_002621b4(scene->unk305C - 1, -1, skill[0], &scene->targeting.targets[0]);
     }
-    const SkillView *record = static_cast<const SkillView *>(FUN_002ae164(skill[0]));
+    const SkillView *record = static_cast<const SkillView *>(dataTable40FindById(skill[0]));
     if ((record->flags & 0x600) != 0 && scene->unk305C < 4 && scene->targeting.fallback < 0) {
         scene->targeting.targets[scene->unk305C] = scene->targeting.fallback;
     }

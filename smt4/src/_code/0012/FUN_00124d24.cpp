@@ -1,111 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00124d24` (_code @ 0x124d24, 0x2ac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: final FUN_002bedb0 becomes a tail call (retail keeps bl + shared epilogue); register choice for the last widget pointer/x also differs. */
+#include "common.h"
+#include "camp/RenderCtx.h"
+#include "ui/MessageMain.h"
+
+struct TitlePartInfo {
+    u8 unk00[8];
+    s16 x;
+    s16 y;
+};
 
 extern "C" {
+extern MessageGlobals g_messageMain;
+extern RenderCtx *g_titleScene;
+s32 gameFlagIsSet(u32 flag);
+s32 vec2GetXInt(void *vec);
+s32 vec2GetYInt(void *vec);
+f32 vec2GetSpeed(void *vec);
+u32 FUN_002c5d80(u32 slot, u32 flags);
+void FUN_002bee04(RenderCtx *context, s32 stack, u32 value);
+void efctSetSpeed(f32 speed);
+void FUN_002bed3c();
+f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
+TitlePartInfo *FUN_002bf4f8(s32 sheet, s32 part);
+void FUN_002bf380(s32 layer, s32 sheet, s32 part, s32 x, s32 y, s32 priority);
+void FUN_002bdce0(s32 value, s32 x, s32 y, s32 flag);
+s32 FUN_002bedb0(RenderCtx *context, s32 stack);
 
-int renderCtxCalculateStereoParallax(unsigned int);
-int FUN_002bdce0(...);
-int FUN_002bed3c(void);
-int vec2GetXInt(...);
-int FUN_002bedb0(...);
-int FUN_002bee04(unsigned int, int, unsigned int);
-int FUN_002bf380(...);
-int efctSetSpeed(void);
-int VectorSignedToFloat(unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern int DAT_0043e190; /* 0x43e190 */
-extern unsigned int g_titleScene; /* 0x44ea00 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_002bdce0. */
-/* Supplied declaration required: FUN_002bed3c. */
-extern int vec2GetYInt(int);
-/* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: FUN_002bedb0. */
-/* Supplied declaration required: FUN_002bee04. */
-/* Supplied declaration required: FUN_002bf380. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: efctSetSpeed. */
-extern int gameFlagIsSet(unsigned int);
-extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
-
-
-void FUN_00124d24(int param_1)
-
+/* Draws the banner's title-style frame, optional second plate and optional third plate. */
+void FUN_00124d24(s32 wide)
 {
-/* irregular: irregular input(s): in_fpscr; 9 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  float temp_v5;
-  
-  temp_v0 = gameFlagIsSet(0x402);
-  if (temp_v0 != 0) {
-    temp_v0 = vec2GetXInt(DAT_0043e190 + 0x754);
-    temp_v1 = vec2GetYInt(DAT_0043e190 + 0x754);
-    if ('\0' < *(char *)(DAT_0043e190 + 0x82)) {
-      temp_v2 = vec2GetXInt(DAT_0043e190 + 0x7e0);
-      temp_v0 = temp_v0 + temp_v2;
-      temp_v2 = vec2GetYInt(DAT_0043e190 + 0x7e0);
-      temp_v1 = temp_v1 + temp_v2;
+    if (gameFlagIsSet(0x402)) {
+        s32 x = vec2GetXInt(g_messageMain.banner->widget754);
+        s32 y = vec2GetYInt(g_messageMain.banner->widget754);
+        f32 speed = vec2GetSpeed(g_messageMain.banner->widget754);
+        if (g_messageMain.banner->unk82 > 0) {
+            x += vec2GetXInt(g_messageMain.banner->widget7E0);
+            y += vec2GetYInt(g_messageMain.banner->widget7E0);
+        }
+        FUN_002bee04(g_titleScene, 3, FUN_002c5d80(1, 0));
+        efctSetSpeed(speed);
+        FUN_002bed3c();
+
+        TitlePartInfo *part;
+        if (wide) {
+            part = FUN_002bf4f8(14, 148);
+            x += static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f));
+        } else {
+            part = FUN_002bf4f8(14, 192);
+        }
+        FUN_002bf380(2, 14, 0, part->x + x, part->y + y, 11);
+        FUN_002bdce0(g_messageMain.banner->unk6C, part->x + x, part->y + y, 0);
+
+        if (g_messageMain.banner->unk80) {
+            if (wide)
+                part = FUN_002bf4f8(14, 256);
+            else
+                part = FUN_002bf4f8(14, 287);
+            FUN_002bf380(2, 14, 12, part->x + x, part->y + y, 11);
+            FUN_002bdce0(g_messageMain.banner->unk74, part->x + x, part->y + y, 1);
+        }
+
+        MessagePanel *banner = g_messageMain.banner;
+        if (banner->unkA1) {
+            s32 bx = vec2GetXInt(banner->widget754);
+            s32 by = vec2GetYInt(banner->widget754);
+            s32 px = static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f) + bx);
+            part = FUN_002bf4f8(14, 256);
+            FUN_002bf380(2, 14, 22, part->x + px, part->y + by, 11);
+            FUN_002bdce0(-banner->unk9C, part->x + px, part->y + by, 1);
+        }
+        efctSetSpeed(1.0f);
+        FUN_002bed3c();
+        FUN_002bedb0(g_titleScene, 3);
     }
-    temp_v3 = FUN_002c5d80(1,0);
-    FUN_002bee04(g_titleScene,3,temp_v3);
-    efctSetSpeed();
-    FUN_002bed3c();
-    temp_v5 = 0.27f;
-    if (param_1 != 0) {
-      temp_v4 = temp_v5;
-      temp_v2 = FUN_002bf4f8(0xe,0x94);
-      temp_v5 = temp_v4;
-      renderCtxCalculateStereoParallax(g_titleScene);
-      temp_v0 = temp_v0 + (int)temp_v4;
-    }
-    else {
-      temp_v2 = FUN_002bf4f8(0xe,0xc0);
-    }
-    FUN_002bf380(2,0xe,0,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0xb);
-    FUN_002bdce0(*(unsigned int *)(DAT_0043e190 + 0x6c),*(short *)(temp_v2 + 8) + temp_v0,
-                 *(short *)(temp_v2 + 10) + temp_v1,0);
-    if (*(char *)(DAT_0043e190 + 0x80) != '\0') {
-      if (param_1 != 0) {
-        temp_v2 = FUN_002bf4f8(0xe,0x100);
-      }
-      else {
-        temp_v2 = FUN_002bf4f8(0xe,0x11f);
-      }
-      FUN_002bf380(2,0xe,0xc,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0xb);
-      FUN_002bdce0(*(unsigned int *)(DAT_0043e190 + 0x74),*(short *)(temp_v2 + 8) + temp_v0,
-                   *(short *)(temp_v2 + 10) + temp_v1,1);
-    }
-    temp_v0 = DAT_0043e190;
-    if (*(char *)(DAT_0043e190 + 0xa1) != '\0') {
-      temp_v1 = DAT_0043e190 + 0x754;
-      temp_v3 = vec2GetXInt();
-      temp_v1 = vec2GetYInt(temp_v1);
-      renderCtxCalculateStereoParallax(g_titleScene);
-      temp_v4 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v2 = FUN_002bf4f8(0xe,0x100);
-      FUN_002bf380(2,0xe,0x16,(int)*(short *)(temp_v2 + 8) + (int)(temp_v5 + temp_v4),
-                   *(short *)(temp_v2 + 10) + temp_v1,0xb);
-      FUN_002bdce0(-*(int *)(temp_v0 + 0x9c),(int)*(short *)(temp_v2 + 8) + (int)(temp_v5 + temp_v4),
-                   *(short *)(temp_v2 + 10) + temp_v1,1);
-    }
-    efctSetSpeed();
-    FUN_002bed3c();
-    FUN_002bedb0(g_titleScene,3);
-  }
-  return;
 }
 
 } /* extern "C" */

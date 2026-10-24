@@ -9,7 +9,7 @@ int aocHandleButtons(unsigned int, int);
 int btlEnsureEnemyDrawResources(unsigned int, int);
 int FUN_004cae0c(int, int, int);
 int FUN_004cb90c(int);
-int FUN_004f9450(void);
+int nameEntriesRegisterVerNames(void);
 int FUN_004fd204(int, unsigned int, int, int, int, int);
 int FUN_004fe764(int, unsigned int, int, unsigned int, int);
 int SBORROW4(unsigned int, int);
@@ -46,7 +46,7 @@ extern unsigned int FUN_00409fe8(int, unsigned int);
 /* Supplied declaration required: FUN_004cae0c. */
 /* Supplied declaration required: FUN_004cb90c. */
 extern unsigned int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_004f9450. */
+/* Supplied declaration required: nameEntriesRegisterVerNames. */
 /* Supplied declaration required: FUN_004fd204. */
 /* Supplied declaration required: FUN_004fe764. */
 
@@ -195,7 +195,7 @@ unsigned int FUN_003ea2b0(int param_1,unsigned int param_2)
 LAB_003ea3c8:
       *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000;
       if ((*(unsigned int *)(g_btlAux + 0x339c) & 0x400) != 0) {
-        FUN_004f9450();
+        nameEntriesRegisterVerNames();
       }
       *pbVar12 = 1;
     }

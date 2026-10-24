@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int operatorNew(int);
+int _Znwj(int);
 int onlineInstanceTableGetCurrent(void);
 int onlineInstanceTableFind(...);
 int FUN_002f7c94(unsigned int, unsigned int, unsigned int);
@@ -45,8 +45,8 @@ extern unsigned char DAT_0055aee0; /* 0x55aee0 */
 extern romwright_code *DAT_0058956c; /* 0x58956c */
 extern unsigned int DAT_00589570; /* 0x589570 */
 
-/* Supplied declaration required: operatorNew. */
-extern unsigned int FUN_002e7908(int *, unsigned int *);
+/* Supplied declaration required: _Znwj. */
+extern unsigned int _ZN12OnlineResultC1ERKj(int *, unsigned int *);
 /* Supplied declaration required: onlineInstanceTableGetCurrent. */
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(int, unsigned int, unsigned int, unsigned char *);
@@ -138,7 +138,7 @@ void FUN_0012c53c(int param_1)
             if (*(int **)(param_1 + 0x40c) != (int *)0x0) {
               (**(romwright_code **)(**(int **)(param_1 + 0x40c) + 4))();
             }
-            puVar5 = (unsigned int *)operatorNew(0x30);
+            puVar5 = (unsigned int *)_Znwj(0x30);
             temp_v6 = param_1 + 0x80;
             temp_v0 = 0;
             if (puVar5 != (unsigned int *)0x0) {
@@ -167,7 +167,7 @@ void FUN_0012c53c(int param_1)
               temp_v2 = onlineInstanceTableGetCurrent();
               FUN_002f7c94(temp_v2,*(unsigned int *)(param_1 + 0x68),temp_v5);
               onlineJobSetStateWaiting(param_1);
-              temp_v0 = operatorNew(0x10);
+              temp_v0 = _Znwj(0x10);
               temp_v2 = 0;
               if (temp_v0 != 0) {
                 temp_v2 = FUN_002ea3c0(temp_v0,0x12c83d,0,&LAB_0012c744);
@@ -176,7 +176,7 @@ void FUN_0012c53c(int param_1)
             }
             else {
               temp_v9 = 0x8001000d;
-              temp_v2 = FUN_002e7908(&temp_v6,(unsigned int *)&temp_v9);
+              temp_v2 = _ZN12OnlineResultC1ERKj(&temp_v6,(unsigned int *)&temp_v9);
               FUN_0030c720(param_1,temp_v2);
             }
             _ZN9Obj55aae4D1Ev(temp_v12);
@@ -200,7 +200,7 @@ void FUN_0012c53c(int param_1)
           }
         }
         temp_v9 = 0x80010004;
-        temp_v2 = FUN_002e7908(&temp_v6,(unsigned int *)&temp_v9);
+        temp_v2 = _ZN12OnlineResultC1ERKj(&temp_v6,(unsigned int *)&temp_v9);
         FUN_0030c720(param_1,temp_v2);
         return;
       }
@@ -210,7 +210,7 @@ void FUN_0012c53c(int param_1)
   else {
     temp_v9 = 0x80010004;
   }
-  temp_v2 = FUN_002e7908(&temp_v6,(unsigned int *)&temp_v9);
+  temp_v2 = _ZN12OnlineResultC1ERKj(&temp_v6,(unsigned int *)&temp_v9);
   FUN_0030c720(param_1,temp_v2);
   return;
 }

@@ -7,7 +7,7 @@ extern "C" {
 int panelSetupButtons(int);
 int FUN_002a60cc(...);
 int asdTMTexTableReleaseNode(int);
-int FUN_002bee58(int, int);
+int spriteStartAnimationByIndex(int, int);
 int FUN_002bf818(int);
 int objectSetPosition(int);
 int FUN_0032c3fc(...);
@@ -21,7 +21,7 @@ extern int g_btlTalkBustUp; /* 0x434210 */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a60cc. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: FUN_002bf818. */
 extern int randNextInRange(unsigned int);
 /* Supplied declaration required: objectSetPosition. */
@@ -136,7 +136,7 @@ unsigned int FUN_00206528(void)
           }
           else if ((*(int *)(temp_v0 + 0x2ec) % 10 == 0) && (temp_v2 = randNextInRange(3), temp_v2 == temp_v1))
           {
-            FUN_002bee58(temp_v0 + temp_v1 * 0x8c + 0xac,6);
+            spriteStartAnimationByIndex(temp_v0 + temp_v1 * 0x8c + 0xac,6);
             *(unsigned char *)(temp_v4 + 0x2dc) = 1;
           }
           temp_v1 = temp_v1 + 1;

@@ -36,7 +36,7 @@ unsigned int FUN_00100bd0(unsigned int param_1,unsigned int param_2,unsigned int
                     /* WARNING: Bad instruction - Truncating control flow here * /
       halt_baddata();
     }
-    FUN_003077e8();
+    _ZSt18uninitialized_copyIPiS0_12AsdAllocatorIiEET0_T_S4_S3_RT1_();
     iVar1 = FUN_002f1370();
     for (uVar2 = *unaff_r6; uVar2 != unaff_r6[1]; uVar2 = uVar2 + 4) {
     }

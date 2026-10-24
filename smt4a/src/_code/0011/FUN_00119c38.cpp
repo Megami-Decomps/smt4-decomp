@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e7908(int *, int *);
+int _ZN12OnlineResultC1ERKj(int *, int *);
 int FUN_002e791c(int, int *, int, int);
-int FUN_002ea20c(unsigned int *);
+int _ZN15OnlineTimestampC1Ev(unsigned int *);
 int FUN_002f6be2(int *, int *);
 int operatorDeleteArrayNullable(int);
 int onlineJobSetStateWaiting(int *);
@@ -26,12 +26,12 @@ typedef struct {
 
 extern unsigned char LAB_00119d18; /* 0x119d18 */
 
-extern int operatorNew(unsigned int);
-/* Supplied declaration required: FUN_002e7908. */
+extern int _Znwj(unsigned int);
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 /* Supplied declaration required: FUN_002e791c. */
-/* Supplied declaration required: FUN_002ea20c. */
+/* Supplied declaration required: _ZN15OnlineTimestampC1Ev. */
 extern unsigned int FUN_002ea3c0(int, unsigned int, unsigned int, unsigned char *);
-extern int FUN_002eab1c(int *, unsigned int *);
+extern int _ZmiRK15OnlineTimestampS1_(int *, unsigned int *);
 /* Supplied declaration required: FUN_002f6be2. */
 /* Supplied declaration required: operatorDeleteArrayNullable. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
@@ -54,11 +54,11 @@ void FUN_00119c38(int *param_1)
   int temp_v8;
   
   if (*(int *)(param_1[0x76] + 0xa0) == 0) {
-    FUN_002ea20c(&temp_v4);
-    temp_v0 = FUN_002eab1c(param_1 + 0x74,&temp_v4);
+    _ZN15OnlineTimestampC1Ev(&temp_v4);
+    temp_v0 = _ZmiRK15OnlineTimestampS1_(param_1 + 0x74,&temp_v4);
     if (temp_v0 < 0) {
       temp_v2 = 0x8001000b;
-      temp_v1 = FUN_002e7908(&iStack_30,&temp_v2);
+      temp_v1 = _ZN12OnlineResultC1ERKj(&iStack_30,&temp_v2);
       (**(romwright_code **)(*param_1 + 0x34))(param_1,temp_v1);
       return;
     }
@@ -77,7 +77,7 @@ void FUN_00119c38(int *param_1)
   FUN_002e791c(temp_v0,temp_v7,0,param_1[0x1c]);
   if (temp_v0 != 0) {
     onlineJobSetStateWaiting(param_1);
-    temp_v0 = operatorNew(0x10);
+    temp_v0 = _Znwj(0x10);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_002ea3c0(temp_v0,0x119b69,0,&LAB_00119d18);
@@ -86,7 +86,7 @@ void FUN_00119c38(int *param_1)
   }
   else {
     temp_v5 = -0x7ffefff3;
-    temp_v1 = FUN_002e7908(&temp_v2,&temp_v5);
+    temp_v1 = _ZN12OnlineResultC1ERKj(&temp_v2,&temp_v5);
     (**(romwright_code **)(*param_1 + 0x34))(param_1,temp_v1);
   }
   operatorDeleteArrayNullable(temp_v8);

@@ -49,8 +49,8 @@ typedef struct {
 extern unsigned int DAT_00433d9c; /* 0x433d9c */
 extern float DAT_00433da4; /* 0x433da4 */
 extern unsigned int DAT_00433da8; /* 0x433da8 */
-extern unsigned int DAT_00476634; /* 0x476634 */
-extern unsigned int DAT_004efd6c; /* 0x4efd6c */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x476634 */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x4efd6c */
 extern unsigned int DAT_004efd70; /* 0x4efd70 */
 extern unsigned int DAT_004efd74; /* 0x4efd74 */
 extern unsigned int DAT_004efd78; /* 0x4efd78 */
@@ -278,21 +278,21 @@ void FUN_0033e8a8(int param_1)
                                     ((unsigned int)*(unsigned char *)((int)pfVar12 + 0x23),
                                      (unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v18 = CONCAT44(temp_v10,temp_v13 / temp_v11 + temp_v16 * (float)temp_v20);
-          if (((DAT_00476634 & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_00476634), temp_v3 != 0)) {
-            DAT_004efd6c = (unsigned int)temp_v22;
+          if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v3 != 0)) {
+            _ZZN2nw4math5MTX348IdentityEvE8identity = (unsigned int)temp_v22;
             DAT_004efd70 = (unsigned int)(temp_v20 >> 0x20);
             DAT_004efd74 = DAT_004efd70;
             DAT_004efd78 = DAT_004efd70;
             DAT_004efd7c = DAT_004efd70;
-            DAT_004efd80 = DAT_004efd6c;
+            DAT_004efd80 = _ZZN2nw4math5MTX348IdentityEvE8identity;
             DAT_004efd84 = DAT_004efd70;
             DAT_004efd88 = DAT_004efd70;
             DAT_004efd8c = DAT_004efd70;
             DAT_004efd90 = DAT_004efd70;
-            DAT_004efd94 = DAT_004efd6c;
+            DAT_004efd94 = _ZZN2nw4math5MTX348IdentityEvE8identity;
             DAT_004efd98 = DAT_004efd70;
           }
-          nn_math_ARMv6_MTX34CopyAsm(temp_v26,&DAT_004efd6c);
+          nn_math_ARMv6_MTX34CopyAsm(temp_v26,&_ZZN2nw4math5MTX348IdentityEvE8identity);
           if (*(short *)(pfVar12 + 8) != 0) {
             temp_v30 = pfVar12[2] * (float)temp_v21 - *pfVar12;
             temp_v31 = pfVar12[3] * (float)temp_v21 - pfVar12[1];

@@ -1,54 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdMemoryAlloc` (_code @ 0x1630d4, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: identical except one compiler nop {0} that retail places between the unlock failure test and its branch in the special-heap path. */
+#include "nn/svc.h"
+#include "nn/Result.h"
+
+/* The allocator's global state, as far as the allocation entry points use it. */
+struct AllocatorLock {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 *mutex; /* handle of the mutex guarding the heaps */
+};
 
 extern "C" {
 
-int FUN_0018003c(void);
-int asdMemoryAllocImpl(...);
-int FUN_002e3140(void);
-int rt_memclr(int, int);
-int software_interrupt(int);
+extern AllocatorLock g_allocationAddressRanges;
 
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_5_stack;
+void FUN_0018003c(void);
+void *asdMemoryAllocImpl(u32 a, u32 b, u32 c, u32 size, s32 extra);
+void *FUN_001844ac(void *block, u32 size, u32 alignment, u32 flags);
+void rt_memclr(void *memory, u32 size);
+void FUN_002e3140(s32 result, bool failed);
 
-extern unsigned char g_allocationAddressRanges; /* 0x5b4028 */
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0018003c. */
-/* Supplied declaration required: asdMemoryAllocImpl. */
-extern int FUN_001844ac(void);
-/* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: rt_memclr. */
-
-
-int asdMemoryAlloc(int param_1,unsigned int param_2,unsigned int param_3,int param_4,unsigned int param_5)
-
+/* Releases the allocator lock, reporting a failed release. */
+static __inline void allocatorUnlock(void)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  
-  if (!(param_1 == 0x20000 || param_1 == 0x30000)) {
-    FUN_0018003c();
-    asdMemoryAllocImpl(param_1,param_2,param_3,(param_4 + 0x13fU) & 0xffffff80,param_5);
-    param_1 = FUN_001844ac();
-    rt_memclr(param_1,param_4);
-    temp_v0 = *(*(int * *)((unsigned char *)&g_allocationAddressRanges + 0x4));
-    software_interrupt(0x14);
-  }
-  else {
-    FUN_0018003c();
-    asdMemoryAllocImpl(param_1,param_2,param_3,param_4,param_5);
-    temp_v0 = *(*(int * *)((unsigned char *)&g_allocationAddressRanges + 0x4));
-    software_interrupt(0x14);
-  }
-  if (temp_v0 < 0) {
-    FUN_002e3140();
-  }
-  return param_1;
+    s32 result = nn::svc::ReleaseMutex(*g_allocationAddressRanges.mutex);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002e3140(result, failed);
+    }
 }
 
-} /* extern "C" */
+// Allocates from `heap` under the allocator lock; the two special heaps hand out the block as is, every other heap gets a
+// 0x80-aligned zeroed block.
+void *asdMemoryAlloc(u32 heap, u32 b, u32 c, u32 size, s32 extra)
+{
+    void *memory;
+    if (heap != 0x20000 && heap != 0x30000) {
+        FUN_0018003c();
+        u32 paddedSize = (size + 0x13f) & ~0x7f;
+        void *block = asdMemoryAllocImpl(heap, b, c, paddedSize, extra);
+        memory = FUN_001844ac(block, paddedSize, 0x80, 0);
+        rt_memclr(memory, size);
+        allocatorUnlock();
+    } else {
+        FUN_0018003c();
+        memory = asdMemoryAllocImpl(heap, b, c, size, extra);
+        allocatorUnlock();
+    }
+    return memory;
+}
+
+}

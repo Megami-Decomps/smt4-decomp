@@ -1,24 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00188688` (_code @ 0x188688, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc does not if-convert the fault call (retail: ldreq key; moveq r1, pc; bleq) and shares the literal for the ready word and the value; retail loads the ready word before the push */
+/* Returns the lazily initialised value, reporting a fault (key and the address of the check) when it is not ready yet. */
+#include "common.h"
 
 extern "C" {
+struct LazyValue {
+    /* 0x00 */ s32 unk00;
+    /* 0x04 */ s32 value;
+};
 
-int FUN_0016e800(unsigned int, int);
+extern s32 DAT_00589390;        /* the ready word */
+extern LazyValue DAT_0058938c;  /* the same words seen as a record */
+void FUN_0016e800(u32 key, u32 address);
 
-extern int DAT_00589390; /* 0x589390 */
-
-/* Supplied declaration required: FUN_0016e800. */
-
-
-int FUN_00188688(void)
-
+s32 FUN_00188688(void)
 {
-/* irregular: 1 native warning(s); review required */
-  if (DAT_00589390 == 0) {
-    FUN_0016e800(0xe0a046db,0x1886a4);
-  }
-  return DAT_00589390;
+    if (DAT_00589390 == 0) {
+        FUN_0016e800(0xE0A046DB, __current_pc());
+    }
+    return DAT_0058938c.value;
 }
-
-} /* extern "C" */
+}

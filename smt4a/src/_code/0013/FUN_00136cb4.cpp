@@ -1,45 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00136cb4` (_code @ 0x136cb4, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail materialises the 0 argument of FUN_00147a9c in r4 (mov r4, #0 after the result test, mov r0, r4) while the final return uses mov r0, #0 */
+#include "nn/Result.h"
 
 extern "C" {
 
-int FUN_00147550(int, unsigned int, int);
-int FUN_00147a9c(int);
-int FUN_0016f9bc(unsigned char *, int);
-int nn_applet_CTR_detail_OpenSession(void);
-int nn_applet_CTR_detail_CloseSession(void);
+s32 FUN_00147374(void);
+s32 FUN_00147550(u32 size, u32 address, u32 permission);
+s32 FUN_00147a9c(s32 session);
+void FUN_0016f9bc(u8 *buffer, u32 size);
+void nn_applet_CTR_detail_OpenSession(void);
+void nn_applet_CTR_detail_CloseSession(void);
 
-extern unsigned char DAT_005891b0; /* 0x5891b0 */
-extern unsigned char DAT_0061a5fc; /* 0x61a5fc */
+extern u8 DAT_005891b0[];
+extern u8 DAT_0061a5fc[];
 
-extern int FUN_00147374(void);
-/* Supplied declaration required: FUN_00147550. */
-/* Supplied declaration required: FUN_00147a9c. */
-/* Supplied declaration required: FUN_0016f9bc. */
-/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
-/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
-
-
-void FUN_00136cb4(unsigned int param_1)
-
+/* Maps the 0x300-byte region at `address` (8-byte aligned) after clearing the 0x100-byte scratch; returns the failure result, or 0. */
+s32 FUN_00136cb4(u32 address)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_00147374();
-  if (temp_v0 == 0) {
-    (*(unsigned char *)((unsigned char *)&DAT_005891b0 + 0x3)) = 1;
-    FUN_0016f9bc(&DAT_0061a5fc,0x100);
-    temp_v0 = 0;
-    FUN_00147550(0x300,param_1 & 0xfffffff8,0xf);
-    if (-1 < temp_v0) {
-      nn_applet_CTR_detail_OpenSession();
-      FUN_00147a9c(0);
-      nn_applet_CTR_detail_CloseSession();
+    if (FUN_00147374() != 0) {
+        return 0;
     }
-  }
-  return;
+    address &= ~7u;
+    DAT_005891b0[3] = 1;
+    FUN_0016f9bc(DAT_0061a5fc, 0x100);
+    s32 result = FUN_00147550(0x300, address, 15);
+    if (!nnResultIsSuccess(result)) {
+        return result;
+    }
+    nn_applet_CTR_detail_OpenSession();
+    FUN_00147a9c(0);
+    nn_applet_CTR_detail_CloseSession();
+    return 0;
 }
 
 } /* extern "C" */

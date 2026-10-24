@@ -26,7 +26,7 @@ struct DepartureState {
 extern "C" {
 extern DepartureCounters DAT_00447510;
 extern DepartureState DAT_0049f890;
-void FUN_002c2218(DepartureState* state);
+void _ZN10FloatStateC1Ev(DepartureState* state);
 
 // Reset the shared departure state and its initial position.
 void FUN_003edf30(u32 first, u32 second, DepartureArguments* arguments)
@@ -35,7 +35,7 @@ void FUN_003edf30(u32 first, u32 second, DepartureArguments* arguments)
     arguments->second = second;
     DAT_00447510.first = 0;
     DAT_00447510.second = 0;
-    FUN_002c2218(&DAT_0049f890);
+    _ZN10FloatStateC1Ev(&DAT_0049f890);
     DAT_0049f890.x = 310.0f;
     DAT_0049f890.y = 45.0f;
     DAT_0049f890.z = 0.0f;

@@ -6,15 +6,15 @@
 extern "C" {
 
 int FUN_0015dc2c(...);
-u32 FUN_0015dd58(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
+u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
 int FUN_002a116c(...);
 int FUN_002a1200(...);
 int asdLoadFileAsyncNoCallback(...);
-int FUN_002a126c(...);
+int _ZN9AocSystem17getPendingRequestEv(...);
 int legacyResourceIdRemap(...);
 int asdLoadFileAsync(...);
 int refIsNullOrZero(...);
-int FUN_002ba968(...);
+int _ZN7AocMain12queueRequestE17RequestParametersji(...);
 int _ZN18WindowStatusResultC1Ej(...);
 int FUN_002bb5a4(...);
 int asdMemoryAllocAligned(...);
@@ -59,11 +59,11 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
 /* Supplied declaration required: FUN_0015dc2c. */
-/* Supplied declaration required: FUN_0015dd58. */
+/* Supplied declaration required: _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle. */
 /* Supplied declaration required: FUN_002a116c. */
 /* Supplied declaration required: FUN_002a1200. */
 /* Supplied declaration required: asdLoadFileAsyncNoCallback. */
-/* Supplied declaration required: FUN_002a126c. */
+/* Supplied declaration required: _ZN9AocSystem17getPendingRequestEv. */
 /* Supplied declaration required: legacyResourceIdRemap. */
 extern int byteIsAtLeast100(unsigned int *);
 extern int objGetFlagBit16(int);
@@ -71,7 +71,7 @@ extern int FUN_002ad1e0(int);
 /* Supplied declaration required: asdLoadFileAsync. */
 extern int FUN_002b90c8(int, unsigned int, unsigned int *);
 /* Supplied declaration required: refIsNullOrZero. */
-/* Supplied declaration required: FUN_002ba968. */
+/* Supplied declaration required: _ZN7AocMain12queueRequestE17RequestParametersji. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern unsigned int _ZN18WindowStatusResultC1Ev(char *);
 /* Supplied declaration required: FUN_002bb5a4. */
@@ -368,7 +368,7 @@ LAB_0015cdc8:
                   nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v10 & 0xfffffffe);
                   return;
                 }
-                FUN_002a126c(&temp_v18,g_aocSystem);
+                _ZN9AocSystem17getPendingRequestEv(&temp_v18,g_aocSystem);
                 temp_v15 = temp_v18;
                 temp_v16[0] = acStack_288[0];
                 temp_v16[1] = acStack_288[1];
@@ -392,7 +392,7 @@ LAB_0015cdc8:
         }
       }
       jyoucyuGetTableEntry(0);
-      FUN_002a126c(&temp_v19,g_aocSystem);
+      _ZN9AocSystem17getPendingRequestEv(&temp_v19,g_aocSystem);
       *(unsigned int *)(g_aocMain + 0x754) = (*(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff) | 0x10;
       if (*(int *)(param_2 + 0x14) != 0) {
         asdMemFree();
@@ -423,16 +423,16 @@ LAB_0015cdc8:
       temp_v10 = uStack_298;
       temp_v11 = temp_v17;
       temp_v12 = uStack_290;
-      FUN_002ba968(g_aocMain,&temp_v8);
+      _ZN7AocMain12queueRequestE17RequestParametersji(g_aocMain,&temp_v8);
       temp_v6 = 1;
 LAB_0015cfcc:
       {
-        RequestParameters parameters = {{
+        RequestParameters parameters(
           static_cast<u32>(temp_v15), *(unsigned int*)temp_v16,
           uStack_298, temp_v17, uStack_290
-        }};
-        QueuedRequestHandle handle = {parameters.words[1], parameters.words[2]};
-        temp_v2 = FUN_0015dd58(reinterpret_cast<QueuedRequestTokenState*>(g_aocMain),
+        );
+        QueuedRequestHandle handle = {parameters.word(1), parameters.word(2)};
+        temp_v2 = _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(reinterpret_cast<QueuedRequestTokenState*>(g_aocMain),
                               &parameters, handle);
       }
       if (temp_v2 != 0) {

@@ -1,121 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003912a4` (_code @ 0x3912a4, 0x24c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation and the inlined render-state push scheduling only (extra scratch register for the entry address; the two stack-argument stores of FUN_002bf380 use stm where retail uses two str) */
+#include "camp/RenderCtx.h"
+#include "ui/NumberPanelWork.h"
+
+/* The record list held by a selection screen (observed fields). */
+struct SelectionList {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 count; /* rows shown */
+    /* 0x08 */ u8 unk08[0x38];
+};
+
+/* A selection screen with a scrolling list and a number panel (observed fields). */
+struct SelectionScreen {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x23C];
+    /* 0x240 */ SelectionList list;
+    /* 0x280 */ u8 unk280[0x68];
+    /* 0x2E8 */ NumberPanelWork panel;
+};
 
 extern "C" {
 
-int FUN_002332e8(unsigned int *, unsigned int, unsigned int);
-int FUN_00240d5c(unsigned int *);
-int FUN_00290994(...);
-int FUN_0029e924(unsigned int *);
-int FUN_002bed3c(void);
-int FUN_002bf380(int, int, int, int, int, int);
-int efctSetSpeed(void);
-int FUN_002c18e4(...);
-int FUN_002c198c(...);
-int FUN_002c39a4(int);
-int FUN_003909d0(unsigned int *, int, int, int);
+extern RenderCtx *g_titleScene;
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_1_stack;
+s16 numberPanelGetValue(const NumberPanelWork *panel);
+s16 numberPanelGetFirst(const NumberPanelWork *panel);
+s16 numberPanelGetSecond(const NumberPanelWork *panel);
+void FUN_002c39a4(RenderCtx *context);
+void FUN_002bed3c(void);
+void efctSetSpeed(f32 speed);
+s32 FUN_002c5d80(u32 first, u32 second);
+void FUN_002bf380(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
+s32 FUN_0029e924(const SelectionList *list);
+s32 FUN_00240d5c(const SelectionList *list);
+s32 flaggedValueHolderGetTotal(const SelectionList *list);
+void FUN_003909d0(SelectionScreen *screen, s32 row, s32 index, s32 selected);
+void FUN_002332e8(NumberPanelWork *panel, s32 first, s32 second);
+void FUN_00290994(u32 sprite, s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g, s32 h, s32 i, s32 j, s32 value,
+                  s32 first, s32 second, s32 size, s32 k);
+void FUN_002c198c(RenderCtx *context);
+void FUN_002c18e4(RenderCtx *context);
 
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_002332e8. */
-extern int flaggedValueHolderGetTotal(unsigned int *);
-/* Supplied declaration required: FUN_00240d5c. */
-/* Supplied declaration required: FUN_00290994. */
-/* Supplied declaration required: FUN_0029e924. */
-/* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003909d0. */
-
-
-void FUN_003912a4(unsigned int *param_1)
-
+/* Draws the selection screen: its frame, the visible rows and the number panel's scroll bar. */
+void FUN_003912a4(SelectionScreen *screen)
 {
-/* irregular: 11 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar7;
-  unsigned int temp_v6;
-  
-  if ((*param_1 & 0x10000) == 0) {
+    if ((screen->flags & 0x10000) != 0) {
+        return;
+    }
     FUN_002c39a4(g_titleScene);
     FUN_002bed3c();
-    efctSetSpeed();
-    temp_v1 = g_titleScene;
-    temp_v0 = FUN_002c5d80(1,0);
-    piVar7 = (int *)(temp_v1 + 0x124c);
-    temp_v4 = *piVar7;
-    temp_v5 = piVar7[temp_v4 + 2];
-    *piVar7 = temp_v4 + 1;
-    piVar7[temp_v4 + 3] = temp_v0;
-    if (*(char *)(temp_v1 + 0x1264) != '\0' || temp_v5 != temp_v0) {
-      (**(romwright_code **)(temp_v1 + 0x1268))();
-      *(unsigned char *)(temp_v1 + 0x1264) = 0;
+    efctSetSpeed(1.0f);
+    renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+    FUN_002bf380(2, 0x3a, 7, 0, 0, 0x81);
+    s32 top = FUN_0029e924(&screen->list);
+    FUN_00240d5c(&screen->list);
+    s32 rows = screen->list.count;
+    for (s32 row = 0; row < rows; row++) {
+        FUN_003909d0(screen, row, top + row, flaggedValueHolderGetTotal(&screen->list) == top + row);
     }
-    FUN_002bf380(2,0x3a,7,0,0,0x81);
-    temp_v1 = FUN_0029e924(param_1 + 0x90);
-    FUN_00240d5c(param_1 + 0x90);
-    temp_v6 = param_1[0x91];
-    temp_v0 = 0;
-    if (temp_v0 < (int)temp_v6) {
-      do {
-        temp_v4 = flaggedValueHolderGetTotal(param_1 + 0x90);
-        FUN_003909d0(param_1,temp_v0,temp_v1 + temp_v0,temp_v4 == temp_v1 + temp_v0);
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < (int)temp_v6);
+    FUN_002332e8(&screen->panel, FUN_0029e924(&screen->list), FUN_00240d5c(&screen->list));
+    s32 value = numberPanelGetValue(&screen->panel);
+    s32 first = numberPanelGetFirst(&screen->panel);
+    s32 second = numberPanelGetSecond(&screen->panel);
+    if (static_cast<u8>(screen->panel.position) == 0) {
+        value = -1;
+        first = -1;
+        second = -1;
     }
-    temp_v2 = FUN_00240d5c(param_1 + 0x90);
-    temp_v3 = FUN_0029e924(param_1 + 0x90);
-    FUN_002332e8(param_1 + 0xba,temp_v3,temp_v2);
-    temp_v1 = (int)(short)param_1[0xd0];
-    temp_v0 = (int)(short)param_1[0xcf];
-    temp_v4 = (int)*(short *)((int)param_1 + 0x33e);
-    if ((char)param_1[0xd3] == '\0') {
-      temp_v1 = -1;
-      temp_v0 = -1;
-      temp_v4 = -1;
-    }
-    FUN_00290994(param_1[0xce],0,0,0x3a,0x4b,0x4c,0x4d,0x47,0x49,0x48,0x4a,temp_v1,temp_v0,temp_v4,0x81,0)
-    ;
-    temp_v1 = g_titleScene;
-    piVar7 = (int *)(g_titleScene + 0x124c);
-    temp_v0 = *piVar7;
-    temp_v4 = piVar7[temp_v0 + 2];
-    *piVar7 = temp_v0 - 1;
-    if (*(char *)(temp_v1 + 0x1264) != '\0' || temp_v4 != piVar7[temp_v0 + 1]) {
-      (**(romwright_code **)(temp_v1 + 0x1268))();
-      *(unsigned char *)(temp_v1 + 0x1264) = 0;
-    }
+    FUN_00290994(screen->panel.sprite, 0, 0, 0x3a, 0x4b, 0x4c, 0x4d, 0x47, 0x49, 0x48, 0x4a, value, first, second,
+                 0x81, 0);
+    renderStackPop(&g_titleScene->stackA);
     FUN_002bed3c();
-    efctSetSpeed();
+    efctSetSpeed(1.0f);
     FUN_002c198c(g_titleScene);
     FUN_002c18e4(g_titleScene);
-    return;
-  }
-  return;
 }
 
-} /* extern "C" */
+}

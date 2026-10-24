@@ -11,7 +11,7 @@ int FUN_002e9c64(int, unsigned char *, int *, int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002f451c(int *, unsigned int);
 int FUN_002f4db0(unsigned char [12], int, unsigned int, int, int, int, int);
-int refIsNonNegative(unsigned char [12]);
+int _ZNK18OnlineResultRecord7isValidEv(unsigned char [12]);
 int FUN_002f4f00(unsigned char [64]);
 int onlineJobSetStateWaiting(int);
 int FUN_00303cd8(unsigned char [64]);
@@ -41,7 +41,7 @@ extern unsigned int streamWriterFinish(unsigned char *);
 /* Supplied declaration required: FUN_002f451c. */
 extern int FUN_002f4d9c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002f4db0. */
-/* Supplied declaration required: refIsNonNegative. */
+/* Supplied declaration required: _ZNK18OnlineResultRecord7isValidEv. */
 /* Supplied declaration required: FUN_002f4f00. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_00303cd8. */
@@ -85,7 +85,7 @@ void FUN_0011dbcc(int param_1)
       *(int *)(param_1 + 200) = temp_v0;
       temp_v1 = streamWriterFinish(temp_v2);
       FUN_002f4db0(temp_v6,temp_v0,temp_v1,1,0,0,0);
-      refIsNonNegative(temp_v6);
+      _ZNK18OnlineResultRecord7isValidEv(temp_v6);
       temp_v1 = FUN_002ea3c0(temp_v7,0x11dcb9,0,&LAB_0011dcb0);
       FUN_002ea3d0(param_1,temp_v1);
       onlineJobSetStateWaiting(param_1);

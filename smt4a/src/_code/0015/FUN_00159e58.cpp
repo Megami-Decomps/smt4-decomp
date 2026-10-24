@@ -1,35 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00159e58` (_code @ 0x159e58, 0x10c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
+extern u8 g_nnSndMasterManager[];
+void FUN_0016f35c(void *manager, u32 value);
 
-extern unsigned short uRam006446ee; /* 0x6446ee */
-extern unsigned short uRam0064773a; /* 0x64773a */
-
-extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
-
-
-void FUN_00159e58(int param_1)
-
+/* Passes the value to the nn::snd master manager. */
+void FUN_00159e58(u32 value)
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  if (param_1 < 2) {
-    param_1 = 2;
-  }
-  else if (param_1 >= 4) {
-    param_1 = 3;
-  }
-  uRam0064773a = (short)param_1;
-  temp_v0 = nn_snd_CTR_Dspsnd_IsInitialized();
-  if (temp_v0 != 0) {
-    puVar2 = *(unsigned int **)((unsigned int)uRam006446ee * 4 + 0x644470);
-    *(short *)(puVar2 + 4) = (short)param_1;
-    *puVar2 = *puVar2 | 0x8000;
-  }
-  return;
+    FUN_0016f35c(g_nnSndMasterManager, value);
 }
-
-} /* extern "C" */
+}

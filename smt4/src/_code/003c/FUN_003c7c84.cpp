@@ -1,40 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c7c84` (_code @ 0x3c7c84, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0027dc24(int, int, int);
+struct IVec2 {
+    s32 x;
+    s32 y;
+};
 
-/* Supplied declaration required: FUN_0027dc24. */
+struct UiPlacementSrc {
+    /* 0x000 */ u8 pad0[0xc8];
+    /* 0x0c8 */ u8 block[0x1f];
+    /* 0x0e7 */ s8 cellX;
+    /* 0x0e8 */ s8 cellY;
+    /* 0x0e9 */ u8 pad1[0x13c - 0xe9];
+    /* 0x13c */ IVec2 pos;
+};
 
+struct UiPlacementDst {
+    /* 0x00 */ u8 pad0[0x84];
+    /* 0x84 */ IVec2 pos;
+    /* 0x8c */ s16 index;
+    /* 0x8e */ u8 pad1[2];
+    /* 0x90 */ f32 v0;
+    /* 0x94 */ f32 v1;
+    /* 0x98 */ f32 v2;
+};
 
-void FUN_003c7c84(int param_1,int param_2)
+void FUN_0027dc24(UiPlacementSrc *src, void *block, int flag);
 
+/* Resets the destination's vector, and copies the source position (filling it from the cell if unset). */
+void FUN_003c7c84(UiPlacementDst *dst, UiPlacementSrc *src)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  
-  *(unsigned int *)(param_1 + 0x98) = 0;
-  *(unsigned int *)(param_1 + 0x94) = 0;
-  *(unsigned int *)(param_1 + 0x90) = 0;
-  *(unsigned short *)(param_1 + 0x8c) = 0xffff;
-  temp_v0 = *(int *)(param_2 + 0x13c);
-  temp_v2 = -1 < temp_v0;
-  if (temp_v2) {
-    temp_v0 = *(int *)(param_2 + 0x140);
-  }
-  if (!temp_v2 || temp_v0 < 0) {
-    FUN_0027dc24(param_2,param_2 + 200,0);
-    *(int *)(param_2 + 0x13c) = (int)*(char *)(param_2 + 0xe7);
-    *(int *)(param_2 + 0x140) = (int)*(char *)(param_2 + 0xe8);
-  }
-  temp_v1 = *(unsigned int *)(param_2 + 0x140);
-  *(unsigned int *)(param_1 + 0x84) = *(unsigned int *)(param_2 + 0x13c);
-  *(unsigned int *)(param_1 + 0x88) = temp_v1;
-  return;
+    dst->v0 = dst->v1 = dst->v2 = 0.0f;
+    dst->index = -1;
+    if (src->pos.x < 0 || src->pos.y < 0) {
+        FUN_0027dc24(src, src->block, 0);
+        s32 x = src->cellX;
+        s32 y = src->cellY;
+        src->pos.x = x;
+        src->pos.y = y;
+    }
+    dst->pos = src->pos;
 }
 
 } /* extern "C" */

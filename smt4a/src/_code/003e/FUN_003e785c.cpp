@@ -1,133 +1,82 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e785c` (_code @ 0x3e785c, 0x27c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: same instruction sequence and row count, but retail keeps the base in r3, saves fp as well and assigns the six field pointers to different registers. */
+#include "common.h"
+
+/* Two tinted layers' color fades: per layer the current color, the fade ends, the state and its progress. */
+struct LayerColorFades {
+    /* 0x0000 */ u8 unk0000[0x4D18];
+    /* 0x4D18 */ u32 color[2];
+    /* 0x4D20 */ u32 from[2];
+    /* 0x4D28 */ u32 to[2];
+    /* 0x4D30 */ u32 state[2];
+    /* 0x4D38 */ s32 step[2];
+    /* 0x4D40 */ s32 duration[2];
+};
+
+/* Moves each channel of `base` toward `other` by `weight` (0..1). */
+static __inline u32 blendColor(u32 base, u32 other, f32 weight)
+{
+    u32 red = ((u32)((f32)((other & 0xFF000000) - (base & 0xFF000000)) * weight) + (base & 0xFF000000)) & 0xFF000000;
+    u32 green = ((u32)((f32)((other & 0xFF0000) - (base & 0xFF0000)) * weight) + (base & 0xFF0000)) & 0xFF0000;
+    u32 blue = ((u32)((f32)((other & 0xFF00) - (base & 0xFF00)) * weight) + (base & 0xFF00)) & 0xFF00;
+    u32 alpha = ((u32)((f32)((other & 0xFF) - (base & 0xFF)) * weight) + (base & 0xFF)) & 0xFF;
+    return alpha | blue | green | red;
+}
 
 extern "C" {
 
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-
-
-void FUN_003e785c(int param_1,int param_2)
-
+/* Steps one layer's color fade: fades in (states 0-2) or out (states 4-6), then holds the end color. */
+void FUN_003e785c(LayerColorFades *fades, s32 layer)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  unsigned int *puVar1;
-  int *piVar2;
-  unsigned int temp_v0;
-  unsigned int *puVar4;
-  unsigned int *puVar5;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int in_fpscr;
-  int temp_v5;
-  float temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  float temp_v10;
-  float temp_v11;
-  
-  param_1 = param_1 + param_2 * 4;
-  puVar1 = (unsigned int *)(param_1 + 0x4d30);
-  piVar2 = (int *)(param_1 + 0x4d38);
-  puVar4 = (unsigned int *)(param_1 + 0x4d18);
-  puVar5 = (unsigned int *)(param_1 + 0x4d28);
-  switch(*puVar1) {
-  case 0:
-    *puVar1 = 1;
-  case 1:
-    temp_v3 = *(int *)(param_1 + 0x4d40);
-    temp_v1 = *puVar5;
-    temp_v4 = *(unsigned int *)(param_1 + 0x4d20);
-    temp_v11 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v10 = (float)VectorSignedToFloat(*piVar2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v2 = *piVar2 + 1;
-    temp_v6 = (float)VectorUnsignedToFloat
-                              ((temp_v4 & 0xff000000) - (temp_v1 & 0xff000000),
-                               (unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v10 = 1.0f - temp_v10 / temp_v11;
-    temp_v7 = VectorFloatToUnsigned(temp_v6 * temp_v10,3);
-    temp_v6 = (float)VectorUnsignedToFloat
-                              ((temp_v4 & 0xff0000) - (temp_v1 & 0xff0000),(unsigned char)(in_fpscr >> 0x16) & 3)
-    ;
-    temp_v8 = VectorFloatToUnsigned(temp_v6 * temp_v10,3);
-    temp_v6 = (float)VectorUnsignedToFloat
-                              ((temp_v4 & 0xff00) - (temp_v1 & 0xff00),(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v9 = VectorFloatToUnsigned(temp_v6 * temp_v10,3);
-    temp_v6 = (float)VectorUnsignedToFloat
-                              ((temp_v4 & 0xff) - (temp_v1 & 0xff),(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v5 = VectorFloatToUnsigned(temp_v6 * temp_v10,3);
-    *puVar4 = ((temp_v5 + (temp_v1 & 0xff)) & 0xff) |
-              ((temp_v9 + (temp_v1 & 0xff00)) & 0xff00) |
-              (((temp_v1 & 0xff0000) + temp_v8) & 0xff0000) |
-              (((temp_v1 & 0xff000000) + temp_v7) & 0xff000000);
-    *piVar2 = temp_v2;
-    if (temp_v2 < temp_v3) {
-      return;
+    u32 *state = &fades->state[layer];
+    s32 *duration = &fades->duration[layer];
+    s32 *step = &fades->step[layer];
+    u32 *color = &fades->color[layer];
+    u32 *from = &fades->from[layer];
+    u32 *to = &fades->to[layer];
+    switch (*state) {
+    case 0:
+        *state = 1;
+    case 1: {
+        s32 total = *duration;
+        u32 end = *to;
+        u32 start = *from;
+        f32 weight = 1.0f - (f32)*step / (f32)total;
+        s32 next = *step + 1;
+        *color = blendColor(end, start, weight);
+        *step = next;
+        if (next < total) {
+            return;
+        }
+        *state = 2;
+        break;
     }
-    temp_v0 = 2;
-    break;
-  case 2:
-    temp_v1 = *puVar5;
-    temp_v0 = 3;
-    *puVar4 = temp_v1;
-    break;
-  default:
-    return;
-  case 4:
-    *puVar1 = 5;
-  case 5:
-    temp_v3 = *(int *)(param_1 + 0x4d40);
-    temp_v4 = *puVar5;
-    temp_v1 = *(unsigned int *)(param_1 + 0x4d20);
-    temp_v10 = (float)VectorSignedToFloat(*piVar2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v6 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v2 = *piVar2 + 1;
-    temp_v11 = (float)VectorUnsignedToFloat
-                              ((temp_v4 & 0xff000000) - (temp_v1 & 0xff000000),
-                               (unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v10 = temp_v10 / temp_v6;
-    temp_v7 = VectorFloatToUnsigned(temp_v11 * temp_v10,3);
-    temp_v6 = (float)VectorUnsignedToFloat
-                              ((temp_v4 & 0xff0000) - (temp_v1 & 0xff0000),(unsigned char)(in_fpscr >> 0x16) & 3)
-    ;
-    temp_v8 = VectorFloatToUnsigned(temp_v6 * temp_v10,3);
-    temp_v6 = (float)VectorUnsignedToFloat
-                              ((temp_v4 & 0xff00) - (temp_v1 & 0xff00),(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v9 = VectorFloatToUnsigned(temp_v6 * temp_v10,3);
-    temp_v6 = (float)VectorUnsignedToFloat
-                              ((temp_v4 & 0xff) - (temp_v1 & 0xff),(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v5 = VectorFloatToUnsigned(temp_v6 * temp_v10,3);
-    *puVar4 = ((temp_v5 + (temp_v1 & 0xff)) & 0xff) |
-              ((temp_v9 + (temp_v1 & 0xff00)) & 0xff00) |
-              (((temp_v1 & 0xff0000) + temp_v8) & 0xff0000) |
-              (((temp_v1 & 0xff000000) + temp_v7) & 0xff000000);
-    *piVar2 = temp_v2;
-    if (temp_v2 < temp_v3) {
-      return;
+    case 2:
+        *color = *to;
+        *state = 3;
+        break;
+    default:
+        return;
+    case 4:
+        *state = 5;
+    case 5: {
+        s32 total = *duration;
+        u32 end = *to;
+        u32 start = *from;
+        f32 weight = (f32)*step / (f32)total;
+        s32 next = *step + 1;
+        *color = blendColor(start, end, weight);
+        *step = next;
+        if (next < total) {
+            return;
+        }
+        *state = 6;
+        break;
     }
-    temp_v0 = 6;
-    break;
-  case 6:
-    temp_v1 = *puVar5;
-    temp_v0 = 7;
-    *puVar4 = temp_v1;
-  }
-  *puVar1 = temp_v0;
-  return;
+    case 6:
+        *color = *to;
+        *state = 7;
+        break;
+    }
 }
 
-} /* extern "C" */
+}

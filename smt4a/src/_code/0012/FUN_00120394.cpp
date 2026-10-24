@@ -22,7 +22,7 @@ typedef struct {
 extern unsigned char DAT_00559524; /* 0x559524 */
 extern unsigned char DAT_00559ef4; /* 0x559ef4 */
 
-extern unsigned int FUN_002e7908(unsigned char **, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char **, unsigned int *);
 extern int _ZN9Obj55aff4C1Ev(unsigned char *);
 /* Supplied declaration required: _ZN9Obj559eecD1Ev. */
 /* Supplied declaration required: FUN_00303d3a. */
@@ -55,7 +55,7 @@ void FUN_00120394(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
   FUN_00304e82();
   if ((temp_v0 & 0xffff) != 1) {
     temp_v5[0] = 0x80010002;
-    temp_v1 = FUN_002e7908(&temp_v3,temp_v5);
+    temp_v1 = _ZN12OnlineResultC1ERKj(&temp_v3,temp_v5);
     FUN_00310cf2(param_1,temp_v1);
   }
   else {

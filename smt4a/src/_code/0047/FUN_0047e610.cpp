@@ -1,37 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047e610` (_code @ 0x47e610, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the constant slot index 2 in a callee-saved register across the FUN_00183468 call (mov r0, #2; mov r4, r0; nop) and stores through [slots, r4, lsl #2]; armcc folds it to [slots, #8] */
+/* Applies every element of `elements` to the target and the owner's state, then records `result` and the follow-up
+ * value in the owner's result slots. */
+#include "common.h"
 
 extern "C" {
+struct ResultSlots {
+    /* 0x0 */ u32 *slots;
+};
 
-int FUN_004493c8(int, unsigned int);
-int FUN_0044cd4c(unsigned int, unsigned int);
+/* The owner's state block, 0xAC bytes after its start the result slot pointer lives. */
+struct OwnerState {
+    /* 0x00 */ u8 unk00[0x6C];
+    /* 0x6C */ u32 *resultSlots;
+};
 
-extern unsigned int FUN_00183468(void);
-/* Supplied declaration required: FUN_004493c8. */
-/* Supplied declaration required: FUN_0044cd4c. */
+struct Owner {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 *state;
+};
 
+struct Target {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 handle;
+};
 
-void FUN_0047e610(int param_1,int param_2,int param_3,unsigned int param_4)
+/* A vector of element pointers. */
+struct ElementList {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 **begin;
+    /* 0x08 */ u32 **end;
+};
 
+void FUN_0044cd4c(u32 *element, u32 handle);
+void FUN_004493c8(OwnerState *state, u32 *element);
+u32 FUN_00183468(void);
+
+/* Stores `value` in result slot `slot`. */
+static inline void setResultSlot(OwnerState *state, s32 slot, u32 value)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + 4);
-  temp_v1 = *(unsigned int *)(param_2 + 4);
-  puVar3 = *(unsigned int **)(param_3 + 8);
-  for (puVar2 = *(unsigned int **)(param_3 + 4); puVar2 != puVar3; puVar2 = puVar2 + 1) {
-    FUN_0044cd4c(*puVar2,temp_v1);
-    FUN_004493c8(temp_v0 + 0x40,*puVar2);
-  }
-  **(unsigned int **)(temp_v0 + 0xac) = param_4;
-  temp_v1 = FUN_00183468();
-  *(unsigned int *)(*(int *)(temp_v0 + 0xac) + 8) = temp_v1;
-  return;
+    state->resultSlots[slot] = value;
 }
 
-} /* extern "C" */
+void FUN_0047e610(Owner *owner, Target *target, ElementList *elements, u32 result)
+{
+    OwnerState *state = (OwnerState *)(owner->state + 0x40);
+    u32 handle = target->handle;
+    u32 **end = elements->end;
+
+    for (u32 **element = elements->begin; element != end; element++) {
+        FUN_0044cd4c(*element, handle);
+        FUN_004493c8(state, *element);
+    }
+    setResultSlot(state, 0, result);
+    setResultSlot(state, 2, FUN_00183468());
+}
+}

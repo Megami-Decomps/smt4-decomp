@@ -7,6 +7,7 @@
  * to destroy. */
 class Obj4222ac : public Obj422318 {
 public:
+    Obj4222ac();
     virtual ~Obj4222ac();
     virtual void start(); /* +0x08 */
     virtual void updateMotion(); /* +0x18 */

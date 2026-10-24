@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002550d8(...);
 int btlMainFindEntryByListedId(...);
 int btlGetMainState(void);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 
 typedef struct fn_003bf5a8_arg0 fn_003bf5a8_arg0;
 typedef struct fn_003bf5a8_arg1 fn_003bf5a8_arg1;
@@ -59,7 +59,7 @@ extern unsigned short FUN_00245cc0(unsigned int);
 /* Supplied declaration required: FUN_002550d8. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 
 
 int FUN_003bf5a8(fn_003bf5a8_arg0 *param_1,fn_003bf5a8_arg1 *param_2,unsigned int param_3)
@@ -78,7 +78,7 @@ int FUN_003bf5a8(fn_003bf5a8_arg0 *param_1,fn_003bf5a8_arg1 *param_2,unsigned in
   
   temp_v5 = 0;
   puVar2 = (unsigned int *)btlGetMainState();
-  FUN_002ae164();
+  dataTable40FindById();
   if (param_2 == (fn_003bf5a8_arg1 *)0x0) {
     return 0;
   }

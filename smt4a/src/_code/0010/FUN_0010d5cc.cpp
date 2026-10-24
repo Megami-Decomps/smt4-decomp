@@ -25,7 +25,7 @@ extern unsigned char LAB_0010db69; /* 0x10db69 */
 
 /* Supplied declaration required: FUN_0010d6d4. */
 extern int FUN_0010da40(int);
-extern unsigned char *FUN_002e7908(unsigned char *, unsigned int *);
+extern unsigned char *_ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 /* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
@@ -61,7 +61,7 @@ void FUN_0010d5cc(int param_1)
     temp_v1 = 0x80010004;
     puVar5 = (unsigned int *)&temp_v3;
     temp_v3 = temp_v1;
-    puVar3 = (unsigned char *)FUN_002e7908(puVar4,puVar5);
+    puVar3 = (unsigned char *)_ZN12OnlineResultC1ERKj(puVar4,puVar5);
     FUN_002f7850(param_1,puVar3);
     return;
   }
@@ -91,7 +91,7 @@ void FUN_0010d5cc(int param_1)
             }
             puVar5 = (unsigned int *)&temp_v3;
             temp_v3 = temp_v1;
-            puVar3 = (unsigned char *)FUN_002e7908(puVar4,puVar5);
+            puVar3 = (unsigned char *)_ZN12OnlineResultC1ERKj(puVar4,puVar5);
             FUN_002f7850(param_1,puVar3);
             return;
           }
@@ -114,7 +114,7 @@ void FUN_0010d5cc(int param_1)
             }
             puVar5 = (unsigned int *)&temp_v3;
             temp_v3 = temp_v1;
-            puVar3 = (unsigned char *)FUN_002e7908(puVar4,puVar5);
+            puVar3 = (unsigned char *)_ZN12OnlineResultC1ERKj(puVar4,puVar5);
             FUN_002f7850(param_1,puVar3);
             return;
           }
@@ -128,7 +128,7 @@ void FUN_0010d5cc(int param_1)
         puVar4 = temp_v5;
         temp_v7 = 0x80050019;
       }
-      puVar3 = (unsigned char *)FUN_002e7908(puVar4,puVar5);
+      puVar3 = (unsigned char *)_ZN12OnlineResultC1ERKj(puVar4,puVar5);
     }
   }
   FUN_002f7850(param_1,puVar3);

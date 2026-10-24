@@ -1,66 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040a884` (_code @ 0x40a884, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: constant-register allocation only, as in FUN_0040a9a0 (retail uses r2/r3/ip for the request defaults and keeps r0 for the request address, saves r5 for the resource); stores, loads and calls match. */
+#include "common.h"
+#include "Model/MoriModelContentLoad.h"
+
+struct ModelResourceRequest {
+    u32 id; // 0x00
+    u8 option; // 0x04
+    u8 unk05[3];
+    u32 first; // 0x08
+    u32 second; // 0x0c
+    u32 third; // 0x10
+    u8 mode; // 0x14
+    u8 unk15[3];
+
+    ModelResourceRequest()
+        : option(0), first(0x30000), second(0x10000), third(0x10000), mode(0) {}
+};
 
 extern "C" {
 
-int FUN_00178b04(...);
+u32 FUN_001581dc(const ModelResourceRequest *request);
+void *FUN_00178b04(u32 size, const char *file, int line);   /* allocate with source location */
+extern MoriModelBinding *_ZN9Obj557b58C1Ev(void *mem, u32 unk0C);   /* binding constructor */
 
-typedef struct fn_0040a884_arg0 fn_0040a884_arg0;
-struct fn_0040a884_arg0 {
-    unsigned char pad_0x0[0x8];
-    undefined4 field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    unsigned char pad_0x10[0x4];
-    undefined4 field_0x14; /* +0x14 */
-    undefined4 field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
-};
+extern char DAT_00526000[];     /* "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelContent.cpp" */
 
-/* stack frame of param_2: 6 slot(s), 18 byte(s) */
-typedef struct {
-    unsigned char sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned char sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern unsigned int FUN_001581dc(unsigned int *);
-/* Supplied declaration required: FUN_00178b04. */
-extern unsigned int _ZN9Obj557b58C1Ev(void);
-
-
-void FUN_0040a884(fn_0040a884_arg0 *param_1,unsigned int param_2)
-
+/* Content constructor: loads the model resource with the content's request options, then creates its binding object (MoriModelContent.cpp line 251). */
+void FUN_0040a884(MoriModelContentLoad *content, u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned char temp_v7;
-  
-  temp_v3 = 0;
-  temp_v6 = 0x10000;
-  temp_v4 = param_1->field_0x18;
-  temp_v5 = param_1->field_0x1c;
-  temp_v7 = (unsigned char)param_1->field_0x14;
-  temp_v2 = param_2;
-  temp_v0 = FUN_001581dc((unsigned int *)&temp_v2);
-  param_1->field_0xc = temp_v0;
-  temp_v1 = 0x1c;
-  FUN_00178b04(0x1c,"c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelContent.cpp",0xfb);
-  temp_v0 = 0;
-  if (temp_v1 != 0) {
-    temp_v0 = _ZN9Obj557b58C1Ev();
-  }
-  param_1->field_0x8 = temp_v0;
-  return;
+    ModelResourceRequest request;
+    request.id = id;
+    request.first = content->unk18;
+    request.second = content->unk1C;
+    request.mode = content->unk14;
+    content->unk0C = FUN_001581dc(&request);
+
+    void *mem = FUN_00178b04(0x1c, DAT_00526000, 0xfb);
+    MoriModelBinding *binding = NULL;
+    if (mem != NULL) {
+        binding = _ZN9Obj557b58C1Ev(mem, content->unk0C);
+    }
+    content->binding = binding;
 }
 
 } /* extern "C" */

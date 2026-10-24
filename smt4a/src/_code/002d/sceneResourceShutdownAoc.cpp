@@ -10,7 +10,7 @@ struct SceneResourceWork {
 extern "C" {
 extern SceneResourceWork* g_sceneResourceWork;
 void aocMainShutdown(void* aoc);
-void* FUN_0047c950(void* aoc);
+void* _ZN7AocMenuD1Ev(void* aoc);
 void asdOperatorDelete(void* object);
 
 // Stop and release the scene's add-on-content manager.
@@ -21,7 +21,7 @@ void sceneResourceShutdownAoc(void)
     if (work->aoc != NULL) {
         aocMainShutdown(work->aoc);
         if (work->aoc != NULL) {
-            asdOperatorDelete(FUN_0047c950(work->aoc));
+            asdOperatorDelete(_ZN7AocMenuD1Ev(work->aoc));
             work->aoc = NULL;
         }
     }

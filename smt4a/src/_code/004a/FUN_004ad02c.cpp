@@ -1,73 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ad02c` (_code @ 0x4ad02c, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: tree insertion and the out-of-memory message (inline literal) now match in structure; remaining differences are frame layout (retail keeps the result pair at [sp] with its address in r7 and the insert link at [sp+8]; the build keeps both above a larger frame and spills the result address) and the scheduling of the allocator virtual call. */
+#include "mobiclip/MoLiveTree.h"
 
-extern "C" {
+typedef void (*MessageCallback)(u32 *object, u32 arg);
 
-int FUN_004d8f4c(int *, int);
+/* What a message mode is handled with. */
+struct MessageHandler {
+    MessageHandler(u8 enabled, MessageCallback callback) : enabled(enabled), callback(callback) {}
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 4 slot(s), 13 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned char sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_4_stack;
+    /* 0x00 */ u8 enabled;
+    /* 0x04 */ MessageCallback callback;
+};
 
-extern unsigned char LAB_004ad144; /* 0x4ad144 */
+/* Handlers by message mode, owned by the player object. */
+struct MessageHandlerTable {
+    /* 0x00 */ MoLive::Allocator *unk00;
+    /* 0x04 */ MoLive::Tree<MessageHandler> handlers;
+};
 
-/* Supplied declaration required: FUN_004d8f4c. */
-
-
-unsigned char FUN_004ad02c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Registers a handler for a mode; true when the table holds one for it afterwards. */
+extern "C" bool FUN_004ad02c(MessageHandlerTable *table, u32 mode, u8 enabled, MessageCallback callback)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  int *piVar2;
-  int temp_v0;
-  int temp_v1;
-  int *piVar5;
-  
-  temp_v1 = param_1 + 8;
-  temp_v0 = temp_v1;
-  piVar5 = (int *)temp_v1;
-  piVar2 = (int *)*(int *)(param_1 + 4);
-  piVar1 = (int *)(param_1 + 4);
-  while (piVar2 != (int *)temp_v1) {
-    piVar5 = piVar2;
-    piVar1 = piVar2;
-    if ((unsigned int)piVar2[4] < param_2) {
-      piVar5 = (int *)temp_v0;
-      piVar1 = piVar2 + 1;
-    }
-    temp_v0 = (int)piVar5;
-    piVar5 = piVar2;
-    piVar2 = (int *)*piVar1;
-  }
-  if ((temp_v0 == temp_v1) || (param_2 < *(unsigned int *)(temp_v0 + 0x10))) {
-    temp_v0 = (**(romwright_code **)**(unsigned int **)(param_1 + 0x28))(*(unsigned int **)(param_1 + 0x28),0x1c);
-    if (temp_v0 != 0) {
-      if ((unsigned int *)(temp_v0 + 0x10) != (unsigned int *)0x0) {
-        *(unsigned int *)(temp_v0 + 0x18) = param_4;
-        *(unsigned int *)(temp_v0 + 0x10) = param_2;
-        *(unsigned int *)(temp_v0 + 0x14) = (param_1 & 0xffffff00) | param_3;
-      }
-      *(int **)(temp_v0 + 8) = piVar5;
-    }
-    else {
-      (**(romwright_code **)(**(int **)(param_1 + 0x28) + 8))(*(int **)(param_1 + 0x28),&LAB_004ad144,0x1c);
-    }
-    if (temp_v0 == 0) {
-      temp_v0 = param_1 + 8;
-    }
-    else {
-      *piVar1 = temp_v0;
-      FUN_004d8f4c((int *)(param_1 + 4),temp_v0);
-    }
-  }
-  return temp_v0 != param_1 + 8;
+    MoLive::Tree<MessageHandler>::InsertResult result =
+        table->handlers.insert(mode, MessageHandler(enabled, callback));
+    return result.node != table->handlers.end();
 }
-
-} /* extern "C" */

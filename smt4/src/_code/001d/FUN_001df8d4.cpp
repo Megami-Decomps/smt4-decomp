@@ -7,7 +7,7 @@ extern "C" {
 int idMapLookup(void);
 int passiveSkillLookupRecord(void);
 int dataTable06Sub1GetRecord(void);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int VectorUnsignedToFloat(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -25,7 +25,7 @@ extern int FUN_0026a604(void);
 /* Supplied declaration required: idMapLookup. */
 /* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 
 
 unsigned int FUN_001df8d4(int param_1)
@@ -71,7 +71,7 @@ unsigned int FUN_001df8d4(int param_1)
         if (*(unsigned char *)(param_1 + 0x2c) == temp_v3) {
           temp_v10 = temp_v10 + temp_v12;
         }
-        FUN_002ae164();
+        dataTable40FindById();
         if ((temp_v5 != 0) && (temp_v6 = 0, 0 < *(int *)(param_1 + 0x10))) {
           do {
             if (*(short *)(*(int *)(param_1 + 0xc) + temp_v6 * 2) != 0) {
@@ -139,7 +139,7 @@ unsigned int FUN_001df8d4(int param_1)
            *(unsigned short *)(*(int *)(param_1 + 4) + temp_v8 * 2);
       *(int *)(param_1 + 0x20) = *(int *)(param_1 + 0x20) + 1;
       temp_v1 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 4) + temp_v8 * 2);
-      FUN_002ae164();
+      dataTable40FindById();
       if ((temp_v1 != 0) && (temp_v9 = 0, 0 < *(int *)(param_1 + 0x10))) {
         do {
           if (*(short *)(*(int *)(param_1 + 0xc) + temp_v9 * 2) != 0) {

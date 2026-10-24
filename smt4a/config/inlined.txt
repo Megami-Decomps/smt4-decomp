@@ -1,0 +1,9 @@
+# Leaf functions armlink inlined (--inline) at every call and then removed as unreferenced, so no
+# copy is left in the image. Each line: <symbol> = 0x<the one ARM instruction>; // retail call sites.
+# The call sites must show the call's argument setup (e.g. mov r0, rN) before the instruction.
+_ZNK9Obj558bd08getCountEv = 0xe5900040; // 0x43236c 0x432394 0x4323d0 (Obj558bd0::printProfile, after mov r0, r4)
+_ZN21Obj558cbcListenerPart8setValueEf = 0xed800a06; // 0x432590 (Obj558cbc ctor, after adds r0, r0, #136; vldr s0, [r5, #20])
+vec2GetSpeed = 0xed900a08; // 0x4058dc 0x405918 0x4059b8 (FUN_004058b0, after add r0, r5, #N)
+recordGetSignedFlags = 0xe1d008da; // 0x25cda4 0x25ce90 (FUN_0025ccc0, after add r0, r0, #52); smt4 keeps the function at 0x2499ac
+uiSpriteGetMode = 0xe1d005fc; // 0x4871cc 0x487218 (FUN_00487124, after mov r0, r7)
+spriteSetVisible = 0xe5c0103c; // 0x472704 0x472710 (FUN_00472568, after mov r1, #1; add r0, r4, #1088 / mov r0, r5)

@@ -22,7 +22,7 @@ void sysMemClear(void *, u32);
 void FUN_00154180(s32, s32, s32, s32);
 f32 FUN_001bc124(f32);
 f32 FUN_001bbf0c(f32);
-void FUN_0013c884(ManagedCamera *, s32);
+void asdCameraInitializeDefaults(ManagedCamera *, s32);
 void FUN_0014f0dc(ManagedCamera *, const Vec3f *, const Vec3f *, const Vec3f *);
 void FUN_001523b8(ManagedCamera *, s32, f32, f32, f32, f32);
 void FUN_0036b824(ManagedCamera *);
@@ -44,7 +44,7 @@ void uniteCameraInitialize(const CameraParameters *parameters)
     target.x -= FUN_001bc124(work->parameters->rotation.y);
     target.y = FUN_001bc124(work->parameters->rotation.x) + target.y;
     target.z -= FUN_001bbf0c(work->parameters->rotation.y);
-    FUN_0013c884(&work->camera, 1);
+    asdCameraInitializeDefaults(&work->camera, 1);
     FUN_0014f0dc(&work->camera, &work->parameters->eye, &target, &work->parameters->up);
     FUN_001523b8(&work->camera, 1, work->parameters->fieldOfView, work->parameters->nearClip,
                  work->parameters->farClip, work->parameters->aspect);

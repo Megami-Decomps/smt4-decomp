@@ -22,24 +22,24 @@ typedef struct Target {
 } Target;
 
 extern void asdMemFree(void *p);
-extern void vectorCopyHeader(u8 *header, Vec3 *vector);
-extern s32 refIsNonNegative(u8 *header);
-extern void FUN_004130c0(Target *target, s32 arg);
+extern void _ZN18OnlineResultRecordaSERKS_(u8 *header, Vec3 *vector);
+extern s32 _ZNK18OnlineResultRecord7isValidEv(u8 *header);
+extern void _ZN9Obj557c908setStateEj(Target *target, s32 arg);
 
-/* Copies the source's position into the target's header; when it is non-negative frees the target's buffer and runs FUN_004130c0 (6), otherwise marks the target invalid. */
+/* Copies the source's position into the target's header; when it is non-negative frees the target's buffer and runs _ZN9Obj557c908setStateEj (6), otherwise marks the target invalid. */
 void FUN_0041481c(Target *target, Source *source)
 {
     Vec3 position = source->position;
 
-    vectorCopyHeader(target->header, &position);
-    if (refIsNonNegative(target->header) == 0) {
+    _ZN18OnlineResultRecordaSERKS_(target->header, &position);
+    if (_ZNK18OnlineResultRecord7isValidEv(target->header) == 0) {
         target->invalid = 1;
     } else {
         if (target->buffer != NULL) {
             asdMemFree(target->buffer);
             target->buffer = NULL;
         }
-        FUN_004130c0(target, 6);
+        _ZN9Obj557c908setStateEj(target, 6);
     }
 }
 

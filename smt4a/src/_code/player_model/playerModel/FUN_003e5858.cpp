@@ -1,117 +1,91 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e5858` (_code @ 0x3e5858, 0x248 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register assignment (object/slot index) and the owned==NULL store is predicated instead of sharing retail's single `unk04 = 0` store */
+#include "classes/Obj557ae8.h"
+
+struct ModelList;
 
 extern "C" {
 
-int FUN_00178b04(int, unsigned char *, int);
-int ptrListRemoveClearOwner(unsigned int);
-int FUN_003e573c(int, int, int, int);
-int FUN_003fd7b4(unsigned int);
-int FUN_003fe86c(unsigned int, int, int);
-int FUN_0040aad4(...);
-int FUN_0040ab7c(unsigned int, int);
-int FUN_0040ab8c(...);
-int handleRegistryRegisterObject(unsigned int, unsigned int);
+extern u32 g_handleRegistry;
 
-typedef int romwright_code(...);
-extern unsigned char LAB_003e5aac; /* 0x3e5aac */
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
+void FUN_003fe86c(ControllerModel *model, u32 index, u8 flags, f32 time, f32 blend);
+u32 FUN_00340f80(Obj557ae8 *object);
+void *FUN_00178b04(u32 size, const char *file, u32 line);
+ModelList *modelListInit(ModelList *list);
+void ptrListRemoveClearOwner(u32 registry, ControllerModel *model);
+void FUN_003e573c(Obj557ae8 *object, s32 index, const char *name, u16 kind);
+void FUN_003fd7b4(ControllerModel *model, f32 x, f32 y, f32 z);
+void FUN_0040aad4(Obj557ae8Child *child, ControllerModel *parent);
+void FUN_0040ab7c(Obj557ae8Child *child, s32 mode);
+s32 FUN_0040ab8c(Obj557ae8Child *child);
+void handleRegistryRegisterObject(u32 registry, ControllerModel *model);
 
-/* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: ptrListRemoveClearOwner. */
-/* Supplied declaration required: FUN_003e573c. */
-/* Supplied declaration required: FUN_003fd7b4. */
-/* Supplied declaration required: FUN_003fe86c. */
-/* Supplied declaration required: FUN_0040aad4. */
-/* Supplied declaration required: FUN_0040ab7c. */
-/* Supplied declaration required: FUN_0040ab8c. */
-extern unsigned int modelListInit(void);
-/* Supplied declaration required: handleRegistryRegisterObject. */
-
-
-void FUN_003e5858(int param_1)
-
+/* Steps the player model: finishes loading the owned model, then advances each of the three slots
+ * through its states (1 loading, 2 releasing, 3 released, 4 retry, 5 queued). */
+void FUN_003e5858(Obj557ae8 *object)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int *puVar5;
-  
-  if ((*(int *)(param_1 + 4) != 0) && (*(int *)(param_1 + 4) == 1)) {
-    if (*(int *)(param_1 + 8) != 0) {
-      temp_v0 = FUN_0040ab8c();
-      if (temp_v0 != 0) {
-        FUN_0040ab7c(*(unsigned int *)(param_1 + 8),2);
-        FUN_0040aad4(*(unsigned int *)(param_1 + 8),0);
-        temp_v2 = *(unsigned int *)(*(int *)(param_1 + 8) + 4);
-        FUN_003fd7b4(temp_v2);
-        FUN_003fe86c(temp_v2,0,2);
-        handleRegistryRegisterObject(g_handleRegistry,temp_v2);
-        temp_v0 = *(int *)(*(int *)(param_1 + 8) + 4);
-        *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 1;
-        *(unsigned int *)(param_1 + 4) = 0;
-      }
-    }
-    else {
-      *(unsigned int *)(param_1 + 4) = 0;
-    }
-  }
-  temp_v0 = 0;
-  do {
-    temp_v3 = param_1 + temp_v0 * 0x5c;
-    puVar5 = (unsigned int *)(temp_v3 + 0x1c);
-    switch(*puVar5) {
-    case 1:
-      temp_v1 = FUN_0040ab8c(*(unsigned int *)(temp_v3 + 0x24));
-      if (temp_v1 != 0) {
-        FUN_0040ab7c(*(unsigned int *)(temp_v3 + 0x24),2);
-        FUN_0040aad4(*(unsigned int *)(temp_v3 + 0x24),*(unsigned int *)(*(int *)(param_1 + 8) + 4));
-        temp_v2 = *(unsigned int *)(*(int *)(temp_v3 + 0x24) + 4);
-        FUN_003fd7b4(temp_v2);
-        handleRegistryRegisterObject(g_handleRegistry,temp_v2);
-        *puVar5 = 0;
-      }
-      break;
-    case 2:
-      *puVar5 = 3;
-      temp_v3 = *(int *)(*(int *)(temp_v3 + 0x24) + 4);
-      *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v3 + 4) | 3;
-      ptrListRemoveClearOwner(g_handleRegistry);
-      break;
-    case 3:
-      if (*(int **)(temp_v3 + 0x24) != (int *)0x0) {
-        (**(romwright_code **)(**(int **)(temp_v3 + 0x24) + 4))();
-        *(unsigned int *)(temp_v3 + 0x24) = 0;
-      }
-      *puVar5 = 0;
-      if (*(char *)(temp_v3 + 0x38) != '\0') {
-        temp_v1 = 0x20;
-        FUN_00178b04(0x20,&LAB_003e5aac,0x38a);
-        temp_v2 = 0;
-        if (temp_v1 != 0) {
-          temp_v2 = modelListInit();
+    if (object->unk04 != 0 && object->unk04 == 1) {
+        if (object->owned != NULL) {
+            if (FUN_0040ab8c(object->owned) != 0) {
+                FUN_0040ab7c(object->owned, 2);
+                FUN_0040aad4(object->owned, NULL);
+                ControllerModel *model = object->owned->model;
+                FUN_003fd7b4(model, 0.0f, 0.0f, 0.0f);
+                FUN_003fe86c(model, 0, 2, 0.0f, 0.0f);
+                handleRegistryRegisterObject(g_handleRegistry, model);
+                object->owned->model->flags |= 1;
+                object->unk04 = 0;
+            }
+        } else {
+            object->unk04 = 0;
         }
-        *(unsigned int *)(temp_v3 + 0x24) = temp_v2;
-        FUN_003e573c(param_1,temp_v0,temp_v3 + 0x38,*(unsigned short *)(temp_v3 + 0x20));
-      }
-      break;
-    case 4:
-      *puVar5 = 1;
-      break;
-    case 5:
-      if ((*(int *)(param_1 + 4) == 0) &&
-         (temp_v1 = FUN_0040ab8c(*(unsigned int *)(param_1 + 8)), temp_v1 != 0)) {
-        FUN_003e573c(param_1,temp_v0,temp_v3 + 0x38,*(unsigned short *)(temp_v3 + 0x20));
-      }
     }
-    temp_v0 = temp_v0 + 1;
-    if (temp_v0 >= 3) {
-      return;
+    bool finished = false;
+    for (s32 i = 0; i < 3; i++) {
+        Obj557ae8Slot *slot = &object->slots[i];
+        switch (slot->state) {
+        case 1:
+            if (FUN_0040ab8c(slot->child) != 0) {
+                FUN_0040ab7c(slot->child, 2);
+                FUN_0040aad4(slot->child, object->owned->model);
+                ControllerModel *model = slot->child->model;
+                FUN_003fd7b4(model, 0.0f, 0.0f, 0.0f);
+                handleRegistryRegisterObject(g_handleRegistry, model);
+                finished = true;
+                slot->state = 0;
+            }
+            break;
+        case 2: {
+            slot->state = 3;
+            ControllerModel *model = slot->child->model;
+            model->flags |= 3;
+            ptrListRemoveClearOwner(g_handleRegistry, model);
+            break;
+        }
+        case 3:
+            if (slot->child != NULL) {
+                delete slot->child;
+                slot->child = NULL;
+            }
+            slot->state = 0;
+            if (slot->name[0] != '\0') {
+                void *storage = FUN_00178b04(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\player_model\\playerModel.cpp", 906);
+                slot->child = storage != NULL ? (Obj557ae8Child *)modelListInit((ModelList *)storage) : NULL;
+                FUN_003e573c(object, i, slot->name, slot->kind);
+            }
+            break;
+        case 5:
+            if (object->unk04 == 0 && FUN_0040ab8c(object->owned) != 0) {
+                FUN_003e573c(object, i, slot->name, slot->kind);
+            }
+            break;
+        case 4:
+            slot->state = 1;
+            break;
+        }
     }
-  } while( 1 );
+    if (finished && object->unk04 == 0) {
+        FUN_00340f80(object);
+    }
 }
 
 } /* extern "C" */

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001068e4(int *, int, char [23], int);
 int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
-int FUN_002e7908(unsigned int, int *);
+int _ZN12OnlineResultC1ERKj(unsigned int, int *);
 int _ZN9Obj55aff4aSERKS_(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002f12d0(unsigned int, unsigned char [4]);
@@ -29,8 +29,8 @@ extern char s__V_V_V_V___00589588[23]; /* 0x589588 */
 extern int onlineContextGetInstance(void);
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-extern int *operatorNew(unsigned int);
-/* Supplied declaration required: FUN_002e7908. */
+extern int *_Znwj(unsigned int);
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 /* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
@@ -66,7 +66,7 @@ void FUN_00116b1c(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   *(unsigned char *)(param_2 + 0x78) = param_5;
   *(unsigned int *)(param_2 + 0x7c) = param_6;
   *(unsigned int *)(param_2 + 0x104) = param_7;
-  piVar2 = (int *)operatorNew(8);
+  piVar2 = (int *)_Znwj(8);
   if (piVar2 != (int *)0x0) {
     *piVar2 = (int)&DAT_00558950;
     *(unsigned char *)(piVar2 + 1) = 1;
@@ -87,7 +87,7 @@ void FUN_00116b1c(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   }
   else {
     temp_v3 = 0x80690009;
-    FUN_002e7908(temp_v6,&temp_v3);
+    _ZN12OnlineResultC1ERKj(temp_v6,&temp_v3);
   }
   _ZN9Obj55b28cD1Ev(temp_v4);
   return;

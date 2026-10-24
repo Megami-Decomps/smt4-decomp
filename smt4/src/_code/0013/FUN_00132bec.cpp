@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_002aa984(int *, unsigned int, unsigned int);
-int FUN_002ac5f4(unsigned char [16]);
+int _ZN2nw3snd8internal14BankFileReaderC1EPKv(unsigned char [16]);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_002aa984. */
 extern unsigned int *FUN_002ac5d8(unsigned char *);
-/* Supplied declaration required: FUN_002ac5f4. */
+/* Supplied declaration required: _ZN2nw3snd8internal14BankFileReaderC1EPKv. */
 extern unsigned int FUN_002ac780(int);
 
 
@@ -31,7 +31,7 @@ unsigned int FUN_00132bec(int *param_1,unsigned int param_2,unsigned int param_3
     return 0;
   }
   if ((param_3 & 8) != 0) {
-    FUN_002ac5f4(temp_v3);
+    _ZN2nw3snd8internal14BankFileReaderC1EPKv(temp_v3);
     puVar3 = (unsigned int *)FUN_002ac5d8(temp_v3);
     if (puVar3 == (unsigned int *)0x0) {
       return 0;

@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: randomGetNormalizedFloat. */
 /* Supplied declaration required: FUN_002929d8. */
 /* Supplied declaration required: asdOperatorNew. */
-extern int FUN_0034afd4(void);
+extern int _ZN9Obj4208f8C1EP12AsdMdlObject(void);
 
 
 int FUN_00349fc0(int param_1)
@@ -55,7 +55,7 @@ int FUN_00349fc0(int param_1)
     temp_v0 = 0;
   }
   else {
-    temp_v0 = FUN_0034afd4();
+    temp_v0 = _ZN9Obj4208f8C1EP12AsdMdlObject();
   }
   temp_v3 = 1.0f;
   temp_v2 = 0.0f;

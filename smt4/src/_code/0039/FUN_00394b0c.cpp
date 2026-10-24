@@ -1,37 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00394b0c` (_code @ 0x394b0c, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bfc24(int, int, unsigned int, int);
+/* The battle main state: only the turn counter at 0x1FC4 is named. */
+struct BattleMainView {
+    /* 0x0000 */ u8 unk0000[0x1FC4];
+    /* 0x1FC4 */ s16 count;
+};
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+BattleMainView *btlGetMainState(void);
+u32 FUN_002bfdc4(void);
+void FUN_002bfc24(s32 a, u32 id, u32 value, s32 b, f32 x, f32 y);
 
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_002bfc24. */
-extern unsigned int FUN_002bfdc4(void);
-
-
+/* Plays one of two sounds, chosen by whether the battle count is at most 1. */
 void FUN_00394b0c(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = btlGetMainState();
-  if (*(short *)(temp_v0 + 0x1fc4) < 2) {
-    temp_v1 = FUN_002bfdc4();
-    FUN_002bfc24(1,0x7a576,temp_v1,4);
-    return;
-  }
-  temp_v1 = FUN_002bfdc4();
-  FUN_002bfc24(1,0x7a5d0,temp_v1,4);
-  return;
+    if (btlGetMainState()->count <= 1) {
+        FUN_002bfc24(1, 0x7A576, FUN_002bfdc4(), 4, 0.707f, 0.707f);
+    } else {
+        FUN_002bfc24(1, 0x7A5D0, FUN_002bfdc4(), 4, 0.707f, 0.707f);
+    }
 }
 
 } /* extern "C" */

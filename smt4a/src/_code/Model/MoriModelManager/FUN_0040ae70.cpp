@@ -77,7 +77,7 @@ extern unsigned int FUN_001581dc(unsigned int *);
 /* Supplied declaration required: FUN_003fed38. */
 /* Supplied declaration required: FUN_00406834. */
 /* Supplied declaration required: moriSceneSetFogDefaults. */
-extern void *FUN_00406e6c(void);
+extern void *_ZN9Obj557b68C1Ev(void);
 
 
 void FUN_0040ae70(fn_0040ae70_arg0 *param_1,fn_0040ae70_arg1 *param_2)
@@ -100,7 +100,7 @@ void FUN_0040ae70(fn_0040ae70_arg0 *param_1,fn_0040ae70_arg1 *param_2)
     FUN_00178b04(0x194,&LAB_0040af28,0x17f);
     pvVar2 = (void *)0x0;
     if (temp_v0 != 0) {
-      pvVar2 = (void *)FUN_00406e6c();
+      pvVar2 = (void *)_ZN9Obj557b68C1Ev();
     }
     param_1->field_0x4 = pvVar2;
     moriSceneSetFogDefaults();

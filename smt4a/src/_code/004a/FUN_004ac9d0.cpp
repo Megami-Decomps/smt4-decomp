@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ac9d0` (_code @ 0x4ac9d0, 0x184 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: BLOCKED: MoLive ring buffer (RingBuffer<ObjectHandle>: data +0x30, capacity +0x34, count +0x38, head +0x3c) sums and inserts a range through FUN_00521898/FUN_00521984 and then resets a handle (ObjectHandle::detach); needs the RingBuffer member functions named and the Stream/Player class layout (include/mobiclip/MoLivePlayer.h has the first pieces). */
 #include "romwright_types.h"
 
 extern "C" {

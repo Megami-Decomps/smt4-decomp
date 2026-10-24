@@ -19,7 +19,7 @@ typedef struct SlotOwner {
 } SlotOwner;
 
 extern Slot *saveGetIndexedMapValue(int index);
-extern Slot *FUN_002ae164(u32 id);
+extern Slot *dataTable40FindById(u32 id);
 
 /* Finds the id in the owner's list whose slot has the owner's rank (or, with no valid rank, the number of active slots). */
 u32 FUN_0028d24c(SlotOwner *owner)
@@ -39,7 +39,7 @@ u32 FUN_0028d24c(SlotOwner *owner)
         for (i = 0; i < owner->idCount; i++) {
             u32 id = owner->ids[i];
 
-            if (FUN_002ae164(id)->rank == rank) {
+            if (dataTable40FindById(id)->rank == rank) {
                 return id;
             }
         }

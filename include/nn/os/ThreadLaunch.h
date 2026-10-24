@@ -9,7 +9,8 @@ struct ThreadArgumentDescriptor {
     /* 0x04 */ void (*callbacks[3])(void);
 };
 struct ThreadStackInfo {
-    /* 0x00 */ u8 unk00[8];
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
     /* 0x08 */ u32 address;
     /* 0x0C */ u32 size;
 };

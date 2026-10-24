@@ -9,7 +9,7 @@ int FUN_0013c174(unsigned char [68], int *, int);
 int FUN_00178b04(int, unsigned char *, int);
 int settings5BSetValue(int);
 int controllerApplyAtUnitScale(void);
-int FUN_003f9e80(void);
+int _ZN9Obj557af8C1EPK21AsdAnimCameraResource(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -27,7 +27,7 @@ extern int g_lmapView; /* 0x5806a4 */
 extern int settings5BGetValue(void);
 /* Supplied declaration required: settings5BSetValue. */
 /* Supplied declaration required: controllerApplyAtUnitScale. */
-/* Supplied declaration required: FUN_003f9e80. */
+/* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
 
 
 void FUN_0035243c(unsigned int param_1,unsigned int param_2)
@@ -67,7 +67,7 @@ void FUN_0035243c(unsigned int param_1,unsigned int param_2)
   temp_v0 = 0x48;
   FUN_00178b04(0x48,&LAB_00352538,0x15ad);
   if (temp_v0 != 0) {
-    FUN_003f9e80();
+    _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
   }
   *(int *)(g_lmapView + 700) = temp_v0;
   controllerApplyAtUnitScale();

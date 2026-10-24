@@ -6,8 +6,8 @@ extern void *g_handleRegistry;
 extern const char DAT_0053295c[];
 void *FUN_0013c174(u32 resource, u32 *entry, s32 flags);
 void *FUN_00178b04(u32 size, const char *source, u32 line);
-MoveCameraResource *FUN_003f9e80(MoveCameraResource *resource, void *data);
-void FUN_0013c884(ManagedCamera *camera, s32 enabled);
+MoveCameraResource *_ZN9Obj557af8C1EPK21AsdAnimCameraResource(MoveCameraResource *resource, void *data);
+void asdCameraInitializeDefaults(ManagedCamera *camera, s32 enabled);
 void uiSetFloatPair(ManagedCamera *camera, f32 distance, f32 scale);
 void FUN_0014f0dc(ManagedCamera *camera, const Vec3f *eye, const Vec3f *target, const Vec3f *up);
 void FUN_001523b8(ManagedCamera *camera, u32 pivot, f32 fieldOfView, f32 nearClip, f32 farClip, f32 aspect);
@@ -25,11 +25,11 @@ void FUN_00407110(MoveCameraCtrlWork *work, u32 resourceId)
     void *data = FUN_0013c174(resourceId, &entry, 1);
     MoveCameraResource *resource = static_cast<MoveCameraResource *>(FUN_00178b04(sizeof(MoveCameraResource), DAT_0053295c, 0x29));
     if (resource != NULL)
-        resource = FUN_003f9e80(resource, data);
+        resource = _ZN9Obj557af8C1EPK21AsdAnimCameraResource(resource, data);
     work->resource = resource;
     work->frameCount = resource->track->frameCount;
     work->auxiliaryCount = resource->track->auxiliaryCount;
-    FUN_0013c884(&work->camera, 1);
+    asdCameraInitializeDefaults(&work->camera, 1);
     work->eye.x = 0.0f;
     work->eye.y = 0.0f;
     work->eye.z = 0.0f;

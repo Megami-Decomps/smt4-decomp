@@ -1,34 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024496c` (_code @ 0x24496c, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001642e4(unsigned int, int *, int, int);
-int FUN_001abbc4(void);
+struct EplSlot {
+    /* 0x00 */ u8 unk00[88];
+    /* 0x58 */ u32 handle;
+    /* 0x5c */ u32 timer;
+    /* 0x60 */ u8 unk60[4];
+};
 
-extern int g_eplSlots; /* 0x580c8c */
+struct EplSlots {
+    /* 0x00 */ u8 unk00[12];
+    /* 0x0c */ EplSlot slots[16];
+};
 
-/* Supplied declaration required: FUN_001642e4. */
-/* Supplied declaration required: FUN_001abbc4. */
+extern EplSlots *g_eplSlots;
 
+s32 FUN_001642e4(u32 id, u32 *arg, s32 count, s32 flags);
+u32 FUN_001abbc4(void);
 
-int FUN_0024496c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Starts the effect in free slot `index` (0..15) and returns the index, or -1 when the slot is out of range or busy. */
+s32 FUN_0024496c(s32 index, u32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int uStack_10;
-  
-  if ((param_1 < 0x10) && (temp_v0 = g_eplSlots + param_1 * 100, *(int *)(temp_v0 + 0x68) == 0)) {
-    uStack_10 = param_4;
-    FUN_001642e4(param_2,&uStack_10,1,0x80);
-    *(unsigned int *)(temp_v0 + 100) = param_2;
-    FUN_001abbc4();
-    *(unsigned int *)(temp_v0 + 0x68) = param_2;
-    return param_1;
-  }
-  return -1;
+    EplSlots *table = g_eplSlots;
+
+    if (index < 16) {
+        EplSlot *slot = &table->slots[index];
+        u32 parameter;
+
+        if (slot->timer == 0) {
+            slot->handle = FUN_001642e4(id, &parameter, 1, 0x80);
+            slot->timer = FUN_001abbc4();
+            return index;
+        }
+    }
+    return -1;
 }
 
 } /* extern "C" */

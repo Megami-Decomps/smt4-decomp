@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_002e32a4(int kind, ...);
+void _ZN4__rw10__rw_throwEiz(int kind, ...);
 int asdOperatorDeleteArray(void);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned char LAB_00413e24; /* 0x413e24 */
 
-/* Supplied declaration required: FUN_002e32a4. */
+/* Supplied declaration required: _ZN4__rw10__rw_throwEiz. */
 extern unsigned char *rt_malloc(void);
 /* Supplied declaration required: asdOperatorDeleteArray. */
 
@@ -43,7 +43,7 @@ void FUN_00413af4(int *param_1,int param_2,unsigned int param_3)
   temp_v2 = (int)(((long long)(int)temp_v1 * -0x4de9bd37 + ((unsigned long long)temp_v1 << 0x20)) >> 0x20);
   if ((unsigned int)((temp_v2 >> 7) - (temp_v2 >> 0x1f)) <= param_3) {
     temp_v2 = (int)(((long long)(int)temp_v1 * -0x4de9bd37 + ((unsigned long long)temp_v1 << 0x20)) >> 0x20);
-    FUN_002e32a4(9,&LAB_00413e24,&LAB_00413e24,param_3,(temp_v2 >> 7) - (temp_v2 >> 0x1f));
+    _ZN4__rw10__rw_throwEiz(9,&LAB_00413e24,&LAB_00413e24,param_3,(temp_v2 >> 7) - (temp_v2 >> 0x1f));
   }
   temp_v2 = *(int *)(param_2 + 0xe8);
   *param_1 = 0;

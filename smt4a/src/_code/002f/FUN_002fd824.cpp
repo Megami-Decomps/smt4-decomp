@@ -6,7 +6,7 @@ extern "C" {
 
 int dataTable04FindById(void);
 int FUN_00321a98(int *, int *);
-int FUN_0034a290(void);
+int dataTable41FindById(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ extern int idIsAbove400(int);
 extern int gameGetSlotRecord(void);
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_00321a98. */
-/* Supplied declaration required: FUN_0034a290. */
+/* Supplied declaration required: dataTable41FindById. */
 
 
 void FUN_002fd824(int *param_1,int *param_2)
@@ -32,7 +32,7 @@ void FUN_002fd824(int *param_1,int *param_2)
   temp_v1 = idIsAbove400(*param_1);
   temp_v2 = *param_1;
   if (temp_v1 != 0) {
-    FUN_0034a290();
+    dataTable41FindById();
     temp_v3 = *(short *)(temp_v2 + 0x22);
   }
   else {
@@ -42,7 +42,7 @@ void FUN_002fd824(int *param_1,int *param_2)
   temp_v1 = idIsAbove400(*param_2);
   temp_v2 = *param_2;
   if (temp_v1 != 0) {
-    FUN_0034a290();
+    dataTable41FindById();
     temp_v0 = *(short *)(temp_v2 + 0x22);
   }
   else {

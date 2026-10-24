@@ -7,7 +7,7 @@ extern "C" {
 int uiSpriteSetImageKeyframe(...);
 int timerStart(...);
 int FUN_002bd954(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int paramsInit(...);
 int memClear(...);
 int asdMemAlloc(...);
@@ -45,7 +45,7 @@ extern unsigned int *DAT_0044e144; /* 0x44e144 */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -98,11 +98,11 @@ void FUN_0028c040(void)
     FUN_002bd954(puVar1 + 0xe3,0x17,0,puVar1 + 9,1);
     timerStart(puVar1 + 0xe3,1,0);
     FUN_002bd954(puVar1 + 0x106,0x1a,1,puVar1 + 9,1);
-    FUN_002bee58(puVar1 + 0x106,0);
+    spriteStartAnimationByIndex(puVar1 + 0x106,0);
     FUN_002bd954(puVar1 + 0x129,0x1a,2,puVar1 + 9,1);
-    FUN_002bee58(puVar1 + 0x129,1);
+    spriteStartAnimationByIndex(puVar1 + 0x129,1);
     FUN_002bd954(puVar1 + 0x14c,0x1a,0,puVar1 + 9,1);
-    FUN_002bee58(puVar1 + 0x14c,2);
+    spriteStartAnimationByIndex(puVar1 + 0x14c,2);
     FUN_002bd954(puVar1 + 0x16f,0x1a,0,puVar1 + 9,1);
     timerStart(puVar1 + 0x16f,7,0);
     temp_v0 = 0;
@@ -118,19 +118,19 @@ void FUN_0028c040(void)
     FUN_002bd954(puVar1 + 0x57,0x1a,0,puVar1 + 9,1);
     uiSpriteSetImageKeyframe(puVar1 + 0x57,4,0);
     FUN_002bd954(puVar1 + 0x7a,0x1a,0,puVar1 + 9,1);
-    FUN_002bee58(puVar1 + 0x7a,6);
+    spriteStartAnimationByIndex(puVar1 + 0x7a,6);
     FUN_002bd954(puVar1 + 0x9d,0x1a,0,puVar1 + 9,1);
-    FUN_002bee58(puVar1 + 0x9d,7);
+    spriteStartAnimationByIndex(puVar1 + 0x9d,7);
     FUN_002bd954(puVar1 + 0xc0,0x1a,0,puVar1 + 9,1);
-    FUN_002bee58(puVar1 + 0xc0,8);
+    spriteStartAnimationByIndex(puVar1 + 0xc0,8);
     FUN_002bd954(puVar1 + 0x34,0x1a,0,puVar1 + 9,1);
-    FUN_002bee58(puVar1 + 0x34,4);
+    spriteStartAnimationByIndex(puVar1 + 0x34,4);
     FUN_002bd954(puVar1 + 0x192,0x1a,0,puVar1 + 9,1);
     timerStart(puVar1 + 0x192,8,0);
     FUN_002bd954(puVar1 + 0x1b5,0x1a,0,puVar1 + 9,1);
     timerStart(puVar1 + 0x1b5,9,0);
     FUN_002bd954(puVar1 + 0x1d8,0x1a,0,puVar1 + 9,1);
-    FUN_002bee58(puVar1 + 0x1d8,5);
+    spriteStartAnimationByIndex(puVar1 + 0x1d8,5);
   }
   g_gameGlobals = g_gameGlobals + '\x01';
   return;

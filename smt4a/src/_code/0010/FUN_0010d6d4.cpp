@@ -6,7 +6,7 @@ extern "C" {
 
 int strAssign(unsigned char [32], int, int, unsigned int);
 int streamReaderReadU32(unsigned char [8], unsigned char [8]);
-int FUN_002e7908(unsigned int *, int *);
+int _ZN12OnlineResultC1ERKj(unsigned int *, int *);
 int FUN_002e9ff4(int *);
 int strDestroy(unsigned char [32]);
 int FUN_002ecad4(unsigned int *, unsigned int, int);
@@ -28,14 +28,14 @@ extern unsigned char DAT_0055af54; /* 0x55af54 */
 
 /* Supplied declaration required: strAssign. */
 /* Supplied declaration required: streamReaderReadU32. */
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 extern unsigned int *_ZN9Obj5593b8C1Ev(unsigned char *, int, int *);
 /* Supplied declaration required: FUN_002e9ff4. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ecad4. */
 /* Supplied declaration required: FUN_002f4e14. */
 extern int FUN_002f4e70(unsigned char *);
-extern int refIsNonNegative(unsigned int *);
+extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
 /* Supplied declaration required: FUN_002f4e90. */
 /* Supplied declaration required: FUN_002f4f00. */
 
@@ -62,7 +62,7 @@ void FUN_0010d6d4(unsigned int *param_1,int param_2,int *param_3)
   temp_v2 = param_3[1] - *param_3;
   if (temp_v2 < 5) {
     temp_v6 = 0x80050001;
-    FUN_002e7908(param_1,&temp_v6);
+    _ZN12OnlineResultC1ERKj(param_1,&temp_v6);
   }
   else {
     puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev(temp_v9,param_3[1],param_3 + 2);
@@ -79,10 +79,10 @@ void FUN_0010d6d4(unsigned int *param_1,int param_2,int *param_3)
       }
       streamReaderReadU32(temp_v3,temp_v10);
       temp_v8 = 0x80050001;
-      FUN_002e7908(param_1,&temp_v8);
+      _ZN12OnlineResultC1ERKj(param_1,&temp_v8);
     }
     else {
-      temp_v1 = refIsNonNegative((unsigned int *)&temp_v7);
+      temp_v1 = _ZNK18OnlineResultRecord7isValidEv((unsigned int *)&temp_v7);
       if (temp_v1 != 0) {
         (**(romwright_code **)(**(int **)(param_2 + 0x9c) + 0x50))(*(int **)(param_2 + 0x9c),temp_v3,temp_v0)
         ;

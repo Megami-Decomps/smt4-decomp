@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail builds the stacked task arguments through ip and keeps g_btlAiScript's address in r5 (20-byte frame); this allocates r5/r6 with a 16-byte frame */
 #include "battle/btlAIScript.h"
 #include "AsdSDK/AsdDebug.h"
 

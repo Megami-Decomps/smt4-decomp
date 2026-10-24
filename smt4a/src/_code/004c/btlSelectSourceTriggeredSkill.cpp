@@ -5,7 +5,7 @@
 extern "C" {
 BtlCombatantEntryA *FUN_003f0e20(BattleMaskState *, u32);
 void source4CCopyHalves(const BtlCombatantEntryA *, u16 *);
-SourceMetadataFlags *FUN_0034a290(u32);
+SourceMetadataFlags *dataTable41FindById(u32);
 s32 FUN_003ec77c(BattleMaskState *);
 s32 lcgRandomRange(u32);
 
@@ -31,14 +31,14 @@ s32 btlSelectSourceTriggeredSkill(u32 id, s32 randomize)
     s32 chanceMultiplier = 1;
     for (s32 i = 0; i < 9; ++i) {
         if (sources[i]) {
-            SourceMetadataFlags *metadata = FUN_0034a290(sources[i]);
+            SourceMetadataFlags *metadata = dataTable41FindById(sources[i]);
             if (metadata != NULL && (metadata->flags & 4))
                 chanceMultiplier = 2;
         }
     }
     for (s32 i = 0; i < 9; ++i) {
         if (sources[i]) {
-            SourceMetadataFlags *metadata = FUN_0034a290(sources[i]);
+            SourceMetadataFlags *metadata = dataTable41FindById(sources[i]);
             if (metadata != NULL && metadata->trigger.skill != 0 &&
                 !FUN_003ec77c(state)) {
                 s32 chance = metadata->trigger.chance;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022ea70(...);
-int FUN_00230cc0(int, unsigned int, int, int, unsigned int);
+int uiRectDrawAtBottomRight(int, unsigned int, int, int, unsigned int);
 int FUN_00231bcc(int, int, int, int, unsigned int, int);
 int FUN_002332e8(...);
 int FUN_00240d5c(int);
@@ -23,7 +23,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0022ea70. */
-/* Supplied declaration required: FUN_00230cc0. */
+/* Supplied declaration required: uiRectDrawAtBottomRight. */
 /* Supplied declaration required: FUN_00231bcc. */
 /* Supplied declaration required: FUN_002332e8. */
 extern int flaggedValueHolderGetTotal(int);
@@ -76,7 +76,7 @@ void FUN_003a2960(int param_1,unsigned int param_2)
   case 8:
     param_2 = 4;
   }
-  FUN_00230cc0(param_1 + 0x380,param_2,0,0,*(unsigned int *)(param_1 + 0x37c));
+  uiRectDrawAtBottomRight(param_1 + 0x380,param_2,0,0,*(unsigned int *)(param_1 + 0x37c));
   temp_v11 = *(unsigned int *)(param_1 + 0x37c);
   FUN_00231bcc(param_1 + 0x380,*(int *)(param_1 + 0x860) + 0x5a,0,0,temp_v11,1);
   FUN_003a07a0(param_1,*(unsigned int *)(param_1 + 0x860));

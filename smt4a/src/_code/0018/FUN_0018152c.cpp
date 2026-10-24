@@ -1,116 +1,97 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018152c` (_code @ 0x18152c, 0x280 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the placeholder rectangle is stored with one stm (retail: four separate mov/str) and the constant/global registers are assigned differently (x in r9 vs sl). */
+#include "common.h"
+
+/* The icon sheet cell to draw: source x range, then y range. */
+struct IconRect {
+    s32 left;
+    s32 right;
+    s32 top;
+    s32 bottom;
+};
+
+struct IconRecord {
+    /* 0x00 */ u8 unk00[0x9C];
+    /* 0x9C */ u16 icon;
+};
+
+struct IconFlagsRecord {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u16 flags;
+};
+
+struct SlotRecord {
+    /* 0x00 */ u8 unk00[0x60];
+    /* 0x60 */ u16 flags;
+};
 
 extern "C" {
+extern u32 g_aocSystem;
+s32 gameFlagIsSet(u32 flag);
+void FUN_001835b4(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority);
+void FUN_001849bc(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority, const IconRect *rect);
+IconRecord *FUN_00184310(u16 id);
+IconFlagsRecord *dataTable00FindById(u16 id);
+SlotRecord *slotRecordFindById(u16 id);
+u32 markerKindGetColor(s32 kind);
+void drawSetColorFromRGBA8(u32 color);
+s32 FUN_00191f18(u32 package, s32 icon);
+void FUN_00191ea8(u32 package, s32 icon, s32 x, s32 y, s32 z);
+void FUN_00183bb0(void);
 
-int FUN_001835b4(int, int, int, unsigned int, unsigned int, unsigned int);
-int FUN_00183bb0(void);
-int FUN_00184310(void);
-int FUN_001849bc(...);
-int drawSetColorFromRGBA8(void);
-int FUN_00191ea8(...);
-int FUN_00191f18(unsigned int, int);
-int dataTable00FindById(void);
-int markerKindGetColor(int);
-
-/* stack frame of param_5: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_5_stack;
-
-extern unsigned int g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_001849bc. */
-/* Supplied declaration required: drawSetColorFromRGBA8. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_00191ea8. */
-/* Supplied declaration required: FUN_00191f18. */
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: markerKindGetColor. */
-extern int slotRecordFindById(unsigned int);
-
-
-void FUN_0018152c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,int param_5)
-
+// Draw an item or status icon (id < 0: the placeholder), optionally tinted when the unit's slot is marked.
+void FUN_0018152c(s32 id, s32 x, s32 y, s32 z, s32 tint)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned short temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  
-  if ((int)param_1 < 0) {
-    temp_v0 = gameFlagIsSet(0x11);
-    if (temp_v0 == 0) {
-      temp_v0 = FUN_00191f18(g_aocSystem,0x25d);
-      if (temp_v0 == 0) {
-        temp_v3 = 0x50;
-        temp_v4 = 0x60;
-        temp_v5 = 0x1a0;
-        temp_v6 = 0x1c0;
-        FUN_001849bc(2,0x1b,3000,param_2,param_3,param_4,&temp_v3);
+    if (id < 0) {
+        if (gameFlagIsSet(17) != 0) {
+            FUN_001835b4(2, 27, 1000, x, y, z);
+            return;
+        }
+        s32 placeholder = 0x25D;
+        if (FUN_00191f18(g_aocSystem, placeholder) != 0) {
+            FUN_00191ea8(g_aocSystem, placeholder, x, y, z);
+            return;
+        }
+        IconRect rect;
+        rect.left = 0x50;
+        rect.right = 0x60;
+        rect.top = 0x1A0;
+        rect.bottom = 0x1C0;
+        FUN_001849bc(2, 27, 3000, x, y, z, &rect);
         return;
-      }
-      FUN_00191ea8(g_aocSystem,0x25d,param_2,param_3,param_4);
-      return;
     }
-    FUN_001835b4(2,0x1b,1000,param_2,param_3,param_4);
-  }
-  else {
-    temp_v1 = param_1 & 0xffff;
-    FUN_00184310();
-    temp_v2 = param_1;
-    dataTable00FindById();
-    if ((*(unsigned short *)(temp_v2 + 2) & 0x8000) != 0) {
-      FUN_001835b4(2,0x1b,2000,param_2,param_3,param_4);
-      return;
+    IconRecord *record = FUN_00184310((u16)id);
+    if ((dataTable00FindById((u16)id)->flags & 0x8000) != 0) {
+        FUN_001835b4(2, 27, 2000, x, y, z);
+        return;
     }
-    if (((param_5 != 0) && (temp_v0 = slotRecordFindById(param_1 & 0xffff), temp_v0 != 0)) &&
-       ((*(unsigned short *)(temp_v0 + 0x60) & 2) != 0)) {
-      markerKindGetColor(1);
-      drawSetColorFromRGBA8();
+    if (tint != 0) {
+        SlotRecord *slot = slotRecordFindById((u16)id);
+        if (slot != NULL && (slot->flags & 2) != 0) {
+            drawSetColorFromRGBA8(markerKindGetColor(1));
+        }
     }
-    temp_v0 = FUN_00191f18(g_aocSystem,*(unsigned short *)(temp_v1 + 0x9c));
-    if (temp_v0 != 0) {
-      FUN_00191ea8(g_aocSystem,*(unsigned short *)(temp_v1 + 0x9c),param_2,param_3,param_4);
+    if (FUN_00191f18(g_aocSystem, record->icon) != 0) {
+        FUN_00191ea8(g_aocSystem, record->icon, x, y, z);
+    } else if (record->icon < 0x200) {
+        s32 icon = record->icon;
+        IconRect rect;
+        rect.left = icon / 16 * 16;
+        rect.right = rect.left + 16;
+        rect.top = icon % 16 * 32;
+        rect.bottom = rect.top + 32;
+        FUN_001849bc(2, 27, 0, x, y, z, &rect);
+    } else {
+        s32 icon = record->icon - 0x200;
+        IconRect rect;
+        rect.left = icon / 16 * 16;
+        rect.right = rect.left + 16;
+        rect.top = icon % 16 * 32;
+        rect.bottom = rect.top + 32;
+        FUN_001849bc(2, 27, 3000, x, y, z, &rect);
     }
-    else {
-      temp_v1 = (unsigned int)*(unsigned short *)(temp_v1 + 0x9c);
-      if (temp_v1 < 0x200) {
-        temp_v3 = temp_v1 & 0xfffffff0;
-        temp_v4 = temp_v3 + 0x10;
-        temp_v5 = (temp_v1 % 0x10) * 0x20;
-        temp_v6 = temp_v5 + 0x20;
-        FUN_001849bc(2,0x1b,0,param_2,param_3,param_4,&temp_v3);
-      }
-      else {
-        temp_v3 = ((int)(temp_v1 - 0x200) / 0x10) * 0x10;
-        temp_v4 = temp_v3 + 0x10;
-        temp_v5 = ((int)(temp_v1 - 0x200) % 0x10) * 0x20;
-        temp_v6 = temp_v5 + 0x20;
-        FUN_001849bc(2,0x1b,3000,param_2,param_3,param_4,&temp_v3);
-      }
+    if (tint != 0) {
+        FUN_00183bb0();
     }
-    if (param_5 != 0) {
-      FUN_00183bb0();
-      return;
-    }
-  }
-  return;
 }
 
-} /* extern "C" */
+}

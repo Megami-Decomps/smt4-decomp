@@ -1,51 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00379958` (_code @ 0x379958, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "addon/PackageSelection.h"
 
 extern "C" {
 
-int FUN_0046c35c(int, int, int);
-int packageFindIndexedRecord(int, unsigned int);
+extern void *g_aocSystem;
+void *dataTableGet(int table, int section);
+u32 FUN_0046c35c(void *aocSystem, s32 kind, u32 tableIndex);
+PackageIndexedRecord *packageFindIndexedRecord(void *aocSystem, u32 index);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int g_aocSystem; /* 0x570280 */
-
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0046c35c. */
-/* Supplied declaration required: packageFindIndexedRecord. */
-
-
-int FUN_00379958(unsigned int param_1)
-
+// Finds record `index` of the base type-40 table, continuing into the add-on packages' tables.
+PackageIndexedRecord *FUN_00379958(u32 index)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = dataTableGet(0x32,0);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  if (param_1 < temp_v2) {
-    temp_v1 = temp_v1 + param_1 * 0x24;
-  }
-  else {
-    temp_v1 = g_aocSystem;
-    FUN_0046c35c(g_aocSystem,0x28,0);
-    if (param_1 < temp_v1 + temp_v2) {
-      temp_v1 = g_aocSystem;
-      packageFindIndexedRecord(g_aocSystem,param_1 - temp_v2);
-      return temp_v1;
+    void *section = dataTableGet(0x32, 0);
+    PackageIndexedRecord *entries = (PackageIndexedRecord *)dataTableGetEntries(section);
+    u32 count = dataTableGetCount(section);
+
+    if (index < count) {
+        return &entries[index];
     }
-    temp_v1 = 0;
-  }
-  return temp_v1;
+    if (index < FUN_0046c35c(g_aocSystem, 0x28, 0) + count) {
+        return packageFindIndexedRecord(g_aocSystem, index - count);
+    }
+    return NULL;
 }
 
 } /* extern "C" */

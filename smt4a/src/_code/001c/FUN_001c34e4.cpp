@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp1C; /* 0x1c: local_1c */
 } param_2_stack;
 
-extern unsigned int FUN_001b1f04(void);
+extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 /* Supplied declaration required: FUN_001b6694. */
 extern unsigned int FUN_001c35d8(void);
 /* Supplied declaration required: FUN_001cb774. */
@@ -66,7 +66,7 @@ void FUN_001c34e4(int *param_1,unsigned int *param_2)
   *(unsigned char *)(param_1 + 3) = 1;
   temp_v0 = FUN_001c35d8();
   FUN_001cc6c0(temp_v0,param_1 + 0x11);
-  temp_v0 = FUN_001b1f04();
+  temp_v0 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
   FUN_001b6694(temp_v0,param_1 + 0x14);
   *(unsigned char *)((int)param_1 + 0x166) = 1;
   return;

@@ -1,42 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027de24` (_code @ 0x27de24, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: loop counter and slot pointer swap callee-saved registers (r4/r5); otherwise identical. */
+#include "common.h"
 
 extern "C" {
 
-int asdMdlManagerMarkDestroy(void);
-int asdMdlManagerDestroy(unsigned int);
+/* A polymorphic object owned by a slot; destroyed through its deleting destructor. */
+class SlotObject {
+public:
+    virtual ~SlotObject();
+};
 
-typedef int romwright_code(...);
-/* Supplied declaration required: asdMdlManagerMarkDestroy. */
-/* Supplied declaration required: asdMdlManagerDestroy. */
+/* A model handle: its resource (at +8) records a signed state at +0xC. */
+struct ModelResource {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ s32 state;
+};
+struct ModelHandle {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ ModelResource *resource;
+};
 
+/* The manager viewed from slot i: the slot's fields sit at 0x960 + 0x10 * i. */
+struct ModelSlotManager {
+    /* 0x000 */ u8 unk000[0x960];
+    /* 0x960 */ ModelHandle *model;
+    /* 0x964 */ u32 unk964;
+    /* 0x968 */ SlotObject *object;
+    /* 0x96C */ u32 unk96C;
+};
 
-void FUN_0027de24(int param_1)
+void asdMdlManagerMarkDestroy(ModelHandle *model);
+void asdMdlManagerDestroy(ModelHandle *model);
 
+/* Releases every slot's object and model and clears the slot. */
+void FUN_0027de24(ModelSlotManager *manager)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = 0;
-  do {
-    temp_v1 = param_1 + temp_v0 * 0x10;
-    if (*(int **)(temp_v1 + 0x968) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(temp_v1 + 0x968) + 4))();
-      *(unsigned int *)(temp_v1 + 0x968) = 0;
+    for (u32 i = 0; i < 109; i++) {
+        ModelSlotManager *slot = (ModelSlotManager *)((u8 *)manager + i * 0x10);
+        if (slot->object != NULL) {
+            delete slot->object;
+            slot->object = NULL;
+        }
+        if (slot->model != NULL) {
+            if (slot->model->resource->state >= 0) {
+                asdMdlManagerMarkDestroy(slot->model);
+            }
+            asdMdlManagerDestroy(slot->model);
+            slot->model = NULL;
+        }
+        slot->unk96C = 0;
     }
-    if (*(int *)(temp_v1 + 0x960) != 0) {
-      if (-1 < *(int *)(*(int *)(*(int *)(temp_v1 + 0x960) + 8) + 0xc)) {
-        asdMdlManagerMarkDestroy();
-      }
-      asdMdlManagerDestroy(*(unsigned int *)(temp_v1 + 0x960));
-      *(unsigned int *)(temp_v1 + 0x960) = 0;
-    }
-    temp_v0 = temp_v0 + 1;
-    *(unsigned int *)(temp_v1 + 0x96c) = 0;
-  } while (temp_v0 < 0x6d);
-  return;
 }
 
 } /* extern "C" */

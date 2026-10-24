@@ -13,7 +13,10 @@ typedef struct InfoWindow {
         /* 0x000 */ u32 task;
     };
     /* 0x008 */ u32 state;
-    /* 0x00C */ u8 unk00C[4];
+    union {
+        /* 0x00C */ u8 unk00C[4];
+        /* 0x00C */ s32 frame;
+    };
     /* 0x010 */ u32 timer;
     /* 0x014 */ s32 textWidth;
     /* 0x018 */ s32 labelX;

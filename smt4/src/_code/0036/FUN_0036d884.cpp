@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002360a8(unsigned int *, unsigned int *);
-int FUN_003fc978(unsigned int *, unsigned int *);
+int _ZSt16__insertion_sortIP21RenderBatchSortRecord27RenderBatchSecondaryKeyLessEvT_S3_T0_(unsigned int *, unsigned int *);
 int FUN_003fca98(unsigned int *, unsigned int *, int);
 int FUN_003fcf00(unsigned int *, unsigned int *, int);
 
@@ -17,7 +17,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002360a8. */
-/* Supplied declaration required: FUN_003fc978. */
+/* Supplied declaration required: _ZSt16__insertion_sortIP21RenderBatchSortRecord27RenderBatchSecondaryKeyLessEvT_S3_T0_. */
 /* Supplied declaration required: FUN_003fca98. */
 /* Supplied declaration required: FUN_003fcf00. */
 
@@ -207,7 +207,7 @@ void FUN_0036d884(int param_1)
         temp_v1 = ((int)puVar17 - (int)puVar13) >> 4;
         FUN_003fcf00(puVar13,puVar17,temp_v1);
         if (temp_v1 >= 0x11) {
-          FUN_003fc978(puVar13,puVar13 + 0x40);
+          _ZSt16__insertion_sortIP21RenderBatchSortRecord27RenderBatchSecondaryKeyLessEvT_S3_T0_(puVar13,puVar13 + 0x40);
           for (puVar13 = puVar13 + 0x40; puVar13 != puVar17; puVar13 = puVar13 + 4) {
             temp_v8 = *puVar13;
             temp_v2 = puVar13[2];
@@ -229,7 +229,7 @@ void FUN_0036d884(int param_1)
           }
         }
         else {
-          FUN_003fc978(puVar13,puVar17);
+          _ZSt16__insertion_sortIP21RenderBatchSortRecord27RenderBatchSecondaryKeyLessEvT_S3_T0_(puVar13,puVar17);
         }
       }
       temp_v6 = temp_v5 + 1;

@@ -12,7 +12,7 @@ int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00185e84(...);
 int FUN_002a4894(...);
-int FUN_0032fea0(...);
+int arrayContainsU16(...);
 int largeGridDrawButtonStrip(int, int, int, int);
 int statDrawClampedDelta(...);
 int FUN_004bd6b0(...);
@@ -42,7 +42,7 @@ extern unsigned int FUN_0014bd84(unsigned short);
 extern int recordGetModeForId(int);
 extern int resourceRunOperationIfUnblocked(void);
 /* Supplied declaration required: FUN_002a4894. */
-/* Supplied declaration required: FUN_0032fea0. */
+/* Supplied declaration required: arrayContainsU16. */
 /* Supplied declaration required: largeGridDrawButtonStrip. */
 /* Supplied declaration required: statDrawClampedDelta. */
 extern int recordContainsPairedId(unsigned int, unsigned short);
@@ -129,7 +129,7 @@ void FUN_003cdeb0(int param_1,unsigned int param_2,int param_3,int param_4)
   }
   else {
     temp_v13 = param_1 + 0x8b60;
-    FUN_0032fea0(temp_v13,8,*(unsigned short *)(param_1 + temp_v9 * 2 + 0x8b70));
+    arrayContainsU16(temp_v13,8,*(unsigned short *)(param_1 + temp_v9 * 2 + 0x8b70));
     if (temp_v13 != 0) {
       temp_v15 = 0x57d8ffff;
     }

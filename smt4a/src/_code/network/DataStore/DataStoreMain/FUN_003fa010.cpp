@@ -24,8 +24,8 @@ extern unsigned char DAT_0055cb28; /* 0x55cb28 */
 extern unsigned int FUN_00122a60(void);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00178b04. */
-extern int operatorNew(unsigned int);
-extern int _ZN9Obj55aff4C1EPKc(int, char *);
+extern int _Znwj(unsigned int);
+extern int _ZN9Obj55aff4C1EPKt(int, char *);
 /* Supplied declaration required: FUN_002e9ff4. */
 extern unsigned int FUN_002fafd0(int, unsigned int);
 extern unsigned int wordByteClear(void);
@@ -58,7 +58,7 @@ void FUN_003fa010(unsigned int *param_1)
     break;
   case 6:
     if ((param_1[0x10] == 0) && (temp_v0 = FUN_00432acc(), temp_v0 != 0)) {
-      temp_v0 = operatorNew(0x150);
+      temp_v0 = _Znwj(0x150);
       temp_v1 = 0;
       if (temp_v0 != 0) {
         temp_v1 = FUN_00122a60();
@@ -75,7 +75,7 @@ void FUN_003fa010(unsigned int *param_1)
         *(unsigned char **)(temp_v0 - 4) = &DAT_0055ca64;
         *(unsigned int *)(temp_v0 + 0x10) = temp_v1;
         *(unsigned char **)(temp_v0 + 0x14) = &LAB_00166b00;
-        temp_v0 = _ZN9Obj55aff4C1EPKc(temp_v0 + 0x18,"20256b73");
+        temp_v0 = _ZN9Obj55aff4C1EPKt(temp_v0 + 0x18,"20256b73");
         *(unsigned int *)(temp_v0 + 0xc) = 0;
         *(unsigned int *)(temp_v0 + 8) = 60000;
         *(unsigned int *)(temp_v0 + 0x10) = 0;
@@ -96,7 +96,7 @@ void FUN_003fa010(unsigned int *param_1)
     FUN_003fa6a4(param_1);
     return;
   case 8:
-    temp_v0 = operatorNew(0x78);
+    temp_v0 = _Znwj(0x78);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_002fafd0(temp_v0,0);

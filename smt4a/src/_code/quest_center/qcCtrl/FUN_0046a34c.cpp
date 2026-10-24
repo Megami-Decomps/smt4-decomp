@@ -40,7 +40,7 @@ extern unsigned char LAB_0046a840; /* 0x46a840 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: textFormatBuffer. */
-extern int floatPairClear(int);
+extern int _ZN10FloatStateC1Ev(int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00178b04. */
 extern int gameFlagIsSet(unsigned int);
@@ -194,7 +194,7 @@ LAB_0046a3b0:
   temp_v4 = 0;
   if (temp_v1 != 0) {
     sysMemClear();
-    temp_v4 = floatPairClear(temp_v1 + 0x4f0);
+    temp_v4 = _ZN10FloatStateC1Ev(temp_v1 + 0x4f0);
     temp_v4 = temp_v4 - 0x4f0;
   }
   *(int *)(param_1 + 0xcdc) = temp_v4;

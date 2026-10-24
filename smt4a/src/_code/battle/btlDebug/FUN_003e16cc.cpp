@@ -12,7 +12,7 @@ int FUN_003f26d4(...);
 int FUN_004aa2e0(...);
 int FUN_004cae0c(int, int, int, int, int);
 int FUN_004f1c5c(...);
-int FUN_004f9450(void);
+int nameEntriesRegisterVerNames(void);
 int FUN_004fb43c(int, unsigned int *, int, int, int, int, int);
 int FUN_004fd204(int, unsigned int *, int, int, int, int);
 int FUN_004fe764(int, unsigned int *, int, unsigned int, int);
@@ -55,7 +55,7 @@ extern int pairedEntryTableContains(int, unsigned short);
 /* Supplied declaration required: FUN_004cae0c. */
 /* Supplied declaration required: FUN_004f1c5c. */
 extern int FUN_004f8264(int);
-/* Supplied declaration required: FUN_004f9450. */
+/* Supplied declaration required: nameEntriesRegisterVerNames. */
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: FUN_004fd204. */
 /* Supplied declaration required: FUN_004fe764. */
@@ -83,7 +83,7 @@ void FUN_003e16cc(unsigned int *param_1,int param_2)
   
   if ((param_1[3] == 0) && ((*(unsigned int *)(g_btlAux + 0x339c) & 0x400) != 0)) {
     *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000;
-    FUN_004f9450();
+    nameEntriesRegisterVerNames();
     param_1[3] = param_1[3] | 2;
   }
   if (((param_1[3] & 2) != 0) && (temp_v3 = FUN_004f8264(g_btlAux), temp_v3 != 0)) {

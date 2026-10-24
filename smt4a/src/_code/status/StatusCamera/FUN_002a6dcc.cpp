@@ -12,7 +12,7 @@ extern StatusCameraRegistryView *g_handleRegistry;
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 void sysMemClear(void *, u32);
 void FUN_00154180(s32, s32, s32, s32);
-void FUN_0013c884(StatusCameraWorkA *, s32);
+void asdCameraInitializeDefaults(StatusCameraWorkA *, s32);
 void FUN_0014f0dc(StatusCameraWorkA *, const Vec3 *, const Vec3 *, const Vec3 *);
 void FUN_001523b8(StatusCameraWorkA *, s32, f32, f32, f32, f32);
 void FUN_0036b824(StatusCameraWorkA *);
@@ -42,7 +42,7 @@ void FUN_002a6dcc(const Vec3 *eye, const Vec3 *direction, const Vec3 *auxiliary,
     target.y += camera->dir.y * camera->dist;
     target.z += camera->dir.z * camera->dist;
     FUN_00154180(200, 0, 200, 240);
-    FUN_0013c884(camera, 1);
+    asdCameraInitializeDefaults(camera, 1);
     FUN_0014f0dc(camera, &camera->eye, &target, &up);
     FUN_001523b8(camera, 1, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip, 1.6666666f);
     FUN_0036b824(camera);

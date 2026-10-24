@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int operatorNew(int);
+int _Znwj(int);
 int onlineInstanceTableGetCurrent(void);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002f7c94(unsigned int, unsigned int, unsigned int);
@@ -40,8 +40,8 @@ extern unsigned char DAT_0055aec4; /* 0x55aec4 */
 extern romwright_code *DAT_00589564; /* 0x589564 */
 extern unsigned int DAT_00589568; /* 0x589568 */
 
-/* Supplied declaration required: operatorNew. */
-extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
+/* Supplied declaration required: _Znwj. */
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 /* Supplied declaration required: onlineInstanceTableGetCurrent. */
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(int, unsigned int, unsigned int, unsigned char *);
@@ -147,7 +147,7 @@ void FUN_0012bce8(int param_1)
           if ((int *)piVar9[3] != (int *)0x0) {
             (**(romwright_code **)(*(int *)piVar9[3] + 4))();
           }
-          puVar4 = (unsigned int *)operatorNew(0x24);
+          puVar4 = (unsigned int *)_Znwj(0x24);
           temp_v7 = param_1 + 0x80;
           temp_v0 = 0;
           if (puVar4 != (unsigned int *)0x0) {
@@ -175,7 +175,7 @@ void FUN_0012bce8(int param_1)
             temp_v3 = onlineInstanceTableGetCurrent();
             FUN_002f7c94(temp_v3,*(unsigned int *)(param_1 + 0x68),temp_v5);
             onlineJobSetStateWaiting(param_1);
-            temp_v0 = operatorNew(0x10);
+            temp_v0 = _Znwj(0x10);
             temp_v3 = 0;
             if (temp_v0 != 0) {
               temp_v3 = FUN_002ea3c0(temp_v0,0x12bfc1,0,&LAB_0012bec8);
@@ -185,7 +185,7 @@ void FUN_0012bce8(int param_1)
           }
           temp_v10 = 0x8001000d;
         }
-        temp_v3 = FUN_002e7908(&temp_v7,(unsigned int *)&temp_v10);
+        temp_v3 = _ZN12OnlineResultC1ERKj(&temp_v7,(unsigned int *)&temp_v10);
         FUN_0030c800(param_1,temp_v3);
         return;
       }
@@ -195,7 +195,7 @@ void FUN_0012bce8(int param_1)
   else {
     temp_v10 = 0x80010004;
   }
-  temp_v3 = FUN_002e7908(&temp_v7,(unsigned int *)&temp_v10);
+  temp_v3 = _ZN12OnlineResultC1ERKj(&temp_v7,(unsigned int *)&temp_v10);
   FUN_0030c800(param_1,temp_v3);
   return;
 }

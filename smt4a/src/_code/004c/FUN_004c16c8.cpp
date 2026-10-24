@@ -11,7 +11,7 @@ int dataTable8FindRecord(void);
 int dataTable04FindById(void);
 int sysMemClear(...);
 int FUN_002efc44(...);
-int FUN_0034a290(void);
+int dataTable41FindById(void);
 int FUN_0034a304(...);
 int FUN_003e8bb0(...);
 int FUN_003f0e20(...);
@@ -120,7 +120,7 @@ extern unsigned int padGetMappedValue(unsigned int);
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002efc44. */
-/* Supplied declaration required: FUN_0034a290. */
+/* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: FUN_0034a304. */
 extern unsigned int FUN_0034ef58(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003e8bb0. */
@@ -752,7 +752,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
             do {
               temp_v2 = (unsigned int)temp_v48[temp_v20];
               if (temp_v2 != 0) {
-                FUN_0034a290();
+                dataTable41FindById();
                 temp_v8 = temp_v9;
                 if (temp_v2 != 0) {
                   temp_v8 = (unsigned int)*(unsigned char *)(temp_v2 + 0x2e);

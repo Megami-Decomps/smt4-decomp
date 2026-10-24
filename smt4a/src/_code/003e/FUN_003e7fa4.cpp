@@ -1,113 +1,135 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e7fa4` (_code @ 0x3e7fa4, 0x200 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: structure, calls, constants and instruction count match; remaining differences are register assignment and scheduling: retail keeps zero in r8, the actor slot id in r1 compared as `cmp slot, id`, the height constant in s0 loaded after the data table lookup and the lift in s16 (this build uses s17/s16), reads the data file through a literal offset (`ldr r0, [pc]; ldr r0, [r0, r5]`) instead of `add; ldr`, and joins the slot search at one clamp. */
+#include "gamedata/DataTable.h"
+
+struct BattleVec3 {
+    f32 x, y, z;
+};
+
+// A battle combatant (0x1d0 bytes each).
+struct BattleActor {
+    u8 unk00[0xc];
+    BattleVec3 position; // 0x0c
+    u8 unk18[0x28];
+    f32 scale;           // 0x40
+    u8 unk44[0xc];
+    u32 flags;           // 0x50: 0x10 follows the anchor, 0x200000 uses the table position
+    u8 unk54[0x16];
+    s16 slotId;          // 0x6a
+    u8 unk6c[0x164];
+};
+
+// The part of the battle state this reads.
+struct BattleWorldView {
+    u8 unk0000[0x1ec4];
+    void* anchor;        // 0x1ec4: object the follow-mode position is taken from
+    u8 unk1ec8[0xc];
+    BattleActor* actors; // 0x1ed4
+    u8 unk1ed8[0x3bc];
+    void* dataFile;      // 0x2294
+};
+
+// A combatant's record in the roster: its list of draw object ids.
+struct BattleRosterEntry {
+    u8 unk00[2];
+    u16 id;              // 0x02
+    u8 unk04[8];
+    s32 drawIds[1];      // 0x0c
+};
+
+struct BattleSlotList {
+    u8 unk00[8];
+    s16 ids[50];         // 0x08
+};
+
+struct BattlePositionRecord {
+    s16 id;              // 0x00
+    u8 unk02[6];
+    BattleVec3 position; // 0x08
+    u8 unk14[0x24];
+};
+
+struct BattleActorData {
+    u8 unk00[0xa2];
+    u8 height;           // 0xa2: 0 tall, 1 average, 2 low
+};
+
+struct EnemyDrawObject;
 
 extern "C" {
+BattleRosterEntry* FUN_001568f8(BattleWorldView* world, s32 index);
+BattleSlotList* FUN_003f0e20(BattleWorldView* world, s32 slotId);
+void* dataTableFileGetTable(void* file, u32 section);
+BattleVec3* FUN_00348ee8(void* anchor);
+BattleActorData* dataTable00FindById(u16 id);
+EnemyDrawObject* stateEntryFindById(BattleWorldView* world, s32 id);
+void enemyDrawCalcVerticalOffset(EnemyDrawObject* object, BattleVec3* offset, f32 scale);
 
-int FUN_001568f8(int, int);
-int dataTable00FindById(void);
-int FUN_00348ee8(void);
-int FUN_003f0e20(int, int);
-int enemyDrawCalcVerticalOffset(unsigned int, int *);
-
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-/* Supplied declaration required: FUN_001568f8. */
-extern int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: dataTable00FindById. */
-extern unsigned int dataTableFileGetTable(int, unsigned int);
-/* Supplied declaration required: FUN_00348ee8. */
-extern unsigned int stateEntryFindById(int, unsigned int);
-/* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: enemyDrawCalcVerticalOffset. */
-
-
-void FUN_003e7fa4(int param_1,int param_2,int param_3)
-
+// The index of `id` in the slot list (0 when the list is missing or does not contain it).
+static __inline s32 slotIndexOf(const BattleSlotList* slots, s32 id)
 {
-/* irregular: 1 goto(s); 5 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int *puVar5;
-  int temp_v4;
-  int temp_v5;
-  float temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  float temp_v9;
-  
-  temp_v5 = *(int *)(param_1 + 0x1ed4) + param_2 * 0x1d0;
-  if ((*(unsigned int *)(temp_v5 + 0x50) & 0x200000) != 0) {
-    temp_v5 = param_1;
-    FUN_001568f8(param_1,param_2);
-    temp_v0 = *(unsigned short *)(temp_v5 + 2);
-    if (*(int *)(param_1 + 0x2294) != 0) {
-      temp_v1 = dataTableFileGetTable(*(int *)(param_1 + 0x2294),0);
-      temp_v5 = dataTableGetEntries();
-      temp_v2 = dataTableGetCount(temp_v1);
-      temp_v3 = 0;
-      if (temp_v3 < temp_v2) {
-        do {
-          if ((int)*(short *)(temp_v5 + temp_v3 * 0x38) == (unsigned int)temp_v0) {
-            return;
-          }
-          temp_v3 = temp_v3 + 1;
-        } while (temp_v3 < temp_v2);
-      }
-    }
-  }
-  else {
-    temp_v6 = 2.0f;
-    if (((*(unsigned int *)(temp_v5 + 0x50) & 0x10) == 0) || (param_3 != 0)) {
-      temp_v2 = param_1;
-      FUN_003f0e20(param_1,(int)*(short *)(temp_v5 + 0x6a));
-      if (temp_v2 != 0) {
-        temp_v3 = 0;
-        do {
-          temp_v4 = temp_v2 + temp_v3 * 2;
-          if (*(short *)(temp_v5 + 0x6a) == *(short *)(temp_v4 + 8)) {
-LAB_003e80ac:
-            if (-1 < temp_v3) {
-              temp_v5 = param_1;
-              FUN_001568f8(param_1,param_2);
-              temp_v1 = stateEntryFindById(param_1,*(unsigned int *)(temp_v5 + temp_v3 * 4 + 0xc));
-              enemyDrawCalcVerticalOffset(temp_v1,&temp_v7);
-              return;
+    if (slots != NULL) {
+        for (s32 i = 0; i < 50; i += 2) {
+            if (id == slots->ids[i]) {
+                return i;
             }
-            break;
-          }
-          if (*(short *)(temp_v5 + 0x6a) == *(short *)(temp_v4 + 10)) {
-            temp_v3 = temp_v3 + 1;
-            goto LAB_003e80ac;
-          }
-          temp_v3 = temp_v3 + 2;
-        } while (temp_v3 < 0x32);
-      }
-      temp_v3 = 0;
-      temp_v5 = param_1;
-      FUN_001568f8(param_1,param_2);
-      temp_v1 = stateEntryFindById(param_1,*(unsigned int *)(temp_v5 + temp_v3 * 4 + 0xc));
-      enemyDrawCalcVerticalOffset(temp_v1,&temp_v7);
+            if (id == slots->ids[i + 1]) {
+                return i + 1;
+            }
+        }
     }
-    else {
-      puVar5 = *(unsigned int **)(param_1 + 0x1ec4);
-      FUN_00348ee8();
-      temp_v7 = *puVar5;
-      temp_v8 = puVar5[1];
-      temp_v9 = (float)puVar5[2] + temp_v6;
-      FUN_001568f8(param_1,param_2);
-      dataTable00FindById();
-    }
-  }
-  return;
+    return 0;
 }
 
-} /* extern "C" */
+// Where combatant `index` is drawn: its table position while spawning, otherwise its own position plus
+// the vertical offset of its draw object (or, when following the anchor, the anchor plus a height-based lift).
+BattleVec3 FUN_003e7fa4(BattleWorldView* world, s32 index, s32 force)
+{
+    BattleActor* actor = &world->actors[index];
+    BattleVec3 position;
+    if (actor->flags & 0x200000) {
+        u16 id = FUN_001568f8(world, index)->id;
+        BattlePositionRecord* found = NULL;
+        if (world->dataFile != NULL) {
+            void* section = dataTableFileGetTable(world->dataFile, 0);
+            BattlePositionRecord* records = static_cast<BattlePositionRecord*>(dataTableGetEntries(section));
+            s32 count = dataTableGetCount(section);
+            for (s32 i = 0; i < count; ++i) {
+                if (records[i].id == id) {
+                    found = &records[i];
+                    break;
+                }
+            }
+        }
+        position = found->position;
+    } else {
+        const f32 lift = 2.0f;
+        if (!(actor->flags & 0x10) || force != 0) {
+            BattleSlotList* slots = FUN_003f0e20(world, actor->slotId);
+            s32 slot = slotIndexOf(slots, actor->slotId);
+            if (slot < 0) {
+                slot = 0;
+            }
+            EnemyDrawObject* object = stateEntryFindById(world, FUN_001568f8(world, index)->drawIds[slot]);
+            enemyDrawCalcVerticalOffset(object, &position, actor->scale);
+            position.x += actor->position.x;
+            position.y += actor->position.y;
+            position.z += actor->position.z;
+            position.z += lift;
+        } else {
+            position = *FUN_00348ee8(world->anchor);
+            position.z += lift;
+            f32 height = 0.0f;
+            switch (dataTable00FindById(FUN_001568f8(world, index)->id)->height) {
+            case 0:
+                height = 15.0f;
+                break;
+            case 2:
+                height = -20.0f;
+                break;
+            }
+            position.z += height;
+        }
+    }
+    return position;
+}
+}

@@ -1,8 +1,7 @@
-/* NON_MATCHING: The readiness store is scheduled after the resource load/compare, whose temporary uses r1 instead of r0. */
 #include "addon/SceneResource.h"
 
 extern "C" {
-SceneResource *FUN_0047c950(SceneResource *resource);
+SceneResource *_ZN7AocMenuD1Ev(SceneResource *resource);
 void asdOperatorDelete(void *allocation);
 void asdMemFree(void *allocation);
 void aocMainShutdown(void);
@@ -23,7 +22,7 @@ u32 FUN_00270a70(void)
             if (work->resource != NULL) {
                 aocMainShutdown();
                 if (work->resource != NULL) {
-                    asdOperatorDelete(FUN_0047c950(work->resource));
+                    asdOperatorDelete(_ZN7AocMenuD1Ev(work->resource));
                     work->resource = NULL;
                 }
             }

@@ -14,7 +14,7 @@ void drawParameterBlockClear(Params002c312c *packet);
 void paramsInit(Params002c312c *packet, const void *first, u16 firstBytes, const void *second, u16 secondBytes,
                 const void *third, u16 thirdBytes, const void *fourth, u16 fourthBytes, const void *fifth, u16 fifthBytes);
 void uiSpriteInitializeState(UiSpriteState *sprite, s32 bank, s32 image, s32 animation, Params002c312c *packet, s32 flags, f32 scale);
-void FUN_002bee58(UiSpriteState *sprite, s32 image);
+void spriteStartAnimationByIndex(UiSpriteState *sprite, s32 image);
 extern const u8 DAT_0040384c[];
 
 // Create the command window's update/draw tasks and initialize both upper-screen sprites.
@@ -37,8 +37,8 @@ void FUN_0010a7bc()
     drawParameterBlockClear(&parameters->packet);
     paramsInit(&parameters->packet, 0, 0, DAT_0040384c - 0x60, 0x30, DAT_0040384c - 0x30, 0x30, 0, 0, DAT_0040384c, 0x118);
     uiSpriteInitializeState(&window->sprites[0], 0xe, -1, 2, &parameters->packet, 1, 1.0f);
-    FUN_002bee58(&window->sprites[0], 0);
+    spriteStartAnimationByIndex(&window->sprites[0], 0);
     uiSpriteInitializeState(&window->sprites[1], 0xe, -1, 3, &parameters->packet, 1, 1.0f);
-    FUN_002bee58(&window->sprites[1], 2);
+    spriteStartAnimationByIndex(&window->sprites[1], 2);
 }
 }

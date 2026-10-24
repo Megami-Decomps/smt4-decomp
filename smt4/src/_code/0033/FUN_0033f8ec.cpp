@@ -1,100 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033f8ec` (_code @ 0x33f8ec, 0x240 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stat-condition chain compiles with swapped compare operands and a different argument-register allocation (retail: second in fp, third in sl; shared miss tail). */
+#include "common.h"
 
 extern "C" {
-
-extern short FUN_0023dcfc(unsigned int);
-extern short FUN_00245cc0(unsigned int);
-extern short battleGetEntryHalfword(int, unsigned int);
-
-
-unsigned char FUN_0033f8ec(int param_1,int param_2,int param_3,int param_4,int param_5)
-
-{
-/* irregular: 8 goto(s) */
-  short temp_v0;
-  short temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v3 = param_5 != 0;
-  temp_v2 = 0;
-  if (temp_v3 || param_2 != 0) {
-    temp_v0 = battleGetEntryHalfword((int)*(short *)(param_1 + 8),7);
-    if (param_2 != -7) {
-      if (param_2 != -6) {
-        if (param_2 != -5) {
-          if (param_2 >= 1) {
-            temp_v1 = FUN_0023dcfc(7);
-            if (temp_v0 < temp_v1) {
-LAB_0033f9c0:
-              if ((param_5 == 0) || (temp_v0 != 0)) {
-                temp_v2 = 8;
-              }
-            }
-          }
-          else if ((-1 < param_2) || (temp_v1 = FUN_00245cc0(7), temp_v1 < temp_v0)) goto LAB_0033f9c0;
-        }
-        else if (0 < temp_v0) goto LAB_0033f9c0;
-      }
-      else if (temp_v0 < 0) goto LAB_0033f9c0;
-    }
-    else if (temp_v0 != 0) goto LAB_0033f9c0;
-  }
-  if (temp_v3 || param_3 != 0) {
-    temp_v0 = battleGetEntryHalfword((int)*(short *)(param_1 + 8),10);
-    if (param_3 != -7) {
-      if (param_3 != -6) {
-        if (param_3 != -5) {
-          if (param_3 >= 1) {
-            temp_v1 = FUN_0023dcfc(10);
-            if (temp_v0 < temp_v1) {
-LAB_0033fa64:
-              if ((param_5 == 0) || (temp_v0 != 0)) {
-                temp_v2 = temp_v2 | 0x10;
-              }
-            }
-          }
-          else if ((-1 < param_3) || (temp_v1 = FUN_00245cc0(10), temp_v1 < temp_v0)) goto LAB_0033fa64;
-        }
-        else if (0 < temp_v0) goto LAB_0033fa64;
-      }
-      else if (temp_v0 < 0) goto LAB_0033fa64;
-    }
-    else if (temp_v0 != 0) goto LAB_0033fa64;
-  }
-  if (temp_v3 || param_4 != 0) {
-    temp_v0 = battleGetEntryHalfword((int)*(short *)(param_1 + 8),0xb);
-    if (param_4 != -7) {
-      if (param_4 != -6) {
-        if (param_4 != -5) {
-          if (param_4 >= 1) {
-            temp_v1 = FUN_0023dcfc(0xb);
-            if (temp_v1 <= temp_v0) {
-              return temp_v2 == 0;
-            }
-          }
-          else if ((param_4 < 0) && (temp_v1 = FUN_00245cc0(0xb), temp_v0 <= temp_v1)) {
-            return temp_v2 == 0;
-          }
-        }
-        else if (temp_v0 < 1) {
-          return temp_v2 == 0;
-        }
-      }
-      else if (-1 < temp_v0) {
-        return temp_v2 == 0;
-      }
-    }
-    else if (temp_v0 == 0) {
-      return temp_v2 == 0;
-    }
-    if ((param_5 == 0) || (temp_v0 != 0)) {
-      temp_v2 = temp_v2 | 0x20;
-    }
-  }
-  return temp_v2 == 0;
+extern s32 FUN_0023dcfc(u32 stat);
+extern s32 FUN_00245cc0(u32 stat);
+extern s32 battleGetEntryHalfword(s32 entry, u32 stat);
 }
 
-} /* extern "C" */
+/* A battle entry; its id selects the stat row. */
+struct BtlStatOwner {
+    u8 unk00[8];
+    s16 entryId; // 0x08
+};
+
+/* Whether `stat` meets the condition: -7 zero, -6 negative, -5 positive, 0 never, > 0 at its cap, < 0 at its floor. */
+static __inline bool statMeetsCondition(s16 value, s32 condition, u32 stat)
+{
+    if (condition == -7) {
+        return value == 0;
+    }
+    if (condition == -6) {
+        return value >= 0;
+    }
+    if (condition == -5) {
+        return value <= 0;
+    }
+    if (condition > 0) {
+        s16 cap = (s16)FUN_0023dcfc(stat);
+        return value >= cap;
+    }
+    if (condition >= 0) {
+        return false;
+    }
+    s16 floor = (s16)FUN_00245cc0(stat);
+    return floor >= value;
+}
+
+extern "C" {
+/* Bit mask of the stats (8, 0x10, 0x20) whose condition is missed; true when none is. */
+u8 FUN_0033f8ec(BtlStatOwner *owner, s32 first, s32 second, s32 third, s32 strict)
+{
+    u32 checked = 0;
+    if (first != 0) {
+        checked = 8;
+    }
+    if (second != 0) {
+        checked |= 0x10;
+    }
+    if (third != 0) {
+        checked |= 0x20;
+    }
+    if (strict != 0) {
+        checked |= 0x38;
+    }
+    u32 missed = 0;
+    if (checked & 8) {
+        s16 value = (s16)battleGetEntryHalfword(owner->entryId, 7);
+        if (!statMeetsCondition(value, first, 7) && (strict == 0 || value != 0)) {
+            missed = 8;
+        }
+    }
+    if (checked & 0x10) {
+        s16 value = (s16)battleGetEntryHalfword(owner->entryId, 10);
+        if (!statMeetsCondition(value, second, 10) && (strict == 0 || value != 0)) {
+            missed |= 0x10;
+        }
+    }
+    if (checked & 0x20) {
+        s16 value = (s16)battleGetEntryHalfword(owner->entryId, 11);
+        if (!statMeetsCondition(value, third, 11) && (strict == 0 || value != 0)) {
+            missed |= 0x20;
+        }
+    }
+    return missed == 0;
+}
+}

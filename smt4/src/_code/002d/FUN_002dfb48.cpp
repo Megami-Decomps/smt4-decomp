@@ -50,9 +50,9 @@ u32 FUN_002dfb48(MapEnemyEncounterView *entry)
         CollisionVector end = candidate;
         end.y += 35.0f;
         if (FUN_0025b4b0(&start, &end, NULL) == -1) {
-            entry->x = candidate.x;
-            entry->y = candidate.y;
-            entry->z = candidate.z;
+            entry->position.x = candidate.x;
+            entry->position.y = candidate.y;
+            entry->position.z = candidate.z;
             entry->heading = mathPositionHeadingDegrees(end.x, end.y, end.z, start.x, start.y, start.z);
             return 1;
         }

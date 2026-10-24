@@ -1,96 +1,95 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002852f0` (_code @ 0x2852f0, 0x280 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only (retail keeps the wall flag in r3, the constant 1 in r7 and the row pointer in r6; here ip/r6/r7). */
+#include "common.h"
+
+/* One grid cell of the generated maze layout. */
+struct MazeCell {
+    /* 0x00 */ u8 wall;
+    /* 0x01 */ u8 unk01;
+    /* 0x02 */ u8 unk02;
+    /* 0x03 */ u8 unk03;
+    /* 0x04 */ u8 marked;
+    /* 0x05 */ u8 unk05;
+    /* 0x06 */ u8 pad06[2];
+};
+
+struct MazeRow {
+    MazeCell cells[15];
+};
+
+/* The map block's maze section: cell grid at 0x3C and the grid size at 0xDD0. */
+struct MazeBlock {
+    /* 0x000 */ u8 unk000[0x3C];
+    /* 0x03C */ MazeRow rows[15];
+    /* 0x744 */ u8 unk744[0x68C];
+    /* 0xDD0 */ s8 width;
+    /* 0xDD1 */ s8 height;
+    /* 0xDD2 */ u8 startX;
+    /* 0xDD3 */ u8 startY;
+    /* 0xDD4 */ u8 unkDD4[4];
+};
+
+struct MazeGenState {
+    /* 0x000 */ u8 startX;
+    /* 0x001 */ u8 startY;
+    /* 0x002 */ u8 unk002[0x242];
+    /* 0x244 */ u32 active;
+    /* 0x248 */ u32 unk248;
+    /* 0x24C */ u32 floor;
+    /* 0x250 */ u8 mode;
+};
 
 extern "C" {
+MazeBlock *gameGetMapBlock(void);
+u16 randNextInRange(u16 range);
+extern MazeGenState DAT_004bce8c;
 
-int randNextInRange(int);
-
-extern unsigned char DAT_004bce8c; /* 0x4bce8c */
-extern unsigned char DAT_004bce8d; /* 0x4bce8d */
-extern unsigned int DAT_004bd0d0; /* 0x4bd0d0 */
-extern unsigned int DAT_004bd0d8; /* 0x4bd0d8 */
-extern unsigned char DAT_004bd0dc; /* 0x4bd0dc */
-
-/* Supplied declaration required: randNextInRange. */
-extern int gameGetMapBlock(void);
-
-
-void FUN_002852f0(int param_1)
-
+/* Lays out the maze grid: walls on the border and on even rows/columns, then picks the four exit cells. */
+void FUN_002852f0(s32 keepSize)
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  int temp_v5;
-  
-  temp_v1 = gameGetMapBlock();
-  if (param_1 == 0) {
-    *(unsigned char *)(temp_v1 + 0xdd0) = 0xb;
-    *(unsigned char *)(temp_v1 + 0xdd1) = 0xb;
-  }
-  *(unsigned char *)(temp_v1 + 0xdd2) = 5;
-  *(unsigned char *)(temp_v1 + 0xdd3) = 5;
-  DAT_004bd0d8 = 0;
-  DAT_004bd0dc = 0;
-  *(unsigned char *)(temp_v1 + 0xdd4) = 0;
-  *(unsigned char *)(temp_v1 + 0xdd5) = 0;
-  *(unsigned char *)(temp_v1 + 0xdd6) = 0;
-  *(unsigned char *)(temp_v1 + 0xdd7) = 0;
-  DAT_004bce8c = 5;
-  DAT_004bce8d = 5;
-  DAT_004bd0d0 = 1;
-  temp_v3 = 0;
-  if ('\0' < *(char *)(temp_v1 + 0xdd1)) {
-    do {
-      temp_v2 = 0;
-      if ('\0' < *(char *)(temp_v1 + 0xdd0)) {
-        do {
-          temp_v4 = 0;
-          if ((((temp_v3 == 0) || ((int)*(char *)(temp_v1 + 0xdd1) - 1U == temp_v3 || temp_v2 == 0)) ||
-              ((int)*(char *)(temp_v1 + 0xdd0) - 1U == temp_v2)) || (((temp_v3 | temp_v2) & 1) == 0)) {
-            temp_v4 = 1;
-          }
-          temp_v5 = temp_v1 + temp_v3 * 0x78 + temp_v2 * 8;
-          temp_v2 = temp_v2 + 1;
-          *(unsigned char *)(temp_v5 + 0x3c) = temp_v4;
-          *(unsigned char *)(temp_v5 + 0x3d) = 0;
-          *(unsigned char *)(temp_v5 + 0x3e) = 0;
-          *(unsigned char *)(temp_v5 + 0x3f) = 0;
-          *(unsigned char *)(temp_v5 + 0x41) = 0;
-        } while ((int)temp_v2 < (int)*(char *)(temp_v1 + 0xdd0));
-      }
-      temp_v3 = temp_v3 + 1;
-    } while ((int)temp_v3 < (int)*(char *)(temp_v1 + 0xdd1));
-  }
-  temp_v3 = randNextInRange(100);
-  if (temp_v3 >= 0x32) {
-    temp_v5 = randNextInRange(*(char *)(temp_v1 + 0xdd0) - 8);
-    *(unsigned char *)(temp_v1 + ((temp_v5 + 4U) & 0xfffefffe) * 8 + 0xb4) = 1;
-    temp_v5 = randNextInRange(*(char *)(temp_v1 + 0xdd0) - 8);
-    *(unsigned char *)
-     (temp_v1 + (*(char *)(temp_v1 + 0xdd1) - 2) * 0x78 + ((temp_v5 + 4U) & 0xfffefffe) * 8 + 0x3c) = 1;
-    temp_v5 = randNextInRange(*(char *)(temp_v1 + 0xdd1) - 4);
-    *(unsigned char *)(temp_v1 + ((temp_v5 + 2U) & 0xfffefffe) * 0x78 + 0x44) = 1;
-    temp_v0 = *(char *)(temp_v1 + 0xdd0);
-    temp_v5 = randNextInRange(*(char *)(temp_v1 + 0xdd1) - 4);
-    *(unsigned char *)(temp_v1 + ((temp_v5 + 2U) & 0xfffefffe) * 0x78 + (temp_v0 - 2) * 8 + 0x3c) = 1;
-    return;
-  }
-  temp_v5 = randNextInRange(*(char *)(temp_v1 + 0xdd0) - 4);
-  *(unsigned char *)(temp_v1 + ((temp_v5 + 2U) & 0xfffefffe) * 8 + 0xb4) = 1;
-  temp_v5 = randNextInRange(*(char *)(temp_v1 + 0xdd0) - 4);
-  *(unsigned char *)
-   (temp_v1 + (*(char *)(temp_v1 + 0xdd1) - 2) * 0x78 + ((temp_v5 + 2U) & 0xfffefffe) * 8 + 0x3c) = 1;
-  temp_v5 = randNextInRange(*(char *)(temp_v1 + 0xdd1) - 8);
-  *(unsigned char *)(temp_v1 + ((temp_v5 + 4U) & 0xfffefffe) * 0x78 + 0x44) = 1;
-  temp_v0 = *(char *)(temp_v1 + 0xdd0);
-  temp_v5 = randNextInRange(*(char *)(temp_v1 + 0xdd1) - 8);
-  *(unsigned char *)(temp_v1 + ((temp_v5 + 4U) & 0xfffefffe) * 0x78 + (temp_v0 - 2) * 8 + 0x3c) = 1;
-  return;
+    MazeBlock *maze = gameGetMapBlock();
+
+    if (keepSize == 0) {
+        maze->width = 11;
+        maze->height = 11;
+    }
+    maze->startX = 5;
+    maze->startY = 5;
+    DAT_004bce8c.floor = 0;
+    DAT_004bce8c.mode = 0;
+    maze->unkDD4[0] = 0;
+    maze->unkDD4[1] = 0;
+    maze->unkDD4[2] = 0;
+    maze->unkDD4[3] = 0;
+    DAT_004bce8c.startX = 5;
+    DAT_004bce8c.startY = 5;
+    DAT_004bce8c.active = 1;
+
+    for (s32 y = 0; y < maze->height; y++) {
+        for (s32 x = 0; x < maze->width; x++) {
+            u8 wall = 0;
+            if (y == 0 || y == maze->height - 1 || x == 0 || x == maze->width - 1 || ((y | x) & 1) == 0) {
+                wall = 1;
+            }
+            MazeCell *cell = &maze->rows[y].cells[x];
+            cell->wall = wall;
+            cell->unk01 = 0;
+            cell->unk02 = 0;
+            cell->unk03 = 0;
+            cell->unk05 = 0;
+        }
+    }
+
+    if (randNextInRange(100) < 50) {
+        maze->rows[1].cells[(randNextInRange(maze->width - 4) + 2) & ~1].wall = 1;
+        maze->rows[maze->height - 2].cells[(randNextInRange(maze->width - 4) + 2) & ~1].wall = 1;
+        maze->rows[(randNextInRange(maze->height - 8) + 4) & ~1].cells[1].wall = 1;
+        maze->rows[(randNextInRange(maze->height - 8) + 4) & ~1].cells[maze->width - 2].wall = 1;
+    } else {
+        maze->rows[1].cells[(randNextInRange(maze->width - 8) + 4) & ~1].wall = 1;
+        maze->rows[maze->height - 2].cells[(randNextInRange(maze->width - 8) + 4) & ~1].wall = 1;
+        maze->rows[(randNextInRange(maze->height - 4) + 2) & ~1].cells[1].wall = 1;
+        maze->rows[(randNextInRange(maze->height - 4) + 2) & ~1].cells[maze->width - 2].wall = 1;
+    }
 }
 
-} /* extern "C" */
+}

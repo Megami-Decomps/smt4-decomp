@@ -34,7 +34,7 @@ typedef struct HelpHolder {
 extern HelpHolder g_buttonHelp;
 
 extern void asdMemFreeSlot(u32 slot);
-extern void FUN_002bee58(HelpButton *button, s32 flag);
+extern void spriteStartAnimationByIndex(HelpButton *button, s32 flag);
 extern void ifTouchDecrementTimer(void);
 extern void scrScriptProcessDestroy(u32 process);
 extern void jobStop(u32 job, s32 arg);
@@ -53,7 +53,7 @@ void buttonHelpRelease(void)
         block->slotHeap = 0;
         if (block->state != 3) {
             for (i = 0; i < 6; i++) {
-                FUN_002bee58(&block->buttons[i], 1);
+                spriteStartAnimationByIndex(&block->buttons[i], 1);
                 if (block->slots[i].kind != 0) {
                     ifTouchDecrementTimer();
                 }

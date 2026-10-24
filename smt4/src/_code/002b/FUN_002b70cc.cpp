@@ -1,37 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b70cc` (_code @ 0x2b70cc, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same dataflow (sine-style table wave: reduce |x| below 65536, 256-entry table with linear interpolation, odd symmetry); armcc schedules the table-base load, the fraction subtract and the compare flags differently */
+#include "common.h"
+#include <math.h>
 
 extern "C" {
 
-int VectorFloatToUnsigned(double, int);
-int VectorUnsignedToFloat(unsigned int, int);
+struct WaveEntry {
+    /* 0x00 */ f32 base;
+    /* 0x04 */ f32 unk04;
+    /* 0x08 */ f32 slope;
+    /* 0x0c */ f32 unk0c;
+};
 
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+extern WaveEntry DAT_00407ed0[256];
+
+/* Table-driven periodic wave with period 65536 and odd symmetry, linearly interpolated between 256 entries. */
+f32 FUN_002b70cc(f32 x)
 {
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
+    f32 phase = fabsf(x);
 
+    while (*(s32 *)&phase >= 0x47800000) {
+        phase -= 65536.0f;
+    }
+    u16 index = (u32)phase;
+    f32 fraction = phase - (f32)index;
+    const WaveEntry *entry = &DAT_00407ed0[index & 0xff];
+    f32 result = entry->base + fraction * entry->slope;
 
-void FUN_002b70cc(void)
-
-{
-/* irregular: irregular input(s): in_fpscr, in_s0; 4 native warning(s); review required */
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v0;
-  unsigned int temp_v1;
-  
-  for (temp_v0 = romwright_fabs_4(in_s0); (int)temp_v0 >= 0x47800000; temp_v0 = temp_v0 - 65536.0f) {
-  }
-  temp_v1 = VectorFloatToUnsigned(temp_v0,3);
-  VectorUnsignedToFloat(temp_v1 & 0xffff,(unsigned char)((in_fpscr & 0xfffffff) >> 0x16) & 3);
-  return;
+    return x < 0.0f ? -result : result;
 }
 
 } /* extern "C" */

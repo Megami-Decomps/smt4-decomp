@@ -7,7 +7,7 @@ extern "C" {
 int linkListEraseManagerNode(unsigned int, int);
 
 /* Supplied declaration required: linkListEraseManagerNode. */
-extern unsigned int nw_snd_internal_driver_SoundThread_GetInstance(void);
+extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 
 
 void FUN_003eade8(int param_1,unsigned int param_2,unsigned int param_3)
@@ -20,7 +20,7 @@ void FUN_003eade8(int param_1,unsigned int param_2,unsigned int param_3)
   base = param_1 - 0x44;
   if ((((*(char *)(param_1 - 0x38) != '\0') && (param_2 <= *(unsigned int *)(base + 0x64))) &&
       (*(unsigned int *)(base + 0x64) <= param_3)) && (*(char *)(base + 0xd) != '\0')) {
-    temp_v0 = nw_snd_internal_driver_SoundThread_GetInstance();
+    temp_v0 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
     linkListEraseManagerNode(temp_v0,base + 0x50);
     *(unsigned char *)(base + 0xd) = 0;
   }

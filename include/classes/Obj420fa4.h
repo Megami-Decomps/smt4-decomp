@@ -3,10 +3,19 @@
 
 #include "common.h"
 
+extern "C" void ngwordStateReset(void *state);
+extern "C" void registerObj8Holder(u32 *holder);
+
 /* Text-scanner state; the first two virtual slots were stripped from retail. */
 class Obj420fa4 {
 public:
     Obj420fa4();
+    /* Not virtual: it resets the filter state and unregisters the holder. */
+    ~Obj420fa4()
+    {
+        ngwordStateReset(this);
+        registerObj8Holder(&unk04Value);
+    }
     virtual void unk00();
     virtual void unk04();
     virtual u32 vfunc08();

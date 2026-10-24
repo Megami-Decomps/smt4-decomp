@@ -6,7 +6,7 @@ extern "C" {
 
 int sharedRefRelease(int *);
 int FUN_002e78d0(unsigned int, int *, int);
-int FUN_002e7908(unsigned int *, unsigned int *);
+int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_7: 6 slot(s), 24 byte(s) */
@@ -22,11 +22,11 @@ typedef struct {
 extern int *FUN_00116f6c(void);
 extern unsigned int onlineContextGetInstance(void);
 /* Supplied declaration required: sharedRefRelease. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
-/* Supplied declaration required: FUN_002e7908. */
-extern int refIsNonNegative(unsigned int *);
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
+extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
 
 
 void FUN_00307380(unsigned int *param_1,unsigned int param_2,int param_3,unsigned int param_4,
@@ -57,7 +57,7 @@ void FUN_00307380(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
   temp_v7 = param_4;
   temp_v0 = FUN_002e789a(param_3);
   if (temp_v0 != 0) {
-    temp_v0 = operatorNew(0x138);
+    temp_v0 = _Znwj(0x138);
     if (temp_v0 != 0) {
       piVar2 = (int *)FUN_00116f6c();
     }
@@ -68,7 +68,7 @@ void FUN_00307380(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
     temp_v4 = param_7;
     temp_v2 = param_6;
     (**(romwright_code **)(*piVar2 + 0x34))(&temp_v5,piVar2,*(unsigned int *)(param_3 + 0x44),temp_v7);
-    temp_v0 = refIsNonNegative((unsigned int *)&temp_v5);
+    temp_v0 = _ZNK18OnlineResultRecord7isValidEv((unsigned int *)&temp_v5);
     if (temp_v0 == 0) {
       sharedRefRelease(piVar2);
       *param_1 = temp_v5;
@@ -84,7 +84,7 @@ void FUN_00307380(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
   else {
     temp_v2 = 0x8001000d;
   }
-  FUN_002e7908(param_1,puVar4);
+  _ZN12OnlineResultC1ERKj(param_1,puVar4);
   return;
 }
 

@@ -1,47 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a6a90` (_code @ 0x3a6a90, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail has an extra literal-pool word (address 0x57f588) and loads the panel pointer before `mov r5, #1`; otherwise identical */
+#include "shard/W6_W6Match8_AnimatedSprite.h"
+
+struct CounterPanel {
+    u8 unk000[0x150];             // 0x000
+    u32 mode;                     // 0x150
+    u8 active;                    // 0x154
+    u8 unk155[3];                 // 0x155
+    u32 state;                    // 0x158
+    u16 count;                    // 0x15C
+    u16 displayCount;             // 0x15E
+    f32 countValue;               // 0x160
+    u8 unk164[0x30];              // 0x164
+    u8 spriteSource[0xB9C];       // 0x194
+    SpritePlaybackView sprite;    // 0xD30
+};
+
+struct CounterPanelOwner {
+    u8 unk00[8];          // 0x00
+    CounterPanel *panel;  // 0x08
+};
 
 extern "C" {
 
-int FUN_0014e188(int, int, unsigned int, int, int);
-int uiSpriteSelectAnim(int, int);
-int pairSetFirstResetSecond(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
+u16 gameDataBlocksGetCounter(void);
+void FUN_0014e188(SpritePlaybackView *sprite, u32 value0, u32 value4, const void *source, u16 value38, f32 value20);
+void pairSetFirstResetSecond(SpritePlaybackView *sprite, s32 value);
+void uiSpriteSelectAnim(SpritePlaybackView *sprite, s32 group);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: pairSetFirstResetSecond. */
-extern unsigned int gameDataBlocksGetCounter(void);
-
-
-unsigned int FUN_003a6a90(unsigned int param_1,int param_2)
-
+/* Script command: opens the counter panel in mode 10 with the current counter value and starts its sprite animation. */
+u32 FUN_003a6a90(u32 unused, CounterPanelOwner *owner)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int in_fpscr;
-  
-  temp_v1 = *(int *)(param_2 + 8);
-  *(unsigned int *)(temp_v1 + 0x150) = 10;
-  *(unsigned int *)(temp_v1 + 0x158) = 1;
-  temp_v0 = gameDataBlocksGetCounter();
-  *(short *)(temp_v1 + 0x15c) = (short)temp_v0;
-  *(short *)(temp_v1 + 0x15e) = (short)temp_v0;
-  temp_v0 = VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v1 + 0x160) = temp_v0;
-  *(unsigned char *)(temp_v1 + 0x154) = 1;
-  FUN_0014e188(temp_v1 + 0xd30,8,0xffffffff,temp_v1 + 0x194,0xb);
-  pairSetFirstResetSecond(temp_v1 + 0xd30,0x11);
-  uiSpriteSelectAnim(temp_v1 + 0xd30,6);
-  return 1;
+    CounterPanel *panel = owner->panel;
+
+    panel->mode = 10;
+    panel->state = 1;
+    u16 counter = gameDataBlocksGetCounter();
+    panel->count = counter;
+    panel->displayCount = counter;
+    panel->countValue = (f32)counter;
+    panel->active = 1;
+    FUN_0014e188(&panel->sprite, 8, 0xFFFFFFFF, panel->spriteSource, 11, 1.0f);
+    pairSetFirstResetSecond(&panel->sprite, 0x11);
+    uiSpriteSelectAnim(&panel->sprite, 6);
+    return 1;
 }
 
 } /* extern "C" */

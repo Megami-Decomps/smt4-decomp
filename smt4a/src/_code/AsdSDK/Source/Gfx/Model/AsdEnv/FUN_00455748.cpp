@@ -1,61 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00455748` (_code @ 0x455748, 0x10c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps one zero in r8 (`mov r5, r8` when the leaf cast fails, hoisted above the group cast) and loads the first vtable slot through the copy of `node` (r4); the build uses `mov r5, #0` and the argument register, and lays out the shared false return after the true return. */
+#include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 
-extern "C" {
+extern "C" nw::ut::RuntimeTypeInfo g_animBlenderTypeInfo;
+extern "C" nw::ut::RuntimeTypeInfo g_animEvaluatorTypeInfo;
 
-typedef int romwright_code(...);
-
-unsigned int FUN_00455748(int param_1,int *param_2)
-
+/* Whether every leaf under the environment node was built for the display sizes of the context. */
+extern "C" bool FUN_00455748(AsdEnvContext *context, AsdEnvNode *node)
 {
-/* irregular: 1 goto(s) */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if (param_2 != (int *)0x0) {
-    piVar1 = (int *)(**(romwright_code **)(*param_2 + 8))(param_2);
-    do {
-      if (piVar1 == (int *)0x5c0e00) {
-        if (param_2 != (int *)0x0) {
-          temp_v2 = 0;
-          temp_v1 = (param_2[6] - param_2[5]) >> 2;
-          if (temp_v1 < 1) {
-            return 1;
-          }
-          do {
-            temp_v0 = FUN_00455748(param_1,(int *)*(unsigned int *)(param_2[5] + temp_v2 * 4));
-            if (temp_v0 == 0) {
-              return 0;
+    if (node != NULL) {
+        AsdEnvGroup *group = nw::ut::DynamicCast<AsdEnvGroup>(node, &g_animBlenderTypeInfo);
+        if (group != NULL) {
+            s32 count = group->children.size();
+            for (s32 i = 0; i < count; i++) {
+                if (!FUN_00455748(context, group->children[i])) {
+                    return false;
+                }
             }
-            temp_v2 = temp_v2 + 1;
-          } while (temp_v2 < temp_v1);
-          return 1;
+            return true;
         }
-        break;
-      }
-      piVar1 = (int *)*piVar1;
-    } while (piVar1 != (int *)0x0);
-    if (param_2 != (int *)0x0) {
-      piVar1 = (int *)(**(romwright_code **)(*param_2 + 8))(param_2);
-      do {
-        if (piVar1 == (int *)0x5c0e04) goto LAB_00455808;
-        piVar1 = (int *)*piVar1;
-      } while (piVar1 != (int *)0x0);
+        AsdEnvLeaf *leaf = nw::ut::CheckedCast<AsdEnvLeaf>(node, &g_animEvaluatorTypeInfo);
+        AsdEnvLeafData *data = leaf->data;
+        return context->widthSource->getValue() == data->width && context->heightSource->getValue() == data->height;
     }
-    param_2 = (int *)0x0;
-LAB_00455808:
-    temp_v2 = param_2[0x15];
-    temp_v1 = (**(romwright_code **)(**(int **)(param_1 + 0x260) + 0x18))();
-    if ((temp_v1 != *(int *)(temp_v2 + 0x28)) ||
-       (temp_v1 = (**(romwright_code **)(**(int **)(param_1 + 600) + 0x18))(), temp_v1 != *(int *)(temp_v2 + 0x2c)))
-    {
-      return 0;
-    }
-  }
-  return 1;
+    return true;
 }
-
-} /* extern "C" */

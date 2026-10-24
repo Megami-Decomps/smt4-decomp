@@ -1,29 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001241a8` (_code @ 0x1241a8, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: float register allocation: retail keeps the result in s0 (from in s16, delta in s17), built keeps both from and to live in s16/s17; compare operand order also differs */
+#include "common.h"
 
 extern "C" {
 
-int mathInterpolatePackedTable(unsigned int);
-int VectorFloatToUnsigned(double, int);
+f32 mathInterpolatePackedTable(u32 angle);
 
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: mathInterpolatePackedTable. */
-
-
-void FUN_001241a8(void)
-
+/* Interpolates from `from` to `to` by progress/duration through an angle table (0 to `from` at progress <= 0, `to` at the end or without a duration). */
+f32 FUN_001241a8(f32 from, f32 to, f32 duration, f32 progress)
 {
-/* irregular: irregular input(s): in_s2, in_s3; 4 native warning(s); review required */
-  unsigned int temp_v0;
-  float in_s2;
-  float in_s3;
-  
-  if (((in_s2 != 0.0f) && (0.0f < in_s3)) && (in_s3 < in_s2)) {
-    temp_v0 = VectorFloatToUnsigned((in_s3 * 16384.0f) / in_s2 + 49152.0f,3);
-    mathInterpolatePackedTable(temp_v0 & 0xffff);
-  }
-  return;
+    f32 result = to;
+
+    if (duration != 0.0f) {
+        if (progress <= 0.0f) {
+            result = from;
+        } else if (progress < duration) {
+            result = (to - from) * (mathInterpolatePackedTable((u32)(progress * 16384.0f / duration + 49152.0f) & 0xFFFF) + 1.0f) + from;
+        }
+    }
+    return result;
 }
 
 } /* extern "C" */

@@ -22,7 +22,7 @@ static __inline u8 findLearnedSkillRank(const ItemRankRecord *player, u32 skillI
 }
 
 extern "C" {
-Table04Record *FUN_002ae164(u32 skillId);
+Table04Record *dataTable40FindById(u32 skillId);
 s32 FUN_00283ebc(Table04Record *skill, s32 rank, u32 modifier);
 s32 flagBitIsSet(u32 flag);
 SkillCostDiscountView *FUN_002ae584(u16 id);
@@ -31,7 +31,7 @@ ItemRankRecord *gameGetPlayerData(void);
 // Apply learned-rank or global cost discounts, keeping a nonzero skill's cost at least one.
 s32 FUN_0029a9d4(u32 skillId, s32 useLearnedRank)
 {
-    Table04Record *skill = FUN_002ae164(skillId);
+    Table04Record *skill = dataTable40FindById(skillId);
     if (skill == NULL) {
         return 0;
     }

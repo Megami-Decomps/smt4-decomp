@@ -10,7 +10,7 @@ int FUN_0029f848(unsigned char *, int, int, int, int, int);
 int uiSpriteSetImageKeyframe(...);
 int timerStart(...);
 int FUN_002bd954(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int paramsInit(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int asdTMTexTableLoadSprites(int);
 int FUN_002c58c8(int, int);
@@ -53,7 +53,7 @@ extern unsigned int *gameDataGetPlayerName(void);
 extern unsigned int *gameGetPlayerName(void);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_002c58c8. */
@@ -154,7 +154,7 @@ void FUN_003984ac(unsigned char *param_1,unsigned char param_2)
   drawParameterBlockClear();
   paramsInit(puVar3,&DAT_004055d0,0x18,&DAT_004055e8,0x24,0,0,0,0,&DAT_0040560c,0x70);
   FUN_002bd954(param_1 + 0x67c,0x2e,0,puVar3,1);
-  FUN_002bee58(param_1 + 0x67c,0);
+  spriteStartAnimationByIndex(param_1 + 0x67c,0);
   FUN_002bd954(param_1 + 0x708,0x2e,0,puVar3,1);
   timerStart(param_1 + 0x708,0);
   FUN_002bd954(param_1 + 0x794,0x2e,0,puVar3,1);

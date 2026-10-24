@@ -1,48 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00283498` (_code @ 0x283498, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int libc_bsearch(unsigned char [32], unsigned int, unsigned int, int, unsigned char *);
-int FUN_00175f90(int, unsigned int);
+struct AocSystem;
 
-/* stack frame of param_1: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short sp18; /* 0x18: local_18 */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_1_stack;
+/* A record of data table 25 (0x28 bytes); `id` at 0x20 is the search key. */
+struct DataTable25Record {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u16 id;
+    /* 0x22 */ u8 unk22[0x28 - 0x22];
+};
 
-extern unsigned char LAB_001628b0; /* 0x1628b0 */
-extern int g_aocSystem; /* 0x570280 */
+extern AocSystem *g_aocSystem;
 
-/* Supplied declaration required: libc_bsearch. */
-/* Supplied declaration required: FUN_00175f90. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
+void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+s32 signedKeyRecordCompare(const void *a, const void *b);
+DataTable25Record *FUN_00175f90(AocSystem *system, u32 id);
+u32 dataTableGet(u32 table, u32 index);
+u32 dataTableGetCount(u32 table);
+void *dataTableGetEntries(u32 table);
 
-
-void FUN_00283498(unsigned int param_1)
-
+/* Finds the record with `id`: the add-on content's override first, else a search of data table 25. */
+DataTable25Record *FUN_00283498(u32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3 [32];
-  unsigned short temp_v4;
-  
-  temp_v0 = g_aocSystem;
-  FUN_00175f90(g_aocSystem,param_1);
-  if (temp_v0 == 0) {
-    temp_v1 = dataTableGet(0x19,0);
-    temp_v2 = dataTableGetEntries();
-    temp_v1 = dataTableGetCount(temp_v1);
-    temp_v4 = (unsigned short)param_1;
-    libc_bsearch(temp_v3,temp_v2,temp_v1,0x28,&LAB_001628b0);
-  }
-  return;
+    DataTable25Record *record = FUN_00175f90(g_aocSystem, id);
+
+    if (record != NULL) {
+        return record;
+    }
+    u32 table = dataTableGet(25, 0);
+    void *entries = dataTableGetEntries(table);
+    u32 count = dataTableGetCount(table);
+    DataTable25Record key;
+    key.id = id;
+    return (DataTable25Record *)libc_bsearch(&key, entries, count, sizeof(DataTable25Record), signedKeyRecordCompare);
 }
 
 } /* extern "C" */

@@ -13,7 +13,7 @@ int FUN_0027da30(unsigned char *, unsigned int);
 int btlMainFindEntryByListedId(...);
 int FUN_00283ebc(int, unsigned int, int);
 int btlGetMainState(void);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int FUN_003be670(unsigned int, unsigned int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -45,7 +45,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00283ebc. */
 /* Supplied declaration required: btlGetMainState. */
 extern unsigned int playerGetSkillRank(int);
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: FUN_003be670. */
 
 
@@ -128,7 +128,7 @@ int FUN_003beba8(int param_1,int param_2,unsigned int param_3,unsigned int param
   puVar5 = (unsigned int *)btlGetMainState();
   btlMainFindEntryByListedId(puVar5,param_3);
   temp_v2 = 0;
-  if (((*puVar5 & 2) != 0) && (temp_v0 = param_1, FUN_002ae164(), temp_v0 != 0)) {
+  if (((*puVar5 & 2) != 0) && (temp_v0 = param_1, dataTable40FindById(), temp_v0 != 0)) {
     temp_v9 = playerGetSkillRank(param_1);
     FUN_00283ebc(temp_v0,temp_v9,1);
     temp_v2 = temp_v0;

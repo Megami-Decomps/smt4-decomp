@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int vectorCopyHeader(int, unsigned int *);
+int _ZN18OnlineResultRecordaSERKS_(int, unsigned int *);
 int onlineInstanceTableFind(int, unsigned int);
 int onlineJobSetStateDone(int);
 int FUN_002f3dc4(void);
@@ -16,12 +16,12 @@ typedef struct {
 } param_4_stack;
 
 extern int onlineInstanceTableGetCurrent(void);
-/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002f3dc4. */
 /* Supplied declaration required: FUN_002f3dde. */
-extern int refIsNonNegative(unsigned int *);
+extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
 
 
 void FUN_002ea214(int param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
@@ -40,9 +40,9 @@ void FUN_002ea214(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
   uStack_18 = param_4;
   temp_v0 = onlineInstanceTableGetCurrent();
   onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0xe0));
-  vectorCopyHeader(*(int *)(param_1 + 0xe8) + 0x130,param_2);
+  _ZN18OnlineResultRecordaSERKS_(*(int *)(param_1 + 0xe8) + 0x130,param_2);
   if (temp_v0 != 0) {
-    temp_v1 = refIsNonNegative(param_2);
+    temp_v1 = _ZNK18OnlineResultRecord7isValidEv(param_2);
     temp_v2 = (unsigned int *)*param_2;
     uStack_1c = param_2[1];
     uStack_18 = param_2[2];

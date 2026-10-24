@@ -36,7 +36,7 @@ typedef struct SelectMenu {
     /* 0x0008 */ s32 mode;               /* 4: pick mode */
     /* 0x000C */ u8 unk000C[0x370];
     /* 0x037C */ u32 listId;
-    /* 0x0380 */ u8 cursor[0x4DC];       /* cursor state (FUN_00230cc0) */
+    /* 0x0380 */ u8 cursor[0x4DC];       /* cursor state (uiRectDrawAtBottomRight) */
     /* 0x085C */ MenuView *view;
     /* 0x0860 */ u8 unk0860[0x9448];
     /* 0x9CA8 */ MenuList list;

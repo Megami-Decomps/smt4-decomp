@@ -1,126 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034cb50` (_code @ 0x34cb50, 0x244 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: logic and instruction mix match; the allocator spills a different set of accumulators (retail keeps the mp percent and the first two stat bonuses in registers, hp percent and the rest on the stack). */
+#include "common.h"
 
-extern "C" {
-
-int FUN_0034a290(void);
-
-/* stack frame of param_3: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_3_stack;
-
-/* Supplied declaration required: FUN_0034a290. */
-
-
-void FUN_0034cb50(short *param_1,int param_2,int param_3)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  short temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  int temp_v11;
-  int temp_v12;
-  
-  temp_v6 = 0;
-  temp_v5 = 100;
-  temp_v7 = 0;
-  temp_v3 = 0;
-  temp_v8 = 100;
-  temp_v9 = 0;
-  temp_v10 = 0;
-  temp_v11 = 0;
-  if (temp_v3 < param_3) {
-    do {
-      temp_v0 = (unsigned int)*(unsigned short *)(param_2 + temp_v3 * 2);
-      if (((temp_v0 != 0) && (FUN_0034a290(), temp_v0 != 0)) &&
-         ((*(unsigned int *)(temp_v0 + 0x44) & 0x7ff) >> 6 == 10)) {
-        temp_v8 = temp_v8 + (unsigned int)*(unsigned char *)(temp_v0 + 0x24) * 10;
-        temp_v6 = (int)(short)((unsigned short)*(unsigned char *)(temp_v0 + 0x28) + (short)temp_v6);
-        temp_v7 = (int)(short)((unsigned short)*(unsigned char *)(temp_v0 + 0x29) + (short)temp_v7);
-        temp_v11 = (int)(short)((unsigned short)*(unsigned char *)(temp_v0 + 0x2c) + (short)temp_v11);
-        temp_v5 = temp_v5 + (unsigned int)*(unsigned char *)(temp_v0 + 0x25) * 10;
-        temp_v9 = (int)(short)((unsigned short)*(unsigned char *)(temp_v0 + 0x2a) + (short)temp_v9);
-        temp_v10 = (int)(short)((unsigned short)*(unsigned char *)(temp_v0 + 0x2b) + (short)temp_v10);
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < param_3);
-  }
-  temp_v0 = (unsigned int)*param_1;
-  if (temp_v0 == 0) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v1 = (temp_v0 * temp_v8) / 100;
-    if ((temp_v1 == temp_v0) && (temp_v8 >= 101)) {
-      temp_v1 = temp_v1 + 1;
-    }
-    temp_v0 = 9999;
-    if ((temp_v1 < 10000) && (temp_v0 = temp_v1, temp_v1 == 0)) {
-      temp_v0 = 1;
-    }
-  }
-  *param_1 = (short)temp_v0;
-  temp_v1 = (unsigned int)param_1[1];
-  temp_v0 = 0;
-  if (temp_v1 != 0) {
-    temp_v4 = (temp_v1 * temp_v5) / 100;
-    if ((temp_v4 == temp_v1) && (temp_v5 >= 101)) {
-      temp_v4 = temp_v4 + 1;
-    }
-    temp_v0 = 9999;
-    if ((temp_v4 < 10000) && (temp_v0 = temp_v4, temp_v4 == 0)) {
-      temp_v0 = 1;
-    }
-  }
-  param_1[1] = (short)temp_v0;
-  temp_v12 = 999;
-  temp_v2 = 999;
-  temp_v6 = param_1[2] + temp_v6;
-  temp_v3 = temp_v12;
-  if ((temp_v6 < 1000) && (temp_v3 = temp_v6, temp_v6 < 1)) {
-    temp_v3 = 1;
-  }
-  param_1[2] = (short)temp_v3;
-  temp_v7 = param_1[3] + temp_v7;
-  temp_v6 = temp_v12;
-  if ((temp_v7 < 1000) && (temp_v6 = temp_v7, temp_v7 < 1)) {
-    temp_v6 = 1;
-  }
-  param_1[3] = (short)temp_v6;
-  temp_v9 = param_1[4] + temp_v9;
-  temp_v6 = temp_v12;
-  if ((temp_v9 < 1000) && (temp_v6 = temp_v9, temp_v9 < 1)) {
-    temp_v6 = 1;
-  }
-  param_1[4] = (short)temp_v6;
-  temp_v10 = temp_v10 + param_1[5];
-  if ((temp_v10 < 1000) && (temp_v12 = temp_v10, temp_v10 < 1)) {
-    temp_v12 = 1;
-  }
-  param_1[5] = (short)temp_v12;
-  temp_v11 = param_1[6] + temp_v11;
-  if (temp_v11 < 1000) {
-    if (temp_v11 < 1) {
-      temp_v11 = 1;
-    }
-    temp_v2 = (short)temp_v11;
-  }
-  param_1[6] = temp_v2;
-  return;
+namespace {
+struct PassiveSkillRecord {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ u8 hpPercentTens;
+    /* 0x25 */ u8 mpPercentTens;
+    /* 0x26 */ u8 unk26[2];
+    /* 0x28 */ u8 statBonus[5];
+    /* 0x2D */ u8 unk2D[0x17];
+    /* 0x44 */ u32 kind;
+};
 }
 
-} /* extern "C" */
+extern "C" {
+const PassiveSkillRecord *dataTable41FindById(u32 id);
+
+/* Apply the stat-boosting passive skills (kind 10) to a unit's hp, mp and five stats. */
+void FUN_0034cb50(s16 *stats, const u16 *skills, s32 skillCount)
+{
+    s16 bonusA = 0;
+    u32 mpPercent = 100;
+    s16 bonusB = 0;
+    u32 hpPercent = 100;
+    s16 bonusC = 0;
+    s16 bonusD = 0;
+    s16 bonusE = 0;
+    for (s32 i = 0; i < skillCount; i++) {
+        if (skills[i] == 0) {
+            continue;
+        }
+        const PassiveSkillRecord *skill = dataTable41FindById(skills[i]);
+        if (skill != NULL && ((skill->kind >> 6) & 0x1F) == 10) {
+            hpPercent += skill->hpPercentTens * 10;
+            mpPercent += skill->mpPercentTens * 10;
+            bonusA = (s16)(bonusA + skill->statBonus[0]);
+            bonusB = (s16)(bonusB + skill->statBonus[1]);
+            bonusC = (s16)(bonusC + skill->statBonus[2]);
+            bonusD = (s16)(bonusD + skill->statBonus[3]);
+            bonusE = (s16)(bonusE + skill->statBonus[4]);
+        }
+    }
+    u32 hp = stats[0];
+    if (hp != 0) {
+        u32 scaled = hp * hpPercent / 100;
+        if (scaled == hp && hpPercent > 100) {
+            scaled++;
+        }
+        hp = scaled > 9999 ? 9999 : (scaled == 0 ? 1 : scaled);
+    }
+    stats[0] = (s16)hp;
+    u32 mp = stats[1];
+    if (mp != 0) {
+        u32 scaled = mp * mpPercent / 100;
+        if (scaled == mp && mpPercent > 100) {
+            scaled++;
+        }
+        mp = scaled > 9999 ? 9999 : (scaled == 0 ? 1 : scaled);
+    }
+    stats[1] = (s16)mp;
+    s32 value = stats[2] + bonusA;
+    stats[2] = (s16)(value > 999 ? 999 : (value < 1 ? 1 : value));
+    value = stats[3] + bonusB;
+    stats[3] = (s16)(value > 999 ? 999 : (value < 1 ? 1 : value));
+    value = stats[4] + bonusC;
+    stats[4] = (s16)(value > 999 ? 999 : (value < 1 ? 1 : value));
+    value = stats[5] + bonusD;
+    stats[5] = (s16)(value > 999 ? 999 : (value < 1 ? 1 : value));
+    value = stats[6] + bonusE;
+    stats[6] = (s16)(value > 999 ? 999 : (value < 1 ? 1 : value));
+}
+}

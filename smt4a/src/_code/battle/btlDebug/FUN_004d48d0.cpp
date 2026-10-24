@@ -1,130 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d48d0` (_code @ 0x4d48d0, 0x2b0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: panel-job and settings loads are scheduled in a different order, and the 64-bit mask loads use LDM/register choices that differ from retail's separate LDRs. */
+#include "battle/DebugPanel.h"
+#include "battle/btlMain.h"
+#include "AsdSDK/Source/Util/AsdListBox.h"
+
+/* The debug menu's settings block at 0x5715f8; only the parts this panel reads are named. */
+struct BtlDebugMenuSettings {
+    /* 0x000 */ s8 variant;
+    /* 0x001 */ u8 unk001[3];
+    /* 0x004 */ s32 selection;
+    /* 0x008 */ u8 unk008[0xA0];
+    /* 0x0A8 */ u64 maskA8;
+    /* 0x0B0 */ u64 maskB0;
+    /* 0x0B8 */ u64 maskB8;
+    /* 0x0C0 */ u8 unk0C0[0x10];
+    /* 0x0D0 */ u64 maskD0;
+    /* 0x0D8 */ u8 unk0D8[0x40];
+    /* 0x118 */ u64 mask118;
+    /* 0x120 */ u8 unk120[8];
+    /* 0x128 */ u64 mask128;
+    /* 0x130 */ u8 unk130[0x28];
+    /* 0x158 */ u64 mask158;
+    /* 0x160 */ u8 unk160[8];
+    /* 0x168 */ u64 mask168;
+};
+typedef char BtlDebugMenuSettingsOffsets[
+    offsetof(BtlDebugMenuSettings, selection) == 4 && offsetof(BtlDebugMenuSettings, maskA8) == 0xA8 &&
+    offsetof(BtlDebugMenuSettings, maskD0) == 0xD0 && offsetof(BtlDebugMenuSettings, mask118) == 0x118 &&
+    offsetof(BtlDebugMenuSettings, mask128) == 0x128 && offsetof(BtlDebugMenuSettings, mask158) == 0x158 &&
+    offsetof(BtlDebugMenuSettings, mask168) == 0x168 ? 1 : -1];
 
 extern "C" {
+extern BtlDebugMenuSettings DAT_005715f8;
+extern const AsdListBoxEntry DAT_00571780[16];
+extern s32 DAT_00573970;
+extern s32 DAT_00573b80;
+s32 jobIsValid(u32 job);
+void FUN_003592dc(u32 job);
+void jobStop(u32 job, s32 mode);
+u32 asdListBoxCreateDefaultFlags(u32 parent, u32 id, u32 argument, u32 flags);
+void asdListBoxAddItems(u32 job, const AsdListBoxEntry *items, u32 count);
+void asdListBoxSetByteValue(u32 job, u32 value);
+void jobSetText(u32 job, const char *text);
+void asdListBoxSetToggleItem(u32 job, s32 item, s32 value);
+void asdListBoxSetIntItem(u32 job, s32 item, s32 value, s32 minimum, s32 maximum, u32 flags);
+s32 dataTable3Type0Count(void);
+s32 dataTable22GetCount(void);
 
-int jobStop(unsigned int, int);
-int asdListBoxCreateDefaultFlags(unsigned int, int, int);
-int jobSetText(unsigned int, unsigned char *);
-int asdListBoxSetIntItem(...);
-int asdListBoxSetByteValue(unsigned int, int);
-int asdListBoxAddItems(void);
-int asdListBoxSetToggleItem(...);
-int FUN_003592dc(unsigned int);
-int dataTable22GetCount(void);
-int dataTable3Type0Count(void);
-
-typedef struct fn_004d48d0_arg0 fn_004d48d0_arg0;
-struct fn_004d48d0_arg0 {
-    void *field_0x0; /* +0x0 */
-    unsigned char pad_0x4[0xc];
-    unsigned char field_0x10; /* +0x10 */
-    unsigned char pad_0x11[0x3f];
-    undefined4 field_0x50; /* +0x50 */
-    undefined4 field_0x54; /* +0x54 */
-    undefined4 field_0x58; /* +0x58 */
-    undefined4 field_0x5c; /* +0x5c */
-    unsigned char pad_0x60[0x8];
-    undefined4 field_0x68; /* +0x68 */
-    undefined4 field_0x6c; /* +0x6c */
-    unsigned char pad_0x70[0xc];
-    undefined4 field_0x7c; /* +0x7c */
-    undefined4 field_0x80; /* +0x80 */
-};
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern unsigned char LAB_004d4b84; /* 0x4d4b84 */
-extern unsigned char DAT_005715f8; /* 0x5715f8 */
-extern unsigned int DAT_005715fc; /* 0x5715fc */
-extern unsigned int DAT_005716a0; /* 0x5716a0 */
-extern unsigned int DAT_005716a4; /* 0x5716a4 */
-extern unsigned int DAT_005716a8; /* 0x5716a8 */
-extern unsigned int DAT_005716ac; /* 0x5716ac */
-extern unsigned int DAT_005716b0; /* 0x5716b0 */
-extern unsigned int DAT_005716b4; /* 0x5716b4 */
-extern unsigned int DAT_005716c8; /* 0x5716c8 */
-extern unsigned int DAT_005716cc; /* 0x5716cc */
-extern unsigned int DAT_00571710; /* 0x571710 */
-extern unsigned int DAT_00571714; /* 0x571714 */
-extern unsigned int DAT_00571720; /* 0x571720 */
-extern unsigned int DAT_00571724; /* 0x571724 */
-extern unsigned int DAT_00571750; /* 0x571750 */
-extern unsigned int DAT_00571754; /* 0x571754 */
-extern unsigned int DAT_00571760; /* 0x571760 */
-extern unsigned int DAT_00571764; /* 0x571764 */
-extern unsigned int DAT_00573970; /* 0x573970 */
-extern unsigned int DAT_00573b80; /* 0x573b80 */
-
-/* Supplied declaration required: jobStop. */
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: asdListBoxCreateDefaultFlags. */
-/* Supplied declaration required: jobSetText. */
-/* Supplied declaration required: asdListBoxSetIntItem. */
-/* Supplied declaration required: asdListBoxSetByteValue. */
-/* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: asdListBoxSetToggleItem. */
-/* Supplied declaration required: FUN_003592dc. */
-/* Supplied declaration required: dataTable22GetCount. */
-/* Supplied declaration required: dataTable3Type0Count. */
-
-
-void FUN_004d48d0(fn_004d48d0_arg0 *param_1,int param_2)
-
+// Recreate the debug menu panel from the battle's marker masks and the menu settings.
+void FUN_004d48d0(BattleDebugPanelWork *work, BtlMainStateA *battle)
 {
-/* irregular: 10 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *puVar4;
-  
-  temp_v0 = jobIsValid(*(unsigned int *)&param_1->field_0x10);
-  if (temp_v0 != 0) {
-    FUN_003592dc(*(unsigned int *)&param_1->field_0x10);
-    jobStop(*(unsigned int *)&param_1->field_0x10,0);
-  }
-  temp_v1 = *(unsigned int *)(param_2 + 0x80);
-  asdListBoxCreateDefaultFlags(temp_v1,0x75,0);
-  *(unsigned int *)&param_1->field_0x10 = temp_v1;
-  asdListBoxAddItems();
-  asdListBoxSetByteValue(*(unsigned int *)&param_1->field_0x10,1);
-  jobSetText(*(unsigned int *)&param_1->field_0x10,&LAB_004d4b84);
-  temp_v2 = (unsigned int)DAT_005715f8;
-  if (temp_v2 != 0) {
-    dataTable3Type0Count();
-    asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,0,DAT_005715fc,0,temp_v2 - 1,0);
-    asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,1,(int)(char)DAT_005715f8);
-  }
-  else {
-    dataTable22GetCount();
-    asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,0,DAT_005715fc,0,temp_v2 - 1,0);
-    asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,1,(int)(char)DAT_005715f8);
-  }
-  asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,2,DAT_00573970,0,0x4b1,0);
-  asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,3,DAT_00573b80,0,1000,0);
-  puVar4 = (unsigned int *)(param_2 + 0x45a8);
-  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,4,
-               (*(unsigned int *)(param_2 + 0x45ac) & DAT_005716a4) != 0 || (DAT_005716a0 & *puVar4) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,5,
-               (*(unsigned int *)(param_2 + 0x45ac) & DAT_005716ac) != 0 || (DAT_005716a8 & *puVar4) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,6,
-               (*(unsigned int *)(param_2 + 0x45ac) & DAT_005716b4) != 0 || (DAT_005716b0 & *puVar4) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,0xb,
-               (*puVar4 & DAT_00571710) != 0 || (DAT_00571714 & *(unsigned int *)(param_2 + 0x45ac)) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,0xc,
-               (*(unsigned int *)(param_2 + 0x45ac) & DAT_00571754) != 0 || (*puVar4 & DAT_00571750) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,0xe,
-               (*puVar4 & DAT_005716c8) != 0 || (DAT_005716cc & *(unsigned int *)(param_2 + 0x45ac)) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,0xf,
-               (*puVar4 & DAT_00571720) != 0 || (*(unsigned int *)(param_2 + 0x45ac) & DAT_00571724) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,0xd,
-               (DAT_00571760 & *puVar4) != 0 || (DAT_00571764 & *(unsigned int *)(param_2 + 0x45ac)) != 0);
-  return;
+    if (jobIsValid(work->panelJob)) {
+        FUN_003592dc(work->panelJob);
+        jobStop(work->panelJob, 0);
+    }
+    work->panelJob = asdListBoxCreateDefaultFlags(battle->uiJobs.menuJob, 117, 0, 0);
+    asdListBoxAddItems(work->panelJob, DAT_00571780, 16);
+    asdListBoxSetByteValue(work->panelJob, 1);
+    jobSetText(work->panelJob, "btl Debug Menu");
+    if (!DAT_005715f8.variant) {
+        asdListBoxSetIntItem(work->panelJob, 0, DAT_005715f8.selection, 0, dataTable22GetCount() - 1, 0);
+        asdListBoxSetToggleItem(work->panelJob, 1, DAT_005715f8.variant);
+    } else {
+        asdListBoxSetIntItem(work->panelJob, 0, DAT_005715f8.selection, 0, dataTable3Type0Count() - 1, 0);
+        asdListBoxSetToggleItem(work->panelJob, 1, DAT_005715f8.variant);
+    }
+    asdListBoxSetIntItem(work->panelJob, 2, DAT_00573970, 0, 0x4B1, 0);
+    asdListBoxSetIntItem(work->panelJob, 3, DAT_00573b80, 0, 1000, 0);
+    asdListBoxSetToggleItem(work->panelJob, 4, (battle->markerMasks.bits & DAT_005715f8.maskA8) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 5, (battle->markerMasks.bits & DAT_005715f8.maskB0) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 6, (battle->markerMasks.bits & DAT_005715f8.maskB8) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 11, (battle->markerMasks.bits & DAT_005715f8.mask118) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 12, (battle->markerMasks.bits & DAT_005715f8.mask158) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 14, (battle->markerMasks.bits & DAT_005715f8.maskD0) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 15, (battle->markerMasks.bits & DAT_005715f8.mask128) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 13, (battle->markerMasks.bits & DAT_005715f8.mask168) != 0);
 }
-
-} /* extern "C" */
+}

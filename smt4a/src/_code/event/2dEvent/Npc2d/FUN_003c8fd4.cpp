@@ -1,110 +1,88 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c8fd4` (_code @ 0x3c8fd4, 0x1dc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the asdProcessCreateSimple stack arguments differ: retail loads the update/destroy callbacks into r0/r1 (pool order update, destroy) and stores them with one `stm sp, {r0, r1, r4}`; armcc here evaluates the call right to left (`str r1, [sp]; stm r5, {r0, r4}`, pool order destroy, update). */
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/W6_W6Match8_NpcTextureEffect.h"
+
+struct NpcTableRecord {
+    u8 unk00[0x24];
+    u16 node; // 0x24: texture node of the NPC
+};
+
+// One entry of the texture table: the slot's anchor point and an optional second one.
+struct NpcTextureEntry {
+    u8 unk00[8];
+    s16 x;           // 0x08
+    s16 y;           // 0x0a
+    const s16 *extra; // 0x0c: optional {x, y} pair
+};
 
 extern "C" {
+void *asdMemoryAllocTracked(u32 heap, u32 alignmentClass, u32 flags, u32 size, s32 kind);
+void sysMemClear(void *memory, u32 size);
+NpcTableRecord *FUN_00283498(u32 id);
+NpcTextureEntry *FUN_001834a4(u32 table, u32 index);
+s32 FUN_00162ea4();
+void *FUN_0014afd0(s32 table, s32 node);
+s32 FUN_002897cc(u32 handle);
+void FUN_0034da3c(u32 handle);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+                           AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
+extern const char DAT_0052f4fc[];
+extern const u8 DAT_0052f4ec[3]; // texture slot index of each anchor
+extern const s8 DAT_0052f4f0[];  // "EVE_2dTex"
 
-int FUN_0014afd0(...);
-int asdProcessCreateSimple(...);
-int asdMemoryAllocTracked(...);
-int FUN_00283498(...);
-int sysMemClear(...);
-int VectorSignedToFloat(...);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern int FUN_002897cc(...); /* 0x2897cc */
-extern int FUN_0034da3c(...); /* 0x34da3c */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014afd0. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-extern int FUN_00162ea4(void);
-/* Supplied declaration required: asdMemoryAllocTracked. */
-extern int FUN_001834a4(unsigned int, unsigned char);
-/* Supplied declaration required: FUN_00283498. */
-/* Supplied declaration required: sysMemClear. */
-
-
-void FUN_003c8fd4(int param_1)
-
+// Creates the 2D texture effect job for NPC `id`: loads the anchors of its three texture slots and
+// starts the "EVE_2dTex" process.
+u32 FUN_003c8fd4(u32 id)
 {
-/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int in_fpscr;
-  int temp_v2;
-  unsigned long long temp_v3;
-  
-  piVar1 = (int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0xbc,1);
-  sysMemClear();
-  temp_v3 = 0;
-  piVar1[8] = 0x3f800000;
-  piVar1[9] = 0x3f800000;
-  piVar1[10] = 0;
-  piVar1[0x12] = -1;
-  piVar1[0x10] = 0x1c;
-  piVar1[1] = 0x41;
-  *piVar1 = param_1;
-  *(unsigned char *)(piVar1 + 0x22) = 1;
-  piVar1[0x23] = 0;
-  piVar1[0x24] = 0;
-  *(unsigned char *)(piVar1 + 0x25) = 0;
-  *(unsigned char *)((int)piVar1 + 0x95) = 0;
-  piVar1[0xd] = 0x3f800000;
-  piVar1[0x1c] = 0;
-  piVar1[0x1d] = 0;
-  piVar1[0x1e] = 0;
-  piVar1[0x1f] = 0;
-  piVar1[0x20] = 0;
-  piVar1[0x21] = 0;
-  FUN_00283498();
-  piVar1[0x16] = param_1;
-  temp_v1 = 0;
-  piVar1[0x11] = (unsigned int)*(unsigned short *)(param_1 + 0x24);
-  do {
-    while( 1 ) {
-      temp_v0 = FUN_001834a4(0x27,*(unsigned char *)(temp_v1 + 0x52f4ec));
-      temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v0 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-      piVar1[temp_v1 * 2 + 0x26] = temp_v2;
-      temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v0 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-      piVar1[temp_v1 * 2 + 0x27] = temp_v2;
-      if (temp_v1 != 0) break;
-      if (*(short **)(temp_v0 + 0xc) != (short *)0x0) {
-        temp_v2 = VectorSignedToFloat((int)**(short **)(temp_v0 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
-        piVar1[0x2c] = temp_v2;
-        temp_v0 = VectorSignedToFloat((int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),
-                                    (unsigned char)(in_fpscr >> 0x16) & 3);
-        piVar1[0x2d] = temp_v0;
-      }
-      temp_v1 = 1;
+    asdDebugTrace(DAT_0052f4fc, 0x400);
+    NpcTextureEffectWork *work = (NpcTextureEffectWork *)asdMemoryAllocTracked(
+        ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(NpcTextureEffectWork), 1);
+    sysMemClear(work, sizeof(*work));
+    work->scaleX = 1.0f;
+    work->fade = 1.0f;
+    work->fadeStep = 0.0f;
+    work->handle = -1;
+    work->table = 0x1c;
+    work->state = 0x41;
+    work->unk00 = id;
+    work->unk88 = 1;
+    work->unk8c = 0;
+    work->unk90 = 0;
+    work->unk94 = 0;
+    work->unk95 = 0;
+    work->alpha = 1.0f;
+    for (s32 i = 0; i < 6; ++i) {
+        work->unk70[i] = 0;
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 3);
-  piVar1[0x28] = 0x42900000;
-  piVar1[4] = 0x48;
-  piVar1[10] = 0x3e87ae14;
-  piVar1[7] = (int)temp_v3;
-  piVar1[9] = (int)temp_v3;
-  piVar1[0xf] = 5;
-  piVar1[5] = (int)(float)piVar1[0x29];
-  temp_v0 = FUN_00162ea4();
-  if (temp_v0 != 0) {
-    piVar1[3] = 1;
-  }
-  else {
-    piVar1[3] = 0;
-    FUN_0014afd0(piVar1[0x10],piVar1[0x11]);
-    FUN_0014afd0(0x27,0);
-  }
-  piVar1[6] = 0x3e851eb8;
-  asdProcessCreateSimple("EVE_2dTex",4,0,0,FUN_002897cc,FUN_0034da3c,piVar1);
-  return;
+    work->record = FUN_00283498(id);
+    work->node = work->record->node;
+    for (u32 i = 0; i < 3; ++i) {
+        NpcTextureEntry *entry = FUN_001834a4(0x27, DAT_0052f4ec[i]);
+        work->points[i].x = entry->x;
+        work->points[i].y = entry->y;
+        if (i == 0 && entry->extra != NULL) {
+            work->extra.x = entry->extra[0];
+            work->extra.y = entry->extra[1];
+        }
+    }
+    work->points[1].x = 72.0f;
+    work->x = 0x48;
+    work->fadeStep = 0.265f;
+    work->rotation = 0.0f;
+    work->fade = 0.0f;
+    work->screenRegion = 5;
+    work->y = (s32)work->points[1].y;
+    if (!FUN_00162ea4()) {
+        work->resourceState = 0;
+        FUN_0014afd0(work->table, work->node);
+        FUN_0014afd0(0x27, 0);
+    } else {
+        work->resourceState = 1;
+    }
+    work->speed = 0.26f;
+    return asdProcessCreateSimple(DAT_0052f4f0, 4, 0, 0,
+                                  FUN_002897cc, FUN_0034da3c, (u32)work);
 }
-
-} /* extern "C" */
+}

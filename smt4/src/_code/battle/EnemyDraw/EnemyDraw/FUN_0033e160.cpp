@@ -76,8 +76,8 @@ extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
 extern float DAT_00433d98; /* 0x433d98 */
 extern int g_titleScene; /* 0x44ea00 */
-extern unsigned int DAT_00476638; /* 0x476638 */
-extern unsigned int DAT_004efd9c; /* 0x4efd9c */
+extern unsigned int _ZGVZN2nw4math5MTX448IdentityEvE8identity; /* 0x476638 */
+extern unsigned int _ZZN2nw4math5MTX448IdentityEvE8identity; /* 0x4efd9c */
 extern unsigned int DAT_004efda0; /* 0x4efda0 */
 extern unsigned int DAT_004efda4; /* 0x4efda4 */
 extern unsigned int DAT_004efda8; /* 0x4efda8 */
@@ -284,25 +284,25 @@ void FUN_0033e160(fn_0033e160_arg0 *param_1,int param_2,int param_3,unsigned int
     temp_v45 = 0;
     temp_v46 = 0;
     temp_v17 = 0x3f800000;
-    if (((DAT_00476638 & 1) == 0) && (temp_v5 = __cxa_guard_acquire(&DAT_00476638), temp_v5 != 0)) {
-      DAT_004efd9c = (unsigned int)temp_v17;
+    if (((_ZGVZN2nw4math5MTX448IdentityEvE8identity & 1) == 0) && (temp_v5 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX448IdentityEvE8identity), temp_v5 != 0)) {
+      _ZZN2nw4math5MTX448IdentityEvE8identity = (unsigned int)temp_v17;
       DAT_004efda0 = temp_v8;
       DAT_004efda4 = temp_v8;
       DAT_004efda8 = temp_v8;
       DAT_004efdac = temp_v8;
-      DAT_004efdb0 = DAT_004efd9c;
+      DAT_004efdb0 = _ZZN2nw4math5MTX448IdentityEvE8identity;
       DAT_004efdb4 = temp_v8;
       DAT_004efdb8 = temp_v8;
       DAT_004efdbc = temp_v8;
       DAT_004efdc0 = temp_v8;
-      DAT_004efdc4 = DAT_004efd9c;
+      DAT_004efdc4 = _ZZN2nw4math5MTX448IdentityEvE8identity;
       DAT_004efdc8 = temp_v8;
       DAT_004efdcc = temp_v8;
       DAT_004efdd0 = temp_v8;
       DAT_004efdd4 = temp_v8;
-      DAT_004efdd8 = DAT_004efd9c;
+      DAT_004efdd8 = _ZZN2nw4math5MTX448IdentityEvE8identity;
     }
-    mtx44Copy(&temp_v20,&DAT_004efd9c);
+    mtx44Copy(&temp_v20,&_ZZN2nw4math5MTX448IdentityEvE8identity);
     mathMatrixTranslateLocal(&temp_v20,&temp_v20,&temp_v50);
     matrixScaleColumnsAlt(&temp_v20,&temp_v20,temp_v53);
     nn_math_ARMv6_MTX44MultAsm(&temp_v20,&temp_v20,&temp_v32);

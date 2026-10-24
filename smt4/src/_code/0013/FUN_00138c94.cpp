@@ -1,46 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00138c94` (_code @ 0x138c94, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b7148(void);
-int nngxBindCmdlist(int);
+/* Command-list descriptor: start pointer, byte size, native handle, state. */
+typedef struct CommandListDesc {
+    /* 0x00 */ u32 *start;
+    /* 0x04 */ u32 size;
+    /* 0x08 */ u32 handle;
+    /* 0x0C */ u32 state;
+} CommandListDesc;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+u32 *FUN_002b7148(void);
+void FUN_002af390(u32 *begin, u32 *end);
+void nngxBindCmdlist(u32 handle);
 
-extern int FUN_002af390(int *, int *);
-/* Supplied declaration required: FUN_002b7148. */
-/* Supplied declaration required: nngxBindCmdlist. */
-
-
-void FUN_00138c94(int *param_1)
-
+/* Records one GPU register write into the current command list and binds the list. */
+void FUN_00138c94(CommandListDesc *list)
 {
-/* irregular: 2 native warning(s); review required */
-  int *piVar1;
-  int *piVar2;
-  int temp_v0;
-  
-  piVar1 = param_1;
-  FUN_002b7148();
-  piVar2 = piVar1;
-  if (((unsigned int)piVar1 & 8) == 0) {
-    *piVar1 = 0;
-    piVar2 = piVar1 + 2;
-    piVar1[1] = 0x200;
-  }
-  *piVar2 = 1;
-  piVar2[1] = 0xf023d;
-  temp_v0 = FUN_002af390(piVar1,piVar2 + 2);
-  FUN_002b7148();
-  param_1[1] = temp_v0 - *param_1;
-  param_1[3] = 2;
-  nngxBindCmdlist(param_1[2]);
-  return;
+    u32 *start = FUN_002b7148();
+    u32 *cmd = start;
+
+    if (((u32)start & 8) == 0) {
+        *cmd++ = 0;
+        *cmd++ = 0x200;
+    }
+    *cmd++ = 1;
+    *cmd++ = 0xF023D;
+    FUN_002af390(start, cmd);
+    list->size = (u32)FUN_002b7148() - (u32)list->start;
+    list->state = 2;
+    nngxBindCmdlist(list->handle);
 }
 
 } /* extern "C" */

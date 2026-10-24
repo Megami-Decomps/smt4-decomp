@@ -8,7 +8,7 @@ int btlGetMainState(...);
 int dataTable8FindRecord(...);
 int dataTable04FindById(...);
 int sysMemClear(...);
-int FUN_0034a290(...);
+int dataTable41FindById(...);
 int FUN_003e8bb0(...);
 int counterIncrementSaturating(...);
 int FUN_003f0e20(...);
@@ -75,7 +75,7 @@ extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: dataTable04FindById. */
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0034a290. */
+/* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: counterIncrementSaturating. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -239,7 +239,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
     temp_v5 = 0;
     do {
       if (*(short *)((int)temp_v19 + temp_v5 * 2) != 0) {
-        FUN_0034a290();
+        dataTable41FindById();
       }
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 9);
@@ -389,7 +389,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
               temp_v10 = 0;
               do {
                 if (*(short *)((int)&temp_v32 + temp_v10 * 2) != 0) {
-                  FUN_0034a290();
+                  dataTable41FindById();
                 }
                 temp_v10 = temp_v10 + 1;
               } while (temp_v10 < 9);
@@ -482,7 +482,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
           temp_v6 = 0;
           do {
             temp_v8 = (unsigned int)*(unsigned short *)((int)temp_v19 + temp_v6 * 2);
-            if ((temp_v8 != 0) && (FUN_0034a290(), temp_v8 != 0)) {
+            if ((temp_v8 != 0) && (dataTable41FindById(), temp_v8 != 0)) {
               temp_v10 = temp_v10 + (unsigned int)*(unsigned char *)(temp_v8 + 0x30);
             }
             temp_v6 = temp_v6 + 1;

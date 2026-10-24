@@ -1,135 +1,126 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003398e4` (_code @ 0x3398e4, 0x268 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: memset lowers to __aeabi_memset instead of retail __aeabi_memset4 (same as FUN_00232698); the demon-id switch also keeps case 1-3 stores addressed from the world base in retail while built folds them into predicated stores off r7 */
+#include "common.h"
+#include <stddef.h>
+#include <string.h>
+
+/* An entry the party setup wrote: a flag word and the demon id. */
+struct PartyEntry {
+    u32 flag;
+    s32 id;
+};
+
+struct PartyObject {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ s32 id;
+};
+
+struct PartyRecord {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ u16 demonId;
+};
+
+struct DemonRecord {
+    /* 0x00 */ u8 unk00[0x88];
+    /* 0x88 */ s16 slot;
+};
+
+struct PartyWorld {
+    /* 0x0000 */ u8 unk0000[0x1FE4];
+    /* 0x1FE4 */ PartyEntry entries[42];
+    /* 0x2134 */ PartyObject *objects[42];
+    /* 0x21DC */ u8 unk21DC[0xD58];
+    /* 0x2F34 */ s32 partyCount;
+    /* 0x2F38 */ u8 unk2F38[0x644];
+    /* 0x357C */ u8 block357C[0xE10];
+    /* 0x438C */ s32 addedCount;
+    /* 0x4390 */ s32 selectedCount;
+    /* 0x4394 */ u8 unk4394[0x14];
+    /* 0x43A8 */ u32 defaults[42];
+    /* 0x4450 */ u8 unk4450[0x58];
+    /* 0x44A8 */ u32 flags;
+};
+typedef char PartyWorldLayout[offsetof(PartyWorld, flags) == 0x44A8 && offsetof(PartyWorld, defaults) == 0x43A8 &&
+    offsetof(PartyWorld, objects) == 0x2134 ? 1 : -1];
 
 extern "C" {
 
-int dataTable00FindById(void);
-int __aeabi_memset4(...);
-int memClear(int, int);
-int SBORROW4(int, int);
+DemonRecord *dataTable00FindById(u32 id);
+void memClear(void *dest, s32 size);
+PartyRecord *saveGetIndexedMapValue(s32 index);
+PartyObject *FUN_00294090(s32 id, s32 arg);
 
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int saveGetIndexedMapValue(int);
-extern unsigned int FUN_00294090(int, unsigned int);
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: memClear. */
-
-
-void FUN_003398e4(int param_1)
-
+/* Builds the party list for a new battle setup: picks the demon ids (the tutorial defaults, the first party-count
+ * defaults, or the saved map's demons), then creates a party object for each id that has none yet. */
+void FUN_003398e4(PartyWorld *world)
 {
-/* irregular: 3 goto(s); 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  int aiStack_c0 [42];
-  
-  temp_v5 = 0;
-  temp_v3 = 0x2a;
-  do {
-    temp_v0 = param_1 + temp_v5 * 8;
-    *(unsigned int *)(temp_v0 + 0x1fe4) = 0;
-    temp_v3 = temp_v3 - 1;
-    temp_v5 = temp_v5 + 1;
-    *(unsigned int *)(temp_v0 + 0x1fe8) = 0xffffffff;
-  } while (temp_v3 != 0);
-  __aeabi_memset4(aiStack_c0,0xa8,0xffffffff);
-  __aeabi_memset4(param_1 + 0x43a8,0xa8,0xffffffff);
-  memClear(param_1 + 0x357c,0xe10);
-  if (((*(unsigned int *)(param_1 + 0x44a8) & 0x40) == 0) && (*(int *)(param_1 + 0x2f34) - 1U >= 4)) {
-    temp_v5 = 0;
-    temp_v3 = temp_v5;
-    do {
-      temp_v0 = saveGetIndexedMapValue(temp_v3);
-      temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0x48);
-      if (temp_v1 != 0) {
-        *(unsigned int *)(param_1 + temp_v5 * 4 + 0x43a8) = temp_v1;
-        dataTable00FindById();
-        aiStack_c0[temp_v5] = (int)*(short *)(temp_v1 + 0x88);
-        temp_v5 = temp_v5 + 1;
-      }
-      temp_v6 = SBORROW4(temp_v5,4);
-      temp_v0 = temp_v5 - 4;
-      if (temp_v5 < 4) {
-        temp_v6 = SBORROW4(temp_v3 + 1,0xc);
-        temp_v0 = temp_v3 - 0xb;
-        temp_v3 = temp_v3 + 1;
-      }
-    } while (temp_v0 < 0 != temp_v6);
-    *(int *)(param_1 + 0x4390) = temp_v5;
-  }
-  else {
-    temp_v3 = *(int *)(param_1 + 0x2f34);
-    if ((*(unsigned int *)(param_1 + 0x44a8) & 0x40) != 0) {
-      temp_v3 = 4;
-      temp_v5 = 0;
-      goto LAB_003399b8;
+    s32 ids[42];
+    s32 selected;
+    s32 added;
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < 42; i++) {
+        world->entries[i].flag = 0;
+        world->entries[i].id = -1;
     }
-    temp_v5 = 0;
-    if (0 < temp_v3) {
-      do {
-        *(unsigned int *)(param_1 + 0x43a8) = 0x225;
-        while( 1 ) {
-          temp_v1 = *(unsigned int *)(param_1 + temp_v5 * 4 + 0x43a8) & 0xffff;
-          dataTable00FindById();
-          aiStack_c0[temp_v5] = (int)*(short *)(temp_v1 + 0x88);
-          temp_v5 = temp_v5 + 1;
-          if (temp_v3 <= temp_v5) goto LAB_00339a3c;
-LAB_003399b8:
-          if (temp_v5 == 0) break;
-          if (temp_v5 != 1) {
-            if (temp_v5 != 2) {
-              if (temp_v5 == 3) {
-                *(unsigned int *)(param_1 + 0x43b4) = 0x83;
-              }
-            }
-            else {
-              *(unsigned int *)(param_1 + 0x43b0) = 0x218;
-            }
-          }
-          else {
-            *(unsigned int *)(param_1 + 0x43ac) = 0x1e1;
-          }
+    memset(ids, 0xFF, sizeof(ids));
+    memset(world->defaults, 0xFF, sizeof(world->defaults));
+    memClear(world->block357C, sizeof(world->block357C));
+    if ((world->flags & 0x40) != 0 || (u32)(world->partyCount - 1) <= 3) {
+        selected = world->partyCount;
+        if ((world->flags & 0x40) != 0) {
+            selected = 4;
         }
-      } while( 1 );
+        for (i = 0; i < selected; i++) {
+            if (i == 0) {
+                world->defaults[0] = 0x225;
+            } else if (i == 1) {
+                world->defaults[1] = 0x1E1;
+            } else if (i == 2) {
+                world->defaults[2] = 0x218;
+            } else if (i == 3) {
+                world->defaults[3] = 0x83;
+            }
+            ids[i] = dataTable00FindById((u16)world->defaults[i])->slot;
+        }
+        world->selectedCount = selected;
+    } else {
+        selected = 0;
+        j = 0;
+        do {
+            PartyRecord *record = saveGetIndexedMapValue(j);
+
+            if (record->demonId != 0) {
+                world->defaults[selected] = record->demonId;
+                ids[selected] = dataTable00FindById(record->demonId)->slot;
+                selected++;
+            }
+        } while (selected < 4 && ++j < 12);
+        world->selectedCount = selected;
     }
-LAB_00339a3c:
-    *(int *)(param_1 + 0x4390) = temp_v3;
-  }
-  temp_v5 = 0;
-  temp_v3 = 0;
-  if (temp_v3 < *(int *)(param_1 + 0x4390)) {
-    do {
-      temp_v0 = 0;
-      do {
-        temp_v4 = *(int *)(param_1 + temp_v0 * 4 + 0x2134);
-        if ((temp_v4 != 0) && (*(int *)(temp_v4 + 4) == aiStack_c0[temp_v3])) goto LAB_00339b20;
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < 0x2a);
-      temp_v2 = FUN_00294090(aiStack_c0[temp_v3],1);
-      temp_v0 = 0;
-      do {
-        if (*(int *)(param_1 + temp_v0 * 4 + 0x2134) == 0) {
-          *(unsigned int *)(param_1 + temp_v0 * 4 + 0x2134) = temp_v2;
-          break;
+    added = 0;
+    for (i = 0; i < world->selectedCount; i++) {
+        s32 id = ids[i];
+        PartyObject *object;
+
+        for (j = 0; j < 42; j++) {
+            if (world->objects[j] != NULL && world->objects[j]->id == id) {
+                break;
+            }
         }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < 0x2a);
-      temp_v0 = temp_v5 * 8;
-      temp_v5 = temp_v5 + 1;
-      *(int *)(param_1 + temp_v0 + 0x1fe8) = aiStack_c0[temp_v3];
-LAB_00339b20:
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < *(int *)(param_1 + 0x4390));
-  }
-  *(int *)(param_1 + 0x438c) = temp_v5;
-  return;
+        if (j < 42) {
+            continue;
+        }
+        object = FUN_00294090(id, 1);
+        for (j = 0; j < 42; j++) {
+            if (world->objects[j] == NULL) {
+                world->objects[j] = object;
+                break;
+            }
+        }
+        world->entries[added++].id = ids[i];
+    }
+    world->addedCount = added;
 }
 
 } /* extern "C" */

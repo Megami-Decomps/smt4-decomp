@@ -12,7 +12,7 @@ int FUN_0050d0ac(...);
 int vtblCopyAssign(...);
 int listNodeUnlinkOrFree(...);
 int FUN_00521c8c(...);
-int FUN_00522e18(...);
+int _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE6insertERKS5_(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 36 slot(s), 144 byte(s) */
@@ -69,7 +69,7 @@ extern romwright_code ***FUN_004d9234(romwright_code *****);
 extern int FUN_0050d178(unsigned int *, unsigned int, romwright_code ***);
 /* Supplied declaration required: listNodeUnlinkOrFree. */
 /* Supplied declaration required: FUN_00521c8c. */
-/* Supplied declaration required: FUN_00522e18. */
+/* Supplied declaration required: _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE6insertERKS5_. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -389,7 +389,7 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
           temp_v21 = temp_v9;
           temp_v24 = temp_v6;
           temp_v26 = (int *****)temp_v22;
-          FUN_00522e18(&temp_v30,param_1 + 0x507);
+          _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE6insertERKS5_(&temp_v30,param_1 + 0x507);
           listNodeUnlinkOrFree(&temp_v6);
           listNodeUnlinkOrFree(&temp_v19);
           pppppcVar17 = &temp_v24;
@@ -504,7 +504,7 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
           temp_v24 = temp_v6;
           temp_v26 = (int *****)temp_v22;
           temp_v27 = temp_v8;
-          FUN_00522e18(&temp_v30,param_1 + 0x507);
+          _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE6insertERKS5_(&temp_v30,param_1 + 0x507);
           listNodeUnlinkOrFree(&temp_v19);
           listNodeUnlinkOrFree(&temp_v24);
           pppppcVar17 = &temp_v6;

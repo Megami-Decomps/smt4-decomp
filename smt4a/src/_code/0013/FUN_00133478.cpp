@@ -14,11 +14,11 @@ struct Vector184View {
 
 extern "C" {
 
-void FUN_002e32a4(s32 kind, ...);
+void _ZN4__rw10__rw_throwEiz(s32 kind, ...);
 void asdOperatorDeleteArray(void* storage);
 s32 vectorCountxB8_00307c56(Vector184View* vector);
 u32 bufGrowCapacity3(s32 count, Vector184View* vector);
-u32* wordRefMax(u32* requested, u32* grown);
+u32* _ZSt3maxIjERKT_S2_S2_(u32* requested, u32* grown);
 Element184View* allocElements184(Vector184View* vector, u32 capacity,
                                 Element184View* oldStorage);
 void FUN_00307c28(Element184View* begin, Element184View* end,
@@ -30,13 +30,13 @@ void vectorDestroyRangeStride184(Vector184View* vector,
 void FUN_00133478(Vector184View* vector, u32 requestedCapacity)
 {
     if (requestedCapacity > 0x01642C85u) {
-        FUN_002e32a4(8, "", "",
+        _ZN4__rw10__rw_throwEiz(8, "", "",
                      requestedCapacity, 0x01642C85u);
     }
 
     if (static_cast<u32>(vector->capacityEnd - vector->begin) < requestedCapacity) {
         u32 grownCapacity = bufGrowCapacity3(vectorCountxB8_00307c56(vector), vector);
-        u32 newCapacity = *wordRefMax(&requestedCapacity, &grownCapacity);
+        u32 newCapacity = *_ZSt3maxIjERKT_S2_S2_(&requestedCapacity, &grownCapacity);
         Element184View* newStorage = allocElements184(vector, newCapacity, vector->begin);
 
         FUN_00307c28(vector->begin, vector->end, newStorage, vector);

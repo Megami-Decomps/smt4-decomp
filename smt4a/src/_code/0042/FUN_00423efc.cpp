@@ -1,47 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00423efc` (_code @ 0x423efc, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: identical except the registers holding the inlined constructor's two stores (retail r2/r1, build r3/r2). */
+#include "classes/Obj557f74.h"
+#include <new>
+
+/* An allocator: slot 0 hands out `size` bytes with the given alignment. */
+class BlockAllocator {
+public:
+    virtual void *allocate(u32 size, u32 alignment) = 0;
+};
+
+/* The part of the request this function reads. */
+struct ObjectRequest {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 skip;
+    /* 0x08 */ u32 mode;
+    /* 0x0c */ u8 unk0c[8];
+    /* 0x14 */ u32 first;
+    /* 0x18 */ u32 second;
+};
+
+/* The part of the owner this function reads. */
+struct ObjectOwner {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 compact;
+};
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned char DAT_00557f7c; /* 0x557f7c */
-
-
-unsigned int FUN_00423efc(int param_1,unsigned int *param_2,int param_3,unsigned int *param_4)
-
+// Creates and sets up the object for a request unless the request is to be skipped; returns
+// whether it was created.
+u32 FUN_00423efc(ObjectOwner *owner, BlockAllocator *allocator, ObjectRequest *request, Obj557f74 **created)
 {
-  unsigned int temp_v0;
-  int *piVar2;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  
-  if (*(int *)(param_3 + 4) != 0) {
-    temp_v0 = 0;
-  }
-  else {
-    piVar2 = (int *)(**(romwright_code **)*param_2)(param_2,8,4);
-    if (piVar2 != (int *)0x0) {
-      piVar2[1] = 0;
-      *piVar2 = (int)&DAT_00557f7c;
+    if (request->skip != 0) {
+        return 0;
     }
-    *param_4 = (unsigned int)piVar2;
-    temp_v1 = *(unsigned int *)(param_3 + 8);
-    temp_v2 = temp_v1 < 2;
-    if (temp_v2) {
-      temp_v1 = (unsigned int)*(unsigned char *)(param_1 + 4);
+    Obj557f74 *object = (Obj557f74 *)allocator->allocate(8, 4);
+    if (object != NULL) {
+        new (object) Obj557f74();
     }
-    if (!(temp_v2 && temp_v1 == 0)) {
-      (**(romwright_code **)(*piVar2 + 8))
-                (piVar2,*(unsigned int *)(param_3 + 0x14),*(unsigned int *)(param_3 + 0x18),6);
+    *created = object;
+    if ((request->mode == 0 || request->mode == 1) && owner->compact == 0) {
+        object->slot2(request->first, request->second, 12);
+    } else {
+        object->slot2(request->first, request->second, 6);
     }
-    else {
-      (**(romwright_code **)(*piVar2 + 8))
-                (piVar2,*(unsigned int *)(param_3 + 0x14),*(unsigned int *)(param_3 + 0x18),0xc);
-    }
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    return 1;
 }
 
-} /* extern "C" */
+}

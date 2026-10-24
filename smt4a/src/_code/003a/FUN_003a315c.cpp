@@ -1,51 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a315c` (_code @ 0x3a315c, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0046c35c(int, int, int);
-int dataSetRecordAt(int, unsigned int);
+/* A 0x30-byte record of the type-0x29 table. */
+struct Table29Record {
+    /* 0x00 */ u8 data[0x30];
+};
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+extern void *g_aocSystem;
+void *dataTableGet(s32 table, s32 section);
+u8 *dataTableGetEntries(void *section);
+s32 dataTableGetCount(void *section);
+u32 FUN_0046c35c(void *aocSystem, s32 kind, u32 tableIndex);
+Table29Record *dataSetRecordAt(void *aocSystem, u32 index);
 
-extern int g_aocSystem; /* 0x570280 */
-
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0046c35c. */
-/* Supplied declaration required: dataSetRecordAt. */
-
-
-int FUN_003a315c(unsigned int param_1)
-
+/* Finds record `index` of the base table, continuing into the add-on packages' tables. */
+Table29Record *FUN_003a315c(u32 index)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = dataTableGet(0x29,4);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  if (param_1 < temp_v2) {
-    temp_v1 = temp_v1 + param_1 * 0x30;
-  }
-  else {
-    temp_v1 = g_aocSystem;
-    FUN_0046c35c(g_aocSystem,0x23,4);
-    if (param_1 < temp_v1 + temp_v2) {
-      temp_v1 = g_aocSystem;
-      dataSetRecordAt(g_aocSystem,param_1 - temp_v2);
-      return temp_v1;
+    void *section = dataTableGet(0x29, 4);
+    Table29Record *entries = (Table29Record *)dataTableGetEntries(section);
+    u32 count = dataTableGetCount(section);
+
+    if (index < count) {
+        return &entries[index];
     }
-    temp_v1 = 0;
-  }
-  return temp_v1;
+    if (index < FUN_0046c35c(g_aocSystem, 0x23, 4) + count) {
+        return dataSetRecordAt(g_aocSystem, index - count);
+    }
+    return NULL;
 }
 
 } /* extern "C" */

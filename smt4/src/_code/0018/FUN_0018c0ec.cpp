@@ -74,7 +74,7 @@ int FUN_00295eb0(...);
 int FUN_002b7bca(...);
 int eventQueueAddUnique(...);
 int timerStart(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int FUN_002bf810(...);
 int FUN_002c1658(...);
 int rt_memclr(...);
@@ -232,7 +232,7 @@ extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bf810. */
@@ -265,7 +265,7 @@ extern int FUN_0030ab14(void);
 extern int statusDownGetCursorIndex(void);
 /* Supplied declaration required: FUN_0033b7a0. */
 /* Supplied declaration required: FUN_0033b838. */
-extern unsigned int FUN_0033b8f4(int);
+extern unsigned int devilRollDropItem(int);
 extern unsigned int FUN_0033be40(int);
 /* Supplied declaration required: FUN_0033be90. */
 /* Supplied declaration required: skillChooseRandomFlaggedSlot. */
@@ -583,7 +583,7 @@ LAB_0018c354:
             }
             *(unsigned char *)(temp_v2 + 0xd554) = 1;
             temp_v4 = temp_v2 + 0x1fd8;
-            FUN_002bee58(temp_v4,2);
+            spriteStartAnimationByIndex(temp_v4,2);
             pairSetFirstResetSecond(temp_v4,0x1a);
             FUN_00295eb0(temp_v4,0x28,0x2f);
             temp_v8 = FUN_002bf4f8(0x28,0x30);
@@ -718,7 +718,7 @@ LAB_0018c354:
                       temp_v5 = temp_v5 + 1;
                     } while (temp_v5 < 3);
                     temp_v17 = temp_v2 + temp_v8 * 0x8c + 0x2064;
-                    FUN_002bee58(temp_v17,2);
+                    spriteStartAnimationByIndex(temp_v17,2);
                     pairSetFirstResetSecond(temp_v17,0x1a);
                     FUN_00295eb0(temp_v17,0x28,0x2f);
                     temp_v8 = FUN_002bf4f8(0x28,temp_v5 + 0x31);
@@ -741,7 +741,7 @@ LAB_0018c354:
                       temp_v5 = temp_v5 + 1;
                     } while (temp_v5 < 0x18);
                     temp_v17 = temp_v2 + temp_v8 * 0x8c + 0x2064;
-                    FUN_002bee58(temp_v17,3);
+                    spriteStartAnimationByIndex(temp_v17,3);
                     pairSetFirstResetSecond(temp_v17,0x62);
                     FUN_00295eb0(temp_v17,0x28,0x67);
                     temp_v8 = FUN_002bf4f8(0x28,temp_v18 + 0x68);
@@ -1819,7 +1819,7 @@ joined_r0x0018edf0:
     temp_v4 = gameGetUnitRecord((int)*(char *)(temp_v2 + *(int *)(temp_v2 + 0xcf78) * 0x620 + 0x3654));
     temp_v8 = *(int *)(temp_v2 + 0x3534);
     if (temp_v8 == 0) {
-      temp_v9 = FUN_0033b8f4(temp_v4);
+      temp_v9 = devilRollDropItem(temp_v4);
       *(unsigned int *)(temp_v2 + 0xd040) = temp_v9;
       beginStatusPanelClose();
       FUN_0029bd4c();

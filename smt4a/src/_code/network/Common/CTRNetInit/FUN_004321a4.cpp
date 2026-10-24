@@ -1,4 +1,3 @@
-/* NON_MATCHING: the svc is an inline-asm-only instruction (declared as a function, svc 0x23 = CloseHandle) */
 #include "common.h"
 #include "nn/Result.h"
 

@@ -1,45 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002345a4` (_code @ 0x2345a4, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: callee-saved register numbering (provider lands in r7, retail r5) and the failure test copies the status to r1 first. */
+#include "classes/WindowStatus.h"
+#include "nn/Result.h"
+#include "shard/W5_W5Match2_ValidationPair.h"
 
 extern "C" {
 
-int recordValidatePair(unsigned int, int, unsigned int);
-int _ZN18WindowStatusResultC1Ej(...);
-int FUN_00353368(unsigned int, unsigned int, unsigned int);
+s32 FUN_0023a1f8(u32 provider);
+u32 FUN_00353368(u32 provider, u32 record, u32 identifier);
+void recordValidatePair(u32 owner, ValidationPair pair);
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-/* Supplied declaration required: recordValidatePair. */
-extern int FUN_0023a1f8(unsigned int);
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-/* Supplied declaration required: FUN_00353368. */
-
-
-void FUN_002345a4(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Reads a record through the provider; a failed provider check is returned as is,
+// otherwise the read result is validated and returned.
+WindowStatusResult FUN_002345a4(u32 provider, u32 record, u32 identifier)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int uStack_1c;
-  
-  temp_v0 = FUN_0023a1f8(param_2);
-  if (temp_v0 < 0) {
-    _ZN18WindowStatusResultC1Ej(param_1,temp_v0);
-    return;
-  }
-  temp_v1 = param_2;
-  FUN_00353368(param_2,param_3,param_4);
-  _ZN18WindowStatusResultC1Ej(&temp_v2,temp_v1);
-  recordValidatePair(param_2,temp_v2,uStack_1c);
-  *param_1 = temp_v2;
-  param_1[1] = uStack_1c;
-  return;
+    s32 status = FUN_0023a1f8(provider);
+    if (nnResultIsFailure(status)) {
+        return WindowStatusResult(status);
+    }
+    WindowStatusResult result(FUN_00353368(provider, record, identifier));
+    ValidationPair pair = { result.code, result.description };
+    recordValidatePair(provider, pair);
+    return result;
 }
 
-} /* extern "C" */
+}

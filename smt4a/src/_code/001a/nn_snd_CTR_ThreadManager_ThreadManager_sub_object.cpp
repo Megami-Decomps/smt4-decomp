@@ -4,23 +4,23 @@
 
 extern "C" {
 
-int FUN_001a0d08(void);
+int nn_os_Thread_FinalizeImpl(void);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_001a0d08. */
+/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
 
 
 int nn_snd_CTR_ThreadManager_ThreadManager_sub_object(int param_1)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_001a0d08();
+  nn_os_Thread_FinalizeImpl();
   if (*(int *)(param_1 + 0x18) != 0) {
     software_interrupt(0x23);
     *(int *)(param_1 + 0x18) = 0;
   }
-  FUN_001a0d08();
+  nn_os_Thread_FinalizeImpl();
   if (*(int *)(param_1 + 0x10) != 0) {
     software_interrupt(0x23);
     *(int *)(param_1 + 0x10) = 0;

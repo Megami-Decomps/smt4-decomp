@@ -1,40 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ad1ac` (_code @ 0x1ad1ac, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "event/bustupEvent/BustupCutAnim.h"
+
+struct BustupPlacement {
+    u8 unk00[8];  // 0x00
+    f32 x;        // 0x08
+};
 
 extern "C" {
 
-int FUN_001ad7cc(unsigned int, unsigned int, int);
+extern BustupCutAnimA *g_bustupCutAnim;
+extern u32 g_bustupCutAnimSlotTable[]; /* 0x57f538 */
 
-extern int g_bustupCutAnim; /* 0x57f4c4 */
+s32 FUN_001ab8c0(void);
+s32 FUN_001ad7cc(u32 job, u32 slot, BustupPlacement *placement);
 
-extern int FUN_001ab8c0(void);
-/* Supplied declaration required: FUN_001ad7cc. */
-
-
-unsigned int FUN_001ad1ac(int param_1,int param_2)
-
+/* Places the active bust-up slot job; the first slot is shifted by the animation's x offset. Returns 1 when there is no job to place. */
+s32 FUN_001ad1ac(BustupPlacement *placement, s32 slot)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = g_bustupCutAnim;
-  if (g_bustupCutAnim == 0) {
-    temp_v1 = 0;
-  }
-  else {
-    if ((*(int *)(g_bustupCutAnim + 0x5e8) == 0) || (temp_v2 = FUN_001ab8c0(), temp_v2 == 0)) {
-      return 1;
+    BustupCutAnimA *anim = g_bustupCutAnim;
+    s32 result;
+
+    if (anim == NULL) {
+        return 0;
     }
-    temp_v1 = *(unsigned int *)(*(int *)(temp_v0 + 0x5e8) + 8);
-    FUN_001ad7cc(temp_v1,*(unsigned int *)(param_2 * 4 + 0x57f538),param_1);
-    if (param_2 == 0) {
-      *(float *)(param_1 + 8) = *(float *)(param_1 + 8) + *(float *)(temp_v0 + 0x644);
+    if (anim->object == NULL || FUN_001ab8c0() == 0) {
+        return 1;
     }
-  }
-  return temp_v1;
+    result = FUN_001ad7cc(anim->object->job, g_bustupCutAnimSlotTable[slot], placement);
+    if (slot == 0) {
+        placement->x += anim->offsetX;
+    }
+    return result;
 }
 
 } /* extern "C" */

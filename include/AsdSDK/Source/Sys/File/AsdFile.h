@@ -60,6 +60,11 @@ typedef struct AsdFileGlobals {
     /* 0x08 */ AsdFileEntry *entries;  /* registered entries, oldest first */
     /* 0x0c */ void *bufferB;
     /* 0x10 */ AsdFileRequest *head;   /* request list */
+    /* 0x14 */ u32 mutex;
+    /* 0x18 */ u32 unk18;
+    /* 0x1c */ struct AddressSpaceRegion *threadStack; /* the worker's stack mapping */
+    /* 0x20 */ u8 unk20[8];            /* the worker thread's handle and joined flag */
+    /* 0x28 */ u8 event[4];            /* nn::os::LightEvent that wakes the worker (longer than shown) */
 } AsdFileGlobals;
 
 #endif

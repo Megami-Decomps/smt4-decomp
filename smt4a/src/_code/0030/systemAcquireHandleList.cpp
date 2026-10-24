@@ -11,7 +11,7 @@ struct SystemHandleLink {
 };
 
 extern "C" {
-void* operatorNew(u32 size);
+void* _Znwj(u32 size);
 SystemHandleLink* FUN_00132f3c(SystemHandleList* list, u32 count);
 extern u8 DAT_006306ac;
 extern u8* DAT_005c4c18;
@@ -25,7 +25,7 @@ struct SystemHandleList {
     SystemHandleLink* head; // 0x10
     u32 unk14;              // 0x14
 
-    static void* operator new(u32 size) throw() { return operatorNew(size); }
+    static void* operator new(u32 size) throw() { return _Znwj(size); }
 
     SystemHandleList()
         : unk00(0), unk04(0), unk08(0), unk0c(0), head(NULL), unk14(0)

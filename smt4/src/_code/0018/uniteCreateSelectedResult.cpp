@@ -78,7 +78,7 @@ void uniteMergeInheritedSkillsAndStats(void* context, PartyMemberView* first,
                  PartyMemberView* second, int mode, PartyMemberView* result);
 DevilRecordView* devilGetRecord(u32 id);
 SkillRecordView* dataTable06Sub1GetRecord(u32 id);
-int FUN_0029cde0(const u16* values, int count, u32 value);
+int arrayContainsU16(const u16* values, int count, u32 value);
 int dataTable06ComparePriority(const void* left, const void* right);
 void FUN_002b7bca(void* base, int count, int elementSize,
                   int (*compare)(const void*, const void*));
@@ -158,7 +158,7 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
             const u16 skill = original->skills[i];
             if (skill != 0 &&
                 (dataTable06Sub1GetRecord(skill)->flags & 0x20) != 0 &&
-                FUN_0029cde0(candidates, 32, original->skills[i]) == 0) {
+                arrayContainsU16(candidates, 32, original->skills[i]) == 0) {
                 candidates[24 + i] = original->skills[i];
             }
         }
@@ -168,7 +168,7 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
             const int unlocked = flagCountUnlockedSlots(member);
             for (int i = 0; i < 32; ++i) {
                 if (candidates[i] == 0 ||
-                    FUN_0029cde0(member->skills, 8, candidates[i]) != 0)
+                    arrayContainsU16(member->skills, 8, candidates[i]) != 0)
                     continue;
 
                 int slot = 0;
@@ -187,7 +187,7 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
         } else {
             for (int i = 0; i < 8; ++i) {
                 if ((dataTable06Sub1GetRecord(member->skills[i])->flags & 0x20) != 0) {
-                    if (FUN_0029cde0(candidates, 32, member->skills[i]) == 0)
+                    if (arrayContainsU16(candidates, 32, member->skills[i]) == 0)
                         candidates[24 + i] = member->skills[i];
                     member->skills[i] = 0;
                 }

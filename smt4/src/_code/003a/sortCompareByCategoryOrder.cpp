@@ -14,7 +14,7 @@ typedef struct CategoryRow {
 
 extern SortRecord *FUN_002498ec(u16 id);
 extern int FUN_0024c52c(u16 category);
-extern CategoryRow *FUN_002ae164(u16 category);
+extern CategoryRow *dataTable40FindById(u16 category);
 
 /* Compare function for sorting ids: by category rank, then by the category row's order (descending), then by id. */
 int sortCompareByCategoryOrder(const u16 *a, const u16 *b)
@@ -24,9 +24,9 @@ int sortCompareByCategoryOrder(const u16 *a, const u16 *b)
     int diff = FUN_0024c52c(recordA->category) - FUN_0024c52c(recordB->category);
 
     if (diff == 0) {
-        u16 orderA = FUN_002ae164(recordA->category)->order;
+        u16 orderA = dataTable40FindById(recordA->category)->order;
 
-        diff = FUN_002ae164(recordB->category)->order - orderA;
+        diff = dataTable40FindById(recordB->category)->order - orderA;
         if (diff == 0) {
             diff = *a - *b;
         }

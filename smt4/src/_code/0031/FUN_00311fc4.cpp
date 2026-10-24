@@ -5,7 +5,7 @@
 #include "gamedata/DevilRecord.h"
 
 extern "C" {
-Table04Record *FUN_002ae164(u32 skill);
+Table04Record *dataTable40FindById(u32 skill);
 
 // Check equipped and default demon skills for the requested encoded category.
 u32 FUN_00311fc4()
@@ -14,7 +14,7 @@ u32 FUN_00311fc4()
     BtlEntry *entry = reinterpret_cast<BtlEntry *>(btlUnitGet(g_btlScriptUnit)->entryView.entry);
     if (entry->equipA != NULL) {
         for (s32 index = 0; index < 8; ++index) {
-            Table04Record *skill = FUN_002ae164(entry->equipA->items[index]);
+            Table04Record *skill = dataTable40FindById(entry->equipA->items[index]);
             if (skill != NULL && category == skill->skillProperties.category) {
                 scrSetResult(1);
                 return 1;
@@ -23,7 +23,7 @@ u32 FUN_00311fc4()
     }
     if (entry->equipB != NULL) {
         for (s32 index = 0; index < 8; ++index) {
-            Table04Record *skill = FUN_002ae164(entry->equipB->items[index]);
+            Table04Record *skill = dataTable40FindById(entry->equipB->items[index]);
             if (skill != NULL && category == skill->skillProperties.category) {
                 scrSetResult(1);
                 return 1;
@@ -33,7 +33,7 @@ u32 FUN_00311fc4()
     if (entry->devil != NULL) {
         DevilRecord *demon = reinterpret_cast<DevilRecord *>(devilGetRecord(entry->id));
         for (s32 index = 0; index < 8; ++index) {
-            Table04Record *skill = FUN_002ae164(demon->skillList.ids[index]);
+            Table04Record *skill = dataTable40FindById(demon->skillList.ids[index]);
             if (skill != NULL && category == skill->skillProperties.category) {
                 scrSetResult(1);
                 return 1;

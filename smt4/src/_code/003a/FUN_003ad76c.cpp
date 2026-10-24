@@ -9,7 +9,7 @@ int FUN_001f50ac(int);
 int uiInitializeFourTimerSet(int);
 int uiSpriteSetImageKeyframe(...);
 int FUN_002bd954(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int asdOperatorNew(...);
 int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
 int drawParameterBlockClear(void);
@@ -54,7 +54,7 @@ extern int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: uiInitializeFourTimerSet. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: paramsInit. */
 extern unsigned int FUN_0033d3e4(void);
@@ -99,18 +99,18 @@ void FUN_003ad76c(fn_003ad76c_arg0 *param_1,int param_2)
     do {
       temp_v5 = temp_v4 + temp_v3 * 0x8c + 0x7f4c;
       FUN_002bd954(temp_v5,0xd,2000,temp_v1,0xf1);
-      FUN_002bee58(temp_v5,3);
+      spriteStartAnimationByIndex(temp_v5,3);
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 5);
     FUN_002bd954(temp_v4 + 0x8208,0x15,1000,temp_v1,0xf1);
-    FUN_002bee58(temp_v4 + 0x8208,9);
+    spriteStartAnimationByIndex(temp_v4 + 0x8208,9);
     FUN_002bd954(temp_v4 + 0x8294,0x15,0x3ea,temp_v1,0xf1);
-    FUN_002bee58(temp_v4 + 0x8294,9);
+    spriteStartAnimationByIndex(temp_v4 + 0x8294,9);
     temp_v3 = temp_v0 + temp_v6 * 0xa0;
     *(unsigned char *)(temp_v3 + 0xbfe4) = 0;
     temp_v3 = temp_v3 + 0xbf4c;
     FUN_002bd954(temp_v3,0x15,0x3ee,temp_v1,0xf1);
-    FUN_002bee58(temp_v3,10);
+    spriteStartAnimationByIndex(temp_v3,10);
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 0x10);
   temp_v6 = 0;
@@ -118,9 +118,9 @@ void FUN_003ad76c(fn_003ad76c_arg0 *param_1,int param_2)
     temp_v3 = temp_v0 + temp_v6 * 0x14c;
     *(unsigned short *)(temp_v3 + 0xe1c4) = 0;
     FUN_002bd954(temp_v3 + 0xe0ac,0x15,0xbba,temp_v0 + 0x7ea0,0xf1);
-    FUN_002bee58(temp_v3 + 0xe0ac,0xb);
+    spriteStartAnimationByIndex(temp_v3 + 0xe0ac,0xb);
     FUN_002bd954(temp_v3 + 0xe138,0x15,0xbbe,temp_v0 + 0x7ea0,0xf1);
-    FUN_002bee58(temp_v3 + 0xe138,0xc);
+    spriteStartAnimationByIndex(temp_v3 + 0xe138,0xc);
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 0xc);
   temp_v6 = 0x3a4;

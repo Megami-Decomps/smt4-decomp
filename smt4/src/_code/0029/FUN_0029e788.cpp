@@ -34,15 +34,15 @@ typedef char MenuSessionResetOffsetsCheck[offsetof(MenuSessionResetViewIV, first
 
 extern "C" {
 extern ObjBRef g_gameGlobals;
-void FUN_002bee58(UiSpriteState *sprite, s32 index);
+void spriteStartAnimationByIndex(UiSpriteState *sprite, s32 index);
 void timerStart(UiSpriteState *sprite, s32 duration, u32 flags);
 
 void FUN_0029e788()
 {
     MenuSessionResetViewIV *session = (MenuSessionResetViewIV *)g_gameGlobals.instance;
-    FUN_002bee58(&session->headers[0], 0);
-    FUN_002bee58(&session->headers[1], 1);
-    FUN_002bee58(&session->headers[2], 2);
+    spriteStartAnimationByIndex(&session->headers[0], 0);
+    spriteStartAnimationByIndex(&session->headers[1], 1);
+    spriteStartAnimationByIndex(&session->headers[2], 2);
     for (s32 index = 0; index < 10; ++index) {
         timerStart(&session->primary[index], 4, 0);
         timerStart(&session->secondary[index], 1, 0);

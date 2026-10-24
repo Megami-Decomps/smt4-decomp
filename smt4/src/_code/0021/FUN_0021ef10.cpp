@@ -12,7 +12,7 @@ int FUN_002bf288(int, int, int, int, int, int);
 int FUN_002c0944(unsigned int);
 int FUN_002c1b64(int, int);
 int FUN_002c39a4(int);
-int FUN_002f472c(int, int);
+int findKeyedRecord(int, int);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -36,7 +36,7 @@ extern unsigned long long FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002f472c. */
+/* Supplied declaration required: findKeyedRecord. */
 
 
 unsigned int FUN_0021ef10(void)
@@ -146,7 +146,7 @@ unsigned int FUN_0021ef10(void)
       } while (temp_v3 < temp_v4);
     }
     temp_v4 = (int)*(short *)(temp_v1 + 0xccbc);
-    if ((temp_v4 == 0x18) || (FUN_002f472c(temp_v4,(int)*(short *)(temp_v1 + 0xccbe)), temp_v4 != 0)) {
+    if ((temp_v4 == 0x18) || (findKeyedRecord(temp_v4,(int)*(short *)(temp_v1 + 0xccbe)), temp_v4 != 0)) {
       temp_v4 = g_titleScene;
       temp_v2 = FUN_002c5d80(1,0);
       piVar7 = (int *)(temp_v4 + 0x124c);

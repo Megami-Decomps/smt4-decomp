@@ -1,34 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f7fe8` (_code @ 0x4f7fe8, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct SourceEntry {
+    s32 id;     // 0x00, negative when the slot is free
+    s32 state;  // 0x04
+    u8 unk08[0x34];
+};
+
+struct SourceTable {
+    u8 unk0000[0x1398];
+    SourceEntry entries[50]; // 0x1398
+};
+
+struct SourceOwner {
+    u8 unk00[0x50];
+    u32 flags; // 0x50
+};
 
 extern "C" {
 
-extern unsigned int btlGetMainState(void);
-extern unsigned int stateEntryFindById(unsigned int, unsigned int);
+void *btlGetMainState(void);
+s32 stateEntryFindById(void *battle, u32 id);
 
-
-void FUN_004f7fe8(int param_1,int param_2,unsigned int param_3)
-
+// Register the id in the first free slot of the table, unless the owner forbids it.
+void FUN_004f7fe8(SourceTable *table, SourceOwner *owner, u32 id)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  if ((*(unsigned int *)(param_2 + 0x50) & 0x20000) == 0) {
-    temp_v1 = 0;
-    while (-1 < *(int *)(param_1 + temp_v1 * 0x3c + 0x1398)) {
-      temp_v1 = temp_v1 + 1;
-      if (temp_v1 >= 0x32) {
-        return;
-      }
+    if ((owner->flags & 0x20000) == 0) {
+        for (s32 i = 0; i < 50; i++) {
+            if (table->entries[i].id < 0) {
+                s32 state = stateEntryFindById(btlGetMainState(), id);
+                table->entries[i].id = id;
+                table->entries[i].state = state;
+                return;
+            }
+        }
     }
-    temp_v0 = btlGetMainState();
-    temp_v0 = stateEntryFindById(temp_v0,param_3);
-    param_1 = param_1 + temp_v1 * 0x3c;
-    *(unsigned int *)(param_1 + 0x1398) = param_3;
-    *(unsigned int *)(param_1 + 0x139c) = temp_v0;
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022d7b0(...);
-int FUN_00230cc0(int, int, int, int, int);
+int uiRectDrawAtBottomRight(int, int, int, int, int);
 int FUN_00231bcc(...);
 int FUN_002be56c(...);
 int textFormatBuffer(...);
@@ -35,7 +35,7 @@ extern union romwright_storage_s__B_B_0043d994_9_1 s__B_B_0043d994; /* 0x43d994 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern unsigned int dataLookupDisplayName(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0022d7b0. */
-/* Supplied declaration required: FUN_00230cc0. */
+/* Supplied declaration required: uiRectDrawAtBottomRight. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern int curveEvaluateStandard(unsigned char *, unsigned int);
 extern int FUN_00240d5c(int);
@@ -63,7 +63,7 @@ void FUN_003a9648(int param_1)
   
   temp_v4 = *(int *)(param_1 + 0x594);
   VectorSignedToFloat(0x100 - temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00230cc0(param_1 + 200,0xd,0,0,temp_v4);
+  uiRectDrawAtBottomRight(param_1 + 200,0xd,0,0,temp_v4);
   if (*(char *)(param_1 + 0xa6be) == '\0') {
     temp_v6 = 0x1025;
   }

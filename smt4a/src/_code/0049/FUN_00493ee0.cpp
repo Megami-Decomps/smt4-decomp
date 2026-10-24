@@ -18,7 +18,7 @@ extern "C" {
 u32 FUN_00192718(u32 id);
 EquipmentSortConsumable *contentEntryFindById2(u32 id);
 Table8Record *dataTable8FindRecord(u32 id);
-EquipmentSortArmor *FUN_00192608(u32 id);
+EquipmentSortArmor *dataTable08Sub2GetRecord(u32 id);
 s32 FUN_0049c9a0(const u16 *id);
 }
 
@@ -33,7 +33,7 @@ static __inline u32 equipmentGetTypeSortValue(u32 id)
     case 6:
     case 7:
     case 8:
-        value = FUN_00192608(id)->value;
+        value = dataTable08Sub2GetRecord(id)->value;
         break;
     case 0:
         value = contentEntryFindById2(id)->value;

@@ -1,145 +1,113 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033fe6c` (_code @ 0x33fe6c, 0x220 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same logic as retail; armcc keeps the effect in r6 and the target record in r7 (swapped here) and compiles the HP/MP merge as a longer branch tree. */
+#include "common.h"
+
+/* The item or skill effect being tested (only the fields read here). */
+struct RecoveryEffect {
+    /* 0x00 */ u8 unk00[0x64];
+    /* 0x64 */ u16 hpAmount;
+    /* 0x66 */ u16 mpAmount;
+    /* 0x68 */ u8 hpPercent;
+    /* 0x69 */ u8 mpPercent;
+    /* 0x6A */ u8 statusKind; /* low 7 bits: the status cured */
+};
+
+/* The player's record (the party's leader when the index is negative). */
+struct PlayerRecord {
+    /* 0x00 */ u8 unk00[0x1E];
+    /* 0x1E */ s16 maxMp;
+    /* 0x20 */ u8 unk20[0xA];
+    /* 0x2A */ s16 hp;
+    /* 0x2C */ s16 mp;
+    /* 0x2E */ u8 unk2E[0x44];
+    /* 0x72 */ u16 status;
+};
+
+/* A party demon's record. */
+struct UnitRecord {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s16 maxMp;
+    /* 0x12 */ u8 unk12[0x18];
+    /* 0x2A */ s16 hp;
+    /* 0x2C */ s16 mp;
+    /* 0x2E */ u8 unk2E[0x16];
+    /* 0x44 */ u16 status;
+};
+
+#define RECOVER_HP 1
+#define RECOVER_MP 2
+#define CURE_STATUS 4
 
 extern "C" {
+PlayerRecord *gameGetPlayerData(void);
+UnitRecord *saveResolvePartySlot(s32 index);
+UnitRecord *gameGetUnitRecord(s32 index);
+s32 btlSourceGetMaxHp(const PlayerRecord *player);
+s32 FUN_00269bf0(const UnitRecord *unit);
+void FUN_0023dc38(u16 *mask, s32 kind);
 
-int FUN_0023dc38(unsigned int *, int);
-int btlSourceGetMaxHp(void);
-int FUN_00269bf0(void);
-
-typedef struct fn_0033fe6c_arg0 fn_0033fe6c_arg0;
-typedef struct fn_0033fe6c_arg2 fn_0033fe6c_arg2;
-struct fn_0033fe6c_arg0 {
-    unsigned char pad_0x0[0x10];
-    short field_0x10; /* +0x10 */
-    unsigned char pad_0x12[0x18];
-    short field_0x2a; /* +0x2a */
-    short field_0x2c; /* +0x2c */
-    unsigned char pad_0x2e[0x16];
-    ushort field_0x44; /* +0x44 */
-};
-struct fn_0033fe6c_arg2 {
-    unsigned char pad_0x0[0x64];
-    ushort field_0x64; /* +0x64 */
-    ushort field_0x66; /* +0x66 */
-    byte field_0x68; /* +0x68 */
-    byte field_0x69; /* +0x69 */
-    byte field_0x6a; /* +0x6a */
-};
-
-/* stack frame of param_4: 1 slot(s), 2 byte(s) */
-typedef struct {
-    unsigned short sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_0023dc38. */
-extern int saveResolvePartySlot(void);
-/* Supplied declaration required: btlSourceGetMaxHp. */
-/* Supplied declaration required: FUN_00269bf0. */
-extern int gameGetUnitRecord(fn_0033fe6c_arg0 *);
-extern int gameGetPlayerData(void);
-
-
-unsigned int
-FUN_0033fe6c(fn_0033fe6c_arg0 *param_1,int param_2,fn_0033fe6c_arg2 *param_3,unsigned int param_4)
-
+/* Tells whether the effect would change the target: 0 when it would, 3 when it would do nothing. */
+u32 FUN_0033fe6c(s32 index, s32 fromParty, const RecoveryEffect *effect, u32 useAmounts)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  
-  temp_v5 = 0;
-  temp_v4 = 0;
-  temp_v2 = 0;
-  if (param_4 != 0) {
-    temp_v4 = param_3->field_0x68 != 0 || param_3->field_0x64 != 0;
-    if (param_3->field_0x66 != 0) {
-      temp_v4 = temp_v4 | 2;
+    u32 result = 0;
+    u32 wanted = 0;
+    u32 changes = 0;
+    if (useAmounts != 0) {
+        if (effect->hpAmount != 0)
+            wanted = RECOVER_HP;
+        if (effect->hpPercent != 0)
+            wanted |= RECOVER_HP;
+        if (effect->mpAmount != 0)
+            wanted |= RECOVER_MP;
+        if (effect->mpPercent != 0)
+            wanted |= RECOVER_MP;
+        if ((effect->statusKind & 0x7F) != 0)
+            wanted |= CURE_STATUS;
     }
-    if (param_3->field_0x69 != 0) {
-      temp_v4 = temp_v4 | 2;
+    if ((effect->statusKind & 0x7F) == 1)
+        wanted |= CURE_STATUS;
+    if (index < 0) {
+        PlayerRecord *player = gameGetPlayerData();
+        if ((wanted & RECOVER_HP) && (player->status & 2) == 0 && btlSourceGetMaxHp(player) != player->hp)
+            changes = RECOVER_HP;
+        if ((wanted & RECOVER_MP) && (player->status & 2) == 0 && player->mp != player->maxMp)
+            changes |= RECOVER_MP;
+        if ((wanted & RECOVER_HP) && (wanted & RECOVER_MP)) {
+            if ((changes & RECOVER_HP) == 0 ||
+                ((changes & RECOVER_MP) == 0 && ((changes |= RECOVER_MP), (changes & RECOVER_HP) == 0))) {
+                if (changes & RECOVER_MP)
+                    changes |= RECOVER_HP;
+            }
+        }
+        if ((wanted & CURE_STATUS) != 0) {
+            u16 cureMask = 0;
+            FUN_0023dc38(&cureMask, effect->statusKind & 0x7F);
+            if ((cureMask & player->status) != 0)
+                changes |= CURE_STATUS;
+        }
+    } else {
+        UnitRecord *unit = fromParty != 0 ? saveResolvePartySlot(index) : gameGetUnitRecord(index);
+        if (unit == NULL)
+            return 3;
+        if ((wanted & RECOVER_HP) && (unit->status & 0x406) == 0 && FUN_00269bf0(unit) != unit->hp)
+            changes = RECOVER_HP;
+        if ((wanted & RECOVER_MP) && (unit->status & 0x406) == 0 && unit->mp != unit->maxMp)
+            changes |= RECOVER_MP;
+        if ((wanted & RECOVER_HP) && (wanted & RECOVER_MP)) {
+            if ((changes & RECOVER_HP) == 0 ||
+                ((changes & RECOVER_MP) == 0 && ((changes |= RECOVER_MP), (changes & RECOVER_HP) == 0))) {
+                if (changes & RECOVER_MP)
+                    changes |= RECOVER_HP;
+            }
+        }
+        if ((wanted & CURE_STATUS) != 0) {
+            u16 cureMask = 0;
+            FUN_0023dc38(&cureMask, effect->statusKind & 0x7F);
+            if ((cureMask & unit->status) != 0)
+                changes |= CURE_STATUS;
+        }
     }
-    if ((param_3->field_0x6a & 0x7f) != 0) {
-      temp_v4 = temp_v4 | 4;
-    }
-  }
-  if ((param_3->field_0x6a & 0x7f) == 1) {
-    temp_v4 = temp_v4 | 4;
-  }
-  temp_v6 = param_4;
-  if ((int)param_1 < 0) {
-    temp_v0 = gameGetPlayerData();
-    if ((((temp_v4 & 1) != 0) && ((*(unsigned short *)(temp_v0 + 0x72) & 2) == 0)) &&
-       (temp_v1 = temp_v0, btlSourceGetMaxHp(), temp_v1 != *(short *)(temp_v0 + 0x2a))) {
-      temp_v2 = 1;
-    }
-    if ((((temp_v4 & 2) != 0) && ((*(unsigned short *)(temp_v0 + 0x72) & 2) == 0)) &&
-       (*(short *)(temp_v0 + 0x2c) != *(short *)(temp_v0 + 0x1e))) {
-      temp_v2 = temp_v2 | 2;
-    }
-    temp_v3 = temp_v2;
-    if ((((temp_v4 & 1) != 0 && (temp_v4 & 2) != 0) &&
-        (((temp_v2 & 1) == 0 || (((temp_v2 & 2) == 0 && (temp_v3 = temp_v2 | 2, (temp_v2 & 1) == 0)))))) &&
-       ((temp_v3 & 2) != 0)) {
-      temp_v3 = temp_v3 | 1;
-    }
-    if ((temp_v4 & 4) == 0) {
-      if (temp_v4 != temp_v3) {
-        temp_v5 = 3;
-      }
-      return temp_v5;
-    }
-    temp_v6 = temp_v6 & 0xffff0000;
-    FUN_0023dc38(&temp_v6,param_3->field_0x6a & 0x7f);
-    (*(unsigned short *)((unsigned char *)&temp_v6 + 0)) = (unsigned short)temp_v6 & *(unsigned short *)(temp_v0 + 0x72);
-  }
-  else {
-    if (param_2 != 0) {
-      temp_v0 = saveResolvePartySlot();
-    }
-    else {
-      temp_v0 = gameGetUnitRecord(param_1);
-    }
-    if (temp_v0 == 0) {
-      return 3;
-    }
-    if ((((temp_v4 & 1) != 0) && ((*(unsigned short *)(temp_v0 + 0x44) & 0x406) == 0)) &&
-       (temp_v1 = temp_v0, FUN_00269bf0(), temp_v1 != *(short *)(temp_v0 + 0x2a))) {
-      temp_v2 = 1;
-    }
-    if ((((temp_v4 & 2) != 0) && ((*(unsigned short *)(temp_v0 + 0x44) & 0x406) == 0)) &&
-       (*(short *)(temp_v0 + 0x2c) != *(short *)(temp_v0 + 0x10))) {
-      temp_v2 = temp_v2 | 2;
-    }
-    temp_v3 = temp_v2;
-    if (((temp_v4 & 1) != 0 && (temp_v4 & 2) != 0) &&
-       ((((temp_v2 & 1) == 0 || (((temp_v2 & 2) == 0 && (temp_v3 = temp_v2 | 2, (temp_v2 & 1) == 0)))) &&
-        ((temp_v3 & 2) != 0)))) {
-      temp_v3 = temp_v3 | 1;
-    }
-    if ((temp_v4 & 4) == 0) {
-      if (temp_v4 != temp_v3) {
-        temp_v5 = 3;
-      }
-      return temp_v5;
-    }
-    temp_v6 = temp_v6 & 0xffff0000;
-    FUN_0023dc38(&temp_v6,param_3->field_0x6a & 0x7f);
-    (*(unsigned short *)((unsigned char *)&temp_v6 + 0)) = (unsigned short)temp_v6 & *(unsigned short *)(temp_v0 + 0x44);
-  }
-  if ((unsigned short)temp_v6 != 0) {
-    temp_v3 = temp_v3 | 4;
-  }
-  if (temp_v4 != temp_v3) {
-    temp_v5 = 3;
-  }
-  return temp_v5;
+    if (wanted != changes)
+        result = 3;
+    return result;
 }
-
-} /* extern "C" */
+}

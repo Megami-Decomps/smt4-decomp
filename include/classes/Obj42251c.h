@@ -8,7 +8,16 @@
  * own to destroy. FUN_003aff9c makes it. */
 class Obj42251c : public Obj422540 {
 public:
+    Obj42251c(OwnerAllocator *allocator, void *storage) : Obj422540(allocator, storage, 0xd)
+    {
+        kind = 3;
+        lowNibble = 6;
+        highNibble = 0;
+    }
     virtual ~Obj42251c();
+    /* 0x18 */ u8 unk18[0x1c];
+    /* 0x34 */ u32 lowNibble;
+    /* 0x38 */ u32 highNibble;
 };
 
 /* Serialized parameter state handled by the concrete pool callback. */

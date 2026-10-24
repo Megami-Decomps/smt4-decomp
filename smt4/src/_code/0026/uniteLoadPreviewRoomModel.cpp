@@ -3,7 +3,7 @@
 
 // The playback fields follow the shared model-node prefix.
 struct UniteModelPlayback : AsdMdlNode {
-    u8 unk2C[0x48];
+    u8 unk30[0x44];
     f32 speed; // 0x74
     f32 frame; // 0x78
 };

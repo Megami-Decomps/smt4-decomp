@@ -1,32 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a2818` (_code @ 0x3a2818, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only register naming of the slot address computation differs (retail: ldr r0,[g_mapGimic]; add r1,idx*3; add r0,r0,r1,lsl #3). */
+#include "common.h"
+
+struct GimicObject {
+    u8 unk00[4];
+    u32 handle; // 0x04
+};
+
+struct GimicSlot {
+    u8 active;          // 0x00
+    u8 unk01;
+    u8 unk02[2];
+    s16 id;             // 0x04
+    u8 unk06[2];
+    GimicObject *obj;   // 0x08
+    u8 unk0c[0xc];
+};
+
+struct GimicTable {
+    u8 unk000[0x8c4];
+    GimicSlot slots[10]; // 0x8c4
+};
 
 extern "C" {
+extern GimicTable *g_mapGimic;
+void FUN_003fd7c0(u32 controller, u32 motion, s32 mode, f32 blend);
 
-int FUN_003fd7c0(unsigned int, unsigned int, int);
-
-extern int g_mapGimic; /* 0x580ca0 */
-
-/* Supplied declaration required: FUN_003fd7c0. */
-
-
-void FUN_003a2818(int param_1,unsigned int param_2)
-
+// Start motion on every active map gimmick with the requested id.
+void FUN_003a2818(s32 id, u32 motion)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  do {
-    temp_v0 = g_mapGimic + temp_v1 * 0x18;
-    if ((*(char *)(temp_v0 + 0x8c4) != '\0') && (*(short *)(temp_v0 + 0x8c8) == param_1)) {
-      FUN_003fd7c0(*(unsigned int *)(*(int *)(temp_v0 + 0x8cc) + 4),param_2,2);
+    for (s32 index = 0; index < 10; ++index) {
+        GimicSlot *slot = &g_mapGimic->slots[index];
+        if (slot->active != 0 && slot->id == id) {
+            FUN_003fd7c0(slot->obj->handle, motion, 2, 0.0f);
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 10);
-  return;
 }
-
-} /* extern "C" */
+}

@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_0013c884(...);
+int asdCameraInitializeDefaults(...);
 int uiSetFloatPair(...);
 int asdProcessCreateSimple(...);
 int FUN_0014f0dc(...);
@@ -35,7 +35,7 @@ extern unsigned char LAB_00387900; /* 0x387900 */
 extern unsigned int *g_bustupCutAnim; /* 0x57f4c4 */
 
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_0013c884. */
+/* Supplied declaration required: asdCameraInitializeDefaults. */
 /* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_0014f0dc. */
@@ -69,7 +69,7 @@ unsigned int FUN_00387604(void)
     asdMemoryAllocTracked(0x100,0x100,0,0x748,1);
     g_bustupCutAnim = puVar1;
     sysMemClear();
-    FUN_0013c884(puVar1 + 1,1);
+    asdCameraInitializeDefaults(puVar1 + 1,1);
     puVar1[0x144] = 0;
     puVar1[0x145] = 0;
     puVar1[0x146] = 0;

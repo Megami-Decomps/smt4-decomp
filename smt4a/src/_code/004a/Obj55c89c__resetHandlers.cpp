@@ -13,7 +13,7 @@ typedef struct {
 extern int FUN_004a15a0(...); /* 0x4a15a0 */
 extern int FUN_004a18ec(...); /* 0x4a18ec */
 extern int FUN_004a2064(...); /* 0x4a2064 */
-extern int FUN_004a2238(...); /* 0x4a2238 */
+extern int _ZN13BibleItemMenu7confirmEv(...); /* 0x4a2238 */
 extern int FUN_004a2404(...); /* 0x4a2404 */
 extern int FUN_004a24a8(...); /* 0x4a24a8 */
 extern int FUN_004a2ee0(...); /* 0x4a2ee0 */
@@ -50,7 +50,7 @@ void Obj55c89c::resetHandlers()
     *(unsigned int *)(temp_v2 + 0xa978) = 0;
     *(unsigned int *)(temp_v2 + 0xa97c) = 0;
   } while (temp_v1 != 0);
-  *(romwright_code **)(param_1 + 0xa878) = FUN_004a2238;
+  *(romwright_code **)(param_1 + 0xa878) = _ZN13BibleItemMenu7confirmEv;
   *(unsigned int *)(param_1 + 0xa87c) = 0;
   *(romwright_code **)(param_1 + 0xa880) = FUN_004a2404;
   *(unsigned int *)(param_1 + 0xa884) = 0;

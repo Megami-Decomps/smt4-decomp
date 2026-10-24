@@ -1,45 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00427ff4` (_code @ 0x427ff4, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: sign test hoists a copy of the status (mov r1,r0; lsrs r0) and r5/r6 argument registers are swapped. */
+#include "classes/WindowStatus.h"
+#include "nn/Result.h"
+
+struct DateTimeValue;
 
 extern "C" {
+s32 FUN_004283cc(void *owner);
+s32 FUN_00428104(void *owner, DateTimeValue *output);
+void recordValidatePair(void *owner, WindowStatusResult result);
 
-int _ZN18WindowStatusResultC1Ej(...);
-int FUN_00428104(unsigned int, unsigned int);
-int recordValidatePair(unsigned int, int, unsigned int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
-
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-/* Supplied declaration required: FUN_00428104. */
-extern int FUN_004283cc(unsigned int);
-/* Supplied declaration required: recordValidatePair. */
-
-
-void FUN_00427ff4(unsigned int *param_1,unsigned int param_2,unsigned int param_3)
-
+// Read the owner's current time and return its translated status, reporting a failed result to the owner.
+WindowStatusResult FUN_00427ff4(void *owner, DateTimeValue *output)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int uStack_14;
-  
-  temp_v0 = FUN_004283cc(param_2);
-  if (temp_v0 < 0) {
-    _ZN18WindowStatusResultC1Ej(param_1,temp_v0);
-    return;
-  }
-  temp_v1 = param_2;
-  FUN_00428104(param_2,param_3);
-  _ZN18WindowStatusResultC1Ej(&temp_v2,temp_v1);
-  recordValidatePair(param_2,temp_v2,uStack_14);
-  *param_1 = temp_v2;
-  param_1[1] = uStack_14;
-  return;
+    s32 status = FUN_004283cc(owner);
+    if (nnResultIsFailure(status)) {
+        return WindowStatusResult(status);
+    }
+    WindowStatusResult result(FUN_00428104(owner, output));
+    recordValidatePair(owner, result);
+    return result;
 }
-
-} /* extern "C" */
+}

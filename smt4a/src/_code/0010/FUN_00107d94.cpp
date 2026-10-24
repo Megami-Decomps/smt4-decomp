@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00103890(unsigned char [4], int);
+int _ZN9Obj5584c8C1ERKS_(unsigned char [4], int);
 int FUN_00105d54(int *, int **, int, int);
 int FUN_00105dd0(int *, int **);
 int FUN_00108ea8(...);
@@ -17,7 +17,7 @@ int destroyObj0055ae64(int **);
 int FUN_002ec934(int **, unsigned char [8], unsigned int);
 int FUN_002ef268(int *, unsigned int);
 int FUN_002efa58(int **, int *, int);
-int bitFieldSet(int **, int);
+int _ZNSt6vectorIb12AsdAllocatorIbEE9referenceaSEb(int **, int);
 int FUN_002f07b8(...);
 int halt_baddata(void);
 
@@ -52,7 +52,7 @@ extern unsigned char g_flagBlock; /* 0x594958 */
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_00103890. */
+/* Supplied declaration required: _ZN9Obj5584c8C1ERKS_. */
 /* Supplied declaration required: FUN_00105d54. */
 /* Supplied declaration required: FUN_00105dd0. */
 /* Supplied declaration required: FUN_00108ea8. */
@@ -72,7 +72,7 @@ extern int FUN_002ef01c(int);
 extern int FUN_002efa1c(int *);
 extern unsigned int *arrayElementAddress_002efa50(int *, unsigned char);
 /* Supplied declaration required: FUN_002efa58. */
-/* Supplied declaration required: bitFieldSet. */
+/* Supplied declaration required: _ZNSt6vectorIb12AsdAllocatorIbEE9referenceaSEb. */
 extern int FUN_002f035c(unsigned char *, unsigned char *);
 extern int FUN_002f03f4(unsigned int, unsigned int);
 extern int FUN_002f0400(unsigned int, unsigned int);
@@ -233,7 +233,7 @@ void FUN_00107d94(int *param_1,int param_2)
           if (*(char *)(temp_v5 + 0xa8) != '\0') {
             temp_v28 = *(unsigned char *)(temp_v18 + 5);
             temp_v5 = FUN_002eac34(temp_v28 >> 4);
-            FUN_00103890(temp_v12,temp_v5 + 0xac);
+            _ZN9Obj5584c8C1ERKS_(temp_v12,temp_v5 + 0xac);
             FUN_002ec934(&temp_v7,temp_v14,temp_v13);
             if ((int *)temp_v11 != temp_v10) {
               FUN_00105dd0(param_1 + 0x80,&temp_v7);
@@ -251,7 +251,7 @@ void FUN_00107d94(int *param_1,int param_2)
       FUN_002efa58(&temp_v9,param_1 + 0x59,*(unsigned char *)(temp_v16 + 4));
       temp_v8 = temp_v10;
       temp_v7 = temp_v9;
-      bitFieldSet(&temp_v7,1);
+      _ZNSt6vectorIb12AsdAllocatorIbEE9referenceaSEb(&temp_v7,1);
     }
     else {
       FUN_00108ea8(param_1,param_2);

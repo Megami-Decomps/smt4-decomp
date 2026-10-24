@@ -1,67 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00428220` (_code @ 0x428220, 0xc8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail schedules `high` before the id load and keeps the sign-extended media field as separate lsl/asr, finishing with `orr r1, r4, r2` (this build emits orr r1, r2, r4 and loads the id into r3). */
+#include "nn/Result.h"
 
 extern "C" {
 
-int FUN_001028b8(unsigned char [20], int, unsigned char *, unsigned int, unsigned int, unsigned int);
-int sysFatalBreak(void);
-int FUN_00439a04(void);
+/* A program id in pieces: the unique id, its category kind, a variation byte and a 0/1 media selector. */
+struct ProgramIdSpec {
+    /* 0x00 */ u8 unk00[0x0c];
+    /* 0x0c */ u32 uniqueId;
+    /* 0x10 */ u8 kind;
+    /* 0x11 */ u8 variation;
+    /* 0x12 */ u8 media;
+};
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
+s32 FUN_001028b8(char *buffer, u32 size, const char *format, ...);
+void sysFatalBreak(void);
+s32 FUN_00439a04(const char *string);
 
-extern unsigned char LAB_004282e8; /* 0x4282e8 */
-
-/* Supplied declaration required: FUN_001028b8. */
-/* Supplied declaration required: sysFatalBreak. */
-/* Supplied declaration required: FUN_00439a04. */
-
-
-void FUN_00428220(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Media selector in bits 28-29 of the low half; anything but 0 or 1 is fatal. */
+static __inline s32 programMediaBits(u8 media)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4 [20];
-  
-  switch(*(unsigned char *)(param_1 + 0x10)) {
-  case 0:
-    temp_v2 = 0x8c;
-    break;
-  case 1:
-    temp_v2 = 0xd;
-    break;
-  default:
-    temp_v2 = 0;
-    break;
-  case 3:
-    temp_v2 = 0x10;
-    break;
-  case 4:
-    temp_v2 = 0x30;
-  }
-  temp_v3 = *(unsigned int *)(param_1 + 0xc);
-  temp_v0 = *(unsigned char *)(param_1 + 0x11);
-  temp_v1 = 0;
-  if (*(char *)(param_1 + 0x12) != '\0') {
-    if (*(char *)(param_1 + 0x12) == '\x01') {
-      temp_v1 = 2;
+    if (media == 0) {
+        return 0;
     }
-    else {
-      sysFatalBreak();
-      temp_v1 = 0;
+    if (media == 1) {
+        return 2;
     }
-  }
-  FUN_001028b8(temp_v4,0x11,&LAB_004282e8,param_4,
-               (temp_v1 << 0x1c) | (unsigned int)temp_v0 | ((temp_v3 & 0xfffff) << 8),temp_v2 | 0x40000);
-  FUN_00439a04();
-  return;
+    sysFatalBreak();
+    return 0;
+}
+
+/* Formats the spec as a 16-digit hexadecimal program id and hands it to the service; returns the failure result or 0. */
+s32 FUN_00428220(const ProgramIdSpec *spec)
+{
+    u32 category;
+    switch (spec->kind) {
+    case 0:
+        category = 0x8c;
+        break;
+    case 1:
+        category = 0xd;
+        break;
+    case 3:
+        category = 0x10;
+        break;
+    case 4:
+        category = 0x30;
+        break;
+    case 2:
+        category = 0;
+        break;
+    default:
+        category = 0;
+        break;
+    }
+    u32 high = category | 0x40000;
+    u32 low = spec->variation | ((spec->uniqueId & 0xfffff) << 8);
+    s32 media = programMediaBits(spec->media) << 28;
+    u64 programId = ((u64)high << 32) | (media | (u64)(low & 0x0fffffff));
+    char text[20];
+    FUN_001028b8(text, 17, "%016llx", programId);
+    s32 result = FUN_00439a04(text);
+    if (!nnResultIsFailure(result)) {
+        result = 0;
+    }
+    return result;
 }
 
 } /* extern "C" */

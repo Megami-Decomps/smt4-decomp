@@ -1,46 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c571c` (_code @ 0x4c571c, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation: retail keeps the old and new values in r2/r3 across the calls to FUN_004c53fc/btlGetPropertyMaximum (small functions of the same source file whose register use armcc knew); the build saves them in callee-saved registers. */
+#include "shard/W5_W5Match7_BattleMask.h"
+
+/* A battle entry; only its array of word properties at +0x74 is named. */
+struct BtlPropertyEntry {
+    /* 0x00 */ u8 unk00[0x74];
+    /* 0x74 */ s32 properties[1];
+};
 
 extern "C" {
 
-int FUN_003f0e20(int, unsigned int);
-int btlGetPropertyMaximum(...);
-int FUN_004c53fc(...);
+BtlPropertyEntry *FUN_003f0e20(BattleMaskState *battle, u32 id);
+s32 btlGetPropertyMaximum(s32 property);
+s32 FUN_004c53fc(s32 property);
 
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: btlGetPropertyMaximum. */
-/* Supplied declaration required: FUN_004c53fc. */
-
-
-void FUN_004c571c(unsigned int param_1,int param_2,int param_3,int param_4)
-
+/* Changes property `property` of the battle entry `id` by `delta`, clamped to its range (left alone when `preview` is set); returns the change. */
+s32 FUN_004c571c(u32 id, s32 property, s32 delta, s32 preview)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = btlGetMainState();
-  FUN_003f0e20(temp_v0,param_1);
-  if (temp_v0 != 0) {
-    temp_v0 = temp_v0 + param_2 * 4;
-    param_3 = *(int *)(temp_v0 + 0x74) + param_3;
-    temp_v1 = FUN_004c53fc(param_2);
-    if (param_3 < temp_v1) {
-      param_3 = FUN_004c53fc();
+    BtlPropertyEntry *entry = FUN_003f0e20(btlGetMainState(), id);
+
+    if (entry == NULL) {
+        return 0;
     }
-    else {
-      temp_v1 = btlGetPropertyMaximum(param_2);
-      if (temp_v1 < param_3) {
-        param_3 = btlGetPropertyMaximum();
-      }
+    s32 old = entry->properties[property];
+    s32 value = old + delta;
+
+    if (value < FUN_004c53fc(property)) {
+        value = FUN_004c53fc(property);
+    } else if (value > btlGetPropertyMaximum(property)) {
+        value = btlGetPropertyMaximum(property);
     }
-    if (param_4 == 0) {
-      *(int *)(temp_v0 + 0x74) = param_3;
+    if (preview == 0) {
+        entry->properties[property] = value;
     }
-  }
-  return;
+    return value - old;
 }
 
 } /* extern "C" */

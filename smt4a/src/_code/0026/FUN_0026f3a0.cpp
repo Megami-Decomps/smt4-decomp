@@ -1,107 +1,124 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026f3a0` (_code @ 0x26f3a0, 0x264 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: structure and field accesses are right (party panel slot widgets reset and filled from the slot table); retail rematerialises the zero constant and the widget pointer before every byte store and uses nop-padded conditional branches where built hoists the zero into a register and predicates the empty-slot store */
+#include "common.h"
+#include <stddef.h>
+
+/* A slot widget of the party panel; only the fields this setup touches are named. */
+struct SlotWidget {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u8 empty;
+    /* 0x21 */ u8 unk21[2];
+    /* 0x23 */ u8 hasTag;
+    /* 0x24 */ u8 flagA;
+    /* 0x25 */ u8 transitionActive;
+    /* 0x26 */ u8 unk26;
+    /* 0x27 */ u8 transitionPending;
+    /* 0x28 */ u8 unk28;
+    /* 0x29 */ u8 flagB;
+    /* 0x2A */ u8 unk2A[0xA];
+    /* 0x34 */ s32 slotValue;
+};
+
+struct DemonSlotValue {
+    s32 value;
+    s32 unk4;
+};
+
+/* The party panel state as this function sees it. */
+struct PanelView {
+    /* 0x000 */ u8 unk000[0x2C];
+    /* 0x02C */ u32 toggle;
+    /* 0x030 */ u8 unk030[0x12];
+    /* 0x042 */ u8 alternate;
+    /* 0x043 */ u8 unk043[0x971];
+    /* 0x9B4 */ u8 mode;
+    /* 0x9B5 */ u8 unk9B5[0x5B];
+    /* 0xA10 */ SlotWidget *characters[4];
+    /* 0xA20 */ SlotWidget *demons[24];
+    /* 0xA80 */ DemonSlotValue demonValues[24];
+};
+typedef char PanelViewLayout[offsetof(PanelView, mode) == 0x9B4 && offsetof(PanelView, demons) == 0xA20 &&
+    offsetof(PanelView, demonValues) == 0xA80 ? 1 : -1];
+
+struct SlotRecord {
+    /* 0x00 */ u8 unk00[0x60];
+    /* 0x60 */ u16 flags;
+};
+
+/* The game's slot table: the three character slots' record ids at +0x1CA0. */
+struct SlotTable {
+    /* 0x0000 */ u8 unk0000[0x1CA0];
+    /* 0x1CA0 */ s8 characterIds[3];
+};
 
 extern "C" {
 
-int gameGetSlotRecord(...);
-int FUN_002ade88(void);
-int partyPanelRefreshFilterMarks(void);
-int slotPlacementStartTransition(unsigned int, int);
-int slotPlacementSetSlot(int, int);
-int FUN_003f5220(...);
+extern PanelView *g_partyPanel;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
+SlotTable *gameGetSlotTable(void);
+SlotRecord *gameGetSlotRecord(s32 id);
+void FUN_003f5220(SlotWidget *widget, u32 toggle);
+void slotPlacementStartTransition(SlotWidget *widget, s32 alternate);
+void slotPlacementSetSlot(SlotWidget *widget, s32 slot);
+s32 FUN_004bd0d8(void);
+void FUN_002ade88(void);
+void partyPanelRefreshFilterMarks(void);
 
-extern int g_partyPanel; /* 0x57f268 */
-
-/* Supplied declaration required: gameGetSlotRecord. */
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002ade88. */
-/* Supplied declaration required: partyPanelRefreshFilterMarks. */
-/* Supplied declaration required: slotPlacementStartTransition. */
-/* Supplied declaration required: slotPlacementSetSlot. */
-/* Supplied declaration required: FUN_003f5220. */
-extern int FUN_004bd0d8(void);
-
-
+/* Resets the slot widgets of the party panel (four characters' three slots and the 24 demon slots) and fills them from the slot table. */
 void FUN_0026f3a0(void)
-
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v0 = g_partyPanel;
-  temp_v1 = gameGetSlotTable();
-  piVar4 = (int *)(temp_v0 + 0xa10);
-  FUN_003f5220(*(unsigned int *)(temp_v0 + 0xa10),0);
-  slotPlacementStartTransition(*(unsigned int *)(temp_v0 + 0xa10),*(char *)(temp_v0 + 0x42) == '\x01');
-  *(unsigned char *)(*piVar4 + 0x25) = 0;
-  *(unsigned char *)(*piVar4 + 0x26) = 0;
-  *(unsigned char *)(*piVar4 + 0x27) = 0;
-  temp_v3 = 0;
-  do {
-    temp_v4 = temp_v0 + temp_v3 * 4;
-    piVar4 = (int *)(temp_v4 + 0xa14);
-    FUN_003f5220(*(unsigned int *)(temp_v4 + 0xa14),*(unsigned int *)(temp_v0 + 0x2c));
-    slotPlacementStartTransition(*(unsigned int *)(temp_v4 + 0xa14),*(char *)(temp_v0 + 0x42) == '\x01');
-    slotPlacementSetSlot(*piVar4,temp_v3 + 1);
-    temp_v2 = temp_v1 + temp_v3;
-    if (*(char *)(temp_v2 + 0x1ca0) < '\0') {
-      *(unsigned char *)(*(int *)(temp_v4 + 0xa14) + 0x20) = 1;
+    PanelView *panel = g_partyPanel;
+    SlotTable *table = gameGetSlotTable();
+    s32 i;
+
+    FUN_003f5220(panel->characters[0], 0);
+    slotPlacementStartTransition(panel->characters[0], panel->alternate == 1);
+    panel->characters[0]->transitionActive = 0;
+    panel->characters[0]->unk26 = 0;
+    panel->characters[0]->transitionPending = 0;
+    for (i = 0; i < 3; i++) {
+        FUN_003f5220(panel->characters[i + 1], panel->toggle);
+        slotPlacementStartTransition(panel->characters[i + 1], panel->alternate == 1);
+        slotPlacementSetSlot(panel->characters[i + 1], i + 1);
+        if (table->characterIds[i] < 0) {
+            panel->characters[i + 1]->empty = 1;
+        } else {
+            SlotRecord *record;
+
+            panel->characters[i + 1]->empty = 0;
+            panel->characters[i + 1]->slotValue = table->characterIds[i];
+            record = gameGetSlotRecord(table->characterIds[i]);
+            panel->characters[i + 1]->flagB = (record->flags & 4) != 0;
+        }
+        panel->characters[i + 1]->transitionActive = 0;
+        panel->characters[i + 1]->unk26 = 0;
+        panel->characters[i + 1]->transitionPending = 0;
     }
-    else {
-      *(unsigned char *)(*(int *)(temp_v4 + 0xa14) + 0x20) = 0;
-      *(int *)(*piVar4 + 0x34) = (int)*(char *)(temp_v2 + 0x1ca0);
-      temp_v2 = gameGetSlotRecord((int)*(char *)(temp_v2 + 0x1ca0));
-      *(unsigned char *)(*(int *)(temp_v4 + 0xa14) + 0x29) = (*(unsigned short *)(temp_v2 + 0x60) & 4) != 0;
+    for (i = 0; i < 24; i++) {
+        FUN_003f5220(panel->demons[i], panel->toggle);
+        slotPlacementStartTransition(panel->demons[i], panel->alternate == 1);
+        slotPlacementSetSlot(panel->demons[i], i + 4);
+        panel->demons[i]->transitionActive = 0;
+        panel->demons[i]->unk26 = 0;
+        panel->demons[i]->transitionPending = 0;
+        if (panel->demonValues[i].value < 0) {
+            panel->demons[i]->empty = 1;
+        } else {
+            SlotRecord *record;
+
+            panel->demons[i]->empty = 0;
+            panel->demons[i]->slotValue = panel->demonValues[i].value;
+            record = gameGetSlotRecord(panel->demonValues[i].value);
+            panel->demons[i]->hasTag = FUN_004bd0d8() != 0;
+            panel->demons[i]->flagA = (record->flags & 0x400) != 0;
+            panel->demons[i]->flagB = (record->flags & 4) != 0;
+        }
     }
-    *(unsigned char *)(*(int *)(temp_v4 + 0xa14) + 0x25) = 0;
-    *(unsigned char *)(*piVar4 + 0x26) = 0;
-    *(unsigned char *)(*piVar4 + 0x27) = 0;
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 3);
-  temp_v1 = 0;
-  do {
-    temp_v3 = temp_v0 + temp_v1 * 4;
-    piVar4 = (int *)(temp_v3 + 0xa20);
-    FUN_003f5220(*piVar4,*(unsigned int *)(temp_v0 + 0x2c));
-    slotPlacementStartTransition(*(unsigned int *)(temp_v3 + 0xa20),*(char *)(temp_v0 + 0x42) == '\x01');
-    slotPlacementSetSlot(*piVar4,temp_v1 + 4);
-    *(unsigned char *)(*piVar4 + 0x25) = 0;
-    *(unsigned char *)(*piVar4 + 0x26) = 0;
-    *(unsigned char *)(*piVar4 + 0x27) = 0;
-    temp_v2 = temp_v0 + temp_v1 * 8;
-    if (*(int *)(temp_v2 + 0xa80) < 0) {
-      *(unsigned char *)(*(int *)(temp_v3 + 0xa20) + 0x20) = 1;
+    if (panel->mode == 10 || panel->mode == 18) {
+        FUN_002ade88();
     }
-    else {
-      *(unsigned char *)(*(int *)(temp_v3 + 0xa20) + 0x20) = 0;
-      *(unsigned int *)(*piVar4 + 0x34) = *(unsigned int *)(temp_v2 + 0xa80);
-      temp_v2 = gameGetSlotRecord(*(unsigned int *)(temp_v2 + 0xa80));
-      temp_v4 = FUN_004bd0d8();
-      *(unsigned char *)(*(int *)(temp_v3 + 0xa20) + 0x23) = temp_v4 != 0;
-      *(unsigned char *)(*(int *)(temp_v3 + 0xa20) + 0x24) = (*(unsigned short *)(temp_v2 + 0x60) & 0x400) != 0;
-      *(unsigned char *)(*(int *)(temp_v3 + 0xa20) + 0x29) = (*(unsigned short *)(temp_v2 + 0x60) & 4) != 0;
+    if (panel->mode == 11) {
+        partyPanelRefreshFilterMarks();
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x18);
-  if (*(char *)(temp_v0 + 0x9b4) == '\n' || *(char *)(temp_v0 + 0x9b4) == '\x12') {
-    FUN_002ade88();
-  }
-  if (*(char *)(temp_v0 + 0x9b4) != '\v') {
-    return;
-  }
-  partyPanelRefreshFilterMarks();
-  return;
 }
 
 } /* extern "C" */

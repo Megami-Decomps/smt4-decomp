@@ -14,7 +14,7 @@ int FUN_001835b4(...);
 int FUN_00185e84(...);
 int FUN_002685cc(void);
 int FUN_002a4894(...);
-int FUN_0032fea0(...);
+int arrayContainsU16(...);
 int FUN_004b4e00(...);
 int FUN_004bcbb4(...);
 int VectorSignedToFloat(...);
@@ -78,7 +78,7 @@ extern int gameGetSlotRecord(int);
 extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_002a4894. */
 extern int objectApplyIfUnblocked(int);
-/* Supplied declaration required: FUN_0032fea0. */
+/* Supplied declaration required: arrayContainsU16. */
 extern int countUnlockedSlots(void);
 extern int FUN_003dfed4(unsigned short, int);
 /* Supplied declaration required: FUN_004b4e00. */
@@ -268,7 +268,7 @@ LAB_004b1d78:
                        ,0x74);
           temp_v9 = *(unsigned short *)(temp_v32 + 0xb4) & 0xff;
           temp_v3 = temp_v14;
-          FUN_0032fea0(temp_v14,*temp_v27,*(unsigned short *)(temp_v32 + 0xa4));
+          arrayContainsU16(temp_v14,*temp_v27,*(unsigned short *)(temp_v32 + 0xa4));
           if (temp_v3 != 0) {
             temp_v17 = 0x57d8ffff;
           }
@@ -355,7 +355,7 @@ LAB_004b1d78:
       temp_v0 = *(unsigned short *)(temp_v1 + 0x76b4);
       temp_v9 = temp_v0 & 0xff;
       temp_v8 = temp_v14;
-      FUN_0032fea0(temp_v14,*temp_v27,*(unsigned short *)(temp_v1 + 0x76a4));
+      arrayContainsU16(temp_v14,*temp_v27,*(unsigned short *)(temp_v1 + 0x76a4));
       if (temp_v8 != 0) {
         temp_v10 = 0x57d8ffff;
       }
@@ -429,7 +429,7 @@ LAB_004b1d78:
             temp_v17 = 0x9b9b9bff;
           }
           temp_v8 = temp_v14;
-          FUN_0032fea0(temp_v14,*temp_v27,*(unsigned short *)(temp_v25 + 0x34));
+          arrayContainsU16(temp_v14,*temp_v27,*(unsigned short *)(temp_v25 + 0x34));
           if (temp_v8 != 0) {
             temp_v17 = 0x9b9b9bff;
           }
@@ -511,7 +511,7 @@ LAB_004b1d78:
       temp_v10 = 0x9b9b9bff;
     }
     temp_v8 = temp_v14;
-    FUN_0032fea0(temp_v14,*temp_v27,*(unsigned short *)(temp_v1 + 0x34));
+    arrayContainsU16(temp_v14,*temp_v27,*(unsigned short *)(temp_v1 + 0x34));
     if (temp_v8 != 0) {
       temp_v10 = 0x9b9b9bff;
     }

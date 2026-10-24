@@ -1,163 +1,156 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002019dc` (_code @ 0x2019dc, 0x274 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the three corner-quad tables differ: retail walks base, base+1584, base+1584*2 chained from one pointer and orders the stores differently; here each table is addressed from the global with its own offset. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+
+struct MapIfVec3 {
+    f32 x, y, z;
+};
+
+/* A quad drawn as a triangle strip. */
+struct MapIfQuad {
+    MapIfVec3 corner[4];
+};
+
+/* The map interface block (0xCD30 bytes): its three tasks and the world-indicator state. */
+struct MapIf {
+    /* 0x0000 */ u32 calcTask;
+    /* 0x0004 */ u32 updateTask;
+    /* 0x0008 */ u32 indicatorTask;
+    /* 0x000C */ u8 unk0C[8];
+    /* 0x0014 */ u8 unk14;
+    /* 0x0015 */ u8 mode;
+    /* 0x0016 */ u8 unk16;
+    /* 0x0017 */ u8 unk17;
+    /* 0x0018 */ u32 unk18;
+    /* 0x001C */ u8 unk1C;
+    /* 0x001D */ u8 unk1D;
+    /* 0x001E */ u8 unk1E[2];
+    /* 0x0020 */ u32 unk20;
+    /* 0x0024 */ u8 unk24;
+    /* 0x0025 */ u8 unk25[0xF];
+    /* 0x0034 */ u8 unk34;
+    /* 0x0035 */ u8 unk35[3];
+    /* 0x0038 */ u32 unk38;
+    /* 0x003C */ u32 unk3C;
+    /* 0x0040 */ u32 unk40;
+    /* 0x0044 */ u32 unk44;
+    /* 0x0048 */ u8 unk48[0xCB94];
+    /* 0xCBDC */ u8 unkCBDC;
+    /* 0xCBDD */ u8 unkCBDD[0x10B];
+    /* 0xCCE8 */ u16 unkCCE8;
+    /* 0xCCEA */ u16 unkCCEA;
+    /* 0xCCEC */ u8 unkCCEC[4];
+    /* 0xCCF0 */ u8 unkCCF0;
+    /* 0xCCF1 */ u8 unkCCF1[0xB];
+    /* 0xCCFC */ f32 unkCCFC;
+    /* 0xCD00 */ f32 unkCD00;
+    /* 0xCD04 */ f32 unkCD04;
+    /* 0xCD08 */ u8 unkCD08;
+    /* 0xCD09 */ u8 unkCD09[7];
+    /* 0xCD10 */ u8 unkCD10;
+    /* 0xCD11 */ u8 unkCD11[3];
+    /* 0xCD14 */ u32 unkCD14;
+    /* 0xCD18 */ f32 unkCD18;
+    /* 0xCD1C */ u8 unkCD1C;
+    /* 0xCD1D */ u8 unkCD1D[3];
+    /* 0xCD20 */ f32 anchor[2];
+    /* 0xCD28 */ u32 unkCD28;
+    /* 0xCD2C */ u32 unkCD2C;
+};
+typedef char MapIfSizeCheck[sizeof(MapIf) == 0xCD30 ? 1 : -1];
 
 extern "C" {
+void *asdMemoryAllocTracked(s32 heap, s32 alignment, s32 option, u32 size, s32 fromFront);
+u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 argument, void (*update)(), void (*draw)(),
+                   void *work, u32 parent);
+void FUN_002747dc(void);
+void FUN_00226538(void);
+void mapIfFree(void);
+void FUN_0029d760(void);
+void FUN_00315d34(void);
+void mapIfDrawWorldIndicators(void);
 
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(int, int, int, int, int);
-int FUN_002747dc(void);
+extern MapIf *g_mapIf;
+extern const char DAT_00201a50[];
+extern MapIfQuad DAT_006087e4[3][33];
 
-/* stack frame of param_2: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_2_stack;
-
-extern unsigned char LAB_00201c9c; /* 0x201c9c */
-extern unsigned char LAB_00201ca8; /* 0x201ca8 */
-extern unsigned char LAB_00201cb4; /* 0x201cb4 */
-extern unsigned char LAB_00201cc4; /* 0x201cc4 */
-extern unsigned char LAB_00226538; /* 0x226538 */
-extern unsigned char LAB_0029aa38; /* 0x29aa38 */
-extern int FUN_0029d760(...); /* 0x29d760 */
-extern unsigned char LAB_0029d7f8; /* 0x29d7f8 */
-extern int FUN_00315d34(...); /* 0x315d34 */
-extern unsigned int *g_mapIf; /* 0x58103c */
-extern unsigned int DAT_006087e4; /* 0x6087e4 */
-extern unsigned int DAT_006087e8; /* 0x6087e8 */
-extern unsigned int DAT_006087ec; /* 0x6087ec */
-extern unsigned int DAT_006087f0; /* 0x6087f0 */
-extern unsigned int DAT_006087f4; /* 0x6087f4 */
-extern unsigned int DAT_006087f8; /* 0x6087f8 */
-extern unsigned int DAT_006087fc; /* 0x6087fc */
-extern unsigned int DAT_00608800; /* 0x608800 */
-extern unsigned int DAT_00608804; /* 0x608804 */
-extern unsigned int DAT_00608808; /* 0x608808 */
-extern unsigned int DAT_0060880c; /* 0x60880c */
-extern unsigned int DAT_00608810; /* 0x608810 */
-extern unsigned int DAT_00608e14; /* 0x608e14 */
-extern unsigned int DAT_00608e18; /* 0x608e18 */
-extern unsigned int DAT_00608e1c; /* 0x608e1c */
-extern unsigned int DAT_00608e20; /* 0x608e20 */
-extern unsigned int DAT_00608e24; /* 0x608e24 */
-extern unsigned int DAT_00608e28; /* 0x608e28 */
-extern unsigned int DAT_00608e2c; /* 0x608e2c */
-extern unsigned int DAT_00608e30; /* 0x608e30 */
-extern unsigned int DAT_00608e34; /* 0x608e34 */
-extern unsigned int DAT_00608e38; /* 0x608e38 */
-extern unsigned int DAT_00608e3c; /* 0x608e3c */
-extern unsigned int DAT_00608e40; /* 0x608e40 */
-extern unsigned int DAT_00609444; /* 0x609444 */
-extern unsigned int DAT_00609448; /* 0x609448 */
-extern unsigned int DAT_0060944c; /* 0x60944c */
-extern unsigned int DAT_00609450; /* 0x609450 */
-extern unsigned int DAT_00609454; /* 0x609454 */
-extern unsigned int DAT_00609458; /* 0x609458 */
-extern unsigned int DAT_0060945c; /* 0x60945c */
-extern unsigned int DAT_00609460; /* 0x609460 */
-extern unsigned int DAT_00609464; /* 0x609464 */
-extern unsigned int DAT_00609468; /* 0x609468 */
-extern unsigned int DAT_0060946c; /* 0x60946c */
-extern unsigned int DAT_00609470; /* 0x609470 */
-
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_002747dc. */
-
-
-void FUN_002019dc(unsigned int param_1,unsigned char param_2)
-
+/* Creates the map interface: its work block, the three tasks and the corner quads of the indicators. */
+void FUN_002019dc(u32 parent, u8 mode)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  unsigned char *puVar3;
-  unsigned int temp_v0;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0xcd30,1);
-  g_mapIf = puVar1;
-  *(unsigned char *)(puVar1 + 5) = 0;
-  *(unsigned char *)((int)puVar1 + 0x16) = 0;
-  puVar1[6] = 0;
-  *(unsigned char *)((int)puVar1 + 0x1d) = 0;
-  puVar1[8] = 0;
-  *(unsigned char *)(puVar1 + 9) = 0;
-  *(unsigned char *)(puVar1 + 0xd) = 0;
-  puVar1[0xe] = 0;
-  puVar1[0xf] = 0;
-  puVar1[0x10] = 0;
-  puVar1[0x11] = 0;
-  *(unsigned char *)(puVar1 + 0x32f7) = 0;
-  *(unsigned short *)(puVar1 + 0x333a) = 0;
-  *(unsigned short *)((int)puVar1 + 0xccea) = 0;
-  temp_v0 = 0;
-  *(unsigned char *)(puVar1 + 0x333c) = 0;
-  puVar1[0x333f] = 0;
-  puVar1[0x3340] = 0;
-  puVar1[0x3341] = 0;
-  *(unsigned char *)(puVar1 + 0x3342) = 0;
-  *(unsigned char *)(puVar1 + 0x3344) = 0;
-  puVar1[0x3345] = 0;
-  puVar1[0x3346] = 0;
-  *(unsigned char *)(puVar1 + 0x3347) = 0;
-  puVar1[0x3348] = 0xc2200000;
-  puVar1[0x3349] = 0x43430000;
-  puVar1[0x334a] = 0;
-  puVar1[0x334b] = 0;
-  puVar2 = &LAB_00201c9c;
-  taskCreateDraw(&LAB_00201c9c,4,0,0,&LAB_00226538,&LAB_0029aa38,0,param_1);
-  *puVar1 = (unsigned int)puVar2;
-  puVar3 = &LAB_00201ca8;
-  taskCreateDraw(&LAB_00201ca8,0x75,0,0,FUN_0029d760,0,0,puVar2);
-  puVar1[1] = (unsigned int)puVar3;
-  taskCreateDraw(&LAB_00201cb4,0x8a,0,0,FUN_00315d34,0,0,*puVar1);
-  puVar2 = &LAB_00201cc4;
-  taskCreateDraw(&LAB_00201cc4,0x71,0,0,&LAB_0029d7f8,0,0,*puVar1);
-  puVar1[2] = (unsigned int)puVar2;
-  DAT_006087e4 = 0xc2800000;
-  DAT_006087e8 = 0x41800000;
-  DAT_006087f0 = 0xc2800000;
-  DAT_006087f4 = 0xc1800000;
-  DAT_006087fc = 0x42800000;
-  DAT_00608800 = 0x41800000;
-  DAT_00608808 = 0x42800000;
-  DAT_0060880c = 0xc1800000;
-  DAT_00608e14 = 0xc2800000;
-  DAT_00608e28 = 0xc1800000;
-  DAT_00608e2c = 0x42800000;
-  DAT_00608e1c = 0x41800000;
-  DAT_00608e20 = 0xc2800000;
-  DAT_00608e34 = 0x41800000;
-  DAT_00608e38 = 0x42800000;
-  DAT_00608e40 = 0xc1800000;
-  DAT_00609444 = 0xc2800000;
-  DAT_0060944c = 0xc1800000;
-  DAT_00609450 = 0xc2800000;
-  DAT_00609458 = 0x41800000;
-  DAT_0060945c = 0x42800000;
-  DAT_00609464 = 0xc1800000;
-  DAT_00609468 = 0x42800000;
-  DAT_00609470 = 0x41800000;
-  DAT_006087ec = temp_v0;
-  DAT_006087f8 = temp_v0;
-  DAT_00608804 = temp_v0;
-  DAT_00608810 = temp_v0;
-  DAT_00608e18 = temp_v0;
-  DAT_00608e24 = temp_v0;
-  DAT_00608e30 = temp_v0;
-  DAT_00608e3c = temp_v0;
-  DAT_00609448 = temp_v0;
-  DAT_00609454 = temp_v0;
-  DAT_00609460 = temp_v0;
-  DAT_0060946c = temp_v0;
-  *(unsigned char *)((int)puVar1 + 0x15) = param_2;
-  FUN_002747dc();
-  return;
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapIf.cpp", 987);
+    g_mapIf = (MapIf *)asdMemoryAllocTracked(0x100, 0x100, 0, 0xCD30, 1);
+    MapIf *mapIf = g_mapIf;
+    mapIf->unk14 = 0;
+    mapIf->unk16 = 0;
+    mapIf->unk18 = 0;
+    mapIf->unk1D = 0;
+    mapIf->unk20 = 0;
+    mapIf->unk24 = 0;
+    mapIf->unk34 = 0;
+    mapIf->unk38 = 0;
+    mapIf->unk3C = 0;
+    mapIf->unk40 = 0;
+    mapIf->unk44 = 0;
+    mapIf->unkCBDC = 0;
+    mapIf->unkCCE8 = 0;
+    mapIf->unkCCEA = 0;
+    mapIf->unkCCF0 = 0;
+    mapIf->unkCCFC = 0.0f;
+    mapIf->unkCD00 = 0.0f;
+    mapIf->unkCD04 = 0.0f;
+    mapIf->unkCD08 = 0;
+    mapIf->unkCD10 = 0;
+    mapIf->unkCD14 = 0;
+    mapIf->unkCD18 = 0.0f;
+    mapIf->unkCD1C = 0;
+    mapIf->anchor[0] = -40.0f;
+    mapIf->anchor[1] = 195.0f;
+    mapIf->unkCD28 = 0;
+    mapIf->unkCD2C = 0;
+    mapIf->calcTask = taskCreateDraw("MAPIF C", 4, 0, 0, FUN_00226538, mapIfFree, NULL, parent);
+    mapIf->updateTask = taskCreateDraw("MAPIF U", 117, 0, 0, FUN_0029d760, NULL, NULL, mapIf->calcTask);
+    taskCreateDraw("MAP FADE", 138, 0, 0, FUN_00315d34, NULL, NULL, mapIf->calcTask);
+    mapIf->indicatorTask = taskCreateDraw("MIF3DL", 113, 0, 0, mapIfDrawWorldIndicators, NULL, NULL, mapIf->calcTask);
+
+    MapIfQuad *quads = DAT_006087e4[0];
+    quads[0].corner[0].x = -64.0f;
+    quads[0].corner[0].y = 16.0f;
+    quads[0].corner[0].z = 0.0f;
+    quads[0].corner[1].x = -64.0f;
+    quads[0].corner[1].y = -16.0f;
+    quads[0].corner[1].z = 0.0f;
+    quads[0].corner[2].x = 64.0f;
+    quads[0].corner[2].y = 16.0f;
+    quads[0].corner[2].z = 0.0f;
+    quads[0].corner[3].x = 64.0f;
+    quads[0].corner[3].y = -16.0f;
+    quads[0].corner[3].z = 0.0f;
+    quads[33].corner[0].x = -64.0f;
+    quads[33].corner[0].y = 0.0f;
+    quads[33].corner[0].z = 16.0f;
+    quads[33].corner[1].x = -64.0f;
+    quads[33].corner[1].y = 0.0f;
+    quads[33].corner[1].z = -16.0f;
+    quads[33].corner[2].x = 64.0f;
+    quads[33].corner[2].y = 0.0f;
+    quads[33].corner[2].z = 16.0f;
+    quads[33].corner[3].x = 64.0f;
+    quads[33].corner[3].y = 0.0f;
+    quads[33].corner[3].z = -16.0f;
+    quads[66].corner[0].x = -64.0f;
+    quads[66].corner[0].y = 0.0f;
+    quads[66].corner[0].z = -16.0f;
+    quads[66].corner[1].x = -64.0f;
+    quads[66].corner[1].y = 0.0f;
+    quads[66].corner[1].z = 16.0f;
+    quads[66].corner[2].x = 64.0f;
+    quads[66].corner[2].y = 0.0f;
+    quads[66].corner[2].z = -16.0f;
+    quads[66].corner[3].x = 64.0f;
+    quads[66].corner[3].y = 0.0f;
+    quads[66].corner[3].z = 16.0f;
+    mapIf->mode = mode;
+    FUN_002747dc();
 }
 
-} /* extern "C" */
+}

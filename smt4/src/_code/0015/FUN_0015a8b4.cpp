@@ -1,175 +1,97 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015a8b4` (_code @ 0x15a8b4, 0x2ac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation/scheduling differs (retail builds the position vector through VFP registers and allocates the command-buffer cursor/pointers differently). */
+#include "shard/W6_W6Match8_LightUniforms.h"
+#include <stddef.h>
+
+/* The light resource fields the register upload reads. */
+struct ShaderLightRegisterResource {
+    /* 0x00 */ u8 unk00[0xB8];
+    /* 0xB8 */ s32 kind;           /* 0 = directional, 1 = point, 2 = spot */
+    /* 0xBC */ f32 diffuse[4];
+    /* 0xCC */ f32 specular[4];
+    /* 0xDC */ u8 unkDC[0xC];
+    /* 0xE8 */ f32 attenuation[4];
+    /* 0xF8 */ f32 spot[4];        /* [1] = cone angle */
+};
+
+/* The light object: its resource and the matrix entries that locate and aim it. */
+struct ShaderLightObject {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ ShaderLightRegisterResource *resource;
+    /* 0x0C */ u8 unk0C[0x8C];
+    /* 0x98 */ f32 positionX;
+    /* 0x9C */ u8 unk9C[0xC];
+    /* 0xA8 */ f32 positionY;
+    /* 0xAC */ u8 unkAC[0xC];
+    /* 0xB8 */ f32 positionZ;
+    /* 0xBC */ u8 unkBC[0xC0];
+    /* 0x17C */ f32 direction[3];
+};
+typedef char ShaderLightObjectOffsets[
+    offsetof(ShaderLightObject, positionY) == 0xA8 && offsetof(ShaderLightObject, direction) == 0x17C ? 1 : -1];
 
 extern "C" {
-
-int phaseCosInterpolate(void);
-int nw_gfx_RenderContext_TransformToViewCoordinate(...);
-int nw_gfx_internal_NWCopyVec4Reverse(...);
-
-/* stack frame of param_3: 14 slot(s), 56 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-} param_3_stack;
-
-extern int *g_commandBufferCursor; /* 0x4652a0 */
-extern unsigned int DAT_0047662c; /* 0x47662c */
-extern float DAT_004efd38; /* 0x4efd38 */
-extern float DAT_004efd3c; /* 0x4efd3c */
-extern float DAT_004efd40; /* 0x4efd40 */
-extern float DAT_004efd44; /* 0x4efd44 */
-
-/* Supplied declaration required: phaseCosInterpolate. */
-extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: nw_gfx_RenderContext_TransformToViewCoordinate. */
-/* Supplied declaration required: nw_gfx_internal_NWCopyVec4Reverse. */
-
-
-void FUN_0015a8b4(int param_1,int param_2,int param_3)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  float *pfVar3;
-  int temp_v1;
-  int temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  int temp_v14;
-  unsigned int temp_v15;
-  unsigned int temp_v16;
-  float temp_v17;
-  int temp_v18;
-  unsigned int uStack_34;
-  unsigned int uStack_30;
-  float temp_v19;
-  
-  piVar1 = g_commandBufferCursor;
-  temp_v0 = *(int *)(*(int *)(param_1 + 8) + 8);
-  if (*(int *)(temp_v0 + 0x68) <= param_2) {
-    return;
-  }
-  temp_v2 = *(int *)(param_1 + 0xa4) + 0x148;
-  temp_v1 = *(int *)(param_3 + 8);
-  temp_v0 = *(int *)(temp_v0 + 0x6c) + param_2 * -6;
-  temp_v4 = 0.0f;
-  temp_v5 = 1.0f;
-  *g_commandBufferCursor = temp_v0 - 0x7fffffed;
-  piVar1[1] = -0x7fb0fd40;
-  nw_gfx_internal_NWCopyVec4Reverse(piVar1 + 2,temp_v1 + 0xbc);
-  piVar1 = g_commandBufferCursor;
-  g_commandBufferCursor = g_commandBufferCursor + 6;
-  *g_commandBufferCursor = temp_v0 - 0x7fffffec;
-  piVar1[7] = -0x7fb0fd40;
-  nw_gfx_internal_NWCopyVec4Reverse(piVar1 + 8,temp_v1 + 0xcc);
-  g_commandBufferCursor = g_commandBufferCursor + 6;
-  if (*(int *)(temp_v1 + 0xb8) != 0) {
-    temp_v18 = *(unsigned int *)(param_3 + 0x98);
-    uStack_34 = *(unsigned int *)(param_3 + 0xa8);
-    uStack_30 = *(unsigned int *)(param_3 + 0xb8);
-    temp_v19 = temp_v5;
-    nw_gfx_RenderContext_TransformToViewCoordinate(param_1,&temp_v18,temp_v2);
-    piVar1 = g_commandBufferCursor;
-    *g_commandBufferCursor = temp_v0 - 0x7fffffeb;
-    piVar1[1] = -0x7fb0fd40;
-    nw_gfx_internal_NWCopyVec4Reverse(piVar1 + 2,&temp_v18);
-    piVar1 = g_commandBufferCursor;
-    g_commandBufferCursor = g_commandBufferCursor + 6;
-    *g_commandBufferCursor = temp_v0 - 0x7fffffe9;
-    piVar1[7] = -0x7fb0fd40;
-    nw_gfx_internal_NWCopyVec4Reverse(piVar1 + 8,temp_v1 + 0xe8);
-    g_commandBufferCursor = g_commandBufferCursor + 6;
-    if (*(int *)(temp_v1 + 0xb8) == 2) {
-      temp_v14 = *(unsigned int *)(param_3 + 0x17c);
-      temp_v15 = *(unsigned int *)(param_3 + 0x180);
-      temp_v16 = *(unsigned int *)(param_3 + 0x184);
-      temp_v17 = temp_v4;
-      nw_gfx_RenderContext_TransformToViewCoordinate(param_1,&temp_v14,temp_v2);
-      temp_v10 = *(float *)(temp_v1 + 0xf8);
-      temp_v11 = *(float *)(temp_v1 + 0xfc);
-      temp_v3 = *(float *)(temp_v1 + 0xfc);
-      temp_v12 = temp_v4;
-      temp_v13 = temp_v4;
-      if ((temp_v3 > temp_v4) && (0x40490fda >= (int)temp_v3)) {
-        temp_v3 = temp_v3 * 40.743664f;
-        phaseCosInterpolate();
-        temp_v11 = temp_v3;
-        temp_v17 = temp_v5;
-      }
-      else {
-        temp_v17 = temp_v4;
-        if (temp_v3 == temp_v4) {
-          temp_v11 = 1.00001f;
-          temp_v17 = temp_v5;
-        }
-      }
-      piVar1 = g_commandBufferCursor;
-      *g_commandBufferCursor = temp_v0 - 0x7fffffea;
-      piVar1[1] = -0x7fb0fd40;
-      nw_gfx_internal_NWCopyVec4Reverse(piVar1 + 2,&temp_v14);
-      pfVar3 = &temp_v10;
-      temp_v0 = temp_v0 - 0x7fffffe8;
-      g_commandBufferCursor = g_commandBufferCursor + 6;
-      piVar1 = g_commandBufferCursor;
-      *g_commandBufferCursor = temp_v0;
-      piVar1[1] = -0x7fb0fd40;
-      nw_gfx_internal_NWCopyVec4Reverse(piVar1 + 2,pfVar3);
-      g_commandBufferCursor = g_commandBufferCursor + 6;
-      return;
-    }
-    if (((DAT_0047662c & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_0047662c), temp_v1 != 0)) {
-      DAT_004efd38 = temp_v4;
-      DAT_004efd3c = temp_v4;
-      DAT_004efd40 = temp_v4;
-      DAT_004efd44 = temp_v4;
-    }
-    pfVar3 = &DAT_004efd38;
-    temp_v0 = temp_v0 + 0x16;
-  }
-  else {
-    temp_v6 = *(float *)(param_3 + 0x17c);
-    temp_v7 = *(float *)(param_3 + 0x180);
-    temp_v8 = *(float *)(param_3 + 0x184);
-    temp_v9 = temp_v4;
-    nw_gfx_RenderContext_TransformToViewCoordinate(param_1,&temp_v6,temp_v2);
-    temp_v10 = -temp_v6;
-    pfVar3 = &temp_v10;
-    temp_v0 = temp_v0 + 0x15;
-    temp_v11 = -temp_v7;
-    temp_v13 = -temp_v9;
-    temp_v12 = -temp_v8;
-  }
-  temp_v0 = temp_v0 + -0x80000000;
-  piVar1 = g_commandBufferCursor;
-  *g_commandBufferCursor = temp_v0;
-  piVar1[1] = -0x7fb0fd40;
-  nw_gfx_internal_NWCopyVec4Reverse(piVar1 + 2,pfVar3);
-  g_commandBufferCursor = g_commandBufferCursor + 6;
-  return;
+f32 phaseCosInterpolate(f32 phase);
+void nw_gfx_RenderContext_TransformToViewCoordinate(ShaderLightContext *context, f32 *vector,
+                                                    const ShaderLightMatrix *matrix);
 }
 
-} /* extern "C" */
+/* Writes one light's registers (colors, position, attenuation, spot cone) into the command buffer. */
+extern "C" void FUN_0015a8b4(ShaderLightContext *context, s32 index, ShaderLightObject *light)
+{
+    ShaderLightFeatures *features = context->node->features;
+    if (features->registerCount <= index)
+        return;
+    const ShaderLightMatrix *camera = &context->camera->matrix;
+    ShaderLightRegisterResource *resource = light->resource;
+    s32 base = features->registerBase - index * 6;
+    shaderLightEmitVector(base + 0x13, resource->diffuse);
+    shaderLightEmitVector(base + 0x14, resource->specular);
+    f32 last[4];
+    s32 lastRegister;
+    const f32 *lastVector;
+    if (resource->kind != 0) {
+        f32 position[4];
+        position[0] = light->positionX;
+        position[1] = light->positionY;
+        position[2] = light->positionZ;
+        position[3] = 1.0f;
+        nw_gfx_RenderContext_TransformToViewCoordinate(context, position, camera);
+        shaderLightEmitVector(base + 0x15, position);
+        shaderLightEmitVector(base + 0x17, resource->attenuation);
+        if (resource->kind == 2) {
+            ShaderLightVector4 direction(light->direction[0], light->direction[1], light->direction[2], 0.0f);
+            nw_gfx_RenderContext_TransformToViewCoordinate(context, &direction.x, camera);
+            last[0] = resource->spot[0];
+            last[1] = resource->spot[1];
+            last[2] = 0.0f;
+            last[3] = 0.0f;
+            f32 angle = resource->spot[1];
+            if (angle > 0.0f && angle < 3.1415927f) {
+                last[1] = phaseCosInterpolate(angle * 40.743664f);
+                direction.w = 1.0f;
+            } else if (angle == 0.0f) {
+                last[1] = 1.00001f;
+                direction.w = 1.0f;
+            } else {
+                direction.w = 0.0f;
+            }
+            shaderLightEmitVector(base + 0x16, &direction.x);
+            lastRegister = base + 0x18;
+            lastVector = last;
+        } else {
+            static ShaderLightVector4 noDirection(0.0f, 0.0f, 0.0f, 0.0f);
+            lastRegister = base + 0x16;
+            lastVector = &noDirection.x;
+        }
+    } else {
+        ShaderLightVector4 direction(light->direction[0], light->direction[1], light->direction[2], 0.0f);
+        nw_gfx_RenderContext_TransformToViewCoordinate(context, &direction.x, camera);
+        last[0] = -direction.x;
+        last[1] = -direction.y;
+        last[2] = -direction.z;
+        last[3] = -direction.w;
+        lastRegister = base + 0x15;
+        lastVector = last;
+    }
+    shaderLightEmitVector(lastRegister, lastVector);
+}

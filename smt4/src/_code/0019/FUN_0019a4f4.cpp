@@ -46,9 +46,9 @@ int sortMenuCreate(...);
 int FUN_0029efa8(...);
 int FUN_0029efc0(...);
 int gameGetUnitRecord(...);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int buttonHelpSetPreset(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int FUN_002bf4f8(...);
 
 void battleSelectButtonHelpPreset(int);
@@ -157,7 +157,7 @@ extern int flagWordTestBit(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: gameGetUnitRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: gameGetPlayerData. */
@@ -170,7 +170,7 @@ extern int ifTouchGetSelectedRegion(void);
 /* Supplied declaration required: timerStart. */
 extern short vec2GetYInt(int);
 extern short vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002bf818. */
@@ -525,7 +525,7 @@ joined_r0x0019aa34:
     playSceneSetState(param_1,*(unsigned int *)(param_1 + 0x304c),0);
     break;
   case 5:
-    FUN_002bee58(param_1 + 0x11a0,0);
+    spriteStartAnimationByIndex(param_1 + 0x11a0,0);
     *(unsigned int *)(param_1 + 0x5918) = 1;
     playSceneSetState(param_1,6,0);
     temp_v9 = 0x33;
@@ -596,7 +596,7 @@ LAB_0019aebc:
                              (param_1 + *(int *)(param_1 + 0x305c) * 0x10 + temp_v5 * 2 + 0x341a);
               *(unsigned int *)(param_1 + 0x3068) = temp_v6;
             }
-            FUN_002ae164();
+            dataTable40FindById();
             temp_v5 = gameGetSlotTable();
             if (-1 < *(char *)(*(int *)(param_1 + 0x305c) + temp_v5 + 0x9107)) {
               temp_v5 = gameGetSlotTable();
@@ -638,7 +638,7 @@ LAB_0019aebc:
               }
               if (temp_v20 && temp_v6 != 0) {
                 *(unsigned int *)(param_1 + 0x3068) = 2;
-                FUN_002bee58(param_1 + 0x11a0,0);
+                spriteStartAnimationByIndex(param_1 + 0x11a0,0);
                 playSceneSetState(param_1,0x12,1);
                 temp_v9 = 0x100016d;
                 eventQueueAddUniqueIfValid(temp_v9);
@@ -672,7 +672,7 @@ LAB_0019aebc:
                              0x341c);
               *(unsigned int *)(param_1 + 0x3068) = temp_v6;
             }
-            FUN_002ae164();
+            dataTable40FindById();
             temp_v9 = *(unsigned int *)(param_1 + 0x3068);
             temp_v5 = FUN_002987d8(0xffffffff,temp_v9);
             if ((temp_v5 == 0) || (temp_v5 = FUN_0028d320(temp_v9), temp_v5 != 0)) {
@@ -701,7 +701,7 @@ LAB_0019aebc:
           }
           *(unsigned int *)(param_1 + 0x3068) = 1;
         }
-        FUN_002bee58(param_1 + 0x11a0,0);
+        spriteStartAnimationByIndex(param_1 + 0x11a0,0);
         playSceneSetState(param_1,0x12,1);
         temp_v9 = 0x100016d;
         eventQueueAddUniqueIfValid(temp_v9);
@@ -722,7 +722,7 @@ LAB_0019aebc:
           temp_v6 = FUN_0028d24c();
           *(unsigned int *)(param_1 + 0x3068) = temp_v6;
         }
-        FUN_002ae164();
+        dataTable40FindById();
         temp_v5 = btlGetMainState();
         if ((*(unsigned int *)(temp_v5 + 0x44a8) & 0x40) == 0) {
           piVar14 = (int *)gameGetSlotTable();
@@ -755,7 +755,7 @@ LAB_0019b2b0:
         }
         if (temp_v20) {
           if (temp_v19) {
-            FUN_002bee58(param_1 + 0x11a0,0);
+            spriteStartAnimationByIndex(param_1 + 0x11a0,0);
             playSceneSetState(param_1,0x12,1);
           }
           else if (temp_v33 != (char *)0x0) {
@@ -860,7 +860,7 @@ LAB_0019b58c:
                              (param_1 + *(int *)(param_1 + 0x305c) * 0x10 + temp_v6 * 2 + 0x341a);
             }
             temp_v10 = temp_v6;
-            FUN_002ae164();
+            dataTable40FindById();
             temp_v5 = gameGetSlotTable();
             if (-1 < *(char *)(*(int *)(param_1 + 0x305c) + temp_v5 + 0x9107)) {
               temp_v5 = gameGetSlotTable();
@@ -921,7 +921,7 @@ LAB_0019b58c:
                          0x341c);
         }
         temp_v10 = temp_v6;
-        FUN_002ae164();
+        dataTable40FindById();
         temp_v5 = FUN_002987d8(0xffffffff,temp_v6);
         if (temp_v5 != 0) {
           FUN_0028d320(temp_v6);
@@ -1015,7 +1015,7 @@ LAB_0019b924:
           eventQueueAddUniqueIfValid(temp_v9);
           break;
         }
-        FUN_002ae164();
+        dataTable40FindById();
         temp_v6 = *(unsigned int *)(temp_v6 + 0x28);
         temp_v19 = (temp_v6 & 0x1e0) != 0;
         if (temp_v19) {
@@ -1032,7 +1032,7 @@ LAB_0019b924:
           eventQueueAddUniqueIfValid(temp_v9);
           break;
         }
-        FUN_002bee58(param_1 + 0x11a0,0);
+        spriteStartAnimationByIndex(param_1 + 0x11a0,0);
         playSceneSetState(param_1,0x12,1);
         temp_v9 = 0x100016d;
         eventQueueAddUniqueIfValid(temp_v9);
@@ -1127,7 +1127,7 @@ LAB_0019bce0:
       *(unsigned char *)(param_1 + 0x3060) = 0;
     }
     if (temp_v5 != 0 || temp_v36[0] != '\0') {
-      FUN_002bee58(param_1 + 0x11a0,0);
+      spriteStartAnimationByIndex(param_1 + 0x11a0,0);
       playSceneSetState(param_1,0x12,1);
       eventQueueAddUniqueIfValid(0x100016d);
       break;
@@ -1333,7 +1333,7 @@ joined_r0x0019c3c8:
         break;
       }
       if (*(int *)(param_1 + 0x3044) == 0x26) {
-        FUN_002bee58(param_1 + 0x1344,10);
+        spriteStartAnimationByIndex(param_1 + 0x1344,10);
         break;
       }
       temp_v5 = FUN_002bf818(param_1 + 0x1344);
@@ -1370,7 +1370,7 @@ joined_r0x0019c3c8:
     if (temp_v5 != 0) {
       temp_v5 = objectPartRunUnlessLocked(temp_v17);
       if (temp_v5 != temp_v7) {
-        FUN_002bee58(param_1 + 0xac,1);
+        spriteStartAnimationByIndex(param_1 + 0xac,1);
         temp_v5 = FUN_00297ca4(param_1,1);
         *(unsigned int *)(param_1 + 0x3460) = 0;
         *(unsigned int *)(param_1 + 0x3464) = 0;
@@ -1418,7 +1418,7 @@ joined_r0x0019c3c8:
         FUN_0029efd8(temp_v17,1);
         if (temp_v5 != 0) {
           do {
-            FUN_002bee58(param_1 + 0xac,1);
+            spriteStartAnimationByIndex(param_1 + 0xac,1);
             temp_v5 = FUN_00297ca4(param_1,1);
             *(unsigned int *)(param_1 + 0x3460) = 0;
             *(unsigned int *)(param_1 + 0x3464) = 0;
@@ -1585,10 +1585,10 @@ LAB_0019c9b8:
     break;
   case 0x2a:
     if (*(char *)(param_1 + 0x3080) == '\0') {
-      FUN_002bee58(param_1 + 0x20,0);
+      spriteStartAnimationByIndex(param_1 + 0x20,0);
       temp_v5 = 0;
       do {
-        FUN_002bee58(param_1 + temp_v5 * 0x8c + 0x138,0);
+        spriteStartAnimationByIndex(param_1 + temp_v5 * 0x8c + 0x138,0);
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < 8);
       temp_v5 = 0;
@@ -1670,7 +1670,7 @@ LAB_0019c9b8:
         break;
       }
     }
-    FUN_002bee58(param_1 + 0xac,1);
+    spriteStartAnimationByIndex(param_1 + 0xac,1);
     temp_v9 = objectPartRunUnlessLocked(temp_v17);
     *(unsigned int *)(param_1 + 0x305c) = temp_v9;
     FUN_0028e9ec(param_1);
@@ -1723,7 +1723,7 @@ LAB_0019cec8:
           if (temp_v5 != 0) {
             temp_v7 = param_1 + temp_v5 * 0x8c;
             uiSpriteSetImageKeyframe(temp_v7 + 0x9f8,8,0);
-            FUN_002bee58(temp_v7 + 0xc28,6);
+            spriteStartAnimationByIndex(temp_v7 + 0xc28,6);
           }
           else {
             uiSpriteSetImageKeyframe(temp_v38,9,0);
@@ -1774,8 +1774,8 @@ LAB_0019cf8c:
           temp_v3 = *(short *)(temp_v43 + 0x161a);
           *(unsigned short *)(temp_v7 + 0x5950) = 4;
           *(short *)(temp_v7 + 0x5988) = temp_v3 + temp_v4;
-          FUN_002bee58(temp_v43 + 0x13d0,0xc);
-          FUN_002bee58(temp_v43 + 0x1600,0xf);
+          spriteStartAnimationByIndex(temp_v43 + 0x13d0,0xc);
+          spriteStartAnimationByIndex(temp_v43 + 0x1600,0xf);
         }
       }
       else {

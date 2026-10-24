@@ -1,39 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c1de8` (_code @ 0x3c1de8, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the constant 0 in r7 (hoisted out of the loop, pushes r7/r8) for the out-of-range row; built uses movge r0, #0 and no r7 */
+#include "common.h"
 
 extern "C" {
 
-int dataTableGet(int, int);
+extern u32 dataTableGet(u32 id, u32 index);
+extern u32 *dataTableGetEntries(u32 table);
 
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: dataTableGet. */
-
-
-int FUN_003c1de8(int param_1,unsigned int *param_2)
-
+/* Subtracts the thresholds of data table 9/1 (99 rows) from *remaining starting at row `start`; returns rows consumed. */
+int FUN_003c1de8(int start, u32 *remaining)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  for (temp_v2 = param_1; temp_v2 != 99; temp_v2 = temp_v2 + 1) {
-    dataTableGet(9,1);
-    temp_v0 = dataTableGetEntries();
-    if (temp_v2 < 99) {
-      temp_v0 = temp_v0 + temp_v2 * 4;
+    int i = start;
+    u32 need;
+
+    for (;;) {
+        if (i == 99) {
+            break;
+        }
+        u32 *entries = dataTableGetEntries(dataTableGet(9, 1));
+        need = 0;
+        if (i < 99) {
+            need = entries[i - 1];
+        }
+        if (need > *remaining) {
+            break;
+        }
+        *remaining -= need;
+        i++;
     }
-    if (temp_v2 < 99) {
-      temp_v1 = *(unsigned int *)(temp_v0 - 4);
-    }
-    else {
-      temp_v1 = 0;
-    }
-    if (*param_2 < temp_v1) break;
-    *param_2 = *param_2 - temp_v1;
-  }
-  return temp_v2 - param_1;
+    return i - start;
 }
 
 } /* extern "C" */

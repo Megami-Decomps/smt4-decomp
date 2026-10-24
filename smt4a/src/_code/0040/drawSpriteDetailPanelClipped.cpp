@@ -1,19 +1,6 @@
 /* NON_MATCHING: scissor-state reloads fold, stack addresses and coordinate operands schedule differently; alternate optimization may preserve the retail shape. */
 #include "shard/S1ListPanel.h"
-
-struct SpriteDetailAnchor {
-    u8 unk00[0x0c];
-    s16 x;
-    s16 y;
-};
-
-struct SpriteDetailPanel {
-    u8 unk00[0x1c];
-    u32 spriteGroup;
-    s32 spriteId;
-    u8 unk24[0x640];
-    SpriteDetailAnchor* anchor;
-};
+#include "shard/SpriteDetailPanel.h"
 
 extern "C" {
 extern RenderCtx* g_renderCtx;

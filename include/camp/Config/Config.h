@@ -22,6 +22,13 @@ typedef struct ConfigWork {
     /* 0xB8 */ u32 unkB8;
 } ConfigWork;
 
+/* Sprite drawing parameters in the Apocalypse work area. */
+typedef struct ConfigDrawParams {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ f32 speedScale;            /* scales the effect speed of the screen's sprites */
+    /* 0x24 */ u8 unk24[0x6C];
+} ConfigDrawParams;
+
 /* Work area, Shin Megami Tensei IV: Apocalypse. */
 typedef struct ConfigWorkA {
     /* 0x00 */ u8 unk00[0x64];
@@ -36,7 +43,8 @@ typedef struct ConfigWorkA {
     /* 0x88 */ u8 unk88[0x34];
     /* 0xBC */ u32 unkBC;
     /* 0xC0 */ u8 param;
-    /* 0xC1 */ u8 unkC1[0x3FF];
+    /* 0xC1 */ u8 unkC1[0x36F];
+    /* 0x430 */ ConfigDrawParams draw;
     /* 0x4C0 */ u8 hasType24A;
     /* 0x4C1 */ u8 hasType24B;
     /* 0x4C2 */ u8 unk4C2[0xA];

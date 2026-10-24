@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002ecda8(unsigned int, int);
 int FUN_002ece70(int, int);
 
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int FUN_002ec75c(int);
 extern unsigned int FUN_002ecd54(void);
 /* Supplied declaration required: FUN_002ecda8. */
@@ -31,21 +31,21 @@ int FUN_00105f86(int param_1)
   temp_v0 = FUN_002ecdec(temp_v0 + 0x18,0x20);
   temp_v0 = FUN_002ecdec(temp_v0 + 0x18,0x20);
   *(unsigned char *)(temp_v0 + 0x18) = 0;
-  temp_v1 = operatorNew(0x230);
+  temp_v1 = _Znwj(0x230);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = FUN_002ecd54();
   }
   FUN_002ecda8(temp_v2,0);
   **(unsigned int **)(temp_v0 - 0x4c) = temp_v2;
-  temp_v1 = operatorNew(0x230);
+  temp_v1 = _Znwj(0x230);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = FUN_002ecd54();
   }
   FUN_002ecda8(temp_v2,0);
   **(unsigned int **)(temp_v0 - 0x40) = temp_v2;
-  temp_v1 = operatorNew(0x230);
+  temp_v1 = _Znwj(0x230);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = FUN_002ecd54();

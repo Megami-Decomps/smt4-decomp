@@ -13,7 +13,7 @@ int _ZN9Obj5596acaSERKS_(int, unsigned int);
 int FUN_0011b634(...);
 int FUN_00120648(...);
 int asdOperatorDeleteArray(...);
-int operatorNew(...);
+int _Znwj(...);
 int _ZN9Obj55aff4aSERKS_(int, unsigned int);
 int _ZN9Obj55b1045resetEv(...);
 int FUN_002f4cd6(...);
@@ -74,11 +74,11 @@ extern unsigned char DAT_0055cacc; /* 0x55cacc */
 extern int campCecHasObject(void);
 extern unsigned int FUN_002bf520(void);
 /* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: operatorNew. */
+/* Supplied declaration required: _Znwj. */
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern int _ZN9Obj55aff4C1Ev(unsigned char *);
-extern unsigned int FUN_002ea100(unsigned char *, unsigned int *);
+extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, unsigned int *);
 /* Supplied declaration required: _ZN9Obj55b1045resetEv. */
 /* Supplied declaration required: FUN_002f4cd6. */
 extern unsigned int FUN_002fafd8(int, unsigned int);
@@ -219,19 +219,19 @@ void FUN_00413144(int param_1)
   temp_v21 = 0;
   temp_v22 = 0;
   textFormatBuffer(&temp_v17,&LAB_004134e8,temp_v1,temp_v2);
-  temp_v1 = FUN_002ea100(temp_v30,(unsigned int *)&temp_v17);
+  temp_v1 = _ZN9Obj55aff4C1EPKc(temp_v30,(unsigned int *)&temp_v17);
   FUN_00522a48(&temp_v14,temp_v1);
   reinterpret_cast<Obj55aff4*>(temp_v30)->Obj55aff4::~Obj55aff4();
   _ZN15Obj55aff4VectoraSERKS_(temp_v9,&temp_v14);
   temp_v6 = 0x70;
-  temp_v0 = operatorNew(0x78);
+  temp_v0 = _Znwj(0x78);
   if (temp_v0 == 0) {
     temp_v1 = 0;
   }
   else {
     temp_v1 = FUN_002fafd8(temp_v0,0);
   }
-  puVar4 = (unsigned int *)operatorNew(0x14);
+  puVar4 = (unsigned int *)_Znwj(0x14);
   if (puVar4 != (unsigned int *)0x0) {
     puVar4[2] = (unsigned int)referenceOwnerCopyAndAdvance;
     puVar4[3] = 0;

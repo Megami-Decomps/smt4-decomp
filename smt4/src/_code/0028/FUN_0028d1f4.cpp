@@ -11,12 +11,12 @@ typedef struct Entry {
 } Entry;
 
 extern s32 *gameGetSlotTable(void);
-extern Entry *FUN_002ae164(u32 id);
+extern Entry *dataTable40FindById(u32 id);
 
 s32 FUN_0028d1f4(u32 id)
 {
     s32 result = 0;
-    Entry *entry = FUN_002ae164(id);
+    Entry *entry = dataTable40FindById(id);
 
     if (entry != NULL) {
         if (entry->value != 0) {

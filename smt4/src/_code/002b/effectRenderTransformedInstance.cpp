@@ -39,8 +39,8 @@ struct EffectInstance {
 struct TitleScene;
 
 extern "C" {
-extern long long DAT_00476638;
-extern Matrix44 DAT_004efd9c;
+extern long long _ZGVZN2nw4math5MTX448IdentityEvE8identity;
+extern Matrix44 _ZZN2nw4math5MTX448IdentityEvE8identity;
 extern TitleScene* g_titleScene;
 
 int __cxa_guard_acquire(long long* guard);
@@ -91,9 +91,9 @@ static __inline void setIdentity(Matrix44 *matrix)
 
 static __inline void initializeSharedIdentityIfNeeded()
 {
-    if (!(static_cast<u32>(DAT_00476638) & 1) &&
-        __cxa_guard_acquire(&DAT_00476638))
-        setIdentity(&DAT_004efd9c);
+    if (!(static_cast<u32>(_ZGVZN2nw4math5MTX448IdentityEvE8identity) & 1) &&
+        __cxa_guard_acquire(&_ZGVZN2nw4math5MTX448IdentityEvE8identity))
+        setIdentity(&_ZZN2nw4math5MTX448IdentityEvE8identity);
 }
 
 static __inline void setTranslation(Matrix44 *matrix, f32 x, f32 y, f32 z)
@@ -129,9 +129,9 @@ extern "C" void effectRenderTransformedInstance(EffectInstance* effect, float ho
     Matrix44 transform;
 
     initializeSharedIdentityIfNeeded();
-    mtx44Copy(&view, &DAT_004efd9c);
+    mtx44Copy(&view, &_ZZN2nw4math5MTX448IdentityEvE8identity);
     initializeSharedIdentityIfNeeded();
-    mtx44Copy(&transform, &DAT_004efd9c);
+    mtx44Copy(&transform, &_ZZN2nw4math5MTX448IdentityEvE8identity);
 
     float scaleX = 1.0f;
     float scaleY = 1.0f;

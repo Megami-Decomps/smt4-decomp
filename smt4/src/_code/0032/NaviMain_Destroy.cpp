@@ -6,7 +6,7 @@ extern NaviMain *g_naviMain;
 int FUN_00291730(u32 *block);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
-int FUN_00291998(void);
+int soundRequestEnd(void);
 int FUN_002b827c(int a);
 int asdMemFree(void *ptr);
 int jobStop(u32 job, int mode);
@@ -14,7 +14,7 @@ int jobStop(u32 job, int mode);
 void NaviMain_Destroy(void)
 {
     FUN_002b827c(3);
-    FUN_00291998();
+    soundRequestEnd();
     uiFadeRelease();
     buttonHelpRelease();
     if (g_naviMain != NULL) {

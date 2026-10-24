@@ -9,7 +9,7 @@ int FUN_00148bb8(int, int);
 int FUN_0014afd0(int, int);
 int asdOperatorNew(void);
 int FUN_0022677c(int, int);
-int FUN_002bf464(void);
+int campButtonHelpLoad(void);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 int FUN_0031e198(void);
 int campButtonHelpAcquire(void);
@@ -38,7 +38,7 @@ extern short *FUN_00145f04(unsigned char, unsigned int);
 /* Supplied declaration required: asdOperatorNew. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
-/* Supplied declaration required: FUN_002bf464. */
+/* Supplied declaration required: campButtonHelpLoad. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_0031e198. */
 /* Supplied declaration required: campButtonHelpAcquire. */
@@ -128,7 +128,7 @@ unsigned int * FUN_0049c3c0(unsigned int *param_1,unsigned int param_2,int param
     *(unsigned int *)(temp_v1 - 0x9f78) = *(unsigned int *)(temp_v1 - 0x9f84);
     *(unsigned int *)(temp_v1 - 0x9f84) = 0xf;
     *(unsigned int *)(temp_v1 - 0x9f80) = 0;
-    FUN_002bf464();
+    campButtonHelpLoad();
     campButtonHelpAcquire();
     asdTMTexTableLoadSprites(0x20);
     FUN_0014afd0(0x20,0);

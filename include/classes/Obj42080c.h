@@ -22,6 +22,7 @@ struct Obj42080cRect {
  * four vertices (the base's heap block) it places over a rectangle. */
 class Obj42080c : public Obj420794 {
 public:
+    Obj42080c(Obj420794Child *owned) : Obj420794(owned), uvStart(0.0f), uvEnd(1.0f), rect(NULL) {}
     virtual ~Obj42080c();
     virtual void prepareGeometry();
     virtual void draw();
@@ -29,6 +30,10 @@ public:
 
     /* The four vertices (the base's heap block). */
     Obj42080cVertex *vertices() { return (Obj42080cVertex *)buffer; }
+
+    /* The 4x4 matrix the filter draws with. */
+    void *matrixSlot() { return unk18; }
+    void setRect(Obj42080cRect *newRect) { rect = newRect; }
 
 protected:
     /* 0x18 */ u8 unk18[0x40];

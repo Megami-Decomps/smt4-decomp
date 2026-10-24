@@ -22,7 +22,7 @@ extern WindowOwner *DAT_00588e2c;
 void FUN_002c75c0(u32, u32);
 void saveLoadProcessUpdateSdCardDetection(void);
 void *asdOperatorNew(u32);
-Obj557e3c *FUN_00420d08(Obj557e3c *);
+Obj557e3c *_ZN9Obj557e3cC1Ev(Obj557e3c *);
 
 // Construct the menu object, start its mode-one request, and reset owner flags.
 void FUN_0039c2a4(u32 argument)
@@ -32,7 +32,7 @@ void FUN_0039c2a4(u32 argument)
     WindowOwner *owner = DAT_00588e2c;
     Obj557e3c *window = (Obj557e3c *)asdOperatorNew(sizeof(Obj557e3c));
     if (window != NULL)
-        window = FUN_00420d08(window);
+        window = _ZN9Obj557e3cC1Ev(window);
     owner->window = window;
     window->initialize(1, argument);
     owner->state = 0;

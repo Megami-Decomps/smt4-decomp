@@ -3,7 +3,14 @@
 
 #include "common.h"
 
+#include <stddef.h>
+
 struct NpcPortraitResource;
+struct NpcTableRecord;
+struct NpcTexturePoint {
+    f32 x;
+    f32 y;
+};
 struct NpcTextureEffectWork {
     u32 unk00;
     s32 state;
@@ -12,7 +19,10 @@ struct NpcTextureEffectWork {
     s32 x;
     s32 y;
     f32 speed;
-    u8 unk1c[4];
+    union {
+        u8 unk1c[4];
+        f32 rotation;
+    };
     f32 scaleX;
     f32 fade;
     f32 fadeStep;
@@ -24,14 +34,32 @@ struct NpcTextureEffectWork {
     s32 screenRegion;
     s32 table;
     s32 node;
-    u8 unk48[4];
+    union {
+        u8 unk48[4];
+        s32 handle;
+    };
     NpcPortraitResource *portrait;
     s32 portraitId;
-    u8 unk54[0xc];
+    u8 unk54[4];
+    NpcTableRecord *record; // 0x58: row of the NPC table the effect was created for
+    u8 unk5c[4];
     u8 animate;
     u8 unk61[0xf];
     u32 unk70[6];
-    u8 unk88[0x34];
+    u8 unk88;
+    u8 unk89[3];
+    u32 unk8c;
+    u32 unk90;
+    u8 unk94;
+    u8 unk95;
+    u8 unk96[2];
+    NpcTexturePoint points[3]; // 0x98: one anchor per texture slot
+    NpcTexturePoint extra;     // 0xb0
+    u8 unkb8[4];
 };
+typedef char NpcTextureEffectWorkLayoutCheck[
+    sizeof(NpcTextureEffectWork) == 0xbc && offsetof(NpcTextureEffectWork, handle) == 0x48 &&
+    offsetof(NpcTextureEffectWork, record) == 0x58 && offsetof(NpcTextureEffectWork, points) == 0x98 &&
+    offsetof(NpcTextureEffectWork, extra) == 0xb0 ? 1 : -1];
 
 #endif

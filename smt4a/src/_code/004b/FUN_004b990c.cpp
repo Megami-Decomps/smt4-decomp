@@ -71,7 +71,7 @@ extern int g_mapSelection; /* 0x5f1c98 */
 
 /* Supplied declaration required: textFormatBuffer. */
 extern int gameDataBlocksGetSaveData(void);
-extern int floatPairClear(int);
+extern int _ZN10FloatStateC1Ev(int);
 /* Supplied declaration required: asdOperatorNew. */
 extern int campIsState85(void);
 extern int gameFlagsGetBlock(void);
@@ -303,7 +303,7 @@ void FUN_004b990c(int param_1)
       asdOperatorNew();
       temp_v6 = 0;
       if (temp_v4 != 0) {
-        temp_v6 = floatPairClear(temp_v4 + 0x4f0);
+        temp_v6 = _ZN10FloatStateC1Ev(temp_v4 + 0x4f0);
         temp_v6 = temp_v6 - 0x4f0;
       }
       *(int *)(param_1 + 0x1218) = temp_v6;

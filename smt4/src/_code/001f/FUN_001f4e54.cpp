@@ -3,7 +3,7 @@
 
 extern "C" {
 s32 FUN_00293230(u32);
-void FUN_002bee58(UiSpriteState *, s32);
+void spriteStartAnimationByIndex(UiSpriteState *, s32);
 }
 
 /* Reset one card's animation channels and select its default sprite animations. */
@@ -21,7 +21,7 @@ extern "C" void FUN_001f4e54(ActorCardAnimations *owner, s32 slot)
         owner->animation.states[slot] = 5;
         return;
     }
-    FUN_002bee58(&owner->sprites[0][slot], 11);
-    FUN_002bee58(&owner->sprites[1][slot], 13);
-    FUN_002bee58(&owner->sprites[2][slot], 14);
+    spriteStartAnimationByIndex(&owner->sprites[0][slot], 11);
+    spriteStartAnimationByIndex(&owner->sprites[1][slot], 13);
+    spriteStartAnimationByIndex(&owner->sprites[2][slot], 14);
 }

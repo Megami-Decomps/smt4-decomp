@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001a6350. */
 extern int constructObj0055c3b8(unsigned int, unsigned int *);
-extern unsigned int FUN_001b1f04(void);
+extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 extern unsigned int *FUN_001b95dc(void);
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
 
@@ -96,7 +96,7 @@ unsigned int FUN_0018fefc(int param_1,int param_2,unsigned int *param_3,int para
             piVar3 = (int *)*piVar3;
           } while (piVar3 != (int *)(param_1 + 0x84));
         }
-        temp_v1 = FUN_001b1f04();
+        temp_v1 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
         FUN_001a6350(temp_v1,param_1 + 0x8c);
         return 1;
       }

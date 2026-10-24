@@ -8,7 +8,7 @@ int FUN_00106a5c(...);
 int FUN_0016cd18(unsigned int, int, int, int, int);
 int asdOperatorDeleteArray(...);
 int _ZN9Obj55aff4D1Ev(...);
-int FUN_002ea100(...);
+int _ZN9Obj55aff4C1EPKc(...);
 int FUN_002ed8a0(unsigned int [2], int, unsigned int);
 int FUN_002ed91c(int, int);
 int FUN_002ed96e(int *, int, int);
@@ -54,7 +54,7 @@ extern unsigned int rt_malloc(void);
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern int _ZN9Obj55aff4C1ERKS_(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002ea100. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
 /* Supplied declaration required: FUN_002ed8a0. */
 extern int wordRefsEqual_002ed902(unsigned int *, int *);
 extern int vectorInitEmpty2(unsigned char *);
@@ -96,7 +96,7 @@ int FUN_001068e4(int param_1,int param_2,int param_3,int *param_4)
   if (*(char *)(param_1 + 4) != '\0') {
     for (piVar4 = (int *)0x0; piVar4 < param_4; piVar4 = (int *)((int)piVar4 + 1)) {
       temp_v4 = *(int *)(DAT_005949dc + 0x138);
-      temp_v0 = FUN_002ea100(&temp_v6,*(unsigned int *)(temp_v14 + (int)piVar4 * 4));
+      temp_v0 = _ZN9Obj55aff4C1EPKc(&temp_v6,*(unsigned int *)(temp_v14 + (int)piVar4 * 4));
       FUN_002ed8a0(temp_v8,DAT_005949dc + 0x128,temp_v0);
       temp_v1 = wordRefsEqual_002ed902(temp_v8,&temp_v4);
       _ZN9Obj55aff4D1Ev(&temp_v6);
@@ -104,7 +104,7 @@ int FUN_001068e4(int param_1,int param_2,int param_3,int *param_4)
     }
     for (piVar4 = (int *)0x0; piVar4 < param_4; piVar4 = (int *)((int)piVar4 + 1)) {
       temp_v1 = DAT_005949dc + 0x128;
-      temp_v0 = FUN_002ea100(temp_v11,*(unsigned int *)(temp_v14 + (int)piVar4 * 4));
+      temp_v0 = _ZN9Obj55aff4C1EPKc(temp_v11,*(unsigned int *)(temp_v14 + (int)piVar4 * 4));
       temp_v3 = &temp_v7;
       puVar5 = temp_v9;
       temp_v4 = temp_v1;

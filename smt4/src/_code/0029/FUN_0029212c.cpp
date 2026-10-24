@@ -10,7 +10,7 @@ int FUN_002907c4(...);
 int textEncodeFontSlot(...);
 int asdTextDrawDirectoryEntry(...);
 int FUN_0029ede8(...);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int dataTable08Sub2GetRecord(void);
 int dataTable08Sub1GetRecord(void);
 int textFormatBuffer(...);
@@ -56,7 +56,7 @@ extern int DAT_0043da2c; /* 0x43da2c */
 extern int FUN_00295cec(void);
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_0029ede8. */
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 extern unsigned int aocEntryGetKind(int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
@@ -133,7 +133,7 @@ void FUN_0029212c(int param_1)
     else {
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v8 + 0x62);
       if (temp_v6 != 0) {
-        FUN_002ae164();
+        dataTable40FindById();
         skillFormatTargetLabel(&temp_v12,(*(unsigned int *)(temp_v6 + 0x28) & 0x1ff) >> 5);
       }
       else if ((*(unsigned char *)(temp_v8 + 0x6a) & 0x80) != 0) {

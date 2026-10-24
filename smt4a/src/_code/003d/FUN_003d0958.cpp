@@ -1,120 +1,90 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d0958` (_code @ 0x3d0958, 0x25c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: case 1's closing stores are tail-merged with case 3's (strne/strne then b), retail keeps all three stores in place */
+#include "gamedata/DataTable.h"
+#include "ui/SpriteWindow.h"
 
 extern "C" {
 
-int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
-int FUN_001517b4(int, int);
-int uiSpriteSetImageKeyframe(int, int);
-int asdTMTexTableReleaseNode(void);
-int FUN_0019e330(int, int);
-int FUN_0028520c(void);
+extern SpriteWindow *g_sWin; /* 0x57f57c */
+s32 FUN_0028520c(s16 id);
+s32 FUN_001517b4(s32 first, s32 second);
+s32 FUN_00163fd4(s32 id);
+s32 FUN_00163aa4(ByteStateWork *sprite, f32 speed);
+void uiSpriteSetImageKeyframe(ByteStateWork *sprite, s32 keyframe, s32 frame);
+void FUN_0019e330(ByteStateWork *sprite, s32 keyframe, s32 frame);
+void workSetStateByte(ByteStateWork *work, u8 state);
+void asdTMTexTableReleaseNode(s32 table, s32 index);
+void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size,
+                   s32 (*compare)(const void *, const void *));
+s32 FUN_002321f8(const void *key, const void *record);
 
-/* stack frame of void: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
+struct TextureIndexMapping {
+    u16 id;
+    s16 resource;
+};
 
-extern unsigned char LAB_002321f8; /* 0x2321f8 */
-extern int g_sWin; /* 0x57f57c */
-
-/* Supplied declaration required: libc_bsearch. */
-/* Supplied declaration required: FUN_001517b4. */
-extern int FUN_00163aa4(int);
-extern int FUN_00163fd4(unsigned int);
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: FUN_0019e330. */
-/* Supplied declaration required: FUN_0028520c. */
-
-
-unsigned int FUN_003d0958(void)
-
+/* Releases the downloadable texture resource mapped to a window texture id, if it has one. */
+static __inline void releaseMappedTexture(s32 id)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned short *puVar5;
-  unsigned int temp_v4;
-  unsigned short temp_v5 [6];
-  
-  temp_v0 = g_sWin;
-  switch(*(unsigned int *)(g_sWin + 8)) {
-  case 1:
-    temp_v1 = (int)(short)*(unsigned int *)(g_sWin + 0x14);
-    FUN_0028520c();
-    if (temp_v1 != 0) {
-      if (*(int *)(temp_v0 + 0xc) == 0) {
-        temp_v1 = 9;
-        FUN_001517b4(9,2);
-        if ((temp_v1 != 0) || (temp_v1 = FUN_00163fd4(6), temp_v1 != 0)) {
-          *(unsigned char *)(temp_v0 + 0xcd) = 1;
+    void *table = dataTableGet(0x47, 0);
+    const void *entries = dataTableGetEntries(table);
+    u32 count = dataTableGetCount(table);
+    u16 key = (u16)id;
+    const TextureIndexMapping *mapping = static_cast<const TextureIndexMapping *>(
+        libc_bsearch(&key, entries, count, sizeof(TextureIndexMapping), FUN_002321f8));
+
+    if (mapping != NULL && mapping->resource >= 0) {
+        asdTMTexTableReleaseNode(52, mapping->resource);
+    }
+}
+
+/* Per-frame update of the sprite window: plays the open animation, waits for the texture, then closes and releases it. */
+s32 FUN_003d0958(void)
+{
+    SpriteWindow *window = g_sWin;
+
+    switch (window->state) {
+    case 0:
+    case 2:
+        break;
+    case 1:
+        if (FUN_0028520c((s16)window->textureId)) {
+            if (window->phase == 0) {
+                if (FUN_001517b4(9, 2) != 0 || FUN_00163fd4(6) != 0) {
+                    workSetStateByte(&window->sprite, 1);
+                } else {
+                    uiSpriteSetImageKeyframe(&window->sprite, 0, 0);
+                    FUN_0019e330(&window->sprite, 0, 0);
+                }
+                window->phase = 1;
+            }
+            if (FUN_00163aa4(&window->sprite, 1.0f)) {
+                window->phase = 0;
+                window->state = 2;
+                window->frames = 0;
+            }
         }
-        else {
-          uiSpriteSetImageKeyframe(temp_v0 + 0x48,0);
-          FUN_0019e330(temp_v0 + 0x48,0);
+        break;
+    case 3:
+        if (FUN_0028520c((s16)window->textureId) && FUN_00163aa4(&window->sprite, 1.0f)) {
+            releaseMappedTexture(window->textureId);
+            window->state = 0;
+            window->phase = 0;
+            window->frames = 0;
         }
-        *(unsigned int *)(temp_v0 + 0xc) = 1;
-      }
-      temp_v1 = FUN_00163aa4(temp_v0 + 0x48);
-      if (temp_v1 != 0) {
-        *(unsigned int *)(temp_v0 + 0xc) = 0;
-        *(unsigned int *)(temp_v0 + 8) = 2;
-        *(unsigned int *)(temp_v0 + 0x10) = 0;
-      }
+        break;
+    case 4:
+        if (FUN_0028520c((s16)window->textureId) && ++window->holdTimer >= window->holdLimit) {
+            releaseMappedTexture(window->holdTextureId);
+            window->phase = 0;
+            window->state = 2;
+            window->frames = 0;
+            window->holdTimer = 0;
+            window->holdTextureId = 0;
+        }
+        break;
     }
-    break;
-  case 3:
-    temp_v1 = (int)(short)*(unsigned int *)(g_sWin + 0x14);
-    FUN_0028520c();
-    if ((temp_v1 != 0) && (temp_v1 = FUN_00163aa4(temp_v0 + 0x48), temp_v1 != 0)) {
-      temp_v4 = *(unsigned int *)(temp_v0 + 0x14);
-      temp_v2 = dataTableGet(0x47,0);
-      temp_v3 = dataTableGetEntries();
-      temp_v2 = dataTableGetCount(temp_v2);
-      puVar5 = temp_v5;
-      temp_v5[0] = (unsigned short)temp_v4;
-      libc_bsearch(puVar5,temp_v3,temp_v2,4,&LAB_002321f8);
-      if ((puVar5 != (unsigned short *)0x0) && (-1 < (short)puVar5[1])) {
-        asdTMTexTableReleaseNode();
-      }
-      *(unsigned int *)(temp_v0 + 8) = 0;
-      *(unsigned int *)(temp_v0 + 0xc) = 0;
-      *(unsigned int *)(temp_v0 + 0x10) = 0;
-    }
-    break;
-  case 4:
-    temp_v1 = (int)(short)*(unsigned int *)(g_sWin + 0x14);
-    FUN_0028520c();
-    if ((temp_v1 != 0) &&
-       (temp_v1 = *(int *)(temp_v0 + 0x1c) + 1, *(int *)(temp_v0 + 0x1c) = temp_v1,
-       *(int *)(temp_v0 + 0x20) <= temp_v1)) {
-      temp_v4 = *(unsigned int *)(temp_v0 + 0x18);
-      temp_v2 = dataTableGet(0x47,0);
-      temp_v3 = dataTableGetEntries();
-      temp_v2 = dataTableGetCount(temp_v2);
-      puVar5 = temp_v5;
-      temp_v5[0] = (unsigned short)temp_v4;
-      libc_bsearch(puVar5,temp_v3,temp_v2,4,&LAB_002321f8);
-      if ((puVar5 != (unsigned short *)0x0) && (-1 < (short)puVar5[1])) {
-        asdTMTexTableReleaseNode();
-      }
-      *(unsigned int *)(temp_v0 + 0xc) = 0;
-      *(unsigned int *)(temp_v0 + 8) = 2;
-      *(unsigned int *)(temp_v0 + 0x10) = 0;
-      *(unsigned int *)(temp_v0 + 0x1c) = 0;
-      *(unsigned int *)(temp_v0 + 0x18) = 0;
-    }
-  }
-  *(int *)(temp_v0 + 0x10) = *(int *)(temp_v0 + 0x10) + 1;
-  return 0;
+    window->frames++;
+    return 0;
 }
 
 } /* extern "C" */

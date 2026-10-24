@@ -1,71 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002dece8` (_code @ 0x2dece8, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same logic as the other render-state push/pop users; the inlined renderStackPush/Pop helpers schedule their index arithmetic differently and the effect null checks branch differently */
+#include "camp/RenderCtx.h"
+
+/* A battle effect part that draws a child object through the render state stack. */
+struct EffectChildVtable {
+    void *unk00[3];
+    void (*draw)(void *child); /* +0x0C */
+};
+struct EffectChild {
+    const EffectChildVtable *vtable;
+};
+
+struct BtlEffectObject {
+    /* 0x0000 */ u8 unk0000[0x339C];
+    /* 0x339C */ u32 flags;
+    /* 0x33A0 */ u8 unk33A0[8];
+    /* 0x33A8 */ EffectChild *child;
+};
+
+struct BtlEffectGlobals {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ BtlEffectObject *object;
+};
 
 extern "C" {
+extern BtlEffectGlobals g_btlEffect;
+extern RenderCtxA *g_renderCtx;
 
-int jobGetWork(void);
-int renderCtxResetColorScale(int);
-int skinObjectUpdateMatrices(int);
+void *jobGetWork(void);
+s32 FUN_00387580(u32 kind, f32 value);
+void skinObjectUpdateMatrices(RenderCtxA *context);
+void renderCtxResetColorScale(RenderCtxA *context);
 
-typedef int romwright_code(...);
-extern unsigned char g_btlEffect; /* 0x5737f0 */
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: jobGetWork. */
-/* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: skinObjectUpdateMatrices. */
-extern int FUN_00387580(unsigned int);
-
-
-unsigned int FUN_002dece8(void)
-
+/* Draws the battle effect's child object inside its own render state. */
+u32 FUN_002dece8(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar7;
-  unsigned char temp_v6;
-  
-  jobGetWork();
-  temp_v3 = g_renderCtx;
-  temp_v0 = (*(int *)((unsigned char *)&g_btlEffect + 0x18));
-  if ((*(int *)((unsigned char *)&g_btlEffect + 0x18)) != 0) {
-    temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&g_btlEffect + 0x18)) + 0x339c);
-    temp_v6 = (temp_v1 & 2) != 0;
-    if (temp_v6) {
-      temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&g_btlEffect + 0x18)) + 0x33a8);
+    jobGetWork();
+    BtlEffectObject *effect = g_btlEffect.object;
+    if (effect != NULL && (effect->flags & 2) != 0 && effect->child != NULL) {
+        RenderCtxA *context = g_renderCtx;
+        s32 state = FUN_00387580(6, 0.0f);
+        renderStackPush(&context->additional.stackC, state);
+        effect->child->vtable->draw(effect->child);
+        renderStackPop(&g_renderCtx->additional.stackC);
+        skinObjectUpdateMatrices(g_renderCtx);
+        renderCtxResetColorScale(g_renderCtx);
     }
-    if (temp_v6 && temp_v1 != 0) {
-      temp_v2 = FUN_00387580(6);
-      piVar7 = (int *)(temp_v3 + 0x1278);
-      temp_v4 = *piVar7;
-      temp_v5 = piVar7[temp_v4 + 2];
-      *piVar7 = temp_v4 + 1;
-      piVar7[temp_v4 + 3] = temp_v2;
-      if (*(char *)(temp_v3 + 0x1290) != '\0' || temp_v5 != temp_v2) {
-        (**(romwright_code **)(temp_v3 + 0x1294))();
-        *(unsigned char *)(temp_v3 + 0x1290) = 0;
-      }
-      (**(romwright_code **)(**(int **)(temp_v0 + 0x33a8) + 0xc))();
-      temp_v0 = g_renderCtx;
-      piVar7 = (int *)(g_renderCtx + 0x1278);
-      temp_v3 = *piVar7;
-      temp_v2 = piVar7[temp_v3 + 2];
-      *piVar7 = temp_v3 - 1;
-      if (*(char *)(temp_v0 + 0x1290) != '\0' || temp_v2 != piVar7[temp_v3 + 1]) {
-        (**(romwright_code **)(temp_v0 + 0x1294))(piVar7[temp_v3 + 1]);
-        *(unsigned char *)(temp_v0 + 0x1290) = 0;
-      }
-      skinObjectUpdateMatrices(g_renderCtx);
-      renderCtxResetColorScale(g_renderCtx);
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

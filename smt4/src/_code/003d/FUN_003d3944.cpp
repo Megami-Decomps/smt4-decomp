@@ -10,7 +10,7 @@ int bgmSwitchCurrent(int, unsigned int);
 int FUN_002569ac(int *, unsigned int, unsigned int *, unsigned int, unsigned int);
 int FUN_0027dd9c(unsigned int);
 int FUN_0027e6f4(int, int);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int dataTable08Sub1GetRecord(void);
 int entryInvalidateStateTable(int);
 int FUN_003cc944(int *, int, int);
@@ -35,7 +35,7 @@ extern int FUN_00227ecc(unsigned int, unsigned char);
 /* Supplied declaration required: FUN_002569ac. */
 /* Supplied declaration required: FUN_0027dd9c. */
 /* Supplied declaration required: FUN_0027e6f4. */
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: entryInvalidateStateTable. */
 /* Supplied declaration required: FUN_003cc944. */
@@ -92,7 +92,7 @@ void FUN_003d3944(int *param_1,int param_2,unsigned int param_3,unsigned int par
       if (temp_v0 == 2 || temp_v0 == 3) {
         temp_v2 = (unsigned int)*(short *)(temp_v1 + 0x14e);
         if (0 < (int)temp_v2) {
-          FUN_002ae164();
+          dataTable40FindById();
           temp_v3 = 0;
           if (temp_v2 != 0) {
             temp_v3 = (unsigned int)*(unsigned char *)(temp_v2 + 0x57);
@@ -108,7 +108,7 @@ void FUN_003d3944(int *param_1,int param_2,unsigned int param_3,unsigned int par
         temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x62);
         if (temp_v2 != 0) {
           if (0 < (int)temp_v2) {
-            FUN_002ae164();
+            dataTable40FindById();
             temp_v3 = 0;
             if (temp_v2 != 0) {
               temp_v3 = (unsigned int)*(unsigned char *)(temp_v2 + 0x57);

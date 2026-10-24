@@ -1,31 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00293e08` (_code @ 0x293e08, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail saves the by-value scale in s16..s18 in x,y,z order (vmov.f64 d8,d0); built saves z,y,x. Stride and calls match. */
+#include "shard/W4_Match1b_Node.h"
+
+struct ScaleNode {
+    u8 unk00[8];
+    NodeOwner *owner; // 0x08
+};
+
+struct ScaleGroup {
+    u8 unk00[8];
+    ScaleNode *root;       // 0x08
+    u8 unk0c[0xc];
+    struct {
+        ScaleNode *node;   // 0x18
+        u8 unk1c[0x4c];
+    } children[3];         // stride 0x50
+};
 
 extern "C" {
 
-int nodeSetScale(unsigned int, int);
+void nodeSetScale(NodeOwner *owner, s32 unused, NodeVec3 scale);
 
-/* Supplied declaration required: nodeSetScale. */
-
-
-void FUN_00293e08(int param_1)
-
+// Apply the scale to the group's root node and to each of its three child nodes.
+void FUN_00293e08(ScaleGroup *group, NodeVec3 scale)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  nodeSetScale(*(unsigned int *)(*(int *)(param_1 + 8) + 8),0);
-  temp_v1 = 0;
-  do {
-    temp_v0 = *(int *)(param_1 + temp_v1 * 0x50 + 0x18);
-    if (temp_v0 != 0) {
-      nodeSetScale(*(unsigned int *)(temp_v0 + 8),0);
+    nodeSetScale(group->root->owner, 0, scale);
+    for (s32 i = 0; i < 3; i++) {
+        if (group->children[i].node != NULL) {
+            nodeSetScale(group->children[i].node->owner, 0, scale);
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 3);
-  return;
 }
 
 } /* extern "C" */

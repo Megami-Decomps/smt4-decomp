@@ -1,4 +1,3 @@
-/* NON_MATCHING: global work pointer and saved zero exchange r6/r7; all other instructions and literals agree. */
 #include "addon/SceneResource.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"

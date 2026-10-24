@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_004af308(void);
+int _ZN12MoLivePlayer5resetEv(void);
 int treeClear(int);
-int FUN_00520b3c(unsigned char [4], unsigned int *, int *, int *);
+int _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE5eraseENS_14__rw_tree_iterIS5_iPS5_RS5_NS_17__rw_rb_tree_nodeISB_S5_jS7_EEEESI_(unsigned char [4], unsigned int *, int *, int *);
 int FUN_00521c8c(unsigned int *, int, unsigned int);
 
 typedef int romwright_code(...);
@@ -16,9 +16,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_004af308. */
+/* Supplied declaration required: _ZN12MoLivePlayer5resetEv. */
 /* Supplied declaration required: treeClear. */
-/* Supplied declaration required: FUN_00520b3c. */
+/* Supplied declaration required: _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE5eraseENS_14__rw_tree_iterIS5_iPS5_RS5_NS_17__rw_rb_tree_nodeISB_S5_jS7_EEEESI_. */
 /* Supplied declaration required: FUN_00521c8c. */
 
 
@@ -34,7 +34,7 @@ int FUN_004afd38(int param_1)
   int temp_v2;
   unsigned char temp_v3 [4];
   
-  FUN_004af308();
+  _ZN12MoLivePlayer5resetEv();
   treeClear(param_1 + 0x1498);
   treeClear(param_1 + 0x144c);
   FUN_00521c8c((unsigned int *)(param_1 + 0x143c),0,*(unsigned int *)(param_1 + 0x1448));
@@ -46,7 +46,7 @@ int FUN_004afd38(int param_1)
   temp_v2 = *(int *)(param_1 + 0x1430);
   if (temp_v2 != 0) {
     temp_v1 = *(unsigned int *)(temp_v2 + 8);
-    FUN_00520b3c(temp_v3,puVar3,&temp_v1,&temp_v2);
+    _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE5eraseENS_14__rw_tree_iterIS5_iPS5_RS5_NS_17__rw_rb_tree_nodeISB_S5_jS7_EEEESI_(temp_v3,puVar3,&temp_v1,&temp_v2);
     temp_v0 = *(int *)(param_1 + 0x1430);
     *(unsigned int *)(temp_v0 + 0xc) = *(unsigned int *)(param_1 + 0x1424);
     *(int *)(param_1 + 0x1424) = temp_v0;

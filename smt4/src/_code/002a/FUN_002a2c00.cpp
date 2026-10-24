@@ -1,42 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a2c00` (_code @ 0x2a2c00, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same quaternion product; retail evaluates and stores the components in a different grouping (two stores of two floats), so the multiply-accumulate order differs. */
+#include "gfx/CameraVectorScratch.h"
 
 extern "C" {
 
-extern float DAT_004ea91c; /* 0x4ea91c */
-extern float DAT_004ea920; /* 0x4ea920 */
-extern float DAT_004ea924; /* 0x4ea924 */
-extern float DAT_004ea928; /* 0x4ea928 */
-extern float DAT_004ea92c; /* 0x4ea92c */
-extern float DAT_004ea930; /* 0x4ea930 */
-extern float DAT_004ea934; /* 0x4ea934 */
-extern float DAT_004ea938; /* 0x4ea938 */
+extern CameraVectorScratch DAT_004ea81c;
 
-
+/* Multiplies the scratch quaternion `direction` by the quaternion `origin`, storing the product in `direction`. */
 void FUN_002a2c00(void)
-
 {
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  
-  temp_v5 = DAT_004ea91c * DAT_004ea92c;
-  temp_v4 = DAT_004ea91c * DAT_004ea930;
-  temp_v2 = DAT_004ea91c * DAT_004ea934;
-  temp_v0 = DAT_004ea920 * DAT_004ea930;
-  temp_v3 = DAT_004ea920 * DAT_004ea92c;
-  temp_v1 = DAT_004ea924 * DAT_004ea934;
-  DAT_004ea91c = (DAT_004ea920 * DAT_004ea934 - DAT_004ea924 * DAT_004ea930) +
-                 DAT_004ea92c * DAT_004ea928 + DAT_004ea91c * DAT_004ea938;
-  DAT_004ea920 = (DAT_004ea924 * DAT_004ea92c - temp_v2) + DAT_004ea930 * DAT_004ea928 +
-                 DAT_004ea920 * DAT_004ea938;
-  DAT_004ea924 = (temp_v4 - temp_v3) + DAT_004ea934 * DAT_004ea928 + DAT_004ea924 * DAT_004ea938;
-  DAT_004ea928 = DAT_004ea928 * DAT_004ea938 - (temp_v5 + temp_v0 + temp_v1);
-  return;
+    Vector4 a = DAT_004ea81c.direction;
+    Vector4 b = DAT_004ea81c.origin;
+
+    DAT_004ea81c.direction.x = (a.y * b.z - a.z * b.y) + b.x * a.w + a.x * b.w;
+    DAT_004ea81c.direction.y = (a.z * b.x - a.x * b.z) + b.y * a.w + a.y * b.w;
+    DAT_004ea81c.direction.z = (a.x * b.y - a.y * b.x) + b.z * a.w + a.z * b.w;
+    DAT_004ea81c.direction.w = a.w * b.w - (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
 } /* extern "C" */

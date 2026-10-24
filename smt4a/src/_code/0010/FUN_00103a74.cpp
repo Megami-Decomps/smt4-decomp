@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7908(unsigned int, unsigned int *);
+int _ZN12OnlineResultC1ERKj(unsigned int, unsigned int *);
 int rt_memcpy(int, unsigned int, int);
 
 /* stack frame of param_5: 2 slot(s), 8 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_5_stack;
 
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -42,7 +42,7 @@ void FUN_00103a74(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   else {
     temp_v1 = 0x8001000a;
   }
-  FUN_002e7908(param_1,puVar1);
+  _ZN12OnlineResultC1ERKj(param_1,puVar1);
   return;
 }
 

@@ -10,7 +10,7 @@ extern unsigned char LAB_001b1f5c; /* 0x1b1f5c */
 extern unsigned char DAT_0055c2ac; /* 0x55c2ac */
 extern unsigned char DAT_0055c2dc; /* 0x55c2dc */
 
-extern unsigned int *FUN_001b9b28(void);
+extern unsigned int *_ZN9Obj55c244C1Ev(void);
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
@@ -20,7 +20,7 @@ unsigned int * FUN_001a6400(void)
 /* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
   
-  puVar1 = (unsigned int *)FUN_001b9b28();
+  puVar1 = (unsigned int *)_ZN9Obj55c244C1Ev();
   puVar1[0x12] = 0;
   puVar1[0x13] = 0;
   *puVar1 = (unsigned int)&DAT_0055c2ac;

@@ -8,13 +8,13 @@ typedef struct IntVector {
     /* 0x08 */ s32 *capacityEnd;
 } IntVector;
 
-void asdDeallocateArrayStorage(s32 *storage, s32 capacity, s32 arg);
+void _ZN4__rw15__rw_deallocateEPvji(s32 *storage, s32 capacity, s32 arg);
 
 /* Releases the vector's storage; returns the vector. */
 IntVector *sysWordVectorRelease(IntVector *vec)
 {
     s32 *begin = vec->begin;
-    asdDeallocateArrayStorage(begin, vec->capacityEnd - begin, 0);
+    _ZN4__rw15__rw_deallocateEPvji(begin, vec->capacityEnd - begin, 0);
     return vec;
 }
 

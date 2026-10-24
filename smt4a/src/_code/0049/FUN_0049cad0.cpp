@@ -23,7 +23,7 @@ extern "C" {
 
 u32 aocEntryGetKind(u32 id);
 ItemPriceRecord *dataTable8FindRecord(u32 id);
-EquipPriceRecord *FUN_00192608(u32 id);
+EquipPriceRecord *dataTable08Sub2GetRecord(u32 id);
 s32 gameDataBlocksGetTableFlag(void);
 
 /* Returns a shop entry's price: the item or equipment base price (99999999 without a record,
@@ -50,7 +50,7 @@ s32 FUN_0049cad0(const ShopEntry *entry)
     case 6:
     case 7:
     case 8: {
-        EquipPriceRecord *equip = FUN_00192608(id);
+        EquipPriceRecord *equip = dataTable08Sub2GetRecord(id);
         price = equip == NULL ? 99999999 : equip->price;
         break;
     }

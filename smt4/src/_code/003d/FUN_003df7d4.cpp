@@ -1,48 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003df7d4` (_code @ 0x3df7d4, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail predicates the empty-list case (movcs/strcs) and compares as `cmp start, count` / `cmp remaining, capacity`; built branches and swaps the compare operands */
+#include "classes/WindowStatus.h"
+
+struct TextListEntry {
+    u32 handleA;       // 0x00
+    u32 handleB;       // 0x04
+    u8 unk08[0x1C];    // 0x08
+    u16 *items;        // 0x24
+    u32 itemCount;     // 0x28
+};
 
 extern "C" {
 
-int _ZN18WindowStatusResultC1Ej(unsigned int, int);
-int FUN_00352098(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
+s32 FUN_00352098(s32 code, s32 mode, u32 handleA, u32 handleB, u16 *items, u32 count);
 
-/* stack frame of param_6: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_6_stack;
-
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-/* Supplied declaration required: FUN_00352098. */
-
-
-void FUN_003df7d4(unsigned int param_1,int *param_2,unsigned int *param_3,int param_4,unsigned int param_5,
-                 unsigned int param_6)
-
+/* Reads up to `capacity` u16 items of the list entry starting at `start`; the count read is stored through `outCount`. */
+WindowStatusResult FUN_003df7d4(TextListEntry **entry, u32 *outCount, s32 code, u32 capacity, u32 start)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  puVar1 = (unsigned int *)*param_2;
-  if (param_6 >= (unsigned int)puVar1[10]) {
-    param_4 = 0;
-    *param_3 = 0;
-  }
-  else {
-    temp_v0 = puVar1[10] - param_6;
-    if (temp_v0 < param_5) {
-      param_5 = temp_v0;
+    TextListEntry *list = *entry;
+
+    if (start >= list->itemCount) {
+        code = 0;
+        *outCount = 0;
+    } else {
+        u32 remaining = list->itemCount - start;
+
+        if (remaining < capacity) {
+            capacity = remaining;
+        }
+        code = FUN_00352098(code, 1, list->handleA, list->handleB, list->items + start, capacity);
+        if (code >= 0) {
+            code = 0;
+            *outCount = capacity;
+        }
     }
-    FUN_00352098(param_4,1,*puVar1,puVar1[1],puVar1[9] + param_6 * 2,param_5);
-    if (-1 < param_4) {
-      param_4 = 0;
-      *param_3 = param_5;
-    }
-  }
-  _ZN18WindowStatusResultC1Ej(param_1,param_4);
-  return;
+    return WindowStatusResult(code);
 }
 
 } /* extern "C" */

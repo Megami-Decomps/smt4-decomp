@@ -11,7 +11,7 @@ int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_0022f770(...);
+int uiDrawDataEntryRow(...);
 int FUN_0022f9c8(...);
 int FUN_0023dcec(...);
 int resourceRunOperationIfUnblocked(...);
@@ -42,7 +42,7 @@ extern unsigned char LAB_00285f24; /* 0x285f24 */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 extern int uniteGetWork(void);
-/* Supplied declaration required: FUN_0022f770. */
+/* Supplied declaration required: uiDrawDataEntryRow. */
 /* Supplied declaration required: FUN_0022f9c8. */
 /* Supplied declaration required: FUN_0023dcec. */
 extern int FUN_0026140c(void);
@@ -202,7 +202,7 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
             }
           }
           else {
-            FUN_0022f770(temp_v0,temp_v5,param_1 + temp_v10,param_2 + temp_v12,0);
+            uiDrawDataEntryRow(temp_v0,temp_v5,param_1 + temp_v10,param_2 + temp_v12,0);
           }
           efctSetSpeed();
         }
@@ -242,7 +242,7 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
         }
       }
       else {
-        FUN_0022f770(temp_v0,temp_v10,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1
+        uiDrawDataEntryRow(temp_v0,temp_v10,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1
                     );
       }
     }

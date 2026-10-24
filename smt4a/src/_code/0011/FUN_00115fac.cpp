@@ -40,11 +40,11 @@ typedef struct {
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: FUN_00133f1c. */
-extern unsigned char *FUN_002e7908(unsigned char *, int *);
+extern unsigned char *_ZN12OnlineResultC1ERKj(unsigned char *, int *);
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea41e. */
-extern int refIsNonNegative(unsigned int);
+extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int);
 /* Supplied declaration required: onlineCompleteVectorJob. */
 extern int vectorSize12A(void);
 /* Supplied declaration required: FUN_00301bd4. */
@@ -102,11 +102,11 @@ void FUN_00115fac(int param_1,unsigned int param_2,int *param_3)
       if (temp_v0 != 1) {
         temp_v10[0] = -0x7f96ffff;
         piVar4 = temp_v10;
-        puVar2 = (unsigned char *)FUN_002e7908(puVar3,piVar4);
+        puVar2 = (unsigned char *)_ZN12OnlineResultC1ERKj(puVar3,piVar4);
         onlineCompleteVectorJob(param_1,puVar2);
         return;
       }
-      temp_v0 = refIsNonNegative(*(unsigned int *)(param_1 + 0x94));
+      temp_v0 = _ZNK18OnlineResultRecord7isValidEv(*(unsigned int *)(param_1 + 0x94));
       if (temp_v0 == 0) {
         puVar2 = *(unsigned char **)(param_1 + 0x94);
         onlineCompleteVectorJob(param_1,puVar2);
@@ -197,7 +197,7 @@ void FUN_00115fac(int param_1,unsigned int param_2,int *param_3)
     temp_v10[0] = -0x7ffefffc;
     piVar4 = temp_v10;
   }
-  puVar2 = (unsigned char *)FUN_002e7908(puVar3,piVar4);
+  puVar2 = (unsigned char *)_ZN12OnlineResultC1ERKj(puVar3,piVar4);
   onlineCompleteVectorJob(param_1,puVar2);
   return;
 }

@@ -1,35 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00230a50` (_code @ 0x230a50, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction scheduling only (retail loads the unit table pointer before the stack/register moves) */
+/* Computes the screen position of unit `index`: x is the unit's x plus the stereo parallax for `depth`, y the unit's y. */
+#include "common.h"
 
 extern "C" {
+/* A unit record (0x8C bytes); its screen position is the vec2 at +0x44. */
+struct UnitRecord {
+    /* 0x00 */ u8 unk00[0x44];
+    /* 0x44 */ u8 position[0x48];
+};
 
-int renderCtxCalculateStereoParallax(unsigned int);
+struct UnitTable {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ UnitRecord *units;
+};
 
-extern unsigned char g_gameGlobals; /* 0x588fd0 */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
+extern UnitTable g_gameGlobals;
+extern void *g_renderCtx;
+s32 vec2GetXInt(const void *vec);
+s32 vec2GetYInt(const void *vec);
+f32 renderCtxCalculateStereoParallax(void *context, f32 depth);
 
-extern int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-
-
-void FUN_00230a50(int *param_1,unsigned int *param_2,int param_3)
-
+void FUN_00230a50(s32 *x, s32 *y, s32 index, f32 depth)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  float in_s0;
-  
-  temp_v2 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + param_3 * 0x8c;
-  temp_v0 = vec2GetXInt(temp_v2 + 0x44);
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  *param_1 = (int)in_s0 + temp_v0;
-  temp_v1 = vec2GetYInt(temp_v2 + 0x44);
-  *param_2 = temp_v1;
-  return;
-}
+    UnitRecord *unit = &g_gameGlobals.units[index];
 
-} /* extern "C" */
+    *x = vec2GetXInt(unit->position) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, depth);
+    *y = vec2GetYInt(unit->position);
+}
+}

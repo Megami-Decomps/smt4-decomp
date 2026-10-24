@@ -1,46 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a08dc` (_code @ 0x1a08dc, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register numbering only (retail: position r5, op r6) */
+/* Runs the script instruction at the current position: looks up its handler by opcode, runs it with this script as the
+ * active one and advances. Returns 1 when the instruction ran, 2 when its handler asked to wait. */
+#include "common.h"
 
 extern "C" {
-
-typedef struct fn_001a08dc_arg0 fn_001a08dc_arg0;
-struct fn_001a08dc_arg0 {
-    unsigned char pad_0x0[0x18];
-    int field_0x18; /* +0x18 */
-    int field_0x1c; /* +0x1c */
-    unsigned char pad_0x20[0x9c];
-    int field_0xbc; /* +0xbc */
+struct ScriptOp {
+    /* 0x0 */ s32 (*handler)(void);
+    /* 0x4 */ s32 length;       /* what the instruction takes off the script's remaining count */
 };
 
-typedef int romwright_code(...);
-extern unsigned char DAT_00405f48; /* 0x405f48 */
-extern unsigned char g_scrContext; /* 0x44de98 */
+struct ScriptState {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ s32 position;
+    /* 0x1C */ s32 remaining;
+    /* 0x20 */ u8 unk20[0x9C];
+    /* 0xBC */ u8 *code;
+};
 
+extern struct {
+    u8 unk00[0x20];
+    ScriptState *active;
+} g_scrContext;
+extern ScriptOp DAT_00405f48[];
 
-unsigned int FUN_001a08dc(fn_001a08dc_arg0 *param_1)
-
+s32 FUN_001a08dc(ScriptState *script)
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v3 = param_1->field_0x18;
-  temp_v0 = (unsigned int)*(unsigned short *)(param_1->field_0xbc + temp_v3 * 4 + 2) * 8;
-  (*(fn_001a08dc_arg0 * *)((unsigned char *)&g_scrContext + 0x20)) = param_1;
-  temp_v1 = (**(romwright_code **)(&DAT_00405f48 + temp_v0))();
-  if (temp_v1 == 0) {
-    temp_v2 = 2;
-  }
-  else {
-    param_1->field_0x1c = param_1->field_0x1c - *(int *)(temp_v0 + 0x405f4c);
-    if (param_1->field_0x18 == temp_v3) {
-      param_1->field_0x18 = param_1->field_0x18 + 1;
-    }
-    temp_v2 = 1;
-  }
-  return temp_v2;
-}
+    s32 position = script->position;
+    u16 opcode = *(u16 *)(script->code + position * 4 + 2);
+    ScriptOp *op = &DAT_00405f48[opcode];
 
-} /* extern "C" */
+    g_scrContext.active = script;
+    if (op->handler() == 0) {
+        return 2;
+    }
+    script->remaining -= op->length;
+    if (script->position == position) {
+        script->position++;
+    }
+    return 1;
+}
+}

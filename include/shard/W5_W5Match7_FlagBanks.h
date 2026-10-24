@@ -129,6 +129,22 @@ struct FlagWorkBanks {
             /* 0x1094 */ u16 incomplete;
             /* 0x1096 */ u16 completed;
         } questProgress;
+        struct {
+            u8 unk07c4BeforeFade[0x8d8];
+            /* 0x109c */ u32 active;
+            /* 0x10a0 */ f32 elapsed;
+            u8 unk10a4[0x51c];
+            /* 0x15c0 */ f32 duration;
+        } mapFade;
+        struct {
+            u8 unk07c4BeforeNavi[0xdc8];
+            /* 0x158c */ s32 currentId;
+            /* 0x1590 */ struct { u8 id; u8 pad[3]; } slots[8];
+            /* 0x15b0 */ s32 slotCount;
+            /* 0x15b4 */ u8 unk15b4[4];
+            /* 0x15b8 */ u32 refresh;
+            /* 0x15bc */ u32 refreshSecond;
+        } navi;
     };
     /* 0x167c */ u32 third[1];
 };

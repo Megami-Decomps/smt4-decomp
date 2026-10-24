@@ -103,7 +103,7 @@ int asdGxPresetRequest(...);
 int asdMemorySetUseAllocatorA(...);
 int FUN_0013b4ac(...);
 int FUN_0013b5c8(...);
-int FUN_0013b6e0(...);
+int sysInitializeServices(...);
 int FUN_0013b790(...);
 int randomStateSeed(...);
 int systemInitializeAndResetSharedState(...);
@@ -365,7 +365,7 @@ extern unsigned int FUN_0013af10(void);
 /* Supplied declaration required: titleConfigApplyTarget. */
 /* Supplied declaration required: asdGxLoadMaterialShader. */
 /* Supplied declaration required: FUN_0013b5c8. */
-/* Supplied declaration required: FUN_0013b6e0. */
+/* Supplied declaration required: sysInitializeServices. */
 /* Supplied declaration required: FUN_0013b790. */
 /* Supplied declaration required: FUN_0013b7e0. */
 /* Supplied declaration required: FUN_0013b8f8. */
@@ -471,7 +471,7 @@ void FUN_00135c30(void)
   FUN_0013b790();
   nn_pl_CTR_InitializeGameCoin();
   FUN_0013b5c8();
-  FUN_0013b6e0();
+  sysInitializeServices();
   temp_v2 = FUN_00138940();
   if (temp_v2 == 0) {
     appletCloseApplication();

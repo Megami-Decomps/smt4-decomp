@@ -9,7 +9,7 @@ typedef struct OnlineString {
 } OnlineString;
 
 extern s32 FUN_002eea7c(OnlineString *string);
-extern void _ZN9Obj55aff4C1EPKc(u32 dest, const u16 *text);
+extern void _ZN9Obj55aff4C1EPKt(u32 dest, const u16 *text);
 extern void _ZN9Obj55aff4C1ERKS_(u32 dest, OnlineString *source);
 extern u32 wstrlenU16(const u16 *text);
 extern void FUN_0030f234(u32 dest, u32 data, s32 kind, const u16 *text, u32 length);
@@ -20,7 +20,7 @@ void FUN_002fecdc(u32 dest, OnlineString *string, const u16 *text)
     s32 kind = FUN_002eea7c(string);
 
     if (kind == 0) {
-        _ZN9Obj55aff4C1EPKc(dest, text);
+        _ZN9Obj55aff4C1EPKt(dest, text);
         return;
     }
     if (text != NULL && *text != 0) {

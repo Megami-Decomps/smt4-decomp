@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_003faab4(unsigned char [4], int, int *);
+int _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE5eraseENS_14__rw_tree_iterIS5_iPS5_RS5_NS_17__rw_rb_tree_nodeISB_S5_jS7_EEEE(unsigned char [4], int, int *);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_003faab4. */
+/* Supplied declaration required: _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE5eraseENS_14__rw_tree_iterIS5_iPS5_RS5_NS_17__rw_rb_tree_nodeISB_S5_jS7_EEEE. */
 
 
 void FUN_003b0cf4(int param_1)
@@ -58,7 +58,7 @@ void FUN_003b0cf4(int param_1)
       temp_v4 = temp_v2;
     }
     else {
-      FUN_003faab4(temp_v5,param_1 + 0x1414,&temp_v4);
+      _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE5eraseENS_14__rw_tree_iterIS5_iPS5_RS5_NS_17__rw_rb_tree_nodeISB_S5_jS7_EEEE(temp_v5,param_1 + 0x1414,&temp_v4);
       temp_v4 = temp_v2;
     }
   }

@@ -14,7 +14,7 @@ struct EquipmentAffinityRecordA {
     s16 replaceAffinities;
 };
 extern "C" {
-const EquipmentAffinityRecordA *FUN_00192608(u32 id);
+const EquipmentAffinityRecordA *dataTable08Sub2GetRecord(u32 id);
 s32 affinityShouldReplaceState(u32 current, u32 candidate);
 
 // Merge the two equipment records' affinity states and their signed modifiers.
@@ -22,9 +22,9 @@ void FUN_0047ffd4(const AffinitySourcePair *equipment, EquipmentAffinityValueA *
 {
     const EquipmentAffinityRecordA *sources[2] = { NULL, NULL };
     if (equipment->first != 0)
-        sources[0] = FUN_00192608(equipment->first);
+        sources[0] = dataTable08Sub2GetRecord(equipment->first);
     if (equipment->second != 0)
-        sources[1] = FUN_00192608(equipment->second);
+        sources[1] = dataTable08Sub2GetRecord(equipment->second);
     for (s32 affinity = 0; affinity < 21; ++affinity, ++output) {
         s32 modifier = 0;
         bool replaced = false;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int nn_os_LightEvent_Signal(int);
-int FUN_001a0d08(int);
+int nn_os_Thread_FinalizeImpl(int);
 int FUN_002e3140(void);
 int coproc_moveto_Data_Synchronization(int);
 int software_interrupt(int);
@@ -15,7 +15,7 @@ extern unsigned char DAT_0064497c; /* 0x64497c */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: coproc_moveto_Data_Synchronization (CALLOTHER). */
 /* Supplied declaration required: nn_os_LightEvent_Signal. */
-/* Supplied declaration required: FUN_001a0d08. */
+/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
 /* Supplied declaration required: FUN_002e3140. */
 
 
@@ -30,7 +30,7 @@ void FUN_001a172c(int param_1)
       FUN_002e3140();
     }
     *(unsigned char *)(param_1 + 0x1c) = 1;
-    FUN_001a0d08(param_1 + 0x18);
+    nn_os_Thread_FinalizeImpl(param_1 + 0x18);
     if (*(int *)(param_1 + 0x18) != 0) {
       software_interrupt(0x23);
       *(unsigned int *)(param_1 + 0x18) = 0;
@@ -46,7 +46,7 @@ void FUN_001a172c(int param_1)
       FUN_002e3140();
     }
     *(unsigned char *)(param_1 + 0x14) = 1;
-    FUN_001a0d08(param_1 + 0x10);
+    nn_os_Thread_FinalizeImpl(param_1 + 0x10);
     if (*(int *)(param_1 + 0x10) != 0) {
       software_interrupt(0x23);
       *(unsigned int *)(param_1 + 0x10) = 0;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: Retail instruction scheduling/register allocation differs (57 retail versus 59 compiled rows). */
 #include "classes/Obj558cbc.h"
 
 extern "C" void FUN_002f4364();

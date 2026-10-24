@@ -1,51 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00303460` (_code @ 0x303460, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: literal pool order (retail: global address before 0.0f) and add r3 vs r2 for &axis.y. */
+#include "map/lmapMain.h"
 
 extern "C" {
 
-int FUN_00395904(void);
+void FUN_00395904(void);
 
-extern unsigned char DAT_005806a0; /* 0x5806a0 */
+extern LmapExtraGlobalsA DAT_005806a0;
 
-/* Supplied declaration required: FUN_00395904. */
-
-
-void FUN_00303460(int param_1)
-
+/* Sets the camera block's mode and resets its transition state. */
+void FUN_00303460(s32 mode)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  int *piVar2;
-  int temp_v0;
-  
-  piVar1 = (*(int * *)((unsigned char *)&DAT_005806a0 + 0x4));
-  piVar2 = (*(int * *)((unsigned char *)&DAT_005806a0 + 0x4)) + 8;
-  *(unsigned char *)((*(int * *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x88) = 0;
-  *piVar1 = param_1;
-  piVar1[1] = 0;
-  piVar1[2] = 0;
-  temp_v0 = *piVar2;
-  piVar1[0xa6] = 0;
-  piVar1[0xb] = temp_v0;
-  piVar1[0xc] = piVar1[9];
-  piVar1[0xd] = piVar1[10];
-  if (param_1 != 0) {
-    piVar1[0x84] = 0;
-    piVar1[0x85] = 0;
-    *(unsigned char *)(piVar1 + 0x2d) = 0;
-    *(unsigned char *)((int)piVar1 + 0xb5) = 0;
-    *(unsigned short *)((int)piVar1 + 0xb6) = 10;
-    *(unsigned short *)(piVar1 + 0x2e) = 0;
-    piVar1[0x2f] = 0;
-    piVar1[0x30] = 0;
-    piVar1[0x31] = 0x3f800000;
-    if (param_1 == 8 || param_1 == 9) {
-      piVar1[0xa6] = 0x43340000;
+    LmapExtraA *camera = DAT_005806a0.extra;
+
+    camera->cameraTransition.flag220 = 0;
+    camera->camera.mode = mode;
+    camera->camera.unk004 = 0;
+    camera->camera.unk008 = 0;
+    camera->camera.upCopy = camera->camera.up;
+    camera->cameraTransition.unk298 = 0.0f;
+    if (mode != 0) {
+        camera->cameraTransition.unk210F = 0.0f;
+        camera->cameraTransition.unk214F = 0.0f;
+        camera->flagB4 = 0;
+        camera->flagB5 = 0;
+        camera->timer = 10;
+        camera->step = 0;
+        camera->axis.x = 0.0f;
+        camera->axis.y = 0.0f;
+        camera->axis.z = 1.0f;
+        if (mode == 8 || mode == 9) {
+            camera->cameraTransition.unk298 = 180.0f;
+        }
     }
-  }
-  FUN_00395904();
-  return;
+    FUN_00395904();
 }
 
 } /* extern "C" */

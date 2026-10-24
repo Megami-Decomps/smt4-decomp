@@ -13,7 +13,7 @@ typedef struct SkillItem {
     /* 0x20 */ u16 skill;
 } SkillItem;
 
-SkillItem *FUN_002ae164(u32 id);
+SkillItem *dataTable40FindById(u32 id);
 s32 FUN_00258de0(s32 unit, u32 a, SkillItem *item, s32 noCost, s32 e);
 UnitRecord *gameGetPlayerData(void);
 UnitRecord *gameGetUnitRecord(s32 unit);
@@ -23,7 +23,7 @@ s16 FUN_0029a924(u16 skill);
 /* Uses a skill item for a unit (negative: the player) and, unless it failed or is free, pays its MP cost. */
 s32 FUN_0026c654(s32 unit, u32 a, u32 id, s32 noCost)
 {
-    SkillItem *item = FUN_002ae164(id);
+    SkillItem *item = dataTable40FindById(id);
     UnitRecord *record;
     s32 result;
     s16 mp;

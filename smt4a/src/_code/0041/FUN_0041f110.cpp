@@ -1,86 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041f110` (_code @ 0x41f110, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the order of the two mode stores in enterMode differs (retail stores the new mode before the remembered one). */
+#include "shard/SaveSlotHeaderWork.h"
 
 extern "C" {
+extern void *g_handleRegistry;
+s32 objectGetSignedFlag(const UiAnimatedSprite *sprite);
+void ptrListRemoveClearOwner(void *registry, u32 handle);
+void FUN_0041e3a0(SaveSlotHeaderWork *work, s32 resetHeader);
+void FUN_00420a2c(SaveSlotHeaderWork *work);
+s32 objBStateAllowsAction(void);
+s32 FUN_0022e72c(void);
+void FUN_0022e774(void);
 
-int ptrListRemoveClearOwner(...);
-int FUN_0022e774(...);
-int FUN_0041e3a0(...);
-int FUN_00420a2c(...);
-
-typedef struct fn_0041f110_arg0 fn_0041f110_arg0;
-struct fn_0041f110_arg0 {
-    unsigned char pad_0x0[0x4];
-    unsigned char field_0x4; /* +0x4 */
-    unsigned char pad_0x5[0x2];
-    byte field_0x7; /* +0x7 */
-    int field_0x8; /* +0x8 */
-    undefined1 field_0xc; /* +0xc */
-    undefined1 field_0xd; /* +0xd */
-    unsigned char pad_0xe[0x4];
-    unsigned char field_0x12; /* +0x12 */
-    unsigned char pad_0x13[0x5];
-    int field_0x18; /* +0x18 */
-};
-
-typedef int romwright_code(...);
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-
-/* Supplied declaration required: ptrListRemoveClearOwner. */
-extern int FUN_0022e72c(void);
-/* Supplied declaration required: FUN_0022e774. */
-extern int objBStateAllowsAction(void);
-/* Supplied declaration required: FUN_0041e3a0. */
-/* Supplied declaration required: FUN_00420a2c. */
-
-
-void FUN_0041f110(fn_0041f110_arg0 *param_1)
-
+/* Switches to another mode, remembering the one it leaves. */
+static void enterMode(SaveSlotHeaderWork *work, u8 mode)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  
-  temp_v1 = param_1->field_0x8;
-  if (temp_v1 != 0) {
-    if (temp_v1 != 1) {
-      if (temp_v1 != 2) {
-        return;
-      }
-      FUN_00420a2c(param_1);
-      if (param_1[param_1->field_0x18 * 5 + 0x2d].field_0x12 == '\0') {
-        return;
-      }
-      temp_v0 = param_1->field_0x7;
-      param_1->field_0x7 = 6;
-      param_1->field_0xd = temp_v0;
-      param_1->field_0x8 = 0;
-      param_1->field_0xc = 0;
-      return;
-    }
-  }
-  else {
-    FUN_0041e3a0(param_1,1);
-    param_1->field_0x8 = param_1->field_0x8 + 1;
-  }
-  FUN_00420a2c(param_1);
-  temp_v1 = objBStateAllowsAction();
-  if (((temp_v1 != 0) || (temp_v1 = FUN_0022e72c(), temp_v1 != 0)) && ((char)param_1[3].field_0x8 != '\0')
-     ) {
-    *(unsigned char *)&param_1[3].field_0x8 = 0;
-    if (*(int *)&param_1[3].field_0x4 != 0) {
-      ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)&param_1[3].field_0x4 + 4));
-      if (*(int **)&param_1[3].field_0x4 != (int *)0x0) {
-        (**(romwright_code **)(**(int **)&param_1[3].field_0x4 + 4))();
-        *(unsigned int *)&param_1[3].field_0x4 = 0;
-      }
-    }
-    FUN_0022e774();
-    param_1->field_0x8 = param_1->field_0x8 + 1;
-    return;
-  }
-  return;
+    work->previousMode = work->mode;
+    work->mode = mode;
 }
 
-} /* extern "C" */
+static void releaseRegisteredHandle(RegisteredHandle *&handle)
+{
+    if (handle != NULL) {
+        ptrListRemoveClearOwner(g_handleRegistry, handle->id);
+        if (handle != NULL) {
+            delete handle;
+            handle = NULL;
+        }
+    }
+}
+
+// Wait for the player to dismiss the popup, then (state 2) hand control back once the last sprite finishes.
+void FUN_0041f110(SaveSlotHeaderWork *work)
+{
+    switch (work->step) {
+    case 0:
+        FUN_0041e3a0(work, 1);
+        ++work->step;
+        // Fall through to poll for the dismissal.
+    case 1:
+        FUN_00420a2c(work);
+        if ((objBStateAllowsAction() || FUN_0022e72c()) && work->popupActive) {
+            work->popupActive = 0;
+            releaseRegisteredHandle(work->popup);
+            FUN_0022e774();
+            ++work->step;
+        }
+        return;
+    case 2:
+        FUN_00420a2c(work);
+        if (objectGetSignedFlag(&work->sprites[work->spriteCount]) == 0) {
+            return;
+        }
+        enterMode(work, 6);
+        work->step = 0;
+        work->phase = 0;
+        return;
+    }
+}
+}

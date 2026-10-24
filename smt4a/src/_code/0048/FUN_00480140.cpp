@@ -1,36 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00480140` (_code @ 0x480140, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct DataRecord {
+    u8 unk00[0x42];
+    u8 flags; // 0x42, bit 0 = permanent
+};
 
 extern "C" {
 
-int dataTable8FindRecord(void);
-int FUN_00287790(int, int, int, int, int);
-int flagValueSub(int, int);
+DataRecord *dataTable8FindRecord(s32 id);
+s32 FUN_00287790(s32 a, DataRecord *record, s32 c, s32 d, s32 e);
+void flagValueSub(s32 id, s32 amount);
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
-
-/* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: FUN_00287790. */
-/* Supplied declaration required: flagValueSub. */
-
-
-void FUN_00480140(int param_1,int param_2,int param_3)
-
+// Apply the record to the value (the target on entry, the result on exit); when it succeeded for a plain request and is not permanent, consume one use.
+s32 FUN_00480140(s32 value, s32 id, s32 plain)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = param_2;
-  dataTable8FindRecord();
-  if (((temp_v0 != 0) && (FUN_00287790(param_1,temp_v0,param_3,0,0), param_1 == 0 && param_3 == 0)) &&
-     ((*(unsigned char *)(temp_v0 + 0x42) & 1) == 0)) {
-    flagValueSub(param_2,1);
-  }
-  return;
+    DataRecord *record = dataTable8FindRecord(id);
+    if (record == NULL) {
+        return 1;
+    }
+    value = FUN_00287790(value, record, plain, 0, 0);
+    if (value == 0) {
+        if (plain == 0 && (record->flags & 1) == 0) {
+            flagValueSub(id, 1);
+        }
+    }
+    return value;
 }
 
 } /* extern "C" */

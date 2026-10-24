@@ -8,7 +8,7 @@ int asdTMTexTableLoadSprites(int);
 int FUN_0014afd0(int, int);
 int dataTable00FindById(void);
 int asdLoadFileAsyncSimple(unsigned char *, unsigned int *, int);
-int FUN_002bf464(void);
+int campButtonHelpLoad(void);
 int campCommonBgAcquire(void);
 int FUN_0031bca4(void);
 int campButtonHelpAcquire(void);
@@ -35,7 +35,7 @@ extern unsigned char LAB_00496990; /* 0x496990 */
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: FUN_002bf464. */
+/* Supplied declaration required: campButtonHelpLoad. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_0031bca4. */
 /* Supplied declaration required: campButtonHelpAcquire. */
@@ -56,7 +56,7 @@ void FUN_0049669c(unsigned int *param_1)
   
   campCommonBgAcquire();
   FUN_003b61ec();
-  FUN_002bf464();
+  campButtonHelpLoad();
   campButtonHelpAcquire();
   asdLoadFileAsyncSimple(&LAB_004968ec,param_1 + 0x61,0);
   asdTMTexTableLoadSprites(0x20);

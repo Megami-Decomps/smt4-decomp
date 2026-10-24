@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184310(void);
 int dataTable8FindRecord(void);
-int FUN_00192608(void);
+int dataTable08Sub2GetRecord(void);
 int dataTable04FindById(void);
 
 /* stack frame of param_3: 16 slot(s), 64 byte(s) */
@@ -49,7 +49,7 @@ extern unsigned int DAT_0057399c; /* 0x57399c */
 #endif
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: FUN_00192608. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 
 
@@ -103,13 +103,13 @@ void FUN_003e8bb0(unsigned int *param_1,unsigned int param_2,unsigned int *param
         if ((short)param_3[0xc9] == 2) {
           temp_v18 = (unsigned int)*(unsigned short *)(param_3[0xfe] + 2);
           temp_v5 = temp_v18;
-          FUN_00192608();
+          dataTable08Sub2GetRecord();
           temp_v0 = *(unsigned char *)(temp_v5 + 0x29);
           temp_v1 = *(unsigned char *)(temp_v5 + 0x7c);
           temp_v15 = temp_v15 | *(unsigned char *)(temp_v5 + 0x28) >> 4;
           temp_v8 = (*(unsigned char *)(temp_v5 + 0x28) & 0xf) << 0x18;
           temp_v6 = (unsigned int)*(unsigned short *)(param_3[0xfe] + 4);
-          FUN_00192608();
+          dataTable08Sub2GetRecord();
           if (temp_v6 != 0) {
             temp_v2 = *(unsigned char *)(temp_v6 + 0x2a);
             temp_v7 = *(unsigned int *)(temp_v6 + 0x24);
@@ -141,7 +141,7 @@ void FUN_003e8bb0(unsigned int *param_1,unsigned int param_2,unsigned int *param
       else {
         temp_v18 = (unsigned int)*(unsigned short *)param_3[0xfe];
         temp_v5 = temp_v18;
-        FUN_00192608();
+        dataTable08Sub2GetRecord();
         temp_v13 = (unsigned int)*(unsigned char *)(temp_v5 + 0x2a) << 0x10;
         temp_v8 = (*(unsigned char *)(temp_v5 + 0x28) & 0xf) << 0x18;
         temp_v14 = ((*(unsigned int *)(temp_v5 + 0x24) & 0xffff03ff) << 0x10) | 100;

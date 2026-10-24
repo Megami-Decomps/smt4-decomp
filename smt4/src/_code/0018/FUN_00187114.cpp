@@ -16,7 +16,7 @@ int FUN_0029acb0(void);
 int flagCountUnlockedSlots(...);
 int FUN_0029dc74(...);
 int FUN_0029ee54(...);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int FUN_002b6c34(...);
 int aocIndexValueOrDefault(...);
 int FUN_002bdf94(...);
@@ -73,7 +73,7 @@ extern int FUN_0029d644(int);
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_0029ee54. */
 extern int FUN_0029efa8(void);
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 extern int partyMemberFindById(unsigned short);
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002b6c34. */
@@ -256,7 +256,7 @@ LAB_0018733c:
             temp_v20 = FUN_0029a924();
           }
           else {
-            FUN_002ae164();
+            dataTable40FindById();
             if (temp_v7 != 0) {
               temp_v20 = (unsigned int)*(unsigned char *)(temp_v7 + 0x22);
             }

@@ -6,7 +6,7 @@
 extern "C" {
 
 int asdMemoryAllocTracked(int, int, int, int, int);
-int FUN_00192608(void);
+int dataTable08Sub2GetRecord(void);
 int asdMemFree(void);
 int wordPairCopy(...);
 int dataTable04FindById(void);
@@ -42,7 +42,7 @@ extern unsigned int DAT_0057117c; /* 0x57117c */
 extern int randRange(unsigned int);
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00192608. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: wordPairCopy. */
 /* Supplied declaration required: dataTable04FindById. */
@@ -140,7 +140,7 @@ unsigned int FUN_004e933c(int *param_1,int param_2)
             ((*(unsigned int **)(param_2 + 0x20))[1] & DAT_00571154) != 0) {
           temp_v1 = gameGetPlayerData();
           temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 2);
-          FUN_00192608();
+          dataTable08Sub2GetRecord();
           if (temp_v3 != 0) {
             *(unsigned short *)(temp_v4 + 0x324) = 2;
             FUN_003e8bb0(temp_v10,*param_1,*(unsigned int *)(param_2 + 0x20));

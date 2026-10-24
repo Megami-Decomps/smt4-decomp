@@ -6,14 +6,14 @@ extern "C" {
 extern UniteWork *g_unite;
 DevilRecordA *FUN_00184310(u32 id);
 void sysMemClear(void *memory, u32 size);
-u32 FUN_0032fea0(const u16 *skills, s32 count, u16 skill);
+u32 arrayContainsU16(const u16 *skills, s32 count, u16 skill);
 void rt_memcpy_w(void *destination, const void *source, u32 size);
 void FUN_00203b40(void *cursor, s32 count, s32 visibleRows, s32 first, s32 second, s32 third);
 }
 
 static __inline void fusionAppendUniqueSkill(u16 *merged, const u16 *skill)
 {
-    if (FUN_0032fea0(merged, 24, *skill) == 0) {
+    if (arrayContainsU16(merged, 24, *skill) == 0) {
         for (s32 index = 0; index < 96; ++index) {
             if (merged[index] == 0) {
                 merged[index] = *skill;

@@ -1,30 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ba4dc` (_code @ 0x2ba4dc, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail splits the active-flag address as +0x1500 then ldrb #244 (add r3, r3, #5376; ldrb r3, [r3, #244]); built folds it as +5120 +500 */
+#include "common.h"
 
 extern "C" {
 
-extern int gameFlagsGetBlock(void);
+struct FlagBlock {
+    /* 0x000 */ u8 unk000[0xe17];
+    /* 0xe17 */ s8 entryCount;
+    /* 0xe18 */ u8 unke18[0x15f4 - 0xe18];
+    /* 0x15f4 */ u8 active[0x50];
+    /* 0x1644 */ s16 ids[1];
+};
 
+FlagBlock *gameFlagsGetBlock(void);
 
-unsigned int FUN_002ba4dc(int param_1)
-
+/* Returns whether an active entry with `id` exists. */
+u32 FUN_002ba4dc(s32 id)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = gameFlagsGetBlock();
-  temp_v1 = 0;
-  if (temp_v1 < *(char *)(temp_v0 + 0xe17)) {
-    do {
-      if ((*(char *)(temp_v0 + temp_v1 + 0x15f4) != '\0') &&
-         (*(short *)(temp_v0 + temp_v1 * 2 + 0x1644) == param_1)) {
-        return 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *(char *)(temp_v0 + 0xe17));
-  }
-  return 0;
+    FlagBlock *block = gameFlagsGetBlock();
+    s32 i = 0;
+    while (i < block->entryCount) {
+        if (block->active[i] != 0 && block->ids[i] == id) {
+            return 1;
+        }
+        i++;
+    }
+    return 0;
 }
 
 } /* extern "C" */

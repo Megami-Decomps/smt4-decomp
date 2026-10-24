@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0011c9f8(unsigned char [8]);
 int onlineInstanceTableGetCurrent(void);
-int vectorCopyHeader(int, unsigned char [12]);
+int _ZN18OnlineResultRecordaSERKS_(int, unsigned char [12]);
 int FUN_002e9c0c(int);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea41e(unsigned char [12], int);
@@ -29,15 +29,15 @@ extern unsigned char LAB_0011adf0; /* 0x11adf0 */
 extern unsigned char LAB_0011adfd; /* 0x11adfd */
 
 /* Supplied declaration required: FUN_0011c9f8. */
-extern int operatorNew(unsigned int);
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
+extern int _Znwj(unsigned int);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 /* Supplied declaration required: onlineInstanceTableGetCurrent. */
-/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: FUN_002e9c0c. */
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea41e. */
-extern unsigned char refIsNonNegative(int);
+extern unsigned char _ZNK18OnlineResultRecord7isValidEv(int);
 /* Supplied declaration required: FUN_002f7c94. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
@@ -66,14 +66,14 @@ void FUN_0011ad2c(int param_1)
     temp_v0 = param_1 + 0x90;
     if (*(char *)(param_1 + 0xa0) != '\x02') {
       FUN_002ea41e(temp_v9,temp_v0);
-      vectorCopyHeader(param_1 + 0x178,temp_v9);
+      _ZN18OnlineResultRecordaSERKS_(param_1 + 0x178,temp_v9);
     }
     FUN_002e9c0c(temp_v0);
     FUN_0011c9f8(temp_v4);
     temp_v7 = *(unsigned int *)(param_1 + 0x140);
     temp_v5 = *(unsigned int *)(param_1 + 0x110);
     temp_v6 = *(unsigned int *)(param_1 + 0x114);
-    temp_v8 = refIsNonNegative(param_1 + 0x178);
+    temp_v8 = _ZNK18OnlineResultRecord7isValidEv(param_1 + 0x178);
     temp_v1 = (**(romwright_code **)(**(int **)(param_1 + 0x6c) + 0x30))
                       (*(int **)(param_1 + 0x6c),temp_v0,temp_v4);
     if (temp_v1 != 0) {
@@ -81,7 +81,7 @@ void FUN_0011ad2c(int param_1)
       temp_v2 = onlineInstanceTableGetCurrent();
       FUN_002f7c94(temp_v2,*(unsigned int *)(param_1 + 0x68),temp_v3);
       onlineJobSetStateWaiting(param_1);
-      temp_v1 = operatorNew(0x10);
+      temp_v1 = _Znwj(0x10);
       temp_v2 = 0;
       if (temp_v1 != 0) {
         temp_v2 = FUN_002ea3c0(temp_v1,&LAB_0011adfd,0,&LAB_0011adf0);
@@ -94,7 +94,7 @@ void FUN_0011ad2c(int param_1)
   else {
     temp_v10 = 0x80010004;
   }
-  temp_v2 = FUN_002e7908(temp_v9,(unsigned int *)&temp_v10);
+  temp_v2 = _ZN12OnlineResultC1ERKj(temp_v9,(unsigned int *)&temp_v10);
   FUN_00306ef8(param_1,temp_v2);
   return;
 }

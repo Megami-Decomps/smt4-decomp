@@ -55,7 +55,7 @@ void FUN_004cd4b8(int param_1,int param_2)
   uVar6 = *(unsigned short *)(uVar14 + 6);
   FUN_003daaf8(uVar6,&uStack_5c);
   uStack_50 = CONCAT22(uVar6,(unsigned short)uStack_50);
-  iVar7 = FUN_003e4de4((unsigned int)uVar2);
+  iVar7 = saveSlotIsActiveWithId((unsigned int)uVar2);
   if (iVar7 == 0) {
     uVar4 = 2;
   }

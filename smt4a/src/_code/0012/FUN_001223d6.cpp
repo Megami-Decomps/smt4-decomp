@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: memCopyWord. */
 /* Supplied declaration required: bufferAssignByte. */
-extern int refIsNonNegative(unsigned int *);
+extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
 
 
 void FUN_001223d6(unsigned int param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
@@ -26,7 +26,7 @@ void FUN_001223d6(unsigned int param_1,unsigned int *param_2,unsigned int param_
   int temp_v1;
   
   temp_v1 = param_4;
-  temp_v0 = refIsNonNegative(param_2);
+  temp_v0 = _ZNK18OnlineResultRecord7isValidEv(param_2);
   if (temp_v0 != 0) {
     bufferAssignByte(param_1);
     return;

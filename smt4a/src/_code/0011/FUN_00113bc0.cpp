@@ -13,7 +13,7 @@ extern unsigned char LAB_00113c50; /* 0x113c50 */
 extern unsigned char DAT_005595c8; /* 0x5595c8 */
 
 extern PoolTreeNode88* nodePoolAcquireRecordTreeNode(ChunkPool*);
-extern int _ZN9Obj55aff4C1EPKc(int, unsigned char *);
+extern int _ZN9Obj55aff4C1EPKt(int, unsigned char *);
 /* Supplied declaration required: FUN_002eca44. */
 extern int FUN_002f8728(unsigned int *);
 extern int FUN_002fe94c(int);
@@ -57,7 +57,7 @@ void FUN_00113bc0(unsigned int *param_1)
   *(unsigned int *)(temp_v1 + 4) = 0;
   *(int *)(*(int *)(temp_v0 + 0x84) + 8) = *(int *)(temp_v0 + 0x84);
   *(int *)(*(int *)(temp_v0 + 0x84) + 0xc) = *(int *)(temp_v0 + 0x84);
-  temp_v0 = _ZN9Obj55aff4C1EPKc(temp_v0 + 0x90,&LAB_00113c50);
+  temp_v0 = _ZN9Obj55aff4C1EPKt(temp_v0 + 0x90,&LAB_00113c50);
   *(unsigned short *)(temp_v0 + 8) = 0;
   *(unsigned char *)(temp_v0 + 10) = 0;
   return;

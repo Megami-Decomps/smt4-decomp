@@ -11,7 +11,7 @@ struct EquipmentDetailGlyphTable {
 extern "C" {
 extern const EquipmentDetailPair DAT_00588ef0[];
 extern const EquipmentDetailPair DAT_00588f28[];
-extern const EquipmentDetailGlyphTable DAT_0053603c;
+extern const EquipmentDetailGlyphTable g_equipMenuStateHandlerInit;
 s32 gameFlagIsSet(u32);
 void FUN_0049368c(const AsdTextureRegion *, u32, s32, s32, u32, u32);
 
@@ -35,7 +35,7 @@ void FUN_00494574(EquipmentMenuState *work, s32 selection)
             pair = DAT_00588f28[9];
     }
     u32 glyphs[16];
-    memcpy(glyphs, DAT_0053603c.glyphs, sizeof(glyphs));
+    memcpy(glyphs, g_equipMenuStateHandlerInit.glyphs, sizeof(glyphs));
     FUN_0049368c(&work->detail.region, glyphs[pair.left], 0, 0, color, 1);
     FUN_0049368c(&work->detail.region, glyphs[pair.right + 8], 0, 0, color, 1);
 }

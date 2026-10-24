@@ -9,7 +9,7 @@ const FusionRecipe *contentEntryFindById(u32);
 s32 gameSlotTableFindFree(void);
 s32 bitsAt60Test(const SlotRecord *, u32);
 s32 FUN_002a4b28(u16);
-u32 FUN_0032fea0(u16 *, s32, s32);
+u32 arrayContainsU16(u16 *, s32, s32);
 
 // Classify recipe ingredients as held or summonable, then test the collected availability list.
 u32 FUN_004db07c(u32 unused, u32 recipeId, u16 *statuses)
@@ -37,6 +37,6 @@ u32 FUN_004db07c(u32 unused, u32 recipeId, u16 *statuses)
             ++count;
         }
     }
-    return FUN_0032fea0(statuses, count, 0) ^ 1;
+    return arrayContainsU16(statuses, count, 0) ^ 1;
 }
 }

@@ -1,43 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003578b8` (_code @ 0x3578b8, 0x60 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the failure test of the stop call: retail tests into r1 (lsrs r1, r0, #31) and returns r0 directly on failure; armcc tests into r0 and returns through r4 */
+/* Shuts the CEC service down when it is initialised: flushes pending work if there is any, stops the service and clears
+ * the initialised flag. Returns the first failure result, or 0. */
+#include "nn/Result.h"
 
 extern "C" {
+/* The CEC module's state flags. */
+struct CecState {
+    /* 0x0 */ u8 initialized;
+    /* 0x1 */ u8 flushPending;
+    /* 0x2 */ u8 unk02;
+};
 
-int FUN_00358d34(void);
+extern CecState DAT_004656ca;
+s32 FUN_0023a244(void);
+s32 FUN_00358f74(void);
+void FUN_00358d34(void);
 
-extern signed char DAT_004656ca; /* 0x4656ca */
-extern signed char DAT_004656cb; /* 0x4656cb */
-extern unsigned char DAT_004656cc; /* 0x4656cc */
-
-extern int FUN_0023a244(void);
-/* Supplied declaration required: FUN_00358d34. */
-extern int FUN_00358f74(void);
-
-
-int FUN_003578b8(void)
-
+s32 FUN_003578b8(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (DAT_004656ca != '\0') {
-    if (DAT_004656cb != '\0') {
-      temp_v0 = FUN_0023a244();
-      if (temp_v0 < 0) {
-        return temp_v0;
-      }
-      DAT_004656cc = 0;
-      DAT_004656cb = '\0';
-    }
-    temp_v0 = FUN_00358f74();
-    if (-1 < temp_v0) {
-      FUN_00358d34();
-      DAT_004656ca = '\0';
-    }
-  }
-  return temp_v0;
-}
+    s32 result = 0;
 
-} /* extern "C" */
+    if (DAT_004656ca.initialized != 0) {
+        if (DAT_004656ca.flushPending != 0) {
+            s32 flushResult = FUN_0023a244();
+
+            if (nnResultIsFailure(flushResult)) {
+                return flushResult;
+            }
+            DAT_004656ca.unk02 = 0;
+            DAT_004656ca.flushPending = 0;
+        }
+        result = FUN_00358f74();
+        if (!nnResultIsFailure(result)) {
+            FUN_00358d34();
+            DAT_004656ca.initialized = 0;
+        }
+    }
+    return result;
+}
+}

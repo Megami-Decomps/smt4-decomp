@@ -6,9 +6,9 @@ extern "C" {
 
 int asdOperatorDeleteArray(int);
 int _ZN9Obj55aff4aSERKS_(...);
-int FUN_003079ae(int *);
-int FUN_003079c6(...);
-int FUN_0030d3ba(...);
+int _ZNSt6vectorI9Obj55aff412AsdAllocatorIS0_EE10_C_destroyEPS0_S4_(int *);
+int _ZSt18uninitialized_copyIP9Obj55aff4S1_12AsdAllocatorIS0_EET0_T_S5_S4_RT1_(...);
+int _ZN12AsdAllocatorI9Obj55aff4E9constructEPS0_RKS0_(...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,9 +18,9 @@ typedef struct {
 extern int rt_malloc(void);
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
-/* Supplied declaration required: FUN_003079ae. */
-/* Supplied declaration required: FUN_003079c6. */
-/* Supplied declaration required: FUN_0030d3ba. */
+/* Supplied declaration required: _ZNSt6vectorI9Obj55aff412AsdAllocatorIS0_EE10_C_destroyEPS0_S4_. */
+/* Supplied declaration required: _ZSt18uninitialized_copyIP9Obj55aff4S1_12AsdAllocatorIS0_EET0_T_S5_S4_RT1_. */
+/* Supplied declaration required: _ZN12AsdAllocatorI9Obj55aff4E9constructEPS0_RKS0_. */
 
 
 void FUN_0013400a(int *param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -39,7 +39,7 @@ void FUN_0013400a(int *param_1,int param_2,unsigned int param_3,unsigned int par
   if (temp_v0 < (unsigned int)((param_1[2] - *param_1) >> 3)) {
     temp_v4 = temp_v3 - 8;
     param_1[1] = temp_v3 + 8;
-    FUN_0030d3ba(param_1,temp_v3,temp_v4,param_4,param_1,param_2);
+    _ZN12AsdAllocatorI9Obj55aff4E9constructEPS0_RKS0_(param_1,temp_v3,temp_v4,param_4,param_1,param_2);
     while (param_2 != temp_v4) {
       temp_v4 = temp_v4 - 8;
       temp_v3 = temp_v3 - 8;
@@ -54,12 +54,12 @@ void FUN_0013400a(int *param_1,int param_2,unsigned int param_3,unsigned int par
     temp_v1 = temp_v2;
   }
   temp_v3 = rt_malloc();
-  FUN_003079c6(*param_1,param_2,temp_v3,param_1);
-  FUN_0030d3ba(param_1,((param_2 - *param_1) & 0xfffffff8U) + temp_v3,param_3);
-  FUN_003079c6(param_2,param_1[1],((param_2 - *param_1) & 0xfffffff8U) + temp_v3 + 8,param_1);
+  _ZSt18uninitialized_copyIP9Obj55aff4S1_12AsdAllocatorIS0_EET0_T_S5_S4_RT1_(*param_1,param_2,temp_v3,param_1);
+  _ZN12AsdAllocatorI9Obj55aff4E9constructEPS0_RKS0_(param_1,((param_2 - *param_1) & 0xfffffff8U) + temp_v3,param_3);
+  _ZSt18uninitialized_copyIP9Obj55aff4S1_12AsdAllocatorIS0_EET0_T_S5_S4_RT1_(param_2,param_1[1],((param_2 - *param_1) & 0xfffffff8U) + temp_v3 + 8,param_1);
   temp_v5 = param_1[1];
   temp_v4 = *param_1;
-  FUN_003079ae(param_1);
+  _ZNSt6vectorI9Obj55aff412AsdAllocatorIS0_EE10_C_destroyEPS0_S4_(param_1);
   asdOperatorDeleteArray(*param_1);
   *param_1 = temp_v3;
   param_1[2] = temp_v1 * 8 + temp_v3;

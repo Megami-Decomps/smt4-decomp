@@ -388,10 +388,25 @@ typedef struct HolderOf9100 {
     /* 0x9100 */ Region9100 region;
 } HolderOf9100;
 
+typedef struct OverlayObj OverlayObj;
+typedef s32 (*OverlayStateHandler)(OverlayObj *overlay);
+
+/* One sliding element: eased offset plus the easing's frame counter. */
+typedef struct OverlaySlide {
+    /* 0x00 */ f32 alpha;
+    /* 0x04 */ s32 offset;
+    /* 0x08 */ s32 unk08;
+    /* 0x0C */ s32 elapsed;      /* frames the easing has run */
+    /* 0x10 */ u8 done;          /* the easing reached its destination */
+    /* 0x11 */ u8 unk11[3];
+} OverlaySlide;
+typedef char OverlaySlideSizeCheck[sizeof(OverlaySlide) == 0x14 ? 1 : -1];
+
 /* The singleton at g_campCec+4 (status screen state). */
-typedef struct OverlayObj {
+struct OverlayObj {
     /* 0x00 */ u32 job;
-    /* 0x04 */ u8 unk04[0x3C];
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ OverlayStateHandler handlers[14];  /* run per state; 0 = none */
     /* 0x40 */ u8 block40[0x50];
     /* 0x90 */ u8 block90[0x20];
     /* 0xB0 */ StatusScene scene;
@@ -400,17 +415,21 @@ typedef struct OverlayObj {
     /* 0xE8 */ void *buffer1;
     /* 0xEC */ u8 unkEC[0x8];
     /* 0xF4 */ u32 scriptProcess;
-    /* 0x0F8 */ u8 unk0F8[0x54];
+    /* 0x0F8 */ u8 unk0F8[0x44];
+    /* 0x13C */ s32 previousState;
+    /* 0x140 */ s32 state;
+    /* 0x144 */ s32 nextState;    /* -1 = none queued */
+    /* 0x148 */ u8 unk148[4];
     /* 0x14C */ u32 unk14C;
     /* 0x150 */ u8 unk150[0x18];
     /* 0x168 */ u32 unk168;
     /* 0x16C */ u8 unk16C;
     /* 0x16D */ u8 unk16D[0x7];
     /* 0x174 */ u32 unk174;
-    /* 0x178 */ u8 unk178[0x28];
+    /* 0x178 */ OverlaySlide slides[2];
     /* 0x1A0 */ u32 unk1A0;
     /* 0x1A4 */ u8 unk1A4;
-} OverlayObj;
+};
 
 typedef struct OverlayRef {
     /* 0x00 */ u32 unk00;

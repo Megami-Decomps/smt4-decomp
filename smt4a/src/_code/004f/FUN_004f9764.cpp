@@ -1,116 +1,112 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f9764` (_code @ 0x4f9764, 0x284 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps every `name != NULL` test and the name/path/work pointers share registers (mov r6,sp / mov r6,r8); armcc here threads the redundant null tests and keeps separate registers */
+#include "common.h"
+#include "battle/btlEffect.h"
+
+/* The effect names of one battle, 0x16 bytes each, after a 0x108 byte header. */
+struct BtlEffectNameTable {
+    /* 0x000 */ u8 unk000[0x108];
+    /* 0x108 */ BtlEffectSlot names[BTL_EFFECT_SLOTS];
+};
+
+/* An effect file being loaded: its data, requested name and state. */
+struct BtlEffectLoad {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ void *file;   /* asynchronously loaded effect file */
+    /* 0x08 */ char name[0x80]; /* file name without its directory */
+    /* 0x88 */ u8 flags;     /* bit 0: load requested */
+    /* 0x89 */ u8 unk89[3];
+};
+
+struct BtlEffectWork {
+    /* 0x0000 */ u8 unk0000[0x1F54];
+    /* 0x1F54 */ BtlEffectNameTable *names;
+    /* 0x1F58 */ u8 unk1F58[0x25EC - 0x1F58];
+    /* 0x25EC */ BtlEffectLoad loads[BTL_EFFECT_SLOTS];
+    /* 0x281C */ u8 unk281C[0x33A8 - 0x281C];
+    /* 0x33A8 */ u32 transition;
+    /* 0x33AC */ u8 transitionEffect;
+};
+
+typedef char BtlEffectWorkOffsets[offsetof(BtlEffectWork, names) == 0x1F54 &&
+    offsetof(BtlEffectWork, loads) == 0x25EC &&
+    sizeof(BtlEffectLoad) == 0x8C &&
+    offsetof(BtlEffectWork, transition) == 0x33A8 ? 1 : -1];
 
 extern "C" {
 
-int textFormatBuffer(...);
-int asdLoadFileAsyncSimple(unsigned char [128], int, int);
-int wstrlen(...);
-int libc_strcpy(...);
-int sysMemClear(...);
-int libc_strcmp(...);
-int btlCameraFinishTransition(int);
+extern BtlEffectGlobals g_btlEffect;
+extern const char DAT_0052853c[]; /* "NOT_EFT" */
+extern const char DAT_00528534[]; /* "%s%02d" */
+extern const char DAT_005284c0[]; /* "battle/effect/%s.eft" */
 
-extern unsigned char LAB_004f99ec; /* 0x4f99ec */
-extern unsigned int g_btlEffect; /* 0x5737f0 */
-extern unsigned int DAT_005737f4; /* 0x5737f4 */
-extern unsigned int DAT_005737f8; /* 0x5737f8 */
-extern unsigned int DAT_005737fc; /* 0x5737fc */
-extern unsigned int DAT_00573800; /* 0x573800 */
-extern unsigned int DAT_00573804; /* 0x573804 */
+u32 wstrlen(const char *text);
+s32 libc_strcmp(const char *a, const char *b);
+s32 libc_strncmp(const char *a, const char *b, u32 count);
+char *libc_strcpy(char *dest, const char *src);
+void textFormatBuffer(char *buffer, const char *format, ...);
+void sysMemClear(void *buffer, u32 bytes);
+char *FUN_00100d60(const char *text, s32 character);
+s32 findRecordByKey(const char *key);
+void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
+void btlCameraFinishTransition(BtlEffectWork *work);
+u32 FUN_002282c8(u32 effect, u32 a, u32 b);
 
-/* Supplied declaration required: textFormatBuffer. */
-extern int FUN_00100d60(unsigned char *, unsigned int);
-extern int libc_strncmp(int, unsigned int, unsigned int);
-extern unsigned int FUN_002282c8(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: wstrlen. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: libc_strcmp. */
-extern int findRecordByKey(int);
-/* Supplied declaration required: btlCameraFinishTransition. */
-
-
-unsigned int FUN_004f9764(int param_1)
-
+/* Requests the loading of every effect the battle names; returns 0 when it has no name table. */
+u32 FUN_004f9764(BtlEffectWork *work)
 {
-/* irregular: 2 goto(s); 7 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  unsigned int temp_v1;
-  unsigned char *puVar4;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5 [128];
-  unsigned char temp_v6 [132];
-  
-  temp_v1 = 0;
-  if (*(int *)(param_1 + 0x1f54) != 0) {
-    temp_v3 = 0;
-    do {
-      temp_v4 = *(int *)(param_1 + 0x1f54) + temp_v3 * 0x16 + 0x108;
-      temp_v0 = wstrlen(temp_v4);
-      if ((temp_v0 != 0) && (temp_v0 = temp_v4, libc_strcmp(temp_v4,&LAB_004f99ec), temp_v0 != 0)) {
-        pcVar2 = "NOT_EFT";
-        libc_strcmp("NOT_EFT",temp_v4);
-        if (((pcVar2 != (char *)0x0) &&
-            ((temp_v4 == 0 ||
-             ((temp_v0 = temp_v4, libc_strcmp(temp_v4,DAT_005737f4), temp_v0 != 0 &&
-              (temp_v0 = temp_v4, libc_strcmp(temp_v4,DAT_005737f8), temp_v0 != 0)))))) &&
-           ((temp_v4 == 0 || (temp_v0 = temp_v4, libc_strcmp(temp_v4,DAT_00573800), temp_v0 != 0)))) {
-          if (temp_v4 != 0) {
-            temp_v1 = wstrlen(DAT_005737fc);
-            temp_v0 = libc_strncmp(temp_v4,DAT_005737fc,temp_v1);
-            if (temp_v0 == 0) goto LAB_004f99d0;
-          }
-          if (temp_v4 != 0) {
-            temp_v1 = wstrlen(g_btlEffect);
-            temp_v0 = libc_strncmp(temp_v4,g_btlEffect,temp_v1);
-            if (temp_v0 == 0) {
-              temp_v2 = 0;
-              do {
-                textFormatBuffer(temp_v6,"%s%02d",g_btlEffect,temp_v2);
-                puVar4 = temp_v6;
-                libc_strcmp(puVar4,temp_v4);
-                if (puVar4 == (unsigned char *)0x0) {
-                  btlCameraFinishTransition(param_1);
-                  temp_v1 = FUN_002282c8(temp_v2 & 0xff,7,0);
-                  *(unsigned int *)(param_1 + 0x33a8) = temp_v1;
-                  *(char *)(param_1 + 0x33ac) = (char)temp_v2;
-                  goto LAB_004f99d0;
-                }
-                temp_v2 = temp_v2 + 1;
-              } while ((int)temp_v2 < 0xb);
-            }
-          }
-          if ((temp_v4 == 0) || (temp_v0 = temp_v4, libc_strcmp(temp_v4,DAT_00573804), temp_v0 != 0)) {
-            sysMemClear(temp_v5,0x80);
-            sysMemClear(temp_v6,0x80);
-            textFormatBuffer(temp_v6,"battle/effect/%s.eft",temp_v4);
-            libc_strcpy(temp_v5,temp_v6);
-            temp_v0 = wstrlen(temp_v5);
-            if (temp_v0 != 0) {
-              temp_v0 = param_1 + temp_v3 * 0x8c;
-              temp_v4 = FUN_00100d60(temp_v5,0x2f);
-              libc_strcpy(temp_v0 + 0x25f4,temp_v4 + 1);
-              temp_v4 = findRecordByKey(temp_v0 + 0x25f4);
-              if (temp_v4 == 0xff) {
-                asdLoadFileAsyncSimple(temp_v5,temp_v0 + 0x25f0,1);
-                *(unsigned char *)(temp_v0 + 0x2674) = *(unsigned char *)(temp_v0 + 0x2674) | 1;
-              }
-            }
-          }
+    s32 i;
+
+    if (work->names == NULL) {
+        return 0;
+    }
+    for (i = 0; i < BTL_EFFECT_SLOTS; i++) {
+        const char *name = work->names->names[i].name;
+        char path[128];
+        char text[128];
+        s32 n;
+
+        if (wstrlen(name) == 0 || libc_strcmp(name, "0") == 0) {
+            continue;
         }
-      }
-LAB_004f99d0:
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 4);
-    temp_v1 = 1;
-  }
-  return temp_v1;
+        if (libc_strcmp(DAT_0052853c, name) != 0 &&
+            (name == NULL || (libc_strcmp(name, g_btlEffect.skipped.skipFirst) != 0 &&
+                              libc_strcmp(name, g_btlEffect.skipped.skipSecond) != 0)) &&
+            (name == NULL || libc_strcmp(name, g_btlEffect.reserved.name) != 0)) {
+            if (name != NULL && libc_strncmp(name, g_btlEffect.otherPrefix, wstrlen(g_btlEffect.otherPrefix)) == 0) {
+                continue;
+            }
+            if (name != NULL && libc_strncmp(name, g_btlEffect.prefix, wstrlen(g_btlEffect.prefix)) == 0) {
+                for (n = 0; n < 11; n++) {
+                    textFormatBuffer(text, DAT_00528534, g_btlEffect.prefix, n);
+                    if (libc_strcmp(text, name) == 0) {
+                        btlCameraFinishTransition(work);
+                        work->transition = FUN_002282c8(n & 0xff, 7, 0);
+                        work->transitionEffect = n;
+                        break;
+                    }
+                }
+                if (n < 11) {
+                    continue;
+                }
+            }
+            if (name == NULL || libc_strcmp(name, g_btlEffect.reserved.otherName) != 0) {
+                sysMemClear(path, sizeof(path));
+                sysMemClear(text, sizeof(text));
+                textFormatBuffer(text, DAT_005284c0, name);
+                libc_strcpy(path, text);
+                if (wstrlen(path) != 0) {
+                    BtlEffectLoad *load = &work->loads[i];
+
+                    libc_strcpy(load->name, FUN_00100d60(path, '/') + 1);
+                    if (findRecordByKey(load->name) == 0xff) {
+                        asdLoadFileAsyncSimple(path, &load->file, 1);
+                        load->flags |= 1;
+                    }
+                }
+            }
+        }
+    }
+    return 1;
 }
 
 } /* extern "C" */

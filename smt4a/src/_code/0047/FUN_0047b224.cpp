@@ -1,170 +1,139 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047b224` (_code @ 0x47b224, 0x26c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: shared handler-release tail is laid out at the end (retail keeps it in the first path, falling into the common epilogue) and the zero/g_aocMain registers are swapped (r6/r5). */
+#include "addon/aocMain.h"
+#include "classes/WindowStatus.h"
+
+/* An object the menu owns and releases through its deleting destructor. */
+class AocConfirmHandler {
+public:
+    virtual void vfunc00();
+    virtual ~AocConfirmHandler();
+};
+
+/* The "is connected" confirmation menu's work. */
+struct AocConfirmMenu {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ s32 state;
+    /* 0x008 */ s32 step;
+    /* 0x00C */ u8 unk00C[0x1FC];
+    /* 0x208 */ AocConfirmHandler *handler;
+    /* 0x20C */ u8 unk20C[4];
+    /* 0x210 */ WindowStatusOperationResult result;
+    /* 0x224 */ u8 unk224[0x90];
+    /* 0x2B4 */ u8 notice[0x34];
+    /* 0x2E8 */ u8 touchRegions[0x68];
+    /* 0x350 */ u32 resource;
+    /* 0x354 */ u8 unk354[4];
+    /* 0x358 */ u32 script;
+};
+
+struct AocConfirmMain {
+    /* 0x000 */ u8 unk000[0x754];
+    /* 0x754 */ u32 flags;
+};
+
+struct AocConfirmMainModes {
+    /* 0x000 */ u8 unk000[0xD50];
+    /* 0xD50 */ u8 mode;
+};
+
+struct AocConfirmDisplay {
+    /* 0x0000 */ u8 unk0000[0x450C];
+    /* 0x450C */ u8 flag;
+};
 
 extern "C" {
+extern AocConfirmMain *g_aocMain;
+extern AocSystemA *g_aocSystem;
+extern AocConfirmDisplay *g_aocDisplay;
 
-int FUN_001517b4(void);
-int eventQueueAddUniqueIfValid(int);
-int ifTouchRegionRemove(void);
-int FUN_00169548(int);
-int FUN_0016ccb4(int);
-int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
-int FUN_001d0fcc(unsigned char [4], unsigned int);
-int FUN_0021c118(int, int);
-int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int msgWindowReset(void);
-int messageBannerRestartOrClear(void);
-int messageClearActiveFlags(void);
-int FUN_00477d10(...);
-int releaseEntriesA(unsigned int *);
-int releaseEntriesB(unsigned int *);
+void FUN_00169548(u32 value);
+void releaseEntriesB(void *regions);
+void releaseEntriesA(void *notice);
+u32 tableGroupFindEntryIndex(u32 resource, const char *name);
+void scrScriptProcessStartEntry(u32 process, u32 entry);
+void FUN_00477d10(AocConfirmMenu *menu, u32 state, s32 enabled);
+s32 scrRunOpcodesStub(u32 script);
+s32 messageGetChoiceResult(void);
+void FUN_0016ccb4(void *owner);
+void FUN_0021c118(u32 handle, s32 frames);
+s32 obj04StateIs4(void);
+s32 FUN_001517b4(s32 id, s32 mode);
+void eventQueueAddUniqueIfValid(u32 event);
+void msgWindowReset(void);
+void messageBannerRestartOrClear(void);
+void messageClearActiveFlags(void);
+void ifTouchRegionRemove(void);
+s32 FUN_002e19f8(void);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 1 byte(s) */
-typedef struct {
-    unsigned char sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern unsigned char LAB_0047b49c; /* 0x47b49c */
-extern int g_aocMain; /* 0x570260 */
-extern int g_aocDisplay; /* 0x57027c */
-extern unsigned int g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_00169548. */
-/* Supplied declaration required: FUN_0016ccb4. */
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned char *);
-/* Supplied declaration required: FUN_001d0fcc. */
-/* Supplied declaration required: FUN_0021c118. */
-extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: msgWindowReset. */
-extern int messageGetChoiceResult(void);
-extern int FUN_002e19f8(void);
-/* Supplied declaration required: messageBannerRestartOrClear. */
-extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-extern int obj04StateIs4(void);
-/* Supplied declaration required: messageClearActiveFlags. */
-/* Supplied declaration required: FUN_00477d10. */
-/* Supplied declaration required: releaseEntriesA. */
-/* Supplied declaration required: releaseEntriesB. */
-
-
-void FUN_0047b224(unsigned int *param_1)
-
+/* Per-frame update of the "is connected" confirmation: opens the script, waits for its choice, then closes. */
+void FUN_0047b224(AocConfirmMenu *menu)
 {
-/* irregular: 15 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  unsigned int temp_v2;
-  unsigned int *puVar5;
-  unsigned int *puVar6;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6 [4];
-  unsigned char temp_v7 [20];
-  unsigned int temp_v8 [3];
-  
-  temp_v0 = param_1[2];
-  if (temp_v0 == 0) {
-    FUN_00169548(0);
-    FUN_001d0fcc(temp_v6,g_aocSystem);
-    *param_1 = *param_1 & 0xffffffef;
-    *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffffeff;
-    *(unsigned char *)(g_aocDisplay + 0x450c) = 0;
-    releaseEntriesB(param_1 + 0xba);
-    releaseEntriesA(param_1 + 0xad);
-    *(unsigned char *)(g_aocMain + 0xd50) = 2;
-    temp_v2 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_0047b49c);
-    scrScriptProcessStartEntry(param_1[0xd6],temp_v2);
-    FUN_00477d10(param_1,0,1);
-    param_1[2] = 1;
-    return;
-  }
-  if (temp_v0 != 1) {
-    if (temp_v0 != 2) {
-      return;
-    }
-    temp_v1 = FUN_002e19f8();
-    if (temp_v1 == 0) {
-      return;
-    }
-    piVar3 = (int *)param_1[0x82];
-    param_1[1] = 4;
-    param_1[2] = 0;
-  }
-  else {
-    temp_v1 = scrRunOpcodesStub(param_1[0xd6]);
-    if (temp_v1 == 2) {
-      temp_v1 = messageGetChoiceResult();
-      if (temp_v1 == 0) {
-        param_1[2] = 2;
-        FUN_0016ccb4(g_aocMain + 0x80);
-        temp_v6[0] = 0;
-        puVar5 = (unsigned int *)_ZN18WindowStatusResultC1Ev(temp_v7);
-        puVar5[2] = 0;
-        puVar5[3] = 0;
-        puVar6 = temp_v8;
-        _ZN18WindowStatusResultC1Ej(puVar6,0);
-        temp_v3 = *puVar6;
-        temp_v0 = puVar6[1];
-        puVar5[1] = temp_v0;
-        *puVar5 = temp_v3;
-        temp_v4 = puVar5[2];
-        temp_v5 = puVar5[3];
-        param_1[0x84] = puVar5[-1];
-        param_1[0x85] = temp_v3;
-        param_1[0x86] = temp_v0;
-        param_1[0x87] = temp_v4;
-        param_1[0x88] = temp_v5;
-        FUN_00477d10(param_1,0xffffffff,0);
-        FUN_0021c118(0x1000001,10);
+    if (menu->step == 0) {
+        FUN_00169548(0);
+        g_aocSystem->getPendingRequest();
+        menu->flags &= ~0x10;
+        g_aocMain->flags &= ~0x100;
+        g_aocDisplay->flag = 0;
+        releaseEntriesB(menu->touchRegions);
+        releaseEntriesA(menu->notice);
+        ((AocConfirmMainModes *)g_aocMain)->mode = 2;
+        scrScriptProcessStartEntry(menu->script, tableGroupFindEntryIndex(menu->resource, "aoc_IsConnect"));
+        FUN_00477d10(menu, 0, 1);
+        menu->step = 1;
         return;
-      }
-      if (temp_v1 != 1) {
+    }
+    if (menu->step == 1) {
+        if (scrRunOpcodesStub(menu->script) == 2) {
+            s32 choice = messageGetChoiceResult();
+            if (choice == 0) {
+                menu->step = 2;
+                FUN_0016ccb4((u8 *)g_aocMain + 0x80);
+                WindowStatusOperationResult operation;
+                operation.status = 0;
+                operation.reserved0c = 0;
+                operation.reserved10 = 0;
+                operation.result = WindowStatusResult(0);
+                menu->result = operation;
+                FUN_00477d10(menu, 0xFFFFFFFF, 0);
+                FUN_0021c118(0x1000001, 10);
+                return;
+            }
+            if (choice != 1) {
+                return;
+            }
+        } else {
+            if (obj04StateIs4() == 0) {
+                return;
+            }
+            if (FUN_001517b4(1, 1) == 0) {
+                return;
+            }
+            eventQueueAddUniqueIfValid(0x100020e);
+            msgWindowReset();
+            messageBannerRestartOrClear();
+            messageClearActiveFlags();
+            ifTouchRegionRemove();
+            ifTouchRegionRemove();
+        }
+        menu->state = 15;
+        menu->step = 0;
+        if (menu->handler != NULL) {
+            delete menu->handler;
+            menu->handler = NULL;
+        }
         return;
-      }
-      piVar3 = (int *)param_1[0x82];
-      param_1[1] = 0xf;
-      param_1[2] = 0;
-      if (piVar3 == (int *)0x0) {
-        return;
-      }
-      (**(romwright_code **)(*piVar3 + 4))();
-      param_1[0x82] = 0;
-      return;
     }
-    temp_v1 = obj04StateIs4();
-    if (temp_v1 == 0) {
-      return;
+    if (menu->step == 2) {
+        if (FUN_002e19f8() == 0) {
+            return;
+        }
+        menu->state = 4;
+        menu->step = 0;
+        if (menu->handler != NULL) {
+            delete menu->handler;
+            menu->handler = NULL;
+        }
     }
-    temp_v1 = 1;
-    FUN_001517b4();
-    if (temp_v1 == 0) {
-      return;
-    }
-    eventQueueAddUniqueIfValid(0x100020e);
-    msgWindowReset();
-    messageBannerRestartOrClear();
-    messageClearActiveFlags();
-    ifTouchRegionRemove();
-    ifTouchRegionRemove();
-    piVar3 = (int *)param_1[0x82];
-    param_1[1] = 0xf;
-    param_1[2] = 0;
-  }
-  if (piVar3 == (int *)0x0) {
-    return;
-  }
-  (**(romwright_code **)(*piVar3 + 4))();
-  param_1[0x82] = 0;
-  return;
 }
 
-} /* extern "C" */
+}

@@ -24,7 +24,7 @@ typedef struct AsdCecMessageBox {
 typedef struct AsdCec {
     /* 0x00 */ u32 unk00;                /* passed to the box's open call with unk04 */
     /* 0x04 */ u32 unk04;
-    /* 0x08 */ u32 unk08;
+    /* 0x08 */ u8 messageParams[4];     /* the byte-sized parameters a new message is created with */
     /* 0x0c */ void *work;               /* 8-byte helper object */
     /* 0x10 */ u32 unk10;
     /* 0x14 */ u32 unk14;

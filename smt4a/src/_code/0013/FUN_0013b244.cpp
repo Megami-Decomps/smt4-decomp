@@ -23,7 +23,7 @@ inline void normalize(Vec3f &vector)
 }
 }
 extern "C" {
-void FUN_0013c884(ManagedCamera *camera, s32 enabled);
+void asdCameraInitializeDefaults(ManagedCamera *camera, s32 enabled);
 u32 asdGxPresetsGetByKind(u32 kind);
 u32 asdGxPresetsGetHeightByKind(u32 kind);
 void FUN_0015a20c(ManagedCamera *camera, f32 left, f32 top, f32 right, f32 bottom, f32 nearClip, f32 farClip);
@@ -42,7 +42,7 @@ void FUN_0013b244(ManagedCamera *camera, f32 distance, f32 offsetX, f32 offsetY,
         f32 focusDistance;
         f32 weight;
     };
-    FUN_0013c884(camera, 1);
+    asdCameraInitializeDefaults(camera, 1);
     f32 width = (f32)asdGxPresetsGetByKind(0);
     f32 height = (f32)asdGxPresetsGetHeightByKind(0);
     FUN_0015a20c(camera, 0.0f, height, width, 0.0f, 1.0f, 1.0f);

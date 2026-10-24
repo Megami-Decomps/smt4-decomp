@@ -8,7 +8,7 @@ extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;
 RelativeDirectory *FUN_002b47ec(void);
 s32 idIsAbove400(s32 id);
-void *FUN_002ae164(u32 id);
+void *dataTable40FindById(u32 id);
 void btlFormatCategoryLabel(char *buffer, u32 category);
 void textEncodeFontSlot(s32 slot, const u8 *text);
 void skillFormatTargetLabel(char *buffer, s32 target);
@@ -36,7 +36,7 @@ void buttonHelpShowSkillDetails(s32 skill)
         } else {
             /* The target/category word is past the shared active-skill prefix. */
             struct ActiveSkillView { u8 unk00[0x28]; u32 flags; };
-            const ActiveSkillView *record = (const ActiveSkillView *)FUN_002ae164(skill);
+            const ActiveSkillView *record = (const ActiveSkillView *)dataTable40FindById(skill);
             btlFormatCategoryLabel(label, (record->flags >> 12) & 31);
             textEncodeFontSlot(36, (const u8 *)label);
             skillFormatTargetLabel(label, (record->flags >> 5) & 15);

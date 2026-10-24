@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00436798` (_code @ 0x436798, 0x12c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: BLOCKED: inlined std::list<Entry>::insert (node from FUN_004387f0, value construction FUN_00515598, link before the sentinel) plus a map lookup (FUN_00515618) and IdList walk; the list/map instantiations behind FUN_004352b0/004387f0/00515580/00515598/00515618 are unnamed. Twin: smt4 FUN_0035d370. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_IdList.h"
 

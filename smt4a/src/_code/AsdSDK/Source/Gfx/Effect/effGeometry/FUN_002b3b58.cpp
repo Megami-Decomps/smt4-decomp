@@ -1,84 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b3b58` (_code @ 0x2b3b58, 0x13c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation, slot setup and the unrolled copy loop match in shape; retail keeps `i * stride` as an in-loop mla and addresses the copy as `(n * i) * 3` after hoisting n = (indices + 2) / 3 behind the count guard, and chooses different registers. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int memAlloc(int, int, int, int, int, int);
-int FUN_00178b04(int, unsigned char *, int);
-int slotInit(int, int, int, int);
+extern const char DAT_0054baf8[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effGeometry.cpp": __FILE__ */
 
-/* stack frame of param_5: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_5_stack;
+/* A primitive slot: 0x4C bytes, its index buffer at 0x48. */
+typedef struct GeomSlot {
+    u8 unk00[0x48];
+    u16 *indices; /* 0x48 */
+} GeomSlot;
 
-extern unsigned char DAT_0054baf8; /* 0x54baf8 */
+typedef struct GeomObject {
+    /* 0x00 */ u16 kind;
+    /* 0x02 */ u16 vertexCount;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ GeomSlot *slot;
+    /* 0x0C */ u8 unk0C[0x48];
+    /* 0x54 */ u32 flags;
+} GeomObject;
 
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: slotInit. */
-extern int slotReset(void);
+void *memAlloc(int, int, int, int size, int align, int);
+void *FUN_00178b04(u32 size, const char *file, s32 line);
+GeomSlot *slotReset(void *memory);
+void slotInit(GeomSlot *slot, u32 kind, u32 indexCount, u32 vertexCount);
 
-
-unsigned short * FUN_002b3b58(int param_1,int param_2,int param_3,short *param_4,unsigned short param_5)
-
+/* Creates a geometry object holding `count` copies of an index list; copy i is offset by i * vertexStride. */
+GeomObject *FUN_002b3b58(s32 count, s32 triangles, s32 vertexStride, const u16 *source, u16 kind)
 {
-/* irregular: 3 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  unsigned int temp_v2;
-  unsigned short *puVar4;
-  int temp_v3;
-  short *psVar6;
-  short *psVar7;
-  short *psVar8;
-  int temp_v4;
-  int temp_v5;
-  
-  puVar4 = (unsigned short *)0x10000;
-  memAlloc(0x10000,0x100,0,0x58,0x10,1);
-  temp_v3 = 0x4c;
-  FUN_00178b04(0x4c,&DAT_0054baf8,0x73);
-  if (temp_v3 == 0) {
-    temp_v3 = 0;
-  }
-  else {
-    temp_v3 = slotReset();
-  }
-  slotInit(temp_v3,0x25,param_1 * param_2 * 3,param_1 * param_3);
-  *puVar4 = param_5;
-  *(int *)(puVar4 + 4) = temp_v3;
-  puVar4[1] = (short)(param_1 * param_3);
-  *(unsigned int *)(puVar4 + 0x2a) = 0xa5;
-  temp_v5 = *(int *)(temp_v3 + 0x48);
-  temp_v3 = 0;
-  if (0 < param_1) {
-    temp_v2 = (param_2 * 3 + 2) / 3;
-    do {
-      if (0 < (int)(temp_v2 * 3)) {
-        psVar7 = (short *)(temp_v5 + temp_v2 * temp_v3 * 6);
-        temp_v0 = (short)param_3;
-        temp_v1 = (short)temp_v3;
-        psVar6 = param_4 + -1;
-        psVar8 = psVar7 + -1;
-        if ((temp_v2 & 1) != 0) {
-          *psVar7 = temp_v0 * temp_v1 + *param_4;
-          psVar6 = param_4;
-          psVar8 = psVar7;
+    s32 vertexCount = count * vertexStride;
+    s32 indexCount = count * triangles * 3;
+    s32 indicesPerTriangleList = triangles * 3;
+    asdDebugTrace(DAT_0054baf8, 113);
+    GeomObject *object = (GeomObject *)memAlloc(0x10000, 0x100, 0, 0x58, 0x10, 1);
+    void *memory = FUN_00178b04(0x4C, DAT_0054baf8, 115);
+    GeomSlot *slot = memory != NULL ? slotReset(memory) : NULL;
+    slotInit(slot, 0x25, indexCount, vertexCount);
+    object->kind = kind;
+    object->slot = slot;
+    object->vertexCount = vertexCount;
+    object->flags = 0xA5;
+    u16 *indices = slot->indices;
+    for (s32 i = 0; i < count; i++) {
+        s32 perCopy = (indicesPerTriangleList + 2) / 3 * 3;
+        for (s32 k = 0; k < perCopy; k++) {
+            indices[i * perCopy + k] = source[k] + i * vertexStride;
         }
-        for (temp_v4 = (int)(temp_v2 * 3) >> 1; temp_v4 != 0; temp_v4 = temp_v4 - 1) {
-          psVar8[1] = temp_v0 * temp_v1 + psVar6[1];
-          psVar6 = psVar6 + 2;
-          psVar8 = psVar8 + 2;
-          *psVar8 = temp_v0 * temp_v1 + *psVar6;
-        }
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < param_1);
-  }
-  return puVar4;
+    }
+    return object;
 }
 
 } /* extern "C" */

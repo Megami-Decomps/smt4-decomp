@@ -1,111 +1,84 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038ae30` (_code @ 0x38ae30, 0x168 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: logic and call order match; retail reserves 16 more bytes of struct-return temporaries (72-byte frame, layout it@28/rec@40/extra@64) and passes an uninitialised r1 (the nothrow tag) to asdOperatorNewB. */
+#include "addon/aocMain.h"
+#include "classes/WindowStatus.h"
+#include "AsdSDK/AsdDebugHooks.h"
+#include "nn/Result.h"
 
 extern "C" {
+extern AocMain *g_aocMain;
 
-int FUN_00234624(unsigned char [4], unsigned int, unsigned int);
-int asdOperatorNewB(void);
-int legacyResourceIdRemap(int);
-int jyoucyuGetTableEntry(int);
-int asdOperatorDelete(int);
-int FUN_00354608(int *, int, int);
-int FUN_003df0c4(int *, unsigned char [4], unsigned char [8], unsigned short [12]);
-int FUN_003df4dc(int *, int, int, int);
+// A content entry as the loader walks it: 0x30 bytes, the count of u16 items at 0x28.
+struct AocListEntry {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ u32 itemCount;
+    /* 0x2c */ u8 unk2c[4];
+};
 
-/* stack frame of param_1: 5 slot(s), 18 byte(s) */
-typedef struct {
-    unsigned short sp40; /* 0x40: local_40 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-} param_1_stack;
+// One item the walk visits (0x18 bytes): its id and flags.
+struct AocListItem {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 unk02[0xe];
+    /* 0x10 */ u8 flags;
+    /* 0x11 */ u8 unk11[7];
+};
 
-extern int g_aocMain; /* 0x432fc8 */
+// The loader job: its status result sits at 0xc, the content entry index at 0x14.
+struct AocListJob {
+    /* 0x00 */ u8 unk00[0xc];
+    /* 0x0c */ WindowStatusResult result;
+    /* 0x14 */ u32 entryIndex;
+};
 
-extern unsigned int FUN_00234618(unsigned char *);
-/* Supplied declaration required: FUN_00234624. */
-/* Supplied declaration required: asdOperatorNewB. */
-/* Supplied declaration required: legacyResourceIdRemap. */
-extern int objGetFlagBit0(unsigned short *);
-/* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: FUN_00354608. */
-/* Supplied declaration required: FUN_003df0c4. */
-/* Supplied declaration required: FUN_003df4dc. */
+WindowStatusResult FUN_00354608(void *parameters, void *source);
+void FUN_00234624(AocListEntry **entry, void *table, u32 index);
+u32 FUN_00234618(AocListEntry **entry);
+void *asdOperatorNewB(u32 size, ...);
+WindowStatusResult FUN_003df0c4(AocListEntry **entry, u8 *extra, AocListItem *item, s32 flag, u32 index);
+WindowStatusResult FUN_003df4dc(void *handle, void *buffer, u32 count);
+s32 legacyResourceIdRemap(const WindowStatusResult *result);
+u8 objGetFlagBit0(AocListItem *item);
+int jyoucyuGetTableEntry(s32 index);
+void asdOperatorDelete(void *ptr);
 
-
-unsigned char * FUN_0038ae30(int param_1)
-
+// Build the list of flagged item ids of the job's content entry and hand it to the file service.
+void FUN_0038ae30(AocListJob *job)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  unsigned int uStack_5c;
-  unsigned char temp_v9 [4];
-  int temp_v10;
-  unsigned int uStack_44;
-  unsigned short temp_v11 [12];
-  unsigned char temp_v12 [8];
-  
-  temp_v3 = g_aocMain;
-  FUN_00354608(&temp_v8,g_aocMain + 0x20,g_aocMain + 0x18);
-  *(unsigned int *)(param_1 + 0xc) = temp_v8;
-  *(unsigned int *)(param_1 + 0x10) = uStack_5c;
-  temp_v0 = legacyResourceIdRemap(param_1 + 0xc);
-  if ((unsigned char *)-(temp_v0 >> 0x1f) != (unsigned char *)0x0) {
-    return (unsigned char *)-(temp_v0 >> 0x1f);
-  }
-  FUN_00234624(temp_v9,*(unsigned int *)(temp_v3 + 0x5a8),*(unsigned int *)(param_1 + 0x14));
-  temp_v1 = FUN_00234618(temp_v9);
-  temp_v0 = temp_v1 << 1;
-  asdOperatorNewB();
-  temp_v5 = 0;
-  if (temp_v0 != 0) {
-    temp_v4 = 0;
-    if (temp_v4 < temp_v1) {
-      do {
-        temp_v6 = 1;
-        temp_v7 = temp_v4;
-        FUN_003df0c4(&temp_v10,temp_v9,temp_v12,temp_v11);
-        *(unsigned int *)(param_1 + 0xc) = temp_v10;
-        *(unsigned int *)(param_1 + 0x10) = uStack_44;
-        temp_v2 = legacyResourceIdRemap(param_1 + 0xc);
-        if (temp_v2 < 0) {
-          legacyResourceIdRemap(param_1 + 0xc);
-          asdOperatorDelete(temp_v0);
-          return temp_v9;
-        }
-        temp_v2 = objGetFlagBit0(temp_v11);
-        if (temp_v2 != 0) {
-          temp_v2 = temp_v5 * 2;
-          temp_v5 = temp_v5 + 1;
-          *(unsigned short *)(temp_v0 + temp_v2) = temp_v11[0];
-        }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < temp_v1);
+    AocMain *aoc = g_aocMain;
+    job->result = FUN_00354608((u8 *)aoc + 0x20, (u8 *)aoc + 0x18);
+    if (nnResultIsFailure(legacyResourceIdRemap(&job->result))) {
+        return;
     }
-    FUN_003df4dc(&temp_v6,temp_v3 + 0x20,temp_v0,temp_v5);
-    *(unsigned int *)(param_1 + 0xc) = temp_v6;
-    *(unsigned int *)(param_1 + 0x10) = temp_v7;
-    temp_v3 = legacyResourceIdRemap(param_1 + 0xc);
-    if (temp_v3 < 0) {
-      legacyResourceIdRemap(param_1 + 0xc);
-      asdOperatorDelete(temp_v0);
-      return temp_v9;
+    AocListEntry *entry;
+    FUN_00234624(&entry, aoc->contentTable, job->entryIndex);
+    u32 itemCount = FUN_00234618(&entry);
+    u16 *ids = (u16 *)asdOperatorNewB(itemCount * 2);
+    u32 kept = 0;
+    if (ids != NULL) {
+        for (u32 i = 0; i < itemCount; i++) {
+            AocListItem item;
+            u8 extra[8];
+            job->result = FUN_003df0c4(&entry, extra, &item, 1, i);
+            if (nnResultIsFailure(legacyResourceIdRemap(&job->result))) {
+                legacyResourceIdRemap(&job->result);
+                asdOperatorDelete(ids);
+                asdDebugHookPtr(&entry);
+                return;
+            }
+            if (objGetFlagBit0(&item)) {
+                ids[kept++] = item.id;
+            }
+        }
+        job->result = FUN_003df4dc((u8 *)aoc + 0x20, ids, kept);
+        if (nnResultIsFailure(legacyResourceIdRemap(&job->result))) {
+            legacyResourceIdRemap(&job->result);
+            asdOperatorDelete(ids);
+            asdDebugHookPtr(&entry);
+            return;
+        }
+        jyoucyuGetTableEntry(0);
+        asdOperatorDelete(ids);
     }
-    jyoucyuGetTableEntry(0);
-    asdOperatorDelete(temp_v0);
-  }
-  return temp_v9;
+    asdDebugHookPtr(&entry);
 }
 
 } /* extern "C" */

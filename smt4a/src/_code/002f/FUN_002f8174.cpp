@@ -31,7 +31,7 @@ extern unsigned char DAT_00558e44; /* 0x558e44 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_002e7908(unsigned int *, unsigned int *);
+extern int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 extern unsigned int *FUN_002eca10(fn_002f8174_arg0 *, unsigned int, unsigned int *);
 extern int FUN_002f5928(int, unsigned int);
 /* Supplied declaration required: FUN_002f5940. */
@@ -58,7 +58,7 @@ FUN_002f8174(fn_002f8174_arg0 *param_1,unsigned int param_2,unsigned int param_3
   puVar1[0x1a] = 0;
   *puVar1 = (unsigned int)&DAT_00558e44;
   temp_v2 = 0x80010001;
-  temp_v0 = FUN_002e7908(puVar1 + 0x1b,(unsigned int *)&temp_v2);
+  temp_v0 = _ZN12OnlineResultC1ERKj(puVar1 + 0x1b,(unsigned int *)&temp_v2);
   *(unsigned int *)(temp_v0 + 0xc) = temp_v1;
   temp_v0 = FUN_002f5928(temp_v0 + 0x10,1);
   *(unsigned int *)(temp_v0 + 0x34) = param_3;

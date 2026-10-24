@@ -3,7 +3,7 @@
 
 extern "C" {
 
-int FUN_002702dc(void);
+int mapCollisionRelease(void);
 int FUN_00277d2c(unsigned int, unsigned int);
 int mapGimicUpdateVisualBounds(void);
 int FUN_0027ae90(void);
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002702dc. */
+/* Supplied declaration required: mapCollisionRelease. */
 /* Supplied declaration required: FUN_00277d2c. */
 /* Supplied declaration required: mapGimicUpdateVisualBounds. */
 /* Supplied declaration required: FUN_0027ae90. */
@@ -43,7 +43,7 @@ void FUN_002fb234(void)
   if (temp_v5 == 0) {
     return;
   }
-  FUN_002702dc();
+  mapCollisionRelease();
   if (*(int *)(temp_v5 + 0x2c) == 0x11) {
     if (*(int *)(temp_v5 + 0x30) != 1) goto LAB_002fb2cc;
     temp_v0 = gameFlagIsSet(0xc6);

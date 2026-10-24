@@ -25,7 +25,7 @@ int sysPlayVoice(...);
 int FUN_003ec6d8(...);
 int FUN_003eeb4c(...);
 int FUN_003f1114(...);
-int FUN_004f9450(void);
+int nameEntriesRegisterVerNames(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 int __aeabi_idivmod(...);
@@ -237,7 +237,7 @@ extern int btlFindEntryValue(int, unsigned int);
 extern int btlGetPropertyMaximum(unsigned int);
 extern int FUN_004c87e0(void);
 /* Supplied declaration required: FUN_004c8e30. */
-/* Supplied declaration required: FUN_004f9450. */
+/* Supplied declaration required: nameEntriesRegisterVerNames. */
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -2556,7 +2556,7 @@ LAB_0022129c:
                 }
               }
               else if ((*(unsigned int *)(g_btlAux + 0x339c) & 0x400) != 0) {
-                FUN_004f9450();
+                nameEntriesRegisterVerNames();
               }
             }
             else if (temp_v4 != 0x29) {

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0010d300(void);
 int FUN_0010d35c(void);
 int asdOperatorDelete(void);
-int vectorCopyHeader(unsigned int *, int *);
+int _ZN18OnlineResultRecordaSERKS_(unsigned int *, int *);
 int asyncOperationStartOrPoll(int, unsigned int *, unsigned int *);
 int FUN_003fa1c8(unsigned int *);
 int FUN_00414a24(void);
@@ -34,8 +34,8 @@ extern unsigned int FUN_00111800(unsigned int *);
 extern int FUN_00122220(void);
 extern int FUN_001224a0(void);
 /* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: vectorCopyHeader. */
-extern int refIsNonNegative(unsigned int *);
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
+extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
 /* Supplied declaration required: asyncOperationStartOrPoll. */
 /* Supplied declaration required: FUN_003fa1c8. */
 extern unsigned int *FUN_003fa580(unsigned int *);
@@ -123,8 +123,8 @@ unsigned int * FUN_003fa83c(unsigned int *param_1)
       temp_v3 = *(unsigned int *)(temp_v1 + 0x40);
       temp_v2 = *(unsigned int *)(temp_v1 + 0x38);
       uStack_14 = *(unsigned int *)(temp_v1 + 0x3c);
-      vectorCopyHeader(param_1 + 7,&temp_v2);
-      temp_v1 = refIsNonNegative(param_1 + 7);
+      _ZN18OnlineResultRecordaSERKS_(param_1 + 7,&temp_v2);
+      temp_v1 = _ZNK18OnlineResultRecord7isValidEv(param_1 + 7);
       if (temp_v1 != 0) {
         temp_v0 = 9;
         break;

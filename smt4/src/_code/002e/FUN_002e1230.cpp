@@ -1,49 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e1230` (_code @ 0x2e1230, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Applies the loop policy to the animation player at +8, then runs FUN_002e11f4 and FUN_002e1260 on it with `flag`
+ * (FUN_002e1260 is placed right after, so the last call is a linker NOP). */
+#include "common.h"
+
+struct AnimOwner {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ void *player;
+};
 
 extern "C" {
+void animPlayerSetLoopPolicy(void *player);
+void FUN_002e11f4(void *player, s32 flag);
+void FUN_002e1260(void *player, s32 flag);
 
-int animPlayerSetLoopPolicy(unsigned int);
-int FUN_002e11f4(unsigned int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern int nw_anim_PlayPolicy_Loop(...); /* 0x151500 */
-extern unsigned char LAB_00155650; /* 0x155650 */
-
-/* Supplied declaration required: animPlayerSetLoopPolicy. */
-/* Supplied declaration required: FUN_002e11f4. */
-
-
-void FUN_002e1230(int param_1,int param_2)
-
+void FUN_002e1230(AnimOwner *owner, s32 flag)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  romwright_code *pcVar2;
-  
-  animPlayerSetLoopPolicy(*(unsigned int *)(param_1 + 8));
-  FUN_002e11f4(*(unsigned int *)(param_1 + 8),param_2);
-  if (((0 < *(int *)(*(int *)(param_1 + 8) + 0x68)) &&
-      (temp_v0 = *(int *)(*(int *)(param_1 + 8) + 0x2c), *(int *)(temp_v0 + 0x150) != 0)) &&
-     (temp_v0 = *(int *)(*(int *)(*(int *)(temp_v0 + 0x28) + 0x1c) +
-                      *(int *)(temp_v0 + 0x154) * *(int *)(*(int *)(temp_v0 + 0x28) + 0x28) * 4),
-     temp_v0 != 0)) {
-    if (param_2 == 0) {
-      pcVar2 = (romwright_code *)&LAB_00155650;
-    }
-    else {
-      pcVar2 = nw_anim_PlayPolicy_Loop;
-    }
-    *(unsigned char *)(temp_v0 + 0x58) = 1;
-    *(romwright_code **)(temp_v0 + 0x4c) = pcVar2;
-  }
-  return;
+    animPlayerSetLoopPolicy(owner->player);
+    FUN_002e11f4(owner->player, flag);
+    FUN_002e1260(owner->player, flag);
 }
-
-} /* extern "C" */
+}

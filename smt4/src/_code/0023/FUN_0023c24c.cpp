@@ -30,7 +30,7 @@ static inline bool actionModelIsHidden(const BtlActionRecord *action)
 
 extern "C" {
 void modelSetAnimationChannels(NodeEnableNode *model, s32 channels, f32 frame);
-void FUN_002d582c(NodeEnableNode *model, f32 speed);
+void animOwnerSetScale(NodeEnableNode *model, f32 speed);
 BtlMainState *btlGetMainState(void);
 
 // Start matching keyed models and reconcile their visibility with the associated action.
@@ -41,7 +41,7 @@ void FUN_0023c24c(KeyedValueTable *table, s32 firstKey, s32 secondKey)
         if ((slot->action.flags & 8) == 0 && slot->model != NULL &&
             slot->firstKey == firstKey && slot->secondKey == secondKey) {
             modelSetAnimationChannels(slot->model, 0, 0.0f);
-            FUN_002d582c(slot->model, 1.0f);
+            animOwnerSetScale(slot->model, 1.0f);
             setModelHidden(slot->model, true);
             slot->action.flags |= 8;
             BtlActionRecord *action = &btlGetMainState()->actions[slot->action.index];

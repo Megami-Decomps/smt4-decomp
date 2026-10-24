@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00134dcc(int, unsigned int, unsigned int);
-int vectorCopyHeader(int, unsigned int);
+int _ZN18OnlineResultRecordaSERKS_(int, unsigned int);
 
 /* Supplied declaration required: FUN_00134dcc. */
-/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 
 
 void FUN_00114c3c(int param_1,int param_2,unsigned int param_3,int param_4)
@@ -22,7 +22,7 @@ void FUN_00114c3c(int param_1,int param_2,unsigned int param_3,int param_4)
         *(unsigned int *)(param_1 + 0x6c) = 0;
       }
       if (*(int *)(param_1 + 0x70) != 0) {
-        vectorCopyHeader(*(int *)(param_1 + 0x70),param_3);
+        _ZN18OnlineResultRecordaSERKS_(*(int *)(param_1 + 0x70),param_3);
         *(unsigned int *)(param_1 + 0x70) = 0;
       }
     }

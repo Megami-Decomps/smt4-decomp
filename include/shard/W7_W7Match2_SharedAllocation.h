@@ -6,7 +6,7 @@
 
 struct SharedAllocationAllocator;
 struct SharedAllocationAllocatorVtable {
-    /* 0x00 */ void (*destroy)(SharedAllocationAllocator *allocator);
+    /* 0x00 */ void *(*allocate)(SharedAllocationAllocator *allocator, u32 bytes);
     /* 0x04 */ void (*release)(SharedAllocationAllocator *allocator, void *allocation);
 };
 struct SharedAllocationAllocator {
@@ -19,6 +19,38 @@ struct SharedAllocationLink {
     /* 0x04 */ void *allocation;
     /* 0x08 */ SharedAllocationLink *next;
     /* 0x0c */ SharedAllocationLink *previous;
+
+    /* Takes over `newAllocation` as the only reference, dropping the current one first. */
+    void reset(void *newAllocation)
+    {
+        if (next == NULL || next == this) {
+            if (allocation != NULL)
+                allocator->vtable->release(allocator, allocation);
+        } else {
+            next->previous = previous;
+            previous->next = next;
+            next = NULL;
+            previous = NULL;
+        }
+        allocation = newAllocation;
+        previous = this;
+        next = this;
+    }
+
+    /* Drops this reference: the last one releases the allocation, the others leave the ring. */
+    ~SharedAllocationLink()
+    {
+        if (next == NULL || next == this) {
+            if (allocation != NULL)
+                allocator->vtable->release(allocator, allocation);
+        } else {
+            next->previous = previous;
+            previous->next = next;
+            next = NULL;
+            previous = NULL;
+        }
+        allocation = NULL;
+    }
 
     SharedAllocationLink &operator=(SharedAllocationLink &source)
     {
@@ -46,6 +78,8 @@ struct SharedAllocationLink {
 struct SharedAllocationArray {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ SharedAllocationLink *entries;
+    /* 0x08 */ u32 capacity;
+    /* 0x0c */ u32 count;
 };
 
 typedef char SharedAllocationLinkSizeCheck[sizeof(SharedAllocationLink) == 0x10 ? 1 : -1];

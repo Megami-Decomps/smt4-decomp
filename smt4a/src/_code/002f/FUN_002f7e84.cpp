@@ -6,7 +6,7 @@ extern "C" {
 
 int sharedRefRelease(int *);
 int FUN_002e78d0(unsigned int, int *, int);
-int FUN_002e7908(unsigned int, unsigned int *);
+int _ZN12OnlineResultC1ERKj(unsigned int, unsigned int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_7: 7 slot(s), 28 byte(s) */
@@ -23,10 +23,10 @@ typedef struct {
 extern int *FUN_0012193c(void);
 extern unsigned int onlineContextGetInstance(void);
 /* Supplied declaration required: sharedRefRelease. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
-/* Supplied declaration required: FUN_002e7908. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 
 
 void FUN_002f7e84(unsigned int param_1,unsigned int param_2,int param_3,unsigned int param_4,
@@ -55,7 +55,7 @@ void FUN_002f7e84(unsigned int param_1,unsigned int param_2,int param_3,unsigned
   temp_v8 = param_4;
   temp_v0 = FUN_002e789a(param_3);
   if (temp_v0 != 0) {
-    temp_v0 = operatorNew(0x98);
+    temp_v0 = _Znwj(0x98);
     if (temp_v0 != 0) {
       piVar2 = (int *)FUN_0012193c();
     }
@@ -71,13 +71,13 @@ void FUN_002f7e84(unsigned int param_1,unsigned int param_2,int param_3,unsigned
       FUN_002e78d0(temp_v1,piVar2,0);
       puVar4 = (unsigned int *)&temp_v6;
       temp_v6 = 0x10001;
-      FUN_002e7908(temp_v7,puVar4);
+      _ZN12OnlineResultC1ERKj(temp_v7,puVar4);
       return;
     }
     sharedRefRelease(piVar2);
   }
   temp_v2 = 0x8001000d;
-  FUN_002e7908(temp_v7,puVar4);
+  _ZN12OnlineResultC1ERKj(temp_v7,puVar4);
   return;
 }
 

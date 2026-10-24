@@ -77,7 +77,7 @@ int gameFlagSetValue(...);
 
 int mapIfSetMode1(...);
 int FUN_002342b8(...);
-int FUN_00245e38(...);
+int mapIfSpawnCaveAction(...);
 int FUN_00246014(...);
 int mapIfReleasePanel(...);
 int mapIfOverlayRelease(...);
@@ -93,7 +93,7 @@ int soundVolumeSettingSet(...);
 int FUN_0014af98(...);
 int sysPlaySe(...);
 int FUN_00233e10(...);
-int FUN_002b7f58(...);
+int mapIfSpawnManholeAction(...);
 int FUN_002d1f40(...);
 int FUN_00303460(...);
 int FUN_003250ac(...);
@@ -317,7 +317,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00233e10. */
 /* Supplied declaration required: FUN_00234118. */
 /* Supplied declaration required: FUN_002342b8. */
-/* Supplied declaration required: FUN_00245e38. */
+/* Supplied declaration required: mapIfSpawnCaveAction. */
 /* Supplied declaration required: FUN_00246014. */
 /* Supplied declaration required: popupStateClose. */
 /* Supplied declaration required: FUN_002469d0. */
@@ -335,7 +335,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_002b621c. */
-/* Supplied declaration required: FUN_002b7f58. */
+/* Supplied declaration required: mapIfSpawnManholeAction. */
 /* Supplied declaration required: mapIfReleaseSlot4. */
 /* Supplied declaration required: FUN_002b80b8. */
 /* Supplied declaration required: mapTrapGetUnk3C. */
@@ -2259,7 +2259,7 @@ LAB_003270bc:
               g_lmapView[0x2c] = -1;
               sysPlaySe(0xdd);
               FUN_00233e10(1,DAT_005f16ac);
-              FUN_002b7f58();
+              mapIfSpawnManholeAction();
               piVar18 = g_lmapScene;
               temp_v32 = piVar18[1];
               piVar18[1] = temp_v32 + 1;
@@ -2452,7 +2452,7 @@ LAB_003270bc:
               FUN_00233e10(1,DAT_005f16ac);
               FUN_001bc124();
               FUN_001bbf0c();
-              FUN_00245e38();
+              mapIfSpawnCaveAction();
               temp_v32 = g_lmapScene[1];
               piVar18 = g_lmapScene;
               piVar18[1] = temp_v32 + 1;

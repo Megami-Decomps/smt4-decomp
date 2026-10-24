@@ -1,34 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031d49c` (_code @ 0x31d49c, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register numbering and constant-pool order only */
+/* Recomputes the map's remaining entry budget: the limit minus the entries in use (a third of the active, slot and map
+ * object counts plus the deferred models), never below the minimum. */
+#include "common.h"
 
 extern "C" {
+/* The map's budget limits. */
+struct MapBudget {
+    /* 0x00 */ u8 unk00[0x7A];
+    /* 0x7A */ s16 limit;
+    /* 0x7C */ s16 minimum;
+};
 
-extern int g_deferredMapModels; /* 0x447e58 */
-extern int g_mapObj; /* 0x447e70 */
-extern int g_mapStateSlots; /* 0x44cd88 */
-extern int DAT_0049fae0; /* 0x49fae0 */
-extern short DAT_0049fb96; /* 0x49fb96 */
-extern short DAT_0049fb98; /* 0x49fb98 */
+struct CountedBlock {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s32 count;
+};
 
-extern int mapCountActiveEntries(void);
+struct DeferredModels {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ s32 count;
+};
 
+/* The game state field that receives the budget. */
+struct BudgetState {
+    /* 0x000 */ u8 unk000[0x1C4];
+    /* 0x1C4 */ s32 entryBudget;
+};
+
+extern MapBudget DAT_0049fb1c;
+extern CountedBlock *g_mapStateSlots;
+extern CountedBlock *g_mapObj;
+extern DeferredModels *g_deferredMapModels;
+extern BudgetState g_gameState;
+s32 mapCountActiveEntries(void);
 
 void FUN_0031d49c(void)
-
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = (int)DAT_0049fb96;
-  temp_v0 = mapCountActiveEntries();
-  DAT_0049fae0 = temp_v1 - (*(int *)(g_deferredMapModels + 8) +
-                         (temp_v0 + *(int *)(g_mapStateSlots + 0x10) + *(int *)(g_mapObj + 0x10)) / 3
-                         );
-  if (DAT_0049fae0 < DAT_0049fb98) {
-    DAT_0049fae0 = (int)DAT_0049fb98;
-  }
-  return;
-}
+    s32 limit = DAT_0049fb1c.limit;
+    s32 budget = limit - (g_deferredMapModels->count +
+                          (mapCountActiveEntries() + g_mapStateSlots->count + g_mapObj->count) / 3);
 
-} /* extern "C" */
+    if (budget < DAT_0049fb1c.minimum) {
+        budget = DAT_0049fb1c.minimum;
+    }
+    g_gameState.entryBudget = budget;
+}
+}

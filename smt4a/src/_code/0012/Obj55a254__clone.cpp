@@ -12,7 +12,7 @@ extern unsigned char DAT_00559534; /* 0x559534 */
 extern unsigned char DAT_0055a25c; /* 0x55a25c */
 
 /* Supplied declaration required: FUN_00119ee6. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int _ZN9Obj55aff4C1Ev(unsigned int *);
 /* Supplied declaration required: FUN_002f76ca. */
 extern unsigned int *FUN_002fb018(void);
@@ -28,7 +28,7 @@ Obj55a254 *Obj55a254::clone()
   int temp_v0;
   unsigned int *puVar2;
   
-  temp_v0 = operatorNew(0x1c);
+  temp_v0 = _Znwj(0x1c);
   if (temp_v0 != 0) {
     puVar2 = (unsigned int *)FUN_002fb018();
     *puVar2 = (unsigned int)&DAT_0055a25c;

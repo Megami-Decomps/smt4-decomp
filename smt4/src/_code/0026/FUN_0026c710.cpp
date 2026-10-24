@@ -1,36 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026c710` (_code @ 0x26c710, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00232b68(int, int, int, int, int);
-int FUN_00250d84(int, int);
-int dataTable08Sub1GetRecord(void);
+struct Table08Record {
+    /* 0x00 */ u8 unk00[0x6e];
+    /* 0x6e */ u8 flags;
+};
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
+Table08Record *dataTable08Sub1GetRecord(s32 id);
+s32 FUN_00232b68(s32 owner, Table08Record *record, s32 flag, s32 arg3, s32 arg4);
+void FUN_00250d84(s32 id, s32 flag);
 
-/* Supplied declaration required: FUN_00232b68. */
-/* Supplied declaration required: FUN_00250d84. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
-
-
-void FUN_0026c710(int param_1,int param_2,int param_3)
-
+/* Applies the table-08 record `id` to `owner`; returns 1 when the record is missing, otherwise the apply result (and queues FUN_00250d84 for a plain no-op apply). */
+s32 FUN_0026c710(s32 owner, s32 id, s32 flag)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = param_2;
-  dataTable08Sub1GetRecord();
-  if (((temp_v0 != 0) && (FUN_00232b68(param_1,temp_v0,param_3,0,0), param_1 == 0 && param_3 == 0)) &&
-     ((*(unsigned char *)(temp_v0 + 0x6e) & 1) == 0)) {
-    FUN_00250d84(param_2,1);
-  }
-  return;
+    Table08Record *record = dataTable08Sub1GetRecord(id);
+    s32 result;
+
+    if (record == NULL) {
+        return 1;
+    }
+    result = FUN_00232b68(owner, record, flag, 0, 0);
+    if (result == 0) {
+        if (flag == 0 && (record->flags & 1) == 0) {
+            FUN_00250d84(id, 1);
+        }
+    }
+    return result;
 }
 
 } /* extern "C" */

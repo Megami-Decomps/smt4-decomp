@@ -1,31 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016e800` (_code @ 0x16e800, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail moves key to r2 and uses r0 as the record base with separate stores for key/address; armcc builds the base in r2 and pairs them into strd */
+/* Records a failed check (a key and the address it was detected at) in the global fault record, then runs the fault handler. */
+#include "common.h"
 
 extern "C" {
+struct FaultRecord {
+    /* 0x00 */ u8 unk00;
+    /* 0x01 */ u8 unk01;
+    /* 0x02 */ u16 code;
+    /* 0x04 */ u32 key;
+    /* 0x08 */ u32 address;
+};
+extern FaultRecord DAT_0062d200;
+void FUN_00189a80(void);
 
-int FUN_00189a80(void);
-
-extern unsigned char DAT_0062d200; /* 0x62d200 */
-extern unsigned char DAT_0062d201; /* 0x62d201 */
-extern unsigned short DAT_0062d202; /* 0x62d202 */
-extern unsigned int DAT_0062d204; /* 0x62d204 */
-extern unsigned int DAT_0062d208; /* 0x62d208 */
-
-/* Supplied declaration required: FUN_00189a80. */
-
-
-void FUN_0016e800(unsigned int param_1,unsigned int param_2)
-
+void FUN_0016e800(u32 key, u32 address)
 {
-/* irregular: 1 native warning(s); review required */
-  DAT_0062d201 = 0;
-  DAT_0062d202 = 0xedac;
-  DAT_0062d200 = 0;
-  DAT_0062d204 = param_1;
-  DAT_0062d208 = param_2;
-  FUN_00189a80();
-  return;
+    DAT_0062d200.unk01 = 0;
+    DAT_0062d200.code = 0xEDAC;
+    DAT_0062d200.unk00 = 0;
+    DAT_0062d200.address = address;
+    DAT_0062d200.key = key;
+    FUN_00189a80();
 }
-
-} /* extern "C" */
+}

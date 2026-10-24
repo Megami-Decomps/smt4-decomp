@@ -14,7 +14,7 @@ int FUN_0029e874(...);
 int asdTMTexTableLoadEntryAsync(int, int);
 int timerStart(...);
 int FUN_002bd954(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int paramsInit(...);
 int memClear(int, int);
 int FUN_002eb76c(...);
@@ -46,7 +46,7 @@ extern int gameGetUnitRecord(void);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002eb76c. */
@@ -130,7 +130,7 @@ void FUN_003b7b58(int param_1)
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 6);
   FUN_002bd954(param_1 + 0x3f4,0x28,0,param_1,1);
-  FUN_002bee58(param_1 + 0x3f4,4);
+  spriteStartAnimationByIndex(param_1 + 0x3f4,4);
   FUN_002bd954(param_1 + 0x480,0x28,0,param_1,1);
   timerStart(param_1 + 0x480,2,0);
   FUN_002bd954(param_1 + 0x50c,0x28,0,param_1,1);
@@ -141,12 +141,12 @@ void FUN_003b7b58(int param_1)
   FUN_002eb76c(param_1 + 0x624,0);
   FUN_002bd954(param_1 + 0x6b0,0x28,1000,param_1,0x65);
   FUN_002bd954(param_1 + 0x73c,0x28,1000,param_1,0x65);
-  FUN_002bee58(param_1 + 0x73c,5);
+  spriteStartAnimationByIndex(param_1 + 0x73c,5);
   temp_v1 = 0;
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c + 0x7c8;
     FUN_002bd954(temp_v2,0x28,0,param_1,1);
-    FUN_002bee58(temp_v2,0);
+    spriteStartAnimationByIndex(temp_v2,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x10);
   temp_v1 = 0;
@@ -170,7 +170,7 @@ void FUN_003b7b58(int param_1)
     do {
       temp_v0 = param_1 + (temp_v1 * 7 + temp_v2 + 0x1e) * 0x8c;
       FUN_002bd954(temp_v0 + 0x20,0xd,0x80c,param_1,0x97);
-      FUN_002bee58(temp_v0 + 0x20,1);
+      spriteStartAnimationByIndex(temp_v0 + 0x20,1);
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 7);
     temp_v1 = temp_v1 + 1;
@@ -179,9 +179,9 @@ void FUN_003b7b58(int param_1)
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c;
     FUN_002bd954(temp_v2 + 0x2d84,0x28,0x3e,param_1,0x6a);
-    FUN_002bee58(temp_v2 + 0x2d84,8);
+    spriteStartAnimationByIndex(temp_v2 + 0x2d84,8);
     FUN_002bd954(temp_v2 + 0x3158,0x28,0x119,param_1,0xf1);
-    FUN_002bee58(temp_v2 + 0x3158,9);
+    spriteStartAnimationByIndex(temp_v2 + 0x3158,9);
     *(unsigned short *)(temp_v2 + 0x3192) = 2;
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 6);

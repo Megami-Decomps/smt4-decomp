@@ -1,77 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00362584` (_code @ 0x362584, 0x108 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: layout and instruction sequence match; only register numbering differs: retail keeps &g_effectEditor in r7, the dir literal in r6 and the locals' base in r5 (loading &g_effectEditor and the result before allocating the frame) and reads the node state through r0, so it reloads the label before the inlined `mov r0, #0` stub; this build uses r6/r5/r7 and r1 and omits that reload. */
+#include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {
+extern char DAT_00634c50[0x50];
+void engineFreeCallback(void* memory);
+void FUN_00375ec8(EffMenuNode* node);
+void namedObjectFormatFullName(EffMenuNode* node, char* dest);
+void namedObjectFormatName(EffMenuNode* node, char* dest);
+char* libc_strcpy(char* dest, const char* src);
+void textFormatBuffer(char* dest, const char* format, ...);
+__weak void FUN_00362584_hook(void* list, const char* path);
+s32 FUN_0036d12c(EffMenuNode* node, const char* dir); // platform stub: `mov r0, #0; bx lr`
 
-int textFormatBuffer(unsigned char [100], unsigned char *, unsigned char *, unsigned char [50]);
-int libc_strcpy(unsigned char *, unsigned char [50]);
-int namedObjectFormatFullName(unsigned int *, unsigned char [50]);
-int FUN_00375ec8(void);
-int namedObjectFormatName(unsigned int *, unsigned char [50]);
-int effMenuNodeCreate(void);
+struct EffectEditorNameResult {
+    char fullName[50];
+    char name[50];
+    s32 state;
+};
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp7C; /* 0x7c: local_7c */
-} void_stack;
-
-extern unsigned char LAB_00362694; /* 0x362694 */
-extern unsigned char LAB_003626a4; /* 0x3626a4 */
-extern unsigned char LAB_003626b0; /* 0x3626b0 */
-extern unsigned char LAB_00400001; /* 0x400001 */
-extern unsigned char LAB_00400002; /* 0x400002 */
-extern int DAT_0059dbf4; /* 0x59dbf4 */
-extern unsigned int *DAT_0059dc28; /* 0x59dc28 */
-extern unsigned char DAT_00634c50; /* 0x634c50 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: namedObjectFormatFullName. */
-/* Supplied declaration required: FUN_00375ec8. */
-/* Supplied declaration required: namedObjectFormatName. */
-/* Supplied declaration required: effMenuNodeCreate. */
-
-
-/* WARNING: Removing unreachable block (ram,0x00362620) */
-
-unsigned char * FUN_00362584(void)
-
+// Polls the effect editor's .EPL name-entry node: creates it on the first call, and once the
+// name is confirmed (state 1) saves it, registers the chosen name and reports 0x400002;
+// state 2 (cancel) reports 0x400000, anything else 0x400001 (still editing).
+u32 FUN_00362584(void)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  unsigned char temp_v0 [50];
-  unsigned char temp_v1 [50];
-  int temp_v2;
-  unsigned char temp_v3 [100];
-  
-  puVar2 = &LAB_00400001;
-  if (DAT_0059dc28 != (unsigned int *)0x0) {
-    FUN_00375ec8();
-    namedObjectFormatFullName(DAT_0059dc28,temp_v0);
-    namedObjectFormatName(DAT_0059dc28,temp_v1);
-    temp_v2 = DAT_0059dc28[2];
-    if (temp_v2 == 1) {
-      return puVar2;
+    const char* dir = "effect_editor/";
+    const char* ext = ".EPL";
+    u32 result = 0x400001;
+    EffectEditorNameResult input;
+    char path[100];
+    if (g_effectEditor.label == NULL) {
+        g_effectEditor.label = effMenuNodeCreate(ext);
+        g_effectEditor.label->initialKind = 182;
+        g_effectEditor.label->unk04 = 100;
+    } else {
+        FUN_00375ec8(g_effectEditor.label);
+        namedObjectFormatFullName(g_effectEditor.label, input.fullName);
+        namedObjectFormatName(g_effectEditor.label, input.name);
+        input.state = g_effectEditor.label->unk08;
+        if (input.state == 1) {
+            if (FUN_0036d12c(g_effectEditor.label, dir)) {
+                engineFreeCallback(g_effectEditor.label);
+                g_effectEditor.label = NULL;
+            } else {
+                input.state = 0;
+            }
+        }
     }
-  }
-  else {
-    puVar1 = (unsigned int *)&LAB_003626a4;
-    effMenuNodeCreate();
-    DAT_0059dc28 = puVar1;
-    *puVar1 = 0xb6;
-    puVar1[1] = 100;
-  }
-  if (temp_v2 == 2) {
-    puVar2 = (unsigned char *)0x400000;
-  }
-  else if ((temp_v2 == 1) && (DAT_0059dbf4 != 0)) {
-    libc_strcpy(&DAT_00634c50,temp_v1);
-    textFormatBuffer(temp_v3,&LAB_003626b0,&LAB_00362694,temp_v0);
-    puVar2 = &LAB_00400002;
-  }
-  return puVar2;
+    if (input.state == 2) {
+        result = 0x400000;
+    } else if (input.state == 1 && g_effectEditor.selection.list != NULL) {
+        libc_strcpy(DAT_00634c50, input.name);
+        textFormatBuffer(path, "%s%s", "effect_editor/", input.fullName);
+        FUN_00362584_hook(g_effectEditor.selection.list, path);
+        result = 0x400002;
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

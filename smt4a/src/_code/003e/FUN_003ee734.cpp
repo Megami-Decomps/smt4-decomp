@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0034a290(void);
+int dataTable41FindById(void);
 int playerGetWords(unsigned short [30], int);
 int FUN_003e0064(int);
 int playerSetClampedValue(int);
@@ -34,7 +34,7 @@ extern unsigned int recordGetScaledMaximum(int);
 extern int gameGetPlayerData(void);
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_0034a290. */
+/* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: playerGetWords. */
 extern short FUN_003e0024(void);
 extern short FUN_003e0034(void);
@@ -90,7 +90,7 @@ void FUN_003ee734(int param_1)
     temp_v6 = 0;
     do {
       temp_v2 = (unsigned int)temp_v19[temp_v6];
-      if ((temp_v2 != 0) && (FUN_0034a290(), temp_v2 != 0)) {
+      if ((temp_v2 != 0) && (dataTable41FindById(), temp_v2 != 0)) {
         switch((*(unsigned int *)(temp_v2 + 0x44) & 0x1f) >> 2) {
         case 1:
           temp_v10 = temp_v10 + temp_v13;
@@ -164,7 +164,7 @@ void FUN_003ee734(int param_1)
           temp_v7 = 0;
           do {
             temp_v5 = (unsigned int)temp_v19[temp_v7];
-            if ((temp_v5 != 0) && (FUN_0034a290(), temp_v5 != 0)) {
+            if ((temp_v5 != 0) && (dataTable41FindById(), temp_v5 != 0)) {
               switch((*(unsigned int *)(temp_v5 + 0x44) & 0x1f) >> 2) {
               case 1:
                 temp_v9 = temp_v9 + temp_v13;

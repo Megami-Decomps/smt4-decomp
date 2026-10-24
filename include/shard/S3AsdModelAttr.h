@@ -69,4 +69,16 @@ typedef struct AsdModelAttrModel {
     /* 0x0A0 */ AsdModelAttrRecords records;
 } AsdModelAttrModel;
 
+/* The container count followed by the record array. */
+typedef struct AsdModelAttrSet {
+    /* 0x00 */ AsdModelAttrContainers containers;
+    /* 0x04 */ AsdModelAttrRecords records;
+} AsdModelAttrSet;
+
+/* The model variant whose records follow the container count directly. */
+typedef struct AsdModelAttrModelB {
+    /* 0x000 */ u8 unk000[0x94];
+    /* 0x094 */ AsdModelAttrSet attr;
+} AsdModelAttrModelB;
+
 #endif

@@ -17,6 +17,8 @@ __weak void asdDebugHookPtrInt(const void *object, int value);
 __weak void asdDebugHookWords3(u32 first, u32 second, u32 third);
 /* Hooks whose result is the object they were given (a constructor returning `this`). */
 __weak void *asdDebugHookPass(void *object);
+/* Formatted debug output: a level, a wide format string and its arguments (doubles go on the stack). */
+__weak void asdDebugPrint(s32 level, const wchar_t *format, ...);
 
 #ifdef __cplusplus
 }

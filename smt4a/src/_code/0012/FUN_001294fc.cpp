@@ -5,15 +5,15 @@
 extern "C" {
 
 int __aeabi_vec_ctor_nocookie_nodtor(...);
-int FUN_004325f4(...);
+int _ZN9Obj559020C1ERKS_(...);
 
-extern int FUN_0030cbf0(...); /* 0x30cbf0 */
+extern int _ZN9Obj559020C1Ev(...); /* 0x30cbf0 */
 extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
 extern unsigned int rt_malloc(int);
 extern unsigned int *operatorNewArray(unsigned int);
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-/* Supplied declaration required: FUN_004325f4. */
+/* Supplied declaration required: _ZN9Obj559020C1ERKS_. */
 
 
 void FUN_001294fc(int param_1)
@@ -29,14 +29,14 @@ void FUN_001294fc(int param_1)
      (puVar1 = (unsigned int *)operatorNewArray(0xffffff30), puVar1 != (unsigned int *)0x0)) {
     puVar1[1] = 0xffffffff;
     *puVar1 = 0xd8;
-    __aeabi_vec_ctor_nocookie_nodtor(puVar1 + 2,FUN_0030cbf0,0xd8,0xffffffff);
+    __aeabi_vec_ctor_nocookie_nodtor(puVar1 + 2,_ZN9Obj559020C1Ev,0xd8,0xffffffff);
   }
   temp_v0 = rt_malloc((*(unsigned int *)((unsigned char *)&DAT_005949d8 + 0x28)) * 0xd8);
   *(unsigned int *)(param_1 + 8) = temp_v0;
   for (temp_v2 = 0; temp_v2 < (*(unsigned int *)((unsigned char *)&DAT_005949d8 + 0x28)); temp_v2 = temp_v2 + 1) {
     temp_v1 = *(int *)(param_1 + 8) + temp_v2 * 0xd8;
     if (temp_v1 != 0) {
-      FUN_004325f4(temp_v1,param_1 + 0xe8);
+      _ZN9Obj559020C1ERKS_(temp_v1,param_1 + 0xe8);
     }
   }
   return;

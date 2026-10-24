@@ -1,33 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f1138` (_code @ 0x3f1138, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the entry's two mask words separately (ldr/ldr, found entry recomputed after the loop) rather than with ldm; register allocation differs. */
+#include "shard/W5_W5Match7_BattleMask.h"
+#include "shard/BattleFlagMasks.h"
+
+struct EntryWords {
+    u64 mask; // 0x00
+    u8 unk08[0x400];
+};
+
+struct EntryTable {
+    u8 unk0000[0x1ffc];
+    EntryWords *entries; // 0x1ffc
+};
 
 extern "C" {
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern unsigned int DAT_00573978; /* 0x573978 */
-extern unsigned int DAT_0057397c; /* 0x57397c */
-
-
-int FUN_003f1138(int param_1)
-
+// Find the first free combatant entry from slot 4 up to slot 53 (NULL when all are taken).
+EntryWords *FUN_003f1138(EntryTable *table)
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  temp_v0 = 4;
-  do {
-    puVar2 = (unsigned int *)(*(int *)(param_1 + 0x1ffc) + temp_v0 * 0x408);
-    if ((puVar2[1] & DAT_0057397c) == 0 && (*puVar2 & DAT_00573978) == 0) {
-      return *(int *)(param_1 + 0x1ffc) + temp_v0 * 0x408;
-    }
-    temp_v0 = (int)(short)((short)temp_v0 + 1);
-  } while (temp_v0 < 0x36);
-  return 0;
+    EntryWords *found = NULL;
+    s16 index = 4;
+    do {
+        EntryWords *entry = &table->entries[index];
+        if ((entry->mask & g_btlMain.entryMask) == 0) {
+            found = entry;
+            break;
+        }
+        index++;
+    } while (index < 54);
+    return found;
 }
 
 } /* extern "C" */

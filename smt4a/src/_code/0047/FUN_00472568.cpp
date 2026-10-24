@@ -1,107 +1,105 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00472568` (_code @ 0x472568, 0x2b0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the build hoists the constant 1 and orders the state stores differently from retail (retail shares one `str r0,[r4,#8]` between states 1 and 3). */
+#include "common.h"
+#include <stddef.h>
+
+/* One sprite object of the job's work block (0x8C bytes). */
+struct JobSprite {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ u8 visible;
+    /* 0x3D */ u8 unk3D[0x4D];
+    /* 0x8A */ s8 finished; /* the sprite's animation has ended */
+    /* 0x8B */ u8 unk8B;
+};
+
+/* The job's work block: a frame counter, a state and three sprites. */
+struct SpriteJobWork {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[4];
+    /* 0x008 */ u32 state;
+    /* 0x00C */ u8 unk00C[4];
+    /* 0x010 */ s32 variant;
+    /* 0x014 */ u8 unk014[0x404];
+    /* 0x418 */ u32 frame;
+    /* 0x41C */ u8 unk41C[4];
+    /* 0x420 */ u8 shared[0x20];
+    /* 0x440 */ JobSprite first;
+    /* 0x4CC */ JobSprite middle;
+    /* 0x558 */ JobSprite last;
+};
+typedef char SpriteJobWorkOffsets[
+    offsetof(SpriteJobWork, frame) == 0x418 && offsetof(SpriteJobWork, first) == 0x440 &&
+    offsetof(SpriteJobWork, middle) == 0x4CC && offsetof(SpriteJobWork, last) == 0x558 &&
+    sizeof(JobSprite) == 0x8C ? 1 : -1];
 
 extern "C" {
+SpriteJobWork *jobGetWork(void);
+void FUN_0014e188(JobSprite *sprite, s32 mode, u32 id, void *shared, s32 priority, f32 scale);
+void FUN_00163aa4(JobSprite *sprite, f32 delta);
+void pairSetSecondResetFirst(JobSprite *sprite, u32 second);
+void pairSetFirstResetSecond(JobSprite *sprite, u32 first);
+void uiSpriteSelectAnim(JobSprite *sprite, s32 group);
+void FUN_00387240(JobSprite *sprite, s32 mode, s32 id);
+s8 recordGetSignedFlags(const JobSprite *sprite);
+void spriteSetVisible(JobSprite *sprite, u8 visible);
 
-int FUN_0014e188(unsigned int *, int, unsigned int, unsigned int *, int);
-int FUN_00163aa4(...);
-int pairSetSecondResetFirst(...);
-int uiSpriteSelectAnim(...);
-int pairSetFirstResetSecond(...);
-int FUN_00387240(...);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int *jobGetWork(void);
-/* Supplied declaration required: pairSetSecondResetFirst. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: pairSetFirstResetSecond. */
-/* Supplied declaration required: FUN_00387240. */
-
-
-unsigned int FUN_00472568(void)
-
+/* Advances the three-sprite banner: builds the sprites, plays them until the first one finishes, then ends. */
+u32 FUN_00472568(void)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  unsigned int *puVar4;
-  unsigned int temp_v1;
-  
-  puVar2 = (unsigned int *)jobGetWork();
-  temp_v0 = (puVar2[0x106] + 1) * -0x33333333;
-  temp_v1 = (puVar2[0x106] + 1) % 0x28;
-  puVar2[0x106] = temp_v1;
-  switch(puVar2[2]) {
-  case 0:
-    *puVar2 = *puVar2 & 0xffffffdf;
-    puVar2[2] = 1;
-    FUN_0014e188(puVar2 + 0x110,8,0xffffffff,puVar2 + 0x108,0xb);
-    puVar3 = puVar2 + 0x133;
-    FUN_0014e188(puVar3,8,0xffffffff,puVar2 + 0x108,0xb);
-    puVar4 = puVar2 + 0x156;
-    FUN_0014e188(puVar4,8,0xffffffff,puVar2 + 0x108,0xb);
-    if ((int)puVar2[4] < 5) {
-      pairSetSecondResetFirst(puVar2 + 0x110,6);
-      uiSpriteSelectAnim(puVar2 + 0x110,3);
-      FUN_00387240(puVar2 + 0x110,8,0x36);
-      pairSetSecondResetFirst(puVar4,7);
-      uiSpriteSelectAnim(puVar4,3);
-      FUN_00387240(puVar4,8,0x36);
+    SpriteJobWork *work = jobGetWork();
+    work->frame = (work->frame + 1) % 40;
+    switch (work->state) {
+    case 0:
+        work->flags &= ~0x20u;
+        work->state = 1;
+        FUN_0014e188(&work->first, 8, 0xFFFFFFFF, work->shared, 11, 1.0f);
+        FUN_0014e188(&work->middle, 8, 0xFFFFFFFF, work->shared, 11, 1.0f);
+        FUN_0014e188(&work->last, 8, 0xFFFFFFFF, work->shared, 11, 1.0f);
+        if (work->variant <= 4) {
+            pairSetSecondResetFirst(&work->first, 6);
+            uiSpriteSelectAnim(&work->first, 3);
+            FUN_00387240(&work->first, 8, 54);
+            pairSetSecondResetFirst(&work->last, 7);
+            uiSpriteSelectAnim(&work->last, 3);
+            FUN_00387240(&work->last, 8, 54);
+        } else {
+            pairSetSecondResetFirst(&work->first, 4);
+            uiSpriteSelectAnim(&work->first, 3);
+            FUN_00387240(&work->first, 8, 34);
+            pairSetSecondResetFirst(&work->last, 5);
+            uiSpriteSelectAnim(&work->last, 3);
+            FUN_00387240(&work->last, 8, 34);
+        }
+        spriteSetVisible(&work->first, 1);
+        spriteSetVisible(&work->last, 1);
+        pairSetFirstResetSecond(&work->middle, 7);
+        uiSpriteSelectAnim(&work->middle, 4);
+        FUN_00387240(&work->middle, 8, 71);
+        FUN_00163aa4(&work->first, 1.0f);
+        break;
+    case 1:
+        FUN_00163aa4(&work->first, 1.0f);
+        FUN_00163aa4(&work->last, 1.0f);
+        if (recordGetSignedFlags(&work->first) != 0) {
+            work->flags |= 0x20;
+            work->state = 2;
+        }
+        break;
+    case 2:
+        FUN_00163aa4(&work->first, 1.0f);
+        FUN_00163aa4(&work->last, 1.0f);
+        FUN_00163aa4(&work->middle, 1.0f);
+        break;
+    case 3:
+        FUN_00163aa4(&work->first, 1.0f);
+        FUN_00163aa4(&work->last, 1.0f);
+        if (recordGetSignedFlags(&work->first) != 0)
+            work->state = 4;
+        break;
+    case 4:
+        work->flags &= ~0x30u;
+        break;
     }
-    else {
-      pairSetSecondResetFirst(puVar2 + 0x110,4);
-      uiSpriteSelectAnim(puVar2 + 0x110,3);
-      FUN_00387240(puVar2 + 0x110,8,0x22);
-      pairSetSecondResetFirst(puVar4,5);
-      uiSpriteSelectAnim(puVar4,3);
-      FUN_00387240(puVar4,8,0x22);
-    }
-    *(unsigned char *)(puVar2 + 0x11f) = 1;
-    *(unsigned char *)(puVar2 + 0x165) = 1;
-    pairSetFirstResetSecond(puVar3,7);
-    uiSpriteSelectAnim(puVar3,4);
-    FUN_00387240(puVar3,8,0x47);
-    puVar2 = puVar2 + 0x110;
-    break;
-  case 1:
-    FUN_00163aa4(puVar2 + 0x110,temp_v1,temp_v0);
-    FUN_00163aa4(puVar2 + 0x156);
-    if (*(char *)((int)puVar2 + 0x4ca) == '\0') {
-      return 0;
-    }
-    *puVar2 = *puVar2 | 0x20;
-    temp_v1 = 2;
-    puVar2[2] = temp_v1;
     return 0;
-  case 2:
-    FUN_00163aa4(puVar2 + 0x110,temp_v1,temp_v0);
-    FUN_00163aa4(puVar2 + 0x156);
-    puVar2 = puVar2 + 0x133;
-    break;
-  case 3:
-    FUN_00163aa4(puVar2 + 0x110,temp_v1,temp_v0);
-    FUN_00163aa4(puVar2 + 0x156);
-    if (*(char *)((int)puVar2 + 0x4ca) == '\0') {
-      return 0;
-    }
-    temp_v1 = 4;
-    puVar2[2] = temp_v1;
-    return 0;
-  case 4:
-    *puVar2 = *puVar2 & 0xffffffcf;
-  default:
-    return 0;
-  }
-  FUN_00163aa4(puVar2);
-  return 0;
 }
 
 } /* extern "C" */

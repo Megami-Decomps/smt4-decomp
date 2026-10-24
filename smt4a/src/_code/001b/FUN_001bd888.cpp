@@ -1,5 +1,6 @@
-/* NON_MATCHING: the data barrier (mcr p15, 0, r7, c7, c10, 4), the system-tick svc and the 64-bit arithmetic through them are inline-asm-only (declared here as functions) */
+/* NON_MATCHING: svc 0x28 (svcGetSystemTick) and the data synchronization barrier (mcr c7, c10, 4 via nn/svc.h) now match; armcc hoists the aux-callback array addresses and keeps different locals (push list r4-fp vs retail r4-r9). */
 #include "shard/S1SndThread.h"
+#include "nn/svc.h"
 
 extern "C" {
 
@@ -13,8 +14,6 @@ void FUN_001c7598(u64 *elapsed);
 void FUN_001cd5ac(void);
 void FUN_001c76b8(void);
 void nn_snd_CTR_MasterManager_GetAuxCallback(void *manager, s32 bus, u32 *callback, u8 *unused);
-u64 nn_svc_GetSystemTick(void);              /* svc 0x28 */
-void nn_dataSynchronizationBarrier(void);   /* mcr p15, 0, rd, c7, c10, 4 */
 
 /* The sound thread loop: each pass runs the aux callbacks, the registered callbacks and the mixer
  * step, timing the pass when profiling is enabled, until the thread is told to stop. */
@@ -27,7 +26,7 @@ void FUN_001bd888(SndThread *thread, void *arg)
 
         if (thread->profiling) {
             FUN_001c7598(&elapsed);
-            startTick = nn_svc_GetSystemTick();
+            startTick = svcGetSystemTick();
         } else {
             FUN_001cd5ac();
         }
@@ -48,7 +47,7 @@ void FUN_001bd888(SndThread *thread, void *arg)
         bool signalAux = auxEnabled & (auxPending | hasPreCallback);
 
         if (signalAux) {
-            nn_dataSynchronizationBarrier();
+            nn::os::DataSynchronizationBarrier();
             nn_os_LightEvent_Signal(&thread->auxEvent);
         }
         if (!thread->skipPreCallback && thread->preCallback != NULL) {
@@ -68,7 +67,7 @@ void FUN_001bd888(SndThread *thread, void *arg)
         nn_os_CriticalSection_Leave(&thread->lock);
 
         if (thread->profiling) {
-            thread->workTicks = elapsed + (nn_svc_GetSystemTick() - startTick);
+            thread->workTicks = elapsed + (svcGetSystemTick() - startTick);
         }
     } while (thread->running);
 }

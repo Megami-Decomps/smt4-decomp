@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00122070(...);
 int onlineContextGetInstance(...);
-int FUN_002e7908(...);
-int vectorCopyHeader(...);
+int _ZN12OnlineResultC1ERKj(...);
+int _ZN18OnlineResultRecordaSERKS_(...);
 int FUN_002e9d28(...);
 int FUN_002e9d6c(...);
 int FUN_002e9d98(...);
@@ -32,8 +32,8 @@ extern unsigned char LAB_00122ea4; /* 0x122ea4 */
 #endif
 /* Supplied declaration required: FUN_00122070. */
 /* Supplied declaration required: onlineContextGetInstance. */
-/* Supplied declaration required: FUN_002e7908. */
-/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: FUN_002e9d28. */
 /* Supplied declaration required: FUN_002e9d6c. */
 /* Supplied declaration required: FUN_002e9d98. */
@@ -76,11 +76,11 @@ FUN_00122ddc(int param_1,unsigned int param_2,romwright_code *param_3,unsigned i
                    ,0xa8,0xe000001a,0);
       puVar7 = (unsigned int *)&temp_v5;
       temp_v5 = 0x8001000b;
-      piVar5 = (int *)FUN_002e7908(puVar6,puVar7);
+      piVar5 = (int *)_ZN12OnlineResultC1ERKj(puVar6,puVar7);
     }
     else {
       temp_v8 = 0x8001000b;
-      FUN_002e7908(temp_v4,&temp_v8);
+      _ZN12OnlineResultC1ERKj(temp_v4,&temp_v8);
       FUN_002e9d28(temp_v6,10,param_2);
       temp_v7 = 2;
       while (temp_v4[0] < 0) {
@@ -97,8 +97,8 @@ FUN_00122ddc(int param_1,unsigned int param_2,romwright_code *param_3,unsigned i
                          ,0xbe,0xe000000c,0);
             puVar6 = (unsigned int *)temp_v9;
             temp_v3 = 0x8001000b;
-            piVar5 = (int *)FUN_002e7908(puVar6,puVar7);
-            vectorCopyHeader(param_5,piVar5);
+            piVar5 = (int *)_ZN12OnlineResultC1ERKj(puVar6,puVar7);
+            _ZN18OnlineResultRecordaSERKS_(param_5,piVar5);
             temp_v2 = 1;
             return temp_v2;
           }
@@ -109,7 +109,7 @@ FUN_00122ddc(int param_1,unsigned int param_2,romwright_code *param_3,unsigned i
       }
       piVar5 = temp_v4;
     }
-    vectorCopyHeader(param_5,piVar5);
+    _ZN18OnlineResultRecordaSERKS_(param_5,piVar5);
     temp_v2 = 1;
   }
   return temp_v2;

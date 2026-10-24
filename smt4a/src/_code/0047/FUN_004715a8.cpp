@@ -1,76 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004715a8` (_code @ 0x4715a8, 0xc8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reaches entryCount through a pointer kept in r5 (no store-to-load forwarding, count re-read for the vector constructor) and loads g_aocMain before the SD card branch. */
+#include "addon/aocMain.h"
+#include "gamedata/GroupedFileTables.h"
+#include "gamedata/TableEntryCache.h"
 
 extern "C" {
 
-int __aeabi_vec_ctor_nocookie_nodtor(...);
-int asdOperatorNewE(...);
-int asdFsIsSdCardDetected(...);
-int FUN_004701d8(...);
-
-typedef struct fn_004715a8_arg0 fn_004715a8_arg0;
-struct fn_004715a8_arg0 {
-    unsigned char pad_0x0[0x310];
-    undefined4 field_0x310; /* +0x310 */
-    unsigned char pad_0x314[0x4];
-    undefined4 field_0x318; /* +0x318 */
-    unsigned char pad_0x31c[0x128];
-    unsigned char field_0x444; /* +0x444 */
-    unsigned char pad_0x445[0x7];
-    int field_0x44c; /* +0x44c */
+/* The owner of the grouped package files, with the per-package state entries it builds. */
+struct AocPackageStates {
+    /* 0x000 */ GroupedFileTables tables;
+    /* 0x31C */ u8 unk31C[0x444 - sizeof(GroupedFileTables)];
+    /* 0x444 */ s32 entryCount;
+    /* 0x448 */ u8 unk448[4];
+    /* 0x44C */ EntryState *entries;
 };
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+extern AocMain *g_aocMain;
 
-extern int g_aocMain; /* 0x570260 */
+s32 asdFsIsSdCardDetected(void);
+s32 objGetFlagBit16(void);
+void asdOperatorDeleteB(void *block);
+void *asdOperatorNewE(u32 bytes);
+EntryState *__aeabi_vec_ctor_nocookie_nodtor(EntryState *, void (*)(EntryState *), u32 size, u32 count);
+s32 aocCountPackageItemsOfType(AocPackageStates *owner, u32 kind);
+void FUN_004701d8(AocPackageStates *owner, s32 kind, s32 capacity, EntryState *output);
 
-extern int objGetFlagBit16(void);
-extern int asdOperatorDeleteB(void);
-/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-/* Supplied declaration required: asdOperatorNewE. */
-/* Supplied declaration required: asdFsIsSdCardDetected. */
-extern int aocCountPackageItemsOfType(fn_004715a8_arg0 *, unsigned int);
-/* Supplied declaration required: FUN_004701d8. */
-
-
-void FUN_004715a8(fn_004715a8_arg0 *param_1)
-
+/* Rebuilds the state entries for the packages of `kind`, or drops the pending flag when no SD card is present. */
+static __inline void rebuildStates(AocPackageStates *owner, s32 kind)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (param_1->field_0x44c != 0) {
-    temp_v0 = asdOperatorDeleteB();
-    param_1->field_0x44c = 0;
-  }
-  *(unsigned int *)&param_1->field_0x444 = 0;
-  asdFsIsSdCardDetected();
-  if (temp_v0 != 0) {
-    temp_v0 = objGetFlagBit16();
-    if (temp_v0 != 0) {
-      temp_v0 = aocCountPackageItemsOfType(param_1,0x33);
-      *(int *)&param_1->field_0x444 = temp_v0;
-      if (0 < *(int *)&param_1->field_0x444) {
-        temp_v0 = temp_v0 << 4;
-        asdOperatorNewE();
-        if (temp_v0 != 0) {
-          __aeabi_vec_ctor_nocookie_nodtor();
-        }
-        param_1->field_0x44c = temp_v0;
-      }
-      FUN_004701d8(param_1,0x33,*(unsigned int *)&param_1->field_0x444,param_1->field_0x44c);
-      return;
+    if (owner->entries != NULL) {
+        asdOperatorDeleteB(owner->entries);
+        owner->entries = NULL;
     }
-  }
-  else {
-    *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
-  }
-  return;
+    owner->entryCount = 0;
+    if (asdFsIsSdCardDetected() != 0) {
+        if (objGetFlagBit16() != 0) {
+            s32 count = aocCountPackageItemsOfType(owner, kind);
+            owner->entryCount = count;
+            if (owner->entryCount > 0) {
+                EntryState *states = (EntryState *)asdOperatorNewE(count * sizeof(EntryState));
+                if (states != NULL) {
+                    states = __aeabi_vec_ctor_nocookie_nodtor(states, entryStateClear, sizeof(EntryState), owner->entryCount);
+                }
+                owner->entries = states;
+            }
+            FUN_004701d8(owner, kind, owner->entryCount, owner->entries);
+        }
+    } else {
+        g_aocMain->flags &= ~0x10000u;
+    }
+}
+
+/* Rebuilds the state entries for the add-on content packages (kind 0x33). */
+void FUN_004715a8(AocPackageStates *owner)
+{
+    rebuildStates(owner, 0x33);
 }
 
 } /* extern "C" */

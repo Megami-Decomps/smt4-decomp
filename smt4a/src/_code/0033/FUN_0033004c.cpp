@@ -1,56 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033004c` (_code @ 0x33004c, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: close: retail materializes the "not a timeout" test as a bool (movne/moveq/teq) and hoists the zero timeout into the predicated moves before the svc; the build folds the bool into a direct branch. Same as FUN_00137f94. */
+#include "nn/Result.h"
+
+/* The CEC worker process (the part this poll touches). */
+struct CecProcess {
+    /* 0x000 */ u8 unk000[0x90];
+    /* 0x090 */ s32 produced;
+    /* 0x094 */ s32 consumed;
+    /* 0x098 */ u8 unk098[0xc90];
+    /* 0xd28 */ u8 lock[0xc];
+    /* 0xd34 */ u32 thread;
+};
+
+/* True when the result is anything but a timeout (description 0x3fe). */
+static __inline bool notTimeout(s32 result)
+{
+    nnResultFields fields;
+    fields.value = result;
+    bool differs = fields.fields.description != 0x3fe;
+    return differs;
+}
 
 extern "C" {
 
-int FUN_002e3140(void);
-int software_interrupt(int);
+extern CecProcess *g_cecProcess;
 
-extern int g_cecProcess; /* 0x57f390 */
+s32 svcWaitSynchronization1(u32 handle, s64 timeout);
+void FUN_002e3140(s32 result, bool failed);
+bool nn_os_CriticalSection_TryEnter(void *section);
+void nn_os_CriticalSection_Leave(void *section);
 
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002e3140. */
-extern void nn_os_CriticalSection_Leave(unsigned int);
-extern unsigned char nn_os_CriticalSection_TryEnter(unsigned int);
-
-
-unsigned int FUN_0033004c(void)
-
+// Polls the worker: while it still runs (the poll times out) one pending message is consumed and
+// 0 is returned; once it has ended (or never started) all pending messages are drained and 1 is
+// returned.
+u32 FUN_0033004c(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = g_cecProcess;
-  temp_v3 = 0;
-  if (g_cecProcess != 0) {
-    temp_v2 = *(unsigned int *)(g_cecProcess + 0xd34);
-    if (temp_v2 != 0) {
-      software_interrupt(0x24);
-      if ((int)temp_v2 < 0) {
-        FUN_002e3140();
-      }
-      if ((temp_v2 & 0x3ff) == 0x3fe) {
-        temp_v1 = nn_os_CriticalSection_TryEnter(temp_v0 + 0xd28);
-        if (!temp_v1) {
-          return 0;
+    u32 drained = 0;
+    CecProcess *process = g_cecProcess;
+    if (process != NULL) {
+        if (process->thread != 0) {
+            s32 result = svcWaitSynchronization1(process->thread, 0);
+            bool failed = nnResultIsFailure(result);
+            if (failed) {
+                FUN_002e3140(result, failed);
+            }
+            if (notTimeout(result) != 1) {
+                if (!nn_os_CriticalSection_TryEnter(process->lock)) {
+                    return 0;
+                }
+                if (process->produced != process->consumed) {
+                    process->consumed++;
+                }
+                nn_os_CriticalSection_Leave(process->lock);
+                return 0;
+            }
         }
-        if (*(int *)(temp_v0 + 0x90) != *(int *)(temp_v0 + 0x94)) {
-          *(int *)(temp_v0 + 0x94) = *(int *)(temp_v0 + 0x94) + 1;
+        drained = 1;
+        while (process->produced != process->consumed) {
+            process->consumed++;
         }
-        nn_os_CriticalSection_Leave(temp_v0 + 0xd28);
-        return 0;
-      }
     }
-    temp_v3 = 1;
-    while (*(int *)(temp_v0 + 0x90) != *(int *)(temp_v0 + 0x94)) {
-      *(int *)(temp_v0 + 0x94) = *(int *)(temp_v0 + 0x94) + 1;
-    }
-  }
-  return temp_v3;
+    return drained;
 }
 
-} /* extern "C" */
+}

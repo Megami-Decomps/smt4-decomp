@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00152cf8(int, int, int, int, int);
+int uiPointerHitsRect(int, int, int, int, int);
 int sysPlaySe(...);
 int messageSetMode(int);
 int FUN_00215bbc(void);
@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00152cf8. */
+/* Supplied declaration required: uiPointerHitsRect. */
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -53,13 +53,13 @@ unsigned int FUN_00318e84(int param_1)
   temp_v2 = 0;
   temp_v0 = FUN_001834a4(0x2e,0x97);
   temp_v1 = (int)*(short *)(temp_v0 + 8);
-  FUN_00152cf8(temp_v1,(int)*(short *)(temp_v0 + 10),(int)**(short **)(temp_v0 + 0xc),
+  uiPointerHitsRect(temp_v1,(int)*(short *)(temp_v0 + 10),(int)**(short **)(temp_v0 + 0xc),
                (int)(*(short **)(temp_v0 + 0xc))[1],0);
   if (temp_v1 != 0) {
     *(int *)(param_1 + 0x100) = *(int *)(param_1 + 0x100) + 1;
   }
   else {
-    FUN_00152cf8((int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),
+    uiPointerHitsRect((int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),
                  (int)**(short **)(temp_v0 + 0xc),(int)(*(short **)(temp_v0 + 0xc))[1],3);
     *(unsigned int *)(param_1 + 0x100) = 0;
   }

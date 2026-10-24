@@ -1,39 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022afc4` (_code @ 0x22afc4, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00152ed8(int);
-int nodeSetTranslation(unsigned int, int, int);
-int modelSelectionActivate(int, unsigned int, unsigned int);
+struct Vec3 {
+    f32 x, y, z;
+};
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_3_stack;
+struct ModelNode {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ void *node;
+};
 
-/* Supplied declaration required: FUN_00152ed8. */
-/* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: modelSelectionActivate. */
+/* A model controller: a state at 0x10, a follow flag at 0x15, its model at 0x20 and a position that follows a target. */
+struct ModelController {
+    /* 0x0000 */ u8 unk0000[0x10];
+    /* 0x0010 */ u32 state;
+    /* 0x0014 */ u8 selected;
+    /* 0x0015 */ u8 follow;
+    /* 0x0016 */ u8 unk0016[0xA];
+    /* 0x0020 */ ModelNode *model;
+    /* 0x0024 */ u8 unk0024[0x1634];
+    /* 0x1658 */ Vec3 position;
+    /* 0x1664 */ Vec3 target;
+};
 
+void FUN_00152ed8(ModelController *controller);
+void modelSelectionActivate(ModelController *controller, u32 a, u32 b);
+void nodeSetTranslation(void *node, s32 index, Vec3 *translation);
 
-void FUN_0022afc4(int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Activates the model selection and, when following, snaps the node to the target position. */
+void FUN_0022afc4(ModelController *controller, u32 a, u32 b)
 {
-/* irregular: 3 native warning(s); review required */
-  *(unsigned int *)(param_1 + 0x10) = 0;
-  *(unsigned char *)(param_1 + 0x14) = 0;
-  FUN_00152ed8(param_1);
-  modelSelectionActivate(param_1,param_2,param_3);
-  if (*(char *)(param_1 + 0x15) != '\0') {
-    *(unsigned int *)(param_1 + 0x1658) = *(unsigned int *)(param_1 + 0x1664);
-    *(unsigned int *)(param_1 + 0x165c) = *(unsigned int *)(param_1 + 0x1668);
-    *(unsigned int *)(param_1 + 0x1660) = *(unsigned int *)(param_1 + 0x166c);
-    nodeSetTranslation(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8),0,param_1 + 0x1658);
-    return;
-  }
-  return;
+    controller->state = 0;
+    controller->selected = 0;
+    FUN_00152ed8(controller);
+    modelSelectionActivate(controller, a, b);
+    if (controller->follow != 0) {
+        controller->position = controller->target;
+        nodeSetTranslation(controller->model->node, 0, &controller->position);
+    }
 }
 
 } /* extern "C" */

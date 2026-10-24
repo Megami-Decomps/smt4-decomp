@@ -1,41 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004395fc` (_code @ 0x4395fc, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc copies the two incoming stack arguments through VFP (vldm s16-s17) where retail loads them into r4/r6 with ldm; the rest of the call set-up matches */
+/* Forwards a wide-string request (with its length including the terminator) to FUN_004397e4, or fails with the
+ * "service unavailable" result when FUN_00426204 reports the service as not ready. */
+#include "common.h"
 
 extern "C" {
+s32 FUN_00426204(void);
+u32 wstrlen(const u16 *text);
+s32 FUN_004397e4(const u16 *text, u32 length, u32 second, u32 third, u32 fourth, u32 fifth, u32 sixth, u32 seventh);
 
-int FUN_00426204(void);
-int FUN_004397e4(unsigned int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-
-/* stack frame of param_6: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_6_stack;
-
-extern int wstrlen(unsigned int);
-/* Supplied declaration required: FUN_00426204. */
-/* Supplied declaration required: FUN_004397e4. */
-
-
-void FUN_004395fc(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6)
-
+s32 FUN_004395fc(const u16 *text, u32 second, u32 third, u32 fourth, u32 fifth, u32 sixth)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = param_6;
-  temp_v0 = param_5;
-  FUN_00426204();
-  if ((unsigned char *)((unsigned int)__current_sp()) != (unsigned char *)0x0) {
-    temp_v2 = wstrlen(param_1);
-    FUN_004397e4(param_1,temp_v2 + 1,param_2,param_3,param_4,temp_v0,temp_v0,temp_v1);
-  }
-  return;
+    if (FUN_00426204() == 0) {
+        return (s32)0xC8A0D018;
+    }
+    return FUN_004397e4(text, wstrlen(text) + 1, second, third, fourth, fifth, fifth, sixth);
 }
-
-} /* extern "C" */
+}

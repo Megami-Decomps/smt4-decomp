@@ -5,7 +5,7 @@
 extern "C" {
 
 int gameGetSlotTable(void);
-int FUN_0032fea0(int, int);
+int arrayContainsU16(int, int);
 int unitRecordBuild(unsigned int);
 int FUN_0034c340(short [16], int, int, int);
 int findSkillMetadataById(void);
@@ -34,7 +34,7 @@ extern int slotRecordFindById(unsigned int);
 extern int gameGetSlotRecord(int);
 /* Supplied declaration required: gameGetSlotTable. */
 extern int gameSlotTableFindFree(void);
-/* Supplied declaration required: FUN_0032fea0. */
+/* Supplied declaration required: arrayContainsU16. */
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0034c340. */
 /* Supplied declaration required: findSkillMetadataById. */
@@ -162,7 +162,7 @@ LAB_0027069c:
         temp_v4 = 0;
         do {
           if (((temp_v8[temp_v4] != 0) &&
-              (temp_v5 = temp_v0 + 0xecc, FUN_0032fea0(temp_v0 + 0xecc,temp_v3), temp_v5 == 0)) &&
+              (temp_v5 = temp_v0 + 0xecc, arrayContainsU16(temp_v0 + 0xecc,temp_v3), temp_v5 == 0)) &&
              (temp_v5 = 0, 0 < temp_v3)) {
             do {
               if (*(short *)(temp_v0 + temp_v5 * 2 + 0xecc) == 0) {

@@ -11,7 +11,7 @@ int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00185e84(...);
-int FUN_0032fea0(...);
+int arrayContainsU16(...);
 int statDrawClampedDelta(...);
 int FUN_004bd6b0(...);
 int VectorSignedToFloat(...);
@@ -38,7 +38,7 @@ extern unsigned int FUN_0014bd84(unsigned short);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00185e84. */
 extern int resourceRunOperationIfUnblocked(void);
-/* Supplied declaration required: FUN_0032fea0. */
+/* Supplied declaration required: arrayContainsU16. */
 extern int uiSearchPrimary(int);
 /* Supplied declaration required: statDrawClampedDelta. */
 extern unsigned int FUN_004bcbb4(unsigned int, unsigned short);
@@ -112,7 +112,7 @@ void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int p
       }
       else {
         temp_v0 = param_1 + 0x8b60;
-        FUN_0032fea0(temp_v0,8,*(unsigned short *)(param_1 + (temp_v1 + param_2) * 2 + 0x8b70));
+        arrayContainsU16(temp_v0,8,*(unsigned short *)(param_1 + (temp_v1 + param_2) * 2 + 0x8b70));
         if (temp_v0 != 0) {
           temp_v6 = 0x57d8ffff;
         }

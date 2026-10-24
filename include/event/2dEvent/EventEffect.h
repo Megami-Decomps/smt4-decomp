@@ -11,7 +11,18 @@
 typedef struct EventEffectA {
     /* 0x00 */ u32 job;          /* job that runs the effect */
     /* 0x04 */ s32 state;
+    /* 0x08 */ s32 frame;
+    /* 0x0C */ f32 level;        /* pulses between 0 and 0.4 */
+    /* 0x10 */ f32 levelStep;    /* per-frame change of level */
+    /* 0x14 */ u8 stopArmed;     /* a stop frame is pending */
+    /* 0x15 */ u8 unk15[3];
+    /* 0x18 */ s32 stopFrame;    /* frame at which the effect starts fading out */
 } EventEffectA;
+
+typedef char EventEffectALayoutCheck[offsetof(EventEffectA, frame) == 8 &&
+    offsetof(EventEffectA, level) == 0xc &&
+    offsetof(EventEffectA, stopArmed) == 0x14 &&
+    offsetof(EventEffectA, stopFrame) == 0x18 ? 1 : -1];
 
 struct EventFilterTexture {
     /* 0x00 */ u32 table;

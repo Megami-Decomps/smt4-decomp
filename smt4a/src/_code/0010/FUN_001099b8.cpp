@@ -78,7 +78,7 @@ extern unsigned int DAT_00594a24; /* 0x594a24 */
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: strAssign. */
 /* Supplied declaration required: sharedRefAddRef. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int onlineBufferGetData(void);
 extern int FUN_002eac34(unsigned char);
 /* Supplied declaration required: onlineTimeGetNow. */
@@ -192,7 +192,7 @@ int FUN_001099b8(int param_1,int *param_2,unsigned int param_3,unsigned int para
     if (piVar3 != (int *)0x0) {
       temp_v1 = FUN_002eff84(piVar3);
       if (((temp_v1 != 0) && (piVar4 != (int *)0x0)) && (temp_v1 = FUN_002eff84(piVar4), temp_v1 != 0)) {
-        temp_v1 = operatorNew(0x10);
+        temp_v1 = _Znwj(0x10);
         if (temp_v1 != 0) {
           piVar3 = (int *)FUN_002ed258(temp_v1,piVar3);
         }
@@ -200,7 +200,7 @@ int FUN_001099b8(int param_1,int *param_2,unsigned int param_3,unsigned int para
           piVar3 = (int *)0x0;
         }
         sharedRefRelease(piVar3[2]);
-        temp_v1 = operatorNew(0x10);
+        temp_v1 = _Znwj(0x10);
         if (temp_v1 != 0) {
           piVar4 = (int *)FUN_002ed258(temp_v1,piVar4);
         }
@@ -218,14 +218,14 @@ int FUN_001099b8(int param_1,int *param_2,unsigned int param_3,unsigned int para
     temp_v1 = 0;
   }
   else {
-    temp_v1 = operatorNew(0x10);
+    temp_v1 = _Znwj(0x10);
     if (temp_v1 != 0) {
       piVar3 = (int *)FUN_002f2afc();
     }
     else {
       piVar3 = (int *)0x0;
     }
-    temp_v1 = operatorNew(0x10);
+    temp_v1 = _Znwj(0x10);
     if (temp_v1 != 0) {
       piVar4 = (int *)FUN_002f2afc();
     }
@@ -259,7 +259,7 @@ LAB_00109b02:
         piVar5 = piVar3;
         if (((*(char *)(temp_v20 + 0x18) != '\0') && (temp_v1 = FUN_002eb6ae(temp_v3,0x100), temp_v1 != 0)
             ) && (piVar5 = piVar9, piVar9 == (int *)0x0)) {
-          temp_v1 = operatorNew(0x10);
+          temp_v1 = _Znwj(0x10);
           if (temp_v1 != 0) {
             piVar5 = (int *)FUN_002f2afc();
             piVar9 = piVar5;

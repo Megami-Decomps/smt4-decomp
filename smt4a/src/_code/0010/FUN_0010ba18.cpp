@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 extern int wordRefsEqual_002ea42c(int, unsigned int);
 /* Supplied declaration required: onlineJobSetStateTimed. */
 /* Supplied declaration required: FUN_002f5898. */
@@ -37,14 +37,14 @@ void FUN_0010ba18(int param_1)
   
   _ZN9Obj55b28cC1EPv(temp_v2,param_1 + 0x7c);
   temp_v4 = 0x80010001;
-  temp_v0 = FUN_002e7908(temp_v3,(unsigned int *)&temp_v4);
+  temp_v0 = _ZN12OnlineResultC1ERKj(temp_v3,(unsigned int *)&temp_v4);
   temp_v1 = wordRefsEqual_002ea42c(param_1 + 0x6c,temp_v0);
   if (temp_v1 != 0) {
     onlineJobSetStateTimed(param_1,10);
   }
   else {
     temp_v6[0] = 0x80010004;
-    temp_v0 = FUN_002e7908(temp_v5,temp_v6);
+    temp_v0 = _ZN12OnlineResultC1ERKj(temp_v5,temp_v6);
     FUN_002f5898(param_1,temp_v0);
   }
   _ZN9Obj55b28cD1Ev(temp_v2);

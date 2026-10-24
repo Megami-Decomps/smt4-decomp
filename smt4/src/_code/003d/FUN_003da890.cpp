@@ -1,119 +1,79 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003da890` (_code @ 0x3da890, 0x29c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction-for-instruction identical except register numbering (first loop keeps the slot base in r8 in retail, r5 here; idOnly loop swaps r0/r1) */
+#include "common.h"
+#include <stddef.h>
 
 extern "C" {
-
-int asdMemFree(void);
-int memClear(int, int);
-
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: memClear. */
-
-
-void FUN_003da890(int param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  *(unsigned int *)(param_1 + 0x1cfc) = 0;
-  do {
-    temp_v1 = param_1 + temp_v2 * 0x8c;
-    *(unsigned char *)(temp_v1 + 0x1d00) = 0xff;
-    memClear(temp_v1 + 0x1d08,0x80);
-    if (*(int *)(temp_v1 + 0x1d04) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v1 + 0x1d04) = 0;
-    }
-    *(unsigned char *)(temp_v1 + 0x1d88) = 0;
-    *(unsigned char *)(temp_v1 + 0x1f30) = 0xff;
-    memClear(temp_v1 + 0x1f38,0x80);
-    if (*(int *)(temp_v1 + 0x1f34) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v1 + 0x1f34) = 0;
-    }
-    *(unsigned char *)(temp_v1 + 0x1fb8) = 0;
-    *(unsigned char *)(temp_v1 + 0x2160) = 0xff;
-    memClear(temp_v1 + 0x2168,0x80);
-    if (*(int *)(temp_v1 + 0x2164) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v1 + 0x2164) = 0;
-    }
-    *(unsigned char *)(temp_v1 + 0x21e8) = 0;
-    *(unsigned char *)(temp_v1 + 0x2390) = 0xff;
-    memClear(temp_v1 + 0x2398,0x80);
-    if (*(int *)(temp_v1 + 0x2394) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v1 + 0x2394) = 0;
-    }
-    temp_v2 = temp_v2 + 1;
-    *(unsigned char *)(temp_v1 + 0x2418) = 0;
-  } while (temp_v2 < 4);
-  temp_v2 = 0;
-  do {
-    temp_v1 = param_1 + temp_v2 * 0x8c;
-    *(unsigned char *)(temp_v1 + 0x2bc4) = 0xff;
-    memClear(temp_v1 + 0x2bcc,0x80);
-    if (*(int *)(temp_v1 + 0x2bc8) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v1 + 0x2bc8) = 0;
-    }
-    temp_v2 = temp_v2 + 1;
-    *(unsigned char *)(temp_v1 + 0x2c4c) = 0;
-  } while (temp_v2 < 2);
-  temp_v2 = 0;
-  do {
-    temp_v1 = param_1 + temp_v2 * 0x8c;
-    *(unsigned char *)(temp_v1 + 0x2cdc) = 0xff;
-    memClear(temp_v1 + 0x2ce4,0x80);
-    if (*(int *)(temp_v1 + 0x2ce0) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v1 + 0x2ce0) = 0;
-    }
-    temp_v2 = temp_v2 + 1;
-    *(unsigned char *)(temp_v1 + 0x2d64) = 0;
-  } while (temp_v2 < 5);
-  temp_v2 = 0;
-  do {
-    temp_v1 = param_1 + temp_v2 * 0x8c;
-    *(unsigned char *)(temp_v1 + 0x3070) = 0xff;
-    memClear(temp_v1 + 0x3078,0x80);
-    if (*(int *)(temp_v1 + 0x3074) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v1 + 0x3074) = 0;
-    }
-    temp_v2 = temp_v2 + 1;
-    *(unsigned char *)(temp_v1 + 0x30f8) = 0;
-  } while (temp_v2 < 3);
-  *(unsigned char *)(param_1 + 0x2f9c) = 0xff;
-  memClear(param_1 + 0x2fa4,0x80);
-  if (*(int *)(param_1 + 0x2fa0) != 0) {
-    asdMemFree();
-    *(unsigned int *)(param_1 + 0x2fa0) = 0;
-  }
-  *(unsigned char *)(param_1 + 0x3024) = 0;
-  *(unsigned char *)(param_1 + 0x3218) = 0xff;
-  memClear(param_1 + 0x3220,0x80);
-  if (*(int *)(param_1 + 0x321c) != 0) {
-    asdMemFree();
-    *(unsigned int *)(param_1 + 0x321c) = 0;
-  }
-  temp_v2 = 1;
-  *(unsigned char *)(param_1 + 0x32a0) = 0;
-  temp_v1 = 1;
-  *(unsigned char *)(param_1 + 0x25c0) = 0xff;
-  do {
-    temp_v0 = temp_v2 + 1;
-    temp_v1 = temp_v1 + 2;
-    *(unsigned char *)(param_1 + temp_v2 * 0x8c + 0x25c0) = 0xff;
-    temp_v2 = temp_v2 + 2;
-    *(unsigned char *)(param_1 + temp_v0 * 0x8c + 0x25c0) = 0xff;
-  } while (temp_v1 < 0xb);
-  return;
+void memClear(void *memory, u32 size);
+void asdMemFree(void *memory);
 }
 
-} /* extern "C" */
+/* A 0x8c-byte resource slot: an id (0xff when free), an owned buffer and 0x80 bytes of data. */
+struct ResourceSlot {
+    /* 0x00 */ u8 id;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ void *buffer;
+    /* 0x08 */ u8 data[0x80];
+    /* 0x88 */ u8 flag;
+    /* 0x89 */ u8 unk89[3];
+};
+
+struct ResourceSlots {
+    /* 0x0000 */ u8 unk0000[0x1CFC];
+    /* 0x1CFC */ u32 active;
+    /* 0x1D00 */ ResourceSlot groupA[4];
+    /* 0x1F30 */ ResourceSlot groupB[4];
+    /* 0x2160 */ ResourceSlot groupC[4];
+    /* 0x2390 */ ResourceSlot groupD[4];
+    /* 0x25C0 */ ResourceSlot idOnly[11];
+    /* 0x2BC4 */ ResourceSlot groupE[2];
+    /* 0x2CDC */ ResourceSlot groupF[5];
+    /* 0x2F98 */ u8 unk2F98[4];
+    /* 0x2F9C */ ResourceSlot single0;
+    /* 0x3028 */ u8 unk3028[0x48];
+    /* 0x3070 */ ResourceSlot groupG[3];
+    /* 0x3214 */ u8 unk3214[4];
+    /* 0x3218 */ ResourceSlot single1;
+};
+
+typedef char ResourceSlotSizeCheck[sizeof(ResourceSlot) == 0x8C ? 1 : -1];
+typedef char ResourceSlotsOffsetCheck[offsetof(ResourceSlots, single0) == 0x2F9C &&
+    offsetof(ResourceSlots, groupG) == 0x3070 && offsetof(ResourceSlots, single1) == 0x3218 ? 1 : -1];
+
+static inline void resetSlot(ResourceSlot *slot)
+{
+    slot->id = 0xFF;
+    memClear(slot->data, sizeof(slot->data));
+    if (slot->buffer != NULL) {
+        asdMemFree(slot->buffer);
+        slot->buffer = NULL;
+    }
+    slot->flag = 0;
+}
+
+extern "C" {
+/* Releases every resource slot of the work area and marks them free. */
+void FUN_003da890(ResourceSlots *work)
+{
+    work->active = 0;
+    for (s32 i = 0; i < 4; i++) {
+        resetSlot(&work->groupA[i]);
+        resetSlot(&work->groupB[i]);
+        resetSlot(&work->groupC[i]);
+        resetSlot(&work->groupD[i]);
+    }
+    for (s32 i = 0; i < 2; i++) {
+        resetSlot(&work->groupE[i]);
+    }
+    for (s32 i = 0; i < 5; i++) {
+        resetSlot(&work->groupF[i]);
+    }
+    for (s32 i = 0; i < 3; i++) {
+        resetSlot(&work->groupG[i]);
+    }
+    resetSlot(&work->single0);
+    resetSlot(&work->single1);
+    for (s32 i = 0; i < 11; i++) {
+        work->idOnly[i].id = 0xFF;
+    }
+}
+}

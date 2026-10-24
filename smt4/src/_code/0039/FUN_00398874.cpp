@@ -24,7 +24,7 @@ s32 FUN_002bf818(void *timer);
 void FUN_00232848(void);
 void FUN_00232698(CursorMenu *menu);
 void buttonHelpSetPreset(s32 preset);
-void FUN_00296ee0(CursorMenu *menu, s32 state);
+void messageOwnerSetState(CursorMenu *menu, s32 state);
 void timerStart(void *timer, s32 a, s32 b);
 s32 vec2GetXInt(void *timer);
 
@@ -48,7 +48,7 @@ void FUN_00398874(CursorMenu *menu)
             FUN_00232698(menu);
             buttonHelpSetPreset(151);
         }
-        FUN_00296ee0(menu, 11);
+        messageOwnerSetState(menu, 11);
         timerStart(menu->timer, 0, 0);
     }
     menu->timerValue = vec2GetXInt(menu->timer);

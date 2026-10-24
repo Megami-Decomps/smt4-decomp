@@ -34,7 +34,7 @@ typedef struct PartyPanelState {
         } history;
     };
     /* 0x002C */ u32 unk2C;
-    /* 0x0030 */ u8 unk0030[0x4];
+    /* 0x0030 */ u32 capacityTier;
     /* 0x0034 */ u8 unk34;
     /* 0x0035 */ u8 unk35;
     union {
@@ -111,8 +111,9 @@ typedef struct PartyPanelState {
         struct {
             u8 prefix7FC[0x144];
             GridNavigation base;
-            u8 gap9A4[0x64];
+            GridNavigation secondary;
             GridNavigation expanded;
+            GridNavigation secondaryExpanded;
         } capacityGrids;
         struct {
             u8 prefix7FC[0x340];

@@ -6,7 +6,8 @@
 #include <stddef.h>
 
 struct PassiveSkillRecord {
-    /* 0x00 */ u8 unk00[0x22];
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u16 id;
     /* 0x22 */ u16 sortKey;
     /* 0x24 */ u8 unk24[0x2];
     /* 0x26 */ u8 holdChance;    /* percent: chance the skill applies when held */
@@ -21,6 +22,14 @@ struct PassiveSkillRecord {
             u8 unk28[0xE];
             /* 0x36 */ u16 percent;
         } scaling;
+        struct {
+            u8 unk28[0x9];
+            /* 0x31 */ u8 weight;
+        } weighting;
+        struct {
+            u8 unk28[0xD];
+            /* 0x35 */ u8 tier;
+        } rank;
     };
     /* 0x38 */ u32 affinity;
 };
@@ -33,6 +42,8 @@ typedef char PassiveSkillRecordSortKeyOffsetCheck[
     offsetof(PassiveSkillRecord, sortKey) == 0x22 ? 1 : -1];
 typedef char PassiveSkillRecordCategoryOffsetCheck[
     offsetof(PassiveSkillRecord, classification.category) == 0x32 && sizeof(PassiveSkillRecord) == 0x3C ? 1 : -1];
+typedef char PassiveSkillRecordRankOffsetCheck[
+    offsetof(PassiveSkillRecord, rank.tier) == 0x35 && sizeof(PassiveSkillRecord) == 0x3C ? 1 : -1];
 typedef char PassiveSkillRecordScalingOffsetCheck[
     offsetof(PassiveSkillRecord, scaling.percent) == 0x36 && sizeof(PassiveSkillRecord) == 0x3C ? 1 : -1];
 

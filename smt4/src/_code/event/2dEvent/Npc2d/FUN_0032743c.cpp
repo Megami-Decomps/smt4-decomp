@@ -23,7 +23,7 @@ extern const char DAT_0040357c[], DAT_00403570[];
 extern const u8 DAT_0040356c[3];
 void *asdMemAlloc(u32, u32, u32, u32, u32);
 void memClear(void *, u32);
-NpcTextureSource *FUN_002459d8(s32);
+NpcTextureSource *dataTable25FindById(s32);
 NpcTextureImage *FUN_002bf4f8(u32, s32);
 s32 FUN_002c1d5c();
 void FUN_002c58c8(s32, s32);
@@ -49,7 +49,7 @@ void FUN_0032743c(s32 npcId)
     work->npc.unk6C = 0;
     work->npc.unk70 = 0;
     work->npc.unk71 = 0;
-    work->npc.source = FUN_002459d8(npcId);
+    work->npc.source = dataTable25FindById(npcId);
     work->textureNode = work->npc.source->textureId;
     for (u32 index = 0; index < 3; ++index) {
         NpcTextureImage *image = FUN_002bf4f8(0x32, DAT_0040356c[index]);

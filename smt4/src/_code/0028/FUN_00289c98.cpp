@@ -37,7 +37,7 @@ extern "C" {
 
 extern ButtonHelpRef g_buttonHelp;
 
-void FUN_002bee58(ButtonHelpPart *part, s32 hidden);
+void spriteStartAnimationByIndex(ButtonHelpPart *part, s32 hidden);
 void ifTouchDecrementTimer(void);
 void timerStart(ButtonHelpPart *part, s32 kind, s32 arg);
 void FUN_002a9fdc(ButtonHelpPart *part, s32 arg1, s32 arg2);
@@ -47,7 +47,7 @@ void FUN_00289c98(s32 clearTouches)
 {
     ButtonHelpPanel *panel = g_buttonHelp.panel;
     for (s32 i = 0; i < 6; ++i) {
-        FUN_002bee58(&panel->buttons[i], 1);
+        spriteStartAnimationByIndex(&panel->buttons[i], 1);
         if (panel->touches[i].active) {
             if (clearTouches) {
                 panel->touches[i].active = 0;

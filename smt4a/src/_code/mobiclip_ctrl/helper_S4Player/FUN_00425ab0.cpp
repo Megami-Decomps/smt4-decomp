@@ -59,8 +59,8 @@ u32 FUN_00425ab0(MoviePlayerInitialization *player, void *fileBackend, void *rea
     DAT_00588100 = memAlloc(0x100, 0x100, 0, 0x2000, 0x1000, 1);
     ThreadStackStorage *stack = (ThreadStackStorage *)asdOperatorNew(sizeof(ThreadStackStorage));
     if (stack) {
-        *(u32 *)&stack->info.unk00[0] = 0;
-        *(u32 *)&stack->info.unk00[4] = 0;
+        stack->info.unk00 = 0;
+        stack->info.unk04 = 0;
         stack->info.address = 0;
         stack->info.size = 0;
         stack->owned = 0;

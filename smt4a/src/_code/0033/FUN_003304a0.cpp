@@ -1,37 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003304a0` (_code @ 0x3304a0, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction scheduling only: retail hoists neither the loop counter init nor the second table address above the third store, and uses r1 for the first table. */
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f58c; /* 0x57f58c */
-extern int DAT_0057f590; /* 0x57f590 */
-extern int DAT_0057f594; /* 0x57f594 */
+/* A message window; only the field the script command writes is named. */
+typedef struct MessageWindow {
+    /* 0x0000 */ u8 unk0000[0x19EC];
+    /* 0x19EC */ u32 scriptValue;
+} MessageWindow;
 
-extern unsigned int scrGetArg(void);
+extern MessageWindow *g_messageMain[4]; /* 0x57f588 */
+extern MessageWindow *DAT_005e2010[12]; /* 0x5e2010 */
 
+extern u32 scrGetArg(void);
 
-unsigned int FUN_003304a0(void)
-
+/* Script command: sets the script value of every message window. */
+u32 FUN_003304a0(void)
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v2 = scrGetArg();
-  *(unsigned int *)(DAT_0057f58c + 0x19ec) = temp_v2;
-  *(unsigned int *)(DAT_0057f590 + 0x19ec) = temp_v2;
-  *(unsigned int *)(DAT_0057f594 + 0x19ec) = temp_v2;
-  temp_v3 = 0;
-  do {
-    temp_v1 = temp_v3 * 4;
-    temp_v0 = temp_v3 * 4;
-    temp_v3 = temp_v3 + 2;
-    *(unsigned int *)(*(int *)(temp_v1 + 0x5e2010) + 0x19ec) = temp_v2;
-    *(unsigned int *)(*(int *)(temp_v0 + 0x5e2014) + 0x19ec) = temp_v2;
-  } while (temp_v3 < 0xc);
-  return 1;
+    u32 value = scrGetArg();
+    s32 i;
+
+    g_messageMain[1]->scriptValue = value;
+    g_messageMain[2]->scriptValue = value;
+    g_messageMain[3]->scriptValue = value;
+    for (i = 0; i < 12; i++) {
+        DAT_005e2010[i]->scriptValue = value;
+    }
+    return 1;
 }
 
 } /* extern "C" */

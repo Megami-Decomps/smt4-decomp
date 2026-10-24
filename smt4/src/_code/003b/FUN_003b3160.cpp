@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0022c564(unsigned int *, int, unsigned int);
 int treeDestroyAllNodes(void);
-int FUN_003fb11c(unsigned char [8], unsigned int *, int *, int *);
+int _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE5eraseENS_14__rw_tree_iterIS5_iPS5_RS5_NS_17__rw_rb_tree_nodeISB_S5_jS7_EEEESI_(unsigned char [8], unsigned int *, int *, int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -19,7 +19,7 @@ extern unsigned char DAT_00422370; /* 0x422370 */
 
 /* Supplied declaration required: FUN_0022c564. */
 /* Supplied declaration required: treeDestroyAllNodes. */
-/* Supplied declaration required: FUN_003fb11c. */
+/* Supplied declaration required: _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE5eraseENS_14__rw_tree_iterIS5_iPS5_RS5_NS_17__rw_rb_tree_nodeISB_S5_jS7_EEEESI_. */
 
 
 unsigned int * FUN_003b3160(unsigned int *param_1)
@@ -38,7 +38,7 @@ unsigned int * FUN_003b3160(unsigned int *param_1)
   if (param_1[0x51c] != 0) {
     temp_v2 = param_1[0x50a];
     temp_v1 = *(unsigned int *)(temp_v2 + 8);
-    FUN_003fb11c(temp_v3,puVar3,&temp_v1,&temp_v2);
+    _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE5eraseENS_14__rw_tree_iterIS5_iPS5_RS5_NS_17__rw_rb_tree_nodeISB_S5_jS7_EEEESI_(temp_v3,puVar3,&temp_v1,&temp_v2);
     FUN_0022c564(puVar2,0,param_1[0x510]);
     param_1[0x510] = 0;
     *param_1 = 0;
@@ -56,7 +56,7 @@ unsigned int * FUN_003b3160(unsigned int *param_1)
   temp_v2 = param_1[0x50a];
   if (temp_v2 != 0) {
     temp_v1 = *(unsigned int *)(temp_v2 + 8);
-    FUN_003fb11c(temp_v3,puVar3,&temp_v1,&temp_v2);
+    _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE5eraseENS_14__rw_tree_iterIS5_iPS5_RS5_NS_17__rw_rb_tree_nodeISB_S5_jS7_EEEESI_(temp_v3,puVar3,&temp_v1,&temp_v2);
     temp_v0 = param_1[0x50a];
     *(unsigned int *)(temp_v0 + 0xc) = param_1[0x507];
     param_1[0x507] = temp_v0;

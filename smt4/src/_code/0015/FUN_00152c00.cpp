@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a2dc8(unsigned int);
+int asdLightActivate(unsigned int);
 int sceneTraverserVisit(unsigned int, unsigned int);
 int nw_gfx_SceneNode_AttachChild(unsigned int, int);
 
@@ -33,7 +33,7 @@ extern unsigned char DAT_004dad84; /* 0x4dad84 */
 extern unsigned char DAT_004dad85; /* 0x4dad85 */
 extern int DAT_004dad98; /* 0x4dad98 */
 
-/* Supplied declaration required: FUN_002a2dc8. */
+/* Supplied declaration required: asdLightActivate. */
 /* Supplied declaration required: sceneTraverserVisit. */
 /* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
 
@@ -64,7 +64,7 @@ void FUN_00152c00(fn_00152c00_arg0 *param_1)
       if (temp_v3 == 2) {
         temp_v0 = 0;
         temp_v5 = sceneGroup2Root;
-        FUN_002a2dc8(temp_v0);
+        asdLightActivate(temp_v0);
       }
       else {
         temp_v5 = sceneGroup4Root;
@@ -74,7 +74,7 @@ void FUN_00152c00(fn_00152c00_arg0 *param_1)
           }
           temp_v0 = 1;
           temp_v5 = sceneGroup5Root;
-          FUN_002a2dc8(temp_v0);
+          asdLightActivate(temp_v0);
         }
       }
     }

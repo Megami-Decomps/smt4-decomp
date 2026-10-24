@@ -1,39 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034e2ac` (_code @ 0x34e2ac, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail walks the members with a write-back pointer ([r4, #80]!, [r4, #-4]!, then sub r4, #28) and keeps it in r4/r5; armcc addresses each member from the owner */
+/* The destructor of the Mobiclip stream reader owner: tears the reader down, closes its two handles and finalizes
+ * its thread. Returns the owner. */
+#include "common.h"
+#include "nn/os/Handle.h"
+#include "nn/os/Thread.h"
 
-extern "C" {
+extern "C" void mobiclipS4FsReaderDestroy(void *reader);
 
-int mobiclipS4FsReaderDestroy(void);
-int software_interrupt(int);
+struct MobiclipStreamOwner {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ NnOsThread thread;
+    /* 0x38 */ u8 unk38[0x14];
+    /* 0x4C */ NnOsHandle firstHandle;
+    /* 0x50 */ NnOsHandle secondHandle;
 
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: mobiclipS4FsReaderDestroy. */
-extern void nn_os_Thread_FinalizeImpl(unsigned int);
+    ~MobiclipStreamOwner() { mobiclipS4FsReaderDestroy(this); }
+};
 
-
-int FUN_0034e2ac(int param_1)
-
+extern "C" MobiclipStreamOwner *FUN_0034e2ac(MobiclipStreamOwner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  int *piVar1;
-  
-  mobiclipS4FsReaderDestroy();
-  if (*(int *)(param_1 + 0x50) != 0) {
-    software_interrupt(0x23);
-    *(int *)(param_1 + 0x50) = 0;
-  }
-  if (*(int *)(param_1 + 0x4c) != 0) {
-    software_interrupt(0x23);
-    *(int *)(param_1 + 0x4c) = 0;
-  }
-  piVar1 = (int *)(param_1 + 0x30);
-  nn_os_Thread_FinalizeImpl((unsigned int)piVar1);
-  if (*piVar1 != 0) {
-    software_interrupt(0x23);
-    *piVar1 = 0;
-  }
-  return param_1;
+    owner->~MobiclipStreamOwner();
+    return owner;
 }
-
-} /* extern "C" */

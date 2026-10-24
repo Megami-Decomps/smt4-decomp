@@ -5,7 +5,7 @@ extern "C" {
 void asdMemFree(void *allocation);
 void sysMemClear(void *buffer, u32 size);
 void textureCacheReleaseAll();
-void FUN_0035bbc4();
+void keyedRecordsFreeAll();
 void workOwnerRelease(void *owner);
 void btlCameraFinishTransition(void *controller);
 void FUN_004f6e68(void *controller);
@@ -58,7 +58,7 @@ void FUN_004f5e6c(void *controller)
     }
     btlCameraFinishTransition(controller);
     state->animation = 0;
-    FUN_0035bbc4();
+    keyedRecordsFreeAll();
     textureCacheReleaseAll();
     BtlCameraA *camera = g_btlCamera;
     if (camera != NULL) {

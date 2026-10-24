@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001f6998(unsigned int, unsigned int, int);
+int effGeomBufferCreate(unsigned int, unsigned int, int);
 int recordPrepareActive(unsigned int, int, int, unsigned int);
 int refCountIncrement(void);
 int asdOperatorNew(int, unsigned short *);
@@ -21,9 +21,9 @@ extern unsigned int DAT_0047380c; /* 0x47380c */
 extern unsigned int DAT_00473810; /* 0x473810 */
 extern unsigned int DAT_00473814; /* 0x473814 */
 
-/* Supplied declaration required: FUN_001f6998. */
+/* Supplied declaration required: effGeomBufferCreate. */
 /* Supplied declaration required: recordPrepareActive. */
-extern unsigned int FUN_002693e4(void);
+extern unsigned int _ZN13EffGeomRecordC1Ev(void);
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
@@ -52,7 +52,7 @@ unsigned short * FUN_00268fc4(unsigned short *param_1)
     memAlloc(0x10000,0x100,0,0x58,0x10,1);
     *puVar3 = 0x300;
     puVar3[1] = 0;
-    FUN_001f6998(temp_v5,temp_v4,0);
+    effGeomBufferCreate(temp_v5,temp_v4,0);
     *(unsigned int *)(puVar3 + 6) = temp_v5;
     temp_v1 = DAT_00473810;
     temp_v7 = DAT_0047380c;
@@ -80,7 +80,7 @@ unsigned short * FUN_00268fc4(unsigned short *param_1)
       temp_v7 = 0;
     }
     else {
-      temp_v7 = FUN_002693e4();
+      temp_v7 = _ZN13EffGeomRecordC1Ev();
     }
     recordPrepareActive(temp_v7,0x25,temp_v8 * 3,temp_v6);
     *puVar3 = temp_v0;

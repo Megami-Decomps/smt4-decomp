@@ -62,7 +62,7 @@ typedef struct {
 extern int FUN_001d1d78(...); /* 0x1d1d78 */
 extern int FUN_001f6524(...); /* 0x1f6524 */
 extern int devilCompareRaceLevelDescending(...); /* 0x2073e4 */
-extern int FUN_00219720(...); /* 0x219720 */
+extern int devilCompareBySetCategoryGrade(...); /* 0x219720 */
 extern int FUN_002c6e90(...); /* 0x2c6e90 */
 extern int FUN_002d0544(...); /* 0x2d0544 */
 extern int devilCompareByEntryValue(...); /* 0x2dcf14 */
@@ -732,7 +732,7 @@ LAB_001df3cc:
           }
           if ((*pbVar20 & 0x7f) == 0x31) {
             if (temp_v15 != 0) {
-              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,FUN_00219720);
+              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareBySetCategoryGrade);
             }
             else {
               FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,devilCompare);

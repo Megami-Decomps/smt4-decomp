@@ -1,76 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c7f20` (_code @ 0x3c7f20, 0xdc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the first thread-handle argument before copying `this`, takes &thread only after the inlined destructor and re-reads bufferA into r0 (moving it to r5 only inside the null test); this build keeps &thread and the buffer in r5 from the start. */
+#include "nn/Result.h"
+#include "nn/os/Thread.h"
+
+/* A model-streaming worker (as far as its shutdown touches it). */
+struct StreamWorker {
+    /* 0x00 */ u8 unk00[0x80];
+    /* 0x80 */ u32 unk80;
+    /* 0x84 */ u8 unk84[0x1C];
+    /* 0xA0 */ u32 unkA0;
+    /* 0xA4 */ NnOsThread thread;
+    /* 0xAC */ void *bufferB;
+    /* 0xB0 */ void *bufferA;
+    /* 0xB4 */ u8 unkB4[0x0C];
+    /* 0xC0 */ s32 unkC0;
+};
 
 extern "C" {
 
-int mdlHandleArrayDestroy(int);
-int FUN_002759bc(void);
-int asdMemFreeNonNull(int);
-int FUN_002c3f5c(void);
-int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
-int asdMemFree(void);
-int FUN_002c526c(void);
-int software_interrupt(int);
+s32 FUN_002c40f8(s32 *index, const s32 *handles, s32 count, s32 waitAll, s64 timeout);
+void FUN_002c526c(s32 result);
+void FUN_002c3f5c(void);
+void asdMemFreeNonNull(void *block);
+void asdMemFree(void *block);
+void FUN_002759bc(void);
+void mdlHandleArrayDestroy(StreamWorker *worker);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: mdlHandleArrayDestroy. */
-/* Supplied declaration required: FUN_002759bc. */
-/* Supplied declaration required: asdMemFreeNonNull. */
-/* Supplied declaration required: FUN_002c3f5c. */
-/* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c526c. */
-extern void nn_os_Thread_FinalizeImpl(unsigned int);
-
-
-void FUN_003c7f20(int param_1)
-
+/* Shuts the worker down: joins and closes its thread, frees its buffers and destroys its model handle array. */
+void FUN_003c7f20(StreamWorker *worker)
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned char *puVar1;
-  int temp_v0;
-  int uStack_18;
-  unsigned char temp_v1 [4];
-  
-  uStack_18 = *(unsigned int *)(param_1 + 0xa4);
-  puVar1 = temp_v1;
-  FUN_002c40f8(puVar1,&uStack_18,1,0,0xffffffff,0xffffffff);
-  if ((int)puVar1 < 0) {
-    FUN_002c526c();
-  }
-  *(unsigned char *)(param_1 + 0xa8) = 1;
-  nn_os_Thread_FinalizeImpl(param_1 + 0xa4);
-  if (*(int *)(param_1 + 0xa4) != 0) {
-    software_interrupt(0x23);
-    *(unsigned int *)(param_1 + 0xa4) = 0;
-  }
-  if (*(int *)(param_1 + 0xb0) != 0) {
-    FUN_002c3f5c();
-    temp_v0 = *(int *)(param_1 + 0xb0);
-    if (temp_v0 != 0) {
-      FUN_002c3f5c();
-      asdMemFreeNonNull(temp_v0);
+    s32 handle = worker->thread.handle;
+    s32 index;
+    s32 result = FUN_002c40f8(&index, &handle, 1, 0, -1);
+    if (nnResultIsFailure(result)) {
+        FUN_002c526c(result);
     }
-    *(unsigned int *)(param_1 + 0xb0) = 0;
-  }
-  if (*(int *)(param_1 + 0xac) != 0) {
-    asdMemFree();
-    *(unsigned int *)(param_1 + 0xac) = 0;
-  }
-  *(unsigned int *)(param_1 + 0xc0) = 0xffffffff;
-  if (*(int *)(param_1 + 0xa0) != 0) {
-    *(unsigned int *)(param_1 + 0xa0) = 0;
-  }
-  FUN_002759bc();
-  mdlHandleArrayDestroy(param_1);
-  *(unsigned int *)(param_1 + 0x80) = 0;
-  return;
+    worker->thread.joined = 1;
+    worker->thread.~NnOsThread();
+    if (worker->bufferA != NULL) {
+        FUN_002c3f5c();
+        void *buffer = worker->bufferA;
+        if (buffer != NULL) {
+            FUN_002c3f5c();
+            asdMemFreeNonNull(buffer);
+        }
+        worker->bufferA = NULL;
+    }
+    if (worker->bufferB != NULL) {
+        asdMemFree(worker->bufferB);
+        worker->bufferB = NULL;
+    }
+    worker->unkC0 = -1;
+    if (worker->unkA0 != 0) {
+        worker->unkA0 = 0;
+    }
+    FUN_002759bc();
+    mdlHandleArrayDestroy(worker);
+    worker->unk80 = 0;
 }
 
 } /* extern "C" */

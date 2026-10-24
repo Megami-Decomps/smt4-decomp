@@ -23,7 +23,7 @@ typedef struct {
 
 extern unsigned char DAT_00589540; /* 0x589540 */
 
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern int onlineInstanceTableGetCurrent(void);
@@ -73,7 +73,7 @@ void FUN_0011af14(int param_1)
     temp_v8[0] = 0x80010004;
     puVar3 = temp_v7;
   }
-  temp_v1 = FUN_002e7908(puVar3,puVar4);
+  temp_v1 = _ZN12OnlineResultC1ERKj(puVar3,puVar4);
   FUN_00307020(param_1,temp_v1);
   return;
 }

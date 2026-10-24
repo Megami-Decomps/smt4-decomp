@@ -15,6 +15,7 @@ public:
     virtual void render();
     void resetHandlers();
     /* 0x5A4 */ u8 mode;
+    /* 0x5A5 */ u8 unk5A5[0xA708 - 0x5A5];   /* the object is 0xA708 bytes */
 };
 
 /* Full state-handler view used by resetHandlers and the vtable's update hook.

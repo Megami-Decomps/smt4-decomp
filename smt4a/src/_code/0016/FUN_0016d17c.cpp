@@ -1,38 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016d17c` (_code @ 0x16d17c, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail stores each size pair as separate words (only the last pair as stm) and sets the owner pointer early; the built stores merge into strd/stm in a different grouping. */
+#include "common.h"
+
+struct ScreenSize {
+    s32 height;
+    s32 width;
+
+    ScreenSize() {}
+    ScreenSize(s32 h, s32 w) : height(h), width(w) {}
+};
+
+struct ScreenConfig {
+    s32 mode;           // 0x00
+    u8 enabled;         // 0x04
+    u8 dirty;           // 0x05
+    s32 height;         // 0x08
+    s32 width;          // 0x0c
+    f32 viewport[4];    // 0x10
+    ScreenConfig *owner; // 0x20
+    s32 unk24;          // 0x24
+    u8 format;          // 0x28
+    s32 height2;        // 0x2c
+    s32 width2;         // 0x30
+    f32 scale;          // 0x34
+    u8 unk38;           // 0x38
+    ScreenConfig *owner2; // 0x3c
+    ScreenSize size3;   // 0x40
+};
 
 extern "C" {
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-
-void FUN_0016d17c(unsigned int *param_1)
-
+// Initialise the screen configuration to the 400x240 top-screen defaults.
+void FUN_0016d17c(ScreenConfig *config)
 {
-  *param_1 = 0;
-  *(unsigned char *)(param_1 + 1) = 0;
-  *(unsigned char *)((int)param_1 + 5) = 0;
-  param_1[2] = 0xf0;
-  param_1[3] = 400;
-  param_1[8] = (unsigned int)param_1;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  param_1[9] = 0;
-  *(unsigned char *)(param_1 + 10) = 3;
-  param_1[0xb] = 0xf0;
-  param_1[0xc] = 400;
-  param_1[0xd] = 0x3f800000;
-  *(unsigned char *)(param_1 + 0xe) = 0;
-  param_1[0xf] = (unsigned int)param_1;
-  param_1[0x10] = 0xf0;
-  param_1[0x11] = 400;
-  return;
+    config->mode = 0;
+    config->enabled = 0;
+    config->dirty = 0;
+    config->height = 240;
+    config->width = 400;
+    config->owner = config;
+    config->viewport[0] = 0.0f;
+    config->viewport[1] = 0.0f;
+    config->viewport[2] = 0.0f;
+    config->viewport[3] = 0.0f;
+    config->unk24 = 0;
+    config->format = 3;
+    config->height2 = 240;
+    config->width2 = 400;
+    config->scale = 1.0f;
+    config->unk38 = 0;
+    config->owner2 = config;
+    config->size3 = ScreenSize(240, 400);
 }
 
 } /* extern "C" */

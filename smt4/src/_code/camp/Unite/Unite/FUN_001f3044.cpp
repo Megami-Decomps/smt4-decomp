@@ -13,7 +13,7 @@ int FUN_002bcc60(...);
 int resultReportIfFailed(...);
 int timerStart(...);
 int FUN_002bd954(...);
-int FUN_002bee58(...);
+int spriteStartAnimationByIndex(...);
 int asdOperatorNew(...);
 int paramsInit(...);
 int memAlloc(...);
@@ -79,7 +79,7 @@ extern int lmapMainIsRunning(void);
 /* Supplied declaration required: resultReportIfFailed. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
+/* Supplied declaration required: spriteStartAnimationByIndex. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: paramsInit. */
@@ -213,19 +213,19 @@ void FUN_001f3044(void)
   temp_v3 = (int *)0x16c;
   paramsInit(piVar1 + 1,&DAT_004030ec,0x54,&DAT_00403140,0x3c,0,0,0,0,&DAT_0040317c);
   FUN_002bd954(piVar1 + 9,0x24,0,piVar1 + 1,1);
-  FUN_002bee58(piVar1 + 9,0);
+  spriteStartAnimationByIndex(piVar1 + 9,0);
   FUN_002bd954(piVar1 + 0x2c,0x24,0,piVar1 + 1,1);
   timerStart(piVar1 + 0x2c,0);
   FUN_002bd954(piVar1 + 0x4f,0x24,0,piVar1 + 1,1);
-  FUN_002bee58(piVar1 + 0x4f,1);
+  spriteStartAnimationByIndex(piVar1 + 0x4f,1);
   FUN_002bd954(piVar1 + 0x72,0x24,0,piVar1 + 1,1);
   timerStart(piVar1 + 0x72,1,0);
   FUN_002bd954(piVar1 + 0x95,0x24,0,piVar1 + 1,1);
   timerStart(piVar1 + 0x95,5,0);
   FUN_002bd954(piVar1 + 0xb8,0x24,0,piVar1 + 1,1);
-  FUN_002bee58(piVar1 + 0xb8,2);
+  spriteStartAnimationByIndex(piVar1 + 0xb8,2);
   FUN_002bd954(piVar1 + 0xdb,0x24,0,piVar1 + 1,1);
-  FUN_002bee58(piVar1 + 0xdb,3);
+  spriteStartAnimationByIndex(piVar1 + 0xdb,3);
   fileSlotLoad(0x24);
   fileSlotLoad(0x22);
   piVar1[0x10d] = -1;

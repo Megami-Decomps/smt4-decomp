@@ -25,7 +25,7 @@ extern "C" {
 extern FrameWork *g_frameTex;
 void FUN_002bd954(UiSpriteState *sprite, s32 group, s32 image, Params002c312c *parameters, s32 flags, f32 scale);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 mode);
-void FUN_002bee58(UiSpriteState *sprite, s32 enabled);
+void spriteStartAnimationByIndex(UiSpriteState *sprite, s32 enabled);
 void FUN_002a9fdc(UiSpriteState *sprite, s32 key, s32 mode);
 void FUN_00295eb0(UiSpriteState *sprite, s32 group, s32 image);
 void FUN_002bf810(u32 sound);
@@ -58,7 +58,7 @@ void FUN_00275be8(s32 mode)
         FUN_002bd954(&work->frame, 0x1D, 2000, &work->parameters, 0xB, 1.0f);
         uiSpriteSetImageKeyframe(&work->frame, 0, 0);
         FUN_002bd954(&work->overlay, 0x1D, 2000, &work->parameters, 0xB, 1.0f);
-        FUN_002bee58(&work->overlay, 0);
+        spriteStartAnimationByIndex(&work->overlay, 0);
         s8 tileKinds[24] = {0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0,
                             0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0};
         for (s32 index = 0; index < 24; ++index) {

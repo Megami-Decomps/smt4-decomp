@@ -1,39 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `effBehaviorRun` (_code @ 0x271b64, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match2_EffectBehaviorQuery.h"
+
+struct EffectBehaviorElement {
+    u8 unk00[0x10];  // 0x00
+    s32 frame;       // 0x10
+    u8 unk14[0x14];  // 0x14
+};
+
+struct EffectBehavior {
+    u16 index;                       // 0x00
+    u8 unk02[6];                     // 0x02
+    u32 elementCount;                // 0x08
+    u8 unk0c[4];                     // 0x0C
+    s32 time;                        // 0x10
+    u8 unk14[4];                     // 0x14
+    EffectBehaviorElement *elements; // 0x18
+};
 
 extern "C" {
+extern EffectBehaviorEntry DAT_005c1d60[];
+s32 effGetFrameStep(void);
 
-typedef int romwright_code(...);
-extern int effGetFrameStep(void);
-
-
-void effBehaviorRun(unsigned short *param_1)
-
+/* Resets the elements' frames on the first step, runs the behavior's callback and advances its time. */
+void effBehaviorRun(EffectBehavior *behavior)
 {
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if (*(int *)(param_1 + 8) == 0) {
-    temp_v1 = *(unsigned int *)(param_1 + 4);
-    if (temp_v1 != 0) {
-      puVar1 = (unsigned int *)(*(int *)(param_1 + 0xc) - 0x18);
-      if ((temp_v1 & 1) != 0) {
-        puVar1 = (unsigned int *)(*(int *)(param_1 + 0xc) + 0x10);
-        *puVar1 = 0xffffffff;
-      }
-      for (temp_v1 = temp_v1 >> 1; temp_v1 != 0; temp_v1 = temp_v1 - 1) {
-        puVar1[10] = 0xffffffff;
-        puVar1 = puVar1 + 0x14;
-        *puVar1 = 0xffffffff;
-      }
+    if (behavior->time == 0) {
+        /* Sets every element's frame word to -1, two at a time; the walk starts one element (10 words) before the first frame word. */
+        u32 count = behavior->elementCount;
+        u32 *elements = (u32 *)behavior->elements;
+
+        if (count != 0) {
+            u32 *frame = elements + 4 - 10;
+
+            if (count & 1) {
+                frame += 10;
+                *frame = 0xFFFFFFFF;
+            }
+            for (count >>= 1; count != 0; count--) {
+                frame[10] = 0xFFFFFFFF;
+                frame += 20;
+                *frame = 0xFFFFFFFF;
+            }
+        }
     }
-  }
-  (**(romwright_code **)((unsigned int)*param_1 * 0x14 + 0x5c1d60))(param_1);
-  temp_v0 = effGetFrameStep();
-  *(int *)(param_1 + 8) = temp_v0 + *(int *)(param_1 + 8);
-  return;
+    DAT_005c1d60[behavior->index].run(behavior);
+    behavior->time += effGetFrameStep();
 }
 
 } /* extern "C" */

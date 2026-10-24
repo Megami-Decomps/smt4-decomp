@@ -1,87 +1,89 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002abe38` (_code @ 0x2abe38, 0x1e4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: needs `--apcs=/interwork/ropi` (the three 4-entry tables are addressed `ldr rN, [pc, #n]; add rN, pc, rN`) and the tables as symbols (DAT_00417e34/44/54 are not mapped); the unscaled path also reuses the `vcvt.u32.f32` result directly as the bits of 2^m, which armcc only produces from integer-in-VFP-register code; retail also squares 0x70000000 at run time for the overflow result where this build folds it to +inf. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002a438c(void);
-int __set_errno(int);
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(...);
+extern const f32 DAT_00417e34[4]; // added last
+extern const f32 DAT_00417e44[4]; // the constant term
+extern const f32 DAT_00417e54[4]; // scales the polynomial
+s32 __set_errno(s32 value);
+f32 FUN_002a438c(void); // signals underflow
+s32 ARM_fpclassifyf(f32 value);
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int ARM_fpclassifyf(float);
-/* Supplied declaration required: FUN_002a438c. */
-/* Supplied declaration required: __set_errno. */
+union ExpFloatBits {
+    f32 f;
+    u32 u;
+};
 
+static const s32 kRangeError = 2;
 
-void FUN_002abe38(void)
-
+// e^x in single precision. x is split as x = n * ln(2) / 4 + r; the quarter-octave factor comes from three
+// 4-entry tables and 2^(n >> 2) is built directly from its exponent bits. Inputs near the limits scale
+// in two steps so the intermediate does not overflow; overflow and underflow set errno.
+f32 FUN_002abe38(f32 x)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 6 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int in_fpscr;
-  float in_s0;
-  unsigned int temp_v3;
-  float temp_v4;
-  
-  temp_v0 = 0;
-  if ((int)in_s0 * 2 + 0x99000000U >= 0x1e500001) {
-    if ((~(unsigned int)in_s0 & 0x7fffffff) >> 0x17 == 0) {
-      return;
+    ExpFloatBits input;
+    input.f = x;
+    const u32 bits = input.u;
+    bool twoStep = false;
+    if (bits * 2 + 0x99000000 > 0x1e500000) {
+        if ((((~bits) << 1) >> 24) == 0) {
+            // infinity or NaN: exp(-inf) is 0, exp(+inf) is +inf, NaN stays NaN
+            if (bits == 0xff800000) {
+                return 0.0f;
+            }
+            return x + x;
+        }
+        if (bits * 2 < 0x67000000) {
+            return 1.0f; // |x| < 2^-24
+        }
+        if (bits * 2 <= 0x85a00000) {
+            twoStep = true;
+        } else {
+            __set_errno(kRangeError);
+            if ((bits & 0x80000000) == 0) {
+                const f32 huge = 1.58456325e29f;
+                return huge * huge; // overflow to +inf
+            }
+            return FUN_002a438c(); // underflow
+        }
     }
-    if ((unsigned int)((int)in_s0 * 2) < 0x67000000) {
-      return;
+    const f32 half = (bits & 0x80000000) == 0 ? 0.5f : -0.5f;
+    const s32 n = (s32)(half + x * 5.77078f); // x * 4 / ln(2), rounded to nearest
+    const u32 quarter = n & 3;
+    const f32 count = (f32)n;
+    const f32 r = (x - count * 0.17327881f) - count * 7.986546e-06f;
+    const f32 polynomial =
+        (0.99999994f + r * (0.49999997f + r * (0.16672924f + r * 0.04168231f))) * r;
+    const f32 mantissa = (DAT_00417e44[quarter] + DAT_00417e54[quarter] * polynomial) + DAT_00417e34[quarter];
+    const s32 exponent = n >> 2;
+    if (!twoStep) {
+        ExpFloatBits scale;
+        scale.u = (u32)((f32)exponent * 8388608.0f + 1.0653532e9f);
+        return scale.f * mantissa;
     }
-    if (0x85a00000 < (unsigned int)((int)in_s0 << 1)) {
-      __set_errno(2);
-      if (((unsigned int)in_s0 & 0x80000000) == 0) {
-        return;
-      }
-      FUN_002a438c();
-      return;
+    const s32 firstHalf = exponent / 2;
+    const s32 secondHalf = exponent - firstHalf;
+    ExpFloatBits first;
+    ExpFloatBits second;
+    first.u = 0x3f800000 + (firstHalf << 23);
+    second.u = 0x3f800000 + (secondHalf << 23);
+    const f32 result = second.f * (first.f * mantissa);
+    ExpFloatBits resultBits;
+    resultBits.f = result;
+    if (resultBits.u == 0) {
+        __set_errno(kRangeError);
+        return FUN_002a438c();
     }
-    temp_v0 = 1;
-  }
-  if (((unsigned int)in_s0 & 0x80000000) == 0) {
-    temp_v4 = 0.5f;
-  }
-  else {
-    temp_v4 = -0.5f;
-  }
-  temp_v3 = (unsigned int)(temp_v4 + in_s0 * 5.77078f);
-  temp_v2 = temp_v3 & 3;
-  temp_v4 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v4 = (in_s0 - temp_v4 * 0.17327881f) - temp_v4 * 7.986546e-06f;
-  temp_v1 = (int)temp_v3 >> 2;
-  if (!temp_v0) {
-    temp_v4 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorFloatToUnsigned(temp_v4 * 8388608.0f + 1.0653532e+09f,3);
-    return;
-  }
-  temp_v4 = (float)((temp_v1 - temp_v1 / 2) * 0x800000 + 0x3f800000) *
-          (float)((temp_v1 / 2) * 0x800000 + 0x3f800000) *
-          (*(float *)(temp_v2 * 4 + 0x417e44) +
-           *(float *)(temp_v2 * 4 + 0x417e54) *
-           (temp_v4 * (temp_v4 * (temp_v4 * 0.04168231f + 0.16672924f) + 0.49999997f) + 0.99999994f) * temp_v4 +
-          *(float *)(temp_v2 * 4 + 0x417e34));
-  if (temp_v4 == 0.0f) {
-    __set_errno(2);
-    FUN_002a438c();
-    return;
-  }
-  if (temp_v4 == INFINITY) {
-    __set_errno(2);
-    return;
-  }
-  temp_v1 = ARM_fpclassifyf(temp_v4);
-  if (temp_v1 == 4) {
-    FUN_002a438c();
-  }
-  return;
+    if (resultBits.u == 0x7f800000) {
+        __set_errno(kRangeError);
+        const f32 huge = 1.58456325e29f;
+        return huge * huge;
+    }
+    if (ARM_fpclassifyf(result) == 4) {
+        FUN_002a438c(); // subnormal: signal underflow, keep the value
+    }
+    return result;
 }
 
 } /* extern "C" */

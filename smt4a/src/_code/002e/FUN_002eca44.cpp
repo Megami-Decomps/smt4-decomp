@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int vectorCopyHeader(int, unsigned int);
+int _ZN18OnlineResultRecordaSERKS_(int, unsigned int);
 
 typedef struct fn_002eca44_arg0 fn_002eca44_arg0;
 struct fn_002eca44_arg0 {
@@ -39,8 +39,8 @@ typedef struct {
 
 extern unsigned char DAT_005585a4; /* 0x5585a4 */
 
-extern unsigned int FUN_002e7908(fn_002eca44_arg0 **, unsigned int *);
-/* Supplied declaration required: vectorCopyHeader. */
+extern unsigned int _ZN12OnlineResultC1ERKj(fn_002eca44_arg0 **, unsigned int *);
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 extern unsigned int *_ZN9Obj5593b8C1Ev(void);
 extern unsigned int FUN_002e9f94(unsigned int *, unsigned int);
 extern int FUN_002e9ff4(unsigned int *);
@@ -86,8 +86,8 @@ int FUN_002eca44(fn_002eca44_arg0 *param_1,unsigned int param_2,unsigned int par
   *(unsigned int *)(temp_v1 + 0x24) = 0;
   puVar1 = (unsigned int *)(temp_v1 + 0x20);
   temp_v2 = 0x80010001;
-  temp_v0 = FUN_002e7908(&pfStack_20,(unsigned int *)&temp_v2);
-  vectorCopyHeader(temp_v1,temp_v0);
+  temp_v0 = _ZN12OnlineResultC1ERKj(&pfStack_20,(unsigned int *)&temp_v2);
+  _ZN18OnlineResultRecordaSERKS_(temp_v1,temp_v0);
   *(unsigned int *)(temp_v1 - 0x2c) = 0;
   *puVar1 = 0;
   puVar1[1] = 0;

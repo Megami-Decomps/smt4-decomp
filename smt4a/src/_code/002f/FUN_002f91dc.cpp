@@ -32,7 +32,7 @@ extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
 extern int *FUN_0010979e(int *);
 /* Supplied declaration required: sharedRefRelease. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: onlineSockAddrConstruct. */
 extern unsigned int onlineInstantiationContextGetCurrent(void);
 extern unsigned int FUN_002ece14(int, int *);
@@ -85,7 +85,7 @@ void FUN_002f91dc(int param_1)
         if (temp_v3[0] != (int *)0x0) {
           if (*(char *)(temp_v7 + 4) != '\0') {
             if (*(int *)(temp_v8 + 0x10) != 0) {
-              temp_v1 = operatorNew(0x20);
+              temp_v1 = _Znwj(0x20);
               temp_v0 = 0;
               if (temp_v1 != 0) {
                 temp_v0 = FUN_002ece14(temp_v1,temp_v3[0]);

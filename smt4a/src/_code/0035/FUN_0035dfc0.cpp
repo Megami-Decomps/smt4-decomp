@@ -1,47 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035dfc0` (_code @ 0x35dfc0, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the byte pointer in r2 and the loaded byte in r0 (build: pointer r0, byte r2). */
+#include "common.h"
 
 extern "C" {
 
-int dataTable5Type9Count(void);
+u32 dataTable5Type9Count(void);
+u8 *FUN_0026140c(void);
+u16 *dataTableFindRecordWord(u32 index);
 
-extern int FUN_0026140c(void);
-extern unsigned short *dataTableFindRecordWord(unsigned int);
-/* Supplied declaration required: dataTable5Type9Count. */
-
-
-void FUN_0035dfc0(unsigned int param_1)
-
+/* Marks table 5 type 9 entry `id` in the save data's bit array at +0x39. */
+void FUN_0035dfc0(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  unsigned short *puVar3;
-  int temp_v2;
-  unsigned char *pbVar5;
-  unsigned int temp_v3;
-  
-  temp_v1 = param_1;
-  dataTable5Type9Count();
-  temp_v3 = 0;
-  if (temp_v1 != 0) {
-    while ((puVar3 = (unsigned short *)dataTableFindRecordWord(temp_v3 & 0xffff), puVar3 == (unsigned short *)0x0 ||
-           (*puVar3 != param_1))) {
-      temp_v3 = temp_v3 + 1;
-      if (temp_v1 <= temp_v3) {
-        return;
-      }
+    u32 count = dataTable5Type9Count();
+
+    for (s32 i = 0; i < count; i++) {
+        u16 *record = dataTableFindRecordWord((u16)i);
+        if (record != NULL && *record == id) {
+            u8 *byte = FUN_0026140c() + 0x39 + i / 8;
+            if ((*byte & (1 << (i % 8))) == 0) {
+                *byte |= 1 << (i % 8);
+            }
+            return;
+        }
     }
-    temp_v2 = FUN_0026140c();
-    pbVar5 = (unsigned char *)(temp_v2 + ((int)(temp_v3 + ((unsigned int)((int)temp_v3 >> 0x1f) >> 0x1d)) >> 3) + 0x39);
-    temp_v0 = *pbVar5;
-    temp_v1 = 1 << (((int)temp_v3 % 8) & 0xffU);
-    if ((temp_v0 & temp_v1) == 0) {
-      *pbVar5 = temp_v0 | (unsigned char)temp_v1;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

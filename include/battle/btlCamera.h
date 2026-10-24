@@ -55,6 +55,10 @@ struct BtlCameraA {
             u8 unk1CBeforeDuration[0x18];
             /* 0x034 */ u32 duration;
         } movement;
+        struct {
+            /* 0x01c */ BtlCameraVector3 from;
+            /* 0x028 */ BtlCameraVector3 to;
+        } span;
     };
     /* 0x038 */ s32 unk38;
     /* 0x03c */ s32 unk3C;
@@ -79,7 +83,9 @@ struct BtlCameraA {
     /* 0x658 */ CameraBackend *backend;
     /* 0x65c */ u8 unk65c[0x2e];
     /* 0x68a */ u8 enabled;
-    /* 0x68b */ u8 unk68b[0x111];
+    /* 0x68b */ u8 unk68b[0x109];
+    /* 0x794 */ u32 settleState;
+    /* 0x798 */ u32 settleMode;
     /* 0x79c */ BtlCameraGraphics graphics;
     union {
         /* 0x7a4 */ u8 unk7A4[0x110];

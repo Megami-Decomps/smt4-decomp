@@ -12,7 +12,7 @@ extern "C" {
 extern Obj420990DrawContext *g_titleScene;
 void FUN_002c1b64(void *context, u32 texture);
 u32 FUN_002c5d80(u32 mode, u32 value);
-void FUN_0023b5e0(void *filter, f32 *matrix, const void *motion);
+void titleSceneMultiplyByCameraView(void *filter, f32 *matrix, const void *motion);
 void FUN_0023b4f4(f32 *vertices, const f32 *matrix, f32 *output, u32 count);
 void FUN_002b011c();
 void gpuSubmitFloatVectorsOrDefault(const f32 *color, f32 x, f32 y, f32 z, f32 u, f32 v);
@@ -32,7 +32,7 @@ void Obj420990::draw()
         points[vertex][2] = vertices()[vertex].position[2] - 11.0f;
     }
     f32 matrix[16];
-    FUN_0023b5e0(this, matrix, &handles[0]);
+    titleSceneMultiplyByCameraView(this, matrix, &handles[0]);
     FUN_0023b4f4(&points[0][0], matrix, &points[0][0], 4);
     FUN_002b011c();
     for (u32 vertex = 0; vertex < 4; ++vertex) {
@@ -42,7 +42,7 @@ void Obj420990::draw()
     forwardRecoveredCallback();
     FUN_002c1b64(g_titleScene, ((FilterDrawTexture *)handles[1].handle)->handle);
     g_titleScene->blend.replace(rects->blendB);
-    FUN_0023b5e0(this, matrix, &handles[1]);
+    titleSceneMultiplyByCameraView(this, matrix, &handles[1]);
     FUN_0023b4f4(&points[4][0], matrix, &points[4][0], 4);
     FUN_002b011c();
     for (u32 vertex = 4; vertex < 8; ++vertex) {

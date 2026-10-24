@@ -21,7 +21,7 @@ typedef struct UnitRecord {
 s32 idIsAbove400(s32 id);
 s32 FUN_0024c5a0(s32 id);
 s32 recordKindRank(s32 id);
-UnitSortRecord *FUN_002ae164(s32 id);
+UnitSortRecord *dataTable40FindById(s32 id);
 UnitRecord *gameGetUnitRecord(s32 unit);
 
 static __inline s32 unitSortLevel(const UnitSortEntry *entry)
@@ -47,7 +47,7 @@ static __inline void unitSortGetKey(const UnitSortEntry *entry, UnitSortKey *key
     } else {
         key->kind = FUN_0024c5a0(entry->id);
         key->rank = recordKindRank(entry->id);
-        key->order = FUN_002ae164(entry->id)->order;
+        key->order = dataTable40FindById(entry->id)->order;
     }
 }
 

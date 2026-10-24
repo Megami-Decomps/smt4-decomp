@@ -10,7 +10,7 @@ int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefRelease(void);
 int sharedRefAddRef(int);
 int FUN_002e78d0(unsigned int, int, int);
-int _ZN9Obj55aff4C1EPKc(unsigned char [12], unsigned int);
+int _ZN9Obj55aff4C1EPKt(unsigned char [12], unsigned int);
 int _ZN9Obj55aff4D1Ev(unsigned char [12]);
 int FUN_002f7218(unsigned int, int);
 
@@ -49,10 +49,10 @@ extern int FUN_0011997c(int, unsigned int, fn_002e791c_arg0 *, unsigned int, uns
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: sharedRefAddRef. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
-/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKt. */
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern unsigned int onlineInstantiationContextGetCurrent(void);
 /* Supplied declaration required: FUN_002f7218. */
@@ -110,7 +110,7 @@ FUN_002e791c(fn_002e791c_arg0 *param_1,int param_2,unsigned int param_3,unsigned
   temp_v1 = FUN_002e789a(temp_v5);
   if (temp_v1 != 0) {
     if (param_1->field_0x78 == 0) {
-      temp_v2 = operatorNew(0x30);
+      temp_v2 = _Znwj(0x30);
       temp_v1 = 0;
       if (temp_v2 != 0) {
         temp_v1 = FUN_00103fd4();
@@ -120,10 +120,10 @@ FUN_002e791c(fn_002e791c_arg0 *param_1,int param_2,unsigned int param_3,unsigned
     if (*(int *)(param_1 + 1) == 0) {
       *(unsigned int *)(param_1 + 1) = *(unsigned int *)&param_1->field_0x74;
     }
-    temp_v1 = operatorNew(0x328);
+    temp_v1 = _Znwj(0x328);
     if (temp_v1 != 0) {
       temp_v0 = *(unsigned int *)(param_1 + 1);
-      _ZN9Obj55aff4C1EPKc(temp_v4,temp_v7);
+      _ZN9Obj55aff4C1EPKt(temp_v4,temp_v7);
       temp_v1 = FUN_0011997c(temp_v1,*(unsigned int *)(temp_v5 + 0x44),param_1,temp_v6,temp_v4,
                            param_5,param_6,param_7,param_8,param_9,param_10,temp_v0,
                            *(unsigned int *)&param_1->field_0x90);

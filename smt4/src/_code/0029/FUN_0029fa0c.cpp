@@ -6,13 +6,13 @@
 extern "C" {
 PartyDamageSlotsIV *gameGetSlotTable(void);
 u32 dataTable05Sub4GetCount(void);
-const FusionRecipe *FUN_0029f7d4(u32 index);
+const FusionRecipe *dataTable54FindById(u32 index);
 s32 gameFlagIsSet(u32 flag);
 bool gameRecordCopy(u32 id, RecordValue *record);
 s32 gameCountUnits(void);
 GameUnitSortRecord *gameGetUnitRecord(u32 slot);
 s32 FUN_0029ea68(u16 id);
-u32 FUN_0029cde0(const u16 *values, u32 count, u16 wanted);
+u32 arrayContainsU16(const u16 *values, u32 count, u16 wanted);
 
 u16 FUN_0029fa0c(u32 context, u16 *output)
 {
@@ -22,7 +22,7 @@ u16 FUN_0029fa0c(u32 context, u16 *output)
     u16 written = 0;
     PartyDamageSlotsIV *slots = gameGetSlotTable();
     for (u16 index = 0; index < dataTable05Sub4GetCount(); ++index) {
-        const CompleteRecipeView *entry = (const CompleteRecipeView *)FUN_0029f7d4(index);
+        const CompleteRecipeView *entry = (const CompleteRecipeView *)dataTable54FindById(index);
         if (!entry)
             continue;
         const DevilRecord *devil = (const DevilRecord *)devilGetRecord(entry->result);
@@ -57,7 +57,7 @@ u16 FUN_0029fa0c(u32 context, u16 *output)
                 ++ingredientCount;
             }
         }
-        if (FUN_0029cde0(owned, ingredientCount, 1))
+        if (arrayContainsU16(owned, ingredientCount, 1))
             output[written++] = index;
     }
     return written;

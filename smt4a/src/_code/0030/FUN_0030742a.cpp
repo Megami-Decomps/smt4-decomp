@@ -14,7 +14,7 @@ typedef struct {
 
 /* Supplied declaration required: strHolderAssignU32. */
 /* Supplied declaration required: FUN_002fbb92. */
-extern unsigned int vectorCount8_0030fcf6(int *);
+extern unsigned int _ZNKSt6vectorI9Obj55aff412AsdAllocatorIS0_EE4sizeEv(int *);
 
 
 void FUN_0030742a(unsigned int param_1,int *param_2,unsigned int param_3,unsigned int param_4)
@@ -26,7 +26,7 @@ void FUN_0030742a(unsigned int param_1,int *param_2,unsigned int param_3,unsigne
   int temp_v2;
   
   temp_v2 = param_4;
-  temp_v2 = vectorCount8_0030fcf6(param_2);
+  temp_v2 = _ZNKSt6vectorI9Obj55aff412AsdAllocatorIS0_EE4sizeEv(param_2);
   strHolderAssignU32(param_1,&temp_v2);
   temp_v1 = param_2[1];
   for (temp_v0 = *param_2; temp_v0 != temp_v1; temp_v0 = temp_v0 + 8) {

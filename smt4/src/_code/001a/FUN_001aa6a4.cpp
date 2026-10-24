@@ -49,8 +49,8 @@ typedef struct {
 } param_1_stack;
 
 extern int g_titleScene; /* 0x44ea00 */
-extern unsigned int DAT_00476634; /* 0x476634 */
-extern float DAT_004efd6c; /* 0x4efd6c */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x476634 */
+extern float _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x4efd6c */
 extern float DAT_004efd70; /* 0x4efd70 */
 extern float DAT_004efd74; /* 0x4efd74 */
 extern float DAT_004efd78; /* 0x4efd78 */
@@ -68,7 +68,7 @@ extern float DAT_004efd98; /* 0x4efd98 */
 /* Supplied declaration required: FUN_00286198. */
 /* Supplied declaration required: mtxMakeTranslation. */
 /* Supplied declaration required: layoutApplyForState. */
-extern unsigned int FUN_002a7bc0(void);
+extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 /* Supplied declaration required: FUN_002b2144. */
 /* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: FUN_002ba1e0. */
@@ -135,7 +135,7 @@ void FUN_001aa6a4(int param_1)
     return;
   }
   layoutApplyForState(g_titleScene);
-  temp_v0 = FUN_002a7bc0();
+  temp_v0 = _ZN2nw4math5MTX448IdentityEv();
   mtx44Copy(temp_v18,temp_v0);
   temp_v3 = g_titleScene;
   temp_v9 = (*(unsigned char *)(param_1 + 0x130) & 7) >> 1;
@@ -229,8 +229,8 @@ void FUN_001aa6a4(int param_1)
     temp_v9 = temp_v4;
   }
   else if (*(char *)(param_1 + 0x380) != '\0') {
-    if (((DAT_00476634 & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_00476634), temp_v3 != 0)) {
-      DAT_004efd6c = temp_v10;
+    if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v3 != 0)) {
+      _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v10;
       DAT_004efd70 = temp_v11;
       DAT_004efd74 = temp_v11;
       DAT_004efd78 = temp_v11;
@@ -243,7 +243,7 @@ void FUN_001aa6a4(int param_1)
       DAT_004efd94 = temp_v10;
       DAT_004efd98 = temp_v11;
     }
-    nn_math_ARMv6_MTX34CopyAsm(temp_v30,&DAT_004efd6c);
+    nn_math_ARMv6_MTX34CopyAsm(temp_v30,&_ZZN2nw4math5MTX348IdentityEvE8identity);
     nn_math_ARMv6_MTX34InvTransposeAsm(temp_v36,temp_v30);
     nn_math_ARMv6_MTX34ToMTX33Asm(temp_v31,temp_v36);
     temp_v3 = 0;

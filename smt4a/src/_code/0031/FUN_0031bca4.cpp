@@ -1,44 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031bca4` (_code @ 0x31bca4, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same control flow, but armcc loads 1.0f into s0 and 0.0f into s1 (retail: 0.0f in s0, 1.0f in s1), so the literal pool order and the stores' registers are swapped. */
+#include "common.h"
 
 extern "C" {
 
-int VectorSignedToFloat(int, int);
+/* The job work area's 2D axis: unit direction along x or a scaled y slope. */
+struct JobAxisWork {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ f32 axisX;
+    /* 0x28 */ f32 axisY;
+};
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int jobGetWork(void);
+JobAxisWork *jobGetWork(void);
 
-
-void FUN_0031bca4(unsigned int param_1,int param_2,int param_3)
-
+/* Sets the work area's axis from a signed extent: reciprocal slope, negated when `flip` is set. */
+void FUN_0031bca4(u32 unused, s32 extent, s32 flip)
 {
-/* irregular: irregular input(s): in_fpscr; 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int in_fpscr;
-  float temp_v1;
-  
-  temp_v0 = jobGetWork();
-  if (param_3 != 0) {
-    if (param_2 != 0) {
-      *(unsigned int *)(temp_v0 + 0x24) = 0x3f800000;
-      temp_v1 = (float)VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-      *(float *)(temp_v0 + 0x28) = -1.0f / temp_v1;
-      return;
+    JobAxisWork *work = jobGetWork();
+
+    if (flip == 0) {
+        if (extent == 0) {
+            work->axisX = 1.0f;
+        } else {
+            work->axisX = 0.0f;
+            work->axisY = 1.0f / (f32)extent;
+            return;
+        }
+    } else {
+        if (extent == 0) {
+            work->axisX = 0.0f;
+        } else {
+            work->axisX = 1.0f;
+            work->axisY = -1.0f / (f32)extent;
+            return;
+        }
     }
-    *(unsigned int *)(temp_v0 + 0x24) = 0;
-  }
-  else {
-    if (param_2 != 0) {
-      *(unsigned int *)(temp_v0 + 0x24) = 0;
-      temp_v1 = (float)VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-      *(float *)(temp_v0 + 0x28) = 1.0f / temp_v1;
-      return;
-    }
-    *(unsigned int *)(temp_v0 + 0x24) = 0x3f800000;
-  }
-  *(unsigned int *)(temp_v0 + 0x28) = 0;
-  return;
+    work->axisY = 0.0f;
 }
 
 } /* extern "C" */

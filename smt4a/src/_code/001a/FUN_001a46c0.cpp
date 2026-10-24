@@ -9,7 +9,7 @@ int nn_math_ARMv6_MTX34CopyAsm(unsigned int *, unsigned int);
 
 extern unsigned char DAT_0055bc3c; /* 0x55bc3c */
 
-extern unsigned int FUN_0018aeb8(void);
+extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 /* Supplied declaration required: mtx44Copy. */
 extern unsigned int FUN_001a1e28(void);
 extern unsigned int *FUN_001b7420(void);
@@ -33,9 +33,9 @@ unsigned int * FUN_001a46c0(void)
   nn_math_ARMv6_MTX34CopyAsm(puVar1 + 0x52,temp_v0);
   temp_v0 = FUN_001a1e28();
   nn_math_ARMv6_MTX34CopyAsm(puVar1 + 0x5e,temp_v0);
-  temp_v0 = FUN_0018aeb8();
+  temp_v0 = _ZN2nw4math5MTX448IdentityEv();
   mtx44Copy(puVar1 + 0x6a,temp_v0);
-  temp_v0 = FUN_0018aeb8();
+  temp_v0 = _ZN2nw4math5MTX448IdentityEv();
   mtx44Copy(puVar1 + 0x7a,temp_v0);
   temp_v0 = FUN_001a1e28();
   nn_math_ARMv6_MTX34CopyAsm(puVar1 + 0x8a,temp_v0);

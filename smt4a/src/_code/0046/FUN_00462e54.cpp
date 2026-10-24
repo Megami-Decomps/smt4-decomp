@@ -27,7 +27,7 @@ extern unsigned int DAT_005c0ad8; /* 0x5c0ad8 */
 /* Supplied declaration required: FUN_0018c87c. */
 /* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
 extern int FUN_001b1998(void);
-extern unsigned int FUN_001b1f04(void);
+extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 /* Supplied declaration required: FUN_001b4a58. */
 extern unsigned int FUN_001c35d8(void);
 /* Supplied declaration required: FUN_001cc6c0. */
@@ -85,7 +85,7 @@ LAB_00462fb0:
         *(unsigned char *)(param_1 + 0xd) = 0;
         return;
       }
-      temp_v2 = FUN_001b1f04();
+      temp_v2 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
       FUN_001d0b28(temp_v2,param_1 + 0x50);
       *(unsigned char *)(param_1 + 0xa2) = 0;
       temp_v0 = *(char *)(param_1 + 0xd);
@@ -99,7 +99,7 @@ LAB_00462fb0:
       }
       *(unsigned char *)(param_1 + 0xf) = 1;
       if (*(char *)(param_1 + 0xa2) != '\0') {
-        temp_v2 = FUN_001b1f04();
+        temp_v2 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
         FUN_001d0b28(temp_v2,param_1 + 0x50);
         *(unsigned char *)(param_1 + 0xa2) = 0;
       }
@@ -182,7 +182,7 @@ LAB_00462ee4:
       if (*(char *)(param_1 + 0xc) != '\0') {
         *(unsigned char *)(param_1 + 0xf) = 1;
         if (*(char *)(param_1 + 0xa2) != '\0') {
-          temp_v2 = FUN_001b1f04();
+          temp_v2 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
           FUN_001d0b28(temp_v2,param_1 + 0x50);
           *(unsigned char *)(param_1 + 0xa2) = 0;
         }
@@ -201,7 +201,7 @@ LAB_00462ee4:
     }
     *(unsigned char *)(param_1 + 0xf) = 1;
     if (*(char *)(param_1 + 0xa2) != '\0') {
-      temp_v2 = FUN_001b1f04();
+      temp_v2 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
       FUN_001d0b28(temp_v2,param_1 + 0x50);
       *(unsigned char *)(param_1 + 0xa2) = 0;
     }

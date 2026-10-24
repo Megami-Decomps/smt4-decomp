@@ -1,74 +1,82 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a4c74` (_code @ 0x4a4c74, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc hoists the mode/entry base differently (retail reads the mode through the menu once, then through a +0x800 base kept in r5) and orders the shared tail call differently */
+#include "common.h"
+
+struct SelectEntry {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 itemId;
+    /* 0x06 */ u8 unk06[0x1A];
+};
+
+/* The selection state at the end of the menu: the mode and the entry table. */
+struct SelectState {
+    /* 0x00 */ u8 unk00[0x60];
+    /* 0x60 */ s8 mode;
+    /* 0x61 */ u8 unk61[3];
+    /* 0x64 */ SelectEntry entries[1];
+};
+
+struct SelectMenu;
+struct SelectMenuVtable {
+    void *unk00[9];
+    s32 (*canConfirm)(SelectMenu *menu); /* +0x24 */
+};
+
+
+struct ItemRecord {
+    /* 0x00 */ u8 unk00[0xB3];
+    /* 0xB3 */ u8 flags; /* bit 1: plays the special confirm sound */
+};
+
+/* The selection menu, reduced to what the confirm handler touches. */
+struct SelectMenu {
+    /* 0x000 */ const SelectMenuVtable *vtable;
+    /* 0x004 */ u8 unk004[0x10];
+    /* 0x014 */ s32 confirmed;
+    /* 0x018 */ s32 unk018;
+    /* 0x01C */ u8 unk01C[4];
+    /* 0x020 */ u8 totalHolder[0x76];
+    /* 0x096 */ u8 busyFlags[0x46];
+    /* 0x0DC */ u8 spriteBank[0x724];
+    /* 0x800 */ SelectState state;
+};
 
 extern "C" {
+s32 utilityReturnSuccess(void *flags);
+s32 sceneTexturesAreLoaded(void);
+void uiSpriteBankApplyPreset(void *bank, s32 preset);
+void FUN_00202400(void);
+s32 flaggedValueHolderGetTotal(void *holder);
+ItemRecord *FUN_00184310(u32 itemId);
+void sysPlaySe(u32 id);
+void FUN_004a5d5c(SelectMenu *menu);
 
-int sysPlaySe(...);
-int FUN_00184310(void);
-int uiSpriteBankApplyPreset(int *, int);
-int FUN_00202400(void);
-int FUN_004a5d5c(int *);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: uiSpriteBankApplyPreset. */
-/* Supplied declaration required: FUN_00202400. */
-extern int sceneTexturesAreLoaded(void);
-/* Supplied declaration required: FUN_004a5d5c. */
-extern int utilityReturnSuccess(int);
-extern int flaggedValueHolderGetTotal(int *);
-
-
-void FUN_004a4c74(int *param_1)
-
+/* Confirms the current selection: plays the confirm sound for the menu's mode and hands over to the follow-up handler. */
+void FUN_004a4c74(SelectMenu *menu)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = (**(romwright_code **)(*param_1 + 0x24))(param_1);
-  if (((temp_v0 == 0) || (temp_v0 = utilityReturnSuccess((int)param_1 + 0x96), temp_v0 != 0)) ||
-     (((char)param_1[0x218] == '\x01' && (temp_v0 = sceneTexturesAreLoaded(), temp_v0 == 0)))) {
-    return;
-  }
-  param_1[5] = 1;
-  param_1[6] = 0;
-  uiSpriteBankApplyPreset(param_1 + 0x37,8);
-  uiSpriteBankApplyPreset(param_1 + 0x37,9);
-  if ((char)param_1[0x218] != '\0') {
-    if ((char)param_1[0x218] != '\x01') {
-      FUN_004a5d5c(param_1);
-      return;
+    if (!menu->vtable->canConfirm(menu) || utilityReturnSuccess(menu->busyFlags) != 0) {
+        return;
     }
-  }
-  else {
-    FUN_00202400();
-    if ((char)param_1[0x218] == '\0') {
-      temp_v0 = flaggedValueHolderGetTotal(param_1 + 8);
-      temp_v1 = (unsigned int)*(unsigned short *)(param_1 + temp_v0 * 8 + 0x21a);
-      FUN_00184310();
-      if ((*(unsigned char *)(temp_v1 + 0xb3) & 2) == 0) {
-        temp_v2 = 0x30;
-      }
-      else {
-        temp_v2 = 0x121;
-      }
-      sysPlaySe(temp_v2);
-      FUN_004a5d5c(param_1);
-      return;
+    if (menu->state.mode == 1 && !sceneTexturesAreLoaded()) {
+        return;
     }
-  }
-  sysPlaySe(0x48);
-  FUN_004a5d5c(param_1);
-  return;
+    menu->confirmed = 1;
+    menu->unk018 = 0;
+    uiSpriteBankApplyPreset(menu->spriteBank, 8);
+    uiSpriteBankApplyPreset(menu->spriteBank, 9);
+    if (menu->state.mode == 0) {
+        FUN_00202400();
+        if (menu->state.mode == 0) {
+            s32 total = flaggedValueHolderGetTotal(menu->totalHolder);
+            ItemRecord *item = FUN_00184310(menu->state.entries[total].itemId);
+            sysPlaySe((item->flags & 2) != 0 ? 0x121 : 0x30);
+            FUN_004a5d5c(menu);
+            return;
+        }
+    } else if (menu->state.mode != 1) {
+        FUN_004a5d5c(menu);
+        return;
+    }
+    sysPlaySe(0x48);
+    FUN_004a5d5c(menu);
 }
-
-} /* extern "C" */
+}

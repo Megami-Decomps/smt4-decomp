@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ea20c(int *);
+int _ZN15OnlineTimestampC1Ev(int *);
 int onlineJobSetStateTimed(int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002ea20c. */
+/* Supplied declaration required: _ZN15OnlineTimestampC1Ev. */
 /* Supplied declaration required: onlineJobSetStateTimed. */
 
 
@@ -26,7 +26,7 @@ unsigned int FUN_002ea4d2(int param_1,unsigned int param_2,int param_3,unsigned 
   temp_v0 = param_3;
   uStack_14 = param_4;
   if ((*(int *)(param_1 + 0xf8) != -1) &&
-     (FUN_002ea20c(&temp_v0), *(int *)(param_1 + 0xf8) <= temp_v0 - *(int *)(param_1 + 0x100))) {
+     (_ZN15OnlineTimestampC1Ev(&temp_v0), *(int *)(param_1 + 0xf8) <= temp_v0 - *(int *)(param_1 + 0x100))) {
     return 0;
   }
   onlineJobSetStateTimed(param_1,0xfa);

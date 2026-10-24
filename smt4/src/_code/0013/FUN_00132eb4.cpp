@@ -9,7 +9,7 @@ s32 FUN_0014d478(void *archive, u32 item, u32 *size);
 s32 FUN_00141fd0(void *archive, u32 item);
 s32 FUN_00141e48(SoundArchiveLoader *loader, u32 item, u32 flags);
 u32 FUN_002ac780(void *archive, u32 item);
-void FUN_002ac444(WaveSoundFileReader *reader, u32 file);
+void _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(WaveSoundFileReader *reader, u32 file);
 s32 nw_snd_internal_WaveSoundFileReader_ReadNoteInfo(WaveSoundFileReader *reader, SoundNoteInfo *info, u32 size, u32 arg3);
 s32 FUN_002aa984(SoundArchiveLoader *loader, SoundNoteKey key);
 
@@ -51,7 +51,7 @@ s32 FUN_00132eb4(SoundArchiveLoader *loader, u32 item, u32 flags)
                 if (FUN_0014d478(loader->archive, id, &size) == 0) {
                     return 0;
                 }
-                FUN_002ac444(&reader, loaded);
+                _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(&reader, loaded);
                 info.extra.flag[0] = 0;
                 info.extra.flag[1] = 0;
                 info.extra.flag[2] = 0;

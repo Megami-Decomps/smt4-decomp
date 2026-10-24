@@ -1,45 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e4308` (_code @ 0x2e4308, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTable04FindById(void);
+struct DataTable04Record {
+    /* 0x00 */ u8 unk00[0x39];
+    /* 0x39 */ u8 flags;
+    /* 0x3a */ u8 unk3a[0x86 - 0x3a];
+    /* 0x86 */ u16 unk86;
+};
 
-extern int g_menuState; /* 0x57f56c */
+struct MenuState {
+    /* 0x000 */ u8 unk000[0x11];
+    /* 0x011 */ u8 unk11;
+    /* 0x012 */ u8 unk12[2];
+    /* 0x014 */ u32 mode;
+    /* 0x018 */ s16 itemId;
+    /* 0x01a */ u8 unk1a[0x2ac - 0x1a];
+    /* 0x2ac */ u32 unk2ac;
+    /* 0x2b0 */ u8 active;
+    /* 0x2b1 */ u8 usable;
+    /* 0x2b2 */ u8 unk2b2[6];
+    /* 0x2b8 */ u8 flagged;
+};
 
-/* Supplied declaration required: dataTable04FindById. */
+extern MenuState *g_menuState;
 
+DataTable04Record *dataTable04FindById(u32 id);
 
-void FUN_002e4308(int param_1,unsigned char param_2,int param_3)
-
+/* Opens the item prompt for `itemId`; it is usable only if requested and the item's record allows it. */
+void FUN_002e4308(s16 itemId, u8 arg, s32 usable)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_menuState;
-  *(unsigned int *)(g_menuState + 0x14) = 2;
-  *(short *)(temp_v0 + 0x18) = (short)param_1;
-  *(unsigned char *)(temp_v0 + 0x11) = param_2;
-  *(unsigned char *)(temp_v0 + 0x2b8) = 0;
-  if (param_3 != 0) {
-    dataTable04FindById();
-    if (param_1 == 0) {
-      param_3 = 0;
+    MenuState *menu = g_menuState;
+
+    menu->mode = 2;
+    menu->itemId = itemId;
+    menu->unk11 = arg;
+    menu->flagged = 0;
+    if (usable != 0) {
+        DataTable04Record *record = dataTable04FindById(itemId);
+        if (record == NULL) {
+            usable = 0;
+        } else {
+            if (record->unk86 == 0) {
+                usable = 0;
+            }
+            if (record->flags & 0x80) {
+                menu->flagged = 1;
+            }
+        }
     }
-    else {
-      if (*(short *)(param_1 + 0x86) == 0) {
-        param_3 = 0;
-      }
-      if ((*(unsigned char *)(param_1 + 0x39) & 0x80) != 0) {
-        *(unsigned char *)(temp_v0 + 0x2b8) = 1;
-      }
-    }
-  }
-  *(unsigned int *)(temp_v0 + 0x2ac) = 0;
-  *(char *)(temp_v0 + 0x2b1) = (char)param_3;
-  *(unsigned char *)(temp_v0 + 0x2b0) = 1;
-  return;
+    menu->unk2ac = 0;
+    menu->usable = usable;
+    menu->active = 1;
 }
 
 } /* extern "C" */

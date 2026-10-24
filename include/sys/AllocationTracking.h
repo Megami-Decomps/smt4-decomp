@@ -52,8 +52,23 @@ struct AllocationTracking {
     void *lock; // 0x04
     AllocationUsage *usage; // 0x08
 };
+struct AllocationRegionPair {
+    u32 first;
+    u32 second;
+};
+/* The whole tracking block (0x465120): the lock, the usage record and the two pooled regions. */
+struct AllocationRegions {
+    u32 unk00;
+    void *lock; // 0x04
+    AllocationUsage *usage; // 0x08
+    u8 unk0c[0x18];
+    AllocationRegionPair base; // 0x24: start of each pooled region
+    u8 unk2c[8];
+    AllocationRegionPair size; // 0x34: size of each pooled region
+};
 typedef char AllocationHeaderLayoutCheck[sizeof(AllocationHeader) == 0x3c && offsetof(AllocationHeader, link) == 0xc && offsetof(AllocationHeader, owner) == 0x38 ? 1 : -1];
 typedef char AllocationUsageLayoutCheck[sizeof(AllocationUsage) == 0x7c && offsetof(AllocationUsage, count) == 0x18 && offsetof(AllocationUsage, categoryBytes) == 0x3c && offsetof(AllocationUsage, categoryPayloadBytes) == 0x5c ? 1 : -1];
 typedef char AllocationTrackingLayoutCheck[sizeof(AllocationTracking) == 0xc && offsetof(AllocationTracking, lock) == 4 && offsetof(AllocationTracking, usage) == 8 ? 1 : -1];
+typedef char AllocationRegionsOffsetCheck[offsetof(AllocationRegions, base) == 0x24 && offsetof(AllocationRegions, size) == 0x34 ? 1 : -1];
 typedef char AllocationUsageCursorOffsetCheck[offsetof(AllocationUsage, cursor) == 8 ? 1 : -1];
 #endif

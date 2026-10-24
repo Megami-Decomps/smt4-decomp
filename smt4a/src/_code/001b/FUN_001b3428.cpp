@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001a0d08(int *);
+int nn_os_Thread_FinalizeImpl(int *);
 int FUN_002e3140(void);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_001a0d08. */
+/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
 /* Supplied declaration required: FUN_002e3140. */
 
 
@@ -23,7 +23,7 @@ void FUN_001b3428(int *param_1)
       FUN_002e3140();
     }
     *(unsigned char *)(param_1 + 1) = 1;
-    FUN_001a0d08(param_1);
+    nn_os_Thread_FinalizeImpl(param_1);
     if (*param_1 != 0) {
       software_interrupt(0x23);
       *param_1 = 0;

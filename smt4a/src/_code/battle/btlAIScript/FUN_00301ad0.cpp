@@ -1,5 +1,3 @@
-/* NON_MATCHING: retail builds the taskCreateDraw stack arguments through ip and keeps the global in
- * r5 with a 20-byte frame; armcc here saves r6 instead */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "battle/btlAIScript.h"

@@ -24,7 +24,7 @@ extern unsigned int *FUN_001104e8(int, unsigned char *);
 /* Supplied declaration required: FUN_0013462c. */
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
 /* Supplied declaration required: onlineFormatWideString. */
@@ -53,7 +53,7 @@ unsigned int FUN_0010b47c(int param_1,unsigned int param_2)
     for (temp_v2 = 0; temp_v2 < param_2; temp_v2 = temp_v2 + 1) {
       _ZN9Obj55aff4C1Ev(temp_v5);
       onlineFormatWideString(temp_v5,&LAB_0010b52c,temp_v2 + 1);
-      temp_v1 = operatorNew(0x34);
+      temp_v1 = _Znwj(0x34);
       puVar3 = (unsigned int *)0x0;
       if (temp_v1 != 0) {
         puVar3 = (unsigned int *)FUN_001104e8(temp_v1,temp_v5);

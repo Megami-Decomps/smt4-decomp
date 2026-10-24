@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-extern int *wordRefMax(int *, unsigned int *);
+extern int *_ZSt3maxIjERKT_S2_S2_(int *, unsigned int *);
 /* Supplied declaration required: _ZN9Obj559eccD1Ev. */
 /* Supplied declaration required: FUN_0030c5d8. */
 extern int allocArrayElem24(int *, int, unsigned int);
@@ -41,7 +41,7 @@ int * FUN_002ffa20(int *param_1,int param_2)
   param_1[2] = 0;
   temp_v5 = param_2;
   temp_v6 = vectorGrowCapacity_0030c61a(0,param_1);
-  piVar2 = (int *)wordRefMax(&temp_v5,(unsigned int *)&temp_v6);
+  piVar2 = (int *)_ZSt3maxIjERKT_S2_S2_(&temp_v5,(unsigned int *)&temp_v6);
   temp_v3 = *piVar2;
   temp_v1 = allocArrayElem24(param_1,temp_v3,0);
   *param_1 = temp_v1;

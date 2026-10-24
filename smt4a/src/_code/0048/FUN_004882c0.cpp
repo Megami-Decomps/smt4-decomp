@@ -5,7 +5,7 @@
 extern "C" {
 s32 MapNaviTable_GetCategoryCount(MapNaviTableContext *table);
 MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext *table, u32 index);
-MapNaviMarkerIcon *FUN_0048b140(Block66Owner *owner, s32 mapId, u8 category);
+MapNaviMarkerIcon *dataTable2BFindType1Entry(Block66Owner *owner, s32 mapId, u8 category);
 }
 
 static inline MapNaviCategoryRecord *findCategory(MapNaviTableContext *table, s32 mapId, s32 section)
@@ -34,7 +34,7 @@ extern "C" void FUN_004882c0(Block66Owner *owner, s32 slot, s32 active, s32 mapI
     if (active != 0) {
         MapNaviTableContext table;
         MapNaviCategoryRecord *record = findCategory(&table, mapId, section);
-        MapNaviMarkerIcon *icon = FUN_0048b140(owner, mapId, record->category);
+        MapNaviMarkerIcon *icon = dataTable2BFindType1Entry(owner, mapId, record->category);
         view->markers[slot].mapId = mapId;
         view->markers[slot].section = section;
         view->markers[slot].category = record->category;

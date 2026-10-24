@@ -1,39 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019c06c` (_code @ 0x19c06c, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct ValueRange {
+    u32 low;  // 0x00
+    u32 high; // 0x04
+    u32 unk08;
+};
 
 extern "C" {
 
+extern ValueRange DAT_00531158[12]; /* 0x531158 */
 
-int FUN_0019c06c(unsigned int param_1)
-
+// Find the range of the table that contains the value (NULL when none does).
+ValueRange *FUN_0019c06c(u32 value)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v0 = 0;
-  while( 1 ) {
-    if ((*(unsigned int *)(temp_v0 * 0xc + 0x531158) <= param_1) &&
-       (param_1 <= *(unsigned int *)(temp_v0 * 0xc + 0x53115c))) {
-      return temp_v0 * 0xc + 0x531158;
+    for (s32 i = 0; i < 12; i += 2) {
+        if (DAT_00531158[i].low <= value) {
+            if (value <= DAT_00531158[i].high) {
+                return &DAT_00531158[i];
+            }
+        }
+        if (DAT_00531158[i + 1].low <= value && value <= DAT_00531158[i + 1].high) {
+            return &DAT_00531158[i + 1];
+        }
     }
-    temp_v1 = *(unsigned int *)(temp_v0 * 0xc + 0x531164);
-    temp_v3 = param_1 <= temp_v1;
-    temp_v2 = temp_v1 == param_1;
-    if (!temp_v3 || temp_v2) {
-      temp_v1 = *(unsigned int *)(temp_v0 * 0xc + 0x531168);
-      temp_v3 = temp_v1 <= param_1;
-      temp_v2 = param_1 == temp_v1;
-    }
-    if (!temp_v3 || temp_v2) break;
-    temp_v0 = temp_v0 + 2;
-    if (temp_v0 >= 0xc) {
-      return 0;
-    }
-  }
-  return temp_v0 * 0xc + 0x531164;
+    return NULL;
 }
 
 } /* extern "C" */

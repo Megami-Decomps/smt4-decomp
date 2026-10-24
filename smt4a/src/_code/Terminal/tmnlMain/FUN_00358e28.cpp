@@ -1,35 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00358e28` (_code @ 0x358e28, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0056fd38; /* 0x56fd38 */
+struct NameEntry {
+    /* 0x00 */ s16 id;
+    /* 0x02 */ u8 unk02[5];
+    /* 0x07 */ char name[0x3c - 7];
+};
 
-extern int gameDataGetPlayerName(void);
+extern NameEntry DAT_0056fd38[22];
 
+const char *gameDataGetPlayerName(s32 id);
 
-int FUN_00358e28(int param_1)
-
+/* Returns the name string for `id`: ids above 200 are the player's, the rest come from the table. */
+const char *FUN_00358e28(s32 id)
 {
-  int temp_v0;
-  
-  if (param_1 >= 201) {
-    temp_v0 = gameDataGetPlayerName();
-    return temp_v0;
-  }
-  temp_v0 = 0;
-  while( 1 ) {
-    if (*(short *)(temp_v0 * 0x3c + 0x56fd38) == param_1) {
-      return temp_v0 * 0x3c + 0x56fd3f;
+    s32 i;
+
+    if (id > 200) {
+        return gameDataGetPlayerName(id);
     }
-    if ((short)(&(*(unsigned short *)((unsigned char *)&DAT_0056fd38 + 0x3c)))[temp_v0 * 0x1e] == param_1) break;
-    temp_v0 = temp_v0 + 2;
-    if (temp_v0 >= 0x16) {
-      return 0;
+    NameEntry *entries = DAT_0056fd38;
+    for (i = 0; i < 22; i++) {
+        if (entries[i].id == id) {
+            return entries[i].name;
+        }
     }
-  }
-  return temp_v0 * 0x3c + 0x56fd7b;
+    return NULL;
 }
 
 } /* extern "C" */

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_002e32a4(int kind, ...);
+void _ZN4__rw10__rw_throwEiz(int kind, ...);
 int FUN_0030eb1c(int *);
 int FUN_0030eb40(int *, int, unsigned int *);
 int FUN_0030ebc0(int *, int);
@@ -21,7 +21,7 @@ typedef struct {
 extern int DAT_005c4bf8; /* 0x5c4bf8 */
 extern int DAT_005c4bfc; /* 0x5c4bfc */
 
-/* Supplied declaration required: FUN_002e32a4. */
+/* Supplied declaration required: _ZN4__rw10__rw_throwEiz. */
 /* Supplied declaration required: FUN_0030eb1c. */
 /* Supplied declaration required: FUN_0030eb40. */
 /* Supplied declaration required: FUN_0030ebc0. */
@@ -71,7 +71,7 @@ int FUN_001246b8(int *param_1,unsigned int *param_2,int param_3,unsigned int par
     }
   }
   if (temp_v8 == 0) {
-    FUN_002e32a4(4);
+    _ZN4__rw10__rw_throwEiz(4);
   }
   if (temp_v3 != 0) {
     temp_v4 = *temp_v7;

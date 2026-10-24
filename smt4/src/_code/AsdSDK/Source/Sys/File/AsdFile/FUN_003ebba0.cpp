@@ -10,7 +10,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned int g_asdFileMutex; /* 0x465014 */
-extern unsigned int DAT_00465020; /* 0x465020 */
+extern unsigned int g_asdFileThread; /* 0x465020 */
 extern unsigned char DAT_00465024; /* 0x465024 */
 extern unsigned int g_asdFileEvent; /* 0x465028 */
 extern unsigned int DAT_0046502c; /* 0x46502c */
@@ -25,7 +25,7 @@ void FUN_003ebba0(unsigned int param_1,unsigned int param_2,int param_3)
   *(unsigned int *)(param_3 + 0x34) = param_2;
   DAT_00465038 = 0;
   DAT_0046503c = 0;
-  DAT_00465020 = 0;
+  g_asdFileThread = 0;
   DAT_00465024 = 1;
   g_asdFileMutex = 0;
   g_asdFileEvent = 0;

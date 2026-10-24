@@ -1,33 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00378a1c` (_code @ 0x378a1c, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only register naming differs (retail i=r0, scratch r1; built i=r1, scratch r0). */
+#include "common.h"
+
+struct IfRecord {
+    u8 active;      // 0x00
+    u8 unk01[3];
+    s32 state;      // 0x04
+    u8 unk08[0xc];
+    s32 type;       // 0x14
+    u8 unk18[0x17c];
+};
+
+struct IfBlock {
+    u8 unk000[0x1dc];
+    IfRecord records[128]; // 0x1dc
+};
 
 extern "C" {
 
-extern int g_mapIf; /* 0x58103c */
+extern IfBlock *g_mapIf; /* 0x58103c */
 
-
+// Records of the listed types that are active and in state 8 are switched to state 6.
 void FUN_00378a1c(void)
-
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = g_mapIf;
-  temp_v1 = 0;
-  do {
-    temp_v3 = temp_v0 + temp_v1 * 0x194;
-    if (((*(char *)(temp_v3 + 0x1dc) != '\0') &&
-        (((temp_v2 = *(int *)(temp_v3 + 0x1f0), temp_v2 == 0x1d || temp_v2 == 0x31 ||
-          (temp_v2 == 0x1e || temp_v2 == 0x1f)) || ((temp_v2 == 0x30 || temp_v2 == 0x22) || temp_v2 == 0x23)))
-        ) && (*(int *)(temp_v3 + 0x1e0) == 8)) {
-      *(unsigned int *)(temp_v3 + 0x1e0) = 6;
+    for (s32 i = 0; i < 128; i++) {
+        IfRecord *record = &g_mapIf->records[i];
+        if (record->active != 0) {
+            s32 type = record->type;
+            if (type == 0x1d || type == 0x31 || type == 0x1e || type == 0x1f || type == 0x30 || type == 0x22 ||
+                type == 0x23) {
+                if (record->state == 8) {
+                    record->state = 6;
+                }
+            }
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x80);
-  return;
 }
 
 } /* extern "C" */

@@ -21,7 +21,7 @@ typedef struct ActorB {
 
 Command *FUN_0019c06c(void);
 ActorA *dataTable8FindRecord(u32 actor);
-ActorB *FUN_00192608(u32 actor);
+ActorB *dataTable08Sub2GetRecord(u32 actor);
 
 /* Returns the actor's flag for the current command's kind (bit 3 of flags at 0x42 or bit 1 of flags at 0x72); 1 when the command is not active. */
 u32 FUN_0047fe44(u32 actor)
@@ -53,7 +53,7 @@ u32 FUN_0047fe44(u32 actor)
         case 6:
         case 7:
         case 8: {
-            ActorB *b = FUN_00192608(actor);
+            ActorB *b = dataTable08Sub2GetRecord(actor);
 
             result = 0;
             if (b != NULL) {

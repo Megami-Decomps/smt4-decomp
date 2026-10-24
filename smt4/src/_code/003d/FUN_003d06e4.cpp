@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002277d4(...);
 int FUN_00229998(...);
 int FUN_0022abe0(unsigned int, unsigned short [10]);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int FUN_002b7bca(...);
 int FUN_003d10a0(...);
 
@@ -24,7 +24,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_001b1a04; /* 0x1b1a04 */
-extern int FUN_001e1808(...); /* 0x1e1808 */
+extern int unitCompareByPriorityValue(...); /* 0x1e1808 */
 extern int FUN_002197a0(...); /* 0x2197a0 */
 
 /* Supplied declaration required: FUN_002277d4. */
@@ -33,7 +33,7 @@ extern int FUN_002197a0(...); /* 0x2197a0 */
 extern int FUN_0029a924(unsigned short);
 extern int FUN_0029a9d4(unsigned short, unsigned int);
 extern int FUN_0029e9cc(unsigned short);
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: FUN_003d10a0. */
 
@@ -84,12 +84,12 @@ void FUN_003d06e4(int *param_1,int param_2)
       FUN_002b7bca(temp_v5,9,2,FUN_002197a0);
     }
     else {
-      FUN_002b7bca(temp_v5,9,2,FUN_001e1808);
+      FUN_002b7bca(temp_v5,9,2,unitCompareByPriorityValue);
     }
     temp_v2 = 0;
     do {
       temp_v1 = (unsigned int)temp_v5[temp_v2];
-      if ((temp_v1 != 0) && (FUN_002ae164(), temp_v1 != 0)) {
+      if ((temp_v1 != 0) && (dataTable40FindById(), temp_v1 != 0)) {
         temp_v0 = temp_v5[temp_v2];
         if ((**(unsigned int **)(param_2 + 0x20) & 2) != 0) {
           temp_v3 = FUN_0029a9d4(temp_v0,1);
@@ -115,7 +115,7 @@ LAB_003d0860:
       temp_v2 = 0;
       do {
         temp_v1 = (unsigned int)temp_v5[temp_v2];
-        if ((temp_v1 != 0) && (FUN_002ae164(), temp_v1 != 0)) {
+        if ((temp_v1 != 0) && (dataTable40FindById(), temp_v1 != 0)) {
           temp_v0 = temp_v5[temp_v2];
           if ((**(unsigned int **)(param_2 + 0x20) & 2) != 0) {
             temp_v3 = FUN_0029a9d4(temp_v0,1);
@@ -138,7 +138,7 @@ LAB_003d0930:
       temp_v2 = 0;
       do {
         temp_v1 = (unsigned int)temp_v5[temp_v2];
-        if ((temp_v1 != 0) && (FUN_002ae164(), temp_v1 != 0)) {
+        if ((temp_v1 != 0) && (dataTable40FindById(), temp_v1 != 0)) {
           temp_v0 = temp_v5[temp_v2];
           if ((**(unsigned int **)(param_2 + 0x20) & 2) != 0) {
             temp_v3 = FUN_0029a9d4(temp_v0,1);

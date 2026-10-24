@@ -1,41 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033f86c` (_code @ 0x33f86c, 0x80 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: loop strength reduction: the build turns the bit index into a counting-down induction variable (mov r5, #32; subs); retail recomputes i + 0x800 from an up-counting index each iteration (candidate lower optimization level). */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-
-void FUN_0033f86c(int param_1,int param_2)
-
+/* ORs the flag bits 0x800-0xa1f of `source` into `destination` (bit n is bit n & 7 of byte n >> 3). */
+void FUN_0033f86c(u8 *destination, const u8 *source)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  do {
-    temp_v0 = (temp_v2 + 0x800U) >> 3;
-    temp_v1 = 1 << ((temp_v2 + 0x800U) & 7);
-    if ((*(unsigned char *)(param_2 + temp_v0) & temp_v1) != 0) {
-      *(unsigned char *)(param_1 + temp_v0) = (unsigned char)temp_v1 | *(unsigned char *)(param_1 + temp_v0);
+    s32 i;
+
+    for (i = 0; i < 0x20; i++) {
+        u32 bit = i + 0x800;
+        u32 mask = 1 << (bit & 7);
+        if ((source[bit >> 3] & mask) != 0) {
+            destination[bit >> 3] |= mask;
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x20);
-  temp_v2 = 0;
-  do {
-    temp_v0 = (temp_v2 + 0x820U) >> 3;
-    temp_v1 = 1 << ((temp_v2 + 0x820U) & 7);
-    if ((*(unsigned char *)(param_2 + temp_v0) & temp_v1) != 0) {
-      *(unsigned char *)(param_1 + temp_v0) = (unsigned char)temp_v1 | *(unsigned char *)(param_1 + temp_v0);
+    for (i = 0; i < 0x200; i++) {
+        u32 bit = i + 0x820;
+        u32 mask = 1 << (bit & 7);
+        if ((source[bit >> 3] & mask) != 0) {
+            destination[bit >> 3] |= mask;
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x200);
-  return;
 }
 
 } /* extern "C" */

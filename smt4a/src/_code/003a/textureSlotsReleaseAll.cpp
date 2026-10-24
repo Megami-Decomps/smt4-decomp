@@ -9,7 +9,7 @@ typedef struct TextureSlot {
     /* 0x4B */ u8 unk4B;
 } TextureSlot; /* 0x4C */
 
-extern TextureSlot DAT_005702fc[26];
+extern TextureSlot g_pendingTextures[26];
 extern void asdTextureRelease(void *texture);
 
 /* Releases and clears the texture of every slot that isn't marked to keep. */
@@ -18,7 +18,7 @@ void textureSlotsReleaseAll(void)
     u32 i;
 
     for (i = 0; i < 26; i++) {
-        TextureSlot *slot = &DAT_005702fc[i];
+        TextureSlot *slot = &g_pendingTextures[i];
 
         if (slot->keep != 1 && slot->texture != NULL) {
             asdTextureRelease(slot->texture);

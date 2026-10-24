@@ -4,6 +4,7 @@
 #include "common.h"
 
 extern "C" {
+void *asdOperatorNew(u32 bytes, ...);
 int asdMemFree(void *block);
 int asdMemFreeNonNull(void *block);
 int bufferHandleRelease(u32 handle);
@@ -17,6 +18,7 @@ public:
     virtual void refreshOffsets();   /* +0x08 */
     virtual void refreshRects();     /* +0x0C */
     virtual void callback();         /* +0x10 */
+    virtual void setTarget(u32 first, u32 second, u32 third);   /* +0x14 */
 };
 
 /* The base of the screen filters (vtable at 0x420794, named after it until its real name is
@@ -24,6 +26,7 @@ public:
  * child it releases when destroyed. */
 class Obj420794 {
 public:
+    Obj420794(Obj420794Child *owned) : buffer(NULL), texture(0), unk0C(0), speed(0.01f), child(owned) {}
     /* Releases the texture, the buffer and the child. */
     virtual ~Obj420794()
     {
@@ -40,7 +43,10 @@ public:
             child = NULL;
         }
     }
+    static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
+    static void *operator new(u32 bytes, u32 owner) throw() { return asdOperatorNew(bytes, owner); }
     static void operator delete(void *block) { asdMemFreeNonNull(block); }
+    void setBuffer(void *block) { buffer = block; }
     virtual void prepareGeometry() = 0; /* +0x08 */
     virtual void draw() = 0;            /* +0x0C */
     virtual void refreshTextureCoordinates() = 0; /* +0x10 */
@@ -51,7 +57,8 @@ protected:
     /* 0x00: vtable pointer */
     /* 0x04 */ void *buffer;       /* heap block */
     /* 0x08 */ u32 texture;        /* buffer handle, released with bufferHandleRelease */
-    /* 0x0C */ u8 unk0C[8];
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ f32 speed;
     /* 0x14 */ Obj420794Child *child;
 };
 

@@ -6,7 +6,7 @@ s32 saveLoadGetValue(void);
 void saveLoadSetValue(s32 value);
 void FUN_00268250(s32 mode, u32 resource, s32 first, s32 second, s32 third);
 s32 FUN_002a60f8(void);
-void FUN_002bf464(void);
+void campButtonHelpLoad(void);
 void helpTexturesRelease(void);
 void campButtonHelpAcquire(void);
 void campCommonBgRelease(void);
@@ -28,7 +28,7 @@ s32 FUN_0037116c(u32 job)
     SaveLoadProcessWork24 *work = jobGetWork(job);
     switch (work->state) {
     case 12:
-        FUN_002bf464();
+        campButtonHelpLoad();
         campButtonHelpAcquire();
         messageMainSetFlag(0);
         FUN_00268250(0, work->unk14, 0, 0, 0);

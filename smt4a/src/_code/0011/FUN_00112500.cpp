@@ -6,7 +6,7 @@ extern "C" {
 
 int onlineSockAddrCopy(int, unsigned char [6]);
 int onlineSockAddrConstruct(unsigned char [6]);
-int FUN_002ea20c(unsigned char [8], int);
+int _ZN15OnlineTimestampC1Ev(unsigned char [8], int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002eb60c(void);
 
@@ -24,10 +24,10 @@ extern unsigned int DAT_00594eb8; /* 0x594eb8 */
 
 /* Supplied declaration required: onlineSockAddrCopy. */
 /* Supplied declaration required: onlineSockAddrConstruct. */
-/* Supplied declaration required: FUN_002ea20c. */
+/* Supplied declaration required: _ZN15OnlineTimestampC1Ev. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-extern unsigned int FUN_002eab1c(unsigned char *, int);
+extern unsigned int _ZmiRK15OnlineTimestampS1_(unsigned char *, int);
 /* Supplied declaration required: FUN_002eb60c. */
 extern int onlineSockAddrEquals(int, int);
 
@@ -62,8 +62,8 @@ unsigned char * FUN_00112500(int param_1,int *param_2)
     temp_v9 = param_1 + 0x158;
     FUN_002eb60c();
     temp_v4 = (int)*(char *)(temp_v3 + param_1 + 0x2c0);
-    FUN_002ea20c(temp_v11,0x11254e);
-    temp_v0 = FUN_002eab1c(temp_v11,temp_v4 + 0x2e8);
+    _ZN15OnlineTimestampC1Ev(temp_v11,0x11254e);
+    temp_v0 = _ZmiRK15OnlineTimestampS1_(temp_v11,temp_v4 + 0x2e8);
     *(unsigned int *)(param_1 + 0x2cc) = temp_v0;
     onlineSockAddrCopy(temp_v9,temp_v5);
     temp_v10 = temp_v4 + 0x138;

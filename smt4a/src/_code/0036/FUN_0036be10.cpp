@@ -1,35 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036be10` (_code @ 0x36be10, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same logic; retail reaches the ready byte through a +0x1254 sub-struct anchor ((base + 0x1000 + 0x254) + 0x88) and schedules `mov r1, r6` before the handle test; built folds the ready flag into a pool offset and reorders the moves */
+#include "common.h"
+
+/* Apocalypse's sound system extends beyond the shared IV work-area layout. */
+struct SpatialSoundActorView {
+    u8 unk00[0x3c];
+    u8 playback[0x4c];
+};
+struct SpatialSoundActorsView {
+    SpatialSoundActorView actors[16];
+    u8 unk880[0x3c];
+    u32 handles[16];    /* 0x8bc */
+    u8 unk8fc[0x184];
+    u32 activeMask;     /* 0xa80 */
+};
+struct ApocalypseSpatialSoundView {
+    u8 unk000[0x854];
+    SpatialSoundActorsView spatial; /* 0x854 */
+    u8 unk12d8[4];
+    u8 ready; /* 0x12dc */
+};
 
 extern "C" {
+extern u8 g_asdSoundSystem[];
+s32 asd3dSoundActorIsPlaying(u32 actorIndex);
+void asdSoundObjectStop(u32 handle, u32 frames);
 
-int asdSoundObjectStop(int, unsigned int);
-int asd3dSoundActorIsPlaying(void);
-
-extern unsigned int DAT_0063f4bc; /* 0x63f4bc */
-extern signed char DAT_0063f4c4; /* 0x63f4c4 */
-
-/* Supplied declaration required: asdSoundObjectStop. */
-/* Supplied declaration required: asd3dSoundActorIsPlaying. */
-
-
-void FUN_0036be10(unsigned int param_1,unsigned int param_2)
-
+/* Stops spatial actor `actorIndex` (when playing) and clears its bit in the active mask. */
+void FUN_0036be10(u32 actorIndex, u32 frames)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  if (((DAT_0063f4c4 != '\0') && (param_1 < 0x10)) && (temp_v0 = param_1, asd3dSoundActorIsPlaying(), temp_v0 != 0))
-  {
-    temp_v1 = *(int *)(param_1 * 4 + 0x63f2f8);
-    if (temp_v1 != 0) {
-      asdSoundObjectStop(temp_v1,param_2);
+    ApocalypseSpatialSoundView *system = (ApocalypseSpatialSoundView *)g_asdSoundSystem;
+    SpatialSoundActorsView *spatial = &system->spatial;
+
+    if (system->ready && actorIndex < 16 && asd3dSoundActorIsPlaying(actorIndex)) {
+        if (spatial->handles[actorIndex] != 0) {
+            asdSoundObjectStop(spatial->handles[actorIndex], frames);
+        }
+        spatial->activeMask &= ~(1u << actorIndex);
     }
-    DAT_0063f4bc = DAT_0063f4bc & ~(1 << (param_1 & 0xff));
-  }
-  return;
 }
 
 } /* extern "C" */

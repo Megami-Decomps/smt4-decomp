@@ -10,7 +10,7 @@ int padIsButtonRepeat(...);
 int FUN_002bf4f8(...);
 int FUN_002bf810(...);
 int padIsButtonPressed(...);
-int FUN_002bff6c(...);
+int uiPointerHitsRect(...);
 int FUN_002bffe0(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
@@ -32,7 +32,7 @@ extern int FUN_0026f024(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: padIsButtonPressed. */
-/* Supplied declaration required: FUN_002bff6c. */
+/* Supplied declaration required: uiPointerHitsRect. */
 /* Supplied declaration required: FUN_002bffe0. */
 
 
@@ -88,7 +88,7 @@ unsigned int FUN_003172e0(int param_1)
   temp_v1 = FUN_002bf4f8(0x39,0x42);
   temp_v16 = 0;
   temp_v2 = (int)*(short *)(temp_v1 + 8);
-  FUN_002bff6c(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
+  uiPointerHitsRect(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
                (int)(*(short **)(temp_v1 + 0xc))[1]);
   if (temp_v2 != 0) {
     temp_v3 = *(unsigned int *)(param_1 + 0x130) | 1;
@@ -100,7 +100,7 @@ unsigned int FUN_003172e0(int param_1)
   temp_v1 = FUN_002bf4f8(0x39,0x43);
   temp_v16 = 0;
   temp_v2 = (int)*(short *)(temp_v1 + 8);
-  FUN_002bff6c(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
+  uiPointerHitsRect(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
                (int)(*(short **)(temp_v1 + 0xc))[1]);
   if (temp_v2 != 0) {
     temp_v3 = *(unsigned int *)(param_1 + 0x130) | 2;
@@ -112,7 +112,7 @@ unsigned int FUN_003172e0(int param_1)
   temp_v1 = FUN_002bf4f8(0x39,0x41);
   temp_v16 = 0;
   temp_v2 = (int)*(short *)(temp_v1 + 8);
-  FUN_002bff6c(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
+  uiPointerHitsRect(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
                (int)(*(short **)(temp_v1 + 0xc))[1]);
   temp_v1 = 0;
   if (temp_v2 != 0) {
@@ -127,7 +127,7 @@ unsigned int FUN_003172e0(int param_1)
       temp_v2 = FUN_002bf4f8(0x39,temp_v1 + 0xd1);
       temp_v16 = 0;
       temp_v4 = (int)*(short *)(temp_v2 + 8);
-      FUN_002bff6c(temp_v4,(int)*(short *)(temp_v2 + 10),(int)**(short **)(temp_v2 + 0xc),
+      uiPointerHitsRect(temp_v4,(int)*(short *)(temp_v2 + 10),(int)**(short **)(temp_v2 + 0xc),
                    (int)(*(short **)(temp_v2 + 0xc))[1]);
       if (temp_v4 != 0) {
         *(unsigned int *)(param_1 + 0x14c) = 0xe1;
@@ -163,7 +163,7 @@ unsigned int FUN_003172e0(int param_1)
   temp_v1 = FUN_002bf4f8(0x39,*(int *)(param_1 + 0x13c) + 0xe6);
   temp_v16 = 3;
   temp_v2 = (int)*(short *)(temp_v1 + 8);
-  FUN_002bff6c(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
+  uiPointerHitsRect(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
                (int)(*(short **)(temp_v1 + 0xc))[1]);
   if (temp_v2 != 0) {
     FUN_002bffe0(temp_v18,&temp_v17,3);

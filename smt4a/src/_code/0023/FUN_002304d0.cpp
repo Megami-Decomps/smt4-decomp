@@ -1,35 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002304d0` (_code @ 0x2304d0, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the order of the cell-index additions and one register differ (retail adds slot into the (group*4-4) term before the row base). */
+#include "common.h"
+
+struct PartyPanelCell {
+    u8 unk00[4];
+    u16 value; // 0x04
+    u8 unk06[2];
+};
+
+struct PartyPanel {
+    u8 unk000[0x42];
+    u8 wideMode;             // 0x042
+    u8 unk043[2429];
+    u8 rowFlags[192];       // 0x9c0
+    PartyPanelCell cells[1]; // 0xa80
+};
 
 extern "C" {
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_4_stack;
+extern PartyPanel *g_partyPanel;
 
-extern int g_partyPanel; /* 0x57f268 */
-
-
-unsigned int FUN_002304d0(unsigned int param_1,int param_2,int param_3,int param_4)
-
+u32 FUN_002304d0(u32 unused, s32 slot, s32 group, s32 row)
 {
-  if (param_3 != 0) {
-    if (*(char *)(g_partyPanel + 0x42) == '\0') {
-      param_4 = param_4 * 0xc;
+    u32 result = 0;
+    if (group != 0) {
+        s32 first = (group - 1) * 4;
+        s32 base = g_partyPanel->wideMode == 0 ? row * 12 : 0;
+        if (g_partyPanel->cells[first + slot + base].value != 0) {
+            result = 1;
+        }
+    } else if (g_partyPanel->rowFlags[slot] != 0) {
+        result = 1;
     }
-    else {
-      param_4 = 0;
-    }
-    if (*(short *)(g_partyPanel + (param_4 + (param_3 * 4 - 4) + param_2) * 8 + 0xa84) == 0) {
-      return 0;
-    }
-  }
-  else if (*(char *)(param_2 + g_partyPanel + 0x9c0) == '\0') {
-    return 0;
-  }
-  return 1;
+    return result;
 }
 
 } /* extern "C" */

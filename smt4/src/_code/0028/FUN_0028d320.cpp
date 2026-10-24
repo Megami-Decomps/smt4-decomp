@@ -1,148 +1,139 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028d320` (_code @ 0x28d320, 0x270 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail saves eight callee-saved registers (fp, plus ip as padding) and hoists the loop limits 4 and 54 into r6; here seven registers and immediate limits. Control flow, switch tables and bitfields match. */
+#include "common.h"
+
+/* The part of a skill record the target check reads. */
+struct SkillTargetRecord {
+    /* 0x00 */ u8 unk00[0x23];
+    /* 0x23 */ u8 category;
+    /* 0x24 */ u8 unk24[4];
+    /* 0x28 */ u32 unk28Low : 5;
+    /* 0x28 */ u32 scope : 4;     /* who the skill can reach: allies, enemies, the script unit, party slots */
+    /* 0x28 */ u32 mode : 2;      /* 2 and 3: skills checked against their targets */
+    /* 0x28 */ u32 unk28High : 21;
+    /* 0x2C */ u8 unk2C[0xC];
+    /* 0x38 */ u32 flags;
+};
+
+struct BtlCheckedUnit {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x284];
+};
+
+struct BtlCheckState {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ BtlCheckedUnit *units;
+    /* 0x1FC4 */ u8 unk1FC4[0x24E4];
+    /* 0x44A8 */ u32 flags;
+};
+
+struct BtlScriptUnit {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ BtlCheckedUnit *unit;
+};
+
+struct SlotTableCount {
+    /* 0x0000 */ u8 unk0000[0x910B];
+    /* 0x910B */ u8 partyCount;
+};
 
 extern "C" {
+extern u32 g_btlScriptUnit;
+SkillTargetRecord *dataTable40FindById(u32 skillId);
+BtlCheckState *btlGetMainState(void);
+BtlScriptUnit *btlUnitGet(u32 id);
+SlotTableCount *gameGetSlotTable(void);
+s32 FUN_0023d488(BtlCheckedUnit *unit, SkillTargetRecord *skill, s32 mode);
+s32 FUN_0023d9b8(s32 slot, s32 flag, SkillTargetRecord *skill);
 
-int FUN_0023d488(...);
-int FUN_0023d9b8(int, int, int);
-int FUN_002ae164(void);
-int SCARRY4(unsigned int, int);
-
-extern unsigned int g_btlScriptUnit; /* 0x43427c */
-
-/* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
-/* Supplied declaration required: FUN_0023d488. */
-/* Supplied declaration required: FUN_0023d9b8. */
-extern int btlUnitGet(unsigned int);
-extern int btlGetMainState(void);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002ae164. */
-
-
-unsigned int FUN_0028d320(int param_1)
-
+/* Checks a skill against everything it could target: 0 = unusable, 1 = no skill, 2 = not checked, 3 = usable. */
+u32 FUN_0028d320(u32 skillId)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int *puVar6;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned char temp_v8;
-  
-  if ((param_1 != 0) && (FUN_002ae164(), param_1 != 0)) {
-    temp_v6 = 2;
-    temp_v8 = (*(unsigned int *)(param_1 + 0x28) & 0x7ff) >> 9 != 2;
-    if (temp_v8) {
-      temp_v6 = 3;
+    if (skillId == 0) {
+        return 1;
     }
-    if (!temp_v8 || temp_v6 == (*(unsigned int *)(param_1 + 0x28) & 0x7ff) >> 9) {
-      switch(*(unsigned char *)(param_1 + 0x23)) {
-      case 0:
-      case 1:
-      case 2:
-      case 5:
-      case 6:
-      case 10:
+    SkillTargetRecord *skill = dataTable40FindById(skillId);
+    if (skill == NULL) {
+        return 1;
+    }
+    if (skill->mode != 2 && skill->mode != 3) {
+        return 2;
+    }
+    switch (skill->category) {
+    case 0:
+    case 1:
+    case 2:
+    case 5:
+    case 6:
+    case 10:
+        return 0;
+    }
+    BtlCheckState *state = btlGetMainState();
+    if ((state->flags & 0x2000000) != 0) {
+        return 0;
+    }
+    u8 front = 0;
+    u8 back = 0;
+    u8 script = 0;
+    u8 slots = 0;
+    switch (skill->scope) {
+    case 0:
+    case 1:
+        back = 1;
         break;
-      default:
-        temp_v4 = btlGetMainState();
-        if ((*(unsigned int *)(temp_v4 + 0x44a8) & 0x2000000) == 0) {
-          temp_v8 = 0;
-          temp_v0 = 0;
-          temp_v1 = 0;
-          temp_v2 = 0;
-          switch((*(unsigned int *)(param_1 + 0x28) & 0x1ff) >> 5) {
-          case 0:
-          case 1:
-            temp_v0 = 1;
-            temp_v8 = 0;
-            break;
-          case 2:
-          case 3:
-            temp_v8 = 1;
-            break;
-          case 4:
-            temp_v1 = 1;
-            temp_v8 = 0;
-            break;
-          case 5:
-          case 6:
-            temp_v0 = 1;
-            temp_v8 = 1;
-            break;
-          case 7:
-          case 8:
-            temp_v2 = 1;
-            temp_v8 = 1;
-          }
-          temp_v7 = 0;
-          if ((*(unsigned int *)(param_1 + 0x38) & 0x4000) != 0) {
-            temp_v1 = 1;
-          }
-          if (temp_v8) {
-            do {
-              puVar6 = (unsigned int *)(*(int *)(temp_v4 + 0x1fc0) + temp_v7 * 0x288);
-              temp_v6 = *puVar6;
-              if ((((temp_v6 & 2) != 0) || (((temp_v6 & 1) != 0 && ((temp_v6 & 0x40) == 0)))) &&
-                 (FUN_0023d488(puVar6,param_1,0), puVar6 == (unsigned int *)0x0)) {
-                return 0;
-              }
-              temp_v7 = temp_v7 + 1;
-            } while (temp_v7 < 4);
-          }
-          if (temp_v0) {
-            temp_v7 = 4;
-            do {
-              puVar6 = (unsigned int *)(*(int *)(temp_v4 + 0x1fc0) + temp_v7 * 0x288);
-              if ((((*puVar6 & 1) != 0) && ((*puVar6 & 0x40) == 0)) &&
-                 (FUN_0023d488(puVar6,param_1,0), puVar6 == (unsigned int *)0x0)) {
-                return 0;
-              }
-              temp_v7 = temp_v7 + 1;
-            } while (temp_v7 < 0x36);
-          }
-          if (temp_v1) {
-            temp_v7 = btlUnitGet(g_btlScriptUnit);
-            temp_v4 = 0;
-            if (temp_v7 != 0) {
-              temp_v4 = *(int *)(temp_v7 + 0x20);
-            }
-            if ((temp_v7 != 0 && temp_v4 != 0) && (FUN_0023d488(temp_v4,param_1,1), temp_v4 == 0)) {
-              return 0;
-            }
-          }
-          if (temp_v2) {
-            temp_v4 = gameGetSlotTable();
-            temp_v7 = -1;
-            if (*(unsigned char *)(temp_v4 + 0x910b) != 0xffffffff &&
-                !SCARRY4((unsigned int)*(unsigned char *)(temp_v4 + 0x910b),1)) {
-              do {
-                temp_v5 = temp_v7;
-                FUN_0023d9b8(temp_v7,0,param_1);
-                if (temp_v5 == 0) {
-                  return 0;
-                }
-                temp_v7 = temp_v7 + 1;
-              } while (temp_v7 < (int)(unsigned int)*(unsigned char *)(temp_v4 + 0x910b));
-            }
-          }
-          return 3;
-        }
-      }
-      return 0;
+    case 2:
+    case 3:
+        front = 1;
+        break;
+    case 4:
+        script = 1;
+        break;
+    case 5:
+    case 6:
+        front = 1;
+        back = 1;
+        break;
+    case 7:
+    case 8:
+        front = 1;
+        slots = 1;
+        break;
     }
-    temp_v3 = 2;
-  }
-  else {
-    temp_v3 = 1;
-  }
-  return temp_v3;
+    s32 i = 0;
+    if ((skill->flags & 0x4000) != 0) {
+        script = 1;
+    }
+    if (front) {
+        for (; i < 4; i++) {
+            BtlCheckedUnit *unit = &state->units[i];
+            if (((unit->flags & 2) != 0 || ((unit->flags & 1) != 0 && (unit->flags & 0x40) == 0)) &&
+                FUN_0023d488(unit, skill, 0) == 0) {
+                return 0;
+            }
+        }
+    }
+    if (back) {
+        for (i = 4; i < 54; i++) {
+            BtlCheckedUnit *unit = &state->units[i];
+            if ((unit->flags & 1) != 0 && (unit->flags & 0x40) == 0 && FUN_0023d488(unit, skill, 0) == 0) {
+                return 0;
+            }
+        }
+    }
+    if (script) {
+        BtlScriptUnit *scriptUnit = btlUnitGet(g_btlScriptUnit);
+        if (scriptUnit != NULL && scriptUnit->unit != NULL && FUN_0023d488(scriptUnit->unit, skill, 1) == 0) {
+            return 0;
+        }
+    }
+    if (slots) {
+        SlotTableCount *table = gameGetSlotTable();
+        for (i = -1; i < table->partyCount; i++) {
+            if (FUN_0023d9b8(i, 0, skill) == 0) {
+                return 0;
+            }
+        }
+    }
+    return 3;
 }
 
-} /* extern "C" */
+}

@@ -1,4 +1,3 @@
-/* NON_MATCHING: pending-byte and loader-state constant stores are scheduled differently. */
 #include "battle/btlTalk.h"
 #include <stddef.h>
 

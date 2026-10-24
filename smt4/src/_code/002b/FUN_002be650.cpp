@@ -1,167 +1,176 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002be650` (_code @ 0x2be650, 0x2a8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: prologue, per-table lookups (inlined) and stack layout match; retail keeps a separate null/payload check (cmp; nop; beq) per case with one shared +0x20 tail, built merges/predicates them */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001317c8(unsigned char *, unsigned char *);
-int FUN_00131898(unsigned char *, unsigned char *);
-int FUN_0014162c(unsigned char *, unsigned char *);
-int FUN_002b4504(unsigned char *, unsigned char *);
-int dataTable08Sub2GetRecord(void);
-int dataTable08Sub1GetRecord(void);
-int libc_bsearch(unsigned char *, unsigned int, unsigned int, int, unsigned char *);
+/* The tail of the content system: one lookup cache per record table, at the offsets the callers below use. */
+typedef struct AocRecordSystem {
+    /* 0x000 */ u8 unk000[0x3A0];
+    /* 0x3A0 */ s32 cache3A0;
+    /* 0x3A4 */ u8 unk3A4[0x20];
+    /* 0x3C4 */ s32 cache3C4;
+    /* 0x3C8 */ u8 unk3C8[8];
+    /* 0x3D0 */ s32 cache3D0;
+    /* 0x3D4 */ u8 unk3D4[8];
+    /* 0x3DC */ s32 cache3DC;
+} AocRecordSystem;
 
-/* stack frame of param_2: 4 slot(s), 10 byte(s) */
-typedef struct {
-    unsigned short sp18; /* 0x18: local_18 */
-    unsigned short sp48; /* 0x48: local_48 */
-    unsigned short sp4C; /* 0x4c: local_4c */
-    unsigned int sp70; /* 0x70: local_70 */
-} param_2_stack;
+/* Search keys of the four bsearched record tables: only the id is filled. */
+typedef struct DataRecord58 {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u16 id;
+    /* 0x52 */ u8 unk52[6];
+} DataRecord58;
 
-extern unsigned char LAB_00125e54; /* 0x125e54 */
-extern unsigned char LAB_001264b4; /* 0x1264b4 */
-extern unsigned char LAB_0012654c; /* 0x12654c */
-extern unsigned char LAB_00138944; /* 0x138944 */
-extern unsigned char *g_aocSystem; /* 0x433158 */
+typedef struct DataRecord3C {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u16 id;
+    /* 0x22 */ u8 unk22[0x1A];
+} DataRecord3C;
 
-#ifndef ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
-#define romwright_subpiece_4_2_0(value, offset) ((unsigned short)(unsigned int)(value))
-#endif
-/* Supplied declaration required: FUN_001317c8. */
-/* Supplied declaration required: FUN_00131898. */
-/* Supplied declaration required: FUN_0014162c. */
-/* Supplied declaration required: FUN_002b4504. */
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
-/* Supplied declaration required: libc_bsearch. */
-extern int FUN_002b4748(void);
-extern unsigned int dataTableGetCount(int);
-extern unsigned int dataTableGetEntries(void);
-extern int dataTableGet(unsigned int, unsigned int);
+typedef struct DataRecord30 {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u16 id;
+    /* 0x22 */ u8 unk22[0xE];
+} DataRecord30;
 
+typedef struct DataRecord2C {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u16 id;
+    /* 0x22 */ u8 unk22[0xA];
+} DataRecord2C;
 
-unsigned char * FUN_002be650(unsigned char *param_1,int param_2)
+extern AocRecordSystem *g_aocSystem;
 
+void *FUN_0014162c(AocRecordSystem *system, u32 id);
+void *FUN_001317c8(AocRecordSystem *system, u32 id);
+void *FUN_00131898(AocRecordSystem *system, u32 id);
+void *FUN_002b4504(AocRecordSystem *system, u32 id);
+int FUN_002b4748(void);
+void *dataTable08Sub1GetRecord(u32 id);
+void *dataTable08Sub2GetRecord(u32 id);
+int dataTableGet(u32 table, u32 index);
+void *dataTableGetEntries(void);
+u32 dataTableGetCount(int table);
+void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, int (*compare)(const void *, const void *));
+
+int dataTable08Sub0CompareKeys(const void *a, const void *b);
+int aocCompareRecord83Keys(const void *a, const void *b);
+int aocCompareRecord84Keys(const void *a, const void *b);
+int compareLookupKey(const void *a, const void *b);
+
+static inline u8 *getTable08Sub0Record(u32 id)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned char *puVar3;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4 [4];
-  unsigned char temp_v5 [28];
-  unsigned short temp_v6;
-  unsigned short temp_v7;
-  unsigned short temp_v8;
-  
-  if (param_1 == (unsigned char *)0x0) {
-    return (unsigned char *)0x0;
-  }
-  temp_v1 = FUN_002b4748();
-  temp_v0 = 0;
-  if (temp_v1 != 0) {
-    temp_v0 = *(unsigned char *)(temp_v1 + 8);
-  }
-  temp_v6 = romwright_subpiece_4_2_0(param_1,0);
-  puVar3 = g_aocSystem;
-  switch(temp_v0) {
-  case 0:
-    temp_v8 = temp_v6;
-    if ((*(int *)(g_aocSystem + 0x3a0) == 0) ||
-       (FUN_0014162c(g_aocSystem,param_1), puVar3 == (unsigned char *)0x0)) {
-      temp_v1 = dataTableGet(8,0);
-      if (temp_v1 == 0) {
-        return (unsigned char *)0x0;
-      }
-      temp_v2 = dataTableGetEntries();
-      temp_v3 = dataTableGetCount(temp_v1);
-      puVar3 = temp_v5;
-      libc_bsearch(puVar3,temp_v2,temp_v3,0x58,&LAB_00138944);
+    DataRecord58 key;
+    u8 *record;
+    key.id = id;
+    if (g_aocSystem->cache3A0 == 0 || (record = (u8 *)FUN_0014162c(g_aocSystem, id)) == NULL) {
+        int table = dataTableGet(8, 0);
+        if (table == 0) {
+            return NULL;
+        }
+        void *entries = dataTableGetEntries();
+        u32 count = dataTableGetCount(table);
+        record = (u8 *)libc_bsearch(&key, entries, count, sizeof(key), dataTable08Sub0CompareKeys);
     }
-    if (puVar3 == (unsigned char *)0x0) {
-      return (unsigned char *)0x0;
+    return record;
+}
+
+static inline u8 *getTable08Sub3Record(u32 id)
+{
+    DataRecord3C key;
+    u8 *record;
+    key.id = id;
+    if (g_aocSystem->cache3C4 == 0 || (record = (u8 *)FUN_001317c8(g_aocSystem, id)) == NULL) {
+        int table = dataTableGet(8, 3);
+        if (table == 0) {
+            return NULL;
+        }
+        void *entries = dataTableGetEntries();
+        u32 count = dataTableGetCount(table);
+        record = (u8 *)libc_bsearch(&key, entries, count, sizeof(key), aocCompareRecord83Keys);
     }
-    if (param_2 == 0) {
-      return puVar3;
+    return record;
+}
+
+static inline u8 *getTable08Sub4Record(u32 id)
+{
+    DataRecord30 key;
+    u8 *record;
+    key.id = id;
+    if (g_aocSystem->cache3D0 == 0 || (record = (u8 *)FUN_00131898(g_aocSystem, id)) == NULL) {
+        int table = dataTableGet(8, 4);
+        if (table == 0) {
+            return NULL;
+        }
+        void *entries = dataTableGetEntries();
+        u32 count = dataTableGetCount(table);
+        record = (u8 *)libc_bsearch(&key, entries, count, sizeof(key), aocCompareRecord84Keys);
     }
-    return puVar3 + 0x20;
-  case 1:
-    dataTable08Sub1GetRecord();
-    puVar3 = param_1;
-    if (puVar3 == (unsigned char *)0x0) {
-      return (unsigned char *)0x0;
+    return record;
+}
+
+static inline u8 *getTable08Sub5Record(u32 id)
+{
+    DataRecord2C key;
+    u8 *record;
+    key.id = id;
+    if (g_aocSystem->cache3DC == 0 || (record = (u8 *)FUN_002b4504(g_aocSystem, id)) == NULL) {
+        int table = dataTableGet(8, 5);
+        if (table == 0) {
+            return NULL;
+        }
+        void *entries = dataTableGetEntries();
+        u32 count = dataTableGetCount(table);
+        record = (u8 *)libc_bsearch(&key, entries, count, sizeof(key), compareLookupKey);
     }
-    if (param_2 == 0) {
-      return puVar3;
+    return record;
+}
+
+/* Looks up the record `id` in the data table selected by the current content mode; with `payload` returns the record's payload at +0x20. */
+u8 *FUN_002be650(u32 id, int payload)
+{
+    u8 *record;
+    int info;
+    u8 mode;
+
+    if (id == 0) {
+        return NULL;
     }
-    return puVar3 + 0x20;
-  case 2:
-  case 3:
-  case 4:
-  case 5:
-  case 6:
-  case 7:
-  case 8:
-    dataTable08Sub2GetRecord();
-    puVar3 = param_1;
-    if (puVar3 == (unsigned char *)0x0) {
-      return (unsigned char *)0x0;
+    info = FUN_002b4748();
+    mode = 0;
+    if (info != 0) {
+        mode = *(u8 *)(info + 8);
     }
-    if (param_2 == 0) {
-      return puVar3;
+    switch (mode) {
+    case 0:
+        record = getTable08Sub0Record(id);
+        break;
+    case 1:
+        record = (u8 *)dataTable08Sub1GetRecord(id);
+        break;
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+        record = (u8 *)dataTable08Sub2GetRecord(id);
+        break;
+    case 9:
+        return getTable08Sub3Record(id);
+    case 10:
+        return getTable08Sub4Record(id);
+    case 11:
+        return getTable08Sub5Record(id);
+    default:
+        return NULL;
     }
-    return puVar3 + 0x20;
-  case 9:
-    if ((*(int *)(g_aocSystem + 0x3c4) == 0) ||
-       (FUN_001317c8(g_aocSystem,param_1), puVar3 == (unsigned char *)0x0)) {
-      temp_v1 = dataTableGet(8,3);
-      if (temp_v1 == 0) {
-        return (unsigned char *)0x0;
-      }
-      temp_v2 = dataTableGetEntries();
-      temp_v3 = dataTableGetCount(temp_v1);
-      puVar3 = temp_v4;
-      libc_bsearch(puVar3,temp_v2,temp_v3,0x3c,&LAB_00125e54);
+    if (record == NULL) {
+        return NULL;
     }
-    break;
-  case 10:
-    temp_v7 = temp_v6;
-    if ((*(int *)(g_aocSystem + 0x3d0) == 0) ||
-       (FUN_00131898(g_aocSystem,param_1), puVar3 == (unsigned char *)0x0)) {
-      temp_v1 = dataTableGet(8,4);
-      if (temp_v1 == 0) {
-        return (unsigned char *)0x0;
-      }
-      temp_v2 = dataTableGetEntries();
-      temp_v3 = dataTableGetCount(temp_v1);
-      puVar3 = temp_v5;
-      libc_bsearch(puVar3,temp_v2,temp_v3,0x30,&LAB_0012654c);
-    }
-    break;
-  case 0xb:
-    if ((*(int *)(g_aocSystem + 0x3dc) == 0) ||
-       (FUN_002b4504(g_aocSystem,param_1), puVar3 == (unsigned char *)0x0)) {
-      temp_v1 = dataTableGet(8,5);
-      if (temp_v1 == 0) {
-        return (unsigned char *)0x0;
-      }
-      temp_v2 = dataTableGetEntries();
-      temp_v3 = dataTableGetCount(temp_v1);
-      puVar3 = temp_v4;
-      libc_bsearch(puVar3,temp_v2,temp_v3,0x2c,&LAB_001264b4);
-    }
-    break;
-  default:
-    return (unsigned char *)0x0;
-  }
-  if (puVar3 != (unsigned char *)0x0) {
-    return puVar3;
-  }
-  return (unsigned char *)0x0;
+    return payload != 0 ? record + 0x20 : record;
 }
 
 } /* extern "C" */

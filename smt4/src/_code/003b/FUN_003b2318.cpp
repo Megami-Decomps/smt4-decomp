@@ -54,7 +54,7 @@ extern unsigned char LAB_003b27b8; /* 0x3b27b8 */
 /* Supplied declaration required: moLiveByteVectorResizeFill. */
 /* Supplied declaration required: FUN_0022be6c. */
 /* Supplied declaration required: poolNodeUnlink. */
-extern int FUN_003af8d0(int);
+extern int moLiveNodeSourceAcquireHeader(int);
 /* Supplied declaration required: FUN_003fb694. */
 extern int FUN_003fbfd0(int);
 
@@ -216,7 +216,7 @@ unsigned int FUN_003b2318(long long *param_1,int param_2,unsigned int *param_3,u
     if (temp_v5 != 0) {
       temp_v5 = *(int *)(temp_v5 + 0x10);
       temp_v27 = FUN_0022be6c(&temp_v20,1);
-      temp_v6 = FUN_003af8d0(temp_v5);
+      temp_v6 = moLiveNodeSourceAcquireHeader(temp_v5);
       if (temp_v6 != 0) {
         if (temp_v27 != 0) {
           temp_v12 = (unsigned int *)&temp_v20;

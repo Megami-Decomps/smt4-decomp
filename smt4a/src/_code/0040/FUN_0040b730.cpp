@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(unsigned char [68], unsigned char *, int, int, unsigned int);
-int FUN_00192608(void);
+int dataTable08Sub2GetRecord(void);
 int FUN_003e573c(unsigned int, int, unsigned char [68], unsigned int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -19,7 +19,7 @@ extern unsigned char LAB_0040b990; /* 0x40b990 */
 
 /* Supplied declaration required: textFormatBuffer. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00192608. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: FUN_003e573c. */
 extern unsigned int FUN_0040b11c(unsigned int, unsigned int, unsigned short, unsigned short, unsigned int);
 
@@ -42,7 +42,7 @@ void FUN_0040b730(unsigned int param_1,int param_2,unsigned int param_3)
     if (param_2 != 1) {
       if (param_2 == 2) {
         temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 10);
-        FUN_00192608();
+        dataTable08Sub2GetRecord();
         temp_v2 = FUN_0040b11c(param_1,2,*(unsigned short *)(temp_v1 + 0x40),*(unsigned short *)(temp_v1 + 0x42),0
                             );
         textFormatBuffer(temp_v3,&LAB_0040b990,*(unsigned short *)(temp_v1 + 0x40),
@@ -51,7 +51,7 @@ void FUN_0040b730(unsigned int param_1,int param_2,unsigned int param_3)
     }
     else {
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 8);
-      FUN_00192608();
+      dataTable08Sub2GetRecord();
       temp_v2 = FUN_0040b11c(param_1,1,*(unsigned short *)(temp_v1 + 0x40),*(unsigned short *)(temp_v1 + 0x42),0);
       textFormatBuffer(temp_v3,&LAB_0040b958,*(unsigned short *)(temp_v1 + 0x40),
                    *(unsigned short *)(temp_v1 + 0x42),temp_v2);
@@ -59,7 +59,7 @@ void FUN_0040b730(unsigned int param_1,int param_2,unsigned int param_3)
   }
   else {
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 6);
-    FUN_00192608();
+    dataTable08Sub2GetRecord();
     temp_v2 = FUN_0040b11c(param_1,0,*(unsigned short *)(temp_v1 + 0x40),*(unsigned short *)(temp_v1 + 0x42),0);
     textFormatBuffer(temp_v3,&LAB_0040b93c,*(unsigned short *)(temp_v1 + 0x40),
                  *(unsigned short *)(temp_v1 + 0x42),temp_v2);

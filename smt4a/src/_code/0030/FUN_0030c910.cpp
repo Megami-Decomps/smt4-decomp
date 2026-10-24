@@ -22,7 +22,7 @@ struct OnlineInstance;
 extern "C" {
 OnlineInstanceTable *onlineInstanceTableGetCurrent(void);
 OnlineInstance *onlineInstanceTableFind(OnlineInstanceTable *table, u32 key);
-s32 refIsNonNegative(s32 *index);
+s32 _ZNK18OnlineResultRecord7isValidEv(s32 *index);
 void FUN_002f3dc4(OnlineInstance *instance, const OnlineReference *reference);
 void FUN_002f3dde(OnlineInstance *instance, const OnlineReference *reference);
 void FUN_002e9f00(void *state, s32 value);
@@ -33,7 +33,7 @@ void FUN_0030c910(OnlineCompletionJob *job, OnlineReference *reference)
 {
     OnlineInstance *instance = onlineInstanceTableFind(onlineInstanceTableGetCurrent(), job->instanceKey);
     if (instance != NULL) {
-        if (refIsNonNegative(&reference->index) != 0) {
+        if (_ZNK18OnlineResultRecord7isValidEv(&reference->index) != 0) {
             *job->output = job->result;
             OnlineReference copied = *reference;
             FUN_002f3dc4(instance, &copied);

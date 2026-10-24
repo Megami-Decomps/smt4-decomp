@@ -11,7 +11,7 @@ int FUN_0028cb40(...);
 int FUN_0028cdec(...);
 int playSceneSetState(int, int, int);
 int flaggedEntrySetValueB(...);
-int FUN_002ae164(void);
+int dataTable40FindById(void);
 int dataTable08Sub1GetRecord(...);
 int buttonHelpSetPreset(int);
 int btlClassifySkillUse(...);
@@ -38,7 +38,7 @@ extern int playerPadTestBit(unsigned int);
 /* Supplied declaration required: flaggedEntrySetValueB. */
 extern int objectPartRunUnlessLocked(int);
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002ae164. */
+/* Supplied declaration required: dataTable40FindById. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: btlClassifySkillUse. */
@@ -83,7 +83,7 @@ void FUN_00218480(int param_1)
   temp_v9 = param_1 + 0x3460;
   if (temp_v12[0] == 2 || temp_v12[0] == 3) {
     temp_v2 = (int)temp_v8[0];
-    FUN_002ae164();
+    dataTable40FindById();
     if ((*(unsigned int *)(temp_v2 + 0x28) & 0x1ff) >> 5 == 3) {
       *(unsigned int *)(param_1 + 0x3048) = 0x23;
       temp_v15[0] = 0;
@@ -98,7 +98,7 @@ void FUN_00218480(int param_1)
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 4);
       temp_v6 = (int)temp_v10[0];
-      FUN_002ae164();
+      dataTable40FindById();
       if ((((*(unsigned int *)(temp_v6 + 0x38) & 0x600) != 0) && (*(unsigned int *)(param_1 + 0x305c) < 4)) &&
          (*(int *)(param_1 + 0x3504) < 0)) {
         *(int *)(param_1 + *(unsigned int *)(param_1 + 0x305c) * 4 + 0x3460) = *(int *)(param_1 + 0x3504);
@@ -149,7 +149,7 @@ void FUN_00218480(int param_1)
     dataTable08Sub1GetRecord();
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
     if (temp_v4 != 0) {
-      FUN_002ae164();
+      dataTable40FindById();
       if ((*(unsigned int *)(temp_v4 + 0x28) & 0x1ff) >> 5 == 3) {
         *(unsigned int *)(param_1 + 0x3048) = 0x23;
         temp_v13[0] = 0;
@@ -164,7 +164,7 @@ void FUN_00218480(int param_1)
           temp_v2 = temp_v2 + 1;
         } while (temp_v2 < 4);
         temp_v2 = (int)temp_v10[0];
-        FUN_002ae164();
+        dataTable40FindById();
         if ((((*(unsigned int *)(temp_v2 + 0x38) & 0x600) != 0) && (*(unsigned int *)(param_1 + 0x305c) < 4)) &&
            (*(int *)(param_1 + 0x3504) < 0)) {
           *(int *)(param_1 + *(unsigned int *)(param_1 + 0x305c) * 4 + 0x3460) = *(int *)(param_1 + 0x3504);

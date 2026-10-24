@@ -26,7 +26,7 @@ typedef struct GeomObject {
 extern Color4 DAT_00473808;
 
 extern void *memAlloc(int, int, int, int size, int align, int);
-extern GeomState *FUN_001f6998(GeomState *state, u32 flags, int arg);
+extern GeomState *effGeomBufferCreate(GeomState *state, u32 flags, int arg);
 
 /* Creates a geometry object around `state`; flag 0x80000 gives it the default color. */
 GeomObject *FUN_002de270(GeomState *state, u32 flags)
@@ -37,7 +37,7 @@ GeomObject *FUN_002de270(GeomState *state, u32 flags)
     object = (GeomObject *)memAlloc(0x10000, 0x100, 0, 0x58, 0x10, 1);
     object->kind = 0x300;
     object->unk02 = 0;
-    object->state = FUN_001f6998(state, flags, 0);
+    object->state = effGeomBufferCreate(state, flags, 0);
     if (flags & 0x80000) {
         GeomState *geom = object->state;
 

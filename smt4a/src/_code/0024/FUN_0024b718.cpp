@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001517b4(...);
 int eventQueueAddUniqueIfValid(int);
 int dialogClose(int);
-int FUN_003ea20c(void);
+int battleFlagsQueryBlockedOrForced(void);
 int btlHelpFreeAll(void);
 int btlHelpFreeEntries(void);
 void FUN_004c8bb8(int alternate, unsigned int argument);
@@ -37,7 +37,7 @@ extern int jobIsValid(unsigned int);
 extern int jobGetWork(void);
 /* Supplied declaration required: dialogClose. */
 extern int dialogIsActive(void);
-/* Supplied declaration required: FUN_003ea20c. */
+/* Supplied declaration required: battleFlagsQueryBlockedOrForced. */
 extern int FUN_003eb1cc(int);
 extern int btlScriptUnitIsNotKind6(int);
 extern int FUN_0040ddec(unsigned int, unsigned int);
@@ -228,7 +228,7 @@ unsigned int FUN_0024b718(void)
           return 0;
         }
         temp_v5 = temp_v3;
-        FUN_003ea20c();
+        battleFlagsQueryBlockedOrForced();
         if (temp_v5 == 0) {
           return 0;
         }

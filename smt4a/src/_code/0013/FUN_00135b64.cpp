@@ -10,7 +10,7 @@ int libc_wprintfStr(void);
 int libc_wprintfWstr(void);
 int FUN_002e31ea(unsigned int *);
 int asdOperatorDeleteArray(void);
-int FUN_003077e8(void);
+int _ZSt18uninitialized_copyIPiS0_12AsdAllocatorIiEET0_T_S4_S3_RT1_(void);
 int SBORROW4(...);
 int coprocessor_loadlong(int, unsigned int, unsigned int *);
 int halt_baddata(void);
@@ -30,8 +30,8 @@ extern unsigned int FUN_002e3216(unsigned int *);
 extern unsigned long long FUN_002e354a(unsigned int, unsigned int *, unsigned int *, unsigned int);
 extern int FUN_002e3f88(unsigned int, unsigned short, unsigned int);
 /* Supplied declaration required: asdOperatorDeleteArray. */
-extern int vectorCount4_002f1370(void);
-/* Supplied declaration required: FUN_003077e8. */
+extern int _ZNKSt6vectorIi12AsdAllocatorIiEE4sizeEv(void);
+/* Supplied declaration required: _ZSt18uninitialized_copyIPiS0_12AsdAllocatorIiEET0_T_S4_S3_RT1_. */
 
 
 /* WARNING: Control flow encountered bad instruction data */
@@ -229,8 +229,8 @@ unsigned int * FUN_00135b64(unsigned int *param_1,unsigned int param_2,unsigned 
     return (unsigned int *)0x0;
   }
   if (temp_v8) {
-    FUN_003077e8();
-    temp_v1 = vectorCount4_002f1370();
+    _ZSt18uninitialized_copyIPiS0_12AsdAllocatorIiEET0_T_S4_S3_RT1_();
+    temp_v1 = _ZNKSt6vectorIi12AsdAllocatorIiEE4sizeEv();
     for (temp_v2 = *unaff_r6; temp_v2 != unaff_r6[1]; temp_v2 = temp_v2 + 4) {
     }
     asdOperatorDeleteArray();

@@ -1,39 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021a468` (_code @ 0x21a468, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the -1 'no handler' length into a callee-saved register (mvnne r7) before the loop; built re-materialises it (mvneq). */
+#include "shard/Resource.h"
+
+struct TimelineNode {
+    u8 unk00[0x80];
+    s32 startOffset;      // 0x80
+    u8 unk84[0xc];
+    Resource *resource;   // 0x90
+    u8 unk94[0x18];
+    TimelineNode *next;   // 0xac
+};
+
+struct TimelineOwner {
+    u8 unk00[0x8c];
+    TimelineNode *first;  // 0x8c
+};
 
 extern "C" {
 
-typedef int romwright_code(...);
-
-int FUN_0021a468(int param_1)
-
+// Duration reported by the resource type's handler, -1 when it has none.
+static __inline s32 resourceDuration(Resource *resource)
 {
-  int *piVar1;
-  int temp_v0;
-  romwright_code *pcVar3;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = -1;
-  temp_v1 = *(int *)(param_1 + 0x8c);
-  if (temp_v1 != 0) {
-    do {
-      pcVar3 = *(romwright_code **)((unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 0x90) + 4) * 0x44 + 0x464150);
-      temp_v0 = -1;
-      if ((pcVar3 != (romwright_code *)0x0) &&
-         (temp_v0 = (*pcVar3)(*(unsigned int *)(*(int *)(temp_v1 + 0x90) + 8)), temp_v0 == 0)) {
-        return 0;
-      }
-      piVar1 = (int *)(temp_v1 + 0x80);
-      temp_v1 = *(int *)(temp_v1 + 0xac);
-      temp_v0 = temp_v0 + *piVar1;
-      if (temp_v2 < temp_v0) {
-        temp_v2 = temp_v0;
-      }
-    } while (temp_v1 != 0);
-  }
-  return temp_v2;
+    s32 (*duration)(void *) = g_handlerTable[resource->type].timeline.duration;
+    if (duration == NULL) {
+        return -1;
+    }
+    return duration(resource->data);
+}
+
+// Longest end time over the owner's nodes (-1 when empty); 0 as soon as one handler reports a zero duration.
+s32 FUN_0021a468(TimelineOwner *owner)
+{
+    s32 longest = -1;
+    for (TimelineNode *node = owner->first; node != NULL; node = node->next) {
+        s32 length = resourceDuration(node->resource);
+        if (length == 0) {
+            return 0;
+        }
+        s32 end = length + node->startOffset;
+        if (longest < end) {
+            longest = end;
+        }
+    }
+    return longest;
 }
 
 } /* extern "C" */

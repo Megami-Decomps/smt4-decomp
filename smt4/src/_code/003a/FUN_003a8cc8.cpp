@@ -11,7 +11,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_0022c988(...); /* 0x22c988 */
-extern int FUN_003a88f4(...); /* 0x3a88f4 */
+extern int _ZN9Obj4223f816confirmSelectionEv(...); /* 0x3a88f4 */
 extern int FUN_003a8dac(...); /* 0x3a8dac */
 extern int FUN_003a8ecc(...); /* 0x3a8ecc */
 extern int FUN_003a9394(...); /* 0x3a9394 */
@@ -49,7 +49,7 @@ void FUN_003a8cc8(int param_1)
   *(unsigned int *)(param_1 + 0xa6dc) = 0;
   *(romwright_code **)(param_1 + 0xa6e0) = FUN_003aa510;
   *(unsigned int *)(param_1 + 0xa6e4) = 0;
-  *(romwright_code **)(param_1 + 0xa6e8) = FUN_003a88f4;
+  *(romwright_code **)(param_1 + 0xa6e8) = _ZN9Obj4223f816confirmSelectionEv;
   *(unsigned int *)(param_1 + 0xa6ec) = 0;
   *(romwright_code **)(param_1 + 0xa6f0) = FUN_003a9394;
   *(unsigned int *)(param_1 + 0xa6f4) = 0;

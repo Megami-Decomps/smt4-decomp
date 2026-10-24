@@ -6,8 +6,8 @@ extern "C" {
 
 int _ZN9Obj55b28cC1EPv(...);
 int _ZN9Obj55b28cD1Ev(...);
-int FUN_002e7908(int *, int *);
-int vectorCopyHeader(...);
+int _ZN12OnlineResultC1ERKj(int *, int *);
+int _ZN18OnlineResultRecordaSERKS_(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 7 slot(s), 22 byte(s) */
@@ -27,8 +27,8 @@ extern int *DAT_00594aa8; /* 0x594aa8 */
 extern unsigned int FUN_00123830(int *);
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: FUN_002e7908. */
-/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
+/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 extern int FUN_002ea6fc(int, unsigned char *);
 extern unsigned int *FUN_002f12d0(unsigned int, unsigned char *);
 
@@ -78,8 +78,8 @@ void FUN_001085bc(unsigned int param_1,int *param_2)
       }
     }
     temp_v8 = 0x8005000d;
-    temp_v0 = FUN_002e7908(&temp_v7,&temp_v8);
-    vectorCopyHeader(temp_v11,temp_v0);
+    temp_v0 = _ZN12OnlineResultC1ERKj(&temp_v7,&temp_v8);
+    _ZN18OnlineResultRecordaSERKS_(temp_v11,temp_v0);
     temp_v1 = param_2[0x22];
     if (temp_v1 != 0) {
       _ZN9Obj55b28cC1EPv(temp_v3,temp_v1 + 4);
@@ -89,7 +89,7 @@ void FUN_001085bc(unsigned int param_1,int *param_2)
       _ZN9Obj55b28cD1Ev(temp_v3,uStack_38,uStack_34,&temp_v8);
       if (-1 < temp_v7) {
         temp_v9 = 0x8005000d;
-        FUN_002e7908(&temp_v4,&temp_v9);
+        _ZN12OnlineResultC1ERKj(&temp_v4,&temp_v9);
         temp_v1 = param_2[0x22];
         temp_v4 = *temp_v11;
         uStack_4c = temp_v11[1];
@@ -99,7 +99,7 @@ void FUN_001085bc(unsigned int param_1,int *param_2)
         temp_v1 = temp_v1 + 0x34;
         temp_v2 = FUN_002ea6fc(temp_v1,temp_v5);
         if (temp_v2 != 0) {
-          vectorCopyHeader(temp_v1,&temp_v4);
+          _ZN18OnlineResultRecordaSERKS_(temp_v1,&temp_v4);
         }
         _ZN9Obj55b28cD1Ev(temp_v10);
       }

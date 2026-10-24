@@ -4,8 +4,8 @@ extern "C" {
 struct ResetCounterOwner { u8 unk00[0x2F98]; u32 counter; };
 struct BattleFlags { u8 unk00[0x634]; u32 flags; };
 extern BattleFlags *g_btlMain;
-void FUN_0024dc64(u32 *counter);
+void keyedRecordsFreeAll(u32 *counter);
 void textureCacheReleaseAll(void);
 /* Reset the pending battle counter and clear the main-state flag. */
-void battleResetCounterAndFlag(ResetCounterOwner *owner) { owner->counter=0; FUN_0024dc64(&owner->counter); textureCacheReleaseAll(); if (g_btlMain!=NULL) g_btlMain->flags&=~0x08000000; }
+void battleResetCounterAndFlag(ResetCounterOwner *owner) { owner->counter=0; keyedRecordsFreeAll(&owner->counter); textureCacheReleaseAll(); if (g_btlMain!=NULL) g_btlMain->flags&=~0x08000000; }
 }

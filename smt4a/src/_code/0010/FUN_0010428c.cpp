@@ -24,7 +24,7 @@ extern unsigned char LAB_00104340; /* 0x104340 */
 extern unsigned char LAB_00104429; /* 0x104429 */
 
 /* Supplied declaration required: sysMemClear. */
-extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
+extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea214. */
@@ -80,7 +80,7 @@ void FUN_0010428c(int param_1)
   else {
     temp_v3[0] = 0x8001000c;
   }
-  temp_v1 = FUN_002e7908(temp_v6,temp_v3);
+  temp_v1 = _ZN12OnlineResultC1ERKj(temp_v6,temp_v3);
   FUN_002ea214(param_1,temp_v1);
   return;
 }

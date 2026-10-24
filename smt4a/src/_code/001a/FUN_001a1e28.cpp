@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern unsigned int DAT_005c4c2c; /* 0x5c4c2c */
-extern unsigned int DAT_0064c054; /* 0x64c054 */
+extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x5c4c2c */
+extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x64c054 */
 extern unsigned int DAT_0064c058; /* 0x64c058 */
 extern unsigned int DAT_0064c05c; /* 0x64c05c */
 extern unsigned int DAT_0064c060; /* 0x64c060 */
@@ -26,8 +26,8 @@ unsigned int * FUN_001a1e28(void)
 {
   int temp_v0;
   
-  if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v0 != 0)) {
-    DAT_0064c054 = 0x3f800000;
+  if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v0 != 0)) {
+    _ZZN2nw4math5MTX348IdentityEvE8identity = 0x3f800000;
     DAT_0064c058 = 0;
     DAT_0064c05c = 0;
     DAT_0064c060 = 0;
@@ -40,7 +40,7 @@ unsigned int * FUN_001a1e28(void)
     DAT_0064c07c = 0x3f800000;
     DAT_0064c080 = 0;
   }
-  return &DAT_0064c054;
+  return &_ZZN2nw4math5MTX348IdentityEvE8identity;
 }
 
 } /* extern "C" */

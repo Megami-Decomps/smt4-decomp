@@ -34,7 +34,7 @@ int FUN_004fb4fc(...);
 int FUN_004fdc0c(...);
 
 int FUN_0023acdc(...);
-int FUN_0034a290(void);
+int dataTable41FindById(void);
 int FUN_003ee0c0(...);
 int FUN_003efb18(...);
 int FUN_003f2594(...);
@@ -174,7 +174,7 @@ extern unsigned int gameGetSaveSlotData(int);
 /* Supplied declaration required: FUN_002c7bf4. */
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_0034919c(void);
-/* Supplied declaration required: FUN_0034a290. */
+/* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: FUN_003756c8. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: eventCommandClearPending. */
@@ -1244,7 +1244,7 @@ code_r0x004f054c:
       switch(iStack_68) {
       case 1:
         temp_v3 = *(int *)(*(int *)(temp_v20 + 0x24) + 0x150);
-        FUN_0034a290();
+        dataTable41FindById();
         if (temp_v3 != 0) {
           FUN_004aa3d4(g_btlUiBlock,2,*(unsigned int *)(*(int *)(temp_v20 + 0x24) + 0x150) & 0xffff,
                        *(unsigned int *)(*(int *)(temp_v20 + 0x24) + 0x3f8),0,0);

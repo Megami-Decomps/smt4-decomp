@@ -10,7 +10,7 @@ int FUN_0011b704(int, unsigned int, int, int, int);
 int FUN_0011bf74(...);
 int FUN_0011fdd8(unsigned char **, unsigned char **);
 int asdOperatorDeleteArray(int);
-int operatorNew(int);
+int _Znwj(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 21 slot(s), 68 byte(s) */
@@ -38,7 +38,7 @@ typedef struct {
     unsigned int spA8; /* 0xa8: local_a8 */
 } param_1_stack;
 
-extern int FUN_00414484(...); /* 0x414484 */
+extern int _ZN9Obj557c9018applyResultCheckedERK18OnlineResultSource(...); /* 0x414484 */
 extern unsigned char DAT_00559ba8; /* 0x559ba8 */
 extern unsigned char DAT_0055a790; /* 0x55a790 */
 extern unsigned char DAT_0055a7d8; /* 0x55a7d8 */
@@ -52,7 +52,7 @@ extern unsigned char DAT_0055cacc; /* 0x55cacc */
 /* Supplied declaration required: FUN_0011fdd8. */
 extern unsigned int *rt_malloc(int);
 /* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: operatorNew. */
+/* Supplied declaration required: _Znwj. */
 extern unsigned int FUN_002fafd8(int, unsigned int);
 
 
@@ -236,17 +236,17 @@ void FUN_004134f8(int param_1)
     temp_v3 = temp_v3 + 1;
     temp_v4 = &DAT_0055a7d8;
   } while (temp_v3 < 100);
-  temp_v1 = operatorNew(0x78);
+  temp_v1 = _Znwj(0x78);
   if (temp_v1 == 0) {
     temp_v2 = 0;
   }
   else {
     temp_v2 = FUN_002fafd8(temp_v1,0);
   }
-  puVar6 = (unsigned int *)operatorNew(0x14);
+  puVar6 = (unsigned int *)_Znwj(0x14);
   if (puVar6 != (unsigned int *)0x0) {
     puVar6[1] = temp_v21;
-    puVar6[2] = (unsigned int)FUN_00414484;
+    puVar6[2] = (unsigned int)_ZN9Obj557c9018applyResultCheckedERK18OnlineResultSource;
     puVar6[3] = 0;
     *puVar6 = (unsigned int)&DAT_0055cacc;
     puVar6[4] = temp_v2;

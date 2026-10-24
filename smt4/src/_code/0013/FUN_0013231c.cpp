@@ -10,7 +10,7 @@ int nnosConvertVirtToPhys(...);
 int FUN_002aa6ac(...);
 int asdGxCommandListStartRecord(unsigned int *);
 int FUN_002ab92c(...);
-int FUN_002aba10(...);
+int _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(...);
 int FUN_002abb5c(unsigned int);
 int FUN_002abbe8(unsigned int, unsigned int);
 int FUN_002c4e98(...);
@@ -48,7 +48,7 @@ extern unsigned char DAT_004dad94; /* 0x4dad94 */
 /* Supplied declaration required: FUN_002aa6ac. */
 /* Supplied declaration required: asdGxCommandListStartRecord. */
 /* Supplied declaration required: FUN_002ab92c. */
-/* Supplied declaration required: FUN_002aba10. */
+/* Supplied declaration required: _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_. */
 /* Supplied declaration required: FUN_002abb5c. */
 /* Supplied declaration required: FUN_002abbe8. */
 /* Supplied declaration required: FUN_002c4e98. */
@@ -98,7 +98,7 @@ void FUN_0013231c(int param_1,unsigned int param_2,int param_3,int param_4)
     (**(romwright_code **)(*piVar9 + 0x10))(piVar9,*(unsigned int *)(temp_v3 + 8));
     FUN_002abb5c(*(unsigned int *)(temp_v3 + 8));
     asdGxCommandListBegin((&DAT_004dad88)[temp_v2 * 6]);
-    FUN_002aba10(temp_v6,*(unsigned int *)(*(int *)(param_1 + 0x14) + 0xc),
+    _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(temp_v6,*(unsigned int *)(*(int *)(param_1 + 0x14) + 0xc),
                  *(unsigned int *)(*(int *)(param_1 + 0x14) + 0x10),temp_v4,
                  *(unsigned int *)(param_1 + 0x18));
     asdGxCommandListEnd((&DAT_004dad88)[temp_v2 * 6],0);
@@ -120,7 +120,7 @@ void FUN_0013231c(int param_1,unsigned int param_2,int param_3,int param_4)
     }
     puVar5 = g_commandBufferCursor;
     if (temp_v8 != 0) {
-      FUN_002aba10(temp_v6,*(unsigned int *)(*(int *)(param_1 + 0x14) + 0xc),
+      _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(temp_v6,*(unsigned int *)(*(int *)(param_1 + 0x14) + 0xc),
                    *(unsigned int *)(*(int *)(param_1 + 0x14) + 0x10),temp_v4,
                    *(unsigned int *)(param_1 + 0x18));
       puVar3 = (unsigned int *)0x0;
@@ -146,7 +146,7 @@ void FUN_0013231c(int param_1,unsigned int param_2,int param_3,int param_4)
       }
     }
     else {
-      FUN_002aba10(temp_v6,*(unsigned int *)(*(int *)(param_1 + 0x14) + 0xc),
+      _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(temp_v6,*(unsigned int *)(*(int *)(param_1 + 0x14) + 0xc),
                    *(unsigned int *)(*(int *)(param_1 + 0x14) + 0x10),temp_v4,
                    *(unsigned int *)(param_1 + 0x18));
     }

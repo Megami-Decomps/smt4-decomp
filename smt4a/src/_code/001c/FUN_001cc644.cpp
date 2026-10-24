@@ -25,7 +25,7 @@ typedef struct Owner {
     /* 0x166 */ u8 listDirty;
 } Owner;
 
-u32 FUN_001b1f04(void);
+u32 _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 s32 FUN_001d0b28(u32 value, u8 *list);
 s32 FUN_001d0b34(void);
 
@@ -46,7 +46,7 @@ void FUN_001cc644(Owner *owner)
     s32 i;
 
     if (owner->listDirty != 0) {
-        FUN_001d0b28(FUN_001b1f04(), owner->list);
+        FUN_001d0b28(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(), owner->list);
         owner->listDirty = 0;
     }
     if (owner->pending != 0) {

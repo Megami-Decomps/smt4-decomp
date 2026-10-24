@@ -1,86 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020d700` (_code @ 0x20d700, 0x230 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "camp/CampMenuEntry.h"
+
+struct CampMenuState {
+    /* 0x00 */ u8 unk00[0x40];
+    /* 0x40 */ u8 list[0x64];
+    /* 0xA4 */ s8 group;
+    /* 0xA5 */ u8 unkA5[2];
+    /* 0xA7 */ s8 selection[1];    /* selected row per group */
+};
 
 extern "C" {
+CampMenuEntry *FUN_002e26c4(u32 id);
+CampMenuEntry *dataTable15GetEntry(u32 index);
+u32 FUN_002e26ac(void);
+s32 gameDataFlagTestBit(u32 bit);
+void FUN_00203b40(void *list, s32 a, s32 b, s32 c, s32 d, s32 e);
+void FUN_002a4914(void *list, s32 index);
 
-int gameFlagIsSet(void);
-int FUN_00203b40(int, int, int, int, int, int);
-int FUN_002a4914(int, int);
-int FUN_002e26ac(void);
+extern CampMenuState *g_camp;
 
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-extern int g_camp; /* 0x57f108 */
-
-/* Supplied declaration required: gameFlagIsSet. */
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_002a4914. */
-/* Supplied declaration required: FUN_002e26ac. */
-extern int FUN_002e26c4(unsigned int);
-extern int dataTable15GetEntry(unsigned int);
-extern int gameDataFlagTestBit(void);
-
-
+// Pick the first unlocked, visible row of the current group and refresh the menu list.
 void FUN_0020d700(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  
-  temp_v2 = g_camp;
-  temp_v1 = 0;
-  temp_v7 = 0;
-  do {
-    temp_v3 = FUN_002e26c4(temp_v7 & 0xff);
-    temp_v4 = 0;
-    if ((temp_v3 != 0) &&
-       (((((*(short *)(temp_v3 + 0x5a) != 0 && (temp_v4 = gameFlagIsSet(), temp_v4 != 0)) ||
-          ((*(short *)(temp_v3 + 0x5c) != 0 && (temp_v4 = gameFlagIsSet(), temp_v4 != 0)))) ||
-         (((*(short *)(temp_v3 + 0x5e) != 0 && (temp_v4 = gameFlagIsSet(), temp_v4 != 0)) ||
-          ((*(short *)(temp_v3 + 0x60) != 0 && (temp_v4 = gameFlagIsSet(), temp_v4 != 0)))))) ||
-        ((temp_v4 = 0, *(short *)(temp_v3 + 0x62) != 0 && (temp_v4 = gameFlagIsSet(), temp_v4 != 0)))))) {
-      temp_v1 = 1;
+    CampMenuState *camp = g_camp;
+    u8 anyHidden = 0;
+
+    for (s32 id = 0; id < 79; id++) {
+        CampMenuEntry *entry = FUN_002e26c4(id & 0xff);
+        if (entry != NULL && campMenuEntryHidden(entry)) {
+            anyHidden = 1;
+        }
     }
-    temp_v7 = temp_v7 + 1;
-  } while ((int)temp_v7 < 0x4f);
-  temp_v0 = 0;
-  temp_v3 = 0;
-  FUN_002e26ac();
-  temp_v7 = 0;
-  if (temp_v7 < temp_v4) {
-    do {
-      temp_v5 = dataTable15GetEntry(temp_v7);
-      if ((((temp_v5 != 0) && ((unsigned int)*(unsigned char *)(temp_v5 + 1) == (int)*(char *)(temp_v2 + 0xa4))) &&
-          ((*(short *)(temp_v5 + 0x56) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 != 0)))) &&
-         (((((*(short *)(temp_v5 + 0x58) == 0 || (temp_v6 = gameDataFlagTestBit(), temp_v6 != 0)) &&
-            (temp_v3 = temp_v3 + 1, (unsigned char)(temp_v1 & ~temp_v0))) &&
-           ((*(short *)(temp_v5 + 0x5a) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)))) &&
-          (((*(short *)(temp_v5 + 0x5c) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)) &&
-           (((*(short *)(temp_v5 + 0x5e) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)) &&
-            (((*(short *)(temp_v5 + 0x60) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)) &&
-             ((*(short *)(temp_v5 + 0x62) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 == 0)))))))))))) {
-        temp_v0 = 1;
-        *(char *)((int)*(char *)(temp_v2 + 0xa4) + temp_v2 + 0xa7) = (char)temp_v3 - '\x01';
-      }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < temp_v4);
-  }
-  FUN_00203b40(temp_v2 + 0x40,temp_v3,1,temp_v3,1,1);
-  FUN_002a4914(temp_v2 + 0x40,(int)*(char *)((int)*(char *)(temp_v2 + 0xa4) + temp_v2 + 0xa7));
-  return;
+    u8 picked = 0;
+    s32 visible = 0;
+    u32 count = FUN_002e26ac();
+    for (u32 i = 0; i < count; i++) {
+        CampMenuEntry *entry = dataTable15GetEntry(i);
+        if (entry != NULL && entry->group == camp->group &&
+            (entry->requiredFlag == 0 || gameFlagIsSet(entry->requiredFlag) != 0) &&
+            (entry->requiredDataBit == 0 || gameDataFlagTestBit(entry->requiredDataBit) != 0)) {
+            visible++;
+            if ((anyHidden & ~picked) && !campMenuEntryHidden(entry)) {
+                camp->selection[camp->group] = visible - 1;
+                picked = 1;
+            }
+        }
+    }
+    FUN_00203b40(camp->list, visible, 1, visible, 1, 1);
+    FUN_002a4914(camp->list, camp->selection[camp->group]);
 }
 
-} /* extern "C" */
+}

@@ -1,50 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fb588` (_code @ 0x2fb588, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00287728(void);
-int slotSetRequest(int, unsigned int, unsigned int);
+u32 scrGetCommandFrame(void);
+s32 scrGetArg(u32 index);
+s32 FUN_002c1d5c(void);
+void FUN_00287728(s32 arg);
+s32 FUN_002b89a4(s32 arg);
+void slotSetRequest(s32 slot, s32 value, s32 arg);
 
-/* Supplied declaration required: FUN_00287728. */
-extern int scrGetCommandFrame(void);
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: slotSetRequest. */
-extern int FUN_002b89a4(unsigned int);
-extern int FUN_002c1d5c(void);
-
-
-unsigned int FUN_002fb588(void)
-
+/* Script command: on the first frame requests slot 0 (unless busy); afterwards waits for the request to finish. Returns 1 while waiting. */
+s32 FUN_002fb588(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = scrGetCommandFrame();
-  if (temp_v0 != 0) {
-    temp_v0 = FUN_002c1d5c();
-    if (temp_v0 != 0) {
-      FUN_00287728();
-      temp_v1 = 1;
+    if (scrGetCommandFrame() == 0) {
+        if (FUN_002c1d5c() != 0) {
+            return 1;
+        }
+        slotSetRequest(0, scrGetArg(0), -1);
+        return 0;
     }
-    else {
-      temp_v0 = FUN_002b89a4(0);
-      temp_v1 = 0;
-      if (temp_v0 != 0) {
+    if (FUN_002c1d5c() != 0) {
+        FUN_00287728(0);
         return 1;
-      }
     }
-    return temp_v1;
-  }
-  temp_v0 = FUN_002c1d5c();
-  if (temp_v0 != 0) {
-    return 1;
-  }
-  temp_v1 = scrGetArg(0);
-  slotSetRequest(0,temp_v1,0xffffffff);
-  return 0;
+    if (FUN_002b89a4(0) != 0) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

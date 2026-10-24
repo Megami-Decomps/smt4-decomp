@@ -1,50 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039b984` (_code @ 0x39b984, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gamedata/DataTable.h"
+
+struct SoundRecord {
+    u16 id;          // 0x00
+    u8 unk02[0x5C];  // 0x02
+    u16 value;       // 0x5E
+    u8 unk60[0x1C];  // 0x60
+};
 
 extern "C" {
 
-int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
+extern void *g_aocSystem;
 
-/* stack frame of param_1: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short sp8C; /* 0x8c: local_8c */
-    unsigned int sp90; /* 0x90: local_90 */
-} param_1_stack;
+s32 FUN_00470bdc(void *system, s32 id);
+void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const u16 *, const u16 *));
+s32 arrayCompareUnsignedHalfword(const u16 *left, const u16 *right);
 
-extern unsigned char LAB_002b2ac4; /* 0x2b2ac4 */
-extern unsigned int g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: libc_bsearch. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-extern int FUN_00470bdc(unsigned int, int);
-
-
-void FUN_0039b984(int param_1)
-
+/* Unless the add-on content already provides it, finds record `id` of data table 0x45 and sets the value of id 0x46's record to 0x26C. */
+void FUN_0039b984(s32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned short *puVar4;
-  unsigned short temp_v3 [62];
-  
-  temp_v0 = FUN_00470bdc(g_aocSystem,param_1);
-  if (temp_v0 == 0) {
-    temp_v1 = dataTableGet(0x45,0);
-    temp_v2 = dataTableGetEntries();
-    temp_v1 = dataTableGetCount(temp_v1);
-    puVar4 = temp_v3;
-    temp_v3[0] = (unsigned short)param_1;
-    libc_bsearch(puVar4,temp_v2,temp_v1,0x7c,&LAB_002b2ac4);
-    if (param_1 == 0x46) {
-      puVar4[0x2f] = 0x26c;
+    if (FUN_00470bdc(g_aocSystem, id) == 0) {
+        void *section = dataTableGet(0x45, 0);
+        const void *entries = dataTableGetEntries(section);
+        u32 count = dataTableGetCount(section);
+        SoundRecord key;
+
+        key.id = id;
+        SoundRecord *found = (SoundRecord *)libc_bsearch(&key, entries, count, sizeof(SoundRecord), arrayCompareUnsignedHalfword);
+        if (id == 0x46) {
+            found->value = 0x26C;
+        }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

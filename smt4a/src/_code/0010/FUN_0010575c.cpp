@@ -11,7 +11,7 @@ extern unsigned char DAT_00558788; /* 0x558788 */
 /* Supplied declaration required: sysMemClear. */
 extern unsigned int *rt_malloc(int);
 extern int FUN_002e7168(unsigned int *, unsigned int, unsigned int, unsigned int, unsigned int);
-extern unsigned int *operatorNew(unsigned int);
+extern unsigned int *_Znwj(unsigned int);
 
 
 int FUN_0010575c(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -28,7 +28,7 @@ int FUN_0010575c(unsigned int *param_1,unsigned int param_2,unsigned int param_3
   
   *param_1 = (unsigned int)&DAT_00558788;
   temp_v0 = FUN_002e7168(param_1 + 1,0x20000000,param_3,param_4,param_4);
-  puVar2 = (unsigned int *)operatorNew(4);
+  puVar2 = (unsigned int *)_Znwj(4);
   if (puVar2 != (unsigned int *)0x0) {
     *puVar2 = 0;
   }

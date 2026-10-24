@@ -6,7 +6,7 @@ struct SkillAilmentView { u8 prefix[0x38]; u32 effect; };
 struct ItemAilmentView { u8 prefix[0x6A]; u8 effect; };
 }
 extern "C" {
-const SkillAilmentView *FUN_002ae164(u32 id);
+const SkillAilmentView *dataTable40FindById(u32 id);
 const ItemAilmentView *dataTable08Sub1GetRecord(u32 id);
 BtlMainState *btlGetMainState();
 BtlUnitData *FUN_0027da30(BtlMainState *state, s32 index);
@@ -15,7 +15,7 @@ PartyDamageUnitIV *gameGetUnitRecord(s32 index);
 // Return the complete affected ailment group when the target has at least one matching ailment.
 u32 btlGetApplicableAilmentMask(u32 skillId, u32 itemId, u32 unused, s32 target)
 {
-    const SkillAilmentView *skill = FUN_002ae164(skillId);
+    const SkillAilmentView *skill = dataTable40FindById(skillId);
     const ItemAilmentView *item = dataTable08Sub1GetRecord(itemId);
     if ((skill != NULL || item != NULL) &&
         (skill == NULL || (skill->effect & 0x7F) != 0) &&

@@ -12,7 +12,7 @@ typedef struct IdList {
     /* 0x34 */ u16 ids[8];
 } IdList;
 
-extern Record *FUN_0034a290(u32 id);
+extern Record *dataTable41FindById(u32 id);
 
 /* True when any of the list's ids names a record whose flag is set. */
 s32 idListHasFlaggedRecord(IdList *list)
@@ -21,7 +21,7 @@ s32 idListHasFlaggedRecord(IdList *list)
 
     for (i = 0; i < 8; i++) {
         if (list->ids[i] != 0) {
-            Record *record = FUN_0034a290(list->ids[i]);
+            Record *record = dataTable41FindById(list->ids[i]);
 
             if (record != NULL && record->flag != 0) {
                 return 1;

@@ -1,45 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037d15c` (_code @ 0x37d15c, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scriptReadStackValueAsFloat(int);
-int eventTexSetJobParam(void);
-int scrSetResult(unsigned int);
-int eventTexStoreHandle(unsigned int);
-int FUN_003affe8(unsigned int);
+u32 scrGetArg(u32 index);
+f32 scriptReadStackValueAsFloat(u32 index);
+s32 eventTexHasMissingValue(void);
+u32 FUN_003affe8(u32 id, f32 first, f32 second);
+void eventTexSetJobParam(void);
+void eventTexStoreHandle(u32 handle);
+void scrSetResult(u32 value);
 
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: scriptReadStackValueAsFloat. */
-/* Supplied declaration required: eventTexSetJobParam. */
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: eventTexStoreHandle. */
-extern int eventTexHasMissingValue(void);
-/* Supplied declaration required: FUN_003affe8. */
-
-
-unsigned int FUN_0037d15c(void)
-
+/* Script command: creates the event texture job for the id with two float arguments (when the event has no missing value) and returns its handle, else 0. */
+u32 FUN_0037d15c(void)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  scriptReadStackValueAsFloat(1);
-  scriptReadStackValueAsFloat(2);
-  temp_v1 = eventTexHasMissingValue();
-  temp_v2 = 0;
-  if (temp_v1 != 0) {
-    FUN_003affe8(temp_v0);
-    eventTexSetJobParam();
-    eventTexStoreHandle(temp_v0);
-    temp_v2 = temp_v0;
-  }
-  scrSetResult(temp_v2);
-  return 1;
+    u32 id = scrGetArg(0);
+    f32 first = scriptReadStackValueAsFloat(1);
+    f32 second = scriptReadStackValueAsFloat(2);
+    u32 result;
+
+    if (eventTexHasMissingValue() != 0) {
+        id = FUN_003affe8(id, first, second);
+        eventTexSetJobParam();
+        eventTexStoreHandle(id);
+        result = id;
+    } else {
+        result = 0;
+    }
+    scrSetResult(result);
+    return 1;
 }
 
 } /* extern "C" */

@@ -13,7 +13,7 @@ extern unsigned char LAB_0010f5d0; /* 0x10f5d0 */
 extern unsigned char LAB_0010f8fd; /* 0x10f8fd */
 
 extern int FUN_001038ea(unsigned int, int, unsigned int);
-extern int operatorNew(unsigned int);
+extern int _Znwj(unsigned int);
 extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea41e. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
@@ -39,7 +39,7 @@ void FUN_0010f57c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v0 = FUN_001038ea(*(unsigned int *)(param_1 + 0xd4),temp_v2,*(unsigned int *)(param_1 + 0x6c));
   if (temp_v0 != 0) {
     onlineJobSetStateWaiting(param_1);
-    temp_v0 = operatorNew(0x10);
+    temp_v0 = _Znwj(0x10);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_002ea3c0(temp_v0,&LAB_0010f8fd,0,&LAB_0010f5d0);

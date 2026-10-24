@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002009c4(int);
 int FUN_00211868(int, int);
-int FUN_00244ee0(int);
+int devilGetCategoryTableId(int);
 int mapGetSelectedRecordCategoryTable(void);
 int playerGetMappedCategory(void);
 int communicationBeginTransition(int);
@@ -33,7 +33,7 @@ extern unsigned char g_btlUi; /* 0x439c88 */
 
 /* Supplied declaration required: FUN_002009c4. */
 /* Supplied declaration required: FUN_00211868. */
-/* Supplied declaration required: FUN_00244ee0. */
+/* Supplied declaration required: devilGetCategoryTableId. */
 /* Supplied declaration required: mapGetSelectedRecordCategoryTable. */
 /* Supplied declaration required: playerGetMappedCategory. */
 /* Supplied declaration required: communicationBeginTransition. */
@@ -115,7 +115,7 @@ void FUN_00227334(unsigned int param_1,unsigned int param_2,int param_3,int para
       else {
         textFormatBuffer(temp_v6,&LAB_00227610);
       }
-      FUN_00244ee0(param_5);
+      devilGetCategoryTableId(param_5);
       temp_v5 = (short)param_5;
     }
     FUN_002cd750((int)temp_v5);

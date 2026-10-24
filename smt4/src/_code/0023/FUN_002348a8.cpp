@@ -1,56 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002348a8` (_code @ 0x2348a8, 0xc8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the handle again after the test (no shared ldr), keeps the failure test in r1 and materialises the timeout compare as a bool (movne/moveq/teq) before returning it. */
+#include "common.h"
+#include "nn/Result.h"
 
 extern "C" {
 
-int FUN_002c40f8(...);
-int FUN_002c526c(void);
-int software_interrupt(int);
+/* A thread-like kernel object: its handle and a finalize flag. */
+struct KernelThreadObject {
+    /* 0x00 */ s32 handle;
+    /* 0x04 */ u8 finalized;
+};
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+s32 FUN_002c40f8(s32 *index, const s32 *handles, s32 count, s32 waitAll, s64 timeout);
+void FUN_002c526c(s32 result);
+void nn_os_Thread_FinalizeImpl(KernelThreadObject *thread);
+void svcCloseHandle(s32 handle);
 
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c526c. */
-extern void nn_os_Thread_FinalizeImpl(unsigned int);
-
-
-unsigned int FUN_002348a8(int *param_1)
-
+/* Waits on the thread's handle for `timeout`. */
+static __inline s32 threadWait(KernelThreadObject *thread, s64 timeout)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char *puVar1;
-  int iStack_18;
-  unsigned char temp_v0 [8];
-  
-  if (*param_1 != 0) {
-    iStack_18 = *param_1;
-    puVar1 = temp_v0;
-    FUN_002c40f8(puVar1,&iStack_18,1,0,0,0);
-    if ((int)puVar1 < 0) {
-      FUN_002c526c();
+    s32 handle = thread->handle;
+    s32 index;
+    s32 result = FUN_002c40f8(&index, &handle, 1, 0, timeout);
+    if (nnResultIsFailure(result)) {
+        FUN_002c526c(result);
     }
-    if (((unsigned int)puVar1 & 0x3ff) == 0x3fe) {
-      return 0;
+    return result;
+}
+
+/* Joins the thread, finalizes it and closes its handle; returns 0 if a poll of the handle times out first, else 1. */
+u32 FUN_002348a8(KernelThreadObject *thread)
+{
+    if (thread->handle != 0) {
+        s32 result = threadWait(thread, 0);
+        nnResultFields fields;
+        fields.value = result;
+        if (fields.fields.description == 0x3fe) {
+            return 0;
+        }
     }
-  }
-  iStack_18 = *param_1;
-  puVar1 = temp_v0;
-  FUN_002c40f8(puVar1,&iStack_18,1,0,0xffffffff,0xffffffff);
-  if ((int)puVar1 < 0) {
-    FUN_002c526c();
-  }
-  *(unsigned char *)(param_1 + 1) = 1;
-  nn_os_Thread_FinalizeImpl((unsigned int)param_1);
-  if (*param_1 != 0) {
-    software_interrupt(0x23);
-    *param_1 = 0;
-  }
-  return 1;
+    threadWait(thread, -1);
+    thread->finalized = 1;
+    nn_os_Thread_FinalizeImpl(thread);
+    if (thread->handle != 0) {
+        svcCloseHandle(thread->handle);
+        thread->handle = 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */
